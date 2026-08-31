@@ -22,6 +22,11 @@ Lifecycle and history rules:
 - ADR 0019 remains authoritative for the bounded D3 package decision.
 - ADR 0020 is the D4 Update Safety authority once CR-013 is merged. For D4-specific conceptual `AppSettings`, `BackupRecord` and `UpdateLog` fields, read `docs/domain-model-d4-update-safety.md` together with `docs/domain-model.md`.
 - ADR 0021 is the D5 Remote Install Rehearsal authority once CR-014 is merged. D5 is documentation + exact-package assisted-install rehearsal only; it does not authorize runtime, signing/notarization, DMG/PKG, public release, auto-update, Phase 12 or release-readiness work.
+- ADR 0030 defines hosted Web/PWA as the FamilyFoodOS target and the retained
+  local stack as transitional migration scaffolding.
+- ADR 0031 is newer for the FamilyFoodOS delivery surface. It retires the
+  inherited macOS consumer package and its forward D5 rehearsal path while
+  preserving ADRs 0019–0024 as historical source-product evidence.
 - `docs/current-lifecycle.md` supersedes dated branch-era status prose in older architecture/roadmap/backup documents without revoking their surrounding durable product/safety contracts.
 - A superseded status sentence cannot reopen completed work or authorize a later runtime slice.
 - `docs/history/` is searchable evidence and context only. Follow `docs/history/AGENTS.md`; historical commands are not automatically safe operational instructions.

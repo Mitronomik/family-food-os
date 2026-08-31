@@ -13,7 +13,7 @@ Source baseline:
 - bootstrap tag: `bootstrap-cosmetic-workshop-2026-08-31`
 - FamilyFoodOS repository: `Mitronomik/family-food-os`
 
-## Current lifecycle
+## Historical bootstrap baseline
 
 `PR0 — Frozen Fork — COMPLETE`
 
@@ -26,7 +26,7 @@ PR0 established:
 - FamilyFoodOS execution state;
 - migration boundaries.
 
-Verified baseline:
+Historical verified baseline:
 
 - backend + launcher: `2546 passed`
 - macOS package: `146 passed, 1 skipped`
@@ -37,11 +37,28 @@ Verified baseline:
 
 ## Current task
 
-The next authorized milestone is:
+Current branch/workstream:
 
 `PR1 — Identity Detox`
 
-PR1 implementation must begin only from an updated `main` on a new branch after PR0 is integrated.
+FamilyFoodOS targets a hosted Web/PWA under ADR 0030. The inherited macOS
+consumer package and its D5 / CR-017 forward path are retired under ADR 0031;
+they are historical source-product evidence, not current implementation work.
+
+Source-run backend, launcher, SQLite and Restore remain transitional migration
+scaffolding. PR1-G retires the consumer package but does not authorize hosted
+infrastructure implementation.
+
+Known remaining PR1 identity debt:
+
+- old technical ownership markers remain in
+  `scripts/smoke_restore_browser_session.py`,
+  `scripts/smoke_restore_control_plane.py`,
+  `scripts/smoke_restore_native_picker.py` and
+  `scripts/smoke_restore_validation_session.py`;
+- two report-document reconciliation tests retain a hard-coded
+  `cosmetic_workshop.sqlite` fixture path. Their failures reproduce at checkpoint
+  `7fd540a` and are PR1-wide fixture debt, not a PR1-G regression.
 
 ## PR1 goal
 
@@ -73,13 +90,13 @@ Do not yet:
 
 ## Required reading
 
-Before PR1 work:
+For current PR1 work:
 
 1. `AGENTS.md`
 2. `docs/family-food/project-operating-manual.md`
 3. `state/current-focus.md`
 4. `docs/family-food/migration-plan.md`
-5. `docs/migration-source.md`
-6. relevant legacy identity code and tests
-
-PR0 must be integrated before PR1 implementation starts.
+5. `docs/decisions/0030-family-food-hosted-product-target.md`
+6. `docs/decisions/0031-retire-inherited-macos-packaging.md`
+7. `docs/migration-source.md`
+8. relevant legacy identity code and tests

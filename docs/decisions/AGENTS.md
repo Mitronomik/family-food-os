@@ -39,6 +39,11 @@ Authority and lifecycle rules:
 - ADR 0019 remains the bounded D3 package authority; package existence is not release readiness.
 - ADR 0020 remains the D4 Update Safety authority; D4 is closed.
 - ADR 0021 is the newer bounded authority for D5 Remote Install Rehearsal once CR-014 merges. It authorizes documentation + exact-package assisted-install rehearsal only, not runtime changes, signing/notarization, DMG/PKG, public release, auto-update, Phase 12 or release readiness.
+- ADR 0030 defines the hosted Web/PWA FamilyFoodOS target while retaining the
+  local stack only as transitional migration scaffolding.
+- ADR 0031 supersedes only forward FamilyFoodOS use of the inherited macOS
+  consumer package and its D5 package-delivery path. ADRs 0019–0024 and their
+  exact-package evidence remain accurate historical records.
 - For current lifecycle and runtime authorization, read
   `docs/current-lifecycle.md` before acting on branch-era status tables in older
   ADRs.

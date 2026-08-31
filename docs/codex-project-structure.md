@@ -1,5 +1,10 @@
 # cosmetic-workshop-os — структура проектной памяти для Codex
 
+> **Historical source-product document.** The example topology below records
+> CosmeticWorkshopOS provenance and is not a current FamilyFoodOS repository or
+> packaging instruction. Follow the root `AGENTS.md`, canonical FamilyFoodOS
+> documents and ADR 0031.
+
 Документ: `docs/codex-project-structure.md`  
 Проект: `cosmetic-workshop-os`  
 Клиентское название: «Мастерская косметолога»  

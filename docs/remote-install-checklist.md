@@ -1,6 +1,9 @@
 # Remote Install Checklist
 
-Status: **DRAFT SKELETON — D5 AUTHORIZED BUT NOT IMPLEMENTED OR VERIFIED**. ADR 0021 defines the required final checklist and evidence; do not treat the unchecked skeleton below as a completed install certification.
+Status: **RETIRED — HISTORICAL SOURCE-PRODUCT DRAFT ONLY**.
+
+ADR 0031 retires the inherited D5 package-install path. The unchecked list below
+is preserved as source-product evidence and is not a FamilyFoodOS procedure.
 
 - [ ] Download app package
 - [ ] Unzip package

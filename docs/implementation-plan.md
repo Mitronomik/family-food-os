@@ -1,11 +1,19 @@
 # Implementation plan
 
 Status: **CURRENT**
-Updated: `2026-08-13`
+Updated: `2026-08-31`
 
 The exact pre-CR-013 plan is preserved in `docs/history/d4-pre-decision/implementation-plan.md` from base `dc2301f7d4e101ad0fba851325dae9274f02da0c`.
 
-## Current lifecycle
+## Current FamilyFoodOS delivery direction
+
+ADR 0030 defines the target consumer product as a hosted responsive Web/PWA.
+ADR 0031 retires the inherited macOS consumer `.app`, ZIP and D5 package
+rehearsal path. Source-run backend, launcher, SQLite and Restore remain
+transitional development/migration scaffolding. Hosted infrastructure remains
+separately gated.
+
+## Historical inherited lifecycle evidence
 
 ```text
 C4-III — DONE — EXACT-HEAD AND EXACT-PACKAGE VERIFIED
@@ -29,10 +37,11 @@ PHASE 12 — MVP release preparation — NOT AUTHORIZED BY CR-014/CR-015/CR-016/
 Product release readiness — NOT CLAIMED
 ```
 
-Normative D4 decision: `docs/decisions/0020-d4-update-safety-contract.md`.
-Normative D5 decision: `docs/decisions/0021-d5-remote-install-rehearsal-contract.md`.
+Historical D4 decision: `docs/decisions/0020-d4-update-safety-contract.md`.
+Historical D5 decision: `docs/decisions/0021-d5-remote-install-rehearsal-contract.md`.
+Current delivery decisions: ADR 0030 and ADR 0031.
 
-## D4 programme
+## Historical D4 programme
 
 ### D4-A — Version identity and compatibility preflight
 
@@ -102,13 +111,13 @@ Verified PR head `ba577f1151e041c11019525862d9bb76eeb1404e` and merged head `3d6
 
 Exact current main `ec88b09193c8ed041e17daef3e3ffc0193d1b559` passed final D4-D run `31751386881` with the complete D4 package safety matrix. D4 is lifecycle-closed. No D5 or release work is authorized by this closure.
 
-## D5 — Remote install checklist
+## Historical D5 — Remote install checklist
 
-**BLOCKER FIXED — FRESH HUMAN REHEARSAL REQUIRED** under CR-014 / ADR 0021.
+**RETIRED AS A FAMILYFOODOS FORWARD PATH** under ADR 0031.
 
-The first clean-Mac rehearsal correctly exposed the native application lifecycle product defect. CR-015 has now repaired that blocker, but the earlier human failure is not converted into a PASS retroactively. D5 remains open until a fresh clean-Mac/clean-profile rehearsal runs the fixed exact package and the D5 documentation/checklist evidence is completed.
+The first clean-Mac rehearsal correctly exposed the native application lifecycle product defect. CR-015 repaired that blocker, but the earlier human failure is not converted into a PASS retroactively. This remains historical source-product evidence; FamilyFoodOS will not run the fresh package rehearsal because the consumer package is retired.
 
-## D5 blocker — Native macOS application lifecycle
+## Historical D5 blocker — Native macOS application lifecycle
 
 **DONE — MERGED AND EXACT-HEAD/EXACT-PACKAGE VERIFIED** under CR-015 / ADR 0022.
 
@@ -116,17 +125,21 @@ Verified implementation head `d7f95141e5f41c7a806c3fafb71e942fe5892dd8` merged a
 
 The native AppKit executable owns only macOS application lifecycle; the existing packaged helper/Python launcher remains the runtime owner. No business logic, database, Restore or D4 update semantics moved into native code. A shutdown timeout fails closed by cancelling Quit rather than killing the runtime owner and risking an orphan backend.
 
-## Release boundary
+## Current release boundary
 
-Product release readiness remains **NOT CLAIMED**. Signing, notarization, DMG/PKG, App Store, public release hosting, GitHub Releases, release channels, auto-update/download, MDM/remote-management integration and `PHASE 12 — MVP release preparation` remain out of CR-014 scope.
+The inherited consumer package and its D5 release path are retired. Product
+release readiness remains **NOT CLAIMED**. No hosted infrastructure, signing,
+notarization, DMG/PKG, App Store, public release hosting, release channel,
+auto-update/download, MDM/remote-management integration or Phase 12 work is
+authorized by ADR 0031.
 
 
-## CR-017 — Single-client operator-assisted pilot path
+## Historical CR-017 — Single-client operator-assisted pilot path
 
-**AUTHORIZED NEXT — NOT IMPLEMENTED**.
+**PREVIOUSLY AUTHORIZED — NOT IMPLEMENTED — NOW RETIRED BY ADR 0031**.
 
 CR-016's downloaded `.command` model failed the mandatory clean-Mac Finder handoff and is not mergeable. CR-017 replaces only that bootstrap mechanism with a support-operator Terminal workflow for one known client.
 
 Implementation may add one operator-owned install/update script plus focused tests/documentation. It must verify package SHA-256 and staged app identity before quarantine removal, install under the user application directory without `sudo`, preserve the previous app during updates, use ordinary macOS Quit semantics, and leave all database/update safety to D4.
 
-A clean-Mac operator-assisted rehearsal is required before any pilot D5 PASS. Public/self-service distribution, Developer ID/notarization, Phase 12 and release readiness remain outside this stage.
+The rehearsal was never completed and is no longer a FamilyFoodOS gate. Public/self-service desktop distribution, Developer ID/notarization, Phase 12 and release readiness remain outside this stage.

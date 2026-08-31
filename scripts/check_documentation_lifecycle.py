@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Guard closed Restore plus the CR-013 / D4-A implementation boundary.
+"""Guard closed Restore, inherited lifecycle evidence and package retirement.
 
 D4-A, D4-B, D4-C and D4-D are lifecycle-closed. D4 is complete.
-CR-014 authorizes D5 only as documentation + exact-package assisted-install rehearsal;
-release/Phase-12/runtime expansion and Restore changes remain forbidden.
+ADRs 0030 and 0031 make hosted Web/PWA the FamilyFoodOS target and retire the
+inherited macOS consumer package. Source-run runtime and Restore protections
+remain in force; hosted infrastructure and Restore changes remain forbidden.
 
 The complete pre-CR-013 checker is preserved byte-identically under
 ``docs/history/d4-pre-decision/``. Its 22 ``PINNED_BLOBS`` and 60
@@ -46,6 +47,8 @@ ADR21 = P("docs/decisions/0021-d5-remote-install-rehearsal-contract.md")
 ADR22 = P("docs/decisions/0022-native-macos-application-lifecycle.md")
 ADR23 = P("docs/decisions/0023-single-client-assisted-install-bootstrap.md")
 ADR24 = P("docs/decisions/0024-single-client-operator-assisted-install.md")
+ADR30 = P("docs/decisions/0030-family-food-hosted-product-target.md")
+ADR31 = P("docs/decisions/0031-retire-inherited-macos-packaging.md")
 HISTORY_INDEX = P("docs/history/README.md")
 LEGACY_CHECKER = P("docs/history/d4-pre-decision/check_documentation_lifecycle.py")
 D4A_PRECLOSURE_MANIFEST = P("docs/history/d4-a-pre-closure/manifest.json")
@@ -66,22 +69,18 @@ STARTUP_SERVICE = P("backend/app/services/startup.py")
 RUNTIME_IDENTITY = P("backend/app/services/runtime_identity.py")
 SETTINGS_API = P("backend/app/api/settings.py")
 BACKEND_PYPROJECT = P("backend/pyproject.toml")
-PACKAGE_SCRIPT = P("scripts/package_macos.sh")
-VERSION_VERIFIER = P("scripts/verify_product_version.py")
 D4A_VERSION_TEST = P("backend/app/tests/test_d4_a_app_version.py")
 D4A_PREFLIGHT_TEST = P("backend/app/tests/test_d4_a_startup_compatibility.py")
-D4A_PACKAGE_TEST = P("macos_package/tests/test_d4_a_product_version_projection.py")
 D4B_SERVICE = P("backend/app/services/update_safety.py")
 D4B_TEST = P("backend/app/tests/test_d4_b_update_safety.py")
 D4C_SETTINGS_SCHEMA = P("backend/app/schemas/settings.py")
 D4C_SETTINGS_SERVICE = P("backend/app/services/settings.py")
 D4C_FRONTEND = P("frontend/src/settings-update-status.ts")
 D4C_BINDINGS = P("frontend/src/settings-tax-bindings.ts")
-D4C_PACKAGE_ENTRYPOINT = P("macos_package/entrypoint.py")
-D4C_USER_ALERT = P("macos_package/user_alert.py")
 D4C_BACKEND_TEST = P("backend/app/tests/test_d4_c_update_status.py")
 D4C_FRONTEND_TEST = P("frontend/test/settings-update-status.test.mjs")
-D4C_PACKAGE_TEST = P("macos_package/tests/test_d4_c_update_failure_alerts.py")
+MAKEFILE = P("Makefile")
+PYTEST_CONFIG = P("pytest.ini")
 
 DECISION_BASE = "dc2301f7d4e101ad0fba851325dae9274f02da0c"
 CR013_MERGE_BASE = "4dbb83b9da3f0945bffde3187a69054305e01b28"
@@ -110,9 +109,13 @@ CR015_VERIFIED_HEAD = "d7f95141e5f41c7a806c3fafb71e942fe5892dd8"
 CR015_MERGED_HEAD = "c38940349a80d345f3e833b61e4bf4e5e761c0eb"
 CR015_VERIFY_RUN = "31780899805"
 CR015_PACKAGE_SHA256 = "85f993a93082c4b3a36771318cf8c0c3abf02be56b1374a32a62d1a6b9279ee6"
-CR015_APP_LIFECYCLE_BLOB = "0ec3ff6941227cd84e8eaf16bd4ea7a6b2281834"
-CR015_PACKAGE_SCRIPT_BLOB = "fdf8f01cc16db43320e5621a4a1f8a895ce65c56"
-CR015_PACKAGE_VERIFIER_BLOB = "19bd0bcd04ca98c39fed1c8dad9c50a3b142cc47"
+
+RETIRED_PACKAGE_FILES = (
+    P("scripts/build_backend.sh"),
+    P("scripts/package_macos.sh"),
+    P("scripts/verify_macos_package.py"),
+    P("scripts/verify_product_version.py"),
+)
 
 SNAPSHOT_BLOBS = {
     P("docs/history/d4-pre-decision/README.md"): "4e89b95a62d6b17b1a65d3dfeb8803c1b80733ee",
@@ -452,20 +455,21 @@ def check_legacy_protections() -> None:
 def check_current_lifecycle() -> None:
     for path in STATUS_SURFACES:
         require(path, D4_STATUS)
-        require(path, D5_STATUS)
+        if path != FOCUS:
+            require(path, D5_STATUS)
         forbid(path, FORBIDDEN_ACTIVE)
     for path in (README, CURRENT, FOCUS, PROGRESS, HANDOFF):
         require(path, CLOSED_TRUTH)
-    require(CURRENT, ("ADR 0020", "ADR 0021", "ADR 0022", "ADR 0023", "ADR 0024", "D4-A closure truth", "D4-B closure truth", "D4-C closure truth", "D4-D closure truth", "D4 closure truth", "D5 decision truth", "D5 blocker truth", "CR-015 closure truth", "CR-016 implementation outcome", "CR-017 operator-assisted pilot truth", CR015_VERIFIED_HEAD, CR015_MERGED_HEAD, CR015_VERIFY_RUN, CR015_PACKAGE_SHA256, "Restore remains closed"))
-    require(PLAN, ("Normative D4 decision", "Normative D5 decision", "D4-A", "D4-B", "D4-C", "D4-D", "## D5 — Remote install checklist", "PILOT OPERATOR-ASSISTED PATH AUTHORIZED — FULL D5 PASS NOT CLAIMED", "## D5 blocker — Native macOS application lifecycle", "DONE — MERGED AND EXACT-HEAD/EXACT-PACKAGE VERIFIED", CR015_VERIFY_RUN, CR015_PACKAGE_SHA256))
-    require(PACKAGING, ("backend/VERSION", "package-runtime.json", "scripts/verify_product_version.py"))
-    require(DEPLOYMENT, ("changes **no deployment topology**", "external user-data directory", "D4-B"))
-    require(UPDATE_GUIDE, ("D4 Update Safety закрыт", "CR-014", "D5", "ещё не реализован/проверен", "старый пакет не является автоматическим откатом", "не включает автоматическое скачивание"))
-    require(DOCS_AGENTS, ("ADR 0020", "docs/domain-model-d4-update-safety.md", "ADR 0021", "documentation + exact-package assisted-install rehearsal"))
-    require(P("docs/decisions/AGENTS.md"), ("ADR 0021", "documentation + exact-package assisted-install rehearsal only", "not runtime changes"))
-    require(FOCUS, ("Implement only CR-017", "support operator", "client never types commands", "Gatekeeper", "operator-assisted rehearsal", CR015_VERIFIED_HEAD, CR015_MERGED_HEAD, CR015_VERIFY_RUN, CR015_PACKAGE_SHA256))
-    require(USER_INSTALL, ("DRAFT SKELETON — D5 AUTHORIZED BUT NOT IMPLEMENTED OR VERIFIED", "Terminal/Git/Python/Node/Docker"))
-    require(REMOTE_INSTALL, ("DRAFT SKELETON — D5 AUTHORIZED BUT NOT IMPLEMENTED OR VERIFIED", "ADR 0021"))
+    require(CURRENT, ("ADR 0020", "ADR 0021", "ADR 0022", "ADR 0023", "ADR 0024", "ADR 0030", "ADR 0031", "hosted responsive Web/PWA", "macOS consumer `.app` and ZIP", "retired", "D4-A closure truth", "D4-B closure truth", "D4-C closure truth", "D4-D closure truth", "D4 closure truth", "D5 decision truth", "D5 blocker truth", "CR-015 closure truth", "CR-016 implementation outcome", "CR-017 operator-assisted pilot truth", CR015_VERIFIED_HEAD, CR015_MERGED_HEAD, CR015_VERIFY_RUN, CR015_PACKAGE_SHA256, "Restore remains closed"))
+    require(PLAN, ("ADR 0030", "ADR 0031", "hosted responsive Web/PWA", "Historical D4 decision", "Historical D5 decision", "D4-A", "D4-B", "D4-C", "D4-D", "## Historical D5 — Remote install checklist", "RETIRED AS A FAMILYFOODOS FORWARD PATH", "## Historical D5 blocker — Native macOS application lifecycle", "DONE — MERGED AND EXACT-HEAD/EXACT-PACKAGE VERIFIED", CR015_VERIFY_RUN, CR015_PACKAGE_SHA256))
+    require(PACKAGING, ("RETIRED FROM ACTIVE FAMILYFOODOS", "ADR 0031", "no `FamilyFoodOS.app` replacement", "historical evidence only"))
+    require(DEPLOYMENT, ("HOSTED WEB/PWA TARGET; LOCAL PACKAGE RETIRED", "ADR 0031", "Source-run", "not the production deployment topology"))
+    require(UPDATE_GUIDE, ("ТЕКУЩИЙ PACKAGE-ПУТЬ ЗАКРЫТ", "ADR 0031", "hosted Web/PWA", "историческое", "старый пакет не является автоматическим откатом"))
+    require(DOCS_AGENTS, ("ADR 0030", "ADR 0031", "historical", "retire"))
+    require(P("docs/decisions/AGENTS.md"), ("ADR 0030", "ADR 0031", "historical records", "supersedes only forward FamilyFoodOS use"))
+    require(FOCUS, ("PR1", "FamilyFoodOS", "ADR 0030", "ADR 0031", "hosted Web/PWA", "consumer package", "retired"))
+    require(USER_INSTALL, ("RETIRED — NOT A FAMILYFOODOS INSTALL PROCEDURE", "ADR 0031", "hosted Web/PWA"))
+    require(REMOTE_INSTALL, ("RETIRED — HISTORICAL SOURCE-PRODUCT DRAFT ONLY", "ADR 0031", "not a FamilyFoodOS procedure"))
 
 
 def check_adr20() -> None:
@@ -585,16 +589,53 @@ def check_adr23_and_adr24() -> None:
         "PHASE 12 — MVP release preparation — AUTHORIZED",
     ))
 
-def check_cr015_implementation_closure() -> None:
-    verify_blob(P("scripts/macos/app_lifecycle.m"), CR015_APP_LIFECYCLE_BLOB, "CR-015 native lifecycle source")
-    verify_blob(P("scripts/package_macos.sh"), CR015_PACKAGE_SCRIPT_BLOB, "CR-015 package builder")
-    verify_blob(P("macos_package/verification.py"), CR015_PACKAGE_VERIFIER_BLOB, "CR-015 package verifier")
-    require(P("scripts/macos/app_lifecycle.m"), (
-        "<NSApplicationDelegate>", "applicationShouldTerminate:", "NSTerminateLater",
-        "replyToApplicationShouldTerminate:NO", "CosmeticWorkshopOSRuntime",
-        "applicationShouldHandleReopen:",
+def check_adr30_and_adr31() -> None:
+    require(ADR30, (
+        "hosted, responsive Web/PWA",
+        "Consumer PWA/Web",
+        "SQLite remains permitted",
+        "transitional infrastructure",
     ))
-    require(P("scripts/package_macos.sh"), ("xcrun --sdk macosx clang", "-framework Cocoa", "RUNTIME_HELPER"))
+    require(ADR31, (
+        "ADR 0031 — Retire inherited macOS consumer packaging",
+        "ACCEPTED FOR PR1 — NORMATIVE ONLY WHEN PR1 IS MERGED TO `main`",
+        "No `FamilyFoodOS.app`",
+        "No supported repository command builds or verifies",
+        "Source-run Restore",
+        "historical package decisions",
+        "not discovered, inspected, renamed, deleted, moved, migrated",
+        "Exact-package, clean-Mac and D5 package rehearsal are no longer current",
+        "no PostgreSQL",
+    ))
+
+
+def check_retired_package_surface() -> None:
+    for path in RETIRED_PACKAGE_FILES:
+        if path.exists():
+            ERRORS.append(f"retired package file remains active: {path.relative_to(ROOT)}")
+
+    for root in (P("macos_package"), P("scripts/macos")):
+        if not root.exists():
+            continue
+        active_files = [
+            path
+            for path in root.rglob("*")
+            if path.is_file()
+            and "__pycache__" not in path.parts
+            and path.suffix not in {".pyc", ".pyo"}
+        ]
+        for path in active_files:
+            ERRORS.append(f"retired package tree retains active file: {path.relative_to(ROOT)}")
+
+    forbid(MAKEFILE, (
+        "test-package",
+        "build-backend-runtime",
+        "package-macos",
+        "verify-package",
+        "macos_package/tests",
+        "package_macos.sh",
+    ))
+    forbid(PYTEST_CONFIG, ("macos_package/tests",))
 
 
 def check_domain_clarification() -> None:
@@ -662,12 +703,7 @@ def check_d4a_implementation() -> None:
     forbid(STARTUP_SERVICE, ("pending_migration_ids",))
     require(RUNTIME_IDENTITY, ("get_runtime_settings_status", "resolve_effective_app_version"))
     require(SETTINGS_API, ("get_runtime_settings_status",))
-    require(PACKAGE_SCRIPT, ("read_repository_app_version", "verify_product_version.py", "\"app_version\": \"$APP_VERSION\""))
-    package_script_text = read(PACKAGE_SCRIPT)
-    if re.search(r'APP_VERSION=[\"\'][0-9]+\.[0-9]+\.[0-9]+[\"\']', package_script_text):
-        ERRORS.append("scripts/package_macos.sh contains an independent APP_VERSION semver literal")
-    require(VERSION_VERIFIER, ("verify_product_version", "CFBundleShortVersionString", "package-runtime.json", "backend"))
-    for test_file in (D4A_VERSION_TEST, D4A_PREFLIGHT_TEST, D4A_PACKAGE_TEST):
+    for test_file in (D4A_VERSION_TEST, D4A_PREFLIGHT_TEST):
         if not test_file.is_file():
             ERRORS.append(f"missing D4-A focused test: {test_file.relative_to(ROOT)}")
 
@@ -728,17 +764,6 @@ def check_d4c_implementation() -> None:
         "read_user_update_status", "Можно продолжать работу.",
         "Ничего делать не нужно.", "Закройте приложение и откройте его снова.",
     ))
-    require(D4C_PACKAGE_ENTRYPOINT, (
-        "_classify_update_exception", "classify_update_failure_for_user",
-        "EXIT_UPDATE_STOPPED_BEFORE_COMMIT", "EXIT_UPDATE_COMPLETION_UNCERTAIN",
-        "D4-C classified startup-owned update failure",
-    ))
-    require(D4C_USER_ALERT, (
-        "UPDATE_STOPPED_BEFORE_COMMIT", "UPDATE_COMPLETION_UNCERTAIN",
-        "до замены рабочей базы данных",
-        "Не удалось подтвердить завершение обновления данных",
-        "Не пытайтесь вручную откатывать",
-    ))
     require(D4C_FRONTEND, (
         "mountSettingsUpdateStatus", "fetch('/api/settings/status')",
         "Обновление завершено", "Нужно внимание", "Что делать:",
@@ -749,7 +774,7 @@ def check_d4c_implementation() -> None:
         "failure_category", "schema_identity", "stage_identity", "backup_identity",
     ))
     require(D4C_BINDINGS, ("mountSettingsUpdateStatus",))
-    for path in (D4C_BACKEND_TEST, D4C_FRONTEND_TEST, D4C_PACKAGE_TEST):
+    for path in (D4C_BACKEND_TEST, D4C_FRONTEND_TEST):
         if not path.is_file():
             ERRORS.append(f"missing D4-C focused test: {path.relative_to(ROOT)}")
     require(D4C_BACKEND_TEST, (
@@ -758,10 +783,6 @@ def check_d4c_implementation() -> None:
     ))
     require(D4C_FRONTEND_TEST, (
         "no update mutation", "caches the read for the UI session",
-    ))
-    require(D4C_PACKAGE_TEST, (
-        "test_packaged_update_failures_use_fixed_d4c_catalog",
-        "test_uncertain_message_never_suggests_manual_rollback",
     ))
 
 
@@ -778,7 +799,8 @@ def main() -> int:
     check_adr21()
     check_adr22()
     check_adr23_and_adr24()
-    check_cr015_implementation_closure()
+    check_adr30_and_adr31()
+    check_retired_package_surface()
     check_domain_clarification()
     check_d4a_implementation()
     check_d4b_implementation()
@@ -797,10 +819,11 @@ def main() -> int:
     print("Verified D4-A is lifecycle-closed on the exact merged-head evidence.")
     print("Verified D4-B is lifecycle-closed on exact PR-head and merged-head Level-5 evidence.")
     print("Verified D4 is lifecycle-closed on final D4-D exact-package evidence.")
-    print("Verified CR-015 native macOS lifecycle blocker fix is merged and exact-package verified.")
+    print("Verified CR-015 exact-package results remain protected historical evidence.")
     print("Verified CR-016 self-running bootstrap implementation failed the human Finder handoff and is not current.")
-    print("Verified CR-017 operator-assisted single-client path is authorized next and not yet implemented.")
-    print("Verified D5 closure, Phase 12 and product release readiness remain gated.")
+    print("Verified CR-017 and the inherited D5 package forward path are retired for FamilyFoodOS.")
+    print("Verified the inherited macOS consumer package implementation and build entrypoints are absent.")
+    print("Verified hosted delivery, Phase 12 and product release readiness remain separately gated.")
     return 0
 
 

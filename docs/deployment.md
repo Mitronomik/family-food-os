@@ -1,11 +1,25 @@
 # Deployment
 
-Status: **CURRENT — LOCAL-FIRST TOPOLOGY UNCHANGED**
-Updated: `2026-08-13`
+Status: **CURRENT — HOSTED WEB/PWA TARGET; LOCAL PACKAGE RETIRED**
+Updated: `2026-08-31`
+
+FamilyFoodOS targets:
+
+```text
+hosted responsive Web/PWA
+→ hosted Application API
+→ domain/services
+→ repositories
+→ production database
+```
+
+ADR 0031 retires the inherited macOS consumer `.app` / ZIP. Source-run
+backend, launcher and SQLite development remain temporary migration
+scaffolding; they are not the production deployment topology.
 
 The exact pre-CR-013 document is preserved in `docs/history/d4-pre-decision/deployment.md`.
 
-## Current lifecycle
+## Historical source-product lifecycle evidence
 
 ```text
 D3 — macOS package MVP — IMPLEMENTED
@@ -27,7 +41,7 @@ PHASE 12 — MVP release preparation — NOT AUTHORIZED BY CR-014/CR-015/CR-016/
 Product release readiness — NOT CLAIMED
 ```
 
-## Topology
+## Historical local topology
 
 D4-A changes **no deployment topology**.
 
@@ -49,17 +63,19 @@ Closed D4-B implements the migration stage and durable UpdateLog under the exist
 
 ## Authorization boundary
 
-D4 is closed with no deployment-topology change. CR-014 authorizes D5 only as documentation + exact-package assisted-install rehearsal over the same local topology. Release/distribution infrastructure, cloud work and runtime topology changes remain unauthorized.
+The inherited D4 evidence remains closed. ADR 0031 retires its package delivery
+surface and the D5 package rehearsal from the FamilyFoodOS forward path. Hosted
+deployment remains separately gated and is not implemented by PR1.
 
-## CR-015 lifecycle repair boundary
+## Historical CR-015 lifecycle repair boundary
 
 CR-015 changes no deployment topology: the application remains local-first, the browser remains the UI, and user data remain external to the `.app`. The only authorized runtime change is the native macOS application lifecycle wrapper required for responsive Dock Quit and repeat launch. No cloud, remote management or release-channel work is authorized.
 
-## CR-015 closure deployment truth
+## Historical CR-015 closure deployment truth
 
 The merged native lifecycle repair changes no deployment topology. The browser remains the product UI, the backend remains local, and user data remain external to the `.app`. The fixed package now participates correctly in the macOS application lifecycle for ordinary Quit/restart. D5 still requires a fresh human clean-Mac rehearsal; no remote-management or release topology is authorized.
 
 
-## CR-017 pilot distribution boundary
+## Historical CR-017 pilot distribution boundary
 
 The CR-016 self-running downloaded `.command` experiment failed the mandatory human Finder rehearsal because Gatekeeper blocked the bootstrap before execution. CR-017 therefore authorizes only a single-client **operator-assisted** install/update pilot: a qualified support operator may use Terminal to verify the exact package and remove quarantine only from the verified staged `.app`; the client does not type commands. Gatekeeper remains globally enabled. No public/self-service distribution, signing/notarization, Phase 12 or release-readiness claim is created.

@@ -413,6 +413,11 @@ This level is mandatory for production and import apply PRs.
 
 ### 9.6. Level 5 - Deployment/package smoke
 
+This is a historical source-product package gate. ADR 0031 retires the macOS
+consumer `.app`/ZIP and D5 package rehearsal from the active FamilyFoodOS test
+surface. Source-run launcher, backend, SQLite and Restore smoke still applies
+when those transitional subsystems change.
+
 For local runtime, launcher, packaging and update PRs.
 
 Check:
@@ -929,7 +934,11 @@ Open/download PDF.
 
 ---
 
-# 10.14. Packaging PRs
+# 10.14. Historical packaging PRs
+
+ADR 0031 retires this inherited consumer-package path for FamilyFoodOS. The
+requirements below remain historical testing evidence and are not an active
+FamilyFoodOS build or release instruction.
 
 Applies to:
 
@@ -963,7 +972,7 @@ Verify test client still exists.
 Create backup.
 ```
 
-Packaging smoke is mandatory.
+Packaging smoke was mandatory for the historical package work.
 
 ---
 
