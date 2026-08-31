@@ -1,54 +1,76 @@
 # Current focus
 
-Updated: `2026-08-16`
+Updated: `2026-08-31`
+
+## Project
+
+FamilyFoodOS is now a separate project bootstrapped from CosmeticWorkshopOS.
+
+Source baseline:
+
+- source repository: `Mitronomik/cosmetic-workshop-os`
+- source commit: `0ac96deace602248e0d31e7e56c7aed7fb63c62b`
+- bootstrap tag: `bootstrap-cosmetic-workshop-2026-08-31`
+- FamilyFoodOS repository: `Mitronomik/family-food-os`
+
+The original source repository is retained only as engineering provenance and a read-only reference.
 
 ## Current lifecycle
 
-```text
-C4-III — DONE — EXACT-HEAD AND EXACT-PACKAGE VERIFIED
-Restore — IMPLEMENTED — C4-III VERIFIED AND LIFECYCLE-CLOSED
-D3 — macOS package MVP — IMPLEMENTED
-CR-013 — ACCEPTED — D4 UPDATE SAFETY CONTRACT
-D4 — Update safety — DONE — EXACT-PACKAGE VERIFIED AND LIFECYCLE-CLOSED
-D4-A — Version identity and compatibility preflight — DONE — MERGED AND EXACT-HEAD VERIFIED
-D4-B — Safe migration execution and durable UpdateLog — DONE — MERGED AND EXACT-HEAD VERIFIED
-D4-C — User-facing update status and packaged failure UX — DONE — MERGED AND EXACT-HEAD/EXACT-PACKAGE VERIFIED
-D4-D — Exact-package update verification and D4 lifecycle closure — DONE — FINAL EXACT-PACKAGE VERIFICATION PASSED
-CR-014 — ACCEPTED — D5 REMOTE INSTALL REHEARSAL CONTRACT
-D5 — Remote install checklist — PILOT OPERATOR-ASSISTED PATH AUTHORIZED — FULL D5 PASS NOT CLAIMED
-CR-015 — ACCEPTED — NATIVE MACOS APPLICATION LIFECYCLE BLOCKER FIX
-D5 blocker fix — Native macOS application lifecycle — DONE — MERGED AND EXACT-HEAD/EXACT-PACKAGE VERIFIED
-CR-016 — ACCEPTED DECISION — IMPLEMENTATION REJECTED BY HUMAN FINDER REHEARSAL
-CR-017 — ACCEPTED — SINGLE-CLIENT OPERATOR-ASSISTED INSTALL/UPDATE CONTRACT
-D5 pilot deployment — OPERATOR-ASSISTED PATH AUTHORIZED NEXT — NOT IMPLEMENTED
-D5 verification — CR-016 FAIL RECORDED; OPERATOR-ASSISTED REHEARSAL NOT STARTED
-PHASE 12 — MVP release preparation — NOT AUTHORIZED BY CR-014/CR-015/CR-016/CR-017
-Product release readiness — NOT CLAIMED
-```
+PR0 — Frozen Fork — IN PROGRESS
+
+Verified baseline before FamilyFoodOS-specific implementation:
+
+- backend + launcher tests: `2546 passed`
+- macOS package tests: `146 passed, 1 skipped`
+- frontend build: passed
+- npm audit during `npm ci`: `0 vulnerabilities`
 
 ## Current task
 
-**Implement only CR-017 — Single-client operator-assisted install/update after this decision merges.**
+Complete only PR0 — Frozen Fork.
 
-CR-016 implementation head `0179be9fa1758a47662f86c5a14a7f24341815c5` and automated run `31959318870` remain historical evidence only. The clean-Mac human rehearsal proved the downloaded `.command` cannot bootstrap itself because Gatekeeper blocks it before execution; PR #210 is closed without merge.
+Current PR0 scope:
 
-CR-017 authorizes a support operator Terminal workflow only. The operator verifies exact package SHA-256 and app identity before removing quarantine from the verified staged `.app`. The client never types commands. Gatekeeper stays globally enabled, no `sudo` is permitted, and product database/user-data/D4/Restore/runtime semantics remain untouched.
+- preserve and document the verified source baseline;
+- establish FamilyFoodOS canonical product documents;
+- establish the root FamilyFoodOS `AGENTS.md`;
+- replace legacy execution-state files with FamilyFoodOS state;
+- verify the resulting documentation/governance diff;
+- commit and open the PR.
 
-After the operator-assisted implementation is separately verified, repeat the clean-Mac D5 rehearsal using that operator procedure. Full D5 PASS, Phase 12 and product release readiness remain unclaimed.
+## Canonical documents for this task
 
-## Prior CR-015 handoff truth
+Read:
 
-The CR-015 closure correctly recorded: **Repeat the D5 human clean-Mac/clean-profile rehearsal on the fixed exact package** and **No new runtime implementation slice is authorized now**. Those statements remain true for product runtime scope. CR-016 is a later, separate distribution/support decision and authorizes only the bounded packaging/bootstrap exception from ADR 0023; it does not reopen runtime, backend, frontend, database, Restore or D4 semantics.
+- `AGENTS.md`
+- `docs/family-food/project-operating-manual.md`
+- `docs/family-food/technical-spec.md`
+- `docs/family-food/data-ingestion.md`
+- `docs/family-food/migration-plan.md`
+- `docs/migration-source.md`
 
-## CR-015 evidence retained
+## Non-goals
 
-- verified implementation head: `d7f95141e5f41c7a806c3fafb71e942fe5892dd8`;
-- content-identical merge: `c38940349a80d345f3e833b61e4bf4e5e761c0eb`;
-- external exact-package run: `31780899805`;
-- exact fixed ZIP SHA-256: `85f993a93082c4b3a36771318cf8c0c3abf02be56b1374a32a62d1a6b9279ee6`.
+PR0 must not:
 
-## Final D4 evidence
+- change backend runtime behavior;
+- change frontend runtime behavior;
+- change database schema;
+- rename runtime packages or environment variables;
+- begin food-domain model implementation;
+- remove legacy CosmeticWorkshopOS bounded contexts;
+- add AI;
+- add retailer integrations;
+- add PostgreSQL/Auth;
+- begin PR1 Identity Detox.
 
-- exact tested main/head: `ec88b09193c8ed041e17daef3e3ffc0193d1b559`;
-- D4-D run: `31751386881`; artifact `9201217317`; digest `sha256:0dc707f8823eb69934a5bc3b3b6824557533bafa3e1e86a7f13fc29c19a1af7d`;
-- final result: `PASS — FULL AUTOMATED SMOKE PASSED`.
+Legacy application code is intentionally still present after PR0.
+
+## Next allowed milestone
+
+After PR0 is reviewed and merged, the next planned milestone is:
+
+`PR1 — Identity Detox`
+
+Do not begin PR1 work from this branch.
