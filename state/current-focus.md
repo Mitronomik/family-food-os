@@ -49,13 +49,11 @@ Source-run backend, launcher, SQLite and Restore remain transitional migration
 scaffolding. PR1-G retires the consumer package but does not authorize hosted
 infrastructure implementation.
 
-Known remaining PR1 identity debt:
+PR1-H aligns the retained Restore smoke tools with current FamilyFoodOS
+launcher-owned temporary and probe identity.
 
-- old technical ownership markers remain in
-  `scripts/smoke_restore_browser_session.py`,
-  `scripts/smoke_restore_control_plane.py`,
-  `scripts/smoke_restore_native_picker.py` and
-  `scripts/smoke_restore_validation_session.py`;
+Known remaining PR1 debt:
+
 - two report-document reconciliation tests retain a hard-coded
   `cosmetic_workshop.sqlite` fixture path. Their failures reproduce at checkpoint
   `7fd540a` and are PR1-wide fixture debt, not a PR1-G regression.

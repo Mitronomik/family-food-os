@@ -25,6 +25,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+OSASCRIPT_PROBE_SENTINEL = "__FAMILY_FOOD_OS_A3_OSASCRIPT_PROBE__"
+
 
 def _git(*args: str) -> str:
     return subprocess.check_output(["git", *args], text=True).strip()
@@ -118,14 +120,14 @@ def _probe_exact_osascript() -> None:
     if OSASCRIPT_PATH != Path("/usr/bin/osascript") or not OSASCRIPT_PATH.is_file():
         raise RuntimeError("exact /usr/bin/osascript helper is unavailable")
     probe = subprocess.run(
-        [str(OSASCRIPT_PATH), "-e", 'return "__CWOS_A3_OSASCRIPT_PROBE__"'],
+        [str(OSASCRIPT_PATH), "-e", f'return "{OSASCRIPT_PROBE_SENTINEL}"'],
         stdin=subprocess.DEVNULL,
         capture_output=True,
         text=True,
         shell=False,
         check=True,
     )
-    if probe.stdout.strip() != "__CWOS_A3_OSASCRIPT_PROBE__":
+    if probe.stdout.strip() != OSASCRIPT_PROBE_SENTINEL:
         raise RuntimeError("osascript probe returned an unexpected result")
 
 
@@ -134,6 +136,7 @@ def run(expected_head: str) -> None:
     _assert_clean_workspace()
     _probe_exact_osascript()
 
+    from launcher import APP_SLUG
     from launcher.config import resolve_runtime_paths
     from launcher.runtime import ensure_backend_import_path
 
@@ -147,7 +150,7 @@ def run(expected_head: str) -> None:
     )
     from launcher.restore.workspace import resolve_restore_dir
 
-    with tempfile.TemporaryDirectory(prefix="cwos-a3-smoke-") as temporary:
+    with tempfile.TemporaryDirectory(prefix=f"{APP_SLUG}-a3-smoke-") as temporary:
         root = Path(temporary)
         working = _build_workspace(root / "work" / "workshop.sqlite", "working")
         source = _build_workspace(root / "chosen" / "backup.sqlite", "source")
