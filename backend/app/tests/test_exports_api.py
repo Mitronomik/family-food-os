@@ -44,8 +44,8 @@ def test_missing_export_dir_returns_empty_list_without_creating_dir(tmp_path):
 def test_existing_export_files_are_listed_newest_first_and_ignore_non_json(tmp_path):
     export_dir = tmp_path / "exports"
     export_dir.mkdir()
-    older = export_dir / "20260705T090000000000Z-cosmetic_workshop-export-manual.json"
-    newer = export_dir / "20260705T100000000000Z-cosmetic_workshop-export-before_update.json"
+    older = export_dir / "20260705T090000000000Z-family_food-export-manual.json"
+    newer = export_dir / "20260705T100000000000Z-family_food-export-before_update.json"
     ignored = export_dir / "notes.txt"
     older.write_text('{"older": true}', encoding="utf-8")
     newer.write_text('{"newer": true}', encoding="utf-8")
@@ -74,7 +74,7 @@ def test_malformed_export_filename_does_not_crash_listing(tmp_path):
 
 @pytest.mark.skipif(TestClient is None, reason="FastAPI TestClient dependencies are unavailable in this environment.")
 def test_export_status_is_read_only_and_reports_paths(tmp_path, monkeypatch):
-    db_path = tmp_path / "data" / "cosmetic_workshop.sqlite"
+    db_path = tmp_path / "data" / "family_food.sqlite"
     user_data_dir = tmp_path / "user-data"
     export_dir = user_data_dir / "exports"
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
@@ -114,7 +114,7 @@ def test_export_list_returns_empty_for_missing_dir_without_creating_it(tmp_path,
 
 @pytest.mark.skipif(TestClient is None, reason="FastAPI TestClient dependencies are unavailable in this environment.")
 def test_post_export_creates_json_snapshot_without_modifying_source(tmp_path, monkeypatch):
-    db_path = tmp_path / "cosmetic_workshop.sqlite"
+    db_path = tmp_path / "family_food.sqlite"
     _create_database(db_path)
     before_bytes = db_path.read_bytes()
     with session(DatabaseConfig(path=db_path)) as connection:
@@ -138,6 +138,7 @@ def test_post_export_creates_json_snapshot_without_modifying_source(tmp_path, mo
     assert first.json()["database_path"] == str(db_path)
     assert first.json()["export_dir"] == str(tmp_path / "exports")
     assert first_export["filename"] != second_export["filename"]
+    assert "-family_food-export-" in first_export["filename"]
     assert "before_large_edit" in first_export["filename"]
 
     export_payload = json.loads(Path(first_export["path"]).read_text(encoding="utf-8"))
@@ -145,7 +146,7 @@ def test_post_export_creates_json_snapshot_without_modifying_source(tmp_path, mo
     manifest = export_payload["manifest"]
     assert manifest["export_schema_version"] == 1
     assert manifest["reason"] == "before_large_edit"
-    assert manifest["source"] == "cosmetic-workshop-os"
+    assert manifest["source"] == "family-food-os"
     assert manifest["database_filename"] == db_path.name
     assert manifest["database_location_kind"] == "development"
     assert "database_path" not in manifest
@@ -188,7 +189,7 @@ def test_post_export_creates_json_snapshot_without_modifying_source(tmp_path, mo
 
 
 def test_export_includes_catalog_tables(tmp_path, monkeypatch):
-    db_path = tmp_path / "cosmetic_workshop.sqlite"
+    db_path = tmp_path / "family_food.sqlite"
     _create_database(db_path)
     with sqlite3.connect(db_path) as connection:
         ingredient_id = connection.execute(
@@ -300,7 +301,7 @@ def test_post_export_with_database_path_directory_returns_safe_error(tmp_path, m
 
 @pytest.mark.skipif(TestClient is None, reason="FastAPI TestClient dependencies are unavailable in this environment.")
 def test_export_reason_defaults_empty_and_sanitizes_unsafe_characters(tmp_path, monkeypatch):
-    db_path = tmp_path / "cosmetic_workshop.sqlite"
+    db_path = tmp_path / "family_food.sqlite"
     _create_database(db_path)
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
     monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
@@ -342,7 +343,7 @@ def test_export_reason_rejects_too_long_values():
 def test_export_create_list_and_status_report_the_same_canonical_reason(
     tmp_path, monkeypatch, human_reason, canonical_reason
 ):
-    db_path = tmp_path / "cosmetic_workshop.sqlite"
+    db_path = tmp_path / "family_food.sqlite"
     _create_database(db_path)
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
     monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
@@ -377,7 +378,7 @@ def test_export_create_list_and_status_report_the_same_canonical_reason(
 def test_export_manifest_keeps_the_human_reason_not_the_canonical_slug(
     tmp_path, monkeypatch, human_reason, expected_manifest_reason, canonical_reason
 ):
-    db_path = tmp_path / "cosmetic_workshop.sqlite"
+    db_path = tmp_path / "family_food.sqlite"
     _create_database(db_path)
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
     monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
@@ -396,7 +397,7 @@ def test_export_manifest_keeps_the_human_reason_not_the_canonical_slug(
 
 
 def test_export_uniqueness_suffix_is_never_reported_as_the_reason(tmp_path, monkeypatch):
-    db_path = tmp_path / "cosmetic_workshop.sqlite"
+    db_path = tmp_path / "family_food.sqlite"
     _create_database(db_path)
     before_bytes = db_path.read_bytes()
     export_dir = tmp_path / "exports"
@@ -442,7 +443,10 @@ def test_legacy_export_files_are_listed_without_rename_delete_or_rewrite(tmp_pat
         assert item.path.exists()
         assert item.created_at is not None
     by_name = {item.filename: item for item in listed}
-    assert by_name["20260705T090000000000Z-cosmetic_workshop-export-before_import____unsafe.json"].reason == (
-        "before_import____unsafe"
+    assert (
+        by_name[
+            "20260705T090000000000Z-cosmetic_workshop-export-before_import____unsafe.json"
+        ].reason
+        is None
     )
     assert by_name["ambiguous.json"].reason is None

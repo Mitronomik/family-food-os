@@ -69,8 +69,8 @@ def test_missing_backup_dir_returns_empty_list_without_creating_dir(tmp_path):
 def test_existing_backup_files_are_listed_newest_first_and_ignore_non_backups(tmp_path):
     backup_dir = tmp_path / "backups"
     backup_dir.mkdir()
-    older = backup_dir / "20260705T090000000000Z-cosmetic_workshop-manual.sqlite"
-    newer = backup_dir / "20260705T100000000000Z-cosmetic_workshop-before_update.sqlite"
+    older = backup_dir / "20260705T090000000000Z-family_food-manual.sqlite"
+    newer = backup_dir / "20260705T100000000000Z-family_food-before_update.sqlite"
     ignored = backup_dir / "notes.txt"
     older.write_bytes(b"old")
     newer.write_bytes(b"newer")
@@ -99,7 +99,7 @@ def test_malformed_backup_filename_does_not_crash_listing(tmp_path):
 
 @pytest.mark.skipif(TestClient is None, reason="FastAPI TestClient dependencies are unavailable in this environment.")
 def test_backup_status_is_read_only_and_reports_paths(tmp_path, monkeypatch):
-    db_path = tmp_path / "data" / "cosmetic_workshop.sqlite"
+    db_path = tmp_path / "data" / "family_food.sqlite"
     user_data_dir = tmp_path / "user-data"
     backup_dir = user_data_dir / "backups"
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
@@ -139,7 +139,7 @@ def test_backup_list_returns_empty_for_missing_dir_without_creating_it(tmp_path,
 
 @pytest.mark.skipif(TestClient is None, reason="FastAPI TestClient dependencies are unavailable in this environment.")
 def test_post_backup_creates_unique_backup_without_modifying_source(tmp_path, monkeypatch):
-    db_path = make_database(tmp_path / "cosmetic_workshop.sqlite")
+    db_path = make_database(tmp_path / "family_food.sqlite")
     source_rows = ingredient_names(db_path)
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
     monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
@@ -186,7 +186,7 @@ def test_post_backup_with_missing_database_returns_safe_error_without_backup(tmp
 
 @pytest.mark.skipif(TestClient is None, reason="FastAPI TestClient dependencies are unavailable in this environment.")
 def test_backup_reason_defaults_empty_and_sanitizes_unsafe_characters(tmp_path, monkeypatch):
-    db_path = make_database(tmp_path / "cosmetic_workshop.sqlite")
+    db_path = make_database(tmp_path / "family_food.sqlite")
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
     monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
 
@@ -223,7 +223,7 @@ def test_backup_reason_rejects_too_long_values():
 def test_backup_create_list_and_status_report_the_same_canonical_reason(
     tmp_path, monkeypatch, human_reason, canonical_reason
 ):
-    db_path = make_database(tmp_path / "cosmetic_workshop.sqlite")
+    db_path = make_database(tmp_path / "family_food.sqlite")
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
     monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
 
@@ -246,7 +246,7 @@ def test_backup_create_list_and_status_report_the_same_canonical_reason(
 
 @pytest.mark.skipif(TestClient is None, reason="FastAPI TestClient dependencies are unavailable in this environment.")
 def test_backup_reason_round_trip_survives_a_hyphenated_source_database_stem(tmp_path, monkeypatch):
-    db_path = make_database(tmp_path / "cosmetic-workshop-os-2.sqlite")
+    db_path = make_database(tmp_path / "custom-family-database-2.sqlite")
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
     monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
 
@@ -255,7 +255,9 @@ def test_backup_reason_round_trip_survives_a_hyphenated_source_database_stem(tmp
 
     assert created.status_code == 201
     backup = created.json()["backup"]
-    assert backup["filename"].startswith(f"{backup['filename'].split('-', 1)[0]}-cosmetic-workshop-os-2-")
+    assert backup["filename"].startswith(
+        f"{backup['filename'].split('-', 1)[0]}-custom-family-database-2-"
+    )
     assert "before_update_unsafe" in backup["filename"]
     assert backup["reason"] == "before_update_unsafe"
     assert client.get("/api/backups").json()["backups"][0]["reason"] == "before_update_unsafe"
@@ -263,7 +265,7 @@ def test_backup_reason_round_trip_survives_a_hyphenated_source_database_stem(tmp
 
 
 def test_backup_uniqueness_suffix_is_never_reported_as_the_reason(tmp_path, monkeypatch):
-    db_path = make_database(tmp_path / "cosmetic-workshop-os.sqlite")
+    db_path = make_database(tmp_path / "family_food.sqlite")
     source_rows = ingredient_names(db_path)
     backup_dir = tmp_path / "backups"
     monkeypatch.setattr("app.services.backup.datetime", _FrozenDatetime)
@@ -324,7 +326,7 @@ def test_create_returns_recorded_and_describes_the_exact_backup_result(tmp_path,
     backup into an HTTP 500, and found it could also raise `StopIteration` or
     describe a different file.
     """
-    db_path = make_database(tmp_path / "cosmetic_workshop.sqlite")
+    db_path = make_database(tmp_path / "family_food.sqlite")
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
     monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
 
@@ -353,7 +355,7 @@ def test_create_returns_recorded_and_describes_the_exact_backup_result(tmp_path,
 @pytest.mark.skipif(TestClient is None, reason="FastAPI TestClient dependencies are unavailable in this environment.")
 def test_create_does_not_re_list_the_backup_directory(tmp_path, monkeypatch):
     """A directory read failure after a successful backup must not fail the create."""
-    db_path = make_database(tmp_path / "cosmetic_workshop.sqlite")
+    db_path = make_database(tmp_path / "family_food.sqlite")
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
     monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
     client = TestClient(create_app())
@@ -372,7 +374,7 @@ def test_create_does_not_re_list_the_backup_directory(tmp_path, monkeypatch):
 
 @pytest.mark.skipif(TestClient is None, reason="FastAPI TestClient dependencies are unavailable in this environment.")
 def test_a_failed_audit_returns_pending_201_and_keeps_the_backup(tmp_path, monkeypatch):
-    db_path = make_database(tmp_path / "cosmetic_workshop.sqlite")
+    db_path = make_database(tmp_path / "family_food.sqlite")
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
     monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
 
@@ -415,7 +417,7 @@ def test_a_failed_audit_returns_pending_201_and_keeps_the_backup(tmp_path, monke
 
 @pytest.mark.skipif(TestClient is None, reason="FastAPI TestClient dependencies are unavailable in this environment.")
 def test_preparation_failure_returns_the_exact_safe_500_and_creates_nothing(tmp_path, monkeypatch):
-    db_path = make_database(tmp_path / "cosmetic_workshop.sqlite")
+    db_path = make_database(tmp_path / "family_food.sqlite")
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
     monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
 
@@ -439,7 +441,7 @@ def test_preparation_failure_returns_the_exact_safe_500_and_creates_nothing(tmp_
 
 @pytest.mark.skipif(TestClient is None, reason="FastAPI TestClient dependencies are unavailable in this environment.")
 def test_status_reports_the_exact_pending_count_and_stays_read_only(tmp_path, monkeypatch):
-    db_path = make_database(tmp_path / "cosmetic_workshop.sqlite")
+    db_path = make_database(tmp_path / "family_food.sqlite")
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
     monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
 
@@ -451,7 +453,7 @@ def test_status_reports_the_exact_pending_count_and_stays_read_only(tmp_path, mo
 
     paths = resolve_backup_paths()
     service = BackupAuditService(paths.backup_dir)
-    service.prepare_operation(primary_filename="20260801T101500123456Z-cosmetic_workshop-manual.sqlite")
+    service.prepare_operation(primary_filename="20260801T101500123456Z-family_food-manual.sqlite")
 
     status = client.get("/api/backups/status").json()
     assert status["pending_audit_count"] == 1
@@ -463,7 +465,7 @@ def test_status_reports_the_exact_pending_count_and_stays_read_only(tmp_path, mo
 @pytest.mark.skipif(TestClient is None, reason="FastAPI TestClient dependencies are unavailable in this environment.")
 def test_a_ledger_read_failure_is_a_safe_500_and_never_a_fabricated_zero(tmp_path, monkeypatch):
     """`0` is a factual claim the frontend clears a standing warning on."""
-    db_path = make_database(tmp_path / "cosmetic_workshop.sqlite")
+    db_path = make_database(tmp_path / "family_food.sqlite")
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
     monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
 
@@ -484,7 +486,7 @@ def test_a_ledger_read_failure_is_a_safe_500_and_never_a_fabricated_zero(tmp_pat
 
 @pytest.mark.skipif(TestClient is None, reason="FastAPI TestClient dependencies are unavailable in this environment.")
 def test_status_reports_zero_without_creating_a_database(tmp_path, monkeypatch):
-    db_path = tmp_path / "data" / "cosmetic_workshop.sqlite"
+    db_path = tmp_path / "data" / "family_food.sqlite"
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
     monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
 
@@ -501,15 +503,15 @@ def test_the_create_response_schema_binds_the_two_audit_fields():
     from app.services.backup_audit import PENDING_AUDIT_MESSAGE
 
     file_payload = {
-        "filename": "20260801T101500123456Z-cosmetic_workshop-manual.sqlite",
-        "path": "/local/backups/20260801T101500123456Z-cosmetic_workshop-manual.sqlite",
+        "filename": "20260801T101500123456Z-family_food-manual.sqlite",
+        "path": "/local/backups/20260801T101500123456Z-family_food-manual.sqlite",
         "created_at": datetime(2026, 8, 1, 10, 15, tzinfo=UTC),
         "reason": "manual",
         "size_bytes": 4096,
     }
     base = {
         "backup": file_payload,
-        "database_path": "/local/cosmetic_workshop.sqlite",
+        "database_path": "/local/family_food.sqlite",
         "backup_dir": "/local/backups",
         "message": "Резервная копия создана.",
     }
@@ -532,7 +534,7 @@ def test_the_create_response_schema_binds_the_two_audit_fields():
 # --------------------------------------------------------------------------
 
 def _workspace(tmp_path, monkeypatch):
-    db_path = make_database(tmp_path / "cosmetic_workshop.sqlite")
+    db_path = make_database(tmp_path / "family_food.sqlite")
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
     monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
     return db_path
@@ -705,7 +707,7 @@ def test_an_unverified_artifact_leaves_the_operation_unresolved_and_counted(tmp_
 @pytest.mark.skipif(TestClient is None, reason="FastAPI TestClient dependencies are unavailable in this environment.")
 def test_a_source_that_is_a_directory_returns_a_safe_error_without_any_path(tmp_path, monkeypatch):
     """`BackupError` embeds an absolute path; the API must never propagate it."""
-    db_path = tmp_path / "cosmetic_workshop.sqlite"
+    db_path = tmp_path / "family_food.sqlite"
     db_path.mkdir()
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db_path))
     monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)

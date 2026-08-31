@@ -50,11 +50,16 @@ def migrated_database(path: Path) -> Path:
 
 
 def supported_older_database(path: Path) -> Path:
-    """Build the exact known prefix immediately before current head."""
+    """Build the supported prefix immediately before the audit ledger exists."""
     path.parent.mkdir(parents=True, exist_ok=True)
     original = list(MIGRATION_MODULES)
     try:
-        MIGRATION_MODULES[:] = original[:-1]
+        cutoff = next(
+            index
+            for index, module_name in enumerate(original)
+            if module_name.endswith("0019_production_batch_tax_rate_snapshots")
+        )
+        MIGRATION_MODULES[:] = original[: cutoff + 1]
         apply_migrations(DatabaseConfig(path=path))
     finally:
         MIGRATION_MODULES[:] = original
@@ -110,7 +115,7 @@ def test_wal_committed_uncheckpointed_rows_are_present_in_the_backup(tmp_path):
     that contained **none** of the committed rows. Structural validity was never
     the question; transactional completeness was.
     """
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     writer = sqlite3.connect(database)
     try:
         writer.execute("PRAGMA journal_mode = WAL")
@@ -131,7 +136,7 @@ def test_wal_committed_uncheckpointed_rows_are_present_in_the_backup(tmp_path):
 
 
 def test_backup_of_a_wal_source_opens_without_the_source_wal(tmp_path):
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     writer = sqlite3.connect(database)
     try:
         writer.execute("PRAGMA journal_mode = WAL")
@@ -153,7 +158,7 @@ def test_backup_of_a_wal_source_opens_without_the_source_wal(tmp_path):
 
 def test_uncommitted_rows_are_excluded_and_committed_rows_are_kept(tmp_path):
     """On merged `main` this leaked 465 never-committed rows and lost 506 real ones."""
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     seed = sqlite3.connect(database)
     try:
         insert_ingredients(seed, [f"committed-{index}" for index in range(30)])
@@ -187,7 +192,7 @@ def test_a_concurrent_transaction_is_never_half_represented(tmp_path):
     SQLite transaction. The writer is driven by explicit events, so the backup
     always runs while a transaction is genuinely open.
     """
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     mid_transaction = threading.Event()
     backup_done = threading.Event()
     failures: list[str] = []
@@ -234,7 +239,7 @@ def test_a_concurrent_transaction_is_never_half_represented(tmp_path):
 
 
 def test_backup_does_not_modify_source_business_data(tmp_path):
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     seed = sqlite3.connect(database)
     try:
         insert_ingredients(seed, [f"stable-{index}" for index in range(10)])
@@ -273,7 +278,7 @@ def test_a_locked_source_fails_within_the_bounded_wait(tmp_path):
     plain call never returned while the source stayed locked. One busy wait, then
     a truthful refusal — and no file left behind.
     """
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     seed = sqlite3.connect(database)
     try:
         seed.executemany(
@@ -327,7 +332,7 @@ def test_a_failure_before_publication_leaves_nothing_behind(tmp_path, monkeypatc
     content onto the reserved name, so a failure during the copy cannot leave a
     half-written artifact under a name the listing would show.
     """
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     backup_dir = tmp_path / "backups"
 
     def failing_copy(source, destination):
@@ -345,7 +350,7 @@ def test_a_failure_before_publication_leaves_nothing_behind(tmp_path, monkeypatc
 
 def test_an_interrupted_copy_never_leaves_a_listable_partial(tmp_path, monkeypatch):
     """Even if the scratch file survives, it can never look like a backup."""
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     backup_dir = tmp_path / "backups"
     leaked: dict[str, Path] = {}
 
@@ -376,7 +381,7 @@ def test_a_scratch_size_read_failure_publishes_nothing(tmp_path, monkeypatch):
     point. It also means the read can still fail — and when it does, nothing has
     been published, so reporting failure is truthful.
     """
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     backup_dir = tmp_path / "backups"
     original_stat = Path.stat
 
@@ -402,7 +407,7 @@ def test_the_engine_never_stats_the_final_path_after_publication(tmp_path, monke
     completed backup into a reported failure — a false total failure that invites
     the user to make a second copy of the same thing.
     """
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     backup_dir = tmp_path / "backups"
     backup_dir.mkdir()
     reserved = reserve_backup_path(backup_dir, database, FIXED_TIME, "manual")
@@ -435,7 +440,7 @@ def test_the_engine_never_stats_the_final_path_after_publication(tmp_path, monke
 
 def test_the_reported_size_is_the_published_file_size(tmp_path):
     """The scratch and final paths are links to one inode, so the size is exact."""
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     seed = sqlite3.connect(database)
     try:
         insert_ingredients(seed, [f"sized-{index}" for index in range(200)])
@@ -452,7 +457,7 @@ def test_the_reported_size_is_the_published_file_size(tmp_path):
 
 def test_a_published_backup_never_fails_on_unavailable_final_metadata(tmp_path, monkeypatch):
     """Once published, no filesystem metadata read can make this a failure."""
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     backup_dir = tmp_path / "backups"
     backup_dir.mkdir()
     reserved = reserve_backup_path(backup_dir, database, FIXED_TIME, "manual")
@@ -488,7 +493,7 @@ def test_a_published_backup_never_fails_on_unavailable_final_metadata(tmp_path, 
 
 def test_the_correction_creates_exactly_one_backup(tmp_path):
     """No duplicate artifact is produced by the pre-publication size read."""
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     backup_dir = tmp_path / "backups"
 
     result = backup_sqlite_database(database, backup_dir, reason="manual")
@@ -498,7 +503,7 @@ def test_the_correction_creates_exactly_one_backup(tmp_path):
 
 
 def test_backup_never_overwrites_an_existing_file(tmp_path):
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     backup_dir = tmp_path / "backups"
     backup_dir.mkdir()
     reserved = reserve_backup_path(backup_dir, database, FIXED_TIME, "manual")
@@ -513,7 +518,7 @@ def test_backup_never_overwrites_an_existing_file(tmp_path):
 
 
 def test_reserved_path_is_used_exactly_and_dates_the_result(tmp_path):
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     backup_dir = tmp_path / "backups"
     reserved = reserve_backup_path(backup_dir, database, FIXED_TIME, "before-import")
 
@@ -529,7 +534,7 @@ def test_reserved_path_is_used_exactly_and_dates_the_result(tmp_path):
 
 
 def test_a_reserved_path_outside_the_backup_directory_is_refused(tmp_path):
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     backup_dir = tmp_path / "backups"
     backup_dir.mkdir()
     elsewhere = tmp_path / "elsewhere"
@@ -541,7 +546,7 @@ def test_a_reserved_path_outside_the_backup_directory_is_refused(tmp_path):
 
 
 def test_a_reserved_path_outside_the_grammar_is_refused(tmp_path):
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     backup_dir = tmp_path / "backups"
     backup_dir.mkdir()
 
@@ -563,7 +568,7 @@ def test_automatic_startup_backup_uses_the_safe_engine(tmp_path, monkeypatch):
     event, and it cannot depend on the ledger table existing.
     """
     user_data_dir = tmp_path / "user-data"
-    database = user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    database = user_data_dir / "data" / "family_food.sqlite"
     monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))
     supported_older_database(database)
     with sqlite3.connect(database) as connection:
@@ -603,7 +608,19 @@ def test_automatic_startup_backup_uses_the_safe_engine(tmp_path, monkeypatch):
 # The strict generated-filename grammar
 # --------------------------------------------------------------------------
 
-def generated_name(stem: str = "cosmetic_workshop", reason: str = "before_import", suffix=None) -> str:
+
+def test_default_family_food_database_generates_the_family_food_backup_stem(tmp_path):
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
+
+    result = backup_sqlite_database(database, tmp_path / "backups", reason="manual")
+    parsed = parse_generated_backup_filename(result.backup_path.name)
+
+    assert "-family_food-manual" in result.backup_path.name
+    assert parsed is not None
+    assert parsed.source_stem == "family_food"
+
+
+def generated_name(stem: str = "family_food", reason: str = "before_import", suffix=None) -> str:
     tail = f"-{suffix}" if suffix is not None else ""
     return f"20260801T101500123456Z-{stem}-{reason}{tail}.sqlite"
 
@@ -614,13 +631,13 @@ def generated_name(stem: str = "cosmetic_workshop", reason: str = "before_import
         generated_name(),
         generated_name(suffix=1),
         generated_name(suffix=12),
-        generated_name(stem="cosmetic-workshop-os-2"),
+        generated_name(stem="custom-family-database-2"),
         generated_name(stem="Мастерская"),
         generated_name(reason="перед_обновлением"),
         generated_name(reason="reason_123"),
         generated_name(reason="manual", suffix=3),
-        "20260801T101500123456Z-cosmetic_workshop-manual.db",
-        "20260801T101500123456Z-cosmetic_workshop-manual.sqlite3",
+        "20260801T101500123456Z-family_food-manual.db",
+        "20260801T101500123456Z-family_food-manual.sqlite3",
     ],
 )
 def test_the_grammar_accepts_every_name_the_generator_produces(name):
@@ -635,19 +652,19 @@ def test_the_grammar_accepts_every_name_the_generator_produces(name):
 @pytest.mark.parametrize(
     ("name", "why"),
     [
-        ("2026-08-01-cosmetic_workshop-manual.sqlite", "malformed timestamp"),
-        ("cosmetic_workshop-manual.sqlite", "missing timestamp"),
+        ("2026-08-01-family_food-manual.sqlite", "malformed timestamp"),
+        ("family_food-manual.sqlite", "missing timestamp"),
         ("20260801T101500123456Z-manual.sqlite", "no source stem"),
         ("20260801T101500123456Z--manual.sqlite", "empty source stem"),
-        ("20260801T101500123456Z-cosmetic_workshop-before import.sqlite", "noncanonical space reason"),
-        ("20260801T101500123456Z-cosmetic_workshop-Before_Import_.sqlite", "trailing separator in reason"),
-        ("20260801T101500123456Z-cosmetic_workshop-123.sqlite", "digits-only reason"),
-        ("20260801T101500123456Z-cosmetic_workshop-manual-01.sqlite", "leading-zero suffix"),
-        ("20260801T101500123456Z-cosmetic_workshop-manual-1.5.sqlite", "malformed suffix"),
-        ("20260801T101500123456Z-cosmetic_workshop-manual.txt", "wrong extension"),
-        ("20260801T101500123456Z-cosmetic_workshop-manual.sqlite.bak", "double extension"),
+        ("20260801T101500123456Z-family_food-before import.sqlite", "noncanonical space reason"),
+        ("20260801T101500123456Z-family_food-Before_Import_.sqlite", "trailing separator in reason"),
+        ("20260801T101500123456Z-family_food-123.sqlite", "digits-only reason"),
+        ("20260801T101500123456Z-family_food-manual-01.sqlite", "leading-zero suffix"),
+        ("20260801T101500123456Z-family_food-manual-1.5.sqlite", "malformed suffix"),
+        ("20260801T101500123456Z-family_food-manual.txt", "wrong extension"),
+        ("20260801T101500123456Z-family_food-manual.sqlite.bak", "double extension"),
         ("", "empty"),
-        ("20260801T101500123456Z-cosmetic_workshop-manual", "no extension"),
+        ("20260801T101500123456Z-family_food-manual", "no extension"),
     ],
 )
 def test_the_grammar_rejects_names_the_generator_could_not_produce(name, why):
@@ -659,9 +676,9 @@ def test_the_grammar_rejects_names_the_generator_could_not_produce(name, why):
 @pytest.mark.parametrize(
     "name",
     [
-        "../20260801T101500123456Z-cosmetic_workshop-manual.sqlite",
-        "sub/20260801T101500123456Z-cosmetic_workshop-manual.sqlite",
-        "/20260801T101500123456Z-cosmetic_workshop-manual.sqlite",
+        "../20260801T101500123456Z-family_food-manual.sqlite",
+        "sub/20260801T101500123456Z-family_food-manual.sqlite",
+        "/20260801T101500123456Z-family_food-manual.sqlite",
     ],
 )
 def test_the_grammar_rejects_anything_that_is_not_a_plain_filename(name):
@@ -678,18 +695,18 @@ def test_the_grammar_rejects_anything_that_is_not_a_plain_filename(name):
 def test_the_grammar_is_ambiguous_between_a_hyphenated_stem_and_reason():
     """CR-005 recorded this ambiguity, and it is why the filename is not identity.
 
-    `...-cosmetic_workshop-before-import.sqlite` is genuinely a name this
-    generator can produce — from a database called `cosmetic_workshop-before`
+    `...-family_food-before-import.sqlite` is genuinely a name this generator
+    can produce — from a database called `family_food-before`
     with reason `import`. The grammar cannot tell that apart from a hyphenated
     reason, and it is not asked to: a backup proves whose it is through the
     ledger row embedded in the snapshot, never through its filename.
     """
     parsed = parse_generated_backup_filename(
-        "20260801T101500123456Z-cosmetic_workshop-before-import.sqlite"
+        "20260801T101500123456Z-family_food-before-import.sqlite"
     )
 
     assert parsed is not None
-    assert (parsed.source_stem, parsed.reason) == ("cosmetic_workshop-before", "import")
+    assert (parsed.source_stem, parsed.reason) == ("family_food-before", "import")
 
 
 def test_the_grammar_is_not_applied_to_legacy_listing(tmp_path):
@@ -715,20 +732,20 @@ def test_the_uniqueness_suffix_is_never_part_of_the_reason():
 
 
 def test_a_hyphenated_source_stem_round_trips(tmp_path):
-    database = migrated_database(tmp_path / "cosmetic-workshop-os-2.sqlite")
+    database = migrated_database(tmp_path / "custom-family-database-2.sqlite")
     reserved = reserve_backup_path(tmp_path / "backups", database, FIXED_TIME, "before-update ../unsafe")
 
     parsed = parse_generated_backup_filename(reserved.name)
 
     assert parsed is not None
-    assert parsed.source_stem == "cosmetic-workshop-os-2"
+    assert parsed.source_stem == "custom-family-database-2"
     assert parsed.reason == "before_update_unsafe"
     assert parsed.suffix is None
 
 
 def test_reservation_advances_past_an_active_ledger_identity(tmp_path):
     """A `prepared` operation owns its filename before that file exists."""
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     backup_dir = tmp_path / "backups"
     taken = {reserve_backup_path(backup_dir, database, FIXED_TIME, "manual").name}
 
@@ -753,7 +770,7 @@ def test_startup_reconciles_manual_backups_after_migrations_and_after_exports(tm
     migration that creates the ledger table it reads.
     """
     user_data_dir = tmp_path / "user-data"
-    database = user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    database = user_data_dir / "data" / "family_food.sqlite"
     monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))
     supported_older_database(database)
     with sqlite3.connect(database) as connection:
@@ -809,7 +826,7 @@ def test_a_foreign_file_appearing_after_the_check_is_never_overwritten(tmp_path,
     appears at the reserved path *after* the early check and *before* publication.
     The engine must fail without touching it.
     """
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     backup_dir = tmp_path / "backups"
     backup_dir.mkdir()
     reserved = reserve_backup_path(backup_dir, database, FIXED_TIME, "manual")
@@ -845,7 +862,7 @@ def test_publication_refuses_rather_than_replacing_an_existing_destination(tmp_p
     backup_dir.mkdir()
     partial = backup_dir / "scratch.partial"
     partial.write_bytes(b"engine-owned content")
-    occupied = backup_dir / "20260801T101500123456Z-cosmetic_workshop-manual.sqlite"
+    occupied = backup_dir / "20260801T101500123456Z-family_food-manual.sqlite"
     occupied.write_bytes(b"a foreign file")
 
     with pytest.raises(BackupError):
@@ -860,7 +877,7 @@ def test_a_racing_foreign_destination_leaves_the_ledger_unresolved(tmp_path, mon
     from app.services.backup_audit import BackupAuditService
     from app.services.backup_creation import create_audited_backup
 
-    database = tmp_path / "data" / "cosmetic_workshop.sqlite"
+    database = tmp_path / "data" / "family_food.sqlite"
     database.parent.mkdir(parents=True)
     config = DatabaseConfig(path=database)
     initialize_database(config)
@@ -896,7 +913,7 @@ def test_a_racing_foreign_destination_leaves_the_ledger_unresolved(tmp_path, mon
 
 
 def test_the_successful_path_publishes_exactly_the_reserved_filename(tmp_path):
-    database = migrated_database(tmp_path / "data" / "cosmetic_workshop.sqlite")
+    database = migrated_database(tmp_path / "data" / "family_food.sqlite")
     backup_dir = tmp_path / "backups"
     reserved = reserve_backup_path(backup_dir, database, FIXED_TIME, "before-import")
 

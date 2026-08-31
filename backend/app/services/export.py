@@ -10,6 +10,7 @@ from typing import Any
 
 from app.db.config import DatabaseConfig, get_database_config
 from app.db.paths import USER_DATA_DIR_ENV, resolve_user_data_paths
+from app.identity import EXPORT_SOURCE
 from app.services.local_artifact_filenames import (
     normalize_artifact_reason,
     normalize_artifact_reason_segment,
@@ -26,11 +27,10 @@ class ExportSourceMissingError(ExportError):
 
 EXPORT_SCHEMA_VERSION = 1
 SUPPORTED_EXPORT_SCHEMA_VERSIONS: frozenset[int] = frozenset({EXPORT_SCHEMA_VERSION})
-EXPORT_SOURCE = "cosmetic-workshop-os"
 EXPORT_FILE_SUFFIX = ".json"
 # The structural middle of the export filename grammar:
-# `{timestamp}-cosmetic_workshop-export-{canonical_reason}[-N].json`.
-EXPORT_FILENAME_MARKER = "-cosmetic_workshop-export-"
+# `{timestamp}-family_food-export-{canonical_reason}[-N].json`.
+EXPORT_FILENAME_MARKER = "-family_food-export-"
 # The one timestamp spelling the generator emits and the strict parser accepts.
 EXPORT_TIMESTAMP_FORMAT = "%Y%m%dT%H%M%S%fZ"
 EXPORT_PAYLOAD_KEYS: frozenset[str] = frozenset({"manifest", "data"})
@@ -226,8 +226,8 @@ def reserve_export_path(
     An identity is free only when no file already occupies it *and* no active
     ledger operation already owns it. A `prepared` operation owns its filename
     before that file exists, so file existence alone cannot tell whether a
-    candidate is free. The numeric suffix advances exactly as before, so
-    generated filenames stay byte-compatible with every export created so far.
+    candidate is free. The numeric suffix advances exactly as before within the
+    current FamilyFoodOS filename grammar.
     """
     suffix: int | None = None
     while True:

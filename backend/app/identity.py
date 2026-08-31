@@ -5,3 +5,4 @@ PRODUCT_NAME = "FamilyFoodOS"
 REPOSITORY_NAME = "family-food-os"
 WORKSPACE_SOURCE_SETTING_KEY = "workspace.source"
 WORKSPACE_SOURCE = "family-food-os"
+EXPORT_SOURCE = APP_SLUG
