@@ -2,12 +2,13 @@ from __future__ import annotations
 
 import argparse
 
+from launcher import PRODUCT_NAME
 from launcher.config import build_runtime_config
 from launcher.runtime import RuntimeLaunchError, run_local_runtime
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Local runtime launcher for Мастерская косметолога.")
+    parser = argparse.ArgumentParser(description=f"Local runtime launcher for {PRODUCT_NAME}.")
     parser.add_argument("--host", default="127.0.0.1", help="Backend host; must remain 127.0.0.1.")
     parser.add_argument("--backend-port", type=int, default=8000, help="Local backend port.")
     parser.add_argument("--frontend-url", default="http://127.0.0.1:5173", help="URL to open in browser.")

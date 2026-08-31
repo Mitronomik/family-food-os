@@ -15,6 +15,7 @@ import threading
 from typing import Callable
 from urllib.parse import urlsplit
 
+from launcher import PRODUCT_NAME
 from launcher.restore.control_protocol import (
     ControlSessionError,
     SourceSelectionAdapter,
@@ -155,7 +156,7 @@ class RestoreControlPlane:
 
 
 class _ControlRequestHandler(BaseHTTPRequestHandler):
-    server_version = "CWOSRestoreControl/1"
+    server_version = f"{PRODUCT_NAME}RestoreControl/1"
     sys_version = ""
 
     @property

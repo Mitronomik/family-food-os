@@ -1,9 +1,12 @@
 import socket
 import sqlite3
+import sys
 from pathlib import Path
 
 import pytest
 
+import launcher
+from launcher import main as launcher_main
 from launcher.config import build_runtime_config, resolve_runtime_paths, RuntimeConfigError
 from launcher import runtime
 from launcher.runtime import RuntimeLaunchError, initialize_backend_startup
@@ -22,6 +25,8 @@ from app.db.paths import USER_DATA_DIR_ENV
 # fails it. It is now bounded by the list the backend actually maintains.
 from app.tests.table_guards import assert_no_forbidden_future_tables, assert_only_current_tables
 
+LEGACY_COSMETIC_WORKSHOP_USER_DATA_DIRNAME = "Мастерская косметолога"
+
 
 def table_names(database_path: Path) -> set[str]:
     with sqlite3.connect(database_path) as connection:
@@ -38,6 +43,28 @@ def test_runtime_config_defaults_are_localhost_user_mode():
     assert config.frontend_url == "http://127.0.0.1:5173"
     assert config.mode == "user"
     assert config.open_browser is False
+
+
+def test_launcher_package_and_cli_help_use_family_food_identity(monkeypatch, capsys):
+    assert launcher.PRODUCT_NAME == "FamilyFoodOS"
+    assert launcher.APP_SLUG == "family-food-os"
+    assert launcher.__doc__ == "Local runtime launcher foundation for FamilyFoodOS."
+
+    monkeypatch.setattr(sys, "argv", ["family-food-launcher", "--help"])
+    with pytest.raises(SystemExit) as exit_info:
+        launcher_main.parse_args()
+
+    assert exit_info.value.code == 0
+    help_text = capsys.readouterr().out
+    assert "Local runtime launcher for FamilyFoodOS." in help_text
+
+
+def test_launcher_identity_projection_matches_backend_canonical_identity():
+    runtime.ensure_backend_import_path(resolve_runtime_paths())
+    from app import identity as backend_identity
+
+    assert launcher.APP_SLUG == backend_identity.APP_SLUG
+    assert launcher.PRODUCT_NAME == backend_identity.PRODUCT_NAME
 
 
 def test_runtime_config_rejects_non_localhost_host():
@@ -62,7 +89,10 @@ def test_launcher_startup_respects_user_data_override(monkeypatch, tmp_path):
     assert result.mode == "user"
     assert result.database_path == user_data_dir / "data" / "family_food.sqlite"
     assert result.database_path.exists()
-    assert not (fake_home / "Documents" / "Мастерская косметолога").exists()
+    # The inherited source-product user-data directory is never adopted.
+    assert not (
+        fake_home / "Documents" / LEGACY_COSMETIC_WORKSHOP_USER_DATA_DIRNAME
+    ).exists()
     assert not (fake_home / "Documents" / "FamilyFoodOS").exists()
     tables = table_names(result.database_path)
     assert_only_current_tables(tables)
@@ -100,7 +130,9 @@ def test_launcher_startup_creates_backup_before_migration(monkeypatch, tmp_path)
         assert connection.execute("SELECT value FROM legacy_marker").fetchone()[0] == "before"
 
 
-def test_run_local_runtime_checks_port_before_user_data_startup(monkeypatch, tmp_path):
+def test_run_local_runtime_checks_port_before_user_data_startup(
+    monkeypatch, tmp_path, capsys
+):
     """An occupied port still stops the run before any startup or migration.
 
     The port check now runs *after* Restore recovery rather than first, because
@@ -139,5 +171,9 @@ def test_run_local_runtime_checks_port_before_user_data_startup(monkeypatch, tmp
     assert startup_called is False
     assert not (user_data_dir / "data").exists(), "no user database was created"
     assert not (user_data_dir / "backups").exists(), "no backup was taken"
-    assert not (fake_home / "Documents" / "Мастерская косметолога").exists()
+    # The inherited source-product user-data directory is never adopted.
+    assert not (
+        fake_home / "Documents" / LEGACY_COSMETIC_WORKSHOP_USER_DATA_DIRNAME
+    ).exists()
     assert not (fake_home / "Documents" / "FamilyFoodOS").exists()
+    assert "FamilyFoodOS: запуск локального режима…" in capsys.readouterr().out

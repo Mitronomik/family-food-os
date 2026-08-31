@@ -17,13 +17,13 @@ from typing import Callable
 from launcher.restore.control_protocol import SourceSelectionResult
 
 OSASCRIPT_PATH = Path("/usr/bin/osascript")
-PICKER_CANCELLED_SENTINEL = "__CWOS_RESTORE_PICKER_CANCELLED__"
+PICKER_CANCELLED_SENTINEL = "__FAMILY_FOOD_OS_RESTORE_PICKER_CANCELLED__"
 PICKER_POLL_SECONDS = 0.05
 PICKER_TERMINATE_TIMEOUT_SECONDS = 1.0
 
 PICKER_APPLESCRIPT = f'''use scripting additions
 try
-    set selectedFile to choose file with prompt "Выберите резервную копию мастерской"
+    set selectedFile to choose file with prompt "Выберите резервную копию FamilyFoodOS"
     return POSIX path of selectedFile
 on error number -128
     return "{PICKER_CANCELLED_SENTINEL}"

@@ -57,7 +57,7 @@ def current_source(tmp_path):
 
 @pytest.fixture
 def scratch_root(tmp_path):
-    return tmp_path / "system-temp" / "cosmetic-workshop-os" / "restore-validation"
+    return tmp_path / "system-temp" / "family-food-os" / "restore-validation"
 
 
 def test_current_schema_is_accepted_and_retains_only_launcher_private_proof(
@@ -411,6 +411,38 @@ def test_default_scratch_refuses_symlinked_app_ancestry(
         ValidationScratchManager(working_database)
 
     assert not (outside / module.VALIDATION_DIRNAME).exists()
+
+
+def test_default_scratch_uses_family_food_namespace_and_leaves_legacy_namespace_untouched(
+    monkeypatch, tmp_path, working_database
+):
+    from launcher.restore import validation_scratch as module
+
+    fake_temp = tmp_path / "system-temp"
+    fake_temp.mkdir()
+    legacy_root = fake_temp / "cosmetic-workshop-os" / "restore-validation"
+    legacy_root.mkdir(parents=True)
+    legacy_file = legacy_root / ".cwos-validation-owner"
+    legacy_file.write_text(
+        "cosmetic-workshop-os:restore-validation:v1\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(module.tempfile, "gettempdir", lambda: str(fake_temp))
+
+    manager = ValidationScratchManager(working_database)
+    try:
+        assert module.VALIDATION_APP_DIRNAME == "family-food-os"
+        assert module.VALIDATION_MARKER_FILENAME == ".family-food-os-validation-owner"
+        assert module.VALIDATION_MARKER_VERSION == "family-food-os:restore-validation:v1"
+        assert manager.root == (
+            fake_temp / "family-food-os" / "restore-validation"
+        ).resolve()
+        assert manager.cleanup_interrupted_runs() == 0
+        assert legacy_file.read_text(encoding="utf-8") == (
+            "cosmetic-workshop-os:restore-validation:v1\n"
+        )
+    finally:
+        assert manager.cleanup_current_run_if_empty() is True
 
 
 def test_close_clears_retained_proof_and_removes_empty_run_root(

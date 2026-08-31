@@ -179,8 +179,8 @@ def validate_workspace_snapshot(snapshot_path: Path) -> ValidatedCandidate:
             )
 
         # 6: recognizably a FamilyFoodOS workspace, not an arbitrary SQLite
-        # database or an unmarked CosmeticWorkshopOS-era database carrying only
-        # a known migration prefix. Both the identity migration and exact stable
+        # database or an unmarked source-product database carrying only a known
+        # migration prefix. Both the identity migration and exact stable
         # machine marker are required; mutable `product.name` is irrelevant.
         if not has_family_food_workspace_identity(connection, lineage.applied_ids):
             raise CandidateRejectedError("candidate-not-a-family-food-database")

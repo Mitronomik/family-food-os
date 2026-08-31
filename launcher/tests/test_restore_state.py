@@ -427,17 +427,22 @@ def test_read_durable_record_falls_back_when_the_record_is_unreadable(store):
     assert store.read_durable_record(record).phase is RestorePhase.SOURCE_STAGED
 
 
-def test_cleanup_only_removes_launcher_owned_temp_files(store):
+def test_cleanup_only_removes_current_family_food_owned_temp_files(store):
     workspace = store.workspace
     workspace.ensure_restore_dir()
+    assert OWNED_TEMP_PREFIX == ".family-food-os-restore."
     foreign = workspace.restore_dir / "somebody-elses-file.txt"
     foreign.write_text("keep me", encoding="utf-8")
+    legacy_cosmetic_workshop = workspace.restore_dir / ".cwos-restore.legacy.tmp"
+    legacy_cosmetic_workshop.write_text("source-product scratch", encoding="utf-8")
     owned = workspace.restore_dir / f"{OWNED_TEMP_PREFIX}abcdef.tmp"
     owned.write_text("scratch", encoding="utf-8")
 
     workspace.clean_owned_temp_files()
 
     assert foreign.exists()
+    assert legacy_cosmetic_workshop.read_text(encoding="utf-8") == "source-product scratch"
+    assert workspace.is_owned_temp(legacy_cosmetic_workshop) is False
     assert not owned.exists()
 
 

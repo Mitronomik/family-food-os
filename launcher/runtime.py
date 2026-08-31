@@ -9,6 +9,7 @@ import time
 import webbrowser
 from pathlib import Path
 
+from launcher import PRODUCT_NAME
 from launcher.config import RuntimeConfig, RuntimePaths, build_runtime_config, resolve_runtime_paths
 
 BACKEND_MODULE = "app.main:app"
@@ -465,7 +466,7 @@ def run_local_runtime(config: RuntimeConfig | None = None, paths: RuntimePaths |
     """
     runtime_config = config or build_runtime_config()
     runtime_paths = paths or resolve_runtime_paths()
-    print("Мастерская косметолога: запуск локального режима…")
+    print(f"{PRODUCT_NAME}: запуск локального режима…")
     print(f"Данные пользователя будут храниться вне кода приложения (режим: {runtime_config.mode}).")
     context = acquire_launcher_lifecycle(runtime_config, runtime_paths)
     try:

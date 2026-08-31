@@ -126,6 +126,7 @@ def test_binds_exact_loopback_on_ephemeral_port_and_uses_no_store(plane):
     assert token
     assert headers["cache-control"] == "no-store"
     assert headers["pragma"] == "no-cache"
+    assert headers["server"].strip() == "FamilyFoodOSRestoreControl/1"
     assert headers["access-control-allow-origin"] == "http://127.0.0.1:5173"
     assert "access-control-allow-credentials" not in headers
 
