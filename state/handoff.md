@@ -4,9 +4,9 @@ Updated: `2026-08-31`
 
 ## Project identity
 
-This repository is now **FamilyFoodOS**.
+This repository is **FamilyFoodOS**.
 
-It was bootstrapped from CosmeticWorkshopOS only to reuse its verified engineering foundation.
+It was bootstrapped from CosmeticWorkshopOS to reuse a verified engineering foundation.
 
 Source provenance:
 
@@ -15,41 +15,39 @@ Source provenance:
 - bootstrap tag: `bootstrap-cosmetic-workshop-2026-08-31`
 - FamilyFoodOS repository: `Mitronomik/family-food-os`
 
-The source repository is retained only as read-only reference/provenance.
+Do not continue CosmeticWorkshopOS product lifecycle work from this repository.
 
-Do not continue CosmeticWorkshopOS lifecycle work from this repository.
+## Completed milestone
 
-## Current branch
+`PR0 — Frozen Fork — COMPLETE`
 
-`migration/pr0-frozen-fork`
+PR0 changed governance, canonical documentation and active project state only.
 
-## Current milestone
+It intentionally did not introduce FamilyFoodOS runtime/domain behavior.
 
-**PR0 — Frozen Fork**
-
-Status: **IN PROGRESS**
-
-The purpose of PR0 is governance, provenance and documentation only.
-
-No FamilyFoodOS runtime implementation is authorized in PR0.
-
-## Verified baseline
-
-Before FamilyFoodOS-specific changes, the inherited runtime was verified:
+## Verified PR0 baseline
 
 - backend + launcher: `2546 passed`
 - macOS package: `146 passed, 1 skipped`
+- frontend test scripts: `22 passed, 0 failed`
 - frontend build: passed
-- npm install/audit: `0 vulnerabilities`
-- no baseline test failures
+- startup smoke: `PASS`
+- npm: `0 vulnerabilities`
+
+Startup smoke verified the complete inherited local stack:
+
+- backend `/health`: HTTP `200`
+- frontend root: HTTP `200`
+- frontend `/api/health`: HTTP `200`
+- frontend API proxy payload matched backend payload
 
 See:
 
-`docs/migration-source.md`
+- `docs/migration-source.md`
 
 ## Canonical reading order
 
-Before continuing work:
+Before continuing:
 
 1. `AGENTS.md`
 2. `docs/family-food/project-operating-manual.md`
@@ -57,90 +55,60 @@ Before continuing work:
 4. `docs/family-food/technical-spec.md`
 5. `docs/family-food/data-ingestion.md`
 6. `docs/family-food/migration-plan.md`
-7. relevant code/tests
+7. relevant code and tests
 
-## Files already established in PR0
+## Legacy boundary
 
-Created:
-
-- `docs/migration-source.md`
-- `docs/family-food/project-operating-manual.md`
-- `docs/family-food/technical-spec.md`
-- `docs/family-food/data-ingestion.md`
-- `docs/family-food/migration-plan.md`
-
-Replaced for FamilyFoodOS:
-
-- root `AGENTS.md`
-- `state/current-focus.md`
-- `state/progress.md`
-- `state/handoff.md`
-
-## Important legacy boundary
-
-The repository still contains CosmeticWorkshopOS:
+The repository still intentionally contains inherited CosmeticWorkshopOS:
 
 - backend runtime;
 - frontend runtime;
-- database schema;
-- nested `AGENTS.md` files;
-- legacy documentation;
+- SQLite schema;
 - launcher/package infrastructure;
-- tests.
+- tests;
+- nested legacy `AGENTS.md` files;
+- historical documentation.
 
-This is intentional at PR0.
+This is not accidental technical debt introduced by PR0.
 
-Do not remove or rewrite legacy runtime in PR0.
+Do not mass-delete or mechanically rename these areas.
 
-Nested legacy `AGENTS.md` files may contain cosmetic-specific rules. Root `AGENTS.md` defines how to interpret them during migration.
+## Next milestone
 
-## PR0 non-goals
+`PR1 — Identity Detox`
 
-Do not:
+## PR1 exact starting procedure
 
-- rename runtime packages;
-- rename environment variables;
-- change database schema;
-- implement Household;
-- implement food ingredients;
-- implement Nutrition Engine;
-- implement Planner;
-- implement Shopping Engine;
-- redesign frontend;
+Before implementation:
+
+1. update local `main` from `origin/main`;
+2. create a new branch from that updated `main`;
+3. read the PR1 section in `docs/family-food/migration-plan.md`;
+4. inventory identity-only CosmeticWorkshopOS references;
+5. separate identity references from true legacy-domain references;
+6. define the bounded PR1 diff before editing runtime code.
+
+Suggested branch:
+
+`migration/pr1-identity-detox`
+
+## PR1 boundary
+
+PR1 may change product/runtime identity while preserving behavior.
+
+Do not use PR1 to:
+
+- add Household;
+- add CanonicalIngredient;
+- change recipe semantics;
+- introduce food migrations;
+- remove whole legacy bounded contexts;
+- redesign consumer frontend;
 - add AI;
-- add retailer parsers;
-- add PostgreSQL/Auth;
-- begin PR1.
+- add retail;
+- add PostgreSQL/Auth.
 
-## Exact next actions
-
-Complete PR0 only:
-
-1. review the complete Git diff;
-2. verify only governance/docs/state files changed;
-3. check for accidental secrets or personal data;
-4. run `git diff --check`;
-5. run appropriate lightweight verification;
-6. update PR0 progress state if needed;
-7. commit;
-8. push branch;
-9. open PR0 against `main`;
-10. review PR;
-11. merge only after acceptance criteria pass.
-
-## After PR0
-
-The next milestone is:
-
-**PR1 — Identity Detox**
-
-PR1 is responsible for beginning runtime/project identity separation while preserving behavior.
-
-Do not start PR1 until PR0 is merged and a new branch is created from updated `main`.
-
-## Safety note
-
-The GitHub repository is public.
+## Public repository safety
 
 Never commit:
 

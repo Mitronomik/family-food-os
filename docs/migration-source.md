@@ -1,6 +1,6 @@
 # FamilyFoodOS — Migration Source
 
-**Status:** frozen bootstrap baseline
+**Status:** verified frozen bootstrap baseline
 **Bootstrap date:** 2026-08-31
 
 ## Source repository
@@ -39,7 +39,7 @@ Git history is preserved for provenance and engineering reference.
 
 ## Frozen baseline verification
 
-The unmodified bootstrap commit was verified locally before FamilyFoodOS-specific implementation began.
+The unmodified bootstrap runtime was verified before FamilyFoodOS-specific runtime implementation began.
 
 Environment:
 
@@ -49,9 +49,11 @@ Environment:
 - isolated local `.venv`
 - frontend dependencies installed with `npm ci`
 
-### Backend + launcher tests
+### Backend + launcher
 
-Command: `make test`
+Command:
+
+`make test`
 
 Results:
 
@@ -59,14 +61,46 @@ Results:
 - macOS package: `146 passed, 1 skipped`
 - no test failures
 
-### Frontend
+### Frontend build
 
-Command: `make build`
+Command:
+
+`make build`
 
 Results:
 
 - TypeScript compilation passed
 - frontend build passed
+
+### Frontend tests
+
+The non-aggregate frontend `test:*` scripts were executed individually.
+
+Results:
+
+- frontend test scripts passed: `22`
+- frontend test scripts failed: `0`
+
+The aggregate `test:core-workspace-feedback` alias was not rerun because it only repeats two test scripts already executed individually.
+
+### Application startup smoke
+
+A temporary development runtime was started using an isolated temporary SQLite database.
+
+Verified:
+
+- backend `/health`: HTTP `200`
+- frontend root: HTTP `200`
+- frontend `/api/health` proxy: HTTP `200`
+- proxied health payload matched the backend health payload
+- launcher/backend startup succeeded
+- frontend server startup succeeded
+- temporary test processes were stopped after verification
+- interactive shell remained alive after cleanup
+
+Result:
+
+`STARTUP_SMOKE=PASS`
 
 ### npm
 
@@ -78,6 +112,15 @@ Results:
 
 Commit `0ac96deace602248e0d31e7e56c7aed7fb63c62b` is the verified frozen starting point for FamilyFoodOS.
 
-All FamilyFoodOS-specific changes must occur after this point through reviewable commits and pull requests.
+The verified baseline covers:
+
+- backend tests
+- launcher tests
+- macOS package tests
+- frontend build
+- frontend tests
+- full local startup smoke
+
+All FamilyFoodOS-specific runtime changes must occur after this point through reviewable commits and pull requests.
 
 Do not alter the bootstrap tag.

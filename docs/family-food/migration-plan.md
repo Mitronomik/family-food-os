@@ -171,7 +171,7 @@ cd family-food-os
 git checkout main
 git pull --ff-only
 
-git tag bootstrap-cosmetic-workshop-2026-08-25
+git tag bootstrap-cosmetic-workshop-2026-08-31
 
 git remote rename origin cosmetic-upstream
 
@@ -179,13 +179,13 @@ git remote add origin \
   git@github.com:Mitronomik/family-food-os.git
 
 git push -u origin main
-git push origin bootstrap-cosmetic-workshop-2026-08-25
+git push origin bootstrap-cosmetic-workshop-2026-08-31
 ```
 
 После этого:
 
 ```bash
-git switch -c migration/pr0-bootstrap
+git switch -c migration/pr0-frozen-fork
 ```
 
 ---
@@ -307,10 +307,11 @@ docs/migration-source.md
 
 - новый repository существует;
 - история Git сохранена;
-- `bootstrap-cosmetic-workshop-2026-08-25` существует;
+- `bootstrap-cosmetic-workshop-2026-08-31` существует;
 - working tree clean;
 - backend tests проходят;
 - frontend build проходит;
+- frontend tests проходят;
 - приложение запускается;
 - fork reproducible.
 

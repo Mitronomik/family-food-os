@@ -4,7 +4,7 @@ Updated: `2026-08-31`
 
 ## Project
 
-FamilyFoodOS is now a separate project bootstrapped from CosmeticWorkshopOS.
+FamilyFoodOS is a separate product bootstrapped from the verified engineering baseline of CosmeticWorkshopOS.
 
 Source baseline:
 
@@ -13,64 +13,73 @@ Source baseline:
 - bootstrap tag: `bootstrap-cosmetic-workshop-2026-08-31`
 - FamilyFoodOS repository: `Mitronomik/family-food-os`
 
-The original source repository is retained only as engineering provenance and a read-only reference.
-
 ## Current lifecycle
 
-PR0 — Frozen Fork — IN PROGRESS
+`PR0 — Frozen Fork — COMPLETE`
 
-Verified baseline before FamilyFoodOS-specific implementation:
+PR0 established:
 
-- backend + launcher tests: `2546 passed`
-- macOS package tests: `146 passed, 1 skipped`
+- Git provenance;
+- verified source baseline;
+- canonical FamilyFoodOS product documents;
+- FamilyFoodOS agent governance;
+- FamilyFoodOS execution state;
+- migration boundaries.
+
+Verified baseline:
+
+- backend + launcher: `2546 passed`
+- macOS package: `146 passed, 1 skipped`
 - frontend build: passed
-- npm audit during `npm ci`: `0 vulnerabilities`
+- frontend test scripts: `22 passed, 0 failed`
+- startup smoke: `PASS`
+- npm: `0 vulnerabilities`
 
 ## Current task
 
-Complete only PR0 — Frozen Fork.
-
-Current PR0 scope:
-
-- preserve and document the verified source baseline;
-- establish FamilyFoodOS canonical product documents;
-- establish the root FamilyFoodOS `AGENTS.md`;
-- replace legacy execution-state files with FamilyFoodOS state;
-- verify the resulting documentation/governance diff;
-- commit and open the PR.
-
-## Canonical documents for this task
-
-Read:
-
-- `AGENTS.md`
-- `docs/family-food/project-operating-manual.md`
-- `docs/family-food/technical-spec.md`
-- `docs/family-food/data-ingestion.md`
-- `docs/family-food/migration-plan.md`
-- `docs/migration-source.md`
-
-## Non-goals
-
-PR0 must not:
-
-- change backend runtime behavior;
-- change frontend runtime behavior;
-- change database schema;
-- rename runtime packages or environment variables;
-- begin food-domain model implementation;
-- remove legacy CosmeticWorkshopOS bounded contexts;
-- add AI;
-- add retailer integrations;
-- add PostgreSQL/Auth;
-- begin PR1 Identity Detox.
-
-Legacy application code is intentionally still present after PR0.
-
-## Next allowed milestone
-
-After PR0 is reviewed and merged, the next planned milestone is:
+The next authorized milestone is:
 
 `PR1 — Identity Detox`
 
-Do not begin PR1 work from this branch.
+PR1 implementation must begin only from an updated `main` on a new branch after PR0 is integrated.
+
+## PR1 goal
+
+Separate project/runtime identity from CosmeticWorkshopOS while preserving behavior.
+
+Identity-only work may include:
+
+- package/project names;
+- product titles;
+- environment-variable names;
+- default database/user-data naming;
+- launcher identity;
+- repository-facing documentation;
+- identity-only fixtures and tests.
+
+## PR1 non-goals
+
+Do not yet:
+
+- introduce Household domain models;
+- introduce food-domain migrations;
+- change recipe business semantics;
+- remove legacy bounded contexts;
+- build Nutrition Engine;
+- build Planner;
+- add AI;
+- add retail integrations;
+- migrate persistence to PostgreSQL.
+
+## Required reading
+
+Before PR1 work:
+
+1. `AGENTS.md`
+2. `docs/family-food/project-operating-manual.md`
+3. `state/current-focus.md`
+4. `docs/family-food/migration-plan.md`
+5. `docs/migration-source.md`
+6. relevant legacy identity code and tests
+
+PR0 must be integrated before PR1 implementation starts.

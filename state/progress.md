@@ -4,7 +4,7 @@ Updated: `2026-08-31`
 
 ## FamilyFoodOS bootstrap
 
-FamilyFoodOS was created as a new repository using the verified engineering baseline of CosmeticWorkshopOS.
+FamilyFoodOS was created as a separate repository using the verified engineering baseline of CosmeticWorkshopOS.
 
 Source:
 
@@ -19,73 +19,68 @@ Detailed provenance:
 
 Legacy CosmeticWorkshopOS lifecycle history remains available in Git history, the bootstrap tag and inherited historical documentation. It is not the active FamilyFoodOS roadmap.
 
-## Verified baseline
-
-Before FamilyFoodOS-specific changes:
-
-- Python environment created successfully;
-- backend dependencies installed successfully;
-- frontend dependencies installed with `npm ci`;
-- npm reported `0 vulnerabilities`;
-- backend + launcher tests: `2546 passed`;
-- macOS package tests: `146 passed, 1 skipped`;
-- frontend TypeScript/build: passed;
-- no baseline test failures.
-
 ## PR0 — Frozen Fork
 
-Status: **IN PROGRESS**
+Status: **COMPLETE**
 
-Completed:
+Completed PR0 deliverables:
 
-- [x] created separate local FamilyFoodOS repository;
-- [x] preserved complete Git history;
-- [x] created bootstrap tag;
-- [x] disabled push to `cosmetic-upstream`;
-- [x] created public GitHub repository `Mitronomik/family-food-os`;
-- [x] pushed `main`;
-- [x] pushed bootstrap tag;
-- [x] verified frozen baseline;
-- [x] added `docs/migration-source.md`;
-- [x] added FamilyFoodOS technical specification;
-- [x] added FamilyFoodOS data-ingestion specification;
-- [x] added FamilyFoodOS migration plan;
-- [x] added FamilyFoodOS Project Operating Manual;
-- [x] replaced root `AGENTS.md` with FamilyFoodOS agent contract;
-- [x] replaced legacy `state/current-focus.md`;
-- [x] replaced legacy active progress state.
+- [x] separate FamilyFoodOS repository created;
+- [x] complete Git history preserved;
+- [x] bootstrap tag created;
+- [x] source remote retained as read-only reference;
+- [x] FamilyFoodOS `main` bootstrap pushed;
+- [x] frozen source baseline verified;
+- [x] `docs/migration-source.md` added;
+- [x] FamilyFoodOS technical specification added;
+- [x] FamilyFoodOS data-ingestion specification added;
+- [x] FamilyFoodOS migration plan added;
+- [x] FamilyFoodOS Project Operating Manual added;
+- [x] root `AGENTS.md` migrated to FamilyFoodOS;
+- [x] active `state/current-focus.md` migrated;
+- [x] active `state/progress.md` migrated;
+- [x] active `state/handoff.md` migrated;
+- [x] documentation/governance diff reviewed;
+- [x] runtime paths verified unchanged;
+- [x] obvious-secret/privacy audit passed;
+- [x] `git diff --check` passed;
+- [x] backend + launcher tests passed;
+- [x] macOS package tests passed;
+- [x] frontend build passed;
+- [x] frontend test scripts passed;
+- [x] full application startup smoke passed;
+- [x] PR0 GitHub review performed.
 
-Remaining PR0 work:
+GitHub PR/merge metadata remains authoritative in GitHub history and is not maintained as a mutable checklist in this file.
 
-- [ ] replace/update `state/handoff.md`;
-- [ ] inspect documentation/governance diff;
-- [ ] verify no unintended runtime changes;
-- [ ] run appropriate lightweight checks after documentation changes;
-- [ ] commit PR0;
-- [ ] push branch;
-- [ ] open PR0;
-- [ ] review and merge PR0.
+## Verified baseline
+
+Results:
+
+- backend + launcher: `2546 passed`
+- macOS package: `146 passed, 1 skipped`
+- frontend test scripts: `22 passed, 0 failed`
+- frontend build: passed
+- startup smoke: `PASS`
+- npm: `0 vulnerabilities`
+
+Startup smoke verified:
+
+- backend HTTP `200`;
+- frontend HTTP `200`;
+- frontend API proxy HTTP `200`;
+- proxy payload matched backend health payload.
 
 ## Runtime implementation
 
-No FamilyFoodOS runtime implementation has started.
+No FamilyFoodOS runtime/domain implementation was introduced by PR0.
 
-Current runtime remains the inherited CosmeticWorkshopOS application intentionally.
-
-PR0 must not change:
-
-- backend runtime behavior;
-- frontend runtime behavior;
-- database schema;
-- runtime package identity;
-- food-domain models.
+The runtime remains intentionally inherited from CosmeticWorkshopOS at the PR0 boundary.
 
 ## Next milestone
 
-After PR0 merges:
+`PR1 — Identity Detox`
 
-**PR1 — Identity Detox**
+PR1 begins identity separation while preserving runtime behavior.
 
-PR1 will begin separating runtime/project identity from CosmeticWorkshopOS while preserving behavior.
-
-Do not begin PR1 from the PR0 branch.
+Food-domain implementation starts only after the identity boundary is established according to the migration plan.
