@@ -1,11 +1,13 @@
 {
-  "name": "cosmetic-workshop-os-frontend",
+  "name": "family-food-os-frontend",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "npm run build && node scripts/dev-server.mjs dist",
     "build": "tsc -p tsconfig.json && node scripts/build.mjs",
     "preview": "npm run build && node scripts/dev-server.mjs dist",
+    "test:frontend-identity": "node --test test/frontend-identity.test.mjs",
+    "test:dev-server-identity": "node --test test/dev-server-identity.test.mjs",
     "test:form-validation": "rm -rf dist-tests/form-validation && tsc -p tsconfig.test.form-validation.json && node --test test/form-validation.test.mjs",
     "test:targeted-validation-update": "rm -rf dist-tests/targeted-validation-update && tsc -p tsconfig.test.targeted-validation-update.json && node --test test/targeted-validation-update.test.mjs",
     "test:order-mutation-lifecycle": "rm -rf dist-tests/order-mutation-lifecycle && tsc -p tsconfig.test.order-mutation-lifecycle.json && node --test test/order-mutation-lifecycle.test.mjs",

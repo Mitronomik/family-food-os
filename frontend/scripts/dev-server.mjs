@@ -8,7 +8,7 @@ const root = process.argv[2] ?? '.';
 const frontendHost = '127.0.0.1';
 const frontendPort = 5173;
 const frontendOrigin = `http://${frontendHost}:${frontendPort}`;
-const apiProxyTarget = new URL(process.env.COSMETIC_WORKSHOP_API_PROXY_TARGET ?? 'http://127.0.0.1:8000');
+const apiProxyTarget = new URL(process.env.FAMILY_FOOD_API_PROXY_TARGET ?? 'http://127.0.0.1:8000');
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8' };
 
 function proxyApiRequest(request, response, url) {
@@ -34,7 +34,7 @@ function proxyApiRequest(request, response, url) {
       response.writeHead(502, { 'content-type': 'text/plain; charset=utf-8' });
     }
     response.end(
-      `Не удалось подключиться к локальному backend API. Проверьте, что backend запущен и COSMETIC_WORKSHOP_API_PROXY_TARGET указывает на правильный адрес.\n\nЦель proxy: ${apiProxyTarget.origin}`,
+      `Не удалось подключиться к локальному backend API. Проверьте, что backend запущен и FAMILY_FOOD_API_PROXY_TARGET указывает на правильный адрес.\n\nЦель proxy: ${apiProxyTarget.origin}`,
     );
   });
 
