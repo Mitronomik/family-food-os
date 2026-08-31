@@ -1,6 +1,6 @@
 import json
 
-from app.db.paths import resolve_user_data_paths
+from app.db.paths import USER_DATA_DIR_ENV, resolve_user_data_paths
 from app.services.settings import SettingsService
 from app.services.update_safety import (
     SAFE_MIGRATION_FAILURE,
@@ -27,7 +27,7 @@ def record(*, status='completed', message=None):
 
 
 def test_no_journal_is_read_only_neutral_status(monkeypatch, tmp_path):
-    monkeypatch.setenv('COSMETIC_WORKSHOP_USER_DATA_DIR', str(tmp_path / 'user-data'))
+    monkeypatch.setenv(USER_DATA_DIR_ENV, str(tmp_path / 'user-data'))
     paths = resolve_user_data_paths()
     status = read_user_update_status(paths)
     assert status.state == 'not_required'
@@ -36,7 +36,7 @@ def test_no_journal_is_read_only_neutral_status(monkeypatch, tmp_path):
 
 
 def test_completed_and_failed_journal_project_only_safe_status(monkeypatch, tmp_path):
-    monkeypatch.setenv('COSMETIC_WORKSHOP_USER_DATA_DIR', str(tmp_path / 'user-data'))
+    monkeypatch.setenv(USER_DATA_DIR_ENV, str(tmp_path / 'user-data'))
     paths = resolve_user_data_paths()
     paths.data_dir.mkdir(parents=True)
     _write_update_journal(update_journal_path(paths), [record(status='completed')])
@@ -55,7 +55,7 @@ def test_completed_and_failed_journal_project_only_safe_status(monkeypatch, tmp_
 
 
 def test_unreadable_or_started_journal_becomes_bounded_attention(monkeypatch, tmp_path):
-    monkeypatch.setenv('COSMETIC_WORKSHOP_USER_DATA_DIR', str(tmp_path / 'user-data'))
+    monkeypatch.setenv(USER_DATA_DIR_ENV, str(tmp_path / 'user-data'))
     paths = resolve_user_data_paths()
     paths.data_dir.mkdir(parents=True)
     update_journal_path(paths).write_text('{broken', encoding='utf-8')

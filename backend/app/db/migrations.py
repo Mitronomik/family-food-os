@@ -24,6 +24,7 @@ MIGRATION_MODULES = [
     "app.migrations.versions.0018_demo_data_tracking",
     "app.migrations.versions.0019_production_batch_tax_rate_snapshots",
     "app.migrations.versions.0020_artifact_audit_operations",
+    "app.migrations.versions.0021_family_food_identity",
 ]
 MIGRATION_TABLE = "schema_migrations"
 

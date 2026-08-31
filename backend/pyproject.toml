@@ -1,7 +1,7 @@
 [project]
-name = "cosmetic-workshop-os-backend"
+name = "family-food-os-backend"
 dynamic = ["version"]
-description = "Local-first backend API for Мастерская косметолога."
+description = "Local-first backend API for FamilyFoodOS."
 requires-python = ">=3.12"
 dependencies = [
   "fastapi>=0.115,<0.116",

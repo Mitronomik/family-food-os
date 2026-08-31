@@ -116,8 +116,8 @@ SOCKET_FAILED_EXIT_CODE = 24
 # The inherited write end of the launcher's one-run handshake pipe, and the
 # one-run token that proves the write came from the child the launcher started.
 # Both are set by the launcher for exactly one spawn; neither survives it.
-HANDSHAKE_FD_ENV = "COSMETIC_WORKSHOP_BACKEND_HANDSHAKE_FD"
-HANDSHAKE_TOKEN_ENV = "COSMETIC_WORKSHOP_BACKEND_HANDSHAKE_TOKEN"
+HANDSHAKE_FD_ENV = "FAMILY_FOOD_BACKEND_HANDSHAKE_FD"
+HANDSHAKE_TOKEN_ENV = "FAMILY_FOOD_BACKEND_HANDSHAKE_TOKEN"
 
 # The two structured results this child can report. Each carries the one-run
 # token, so a reader can tell a complete report from a truncated one and this

@@ -19,8 +19,8 @@ def test_settings_status_response_builds_local_first_status(monkeypatch, tmp_pat
     response = SettingsService().build_status()
 
     assert response.generated_at
-    assert response.app.product_name == "Мастерская косметолога"
-    assert response.app.repository_name == "cosmetic-workshop-os"
+    assert response.app.product_name == "FamilyFoodOS"
+    assert response.app.repository_name == "family-food-os"
     assert response.app.mode == "Локальное приложение"
     assert response.app.local_first is True
     assert response.app.internet_required is False

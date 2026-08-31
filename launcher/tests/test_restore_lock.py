@@ -124,10 +124,10 @@ def test_a_second_launcher_is_refused_by_run_local_runtime(monkeypatch, tmp_path
     from launcher.config import build_runtime_config, resolve_runtime_paths
 
     user_data_dir = tmp_path / "user-data"
-    monkeypatch.setenv("COSMETIC_WORKSHOP_USER_DATA_DIR", str(user_data_dir))
-    monkeypatch.delenv("COSMETIC_WORKSHOP_DB_PATH", raising=False)
+    monkeypatch.setenv("FAMILY_FOOD_USER_DATA_DIR", str(user_data_dir))
+    monkeypatch.delenv("FAMILY_FOOD_DB_PATH", raising=False)
 
-    database_path = user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    database_path = user_data_dir / "data" / "family_food.sqlite"
     holder = LauncherInstanceLock.for_workspace(
         RestoreWorkspace.for_database(database_path)
     ).acquire()
@@ -151,8 +151,8 @@ def test_the_port_check_still_runs_and_keeps_its_own_message(monkeypatch, tmp_pa
     from launcher.config import build_runtime_config, resolve_runtime_paths
 
     user_data_dir = tmp_path / "user-data"
-    monkeypatch.setenv("COSMETIC_WORKSHOP_USER_DATA_DIR", str(user_data_dir))
-    monkeypatch.delenv("COSMETIC_WORKSHOP_DB_PATH", raising=False)
+    monkeypatch.setenv("FAMILY_FOOD_USER_DATA_DIR", str(user_data_dir))
+    monkeypatch.delenv("FAMILY_FOOD_DB_PATH", raising=False)
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as occupied:
         occupied.bind(("127.0.0.1", 0))

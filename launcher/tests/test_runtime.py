@@ -7,8 +7,9 @@ import pytest
 from launcher.config import build_runtime_config, resolve_runtime_paths, RuntimeConfigError
 from launcher import runtime
 from launcher.runtime import RuntimeLaunchError, initialize_backend_startup
-from app.db.config import DatabaseConfig
+from app.db.config import DATABASE_PATH_ENV, DatabaseConfig
 from app.db.migrations import MIGRATION_MODULES, apply_migrations
+from app.db.paths import USER_DATA_DIR_ENV
 
 # The single shared table guard, so the launcher's expectation of the migrated
 # schema cannot drift away from the backend's own. The previous local copy was
@@ -53,15 +54,16 @@ def test_launcher_startup_respects_user_data_override(monkeypatch, tmp_path):
     user_data_dir = tmp_path / "user-data"
     fake_home = tmp_path / "home"
     monkeypatch.setattr(Path, "home", lambda: fake_home)
-    monkeypatch.setenv("COSMETIC_WORKSHOP_USER_DATA_DIR", str(user_data_dir))
-    monkeypatch.delenv("COSMETIC_WORKSHOP_DB_PATH", raising=False)
+    monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))
+    monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
 
     result = initialize_backend_startup("user", resolve_runtime_paths())
 
     assert result.mode == "user"
-    assert result.database_path == user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    assert result.database_path == user_data_dir / "data" / "family_food.sqlite"
     assert result.database_path.exists()
     assert not (fake_home / "Documents" / "Мастерская косметолога").exists()
+    assert not (fake_home / "Documents" / "FamilyFoodOS").exists()
     tables = table_names(result.database_path)
     assert_only_current_tables(tables)
     assert_no_forbidden_future_tables(tables)
@@ -82,10 +84,10 @@ def build_supported_older_database(database_path: Path) -> None:
 
 def test_launcher_startup_creates_backup_before_migration(monkeypatch, tmp_path):
     user_data_dir = tmp_path / "user-data"
-    database_path = user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    database_path = user_data_dir / "data" / "family_food.sqlite"
     build_supported_older_database(database_path)
-    monkeypatch.setenv("COSMETIC_WORKSHOP_USER_DATA_DIR", str(user_data_dir))
-    monkeypatch.delenv("COSMETIC_WORKSHOP_DB_PATH", raising=False)
+    monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))
+    monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
     with sqlite3.connect(database_path) as connection:
         connection.execute("CREATE TABLE legacy_marker (value TEXT NOT NULL)")
         connection.execute("INSERT INTO legacy_marker (value) VALUES ('before')")
@@ -116,8 +118,8 @@ def test_run_local_runtime_checks_port_before_user_data_startup(monkeypatch, tmp
     fake_home = tmp_path / "home"
     startup_called = False
     monkeypatch.setattr(Path, "home", lambda: fake_home)
-    monkeypatch.setenv("COSMETIC_WORKSHOP_USER_DATA_DIR", str(user_data_dir))
-    monkeypatch.delenv("COSMETIC_WORKSHOP_DB_PATH", raising=False)
+    monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))
+    monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
 
     def fail_if_startup_is_called(mode, paths):
         nonlocal startup_called
@@ -138,3 +140,4 @@ def test_run_local_runtime_checks_port_before_user_data_startup(monkeypatch, tmp
     assert not (user_data_dir / "data").exists(), "no user database was created"
     assert not (user_data_dir / "backups").exists(), "no backup was taken"
     assert not (fake_home / "Documents" / "Мастерская косметолога").exists()
+    assert not (fake_home / "Documents" / "FamilyFoodOS").exists()

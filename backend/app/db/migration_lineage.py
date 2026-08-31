@@ -4,10 +4,10 @@ Durable contract:
 ``docs/decisions/0016-launcher-assisted-restore.md`` § 3 (`CR-010`) and
 ``docs/backup-and-restore.md`` § 3.
 
-`C4-I` has to answer one question about a **staged Restore candidate**: is this
-file a `cosmetic-workshop-os` workspace whose recorded migration history is an
-exact ordered prefix of the chain this application knows? Everything here exists
-to answer that **without writing to the candidate**.
+`C4-I` has to answer two questions about a **staged Restore candidate**: is its
+recorded migration history an exact ordered prefix of the chain this application
+knows, and does it carry the stable FamilyFoodOS workspace identity? Everything
+here exists to answer those questions **without writing to the candidate**.
 
 That rules out the obvious reuse. `app.db.migrations.applied_migration_ids`
 calls `_ensure_migration_table`, which issues `CREATE TABLE IF NOT EXISTS` —
@@ -31,6 +31,9 @@ from typing import Literal
 import sqlite3
 
 from app.db.migrations import MIGRATION_TABLE, expected_migration_ids
+from app.identity import WORKSPACE_SOURCE, WORKSPACE_SOURCE_SETTING_KEY
+
+FAMILY_FOOD_IDENTITY_MIGRATION_ID = "0021_family_food_identity"
 
 # The two columns `_ensure_migration_table` creates. A candidate whose migration
 # table has some other shape is not one this application wrote, and reading
@@ -54,7 +57,9 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
     "0004_stock_movements": frozenset({"stock_movements"}),
     "0005_packaging_items": frozenset({"packaging_items"}),
     "0006_packaging_stock_movements": frozenset({"packaging_stock_movements"}),
-    "0007_recipes": frozenset({"recipe_templates", "recipe_versions", "recipe_ingredients"}),
+    "0007_recipes": frozenset(
+        {"recipe_templates", "recipe_versions", "recipe_ingredients"}
+    ),
     "0008_clients": frozenset({"clients"}),
     "0009_client_recipes": frozenset({"client_recipes", "client_recipe_ingredients"}),
     "0010_catalog": frozenset(
@@ -69,20 +74,27 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
     "0011_client_wishes_feedback": frozenset({"client_wishes", "client_feedback"}),
     "0012_orders": frozenset({"orders"}),
     "0013_production_batches": frozenset(
-        {"production_batches", "production_batch_ingredients", "production_batch_packaging"}
+        {
+            "production_batches",
+            "production_batch_ingredients",
+            "production_batch_packaging",
+        }
     ),
     "0014_alerts": frozenset({"alerts"}),
     "0015_purchase_suggestions": frozenset({"purchase_suggestions"}),
-    "0016_import_drafts": frozenset({"import_sources", "import_drafts", "import_draft_rows"}),
+    "0016_import_drafts": frozenset(
+        {"import_sources", "import_drafts", "import_draft_rows"}
+    ),
     "0017_import_apply_status": frozenset(),
     "0018_demo_data_tracking": frozenset({"demo_data_sessions", "demo_data_records"}),
     "0019_production_batch_tax_rate_snapshots": frozenset(),
     "0020_artifact_audit_operations": frozenset({"artifact_audit_operations"}),
+    "0021_family_food_identity": frozenset(),
 }
 
-# What makes a file recognizably *this* application's workspace rather than an
-# arbitrary healthy SQLite database. `0001` is the floor of every supported
-# prefix, so these three always have to be present.
+# The foundational tables promised by migration `0001`. Stable FamilyFoodOS
+# identity is checked separately because table presence alone cannot distinguish
+# an unmarked CosmeticWorkshopOS-era database from this product.
 WORKSPACE_IDENTITY_TABLES: frozenset[str] = frozenset(
     {MIGRATION_TABLE, "app_settings", "audit_logs"}
 )
@@ -127,7 +139,9 @@ class MigrationLineage:
         `False` for an accepted older prefix, which is exactly the case that will
         take the ordinary `before_migration` backup during restored startup.
         """
-        return self.is_known_prefix and list(self.applied_ids) == expected_migration_ids()
+        return (
+            self.is_known_prefix and list(self.applied_ids) == expected_migration_ids()
+        )
 
 
 def _rejected(reason: LineageRejection) -> MigrationLineage:
@@ -150,9 +164,42 @@ def table_exists(connection: sqlite3.Connection, name: str) -> bool:
     return row is not None
 
 
+def has_family_food_workspace_identity(
+    connection: sqlite3.Connection, applied_ids: tuple[str, ...] | list[str]
+) -> bool:
+    """Whether a known lineage carries the complete FamilyFoodOS identity.
+
+    Restore accepts the candidate only when the identity migration is present
+    in its already-validated lineage *and* ``app_settings`` contains exactly one
+    stable machine marker with the canonical value. Missing tables, missing or
+    duplicate rows, malformed settings storage and any other value all fail
+    closed. ``product.name`` is deliberately not read: it is human-facing and
+    mutable.
+
+    The caller supplies the IDs returned by :func:`inspect_migration_lineage`.
+    This function neither repairs the settings table nor runs the identity
+    migration; it only reads through the caller's read-only connection.
+    """
+    if FAMILY_FOOD_IDENTITY_MIGRATION_ID not in applied_ids:
+        return False
+    try:
+        if not table_exists(connection, "app_settings"):
+            return False
+        rows = connection.execute(
+            "SELECT value FROM app_settings WHERE key = ?",
+            (WORKSPACE_SOURCE_SETTING_KEY,),
+        ).fetchall()
+    except sqlite3.Error:
+        return False
+    return rows == [(WORKSPACE_SOURCE,)]
+
+
 def _migration_table_shape_matches(connection: sqlite3.Connection) -> bool:
     columns = tuple(
-        row[1] for row in connection.execute(f"PRAGMA table_info({MIGRATION_TABLE})").fetchall()
+        row[1]
+        for row in connection.execute(
+            f"PRAGMA table_info({MIGRATION_TABLE})"
+        ).fetchall()
     )
     return columns == EXPECTED_MIGRATION_TABLE_COLUMNS
 
@@ -186,9 +233,15 @@ def classify_recorded_migration_ids(recorded: list[str]) -> MigrationLineage:
         return _rejected("duplicate-migration-id")
 
     expected = expected_migration_ids()
-    expected_positions = {migration_id: index for index, migration_id in enumerate(expected)}
+    expected_positions = {
+        migration_id: index for index, migration_id in enumerate(expected)
+    }
 
-    unknown = [migration_id for migration_id in recorded if migration_id not in expected_positions]
+    unknown = [
+        migration_id
+        for migration_id in recorded
+        if migration_id not in expected_positions
+    ]
     if unknown:
         # A history that contains the complete known chain *plus* extra IDs is a
         # database written by a later version of this application. Anything else
@@ -227,10 +280,12 @@ def inspect_migration_lineage(connection: sqlite3.Connection) -> MigrationLineag
     return classify_recorded_migration_ids(recorded)
 
 
-def required_tables_for_prefix(applied_ids: tuple[str, ...] | list[str]) -> frozenset[str]:
+def required_tables_for_prefix(
+    applied_ids: tuple[str, ...] | list[str],
+) -> frozenset[str]:
     """The tables a database recording exactly `applied_ids` must contain.
 
-    Union of the identity tables and everything each recorded migration creates.
+    Union of the foundational tables and everything each recorded migration creates.
     Unknown IDs contribute nothing, because `classify_recorded_migration_ids`
     has already rejected any history that contains one.
     """

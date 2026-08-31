@@ -21,10 +21,11 @@ import pytest
 
 from app.db.config import DATABASE_PATH_ENV, DEFAULT_DATABASE_PATH, DatabaseConfig, get_database_config
 from app.db.paths import USER_DATA_DIR_ENV
+from app.services.backend_liveness import BACKEND_LIVENESS_LOCK_ENV
 from launcher import runtime
 from launcher.config import build_runtime_config, resolve_runtime_paths
 
-USER_DATA_ENV = "COSMETIC_WORKSHOP_USER_DATA_DIR"
+USER_DATA_ENV = USER_DATA_DIR_ENV
 
 
 class RecordedPopen:
@@ -133,7 +134,7 @@ def test_user_mode_child_receives_the_exact_startup_database_path(monkeypatch, t
 
     child = run_launcher(monkeypatch, "user")
 
-    expected = user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    expected = user_data_dir / "data" / "family_food.sqlite"
     assert child.env[DATABASE_PATH_ENV] == str(expected)
     assert expected.exists()
     # Not the repository default, which is what the child would otherwise pick.
@@ -154,7 +155,7 @@ def test_development_mode_child_receives_the_startup_database_path(monkeypatch, 
 def test_a_stale_inherited_database_path_is_overridden_in_user_mode(monkeypatch, tmp_path, recorded_child):
     """The startup result wins over whatever the parent shell happened to hold.
 
-    A leftover `COSMETIC_WORKSHOP_DB_PATH` from an earlier development session is
+    A leftover `FAMILY_FOOD_DB_PATH` from an earlier development session is
     exactly the case that would otherwise split the two processes apart while
     every individual step looked correct.
     """
@@ -167,7 +168,7 @@ def test_a_stale_inherited_database_path_is_overridden_in_user_mode(monkeypatch,
 
     child = run_launcher(monkeypatch, "user")
 
-    expected = user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    expected = user_data_dir / "data" / "family_food.sqlite"
     assert child.env[DATABASE_PATH_ENV] == str(expected)
     assert child.env[DATABASE_PATH_ENV] != str(stale)
     # The stale file was never migrated.
@@ -268,13 +269,19 @@ def test_no_production_call_site_starts_the_api_without_a_database_path():
     assert "startup.database_path" in launcher_source
 
 
-def test_the_launcher_reads_the_database_environment_key_from_the_backend(monkeypatch, tmp_path):
-    """The key is not duplicated as a literal in the launcher.
+def test_the_launcher_reads_runtime_environment_keys_from_the_backend(monkeypatch, tmp_path):
+    """The database and liveness keys are not duplicated in the launcher.
 
     If the backend ever renames it, the launcher follows automatically instead of
     silently writing an ignored variable.
     """
-    assert runtime.backend_database_path_env(resolve_runtime_paths()) == DATABASE_PATH_ENV
+    paths = resolve_runtime_paths()
+
+    assert DATABASE_PATH_ENV == "FAMILY_FOOD_DB_PATH"
+    assert USER_DATA_DIR_ENV == "FAMILY_FOOD_USER_DATA_DIR"
+    assert BACKEND_LIVENESS_LOCK_ENV == "FAMILY_FOOD_BACKEND_LIVENESS_LOCK"
+    assert runtime.backend_database_path_env(paths) == DATABASE_PATH_ENV
+    assert runtime.backend_liveness_lock_env(paths) == BACKEND_LIVENESS_LOCK_ENV
 
 
 # --------------------------------------------------------------------------
@@ -297,7 +304,7 @@ def test_the_api_database_config_resolves_to_the_startup_database(monkeypatch, t
     for key, value in child.env.items():
         if key in (DATABASE_PATH_ENV, USER_DATA_ENV):
             monkeypatch.setenv(key, value)
-    assert get_database_config().path == user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    assert get_database_config().path == user_data_dir / "data" / "family_food.sqlite"
 
 
 def test_backup_migration_reconciliation_and_api_all_use_one_database(monkeypatch, tmp_path, recorded_child):
@@ -311,7 +318,7 @@ def test_backup_migration_reconciliation_and_api_all_use_one_database(monkeypatc
     user_data_dir = tmp_path / "user-data"
     monkeypatch.setenv(USER_DATA_ENV, str(user_data_dir))
     monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
-    user_database = user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    user_database = user_data_dir / "data" / "family_food.sqlite"
 
     # A pre-existing database at the previous migration level, so a backup and a
     # real migration both have to happen.
@@ -380,7 +387,7 @@ def test_a_restart_reconciles_the_same_database_the_api_wrote_to(monkeypatch, tm
     user_data_dir = tmp_path / "user-data"
     monkeypatch.setenv(USER_DATA_ENV, str(user_data_dir))
     monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
-    user_database = user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    user_database = user_data_dir / "data" / "family_food.sqlite"
 
     child = run_launcher(monkeypatch, "user")
     for key, value in child.env.items():

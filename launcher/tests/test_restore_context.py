@@ -161,8 +161,8 @@ def test_development_mode_stays_isolated_from_the_user_documents_directory(
 ):
     """A developer run must never resolve into the real Documents directory."""
     development_database = tmp_path / "development" / "workshop.sqlite"
-    monkeypatch.setenv("COSMETIC_WORKSHOP_DB_PATH", str(development_database))
-    monkeypatch.delenv("COSMETIC_WORKSHOP_USER_DATA_DIR", raising=False)
+    monkeypatch.setenv("FAMILY_FOOD_DB_PATH", str(development_database))
+    monkeypatch.delenv("FAMILY_FOOD_USER_DATA_DIR", raising=False)
     fake_home = tmp_path / "home"
     monkeypatch.setattr(Path, "home", lambda: fake_home)
     build_workspace_database(development_database, "development")
@@ -186,7 +186,7 @@ def test_user_mode_uses_the_expected_user_data_layout(monkeypatch, tmp_path):
     workspace = make_workspace(monkeypatch, tmp_path, marker="workspace-A")
     context = workspace.context()
     try:
-        assert context.database_path == workspace.base_dir / "data" / "cosmetic_workshop.sqlite"
+        assert context.database_path == workspace.base_dir / "data" / "family_food.sqlite"
         assert context.backup_dir == workspace.base_dir / "backups"
         assert context.workspace.restore_dir == workspace.base_dir / "restore"
     finally:

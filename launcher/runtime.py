@@ -141,7 +141,7 @@ def start_backend_process(
     corrupted run.
 
     An inherited value is deliberately overwritten rather than respected: a stale
-    `COSMETIC_WORKSHOP_DB_PATH` left in the parent shell is exactly the case that
+    `FAMILY_FOOD_DB_PATH` left in the parent shell is exactly the case that
     would otherwise split the two processes apart again. The startup result is
     authoritative.
 

@@ -77,7 +77,7 @@ def build_older_schema_database(database_path: Path) -> None:
 
 @pytest.fixture
 def isolated_user_data(tmp_path, monkeypatch):
-    base = tmp_path / "Мастерская косметолога"
+    base = tmp_path / "FamilyFoodOS"
     monkeypatch.setenv(USER_DATA_DIR_ENV, str(base))
     return base
 
@@ -100,7 +100,7 @@ def test_the_packaged_migration_registry_matches_the_repository(tmp_path):
 def test_a_fresh_user_mode_start_reaches_the_current_migration_set(isolated_user_data):
     """First launch: directories created, database created, every migration applied."""
     result = initialize_startup("user")
-    assert result.database_path == isolated_user_data / "data" / "cosmetic_workshop.sqlite"
+    assert result.database_path == isolated_user_data / "data" / "family_food.sqlite"
     assert result.database_path.is_file()
     assert applied_migration_ids(result.database_path) == expected_migration_ids()
     # No backup on a first run: there was nothing to back up.
@@ -122,7 +122,7 @@ def test_the_fresh_database_is_created_outside_the_application_root(isolated_use
 
 def test_an_older_database_is_migrated_with_a_backup_taken_first(isolated_user_data):
     """The mandatory backup-before-migration contract survives packaging unchanged."""
-    database_path = isolated_user_data / "data" / "cosmetic_workshop.sqlite"
+    database_path = isolated_user_data / "data" / "family_food.sqlite"
     build_older_schema_database(database_path)
     before = applied_migration_ids(database_path)
     assert CURRENT_HEAD_MIGRATION not in before
@@ -143,7 +143,7 @@ def test_an_older_database_is_migrated_with_a_backup_taken_first(isolated_user_d
 
 def test_the_backup_snapshot_still_holds_the_pre_migration_schema(isolated_user_data):
     """A backup that already contained the new schema would be no protection."""
-    database_path = isolated_user_data / "data" / "cosmetic_workshop.sqlite"
+    database_path = isolated_user_data / "data" / "family_food.sqlite"
     build_older_schema_database(database_path)
     result = initialize_startup("user")
     assert result.backup is not None

@@ -36,6 +36,7 @@ from app.api.reports import router as reports_router
 from app.api.settings import router as settings_router
 from app.api.stock_movements import router as stock_movements_router
 from app.api.tax_rate_settings import router as tax_rate_settings_router
+from app.identity import APP_SLUG, PRODUCT_NAME
 from app.services.backend_liveness import acquire_backend_liveness_lock
 from app.domain.production_tax_context import (
     EXPECTED_EFFECTIVE_AT_FIELD,
@@ -44,8 +45,7 @@ from app.domain.production_tax_context import (
 )
 from app.version import resolve_effective_app_version
 
-APP_NAME = "cosmetic-workshop-os"
-PRODUCT_NAME = "Мастерская косметолога"
+APP_NAME = APP_SLUG
 APP_VERSION = resolve_effective_app_version()
 
 TAX_RATE_CONTEXT_BODY_FIELDS = frozenset({EXPECTED_PERCENT_FIELD, EXPECTED_EFFECTIVE_AT_FIELD})
@@ -100,7 +100,7 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title=PRODUCT_NAME,
         version=APP_VERSION,
-        description="Local-first API for the cosmetic workshop app shell.",
+        description="Local-first API for FamilyFoodOS.",
         lifespan=_lifespan,
     )
     app.add_middleware(

@@ -44,7 +44,7 @@ def test_existing_infrastructure_tables_still_work(tmp_path):
     with sqlite3.connect(config.path) as connection:
         setting = connection.execute("SELECT value FROM app_settings WHERE key = 'product.name'").fetchone()[0]
         audit_count = connection.execute("SELECT count(*) FROM audit_logs").fetchone()[0]
-    assert setting == "Мастерская косметолога"
+    assert setting == "FamilyFoodOS"
     assert audit_count == 1
 
 

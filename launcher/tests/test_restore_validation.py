@@ -17,7 +17,10 @@ import pytest
 
 from app.db.migrations import MIGRATION_TABLE, expected_migration_ids
 
-from launcher.restore.validation import CandidateRejectedError, validate_staged_candidate
+from launcher.restore.validation import (
+    CandidateRejectedError,
+    validate_staged_candidate,
+)
 
 from launcher.tests.restore_fixtures import build_workspace_database
 
@@ -45,6 +48,7 @@ def current(tmp_path):
 # Accepted
 # --------------------------------------------------------------------------
 
+
 def test_the_current_schema_is_accepted(current):
     validated = validate_staged_candidate(current)
 
@@ -52,21 +56,86 @@ def test_the_current_schema_is_accepted(current):
     assert validated.is_current_head is True
 
 
-def test_a_known_older_prefix_is_accepted(tmp_path):
-    older = build_workspace_database(
-        tmp_path / "older.sqlite", "older", up_to="0018_demo_data_tracking"
+def test_legacy_unmarked_database_through_0020_is_rejected(tmp_path):
+    legacy_unmarked = build_workspace_database(
+        tmp_path / "legacy-unmarked.sqlite",
+        "legacy-unmarked",
+        up_to="0020_artifact_audit_operations",
     )
 
-    validated = validate_staged_candidate(older)
+    with pytest.raises(CandidateRejectedError) as error:
+        validate_staged_candidate(legacy_unmarked)
 
-    assert validated.is_current_head is False
-    assert validated.applied_migration_ids[-1] == "0018_demo_data_tracking"
-    assert "0020_artifact_audit_operations" not in validated.applied_migration_ids
+    assert error.value.rejection == "candidate-not-a-family-food-database"
+
+
+def test_legacy_0020_database_with_spoofed_workspace_source_is_still_rejected(tmp_path):
+    legacy_spoofed = build_workspace_database(
+        tmp_path / "legacy-spoofed.sqlite",
+        "legacy-spoofed",
+        up_to="0020_artifact_audit_operations",
+    )
+    with sqlite3.connect(legacy_spoofed) as connection:
+        connection.execute(
+            "INSERT INTO app_settings (key, value, value_type, description) VALUES (?, ?, ?, ?)",
+            ("workspace.source", "family-food-os", "string", "Spoofed in test."),
+        )
+
+    with pytest.raises(CandidateRejectedError) as error:
+        validate_staged_candidate(legacy_spoofed)
+
+    assert error.value.rejection == "candidate-not-a-family-food-database"
+
+
+def test_identity_migration_without_workspace_source_is_rejected(current):
+    with sqlite3.connect(current) as connection:
+        connection.execute("DELETE FROM app_settings WHERE key = 'workspace.source'")
+
+    with pytest.raises(CandidateRejectedError) as error:
+        validate_staged_candidate(current)
+
+    assert error.value.rejection == "candidate-not-a-family-food-database"
+
+
+def test_identity_migration_with_wrong_workspace_source_is_rejected(current):
+    with sqlite3.connect(current) as connection:
+        connection.execute(
+            "UPDATE app_settings SET value = 'cosmetic-workshop-os' "
+            "WHERE key = 'workspace.source'"
+        )
+
+    with pytest.raises(CandidateRejectedError) as error:
+        validate_staged_candidate(current)
+
+    assert error.value.rejection == "candidate-not-a-family-food-database"
+
+
+def test_identity_migration_with_malformed_settings_storage_is_rejected(current):
+    with sqlite3.connect(current) as connection:
+        connection.execute("DROP TABLE app_settings")
+        connection.execute("CREATE TABLE app_settings (unexpected TEXT)")
+
+    with pytest.raises(CandidateRejectedError) as error:
+        validate_staged_candidate(current)
+
+    assert error.value.rejection == "candidate-not-a-family-food-database"
+
+
+def test_mutable_product_name_does_not_define_workspace_identity(current):
+    with sqlite3.connect(current) as connection:
+        connection.execute(
+            "UPDATE app_settings SET value = 'Renamed by a person' WHERE key = 'product.name'"
+        )
+
+    validated = validate_staged_candidate(current)
+
+    assert validated.is_current_head is True
 
 
 # --------------------------------------------------------------------------
 # Rejected
 # --------------------------------------------------------------------------
+
 
 def test_a_newer_schema_is_rejected_as_newer(current):
     rewrite_history(current, expected_migration_ids() + ["0021_from_the_future"])
@@ -138,7 +207,9 @@ def test_a_malformed_migration_table_is_rejected(current):
     with sqlite3.connect(current) as connection:
         connection.execute(f"DROP TABLE {MIGRATION_TABLE}")
         connection.execute(f"CREATE TABLE {MIGRATION_TABLE} (whatever TEXT)")
-        connection.execute(f"INSERT INTO {MIGRATION_TABLE} VALUES ('0001_infrastructure')")
+        connection.execute(
+            f"INSERT INTO {MIGRATION_TABLE} VALUES ('0001_infrastructure')"
+        )
 
     with pytest.raises(CandidateRejectedError) as error:
         validate_staged_candidate(current)
@@ -176,7 +247,9 @@ def test_an_arbitrary_healthy_sqlite_database_is_rejected(tmp_path):
     assert error.value.rejection == "migration-table-missing"
 
 
-def test_a_database_with_a_migration_table_but_no_workshop_identity_is_rejected(tmp_path):
+def test_a_database_with_a_migration_table_but_no_family_food_identity_is_rejected(
+    tmp_path,
+):
     """`schema_migrations` alone does not make a file this application's workspace."""
     impostor = tmp_path / "impostor.sqlite"
     with sqlite3.connect(impostor) as connection:
@@ -190,7 +263,7 @@ def test_a_database_with_a_migration_table_but_no_workshop_identity_is_rejected(
 
     with pytest.raises(CandidateRejectedError) as error:
         validate_staged_candidate(impostor)
-    assert error.value.rejection == "candidate-not-a-workshop-database"
+    assert error.value.rejection == "candidate-not-a-family-food-database"
 
 
 def test_an_empty_sqlite_file_is_rejected(tmp_path):
@@ -231,8 +304,9 @@ def test_a_corrupt_candidate_is_rejected(tmp_path, current):
         payload[offset] = payload[offset] ^ 0xFF
     corrupt.write_bytes(bytes(payload))
 
-    with pytest.raises(CandidateRejectedError):
+    with pytest.raises(CandidateRejectedError) as error:
         validate_staged_candidate(corrupt)
+    assert error.value.rejection == "candidate-not-openable"
 
 
 def test_a_candidate_depending_on_an_external_wal_is_rejected(tmp_path, current):
@@ -243,7 +317,9 @@ def test_a_candidate_depending_on_an_external_wal_is_rejected(tmp_path, current)
     assert error.value.rejection == "candidate-external-journal-dependency"
 
 
-def test_a_candidate_depending_on_an_external_rollback_journal_is_rejected(tmp_path, current):
+def test_a_candidate_depending_on_an_external_rollback_journal_is_rejected(
+    tmp_path, current
+):
     current.with_name(current.name + "-journal").write_bytes(b"pretend journal")
 
     with pytest.raises(CandidateRejectedError) as error:
@@ -263,6 +339,7 @@ def test_a_symlinked_candidate_is_rejected(tmp_path, current):
 # --------------------------------------------------------------------------
 # Validation changes nothing
 # --------------------------------------------------------------------------
+
 
 def test_validation_performs_no_writes(current):
     before = digest(current)
@@ -286,26 +363,36 @@ def test_validation_never_creates_the_migration_table(tmp_path):
     with sqlite3.connect(f"file:{foreign}?mode=ro", uri=True) as connection:
         tables = {
             row[0]
-            for row in connection.execute("SELECT name FROM sqlite_master WHERE type = 'table'")
+            for row in connection.execute(
+                "SELECT name FROM sqlite_master WHERE type = 'table'"
+            )
         }
     assert MIGRATION_TABLE not in tables
 
 
 def test_validation_never_migrates_the_candidate(tmp_path):
-    older = build_workspace_database(
-        tmp_path / "older.sqlite", "older", up_to="0018_demo_data_tracking"
+    legacy_unmarked = build_workspace_database(
+        tmp_path / "legacy-unmarked.sqlite",
+        "legacy-unmarked",
+        up_to="0020_artifact_audit_operations",
     )
-    before = digest(older)
+    before = digest(legacy_unmarked)
 
-    validate_staged_candidate(older)
+    with pytest.raises(CandidateRejectedError) as error:
+        validate_staged_candidate(legacy_unmarked)
 
-    assert digest(older) == before
-    with sqlite3.connect(f"file:{older}?mode=ro", uri=True) as connection:
-        tables = {
+    assert error.value.rejection == "candidate-not-a-family-food-database"
+    assert digest(legacy_unmarked) == before
+    with sqlite3.connect(f"file:{legacy_unmarked}?mode=ro", uri=True) as connection:
+        applied = {
             row[0]
-            for row in connection.execute("SELECT name FROM sqlite_master WHERE type = 'table'")
+            for row in connection.execute(f"SELECT migration_id FROM {MIGRATION_TABLE}")
         }
-    assert "artifact_audit_operations" not in tables
+        workspace_source = connection.execute(
+            "SELECT value FROM app_settings WHERE key = 'workspace.source'"
+        ).fetchone()
+    assert "0021_family_food_identity" not in applied
+    assert workspace_source is None
 
 
 def test_validation_leaves_no_sidecar_beside_the_candidate(current):

@@ -22,12 +22,18 @@ from app.db.migration_lineage import (
     REQUIRED_TABLES_BY_MIGRATION,
     WORKSPACE_IDENTITY_TABLES,
     classify_recorded_migration_ids,
+    has_family_food_workspace_identity,
     inspect_migration_lineage,
     migration_table_exists,
     missing_required_tables,
     required_tables_for_prefix,
 )
-from app.db.migrations import MIGRATION_MODULES, MIGRATION_TABLE, apply_migrations, expected_migration_ids
+from app.db.migrations import (
+    MIGRATION_MODULES,
+    MIGRATION_TABLE,
+    apply_migrations,
+    expected_migration_ids,
+)
 
 
 def digest(path: Path) -> str:
@@ -54,6 +60,7 @@ def migrated_database(path: Path, up_to: str | None = None) -> Path:
 # --------------------------------------------------------------------------
 # Classification
 # --------------------------------------------------------------------------
+
 
 def test_the_complete_current_chain_is_a_known_prefix_at_head():
     lineage = classify_recorded_migration_ids(expected_migration_ids())
@@ -89,14 +96,18 @@ def test_every_malformed_history_shape_has_its_own_reason(recorded, reason):
 
 def test_a_superset_of_the_known_chain_is_reported_as_newer():
     """The complete chain plus extras is a database from a later version."""
-    lineage = classify_recorded_migration_ids(expected_migration_ids() + ["0021_future"])
+    lineage = classify_recorded_migration_ids(
+        expected_migration_ids() + ["0021_future"]
+    )
 
     assert lineage.rejection == "schema-newer-than-application"
 
 
 def test_a_partial_chain_with_an_extra_is_merely_unknown():
     """Distinct from `newer`, because the user-facing category differs."""
-    lineage = classify_recorded_migration_ids(expected_migration_ids()[:5] + ["9999_alien"])
+    lineage = classify_recorded_migration_ids(
+        expected_migration_ids()[:5] + ["9999_alien"]
+    )
 
     assert lineage.rejection == "unknown-migration-id"
 
@@ -110,6 +121,7 @@ def test_a_rejected_lineage_hands_back_no_ids_to_work_around():
 # --------------------------------------------------------------------------
 # Inspection through a read-only connection
 # --------------------------------------------------------------------------
+
 
 def test_a_migrated_database_inspects_as_the_current_head(tmp_path):
     database = migrated_database(tmp_path / "head.sqlite")
@@ -150,7 +162,9 @@ def test_a_database_without_the_migration_table_is_rejected(tmp_path):
     connection = read_only(foreign)
     try:
         assert migration_table_exists(connection) is False
-        assert inspect_migration_lineage(connection).rejection == "migration-table-missing"
+        assert (
+            inspect_migration_lineage(connection).rejection == "migration-table-missing"
+        )
     finally:
         connection.close()
 
@@ -166,7 +180,10 @@ def test_an_unexpected_migration_table_shape_is_rejected(tmp_path):
 
     connection = read_only(odd)
     try:
-        assert inspect_migration_lineage(connection).rejection == "migration-table-shape-unexpected"
+        assert (
+            inspect_migration_lineage(connection).rejection
+            == "migration-table-shape-unexpected"
+        )
     finally:
         connection.close()
 
@@ -177,7 +194,8 @@ def test_the_expected_migration_table_columns_match_what_migrations_creates(tmp_
     connection = read_only(database)
     try:
         columns = tuple(
-            row[1] for row in connection.execute(f"PRAGMA table_info({MIGRATION_TABLE})")
+            row[1]
+            for row in connection.execute(f"PRAGMA table_info({MIGRATION_TABLE})")
         )
     finally:
         connection.close()
@@ -186,8 +204,59 @@ def test_the_expected_migration_table_columns_match_what_migrations_creates(tmp_
 
 
 # --------------------------------------------------------------------------
+# FamilyFoodOS workspace identity
+# --------------------------------------------------------------------------
+
+
+def test_current_database_has_family_food_workspace_identity(tmp_path):
+    database = migrated_database(tmp_path / "current.sqlite")
+
+    connection = read_only(database)
+    try:
+        lineage = inspect_migration_lineage(connection)
+        assert has_family_food_workspace_identity(connection, lineage.applied_ids)
+    finally:
+        connection.close()
+
+
+def test_legacy_0020_prefix_fails_identity_even_with_spoofed_marker(tmp_path):
+    database = migrated_database(
+        tmp_path / "legacy-spoofed.sqlite", up_to="0020_artifact_audit_operations"
+    )
+    with sqlite3.connect(database) as connection:
+        connection.execute(
+            "INSERT INTO app_settings (key, value, value_type, description) VALUES (?, ?, ?, ?)",
+            ("workspace.source", "family-food-os", "string", "Spoofed in test."),
+        )
+
+    connection = read_only(database)
+    try:
+        lineage = inspect_migration_lineage(connection)
+        assert lineage.is_known_prefix
+        assert not has_family_food_workspace_identity(connection, lineage.applied_ids)
+    finally:
+        connection.close()
+
+
+def test_product_name_is_not_part_of_machine_identity(tmp_path):
+    database = migrated_database(tmp_path / "renamed.sqlite")
+    with sqlite3.connect(database) as connection:
+        connection.execute(
+            "UPDATE app_settings SET value = 'Personal title' WHERE key = 'product.name'"
+        )
+
+    connection = read_only(database)
+    try:
+        lineage = inspect_migration_lineage(connection)
+        assert has_family_food_workspace_identity(connection, lineage.applied_ids)
+    finally:
+        connection.close()
+
+
+# --------------------------------------------------------------------------
 # The required-table mapping
 # --------------------------------------------------------------------------
+
 
 def test_the_mapping_covers_every_migration_in_the_chain():
     assert set(REQUIRED_TABLES_BY_MIGRATION) == set(expected_migration_ids())
@@ -201,20 +270,29 @@ def test_the_head_prefix_requires_every_table_the_migrations_create(tmp_path):
     try:
         present = {
             row[0]
-            for row in connection.execute("SELECT name FROM sqlite_master WHERE type = 'table'")
+            for row in connection.execute(
+                "SELECT name FROM sqlite_master WHERE type = 'table'"
+            )
         }
-        assert missing_required_tables(connection, expected_migration_ids()) == frozenset()
+        assert (
+            missing_required_tables(connection, expected_migration_ids()) == frozenset()
+        )
     finally:
         connection.close()
 
-    # Every required table really exists, and the identity tables are included.
+    # Every required table really exists, and the foundational tables are included.
     assert required <= present
     assert WORKSPACE_IDENTITY_TABLES <= required
 
 
 @pytest.mark.parametrize(
     "up_to",
-    ["0001_infrastructure", "0007_recipes", "0013_production_batches", "0018_demo_data_tracking"],
+    [
+        "0001_infrastructure",
+        "0007_recipes",
+        "0013_production_batches",
+        "0018_demo_data_tracking",
+    ],
 )
 def test_each_supported_older_prefix_maps_to_tables_that_really_exist(tmp_path, up_to):
     database = migrated_database(tmp_path / f"{up_to}.sqlite", up_to=up_to)
@@ -246,7 +324,9 @@ def test_a_dropped_required_table_is_reported(tmp_path):
 
 
 def test_an_older_prefix_does_not_require_a_later_migrations_table(tmp_path):
-    prefix = expected_migration_ids()[: expected_migration_ids().index("0018_demo_data_tracking") + 1]
+    prefix = expected_migration_ids()[
+        : expected_migration_ids().index("0018_demo_data_tracking") + 1
+    ]
 
     required = required_tables_for_prefix(prefix)
 
@@ -254,15 +334,20 @@ def test_an_older_prefix_does_not_require_a_later_migrations_table(tmp_path):
     assert "demo_data_sessions" in required
 
 
-def test_column_only_migrations_add_no_required_table():
-    """`0017` rebuilds existing tables and `0019` only adds columns."""
+def test_migrations_without_new_tables_add_no_required_table():
+    """Rebuild, column-only and identity-only migrations add no table."""
     assert REQUIRED_TABLES_BY_MIGRATION["0017_import_apply_status"] == frozenset()
-    assert REQUIRED_TABLES_BY_MIGRATION["0019_production_batch_tax_rate_snapshots"] == frozenset()
+    assert (
+        REQUIRED_TABLES_BY_MIGRATION["0019_production_batch_tax_rate_snapshots"]
+        == frozenset()
+    )
+    assert REQUIRED_TABLES_BY_MIGRATION["0021_family_food_identity"] == frozenset()
 
 
 # --------------------------------------------------------------------------
 # Nothing here writes
 # --------------------------------------------------------------------------
+
 
 def test_inspection_never_creates_the_migration_table(tmp_path):
     foreign = tmp_path / "foreign.sqlite"

@@ -92,6 +92,7 @@ def fail_transition_at(monkeypatch, phase: RestorePhase) -> None:
 # The accepted happy path
 # --------------------------------------------------------------------------
 
+
 def test_a_complete_restore_reaches_durable_completed(scenario):
     workspace, source, context = scenario
 
@@ -136,36 +137,49 @@ def test_a_successful_restore_cleans_only_its_own_staging(scenario):
     assert (workspace.restore_dir / "operation.json").exists()
 
 
-def test_an_older_supported_schema_is_migrated_on_the_restored_copy(monkeypatch, tmp_path):
+def test_restore_does_not_migrate_a_legacy_unmarked_candidate_to_make_it_pass(
+    monkeypatch, tmp_path
+):
     import sqlite3
 
     workspace = make_workspace(monkeypatch, tmp_path, marker="workspace-A")
-    older = make_source_backup(tmp_path, "workspace-B-old", up_to="0018_demo_data_tracking")
-    before = digest(older)
+    legacy_unmarked = make_source_backup(
+        tmp_path,
+        "legacy-unmarked",
+        up_to="0020_artifact_audit_operations",
+    )
+    before = digest(legacy_unmarked)
 
     context = workspace.context()
     try:
-        result = run(workspace, older, context)
+        result = run(workspace, legacy_unmarked, context)
     finally:
         context.release()
 
-    assert result.outcome is RestoreOutcome.COMPLETED
-    connection = sqlite3.connect(f"file:{workspace.database_path}?mode=ro", uri=True)
+    assert result.outcome is RestoreOutcome.ABORTED
+    assert result.failure is RestoreFailure.CANDIDATE_INVALID
+    assert read_marker(workspace.database_path) == "workspace-A"
+    assert workspace.safety_copies() == []
+    assert digest(legacy_unmarked) == before
+    connection = sqlite3.connect(f"file:{legacy_unmarked}?mode=ro", uri=True)
     try:
-        tables = {
+        applied = {
             row[0]
-            for row in connection.execute("SELECT name FROM sqlite_master WHERE type = 'table'")
+            for row in connection.execute("SELECT migration_id FROM schema_migrations")
         }
+        workspace_source = connection.execute(
+            "SELECT value FROM app_settings WHERE key = 'workspace.source'"
+        ).fetchone()
     finally:
         connection.close()
-    assert "artifact_audit_operations" in tables
-    # The selected source itself was never migrated.
-    assert digest(older) == before
+    assert "0021_family_food_identity" not in applied
+    assert workspace_source is None
 
 
 # --------------------------------------------------------------------------
 # Failures before the replacement boundary — abort, database untouched
 # --------------------------------------------------------------------------
+
 
 def test_a_rejected_source_aborts_without_creating_an_operation(scenario, tmp_path):
     workspace, _source, context = scenario
@@ -183,7 +197,9 @@ def test_a_rejected_source_aborts_without_creating_an_operation(scenario, tmp_pa
     assert store_for(workspace).read() is None
 
 
-def test_an_invalid_candidate_aborts_and_retains_the_working_database(monkeypatch, tmp_path):
+def test_an_invalid_candidate_aborts_and_retains_the_working_database(
+    monkeypatch, tmp_path
+):
     import sqlite3
 
     workspace = make_workspace(monkeypatch, tmp_path, marker="workspace-A")
@@ -210,7 +226,9 @@ def test_an_invalid_candidate_aborts_and_retains_the_working_database(monkeypatc
     assert workspace.safety_copies() == []
 
 
-def test_a_newer_schema_is_rejected_before_the_working_database_changes(monkeypatch, tmp_path):
+def test_a_newer_schema_is_rejected_before_the_working_database_changes(
+    monkeypatch, tmp_path
+):
     import sqlite3
 
     from app.db.migrations import expected_migration_ids
@@ -243,7 +261,9 @@ def test_insufficient_disk_space_aborts_before_staging(scenario, monkeypatch):
 
     workspace, source, context = scenario
     monkeypatch.setattr(
-        shutil, "disk_usage", lambda _p: shutil._ntuple_diskusage(total=1, used=0, free=1)
+        shutil,
+        "disk_usage",
+        lambda _p: shutil._ntuple_diskusage(total=1, used=0, free=1),
     )
 
     result = run(workspace, source, context)
@@ -310,10 +330,13 @@ def test_a_failure_to_publish_replacement_intent_aborts(scenario, monkeypatch):
 # Failures at or after the replacement boundary — rollback
 # --------------------------------------------------------------------------
 
+
 def assert_rolled_back(result, workspace, source_digest=None, source=None):
     assert result.outcome is RestoreOutcome.ROLLED_BACK
     assert result.durable_phase is RestorePhase.ROLLED_BACK
-    assert result.restore_succeeded is False, "rolled_back is never a successful Restore"
+    assert (
+        result.restore_succeeded is False
+    ), "rolled_back is never a successful Restore"
     assert read_marker(workspace.database_path) == "workspace-A"
     assert store_for(workspace).read().phase is RestorePhase.ROLLED_BACK
     assert workspace.safety_copies(), "the safety copy is retained after rollback"
@@ -349,7 +372,9 @@ def test_a_failing_replacement_call_rolls_back(scenario, monkeypatch):
     "phase",
     [RestorePhase.REPLACEMENT_COMMITTED, RestorePhase.VERIFICATION_IN_PROGRESS],
 )
-def test_a_failure_to_publish_a_post_replacement_phase_rolls_back(scenario, monkeypatch, phase):
+def test_a_failure_to_publish_a_post_replacement_phase_rolls_back(
+    scenario, monkeypatch, phase
+):
     workspace, source, context = scenario
     before = digest(source)
     fail_transition_at(monkeypatch, phase)
@@ -363,7 +388,9 @@ def test_a_migration_failure_during_restored_startup_rolls_back(scenario):
     workspace, source, context = scenario
     before = digest(source)
 
-    result = run(workspace, source, context, startup=failing_startup(workspace.database_path))
+    result = run(
+        workspace, source, context, startup=failing_startup(workspace.database_path)
+    )
 
     assert_rolled_back(result, workspace, before, source)
 
@@ -436,6 +463,7 @@ def test_after_completed_is_published_nothing_rolls_back(scenario):
 # recovery_blocked
 # --------------------------------------------------------------------------
 
+
 def test_an_unverifiable_rollback_becomes_recovery_blocked(scenario, monkeypatch):
     from launcher.restore import engine as engine_module
     from launcher.restore.safety_copy import SafetyCopyError
@@ -476,6 +504,7 @@ def test_recovery_blocked_preserves_every_piece_of_evidence(scenario, monkeypatc
 # --------------------------------------------------------------------------
 # Locking
 # --------------------------------------------------------------------------
+
 
 def test_restore_is_refused_without_a_held_lifecycle_lock(scenario):
     """A bare engine call cannot bypass the gate.

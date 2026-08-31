@@ -374,16 +374,16 @@ HELPER_LAUNCHER_WITH_DELAYED_CHILD = textwrap.dedent(
     ) = sys.argv[1:9]
     sys.path.insert(0, repository_root)
     sys.path.insert(0, backend_dir)
-    os.environ["COSMETIC_WORKSHOP_USER_DATA_DIR"] = user_data_dir
-    os.environ.pop("COSMETIC_WORKSHOP_DB_PATH", None)
+    os.environ["FAMILY_FOOD_USER_DATA_DIR"] = user_data_dir
+    os.environ.pop("FAMILY_FOOD_DB_PATH", None)
 
     from launcher.restore.workspace import RestoreWorkspace
     from pathlib import Path
 
     lock_path = RestoreWorkspace.for_database(Path(database_path)).backend_liveness_lock_path
     env = os.environ.copy()
-    env["COSMETIC_WORKSHOP_BACKEND_LIVENESS_LOCK"] = str(lock_path)
-    env["COSMETIC_WORKSHOP_DB_PATH"] = database_path
+    env["FAMILY_FOOD_BACKEND_LIVENESS_LOCK"] = str(lock_path)
+    env["FAMILY_FOOD_DB_PATH"] = database_path
     env["PYTHONPATH"] = backend_dir
 
     child = subprocess.Popen(

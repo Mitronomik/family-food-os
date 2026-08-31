@@ -6,7 +6,7 @@ short of that is a failed Restore that rolls back.
 
 The backend is started through the **existing** launcher/backend boundary —
 `launcher.runtime.start_backend_process`, pinned to an explicit
-`COSMETIC_WORKSHOP_DB_PATH` — so no second uvicorn implementation exists and the
+`FAMILY_FOOD_DB_PATH` — so no second uvicorn implementation exists and the
 child cannot resolve a fallback database of its own. Readiness is *polled* within
 an explicit timeout rather than slept for: a fixed sleep either wastes time or
 declares success before the process is listening.
