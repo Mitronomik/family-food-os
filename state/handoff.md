@@ -1,72 +1,123 @@
 # Handoff
 
-Updated: `2026-08-13`
+Updated: `2026-08-31`
 
-## Current authority
+## Project identity
 
-```text
-C4-III — DONE — EXACT-HEAD AND EXACT-PACKAGE VERIFIED
-Restore — IMPLEMENTED — C4-III VERIFIED AND LIFECYCLE-CLOSED
-D3 — macOS package MVP — IMPLEMENTED
-```
+This repository is **FamilyFoodOS**.
 
-- CR-013 / ADR 0020 decides D4 Update Safety.
-- CR-014 / ADR 0021 decides D5 Remote Install Rehearsal and authorizes D5 only.
-- D4-A is DONE — merged and exact-head verified.
-- D4-B is DONE — merged, exact-head/exact-package verified and lifecycle-closed.
-- D4-C is DONE — merged, exact-head/exact-package verified and lifecycle-closed.
-- D4-D is DONE — final exact-package verification passed; D4 is lifecycle-closed.
+It was bootstrapped from CosmeticWorkshopOS to reuse a verified engineering foundation.
 
-The exact pre-CR-013 handoff is preserved in `docs/history/d4-pre-decision/handoff.md`.
+Source provenance:
 
-## Lifecycle
+- source repository: `Mitronomik/cosmetic-workshop-os`
+- source commit: `0ac96deace602248e0d31e7e56c7aed7fb63c62b`
+- bootstrap tag: `bootstrap-cosmetic-workshop-2026-08-31`
+- FamilyFoodOS repository: `Mitronomik/family-food-os`
 
-```text
-CR-013 — ACCEPTED — D4 UPDATE SAFETY CONTRACT
-D4 — Update safety — DONE — EXACT-PACKAGE VERIFIED AND LIFECYCLE-CLOSED
-D4-A — Version identity and compatibility preflight — DONE — MERGED AND EXACT-HEAD VERIFIED
-D4-B — Safe migration execution and durable UpdateLog — DONE — MERGED AND EXACT-HEAD VERIFIED
-D4-C — User-facing update status and packaged failure UX — DONE — MERGED AND EXACT-HEAD/EXACT-PACKAGE VERIFIED
-D4-D — Exact-package update verification and D4 lifecycle closure — DONE — FINAL EXACT-PACKAGE VERIFICATION PASSED
-CR-014 — ACCEPTED — D5 REMOTE INSTALL REHEARSAL CONTRACT
-D5 — Remote install checklist — PILOT OPERATOR-ASSISTED PATH AUTHORIZED — FULL D5 PASS NOT CLAIMED
-CR-015 — ACCEPTED — NATIVE MACOS APPLICATION LIFECYCLE BLOCKER FIX
-D5 blocker fix — Native macOS application lifecycle — DONE — MERGED AND EXACT-HEAD/EXACT-PACKAGE VERIFIED
-CR-016 — ACCEPTED DECISION — IMPLEMENTATION REJECTED BY HUMAN FINDER REHEARSAL
-CR-017 — ACCEPTED — SINGLE-CLIENT OPERATOR-ASSISTED INSTALL/UPDATE CONTRACT
-D5 pilot deployment — OPERATOR-ASSISTED PATH AUTHORIZED NEXT — NOT IMPLEMENTED
-D5 verification — CR-016 FAIL RECORDED; OPERATOR-ASSISTED REHEARSAL NOT STARTED
-PHASE 12 — MVP release preparation — NOT AUTHORIZED BY CR-014/CR-015/CR-016/CR-017
-Product release readiness — NOT CLAIMED
-```
+Do not continue CosmeticWorkshopOS product lifecycle work from this repository.
 
-## D4 final closed handoff
+## Completed milestone
 
-Load-bearing implementation seams:
+`PR0 — Frozen Fork — COMPLETE`
 
-1. `backend/VERSION` — only editable product-version authority.
-2. `backend/app/version.py` — validates and resolves repository vs packaged effective version without version ordering.
-3. `scripts/package_macos.sh` — generates package version projections from the authority.
-4. `scripts/verify_product_version.py` — build-time projection consistency gate.
-5. `backend/app/db/startup_compatibility.py` — opens existing canonical DB read-only and delegates lineage classification to `app.db.migration_lineage`.
-6. `backend/app/services/startup.py` — runs version + schema preflight before directory creation, backup or migrations.
-7. `backend/app/services/runtime_identity.py` + thin Settings route — expose the same effective version read-only.
+PR0 changed governance, canonical documentation and active project state only.
 
-Supported older schemas now enter `backend/app/services/update_safety.py` after the closed D4-A gate. That service owns verified backup, consistent stage creation, stage-only migration, target verification, atomic canonical publication and external UpdateLog reconciliation; current/fresh/development paths retain their bounded existing behavior.
+It intentionally did not introduce FamilyFoodOS runtime/domain behavior.
 
-D4-C remains closed. D4-D final verification passed on exact main `ec88b09193c8ed041e17daef3e3ffc0193d1b559` in run `31751386881` and D4 is lifecycle-closed. CR-014 now authorizes D5 only as documentation + assisted-install rehearsal; release/Phase 12/runtime/Restore expansion remains unauthorized.
+## Verified PR0 baseline
 
-D4-A evidence remains recorded above. D4-B evidence: verified PR head `8688fa3dba87205b4b4626ebab2902262fd4cd24`, run `31716610699`, artifact `9187785415`; merged head `d60a3be993c76b59292cf27ee66bcbe856669fc4`, run `31717705331`, artifact `9188228739`; compare `0` changed files.
+- backend + launcher: `2546 passed`
+- macOS package: `146 passed, 1 skipped`
+- frontend test scripts: `22 passed, 0 failed`
+- frontend build: passed
+- startup smoke: `PASS`
+- npm: `0 vulnerabilities`
 
-## CR-015 handoff
+Startup smoke verified the complete inherited local stack:
 
-Next implementation work is only the native macOS application lifecycle blocker fix from ADR 0022. Preserve the existing browser UI, Python packaged entrypoint, launcher/backend ownership, external user-data boundary, Restore and D4 update semantics. Required acceptance proof includes a real packaged `.app` launched through LaunchServices, responsive application-level Quit (not direct SIGTERM as the sole proof), released ports/processes, repeat Finder launch and persistence, followed by a fresh human clean-Mac D5 rehearsal.
+- backend `/health`: HTTP `200`
+- frontend root: HTTP `200`
+- frontend `/api/health`: HTTP `200`
+- frontend API proxy payload matched backend payload
 
-## CR-015 closure handoff
+See:
 
-Do not implement more runtime work now. The next action is the mandatory D5 human clean-Mac/clean-profile rehearsal using the fixed exact package verified by run `31780899805` (ZIP SHA-256 `85f993a93082c4b3a36771318cf8c0c3abf02be56b1374a32a62d1a6b9279ee6`). Ordinary Quit must be performed through the macOS application lifecycle; closing the browser is not application shutdown. On success, complete D5 documentation/checklist evidence and lifecycle closure separately. On failure, stop and classify before changing code.
+- `docs/migration-source.md`
 
+## Canonical reading order
 
-## CR-017 pilot distribution boundary
+Before continuing:
 
-The CR-016 self-running downloaded `.command` experiment failed the mandatory human Finder rehearsal because Gatekeeper blocked the bootstrap before execution. CR-017 therefore authorizes only a single-client **operator-assisted** install/update pilot: a qualified support operator may use Terminal to verify the exact package and remove quarantine only from the verified staged `.app`; the client does not type commands. Gatekeeper remains globally enabled. No public/self-service distribution, signing/notarization, Phase 12 or release-readiness claim is created.
+1. `AGENTS.md`
+2. `docs/family-food/project-operating-manual.md`
+3. `state/current-focus.md`
+4. `docs/family-food/technical-spec.md`
+5. `docs/family-food/data-ingestion.md`
+6. `docs/family-food/migration-plan.md`
+7. relevant code and tests
+
+## Legacy boundary
+
+The repository still intentionally contains inherited CosmeticWorkshopOS:
+
+- backend runtime;
+- frontend runtime;
+- SQLite schema;
+- launcher/package infrastructure;
+- tests;
+- nested legacy `AGENTS.md` files;
+- historical documentation.
+
+This is not accidental technical debt introduced by PR0.
+
+Do not mass-delete or mechanically rename these areas.
+
+## Next milestone
+
+`PR1 — Identity Detox`
+
+## PR1 exact starting procedure
+
+Before implementation:
+
+1. update local `main` from `origin/main`;
+2. create a new branch from that updated `main`;
+3. read the PR1 section in `docs/family-food/migration-plan.md`;
+4. inventory identity-only CosmeticWorkshopOS references;
+5. separate identity references from true legacy-domain references;
+6. define the bounded PR1 diff before editing runtime code.
+
+Suggested branch:
+
+`migration/pr1-identity-detox`
+
+## PR1 boundary
+
+PR1 may change product/runtime identity while preserving behavior.
+
+Do not use PR1 to:
+
+- add Household;
+- add CanonicalIngredient;
+- change recipe semantics;
+- introduce food migrations;
+- remove whole legacy bounded contexts;
+- redesign consumer frontend;
+- add AI;
+- add retail;
+- add PostgreSQL/Auth.
+
+## Public repository safety
+
+Never commit:
+
+- API keys;
+- tokens;
+- passwords;
+- `.env`;
+- private credentials;
+- real user personal data;
+- real health-related data;
+- local databases;
+- local development environments.

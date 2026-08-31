@@ -1,1069 +1,341 @@
-# AGENTS.md — Codex System Prompt
+# AGENTS.md — FamilyFoodOS Agent Contract
 
-Project: **cosmetic-workshop-os**  
-Human-facing name: **Мастерская косметолога**  
-Product type: local-first web application for a small cosmetic workshop.
+Project: **family-food-os**
 
----
+FamilyFoodOS is a new product bootstrapped from CosmeticWorkshopOS.
 
-## 1. Agent role
+The preserved Git history is engineering provenance, not the current product specification.
 
-You are a senior full-stack product engineering agent working on `cosmetic-workshop-os`.
+## 1. First reading order
 
-Your job is to implement the project safely, incrementally, and according to the product architecture. Treat every task as a scoped PR-sized change. Do not invent large features outside the requested roadmap step.
+Before significant work, read in this order:
 
-The product is not a generic website. It is a local-first operational system for a cosmetic maker who needs to manage recipes, individual client formulas, ingredients, packaging, orders, production, costs, expiration dates, alerts, purchase planning, imports, exports, and future cloud/mobile expansion.
+1. `AGENTS.md`
+2. `docs/family-food/project-operating-manual.md`
+3. `state/current-focus.md`
+4. relevant canonical FamilyFoodOS documents
+5. relevant source code
+6. relevant tests
+7. `state/handoff.md` when continuing previous work
 
-Primary user is non-technical. The interface must be simple, predictable, and human-readable.
+Canonical FamilyFoodOS foundation documents:
 
----
+- `docs/family-food/technical-spec.md`
+- `docs/family-food/data-ingestion.md`
+- `docs/family-food/migration-plan.md`
+- `docs/migration-source.md`
 
-## 2. Product summary
+Do not reconstruct the intended product only from legacy source code.
 
-The application helps a cosmetic maker:
+## 2. Important migration warning
 
-- store base recipes;
-- create recipe versions;
-- create individual client recipes;
-- calculate recipe percentages and grams;
-- convert ml to grams through density when applicable;
-- manage clients;
-- manage orders;
-- manage ingredients and ingredient lots;
-- manage packaging and consumables;
-- track stock movements;
-- track expiration dates;
-- generate alerts;
-- form purchase suggestions;
-- calculate cost, tax, margin, and profitability;
-- log all important actions;
-- import data from Excel/CSV;
-- export and back up data;
-- later support PDF/image OCR, mobile viewing, cloud sync, attachments, certification documents, and advanced reports.
+This repository currently contains substantial CosmeticWorkshopOS code and documentation.
 
-The reference UX logic is similar to the working environment of soap-formula.ru: “my recipes”, “my stock”, recipe calculation, cost calculation, printing/export, and a professional ingredient catalogue. Do not copy visuals or code. Use the logic only as a familiar mental model.
+Legacy code is intentionally preserved during migration.
 
----
+Do not assume an existing cosmetic concept is also a FamilyFoodOS concept.
 
-## 3. Core product principles
+Never mechanically rename:
 
-### 3.1 Local-first first
+- `Client` to `HouseholdMember`
+- `Order` to `MealPlan`
+- `ProductionBatch` to `PrepBatch`
+- `PackagingItem` to a retail food package
 
-The first version must work locally on a MacBook without requiring internet.
+Preferred migration pattern:
 
-Preferred architecture:
+`introduce new food bounded context → move dependencies → test → remove obsolete legacy context`
 
-```text
-Browser UI
-  ↓
-Local backend API
-  ↓
-Domain services
-  ↓
-SQLite database
-  ↓
-Backup / Export / future cloud migration
-```
+Do not delete large legacy areas merely because they are no longer part of the target product unless the current migration step explicitly authorizes removal.
 
-Do not introduce mandatory cloud dependencies unless a task explicitly says so.
+## 3. Source-of-truth order
 
-### 3.2 API-first even when local
+When instructions conflict, use:
 
-Even if the app runs locally, keep a clean backend API boundary. Future cloud/mobile migration must not require rewriting business logic.
+1. latest explicit user-approved decision;
+2. this root `AGENTS.md`;
+3. current canonical FamilyFoodOS documents;
+4. `docs/family-food/project-operating-manual.md`;
+5. current task specification;
+6. legacy CosmeticWorkshopOS documentation;
+7. assumptions.
 
-### 3.3 User does not need a developer for daily use
+If an approved architecture decision appears wrong, do not silently replace it. Report the issue and propose a change.
 
-The user must be able to add/edit:
+## 4. Product core
 
-- clients;
-- ingredients;
-- ingredient lots;
-- packaging;
-- categories;
-- units;
-- densities;
-- recipe templates;
-- recipe versions;
-- individual client recipes;
-- orders;
-- stock movements;
-- alert thresholds;
-- tax settings;
-- import files;
-- exports/backups.
+FamilyFoodOS should eventually support this core loop:
 
-Do not hard-code business data that should be user-editable.
+`Household → Planner → MealPlan → Servings → Recipes → Shopping → Pantry → Prep/Freezer → Daily Use → Feedback → Next Week`
 
-### 3.4 No hidden destructive behavior
+The product should minimize user effort.
 
-Do not silently delete important records.
+Guiding principle:
+
+**complexity inside the system, simplicity for the user.**
+
+## 5. Deterministic core
+
+The core must work with:
+
+`AI_ENABLED=false`
+
+Critical calculations belong to deterministic backend code.
+
+LLM must not be the source of truth for:
+
+- calories;
+- nutrients;
+- ingredient quantities;
+- serving sizes;
+- allergens;
+- prices;
+- availability;
+- storage duration.
+
+Production recipes require verifiable provenance.
+
+AI may assist with parsing, natural-language input, feedback, matching, explanation, and suggestions, subject to deterministic validation where appropriate.
+
+## 6. Backend ownership
+
+Preserve clear boundaries:
+
+`UI → API → services/domain → repositories → database`
+
+Critical business logic must not live only in frontend.
+
+Reuse strong inherited engineering patterns where suitable:
+
+- transactional writes;
+- immutable/versioned history;
+- validation;
+- migrations;
+- auditability;
+- safe import drafts;
+- backup/export safety;
+- structured errors;
+- tests.
+
+Do not preserve legacy business semantics merely to maximize code reuse.
+
+## 7. Consumer UX
+
+FamilyFoodOS consumer UX is mobile-first.
+
+Primary conceptual sections:
+
+- Сегодня
+- Неделя
+- Купить
+- Заготовки
+- Дома
+
+Administrative functionality such as ingestion, canonical ingredient management, retailer matching and audit must not dominate consumer navigation.
 
 Prefer:
 
-- archive;
-- deactivate;
-- cancel;
-- reverse movement;
-- create a new version.
+`system proposes → user confirms or changes`
 
-Deletion of core business records must be explicit, confirmed, and audited.
+over long manual forms.
 
-### 3.5 Everything important is logged
+## 8. Recipe and nutrition safety
 
-Create or preserve audit logging for important actions:
+Production recipes must have source provenance.
 
-- client created/updated/archived;
-- recipe created/updated/versioned/archived;
-- individual client recipe created/updated;
-- ingredient created/updated/archived;
-- lot created/updated;
-- stock movement created/reversed;
-- packaging created/updated;
-- order created/status changed/cancelled;
-- production batch created;
-- automatic stock write-off;
-- import started/applied/failed;
-- export or backup created;
-- settings changed.
+Preferred recipe pipeline:
 
----
+`source → parse → resolve ingredients → normalize units → structure → calculate nutrition → validate → review → publish`
 
-## 4. Non-goals for MVP
+Nutrition Engine is deterministic and versioned.
 
-Do not implement these in MVP unless the task explicitly asks:
+FamilyFoodOS MVP is not a medical treatment system.
 
-- full cloud SaaS;
-- multi-user roles;
-- public website;
-- online store;
-- payment processing;
-- full accounting system;
-- legal certification workflow;
-- automatic import from soap-formula.ru;
-- OCR from PDF/images as trusted automatic data;
-- mobile app;
-- advanced analytics dashboard;
-- branded commercial PDF templates;
-- label printing;
-- integrations with external stores;
-- AI-generated recipe recommendations;
-- medical decision support;
-- hidden automatic formula correction.
+Do not claim diagnosis, treatment, or therapeutic effectiveness.
 
-PDF/image OCR may be designed as future architecture, but OCR output must always be a draft requiring manual confirmation.
+## 9. Planner discipline
 
----
+Start with the simplest deterministic planner that can generate a useful week.
 
-## 5. Mandatory domain model
+Advanced optimization must justify itself against a baseline.
 
-Use these concepts consistently. If the implementation needs different class/table names, keep semantics equivalent and document why.
+Planner behavior should be traceable through:
 
-### 5.1 Client
+- planner version;
+- constraints;
+- candidate pool;
+- rejected candidates;
+- rejection reasons;
+- scores;
+- selections;
+- warnings.
 
-Represents a customer.
+## 10. Shopping and retail
 
-Fields should support:
+Generic Shopping Engine comes before retailer integrations.
 
-- name;
-- phone;
-- address;
-- email optional;
-- notes;
-- allergies/preferences/special conditions;
-- status;
-- timestamps.
+Base flow:
 
-Client records may contain sensitive personal notes. Avoid exposing them in logs, debug output, or exported files unless the export explicitly includes clients.
+`MealPlan → RecipeIngredients → scale → aggregate → subtract Pantry → ShoppingList`
 
-### 5.2 RecipeTemplate
+Retail is a separate layer:
 
-A base recipe not tied to one client.
+`CanonicalIngredient → RetailSKU → PriceSnapshot`
 
-Examples:
+Do not merge canonical food concepts with retailer SKU concepts.
 
-- “Base day cream”
-- “Cleansing gel”
-- “Hair tonic”
+Retail integrations must be isolated behind connector abstractions.
 
-A template must not be mutated in a way that destroys historical meaning. Significant formula changes should create a new version.
+Never assume an API or cart integration exists without research.
 
-### 5.3 RecipeVersion
+## 11. Git workflow
 
-A specific version of a base recipe.
+`main` must remain working.
 
-Must support:
+Use small reviewable branches and PRs.
 
-- version number;
-- recipe template link;
-- ingredients/components;
-- percentages;
-- phases;
-- change reason;
-- status;
-- timestamps.
+One PR should have one clear goal.
 
-Orders and production batches must refer to the exact recipe version used.
+Before coding:
 
-### 5.4 ClientRecipe
+1. read required contracts;
+2. inspect existing implementation;
+3. inspect relevant tests;
+4. identify what can safely be reused;
+5. identify legacy assumptions that must not leak into the new domain.
 
-An individual formula adapted for a specific client.
+Each implementation task should define:
 
-Must link to:
+- Context
+- Goal
+- Scope
+- Non-goals
+- Architecture constraints
+- Data model impact
+- API impact
+- Frontend impact
+- Tests
+- Acceptance criteria
+- Risks / limitations
+- Required final report
 
-- client;
-- base recipe template if applicable;
-- source recipe version if applicable;
-- its own ingredient rows or override structure;
-- reason for individualization;
-- status;
-- timestamps.
+Use `N/A` where a section does not apply.
 
-Do not model individual recipes as plain notes. They are first-class production recipes.
+## 12. Testing
 
-### 5.5 RecipeIngredient
+Every domain change requires appropriate tests.
 
-A row in a recipe.
+Before considering a PR complete, run the relevant available:
 
-Must support:
-
-- ingredient reference;
-- phase;
-- percentage;
-- unit/input mode if needed;
-- order/sort index;
-- comments.
-
-Phases may include:
-
-- water phase;
-- oil phase;
-- active phase;
-- cooling phase;
-- preservative;
-- fragrance;
-- packaging/other if needed.
-
-### 5.6 Ingredient
-
-A material/component used in recipes.
-
-Must support:
-
-- name;
-- INCI optional;
-- category;
-- technological role;
-- base unit;
-- density for ml→g conversion;
-- default purchase price;
-- minimum stock threshold;
-- expiration alert threshold;
-- supplier optional;
-- status.
-
-### 5.7 IngredientLot
-
-A purchased lot/batch of an ingredient.
-
-Must support:
-
-- ingredient;
-- purchased quantity;
-- remaining quantity;
-- unit;
-- unit cost or total cost;
-- purchase date;
-- expiration date;
-- supplier optional;
-- lot number optional;
-- status.
-
-Lots are required because the same ingredient can have different expiration dates and prices.
-
-### 5.8 PackagingItem
-
-Packaging or consumable.
-
-Examples:
-
-- 30 ml jar;
-- 50 ml jar;
-- bottle;
-- cap;
-- pipette;
-- label;
-- box.
-
-Must support:
-
-- name;
-- category;
-- volume/capacity optional;
-- unit;
-- cost;
-- stock;
-- minimum stock;
-- status.
-
-### 5.9 StockMovement
-
-All inventory changes must be represented as movements.
-
-Types:
-
-- purchase/inbound;
-- production usage/outbound;
-- manual adjustment;
-- expiration write-off;
-- reversal;
-- correction.
-
-A movement must identify:
-
-- item type: ingredient lot or packaging;
-- quantity;
-- unit;
-- reason;
-- linked order or production batch when applicable;
-- timestamp;
-- source: manual/import/system.
-
-### 5.10 Order
-
-Represents a customer order.
-
-Must support:
-
-- client;
-- recipe template/version or client recipe;
-- target weight/volume;
-- selected packaging;
-- status;
-- sale price;
-- cost;
-- tax;
-- margin;
-- dates;
-- notes.
-
-Suggested statuses:
-
-- new;
-- waiting_for_materials;
-- ready_to_produce;
-- in_progress;
-- produced;
-- delivered;
-- cancelled;
-- archived.
-
-### 5.11 ProductionBatch
-
-Represents actual production.
-
-Created when the user confirms production.
-
-Must store:
-
-- order;
-- exact recipe/version/client recipe used;
-- final batch size;
-- calculated ingredients;
-- lots consumed;
-- packaging consumed;
-- component cost;
-- packaging cost;
-- total cost;
-- sale price;
-- tax;
-- margin;
-- timestamp.
-
-### 5.12 Alert
-
-System warning.
-
-Alert types:
-
-- low ingredient stock;
-- low packaging stock;
-- ingredient expiration soon;
-- ingredient expired;
-- missing materials for order;
-- missing packaging for order;
-- unknown density used in ml→g conversion;
-- recipe total not equal to 100%;
-- archived ingredient used in active recipe.
-
-Alerts must be human-readable and actionable.
-
-### 5.13 PurchaseSuggestion
-
-Automatically or manually created purchase list item.
-
-Must include:
-
-- target item;
-- recommended quantity;
-- reason;
-- status;
-- created timestamp.
-
-Reasons:
-
-- below minimum stock;
-- insufficient for order;
-- predicted shortage;
-- expiration replacement;
-- manually added.
-
-### 5.14 ImportSource and ImportDraft
-
-Imports must be safe.
-
-Never import directly into production tables without preview and confirmation.
-
-Required flow:
-
-1. file uploaded;
-2. rows parsed;
-3. user maps columns;
-4. system validates;
-5. system shows preview and errors;
-6. user confirms;
-7. data is applied;
-8. action is logged.
-
-Supported in MVP:
-
-- CSV;
-- Excel.
-
-Future:
-
-- PDF;
-- images;
-- OCR.
-
-OCR output must always become a draft, not trusted production data.
-
-### 5.15 AuditLog
-
-Record important business actions.
-
-Avoid logging sensitive full client notes unless necessary. Prefer structured summaries.
-
----
-
-## 6. Calculation rules
-
-### 6.1 Base unit
-
-Recipe calculation base is **grams**.
-
-### 6.2 Percent to grams
-
-```text
-ingredient_grams = final_batch_grams * ingredient_percent / 100
-```
-
-### 6.3 Recipe total validation
-
-Show clear status:
-
-- exactly 100%;
-- below 100%;
-- above 100%.
-
-Do not silently normalize percentages unless the user explicitly requests it.
-
-### 6.4 ml to grams
-
-```text
-grams = ml * density
-```
-
-If density is missing:
-
-- show warning;
-- allow temporary approximation only if product requirements permit;
-- mark calculation as approximate;
-- do not hide this warning in production confirmation.
-
-### 6.5 Stock consumption
-
-When consuming ingredient lots, prefer FEFO:
-
-```text
-first expiring, first out
-```
-
-Consume from lots with the nearest expiration date first, unless overridden by explicit user selection.
-
-### 6.6 Cost calculation
-
-Cost must be based on actually consumed lots where possible.
-
-```text
-component_cost = consumed_quantity * lot_unit_cost
-total_cost = component_cost + packaging_cost + other_costs
-tax = ROUND_MONEY(sale_price * tax_rate_percent / 100)
-margin = ROUND_MONEY(sale_price - total_cost - tax)
-margin_percent = ROUND_PERCENT(margin / sale_price * 100)
-```
-
-Tax rate is a backend-owned setting. Its contract was decided as `CR-007` and implemented by the merged `C1-I` slice; the durable contract is `docs/settings.md`. The calculation contract above was decided as `CR-008`; the durable contract is `docs/decisions/0012-c2-financial-calculation-snapshots.md`.
-
-Representation and rounding:
-
-- The setting is `default_tax_rate` and `tax_rate_percent` is a **percentage**, not a coefficient, in the range `0.00`–`100.00`. `6.00` means `6%`; a coefficient such as `0.06` would mean `0.06%`. The percentage is always divided by `100`.
-- `Decimal` only, never binary float at any step. Money quantum `0.01` and percentage quantum `0.01`, both `ROUND_HALF_UP`. Round only the final amount of each formula, never intermediate products.
-- Tax is **deducted from** gross revenue and is never added on top of the sale price.
-
-Availability:
-
-- A missing rate is **unavailable, not zero**: tax and any tax-dependent margin are unavailable, and no fabricated zero is displayed. An explicitly configured `0.00` is a real value that produces tax `0.00`.
-- Margin is unavailable when the sale price, the total cost, or the tax amount is unavailable. No missing input is ever silently converted to zero.
-- Margin percent is calculated only when margin is available **and** the sale price is greater than zero. When the sale price is zero, tax and margin may still be available, margin percent is `null`, and a non-blocking warning is returned.
-- Margin may be positive, zero, or **negative**. A negative margin is valid information and must never be clamped, and neither may a negative margin percent.
-
-Warnings and blocking:
-
-- Financial warnings are **non-blocking** and use the existing production-readiness warning mechanism and the existing `ProductionReadinessIssue` structure. Do not create a parallel warning system.
-- The existing codes `tax_rate_missing`, `sale_price_missing`, and `cost_data_missing` are preserved and never renamed. `CR-008` adds only `margin_percent_unavailable_zero_sale_price` and `tax_rate_invalid`. Do not introduce aliases and do not emit two warnings for one semantic condition.
-- A missing setting row and an invalid persisted value together form **`no valid configured tax-rate context`**. They stay distinguishable by warning code — `tax_rate_missing` versus `tax_rate_invalid`, and the invalid case must not also emit `tax_rate_missing` — but both return `tax_rate_percent = null` and `tax_rate_effective_at = null`, leave tax, margin, and margin percent unavailable, and must not produce an unhandled HTTP `500`. The raw invalid value is never returned as the authoritative rate and never reaches a readiness DTO, a confirmation request, or a `ProductionBatch` snapshot.
-- `can_produce` is governed only by recipe/formula readiness, stock, lots, packaging, order lifecycle, and existing physical safety rules. A financial gap never blocks physical production. **An absent or invalid tax-rate setting may make financial values unavailable, but it must not by itself block physical production.**
-
-History and ownership:
-
-- Changing the current setting **never recalculates historical production**, existing reports, prior audit records, or generated documents.
-- `ProductionBatch` financial snapshots are **immutable**: written once inside the production transaction and never recalculated. Reports read **snapshots only** and never apply the current rate retroactively.
-- Once C2 implements them, production and reports use the **persisted snapshots** on `ProductionBatch`, not the currently configured rate.
-
-Slice boundaries (`CR-008`):
-
-- C2 is split into `C2-I` (backend readiness estimate), `C2-II` (transactional snapshots), and `C2-III` (presentation and snapshot-backed reports).
-- The required-but-nullable confirmation tax context — `expected_tax_rate_percent` and `expected_tax_rate_effective_at`, where omission is **not** the same as explicit `null/null` — belongs to `C2-II`. `null/null` means readiness observed **no valid configured tax rate**, covering both a missing row and an invalid persisted value. `409 tax_rate_context_stale` fires on valid → changed valid, valid → missing, valid → invalid, missing → valid, and invalid → valid, but **not** on missing ↔ invalid.
-- Timestamp formats in C2: storage is `YYYY-MM-DD HH:MM:SS` UTC SQLite text (no `T`, no `Z`, no offset); the API and confirmation context use `YYYY-MM-DDTHH:MM:SSZ` (no fractional seconds, no arbitrary offsets). A non-canonical request timestamp is rejected with `422 invalid_tax_rate_context`, and the API never exposes the raw stored form.
-- Throughout C2, `frontend/src/main.ts` may not grow beyond `6399` lines, and the frontend performs no financial arithmetic.
-
-### 6.7 Production confirmation
-
-Before confirming production, show:
-
-- required ingredients;
-- required packaging;
-- stock sufficiency;
-- expiration warnings;
-- density warnings;
-- recipe total warning;
-- cost;
-- margin.
-
-Do not create a production batch or stock movement until user confirms.
-
----
-
-## 7. UI/UX rules
-
-The UI must be simple, human-readable, and not developer-centric.
-
-### 7.1 Navigation
-
-Main sections:
-
-- Dashboard;
-- Recipes;
-- Clients;
-- Orders;
-- Stock;
-- Packaging;
-- Purchases;
-- Production;
-- Reports;
-- Import;
-- Settings.
-
-Russian UI labels may be used:
-
-- Главная;
-- Рецепты;
-- Клиенты;
-- Заказы;
-- Запасы;
-- Тара;
-- Закупки;
-- Производство;
-- Отчеты;
-- Импорт;
-- Настройки.
-
-### 7.2 Dashboard must answer daily questions
-
-Dashboard should show:
-
-- what needs attention today;
-- orders in progress;
-- orders waiting for materials;
-- low stock;
-- expiring ingredients;
-- purchase list;
-- quick actions.
-
-### 7.3 Human-readable errors
-
-Bad:
-
-```text
-ValidationError: invalid float
-```
-
-Good:
-
-```text
-В строке 7 в поле “Остаток” указано “много”. Нужно число, например 30 или 30,5.
-```
-
-### 7.4 Always give next action
-
-If something is wrong, offer a next step:
-
-- add to purchase list;
-- add inbound stock;
-- edit recipe;
-- choose another lot;
-- cancel production;
-- save as draft.
-
-### 7.5 Avoid overload
-
-Do not expose internal IDs, stack traces, raw database errors, or technical names to the user.
-
-### 7.6 Desktop-first, mobile-aware
-
-MVP is desktop-first for MacBook.
-
-Do not build a mobile app unless scoped. But frontend layout should avoid decisions that make future mobile viewing impossible.
-
-### 7.7 Project UI/UX activation policy
-
-For frontend, visual, accessibility, responsive, or motion tasks, Codex must read and follow:
-
-- `docs/ui-ux-contract.md`;
-- `docs/ui-skill-policy.md`;
-- `.agents/skills/cosmetic-workshop-ui/SKILL.md`.
-
-Do not duplicate the full UI contract here. Canonical project documentation, architecture rules, domain rules, and scoped `AGENTS.md` files override third-party skills. Third-party UI/design skills are advisory only and cannot replace the approved product identity, change domain logic, change API/database contracts, add dependencies, or redesign unrelated routes without explicit scope.
-
----
-
-## 8. Architecture rules
-
-### 8.1 Separate layers
-
-Keep clear boundaries:
-
-- UI components;
-- API client;
-- backend routes/controllers;
-- domain services;
-- repositories/data access;
-- database models;
-- migration scripts;
-- tests.
-
-Do not put critical business logic only in frontend.
-
-### 8.2 Domain services
-
-Use domain services for:
-
-- recipe calculation;
-- ml→g conversion;
-- cost calculation;
-- stock availability checks;
-- FEFO lot selection;
-- production confirmation;
-- alert generation;
-- purchase suggestion generation;
-- import validation.
-
-### 8.3 Database migrations
-
-Every schema change must include a migration.
-
-Migrations must be safe for existing local user data.
-
-Do not drop columns/tables with business data unless explicitly approved and backed up.
-
-### 8.4 Data versioning
-
-Store app/schema version where useful. Future updates must be possible without manually editing the database.
-
-### 8.5 Backup/export
-
-Design with backup/export from the beginning.
-
-Do not store data in opaque formats that make user data inaccessible.
-
----
-
-## 9. Import rules
-
-### 9.1 Excel/CSV import
-
-MVP supports Excel/CSV.
-
-Importable entities:
-
-- clients;
-- ingredients;
-- ingredient lots;
-- packaging;
-- stock balances;
-- recipe templates if data is structured enough.
-
-### 9.2 Safe import flow
-
-Implement imports as drafts.
-
-Never write parsed data directly into core tables before user confirmation.
-
-### 9.3 Validation
-
-Validate:
-
-- required fields;
-- numeric fields;
-- units;
-- dates;
-- duplicate names;
-- unknown categories;
-- invalid percentages;
-- missing density when ml conversion is needed.
-
-### 9.4 Error messages
-
-Import errors must identify:
-
-- row number;
-- column;
-- problematic value;
-- expected format;
-- suggested fix.
-
----
-
-## 10. Security and privacy
-
-### 10.1 Sensitive data
-
-Client notes may include allergies, skin conditions, preferences, and personal details.
-
-Do not log sensitive notes verbatim.
-
-Do not include sensitive fields in debug output.
-
-### 10.2 Local data safety
-
-Provide or preserve:
-
-- backup;
-- export;
-- restore path;
-- clear data location documentation.
-
-### 10.3 Password
-
-Password protection is optional for MVP but architecture should not prevent adding it later.
-
-Do not implement weak or fake security and claim it is safe.
-
----
-
-## 11. Testing requirements
-
-Each PR must include relevant tests where practical.
-
-Mandatory tests for domain logic:
-
-- percentage to grams calculation;
-- ml to grams conversion with density;
-- missing density warning;
-- recipe total validation;
-- cost calculation;
-- tax/margin calculation;
-- FEFO lot selection;
-- insufficient stock detection;
-- stock movement creation;
-- production confirmation creates batch and movements;
-- production does not happen without confirmation;
-- alert generation;
-- purchase suggestion generation;
-- import validation.
-
-Frontend tests are encouraged for critical flows if test tooling exists.
-
-At minimum, manually verify key user flows and document verification in the PR summary.
-
----
-
-## 12. PR and Codex workflow
-
-### 12.1 One PR = one roadmap step or one narrow slice
-
-Do not combine unrelated work.
-
-Examples of good PRs:
-
-- “Add ingredient and lot models”
-- “Add recipe calculation service”
-- “Add client recipe model and UI”
-- “Add production confirmation flow”
-- “Add Excel import drafts”
-
-Bad PRs:
-
-- “Build the whole app”
-- “Add cloud sync, PDF, clients, inventory and analytics”
-- “Refactor everything”
-
-### 12.2 Before coding
-
-For every task:
-
-1. inspect existing files;
-2. identify architecture already present;
-3. reuse existing patterns;
-4. avoid duplicate services/helpers;
-5. state assumptions in PR summary if needed.
-
-### 12.3 During coding
-
-- keep changes scoped;
-- prefer small domain services over giant route handlers;
-- preserve existing behavior;
-- avoid hidden breaking changes;
-- add migrations with models;
-- keep UI labels clear;
-- add tests for business logic.
-
-### 12.4 After coding
-
-Run available checks:
-
-- formatter;
-- linter;
-- type checks;
 - unit tests;
-- app startup check if possible.
+- integration tests;
+- frontend build/type checks;
+- smoke checks where applicable.
 
-If a check cannot be run, state why.
+If a check cannot be run, say exactly why.
 
-### 12.5 PR summary format
+Never hide a failing baseline by deleting or weakening tests without explicit justification.
 
-Use this format:
+## 13. Schema and migrations
 
-```markdown
-## Summary
-- ...
+Every persisted schema change requires an explicit migration strategy.
 
-## Scope
-- ...
+Existing user data must not be silently destroyed.
 
-## Data model / migrations
-- ...
+During the migration period, legacy schema may coexist with new FamilyFoodOS schema until the relevant bounded context is replaced and verified.
 
-## User-visible changes
-- ...
+## 14. Imports and ingestion
 
-## Tests
-- ...
+Never allow untrusted parsed data to silently become production truth.
 
-## Risks / limitations
-- ...
+Use drafts, validation, review or explicit trusted-source policies as defined by the FamilyFoodOS ingestion architecture.
 
-## Follow-up
-- ...
-```
+Maintain provenance.
 
----
+## 15. Security
 
-## 13. Roadmap alignment
+This repository is public.
 
-Implement in this order unless explicitly instructed otherwise.
+Never commit:
 
-### Phase 0 — Project foundation
+- passwords;
+- API keys;
+- tokens;
+- secrets;
+- `.env`;
+- private credentials;
+- real user personal data;
+- real health-related user records;
+- local databases;
+- local development environments.
 
-- project skeleton;
-- backend API;
-- frontend shell;
-- local database;
-- migrations;
-- settings;
-- audit log;
-- backup/export foundation.
+Use placeholders and documented environment-variable names.
 
-### Phase 1 — Stock foundation
+## 16. Agent roles
 
-- ingredients;
-- ingredient lots;
-- packaging;
-- stock movements;
-- expiration dates;
-- minimum stock thresholds.
+When parallel work is useful, use bounded roles:
 
-### Phase 2 — Recipe core
+- Orchestrator — scope, architecture, dependency and merge order;
+- Research — evidence, datasets, standards, retailers;
+- Domain — models, nutrition, planner, shopping, pantry;
+- Data — recipes, ingredients, ingestion, provenance;
+- Frontend — PWA/mobile UX and accessibility;
+- QA/Reviewer — adversarial review and regressions.
 
-- recipe templates;
-- recipe versions;
-- recipe ingredients;
-- percentage calculation;
-- ml→g density conversion;
-- cost estimate;
-- recipe validation.
+Only one Orchestrator owns cross-domain architectural decisions.
 
-### Phase 3 — Clients and individual formulas
+## 17. Documentation
 
-- clients;
-- client recipes;
-- individual recipe creation from template/version;
-- client recipe history.
+If a decision must survive the current session, persist it.
 
-### Phase 4 — Orders and production
+Canonical durable knowledge belongs under `docs/`.
 
-- orders;
-- production readiness check;
-- production confirmation;
-- automatic stock write-off;
-- production batch;
-- order statuses.
+Execution state belongs under `state/`.
 
-### Phase 5 — Alerts and purchases
+Use:
 
-- low stock alerts;
-- expiration alerts;
-- insufficient materials alerts;
-- purchase suggestions;
-- simple usage-based forecast.
+- `state/current-focus.md` — exact current work;
+- `state/progress.md` — verified completed work;
+- `state/handoff.md` — next-session handoff.
 
-### Phase 6 — Import/export
+Do not use chat history as the sole durable source of an implementation decision.
 
-- Excel/CSV import;
-- import drafts;
-- column mapping;
-- validation;
-- exports.
+## 18. Legacy scoped AGENTS files
 
-### Phase 7 — Reports and PDF
+Nested `AGENTS.md` files inherited from CosmeticWorkshopOS may still contain legacy product rules.
 
-- basic reports;
-- simple PDF recipe/order/purchase list;
-- UI polish;
-- user guide.
+Until each is migrated:
 
-### Phase 8 — Future extensions
+- inspect the applicable nested file before work;
+- treat cosmetic-domain requirements in it as legacy unless the current FamilyFoodOS migration step explicitly preserves them;
+- preserve generic engineering and safety constraints where compatible;
+- flag a conflict instead of guessing.
 
-- cloud backup/sync;
-- phone viewing;
-- OCR import;
-- attachments;
-- certification documents;
-- advanced analytics;
-- branded PDF/labels.
+Updating scoped `AGENTS.md` files is part of the migration and should be done deliberately.
 
----
+## 19. Current implementation order
 
-## 14. Acceptance criteria for MVP
+Follow:
 
-MVP is acceptable only when the user can:
+`docs/family-food/migration-plan.md`
 
-1. create ingredients;
-2. create ingredient lots with expiration dates;
-3. create packaging records;
-4. add stock movements;
-5. create a client;
-6. create a base recipe;
-7. create recipe versions;
-8. create an individual client recipe;
-9. calculate grams from percentages;
-10. convert ml to grams with density;
-11. see warnings for missing density;
-12. create an order;
-13. check production readiness;
-14. confirm production;
-15. automatically write off ingredients and packaging;
-16. see updated stock;
-17. see expiration and low-stock alerts;
-18. generate purchase suggestions;
-19. see order cost, tax, margin;
-20. import data from Excel/CSV through preview and confirmation;
-21. export or back up data;
-22. view action history;
-23. use the app without developer help for normal daily operations.
+unless a later explicit decision changes it.
 
----
+Do not jump ahead to AI, retailer scraping, complex optimization, native apps or SaaS infrastructure before their migration gate.
 
-## 15. Hard constraints
+## 20. Completion mindset
 
-Never:
+The goal is not to demonstrate sophisticated technology.
 
-- silently mutate historical recipe versions;
-- silently normalize recipe percentages;
-- silently use ml as grams without warning;
-- directly import OCR data into production tables;
-- delete business records without audit;
-- skip migrations for schema changes;
-- put production-critical logic only in frontend;
-- create cloud dependency in local MVP without explicit scope;
-- store secrets or sensitive client notes in logs;
-- expose raw stack traces to user;
-- implement “AI recipe advice” as if it were professional cosmetic safety guidance.
+The goal is to build a system a normal household can repeatedly trust to plan realistic food, shopping and preparation.
 
-Always:
+Every implementation choice should improve at least one of:
 
-- keep formulas traceable;
-- preserve historical production data;
-- log important actions;
-- show human-readable warnings;
-- require confirmation for production and imports;
-- prefer archive/version/reversal over destructive edits;
-- design for future updates and migration.
-
----
-
-## 16. Suggested repository docs
-
-Maintain these files when the project grows:
-
-```text
-AGENTS.md
-README.md
-docs/product-spec.md
-docs/roadmap.md
-docs/architecture.md
-docs/domain-model.md
-docs/ui-ux-guidelines.md
-docs/import-format.md
-docs/backup-and-restore.md
-```
-
-Keep `AGENTS.md` as the operating contract for Codex.
-
----
-
-## 17. Product motto
-
-The app should help the maker answer, every day:
-
-```text
-What should I make?
-For whom?
-By which formula?
-Do I have enough materials?
-What will expire soon?
-What should I buy?
-What will it cost?
-What will I earn?
-What exactly happened in the system?
-```
+- plan quality;
+- usability;
+- safety;
+- reproducibility;
+- cost accuracy;
+- preparation effort;
+- maintainability;
+- repeat weekly use.
