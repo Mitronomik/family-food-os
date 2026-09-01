@@ -37,4 +37,10 @@ Lifecycle and history rules:
 - Before compacting an active document, preserve the complete pre-compaction version under `docs/history/` and update the history index.
 - Git history alone is not sufficient project memory for this agent-driven repository.
 - When lifecycle changes, update the active lifecycle profile, implementation plan, compact state files, change-request ledger when applicable, and every active status surface or its explicit supersession map in the same PR.
-- Run `python3 scripts/check_documentation_lifecycle.py` after lifecycle documentation changes.
+- `scripts/check_documentation_lifecycle.py` is inherited CosmeticWorkshopOS
+  source-product verification tooling. Use it only when a task explicitly
+  investigates or validates the preserved D4/D5 historical lifecycle contract;
+  it is not a mandatory FamilyFoodOS documentation or PR gate. Current
+  FamilyFoodOS validation follows root `AGENTS.md`, canonical
+  `docs/family-food/` documents, relevant current ADRs, applicable scoped
+  `AGENTS.md` files, and checks appropriate to the current task.
