@@ -169,9 +169,18 @@ Acceptance evidence:
 - unsupported fields, including fake `owner_id`, are rejected;
 - rollback, no-partial-state, independent-read visibility, UUID/UTC/Decimal
   round trips and foreign-key enforcement are covered by tests;
-- targeted Household/persistence/migration suite: `142 passed`;
-- full backend + launcher regression: `2647 passed`;
+- correction-pass terminality tests prove repositories are revoked after
+  successful and failed commit/rollback attempts and later UoWs are clean;
+- non-finite, extreme-exponent and negative sub-cent Decimal input follows
+  stable domain/API validation instead of leaking `decimal.InvalidOperation`;
+- future birth-date validation uses an injected aware clock and the persisted
+  Household timezone rather than process-local time;
+- PR2-C correction-pass targeted suite: `196 passed`;
+- full backend + launcher regression: `2684 passed`;
 - Ruff checks, Ruff formatting checks and `git diff --check`: passed.
+
+Correction implementation is ready for final review. No final adversarial
+`ACCEPT` has been issued yet.
 
 Deliberately deferred:
 
@@ -182,10 +191,10 @@ Deliberately deferred:
   planner/nutrition semantics;
 - controlled vocabularies and calculation meaning for activity level and goal.
 
-## Next milestone
+## Milestone gated after PR2-C final acceptance
 
 `PR3 — FoodIngredient Catalogue`
 
-Do not begin PR3 until PR2-C is reviewed and accepted. PR3 owns the canonical
-platform food catalogue; it must not merge `FoodIngredient` with `RetailSKU` or
-start later Nutrition, Recipe, Retail, Planner or AI work.
+PR3 is not authorized until PR2-C receives final review and acceptance. PR3
+owns the canonical platform food catalogue; it must not merge `FoodIngredient`
+with `RetailSKU` or start later Nutrition, Recipe, Retail, Planner or AI work.

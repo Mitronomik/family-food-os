@@ -3,6 +3,7 @@
 from types import TracebackType
 
 from sqlalchemy.engine import Engine
+from sqlalchemy.exc import DBAPIError, IntegrityError
 
 from app.persistence.sqlalchemy_core.household_repositories import (
     SqlAlchemyHouseholdMemberRepository,
@@ -11,6 +12,10 @@ from app.persistence.sqlalchemy_core.household_repositories import (
 from app.persistence.sqlalchemy_core.uow import (
     SqlAlchemyReadOnlyScope,
     SqlAlchemyUnitOfWork,
+)
+from app.services.household_contracts import (
+    HouseholdPersistenceConflictError,
+    HouseholdPersistenceError,
 )
 
 
@@ -40,12 +45,28 @@ class SqlAlchemyHouseholdUnitOfWork:
         return self
 
     def commit(self) -> None:
-        self._scope.commit()
-        self._revoke_repositories()
+        try:
+            self._scope.commit()
+        except IntegrityError as exc:
+            raise HouseholdPersistenceConflictError(
+                "Household transaction commit conflicted with persisted state."
+            ) from exc
+        except DBAPIError as exc:
+            raise HouseholdPersistenceError(
+                "Household transaction commit failed at the persistence boundary."
+            ) from exc
+        finally:
+            self._revoke_repositories()
 
     def rollback(self) -> None:
-        self._scope.rollback()
-        self._revoke_repositories()
+        try:
+            self._scope.rollback()
+        except DBAPIError as exc:
+            raise HouseholdPersistenceError(
+                "Household transaction rollback failed at the persistence boundary."
+            ) from exc
+        finally:
+            self._revoke_repositories()
 
     def __exit__(
         self,

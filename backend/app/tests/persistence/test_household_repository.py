@@ -5,6 +5,7 @@ from decimal import Decimal
 from uuid import uuid4
 
 import pytest
+from sqlalchemy import Column, ForeignKey, Integer, MetaData, Table, event
 
 from app.db.config import DatabaseConfig
 from app.db.migrations import apply_migrations
@@ -18,12 +19,37 @@ from app.services.household_contracts import HouseholdPersistenceConflictError
 
 NOW = datetime(2026, 9, 1, 10, 0, 0, 123456, tzinfo=timezone.utc)
 
+terminality_metadata = MetaData()
+deferred_parent_table = Table(
+    "household_uow_deferred_parent",
+    terminality_metadata,
+    Column("id", Integer, primary_key=True),
+)
+deferred_child_table = Table(
+    "household_uow_deferred_child",
+    terminality_metadata,
+    Column("id", Integer, primary_key=True),
+    Column(
+        "parent_id",
+        Integer,
+        ForeignKey(
+            deferred_parent_table.c.id,
+            deferrable=True,
+            initially="DEFERRED",
+        ),
+        nullable=False,
+    ),
+)
+
 
 @pytest.fixture
 def household_engine(tmp_path):
     config = DatabaseConfig(path=tmp_path / "households.sqlite")
     apply_migrations(config)
     engine = create_sqlite_engine(config)
+    with engine.begin() as connection:
+        deferred_parent_table.create(connection)
+        deferred_child_table.create(connection)
     try:
         yield config, engine
     finally:
@@ -207,3 +233,108 @@ def test_read_scope_has_no_commit_operation(household_engine):
 
     with SqlAlchemyHouseholdReadScope(engine) as scope:
         assert not hasattr(scope, "commit")
+
+
+def assert_household_repositories_revoked(scope):
+    with pytest.raises(RuntimeError, match="not active"):
+        _ = scope.households
+    with pytest.raises(RuntimeError, match="not active"):
+        _ = scope.members
+
+
+def test_successful_commit_revokes_household_repositories(household_engine):
+    _, engine = household_engine
+    expected = household()
+    scope = SqlAlchemyHouseholdUnitOfWork(engine)
+
+    with scope:
+        retained_connection = scope._scope.adapter_connection
+        scope.households.add_household(expected)
+        scope.commit()
+        assert retained_connection.closed
+        assert_household_repositories_revoked(scope)
+
+    with SqlAlchemyHouseholdReadScope(engine) as read_scope:
+        assert read_scope.households.get_household(expected.id) == expected
+
+
+def test_successful_rollback_revokes_household_repositories(household_engine):
+    _, engine = household_engine
+    discarded = household()
+    scope = SqlAlchemyHouseholdUnitOfWork(engine)
+
+    with scope:
+        retained_connection = scope._scope.adapter_connection
+        scope.households.add_household(discarded)
+        scope.rollback()
+        assert retained_connection.closed
+        assert_household_repositories_revoked(scope)
+
+    with SqlAlchemyHouseholdReadScope(engine) as read_scope:
+        assert read_scope.households.get_household(discarded.id) is None
+
+
+def test_failed_commit_revokes_repositories_and_later_uow_is_clean(
+    household_engine,
+):
+    _, engine = household_engine
+    scope = SqlAlchemyHouseholdUnitOfWork(engine)
+
+    with pytest.raises(HouseholdPersistenceConflictError) as exc_info:
+        with scope:
+            retained_connection = scope._scope.adapter_connection
+            retained_connection.execute(
+                deferred_child_table.insert().values(id=1, parent_id=999)
+            )
+            scope.commit()
+
+    assert exc_info.value.__cause__ is not None
+    assert retained_connection.closed
+    assert_household_repositories_revoked(scope)
+
+    expected = household()
+    with SqlAlchemyHouseholdUnitOfWork(engine) as later_scope:
+        later_scope.households.add_household(expected)
+        later_scope.commit()
+    with SqlAlchemyHouseholdReadScope(engine) as read_scope:
+        assert read_scope.households.get_household(expected.id) == expected
+
+
+def test_failed_rollback_revokes_repositories_and_later_uow_is_clean(
+    household_engine,
+):
+    _, engine = household_engine
+    scope = SqlAlchemyHouseholdUnitOfWork(engine)
+    discarded = household()
+
+    def fail_rollback(connection):
+        del connection
+        raise RuntimeError("simulated rollback failure")
+
+    with pytest.raises(RuntimeError, match="simulated rollback failure"):
+        with scope:
+            retained_connection = scope._scope.adapter_connection
+            scope.households.add_household(discarded)
+            event.listen(engine, "rollback", fail_rollback, once=True)
+            scope.rollback()
+
+    assert retained_connection.closed
+    assert_household_repositories_revoked(scope)
+
+    expected = household()
+    with SqlAlchemyHouseholdUnitOfWork(engine) as later_scope:
+        later_scope.households.add_household(expected)
+        later_scope.commit()
+    with SqlAlchemyHouseholdReadScope(engine) as read_scope:
+        assert read_scope.households.get_household(discarded.id) is None
+        assert read_scope.households.get_household(expected.id) == expected
+
+
+def test_inactive_commit_programming_error_is_not_wrapped(household_engine):
+    _, engine = household_engine
+    scope = SqlAlchemyHouseholdUnitOfWork(engine)
+
+    with pytest.raises(RuntimeError, match="no active transaction"):
+        scope.commit()
+
+    assert_household_repositories_revoked(scope)

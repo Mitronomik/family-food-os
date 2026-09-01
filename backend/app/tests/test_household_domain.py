@@ -94,6 +94,24 @@ def test_household_rejects_negative_budget_and_float_budget():
     assert floating.value.issue.code == DomainIssueCode.FLOAT_NOT_ALLOWED
 
 
+@pytest.mark.parametrize("value", ["NaN", "Infinity", "-Infinity", "1E+999999"])
+def test_household_rejects_non_finite_or_unquantizable_budget(value):
+    with pytest.raises(DomainValidationError) as exc_info:
+        household(default_weekly_budget=value)
+
+    assert exc_info.value.issue.code == DomainIssueCode.INVALID_DECIMAL
+    assert exc_info.value.issue.field == "default_weekly_budget"
+
+
+@pytest.mark.parametrize("value", ["-0.004", "-0.00"])
+def test_household_rejects_negative_budget_before_rounding(value):
+    with pytest.raises(DomainValidationError) as exc_info:
+        household(default_weekly_budget=value)
+
+    assert exc_info.value.issue.code == DomainIssueCode.NEGATIVE_MONEY
+    assert exc_info.value.issue.value == value
+
+
 def test_valid_member_uses_explicit_measurement_units_and_birth_date():
     household_id = uuid4()
 
@@ -123,10 +141,23 @@ def test_member_rejects_invalid_physical_measurements(field, value, code):
     assert exc_info.value.issue.field == field
 
 
-def test_member_rejects_future_birth_date_and_empty_profile_codes():
-    with pytest.raises(DomainValidationError) as future:
-        member(uuid4(), birth_date=date.today() + timedelta(days=1))
-    assert future.value.issue.code == DomainIssueCode.INVALID_DATE
+@pytest.mark.parametrize("field", ["height_cm", "weight_kg"])
+@pytest.mark.parametrize("value", ["NaN", "Infinity", "-Infinity", "1E+999999"])
+def test_member_rejects_non_finite_or_unquantizable_measurements(field, value):
+    with pytest.raises(DomainValidationError) as exc_info:
+        member(uuid4(), **{field: value})
+
+    assert exc_info.value.issue.code == DomainIssueCode.INVALID_DECIMAL
+    assert exc_info.value.issue.field == field
+
+
+def test_member_birth_date_validation_is_pure_and_profile_codes_still_validate():
+    future_calendar_date = date(2999, 1, 1)
+
+    assert (
+        member(uuid4(), birth_date=future_calendar_date).birth_date
+        == future_calendar_date
+    )
 
     with pytest.raises(DomainValidationError) as activity:
         member(uuid4(), activity_level=" ")

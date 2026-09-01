@@ -28,13 +28,20 @@ SQLAlchemy Core → SQLite path. Migration `0022_household_foundation` adds the
 new tables beside every inherited table and leaves the custom migration runner
 as the sole SQLite schema authority.
 
-Final evidence:
+Correction-pass evidence:
 
-- targeted Household/persistence/migration suite: `142 passed`;
-- backend + launcher regression: `2647 passed`;
+- targeted Household/domain/persistence/API/migration suite: `196 passed`;
+- backend + launcher regression: `2684 passed`;
 - Ruff checks and formatting checks: passed;
 - `git diff --check`: passed;
-- readiness: `READY FOR PR2-C REVIEW`.
+- readiness: `READY FOR PR2-C FINAL REVIEW`;
+- final adversarial `ACCEPT`: not yet issued.
+
+The correction pass revokes Household repositories after every terminal UoW
+attempt, maps expected commit-time database failures to stable Household
+persistence errors, makes Decimal validation total for hostile numeric input,
+and validates future birth dates from an injected aware clock in the persisted
+Household timezone.
 
 ## Canonical reading order
 
@@ -65,12 +72,13 @@ Before continuing:
     - `backend/app/db/migrations.py`
     - its migration-chain tests
 
-## Next authorized milestone
+## Milestone gated after PR2-C final acceptance
 
 `PR3 — FoodIngredient Catalogue`
 
-Do not begin PR3 until PR2-C is reviewed and accepted. PR3 owns the canonical
-platform `FoodIngredient` catalogue and must keep it distinct from RetailSKU.
+PR3 is not authorized until PR2-C receives final review and acceptance. PR3
+owns the canonical platform `FoodIngredient` catalogue and must keep it
+distinct from RetailSKU.
 
 ## Persistence constraints
 

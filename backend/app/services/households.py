@@ -11,6 +11,7 @@ from app.domain.households import (
     HouseholdState,
     update_household,
     update_household_member,
+    validate_birth_date_not_future,
 )
 from app.services.household_contracts import HouseholdReadScope, HouseholdUnitOfWork
 
@@ -115,23 +116,29 @@ class HouseholdService:
         weight_kg: Decimal | int | str | None = None,
     ) -> HouseholdMember:
         now = self._clock()
-        member = HouseholdMember(
-            id=self._id_factory(),
-            household_id=household_id,
-            name=name,
-            active=active,
-            birth_date=birth_date,
-            sex=sex,
-            height_cm=height_cm,  # type: ignore[arg-type]
-            weight_kg=weight_kg,  # type: ignore[arg-type]
-            activity_level=activity_level,
-            goal=goal,
-            created_at=now,
-            updated_at=now,
-        )
         with self._write_scope_factory() as scope:
-            if scope.households.get_household(household_id) is None:
+            household = scope.households.get_household(household_id)
+            if household is None:
                 raise HouseholdNotFoundError(household_id)
+            validate_birth_date_not_future(
+                birth_date,
+                household_timezone=household.timezone,
+                reference_instant=now,
+            )
+            member = HouseholdMember(
+                id=self._id_factory(),
+                household_id=household_id,
+                name=name,
+                active=active,
+                birth_date=birth_date,
+                sex=sex,
+                height_cm=height_cm,  # type: ignore[arg-type]
+                weight_kg=weight_kg,  # type: ignore[arg-type]
+                activity_level=activity_level,
+                goal=goal,
+                created_at=now,
+                updated_at=now,
+            )
             scope.members.add_member(member)
             scope.commit()
         return member
@@ -153,15 +160,23 @@ class HouseholdService:
                 "At least one supported HouseholdMember field must be supplied."
             )
         with self._write_scope_factory() as scope:
-            if scope.households.get_household(household_id) is None:
+            household = scope.households.get_household(household_id)
+            if household is None:
                 raise HouseholdNotFoundError(household_id)
             member = scope.members.get_member(household_id, member_id)
             if member is None:
                 raise HouseholdMemberNotFoundError(member_id)
+            now = self._clock()
+            if "birth_date" in changes:
+                validate_birth_date_not_future(
+                    changes["birth_date"],
+                    household_timezone=household.timezone,
+                    reference_instant=now,
+                )
             updated = update_household_member(
                 member,
                 changes,
-                updated_at=self._clock(),
+                updated_at=now,
             )
             scope.members.update_member(updated)
             scope.commit()

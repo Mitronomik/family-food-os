@@ -7,7 +7,7 @@ from typing import Mapping
 from uuid import UUID
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
-from app.domain.decimal_utils import quantize_decimal, quantize_money
+from app.domain.decimal_utils import parse_decimal, quantize_decimal, quantize_money
 from app.domain.errors import DomainIssue, DomainIssueCode, DomainValidationError
 
 HEIGHT_CM_QUANT = Decimal("0.1")
@@ -91,16 +91,16 @@ def normalize_timezone(value: object) -> str:
 def normalize_budget(value: object) -> Decimal | None:
     if value is None:
         return None
-    budget = quantize_money(value, field="default_weekly_budget")  # type: ignore[arg-type]
-    if budget < 0:
+    parsed = parse_decimal(value, field="default_weekly_budget")  # type: ignore[arg-type]
+    if parsed.is_signed():
         raise _issue(
             DomainIssueCode.NEGATIVE_MONEY,
             "Default weekly budget must not be negative.",
             field="default_weekly_budget",
-            value=budget,
+            value=parsed,
             next_action="Provide zero, a positive decimal amount, or null.",
         )
-    return budget
+    return quantize_money(parsed, field="default_weekly_budget")
 
 
 def _normalize_measurement(
@@ -150,7 +150,7 @@ def normalize_weight_kg(value: object) -> Decimal | None:
     )
 
 
-def normalize_birth_date(value: date | None) -> date | None:
+def normalize_birth_date(value: object) -> date | None:
     if value is None:
         return None
     if not isinstance(value, date) or isinstance(value, datetime):
@@ -161,15 +161,31 @@ def normalize_birth_date(value: date | None) -> date | None:
             value=value,
             next_action="Provide an ISO date such as 1990-05-20 or null.",
         )
-    if value > date.today():
+    return value
+
+
+def validate_birth_date_not_future(
+    value: object, *, household_timezone: str, reference_instant: datetime
+) -> None:
+    birth_date = normalize_birth_date(value)
+    if birth_date is None:
+        return
+    local_date = (
+        normalize_utc_instant(reference_instant, field="reference_instant")
+        .astimezone(ZoneInfo(normalize_timezone(household_timezone)))
+        .date()
+    )
+    if birth_date > local_date:
         raise _issue(
             DomainIssueCode.INVALID_DATE,
-            "Birth date must not be in the future.",
+            "Birth date must not be in the future for the Household timezone.",
             field="birth_date",
-            value=value,
-            next_action="Provide a past or current calendar date.",
+            value=birth_date,
+            next_action=(
+                f"Provide a date on or before {local_date.isoformat()} "
+                f"in {household_timezone}."
+            ),
         )
-    return value
 
 
 def normalize_active(value: object) -> bool:

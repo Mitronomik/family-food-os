@@ -186,6 +186,50 @@ def test_float_money_and_measurements_are_rejected(household_api):
     assert measurement.status_code == 422
 
 
+@pytest.mark.parametrize("value", ["NaN", "Infinity", "-Infinity", "1E+999999"])
+def test_malformed_budget_is_http_safe_validation(household_api, value):
+    response = household_api.post(
+        "/api/households",
+        json={
+            "name": "Home",
+            "timezone": "UTC",
+            "default_weekly_budget": value,
+        },
+    )
+
+    assert response.status_code == 422
+
+
+def test_negative_sub_cent_budget_is_rejected_before_rounding(household_api):
+    response = household_api.post(
+        "/api/households",
+        json={
+            "name": "Home",
+            "timezone": "UTC",
+            "default_weekly_budget": "-0.004",
+        },
+    )
+
+    assert response.status_code == 422
+    assert response.json()["detail"]["code"] == "negative_money"
+    assert response.json()["detail"]["value"] == "-0.004"
+
+
+@pytest.mark.parametrize("field", ["height_cm", "weight_kg"])
+@pytest.mark.parametrize("value", ["NaN", "Infinity", "-Infinity"])
+def test_non_finite_member_measurement_is_http_safe_validation(
+    household_api, field, value
+):
+    household = create_household(household_api)
+
+    response = household_api.post(
+        f"/api/households/{household['id']}/members",
+        json={**member_payload("Anna"), field: value},
+    )
+
+    assert response.status_code == 422
+
+
 def test_existing_legacy_client_api_remains_available(household_api):
     response = household_api.get("/api/clients")
 

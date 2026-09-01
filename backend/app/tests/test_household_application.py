@@ -4,6 +4,7 @@ from uuid import UUID, uuid4
 
 import pytest
 
+from app.domain.errors import DomainIssueCode, DomainValidationError
 from app.domain.households import Household, HouseholdMember
 from app.services.households import (
     HouseholdMemberNotFoundError,
@@ -188,3 +189,44 @@ def test_application_member_lookup_never_crosses_household_boundary():
         application.update_household_member(second.id, member.id, {"active": False})
 
     assert store.members[(first.id, member.id)].active is True
+
+
+def test_birth_date_uses_injected_clock_and_household_local_date():
+    store = MemoryStore()
+    scopes = []
+    household_id, member_id = uuid4(), uuid4()
+    ids = iter([household_id, member_id])
+    fixed_clock = datetime(2026, 9, 1, 21, 30, tzinfo=timezone.utc)
+    application = HouseholdService(
+        write_scope_factory=lambda: MemoryWriteScope(store, scopes),
+        read_scope_factory=lambda: MemoryReadScope(store),
+        id_factory=lambda: next(ids),
+        clock=lambda: fixed_clock,
+    )
+    household = application.create_household(
+        name="Moscow Home", timezone_name="Europe/Moscow"
+    )
+
+    accepted = application.add_household_member(
+        household.id,
+        name="Boundary Member",
+        activity_level="moderate",
+        goal="maintain",
+        birth_date=datetime(2026, 9, 2).date(),
+    )
+
+    assert accepted.birth_date == datetime(2026, 9, 2).date()
+    with pytest.raises(DomainValidationError) as exc_info:
+        application.update_household_member(
+            household.id,
+            accepted.id,
+            {"birth_date": datetime(2026, 9, 3).date()},
+        )
+    assert exc_info.value.issue.code == DomainIssueCode.INVALID_DATE
+    assert exc_info.value.issue.value == "2026-09-03"
+    assert exc_info.value.issue.next_action is not None
+    assert "2026-09-02" in exc_info.value.issue.next_action
+    assert (
+        store.members[(household.id, accepted.id)].birth_date
+        == datetime(2026, 9, 2).date()
+    )

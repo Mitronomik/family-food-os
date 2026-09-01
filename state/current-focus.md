@@ -67,15 +67,22 @@ Household-scoped; there is no `owner_id`, Auth shortcut or Client reuse.
 
 Verification:
 
-- targeted Household/persistence/migration suite: `142 passed`;
-- full backend + launcher regression: `2647 passed`;
+- PR2-C correction-pass targeted suite: `196 passed`;
+- full backend + launcher regression: `2684 passed`;
 - Ruff checks and formatting checks: passed;
 - `git diff --check`: passed.
 
-## Next authorized task after PR2-C acceptance
+The correction pass preserves terminal Household UoW semantics after successful
+and failed commit/rollback attempts, rejects non-finite or unquantizable Decimal
+input through stable validation, and evaluates future birth dates against an
+injected clock in the persisted Household timezone. A final adversarial review
+has not yet issued `ACCEPT`.
+
+## Milestone gated after PR2-C final acceptance
 
 `PR3 — FoodIngredient Catalogue`
 
-The immediate next action is PR2-C review/merge. Do not begin PR3 until PR2-C is
-accepted. PR3 must introduce the canonical platform `FoodIngredient` catalogue
-without merging it with RetailSKU or beginning Nutrition, Recipe, Retail or AI.
+The immediate next action remains PR2-C final review/acceptance. PR3 is not
+authorized until that acceptance is issued. It must introduce the canonical
+platform `FoodIngredient` catalogue without merging it with RetailSKU or
+beginning Nutrition, Recipe, Retail or AI.
