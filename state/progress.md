@@ -116,11 +116,36 @@ Completion evidence:
 - documentation-only verification passed;
 - no runtime, schema, migration or dependency changes occurred in PR2-A.
 
+## PR2-B — Persistence Foundation
+
+Status: **COMPLETE**
+
+Acceptance evidence:
+
+- synchronous SQLAlchemy 2.x Core foundation implemented with dependency
+  constraint `SQLAlchemy>=2.0.52,<2.1`;
+- driver-independent application Unit of Work contract and SQLite SQLAlchemy
+  adapter established;
+- explicit transaction ownership implemented; commit and rollback are terminal
+  and immediately revoke the active connection;
+- failed commit or rollback cannot contaminate a later pooled command;
+- SQLite foreign keys and structured, special-character-safe path handling are
+  enforced by the adapter;
+- identifiers are application-generated `uuid.UUID` values using UUIDv4 and
+  generic SQLAlchemy `Uuid` persistence;
+- UTC-normalizing instant persistence primitive established;
+- the custom migration runner remains the sole SQLite schema authority;
+- no production food tables, food migrations or runtime rewiring were added;
+- adversarial final review: `PR2-B FINAL REVIEW: ACCEPT`;
+- readiness decision: `READY FOR HOUSEHOLD`;
+- targeted persistence suite: `30 passed`;
+- backend + launcher regression: `2603 passed`.
+
 ## Next milestone
 
-`PR2-B — Persistence Foundation`
+`PR2-C — Household Foundation`
 
-PR2-B is the current authorized milestone. It introduces the approved
-persistence infrastructure without implementing the Household bounded context
-or production food tables. After PR2-B acceptance, the intended next milestone
-is `PR2-C — Household Foundation`.
+PR2-C is the next authorized milestone and the first production FamilyFoodOS
+bounded-context implementation. It must build Household persistence and
+application/API behavior on the accepted PR2-B Unit-of-Work and synchronous
+SQLAlchemy Core foundation without creating a parallel persistence path.
