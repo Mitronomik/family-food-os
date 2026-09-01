@@ -42,5 +42,7 @@ vendored or enabled:
 `GUIDANCE.md` is project-authored and contains only adapted advisory principles.
 
 `GUIDANCE.md` is advisory only. Project architecture, product documentation,
-UI/UX contract, repository AGENTS instructions, and the project-owned
-`cosmetic-workshop-ui` skill always take priority.
+repository AGENTS instructions, current FamilyFoodOS contracts, and the
+project-owned `family-food-ui` skill always take priority. The inherited
+CosmeticWorkshopOS UI/UX contract is legacy context, not current FamilyFoodOS
+consumer guidance.

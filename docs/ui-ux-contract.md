@@ -1,4 +1,17 @@
-# UI/UX Contract
+# Inherited CosmeticWorkshopOS UI/UX Contract
+
+**Status:** inherited legacy product contract; not the canonical FamilyFoodOS
+consumer UI contract.
+
+This document is preserved as historical product evidence and as behavior
+context for the still-transitional inherited frontend. Its desktop-first
+workflow, navigation, visual identity, and cosmetic business jobs must not be
+used to define the future FamilyFoodOS consumer experience. Current
+FamilyFoodOS decisions come from `AGENTS.md`, canonical `docs/family-food/`
+documents, relevant approved ADRs, and the active project-owned
+`.agents/skills/family-food-ui/SKILL.md`. A new FamilyFoodOS consumer UI
+contract belongs to the later migration/frontend gate; this document must not
+be mechanically rewritten into one.
 
 This contract defines the product-owned interface rules for **cosmetic-workshop-os** / **Мастерская косметолога**. It applies to frontend, visual, accessibility, responsive, copy, and motion work. It does not replace the product specification, architecture contract, or domain model; it translates them into practical UI decisions.
 

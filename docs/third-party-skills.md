@@ -1,8 +1,16 @@
 # Third-Party Codex Skills Registry
 
-This registry tracks third-party Codex skills and reviewed reference material considered for **cosmetic-workshop-os**.
+This registry tracks third-party Codex skills and reviewed reference material
+available to **FamilyFoodOS / family-food-os**, including inherited review
+records from the source repository.
 
-Project-adapted guidance stored outside `.agents/skills/` is not an installed or independently discoverable Codex skill. Before any third-party content is installed, activated, or vendored, a separate PR must review source, license, scripts, hooks, invocation behavior, and compatibility with `docs/ui-skill-policy.md` and `docs/ui-ux-contract.md`.
+Project-adapted guidance stored outside `.agents/skills/` is not an installed or
+independently discoverable Codex skill. Before any third-party content is
+installed, activated, or vendored, a separate PR must review source, license,
+scripts, hooks, invocation behavior, and compatibility with current
+FamilyFoodOS contracts, `docs/ui-skill-policy.md`, and the active project-owned
+UI skill. The inherited `docs/ui-ux-contract.md` is not the FamilyFoodOS
+consumer UI authority.
 
 ## Required registry fields for every future skill
 
@@ -42,9 +50,9 @@ Project-adapted guidance stored outside `.agents/skills/` is not an installed or
 - Included provider agents: none
 - Reviewed files: npm metadata; CLI download, target, copy, update, and hook logic; upstream `SKILL.md`; selected upstream reference files; executable and file-mutation risk markers.
 - Local modifications: raw upstream instructions were excluded after review. `GUIDANCE.md` is a project-authored safe adaptation; `UPSTREAM.md` and `SHA256SUMS` record provenance and integrity.
-- Implicit invocation policy: none. Only project-authored `GUIDANCE.md` may be consulted through the project-owned `cosmetic-workshop-ui` skill for an applicable, explicitly scoped UI task.
+- Implicit invocation policy: none. Only project-authored `GUIDANCE.md` may be consulted through the project-owned `family-food-ui` skill for an applicable, explicitly scoped UI task.
 - Approved use cases: evidence-based audits, accessibility and responsive review, interaction review, hierarchy and typography guidance, onboarding review, hardening, and polish of approved routes.
-- Forbidden use cases: activating the upstream skill; running upstream scripts; enabling hooks, live mode, update checks, `impeccable init`, or `impeccable document`; generating competing `PRODUCT.md` or `DESIGN.md`; changing architecture, domain logic, APIs, schemas, migrations, dependencies, unrelated routes, historical or operational data, or the approved product identity.
+- Forbidden use cases: activating the upstream skill; running upstream scripts; enabling hooks, live mode, update checks, `impeccable init`, or `impeccable document`; generating competing `PRODUCT.md` or `DESIGN.md`; changing architecture, domain logic, APIs, schemas, migrations, dependencies, unrelated routes, historical or operational data, or current FamilyFoodOS product decisions.
 - Update policy: update only in a separate PR pinned to an exact upstream commit, with renewed source, license, script, hook, behavior, file-list, and checksum review.
 
 ### Taste Skill
@@ -65,10 +73,13 @@ Project-adapted guidance stored outside `.agents/skills/` is not an installed or
 - Reviewed material: `SKILL.md`, `README.md`, `evals/evals.json`, `references/extract.js`, all Markdown references, repository metadata, and complete Git history for legal-file presence.
 - Decision: do not install the upstream skill, do not place it under `.agents/skills`, and do not copy its source or reference text into the project.
 - Primary blockers: incomplete licensing evidence; unpinned `@latest` Playwright MCP dependency; external browser automation; broad implicit activation; current-directory output writes; optional mutation or overwrite of AI instruction and tool configuration files.
-- Product constraint: external design analysis must not replace the approved identity and human-readable workflow of «Мастерская косметолога».
+- Product constraint: external design analysis must not define or replace
+  FamilyFoodOS identity, migration gates, or human-readable consumer workflow.
+  The inherited CosmeticWorkshopOS visual identity is historical context, not
+  the current FamilyFoodOS consumer design contract.
 - Implicit invocation policy: prohibited.
 - Approved use cases for the upstream skill: none.
-- Project-owned alternative: evidence-based UI audits may be designed independently under the canonical UI/UX contract without copying upstream text or code.
+- Project-owned alternative: evidence-based UI audits may be designed independently under current FamilyFoodOS contracts and the project-owned UI skill without copying upstream text or code.
 - Revisit conditions: complete license text, pinned dependencies, explicit-only invocation, sandboxed outputs, no mutation of canonical instruction files, and a new security and architecture review.
 - Update policy: any reconsideration requires a new pinned-commit review in a separate PR.
 
