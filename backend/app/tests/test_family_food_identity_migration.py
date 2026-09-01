@@ -73,7 +73,7 @@ def test_database_at_0020_is_upgraded_to_family_food_identity(tmp_path):
 
     applied = apply_migrations(DatabaseConfig(path=database_path))
 
-    assert applied == ["0021_family_food_identity"]
+    assert applied == ["0021_family_food_identity", "0022_household_foundation"]
     assert read_identity_settings(database_path)["product.name"][0] == "FamilyFoodOS"
     assert read_identity_settings(database_path)["workspace.source"][0] == "family-food-os"
 

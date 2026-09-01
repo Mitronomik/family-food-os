@@ -589,8 +589,9 @@ def test_user_mode_startup_creates_backup_before_migration_for_existing_database
         ).fetchone()
         backup_tables = table_names(result.backup.backup_path)
     assert marker == "before migration"
-    assert workspace_source is None
+    assert workspace_source == ("family-food-os",)
     assert "artifact_audit_operations" in backup_tables
+    assert "households" not in backup_tables
     assert result.applied_migrations == [expected_migration_ids()[-1]]
     tables = table_names(database_path)
     assert tables <= (CURRENT_ALLOWED_TABLES | {"legacy_marker"})

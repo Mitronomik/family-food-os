@@ -22,6 +22,7 @@ from app.services.startup import initialize_startup
 MIGRATION_ID = "0020_artifact_audit_operations"
 PREVIOUS_MIGRATION_ID = "0019_production_batch_tax_rate_snapshots"
 NEXT_MIGRATION_ID = "0021_family_food_identity"
+HEAD_MIGRATION_ID = "0022_household_foundation"
 TABLE = "artifact_audit_operations"
 
 
@@ -104,9 +105,9 @@ def prepared_row(connection, operation_id="11111111-1111-4111-8111-111111111111"
 def test_migration_0020_is_registered_exactly_once_before_0021():
     ids = expected_migration_ids()
 
-    assert ids[-1] == NEXT_MIGRATION_ID
-    assert ids[-2] == MIGRATION_ID
-    assert ids[-3] == PREVIOUS_MIGRATION_ID
+    assert ids[-1] == HEAD_MIGRATION_ID
+    assert ids.index(PREVIOUS_MIGRATION_ID) + 1 == ids.index(MIGRATION_ID)
+    assert ids.index(MIGRATION_ID) + 1 == ids.index(NEXT_MIGRATION_ID)
     assert ids.count(MIGRATION_ID) == 1
     assert len(ids) == len(set(ids))
 
@@ -129,6 +130,7 @@ def test_a_database_at_0019_reports_0020_then_0021_pending(tmp_path):
     assert pending_migration_ids(DatabaseConfig(path=database_path)) == [
         MIGRATION_ID,
         NEXT_MIGRATION_ID,
+        HEAD_MIGRATION_ID,
     ]
 
 
@@ -139,10 +141,14 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
 
     applied_now = initialize_database(DatabaseConfig(path=database_path))
 
-    assert applied_now == [MIGRATION_ID, NEXT_MIGRATION_ID]
+    assert applied_now == [MIGRATION_ID, NEXT_MIGRATION_ID, HEAD_MIGRATION_ID]
     assert snapshot(database_path) == before
     assert tables_before < table_names(database_path)
-    assert table_names(database_path) - tables_before == {TABLE}
+    assert table_names(database_path) - tables_before == {
+        TABLE,
+        "households",
+        "household_members",
+    }
 
 
 def test_the_migration_applies_once_and_is_not_reapplied(tmp_path):
@@ -419,7 +425,11 @@ def test_user_mode_startup_backs_up_before_applying_0020(monkeypatch, tmp_path):
 
     result = initialize_startup("user")
 
-    assert result.applied_migrations == [MIGRATION_ID, NEXT_MIGRATION_ID]
+    assert result.applied_migrations == [
+        MIGRATION_ID,
+        NEXT_MIGRATION_ID,
+        HEAD_MIGRATION_ID,
+    ]
     assert result.backup is not None
     assert result.backup.reason == "before_migration"
     # The backup predates `0020`: no ledger table, and the data is intact.

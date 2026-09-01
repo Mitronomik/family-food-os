@@ -141,11 +141,51 @@ Acceptance evidence:
 - targeted persistence suite: `30 passed`;
 - backend + launcher regression: `2603 passed`.
 
+## PR2-C — Household Foundation
+
+Status: **COMPLETE**
+
+Acceptance evidence:
+
+- new `Household` and `HouseholdMember` domain models use application-generated
+  UUIDv4 identifiers and aware UTC instants;
+- Household validates an IANA timezone through standard-library `zoneinfo`;
+- Household persists optional city, Decimal-safe weekly budget and generic
+  cooking profile without adding Auth or currency/FX behavior;
+- HouseholdMember persists birth date, optional sex, explicit `height_cm` and
+  `weight_kg`, activity level, goal and active state without medical semantics;
+- application-facing repository and Household-specific UoW/read-scope contracts
+  remain driver-independent;
+- concrete repositories use one active PR2-B SQLAlchemy Core connection and
+  never open or complete their own transaction;
+- migration `0022_household_foundation` creates `households` and
+  `household_members` beside all inherited tables, with a real foreign key;
+- the custom `schema_migrations` lineage remains the sole SQLite schema truth;
+- all required POST/GET/PATCH Household and nested member routes are wired
+  through application operations;
+- complete acceptance flow with three members passes through FastAPI to SQLite;
+- wrong-Household member lookup/update returns no entity and the API returns
+  `404` without cross-Household data;
+- unsupported fields, including fake `owner_id`, are rejected;
+- rollback, no-partial-state, independent-read visibility, UUID/UTC/Decimal
+  round trips and foreign-key enforcement are covered by tests;
+- targeted Household/persistence/migration suite: `142 passed`;
+- full backend + launcher regression: `2647 passed`;
+- Ruff checks, Ruff formatting checks and `git diff --check`: passed.
+
+Deliberately deferred:
+
+- Household membership/Auth/principal roles;
+- FoodPreference and excluded ingredients until the canonical FoodIngredient
+  catalogue exists;
+- member role, meals-at-home scheduling, portion adjustment and detailed
+  planner/nutrition semantics;
+- controlled vocabularies and calculation meaning for activity level and goal.
+
 ## Next milestone
 
-`PR2-C — Household Foundation`
+`PR3 — FoodIngredient Catalogue`
 
-PR2-C is the next authorized milestone and the first production FamilyFoodOS
-bounded-context implementation. It must build Household persistence and
-application/API behavior on the accepted PR2-B Unit-of-Work and synchronous
-SQLAlchemy Core foundation without creating a parallel persistence path.
+Do not begin PR3 until PR2-C is reviewed and accepted. PR3 owns the canonical
+platform food catalogue; it must not merge `FoodIngredient` with `RetailSKU` or
+start later Nutrition, Recipe, Retail, Planner or AI work.

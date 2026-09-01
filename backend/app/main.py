@@ -18,6 +18,7 @@ from app.api.database import router as database_router
 from app.api.demo_data import router as demo_data_router
 from app.api.exports import router as exports_router
 from app.api.health import router as health_router
+from app.api.households import create_households_router
 from app.api.ingredients import router as ingredients_router
 from app.api.imports import router as imports_router
 from app.api.ingredient_lots import router as ingredient_lots_router
@@ -37,6 +38,10 @@ from app.api.settings import router as settings_router
 from app.api.stock_movements import router as stock_movements_router
 from app.api.tax_rate_settings import router as tax_rate_settings_router
 from app.identity import APP_SLUG, PRODUCT_NAME
+from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
+from app.persistence.sqlalchemy_core.household_composition import (
+    create_household_service,
+)
 from app.services.backend_liveness import acquire_backend_liveness_lock
 from app.domain.production_tax_context import (
     EXPECTED_EFFECTIVE_AT_FIELD,
@@ -92,8 +97,13 @@ async def _lifespan(_app: FastAPI):
     and that is precisely the property a launcher needs after a *hard* crash,
     when no cleanup code of ours runs at all.
     """
-    acquire_backend_liveness_lock()
-    yield
+    try:
+        acquire_backend_liveness_lock()
+        yield
+    finally:
+        household_engine = getattr(_app.state, "household_engine", None)
+        if household_engine is not None:
+            household_engine.dispose()
 
 
 def create_app() -> FastAPI:
@@ -111,6 +121,9 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
     app.add_exception_handler(RequestValidationError, _validation_error_response)
+    household_engine = create_sqlite_engine()
+    app.state.household_engine = household_engine
+    household_service = create_household_service(household_engine)
     app.include_router(alerts_router, prefix="/api")
     app.include_router(audit_logs_router, prefix="/api")
     app.include_router(backups_router, prefix="/api")
@@ -118,6 +131,9 @@ def create_app() -> FastAPI:
     app.include_router(imports_router, prefix="/api")
     app.include_router(health_router, prefix="/api")
     app.include_router(health_router)
+    app.include_router(
+        create_households_router(lambda: household_service), prefix="/api"
+    )
     app.include_router(database_router, prefix="/api")
     app.include_router(demo_data_router, prefix="/api")
     app.include_router(settings_router, prefix="/api")

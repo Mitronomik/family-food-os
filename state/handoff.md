@@ -19,22 +19,22 @@ Do not continue CosmeticWorkshopOS product lifecycle work from this repository.
 
 ## Completed milestone
 
-`PR2-B — Persistence Foundation — COMPLETE`
+`PR2-C — Household Foundation — COMPLETE`
 
-PR2-B implemented and tested the accepted synchronous SQLAlchemy 2.x Core
-persistence foundation with `SQLAlchemy>=2.0.52,<2.1`. The application-facing
-Unit of Work is driver-independent, owns one explicit transaction, and makes
-commit, rollback and failure terminal by revoking or discarding the active
-connection. The custom migration runner remains the sole SQLite schema
-authority. No production food tables, food migrations or runtime rewiring were
-introduced.
+PR2-C implemented the first production FamilyFoodOS bounded context. Household
+and HouseholdMember now work through the real FastAPI → application service →
+repository contracts → Household-specific Unit of Work → synchronous
+SQLAlchemy Core → SQLite path. Migration `0022_household_foundation` adds the
+new tables beside every inherited table and leaves the custom migration runner
+as the sole SQLite schema authority.
 
 Final evidence:
 
-- adversarial review: `PR2-B FINAL REVIEW: ACCEPT`;
-- readiness: `READY FOR HOUSEHOLD`;
-- targeted persistence suite: `30 passed`;
-- backend + launcher regression: `2603 passed`.
+- targeted Household/persistence/migration suite: `142 passed`;
+- backend + launcher regression: `2647 passed`;
+- Ruff checks and formatting checks: passed;
+- `git diff --check`: passed;
+- readiness: `READY FOR PR2-C REVIEW`.
 
 ## Canonical reading order
 
@@ -49,27 +49,32 @@ Before continuing:
 7. `docs/family-food/migration-plan.md`
 8. `backend/app/AGENTS.md`
 9. `backend/app/persistence/AGENTS.md`
-10. PR2-B persistence foundation code and tests:
+10. PR2-B persistence foundation code and PR2-C Household code/tests:
     - `backend/app/services/unit_of_work.py`
     - `backend/app/persistence/sqlalchemy_core/engine.py`
     - `backend/app/persistence/sqlalchemy_core/uow.py`
     - `backend/app/persistence/sqlalchemy_core/types.py`
     - `backend/app/tests/persistence/`
+    - `backend/app/domain/households.py`
+    - `backend/app/services/household_contracts.py`
+    - `backend/app/services/households.py`
+    - `backend/app/persistence/sqlalchemy_core/household_*.py`
+    - `backend/app/api/households.py`
+    - `backend/app/tests/test_household_*.py`
 11. existing custom migration runner:
     - `backend/app/db/migrations.py`
     - its migration-chain tests
 
 ## Next authorized milestone
 
-`PR2-C — Household Foundation`
+`PR3 — FoodIngredient Catalogue`
 
-PR2-C is the first production FamilyFoodOS bounded-context implementation. Its
-goal is to establish the Household aggregate and the persistence/API foundation
-needed by later food-domain contexts.
+Do not begin PR3 until PR2-C is reviewed and accepted. PR3 owns the canonical
+platform `FoodIngredient` catalogue and must keep it distinct from RetailSKU.
 
 ## Persistence constraints
 
-PR2-C must use:
+PR3 must continue to use:
 
 `synchronous SQLAlchemy 2.x Core`
 
@@ -84,7 +89,7 @@ Reuse, do not replace:
 - `backend/app/persistence/sqlalchemy_core/uow.py`;
 - `backend/app/persistence/sqlalchemy_core/types.py`.
 
-If PR2-C discovers a genuine defect in these contracts, identify it explicitly
+If PR3 discovers a genuine defect in these contracts, identify it explicitly
 instead of silently creating a parallel persistence path.
 
 New repository interfaces and the Unit of Work must not expose SQLAlchemy,
@@ -99,9 +104,9 @@ During the SQLite phase:
 - do not use `MetaData.create_all()` as production schema management;
 - do not create a second schema-version history.
 
-PR2-C may add the first production food-domain migration after `0021`, using the
-existing custom runner. New Household tables must coexist with inherited legacy
-tables.
+PR2-C added `0022_household_foundation` through the existing runner. PR3 must
+append its migration after `0022`; historical migrations remain immutable and
+new tables continue to coexist with inherited legacy tables.
 
 ## Unit of Work contract
 
@@ -122,9 +127,9 @@ Read-only operations use a consistent query scope and do not commit. Inherited
 `backend/app/db/session()` is transitional implementation evidence and is not
 the new food-domain Unit-of-Work contract.
 
-## PR2-C scope
+## PR2-C implementation and scope audit
 
-PR2-C may implement, where justified by the canonical architecture:
+Implemented:
 
 - `Household` and `HouseholdMember`;
 - household-local timezone;
@@ -136,9 +141,7 @@ PR2-C may implement, where justified by the canonical architecture:
 - deterministic validation;
 - domain, application, repository and API tests.
 
-## PR2-C non-goals
-
-It must not:
+PR2-C did not:
 
 - replace the custom SQLite migration runner or introduce Alembic;
 - introduce PostgreSQL, Auth or pretend `household_id` is authorization;
@@ -150,6 +153,10 @@ It must not:
 - refactor unrelated inherited repositories;
 - begin Nutrition, Planner, Shopping, Pantry, Prep, Retail or AI;
 - begin consumer PWA redesign.
+
+Also deliberately deferred are FoodPreference/excluded-ingredient entities,
+member roles, meals-at-home scheduling, portion adjustment, and controlled
+Nutrition/Planner vocabularies for activity level and goal.
 
 ## Preserved migration boundary
 
