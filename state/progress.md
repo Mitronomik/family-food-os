@@ -1,6 +1,6 @@
 # Progress
 
-Updated: `2026-08-31`
+Updated: `2026-09-01`
 
 ## FamilyFoodOS bootstrap
 
@@ -77,10 +77,30 @@ No FamilyFoodOS runtime/domain implementation was introduced by PR0.
 
 The runtime remains intentionally inherited from CosmeticWorkshopOS at the PR0 boundary.
 
+## PR1 — Identity Detox
+
+Status: **COMPLETE**
+
+Verified closure:
+
+- active project, runtime, launcher and frontend identity is FamilyFoodOS;
+- active project-owned UI guidance is `.agents/skills/family-food-ui/SKILL.md`;
+- inherited root and current-location documentation is explicitly classified;
+- old identity remains only as accepted provenance/history, immutable legacy
+  evidence, explicit legacy documentation and negative/legacy tests;
+- backend + launcher regression: `2573 passed, 0 failed, 0 skipped`;
+- frontend build: passed;
+- all 25 defined frontend `test:*` scripts: passed;
+- isolated FamilyFoodOS source-runtime startup smoke: passed;
+- static identity gate: zero active blockers;
+- final PR1 acceptance worktree: clean.
+
+PR1 changed identity while preserving inherited runtime, API, schema and
+transitional frontend behavior.
+
 ## Next milestone
 
-`PR1 — Identity Detox`
+`PR2-A — FamilyFoodOS Architecture & Persistence Contract`
 
-PR1 begins identity separation while preserving runtime behavior.
-
-Food-domain implementation starts only after the identity boundary is established according to the migration plan.
+PR2-A is documentation/architecture work. Production food-domain code remains
+gated until that contract is reviewed.

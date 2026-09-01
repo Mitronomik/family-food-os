@@ -1,6 +1,6 @@
 # Current focus
 
-Updated: `2026-08-31`
+Updated: `2026-09-01`
 
 ## Project
 
@@ -13,86 +13,46 @@ Source baseline:
 - bootstrap tag: `bootstrap-cosmetic-workshop-2026-08-31`
 - FamilyFoodOS repository: `Mitronomik/family-food-os`
 
-## Historical bootstrap baseline
+## Completed lifecycle
 
 `PR0 — Frozen Fork — COMPLETE`
 
-PR0 established:
+`PR1 — Identity Detox — COMPLETE`
 
-- Git provenance;
-- verified source baseline;
-- canonical FamilyFoodOS product documents;
-- FamilyFoodOS agent governance;
-- FamilyFoodOS execution state;
-- migration boundaries.
+PR1 separated active FamilyFoodOS project, runtime, launcher, frontend and agent
+identity from CosmeticWorkshopOS while preserving inherited runtime behavior.
+Accepted source provenance, historical evidence, explicitly classified legacy
+documentation and negative/legacy tests remain intentionally present.
 
-Historical verified baseline:
+## Next authorized task
 
-- backend + launcher: `2546 passed`
-- macOS package: `146 passed, 1 skipped`
-- frontend build: passed
-- frontend test scripts: `22 passed, 0 failed`
-- startup smoke: `PASS`
-- npm: `0 vulnerabilities`
+`PR2-A — FamilyFoodOS Architecture & Persistence Contract`
 
-## Current task
+PR2-A is a documentation and architecture contract that must be reviewed before
+production food-domain implementation begins. It defines the seams and ownership
+boundaries for later PR2 implementation; it does not create food entities,
+migrations, APIs or frontend behavior.
 
-Current branch/workstream:
+PR2-A must define at minimum:
 
-`PR1 — Identity Detox`
+- FamilyFoodOS bounded contexts;
+- dependency direction: `UI → API → services/domain → repositories → persistence`;
+- repository interfaces that keep domain services independent of database technology;
+- SQLite as the MVP/local persistence implementation;
+- an explicit future SQLite → PostgreSQL seam;
+- transaction and unit-of-work boundaries;
+- the household ownership boundary;
+- separation of canonical `FoodIngredient` from `RetailSKU`;
+- deterministic Nutrition, Planner and Shopping boundaries;
+- the `MealPlan → Serving` pipeline;
+- Pantry and Prep boundaries;
+- recipe provenance requirements;
+- optional AI with a deterministic core that works under `AI_ENABLED=false`;
+- retailer connectors only after the generic Shopping Engine.
 
-FamilyFoodOS targets a hosted Web/PWA under ADR 0030. The inherited macOS
-consumer package and its D5 / CR-017 forward path are retired under ADR 0031;
-they are historical source-product evidence, not current implementation work.
+## PR2-A boundary
 
-Source-run backend, launcher, SQLite and Restore remain transitional migration
-scaffolding. PR1-G retires the consumer package but does not authorize hosted
-infrastructure implementation.
-
-PR1-H aligns the retained Restore smoke tools with current FamilyFoodOS
-launcher-owned temporary and probe identity.
-
-PR1-I resolves the report-document reconciliation fixture debt by deriving the
-current user-mode test database from the canonical FamilyFoodOS path resolver;
-the inherited hard-coded `cosmetic_workshop.sqlite` fixture is no longer used.
-
-## PR1 goal
-
-Separate project/runtime identity from CosmeticWorkshopOS while preserving behavior.
-
-Identity-only work may include:
-
-- package/project names;
-- product titles;
-- environment-variable names;
-- default database/user-data naming;
-- launcher identity;
-- repository-facing documentation;
-- identity-only fixtures and tests.
-
-## PR1 non-goals
-
-Do not yet:
-
-- introduce Household domain models;
-- introduce food-domain migrations;
-- change recipe business semantics;
-- remove legacy bounded contexts;
-- build Nutrition Engine;
-- build Planner;
-- add AI;
-- add retail integrations;
-- migrate persistence to PostgreSQL.
-
-## Required reading
-
-For current PR1 work:
-
-1. `AGENTS.md`
-2. `docs/family-food/project-operating-manual.md`
-3. `state/current-focus.md`
-4. `docs/family-food/migration-plan.md`
-5. `docs/decisions/0030-family-food-hosted-product-target.md`
-6. `docs/decisions/0031-retire-inherited-macos-packaging.md`
-7. `docs/migration-source.md`
-8. relevant legacy identity code and tests
+Do not implement Household or other production food-domain code in PR2-A. Do
+not migrate to PostgreSQL, add AI, build retailer parsers/connectors, or start
+the consumer PWA. Production food-domain implementation begins only after the
+architecture and persistence contract has been reviewed.

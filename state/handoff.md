@@ -1,6 +1,6 @@
 # Handoff
 
-Updated: `2026-08-31`
+Updated: `2026-09-01`
 
 ## Project identity
 
@@ -19,31 +19,12 @@ Do not continue CosmeticWorkshopOS product lifecycle work from this repository.
 
 ## Completed milestone
 
-`PR0 — Frozen Fork — COMPLETE`
+`PR1 — Identity Detox — COMPLETE`
 
-PR0 changed governance, canonical documentation and active project state only.
-
-It intentionally did not introduce FamilyFoodOS runtime/domain behavior.
-
-## Verified PR0 baseline
-
-- backend + launcher: `2546 passed`
-- macOS package: `146 passed, 1 skipped`
-- frontend test scripts: `22 passed, 0 failed`
-- frontend build: passed
-- startup smoke: `PASS`
-- npm: `0 vulnerabilities`
-
-Startup smoke verified the complete inherited local stack:
-
-- backend `/health`: HTTP `200`
-- frontend root: HTTP `200`
-- frontend `/api/health`: HTTP `200`
-- frontend API proxy payload matched backend payload
-
-See:
-
-- `docs/migration-source.md`
+PR1 established active FamilyFoodOS identity while preserving inherited runtime
+behavior. Acceptance closed with `2573` backend/launcher tests passing, frontend
+build and all 25 frontend test scripts passing, the isolated source-runtime
+smoke passing, zero active static-identity blockers and a clean worktree.
 
 ## Canonical reading order
 
@@ -55,58 +36,52 @@ Before continuing:
 4. `docs/family-food/technical-spec.md`
 5. `docs/family-food/data-ingestion.md`
 6. `docs/family-food/migration-plan.md`
-7. relevant code and tests
+7. relevant current ADRs
+8. current repository architecture and persistence code only as implementation
+   evidence, not as the target food-domain specification
 
-## Legacy boundary
+## Next authorized milestone
+
+`PR2-A — FamilyFoodOS Architecture & Persistence Contract`
+
+PR2-A must produce a reviewable documentation/architecture contract before any
+production food-domain implementation. It should define bounded contexts,
+dependency direction, repository and unit-of-work seams, household ownership,
+food/catalog/retail separation, deterministic engines, recipe provenance and the
+future persistence boundary while retaining SQLite for MVP/local execution.
+
+## Migration boundary
 
 The repository still intentionally contains inherited CosmeticWorkshopOS:
 
 - backend runtime;
 - frontend runtime;
 - SQLite schema;
-- launcher/package infrastructure;
+- source-run launcher, SQLite and Restore scaffolding;
 - tests;
 - nested legacy `AGENTS.md` files;
-- historical documentation.
+- historical documentation and packaging evidence.
 
-This is not accidental technical debt introduced by PR0.
+This is preserved migration scaffolding, not the FamilyFoodOS food-domain
+specification. Do not mass-delete it and never mechanically rename legacy
+entities such as `Client → HouseholdMember`, `Order → MealPlan` or
+`ProductionBatch → PrepBatch`.
 
-Do not mass-delete or mechanically rename these areas.
+## PR2-A constraints
 
-## Next milestone
-
-`PR1 — Identity Detox`
-
-## PR1 exact starting procedure
-
-Before implementation:
-
-1. update local `main` from `origin/main`;
-2. create a new branch from that updated `main`;
-3. read the PR1 section in `docs/family-food/migration-plan.md`;
-4. inventory identity-only CosmeticWorkshopOS references;
-5. separate identity references from true legacy-domain references;
-6. define the bounded PR1 diff before editing runtime code.
-
-Suggested branch:
-
-`migration/pr1-identity-detox`
-
-## PR1 boundary
-
-PR1 may change product/runtime identity while preserving behavior.
-
-Do not use PR1 to:
-
-- add Household;
-- add CanonicalIngredient;
-- change recipe semantics;
-- introduce food migrations;
-- remove whole legacy bounded contexts;
-- redesign consumer frontend;
-- add AI;
-- add retail;
-- add PostgreSQL/Auth.
+- Do not implement `Household` or any other production food-domain entity in PR2-A.
+- Do not migrate the database to PostgreSQL yet.
+- Define new repository contracts so food-domain services are not coupled to
+  `sqlite3` or another concrete database technology.
+- Keep SQLite as the MVP/local implementation and define an explicit future
+  SQLite → PostgreSQL seam.
+- Reconsider PostgreSQL and Auth before shared multi-family deployment; billing
+  remains a later milestone.
+- Keep the deterministic core usable with `AI_ENABLED=false`.
+- The generic Shopping Engine precedes retailer connectors; do not add retailer
+  parsers or integrations in PR2-A.
+- Do not start the consumer PWA or other production implementation in this
+  documentation/architecture milestone.
 
 ## Public repository safety
 
