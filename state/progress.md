@@ -98,9 +98,29 @@ Verified closure:
 PR1 changed identity while preserving inherited runtime, API, schema and
 transitional frontend behavior.
 
+## PR2-A — FamilyFoodOS Architecture & Persistence Contract
+
+Status: **COMPLETE**
+
+Completion evidence:
+
+- canonical `docs/family-food/architecture.md` created;
+- ADR 0032 accepted;
+- migration plan aligned with the persistence and shared-deployment gates;
+- adversarial architecture review initially returned `CHANGES REQUIRED`;
+- all three blocker classes were resolved: persistence technology, migration
+  authority and derived-state invalidation;
+- final corrections also resolved Unit-of-Work read/write scopes, canonical
+  ingredient naming, Food Product Type disposition, Household/Auth semantics
+  and UTC versus household-local timezone rules;
+- documentation-only verification passed;
+- no runtime, schema, migration or dependency changes occurred in PR2-A.
+
 ## Next milestone
 
-`PR2-A — FamilyFoodOS Architecture & Persistence Contract`
+`PR2-B — Persistence Foundation`
 
-PR2-A is documentation/architecture work. Production food-domain code remains
-gated until that contract is reviewed.
+PR2-B is the current authorized milestone. It introduces the approved
+persistence infrastructure without implementing the Household bounded context
+or production food tables. After PR2-B acceptance, the intended next milestone
+is `PR2-C — Household Foundation`.
