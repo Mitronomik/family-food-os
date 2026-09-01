@@ -2,7 +2,11 @@
 
 > **Historical source-product architecture.** This document remains engineering
 > provenance, not the FamilyFoodOS target. ADR 0030 defines hosted Web/PWA as
-> the target and ADR 0031 retires the inherited macOS consumer package.
+> the target and ADR 0031 retires the inherited macOS consumer package. Its
+> internal “architectural contract” wording applies only to CosmeticWorkshopOS;
+> current FamilyFoodOS architecture comes from `AGENTS.md`, canonical
+> `docs/family-food/` documents and relevant approved ADRs. Generic engineering
+> patterns may be consulted only when compatible with those sources.
 
 Проект: **cosmetic-workshop-os**  
 Клиентское название: **Мастерская косметолога**  

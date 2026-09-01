@@ -3,7 +3,9 @@
 > **Historical source-product document.** This roadmap describes
 > CosmeticWorkshopOS and is not the FamilyFoodOS forward plan. Use
 > `docs/family-food/migration-plan.md`, ADR 0030 and ADR 0031; the macOS
-> consumer-package stages below are retired for FamilyFoodOS.
+> consumer-package stages below are retired for FamilyFoodOS. Internal status,
+> authorization, PR sequencing and task templates are preserved as historical
+> evidence only and cannot authorize current work.
 
 Проект: **cosmetic-workshop-os**  
 Клиентское название: **Мастерская косметолога**  

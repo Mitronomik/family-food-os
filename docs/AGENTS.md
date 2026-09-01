@@ -20,7 +20,11 @@ Lifecycle and history rules:
 - ADR 0016 remains authoritative for durable Restore safety semantics; newer lifecycle decisions do not reopen it implicitly.
 - ADR 0018 remains authoritative for the Restore interaction/validation-session topic.
 - ADR 0019 remains authoritative for the bounded D3 package decision.
-- ADR 0020 is the D4 Update Safety authority once CR-013 is merged. For D4-specific conceptual `AppSettings`, `BackupRecord` and `UpdateLog` fields, read `docs/domain-model-d4-update-safety.md` together with `docs/domain-model.md`.
+- ADR 0020 remains the bounded historical D4 Update Safety authority. When
+  investigating preserved D4 evidence, read
+  `docs/domain-model-d4-update-safety.md` with the inherited
+  `docs/domain-model.md` only as legacy context; neither is current
+  FamilyFoodOS domain authority.
 - ADR 0021 is the D5 Remote Install Rehearsal authority once CR-014 is merged. D5 is documentation + exact-package assisted-install rehearsal only; it does not authorize runtime, signing/notarization, DMG/PKG, public release, auto-update, Phase 12 or release-readiness work.
 - ADR 0030 defines hosted Web/PWA as the FamilyFoodOS target and the retained
   local stack as transitional migration scaffolding.

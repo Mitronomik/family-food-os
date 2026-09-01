@@ -1,5 +1,14 @@
 # cosmetic-workshop-os - Codex Web Prompting Rules
 
+> **Status: inherited CosmeticWorkshopOS prompting guide — not a current
+> FamilyFoodOS Codex contract.** All prescriptive wording, required-reading
+> lists, PR numbering, architecture anchors, and templates below are scoped to
+> the source product. Current FamilyFoodOS tasks follow `AGENTS.md`, canonical
+> `docs/family-food/` documents, relevant approved ADRs, current state files,
+> scoped `AGENTS.md` files, and the explicit task. Generic prompt-structure ideas
+> may be consulted only as legacy reference when compatible; do not use this
+> document to reactivate inherited product or delivery decisions.
+
 Document: `docs/codex-prompting-rules.md`  
 Project: `cosmetic-workshop-os`  
 Human-facing name: `Мастерская косметолога`  
@@ -58,9 +67,10 @@ The second version is too broad and allows Codex to invent architecture, skip te
 
 ---
 
-## 3. Required project context for every Codex prompt
+## 3. Historical source-project context list
 
-Every Codex prompt must tell the agent to read the relevant project memory files.
+CosmeticWorkshopOS prompts were expected to use the following project-memory
+list. It is not the current FamilyFoodOS reading order.
 
 Minimum required files:
 
@@ -1138,9 +1148,10 @@ For `cosmetic-workshop-os`, also check:
 
 ---
 
-## 22. Recommended first prompt for Codex Web
+## 22. Historical first prompt for Codex Web
 
-Use this as the first real implementation prompt after project documents are committed.
+This preserved source-project bootstrap prompt must not be executed or reused as
+a current FamilyFoodOS implementation task.
 
 ```markdown
 # Task: PR0 - Project documentation contract
