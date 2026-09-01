@@ -1,6 +1,9 @@
 # JSON Export Foundation
 
-PR75 adds a backend-only local JSON export foundation for **Мастерская косметолога**.
+This document describes the local JSON export foundation retained by
+**FamilyFoodOS** during the incremental migration. The exported table groups
+still include inherited workshop-domain data; identity cleanup does not rename
+those business concepts.
 
 ## Purpose
 
@@ -13,7 +16,7 @@ Export is not backup and does not replace backup. Backup preserves the SQLite da
 Exports are written under the selected local `exports/` directory:
 
 ```text
-~/Documents/Мастерская косметолога/exports/
+~/Documents/FamilyFoodOS/exports/
 ```
 
 In development and tests, when the configured database is not the user data database, exports are written next to the configured SQLite database:
@@ -48,8 +51,8 @@ Each export file contains:
     "export_schema_version": 1,
     "created_at": "2026-07-05T12:00:00Z",
     "reason": "manual",
-    "source": "cosmetic-workshop-os",
-    "database_filename": "cosmetic_workshop.sqlite",
+    "source": "family-food-os",
+    "database_filename": "family_food.sqlite",
     "database_location_kind": "user_data",
     "tables": {
       "ingredients": 12,
@@ -129,10 +132,10 @@ Literal hyphens are normalized to underscores inside the filename reason segment
 
 ### Filename grammar
 
-The existing grammar is preserved. No new filename version, marker, sidecar format, or migration is authorized. A new export filename remains conceptually:
+The overall filename grammar structure is preserved, while PR1 / ADR 0027 changes the current product-identity marker from the inherited CosmeticWorkshopOS marker to `-family_food-export-`. This identity-only marker change does not bump `export_schema_version`, which remains `1`; it does not change the export payload structure or introduce a new sidecar format or data migration. Canonical reason normalization and the optional `-N` uniqueness suffix semantics are unchanged. A new export filename remains conceptually:
 
 ```text
-{timestamp}-cosmetic_workshop-export-{canonical_reason}[-N].json
+{timestamp}-family_food-export-{canonical_reason}[-N].json
 ```
 
 where `canonical_reason` contains no hyphen and is never numeric-only, and `-N` is reserved solely for uniqueness. Existing non-overwrite behavior is unchanged.
@@ -168,6 +171,12 @@ The export and backup mappings are separate and are **not** identical: `manual` 
 This contract applies to newly generated artifacts only. Existing export files must not be renamed, rewritten, or deleted, and no database or filesystem migration is required or authorized.
 
 Legacy artifact listing remains **best-effort**. Filename, path, created-timestamp fallback, size, and list availability must be preserved even when an old filename contains an ambiguous legacy reason. Exact round-trip recovery is **not** claimed for legacy ambiguous filenames. Legacy export manifests remain readable and are not rewritten.
+
+In particular, a legacy CosmeticWorkshopOS export using
+`source = cosmetic-workshop-os` or the `-cosmetic_workshop-export-` marker may
+remain visible through best-effort listing. It is not a current generated or
+verified FamilyFoodOS export, and visibility does not imply trust,
+importability, or compatibility.
 
 ## Create-response confirmation contract (CR-006, decided 2026-08-01)
 
@@ -278,7 +287,9 @@ The list above records the scope of **PR75 specifically** and is historical. Cur
 
 ## Testing
 
-Automated tests use `tmp_path` and monkeypatch `COSMETIC_WORKSHOP_DB_PATH` and, where needed, `COSMETIC_WORKSHOP_USER_DATA_DIR`. Tests must not write to the real `~/Documents/Мастерская косметолога/` directory.
+Automated tests use `tmp_path` and monkeypatch `FAMILY_FOOD_DB_PATH` and, where
+needed, `FAMILY_FOOD_USER_DATA_DIR`. Tests must not write to the real
+`~/Documents/FamilyFoodOS/` directory.
 
 ## CR-009 JSON-export AuditLog coverage
 
@@ -332,7 +343,7 @@ export undeleted, unaudited, unresolved and counted for bounded reconciliation.
   file: safe name, resolution inside the export directory, escaping symlinks
   refused, existence, regular file, the **complete** filename grammar, JSON
   parses, top-level keys exactly `manifest` and `data`, supported
-  `export_schema_version`, `source == "cosmetic-workshop-os"`, a **human**
+  `export_schema_version`, `source == "family-food-os"`, a **human**
   `manifest.reason` that is not required to equal the canonical slug, and
   manifest table counts that agree with the exported data. It never rewrites the
   export and never compares historical exported data with the current database.

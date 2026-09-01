@@ -4,7 +4,13 @@ Scope: offline user help under `help/`.
 
 User help rules:
 
-- Help content is for non-technical users of «Мастерская косметолога».
+- FamilyFoodOS is the current product. New or updated help must follow the
+  current FamilyFoodOS canonical documents and the latest approved product
+  decisions.
+- Inherited CosmeticWorkshopOS help and workshop-domain terminology may remain
+  until the owning bounded context is migrated. Their presence is legacy
+  implementation context, not current FamilyFoodOS product identity; do not
+  mechanically rewrite it into imaginary food-domain behavior.
 - Write user help in Russian.
 - Use short, step-by-step guidance.
 - Avoid developer jargon, internal IDs, stack traces and implementation details.

@@ -2,6 +2,11 @@
 
 Status: evolving implementation contract. Existing implemented areas have backend routes in the application; planned sections remain placeholders until their scoped PRs define them.
 
+The current runtime identity is **FamilyFoodOS**. During the incremental
+migration this document still describes inherited workshop-domain APIs that
+remain implemented; those business concepts are replaced only by later bounded-
+context PRs, not by identity renaming.
+
 
 ## Settings status
 
@@ -547,15 +552,15 @@ Example response:
 
 ```json
 {
-  "database_path": "/path/to/cosmetic_workshop.sqlite",
+  "database_path": "/path/to/family_food.sqlite",
   "database_exists": true,
   "database_size_bytes": 245760,
   "backup_dir": "/path/to/backups",
   "backup_dir_exists": true,
   "backup_count": 2,
   "latest_backup": {
-    "filename": "20260705T100000000000Z-cosmetic_workshop-manual.sqlite",
-    "path": "/path/to/backups/20260705T100000000000Z-cosmetic_workshop-manual.sqlite",
+    "filename": "20260705T100000000000Z-family_food-manual.sqlite",
+    "path": "/path/to/backups/20260705T100000000000Z-family_food-manual.sqlite",
     "created_at": "2026-07-05T10:00:00Z",
     "reason": "manual",
     "size_bytes": 245760
@@ -598,13 +603,13 @@ Success response:
 ```json
 {
   "backup": {
-    "filename": "20260705T100000000000Z-cosmetic_workshop-before_large_edit.sqlite",
-    "path": "/path/to/backups/20260705T100000000000Z-cosmetic_workshop-before_large_edit.sqlite",
+    "filename": "20260705T100000000000Z-family_food-before_large_edit.sqlite",
+    "path": "/path/to/backups/20260705T100000000000Z-family_food-before_large_edit.sqlite",
     "created_at": "2026-07-05T10:00:00Z",
     "reason": "before_large_edit",
     "size_bytes": 245760
   },
-  "database_path": "/path/to/cosmetic_workshop.sqlite",
+  "database_path": "/path/to/family_food.sqlite",
   "backup_dir": "/path/to/backups",
   "message": "Резервная копия создана.",
   "audit_status": "recorded",
@@ -748,13 +753,13 @@ Successful response shape:
 ```json
 {
   "export": {
-    "filename": "20260705T120000000000Z-cosmetic_workshop-export-manual.json",
-    "path": "/path/to/exports/20260705T120000000000Z-cosmetic_workshop-export-manual.json",
+    "filename": "20260705T120000000000Z-family_food-export-manual.json",
+    "path": "/path/to/exports/20260705T120000000000Z-family_food-export-manual.json",
     "created_at": "2026-07-05T12:00:00Z",
     "reason": "manual",
     "size_bytes": 120000
   },
-  "database_path": "/path/to/cosmetic_workshop.sqlite",
+  "database_path": "/path/to/family_food.sqlite",
   "export_dir": "/path/to/exports",
   "entity_counts": {
     "ingredients": 12,
@@ -1144,7 +1149,7 @@ internal path is exposed, and the failed read still mutates nothing.
 
 In normal operation the launcher makes this unreachable: `run_local_runtime`
 passes the database path that `initialize_startup` backed up, migrated and
-reconciled to the API child through `COSMETIC_WORKSHOP_DB_PATH`, so the API
+reconciled to the API child through `FAMILY_FOOD_DB_PATH`, so the API
 always serves a database whose ledger exists.
 
 ### `GET /api/report-documents`
