@@ -25,18 +25,22 @@ def parse_decimal(value: Decimal | int | str, *, field: str = "value") -> Decima
             )
         )
     if isinstance(value, Decimal):
-        return value
-    if isinstance(value, int):
-        return Decimal(value)
-    if not isinstance(value, str):
+        parsed = value
+    elif isinstance(value, int):
+        parsed = Decimal(value)
+    else:
+        if not isinstance(value, str):
+            raise _invalid_decimal(value, field)
+        normalized = value.strip().replace(",", ".")
+        if not normalized:
+            raise _invalid_decimal(value, field)
+        try:
+            parsed = Decimal(normalized)
+        except InvalidOperation as exc:
+            raise _invalid_decimal(value, field) from exc
+    if not parsed.is_finite():
         raise _invalid_decimal(value, field)
-    normalized = value.strip().replace(",", ".")
-    if not normalized:
-        raise _invalid_decimal(value, field)
-    try:
-        return Decimal(normalized)
-    except InvalidOperation as exc:
-        raise _invalid_decimal(value, field) from exc
+    return parsed
 
 
 def _invalid_decimal(value: object, field: str) -> DomainValidationError:
@@ -51,8 +55,14 @@ def _invalid_decimal(value: object, field: str) -> DomainValidationError:
     )
 
 
-def quantize_decimal(value: Decimal | int | str, quantum: Decimal, *, field: str = "value") -> Decimal:
-    return parse_decimal(value, field=field).quantize(quantum, rounding=ROUNDING_MODE)
+def quantize_decimal(
+    value: Decimal | int | str, quantum: Decimal, *, field: str = "value"
+) -> Decimal:
+    parsed = parse_decimal(value, field=field)
+    try:
+        return parsed.quantize(quantum, rounding=ROUNDING_MODE)
+    except InvalidOperation as exc:
+        raise _invalid_decimal(value, field) from exc
 
 
 def quantize_weight(value: Decimal | int | str, *, field: str = "weight_g") -> Decimal:
@@ -63,7 +73,9 @@ def quantize_volume(value: Decimal | int | str, *, field: str = "volume_ml") -> 
     return quantize_decimal(value, VOLUME_QUANT, field=field)
 
 
-def quantize_percentage(value: Decimal | int | str, *, field: str = "percentage") -> Decimal:
+def quantize_percentage(
+    value: Decimal | int | str, *, field: str = "percentage"
+) -> Decimal:
     return quantize_decimal(value, PERCENT_QUANT, field=field)
 
 
@@ -83,8 +95,10 @@ def quantize_count(value: Decimal | int | str, *, field: str = "count") -> Decim
                 next_action="Укажите целое количество, например 2 или 3.",
             )
         )
-    return parsed.quantize(COUNT_QUANT, rounding=ROUNDING_MODE)
+    return quantize_decimal(parsed, COUNT_QUANT, field=field)
 
 
-def quantize_density(value: Decimal | int | str, *, field: str = "density_g_per_ml") -> Decimal:
+def quantize_density(
+    value: Decimal | int | str, *, field: str = "density_g_per_ml"
+) -> Decimal:
     return quantize_decimal(value, DENSITY_QUANT, field=field)

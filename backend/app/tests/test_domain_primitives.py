@@ -4,7 +4,10 @@ import sqlite3
 import pytest
 
 from app.db.config import DatabaseConfig
-from app.tests.table_guards import assert_no_forbidden_future_tables, assert_only_current_tables
+from app.tests.table_guards import (
+    assert_no_forbidden_future_tables,
+    assert_only_current_tables,
+)
 from app.services.database import initialize_database
 from app.domain.conversions import milliliters_to_grams
 from app.domain.decimal_utils import (
@@ -44,6 +47,26 @@ def test_parse_decimal_rejects_invalid_values(bad_value):
     assert exc_info.value.issue.field == "Остаток"
 
 
+@pytest.mark.parametrize(
+    "bad_value",
+    ["NaN", "Infinity", "-Infinity", Decimal("NaN"), Decimal("Infinity")],
+)
+def test_parse_decimal_rejects_non_finite_values(bad_value):
+    with pytest.raises(DomainValidationError) as exc_info:
+        parse_decimal(bad_value, field="critical_amount")
+
+    assert exc_info.value.issue.code == DomainIssueCode.INVALID_DECIMAL
+    assert exc_info.value.issue.field == "critical_amount"
+
+
+def test_quantization_translates_extreme_exponent_invalid_operation():
+    with pytest.raises(DomainValidationError) as exc_info:
+        quantize_money("1E+999999", field="critical_amount")
+
+    assert exc_info.value.issue.code == DomainIssueCode.INVALID_DECIMAL
+    assert exc_info.value.issue.field == "critical_amount"
+
+
 @pytest.mark.parametrize("bad_float", [1.2, True])
 def test_parse_decimal_rejects_float_and_bool_inputs(bad_float):
     with pytest.raises(DomainValidationError) as exc_info:
@@ -61,7 +84,12 @@ def test_quantization_rules_are_explicit_and_half_up():
 
 
 def test_mvp_unit_definitions_have_canonical_codes_and_russian_labels():
-    assert set(MVP_UNITS) == {UnitCode.GRAM, UnitCode.MILLILITER, UnitCode.PERCENT, UnitCode.PIECE}
+    assert set(MVP_UNITS) == {
+        UnitCode.GRAM,
+        UnitCode.MILLILITER,
+        UnitCode.PERCENT,
+        UnitCode.PIECE,
+    }
     assert MVP_UNITS[UnitCode.GRAM].russian_label == "г"
     assert MVP_UNITS[UnitCode.MILLILITER].russian_label == "мл"
     assert MVP_UNITS[UnitCode.PERCENT].russian_label == "%"

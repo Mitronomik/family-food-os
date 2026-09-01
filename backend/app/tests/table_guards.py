@@ -32,6 +32,8 @@ CURRENT_ALLOWED_TABLES = {
     "demo_data_sessions",
     "demo_data_records",
     "artifact_audit_operations",
+    "households",
+    "household_members",
     "sqlite_sequence",
 }
 

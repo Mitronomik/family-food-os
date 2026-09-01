@@ -23,6 +23,8 @@ Source baseline:
 
 `PR2-B — Persistence Foundation — COMPLETE`
 
+`PR2-C — Household Foundation — COMPLETE`
+
 PR1 separated active FamilyFoodOS project, runtime, launcher, frontend and agent
 identity from CosmeticWorkshopOS while preserving inherited runtime behavior.
 Accepted source provenance, historical evidence, explicitly classified legacy
@@ -53,24 +55,34 @@ New entity identifiers are application-generated `uuid.UUID` values using
 UUIDv4 and generic SQLAlchemy `Uuid`; true instants use the UTC-normalizing
 persistence type, while planning dates remain date-only and household-local.
 
-## Next authorized task
+PR2-C implemented the first production FamilyFoodOS bounded context beside the
+legacy schema. The real path now supports creating and updating a Household,
+adding and updating HouseholdMembers, and reading complete Household state via:
 
-`PR2-C — Household Foundation`
+`FastAPI → HouseholdService → repository contracts → Household Unit of Work → SQLAlchemy Core → SQLite`
 
-PR2-C is the first production FamilyFoodOS bounded-context implementation. It
-may establish `Household`, `HouseholdMember`, household-local timezone and
-genuine Household settings/constraints; add the first production food-domain
-migration after `0021`; implement SQLAlchemy Core tables and repository
-adapters; and add Household-scoped application operations, minimal create/read/
-update API contracts, deterministic validation and tests across the domain,
-application, repository and API layers.
+Migration `0022_household_foundation` adds `households` and
+`household_members` after `0021_family_food_identity`. Member access is always
+Household-scoped; there is no `owner_id`, Auth shortcut or Client reuse.
 
-PR2-C must reuse the accepted dependency path:
+Verification:
 
-`application/domain → repository contracts → Unit of Work → synchronous SQLAlchemy Core → SQLite`
+- PR2-C correction-pass targeted suite: `196 passed`;
+- full backend + launcher regression: `2684 passed`;
+- Ruff checks and formatting checks: passed;
+- `git diff --check`: passed.
 
-It must not replace the custom migration runner; add Alembic, PostgreSQL, Auth,
-a fake `owner_id`, ORM or async persistence; expose database-driver types above
-the adapter boundary; reuse or mechanically rename inherited Client semantics;
-refactor unrelated repositories; begin later food contexts or AI; or redesign
-the consumer PWA. New Household tables must coexist with inherited legacy tables.
+The correction pass preserves terminal Household UoW semantics after successful
+and failed commit/rollback attempts, rejects non-finite or unquantizable Decimal
+input through stable validation, and evaluates future birth dates against an
+injected clock in the persisted Household timezone. A final adversarial review
+has not yet issued `ACCEPT`.
+
+## Milestone gated after PR2-C final acceptance
+
+`PR3 — FoodIngredient Catalogue`
+
+The immediate next action remains PR2-C final review/acceptance. PR3 is not
+authorized until that acceptance is issued. It must introduce the canonical
+platform `FoodIngredient` catalogue without merging it with RetailSKU or
+beginning Nutrition, Recipe, Retail or AI.

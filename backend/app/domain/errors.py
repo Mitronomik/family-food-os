@@ -24,6 +24,11 @@ class DomainIssueCode(StrEnum):
     TAX_RATE_PRECISION_EXCEEDED = "tax_rate_precision_exceeded"
     TAX_RATE_CONTEXT_REQUIRED = "tax_rate_context_required"
     INVALID_TAX_RATE_CONTEXT = "invalid_tax_rate_context"
+    INVALID_TIMEZONE = "invalid_timezone"
+    NEGATIVE_MONEY = "negative_money"
+    NON_POSITIVE_MEASUREMENT = "non_positive_measurement"
+    MEASUREMENT_OUT_OF_RANGE = "measurement_out_of_range"
+    INVALID_BOOLEAN = "invalid_boolean"
 
 
 @dataclass(frozen=True)
