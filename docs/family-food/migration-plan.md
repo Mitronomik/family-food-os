@@ -139,7 +139,7 @@ SQLite
 - fixture testing;
 - planner development.
 
-Перед внешней multi-user beta:
+Перед первым shared multi-family deployment:
 
 ```text
 PostgreSQL
@@ -150,6 +150,24 @@ Tenant isolation
 ```
 
 становятся обязательными.
+
+Это deployment gate, а не требование для local/isolated vertical slice.
+Billing и subscriptions остаются отдельным более поздним commercial concern и
+не входят в этот safety gate.
+
+Для новых food bounded contexts runtime persistence использует synchronous
+SQLAlchemy 2.x Core за repository/Unit-of-Work boundary. Пока активной базой
+vertical slice остаётся SQLite, единственный schema authority — существующий
+custom migration runner и его ordered lineage; новые food migrations добавляются
+в эту цепочку. Alembic, `MetaData.create_all()` и вторая migration history против
+активной SQLite базы запрещены.
+
+Отдельный PostgreSQL cutover PR должен определить target schema baseline,
+перенос и reconciliation данных, активацию PostgreSQL adapter и freeze исходной
+SQLite lineage. После cutover Alembic становится единственным schema migration
+authority для PostgreSQL. SQLite-specific historical migrations не обязаны
+воспроизводиться против PostgreSQL. Ни одна физическая база не управляется двумя
+независимыми migration histories.
 
 ---
 
@@ -224,8 +242,8 @@ PR не должен одновременно:
 ```text
 PR0   Frozen Fork
 PR1   Identity Detox
-PR2   Food Domain Foundation
-PR3   Canonical Ingredient Core
+PR2   Food Domain Foundation (PR2-A contract → first schema implementation)
+PR3   FoodIngredient Catalogue Core
 PR4   Food Recipe Core
 PR5   Pantry Core
 PR6   Nutrition Engine
@@ -243,6 +261,10 @@ PR14  PDF / Printable Week
 
 ----- CLOSED MVP GATE -----
 
+----- SHARED MULTI-FAMILY DEPLOYMENT GATE (triggered before shared families) -----
+
+PostgreSQL + Auth + Tenant isolation + hosted deployment
+
 PR15  Data Ingestion Platform
 PR16  Retail Foundation
 PR17  Feedback & Personalization
@@ -250,8 +272,13 @@ PR18  Optional AI Gateway
 
 ----- PAID BETA GATE -----
 
-PR19  SaaS / PostgreSQL / Auth / Billing
+PR19  Paid Beta Commercial Foundation / Billing / Hardening
 ```
+
+Shared-deployment work is trigger-based rather than tied to the late PR19
+number. Its exact implementation PR must be scoped and reviewed before the
+first shared multi-family deployment; it may be scheduled before PR15–PR18 if
+shared validation starts earlier.
 
 ---
 
@@ -398,6 +425,12 @@ rg -n "cosmetic-workshop|Мастерская косметолога|COSMETIC_WO
 
 # PR2 — Food Domain Foundation
 
+PR2-A фиксирует documentation-only architecture/persistence contract. Первый
+food schema implementation после него использует SQLite, synchronous SQLAlchemy
+2.x Core для runtime persistence и существующий custom migration runner как
+единственный SQLite schema authority. PR2-A сам не добавляет dependency, schema
+или migration.
+
 ## Goal
 
 Добавить фундамент новой предметной области рядом со старой.
@@ -496,7 +529,7 @@ create household
 
 ---
 
-# PR3 — Canonical Ingredient Core
+# PR3 — FoodIngredient Catalogue Core
 
 ## Goal
 
@@ -505,8 +538,12 @@ create household
 ## Новая сущность
 
 ```text
-CanonicalIngredient
+FoodIngredient
 ```
+
+`CanonicalIngredient` в более ранних Project Sources означает тот же
+канонический platform food concept. В repository architecture используется имя
+`FoodIngredient`; это не две разные сущности.
 
 ## Поля
 
@@ -1073,7 +1110,7 @@ status
 Пока:
 
 ```text
-CanonicalIngredient.average_price
+FoodIngredient.average_price
 ```
 
 или отдельная generic price table.
@@ -1405,6 +1442,17 @@ PDF:
 
 **10–30 семьях.**
 
+Local или isolated single-household testing не требует Auth/PostgreSQL. До того
+как независимые семьи используют один hosted deployment, обязательно пройти
+shared multi-family deployment gate:
+
+```text
+PostgreSQL
++ Auth
++ Tenant isolation
++ hosted deployment
+```
+
 Обязательный сценарий:
 
 ```text
@@ -1507,7 +1555,7 @@ normalize()
 
 ```text
 RetailSKU
-→ CanonicalIngredient
+→ FoodIngredient
 ```
 
 ## Confidence
@@ -1653,51 +1701,28 @@ AI_ENABLED=false
 - onboarding completion приемлемый;
 - planner имеет достаточный acceptance rate.
 
+Если продукт уже обслуживает несколько независимых семей в одном deployment,
+shared multi-family deployment gate должен быть закрыт до этого момента, а не
+откладываться до Paid Beta.
+
 ---
 
-# PR19 — SaaS Foundation
+# PR19 — Paid Beta Commercial Foundation
 
 ## Goal
 
-Подготовить FamilyFoodOS к нескольким независимым пользователям.
+Добавить commercial capabilities после доказательства core value и закрытого
+shared-deployment safety gate.
 
-## PostgreSQL
+## Shared deployment prerequisite
 
-Перевести persistence на PostgreSQL.
-
-Repository layer должен минимизировать влияние migration на domain services.
-
-## Новые сущности
-
-```text
-User
-Account
-Subscription
-```
-
-Все household-owned данные получают tenant boundary.
-
-## Auth
-
-Минимум:
-
-- login;
-- session;
-- password reset либо passwordless equivalent.
-
-## Tenant rule
-
-Ни один API request не может получить:
-
-```text
-household_id
-```
-
-другого пользователя.
+PostgreSQL, Auth, tenant isolation и hosted deployment не являются scope PR19,
+если они уже реализованы более ранним trigger-based PR. Если gate ещё не
+закрыт, Paid Beta не начинается.
 
 ## Billing
 
-Подготовить tiers:
+Добавить `Subscription` и подготовить tiers:
 
 ```text
 Core
@@ -1730,7 +1755,9 @@ ADVANCED_HISTORY
 
 ## Acceptance criteria
 
-Два тестовых account не видят данные друг друга.
+Shared-deployment isolation tests уже проходят как prerequisite.
+
+Billing не ослабляет household authorization и tenant boundary.
 
 Production deployment восстанавливается из documented backup.
 
@@ -2103,7 +2130,8 @@ AI_ENABLED=false
 
 # 25. Definition of Done для Paid Beta
 
-Дополнительно:
+Shared-deployment prerequisites, которые должны быть выполнены раньше при
+первом shared multi-family deployment:
 
 - PostgreSQL;
 - auth;
@@ -2111,6 +2139,9 @@ AI_ENABLED=false
 - production deployment;
 - backups;
 - monitoring;
+
+Дополнительно для Paid Beta:
+
 - billing;
 - минимум один RetailConnector;
 - optional AI;
