@@ -1,10 +1,28 @@
-# cosmetic-workshop-os
+# FamilyFoodOS
 
-Local-first working system for a cosmetic workshop. Client-facing product name: **«Мастерская косметолога»**.
+FamilyFoodOS is a separate hosted Web/PWA product bootstrapped from the verified
+engineering foundation of CosmeticWorkshopOS.
 
-The product is a packaged local application, not a repository/admin panel. User data lives outside application code/package, ordinary product work is API-first, and critical business logic remains backend-owned.
+The source-run backend, launcher, SQLite workflow and inherited frontend remain
+transitional migration scaffolding. The inherited macOS consumer `.app` / ZIP
+surface is retired by ADR 0031 and is not a supported FamilyFoodOS build or
+delivery path.
 
-## Current lifecycle
+## Current FamilyFoodOS delivery direction
+
+```text
+Target consumer delivery — hosted responsive Web/PWA
+Inherited macOS consumer package — RETIRED FROM ACTIVE FAMILYFOODOS
+Hosted infrastructure — SEPARATELY GATED; NOT IMPLEMENTED BY PR1
+```
+
+See `docs/decisions/0030-family-food-hosted-product-target.md` and
+`docs/decisions/0031-retire-inherited-macos-packaging.md`.
+
+## Inherited source-product lifecycle evidence
+
+The following closed CosmeticWorkshopOS lifecycle record remains historical
+engineering provenance. It is not a current FamilyFoodOS implementation queue.
 
 ```text
 PR #193 — MERGED — C4-III RESTORE LIFECYCLE CLOSURE
@@ -30,12 +48,12 @@ Product release readiness — NOT CLAIMED
 ```
 
 Normative lifecycle: `docs/current-lifecycle.md`.
-D4 decision: `docs/decisions/0020-d4-update-safety-contract.md`.
-D5 decision: `docs/decisions/0021-d5-remote-install-rehearsal-contract.md`.
+Historical D4 decision: `docs/decisions/0020-d4-update-safety-contract.md`.
+Historical D5 decision: `docs/decisions/0021-d5-remote-install-rehearsal-contract.md`.
 
 The exact pre-CR-013 README is preserved in `docs/history/d4-pre-decision/README.md`.
 
-## D4-A closed baseline
+## Historical D4-A closed baseline
 
 D4-A establishes the pre-mutation safety gate without implementing D4-B migration execution:
 
@@ -47,11 +65,13 @@ D4-A establishes the pre-mutation safety gate without implementing D4-B migratio
 - current lineage continues normally, supported older lineage keeps the existing backup-before-migration path, and newer/unsupported/unreadable lineage fails closed;
 - no protected Restore production file changes.
 
-D4-A, D4-B, D4-C and D4-D are closed. D4 is complete. CR-014 authorizes D5 only as a documentation + exact-package assisted-install rehearsal; Phase 12 and product release readiness remain gated.
+D4-A, D4-B, D4-C and D4-D are closed historical source-product evidence.
+ADR 0031 retires the D5 exact-package rehearsal from the FamilyFoodOS forward
+path; Phase 12 and product release readiness remain gated.
 
 D4-A closure evidence: verified PR head `f294b15365fcf651790e2dc5638ed1551f616c3d` merged as `89dd69dc1958e622146e01869cc34d4cd2ec859e`; exact merged-head verifier `31699624984` passed.
 
-## D4-A/B/C closed baseline / D4-D next
+## Historical D4-A/B/C/D closed baseline
 
 The current D4-B changeset replaces only the supported-older direct migration seam:
 
@@ -81,9 +101,15 @@ Final D4-D evidence:
 - one exact current-main `.app` was reused across the D4-C human-status/failure matrix and the accepted D4-B staging/interruption/newer-lineage matrix;
 - isolated user-data remained outside the repository/package and the repository postflight was clean.
 
-CR-014 authorizes D5 as the only next stage. D5 is not implemented or verified yet; signing/notarization/DMG/App Store/public release/auto-update, Phase 12 and product release readiness remain unauthorized or not claimed.
+The historical D5 path did not complete. ADR 0031 retires it from the
+FamilyFoodOS forward plan; signing/notarization/DMG/App Store/public desktop
+release/auto-update, Phase 12 and product release readiness remain unauthorized
+or not claimed.
 
-## Core product invariants
+## Inherited source-product invariants
+
+The following list records the source baseline and is not the target
+FamilyFoodOS delivery architecture.
 
 - local-first on a MacBook without mandatory internet;
 - user data separate from code/package;
@@ -99,9 +125,16 @@ CR-014 authorizes D5 as the only next stage. D5 is not implemented or verified y
 
 ## Development authority
 
-Read `AGENTS.md`, `docs/current-lifecycle.md`, relevant ADRs and the focused product/domain/test docs before changing behavior. D4 is closed. D5 work must follow ADR 0021 and remain documentation/rehearsal-only; any release/distribution/runtime expansion requires a separate decision and must not reopen the closed Restore boundary.
+Read `AGENTS.md`, the canonical FamilyFoodOS documents and ADRs 0030–0031 before
+changing delivery architecture. Source-run development remains available; the
+old D5 package path is historical and no macOS consumer package replacement is
+authorized. Restore remains closed.
 
 
-## CR-017 pilot distribution boundary
+## Historical CR-017 pilot distribution boundary
 
-The CR-016 self-running downloaded `.command` experiment failed the mandatory human Finder rehearsal because Gatekeeper blocked the bootstrap before execution. CR-017 therefore authorizes only a single-client **operator-assisted** install/update pilot: a qualified support operator may use Terminal to verify the exact package and remove quarantine only from the verified staged `.app`; the client does not type commands. Gatekeeper remains globally enabled. No public/self-service distribution, signing/notarization, Phase 12 or release-readiness claim is created.
+The CR-016 self-running downloaded `.command` experiment failed the mandatory
+human Finder rehearsal because Gatekeeper blocked the bootstrap before
+execution. CR-017 then authorized only a single-client operator-assisted
+install/update pilot. ADR 0031 retires that path from the current FamilyFoodOS
+forward plan; this paragraph remains inherited source-product evidence only.

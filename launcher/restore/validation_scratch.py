@@ -4,7 +4,7 @@ C4-II-A1 must validate a selected backup without creating a durable Restore
 operation.  The scratch therefore lives under the operating-system temporary
 root, not under the durable ``<user-data>/restore`` workspace used by C4-I::
 
-    <system-temp>/cosmetic-workshop-os/restore-validation/<run-id>/<session-id>/
+    <system-temp>/family-food-os/restore-validation/<run-id>/<session-id>/
 
 Only directories carrying this module's exact ownership/version marker are ever
 cleaned.  Symlinks and paths outside the canonical validation root are refused.
@@ -21,12 +21,13 @@ import stat
 import tempfile
 import uuid
 
+from launcher import APP_SLUG
 from launcher.restore.workspace import RestoreWorkspace
 
-VALIDATION_APP_DIRNAME = "cosmetic-workshop-os"
+VALIDATION_APP_DIRNAME = APP_SLUG
 VALIDATION_DIRNAME = "restore-validation"
-VALIDATION_MARKER_FILENAME = ".cwos-validation-owner"
-VALIDATION_MARKER_VERSION = "cosmetic-workshop-os:restore-validation:v1"
+VALIDATION_MARKER_FILENAME = f".{APP_SLUG}-validation-owner"
+VALIDATION_MARKER_VERSION = f"{APP_SLUG}:restore-validation:v1"
 PRIVATE_DIRECTORY_MODE = 0o700
 PRIVATE_FILE_MODE = 0o600
 
@@ -92,7 +93,7 @@ def _ensure_default_private_root() -> Path:
     exposes ``/var`` via ``/private/var``), so the operating-system temp base is
     canonicalized first.  From that trusted base onward, however, each app-owned
     path component is inspected with ``lstat`` and created one level at a time.
-    A pre-existing symlink at ``cosmetic-workshop-os`` or ``restore-validation``
+    A pre-existing symlink at ``family-food-os`` or ``restore-validation``
     is therefore refused before this launcher can create/chmod anything through
     it outside the canonical temp subtree.
     """

@@ -1,5 +1,14 @@
 # cosmetic-workshop-os - Domain Model
 
+> **Status: inherited CosmeticWorkshopOS domain model — non-canonical for
+> FamilyFoodOS.** The models, invariants and workflows below remain source-product
+> evidence and context for legacy bounded contexts still present during
+> migration. They must not define new FamilyFoodOS entities and must not be
+> converted by mechanical renames such as `Client → HouseholdMember`,
+> `Order → MealPlan`, or `ProductionBatch → PrepBatch`. Follow `AGENTS.md`,
+> canonical `docs/family-food/` documents and relevant approved ADRs for current
+> work.
+
 Документ: `docs/domain-model.md`  
 Проект: `cosmetic-workshop-os`  
 Клиентское название: «Мастерская косметолога»  

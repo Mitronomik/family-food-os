@@ -56,10 +56,10 @@ def unleased_cycle(cycle):
 @pytest.fixture
 def restored(monkeypatch, tmp_path):
     base = tmp_path / "user-data"
-    monkeypatch.setenv("COSMETIC_WORKSHOP_USER_DATA_DIR", str(base))
-    monkeypatch.delenv("COSMETIC_WORKSHOP_DB_PATH", raising=False)
+    monkeypatch.setenv("FAMILY_FOOD_USER_DATA_DIR", str(base))
+    monkeypatch.delenv("FAMILY_FOOD_DB_PATH", raising=False)
     database = build_workspace_database(
-        base / "data" / "cosmetic_workshop.sqlite", "restored-workspace"
+        base / "data" / "family_food.sqlite", "restored-workspace"
     )
     return database
 

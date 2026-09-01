@@ -1,6 +1,13 @@
 # User Install Guide
 
-Status: **DRAFT SKELETON — D5 AUTHORIZED BUT NOT IMPLEMENTED OR VERIFIED**. This is not yet the final remote-install procedure.
+Status: **RETIRED — NOT A FAMILYFOODOS INSTALL PROCEDURE**.
+
+ADR 0031 retires the inherited macOS consumer package and D5 install path.
+FamilyFoodOS has no current end-user install procedure until the separately
+gated hosted Web/PWA delivery exists.
+
+The following source-product draft is retained only as historical evidence and
+must not be followed for FamilyFoodOS:
 
 1. Скачать архив приложения.
 2. Распаковать архив.
@@ -21,4 +28,6 @@ Status: **DRAFT SKELETON — D5 AUTHORIZED BUT NOT IMPLEMENTED OR VERIFIED**. Th
   logs/
 ```
 
-Примечание: D3/D4 уже дают реальный `CosmeticWorkshopOS.app` внутри ZIP и безопасный update path, но этот install guide ещё не прошёл D5 clean-profile rehearsal. До D5 PASS не трактовать его как release-ready инструкцию. Пользовательский сценарий не должен требовать Terminal/Git/Python/Node/Docker.
+Историческое примечание: D3/D4 давали source-product `.app` внутри ZIP, но этот
+draft не прошёл D5 clean-profile rehearsal. ADR 0031 отменяет его как текущий
+путь FamilyFoodOS.

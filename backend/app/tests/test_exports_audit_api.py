@@ -441,7 +441,7 @@ def test_the_pending_audit_count_excludes_other_kinds_audited_and_abandoned(monk
     repository.prepare_operation(
         operation_id="66666666-7777-8888-9999-aaaaaaaaaaaa",
         artifact_kind="manual_backup",
-        primary_filename="20260801T101112131415Z-cosmetic_workshop-backup-manual.sqlite",
+        primary_filename="20260801T101112131415Z-family_food-backup-manual.sqlite",
         companion_filename=None,
         audit_action="backup.created",
     )
@@ -449,7 +449,7 @@ def test_the_pending_audit_count_excludes_other_kinds_audited_and_abandoned(monk
     repository.prepare_operation(
         operation_id=abandoned,
         artifact_kind="json_export",
-        primary_filename="20250101T000000000000Z-cosmetic_workshop-export-gone.json",
+        primary_filename="20250101T000000000000Z-family_food-export-gone.json",
         companion_filename=None,
         audit_action="export.created",
     )
@@ -520,7 +520,7 @@ def test_status_and_list_never_reconcile_audit_or_mutate(monkeypatch, tmp_path):
 
 def test_a_status_read_never_creates_the_database_or_the_export_directory(monkeypatch, tmp_path):
     """A GET that creates a database file is not a read."""
-    database_path = tmp_path / "data" / "cosmetic_workshop.sqlite"
+    database_path = tmp_path / "data" / "family_food.sqlite"
     user_data = tmp_path / "user-data"
     monkeypatch.setenv(DATABASE_PATH_ENV, str(database_path))
     monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data))
@@ -733,7 +733,7 @@ def test_the_verification_error_leaks_no_filename_path_reason_or_sqlite_detail(m
         captured["name"],
         captured["operation_id"],
         str(export_dir),
-        "cosmetic_workshop",
+        "family_food",
         "квартальная выгрузка",
         "kvartalnaya",
         "database disk image is malformed",

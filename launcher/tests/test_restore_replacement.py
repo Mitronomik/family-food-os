@@ -304,6 +304,7 @@ def test_the_replacement_artifact_is_staged_beside_the_target(target, candidate)
 
     artifact = prepare_replacement_artifact(candidate, target, operation_id)
 
+    assert REPLACEMENT_ARTIFACT_PREFIX == ".family-food-os-restore-"
     assert artifact.parent == target.parent
     assert artifact.name.startswith(REPLACEMENT_ARTIFACT_PREFIX)
     assert digest(artifact) == digest(candidate)
@@ -415,10 +416,14 @@ def test_a_failed_artifact_write_leaves_nothing_behind(target, tmp_path, monkeyp
 def test_discard_only_removes_launcher_owned_artifacts(target):
     foreign = target.parent / "not-ours.sqlite"
     foreign.write_bytes(b"keep me")
+    legacy_cosmetic_workshop = target.parent / ".cwos-restore-legacy.replacement"
+    legacy_cosmetic_workshop.write_bytes(b"source-product replacement scratch")
 
     discard_replacement_artifact(foreign)
+    discard_replacement_artifact(legacy_cosmetic_workshop)
 
     assert foreign.exists()
+    assert legacy_cosmetic_workshop.read_bytes() == b"source-product replacement scratch"
 
 
 def test_a_failing_rename_is_reported_as_possibly_replaced(target, candidate, monkeypatch):

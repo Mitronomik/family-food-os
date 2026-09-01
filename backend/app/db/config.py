@@ -3,8 +3,8 @@ from pathlib import Path
 import os
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
-DEFAULT_DATABASE_PATH = REPOSITORY_ROOT / ".local" / "cosmetic_workshop.sqlite"
-DATABASE_PATH_ENV = "COSMETIC_WORKSHOP_DB_PATH"
+DEFAULT_DATABASE_PATH = REPOSITORY_ROOT / ".local" / "family_food.sqlite"
+DATABASE_PATH_ENV = "FAMILY_FOOD_DB_PATH"
 
 
 @dataclass(frozen=True)

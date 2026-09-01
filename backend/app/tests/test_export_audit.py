@@ -60,7 +60,7 @@ def write_export(export_dir: Path, *, reason="manual", suffix=None, **manifest_o
         "created_at": "2026-08-01T10:11:12Z",
         "reason": reason,
         "source": EXPORT_SOURCE,
-        "database_filename": "cosmetic_workshop.sqlite",
+        "database_filename": "family_food.sqlite",
         "database_location_kind": "user_data",
         "tables": {name: len(rows) for name, rows in data.items()},
     }
@@ -92,7 +92,7 @@ def test_the_reserved_name_matches_the_accepted_grammar_and_canonical_reason(tmp
     path = reserve_export_path(export_dir, FROZEN, "before-update ../unsafe")
 
     assert path.parent == export_dir
-    assert path.name == "20260801T101112131415Z-cosmetic_workshop-export-before_update_unsafe.json"
+    assert path.name == "20260801T101112131415Z-family_food-export-before_update_unsafe.json"
     # The human reason stays human; only the filename carries the canonical slug.
     assert parse_export_reason(path) == "before_update_unsafe"
 
@@ -165,7 +165,7 @@ def test_the_writer_never_overwrites_a_reserved_path_that_is_already_taken(tmp_p
 
 @pytest.mark.parametrize(
     "name",
-    ["20260801T101112131415Z-cosmetic_workshop-export-manual.txt", "not-an-export.json", "manual.json"],
+    ["20260801T101112131415Z-family_food-export-manual.txt", "not-an-export.json", "manual.json"],
 )
 def test_a_reserved_path_outside_the_accepted_grammar_is_refused(tmp_path, name):
     config, export_dir, _service = setup(tmp_path)
@@ -181,7 +181,7 @@ def test_a_reserved_path_outside_the_export_directory_is_refused(tmp_path):
     config, export_dir, _service = setup(tmp_path)
     outside = tmp_path / "elsewhere"
     outside.mkdir()
-    stray = outside / "20260801T101112131415Z-cosmetic_workshop-export-manual.json"
+    stray = outside / "20260801T101112131415Z-family_food-export-manual.json"
 
     with pytest.raises(Exception) as failure:
         create_json_export(config.path, export_dir, reason="manual", reserved_export_path=stray)
@@ -313,6 +313,18 @@ def test_a_manifest_that_disagrees_with_the_contract_is_ambiguous(tmp_path, over
     assert verification.reason == expected
 
 
+def test_a_cosmetic_workshop_manifest_is_rejected_without_mutating_the_export(tmp_path):
+    _config, export_dir, service = setup(tmp_path)
+    path = write_export(export_dir, source="cosmetic-workshop-os")
+    before = path.read_bytes()
+
+    verification = verify_name(service, path.name)
+
+    assert verification.outcome == "ambiguous"
+    assert verification.reason == "unexpected-source"
+    assert path.read_bytes() == before
+
+
 def test_a_non_string_manifest_reason_is_ambiguous(tmp_path):
     _config, export_dir, service = setup(tmp_path)
     path = write_export(export_dir)
@@ -397,7 +409,7 @@ def test_a_symlink_leaving_the_export_directory_is_refused(tmp_path):
     assert foreign.exists()
 
 
-@pytest.mark.parametrize("name", ["notes.json", "20260801T101112131415Z-cosmetic_workshop-backup-manual.json"])
+@pytest.mark.parametrize("name", ["notes.json", "20260801T101112131415Z-family_food-backup-manual.json"])
 def test_a_filename_outside_the_export_grammar_is_ambiguous(tmp_path, name):
     _config, export_dir, service = setup(tmp_path)
     write_export(export_dir, suffix=name)
@@ -418,15 +430,15 @@ def test_a_filename_outside_the_export_grammar_is_ambiguous(tmp_path, name):
 # would audit it.
 # --------------------------------------------------------------------------
 
-VALID_STEM = "20260801T101112131415Z" + "-cosmetic_workshop-export-"
+VALID_STEM = "20260801T101112131415Z" + "-family_food-export-"
 
 MALFORMED_NAMES = [
     # malformed timestamp, correct marker, correct suffix
-    ("wrong-timestamp-cosmetic_workshop-export-manual-1.json", "malformed-timestamp"),
+    ("wrong-timestamp-family_food-export-manual-1.json", "malformed-timestamp"),
     # missing timestamp entirely
-    ("-cosmetic_workshop-export-manual.json", "missing-timestamp"),
+    ("-family_food-export-manual.json", "missing-timestamp"),
     # truncated timestamp the generator never emits
-    ("20260801T101112Z-cosmetic_workshop-export-manual.json", "timestamp-without-microseconds"),
+    ("20260801T101112Z-family_food-export-manual.json", "timestamp-without-microseconds"),
     # human, noncanonical reason containing a hyphen
     (f"{VALID_STEM}before-update.json", "hyphen-in-reason"),
     # repeated separators the canonical form collapses
@@ -499,7 +511,7 @@ def test_a_filename_the_generator_does_produce_stays_valid(tmp_path, name, label
         f"{VALID_STEM}manual-01.json",
         f"{VALID_STEM}manual-invalid.json",
         f"{VALID_STEM}before-update.json",
-        "wrong-timestamp-cosmetic_workshop-export-manual-1.json",
+        "wrong-timestamp-family_food-export-manual-1.json",
     ],
 )
 def test_partially_parsable_names_are_still_refused_by_the_strict_grammar(name):
@@ -527,6 +539,20 @@ def test_the_strict_parser_round_trips_every_name_the_generator_emits(tmp_path):
             # The parsed reason is canonical and matches what the API reports.
             assert parsed.reason == parse_export_reason(Path(name))
             assert normalize_artifact_reason_segment(parsed.reason) == parsed.reason
+
+
+def test_strict_current_parser_rejects_an_otherwise_valid_legacy_product_filename(tmp_path):
+    _config, export_dir, service = setup(tmp_path)
+    legacy_name = "20260801T101112131415Z-cosmetic_workshop-export-manual.json"
+    path = write_export(export_dir, suffix=legacy_name)
+    before = path.read_bytes()
+
+    assert parse_generated_export_filename(legacy_name) is None
+    assert is_generated_export_filename(legacy_name) is False
+    verification = verify_name(service, legacy_name)
+    assert verification.outcome == "ambiguous"
+    assert verification.reason == "filename-grammar-mismatch"
+    assert path.read_bytes() == before
 
 
 def test_legacy_listing_stays_best_effort_and_is_not_tightened(tmp_path):
@@ -621,7 +647,7 @@ def test_the_event_leaks_no_filename_path_reason_manifest_or_entity_count(tmp_pa
         str(export_dir),
         "before_update_unsafe",
         "before-update ../unsafe",
-        "cosmetic_workshop.sqlite",
+        "family_food.sqlite",
         "ingredients",
         "manifest",
     ]:
@@ -875,7 +901,7 @@ def test_reconciliation_never_touches_another_artifact_kind(tmp_path):
     repository.prepare_operation(
         operation_id="66666666-7777-8888-9999-aaaaaaaaaaaa",
         artifact_kind="manual_backup",
-        primary_filename="20260801T101112131415Z-cosmetic_workshop-backup-manual.sqlite",
+        primary_filename="20260801T101112131415Z-family_food-backup-manual.sqlite",
         companion_filename=None,
         audit_action="backup.created",
     )

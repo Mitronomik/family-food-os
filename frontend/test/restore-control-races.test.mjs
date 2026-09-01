@@ -250,7 +250,7 @@ test('C4-II-C completed result is truthful and allows ordinary navigation', asyn
   const resumedMarkup = restoreControlMarkup(h.runtime.view);
   assertCompleted(resumedMarkup);
   assert.doesNotMatch(resumedMarkup, /Восстановление недоступно/);
-  assert.doesNotMatch(resumedMarkup, /Перезапустите «Мастерскую косметолога»/);
+  assert.doesNotMatch(resumedMarkup, /Перезапустите FamilyFoodOS/);
   h.runtime.dispose();
 });
 
@@ -288,7 +288,7 @@ test('C4-II-C failed result avoids rollback and unchanged-data inference', async
 
 test('C4-II-C blocked result requires restart and offers no normal-work action', async () => {
   const assertBlocked = (markup) => {
-    assert.match(markup, /Перезапустите «Мастерскую косметолога»/);
+    assert.match(markup, /Перезапустите FamilyFoodOS/);
     assert.match(markup, /Обычная работа в текущем запуске не подтверждена как безопасная/);
     assert.match(markup, /разделом «Помощь»/);
     assert.doesNotMatch(markup, /data-restore-action="back"/);
@@ -349,7 +349,7 @@ test('C4-II-C destructive-result uncertainty stays unknown after connection loss
     assert.match(markup, /Статус неизвестен/);
     assert.match(markup, /Локальная сессия восстановления сейчас недоступна/);
     assert.match(markup, /этот экран не может подтвердить текущий результат восстановления или состояние данных/i);
-    assert.match(markup, /перезапустите «Мастерскую косметолога»/i);
+    assert.match(markup, /перезапустите FamilyFoodOS/i);
     assert.doesNotMatch(markup, /Без изменения данных/);
     assert.doesNotMatch(markup, /Выбор и проверка не меняют/);
     assert.doesNotMatch(markup, /рабочая база данных не заменяется/i);

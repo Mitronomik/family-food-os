@@ -1,11 +1,20 @@
 # Packaging
 
-Status: **CURRENT — D3 IMPLEMENTED; D4 CLOSED; D5 DECIDED AND AUTHORIZED NEXT; RELEASE NOT CLAIMED**
-Updated: `2026-08-13`
+Status: **RETIRED FROM ACTIVE FAMILYFOODOS — HISTORICAL PACKAGE EVIDENCE RETAINED**
+Updated: `2026-08-31`
+
+ADR 0031 retires the inherited macOS consumer `.app` / ZIP surface. The
+repository no longer supplies a supported package build, verifier or install
+path, and no `FamilyFoodOS.app` replacement is created. ADR 0030 defines the
+hosted Web/PWA target.
+
+The material below records the previously verified CosmeticWorkshopOS package
+and remains historical evidence only. It must not be followed as a current
+FamilyFoodOS build or release procedure.
 
 The exact pre-CR-013 packaging document is preserved in `docs/history/d4-pre-decision/packaging.md`.
 
-## Current lifecycle
+## Historical source-product lifecycle
 
 ```text
 D3 — macOS package MVP — IMPLEMENTED
@@ -27,11 +36,11 @@ PHASE 12 — MVP release preparation — NOT AUTHORIZED BY CR-014/CR-015/CR-016/
 Product release readiness — NOT CLAIMED
 ```
 
-## D3 baseline
+## Historical D3 baseline
 
 The package remains `CosmeticWorkshopOS.app` distributed in `CosmeticWorkshopOS-mac.zip`, with a bundled Python runtime, built frontend, existing launcher/backend architecture and user data outside the application package. D4 does not introduce another desktop shell.
 
-## D4-A version projection contract
+## Historical D4-A version projection contract
 
 `backend/VERSION` is now the one editable repository-owned build-time product version. D4-A accepts a numeric `major.minor.patch` identity token only; it never orders application versions to decide schema compatibility.
 
@@ -51,29 +60,29 @@ The source `backend/VERSION` file is deliberately **not copied into the packaged
 
 The historical mutable database `app.version` placeholder is not used to decide package identity or compatibility.
 
-## D4 manual update model
+## Historical D4 manual update model
 
 D4 remains safe manual package replacement. D4-A supplies the closed compatibility gate; D4-B owns staged migration and UpdateLog; D4-C adds only bounded read-only status/failure presentation on top of that startup truth.
 
 The previous package is **not** a guaranteed rollback after the database update commit point. An older package must independently prove the canonical database lineage is compatible; otherwise it fails closed before mutation.
 
-## Packaged failure UX
+## Historical packaged failure UX
 
 D4-C extends the existing Finder-visible fixed-message catalogue with two update outcomes only: stopped before canonical DB replacement, or completion cannot be confirmed automatically. Messages are fixed, non-technical and never interpolate exception text, paths or migration internals.
 
-## Explicit non-goals
+## Historical explicit non-goals
 
 D4 is closed and final exact-package verified. CR-014 authorizes D5 only to document and rehearse assisted installation of the existing ZIP/.app. It does not authorize package-runtime redesign, auto-update/download, internet update checking, GitHub Releases, release channels, signing/notarization, DMG/PKG, App Store, sandbox migration, Phase 12 or release readiness.
 
-## CR-015 native macOS lifecycle blocker
+## Historical CR-015 native macOS lifecycle blocker
 
 The first clean-Mac D5 human rehearsal exposed that the current shell/Python `CFBundleExecutable` does not provide a healthy native macOS Dock/Quit lifecycle even though the local browser product runtime itself starts. CR-015 / ADR 0022 authorizes a minimal AppKit lifecycle executable around the existing packaged bootstrap only. This is a product-lifecycle repair, not signing/notarization, DMG/PKG, App Store packaging or a new desktop UI framework.
 
-## CR-015 implementation closure
+## Historical CR-015 implementation closure
 
 The native lifecycle repair is merged and exact-package verified. `CosmeticWorkshopOS.app` now has a Mach-O/AppKit `CFBundleExecutable`, while `CosmeticWorkshopOSRuntime` retains the existing self-contained shell/Python isolation path. Verified head `d7f95141e5f41c7a806c3fafb71e942fe5892dd8`, merge `c38940349a80d345f3e833b61e4bf4e5e761c0eb`, run `31780899805`, exact ZIP SHA-256 `85f993a93082c4b3a36771318cf8c0c3abf02be56b1374a32a62d1a6b9279ee6`. This closes only the lifecycle blocker; signing/notarization and release distribution remain out of scope.
 
 
-## CR-017 pilot distribution boundary
+## Historical CR-017 pilot distribution boundary
 
 The CR-016 self-running downloaded `.command` experiment failed the mandatory human Finder rehearsal because Gatekeeper blocked the bootstrap before execution. CR-017 therefore authorizes only a single-client **operator-assisted** install/update pilot: a qualified support operator may use Terminal to verify the exact package and remove quarantine only from the verified staged `.app`; the client does not type commands. Gatekeeper remains globally enabled. No public/self-service distribution, signing/notarization, Phase 12 or release-readiness claim is created.

@@ -19,8 +19,8 @@ def test_settings_status_response_builds_local_first_status(monkeypatch, tmp_pat
     response = SettingsService().build_status()
 
     assert response.generated_at
-    assert response.app.product_name == "Мастерская косметолога"
-    assert response.app.repository_name == "cosmetic-workshop-os"
+    assert response.app.product_name == "FamilyFoodOS"
+    assert response.app.repository_name == "family-food-os"
     assert response.app.mode == "Локальное приложение"
     assert response.app.local_first is True
     assert response.app.internet_required is False
@@ -72,7 +72,7 @@ def test_calculation_sensitive_settings_require_backend_service_and_history_flag
 
 
 def test_settings_service_does_not_create_files_or_mutate_database(monkeypatch, tmp_path):
-    db = tmp_path / "data" / "cosmetic_workshop.sqlite"
+    db = tmp_path / "data" / "settings-readonly.sqlite"
     user_data_dir = tmp_path / "user-data"
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db))
     monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))

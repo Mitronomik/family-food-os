@@ -252,8 +252,8 @@ HELPER_LAUNCHER = textwrap.dedent(
     repository_root, user_data_dir, database_path, port, pid_file = sys.argv[1:6]
     sys.path.insert(0, repository_root)
     sys.path.insert(0, os.path.join(repository_root, "backend"))
-    os.environ["COSMETIC_WORKSHOP_USER_DATA_DIR"] = user_data_dir
-    os.environ.pop("COSMETIC_WORKSHOP_DB_PATH", None)
+    os.environ["FAMILY_FOOD_USER_DATA_DIR"] = user_data_dir
+    os.environ.pop("FAMILY_FOOD_DB_PATH", None)
 
     from launcher.config import build_runtime_config, resolve_runtime_paths
     from launcher.restore.context import LauncherLifecycleContext

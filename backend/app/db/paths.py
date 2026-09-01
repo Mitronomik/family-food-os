@@ -4,9 +4,9 @@ import os
 
 from app.db.config import DEFAULT_DATABASE_PATH
 
-USER_DATA_DIR_ENV = "COSMETIC_WORKSHOP_USER_DATA_DIR"
-USER_DOCUMENTS_DIRNAME = "Мастерская косметолога"
-DATABASE_FILENAME = "cosmetic_workshop.sqlite"
+USER_DATA_DIR_ENV = "FAMILY_FOOD_USER_DATA_DIR"
+USER_DOCUMENTS_DIRNAME = "FamilyFoodOS"
+DATABASE_FILENAME = "family_food.sqlite"
 
 
 @dataclass(frozen=True)

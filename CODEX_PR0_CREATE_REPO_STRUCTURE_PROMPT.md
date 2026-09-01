@@ -1,5 +1,12 @@
 # Task: PR0 - Project documentation contract and repository structure
 
+> **Status: historical CosmeticWorkshopOS bootstrap artifact — not an active
+> FamilyFoodOS task.** This file preserves the source project's original PR0
+> repository-setup prompt as provenance. Do not execute it, use its PR numbering,
+> or treat its local-first/product/domain requirements as current FamilyFoodOS
+> instructions. Current work follows `AGENTS.md`, canonical
+> `docs/family-food/` documents, relevant approved ADRs, and current state files.
+
 ## Context
 
 You are a senior full-stack product engineer working on `cosmetic-workshop-os`.

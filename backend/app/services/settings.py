@@ -7,6 +7,7 @@ from typing import Final
 from app.db.config import DatabaseConfig, get_database_config
 from app.db.connection import session
 from app.db.paths import resolve_user_data_paths
+from app.identity import PRODUCT_NAME, REPOSITORY_NAME
 from app.models.settings import AppSetting
 from app.repositories.audit import AuditLogRepository
 from app.repositories.settings import SettingsNotInitializedError, SettingsRepository
@@ -24,10 +25,6 @@ from app.schemas.settings import (
     WorkshopProfileResponse,
     WorkshopProfileUpdateRequest,
 )
-
-
-PRODUCT_NAME = "Мастерская косметолога"
-REPOSITORY_NAME = "cosmetic-workshop-os"
 
 
 def read_app_settings(config: DatabaseConfig | None = None) -> list[AppSetting]:

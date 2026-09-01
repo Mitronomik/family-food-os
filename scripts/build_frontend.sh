@@ -3,9 +3,8 @@
 # Build the production frontend from the checked-out source.
 #
 # This runs the repository's own build command and changes nothing about how the
-# frontend behaves. Node and npm are needed **here**, at build time, and only
-# here: the packaged product serves the resulting static files through
-# `macos_package/frontend_server.py`, so the end user never needs Node.
+# frontend behaves. It remains a reusable source-build helper after retirement
+# of the inherited macOS consumer package.
 #
 set -euo pipefail
 

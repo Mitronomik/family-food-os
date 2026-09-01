@@ -873,13 +873,13 @@ function navigationMarkup() {
 function render() {
   const root = document.getElementById('root');
   if (!root) return;
-  const healthMarkup = healthStatus === 'offline' ? '<span class="status offline"><strong>Не удалось загрузить данные</strong><small>Перезапустите «Мастерскую косметолога» и повторите попытку.</small></span>' : '';
+  const healthMarkup = healthStatus === 'offline' ? '<span class="status offline"><strong>Не удалось загрузить данные</strong><small>Перезапустите FamilyFoodOS и повторите попытку.</small></span>' : '';
   root.innerHTML = `
     <div class="app-shell">
       <aside class="sidebar" aria-label="Основная навигация">
-        <div class="brand" aria-label="Мастерская косметолога">
-          <div class="brand-mark" aria-hidden="true"><span class="brand-fallback">МК</span><img src="/brand/mch-logo.png" alt="" /></div>
-          <div class="brand-copy"><p class="brand-kicker">Локальная система</p><p class="brand-name">Мастерская косметолога</p></div>
+        <div class="brand" aria-label="FamilyFoodOS">
+          <div class="brand-mark" aria-hidden="true"><span class="brand-fallback">FF</span></div>
+          <div class="brand-copy"><p class="brand-kicker">Локальная система</p><p class="brand-name">FamilyFoodOS</p></div>
         </div>
         <nav class="navigation">${navigationMarkup()}</nav>
       </aside>
@@ -921,7 +921,6 @@ function bindEvents(root: HTMLElement) {
     submitPackaging: (event) => submitPackagingItemForm(event as SubmitEvent),
   });
   bindAuditLogWorkspaceControls(root, { refresh: () => auditLogRuntime.refresh(), retry: () => auditLogRuntime.retry(), applyFilters: () => auditLogRuntime.applyFilters(), clearFilters: () => auditLogRuntime.clearFilters(), loadMore: () => auditLogRuntime.loadMore(), setFilter: (name, value) => auditLogRuntime.setFilter(name, value) });
-  root.querySelector<HTMLImageElement>('.brand-mark img')?.addEventListener('error', (event) => { (event.currentTarget as HTMLImageElement).hidden = true; });
   root.querySelectorAll<HTMLButtonElement>('.nav-group-toggle').forEach((button) => {
     button.addEventListener('click', () => {
       const groupTitle = button.dataset.navGroup;
@@ -3173,7 +3172,7 @@ function settingsLocalDataSection() {
     return `<section class="card data-card settings-card error-card"><h2>Локальные данные</h2><p>Не удалось показать сведения о папке данных. Профиль мастерской можно редактировать отдельно, если он загрузился.</p><div class="actions"><button class="secondary-action" type="button" data-action="reload-settings-status">Обновить сведения</button></div>${settingsLocalDataActions()}</section>`;
   }
   const local = settingsUiState.data?.local_data;
-  return `<section class="card data-card settings-card"><h2>Локальные данные</h2><p>Данные «Мастерской косметолога» хранятся на этом компьютере отдельно от файлов приложения. Для ежедневной работы не требуется обязательное подключение к интернету.</p><p class="next-step">Перед обновлением приложения, переносом данных или большими изменениями в рабочих данных сначала создайте резервную копию.</p><div class="settings-data-path"><span>${escapeHtml(artifactFolderLabel('data'))}</span><strong>${local?.user_data_separate_from_code ? 'Данные отделены от приложения' : 'Проверьте расположение данных'}</strong><p>Ищите рабочие файлы в папке данных приложения для «Мастерской косметолога».</p></div>${local?.user_data_path_display ? `<details class="technical-details settings-technical-details"><summary>Путь к папке данных</summary><code class="path-text">${escapeHtml(local.user_data_path_display)}</code></details>` : '<p class="muted-text">Путь к папке данных будет показан, когда локальное приложение вернёт эти сведения.</p>'}${local?.backup_before_migration_required ? feedbackMessage('warning', 'Перед обновлением приложения или переносом данных обязательно создайте резервную копию.') : ''}${settingsLocalDataActions()}</section>`;
+  return `<section class="card data-card settings-card"><h2>Локальные данные</h2><p>Данные FamilyFoodOS хранятся на этом компьютере отдельно от файлов приложения. Для ежедневной работы не требуется обязательное подключение к интернету.</p><p class="next-step">Перед обновлением приложения, переносом данных или большими изменениями в рабочих данных сначала создайте резервную копию.</p><div class="settings-data-path"><span>${escapeHtml(artifactFolderLabel('data'))}</span><strong>${local?.user_data_separate_from_code ? 'Данные отделены от приложения' : 'Проверьте расположение данных'}</strong><p>Ищите рабочие файлы в папке данных приложения FamilyFoodOS.</p></div>${local?.user_data_path_display ? `<details class="technical-details settings-technical-details"><summary>Путь к папке данных</summary><code class="path-text">${escapeHtml(local.user_data_path_display)}</code></details>` : '<p class="muted-text">Путь к папке данных будет показан, когда локальное приложение вернёт эти сведения.</p>'}${local?.backup_before_migration_required ? feedbackMessage('warning', 'Перед обновлением приложения или переносом данных обязательно создайте резервную копию.') : ''}${settingsLocalDataActions()}</section>`;
 }
 
 function settingsLocalDataActions() {

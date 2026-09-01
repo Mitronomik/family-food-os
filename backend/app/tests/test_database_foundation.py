@@ -34,6 +34,9 @@ from app.tests.table_guards import (
     assert_only_current_tables,
 )
 
+OLD_DATABASE_PATH_ENV = "COSMETIC_WORKSHOP_DB_PATH"
+OLD_USER_DATA_DIR_ENV = "COSMETIC_WORKSHOP_USER_DATA_DIR"
+
 
 def table_names(database_path):
     with sqlite3.connect(database_path) as connection:
@@ -49,7 +52,7 @@ def test_default_database_path_is_repository_root_local_path(monkeypatch):
     config = get_database_config()
 
     assert config.path == DEFAULT_DATABASE_PATH
-    assert config.path == REPOSITORY_ROOT / ".local" / "cosmetic_workshop.sqlite"
+    assert config.path == REPOSITORY_ROOT / ".local" / "family_food.sqlite"
     assert config.path.is_absolute()
 
 
@@ -60,6 +63,17 @@ def test_database_path_env_override_still_works(monkeypatch, tmp_path):
     config = get_database_config()
 
     assert config.path == override_path
+
+
+def test_old_cosmetic_workshop_database_path_env_is_ignored(monkeypatch, tmp_path):
+    old_database = tmp_path / "cosmetic-workshop.sqlite"
+    monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
+    monkeypatch.setenv(OLD_DATABASE_PATH_ENV, str(old_database))
+
+    config = get_database_config()
+
+    assert config.path == DEFAULT_DATABASE_PATH
+    assert config.path != old_database
 
 
 def test_database_initialization_creates_infrastructure_tables(tmp_path):
@@ -122,7 +136,8 @@ def test_settings_read_returns_seeded_app_configuration_after_explicit_init(tmp_
 
     settings = {setting.key: setting for setting in read_app_settings(config)}
 
-    assert settings["product.name"].value == "Мастерская косметолога"
+    assert settings["product.name"].value == "FamilyFoodOS"
+    assert settings["workspace.source"].value == "family-food-os"
     assert settings["mode.local_first"].value == "true"
     assert settings["tax.default_rate"].value == "0.06"
 
@@ -180,7 +195,8 @@ def test_settings_endpoint_reads_explicitly_initialized_test_database(monkeypatc
     assert response.status_code == 200
     body = response.json()
     settings = {setting["key"]: setting for setting in body["settings"]}
-    assert settings["product.name"]["value"] == "Мастерская косметолога"
+    assert settings["product.name"]["value"] == "FamilyFoodOS"
+    assert settings["workspace.source"]["value"] == "family-food-os"
     assert settings["mode.local_first"]["value"] == "true"
 
 
@@ -205,7 +221,7 @@ def test_database_status_endpoint_reads_explicitly_initialized_test_database(mon
 def test_development_database_path_remains_stable(monkeypatch):
     monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
 
-    assert resolve_development_database_path() == REPOSITORY_ROOT / ".local" / "cosmetic_workshop.sqlite"
+    assert resolve_development_database_path() == REPOSITORY_ROOT / ".local" / "family_food.sqlite"
     assert get_database_config().path == resolve_development_database_path()
 
 
@@ -216,9 +232,9 @@ def test_user_data_default_path_uses_documents_folder_without_creating_it(monkey
 
     paths = resolve_user_data_paths()
 
-    assert paths.base_dir == fake_home / "Documents" / "Мастерская косметолога"
+    assert paths.base_dir == fake_home / "Documents" / "FamilyFoodOS"
     assert paths.data_dir == paths.base_dir / "data"
-    assert paths.database_path == paths.data_dir / "cosmetic_workshop.sqlite"
+    assert paths.database_path == paths.data_dir / "family_food.sqlite"
     assert paths.backups_dir == paths.base_dir / "backups"
     assert paths.exports_dir == paths.base_dir / "exports"
     assert paths.attachments_dir == paths.base_dir / "attachments"
@@ -233,8 +249,81 @@ def test_user_data_directory_env_override(monkeypatch, tmp_path):
     paths = resolve_user_data_paths()
 
     assert paths.base_dir == override_dir
-    assert paths.database_path == override_dir / "data" / "cosmetic_workshop.sqlite"
+    assert paths.database_path == override_dir / "data" / "family_food.sqlite"
     assert not override_dir.exists()
+
+
+def test_old_cosmetic_workshop_user_data_env_is_ignored(monkeypatch, tmp_path):
+    fake_home = tmp_path / "home"
+    old_user_data = tmp_path / "cosmetic-workshop-user-data"
+    monkeypatch.setattr(Path, "home", lambda: fake_home)
+    monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
+    monkeypatch.setenv(OLD_USER_DATA_DIR_ENV, str(old_user_data))
+
+    paths = resolve_user_data_paths()
+
+    assert paths.base_dir == fake_home / "Documents" / "FamilyFoodOS"
+    assert paths.base_dir != old_user_data
+    assert paths.database_path == fake_home / "Documents" / "FamilyFoodOS" / "data" / "family_food.sqlite"
+    assert not paths.base_dir.exists()
+    assert not old_user_data.exists()
+
+
+def test_only_old_cosmetic_workshop_env_does_not_select_old_runtime_data(monkeypatch, tmp_path):
+    fake_home = tmp_path / "home"
+    old_database = tmp_path / "old-config" / "cosmetic_workshop.sqlite"
+    old_user_data = tmp_path / "old-user-data"
+    monkeypatch.setattr(Path, "home", lambda: fake_home)
+    monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
+    monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
+    monkeypatch.setenv(OLD_DATABASE_PATH_ENV, str(old_database))
+    monkeypatch.setenv(OLD_USER_DATA_DIR_ENV, str(old_user_data))
+
+    config = get_database_config()
+    paths = resolve_user_data_paths()
+
+    assert config.path == REPOSITORY_ROOT / ".local" / "family_food.sqlite"
+    assert paths.base_dir == fake_home / "Documents" / "FamilyFoodOS"
+    assert paths.database_path == paths.base_dir / "data" / "family_food.sqlite"
+    assert config.path != old_database
+    assert paths.base_dir != old_user_data
+    assert paths.base_dir != fake_home / "Documents" / "Мастерская косметолога"
+    assert not old_database.exists()
+    assert not old_user_data.exists()
+
+
+def test_user_startup_with_only_old_env_leaves_cosmetic_workshop_data_untouched(
+    monkeypatch, tmp_path
+):
+    fake_home = tmp_path / "home"
+    old_configured_database = tmp_path / "old-config" / "cosmetic_workshop.sqlite"
+    old_configured_user_data = tmp_path / "old-user-data"
+    old_default_database = (
+        fake_home
+        / "Documents"
+        / "Мастерская косметолога"
+        / "data"
+        / "cosmetic_workshop.sqlite"
+    )
+    for old_database in (old_configured_database, old_default_database):
+        old_database.parent.mkdir(parents=True, exist_ok=True)
+        old_database.write_bytes(b"source-product-data")
+    monkeypatch.setattr(Path, "home", lambda: fake_home)
+    monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
+    monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
+    monkeypatch.setenv(OLD_DATABASE_PATH_ENV, str(old_configured_database))
+    monkeypatch.setenv(OLD_USER_DATA_DIR_ENV, str(old_configured_user_data))
+
+    result = initialize_startup("user")
+
+    expected_database = (
+        fake_home / "Documents" / "FamilyFoodOS" / "data" / "family_food.sqlite"
+    )
+    assert result.database_path == expected_database
+    assert expected_database.exists()
+    assert old_configured_database.read_bytes() == b"source-product-data"
+    assert old_default_database.read_bytes() == b"source-product-data"
+    assert not old_configured_user_data.exists()
 
 
 def test_database_path_env_override_takes_precedence_for_development_config(monkeypatch, tmp_path):
@@ -258,18 +347,18 @@ def test_user_mode_database_path_uses_user_data_directory(monkeypatch, tmp_path)
 
     config = startup_database_config("user")
 
-    assert config.path == user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    assert config.path == user_data_dir / "data" / "family_food.sqlite"
     assert not config.path.exists()
 
 
 def test_default_user_data_base_dir_is_cross_platform_documents_folder(tmp_path):
-    assert default_user_data_base_dir(tmp_path, "Darwin") == tmp_path / "Documents" / "Мастерская косметолога"
-    assert default_user_data_base_dir(tmp_path, "Windows") == tmp_path / "Documents" / "Мастерская косметолога"
-    assert default_user_data_base_dir(tmp_path, "Linux") == tmp_path / "Documents" / "Мастерская косметолога"
+    assert default_user_data_base_dir(tmp_path, "Darwin") == tmp_path / "Documents" / "FamilyFoodOS"
+    assert default_user_data_base_dir(tmp_path, "Windows") == tmp_path / "Documents" / "FamilyFoodOS"
+    assert default_user_data_base_dir(tmp_path, "Linux") == tmp_path / "Documents" / "FamilyFoodOS"
 
 
 def test_directory_creation_helper_creates_expected_user_data_folders(tmp_path):
-    paths = resolve_user_data_paths(tmp_path / "Мастерская косметолога")
+    paths = resolve_user_data_paths(tmp_path / "FamilyFoodOS")
 
     create_user_data_directories(paths)
 
@@ -286,7 +375,7 @@ def test_explicit_user_startup_initialization_creates_directories_and_applies_mi
 
     assert result.mode == "user"
     assert result.user_data_paths is not None
-    assert result.database_path == user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    assert result.database_path == user_data_dir / "data" / "family_food.sqlite"
     assert result.applied_migrations == expected_migration_ids()
     assert all(directory.is_dir() for directory in result.user_data_paths.required_directories)
     tables = table_names(result.database_path)
@@ -480,7 +569,7 @@ def build_supported_older_database(database_path: Path) -> None:
 
 def test_user_mode_startup_creates_backup_before_migration_for_existing_database(monkeypatch, tmp_path):
     user_data_dir = tmp_path / "user-data"
-    database_path = user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    database_path = user_data_dir / "data" / "family_food.sqlite"
     monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))
     monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
     build_supported_older_database(database_path)
@@ -495,9 +584,13 @@ def test_user_mode_startup_creates_backup_before_migration_for_existing_database
     assert result.backup.backup_path.parent == user_data_dir / "backups"
     with sqlite3.connect(result.backup.backup_path) as backup_connection:
         marker = backup_connection.execute("SELECT value FROM legacy_marker").fetchone()[0]
+        workspace_source = backup_connection.execute(
+            "SELECT value FROM app_settings WHERE key = 'workspace.source'"
+        ).fetchone()
         backup_tables = table_names(result.backup.backup_path)
     assert marker == "before migration"
-    assert "artifact_audit_operations" not in backup_tables
+    assert workspace_source is None
+    assert "artifact_audit_operations" in backup_tables
     assert result.applied_migrations == [expected_migration_ids()[-1]]
     tables = table_names(database_path)
     assert tables <= (CURRENT_ALLOWED_TABLES | {"legacy_marker"})

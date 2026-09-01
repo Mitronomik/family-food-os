@@ -1,18 +1,29 @@
 # UI Skill Policy
 
-This policy defines how project-owned and third-party Codex UI/design skills may be used in **cosmetic-workshop-os**.
+This policy defines how project-owned and third-party Codex UI/design guidance
+may be used in **FamilyFoodOS / family-food-os**.
 
 ## Instruction priority
 
 For frontend, visual, accessibility, responsive, or motion tasks, apply instructions in this order:
 
-1. Project architecture and product documentation, including `AGENTS.md`, `docs/product-spec.md`, `docs/architecture.md`, `docs/domain-model.md`, `docs/frontend-concept.md`, roadmap/state files, and any scoped `AGENTS.md` files.
-2. `docs/ui-ux-contract.md`.
-3. The project-owned `.agents/skills/cosmetic-workshop-ui/SKILL.md` skill.
-4. The explicit Codex task for the current PR.
-5. Third-party design skills.
+1. Latest explicit user-approved decisions and repository/scoped `AGENTS.md`
+   files.
+2. Current canonical FamilyFoodOS documents under `docs/family-food/`, relevant
+   approved ADRs under `docs/decisions/`, the project operating manual, and
+   current state files.
+3. The explicit task and PR scope.
+4. `frontend/AGENTS.md` and the project-owned
+   `.agents/skills/family-food-ui/SKILL.md` skill.
+5. Third-party design guidance.
 
 If instructions conflict, the higher-priority source wins. Canonical project documentation always overrides third-party skills.
+
+`docs/ui-ux-contract.md` is the inherited CosmeticWorkshopOS UI contract. It
+may be consulted for historical or transitional-frontend behavior context, but
+it is not the active FamilyFoodOS consumer UI contract and cannot define the
+future consumer product. A FamilyFoodOS consumer UI contract belongs to its
+later migration/frontend gate.
 
 ## Third-party skill boundaries
 
@@ -26,12 +37,16 @@ Third-party skills are advisory and implementation aids only. They cannot:
 - add scripts, hooks, or executable automation without explicit approval;
 - redesign unrelated routes;
 - mutate historical or operational data;
-- bypass local-first constraints;
+- treat transitional local infrastructure as the target hosted consumer
+  architecture;
 - replace backend ownership of critical calculations;
-- remove confirmations, auditability, import preview, production confirmation, or stock-movement safety;
-- replace the approved product identity: warm cream/off-white surfaces, deep brown navigation/typography, restrained rose-gold or soft copper accents, calm operational density, high text contrast, and purposeful motion.
+- remove applicable confirmations, auditability, validation, or data-safety
+  boundaries;
+- invent or replace a FamilyFoodOS visual identity, information architecture,
+  component library, or future consumer workflow without approval.
 
-Third-party output must be reviewed against `docs/ui-ux-contract.md` before implementation.
+Third-party output must be reviewed against the current FamilyFoodOS contracts,
+the migration gate, and the project-owned UI skill before implementation.
 
 ## Approved and planned roles
 
@@ -43,9 +58,16 @@ Approved role: project-adapted advisory guidance for audit, hierarchy, layout, t
 
 The reviewed source record and project-authored guidance live at `.agents/vendor/impeccable/3.9.1/` and are intentionally outside `.agents/skills/`. Raw upstream command references are not included. The directory is not an independently discoverable skill and has no vendored scripts, hooks, live mode, provider agents, or automatic update behavior.
 
-Use it only after the relevant route and product workflow already exist and only through the project-owned `cosmetic-workshop-ui` skill. Impeccable-derived feedback must separate objective usability issues from taste-based preferences and must not broaden scope without approval.
+Use it only after the relevant route and product workflow already exist and only
+through the project-owned `family-food-ui` skill. Impeccable-derived feedback
+must separate objective usability issues from taste-based preferences and must
+not broaden scope without approval.
 
-Generic upstream taste rules do not override the existing project identity. In particular, the approved warm cream/off-white surfaces, deep brown typography and navigation, restrained rose-gold or soft copper accents, rounded operational surfaces, and calm visual density remain valid when used according to `docs/ui-ux-contract.md`.
+Generic upstream taste rules do not define FamilyFoodOS product identity. No
+new color palette, visual system, component library, or detailed future
+consumer information architecture is approved by this policy. Existing
+transitional frontend patterns should not be changed in an unrelated narrow
+task, but they are not automatically the future FamilyFoodOS design.
 
 ### Taste Skill
 
@@ -74,6 +96,7 @@ The currently approved Impeccable integration is limited to project-authored ada
 - tied to an exact reviewed upstream commit;
 - documented with source, license, reviewed scope, restrictions, and checksums.
 
-The project-owned `cosmetic-workshop-ui` skill is the only instruction layer allowed to consult `GUIDANCE.md`.
+The project-owned `family-food-ui` skill is the only instruction layer allowed
+to consult `GUIDANCE.md`.
 
 Taste Skill and Emil skills remain uninstalled and unvendored. Any future third-party addition or Impeccable update requires a separate review PR.

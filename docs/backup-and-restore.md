@@ -1,13 +1,13 @@
 # Backup and Restore
 
-Default user data directory: `~/Documents/Мастерская косметолога/`.
+Default user data directory: `~/Documents/FamilyFoodOS/`.
 
 Expected local user-data layout:
 
 ```text
-~/Documents/Мастерская косметолога/
+~/Documents/FamilyFoodOS/
   data/
-    cosmetic_workshop.sqlite
+    family_food.sqlite
   backups/
   exports/
   attachments/
@@ -16,8 +16,8 @@ Expected local user-data layout:
 
 Current foundation behavior:
 
-- Development mode still uses repository-root `.local/cosmetic_workshop.sqlite` unless `COSMETIC_WORKSHOP_DB_PATH` is set.
-- User-mode path resolution targets the default user data directory above, or `COSMETIC_WORKSHOP_USER_DATA_DIR` when explicitly overridden.
+- Development mode uses repository-root `.local/family_food.sqlite` unless `FAMILY_FOOD_DB_PATH` is set.
+- User-mode path resolution targets the default user data directory above, or `FAMILY_FOOD_USER_DATA_DIR` when explicitly overridden.
 - Directory creation and database migration are explicit startup actions, not side effects of ordinary status/read endpoints.
 - Backup creation is implemented as a backend service operation that writes a transactionally consistent SQLite snapshot into `backups/` through the SQLite Online Backup API, without modifying the original database. See ADR 0015; the former raw file copy was removed by `CR-004`.
 - PR73 exposes a manual backup backend API: `GET /api/backups/status`, `GET /api/backups`, and `POST /api/backups`.
@@ -27,7 +27,12 @@ Current foundation behavior:
 - Brand-new user-mode startup may create the empty `backups/` directory as part of the user-data layout, but it does not create a backup file for a database that does not exist yet.
 - Ordinary status/settings reads and backup status/list reads must not create backup directories, backup files, databases, or migrations.
 - Manual backup creation is explicit through `POST /api/backups`; it may create the selected backup directory and copies only the current configured SQLite database.
-- Backup path selection keeps development backups next to the configured development database unless the database is the resolved user database path or `COSMETIC_WORKSHOP_USER_DATA_DIR` is explicitly set.
+- Backup path selection keeps development backups next to the configured development database unless the database is the resolved user database path or `FAMILY_FOOD_USER_DATA_DIR` is explicitly set.
+
+FamilyFoodOS does not automatically discover, adopt, migrate, rename, or clean
+CosmeticWorkshopOS user data or temporary artifacts. Source-product paths,
+environment variables, and `.cwos-*` ownership markers are unsupported legacy
+identity, not aliases for the current FamilyFoodOS workspace.
 Current implementation status:
 
 - the manual backup **UI is implemented** — `/backups` is a user-facing workspace that creates and lists local backups through the backup API;
@@ -161,9 +166,9 @@ Report-document filenames and `sanitize_reason` in `backend/app/services/report_
 
 Developer/test safety:
 
-- Tests and smoke checks must use temporary directories, typically through `COSMETIC_WORKSHOP_USER_DATA_DIR` and/or `COSMETIC_WORKSHOP_DB_PATH`.
-- Tests must not write to the real `~/Documents/Мастерская косметолога/` directory.
-- Backup API tests must use temporary directories and environment overrides such as `COSMETIC_WORKSHOP_DB_PATH` and `COSMETIC_WORKSHOP_USER_DATA_DIR`.
+- Tests and smoke checks must use temporary directories, typically through `FAMILY_FOOD_USER_DATA_DIR` and/or `FAMILY_FOOD_DB_PATH`.
+- Tests must not write to the real `~/Documents/FamilyFoodOS/` directory.
+- Backup API tests must use temporary directories and environment overrides such as `FAMILY_FOOD_DB_PATH` and `FAMILY_FOOD_USER_DATA_DIR`.
 
 ## CR-009 manual-backup AuditLog boundary
 
@@ -296,7 +301,9 @@ Restore accepts a locally selected SQLite backup that passes the
 application-owned validation contract below. The selected source may be:
 
 - a current manual backup produced by the application;
-- a historical application backup from a supported schema version;
+- a historical FamilyFoodOS backup from a supported schema version whose
+  lineage includes `0021_family_food_identity` and whose stable workspace
+  marker is exact;
 - a backup copied to another local directory or external drive.
 
 **The backup filename is not sufficient proof that the file is valid.**
@@ -373,9 +380,11 @@ Validation must include at least:
   migration chain;
 - there are no unknown, duplicated, reordered or skipped migration IDs;
 - the backup is not from a schema newer than the running application;
+- the valid ordered lineage includes `0021_family_food_identity` and
+  `app_settings` contains exactly `workspace.source = family-food-os`;
+- mutable `product.name`, filename, directory and backup name are not accepted
+  as workspace identity proof;
 - required application tables for the recorded schema level exist;
-- the database is recognizably a `cosmetic-workshop-os` workspace rather than an
-  arbitrary SQLite file;
 - the candidate does not depend on an external `-wal`, `-shm` or
   rollback-journal file;
 - validation performs no business-data mutation;
@@ -386,9 +395,13 @@ Validation must include at least:
 row and mixed-transaction copies all returning `ok`.
 
 A backup from a **newer unsupported schema is rejected before the current
-database changes**. An **older but known and migratable schema may be accepted**;
-the candidate itself stays immutable, and normal application migrations operate
-only on the restored working copy after replacement.
+database changes**. A candidate whose lineage ends before
+`0021_family_food_identity` is also rejected, even if it otherwise resembles a
+known source-product database or carries a manually added marker. A historical
+FamilyFoodOS backup may be accepted only when its lineage includes the identity
+migration and its exact stable marker is present; the candidate itself stays
+immutable, and normal application migrations operate only on the restored
+working copy after replacement.
 
 ## 4. Explicit confirmation
 
@@ -890,7 +903,7 @@ after construction is refused before any staging. The replacement target is
 checked by **re-resolving it from the startup resolver**, not by comparing a
 value with a copy of itself.
 
-Development mode remains supported and isolated: with `COSMETIC_WORKSHOP_DB_PATH`
+Development mode remains supported and isolated: with `FAMILY_FOOD_DB_PATH`
 set, `restore/` and `backups/` sit beside the configured development database and
 never in the real Documents directory.
 
@@ -918,7 +931,7 @@ would otherwise conclude that nothing was running.
 
 So the backend process itself holds `<restore dir>/backend-liveness.lock` for its
 whole lifetime, taken from the exact path the launcher passes in
-`COSMETIC_WORKSHOP_BACKEND_LIVENESS_LOCK`. The kernel releases an `fcntl.flock`
+`FAMILY_FOOD_BACKEND_LIVENESS_LOCK`. The kernel releases an `fcntl.flock`
 when the holder dies, for any reason, with no cleanup code of ours involved — so
 a held lock means a live backend, whoever started it, and a free lock means none.
 That is a fact about the operating system's process table rather than about
@@ -1226,7 +1239,8 @@ on the failure path too. `recovery_blocked` starts nothing.
 <user data base>/restore/
   launcher.lock                  exclusive launcher-instance lock
   operation.json                 the one authoritative operation record
-  .cwos-restore.<random>.tmp     transient publication scratch (launcher-owned)
+  .family-food-os-restore.<random>.tmp
+                                 transient publication scratch (launcher-owned)
   <operation-id>/                one isolated directory per attempt
     candidate.sqlite             the staged read-only candidate
 ```
@@ -1435,11 +1449,11 @@ reason `before_restore`. No `shutil.copy2`, no second backup implementation, no
 
 Verification reuses `validate_workspace_snapshot` — the **same** read-only
 checker the staged candidate passes: regular non-symlink file, non-empty,
-read-only open, structural check, a known ordered migration prefix, recognizable
-workspace identity, the required tables for that prefix, and no external sidecar
-dependency. A safety copy verified more weakly than a candidate would be a
-recovery point that might not be one, and it is the artifact the entire
-destructive boundary rests on.
+read-only open, structural check, a known ordered migration prefix containing
+`0021_family_food_identity`, exact `workspace.source = family-food-os`, the
+required tables for that prefix, and no external sidecar dependency. A safety
+copy verified more weakly than a candidate would be a recovery point that might
+not be one, and it is the artifact the entire destructive boundary rests on.
 
 ## 16.10. Target journal handling, replacement and verification
 
@@ -1454,7 +1468,8 @@ nothing is blind-unlinked.
 
 **Replacement** is never from the selected path and never from the staged
 candidate (preserved as evidence). A launcher-owned artifact with a
-**deterministic** name — `.cwos-restore-<operation-id>.replacement`, exclusively
+**deterministic** name —
+`.family-food-os-restore-<operation-id>.replacement`, exclusively
 created beside the working database — is published with one durable atomic
 rename. The name is derived rather than random so startup recovery can name the
 one artifact it owns and remove exactly that, with no directory globbing beside
@@ -1462,7 +1477,7 @@ the user's database. `recovery_blocked` preserves it as evidence.
 
 **Verification** starts the child through the existing
 `launcher.runtime.start_backend_process` boundary, pinned to the exact
-`COSMETIC_WORKSHOP_DB_PATH`, with bounded readiness polling (30 s, 0.2 s interval,
+`FAMILY_FOOD_DB_PATH`, with bounded readiness polling (30 s, 0.2 s interval,
 10 s per request) and then:
 
 ```text

@@ -1,1 +1,1 @@
-"""Backend application package for cosmetic-workshop-os."""
+"""Backend application package for FamilyFoodOS."""

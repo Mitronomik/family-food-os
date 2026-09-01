@@ -1,24 +1,36 @@
 # Current project lifecycle and documentation authority
 
 Status: **CURRENT — NORMATIVE LIFECYCLE PROFILE**
-Updated: `2026-08-13`
+Updated: `2026-08-31`
 
 For historical pre-D4 decision state, see `docs/history/d4-pre-decision/`. The exact pre-decision `docs/current-lifecycle.md` is preserved there byte-identically from base `dc2301f7d4e101ad0fba851325dae9274f02da0c`.
 
 ## Authority
 
+- ADR 0030 defines the target FamilyFoodOS consumer delivery as hosted Web/PWA.
+- ADR 0031 retires the inherited macOS consumer package and its D5 forward path.
+- ADRs 0019–0024 remain accurate historical evidence for the inherited package work; they no longer authorize an active FamilyFoodOS package surface.
+
 - ADR 0016 remains authoritative for destructive Restore.
 - ADR 0018 remains authoritative for Restore interaction/validation session semantics.
-- ADR 0019 remains authoritative for the bounded D3 macOS package decision.
+- ADR 0019 remains authoritative as historical evidence for the bounded D3 macOS package decision.
 - ADR 0020 is authoritative for D4 Update Safety.
-- ADR 0021 is authoritative for D5 Remote Install Rehearsal.
+- ADR 0021 remains authoritative for the historical D5 Remote Install Rehearsal contract.
 - ADR 0022 is authoritative for the bounded CR-015 native macOS lifecycle blocker fix discovered by that rehearsal.
 - ADR 0023 records the rejected CR-016 self-running bootstrap experiment.
-- ADR 0024 is authoritative for the CR-017 single-client operator-assisted install/update pilot path.
-- `docs/roadmap.md` remains the product-scope source for D4 and D5.
+- ADR 0024 remains authoritative for the historical CR-017 single-client operator-assisted install/update pilot decision.
+- `docs/roadmap.md` remains historical product-scope evidence for D4 and D5.
 - `docs/domain-model-d4-update-safety.md` is the bounded D4 companion clarification.
 
-## Current lifecycle
+## Current FamilyFoodOS delivery lifecycle
+
+FamilyFoodOS targets a hosted responsive Web/PWA under ADR 0030. The inherited
+macOS consumer `.app` and ZIP build, verification and D5 rehearsal path are
+retired under ADR 0031. Source-run backend, launcher, SQLite and Restore remain
+transitional development and migration infrastructure; this retirement does
+not authorize hosted deployment implementation.
+
+## Historical inherited lifecycle evidence
 
 ```text
 PR #193 — MERGED — C4-III RESTORE LIFECYCLE CLOSURE
@@ -47,7 +59,7 @@ PHASE 12 — MVP release preparation — NOT AUTHORIZED BY CR-014/CR-015/CR-016/
 Product release readiness — NOT CLAIMED
 ```
 
-## D4-A closure truth
+## Historical D4-A closure truth
 
 D4-A implements only the first ADR 0020 slice:
 
@@ -147,7 +159,7 @@ D4-D is **DONE — FINAL EXACT-PACKAGE VERIFICATION PASSED**. It introduced no r
 
 D4 Update Safety is **DONE — EXACT-PACKAGE VERIFIED AND LIFECYCLE-CLOSED**. CR-013 authorizes no further implementation slice. D5 remains **NOT AUTHORIZED BY CR-013**, and product release readiness remains **NOT CLAIMED**. A future D5 start requires a separate authorization decision/change request.
 
-## D5 decision truth
+## Historical D5 decision truth
 
 CR-014 / ADR 0021 defines D5 as a **documentation + exact-package assisted-install rehearsal**, not a release/distribution programme and not a runtime feature.
 
@@ -161,11 +173,15 @@ D5 itself authorizes no backend/frontend/launcher/migration/package-runtime chan
 
 Restore remains closed. D4-C changes no protected Restore production blob, no Restore state machine, picker, source proof, control plane, backend handshake, replacement or recovery semantics.
 
-## Release boundary
+## Current release boundary
 
-D4 is closed. D5 alone is authorized next under ADR 0021 for documentation + assisted-install rehearsal. Auto-update/download, GitHub Releases integration, signing, notarization, DMG/PKG, App Store, release channels, Phase 12 and release readiness remain unauthorized or not claimed.
+The inherited D5 package rehearsal and operator-assisted pilot are retired under
+ADR 0031. No supported FamilyFoodOS command builds a consumer `.app` or ZIP.
+Hosted delivery remains separately gated; this retirement does not authorize
+auto-update/download, deployment infrastructure, signing, notarization,
+DMG/PKG, App Store, release channels, Phase 12 or release readiness.
 
-## D5 blocker truth
+## Historical D5 blocker truth
 
 The mandatory human D5 rehearsal on a clean Mac produced a product-level stop condition after successful first launch and normal Gatekeeper approval: the packaged app did not expose a healthy native macOS application lifecycle. The Dock reported the application as not responding; closing the browser did not own or complete application shutdown; and a subsequent Finder launch could not be accepted as a valid restart. This is classified `FAIL — PRODUCT` for the D5 human layer, not a runner failure.
 
@@ -175,7 +191,7 @@ CR-015 / ADR 0022 authorizes one bounded repair: make a minimal native AppKit ex
 
 D5 closure remains blocked until a fresh exact package containing the fix passes both automated package verification and the mandatory clean-Mac/clean-profile human rehearsal. `PHASE 12` and product release readiness remain unauthorized/not claimed.
 
-## CR-015 closure truth
+## Historical CR-015 closure truth
 
 CR-015 native macOS application lifecycle blocker fix is **DONE — MERGED AND EXACT-HEAD/EXACT-PACKAGE VERIFIED**.
 
@@ -194,12 +210,15 @@ Evidence:
 D5 itself is **not** complete. The fixed exact package still requires the mandatory fresh human clean-Mac/clean-profile rehearsal and final D5 evidence. Phase 12 and product release readiness remain unauthorized/not claimed.
 
 
-## CR-016 implementation outcome
+## Historical CR-016 implementation outcome
 
 CR-016's version-specific downloaded `.command` bootstrap was implemented and automated post-execution behavior passed on head `0179be9fa1758a47662f86c5a14a7f24341815c5` in run `31959318870`. The mandatory clean-Mac Finder rehearsal then produced `FAIL — PRODUCT`: Gatekeeper blocked the quarantined `.command` before it could execute. PR #210 was closed without merge. That self-running bootstrap is not an authorized current implementation target.
 
-## CR-017 operator-assisted pilot truth
+## Historical CR-017 operator-assisted pilot truth
 
 ADR 0024 authorizes the next bounded D5 pilot action: a qualified support operator may use Terminal/screen sharing to install or update one known client's exact package after mandatory SHA-256 and app-identity verification. Only the verified staged `.app` may have quarantine removed. The client must not type commands. Gatekeeper stays globally enabled; `sudo`, SIP/security weakening, database/Restore/D4 changes and public distribution remain forbidden.
 
-The operator-assisted path is **AUTHORIZED NEXT — NOT IMPLEMENTED**. Full D5 PASS, Phase 12 and product release readiness remain unclaimed.
+The operator-assisted path was **AUTHORIZED NEXT — NOT IMPLEMENTED** in the
+source-product lifecycle. ADR 0031 now retires that forward path for
+FamilyFoodOS. Full D5 PASS, Phase 12 and product release readiness remain
+unclaimed.

@@ -158,7 +158,7 @@ def test_no_extra_snapshot_columns_and_no_new_table_are_introduced(tmp_path):
 
 def test_user_mode_startup_backs_up_before_applying_0019(monkeypatch, tmp_path):
     user_data_dir = tmp_path / "user-data"
-    database_path = user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    database_path = user_data_dir / "data" / "family_food.sqlite"
     monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))
     monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
     before = build_pre_c2_ii_database(database_path)
@@ -197,7 +197,7 @@ def test_a_failed_0019_destroys_neither_the_user_database_nor_the_backup(monkeyp
     next startup completes the migration exactly once.
     """
     user_data_dir = tmp_path / "user-data"
-    database_path = user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    database_path = user_data_dir / "data" / "family_food.sqlite"
     monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))
     monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
     before = build_pre_c2_ii_database(database_path)
@@ -284,7 +284,7 @@ def test_stage_interruption_between_alters_never_partially_mutates_canonical(mon
     therefore executes both ALTERs normally.
     """
     user_data_dir = tmp_path / "user-data"
-    database_path = user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    database_path = user_data_dir / "data" / "family_food.sqlite"
     monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))
     monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
     before = build_pre_c2_ii_database(database_path)
@@ -366,7 +366,7 @@ def test_a_fully_migrated_user_database_starts_up_without_another_backup(monkeyp
     user_data_dir = tmp_path / "user-data"
     monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))
     monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
-    build_pre_c2_ii_database(user_data_dir / "data" / "cosmetic_workshop.sqlite")
+    build_pre_c2_ii_database(user_data_dir / "data" / "family_food.sqlite")
     initialize_startup("user")
 
     repeated = initialize_startup("user")

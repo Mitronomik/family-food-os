@@ -90,6 +90,7 @@ def run(expected_head: str) -> None:
     _assert_clean_workspace()
     _run_frontend_checks()
 
+    from launcher import APP_SLUG
     from launcher.config import build_runtime_config, resolve_runtime_paths
     from launcher.runtime import ensure_backend_import_path
 
@@ -100,7 +101,7 @@ def run(expected_head: str) -> None:
     from launcher.restore.macos_picker import MacOSNativeSourceSelectionAdapter, PICKER_APPLESCRIPT
     from launcher.restore.workspace import resolve_restore_dir
 
-    with tempfile.TemporaryDirectory(prefix="cwos-a4-smoke-") as temporary:
+    with tempfile.TemporaryDirectory(prefix=f"{APP_SLUG}-a4-smoke-") as temporary:
         root = Path(temporary)
         working = _build_workspace(root / "work" / "workshop.sqlite", "working")
         source = _build_workspace(root / "chosen" / "backup.sqlite", "source")

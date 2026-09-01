@@ -30,12 +30,12 @@ const messages = { loading:'loading', refreshing:'refreshing', reconciling:'reco
 const flush = () => new Promise((resolve) => setImmediate(resolve));
 function deferred(){let resolve,reject;const promise=new Promise((res,rej)=>{resolve=res;reject=rej});return {promise,resolve,reject};}
 
-const backupFile = (filename = '20260801T101112131415Z-cosmetic_workshop-before_import.sqlite') => ({ filename, path: `/local/backups/${filename}`, created_at: '2026-08-01T10:11:12Z', reason: 'before_import', size_bytes: 417792 });
+const backupFile = (filename = '20260801T101112131415Z-family_food-before_import.sqlite') => ({ filename, path: `/local/backups/${filename}`, created_at: '2026-08-01T10:11:12Z', reason: 'before_import', size_bytes: 417792 });
 
-const recordedResponse = (filename) => ({ backup: backupFile(filename), database_path: '/local/cosmetic_workshop.sqlite', backup_dir: '/local/backups', message: 'Резервная копия создана.', audit_status: 'recorded', audit_message: null });
-const pendingResponse = (filename) => ({ backup: backupFile(filename), database_path: '/local/cosmetic_workshop.sqlite', backup_dir: '/local/backups', message: 'Резервная копия создана.', audit_status: 'pending', audit_message: BACKUP_PENDING_AUDIT_MESSAGE });
+const recordedResponse = (filename) => ({ backup: backupFile(filename), database_path: '/local/family_food.sqlite', backup_dir: '/local/backups', message: 'Резервная копия создана.', audit_status: 'recorded', audit_message: null });
+const pendingResponse = (filename) => ({ backup: backupFile(filename), database_path: '/local/family_food.sqlite', backup_dir: '/local/backups', message: 'Резервная копия создана.', audit_status: 'pending', audit_message: BACKUP_PENDING_AUDIT_MESSAGE });
 
-const statusResponse = (pending = 0) => ({ database_path: '/local/cosmetic_workshop.sqlite', database_exists: true, database_size_bytes: 40960, backup_dir: '/local/backups', backup_dir_exists: true, backup_count: 1, latest_backup: backupFile(), pending_audit_count: pending });
+const statusResponse = (pending = 0) => ({ database_path: '/local/family_food.sqlite', database_exists: true, database_size_bytes: 40960, backup_dir: '/local/backups', backup_dir_exists: true, backup_count: 1, latest_backup: backupFile(), pending_audit_count: pending });
 
 /**
  * A backups route wired exactly as `main.ts` wires it: the mutation result
@@ -244,7 +244,7 @@ test('pending success is a success plus a separate warning, not a failure', asyn
   assert.notEqual(visibleWarning(ui), messages.mutationAmbiguous);
   assert.notEqual(visibleWarning(ui), messages.mutationError);
   // The created backup metadata is retained, including its canonical reason.
-  assert.equal(ui.lastCreatedBackup.filename, '20260801T101112131415Z-cosmetic_workshop-before_import.sqlite');
+  assert.equal(ui.lastCreatedBackup.filename, '20260801T101112131415Z-family_food-before_import.sqlite');
   assert.equal(ui.lastCreatedBackup.reason, 'before_import');
   assert.equal(h.postCount, 1);
 });

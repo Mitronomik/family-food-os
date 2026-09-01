@@ -25,12 +25,12 @@ const messages = { loading:'loading', refreshing:'refreshing', reconciling:'reco
 const flush = () => new Promise((resolve) => setImmediate(resolve));
 function deferred(){let resolve,reject;const promise=new Promise((res,rej)=>{resolve=res;reject=rej});return {promise,resolve,reject};}
 
-const exportFile = (filename = '20260801T101112131415Z-cosmetic_workshop-export-before_import.json') => ({ filename, path: `/local/exports/${filename}`, created_at: '2026-08-01T10:11:12Z', reason: 'before_import', size_bytes: 3414 });
+const exportFile = (filename = '20260801T101112131415Z-family_food-export-before_import.json') => ({ filename, path: `/local/exports/${filename}`, created_at: '2026-08-01T10:11:12Z', reason: 'before_import', size_bytes: 3414 });
 
-const recordedResponse = (filename) => ({ export: exportFile(filename), database_path: '/local/cosmetic_workshop.sqlite', export_dir: '/local/exports', entity_counts: { ingredients: 2 }, message: 'Экспорт создан.', audit_status: 'recorded', audit_message: null });
-const pendingResponse = (filename) => ({ export: exportFile(filename), database_path: '/local/cosmetic_workshop.sqlite', export_dir: '/local/exports', entity_counts: { ingredients: 2 }, message: 'Экспорт создан.', audit_status: 'pending', audit_message: EXPORT_PENDING_AUDIT_MESSAGE });
+const recordedResponse = (filename) => ({ export: exportFile(filename), database_path: '/local/family_food.sqlite', export_dir: '/local/exports', entity_counts: { ingredients: 2 }, message: 'Экспорт создан.', audit_status: 'recorded', audit_message: null });
+const pendingResponse = (filename) => ({ export: exportFile(filename), database_path: '/local/family_food.sqlite', export_dir: '/local/exports', entity_counts: { ingredients: 2 }, message: 'Экспорт создан.', audit_status: 'pending', audit_message: EXPORT_PENDING_AUDIT_MESSAGE });
 
-const statusResponse = (pending = 0) => ({ database_path: '/local/cosmetic_workshop.sqlite', database_exists: true, database_size_bytes: 40960, export_dir: '/local/exports', export_dir_exists: true, export_count: 1, latest_export: exportFile(), pending_audit_count: pending });
+const statusResponse = (pending = 0) => ({ database_path: '/local/family_food.sqlite', database_exists: true, database_size_bytes: 40960, export_dir: '/local/exports', export_dir_exists: true, export_count: 1, latest_export: exportFile(), pending_audit_count: pending });
 
 /**
  * An exports route wired exactly as `main.ts` wires it: the mutation result
@@ -236,7 +236,7 @@ test('pending success is a success plus a separate warning, not a failure', asyn
   assert.notEqual(visibleWarning(ui), messages.mutationAmbiguous);
   assert.notEqual(visibleWarning(ui), messages.mutationError);
   // The created export metadata is retained, including its canonical reason.
-  assert.equal(ui.lastCreatedExport.filename, '20260801T101112131415Z-cosmetic_workshop-export-before_import.json');
+  assert.equal(ui.lastCreatedExport.filename, '20260801T101112131415Z-family_food-export-before_import.json');
   assert.equal(ui.lastCreatedExport.reason, 'before_import');
   assert.equal(h.postCount, 1);
 });
@@ -574,7 +574,7 @@ test('a verification failure leaks no filename, path or verifier detail to the s
   for (const forbidden of [
     '20260801T101112131415Z',
     '/local/exports',
-    'cosmetic_workshop.sqlite',
+    'family_food.sqlite',
     'export_schema_version',
     'operation_id',
     'sqlite',

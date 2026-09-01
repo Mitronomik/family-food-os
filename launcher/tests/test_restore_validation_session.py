@@ -2,7 +2,6 @@
 
 from pathlib import Path
 import hashlib
-import os
 import sqlite3
 import stat
 
@@ -58,7 +57,7 @@ def current_source(tmp_path):
 
 @pytest.fixture
 def scratch_root(tmp_path):
-    return tmp_path / "system-temp" / "cosmetic-workshop-os" / "restore-validation"
+    return tmp_path / "system-temp" / "family-food-os" / "restore-validation"
 
 
 def test_current_schema_is_accepted_and_retains_only_launcher_private_proof(
@@ -89,7 +88,9 @@ def test_current_schema_is_accepted_and_retains_only_launcher_private_proof(
         # service.  Absolute source/staged paths are not DTO fields.
         assert str(current_source) not in repr(result)
         assert str(current_source.parent) not in result.message
-        assert not (service._scratch.run_dir / result.session_id / "candidate.sqlite").exists()
+        assert not (
+            service._scratch.run_dir / result.session_id / "candidate.sqlite"
+        ).exists()
 
     assert digest(current_source) == source_before
     assert digest(working_database) == working_before
@@ -114,36 +115,31 @@ def test_display_filename_is_bounded_and_removes_control_formatting(
         assert str(source.parent) not in result.filename
 
 
-def test_known_older_schema_is_accepted_without_migrating_source_or_working_database(
+def test_legacy_unmarked_0020_is_rejected_without_migrating_source_or_working_database(
     tmp_path, working_database, scratch_root
 ):
-    older = build_workspace_database(
-        tmp_path / "chosen" / "older.sqlite",
-        "older",
-        up_to="0018_demo_data_tracking",
+    legacy_unmarked = build_workspace_database(
+        tmp_path / "chosen" / "legacy-unmarked.sqlite",
+        "legacy-unmarked",
+        up_to="0020_artifact_audit_operations",
     )
-    source_before = digest(older)
+    source_before = digest(legacy_unmarked)
     working_before = digest(working_database)
 
     with RestoreCandidatePreparationService(
         working_database, scratch_root=scratch_root
     ) as service:
-        result = service.prepare_restore_candidate(older)
-        proof = service.retained_proof
+        result = service.prepare_restore_candidate(legacy_unmarked)
 
-        assert result.state is CandidatePreparationState.ACCEPTED
-        assert result.compatibility is CandidateCompatibility.OLDER_SUPPORTED_SCHEMA
-        assert proof is not None
-        assert proof.compatibility is CandidateCompatibility.OLDER_SUPPORTED_SCHEMA
+        assert result.state is CandidatePreparationState.REJECTED
+        assert result.failure is CandidatePreparationFailure.CANDIDATE_INVALID
+        assert result.compatibility is None
+        assert service.retained_proof is None
+        assert "0021_family_food_identity" not in result.message
+        assert "workspace.source" not in result.message
 
-    assert digest(older) == source_before
+    assert digest(legacy_unmarked) == source_before
     assert digest(working_database) == working_before
-    with sqlite3.connect(f"file:{older}?mode=ro", uri=True) as connection:
-        tables = {
-            row[0]
-            for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")
-        }
-    assert "artifact_audit_operations" not in tables
 
 
 def test_newer_schema_is_typed_unsupported_and_retains_no_proof(
@@ -325,7 +321,9 @@ def test_source_change_during_candidate_validation_is_refused_and_not_retained(
             stream.write(b"changed-after-staging")
         return validated
 
-    monkeypatch.setattr(module, "validate_staged_candidate", mutate_source_after_staging)
+    monkeypatch.setattr(
+        module, "validate_staged_candidate", mutate_source_after_staging
+    )
     with RestoreCandidatePreparationService(
         working_database, scratch_root=scratch_root
     ) as service:
@@ -335,7 +333,9 @@ def test_source_change_during_candidate_validation_is_refused_and_not_retained(
         assert result.failure is CandidatePreparationFailure.SOURCE_REJECTED
         assert service.retained_proof is None
 
-    assert digest(current_source) != before, "fixture did not actually mutate the source"
+    assert (
+        digest(current_source) != before
+    ), "fixture did not actually mutate the source"
 
 
 def test_internal_failure_returns_fixed_safe_message_and_no_proof(
@@ -411,6 +411,38 @@ def test_default_scratch_refuses_symlinked_app_ancestry(
         ValidationScratchManager(working_database)
 
     assert not (outside / module.VALIDATION_DIRNAME).exists()
+
+
+def test_default_scratch_uses_family_food_namespace_and_leaves_legacy_namespace_untouched(
+    monkeypatch, tmp_path, working_database
+):
+    from launcher.restore import validation_scratch as module
+
+    fake_temp = tmp_path / "system-temp"
+    fake_temp.mkdir()
+    legacy_root = fake_temp / "cosmetic-workshop-os" / "restore-validation"
+    legacy_root.mkdir(parents=True)
+    legacy_file = legacy_root / ".cwos-validation-owner"
+    legacy_file.write_text(
+        "cosmetic-workshop-os:restore-validation:v1\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(module.tempfile, "gettempdir", lambda: str(fake_temp))
+
+    manager = ValidationScratchManager(working_database)
+    try:
+        assert module.VALIDATION_APP_DIRNAME == "family-food-os"
+        assert module.VALIDATION_MARKER_FILENAME == ".family-food-os-validation-owner"
+        assert module.VALIDATION_MARKER_VERSION == "family-food-os:restore-validation:v1"
+        assert manager.root == (
+            fake_temp / "family-food-os" / "restore-validation"
+        ).resolve()
+        assert manager.cleanup_interrupted_runs() == 0
+        assert legacy_file.read_text(encoding="utf-8") == (
+            "cosmetic-workshop-os:restore-validation:v1\n"
+        )
+    finally:
+        assert manager.cleanup_current_run_if_empty() is True
 
 
 def test_close_clears_retained_proof_and_removes_empty_run_root(

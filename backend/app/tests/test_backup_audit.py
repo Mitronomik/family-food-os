@@ -51,7 +51,7 @@ FIXED_TIME = datetime(2026, 8, 1, 10, 15, 0, 123456, tzinfo=UTC)
 @pytest.fixture
 def workspace(tmp_path):
     """A migrated database plus its backup directory, wired as the API wires them."""
-    database = tmp_path / "data" / "cosmetic_workshop.sqlite"
+    database = tmp_path / "data" / "family_food.sqlite"
     database.parent.mkdir(parents=True)
     config = DatabaseConfig(path=database)
     initialize_database(config)
@@ -365,7 +365,6 @@ def test_concurrent_finalization_commits_exactly_one_event(workspace):
     """Twelve finalizers race for one operation; `BEGIN IMMEDIATE` orders them."""
     paths, config = workspace
     paths.backup_dir.mkdir(parents=True, exist_ok=True)
-    service = BackupAuditService(paths.backup_dir, config)
     created = create_audited_backup(paths, "manual", config=config)
 
     # Re-open the resolved operation so every thread has real work to attempt.
@@ -492,7 +491,7 @@ def test_reconciliation_finalizes_a_valid_unresolved_backup_exactly_once(workspa
     paths.backup_dir.mkdir(parents=True, exist_ok=True)
     service = BackupAuditService(paths.backup_dir, config)
     reserved = reserve_backup_path(paths.backup_dir, paths.database_path, FIXED_TIME, "manual")
-    operation_id = service.prepare_operation(primary_filename=reserved.name)
+    service.prepare_operation(primary_filename=reserved.name)
     from app.services.backup import backup_sqlite_database
 
     backup_sqlite_database(
@@ -519,7 +518,7 @@ def test_reconciliation_never_touches_other_artifact_kinds(workspace):
     repository.prepare_operation(
         operation_id=foreign,
         artifact_kind=ARTIFACT_KIND_JSON_EXPORT,
-        primary_filename="20260801T101500123456Z-cosmetic_workshop-export-manual.json",
+        primary_filename="20260801T101500123456Z-family_food-export-manual.json",
         companion_filename=None,
         audit_action=AUDIT_ACTION_EXPORT_CREATED,
     )
@@ -538,9 +537,9 @@ def test_one_broken_operation_does_not_block_the_others(workspace):
     from app.services.backup import backup_sqlite_database
 
     broken = service.prepare_operation(
-        primary_filename="20260801T101500123456Z-cosmetic_workshop-broken.sqlite"
+        primary_filename="20260801T101500123456Z-family_food-broken.sqlite"
     )
-    (paths.backup_dir / "20260801T101500123456Z-cosmetic_workshop-broken.sqlite").write_bytes(
+    (paths.backup_dir / "20260801T101500123456Z-family_food-broken.sqlite").write_bytes(
         b"not a database at all"
     )
     good_path = reserve_backup_path(paths.backup_dir, paths.database_path, FIXED_TIME, "good")
@@ -598,7 +597,7 @@ def test_pending_count_counts_only_unresolved_manual_backups(workspace):
     repository.prepare_operation(
         operation_id=new_operation_id(),
         artifact_kind=ARTIFACT_KIND_JSON_EXPORT,
-        primary_filename="20260801T101500123456Z-cosmetic_workshop-export-manual.json",
+        primary_filename="20260801T101500123456Z-family_food-export-manual.json",
         companion_filename=None,
         audit_action=AUDIT_ACTION_EXPORT_CREATED,
     )
@@ -649,9 +648,9 @@ def test_only_unresolved_manual_backup_identities_are_reported_as_active(workspa
     service = BackupAuditService(paths.backup_dir, config)
     repository = ArtifactAuditOperationRepository(config)
 
-    active = "20260801T101500123456Z-cosmetic_workshop-active.sqlite"
-    resolved = "20260801T101500123456Z-cosmetic_workshop-resolved.sqlite"
-    other_kind = "20260801T101500123456Z-cosmetic_workshop-export-manual.json"
+    active = "20260801T101500123456Z-family_food-active.sqlite"
+    resolved = "20260801T101500123456Z-family_food-resolved.sqlite"
+    other_kind = "20260801T101500123456Z-family_food-export-manual.json"
     service.prepare_operation(primary_filename=active)
     repository.mark_abandoned(service.prepare_operation(primary_filename=resolved))
     repository.prepare_operation(

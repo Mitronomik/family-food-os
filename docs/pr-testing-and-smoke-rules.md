@@ -1,5 +1,15 @@
 # cosmetic-workshop-os - PR Testing and Smoke Rules
 
+> **Status: inherited CosmeticWorkshopOS testing guide — not a current
+> FamilyFoodOS testing or Codex contract.** All prescriptive language, PR
+> numbering, domain smoke scenarios, packaging checks, and prompt templates
+> below apply only to the source product. Current FamilyFoodOS work follows
+> `AGENTS.md`, `docs/family-food/project-operating-manual.md`,
+> `state/current-focus.md`, relevant canonical `docs/family-food/` documents,
+> approved ADRs, the explicit task, and current test/build configuration. Useful
+> generic verification patterns may be consulted only as legacy reference when
+> compatible; this file must not be cited as mandatory current guidance.
+
 Document: `docs/pr-testing-and-smoke-rules.md`  
 Project: `cosmetic-workshop-os`  
 Human-facing name: `Мастерская косметолога`  
@@ -21,7 +31,9 @@ The goal is to make every PR:
 - clear for review;
 - ready for Codex Web PR workflow.
 
-Every Codex prompt must reference this document when implementation or review work is requested.
+Historical CosmeticWorkshopOS implementation and review prompts were required
+to reference this document. Current FamilyFoodOS prompts must not treat it as an
+active instruction source.
 
 ---
 
@@ -412,6 +424,11 @@ This level is mandatory for production and import apply PRs.
 ---
 
 ### 9.6. Level 5 - Deployment/package smoke
+
+This is a historical source-product package gate. ADR 0031 retires the macOS
+consumer `.app`/ZIP and D5 package rehearsal from the active FamilyFoodOS test
+surface. Source-run launcher, backend, SQLite and Restore smoke still applies
+when those transitional subsystems change.
 
 For local runtime, launcher, packaging and update PRs.
 
@@ -929,7 +946,11 @@ Open/download PDF.
 
 ---
 
-# 10.14. Packaging PRs
+# 10.14. Historical packaging PRs
+
+ADR 0031 retires this inherited consumer-package path for FamilyFoodOS. The
+requirements below remain historical testing evidence and are not an active
+FamilyFoodOS build or release instruction.
 
 Applies to:
 
@@ -963,7 +984,7 @@ Verify test client still exists.
 Create backup.
 ```
 
-Packaging smoke is mandatory.
+Packaging smoke was mandatory for the historical package work.
 
 ---
 
@@ -1153,14 +1174,15 @@ Priority for automation:
 
 ---
 
-## 18. What must be added to Codex prompts
+## 18. Historical CosmeticWorkshopOS prompt fragment
 
-Every implementation prompt must include:
+The source product required the following block. It is preserved as evidence
+and must not be copied as current FamilyFoodOS instruction:
 
 ```markdown
 ## Testing requirements
 
-Follow `docs/pr-testing-and-smoke-rules.md`.
+For the historical CosmeticWorkshopOS project, follow `docs/pr-testing-and-smoke-rules.md`.
 
 Add or update tests for the PR scope.
 

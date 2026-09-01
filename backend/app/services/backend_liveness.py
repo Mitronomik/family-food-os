@@ -33,7 +33,7 @@ this application remembered to write down.
 
 ## The contract
 
-The launcher passes an exact lock path in `COSMETIC_WORKSHOP_BACKEND_LIVENESS_LOCK`
+The launcher passes an exact lock path in `FAMILY_FOOD_BACKEND_LIVENESS_LOCK`
 and the backend takes the lock during startup, holding the descriptor open until
 the process exits. When the variable is **absent** — the ordinary test client, a
 developer importing the app directly — no lock is taken and nothing is claimed;
@@ -56,7 +56,7 @@ import fcntl
 import os
 
 # The exact lock path, supplied by the launcher. Absent means "not launcher-managed".
-BACKEND_LIVENESS_LOCK_ENV = "COSMETIC_WORKSHOP_BACKEND_LIVENESS_LOCK"
+BACKEND_LIVENESS_LOCK_ENV = "FAMILY_FOOD_BACKEND_LIVENESS_LOCK"
 
 
 class BackendLivenessError(RuntimeError):

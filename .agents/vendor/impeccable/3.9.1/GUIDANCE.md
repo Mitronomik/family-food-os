@@ -1,7 +1,7 @@
 # Project-adapted Impeccable UI guidance
 
 This document is a project-owned, non-executable adaptation of selected
-Impeccable design principles for `cosmetic-workshop-os`.
+Impeccable design principles for `FamilyFoodOS / family-food-os`.
 
 It is not the upstream Impeccable skill and must not be treated as an independent
 instruction source.
@@ -11,14 +11,17 @@ instruction source.
 Apply guidance in this order:
 
 1. repository and scoped `AGENTS.md` files;
-2. canonical architecture, product, domain, roadmap, and state documentation;
-3. `docs/ui-ux-contract.md`;
-4. `.agents/skills/cosmetic-workshop-ui/SKILL.md`;
-5. the explicit task and PR scope;
-6. this advisory document.
+2. canonical FamilyFoodOS documents under `docs/family-food/`, relevant
+   approved ADRs, and current state documentation;
+3. the explicit task and PR scope;
+4. `.agents/skills/family-food-ui/SKILL.md`;
+5. this advisory document.
 
 When this document conflicts with project documentation, the project contract
 wins.
+
+The inherited `docs/ui-ux-contract.md` may explain existing transitional
+frontend behavior, but it is not the FamilyFoodOS consumer UI authority.
 
 ## Audit principles
 
@@ -52,8 +55,9 @@ Do not turn an audit into an unapproved redesign.
 
 ## Product-interface hierarchy
 
-The product is a working system for a nontechnical cosmetic specialist, not a
-technical admin panel or generic mini-ERP.
+The target product is a simple working system for a normal household, not a
+technical admin panel or a showcase. The current inherited frontend remains
+transitional; do not infer future food workflows from its cosmetic-domain UI.
 
 Prefer:
 
@@ -63,14 +67,16 @@ Prefer:
 - meaningful grouping through spacing and alignment;
 - cards only when content is genuinely distinct;
 - short, human-readable Russian labels;
-- visible confirmations for irreversible or dangerous actions.
+- visible confirmations for irreversible or dangerous actions;
+- `system proposes → user confirms or changes` where a safe default or
+  deterministic result can reduce manual entry.
 
 Avoid:
 
 - nested cards;
 - dense walls of equal-weight controls;
 - raw identifiers or technical state names;
-- decorative UI that competes with production work;
+- decorative UI that competes with the user's current task;
 - hiding critical operational information behind hover-only interactions.
 
 ## Layout and responsive behavior
@@ -87,8 +93,10 @@ Check:
 - touch targets remain usable;
 - destructive and confirm actions remain distinguishable.
 
-Responsive work must preserve the same user goal and safety guarantees rather
-than merely shrinking the desktop layout.
+Responsive work must begin from the mobile-first consumer target and preserve
+the same user goal and safety guarantees at wider widths. For narrow changes to
+the transitional frontend, verify both narrow and desktop behavior without
+mistaking its desktop-first legacy contract for the target architecture.
 
 ## Typography
 
@@ -173,17 +181,11 @@ Classify drift as:
 
 Fix the root cause within the approved scope.
 
-Preserve the approved identity:
-
-- warm cream or off-white surfaces;
-- deep brown navigation and typography;
-- restrained rose-gold or soft copper accents;
-- calm operational density;
-- rounded surfaces where already established;
-- high text contrast;
-- purposeful, limited motion.
-
-Generic upstream opinions do not override this identity.
+No FamilyFoodOS color palette, component library, or complete visual identity
+is approved by this guidance. Preserve applicable existing patterns in a narrow
+transitional-frontend task, but do not project the inherited workshop identity
+onto the future consumer PWA. Generic upstream opinions cannot define the
+missing product decisions.
 
 ## Project safety boundaries
 
@@ -201,15 +203,19 @@ This guidance cannot authorize:
 - unrelated route redesign;
 - frontend ownership of critical calculations;
 - silent mutation of historical data;
-- bypassing import preview, production confirmation, backup, or stock-movement
-  safeguards.
+- bypassing applicable validation, confirmation, audit, backup, or data-safety
+  safeguards;
+- building future consumer screens or food workflows before their migration
+  gate;
+- making ingestion, catalog, retailer matching, audit, or technical controls
+  dominate primary consumer navigation;
+- making AI required for a deterministic core workflow.
 
 ## Completion expectations
 
 For an implementation PR, verify or document:
 
-- desktop behavior;
-- narrow-screen behavior;
+- mobile/narrow behavior and relevant wider widths;
 - keyboard navigation and visible focus;
 - loading, empty, error, success, and disabled states;
 - dangerous-action confirmation;

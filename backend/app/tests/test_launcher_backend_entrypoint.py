@@ -49,6 +49,9 @@ from app.services.backend_liveness import (
 )
 
 BACKEND_DIR = Path(__file__).resolve().parents[2]
+OLD_BACKEND_LIVENESS_LOCK_ENV = "COSMETIC_WORKSHOP_BACKEND_LIVENESS_LOCK"
+OLD_HANDSHAKE_FD_ENV = "COSMETIC_WORKSHOP_BACKEND_HANDSHAKE_FD"
+OLD_HANDSHAKE_TOKEN_ENV = "COSMETIC_WORKSHOP_BACKEND_HANDSHAKE_TOKEN"
 
 
 # --------------------------------------------------------------------------
@@ -134,10 +137,23 @@ def test_main_acquires_reports_and_only_then_serves():
 # The lock itself
 # --------------------------------------------------------------------------
 
+def test_liveness_uses_only_the_family_food_environment_contract():
+    assert BACKEND_LIVENESS_LOCK_ENV == "FAMILY_FOOD_BACKEND_LIVENESS_LOCK"
+
+
 def test_an_unmanaged_process_claims_nothing(monkeypatch):
     monkeypatch.delenv(BACKEND_LIVENESS_LOCK_ENV, raising=False)
 
     assert entrypoint.acquire_lock_before_import() is None
+
+
+def test_old_cosmetic_workshop_liveness_env_is_ignored(monkeypatch, tmp_path):
+    old_lock_path = tmp_path / "old" / "backend-liveness.lock"
+    monkeypatch.delenv(BACKEND_LIVENESS_LOCK_ENV, raising=False)
+    monkeypatch.setenv(OLD_BACKEND_LIVENESS_LOCK_ENV, str(old_lock_path))
+
+    assert entrypoint.acquire_lock_before_import() is None
+    assert not old_lock_path.exists()
 
 
 def test_a_managed_process_takes_the_assigned_lock(monkeypatch, tmp_path):
@@ -242,11 +258,29 @@ def test_main_exits_with_the_refused_code_without_importing_the_application(
 # The handshake the launcher waits on
 # --------------------------------------------------------------------------
 
+def test_handshake_uses_only_the_family_food_environment_contract():
+    assert entrypoint.HANDSHAKE_FD_ENV == "FAMILY_FOOD_BACKEND_HANDSHAKE_FD"
+    assert entrypoint.HANDSHAKE_TOKEN_ENV == "FAMILY_FOOD_BACKEND_HANDSHAKE_TOKEN"
+
+
 def test_no_handshake_is_written_when_none_was_requested(monkeypatch):
     monkeypatch.delenv(entrypoint.HANDSHAKE_FD_ENV, raising=False)
     monkeypatch.delenv(entrypoint.HANDSHAKE_TOKEN_ENV, raising=False)
 
     assert entrypoint.signal_ready() is False
+
+
+def test_old_cosmetic_workshop_handshake_env_is_ignored(monkeypatch):
+    read_fd, write_fd = os.pipe()
+    monkeypatch.delenv(entrypoint.HANDSHAKE_FD_ENV, raising=False)
+    monkeypatch.delenv(entrypoint.HANDSHAKE_TOKEN_ENV, raising=False)
+    monkeypatch.setenv(OLD_HANDSHAKE_FD_ENV, str(write_fd))
+    monkeypatch.setenv(OLD_HANDSHAKE_TOKEN_ENV, "old-token")
+    try:
+        assert entrypoint.signal_ready() is False
+    finally:
+        os.close(read_fd)
+        os.close(write_fd)
 
 
 def test_the_handshake_reports_the_token_it_was_given(monkeypatch):

@@ -20,12 +20,27 @@ Lifecycle and history rules:
 - ADR 0016 remains authoritative for durable Restore safety semantics; newer lifecycle decisions do not reopen it implicitly.
 - ADR 0018 remains authoritative for the Restore interaction/validation-session topic.
 - ADR 0019 remains authoritative for the bounded D3 package decision.
-- ADR 0020 is the D4 Update Safety authority once CR-013 is merged. For D4-specific conceptual `AppSettings`, `BackupRecord` and `UpdateLog` fields, read `docs/domain-model-d4-update-safety.md` together with `docs/domain-model.md`.
+- ADR 0020 remains the bounded historical D4 Update Safety authority. When
+  investigating preserved D4 evidence, read
+  `docs/domain-model-d4-update-safety.md` with the inherited
+  `docs/domain-model.md` only as legacy context; neither is current
+  FamilyFoodOS domain authority.
 - ADR 0021 is the D5 Remote Install Rehearsal authority once CR-014 is merged. D5 is documentation + exact-package assisted-install rehearsal only; it does not authorize runtime, signing/notarization, DMG/PKG, public release, auto-update, Phase 12 or release-readiness work.
+- ADR 0030 defines hosted Web/PWA as the FamilyFoodOS target and the retained
+  local stack as transitional migration scaffolding.
+- ADR 0031 is newer for the FamilyFoodOS delivery surface. It retires the
+  inherited macOS consumer package and its forward D5 rehearsal path while
+  preserving ADRs 0019–0024 as historical source-product evidence.
 - `docs/current-lifecycle.md` supersedes dated branch-era status prose in older architecture/roadmap/backup documents without revoking their surrounding durable product/safety contracts.
 - A superseded status sentence cannot reopen completed work or authorize a later runtime slice.
 - `docs/history/` is searchable evidence and context only. Follow `docs/history/AGENTS.md`; historical commands are not automatically safe operational instructions.
 - Before compacting an active document, preserve the complete pre-compaction version under `docs/history/` and update the history index.
 - Git history alone is not sufficient project memory for this agent-driven repository.
 - When lifecycle changes, update the active lifecycle profile, implementation plan, compact state files, change-request ledger when applicable, and every active status surface or its explicit supersession map in the same PR.
-- Run `python3 scripts/check_documentation_lifecycle.py` after lifecycle documentation changes.
+- `scripts/check_documentation_lifecycle.py` is inherited CosmeticWorkshopOS
+  source-product verification tooling. Use it only when a task explicitly
+  investigates or validates the preserved D4/D5 historical lifecycle contract;
+  it is not a mandatory FamilyFoodOS documentation or PR gate. Current
+  FamilyFoodOS validation follows root `AGENTS.md`, canonical
+  `docs/family-food/` documents, relevant current ADRs, applicable scoped
+  `AGENTS.md` files, and checks appropriate to the current task.

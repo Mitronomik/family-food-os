@@ -127,9 +127,25 @@ def test_selected_path_uses_exact_owned_osascript_command(fake_osascript: Path):
     assert calls[0][1]["stderr"] is subprocess.PIPE
     assert "use scripting additions" in PICKER_APPLESCRIPT
     assert "choose file" in PICKER_APPLESCRIPT
+    assert "Выберите резервную копию FamilyFoodOS" in PICKER_APPLESCRIPT
     assert "POSIX path of selectedFile" in PICKER_APPLESCRIPT
     assert "on error number -128" in PICKER_APPLESCRIPT
     assert "System Events" not in PICKER_APPLESCRIPT
+
+
+def test_picker_uses_only_the_family_food_cancel_sentinel(fake_osascript: Path):
+    assert PICKER_CANCELLED_SENTINEL == "__FAMILY_FOOD_OS_RESTORE_PICKER_CANCELLED__"
+    legacy_cosmetic_workshop_sentinel = "__CWOS_RESTORE_PICKER_CANCELLED__"
+    adapter = MacOSNativeSourceSelectionAdapter(
+        process_factory=lambda *_args, **_kwargs: CompletedProcess(
+            f"{legacy_cosmetic_workshop_sentinel}\n"
+        ),
+        platform_name="darwin",
+        osascript_path=fake_osascript,
+    )
+
+    with pytest.raises(NativePickerError, match="native_picker_non_absolute_result"):
+        adapter.select(threading.Event())
 
 
 def test_user_cancel_is_typed_cancelled(fake_osascript: Path):

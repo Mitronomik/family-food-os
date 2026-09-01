@@ -1,7 +1,7 @@
 """Shared helpers for the `C4-I` Restore tests.
 
 Every helper here builds an **isolated temporary workspace**. Nothing in these
-tests touches the real `~/Documents/Мастерская косметолога/` directory, the
+tests touches the real `~/Documents/FamilyFoodOS/` directory, the
 repository database or any real user data — `docs/pr-testing-and-smoke-rules.md`
 § 15-16 requires exactly that, and Restore is the operation where getting it
 wrong would be least recoverable.
@@ -35,13 +35,14 @@ from launcher.restore.verification import VERIFICATION_CYCLES
 MARKER_KEY = "test.workspace_marker"
 
 
-def build_workspace_database(path: Path, marker: str, *, up_to: str | None = None) -> Path:
-    """Create a migrated workshop database carrying one recognizable marker.
+def build_workspace_database(
+    path: Path, marker: str, *, up_to: str | None = None
+) -> Path:
+    """Create a migrated database carrying one recognizable test marker.
 
-    `up_to` truncates the migration chain to an earlier prefix, the same
-    technique `launcher/tests/test_runtime_database_continuity.py` already uses,
-    so an "older supported schema" candidate is a real one rather than a
-    hand-written file.
+    `up_to` truncates the migration chain to an earlier prefix. Prefixes ending
+    before `0021_family_food_identity` intentionally represent legacy/unmarked
+    CosmeticWorkshopOS data, not a supported FamilyFoodOS Restore source.
     """
     path.parent.mkdir(parents=True, exist_ok=True)
     original = list(MIGRATION_MODULES)
@@ -124,12 +125,14 @@ class Workspace:
         return LauncherLifecycleContext.acquire(config, resolve_runtime_paths())
 
 
-def make_workspace(monkeypatch, tmp_path: Path, marker: str = "workspace-A") -> Workspace:
+def make_workspace(
+    monkeypatch, tmp_path: Path, marker: str = "workspace-A"
+) -> Workspace:
     """Build an isolated user-data workspace and point the resolvers at it."""
     base_dir = tmp_path / "user-data"
-    database_path = base_dir / "data" / "cosmetic_workshop.sqlite"
-    monkeypatch.setenv("COSMETIC_WORKSHOP_USER_DATA_DIR", str(base_dir))
-    monkeypatch.delenv("COSMETIC_WORKSHOP_DB_PATH", raising=False)
+    database_path = base_dir / "data" / "family_food.sqlite"
+    monkeypatch.setenv("FAMILY_FOOD_USER_DATA_DIR", str(base_dir))
+    monkeypatch.delenv("FAMILY_FOOD_DB_PATH", raising=False)
     build_workspace_database(database_path, marker)
     backup_dir = base_dir / "backups"
     backup_dir.mkdir(parents=True, exist_ok=True)
@@ -141,9 +144,13 @@ def make_workspace(monkeypatch, tmp_path: Path, marker: str = "workspace-A") -> 
     )
 
 
-def make_source_backup(tmp_path: Path, marker: str, *, up_to: str | None = None) -> Path:
+def make_source_backup(
+    tmp_path: Path, marker: str, *, up_to: str | None = None
+) -> Path:
     """A selectable backup file outside the workspace, with its own marker."""
-    source = tmp_path / "chosen" / "20260101T000000000000Z-cosmetic_workshop-manual.sqlite"
+    source = (
+        tmp_path / "chosen" / "20260101T000000000000Z-cosmetic_workshop-manual.sqlite"
+    )
     build_workspace_database(source, marker, up_to=up_to)
     return source
 
@@ -214,7 +221,9 @@ def stub_services(
         verify_backend=cycle_shaped_verifier(
             verify if verify is not None else (lambda _c, _p, _db: None)
         ),
-        initialize_startup=startup if startup is not None else migrating_startup(database_path),
+        initialize_startup=startup
+        if startup is not None
+        else migrating_startup(database_path),
     )
 
 

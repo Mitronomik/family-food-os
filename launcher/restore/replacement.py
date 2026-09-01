@@ -4,7 +4,7 @@
 
 ## 1. The target's SQLite sidecars
 
-Replacing `cosmetic_workshop.sqlite` while a `-wal`, `-shm` or `-journal` file
+Replacing `family_food.sqlite` while a `-wal`, `-shm` or `-journal` file
 survives beside it is not a replacement — it is a new main database with another
 database's transaction state pointed at it. SQLite would then either apply WAL
 frames that belong to the *old* file or roll back a hot journal over the *new*
@@ -43,6 +43,7 @@ import os
 import shutil
 import sqlite3
 
+from launcher import APP_SLUG
 from launcher.restore.durability import (
     DurabilityError,
     PublicationCategory,
@@ -61,7 +62,7 @@ TARGET_SIDECAR_SUFFIXES: tuple[str, ...] = ("-wal", "-shm", "-journal")
 # find it, and globbing for things to delete beside a user's database is exactly
 # the kind of cleanup this engine refuses to do. With a derived name, recovery
 # can name the one artifact it owns and touch nothing else.
-REPLACEMENT_ARTIFACT_PREFIX = ".cwos-restore-"
+REPLACEMENT_ARTIFACT_PREFIX = f".{APP_SLUG}-restore-"
 REPLACEMENT_ARTIFACT_SUFFIX = ".replacement"
 
 SQLITE_TIMEOUT_SECONDS = 5.0

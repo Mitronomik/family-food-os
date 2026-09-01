@@ -13,7 +13,6 @@ def test_runtime_version_surfaces_do_not_embed_the_current_version_literal():
     for relative in (
         "backend/app/main.py",
         "backend/app/api/health.py",
-        "macos_package/tests/packaging_fixtures.py",
     ):
         source = (REPO_ROOT / relative).read_text(encoding="utf-8")
         assert f'"{canonical}"' not in source

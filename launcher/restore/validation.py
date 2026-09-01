@@ -9,8 +9,8 @@ sufficient.** `CR-004` produced `ok` from an empty file, from a WAL-era raw copy
 missing every committed row, and from a copy holding two transaction states at
 once — and an unrelated healthy SQLite database returns `ok` as well. So
 `quick_check` is one condition among many here, and the conditions that actually
-identify the file are the migration lineage and the required-table check that
-follows it.
+identify the file are the migration lineage, stable FamilyFoodOS workspace
+identity and the required-table check that follows them.
 
 Schema lineage is read through `app.db.migration_lineage`, a read-only backend
 helper. The launcher does not carry its own migration list; the expected chain
@@ -33,7 +33,7 @@ CandidateRejection = Literal[
     "candidate-not-openable",
     "candidate-quick-check-failed",
     "candidate-structure-unreadable",
-    "candidate-not-a-workshop-database",
+    "candidate-not-a-family-food-database",
     "candidate-missing-required-table",
     "migration-table-missing",
     "migration-table-shape-unexpected",
@@ -119,9 +119,9 @@ def validate_workspace_snapshot(snapshot_path: Path) -> ValidatedCandidate:
 
     Shared by the staged Restore candidate and by the `before_restore` safety
     copy, because the two need the *same* proof: that a file on disk is a
-    self-contained, structurally sound, recognizably `cosmetic-workshop-os`
-    workspace whose recorded migration history is a known ordered prefix that the
-    file actually backs up.
+    self-contained, structurally sound, recognizably FamilyFoodOS workspace whose
+    recorded migration history is a known ordered prefix that the file actually
+    backs up.
 
     Extracting it rather than writing a second checker is the point. A safety
     copy verified more weakly than a candidate is a recovery point that might not
@@ -132,7 +132,7 @@ def validate_workspace_snapshot(snapshot_path: Path) -> ValidatedCandidate:
     """
     candidate = Path(snapshot_path)
 
-    # 1-3: it is an owned regular file, not a symlink, and not empty. The size
+    # 1: it is an owned regular file, not a symlink, and not empty. The size
     # check has to precede every structural one, because a zero-byte file is a
     # valid empty SQLite database that passes `quick_check`.
     if candidate.is_symlink():
@@ -147,13 +147,13 @@ def validate_workspace_snapshot(snapshot_path: Path) -> ValidatedCandidate:
     except OSError as exc:
         raise CandidateRejectedError("candidate-not-regular-file") from exc
 
-    # 4: no external journal dependency.
+    # 2: no external journal dependency.
     _assert_no_external_journal_dependency(candidate)
 
-    # 5: SQLite opens it read-only.
+    # 3: SQLite opens it read-only.
     connection = _open_read_only(candidate)
     try:
-        # 6: structural health. Necessary, nowhere near sufficient — everything
+        # 4: structural health. Necessary, nowhere near sufficient — everything
         # below is what makes the difference.
         try:
             quick_check = connection.execute("PRAGMA quick_check").fetchone()
@@ -162,35 +162,30 @@ def validate_workspace_snapshot(snapshot_path: Path) -> ValidatedCandidate:
         if not quick_check or quick_check[0] != "ok":
             raise CandidateRejectedError("candidate-quick-check-failed")
 
-        # 7-13: the migration-history table exists with the expected shape, and
+        # 5: the migration-history table exists with the expected shape, and
         # its IDs form an exact known ordered prefix — no unknown, duplicated,
         # reordered or skipped ID, and nothing newer than this application.
         # Read without creating or modifying the migration table.
         from app.db.migration_lineage import (
-            WORKSPACE_IDENTITY_TABLES,
+            has_family_food_workspace_identity,
             inspect_migration_lineage,
             missing_required_tables,
-            table_exists,
         )
 
         lineage = inspect_migration_lineage(connection)
         if not lineage.is_known_prefix:
-            raise CandidateRejectedError(lineage.rejection or "candidate-structure-unreadable")
-
-        # 14: recognizably a `cosmetic-workshop-os` workspace rather than an
-        # arbitrary SQLite database that happens to carry a `schema_migrations`
-        # table. Checked separately from the required-table mapping so the
-        # user-facing category can say "not this application's backup".
-        try:
-            identity_present = all(
-                table_exists(connection, name) for name in sorted(WORKSPACE_IDENTITY_TABLES)
+            raise CandidateRejectedError(
+                lineage.rejection or "candidate-structure-unreadable"
             )
-        except sqlite3.Error as exc:
-            raise CandidateRejectedError("candidate-structure-unreadable") from exc
-        if not identity_present:
-            raise CandidateRejectedError("candidate-not-a-workshop-database")
 
-        # 15: every table the recorded prefix promises is actually present. A
+        # 6: recognizably a FamilyFoodOS workspace, not an arbitrary SQLite
+        # database or an unmarked source-product database carrying only a known
+        # migration prefix. Both the identity migration and exact stable
+        # machine marker are required; mutable `product.name` is irrelevant.
+        if not has_family_food_workspace_identity(connection, lineage.applied_ids):
+            raise CandidateRejectedError("candidate-not-a-family-food-database")
+
+        # 7: every table the recorded prefix promises is actually present. A
         # recorded history is a claim; this is the check that the file backs it.
         try:
             missing = missing_required_tables(connection, lineage.applied_ids)

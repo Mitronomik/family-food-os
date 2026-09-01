@@ -45,7 +45,7 @@ def test_targets_endpoint_returns_supported_targets(tmp_path, monkeypatch):
 
 @pytest.mark.skipif(TestClient is None, reason="FastAPI TestClient dependencies are unavailable in this environment.")
 def test_create_list_detail_and_cancel_import_draft_without_domain_mutation(tmp_path, monkeypatch):
-    db_path = tmp_path / "cosmetic_workshop.sqlite"
+    db_path = tmp_path / "imports.sqlite"
     user_dir = tmp_path / "user-data"
     _create_database(db_path)
     before_counts = _counts(db_path)

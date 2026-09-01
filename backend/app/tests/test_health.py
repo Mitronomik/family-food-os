@@ -8,8 +8,8 @@ from app.version import resolve_effective_app_version
 def expected_health_payload() -> dict[str, str]:
     return {
         "status": "ok",
-        "app": "cosmetic-workshop-os",
-        "product_name": "Мастерская косметолога",
+        "app": "family-food-os",
+        "product_name": "FamilyFoodOS",
         "mode": "local-first",
         "version": resolve_effective_app_version(),
     }
@@ -20,7 +20,10 @@ def test_health_payload_stays_stable():
 
 
 def test_fastapi_metadata_uses_the_same_effective_runtime_version():
-    assert create_app().version == resolve_effective_app_version()
+    app = create_app()
+
+    assert app.title == "FamilyFoodOS"
+    assert app.version == resolve_effective_app_version()
 
 
 def test_api_health_endpoint_returns_local_first_status():

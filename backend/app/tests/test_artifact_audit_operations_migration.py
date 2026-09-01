@@ -21,6 +21,7 @@ from app.services.startup import initialize_startup
 
 MIGRATION_ID = "0020_artifact_audit_operations"
 PREVIOUS_MIGRATION_ID = "0019_production_batch_tax_rate_snapshots"
+NEXT_MIGRATION_ID = "0021_family_food_identity"
 TABLE = "artifact_audit_operations"
 
 
@@ -100,11 +101,12 @@ def prepared_row(connection, operation_id="11111111-1111-4111-8111-111111111111"
 # Registration and ordering
 # --------------------------------------------------------------------------
 
-def test_migration_0020_is_registered_exactly_once_and_last():
+def test_migration_0020_is_registered_exactly_once_before_0021():
     ids = expected_migration_ids()
 
-    assert ids[-1] == MIGRATION_ID
-    assert ids[-2] == PREVIOUS_MIGRATION_ID
+    assert ids[-1] == NEXT_MIGRATION_ID
+    assert ids[-2] == MIGRATION_ID
+    assert ids[-3] == PREVIOUS_MIGRATION_ID
     assert ids.count(MIGRATION_ID) == 1
     assert len(ids) == len(set(ids))
 
@@ -120,11 +122,14 @@ def test_fresh_empty_database_gets_the_ledger_table(tmp_path):
         assert connection.execute(f"SELECT COUNT(*) FROM {TABLE}").fetchone()[0] == 0
 
 
-def test_a_database_at_0019_reports_exactly_one_pending_migration(tmp_path):
+def test_a_database_at_0019_reports_0020_then_0021_pending(tmp_path):
     database_path = tmp_path / "at-0019.sqlite"
     build_pre_0020_database(database_path)
 
-    assert pending_migration_ids(DatabaseConfig(path=database_path)) == [MIGRATION_ID]
+    assert pending_migration_ids(DatabaseConfig(path=database_path)) == [
+        MIGRATION_ID,
+        NEXT_MIGRATION_ID,
+    ]
 
 
 def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
@@ -134,7 +139,7 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
 
     applied_now = initialize_database(DatabaseConfig(path=database_path))
 
-    assert applied_now == [MIGRATION_ID]
+    assert applied_now == [MIGRATION_ID, NEXT_MIGRATION_ID]
     assert snapshot(database_path) == before
     assert tables_before < table_names(database_path)
     assert table_names(database_path) - tables_before == {TABLE}
@@ -407,14 +412,14 @@ def test_user_mode_startup_backs_up_before_applying_0020(monkeypatch, tmp_path):
     not exist until the migration it is protecting has run.
     """
     user_data_dir = tmp_path / "user-data"
-    database_path = user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    database_path = user_data_dir / "data" / "family_food.sqlite"
     monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))
     monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
     before = build_pre_0020_database(database_path)
 
     result = initialize_startup("user")
 
-    assert result.applied_migrations == [MIGRATION_ID]
+    assert result.applied_migrations == [MIGRATION_ID, NEXT_MIGRATION_ID]
     assert result.backup is not None
     assert result.backup.reason == "before_migration"
     # The backup predates `0020`: no ledger table, and the data is intact.
@@ -429,7 +434,7 @@ def test_user_mode_startup_backs_up_before_applying_0020(monkeypatch, tmp_path):
 
 def test_the_startup_backup_creates_no_ledger_row_and_no_audit_event(monkeypatch, tmp_path):
     user_data_dir = tmp_path / "user-data"
-    database_path = user_data_dir / "data" / "cosmetic_workshop.sqlite"
+    database_path = user_data_dir / "data" / "family_food.sqlite"
     monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))
     monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
     build_pre_0020_database(database_path)

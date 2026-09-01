@@ -1,5 +1,13 @@
 # cosmetic-workshop-os - Frontend concept
 
+> **Status: inherited CosmeticWorkshopOS frontend concept — non-canonical for
+> FamilyFoodOS.** This desktop-first workshop UI is preserved as source-product
+> and transitional-frontend context. It is not the FamilyFoodOS consumer UI
+> contract and must not define future navigation, workflows, components or
+> visual identity. ADRs 0029–0030, the migration plan, `frontend/AGENTS.md` and
+> `.agents/skills/family-food-ui/SKILL.md` define the current boundary; the new
+> consumer PWA remains gated to its later migration stage.
+
 Проект: **cosmetic-workshop-os**  
 Клиентское название: **Мастерская косметолога**  
 Документ: **docs/frontend-concept.md**  

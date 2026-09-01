@@ -1,5 +1,13 @@
 # cosmetic-workshop-os - Product Specification
 
+> **Status: inherited CosmeticWorkshopOS product specification — non-canonical
+> for FamilyFoodOS.** This document is preserved as source-product evidence and
+> context for bounded contexts that still exist during migration. It must not
+> direct current FamilyFoodOS product decisions or be mechanically rewritten
+> into food-domain requirements. Current product authority is `AGENTS.md`,
+> canonical `docs/family-food/` documents, relevant approved ADRs, and current
+> state files.
+
 Документ: `docs/product-spec.md`  
 Проект: `cosmetic-workshop-os`  
 Клиентское название: «Мастерская косметолога»  

@@ -31,6 +31,8 @@ from pathlib import Path
 import os
 import uuid
 
+from launcher import APP_SLUG
+
 RESTORE_DIRNAME = "restore"
 OPERATION_RECORD_FILENAME = "operation.json"
 INSTANCE_LOCK_FILENAME = "launcher.lock"
@@ -44,7 +46,7 @@ OWNED_TEMP_SUFFIX = ".tmp"
 
 # The prefix every launcher-owned scratch file carries. Cleanup matches on it, so
 # a file this launcher did not create cannot be removed by mistake.
-OWNED_TEMP_PREFIX = ".cwos-restore."
+OWNED_TEMP_PREFIX = f".{APP_SLUG}-restore."
 
 
 class RestoreWorkspaceError(RuntimeError):
