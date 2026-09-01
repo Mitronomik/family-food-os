@@ -21,6 +21,8 @@ Source baseline:
 
 `PR2-A — FamilyFoodOS Architecture & Persistence Contract — COMPLETE`
 
+`PR2-B — Persistence Foundation — COMPLETE`
+
 PR1 separated active FamilyFoodOS project, runtime, launcher, frontend and agent
 identity from CosmeticWorkshopOS while preserving inherited runtime behavior.
 Accepted source provenance, historical evidence, explicitly classified legacy
@@ -42,28 +44,33 @@ accepted these decisions:
 - UTC instants are distinct from household-local planning dates;
 - the deterministic core works with `AI_ENABLED=false`.
 
+PR2-B implemented the accepted synchronous SQLAlchemy 2.x Core persistence
+foundation while preserving the custom migration runner as the sole SQLite
+schema authority. The driver-independent Unit of Work owns one explicit
+transaction; commit and rollback are terminal, revoke the active connection,
+and prevent failed command state from contaminating later pooled commands.
+New entity identifiers are application-generated `uuid.UUID` values using
+UUIDv4 and generic SQLAlchemy `Uuid`; true instants use the UTC-normalizing
+persistence type, while planning dates remain date-only and household-local.
+
 ## Next authorized task
 
-`PR2-B — Persistence Foundation`
-
-PR2-B is implementation infrastructure only. It proves the approved persistence
-seam separately from the first FamilyFoodOS business bounded context.
-
-PR2-B may:
-
-- add the approved SQLAlchemy 2.x Core dependency;
-- resolve physical ID representation, the exact SQLAlchemy dependency version,
-  module/table organization, timestamp SQL types and SQLite conformance-test layout;
-- introduce project-owned repository/Unit-of-Work infrastructure for new food contexts;
-- implement the SQLite persistence-adapter foundation;
-- add persistence/UoW transaction and portability/conformance tests;
-- integrate with the existing custom migration authority without changing its authority.
-
-PR2-B must not create `Household`, `HouseholdMember`, production food tables or
-food migrations. It must not implement Nutrition, Planner, Shopping, Pantry,
-Prep or Retail; add PostgreSQL, Alembic or Auth; refactor inherited
-CosmeticWorkshopOS repositories to SQLAlchemy; or change consumer UI.
-
-After PR2-B is accepted, the next intended milestone is:
-
 `PR2-C — Household Foundation`
+
+PR2-C is the first production FamilyFoodOS bounded-context implementation. It
+may establish `Household`, `HouseholdMember`, household-local timezone and
+genuine Household settings/constraints; add the first production food-domain
+migration after `0021`; implement SQLAlchemy Core tables and repository
+adapters; and add Household-scoped application operations, minimal create/read/
+update API contracts, deterministic validation and tests across the domain,
+application, repository and API layers.
+
+PR2-C must reuse the accepted dependency path:
+
+`application/domain → repository contracts → Unit of Work → synchronous SQLAlchemy Core → SQLite`
+
+It must not replace the custom migration runner; add Alembic, PostgreSQL, Auth,
+a fake `owner_id`, ORM or async persistence; expose database-driver types above
+the adapter boundary; reuse or mechanically rename inherited Client semantics;
+refactor unrelated repositories; begin later food contexts or AI; or redesign
+the consumer PWA. New Household tables must coexist with inherited legacy tables.

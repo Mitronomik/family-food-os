@@ -2,7 +2,7 @@
 
 **Status:** canonical architecture contract for PR2 and subsequent FamilyFoodOS work
 
-**Version:** 1.0
+**Version:** 1.1
 
 **Decision date:** 2026-09-01
 
@@ -443,11 +443,15 @@ and actions rather than database IDs.
 Clients must not infer ordering, tenancy, type or authorization from an ID.
 APIs must not leak internal row objects or database-driver values.
 
-**OPEN QUESTION — must be resolved by the first schema implementation PR:** use
-of integer, UUID or another identifier representation for new food entities.
-The decision must consider offline fixtures, PostgreSQL migration, URL safety,
-index/storage cost and server-side generation. PR2-A does not invent a mixed or
-premature ID scheme.
+**DECISION:** New FamilyFoodOS entity identifiers use Python `uuid.UUID` values,
+generated application-side with `uuid.uuid4()` before persistence. This keeps entity
+identity opaque, independent of SQLite autoincrement, composable in fixtures and
+imports, and portable to PostgreSQL. SQLAlchemy Core schemas represent these
+values with the backend-agnostic `Uuid(as_uuid=True)` type, which is emulated on
+SQLite and uses a native UUID type when supported by the target dialect.
+
+UUID opacity and unpredictability are not authorization. Household access still
+requires the authorization boundary described in section 5.
 
 ### 7.2 Instants and the household planning calendar
 
@@ -456,11 +460,13 @@ timestamps, audit and import events, retail `PriceSnapshot.captured_at`, externa
 synchronization timestamps and confirmed execution events.
 
 `Household` owns an IANA timezone identifier. MealPlan weeks, calendar days and
-meal-slot dates use date/local-calendar semantics in that Household timezone;
-they are not inferred directly from a UTC timestamp. API/UI presentation
-converts instants for the household/user experience without redefining stored
-planning dates. Exact SQL column types and API serialization formats are first
-schema/API implementation decisions.
+meal-slot dates use ordinary SQL `Date` / Python `date` values interpreted in
+that Household timezone; they are not inferred directly from a UTC timestamp.
+True instants use a persistence adapter type that requires aware Python
+`datetime` values, normalizes them to UTC, stores portable timezone-naive UTC,
+and restores aware UTC values. API/UI presentation converts instants for the
+household/user experience without redefining stored planning dates. Exact API
+serialization formats remain owning API implementation decisions.
 
 ## 8. Data provenance
 
@@ -650,6 +656,19 @@ session unless a caller passes a connection.
 code or a concrete SQLite adapter. New food-domain application and domain code
 must not repeat them. PR2-A does not repair inherited areas.
 
+### 11.4 Adapter organization and SQLite connection convention
+
+New food SQLAlchemy table definitions and concrete repositories live below the
+application/domain boundary in the dedicated `app.persistence` adapter
+namespace. Domain and application services do not import SQLAlchemy, and raw
+connections remain adapter-only implementation details.
+
+New SQLAlchemy SQLite engines use Python 3.12+ non-legacy transaction control
+with DBAPI `autocommit=False`; the Unit of Work owns transaction completion.
+Every connection enables SQLite foreign-key enforcement. Engine construction
+does not create application schema, and the migration authority in section 13
+remains unchanged.
+
 ## 12. Persistence adapter technology evaluation
 
 ### Option A — direct SQLite SQL behind clean interfaces
@@ -698,10 +717,10 @@ needed. A future performance-driven ADR may revisit this only with measured
 evidence.
 
 This decision applies only to new food persistence adapters and does not
-authorize rewriting inherited repositories. PR2-A does not add SQLAlchemy,
-tables, metadata, repositories or engines. Exact dependency versions,
-SQLAlchemy module/table organization, row mapping and query conventions are
-first-schema implementation concerns.
+authorize rewriting inherited repositories. PR2-B adds the constrained
+SQLAlchemy 2.0 runtime foundation and the dedicated adapter namespace without
+adding a production schema. Aggregate-specific table, row-mapping and repository
+organization remain owning bounded-context decisions.
 
 ## 13. Migration coexistence
 
@@ -1006,6 +1025,8 @@ Pantry movements / prepared inventory changes
   an opaque Unit of Work.
 - New food persistence adapters use synchronous SQLAlchemy 2.x Core; inherited
   repositories are not rewritten by this decision.
+- New entity IDs are application-generated UUIDv4 values represented in Python
+  by `uuid.UUID` and in SQLAlchemy by `Uuid(as_uuid=True)`.
 - SQLite is retained for the vertical slice and isolated MVP development.
 - PostgreSQL, Auth and tenant isolation are mandatory before shared families use
   one deployment.
@@ -1014,24 +1035,20 @@ Pantry movements / prepared inventory changes
 - Legacy schema coexists unchanged until bounded replacements are verified.
 - Persisted derived snapshots carry source revisions and become stale when
   relevant authoritative input changes.
+- True instants use the UTC-normalizing persistence convention; planning dates
+  retain household-local date-only semantics.
 
 ### OPEN QUESTION
 
 PR2-A resolves the persistence technology, migration authority/cutover,
 Unit-of-Work semantics, derived-state invalidation, ingredient terminology,
 Food Product Type disposition, Household/Auth separation, and UTC versus
-household-local calendar semantics.
+household-local calendar semantics. PR2-B resolves the pre-schema identifier,
+dependency, adapter namespace, timestamp persistence and SQLite conformance-test
+conventions recorded in sections 7, 11 and 12.
 
-**Resolve before the first schema implementation PR:**
-
-- integer, UUID or other physical ID representation;
-- exact dependency versions;
-- SQLAlchemy module/table organization, row mapping and query conventions;
-- exact timestamp SQL types and API serialization details;
-- SQLite persistence conformance-test layout.
-
-The first schema task must resolve and document these before creating production
-food tables; they are not license for silent implementation choices.
+The remaining questions below stay with their owning bounded-context or
+shared-deployment PR; they are not license for silent implementation choices.
 
 **Resolve in the owning bounded-context PR:**
 
