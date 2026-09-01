@@ -15,7 +15,7 @@ Household
 → Recipe Catalogue
 → Nutrition
 → MealPlan
-→ Portions
+→ Servings
 → Pantry
 → Shopping
 → Prep
@@ -23,6 +23,23 @@ Household
 ```
 
 Основной цикл MVP должен работать **без LLM и без retail parsers**.
+
+## Каноническое разграничение документов
+
+`docs/family-food/master-roadmap.md` — канонический контракт текущей
+последовательности реализации и delivery gates. При конфликте старого порядка
+в этом документе с Master Roadmap действует Master Roadmap.
+
+Этот Migration Plan отвечает за:
+
+- стратегию миграции;
+- reuse/removal strategy;
+- дисциплину замены legacy bounded contexts;
+- bounded migration notes;
+- историческое обоснование миграции.
+
+Master Roadmap отвечает за текущий implementation order, delivery gates и
+момент, когда разрешены PWA, Auth, Retail, AI и Billing.
 
 ---
 
@@ -146,7 +163,11 @@ PostgreSQL
 +
 Auth
 +
+HouseholdMembership / authorization
++
 Tenant isolation
++
+Hosted operational baseline
 ```
 
 становятся обязательными.
@@ -240,45 +261,64 @@ PR не должен одновременно:
 # 8. Общий порядок
 
 ```text
-PR0   Frozen Fork
-PR1   Identity Detox
-PR2   Food Domain Foundation (PR2-A contract → first schema implementation)
-PR3   FoodIngredient Catalogue Core
-PR4   Food Recipe Core
-PR5   Pantry Core
-PR6   Nutrition Engine
-PR7   Household MealPlan Domain
-PR8   Planner v0
-PR9   Shopping Engine
-PR10  Prep & Freezer Engine
+✅ PR0   Frozen Fork
+✅ PR1   Identity Detox
+✅ PR2-A Architecture & Persistence Contract
+✅ PR2-B Persistence Foundation
+✅ PR2-C Household Foundation
 
------ MVP CORE GATE -----
+→ PR3   FoodIngredient Catalogue
+→ PR4   Recipe Catalogue
+→ PR5   Pantry
+→ PR6   Nutrition Core
+→ PR7   MealPlan / Serving + serving-nutrition integration
+→ PR8   Planner v0
 
-PR11  New Consumer PWA Shell
-PR12  Household Onboarding
-PR13  Weekly UX
-PR14  PDF / Printable Week
+──────── GATE 1 — PLANNING CORE ────────
 
------ CLOSED MVP GATE -----
+→ PR9   Shopping Engine
+→ PR10  Prep / Freezer
+→ PR10-PDF Backend Weekly PDF
 
------ SHARED MULTI-FAMILY DEPLOYMENT GATE (triggered before shared families) -----
+──────── GATE 2 — MVP0 BACKEND ────────
 
-PostgreSQL + Auth + Tenant isolation + hosted deployment
+→ PR11  Consumer PWA Shell
+→ PR12  Household Onboarding UX
+→ PR13  Today / Week / Shopping / Prep / Pantry UX
+→ PR14  PDF / Print UX
+→ PR15  Feedback & History v0
 
-PR15  Data Ingestion Platform
-PR16  Retail Foundation
-PR17  Feedback & Personalization
-PR18  Optional AI Gateway
+──────── GATE 3 — CONSUMER CORE ────────
 
------ PAID BETA GATE -----
+→ DATA READINESS GATE
 
-PR19  Paid Beta Commercial Foundation / Billing / Hardening
+→ SHARED-1 PostgreSQL Cutover
+→ SHARED-2 Auth + HouseholdMembership
+→ SHARED-3 Tenant Isolation + Hosted Operations
+
+──────── GATE 4 — SHARED DEPLOYMENT ────────
+
+→ REAL FAMILY TESTING
+   10–30 households
+   week → use → feedback → next week
+
+→ DATA PROGRAM — Data Ingestion Platform
+→ Catalogue expansion / quality automation
+
+→ RETAIL PROGRAM — Retail Foundation
+→ Retail Connector #1
+
+→ Optional AI Gateway
+
+→ Commercial / Billing
+→ Production Hardening
+→ Additional Retail Connectors
+→ Production v1
 ```
 
-Shared-deployment work is trigger-based rather than tied to the late PR19
-number. Its exact implementation PR must be scoped and reviewed before the
-first shared multi-family deployment; it may be scheduled before PR15–PR18 if
-shared validation starts earlier.
+Эту последовательность нельзя материально менять внутри Migration Plan.
+`PR2-DOCS` является docs-only governance operation между PR2-C и PR3, а не
+новым product milestone.
 
 ---
 
@@ -423,163 +463,74 @@ rg -n "cosmetic-workshop|Мастерская косметолога|COSMETIC_WO
 
 ---
 
-# PR2 — Food Domain Foundation
+# PR2 — Completed foundation split
 
-PR2-A фиксирует documentation-only architecture/persistence contract. Первый
-food schema implementation после него использует SQLite, synchronous SQLAlchemy
-2.x Core для runtime persistence и существующий custom migration runner как
-единственный SQLite schema authority. PR2-A сам не добавляет dependency, schema
-или migration.
-
-## Goal
-
-Добавить фундамент новой предметной области рядом со старой.
-
-## Новые сущности
+Старый единый этап `PR2 — Food Domain Foundation` заменён и полностью завершён
+тремя bounded milestones:
 
 ```text
-Household
-HouseholdMember
-FoodPreference
-ExcludedIngredient
-HouseholdSettings
+PR2-A Architecture & Persistence Contract — COMPLETE
+PR2-B Persistence Foundation               — COMPLETE
+PR2-C Household Foundation                 — COMPLETE
 ```
 
-## Household
+PR2-A зафиксировал dependency direction, synchronous SQLAlchemy 2.x Core,
+repository/Unit-of-Work boundary, custom SQLite migration authority и
+PostgreSQL/Auth/tenant-isolation gate. PR2-B реализовал persistence foundation
+без production food schema. PR2-C реализовал `Household` и `HouseholdMember`
+через migration `0022_household_foundation`.
 
-Минимально:
+PR2-C принят итоговым project review (`PR2-C FINAL REVIEW: ACCEPT`) и merged в
+GitHub PR `#5`; merge commit:
+`48c72aeba19a1e6ece0dc729f0a80de930be88a8`.
 
-```text
-id
-name
-city
-timezone
-weekly_budget
-cooking_profile
-created_at
-updated_at
-```
-
-## HouseholdMember
-
-```text
-id
-household_id
-name
-birth_date / age
-sex optional
-height optional
-weight optional
-activity_level
-goal
-active
-created_at
-updated_at
-```
-
-## Scope
-
-Добавить:
-
-- domain models;
-- schemas;
-- repositories;
-- services;
-- migrations;
-- API;
-- tests.
-
-## API
-
-Предварительно:
-
-```text
-GET    /api/households
-POST   /api/households
-
-GET    /api/households/{id}
-PATCH  /api/households/{id}
-
-GET    /api/households/{id}/members
-POST   /api/households/{id}/members
-PATCH  /api/household-members/{id}
-```
-
-## Non-goals
-
-Не:
-
-- удалять Client;
-- строить меню;
-- рассчитывать калории;
-- делать frontend onboarding;
-- добавлять auth.
-
-## Acceptance criteria
-
-Можно программно:
-
-```text
-create household
-→ add 3 members
-→ update household
-→ update member
-→ retrieve complete household
-```
+PR2 больше не является будущим implementation PR.
 
 ---
 
-# PR3 — FoodIngredient Catalogue Core
+# PR3 — FoodIngredient Catalogue
 
 ## Goal
 
-Создать системный каталог пищевых ингредиентов.
+Создать canonical platform-owned каталог пищевых ингредиентов. Каталог не
+принадлежит отдельному Household.
 
-## Новая сущность
+`FoodIngredient` — canonical repository-domain name. `CanonicalIngredient` в
+ранних Project Sources — исторический alias того же понятия, а не второй
+aggregate.
+
+`FoodProductType` не является обязательным MVP aggregate. Retail/catalogue
+classification может появиться позже только при подтверждённом downstream use
+case.
+
+## Minimum model and capabilities
 
 ```text
 FoodIngredient
-```
-
-`CanonicalIngredient` в более ранних Project Sources означает тот же
-канонический platform food concept. В repository architecture используется имя
-`FoodIngredient`; это не две разные сущности.
-
-## Поля
-
-```text
-id
-canonical_code
-name
-category
-default_unit
-
-density optional
-edible_fraction
-
-kcal
-protein
-fat
-carbohydrates
-fiber
-
-allergen_flags
-storage_profile
-
-is_active
-created_at
-updated_at
-```
-
-Дополнительно:
-
-```text
 IngredientAlias
+FoodNutritionProfile / equivalent provenance representation
+IngredientUnitProfile where genuinely required
 ```
+
+Поддержать:
+
+- canonical code и name;
+- category;
+- default unit;
+- optional density;
+- edible fraction;
+- nutrition/macros/fiber либо ссылку на nutrition profile;
+- nutrition source/version/provenance;
+- allergen metadata;
+- storage metadata/profile;
+- active/deactivate;
+- timestamps;
+- name/alias lookup;
+- idempotent seed/import.
 
 ## Что переиспользовать
 
-Из старого Ingredient:
+Из старого Ingredient допускается адаптировать:
 
 - ID conventions;
 - unit validation;
@@ -588,9 +539,7 @@ IngredientAlias
 - repository/service patterns;
 - catalog category/tag ideas.
 
-## Что удалить из новой модели
-
-Не переносить:
+Не переносить косметические поля и invariants:
 
 ```text
 inci_name
@@ -599,42 +548,53 @@ cosmetic usage notes
 cosmetic categories
 ```
 
-## Bootstrap
+## Technical slice
 
-Добавить fixture:
+Первая реализация содержит:
 
-```text
-data/seed/canonical-ingredients.csv
-```
+**80–120 `FoodIngredient`.**
 
-Для первого этапа:
+Более широкий MVP target остаётся примерно **250–350**, но PR3 не должен
+пытаться реализовать полную automation платформы каталогов.
 
-**80–120 ингредиентов.**
+## Tests
+
+- idempotent seed/import;
+- alias lookup;
+- unit validation;
+- Decimal semantics;
+- nutrition provenance required;
+- duplicate prevention;
+- deactivation behavior;
+- no `RetailSKU` coupling.
 
 ## Non-goals
 
-- retailer SKU;
-- parsing;
-- цены магазинов;
-- полноценный nutrition source catalogue.
+- `RetailSKU`;
+- retailer parsing;
+- retailer prices;
+- full ingestion automation;
+- Recipe;
+- Pantry;
+- Nutrition Engine calculations;
+- Planner;
+- AI.
+
+## Persistence constraints
+
+PR3 продолжает synchronous SQLAlchemy 2.x Core через repository contracts и
+Unit of Work, использует SQLite и custom migration chain, добавляет следующую
+migration после `0022` и не вводит Alembic, ORM, async, PostgreSQL или Auth.
 
 ## Acceptance criteria
 
-Seed-команда автоматически создаёт каталог.
-
-Повторный импорт не создаёт duplicates.
-
-Поиск:
-
-```text
-"греч"
-```
-
-возвращает canonical ingredient без ручного создания пользователем.
+Платформа идемпотентно создаёт bounded catalogue slice, не создаёт duplicates,
+находит ингредиенты по имени/alias, требует verifiable nutrition provenance,
+корректно деактивирует записи и не связывает `FoodIngredient` с `RetailSKU`.
 
 ---
 
-# PR4 — Food Recipe Core
+# PR4 — Recipe Catalogue
 
 ## Goal
 
@@ -682,7 +642,7 @@ storage_days_freezer
 
 ```text
 recipe_version_id
-canonical_ingredient_id
+food_ingredient_id
 quantity
 unit
 position
@@ -729,7 +689,7 @@ load recipe
 
 ---
 
-# PR5 — Pantry Core
+# PR5 — Pantry
 
 ## Goal
 
@@ -821,11 +781,11 @@ attempt consume 10
 
 ---
 
-# PR6 — Nutrition Engine
+# PR6 — Nutrition Core
 
 ## Goal
 
-Создать полностью deterministic расчётный слой питания.
+Создать deterministic Nutrition Core до появления Serving.
 
 ## Новый module
 
@@ -837,35 +797,25 @@ backend/app/services/nutrition/
 
 ## Ответственность
 
-- nutrition ingredient;
-- nutrition recipe;
-- nutrition serving;
-- nutrition day;
-- nutrition week;
-- member target profile.
+```text
+FoodIngredient nutrition
+→ RecipeVersion nutrition
+→ Member target formula/config foundation
+```
+
+PR6 не рассчитывает Serving, member/day totals или week aggregates: сущность
+`Serving` появляется только в PR7.
 
 ## Основное правило
 
 LLM запрещён внутри Nutrition Engine.
 
-## Вход
+## Вход и выход
 
-```text
-HouseholdMember
-Recipe
-Serving
-```
-
-## Выход
-
-```text
-kcal
-protein
-fat
-carbs
-fiber
-warnings
-```
+Входом служат versioned `FoodIngredient` nutrition data, `RecipeVersion` и
+данные `HouseholdMember`, необходимые для target formula/config foundation.
+Результат включает детерминированные kcal/macros/fiber, member target profile и
+явные warnings без зависимости от Serving.
 
 ## Требования
 
@@ -898,7 +848,7 @@ family_2_adults_2_children
 
 ---
 
-# PR7 — MealPlan Domain
+# PR7 — MealPlan / Serving + serving-nutrition integration
 
 ## Goal
 
@@ -947,6 +897,20 @@ Meal
 ```
 
 Один рецепт может иметь разные порции для разных членов семьи.
+
+## Nutrition integration
+
+PR7 интегрирует:
+
+```text
+RecipeVersion nutrition
+→ Serving nutrition
+→ Member/day totals
+→ week aggregates
+```
+
+MealPlan history начинается вместе с MealPlan context. Structured feedback и
+personalization history принадлежат PR15.
 
 ## Non-goals
 
@@ -1047,7 +1011,7 @@ selected_reason
 
 ---
 
-# MVP CORE GATE A
+# GATE 1 — PLANNING CORE
 
 После PR8 запрещено переходить дальше, пока не работает:
 
@@ -1127,7 +1091,7 @@ FoodIngredient.average_price
 
 ---
 
-# PR10 — Prep & Freezer Engine
+# PR10 — Prep / Freezer
 
 ## Goal
 
@@ -1182,20 +1146,52 @@ MealPlan автоматически выдаёт PrepPlan.
 
 ---
 
-# MVP CORE GATE B
+# PR10-PDF — Backend Weekly PDF
+
+## Goal
+
+Создать backend-generated Weekly PDF как derived artifact уже существующего
+детерминированного состояния:
+
+```text
+MealPlan + ShoppingList + PrepPlan
+→ Backend Weekly PDF
+```
+
+Минимальный artifact содержит меню недели, shopping list, prep/freezer plan и
+краткие рецепты/инструкции. Он должен быть A4-readable, reproducible по source
+revisions и renderer version, безопасно создаваться без silent overwrite и не
+становиться source of truth.
+
+PR10-PDF находится в MVP0 backend до Consumer PWA. Consumer download/print UX
+появится отдельно в PR14.
+
+## Non-goals
+
+- Consumer PWA;
+- browser print/download UX;
+- Auth;
+- Retail;
+- AI.
+
+---
+
+# GATE 2 — MVP0 BACKEND
 
 На этом этапе backend должен поддерживать полный vertical slice:
 
 ```text
 Family
 → Week
-→ Portions
+→ Servings
 → Shopping
 → Pantry
 → Prep
 ```
 
 Без frontend и без AI.
+
+Backend Weekly PDF уже существует.
 
 Все основные операции покрыты API tests.
 
@@ -1274,11 +1270,15 @@ Horizontal page overflow отсутствует.
 
 ---
 
-# PR12 — Household Onboarding
+# PR12 — Household Onboarding UX
 
 ## Goal
 
 Получить первую неделю максимум за несколько минут.
+
+До появления Auth это onboarding Household и первой недели, а не
+account-registration/auth onboarding. Fixture/local identity не должна
+маскироваться под готовую авторизацию.
 
 ## Flow
 
@@ -1327,7 +1327,7 @@ Horizontal page overflow отсутствует.
 Новый пользователь проходит:
 
 ```text
-empty account
+empty product state
 → household
 → family members
 → constraints
@@ -1338,7 +1338,7 @@ empty account
 
 ---
 
-# PR13 — Weekly Consumer UX
+# PR13 — Today / Week / Shopping / Prep / Pantry UX
 
 ## Goal
 
@@ -1391,15 +1391,17 @@ empty account
 
 ---
 
-# PR14 — Weekly PDF
+# PR14 — PDF / Print UX
 
 ## Goal
 
-Сделать FamilyFoodOS пригодным для использования без постоянного открытого приложения.
+Добавить consumer download/print UX для backend Weekly PDF, уже реализованного
+в PR10-PDF.
 
-## PDF
+## Consumer UX
 
-Минимум:
+Пользователь может открыть, скачать и распечатать существующий artifact.
+Представление охватывает:
 
 ### Page 1
 
@@ -1417,16 +1419,12 @@ empty account
 
 Краткие рецепты.
 
-## Переиспользовать
-
-- file creation safety;
-- artifact handling;
-- PDF generation pattern;
-- non-overwriting filenames.
+PR14 не владеет backend PDF generation, его persistence/provenance или
+renderer. Он использует существующий backend API/artifact contract.
 
 ## Acceptance criteria
 
-PDF:
+Consumer PDF/Print UX:
 
 - A4;
 - русский текст;
@@ -1436,49 +1434,149 @@ PDF:
 
 ---
 
-# CLOSED MVP GATE
+# PR15 — Feedback & History v0
 
-После PR14 можно начинать тестирование на:
+## Goal
 
-**10–30 семьях.**
+Замкнуть цикл `week → use → feedback → next week` до real-family testing и до
+Retail, полностью без обязательного LLM.
 
-Local или isolated single-household testing не требует Auth/PostgreSQL. До того
-как независимые семьи используют один hosted deployment, обязательно пройти
-shared multi-family deployment gate:
+## Structured signals
+
+```text
+LIKED
+DISLIKED
+SKIPPED
+REPLACED
+LEFTOVER
+REPEAT_REQUESTED
+```
+
+## Minimum model/capabilities
+
+```text
+MealFeedback
+RecipePreferenceScore
+HouseholdIngredientPreference, where justified
+```
+
+MealPlan history начинается раньше, вместе с MealPlan context в PR7. PR15
+владеет structured feedback и deterministic personalization/history signals,
+которые Planner использует для следующей недели.
+
+## Acceptance criteria
+
+Household может завершить неделю, сохранить structured feedback и получить
+детерминированное изменение scoring следующего плана. Например, повторно
+отклонённый рецепт получает более низкую вероятность нового предложения.
+
+---
+
+# GATE 3 — CONSUMER CORE
+
+Consumer flow должен поддерживать:
+
+```text
+Household onboarding
+→ generate week
+→ modify/use week
+→ shopping
+→ prep
+→ PDF/print
+→ structured feedback/history
+→ next week
+```
+
+PR12 onboarding до Auth означает Household/product setup, а не регистрацию
+аккаунта.
+
+---
+
+# DATA READINESS GATE
+
+Data Readiness — quality gate, а не требование заранее реализовать полную Data
+Ingestion Platform.
+
+До real-family testing активный каталог должен иметь:
+
+- достаточное количество verified recipes для полезного и разнообразного
+  теста;
+- complete `FoodIngredient` resolution для активных recipes;
+- valid nutrition provenance;
+- отсутствие critical catalogue gaps для целевых тестовых Household.
+
+Gate может быть закрыт bounded seed/import и review work. Полная ingestion
+automation следует позже в Data Program.
+
+---
+
+# SHARED-1 — PostgreSQL Cutover
+
+## Goal
+
+До shared-family deployment определить PostgreSQL target baseline, перенос и
+reconciliation данных, adapter conformance и freeze/retirement правила custom
+SQLite lineage. Только на этом явном cutover Alembic может стать единственным
+PostgreSQL migration authority.
+
+---
+
+# SHARED-2 — Auth + HouseholdMembership
+
+## Goal
+
+Добавить authenticated principal, `HouseholdMembership`, roles/authorization и
+trusted propagation разрешённого Household scope. Client-provided
+`household_id` не является proof of authorization.
+
+---
+
+# SHARED-3 — Tenant Isolation + Hosted Operations
+
+## Goal
+
+Доказать adversarial tenant isolation и установить hosted operational baseline:
+deployment, secrets, backup/restore, monitoring и безопасные migration
+operations для shared environment.
+
+---
+
+# GATE 4 — SHARED DEPLOYMENT
+
+До того как независимые реальные семьи используют один deployment, обязательны:
 
 ```text
 PostgreSQL
 + Auth
-+ Tenant isolation
-+ hosted deployment
++ HouseholdMembership / authorization
++ tenant isolation
++ hosted operational baseline
 ```
 
-Обязательный сценарий:
-
-```text
-onboarding
-→ generate week
-→ modify week
-→ shopping
-→ prep
-→ use week
-→ feedback
-→ next week
-```
+Billing не входит в этот safety gate.
 
 ---
 
-# PR15 — Data Ingestion Platform
+# REAL FAMILY TESTING
+
+После Consumer Core, Data Readiness и Shared Deployment gates начинается
+тестирование на **10–30 households**:
+
+```text
+week → use → feedback → next week
+```
+
+Local или isolated single-Household validation может выполняться раньше, но не
+должна называться shared real-family testing.
+
+---
+
+# DATA PROGRAM — Data Ingestion Platform
 
 ## Goal
 
-Убрать ручное администрирование системной базы.
-
-## Новый bounded context
-
-```text
-ingestion/
-```
+После core/shared-family validation убрать ручное администрирование и расширять
+качество системной базы через automation.
 
 ## Основные pipelines
 
@@ -1490,46 +1588,30 @@ AliasResolutionJob
 ValidationJob
 ```
 
-## Reuse
-
-Сохранить проверенную идею:
+Сохраняется безопасный flow:
 
 ```text
 Source
 → Draft
 → validation
-→ preview
+→ preview/review or trusted-source policy
 → apply
 ```
 
-Но для trusted automatic sources допускается configurable auto-approval.
-
-## Новые сущности
-
-```text
-IngestionJob
-RawSourceRecord
-ReviewQueueItem
-```
-
-## Acceptance criteria
-
-Можно массово загрузить:
-
-- 300 ingredients;
-- 100 recipes;
-
-без ручного создания каждой сущности.
+`IngestionJob`, `RawSourceRecord` и `ReviewQueueItem` могут поддерживать
+catalogue expansion / quality automation. Повторный импорт идемпотентен, а
+untrusted parsed data не становится production truth автоматически.
 
 ---
 
-# PR16 — Retail Foundation
+# RETAIL PROGRAM — Retail Foundation / Connector #1
 
 ## Goal
 
-Подготовить систему к актуальным магазинам и ценам.
+После generic Shopping Engine и Data Program добавить Retail как отдельный
+enrichment layer.
 
-## Новые сущности
+## Model
 
 ```text
 Retailer
@@ -1539,227 +1621,50 @@ PriceSnapshot
 RetailMapping
 ```
 
-## Connector interface
-
 ```text
-RetailConnector
-
-search()
-fetch_product()
-fetch_price()
-fetch_availability()
-normalize()
+FoodIngredient
+→ RetailMapping
+→ RetailSKU
+→ PriceSnapshot
 ```
 
-## Matching
-
-```text
-RetailSKU
-→ FoodIngredient
-```
-
-## Confidence
-
-Поддержать:
-
-```text
-AUTO_APPROVE
-REVIEW
-REJECT
-```
-
-## Первый connector
-
-Только одна сеть.
-
-Не подключать три сети в одном PR.
-
-## Non-goals
-
-- полный ассортимент сети;
-- оформление доставки;
-- обход технических защит.
-
-## Acceptance criteria
-
-Для whitelist ingredients система получает актуальные candidate SKU и цены автоматически.
+Первым вводится только один connector. Не импортируется весь ассортимент и не
+обходятся технические защиты. Retail failure не ломает generic ShoppingList.
 
 ---
 
-# PR17 — Feedback & Personalization
+# Optional AI Gateway
 
-## Goal
-
-Сделать следующую неделю лучше предыдущей без LLM.
-
-## Сигналы
-
-```text
-LIKED
-DISLIKED
-SKIPPED
-REPLACED
-LEFTOVER
-REPEAT_REQUESTED
-```
-
-## Новые сущности
-
-```text
-MealFeedback
-RecipePreferenceScore
-HouseholdIngredientPreference
-```
-
-## Planner integration
-
-История влияет на score следующего MealPlan.
-
-## Acceptance criteria
-
-Если пользователь 3 раза отклонил рецепт, planner снижает вероятность его повторного предложения.
-
----
-
-# PR18 — Optional AI Gateway
-
-## Goal
-
-Добавить natural-language interaction поверх deterministic system.
-
-## Архитектура
-
-```text
-AI Gateway
-        ↓
-LLMProvider
-        ├── OpenAIProvider
-        ├── GigaChatProvider
-        └── future/local
-```
-
-## Разрешённые задачи
-
-### Natural-language preference
-
-> На следующей неделе меньше курицы.
-
-↓
-
-```text
-structured constraint
-```
-
-### Schedule change
-
-> В среду муж не ужинает.
-
-↓
-
-structured change.
-
-### Pantry input
-
-> Осталось полпачки гречки и шесть яиц.
-
-### Replacement request
-
-> Замени рыбу чем-нибудь дешёвым.
-
-## Hard rule
-
-AI не является источником истины для:
-
-- kcal;
-- nutrients;
-- allergens;
-- quantities;
-- prices;
-- availability;
-- shopping;
-- storage safety.
-
-Все AI suggestions проходят deterministic validation.
-
-## Feature flag
+AI добавляется только как provider-neutral optional layer поверх deterministic
+system. Natural-language preferences, schedule changes, Pantry input,
+replacement suggestions и explanations проходят deterministic validation.
 
 ```text
 AI_ENABLED=false
 ```
 
-не должен ломать ни один core workflow.
+не ломает ни один core workflow. AI не является источником истины для kcal,
+nutrients, allergens, quantities, prices, availability, shopping или storage
+safety.
 
 ---
 
-# PAID BETA GATE
+# Commercial / Billing
 
-Перед следующим этапом необходимо подтвердить:
+Commercial capabilities появляются после core/shared-family validation,
+Data/Retail foundation и optional AI position in the sequence. Billing остаётся
+отдельным поздним concern и не входит в Shared Deployment gate.
 
-- пользователи возвращаются на вторую неделю;
-- generated menu используется;
-- shopping list реально используется;
-- onboarding completion приемлемый;
-- planner имеет достаточный acceptance rate.
-
-Если продукт уже обслуживает несколько независимых семей в одном deployment,
-shared multi-family deployment gate должен быть закрыт до этого момента, а не
-откладываться до Paid Beta.
+Допускаются `Subscription`, tiers и feature flags, но они не ослабляют
+Household authorization или tenant boundary.
 
 ---
 
-# PR19 — Paid Beta Commercial Foundation
+# Production Hardening → Additional Retail Connectors → Production v1
 
-## Goal
-
-Добавить commercial capabilities после доказательства core value и закрытого
-shared-deployment safety gate.
-
-## Shared deployment prerequisite
-
-PostgreSQL, Auth, tenant isolation и hosted deployment не являются scope PR19,
-если они уже реализованы более ранним trigger-based PR. Если gate ещё не
-закрыт, Paid Beta не начинается.
-
-## Billing
-
-Добавить `Subscription` и подготовить tiers:
-
-```text
-Core
-Smart
-Plus
-```
-
-## Feature flags
-
-Пример:
-
-```text
-AI_ACCESS
-RETAIL_PRICES
-ADVANCED_HISTORY
-```
-
-## Production infrastructure
-
-Добавить:
-
-- container deployment;
-- secrets;
-- DB backups;
-- error monitoring;
-- structured logs;
-- health checks;
-- migration procedure;
-- restore procedure.
-
-## Acceptance criteria
-
-Shared-deployment isolation tests уже проходят как prerequisite.
-
-Billing не ослабляет household authorization и tenant boundary.
-
-Production deployment восстанавливается из documented backup.
+Hardening включает production-grade observability, backup/restore, error
+monitoring, safe migration procedure и operational evidence. Только после него
+следуют дополнительные Retail Connectors и Production v1.
 
 ---
 
@@ -2135,8 +2040,9 @@ Shared-deployment prerequisites, которые должны быть выпол
 
 - PostgreSQL;
 - auth;
+- `HouseholdMembership` / authorization;
 - tenant isolation;
-- production deployment;
+- hosted operational baseline;
 - backups;
 - monitoring;
 
@@ -2153,26 +2059,10 @@ Shared-deployment prerequisites, которые должны быть выпол
 
 # 26. Оценка этапов
 
-Ориентировочно при плотной agent-assisted разработке:
-
-| Этап | Срок |
-|---|---:|
-| PR0–PR1 | 1–2 дня |
-| PR2–PR5 | 6–10 дней |
-| PR6–PR8 | 5–8 дней |
-| PR9–PR10 | 3–5 дней |
-| PR11–PR14 | 6–10 дней |
-| **Closed MVP** | **примерно 3–5 недель** |
-| PR15–PR18 | ещё 2–3 недели |
-| PR19 + hardening | ещё 2–3 недели |
-| **Paid beta** | **примерно 7–10 недель от старта** |
-
-Сроки предполагают:
-
-- использование Codex/Claude Code;
-- маленькие PR;
-- быстрое review;
-- отсутствие масштабного scope creep.
+Старые оценки, привязанные к superseded downstream numbering, удалены: они
+больше не являются planning authority. Сроки оцениваются отдельно для
+canonical milestones и gates из `docs/family-food/master-roadmap.md` без
+изменения их порядка.
 
 ---
 

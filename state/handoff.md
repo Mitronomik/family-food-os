@@ -1,6 +1,6 @@
 # Handoff
 
-Updated: `2026-09-01`
+Updated: `2026-09-02`
 
 ## Project identity
 
@@ -28,14 +28,18 @@ SQLAlchemy Core → SQLite path. Migration `0022_household_foundation` adds the
 new tables beside every inherited table and leaves the custom migration runner
 as the sole SQLite schema authority.
 
-Correction-pass evidence:
+Closure evidence:
 
 - targeted Household/domain/persistence/API/migration suite: `196 passed`;
 - backend + launcher regression: `2684 passed`;
 - Ruff checks and formatting checks: passed;
 - `git diff --check`: passed;
-- readiness: `READY FOR PR2-C FINAL REVIEW`;
-- final adversarial `ACCEPT`: not yet issued.
+- final project review: `PR2-C FINAL REVIEW: ACCEPT`;
+- GitHub PR `#5`: **MERGED**;
+- accepted head: `13f7c7c480469853579912a7836680afc4734ad7`;
+- merge commit: `48c72aeba19a1e6ece0dc729f0a80de930be88a8`;
+- merged at: `2026-09-01T21:23:23Z`;
+- no remaining PR2-C blocker.
 
 The correction pass revokes Household repositories after every terminal UoW
 attempt, maps expected commit-time database failures to stable Household
@@ -50,13 +54,18 @@ Before continuing:
 1. `AGENTS.md`
 2. `docs/family-food/project-operating-manual.md`
 3. `state/current-focus.md`
-4. `docs/family-food/architecture.md`
-5. `docs/decisions/0032-family-food-persistence-portability-and-shared-deployment-tenancy-gate.md`
-6. `docs/family-food/technical-spec.md`
-7. `docs/family-food/migration-plan.md`
-8. `backend/app/AGENTS.md`
-9. `backend/app/persistence/AGENTS.md`
-10. PR2-B persistence foundation code and PR2-C Household code/tests:
+4. `docs/family-food/master-roadmap.md`
+5. relevant architecture/domain documents, including:
+   - `docs/family-food/architecture.md`
+   - `docs/decisions/0032-family-food-persistence-portability-and-shared-deployment-tenancy-gate.md`
+   - `docs/family-food/technical-spec.md`
+   - `docs/family-food/data-ingestion.md`
+   - `docs/family-food/migration-plan.md`
+6. `state/handoff.md`
+7. applicable scoped `AGENTS.md`, code and tests, including:
+   - `backend/app/AGENTS.md`
+   - `backend/app/persistence/AGENTS.md`
+8. PR2-B persistence foundation code and PR2-C Household code/tests:
     - `backend/app/services/unit_of_work.py`
     - `backend/app/persistence/sqlalchemy_core/engine.py`
     - `backend/app/persistence/sqlalchemy_core/uow.py`
@@ -68,17 +77,26 @@ Before continuing:
     - `backend/app/persistence/sqlalchemy_core/household_*.py`
     - `backend/app/api/households.py`
     - `backend/app/tests/test_household_*.py`
-11. existing custom migration runner:
+9. existing custom migration runner:
     - `backend/app/db/migrations.py`
     - its migration-chain tests
 
-## Milestone gated after PR2-C final acceptance
+## Current work
+
+`PR2-DOCS — Canonical Roadmap & PR2-C Closure Sync — READY FOR REVIEW`
+
+This branch performs documentation/governance synchronization only. It creates
+the repository-local Master Roadmap, aligns older sequencing, and records the
+accepted/merged PR2-C result. It must not be marked complete before review and
+merge, and no PR3 implementation belongs on this branch.
+
+## Next product milestone after this docs PR
 
 `PR3 — FoodIngredient Catalogue`
 
-PR3 is not authorized until PR2-C receives final review and acceptance. PR3
-owns the canonical platform `FoodIngredient` catalogue and must keep it
-distinct from RetailSKU.
+PR3 is the next approved product milestone, but implementation must wait until
+PR2-DOCS is reviewed and merged. PR3 owns the canonical platform
+`FoodIngredient` catalogue and keeps it distinct from `RetailSKU`.
 
 ## Persistence constraints
 
@@ -102,6 +120,10 @@ instead of silently creating a parallel persistence path.
 
 New repository interfaces and the Unit of Work must not expose SQLAlchemy,
 DBAPI or `sqlite3` connection types through domain/application APIs.
+
+PR3 must not introduce ORM or async persistence. PostgreSQL remains deferred to
+`SHARED-1`; Auth and `HouseholdMembership` remain deferred to `SHARED-2`;
+Retail and AI remain later roadmap programs.
 
 ## Migration constraints
 

@@ -1,6 +1,6 @@
 # Progress
 
-Updated: `2026-09-01`
+Updated: `2026-09-02`
 
 ## FamilyFoodOS bootstrap
 
@@ -179,8 +179,14 @@ Acceptance evidence:
 - full backend + launcher regression: `2684 passed`;
 - Ruff checks, Ruff formatting checks and `git diff --check`: passed.
 
-Correction implementation is ready for final review. No final adversarial
-`ACCEPT` has been issued yet.
+Closure evidence:
+
+- final adversarial review: `PR2-C FINAL REVIEW: ACCEPT`;
+- GitHub PR `#5`: **MERGED**;
+- accepted head: `13f7c7c480469853579912a7836680afc4734ad7`;
+- merge commit: `48c72aeba19a1e6ece0dc729f0a80de930be88a8`;
+- merged at: `2026-09-01T21:23:23Z`;
+- no remaining PR2-C blocker.
 
 Deliberately deferred:
 
@@ -191,10 +197,25 @@ Deliberately deferred:
   planner/nutrition semantics;
 - controlled vocabularies and calculation meaning for activity level and goal.
 
-## Milestone gated after PR2-C final acceptance
+## PR2-DOCS — Canonical Roadmap & PR2-C Closure Sync
+
+Status: **READY FOR REVIEW**
+
+This documentation-only governance sync:
+
+- adds `docs/family-food/master-roadmap.md` as the canonical implementation
+  sequence and delivery-gate contract;
+- aligns the migration plan without changing its migration-strategy ownership;
+- adds narrow compatibility notes to older source-style specifications;
+- synchronizes repository state with the accepted and merged PR2-C result.
+
+It is not marked complete before review and merge.
+
+## Next product milestone
 
 `PR3 — FoodIngredient Catalogue`
 
-PR3 is not authorized until PR2-C receives final review and acceptance. PR3
-owns the canonical platform food catalogue; it must not merge `FoodIngredient`
-with `RetailSKU` or start later Nutrition, Recipe, Retail, Planner or AI work.
+PR3 is approved as next, but implementation must wait until PR2-DOCS is reviewed
+and merged. PR3 owns the canonical platform food catalogue; it must not merge
+`FoodIngredient` with `RetailSKU` or start Recipe, Pantry, Nutrition Engine
+calculations, Planner, Retail, full ingestion automation or AI work.

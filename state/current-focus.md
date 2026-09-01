@@ -1,6 +1,6 @@
 # Current focus
 
-Updated: `2026-09-01`
+Updated: `2026-09-02`
 
 ## Project
 
@@ -75,14 +75,30 @@ Verification:
 The correction pass preserves terminal Household UoW semantics after successful
 and failed commit/rollback attempts, rejects non-finite or unquantizable Decimal
 input through stable validation, and evaluates future birth dates against an
-injected clock in the persisted Household timezone. A final adversarial review
-has not yet issued `ACCEPT`.
+injected clock in the persisted Household timezone.
 
-## Milestone gated after PR2-C final acceptance
+Closure:
+
+- final review: `PR2-C FINAL REVIEW: ACCEPT`;
+- GitHub PR `#5`: **MERGED**;
+- accepted head: `13f7c7c480469853579912a7836680afc4734ad7`;
+- merge commit: `48c72aeba19a1e6ece0dc729f0a80de930be88a8`.
+
+## Current active repository task
+
+`PR2-DOCS — Canonical Roadmap & PR2-C Closure Sync`
+
+This is documentation/governance synchronization only. It adds the
+repository-local canonical `docs/family-food/master-roadmap.md`, reconciles the
+migration plan and records PR2-C closure. It is not a product milestone and is
+not complete until reviewed and merged.
+
+## Next product milestone
 
 `PR3 — FoodIngredient Catalogue`
 
-The immediate next action remains PR2-C final review/acceptance. PR3 is not
-authorized until that acceptance is issued. It must introduce the canonical
-platform `FoodIngredient` catalogue without merging it with RetailSKU or
-beginning Nutrition, Recipe, Retail or AI.
+PR3 is the next approved product milestone, but implementation must not begin
+until PR2-DOCS is reviewed and merged. PR3 introduces the canonical platform
+`FoodIngredient` catalogue without merging it with `RetailSKU` or beginning
+Recipe, Pantry, Nutrition Engine calculations, Planner, Retail, ingestion
+automation or AI.

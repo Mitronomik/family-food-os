@@ -10,12 +10,14 @@ Before any significant product, architecture, research or implementation task, r
 1. `AGENTS.md`
 2. `docs/family-food/project-operating-manual.md`
 3. `state/current-focus.md`
-4. the relevant canonical FamilyFoodOS documents:
+4. `docs/family-food/master-roadmap.md`
+5. the relevant canonical FamilyFoodOS documents:
+   - `docs/family-food/architecture.md`
    - `docs/family-food/technical-spec.md`
    - `docs/family-food/data-ingestion.md`
    - `docs/family-food/migration-plan.md`
-5. relevant implementation code and tests
-6. `state/handoff.md` when continuing previous work
+6. relevant implementation code and tests
+7. `state/handoff.md` when continuing previous work
 
 Later, more focused canonical documents may be added under `docs/`. Read them when relevant.
 
@@ -216,9 +218,11 @@ Base pipeline:
 
 Retail integration is a separate layer:
 
-`CanonicalIngredient → RetailSKU → PriceSnapshot → Package Selection`
+`FoodIngredient → RetailSKU → PriceSnapshot → Package Selection`
 
-Never merge CanonicalIngredient and RetailSKU into one concept.
+Never merge `FoodIngredient` and `RetailSKU` into one concept.
+`CanonicalIngredient` is a historical alias for the current canonical
+repository-domain name `FoodIngredient`, not a second aggregate.
 
 Prices must have timestamps.
 
@@ -505,7 +509,10 @@ Retail integration comes after generic Shopping Engine.
 
 AI comes after deterministic Planner.
 
-Multi-user PostgreSQL/Auth comes before external paid beta, not before core-loop validation.
+PostgreSQL, Auth, `HouseholdMembership`, tenant isolation and a hosted
+operational baseline are required before multiple real families share one
+deployment. They do not block isolated core-loop validation. Billing remains a
+later commercial concern.
 
 ## 21. Product quality test
 
