@@ -52,11 +52,9 @@ infrastructure implementation.
 PR1-H aligns the retained Restore smoke tools with current FamilyFoodOS
 launcher-owned temporary and probe identity.
 
-Known remaining PR1 debt:
-
-- two report-document reconciliation tests retain a hard-coded
-  `cosmetic_workshop.sqlite` fixture path. Their failures reproduce at checkpoint
-  `7fd540a` and are PR1-wide fixture debt, not a PR1-G regression.
+PR1-I resolves the report-document reconciliation fixture debt by deriving the
+current user-mode test database from the canonical FamilyFoodOS path resolver;
+the inherited hard-coded `cosmetic_workshop.sqlite` fixture is no longer used.
 
 ## PR1 goal
 

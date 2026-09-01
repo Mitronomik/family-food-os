@@ -24,7 +24,7 @@ except (RuntimeError, ImportError):
     TestClient = None
 
 from app.db.config import DATABASE_PATH_ENV, DatabaseConfig
-from app.db.paths import USER_DATA_DIR_ENV
+from app.db.paths import USER_DATA_DIR_ENV, resolve_user_data_paths
 from app.main import create_app
 from app.repositories.artifact_audit_operations import ArtifactAuditOperationRepository
 from app.repositories.audit import AuditLogRepository
@@ -77,10 +77,10 @@ def user_mode_environment(monkeypatch, tmp_path):
     same file — otherwise startup reconciles an empty database and proves nothing.
     """
     user_data = tmp_path / "user-data"
-    database_path = user_data / "data" / "cosmetic_workshop.sqlite"
+    monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data))
+    database_path = resolve_user_data_paths().database_path
     database_path.parent.mkdir(parents=True)
     monkeypatch.setenv(DATABASE_PATH_ENV, str(database_path))
-    monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data))
     initialize_database(DatabaseConfig(path=database_path))
     return DatabaseConfig(path=database_path), user_data / "exports" / "report-documents", TestClient(create_app())
 

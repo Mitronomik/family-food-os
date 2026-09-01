@@ -72,7 +72,7 @@ def test_calculation_sensitive_settings_require_backend_service_and_history_flag
 
 
 def test_settings_service_does_not_create_files_or_mutate_database(monkeypatch, tmp_path):
-    db = tmp_path / "data" / "cosmetic_workshop.sqlite"
+    db = tmp_path / "data" / "settings-readonly.sqlite"
     user_data_dir = tmp_path / "user-data"
     monkeypatch.setenv(DATABASE_PATH_ENV, str(db))
     monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))
