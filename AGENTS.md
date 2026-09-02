@@ -13,13 +13,16 @@ Before significant work, read in this order:
 1. `AGENTS.md`
 2. `docs/family-food/project-operating-manual.md`
 3. `state/current-focus.md`
-4. relevant canonical FamilyFoodOS documents
-5. relevant source code
-6. relevant tests
-7. `state/handoff.md` when continuing previous work
+4. `docs/family-food/master-roadmap.md`
+5. relevant canonical architecture/domain documents
+6. relevant source code
+7. relevant tests
+8. `state/handoff.md` when continuing previous work
 
 Canonical FamilyFoodOS foundation documents:
 
+- `docs/family-food/master-roadmap.md`
+- `docs/family-food/architecture.md`
 - `docs/family-food/technical-spec.md`
 - `docs/family-food/data-ingestion.md`
 - `docs/family-food/migration-plan.md`
@@ -131,7 +134,8 @@ Primary conceptual sections:
 - Заготовки
 - Дома
 
-Administrative functionality such as ingestion, canonical ingredient management, retailer matching and audit must not dominate consumer navigation.
+Administrative functionality such as ingestion, `FoodIngredient` management,
+retailer matching and audit must not dominate consumer navigation.
 
 Prefer:
 
@@ -180,7 +184,7 @@ Base flow:
 
 Retail is a separate layer:
 
-`CanonicalIngredient → RetailSKU → PriceSnapshot`
+`FoodIngredient → RetailSKU → PriceSnapshot`
 
 Do not merge canonical food concepts with retailer SKU concepts.
 
@@ -317,9 +321,12 @@ Updating scoped `AGENTS.md` files is part of the migration and should be done de
 
 Follow:
 
-`docs/family-food/migration-plan.md`
+`docs/family-food/master-roadmap.md`
 
-unless a later explicit decision changes it.
+Use `docs/family-food/migration-plan.md` for migration strategy, legacy
+replacement discipline and bounded migration notes.
+
+Only a later explicit decision may change this order.
 
 Do not jump ahead to AI, retailer scraping, complex optimization, native apps or SaaS infrastructure before their migration gate.
 

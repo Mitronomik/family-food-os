@@ -6,6 +6,15 @@
 **Связанный документ:** `technical-spec.md`
 **Предполагаемое имя файла:** `data-ingestion.md`
 
+> **Каноническая интерпретация:** `CanonicalIngredient` в этом исходном
+> документе — исторический alias текущего repository-domain имени
+> `FoodIngredient`, а не отдельный aggregate. `FoodProductType` не является
+> обязательным aggregate для MVP и может появиться позднее только при наличии
+> реального downstream use case. Data Readiness — отдельный quality gate перед
+> real-family testing и не требует, чтобы до него была реализована полная
+> платформа ingestion automation. Текущий порядок реализации определяет
+> `docs/family-food/master-roadmap.md`.
+
 ---
 
 # 1. Назначение документа
