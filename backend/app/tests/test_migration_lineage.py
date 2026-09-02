@@ -345,6 +345,14 @@ def test_migrations_without_new_tables_add_no_required_table():
     assert REQUIRED_TABLES_BY_MIGRATION["0022_household_foundation"] == frozenset(
         {"households", "household_members"}
     )
+    assert REQUIRED_TABLES_BY_MIGRATION["0023_food_ingredient_catalogue"] == frozenset(
+        {
+            "food_ingredients",
+            "food_ingredient_aliases",
+            "food_nutrition_profiles",
+            "food_ingredient_allergens",
+        }
+    )
 
 
 # --------------------------------------------------------------------------

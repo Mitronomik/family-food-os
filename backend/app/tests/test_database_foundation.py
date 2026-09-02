@@ -11,7 +11,12 @@ from app.db.config import (
     DatabaseConfig,
     get_database_config,
 )
-from app.db.migrations import MIGRATION_MODULES, apply_migrations, current_migrations, expected_migration_ids
+from app.db.migrations import (
+    MIGRATION_MODULES,
+    apply_migrations,
+    current_migrations,
+    expected_migration_ids,
+)
 from app.main import create_app
 from app.repositories.database import DatabaseRepository
 from app.repositories.settings import SettingsNotInitializedError
@@ -156,7 +161,9 @@ def test_database_status_reports_required_tables_after_explicit_init(tmp_path):
     assert "audit_logs" in status["tables"]
 
 
-def test_database_status_endpoint_does_not_initialize_test_database(monkeypatch, tmp_path):
+def test_database_status_endpoint_does_not_initialize_test_database(
+    monkeypatch, tmp_path
+):
     database_path = tmp_path / "api-uninitialized-database.sqlite"
     monkeypatch.setenv(DATABASE_PATH_ENV, str(database_path))
     client = TestClient(create_app())
@@ -172,7 +179,9 @@ def test_database_status_endpoint_does_not_initialize_test_database(monkeypatch,
     assert not database_path.exists()
 
 
-def test_settings_endpoint_requires_explicit_database_initialization(monkeypatch, tmp_path):
+def test_settings_endpoint_requires_explicit_database_initialization(
+    monkeypatch, tmp_path
+):
     database_path = tmp_path / "api-uninitialized-settings.sqlite"
     monkeypatch.setenv(DATABASE_PATH_ENV, str(database_path))
     client = TestClient(create_app())
@@ -184,7 +193,9 @@ def test_settings_endpoint_requires_explicit_database_initialization(monkeypatch
     assert not database_path.exists()
 
 
-def test_settings_endpoint_reads_explicitly_initialized_test_database(monkeypatch, tmp_path):
+def test_settings_endpoint_reads_explicitly_initialized_test_database(
+    monkeypatch, tmp_path
+):
     database_path = tmp_path / "api-settings.sqlite"
     monkeypatch.setenv(DATABASE_PATH_ENV, str(database_path))
     initialize_database(DatabaseConfig(path=database_path))
@@ -200,7 +211,9 @@ def test_settings_endpoint_reads_explicitly_initialized_test_database(monkeypatc
     assert settings["mode.local_first"]["value"] == "true"
 
 
-def test_database_status_endpoint_reads_explicitly_initialized_test_database(monkeypatch, tmp_path):
+def test_database_status_endpoint_reads_explicitly_initialized_test_database(
+    monkeypatch, tmp_path
+):
     database_path = tmp_path / "api-database.sqlite"
     monkeypatch.setenv(DATABASE_PATH_ENV, str(database_path))
     initialize_database(DatabaseConfig(path=database_path))
@@ -221,11 +234,16 @@ def test_database_status_endpoint_reads_explicitly_initialized_test_database(mon
 def test_development_database_path_remains_stable(monkeypatch):
     monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
 
-    assert resolve_development_database_path() == REPOSITORY_ROOT / ".local" / "family_food.sqlite"
+    assert (
+        resolve_development_database_path()
+        == REPOSITORY_ROOT / ".local" / "family_food.sqlite"
+    )
     assert get_database_config().path == resolve_development_database_path()
 
 
-def test_user_data_default_path_uses_documents_folder_without_creating_it(monkeypatch, tmp_path):
+def test_user_data_default_path_uses_documents_folder_without_creating_it(
+    monkeypatch, tmp_path
+):
     monkeypatch.delenv(USER_DATA_DIR_ENV, raising=False)
     fake_home = tmp_path / "home"
     monkeypatch.setattr(Path, "home", lambda: fake_home)
@@ -264,12 +282,17 @@ def test_old_cosmetic_workshop_user_data_env_is_ignored(monkeypatch, tmp_path):
 
     assert paths.base_dir == fake_home / "Documents" / "FamilyFoodOS"
     assert paths.base_dir != old_user_data
-    assert paths.database_path == fake_home / "Documents" / "FamilyFoodOS" / "data" / "family_food.sqlite"
+    assert (
+        paths.database_path
+        == fake_home / "Documents" / "FamilyFoodOS" / "data" / "family_food.sqlite"
+    )
     assert not paths.base_dir.exists()
     assert not old_user_data.exists()
 
 
-def test_only_old_cosmetic_workshop_env_does_not_select_old_runtime_data(monkeypatch, tmp_path):
+def test_only_old_cosmetic_workshop_env_does_not_select_old_runtime_data(
+    monkeypatch, tmp_path
+):
     fake_home = tmp_path / "home"
     old_database = tmp_path / "old-config" / "cosmetic_workshop.sqlite"
     old_user_data = tmp_path / "old-user-data"
@@ -326,7 +349,9 @@ def test_user_startup_with_only_old_env_leaves_cosmetic_workshop_data_untouched(
     assert not old_configured_user_data.exists()
 
 
-def test_database_path_env_override_takes_precedence_for_development_config(monkeypatch, tmp_path):
+def test_database_path_env_override_takes_precedence_for_development_config(
+    monkeypatch, tmp_path
+):
     override_path = tmp_path / "explicit-db.sqlite"
     user_data_dir = tmp_path / "user-data"
     monkeypatch.setenv(DATABASE_PATH_ENV, str(override_path))
@@ -352,9 +377,18 @@ def test_user_mode_database_path_uses_user_data_directory(monkeypatch, tmp_path)
 
 
 def test_default_user_data_base_dir_is_cross_platform_documents_folder(tmp_path):
-    assert default_user_data_base_dir(tmp_path, "Darwin") == tmp_path / "Documents" / "FamilyFoodOS"
-    assert default_user_data_base_dir(tmp_path, "Windows") == tmp_path / "Documents" / "FamilyFoodOS"
-    assert default_user_data_base_dir(tmp_path, "Linux") == tmp_path / "Documents" / "FamilyFoodOS"
+    assert (
+        default_user_data_base_dir(tmp_path, "Darwin")
+        == tmp_path / "Documents" / "FamilyFoodOS"
+    )
+    assert (
+        default_user_data_base_dir(tmp_path, "Windows")
+        == tmp_path / "Documents" / "FamilyFoodOS"
+    )
+    assert (
+        default_user_data_base_dir(tmp_path, "Linux")
+        == tmp_path / "Documents" / "FamilyFoodOS"
+    )
 
 
 def test_directory_creation_helper_creates_expected_user_data_folders(tmp_path):
@@ -366,7 +400,9 @@ def test_directory_creation_helper_creates_expected_user_data_folders(tmp_path):
     assert not paths.database_path.exists()
 
 
-def test_explicit_user_startup_initialization_creates_directories_and_applies_migrations(monkeypatch, tmp_path):
+def test_explicit_user_startup_initialization_creates_directories_and_applies_migrations(
+    monkeypatch, tmp_path
+):
     user_data_dir = tmp_path / "user-data"
     monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))
     monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
@@ -377,13 +413,17 @@ def test_explicit_user_startup_initialization_creates_directories_and_applies_mi
     assert result.user_data_paths is not None
     assert result.database_path == user_data_dir / "data" / "family_food.sqlite"
     assert result.applied_migrations == expected_migration_ids()
-    assert all(directory.is_dir() for directory in result.user_data_paths.required_directories)
+    assert all(
+        directory.is_dir() for directory in result.user_data_paths.required_directories
+    )
     tables = table_names(result.database_path)
     assert_only_current_tables(tables)
     assert_no_forbidden_future_tables(tables)
 
 
-def test_explicit_development_startup_initialization_respects_database_path_override(monkeypatch, tmp_path):
+def test_explicit_development_startup_initialization_respects_database_path_override(
+    monkeypatch, tmp_path
+):
     database_path = tmp_path / "development.sqlite"
     user_data_dir = tmp_path / "unused-user-data"
     monkeypatch.setenv(DATABASE_PATH_ENV, str(database_path))
@@ -401,7 +441,9 @@ def test_explicit_development_startup_initialization_respects_database_path_over
     assert_no_forbidden_future_tables(tables)
 
 
-def test_status_endpoint_still_does_not_apply_migrations_when_user_data_env_exists(monkeypatch, tmp_path):
+def test_status_endpoint_still_does_not_apply_migrations_when_user_data_env_exists(
+    monkeypatch, tmp_path
+):
     database_path = tmp_path / "api-status.sqlite"
     user_data_dir = tmp_path / "user-data"
     monkeypatch.setenv(DATABASE_PATH_ENV, str(database_path))
@@ -429,7 +471,9 @@ def test_startup_database_config_rejects_unsupported_mode(monkeypatch, tmp_path)
     assert not user_data_dir.exists()
 
 
-def test_initialize_startup_rejects_unsupported_mode_without_side_effects(monkeypatch, tmp_path):
+def test_initialize_startup_rejects_unsupported_mode_without_side_effects(
+    monkeypatch, tmp_path
+):
     database_path = tmp_path / "should-not-exist.sqlite"
     user_data_dir = tmp_path / "should-not-exist-user-data"
     monkeypatch.setenv(DATABASE_PATH_ENV, str(database_path))
@@ -446,7 +490,9 @@ def test_backup_fails_clearly_when_source_database_is_missing(tmp_path):
     source = tmp_path / "missing.sqlite"
     backup_dir = tmp_path / "backups"
 
-    with pytest.raises(BackupSourceMissingError, match="SQLite database file does not exist"):
+    with pytest.raises(
+        BackupSourceMissingError, match="SQLite database file does not exist"
+    ):
         backup_sqlite_database(source, backup_dir, reason="before_migration")
 
     assert not backup_dir.exists()
@@ -463,7 +509,9 @@ def _seed_source_database(path, values):
     with sqlite3.connect(path) as connection:
         connection.execute("CREATE TABLE IF NOT EXISTS marker (value TEXT NOT NULL)")
         connection.execute("DELETE FROM marker")
-        connection.executemany("INSERT INTO marker (value) VALUES (?)", [(value,) for value in values])
+        connection.executemany(
+            "INSERT INTO marker (value) VALUES (?)", [(value,) for value in values]
+        )
     return path
 
 
@@ -471,7 +519,10 @@ def _marker_values(path):
     """Read one database independently, without its source WAL or journal."""
     connection = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
     try:
-        return [row[0] for row in connection.execute("SELECT value FROM marker ORDER BY value")]
+        return [
+            row[0]
+            for row in connection.execute("SELECT value FROM marker ORDER BY value")
+        ]
     finally:
         connection.close()
 
@@ -567,7 +618,9 @@ def build_supported_older_database(database_path: Path) -> None:
         MIGRATION_MODULES[:] = original
 
 
-def test_user_mode_startup_creates_backup_before_migration_for_existing_database(monkeypatch, tmp_path):
+def test_user_mode_startup_creates_backup_before_migration_for_existing_database(
+    monkeypatch, tmp_path
+):
     user_data_dir = tmp_path / "user-data"
     database_path = user_data_dir / "data" / "family_food.sqlite"
     monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))
@@ -575,7 +628,9 @@ def test_user_mode_startup_creates_backup_before_migration_for_existing_database
     build_supported_older_database(database_path)
     with sqlite3.connect(database_path) as connection:
         connection.execute("CREATE TABLE legacy_marker (value TEXT NOT NULL)")
-        connection.execute("INSERT INTO legacy_marker (value) VALUES ('before migration')")
+        connection.execute(
+            "INSERT INTO legacy_marker (value) VALUES ('before migration')"
+        )
 
     result = initialize_startup("user")
 
@@ -583,7 +638,9 @@ def test_user_mode_startup_creates_backup_before_migration_for_existing_database
     assert result.backup.reason == "before_migration"
     assert result.backup.backup_path.parent == user_data_dir / "backups"
     with sqlite3.connect(result.backup.backup_path) as backup_connection:
-        marker = backup_connection.execute("SELECT value FROM legacy_marker").fetchone()[0]
+        marker = backup_connection.execute(
+            "SELECT value FROM legacy_marker"
+        ).fetchone()[0]
         workspace_source = backup_connection.execute(
             "SELECT value FROM app_settings WHERE key = 'workspace.source'"
         ).fetchone()
@@ -591,14 +648,17 @@ def test_user_mode_startup_creates_backup_before_migration_for_existing_database
     assert marker == "before migration"
     assert workspace_source == ("family-food-os",)
     assert "artifact_audit_operations" in backup_tables
-    assert "households" not in backup_tables
+    assert "households" in backup_tables
+    assert "food_ingredients" not in backup_tables
     assert result.applied_migrations == [expected_migration_ids()[-1]]
     tables = table_names(database_path)
     assert tables <= (CURRENT_ALLOWED_TABLES | {"legacy_marker"})
     assert_no_forbidden_future_tables(tables)
 
 
-def test_brand_new_user_mode_startup_does_not_create_unnecessary_backup(monkeypatch, tmp_path):
+def test_brand_new_user_mode_startup_does_not_create_unnecessary_backup(
+    monkeypatch, tmp_path
+):
     user_data_dir = tmp_path / "user-data"
     monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))
     monkeypatch.delenv(DATABASE_PATH_ENV, raising=False)
@@ -611,7 +671,9 @@ def test_brand_new_user_mode_startup_does_not_create_unnecessary_backup(monkeypa
     assert list((user_data_dir / "backups").iterdir()) == []
 
 
-def test_ordinary_status_and_settings_reads_do_not_create_backups(monkeypatch, tmp_path):
+def test_ordinary_status_and_settings_reads_do_not_create_backups(
+    monkeypatch, tmp_path
+):
     database_path = tmp_path / "api-status.sqlite"
     user_data_dir = tmp_path / "user-data"
     monkeypatch.setenv(DATABASE_PATH_ENV, str(database_path))

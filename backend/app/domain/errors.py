@@ -29,6 +29,9 @@ class DomainIssueCode(StrEnum):
     NON_POSITIVE_MEASUREMENT = "non_positive_measurement"
     MEASUREMENT_OUT_OF_RANGE = "measurement_out_of_range"
     INVALID_BOOLEAN = "invalid_boolean"
+    INVALID_CODE = "invalid_code"
+    VALUE_OUT_OF_RANGE = "value_out_of_range"
+    INVALID_IDENTIFIER = "invalid_identifier"
 
 
 @dataclass(frozen=True)

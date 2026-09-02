@@ -199,7 +199,7 @@ Deliberately deferred:
 
 ## PR2-DOCS — Canonical Roadmap & PR2-C Closure Sync
 
-Status: **READY FOR REVIEW**
+Status: **COMPLETE**
 
 This documentation-only governance sync:
 
@@ -209,13 +209,60 @@ This documentation-only governance sync:
 - adds narrow compatibility notes to older source-style specifications;
 - synchronizes repository state with the accepted and merged PR2-C result.
 
-It is not marked complete before review and merge.
+Closure evidence:
 
-## Next product milestone
+- GitHub PR `#6`: **MERGED**;
+- accepted head: `351a0a7e374312d6dda4b7e0e746d6a54579de61`;
+- merge commit: `a5b6ca5d210b2401a2fa7e4037a957ec7b846774`.
 
-`PR3 — FoodIngredient Catalogue`
+## PR3 — FoodIngredient Catalogue
 
-PR3 is approved as next, but implementation must wait until PR2-DOCS is reviewed
-and merged. PR3 owns the canonical platform food catalogue; it must not merge
-`FoodIngredient` with `RetailSKU` or start Recipe, Pantry, Nutrition Engine
-calculations, Planner, Retail, full ingestion automation or AI work.
+Status: **READY FOR REVIEW**
+
+Implementation evidence:
+
+- canonical platform-owned `FoodIngredient`, `IngredientAlias` and
+  `FoodNutritionProfile` domain types use application UUIDv4, aware UTC instants,
+  deterministic Unicode search keys and total exact-Decimal validation;
+- allergen review state distinguishes unknown, reviewed-empty and reviewed with
+  structural codes; the technical seed remains explicitly unreviewed;
+- driver-independent repository, Food Catalogue UoW and read-scope contracts
+  compose the accepted synchronous SQLAlchemy 2.x Core adapter without exposing
+  SQLAlchemy, DBAPI or `sqlite3` through application/domain APIs;
+- migration `0023_food_ingredient_catalogue` adds `food_ingredients`,
+  `food_ingredient_aliases`, `food_nutrition_profiles` and
+  `food_ingredient_allergens` after `0022_household_foundation` with real foreign
+  keys, uniqueness, current-profile and lookup indexes;
+- fresh and `0022 → 0023` upgrades preserve the legacy `ingredients` and
+  Household schemas; the custom migration chain remains the only SQLite schema
+  authority;
+- checked-in trusted seed contains exactly `100` active FoodIngredients and
+  `89` aliases, backed by USDA FoodData Central Foundation Foods `2026-04-30`
+  (`87` records) and final SR Legacy `2018-04` (`13` records);
+- first seed run inserts `100` ingredients, `89` aliases and `100` nutrition
+  profiles; the second identical run inserts zero and reports all rows existing;
+- every active seed item has exactly one current profile with source name, FDC
+  identifier, exact release, data type and verification instant;
+- `греч` deterministically returns `BUCKWHEAT` first; `СВЕКЛА` resolves `BEET`
+  through Python NFKC/casefold/`ё → е` normalization;
+- deactivation preserves identity, aliases and nutrition history, hides the
+  ingredient from default search and is not reversed by seed reruns;
+- atomic seed conflict, failed UoW cleanliness and terminal repository-handle
+  revocation are covered;
+- direct PR3 focused suite: `75 passed`;
+- expanded PR3 + affected migration/lineage suite: `154 passed`;
+- full backend + launcher regression: `2759 passed`;
+- Ruff format/check and `git diff --check`: passed.
+
+Deliberately deferred:
+
+- `IngredientUnitProfile` because all technical-slice defaults are mass-based
+  and no reviewed `pcs → grams` conversion is required;
+- density, edible fraction, storage-duration and regulatory allergen claims when
+  this slice has no authoritative reviewed value;
+- public mutation/read HTTP endpoints and all frontend work;
+- Recipe, Pantry, Nutrition Engine calculations, Planner, Shopping, Prep,
+  Retail, Data Program automation, PostgreSQL, Auth, HouseholdMembership and AI.
+
+Immediate next action: PR3 adversarial final review. PR3 is not COMPLETE and PR4
+remains unauthorized until final PR3 acceptance and merge.
