@@ -91,6 +91,14 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
     "0020_artifact_audit_operations": frozenset({"artifact_audit_operations"}),
     "0021_family_food_identity": frozenset(),
     "0022_household_foundation": frozenset({"households", "household_members"}),
+    "0023_food_ingredient_catalogue": frozenset(
+        {
+            "food_ingredients",
+            "food_ingredient_aliases",
+            "food_nutrition_profiles",
+            "food_ingredient_allergens",
+        }
+    ),
 }
 
 # The foundational tables promised by migration `0001`. Stable FamilyFoodOS

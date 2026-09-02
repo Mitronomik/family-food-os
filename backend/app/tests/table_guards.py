@@ -34,6 +34,10 @@ CURRENT_ALLOWED_TABLES = {
     "artifact_audit_operations",
     "households",
     "household_members",
+    "food_ingredients",
+    "food_ingredient_aliases",
+    "food_nutrition_profiles",
+    "food_ingredient_allergens",
     "sqlite_sequence",
 }
 

@@ -33,10 +33,10 @@ def table_names(database_path):
         }
 
 
-def test_migration_chain_ends_with_household_foundation():
+def test_household_foundation_remains_immediately_before_food_catalogue():
     assert expected_migration_ids()[-2:] == [
-        "0021_family_food_identity",
         "0022_household_foundation",
+        "0023_food_ingredient_catalogue",
     ]
 
 
@@ -59,7 +59,10 @@ def test_database_at_0021_upgrades_only_to_household_foundation(tmp_path):
 
     applied = apply_migrations(DatabaseConfig(path=database_path))
 
-    assert applied == ["0022_household_foundation"]
+    assert applied == [
+        "0022_household_foundation",
+        "0023_food_ingredient_catalogue",
+    ]
     assert before <= table_names(database_path)
     with sqlite3.connect(database_path) as connection:
         history = [

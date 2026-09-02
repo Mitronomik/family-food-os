@@ -14,7 +14,12 @@ import sqlite3
 import pytest
 
 from app.db.config import DATABASE_PATH_ENV, DatabaseConfig
-from app.db.migrations import MIGRATION_MODULES, apply_migrations, expected_migration_ids, pending_migration_ids
+from app.db.migrations import (
+    MIGRATION_MODULES,
+    apply_migrations,
+    expected_migration_ids,
+    pending_migration_ids,
+)
 from app.db.paths import USER_DATA_DIR_ENV
 from app.services.database import initialize_database
 from app.services.startup import initialize_startup
@@ -22,7 +27,8 @@ from app.services.startup import initialize_startup
 MIGRATION_ID = "0020_artifact_audit_operations"
 PREVIOUS_MIGRATION_ID = "0019_production_batch_tax_rate_snapshots"
 NEXT_MIGRATION_ID = "0021_family_food_identity"
-HEAD_MIGRATION_ID = "0022_household_foundation"
+HOUSEHOLD_MIGRATION_ID = "0022_household_foundation"
+HEAD_MIGRATION_ID = "0023_food_ingredient_catalogue"
 TABLE = "artifact_audit_operations"
 
 
@@ -35,12 +41,20 @@ def connect(database_path: Path) -> sqlite3.Connection:
 
 def applied(database_path: Path) -> list[str]:
     with sqlite3.connect(database_path) as connection:
-        return [row[0] for row in connection.execute("SELECT migration_id FROM schema_migrations")]
+        return [
+            row[0]
+            for row in connection.execute("SELECT migration_id FROM schema_migrations")
+        ]
 
 
 def table_names(database_path: Path) -> set[str]:
     with sqlite3.connect(database_path) as connection:
-        return {row[0] for row in connection.execute("SELECT name FROM sqlite_master WHERE type = 'table'")}
+        return {
+            row[0]
+            for row in connection.execute(
+                "SELECT name FROM sqlite_master WHERE type = 'table'"
+            )
+        }
 
 
 def build_pre_0020_database(database_path: Path) -> dict[str, object]:
@@ -53,14 +67,20 @@ def build_pre_0020_database(database_path: Path) -> dict[str, object]:
     database_path.parent.mkdir(parents=True, exist_ok=True)
     original = list(MIGRATION_MODULES)
     try:
-        cutoff = next(index for index, name in enumerate(original) if name.endswith(MIGRATION_ID))
+        cutoff = next(
+            index for index, name in enumerate(original) if name.endswith(MIGRATION_ID)
+        )
         MIGRATION_MODULES[:] = original[:cutoff]
         apply_migrations(DatabaseConfig(path=database_path))
     finally:
         MIGRATION_MODULES[:] = original
     with sqlite3.connect(database_path) as connection:
-        connection.execute("INSERT INTO clients (full_name) VALUES ('Историческая клиентка')")
-        connection.execute("INSERT INTO ingredients (name, category, default_unit) VALUES ('Масло', 'oil', 'g')")
+        connection.execute(
+            "INSERT INTO clients (full_name) VALUES ('Историческая клиентка')"
+        )
+        connection.execute(
+            "INSERT INTO ingredients (name, category, default_unit) VALUES ('Масло', 'oil', 'g')"
+        )
         connection.execute(
             "INSERT INTO audit_logs (actor_type, action, entity_type, entity_id, summary)"
             " VALUES ('user', 'client.created', 'client', '1', 'Client created: Историческая клиентка')"
@@ -71,13 +91,21 @@ def build_pre_0020_database(database_path: Path) -> dict[str, object]:
 def snapshot(database_path: Path) -> dict[str, object]:
     with sqlite3.connect(database_path) as connection:
         return {
-            "clients": connection.execute("SELECT id, full_name FROM clients ORDER BY id").fetchall(),
-            "ingredients": connection.execute("SELECT id, name FROM ingredients ORDER BY id").fetchall(),
-            "audit_logs": connection.execute("SELECT id, action, summary FROM audit_logs ORDER BY id").fetchall(),
+            "clients": connection.execute(
+                "SELECT id, full_name FROM clients ORDER BY id"
+            ).fetchall(),
+            "ingredients": connection.execute(
+                "SELECT id, name FROM ingredients ORDER BY id"
+            ).fetchall(),
+            "audit_logs": connection.execute(
+                "SELECT id, action, summary FROM audit_logs ORDER BY id"
+            ).fetchall(),
         }
 
 
-def prepared_row(connection, operation_id="11111111-1111-4111-8111-111111111111", **overrides):
+def prepared_row(
+    connection, operation_id="11111111-1111-4111-8111-111111111111", **overrides
+):
     values = {
         "operation_id": operation_id,
         "artifact_kind": "report_document",
@@ -101,6 +129,7 @@ def prepared_row(connection, operation_id="11111111-1111-4111-8111-111111111111"
 # --------------------------------------------------------------------------
 # Registration and ordering
 # --------------------------------------------------------------------------
+
 
 def test_migration_0020_is_registered_exactly_once_before_0021():
     ids = expected_migration_ids()
@@ -130,6 +159,7 @@ def test_a_database_at_0019_reports_0020_then_0021_pending(tmp_path):
     assert pending_migration_ids(DatabaseConfig(path=database_path)) == [
         MIGRATION_ID,
         NEXT_MIGRATION_ID,
+        HOUSEHOLD_MIGRATION_ID,
         HEAD_MIGRATION_ID,
     ]
 
@@ -141,13 +171,22 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
 
     applied_now = initialize_database(DatabaseConfig(path=database_path))
 
-    assert applied_now == [MIGRATION_ID, NEXT_MIGRATION_ID, HEAD_MIGRATION_ID]
+    assert applied_now == [
+        MIGRATION_ID,
+        NEXT_MIGRATION_ID,
+        HOUSEHOLD_MIGRATION_ID,
+        HEAD_MIGRATION_ID,
+    ]
     assert snapshot(database_path) == before
     assert tables_before < table_names(database_path)
     assert table_names(database_path) - tables_before == {
         TABLE,
         "households",
         "household_members",
+        "food_ingredients",
+        "food_ingredient_aliases",
+        "food_nutrition_profiles",
+        "food_ingredient_allergens",
     }
 
 
@@ -177,7 +216,9 @@ def test_the_migration_creates_no_ledger_row_and_no_audit_log_row(tmp_path):
     legacy_document = documents_dir / "workshop-overview-20250101-000000.md"
     legacy_sidecar = documents_dir / "workshop-overview-20250101-000000.json"
     legacy_document.write_text("# Старый документ\n", encoding="utf-8")
-    legacy_sidecar.write_text('{"id": "workshop-overview-20250101-000000"}', encoding="utf-8")
+    legacy_sidecar.write_text(
+        '{"id": "workshop-overview-20250101-000000"}', encoding="utf-8"
+    )
     legacy_bytes = (legacy_document.read_bytes(), legacy_sidecar.read_bytes())
     build_pre_0020_database(database_path)
     audit_before = snapshot(database_path)["audit_logs"]
@@ -194,12 +235,16 @@ def test_the_migration_creates_no_ledger_row_and_no_audit_log_row(tmp_path):
 # Schema and constraints
 # --------------------------------------------------------------------------
 
+
 def test_the_ledger_has_exactly_the_accepted_columns(tmp_path):
     database_path = tmp_path / "schema.sqlite"
     initialize_database(DatabaseConfig(path=database_path))
 
     with connect(database_path) as connection:
-        columns = {row["name"]: row for row in connection.execute(f"PRAGMA table_info({TABLE})")}
+        columns = {
+            row["name"]: row
+            for row in connection.execute(f"PRAGMA table_info({TABLE})")
+        }
 
     assert set(columns) == {
         "operation_id",
@@ -213,7 +258,14 @@ def test_the_ledger_has_exactly_the_accepted_columns(tmp_path):
         "updated_at",
     }
     assert columns["operation_id"]["pk"] == 1
-    for required in ("artifact_kind", "primary_filename", "status", "audit_action", "created_at", "updated_at"):
+    for required in (
+        "artifact_kind",
+        "primary_filename",
+        "status",
+        "audit_action",
+        "created_at",
+        "updated_at",
+    ):
         assert columns[required]["notnull"] == 1, required
     for nullable in ("companion_filename", "audit_log_id"):
         assert columns[nullable]["notnull"] == 0, nullable
@@ -226,7 +278,10 @@ def test_the_accepted_unresolved_and_abandoned_statuses_are_allowed(tmp_path, st
 
     with connect(database_path) as connection:
         prepared_row(connection, status=status)
-        assert connection.execute(f"SELECT status FROM {TABLE}").fetchone()["status"] == status
+        assert (
+            connection.execute(f"SELECT status FROM {TABLE}").fetchone()["status"]
+            == status
+        )
 
 
 @pytest.mark.parametrize("status", ["done", "PREPARED", "", "pending", "audited_maybe"])
@@ -245,8 +300,15 @@ def test_the_reserved_artifact_kinds_are_accepted(tmp_path, kind):
     initialize_database(DatabaseConfig(path=database_path))
 
     with connect(database_path) as connection:
-        prepared_row(connection, artifact_kind=kind, audit_action="report_document.created")
-        assert connection.execute(f"SELECT artifact_kind FROM {TABLE}").fetchone()["artifact_kind"] == kind
+        prepared_row(
+            connection, artifact_kind=kind, audit_action="report_document.created"
+        )
+        assert (
+            connection.execute(f"SELECT artifact_kind FROM {TABLE}").fetchone()[
+                "artifact_kind"
+            ]
+            == kind
+        )
 
 
 @pytest.mark.parametrize("kind", ["database_backup", "", "REPORT_DOCUMENT", "anything"])
@@ -259,17 +321,26 @@ def test_an_unknown_artifact_kind_is_rejected_by_sqlite(tmp_path, kind):
             prepared_row(connection, artifact_kind=kind)
 
 
-@pytest.mark.parametrize("action", ["report_document.created", "export.created", "backup.created"])
+@pytest.mark.parametrize(
+    "action", ["report_document.created", "export.created", "backup.created"]
+)
 def test_the_reserved_audit_actions_are_accepted(tmp_path, action):
     database_path = tmp_path / f"action-{action}.sqlite"
     initialize_database(DatabaseConfig(path=database_path))
 
     with connect(database_path) as connection:
         prepared_row(connection, audit_action=action)
-        assert connection.execute(f"SELECT audit_action FROM {TABLE}").fetchone()["audit_action"] == action
+        assert (
+            connection.execute(f"SELECT audit_action FROM {TABLE}").fetchone()[
+                "audit_action"
+            ]
+            == action
+        )
 
 
-@pytest.mark.parametrize("action", ["report_document.deleted", "client.created", "", "restore.created"])
+@pytest.mark.parametrize(
+    "action", ["report_document.deleted", "client.created", "", "restore.created"]
+)
 def test_an_unknown_audit_action_is_rejected_by_sqlite(tmp_path, action):
     database_path = tmp_path / "action-check.sqlite"
     initialize_database(DatabaseConfig(path=database_path))
@@ -318,13 +389,32 @@ def test_an_audited_row_must_carry_an_audit_log_id_and_others_must_not(tmp_path)
         ).lastrowid
 
         with pytest.raises(sqlite3.IntegrityError):
-            prepared_row(connection, operation_id="22222222-2222-4222-8222-222222222222", status="audited")
+            prepared_row(
+                connection,
+                operation_id="22222222-2222-4222-8222-222222222222",
+                status="audited",
+            )
         with pytest.raises(sqlite3.IntegrityError):
-            prepared_row(connection, operation_id="33333333-3333-4333-8333-333333333333", status="prepared", audit_log_id=log_id)
+            prepared_row(
+                connection,
+                operation_id="33333333-3333-4333-8333-333333333333",
+                status="prepared",
+                audit_log_id=log_id,
+            )
         with pytest.raises(sqlite3.IntegrityError):
-            prepared_row(connection, operation_id="44444444-4444-4444-8444-444444444444", status="abandoned", audit_log_id=log_id)
+            prepared_row(
+                connection,
+                operation_id="44444444-4444-4444-8444-444444444444",
+                status="abandoned",
+                audit_log_id=log_id,
+            )
 
-        prepared_row(connection, operation_id="55555555-5555-4555-8555-555555555555", status="audited", audit_log_id=log_id)
+        prepared_row(
+            connection,
+            operation_id="55555555-5555-4555-8555-555555555555",
+            status="audited",
+            audit_log_id=log_id,
+        )
         assert connection.execute(f"SELECT COUNT(*) FROM {TABLE}").fetchone()[0] == 1
 
 
@@ -344,12 +434,22 @@ def test_only_one_active_operation_may_own_one_artifact_identity(tmp_path):
     with connect(database_path) as connection:
         prepared_row(connection, operation_id="11111111-1111-4111-8111-111111111111")
         with pytest.raises(sqlite3.IntegrityError):
-            prepared_row(connection, operation_id="22222222-2222-4222-8222-222222222222")
+            prepared_row(
+                connection, operation_id="22222222-2222-4222-8222-222222222222"
+            )
         # `pending_audit` is active too, so it collides with `prepared` as well.
         with pytest.raises(sqlite3.IntegrityError):
-            prepared_row(connection, operation_id="33333333-3333-4333-8333-333333333333", status="pending_audit")
+            prepared_row(
+                connection,
+                operation_id="33333333-3333-4333-8333-333333333333",
+                status="pending_audit",
+            )
         # A different artifact kind is a different identity.
-        prepared_row(connection, operation_id="44444444-4444-4444-8444-444444444444", artifact_kind="json_export")
+        prepared_row(
+            connection,
+            operation_id="44444444-4444-4444-8444-444444444444",
+            artifact_kind="json_export",
+        )
 
 
 def test_resolved_history_is_retained_and_does_not_block_reuse(tmp_path):
@@ -368,9 +468,22 @@ def test_resolved_history_is_retained_and_does_not_block_reuse(tmp_path):
             "INSERT INTO audit_logs (actor_type, action, entity_type, entity_id, summary)"
             " VALUES ('user', 'report_document.created', 'report_document', 'op', 'Report document created')"
         ).lastrowid
-        prepared_row(connection, operation_id="11111111-1111-4111-8111-111111111111", status="audited", audit_log_id=log_id)
-        prepared_row(connection, operation_id="22222222-2222-4222-8222-222222222222", status="abandoned")
-        prepared_row(connection, operation_id="33333333-3333-4333-8333-333333333333", status="prepared")
+        prepared_row(
+            connection,
+            operation_id="11111111-1111-4111-8111-111111111111",
+            status="audited",
+            audit_log_id=log_id,
+        )
+        prepared_row(
+            connection,
+            operation_id="22222222-2222-4222-8222-222222222222",
+            status="abandoned",
+        )
+        prepared_row(
+            connection,
+            operation_id="33333333-3333-4333-8333-333333333333",
+            status="prepared",
+        )
 
         assert connection.execute(f"SELECT COUNT(*) FROM {TABLE}").fetchone()[0] == 3
 
@@ -396,7 +509,9 @@ def test_timestamps_use_the_existing_sqlite_utc_convention(tmp_path):
 
     with connect(database_path) as connection:
         prepared_row(connection)
-        row = connection.execute(f"SELECT created_at, updated_at FROM {TABLE}").fetchone()
+        row = connection.execute(
+            f"SELECT created_at, updated_at FROM {TABLE}"
+        ).fetchone()
         expected = connection.execute("SELECT CURRENT_TIMESTAMP").fetchone()[0]
 
     # Same `YYYY-MM-DD HH:MM:SS` shape as every other table, not a new ISO/offset
@@ -409,6 +524,7 @@ def test_timestamps_use_the_existing_sqlite_utc_convention(tmp_path):
 # --------------------------------------------------------------------------
 # Startup ordering
 # --------------------------------------------------------------------------
+
 
 def test_user_mode_startup_backs_up_before_applying_0020(monkeypatch, tmp_path):
     """The pre-migration backup still runs first, and does not know the ledger.
@@ -428,6 +544,7 @@ def test_user_mode_startup_backs_up_before_applying_0020(monkeypatch, tmp_path):
     assert result.applied_migrations == [
         MIGRATION_ID,
         NEXT_MIGRATION_ID,
+        HOUSEHOLD_MIGRATION_ID,
         HEAD_MIGRATION_ID,
     ]
     assert result.backup is not None
@@ -442,7 +559,9 @@ def test_user_mode_startup_backs_up_before_applying_0020(monkeypatch, tmp_path):
     assert snapshot(database_path) == before
 
 
-def test_the_startup_backup_creates_no_ledger_row_and_no_audit_event(monkeypatch, tmp_path):
+def test_the_startup_backup_creates_no_ledger_row_and_no_audit_event(
+    monkeypatch, tmp_path
+):
     user_data_dir = tmp_path / "user-data"
     database_path = user_data_dir / "data" / "family_food.sqlite"
     monkeypatch.setenv(USER_DATA_DIR_ENV, str(user_data_dir))
@@ -454,7 +573,10 @@ def test_the_startup_backup_creates_no_ledger_row_and_no_audit_event(monkeypatch
 
     with connect(database_path) as connection:
         assert connection.execute(f"SELECT COUNT(*) FROM {TABLE}").fetchone()[0] == 0
-        actions = [row[0] for row in connection.execute("SELECT action FROM audit_logs ORDER BY id")]
+        actions = [
+            row[0]
+            for row in connection.execute("SELECT action FROM audit_logs ORDER BY id")
+        ]
     assert snapshot(database_path)["audit_logs"] == audit_before
     assert "backup.created" not in actions
     assert "report_document.created" not in actions

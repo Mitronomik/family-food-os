@@ -47,6 +47,12 @@ persistence errors, makes Decimal validation total for hostile numeric input,
 and validates future birth dates from an injected aware clock in the persisted
 Household timezone.
 
+`PR2-DOCS — Canonical Roadmap & PR2-C Closure Sync — COMPLETE`
+
+- GitHub PR `#6`: merged;
+- accepted head: `351a0a7e374312d6dda4b7e0e746d6a54579de61`;
+- merge commit: `a5b6ca5d210b2401a2fa7e4037a957ec7b846774`.
+
 ## Canonical reading order
 
 Before continuing:
@@ -83,20 +89,65 @@ Before continuing:
 
 ## Current work
 
-`PR2-DOCS — Canonical Roadmap & PR2-C Closure Sync — READY FOR REVIEW`
+`PR3 — FoodIngredient Catalogue — READY FOR REVIEW`
 
-This branch performs documentation/governance synchronization only. It creates
-the repository-local Master Roadmap, aligns older sequencing, and records the
-accepted/merged PR2-C result. It must not be marked complete before review and
-merge, and no PR3 implementation belongs on this branch.
+Branch: `migration/pr3-food-ingredient-catalogue`
 
-## Next product milestone after this docs PR
+Base commit:
 
-`PR3 — FoodIngredient Catalogue`
+`a5b6ca5d210b2401a2fa7e4037a957ec7b846774`
 
-PR3 is the next approved product milestone, but implementation must wait until
-PR2-DOCS is reviewed and merged. PR3 owns the canonical platform
-`FoodIngredient` catalogue and keeps it distinct from `RetailSKU`.
+PR3 implements the canonical platform Food Catalogue only. It must remain
+`READY FOR REVIEW`, not COMPLETE, until adversarial acceptance and merge.
+
+## PR3 implementation
+
+Domain/application:
+
+- `FoodIngredient`, `IngredientAlias` and `FoodNutritionProfile` use UUIDv4,
+  UTC instants, exact Decimal validation and Python-generated Unicode keys;
+- search supports exact canonical code/name/alias and bounded prefix/contains
+  matching with deterministic ordering and deduplication;
+- deactivation preserves aliases and nutrition provenance and is not reversed
+  by seed reruns;
+- nutrition source/version snapshots are immutable: identical snapshots are
+  idempotent, new versions become current and conflicts are explicit.
+
+Persistence:
+
+- migration `0023_food_ingredient_catalogue` follows
+  `0022_household_foundation`;
+- new tables are `food_ingredients`, `food_ingredient_aliases`,
+  `food_nutrition_profiles` and `food_ingredient_allergens`;
+- driver-independent contracts compose a Food Catalogue UoW/read scope over the
+  accepted synchronous SQLAlchemy Core foundation;
+- repository access is revoked after every terminal commit/rollback attempt;
+- legacy `ingredients`, catalogue and Household schemas remain unchanged.
+
+Seed/data:
+
+- `data/seed/food_ingredients/` contains `100` FoodIngredients, `89` aliases and
+  one current nutrition profile per ingredient;
+- authoritative sources are USDA FDC Foundation Foods `2026-04-30` (`87`
+  records) and final SR Legacy `2018-04` (`13` records);
+- first run inserts `100/89/100`; the second inserts `0/0/0` and reports every
+  row existing;
+- `греч` returns `BUCKWHEAT` first; `СВЕКЛА` resolves `BEET` through NFKC,
+  casefold and `ё → е` normalization;
+- allergen review, density, edible fraction and storage truth remain unknown
+  rather than receiving invented defaults.
+
+Verification:
+
+- direct PR3 focused suite: `75 passed`;
+- expanded PR3 + affected migration/lineage suite: `154 passed`;
+- full backend + launcher regression: `2759 passed`;
+- Ruff format/check and `git diff --check`: passed.
+
+## Immediate next action
+
+Run PR3 adversarial final review. Do not start or authorize PR4 until PR3 is
+accepted and merged.
 
 ## Persistence constraints
 

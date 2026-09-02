@@ -73,9 +73,15 @@ def test_database_at_0020_is_upgraded_to_family_food_identity(tmp_path):
 
     applied = apply_migrations(DatabaseConfig(path=database_path))
 
-    assert applied == ["0021_family_food_identity", "0022_household_foundation"]
+    assert applied == [
+        "0021_family_food_identity",
+        "0022_household_foundation",
+        "0023_food_ingredient_catalogue",
+    ]
     assert read_identity_settings(database_path)["product.name"][0] == "FamilyFoodOS"
-    assert read_identity_settings(database_path)["workspace.source"][0] == "family-food-os"
+    assert (
+        read_identity_settings(database_path)["workspace.source"][0] == "family-food-os"
+    )
 
 
 def test_direct_identity_migration_is_idempotent(tmp_path):
@@ -106,7 +112,9 @@ def test_direct_identity_migration_is_idempotent(tmp_path):
     assert after_second == after_first
 
 
-def test_identity_migration_creates_no_table_and_changes_no_business_data_or_audit(tmp_path):
+def test_identity_migration_creates_no_table_and_changes_no_business_data_or_audit(
+    tmp_path,
+):
     database_path = tmp_path / "bounded.sqlite"
     migrate_through_0020(database_path)
 
@@ -136,7 +144,9 @@ def test_identity_migration_creates_no_table_and_changes_no_business_data_or_aud
             ("Representative inherited ingredient",),
         ).fetchone()
         tables_before = table_names(connection)
-        audit_count_before = connection.execute("SELECT count(*) FROM audit_logs").fetchone()[0]
+        audit_count_before = connection.execute(
+            "SELECT count(*) FROM audit_logs"
+        ).fetchone()[0]
 
         IDENTITY_MIGRATION.upgrade(connection)
 
@@ -145,7 +155,9 @@ def test_identity_migration_creates_no_table_and_changes_no_business_data_or_aud
             ("Representative inherited ingredient",),
         ).fetchone()
         tables_after = table_names(connection)
-        audit_count_after = connection.execute("SELECT count(*) FROM audit_logs").fetchone()[0]
+        audit_count_after = connection.execute(
+            "SELECT count(*) FROM audit_logs"
+        ).fetchone()[0]
 
     assert tables_after == tables_before
     assert business_row_after == business_row_before

@@ -26,6 +26,7 @@ MIGRATION_MODULES = [
     "app.migrations.versions.0020_artifact_audit_operations",
     "app.migrations.versions.0021_family_food_identity",
     "app.migrations.versions.0022_household_foundation",
+    "app.migrations.versions.0023_food_ingredient_catalogue",
 ]
 MIGRATION_TABLE = "schema_migrations"
 
@@ -94,4 +95,6 @@ def current_migrations(config: DatabaseConfig | None = None) -> set[str]:
 
 
 def expected_migration_ids() -> list[str]:
-    return [import_module(module_name).MIGRATION_ID for module_name in MIGRATION_MODULES]
+    return [
+        import_module(module_name).MIGRATION_ID for module_name in MIGRATION_MODULES
+    ]

@@ -25,6 +25,8 @@ Source baseline:
 
 `PR2-C — Household Foundation — COMPLETE`
 
+`PR2-DOCS — Canonical Roadmap & PR2-C Closure Sync — COMPLETE`
+
 PR1 separated active FamilyFoodOS project, runtime, launcher, frontend and agent
 identity from CosmeticWorkshopOS while preserving inherited runtime behavior.
 Accepted source provenance, historical evidence, explicitly classified legacy
@@ -84,21 +86,38 @@ Closure:
 - accepted head: `13f7c7c480469853579912a7836680afc4734ad7`;
 - merge commit: `48c72aeba19a1e6ece0dc729f0a80de930be88a8`.
 
+PR2-DOCS closure:
+
+- GitHub PR: `#6` — merged;
+- accepted head: `351a0a7e374312d6dda4b7e0e746d6a54579de61`;
+- merge commit: `a5b6ca5d210b2401a2fa7e4037a957ec7b846774`.
+
 ## Current active repository task
 
-`PR2-DOCS — Canonical Roadmap & PR2-C Closure Sync`
+`PR3 — FoodIngredient Catalogue — READY FOR REVIEW`
 
-This is documentation/governance synchronization only. It adds the
-repository-local canonical `docs/family-food/master-roadmap.md`, reconciles the
-migration plan and records PR2-C closure. It is not a product milestone and is
-not complete until reviewed and merged.
+PR3 introduces the canonical platform-owned `FoodIngredient` catalogue through
+the accepted application/domain → repository contracts → Unit of Work →
+synchronous SQLAlchemy Core → SQLite path. It remains separate from legacy
+cosmetic Ingredient, Household ownership, Pantry, recipes and RetailSKU.
 
-## Next product milestone
+Implementation evidence:
 
-`PR3 — FoodIngredient Catalogue`
+- migration: `0023_food_ingredient_catalogue`;
+- trusted technical seed: `100` active FoodIngredients and `89` aliases;
+- USDA FoodData Central sources: Foundation Foods `2026-04-30` (`87` rows)
+  and final SR Legacy `2018-04` (`13` rows);
+- every active seed item has one current provenance-bearing nutrition profile;
+- direct PR3 focused suite: `75 passed`;
+- expanded PR3 + affected migration/lineage suite: `154 passed`;
+- full backend + launcher regression: `2759 passed`;
+- Ruff format/check and `git diff --check`: passed.
 
-PR3 is the next approved product milestone, but implementation must not begin
-until PR2-DOCS is reviewed and merged. PR3 introduces the canonical platform
-`FoodIngredient` catalogue without merging it with `RetailSKU` or beginning
-Recipe, Pantry, Nutrition Engine calculations, Planner, Retail, ingestion
-automation or AI.
+Explicitly deferred: IngredientUnitProfile, regulatory allergen review,
+storage-duration truth, Recipe, Pantry, Nutrition Engine calculations, Planner,
+Shopping, Retail, Auth, PostgreSQL, AI, frontend and the full Data Program.
+
+## Next action
+
+Perform PR3 adversarial final review. Do not begin or authorize PR4 before PR3
+final acceptance and merge.
