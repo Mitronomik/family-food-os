@@ -2,12 +2,14 @@ import sqlite3
 from dataclasses import replace
 from datetime import datetime, timezone
 from decimal import Decimal
+from uuid import uuid4
 
 import pytest
-from sqlalchemy import Column, ForeignKey, Integer, MetaData, Table
+from sqlalchemy import Column, ForeignKey, Integer, MetaData, Table, event
 
 from app.db.config import DatabaseConfig
 from app.db.migrations import apply_migrations
+from app.domain.food_ingredients import IngredientAlias
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_ingredient_composition import (
     create_food_catalogue_service,
@@ -290,6 +292,49 @@ def test_failed_commit_revokes_handles_and_later_uow_is_clean(catalogue_engine):
     service = create_food_catalogue_service(engine)
     expected = service.add_trusted_ingredient(seed())
     assert service.get(expected.id) == expected
+
+
+def test_failed_rollback_revokes_handles_and_later_uow_is_clean(catalogue_engine):
+    _, engine = catalogue_engine
+    service = create_food_catalogue_service(engine)
+    ingredient = service.add_trusted_ingredient(seed(aliases=()))
+    scope = SqlAlchemyFoodCatalogueUnitOfWork(engine)
+    uncertain_alias = IngredientAlias(
+        id=uuid4(),
+        food_ingredient_id=ingredient.id,
+        alias="неопределенный откат",
+        alias_key="неопределенный откат",
+        language_code="ru",
+        created_at=NOW,
+    )
+
+    def fail_rollback(connection):
+        del connection
+        raise RuntimeError("simulated rollback failure")
+
+    with pytest.raises(RuntimeError, match="simulated rollback failure"):
+        with scope:
+            retained_connection = scope._scope.adapter_connection
+            scope.aliases.add(uncertain_alias)
+            event.listen(engine, "rollback", fail_rollback, once=True)
+            scope.rollback()
+
+    assert retained_connection.closed
+    assert_repositories_revoked(scope)
+
+    later_alias = replace(
+        uncertain_alias,
+        id=uuid4(),
+        alias="последующая запись",
+        alias_key="последующая запись",
+    )
+    with SqlAlchemyFoodCatalogueUnitOfWork(engine) as later_scope:
+        assert later_scope.aliases.get_by_key(uncertain_alias.alias_key) is None
+        later_scope.aliases.add(later_alias)
+        later_scope.commit()
+    with SqlAlchemyFoodCatalogueReadScope(engine) as read_scope:
+        assert read_scope.aliases.get_by_key(uncertain_alias.alias_key) is None
+        assert read_scope.aliases.get_by_key(later_alias.alias_key) == later_alias
 
 
 def test_read_scope_has_no_commit_and_committed_write_is_later_visible(

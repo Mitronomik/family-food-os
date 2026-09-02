@@ -188,7 +188,6 @@ def entry():
             source_version="2026-04-30",
             source_data_type="Foundation",
             verified_at=NOW,
-            estimated=None,
         ),
     )
 
@@ -215,6 +214,21 @@ def test_application_adds_complete_catalogue_item_and_commits_explicitly():
     assert store.aliases["гречка"].food_ingredient_id == created.id
     assert next(iter(store.nutrition.values())).food_ingredient_id == created.id
     assert application.get_by_code("BUCKWHEAT") == created
+
+
+def test_omitted_trusted_nutrition_estimation_preserves_unknown_state():
+    store = Store()
+    scopes = []
+    application = service(store, scopes)
+    trusted_entry = entry()
+
+    assert trusted_entry.nutrition.estimated is None
+
+    created = application.add_trusted_ingredient(trusted_entry)
+    persisted = next(iter(store.nutrition.values()))
+
+    assert persisted.food_ingredient_id == created.id
+    assert persisted.estimated is None
 
 
 def test_application_failure_rolls_back_complete_multi_repository_command():

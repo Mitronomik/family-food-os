@@ -54,7 +54,7 @@ class TrustedNutritionSeed:
     source_version: str
     source_data_type: str | None
     verified_at: datetime
-    estimated: bool | None = False
+    estimated: bool | None = None
 
 
 @dataclass(frozen=True)
