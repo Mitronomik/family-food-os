@@ -1027,9 +1027,14 @@ Household
 Минимум:
 
 - 3 fixture households;
-- 30 recipes;
-- 80+ ingredients;
-- deterministic planner tests.
+- 30 verified recipes;
+- 80+ `FoodIngredient`;
+- deterministic Planner;
+- соблюдение exclusions и всех hard constraints;
+- complete week для каждого fixture либо явный bounded failure;
+- individualized Servings;
+- reproducible planner trace с candidates, rejections, scores, selections и
+  warnings.
 
 ---
 
@@ -1181,15 +1186,31 @@ PR10-PDF находится в MVP0 backend до Consumer PWA. Consumer download
 На этом этапе backend должен поддерживать полный vertical slice:
 
 ```text
-Family
-→ Week
-→ Servings
-→ Shopping
-→ Pantry
-→ Prep
+Household
+→ Members
+→ Planner
+→ 7-day MealPlan
+→ Serving calculation
+→ ingredient aggregation
+→ Pantry subtraction
+→ ShoppingList
+→ PrepPlan
+→ PDF
 ```
 
-Без frontend и без AI.
+Обязательные условия:
+
+```text
+AI_ENABLED=false
+RetailConnector=none
+```
+
+Exact fixture:
+
+- 1 Household;
+- 3 members;
+- 30 verified recipes;
+- 80–120 `FoodIngredient`.
 
 Backend Weekly PDF уже существует.
 
@@ -1479,11 +1500,14 @@ Consumer flow должен поддерживать:
 ```text
 Household onboarding
 → generate week
-→ modify/use week
-→ shopping
-→ prep
+→ Today / Week
+→ meal change
+→ recalculated Shopping
+→ Pantry
+→ Prep
 → PDF/print
-→ structured feedback/history
+→ finish week
+→ structured feedback
 → next week
 ```
 
@@ -1499,11 +1523,15 @@ Ingestion Platform.
 
 До real-family testing активный каталог должен иметь:
 
-- достаточное количество verified recipes для полезного и разнообразного
-  теста;
-- complete `FoodIngredient` resolution для активных recipes;
-- valid nutrition provenance;
-- отсутствие critical catalogue gaps для целевых тестовых Household.
+- `50–80+` verified recipes;
+- complete required `FoodIngredient` resolution;
+- `100%` required FoodIngredient coverage для active recipe corpus;
+- valid nutrition source/version/provenance;
+- отсутствие unresolved required ingredients;
+- отсутствие critical sanity-validation errors;
+- reviewable RecipeVersion source provenance и rights status;
+- reasonable weekly variety;
+- broader FoodIngredient target примерно `250–350`.
 
 Gate может быть закрыт bounded seed/import и review work. Полная ingestion
 automation следует позже в Data Program.
@@ -2048,12 +2076,21 @@ Shared-deployment prerequisites, которые должны быть выпол
 
 Дополнительно для Paid Beta:
 
-- billing;
-- минимум один RetailConnector;
-- optional AI;
-- feedback history;
-- admin ingestion UI;
-- legal/privacy documents.
+- проверенная recurring value и готовность к Commercial / Billing только после
+  shared-safety gate;
+- `Feedback & History v0`, уже обязательный до real-family testing;
+- legal/privacy документы, соответствующие фактическому способу использования
+  данных и коммерческому запуску;
+- production operational readiness, включая support/incident ownership,
+  security, backup/restore и monitoring на требуемом уровне.
+
+`RetailConnector`, AI и admin ingestion UI не являются безусловными условиями
+Paid Beta. Retail Connector добавляется только если актуальное product evidence
+и отдельное решение подтверждают его необходимость. AI остаётся optional и
+добавляется только если улучшает продукт при сохранении `AI_ENABLED=false`.
+Admin ingestion UI появляется только при доказанной операционной потребности;
+Data Readiness может быть достигнут bounded curation/import/review без полной
+ingestion automation platform.
 
 ---
 
@@ -2068,45 +2105,23 @@ canonical milestones и gates из `docs/family-food/master-roadmap.md` без
 
 # 27. Возможная параллельная работа агентов
 
-После PR3 можно частично параллелить.
+Параллельная работа разрешена только внутри текущего milestone/gate или для
+явно ограниченных supporting-задач, которые не реализуют будущий milestone:
 
-### Agent A — Domain
+- research и проверка evidence;
+- QA, adversarial review и regression;
+- fixture/data preparation в рамках уже разрешённого scope;
+- документация и non-conflicting supporting work.
 
-```text
-Recipe
-Nutrition
-Planner
-```
+Параллельные агенты не дают разрешение перепрыгивать порядок
+`docs/family-food/master-roadmap.md`. В частности:
 
-### Agent B — Data
+- Planner implementation ждёт canonical PR8;
+- Consumer PWA ждёт Gate 2 и PR11;
+- Retail ждёт позднюю Retail Program;
+- AI остаётся optional и поздним.
 
-```text
-ingredients
-seed
-recipes
-ingestion preparation
-```
-
-### Agent C — Frontend
-
-после стабилизации API:
-
-```text
-PWA shell
-onboarding
-weekly UX
-```
-
-### Agent D — QA / Reviewer
-
-```text
-tests
-architecture compliance
-regression
-migration safety
-```
-
-Но один агент/оркестратор должен владеть:
+Один агент/оркестратор должен владеть:
 
 - domain contracts;
 - schema;
@@ -2229,13 +2244,15 @@ Next Week
 
 # 31. Первый практический этап после утверждения документа
 
-После утверждения Migration Plan следующий технический шаг:
+## Историческая миграционная provenance
+
+При первоначальном утверждении Migration Plan следующим техническим шагом был:
 
 ```text
 PR0 — Frozen Fork
 ```
 
-До начала PR1 необходимо сохранить:
+До начала PR1 требовалось сохранить:
 
 ```text
 source repository
@@ -2245,13 +2262,18 @@ test baseline
 build baseline
 ```
 
-После PR0 выполняется:
+После PR0 был выполнен:
 
 ```text
 PR1 — Identity Detox
 ```
 
-и только после него начинается изменение доменной модели.
+Этот раздел фиксирует выполненную историческую последовательность и не является
+текущей инструкцией. PR0, PR1 и PR2-A/B/C завершены. Текущий следующий
+product milestone — `PR3 — FoodIngredient Catalogue`, но его implementation
+начинается только после review и merge документационного sync PR2-DOCS.
+Актуальный порядок всегда определяется
+`docs/family-food/master-roadmap.md`.
 
 ---
 
