@@ -1,15 +1,19 @@
-# FoodIngredient technical seed
+# FoodIngredient catalogue seed
 
-This directory contains the reviewed PR3 technical subset for the canonical,
-platform-owned FamilyFoodOS Food Catalogue. It is application seed data, not a
-test fixture and not an upstream USDA bulk-data mirror.
+This directory contains the reviewed canonical, platform-owned FamilyFoodOS
+Food Catalogue. It is application seed data, not a test fixture and not an
+upstream USDA bulk-data mirror. The accepted PR3 100-item technical slice is
+preserved and expanded only with concepts required by the frozen PR4 MVP0 recipe
+corpus.
 
 ## Scope
 
-- `ingredients.csv`: 100 Russian-language canonical FoodIngredients.
-- `aliases.csv`: deterministic Russian lookup aliases.
+- `ingredients.csv`: 183 Russian-language canonical FoodIngredients.
+- `aliases.csv`: deterministic Russian and English/source-resolution aliases.
 - `nutrition.csv`: one current authoritative nutrition snapshot per ingredient.
-- Source mix: 87 Foundation Foods records and 13 SR Legacy records.
+- Source mix: 102 Foundation Foods records and 81 SR Legacy records.
+- PR4-DATA expansion: 83 corpus-required concepts, comprising 15 Foundation
+  Foods records and 68 SR Legacy records.
 - All nutrition is per 100 g edible portion.
 - All default units are `g`, so PR3 does not require unprovenanced density or a
   `pcs → grams` unit profile. `IngredientUnitProfile` is explicitly deferred.
@@ -19,8 +23,13 @@ test fixture and not an upstream USDA bulk-data mirror.
 
 ## Authoritative sources and releases
 
-The subset was curated on 2026-09-02 from the official downloadable CSV
-archives published by USDA FoodData Central:
+The catalogue was curated and verified in two reviewed revisions from the
+official downloadable CSV archives published by USDA FoodData Central:
+
+- original PR3 100-item technical slice: `2026-09-02`;
+- PR4-DATA 83-item expansion: `2026-09-04`.
+
+Both revisions use the same authoritative source releases:
 
 1. Foundation Foods, April 2026 release / FoodData Central Version 15.0,
    archive `FoodData_Central_foundation_food_csv_2026-04-30.zip`.
@@ -60,9 +69,17 @@ Source and licensing page: <https://fdc.nal.usda.gov/>. Download inventory:
 - `estimated` remains null because this slice does not reinterpret USDA's
   analytical and calculated-value methodology as a boolean certainty claim.
 
+Catalogue cardinality is intentionally not enforced by the production loader.
+The historical PR3 80–120 range was a technical-slice acceptance criterion, not
+a permanent platform maximum. Bounded milestone fixture limits belong in their
+curation evidence and tests; the PR4 MVP0 subset is recorded separately under
+`data/curation/pr4/mvp0-food-ingredient-codes.txt`.
+
 ## Known limitations
 
-This is a bounded technical slice, not complete Russian food-market coverage.
+This remains a bounded catalogue revision, not complete Russian food-market
+coverage. The broader MVP target remains approximately 250–350 canonical
+FoodIngredients and may be reached only through later reviewed data work.
 Some canonical names intentionally use one practical USDA representative (for
 example one apple or potato record), so later catalogue expansion may introduce
 materially distinct varieties only when recipes or nutrition behavior justify

@@ -1,6 +1,6 @@
 # Progress
 
-Updated: `2026-09-02`
+Updated: `2026-09-04`
 
 ## FamilyFoodOS bootstrap
 
@@ -217,7 +217,7 @@ Closure evidence:
 
 ## PR3 — FoodIngredient Catalogue
 
-Status: **READY FOR REVIEW**
+Status: **COMPLETE**
 
 Implementation evidence:
 
@@ -249,10 +249,17 @@ Implementation evidence:
   ingredient from default search and is not reversed by seed reruns;
 - atomic seed conflict, failed UoW cleanliness and terminal repository-handle
   revocation are covered;
-- direct PR3 focused suite: `75 passed`;
+- direct PR3 focused suite: `77 passed`;
 - expanded PR3 + affected migration/lineage suite: `154 passed`;
-- full backend + launcher regression: `2759 passed`;
+- full backend + launcher regression: `2761 passed`;
 - Ruff format/check and `git diff --check`: passed.
+
+Closure evidence:
+
+- final adversarial review: `PR3 FINAL REVIEW: ACCEPT`;
+- GitHub PR `#7`: **MERGED**;
+- accepted head: `b4d886824989a67711fca0b28821e60934279e6b`;
+- merge commit: `1a67fd96e9d2921ed986dc887081bbfe57c4dd83`.
 
 Deliberately deferred:
 
@@ -264,5 +271,52 @@ Deliberately deferred:
 - Recipe, Pantry, Nutrition Engine calculations, Planner, Shopping, Prep,
   Retail, Data Program automation, PostgreSQL, Auth, HouseholdMembership and AI.
 
-Immediate next action: PR3 adversarial final review. PR3 is not COMPLETE and PR4
-remains unauthorized until final PR3 acceptance and merge.
+## PR4-DATA — Recipe Corpus FoodIngredient Coverage
+
+Status: **READY FOR REVIEW**
+
+PR4-DATA is a supporting data operation, not a product milestone. It runs on
+branch `data/pr4-recipe-ingredient-coverage` from accepted PR3 merge commit
+`1a67fd96e9d2921ed986dc887081bbfe57c4dd83`.
+
+The initial 30-recipe corpus required 126 unique FoodIngredient concepts. Exact
+marginal analysis identified `Roasted Potato and Turkey Hash` at six exclusive
+concepts and `Brown Rice Pilaf` at three. Replacing them with the already
+reviewed six-serving `Vegetable Frittata Bites` and `Cauliflower Rice`
+candidates contributes one new concept each. One replacement could reach only
+121, so two replacements are the minimum needed to preserve Gate 2 unchanged.
+
+Durable curation evidence under `data/curation/pr4/` now freezes the corrected
+30 directly published USDA FNS CACFP six-serving recipe cards and proves:
+
+- 363 represented source ingredient rows;
+- 358 per-recipe concept occurrences after within-recipe deduplication;
+- 310 distinct transcribed source ingredient texts;
+- 119 unique canonical FoodIngredient codes in the exact MVP0 manifest;
+- 36 concepts pre-existed in the accepted PR3 catalogue;
+- 83 corpus-required concepts were added;
+- 0 source ingredient rows were dropped;
+- 0 ambiguous or unresolved required rows remain.
+
+The global catalogue now contains 183 active FoodIngredients, 172 aliases and
+183 nutrition profiles. The 83 additions use 15 USDA FoodData Central
+Foundation Foods records from the `2026-04-30` release and 68 SR Legacy records
+from the `2018-04` release. A fresh-database seed inserted all 183/172/183 rows;
+an identical second run inserted zero rows and reported all rows as existing.
+
+The production loader's historical `80–120` milestone-cardinality restriction
+was removed. It still rejects an empty catalogue and retains record, collision,
+nutrition, provenance and domain validation. The exact 119-code Gate 2 bound is
+instead enforced by curation/data-quality tests and the MVP0 manifest.
+
+Verification evidence:
+
+- focused seed suite: `13 passed`;
+- PR4-DATA curation suite: `4 passed`;
+- full backend + launcher regression: `2766 passed`;
+- Ruff format/check and `git diff --check`: passed.
+
+No FoodIngredient schema, migration, domain, repository, UoW, search, allergen,
+API or frontend behavior changed. No Recipe schema, domain, persistence or
+implementation was started. `PR4 — Recipe Catalogue` remains the next product
+milestone and waits for PR4-DATA acceptance/merge. PR5 remains unauthorized.
