@@ -23,8 +23,13 @@ corpus.
 
 ## Authoritative sources and releases
 
-The subset was curated on 2026-09-02 from the official downloadable CSV
-archives published by USDA FoodData Central:
+The catalogue was curated and verified in two reviewed revisions from the
+official downloadable CSV archives published by USDA FoodData Central:
+
+- original PR3 100-item technical slice: `2026-09-02`;
+- PR4-DATA 83-item expansion: `2026-09-04`.
+
+Both revisions use the same authoritative source releases:
 
 1. Foundation Foods, April 2026 release / FoodData Central Version 15.0,
    archive `FoodData_Central_foundation_food_csv_2026-04-30.zip`.
