@@ -1,6 +1,6 @@
 # Handoff
 
-Updated: `2026-09-02`
+Updated: `2026-09-04`
 
 ## Project identity
 
@@ -89,18 +89,45 @@ Before continuing:
 
 ## Current work
 
-`PR3 — FoodIngredient Catalogue — READY FOR REVIEW`
+`PR3 — FoodIngredient Catalogue — COMPLETE`
 
-Branch: `migration/pr3-food-ingredient-catalogue`
+Closure evidence:
 
-Base commit:
+- GitHub PR `#7`: **MERGED**;
+- accepted head: `b4d886824989a67711fca0b28821e60934279e6b`;
+- merge commit: `1a67fd96e9d2921ed986dc887081bbfe57c4dd83`;
+- final review: `PR3 FINAL REVIEW: ACCEPT`;
+- PR3-focused suite: `77 passed`;
+- full backend + launcher regression: `2761 passed`;
+- Ruff and `git diff --check`: passed.
 
-`a5b6ca5d210b2401a2fa7e4037a957ec7b846774`
+`PR4-DATA — Recipe Corpus FoodIngredient Coverage — READY FOR REVIEW`
 
-PR3 implements the canonical platform Food Catalogue only. It must remain
-`READY FOR REVIEW`, not COMPLETE, until adversarial acceptance and merge.
+This is a supporting data operation, not a product milestone.
 
-## PR3 implementation
+Branch: `data/pr4-recipe-ingredient-coverage`
+
+Base commit: `1a67fd96e9d2921ed986dc887081bbfe57c4dd83`
+
+Review evidence:
+
+- the initial 30-card union contained 126 concepts;
+- Roasted Potato and Turkey Hash (marginal 6) and Brown Rice Pilaf (marginal 3)
+  were replaced by Vegetable Frittata Bites (contribution 1) and Cauliflower
+  Rice (contribution 1), the minimum two-card correction that passes the gate;
+- `data/curation/pr4/ingredient-coverage.csv` retains all 363 source ingredient
+  rows, including optional ingredients, alternatives and the explicit Bean
+  Burrito Bowl subrecipe structure;
+- the exact `mvp0-food-ingredient-codes.txt` manifest contains 119 codes, within
+  the unchanged Gate 2 maximum of 120;
+- all source rows resolve, with 36 PR3 codes and 83 corpus-required additions;
+- the global seed contains 183 FoodIngredients, 172 aliases and 183 current
+  nutrition profiles, with 102 Foundation and 81 SR Legacy profiles in total;
+- the production loader validates a non-empty catalogue and all existing data
+  rules but no longer hard-codes PR3's historical 80–120 milestone range;
+- no Recipe implementation was made.
+
+## Completed PR3 implementation
 
 Domain/application:
 
@@ -146,8 +173,9 @@ Verification:
 
 ## Immediate next action
 
-Run PR3 adversarial final review. Do not start or authorize PR4 until PR3 is
-accepted and merged.
+Complete PR4-DATA final review and merge. The next product milestone remains
+`PR4 — Recipe Catalogue`, and its implementation waits for PR4-DATA merge. PR5
+remains unauthorized.
 
 ## Persistence constraints
 

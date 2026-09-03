@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-09-04",
+  "recipes": [
+    {
+      "recipe_source_id": "CACFP6-SOUTHWEST-TOFU-SCRAMBLE",
+      "recipe_name": "Southwest Tofu Scramble",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Southwest%20Tofu%20Scramble%206%20Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Breakfasts",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-SPICED-OATMEAL",
+      "recipe_name": "Spiced Oatmeal",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Spiced%20Oatmeal%206%20Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Breakfasts",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-STRAWBERRY-SMOOTHIE-BOWL",
+      "recipe_name": "Strawberry Smoothie Bowl",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Strawberry%20Smoothie%20Bowl%206%20Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Breakfasts",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-BAKED-SWEET-POTATOES-APPLES",
+      "recipe_name": "Baked Sweet Potatoes and Apples",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Baked_Sweet_Potatoes_Apples_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-CORN-EDAMAME-BLEND",
+      "recipe_name": "Corn and Edamame Blend",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-LOCAL-HARVEST-BAKE",
+      "recipe_name": "Local Harvest Bake",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Local_Harvest_Bake_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-ORANGE-GLAZED-CARROTS",
+      "recipe_name": "Orange Glazed Carrots",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Orange_Glazed_Carrots_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-PIZZA-GREEN-BEANS",
+      "recipe_name": "Pizza Green Beans",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Pizza_Green_Beans_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-SAUTEED-SPINACH-TOMATOES",
+      "recipe_name": "Sautéed Spinach and Tomatoes",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Sauteed_Spinach_6_servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-SPANISH-RICE",
+      "recipe_name": "Spanish Rice",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Spanish_Rice_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-TABBOULEH",
+      "recipe_name": "Tabbouleh",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tabbouleh_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-CHICKEN-FAJITA",
+      "recipe_name": "Chicken Fajita",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Chicken_Fajita_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Main Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-HONEY-LIME-CHICKEN",
+      "recipe_name": "Honey Lime Chicken",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Honey_Lime_Chicken_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Main Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-RICE-VEGETABLE-CASSEROLE",
+      "recipe_name": "Rice Vegetable Casserole",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Rice_Veg_Casserole_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Main Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-VEGETABLE-CHILI",
+      "recipe_name": "Vegetable Chili",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Vegetable_Chili_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Main Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-VEGETABLE-FRITTATA",
+      "recipe_name": "Vegetable Frittata",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Vegetable_Frittata_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Main Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-CARROT-RAISIN-SALAD",
+      "recipe_name": "Carrot Raisin Salad",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Carrot%20Raisin%20Salad%206%20Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Salads",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-MACARONI-SALAD",
+      "recipe_name": "Macaroni Salad",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Macaroni%20Salad%206%20Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Salads",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-MARINATED-BLACK-BEAN-SALAD",
+      "recipe_name": "Marinated Black Bean Salad",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Marinated%20Black%20Bean%20Salad%206%20Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Salads",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-QUICHE-SELF-FORMING-CRUST",
+      "recipe_name": "Quiche with Self-Forming Crust",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Quiche_Self-Forming_Crust_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Main Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-ROPA-VIEJA",
+      "recipe_name": "Ropa Vieja",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Ropa_Vieja_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Main Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-CORN-PUDDING",
+      "recipe_name": "Corn Pudding",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Pudding_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-CREAMY-COLESLAW",
+      "recipe_name": "Creamy Coleslaw",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-GREEN-BEANS-POTATOES-SMOKED-TURKEY",
+      "recipe_name": "Green Beans with Potatoes and Smoked Turkey",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/GreenBeans_Potatoes_Smoked_Turkey_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-TUNA-SALAD-SANDWICH",
+      "recipe_name": "Tuna Salad Sandwich",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tuna_Salad_Sandwich_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Sandwiches",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-TUSCAN-GRILL-CHEESE",
+      "recipe_name": "Tuscan Grill Cheese Sandwich",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tuscan_Grill_Cheese_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Sandwiches",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-ASIAN-TUNA-BURGER",
+      "recipe_name": "Asian Tuna Burger",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Asian_Tuna_Burger_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Sandwiches",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-BEAN-BURRITO-BOWL",
+      "recipe_name": "Bean Burrito Bowl",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Bean_Burrito_Bowl_6_Servings.pdf",
+      "source_collection": "USDA FNS CACFP Home Childcare — Main Dishes",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-VEGETABLE-FRITTATA-BITES",
+      "recipe_name": "Vegetable Frittata Bites",
+      "source_url": "https://theicn.org/cnrb/pdfs/cacfp/family-child-care-homes/11-06-2024/vegetable-frittata-bites-6-servings-v2.pdf",
+      "source_collection": "USDA FNS CACFP — Standardized Recipes Project 2024",
+      "source_servings": 6
+    },
+    {
+      "recipe_source_id": "CACFP6-CAULIFLOWER-RICE",
+      "recipe_name": "Cauliflower Rice",
+      "source_url": "https://theicn.org/cnrb/pdfs/cacfp/family-child-care-homes/12-03-2024/cauliflower-rice-6-servings-v2.pdf",
+      "source_collection": "USDA FNS CACFP — Standardized Recipes Project 2024",
+      "source_servings": 6
+    }
+  ]
+}

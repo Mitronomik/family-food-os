@@ -24,6 +24,12 @@ from app.seed.food_ingredients import (
 from app.services.food_ingredients import FoodCatalogueConflictError
 
 
+EXPECTED_INGREDIENT_COUNT = 183
+EXPECTED_ALIAS_COUNT = 172
+EXPECTED_FOUNDATION_COUNT = 102
+EXPECTED_SR_LEGACY_COUNT = 81
+
+
 def _copy_seed(tmp_path: Path) -> Path:
     target = tmp_path / "seed"
     shutil.copytree(DEFAULT_SEED_DIRECTORY, target)
@@ -60,20 +66,22 @@ def _update_csv_row(
         writer.writerows(rows)
 
 
-def test_checked_in_seed_has_100_quality_validated_authoritative_rows():
+def test_checked_in_expanded_seed_has_quality_validated_authoritative_rows():
     entries = load_seed_entries()
 
-    assert len(entries) == 100
+    assert len(entries) == EXPECTED_INGREDIENT_COUNT
     assert (
-        sum(entry.nutrition.source_data_type == "Foundation" for entry in entries) == 87
+        sum(entry.nutrition.source_data_type == "Foundation" for entry in entries)
+        == EXPECTED_FOUNDATION_COUNT
     )
     assert (
-        sum(entry.nutrition.source_data_type == "SR Legacy" for entry in entries) == 13
+        sum(entry.nutrition.source_data_type == "SR Legacy" for entry in entries)
+        == EXPECTED_SR_LEGACY_COUNT
     )
-    assert len({entry.canonical_code for entry in entries}) == 100
+    assert len({entry.canonical_code for entry in entries}) == EXPECTED_INGREDIENT_COUNT
     assert (
         len({entry.canonical_name.casefold().replace("ё", "е") for entry in entries})
-        == 100
+        == EXPECTED_INGREDIENT_COUNT
     )
     assert all(entry.nutrition.source_name == "USDA_FDC" for entry in entries)
     assert all(entry.nutrition.source_id for entry in entries)
@@ -83,6 +91,22 @@ def test_checked_in_seed_has_100_quality_validated_authoritative_rows():
     assert all(entry.allergen_codes == () for entry in entries)
 
 
+def test_seed_rejects_an_empty_catalogue_without_imposing_a_milestone_maximum(
+    tmp_path,
+):
+    seed_directory = _copy_seed(tmp_path)
+    for filename in ("ingredients.csv", "aliases.csv", "nutrition.csv"):
+        path = seed_directory / filename
+        with path.open(encoding="utf-8", newline="") as handle:
+            fieldnames = csv.DictReader(handle).fieldnames
+        assert fieldnames is not None
+        with path.open("w", encoding="utf-8", newline="") as handle:
+            csv.DictWriter(handle, fieldnames=fieldnames).writeheader()
+
+    with pytest.raises(FoodIngredientSeedError, match="must not be empty"):
+        load_seed_entries(seed_directory)
+
+
 def test_seed_is_idempotent_and_every_active_item_has_current_provenance(tmp_path):
     config = DatabaseConfig(path=tmp_path / "seed.sqlite")
 
@@ -90,21 +114,21 @@ def test_seed_is_idempotent_and_every_active_item_has_current_provenance(tmp_pat
     second = seed_food_ingredients(config)
 
     assert asdict(first) == {
-        "ingredients_inserted": 100,
+        "ingredients_inserted": EXPECTED_INGREDIENT_COUNT,
         "ingredients_existing": 0,
-        "aliases_inserted": 89,
+        "aliases_inserted": EXPECTED_ALIAS_COUNT,
         "aliases_existing": 0,
-        "nutrition_profiles_inserted": 100,
+        "nutrition_profiles_inserted": EXPECTED_INGREDIENT_COUNT,
         "nutrition_profiles_existing": 0,
         "conflicts": 0,
     }
     assert asdict(second) == {
         "ingredients_inserted": 0,
-        "ingredients_existing": 100,
+        "ingredients_existing": EXPECTED_INGREDIENT_COUNT,
         "aliases_inserted": 0,
-        "aliases_existing": 89,
+        "aliases_existing": EXPECTED_ALIAS_COUNT,
         "nutrition_profiles_inserted": 0,
-        "nutrition_profiles_existing": 100,
+        "nutrition_profiles_existing": EXPECTED_INGREDIENT_COUNT,
         "conflicts": 0,
     }
     with sqlite3.connect(config.path) as connection:
@@ -128,15 +152,15 @@ def test_seed_is_idempotent_and_every_active_item_has_current_provenance(tmp_pat
             connection.execute(
                 "SELECT COUNT(*) FROM food_ingredient_aliases"
             ).fetchone()[0]
-            == 89
+            == EXPECTED_ALIAS_COUNT
         )
         assert (
             connection.execute(
                 "SELECT COUNT(*) FROM food_nutrition_profiles"
             ).fetchone()[0]
-            == 100
+            == EXPECTED_INGREDIENT_COUNT
         )
-    assert active_count == current_with_provenance == 100
+    assert active_count == current_with_provenance == EXPECTED_INGREDIENT_COUNT
 
 
 def test_seed_search_cyrillic_yo_and_decimal_roundtrip(tmp_path):
@@ -173,7 +197,7 @@ def test_seed_rerun_never_reactivates_deactivated_item(tmp_path):
     engine = create_sqlite_engine(config)
     try:
         service = create_food_catalogue_service(engine)
-        assert summary.ingredients_existing == 100
+        assert summary.ingredients_existing == EXPECTED_INGREDIENT_COUNT
         assert all(
             result.canonical_code != "BUCKWHEAT" for result in service.search("греч")
         )
@@ -235,13 +259,13 @@ def test_persisted_nutrition_conflict_rolls_back_alias_inserted_earlier_in_seed(
         )
         assert (
             connection.execute("SELECT COUNT(*) FROM food_ingredients").fetchone()[0]
-            == 100
+            == EXPECTED_INGREDIENT_COUNT
         )
         assert (
             connection.execute(
                 "SELECT COUNT(*) FROM food_nutrition_profiles"
             ).fetchone()[0]
-            == 100
+            == EXPECTED_INGREDIENT_COUNT
         )
 
 

@@ -151,10 +151,8 @@ def load_seed_entries(
         )
         for code in ingredients
     )
-    if not 80 <= len(entries) <= 120:
-        raise FoodIngredientSeedError(
-            f"PR3 seed must contain 80 through 120 ingredients, found {len(entries)}."
-        )
+    if not entries:
+        raise FoodIngredientSeedError("FoodIngredient seed must not be empty.")
     _validate_domain_objects(entries)
     return entries
 
