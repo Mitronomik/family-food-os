@@ -84,12 +84,7 @@ jobs:
             backend/app/tests/test_food_recipe_seed.py \
             scripts/build_pr4_recipe_seed.py
           git diff --check
-          test "$(python - <<'PY'
-import json
-r=json.load(open('data/seed/recipes/recipes.json'))['recipes']
-print(len(r), sum(len(x['version']['ingredients']) for x in r), sum(len(x['version']['steps']) for x in r), sum(len(x['version']['equipment_codes']) for x in r), len({i['food_ingredient_code'] for x in r for i in x['version']['ingredients']}))
-PY
-)" = "30 189 169 86 81"
+          test "$(python -c "import json; r=json.load(open('data/seed/recipes/recipes.json'))['recipes']; print(len(r),sum(len(x['version']['ingredients']) for x in r),sum(len(x['version']['steps']) for x in r),sum(len(x['version']['equipment_codes']) for x in r),len({i['food_ingredient_code'] for x in r for i in x['version']['ingredients']}))")" = "30 189 169 86 81"
           ! grep -R "EXPECTED_MANIFEST_CODE_COUNT = 119\|365 RecipeIngredient\|315 RecipeStep" backend/app/seed scripts data/seed/recipes
 
       - name: Commit verified scope reset and remove temporary tooling
