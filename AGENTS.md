@@ -12,12 +12,13 @@ Before significant work, read in this order:
 
 1. `AGENTS.md`
 2. `docs/family-food/project-operating-manual.md`
-3. `state/current-focus.md`
-4. `docs/family-food/master-roadmap.md`
-5. relevant canonical architecture/domain documents
-6. relevant source code
-7. relevant tests
-8. `state/handoff.md` when continuing previous work
+3. `docs/family-food/agent-git-pr-workflow.md`
+4. `state/current-focus.md`
+5. `docs/family-food/master-roadmap.md`
+6. relevant canonical architecture/domain documents
+7. relevant source code
+8. relevant tests
+9. `state/handoff.md` when continuing previous work
 
 Canonical FamilyFoodOS foundation documents:
 
@@ -26,6 +27,7 @@ Canonical FamilyFoodOS foundation documents:
 - `docs/family-food/technical-spec.md`
 - `docs/family-food/data-ingestion.md`
 - `docs/family-food/migration-plan.md`
+- `docs/family-food/agent-git-pr-workflow.md`
 - `docs/migration-source.md`
 
 Do not reconstruct the intended product only from legacy source code.
@@ -199,6 +201,28 @@ Never assume an API or cart integration exists without research.
 Use small reviewable branches and PRs.
 
 One PR should have one clear goal.
+
+The canonical agent execution contract is:
+
+`docs/family-food/agent-git-pr-workflow.md`
+
+For an already-authorized bounded task, the default agent behavior is self-service execution:
+
+`read → implement → test → fix → re-test → audit scope → commit → push feature branch → create/update PR → stop for final review`
+
+The user should not need to manually drive ordinary staging, commit, push or PR-creation mechanics when the agent has the required repository tools and no stop condition is present.
+
+Agents may autonomously fix implementation defects, failing task-local tests, lint/format failures, migration-registration omissions, staged-file mistakes and PR metadata inside the approved scope.
+
+Agents must stop and escalate rather than silently change project truth when a fix requires changing architecture, roadmap, bounded-context scope, authoritative data, accepted corpus, acceptance criteria, migration strategy or another gated product decision.
+
+Hard boundaries:
+
+- never push implementation work directly to `main`;
+- never merge the agent's own PR without explicit post-review merge authorization;
+- never start the next milestone merely because the current branch is review-ready;
+- never weaken tests or acceptance criteria simply to make the branch green;
+- never force-push shared history unless explicitly authorized.
 
 Before coding:
 
