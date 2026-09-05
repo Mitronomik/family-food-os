@@ -1,6 +1,6 @@
 # Current focus
 
-Updated: `2026-09-04`
+Updated: `2026-09-05`
 
 ## Project
 
@@ -119,9 +119,19 @@ PR2-DOCS closure:
 
 Branch: `migration/pr4-recipe-catalogue`
 
-Base commit: `704c588387a28e18ac1aa947ded398f168875ea0`
+Original base commit: `704c588387a28e18ac1aa947ded398f168875ea0`
 
-Working-tree HEAD at verification: `704c588387a28e18ac1aa947ded398f168875ea0`
+Reviewed implementation head: `e3b31e9ef5e7ad30c252cb59a9edac8056efbe74`
+
+Current main `4a8b0a20f7793b890efa37741f035eb120909bc7` includes merged
+governance PR #9. It was merged without conflicts or history rewrite at
+`ac28dd4a3e972d943c53bd8d61cc6892dfb2e24b`.
+
+Correction result: **CHANGES REQUIRED / RIGHTS BLOCKED — Outcome B**.
+The [rights review](../docs/family-food/pr4-rights-review.md) records primary
+evidence and all 30 affected recipes. Existing rights flags are not accepted
+clearance. Implementation stopped; no replacement or equipment fix was made.
+The blocker-report commit SHA is recorded in PR #10, not as a self-reference.
 
 The corrected 30-card USDA FNS CACFP corpus and all 363 source ingredient rows
 are frozen under `data/curation/pr4/`. Two minimal replacements reduce the
@@ -138,11 +148,11 @@ PR4 now implements the platform-owned verified Recipe Catalogue from this
 accepted frozen corpus. Migration `0024_food_recipe_catalogue` creates the five
 new catalogue tables beside the legacy recipe schema. The trusted offline seed
 contains exactly 30 active Recipes, 30 immutable source-verified v1 records,
-365 ordered ingredient lines, 315 source-derived steps and 0 inferred equipment
-rows. All ingredient lines resolve to the accepted 119-code subset without
+365 ordered ingredient lines, 315 source-derived steps and 0 equipment rows
+(the latter is a known defect). All ingredient lines resolve to the accepted 119-code subset without
 adding a FoodIngredient.
 
-Verification evidence:
+Historical pre-correction verification evidence (not rerun after Outcome B):
 
 - PR4-focused and affected migration suite: `80 passed`;
 - backend suite within final regression: `2174 passed`;
@@ -155,4 +165,9 @@ PR4 is READY FOR REVIEW, not complete. PR5 remains unauthorized.
 
 ## Next action
 
-Perform PR4 final review. Do not begin PR5.
+Obtain an explicit rights decision and source-specific clearance before
+resuming PR4 corrections. The retained READY FOR REVIEW label is not final
+readiness: rights and equipment remain unresolved. Do not merge PR #10 or begin
+PR5. Current read-only counts remain `30/30/365/315/0`, with 119 codes. Full and
+focused tests and seed runs stopped at Outcome B; Ruff is N/A (no Python edits).
+Read-only artifact/coverage assertions and `git diff --check` passed.

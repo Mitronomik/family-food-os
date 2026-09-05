@@ -1,6 +1,6 @@
 # Progress
 
-Updated: `2026-09-04`
+Updated: `2026-09-05`
 
 ## FamilyFoodOS bootstrap
 
@@ -332,8 +332,9 @@ Closure evidence:
 
 Status: **READY FOR REVIEW**
 
-Branch `migration/pr4-recipe-catalogue` is based on and currently has working-
-tree HEAD `704c588387a28e18ac1aa947ded398f168875ea0`. The review candidate appends
+Branch `migration/pr4-recipe-catalogue` originally branched from
+`704c588387a28e18ac1aa947ded398f168875ea0`; the reviewed implementation head is
+`e3b31e9ef5e7ad30c252cb59a9edac8056efbe74`. The review candidate appends
 migration `0024_food_recipe_catalogue` and adds the platform-owned Recipe,
 RecipeVersion, RecipeIngredient, RecipeStep and RecipeEquipment model without
 altering legacy recipe tables.
@@ -359,14 +360,14 @@ Corpus and rights evidence:
 - source mix: 3 Breakfasts, 8 Main Dishes, 11 Side Dishes, 3 Salads,
   3 Sandwiches and 2 Standardized Recipes Project 2024 cards;
 - all 30 manifests have unique full SHA-256 values, original servings of six,
-  reviewed rights basis and USDA attribution evidence;
+  rights metadata whose ARS-based clearance assertion failed correction review;
 - exact accepted FoodIngredient subset: 119 codes; unresolved required lines: 0;
   FoodIngredients introduced by PR4: 0;
 - the 363-row PR4-DATA matrix becomes 365 RecipeIngredients: one non-consumable
   Bean Burrito Bowl structural marker is omitted, while three water rows with
   two explicit semicolon-plus quantities are each represented by two lines;
 
-Seed and verification evidence:
+Historical pre-correction seed and verification evidence:
 
 - exact source-PDF rebuild matches both checked-in JSON artifacts byte-for-byte;
 - first fresh run inserted Recipes/Versions/Ingredients/Steps/Equipment
@@ -379,3 +380,23 @@ Seed and verification evidence:
 - Ruff format/check and `git diff --check`: passed.
 
 PR4 remains a review candidate, not COMPLETE. PR5 is unauthorized.
+
+### 2026-09-05 correction pass
+
+- Read the merged agent workflow and fetched main containing governance PR #9:
+  `4a8b0a20f7793b890efa37741f035eb120909bc7`.
+- Normal conflict-free merge on the same branch:
+  `ac28dd4a3e972d943c53bd8d61cc6892dfb2e24b`; no shared history rewritten.
+- Primary-source rights research triggered **Outcome B / RIGHTS BLOCKED**.
+  See [exact collection/recipe evidence](../docs/family-food/pr4-rights-review.md).
+  Existing flags are not accepted clearance; no seed/code/test changes followed.
+- Read-only artifact counts remain `30/30/365/315/0`; distinct ingredient
+  codes remain 119. Equipment codes remain empty, a known unresolved defect.
+- Focused/full regression and seed twice were not rerun due to the mandatory
+  rights stop. Historical green tests above do not establish rights clearance.
+  Ruff format/check is N/A: no changed Python files.
+- Read-only artifact/coverage assertions and `git diff --check`: passed.
+- Only sync, blocker documentation, README warning and state correction are
+  being delivered. The report commit SHA is recorded in PR #10.
+- Retain **READY FOR REVIEW** lifecycle label with **CHANGES REQUIRED / RIGHTS
+  BLOCKED** review result. No final acceptance, COMPLETE, merge or PR5 authority.

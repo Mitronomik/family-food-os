@@ -1,5 +1,11 @@
 # PR4 verified Recipe Catalogue seed
 
+> **2026-09-05 correction: RIGHTS BLOCKED (Outcome B).** Existing
+> `REVIEWED` / `SOURCE_VERIFIED` fields are not accepted rights clearance.
+> Do not publish this seed as rights-cleared. See the
+> [source-collection review and exact affected recipes](../../../docs/family-food/pr4-rights-review.md).
+> The corpus is unchanged pending an explicit rights decision.
+
 This directory is the bounded, repository-owned production seed for
 `PR4 — Verified Recipe Catalogue`. It was curated from the exact 30-source
 corpus frozen in `data/curation/pr4/recipe-corpus.json`; it is not a runtime
@@ -12,9 +18,9 @@ import pipeline and performs no network access.
 - RecipeIngredients: **365** ordered lines using exactly the accepted 119
   FoodIngredient codes.
 - RecipeSteps: **315** ordered, source-language instructions.
-- RecipeEquipment rows: **0**. The reviewed cards contain contextual utensil
-  words in directions but no dedicated source equipment inventory. PR4 does
-  not infer equipment from culinary knowledge.
+- RecipeEquipment rows: **0**, a known correction requirement. Explicit
+  equipment in source directions must be captured; a dedicated equipment list
+  is not required. Equipment correction stopped at the rights gate.
 
 The PR4-DATA coverage matrix has 363 rows. One Bean Burrito Bowl row is the
 explicit structural marker for its source-supplied pico de gallo subrecipe and
@@ -56,11 +62,12 @@ hidden in free text.
 
 `source-manifest.json` records the URL, collection, original serving count,
 retrieval instant, full SHA-256, review status, rights basis, and evidence URL
-for every source. All 30 documents are identified USDA Food and Nutrition
-Service works. Each was reviewed for third-party copyright notices; none was
-found. The recorded basis applies USDA ARS guidance that works prepared by
-federal employees as part of official duties are public domain under
-17 U.S.C. §105, while retaining USDA attribution.
+for every source. The recorded ARS-based public-domain inference has failed
+review: it does not establish federal-employee authorship for each source.
+The 28 direct FNS cards and two ICN-hosted 2024 cards require distinct,
+appropriate evidence. The existing JSON assertions and hard-coded loader URL
+remain unchanged under the user's Outcome B stop instruction, not endorsed.
+See the linked rights review before using or regenerating the seed.
 
 ## Reproduction
 

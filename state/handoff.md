@@ -1,6 +1,6 @@
 # Handoff
 
-Updated: `2026-09-04`
+Updated: `2026-09-05`
 
 ## Project identity
 
@@ -29,15 +29,20 @@ Do not continue CosmeticWorkshopOS product lifecycle work from this repository.
 `PR4 — Verified Recipe Catalogue — READY FOR REVIEW`
 
 - branch: `migration/pr4-recipe-catalogue`;
-- base and working-tree HEAD at verification:
+- original base:
   `704c588387a28e18ac1aa947ded398f168875ea0`;
+- reviewed implementation head: `e3b31e9ef5e7ad30c252cb59a9edac8056efbe74`;
+- current main including merged governance PR #9:
+  `4a8b0a20f7793b890efa37741f035eb120909bc7`;
+- clean normal main-sync merge: `ac28dd4a3e972d943c53bd8d61cc6892dfb2e24b`;
+- subsequent blocker-report head is recorded in PR #10 and final agent report;
 - migration: `0024_food_recipe_catalogue` after `0023`;
 - structured seed counts: 30 Recipes, 30 immutable RecipeVersions,
   365 RecipeIngredients, 315 RecipeSteps, 0 RecipeEquipment rows;
 - source mix: 3 Breakfasts, 8 Main Dishes, 11 Side Dishes, 3 Salads,
   3 Sandwiches, 2 Standardized Recipes Project 2024;
-- all 30 source manifests have unique SHA-256, six original servings, reviewed
-  rights basis and rights-evidence URL;
+- all 30 source manifests have unique SHA-256 and six original servings;
+  existing rights bases/flags failed review and are NOT accepted clearance;
 - exact FoodIngredient coverage is the accepted 119-code manifest, with 0
   unresolved required lines and 0 new FoodIngredients in PR4;
 - first seed run inserted `30/30/365/315/0`; second run inserted zero and
@@ -51,8 +56,22 @@ Do not continue CosmeticWorkshopOS product lifecycle work from this repository.
   `2174 passed`; mandatory backend + launcher regression: `2819 passed`;
 - Ruff format/check and `git diff --check`: passed.
 
-PR4 is not COMPLETE. The immediate action is PR4 final review. PR5 remains
-unauthorized; do not begin it.
+PR4 is not COMPLETE. The lifecycle label above is retained as requested; review
+result is **CHANGES REQUIRED / RIGHTS BLOCKED (Outcome B)**. See the
+[rights review](../docs/family-food/pr4-rights-review.md) for all affected
+collections, evidence, options and recommended decision. Obtain source-specific
+clearance or an explicit corpus decision before continuing. Do not merge PR #10.
+PR5 remains unauthorized. Equipment rows remain zero as a known defect.
+
+Seed and test results above are historical pre-correction evidence, not rerun
+results. This pass stopped implementation at the rights gate. Read-only JSON
+recount confirms `30/30/365/315/0` and 119 ingredient codes. Focused PR4,
+FoodIngredient, full regression and seed twice were not rerun under Outcome B;
+Ruff is N/A with no changed Python files. The ignored stale local development
+database is untouched and must not be staged.
+Read-only artifact/coverage assertions and `git diff --check` passed. Scope is
+governance synchronization plus five documentation/state files; runtime,
+generator, tests, manifests and corpus are unchanged from the reviewed head.
 
 ## Completed milestone
 
