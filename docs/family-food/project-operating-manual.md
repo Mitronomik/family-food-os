@@ -9,15 +9,16 @@ Before any significant product, architecture, research or implementation task, r
 
 1. `AGENTS.md`
 2. `docs/family-food/project-operating-manual.md`
-3. `state/current-focus.md`
-4. `docs/family-food/master-roadmap.md`
-5. the relevant canonical FamilyFoodOS documents:
+3. `docs/family-food/agent-git-pr-workflow.md`
+4. `state/current-focus.md`
+5. `docs/family-food/master-roadmap.md`
+6. the relevant canonical FamilyFoodOS documents:
    - `docs/family-food/architecture.md`
    - `docs/family-food/technical-spec.md`
    - `docs/family-food/data-ingestion.md`
    - `docs/family-food/migration-plan.md`
-6. relevant implementation code and tests
-7. `state/handoff.md` when continuing previous work
+7. relevant implementation code and tests
+8. `state/handoff.md` when continuing previous work
 
 Later, more focused canonical documents may be added under `docs/`. Read them when relevant.
 
@@ -441,11 +442,53 @@ Use `N/A` for irrelevant sections.
 
 Do not combine unrelated bounded contexts in one PR.
 
+Within that approved bounded task, Codex should execute routine implementation and Git mechanics autonomously according to:
+
+`docs/family-food/agent-git-pr-workflow.md`
+
+The default is not to return each ordinary staging/commit/push step to the user. The agent should implement, test, correct, verify, commit, push the feature branch and create/update the PR when those actions remain inside the authorized task.
+
+If resolution requires a new architecture, roadmap, scope, authoritative-data, licensing/rights or acceptance decision, Codex must stop with a concrete blocker instead of guessing.
+
 ## 18. Git discipline
 
 `main` must remain working.
 
 Use small reviewable branches and PRs.
+
+Canonical execution workflow:
+
+`docs/family-food/agent-git-pr-workflow.md`
+
+Default implementation lifecycle:
+
+```text
+read contracts
+→ implement bounded task
+→ focused tests
+→ fix implementation defects
+→ repeat verification
+→ full required regression/lint/build/diff checks
+→ staged scope audit
+→ commit feature branch
+→ push feature branch
+→ create/update Pull Request into main
+→ READY FOR FINAL REVIEW
+→ stop
+```
+
+Routine actions inside approved scope do not require repeated manual user confirmation.
+
+Agents MAY autonomously fix task-local implementation defects and make correction commits on the same feature branch.
+
+Agents MUST NOT:
+
+- push implementation commits directly to `main`;
+- merge their own PR without explicit post-review merge authorization;
+- force-push shared history without explicit authorization;
+- start the next milestone before current acceptance/merge unless canonical sequencing explicitly allows it;
+- weaken tests or acceptance criteria merely to obtain a green run;
+- silently change architecture, roadmap, scope, source-of-truth data, accepted corpus, migration authority or another gated decision.
 
 Before merge:
 
@@ -454,6 +497,14 @@ Before merge:
 - diff is reviewed;
 - acceptance criteria are checked;
 - relevant documentation/state is updated.
+
+Before committing, audit staged scope and exclude local-only artifacts. At minimum use shell-equivalent checks for:
+
+```text
+git status --short
+git diff --cached --check
+git diff --cached --stat
+```
 
 Do not commit:
 
@@ -464,6 +515,10 @@ Do not commit:
 - `.env`;
 - local databases;
 - local development environments.
+
+If a required verification cannot run, state the exact reason. Do not claim an unexecuted check passed.
+
+Implementation state is not acceptance state: an agent may set `READY FOR REVIEW` when implementation evidence is complete, but must not mark a milestone `COMPLETE` solely because code was committed or a PR was opened.
 
 ## 19. Documentation and state
 
