@@ -1,0 +1,44 @@
+name: PR4 scope-reset workspace bundle
+
+on:
+  push:
+    branches:
+      - migration/pr4-recipe-catalogue
+
+permissions:
+  contents: read
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build task-local workspace bundle
+        run: |
+          set -euo pipefail
+          mkdir -p pr4-reset-bundle
+          cp -R data/curation/pr4-data2 pr4-reset-bundle/
+          cp -R data/seed/recipes pr4-reset-bundle/current-seed
+          mkdir -p pr4-reset-bundle/backend/app/domain
+          mkdir -p pr4-reset-bundle/backend/app/services
+          mkdir -p pr4-reset-bundle/backend/app/seed
+          mkdir -p pr4-reset-bundle/backend/app/migrations/versions
+          mkdir -p pr4-reset-bundle/backend/app/persistence/sqlalchemy_core
+          mkdir -p pr4-reset-bundle/backend/app/tests/persistence
+          cp backend/app/domain/food_recipes.py pr4-reset-bundle/backend/app/domain/
+          cp backend/app/services/food_recipe_contracts.py pr4-reset-bundle/backend/app/services/
+          cp backend/app/services/food_recipes.py pr4-reset-bundle/backend/app/services/
+          cp backend/app/seed/food_recipes.py pr4-reset-bundle/backend/app/seed/
+          cp backend/app/migrations/versions/0024_food_recipe_catalogue.py pr4-reset-bundle/backend/app/migrations/versions/
+          cp backend/app/persistence/sqlalchemy_core/food_recipe_tables.py pr4-reset-bundle/backend/app/persistence/sqlalchemy_core/
+          cp backend/app/persistence/sqlalchemy_core/food_recipe_repositories.py pr4-reset-bundle/backend/app/persistence/sqlalchemy_core/
+          cp backend/app/persistence/sqlalchemy_core/food_recipe_uow.py pr4-reset-bundle/backend/app/persistence/sqlalchemy_core/
+          cp backend/app/tests/test_food_recipe_*.py pr4-reset-bundle/backend/app/tests/
+          cp backend/app/tests/persistence/test_food_recipe_repository.py pr4-reset-bundle/backend/app/tests/persistence/
+          cp scripts/build_pr4_recipe_seed.py pr4-reset-bundle/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pr4-reset-workspace
+          path: pr4-reset-bundle
+          if-no-files-found: error
+          retention-days: 2
