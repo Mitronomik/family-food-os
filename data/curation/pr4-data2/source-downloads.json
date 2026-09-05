@@ -209,6 +209,22 @@
       "retrieval_method": "Official page print download; saved representation rendered with Poppler and inspected; hash identifies saved representation, not byte-identical HTTP HTML",
       "sha256": "068b5b0d4c7e45ad498758501bcc8f67b7e5f69f9c27ea4db4af39b05cba069c",
       "visual_review": "Complete selected recipe and notices rendered and inspected in correction pass; see correction-anchor-candidates.json"
+    },
+    {
+      "source_url": "https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese/printable/print",
+      "artifact_name": "Beyond Basic Grilled Cheese.html",
+      "artifact_type": "BROWSER_SAVED_PRIMARY_HTML",
+      "retrieval_method": "Normal browser Save Page HTML-only / original PDF download from exact official URL, full text and notices reviewed, SHA-256 verified; no recreated source content.",
+      "sha256": "357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334",
+      "visual_review": "Actual artifact content/notes reviewed; PDF selected page rendered visually; native HTML fully inspected."
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
+      "artifact_name": "EasterMenu.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "retrieval_method": "Normal browser Save Page HTML-only / original PDF download from exact official URL, full text and notices reviewed, SHA-256 verified; no recreated source content.",
+      "sha256": "1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+      "visual_review": "Actual artifact content/notes reviewed; PDF selected page rendered visually; native HTML fully inspected."
     }
   ]
 }

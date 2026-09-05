@@ -3,12 +3,10 @@
   "checked_at": "2026-09-05",
   "status": "REVIEWED_SELECTION_PENDING_PROJECT_ACCEPT",
   "authority": "GitHub issue #12 and its Orchestrator clarification; corpus re-curation is authorized, no runtime consumer substitution is authorized.",
-  "interpretation": "Pairs identify technical fixture slots, not nutrition-equivalent servings or household substitution recommendations. Twenty-five original cards are replaced; five source cards remain. A rejected source form is not claimed absent from all Russian stores: qualifying evidence was not established in the reviewed panel. Exact source-form findings and failed product matches remain in original-corpus-market-review.json and research files.",
+  "interpretation": "Pairs identify fixture slots, not nutritional equivalence or household substitutions. Original/final partitions and counts derive exactly from these decisions. Two original keepers additionally rejected for required unquantified spray; neither a source limitation nor parchment solves this defect.",
   "kept_source_ids": [
     "CACFP6-CORN-EDAMAME-BLEND",
-    "CACFP6-LOCAL-HARVEST-BAKE",
     "CACFP6-TABBOULEH",
-    "CACFP6-HONEY-LIME-CHICKEN",
     "CACFP6-CREAMY-COLESLAW"
   ],
   "replacements": [
@@ -136,10 +134,20 @@
       "removed": "CACFP6-CAULIFLOWER-RICE",
       "replacement": "TNC6-APPLESAUCE",
       "reason": "Mandatory exclusion of ICN 2024 card: rights posture not cleared. Direct FNS Team Nutrition source has reviewed provenance and copying statement; no public-domain claim."
+    },
+    {
+      "removed": "CACFP6-HONEY-LIME-CHICKEN",
+      "replacement": "WIC1-BEYOND-BASIC-GRILLED-CHEESE",
+      "reason": "Required unquantified pan-release spray has no source-explicit alternative in Honey Lime Chicken. Replace with a genuine whole-wheat grilled-cheese/fresh-cauliflower sandwich using the WIC source-explicit nonstick/no-fat method; restores the lost meal anchor and adds sandwich coverage."
+    },
+    {
+      "removed": "CACFP6-LOCAL-HARVEST-BAKE",
+      "replacement": "SNAP6-HEAVENLY-DEVILED-EGGS",
+      "reason": "Required unquantified pan-release spray has no source-explicit alternative in Local Harvest Bake. Replace this vegetable side with a source-verified savory egg snack using its exact salt/pepper alternative to mustard. No seasoning amount or omission invented; not counted as a meal anchor."
     }
   ],
   "selection_tradeoffs": [
-    "Diverse technical fixture, not a certified weekly plan: 8 real anchors across egg, fish, legume, meat and poultry families; 3 breakfasts, 2 soups plus lentil one-dish meal and at most12 pure sides. Selection is not optimized primarily for minimum ingredient union. The green smoothie is a distinct source-backed snack, not an inflated anchor.",
+    "Diverse technical fixture, not a certified weekly plan: anchors span egg, fish, legume, meat, poultry and dairy. Source-backed sandwich replaces the invalid spray poultry card; deviled eggs remain a snack, not an inflated anchor. Exact diversity/meal-role counts derive from final reviewed recipes. Selection is not optimized primarily for minimum FoodIngredient union.",
     "Most qualified concepts have only one evidenced panel chain. They are deliberately RU_AVAILABLE, not claimed RU_MASS_MARKET; commodity three-chain positives are retained where verified. Family practicality is an equipment/preparation assessment, not tested taste, cost, health, storage or child-safety certification.",
     "The original 119-code union is historical. Exact new union is mechanically derived from the selected rows; global183 catalogue remains unchanged. Unselected optional additions and source alternatives remain in the ingredient audit, not silently converted into required fixture ingredients.",
     "Additional rejected candidates and failures (unquantified required seasoning, missing global codes, wrong-form foods, source retrieval/notice gaps) remain in candidate-review-v2 through v5. No rejected candidate is a production recipe."
@@ -199,6 +207,30 @@
         "replacement": "FNS4-OVEN-FRIED-FISH",
         "reason": "Replace another plain potato side with a second materially different fish preparation: breaded tilapia oven-baked using the measured source butter coating."
       }
+    ]
+  },
+  "direction_consumables_correction": {
+    "reviewed_head": "66a30403e3463248bb9b66e5a40920ef3fb136b5",
+    "retained": 28,
+    "replacements": [
+      {
+        "removed": "CACFP6-HONEY-LIME-CHICKEN",
+        "replacement": "WIC1-BEYOND-BASIC-GRILLED-CHEESE",
+        "reason": "Required unquantified pan-release spray has no source-explicit alternative in Honey Lime Chicken. Replace with a genuine whole-wheat grilled-cheese/fresh-cauliflower sandwich using the WIC source-explicit nonstick/no-fat method; restores the lost meal anchor and adds sandwich coverage."
+      },
+      {
+        "removed": "CACFP6-LOCAL-HARVEST-BAKE",
+        "replacement": "SNAP6-HEAVENLY-DEVILED-EGGS",
+        "reason": "Required unquantified pan-release spray has no source-explicit alternative in Local Harvest Bake. Replace this vegetable side with a source-verified savory egg snack using its exact salt/pepper alternative to mustard. No seasoning amount or omission invented; not counted as a meal anchor."
+      }
+    ],
+    "source_audit_files": [
+      "direction-consumables-audit-a.json",
+      "direction-consumables-audit-b.json"
+    ],
+    "rejected_candidate_ledgers": [
+      "consumables-anchor-alternatives.json",
+      "consumables-replacement-candidates.json"
     ]
   }
 }

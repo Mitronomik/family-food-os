@@ -8,7 +8,7 @@
     "checked_at": "2026-09-05",
     "base_sha": "26af749be0f6446de1d88cad2e2e03158a9830a0",
     "scope": "Versioned successor curation fixture only. Pending project ACCEPT + merge; do not feed to PR4 runtime until then. No production RecipeVersion rows are created by DATA2.",
-    "count_semantics": "Source rows include explicit omitted optional/alternative and discarded process-water audit rows. Selected rows preserve required/optional/conditional status. Market summaries count required non-water code/form concepts. All counts and summaries derive from reviewed source inputs. Equipment codes are first explicit operational-use order, never inferred."
+    "count_semantics": "Source rows include explicit omitted optional/alternative and discarded process-water audit rows. Selected rows preserve required/optional/conditional status. Market summaries count required non-water code/form concepts. All counts and summaries derive from reviewed source inputs. Equipment codes are first explicit operational-use order, never inferred. Direction/notes audit includes selected food references and resolved optional/alternative/process uses; distinct source rows are not double counted when used in several steps. All nine source-consistency dimensions are required."
   },
   "recipes": [
     {
@@ -90,90 +90,139 @@
         "SESAME_OIL",
         "SESAME_SEEDS"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "CACFP6-CORN-EDAMAME-BLEND:I1",
+          "CACFP6-CORN-EDAMAME-BLEND:I2",
+          "CACFP6-CORN-EDAMAME-BLEND:I3",
+          "CACFP6-CORN-EDAMAME-BLEND:I4",
+          "CACFP6-CORN-EDAMAME-BLEND:I5",
+          "CACFP6-CORN-EDAMAME-BLEND:I6",
+          "CACFP6-CORN-EDAMAME-BLEND:I7",
+          "CACFP6-CORN-EDAMAME-BLEND:I8",
+          "CACFP6-CORN-EDAMAME-BLEND:I9",
+          "CACFP6-CORN-EDAMAME-BLEND:I10"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "unresolved_required": 0
+      }
     },
     {
-      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
-      "source_section": "Complete six-serving card",
-      "source_attribution": "USDA FNS CACFP Home Childcare — Side Dishes; Local Harvest Bake",
+      "source_collection": "SNAP-Ed Healthy Thrifty Holiday Menus — Easter, direct FNS-hosted PDF",
+      "source_section": "Easter PDF page 3, Heavenly Deviled Eggs",
+      "source_attribution": "ONIE Project - Oklahoma Nutrition Information and Education. Simple Healthy Recipes.",
       "rights_review": {
         "status": "REVIEWED",
         "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Direct FNS CACFP card reviewed under the project risk classification approved in issue #12 and recipe-localization-and-substitution.md. Not a blanket public-domain or unrestricted commercial/derivative license assertion. Preserve attribution; no source photographs, logos or trademarks imported.",
-        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Local_Harvest_Bake_6_Servings.pdf",
+        "basis": "Approved narrow direct-FNS project risk posture, issue #12 and recipe-localization-and-substitution.md; no federal-employee authorship inference, blanket public-domain assertion or unrestricted commercial/derivative rights. Preserve actual attribution; no photos/logos/marks imported.",
+        "evidence_url": "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
         "evidence_urls": [
-          "https://fns-prod.azureedge.us/sites/default/files/resource-files/Local_Harvest_Bake_6_Servings.pdf",
+          "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
           "https://github.com/Mitronomik/family-food-os/issues/12"
         ],
-        "notices_reviewed": "Complete downloaded card and source-equipment audit reviewed; no recipe-specific third-party copyright/licensing restriction found. ICN cards excluded independently."
+        "notices_reviewed": "All eight pages and selected page 3 reviewed. ONIE Project — Oklahoma Nutrition Information and Education, Simple Healthy Recipes attribution retained. No source-specific restrictive notice or affirmative unrestricted commercial/derivative grant visible; lack of a notice is not a rights grant."
       },
       "source_artifact": {
-        "artifact_name": "Local_Harvest_Bake_6_Servings.pdf",
+        "artifact_name": "EasterMenu.pdf",
         "artifact_type": "DOWNLOADED_PRIMARY_PDF",
-        "retrieval_method": "Historical bounded PDF download, SHA-256 and full card review recorded in source-equipment-audit.json"
+        "retrieval_method": "Normal browser Save Page HTML-only / original PDF download from exact official URL, full text and notices reviewed, SHA-256 verified; no recreated source content."
       },
-      "source_quality_flags": [],
+      "source_quality_flags": [
+        "REVIEWABLE_SOURCE_LIMITATIONS"
+      ],
       "checked_at": "2026-09-05",
       "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
       "selection": {
-        "decision": "KEEP",
-        "reason": "Existing direct-FNS source passes the reviewed source-specific purchase-form evidence; preserve original ingredient transcription.",
-        "replaces_source_id": null
+        "decision": "REPLACE",
+        "reason": "Required unquantified pan-release spray has no source-explicit alternative in Local Harvest Bake. Replace this vegetable side with a source-verified savory egg snack using its exact salt/pepper alternative to mustard. No seasoning amount or omission invented; not counted as a meal anchor.",
+        "replaces_source_id": "CACFP6-LOCAL-HARVEST-BAKE"
       },
-      "recipe_name": "Local Harvest Bake",
+      "recipe_source_id": "SNAP6-HEAVENLY-DEVILED-EGGS",
+      "recipe_name": "Heavenly Deviled Eggs",
       "source_servings": 6,
-      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Local_Harvest_Bake_6_Servings.pdf",
-      "source_sha256": "340444ab1ec4f626a34d6a2737fa04d12481ef21f8850ad7c1199c49c2b3786b",
-      "meal_type_code": "side",
-      "curation_role": "SIDE_DISH",
+      "source_url": "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
+      "source_sha256": "1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+      "meal_type_code": "other",
+      "curation_role": "SNACK",
       "meal_anchor": false,
       "substantial_one_bowl": false,
-      "pure_side_dish": true,
-      "primary_protein_family": null,
-      "protein_evidence_codes": [],
-      "role_evidence": {
-        "source_words": "a hearty vegetable side",
-        "source_section": "Complete six-serving card",
-        "curator_rationale": "Source introduction expressly says vegetable side; squash, beet and sweet potato with oil and seasoning. No meat ingredient."
-      },
-      "diversity_contribution": "Oven-baked butternut squash, beet and sweet potato vegetable side.",
+      "pure_side_dish": false,
+      "primary_protein_family": "EGG",
+      "protein_evidence_codes": [
+        "EGG"
+      ],
+      "diversity_contribution": "Boiled and filled shell eggs as a savory snack/appetizer; not counted as a meal anchor. Distinct from the baked frittata and scrambled egg dishes.",
+      "source_limits": [
+        "Source directions name dressing while the ingredient table names light mayonnaise. Preserve that wording without introducing a second ingredient.",
+        "The source PDF has no separate prep/cook/total-time fields. The twelve-minute simmer is not a full preparation-time estimate.",
+        "Do not infer a knife or scissors from cut/split verbs: these objects are not named in the selected primary PDF recipe.",
+        "Actual PDF hash and visual recipe-page review are complete. All eight extracted pages were checked; no recipe-specific copyright/reuse restriction appeared. ONIE is credited, not declared a federal employee. No nutrition values from the unmodified source recipe are asserted for the selected salt/pepper alternative."
+      ],
       "source_times": {
-        "preparation": "20 minutes",
-        "cooking": "25 minutes",
-        "note": "Header values transcribed exactly; not recomputed from directions, not assumed active time or total elapsed time."
+        "preparation": null,
+        "cooking": null,
+        "total": null,
+        "note": "No header times stated; direction 2 gives 12-minute simmer, not total elapsed time."
+      },
+      "selected_ingredient_codes": [
+        "BLACK_PEPPER",
+        "EGG",
+        "MAYONNAISE_LOW_FAT",
+        "SALT"
+      ],
+      "review_basis": "Complete actual primary artifact review; consumables replacement ledgers and direction-consumables-audit.json cover all nine source-consistency dimensions.",
+      "role_evidence": {
+        "source_words": "Heavenly Deviled Eggs; Yield: 6 Servings",
+        "source_section": "Easter PDF page 3",
+        "curator_rationale": "Six filled shell eggs across six servings are a savory snack/appetizer, not inflated into a meal anchor."
       },
       "equipment": [
         {
           "position": 1,
-          "equipment_code": "OVEN",
-          "evidence_snippet": "Preheat oven",
-          "source_section": "Page 1, step 1"
+          "equipment_code": "SAUCEPAN",
+          "evidence_snippet": "saucepan",
+          "source_section": "Instruction 1"
         },
         {
           "position": 2,
-          "equipment_code": "BOWL",
-          "evidence_snippet": "medium size mixing bowl",
-          "source_section": "Page 1, step 2"
-        },
-        {
-          "position": 3,
-          "equipment_code": "BAKING_PAN",
-          "evidence_snippet": "baking pan",
-          "source_section": "Page 1, step 3"
+          "equipment_code": "ZIPPER_LOCK_BAG",
+          "evidence_snippet": "small zipper-lock plastic bag",
+          "source_section": "Instructions 6–7 mixing and piping"
         }
       ],
-      "source_limits": [],
-      "recipe_source_id": "CACFP6-LOCAL-HARVEST-BAKE",
-      "selected_ingredient_codes": [
-        "BEET",
-        "BUTTERNUT_SQUASH",
-        "GARLIC",
-        "OLIVE_OIL",
-        "PARSLEY_DRIED",
-        "SALT",
-        "SWEET_POTATO"
-      ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "SNAP6-HEAVENLY-DEVILED-EGGS:I1",
+          "SNAP6-HEAVENLY-DEVILED-EGGS:I2",
+          "SNAP6-HEAVENLY-DEVILED-EGGS:I3",
+          "SNAP6-HEAVENLY-DEVILED-EGGS:N1",
+          "SNAP6-HEAVENLY-DEVILED-EGGS:N2",
+          "SNAP6-HEAVENLY-DEVILED-EGGS:D1",
+          "SNAP6-HEAVENLY-DEVILED-EGGS:D2",
+          "SNAP6-HEAVENLY-DEVILED-EGGS:D3"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          4,
+          5
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
@@ -262,96 +311,147 @@
         "TOMATO",
         "WATER"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "CACFP6-TABBOULEH:I1",
+          "CACFP6-TABBOULEH:I2",
+          "CACFP6-TABBOULEH:I3",
+          "CACFP6-TABBOULEH:I4",
+          "CACFP6-TABBOULEH:I5",
+          "CACFP6-TABBOULEH:I6",
+          "CACFP6-TABBOULEH:I7",
+          "CACFP6-TABBOULEH:I8",
+          "CACFP6-TABBOULEH:I9",
+          "CACFP6-TABBOULEH:I10",
+          "CACFP6-TABBOULEH:I11",
+          "CACFP6-TABBOULEH:I12",
+          "CACFP6-TABBOULEH:I13",
+          "CACFP6-TABBOULEH:D1"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        "unresolved_required": 0
+      }
     },
     {
-      "source_collection": "USDA FNS CACFP Home Childcare — Main Dishes",
-      "source_section": "Complete six-serving card",
-      "source_attribution": "USDA FNS CACFP Home Childcare — Main Dishes; Honey Lime Chicken",
+      "source_collection": "DIRECT_FNS_WIC_WORKS",
+      "source_section": "Complete native printable HTML",
+      "source_attribution": "USDA Food and Nutrition Service, WIC Works Resource System. Complete native printable source identifies WIC Works and the canonical source URL; no separate contributor is identified in this representation.",
       "rights_review": {
         "status": "REVIEWED",
         "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Direct FNS CACFP card reviewed under the project risk classification approved in issue #12 and recipe-localization-and-substitution.md. Not a blanket public-domain or unrestricted commercial/derivative license assertion. Preserve attribution; no source photographs, logos or trademarks imported.",
-        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Honey_Lime_Chicken_6_Servings.pdf",
+        "basis": "Approved narrow direct-FNS project risk posture, issue #12 and recipe-localization-and-substitution.md; no federal-employee authorship inference, blanket public-domain assertion or unrestricted commercial/derivative rights. Preserve actual attribution; no photos/logos/marks imported.",
+        "evidence_url": "https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese/printable/print",
         "evidence_urls": [
-          "https://fns-prod.azureedge.us/sites/default/files/resource-files/Honey_Lime_Chicken_6_Servings.pdf",
+          "https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese/printable/print",
           "https://github.com/Mitronomik/family-food-os/issues/12"
         ],
-        "notices_reviewed": "Complete downloaded card and source-equipment audit reviewed; no recipe-specific third-party copyright/licensing restriction found. ICN cards excluded independently."
+        "notices_reviewed": "Complete actual printable HTML has WIC Works header and canonical source URL footer. No separate contributor, recipe-specific restriction, copyright notice, or affirmative commercial/derivative grant appears. This absence is not a rights grant; approved narrow direct-FNS project posture is preserved without public-domain or unrestricted-rights claims."
       },
       "source_artifact": {
-        "artifact_name": "Honey_Lime_Chicken_6_Servings.pdf",
-        "artifact_type": "DOWNLOADED_PRIMARY_PDF",
-        "retrieval_method": "Historical bounded PDF download, SHA-256 and full card review recorded in source-equipment-audit.json"
+        "artifact_name": "Beyond Basic Grilled Cheese.html",
+        "artifact_type": "BROWSER_SAVED_PRIMARY_HTML",
+        "retrieval_method": "Normal browser Save Page HTML-only / original PDF download from exact official URL, full text and notices reviewed, SHA-256 verified; no recreated source content."
       },
-      "source_quality_flags": [],
+      "source_quality_flags": [
+        "REVIEWABLE_SOURCE_LIMITATIONS"
+      ],
       "checked_at": "2026-09-05",
       "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
       "selection": {
-        "decision": "KEEP",
-        "reason": "Existing direct-FNS source passes the reviewed source-specific purchase-form evidence; preserve original ingredient transcription.",
-        "replaces_source_id": null
+        "decision": "REPLACE",
+        "reason": "Required unquantified pan-release spray has no source-explicit alternative in Honey Lime Chicken. Replace with a genuine whole-wheat grilled-cheese/fresh-cauliflower sandwich using the WIC source-explicit nonstick/no-fat method; restores the lost meal anchor and adds sandwich coverage.",
+        "replaces_source_id": "CACFP6-HONEY-LIME-CHICKEN"
       },
-      "recipe_name": "Honey Lime Chicken",
-      "source_servings": 6,
-      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Honey_Lime_Chicken_6_Servings.pdf",
-      "source_sha256": "df6b0bf8dd73975119a3d0b3ad1a9a447bc611e8dc9076c1548401e2cbcde634",
-      "meal_type_code": "main",
-      "curation_role": "MAIN_DISH",
+      "recipe_source_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE",
+      "recipe_name": "Beyond Basic Grilled Cheese",
+      "source_servings": 1,
+      "source_url": "https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese/printable/print",
+      "source_sha256": "357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334",
+      "meal_type_code": "sandwich",
+      "curation_role": "SANDWICH",
       "meal_anchor": true,
       "substantial_one_bowl": false,
       "pure_side_dish": false,
-      "primary_protein_family": "POULTRY",
+      "primary_protein_family": "DAIRY",
       "protein_evidence_codes": [
-        "CHICKEN_THIGH"
+        "CHEESE_CHEDDAR"
       ],
-      "role_evidence": {
-        "source_words": "tender baked chicken thighs",
-        "source_section": "Complete six-serving card",
-        "curator_rationale": "Six meat portions from 1 lb 7 oz raw boneless skinless chicken; poultry is the central food."
-      },
-      "diversity_contribution": "Oven-baked chicken thighs with measured honey, lime juice and zest.",
+      "diversity_contribution": "Whole-wheat grilled-cheese and fresh-cauliflower sandwich; natural cheddar is the principal protein, and the source-explicit nonstick method uses no added fat.",
+      "source_limits": [
+        "Main directions imply closing sandwich but do not separately state placing second bread slice; ingredient list explicitly has 2 slices and instruction 7 grills sandwich. Preserve source wording; do not author a new step.",
+        "Generic cheese permits cheddar; named examples are non-exhaustive. Do not claim cheese quantity is grams or corresponds to a fixed retailer package.",
+        "Half-cup fresh vegetables of choice permits fresh cauliflower as the sole vegetable; no roast yields, ingredient ratios or cooking aids inferred.",
+        "Fresh cauliflower is a preparation selection; use reviewed fresh CAULIFLOWER market evidence, not frozen smoothie evidence.",
+        "DAIRY is curation-only protein-family metadata supported by selected CHEESE_CHEDDAR, not an extension of PR4 MealTypeCode or any runtime schema.",
+        "Equipment notes list spoon, but its only explicit directional use is omitted optional harissa spreading; selected equipment retains nonstick pan and knife only. No replacement spoon action invented."
+      ],
       "source_times": {
-        "preparation": "25 minutes",
-        "cooking": "30 minutes",
-        "note": "Header values transcribed exactly; not recomputed from directions, not assumed active time or total elapsed time."
+        "preparation": "5 minutes",
+        "cooking": "8 minutes",
+        "total": "13 minutes",
+        "note": "Source header times retained exactly; direction interval not used to invent header time."
+      },
+      "selected_ingredient_codes": [
+        "BREAD_WHOLE_WHEAT",
+        "CAULIFLOWER",
+        "CHEESE_CHEDDAR"
+      ],
+      "review_basis": "Complete actual primary artifact review; consumables replacement ledgers and direction-consumables-audit.json cover all nine source-consistency dimensions.",
+      "role_evidence": {
+        "source_words": "Grill the sandwich three minutes on each side",
+        "source_section": "Instruction 7 and one-serving header",
+        "curator_rationale": "Two whole-wheat slices, 3/4 cup cheese and vegetables form a source-backed savory sandwich meal anchor; DAIRY is curation-only evidence, not runtime enum."
       },
       "equipment": [
         {
           "position": 1,
-          "equipment_code": "OVEN",
-          "evidence_snippet": "Preheat oven",
-          "source_section": "Page 1, step 1"
+          "equipment_code": "NONSTICK_PAN",
+          "evidence_snippet": "non-stick pan (and skip the butter)",
+          "source_section": "Introduction and instruction 2"
         },
         {
           "position": 2,
-          "equipment_code": "BOWL",
-          "evidence_snippet": "large bowl",
-          "source_section": "Page 1, step 2"
-        },
-        {
-          "position": 3,
-          "equipment_code": "BAKING_PAN",
-          "evidence_snippet": "baking pan",
-          "source_section": "Page 1, step 3"
+          "equipment_code": "KNIFE",
+          "evidence_snippet": "Knife",
+          "source_section": "Equipment notes and instruction 7 operational diagonal cut"
         }
       ],
-      "source_limits": [
-        {
-          "source_fact": "Source header cook time 30 minutes, oven directions 30–35 minutes. The step 2 Set aside for step 2 reference is a source typo.",
-          "review_decision": "PRESERVE_SOURCE_HEADER_AND_STAGE_RANGE_NO_REWRITTEN_STEP"
-        }
-      ],
-      "recipe_source_id": "CACFP6-HONEY-LIME-CHICKEN",
-      "selected_ingredient_codes": [
-        "BLACK_PEPPER",
-        "CHICKEN_THIGH",
-        "HONEY",
-        "LIME",
-        "LIME_JUICE",
-        "SALT"
-      ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "WIC1-BEYOND-BASIC-GRILLED-CHEESE:I1",
+          "WIC1-BEYOND-BASIC-GRILLED-CHEESE:I2",
+          "WIC1-BEYOND-BASIC-GRILLED-CHEESE:I3",
+          "WIC1-BEYOND-BASIC-GRILLED-CHEESE:I4",
+          "WIC1-BEYOND-BASIC-GRILLED-CHEESE:I5",
+          "WIC1-BEYOND-BASIC-GRILLED-CHEESE:D1",
+          "WIC1-BEYOND-BASIC-GRILLED-CHEESE:D2",
+          "WIC1-BEYOND-BASIC-GRILLED-CHEESE:D3",
+          "WIC1-BEYOND-BASIC-GRILLED-CHEESE:D4"
+        ],
+        "required_edible_source_positions": [
+          1,
+          3,
+          4
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
@@ -431,7 +531,37 @@
         "SALT",
         "YOGURT_PLAIN_LOW_FAT"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "CACFP6-CREAMY-COLESLAW:I1",
+          "CACFP6-CREAMY-COLESLAW:I2",
+          "CACFP6-CREAMY-COLESLAW:I3",
+          "CACFP6-CREAMY-COLESLAW:I4",
+          "CACFP6-CREAMY-COLESLAW:I5",
+          "CACFP6-CREAMY-COLESLAW:I6",
+          "CACFP6-CREAMY-COLESLAW:I7",
+          "CACFP6-CREAMY-COLESLAW:I8",
+          "CACFP6-CREAMY-COLESLAW:I9",
+          "CACFP6-CREAMY-COLESLAW:I10",
+          "CACFP6-CREAMY-COLESLAW:I11"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS Team Nutrition Cooks! — Family Handouts",
@@ -550,7 +680,36 @@
         "OLIVE_OIL",
         "SPINACH"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "TNC6-EGGS-SPINACH:I1",
+          "TNC6-EGGS-SPINACH:I2",
+          "TNC6-EGGS-SPINACH:I3",
+          "TNC6-EGGS-SPINACH:I4",
+          "TNC6-EGGS-SPINACH:I5",
+          "TNC6-EGGS-SPINACH:I6",
+          "TNC6-EGGS-SPINACH:I7",
+          "TNC6-EGGS-SPINACH:I8",
+          "TNC6-EGGS-SPINACH:I9",
+          "TNC6-EGGS-SPINACH:I10",
+          "TNC6-EGGS-SPINACH:I11",
+          "TNC6-EGGS-SPINACH:I12",
+          "TNC6-EGGS-SPINACH:D1",
+          "TNC6-EGGS-SPINACH:D2",
+          "TNC6-EGGS-SPINACH:D3",
+          "TNC6-EGGS-SPINACH:D4",
+          "TNC6-EGGS-SPINACH:D5",
+          "TNC6-EGGS-SPINACH:D6"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS Team Nutrition Cooks! — Family Handouts",
@@ -655,7 +814,27 @@
         "APPLE",
         "WATER"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "TNC6-APPLESAUCE:I1",
+          "TNC6-APPLESAUCE:I2",
+          "TNC6-APPLESAUCE:I3",
+          "TNC6-APPLESAUCE:I4",
+          "TNC6-APPLESAUCE:D1",
+          "TNC6-APPLESAUCE:D2",
+          "TNC6-APPLESAUCE:D3",
+          "TNC6-APPLESAUCE:D4",
+          "TNC6-APPLESAUCE:D5",
+          "TNC6-APPLESAUCE:D6"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "recipe_source_id": "SNAP4-SPANISH-FRITTATA",
@@ -774,7 +953,28 @@
         "SALT",
         "SUNFLOWER_OIL"
       ],
-      "review_basis": "correction-anchor-candidates.json: actual primary PDF text, rendered pages, notices and factual fields independently reviewed"
+      "review_basis": "correction-anchor-candidates.json: actual primary PDF text, rendered pages, notices and factual fields independently reviewed",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "SNAP4-SPANISH-FRITTATA:I1",
+          "SNAP4-SPANISH-FRITTATA:I2",
+          "SNAP4-SPANISH-FRITTATA:I3",
+          "SNAP4-SPANISH-FRITTATA:I4",
+          "SNAP4-SPANISH-FRITTATA:I5",
+          "SNAP4-SPANISH-FRITTATA:I6",
+          "SNAP4-SPANISH-FRITTATA:I7"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "recipe_source_id": "FNS5-BAKED-LENTILS-CASSEROLE",
@@ -869,7 +1069,32 @@
         "TOMATO_CANNED_NO_SALT",
         "WATER"
       ],
-      "review_basis": "correction-anchor-candidates.json: actual primary PDF text, rendered pages, notices and factual fields independently reviewed"
+      "review_basis": "correction-anchor-candidates.json: actual primary PDF text, rendered pages, notices and factual fields independently reviewed",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "FNS5-BAKED-LENTILS-CASSEROLE:I1",
+          "FNS5-BAKED-LENTILS-CASSEROLE:I2",
+          "FNS5-BAKED-LENTILS-CASSEROLE:I3",
+          "FNS5-BAKED-LENTILS-CASSEROLE:I4",
+          "FNS5-BAKED-LENTILS-CASSEROLE:I5",
+          "FNS5-BAKED-LENTILS-CASSEROLE:I6",
+          "FNS5-BAKED-LENTILS-CASSEROLE:I7",
+          "FNS5-BAKED-LENTILS-CASSEROLE:I8",
+          "FNS5-BAKED-LENTILS-CASSEROLE:I9",
+          "FNS5-BAKED-LENTILS-CASSEROLE:D1"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          6,
+          7,
+          8,
+          9
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS FDPIR — A Harvest of Recipes with USDA Foods (FNS-430)",
@@ -942,7 +1167,32 @@
         "SUNFLOWER_OIL",
         "TOMATO"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "HARV6-FRESH-TOMATO-SALSA:I1",
+          "HARV6-FRESH-TOMATO-SALSA:I2",
+          "HARV6-FRESH-TOMATO-SALSA:I3",
+          "HARV6-FRESH-TOMATO-SALSA:I4",
+          "HARV6-FRESH-TOMATO-SALSA:I5",
+          "HARV6-FRESH-TOMATO-SALSA:I6",
+          "HARV6-FRESH-TOMATO-SALSA:I7",
+          "HARV6-FRESH-TOMATO-SALSA:I8",
+          "HARV6-FRESH-TOMATO-SALSA:I9",
+          "HARV6-FRESH-TOMATO-SALSA:D1"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS FDPIR — A Harvest of Recipes with USDA Foods (FNS-430)",
@@ -1023,7 +1273,33 @@
         "SALT",
         "SUNFLOWER_OIL"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "HARV6-GARDEN-PASTA-SALAD:I1",
+          "HARV6-GARDEN-PASTA-SALAD:I2",
+          "HARV6-GARDEN-PASTA-SALAD:I3",
+          "HARV6-GARDEN-PASTA-SALAD:I4",
+          "HARV6-GARDEN-PASTA-SALAD:I5",
+          "HARV6-GARDEN-PASTA-SALAD:I6",
+          "HARV6-GARDEN-PASTA-SALAD:I7",
+          "HARV6-GARDEN-PASTA-SALAD:I8",
+          "HARV6-GARDEN-PASTA-SALAD:I9",
+          "HARV6-GARDEN-PASTA-SALAD:D1"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
@@ -1095,7 +1371,29 @@
         "SPINACH",
         "SUGAR"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "SNAP6-SPINACH-APPLE-SALAD:I1",
+          "SNAP6-SPINACH-APPLE-SALAD:I2",
+          "SNAP6-SPINACH-APPLE-SALAD:I3",
+          "SNAP6-SPINACH-APPLE-SALAD:I4",
+          "SNAP6-SPINACH-APPLE-SALAD:I5",
+          "SNAP6-SPINACH-APPLE-SALAD:I6",
+          "SNAP6-SPINACH-APPLE-SALAD:I7"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
@@ -1185,7 +1483,29 @@
         "PEACH",
         "SUGAR"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "SNAP6-PEACH-CRISP:I1",
+          "SNAP6-PEACH-CRISP:I2",
+          "SNAP6-PEACH-CRISP:I3",
+          "SNAP6-PEACH-CRISP:I4",
+          "SNAP6-PEACH-CRISP:I5",
+          "SNAP6-PEACH-CRISP:I6",
+          "SNAP6-PEACH-CRISP:I7"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
@@ -1263,7 +1583,29 @@
         "SALT",
         "WATER"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "SNAP6-SEARED-GREENS:I1",
+          "SNAP6-SEARED-GREENS:I2",
+          "SNAP6-SEARED-GREENS:I3",
+          "SNAP6-SEARED-GREENS:I4",
+          "SNAP6-SEARED-GREENS:I5",
+          "SNAP6-SEARED-GREENS:I6",
+          "SNAP6-SEARED-GREENS:I7"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
@@ -1333,7 +1675,28 @@
         "OLIVE_OIL",
         "TOMATO"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "SNAP8-SOMALI-SUMMER-SALAD:I1",
+          "SNAP8-SOMALI-SUMMER-SALAD:I2",
+          "SNAP8-SOMALI-SUMMER-SALAD:I3",
+          "SNAP8-SOMALI-SUMMER-SALAD:I4",
+          "SNAP8-SOMALI-SUMMER-SALAD:I5",
+          "SNAP8-SOMALI-SUMMER-SALAD:I6",
+          "SNAP8-SOMALI-SUMMER-SALAD:I7"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "recipe_source_id": "FNS2-ORANGE-PORK-CHOPS",
@@ -1425,7 +1788,28 @@
         "SUNFLOWER_OIL",
         "SWEET_POTATO"
       ],
-      "review_basis": "correction-anchor-candidates.json: actual primary PDF text, rendered pages, notices and factual fields independently reviewed"
+      "review_basis": "correction-anchor-candidates.json: actual primary PDF text, rendered pages, notices and factual fields independently reviewed",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "FNS2-ORANGE-PORK-CHOPS:LIST-01",
+          "FNS2-ORANGE-PORK-CHOPS:LIST-02",
+          "FNS2-ORANGE-PORK-CHOPS:LIST-03",
+          "FNS2-ORANGE-PORK-CHOPS:LIST-04",
+          "FNS2-ORANGE-PORK-CHOPS:LIST-05",
+          "FNS2-ORANGE-PORK-CHOPS:LIST-06",
+          "FNS2-ORANGE-PORK-CHOPS:LIST-07",
+          "FNS2-ORANGE-PORK-CHOPS:SEASONINGS",
+          "FNS2-ORANGE-PORK-CHOPS:SIDE"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS WIC Works — Recipes",
@@ -1536,7 +1920,31 @@
         "OLIVE_OIL",
         "SALT"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "WIC4-BUTTERNUT-SOUP:LIST-01",
+          "WIC4-BUTTERNUT-SOUP:LIST-02",
+          "WIC4-BUTTERNUT-SOUP:LIST-03",
+          "WIC4-BUTTERNUT-SOUP:LIST-04",
+          "WIC4-BUTTERNUT-SOUP:LIST-05",
+          "WIC4-BUTTERNUT-SOUP:LIST-06",
+          "WIC4-BUTTERNUT-SOUP:PARCHMENT",
+          "WIC4-BUTTERNUT-SOUP:TOWEL",
+          "WIC4-BUTTERNUT-SOUP:SEEDS",
+          "WIC4-BUTTERNUT-SOUP:VEGETARIAN",
+          "WIC4-BUTTERNUT-SOUP:OIL",
+          "WIC4-BUTTERNUT-SOUP:TOPPING"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          5
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS WIC Works — Recipes",
@@ -1633,7 +2041,29 @@
         "OATS_ROLLED",
         "YOGURT_PLAIN_LOW_FAT"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:LIST-01",
+          "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:LIST-02",
+          "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:LIST-03",
+          "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:LIST-04",
+          "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:LIST-05",
+          "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:LIST-06",
+          "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:THINNING",
+          "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:PB-VARIANT",
+          "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:PEACH-VARIANT",
+          "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:RAISIN-VARIANT",
+          "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:MIXINS",
+          "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:DRIED-FRUIT"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "recipe_source_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
@@ -1711,7 +2141,29 @@
         "STRAWBERRY",
         "YOGURT_PLAIN_LOW_FAT"
       ],
-      "review_basis": "correction-anchor-candidates.json: actual primary PDF text, rendered pages, notices and factual fields independently reviewed"
+      "review_basis": "correction-anchor-candidates.json: actual primary PDF text, rendered pages, notices and factual fields independently reviewed",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "SNAP2-SIMPLE-GREEN-SMOOTHIE:LIST-01",
+          "SNAP2-SIMPLE-GREEN-SMOOTHIE:LIST-02",
+          "SNAP2-SIMPLE-GREEN-SMOOTHIE:LIST-03",
+          "SNAP2-SIMPLE-GREEN-SMOOTHIE:LIST-04",
+          "SNAP2-SIMPLE-GREEN-SMOOTHIE:LIST-05",
+          "SNAP2-SIMPLE-GREEN-SMOOTHIE:LIST-06",
+          "SNAP2-SIMPLE-GREEN-SMOOTHIE:LIST-07",
+          "SNAP2-SIMPLE-GREEN-SMOOTHIE:LIST-08"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
@@ -1780,7 +2232,25 @@
         "PEACH",
         "PINEAPPLE"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "SNAP3-GRILLED-FRUIT:LIST-01",
+          "SNAP3-GRILLED-FRUIT:LIST-02",
+          "SNAP3-GRILLED-FRUIT:LIST-03",
+          "SNAP3-GRILLED-FRUIT:WASH-WATER",
+          "SNAP3-GRILLED-FRUIT:SOAP",
+          "SNAP3-GRILLED-FRUIT:SOAK-WATER",
+          "SNAP3-GRILLED-FRUIT:WOODEN-SKEWER"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS WIC Works — Recipes",
@@ -1871,7 +2341,34 @@
         "SPINACH",
         "YOGURT_PLAIN_LOW_FAT"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:LIST-01",
+          "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:LIST-02",
+          "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:LIST-03",
+          "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:LIST-04",
+          "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:LIST-05",
+          "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:LIST-06",
+          "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:LIST-07",
+          "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:LIST-08",
+          "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:PROTEIN-SIDE",
+          "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:FRUIT-VARIANTS",
+          "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:FRESH-CAULIFLOWER",
+          "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:RICED-CAULIFLOWER"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
@@ -1941,7 +2438,21 @@
         "PEAR",
         "SUGAR"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "SNAP4-PEAR-ORANGE-SAUCE:LIST-01",
+          "SNAP4-PEAR-ORANGE-SAUCE:LIST-02",
+          "SNAP4-PEAR-ORANGE-SAUCE:LIST-03"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
@@ -2024,7 +2535,39 @@
         "SALT",
         "WATER"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-01",
+          "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-02",
+          "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-03",
+          "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-04",
+          "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-05",
+          "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-06",
+          "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-07",
+          "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-08",
+          "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-09",
+          "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-10",
+          "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-11",
+          "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-12"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "recipe_source_id": "FNS4-OVEN-FRIED-FISH",
@@ -2123,7 +2666,31 @@
         "SALT",
         "TILAPIA_RAW"
       ],
-      "review_basis": "correction-anchor-candidates.json: actual primary PDF text, rendered pages, notices and factual fields independently reviewed"
+      "review_basis": "correction-anchor-candidates.json: actual primary PDF text, rendered pages, notices and factual fields independently reviewed",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "FNS4-OVEN-FRIED-FISH:LIST-01",
+          "FNS4-OVEN-FRIED-FISH:LIST-02",
+          "FNS4-OVEN-FRIED-FISH:LIST-03",
+          "FNS4-OVEN-FRIED-FISH:LIST-04",
+          "FNS4-OVEN-FRIED-FISH:LIST-05",
+          "FNS4-OVEN-FRIED-FISH:LIST-06",
+          "FNS4-OVEN-FRIED-FISH:LIST-07",
+          "FNS4-OVEN-FRIED-FISH:PAN-BUTTER",
+          "FNS4-OVEN-FRIED-FISH:CITRUS",
+          "FNS4-OVEN-FRIED-FISH:SIDE"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
@@ -2194,7 +2761,30 @@
         "SALT",
         "WATER"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "SNAP8-APPLE-CARROT-SOUP:LIST-01",
+          "SNAP8-APPLE-CARROT-SOUP:LIST-02",
+          "SNAP8-APPLE-CARROT-SOUP:LIST-03",
+          "SNAP8-APPLE-CARROT-SOUP:LIST-04",
+          "SNAP8-APPLE-CARROT-SOUP:LIST-05",
+          "SNAP8-APPLE-CARROT-SOUP:LIST-06",
+          "SNAP8-APPLE-CARROT-SOUP:LIST-07",
+          "SNAP8-APPLE-CARROT-SOUP:WASH-WATER",
+          "SNAP8-APPLE-CARROT-SOUP:SOAP"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          5,
+          6,
+          7
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
@@ -2273,7 +2863,29 @@
         "WALNUTS_RAW",
         "YOGURT_GREEK_NONFAT"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "SNAP6-WALDORF-SALAD:LIST-01",
+          "SNAP6-WALDORF-SALAD:LIST-02",
+          "SNAP6-WALDORF-SALAD:LIST-03",
+          "SNAP6-WALDORF-SALAD:LIST-04",
+          "SNAP6-WALDORF-SALAD:LIST-05",
+          "SNAP6-WALDORF-SALAD:LIST-06",
+          "SNAP6-WALDORF-SALAD:LIST-07"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
@@ -2349,7 +2961,29 @@
         "RICE_BROWN",
         "WATER"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "SNAP4-BROWN-RICE-PILAF:LIST-01",
+          "SNAP4-BROWN-RICE-PILAF:LIST-02",
+          "SNAP4-BROWN-RICE-PILAF:LIST-03",
+          "SNAP4-BROWN-RICE-PILAF:LIST-04",
+          "SNAP4-BROWN-RICE-PILAF:LIST-05",
+          "SNAP4-BROWN-RICE-PILAF:LIST-06",
+          "SNAP4-BROWN-RICE-PILAF:WASH-WATER",
+          "SNAP4-BROWN-RICE-PILAF:SOAP"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
@@ -2433,7 +3067,29 @@
         "SUNFLOWER_OIL",
         "WALNUTS_RAW"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "SNAP5-KALE-NUTS-RAISINS:LIST-01",
+          "SNAP5-KALE-NUTS-RAISINS:LIST-02",
+          "SNAP5-KALE-NUTS-RAISINS:LIST-03",
+          "SNAP5-KALE-NUTS-RAISINS:LIST-04",
+          "SNAP5-KALE-NUTS-RAISINS:LIST-05",
+          "SNAP5-KALE-NUTS-RAISINS:LIST-06",
+          "SNAP5-KALE-NUTS-RAISINS:WASH-WATER",
+          "SNAP5-KALE-NUTS-RAISINS:SOAP",
+          "SNAP5-KALE-NUTS-RAISINS:SALT"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS — Food and Physical Activity Checklist",
@@ -2528,7 +3184,35 @@
         "THYME_DRIED",
         "WATER"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-01",
+          "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-02",
+          "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-03",
+          "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-04",
+          "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-05",
+          "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-06",
+          "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-07",
+          "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-08",
+          "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-09",
+          "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-10"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "unresolved_required": 0
+      }
     },
     {
       "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
@@ -2615,7 +3299,27 @@
         "LEMON",
         "SALT"
       ],
-      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions",
+      "direction_only_consumables": {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [
+          "SNAP4-DILLED-FISH-FILLETS:LIST-01",
+          "SNAP4-DILLED-FISH-FILLETS:LIST-02",
+          "SNAP4-DILLED-FISH-FILLETS:LIST-03",
+          "SNAP4-DILLED-FISH-FILLETS:LIST-04",
+          "SNAP4-DILLED-FISH-FILLETS:LIST-05",
+          "SNAP4-DILLED-FISH-FILLETS:WASH-WATER",
+          "SNAP4-DILLED-FISH-FILLETS:SOAP",
+          "SNAP4-DILLED-FISH-FILLETS:WAX-PAPER"
+        ],
+        "required_edible_source_positions": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "unresolved_required": 0
+      }
     }
   ]
 }

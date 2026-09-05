@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
   "checked_at": "2026-09-05",
-  "scope": "Final correction integration of retained-source market review and independently reviewed new primary evidence; not a stock guarantee.",
+  "scope": "Final direction-consumables correction integration: reviewed source-compatible market forms and new primary bread/fresh-cauliflower evidence; not a stock guarantee.",
   "reviewed_file": "draft-purchase-form-review.json",
-  "selection": "Exact corrected final30 in recipe-corpus.json; old pre-correction selection is superseded.",
+  "selection": "Exact final30 after reviewed head66a30403 direction-consumables correction; earlier snapshots are superseded.",
   "result": "NO_UNRESOLVED_MARKET_FORM_GAP_FOUND",
   "counts": {
     "recipes": 30,
-    "existing_global_codes_including_water": 82,
-    "nonwater_purchase_forms": 85,
+    "existing_global_codes_including_water": 81,
+    "nonwater_purchase_forms": 83,
     "ru_mass_market_forms": 3,
-    "ru_available_forms": 82,
+    "ru_available_forms": 80,
     "specialty_or_unclear_forms": 0,
-    "validated_one_based_available_same_code_references": 111
+    "validated_one_based_available_same_code_references": 108
   },
   "checks": [
     "Reviewed forms preserve exact purchase-critical distinctions; source preparation is not a separate retail form.",
@@ -22,11 +22,14 @@
     "Freshly chopped spinach and generic milk/yogurt member selections retain exact source text without invented fat requirements or conversions.",
     "No-salt tomato proof is reviewed ingredient composition (tomato, juice, citric acid, no salt), not generic canned tomato equivalence.",
     "See research-correction-market.json for independent new-source notices/hashes and rejected BEEF_TOP_ROUND and SOY_SAUCE_LOW_SODIUM matches. They are not final ingredients.",
-    "Coverage/matrix/final corpus parity and exact union are validated; no stale assembly gap remains."
+    "Coverage/matrix/final corpus parity and exact union are validated; no stale assembly gap remains.",
+    "Fresh cauliflower has its own current official product proof, not the smoothie frozen-form record; whole-wheat bread is supported by actual whole-wheat flour ingredients, not category labeling.",
+    "New deviled eggs use existing egg, light mayonnaise, salt and pepper forms; source-explicit quantified seasoning alternative avoids adding mustard.",
+    "See research-consumables-market.json for current retailer product wording, official SPB/LO presence and all-five-chain search limitations."
   ],
   "limitations": [
     "Market compatibility is not momentary stock or guaranteed year-round inventory.",
-    "71 one-chain forms remain RU_AVAILABLE, never relabelled RU_MASS_MARKET.",
+    "70 one-chain forms remain RU_AVAILABLE, never relabelled RU_MASS_MARKET.",
     "The five baseline chains are not equally represented; evidence concentration in Lenta remains explicit.",
     "Rights and source consistency have separate reviewed artifacts and narrow project risk treatment."
   ]

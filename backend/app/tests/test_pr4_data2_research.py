@@ -935,6 +935,46 @@ def test_existing_tilapia_concept_supports_fish_anchor():
 
 
 @pytest.mark.parametrize(
+    "code",
+    ["CHEESE_CHEDDAR", "CHEESE_MOZZARELLA_PART_SKIM", "COTTAGE_CHEESE_FULL_FAT"],
+)
+def test_dairy_anchor_requires_selected_cheese_evidence(code):
+    recipes, rows = diversity_fixture()
+    recipes[3].update(
+        primary_protein_family="DAIRY",
+        protein_evidence_codes=[code],
+        diversity_contribution="Synthetic cheese-based savory anchor",
+    )
+    rows[3]["existing_food_ingredient_code"] = code
+    assert (
+        validator.diversity_errors(recipes, rows, validator.pr4_meal_type_codes()) == []
+    )
+
+
+@pytest.mark.parametrize(
+    "code",
+    [
+        "BREAD_WHOLE_WHEAT",
+        "BUTTER_UNSALTED",
+        "MILK_1_PERCENT",
+        "YOGURT_PLAIN_LOW_FAT",
+        "EGG",
+    ],
+)
+def test_noncheese_code_cannot_support_dairy_cheese_anchor_claim(code):
+    recipes, rows = diversity_fixture()
+    recipes[3].update(
+        primary_protein_family="DAIRY",
+        protein_evidence_codes=[code],
+        diversity_contribution="Synthetic cheddar sandwich anchor",
+    )
+    rows[3]["existing_food_ingredient_code"] = code
+    errors = validator.diversity_errors(recipes, rows, validator.pr4_meal_type_codes())
+    assert any("Primary protein family contradicts" in error for error in errors)
+    assert any("Diversity protein claim contradicts" in error for error in errors)
+
+
+@pytest.mark.parametrize(
     "mutation,expected",
     [
         ("anchor", ">=8 meal anchors"),
@@ -1114,10 +1154,15 @@ def test_spinach_cauliflower_smoothie_keeps_exact_generic_milk_source_text():
     )
 
 
-def test_selected_local_harvest_has_only_reviewed_vegetable_side_claims():
+def test_rejected_local_harvest_retains_reviewed_vegetable_side_facts():
     recipes = validator.read_json(DIRECTORY / "recipe-corpus.json")["recipes"]
+    assert "CACFP6-LOCAL-HARVEST-BAKE" not in {r["recipe_source_id"] for r in recipes}
     local = next(
-        r for r in recipes if r["recipe_source_id"] == "CACFP6-LOCAL-HARVEST-BAKE"
+        r
+        for r in validator.read_json(DIRECTORY / "correction-source-audit.json")[
+            "recipes"
+        ]
+        if r["recipe_source_id"] == "CACFP6-LOCAL-HARVEST-BAKE"
     )
     assert local["meal_type_code"] == "side"
     assert local["curation_role"] == "SIDE_DISH"
@@ -1130,7 +1175,7 @@ def test_selected_local_harvest_has_only_reviewed_vegetable_side_claims():
         == "Oven-baked butternut squash, beet and sweet potato vegetable side."
     )
     assert {"BUTTERNUT_SQUASH", "BEET", "SWEET_POTATO"} <= set(
-        local["distinct_food_ingredient_codes"]
+        local["selected_ingredient_codes"]
     )
 
 
@@ -1144,3 +1189,528 @@ def test_non_breakfast_role_cannot_inflate_breakfast_count(role):
             recipes, rows, validator.pr4_meal_type_codes()
         )
     )
+
+
+@pytest.fixture
+def direction_case(tmp_path):
+    """One-recipe mechanics fixture, not purported production/source acceptance."""
+    recipe = {
+        "recipe_source_id": "TEST-ONLY-CONSUMABLES",
+        "source_url": "https://example.invalid/test-consumables",
+        "source_sha256": "a" * 64,
+    }
+    source = {
+        "source_recipe_id": recipe["recipe_source_id"],
+        "source_position": 1,
+        "existing_food_ingredient_code": "SUNFLOWER_OIL",
+        "ingredient_selection": "SELECTED_REQUIRED",
+        "source_quantity_text": "1 tsp",
+    }
+    row = {
+        "row_id": "OIL",
+        "source_location": "Test-only ingredient list and step1",
+        "source_wording": "Use 1 tsp oil",
+        "concept": "COOKING_OIL",
+        "edible": True,
+        "quantity_explicit": True,
+        "quantity_text": "1 tsp",
+        "requirement": "REQUIRED",
+        "already_in_ingredient_list": True,
+        "ingredient_links": [
+            {
+                "source_position": 1,
+                "food_ingredient_code": "SUNFLOWER_OIL",
+                "quantity_text": "1 tsp",
+            }
+        ],
+        "resolution": "ALREADY_STRUCTURED",
+        "rationale": "Synthetic listed oil is already selected, not extra grease.",
+        "water_fate": "NOT_WATER",
+        "optionality_evidence": None,
+        "alternative_evidence": None,
+        "selected_alternative": None,
+    }
+    audit = {
+        **recipe,
+        "status": "REVIEWED",
+        "reviewed_sections": {
+            key: {
+                "status": "REVIEWED",
+                "evidence": "Synthetic section reviewed; not source evidence",
+            }
+            for key in validator.CONSUMABLE_REVIEW_SCOPES
+        },
+        "rows": [row],
+        "conclusion": {
+            "unresolved_required_direction_consumables": 0,
+            "all_required_edible_consumables_resolved": True,
+        },
+    }
+    document = {"schema_version": 1, "status": "REVIEWED", "recipes": [audit]}
+    return tmp_path, recipe, source, document
+
+
+def check_direction_case(case):
+    directory, recipe, source, document = case
+    recipe["direction_only_consumables"] = validator.direction_consumable_summary(
+        document["recipes"][0]
+    )
+    write_json(directory / "direction-consumables-audit.json", document)
+    return validator.direction_consumable_errors([recipe], [source], directory)
+
+
+def extra_direction_row(case, **changes):
+    row = deepcopy(case[3]["recipes"][0]["rows"][0])
+    row.update(
+        row_id="DIRECTION-ONLY-EXTRA",
+        already_in_ingredient_list=False,
+        ingredient_links=[],
+        **changes,
+    )
+    case[3]["recipes"][0]["rows"].append(row)
+    return row
+
+
+def test_direction_audit_positive_mechanics(direction_case):
+    assert check_direction_case(direction_case) == []
+
+
+def test_required_quantified_direction_oil_must_enter_selected_coverage(direction_case):
+    extra_direction_row(direction_case, resolution="ADD_SELECTED_REQUIRED")
+    assert any(
+        "missing selected coverage" in e for e in check_direction_case(direction_case)
+    )
+
+
+@pytest.mark.parametrize("concept", ["COOKING_SPRAY", "COOKING_OIL"])
+def test_required_unquantified_edible_consumable_cannot_be_hidden(
+    direction_case, concept
+):
+    extra_direction_row(
+        direction_case,
+        concept=concept,
+        source_wording="Lightly coat the pan",
+        quantity_text=None,
+        quantity_explicit=False,
+        resolution="BLOCKED_UNREPRESENTABLE_REQUIRED_CONSUMABLE",
+    )
+    assert any("unresolved required" in e for e in check_direction_case(direction_case))
+
+
+def test_unquantified_food_cannot_pass_by_setting_already_structured(direction_case):
+    row = direction_case[3]["recipes"][0]["rows"][0]
+    row.update(quantity_text=None, quantity_explicit=False)
+    assert any(
+        "unquantified selected edible" in e
+        for e in check_direction_case(direction_case)
+    )
+
+
+def test_source_optional_omission_needs_actual_evidence(direction_case):
+    row = extra_direction_row(
+        direction_case,
+        requirement="OPTIONAL",
+        resolution="OMIT_SOURCE_OPTIONAL",
+        quantity_explicit=False,
+        quantity_text=None,
+    )
+    assert any(
+        "optional omission lacks" in e for e in check_direction_case(direction_case)
+    )
+    row["optionality_evidence"] = "Test-only source: garnish if desired"
+    assert check_direction_case(direction_case) == []
+    row["requirement"] = "REQUIRED"
+    assert any(
+        "optional omission lacks" in e for e in check_direction_case(direction_case)
+    )
+
+
+def test_source_alternative_needs_reviewed_choice_not_common_sense(direction_case):
+    row = extra_direction_row(
+        direction_case,
+        resolution="SOURCE_ALTERNATIVE_SELECTED",
+        quantity_explicit=False,
+        quantity_text=None,
+    )
+    assert any(
+        "alternative selection lacks" in e for e in check_direction_case(direction_case)
+    )
+    row.update(
+        alternative_evidence="Synthetic source explicitly says oil OR parchment",
+        selected_alternative="Parchment",
+        alternative_kind="NON_FOOD_ALTERNATIVE",
+        selected_alternative_row_ids=["PARCHMENT"],
+    )
+    parchment = deepcopy(row)
+    parchment.update(
+        row_id="PARCHMENT",
+        concept="PARCHMENT_PAPER",
+        edible=False,
+        resolution="NON_FOOD_CONSUMABLE",
+        source_wording="Synthetic source explicitly says oil OR parchment",
+        rationale="Select the source's non-food parchment option, not an invented oil quantity.",
+        alternative_kind=None,
+        selected_alternative_row_ids=[],
+    )
+    direction_case[3]["recipes"][0]["rows"].append(parchment)
+    assert check_direction_case(direction_case) == []
+
+
+@pytest.mark.parametrize("concept", ["COOKING_OIL", "COOKING_SPRAY"])
+def test_required_oil_or_spray_cannot_be_relabelled_discarded_water(
+    direction_case, concept
+):
+    extra_direction_row(
+        direction_case,
+        concept=concept,
+        source_wording="Synthetic source requires coating the pan with oil or spray",
+        quantity_explicit=False,
+        quantity_text=None,
+        water_fate="DISCARDED",
+        resolution="DISCARDED_PROCESS_WATER",
+    )
+    assert any(
+        "non-water edible cannot be discarded as process water" in error
+        for error in check_direction_case(direction_case)
+    )
+
+
+@pytest.mark.parametrize("concept", ["COOKING_OIL", "COOKING_SPRAY"])
+def test_required_oil_or_spray_cannot_be_relabelled_nonfood(direction_case, concept):
+    extra_direction_row(
+        direction_case,
+        concept=concept,
+        source_wording="Synthetic source requires coating the pan with oil or spray",
+        edible=False,
+        quantity_explicit=False,
+        quantity_text=None,
+        resolution="NON_FOOD_CONSUMABLE",
+    )
+    assert any(
+        "unreviewed non-food material classification" in error
+        for error in check_direction_case(direction_case)
+    )
+
+
+def quantified_alternative_row(case):
+    """Synthetic mustard alternative; not a claim about any production recipe."""
+    return extra_direction_row(
+        case,
+        concept="MUSTARD_YELLOW",
+        source_wording="Synthetic source: use 1 tsp mustard OR 1 tsp oil",
+        quantity_text="1 tsp",
+        resolution="SOURCE_ALTERNATIVE_SELECTED",
+        alternative_evidence="Synthetic source expressly permits 1 tsp oil instead of 1 tsp mustard",
+        selected_alternative="1 tsp oil",
+        alternative_kind="QUANTIFIED_EDIBLE_ALTERNATIVE",
+        selected_alternative_row_ids=["OIL"],
+    )
+
+
+def test_quantified_source_alternative_reconciles_selected_food(direction_case):
+    quantified_alternative_row(direction_case)
+    assert check_direction_case(direction_case) == []
+    assert direction_case[2]["existing_food_ingredient_code"] == "SUNFLOWER_OIL"
+    oil = direction_case[3]["recipes"][0]["rows"][0]
+    assert oil["ingredient_links"] == [
+        {
+            "source_position": 1,
+            "food_ingredient_code": "SUNFLOWER_OIL",
+            "quantity_text": "1 tsp",
+        }
+    ]
+    oil["ingredient_links"][0]["quantity_text"] = "2 tsp"
+    assert any(
+        "missing exact selected coverage" in error
+        for error in check_direction_case(direction_case)
+    )
+
+
+@pytest.mark.parametrize("mutation", ["missing", "empty", "unknown", "self", "nonfood"])
+def test_source_alternative_cannot_omit_resolved_food_crosswalk(
+    direction_case, mutation
+):
+    row = quantified_alternative_row(direction_case)
+    assert check_direction_case(direction_case) == []
+    if mutation == "missing":
+        row.pop("selected_alternative_row_ids")
+    elif mutation == "empty":
+        row["selected_alternative_row_ids"] = []
+    elif mutation == "unknown":
+        row["selected_alternative_row_ids"] = ["NOT_A_REVIEWED_ROW"]
+    elif mutation == "self":
+        row["selected_alternative_row_ids"] = [row["row_id"]]
+    elif mutation == "nonfood":
+        parchment = deepcopy(row)
+        parchment.update(
+            row_id="PARCHMENT",
+            concept="PARCHMENT_PAPER",
+            edible=False,
+            resolution="NON_FOOD_CONSUMABLE",
+            alternative_kind=None,
+            selected_alternative_row_ids=[],
+        )
+        direction_case[3]["recipes"][0]["rows"].append(parchment)
+        row["selected_alternative_row_ids"] = ["PARCHMENT"]
+    assert any(
+        "selected source alternative missing resolved audit crosswalk" in error
+        for error in check_direction_case(direction_case)
+    )
+
+
+@pytest.mark.parametrize("concept", ["PARCHMENT_PAPER", "ALUMINUM_FOIL", "WAX_PAPER"])
+def test_nonfood_disposables_never_expand_food_union(direction_case, concept):
+    row = extra_direction_row(
+        direction_case,
+        concept=concept,
+        edible=False,
+        quantity_explicit=False,
+        quantity_text=None,
+        resolution="NON_FOOD_CONSUMABLE",
+    )
+    before = {direction_case[2]["existing_food_ingredient_code"]}
+    assert check_direction_case(direction_case) == []
+    assert {direction_case[2]["existing_food_ingredient_code"]} == before
+    row["ingredient_links"] = deepcopy(
+        direction_case[3]["recipes"][0]["rows"][0]["ingredient_links"]
+    )
+    assert any(
+        "non-food/discarded item entered" in e
+        for e in check_direction_case(direction_case)
+    )
+    row.update(
+        edible=True,
+        quantity_explicit=True,
+        quantity_text="1 tsp",
+        resolution="ALREADY_STRUCTURED",
+    )
+    assert any(
+        "non-food disposable misclassified" in e
+        for e in check_direction_case(direction_case)
+    )
+
+
+def test_discarded_process_water_is_reviewed_but_not_purchased(direction_case):
+    row = extra_direction_row(
+        direction_case,
+        concept="WATER",
+        water_fate="DISCARDED",
+        quantity_explicit=False,
+        quantity_text=None,
+        resolution="DISCARDED_PROCESS_WATER",
+        source_wording="Boil in water and drain",
+    )
+    assert check_direction_case(direction_case) == []
+    row.update(
+        resolution="ADD_SELECTED_REQUIRED",
+        quantity_explicit=True,
+        quantity_text="1 cup",
+        ingredient_links=[
+            {
+                "source_position": 2,
+                "food_ingredient_code": "WATER",
+                "quantity_text": "1 cup",
+            }
+        ],
+    )
+    assert any(
+        "discarded process water cannot enter" in e
+        for e in check_direction_case(direction_case)
+    )
+
+
+def test_retained_water_cannot_be_dropped_as_process_water(direction_case):
+    row = extra_direction_row(
+        direction_case,
+        concept="WATER",
+        water_fate="RETAINED",
+        quantity_text="1 cup",
+        source_wording="Add 1 cup water to the soup",
+        resolution="DISCARDED_PROCESS_WATER",
+    )
+    assert any(
+        "retained recipe water cannot be discarded" in e
+        for e in check_direction_case(direction_case)
+    )
+    row["resolution"] = "ADD_SELECTED_REQUIRED"
+    assert any(
+        "missing selected coverage" in e for e in check_direction_case(direction_case)
+    )
+
+
+def test_quantified_retained_water_with_exact_crosswalk_passes(direction_case):
+    directory, recipe, source, document = direction_case
+    source.update(existing_food_ingredient_code="WATER", source_quantity_text="1 cup")
+    row = document["recipes"][0]["rows"][0]
+    row.update(
+        concept="WATER",
+        water_fate="RETAINED",
+        already_in_ingredient_list=False,
+        quantity_text="1 cup",
+        source_wording="Add 1 cup water",
+        resolution="ADD_SELECTED_REQUIRED",
+        ingredient_links=[
+            {
+                "source_position": 1,
+                "food_ingredient_code": "WATER",
+                "quantity_text": "1 cup",
+            }
+        ],
+    )
+    assert check_direction_case(direction_case) == []
+    row["quantity_text"] = "2 cups"
+    assert any(
+        "direction-only quantity differs" in e
+        for e in check_direction_case(direction_case)
+    )
+
+
+@pytest.mark.parametrize("recipe_id", sorted(validator.KNOWN_SPRAY_SOURCE_HASHES))
+def test_known_spray_cards_cannot_reenter_with_incomplete_food_truth(
+    direction_case, recipe_id
+):
+    _, recipe, source, document = direction_case
+    recipe.update(
+        recipe_source_id=recipe_id,
+        source_sha256=validator.KNOWN_SPRAY_SOURCE_HASHES[recipe_id],
+    )
+    source["source_recipe_id"] = recipe_id
+    document["recipes"][0].update(
+        recipe_source_id=recipe_id, source_sha256=recipe["source_sha256"]
+    )
+    assert any(
+        "known source requires unquantified pan release spray" in e
+        for e in check_direction_case(direction_case)
+    )
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "missing",
+        "recipe_missing",
+        "scope_missing",
+        "no_directions",
+        "wrong_hash",
+        "wrong_conclusion",
+        "uncovered_food",
+    ],
+)
+def test_direction_audit_fails_closed_on_missing_or_incomplete_review(
+    direction_case, mutation
+):
+    directory, recipe, source, document = direction_case
+    assert check_direction_case(direction_case) == []
+    if mutation == "missing":
+        (directory / "direction-consumables-audit.json").unlink()
+        assert validator.direction_consumable_errors([recipe], [source], directory)
+        return
+    audit = document["recipes"][0]
+    if mutation == "recipe_missing":
+        document["recipes"] = []
+        write_json(directory / "direction-consumables-audit.json", document)
+        assert validator.direction_consumable_errors([recipe], [source], directory)
+        return
+    if mutation == "scope_missing":
+        audit["reviewed_sections"].pop("footnotes")
+    elif mutation == "no_directions":
+        audit["reviewed_sections"]["numbered_directions"]["status"] = (
+            "NOT_PRESENT_NOT_USED"
+        )
+    elif mutation == "wrong_hash":
+        audit["source_sha256"] = "b" * 64
+    elif mutation == "wrong_conclusion":
+        audit["conclusion"]["all_required_edible_consumables_resolved"] = False
+    elif mutation == "uncovered_food":
+        audit["rows"] = []
+    assert check_direction_case(direction_case)
+
+
+def test_final_all30_consumables_are_source_complete_and_reproducible():
+    corpus = validator.read_json(DIRECTORY / "recipe-corpus.json")
+    audit = validator.read_json(DIRECTORY / "direction-consumables-audit.json")
+    rows = validator.selected_source_rows()
+    assert len(audit["recipes"]) == len(corpus["recipes"]) == 30
+    assert (
+        validator.direction_consumable_errors(corpus["recipes"], rows, DIRECTORY) == []
+    )
+    assert json.loads(json.dumps(audit)) == audit
+    assert corpus["counts"]["unresolved_required_direction_consumables"] == 0
+    assert not set(validator.KNOWN_SPRAY_SOURCE_HASHES) & {
+        r["recipe_source_id"] for r in corpus["recipes"]
+    }
+    assert (
+        corpus["counts"]
+        | validator.direction_consumable_counts(corpus["recipes"], DIRECTORY)
+        == corpus["counts"]
+    )
+
+
+@pytest.mark.parametrize("quantity", ["as needed", "enough to cover", ""])
+def test_selected_retained_water_also_requires_explicit_amount(research_copy, quantity):
+    path = research_copy / "draft-ingredient-coverage.json"
+    document = validator.read_json(path)
+    water = next(
+        row
+        for r in document["recipes"]
+        for row in r["rows"]
+        if "WATER" in row["selected_codes"]
+    )
+    water["quantity_text"] = quantity
+    write_json(path, document)
+    with pytest.raises(ValueError, match="explicit source quantity"):
+        validator.selected_source_rows(research_copy)
+
+
+@pytest.mark.parametrize(
+    "quantity",
+    [
+        "0 tsp",
+        "-1 tsp",
+        "step 2 lightly coat",
+        "1/0 tsp",
+        "1 dash",
+        "1 pinch",
+        "as needed",
+    ],
+)
+def test_selected_food_requires_a_positive_amount_not_embedded_step_number(quantity):
+    assert not validator.has_positive_source_quantity(quantity)
+
+
+@pytest.mark.parametrize(
+    "quantity",
+    [
+        "1/16 teaspoon (pinch)",
+        "about ½ teaspoon each",
+        "1 teaspoon (size-dependent)",
+        "⅔ cup",
+        "1–2 tablespoons",
+    ],
+)
+def test_explicit_source_amount_keeps_source_qualifiers_without_conversion(quantity):
+    assert validator.has_positive_source_quantity(quantity)
+
+
+@pytest.mark.parametrize("mutation", ["count", "union", "form_count", "form_ids"])
+def test_draft_summaries_cannot_retain_stale_previous_corpus_counts(
+    research_copy, mutation
+):
+    assert validator.reviewed_input_summary_errors(research_copy) == []
+    filename = (
+        "draft-ingredient-coverage.json"
+        if mutation in {"count", "union"}
+        else "draft-purchase-form-review.json"
+    )
+    path = research_copy / filename
+    document = validator.read_json(path)
+    if mutation == "count":
+        document["counts"]["source_rows"] += 1
+    elif mutation == "union":
+        document["selected_existing_codes"].pop()
+    elif mutation == "form_count":
+        document["purchase_form_row_count"] += 1
+    else:
+        document["recipe_ids"].reverse()
+    write_json(path, document)
+    assert validator.reviewed_input_summary_errors(research_copy)

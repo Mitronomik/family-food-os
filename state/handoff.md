@@ -9,42 +9,55 @@ PR4-DATA2 — READY FOR REVIEW, not ACCEPTED or COMPLETE (`2026-09-05`).
 Issue #12; existing branch `data/pr4-data2-russia-spb-recuration` and
 [PR #13](https://github.com/Mitronomik/family-food-os/pull/13).
 Exact base: `26af749be0f6446de1d88cad2e2e03158a9830a0` (merged governance #9,
-historical PR4-DATA #8 and localization #11). Correction begins at reviewed head
-`36c0cb82680fbc8a57ab4a78a41f363f3420d39d`; delivered head is the current branch
-HEAD, recorded exactly in PR #13 after push, not a self-referential commit hash.
+historical PR4-DATA #8 and localization #11). This direction-consumables
+correction begins at reviewed head `66a30403e3463248bb9b66e5a40920ef3fb136b5`.
+The delivered head is recorded exactly in PR #13 after push, not as a
+self-referential commit hash in its own contents.
 
-Final: **30 recipes**, **25 retained / 5 replaced in this correction pass**;
-relative to historical PR4: **5 retained / 25 replaced**. Both forbidden ICN
-cards are absent. **226 source-audit rows / 195 selected rows** (190 required,
-4 source-explicit optional, 1 conditional); exact **82 existing FoodIngredient**
+Final: **30 recipes**, **28 retained / 2 replaced in this correction pass**;
+relative to historical PR4: **3 retained / 27 replaced**. Both forbidden ICN
+cards remain absent. **225 source-audit rows / 189 selected rows** (185 required,
+3 source-explicit optional, 1 conditional); exact **81 existing FoodIngredient**
 union within **80..120**, zero new codes and zero unresolved required rows.
-**88 source-backed equipment rows / 32 normalized codes**.
+**86 source-backed equipment rows / 34 normalized codes**.
 
-Canonical PR4 meal types: **breakfast 3 / main 6 / side 6 / salad 6 /
-sandwich 0 / other 9**. Separate curation roles: **BREAKFAST 3 / MAIN_DISH 6 /
-SIDE_DISH 12 / SOUP 2 / DESSERT 3 / SNACK 3 / CONDIMENT 1**.
-**8 meal anchors**, **3 soups/substantial one-bowl meals**, **12 pure sides**;
-five primary-protein families: **EGG 2 / FISH 2 / LEGUME_TOFU 1 / MEAT 1 /
-POULTRY 2** among anchors. Local Harvest is a vegetable side, never a pork main.
+Canonical PR4 meal types: **breakfast 3 / main 5 / side 5 / salad 6 /
+sandwich 1 / other 10**. Separate curation roles: **BREAKFAST 3 / MAIN_DISH 5 /
+SIDE_DISH 11 / SOUP 2 / DESSERT 3 / SNACK 4 / CONDIMENT 1 / SANDWICH 1**.
+**8 meal anchors**, **3 soups/substantial one-bowl meals**, **11 pure sides**;
+six primary-protein families: **DAIRY 1 / EGG 2 / FISH 2 / LEGUME_TOFU 1 /
+MEAT 1 / POULTRY 1** among anchors.
 
-**85 non-water purchase forms: 3 RU_MASS_MARKET / 82 RU_AVAILABLE /
-0 SPECIALTY_OR_UNCLEAR**. Chain coverage: 71 one-chain, 11 two-chain,
-3 three-chain forms. All five baseline chains assessed; Lenta concentration
-remains a limitation. Matrix: 185 raw / 177 unique observations, 140 AVAILABLE /
-37 UNCERTAIN (includes rejected research). Compatibility is not momentary stock.
+All 30 actual sources were audited beyond ingredient lists: **281 consumable
+audit rows**. At the reviewed head, **9 recipes / 19 direction-only edible
+rows** included two required unquantified pan-release sprays. Honey Lime
+Chicken and Local Harvest Bake were replaced, not silently edited. The final
+corpus has **9 recipes / 24 direction-only edible rows**, all explicitly
+resolved; **zero unresolved required direction consumables**. Process water
+discarded after preparation is excluded from those direction-only edible
+counts; selected retained water is not.
 
-All final sources re-audited for name, servings, ingredient concepts, meal role,
-diversity, times, equipment and limitations. Exact artifacts/hashes, attribution
-and notices retained under the approved narrow direct-FNS project risk posture.
+**83 non-water purchase forms: 3 RU_MASS_MARKET / 80 RU_AVAILABLE /
+0 SPECIALTY_OR_UNCLEAR**. Chain coverage: **70 one-chain / 10 two-chain /
+3 three-chain** forms. All five baseline chains assessed; Lenta concentration
+remains a limitation. Matrix: **187 raw / 179 unique observations,
+142 AVAILABLE / 37 UNCERTAIN** (includes rejected research).
+Compatibility is not momentary store stock.
+
+All final sources have nine reviewed consistency dimensions, including
+direction-only consumables; missing that ninth dimension fails closed. Exact
+artifacts/hashes, attribution and notices remain under the approved narrow
+direct-FNS project risk posture, including the ONIE-attributed deviled eggs.
 No unresolved selected-source rights blocker; no blanket public-domain or
 unrestricted commercial/derivative rights claim.
 
-Verification: final DATA2 validator **PASS**; focused DATA2 **104 passed in 2.54s**;
-historical PR4-DATA/FoodIngredient affected suite **82 passed in 2.43s**;
+Verification: final DATA2 validator **PASS**; focused DATA2 **164 passed in
+3.40s**; historical PR4-DATA/FoodIngredient affected suite **82 passed in 1.71s**;
 Ruff format **2 files already formatted**, Ruff check **All checks passed!**;
-`git diff --check` and staged scope audit **PASS**. Five final artifacts reproduce
-byte-for-byte from reviewed source/form inputs. Full runtime suite and PR4
-production seed execution are excluded from this isolated curation operation.
+`git diff --check` **PASS**. Five final artifacts reproduce byte-for-byte from
+reviewed source/form/consumable inputs. Final staged scope audit **PASS**: 24
+authorized text files, no runtime/database/binary or unrelated files. Full runtime suite
+and PR4 production seed execution are excluded from this isolated curation operation.
 
 Historical `data/curation/pr4/`, global seeds (183 ingredients / 172 aliases /
 183 profiles), PR4 runtime, migrations/API/frontend and local development DB
@@ -53,7 +66,7 @@ it may consume DATA2 only after ACCEPT + merge. No RetailSKU/retailer production
 Nutrition, Pantry, Planner, Shopping, Auth/PostgreSQL or AI work. PR5 unauthorized.
 Next action: project final review, not autonomous merge.
 
-Read the [DATA2 report](../data/curation/pr4-data2/review-report.md), source-consistency audit and pinned PR4 contract before continuing.
+See [final review evidence](../data/curation/pr4-data2/review-report.md) for sources, replacements and consumable resolutions.
 
 ## Project identity
 

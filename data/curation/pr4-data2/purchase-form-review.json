@@ -398,19 +398,19 @@
           "observation_id": "research-lenta-okey-v4.json:17",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
         },
         {
           "observation_id": "research-lenta-okey-v7.json:3",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
         },
         {
           "observation_id": "research-x5-v3.json:2",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -488,31 +488,43 @@
     },
     {
       "coverage_line": 12,
-      "source_recipe_id": "CACFP6-LOCAL-HARVEST-BAKE",
-      "food_ingredient_code": "BUTTERNUT_SQUASH",
+      "source_recipe_id": "SNAP6-HEAVENLY-DEVILED-EGGS",
+      "food_ingredient_code": "EGG",
       "source_position": 1,
-      "source_quantity_text": "2 cups or 8 oz Fresh butternut squash, peeled, cubed",
+      "source_quantity_text": "6",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+      "normalization_reason": "Literal source amount and existing canonical member; no weight or yield conversion.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "BUTTERNUT_SQUASH",
-      "purchase_concept": "Fresh butternut squash; peel, seed and cube as specified",
+      "purchase_form_review_id": "EGG",
+      "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v2.json:7",
-          "purchase_concept": "Fresh butternut squash; peel, seed and cube as specified",
+          "observation_id": "research-x5-v2.json:1",
+          "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Literal source amount and existing canonical member; no weight or yield conversion."
+        },
+        {
+          "observation_id": "research-magnit-v2.json:4",
+          "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
+          "form_match_reviewed": true,
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Literal source amount and existing canonical member; no weight or yield conversion."
+        },
+        {
+          "observation_id": "research-panel-v3.json:1",
+          "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
+          "form_match_reviewed": true,
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Literal source amount and existing canonical member; no weight or yield conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary fresh butternut squash; peel, seed and cube as specified product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh butternut squash; peel, seed and cube as specified) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "ordinary_retail_rationale": "A named ordinary raw shell chicken eggs; cracking/whisking is preparation product/category is directly evidenced in PYATEROCHKA, MAGNIT, LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "market_classification": "RU_MASS_MARKET",
+      "retention_reason": "At least three distinct baseline chains evidenced for the actual purchase concept.",
       "chain_review": {
         "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "status": "AVAILABLE",
+          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
         },
         "PEREKRESTOK": {
           "status": "UNCERTAIN",
@@ -527,40 +539,34 @@
           "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
         },
         "MAGNIT": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "status": "AVAILABLE",
+          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
         }
       }
     },
     {
       "coverage_line": 13,
-      "source_recipe_id": "CACFP6-LOCAL-HARVEST-BAKE",
-      "food_ingredient_code": "BEET",
+      "source_recipe_id": "SNAP6-HEAVENLY-DEVILED-EGGS",
+      "food_ingredient_code": "MAYONNAISE_LOW_FAT",
       "source_position": 2,
-      "source_quantity_text": "2 cups or 8 oz Fresh beets, peeled, cubed",
+      "source_quantity_text": "2 tablespoons",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+      "normalization_reason": "Literal source amount and existing canonical member; no weight or yield conversion.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "BEET",
-      "purchase_concept": "Fresh beetroot; peel and cut",
+      "purchase_form_review_id": "MAYONNAISE_LOW_FAT",
+      "purchase_concept": "Light reduced-fat mayonnaise-family product20%; not full-fat mayonnaise",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v2.json:3",
-          "purchase_concept": "Fresh beetroot; peel and cut",
+          "observation_id": "research-lenta-okey-v2.json:19",
+          "purchase_concept": "Light reduced-fat mayonnaise-family product20%; not full-fat mayonnaise",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
-        },
-        {
-          "observation_id": "research-magnit-v2.json:8",
-          "purchase_concept": "Fresh beetroot; peel and cut",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Literal source amount and existing canonical member; no weight or yield conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary fresh beetroot; peel and cut product/category is directly evidenced in LENTA, MAGNIT. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "A named ordinary light reduced-fat mayonnaise-family product20%; not full-fat mayonnaise product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh beetroot; peel and cut) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Light reduced-fat mayonnaise-family product20%; not full-fat mayonnaise) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
       "chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
@@ -579,34 +585,46 @@
           "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
         },
         "MAGNIT": {
-          "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
         }
       }
     },
     {
       "coverage_line": 14,
-      "source_recipe_id": "CACFP6-LOCAL-HARVEST-BAKE",
-      "food_ingredient_code": "SWEET_POTATO",
-      "source_position": 3,
-      "source_quantity_text": "2 cups or 8 oz Fresh sweet potatoes, peeled, cubed",
+      "source_recipe_id": "SNAP6-HEAVENLY-DEVILED-EGGS",
+      "food_ingredient_code": "SALT",
+      "source_position": 4,
+      "source_quantity_text": "1/8 tsp",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+      "normalization_reason": "Source explicitly permits 1/8 tsp each salt and pepper instead of 1 tsp mustard; two selected note rows preserve each amount without inventing a seasoning quantity. Existing black pepper is the selected member of source-generic pepper.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "SWEET_POTATO",
-      "purchase_concept": "Fresh sweet potatoes; peel/cube as specified",
+      "purchase_form_review_id": "SALT",
+      "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v2.json:8",
-          "purchase_concept": "Fresh sweet potatoes; peel/cube as specified",
+          "observation_id": "research-lenta-okey-v4.json:17",
+          "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source explicitly permits 1/8 tsp each salt and pepper instead of 1 tsp mustard; two selected note rows preserve each amount without inventing a seasoning quantity. Existing black pepper is the selected member of source-generic pepper."
+        },
+        {
+          "observation_id": "research-lenta-okey-v7.json:3",
+          "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
+          "form_match_reviewed": true,
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source explicitly permits 1/8 tsp each salt and pepper instead of 1 tsp mustard; two selected note rows preserve each amount without inventing a seasoning quantity. Existing black pepper is the selected member of source-generic pepper."
+        },
+        {
+          "observation_id": "research-x5-v3.json:2",
+          "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
+          "form_match_reviewed": true,
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source explicitly permits 1/8 tsp each salt and pepper instead of 1 tsp mustard; two selected note rows preserve each amount without inventing a seasoning quantity. Existing black pepper is the selected member of source-generic pepper."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary fresh sweet potatoes; peel/cube as specified product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "A named ordinary ordinary food table salt; iodized-specific source option separately reviewed product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh sweet potatoes; peel/cube as specified) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Ordinary food table salt; iodized-specific source option separately reviewed) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
       "chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
@@ -632,33 +650,27 @@
     },
     {
       "coverage_line": 15,
-      "source_recipe_id": "CACFP6-LOCAL-HARVEST-BAKE",
-      "food_ingredient_code": "OLIVE_OIL",
-      "source_position": 4,
-      "source_quantity_text": "1 Tbsp Olive oil",
+      "source_recipe_id": "SNAP6-HEAVENLY-DEVILED-EGGS",
+      "food_ingredient_code": "BLACK_PEPPER",
+      "source_position": 5,
+      "source_quantity_text": "1/8 tsp",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+      "normalization_reason": "Source explicitly permits 1/8 tsp each salt and pepper instead of 1 tsp mustard; two selected note rows preserve each amount without inventing a seasoning quantity. Existing black pepper is the selected member of source-generic pepper.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "OLIVE_OIL",
-      "purchase_concept": "Pure olive oil; no non-olive blend",
+      "purchase_form_review_id": "BLACK_PEPPER",
+      "purchase_concept": "Ground black pepper",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v4.json:9",
-          "purchase_concept": "Pure olive oil; no non-olive blend",
+          "observation_id": "research-lenta-okey-v2.json:34",
+          "purchase_concept": "Ground black pepper",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
-        },
-        {
-          "observation_id": "research-x5-v3.json:1",
-          "purchase_concept": "Pure olive oil; no non-olive blend",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source explicitly permits 1/8 tsp each salt and pepper instead of 1 tsp mustard; two selected note rows preserve each amount without inventing a seasoning quantity. Existing black pepper is the selected member of source-generic pepper."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary pure olive oil; no non-olive blend product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "A named ordinary ground black pepper product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Pure olive oil; no non-olive blend) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Ground black pepper) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
       "chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
@@ -684,150 +696,6 @@
     },
     {
       "coverage_line": 16,
-      "source_recipe_id": "CACFP6-LOCAL-HARVEST-BAKE",
-      "food_ingredient_code": "SALT",
-      "source_position": 5,
-      "source_quantity_text": "¼ tsp Kosher salt or iodized salt",
-      "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
-      "review_status": "REVIEWED",
-      "purchase_form_review_id": "SALT__IODIZED",
-      "purchase_concept": "Iodized food salt selected from explicit source kosher-or-iodized alternative",
-      "evidence_matches": [
-        {
-          "observation_id": "research-lenta-okey-v7.json:3",
-          "purchase_concept": "Iodized food salt selected from explicit source kosher-or-iodized alternative",
-          "form_match_reviewed": true,
-          "rationale": "Generic salt alone does not establish iodized source option. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
-        }
-      ],
-      "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary iodized food salt selected from explicit source kosher-or-iodized alternative product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Iodized food salt selected from explicit source kosher-or-iodized alternative) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      }
-    },
-    {
-      "coverage_line": 17,
-      "source_recipe_id": "CACFP6-LOCAL-HARVEST-BAKE",
-      "food_ingredient_code": "GARLIC",
-      "source_position": 6,
-      "source_quantity_text": "¾ tsp Fresh garlic, minced",
-      "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
-      "review_status": "REVIEWED",
-      "purchase_form_review_id": "GARLIC",
-      "purchase_concept": "Fresh garlic cloves; peel and mince",
-      "evidence_matches": [
-        {
-          "observation_id": "research-lenta-okey-v2.json:6",
-          "purchase_concept": "Fresh garlic cloves; peel and mince",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
-        },
-        {
-          "observation_id": "research-magnit-v2.json:3",
-          "purchase_concept": "Fresh garlic cloves; peel and mince",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
-        }
-      ],
-      "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary fresh garlic cloves; peel and mince product/category is directly evidenced in LENTA, MAGNIT. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh garlic cloves; peel and mince) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
-        }
-      }
-    },
-    {
-      "coverage_line": 18,
-      "source_recipe_id": "CACFP6-LOCAL-HARVEST-BAKE",
-      "food_ingredient_code": "PARSLEY_DRIED",
-      "source_position": 7,
-      "source_quantity_text": "½ tsp Dried parsley (optional)",
-      "ingredient_selection": "SELECTED_OPTIONAL",
-      "normalization_reason": "Exact accepted quantified optional parsley retained as selected optional, not required; no source amount or code changed.",
-      "review_status": "REVIEWED",
-      "purchase_form_review_id": "PARSLEY_DRIED",
-      "purchase_concept": "Plain dried parsley",
-      "evidence_matches": [
-        {
-          "observation_id": "research-lenta-okey-v2.json:25",
-          "purchase_concept": "Plain dried parsley",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted quantified optional parsley retained as selected optional, not required; no source amount or code changed."
-        }
-      ],
-      "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary plain dried parsley product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Plain dried parsley) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      }
-    },
-    {
-      "coverage_line": 19,
       "source_recipe_id": "CACFP6-TABBOULEH",
       "food_ingredient_code": "QUINOA",
       "source_position": 1,
@@ -873,7 +741,7 @@
       }
     },
     {
-      "coverage_line": 20,
+      "coverage_line": 17,
       "source_recipe_id": "CACFP6-TABBOULEH",
       "food_ingredient_code": "BULGUR",
       "source_position": 2,
@@ -925,7 +793,7 @@
       }
     },
     {
-      "coverage_line": 21,
+      "coverage_line": 18,
       "source_recipe_id": "CACFP6-TABBOULEH",
       "food_ingredient_code": "WATER",
       "source_position": 3,
@@ -939,7 +807,7 @@
       "retention_reason": "Explicit source cooking/preparation water; no retailer purchase requirement. Preserve source amount/condition."
     },
     {
-      "coverage_line": 22,
+      "coverage_line": 19,
       "source_recipe_id": "CACFP6-TABBOULEH",
       "food_ingredient_code": "SALT",
       "source_position": 4,
@@ -954,19 +822,19 @@
           "observation_id": "research-lenta-okey-v4.json:17",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
         },
         {
           "observation_id": "research-lenta-okey-v7.json:3",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
         },
         {
           "observation_id": "research-x5-v3.json:2",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -997,7 +865,7 @@
       }
     },
     {
-      "coverage_line": 23,
+      "coverage_line": 20,
       "source_recipe_id": "CACFP6-TABBOULEH",
       "food_ingredient_code": "TOMATO",
       "source_position": 5,
@@ -1049,7 +917,7 @@
       }
     },
     {
-      "coverage_line": 24,
+      "coverage_line": 21,
       "source_recipe_id": "CACFP6-TABBOULEH",
       "food_ingredient_code": "CUCUMBER",
       "source_position": 6,
@@ -1101,7 +969,7 @@
       }
     },
     {
-      "coverage_line": 25,
+      "coverage_line": 22,
       "source_recipe_id": "CACFP6-TABBOULEH",
       "food_ingredient_code": "PARSLEY",
       "source_position": 7,
@@ -1147,7 +1015,7 @@
       }
     },
     {
-      "coverage_line": 26,
+      "coverage_line": 23,
       "source_recipe_id": "CACFP6-TABBOULEH",
       "food_ingredient_code": "ONION_YELLOW",
       "source_position": 8,
@@ -1193,7 +1061,7 @@
       }
     },
     {
-      "coverage_line": 27,
+      "coverage_line": 24,
       "source_recipe_id": "CACFP6-TABBOULEH",
       "food_ingredient_code": "BELL_PEPPER_RED",
       "source_position": 9,
@@ -1239,7 +1107,7 @@
       }
     },
     {
-      "coverage_line": 28,
+      "coverage_line": 25,
       "source_recipe_id": "CACFP6-TABBOULEH",
       "food_ingredient_code": "MINT_FRESH",
       "source_position": 10,
@@ -1285,7 +1153,7 @@
       }
     },
     {
-      "coverage_line": 29,
+      "coverage_line": 26,
       "source_recipe_id": "CACFP6-TABBOULEH",
       "food_ingredient_code": "CUMIN_GROUND",
       "source_position": 11,
@@ -1331,7 +1199,7 @@
       }
     },
     {
-      "coverage_line": 30,
+      "coverage_line": 27,
       "source_recipe_id": "CACFP6-TABBOULEH",
       "food_ingredient_code": "LEMON",
       "source_position": 12,
@@ -1383,7 +1251,7 @@
       }
     },
     {
-      "coverage_line": 31,
+      "coverage_line": 28,
       "source_recipe_id": "CACFP6-TABBOULEH",
       "food_ingredient_code": "OLIVE_OIL",
       "source_position": 13,
@@ -1435,301 +1303,151 @@
       }
     },
     {
-      "coverage_line": 32,
-      "source_recipe_id": "CACFP6-HONEY-LIME-CHICKEN",
-      "food_ingredient_code": "CHICKEN_THIGH",
+      "coverage_line": 29,
+      "source_recipe_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE",
+      "food_ingredient_code": "BREAD_WHOLE_WHEAT",
       "source_position": 1,
-      "source_quantity_text": "1 lb 7 oz Raw chicken thighs, boneless, skinless",
+      "source_quantity_text": "2 slices",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+      "normalization_reason": "Source count retained exactly; no grams, retailer-package or count-to-weight conversion.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "CHICKEN_THIGH",
-      "purchase_concept": "Raw boneless skinless chicken thigh for Honey Lime Chicken",
+      "purchase_form_review_id": "BREAD_WHOLE_WHEAT",
+      "purchase_concept": "Whole-wheat bread slices; actual whole-wheat flour and whole-wheat sourdough, not crispbread or mixed refined-flour bread",
       "evidence_matches": [
         {
-          "observation_id": "research-x5-v3.json:3",
-          "purchase_concept": "Raw boneless skinless chicken thigh for Honey Lime Chicken",
+          "observation_id": "research-consumables-market.json:1",
+          "purchase_concept": "Whole-wheat bread slices; actual whole-wheat flour and whole-wheat sourdough, not crispbread or mixed refined-flour bread",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Actual source and retailer form independently matched in consumables correction. Whole-wheat bread slices; actual whole-wheat flour and whole-wheat sourdough, not crispbread or mixed refined-flour bread Source normalization: Source count retained exactly; no grams, retailer-package or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary raw boneless skinless chicken thigh for honey lime chicken product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "Ordinary household grocery form on a baseline major-chain catalogue with current SPB presence, not specialist retail.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Raw boneless skinless chicken thigh for Honey Lime Chicken) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Preserve source-backed sandwich anchor using precisely matched ordinary purchase form; one qualifying chain, no three-chain claim.",
       "chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search reviewed in research-consumables-market.json; wrong form/region and expired material excluded, not product absence."
         },
         "PEREKRESTOK": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search reviewed in research-consumables-market.json; wrong form/region and expired material excluded, not product absence."
         },
         "LENTA": {
           "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
+          "basis": "Current official exact product plus official SPB delivery presence."
         },
         "OKEY": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search reviewed in research-consumables-market.json; wrong form/region and expired material excluded, not product absence."
         },
         "MAGNIT": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search reviewed in research-consumables-market.json; wrong form/region and expired material excluded, not product absence."
         }
       }
     },
     {
-      "coverage_line": 33,
-      "source_recipe_id": "CACFP6-HONEY-LIME-CHICKEN",
-      "food_ingredient_code": "HONEY",
-      "source_position": 2,
-      "source_quantity_text": "⅓ cup or 3 ½ oz Honey",
-      "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
-      "review_status": "REVIEWED",
-      "purchase_form_review_id": "HONEY",
-      "purchase_concept": "Natural honey",
-      "evidence_matches": [
-        {
-          "observation_id": "research-lenta-okey-v3.json:7",
-          "purchase_concept": "Natural honey",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
-        }
-      ],
-      "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary natural honey product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Natural honey) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      }
-    },
-    {
-      "coverage_line": 34,
-      "source_recipe_id": "CACFP6-HONEY-LIME-CHICKEN",
-      "food_ingredient_code": "LIME_JUICE",
+      "coverage_line": 30,
+      "source_recipe_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE",
+      "food_ingredient_code": "CHEESE_CHEDDAR",
       "source_position": 3,
-      "source_quantity_text": "¼ cup or 2 oz Fresh lime juice",
+      "source_quantity_text": "3/4 cup",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+      "normalization_reason": "Generic cheese is not restricted to the examples; cheddar is itself mentioned in the source flavor ideas. Selected ordinary natural cheddar, not a processed cheese product.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "LIME_JUICE",
-      "purchase_concept": "Fresh-squeezed lime juice prepared from purchased whole limes",
+      "purchase_form_review_id": "CHEESE_CHEDDAR",
+      "purchase_concept": "Natural regular-fat cheddar cheese; grate at home, not processed cheese or reduced-fat cheese",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v4.json:19",
-          "purchase_concept": "Fresh-squeezed lime juice prepared from purchased whole limes",
+          "observation_id": "research-correction-market.json:8",
+          "purchase_concept": "Natural regular-fat cheddar cheese; grate at home, not processed cheese or reduced-fat cheese",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Generic cheese is not restricted to the examples; cheddar is itself mentioned in the source flavor ideas. Selected ordinary natural cheddar, not a processed cheese product."
         },
         {
-          "observation_id": "research-x5-v3.json:7",
-          "purchase_concept": "Fresh-squeezed lime juice prepared from purchased whole limes",
+          "observation_id": "research-correction-market.json:9",
+          "purchase_concept": "Natural regular-fat cheddar cheese; grate at home, not processed cheese or reduced-fat cheese",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Generic cheese is not restricted to the examples; cheddar is itself mentioned in the source flavor ideas. Selected ordinary natural cheddar, not a processed cheese product."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary fresh-squeezed lime juice prepared from purchased whole limes product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "Ordinary Natural regular-fat cheddar cheese; grate at home, not processed cheese or reduced-fat cheese product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh-squeezed lime juice prepared from purchased whole limes) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
       "chain_review": {
         "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "status": "AVAILABLE",
+          "basis": "Qualifying official product plus SPB evidence, no live stock claim."
         },
         "PEREKRESTOK": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "LENTA": {
           "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
+          "basis": "Qualifying official product plus SPB evidence, no live stock claim."
         },
         "OKEY": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "MAGNIT": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         }
       }
     },
     {
-      "coverage_line": 35,
-      "source_recipe_id": "CACFP6-HONEY-LIME-CHICKEN",
-      "food_ingredient_code": "SALT",
+      "coverage_line": 31,
+      "source_recipe_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE",
+      "food_ingredient_code": "CAULIFLOWER",
       "source_position": 4,
-      "source_quantity_text": "½ tsp Salt",
+      "source_quantity_text": "1/2 cup",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+      "normalization_reason": "Select all 1/2 cup as fresh cauliflower under explicit fresh vegetables of choice alternative. No ratio invented, no roasting workflow silently omitted.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "SALT",
-      "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
+      "purchase_form_review_id": "CAULIFLOWER__FRESH",
+      "purchase_concept": "Plain fresh raw cauliflower; cut at home under explicit fresh vegetables choice, not frozen/riced/pre-roasted",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v4.json:17",
-          "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
+          "observation_id": "research-consumables-market.json:2",
+          "purchase_concept": "Plain fresh raw cauliflower; cut at home under explicit fresh vegetables choice, not frozen/riced/pre-roasted",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
-        },
-        {
-          "observation_id": "research-lenta-okey-v7.json:3",
-          "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
-        },
-        {
-          "observation_id": "research-x5-v3.json:2",
-          "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Actual source and retailer form independently matched in consumables correction. Plain fresh raw cauliflower; cut at home under explicit fresh vegetables choice, not frozen/riced/pre-roasted Source normalization: Select all 1/2 cup as fresh cauliflower under explicit fresh vegetables of choice alternative. No ratio invented, no roasting workflow silently omitted."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary ordinary food table salt; iodized-specific source option separately reviewed product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "Ordinary household grocery form on a baseline major-chain catalogue with current SPB presence, not specialist retail.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Ordinary food table salt; iodized-specific source option separately reviewed) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Preserve source-backed sandwich anchor using precisely matched ordinary purchase form; one qualifying chain, no three-chain claim.",
       "chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search reviewed in research-consumables-market.json; wrong form/region and expired material excluded, not product absence."
         },
         "PEREKRESTOK": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search reviewed in research-consumables-market.json; wrong form/region and expired material excluded, not product absence."
         },
         "LENTA": {
           "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
+          "basis": "Current official exact product plus official SPB delivery presence."
         },
         "OKEY": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search reviewed in research-consumables-market.json; wrong form/region and expired material excluded, not product absence."
         },
         "MAGNIT": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search reviewed in research-consumables-market.json; wrong form/region and expired material excluded, not product absence."
         }
       }
     },
     {
-      "coverage_line": 36,
-      "source_recipe_id": "CACFP6-HONEY-LIME-CHICKEN",
-      "food_ingredient_code": "BLACK_PEPPER",
-      "source_position": 5,
-      "source_quantity_text": "¼ tsp Ground black or white pepper (black selected)",
-      "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
-      "review_status": "REVIEWED",
-      "purchase_form_review_id": "BLACK_PEPPER",
-      "purchase_concept": "Ground black pepper",
-      "evidence_matches": [
-        {
-          "observation_id": "research-lenta-okey-v2.json:34",
-          "purchase_concept": "Ground black pepper",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
-        }
-      ],
-      "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary ground black pepper product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Ground black pepper) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      }
-    },
-    {
-      "coverage_line": 37,
-      "source_recipe_id": "CACFP6-HONEY-LIME-CHICKEN",
-      "food_ingredient_code": "LIME",
-      "source_position": 6,
-      "source_quantity_text": "⅛ cup Lime zest",
-      "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
-      "review_status": "REVIEWED",
-      "purchase_form_review_id": "LIME",
-      "purchase_concept": "Fresh whole lime for source zest",
-      "evidence_matches": [
-        {
-          "observation_id": "research-x5-v3.json:6",
-          "purchase_concept": "Fresh whole lime for source zest",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
-        }
-      ],
-      "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary fresh whole lime for source zest product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh whole lime for source zest) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      }
-    },
-    {
-      "coverage_line": 38,
+      "coverage_line": 32,
       "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
       "food_ingredient_code": "YOGURT_PLAIN_LOW_FAT",
       "source_position": 1,
@@ -1775,7 +1493,7 @@
       }
     },
     {
-      "coverage_line": 39,
+      "coverage_line": 33,
       "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
       "food_ingredient_code": "MAYONNAISE_LOW_FAT",
       "source_position": 2,
@@ -1790,7 +1508,7 @@
           "observation_id": "research-lenta-okey-v2.json:19",
           "purchase_concept": "Light reduced-fat mayonnaise-family product20%; not full-fat mayonnaise",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -1821,7 +1539,7 @@
       }
     },
     {
-      "coverage_line": 40,
+      "coverage_line": 34,
       "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
       "food_ingredient_code": "HONEY",
       "source_position": 3,
@@ -1867,7 +1585,7 @@
       }
     },
     {
-      "coverage_line": 41,
+      "coverage_line": 35,
       "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
       "food_ingredient_code": "APPLE_CIDER_VINEGAR",
       "source_position": 4,
@@ -1913,7 +1631,7 @@
       }
     },
     {
-      "coverage_line": 42,
+      "coverage_line": 36,
       "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
       "food_ingredient_code": "SALT",
       "source_position": 5,
@@ -1928,19 +1646,19 @@
           "observation_id": "research-lenta-okey-v4.json:17",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
         },
         {
           "observation_id": "research-lenta-okey-v7.json:3",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
         },
         {
           "observation_id": "research-x5-v3.json:2",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -1971,7 +1689,7 @@
       }
     },
     {
-      "coverage_line": 43,
+      "coverage_line": 37,
       "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
       "food_ingredient_code": "BLACK_PEPPER",
       "source_position": 6,
@@ -1986,7 +1704,7 @@
           "observation_id": "research-lenta-okey-v2.json:34",
           "purchase_concept": "Ground black pepper",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -2017,7 +1735,7 @@
       }
     },
     {
-      "coverage_line": 44,
+      "coverage_line": 38,
       "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
       "food_ingredient_code": "CABBAGE_GREEN",
       "source_position": 7,
@@ -2069,7 +1787,7 @@
       }
     },
     {
-      "coverage_line": 45,
+      "coverage_line": 39,
       "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
       "food_ingredient_code": "CABBAGE_RED",
       "source_position": 8,
@@ -2115,7 +1833,7 @@
       }
     },
     {
-      "coverage_line": 46,
+      "coverage_line": 40,
       "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
       "food_ingredient_code": "CARROT",
       "source_position": 9,
@@ -2167,7 +1885,7 @@
       }
     },
     {
-      "coverage_line": 47,
+      "coverage_line": 41,
       "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
       "food_ingredient_code": "GREEN_ONION",
       "source_position": 10,
@@ -2219,7 +1937,7 @@
       }
     },
     {
-      "coverage_line": 48,
+      "coverage_line": 42,
       "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
       "food_ingredient_code": "CRANBERRIES_DRIED",
       "source_position": 11,
@@ -2265,7 +1983,7 @@
       }
     },
     {
-      "coverage_line": 49,
+      "coverage_line": 43,
       "source_recipe_id": "TNC6-EGGS-SPINACH",
       "food_ingredient_code": "OLIVE_OIL",
       "source_position": 1,
@@ -2317,7 +2035,7 @@
       }
     },
     {
-      "coverage_line": 50,
+      "coverage_line": 44,
       "source_recipe_id": "TNC6-EGGS-SPINACH",
       "food_ingredient_code": "EGG",
       "source_position": 2,
@@ -2332,19 +2050,19 @@
           "observation_id": "research-x5-v2.json:1",
           "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Shell eggs; not frozen liquid eggs."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Shell eggs; not frozen liquid eggs."
         },
         {
           "observation_id": "research-magnit-v2.json:4",
           "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Shell eggs; not frozen liquid eggs."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Shell eggs; not frozen liquid eggs."
         },
         {
           "observation_id": "research-panel-v3.json:1",
           "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Shell eggs; not frozen liquid eggs."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Shell eggs; not frozen liquid eggs."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -2375,7 +2093,7 @@
       }
     },
     {
-      "coverage_line": 51,
+      "coverage_line": 45,
       "source_recipe_id": "TNC6-EGGS-SPINACH",
       "food_ingredient_code": "SPINACH",
       "source_position": 3,
@@ -2421,7 +2139,7 @@
       }
     },
     {
-      "coverage_line": 52,
+      "coverage_line": 46,
       "source_recipe_id": "TNC6-APPLESAUCE",
       "food_ingredient_code": "APPLE",
       "source_position": 1,
@@ -2467,7 +2185,7 @@
       }
     },
     {
-      "coverage_line": 53,
+      "coverage_line": 47,
       "source_recipe_id": "TNC6-APPLESAUCE",
       "food_ingredient_code": "WATER",
       "source_position": 2,
@@ -2481,7 +2199,7 @@
       "retention_reason": "Explicit source cooking/preparation water; no retailer purchase requirement. Preserve source amount/condition."
     },
     {
-      "coverage_line": 54,
+      "coverage_line": 48,
       "source_recipe_id": "SNAP4-SPANISH-FRITTATA",
       "food_ingredient_code": "POTATO",
       "source_position": 1,
@@ -2527,7 +2245,7 @@
       }
     },
     {
-      "coverage_line": 55,
+      "coverage_line": 49,
       "source_recipe_id": "SNAP4-SPANISH-FRITTATA",
       "food_ingredient_code": "EGG",
       "source_position": 2,
@@ -2542,19 +2260,19 @@
           "observation_id": "research-x5-v2.json:1",
           "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
           "observation_id": "research-magnit-v2.json:4",
           "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
           "observation_id": "research-panel-v3.json:1",
           "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -2585,7 +2303,7 @@
       }
     },
     {
-      "coverage_line": 56,
+      "coverage_line": 50,
       "source_recipe_id": "SNAP4-SPANISH-FRITTATA",
       "food_ingredient_code": "SUNFLOWER_OIL",
       "source_position": 3,
@@ -2631,7 +2349,7 @@
       }
     },
     {
-      "coverage_line": 57,
+      "coverage_line": 51,
       "source_recipe_id": "SNAP4-SPANISH-FRITTATA",
       "food_ingredient_code": "ONION_YELLOW",
       "source_position": 4,
@@ -2677,7 +2395,7 @@
       }
     },
     {
-      "coverage_line": 58,
+      "coverage_line": 52,
       "source_recipe_id": "SNAP4-SPANISH-FRITTATA",
       "food_ingredient_code": "SALT",
       "source_position": 5,
@@ -2692,19 +2410,19 @@
           "observation_id": "research-lenta-okey-v4.json:17",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
           "observation_id": "research-lenta-okey-v7.json:3",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
           "observation_id": "research-x5-v3.json:2",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -2735,7 +2453,7 @@
       }
     },
     {
-      "coverage_line": 59,
+      "coverage_line": 53,
       "source_recipe_id": "SNAP4-SPANISH-FRITTATA",
       "food_ingredient_code": "BLACK_PEPPER",
       "source_position": 6,
@@ -2750,7 +2468,7 @@
           "observation_id": "research-lenta-okey-v2.json:34",
           "purchase_concept": "Ground black pepper",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -2781,7 +2499,7 @@
       }
     },
     {
-      "coverage_line": 60,
+      "coverage_line": 54,
       "source_recipe_id": "FNS5-BAKED-LENTILS-CASSEROLE",
       "food_ingredient_code": "LENTILS_DRY",
       "source_position": 1,
@@ -2833,7 +2551,7 @@
       }
     },
     {
-      "coverage_line": 61,
+      "coverage_line": 55,
       "source_recipe_id": "FNS5-BAKED-LENTILS-CASSEROLE",
       "food_ingredient_code": "WATER",
       "source_position": 2,
@@ -2847,7 +2565,7 @@
       "retention_reason": "Explicit source cooking/preparation water; no retailer purchase requirement. Preserve source amount/condition."
     },
     {
-      "coverage_line": 62,
+      "coverage_line": 56,
       "source_recipe_id": "FNS5-BAKED-LENTILS-CASSEROLE",
       "food_ingredient_code": "SALT",
       "source_position": 3,
@@ -2862,19 +2580,19 @@
           "observation_id": "research-lenta-okey-v4.json:17",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
           "observation_id": "research-lenta-okey-v7.json:3",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
           "observation_id": "research-x5-v3.json:2",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -2905,7 +2623,7 @@
       }
     },
     {
-      "coverage_line": 63,
+      "coverage_line": 57,
       "source_recipe_id": "FNS5-BAKED-LENTILS-CASSEROLE",
       "food_ingredient_code": "ONION_YELLOW",
       "source_position": 6,
@@ -2951,7 +2669,7 @@
       }
     },
     {
-      "coverage_line": 64,
+      "coverage_line": 58,
       "source_recipe_id": "FNS5-BAKED-LENTILS-CASSEROLE",
       "food_ingredient_code": "TOMATO_CANNED_NO_SALT",
       "source_position": 7,
@@ -3003,7 +2721,7 @@
       }
     },
     {
-      "coverage_line": 65,
+      "coverage_line": 59,
       "source_recipe_id": "FNS5-BAKED-LENTILS-CASSEROLE",
       "food_ingredient_code": "CARROT",
       "source_position": 8,
@@ -3055,7 +2773,7 @@
       }
     },
     {
-      "coverage_line": 66,
+      "coverage_line": 60,
       "source_recipe_id": "FNS5-BAKED-LENTILS-CASSEROLE",
       "food_ingredient_code": "CHEESE_CHEDDAR",
       "source_position": 9,
@@ -3070,13 +2788,13 @@
           "observation_id": "research-correction-market.json:8",
           "purchase_concept": "Natural regular-fat cheddar cheese; grate at home, not processed cheese or reduced-fat cheese",
           "form_match_reviewed": true,
-          "rationale": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
           "observation_id": "research-correction-market.json:9",
           "purchase_concept": "Natural regular-fat cheddar cheese; grate at home, not processed cheese or reduced-fat cheese",
           "form_match_reviewed": true,
-          "rationale": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -3107,7 +2825,7 @@
       }
     },
     {
-      "coverage_line": 67,
+      "coverage_line": 61,
       "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
       "food_ingredient_code": "TOMATO",
       "source_position": 1,
@@ -3159,7 +2877,7 @@
       }
     },
     {
-      "coverage_line": 68,
+      "coverage_line": 62,
       "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
       "food_ingredient_code": "APPLE",
       "source_position": 2,
@@ -3205,7 +2923,7 @@
       }
     },
     {
-      "coverage_line": 69,
+      "coverage_line": 63,
       "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
       "food_ingredient_code": "ONION_YELLOW",
       "source_position": 3,
@@ -3251,7 +2969,7 @@
       }
     },
     {
-      "coverage_line": 70,
+      "coverage_line": 64,
       "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
       "food_ingredient_code": "LIME_JUICE",
       "source_position": 4,
@@ -3303,7 +3021,7 @@
       }
     },
     {
-      "coverage_line": 71,
+      "coverage_line": 65,
       "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
       "food_ingredient_code": "GARLIC",
       "source_position": 5,
@@ -3355,7 +3073,7 @@
       }
     },
     {
-      "coverage_line": 72,
+      "coverage_line": 66,
       "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
       "food_ingredient_code": "SUNFLOWER_OIL",
       "source_position": 6,
@@ -3401,7 +3119,7 @@
       }
     },
     {
-      "coverage_line": 73,
+      "coverage_line": 67,
       "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
       "food_ingredient_code": "SALT",
       "source_position": 7,
@@ -3416,19 +3134,19 @@
           "observation_id": "research-lenta-okey-v4.json:17",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         },
         {
           "observation_id": "research-lenta-okey-v7.json:3",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         },
         {
           "observation_id": "research-x5-v3.json:2",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -3459,7 +3177,7 @@
       }
     },
     {
-      "coverage_line": 74,
+      "coverage_line": 68,
       "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
       "food_ingredient_code": "PASTA_DRY",
       "source_position": 1,
@@ -3505,7 +3223,7 @@
       }
     },
     {
-      "coverage_line": 75,
+      "coverage_line": 69,
       "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
       "food_ingredient_code": "ONION_YELLOW",
       "source_position": 2,
@@ -3551,7 +3269,7 @@
       }
     },
     {
-      "coverage_line": 76,
+      "coverage_line": 70,
       "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
       "food_ingredient_code": "CUCUMBER",
       "source_position": 3,
@@ -3603,7 +3321,7 @@
       }
     },
     {
-      "coverage_line": 77,
+      "coverage_line": 71,
       "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
       "food_ingredient_code": "BELL_PEPPER_GREEN",
       "source_position": 4,
@@ -3649,7 +3367,7 @@
       }
     },
     {
-      "coverage_line": 78,
+      "coverage_line": 72,
       "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
       "food_ingredient_code": "APPLE_CIDER_VINEGAR",
       "source_position": 5,
@@ -3695,7 +3413,7 @@
       }
     },
     {
-      "coverage_line": 79,
+      "coverage_line": 73,
       "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
       "food_ingredient_code": "SUNFLOWER_OIL",
       "source_position": 6,
@@ -3741,7 +3459,7 @@
       }
     },
     {
-      "coverage_line": 80,
+      "coverage_line": 74,
       "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
       "food_ingredient_code": "SALT",
       "source_position": 7,
@@ -3756,19 +3474,19 @@
           "observation_id": "research-lenta-okey-v4.json:17",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         },
         {
           "observation_id": "research-lenta-okey-v7.json:3",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         },
         {
           "observation_id": "research-x5-v3.json:2",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -3799,7 +3517,7 @@
       }
     },
     {
-      "coverage_line": 81,
+      "coverage_line": 75,
       "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
       "food_ingredient_code": "BLACK_PEPPER",
       "source_position": 8,
@@ -3814,7 +3532,7 @@
           "observation_id": "research-lenta-okey-v2.json:34",
           "purchase_concept": "Ground black pepper",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -3845,7 +3563,7 @@
       }
     },
     {
-      "coverage_line": 82,
+      "coverage_line": 76,
       "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
       "food_ingredient_code": "SPINACH",
       "source_position": 1,
@@ -3891,7 +3609,7 @@
       }
     },
     {
-      "coverage_line": 83,
+      "coverage_line": 77,
       "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
       "food_ingredient_code": "APPLE",
       "source_position": 2,
@@ -3937,7 +3655,7 @@
       }
     },
     {
-      "coverage_line": 84,
+      "coverage_line": 78,
       "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
       "food_ingredient_code": "RAISINS_GOLDEN",
       "source_position": 3,
@@ -3983,7 +3701,7 @@
       }
     },
     {
-      "coverage_line": 85,
+      "coverage_line": 79,
       "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
       "food_ingredient_code": "CANOLA_OIL",
       "source_position": 4,
@@ -4029,7 +3747,7 @@
       }
     },
     {
-      "coverage_line": 86,
+      "coverage_line": 80,
       "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
       "food_ingredient_code": "APPLE_CIDER_VINEGAR",
       "source_position": 5,
@@ -4075,7 +3793,7 @@
       }
     },
     {
-      "coverage_line": 87,
+      "coverage_line": 81,
       "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
       "food_ingredient_code": "SUGAR",
       "source_position": 6,
@@ -4133,7 +3851,7 @@
       }
     },
     {
-      "coverage_line": 88,
+      "coverage_line": 82,
       "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
       "food_ingredient_code": "GARLIC_POWDER",
       "source_position": 7,
@@ -4179,7 +3897,7 @@
       }
     },
     {
-      "coverage_line": 89,
+      "coverage_line": 83,
       "source_recipe_id": "SNAP6-PEACH-CRISP",
       "food_ingredient_code": "PEACH",
       "source_position": 1,
@@ -4225,7 +3943,7 @@
       }
     },
     {
-      "coverage_line": 90,
+      "coverage_line": 84,
       "source_recipe_id": "SNAP6-PEACH-CRISP",
       "food_ingredient_code": "MARGARINE",
       "source_position": 2,
@@ -4271,7 +3989,7 @@
       }
     },
     {
-      "coverage_line": 91,
+      "coverage_line": 85,
       "source_recipe_id": "SNAP6-PEACH-CRISP",
       "food_ingredient_code": "OATS_ROLLED",
       "source_position": 3,
@@ -4317,7 +4035,7 @@
       }
     },
     {
-      "coverage_line": 92,
+      "coverage_line": 86,
       "source_recipe_id": "SNAP6-PEACH-CRISP",
       "food_ingredient_code": "SUGAR",
       "source_position": 4,
@@ -4375,7 +4093,7 @@
       }
     },
     {
-      "coverage_line": 93,
+      "coverage_line": 87,
       "source_recipe_id": "SNAP6-PEACH-CRISP",
       "food_ingredient_code": "FLOUR_WHEAT",
       "source_position": 5,
@@ -4421,7 +4139,7 @@
       }
     },
     {
-      "coverage_line": 94,
+      "coverage_line": 88,
       "source_recipe_id": "SNAP6-PEACH-CRISP",
       "food_ingredient_code": "CINNAMON_GROUND",
       "source_position": 6,
@@ -4467,7 +4185,7 @@
       }
     },
     {
-      "coverage_line": 95,
+      "coverage_line": 89,
       "source_recipe_id": "SNAP6-PEACH-CRISP",
       "food_ingredient_code": "LEMON",
       "source_position": 7,
@@ -4519,7 +4237,7 @@
       }
     },
     {
-      "coverage_line": 96,
+      "coverage_line": 90,
       "source_recipe_id": "SNAP6-SEARED-GREENS",
       "food_ingredient_code": "KALE",
       "source_position": 1,
@@ -4565,7 +4283,7 @@
       }
     },
     {
-      "coverage_line": 97,
+      "coverage_line": 91,
       "source_recipe_id": "SNAP6-SEARED-GREENS",
       "food_ingredient_code": "OLIVE_OIL",
       "source_position": 2,
@@ -4617,7 +4335,7 @@
       }
     },
     {
-      "coverage_line": 98,
+      "coverage_line": 92,
       "source_recipe_id": "SNAP6-SEARED-GREENS",
       "food_ingredient_code": "GARLIC",
       "source_position": 3,
@@ -4669,7 +4387,7 @@
       }
     },
     {
-      "coverage_line": 99,
+      "coverage_line": 93,
       "source_recipe_id": "SNAP6-SEARED-GREENS",
       "food_ingredient_code": "WATER",
       "source_position": 4,
@@ -4683,7 +4401,7 @@
       "retention_reason": "Explicit source cooking/preparation water; no retailer purchase requirement. Preserve source amount/condition."
     },
     {
-      "coverage_line": 100,
+      "coverage_line": 94,
       "source_recipe_id": "SNAP6-SEARED-GREENS",
       "food_ingredient_code": "SALT",
       "source_position": 5,
@@ -4698,19 +4416,19 @@
           "observation_id": "research-lenta-okey-v4.json:17",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         },
         {
           "observation_id": "research-lenta-okey-v7.json:3",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         },
         {
           "observation_id": "research-x5-v3.json:2",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -4741,7 +4459,7 @@
       }
     },
     {
-      "coverage_line": 101,
+      "coverage_line": 95,
       "source_recipe_id": "SNAP6-SEARED-GREENS",
       "food_ingredient_code": "BLACK_PEPPER",
       "source_position": 6,
@@ -4756,7 +4474,7 @@
           "observation_id": "research-lenta-okey-v2.json:34",
           "purchase_concept": "Ground black pepper",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -4787,7 +4505,7 @@
       }
     },
     {
-      "coverage_line": 102,
+      "coverage_line": 96,
       "source_recipe_id": "SNAP6-SEARED-GREENS",
       "food_ingredient_code": "APPLE_CIDER_VINEGAR",
       "source_position": 7,
@@ -4833,7 +4551,7 @@
       }
     },
     {
-      "coverage_line": 103,
+      "coverage_line": 97,
       "source_recipe_id": "SNAP8-SOMALI-SUMMER-SALAD",
       "food_ingredient_code": "OLIVE_OIL",
       "source_position": 1,
@@ -4885,7 +4603,7 @@
       }
     },
     {
-      "coverage_line": 104,
+      "coverage_line": 98,
       "source_recipe_id": "SNAP8-SOMALI-SUMMER-SALAD",
       "food_ingredient_code": "LEMON",
       "source_position": 2,
@@ -4937,7 +4655,7 @@
       }
     },
     {
-      "coverage_line": 105,
+      "coverage_line": 99,
       "source_recipe_id": "SNAP8-SOMALI-SUMMER-SALAD",
       "food_ingredient_code": "APPLE",
       "source_position": 3,
@@ -4983,7 +4701,7 @@
       }
     },
     {
-      "coverage_line": 106,
+      "coverage_line": 100,
       "source_recipe_id": "SNAP8-SOMALI-SUMMER-SALAD",
       "food_ingredient_code": "BELL_PEPPER_GREEN",
       "source_position": 4,
@@ -5029,7 +4747,7 @@
       }
     },
     {
-      "coverage_line": 107,
+      "coverage_line": 101,
       "source_recipe_id": "SNAP8-SOMALI-SUMMER-SALAD",
       "food_ingredient_code": "TOMATO",
       "source_position": 5,
@@ -5081,7 +4799,7 @@
       }
     },
     {
-      "coverage_line": 108,
+      "coverage_line": 102,
       "source_recipe_id": "SNAP8-SOMALI-SUMMER-SALAD",
       "food_ingredient_code": "CUCUMBER",
       "source_position": 6,
@@ -5133,7 +4851,7 @@
       }
     },
     {
-      "coverage_line": 109,
+      "coverage_line": 103,
       "source_recipe_id": "FNS2-ORANGE-PORK-CHOPS",
       "food_ingredient_code": "SUNFLOWER_OIL",
       "source_position": 1,
@@ -5179,7 +4897,7 @@
       }
     },
     {
-      "coverage_line": 110,
+      "coverage_line": 104,
       "source_recipe_id": "FNS2-ORANGE-PORK-CHOPS",
       "food_ingredient_code": "PORK_LOIN",
       "source_position": 2,
@@ -5231,7 +4949,7 @@
       }
     },
     {
-      "coverage_line": 111,
+      "coverage_line": 105,
       "source_recipe_id": "FNS2-ORANGE-PORK-CHOPS",
       "food_ingredient_code": "SWEET_POTATO",
       "source_position": 3,
@@ -5277,7 +4995,7 @@
       }
     },
     {
-      "coverage_line": 112,
+      "coverage_line": 106,
       "source_recipe_id": "FNS2-ORANGE-PORK-CHOPS",
       "food_ingredient_code": "ORANGE",
       "source_position": 4,
@@ -5323,7 +5041,7 @@
       }
     },
     {
-      "coverage_line": 113,
+      "coverage_line": 107,
       "source_recipe_id": "WIC4-BUTTERNUT-SOUP",
       "food_ingredient_code": "BUTTERNUT_SQUASH",
       "source_position": 1,
@@ -5369,7 +5087,7 @@
       }
     },
     {
-      "coverage_line": 114,
+      "coverage_line": 108,
       "source_recipe_id": "WIC4-BUTTERNUT-SOUP",
       "food_ingredient_code": "OLIVE_OIL",
       "source_position": 2,
@@ -5421,7 +5139,7 @@
       }
     },
     {
-      "coverage_line": 115,
+      "coverage_line": 109,
       "source_recipe_id": "WIC4-BUTTERNUT-SOUP",
       "food_ingredient_code": "SALT",
       "source_position": 3,
@@ -5436,19 +5154,19 @@
           "observation_id": "research-lenta-okey-v4.json:17",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         },
         {
           "observation_id": "research-lenta-okey-v7.json:3",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         },
         {
           "observation_id": "research-x5-v3.json:2",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -5479,7 +5197,7 @@
       }
     },
     {
-      "coverage_line": 116,
+      "coverage_line": 110,
       "source_recipe_id": "WIC4-BUTTERNUT-SOUP",
       "food_ingredient_code": "MILK_1_PERCENT",
       "source_position": 5,
@@ -5525,7 +5243,7 @@
       }
     },
     {
-      "coverage_line": 117,
+      "coverage_line": 111,
       "source_recipe_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
       "food_ingredient_code": "MILK_1_PERCENT",
       "source_position": 1,
@@ -5571,7 +5289,7 @@
       }
     },
     {
-      "coverage_line": 118,
+      "coverage_line": 112,
       "source_recipe_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
       "food_ingredient_code": "OATS_ROLLED",
       "source_position": 2,
@@ -5641,7 +5359,7 @@
       }
     },
     {
-      "coverage_line": 119,
+      "coverage_line": 113,
       "source_recipe_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
       "food_ingredient_code": "YOGURT_PLAIN_LOW_FAT",
       "source_position": 3,
@@ -5687,7 +5405,7 @@
       }
     },
     {
-      "coverage_line": 120,
+      "coverage_line": 114,
       "source_recipe_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
       "food_ingredient_code": "CINNAMON_GROUND",
       "source_position": 4,
@@ -5733,7 +5451,7 @@
       }
     },
     {
-      "coverage_line": 121,
+      "coverage_line": 115,
       "source_recipe_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
       "food_ingredient_code": "APPLE",
       "source_position": 6,
@@ -5779,7 +5497,7 @@
       }
     },
     {
-      "coverage_line": 122,
+      "coverage_line": 116,
       "source_recipe_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
       "food_ingredient_code": "SPINACH",
       "source_position": 1,
@@ -5825,7 +5543,7 @@
       }
     },
     {
-      "coverage_line": 123,
+      "coverage_line": 117,
       "source_recipe_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
       "food_ingredient_code": "BANANA",
       "source_position": 2,
@@ -5871,7 +5589,7 @@
       }
     },
     {
-      "coverage_line": 124,
+      "coverage_line": 118,
       "source_recipe_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
       "food_ingredient_code": "MILK_1_PERCENT",
       "source_position": 3,
@@ -5917,7 +5635,7 @@
       }
     },
     {
-      "coverage_line": 125,
+      "coverage_line": 119,
       "source_recipe_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
       "food_ingredient_code": "YOGURT_PLAIN_LOW_FAT",
       "source_position": 4,
@@ -5963,7 +5681,7 @@
       }
     },
     {
-      "coverage_line": 126,
+      "coverage_line": 120,
       "source_recipe_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
       "food_ingredient_code": "APPLE",
       "source_position": 5,
@@ -6009,7 +5727,7 @@
       }
     },
     {
-      "coverage_line": 127,
+      "coverage_line": 121,
       "source_recipe_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
       "food_ingredient_code": "STRAWBERRY",
       "source_position": 6,
@@ -6061,7 +5779,7 @@
       }
     },
     {
-      "coverage_line": 128,
+      "coverage_line": 122,
       "source_recipe_id": "SNAP3-GRILLED-FRUIT",
       "food_ingredient_code": "PINEAPPLE",
       "source_position": 1,
@@ -6107,7 +5825,7 @@
       }
     },
     {
-      "coverage_line": 129,
+      "coverage_line": 123,
       "source_recipe_id": "SNAP3-GRILLED-FRUIT",
       "food_ingredient_code": "PEACH",
       "source_position": 2,
@@ -6153,7 +5871,7 @@
       }
     },
     {
-      "coverage_line": 130,
+      "coverage_line": 124,
       "source_recipe_id": "SNAP3-GRILLED-FRUIT",
       "food_ingredient_code": "BANANA",
       "source_position": 3,
@@ -6199,7 +5917,7 @@
       }
     },
     {
-      "coverage_line": 131,
+      "coverage_line": 125,
       "source_recipe_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
       "food_ingredient_code": "MILK_1_PERCENT",
       "source_position": 1,
@@ -6245,7 +5963,7 @@
       }
     },
     {
-      "coverage_line": 132,
+      "coverage_line": 126,
       "source_recipe_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
       "food_ingredient_code": "YOGURT_PLAIN_LOW_FAT",
       "source_position": 2,
@@ -6291,7 +6009,7 @@
       }
     },
     {
-      "coverage_line": 133,
+      "coverage_line": 127,
       "source_recipe_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
       "food_ingredient_code": "BANANA",
       "source_position": 3,
@@ -6337,7 +6055,7 @@
       }
     },
     {
-      "coverage_line": 134,
+      "coverage_line": 128,
       "source_recipe_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
       "food_ingredient_code": "SPINACH",
       "source_position": 4,
@@ -6383,7 +6101,7 @@
       }
     },
     {
-      "coverage_line": 135,
+      "coverage_line": 129,
       "source_recipe_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
       "food_ingredient_code": "APPLE",
       "source_position": 5,
@@ -6429,7 +6147,7 @@
       }
     },
     {
-      "coverage_line": 136,
+      "coverage_line": 130,
       "source_recipe_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
       "food_ingredient_code": "CAULIFLOWER",
       "source_position": 6,
@@ -6475,7 +6193,7 @@
       }
     },
     {
-      "coverage_line": 137,
+      "coverage_line": 131,
       "source_recipe_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
       "food_ingredient_code": "OATS_ROLLED",
       "source_position": 7,
@@ -6545,7 +6263,7 @@
       }
     },
     {
-      "coverage_line": 138,
+      "coverage_line": 132,
       "source_recipe_id": "SNAP4-PEAR-ORANGE-SAUCE",
       "food_ingredient_code": "PEAR",
       "source_position": 1,
@@ -6591,7 +6309,7 @@
       }
     },
     {
-      "coverage_line": 139,
+      "coverage_line": 133,
       "source_recipe_id": "SNAP4-PEAR-ORANGE-SAUCE",
       "food_ingredient_code": "ORANGE",
       "source_position": 2,
@@ -6637,7 +6355,7 @@
       }
     },
     {
-      "coverage_line": 140,
+      "coverage_line": 134,
       "source_recipe_id": "SNAP4-PEAR-ORANGE-SAUCE",
       "food_ingredient_code": "SUGAR",
       "source_position": 3,
@@ -6695,7 +6413,7 @@
       }
     },
     {
-      "coverage_line": 141,
+      "coverage_line": 135,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "OLIVE_OIL",
       "source_position": 1,
@@ -6747,7 +6465,7 @@
       }
     },
     {
-      "coverage_line": 142,
+      "coverage_line": 136,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "ONION_RED",
       "source_position": 2,
@@ -6793,7 +6511,7 @@
       }
     },
     {
-      "coverage_line": 143,
+      "coverage_line": 137,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "GARLIC",
       "source_position": 3,
@@ -6845,7 +6563,7 @@
       }
     },
     {
-      "coverage_line": 144,
+      "coverage_line": 138,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "POTATO",
       "source_position": 4,
@@ -6891,7 +6609,7 @@
       }
     },
     {
-      "coverage_line": 145,
+      "coverage_line": 139,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "CARROT",
       "source_position": 5,
@@ -6943,7 +6661,7 @@
       }
     },
     {
-      "coverage_line": 146,
+      "coverage_line": 140,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "ASPARAGUS",
       "source_position": 6,
@@ -6989,7 +6707,7 @@
       }
     },
     {
-      "coverage_line": 147,
+      "coverage_line": 141,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "GREEN_BEANS",
       "source_position": 7,
@@ -7035,7 +6753,7 @@
       }
     },
     {
-      "coverage_line": 148,
+      "coverage_line": 142,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "RADISH",
       "source_position": 8,
@@ -7081,7 +6799,7 @@
       }
     },
     {
-      "coverage_line": 149,
+      "coverage_line": 143,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "SALT",
       "source_position": 9,
@@ -7096,19 +6814,19 @@
           "observation_id": "research-lenta-okey-v4.json:17",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; preserve source quantity and preparation without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; preserve source quantity and preparation without conversion."
         },
         {
           "observation_id": "research-lenta-okey-v7.json:3",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; preserve source quantity and preparation without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; preserve source quantity and preparation without conversion."
         },
         {
           "observation_id": "research-x5-v3.json:2",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; preserve source quantity and preparation without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; preserve source quantity and preparation without conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -7139,7 +6857,7 @@
       }
     },
     {
-      "coverage_line": 150,
+      "coverage_line": 144,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "BLACK_PEPPER",
       "source_position": 10,
@@ -7154,7 +6872,7 @@
           "observation_id": "research-lenta-okey-v2.json:34",
           "purchase_concept": "Ground black pepper",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; preserve source quantity and preparation without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; preserve source quantity and preparation without conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -7185,7 +6903,7 @@
       }
     },
     {
-      "coverage_line": 151,
+      "coverage_line": 145,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "DILL_DRIED",
       "source_position": 11,
@@ -7231,7 +6949,7 @@
       }
     },
     {
-      "coverage_line": 152,
+      "coverage_line": 146,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "WATER",
       "source_position": 12,
@@ -7245,7 +6963,7 @@
       "retention_reason": "Explicit source cooking/preparation water; no retailer purchase requirement. Preserve source amount/condition."
     },
     {
-      "coverage_line": 153,
+      "coverage_line": 147,
       "source_recipe_id": "FNS4-OVEN-FRIED-FISH",
       "food_ingredient_code": "EGG",
       "source_position": 1,
@@ -7260,19 +6978,19 @@
           "observation_id": "research-x5-v2.json:1",
           "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
           "observation_id": "research-magnit-v2.json:4",
           "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
           "observation_id": "research-panel-v3.json:1",
           "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -7303,7 +7021,7 @@
       }
     },
     {
-      "coverage_line": 154,
+      "coverage_line": 148,
       "source_recipe_id": "FNS4-OVEN-FRIED-FISH",
       "food_ingredient_code": "SALT",
       "source_position": 2,
@@ -7318,19 +7036,19 @@
           "observation_id": "research-lenta-okey-v4.json:17",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
           "observation_id": "research-lenta-okey-v7.json:3",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
           "observation_id": "research-x5-v3.json:2",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -7361,7 +7079,7 @@
       }
     },
     {
-      "coverage_line": 155,
+      "coverage_line": 149,
       "source_recipe_id": "FNS4-OVEN-FRIED-FISH",
       "food_ingredient_code": "BLACK_PEPPER",
       "source_position": 3,
@@ -7376,7 +7094,7 @@
           "observation_id": "research-lenta-okey-v2.json:34",
           "purchase_concept": "Ground black pepper",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -7407,7 +7125,7 @@
       }
     },
     {
-      "coverage_line": 156,
+      "coverage_line": 150,
       "source_recipe_id": "FNS4-OVEN-FRIED-FISH",
       "food_ingredient_code": "BREADCRUMBS",
       "source_position": 4,
@@ -7453,7 +7171,7 @@
       }
     },
     {
-      "coverage_line": 157,
+      "coverage_line": 151,
       "source_recipe_id": "FNS4-OVEN-FRIED-FISH",
       "food_ingredient_code": "TILAPIA_RAW",
       "source_position": 5,
@@ -7499,7 +7217,7 @@
       }
     },
     {
-      "coverage_line": 158,
+      "coverage_line": 152,
       "source_recipe_id": "FNS4-OVEN-FRIED-FISH",
       "food_ingredient_code": "BUTTER_UNSALTED",
       "source_position": 6,
@@ -7545,7 +7263,7 @@
       }
     },
     {
-      "coverage_line": 159,
+      "coverage_line": 153,
       "source_recipe_id": "SNAP8-APPLE-CARROT-SOUP",
       "food_ingredient_code": "PORK_LOIN",
       "source_position": 1,
@@ -7597,7 +7315,7 @@
       }
     },
     {
-      "coverage_line": 160,
+      "coverage_line": 154,
       "source_recipe_id": "SNAP8-APPLE-CARROT-SOUP",
       "food_ingredient_code": "APPLE",
       "source_position": 2,
@@ -7643,7 +7361,7 @@
       }
     },
     {
-      "coverage_line": 161,
+      "coverage_line": 155,
       "source_recipe_id": "SNAP8-APPLE-CARROT-SOUP",
       "food_ingredient_code": "CARROT",
       "source_position": 3,
@@ -7695,7 +7413,7 @@
       }
     },
     {
-      "coverage_line": 162,
+      "coverage_line": 156,
       "source_recipe_id": "SNAP8-APPLE-CARROT-SOUP",
       "food_ingredient_code": "GINGER",
       "source_position": 5,
@@ -7741,7 +7459,7 @@
       }
     },
     {
-      "coverage_line": 163,
+      "coverage_line": 157,
       "source_recipe_id": "SNAP8-APPLE-CARROT-SOUP",
       "food_ingredient_code": "SALT",
       "source_position": 6,
@@ -7756,19 +7474,19 @@
           "observation_id": "research-lenta-okey-v4.json:17",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         },
         {
           "observation_id": "research-lenta-okey-v7.json:3",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         },
         {
           "observation_id": "research-x5-v3.json:2",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -7799,7 +7517,7 @@
       }
     },
     {
-      "coverage_line": 164,
+      "coverage_line": 158,
       "source_recipe_id": "SNAP8-APPLE-CARROT-SOUP",
       "food_ingredient_code": "WATER",
       "source_position": 7,
@@ -7813,7 +7531,7 @@
       "retention_reason": "Explicit source cooking/preparation water; no retailer purchase requirement. Preserve source amount/condition."
     },
     {
-      "coverage_line": 165,
+      "coverage_line": 159,
       "source_recipe_id": "SNAP6-WALDORF-SALAD",
       "food_ingredient_code": "WALNUTS_RAW",
       "source_position": 1,
@@ -7859,7 +7577,7 @@
       }
     },
     {
-      "coverage_line": 166,
+      "coverage_line": 160,
       "source_recipe_id": "SNAP6-WALDORF-SALAD",
       "food_ingredient_code": "APPLE",
       "source_position": 2,
@@ -7905,7 +7623,7 @@
       }
     },
     {
-      "coverage_line": 167,
+      "coverage_line": 161,
       "source_recipe_id": "SNAP6-WALDORF-SALAD",
       "food_ingredient_code": "CELERY",
       "source_position": 3,
@@ -7951,7 +7669,7 @@
       }
     },
     {
-      "coverage_line": 168,
+      "coverage_line": 162,
       "source_recipe_id": "SNAP6-WALDORF-SALAD",
       "food_ingredient_code": "RAISINS_GOLDEN",
       "source_position": 4,
@@ -7997,7 +7715,7 @@
       }
     },
     {
-      "coverage_line": 169,
+      "coverage_line": 163,
       "source_recipe_id": "SNAP6-WALDORF-SALAD",
       "food_ingredient_code": "YOGURT_GREEK_NONFAT",
       "source_position": 5,
@@ -8043,7 +7761,7 @@
       }
     },
     {
-      "coverage_line": 170,
+      "coverage_line": 164,
       "source_recipe_id": "SNAP6-WALDORF-SALAD",
       "food_ingredient_code": "SUGAR",
       "source_position": 6,
@@ -8101,7 +7819,7 @@
       }
     },
     {
-      "coverage_line": 171,
+      "coverage_line": 165,
       "source_recipe_id": "SNAP6-WALDORF-SALAD",
       "food_ingredient_code": "LEMON",
       "source_position": 7,
@@ -8153,7 +7871,7 @@
       }
     },
     {
-      "coverage_line": 172,
+      "coverage_line": 166,
       "source_recipe_id": "SNAP4-BROWN-RICE-PILAF",
       "food_ingredient_code": "RICE_BROWN",
       "source_position": 1,
@@ -8199,7 +7917,7 @@
       }
     },
     {
-      "coverage_line": 173,
+      "coverage_line": 167,
       "source_recipe_id": "SNAP4-BROWN-RICE-PILAF",
       "food_ingredient_code": "WATER",
       "source_position": 2,
@@ -8213,7 +7931,7 @@
       "retention_reason": "Explicit source cooking/preparation water; no retailer purchase requirement. Preserve source amount/condition."
     },
     {
-      "coverage_line": 174,
+      "coverage_line": 168,
       "source_recipe_id": "SNAP4-BROWN-RICE-PILAF",
       "food_ingredient_code": "ALMONDS_RAW",
       "source_position": 3,
@@ -8259,7 +7977,7 @@
       }
     },
     {
-      "coverage_line": 175,
+      "coverage_line": 169,
       "source_recipe_id": "SNAP4-BROWN-RICE-PILAF",
       "food_ingredient_code": "PARSLEY_DRIED",
       "source_position": 4,
@@ -8305,7 +8023,7 @@
       }
     },
     {
-      "coverage_line": 176,
+      "coverage_line": 170,
       "source_recipe_id": "SNAP4-BROWN-RICE-PILAF",
       "food_ingredient_code": "GARLIC_POWDER",
       "source_position": 5,
@@ -8351,7 +8069,7 @@
       }
     },
     {
-      "coverage_line": 177,
+      "coverage_line": 171,
       "source_recipe_id": "SNAP4-BROWN-RICE-PILAF",
       "food_ingredient_code": "BLACK_PEPPER",
       "source_position": 6,
@@ -8366,7 +8084,7 @@
           "observation_id": "research-lenta-okey-v2.json:34",
           "purchase_concept": "Ground black pepper",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -8397,7 +8115,7 @@
       }
     },
     {
-      "coverage_line": 178,
+      "coverage_line": 172,
       "source_recipe_id": "SNAP5-KALE-NUTS-RAISINS",
       "food_ingredient_code": "WALNUTS_RAW",
       "source_position": 1,
@@ -8443,7 +8161,7 @@
       }
     },
     {
-      "coverage_line": 179,
+      "coverage_line": 173,
       "source_recipe_id": "SNAP5-KALE-NUTS-RAISINS",
       "food_ingredient_code": "SUNFLOWER_OIL",
       "source_position": 2,
@@ -8489,7 +8207,7 @@
       }
     },
     {
-      "coverage_line": 180,
+      "coverage_line": 174,
       "source_recipe_id": "SNAP5-KALE-NUTS-RAISINS",
       "food_ingredient_code": "GARLIC",
       "source_position": 3,
@@ -8541,7 +8259,7 @@
       }
     },
     {
-      "coverage_line": 181,
+      "coverage_line": 175,
       "source_recipe_id": "SNAP5-KALE-NUTS-RAISINS",
       "food_ingredient_code": "KALE",
       "source_position": 4,
@@ -8587,7 +8305,7 @@
       }
     },
     {
-      "coverage_line": 182,
+      "coverage_line": 176,
       "source_recipe_id": "SNAP5-KALE-NUTS-RAISINS",
       "food_ingredient_code": "RAISINS_GOLDEN",
       "source_position": 5,
@@ -8633,7 +8351,7 @@
       }
     },
     {
-      "coverage_line": 183,
+      "coverage_line": 177,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "CHICKEN_THIGH",
       "source_position": 1,
@@ -8679,7 +8397,7 @@
       }
     },
     {
-      "coverage_line": 184,
+      "coverage_line": 178,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "SUNFLOWER_OIL",
       "source_position": 2,
@@ -8725,7 +8443,7 @@
       }
     },
     {
-      "coverage_line": 185,
+      "coverage_line": 179,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "SALT",
       "source_position": 3,
@@ -8740,19 +8458,19 @@
           "observation_id": "research-lenta-okey-v4.json:17",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Listed source amount retained although application omitted from directions."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Listed source amount retained although application omitted from directions."
         },
         {
           "observation_id": "research-lenta-okey-v7.json:3",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Listed source amount retained although application omitted from directions."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Listed source amount retained although application omitted from directions."
         },
         {
           "observation_id": "research-x5-v3.json:2",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Listed source amount retained although application omitted from directions."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Listed source amount retained although application omitted from directions."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -8783,7 +8501,7 @@
       }
     },
     {
-      "coverage_line": 186,
+      "coverage_line": 180,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "BLACK_PEPPER",
       "source_position": 4,
@@ -8798,7 +8516,7 @@
           "observation_id": "research-lenta-okey-v2.json:34",
           "purchase_concept": "Ground black pepper",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Listed source amount retained although application omitted from directions."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Listed source amount retained although application omitted from directions."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -8829,7 +8547,7 @@
       }
     },
     {
-      "coverage_line": 187,
+      "coverage_line": 181,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "ONION_YELLOW",
       "source_position": 5,
@@ -8875,7 +8593,7 @@
       }
     },
     {
-      "coverage_line": 188,
+      "coverage_line": 182,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "GARLIC",
       "source_position": 6,
@@ -8927,7 +8645,7 @@
       }
     },
     {
-      "coverage_line": 189,
+      "coverage_line": 183,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "THYME_DRIED",
       "source_position": 7,
@@ -8973,7 +8691,7 @@
       }
     },
     {
-      "coverage_line": 190,
+      "coverage_line": 184,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "ROSEMARY_DRIED",
       "source_position": 8,
@@ -9019,7 +8737,7 @@
       }
     },
     {
-      "coverage_line": 191,
+      "coverage_line": 185,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "WATER",
       "source_position": 9,
@@ -9033,7 +8751,7 @@
       "retention_reason": "Explicit source cooking/preparation water; no retailer purchase requirement. Preserve source amount/condition."
     },
     {
-      "coverage_line": 192,
+      "coverage_line": 186,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "SPINACH",
       "source_position": 10,
@@ -9079,7 +8797,7 @@
       }
     },
     {
-      "coverage_line": 193,
+      "coverage_line": 187,
       "source_recipe_id": "SNAP4-DILLED-FISH-FILLETS",
       "food_ingredient_code": "COD_ATLANTIC",
       "source_position": 1,
@@ -9125,7 +8843,7 @@
       }
     },
     {
-      "coverage_line": 194,
+      "coverage_line": 188,
       "source_recipe_id": "SNAP4-DILLED-FISH-FILLETS",
       "food_ingredient_code": "LEMON",
       "source_position": 2,
@@ -9177,7 +8895,7 @@
       }
     },
     {
-      "coverage_line": 195,
+      "coverage_line": 189,
       "source_recipe_id": "SNAP4-DILLED-FISH-FILLETS",
       "food_ingredient_code": "DILL_DRIED",
       "source_position": 3,
@@ -9223,7 +8941,7 @@
       }
     },
     {
-      "coverage_line": 196,
+      "coverage_line": 190,
       "source_recipe_id": "SNAP4-DILLED-FISH-FILLETS",
       "food_ingredient_code": "SALT",
       "source_position": 4,
@@ -9238,19 +8956,19 @@
           "observation_id": "research-lenta-okey-v4.json:17",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact source amount."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Exact source amount."
         },
         {
           "observation_id": "research-lenta-okey-v7.json:3",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact source amount."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Exact source amount."
         },
         {
           "observation_id": "research-x5-v3.json:2",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Exact source amount."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. New consumables-correction recipe independently checked against this exact existing form; see selected_market_re_review or reviewed WIC generic-cheese/cheddar selection. No blanket code clearance. Source normalization: Exact source amount."
         }
       ],
       "ordinary_retail_plausibility": true,

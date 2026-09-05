@@ -1,0 +1,3154 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-05",
+  "reviewed_head": "66a30403e3463248bb9b66e5a40920ef3fb136b5",
+  "scope": "Actual-source direction/consumable audit corpus positions16–30 only.",
+  "method": "All exact named artifacts SHA-256 checked; full ingredients/directions/applicable notes/tips/alternatives read; three PDF recipe pages rendered and visually inspected; HTML bodies parsed read-only. Every selected food position crosswalked.",
+  "edible_definition": "Intrinsic edibility; water_fate separately marks retained versus discarded process/hygiene water.",
+  "recipes": [
+    {
+      "recipe_source_id": "FNS2-ORANGE-PORK-CHOPS",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/orange-porkchops",
+      "source_sha256": "aa07563b660219b4173edc63cf6f76478e1bc71bff7f0c8a54fc5eaf5985a479",
+      "source_artifact": "data2-correction-orange-pork-chops.pdf",
+      "hash_verified": true,
+      "status": "REVIEWED",
+      "reviewed_sections": {
+        "ingredient_list": "REVIEWED",
+        "numbered_directions": "REVIEWED",
+        "preparation_notes": "REVIEWED",
+        "footnotes": "NOT_PRESENT_NOT_USED",
+        "recipe_specific_tips": "REVIEWED",
+        "alternative_methods": "REVIEWED",
+        "supporting_instructions": "NOT_PRESENT_NOT_USED"
+      },
+      "rows": [
+        {
+          "row_id": "FNS2-ORANGE-PORK-CHOPS:LIST-01",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 1",
+          "source_wording": "1 teaspoon oil",
+          "concept": "SUNFLOWER_OIL",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 teaspoon oil",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "SUNFLOWER_OIL"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS2-ORANGE-PORK-CHOPS:LIST-02",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 2",
+          "source_wording": "2 pork chops",
+          "concept": "PORK_LOIN",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 pork chops",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "PORK_LOIN"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS2-ORANGE-PORK-CHOPS:LIST-03",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 3",
+          "source_wording": "1 medium sweet potato, peeled and cut into ½-inch slices",
+          "concept": "SWEET_POTATO",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 medium sweet potato, peeled and cut into ½-inch slices",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "SWEET_POTATO"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS2-ORANGE-PORK-CHOPS:LIST-04",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 4",
+          "source_wording": "½ medium orange, sliced",
+          "concept": "ORANGE",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ medium orange, sliced",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "ORANGE"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS2-ORANGE-PORK-CHOPS:LIST-05",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 5",
+          "source_wording": "1 dash cinnamon?(optional)",
+          "concept": "1 dash cinnamon (optional)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 dash cinnamon (optional)",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Explicit source option omitted; no fabricated required addition.",
+          "optionality_evidence": "1 dash cinnamon (optional)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS2-ORANGE-PORK-CHOPS:LIST-06",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 6",
+          "source_wording": "1 dash salt?(optional)",
+          "concept": "1 dash salt (optional)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 dash salt (optional)",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Explicit source option omitted; no fabricated required addition.",
+          "optionality_evidence": "1 dash salt (optional)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS2-ORANGE-PORK-CHOPS:LIST-07",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 7",
+          "source_wording": "1 dash black pepper?(optional)",
+          "concept": "1 dash black pepper (optional)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 dash black pepper (optional)",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Explicit source option omitted; no fabricated required addition.",
+          "optionality_evidence": "1 dash black pepper (optional)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS2-ORANGE-PORK-CHOPS:SEASONINGS",
+          "source_location": "PDF p1 Directions4",
+          "source_wording": "sprinkle with seasonings as desired.",
+          "concept": "cinnamon, salt, black pepper",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Explicit source option omitted; no amount invented.",
+          "optionality_evidence": "as desired; list marks all three seasonings optional",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS2-ORANGE-PORK-CHOPS:SIDE",
+          "source_location": "PDF p1 introduction",
+          "source_wording": "Enjoy this flavorful dish with a side of brown rice.",
+          "concept": "brown rice accompaniment",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SERVING_SUGGESTION",
+          "rationale": "Separate side suggestion, not a pork-chop ingredient.",
+          "optionality_evidence": "with a side of brown rice",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_conclusion": "No unresolved required unquantified edible addition found in selected path."
+    },
+    {
+      "recipe_source_id": "WIC4-BUTTERNUT-SOUP",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+      "source_sha256": "ee642490786720348eae5f18170c5dcb26a0c7b22b042fc829ab0dc6ee1e95e8",
+      "source_artifact": "data2-wic-butternut-soup.html",
+      "hash_verified": true,
+      "status": "REVIEWED",
+      "reviewed_sections": {
+        "ingredient_list": "REVIEWED",
+        "numbered_directions": "REVIEWED",
+        "preparation_notes": "REVIEWED",
+        "footnotes": "NOT_PRESENT_NOT_USED",
+        "recipe_specific_tips": "REVIEWED",
+        "alternative_methods": "REVIEWED",
+        "supporting_instructions": "REVIEWED"
+      },
+      "rows": [
+        {
+          "row_id": "WIC4-BUTTERNUT-SOUP:LIST-01",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 1",
+          "source_wording": "1 butternut squash (large - about 3 pounds)",
+          "concept": "BUTTERNUT_SQUASH",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 large (about 3 pounds)",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "BUTTERNUT_SQUASH"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC4-BUTTERNUT-SOUP:LIST-02",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 2",
+          "source_wording": "1 teaspoon olive oil (may need a bit more or less depending on the size of the squash)",
+          "concept": "OLIVE_OIL",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 teaspoon (size-dependent)",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "OLIVE_OIL"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC4-BUTTERNUT-SOUP:LIST-03",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 3",
+          "source_wording": "1 teaspoon salt",
+          "concept": "SALT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "SALT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC4-BUTTERNUT-SOUP:LIST-04",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 4",
+          "source_wording": "white pepper (optional)",
+          "concept": "white pepper (optional)",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Explicit source option omitted; no fabricated required addition.",
+          "optionality_evidence": "white pepper (optional)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC4-BUTTERNUT-SOUP:LIST-05",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 5",
+          "source_wording": "3 cups milk (the amount depends on how thick or thin you like your soup!)",
+          "concept": "MILK_1_PERCENT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "3 cups",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "MILK_1_PERCENT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC4-BUTTERNUT-SOUP:LIST-06",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 6",
+          "source_wording": "plain low-fat or non-fat yogurt (for an optional topping when serving)",
+          "concept": "plain low-fat or non-fat yogurt (for an optional topping when serving)",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Explicit source option omitted; no fabricated required addition.",
+          "optionality_evidence": "plain low-fat or non-fat yogurt (for an optional topping when serving)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC4-BUTTERNUT-SOUP:PARCHMENT",
+          "source_location": "Instructions1; equipment notes",
+          "source_wording": "line a rimmed baking sheet with parchment paper.",
+          "concept": "parchment paper",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_CONSUMABLE",
+          "rationale": "Source-required nonfood pan liner. No oil substituted.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC4-BUTTERNUT-SOUP:TOWEL",
+          "source_location": "Instructions cutting tip",
+          "source_wording": "Use a slip-free cutting board, or place a lightly damp tea towel beneath your cutting board to keep it from moving around.",
+          "concept": "tea towel",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "UNSELECTED_SOURCE_ALTERNATIVE",
+          "rationale": "Slip-free-board branch selected; no water amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": "slip-free cutting board, or",
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC4-BUTTERNUT-SOUP:SEEDS",
+          "source_location": "Introduction",
+          "source_wording": "Once removed, roast the seeds and enjoy them as you would any other roasted seed.",
+          "concept": "squash seeds snack",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SEPARATE_VARIANT",
+          "rationale": "Separate optional snack; no extra soup food/oil inferred.",
+          "optionality_evidence": "You can also get a tasty snack out of this recipe.",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC4-BUTTERNUT-SOUP:VEGETARIAN",
+          "source_location": "Introduction",
+          "source_wording": "Make this recipe vegetarian by substituting vegetable broth or a soy-based beverage for the milk.",
+          "concept": "vegetable broth or soy beverage",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "UNSELECTED_SOURCE_ALTERNATIVE",
+          "rationale": "Milk branch selected; unused variant adds no foods.",
+          "optionality_evidence": null,
+          "alternative_evidence": "substituting vegetable broth or a soy-based beverage for the milk",
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC4-BUTTERNUT-SOUP:OIL",
+          "source_location": "Instructions squash coating",
+          "source_wording": "drizzle each half with just enough olive oil to lightly coat the squash on the inside (about ½ teaspoon each).",
+          "concept": "olive oil",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "about ½ teaspoon each",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "OLIVE_OIL"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Two halves share listed teaspoon, not a second fat amount.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC4-BUTTERNUT-SOUP:TOPPING",
+          "source_location": "Instructions final sentence",
+          "source_wording": "Serve with a dollop of plain yogurt for a bit of tang.",
+          "concept": "plain yogurt topping",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Ingredient entry explicitly says optional topping, authorizing omission despite imperative final sentence.",
+          "optionality_evidence": "plain low-fat or non-fat yogurt (for an optional topping when serving)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_conclusion": "No unresolved required unquantified edible addition found in selected path.",
+      "scope_notes": [
+        "Oil listed1tsp size-dependent caveat; directionsabout1/2tsp each half. Listed baseline selected without extra unquantified fat.",
+        "Milk listed3cups thickness caveat; no additional direction-only liquid commanded."
+      ]
+    },
+    {
+      "recipe_source_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+      "source_sha256": "0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+      "source_artifact": "data2-wic-overnight-oats.html",
+      "hash_verified": true,
+      "status": "REVIEWED",
+      "reviewed_sections": {
+        "ingredient_list": "REVIEWED",
+        "numbered_directions": "REVIEWED",
+        "preparation_notes": "REVIEWED",
+        "footnotes": "NOT_PRESENT_NOT_USED",
+        "recipe_specific_tips": "REVIEWED",
+        "alternative_methods": "REVIEWED",
+        "supporting_instructions": "REVIEWED"
+      },
+      "rows": [
+        {
+          "row_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:LIST-01",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 1",
+          "source_wording": "1⁄3 cup low-fat or non-fat milk (or soy beverage)",
+          "concept": "MILK_1_PERCENT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/3 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "MILK_1_PERCENT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:LIST-02",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 2",
+          "source_wording": "1⁄4 cup oats (rolled or quick)",
+          "concept": "OATS_ROLLED",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/4 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "OATS_ROLLED"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:LIST-03",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 3",
+          "source_wording": "1⁄4 cup plain low-fat or non-fat yogurt",
+          "concept": "YOGURT_PLAIN_LOW_FAT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/4 cup",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "YOGURT_PLAIN_LOW_FAT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": "In fact, aside from the oats and liquid, all other ingredients are optional.",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:LIST-04",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 4",
+          "source_wording": "1 teaspoon cinnamon",
+          "concept": "CINNAMON_GROUND",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 teaspoon",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "CINNAMON_GROUND"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": "In fact, aside from the oats and liquid, all other ingredients are optional.",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:LIST-05",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 5",
+          "source_wording": "1 teaspoon vanilla extract (optional)",
+          "concept": "1 teaspoon vanilla extract (optional)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 teaspoon",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Explicit source option omitted; no fabricated required addition.",
+          "optionality_evidence": "In fact, aside from the oats and liquid, all other ingredients are optional.",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:LIST-06",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 6",
+          "source_wording": "1⁄2 apple (chopped)",
+          "concept": "APPLE",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/2 apple",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "APPLE"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": "In fact, aside from the oats and liquid, all other ingredients are optional.",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:THINNING",
+          "source_location": "Instructions final sentence",
+          "source_wording": "and more liquid if you want a thinner consistency",
+          "concept": "extra liquid for thinning",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Base1/3cup milk retained; optional extra liquid omitted.",
+          "optionality_evidence": "if you want a thinner consistency",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:PB-VARIANT",
+          "source_location": "Introduction variants",
+          "source_wording": "Peanut butter banana - add 2 tablespoons peanut butter and 1/2 of a medium banana (mashed) when ready to eat",
+          "concept": "peanut butter, banana",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 tablespoons peanut butter and 1/2 of a medium banana",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "UNSELECTED_SOURCE_ALTERNATIVE",
+          "rationale": "Separate named variant not combined with selected cinnamon-apple.",
+          "optionality_evidence": null,
+          "alternative_evidence": "Peanut butter banana",
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:PEACH-VARIANT",
+          "source_location": "Introduction variants",
+          "source_wording": "Peaches & cream - use vanilla yogurt and add cinnamon to the overnight mixture, top with sliced peaches",
+          "concept": "vanilla yogurt, peaches, cinnamon",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "UNSELECTED_SOURCE_ALTERNATIVE",
+          "rationale": "Explicit source option omitted; no amount invented.",
+          "optionality_evidence": null,
+          "alternative_evidence": "Peaches & cream",
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:RAISIN-VARIANT",
+          "source_location": "Introduction variants",
+          "source_wording": "Cinnamon raisin - add 2 tablespoons raisins and 1/4 teaspoon cinnamon to the overnight mixture",
+          "concept": "raisins, cinnamon",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 tablespoons raisins and 1/4 teaspoon cinnamon",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "UNSELECTED_SOURCE_ALTERNATIVE",
+          "rationale": "Explicit source option omitted; no amount invented.",
+          "optionality_evidence": null,
+          "alternative_evidence": "Cinnamon raisin",
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:MIXINS",
+          "source_location": "Introduction tips",
+          "source_wording": "Save mix-ins like fresh fruit or anything crunchy like nuts for adding when you're ready to eat it",
+          "concept": "extra fresh fruit/nuts",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Explicit source option omitted; no amount invented.",
+          "optionality_evidence": "aside from the oats and liquid, all other ingredients are optional.",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:DRIED-FRUIT",
+          "source_location": "Recipe notes/tips",
+          "source_wording": "However, dried fruit, which will plump overnight, can be added at night.",
+          "concept": "optional dried-fruit mix-in",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Optional general mix-in timing tip, no new food/amount added to cinnamon-apple selection.",
+          "optionality_evidence": "However, dried fruit, which will plump overnight, can be added at night.",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_conclusion": "No unresolved required unquantified edible addition found in selected path."
+    },
+    {
+      "recipe_source_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+      "source_url": "https://snaped.fns.usda.gov/node/2489",
+      "source_sha256": "240c8b7a10a0399cb70743d48f59c9d6b828c8e640e9cbfc1eec0762cf6108ca",
+      "source_artifact": "data2-correction-simple-green-smoothie.html",
+      "hash_verified": true,
+      "status": "REVIEWED",
+      "reviewed_sections": {
+        "ingredient_list": "REVIEWED",
+        "numbered_directions": "REVIEWED",
+        "preparation_notes": "NOT_PRESENT_NOT_USED",
+        "footnotes": "NOT_PRESENT_NOT_USED",
+        "recipe_specific_tips": "NOT_PRESENT_NOT_USED",
+        "alternative_methods": "NOT_PRESENT_NOT_USED",
+        "supporting_instructions": "NOT_PRESENT_NOT_USED"
+      },
+      "rows": [
+        {
+          "row_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE:LIST-01",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 1",
+          "source_wording": "1 cup kale or spinach",
+          "concept": "SPINACH",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 cup kale or spinach",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "SPINACH"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE:LIST-02",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 2",
+          "source_wording": "1 banana, medium",
+          "concept": "BANANA",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 banana, medium",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "BANANA"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE:LIST-03",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 3",
+          "source_wording": "1 cup low fat milk (or optional coconut milk or almond milk)",
+          "concept": "MILK_1_PERCENT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 cup low fat milk (or optional coconut milk or almond milk)",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "MILK_1_PERCENT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE:LIST-04",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 4",
+          "source_wording": "1 cup plain yogurt",
+          "concept": "YOGURT_PLAIN_LOW_FAT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 cup plain yogurt",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "YOGURT_PLAIN_LOW_FAT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE:LIST-05",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 5",
+          "source_wording": "1 apple, medium (cored and sliced)",
+          "concept": "APPLE",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 apple, medium (cored and sliced)",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "APPLE"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE:LIST-06",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 6",
+          "source_wording": "1 cup frozen fruit (all one fruit or a combination of mixed frozen fruit)",
+          "concept": "STRAWBERRY",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 cup frozen fruit (all one fruit or a combination of mixed frozen fruit)",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "STRAWBERRY"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE:LIST-07",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 7",
+          "source_wording": "flax seeds, 1 Tablespoon (optional)",
+          "concept": "flax seeds, 1 Tablespoon (optional)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "flax seeds, 1 Tablespoon (optional)",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Explicit source option omitted; no fabricated required addition.",
+          "optionality_evidence": "flax seeds, 1 Tablespoon (optional)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE:LIST-08",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 8",
+          "source_wording": "chia seeds, 1 Tablespoon (optional)",
+          "concept": "chia seeds, 1 Tablespoon (optional)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "chia seeds, 1 Tablespoon (optional)",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Explicit source option omitted; no fabricated required addition.",
+          "optionality_evidence": "chia seeds, 1 Tablespoon (optional)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_conclusion": "No unresolved required unquantified edible addition found in selected path."
+    },
+    {
+      "recipe_source_id": "SNAP3-GRILLED-FRUIT",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit",
+      "source_sha256": "03269eead24a3965e76c71a9eed6b7b82b9d785845427fa9b8b445aee55cf6f9",
+      "source_artifact": "data2-snap-grilled-fruit.html",
+      "hash_verified": true,
+      "status": "REVIEWED",
+      "reviewed_sections": {
+        "ingredient_list": "REVIEWED",
+        "numbered_directions": "REVIEWED",
+        "preparation_notes": "REVIEWED",
+        "footnotes": "NOT_PRESENT_NOT_USED",
+        "recipe_specific_tips": "REVIEWED",
+        "alternative_methods": "REVIEWED",
+        "supporting_instructions": "NOT_PRESENT_NOT_USED"
+      },
+      "rows": [
+        {
+          "row_id": "SNAP3-GRILLED-FRUIT:LIST-01",
+          "source_location": "SNAP-Ed recipe / directions; ingredient list row 1",
+          "source_wording": "1 cup pineapple chunks",
+          "concept": "PINEAPPLE",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "PINEAPPLE"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP3-GRILLED-FRUIT:LIST-02",
+          "source_location": "SNAP-Ed recipe / directions; ingredient list row 2",
+          "source_wording": "1 peach (cubed)",
+          "concept": "PEACH",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 peach",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "PEACH"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP3-GRILLED-FRUIT:LIST-03",
+          "source_location": "SNAP-Ed recipe / directions; ingredient list row 3",
+          "source_wording": "1 banana (sliced)",
+          "concept": "BANANA",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 banana",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "BANANA"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP3-GRILLED-FRUIT:WASH-WATER",
+          "source_location": "Directions first hygiene instruction",
+          "source_wording": "Wash hands with soap and water.",
+          "concept": "handwashing water",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "DISCARDED_PROCESS_WATER",
+          "rationale": "Hygiene water not retained in recipe; no food row.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "DISCARDED"
+        },
+        {
+          "row_id": "SNAP3-GRILLED-FRUIT:SOAP",
+          "source_location": "Directions first hygiene instruction",
+          "source_wording": "Wash hands with soap and water.",
+          "concept": "soap",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_CONSUMABLE",
+          "rationale": "Nonfood hygiene consumable, never FoodIngredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP3-GRILLED-FRUIT:SOAK-WATER",
+          "source_location": "Directions Note",
+          "source_wording": "If using wooden skewers, thoroughly soak skewers in water prior to using to prevent burning (approximately 30 minutes).",
+          "concept": "skewer-soaking water",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "CONDITIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "DISCARDED_PROCESS_WATER",
+          "rationale": "Discarded process water;30minutes is duration, not water quantity.",
+          "optionality_evidence": null,
+          "alternative_evidence": "If using wooden skewers",
+          "water_fate": "DISCARDED"
+        },
+        {
+          "row_id": "SNAP3-GRILLED-FRUIT:WOODEN-SKEWER",
+          "source_location": "Directions Note",
+          "source_wording": "If using wooden skewers",
+          "concept": "wooden skewer",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "CONDITIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_CONSUMABLE",
+          "rationale": "Conditional nonfood material/equipment, not edible input.",
+          "optionality_evidence": null,
+          "alternative_evidence": "If using wooden skewers",
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_conclusion": "No unresolved required unquantified edible addition found in selected path."
+    },
+    {
+      "recipe_source_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+      "source_sha256": "439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6",
+      "source_artifact": "data2-wic-spinach-cauliflower-smoothie.html",
+      "hash_verified": true,
+      "status": "REVIEWED",
+      "reviewed_sections": {
+        "ingredient_list": "REVIEWED",
+        "numbered_directions": "REVIEWED",
+        "preparation_notes": "REVIEWED",
+        "footnotes": "NOT_PRESENT_NOT_USED",
+        "recipe_specific_tips": "REVIEWED",
+        "alternative_methods": "REVIEWED",
+        "supporting_instructions": "REVIEWED"
+      },
+      "rows": [
+        {
+          "row_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:LIST-01",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 1",
+          "source_wording": "1 cup milk",
+          "concept": "MILK_1_PERCENT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "MILK_1_PERCENT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:LIST-02",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 2",
+          "source_wording": "1⁄2 cup plain low-fat or non-fat yogurt (or vanilla flavored)",
+          "concept": "YOGURT_PLAIN_LOW_FAT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/2 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "YOGURT_PLAIN_LOW_FAT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:LIST-03",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 3",
+          "source_wording": "1 banana (peeled and sliced)",
+          "concept": "BANANA",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 banana",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "BANANA"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:LIST-04",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 4",
+          "source_wording": "1 cup spinach",
+          "concept": "SPINACH",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "SPINACH"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:LIST-05",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 5",
+          "source_wording": "1 cup apple (chopped)",
+          "concept": "APPLE",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "APPLE"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:LIST-06",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 6",
+          "source_wording": "1⁄2 cup cauliflower (frozen)",
+          "concept": "CAULIFLOWER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/2 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "CAULIFLOWER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:LIST-07",
+          "source_location": "WIC recipe / instructions and equipment notes; ingredient list row 7",
+          "source_wording": "1⁄2 cup oats",
+          "concept": "OATS_ROLLED",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/2 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [
+            "OATS_ROLLED"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:LIST-08",
+          "source_location": "WIC recipe / instructions and equipment notes; Notes fresh-cauliflower alternative",
+          "source_wording": "1⁄2 cup to 1 cup ice",
+          "concept": "1/2 cup to 1 cup ice",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/2 cup to 1 cup",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Explicit source option omitted; no fabricated required addition.",
+          "optionality_evidence": "1/2 cup to 1 cup ice",
+          "alternative_evidence": null,
+          "water_fate": "RETAINED"
+        },
+        {
+          "row_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:PROTEIN-SIDE",
+          "source_location": "Instructions final sentence",
+          "source_wording": "enjoy as a snack or with a protein food like nuts or an egg!",
+          "concept": "nuts or egg accompaniment",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SERVING_SUGGESTION",
+          "rationale": "Separate accompaniment, not smoothie ingredient.",
+          "optionality_evidence": "as a snack or with",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:FRUIT-VARIANTS",
+          "source_location": "Notes",
+          "source_wording": "Try adding other fruits like pineapple, mango, or pears for a different flavor.",
+          "concept": "pineapple, mango, pears",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "UNSELECTED_SOURCE_ALTERNATIVE",
+          "rationale": "Explicit source option omitted; no amount invented.",
+          "optionality_evidence": "Try adding other fruits",
+          "alternative_evidence": "for a different flavor",
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:FRESH-CAULIFLOWER",
+          "source_location": "Notes",
+          "source_wording": "If you don’t have frozen cauliflower, you can also use fresh cauliflower that’s been steamed.",
+          "concept": "fresh steamed cauliflower",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "UNSELECTED_SOURCE_ALTERNATIVE",
+          "rationale": "Frozen branch selected; no steaming-water inference for unused variant.",
+          "optionality_evidence": null,
+          "alternative_evidence": "If you don’t have frozen cauliflower",
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE:RICED-CAULIFLOWER",
+          "source_location": "Recipe notes/tips",
+          "source_wording": "½ cup frozen riced cauliflower works well in this too!",
+          "concept": "frozen riced cauliflower",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ cup",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "UNSELECTED_SOURCE_ALTERNATIVE",
+          "rationale": "Source-explicit alternative reviewed, not selected; existing frozen cauliflower branch retained.",
+          "optionality_evidence": "½ cup frozen riced cauliflower works well in this too!",
+          "alternative_evidence": "½ cup frozen riced cauliflower works well in this too!",
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_conclusion": "No unresolved required unquantified edible addition found in selected path.",
+      "scope_notes": [
+        "Wash/rinse instruction does not name water or soap; no consumables inferred.",
+        "Optional ice would be retained if selected; currently omitted."
+      ]
+    },
+    {
+      "recipe_source_id": "SNAP4-PEAR-ORANGE-SAUCE",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "source_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "source_artifact": "data2-snap-fall.html",
+      "hash_verified": true,
+      "status": "REVIEWED",
+      "reviewed_sections": {
+        "ingredient_list": "REVIEWED",
+        "numbered_directions": "REVIEWED",
+        "preparation_notes": "NOT_PRESENT_NOT_USED",
+        "footnotes": "NOT_PRESENT_NOT_USED",
+        "recipe_specific_tips": "NOT_PRESENT_NOT_USED",
+        "alternative_methods": "NOT_PRESENT_NOT_USED",
+        "supporting_instructions": "NOT_PRESENT_NOT_USED"
+      },
+      "rows": [
+        {
+          "row_id": "SNAP4-PEAR-ORANGE-SAUCE:LIST-01",
+          "source_location": "Fall Recipes / Pear in Orange Sauce / directions; ingredient list row 1",
+          "source_wording": "4 pears (medium)",
+          "concept": "PEAR",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "4 medium pears",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "PEAR"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-PEAR-ORANGE-SAUCE:LIST-02",
+          "source_location": "Fall Recipes / Pear in Orange Sauce / directions; ingredient list row 2",
+          "source_wording": "3/4 cup orange juice (100%)",
+          "concept": "ORANGE",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "3/4 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "ORANGE"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-PEAR-ORANGE-SAUCE:LIST-03",
+          "source_location": "Fall Recipes / Pear in Orange Sauce / directions; ingredient list row 3",
+          "source_wording": "4 teaspoons sugar",
+          "concept": "SUGAR",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "4 teaspoons",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "SUGAR"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_conclusion": "No unresolved required unquantified edible addition found in selected path.",
+      "scope_notes": [
+        "Double boiler named but water is not; no process water inferred from convention.",
+        "Other Fall recipe consumables outside selected recipe scope."
+      ]
+    },
+    {
+      "recipe_source_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "source_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "source_artifact": "data2-snap-spring.html",
+      "hash_verified": true,
+      "status": "REVIEWED",
+      "reviewed_sections": {
+        "ingredient_list": "REVIEWED",
+        "numbered_directions": "REVIEWED",
+        "preparation_notes": "NOT_PRESENT_NOT_USED",
+        "footnotes": "NOT_PRESENT_NOT_USED",
+        "recipe_specific_tips": "NOT_PRESENT_NOT_USED",
+        "alternative_methods": "NOT_PRESENT_NOT_USED",
+        "supporting_instructions": "NOT_PRESENT_NOT_USED"
+      },
+      "rows": [
+        {
+          "row_id": "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-01",
+          "source_location": "Spring Recipes / Spring Vegetable Saute / directions; ingredient list row 1",
+          "source_wording": "1 teaspoon olive oil",
+          "concept": "OLIVE_OIL",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "OLIVE_OIL"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-02",
+          "source_location": "Spring Recipes / Spring Vegetable Saute / directions; ingredient list row 2",
+          "source_wording": "1/2 cup sweet onion (sliced)",
+          "concept": "ONION_RED",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/2 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "ONION_RED"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-03",
+          "source_location": "Spring Recipes / Spring Vegetable Saute / directions; ingredient list row 3",
+          "source_wording": "1 garlic clove (finely chopped)",
+          "concept": "GARLIC",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 clove",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "GARLIC"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-04",
+          "source_location": "Spring Recipes / Spring Vegetable Saute / directions; ingredient list row 4",
+          "source_wording": "3 new potatoes (tiny, quartered)",
+          "concept": "POTATO",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "3 tiny new potatoes",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "POTATO"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-05",
+          "source_location": "Spring Recipes / Spring Vegetable Saute / directions; ingredient list row 5",
+          "source_wording": "3/4 cup carrot (sliced)",
+          "concept": "CARROT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "3/4 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "CARROT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-06",
+          "source_location": "Spring Recipes / Spring Vegetable Saute / directions; ingredient list row 6",
+          "source_wording": "3/4 cup asparagus pieces",
+          "concept": "ASPARAGUS",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "3/4 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "ASPARAGUS"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-07",
+          "source_location": "Spring Recipes / Spring Vegetable Saute / directions; ingredient list row 7",
+          "source_wording": "3/4 cup sugar snap peas, or green beans",
+          "concept": "GREEN_BEANS",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "3/4 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [
+            "GREEN_BEANS"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-08",
+          "source_location": "Spring Recipes / Spring Vegetable Saute / directions; ingredient list row 8",
+          "source_wording": "1/2 cup radishes (quartered)",
+          "concept": "RADISH",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/2 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            8
+          ],
+          "food_ingredient_codes": [
+            "RADISH"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-09",
+          "source_location": "Spring Recipes / Spring Vegetable Saute / directions; ingredient list row 9",
+          "source_wording": "1/4 teaspoon salt",
+          "concept": "SALT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/4 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            9
+          ],
+          "food_ingredient_codes": [
+            "SALT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-10",
+          "source_location": "Spring Recipes / Spring Vegetable Saute / directions; ingredient list row 10",
+          "source_wording": "1/4 teaspoon black pepper",
+          "concept": "BLACK_PEPPER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/4 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            10
+          ],
+          "food_ingredient_codes": [
+            "BLACK_PEPPER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-11",
+          "source_location": "Spring Recipes / Spring Vegetable Saute / directions; ingredient list row 11",
+          "source_wording": "1/2 teaspoon dill (dried)",
+          "concept": "DILL_DRIED",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/2 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            11
+          ],
+          "food_ingredient_codes": [
+            "DILL_DRIED"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-SPRING-VEGETABLE-SAUTE:LIST-12",
+          "source_location": "Spring Recipes / Spring Vegetable Saute / directions; Directions step2",
+          "source_wording": "If the vegetables start to brown, add a Tablespoon or 2 of water.",
+          "concept": "WATER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 or 2 tablespoons, only if vegetables start to brown",
+          "requirement": "CONDITIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [
+            12
+          ],
+          "food_ingredient_codes": [
+            "WATER"
+          ],
+          "resolution": "ALREADY_STRUCTURED_DIRECTION_ROW",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "RETAINED"
+        }
+      ],
+      "unresolved_conclusion": "No unresolved required unquantified edible addition found in selected path."
+    },
+    {
+      "recipe_source_id": "FNS4-OVEN-FRIED-FISH",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/fish",
+      "source_sha256": "068b5b0d4c7e45ad498758501bcc8f67b7e5f69f9c27ea4db4af39b05cba069c",
+      "source_artifact": "data2-correction-oven-fried-fish.pdf",
+      "hash_verified": true,
+      "status": "REVIEWED",
+      "reviewed_sections": {
+        "ingredient_list": "REVIEWED",
+        "numbered_directions": "REVIEWED",
+        "preparation_notes": "REVIEWED",
+        "footnotes": "NOT_PRESENT_NOT_USED",
+        "recipe_specific_tips": "REVIEWED",
+        "alternative_methods": "REVIEWED",
+        "supporting_instructions": "NOT_PRESENT_NOT_USED"
+      },
+      "rows": [
+        {
+          "row_id": "FNS4-OVEN-FRIED-FISH:LIST-01",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 1",
+          "source_wording": "1 large egg, slightly beaten",
+          "concept": "EGG",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 large egg, slightly beaten",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "EGG"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS4-OVEN-FRIED-FISH:LIST-02",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 2",
+          "source_wording": "½ teaspoon salt",
+          "concept": "SALT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ teaspoon salt",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "SALT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS4-OVEN-FRIED-FISH:LIST-03",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 3",
+          "source_wording": "½ teaspoon ground black pepper",
+          "concept": "BLACK_PEPPER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ teaspoon ground black pepper",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "BLACK_PEPPER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS4-OVEN-FRIED-FISH:LIST-04",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 4",
+          "source_wording": "½ cup breadcrumbs",
+          "concept": "BREADCRUMBS",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ cup breadcrumbs",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "BREADCRUMBS"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS4-OVEN-FRIED-FISH:LIST-05",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 5",
+          "source_wording": "1 pound tilapia fillets, fresh or frozen and thawed (4 fillets)",
+          "concept": "TILAPIA_RAW",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 pound tilapia fillets, fresh or frozen and thawed (4 fillets)",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "TILAPIA_RAW"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS4-OVEN-FRIED-FISH:LIST-06",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 6",
+          "source_wording": "1 tablespoon butter, melted",
+          "concept": "BUTTER_UNSALTED",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 tablespoon butter, melted",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "BUTTER_UNSALTED"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS4-OVEN-FRIED-FISH:LIST-07",
+          "source_location": "Complete official Print PDF and linked recipe page; ingredient list row 7",
+          "source_wording": "lime or lemon slices (optional)",
+          "concept": "lime or lemon slices (optional)",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Explicit source option omitted; no fabricated required addition.",
+          "optionality_evidence": "lime or lemon slices (optional)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS4-OVEN-FRIED-FISH:PAN-BUTTER",
+          "source_location": "PDF p1 Directions4",
+          "source_wording": "Melt butter in a shallow 9x13 inch baking pan for 1 minute in the oven. Tilt pan to coat with butter.",
+          "concept": "pan-coating butter",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 tablespoon butter, melted",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "BUTTER_UNSALTED"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Listed tablespoon explicitly coats pan; no extra butter/spray.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS4-OVEN-FRIED-FISH:CITRUS",
+          "source_location": "PDF p1 Directions6",
+          "source_wording": "Serve topped with lime or lemon slices if desired.",
+          "concept": "lime/lemon slices",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Explicit source option omitted; no amount invented.",
+          "optionality_evidence": "if desired; list optional",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS4-OVEN-FRIED-FISH:SIDE",
+          "source_location": "PDF p1 introduction",
+          "source_wording": "Oven fried fish pairs well with fresh summer vegetables or hearty root vegetables in the winter.",
+          "concept": "vegetable accompaniment",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SERVING_SUGGESTION",
+          "rationale": "Pairing suggestion, not unquantified recipe ingredient.",
+          "optionality_evidence": "pairs well with",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_conclusion": "No unresolved required unquantified edible addition found in selected path."
+    },
+    {
+      "recipe_source_id": "SNAP8-APPLE-CARROT-SOUP",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+      "source_sha256": "1cc2ed9ddb3253b4a9a5ed9aa6609184e7381035977d00a542a00239f8261258",
+      "source_artifact": "data2-snap-apple-carrot-soup.html",
+      "hash_verified": true,
+      "status": "REVIEWED",
+      "reviewed_sections": {
+        "ingredient_list": "REVIEWED",
+        "numbered_directions": "REVIEWED",
+        "preparation_notes": "NOT_PRESENT_NOT_USED",
+        "footnotes": "NOT_PRESENT_NOT_USED",
+        "recipe_specific_tips": "NOT_PRESENT_NOT_USED",
+        "alternative_methods": "NOT_PRESENT_NOT_USED",
+        "supporting_instructions": "NOT_PRESENT_NOT_USED"
+      },
+      "rows": [
+        {
+          "row_id": "SNAP8-APPLE-CARROT-SOUP:LIST-01",
+          "source_location": "SNAP-Ed recipe / directions; ingredient list row 1",
+          "source_wording": "1 pound pork (lean, cut into chunks)",
+          "concept": "PORK_LOIN",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 pound",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "PORK_LOIN"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP8-APPLE-CARROT-SOUP:LIST-02",
+          "source_location": "SNAP-Ed recipe / directions; ingredient list row 2",
+          "source_wording": "4 apples (with skin, cored and quartered)",
+          "concept": "APPLE",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "4 apples",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "APPLE"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP8-APPLE-CARROT-SOUP:LIST-03",
+          "source_location": "SNAP-Ed recipe / directions; ingredient list row 3",
+          "source_wording": "4 carrots (large, peeled and cut into chunks)",
+          "concept": "CARROT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "4 large",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "CARROT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP8-APPLE-CARROT-SOUP:LIST-04",
+          "source_location": "SNAP-Ed recipe / directions; ingredient list row 4",
+          "source_wording": "orange peel (dried, 1 teaspoon, optional)",
+          "concept": "orange peel (dried, 1 teaspoon, optional)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 teaspoon",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Explicit source option omitted; no fabricated required addition.",
+          "optionality_evidence": "orange peel (dried, 1 teaspoon, optional)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP8-APPLE-CARROT-SOUP:LIST-05",
+          "source_location": "SNAP-Ed recipe / directions; ingredient list row 5",
+          "source_wording": "4 slices ginger",
+          "concept": "GINGER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "4 slices",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "GINGER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP8-APPLE-CARROT-SOUP:LIST-06",
+          "source_location": "SNAP-Ed recipe / directions; ingredient list row 6",
+          "source_wording": "1/2 teaspoon salt",
+          "concept": "SALT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/2 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "SALT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP8-APPLE-CARROT-SOUP:LIST-07",
+          "source_location": "SNAP-Ed recipe / directions; ingredient list row 7",
+          "source_wording": "20 cups water",
+          "concept": "WATER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "20 cups",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [
+            "WATER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "RETAINED"
+        },
+        {
+          "row_id": "SNAP8-APPLE-CARROT-SOUP:WASH-WATER",
+          "source_location": "Directions first hygiene instruction",
+          "source_wording": "Wash hands with soap and water.",
+          "concept": "handwashing water",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "DISCARDED_PROCESS_WATER",
+          "rationale": "Hygiene water not retained in recipe; no food row.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "DISCARDED"
+        },
+        {
+          "row_id": "SNAP8-APPLE-CARROT-SOUP:SOAP",
+          "source_location": "Directions first hygiene instruction",
+          "source_wording": "Wash hands with soap and water.",
+          "concept": "soap",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_CONSUMABLE",
+          "rationale": "Nonfood hygiene consumable, never FoodIngredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_conclusion": "No unresolved required unquantified edible addition found in selected path.",
+      "scope_notes": [
+        "Listed20cups water reduces to about8cups liquid; retained soup water, no evaporation conversion.",
+        "Skim fat removes released pork fat, not a new fat addition."
+      ]
+    },
+    {
+      "recipe_source_id": "SNAP6-WALDORF-SALAD",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "source_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "source_artifact": "data2-snap-fall.html",
+      "hash_verified": true,
+      "status": "REVIEWED",
+      "reviewed_sections": {
+        "ingredient_list": "REVIEWED",
+        "numbered_directions": "REVIEWED",
+        "preparation_notes": "NOT_PRESENT_NOT_USED",
+        "footnotes": "NOT_PRESENT_NOT_USED",
+        "recipe_specific_tips": "NOT_PRESENT_NOT_USED",
+        "alternative_methods": "NOT_PRESENT_NOT_USED",
+        "supporting_instructions": "NOT_PRESENT_NOT_USED"
+      },
+      "rows": [
+        {
+          "row_id": "SNAP6-WALDORF-SALAD:LIST-01",
+          "source_location": "Fall Recipes / Waldorf Salad / directions; ingredient list row 1",
+          "source_wording": "1/4 cup walnuts (chopped)",
+          "concept": "WALNUTS_RAW",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/4 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "WALNUTS_RAW"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-WALDORF-SALAD:LIST-02",
+          "source_location": "Fall Recipes / Waldorf Salad / directions; ingredient list row 2",
+          "source_wording": "2 apples (cored and diced)",
+          "concept": "APPLE",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 apples",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "APPLE"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-WALDORF-SALAD:LIST-03",
+          "source_location": "Fall Recipes / Waldorf Salad / directions; ingredient list row 3",
+          "source_wording": "1 cup celery (diced)",
+          "concept": "CELERY",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "CELERY"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-WALDORF-SALAD:LIST-04",
+          "source_location": "Fall Recipes / Waldorf Salad / directions; ingredient list row 4",
+          "source_wording": "1/2 cup raisins",
+          "concept": "RAISINS_GOLDEN",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/2 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "RAISINS_GOLDEN"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-WALDORF-SALAD:LIST-05",
+          "source_location": "Fall Recipes / Waldorf Salad / directions; ingredient list row 5",
+          "source_wording": "1/4 cup plain yogurt, non-fat",
+          "concept": "YOGURT_GREEK_NONFAT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/4 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "YOGURT_GREEK_NONFAT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-WALDORF-SALAD:LIST-06",
+          "source_location": "Fall Recipes / Waldorf Salad / directions; ingredient list row 6",
+          "source_wording": "1/2 teaspoon sugar",
+          "concept": "SUGAR",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/2 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "SUGAR"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-WALDORF-SALAD:LIST-07",
+          "source_location": "Fall Recipes / Waldorf Salad / directions; ingredient list row 7",
+          "source_wording": "1 teaspoon lemon juice",
+          "concept": "LEMON",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [
+            "LEMON"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_conclusion": "No unresolved required unquantified edible addition found in selected path."
+    },
+    {
+      "recipe_source_id": "SNAP4-BROWN-RICE-PILAF",
+      "source_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+      "source_sha256": "f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281",
+      "source_artifact": "data2-snap-valentines.html",
+      "hash_verified": true,
+      "status": "REVIEWED",
+      "reviewed_sections": {
+        "ingredient_list": "REVIEWED",
+        "numbered_directions": "REVIEWED",
+        "preparation_notes": "NOT_PRESENT_NOT_USED",
+        "footnotes": "NOT_PRESENT_NOT_USED",
+        "recipe_specific_tips": "NOT_PRESENT_NOT_USED",
+        "alternative_methods": "NOT_PRESENT_NOT_USED",
+        "supporting_instructions": "NOT_PRESENT_NOT_USED"
+      },
+      "rows": [
+        {
+          "row_id": "SNAP4-BROWN-RICE-PILAF:LIST-01",
+          "source_location": "Valentine's Day menu / Brown Rice Pilaf / directions; ingredient list row 1",
+          "source_wording": "1 1/2 cups brown rice",
+          "concept": "RICE_BROWN",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 1/2 cups",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "RICE_BROWN"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-BROWN-RICE-PILAF:LIST-02",
+          "source_location": "Valentine's Day menu / Brown Rice Pilaf / directions; ingredient list row 2",
+          "source_wording": "3 cups water",
+          "concept": "WATER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "3 cups",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "WATER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "RETAINED"
+        },
+        {
+          "row_id": "SNAP4-BROWN-RICE-PILAF:LIST-03",
+          "source_location": "Valentine's Day menu / Brown Rice Pilaf / directions; ingredient list row 3",
+          "source_wording": "1/4 cup almonds (chopped)",
+          "concept": "ALMONDS_RAW",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/4 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "ALMONDS_RAW"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-BROWN-RICE-PILAF:LIST-04",
+          "source_location": "Valentine's Day menu / Brown Rice Pilaf / directions; ingredient list row 4",
+          "source_wording": "1 teaspoon parsley (dried)",
+          "concept": "PARSLEY_DRIED",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "PARSLEY_DRIED"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-BROWN-RICE-PILAF:LIST-05",
+          "source_location": "Valentine's Day menu / Brown Rice Pilaf / directions; ingredient list row 5",
+          "source_wording": "1/2 teaspoon garlic powder",
+          "concept": "GARLIC_POWDER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/2 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "GARLIC_POWDER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-BROWN-RICE-PILAF:LIST-06",
+          "source_location": "Valentine's Day menu / Brown Rice Pilaf / directions; ingredient list row 6",
+          "source_wording": "1/4 teaspoon black pepper",
+          "concept": "BLACK_PEPPER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/4 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "BLACK_PEPPER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-BROWN-RICE-PILAF:WASH-WATER",
+          "source_location": "Directions first hygiene instruction",
+          "source_wording": "Wash hands with soap and water.",
+          "concept": "handwashing water",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "DISCARDED_PROCESS_WATER",
+          "rationale": "Hygiene water not retained in recipe; no food row.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "DISCARDED"
+        },
+        {
+          "row_id": "SNAP4-BROWN-RICE-PILAF:SOAP",
+          "source_location": "Directions first hygiene instruction",
+          "source_wording": "Wash hands with soap and water.",
+          "concept": "soap",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_CONSUMABLE",
+          "rationale": "Nonfood hygiene consumable, never FoodIngredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_conclusion": "No unresolved required unquantified edible addition found in selected path.",
+      "scope_notes": [
+        "Listed3cups water is cooking liquid, no draining instruction; no yield inferred.",
+        "Other Valentine recipes/cooking sprays excluded from this recipe."
+      ]
+    },
+    {
+      "recipe_source_id": "SNAP5-KALE-NUTS-RAISINS",
+      "source_url": "https://snaped.fns.usda.gov/node/1861",
+      "source_sha256": "7c2bb840618e0dfbe372e9ecdb697ad59d2fab36e0fbf07cabe347a93ea6a1a0",
+      "source_artifact": "data2-snap-kale-nuts.html",
+      "hash_verified": true,
+      "status": "REVIEWED",
+      "reviewed_sections": {
+        "ingredient_list": "REVIEWED",
+        "numbered_directions": "REVIEWED",
+        "preparation_notes": "NOT_PRESENT_NOT_USED",
+        "footnotes": "NOT_PRESENT_NOT_USED",
+        "recipe_specific_tips": "NOT_PRESENT_NOT_USED",
+        "alternative_methods": "NOT_PRESENT_NOT_USED",
+        "supporting_instructions": "NOT_PRESENT_NOT_USED"
+      },
+      "rows": [
+        {
+          "row_id": "SNAP5-KALE-NUTS-RAISINS:LIST-01",
+          "source_location": "SNAP-Ed node1861 / directions; ingredient list row 1",
+          "source_wording": "1/4 cup nuts, chopped",
+          "concept": "WALNUTS_RAW",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/4 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "WALNUTS_RAW"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP5-KALE-NUTS-RAISINS:LIST-02",
+          "source_location": "SNAP-Ed node1861 / directions; ingredient list row 2",
+          "source_wording": "2 tablespoons vegetable oil",
+          "concept": "SUNFLOWER_OIL",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 tablespoons",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "SUNFLOWER_OIL"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP5-KALE-NUTS-RAISINS:LIST-03",
+          "source_location": "SNAP-Ed node1861 / directions; ingredient list row 3",
+          "source_wording": "2 cloves garlic, chopped",
+          "concept": "GARLIC",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 cloves",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "GARLIC"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP5-KALE-NUTS-RAISINS:LIST-04",
+          "source_location": "SNAP-Ed node1861 / directions; ingredient list row 4",
+          "source_wording": "4 cups kale, stems removed and chopped (1 bunch)",
+          "concept": "KALE",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "4 cups (1 bunch)",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "KALE"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP5-KALE-NUTS-RAISINS:LIST-05",
+          "source_location": "SNAP-Ed node1861 / directions; ingredient list row 5",
+          "source_wording": "1/2 cup raisins",
+          "concept": "RAISINS_GOLDEN",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/2 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "RAISINS_GOLDEN"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP5-KALE-NUTS-RAISINS:LIST-06",
+          "source_location": "SNAP-Ed node1861 / directions; ingredient list row 6",
+          "source_wording": "salt (optional, to taste)",
+          "concept": "salt (optional, to taste)",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Explicit source option omitted; no fabricated required addition.",
+          "optionality_evidence": "salt (optional, to taste)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP5-KALE-NUTS-RAISINS:WASH-WATER",
+          "source_location": "Directions first hygiene instruction",
+          "source_wording": "Wash hands with soap and water.",
+          "concept": "handwashing water",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "DISCARDED_PROCESS_WATER",
+          "rationale": "Hygiene water not retained in recipe; no food row.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "DISCARDED"
+        },
+        {
+          "row_id": "SNAP5-KALE-NUTS-RAISINS:SOAP",
+          "source_location": "Directions first hygiene instruction",
+          "source_wording": "Wash hands with soap and water.",
+          "concept": "soap",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_CONSUMABLE",
+          "rationale": "Nonfood hygiene consumable, never FoodIngredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP5-KALE-NUTS-RAISINS:SALT",
+          "source_location": "Directions final sentence",
+          "source_wording": "Add salt to taste (optional)",
+          "concept": "salt",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Explicit source option omitted; no amount invented.",
+          "optionality_evidence": "optional",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_conclusion": "No unresolved required unquantified edible addition found in selected path."
+    },
+    {
+      "recipe_source_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
+      "source_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
+      "source_sha256": "d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+      "source_artifact": "data2-snap-braised-chicken.pdf",
+      "hash_verified": true,
+      "status": "REVIEWED",
+      "reviewed_sections": {
+        "ingredient_list": "REVIEWED",
+        "numbered_directions": "REVIEWED",
+        "preparation_notes": "NOT_PRESENT_NOT_USED",
+        "footnotes": "NOT_PRESENT_NOT_USED",
+        "recipe_specific_tips": "NOT_PRESENT_NOT_USED",
+        "alternative_methods": "NOT_PRESENT_NOT_USED",
+        "supporting_instructions": "NOT_PRESENT_NOT_USED"
+      },
+      "rows": [
+        {
+          "row_id": "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-01",
+          "source_location": "Food and Physical Activity Checklist handout p2; ingredient list row 1",
+          "source_wording": "4 (6-ounce) chicken thighs, bone-in, skin removed",
+          "concept": "CHICKEN_THIGH",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "4 (6-ounce) thighs",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "CHICKEN_THIGH"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-02",
+          "source_location": "Food and Physical Activity Checklist handout p2; ingredient list row 2",
+          "source_wording": "1 teaspoon oil",
+          "concept": "SUNFLOWER_OIL",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "SUNFLOWER_OIL"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-03",
+          "source_location": "Food and Physical Activity Checklist handout p2; ingredient list row 3",
+          "source_wording": "½ teaspoon salt",
+          "concept": "SALT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "SALT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-04",
+          "source_location": "Food and Physical Activity Checklist handout p2; ingredient list row 4",
+          "source_wording": "½ teaspoon black pepper",
+          "concept": "BLACK_PEPPER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "BLACK_PEPPER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-05",
+          "source_location": "Food and Physical Activity Checklist handout p2; ingredient list row 5",
+          "source_wording": "1 small onion, peeled, chopped",
+          "concept": "ONION_YELLOW",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 small",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "ONION_YELLOW"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-06",
+          "source_location": "Food and Physical Activity Checklist handout p2; ingredient list row 6",
+          "source_wording": "3 garlic cloves, peeled, minced",
+          "concept": "GARLIC",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "3 cloves",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "GARLIC"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-07",
+          "source_location": "Food and Physical Activity Checklist handout p2; ingredient list row 7",
+          "source_wording": "½ teaspoon dried thyme",
+          "concept": "THYME_DRIED",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [
+            "THYME_DRIED"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-08",
+          "source_location": "Food and Physical Activity Checklist handout p2; ingredient list row 8",
+          "source_wording": "½ teaspoon dried rosemary",
+          "concept": "ROSEMARY_DRIED",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            8
+          ],
+          "food_ingredient_codes": [
+            "ROSEMARY_DRIED"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-09",
+          "source_location": "Food and Physical Activity Checklist handout p2; ingredient list row 9",
+          "source_wording": "1 cup water",
+          "concept": "WATER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            9
+          ],
+          "food_ingredient_codes": [
+            "WATER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "RETAINED"
+        },
+        {
+          "row_id": "SNAP4-BRAISED-CHICKEN-SPINACH:LIST-10",
+          "source_location": "Food and Physical Activity Checklist handout p2; ingredient list row 10",
+          "source_wording": "1 10-ounce package frozen or 1 bunch fresh spinach",
+          "concept": "SPINACH",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 bunch fresh spinach",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            10
+          ],
+          "food_ingredient_codes": [
+            "SPINACH"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_conclusion": "No unresolved required unquantified edible addition found in selected path.",
+      "scope_notes": [
+        "Salt/pepper quantified in list but application omitted in directions. Preserve limitation, no invented step.",
+        "Recipe page2 only; checklist page1 and photographed side foods are not ingredients.",
+        "Selected fresh-spinach source alternative covered in list and step4."
+      ]
+    },
+    {
+      "recipe_source_id": "SNAP4-DILLED-FISH-FILLETS",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
+      "source_sha256": "43d44c84d7c007a0c32906210b13212ffb43fb7a62312e9fb43c819f8a8a63a3",
+      "source_artifact": "data2-snap-dilled-fish.html",
+      "hash_verified": true,
+      "status": "REVIEWED",
+      "reviewed_sections": {
+        "ingredient_list": "REVIEWED",
+        "numbered_directions": "REVIEWED",
+        "preparation_notes": "REVIEWED",
+        "footnotes": "NOT_PRESENT_NOT_USED",
+        "recipe_specific_tips": "REVIEWED",
+        "alternative_methods": "REVIEWED",
+        "supporting_instructions": "NOT_PRESENT_NOT_USED"
+      },
+      "rows": [
+        {
+          "row_id": "SNAP4-DILLED-FISH-FILLETS:LIST-01",
+          "source_location": "SNAP-Ed recipe / Microwave Method; ingredient list row 1",
+          "source_wording": "1 pound haddock or cod fillets (frozen)",
+          "concept": "COD_ATLANTIC",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 pound",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "COD_ATLANTIC"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-DILLED-FISH-FILLETS:LIST-02",
+          "source_location": "SNAP-Ed recipe / Microwave Method; ingredient list row 2",
+          "source_wording": "1 tablespoon lemon juice",
+          "concept": "LEMON",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 tablespoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "LEMON"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-DILLED-FISH-FILLETS:LIST-03",
+          "source_location": "SNAP-Ed recipe / Microwave Method; ingredient list row 3",
+          "source_wording": "1/8 teaspoon dill weed (dried)",
+          "concept": "DILL_DRIED",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/8 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "DILL_DRIED"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-DILLED-FISH-FILLETS:LIST-04",
+          "source_location": "SNAP-Ed recipe / Microwave Method; ingredient list row 4",
+          "source_wording": "1/8 teaspoon salt",
+          "concept": "SALT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/8 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "SALT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Source amount/option and current selection preserved; no extra direction-only amount inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-DILLED-FISH-FILLETS:LIST-05",
+          "source_location": "SNAP-Ed recipe / Microwave Method; ingredient list row 5",
+          "source_wording": "black pepper (optional)",
+          "concept": "black pepper (optional)",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "OMITTED_SOURCE_OPTIONAL",
+          "rationale": "Explicit source option omitted; no fabricated required addition.",
+          "optionality_evidence": "black pepper (optional)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-DILLED-FISH-FILLETS:WASH-WATER",
+          "source_location": "Directions first hygiene instruction",
+          "source_wording": "Wash hands with soap and water.",
+          "concept": "handwashing water",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "DISCARDED_PROCESS_WATER",
+          "rationale": "Hygiene water not retained in recipe; no food row.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "DISCARDED"
+        },
+        {
+          "row_id": "SNAP4-DILLED-FISH-FILLETS:SOAP",
+          "source_location": "Directions first hygiene instruction",
+          "source_wording": "Wash hands with soap and water.",
+          "concept": "soap",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_CONSUMABLE",
+          "rationale": "Nonfood hygiene consumable, never FoodIngredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-DILLED-FISH-FILLETS:WAX-PAPER",
+          "source_location": "Microwave Method step3",
+          "source_wording": "Cover with wax paper.",
+          "concept": "wax paper",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_CONSUMABLE",
+          "rationale": "Selected microwave-path nonfood cover; no pan grease inferred.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_conclusion": "No unresolved required unquantified edible addition found in selected path.",
+      "scope_notes": [
+        "Microwave and skillet methods fully reviewed; microwave selected. Neither requires added fat/spray.",
+        "Both use same listed lemon/dill/salt and optional pepper."
+      ]
+    }
+  ],
+  "counts": {
+    "recipes_reviewed": 15,
+    "hashes_verified": 15,
+    "audit_rows": 136,
+    "unresolved_required_edible_rows": 0
+  },
+  "result": "No new required unquantified edible addition found; quantified conditional SpringVegetable water already structured."
+}

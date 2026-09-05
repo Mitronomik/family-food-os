@@ -13,6 +13,7 @@ import csv
 from datetime import date
 import hashlib
 import json
+from fractions import Fraction
 from io import StringIO
 from pathlib import Path
 import re
@@ -44,6 +45,7 @@ OBSERVATION_FILES = (
     "research-magnit-v2.json",
     "research-panel-v3.json",
     "research-correction-market.json",
+    "research-consumables-market.json",
 )
 FORBIDDEN = {
     "CACFP6-VEGETABLE-FRITTATA-BITES",
@@ -77,6 +79,7 @@ SOURCE_FACT_FIELDS = (
     "source_times",
     "equipment",
     "source_limits",
+    "direction_only_consumables",
 )
 HANDBACK_METADATA_FIELDS = (
     "source_collection",
@@ -92,6 +95,7 @@ HANDBACK_METADATA_FIELDS = (
 PROTEIN_PATTERNS = {
     "POULTRY": r"(?:CHICKEN|TURKEY)_(?!BROTH)[A-Z0-9_]+",
     "FISH": r"(?:COD|SALMON|TUNA|TILAPIA)_[A-Z0-9_]+",
+    "DAIRY": r"CHEESE_[A-Z0-9_]+|COTTAGE_CHEESE_[A-Z0-9_]+",
     "MEAT": r"(?:BEEF|PORK)_(?!BROTH)[A-Z0-9_]+",
     "EGG": r"EGG(?:_WHITE)?",
     "LEGUME_TOFU": r"(?:TOFU|LENTILS|CHICKPEAS)_[A-Z0-9_]+|(?:WHITE|BLACK|KIDNEY|PINTO)_BEANS_[A-Z0-9_]+|BLACK_EYED_PEAS_DRY|GREEN_PEAS_CANNED|EDAMAME_FROZEN",
@@ -109,6 +113,386 @@ CURATION_ROLE_COMPATIBILITY = {
     "SNACK": {"other"},
     "CONDIMENT": {"other"},
 }
+
+CONSUMABLE_REVIEW_SCOPES = {
+    "ingredient_list",
+    "numbered_directions",
+    "preparation_notes",
+    "footnotes",
+    "recipe_specific_tips",
+    "alternative_methods",
+    "supporting_instructions",
+}
+CONSUMABLE_SELECTED = {
+    "ALREADY_STRUCTURED",
+    "ADD_SELECTED_REQUIRED",
+    "ADD_SELECTED_OPTIONAL",
+    "ADD_SELECTED_CONDITIONAL",
+}
+CONSUMABLE_RESOLUTIONS = CONSUMABLE_SELECTED | {
+    "OMIT_SOURCE_OPTIONAL",
+    "NON_FOOD_CONSUMABLE",
+    "DISCARDED_PROCESS_WATER",
+    "SOURCE_ALTERNATIVE_SELECTED",
+    "BLOCKED_UNREPRESENTABLE_REQUIRED_CONSUMABLE",
+}
+# Bounded, reviewed material vocabulary: unknown non-food labels fail closed.
+# This does not try to infer arbitrary ingredient semantics from prose.
+NON_FOOD_CONCEPTS = {
+    "SOAP",
+    "PAPER_TOWEL",
+    "TABLE_NAPKIN",
+    "APPLE_DRYING_PAPER_TOWEL",
+    "ALUMINUM_FOIL",
+    "FOIL",
+    "PARCHMENT",
+    "PARCHMENT_PAPER",
+    "UNSPECIFIED_BOWL_COVER",
+    "TEA_TOWEL",
+    "WOODEN_SKEWER",
+    "WAX_PAPER",
+    "ZIPPER_LOCK_BAG",
+    "ZIPPER_LOCK_PLASTIC_BAG",
+    "DISPOSABLE_LINER",
+    "NAPKIN",
+}
+# Exact reviewed cards require spray AND parchment, not an alternative.
+# A changed source requires a new artifact review, never an invented amount.
+KNOWN_SPRAY_SOURCE_HASHES = {
+    "CACFP6-HONEY-LIME-CHICKEN": "df6b0bf8dd73975119a3d0b3ad1a9a447bc611e8dc9076c1548401e2cbcde634",
+    "CACFP6-LOCAL-HARVEST-BAKE": "340444ab1ec4f626a34d6a2737fa04d12481ef21f8850ad7c1199c49c2b3786b",
+}
+
+
+def has_positive_source_quantity(value: object) -> bool:
+    """Check explicit positive source amount, not a normalization/conversion.
+
+    A step number embedded in prose is not a food quantity. No amount is
+    assigned to a dash, pinch, 'as needed' or lightly-coated instruction.
+    """
+    if not isinstance(value, str) or re.search(
+        r"\bunquantified\b|to taste|as needed|small amount",
+        value,
+        re.IGNORECASE,
+    ):
+        return False
+    match = re.match(r"\s*(?:about\s+)?(\d+(?:\.\d+)?(?:/\d+)?|[¼½¾⅛⅜⅝⅞⅓⅔])", value)
+    if not match:
+        return False
+    if re.match(r"\s*(?:dash|pinch)(?:es)?\b", value[match.end() :], re.IGNORECASE):
+        return False
+    amount = match.group(1)
+    if amount in "¼½¾⅛⅜⅝⅞⅓⅔":
+        return True
+    try:
+        return Fraction(amount) > 0
+    except (ValueError, ZeroDivisionError):
+        return False
+
+
+def direction_consumable_summary(audit: dict) -> dict:
+    rows = audit["rows"]
+    return {
+        "audit_file": "direction-consumables-audit.json",
+        "reviewed_row_ids": [row["row_id"] for row in rows],
+        "required_edible_source_positions": sorted(
+            {
+                link["source_position"]
+                for row in rows
+                if row["edible"] and row["requirement"] in {"REQUIRED", "CONDITIONAL"}
+                for link in row["ingredient_links"]
+            }
+        ),
+        "unresolved_required": sum(
+            row["resolution"] == "BLOCKED_UNREPRESENTABLE_REQUIRED_CONSUMABLE"
+            for row in rows
+        ),
+    }
+
+
+def direction_consumable_counts(recipes: list[dict], directory: Path) -> dict:
+    ids = {r["recipe_source_id"] for r in recipes}
+    audits = [
+        a
+        for a in read_json(directory / "direction-consumables-audit.json")["recipes"]
+        if a["recipe_source_id"] in ids
+    ]
+    rows = [r for a in audits for r in a["rows"]]
+    direction_foods = [
+        (a["recipe_source_id"], r)
+        for a in audits
+        for r in a["rows"]
+        if r["edible"]
+        and not r["already_in_ingredient_list"]
+        and r["water_fate"] != "DISCARDED"
+    ]
+    blocked = sum(
+        r["resolution"] == "BLOCKED_UNREPRESENTABLE_REQUIRED_CONSUMABLE" for r in rows
+    )
+    return {
+        "direction_consumable_audited_recipes": len(audits),
+        "consumable_audit_rows": len(rows),
+        "direction_only_edible_consumable_recipes": len(
+            {i for i, _ in direction_foods}
+        ),
+        "direction_only_edible_consumable_rows": len(direction_foods),
+        "resolved_direction_only_edible_consumables": sum(
+            r["resolution"] != "BLOCKED_UNREPRESENTABLE_REQUIRED_CONSUMABLE"
+            for _, r in direction_foods
+        ),
+        "unresolved_required_direction_consumables": blocked,
+        "consumable_resolution_counts": dict(
+            sorted(Counter(r["resolution"] for r in rows).items())
+        ),
+    }
+
+
+def direction_consumable_errors(
+    recipes: list[dict], source_rows: list[dict], directory: Path
+) -> list[str]:
+    """Validate an explicit human source audit and its complete ingredient crosswalk.
+
+    No culinary inference, quantity conversion or process-aid runtime context.
+    An empty remainder is a checked conclusion, not a replacement for source review.
+    """
+    path = directory / "direction-consumables-audit.json"
+    if not path.exists():
+        return ["Missing direction-consumables audit"]
+    document = read_json(path)
+    audits = document["recipes"]
+    ids = [a["recipe_source_id"] for a in audits]
+    by_id = {r["recipe_source_id"]: r for r in recipes}
+    if (
+        document.get("schema_version") != 1
+        or document.get("status") != "REVIEWED"
+        or len(ids) != len(set(ids))
+        or set(ids) != set(by_id)
+    ):
+        return ["Direction-consumables audit must cover exactly final recipes"]
+    errors = []
+    for audit in audits:
+        recipe_id = audit["recipe_source_id"]
+        recipe = by_id[recipe_id]
+        prefix = f"Direction consumable {recipe_id}"
+        if audit.get("status") != "REVIEWED" or any(
+            audit.get(key) != recipe.get(key) for key in ("source_url", "source_sha256")
+        ):
+            errors.append(f"{prefix}: missing reviewed source identity")
+        scopes = audit.get("reviewed_sections", {})
+        if set(scopes) != CONSUMABLE_REVIEW_SCOPES or any(
+            not isinstance(section, dict)
+            or section.get("status") not in {"REVIEWED", "NOT_PRESENT_NOT_USED"}
+            or not nonempty_text(section.get("evidence"))
+            for section in scopes.values()
+        ):
+            errors.append(f"{prefix}: incomplete ingredient/direction/note review")
+        if any(
+            scopes.get(k, {}).get("status") != "REVIEWED"
+            for k in ("ingredient_list", "numbered_directions")
+        ):
+            errors.append(
+                f"{prefix}: ingredient list and directions must actually be reviewed"
+            )
+        if recipe.get("source_sha256") == KNOWN_SPRAY_SOURCE_HASHES.get(recipe_id):
+            errors.append(
+                f"{prefix}: known source requires unquantified pan release spray"
+            )
+        selected = {
+            (r["source_position"], r["existing_food_ingredient_code"]): r
+            for r in source_rows
+            if r["source_recipe_id"] == recipe_id
+        }
+        covered = set()
+        row_ids = [r["row_id"] for r in audit["rows"]]
+        audit_by_id = {r["row_id"]: r for r in audit["rows"]}
+        if len(row_ids) != len(set(row_ids)) or any(
+            not nonempty_text(i) for i in row_ids
+        ):
+            errors.append(f"{prefix}: invalid/duplicate audit row identity")
+        for row in audit["rows"]:
+            label = f"{prefix}/{row['row_id']}"
+            resolution = row.get("resolution")
+            requirement = row.get("requirement")
+            edible = row.get("edible")
+            fate = row.get("water_fate")
+            links = row.get("ingredient_links")
+            if (
+                resolution not in CONSUMABLE_RESOLUTIONS
+                or requirement not in {"REQUIRED", "OPTIONAL", "CONDITIONAL"}
+                or any(
+                    type(row.get(k)) is not bool
+                    for k in (
+                        "edible",
+                        "quantity_explicit",
+                        "already_in_ingredient_list",
+                    )
+                )
+                or fate not in {"NOT_WATER", "RETAINED", "DISCARDED"}
+                or not isinstance(links, list)
+                or not all(isinstance(link, dict) for link in links)
+                or any(
+                    not nonempty_text(row.get(k))
+                    for k in (
+                        "source_location",
+                        "source_wording",
+                        "concept",
+                        "rationale",
+                    )
+                )
+            ):
+                errors.append(f"{label}: incomplete consumable schema/evidence")
+                continue
+            if resolution == "BLOCKED_UNREPRESENTABLE_REQUIRED_CONSUMABLE":
+                errors.append(f"{label}: unresolved required direction consumable")
+            if resolution in CONSUMABLE_SELECTED:
+                if not edible or fate == "DISCARDED" or not links:
+                    errors.append(
+                        f"{label}: food consumable missing selected coverage or invalid process mapping"
+                    )
+                if not row["quantity_explicit"] or not has_positive_source_quantity(
+                    row.get("quantity_text")
+                ):
+                    errors.append(f"{label}: unquantified selected edible consumable")
+                expected = "SELECTED_" + requirement
+                if not row["already_in_ingredient_list"] and any(
+                    link.get("quantity_text") != row["quantity_text"] for link in links
+                ):
+                    errors.append(
+                        f"{label}: direction-only quantity differs from selected source quantity"
+                    )
+                for link in links:
+                    key = (
+                        link.get("source_position"),
+                        link.get("food_ingredient_code"),
+                    )
+                    source = selected.get(key)
+                    if (
+                        not source
+                        or source["ingredient_selection"] != expected
+                        or link.get("quantity_text") != source["source_quantity_text"]
+                    ):
+                        errors.append(
+                            f"{label}: required/selected food missing exact selected coverage"
+                        )
+                    else:
+                        covered.add(key)
+                    if fate == "RETAINED" and key[1] != "WATER":
+                        errors.append(f"{label}: retained water must be selected WATER")
+                if resolution.startswith("ADD_SELECTED_") and (
+                    row["already_in_ingredient_list"] or resolution != "ADD_" + expected
+                ):
+                    errors.append(f"{label}: inconsistent direction-only addition")
+            elif links:
+                errors.append(
+                    f"{label}: omitted/non-food/discarded item entered FoodIngredient coverage"
+                )
+            if not edible and resolution != "NON_FOOD_CONSUMABLE":
+                errors.append(f"{label}: non-food item cannot become a food ingredient")
+            if (
+                re.search(
+                    r"PARCHMENT|FOIL|WAX_PAPER|NAPKIN|DISPOSABLE_LINER",
+                    row["concept"].upper(),
+                )
+                and edible
+            ):
+                errors.append(f"{label}: non-food disposable misclassified as edible")
+            if resolution == "NON_FOOD_CONSUMABLE" and edible:
+                errors.append(
+                    f"{label}: edible consumable cannot be hidden as non-food"
+                )
+            normalized_concept = re.sub(
+                r"[^A-Z0-9]+", "_", row["concept"].upper()
+            ).strip("_")
+            if not edible and normalized_concept not in NON_FOOD_CONCEPTS:
+                errors.append(f"{label}: unreviewed non-food material classification")
+            if fate != "NOT_WATER" and not re.search(
+                r"(?:^|_)(?:WATER|ICE)(?:_|$)", normalized_concept
+            ):
+                errors.append(
+                    f"{label}: non-water edible cannot be discarded as process water"
+                )
+            if fate == "DISCARDED" and resolution != "DISCARDED_PROCESS_WATER":
+                errors.append(
+                    f"{label}: discarded process water cannot enter Shopping ingredients"
+                )
+            if resolution == "DISCARDED_PROCESS_WATER" and fate != "DISCARDED":
+                errors.append(f"{label}: retained recipe water cannot be discarded")
+            if fate == "RETAINED" and resolution not in CONSUMABLE_SELECTED | {
+                "OMIT_SOURCE_OPTIONAL",
+                "SOURCE_ALTERNATIVE_SELECTED",
+            }:
+                errors.append(f"{label}: retained water missing selected coverage")
+            if resolution == "OMIT_SOURCE_OPTIONAL" and (
+                requirement != "OPTIONAL"
+                or not nonempty_text(row.get("optionality_evidence"))
+            ):
+                errors.append(
+                    f"{label}: optional omission lacks source-backed optional evidence"
+                )
+            if resolution == "SOURCE_ALTERNATIVE_SELECTED" and (
+                not nonempty_text(row.get("alternative_evidence"))
+                or not nonempty_text(row.get("selected_alternative"))
+            ):
+                errors.append(
+                    f"{label}: alternative selection lacks explicit source evidence"
+                )
+            if resolution == "SOURCE_ALTERNATIVE_SELECTED":
+                kind = row.get("alternative_kind")
+                targets = row.get("selected_alternative_row_ids", [])
+                permitted = (
+                    {"NON_FOOD_CONSUMABLE"}
+                    if kind == "NON_FOOD_ALTERNATIVE"
+                    else CONSUMABLE_SELECTED
+                )
+                if (
+                    kind
+                    not in {
+                        "BASE_RECIPE_OPTIONAL_VARIANT_OMITTED",
+                        "QUANTIFIED_EDIBLE_ALTERNATIVE",
+                        "NON_FOOD_ALTERNATIVE",
+                    }
+                    or not isinstance(targets, list)
+                    or not targets
+                    or any(
+                        not isinstance(target, str)
+                        or target == row["row_id"]
+                        or audit_by_id.get(target, {}).get("resolution")
+                        not in permitted
+                        for target in targets
+                    )
+                    or (
+                        kind == "BASE_RECIPE_OPTIONAL_VARIANT_OMITTED"
+                        and not nonempty_text(row.get("optionality_evidence"))
+                    )
+                ):
+                    errors.append(
+                        f"{label}: selected source alternative missing resolved audit crosswalk"
+                    )
+            if (
+                edible
+                and fate != "DISCARDED"
+                and requirement in {"REQUIRED", "CONDITIONAL"}
+                and resolution
+                not in CONSUMABLE_SELECTED | {"SOURCE_ALTERNATIVE_SELECTED"}
+            ):
+                errors.append(f"{label}: unresolved required edible consumable")
+        if covered != set(selected):
+            errors.append(
+                f"{prefix}: consumables audit does not reconcile every selected food row"
+            )
+        summary = direction_consumable_summary(audit)
+        if (
+            audit.get("conclusion")
+            != {
+                "unresolved_required_direction_consumables": 0,
+                "all_required_edible_consumables_resolved": True,
+            }
+            or summary["unresolved_required"]
+        ):
+            errors.append(f"{prefix}: unresolved consumable conclusion")
+        if recipe.get("direction_only_consumables") != summary:
+            errors.append(f"{prefix}: source-consistency ninth dimension missing/stale")
+    return errors
 
 
 def pr4_meal_type_codes(directory: Path = DIRECTORY, root: Path = ROOT) -> set[str]:
@@ -279,6 +663,7 @@ def diversity_errors(
             (r"\bfish\b|\bcod\b|\bsalmon\b|\btuna\b", PROTEIN_PATTERNS["FISH"]),
             (r"\beggs?\b", PROTEIN_PATTERNS["EGG"]),
             (r"\btofu\b", r"TOFU_.*"),
+            (r"\bcheese\b|\bcheddar\b|\bmozzarella\b", PROTEIN_PATTERNS["DAIRY"]),
         ):
             if re.search(words, claims) and not any(
                 re.fullmatch(pattern, code) for code in codes
@@ -502,10 +887,7 @@ def selected_source_rows(directory: Path = DIRECTORY) -> list[dict]:
             if not source["selected_codes"]:
                 raise ValueError("Selected source row has no resolved food concept")
             for code in source["selected_codes"]:
-                if not nonempty_text(source["quantity_text"]) or (
-                    code != "WATER"
-                    and not re.search(r"[0-9¼½¾⅛⅜⅝⅞]", source["quantity_text"])
-                ):
+                if not has_positive_source_quantity(source["quantity_text"]):
                     raise ValueError(
                         "Selected food row lacks an explicit source quantity"
                     )
@@ -885,6 +1267,7 @@ def corpus_counts(
             {r["existing_food_ingredient_code"] for r in source_rows} - global_codes
         ),
         **diversity_counts(recipes),
+        **direction_consumable_counts(recipes, directory),
     }
 
 
@@ -1004,6 +1387,50 @@ def source_consistency_errors(
             errors.append(
                 f"Source consistency selected concepts differ from ingredient audit: {recipe_id}"
             )
+    return errors
+
+
+def reviewed_input_summary_errors(directory: Path) -> list[str]:
+    """Reject stale draft summaries as well as stale generated final summaries."""
+    source = read_json(directory / "draft-ingredient-coverage.json")
+    selected = selected_source_rows(directory)
+    union = sorted({r["existing_food_ingredient_code"] for r in selected})
+    choices = read_json(directory / "replacement-decisions.json")
+    kinds = Counter(r["ingredient_selection"] for r in selected)
+    expected = {
+        "recipes": len(source["recipes"]),
+        "historical_recipes": len(choices["kept_source_ids"]),
+        "new_recipes": len(choices["replacements"]),
+        "source_rows": sum(len(r["rows"]) for r in source["recipes"]),
+        "selected_food_concept_rows": len(selected),
+        "distinct_selected_existing_codes": len(union),
+        "required_food_concept_rows": kinds["SELECTED_REQUIRED"],
+        "selected_optional_food_concept_rows": kinds["SELECTED_OPTIONAL"],
+        "selected_conditional_food_concept_rows": kinds["SELECTED_CONDITIONAL"],
+    }
+    errors = []
+    if (
+        source.get("counts") != expected
+        or source.get("selected_existing_codes") != union
+    ):
+        errors.append("Draft ingredient summaries differ from actual reviewed rows")
+    forms = read_json(directory / "draft-purchase-form-review.json")
+    if (
+        forms.get("recipe_ids") != [r["source_recipe_id"] for r in source["recipes"]]
+        or forms.get("recipe_count") != len(source["recipes"])
+        or forms.get("purchase_form_row_count") != len(forms["rows"])
+        or forms.get("classification_counts")
+        != dict(Counter(f["classification"] for f in forms["rows"]))
+        or forms.get("required_code_count_including_water")
+        != len(
+            {
+                r["existing_food_ingredient_code"]
+                for r in selected
+                if r["ingredient_selection"] == "SELECTED_REQUIRED"
+            }
+        )
+    ):
+        errors.append("Draft purchase-form summaries differ from actual reviewed rows")
     return errors
 
 
@@ -1249,6 +1676,7 @@ def final_errors(directory: Path = DIRECTORY, root: Path = ROOT) -> list[str]:
             if reader.fieldnames != list(CSV_FIELDS):
                 errors.append("Final coverage columns differ from source contract")
         expected_sources = selected_source_rows(directory)
+        errors.extend(reviewed_input_summary_errors(directory))
         expected_coverage = [
             {key: row[key] for key in CSV_FIELDS} for row in expected_sources
         ]
@@ -1370,6 +1798,7 @@ def final_errors(directory: Path = DIRECTORY, root: Path = ROOT) -> list[str]:
         )
         errors.extend(source_consistency_errors(recipes, expected_sources, directory))
         errors.extend(selection_errors(recipes, directory, root))
+        errors.extend(direction_consumable_errors(recipes, expected_sources, directory))
         if corpus.get("counts") != corpus_counts(recipes, expected_sources, directory):
             errors.append("Final corpus counts disagree with reviewed rows/equipment")
         if corpus_path.read_text(encoding="utf-8") != build_final_corpus(directory):

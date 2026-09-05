@@ -6,13 +6,13 @@
   "selection_note": "Correction-pass selection; quantities and optionality reviewed against primary artifacts. Exact counts derived from rows; not authorized for runtime until ACCEPT + merge.",
   "counts": {
     "recipes": 30,
-    "historical_recipes": 5,
-    "new_recipes": 25,
-    "source_rows": 226,
-    "selected_food_concept_rows": 195,
-    "distinct_selected_existing_codes": 82,
-    "required_food_concept_rows": 190,
-    "selected_optional_food_concept_rows": 4,
+    "historical_recipes": 3,
+    "new_recipes": 27,
+    "source_rows": 225,
+    "selected_food_concept_rows": 189,
+    "distinct_selected_existing_codes": 81,
+    "required_food_concept_rows": 185,
+    "selected_optional_food_concept_rows": 3,
     "selected_conditional_food_concept_rows": 1
   },
   "selected_existing_codes": [
@@ -21,11 +21,11 @@
     "APPLE_CIDER_VINEGAR",
     "ASPARAGUS",
     "BANANA",
-    "BEET",
     "BELL_PEPPER_GREEN",
     "BELL_PEPPER_RED",
     "BLACK_PEPPER",
     "BREADCRUMBS",
+    "BREAD_WHOLE_WHEAT",
     "BULGUR",
     "BUTTERNUT_SQUASH",
     "BUTTER_UNSALTED",
@@ -58,7 +58,6 @@
     "KALE",
     "LEMON",
     "LENTILS_DRY",
-    "LIME",
     "LIME_JUICE",
     "MARGARINE",
     "MAYONNAISE_LOW_FAT",
@@ -304,150 +303,90 @@
       "source_limitations": []
     },
     {
-      "source_recipe_id": "CACFP6-LOCAL-HARVEST-BAKE",
-      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Local_Harvest_Bake_6_Servings.pdf",
+      "source_recipe_id": "SNAP6-HEAVENLY-DEVILED-EGGS",
+      "source_url": "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
       "source_servings": 6,
-      "review_basis": "HISTORICAL_ACCEPTED_COVERAGE_VERBATIM_COPY_NOT_RETRANSCRIPTION",
+      "review_basis": "Actual complete primary artifact and all recipe-specific instructions/notes re-reviewed in direction-consumables correction 2026-09-05.",
       "rows": [
         {
           "position": 1,
-          "source_section": "HISTORICAL_COVERAGE",
-          "source_text": "2 cups or 8 oz Fresh butternut squash, peeled, cubed",
+          "source_section": "Ingredients",
+          "source_text": "6 eggs (in shell)",
           "selected_codes": [
-            "BUTTERNUT_SQUASH"
+            "EGG"
           ],
           "selection": "SELECTED_REQUIRED",
-          "quantity_text": "2 cups or 8 oz Fresh butternut squash, peeled, cubed",
-          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
-          "historical_row": {
-            "source_recipe_id": "CACFP6-LOCAL-HARVEST-BAKE",
-            "source_ingredient_text": "2 cups or 8 oz Fresh butternut squash, peeled, cubed",
-            "normalized_concept": "butternut_squash",
-            "existing_food_ingredient_code": "BUTTERNUT_SQUASH",
-            "resolution_status": "RESOLVED_EXISTING",
-            "missing_reason": ""
-          }
+          "quantity_text": "6",
+          "normalization_reason": "Literal source amount and existing canonical member; no weight or yield conversion."
         },
         {
           "position": 2,
-          "source_section": "HISTORICAL_COVERAGE",
-          "source_text": "2 cups or 8 oz Fresh beets, peeled, cubed",
+          "source_section": "Ingredients",
+          "source_text": "2 tablespoons light mayonnaise",
           "selected_codes": [
-            "BEET"
+            "MAYONNAISE_LOW_FAT"
           ],
           "selection": "SELECTED_REQUIRED",
-          "quantity_text": "2 cups or 8 oz Fresh beets, peeled, cubed",
-          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
-          "historical_row": {
-            "source_recipe_id": "CACFP6-LOCAL-HARVEST-BAKE",
-            "source_ingredient_text": "2 cups or 8 oz Fresh beets, peeled, cubed",
-            "normalized_concept": "beet",
-            "existing_food_ingredient_code": "BEET",
-            "resolution_status": "RESOLVED_EXISTING",
-            "missing_reason": ""
-          }
+          "quantity_text": "2 tablespoons",
+          "normalization_reason": "Literal source amount and existing canonical member; no weight or yield conversion."
         },
         {
           "position": 3,
-          "source_section": "HISTORICAL_COVERAGE",
-          "source_text": "2 cups or 8 oz Fresh sweet potatoes, peeled, cubed",
-          "selected_codes": [
-            "SWEET_POTATO"
-          ],
-          "selection": "SELECTED_REQUIRED",
-          "quantity_text": "2 cups or 8 oz Fresh sweet potatoes, peeled, cubed",
-          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
-          "historical_row": {
-            "source_recipe_id": "CACFP6-LOCAL-HARVEST-BAKE",
-            "source_ingredient_text": "2 cups or 8 oz Fresh sweet potatoes, peeled, cubed",
-            "normalized_concept": "sweet_potato",
-            "existing_food_ingredient_code": "SWEET_POTATO",
-            "resolution_status": "RESOLVED_EXISTING",
-            "missing_reason": ""
-          }
+          "source_section": "Ingredients; explicit Notes alternative selected",
+          "source_text": "1 teaspoon mustard",
+          "selected_codes": [],
+          "selection": "OMITTED_VARIANT",
+          "quantity_text": "1 teaspoon",
+          "normalization_reason": "Source explicitly permits 1/8 tsp each salt and pepper instead of 1 tsp mustard; two selected note rows preserve each amount without inventing a seasoning quantity. Existing black pepper is the selected member of source-generic pepper."
         },
         {
           "position": 4,
-          "source_section": "HISTORICAL_COVERAGE",
-          "source_text": "1 Tbsp Olive oil",
-          "selected_codes": [
-            "OLIVE_OIL"
-          ],
-          "selection": "SELECTED_REQUIRED",
-          "quantity_text": "1 Tbsp Olive oil",
-          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
-          "historical_row": {
-            "source_recipe_id": "CACFP6-LOCAL-HARVEST-BAKE",
-            "source_ingredient_text": "1 Tbsp Olive oil",
-            "normalized_concept": "olive_oil",
-            "existing_food_ingredient_code": "OLIVE_OIL",
-            "resolution_status": "RESOLVED_EXISTING",
-            "missing_reason": ""
-          }
-        },
-        {
-          "position": 5,
-          "source_section": "HISTORICAL_COVERAGE",
-          "source_text": "¼ tsp Kosher salt or iodized salt",
+          "source_section": "Notes: salt allocation",
+          "source_text": "1/8 tsp each of salt and pepper may be substituted for 1 tsp mustard.",
           "selected_codes": [
             "SALT"
           ],
           "selection": "SELECTED_REQUIRED",
-          "quantity_text": "¼ tsp Kosher salt or iodized salt",
-          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
-          "historical_row": {
-            "source_recipe_id": "CACFP6-LOCAL-HARVEST-BAKE",
-            "source_ingredient_text": "¼ tsp Kosher salt or iodized salt",
-            "normalized_concept": "salt",
-            "existing_food_ingredient_code": "SALT",
-            "resolution_status": "RESOLVED_EXISTING",
-            "missing_reason": ""
-          }
+          "quantity_text": "1/8 tsp",
+          "normalization_reason": "Source explicitly permits 1/8 tsp each salt and pepper instead of 1 tsp mustard; two selected note rows preserve each amount without inventing a seasoning quantity. Existing black pepper is the selected member of source-generic pepper."
+        },
+        {
+          "position": 5,
+          "source_section": "Notes: pepper allocation",
+          "source_text": "1/8 tsp each of salt and pepper may be substituted for 1 tsp mustard.",
+          "selected_codes": [
+            "BLACK_PEPPER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/8 tsp",
+          "normalization_reason": "Source explicitly permits 1/8 tsp each salt and pepper instead of 1 tsp mustard; two selected note rows preserve each amount without inventing a seasoning quantity. Existing black pepper is the selected member of source-generic pepper."
         },
         {
           "position": 6,
-          "source_section": "HISTORICAL_COVERAGE",
-          "source_text": "¾ tsp Fresh garlic, minced",
-          "selected_codes": [
-            "GARLIC"
-          ],
-          "selection": "SELECTED_REQUIRED",
-          "quantity_text": "¾ tsp Fresh garlic, minced",
-          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
-          "historical_row": {
-            "source_recipe_id": "CACFP6-LOCAL-HARVEST-BAKE",
-            "source_ingredient_text": "¾ tsp Fresh garlic, minced",
-            "normalized_concept": "garlic",
-            "existing_food_ingredient_code": "GARLIC",
-            "resolution_status": "RESOLVED_EXISTING",
-            "missing_reason": ""
-          }
+          "source_section": "Instruction 7 and Notes",
+          "source_text": "Garnish as desired; paprika, cayenne pepper, pickle relish, sliced scallions, or sliced green or black olives",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": null,
+          "normalization_reason": "Source says garnish as desired; all garnish choices omitted explicitly, without invented quantity."
         },
         {
           "position": 7,
-          "source_section": "HISTORICAL_COVERAGE",
-          "source_text": "½ tsp Dried parsley (optional)",
-          "selected_codes": [
-            "PARSLEY_DRIED"
-          ],
-          "selection": "SELECTED_OPTIONAL",
-          "quantity_text": "½ tsp Dried parsley (optional)",
-          "normalization_reason": "Exact accepted quantified optional parsley retained as selected optional, not required; no source amount or code changed.",
-          "historical_row": {
-            "source_recipe_id": "CACFP6-LOCAL-HARVEST-BAKE",
-            "source_ingredient_text": "½ tsp Dried parsley (optional)",
-            "normalized_concept": "parsley_dried",
-            "existing_food_ingredient_code": "PARSLEY_DRIED",
-            "resolution_status": "RESOLVED_EXISTING",
-            "missing_reason": ""
-          }
+          "source_section": "Instructions 1, 3, 4: discarded process water",
+          "source_text": "Cover with cold water; remove from heat and drain; crack eggs under cold water",
+          "selected_codes": [],
+          "selection": "OMITTED_VARIANT",
+          "quantity_text": null,
+          "normalization_reason": "Source explicitly drains boiling water; cracking/cooling water is discarded process use, not retained food or purchased WATER."
         }
       ],
       "unresolved_issues": [],
-      "notes": [
-        "Historical optional rows retained as selected exactly as accepted; this is not a newly omitted source optional."
-      ],
-      "source_limitations": []
+      "source_limitations": [
+        "Source directions name dressing while the ingredient table names light mayonnaise. Preserve that wording without introducing a second ingredient.",
+        "The source PDF has no separate prep/cook/total-time fields. The twelve-minute simmer is not a full preparation-time estimate.",
+        "Do not infer a knife or scissors from cut/split verbs: these objects are not named in the selected primary PDF recipe.",
+        "Actual PDF hash and visual recipe-page review are complete. All eight extracted pages were checked; no recipe-specific copyright/reuse restriction appeared. ONIE is credited, not declared a federal employee. No nutrition values from the unmodified source recipe are asserted for the selected salt/pepper alternative."
+      ]
     },
     {
       "source_recipe_id": "CACFP6-TABBOULEH",
@@ -710,135 +649,71 @@
       "source_limitations": []
     },
     {
-      "source_recipe_id": "CACFP6-HONEY-LIME-CHICKEN",
-      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Honey_Lime_Chicken_6_Servings.pdf",
-      "source_servings": 6,
-      "review_basis": "HISTORICAL_ACCEPTED_COVERAGE_VERBATIM_COPY_NOT_RETRANSCRIPTION",
+      "source_recipe_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese/printable/print",
+      "source_servings": 1,
+      "review_basis": "Actual complete primary artifact and all recipe-specific instructions/notes re-reviewed in direction-consumables correction 2026-09-05.",
       "rows": [
         {
           "position": 1,
-          "source_section": "HISTORICAL_COVERAGE",
-          "source_text": "1 lb 7 oz Raw chicken thighs, boneless, skinless",
+          "source_section": "Ingredients",
+          "source_text": "whole wheat bread (2 slices)",
           "selected_codes": [
-            "CHICKEN_THIGH"
+            "BREAD_WHOLE_WHEAT"
           ],
           "selection": "SELECTED_REQUIRED",
-          "quantity_text": "1 lb 7 oz Raw chicken thighs, boneless, skinless",
-          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
-          "historical_row": {
-            "source_recipe_id": "CACFP6-HONEY-LIME-CHICKEN",
-            "source_ingredient_text": "1 lb 7 oz Raw chicken thighs, boneless, skinless",
-            "normalized_concept": "chicken_thigh",
-            "existing_food_ingredient_code": "CHICKEN_THIGH",
-            "resolution_status": "RESOLVED_EXISTING",
-            "missing_reason": ""
-          }
+          "quantity_text": "2 slices",
+          "normalization_reason": "Source count retained exactly; no grams, retailer-package or count-to-weight conversion."
         },
         {
           "position": 2,
-          "source_section": "HISTORICAL_COVERAGE",
-          "source_text": "⅓ cup or 3 ½ oz Honey",
-          "selected_codes": [
-            "HONEY"
-          ],
-          "selection": "SELECTED_REQUIRED",
-          "quantity_text": "⅓ cup or 3 ½ oz Honey",
-          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
-          "historical_row": {
-            "source_recipe_id": "CACFP6-HONEY-LIME-CHICKEN",
-            "source_ingredient_text": "⅓ cup or 3 ½ oz Honey",
-            "normalized_concept": "honey",
-            "existing_food_ingredient_code": "HONEY",
-            "resolution_status": "RESOLVED_EXISTING",
-            "missing_reason": ""
-          }
+          "source_section": "Ingredients",
+          "source_text": "1 T (tablespoon) harissa (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "1 tablespoon",
+          "normalization_reason": "Explicit optional label; no substitute spread selected."
         },
         {
           "position": 3,
-          "source_section": "HISTORICAL_COVERAGE",
-          "source_text": "¼ cup or 2 oz Fresh lime juice",
+          "source_section": "Ingredients",
+          "source_text": "3/4 c (cup) cheese (grated, try Muenster, Monterey jack or mozzarella)",
           "selected_codes": [
-            "LIME_JUICE"
+            "CHEESE_CHEDDAR"
           ],
           "selection": "SELECTED_REQUIRED",
-          "quantity_text": "¼ cup or 2 oz Fresh lime juice",
-          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
-          "historical_row": {
-            "source_recipe_id": "CACFP6-HONEY-LIME-CHICKEN",
-            "source_ingredient_text": "¼ cup or 2 oz Fresh lime juice",
-            "normalized_concept": "lime_juice",
-            "existing_food_ingredient_code": "LIME_JUICE",
-            "resolution_status": "RESOLVED_EXISTING",
-            "missing_reason": ""
-          }
+          "quantity_text": "3/4 cup",
+          "normalization_reason": "Generic cheese is not restricted to the examples; cheddar is itself mentioned in the source flavor ideas. Selected ordinary natural cheddar, not a processed cheese product."
         },
         {
           "position": 4,
-          "source_section": "HISTORICAL_COVERAGE",
-          "source_text": "½ tsp Salt",
+          "source_section": "Ingredients",
+          "source_text": "1/2 c (cup) broccoli and cauliflower (roasted, cut into small pieces or use fresh veggies of your choice)",
           "selected_codes": [
-            "SALT"
+            "CAULIFLOWER"
           ],
           "selection": "SELECTED_REQUIRED",
-          "quantity_text": "½ tsp Salt",
-          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
-          "historical_row": {
-            "source_recipe_id": "CACFP6-HONEY-LIME-CHICKEN",
-            "source_ingredient_text": "½ tsp Salt",
-            "normalized_concept": "salt",
-            "existing_food_ingredient_code": "SALT",
-            "resolution_status": "RESOLVED_EXISTING",
-            "missing_reason": ""
-          }
+          "quantity_text": "1/2 cup",
+          "normalization_reason": "Select all 1/2 cup as fresh cauliflower under explicit fresh vegetables of choice alternative. No ratio invented, no roasting workflow silently omitted."
         },
         {
           "position": 5,
-          "source_section": "HISTORICAL_COVERAGE",
-          "source_text": "¼ tsp Ground black or white pepper (black selected)",
-          "selected_codes": [
-            "BLACK_PEPPER"
-          ],
-          "selection": "SELECTED_REQUIRED",
-          "quantity_text": "¼ tsp Ground black or white pepper (black selected)",
-          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
-          "historical_row": {
-            "source_recipe_id": "CACFP6-HONEY-LIME-CHICKEN",
-            "source_ingredient_text": "¼ tsp Ground black or white pepper (black selected)",
-            "normalized_concept": "black_pepper",
-            "existing_food_ingredient_code": "BLACK_PEPPER",
-            "resolution_status": "RESOLVED_EXISTING",
-            "missing_reason": ""
-          }
-        },
-        {
-          "position": 6,
-          "source_section": "HISTORICAL_COVERAGE",
-          "source_text": "⅛ cup Lime zest",
-          "selected_codes": [
-            "LIME"
-          ],
-          "selection": "SELECTED_REQUIRED",
-          "quantity_text": "⅛ cup Lime zest",
-          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
-          "historical_row": {
-            "source_recipe_id": "CACFP6-HONEY-LIME-CHICKEN",
-            "source_ingredient_text": "⅛ cup Lime zest",
-            "normalized_concept": "lime_zest",
-            "existing_food_ingredient_code": "LIME",
-            "resolution_status": "RESOLVED_EXISTING",
-            "missing_reason": ""
-          }
+          "source_section": "Ingredients",
+          "source_text": "oil spray (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": null,
+          "normalization_reason": "Source explicitly permits nonstick-pan no-butter method; listed spray optional and step 2 conditional if needed."
         }
       ],
       "unresolved_issues": [],
-      "notes": [
-        "Historical optional rows retained as selected exactly as accepted; this is not a newly omitted source optional."
-      ],
       "source_limitations": [
-        {
-          "source_fact": "Source header cook time 30 minutes, oven directions 30–35 minutes. The step 2 Set aside for step 2 reference is a source typo.",
-          "review_decision": "PRESERVE_SOURCE_HEADER_AND_STAGE_RANGE_NO_REWRITTEN_STEP"
-        }
+        "Main directions imply closing sandwich but do not separately state placing second bread slice; ingredient list explicitly has 2 slices and instruction 7 grills sandwich. Preserve source wording; do not author a new step.",
+        "Generic cheese permits cheddar; named examples are non-exhaustive. Do not claim cheese quantity is grams or corresponds to a fixed retailer package.",
+        "Half-cup fresh vegetables of choice permits fresh cauliflower as the sole vegetable; no roast yields, ingredient ratios or cooking aids inferred.",
+        "Fresh cauliflower is a preparation selection; use reviewed fresh CAULIFLOWER market evidence, not frozen smoothie evidence.",
+        "DAIRY is curation-only protein-family metadata supported by selected CHEESE_CHEDDAR, not an extension of PR4 MealTypeCode or any runtime schema.",
+        "Equipment notes list spoon, but its only explicit directional use is omitted optional harissa spreading; selected equipment retains nonstick pan and knife only. No replacement spoon action invented."
       ]
     },
     {
