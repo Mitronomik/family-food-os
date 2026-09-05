@@ -1,4 +1,4 @@
-name: PR4 scope-reset workspace bundle
+name: PR4 scope reset verification
 
 on:
   push:
@@ -6,39 +6,102 @@ on:
       - migration/pr4-recipe-catalogue
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  bundle:
+  reset-and-verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      - name: Build task-local workspace bundle
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: backend/pyproject.toml
+
+      - name: Apply approved PR4 scope reset
         run: |
           set -euo pipefail
-          mkdir -p pr4-reset-bundle
-          cp -R data/curation/pr4-data2 pr4-reset-bundle/
-          cp -R data/seed/recipes pr4-reset-bundle/current-seed
-          mkdir -p pr4-reset-bundle/backend/app/domain
-          mkdir -p pr4-reset-bundle/backend/app/services
-          mkdir -p pr4-reset-bundle/backend/app/seed
-          mkdir -p pr4-reset-bundle/backend/app/migrations/versions
-          mkdir -p pr4-reset-bundle/backend/app/persistence/sqlalchemy_core
-          mkdir -p pr4-reset-bundle/backend/app/tests/persistence
-          cp backend/app/domain/food_recipes.py pr4-reset-bundle/backend/app/domain/
-          cp backend/app/services/food_recipe_contracts.py pr4-reset-bundle/backend/app/services/
-          cp backend/app/services/food_recipes.py pr4-reset-bundle/backend/app/services/
-          cp backend/app/seed/food_recipes.py pr4-reset-bundle/backend/app/seed/
-          cp backend/app/migrations/versions/0024_food_recipe_catalogue.py pr4-reset-bundle/backend/app/migrations/versions/
-          cp backend/app/persistence/sqlalchemy_core/food_recipe_tables.py pr4-reset-bundle/backend/app/persistence/sqlalchemy_core/
-          cp backend/app/persistence/sqlalchemy_core/food_recipe_repositories.py pr4-reset-bundle/backend/app/persistence/sqlalchemy_core/
-          cp backend/app/persistence/sqlalchemy_core/food_recipe_uow.py pr4-reset-bundle/backend/app/persistence/sqlalchemy_core/
-          cp backend/app/tests/test_food_recipe_*.py pr4-reset-bundle/backend/app/tests/
-          cp backend/app/tests/persistence/test_food_recipe_repository.py pr4-reset-bundle/backend/app/tests/persistence/
-          cp scripts/build_pr4_recipe_seed.py pr4-reset-bundle/
-      - uses: actions/upload-artifact@v4
-        with:
-          name: pr4-reset-workspace
-          path: pr4-reset-bundle
-          if-no-files-found: error
-          retention-days: 2
+          python scripts/pr4_scope_reset_apply.py
+          python scripts/build_pr4_recipe_seed.py
+          cp data/seed/recipes/recipes.json /tmp/recipes.first.json
+          cp data/seed/recipes/source-manifest.json /tmp/manifest.first.json
+          python scripts/build_pr4_recipe_seed.py
+          cmp /tmp/recipes.first.json data/seed/recipes/recipes.json
+          cmp /tmp/manifest.first.json data/seed/recipes/source-manifest.json
+
+      - name: Install backend and test tooling
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e 'backend[test]' ruff
+
+      - name: Verify DATA2 handoff
+        run: |
+          set -euo pipefail
+          python scripts/validate_pr4_data2.py
+          python -m pytest -q backend/app/tests/test_pr4_data2_research.py
+
+      - name: Verify PR4 focused suite
+        run: |
+          set -euo pipefail
+          python -m pytest -q \
+            backend/app/tests/test_food_recipe_domain.py \
+            backend/app/tests/test_food_recipe_application.py \
+            backend/app/tests/test_food_recipe_architecture.py \
+            backend/app/tests/test_food_recipe_migration.py \
+            backend/app/tests/test_food_recipe_seed.py \
+            backend/app/tests/persistence/test_food_recipe_repository.py
+
+      - name: Verify full backend regression
+        working-directory: backend
+        run: python -m pytest -q
+
+      - name: Static and scope checks
+        run: |
+          set -euo pipefail
+          ruff format --check \
+            backend/app/domain/food_recipes.py \
+            backend/app/services/food_recipes.py \
+            backend/app/seed/food_recipes.py \
+            backend/app/persistence/sqlalchemy_core/food_recipe_tables.py \
+            backend/app/tests/test_food_recipe_domain.py \
+            backend/app/tests/test_food_recipe_application.py \
+            backend/app/tests/test_food_recipe_migration.py \
+            backend/app/tests/test_food_recipe_seed.py \
+            scripts/build_pr4_recipe_seed.py
+          ruff check \
+            backend/app/domain/food_recipes.py \
+            backend/app/services/food_recipes.py \
+            backend/app/seed/food_recipes.py \
+            backend/app/persistence/sqlalchemy_core/food_recipe_tables.py \
+            backend/app/tests/test_food_recipe_domain.py \
+            backend/app/tests/test_food_recipe_application.py \
+            backend/app/tests/test_food_recipe_migration.py \
+            backend/app/tests/test_food_recipe_seed.py \
+            scripts/build_pr4_recipe_seed.py
+          git diff --check
+          test "$(python - <<'PY'
+import json
+r=json.load(open('data/seed/recipes/recipes.json'))['recipes']
+print(len(r), sum(len(x['version']['ingredients']) for x in r), sum(len(x['version']['steps']) for x in r), sum(len(x['version']['equipment_codes']) for x in r), len({i['food_ingredient_code'] for x in r for i in x['version']['ingredients']}))
+PY
+)" = "30 189 169 86 81"
+          ! grep -R "EXPECTED_MANIFEST_CODE_COUNT = 119\|365 RecipeIngredient\|315 RecipeStep" backend/app/seed scripts data/seed/recipes
+
+      - name: Commit verified scope reset and remove temporary tooling
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -f scripts/pr4_scope_reset_apply.py
+          rm -f .github/workflows/pr4-reset-bundle.yml
+          git add -A
+          git diff --cached --check
+          git config user.name 'FamilyFoodOS Orchestrator'
+          git config user.email 'actions@users.noreply.github.com'
+          git commit -m 'PR4: reset recipe catalogue to accepted DATA2'
+          git push origin HEAD:migration/pr4-recipe-catalogue
