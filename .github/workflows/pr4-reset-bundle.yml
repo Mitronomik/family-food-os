@@ -30,6 +30,7 @@ jobs:
           python scripts/pr4_reset_payload_b.py
           python scripts/pr4_reset_payload_c.py
           python scripts/pr4_reset_payload_d.py
+          python scripts/pr4_reset_payload_e.py
           rm -f \
             docs/family-food/pr4-github-actions-acquisition.json \
             docs/family-food/pr4-provenance-refresh-attempt.json \
@@ -81,6 +82,7 @@ jobs:
             backend/app/tests/test_food_recipe_application.py \
             backend/app/tests/test_food_recipe_migration.py \
             backend/app/tests/test_food_recipe_seed.py \
+            backend/app/tests/persistence/test_food_recipe_repository.py \
             scripts/build_pr4_recipe_seed.py
           ruff check \
             backend/app/domain/food_recipes.py \
@@ -91,6 +93,7 @@ jobs:
             backend/app/tests/test_food_recipe_application.py \
             backend/app/tests/test_food_recipe_migration.py \
             backend/app/tests/test_food_recipe_seed.py \
+            backend/app/tests/persistence/test_food_recipe_repository.py \
             scripts/build_pr4_recipe_seed.py
           git diff --check
           test "$(python -c "import json; r=json.load(open('data/seed/recipes/recipes.json'))['recipes']; print(len(r),sum(len(x['version']['ingredients']) for x in r),sum(len(x['version']['steps']) for x in r),sum(len(x['version']['equipment_codes']) for x in r),len({i['food_ingredient_code'] for x in r for i in x['version']['ingredients']}))")" = "30 189 169 86 81"
@@ -105,6 +108,7 @@ jobs:
             scripts/pr4_reset_payload_b.py \
             scripts/pr4_reset_payload_c.py \
             scripts/pr4_reset_payload_d.py \
+            scripts/pr4_reset_payload_e.py \
             .github/workflows/pr4-reset-bundle.yml
           git add -A
           git diff --cached --check
