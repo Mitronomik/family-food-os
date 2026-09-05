@@ -1,3 +1,99 @@
+# PR4 — official equivalent acquisition remains unavailable
+
+## FACT
+
+Latest [Orchestrator decision](https://github.com/Mitronomik/family-food-os/pull/10#issuecomment-5554016049),
+`2026-09-05T18:48:54Z`, authorizes official canonical/equivalent retrieval URLs.
+It supersedes only the earlier exact-historical-URL constraint. No new permission
+is needed to retrieve the same source through an official equivalent endpoint.
+Starting head: `7e155013a5c5a3fea42ec91930f7a1a6e06ef582`.
+Main and synchronization remain `2f5fba991f1f612ce7b4b8dfda8ebd41ad6333e7`
+and `dfcbce2814b46da45cf346762a778170ffc5b36c` respectively.
+
+The blocking source is **SNAP6-HEAVENLY-DEVILED-EGGS**:
+
+- Accepted URL: `https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf`.
+- Accepted SHA-256: `1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f`.
+- Current official PDF: `https://snaped.fns.usda.gov/sites/default/files/documents/EnglishEaster508_1.pdf`.
+  HTTPS client: TLS EOF; browser: Access Denied.
+- Current official recipe: `https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/heavenly-deviled-eggs`.
+  HTTPS client: TLS EOF; web retrieval: HTTP 403.
+- Current official collection: `https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/easter`.
+  Browser: Access Denied.
+- Linked official MyPlate recipe: `https://www.myplate.gov/recipes/supplemental-nutrition-assistance-program-snap/heavenly-deviled-eggs`.
+  Browser: Forbidden; curl: exit 35, TLS connection failed, no HTTP response body.
+
+The non-print WIC grilled-cheese route returned 403. Current www.fns.usda.gov
+paths for tnc-eggs.pdf, tnc-applesauce.pdf and HarvestofRecipes.pdf also failed
+with TLS EOF. A discovered public USDA staging recipe URL was inspected only
+as a candidate, failed acquisition, and was not adopted as canonical provenance.
+[Machine-readable attempt evidence](pr4-provenance-refresh-attempt.json) contains
+the exact URLs and failed request times under `official_equivalent_fallback_pass`.
+The six-URL Python batch was repeated once while loading its helper; both failed.
+The stored batch records are the later attempts, not successful retrieval events.
+
+## ASSUMPTION
+
+The failure may be environment-specific or temporary; it does not establish
+worldwide disappearance. Search-reader text suggests an extra handwashing
+instruction in current Easter sources, but this cached discovery output is not
+accepted as a fresh source or an established authoritative diff. No recipe or
+rights change is claimed without complete current bytes and review.
+
+## BLOCKER
+
+**PR4 SOURCE DRIFT BLOCKER — current-source acquisition unavailable.**
+The tested official equivalent paths did not yield a complete current source
+representation for the exact accepted recipe. Fresh URL/hash/fact comparison
+and rights-notice review therefore remain unavailable. Both authoritative drift
+and rights drift are **unassessed**; zero drift cannot truthfully be certified.
+Production hash/retrieval instant remain null for failed requests. Denial pages
+and old locally saved bytes were not promoted to source artifacts.
+
+Historical retrieval evidence remains reusable for **3** artifacts. Fresh
+byte-identical artifacts: **0**. Accepted presentation successors: **0**.
+Changed-hash successor list and accepted production fallback URL list: **empty**.
+Remaining acquisition: **22 distinct artifacts / 27 recipes**. Accepted DATA2
+is unchanged; no corpus selection, quantities, rights, mappings or hash was edited.
+Production correction and first/second fresh seed remain pending this gate.
+No corrected step count or production row-count acceptance is claimed.
+
+## OPTIONS / RECOMMENDED DECISION
+
+1. Obtain complete bytes of these same official sources through a working client
+   with URL/redirect lineage and a UTC completion instant recorded at retrieval.
+   Keep binaries temporary and run the authorized recipe/rights comparison.
+2. Resume acquisition when these official endpoints are accessible from this
+   environment. Do not repeat historical-log recovery or substitute recipes.
+
+Recommended: restore/provide a working official acquisition path under the
+existing authorization, then continue this same PR through production correction
+and the complete verification matrix. Further URL-fallback permission is not
+the missing prerequisite. PR4 remains blocked; PR5 remains unauthorized.
+
+## Verification in this pass
+
+Only task-local evidence, documentation and state changed. Current checks:
+
+- DATA2 validator: **PASS: final DATA2 gates**.
+- DATA2 focused: **164 passed in 4.71s**.
+- Preserved PR4 domain/application/architecture/migration/persistence, excluding
+  obsolete seed: **43 passed in 5.41s**.
+- Affected PR4-DATA/FoodIngredient regression: **82 passed in 3.02s**.
+- Ruff over all 24 PR Python files: **24 files already formatted; All checks passed!**
+- `git diff --check`: **PASS**. Accepted DATA2 has no diff against accepted main.
+- Staged scope is restricted to six PR4 evidence/README/state files. No binaries,
+  source HTML, browser history, private records or production changes.
+
+Full PR4 seed suite, fresh first/second seed and full backend+launcher were **not
+run**: the source gate stopped production correction. These baseline checks do
+not establish corrected production readiness. Earlier test counts below are
+historical results from the previous pass.
+
+---
+
+## Historical previous pass — exact-URL acquisition
+
 # PR4 — authorized refresh: current-source acquisition blocker
 
 ## Current decision and FACT

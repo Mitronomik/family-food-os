@@ -1,5 +1,13 @@
 # PR4 Recipe Catalogue seed — DATA2 integration pending
 
+Latest pass: official canonical/equivalent URLs are authorized by
+[Orchestrator](https://github.com/Mitronomik/family-food-os/pull/10#issuecomment-5554016049).
+Current Easter PDF/page/collection and linked MyPlate routes failed acquisition.
+The [current review](../../../docs/family-food/pr4-retrieval-provenance-review.md)
+records exact fallback URLs and outcomes. No fresh production artifact or
+successor was accepted; drift remains unassessed. The earlier attempts below
+remain historical evidence; their exact-URL restriction is superseded.
+
 The JSON files in this directory and the existing builder/loader still contain
 the obsolete PR10 corpus. They have not been regenerated from accepted DATA2
 because the authorized fresh-source acquisition could not obtain complete
