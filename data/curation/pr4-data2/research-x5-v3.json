@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-05",
+  "scope": "Supplemental ordinary-concept research for four retained-candidate original recipes; any baseline chain allowed by orchestrator. Research only, no production retailer integration.",
+  "region_evidence": [
+    {
+      "url": "https://lenta.com/catalog/ovoshchi-146/",
+      "wording": "В какие города доставляем овощи; доставка осуществляется ... Санкт-Петербург",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_CATEGORY_OPENED"
+    }
+  ],
+  "observations": [
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Standalone ordinary grocery purchase concept in baseline chain, not specialty merchant; one evidenced chain supports RU_AVAILABLE retention review, no live-stock claim.",
+      "code": "OLIVE_OIL",
+      "url": "https://lenta.com/product/maslo-olivkovoe-neraf-extra-virgin-ispaniya-250ml-906830/",
+      "wording": "Масло оливковое ЛЕНТА нерафинированное Extra Virgin, 250мл; состав МАСЛО ОЛИВКОВОЕ",
+      "notes": "Pure olive oil, no non-olive oil blend. Current indexed today, product body opened; reviews September 2026."
+    },
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Standalone ordinary grocery purchase concept in baseline chain, not specialty merchant; one evidenced chain supports RU_AVAILABLE retention review, no live-stock claim.",
+      "code": "SALT",
+      "url": "https://lenta.com/product/sol-pomol-1-kup-rossiya-1kg-491061/",
+      "wording": "Соль ИЛЕЦКАЯ помол №1, 1кг; состав: Соль поваренная пищевая молотая.",
+      "notes": "Explicit food salt, not dishwasher salt. Current product body opened; August 2026 reviews."
+    },
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Standalone ordinary grocery purchase concept in baseline chain, not specialty merchant; one evidenced chain supports RU_AVAILABLE retention review, no live-stock claim.",
+      "code": "CHICKEN_THIGH",
+      "url": "https://lenta.com/product/file-bedra-cb-bez-kozhi-ohl-ves-rossiya-696329/",
+      "wording": "Филе бедра куриное ПЕТЕЛИНКА без кожи, весовое; состав: бескостное мясо бедра охлажденное; На кости Нет",
+      "notes": "Explicit raw chilled boneless skinless chicken thigh; no marinade or cooked preparation inferred. Current product body opened, September2026reviews. Transient sold-out does not establish market incompatibility."
+    },
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Standalone ordinary grocery purchase concept in baseline chain, not specialty merchant; one evidenced chain supports RU_AVAILABLE retention review, no live-stock claim.",
+      "code": "CABBAGE_RED",
+      "url": "https://lenta.com/product/kapusta-krasnokochannaya-ves-31723/",
+      "wording": "Капуста краснокочанная, весовая",
+      "notes": "Current neutral official product indexed last month; fresh red cabbage, not prepared salad. Transient sold-out is not a stock-based blocker."
+    },
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Standalone ordinary grocery purchase concept in baseline chain, not specialty merchant; one evidenced chain supports RU_AVAILABLE retention review, no live-stock claim.",
+      "code": "GREEN_ONION",
+      "url": "https://lenta.com/product/luk-zelenyjj-svezhijj-up-50g-584159/",
+      "wording": "Лук зеленый ЛЕНТА свежий,50г; состав: Лук зеленый свежий.",
+      "notes": "Actual fresh green onion. Separate dried green onion and composite snacks excluded. Indexed2months."
+    },
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Standalone ordinary grocery purchase concept in baseline chain, not specialty merchant; one evidenced chain supports RU_AVAILABLE retention review, no live-stock claim.",
+      "code": "LIME",
+      "url": "https://lenta.com/product/lajjm-3sht-771025/",
+      "wording": "Лайм ЛЕНТА FRESH,3шт; состав: Лайм.",
+      "notes": "Fresh lime fruit. Applies to source lime-zest preparation context without inferring whole-fruit quantity or changing accepted global code. Current product body opened; September2026reviews."
+    },
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Standalone ordinary grocery purchase concept in baseline chain, not specialty merchant; one evidenced chain supports RU_AVAILABLE retention review, no live-stock claim.",
+      "code": "LIME_JUICE",
+      "url": "https://lenta.com/product/lajjm-3sht-771025/",
+      "wording": "Лайм ЛЕНТА FRESH,3шт; состав: Лайм.",
+      "notes": "Explicit normalization decision: fresh lime is the purchase concept needed to prepare fresh lime juice. Honey_Lime_Chicken_6_Servings.pdf lists fresh lime juice and lime zest; it does not contain a squeeze instruction. This is purchase/preparation collapse under approved issue clarification, NOT evidence of bottled juice, not a claim of an authored squeeze step, not a quantity/yield conversion, and not a global-code change.",
+      "source_context_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Honey_Lime_Chicken_6_Servings.pdf"
+    },
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_INDEXED_OFFICIAL_PRODUCT_TITLE_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Standalone ordinary grocery purchase concept in baseline chain, not specialty merchant; one evidenced chain supports RU_AVAILABLE retention review, no live-stock claim.",
+      "code": "CUMIN_GROUND",
+      "url": "https://lenta.com/product/kumin-zira-molotaya-umnaya-pokupka-indiya-10g-454150/",
+      "wording": "Кумин (зира) SANTA MARIA Умная покупка молотый,10г",
+      "notes": "Exact standalone ground-cumin product title indexed2months with current2026official neutral page footer. Product body unavailable (liveopen internalerror); accepted evidence is expressly the current official indexed title under clarification, not a full ingredient-label inspection. No claim that whole cumin is ground; no invented grinding step or conversion."
+    }
+  ],
+  "search_queries": [
+    "site:lenta.com/product \"Масло оливковое\"",
+    "site:lenta.com/product \"Соль\"",
+    "site:lenta.com/product \"Кумин\"",
+    "site:lenta.com/product \"Филе бедра\" \"куриного\"",
+    "site:lenta.com \"Зира\" \"молотая\"",
+    "site:lenta.com/product \"Капуста краснокочанная\"",
+    "site:lenta.com/product \"Лук зеленый\"",
+    "site:lenta.com/product \"Лайм\"",
+    "\"Зира молотая\" \"Перекрёсток\"",
+    "\"Кумин\" \"Лента\"",
+    "\"Филе бедра\" \"без кожи\" site:lenta.com",
+    "\"Зира\" site:magnit.ru/product \"Санкт-Петербург\"",
+    "\"Зира молотая\" site:magnit.ru/product",
+    "\"Зира молотая\" site:5ka.ru",
+    "\"Кумин молотый\" site:perekrestok.ru",
+    "\"Зира молотая\" site:okeydostavka.ru",
+    "\"кумин молотый\" \"Лента\" купить",
+    "site:lenta.com/product/kumin-zira-molotaya-umnaya-pokupka-indiya-10g-454150 \"Кумин\"",
+    "site:lenta.com \"SANTA MARIA\" \"молотый\" \"Кумин\""
+  ],
+  "exclusions": [
+    {
+      "url": "https://lenta.com/product/sol-dlya-posudomoechnojj-mashiny-lenta-rossiya-15kg-449188/",
+      "reason": "Dishwasher salt is not food salt."
+    },
+    {
+      "url": "https://lenta.com/product/priprava-luk-zelenyjj-rossiya-7g-509870/",
+      "reason": "Dried green onion is not the required fresh herb."
+    },
+    {
+      "url": "https://lenta.com/product/kumin-zira-celyjj-avstriya-20g-206565/",
+      "reason": "Whole cumin does not itself prove ground product; no grinding invented to rescue."
+    },
+    {
+      "url": "https://magnit.ru/product/1000537685-vostochnyy_gost_priprava_dlya_plova_15g?shopCode=017670&shopType=1",
+      "reason": "Samara and composite pilaf spice mix, not standalone ground cumin."
+    },
+    {
+      "url": "https://perekrestok-store.ru/brands/spiceexpert",
+      "reason": "Official retailer ownership not established; not treated as primary X5 evidence."
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "scope": "WIC candidate dairy/oat purchase-concept follow-up. Existing global codes checked against ingredients.csv; no corpus acceptance or runtime changes.",
+  "checked_at": "2026-09-05",
+  "observations": [
+    {
+      "code": "CHEESE_CHEDDAR",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/syr-chedder-48-bez-zmzh-argentina-180g-712297/",
+      "wording": "Сыр LA PAULINA Чеддер 48% 180г; форма кусок; пастеризованное молоко, бактериальные культуры, соль, фермент.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Plain nonprocessed cheddar block. Grating is kitchen preparation. This is not reduced-fat cheddar."
+    },
+    {
+      "code": "CHEESE_CHEDDAR",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/706687-706687/",
+      "wording": "Сыр PREMIUM CLUB Чеддер выдержанный 45% 200г; форма кусок.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Aged cheddar, not processed cheddar-flavoured cheese. Zero displayed price does not invalidate current indexed catalogue wording; no live stock claim."
+    },
+    {
+      "code": "OATS_ROLLED",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/hlopya-gerkules-finskijj-rossiya-500g-391188/",
+      "wording": "Хлопья овсяные NORDIC Геркулес Финский; из цельного зерна; варить12минут.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Plain traditional rolled oat flakes, not steel-cut oats or sweetened instant cereal. Preserve source cooking directions and quantity."
+    },
+    {
+      "code": "OATS_ROLLED",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/hlopya-gerkules-rossiya-400g-339042/",
+      "wording": "Хлопья365ДНЕЙ Геркулес; состав овсяные хлопья; быстрого приготовления5минут.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Plain quick rolled oat flakes purchase concept; source quick/regular choice must be retained, not silently swapping cooking times."
+    },
+    {
+      "code": "CHEESE_MOZZARELLA_PART_SKIM",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/syr-balance-mini-myagkijj-mocarella-30-bez-zmzh-belarus-250g-745590/",
+      "wording": "BONFESTO Balance Mini Моцарелла30%; в2раза меньше жира; жиры9,5г/100г; шарики в рассоле.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "UNCERTAIN",
+      "notes": "Explicit reduced-fat mozzarella evidenced, but fresh brined balls; does not establish low-moisture shreddable part-skim form if source requires that functional form. No ordinary mozzarella global code exists. Parent must review exact source form before qualification."
+    },
+    {
+      "code": "MILK_2",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/moloko-pasterizovannoe-25-pet-bez-zmzh-rossiya-900ml-671969/",
+      "wording": "Молоко пастеризованное ЛЕНТА2,5%900мл.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "UNCERTAIN",
+      "notes": "2.5% milk is not exact2% MILK_2. No qualifying exact2% plain milk located in bounded official Lenta/Okey queries; not proof of market absence. If source says low-fat without fixedpercentage, select reviewed existing1% only under source-permitted choice."
+    }
+  ],
+  "search_queries": [
+    "site:lenta.com/product/ \"Сыр\" \"Моцарелла\" \"легкий\"",
+    "site:lenta.com/product/ \"Молоко\" \"2%\"",
+    "site:lenta.com/product/ \"Сыр\" \"Чеддер\" \"Состав\"",
+    "site:lenta.com/product/ молоко \"2\" \"жиры – 2г\" -2.5 -2,5",
+    "site:okeydostavka.ru \"молоко\" \"2%\"",
+    "site:lenta.com/product/ \"Хлопья овсяные\" \"Геркулес\"",
+    "site:lenta.com/product/ \"Моцарелла\" \"обезжиренное\" -пицца -сэндвич -пирог",
+    "site:lenta.com/product/ молоко \"2%\" -сыр -коктейль -каша -кефир -йогурт -2,5 -1,2 -напиток",
+    "site:okeydostavka.ru молоко \"2%\" -сыр -коктейль -напиток",
+    "site:lenta.com/product/ \"моцарелла\" \"30%\"",
+    "site:lenta.com/product/ \"молоко\" \"2%\" \"пастеризованное\"",
+    "site:okeydostavka.ru \"молоко\" \"2%\" \"пастеризованное\""
+  ],
+  "exclusions": [
+    {
+      "url": "https://lenta.com/product/syr-chedder-plavlenyjj-45-tertyjj-bez-zmzh-rossiya-150g-769262/",
+      "reason": "Processed grated cheddar contains emulsifying salts/water/butter and is not ordinary cheddar."
+    },
+    {
+      "url": "https://lenta.com/product/587804-587804/",
+      "reason": "VIOLA processed cheddar slices not ordinary cheddar."
+    },
+    {
+      "url": "https://lenta.com/product/syr-mocarella-myagkijj-45--bez-zmzh-ves-argentina-539237/",
+      "reason": "Page explicitly Moscow/Moscow-region-bound, so excluded from SPB compatibility proof."
+    }
+  ],
+  "summary": {
+    "observations": 6,
+    "available": 4,
+    "uncertain": 2
+  }
+}

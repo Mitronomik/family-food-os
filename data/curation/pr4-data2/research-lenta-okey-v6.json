@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "scope": "Expanded candidate union71 follow-up. Review exact source application before integrating conditional forms. No runtime, seed or RetailSKU mutation.",
+  "checked_at": "2026-09-05",
+  "observations": [
+    {
+      "code": "ALMONDS_RAW",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/mindal-sushenyjj-ves-60374/",
+      "wording": "Миндаль сушеный весовой; ядра орехов миндаля сушеные.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Plain dried almond kernels, no roasting/salt/coating declared. Dried storage form is not roasted almonds; chopping/slicing is source preparation."
+    },
+    {
+      "code": "BANANA",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/011230/",
+      "wording": "Бананы весовые; состав бананы.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Ordinary fresh bananas; not dried banana chips."
+    },
+    {
+      "code": "BEEF_TOP_ROUND",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/govyadina-tazobedrennaya-chast-zam-ves-rossiya-887602/",
+      "wording": "Говядина тазобедренная часть замороженная весовая; состав говядина.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "UNCERTAIN",
+      "notes": "Generic round/thigh cut does not explicitly establish top/inside round. Prior v4 boneless thigh similarly insufficient for exact upper-thigh code. Bone-in cuts excluded."
+    },
+    {
+      "code": "BROCCOLI",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/kapusta-brokkoli-ves-55648",
+      "wording": "Капуста брокколи весовая; категория овощи, капуста; сорт1.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Whole broccoli purchase concept. Generic description contains a frozen-cooking sentence despite fresh-produce category; retain this limitation and use explicitly frozen alternative only when source allows it."
+    },
+    {
+      "code": "CANOLA_OIL",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/maslo-rapsovoe-neraf-st-rossiya-250ml-707922/",
+      "wording": "Масло рапсовое АЛТАЙСКИЙ ЛЕН нерафинированное холодного отжима250мл; не подлежит термической обработке.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Matches existing Russian canonical name Масло рапсовое, but ONLY cold-use purchase compatibility (e.g. source salad dressing). Does NOT clear frying/heated applications. Current indexed official title/description qualifies even live body empty. No source-choice substitution made here."
+    },
+    {
+      "code": "CHICKEN_BREAST",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/011991-11991/",
+      "wording": "Филе грудки куриное ЛЕНТА FRESH; цыпленок-бройлер; натуральный полуфабрикат, перед употреблением довести до готовности.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Plain raw breast fillet explicitly evidenced. Not smoked, marinated, breaded or cooked. Product provider may vary; no production nutrient import."
+    },
+    {
+      "code": "CHICKEN_BREAST_COOKED",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/file-grudki-vk-ves-rossiya-714366/",
+      "wording": "Филе грудки варено-копченое ОКРАИНА; вода, нитритная соль, фосфаты, крахмал, пряности.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "UNCERTAIN",
+      "notes": "Observed cooked product is smoked/processed, not plain cooked breast. Raw breast availability does not automatically qualify separate cooked code. Need source-explicit cook-from-raw operation or qualifying plain cooked product. Preserve cooked source quantities; no raw conversion."
+    },
+    {
+      "code": "CHICKPEAS_DRY",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/nut-rossiya-450g-552023/",
+      "wording": "Нут ЛЕНТА450г; нут продовольственный; целые зерна, варить.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Plain dry chickpea grain in grain/legume category, not canned chickpeas or a mixed grain product."
+    },
+    {
+      "code": "KALE",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/salat-kejjl-rossiya-50g-663970/",
+      "wording": "Салат Кейл50г; состав салат кейл; форма листья.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Standalone fresh kale leaves, not mixed salad containing some kale. Current indexed official product, July2026 reviews; sold-out is not a permanent market absence."
+    },
+    {
+      "code": "MUSHROOM_WHITE",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/griby-shampinony-svezhie-400g-558630/",
+      "wording": "Шампиньоны ЛЕНТА FRESH400г; грибы шампиньоны свежие; цвет шляпки от белого до бежевого.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Fresh ordinary white/button mushrooms. Slicing is kitchen preparation; frozen sliced mushrooms not used for this evidence."
+    },
+    {
+      "code": "MUSTARD_YELLOW",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/gorchica-klassicheskaya-niderlandy-185g-189538/",
+      "wording": "Горчица HEINZ Классическая185г.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "UNCERTAIN",
+      "notes": "Indexed plain classic mustard title alone does not explicitly establish yellow rather than another mustard type. Generic mustard-flavoured high-fat sauce and garden mustard seeds excluded. No matching yellow prepared mustard found in bounded Lenta/Okey queries."
+    },
+    {
+      "code": "PUMPKIN_SEEDS_RAW",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/semechki-ochishchennye-tykvennye-ves-722792/",
+      "wording": "Семечки тыквенные очищенные; состав семена тыквы очищенные; способ обработки очистка.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Plain shelled pumpkin seeds, processing explicitly shelling only; not labelled roasted/salted products. Source roasting may be kitchen preparation."
+    },
+    {
+      "code": "VANILLA_EXTRACT",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/sirop-vanilnyjj-nizkokalorijjnyjj-bsah-rossiya-250g-885225/",
+      "wording": "Сироп НОЛЬ ГРАММ Ванильный; ванильный экстракт один из ингредиентов.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "UNCERTAIN",
+      "notes": "Carry-forward exact wrong-form exclusion from v4: thickened sweetened syrup is not standalone extract. Prior official exact-name searches remain unconfirmed; no new positive in this pass."
+    },
+    {
+      "code": "WALNUTS_RAW",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/greckijj-oreh-rossiya-200g-431488/",
+      "wording": "Орех грецкий365ДНЕЙ сушеный200г; ядра грецкого ореха натуральные.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Plain natural dried walnut kernels, not roasted/salted/coated nuts. Chopping is source preparation, and edible kernel weight must exclude shell."
+    },
+    {
+      "code": "YOGURT_GREEK_NONFAT",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/jjogurt-grecheskijj-obezzhirennyjj-01-rossiya-130g-584769/",
+      "wording": "VENN'S Греческий0,1%; состав молоко обезжиренное, закваска и пробиотики; жиры0,1г/100г.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Plain Greek yogurt explicitly made from skim milk qualifies the generic NONFAT/skim family under orchestrator clarification; no source exact0% requirement assumed. Preserve declared residual fat0.1g/100g without rounding to0. This does not relax fixed-percentage source requirements such as milk1%. Strawberry-flavoured version excluded."
+    }
+  ],
+  "search_queries": [
+    "site:lenta.com/product/ \"Миндаль\" \"сырой\"",
+    "site:lenta.com/product/ \"Орех грецкий\" \"Состав\"",
+    "site:lenta.com/product/ \"Семечки тыквенные\" \"необжаренные\"",
+    "site:lenta.com/product/ \"Бананы\" \"Состав\"",
+    "site:lenta.com/product/ \"Миндаль\" \"сушеный\"",
+    "site:lenta.com/product/ \"Семечки тыквенные\" \"очищенные\"",
+    "site:lenta.com/product/ \"Капуста брокколи\" свежая",
+    "site:lenta.com/product/ \"Грибы шампиньоны\" \"свежие\"",
+    "site:lenta.com/product/ \"Филе грудки\" \"Состав\"",
+    "site:lenta.com/product/ \"Нут\" \"крупа\"",
+    "site:lenta.com/product/ \"Кале\" -игрушка -сок -карта",
+    "site:okeydostavka.ru \"кейл\"",
+    "site:lenta.com/product/ \"Нут МИСТРАЛЬ\"",
+    "site:lenta.com/product/ \"кейл\"",
+    "site:lenta.com \"кейл\"",
+    "site:okeydostavka.ru \"капуста кале\"",
+    "site:lenta.com/product/ \"нут\" \"450г\"",
+    "site:lenta.com/product/ \"йогурт\" \"греческий\" \"0%\"",
+    "site:lenta.com/product/ \"говядина\" \"внутренняя\"",
+    "site:lenta.com/product/ \"горчица\" \"американская\"",
+    "site:lenta.com/product/ \"йогурт\" \"Total\" \"0\"",
+    "site:okeydostavka.ru \"йогурт\" \"греческий\" \"0%\"",
+    "site:lenta.com/product/ \"масло рапсовое\"",
+    "site:okeydostavka.ru \"масло рапсовое\"",
+    "site:lenta.com/product/ \"горчица\" \"French\"",
+    "site:okeydostavka.ru \"горчица\" \"американская\"",
+    "site:lenta.com/product/ \"грудка\" \"вареная\"",
+    "site:lenta.com/product/ \"говядина\" \"тазобедренная\"",
+    "site:lenta.com/product/ \"Филе куриное\" \"отварное\"",
+    "site:okeydostavka.ru/spb \"филе\" \"отварное\"",
+    "site:lenta.com/product/ \"Горчица\" \"классическая\" -соус -кетчуп -майонез"
+  ],
+  "exclusions": [
+    {
+      "url": "https://lenta.com/product/file-grudki-file-grudki-bolshoe-ohlazhdennoe-rossiya-1000g-563545/",
+      "reason": "Contradictory title/description chicken but composition turkey; not breast-chicken proof."
+    },
+    {
+      "url": "https://lenta.com/product/salat-stolichnyjj-ves-rossiya-11557/",
+      "reason": "Cooked chicken inside mayonnaise salad is not separately purchasable plain cooked chicken."
+    },
+    {
+      "url": "https://lenta.com/product/file-kurinoe-s-provanskimi-travami-vu-ves-rossiya-746842/",
+      "reason": "Ready cooked chicken with Provencal herbs is not plain cooked breast."
+    },
+    {
+      "url": "https://lenta.com/product/jjogurt-grecheskijj-obezzhirennyjj-01-s-klubnikojj-rossiya-130g-584771/",
+      "reason": "Strawberry sweetened Greek yogurt is not plain."
+    },
+    {
+      "url": "https://lenta.com/product/smes-miks-sushenyh-orehov-i-izyuma-rossiya-50g-729745/",
+      "reason": "Nuts-and-raisins blend cannot supply independently measured plain nuts/raisins as source rows."
+    }
+  ],
+  "summary": {
+    "observations": 15,
+    "available": 11,
+    "uncertain": 4
+  }
+}

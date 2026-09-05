@@ -2,57 +2,983 @@
   "schema_version": 1,
   "checked_at": "2026-09-05",
   "status": "RESEARCH_INCOMPLETE_NOT_ACCEPTED_CORPUS",
-  "method": "All 363 ingredient-coverage rows across all 30 accepted source records were inspected for material retail forms. The entries below identify source forms needing specific evidence, not retailer availability determinations. Every other non-exempt required row still requires current regional retailer proof. No candidate has been accepted and no source substitutions were made.",
+  "method": "All 363 source rows inspected; 96 historically flagged source-text rows retained and classified by purchase-form relevance. Repeated purchase concepts share retailer evidence. Source quantities/directions remain unchanged. No candidate accepted without further gates.",
   "input_matrix": "data/curation/pr4/ingredient-coverage.csv",
   "all_recipe_form_audit": [
-    {"recipe_source_id":"CACFP6-SOUTHWEST-TOFU-SCRAMBLE","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"TOFU_FIRM","source_text":"2 ½ cups or 1 lb Firm tofu"},{"code":"QUINOA","source_text":"1 cup or 7 oz Quinoa, uncooked"}]},
-    {"recipe_source_id":"CACFP6-SPICED-OATMEAL","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"MILK_1_PERCENT","source_text":"2 ¼ cups Milk, low-fat (1%)"},{"code":"AGAVE_SYRUP","source_text":"2 Tbsp Agave nectar"},{"code":"VANILLA_EXTRACT","source_text":"¼ tsp Vanilla extract"},{"code":"MARGARINE","source_text":"1 Tbsp 1 tsp or 1 oz Margarine, trans-fat free"}]},
-    {"recipe_source_id":"CACFP6-STRAWBERRY-SMOOTHIE-BOWL","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"YOGURT_GREEK_LOW_FAT","source_text":"3 cups or 1 lb 8 oz Low-fat Greek yogurt"},{"code":"STRAWBERRY","source_text":"1 qt 2 cups or 1 lb 11 oz Frozen strawberries, diced"},{"code":"AGAVE_SYRUP","source_text":"¼ cup or 3 oz Agave syrup"},{"code":"VANILLA_EXTRACT","source_text":"1 ½ tsp Vanilla extract"}]},
-    {"recipe_source_id":"CACFP6-BAKED-SWEET-POTATOES-APPLES","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"APPLE","source_text":"1 ¼ cups or 7 oz Frozen green apples, thawed, unsweetened"},{"code":"ORANGE_JUICE_CONCENTRATE","source_text":"¼ cup or 2 oz Orange juice concentrate, frozen, thawed"},{"code":"MARGARINE","source_text":"2 Tbsp or 1 oz Margarine, trans-fat free"},{"code":"VANILLA_EXTRACT","source_text":"½ tsp Vanilla extract"}]},
-    {"recipe_source_id":"CACFP6-CORN-EDAMAME-BLEND","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"EDAMAME_FROZEN","source_text":"1 cup or 6 oz Frozen edamame, thawed, drained"},{"code":"CORN_SWEET","source_text":"⅔ cup or 5 oz Frozen corn, thawed, drained"},{"code":"SESAME_SEEDS","source_text":"1 tsp Toasted sesame seeds"}]},
-    {"recipe_source_id":"CACFP6-LOCAL-HARVEST-BAKE","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"BUTTERNUT_SQUASH","source_text":"2 cups or 8 oz Fresh butternut squash, peeled, cubed"},{"code":"SWEET_POTATO","source_text":"2 cups or 8 oz Fresh sweet potatoes, peeled, cubed"}]},
-    {"recipe_source_id":"CACFP6-ORANGE-GLAZED-CARROTS","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"ORANGE_JUICE_CONCENTRATE","source_text":"¼ cup Orange juice concentrate, frozen, thawed"},{"code":"CARROT","source_text":"3 ⅓ cups or 1 ¼ lb Frozen carrots, thawed, sliced, drained"},{"code":"MARGARINE","source_text":"½ oz or ⅛ cup Margarine, trans-fat free"},{"code":"VANILLA_EXTRACT","source_text":"⅔ tsp Vanilla extract"}]},
-    {"recipe_source_id":"CACFP6-PIZZA-GREEN-BEANS","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"GREEN_BEANS_CANNED_NO_SALT","source_text":"1 qt or 1 lb 11 oz Canned no-salt-added green beans, with liquid"},{"code":"TOMATO_CANNED_NO_SALT","source_text":"2 cups or 8 ¼ oz Canned no-salt-added diced tomatoes, drained"}]},
-    {"recipe_source_id":"CACFP6-SAUTEED-SPINACH-TOMATOES","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"TOMATO_PASTE_NO_SALT","source_text":"2 oz Canned no-salt-added tomato paste"},{"code":"MARGARINE","source_text":"1 Tbsp Margarine, trans-fat free"}]},
-    {"recipe_source_id":"CACFP6-SPANISH-RICE","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"BEEF_BROTH_LOW_SODIUM","source_text":"1 cup Low-sodium beef broth"},{"code":"RICE_BROWN","source_text":"1 cup or 7 oz Brown rice, long-grain, regular, dry, parboiled"},{"code":"TOMATO_CANNED_NO_SALT","source_text":"⅓ cup or 2 ½ oz Canned no-salt-added diced tomatoes, undrained"},{"code":"CHILI_POWDER","source_text":"½ tsp Chili powder"}]},
-    {"recipe_source_id":"CACFP6-TABBOULEH","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"QUINOA","source_text":"⅓ cup or 3 oz Quinoa, dry"},{"code":"BULGUR","source_text":"½ cup or 3 oz Bulgur wheat, dry"},{"code":"MINT_FRESH","source_text":"¼ tsp Fresh mint, chopped"}]},
-    {"recipe_source_id":"CACFP6-CHICKEN-FAJITA","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"CHICKEN_BREAST_COOKED","source_text":"7 oz Frozen chicken strips, cooked, thawed"},{"code":"ANCHO_CHILI_POWDER","source_text":"1 Tbsp Ancho chili powder OR Mexican seasoning mix (ancho selected)"},{"code":"SALSA","source_text":"½ cup or 3 ½ oz Canned low-sodium salsa"},{"code":"TORTILLA_WHOLE_WHEAT","source_text":"6 Whole-grain tortillas, 1 oz each"}]},
-    {"recipe_source_id":"CACFP6-HONEY-LIME-CHICKEN","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"CHICKEN_THIGH","source_text":"1 lb 7 oz Raw chicken thighs, boneless, skinless"},{"code":"LIME_JUICE","source_text":"¼ cup or 2 oz Fresh lime juice"}]},
-    {"recipe_source_id":"CACFP6-RICE-VEGETABLE-CASSEROLE","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"CHICKEN_BROTH_LOW_SODIUM","source_text":"2 cups Low-sodium chicken broth"},{"code":"KALE","source_text":"1 qt or 4 oz Fresh kale, finely chopped"},{"code":"CHEESE_CHEDDAR_REDUCED_FAT","source_text":"1 cup or 4 oz Low-fat cheddar cheese, shredded"},{"code":"CHEESE_MOZZARELLA_PART_SKIM","source_text":"¾ cup or 3 oz Low-fat mozzarella cheese, low-moisture, part-skim, shredded"},{"code":"RICE_BROWN","source_text":"1 cup or 7 oz Brown rice, uncooked, long-grain, regular, dry, parboiled"}]},
-    {"recipe_source_id":"CACFP6-VEGETABLE-CHILI","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"ANCHO_CHILI_POWDER","source_text":"2 ¼ tsp or ¼ oz Ancho chili powder OR Mexican seasoning mix (ancho selected)"},{"code":"KIDNEY_BEANS_CANNED_LOW_SODIUM","source_text":"1 ½ cups or 11 oz Canned low-sodium kidney beans OR dry kidney beans, cooked (canned selected)"},{"code":"JALAPENO","source_text":"⅛ cup or ¼ oz Fresh jalapeño peppers, seeded, diced"},{"code":"VEGETABLE_BROTH","source_text":"¼ cup or 2 oz Low-sodium vegetable broth"}]},
-    {"recipe_source_id":"CACFP6-VEGETABLE-FRITTATA","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"CHEESE_CHEDDAR_REDUCED_FAT","source_text":"⅓ cup or 1 oz Low-fat cheddar cheese, shredded"},{"code":"MILK_SKIM","source_text":"¼ cup Skim milk"},{"code":"EGG","source_text":"3 eggs or 6 oz Liquid eggs"}]},
-    {"recipe_source_id":"CACFP6-CARROT-RAISIN-SALAD","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"YOGURT_PLAIN_LOW_FAT","source_text":"⅔ cup or 5 oz Low-fat yogurt, plain"},{"code":"MAYONNAISE_LOW_FAT","source_text":"¼ cup or 2 oz Low-fat mayonnaise"},{"code":"PINEAPPLE_CANNED_JUICE","source_text":"1 cup or 7 ½ oz Canned pineapple tidbits in 100% juice, drained"},{"code":"RAISINS_GOLDEN","source_text":"1 ¼ cups or 2 ½ oz Golden raisins"}]},
-    {"recipe_source_id":"CACFP6-MACARONI-SALAD","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"PIMIENTO_CANNED","source_text":"1 Tbsp Canned pimientos, diced, drained"},{"code":"PASTA_WHOLE_WHEAT","source_text":"1 ½ cups or 7 oz Whole-grain elbow macaroni"},{"code":"MAYONNAISE_LOW_FAT","source_text":"½ cup or 3 oz Low-fat mayonnaise"},{"code":"VINEGAR_WHITE","source_text":"1 Tbsp or ½ oz White vinegar"}]},
-    {"recipe_source_id":"CACFP6-MARINATED-BLACK-BEAN-SALAD","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"ANCHO_CHILI_POWDER","source_text":"2 tsp or ⅓ oz Ancho chili powder OR Mexican seasoning mix (ancho selected)"},{"code":"BLACK_BEANS_CANNED","source_text":"2 cups or 11 ½ oz Canned low-sodium black beans OR dry black beans, cooked (canned selected)"},{"code":"SALSA","source_text":"⅓ cup or 3 ⅓ oz Canned low-sodium salsa"},{"code":"JALAPENO","source_text":"¼ cup or ¼ oz Jalapeños, diced, seeded"},{"code":"CHEESE_CHEDDAR_REDUCED_FAT","source_text":"½ cup or 2 oz Low-fat cheddar cheese, shredded"}]},
-    {"recipe_source_id":"CACFP6-QUICHE-SELF-FORMING-CRUST","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"EGG","source_text":"1 ⅛ cups or 8 oz Frozen whole eggs, thawed"},{"code":"MILK_SKIM","source_text":"1 ½ cups or 12 oz Nonfat milk"},{"code":"CHEESE_CHEDDAR_REDUCED_FAT","source_text":"⅓ cup or 1 oz Low-fat cheddar cheese, shredded"}]},
-    {"recipe_source_id":"CACFP6-ROPA-VIEJA","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"BEEF_BROTH_LOW_SODIUM","source_text":"1 ½ cups Low-sodium beef broth"},{"code":"BEEF_SHOULDER","source_text":"12 oz Beef shoulder"},{"code":"RICE_BROWN","source_text":"1 ⅛ cups or 7 oz Brown rice, long-grain, regular, dry, parboiled"}]},
-    {"recipe_source_id":"CACFP6-CORN-PUDDING","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"CORN_CREAM_STYLE_NO_SALT","source_text":"½ cup or 5 ½ oz Canned cream-style corn, unsalted"},{"code":"CORNMEAL_WHOLE_GRAIN","source_text":"¼ cup plus 2 Tbsp or 2 oz White whole-grain cornmeal"},{"code":"SOUR_CREAM_LOW_FAT","source_text":"¼ cup or 2 oz Low-fat sour cream"}]},
-    {"recipe_source_id":"CACFP6-CREAMY-COLESLAW","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"YOGURT_PLAIN_LOW_FAT","source_text":"½ cup or 5 oz Low-fat yogurt, plain"},{"code":"MAYONNAISE_LOW_FAT","source_text":"¼ cup or 2 oz Low-fat mayonnaise"}]},
-    {"recipe_source_id":"CACFP6-GREEN-BEANS-POTATOES-SMOKED-TURKEY","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"TURKEY_DRUMSTICK_SMOKED_COOKED","source_text":"¾ cup or 4 oz Smoked turkey legs, deboned"},{"code":"POTATO_RED","source_text":"1 cup or 4 oz Fresh red potatoes, unpeeled, diced"},{"code":"GREEN_BEANS","source_text":"2 ¾ cups or 11 oz Frozen green beans, thawed, drained"}]},
-    {"recipe_source_id":"CACFP6-TUNA-SALAD-SANDWICH","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"TUNA_CANNED_WATER","source_text":"1 ¼ cups or 11 ½ oz Canned tuna, chunk style, water packed, drained"},{"code":"MAYONNAISE_LOW_FAT","source_text":"½ cup Low-fat mayonnaise"},{"code":"ROLL_WHOLE_WHEAT","source_text":"6 small Whole-grain rolls, 1 oz each"}]},
-    {"recipe_source_id":"CACFP6-TUSCAN-GRILL-CHEESE","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"CHEESE_MOZZARELLA_PART_SKIM","source_text":"7 oz Low-fat mozzarella cheese"},{"code":"BREAD_WHOLE_WHEAT","source_text":"12 slices Whole-grain bread"},{"code":"MARGARINE","source_text":"1 oz Margarine, trans-fat free"}]},
-    {"recipe_source_id":"CACFP6-ASIAN-TUNA-BURGER","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"SOY_SAUCE_LOW_SODIUM","source_text":"¾ tsp Low-sodium soy sauce"},{"code":"MAYONNAISE_LOW_FAT","source_text":"¼ cup Low-fat mayonnaise"},{"code":"BREADCRUMBS","source_text":"½ cup or 1 ½ oz Panko breadcrumbs"},{"code":"ROLL_WHOLE_WHEAT","source_text":"6 medium Whole-grain buns, 2 oz each"}]},
-    {"recipe_source_id":"CACFP6-BEAN-BURRITO-BOWL","decision":"MARKET_REVIEW_PENDING","form_checks":[{"code":"PINTO_BEANS_CANNED_LOW_SODIUM","source_text":"3 ½ cups or 1 lb 5 oz Canned low-sodium pinto beans OR dry pinto beans, cooked (canned selected)"},{"code":"JALAPENO","source_text":"Pico de Gallo: 1 oz Fresh jalapeño peppers, seeded, diced"},{"code":"CHEESE_CHEDDAR_REDUCED_FAT","source_text":"½ cup or 2 oz Reduced-fat cheddar cheese, finely shredded"},{"code":"RICE_BROWN","source_text":"1 ⅛ cups or 7 oz Brown rice, long-grain, regular, dry, parboiled"}]},
-    {"recipe_source_id":"CACFP6-VEGETABLE-FRITTATA-BITES","decision":"REPLACE_REQUIRED_RIGHTS","form_checks":[{"code":"CHEESE_CHEDDAR_REDUCED_FAT","source_text":"1 cup or 4 oz Low-fat cheddar cheese, shredded"},{"code":"MILK_SKIM","source_text":"¼ cup Skim milk"}],"reason":"ICN-hosted 2024 card explicitly excluded by issue #12; market evidence cannot rescue the rights decision."},
-    {"recipe_source_id":"CACFP6-CAULIFLOWER-RICE","decision":"REPLACE_REQUIRED_RIGHTS","form_checks":[{"code":"CAULIFLOWER","source_text":"3 cups Riced cauliflower, thawed, drained"}],"reason":"ICN-hosted 2024 card explicitly excluded by issue #12; market evidence cannot rescue the rights decision."}
+    {
+      "recipe_source_id": "CACFP6-SOUTHWEST-TOFU-SCRAMBLE",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "TOFU_FIRM",
+          "source_text": "2 ½ cups or 1 lb Firm tofu",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "firm tofu",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "QUINOA",
+          "source_text": "1 cup or 7 oz Quinoa, uncooked",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "dry quinoa",
+          "collapse_reason": "This is the ordinary named purchase concept, with no additional retail-form demand. Dry/uncooked grain is its standard purchase state, not a separate SKU; preserve the exact source text and food identity."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-SPICED-OATMEAL",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "MILK_1_PERCENT",
+          "source_text": "2 ¼ cups Milk, low-fat (1%)",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "milk 1% fat",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "AGAVE_SYRUP",
+          "source_text": "2 Tbsp Agave nectar",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "agave syrup",
+          "collapse_reason": "This is the ordinary named purchase concept, with no additional retail-form demand. Dry/uncooked grain is its standard purchase state, not a separate SKU; preserve the exact source text and food identity."
+        },
+        {
+          "code": "VANILLA_EXTRACT",
+          "source_text": "¼ tsp Vanilla extract",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "vanilla extract (not vanilla sugar)",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "MARGARINE",
+          "source_text": "1 Tbsp 1 tsp or 1 oz Margarine, trans-fat free",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "trans-fat-free margarine",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-STRAWBERRY-SMOOTHIE-BOWL",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "YOGURT_GREEK_LOW_FAT",
+          "source_text": "3 cups or 1 lb 8 oz Low-fat Greek yogurt",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "plain low-fat Greek yogurt",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "STRAWBERRY",
+          "source_text": "1 qt 2 cups or 1 lb 11 oz Frozen strawberries, diced",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "frozen strawberries",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "AGAVE_SYRUP",
+          "source_text": "¼ cup or 3 oz Agave syrup",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "agave syrup",
+          "collapse_reason": "This is the ordinary named purchase concept, with no additional retail-form demand. Dry/uncooked grain is its standard purchase state, not a separate SKU; preserve the exact source text and food identity."
+        },
+        {
+          "code": "VANILLA_EXTRACT",
+          "source_text": "1 ½ tsp Vanilla extract",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "vanilla extract (not vanilla sugar)",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-BAKED-SWEET-POTATOES-APPLES",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "APPLE",
+          "source_text": "1 ¼ cups or 7 oz Frozen green apples, thawed, unsweetened",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "frozen unsweetened green apples",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "ORANGE_JUICE_CONCENTRATE",
+          "source_text": "¼ cup or 2 oz Orange juice concentrate, frozen, thawed",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "frozen orange juice concentrate (not drinking juice)",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "MARGARINE",
+          "source_text": "2 Tbsp or 1 oz Margarine, trans-fat free",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "trans-fat-free margarine",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "VANILLA_EXTRACT",
+          "source_text": "½ tsp Vanilla extract",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "vanilla extract (not vanilla sugar)",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-CORN-EDAMAME-BLEND",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "EDAMAME_FROZEN",
+          "source_text": "1 cup or 6 oz Frozen edamame, thawed, drained",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "frozen edamame",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "CORN_SWEET",
+          "source_text": "⅔ cup or 5 oz Frozen corn, thawed, drained",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "frozen sweetcorn",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "SESAME_SEEDS",
+          "source_text": "1 tsp Toasted sesame seeds",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "sesame seeds; source preparation: toasted",
+          "collapse_reason": "Toasted is source preparation, not a requirement to buy packaged pre-toasted seeds; preserve the descriptor and source quantities. Market evidence is for sesame seeds."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-LOCAL-HARVEST-BAKE",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "BUTTERNUT_SQUASH",
+          "source_text": "2 cups or 8 oz Fresh butternut squash, peeled, cubed",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "butternut squash",
+          "collapse_reason": "Preserve source text/quantity; chopped, diced, minced, peeled, shredded, sliced, deboned and portion size are kitchen preparation, not separate SKU requirements. Evidence is for the stated canonical purchase concept."
+        },
+        {
+          "code": "SWEET_POTATO",
+          "source_text": "2 cups or 8 oz Fresh sweet potatoes, peeled, cubed",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "sweet potato",
+          "collapse_reason": "Preserve source text/quantity; chopped, diced, minced, peeled, shredded, sliced, deboned and portion size are kitchen preparation, not separate SKU requirements. Evidence is for the stated canonical purchase concept."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-ORANGE-GLAZED-CARROTS",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "ORANGE_JUICE_CONCENTRATE",
+          "source_text": "¼ cup Orange juice concentrate, frozen, thawed",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "frozen orange juice concentrate (not drinking juice)",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "CARROT",
+          "source_text": "3 ⅓ cups or 1 ¼ lb Frozen carrots, thawed, sliced, drained",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "frozen carrots",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "MARGARINE",
+          "source_text": "½ oz or ⅛ cup Margarine, trans-fat free",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "trans-fat-free margarine",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "VANILLA_EXTRACT",
+          "source_text": "⅔ tsp Vanilla extract",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "vanilla extract (not vanilla sugar)",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-PIZZA-GREEN-BEANS",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "GREEN_BEANS_CANNED_NO_SALT",
+          "source_text": "1 qt or 1 lb 11 oz Canned no-salt-added green beans, with liquid",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "no-salt-added canned green beans",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "TOMATO_CANNED_NO_SALT",
+          "source_text": "2 cups or 8 ¼ oz Canned no-salt-added diced tomatoes, drained",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "no-salt-added canned tomatoes",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-SAUTEED-SPINACH-TOMATOES",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "TOMATO_PASTE_NO_SALT",
+          "source_text": "2 oz Canned no-salt-added tomato paste",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "no-salt-added tomato paste",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "MARGARINE",
+          "source_text": "1 Tbsp Margarine, trans-fat free",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "trans-fat-free margarine",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-SPANISH-RICE",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "BEEF_BROTH_LOW_SODIUM",
+          "source_text": "1 cup Low-sodium beef broth",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-sodium beef broth (not base concentrate)",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "RICE_BROWN",
+          "source_text": "1 cup or 7 oz Brown rice, long-grain, regular, dry, parboiled",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "dry long-grain parboiled brown rice",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "TOMATO_CANNED_NO_SALT",
+          "source_text": "⅓ cup or 2 ½ oz Canned no-salt-added diced tomatoes, undrained",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "no-salt-added canned tomatoes",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "CHILI_POWDER",
+          "source_text": "½ tsp Chili powder",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "chili seasoning blend (not pure ground chilli pepper)",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-TABBOULEH",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "QUINOA",
+          "source_text": "⅓ cup or 3 oz Quinoa, dry",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "dry quinoa",
+          "collapse_reason": "This is the ordinary named purchase concept, with no additional retail-form demand. Dry/uncooked grain is its standard purchase state, not a separate SKU; preserve the exact source text and food identity."
+        },
+        {
+          "code": "BULGUR",
+          "source_text": "½ cup or 3 oz Bulgur wheat, dry",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "dry bulgur",
+          "collapse_reason": "This is the ordinary named purchase concept, with no additional retail-form demand. Dry/uncooked grain is its standard purchase state, not a separate SKU; preserve the exact source text and food identity."
+        },
+        {
+          "code": "MINT_FRESH",
+          "source_text": "¼ tsp Fresh mint, chopped",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "fresh mint",
+          "collapse_reason": "Preserve source text/quantity; chopped, diced, minced, peeled, shredded, sliced, deboned and portion size are kitchen preparation, not separate SKU requirements. Evidence is for the stated canonical purchase concept."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-CHICKEN-FAJITA",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "CHICKEN_BREAST_COOKED",
+          "source_text": "7 oz Frozen chicken strips, cooked, thawed",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "cooked chicken strips; frozen source form",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "ANCHO_CHILI_POWDER",
+          "source_text": "1 Tbsp Ancho chili powder OR Mexican seasoning mix (ancho selected)",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "dried ancho chile powder",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "SALSA",
+          "source_text": "½ cup or 3 ½ oz Canned low-sodium salsa",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-sodium prepared salsa",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "TORTILLA_WHOLE_WHEAT",
+          "source_text": "6 Whole-grain tortillas, 1 oz each",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "whole-grain wheat tortilla",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-HONEY-LIME-CHICKEN",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "CHICKEN_THIGH",
+          "source_text": "1 lb 7 oz Raw chicken thighs, boneless, skinless",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "raw boneless skinless chicken thigh",
+          "collapse_reason": "Preserve source text/quantity; chopped, diced, minced, peeled, shredded, sliced, deboned and portion size are kitchen preparation, not separate SKU requirements. Evidence is for the stated canonical purchase concept."
+        },
+        {
+          "code": "LIME_JUICE",
+          "source_text": "¼ cup or 2 oz Fresh lime juice",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "fresh lime juice squeezed from lime",
+          "collapse_reason": "Preserve source text/quantity; chopped, diced, minced, peeled, shredded, sliced, deboned and portion size are kitchen preparation, not separate SKU requirements. Evidence is for the stated canonical purchase concept."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-RICE-VEGETABLE-CASSEROLE",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "CHICKEN_BROTH_LOW_SODIUM",
+          "source_text": "2 cups Low-sodium chicken broth",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-sodium chicken broth (not base concentrate)",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "KALE",
+          "source_text": "1 qt or 4 oz Fresh kale, finely chopped",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "fresh kale",
+          "collapse_reason": "Finely chopped is kitchen preparation. Market evidence is for ordinary fresh kale, not a pre-chopped retail product."
+        },
+        {
+          "code": "CHEESE_CHEDDAR_REDUCED_FAT",
+          "source_text": "1 cup or 4 oz Low-fat cheddar cheese, shredded",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "reduced-fat cheddar",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "CHEESE_MOZZARELLA_PART_SKIM",
+          "source_text": "¾ cup or 3 oz Low-fat mozzarella cheese, low-moisture, part-skim, shredded",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-fat low-moisture part-skim mozzarella",
+          "collapse_reason": "Low-moisture, low-fat and part-skim are source-explicit material properties. Preserve them. Shredded is preparation only; a source-compatible block can be shredded at home. Do not collapse low-moisture mozzarella to generic fresh mozzarella."
+        },
+        {
+          "code": "RICE_BROWN",
+          "source_text": "1 cup or 7 oz Brown rice, uncooked, long-grain, regular, dry, parboiled",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "dry long-grain parboiled brown rice",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-VEGETABLE-CHILI",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "ANCHO_CHILI_POWDER",
+          "source_text": "2 ¼ tsp or ¼ oz Ancho chili powder OR Mexican seasoning mix (ancho selected)",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "dried ancho chile powder",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "KIDNEY_BEANS_CANNED_LOW_SODIUM",
+          "source_text": "1 ½ cups or 11 oz Canned low-sodium kidney beans OR dry kidney beans, cooked (canned selected)",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-sodium canned kidney beans",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "JALAPENO",
+          "source_text": "⅛ cup or ¼ oz Fresh jalapeño peppers, seeded, diced",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "fresh jalapeño",
+          "collapse_reason": "Preserve source text/quantity; chopped, diced, minced, peeled, shredded, sliced, deboned and portion size are kitchen preparation, not separate SKU requirements. Evidence is for the stated canonical purchase concept."
+        },
+        {
+          "code": "VEGETABLE_BROTH",
+          "source_text": "¼ cup or 2 oz Low-sodium vegetable broth",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-sodium vegetable broth",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-VEGETABLE-FRITTATA",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "CHEESE_CHEDDAR_REDUCED_FAT",
+          "source_text": "⅓ cup or 1 oz Low-fat cheddar cheese, shredded",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "reduced-fat cheddar",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "MILK_SKIM",
+          "source_text": "¼ cup Skim milk",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "skim/nonfat milk",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "EGG",
+          "source_text": "3 eggs or 6 oz Liquid eggs",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "shell eggs; explicit source alternative to liquid egg",
+          "collapse_reason": "Preserve source text/quantity; chopped, diced, minced, peeled, shredded, sliced, deboned and portion size are kitchen preparation, not separate SKU requirements. Evidence is for the stated canonical purchase concept."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-CARROT-RAISIN-SALAD",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "YOGURT_PLAIN_LOW_FAT",
+          "source_text": "⅔ cup or 5 oz Low-fat yogurt, plain",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "plain low-fat yogurt",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "MAYONNAISE_LOW_FAT",
+          "source_text": "¼ cup or 2 oz Low-fat mayonnaise",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-fat mayonnaise",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "PINEAPPLE_CANNED_JUICE",
+          "source_text": "1 cup or 7 ½ oz Canned pineapple tidbits in 100% juice, drained",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "canned pineapple in 100% juice (not syrup)",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "RAISINS_GOLDEN",
+          "source_text": "1 ¼ cups or 2 ½ oz Golden raisins",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "golden raisins",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-MACARONI-SALAD",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "PIMIENTO_CANNED",
+          "source_text": "1 Tbsp Canned pimientos, diced, drained",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "canned pimiento peppers",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "PASTA_WHOLE_WHEAT",
+          "source_text": "1 ½ cups or 7 oz Whole-grain elbow macaroni",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "dry whole-grain macaroni",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "MAYONNAISE_LOW_FAT",
+          "source_text": "½ cup or 3 oz Low-fat mayonnaise",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-fat mayonnaise",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "VINEGAR_WHITE",
+          "source_text": "1 Tbsp or ½ oz White vinegar",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "white distilled vinegar",
+          "collapse_reason": "This is the ordinary named purchase concept, with no additional retail-form demand. Dry/uncooked grain is its standard purchase state, not a separate SKU; preserve the exact source text and food identity."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-MARINATED-BLACK-BEAN-SALAD",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "ANCHO_CHILI_POWDER",
+          "source_text": "2 tsp or ⅓ oz Ancho chili powder OR Mexican seasoning mix (ancho selected)",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "dried ancho chile powder",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "BLACK_BEANS_CANNED",
+          "source_text": "2 cups or 11 ½ oz Canned low-sodium black beans OR dry black beans, cooked (canned selected)",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-sodium canned black beans",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "SALSA",
+          "source_text": "⅓ cup or 3 ⅓ oz Canned low-sodium salsa",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-sodium prepared salsa",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "JALAPENO",
+          "source_text": "¼ cup or ¼ oz Jalapeños, diced, seeded",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "fresh jalapeño",
+          "collapse_reason": "Preserve source text/quantity; chopped, diced, minced, peeled, shredded, sliced, deboned and portion size are kitchen preparation, not separate SKU requirements. Evidence is for the stated canonical purchase concept."
+        },
+        {
+          "code": "CHEESE_CHEDDAR_REDUCED_FAT",
+          "source_text": "½ cup or 2 oz Low-fat cheddar cheese, shredded",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "reduced-fat cheddar",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-QUICHE-SELF-FORMING-CRUST",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "EGG",
+          "source_text": "1 ⅛ cups or 8 oz Frozen whole eggs, thawed",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "frozen whole liquid egg",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "MILK_SKIM",
+          "source_text": "1 ½ cups or 12 oz Nonfat milk",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "skim/nonfat milk",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "CHEESE_CHEDDAR_REDUCED_FAT",
+          "source_text": "⅓ cup or 1 oz Low-fat cheddar cheese, shredded",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "reduced-fat cheddar",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-ROPA-VIEJA",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "BEEF_BROTH_LOW_SODIUM",
+          "source_text": "1 ½ cups Low-sodium beef broth",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-sodium beef broth (not base concentrate)",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "BEEF_SHOULDER",
+          "source_text": "12 oz Beef shoulder",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "raw beef shoulder",
+          "collapse_reason": "Preserve source text/quantity; chopped, diced, minced, peeled, shredded, sliced, deboned and portion size are kitchen preparation, not separate SKU requirements. Evidence is for the stated canonical purchase concept."
+        },
+        {
+          "code": "RICE_BROWN",
+          "source_text": "1 ⅛ cups or 7 oz Brown rice, long-grain, regular, dry, parboiled",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "dry long-grain parboiled brown rice",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-CORN-PUDDING",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "CORN_CREAM_STYLE_NO_SALT",
+          "source_text": "½ cup or 5 ½ oz Canned cream-style corn, unsalted",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "unsalted canned cream-style corn",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "CORNMEAL_WHOLE_GRAIN",
+          "source_text": "¼ cup plus 2 Tbsp or 2 oz White whole-grain cornmeal",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "white whole-grain cornmeal",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "SOUR_CREAM_LOW_FAT",
+          "source_text": "¼ cup or 2 oz Low-fat sour cream",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-fat sour cream",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-CREAMY-COLESLAW",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "YOGURT_PLAIN_LOW_FAT",
+          "source_text": "½ cup or 5 oz Low-fat yogurt, plain",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "plain low-fat yogurt",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "MAYONNAISE_LOW_FAT",
+          "source_text": "¼ cup or 2 oz Low-fat mayonnaise",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-fat mayonnaise",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-GREEN-BEANS-POTATOES-SMOKED-TURKEY",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "TURKEY_DRUMSTICK_SMOKED_COOKED",
+          "source_text": "¾ cup or 4 oz Smoked turkey legs, deboned",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "cooked smoked turkey drumstick",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "POTATO_RED",
+          "source_text": "1 cup or 4 oz Fresh red potatoes, unpeeled, diced",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "red-skinned potato",
+          "collapse_reason": "Preserve source text/quantity; chopped, diced, minced, peeled, shredded, sliced, deboned and portion size are kitchen preparation, not separate SKU requirements. Evidence is for the stated canonical purchase concept."
+        },
+        {
+          "code": "GREEN_BEANS",
+          "source_text": "2 ¾ cups or 11 oz Frozen green beans, thawed, drained",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "frozen green beans",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-TUNA-SALAD-SANDWICH",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "TUNA_CANNED_WATER",
+          "source_text": "1 ¼ cups or 11 ½ oz Canned tuna, chunk style, water packed, drained",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "canned tuna in water",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "MAYONNAISE_LOW_FAT",
+          "source_text": "½ cup Low-fat mayonnaise",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-fat mayonnaise",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "ROLL_WHOLE_WHEAT",
+          "source_text": "6 small Whole-grain rolls, 1 oz each",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "whole-grain wheat roll",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-TUSCAN-GRILL-CHEESE",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "CHEESE_MOZZARELLA_PART_SKIM",
+          "source_text": "7 oz Low-fat mozzarella cheese",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-fat mozzarella",
+          "collapse_reason": "Preserve source low-fat requirement. Do not import the other casserole card's low-moisture wording into this row. The existing canonical part-skim mapping remains recorded, not a new requirement inferred from another recipe."
+        },
+        {
+          "code": "BREAD_WHOLE_WHEAT",
+          "source_text": "12 slices Whole-grain bread",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "whole-grain wheat bread",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "MARGARINE",
+          "source_text": "1 oz Margarine, trans-fat free",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "trans-fat-free margarine",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-ASIAN-TUNA-BURGER",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "SOY_SAUCE_LOW_SODIUM",
+          "source_text": "¾ tsp Low-sodium soy sauce",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-sodium soy sauce",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "MAYONNAISE_LOW_FAT",
+          "source_text": "¼ cup Low-fat mayonnaise",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-fat mayonnaise",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "BREADCRUMBS",
+          "source_text": "½ cup or 1 ½ oz Panko breadcrumbs",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "panko-style dry breadcrumbs",
+          "collapse_reason": "Panko is a source-requested breadcrumb form, not a preparation verb. Keep the existing BREADCRUMBS abstraction but seek panko evidence; do not silently replace with differently textured breadcrumbs."
+        },
+        {
+          "code": "ROLL_WHOLE_WHEAT",
+          "source_text": "6 medium Whole-grain buns, 2 oz each",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "whole-grain wheat roll",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-BEAN-BURRITO-BOWL",
+      "decision": "MARKET_REVIEW_PENDING",
+      "form_checks": [
+        {
+          "code": "PINTO_BEANS_CANNED_LOW_SODIUM",
+          "source_text": "3 ½ cups or 1 lb 5 oz Canned low-sodium pinto beans OR dry pinto beans, cooked (canned selected)",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "low-sodium canned pinto beans",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "JALAPENO",
+          "source_text": "Pico de Gallo: 1 oz Fresh jalapeño peppers, seeded, diced",
+          "form_class": "PREPARATION_ONLY_OR_NOT_RETAIL_FORM",
+          "purchase_concept": "fresh jalapeño",
+          "collapse_reason": "Preserve source text/quantity; chopped, diced, minced, peeled, shredded, sliced, deboned and portion size are kitchen preparation, not separate SKU requirements. Evidence is for the stated canonical purchase concept."
+        },
+        {
+          "code": "CHEESE_CHEDDAR_REDUCED_FAT",
+          "source_text": "½ cup or 2 oz Reduced-fat cheddar cheese, finely shredded",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "reduced-fat cheddar",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "RICE_BROWN",
+          "source_text": "1 ⅛ cups or 7 oz Brown rice, long-grain, regular, dry, parboiled",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "dry long-grain parboiled brown rice",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ]
+    },
+    {
+      "recipe_source_id": "CACFP6-VEGETABLE-FRITTATA-BITES",
+      "decision": "REPLACE_REQUIRED_RIGHTS",
+      "form_checks": [
+        {
+          "code": "CHEESE_CHEDDAR_REDUCED_FAT",
+          "source_text": "1 cup or 4 oz Low-fat cheddar cheese, shredded",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "reduced-fat cheddar",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        },
+        {
+          "code": "MILK_SKIM",
+          "source_text": "¼ cup Skim milk",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "skim/nonfat milk",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ],
+      "reason": "ICN-hosted 2024 card explicitly excluded by issue #12; market evidence cannot rescue the rights decision."
+    },
+    {
+      "recipe_source_id": "CACFP6-CAULIFLOWER-RICE",
+      "decision": "REPLACE_REQUIRED_RIGHTS",
+      "form_checks": [
+        {
+          "code": "CAULIFLOWER",
+          "source_text": "3 cups Riced cauliflower, thawed, drained",
+          "form_class": "PURCHASE_FORM_CRITICAL",
+          "purchase_concept": "frozen cauliflower (ricing is preparation)",
+          "collapse_reason": "Preserve material purchased food/form and canonical code. Collapse chopping, dicing, mincing, shredding, draining, thawing, package size and source quantity; these do not require independent retail records."
+        }
+      ],
+      "reason": "ICN-hosted 2024 card explicitly excluded by issue #12; market evidence cannot rescue the rights decision."
+    }
   ],
   "candidate_screening": [
-    {"name":"Chinese Style Vegetables with Tofu","source_url":"https://fns-prod.azureedge.us/sites/default/files/resource-files/Chinese_Style_Veg_Tofu_6_Servings.pdf","source_servings":6,"status":"REJECT_EXISTING_CATALOGUE_GATE","missing_source_ingredients":["2 cups or 6 oz Fresh yellow squash, diced","¼ tsp Asian five spice powder"],"notes":"The card lists seasonal vegetable replacement options, but no accepted global Asian five spice powder concept exists. No substitution attempted.","source_sha256":null,"retrieval_status":"WEB_PDF_TEXT_REVIEWED_NOT_LOCALLY_DOWNLOADED"},
-    {"name":"Chicken or Turkey Noodles","source_url":"https://fns-prod.azureedge.us/sites/default/files/resource-files/Chicken_Turkey_Noodles_6_Servings.pdf","source_servings":6,"status":"REJECT_EXISTING_CATALOGUE_GATE","missing_source_ingredients":["¼ tsp Dried marjoram"],"notes":"Also requires low-sodium chicken broth; availability not established.","source_sha256":null,"retrieval_status":"WEB_PDF_TEXT_REVIEWED_NOT_LOCALLY_DOWNLOADED"},
-    {"name":"Hoppin' John","source_url":"https://fns-prod.azureedge.us/sites/default/files/resource-files/Hoppin_John_6_Servings.pdf","source_servings":6,"status":"REJECT_EXISTING_CATALOGUE_GATE","missing_source_ingredients":["1 Tbsp Salt-free seasoning","1 tsp Vegetable base concentrate"],"notes":"Dry black-eyed peas exist, but cannot resolve the seasoning/base to a different food or invent a recipe.","source_sha256":null,"retrieval_status":"WEB_PDF_TEXT_REVIEWED_NOT_LOCALLY_DOWNLOADED"},
-    {"name":"Vegetable Wrap","source_url":"https://fns-prod.azureedge.us/sites/default/files/resource-files/Vegetable_Wrap_6_Servings.pdf","source_servings":6,"status":"REJECT_EXISTING_CATALOGUE_GATE","missing_source_ingredients":["2 tsp Chipotle spice, salt-free"],"notes":"Ranch is source-subrecipe, not reason by itself to reject, but chipotle concept is absent.","source_sha256":null,"retrieval_status":"WEB_PDF_TEXT_PARTIAL_REVIEW_NOT_LOCALLY_DOWNLOADED"},
-    {"name":"Mediterranean Quinoa Salad","source_url":"https://fns-prod.azureedge.us/sites/default/files/resource-files/MediterraneanQuinoaSaladCACFPhomerecipe.pdf","source_servings":6,"status":"REJECT_EXISTING_CATALOGUE_GATE","missing_source_ingredients":["2 Tbsp Red wine vinegar","Ground white pepper","2 Tbsp Black olives, sliced","2 Tbsp Feta cheese, crumbled"],"notes":"The direct FNS card identifies school/chef/student creation; do not infer federal employee authorship from hosting. Rights would need review if the ingredient gate were met.","source_sha256":null,"retrieval_status":"WEB_PDF_TEXT_REVIEWED_NOT_LOCALLY_DOWNLOADED"},
-    {"name":"Aztec Grain Salad","source_url":"https://fns-prod.azureedge.us/sites/default/files/resource-files/AztecGrainSaladCACFPhomerecipe.pdf","source_servings":6,"status":"REJECT_EXISTING_CATALOGUE_GATE","missing_source_ingredients":["¼ tsp Ground ginger","Dijon mustard","2 Tbsp Red wine vinegar","1 dash Ground white pepper"],"notes":"Also requires frozen orange juice concentrate. OCR fractions need visual review, not automatic quantity ingestion.","source_sha256":null,"retrieval_status":"WEB_PDF_TEXT_REVIEWED_NOT_LOCALLY_DOWNLOADED"},
-    {"name":"Peppy Quinoa","source_url":"https://fns-prod.azureedge.us/sites/default/files/resource-files/PeppyQuinoaCACFPhomerecipe.pdf","source_servings":6,"status":"REJECT_EXISTING_CATALOGUE_GATE","missing_source_ingredients":["1 Tbsp Low-sodium chicken base","½ cup Canned diced green chilies"],"notes":"Broth is not chicken base and fresh jalapeño is not an authorized replacement for canned green chilies.","source_sha256":null,"retrieval_status":"WEB_PDF_TEXT_REVIEWED_NOT_LOCALLY_DOWNLOADED"},
-    {"name":"Tasty Tots","source_url":"https://fns-prod.azureedge.us/sites/default/files/resource-files/TastyTotsCACFPhomerecipe.pdf","source_servings":6,"status":"REJECT_EXISTING_CATALOGUE_GATE","missing_source_ingredients":["Canned low-sodium garbanzo beans (chickpeas), with liquid"],"notes":"Global CHICKPEAS_DRY cannot stand for canned cooked chickpeas with packing liquid; no yield or liquid substitution invented.","source_sha256":null,"retrieval_status":"WEB_PDF_TEXT_REVIEWED_NOT_LOCALLY_DOWNLOADED"}
+    {
+      "name": "Chinese Style Vegetables with Tofu",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Chinese_Style_Veg_Tofu_6_Servings.pdf",
+      "source_servings": 6,
+      "status": "REJECT_EXISTING_CATALOGUE_GATE",
+      "missing_source_ingredients": [
+        "2 cups or 6 oz Fresh yellow squash, diced",
+        "¼ tsp Asian five spice powder"
+      ],
+      "notes": "The card lists seasonal vegetable replacement options, but no accepted global Asian five spice powder concept exists. No substitution attempted.",
+      "source_sha256": null,
+      "retrieval_status": "WEB_PDF_TEXT_REVIEWED_NOT_LOCALLY_DOWNLOADED"
+    },
+    {
+      "name": "Chicken or Turkey Noodles",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Chicken_Turkey_Noodles_6_Servings.pdf",
+      "source_servings": 6,
+      "status": "REJECT_EXISTING_CATALOGUE_GATE",
+      "missing_source_ingredients": [
+        "¼ tsp Dried marjoram"
+      ],
+      "notes": "Also requires low-sodium chicken broth; availability not established.",
+      "source_sha256": null,
+      "retrieval_status": "WEB_PDF_TEXT_REVIEWED_NOT_LOCALLY_DOWNLOADED"
+    },
+    {
+      "name": "Hoppin' John",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Hoppin_John_6_Servings.pdf",
+      "source_servings": 6,
+      "status": "REJECT_EXISTING_CATALOGUE_GATE",
+      "missing_source_ingredients": [
+        "1 Tbsp Salt-free seasoning",
+        "1 tsp Vegetable base concentrate"
+      ],
+      "notes": "Dry black-eyed peas exist, but cannot resolve the seasoning/base to a different food or invent a recipe.",
+      "source_sha256": null,
+      "retrieval_status": "WEB_PDF_TEXT_REVIEWED_NOT_LOCALLY_DOWNLOADED"
+    },
+    {
+      "name": "Vegetable Wrap",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Vegetable_Wrap_6_Servings.pdf",
+      "source_servings": 6,
+      "status": "REJECT_EXISTING_CATALOGUE_GATE",
+      "missing_source_ingredients": [
+        "2 tsp Chipotle spice, salt-free"
+      ],
+      "notes": "Ranch is source-subrecipe, not reason by itself to reject, but chipotle concept is absent.",
+      "source_sha256": null,
+      "retrieval_status": "WEB_PDF_TEXT_PARTIAL_REVIEW_NOT_LOCALLY_DOWNLOADED"
+    },
+    {
+      "name": "Mediterranean Quinoa Salad",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/MediterraneanQuinoaSaladCACFPhomerecipe.pdf",
+      "source_servings": 6,
+      "status": "REJECT_EXISTING_CATALOGUE_GATE",
+      "missing_source_ingredients": [
+        "2 Tbsp Red wine vinegar",
+        "Ground white pepper",
+        "2 Tbsp Black olives, sliced",
+        "2 Tbsp Feta cheese, crumbled"
+      ],
+      "notes": "The direct FNS card identifies school/chef/student creation; do not infer federal employee authorship from hosting. Rights would need review if the ingredient gate were met.",
+      "source_sha256": null,
+      "retrieval_status": "WEB_PDF_TEXT_REVIEWED_NOT_LOCALLY_DOWNLOADED"
+    },
+    {
+      "name": "Aztec Grain Salad",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/AztecGrainSaladCACFPhomerecipe.pdf",
+      "source_servings": 6,
+      "status": "REJECT_EXISTING_CATALOGUE_GATE",
+      "missing_source_ingredients": [
+        "¼ tsp Ground ginger",
+        "Dijon mustard",
+        "2 Tbsp Red wine vinegar",
+        "1 dash Ground white pepper"
+      ],
+      "notes": "Also requires frozen orange juice concentrate. OCR fractions need visual review, not automatic quantity ingestion.",
+      "source_sha256": null,
+      "retrieval_status": "WEB_PDF_TEXT_REVIEWED_NOT_LOCALLY_DOWNLOADED"
+    },
+    {
+      "name": "Peppy Quinoa",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/PeppyQuinoaCACFPhomerecipe.pdf",
+      "source_servings": 6,
+      "status": "REJECT_EXISTING_CATALOGUE_GATE",
+      "missing_source_ingredients": [
+        "1 Tbsp Low-sodium chicken base",
+        "½ cup Canned diced green chilies"
+      ],
+      "notes": "Broth is not chicken base and fresh jalapeño is not an authorized replacement for canned green chilies.",
+      "source_sha256": null,
+      "retrieval_status": "WEB_PDF_TEXT_REVIEWED_NOT_LOCALLY_DOWNLOADED"
+    },
+    {
+      "name": "Tasty Tots",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/TastyTotsCACFPhomerecipe.pdf",
+      "source_servings": 6,
+      "status": "REJECT_EXISTING_CATALOGUE_GATE",
+      "missing_source_ingredients": [
+        "Canned low-sodium garbanzo beans (chickpeas), with liquid"
+      ],
+      "notes": "Global CHICKPEAS_DRY cannot stand for canned cooked chickpeas with packing liquid; no yield or liquid substitution invented.",
+      "source_sha256": null,
+      "retrieval_status": "WEB_PDF_TEXT_REVIEWED_NOT_LOCALLY_DOWNLOADED"
+    }
   ],
   "additional_candidate_pool": {
-    "name":"It's Breakfast Time! FNS-902",
-    "page_url":"https://fns-prod.azureedge.us/tn/cacfp/trainers-tools/its-breakfast-time",
-    "document_url":"https://fns-prod.azureedge.us/sites/default/files/resource-files/USDA-CACFP_BreakfastPlanner.pdf",
-    "observed_description":"20 USDA standardized breakfast recipes; official page allows downloading and making copies; latest browser page states resource under revision for current program meal pattern requirements and nutrition standards.",
-    "status":"NOT_CLEARED_CANDIDATE_POOL",
-    "retrieval_notes":"Web PDF fetch rejected 40,502,924-byte document as too large. Ordinary curl retrieval via CDN and agency domain failed TLS. Browser successfully reached official page and began PDF loading; no validated local document/hash at this audit point. No candidate ingredient or rights clearance inferred.",
-    "feasibility_limit":"This is a bounded screen, not proof that no compliant 30-recipe corpus exists. Current exact-source and market-evidence gates remain unproven; no authoritative data was changed to compensate."
+    "name": "It's Breakfast Time! FNS-902",
+    "page_url": "https://fns-prod.azureedge.us/tn/cacfp/trainers-tools/its-breakfast-time",
+    "document_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/USDA-CACFP_BreakfastPlanner.pdf",
+    "observed_description": "20 USDA standardized breakfast recipes; official page allows downloading and making copies; latest browser page states resource under revision for current program meal pattern requirements and nutrition standards.",
+    "status": "NOT_CLEARED_CANDIDATE_POOL",
+    "retrieval_notes": "Web PDF fetch rejected 40,502,924-byte document as too large. Ordinary curl retrieval via CDN and agency domain failed TLS. Browser successfully reached official page and began PDF loading; no validated local document/hash at this audit point. No candidate ingredient or rights clearance inferred.",
+    "feasibility_limit": "This is a bounded screen, not proof that no compliant 30-recipe corpus exists. Current exact-source and market-evidence gates remain unproven; no authoritative data was changed to compensate."
+  },
+  "clarification_applied": "Issue #12 owner clarification and PR #13 reviews: purchase-concept/form evidence, not 96 independent retail form requirements; retailer stock is not the target.",
+  "form_class_counts": {
+    "PURCHASE_FORM_CRITICAL": 77,
+    "PREPARATION_ONLY_OR_NOT_RETAIL_FORM": 19
   }
 }

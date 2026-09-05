@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-05",
+  "scope": "Bounded independent market purchase-form adversarial review, not rights/source acceptance or runtime validation.",
+  "reviewed_file": "draft-purchase-form-review.json",
+  "selection": "Final30 with SNAP4-PEAR-ORANGE-SAUCE replacing SNAP4-SAUTEED-CAULIFLOWER-RICE.",
+  "result": "NO_UNRESOLVED_MARKET_FORM_GAP_FOUND",
+  "counts": {
+    "recipes": 30,
+    "existing_global_codes_including_water": 79,
+    "nonwater_purchase_forms": 82,
+    "ru_mass_market_forms": 3,
+    "ru_available_forms": 79,
+    "specialty_or_unclear_forms": 0,
+    "validated_one_based_available_same_code_references": 103
+  },
+  "checks": [
+    "All82 form descriptions and recipe associations reviewed; each has positive actual-form evidence in the five-chain panel and every selected code exists in global ingredients.csv.",
+    "Five-chain status counts recomputed. Same-chain multiple products/duplicates do not increase chain count. A chain without qualifying evidence remains UNCERTAIN, not an absence claim.",
+    "All103 one-based observation references resolve to AVAILABLE matching-code records. Regional chain presence is paired with current neutral/chainwide product evidence, never used alone.",
+    "Exact material differences preserved: frozen cauliflower, frozen corn, frozen edamame, frozen green beans, frozen Atlantic cod, raw bone-in versus boneless thighs, quick oats versus ordinary oats, iodized salt, young potatoes and sweet Yalta onion.",
+    "Source-directed cutting, peeling, squeezing and cooking retain original prepared quantities; no inferred yield/conversion.",
+    "No selected no-salt/low-sodium/fixed-specialty broth, canned bean or frozen orange-concentrate ingredient is cleared by a generic substitute.",
+    "Milk1% evidence exact. Generic lowfat/plain and nonfat Greek families retain actual1.5%/0.1% skim evidence, not mathematical-zero claims.",
+    "Canola evidence restricted to cold salad dressing. Sesame saute selects specific ELEYA identity with official frying-use corroboration; KOTANYI no-frying and PREMIUM CLUB no-heat remain excluded. Corroborating Yarche is not a counted availability chain.",
+    "Raw sesame seeds explicitly select original card's home-toast3minutes medium heat in small stock pot. No unsupported raw/toasted equivalence.",
+    "Spring sweet onion selects explicitly sweet red Yalta member; young potatoes remain young/tiny. Frozen green beans selected under parent-approved source-generic green-bean member, not source-explicit frozen language, and no thawing/time adjustment invented.",
+    "Pear/Orange sauce uses existing PEAR and ORANGE with source¾cup pure prepared juice; no invented orange count/yield or packaged nectar assumption.",
+    "Standard Roasted Carrots olive oil is a parent-selected generic vegetable-oil member; explicit olive-oil wording in spicy variant is not asserted to mandate standard choice."
+  ],
+  "remaining_integration": "Coverage file at audit time still contains six CauliflowerRice rows instead of three PearOrangeSauce rows. This is an identified source-selection snapshot difference. Data/QA owns final coverage/matrix parity and final assembly. No other nonwater recipe/code mismatch was found.",
+  "limitations": [
+    "Catalogue compatibility is not current store inventory or guaranteed year-round stock.",
+    "One-chain ordinary concepts are RU_AVAILABLE with explicit reasons, not RU_MASS_MARKET.",
+    "Rights acceptance, source execution safety, recipe categorization and final PR verification are outside this bounded market audit."
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-05",
+  "scope": "Supplementary third-chain evidence for ordinary purchase concepts; no momentary stock claim.",
+  "observations": [
+    {
+      "food_ingredient_code": "EGG",
+      "retailer_chain": "LENTA",
+      "region": "Saint Petersburg / Leningrad Region",
+      "evidence_url": "https://lenta.com/product/680723-680723/",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "observed_product_wording": "Яйцо куриное ЛЕНТА С1, 10шт; состав: яйца куриные",
+      "purchase_concept": "raw shell chicken eggs",
+      "checked_at": "2026-09-05",
+      "method": "current_official_indexed_product_plus_official_SPB_delivery",
+      "status": "AVAILABLE",
+      "notes": "Indexed today; exact ordinary shell-egg wording. Does not clear frozen liquid whole eggs. Category region evidence expressly lists Saint Petersburg delivery."
+    },
+    {
+      "food_ingredient_code": "SUGAR",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "evidence_url": "https://magnit.ru/product/3133780401-sakhar_belyy_kristallicheskiy_fas_1kg?shopCode=834352&shopType=1",
+      "region_evidence_url": "https://magnit.ru/product/3133780401-sakhar_belyy_kristallicheskiy_fas_1kg?shopCode=834352&shopType=1",
+      "observed_product_wording": "Сахар-песок белый кристаллический 1кг; г Санкт-Петербург, пр-кт Ленинский, д 72 к 1 литера а",
+      "purchase_concept": "white granulated sugar",
+      "checked_at": "2026-09-05",
+      "method": "current_indexed_official_SPB_product",
+      "status": "AVAILABLE",
+      "notes": "Index crawled four months ago, current official product URL retained. Public store label establishes region, not current stock. Not vanilla sugar."
+    },
+    {
+      "food_ingredient_code": "OATS_ROLLED",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "evidence_url": "https://magnit.ru/product/1000142900-khlopya_ovsyanye_magnit_ekstra_400g?shopCode=784430&shopType=1",
+      "region_evidence_url": "https://magnit.ru/product/1000142900-khlopya_ovsyanye_magnit_ekstra_400g?shopCode=784430&shopType=1",
+      "observed_product_wording": "Хлопья овсяные Экстра Семейные Секреты 400г; Санкт-Петербург, Культуры пр-кт, 21,1, литер А, пом. 5Н; цельные хлопья",
+      "purchase_concept": "plain rolled oat flakes",
+      "checked_at": "2026-09-05",
+      "method": "current_indexed_official_SPB_product",
+      "status": "AVAILABLE",
+      "notes": "Index crawled last week. Plain oat-flake concept; specific cooking-time variants still need source-appropriate review. Public store wording, no stock claim."
+    }
+  ],
+  "searches": [
+    "site.lenta.com/product Яйца куриные Состав",
+    "site.magnit.ru/product Сахар Санкт-Петербург",
+    "site.magnit.ru/product Хлопья овсяные Санкт-Петербург"
+  ],
+  "additional_critical_form_searches": [
+    "site.lenta.com экстракт ванили",
+    "site.okeydostavka.ru сироп агавы",
+    "site.perekrestok.ru тофу твердый",
+    "site.lenta.com маргарин транс",
+    "экстракт ванили Лента купить",
+    "экстракт ванили Перекрёсток купить",
+    "сироп агавы Магнит",
+    "site.lenta.com/product тофу плотный",
+    "site.perekrestok.ru Экстракт Nielsen",
+    "site.kuper.ru Перекрёсток ванили Экстракт",
+    "site.5ka.ru агавы"
+  ],
+  "excluded_examples": [
+    {
+      "food_ingredient_code": "VANILLA_EXTRACT",
+      "url": "https://lenta.com/product/sahar-vanilnyjj-pak-avstriya-10g-151277/",
+      "reason": "Vanilla sugar with extract in its composition is not standalone vanilla extract."
+    },
+    {
+      "food_ingredient_code": "TOFU_FIRM",
+      "url": "https://files.perekrestok.ru/static/files/bb/29/36869dd1534e640c622e6da68b26.pdf",
+      "reason": "Flyer period 26 October–29 November 2023 is expired; no current form evidence."
+    },
+    {
+      "food_ingredient_code": "VANILLA_EXTRACT",
+      "url": "https://perekrestok-store.ru/products/bakaleya-konservaciya/muka-smesi-dlya-vypechki/9",
+      "reason": "Third-party chain-named catalogue is not verified official or an established SPB retailer storefront. Not promoted to qualifying evidence."
+    }
+  ],
+  "critical_search_result": "No additional qualifying standalone extract, agave or explicit firm-tofu record from these bounded probes. This is not proof of product absence or a browser-access blocker."
+}

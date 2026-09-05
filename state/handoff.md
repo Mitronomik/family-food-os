@@ -4,31 +4,47 @@ Updated: `2026-09-05`
 
 ## Immediate handoff — PR4-DATA2
 
-Issue #12 authorizes supporting Russia/SPB re-curation only. Branch:
-`data/pr4-data2-russia-spb-recuration`; exact starting main:
-`26af749be0f6446de1d88cad2e2e03158a9830a0`, including merged PR #11 policy and
-PR #9 workflow. PR4-DATA/#8 is already merged; older status below is historical.
+**PR4-DATA2 — READY FOR REVIEW**, not ACCEPTED or COMPLETE.
+Issue #12 authorizes this supporting Russia/SPB re-curation only.
+Existing branch `data/pr4-data2-russia-spb-recuration`;
+[existing PR #13](https://github.com/Mitronomik/family-food-os/pull/13).
+Exact starting main `26af749be0f6446de1d88cad2e2e03158a9830a0` includes merged
+PR #9 workflow, PR #11 localization policy and historical PR4-DATA/#8.
+The exact pushed review head is recorded in PR #13, not guessed here.
 
-**IN PROGRESS / BLOCKED — regional evidence access**, not READY FOR REVIEW.
-Read [DATA2 research handoff](../data/curation/pr4-data2/README.md) and its linked
-JSON files before continuing. Five-chain access/form probes and all30 source
-ingredient-list screening are partial research, not a completed119-concept
-retailer audit. No final replacement corpus has been accepted or generated.
-The two ICN sources must not enter a future DATA2 selection.
+Read [final DATA2 report](../data/curation/pr4-data2/review-report.md) and
+[methodology](../data/curation/pr4-data2/market-methodology.md). Orchestrator
+clarification supersedes the previous browser-access blocker. Market evidence
+proves ordinary retail representation in SPB/LO, not momentary stock.
+All original 30 cards / 363 rows were audited; 96 exact risk rows remain
+(77 PURCHASE_FORM_CRITICAL / 19 PREPARATION_ONLY_OR_NOT_RETAIL_FORM).
 
-Current source corpus and all global seeds are unchanged. Baseline curation
-and FoodIngredient suite: **82 passed in 2.25s**. Full runtime suite/Ruff are
-N/A for this isolated JSON/Markdown research. No criteria/tests weakened.
+Final successor: **30 recipes**, **5 retained / 25 replaced**, **223 source-audit
+rows / 193 selected food rows**, **79 existing codes <=120**, **0 new codes /
+0 unresolved required rows**, **96 equipment rows / 33 codes**. Both ICN cards
+are excluded. All **82 purchase forms** pass: **3 RU_MASS_MARKET / 79 RU_AVAILABLE**,
+none SPECIALTY_OR_UNCLEAR. All five baseline chains were reviewed; 72 forms
+have one-chain-only evidence and remain RU_AVAILABLE. Lenta evidence dominance,
+source quantity ambiguities, omitted source seasoning directions and unknown
+times remain visible limitations, not invented normalized production truth.
 
-Research-integrity checks passed: four JSON files, all 30 source IDs, 96 exact
-source/code pairs, nine unique UNCERTAIN observations. `git diff --check`
-passed; backend/scripts/seeds/previous corpus are unchanged from base.
+Selected direct-FNS source documents have hashes, attribution, explicit notice
+review and the accepted narrow project risk basis. No selected rights blocker;
+no blanket public-domain or unrestricted-commercial-use claim. All replacement
+pairs, rejected candidate failures and exact retailer evidence links are durable.
 
-Resume when permitted current regional catalogue access or reviewable offline
-SPB/LO retailer evidence is available. Research PR is draft, not merge-ready.
-Exact blocker-report head/PR URL are recorded in the PR and final agent report.
-Do not modify PR #10 until DATA2 ACCEPT+merge, do not merge this research draft,
-and do not begin PR5. The ignored local SQLite database remains untouched.
+Checks: final DATA2 validator PASS; focused **66 passed in 1.26s**;
+PR4-DATA/FoodIngredient regressions **82 passed in 1.77s**; Ruff format/check and
+`git diff --check` passed. Full backend/launcher suite and production seed runs
+are outside issue #12's isolated curation contract. Tests reproduce four final
+artifacts byte-for-byte. Offline structural validation does not replace source
+review. No criteria or existing tests weakened.
+
+Scope: successor curation, one offline validator/test module, execution state.
+Global seeds and historical `data/curation/pr4/` are byte-unchanged. Ignored local
+SQLite DB, PR4 runtime/seed and PR #10 remain untouched. Await final project
+review; do not merge PR #13 autonomously. Only after DATA2 ACCEPT + merge may
+PR #10 consume this successor. Do not start PR5.
 
 ## Project identity
 

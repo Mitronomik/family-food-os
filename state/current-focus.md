@@ -106,33 +106,41 @@ PR2-DOCS closure:
 
 ## Current active repository task
 
-`PR4-DATA2 — Russia/SPB Recipe Corpus Re-curation — IN PROGRESS`
+`PR4-DATA2 — Russia/SPB Recipe Corpus Re-curation — READY FOR REVIEW`
 
-Execution result: **BLOCKED — current regional market evidence**, not ready
-for final review. Authorized by issue #12, on
-`data/pr4-data2-russia-spb-recuration`, strictly from
-`26af749be0f6446de1d88cad2e2e03158a9830a0` (main including merged policy PR #11).
-Governance PR #9 and PR4-DATA PR #8 are already merged. The historical task
-record below does not supersede this authorization.
+Authorized by [issue #12](https://github.com/Mitronomik/family-food-os/issues/12).
+Continued existing branch `data/pr4-data2-russia-spb-recuration` and
+[PR #13](https://github.com/Mitronomik/family-food-os/pull/13), strictly from
+`main@26af749be0f6446de1d88cad2e2e03158a9830a0`. Governance PR #9, historical
+PR4-DATA PR #8 and localization policy PR #11 are merged in that base.
+The exact pushed review head is recorded in PR #13.
 
-Research covers the five specified retailer chains and ingredient-form
-screening of all30 old recipes. Current SPB-qualified exact-form evidence was
-not established; do not convert access failures into stock-absence claims.
-See [DATA2 blocker and partial evidence](../data/curation/pr4-data2/README.md).
+The previous regional-browser blocker is superseded by the Orchestrator's
+clarified evidence method: market compatibility is not momentary store stock.
+The original 30-card / 363-row corpus was audited; all 96 flagged source-text
+rows are preserved and reclassified (77 purchase-critical / 19 preparation-only).
+The successor contains exactly 30 recipes: 5 retained / 25 replacements,
+including exclusion of both ICN 2024 sources. See
+[final evidence and all replacements](../data/curation/pr4-data2/review-report.md).
 
-No successor corpus or replacements accepted; the two ICN sources are barred
-from the future selection but the previous30-source artifact is unchanged.
-Baseline remains30 recipes /363 coverage rows /119 fixture codes /183 global
-FoodIngredients. No new FoodIngredient or runtime change. Baseline curation and
-FoodIngredient regressions: **82 passed**. This is not DATA2 acceptance.
-Research JSON/reference integrity and `git diff --check` passed; nine unique
-observations remain UNCERTAIN. No current AVAILABLE record accepted.
+Final curation: 223 complete source-audit rows, 193 selected food rows
+(191 required / 1 optional / 1 conditional), 79 existing FoodIngredient codes,
+0 new codes and 0 unresolved required code rows; 96 equipment rows / 33 codes.
+All 82 non-water purchase forms pass: 3 RU_MASS_MARKET / 79 RU_AVAILABLE /
+0 SPECIALTY_OR_UNCLEAR. Five chains reviewed; 72 forms have only one evidenced
+chain. Evidence concentration in Lenta is explicit, not relabelled mass-market.
+Selected direct-FNS rights reviews use the approved narrow project risk posture,
+not blanket public-domain/commercial rights. No selected rights blocker remains.
 
-Next allowed action: obtain permitted current SPB/LO catalogue access or
-reviewable offline regional evidence, then resume the same supporting task.
-The research PR is draft; no final ACCEPT or merge is claimed. PR #10 remains
-unchanged on its own branch and must consume DATA2 only after ACCEPT+merge.
-PR5 remains unauthorized.
+Verification: final DATA2 validator PASS; DATA2 + historical coverage tests
+**66 passed in 1.26s**; PR4-DATA/FoodIngredient regressions **82 passed in 1.77s**;
+Ruff format/check and `git diff --check` passed. Full runtime suite and production
+seed execution are outside this isolated DATA2 contract. Global seeds (183 /
+172 / 183), historical PR4 fixture, production runtime and local DB are unchanged.
+
+Next allowed action: project final review of PR #13. This is **READY FOR REVIEW**,
+not ACCEPTED or COMPLETE. Do not merge autonomously. PR #10 remains unchanged
+and may consume DATA2 only after ACCEPT + merge. PR5 remains unauthorized.
 
 ## Historical PR4-DATA task record (status superseded)
 

@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-05",
+  "scope": "Bounded primary-source downloads; document hashes are provenance, not rights clearance or final-corpus acceptance. Original30 PDF hashes are in source-equipment-audit.json. Source binaries and website assets are not committed.",
+  "documents": [
+    {
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+      "artifact_name": "tnc-eggs.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "sha256": "0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+      "retrieval_method": "Native browser PDF download; SHA-256 computed locally",
+      "visual_review": "Family Handout recipe page inspected after Poppler rendering"
+    },
+    {
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+      "artifact_name": "tnc-applesauce.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "sha256": "7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+      "retrieval_method": "Native browser PDF download; SHA-256 computed locally",
+      "visual_review": "Family Handout recipe page inspected after Poppler rendering"
+    },
+    {
+      "source_url": "https://www.fns.usda.gov/sites/default/files/resource-files/tnc-pancakes.pdf",
+      "resolved_url": "https://fna-bwbufwdzbabpezgc.z01.azurefd.us/sites/default/files/resource-files/tnc-pancakes.pdf",
+      "artifact_name": "tnc-pancakes.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "sha256": "e241fe6f2ebaea8bf81c82652f8d88f2fc95558a8b0221d34f7e12788053abed",
+      "retrieval_method": "Observed official redirect, native browser PDF download, local SHA-256",
+      "visual_review": "Family Handout recipe page inspected after Poppler rendering"
+    },
+    {
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "artifact_name": "HarvestofRecipes.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "retrieval_method": "Native browser PDF download; SHA-256 computed locally",
+      "visual_review": "Six screened recipe pages inspected after Poppler rendering; see candidate-review-v2.json"
+    },
+    {
+      "source_url": "https://wicworks.fns.usda.gov/recipe/roasted-carrots-3-ways",
+      "artifact_name": "data2-wic-roasted-carrots.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "sha256": "a91715ce573ab80385ae897e7966267e7a9c9732c76ac83a4328ed078201a7eb",
+      "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response",
+      "visual_review": "Primary recipe page loaded; exact recipe text retained in downloaded HTML"
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+      "artifact_name": "data2-snap-summer.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "size_bytes": 47658,
+      "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response",
+      "visual_review": "Primary page loaded and recipe text, attribution and footer inspected; downloaded HTML checked against selected recipe facts"
+    },
+    {
+      "source_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+      "artifact_name": "data2-wic-overnight-oats.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "sha256": "0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+      "size_bytes": 35720,
+      "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response",
+      "visual_review": "Primary page loaded and recipe text, attribution and footer inspected; downloaded HTML checked against selected recipe facts"
+    },
+    {
+      "source_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+      "artifact_name": "data2-wic-butternut-soup.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "sha256": "ee642490786720348eae5f18170c5dcb26a0c7b22b042fc829ab0dc6ee1e95e8",
+      "size_bytes": 48383,
+      "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response",
+      "visual_review": "Primary page loaded and recipe text, attribution and footer inspected; downloaded HTML checked against selected recipe facts"
+    },
+    {
+      "source_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+      "artifact_name": "data2-wic-spinach-cauliflower-smoothie.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "sha256": "439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6",
+      "size_bytes": 32197,
+      "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response",
+      "visual_review": "Primary page loaded and recipe text, attribution and footer inspected; downloaded HTML checked against selected recipe facts"
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "artifact_name": "data2-snap-fall.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "size_bytes": 49631,
+      "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response",
+      "visual_review": "Primary page loaded and recipe text, attribution and footer inspected; downloaded HTML checked against selected recipe facts"
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "artifact_name": "data2-snap-spring.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "size_bytes": 48335,
+      "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response",
+      "visual_review": "Primary page loaded and recipe text, attribution and footer inspected; downloaded HTML checked against selected recipe facts"
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/homemade-mashed-potatoes",
+      "artifact_name": "data2-snap-mashed-potatoes.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "sha256": "e9d0e861134ad04f414ad74cacf8a4d49e78f218fe72105f1a54518267594cdf",
+      "size_bytes": 26910,
+      "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response",
+      "visual_review": "Primary page loaded and recipe text, attribution and footer inspected; downloaded HTML checked against selected recipe facts"
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+      "artifact_name": "data2-snap-apple-carrot-soup.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "sha256": "1cc2ed9ddb3253b4a9a5ed9aa6609184e7381035977d00a542a00239f8261258",
+      "size_bytes": 27012,
+      "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response",
+      "visual_review": "Primary page loaded and recipe text, attribution and footer inspected; downloaded HTML checked against selected recipe facts"
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+      "artifact_name": "data2-snap-valentines.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "sha256": "f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281",
+      "size_bytes": 44089,
+      "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response",
+      "visual_review": "Primary page loaded and recipe text, attribution and footer inspected; downloaded HTML checked against selected recipe facts"
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/node/1861",
+      "artifact_name": "data2-snap-kale-nuts.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "sha256": "7c2bb840618e0dfbe372e9ecdb697ad59d2fab36e0fbf07cabe347a93ea6a1a0",
+      "size_bytes": 26757,
+      "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response",
+      "visual_review": "Primary page loaded and recipe text, attribution and footer inspected; downloaded HTML checked against selected recipe facts"
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit",
+      "artifact_name": "data2-snap-grilled-fruit.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "sha256": "03269eead24a3965e76c71a9eed6b7b82b9d785845427fa9b8b445aee55cf6f9",
+      "size_bytes": 26651,
+      "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response",
+      "visual_review": "Primary page loaded and recipe text, attribution and footer inspected; downloaded HTML checked against selected recipe facts"
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
+      "artifact_name": "data2-snap-dilled-fish.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "sha256": "43d44c84d7c007a0c32906210b13212ffb43fb7a62312e9fb43c819f8a8a63a3",
+      "size_bytes": 27316,
+      "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response",
+      "visual_review": "Primary page loaded and recipe text, attribution and footer inspected; downloaded HTML checked against selected recipe facts"
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
+      "artifact_name": "data2-snap-braised-chicken.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "sha256": "d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+      "size_bytes": 1000253,
+      "retrieval_method": "Native browser PDF download; local SHA-256",
+      "visual_review": "Primary recipe page reviewed; PDF recipe rendered and visually inspected with Poppler"
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/snap/recipes/Microwave_Baked_Potato.pdf",
+      "artifact_name": "data2-snap-microwave-potato.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "sha256": "a3ff68c8066be7c5550d49a0eae60c572d2d7ff28427538df88cc29647610256",
+      "size_bytes": 195741,
+      "retrieval_method": "Native browser PDF download; local SHA-256",
+      "visual_review": "Primary recipe page reviewed; PDF recipe rendered and visually inspected with Poppler"
+    }
+  ]
+}

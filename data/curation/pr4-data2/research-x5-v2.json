@@ -1,0 +1,399 @@
+{
+  "schema_version": 2,
+  "checked_at": "2026-09-05",
+  "scope": "Bounded X5 research after issue12/PR13 evidence-method clarification; partial evidence, not complete corpus classification",
+  "authorizing_clarification": "https://github.com/Mitronomik/family-food-os/issues/12#issuecomment-5550629546",
+  "methodology": "Catalogue-level market compatibility may qualify without live stock. Current neutral official brand/category records plus current official SPB/LO chain presence are evaluated. Material purchase qualifiers remain mandatory. Other-city titles/store bindings, expired flyers, food composition within unrelated prepared products, and unverified aggregators are excluded. Live access failure remains UNCERTAIN and is not a data-impossibility conclusion.",
+  "region_evidence": [
+    {
+      "url": "https://rabota.x5.ru/dostavka/rabota-v-x5/",
+      "checked_at": "2026-09-05",
+      "observed_wording": "X5 delivery work from Пятёрочка/Перекрёсток stores; courier positions in Moscow and Saint Petersburg",
+      "method": "INDEXED_OFFICIAL_CURRENT_PAGE",
+      "notes": "Current official recruitment page crawled three weeks ago; evidence of both chains' operating delivery network, not product stock."
+    },
+    {
+      "url": "https://www.x5.ru/ru/news/tovary-torgovyh-setej-h5-group-teper-dostupny-na-ozon/",
+      "checked_at": "2026-09-05",
+      "observed_wording": "29 April2025 launch of online delivery from Pyaterochka, Perekrestok and Chizhik in Moscow and Saint Petersburg",
+      "method": "INDEXED_OFFICIAL_CORROBORATION",
+      "notes": "Historical launch announcement corroborates region; not sole evidence of today's assortment."
+    }
+  ],
+  "observations": [
+    {
+      "retailer_chain": "PYATEROCHKA",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "INDEXED_OFFICIAL_CHAIN_NEUTRAL_CATEGORY_PLUS_OFFICIAL_REGION_PRESENCE",
+      "region_evidence_url": "https://rabota.x5.ru/dostavka/rabota-v-x5/",
+      "status": "AVAILABLE",
+      "stock_claim": false,
+      "food_ingredient_code": "EGG",
+      "evidence_url": "https://brands.5ka.ru/vyruchay",
+      "observed_product_wording": "Яйцо",
+      "notes": "Current official own-brand category indexed today. Plain chicken egg purchase concept; no claim about liquid egg products or exact current stock."
+    },
+    {
+      "retailer_chain": "PYATEROCHKA",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "INDEXED_OFFICIAL_CHAIN_NEUTRAL_CATEGORY_PLUS_OFFICIAL_REGION_PRESENCE",
+      "region_evidence_url": "https://rabota.x5.ru/dostavka/rabota-v-x5/",
+      "status": "AVAILABLE",
+      "stock_claim": false,
+      "food_ingredient_code": "SUGAR",
+      "evidence_url": "https://brands.5ka.ru/vyruchay",
+      "observed_product_wording": "Сахар",
+      "notes": "Current official own-brand category indexed today. Basic commodity category exception applies; does not prove brown sugar."
+    },
+    {
+      "retailer_chain": "PYATEROCHKA",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "INDEXED_OFFICIAL_CHAIN_NEUTRAL_CATEGORY_PLUS_OFFICIAL_REGION_PRESENCE",
+      "region_evidence_url": "https://rabota.x5.ru/dostavka/rabota-v-x5/",
+      "status": "AVAILABLE",
+      "stock_claim": false,
+      "food_ingredient_code": "OATS_ROLLED",
+      "evidence_url": "https://brands.5ka.ru/vkus-polza",
+      "observed_product_wording": "Овсяные хлопья без глютена",
+      "notes": "Current official own-brand breakfast category indexed today. Canonical catalogue code is generic Овсяные хлопья. Gluten-free wording adds a property but does not replace the oat-flake purchase concept; no brand/package/preparation-state overfit."
+    },
+    {
+      "retailer_chain": "PYATEROCHKA",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "INDEXED_OFFICIAL_CHAIN_NEUTRAL_CATEGORY_PLUS_OFFICIAL_REGION_PRESENCE",
+      "region_evidence_url": "https://rabota.x5.ru/dostavka/rabota-v-x5/",
+      "status": "UNCERTAIN",
+      "stock_claim": false,
+      "food_ingredient_code": "EGG_WHITE",
+      "evidence_url": "https://brands.5ka.ru/vkus-polza",
+      "observed_product_wording": "Яичные белки и обогащенные яйца",
+      "notes": "Current chain-neutral white-of-egg product category. Liquid/pasteurized form is not explicit; retain as a lead only where source purchase form requires liquid egg white."
+    }
+  ],
+  "search_attempts": [
+    {
+      "food_ingredient_code": "MILK_1_PERCENT",
+      "query": "site:5ka.ru/product/ \"Молоко\" \"1%\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "Only3.2%milk or unrelated productcomposition exposed; wrong fat qualifier. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "MILK_1_PERCENT",
+      "query": "\"Перекресток\" \"молоко\" \"1%\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying exact-fat official chain-neutral product surfaced. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "MILK_SKIM",
+      "query": "site:5ka.ru/product/ \"Молоко\" \"0.5%\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying skim milk surfaced.0.5%not silently accepted as zero-fat. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "MILK_SKIM",
+      "query": "site:perekrestok.ru \"молоко\" \"1.0%\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "Unrelated composition/nutrition hits; no qualifying skim milk. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "EDAMAME_FROZEN",
+      "query": "site:5ka.ru/product/ \"эдамаме\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying frozen-edamame product surfaced. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "EDAMAME_FROZEN",
+      "query": "site:perekrestok.ru/cat/ \"эдамаме\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "Historical frozen-edamame flyers only; already retained in v1 as historical leads. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "EDAMAME_FROZEN",
+      "query": "\"эдамаме\" \"Перекрёсток\" -site:files.perekrestok.ru",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "Recipes/prepared meals/price comparator surfaced, not qualifying current official standalone product. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "ANCHO_CHILI_POWDER",
+      "query": "\"Перекресток\" \"анчо\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying result. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "ANCHO_CHILI_POWDER",
+      "query": "site:5ka.ru \"перец Анчо\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying result. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "CHEESE_CHEDDAR_REDUCED_FAT",
+      "query": "site:5ka.ru \"Чеддер\" \"легкий\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "Current cheese category offers regular50%Cheddar and separate light cheeses; neither establishes reduced-fat Cheddar. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "CHEESE_CHEDDAR_REDUCED_FAT",
+      "query": "site:perekrestok.ru \"Чеддер\" \"легкий\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "Regular Cheddar45-50% and light non-Cheddar appeared in oldflyers; wrong form and stale. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "ORANGE_JUICE_CONCENTRATE",
+      "query": "site:perekrestok.ru \"сок\" \"концентрированный\" \"замороженный\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying frozen concentrate product. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "ORANGE_JUICE_CONCENTRATE",
+      "query": "site:5ka.ru \"сок апельсиновый концентрированный\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying frozen concentrate product. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "ORANGE_JUICE_CONCENTRATE",
+      "query": "site:perekrestok.ru \"сок\" \"апельсиновый концентрат\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying frozen concentrate product. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "CORN_CREAM_STYLE_NO_SALT",
+      "query": "site:perekrestok.ru \"кукуруза\" \"без соли\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying cream-style no-salt product. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "CORN_CREAM_STYLE_NO_SALT",
+      "query": "site:5ka.ru \"кукуруза\" \"крем\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying cream-style no-salt product. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "CORN_CREAM_STYLE_NO_SALT",
+      "query": "site:5ka.ru \"кукуруза кремообразная\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying cream-style no-salt product. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "GREEN_BEANS_CANNED_NO_SALT",
+      "query": "site:perekrestok.ru \"стручковая\" \"консервированная\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying canned no-salt greenbeans. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "KIDNEY_BEANS_CANNED_LOW_SODIUM",
+      "query": "site:5ka.ru \"фасоль\" \"без соли\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying canned low-sodium kidneybeans. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "KIDNEY_BEANS_CANNED_LOW_SODIUM",
+      "query": "site:perekrestok.ru \"фасоль\" \"без соли\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying canned low-sodium kidneybeans. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "PINTO_BEANS_CANNED_LOW_SODIUM",
+      "query": "site:5ka.ru \"фасоль\" \"пинто\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying canned low-sodium pintobeans. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "PINTO_BEANS_CANNED_LOW_SODIUM",
+      "query": "site:perekrestok.ru \"Пинто\" -site:files.perekrestok.ru",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying canned low-sodium pintobeans. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "KIDNEY_BEANS_CANNED_LOW_SODIUM",
+      "query": "site:5ka.ru \"фасоль\" \"низким содержанием\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying low-sodium product. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "CHICKEN_BROTH_LOW_SODIUM",
+      "query": "site:perekrestok.ru \"бульон\" \"натрия\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "Instant noodle broth-seasoning composition, not qualifying low-sodium liquid broth. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "BEEF_BROTH_LOW_SODIUM",
+      "query": "site:5ka.ru \"бульон\" \"натрия\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying low-sodium liquid broth. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "PIMIENTO_CANNED",
+      "query": "site:perekrestok.ru \"пименто\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying product. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    },
+    {
+      "food_ingredient_code": "PIMIENTO_CANNED",
+      "query": "site:5ka.ru \"Пименто\"",
+      "checked_at": "2026-09-05",
+      "method": "WEB_SEARCH_INDEXED_OFFICIAL_SOURCE",
+      "status": "UNCERTAIN",
+      "notes": "No qualifying product. Search non-discovery is not proof of product absence; no stock NOT_FOUND claim."
+    }
+  ],
+  "excluded_observations": [
+    {
+      "code": "CHEESE_CHEDDAR_REDUCED_FAT",
+      "url": "https://5ka.ru/catalog/syr--251C13095/",
+      "wording": "Сыр Le Superbe Чеддер50%; Сыр Natura Сливочный легкий16%",
+      "reason": "Current chain-neutral category but regular Cheddar and another low-fat cheese are separate products. Neither proves the required combined identity."
+    },
+    {
+      "code": "MILK_1_PERCENT",
+      "url": "https://5ka.ru/product/moloko-prostokvashino-pasterizovannoe-3-2-bzmzh--4259100/",
+      "wording": "Молоко Простоквашино пастеризованное3.2%",
+      "reason": "Wrong fat-specific concept."
+    },
+    {
+      "code": "MILK_SKIM",
+      "url": "https://www.perekrestok.ru/cat/117/p/tvorog-savuskin-magkij-obezzirennyj-0-1-bzmz-125g-3194302",
+      "wording": "Творог Савушкин Мягкий обезжиренный0.1%; composition milk skim",
+      "reason": "Skim milk is merely composition of cottage cheese, not a sold milk product; title also explicitly Moscow and pickup Suvar Plaza."
+    },
+    {
+      "code": "CARROT",
+      "url": "https://www.perekrestok.ru/catalog/makarony-krupy-spetsii/spetsii-i-pripravy/syre-spetsii/koritsa",
+      "wording": "Морковь мытая; title delivery in Moscow",
+      "reason": "Explicit other-city title; no transfer to SPB."
+    },
+    {
+      "code": "STRAWBERRY",
+      "url": "https://www.perekrestok.ru/promotions",
+      "wording": "Клубника",
+      "reason": "Neutral promotions page indexed3months ago; no promotion-validity date or standalone current product identified in this pass; lead not counted."
+    }
+  ],
+  "summary": {
+    "qualifying_records": 3,
+    "qualifying_chains": {
+      "PYATEROCHKA": 3,
+      "PEREKRESTOK": 0
+    },
+    "uncertain_observation_records": 1,
+    "purchase_critical_search_attempts": 27
+  },
+  "continued_ordinary_concept_search": {
+    "checked_at": "2026-09-05",
+    "new_qualifying_records": 0,
+    "exact_queries": [
+      "site:5ka.ru \"Булгур\"",
+      "site:5ka.ru \"Масло оливковое\" -site:actions.5ka.ru -site:media.5ka.ru",
+      "site:5ka.ru \"Тофу\"",
+      "site:5ka.ru \"Сироп агавы\"",
+      "Пятёрочка булгур купить",
+      "Пятёрочка масло оливковое купить",
+      "Пятёрочка сироп агавы купить",
+      "Пятёрочка тофу купить",
+      "site:brands.5ka.ru/globalvillage",
+      "site:5ka.ru/catalog/ \"Овощи\"",
+      "site:perekrestok.ru \"булгур\" \"Санкт-Петербург\"",
+      "site:5ka.ru \"рафинированное\" \"рапсовое\"",
+      "site:perekrestok.ru \"экстракт ванили\"",
+      "site:kuper.ru/5ka \"Санкт-Петербург\" \"Булгур\"",
+      "site:kuper.ru/perekrestok \"Санкт-Петербург\" \"Оливковое\"",
+      "site:eda.yandex.ru \"Пятёрочка\" \"Санкт-Петербург\" \"Морковь\"",
+      "site:eda.yandex.ru \"Перекрёсток\" \"Санкт-Петербург\" \"булгур\"",
+      "site:5ka.ru \"мед натуральный\"",
+      "site:5ka.ru \"лимон\"",
+      "site:5ka.ru \"лайм\"",
+      "site:5ka.ru \"корица молотая\"",
+      "site:5ka.ru \"перец черный молотый\" -колбаса -хлебцы -торт",
+      "site:5ka.ru \"петрушка\"",
+      "site:5ka.ru \"батат\"",
+      "site:5ka.ru \"тыква\"",
+      "site:perekrestok.ru \"Булгур\" -Москва -files",
+      "site:perekrestok.ru \"рапсовое масло\" -Москва -files",
+      "site:perekrestok.ru \"агавы\" -Москва -files",
+      "site:perekrestok.ru \"Ванильный экстракт\" -Москва -files",
+      "site:kuper.ru \"ПЯТЕРОЧКА\" \"Санкт-Петербург\" \"морковь\"",
+      "site:kuper.ru \"ПЕРЕКРЕСТОК\" \"Санкт-Петербург\" \"масло\"",
+      "site:5ka.ru \"хлеб цельнозерновой\"",
+      "site:5ka.ru \"майонез легкий\"",
+      "site:brands.5ka.ru/vyruchay"
+    ],
+    "excluded_leads": [
+      {
+        "url": "https://www.perekrestok.ru/cat/107/p/bulgur-agro-alans-ekstra-450g-3696765",
+        "wording": "Булгур Агро-Альянс Экстра, 450г — купить с доставкой в Москве",
+        "reason": "Correct purchase concept, but explicit other-city title; not counted for SPB."
+      },
+      {
+        "url": "https://brands.5ka.ru/globalvillage",
+        "wording": "Фрукты и овощи; Крупы и зерновые; Растительные масла",
+        "reason": "Current official chain-neutral assortment page but broad categories do not explicitly identify individual requested foods or oil types. No invented per-code expansion. Existing sugar evidence already recorded from another current official brand page."
+      },
+      {
+        "url": "https://5ka.ru/media/hosting/documents/isklyucheniya_21_06.pdf",
+        "wording": "Масло Оливковое Красная Цена 500мл; Перец черный Красная цена молотый; Мед натуральный цветочный",
+        "reason": "Exact commodity names appear, but the indexed official exclusions list is approximately two years old and current validity was not established; historical lead only."
+      },
+      {
+        "url": "https://kuper.ru/5ka/c/prigotovit-doma-840353d/vtorie-blyuda-new/zharenij-tofu-s-ovoshchami",
+        "wording": "Жареный тофу с овощами в ПЯТЕРОЧКА",
+        "reason": "Recipe/meal category rather than explicit firm-tofu purchase product; SPB context not exposed."
+      }
+    ]
+  },
+  "limitations": "No claim that X5 cannot sell these forms; current qualifying product-level evidence was not discovered by this bounded pass. Previous browser challenges do not invalidate the 3 qualifying indexed observations. Further retail or permitted platform evidence can resolve the remaining forms."
+}

@@ -349,3 +349,41 @@ No FoodIngredient schema, migration, domain, repository, UoW, search, allergen,
 API or frontend behavior changed. No Recipe schema, domain, persistence or
 implementation was started. `PR4 — Recipe Catalogue` remains the next product
 milestone and waits for PR4-DATA acceptance/merge. PR5 remains unauthorized.
+
+
+## PR4-DATA2 — Russia/SPB Recipe Corpus Re-curation
+
+Status: **READY FOR REVIEW**, not ACCEPTED or COMPLETE (`2026-09-05`).
+Supporting issue #12, existing branch `data/pr4-data2-russia-spb-recuration`,
+[PR #13](https://github.com/Mitronomik/family-food-os/pull/13), exact base
+`26af749be0f6446de1d88cad2e2e03158a9830a0` (merged governance #9 and policy #11).
+The Orchestrator's market-evidence clarification supersedes the original
+regional-browser blocker; no acceptance gate was relaxed.
+
+Verified successor under `data/curation/pr4-data2/`:
+
+- all original 30 recipes / 363 source rows audited; all 96 risk rows preserved
+  and classified as 77 purchase-critical / 19 preparation-only;
+- exactly 30 selected recipes, 5 retained / 25 replaced, both ICN cards excluded;
+- 223 source-audit rows / 193 selected food rows (191 required, 1 optional,
+  1 conditional); 79 existing global FoodIngredient codes, zero new/unresolved;
+- all 82 non-water purchase forms qualify: 3 RU_MASS_MARKET / 79 RU_AVAILABLE /
+  0 SPECIALTY_OR_UNCLEAR; 72 one-chain, 7 two-chain, 3 three-chain forms;
+- 172 raw retailer observations / 166 unique records, 129 AVAILABLE /
+  37 UNCERTAIN; five-chain matrix, no access-error-as-absence or stock claim;
+- 96 source-backed equipment rows / 33 deterministic normalized codes;
+- reviewed direct-FNS document hashes, attributions and notice findings under
+  the approved project risk posture, no blanket public-domain claim.
+
+Verification: DATA2 final validator PASS; focused 66 passed in 1.26s;
+affected PR4-DATA/FoodIngredient regressions 82 passed in 1.77s; Ruff
+format/check and `git diff --check` passed. Four output artifacts reproduce
+byte-for-byte. Full runtime suite / production seed execution are outside this
+supporting operation; existing FoodIngredient seed tests were run.
+
+See [full review evidence](../data/curation/pr4-data2/review-report.md) for all
+30 recipes, all 25 replacements, exact one-chain-only forms, source limitations
+and commands. Global183 catalogue/172 aliases/183 nutrition profiles and old
+30/363/119 fixture remain unchanged. No runtime/schema/API/frontend/Retail/AI
+change. Local DB untouched. PR #10 unchanged until DATA2 ACCEPT + merge;
+PR5 unauthorized. Next action is project final review, not autonomous merge.
