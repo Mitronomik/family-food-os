@@ -31,6 +31,7 @@ jobs:
           python scripts/pr4_reset_payload_c.py
           python scripts/pr4_reset_payload_d.py
           python scripts/pr4_reset_payload_e.py
+          python scripts/pr4_reset_payload_f.py
           rm -f \
             docs/family-food/pr4-github-actions-acquisition.json \
             docs/family-food/pr4-provenance-refresh-attempt.json \
@@ -49,19 +50,24 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -e 'backend[test]' ruff
 
-      - name: Format final reset Python before tests
+      - name: Format and lint-fix final reset Python before tests
         run: |
-          ruff format \
-            backend/app/domain/food_recipes.py \
-            backend/app/services/food_recipes.py \
-            backend/app/seed/food_recipes.py \
-            backend/app/persistence/sqlalchemy_core/food_recipe_tables.py \
-            backend/app/tests/test_food_recipe_domain.py \
-            backend/app/tests/test_food_recipe_application.py \
-            backend/app/tests/test_food_recipe_migration.py \
-            backend/app/tests/test_food_recipe_seed.py \
-            backend/app/tests/persistence/test_food_recipe_repository.py \
+          set -euo pipefail
+          FILES=(
+            backend/app/domain/food_recipes.py
+            backend/app/services/food_recipes.py
+            backend/app/seed/food_recipes.py
+            backend/app/persistence/sqlalchemy_core/food_recipe_tables.py
+            backend/app/tests/test_food_recipe_domain.py
+            backend/app/tests/test_food_recipe_application.py
+            backend/app/tests/test_food_recipe_migration.py
+            backend/app/tests/test_food_recipe_seed.py
+            backend/app/tests/persistence/test_food_recipe_repository.py
             scripts/build_pr4_recipe_seed.py
+          )
+          ruff format "${FILES[@]}"
+          ruff check --fix "${FILES[@]}"
+          ruff format "${FILES[@]}"
 
       - name: Verify DATA2 handoff
         run: |
@@ -86,28 +92,20 @@ jobs:
       - name: Static and scope checks
         run: |
           set -euo pipefail
-          ruff format --check \
-            backend/app/domain/food_recipes.py \
-            backend/app/services/food_recipes.py \
-            backend/app/seed/food_recipes.py \
-            backend/app/persistence/sqlalchemy_core/food_recipe_tables.py \
-            backend/app/tests/test_food_recipe_domain.py \
-            backend/app/tests/test_food_recipe_application.py \
-            backend/app/tests/test_food_recipe_migration.py \
-            backend/app/tests/test_food_recipe_seed.py \
-            backend/app/tests/persistence/test_food_recipe_repository.py \
+          FILES=(
+            backend/app/domain/food_recipes.py
+            backend/app/services/food_recipes.py
+            backend/app/seed/food_recipes.py
+            backend/app/persistence/sqlalchemy_core/food_recipe_tables.py
+            backend/app/tests/test_food_recipe_domain.py
+            backend/app/tests/test_food_recipe_application.py
+            backend/app/tests/test_food_recipe_migration.py
+            backend/app/tests/test_food_recipe_seed.py
+            backend/app/tests/persistence/test_food_recipe_repository.py
             scripts/build_pr4_recipe_seed.py
-          ruff check \
-            backend/app/domain/food_recipes.py \
-            backend/app/services/food_recipes.py \
-            backend/app/seed/food_recipes.py \
-            backend/app/persistence/sqlalchemy_core/food_recipe_tables.py \
-            backend/app/tests/test_food_recipe_domain.py \
-            backend/app/tests/test_food_recipe_application.py \
-            backend/app/tests/test_food_recipe_migration.py \
-            backend/app/tests/test_food_recipe_seed.py \
-            backend/app/tests/persistence/test_food_recipe_repository.py \
-            scripts/build_pr4_recipe_seed.py
+          )
+          ruff format --check "${FILES[@]}"
+          ruff check "${FILES[@]}"
           git diff --check
           test "$(python -c "import json; r=json.load(open('data/seed/recipes/recipes.json'))['recipes']; print(len(r),sum(len(x['version']['ingredients']) for x in r),sum(len(x['version']['steps']) for x in r),sum(len(x['version']['equipment_codes']) for x in r),len({i['food_ingredient_code'] for x in r for i in x['version']['ingredients']}))")" = "30 189 169 86 81"
           ! grep -R "EXPECTED_MANIFEST_CODE_COUNT = 119\|365 RecipeIngredient\|315 RecipeStep" backend/app/seed scripts data/seed/recipes
@@ -122,6 +120,7 @@ jobs:
             scripts/pr4_reset_payload_c.py \
             scripts/pr4_reset_payload_d.py \
             scripts/pr4_reset_payload_e.py \
+            scripts/pr4_reset_payload_f.py \
             .github/workflows/pr4-reset-bundle.yml
           git add -A
           git diff --cached --check
