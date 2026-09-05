@@ -24,6 +24,8 @@ from app.seed.food_recipes import load_seed_entries, seed_food_recipes
 from app.services.food_recipe_contracts import RecipeCataloguePersistenceConflictError
 
 NOW = datetime(2026, 9, 4, tzinfo=timezone.utc)
+PRIMARY_RECIPE_CODE = "CACFP6_CORN_EDAMAME_BLEND"
+SECONDARY_RECIPE_CODE = "CACFP6_TABBOULEH"
 
 terminality_metadata = MetaData()
 deferred_parent_table = Table(
@@ -67,7 +69,7 @@ def _assert_revoked(scope):
 def test_complete_version_roundtrips_uuid_utc_decimal_and_order(recipe_engine):
     _, engine = recipe_engine
     service = create_food_recipe_catalogue_service(engine)
-    recipe = service.get_by_code("SPICED_OATMEAL")
+    recipe = service.get_by_code(PRIMARY_RECIPE_CODE)
     detail = service.get_current_verified(recipe.id)
 
     assert recipe.id.version == detail.version.id.version == 4
@@ -84,12 +86,12 @@ def test_complete_version_roundtrips_uuid_utc_decimal_and_order(recipe_engine):
 def test_append_v2_preserves_v1_and_current_verified_advances(recipe_engine):
     _, engine = recipe_engine
     service = create_food_recipe_catalogue_service(engine)
-    recipe = service.get_by_code("SPICED_OATMEAL")
+    recipe = service.get_by_code(PRIMARY_RECIPE_CODE)
     v1 = service.get_current_verified(recipe.id)
     source = next(
         seed.version
         for seed in load_seed_entries()
-        if seed.canonical_code == "SPICED_OATMEAL"
+        if seed.canonical_code == PRIMARY_RECIPE_CODE
     )
     v2_seed = replace(
         source,
@@ -112,11 +114,11 @@ def test_sqlite_guards_reject_update_and_delete_for_every_version_owned_table(
 ):
     config, engine = recipe_engine
     service = create_food_recipe_catalogue_service(engine)
-    recipe = service.get_by_code("SPICED_OATMEAL")
+    recipe = service.get_by_code(PRIMARY_RECIPE_CODE)
     source = next(
         seed.version
         for seed in load_seed_entries()
-        if seed.canonical_code == "SPICED_OATMEAL"
+        if seed.canonical_code == PRIMARY_RECIPE_CODE
     )
     v2 = service.append_trusted_version(
         recipe.id,
@@ -179,7 +181,7 @@ def test_failed_commit_revokes_discards_and_later_uow_is_clean(recipe_engine):
     assert retained.closed
     _assert_revoked(scope)
     service = create_food_recipe_catalogue_service(engine)
-    assert service.get_by_code("SPICED_OATMEAL").is_active is True
+    assert service.get_by_code(PRIMARY_RECIPE_CODE).is_active is True
 
 
 def test_failed_rollback_revokes_discards_and_later_uow_is_clean(recipe_engine):
@@ -209,14 +211,14 @@ def test_failed_rollback_revokes_discards_and_later_uow_is_clean(recipe_engine):
     _assert_revoked(scope)
     with SqlAlchemyRecipeCatalogueReadScope(engine) as later:
         assert later.recipes.get_by_code("ROLLBACK_FIXTURE") is None
-        assert later.recipes.get_by_code("SPICED_OATMEAL") is not None
+        assert later.recipes.get_by_code(PRIMARY_RECIPE_CODE) is not None
 
 
 def test_repository_rejects_cross_recipe_created_from_reference(recipe_engine):
     _, engine = recipe_engine
     service = create_food_recipe_catalogue_service(engine)
-    first = service.get_current_verified(service.get_by_code("SPICED_OATMEAL").id)
-    second = service.get_current_verified(service.get_by_code("PIZZA_GREEN_BEANS").id)
+    first = service.get_current_verified(service.get_by_code(PRIMARY_RECIPE_CODE).id)
+    second = service.get_current_verified(service.get_by_code(SECONDARY_RECIPE_CODE).id)
     new_id = uuid4()
     invalid_version = replace(
         second.version,
@@ -251,7 +253,7 @@ def test_repository_rejects_cross_recipe_created_from_reference(recipe_engine):
 def test_repository_maps_duplicate_version_number_to_stable_conflict(recipe_engine):
     _, engine = recipe_engine
     service = create_food_recipe_catalogue_service(engine)
-    existing = service.get_current_verified(service.get_by_code("SPICED_OATMEAL").id)
+    existing = service.get_current_verified(service.get_by_code(PRIMARY_RECIPE_CODE).id)
     duplicate_id = uuid4()
     detail = RecipeVersionDetail(
         recipe=existing.recipe,
