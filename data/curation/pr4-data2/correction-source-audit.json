@@ -1,0 +1,3225 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-05",
+  "reviewed_head": "36c0cb82680fbc8a57ab4a78a41f363f3420d39d",
+  "scope": "Adversarial primary-source recheck of all 30 recipes at reviewed PR13 head. Corrected source facts for integration, not final rebalance selection. Replaced candidates remain here as historical audit evidence.",
+  "source_hashes_rechecked": 30,
+  "recipes": [
+    {
+      "recipe_source_id": "CACFP6-CORN-EDAMAME-BLEND",
+      "recipe_name": "Corn and Edamame Blend",
+      "source_servings": 6,
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
+      "source_sha256": "314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef",
+      "source_artifact_name": "Corn_Edamame_Blend_6_Servings.pdf",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "CARROT",
+        "CILANTRO",
+        "CORIANDER_SEED",
+        "CORN_SWEET",
+        "EDAMAME_FROZEN",
+        "GARLIC",
+        "ONION_YELLOW",
+        "SALT",
+        "SESAME_OIL",
+        "SESAME_SEEDS"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "1 tsp Sesame oil",
+          "food_ingredient_code": "SESAME_OIL"
+        },
+        {
+          "source_ingredient_text": "⅔ cup or 3 oz Fresh onions, chopped",
+          "food_ingredient_code": "ONION_YELLOW"
+        },
+        {
+          "source_ingredient_text": "2 tsp Garlic, minced",
+          "food_ingredient_code": "GARLIC"
+        },
+        {
+          "source_ingredient_text": "⅔ cup or 5 oz Frozen corn, thawed, drained",
+          "food_ingredient_code": "CORN_SWEET"
+        },
+        {
+          "source_ingredient_text": "1 cup or 6 oz Frozen edamame, thawed, drained",
+          "food_ingredient_code": "EDAMAME_FROZEN"
+        },
+        {
+          "source_ingredient_text": "1 ½ cups or 6 oz Fresh carrots, shredded",
+          "food_ingredient_code": "CARROT"
+        },
+        {
+          "source_ingredient_text": "¼ tsp Ground coriander seeds",
+          "food_ingredient_code": "CORIANDER_SEED"
+        },
+        {
+          "source_ingredient_text": "1 tsp Toasted sesame seeds",
+          "food_ingredient_code": "SESAME_SEEDS"
+        },
+        {
+          "source_ingredient_text": "¼ tsp Salt",
+          "food_ingredient_code": "SALT"
+        },
+        {
+          "source_ingredient_text": "¼ cup or ½ oz Fresh cilantro, chopped",
+          "food_ingredient_code": "CILANTRO"
+        }
+      ],
+      "meal_type_code": "side",
+      "curation_role": "SIDE_DISH",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": true,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [
+        "EDAMAME_FROZEN"
+      ],
+      "role_evidence": {
+        "source_words": "provides ½ cup vegetable",
+        "source_section": "Complete six-serving card",
+        "curator_rationale": "Six half-cup portions of corn, edamame and carrots: vegetable side, not a standalone soybean entree."
+      },
+      "diversity_contribution": "Corn and edamame vegetable side; saucepan saute with source-explicit sesame-seed toasting.",
+      "source_times": {
+        "preparation": "20 minutes",
+        "cooking": "10 minutes",
+        "note": "Header values transcribed exactly; not recomputed from directions, not assumed active time or total elapsed time."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "NONSTICK_SAUCEPAN",
+          "evidence_snippet": "medium non-stick saucepan",
+          "source_section": "Page 1, step 1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "STOCK_POT",
+          "evidence_snippet": "small stock pot",
+          "source_section": "Source notes: toast raw sesame seeds for 3 minutes over medium heat",
+          "selection_reason": "Reviewed retail evidence is raw sesame; activate the source-explicit home-toasting alternative, preserving seed quantity."
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "CACFP6-LOCAL-HARVEST-BAKE",
+      "recipe_name": "Local Harvest Bake",
+      "source_servings": 6,
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Local_Harvest_Bake_6_Servings.pdf",
+      "source_sha256": "340444ab1ec4f626a34d6a2737fa04d12481ef21f8850ad7c1199c49c2b3786b",
+      "source_artifact_name": "Local_Harvest_Bake_6_Servings.pdf",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "BEET",
+        "BUTTERNUT_SQUASH",
+        "GARLIC",
+        "OLIVE_OIL",
+        "PARSLEY_DRIED",
+        "SALT",
+        "SWEET_POTATO"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "2 cups or 8 oz Fresh butternut squash, peeled, cubed",
+          "food_ingredient_code": "BUTTERNUT_SQUASH"
+        },
+        {
+          "source_ingredient_text": "2 cups or 8 oz Fresh beets, peeled, cubed",
+          "food_ingredient_code": "BEET"
+        },
+        {
+          "source_ingredient_text": "2 cups or 8 oz Fresh sweet potatoes, peeled, cubed",
+          "food_ingredient_code": "SWEET_POTATO"
+        },
+        {
+          "source_ingredient_text": "1 Tbsp Olive oil",
+          "food_ingredient_code": "OLIVE_OIL"
+        },
+        {
+          "source_ingredient_text": "¼ tsp Kosher salt or iodized salt",
+          "food_ingredient_code": "SALT"
+        },
+        {
+          "source_ingredient_text": "¾ tsp Fresh garlic, minced",
+          "food_ingredient_code": "GARLIC"
+        },
+        {
+          "source_ingredient_text": "½ tsp Dried parsley (optional)",
+          "food_ingredient_code": "PARSLEY_DRIED"
+        }
+      ],
+      "meal_type_code": "side",
+      "curation_role": "SIDE_DISH",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": true,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "a hearty vegetable side",
+        "source_section": "Complete six-serving card",
+        "curator_rationale": "Source introduction expressly says vegetable side; squash, beet and sweet potato with oil and seasoning. No meat ingredient."
+      },
+      "diversity_contribution": "Oven-baked butternut squash, beet and sweet potato vegetable side.",
+      "source_times": {
+        "preparation": "20 minutes",
+        "cooking": "25 minutes",
+        "note": "Header values transcribed exactly; not recomputed from directions, not assumed active time or total elapsed time."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "OVEN",
+          "evidence_snippet": "Preheat oven",
+          "source_section": "Page 1, step 1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "BOWL",
+          "evidence_snippet": "medium size mixing bowl",
+          "source_section": "Page 1, step 2"
+        },
+        {
+          "position": 3,
+          "equipment_code": "BAKING_PAN",
+          "evidence_snippet": "baking pan",
+          "source_section": "Page 1, step 3"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [
+        {
+          "code": "FACTUAL_CORRUPTION",
+          "detail": "Reviewed metadata asserted pork main, but source and selected codes contain no pork. Correct to vegetable side; do not add ingredient."
+        }
+      ],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "CACFP6-TABBOULEH",
+      "recipe_name": "Tabbouleh",
+      "source_servings": 6,
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tabbouleh_6_Servings.pdf",
+      "source_sha256": "ef746c97415426316a78995b42a1e7f5a5d76c0078e6f006ab9940f0120cca49",
+      "source_artifact_name": "Tabbouleh_6_Servings.pdf",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "BELL_PEPPER_RED",
+        "BULGUR",
+        "CUCUMBER",
+        "CUMIN_GROUND",
+        "LEMON",
+        "MINT_FRESH",
+        "OLIVE_OIL",
+        "ONION_YELLOW",
+        "PARSLEY",
+        "QUINOA",
+        "SALT",
+        "TOMATO",
+        "WATER"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "⅓ cup or 3 oz Quinoa, dry",
+          "food_ingredient_code": "QUINOA"
+        },
+        {
+          "source_ingredient_text": "½ cup or 3 oz Bulgur wheat, dry",
+          "food_ingredient_code": "BULGUR"
+        },
+        {
+          "source_ingredient_text": "1 ⅓ cups or 11 oz Water",
+          "food_ingredient_code": "WATER"
+        },
+        {
+          "source_ingredient_text": "½ tsp Salt",
+          "food_ingredient_code": "SALT"
+        },
+        {
+          "source_ingredient_text": "1 ½ cups or 9 ⅓ oz Fresh tomatoes, unpeeled, diced",
+          "food_ingredient_code": "TOMATO"
+        },
+        {
+          "source_ingredient_text": "1 cup or 4 ¾ oz Fresh cucumbers, peeled, seeded, diced",
+          "food_ingredient_code": "CUCUMBER"
+        },
+        {
+          "source_ingredient_text": "¼ cup or ½ oz Fresh parsley, chopped",
+          "food_ingredient_code": "PARSLEY"
+        },
+        {
+          "source_ingredient_text": "¼ cup or 1 ½ oz Fresh onions, diced",
+          "food_ingredient_code": "ONION_YELLOW"
+        },
+        {
+          "source_ingredient_text": "¼ cup or 1 ¼ oz Fresh red bell peppers, diced",
+          "food_ingredient_code": "BELL_PEPPER_RED"
+        },
+        {
+          "source_ingredient_text": "¼ tsp Fresh mint, chopped",
+          "food_ingredient_code": "MINT_FRESH"
+        },
+        {
+          "source_ingredient_text": "¼ tsp Ground cumin",
+          "food_ingredient_code": "CUMIN_GROUND"
+        },
+        {
+          "source_ingredient_text": "¼ cup or 2 oz Lemon juice",
+          "food_ingredient_code": "LEMON"
+        },
+        {
+          "source_ingredient_text": "2 ¼ tsp Olive oil",
+          "food_ingredient_code": "OLIVE_OIL"
+        }
+      ],
+      "meal_type_code": "salad",
+      "curation_role": "SIDE_DISH",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": true,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "a light refreshing salad",
+        "source_section": "Complete six-serving card",
+        "curator_rationale": "Source describes a light quinoa/bulgur vegetable salad, not a standalone entree."
+      },
+      "diversity_contribution": "Chilled quinoa and bulgur salad with tomato, cucumber, pepper and fresh herbs.",
+      "source_times": {
+        "preparation": "4 hours",
+        "cooking": "15 minutes",
+        "note": "Header values transcribed exactly; not recomputed from directions, not assumed active time or total elapsed time."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "FINE_MESH_STRAINER",
+          "evidence_snippet": "fine mesh strainer",
+          "source_section": "Page 1, step 1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "STOCK_POT",
+          "evidence_snippet": "large, covered stock pot",
+          "source_section": "Page 1, step 2"
+        },
+        {
+          "position": 3,
+          "equipment_code": "BOWL",
+          "evidence_snippet": "large bowl",
+          "source_section": "Page 1, step 7"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [
+        {
+          "code": "CANONICAL_ROLE",
+          "detail": "Canonical salad; retain curation side and exclude anchor. Prior diversity summary omitted quinoa although correctly selected."
+        }
+      ],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "CACFP6-HONEY-LIME-CHICKEN",
+      "recipe_name": "Honey Lime Chicken",
+      "source_servings": 6,
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Honey_Lime_Chicken_6_Servings.pdf",
+      "source_sha256": "df6b0bf8dd73975119a3d0b3ad1a9a447bc611e8dc9076c1548401e2cbcde634",
+      "source_artifact_name": "Honey_Lime_Chicken_6_Servings.pdf",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "BLACK_PEPPER",
+        "CHICKEN_THIGH",
+        "HONEY",
+        "LIME",
+        "LIME_JUICE",
+        "SALT"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "1 lb 7 oz Raw chicken thighs, boneless, skinless",
+          "food_ingredient_code": "CHICKEN_THIGH"
+        },
+        {
+          "source_ingredient_text": "⅓ cup or 3 ½ oz Honey",
+          "food_ingredient_code": "HONEY"
+        },
+        {
+          "source_ingredient_text": "¼ cup or 2 oz Fresh lime juice",
+          "food_ingredient_code": "LIME_JUICE"
+        },
+        {
+          "source_ingredient_text": "½ tsp Salt",
+          "food_ingredient_code": "SALT"
+        },
+        {
+          "source_ingredient_text": "¼ tsp Ground black or white pepper (black selected)",
+          "food_ingredient_code": "BLACK_PEPPER"
+        },
+        {
+          "source_ingredient_text": "⅛ cup Lime zest",
+          "food_ingredient_code": "LIME"
+        }
+      ],
+      "meal_type_code": "main",
+      "curation_role": "MAIN_DISH",
+      "meal_anchor": true,
+      "substantial_one_bowl": false,
+      "pure_side_dish": false,
+      "primary_protein_family": "POULTRY",
+      "protein_evidence_codes": [
+        "CHICKEN_THIGH"
+      ],
+      "selected_protein_concepts": [
+        "CHICKEN_THIGH"
+      ],
+      "role_evidence": {
+        "source_words": "tender baked chicken thighs",
+        "source_section": "Complete six-serving card",
+        "curator_rationale": "Six meat portions from 1 lb 7 oz raw boneless skinless chicken; poultry is the central food."
+      },
+      "diversity_contribution": "Oven-baked chicken thighs with measured honey, lime juice and zest.",
+      "source_times": {
+        "preparation": "25 minutes",
+        "cooking": "30 minutes",
+        "note": "Header values transcribed exactly; not recomputed from directions, not assumed active time or total elapsed time."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "OVEN",
+          "evidence_snippet": "Preheat oven",
+          "source_section": "Page 1, step 1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "BOWL",
+          "evidence_snippet": "large bowl",
+          "source_section": "Page 1, step 2"
+        },
+        {
+          "position": 3,
+          "equipment_code": "BAKING_PAN",
+          "evidence_snippet": "baking pan",
+          "source_section": "Page 1, step 3"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [
+        {
+          "source_fact": "Source header cook time 30 minutes, oven directions 30–35 minutes. The step 2 Set aside for step 2 reference is a source typo.",
+          "review_decision": "PRESERVE_SOURCE_HEADER_AND_STAGE_RANGE_NO_REWRITTEN_STEP"
+        }
+      ],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "CACFP6-CREAMY-COLESLAW",
+      "recipe_name": "Creamy Coleslaw",
+      "source_servings": 6,
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf",
+      "source_sha256": "8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6",
+      "source_artifact_name": "Creamy_Coleslaw_6_Servings.pdf",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "APPLE_CIDER_VINEGAR",
+        "BLACK_PEPPER",
+        "CABBAGE_GREEN",
+        "CABBAGE_RED",
+        "CARROT",
+        "CRANBERRIES_DRIED",
+        "GREEN_ONION",
+        "HONEY",
+        "MAYONNAISE_LOW_FAT",
+        "SALT",
+        "YOGURT_PLAIN_LOW_FAT"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "½ cup or 5 oz Low-fat yogurt, plain",
+          "food_ingredient_code": "YOGURT_PLAIN_LOW_FAT"
+        },
+        {
+          "source_ingredient_text": "¼ cup or 2 oz Low-fat mayonnaise",
+          "food_ingredient_code": "MAYONNAISE_LOW_FAT"
+        },
+        {
+          "source_ingredient_text": "¼ cup or 2 ½ oz Honey",
+          "food_ingredient_code": "HONEY"
+        },
+        {
+          "source_ingredient_text": "⅛ cup Apple cider vinegar",
+          "food_ingredient_code": "APPLE_CIDER_VINEGAR"
+        },
+        {
+          "source_ingredient_text": "¼ tsp Salt",
+          "food_ingredient_code": "SALT"
+        },
+        {
+          "source_ingredient_text": "¼ tsp Ground black pepper",
+          "food_ingredient_code": "BLACK_PEPPER"
+        },
+        {
+          "source_ingredient_text": "4 cups or 6 oz Fresh green cabbage, chilled, shredded",
+          "food_ingredient_code": "CABBAGE_GREEN"
+        },
+        {
+          "source_ingredient_text": "¾ cup or 1 ¼ oz Fresh purple cabbage, chilled, shredded",
+          "food_ingredient_code": "CABBAGE_RED"
+        },
+        {
+          "source_ingredient_text": "¾ cup or 2 oz Fresh carrots, shredded",
+          "food_ingredient_code": "CARROT"
+        },
+        {
+          "source_ingredient_text": "½ cup or 1 oz Fresh green onions, diced",
+          "food_ingredient_code": "GREEN_ONION"
+        },
+        {
+          "source_ingredient_text": "½ cup or 2 ¼ oz Dried cranberries",
+          "food_ingredient_code": "CRANBERRIES_DRIED"
+        }
+      ],
+      "meal_type_code": "salad",
+      "curation_role": "SIDE_DISH",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": true,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "This classic side dish",
+        "source_section": "Complete six-serving card",
+        "curator_rationale": "Source explicitly calls cabbage/carrot coleslaw a side; canonical salad does not imply meal anchor."
+      },
+      "diversity_contribution": "Uncooked green and red cabbage/carrot side with yogurt-mayonnaise dressing and dried cranberries.",
+      "source_times": {
+        "preparation": "15 minutes",
+        "cooking": "10 minutes",
+        "note": "Header values transcribed exactly; not recomputed from directions, not assumed active time or total elapsed time."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "BOWL",
+          "evidence_snippet": "medium mixing bowl; large mixing bowl",
+          "source_section": "Page 1, step 1;2"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [
+        {
+          "source_fact": "Source header says cooking 10 minutes although directions perform no cooking. Preserve reported field, flag mismatch; do not invent heating.",
+          "review_decision": "PRESERVE_SOURCE_AND_DISTINGUISH_CURATED_SELECTION"
+        }
+      ],
+      "findings": [
+        {
+          "code": "SOURCE_TIME_LIMITATION",
+          "detail": "Source header says cooking 10 minutes although directions perform no cooking. Preserve reported field, flag mismatch; do not invent heating."
+        }
+      ],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "TNC6-EGGS-SPINACH",
+      "recipe_name": "Scrambled Eggs with Spinach",
+      "source_servings": 6,
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+      "source_sha256": "0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+      "source_artifact_name": "tnc-eggs.pdf",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "EGG",
+        "OLIVE_OIL",
+        "SPINACH"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "1 teaspoon olive, canola, or vegetable oil",
+          "food_ingredient_code": "OLIVE_OIL"
+        },
+        {
+          "source_ingredient_text": "12 large eggs",
+          "food_ingredient_code": "EGG"
+        },
+        {
+          "source_ingredient_text": "3 cups rinsed chopped fresh spinach",
+          "food_ingredient_code": "SPINACH"
+        }
+      ],
+      "meal_type_code": "breakfast",
+      "curation_role": "BREAKFAST",
+      "meal_anchor": true,
+      "substantial_one_bowl": false,
+      "pure_side_dish": false,
+      "primary_protein_family": "EGG",
+      "protein_evidence_codes": [
+        "EGG"
+      ],
+      "selected_protein_concepts": [
+        "EGG"
+      ],
+      "role_evidence": {
+        "source_words": "traditional breakfast dish any time of day",
+        "source_section": "Family Handout p3; supporting skill directions pp5,7,8",
+        "curator_rationale": "Source serving is two eggs with half a cup of spinach (12 eggs, six servings). A substantial egg breakfast anchor; not a complete nutritional meal claim."
+      },
+      "diversity_contribution": "Two-egg-per-serving scrambled spinach breakfast, prepared in a skillet.",
+      "source_times": {
+        "total_minutes": 15,
+        "hands_on_minutes": 15,
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "evidence": "Family Handout recipe page 3 heading; hands-on includes cooking and is not prep-only."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "BOWL",
+          "evidence_snippet": "small bowl or cup; larger bowl",
+          "source_section": "Family Handout p3; supporting skill directions pp5,7,8 / p3 steps5–6"
+        },
+        {
+          "position": 2,
+          "equipment_code": "SKILLET",
+          "evidence_snippet": "skillet",
+          "source_section": "Family Handout p3; supporting skill directions pp5,7,8 / p3 step8"
+        },
+        {
+          "position": 3,
+          "equipment_code": "STOVETOP",
+          "evidence_snippet": "stove or cooktop",
+          "source_section": "Family Handout p3; supporting skill directions pp5,7,8 / p3 step8; stove selected"
+        },
+        {
+          "position": 4,
+          "equipment_code": "SPATULA",
+          "evidence_snippet": "spatula",
+          "source_section": "Family Handout p3; supporting skill directions pp5,7,8 / p3 step11"
+        },
+        {
+          "position": 5,
+          "equipment_code": "KNIFE",
+          "evidence_snippet": "knife; butter knife",
+          "source_section": "Family Handout p3; supporting skill directions pp5,7,8 / p5 How to Chop"
+        },
+        {
+          "position": 6,
+          "equipment_code": "CUTTING_BOARD",
+          "evidence_snippet": "cutting board",
+          "source_section": "Family Handout p3; supporting skill directions pp5,7,8 / p5 How to Chop"
+        },
+        {
+          "position": 7,
+          "equipment_code": "WHISK",
+          "evidence_snippet": "fork or whisk",
+          "source_section": "Family Handout p3; supporting skill directions pp5,7,8 / p7 How to Whisk; whisk selected"
+        },
+        {
+          "position": 8,
+          "equipment_code": "MEASURING_CUP",
+          "evidence_snippet": "measuring cups",
+          "source_section": "Family Handout p3; supporting skill directions pp5,7,8 / p8 How to Measure"
+        },
+        {
+          "position": 9,
+          "equipment_code": "MEASURING_SPOON",
+          "evidence_snippet": "measuring spoons",
+          "source_section": "Family Handout p3; supporting skill directions pp5,7,8 / p8 How to Measure"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "TNC6-APPLESAUCE",
+      "recipe_name": "Applesauce",
+      "source_servings": 6,
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+      "source_sha256": "7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+      "source_artifact_name": "tnc-applesauce.pdf",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "APPLE",
+        "WATER"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "6 apples, any variety, rinsed",
+          "food_ingredient_code": "APPLE"
+        },
+        {
+          "source_ingredient_text": "½ cup water",
+          "food_ingredient_code": "WATER"
+        }
+      ],
+      "meal_type_code": "other",
+      "curation_role": "SNACK",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": false,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "Eat this by itself as a snack",
+        "source_section": "Family Handout p3; supporting skill directions pp6,8,9",
+        "curator_rationale": "Apple snack or accompaniment; serving suggestions mentioning chicken or pork do not add either ingredient."
+      },
+      "diversity_contribution": "Cooked and mashed apples with water; optional cinnamon omitted.",
+      "source_times": {
+        "total_minutes": 55,
+        "hands_on_minutes": 20,
+        "prep_minutes": null,
+        "cook_minutes": 25,
+        "cool_minutes": 10,
+        "evidence": "Family Handout recipe page 3 heading plus steps 6 and 7. Hands-on is not automatically prep-only."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "KNIFE",
+          "evidence_snippet": "chef's knife",
+          "source_section": "Family Handout p3; supporting skill directions pp6,8,9 / p3 step3; alternative to corer/slicer"
+        },
+        {
+          "position": 2,
+          "equipment_code": "POT",
+          "evidence_snippet": "pot",
+          "source_section": "Family Handout p3; supporting skill directions pp6,8,9 / p3 step5"
+        },
+        {
+          "position": 3,
+          "equipment_code": "STOVETOP",
+          "evidence_snippet": "stove",
+          "source_section": "Family Handout p3; supporting skill directions pp6,8,9 / p3 step6"
+        },
+        {
+          "position": 4,
+          "equipment_code": "POTATO_MASHER",
+          "evidence_snippet": "potato masher or fork",
+          "source_section": "Family Handout p3; supporting skill directions pp6,8,9 / p3 step8; masher selected"
+        },
+        {
+          "position": 5,
+          "equipment_code": "CUTTING_BOARD",
+          "evidence_snippet": "cutting board",
+          "source_section": "Family Handout p3; supporting skill directions pp6,8,9 / p6 How to Core and Slice"
+        },
+        {
+          "position": 6,
+          "equipment_code": "MEASURING_CUP",
+          "evidence_snippet": "liquid measuring cups",
+          "source_section": "Family Handout p3; supporting skill directions pp6,8,9 / p8 How to Measure Liquids"
+        },
+        {
+          "position": 7,
+          "equipment_code": "SPOON",
+          "evidence_snippet": "wooden spoon",
+          "source_section": "Family Handout p3; supporting skill directions pp6,8,9 / p9 How to Stir"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "TNC6-CORN-ZUCCHINI-PANCAKES",
+      "recipe_name": "Corn and Zucchini Pancakes",
+      "source_servings": 6,
+      "source_url": "https://www.fns.usda.gov/sites/default/files/resource-files/tnc-pancakes.pdf",
+      "source_sha256": "e241fe6f2ebaea8bf81c82652f8d88f2fc95558a8b0221d34f7e12788053abed",
+      "source_artifact_name": "tnc-pancakes.pdf",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "BAKING_POWDER",
+        "CORN_SWEET",
+        "EGG",
+        "FLOUR_WHOLE_WHEAT",
+        "GREEN_ONION",
+        "SALT",
+        "SUNFLOWER_OIL",
+        "ZUCCHINI"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "3 medium-sized zucchini, trimmed and shredded",
+          "food_ingredient_code": "ZUCCHINI"
+        },
+        {
+          "source_ingredient_text": "1½ cups canned, fresh, or frozen corn",
+          "food_ingredient_code": "CORN_SWEET"
+        },
+        {
+          "source_ingredient_text": "3 large eggs, whisked",
+          "food_ingredient_code": "EGG"
+        },
+        {
+          "source_ingredient_text": "1 cup whole-wheat flour",
+          "food_ingredient_code": "FLOUR_WHOLE_WHEAT"
+        },
+        {
+          "source_ingredient_text": "¼ teaspoon salt",
+          "food_ingredient_code": "SALT"
+        },
+        {
+          "source_ingredient_text": "½ teaspoon baking powder",
+          "food_ingredient_code": "BAKING_POWDER"
+        },
+        {
+          "source_ingredient_text": "3 scallions, trimmed and chopped",
+          "food_ingredient_code": "GREEN_ONION"
+        },
+        {
+          "source_ingredient_text": "1½ tablespoons oil",
+          "food_ingredient_code": "SUNFLOWER_OIL"
+        }
+      ],
+      "meal_type_code": "side",
+      "curation_role": "SIDE_DISH",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": true,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [
+        "EGG"
+      ],
+      "role_evidence": {
+        "source_words": "savory, veggie-filled pancake as a snack or side",
+        "source_section": "Family Handout p3; supporting skill directions pp6,7,9,10,11",
+        "curator_rationale": "Source specifies snack/side. Twelve pancakes at two per serving; three eggs in the entire batch do not make this an egg main."
+      },
+      "diversity_contribution": "Small skillet corn and zucchini pancakes with whole-wheat flour; a source-described snack or side.",
+      "source_times": {
+        "total_minutes": 35,
+        "hands_on_minutes": 35,
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "drain_minutes": 10,
+        "per_side_cook_minutes": 5,
+        "evidence": "Family Handout recipe page 3; repeat batches means 5+5 minutes is not total cooking time."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "COLANDER",
+          "evidence_snippet": "colander",
+          "source_section": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p3 step3"
+        },
+        {
+          "position": 2,
+          "equipment_code": "BOWL",
+          "evidence_snippet": "bowl",
+          "source_section": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p3 step3"
+        },
+        {
+          "position": 3,
+          "equipment_code": "SKILLET",
+          "evidence_snippet": "skillet",
+          "source_section": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p3 step10"
+        },
+        {
+          "position": 4,
+          "equipment_code": "STOVETOP",
+          "evidence_snippet": "stove or cooktop",
+          "source_section": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p3 step10; stove selected"
+        },
+        {
+          "position": 5,
+          "equipment_code": "MEASURING_CUP",
+          "evidence_snippet": "¼-cup measuring cup",
+          "source_section": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p3 step11"
+        },
+        {
+          "position": 6,
+          "equipment_code": "WHISK",
+          "evidence_snippet": "whisk or fork",
+          "source_section": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p6 How to Whisk; whisk selected"
+        },
+        {
+          "position": 7,
+          "equipment_code": "GRATER",
+          "evidence_snippet": "grater",
+          "source_section": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p7 How to Grate"
+        },
+        {
+          "position": 8,
+          "equipment_code": "CUTTING_BOARD",
+          "evidence_snippet": "cutting board",
+          "source_section": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p7 How to Grate"
+        },
+        {
+          "position": 9,
+          "equipment_code": "MEASURING_SPOON",
+          "evidence_snippet": "measuring spoons",
+          "source_section": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p9 How to Measure"
+        },
+        {
+          "position": 10,
+          "equipment_code": "KNIFE",
+          "evidence_snippet": "knife or fork",
+          "source_section": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p9 How to Measure; knife selected for leveling"
+        },
+        {
+          "position": 11,
+          "equipment_code": "SPOON",
+          "evidence_snippet": "spoon",
+          "source_section": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p9 How to Measure Flour"
+        },
+        {
+          "position": 12,
+          "equipment_code": "SPATULA",
+          "evidence_snippet": "spatula",
+          "source_section": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p11 How to Cook Pancakes step2"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [
+        {
+          "source_fact": "Recipe yields 12 pancakes at 2 per serving; 6 servings is exact count division. Supporting directions allow extra oil if needed without a quantity; do not create a numeric extra line.",
+          "review_decision": "PRESERVE_SOURCE_YIELD_AND_CONDITIONAL_NONNUMERIC_NOTE"
+        }
+      ],
+      "findings": [
+        {
+          "code": "UNSUPPORTED_BREAKFAST_ROLE",
+          "detail": "Source twice specifies snack or side. Prior curator BREAKFAST classification should not satisfy source-grounded breakfast guard."
+        }
+      ],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "HARV6-ROASTED-POTATOES",
+      "recipe_name": "Roasted Potatoes",
+      "source_servings": 6,
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "source_artifact_name": "HarvestofRecipes.pdf",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "BELL_PEPPER_GREEN",
+        "BLACK_PEPPER",
+        "GARLIC",
+        "ONION_YELLOW",
+        "POTATO",
+        "SALT",
+        "SUNFLOWER_OIL"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "1 pound potatoes, chopped into 1-inch cubes",
+          "food_ingredient_code": "POTATO"
+        },
+        {
+          "source_ingredient_text": "½ cup onion, chopped into 1-inch cubes",
+          "food_ingredient_code": "ONION_YELLOW"
+        },
+        {
+          "source_ingredient_text": "½ cup green pepper, chopped into 1-inch cubes",
+          "food_ingredient_code": "BELL_PEPPER_GREEN"
+        },
+        {
+          "source_ingredient_text": "1 teaspoon garlic, finely chopped",
+          "food_ingredient_code": "GARLIC"
+        },
+        {
+          "source_ingredient_text": "1 teaspoon vegetable oil",
+          "food_ingredient_code": "SUNFLOWER_OIL"
+        },
+        {
+          "source_ingredient_text": "¼ teaspoon salt",
+          "food_ingredient_code": "SALT"
+        },
+        {
+          "source_ingredient_text": "¼ teaspoon pepper",
+          "food_ingredient_code": "BLACK_PEPPER"
+        }
+      ],
+      "meal_type_code": "side",
+      "curation_role": "SIDE_DISH",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": true,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "Side Dishes",
+        "source_section": "Harvest printed p61",
+        "curator_rationale": "Harvest collection section labels these potatoes a side; six quarter-cup servings are not meal anchors."
+      },
+      "diversity_contribution": "Oven-roasted potato pieces with onion and green pepper.",
+      "source_times": {
+        "total_minutes": null,
+        "prep_minutes": null,
+        "cook_minutes": 35,
+        "chill_minutes": 15,
+        "oven_fahrenheit": 350,
+        "evidence": "Harvest printed page 61, steps 3 to 5. Do not label 50 minutes as source total because chopping/preheating not timed."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "BOWL",
+          "evidence_snippet": "medium-size bowl",
+          "source_section": "Harvest printed p61 / step1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "OVEN",
+          "evidence_snippet": "oven",
+          "source_section": "Harvest printed p61 / step4"
+        },
+        {
+          "position": 3,
+          "equipment_code": "BAKING_SHEET",
+          "evidence_snippet": "cookie sheet",
+          "source_section": "Harvest printed p61 / step5"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "HARV6-FRESH-TOMATO-SALSA",
+      "recipe_name": "Fresh Tomato Salsa",
+      "source_servings": 6,
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "source_artifact_name": "HarvestofRecipes.pdf",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "APPLE",
+        "GARLIC",
+        "LIME_JUICE",
+        "ONION_YELLOW",
+        "SALT",
+        "SUNFLOWER_OIL",
+        "TOMATO"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "1 cup tomatoes, finely chopped (or ½ can, about 8 ounces, low-sodium diced tomatoes)",
+          "food_ingredient_code": "TOMATO"
+        },
+        {
+          "source_ingredient_text": "½ cup apple, peeled and finely chopped",
+          "food_ingredient_code": "APPLE"
+        },
+        {
+          "source_ingredient_text": "¼ cup onion, finely chopped",
+          "food_ingredient_code": "ONION_YELLOW"
+        },
+        {
+          "source_ingredient_text": "2 tablespoons lime (or lemon) juice",
+          "food_ingredient_code": "LIME_JUICE"
+        },
+        {
+          "source_ingredient_text": "1 teaspoon garlic, finely chopped",
+          "food_ingredient_code": "GARLIC"
+        },
+        {
+          "source_ingredient_text": "½ teaspoon vegetable oil",
+          "food_ingredient_code": "SUNFLOWER_OIL"
+        },
+        {
+          "source_ingredient_text": "¼ teaspoon salt",
+          "food_ingredient_code": "SALT"
+        }
+      ],
+      "meal_type_code": "other",
+      "curation_role": "CONDIMENT",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": false,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "addition to a meal or snack",
+        "source_section": "Harvest printed p53",
+        "curator_rationale": "Fresh salsa is a condiment added to other foods, not a standalone entree."
+      },
+      "diversity_contribution": "Cold tomato/apple salsa with measured lime juice and seasoning; fresh tomato alternative selected.",
+      "source_times": {
+        "total_minutes": null,
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "chill_minutes": 15,
+        "evidence": "Harvest printed page 53, step 3."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "BOWL",
+          "evidence_snippet": "medium-size bowl",
+          "source_section": "Harvest printed p53 / step1"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "HARV6-GARDEN-PASTA-SALAD",
+      "recipe_name": "Garden Pasta Salad",
+      "source_servings": 6,
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "source_artifact_name": "HarvestofRecipes.pdf",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "APPLE_CIDER_VINEGAR",
+        "BELL_PEPPER_GREEN",
+        "BLACK_PEPPER",
+        "CUCUMBER",
+        "ONION_YELLOW",
+        "PASTA_DRY",
+        "SALT",
+        "SUNFLOWER_OIL"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "½ cup macaroni, cooked",
+          "food_ingredient_code": "PASTA_DRY"
+        },
+        {
+          "source_ingredient_text": "¼ cup onion, finely chopped",
+          "food_ingredient_code": "ONION_YELLOW"
+        },
+        {
+          "source_ingredient_text": "½ cup cucumber, finely chopped",
+          "food_ingredient_code": "CUCUMBER"
+        },
+        {
+          "source_ingredient_text": "¼ cup green pepper, diced",
+          "food_ingredient_code": "BELL_PEPPER_GREEN"
+        },
+        {
+          "source_ingredient_text": "1 tablespoon vinegar",
+          "food_ingredient_code": "APPLE_CIDER_VINEGAR"
+        },
+        {
+          "source_ingredient_text": "½ tablespoon vegetable oil",
+          "food_ingredient_code": "SUNFLOWER_OIL"
+        },
+        {
+          "source_ingredient_text": "¼ teaspoon salt",
+          "food_ingredient_code": "SALT"
+        },
+        {
+          "source_ingredient_text": "¼ teaspoon pepper",
+          "food_ingredient_code": "BLACK_PEPPER"
+        }
+      ],
+      "meal_type_code": "salad",
+      "curation_role": "SIDE_DISH",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": true,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "It goes with soup or a sandwich",
+        "source_section": "Harvest printed p55",
+        "curator_rationale": "Source quarter-cup serving is a small pasta side; cooked-input amount cannot be changed into dry quantity."
+      },
+      "diversity_contribution": "Cold cooked-macaroni salad with cucumber, onion, green pepper and vinegar/oil dressing.",
+      "source_times": {
+        "total_minutes": null,
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "chill_minutes_min": 30,
+        "chill_minutes_max": 45,
+        "evidence": "Harvest printed page 55, step 4. Source quantity is cooked macaroni; no cooking duration or dry-yield conversion supplied."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "BOWL",
+          "evidence_snippet": "medium-size bowl; separate bowl",
+          "source_section": "Harvest printed p55 / steps1–2; two vessels, one normalized code"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [
+        {
+          "source_fact": "Cooked macaroni input quantity retained; dry purchase amount is not established and must not be generated as ½ cup dry.",
+          "review_decision": "PRESERVE_SOURCE_NO_INVENTED_CONVERSION_OR_STEP",
+          "scope": "Source evidence is retained verbatim for technical curation. No purchase-weight conversion or missing source step is generated by DATA2; later runtime normalization must review this limitation."
+        }
+      ],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "SNAP6-SPINACH-APPLE-SALAD",
+      "recipe_name": "Spinach Salad with Apples and Raisins",
+      "source_servings": 6,
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "source_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "source_artifact_name": "data2-snap-fall.html",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "APPLE",
+        "APPLE_CIDER_VINEGAR",
+        "CANOLA_OIL",
+        "GARLIC_POWDER",
+        "RAISINS_GOLDEN",
+        "SPINACH",
+        "SUGAR"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "2/3 package baby spinach (10 ounces, washed. Could also use Kale or other greens)",
+          "food_ingredient_code": "SPINACH"
+        },
+        {
+          "source_ingredient_text": "1 1/2 apples (chopped, can use 1-2 apples)",
+          "food_ingredient_code": "APPLE"
+        },
+        {
+          "source_ingredient_text": "1 cup raisins",
+          "food_ingredient_code": "RAISINS_GOLDEN"
+        },
+        {
+          "source_ingredient_text": "1/4 cup canola oil",
+          "food_ingredient_code": "CANOLA_OIL"
+        },
+        {
+          "source_ingredient_text": "1/4 cup apple cider vinegar",
+          "food_ingredient_code": "APPLE_CIDER_VINEGAR"
+        },
+        {
+          "source_ingredient_text": "1/4 cup sugar",
+          "food_ingredient_code": "SUGAR"
+        },
+        {
+          "source_ingredient_text": "1/16 teaspoon garlic powder (pinch)",
+          "food_ingredient_code": "GARLIC_POWDER"
+        }
+      ],
+      "meal_type_code": "salad",
+      "curation_role": "SIDE_DISH",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": true,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "with a savory and seasonal entrée",
+        "source_section": "Fall Recipes / same-titled recipe / directions",
+        "curator_rationale": "Source pairs this leaf/apple salad with an entree; it is not itself a meal anchor."
+      },
+      "diversity_contribution": "Uncooked spinach, apple and raisin salad with canola and cider-vinegar dressing.",
+      "source_times": {
+        "total_minutes": null,
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "evidence": "Direct FNS card https://snaped.fns.usda.gov/node/2537 contains two combining directions, no numeric timing."
+      },
+      "equipment": [],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [
+        {
+          "source_fact": "Source spinach says 2/3 package (10 ounces); preserve exact dual notation without inventing package-size conversion.",
+          "review_decision": "PRESERVE_SOURCE_NO_INVENTED_CONVERSION_OR_STEP",
+          "scope": "Source evidence is retained verbatim for technical curation. No purchase-weight conversion or missing source step is generated by DATA2; later runtime normalization must review this limitation."
+        }
+      ],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "SNAP6-PEACH-CRISP",
+      "recipe_name": "Peach Crisp",
+      "source_servings": 6,
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+      "source_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "source_artifact_name": "data2-snap-summer.html",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "CINNAMON_GROUND",
+        "FLOUR_WHEAT",
+        "LEMON",
+        "MARGARINE",
+        "OATS_ROLLED",
+        "PEACH",
+        "SUGAR"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "4 peaches (4 cups sliced)",
+          "food_ingredient_code": "PEACH"
+        },
+        {
+          "source_ingredient_text": "2 tablespoons margarine",
+          "food_ingredient_code": "MARGARINE"
+        },
+        {
+          "source_ingredient_text": "3/4 cup quick-cooking oats",
+          "food_ingredient_code": "OATS_ROLLED"
+        },
+        {
+          "source_ingredient_text": "1/2 cup sugar",
+          "food_ingredient_code": "SUGAR"
+        },
+        {
+          "source_ingredient_text": "1/4 cup flour",
+          "food_ingredient_code": "FLOUR_WHEAT"
+        },
+        {
+          "source_ingredient_text": "2 teaspoons cinnamon",
+          "food_ingredient_code": "CINNAMON_GROUND"
+        },
+        {
+          "source_ingredient_text": "1 teaspoon lemon juice",
+          "food_ingredient_code": "LEMON"
+        }
+      ],
+      "meal_type_code": "other",
+      "curation_role": "DESSERT",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": false,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "The perfect dessert when peaches are in season",
+        "source_section": "Summer Recipes / Peach Crisp / directions",
+        "curator_rationale": "Fruit dessert, not an anchor."
+      },
+      "diversity_contribution": "Baked fresh-peach dessert with quick-oat, flour and margarine topping.",
+      "source_times": {
+        "total_minutes": null,
+        "prep_minutes": null,
+        "cook_minutes": 20,
+        "oven_fahrenheit": 375,
+        "evidence": "Direct FNS Summer Recipes page, Peach Crisp steps 1 and 7."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "OVEN",
+          "evidence_snippet": "oven",
+          "source_section": "Summer Recipes / Peach Crisp / directions / step1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "BAKING_PAN",
+          "evidence_snippet": "baking pan",
+          "source_section": "Summer Recipes / Peach Crisp / directions / step3"
+        },
+        {
+          "position": 3,
+          "equipment_code": "SAUCEPAN",
+          "evidence_snippet": "saucepan",
+          "source_section": "Summer Recipes / Peach Crisp / directions / step4"
+        },
+        {
+          "position": 4,
+          "equipment_code": "BOWL",
+          "evidence_snippet": "small bowl",
+          "source_section": "Summer Recipes / Peach Crisp / directions / step5"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "SNAP6-SEARED-GREENS",
+      "recipe_name": "Seared Greens",
+      "source_servings": 6,
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "source_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "source_artifact_name": "data2-snap-spring.html",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "APPLE_CIDER_VINEGAR",
+        "BLACK_PEPPER",
+        "GARLIC",
+        "KALE",
+        "OLIVE_OIL",
+        "SALT",
+        "WATER"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "8 cups kale or collard greens (1 1/2 pounds)",
+          "food_ingredient_code": "KALE"
+        },
+        {
+          "source_ingredient_text": "2 tablespoons vegetable oil (or olive oil)",
+          "food_ingredient_code": "OLIVE_OIL"
+        },
+        {
+          "source_ingredient_text": "4 garlic cloves (chopped)",
+          "food_ingredient_code": "GARLIC"
+        },
+        {
+          "source_ingredient_text": "1 cup water",
+          "food_ingredient_code": "WATER"
+        },
+        {
+          "source_ingredient_text": "1/4 teaspoon salt",
+          "food_ingredient_code": "SALT"
+        },
+        {
+          "source_ingredient_text": "1 teaspoon black pepper",
+          "food_ingredient_code": "BLACK_PEPPER"
+        },
+        {
+          "source_ingredient_text": "2 tablespoons vinegar, cider",
+          "food_ingredient_code": "APPLE_CIDER_VINEGAR"
+        }
+      ],
+      "meal_type_code": "side",
+      "curation_role": "SIDE_DISH",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": true,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "a tasty side dish in minutes",
+        "source_section": "Spring Recipes / Seared Greens / directions",
+        "curator_rationale": "Leafy greens are explicitly a side, despite pot preparation."
+      },
+      "diversity_contribution": "Kale cooked with garlic in a covered pot, then finished with cider vinegar.",
+      "source_times": {
+        "total_minutes": null,
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "steam_stage_minutes": 4,
+        "evidence": "Direct FNS card https://snaped.fns.usda.gov/node/2488 step 3. Other saute/stir/standing stages untimed; 4 minutes is not the full cooking duration."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "POT",
+          "evidence_snippet": "large deep pot or skillet",
+          "source_section": "Spring Recipes / Seared Greens / directions / step2; pot selected"
+        },
+        {
+          "position": 2,
+          "equipment_code": "LID",
+          "evidence_snippet": "cover",
+          "source_section": "Spring Recipes / Seared Greens / directions / step2 explicit noun: with a cover"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "SNAP8-SOMALI-SUMMER-SALAD",
+      "recipe_name": "Somali Summer Salad",
+      "source_servings": 8,
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+      "source_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "source_artifact_name": "data2-snap-summer.html",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "APPLE",
+        "BELL_PEPPER_GREEN",
+        "CUCUMBER",
+        "LEMON",
+        "OLIVE_OIL",
+        "TOMATO"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "3 tablespoons olive oil",
+          "food_ingredient_code": "OLIVE_OIL"
+        },
+        {
+          "source_ingredient_text": "1 tablespoon lemon juice",
+          "food_ingredient_code": "LEMON"
+        },
+        {
+          "source_ingredient_text": "3 apples",
+          "food_ingredient_code": "APPLE"
+        },
+        {
+          "source_ingredient_text": "2 green peppers",
+          "food_ingredient_code": "BELL_PEPPER_GREEN"
+        },
+        {
+          "source_ingredient_text": "3 tomatoes",
+          "food_ingredient_code": "TOMATO"
+        },
+        {
+          "source_ingredient_text": "2 cucumbers",
+          "food_ingredient_code": "CUCUMBER"
+        }
+      ],
+      "meal_type_code": "salad",
+      "curation_role": "SIDE_DISH",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": true,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "Great with grilled meat, fish, and tofu",
+        "source_section": "Summer Recipes / Somali Summer Salad / directions",
+        "curator_rationale": "Those proteins are serving suggestions only and absent from selected salad ingredients."
+      },
+      "diversity_contribution": "Fresh apple, cucumber, tomato and green-pepper salad with olive oil and lemon juice.",
+      "source_times": {
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "chill_minutes": null,
+        "note": "Chilled service specified but no numeric chilling interval; do not invent one."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "BOWL",
+          "evidence_snippet": "large bowl",
+          "source_section": "Summer Recipes / Somali Summer Salad / directions / step1"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "SNAP1-MICROWAVE-BAKED-POTATO",
+      "recipe_name": "Microwave Baked Potato",
+      "source_servings": 1,
+      "source_url": "https://snaped.fns.usda.gov/snap/recipes/Microwave_Baked_Potato.pdf",
+      "source_sha256": "a3ff68c8066be7c5550d49a0eae60c572d2d7ff28427538df88cc29647610256",
+      "source_artifact_name": "data2-snap-microwave-potato.pdf",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "POTATO"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "1 potato",
+          "food_ingredient_code": "POTATO"
+        }
+      ],
+      "meal_type_code": "side",
+      "curation_role": "SIDE_DISH",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": true,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "1 potato",
+        "source_section": "Recipe card PDF p1; duplicated card is one recipe",
+        "curator_rationale": "One plain potato is a side, not a meal anchor. Tomato-sauce suggestion is not a selected ingredient."
+      },
+      "diversity_contribution": "Single whole-potato microwave preparation with an explicit batch-size timing table.",
+      "source_times": {
+        "prep_minutes": null,
+        "cook_minutes_min": 7,
+        "cook_minutes_max": 8,
+        "rest_minutes_min": 1,
+        "rest_minutes_max": 3,
+        "total_minutes": null,
+        "evidence": "PDFp1 one-potato table and step4; batch2and4 cooking ranges retained in candidate v5, not linear scaling."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "MICROWAVE",
+          "evidence_snippet": "Microwave Baked Potato",
+          "source_section": "Recipe card PDF p1; duplicated card is one recipe / recipe title explicitly names cooking appliance; Spanish p2 also names horno microondas"
+        },
+        {
+          "position": 2,
+          "equipment_code": "FORK",
+          "evidence_snippet": "fork or knife",
+          "source_section": "Recipe card PDF p1; duplicated card is one recipe / step1; fork selected"
+        },
+        {
+          "position": 3,
+          "equipment_code": "MICROWAVE_SAFE_PLATE",
+          "evidence_snippet": "microwave safe plate",
+          "source_section": "Recipe card PDF p1; duplicated card is one recipe / step2"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "WIC4-BUTTERNUT-SOUP",
+      "recipe_name": "Butternut Squash Soup",
+      "source_servings": 4,
+      "source_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+      "source_sha256": "ee642490786720348eae5f18170c5dcb26a0c7b22b042fc829ab0dc6ee1e95e8",
+      "source_artifact_name": "data2-wic-butternut-soup.html",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "BUTTERNUT_SQUASH",
+        "MILK_1_PERCENT",
+        "OLIVE_OIL",
+        "SALT"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "1 butternut squash (large - about 3 pounds)",
+          "food_ingredient_code": "BUTTERNUT_SQUASH"
+        },
+        {
+          "source_ingredient_text": "1 teaspoon olive oil (may need a bit more or less depending on the size of the squash)",
+          "food_ingredient_code": "OLIVE_OIL"
+        },
+        {
+          "source_ingredient_text": "1 teaspoon salt",
+          "food_ingredient_code": "SALT"
+        },
+        {
+          "source_ingredient_text": "3 cups milk (the amount depends on how thick or thin you like your soup!)",
+          "food_ingredient_code": "MILK_1_PERCENT"
+        }
+      ],
+      "meal_type_code": "other",
+      "curation_role": "SOUP",
+      "meal_anchor": false,
+      "substantial_one_bowl": true,
+      "pure_side_dish": false,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "Butternut Squash Soup",
+        "source_section": "WIC recipe / instructions and equipment notes",
+        "curator_rationale": "Three-pound squash and three cups milk yield four servings of soup. Counts as soup, not as a protein anchor."
+      },
+      "diversity_contribution": "Roasted butternut squash blended with milk using the selected immersion-blender method.",
+      "source_times": {
+        "total_minutes": 80,
+        "prep_minutes": 20,
+        "cook_minutes": 60,
+        "roast_minutes_min": 40,
+        "roast_minutes_max": 50,
+        "cool_minutes": 10,
+        "oven_fahrenheit": 425,
+        "evidence": "WIC recipe time fields and steps 1/4; keep official 60-minute cook field distinct from roast-stage range."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "OVEN",
+          "evidence_snippet": "oven",
+          "source_section": "WIC recipe / instructions and equipment notes / step1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "BAKING_SHEET",
+          "evidence_snippet": "rimmed baking sheet",
+          "source_section": "WIC recipe / instructions and equipment notes / step1"
+        },
+        {
+          "position": 3,
+          "equipment_code": "CUTTING_BOARD",
+          "evidence_snippet": "cutting board",
+          "source_section": "WIC recipe / instructions and equipment notes / step2 sub-instructions"
+        },
+        {
+          "position": 4,
+          "equipment_code": "KNIFE",
+          "evidence_snippet": "knife",
+          "source_section": "WIC recipe / instructions and equipment notes / step2 sub-instructions"
+        },
+        {
+          "position": 5,
+          "equipment_code": "SPOON",
+          "evidence_snippet": "large spoon (or ice cream scoop)",
+          "source_section": "WIC recipe / instructions and equipment notes / step2 sub-instructions; spoon selected"
+        },
+        {
+          "position": 6,
+          "equipment_code": "POT",
+          "evidence_snippet": "soup pot",
+          "source_section": "WIC recipe / instructions and equipment notes / step5 first blending alternative"
+        },
+        {
+          "position": 7,
+          "equipment_code": "IMMERSION_BLENDER",
+          "evidence_snippet": "immersion blender",
+          "source_section": "WIC recipe / instructions and equipment notes / step5 first blending alternative"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+      "recipe_name": "Overnight Oats - Cinnamon Apple",
+      "source_servings": 1,
+      "source_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+      "source_sha256": "0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+      "source_artifact_name": "data2-wic-overnight-oats.html",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "APPLE",
+        "CINNAMON_GROUND",
+        "MILK_1_PERCENT",
+        "OATS_ROLLED",
+        "YOGURT_PLAIN_LOW_FAT"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "1/3 cup low-fat or non-fat milk (or soy beverage)",
+          "food_ingredient_code": "MILK_1_PERCENT"
+        },
+        {
+          "source_ingredient_text": "1/4 cup oats (rolled or quick)",
+          "food_ingredient_code": "OATS_ROLLED"
+        },
+        {
+          "source_ingredient_text": "1/4 cup plain low-fat or non-fat yogurt",
+          "food_ingredient_code": "YOGURT_PLAIN_LOW_FAT"
+        },
+        {
+          "source_ingredient_text": "1 teaspoon cinnamon",
+          "food_ingredient_code": "CINNAMON_GROUND"
+        },
+        {
+          "source_ingredient_text": "1/2 apple (chopped)",
+          "food_ingredient_code": "APPLE"
+        }
+      ],
+      "meal_type_code": "breakfast",
+      "curation_role": "BREAKFAST",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": false,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "A great make-ahead, healthy, and versatile breakfast",
+        "source_section": "WIC recipe / instructions and equipment notes",
+        "curator_rationale": "Source explicitly breakfast. Selected apple/yogurt/cinnamon variant is valid, but source prose makes all ingredients except oats and liquid optional."
+      },
+      "diversity_contribution": "No-cook overnight rolled-oat breakfast with the source-quantified apple, cinnamon and plain-yogurt options selected.",
+      "source_times": {
+        "prep_minutes": 5,
+        "minimum_chill_minutes": 300
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "RESEALABLE_CONTAINER",
+          "evidence_snippet": "resealable container",
+          "source_section": "WIC recipe / instructions and equipment notes / instruction1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "MEASURING_CUP",
+          "evidence_snippet": "measuring cups and spoons",
+          "source_section": "WIC recipe / instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 3,
+          "equipment_code": "MEASURING_SPOON",
+          "evidence_snippet": "measuring cups and spoons",
+          "source_section": "WIC recipe / instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 4,
+          "equipment_code": "KNIFE",
+          "evidence_snippet": "knife",
+          "source_section": "WIC recipe / instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 5,
+          "equipment_code": "CUTTING_BOARD",
+          "evidence_snippet": "cutting board",
+          "source_section": "WIC recipe / instructions and equipment notes / equipment notes"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [
+        {
+          "source_fact": "Source prose says all except oats and liquid optional. Selected apple, yogurt and cinnamon remain quantified choices, but are source-optional selections.",
+          "review_decision": "PRESERVE_SOURCE_AND_DISTINGUISH_CURATED_SELECTION"
+        }
+      ],
+      "findings": [
+        {
+          "code": "SOURCE_NAME",
+          "detail": "Actual source title is Overnight Oats - Cinnamon Apple; prior with wording was a paraphrase."
+        },
+        {
+          "code": "SOURCE_OPTIONALITY",
+          "detail": "Source prose says all except oats and liquid optional. Selected apple, yogurt and cinnamon remain quantified choices, but are source-optional selections."
+        }
+      ],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "WIC4-ROASTED-CARROTS",
+      "recipe_name": "Roasted Carrots-3 ways",
+      "source_servings": 4,
+      "source_url": "https://wicworks.fns.usda.gov/recipe/roasted-carrots-3-ways",
+      "source_sha256": "a91715ce573ab80385ae897e7966267e7a9c9732c76ac83a4328ed078201a7eb",
+      "source_artifact_name": "data2-wic-roasted-carrots.html",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "BLACK_PEPPER",
+        "CARROT",
+        "GARLIC_POWDER",
+        "OLIVE_OIL",
+        "SALT"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "1 pound carrots (peeled and cut into 2 inch pieces)",
+          "food_ingredient_code": "CARROT"
+        },
+        {
+          "source_ingredient_text": "1 tablespoon vegetable oil",
+          "food_ingredient_code": "OLIVE_OIL"
+        },
+        {
+          "source_ingredient_text": "2 teaspoons garlic powder",
+          "food_ingredient_code": "GARLIC_POWDER"
+        },
+        {
+          "source_ingredient_text": "1 1/2 teaspoons salt",
+          "food_ingredient_code": "SALT"
+        },
+        {
+          "source_ingredient_text": "1 teaspoon black pepper",
+          "food_ingredient_code": "BLACK_PEPPER"
+        }
+      ],
+      "meal_type_code": "side",
+      "curation_role": "SIDE_DISH",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": true,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "this easy side dish",
+        "source_section": "WIC Roasted Carrots-3 ways / standard instructions and equipment notes",
+        "curator_rationale": "Standard variant of the source carrot side; spicy/sweet variations not selected."
+      },
+      "diversity_contribution": "Standard oven-roasted carrot side with garlic powder, salt and pepper; generic vegetable-oil member olive oil selected.",
+      "source_times": {
+        "prep_minutes": 5,
+        "cook_minutes": 25,
+        "total_minutes": 30
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "OVEN",
+          "evidence_snippet": "oven",
+          "source_section": "WIC Roasted Carrots-3 ways / standard instructions and equipment notes / step2"
+        },
+        {
+          "position": 2,
+          "equipment_code": "BAKING_SHEET",
+          "evidence_snippet": "baking tray",
+          "source_section": "WIC Roasted Carrots-3 ways / standard instructions and equipment notes / step3"
+        },
+        {
+          "position": 3,
+          "equipment_code": "VEGETABLE_PEELER",
+          "evidence_snippet": "vegetable peeler",
+          "source_section": "WIC Roasted Carrots-3 ways / standard instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 4,
+          "equipment_code": "KNIFE",
+          "evidence_snippet": "knife",
+          "source_section": "WIC Roasted Carrots-3 ways / standard instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 5,
+          "equipment_code": "CUTTING_BOARD",
+          "evidence_snippet": "cutting board",
+          "source_section": "WIC Roasted Carrots-3 ways / standard instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 6,
+          "equipment_code": "MEASURING_SPOON",
+          "evidence_snippet": "measuring spoons",
+          "source_section": "WIC Roasted Carrots-3 ways / standard instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 7,
+          "equipment_code": "SPATULA",
+          "evidence_snippet": "spatula",
+          "source_section": "WIC Roasted Carrots-3 ways / standard instructions and equipment notes / equipment notes"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [
+        {
+          "code": "SOURCE_NAME",
+          "detail": "Actual source title Roasted Carrots-3 ways; standard version is selection metadata, not the source title."
+        }
+      ],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "SNAP3-GRILLED-FRUIT",
+      "recipe_name": "Grilled Fruit",
+      "source_servings": 3,
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit",
+      "source_sha256": "03269eead24a3965e76c71a9eed6b7b82b9d785845427fa9b8b445aee55cf6f9",
+      "source_artifact_name": "data2-snap-grilled-fruit.html",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "BANANA",
+        "PEACH",
+        "PINEAPPLE"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "1 cup pineapple chunks",
+          "food_ingredient_code": "PINEAPPLE"
+        },
+        {
+          "source_ingredient_text": "1 peach (cubed)",
+          "food_ingredient_code": "PEACH"
+        },
+        {
+          "source_ingredient_text": "1 banana (sliced)",
+          "food_ingredient_code": "BANANA"
+        }
+      ],
+      "meal_type_code": "other",
+      "curation_role": "DESSERT",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": false,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "make a tasty and healthy dessert",
+        "source_section": "SNAP-Ed recipe / directions",
+        "curator_rationale": "Fruit kabobs, not a savory entree."
+      },
+      "diversity_contribution": "Pineapple, peach and banana skewers grilled or broiled according to source doneness cues.",
+      "source_times": {
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "optional_wooden_skewer_soak_minutes": 30,
+        "note": "Cooking doneness cue is source-backed; no invented numeric cooking duration."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "SKEWER",
+          "evidence_snippet": "skewers",
+          "source_section": "SNAP-Ed recipe / directions / assembly direction"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
+      "recipe_name": "Spinach and Cauliflower Smoothie",
+      "source_servings": 2,
+      "source_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+      "source_sha256": "439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6",
+      "source_artifact_name": "data2-wic-spinach-cauliflower-smoothie.html",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "APPLE",
+        "BANANA",
+        "CAULIFLOWER",
+        "MILK_1_PERCENT",
+        "OATS_ROLLED",
+        "SPINACH",
+        "YOGURT_PLAIN_LOW_FAT"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "1 cup milk",
+          "food_ingredient_code": "MILK_1_PERCENT"
+        },
+        {
+          "source_ingredient_text": "1/2 cup plain low-fat or non-fat yogurt (or vanilla flavored)",
+          "food_ingredient_code": "YOGURT_PLAIN_LOW_FAT"
+        },
+        {
+          "source_ingredient_text": "1 banana (peeled and sliced)",
+          "food_ingredient_code": "BANANA"
+        },
+        {
+          "source_ingredient_text": "1 cup spinach",
+          "food_ingredient_code": "SPINACH"
+        },
+        {
+          "source_ingredient_text": "1 cup apple (chopped)",
+          "food_ingredient_code": "APPLE"
+        },
+        {
+          "source_ingredient_text": "1/2 cup cauliflower (frozen)",
+          "food_ingredient_code": "CAULIFLOWER"
+        },
+        {
+          "source_ingredient_text": "1/2 cup oats",
+          "food_ingredient_code": "OATS_ROLLED"
+        }
+      ],
+      "meal_type_code": "other",
+      "curation_role": "SNACK",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": false,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "enjoy as a snack or with a protein food",
+        "source_section": "WIC recipe / instructions and equipment notes",
+        "curator_rationale": "Source specifically a snack or accompaniment to a protein food; no standalone meal claim."
+      },
+      "diversity_contribution": "Blended spinach, frozen cauliflower, apple, banana, oats, milk and plain yogurt snack.",
+      "source_times": {
+        "prep_minutes": 5,
+        "blending_stage_minutes_range": [
+          1,
+          2
+        ]
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "BLENDER",
+          "evidence_snippet": "blender",
+          "source_section": "WIC recipe / instructions and equipment notes / step2"
+        },
+        {
+          "position": 2,
+          "equipment_code": "KNIFE",
+          "evidence_snippet": "knife",
+          "source_section": "WIC recipe / instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 3,
+          "equipment_code": "CUTTING_BOARD",
+          "evidence_snippet": "cutting board",
+          "source_section": "WIC recipe / instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 4,
+          "equipment_code": "MEASURING_CUP",
+          "evidence_snippet": "measuring cups",
+          "source_section": "WIC recipe / instructions and equipment notes / equipment notes"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [
+        {
+          "code": "SOURCE_TEXT_CORRUPTION",
+          "detail": "Source lists 1 cup milk, not 1 cup low-fat or non-fat milk. Restore exact source text. MILK_1_PERCENT remains an explicit curated member of generic milk, not source-imposed fat restriction."
+        }
+      ],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "SNAP4-PEAR-ORANGE-SAUCE",
+      "recipe_name": "Pear in Orange Sauce",
+      "source_servings": 4,
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "source_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "source_artifact_name": "data2-snap-fall.html",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "ORANGE",
+        "PEAR",
+        "SUGAR"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "4 pears (medium)",
+          "food_ingredient_code": "PEAR"
+        },
+        {
+          "source_ingredient_text": "3/4 cup orange juice (100%)",
+          "food_ingredient_code": "ORANGE"
+        },
+        {
+          "source_ingredient_text": "4 teaspoons sugar",
+          "food_ingredient_code": "SUGAR"
+        }
+      ],
+      "meal_type_code": "other",
+      "curation_role": "DESSERT",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": false,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "warm and cozy dessert",
+        "source_section": "Fall Recipes / Pear in Orange Sauce / directions",
+        "curator_rationale": "Steamed pear dessert with orange sauce; not a meal anchor."
+      },
+      "diversity_contribution": "Double-boiler pears served with measured orange-juice and sugar sauce.",
+      "source_times": {
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "total_minutes": null,
+        "pear_cooking_minutes": 15,
+        "sauce_cooking_minutes": 5,
+        "cool_minutes": 5,
+        "evidence": "Fall page directions1–2; no supplied overall total."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "DOUBLE_BOILER",
+          "evidence_snippet": "double boiler",
+          "source_section": "Fall Recipes / Pear in Orange Sauce / directions / step1"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
+      "recipe_name": "Spring Vegetable Saute",
+      "source_servings": 4,
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "source_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "source_artifact_name": "data2-snap-spring.html",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "ASPARAGUS",
+        "BLACK_PEPPER",
+        "CARROT",
+        "DILL_DRIED",
+        "GARLIC",
+        "GREEN_BEANS",
+        "OLIVE_OIL",
+        "ONION_RED",
+        "POTATO",
+        "RADISH",
+        "SALT",
+        "WATER"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "1 teaspoon olive oil",
+          "food_ingredient_code": "OLIVE_OIL"
+        },
+        {
+          "source_ingredient_text": "1/2 cup sweet onion (sliced)",
+          "food_ingredient_code": "ONION_RED"
+        },
+        {
+          "source_ingredient_text": "1 garlic clove (finely chopped)",
+          "food_ingredient_code": "GARLIC"
+        },
+        {
+          "source_ingredient_text": "3 new potatoes (tiny, quartered)",
+          "food_ingredient_code": "POTATO"
+        },
+        {
+          "source_ingredient_text": "3/4 cup carrot (sliced)",
+          "food_ingredient_code": "CARROT"
+        },
+        {
+          "source_ingredient_text": "3/4 cup asparagus pieces",
+          "food_ingredient_code": "ASPARAGUS"
+        },
+        {
+          "source_ingredient_text": "3/4 cup sugar snap peas, or green beans",
+          "food_ingredient_code": "GREEN_BEANS"
+        },
+        {
+          "source_ingredient_text": "1/2 cup radishes (quartered)",
+          "food_ingredient_code": "RADISH"
+        },
+        {
+          "source_ingredient_text": "1/4 teaspoon salt",
+          "food_ingredient_code": "SALT"
+        },
+        {
+          "source_ingredient_text": "1/4 teaspoon black pepper",
+          "food_ingredient_code": "BLACK_PEPPER"
+        },
+        {
+          "source_ingredient_text": "1/2 teaspoon dill (dried)",
+          "food_ingredient_code": "DILL_DRIED"
+        },
+        {
+          "source_ingredient_text": "If the vegetables start to brown, add a Tablespoon or 2 of water.",
+          "food_ingredient_code": "WATER"
+        }
+      ],
+      "meal_type_code": "side",
+      "curation_role": "SIDE_DISH",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": true,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "Spring Vegetable Saute",
+        "source_section": "Spring Recipes / Spring Vegetable Saute / directions",
+        "curator_rationale": "Selected potato/vegetable saute has no primary protein. Keep side semantics; accompanying chicken, fish or tofu are not ingredients."
+      },
+      "diversity_contribution": "Skillet vegetable saute with small potatoes, carrot, asparagus, green beans and radishes.",
+      "source_times": {
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "stage_minutes": [
+          2,
+          1,
+          4,
+          4
+        ],
+        "note": "Four source stage durations preserved; no independent source total duration stated."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "SKILLET",
+          "evidence_snippet": "skillet",
+          "source_section": "Spring Recipes / Spring Vegetable Saute / directions / step1"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "SNAP8-HOMEMADE-MASHED-POTATOES",
+      "recipe_name": "Homemade Mashed Potatoes",
+      "source_servings": 8,
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/homemade-mashed-potatoes",
+      "source_sha256": "e9d0e861134ad04f414ad74cacf8a4d49e78f218fe72105f1a54518267594cdf",
+      "source_artifact_name": "data2-snap-mashed-potatoes.html",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "BLACK_PEPPER",
+        "BUTTER_UNSALTED",
+        "MILK_1_PERCENT",
+        "POTATO",
+        "SALT",
+        "WATER"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "2 pounds potatoes (6 medium)",
+          "food_ingredient_code": "POTATO"
+        },
+        {
+          "source_ingredient_text": "1 cup milk, low-fat",
+          "food_ingredient_code": "MILK_1_PERCENT"
+        },
+        {
+          "source_ingredient_text": "3 tablespoons margarine or butter",
+          "food_ingredient_code": "BUTTER_UNSALTED"
+        },
+        {
+          "source_ingredient_text": "1 teaspoon salt",
+          "food_ingredient_code": "SALT"
+        },
+        {
+          "source_ingredient_text": "1/2 teaspoon pepper (ground)",
+          "food_ingredient_code": "BLACK_PEPPER"
+        },
+        {
+          "source_ingredient_text": "Put the potatoes in a medium saucepan with enough water to cover them.",
+          "food_ingredient_code": "WATER"
+        }
+      ],
+      "meal_type_code": "side",
+      "curation_role": "SIDE_DISH",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": true,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "Homemade Mashed Potatoes",
+        "source_section": "SNAP-Ed recipe / directions",
+        "curator_rationale": "Plain potatoes with milk and butter are a side, not an anchor."
+      },
+      "diversity_contribution": "Boiled and mashed potatoes with source-quantified milk, butter, salt and pepper.",
+      "source_times": {
+        "prep_minutes": null,
+        "cook_minutes": 15,
+        "total_minutes": null,
+        "evidence": "Directions step4; 15 minutes or until tender."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "SAUCEPAN",
+          "evidence_snippet": "medium saucepan",
+          "source_section": "SNAP-Ed recipe / directions / step1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "FORK",
+          "evidence_snippet": "fork or potato masher",
+          "source_section": "SNAP-Ed recipe / directions / mashing step; fork selected"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [
+        {
+          "source_fact": "Cooking water is enough to cover, not a numeric volume; it is process water, not an invented quantitative ingredient.",
+          "review_decision": "PRESERVE_UNQUANTIFIED_PROCESS_WATER_NO_INVENTED_AMOUNT"
+        }
+      ],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "SNAP8-APPLE-CARROT-SOUP",
+      "recipe_name": "Apple Carrot Soup",
+      "source_servings": 8,
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+      "source_sha256": "1cc2ed9ddb3253b4a9a5ed9aa6609184e7381035977d00a542a00239f8261258",
+      "source_artifact_name": "data2-snap-apple-carrot-soup.html",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "APPLE",
+        "CARROT",
+        "GINGER",
+        "PORK_LOIN",
+        "SALT",
+        "WATER"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "1 pound pork (lean, cut into chunks)",
+          "food_ingredient_code": "PORK_LOIN"
+        },
+        {
+          "source_ingredient_text": "4 apples (with skin, cored and quartered)",
+          "food_ingredient_code": "APPLE"
+        },
+        {
+          "source_ingredient_text": "4 carrots (large, peeled and cut into chunks)",
+          "food_ingredient_code": "CARROT"
+        },
+        {
+          "source_ingredient_text": "4 slices ginger",
+          "food_ingredient_code": "GINGER"
+        },
+        {
+          "source_ingredient_text": "1/2 teaspoon salt",
+          "food_ingredient_code": "SALT"
+        },
+        {
+          "source_ingredient_text": "20 cups water",
+          "food_ingredient_code": "WATER"
+        }
+      ],
+      "meal_type_code": "other",
+      "curation_role": "SOUP",
+      "meal_anchor": false,
+      "substantial_one_bowl": true,
+      "pure_side_dish": false,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [
+        "PORK_LOIN"
+      ],
+      "role_evidence": {
+        "source_words": "this pork, apple, and carrot soup",
+        "source_section": "SNAP-Ed recipe / directions",
+        "curator_rationale": "Source includes one pound lean pork across eight soup servings. Preserve meat content; conservatively count as soup but not use the dilute serving to pad meal-anchor threshold."
+      },
+      "diversity_contribution": "Long-simmer pork, apple and carrot soup with ginger; not a vegetarian soup.",
+      "source_times": {
+        "prep_minutes": null,
+        "cook_minutes_min": 180,
+        "cook_minutes_max": 240,
+        "total_minutes": null,
+        "evidence": "Directions: simmer 3–4 hours, until reduced to 8 cups."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "POT",
+          "evidence_snippet": "large pot",
+          "source_section": "SNAP-Ed recipe / directions / cooking directions"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [
+        {
+          "code": "MISLEADING_DIVERSITY_SUMMARY",
+          "detail": "Prior vegetable/fruit-only description omitted actual source pork. PORK_LOIN selection is supported by 1 pound pork (lean, cut into chunks); distinguish from Local Harvest."
+        }
+      ],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "SNAP6-WALDORF-SALAD",
+      "recipe_name": "Waldorf Salad",
+      "source_servings": 6,
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "source_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "source_artifact_name": "data2-snap-fall.html",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "APPLE",
+        "CELERY",
+        "LEMON",
+        "RAISINS_GOLDEN",
+        "SUGAR",
+        "WALNUTS_RAW",
+        "YOGURT_GREEK_NONFAT"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "1/4 cup walnuts (chopped)",
+          "food_ingredient_code": "WALNUTS_RAW"
+        },
+        {
+          "source_ingredient_text": "2 apples (cored and diced)",
+          "food_ingredient_code": "APPLE"
+        },
+        {
+          "source_ingredient_text": "1 cup celery (diced)",
+          "food_ingredient_code": "CELERY"
+        },
+        {
+          "source_ingredient_text": "1/2 cup raisins",
+          "food_ingredient_code": "RAISINS_GOLDEN"
+        },
+        {
+          "source_ingredient_text": "1/4 cup plain yogurt, non-fat",
+          "food_ingredient_code": "YOGURT_GREEK_NONFAT"
+        },
+        {
+          "source_ingredient_text": "1/2 teaspoon sugar",
+          "food_ingredient_code": "SUGAR"
+        },
+        {
+          "source_ingredient_text": "1 teaspoon lemon juice",
+          "food_ingredient_code": "LEMON"
+        }
+      ],
+      "meal_type_code": "salad",
+      "curation_role": "SIDE_DISH",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": true,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "Waldorf Salad with walnuts and crunchy fall apples",
+        "source_section": "Fall Recipes / Waldorf Salad / directions",
+        "curator_rationale": "Small fruit/celery/nut salad with yogurt dressing, not a primary-protein entree."
+      },
+      "diversity_contribution": "Apple, celery and raisin salad with source oven-toasted walnuts and plain nonfat yogurt dressing.",
+      "source_times": {
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "total_minutes": null,
+        "nut_toasting_minutes_min": 12,
+        "nut_toasting_minutes_max": 15,
+        "evidence": "Fall page step2; nut-toasting stage, not a published total."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "OVEN",
+          "evidence_snippet": "oven",
+          "source_section": "Fall Recipes / Waldorf Salad / directions / step1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "BAKING_SHEET",
+          "evidence_snippet": "baking sheet",
+          "source_section": "Fall Recipes / Waldorf Salad / directions / step2"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "SNAP4-BROWN-RICE-PILAF",
+      "recipe_name": "Brown Rice Pilaf",
+      "source_servings": 4,
+      "source_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+      "source_sha256": "f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281",
+      "source_artifact_name": "data2-snap-valentines.html",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "ALMONDS_RAW",
+        "BLACK_PEPPER",
+        "GARLIC_POWDER",
+        "PARSLEY_DRIED",
+        "RICE_BROWN",
+        "WATER"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "1 1/2 cups brown rice",
+          "food_ingredient_code": "RICE_BROWN"
+        },
+        {
+          "source_ingredient_text": "3 cups water",
+          "food_ingredient_code": "WATER"
+        },
+        {
+          "source_ingredient_text": "1/4 cup almonds (chopped)",
+          "food_ingredient_code": "ALMONDS_RAW"
+        },
+        {
+          "source_ingredient_text": "1 teaspoon parsley (dried)",
+          "food_ingredient_code": "PARSLEY_DRIED"
+        },
+        {
+          "source_ingredient_text": "1/2 teaspoon garlic powder",
+          "food_ingredient_code": "GARLIC_POWDER"
+        },
+        {
+          "source_ingredient_text": "1/4 teaspoon black pepper",
+          "food_ingredient_code": "BLACK_PEPPER"
+        }
+      ],
+      "meal_type_code": "side",
+      "curation_role": "SIDE_DISH",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": true,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "Parsley, almonds, and spices spruce up this brown rice dish",
+        "source_section": "Valentine's Day menu / Brown Rice Pilaf / directions",
+        "curator_rationale": "Grain side in the Valentine menu, not a standalone grain/vegetable entree."
+      },
+      "diversity_contribution": "Rice-cooker brown rice with almonds, parsley and measured seasonings.",
+      "source_times": {
+        "prep_minutes": null,
+        "cook_minutes": 30,
+        "total_minutes": null,
+        "evidence": "Rice cooker direction: about30 minutes, until water evaporates."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "RICE_COOKER",
+          "evidence_snippet": "rice cooker",
+          "source_section": "Valentine's Day menu / Brown Rice Pilaf / directions / cooking direction"
+        },
+        {
+          "position": 2,
+          "equipment_code": "FORK",
+          "evidence_snippet": "fork",
+          "source_section": "Valentine's Day menu / Brown Rice Pilaf / directions / fluffing direction"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "SNAP5-KALE-NUTS-RAISINS",
+      "recipe_name": "Kale with Nuts and Raisins",
+      "source_servings": 5,
+      "source_url": "https://snaped.fns.usda.gov/node/1861",
+      "source_sha256": "7c2bb840618e0dfbe372e9ecdb697ad59d2fab36e0fbf07cabe347a93ea6a1a0",
+      "source_artifact_name": "data2-snap-kale-nuts.html",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "GARLIC",
+        "KALE",
+        "RAISINS_GOLDEN",
+        "SUNFLOWER_OIL",
+        "WALNUTS_RAW"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "1/4 cup nuts, chopped",
+          "food_ingredient_code": "WALNUTS_RAW"
+        },
+        {
+          "source_ingredient_text": "2 tablespoons vegetable oil",
+          "food_ingredient_code": "SUNFLOWER_OIL"
+        },
+        {
+          "source_ingredient_text": "2 cloves garlic, chopped",
+          "food_ingredient_code": "GARLIC"
+        },
+        {
+          "source_ingredient_text": "4 cups kale, stems removed and chopped (1 bunch)",
+          "food_ingredient_code": "KALE"
+        },
+        {
+          "source_ingredient_text": "1/2 cup raisins",
+          "food_ingredient_code": "RAISINS_GOLDEN"
+        }
+      ],
+      "meal_type_code": "side",
+      "curation_role": "SIDE_DISH",
+      "meal_anchor": false,
+      "substantial_one_bowl": false,
+      "pure_side_dish": true,
+      "primary_protein_family": null,
+      "protein_evidence_codes": [],
+      "selected_protein_concepts": [],
+      "role_evidence": {
+        "source_words": "Kale with Nuts and Raisins",
+        "source_section": "SNAP-Ed node1861 / directions",
+        "curator_rationale": "Four cups kale and a quarter cup nuts across five servings remain a leaf side, not a nut-protein anchor."
+      },
+      "diversity_contribution": "Leafy kale side with oven-toasted walnuts and raisins, then skillet-cooked.",
+      "source_times": {
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "total_minutes": null,
+        "nut_toasting_minutes": 5,
+        "kale_cooking_minutes": 4,
+        "final_cooking_minutes": 1,
+        "evidence": "Directions steps3,5,6; do not infer non-overlap or total."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "OVEN",
+          "evidence_snippet": "oven",
+          "source_section": "SNAP-Ed node1861 / directions / preheating direction"
+        },
+        {
+          "position": 2,
+          "equipment_code": "BAKING_SHEET",
+          "evidence_snippet": "baking sheet",
+          "source_section": "SNAP-Ed node1861 / directions / nut toasting direction"
+        },
+        {
+          "position": 3,
+          "equipment_code": "SKILLET",
+          "evidence_snippet": "frying pan",
+          "source_section": "SNAP-Ed node1861 / directions / saute direction"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
+      "recipe_name": "Braised Chicken Thighs with Spinach",
+      "source_servings": 4,
+      "source_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
+      "source_sha256": "d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+      "source_artifact_name": "data2-snap-braised-chicken.pdf",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "BLACK_PEPPER",
+        "CHICKEN_THIGH",
+        "GARLIC",
+        "ONION_YELLOW",
+        "ROSEMARY_DRIED",
+        "SALT",
+        "SPINACH",
+        "SUNFLOWER_OIL",
+        "THYME_DRIED",
+        "WATER"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "4 (6-ounce) chicken thighs, bone-in, skin removed",
+          "food_ingredient_code": "CHICKEN_THIGH"
+        },
+        {
+          "source_ingredient_text": "1 teaspoon oil",
+          "food_ingredient_code": "SUNFLOWER_OIL"
+        },
+        {
+          "source_ingredient_text": "½ teaspoon salt",
+          "food_ingredient_code": "SALT"
+        },
+        {
+          "source_ingredient_text": "½ teaspoon black pepper",
+          "food_ingredient_code": "BLACK_PEPPER"
+        },
+        {
+          "source_ingredient_text": "1 small onion, peeled, chopped",
+          "food_ingredient_code": "ONION_YELLOW"
+        },
+        {
+          "source_ingredient_text": "3 garlic cloves, peeled, minced",
+          "food_ingredient_code": "GARLIC"
+        },
+        {
+          "source_ingredient_text": "½ teaspoon dried thyme",
+          "food_ingredient_code": "THYME_DRIED"
+        },
+        {
+          "source_ingredient_text": "½ teaspoon dried rosemary",
+          "food_ingredient_code": "ROSEMARY_DRIED"
+        },
+        {
+          "source_ingredient_text": "1 cup water",
+          "food_ingredient_code": "WATER"
+        },
+        {
+          "source_ingredient_text": "1 10-ounce package frozen or 1 bunch fresh spinach",
+          "food_ingredient_code": "SPINACH"
+        }
+      ],
+      "meal_type_code": "main",
+      "curation_role": "MAIN_DISH",
+      "meal_anchor": true,
+      "substantial_one_bowl": false,
+      "pure_side_dish": false,
+      "primary_protein_family": "POULTRY",
+      "protein_evidence_codes": [
+        "CHICKEN_THIGH"
+      ],
+      "selected_protein_concepts": [
+        "CHICKEN_THIGH"
+      ],
+      "role_evidence": {
+        "source_words": "four 4-ounce servings",
+        "source_section": "Food and Physical Activity Checklist handout p2",
+        "curator_rationale": "Four bone-in chicken thighs are the central food; selected fresh spinach is a source-explicit alternative."
+      },
+      "diversity_contribution": "Bone-in chicken thighs browned then braised with herbs and fresh spinach.",
+      "source_times": {
+        "prep_minutes": null,
+        "cook_minutes": 70,
+        "total_minutes": null,
+        "chicken_browning_minutes_per_side": 8,
+        "onion_cooking_minutes": 5,
+        "braise_minutes": 30,
+        "selected_fresh_spinach_minutes": 2,
+        "evidence": "PDFp2 header says1hour10minutes. Retain header despite selected fresh alternative2minutes vs frozen10; do not silently recompute header."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "SKILLET",
+          "evidence_snippet": "skillet",
+          "source_section": "Food and Physical Activity Checklist handout p2 / step1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "PLATE",
+          "evidence_snippet": "dinner plate",
+          "source_section": "Food and Physical Activity Checklist handout p2 / step1 holding partially cooked chicken; not serving-only"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [
+        {
+          "source_fact": "Salt and pepper listed but directions omit application; no invented source step.",
+          "review_decision": "PRESERVE_SOURCE_NO_INVENTED_CONVERSION_OR_STEP",
+          "scope": "Source evidence is retained verbatim for technical curation. No purchase-weight conversion or missing source step is generated by DATA2; later runtime normalization must review this limitation."
+        }
+      ],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    },
+    {
+      "recipe_source_id": "SNAP4-DILLED-FISH-FILLETS",
+      "recipe_name": "Dilled Fish Fillets",
+      "source_servings": 4,
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
+      "source_sha256": "43d44c84d7c007a0c32906210b13212ffb43fb7a62312e9fb43c819f8a8a63a3",
+      "source_artifact_name": "data2-snap-dilled-fish.html",
+      "actual_hash_rechecked": true,
+      "review_status": "PRIMARY_SOURCE_RECHECKED_CORRECTED_FACTS",
+      "review_dimensions": [
+        "recipe_name",
+        "source_servings",
+        "selected_ingredient_concepts",
+        "meal_role",
+        "diversity_contribution",
+        "source_times",
+        "equipment_evidence",
+        "source_limitations"
+      ],
+      "review_method": "Read actual downloaded primary source text and recipe-specific supporting directions; compare selected rows and current metadata. Local Harvest PDF additionally rendered and visually inspected in this pass.",
+      "selected_ingredient_codes": [
+        "COD_ATLANTIC",
+        "DILL_DRIED",
+        "LEMON",
+        "SALT"
+      ],
+      "selected_source_rows": [
+        {
+          "source_ingredient_text": "1 pound haddock or cod fillets (frozen)",
+          "food_ingredient_code": "COD_ATLANTIC"
+        },
+        {
+          "source_ingredient_text": "1 tablespoon lemon juice",
+          "food_ingredient_code": "LEMON"
+        },
+        {
+          "source_ingredient_text": "1/8 teaspoon dill weed (dried)",
+          "food_ingredient_code": "DILL_DRIED"
+        },
+        {
+          "source_ingredient_text": "1/8 teaspoon salt",
+          "food_ingredient_code": "SALT"
+        }
+      ],
+      "meal_type_code": "main",
+      "curation_role": "MAIN_DISH",
+      "meal_anchor": true,
+      "substantial_one_bowl": false,
+      "pure_side_dish": false,
+      "primary_protein_family": "FISH",
+      "protein_evidence_codes": [
+        "COD_ATLANTIC"
+      ],
+      "selected_protein_concepts": [
+        "COD_ATLANTIC"
+      ],
+      "role_evidence": {
+        "source_words": "a quick, weeknight seafood dinner",
+        "source_section": "SNAP-Ed recipe / Microwave Method",
+        "curator_rationale": "One pound fish in four portions is a source-described dinner main; cod selected from explicit haddock/cod alternative."
+      },
+      "diversity_contribution": "Frozen cod fillets cooked by the source microwave method with measured dill and lemon juice.",
+      "source_times": {
+        "prep_minutes": null,
+        "cook_minutes": 6,
+        "total_minutes": null,
+        "microwave_stages_minutes": [
+          3,
+          3
+        ],
+        "thaw_minutes": null,
+        "evidence": "Selected Microwave Method steps3–4; microwave-thaw alternative has no numeric duration."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "MICROWAVE",
+          "evidence_snippet": "microwave oven",
+          "source_section": "SNAP-Ed recipe / Microwave Method / step1 microwave-thaw alternative selected"
+        },
+        {
+          "position": 2,
+          "equipment_code": "BAKING_PAN",
+          "evidence_snippet": "glass-baking dish",
+          "source_section": "SNAP-Ed recipe / Microwave Method / step2"
+        },
+        {
+          "position": 3,
+          "equipment_code": "FORK",
+          "evidence_snippet": "fork",
+          "source_section": "SNAP-Ed recipe / Microwave Method / step4 doneness test"
+        }
+      ],
+      "equipment_review": "Every retained normalized code cross-checked against actual named vessel/tool/appliance in selected recipe or recipe-specific skill directions; optional unselected and serving-only items remain excluded. No equipment inferred from culinary convention.",
+      "source_limits": [],
+      "findings": [],
+      "rights_review_result": "No newly exposed third-party restrictive notice in reviewed selected recipe section. Preserve existing narrow accepted direct-FNS project risk posture, attribution and source hashes; no blanket public-domain or unrestricted commercial claim."
+    }
+  ]
+}

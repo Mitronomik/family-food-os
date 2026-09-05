@@ -1,0 +1,271 @@
+{
+  "schema_version": 2,
+  "checked_at": "2026-09-05",
+  "status": "PARTIAL_RESEARCH_NOT_ACCEPTED_CORPUS",
+  "method": "Supersedes the active-store requirement in research-magnit.json. Current indexed official SPB product cards count without a live selected-shop session. No expired flyer or other-city card counts.",
+  "clarification_urls": [
+    "https://github.com/Mitronomik/family-food-os/issues/12#issuecomment-5550629546",
+    "https://github.com/Mitronomik/family-food-os/pull/13#pullrequestreview-5120531004"
+  ],
+  "observations": [
+    {
+      "observation_id": "MAGNIT-V2-001",
+      "food_ingredient_code": "CARROT",
+      "purchase_concept": "fresh carrot",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "store_or_region_wording": "г Санкт-Петербург, пр-кт Малый В.О., д 67 к 1 литера а",
+      "evidence_url": "https://magnit.ru/product/9072651201-morkov?shopCode=782592&shopType=1",
+      "region_evidence_url": "https://magnit.ru/product/9072651201-morkov?shopCode=782592&shopType=1",
+      "observed_product_wording": "Морковь; Морковь свежая",
+      "checked_at": "2026-09-05",
+      "evidence_method": "CURRENT_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "index_crawl_recency": "2 months ago",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary unflavoured staple/produce, listed by the baseline grocery chain itself; no specialist storefront required.",
+      "notes": "Catalogue-level market compatibility only, not a current-stock assertion. Preparation and package sizes do not create separate retail requirements."
+    },
+    {
+      "observation_id": "MAGNIT-V2-002",
+      "food_ingredient_code": "ONION_YELLOW",
+      "purchase_concept": "yellow onion",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "store_or_region_wording": "г Санкт-Петербург, пл Ржевская, д 1 литера а",
+      "evidence_url": "https://magnit.ru/product/9072651204-luk_repchatyy?shopCode=781202&shopType=1",
+      "region_evidence_url": "https://magnit.ru/product/9072651204-luk_repchatyy?shopCode=781202&shopType=1",
+      "observed_product_wording": "Лук репчатый; с золотистой сухой шелухой",
+      "checked_at": "2026-09-05",
+      "evidence_method": "CURRENT_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "index_crawl_recency": "4 months ago",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary unflavoured staple/produce, listed by the baseline grocery chain itself; no specialist storefront required.",
+      "notes": "Catalogue-level market compatibility only, not a current-stock assertion. Preparation and package sizes do not create separate retail requirements."
+    },
+    {
+      "observation_id": "MAGNIT-V2-003",
+      "food_ingredient_code": "GARLIC",
+      "purchase_concept": "fresh garlic",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "store_or_region_wording": "г Санкт-Петербург, пр-кт Энергетиков, д 26 литера а",
+      "evidence_url": "https://magnit.ru/product/3412060011-chesnok?shopCode=780032&shopType=1",
+      "region_evidence_url": "https://magnit.ru/product/3412060011-chesnok?shopCode=780032&shopType=1",
+      "observed_product_wording": "Чеснок; Свежий, крупный чеснок со светлой шелухой",
+      "checked_at": "2026-09-05",
+      "evidence_method": "CURRENT_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "index_crawl_recency": "last month",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary unflavoured staple/produce, listed by the baseline grocery chain itself; no specialist storefront required.",
+      "notes": "Catalogue-level market compatibility only, not a current-stock assertion. Preparation and package sizes do not create separate retail requirements."
+    },
+    {
+      "observation_id": "MAGNIT-V2-004",
+      "food_ingredient_code": "EGG",
+      "purchase_concept": "shell chicken egg",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "store_or_region_wording": "Санкт-Петербург, Стрельна п, Санкт-Петербургское ш, 84, литера А, пом 1Н",
+      "evidence_url": "https://magnit.ru/product/2047000007-yaytso-stolovoe-s2-10sht-v-assortimente?shopCode=780040&shopType=1",
+      "region_evidence_url": "https://magnit.ru/product/2047000007-yaytso-stolovoe-s2-10sht-v-assortimente?shopCode=780040&shopType=1",
+      "observed_product_wording": "Куриное яйцо С2 10шт в ассортименте",
+      "checked_at": "2026-09-05",
+      "evidence_method": "CURRENT_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "index_crawl_recency": "3 weeks ago",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary unflavoured staple/produce, listed by the baseline grocery chain itself; no specialist storefront required.",
+      "notes": "Catalogue-level market compatibility only, not a current-stock assertion. Preparation and package sizes do not create separate retail requirements."
+    },
+    {
+      "observation_id": "MAGNIT-V2-005",
+      "food_ingredient_code": "BULGUR",
+      "purchase_concept": "dry bulgur",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "store_or_region_wording": "Санкт-Петербург, Пушкин, ул Полковая, 1/25, литерА, помещ. 8-Н",
+      "evidence_url": "https://magnit.ru/product/1000390742-magnit_bulgur_450g_poliet_up?shopCode=448223&shopType=1",
+      "region_evidence_url": "https://magnit.ru/product/1000390742-magnit_bulgur_450g_poliet_up?shopCode=448223&shopType=1",
+      "observed_product_wording": "Крупа Булгур Premiere of Taste 450г",
+      "checked_at": "2026-09-05",
+      "evidence_method": "CURRENT_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "index_crawl_recency": "2 months ago",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary unflavoured staple/produce, listed by the baseline grocery chain itself; no specialist storefront required.",
+      "notes": "Catalogue-level market compatibility only, not a current-stock assertion. Preparation and package sizes do not create separate retail requirements."
+    },
+    {
+      "observation_id": "MAGNIT-V2-006",
+      "food_ingredient_code": "YOGURT_GREEK_LOW_FAT",
+      "purchase_concept": "plain low-fat Greek yogurt",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "store_or_region_wording": "г Санкт-Петербург, ул Ультрамариновая, д 8 стр 1",
+      "evidence_url": "https://magnit.ru/product/1000264408-savushkin_yogurt_grecheskiy_teos_natur_2_250g_pl_st_6?shopCode=494499&shopType=1",
+      "region_evidence_url": "https://magnit.ru/product/1000264408-savushkin_yogurt_grecheskiy_teos_natur_2_250g_pl_st_6?shopCode=494499&shopType=1",
+      "observed_product_wording": "Йогурт Савушкин Греческий Teos 2% 250г; Без вкусовой добавки",
+      "checked_at": "2026-09-05",
+      "evidence_method": "CURRENT_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "index_crawl_recency": "last week",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary unflavoured staple/produce, listed by the baseline grocery chain itself; no specialist storefront required.",
+      "notes": "Catalogue-level market compatibility only, not a current-stock assertion. Preparation and package sizes do not create separate retail requirements."
+    },
+    {
+      "observation_id": "MAGNIT-V2-007",
+      "food_ingredient_code": "CABBAGE_GREEN",
+      "purchase_concept": "fresh white cabbage",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "store_or_region_wording": "г Санкт-Петербург, пр-кт Непокорённых, д 16 к 1 литера а",
+      "evidence_url": "https://magnit.ru/product/9072651205-kapusta_belokochannaya_1kg?shopCode=279915&shopType=1",
+      "region_evidence_url": "https://magnit.ru/product/9072651205-kapusta_belokochannaya_1kg?shopCode=279915&shopType=1",
+      "observed_product_wording": "Капуста белокочанная",
+      "checked_at": "2026-09-05",
+      "evidence_method": "CURRENT_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "index_crawl_recency": "2 weeks ago",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary unflavoured staple/produce, listed by the baseline grocery chain itself; no specialist storefront required.",
+      "notes": "Catalogue-level market compatibility only, not a current-stock assertion. Preparation and package sizes do not create separate retail requirements."
+    },
+    {
+      "observation_id": "MAGNIT-V2-008",
+      "food_ingredient_code": "BEET",
+      "purchase_concept": "fresh beetroot",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "store_or_region_wording": "г Санкт-Петербург, пр-кт Тореза, д 82 литера а",
+      "evidence_url": "https://magnit.ru/product/3412070011-svekla?shopCode=784170&shopType=1",
+      "region_evidence_url": "https://magnit.ru/product/3412070011-svekla?shopCode=784170&shopType=1",
+      "observed_product_wording": "Свекла",
+      "checked_at": "2026-09-05",
+      "evidence_method": "CURRENT_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "index_crawl_recency": "2 weeks ago",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary unflavoured staple/produce, listed by the baseline grocery chain itself; no specialist storefront required.",
+      "notes": "Catalogue-level market compatibility only, not a current-stock assertion. Preparation and package sizes do not create separate retail requirements."
+    },
+    {
+      "observation_id": "MAGNIT-V2-009",
+      "food_ingredient_code": "BELL_PEPPER_RED",
+      "purchase_concept": "fresh red sweet pepper",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "store_or_region_wording": "Санкт-Петербург, Лыжный пер, 8,к. 1 литер А",
+      "evidence_url": "https://magnit.ru/product/1444282020-perets_krasnyy?shopCode=690101&shopType=1",
+      "region_evidence_url": "https://magnit.ru/product/1444282020-perets_krasnyy?shopCode=690101&shopType=1",
+      "observed_product_wording": "Перец красный; плотная красная кожица скрывает сладковатую мякоть",
+      "checked_at": "2026-09-05",
+      "evidence_method": "CURRENT_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "index_crawl_recency": "4 months ago",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary unflavoured staple/produce, listed by the baseline grocery chain itself; no specialist storefront required.",
+      "notes": "Catalogue-level market compatibility only, not a current-stock assertion. Preparation and package sizes do not create separate retail requirements."
+    },
+    {
+      "observation_id": "MAGNIT-V2-010",
+      "food_ingredient_code": "TOMATO",
+      "purchase_concept": "fresh tomato",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "store_or_region_wording": "г Санкт-Петербург, пр-кт Дачный, д 17 к 2 литера а",
+      "evidence_url": "https://magnit.ru/product/3412070012-tomaty?shopCode=161924&shopType=1",
+      "region_evidence_url": "https://magnit.ru/product/3412070012-tomaty?shopCode=161924&shopType=1",
+      "observed_product_wording": "Томаты",
+      "checked_at": "2026-09-05",
+      "evidence_method": "CURRENT_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "index_crawl_recency": "2 weeks ago",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary unflavoured staple/produce, listed by the baseline grocery chain itself; no specialist storefront required.",
+      "notes": "Catalogue-level market compatibility only, not a current-stock assertion. Preparation and package sizes do not create separate retail requirements."
+    },
+    {
+      "observation_id": "MAGNIT-V2-011",
+      "food_ingredient_code": "CUCUMBER",
+      "purchase_concept": "fresh cucumber",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "store_or_region_wording": "г Санкт-Петербург, ул Гаванская, д 34 литера а",
+      "evidence_url": "https://magnit.ru/product/8000024719-ogurtsy_botanika_420g?shopCode=281798&shopType=1",
+      "region_evidence_url": "https://magnit.ru/product/8000024719-ogurtsy_botanika_420g?shopCode=281798&shopType=1",
+      "observed_product_wording": "Огурцы Ботаника 420г; Свежие огурцы с гладкой кожицей",
+      "checked_at": "2026-09-05",
+      "evidence_method": "CURRENT_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "index_crawl_recency": "4 months ago",
+      "status": "AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary unflavoured staple/produce, listed by the baseline grocery chain itself; no specialist storefront required.",
+      "notes": "Catalogue-level market compatibility only, not a current-stock assertion. Preparation and package sizes do not create separate retail requirements."
+    }
+  ],
+  "searches": [
+    {
+      "queries": [
+        "site:magnit.ru/product/ \"Анчо\"",
+        "site:magnit.ru/product/ \"кукуруза\" \"без соли\"",
+        "site:magnit.ru/product/ \"фасоль\" \"без соли\"",
+        "site:magnit.ru/product/ \"бульон\" \"соли\""
+      ],
+      "codes": [
+        "ANCHO_CHILI_POWDER",
+        "CORN_CREAM_STYLE_NO_SALT",
+        "KIDNEY_BEANS_CANNED_LOW_SODIUM",
+        "PINTO_BEANS_CANNED_LOW_SODIUM",
+        "GREEN_BEANS_CANNED_NO_SALT",
+        "BEEF_BROTH_LOW_SODIUM",
+        "CHICKEN_BROTH_LOW_SODIUM"
+      ],
+      "result": "UNCERTAIN",
+      "notes": "No qualifying exact-form result. Broth search gives salted powder/instant noodles and other-city titles; not ready low-sodium liquid broth. Empty exact searches are not evidence of stock absence."
+    },
+    {
+      "queries": [
+        "site:magnit.ru \"чеддер\" \"легкий\"",
+        "site:magnit.ru \"сок\" \"концентрированный\" \"апельсиновый\"",
+        "site:magnit.ru/product/ \"пимиенто\" OR \"пименто\"",
+        "site:magnit.ru/product/ \"соус соевый\" \"пониженным\""
+      ],
+      "codes": [
+        "CHEESE_CHEDDAR_REDUCED_FAT",
+        "ORANGE_JUICE_CONCENTRATE",
+        "PIMIENTO_CANNED",
+        "SOY_SAUCE_LOW_SODIUM"
+      ],
+      "result": "UNCERTAIN",
+      "notes": "No qualifying exact-form result. Reconstituted drinking orange juice is not frozen concentrate; ingredient-list mentions of concentrate do not evidence retail concentrate."
+    },
+    {
+      "queries": [
+        "site:magnit.ru/product/ \"Молоко\" \"1%\" -творог -каша -вареники",
+        "site:magnit.ru/product/ \"молоко\" \"0.5\"",
+        "site:magnit.ru/product/ \"яичный\" \"белок\" -состав -шоколад -зефир"
+      ],
+      "codes": [
+        "MILK_1_PERCENT",
+        "MILK_SKIM",
+        "EGG_WHITE",
+        "EGG"
+      ],
+      "result": "UNCERTAIN",
+      "notes": "No qualifying 1%/skim/frozen-whole-egg or liquid-white observation. Milk0.5% results explicitly Volgograd/Krasnodar; desserts mentioning egg white are wrong purchase concept. Separate accepted shell egg record does not clear frozen whole egg."
+    }
+  ],
+  "excluded_observations": [
+    {
+      "food_ingredient_code": "ORANGE_JUICE_CONCENTRATE",
+      "evidence_url": "https://magnit.ru/product/1000088652-yan_sok_apelsin_neosv_s_myak_0_93l_st_but_armeniya_si",
+      "observed_product_wording": "Сок Yan Апельсиновый восстановленный 930мл",
+      "reason": "Wrong form: drinking juice; explicitly Krasnodar. Not retail frozen concentrate."
+    },
+    {
+      "food_ingredient_code": "MILK_SKIM",
+      "evidence_url": "https://magnit.ru/product/1000207058-selo_zelenoe_moloko_pitevoe_ultrapasterizovannoe_0_5_950ml_tetra_pak_oao_milkom_proizvodstvennaya_pl?shopCode=993406&shopType=6",
+      "observed_product_wording": "Молоко Село Зеленое ультрапастеризованное 0.5% 950мл",
+      "reason": "Explicitly Volgograd. No claim that0.5% is exact skim equivalence."
+    },
+    {
+      "food_ingredient_code": "BEEF_BROTH_LOW_SODIUM",
+      "evidence_url": "https://magnit.ru/product/1000498401-rollton_bulon_govyazhiy_domashniy_90g_doy_pak",
+      "observed_product_wording": "Бульон Роллтон говяжий Домашний 90г",
+      "reason": "Salted powder not source ready low-sodium broth; explicitly Krasnodar."
+    }
+  ]
+}

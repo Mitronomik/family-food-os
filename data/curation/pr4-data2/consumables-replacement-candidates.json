@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-05",
+  "scope": "Bounded replacement research after the required, unquantified pan-release spray in Honey Lime Chicken and Local Harvest Bake was confirmed. This ledger is not a production seed and does not by itself mark a candidate accepted.",
+  "method": "Review ingredient list, every direction, notes, variants, serving suggestions and consumed processing materials. Preserve source quantities without conversions. Process water that is explicitly drained is not recipe-retained water. Optional garnishes and alternate versions may be omitted only when the source makes that choice explicit.",
+  "rights_method": "Retain the approved narrow direct-FNS project risk posture, attribution, exact source artifact/hash and source notices. No assertion of federal employee authorship, blanket public domain or unrestricted commercial/derivative rights. Do not import images, logos or trademarks. Actual artifact review remains required before final acceptance.",
+  "candidates": [
+    {
+      "recipe_name": "Turkey Patties",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/turkey-patties",
+      "source_collection": "America's Harvest — Budget-friendly recipes — Main dishes, direct FNS-hosted HTML",
+      "source_attribution": "Quick and Healthy Meals: Tips and Tools for Planning Meals for Your Family, Ohio State University Cooperative Extension, Cuyahoga County, adapted by the USDA Food and Nutrition Administration.",
+      "source_artifact_path": null,
+      "source_artifact_sha256": null,
+      "artifact_review_status": "PENDING_ACTUAL_SAVED_ARTIFACT; official current search-indexed complete recipe body reviewed",
+      "source_servings": 4,
+      "source_yield": "4 patties, about 1/2 inch thick",
+      "meal_type_code": "main",
+      "curation_role": "MAIN_DISH",
+      "meal_anchor": true,
+      "primary_protein_family": "POULTRY",
+      "diversity_contribution": "Measured-oil skillet turkey patties with egg and breadcrumbs as binders; a true savory poultry main, distinct from the current braised chicken dish.",
+      "source_ingredients": [
+        {"source_order": 1, "source_text": "1 ¼ pounds ground turkey", "quantity": "1.25", "unit": "lb", "food_ingredient_code": "TURKEY_GROUND_93", "selection_basis": "Existing 93%-lean / 7%-fat member of source-generic ground turkey, conditional on exact 7g fat/100g plain raw turkey retailer evidence; not a conversion or an assertion that all turkey mince is equivalent."},
+        {"source_order": 2, "source_text": "1 cup breadcrumbs", "quantity": "1", "unit": "cup", "food_ingredient_code": "BREADCRUMBS"},
+        {"source_order": 3, "source_text": "1 egg", "quantity": "1", "unit": "count", "food_ingredient_code": "EGG"},
+        {"source_order": 4, "source_text": "¼ cup chopped green onion", "quantity": "0.25", "unit": "cup", "food_ingredient_code": "GREEN_ONION", "selection_basis": "Chopped is source preparation, not a separate retail form."},
+        {"source_order": 5, "source_text": "3 teaspoons yellow mustard", "quantity": "3", "unit": "tsp", "food_ingredient_code": "MUSTARD_YELLOW", "selection_basis": "Yellow prepared mustard is purchase-form critical; Russian hot mustard, Dijon/grain mustard and mayonnaise-like mustard-flavoured sauce are not equivalent evidence."},
+        {"source_order": 6, "source_text": "1 teaspoon oil", "quantity": "1", "unit": "tsp", "food_ingredient_code": "SUNFLOWER_OIL", "selection_basis": "Plain sunflower oil is a member of unrestricted source oil."}
+      ],
+      "source_directions": [
+        "Mix ground turkey, breadcrumbs, egg, onions, and mustard in a large bowl. Shape into 4 patties, about ½ inch thick.",
+        "Heat oil in a skillet. Add patties and cook, turning once to brown both sides. Cook until golden brown outside and white inside (no pink remains), about 10 minutes. Remove from heat and serve."
+      ],
+      "source_serving_suggestion": "Enjoy these tasty patties with fresh tomato slices and your favorite condiments on a whole grain bun.",
+      "consumables_audit": [
+        {"source_location": "direction 1", "material": "ground turkey, breadcrumbs, egg, onions, mustard", "disposition": "QUANTIFIED_REQUIRED", "ingredient_source_orders": [1, 2, 3, 4, 5], "reason": "All five named patty-mixture ingredients resolve to measured source ingredient rows."},
+        {"source_location": "direction 2", "material": "oil", "disposition": "QUANTIFIED_REQUIRED", "ingredient_source_orders": [6], "reason": "The one measured teaspoon is used in the skillet. No second pan-greasing/spray requirement or additional oil is present in the reviewed recipe body."},
+        {"source_location": "introductory serving suggestion", "material": "fresh tomato slices; favorite condiments; whole grain bun", "disposition": "UNSELECTED_SERVING_SUGGESTION", "reason": "The selected recipe is four patties, not a sandwich. These accompaniments are outside the source ingredient list and preparation directions; the source says enjoy with, not add to the patties. Do not claim this recipe includes bread, tomato or an invented condiment amount."}
+      ],
+      "source_equipment": [
+        {"order": 1, "equipment_code": "bowl", "source_location": "direction 1", "source_text": "large bowl"},
+        {"order": 2, "equipment_code": "skillet", "source_location": "direction 2", "source_text": "skillet"}
+      ],
+      "source_times": {"prep_minutes": null, "cook_minutes": null, "total_minutes": null, "direction_intervals": ["about 10 minutes"]},
+      "limitations": [
+        "No header prep/cook/total times are supplied; do not derive an invented total from the direction interval.",
+        "The source uses colour-based doneness wording and does not state a thermometer temperature. Preserve this source limitation; do not invent a source step.",
+        "Final source notices/footer review and actual artifact hash are pending. Indexed body is not an artifact hash.",
+        "Yellow-mustard market evidence remains a hard gate until a qualifying exact-form retailer record is independently reviewed."
+      ],
+      "selection_status": "NOT_SELECTED: clean quantified patty method, but exact yellow prepared mustard was not market-cleared after five-chain research; the source explicitly requires yellow mustard, not generic mustard. No actual artifact hash was obtained, so this candidate is not source-accepted. A clean sandwich anchor is selected by the parent instead.",
+      "market_rejection_evidence": [
+        {"url": "https://lenta.com/product/sous-gorchichnyjj-na-osnove-rast-masel-dojj-pak-rossiya-200g-679859/", "reason": "HEINZ mustard-flavoured oil-based sauce, not plain yellow prepared mustard. Do not use its supermarket presence to clear MUSTARD_YELLOW."},
+        {"url": "https://lenta.com/product/gorchica-klassicheskaya-niderlandy-185g-189538/", "reason": "Generic Heinz Classic title alone did not establish American/yellow prepared mustard; reviewed page lacked sufficient product form/composition. Not treated as product absence."},
+        {"reason": "Other tested five-chain results were Russian hot mustard, Dijon or whole-grain mustard, mayonnaise-like sauces, expired flyers, or delivery pages explicitly tied to other cities. None establishes the exact selected purchase form."}
+      ]
+    },
+    {
+      "recipe_name": "Heavenly Deviled Eggs",
+      "source_url": "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
+      "source_collection": "SNAP-Ed Healthy Thrifty Holiday Menus — Easter, direct FNS-hosted PDF",
+      "source_page": 3,
+      "source_pdf_page_index": 2,
+      "source_attribution": "ONIE Project - Oklahoma Nutrition Information and Education. Simple Healthy Recipes.",
+      "source_artifact_name": "EasterMenu.pdf",
+      "source_artifact_sha256": "1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+      "artifact_review_status": "REVIEWED: all eight actual PDF pages extracted and reviewed; recipe page 3 rendered and visually reviewed, including notes, source credit and footer. No recipe-specific restrictive notice or affirmative broad reuse grant is present. Approved narrow direct-FNS posture only.",
+      "source_servings": 6,
+      "meal_type_code": "other",
+      "curation_role": "SNACK",
+      "meal_anchor": false,
+      "primary_protein_family": "EGG",
+      "diversity_contribution": "Boiled and filled shell eggs as a savory snack/appetizer; not counted as a meal anchor. Distinct from the baked frittata and scrambled egg dishes.",
+      "source_ingredients": [
+        {"source_order": 1, "source_text": "6 eggs (in shell)", "quantity": "6", "unit": "count", "food_ingredient_code": "EGG"},
+        {"source_order": 2, "source_text": "2 tablespoons light mayonnaise", "quantity": "2", "unit": "tbsp", "food_ingredient_code": "MAYONNAISE_LOW_FAT", "selection_basis": "Light/reduced-fat prepared mayonnaise is a critical purchase form; not ordinary full-fat mayonnaise."},
+        {"source_order": 3, "source_text": "1 teaspoon mustard", "quantity": "1", "unit": "tsp", "food_ingredient_code": "MUSTARD_YELLOW", "selection_basis": "Existing yellow prepared mustard is a member of generic source mustard, subject to qualifying retailer evidence. An explicit source alternative is separately retained below."}
+      ],
+      "source_directions": [
+        "Put eggs into a saucepan. Cover with cold water.",
+        "Bring eggs to a simmer (small bubbles) and cook for 12 minutes.",
+        "Remove from the heat and drain.",
+        "Crack eggs under cold water and allow to cool. Remove shells.",
+        "Split eggs in half, lengthwise and remove yolks.",
+        "Put yolks, dressing and mustard into a small zipper-lock plastic bag to mix.",
+        "Cut a small hole in a lower corner of the bag. Squeeze mixture into egg white halves. Garnish as desired."
+      ],
+      "source_notes": [
+        "Garnishes: paprika, cayenne pepper (if you like it hot), pickle relish, sliced scallions, or sliced green or black olives",
+        "1/8 tsp each of salt and pepper may be substituted for 1 tsp mustard."
+      ],
+      "source_explicit_alternative": {
+        "instead_of_source_order": 3,
+        "source_text": "1/8 tsp each of salt and pepper may be substituted for 1 tsp mustard.",
+        "selected_if_yellow_mustard_not_cleared": true,
+        "ingredients": [
+          {"quantity": "0.125", "unit": "tsp", "food_ingredient_code": "SALT"},
+          {"quantity": "0.125", "unit": "tsp", "food_ingredient_code": "BLACK_PEPPER"}
+        ],
+        "basis": "This is a source-explicit quantified alternative, not an invented seasoning quantity. Choosing it yields four selected rows from the three main ingredient rows plus the source note. Source directions must remain reviewable with the selected alternative explained."
+      },
+      "consumables_audit": [
+        {"source_location": "directions 1-4", "material": "cold water", "disposition": "DISCARDED_PROCESS_WATER", "reason": "Whole shell eggs are simmered in water, then explicitly drained; subsequent cold water is used for cracking/cooling. Neither water is a retained ingredient or an invented food quantity."},
+        {"source_location": "directions 1-6", "material": "eggs; yolks", "disposition": "QUANTIFIED_REQUIRED", "ingredient_source_orders": [1], "reason": "The yolks are separated parts of the same six eggs, not additional eggs or an invented yolk mass."},
+        {"source_location": "direction 6", "material": "dressing", "disposition": "QUANTIFIED_REQUIRED", "ingredient_source_orders": [2], "reason": "Within this three-ingredient recipe, the direction calls the listed light mayonnaise dressing. No independent salad dressing is listed or added. Retain this naming inconsistency as a source limitation."},
+        {"source_location": "direction 6", "material": "mustard", "disposition": "REPLACED_BY_SOURCE_EXPLICIT_QUANTIFIED_ALTERNATIVE", "ingredient_source_orders": [3], "reason": "Select the source note's 1/8 teaspoon each salt and pepper instead of the measured teaspoon mustard. Preserve the original mustard wording without adding mustard to the selected corpus."},
+        {"source_location": "direction 7 and garnish notes", "material": "paprika; cayenne pepper; pickle relish; scallions; green or black olives", "disposition": "SOURCE_EXPLICIT_OPTIONAL_OMITTED", "reason": "Garnish as desired makes the listed garnish choices optional; select none. Do not add unquantified garnish rows or implied garnish equipment."},
+        {"source_location": "direction 6-7", "material": "zipper-lock plastic bag", "disposition": "NONFOOD_EQUIPMENT", "reason": "Mixing/piping container, not a consumed food."},
+        {"source_location": "source substitution note", "material": "1/8 tsp each salt and pepper", "disposition": "SELECTED_SOURCE_EXPLICIT_QUANTIFIED_ALTERNATIVE", "reason": "Selected instead of mustard, not on top of it. Four selected rows result from three source ingredient-list rows plus this note."}
+      ],
+      "source_equipment": [
+        {"order": 1, "equipment_code": "saucepan", "source_location": "direction 1", "source_text": "saucepan"},
+        {"order": 2, "equipment_code": "zipper_lock_bag", "source_location": "direction 6", "source_text": "small zipper-lock plastic bag"}
+      ],
+      "source_times": {"prep_minutes": null, "cook_minutes": null, "total_minutes": null, "direction_intervals": ["12 minutes"]},
+      "selected_market_re_review": {
+        "checked_at": "2026-09-05",
+        "method": "Independently reopened current official Lenta product pages and composition fields for each actual selected recipe form, plus current official chain presence in Saint Petersburg. This is a recipe-form review, not inherited code-level clearance or a current-stock claim.",
+        "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+        "region_evidence_wording": "Current official delivery section explicitly includes Санкт-Петербург in the chain's delivery cities; product pages are region-neutral and do not select another city's store.",
+        "rows": [
+          {"food_ingredient_code": "EGG", "source_form": "eggs (in shell)", "observation_id": "research-panel-v3.json:1", "evidence_url": "https://lenta.com/product/yajjco-kurinoe-s1-rossiya-10sht-680723/", "observed_wording": "Яйцо куриное ЛЕНТА С1, 10шт; состав: яйца куриные", "match": "PASS: ordinary shell chicken eggs, not liquid egg product; no count-to-weight conversion."},
+          {"food_ingredient_code": "MAYONNAISE_LOW_FAT", "source_form": "light mayonnaise", "observation_id": "research-lenta-okey-v2.json:19", "evidence_url": "https://lenta.com/product/sous-majjoneznyjj-legkijj-20-dojj-pak-s-doz-rossiya-400g-214314/", "observed_wording": "Соус майонезный CALVE Легкий 20%, 400г; жиры20г/100г; water, sunflower oil, egg yolk, vinegar and seasonings", "match": "PASS: deliberately reduced-fat/light mayonnaise-style dressing, not regular57–67% mayonnaise or an arbitrary unrelated sauce. Source does not prescribe a specific percent; no equivalence of nutrition values is asserted."},
+          {"food_ingredient_code": "SALT", "source_form": "1/8 tsp salt in explicit mustard alternative", "observation_id": "research-x5-v3.json:2", "evidence_url": "https://lenta.com/product/sol-pomol-1-kup-rossiya-1kg-491061/", "observed_wording": "Соль ИЛЕЦКАЯ помол №1,1кг; соль поваренная пищевая молотая", "match": "PASS: source-generic food salt, no iodine or reduced-sodium requirement."},
+          {"food_ingredient_code": "BLACK_PEPPER", "source_form": "1/8 tsp pepper in explicit mustard alternative", "observation_id": "research-lenta-okey-v2.json:34", "evidence_url": "https://lenta.com/product/priprava-perec-chernyjj-molotyjj-vetnam-20g-611678/", "observed_wording": "Перец черный ЛЕНТА молотый,20г; состав: перец черный", "match": "PASS: plain ground black pepper is a member of generic source pepper; not a seasoning blend."}
+        ]
+      },
+      "limitations": [
+        "Source directions name dressing while the ingredient table names light mayonnaise. Preserve that wording without introducing a second ingredient.",
+        "The source PDF has no separate prep/cook/total-time fields. The twelve-minute simmer is not a full preparation-time estimate.",
+        "Do not infer a knife or scissors from cut/split verbs: these objects are not named in the selected primary PDF recipe.",
+        "Actual PDF hash and visual recipe-page review are complete. All eight extracted pages were checked; no recipe-specific copyright/reuse restriction appeared. ONIE is credited, not declared a federal employee. No nutrition values from the unmodified source recipe are asserted for the selected salt/pepper alternative."
+      ],
+      "selection_status": "SOURCE_QUANTITIES_CONSUMABLES_ARTIFACT_MARKET_FORM_REVIEW_PASS; selected salt/pepper alternative avoids mustard market dependency"
+    }
+  ],
+  "market_evidence": [
+    {
+      "food_ingredient_code": "TURKEY_GROUND_93",
+      "recipe_name": "Turkey Patties",
+      "retailer_chain": "LENTA",
+      "evidence_url": "https://lenta.com/product/farsh-indejjki-nezhnyjj-rossiya-450g-671833/",
+      "discovered_url": "https://lenta.com/product/farsh-indejjki-pava-pava-nezhnyjj-rossiya-450g-671833/",
+      "region_evidence_url": "https://lenta.com/allmarkets/?citykey=spb&withRedirect=true",
+      "region": "Saint Petersburg / Leningrad Region chain presence with region-neutral product page; no selected other-city store",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_page",
+      "observed_product_wording": "Фарш индейки ПАВА ПАВА Нежный, 450г; на100г белки18г, жиры7г; охлажденный, на кости нет, вид мяса индюшатина; состав: полуфабрикаты из мяса индеек рубленые: фарш Нежный охлажденный.",
+      "status": "AVAILABLE",
+      "form_review": "Plain raw chilled turkey mince with exactly7g fat/100g supports the selected7%-fat member of generic ground turkey under project clarification. Not6%/8% assumed equivalent and not a literal93/7 package-label claim. No product addition to runtime or nutrient import.",
+      "stock_claim": false
+    }
+  ],
+  "tested_fallbacks_and_rejections": [
+    {
+      "recipe_name": "Roasted Carrots 3 Ways — standard",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/roasted-carrots-3-ways",
+      "source_artifact_name": "data2-wic-roasted-carrots.html",
+      "source_artifact_sha256": "a91715ce573ab80385ae897e7966267e7a9c9732c76ac83a4328ed078201a7eb",
+      "status": "SOURCE_CONSUMABLES_PASS_FALLBACK_NOT_SELECTED",
+      "source_servings": 4,
+      "source_times": {"prep_minutes": 5, "cook_minutes": 25, "total_minutes": 30},
+      "source_ingredients": ["1 pound carrots (peeled and cut into 2-inch pieces)", "1 tablespoon vegetable oil", "2 teaspoons garlic powder", "1 1/2 teaspoons salt", "1 teaspoon black pepper"],
+      "source_directions_review": "Standard method: wash hands and carrots; preheat425degrees; foil-line baking tray, distribute carrots, drizzle the measured oil and sprinkle the listed seasoning; toss with hands, redistribute; bake15minutes, stir, bake10minutes/tender-browning. No spray/grease request. Sweet-version-only step adds quantified1Tbspbutter+1Tbsphoney and requires saucepan; not selected. Spicy-version-only adds chili+cinnamon; not selected. Notes try any seasoning are suggestions, not required additions. Post-cook toss with honey/butter occurs only in the expressly unselected sweet version.",
+      "source_equipment": ["vegetable peeler", "knife", "cutting board", "measuring spoons", "baking tray", "aluminum foil", "spatula"],
+      "limitation": "Olive oil is named only inside the spicy-version conditional, whereas the standard ingredient list says vegetable oil. No extra olive oil is selected. The standard source quantity is one tablespoon vegetable oil.",
+      "decision": "Previously removed for balance/redundancy, not permanently rejected. It remains a clean fallback; deviled eggs contribute a less redundant savory snack if their artifact/market gates pass."
+    },
+    {"recipe_name": "Chicken Fajita —6servings", "source_artifact_name": "Chicken_Fajita_6_Servings.pdf", "status": "REJECTED", "reason": "Directions2and4 separately require unquantified nonstick cooking spray. The listed2Tbspcanola oil is allocated to the corn mixture later; it cannot be silently reallocated to pan release."},
+    {"recipe_name": "Chicken Ratatouille", "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/MCRChicken_Ratatouille.pdf", "status": "REJECTED", "reason": "Required canned tomatoes with juice/garlic/oregano/basil are a purchased pre-seasoned form; not plain TOMATO_CANNED_NO_SALT and not an invented decomposition into source-unquantified extra herbs."},
+    {"recipe_name": "Perfectly Roasted Broccoli", "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Broccoli_fresh.pdf", "status": "REJECTED", "reason": "Requires unquantified nonstick cooking spray in addition to measured oil on the broccoli; foil lining does not replace the mandatory spray."},
+    {"recipe_name": "Pink Party Salad", "source_url": "https://snaped.fns.usda.gov/node/1848", "status": "REJECTED", "reason": "Required fresh/frozen green peas do not resolve to an existing exact global FoodIngredient; only canned peas exist. Do not substitute the canned form silently."},
+    {"recipe_name": "Spinach and Meat Cakes", "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/spinach-and-meat-cakes", "status": "REJECTED", "reason": "Required black pepper to taste is not marked optional. No oil in the frying pan is explicit, but that does not cure the unquantified required seasoning."},
+    {"recipe_name": "Turkey Burgers — WIC", "source_url": "https://wicworks.fns.usda.gov/recipe/turkey-burgers", "status": "REJECTED", "reason": "Source broiling method has no hidden oil, but required2TbspWorcestershire sauce has no existing global FoodIngredient. Do not replace it with soy sauce."},
+    {"recipe_name": "Tastee Burgers", "source_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/memorial-day", "status": "PURCHASE_FORM_UNCLEARED_FALLBACK", "reason": "All11listedingredients and frying margarine are quantified, but3cups explicitly fresh bread crumbs cannot reuse retailer evidence for dried packaged breadcrumbs without an independent exact-form review. Source lentils are cooked in measured3cupswater; no hidden cooking oil found."},
+    {"recipe_name": "Red Lentil Latkes", "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/red-lentil-latkes", "status": "REJECTED", "reason": "Direction4introduces green onion absent from ingredient list; direction6requires more oil for each batch beyond initial1-2Tbsp without final total allocation. Optional black pepper is legitimately omittable but does not solve these defects."},
+    {"recipe_name": "Lentil Vegetable Soup", "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/lentil-vegetable-soup", "status": "REJECTED", "reason": "Direction5calls for more water if necessary in retained soup without quantity. Do not treat retained soup liquid as discarded process water."},
+    {"recipe_name": "Salmon Corn and More Salad", "source_url": "https://wicworks.fns.usda.gov/recipe/salmon-corn-and-more-salad", "status": "REJECTED", "reason": "Roasting asparagus explicitly requires unquantified vegetable oil, salt and pepper outside the measured olive-oil dressing. Fresh/canned salmon alternatives do not cure hidden consumed seasoning/fat."},
+    {"recipe_name": "Baked Parmesan Fish", "source_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day", "status": "REJECTED", "reason": "Required non-fat Parmesan is not ordinary Parmesan; final mushroom direction also adds unquantified black pepper outside the ingredient list."},
+    {"recipe_name": "Italian Bean Patties", "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/bean-patties", "status": "REJECTED", "reason": "RequiredItalianseasoning has no exact global code; whole-wheat breadcrumbs/cracker crumbs require independent form evidence; extra tablespoons breadcrumbs repeat until texture achieved without a bounded total. Genericcanbeans weight also unspecified."},
+    {"recipe_name": "Savory Meatloaf Muffins", "source_url": "https://snaped.fns.usda.gov/node/1845", "status": "REJECTED", "reason": "Directions require12greasedmuffincups, with no quantified pan-release fat in ingredient list."}
+  ]
+}

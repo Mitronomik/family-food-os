@@ -1,0 +1,2917 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-05",
+  "scope": "Independent research-snapshot QA: all original30 and all363 coverage rows. No rights conclusions broadened. No availability or feasibility impossibility inferred from absent evidence.",
+  "inputs": [
+    "../pr4/ingredient-coverage.csv",
+    "research-candidates.json",
+    "research-magnit-v2.json",
+    "research-x5-v2.json",
+    "research-lenta-okey-v2.json",
+    "research-lenta-okey-v3.json",
+    "research-x5-v3.json",
+    "research-lenta-okey-v4.json",
+    "research-lenta-okey-v5.json",
+    "research-lenta-okey-v6.json",
+    "research-lenta-okey-v7.json",
+    "research-lenta-okey-v8.json",
+    "research-lenta-okey-v9.json"
+  ],
+  "evidence_reference_format": "filename:1-based-observation-index",
+  "rules": {
+    "market": "Current qualifying official AVAILABLE observation with material source-form match; not live stock. Parent owns final RU_AVAILABLE/RU_MASS_MARKET decision.",
+    "preparation": "Chopped/diced/minced/peeled/shredded/drained/thawed are preparation, not independent purchase forms. Frozen purchase state remains separate.",
+    "low_fat": "Parent-approved generic low-fat product-family criterion, not a fixed US nutrient fingerprint. Exact1%milk, cheese variety, part-skim and low-moisture remain material.",
+    "water": "Household recipe WATER excluded from retailer SKU requirement; not inferred bottled water.",
+    "rice": "All four source PDFs directions/notes checked: long-grain parboiled brown rice specified, no ordinary-rice alternative.",
+    "missing": "NO_QUALIFYING_FORM_YET and ordinary evidence gaps are research gaps, not NOT_FOUND or product unavailability.",
+    "margarine": "Original trans-fat-free source trait is retained. Ordinary margarine product alone does not establish that trait; new recipes specifying ordinary margarine are outside this audit.",
+    "fresh_lime": "Approved market-context preparation collapse: fresh lime is purchased for fresh juice/zest; no bottled-juice evidence, source-authored squeeze step, recipe-quantity conversion, or global-code change is claimed."
+  },
+  "counts": {
+    "recipes": 30,
+    "coverage_rows": 363,
+    "historical_risk_rows_reclassified": 96,
+    "fully_market_evidenced": 6,
+    "critical_form_gaps": 24,
+    "ordinary_gaps_only": 0,
+    "fully_market_evidenced_but_mandated_remove": 1,
+    "eligible_original_keepers": 5
+  },
+  "recipes": [
+    {
+      "recipe_source_id": "CACFP6-SOUTHWEST-TOFU-SCRAMBLE",
+      "mandated_remove": false,
+      "required_row_count": 14,
+      "required_codes": [
+        "BELL_PEPPER_RED",
+        "BLACK_PEPPER",
+        "CUMIN_GROUND",
+        "CURRY_POWDER",
+        "GARLIC",
+        "GREEN_ONION",
+        "OLIVE_OIL",
+        "QUINOA",
+        "RED_PEPPER_FLAKES",
+        "SALT",
+        "SPINACH",
+        "TOFU_FIRM",
+        "TURMERIC_GROUND",
+        "WATER"
+      ],
+      "critical_form_gaps": [
+        "TOFU_FIRM"
+      ],
+      "ordinary_evidence_gaps": [
+        "RED_PEPPER_FLAKES"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "TOFU_FIRM",
+          "coverage_line": 5,
+          "purchase_concept": "firm tofu",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [
+        {
+          "code": "QUINOA",
+          "purchase_concept": "dry quinoa"
+        }
+      ],
+      "matching_evidence_by_code": {
+        "QUINOA": [
+          "research-lenta-okey-v2.json:31"
+        ],
+        "GARLIC": [
+          "research-magnit-v2.json:3",
+          "research-lenta-okey-v2.json:6"
+        ],
+        "BLACK_PEPPER": [
+          "research-lenta-okey-v2.json:34"
+        ],
+        "CURRY_POWDER": [
+          "research-lenta-okey-v3.json:19"
+        ],
+        "TURMERIC_GROUND": [
+          "research-lenta-okey-v3.json:16"
+        ],
+        "BELL_PEPPER_RED": [
+          "research-magnit-v2.json:9"
+        ],
+        "CUMIN_GROUND": [
+          "research-x5-v3.json:8"
+        ],
+        "GREEN_ONION": [
+          "research-lenta-okey-v4.json:11",
+          "research-x5-v3.json:5"
+        ],
+        "OLIVE_OIL": [
+          "research-lenta-okey-v4.json:9",
+          "research-x5-v3.json:1"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ],
+        "SPINACH": [
+          "research-lenta-okey-v4.json:2"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-SPICED-OATMEAL",
+      "mandated_remove": false,
+      "required_row_count": 9,
+      "required_codes": [
+        "AGAVE_SYRUP",
+        "CINNAMON_GROUND",
+        "MARGARINE",
+        "MILK_1_PERCENT",
+        "NUTMEG_GROUND",
+        "OATS_ROLLED",
+        "SALT",
+        "VANILLA_EXTRACT",
+        "WATER"
+      ],
+      "critical_form_gaps": [
+        "MARGARINE",
+        "VANILLA_EXTRACT"
+      ],
+      "ordinary_evidence_gaps": [
+        "AGAVE_SYRUP"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "MILK_1_PERCENT",
+          "coverage_line": 16,
+          "purchase_concept": "milk 1% fat",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "MARGARINE",
+          "coverage_line": 18,
+          "purchase_concept": "trans-fat-free margarine",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [
+            "research-lenta-okey-v4.json:10"
+          ],
+          "reason": "TRANS_FAT_FREE_NOT_EVIDENCED"
+        },
+        {
+          "code": "VANILLA_EXTRACT",
+          "coverage_line": 20,
+          "purchase_concept": "vanilla extract (not vanilla sugar)",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [
+        {
+          "code": "AGAVE_SYRUP",
+          "purchase_concept": "agave syrup"
+        }
+      ],
+      "matching_evidence_by_code": {
+        "MILK_1_PERCENT": [
+          "research-lenta-okey-v2.json:14"
+        ],
+        "CINNAMON_GROUND": [
+          "research-lenta-okey-v2.json:36"
+        ],
+        "NUTMEG_GROUND": [
+          "research-lenta-okey-v3.json:18"
+        ],
+        "OATS_ROLLED": [
+          "research-x5-v2.json:3",
+          "research-lenta-okey-v2.json:33"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-STRAWBERRY-SMOOTHIE-BOWL",
+      "mandated_remove": false,
+      "required_row_count": 4,
+      "required_codes": [
+        "AGAVE_SYRUP",
+        "STRAWBERRY",
+        "VANILLA_EXTRACT",
+        "YOGURT_GREEK_LOW_FAT"
+      ],
+      "critical_form_gaps": [
+        "STRAWBERRY",
+        "VANILLA_EXTRACT"
+      ],
+      "ordinary_evidence_gaps": [
+        "AGAVE_SYRUP"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "YOGURT_GREEK_LOW_FAT",
+          "coverage_line": 25,
+          "purchase_concept": "plain low-fat Greek yogurt",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "STRAWBERRY",
+          "coverage_line": 26,
+          "purchase_concept": "frozen strawberries",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "VANILLA_EXTRACT",
+          "coverage_line": 28,
+          "purchase_concept": "vanilla extract (not vanilla sugar)",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [
+        {
+          "code": "AGAVE_SYRUP",
+          "purchase_concept": "agave syrup"
+        }
+      ],
+      "matching_evidence_by_code": {
+        "YOGURT_GREEK_LOW_FAT": [
+          "research-magnit-v2.json:6"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-BAKED-SWEET-POTATOES-APPLES",
+      "mandated_remove": false,
+      "required_row_count": 13,
+      "required_codes": [
+        "APPLE",
+        "BROWN_SUGAR",
+        "CINNAMON_GROUND",
+        "CORNSTARCH",
+        "CRANBERRIES_DRIED",
+        "GINGER",
+        "MARGARINE",
+        "NUTMEG_GROUND",
+        "ORANGE_JUICE_CONCENTRATE",
+        "SALT",
+        "SWEET_POTATO",
+        "VANILLA_EXTRACT",
+        "WATER"
+      ],
+      "critical_form_gaps": [
+        "APPLE",
+        "MARGARINE",
+        "ORANGE_JUICE_CONCENTRATE",
+        "VANILLA_EXTRACT"
+      ],
+      "ordinary_evidence_gaps": [
+        "BROWN_SUGAR"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "MARGARINE",
+          "coverage_line": 30,
+          "purchase_concept": "trans-fat-free margarine",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [
+            "research-lenta-okey-v4.json:10"
+          ],
+          "reason": "TRANS_FAT_FREE_NOT_EVIDENCED"
+        },
+        {
+          "code": "VANILLA_EXTRACT",
+          "coverage_line": 36,
+          "purchase_concept": "vanilla extract (not vanilla sugar)",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "APPLE",
+          "coverage_line": 37,
+          "purchase_concept": "frozen unsweetened green apples",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [
+            "research-lenta-okey-v3.json:27"
+          ],
+          "reason": "FRESH_OR_SHELL_DOES_NOT_CLEAR_FROZEN"
+        },
+        {
+          "code": "ORANGE_JUICE_CONCENTRATE",
+          "coverage_line": 39,
+          "purchase_concept": "frozen orange juice concentrate (not drinking juice)",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [],
+      "matching_evidence_by_code": {
+        "SWEET_POTATO": [
+          "research-lenta-okey-v2.json:8"
+        ],
+        "GINGER": [
+          "research-lenta-okey-v2.json:9"
+        ],
+        "CINNAMON_GROUND": [
+          "research-lenta-okey-v2.json:36"
+        ],
+        "NUTMEG_GROUND": [
+          "research-lenta-okey-v3.json:18"
+        ],
+        "CRANBERRIES_DRIED": [
+          "research-lenta-okey-v3.json:21"
+        ],
+        "CORNSTARCH": [
+          "research-lenta-okey-v2.json:29"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-CORN-EDAMAME-BLEND",
+      "mandated_remove": false,
+      "required_row_count": 10,
+      "required_codes": [
+        "CARROT",
+        "CILANTRO",
+        "CORIANDER_SEED",
+        "CORN_SWEET",
+        "EDAMAME_FROZEN",
+        "GARLIC",
+        "ONION_YELLOW",
+        "SALT",
+        "SESAME_OIL",
+        "SESAME_SEEDS"
+      ],
+      "critical_form_gaps": [],
+      "ordinary_evidence_gaps": [],
+      "market_status": "FULL_REQUIRED_MARKET_EVIDENCE",
+      "critical_form_checks": [
+        {
+          "code": "CORN_SWEET",
+          "coverage_line": 45,
+          "purchase_concept": "frozen sweetcorn",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "EDAMAME_FROZEN",
+          "coverage_line": 46,
+          "purchase_concept": "frozen edamame",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "SESAME_OIL",
+          "coverage_line": 42,
+          "purchase_concept": "sesame oil suitable for saute/frying",
+          "status": "MATCHED",
+          "excluded_code_only": [
+            "research-lenta-okey-v3.json:6"
+          ],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [
+        {
+          "code": "SESAME_SEEDS",
+          "purchase_concept": "sesame seeds; source preparation: toasted",
+          "source_application_note": "Plain raw seeds select source-explicit alternative: toast in small stock pot medium heat three minutes before step5; no yield conversion."
+        }
+      ],
+      "matching_evidence_by_code": {
+        "SESAME_OIL": [
+          "research-lenta-okey-v8.json:6"
+        ],
+        "ONION_YELLOW": [
+          "research-magnit-v2.json:2"
+        ],
+        "GARLIC": [
+          "research-magnit-v2.json:3",
+          "research-lenta-okey-v2.json:6"
+        ],
+        "EDAMAME_FROZEN": [
+          "research-lenta-okey-v3.json:1"
+        ],
+        "CARROT": [
+          "research-magnit-v2.json:1",
+          "research-lenta-okey-v2.json:1"
+        ],
+        "CORIANDER_SEED": [
+          "research-lenta-okey-v7.json:2"
+        ],
+        "SESAME_SEEDS": [
+          "research-lenta-okey-v3.json:14"
+        ],
+        "CILANTRO": [
+          "research-lenta-okey-v3.json:12"
+        ],
+        "CORN_SWEET": [
+          "research-lenta-okey-v4.json:18"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-LOCAL-HARVEST-BAKE",
+      "mandated_remove": false,
+      "required_row_count": 7,
+      "required_codes": [
+        "BEET",
+        "BUTTERNUT_SQUASH",
+        "GARLIC",
+        "OLIVE_OIL",
+        "PARSLEY_DRIED",
+        "SALT",
+        "SWEET_POTATO"
+      ],
+      "critical_form_gaps": [],
+      "ordinary_evidence_gaps": [],
+      "market_status": "FULL_REQUIRED_MARKET_EVIDENCE",
+      "critical_form_checks": [],
+      "preparation_collapse_checks": [
+        {
+          "code": "BUTTERNUT_SQUASH",
+          "purchase_concept": "butternut squash"
+        },
+        {
+          "code": "SWEET_POTATO",
+          "purchase_concept": "sweet potato"
+        }
+      ],
+      "matching_evidence_by_code": {
+        "BUTTERNUT_SQUASH": [
+          "research-lenta-okey-v2.json:7"
+        ],
+        "BEET": [
+          "research-magnit-v2.json:8",
+          "research-lenta-okey-v2.json:3"
+        ],
+        "SWEET_POTATO": [
+          "research-lenta-okey-v2.json:8"
+        ],
+        "GARLIC": [
+          "research-magnit-v2.json:3",
+          "research-lenta-okey-v2.json:6"
+        ],
+        "PARSLEY_DRIED": [
+          "research-lenta-okey-v2.json:25"
+        ],
+        "OLIVE_OIL": [
+          "research-lenta-okey-v4.json:9",
+          "research-x5-v3.json:1"
+        ],
+        "SALT": [
+          "research-lenta-okey-v7.json:3"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-ORANGE-GLAZED-CARROTS",
+      "mandated_remove": false,
+      "required_row_count": 11,
+      "required_codes": [
+        "BROWN_SUGAR",
+        "CARROT",
+        "CINNAMON_GROUND",
+        "CORNSTARCH",
+        "CRANBERRIES_DRIED",
+        "MARGARINE",
+        "NUTMEG_GROUND",
+        "ORANGE_JUICE_CONCENTRATE",
+        "PINEAPPLE_CANNED_JUICE",
+        "VANILLA_EXTRACT",
+        "WATER"
+      ],
+      "critical_form_gaps": [
+        "CARROT",
+        "MARGARINE",
+        "ORANGE_JUICE_CONCENTRATE",
+        "VANILLA_EXTRACT"
+      ],
+      "ordinary_evidence_gaps": [
+        "BROWN_SUGAR",
+        "PINEAPPLE_CANNED_JUICE"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "MARGARINE",
+          "coverage_line": 59,
+          "purchase_concept": "trans-fat-free margarine",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [
+            "research-lenta-okey-v4.json:10"
+          ],
+          "reason": "TRANS_FAT_FREE_NOT_EVIDENCED"
+        },
+        {
+          "code": "ORANGE_JUICE_CONCENTRATE",
+          "coverage_line": 61,
+          "purchase_concept": "frozen orange juice concentrate (not drinking juice)",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "VANILLA_EXTRACT",
+          "coverage_line": 63,
+          "purchase_concept": "vanilla extract (not vanilla sugar)",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "CARROT",
+          "coverage_line": 66,
+          "purchase_concept": "frozen carrots",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [
+            "research-lenta-okey-v2.json:1",
+            "research-magnit-v2.json:1"
+          ],
+          "reason": "FRESH_OR_SHELL_DOES_NOT_CLEAR_FROZEN"
+        }
+      ],
+      "preparation_collapse_checks": [],
+      "matching_evidence_by_code": {
+        "CINNAMON_GROUND": [
+          "research-lenta-okey-v2.json:36"
+        ],
+        "NUTMEG_GROUND": [
+          "research-lenta-okey-v3.json:18"
+        ],
+        "CRANBERRIES_DRIED": [
+          "research-lenta-okey-v3.json:21"
+        ],
+        "CORNSTARCH": [
+          "research-lenta-okey-v2.json:29"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-PIZZA-GREEN-BEANS",
+      "mandated_remove": false,
+      "required_row_count": 6,
+      "required_codes": [
+        "BLACK_PEPPER",
+        "GARLIC",
+        "GREEN_BEANS_CANNED_NO_SALT",
+        "OREGANO_DRIED",
+        "SALT",
+        "TOMATO_CANNED_NO_SALT"
+      ],
+      "critical_form_gaps": [
+        "GREEN_BEANS_CANNED_NO_SALT"
+      ],
+      "ordinary_evidence_gaps": [],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "TOMATO_CANNED_NO_SALT",
+          "coverage_line": 70,
+          "purchase_concept": "no-salt-added canned tomatoes",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "GREEN_BEANS_CANNED_NO_SALT",
+          "coverage_line": 71,
+          "purchase_concept": "no-salt-added canned green beans",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [],
+      "matching_evidence_by_code": {
+        "TOMATO_CANNED_NO_SALT": [
+          "research-lenta-okey-v2.json:16"
+        ],
+        "OREGANO_DRIED": [
+          "research-lenta-okey-v2.json:22"
+        ],
+        "GARLIC": [
+          "research-magnit-v2.json:3",
+          "research-lenta-okey-v2.json:6"
+        ],
+        "BLACK_PEPPER": [
+          "research-lenta-okey-v2.json:34"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-SAUTEED-SPINACH-TOMATOES",
+      "mandated_remove": false,
+      "required_row_count": 9,
+      "required_codes": [
+        "BELL_PEPPER_RED",
+        "GARLIC",
+        "GINGER",
+        "MARGARINE",
+        "ONION_YELLOW",
+        "RED_PEPPER_FLAKES",
+        "SALT",
+        "SPINACH",
+        "TOMATO_PASTE_NO_SALT"
+      ],
+      "critical_form_gaps": [
+        "MARGARINE"
+      ],
+      "ordinary_evidence_gaps": [
+        "RED_PEPPER_FLAKES"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "MARGARINE",
+          "coverage_line": 76,
+          "purchase_concept": "trans-fat-free margarine",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [
+            "research-lenta-okey-v4.json:10"
+          ],
+          "reason": "TRANS_FAT_FREE_NOT_EVIDENCED"
+        },
+        {
+          "code": "TOMATO_PASTE_NO_SALT",
+          "coverage_line": 83,
+          "purchase_concept": "no-salt-added tomato paste",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [],
+      "matching_evidence_by_code": {
+        "ONION_YELLOW": [
+          "research-magnit-v2.json:2"
+        ],
+        "BELL_PEPPER_RED": [
+          "research-magnit-v2.json:9"
+        ],
+        "GARLIC": [
+          "research-magnit-v2.json:3",
+          "research-lenta-okey-v2.json:6"
+        ],
+        "GINGER": [
+          "research-lenta-okey-v2.json:9"
+        ],
+        "TOMATO_PASTE_NO_SALT": [
+          "research-lenta-okey-v2.json:17"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ],
+        "SPINACH": [
+          "research-lenta-okey-v4.json:2"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-SPANISH-RICE",
+      "mandated_remove": false,
+      "required_row_count": 22,
+      "required_codes": [
+        "BEEF_BROTH_LOW_SODIUM",
+        "BELL_PEPPER_GREEN",
+        "BLACK_PEPPER",
+        "CANOLA_OIL",
+        "CELERY",
+        "CHILI_POWDER",
+        "CILANTRO",
+        "CINNAMON_GROUND",
+        "CORN_SWEET",
+        "CUMIN_GROUND",
+        "GARLIC",
+        "GARLIC_POWDER",
+        "LIME_JUICE",
+        "ONION_POWDER",
+        "ONION_YELLOW",
+        "OREGANO_DRIED",
+        "PAPRIKA",
+        "RICE_BROWN",
+        "SALT",
+        "TOMATO_CANNED_NO_SALT",
+        "TOMATO_PASTE_NO_SALT",
+        "WATER"
+      ],
+      "critical_form_gaps": [
+        "BEEF_BROTH_LOW_SODIUM",
+        "CHILI_POWDER",
+        "RICE_BROWN"
+      ],
+      "ordinary_evidence_gaps": [
+        "CANOLA_OIL",
+        "ONION_POWDER"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "CORN_SWEET",
+          "coverage_line": 91,
+          "purchase_concept": "corn_sweet",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "CHILI_POWDER",
+          "coverage_line": 94,
+          "purchase_concept": "chili seasoning blend (not pure ground chilli pepper)",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "BEEF_BROTH_LOW_SODIUM",
+          "coverage_line": 101,
+          "purchase_concept": "low-sodium beef broth (not base concentrate)",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "TOMATO_PASTE_NO_SALT",
+          "coverage_line": 102,
+          "purchase_concept": "tomato_paste_no_salt",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "TOMATO_CANNED_NO_SALT",
+          "coverage_line": 103,
+          "purchase_concept": "no-salt-added canned tomatoes",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "RICE_BROWN",
+          "coverage_line": 104,
+          "purchase_concept": "dry long-grain parboiled brown rice",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [
+            "research-lenta-okey-v2.json:32"
+          ],
+          "reason": "PARBOILED_LONG_GRAIN_NOT_EVIDENCED"
+        }
+      ],
+      "preparation_collapse_checks": [],
+      "matching_evidence_by_code": {
+        "CILANTRO": [
+          "research-lenta-okey-v3.json:12"
+        ],
+        "ONION_YELLOW": [
+          "research-magnit-v2.json:2"
+        ],
+        "GARLIC": [
+          "research-magnit-v2.json:3",
+          "research-lenta-okey-v2.json:6"
+        ],
+        "CELERY": [
+          "research-lenta-okey-v3.json:13"
+        ],
+        "BLACK_PEPPER": [
+          "research-lenta-okey-v2.json:34"
+        ],
+        "PAPRIKA": [
+          "research-lenta-okey-v2.json:35"
+        ],
+        "CINNAMON_GROUND": [
+          "research-lenta-okey-v2.json:36"
+        ],
+        "OREGANO_DRIED": [
+          "research-lenta-okey-v2.json:22"
+        ],
+        "TOMATO_PASTE_NO_SALT": [
+          "research-lenta-okey-v2.json:17"
+        ],
+        "TOMATO_CANNED_NO_SALT": [
+          "research-lenta-okey-v2.json:16"
+        ],
+        "BELL_PEPPER_GREEN": [
+          "research-lenta-okey-v4.json:13"
+        ],
+        "CORN_SWEET": [
+          "research-lenta-okey-v4.json:18"
+        ],
+        "CUMIN_GROUND": [
+          "research-x5-v3.json:8"
+        ],
+        "GARLIC_POWDER": [
+          "research-lenta-okey-v4.json:15"
+        ],
+        "LIME_JUICE": [
+          "research-lenta-okey-v4.json:19",
+          "research-x5-v3.json:7"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-TABBOULEH",
+      "mandated_remove": false,
+      "required_row_count": 13,
+      "required_codes": [
+        "BELL_PEPPER_RED",
+        "BULGUR",
+        "CUCUMBER",
+        "CUMIN_GROUND",
+        "LEMON",
+        "MINT_FRESH",
+        "OLIVE_OIL",
+        "ONION_YELLOW",
+        "PARSLEY",
+        "QUINOA",
+        "SALT",
+        "TOMATO",
+        "WATER"
+      ],
+      "critical_form_gaps": [],
+      "ordinary_evidence_gaps": [],
+      "market_status": "FULL_REQUIRED_MARKET_EVIDENCE",
+      "critical_form_checks": [],
+      "preparation_collapse_checks": [
+        {
+          "code": "QUINOA",
+          "purchase_concept": "dry quinoa"
+        },
+        {
+          "code": "BULGUR",
+          "purchase_concept": "dry bulgur"
+        },
+        {
+          "code": "MINT_FRESH",
+          "purchase_concept": "fresh mint"
+        }
+      ],
+      "matching_evidence_by_code": {
+        "QUINOA": [
+          "research-lenta-okey-v2.json:31"
+        ],
+        "BULGUR": [
+          "research-magnit-v2.json:5",
+          "research-lenta-okey-v2.json:30"
+        ],
+        "TOMATO": [
+          "research-magnit-v2.json:10",
+          "research-lenta-okey-v2.json:2"
+        ],
+        "CUCUMBER": [
+          "research-magnit-v2.json:11",
+          "research-lenta-okey-v2.json:4"
+        ],
+        "PARSLEY": [
+          "research-lenta-okey-v2.json:24"
+        ],
+        "ONION_YELLOW": [
+          "research-magnit-v2.json:2"
+        ],
+        "BELL_PEPPER_RED": [
+          "research-magnit-v2.json:9"
+        ],
+        "MINT_FRESH": [
+          "research-lenta-okey-v3.json:11"
+        ],
+        "LEMON": [
+          "research-lenta-okey-v3.json:9"
+        ],
+        "CUMIN_GROUND": [
+          "research-x5-v3.json:8"
+        ],
+        "OLIVE_OIL": [
+          "research-lenta-okey-v4.json:9",
+          "research-x5-v3.json:1"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-CHICKEN-FAJITA",
+      "mandated_remove": false,
+      "required_row_count": 18,
+      "required_codes": [
+        "ANCHO_CHILI_POWDER",
+        "BELL_PEPPER_GREEN",
+        "BELL_PEPPER_RED",
+        "BLACK_PEPPER",
+        "CANOLA_OIL",
+        "CHICKEN_BREAST_COOKED",
+        "CHILI_POWDER",
+        "CORN_SWEET",
+        "CUMIN_GROUND",
+        "GARLIC_POWDER",
+        "LIME_JUICE",
+        "ONION_YELLOW",
+        "OREGANO_DRIED",
+        "PAPRIKA",
+        "SALSA",
+        "SUGAR",
+        "TOMATO_CANNED_NO_SALT",
+        "TORTILLA_WHOLE_WHEAT"
+      ],
+      "critical_form_gaps": [
+        "ANCHO_CHILI_POWDER",
+        "CHICKEN_BREAST_COOKED",
+        "SALSA",
+        "TORTILLA_WHOLE_WHEAT"
+      ],
+      "ordinary_evidence_gaps": [
+        "CANOLA_OIL",
+        "CHILI_POWDER"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "CHICKEN_BREAST_COOKED",
+          "coverage_line": 120,
+          "purchase_concept": "cooked chicken strips; frozen source form",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "ANCHO_CHILI_POWDER",
+          "coverage_line": 126,
+          "purchase_concept": "dried ancho chile powder",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "CORN_SWEET",
+          "coverage_line": 130,
+          "purchase_concept": "corn_sweet",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "TOMATO_CANNED_NO_SALT",
+          "coverage_line": 131,
+          "purchase_concept": "tomato_canned_no_salt",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "SALSA",
+          "coverage_line": 132,
+          "purchase_concept": "low-sodium prepared salsa",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "TORTILLA_WHOLE_WHEAT",
+          "coverage_line": 137,
+          "purchase_concept": "whole-grain wheat tortilla",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [],
+      "matching_evidence_by_code": {
+        "BLACK_PEPPER": [
+          "research-lenta-okey-v2.json:34"
+        ],
+        "OREGANO_DRIED": [
+          "research-lenta-okey-v2.json:22"
+        ],
+        "BELL_PEPPER_RED": [
+          "research-magnit-v2.json:9"
+        ],
+        "ONION_YELLOW": [
+          "research-magnit-v2.json:2"
+        ],
+        "TOMATO_CANNED_NO_SALT": [
+          "research-lenta-okey-v2.json:16"
+        ],
+        "SUGAR": [
+          "research-x5-v2.json:2",
+          "research-lenta-okey-v3.json:23"
+        ],
+        "PAPRIKA": [
+          "research-lenta-okey-v2.json:35"
+        ],
+        "BELL_PEPPER_GREEN": [
+          "research-lenta-okey-v4.json:13"
+        ],
+        "CORN_SWEET": [
+          "research-lenta-okey-v4.json:18"
+        ],
+        "CUMIN_GROUND": [
+          "research-x5-v3.json:8"
+        ],
+        "GARLIC_POWDER": [
+          "research-lenta-okey-v4.json:15"
+        ],
+        "LIME_JUICE": [
+          "research-lenta-okey-v4.json:19",
+          "research-x5-v3.json:7"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-HONEY-LIME-CHICKEN",
+      "mandated_remove": false,
+      "required_row_count": 6,
+      "required_codes": [
+        "BLACK_PEPPER",
+        "CHICKEN_THIGH",
+        "HONEY",
+        "LIME",
+        "LIME_JUICE",
+        "SALT"
+      ],
+      "critical_form_gaps": [],
+      "ordinary_evidence_gaps": [],
+      "market_status": "FULL_REQUIRED_MARKET_EVIDENCE",
+      "critical_form_checks": [],
+      "preparation_collapse_checks": [
+        {
+          "code": "CHICKEN_THIGH",
+          "purchase_concept": "raw boneless skinless chicken thigh"
+        },
+        {
+          "code": "LIME_JUICE",
+          "purchase_concept": "fresh lime juice squeezed from lime"
+        }
+      ],
+      "matching_evidence_by_code": {
+        "HONEY": [
+          "research-lenta-okey-v3.json:7"
+        ],
+        "BLACK_PEPPER": [
+          "research-lenta-okey-v2.json:34"
+        ],
+        "CHICKEN_THIGH": [
+          "research-x5-v3.json:3"
+        ],
+        "LIME": [
+          "research-x5-v3.json:6"
+        ],
+        "LIME_JUICE": [
+          "research-lenta-okey-v4.json:19",
+          "research-x5-v3.json:7"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-RICE-VEGETABLE-CASSEROLE",
+      "mandated_remove": false,
+      "required_row_count": 14,
+      "required_codes": [
+        "BLACK_PEPPER",
+        "CHEESE_CHEDDAR_REDUCED_FAT",
+        "CHEESE_MOZZARELLA_PART_SKIM",
+        "CHICKEN_BROTH_LOW_SODIUM",
+        "FLOUR_WHOLE_WHEAT",
+        "GARLIC",
+        "KALE",
+        "MARGARINE",
+        "MILK_1_PERCENT",
+        "MUSHROOM_WHITE",
+        "ONION_POWDER",
+        "ONION_YELLOW",
+        "RICE_BROWN",
+        "SALT"
+      ],
+      "critical_form_gaps": [
+        "CHEESE_CHEDDAR_REDUCED_FAT",
+        "CHEESE_MOZZARELLA_PART_SKIM",
+        "CHICKEN_BROTH_LOW_SODIUM",
+        "MARGARINE",
+        "RICE_BROWN"
+      ],
+      "ordinary_evidence_gaps": [
+        "ONION_POWDER"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "CHICKEN_BROTH_LOW_SODIUM",
+          "coverage_line": 144,
+          "purchase_concept": "low-sodium chicken broth (not base concentrate)",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "RICE_BROWN",
+          "coverage_line": 145,
+          "purchase_concept": "dry long-grain parboiled brown rice",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [
+            "research-lenta-okey-v2.json:32"
+          ],
+          "reason": "PARBOILED_LONG_GRAIN_NOT_EVIDENCED"
+        },
+        {
+          "code": "MARGARINE",
+          "coverage_line": 146,
+          "purchase_concept": "margarine",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [
+            "research-lenta-okey-v4.json:10"
+          ],
+          "reason": "TRANS_FAT_FREE_NOT_EVIDENCED"
+        },
+        {
+          "code": "FLOUR_WHOLE_WHEAT",
+          "coverage_line": 153,
+          "purchase_concept": "flour_whole_wheat",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "MILK_1_PERCENT",
+          "coverage_line": 154,
+          "purchase_concept": "milk_1_percent",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "CHEESE_CHEDDAR_REDUCED_FAT",
+          "coverage_line": 156,
+          "purchase_concept": "reduced-fat cheddar",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "CHEESE_MOZZARELLA_PART_SKIM",
+          "coverage_line": 157,
+          "purchase_concept": "low-fat low-moisture part-skim mozzarella",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [
+        {
+          "code": "KALE",
+          "purchase_concept": "fresh kale"
+        }
+      ],
+      "matching_evidence_by_code": {
+        "ONION_YELLOW": [
+          "research-magnit-v2.json:2"
+        ],
+        "GARLIC": [
+          "research-magnit-v2.json:3",
+          "research-lenta-okey-v2.json:6"
+        ],
+        "BLACK_PEPPER": [
+          "research-lenta-okey-v2.json:34"
+        ],
+        "FLOUR_WHOLE_WHEAT": [
+          "research-lenta-okey-v3.json:10"
+        ],
+        "MILK_1_PERCENT": [
+          "research-lenta-okey-v2.json:14"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ],
+        "KALE": [
+          "research-lenta-okey-v6.json:9"
+        ],
+        "MUSHROOM_WHITE": [
+          "research-lenta-okey-v6.json:10"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-VEGETABLE-CHILI",
+      "mandated_remove": false,
+      "required_row_count": 18,
+      "required_codes": [
+        "ANCHO_CHILI_POWDER",
+        "BELL_PEPPER_GREEN",
+        "BROWN_SUGAR",
+        "BULGUR",
+        "CANOLA_OIL",
+        "CHILI_POWDER",
+        "CUMIN_GROUND",
+        "GARLIC_POWDER",
+        "HOT_SAUCE",
+        "JALAPENO",
+        "KIDNEY_BEANS_CANNED_LOW_SODIUM",
+        "ONION_POWDER",
+        "ONION_YELLOW",
+        "SOUR_CREAM_LOW_FAT",
+        "TOMATO_CANNED_NO_SALT",
+        "TOMATO_CRUSHED",
+        "VEGETABLE_BROTH",
+        "WATER"
+      ],
+      "critical_form_gaps": [
+        "ANCHO_CHILI_POWDER",
+        "KIDNEY_BEANS_CANNED_LOW_SODIUM",
+        "TOMATO_CRUSHED",
+        "VEGETABLE_BROTH"
+      ],
+      "ordinary_evidence_gaps": [
+        "BROWN_SUGAR",
+        "CANOLA_OIL",
+        "CHILI_POWDER",
+        "HOT_SAUCE",
+        "JALAPENO",
+        "ONION_POWDER"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "ANCHO_CHILI_POWDER",
+          "coverage_line": 165,
+          "purchase_concept": "dried ancho chile powder",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "TOMATO_CRUSHED",
+          "coverage_line": 169,
+          "purchase_concept": "tomato_crushed_no_salt",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [
+            "research-lenta-okey-v2.json:18"
+          ],
+          "reason": "NO_ADDED_SALT_NOT_EVIDENCED"
+        },
+        {
+          "code": "TOMATO_CANNED_NO_SALT",
+          "coverage_line": 170,
+          "purchase_concept": "tomato_canned_no_salt",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "KIDNEY_BEANS_CANNED_LOW_SODIUM",
+          "coverage_line": 171,
+          "purchase_concept": "low-sodium canned kidney beans",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "VEGETABLE_BROTH",
+          "coverage_line": 173,
+          "purchase_concept": "low-sodium vegetable broth",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "SOUR_CREAM_LOW_FAT",
+          "coverage_line": 175,
+          "purchase_concept": "sour_cream_low_fat",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [
+        {
+          "code": "JALAPENO",
+          "purchase_concept": "fresh jalapeño"
+        }
+      ],
+      "matching_evidence_by_code": {
+        "ONION_YELLOW": [
+          "research-magnit-v2.json:2"
+        ],
+        "TOMATO_CANNED_NO_SALT": [
+          "research-lenta-okey-v2.json:16"
+        ],
+        "BULGUR": [
+          "research-magnit-v2.json:5",
+          "research-lenta-okey-v2.json:30"
+        ],
+        "SOUR_CREAM_LOW_FAT": [
+          "research-lenta-okey-v2.json:20"
+        ],
+        "BELL_PEPPER_GREEN": [
+          "research-lenta-okey-v4.json:13"
+        ],
+        "CUMIN_GROUND": [
+          "research-x5-v3.json:8"
+        ],
+        "GARLIC_POWDER": [
+          "research-lenta-okey-v4.json:15"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-VEGETABLE-FRITTATA",
+      "mandated_remove": false,
+      "required_row_count": 10,
+      "required_codes": [
+        "BELL_PEPPER_RED",
+        "BLACK_PEPPER",
+        "CHEESE_CHEDDAR_REDUCED_FAT",
+        "EGG",
+        "FLOUR_WHOLE_WHEAT",
+        "MILK_SKIM",
+        "MUSHROOM_WHITE",
+        "ONION_YELLOW",
+        "SALT",
+        "SPINACH"
+      ],
+      "critical_form_gaps": [
+        "CHEESE_CHEDDAR_REDUCED_FAT"
+      ],
+      "ordinary_evidence_gaps": [],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "CHEESE_CHEDDAR_REDUCED_FAT",
+          "coverage_line": 182,
+          "purchase_concept": "reduced-fat cheddar",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "MILK_SKIM",
+          "coverage_line": 183,
+          "purchase_concept": "skim/nonfat milk",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "FLOUR_WHOLE_WHEAT",
+          "coverage_line": 185,
+          "purchase_concept": "flour_whole_wheat",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [
+        {
+          "code": "EGG",
+          "purchase_concept": "shell eggs; explicit source alternative to liquid egg"
+        }
+      ],
+      "matching_evidence_by_code": {
+        "ONION_YELLOW": [
+          "research-magnit-v2.json:2"
+        ],
+        "BELL_PEPPER_RED": [
+          "research-magnit-v2.json:9"
+        ],
+        "BLACK_PEPPER": [
+          "research-lenta-okey-v2.json:34"
+        ],
+        "MILK_SKIM": [
+          "research-lenta-okey-v2.json:13"
+        ],
+        "EGG": [
+          "research-magnit-v2.json:4",
+          "research-x5-v2.json:1"
+        ],
+        "FLOUR_WHOLE_WHEAT": [
+          "research-lenta-okey-v3.json:10"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ],
+        "SPINACH": [
+          "research-lenta-okey-v4.json:2"
+        ],
+        "MUSHROOM_WHITE": [
+          "research-lenta-okey-v6.json:10"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-CARROT-RAISIN-SALAD",
+      "mandated_remove": false,
+      "required_row_count": 11,
+      "required_codes": [
+        "APPLE",
+        "APPLE_CIDER_VINEGAR",
+        "CARROT",
+        "COCONUT_SHREDDED",
+        "HONEY",
+        "MAYONNAISE_LOW_FAT",
+        "NUTMEG_GROUND",
+        "PINEAPPLE_CANNED_JUICE",
+        "RAISINS_GOLDEN",
+        "SALT",
+        "YOGURT_PLAIN_LOW_FAT"
+      ],
+      "critical_form_gaps": [
+        "PINEAPPLE_CANNED_JUICE"
+      ],
+      "ordinary_evidence_gaps": [],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "YOGURT_PLAIN_LOW_FAT",
+          "coverage_line": 186,
+          "purchase_concept": "plain low-fat yogurt",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "MAYONNAISE_LOW_FAT",
+          "coverage_line": 187,
+          "purchase_concept": "low-fat mayonnaise",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "PINEAPPLE_CANNED_JUICE",
+          "coverage_line": 193,
+          "purchase_concept": "canned pineapple in 100% juice (not syrup)",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "RAISINS_GOLDEN",
+          "coverage_line": 195,
+          "purchase_concept": "golden raisins",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [],
+      "matching_evidence_by_code": {
+        "YOGURT_PLAIN_LOW_FAT": [
+          "research-lenta-okey-v3.json:4"
+        ],
+        "MAYONNAISE_LOW_FAT": [
+          "research-lenta-okey-v2.json:19"
+        ],
+        "NUTMEG_GROUND": [
+          "research-lenta-okey-v3.json:18"
+        ],
+        "APPLE_CIDER_VINEGAR": [
+          "research-lenta-okey-v3.json:22"
+        ],
+        "HONEY": [
+          "research-lenta-okey-v3.json:7"
+        ],
+        "CARROT": [
+          "research-magnit-v2.json:1",
+          "research-lenta-okey-v2.json:1"
+        ],
+        "APPLE": [
+          "research-lenta-okey-v3.json:27"
+        ],
+        "RAISINS_GOLDEN": [
+          "research-lenta-okey-v3.json:3"
+        ],
+        "COCONUT_SHREDDED": [
+          "research-lenta-okey-v3.json:20"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-MACARONI-SALAD",
+      "mandated_remove": false,
+      "required_row_count": 15,
+      "required_codes": [
+        "BELL_PEPPER_GREEN",
+        "BELL_PEPPER_RED",
+        "BLACK_PEPPER",
+        "CARROT",
+        "CELERY",
+        "MAYONNAISE_LOW_FAT",
+        "MUSTARD_YELLOW",
+        "ONION_RED",
+        "PAPRIKA",
+        "PASTA_WHOLE_WHEAT",
+        "PIMIENTO_CANNED",
+        "SALT",
+        "SUGAR",
+        "VINEGAR_WHITE",
+        "WATER"
+      ],
+      "critical_form_gaps": [
+        "PASTA_WHOLE_WHEAT",
+        "PIMIENTO_CANNED"
+      ],
+      "ordinary_evidence_gaps": [
+        "MUSTARD_YELLOW",
+        "VINEGAR_WHITE"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "PASTA_WHOLE_WHEAT",
+          "coverage_line": 198,
+          "purchase_concept": "dry whole-grain macaroni",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "MAYONNAISE_LOW_FAT",
+          "coverage_line": 199,
+          "purchase_concept": "low-fat mayonnaise",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "PIMIENTO_CANNED",
+          "coverage_line": 205,
+          "purchase_concept": "canned pimiento peppers",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [
+        {
+          "code": "VINEGAR_WHITE",
+          "purchase_concept": "white distilled vinegar"
+        }
+      ],
+      "matching_evidence_by_code": {
+        "MAYONNAISE_LOW_FAT": [
+          "research-lenta-okey-v2.json:19"
+        ],
+        "SUGAR": [
+          "research-x5-v2.json:2",
+          "research-lenta-okey-v3.json:23"
+        ],
+        "BELL_PEPPER_RED": [
+          "research-magnit-v2.json:9"
+        ],
+        "CARROT": [
+          "research-magnit-v2.json:1",
+          "research-lenta-okey-v2.json:1"
+        ],
+        "CELERY": [
+          "research-lenta-okey-v3.json:13"
+        ],
+        "ONION_RED": [
+          "research-lenta-okey-v2.json:5"
+        ],
+        "BLACK_PEPPER": [
+          "research-lenta-okey-v2.json:34"
+        ],
+        "PAPRIKA": [
+          "research-lenta-okey-v2.json:35"
+        ],
+        "BELL_PEPPER_GREEN": [
+          "research-lenta-okey-v4.json:13"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-MARINATED-BLACK-BEAN-SALAD",
+      "mandated_remove": false,
+      "required_row_count": 17,
+      "required_codes": [
+        "ANCHO_CHILI_POWDER",
+        "APPLE_CIDER_VINEGAR",
+        "BELL_PEPPER_GREEN",
+        "BELL_PEPPER_RED",
+        "BLACK_BEANS_CANNED",
+        "CHEESE_CHEDDAR_REDUCED_FAT",
+        "CILANTRO",
+        "CORN_SWEET",
+        "CUMIN_GROUND",
+        "GARLIC",
+        "HONEY",
+        "JALAPENO",
+        "LIME_JUICE",
+        "OLIVE_OIL",
+        "ONION_RED",
+        "PARSLEY_DRIED",
+        "SALSA"
+      ],
+      "critical_form_gaps": [
+        "ANCHO_CHILI_POWDER",
+        "BLACK_BEANS_CANNED",
+        "CHEESE_CHEDDAR_REDUCED_FAT",
+        "SALSA"
+      ],
+      "ordinary_evidence_gaps": [
+        "JALAPENO"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "ANCHO_CHILI_POWDER",
+          "coverage_line": 216,
+          "purchase_concept": "dried ancho chile powder",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "BLACK_BEANS_CANNED",
+          "coverage_line": 221,
+          "purchase_concept": "low-sodium canned black beans",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "CORN_SWEET",
+          "coverage_line": 222,
+          "purchase_concept": "corn_sweet",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "SALSA",
+          "coverage_line": 225,
+          "purchase_concept": "low-sodium prepared salsa",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "CHEESE_CHEDDAR_REDUCED_FAT",
+          "coverage_line": 228,
+          "purchase_concept": "reduced-fat cheddar",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [
+        {
+          "code": "JALAPENO",
+          "purchase_concept": "fresh jalapeño"
+        }
+      ],
+      "matching_evidence_by_code": {
+        "PARSLEY_DRIED": [
+          "research-lenta-okey-v2.json:25"
+        ],
+        "GARLIC": [
+          "research-magnit-v2.json:3",
+          "research-lenta-okey-v2.json:6"
+        ],
+        "CILANTRO": [
+          "research-lenta-okey-v3.json:12"
+        ],
+        "HONEY": [
+          "research-lenta-okey-v3.json:7"
+        ],
+        "APPLE_CIDER_VINEGAR": [
+          "research-lenta-okey-v3.json:22"
+        ],
+        "BELL_PEPPER_RED": [
+          "research-magnit-v2.json:9"
+        ],
+        "ONION_RED": [
+          "research-lenta-okey-v2.json:5"
+        ],
+        "BELL_PEPPER_GREEN": [
+          "research-lenta-okey-v4.json:13"
+        ],
+        "CORN_SWEET": [
+          "research-lenta-okey-v4.json:18"
+        ],
+        "CUMIN_GROUND": [
+          "research-x5-v3.json:8"
+        ],
+        "LIME_JUICE": [
+          "research-lenta-okey-v4.json:19",
+          "research-x5-v3.json:7"
+        ],
+        "OLIVE_OIL": [
+          "research-lenta-okey-v4.json:9",
+          "research-x5-v3.json:1"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-QUICHE-SELF-FORMING-CRUST",
+      "mandated_remove": false,
+      "required_row_count": 11,
+      "required_codes": [
+        "BAKING_POWDER",
+        "BELL_PEPPER_RED",
+        "BLACK_PEPPER",
+        "CHEESE_CHEDDAR_REDUCED_FAT",
+        "EGG",
+        "FLOUR_WHOLE_WHEAT",
+        "MILK_SKIM",
+        "NUTMEG_GROUND",
+        "ONION_YELLOW",
+        "SALT",
+        "SPINACH"
+      ],
+      "critical_form_gaps": [
+        "CHEESE_CHEDDAR_REDUCED_FAT",
+        "EGG"
+      ],
+      "ordinary_evidence_gaps": [],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "EGG",
+          "coverage_line": 229,
+          "purchase_concept": "frozen whole liquid egg",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [
+            "research-magnit-v2.json:4",
+            "research-x5-v2.json:1"
+          ],
+          "reason": "FRESH_OR_SHELL_DOES_NOT_CLEAR_FROZEN"
+        },
+        {
+          "code": "MILK_SKIM",
+          "coverage_line": 230,
+          "purchase_concept": "skim/nonfat milk",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "FLOUR_WHOLE_WHEAT",
+          "coverage_line": 231,
+          "purchase_concept": "flour_whole_wheat",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "CHEESE_CHEDDAR_REDUCED_FAT",
+          "coverage_line": 239,
+          "purchase_concept": "reduced-fat cheddar",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [],
+      "matching_evidence_by_code": {
+        "MILK_SKIM": [
+          "research-lenta-okey-v2.json:13"
+        ],
+        "FLOUR_WHOLE_WHEAT": [
+          "research-lenta-okey-v3.json:10"
+        ],
+        "BAKING_POWDER": [
+          "research-lenta-okey-v3.json:24"
+        ],
+        "BLACK_PEPPER": [
+          "research-lenta-okey-v2.json:34"
+        ],
+        "NUTMEG_GROUND": [
+          "research-lenta-okey-v3.json:18"
+        ],
+        "ONION_YELLOW": [
+          "research-magnit-v2.json:2"
+        ],
+        "BELL_PEPPER_RED": [
+          "research-magnit-v2.json:9"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ],
+        "SPINACH": [
+          "research-lenta-okey-v4.json:2"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-ROPA-VIEJA",
+      "mandated_remove": false,
+      "required_row_count": 16,
+      "required_codes": [
+        "APPLE_CIDER_VINEGAR",
+        "BAY_LEAF",
+        "BEEF_BROTH_LOW_SODIUM",
+        "BEEF_SHOULDER",
+        "BELL_PEPPER_RED",
+        "BLACK_PEPPER",
+        "CILANTRO",
+        "CUMIN_GROUND",
+        "GARLIC",
+        "ONION_YELLOW",
+        "OREGANO_DRIED",
+        "RICE_BROWN",
+        "ROSEMARY_DRIED",
+        "SALT",
+        "TOMATO_PASTE_NO_SALT",
+        "WATER"
+      ],
+      "critical_form_gaps": [
+        "BEEF_BROTH_LOW_SODIUM",
+        "RICE_BROWN"
+      ],
+      "ordinary_evidence_gaps": [
+        "BEEF_SHOULDER"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "BEEF_BROTH_LOW_SODIUM",
+          "coverage_line": 250,
+          "purchase_concept": "low-sodium beef broth (not base concentrate)",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "TOMATO_PASTE_NO_SALT",
+          "coverage_line": 251,
+          "purchase_concept": "tomato_paste_no_salt",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "RICE_BROWN",
+          "coverage_line": 255,
+          "purchase_concept": "dry long-grain parboiled brown rice",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [
+            "research-lenta-okey-v2.json:32"
+          ],
+          "reason": "PARBOILED_LONG_GRAIN_NOT_EVIDENCED"
+        }
+      ],
+      "preparation_collapse_checks": [
+        {
+          "code": "BEEF_SHOULDER",
+          "purchase_concept": "raw beef shoulder"
+        }
+      ],
+      "matching_evidence_by_code": {
+        "ONION_YELLOW": [
+          "research-magnit-v2.json:2"
+        ],
+        "BELL_PEPPER_RED": [
+          "research-magnit-v2.json:9"
+        ],
+        "GARLIC": [
+          "research-magnit-v2.json:3",
+          "research-lenta-okey-v2.json:6"
+        ],
+        "OREGANO_DRIED": [
+          "research-lenta-okey-v2.json:22"
+        ],
+        "BLACK_PEPPER": [
+          "research-lenta-okey-v2.json:34"
+        ],
+        "APPLE_CIDER_VINEGAR": [
+          "research-lenta-okey-v3.json:22"
+        ],
+        "TOMATO_PASTE_NO_SALT": [
+          "research-lenta-okey-v2.json:17"
+        ],
+        "BAY_LEAF": [
+          "research-lenta-okey-v2.json:26"
+        ],
+        "CILANTRO": [
+          "research-lenta-okey-v3.json:12"
+        ],
+        "CUMIN_GROUND": [
+          "research-x5-v3.json:8"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ],
+        "ROSEMARY_DRIED": [
+          "research-lenta-okey-v7.json:6"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-CORN-PUDDING",
+      "mandated_remove": false,
+      "required_row_count": 12,
+      "required_codes": [
+        "BAKING_POWDER",
+        "BLACK_PEPPER",
+        "CANOLA_OIL",
+        "CORNMEAL_WHOLE_GRAIN",
+        "CORN_CREAM_STYLE_NO_SALT",
+        "CORN_SWEET",
+        "EGG",
+        "FLOUR_WHOLE_WHEAT",
+        "ONION_YELLOW",
+        "SALT",
+        "SOUR_CREAM_LOW_FAT",
+        "SUGAR"
+      ],
+      "critical_form_gaps": [
+        "CORNMEAL_WHOLE_GRAIN",
+        "CORN_CREAM_STYLE_NO_SALT"
+      ],
+      "ordinary_evidence_gaps": [
+        "CANOLA_OIL"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "FLOUR_WHOLE_WHEAT",
+          "coverage_line": 256,
+          "purchase_concept": "flour_whole_wheat",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "CORNMEAL_WHOLE_GRAIN",
+          "coverage_line": 257,
+          "purchase_concept": "white whole-grain cornmeal",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "SOUR_CREAM_LOW_FAT",
+          "coverage_line": 263,
+          "purchase_concept": "low-fat sour cream",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "CORN_SWEET",
+          "coverage_line": 265,
+          "purchase_concept": "corn_sweet",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "CORN_CREAM_STYLE_NO_SALT",
+          "coverage_line": 266,
+          "purchase_concept": "unsalted canned cream-style corn",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [],
+      "matching_evidence_by_code": {
+        "FLOUR_WHOLE_WHEAT": [
+          "research-lenta-okey-v3.json:10"
+        ],
+        "SUGAR": [
+          "research-x5-v2.json:2",
+          "research-lenta-okey-v3.json:23"
+        ],
+        "BAKING_POWDER": [
+          "research-lenta-okey-v3.json:24"
+        ],
+        "BLACK_PEPPER": [
+          "research-lenta-okey-v2.json:34"
+        ],
+        "EGG": [
+          "research-magnit-v2.json:4",
+          "research-x5-v2.json:1"
+        ],
+        "SOUR_CREAM_LOW_FAT": [
+          "research-lenta-okey-v2.json:20"
+        ],
+        "ONION_YELLOW": [
+          "research-magnit-v2.json:2"
+        ],
+        "CORN_SWEET": [
+          "research-lenta-okey-v4.json:18"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-CREAMY-COLESLAW",
+      "mandated_remove": false,
+      "required_row_count": 11,
+      "required_codes": [
+        "APPLE_CIDER_VINEGAR",
+        "BLACK_PEPPER",
+        "CABBAGE_GREEN",
+        "CABBAGE_RED",
+        "CARROT",
+        "CRANBERRIES_DRIED",
+        "GREEN_ONION",
+        "HONEY",
+        "MAYONNAISE_LOW_FAT",
+        "SALT",
+        "YOGURT_PLAIN_LOW_FAT"
+      ],
+      "critical_form_gaps": [],
+      "ordinary_evidence_gaps": [],
+      "market_status": "FULL_REQUIRED_MARKET_EVIDENCE",
+      "critical_form_checks": [
+        {
+          "code": "YOGURT_PLAIN_LOW_FAT",
+          "coverage_line": 268,
+          "purchase_concept": "plain low-fat yogurt",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "MAYONNAISE_LOW_FAT",
+          "coverage_line": 269,
+          "purchase_concept": "low-fat mayonnaise",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [],
+      "matching_evidence_by_code": {
+        "YOGURT_PLAIN_LOW_FAT": [
+          "research-lenta-okey-v3.json:4"
+        ],
+        "MAYONNAISE_LOW_FAT": [
+          "research-lenta-okey-v2.json:19"
+        ],
+        "HONEY": [
+          "research-lenta-okey-v3.json:7"
+        ],
+        "APPLE_CIDER_VINEGAR": [
+          "research-lenta-okey-v3.json:22"
+        ],
+        "BLACK_PEPPER": [
+          "research-lenta-okey-v2.json:34"
+        ],
+        "CABBAGE_GREEN": [
+          "research-magnit-v2.json:7",
+          "research-lenta-okey-v2.json:12"
+        ],
+        "CARROT": [
+          "research-magnit-v2.json:1",
+          "research-lenta-okey-v2.json:1"
+        ],
+        "CRANBERRIES_DRIED": [
+          "research-lenta-okey-v3.json:21"
+        ],
+        "CABBAGE_RED": [
+          "research-x5-v3.json:4"
+        ],
+        "GREEN_ONION": [
+          "research-lenta-okey-v4.json:11",
+          "research-x5-v3.json:5"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-GREEN-BEANS-POTATOES-SMOKED-TURKEY",
+      "mandated_remove": false,
+      "required_row_count": 10,
+      "required_codes": [
+        "BLACK_PEPPER",
+        "GARLIC",
+        "GREEN_BEANS",
+        "MARGARINE",
+        "ONION_POWDER",
+        "ONION_YELLOW",
+        "POTATO_RED",
+        "THYME_DRIED",
+        "TURKEY_DRUMSTICK_SMOKED_COOKED",
+        "WATER"
+      ],
+      "critical_form_gaps": [
+        "MARGARINE",
+        "TURKEY_DRUMSTICK_SMOKED_COOKED"
+      ],
+      "ordinary_evidence_gaps": [
+        "ONION_POWDER",
+        "POTATO_RED"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "TURKEY_DRUMSTICK_SMOKED_COOKED",
+          "coverage_line": 279,
+          "purchase_concept": "cooked smoked turkey drumstick",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "MARGARINE",
+          "coverage_line": 282,
+          "purchase_concept": "margarine",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [
+            "research-lenta-okey-v4.json:10"
+          ],
+          "reason": "TRANS_FAT_FREE_NOT_EVIDENCED"
+        },
+        {
+          "code": "GREEN_BEANS",
+          "coverage_line": 288,
+          "purchase_concept": "frozen green beans",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null,
+          "historical_status": "NO_QUALIFYING_FORM_YET",
+          "historical_reason": null,
+          "refresh_note": "Exact frozen plain green beans match original thawed/drained frozen source form. Trans-fat-free margarine and cooked smoked turkey drumstick remain unresolved."
+        }
+      ],
+      "preparation_collapse_checks": [
+        {
+          "code": "POTATO_RED",
+          "purchase_concept": "red-skinned potato"
+        }
+      ],
+      "matching_evidence_by_code": {
+        "ONION_YELLOW": [
+          "research-magnit-v2.json:2"
+        ],
+        "GARLIC": [
+          "research-magnit-v2.json:3",
+          "research-lenta-okey-v2.json:6"
+        ],
+        "THYME_DRIED": [
+          "research-lenta-okey-v2.json:23"
+        ],
+        "BLACK_PEPPER": [
+          "research-lenta-okey-v2.json:34"
+        ],
+        "GREEN_BEANS": [
+          "research-lenta-okey-v8.json:5"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-TUNA-SALAD-SANDWICH",
+      "mandated_remove": false,
+      "required_row_count": 12,
+      "required_codes": [
+        "CELERY",
+        "EGG",
+        "GARLIC_POWDER",
+        "LETTUCE_ROMAINE",
+        "MAYONNAISE_LOW_FAT",
+        "MUSTARD_GROUND",
+        "ONION_POWDER",
+        "ONION_YELLOW",
+        "PARSLEY",
+        "ROLL_WHOLE_WHEAT",
+        "TOMATO",
+        "TUNA_CANNED_WATER"
+      ],
+      "critical_form_gaps": [
+        "ROLL_WHOLE_WHEAT",
+        "TUNA_CANNED_WATER"
+      ],
+      "ordinary_evidence_gaps": [
+        "LETTUCE_ROMAINE",
+        "ONION_POWDER"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "TUNA_CANNED_WATER",
+          "coverage_line": 289,
+          "purchase_concept": "canned tuna in water",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "MAYONNAISE_LOW_FAT",
+          "coverage_line": 294,
+          "purchase_concept": "low-fat mayonnaise",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "ROLL_WHOLE_WHEAT",
+          "coverage_line": 298,
+          "purchase_concept": "whole-grain wheat roll",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [],
+      "matching_evidence_by_code": {
+        "ONION_YELLOW": [
+          "research-magnit-v2.json:2"
+        ],
+        "CELERY": [
+          "research-lenta-okey-v3.json:13"
+        ],
+        "MUSTARD_GROUND": [
+          "research-lenta-okey-v3.json:15"
+        ],
+        "EGG": [
+          "research-magnit-v2.json:4",
+          "research-x5-v2.json:1"
+        ],
+        "MAYONNAISE_LOW_FAT": [
+          "research-lenta-okey-v2.json:19"
+        ],
+        "PARSLEY": [
+          "research-lenta-okey-v2.json:24"
+        ],
+        "TOMATO": [
+          "research-magnit-v2.json:10",
+          "research-lenta-okey-v2.json:2"
+        ],
+        "GARLIC_POWDER": [
+          "research-lenta-okey-v4.json:15"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-TUSCAN-GRILL-CHEESE",
+      "mandated_remove": false,
+      "required_row_count": 8,
+      "required_codes": [
+        "BASIL_DRIED",
+        "BREAD_WHOLE_WHEAT",
+        "CHEESE_MOZZARELLA_PART_SKIM",
+        "GARLIC_POWDER",
+        "MARGARINE",
+        "OREGANO_DRIED",
+        "SPINACH",
+        "TOMATO"
+      ],
+      "critical_form_gaps": [
+        "BREAD_WHOLE_WHEAT",
+        "CHEESE_MOZZARELLA_PART_SKIM",
+        "MARGARINE"
+      ],
+      "ordinary_evidence_gaps": [],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "MARGARINE",
+          "coverage_line": 301,
+          "purchase_concept": "trans-fat-free margarine",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [
+            "research-lenta-okey-v4.json:10"
+          ],
+          "reason": "TRANS_FAT_FREE_NOT_EVIDENCED"
+        },
+        {
+          "code": "BREAD_WHOLE_WHEAT",
+          "coverage_line": 305,
+          "purchase_concept": "whole-grain wheat bread",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "CHEESE_MOZZARELLA_PART_SKIM",
+          "coverage_line": 306,
+          "purchase_concept": "low-fat part-skim mozzarella",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [],
+      "matching_evidence_by_code": {
+        "BASIL_DRIED": [
+          "research-lenta-okey-v2.json:21"
+        ],
+        "OREGANO_DRIED": [
+          "research-lenta-okey-v2.json:22"
+        ],
+        "TOMATO": [
+          "research-magnit-v2.json:10",
+          "research-lenta-okey-v2.json:2"
+        ],
+        "GARLIC_POWDER": [
+          "research-lenta-okey-v4.json:15"
+        ],
+        "SPINACH": [
+          "research-lenta-okey-v4.json:2"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-ASIAN-TUNA-BURGER",
+      "mandated_remove": false,
+      "required_row_count": 14,
+      "required_codes": [
+        "BELL_PEPPER_RED",
+        "BREADCRUMBS",
+        "CANOLA_OIL",
+        "EGG_WHITE",
+        "GARLIC",
+        "GINGER",
+        "GREEN_ONION",
+        "LETTUCE_ROMAINE",
+        "MAYONNAISE_LOW_FAT",
+        "ROLL_WHOLE_WHEAT",
+        "SESAME_OIL",
+        "SOY_SAUCE_LOW_SODIUM",
+        "TOMATO",
+        "TUNA_CANNED_WATER"
+      ],
+      "critical_form_gaps": [
+        "BREADCRUMBS",
+        "ROLL_WHOLE_WHEAT",
+        "SOY_SAUCE_LOW_SODIUM"
+      ],
+      "ordinary_evidence_gaps": [
+        "CANOLA_OIL",
+        "LETTUCE_ROMAINE",
+        "TUNA_CANNED_WATER"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "MAYONNAISE_LOW_FAT",
+          "coverage_line": 310,
+          "purchase_concept": "low-fat mayonnaise",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "SOY_SAUCE_LOW_SODIUM",
+          "coverage_line": 313,
+          "purchase_concept": "low-sodium soy sauce",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "BREADCRUMBS",
+          "coverage_line": 319,
+          "purchase_concept": "panko-style dry breadcrumbs",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [
+            "research-lenta-okey-v3.json:25"
+          ],
+          "reason": "PANKO_NOT_EVIDENCED"
+        },
+        {
+          "code": "ROLL_WHOLE_WHEAT",
+          "coverage_line": 320,
+          "purchase_concept": "whole-grain wheat roll",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [],
+      "matching_evidence_by_code": {
+        "MAYONNAISE_LOW_FAT": [
+          "research-lenta-okey-v2.json:19"
+        ],
+        "GARLIC": [
+          "research-magnit-v2.json:3",
+          "research-lenta-okey-v2.json:6"
+        ],
+        "GINGER": [
+          "research-lenta-okey-v2.json:9"
+        ],
+        "BELL_PEPPER_RED": [
+          "research-magnit-v2.json:9"
+        ],
+        "SESAME_OIL": [
+          "research-lenta-okey-v3.json:6"
+        ],
+        "EGG_WHITE": [
+          "research-lenta-okey-v2.json:15"
+        ],
+        "TOMATO": [
+          "research-magnit-v2.json:10",
+          "research-lenta-okey-v2.json:2"
+        ],
+        "GREEN_ONION": [
+          "research-lenta-okey-v4.json:11",
+          "research-x5-v3.json:5"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-BEAN-BURRITO-BOWL",
+      "mandated_remove": false,
+      "required_row_count": 23,
+      "required_codes": [
+        "",
+        "BLACK_PEPPER",
+        "CHEESE_CHEDDAR_REDUCED_FAT",
+        "CHILI_POWDER",
+        "CILANTRO",
+        "CUMIN_GROUND",
+        "GARLIC_POWDER",
+        "GREEN_ONION",
+        "JALAPENO",
+        "ONION_POWDER",
+        "ONION_RED",
+        "ONION_YELLOW",
+        "PAPRIKA",
+        "PINTO_BEANS_CANNED_LOW_SODIUM",
+        "RICE_BROWN",
+        "SALT",
+        "TOMATO",
+        "TOMATO_PASTE_NO_SALT",
+        "WATER"
+      ],
+      "critical_form_gaps": [
+        "CHEESE_CHEDDAR_REDUCED_FAT",
+        "PINTO_BEANS_CANNED_LOW_SODIUM",
+        "RICE_BROWN"
+      ],
+      "ordinary_evidence_gaps": [
+        "",
+        "CHILI_POWDER",
+        "JALAPENO",
+        "ONION_POWDER"
+      ],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "PINTO_BEANS_CANNED_LOW_SODIUM",
+          "coverage_line": 323,
+          "purchase_concept": "low-sodium canned pinto beans",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "TOMATO_PASTE_NO_SALT",
+          "coverage_line": 333,
+          "purchase_concept": "tomato_paste_no_salt",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "RICE_BROWN",
+          "coverage_line": 334,
+          "purchase_concept": "dry long-grain parboiled brown rice",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [
+            "research-lenta-okey-v2.json:32"
+          ],
+          "reason": "PARBOILED_LONG_GRAIN_NOT_EVIDENCED"
+        },
+        {
+          "code": "CHEESE_CHEDDAR_REDUCED_FAT",
+          "coverage_line": 345,
+          "purchase_concept": "reduced-fat cheddar",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [
+        {
+          "code": "JALAPENO",
+          "purchase_concept": "fresh jalapeño"
+        }
+      ],
+      "matching_evidence_by_code": {
+        "ONION_YELLOW": [
+          "research-magnit-v2.json:2"
+        ],
+        "BLACK_PEPPER": [
+          "research-lenta-okey-v2.json:34"
+        ],
+        "PAPRIKA": [
+          "research-lenta-okey-v2.json:35"
+        ],
+        "TOMATO_PASTE_NO_SALT": [
+          "research-lenta-okey-v2.json:17"
+        ],
+        "CILANTRO": [
+          "research-lenta-okey-v3.json:12"
+        ],
+        "TOMATO": [
+          "research-magnit-v2.json:10",
+          "research-lenta-okey-v2.json:2"
+        ],
+        "ONION_RED": [
+          "research-lenta-okey-v2.json:5"
+        ],
+        "CUMIN_GROUND": [
+          "research-x5-v3.json:8"
+        ],
+        "GARLIC_POWDER": [
+          "research-lenta-okey-v4.json:15"
+        ],
+        "GREEN_ONION": [
+          "research-lenta-okey-v4.json:11",
+          "research-x5-v3.json:5"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-VEGETABLE-FRITTATA-BITES",
+      "mandated_remove": true,
+      "required_row_count": 10,
+      "required_codes": [
+        "BELL_PEPPER_RED",
+        "BLACK_PEPPER",
+        "CHEESE_CHEDDAR_REDUCED_FAT",
+        "EGG",
+        "FLOUR_WHEAT",
+        "MILK_SKIM",
+        "MUSHROOM_WHITE",
+        "ONION_YELLOW",
+        "SALT",
+        "SPINACH"
+      ],
+      "critical_form_gaps": [
+        "CHEESE_CHEDDAR_REDUCED_FAT"
+      ],
+      "ordinary_evidence_gaps": [],
+      "market_status": "CRITICAL_FORM_GAPS",
+      "critical_form_checks": [
+        {
+          "code": "CHEESE_CHEDDAR_REDUCED_FAT",
+          "coverage_line": 352,
+          "purchase_concept": "reduced-fat cheddar",
+          "status": "NO_QUALIFYING_FORM_YET",
+          "excluded_code_only": [],
+          "reason": null
+        },
+        {
+          "code": "MILK_SKIM",
+          "coverage_line": 353,
+          "purchase_concept": "skim/nonfat milk",
+          "status": "MATCHED",
+          "excluded_code_only": [],
+          "reason": null
+        }
+      ],
+      "preparation_collapse_checks": [],
+      "matching_evidence_by_code": {
+        "ONION_YELLOW": [
+          "research-magnit-v2.json:2"
+        ],
+        "BELL_PEPPER_RED": [
+          "research-magnit-v2.json:9"
+        ],
+        "BLACK_PEPPER": [
+          "research-lenta-okey-v2.json:34"
+        ],
+        "MILK_SKIM": [
+          "research-lenta-okey-v2.json:13"
+        ],
+        "EGG": [
+          "research-magnit-v2.json:4",
+          "research-x5-v2.json:1"
+        ],
+        "FLOUR_WHEAT": [
+          "research-lenta-okey-v4.json:16"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ],
+        "SPINACH": [
+          "research-lenta-okey-v4.json:2"
+        ],
+        "MUSHROOM_WHITE": [
+          "research-lenta-okey-v6.json:10"
+        ]
+      }
+    },
+    {
+      "recipe_source_id": "CACFP6-CAULIFLOWER-RICE",
+      "mandated_remove": true,
+      "required_row_count": 9,
+      "required_codes": [
+        "BELL_PEPPER_RED",
+        "CARROT",
+        "CAULIFLOWER",
+        "CELERY",
+        "CILANTRO",
+        "GARLIC_POWDER",
+        "OLIVE_OIL",
+        "ONION_YELLOW",
+        "SALT"
+      ],
+      "critical_form_gaps": [],
+      "ordinary_evidence_gaps": [],
+      "market_status": "FULL_REQUIRED_MARKET_EVIDENCE",
+      "critical_form_checks": [
+        {
+          "code": "CAULIFLOWER",
+          "coverage_line": 360,
+          "purchase_concept": "frozen cauliflower (ricing is preparation)",
+          "status": "MATCHED",
+          "excluded_code_only": [
+            "research-lenta-okey-v2.json:10"
+          ],
+          "reason": null,
+          "historical_status": "NO_QUALIFYING_FORM_YET",
+          "historical_reason": "FRESH_OR_SHELL_DOES_NOT_CLEAR_FROZEN",
+          "refresh_note": "Frozen plain cauliflower matches material purchase state; ricing is preparation. This ICN card remains mandated_remove=true regardless of market evidence and cannot become a keeper."
+        }
+      ],
+      "preparation_collapse_checks": [],
+      "matching_evidence_by_code": {
+        "CELERY": [
+          "research-lenta-okey-v3.json:13"
+        ],
+        "ONION_YELLOW": [
+          "research-magnit-v2.json:2"
+        ],
+        "CARROT": [
+          "research-magnit-v2.json:1",
+          "research-lenta-okey-v2.json:1"
+        ],
+        "BELL_PEPPER_RED": [
+          "research-magnit-v2.json:9"
+        ],
+        "CILANTRO": [
+          "research-lenta-okey-v3.json:12"
+        ],
+        "GARLIC_POWDER": [
+          "research-lenta-okey-v4.json:15"
+        ],
+        "OLIVE_OIL": [
+          "research-lenta-okey-v4.json:9",
+          "research-x5-v3.json:1"
+        ],
+        "SALT": [
+          "research-lenta-okey-v4.json:17",
+          "research-x5-v3.json:2"
+        ],
+        "CAULIFLOWER": [
+          "research-lenta-okey-v7.json:1"
+        ]
+      }
+    }
+  ],
+  "review_findings": [
+    {
+      "finding": "Original96 flags are not a complete material-form inventory.",
+      "detail": "All363 rows were checked. Additional material rows outside96 include frozen corn in SpanishRice, ChickenFajita, MarinatedBlackBeanSalad and CornPudding; no-salt-added crushed tomatoes in VegetableChili; repeated milk/flour/margarine/tomato traits. Existing code-only positive must not auto-clear those."
+    },
+    {
+      "finding": "Generic same-code evidence exclusions retained.",
+      "detail": "Fresh apples/carrots/cauliflower, shell eggs, generic brown rice, ordinary breadcrumbs and crushed tomatoes without salt review do not establish source frozen, parboiled-long-grain, panko or no-added-salt traits."
+    },
+    {
+      "finding": "VegetableFrittata shell alternative is source-authored.",
+      "detail": "DirectFNS Vegetable_Frittata_6_Servings.pdf says3 eggs or6oz Liquid eggs; no inferred conversion added."
+    },
+    {
+      "finding": "Supplemental positives reviewed without blanket code clearing.",
+      "detail": "research-x5-v3 and research-lenta-okey-v4 integrated. Frozen sweet corn clears source frozen-corn form. Generic margarine does NOT clear original trans-fat-free requirement. Fresh lime supplies source fresh juice/zest through approved purchase/preparation collapse; no source-authored squeeze step or yield conversion claimed."
+    }
+  ],
+  "evidence_refresh": {
+    "checked_at": "2026-09-05",
+    "historical_counts": {
+      "fully_market_evidenced": 5,
+      "critical_form_gaps": 25,
+      "ordinary_gaps_only": 0
+    },
+    "changes": [
+      {
+        "recipe_source_id": "CACFP6-CORN-EDAMAME-BLEND",
+        "code": "SESAME_OIL",
+        "prior": {
+          "critical_form_gaps": [],
+          "ordinary_evidence_gaps": [],
+          "matching_evidence": [
+            "research-lenta-okey-v3.json:6"
+          ]
+        },
+        "qualifying_ref": "research-lenta-okey-v8.json:6",
+        "reason": "Replace historical KOTANYI generic-oil match: it explicitly forbids frying. Exact ELEYA sesame oil identity has matching official frying/hot-dish use support; Yarche corroborates product use only, not five-chain availability."
+      },
+      {
+        "recipe_source_id": "CACFP6-CORN-EDAMAME-BLEND",
+        "code": "CORIANDER_SEED",
+        "prior": {
+          "critical_form_gaps": [],
+          "ordinary_evidence_gaps": [],
+          "matching_evidence": [
+            "research-lenta-okey-v3.json:17"
+          ]
+        },
+        "qualifying_ref": "research-lenta-okey-v7.json:2",
+        "reason": "Source explicitly ground coriander seeds. Replace historical whole-seed code-only evidence with exact ground-spice product."
+      },
+      {
+        "recipe_source_id": "CACFP6-LOCAL-HARVEST-BAKE",
+        "code": "SALT",
+        "prior": {
+          "critical_form_gaps": [],
+          "ordinary_evidence_gaps": [],
+          "matching_evidence": [
+            "research-lenta-okey-v4.json:17",
+            "research-x5-v3.json:2"
+          ]
+        },
+        "qualifying_ref": "research-lenta-okey-v7.json:3",
+        "reason": "Exact source kosher-or-iodized alternative: explicitly selected iodized salt, not generic salt inference."
+      },
+      {
+        "recipe_source_id": "CACFP6-GREEN-BEANS-POTATOES-SMOKED-TURKEY",
+        "code": "GREEN_BEANS",
+        "prior": {
+          "critical_form_gaps": [
+            "GREEN_BEANS",
+            "MARGARINE",
+            "TURKEY_DRUMSTICK_SMOKED_COOKED"
+          ],
+          "ordinary_evidence_gaps": [
+            "ONION_POWDER",
+            "POTATO_RED"
+          ],
+          "matching_evidence": []
+        },
+        "qualifying_ref": "research-lenta-okey-v8.json:5",
+        "reason": "Exact frozen plain green beans match original thawed/drained frozen source form. Trans-fat-free margarine and cooked smoked turkey drumstick remain unresolved."
+      },
+      {
+        "recipe_source_id": "CACFP6-CAULIFLOWER-RICE",
+        "code": "CAULIFLOWER",
+        "prior": {
+          "critical_form_gaps": [
+            "CAULIFLOWER"
+          ],
+          "ordinary_evidence_gaps": [],
+          "matching_evidence": []
+        },
+        "qualifying_ref": "research-lenta-okey-v7.json:1",
+        "reason": "Frozen plain cauliflower matches material purchase state; ricing is preparation. This ICN card remains mandated_remove=true regardless of market evidence and cannot become a keeper."
+      },
+      {
+        "recipe_source_id": "CACFP6-RICE-VEGETABLE-CASSEROLE",
+        "code": "KALE",
+        "prior": {
+          "critical_form_gaps": [
+            "CHEESE_CHEDDAR_REDUCED_FAT",
+            "CHEESE_MOZZARELLA_PART_SKIM",
+            "CHICKEN_BROTH_LOW_SODIUM",
+            "MARGARINE",
+            "RICE_BROWN"
+          ],
+          "ordinary_evidence_gaps": [
+            "KALE",
+            "MUSHROOM_WHITE",
+            "ONION_POWDER"
+          ],
+          "matching_evidence": []
+        },
+        "qualifying_ref": "research-lenta-okey-v6.json:9",
+        "reason": "Fresh kale leaves exactly match source; fine chopping is preparation."
+      },
+      {
+        "recipe_source_id": "CACFP6-RICE-VEGETABLE-CASSEROLE",
+        "code": "MUSHROOM_WHITE",
+        "prior": {
+          "critical_form_gaps": [
+            "CHEESE_CHEDDAR_REDUCED_FAT",
+            "CHEESE_MOZZARELLA_PART_SKIM",
+            "CHICKEN_BROTH_LOW_SODIUM",
+            "MARGARINE",
+            "RICE_BROWN"
+          ],
+          "ordinary_evidence_gaps": [
+            "MUSHROOM_WHITE",
+            "ONION_POWDER"
+          ],
+          "matching_evidence": []
+        },
+        "qualifying_ref": "research-lenta-okey-v6.json:10",
+        "reason": "Fresh white champignons match source fresh mushrooms; slicing/chopping is preparation."
+      },
+      {
+        "recipe_source_id": "CACFP6-VEGETABLE-FRITTATA",
+        "code": "MUSHROOM_WHITE",
+        "prior": {
+          "critical_form_gaps": [
+            "CHEESE_CHEDDAR_REDUCED_FAT"
+          ],
+          "ordinary_evidence_gaps": [
+            "MUSHROOM_WHITE"
+          ],
+          "matching_evidence": []
+        },
+        "qualifying_ref": "research-lenta-okey-v6.json:10",
+        "reason": "Fresh white champignons match source fresh mushrooms; slicing/chopping is preparation."
+      },
+      {
+        "recipe_source_id": "CACFP6-VEGETABLE-FRITTATA-BITES",
+        "code": "MUSHROOM_WHITE",
+        "prior": {
+          "critical_form_gaps": [
+            "CHEESE_CHEDDAR_REDUCED_FAT"
+          ],
+          "ordinary_evidence_gaps": [
+            "MUSHROOM_WHITE"
+          ],
+          "matching_evidence": []
+        },
+        "qualifying_ref": "research-lenta-okey-v6.json:10",
+        "reason": "Fresh white champignons match source fresh mushrooms; slicing/chopping is preparation."
+      },
+      {
+        "recipe_source_id": "CACFP6-ROPA-VIEJA",
+        "code": "ROSEMARY_DRIED",
+        "prior": {
+          "critical_form_gaps": [
+            "BEEF_BROTH_LOW_SODIUM",
+            "RICE_BROWN"
+          ],
+          "ordinary_evidence_gaps": [
+            "BEEF_SHOULDER",
+            "ROSEMARY_DRIED"
+          ],
+          "matching_evidence": []
+        },
+        "qualifying_ref": "research-lenta-okey-v7.json:6",
+        "reason": "Explicit dried rosemary matches source dried crushed rosemary; crushing is preparation."
+      }
+    ],
+    "non_promotions": [
+      "Fresh whole ORANGE is not frozen orange concentrate.",
+      "Ordinary cheddar is not reduced-fat cheddar; brined lowfat mozzarella is not low-moisture part-skim form.",
+      "Raw chicken breast is not source cooked frozen chicken strips; raw shell eggs are not frozen whole liquid eggs.",
+      "Cold-use-only canola oil cannot clear original cooking/frying recipes.",
+      "Fresh pineapple is not canned pineapple in100%juice; young white potatoes do not clear source red-potato variety.",
+      "New generic margarine evidence does not establish original trans-fat-free trait.",
+      "Frozen ICN cauliflower now has market proof but remains explicitly excluded by user decision."
+    ],
+    "interpretation": "Six original cards now have full required market evidence; one is mandated-remove ICN Cauliflower Rice. Exactly five eligible original keepers remain. Historical96 risk-row reclassifications are retained as an initial-audit metric, not asserted as a current unresolved count."
+  }
+}

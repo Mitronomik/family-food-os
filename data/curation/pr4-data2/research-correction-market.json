@@ -1,0 +1,581 @@
+{
+  "schema_version": 1,
+  "primary_candidate_notice_reviews": [
+    {
+      "recipe_name": "Oven Fried Fish",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/fish",
+      "artifact_name": "data2-correction-oven-fried-fish.pdf",
+      "source_sha256": "068b5b0d4c7e45ad498758501bcc8f67b7e5f69f9c27ea4db4af39b05cba069c",
+      "artifact_type": "BROWSER_PRINTED_PRIMARY_PAGE_PDF",
+      "review_method": "Independently read complete one-page saved source representation with pdftotext and rechecked SHA-256; printed page includes source URL and July 31 2026 date.",
+      "attribution": "Eating Smart, Being Active; Colorado State University and University of California at Davis; adapted by USDA Food and Nutrition Administration.",
+      "notice_result": "Equal-opportunity footer present. No recipe-specific restriction or affirmative unrestricted copying/commercial/derivative grant visible in this printed representation. The approved narrow direct-FNS project risk posture applies only; outside contributors remain attributed, photos/logos excluded, no public-domain conclusion. Hash identifies this saved print representation, not HTTP HTML bytes."
+    },
+    {
+      "recipe_name": "Baked Lentils Casserole",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/lentils-casserole",
+      "artifact_name": "data2-correction-baked-lentils.pdf",
+      "source_sha256": "86b118c36ca73b75618e1656bbc96c2c06f59785ca7292efc47be0fe99cc4598",
+      "artifact_type": "BROWSER_PRINTED_PRIMARY_PAGE_PDF",
+      "review_method": "Independently read both saved source pages with pdftotext, including final cooking step and attribution/footer on page two; rechecked SHA-256. Printed date July 31 2026.",
+      "attribution": "Let's Make Meatless Meals; University of Wisconsin Cooperative Extension Service; adapted by USDA Food and Nutrition Administration.",
+      "notice_result": "Equal-opportunity footer present. No recipe-specific restriction or affirmative unrestricted copying/commercial/derivative grant visible in this printed representation. Approved narrow direct-FNS project risk posture only; outside contributors remain attributed, photos/logos excluded, no public-domain conclusion."
+    },
+    {
+      "recipe_name": "Orange Pork Chops",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/orange-porkchops",
+      "artifact_name": "data2-correction-orange-pork-chops.pdf",
+      "source_sha256": "aa07563b660219b4173edc63cf6f76478e1bc71bff7f0c8a54fc5eaf5985a479",
+      "artifact_type": "BROWSER_PRINTED_PRIMARY_PAGE_PDF",
+      "review_method": "Independently read complete one-page saved source representation, rechecked SHA-256 and visually inspected Poppler rendering, including actual attribution and footer. Printed date July 31 2026.",
+      "attribution": "Simply Seniors Cookbook; Utah State University Cooperative Extension; adapted by USDA Food and Nutrition Administration.",
+      "notice_result": "External Utah State contributor must not be dropped or replaced by USDA-only attribution. Equal-opportunity footer present. No recipe-specific restriction or affirmative unrestricted copying/commercial/derivative grant visible in this printed representation. Approved narrow direct-FNS project risk posture only; photos/logos excluded and no public-domain conclusion.",
+      "source_limit": "Optional dash seasonings visibly have stray question marks before optional labels in the primary page; preserve reviewable source text and omit those explicitly optional ingredients, never invent dash quantities."
+    }
+  ],
+  "additional_candidate_checks": [
+    {
+      "code": "BEEF_TOP_ROUND",
+      "candidate": "Hearty Beef Soup",
+      "status": "UNCERTAIN",
+      "queries": ["site:lenta.com/product говядина бедро", "site:lenta.com/product говядина внутренняя", "site:lenta.com/product говядина верхняя", "site:5ka.ru говядина внутренняя", "site:magnit.ru/product говядина внутренняя", "site:magnit.ru/product говядина верхняя часть", "site:perekrestok.ru говядина внутренняя", "site:okeydostavka.ru говядина внутренняя", "site:okeydostavka.ru говядина top"],
+      "reviewed_urls": ["https://lenta.com/product/govyadina-bedro-bez-kosti-ohl-ves-rossiya-669959/", "https://lenta.com/product/govyadina-tazobedrennyjj-otrub-bk-ohl-vu-rossiya-700g-701640/", "https://lenta.com/catalog/govyadina-418/"],
+      "finding": "Plain boneless round/thigh products are real mainstream retail, but none of these exact product records establishes the narrower top/inside round cut. The 701640 description calls the whole round the upper leg, which is not evidence that this is specifically its inside/top subdivision. Category explanatory copy and third-party declarations of possible manufactured cuts are not a product match. No qualifying exact cut evidence established across the five baseline chains. Do not import as AVAILABLE or assume frozen/thawed provenance from chilled meat."
+    },
+    {
+      "code": "SOY_SAUCE_LOW_SODIUM",
+      "candidate": "Honey-Mustard Pork Chops",
+      "status": "UNCERTAIN",
+      "queries": ["site:lenta.com/product соус соевый меньше соли", "site:lenta.com соевый пониженным содержанием соли", "site:lenta.com/product соус соевый легкий", "site:magnit.ru/product соус соевый соли Санкт-Петербург", "site:magnit.ru/product Sen Soy лёгкий Санкт-Петербург", "site:5ka.ru соевый пониженным", "site:perekrestok.ru соевый пониженным", "site:okeydostavka.ru Kikkoman Легкий"],
+      "reviewed_urls": ["https://lenta.com/product/710993-710993/", "https://magnit.ru/product/1000217072-sen_soy_sous_soevyy_lyegkiy_150ml_st_but_sostra_6", "https://magnit.ru/product/1009991111-sous_soevyy_sen_soy_klassicheskiy_1l?shopCode=782897&shopType=1"],
+      "finding": "Lenta PAN ASIAN light has no explicit reduced-salt claim; light naming alone does not establish low sodium. Magnit Sen Soy light product explicitly describes low salt but is bound to Krasnodar and cannot be qualified by generic SPB chain presence. A SPB classic sauce page displays a light variant selector but the selected actual product is classic; this is not evidence that the reduced-salt variant is listed for that store. No qualifying exact low-sodium form established in reviewed baseline-chain results."
+    }
+  ],
+  "checked_at": "2026-09-05",
+  "scope": "Correction-pass six canonical purchase concepts for Oven Fried Fish, Baked Lentils Casserole, and Orange Pork Chops. One-based filename:N references observations[N-1]. Market compatibility is not momentary store stock. No production retailer integration, prices, nutrition, recipe conversion, or unrestricted rights claims.",
+  "search_queries": [
+    "site:lenta.com/product/ тилапия филе",
+    "site:magnit.ru/product тилапия филе",
+    "site:5ka.ru тилапия филе",
+    "site:perekrestok.ru тилапия филе",
+    "site:okeydostavka.ru тилапия филе",
+    "site:magnit.ru/product \"тилапия\" \"Санкт-Петербург\"",
+    "site:lenta.com/product/ \"сухари панировочные\"",
+    "site:magnit.ru/product \"сухари панировочные\" \"Санкт-Петербург\"",
+    "site:5ka.ru \"сухари панировочные\"",
+    "site:perekrestok.ru \"сухари панировочные\"",
+    "site:okeydostavka.ru \"сухари панировочные\"",
+    "site:lenta.com/product/ \"чечевица\"",
+    "site:magnit.ru/product \"чечевица\" \"Санкт-Петербург\"",
+    "site:5ka.ru \"чечевица\"",
+    "site:perekrestok.ru \"чечевица\"",
+    "site:okeydostavka.ru \"чечевица\"",
+    "site:lenta.com/product/ \"томаты\" \"кусочками\"",
+    "site:5ka.ru \"томаты\" \"собственном соку\"",
+    "site:perekrestok.ru \"томаты\" \"без соли\"",
+    "site:okeydostavka.ru \"томаты\" \"без соли\"",
+    "site:magnit.ru/product \"томаты\" \"без соли\" \"Санкт-Петербург\"",
+    "site:lenta.com/product/ \"Чеддер\"",
+    "site:5ka.ru \"Чеддер\"",
+    "site:perekrestok.ru \"Чеддер\"",
+    "site:okeydostavka.ru \"Чеддер\"",
+    "site:magnit.ru/product \"Чеддер\" \"Санкт-Петербург\"",
+    "site:5ka.ru/catalog/syr--251C13095/ \"Le Superbe\"",
+    "site:lenta.com/product/ \"корейка\" \"свинина\"",
+    "site:5ka.ru \"корейка\"",
+    "site:perekrestok.ru/cat \"корейка\"",
+    "site:okeydostavka.ru \"корейка\"",
+    "site:magnit.ru/product \"корейка\" \"Санкт-Петербург\""
+  ],
+  "exclusions": [
+    "Official product pages explicitly bound to Moscow, Krasnodar, Rostov or another non-SPB/LO city were not accepted; this includes multiple Magnit tilapia results and Perekrestok categories.",
+    "Expired retailer promotional PDFs were excluded, including old Pyaterochka cheese offers and Perekrestok fish flyers.",
+    "Breadcrumbs listed only as an ingredient of ready fishcakes were not evidence for standalone breadcrumbs.",
+    "Okey Orenburg cheese and Murmansk dried tomato pages were excluded for wrong region and/or form.",
+    "Salted Pikanta passata, processed cheddar, smoked or marinated pork loin, canned lentils, and culinary preparation descriptors were not accepted as the selected purchase concepts.",
+    "Browser errors and missing qualifying results mean evidence not established in that search, never product absence. User reviews, health claims and generic web assertions were not used as primary product evidence."
+  ],
+  "region_reviews": [
+    {
+      "retailer": "Лента",
+      "url": "https://lenta.com/catalog/ovoshchi-146/",
+      "finding": "Current official vegetables category delivery section expressly lists Saint Petersburg among served cities.",
+      "review_method": "CURRENT_OFFICIAL_PAGE_TEXT",
+      "checked_at": "2026-09-05"
+    },
+    {
+      "retailer": "Пятёрочка",
+      "url": "https://rabota.x5.ru/dostavka/rabota-v-x5/",
+      "finding": "Current official X5 delivery operation page identifies Pyaterochka and Perekrestok stores; current picker locations include Saint Petersburg.",
+      "review_method": "CURRENT_OFFICIAL_PAGE_TEXT",
+      "checked_at": "2026-09-05"
+    },
+    {
+      "retailer": "Магнит",
+      "finding": "The two accepted official product URLs contain shop IDs and explicitly display Saint Petersburg store addresses; no separate generic chain-presence inference is needed.",
+      "review_method": "CURRENT_SEARCH_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "checked_at": "2026-09-05"
+    }
+  ],
+  "observations": [
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "code": "TILAPIA_RAW",
+      "url": "https://lenta.com/product/tilapiya-file-premium-razmorozhennoe-rossiya-474037/",
+      "wording": "Тилапия филе (из замороженного сырья) Премиум ЛЕНТА FRESH, весовая",
+      "notes": "Current official neutral page indexed today. Plain raw thawed tilapia fillet, sole ingredient tilapia; not cooked fish or a prepared breaded product. Source explicitly permits fresh or frozen-and-thawed tilapia. No yield conversion."
+    },
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "code": "TILAPIA_RAW",
+      "url": "https://lenta.com/product/tilapiya-file-sm-rossiya-500g-428531/",
+      "wording": "Тилапия замороженная ЛЕНТА филе, 500г",
+      "notes": "Current official neutral page indexed two days ago. Raw frozen fillets, tilapia and drinking-water glaze. An explicitly source-permitted frozen-and-thawed alternative; not a second qualifying chain. No glaze-to-edible mass conversion."
+    },
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "code": "BREADCRUMBS",
+      "url": "https://lenta.com/product/suhari-panirovochnye-lenta-rossiya-200g-638246/",
+      "wording": "Сухари панировочные ЛЕНТА, 200г",
+      "notes": "Current official neutral page indexed yesterday. Plain wheat breadcrumbs intended for breading fish/meat/vegetables, not seasoned mix, panko-only concept, or breadcrumbs hidden inside a ready meal. Ordinary grocery purchase concept."
+    },
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "code": "LENTILS_DRY",
+      "url": "https://lenta.com/product/chechevica-zelenaya-prodovolstvennaya-kalibrovannaya-rossiya-450g-440340/",
+      "wording": "Чечевица зеленая ЛЕНТА калиброванная, 450г",
+      "notes": "Current official neutral page indexed today. Plain dry whole green lentils; select whole lentils within source generic lentils, not canned cooked lentils or split red lentils requiring an unreviewed method change."
+    },
+    {
+      "retailer": "Магнит",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_SEARCH_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "region_evidence_url": "https://magnit.ru/product/1000108780-chechevitsa_zelenaya_tselaya_td_kholding_400g?shopCode=782972&shopType=1",
+      "status": "AVAILABLE",
+      "code": "LENTILS_DRY",
+      "url": "https://magnit.ru/product/1000108780-chechevitsa_zelenaya_tselaya_td_kholding_400g?shopCode=782972&shopType=1",
+      "wording": "Чечевица зелёная целая Premiere of Taste, 400г",
+      "notes": "Current official product indexed three weeks ago, explicitly Санкт-Петербург, Шушары, Вилеровский переулок, 8, литера А. Plain dry whole green lentils. Product title and body have a package-weight inconsistency (400g versus 0.45kg); no package mass is imported or used to normalize recipe quantities."
+    },
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "code": "TOMATO_CANNED_NO_SALT",
+      "url": "https://lenta.com/product/tomaty-kusochkami-v-tomatnom-soke-zhb-italiya-400g-542921/",
+      "wording": "Томаты DOLCE ALBERO кусочками в томатном соке, 400г; composition: cut tomatoes, tomato juice, citric acid.",
+      "notes": "Current official neutral page indexed yesterday and product composition inspected. Canned cut tomatoes with no added salt in the complete declared ingredient list. Supports no-salt-added purchase selection, not sodium-free certification or a measured nutrient claim. Not tomato paste, ketchup, salted passata, or fresh tomatoes."
+    },
+    {
+      "retailer": "Магнит",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_SEARCH_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "region_evidence_url": "https://magnit.ru/product/1000216768-tomaty_premier_of_taste_rezanye_v_sobstvennom_soku_400g?shopCode=784364&shopType=1",
+      "status": "AVAILABLE",
+      "code": "TOMATO_CANNED_NO_SALT",
+      "url": "https://magnit.ru/product/1000216768-tomaty_premier_of_taste_rezanye_v_sobstvennom_soku_400g?shopCode=784364&shopType=1",
+      "wording": "Томаты резаные в собственном соку Premiere of Taste, 400г; composition: peeled cut tomatoes, directly pressed tomato juice, citric acid.",
+      "notes": "Current official product indexed last month, explicitly Санкт-Петербург, Дачный проспект, 18, литера А. Official complete ingredient declaration contains no added salt. Consumer reviews are not relied on. No claim of zero naturally occurring sodium."
+    },
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "code": "CHEESE_CHEDDAR",
+      "url": "https://lenta.com/product/syr-polutverdyjj-chedder-45-brusok-bez-zmzh-belarus-200g-734869/",
+      "wording": "Сыр полутвердый БРЕСТ-ЛИТОВСК Чеддер 45%, без змж, 200г",
+      "notes": "Current official neutral page indexed today. Ordinary natural semi-hard block cheddar made from milk, not processed cheese slices, cheese sauce, or reduced-fat cheese. Shredding is source preparation, not a required retail form. Dry-matter fat labeling is not converted to a recipe fat quantity."
+    },
+    {
+      "retailer": "Пятёрочка",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_SEARCH_INDEXED_OFFICIAL_REGION_NEUTRAL_CATALOGUE_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://rabota.x5.ru/dostavka/rabota-v-x5/",
+      "status": "AVAILABLE",
+      "code": "CHEESE_CHEDDAR",
+      "url": "https://5ka.ru/catalog/syr--251C13095/",
+      "wording": "Official cheese category lists Сыр Le Superbe Чеддер 50% БЗМЖ 150г.",
+      "notes": "Current search-indexed official region-neutral category, indexed three months ago; live open failed, so the underlying official category URL and exact product wording are retained for review. No city binding was shown. Separate current X5 official delivery-employment page identifies delivery from Pyaterochka and Perekrestok stores and picker operations in Saint Petersburg. Premium brand alone is not the plausibility basis: the ordinary Lenta Belarus-made cheddar corroborates a non-specialist canonical purchase concept."
+    },
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "code": "PORK_LOIN",
+      "url": "https://lenta.com/product/svinina-korejjka-premium-polufabrikat-ohlazhdennyjj-rossiya-70099/",
+      "wording": "Корейка свиная Премиум ЛЕНТА FRESH; raw chilled boneless pork loin, sole ingredient pork.",
+      "notes": "Current official neutral product indexed today and full attributes inspected: На кости — Нет; Режим охлаждения — Охлажденный; Часть туши — Корейка. Ordinary plain raw boneless loin can be selected for generic pork chops; not marinated pork, smoked loin, or a cooked product. Retain two source chops as counts; no invented slice thickness or mass. A stock-ended label is not treated as market absence or current availability."
+    },
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "code": "OREGANO_DRIED",
+      "url": "https://lenta.com/product/oregano-dushica-dushica-izmelchennyjj-paket-avstriya-8g-153107/",
+      "wording": "Орегано (душица) KOTANYI измельченный, 8г; sole ingredient oregano, shelf-stable grocery seasoning.",
+      "notes": "Current official neutral product indexed two weeks ago. Standalone dried chopped herb in a spice packet, not fresh plant, sowing seeds, mixed Italian herbs, or oregano within a prepared sauce. Ordinary non-specialist seasoning. Five-chain queries also reviewed 5ka oregano, Perekrestok dried oregano, Okey oregano, Magnit oregano Saint Petersburg: other results were recipes, expired flyers, wrong-city pages, mixed seasoning or ready dishes, not qualifying product evidence. Supplemental classification RU_AVAILABLE. No health, price or nutrient claims imported."
+    },
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "code": "STRAWBERRY",
+      "purchase_form": "FROZEN_UNSWEETENED_SINGLE_FRUIT",
+      "url": "https://lenta.com/product/klubnika-zam-1500g-495854/",
+      "wording": "Клубника замороженная BONVIDA, 1500г; sole ingredient клубника.",
+      "notes": "Current official neutral product indexed today. Frozen single-fruit strawberries with no added sugar in the declared complete ingredient list, not syrup, jam, fruit puree, ice cream or mixed berries. Supports the frozen-fruit selection for Simple Green Smoothie; not evidence for fresh-only strawberries. Ordinary frozen-grocery plausibility, retain source cup quantity without converting from retailer package weight. No health claims, current inventory, prices or consumer reviews imported."
+    },
+    {
+      "retailer": "Магнит",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_SEARCH_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "region_evidence_url": "https://magnit.ru/product/1499919387-klubnika_zamorozhennaya_v_10?catalogType=1&shopCode=571452&shopType=1",
+      "status": "AVAILABLE",
+      "code": "STRAWBERRY",
+      "purchase_form": "FROZEN_UNSWEETENED_SINGLE_FRUIT",
+      "url": "https://magnit.ru/product/1499919387-klubnika_zamorozhennaya_v_10?catalogType=1&shopCode=571452&shopType=1",
+      "wording": "Клубника быстрозамороженная; sole ingredient клубника замороженная.",
+      "notes": "Current search-indexed official product (three months) explicitly identifies Saint Petersburg, проспект Науки, 10, корпус 1, литера А. Plain frozen single-fruit strawberries with no added sugar in the ingredient list. The selected product is strawberry, not another berry in the variant selector. Out-of-stock wording does not negate market representation or establish momentary availability. No consumer-review evidence, nutrient or mass conversion imported."
+    }
+  ],
+  "five_chain_review": [
+    {
+      "code": "STRAWBERRY",
+      "purchase_form": "FROZEN_UNSWEETENED_SINGLE_FRUIT",
+      "queries": ["site:lenta.com/product клубника замороженная", "site:5ka.ru клубника замороженная", "site:5ka.ru клубника быстрозамороженная", "site:perekrestok.ru клубника замороженная", "site:okeydostavka.ru клубника замороженная", "site:okeydostavka.ru клубника замороженная spb", "site:magnit.ru/product клубника замороженная Санкт-Петербург"],
+      "cells": [
+        {"retailer": "Пятёрочка", "status": "UNCERTAIN", "evidence_refs": [], "interpretation": "Old promotional-exclusion document is not sufficient current exact unsweetened-product proof; no product absence inferred."},
+        {"retailer": "Перекрёсток", "status": "UNCERTAIN", "evidence_refs": [], "interpretation": "Expired official promotional flyers excluded; no product absence inferred."},
+        {"retailer": "Лента", "status": "AVAILABLE", "evidence_refs": ["research-correction-market.json:12"], "interpretation": "Qualifying current frozen single-fruit product plus official SPB presence."},
+        {"retailer": "О'КЕЙ", "status": "UNCERTAIN", "evidence_refs": [], "interpretation": "No qualifying result established; no product absence inferred."},
+        {"retailer": "Магнит", "status": "AVAILABLE", "evidence_refs": ["research-correction-market.json:13"], "interpretation": "Qualifying official current indexed product explicitly bound to SPB store."}
+      ],
+      "classification": "RU_AVAILABLE",
+      "rationale": "Two qualifying baseline chains and ordinary non-specialist frozen-fruit plausibility; no three-chain mass-market claim for this purchase form."
+    },
+    {
+      "code": "TILAPIA_RAW",
+      "queries": [
+        "site:lenta.com/product/ тилапия филе",
+        "site:magnit.ru/product тилапия филе",
+        "site:5ka.ru тилапия филе",
+        "site:perekrestok.ru тилапия филе",
+        "site:okeydostavka.ru тилапия филе",
+        "site:magnit.ru/product \"тилапия\" \"Санкт-Петербург\""
+      ],
+      "cells": [
+        {
+          "retailer": "Пятёрочка",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        },
+        {
+          "retailer": "Перекрёсток",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        },
+        {
+          "retailer": "Лента",
+          "status": "AVAILABLE",
+          "evidence_refs": [
+            "research-correction-market.json:1",
+            "research-correction-market.json:2"
+          ],
+          "interpretation": "Qualifying purchase-form evidence; no current stock claim."
+        },
+        {
+          "retailer": "О'КЕЙ",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        },
+        {
+          "retailer": "Магнит",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        }
+      ],
+      "classification": "RU_AVAILABLE",
+      "rationale": "At least one qualifying major chain and ordinary non-specialist grocery plausibility; fewer than three qualifying baseline chains in this supplemental ledger."
+    },
+    {
+      "code": "BREADCRUMBS",
+      "queries": [
+        "site:lenta.com/product/ \"сухари панировочные\"",
+        "site:magnit.ru/product \"сухари панировочные\" \"Санкт-Петербург\"",
+        "site:5ka.ru \"сухари панировочные\"",
+        "site:perekrestok.ru \"сухари панировочные\"",
+        "site:okeydostavka.ru \"сухари панировочные\""
+      ],
+      "cells": [
+        {
+          "retailer": "Пятёрочка",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        },
+        {
+          "retailer": "Перекрёсток",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        },
+        {
+          "retailer": "Лента",
+          "status": "AVAILABLE",
+          "evidence_refs": [
+            "research-correction-market.json:3"
+          ],
+          "interpretation": "Qualifying purchase-form evidence; no current stock claim."
+        },
+        {
+          "retailer": "О'КЕЙ",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        },
+        {
+          "retailer": "Магнит",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        }
+      ],
+      "classification": "RU_AVAILABLE",
+      "rationale": "At least one qualifying major chain and ordinary non-specialist grocery plausibility; fewer than three qualifying baseline chains in this supplemental ledger."
+    },
+    {
+      "code": "LENTILS_DRY",
+      "queries": [
+        "site:lenta.com/product/ \"чечевица\"",
+        "site:magnit.ru/product \"чечевица\" \"Санкт-Петербург\"",
+        "site:5ka.ru \"чечевица\"",
+        "site:perekrestok.ru \"чечевица\"",
+        "site:okeydostavka.ru \"чечевица\""
+      ],
+      "cells": [
+        {
+          "retailer": "Пятёрочка",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        },
+        {
+          "retailer": "Перекрёсток",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        },
+        {
+          "retailer": "Лента",
+          "status": "AVAILABLE",
+          "evidence_refs": [
+            "research-correction-market.json:4"
+          ],
+          "interpretation": "Qualifying purchase-form evidence; no current stock claim."
+        },
+        {
+          "retailer": "О'КЕЙ",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        },
+        {
+          "retailer": "Магнит",
+          "status": "AVAILABLE",
+          "evidence_refs": [
+            "research-correction-market.json:5"
+          ],
+          "interpretation": "Qualifying purchase-form evidence; no current stock claim."
+        }
+      ],
+      "classification": "RU_AVAILABLE",
+      "rationale": "At least one qualifying major chain and ordinary non-specialist grocery plausibility; fewer than three qualifying baseline chains in this supplemental ledger."
+    },
+    {
+      "code": "TOMATO_CANNED_NO_SALT",
+      "queries": [
+        "site:lenta.com/product/ \"томаты\" \"кусочками\"",
+        "site:5ka.ru \"томаты\" \"собственном соку\"",
+        "site:perekrestok.ru \"томаты\" \"без соли\"",
+        "site:okeydostavka.ru \"томаты\" \"без соли\"",
+        "site:magnit.ru/product \"томаты\" \"без соли\" \"Санкт-Петербург\""
+      ],
+      "cells": [
+        {
+          "retailer": "Пятёрочка",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        },
+        {
+          "retailer": "Перекрёсток",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        },
+        {
+          "retailer": "Лента",
+          "status": "AVAILABLE",
+          "evidence_refs": [
+            "research-correction-market.json:6"
+          ],
+          "interpretation": "Qualifying purchase-form evidence; no current stock claim."
+        },
+        {
+          "retailer": "О'КЕЙ",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        },
+        {
+          "retailer": "Магнит",
+          "status": "AVAILABLE",
+          "evidence_refs": [
+            "research-correction-market.json:7"
+          ],
+          "interpretation": "Qualifying purchase-form evidence; no current stock claim."
+        }
+      ],
+      "classification": "RU_AVAILABLE",
+      "rationale": "At least one qualifying major chain and ordinary non-specialist grocery plausibility; fewer than three qualifying baseline chains in this supplemental ledger."
+    },
+    {
+      "code": "CHEESE_CHEDDAR",
+      "queries": [
+        "site:lenta.com/product/ \"Чеддер\"",
+        "site:5ka.ru \"Чеддер\"",
+        "site:perekrestok.ru \"Чеддер\"",
+        "site:okeydostavka.ru \"Чеддер\"",
+        "site:magnit.ru/product \"Чеддер\" \"Санкт-Петербург\"",
+        "site:5ka.ru/catalog/syr--251C13095/ \"Le Superbe\""
+      ],
+      "cells": [
+        {
+          "retailer": "Пятёрочка",
+          "status": "AVAILABLE",
+          "evidence_refs": [
+            "research-correction-market.json:9"
+          ],
+          "interpretation": "Qualifying purchase-form evidence; no current stock claim."
+        },
+        {
+          "retailer": "Перекрёсток",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        },
+        {
+          "retailer": "Лента",
+          "status": "AVAILABLE",
+          "evidence_refs": [
+            "research-correction-market.json:8"
+          ],
+          "interpretation": "Qualifying purchase-form evidence; no current stock claim."
+        },
+        {
+          "retailer": "О'КЕЙ",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        },
+        {
+          "retailer": "Магнит",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        }
+      ],
+      "classification": "RU_AVAILABLE",
+      "rationale": "At least one qualifying major chain and ordinary non-specialist grocery plausibility; fewer than three qualifying baseline chains in this supplemental ledger."
+    },
+    {
+      "code": "PORK_LOIN",
+      "queries": [
+        "site:lenta.com/product/ \"корейка\" \"свинина\"",
+        "site:5ka.ru \"корейка\"",
+        "site:perekrestok.ru/cat \"корейка\"",
+        "site:okeydostavka.ru \"корейка\"",
+        "site:magnit.ru/product \"корейка\" \"Санкт-Петербург\""
+      ],
+      "cells": [
+        {
+          "retailer": "Пятёрочка",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        },
+        {
+          "retailer": "Перекрёсток",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        },
+        {
+          "retailer": "Лента",
+          "status": "AVAILABLE",
+          "evidence_refs": [
+            "research-correction-market.json:10"
+          ],
+          "interpretation": "Qualifying purchase-form evidence; no current stock claim."
+        },
+        {
+          "retailer": "О'КЕЙ",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        },
+        {
+          "retailer": "Магнит",
+          "status": "UNCERTAIN",
+          "evidence_refs": [],
+          "interpretation": "No qualifying SPB/LO or neutral-plus-presence evidence established in these reviewed results; not a product-absence assertion."
+        }
+      ],
+      "classification": "RU_AVAILABLE",
+      "rationale": "At least one qualifying major chain and ordinary non-specialist grocery plausibility; fewer than three qualifying baseline chains in this supplemental ledger."
+    }
+  ]
+}

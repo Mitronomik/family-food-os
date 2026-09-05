@@ -1,0 +1,396 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-05",
+  "scope": "Independent alternative anchor screening only; no final corpus, runtime or global-catalogue edits.",
+  "method": "Complete actual saved official printable HTML read after initial official-index discovery. OpenSSL SHA-256 checked; all ingredients, seven directions, introductory preparation alternatives, flavor suggestions, notes, source-link footer and complete document markup reviewed. Native source overrides stale indexed typo in instruction 1.",
+  "candidates": [
+    {
+      "recipe_source_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE",
+      "recipe_name": "Beyond Basic Grilled Cheese",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese/printable/print",
+      "source_collection": "DIRECT_FNS_WIC_WORKS",
+      "source_attribution": "USDA Food and Nutrition Service, WIC Works Resource System. Complete native printable source identifies WIC Works and the canonical source URL; no separate contributor is identified in this representation.",
+      "source_artifact_name": "Beyond Basic Grilled Cheese.html",
+      "source_artifact_sha256": "357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334",
+      "artifact_review_status": "COMPLETE_NATIVE_PRIMARY_HTML_HASH_CHECKED",
+      "selection_status": "REVIEWED_CANDIDATE_READY_FOR_PARENT_INTEGRATION",
+      "source_servings": 1,
+      "source_yield": "1 serving; grilled-cheese sandwich",
+      "source_times": {
+        "prep_minutes": 5,
+        "cook_minutes": 8,
+        "total_minutes": 13
+      },
+      "meal_type_code": "sandwich",
+      "curation_role": "SANDWICH",
+      "meal_anchor": true,
+      "primary_protein_family": "DAIRY",
+      "protein_evidence_codes": [
+        "CHEESE_CHEDDAR"
+      ],
+      "diversity_contribution": "Whole-wheat grilled-cheese and fresh-cauliflower sandwich; natural cheddar is the principal protein, and the source-explicit nonstick method uses no added fat.",
+      "source_ingredients": [
+        {
+          "position": 1,
+          "source_text": "whole wheat bread (2 slices)",
+          "quantity_text": "2 slices",
+          "selected_codes": [
+            "BREAD_WHOLE_WHEAT"
+          ],
+          "selection": "REQUIRED"
+        },
+        {
+          "position": 2,
+          "source_text": "1 T (tablespoon) harissa (optional)",
+          "quantity_text": "1 tablespoon",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "rationale": "Explicit optional label; no substitute spread selected."
+        },
+        {
+          "position": 3,
+          "source_text": "3/4 c (cup) cheese (grated, try Muenster, Monterey jack or mozzarella)",
+          "quantity_text": "3/4 cup",
+          "selected_codes": [
+            "CHEESE_CHEDDAR"
+          ],
+          "selection": "REQUIRED",
+          "rationale": "Generic cheese is not restricted to the examples; cheddar is itself mentioned in the source flavor ideas. Selected ordinary natural cheddar, not a processed cheese product."
+        },
+        {
+          "position": 4,
+          "source_text": "1/2 c (cup) broccoli and cauliflower (roasted, cut into small pieces or use fresh veggies of your choice)",
+          "quantity_text": "1/2 cup",
+          "selected_codes": [
+            "CAULIFLOWER"
+          ],
+          "selection": "REQUIRED",
+          "rationale": "Select all 1/2 cup as fresh cauliflower under explicit fresh vegetables of choice alternative. No ratio invented, no roasting workflow silently omitted."
+        },
+        {
+          "position": 5,
+          "source_text": "oil spray (optional)",
+          "quantity_text": null,
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "rationale": "Source explicitly permits nonstick-pan no-butter method; listed spray optional and step 2 conditional if needed."
+        }
+      ],
+      "source_directions": [
+        {
+          "position": 1,
+          "summary": "Wash hands."
+        },
+        {
+          "position": 2,
+          "summary": "Heat pan on medium; spray oil only if needed (omitted under explicit nonstick method)."
+        },
+        {
+          "position": 3,
+          "summary": "Place a bread slice in pan."
+        },
+        {
+          "position": 4,
+          "summary": "Optional harissa spread omitted."
+        },
+        {
+          "position": 5,
+          "summary": "Add half the grated cheese."
+        },
+        {
+          "position": 6,
+          "summary": "Add vegetables then remaining cheese."
+        },
+        {
+          "position": 7,
+          "summary": "Grill sandwich for three minutes each side; cut diagonally; side accompaniments are suggestions, not quantified recipe inputs."
+        }
+      ],
+      "source_equipment": [
+        {
+          "position": 1,
+          "equipment_code": "SPOON",
+          "source_location": "Equipment you'll need",
+          "source_wording": "Spoon"
+        },
+        {
+          "position": 2,
+          "equipment_code": "KNIFE",
+          "source_location": "Equipment you'll need and instruction 7",
+          "source_wording": "Knife"
+        },
+        {
+          "position": 3,
+          "equipment_code": "NONSTICK_PAN",
+          "source_location": "Equipment you'll need; introductory preparation alternative; instruction 2",
+          "source_wording": "Nonstick pan"
+        }
+      ],
+      "source_serving_suggestion": "Side salad, vegetable soup and/or seasonal fruit are suggested accompaniments; no quantity and not part of the chosen sandwich ingredient list.",
+      "limitations": [
+        "Main directions imply closing sandwich but do not separately state placing second bread slice; ingredient list explicitly has 2 slices and instruction 7 grills sandwich. Preserve source wording; do not author a new step.",
+        "Generic cheese permits cheddar; named examples are non-exhaustive. Do not claim cheese quantity is grams or corresponds to a fixed retailer package.",
+        "Half-cup fresh vegetables of choice permits fresh cauliflower as the sole vegetable; no roast yields, ingredient ratios or cooking aids inferred.",
+        "Fresh cauliflower is a preparation selection; use reviewed fresh CAULIFLOWER market evidence, not frozen smoothie evidence.",
+        "DAIRY is curation-only protein-family metadata supported by selected CHEESE_CHEDDAR, not an extension of PR4 MealTypeCode or any runtime schema."
+      ],
+      "consumables_audit": {
+        "unresolved_required_consumable_count": 0,
+        "rows": [
+          {
+            "row_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE:I1",
+            "source_location": "Ingredient list; instructions 3 and 7",
+            "source_wording": "whole wheat bread (2 slices)",
+            "concept": "BREAD_WHOLE_WHEAT",
+            "edible": true,
+            "quantity_explicit": true,
+            "quantity_text": "2 slices",
+            "requirement": "REQUIRED",
+            "already_in_ingredient_list": true,
+            "ingredient_source_positions": [
+              1
+            ],
+            "food_ingredient_codes": [
+              "BREAD_WHOLE_WHEAT"
+            ],
+            "resolution": "ALREADY_STRUCTURED",
+            "rationale": "Both bread slices constitute the source sandwich; no additional edible topping is required.",
+            "optionality_evidence": null,
+            "alternative_evidence": null,
+            "water_fate": "NOT_WATER"
+          },
+          {
+            "row_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE:I2",
+            "source_location": "Ingredient list; instructions 4",
+            "source_wording": "1 T (tablespoon) harissa (optional)",
+            "concept": "1 T (tablespoon) harissa (optional)",
+            "edible": true,
+            "quantity_explicit": true,
+            "quantity_text": "1 tablespoon",
+            "requirement": "OPTIONAL",
+            "already_in_ingredient_list": true,
+            "ingredient_source_positions": [
+              2
+            ],
+            "food_ingredient_codes": [],
+            "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+            "rationale": "Explicit optional label; no substitute spread selected.",
+            "optionality_evidence": "harissa (optional)",
+            "alternative_evidence": null,
+            "water_fate": "NOT_WATER"
+          },
+          {
+            "row_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE:I3",
+            "source_location": "Ingredient list; instructions 5 and 6",
+            "source_wording": "3/4 c (cup) cheese (grated, try Muenster, Monterey jack or mozzarella)",
+            "concept": "CHEESE_CHEDDAR",
+            "edible": true,
+            "quantity_explicit": true,
+            "quantity_text": "3/4 cup",
+            "requirement": "REQUIRED",
+            "already_in_ingredient_list": true,
+            "ingredient_source_positions": [
+              3
+            ],
+            "food_ingredient_codes": [
+              "CHEESE_CHEDDAR"
+            ],
+            "resolution": "ALREADY_STRUCTURED",
+            "rationale": "Generic cheese is not restricted to the examples; cheddar is itself mentioned in the source flavor ideas. Selected ordinary natural cheddar, not a processed cheese product.",
+            "optionality_evidence": null,
+            "alternative_evidence": null,
+            "water_fate": "NOT_WATER"
+          },
+          {
+            "row_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE:I4",
+            "source_location": "Ingredient list; instructions 6",
+            "source_wording": "1/2 c (cup) broccoli and cauliflower (roasted, cut into small pieces or use fresh veggies of your choice)",
+            "concept": "CAULIFLOWER",
+            "edible": true,
+            "quantity_explicit": true,
+            "quantity_text": "1/2 cup",
+            "requirement": "REQUIRED",
+            "already_in_ingredient_list": true,
+            "ingredient_source_positions": [
+              4
+            ],
+            "food_ingredient_codes": [
+              "CAULIFLOWER"
+            ],
+            "resolution": "ALREADY_STRUCTURED",
+            "rationale": "Select all 1/2 cup as fresh cauliflower under explicit fresh vegetables of choice alternative. No ratio invented, no roasting workflow silently omitted.",
+            "optionality_evidence": null,
+            "alternative_evidence": "or use fresh veggies of your choice",
+            "water_fate": "NOT_WATER"
+          },
+          {
+            "row_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE:I5",
+            "source_location": "Ingredient list; instructions 2",
+            "source_wording": "oil spray (optional)",
+            "concept": "oil spray (optional)",
+            "edible": true,
+            "quantity_explicit": false,
+            "quantity_text": null,
+            "requirement": "OPTIONAL",
+            "already_in_ingredient_list": true,
+            "ingredient_source_positions": [
+              5
+            ],
+            "food_ingredient_codes": [],
+            "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+            "rationale": "Source explicitly permits nonstick-pan no-butter method; listed spray optional and step 2 conditional if needed.",
+            "optionality_evidence": "oil spray (optional); if needed",
+            "alternative_evidence": null,
+            "water_fate": "NOT_WATER"
+          },
+          {
+            "row_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE:D1",
+            "source_location": "Introductory preparation method",
+            "source_wording": "non-stick pan (and skip the butter)",
+            "concept": "BUTTER",
+            "edible": true,
+            "quantity_explicit": false,
+            "quantity_text": null,
+            "requirement": "OPTIONAL",
+            "already_in_ingredient_list": false,
+            "ingredient_source_positions": [],
+            "food_ingredient_codes": [],
+            "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+            "rationale": "Chosen source-explicit nonstick execution requires no butter. Not an inference that fat can generally be omitted.",
+            "optionality_evidence": "skip the butter",
+            "alternative_evidence": "non-stick pan",
+            "water_fate": "NOT_WATER"
+          },
+          {
+            "row_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE:D2",
+            "source_location": "Introductory alternative pan treatment",
+            "source_wording": "brush the pan (any kind of pan) with a teaspoon of oil",
+            "concept": "OIL",
+            "edible": true,
+            "quantity_explicit": true,
+            "quantity_text": "1 teaspoon",
+            "requirement": "OPTIONAL",
+            "already_in_ingredient_list": false,
+            "ingredient_source_positions": [],
+            "food_ingredient_codes": [],
+            "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+            "rationale": "Quantified alternative, not cumulative with selected no-fat nonstick method. Preserve as audit row; no oil inferred or silently introduced.",
+            "optionality_evidence": "You can also use",
+            "alternative_evidence": "cooking oil spray or brush the pan",
+            "water_fate": "NOT_WATER"
+          },
+          {
+            "row_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE:D3",
+            "source_location": "Instruction 1",
+            "source_wording": "Wash your hands before you begin.",
+            "concept": "HAND_WASHING_PROCESS",
+            "edible": false,
+            "quantity_explicit": false,
+            "quantity_text": null,
+            "requirement": "REQUIRED",
+            "already_in_ingredient_list": false,
+            "ingredient_source_positions": [],
+            "food_ingredient_codes": [],
+            "resolution": "NONFOOD_PROCESS",
+            "rationale": "Actual native source corrects the stale indexed typo. Soap/water not explicitly named; do not fabricate additional source consumable quantities or convert hand washing into food WATER. The linked general food-safety resources index is not used to introduce recipe ingredients or cooking steps.",
+            "optionality_evidence": null,
+            "alternative_evidence": null,
+            "water_fate": "NOT_WATER"
+          }
+        ],
+        "notes": "No water retained in dish. No nonfood disposable explicitly required. Optional flavor-combination suggestions (additional vegetables, herbs, spices, fruit) not selected. Equipment list and complete instructions reviewed."
+      },
+      "rights_review": {
+        "status": "REVIEWED_UNDER_APPROVED_NARROW_DIRECT_FNS_PROJECT_RISK_POSTURE",
+        "notice_review_result": "Complete actual printable HTML has WIC Works header and canonical source URL footer. No separate contributor, recipe-specific restriction, copyright notice, or affirmative commercial/derivative grant appears. This absence is not a rights grant; approved narrow direct-FNS project posture is preserved without public-domain or unrestricted-rights claims.",
+        "basis": "Approved narrow direct-FNS project risk posture only; not blanket public domain, not unrestricted commercial or derivative rights.",
+        "scope_exclusions": [
+          "photos",
+          "logos"
+        ]
+      }
+    }
+  ],
+  "market_evidence": [
+    {
+      "code": "BREAD_WHOLE_WHEAT",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/hleb-remeslennyjj-iz-celnozernmuki-rossiya-550g-528673/",
+      "wording": "Хлеб АЮТИНСКИЙ ХЛЕБ Ремесленный из цельнозерн.муки, 550г; мука пшеничная хлебопекарная обойная (цельнозерновая), закваска из пшеничной цельнозерновой муки.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Actual flour ingredients are whole-wheat; minor rye malt is listed last, not rye flour. Generic rye-wheat category does not erase ingredient statement. Region-neutral active catalogue with August 2026 reviews; SPB delivery expressly listed in official category FAQ. Transient sold-out label is not absence. At least one qualifying chain + ordinary bread plausibility gives RU_AVAILABLE, not three-chain RU_MASS_MARKET."
+    }
+  ],
+  "five_chain_market_search": {
+    "code": "BREAD_WHOLE_WHEAT",
+    "searched_chains": [
+      "Пятёрочка",
+      "Перекрёсток",
+      "Лента",
+      "О'КЕЙ",
+      "Магнит"
+    ],
+    "queries": [
+      "site:perekrestok.ru хлеб цельнозерновой пшеничный",
+      "site:lenta.com хлеб цельнозерновой пшеничный",
+      "site:5ka.ru хлеб цельнозерновой пшеничный",
+      "site:magnit.ru хлеб пшеничный цельнозерновой",
+      "site:okeydostavka.ru хлеб пшеничный цельнозерновой",
+      "domain-specific exact хлеб цельнозерновой searches for each baseline chain"
+    ],
+    "result": "One qualifying chain (Lenta). Magnit matching Aytinsky bread URLs explicitly other-city stores; excluded. Perekrestok expired flyers excluded. Pyaterochka returned crispbreads/wrong form; excluded. OKEY no qualifying current exact product result in this search. No product absence inferred.",
+    "excluded_urls": [
+      "https://magnit.ru/product/1000310438-ayutinskiy_khleb_khdeb_remeslennyy_iz_tselnozernovoy_muki_tselnozernovoy_pshenichnyy_v_narezke_0_55k",
+      "https://files.perekrestok.ru/static/files/e0/dd/31caceb4fd345f28ce8c02d075b6.pdf",
+      "https://5ka.ru/product/khlebtsy-dr-korner-grechnevye-s-vitaminami--3275648/"
+    ]
+  },
+  "tested_fallbacks_and_rejections": [
+    {
+      "recipe_name": "Roast Turkey Breast with Rosemary, Sage, and Thyme",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/roast-turkey-breast-rosemary-sage-and-thyme",
+      "result": "REJECT_GLOBAL_CATALOGUE",
+      "reason": "Turkey breast with skin and bones and sage lack existing canonical codes. Selected pan-juice basting could avoid optional unquantified broth/margarine but does not fix global-FI gap."
+    },
+    {
+      "recipe_name": "Pork Loin Roast with Veggies",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/pork-loin-roast-veggies",
+      "result": "REJECT_UNQUANTIFIED_REQUIRED_SEASONING",
+      "reason": "Direction 3 applies salt and pepper to vegetables; direction 5 assigns entire listed 1/2 tsp pepper and 1/4 tsp salt to rub. Additional vegetable seasoning quantity not established; cannot split or double without authority."
+    },
+    {
+      "recipe_name": "Spinach and Meat Cakes",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "result": "REJECT_QUANTITY_AND_PREPARATION",
+      "reason": "Required black pepper to taste; source 3 cups brown rice has no explicit cooked/raw quantity normalization. Explicit no-oil pan is clean but does not fix seasoning/rice."
+    },
+    {
+      "recipe_name": "Savory Garlicky Oatmeal with Egg",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/savory-garlicky-oatmeal-egg",
+      "result": "REJECT_HIDDEN_ADDITIONAL_OIL",
+      "reason": "Only 1 Tbsp oil listed and entirely used at step 2; step 5 calls for remaining oil to cook eggs without any remaining quantified allocation. Also required salt/pepper to taste."
+    },
+    {
+      "recipe_name": "Pineapple Mustard Chicken",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/ChickenSplitBreast.pdf",
+      "result": "REJECT_UNQUANTIFIED_REQUIRED_SEASONING",
+      "reason": "Required salt and pepper have no amount."
+    },
+    {
+      "recipe_name": "Crispy Parmesan Baked Fish",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Catfish.pdf",
+      "result": "REJECT_HIDDEN_SPRAY",
+      "reason": "Directions require spray to grease baking sheet though absent ingredient list; amount unspecified."
+    },
+    {
+      "recipe_name": "Spanish Baked Fish",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HaddockPerchPollock.pdf",
+      "result": "REJECT_HIDDEN_GREASING_FAT",
+      "reason": "Step 2 requires buttery spread or oil to grease baking dish; no quantity."
+    }
+  ]
+}

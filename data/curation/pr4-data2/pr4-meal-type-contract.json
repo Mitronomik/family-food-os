@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "source_repository": "Mitronomik/family-food-os",
+  "source_pr": 10,
+  "source_head": "cd2285802c94735e0c9015042f9f4c0b52d68b85",
+  "source_path": "backend/app/domain/food_recipes.py",
+  "source_url": "https://github.com/Mitronomik/family-food-os/blob/cd2285802c94735e0c9015042f9f4c0b52d68b85/backend/app/domain/food_recipes.py",
+  "source_blob_sha256": "0d0d590d5f0e38889076e1834d52f8f1f529ff60a27b131d9b79bfa33421fce6",
+  "enum_source": "class MealTypeCode(StrEnum):\n    BREAKFAST = \"breakfast\"\n    MAIN = \"main\"\n    SIDE = \"side\"\n    SALAD = \"salad\"\n    SANDWICH = \"sandwich\"\n    OTHER = \"other\"\n",
+  "enum_source_sha256": "86e61513ea1ae4373c1624d47e01e4bedf993ad6ccd433f0093d125da60a6552",
+  "method": "Verbatim AST-delimited MealTypeCode declaration, extracted read-only from the reviewed PR4 head. Values are parsed from this source, never maintained as a parallel enum. When this Git object is available the validator compares the declaration and full source hash; offline clones use this pinned excerpt and hash. No production import or enum expansion."
+}

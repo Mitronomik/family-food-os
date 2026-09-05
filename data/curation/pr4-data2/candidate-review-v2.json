@@ -1,0 +1,1477 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-05",
+  "status": "EXTENDED_SCREEN_NOT_ACCEPTED_CORPUS",
+  "method": "Bounded expanded source screen after issue12 market clarification. Preparation-only descriptors are not independent purchase forms. VIABLE_SOURCE_SCREEN means no clear ingredient obstacle; it is not production acceptance. Preserve source quantities including cooked amounts. Optional source ingredients may be omitted only as the source allows. Generic-to-specific code selections still require transparent review. Missing-form findings are not an exhaustive proof that no30-recipe corpus exists. Ingredient_facts preserve ingredient quantities and distinctions for screening; some negative screens use compact transcription, not archival exact-text evidence. Final selected records require exact source-text transcription and visual check.",
+  "collections": [
+    {
+      "name": "USDA FNS Team Nutrition Cooks",
+      "landing_url": "https://www.fns.usda.gov/tn/cooks",
+      "rights_review": "Official collection expressly allows download and copies. Eggs and Applesauce binary/hash and visual recipe-page review complete. No restrictive notice found. Accepted direct-FNS project risk classification; no public-domain or unrestricted commercial/derivative assertion. Remaining selected TNC cards need binary/visual review.",
+      "pool_size": 5,
+      "screened": 5
+    },
+    {
+      "name": "USDA FNS A Harvest of Recipes with USDA Foods (FNS-430, May2013)",
+      "landing_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "rights_review": "Official FNS-430 primary binary hash verified; full-text notices, acknowledgments and back cover reviewed; all six mapped candidate cards visually reviewed. No third-party copyright/licensing restriction found on selected cards. Tribal/contractor acknowledgments preserved as provenance; not a license. Apply accepted direct-FNS project risk posture without public-domain or unrestricted commercial/derivative claim.",
+      "pool_size": 41,
+      "screened_in_this_file": 41
+    },
+    {
+      "name": "CACFP Breakfast Planner pool; ICN mirrors used for negative ingredient screen only, not rights clearance",
+      "official_collection_url": "https://fns-prod.azureedge.us/tn/cacfp/trainers-tools/its-breakfast-time",
+      "official_book_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/USDA-CACFP_BreakfastPlanner.pdf",
+      "rights_review": "Negative screens from exact titled ICN mirrors do not clear ICN or substitute for FNS production source. The official FNS book exists but exceeds web PDF parsing limit; TLS download failed without bypass.",
+      "screened_in_this_file": 5
+    }
+  ],
+  "candidate_count": 30,
+  "candidates": [
+    {
+      "candidate_id": "TNC6-EGGS-SPINACH",
+      "source_time_facts": {"total_minutes": 15, "hands_on_minutes": 15, "prep_minutes": null, "cook_minutes": null, "evidence": "Family Handout recipe page 3 heading; hands-on includes cooking and is not prep-only."},
+      "recipe_name": "Scrambled Eggs With Spinach",
+      "source_collection": "USDA FNS Team Nutrition Cooks",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+      "source_servings": 6,
+      "screen_decision": "VIABLE_SOURCE_SCREEN",
+      "remaining_issues": [
+        "Retail evidence association and final reviewer acceptance"
+      ],
+      "source_backed_equipment": [
+        "small bowl or cup",
+        "larger bowl",
+        "skillet",
+        "spatula",
+        "whisk"
+      ],
+      "notes": "Page3. Source explicit oil options permit OLIVE_OIL or CANOLA_OIL. Required codes EGG, SPINACH, OLIVE_OIL. Total and hands-on time15min. Optional bread/pepper not required.",
+      "pdf_sha256": "0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+      "source_access": "Primary PDF downloaded by orchestrator; recipe page PDFindex4 visually inspected after Poppler render by source_candidates. Full20page text read; copyright/permission/license searches no matches.",
+      "selected_required_codes": [
+        "OLIVE_OIL",
+        "EGG",
+        "SPINACH"
+      ],
+      "ingredient_facts": [
+        "1 teaspoon olive, canola, or vegetable oil",
+        "12 large eggs",
+        "3 cups rinsed chopped fresh spinach",
+        "6 slices whole-wheat bread, toasted (optional)",
+        "ground pepper or other herbs and spices (optional)"
+      ]
+    },
+    {
+      "candidate_id": "TNC6-APPLESAUCE",
+      "source_time_facts": {"total_minutes": 55, "hands_on_minutes": 20, "prep_minutes": null, "cook_minutes": 25, "cool_minutes": 10, "evidence": "Family Handout recipe page 3 heading plus steps 6 and 7. Hands-on is not automatically prep-only."},
+      "recipe_name": "Applesauce",
+      "source_collection": "USDA FNS Team Nutrition Cooks",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+      "source_servings": 6,
+      "screen_decision": "VIABLE_SOURCE_SCREEN",
+      "remaining_issues": [
+        "Finalretailer evidenceassociation andcorpusreview"
+      ],
+      "source_backed_equipment": [
+        "apple corer or slicer / chef's knife",
+        "pot with lid",
+        "potato masher or fork"
+      ],
+      "notes": "Family Handout printed page 3, PDF page index 4. Required APPLE and WATER; optional cinnamon omitted. 55 minutes total and 20 minutes hands-on. Do not use activity-guide taste-test foods as recipe ingredients.",
+      "pdf_sha256": "7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+      "source_access": "PrimaryFamilyHandoutPDFpage3/PDFindex4 visuallychecked afterPopplerrender; exacthashverified. Textcopyright/permission/licensesearch no matches.",
+      "ingredient_facts": [
+        "6 apples, any variety, rinsed",
+        "½ cup water",
+        "½ teaspoon of cinnamon (optional)"
+      ],
+      "selected_required_codes": [
+        "APPLE",
+        "WATER"
+      ],
+      "normalization_basis": "Source-explicit alternatives selected where listed. Genuinely unrestricted generic vegetable oil resolves SUNFLOWER_OIL; unspecified raisins resolves RAISINS_GOLDEN; generic vinegar resolves APPLE_CIDER_VINEGAR; generic mustard resolves MUSTARD_YELLOW. These are members of the named source category, not replacement of a specifically named food. Source wording/quantities stay unchanged; cooked quantities stay cooked and must not be assigned raw grams. Optional toppings/herbs not selected."
+    },
+    {
+      "candidate_id": "TNC6-CORN-ZUCCHINI-PANCAKES",
+      "source_time_facts": {"total_minutes": 35, "hands_on_minutes": 35, "prep_minutes": null, "cook_minutes": null, "drain_minutes": 10, "per_side_cook_minutes": 5, "evidence": "Family Handout recipe page 3; repeat batches means 5+5 minutes is not total cooking time."},
+      "recipe_name": "Corn and Zucchini Pancakes",
+      "source_collection": "USDA FNS Team Nutrition Cooks",
+      "source_url": "https://www.fns.usda.gov/sites/default/files/resource-files/tnc-pancakes.pdf",
+      "source_servings": 6,
+      "screen_decision": "VIABLE_SOURCE_SCREEN",
+      "remaining_issues": [
+        "Retail evidence association",
+        "Final reviewer acceptance"
+      ],
+      "source_backed_equipment": [
+        "colander",
+        "bowl",
+        "small bowl or cup",
+        "large bowl",
+        "skillet",
+        "¼-cup measuring cup",
+        "spatula"
+      ],
+      "notes": "Page3.12pancakes/2perportion=6servings.35min total/hands-on. Source explicitly permits fresh or frozen corn: no lowNa canned requirement if selected frozen. Grated zucchini is preparation. Scallion synonym resolves existing GREEN_ONION.",
+      "pdf_sha256": "e241fe6f2ebaea8bf81c82652f8d88f2fc95558a8b0221d34f7e12788053abed",
+      "source_access": "Primary Family Handout binary SHA-256 verified. Page 3 visually reviewed after Poppler rendering; full-text copyright/permission/license search found no matches.",
+      "ingredient_facts": [
+        "3 medium-sized zucchini, trimmed and shredded",
+        "1½ cups canned, fresh, or frozen corn",
+        "3 large eggs, whisked",
+        "1 cup whole-wheat flour",
+        "¼ teaspoon salt",
+        "½ teaspoon baking powder",
+        "3 scallions, trimmed and chopped",
+        "1½ tablespoons oil",
+        "Optional, for topping: plain, low-fat yogurt, salsa, herbs"
+      ],
+      "selected_required_codes": [
+        "ZUCCHINI",
+        "CORN_SWEET",
+        "EGG",
+        "FLOUR_WHOLE_WHEAT",
+        "SALT",
+        "BAKING_POWDER",
+        "GREEN_ONION",
+        "SUNFLOWER_OIL"
+      ],
+      "normalization_basis": "Source-explicit alternatives selected where listed. Genuinely unrestricted generic vegetable oil resolves SUNFLOWER_OIL; unspecified raisins resolves RAISINS_GOLDEN; generic vinegar resolves APPLE_CIDER_VINEGAR; generic mustard resolves MUSTARD_YELLOW. These are members of the named source category, not replacement of a specifically named food. Source wording/quantities stay unchanged; cooked quantities stay cooked and must not be assigned raw grams. Optional toppings/herbs not selected.",
+      "resolved_retrieval_url": "https://fna-bwbufwdzbabpezgc.z01.azurefd.us/sites/default/files/resource-files/tnc-pancakes.pdf",
+      "source_recipe_printed_page": 3,
+      "source_recipe_pdf_page_index": 4,
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://www.fns.usda.gov/tn/cooks",
+      "rights_basis": "Collection expressly permits download/copies; card has no third-party restriction found. Use accepted project direct-FNS risk classification, retain attribution, exclude assets. No public-domain or unrestricted commercial/derivative assertion.",
+      "source_step_facts": [
+        "Wash hands; grate zucchini, drain in colander over bowl, press, rest 10 minutes and press again.",
+        "Chop scallions; break each egg into small bowl/cup then pour into large bowl and whisk.",
+        "Add selected frozen corn, zucchini and scallions; add flour, baking powder and salt; mix.",
+        "Heat skillet on medium, add oil per source nonstick-pan caveat.",
+        "Scoop 1/4 cup batter per pancake; cook about 5 minutes per side until golden; repeat and serve."
+      ]
+    },
+    {
+      "candidate_id": "TNC6-GRAIN-BOWLS",
+      "recipe_name": "Grain Bowls",
+      "source_collection": "USDA FNS Team Nutrition Cooks",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-grainbowls.pdf",
+      "source_servings": 6,
+      "screen_decision": "VIABLE_SOURCE_SCREEN",
+      "remaining_issues": [
+        "Fix explicit source-permitted vegetable/protein/fruit options and generic oil/vinegar/mustard to existing codes without altering category quantities",
+        "Final PDF visual/hash review",
+        "Retail evidence association"
+      ],
+      "source_backed_equipment": [
+        "pot with lid",
+        "strainer or fine-mesh colander",
+        "bowl",
+        "whisk or fork / jar with lid"
+      ],
+      "notes": "Page3 shopping list explicitly permits any combination tomatoes,cucumbers,zucchini,broccoli,carrots,greenbeans,corn,peas; cookedprotein chicken,meat,fish,beans,tofu; driedfruit raisins,cranberries,cherries,apricots,prunes,dates,figs. Thus one can select3cupsCARROT not invent a ratio. QUINOA1cup is explicit with15min cooking.35min total. Preserve1½cups cookedprotein amount; do not convert to raw.",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "3 cups cooked grains or 1 cup uncooked grains, such as quinoa",
+        "2 cups water",
+        "3 cups chopped vegetables",
+        "1½ cups protein food",
+        "1½ cups dried fruit",
+        "½ cup vinaigrette dressing (1½ tablespoons finely chopped onion or shallot, ¼ cup oil, 1½ tablespoons vinegar, 1 tablespoon water, ¾ teaspoon mustard, ¾ teaspoon honey, ⅓ teaspoon salt, pinch of black pepper, 1½ tablespoons chopped chives (optional))"
+      ],
+      "selected_required_codes": [
+        "QUINOA",
+        "WATER",
+        "CARROT",
+        "CHICKEN_BREAST_COOKED",
+        "RAISINS_GOLDEN",
+        "ONION_YELLOW",
+        "SUNFLOWER_OIL",
+        "APPLE_CIDER_VINEGAR",
+        "MUSTARD_YELLOW",
+        "HONEY",
+        "SALT",
+        "BLACK_PEPPER"
+      ],
+      "normalization_basis": "Source-explicit alternatives selected where listed. Genuinely unrestricted generic vegetable oil resolves SUNFLOWER_OIL; unspecified raisins resolves RAISINS_GOLDEN; generic vinegar resolves APPLE_CIDER_VINEGAR; generic mustard resolves MUSTARD_YELLOW. These are members of the named source category, not replacement of a specifically named food. Source wording/quantities stay unchanged; cooked quantities stay cooked and must not be assigned raw grams. Optional toppings/herbs not selected. Select source-permitted1cupdryQUINOA,3cupsCARROT,1½cupscookedCHICKEN_BREAST_COOKED,1½cupsRAISINS_GOLDEN; retain source dressing recipe quantities, omit optionalchives.",
+      "source_permitted_protein_alternative": {
+        "code": "TOFU_FIRM",
+        "source_category_quantity": "1½ cups cooked protein food",
+        "shopping_list_fact": "16 oz container tofu; source also lists 10 oz raw chicken, dried/canned beans and canned fish options",
+        "reason": "Tofu is explicitly allowed; firm tofu is existing member of source generic tofu. Preserve source cooked preparation quantity and do not equate shopping-container mass to recipe grams.",
+        "selected": false
+      }
+    },
+    {
+      "candidate_id": "TNC6-SALAD-VINAIGRETTE",
+      "recipe_name": "Salad With Vinaigrette Dressing",
+      "source_collection": "USDA FNS Team Nutrition Cooks",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-salad.pdf",
+      "source_servings": 6,
+      "screen_decision": "PROMISING_NORMALIZATION_REVIEW",
+      "remaining_issues": [
+        "Generic oil/greens/lowfat cheese need source-consistent selected existing codes",
+        "Final PDF visual/hash review",
+        "Retail evidence association"
+      ],
+      "source_backed_equipment": [
+        "bowl",
+        "whisk / jar with lid",
+        "tongs or salad servers"
+      ],
+      "notes": "Page3 cheese shopping examples cheddar,feta,blue; not explicitly exclusive. If selecting whitevinegar, source expressly increases honey to¾tsp and adds1tspwater; don't silently use unchanged½tsp honey.30min.",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "1 tablespoon finely chopped onion or shallot",
+        "2 tablespoons (⅛ cup) oil",
+        "1 tablespoon vinegar",
+        "½ teaspoon mustard",
+        "¼ teaspoon salt",
+        "1 pinch black pepper",
+        "½ teaspoon honey",
+        "1 tablespoon herbs (e.g., chives) (optional)",
+        "8 cups mixed greens",
+        "1 tomato, cored and diced",
+        "1 cucumber, peeled and sliced",
+        "1 apple, scrubbed well, cored, and diced",
+        "¼ cup shredded or crumbled low-fat cheese"
+      ]
+    },
+    {
+      "candidate_id": "HARV6-ROASTED-POTATOES",
+      "source_time_facts": {"total_minutes": null, "prep_minutes": null, "cook_minutes": 35, "chill_minutes": 15, "oven_fahrenheit": 350, "evidence": "Harvest printed page 61, steps 3 to 5. Do not label 50 minutes as source total because chopping/preheating not timed."},
+      "recipe_name": "Roasted Potatoes",
+      "source_collection": "USDA FNS A Harvest of Recipes with USDA Foods (FNS-430, May2013)",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_servings": 6,
+      "screen_decision": "VIABLE_SOURCE_SCREEN",
+      "remaining_issues": [
+        "Retail evidence association",
+        "Final corpus reviewer acceptance; preserve cooked ingredient amounts and source-explicit selections"
+      ],
+      "source_backed_equipment": [
+        "medium-size bowl",
+        "cookie sheet"
+      ],
+      "notes": "Printed60/PDF62. POTATO,ONION_YELLOW,BELL_PEPPER_GREEN,GARLIC,SALT,BLACK_PEPPER; source chill15min+bake35min350F.",
+      "pdf_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "source_access": "Downloaded primary 98-page PDF; exact SHA-256 verified. Both recipe pages visually checked after Poppler render; ingredients, options, quantities, directions and notices reviewed. Full-text notice searches and visual acknowledgments/back-cover review completed.",
+      "ingredient_facts": [
+        "1 pound potatoes, chopped into 1-inch cubes",
+        "½ cup onion, chopped into 1-inch cubes",
+        "½ cup green pepper, chopped into 1-inch cubes",
+        "1 teaspoon garlic, finely chopped",
+        "1 teaspoon vegetable oil",
+        "¼ teaspoon salt",
+        "¼ teaspoon pepper",
+        "1 tablespoon parsley, finely chopped (if you have it)",
+        "½ teaspoon paprika (if you have it)"
+      ],
+      "selected_required_codes": [
+        "POTATO",
+        "ONION_YELLOW",
+        "BELL_PEPPER_GREEN",
+        "GARLIC",
+        "SUNFLOWER_OIL",
+        "SALT",
+        "BLACK_PEPPER"
+      ],
+      "normalization_basis": "Source-explicit alternatives selected where listed. Genuinely unrestricted generic vegetable oil resolves SUNFLOWER_OIL; unspecified raisins resolves RAISINS_GOLDEN; generic vinegar resolves APPLE_CIDER_VINEGAR; generic mustard resolves MUSTARD_YELLOW. These are members of the named source category, not replacement of a specifically named food. Source wording/quantities stay unchanged; cooked quantities stay cooked and must not be assigned raw grams. Optional toppings/herbs not selected.",
+      "pdf_bytes": 4367674,
+      "source_recipe_printed_page": 61,
+      "source_recipe_pdf_page_index": 62,
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://www.fns.usda.gov/fdpir/harvest-recipes-usda-foods",
+      "rights_basis": "Official FNS-430 collection; selected card has no third-party copyright/licensing restriction. Publication credits USDA staff, tribal contributors and contracted support; credit is preserved as provenance, not treated as a license or exclusion. No public-domain or unrestricted commercial/derivative assertion. Attribution required by project; no photos, logos or trademarks imported.",
+      "source_step_facts": [
+        "Mix vegetables in medium bowl; add oil and seasonings.",
+        "Cover and refrigerate 15 minutes. Preheat 350 F.",
+        "Spread on cookie sheet; bake about 35 minutes."
+      ]
+    },
+    {
+      "candidate_id": "HARV6-RICE-PUDDING",
+      "recipe_name": "Rice Pudding",
+      "source_collection": "USDA FNS A Harvest of Recipes with USDA Foods (FNS-430, May2013)",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_servings": 6,
+      "screen_decision": "VIABLE_SOURCE_SCREEN",
+      "remaining_issues": [
+        "Retail evidence association",
+        "Final corpus reviewer acceptance; preserve cooked ingredient amounts and source-explicit selections"
+      ],
+      "source_backed_equipment": [
+        "medium-size pot"
+      ],
+      "notes": "Printed20/PDF22. MILK_1_PERCENT,RICE_WHITE,SALT,SUGAR,VANILLA_EXTRACT,CINNAMON_GROUND all existing. Source cooks15min+5min.",
+      "pdf_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "source_access": "Downloaded primary 98-page PDF; exact SHA-256 verified. Both recipe pages visually checked after Poppler render; ingredients, options, quantities, directions and notices reviewed. Full-text notice searches and visual acknowledgments/back-cover review completed.",
+      "ingredient_facts": [
+        "2½ cups 1% low-fat milk",
+        "2¼ cups cooked long-grain white rice",
+        "¼ cup raisins",
+        "¼ teaspoon salt",
+        "¼ cup brown (or white) sugar",
+        "1 teaspoon vanilla extract",
+        "¼ teaspoon cinnamon"
+      ],
+      "selected_required_codes": [
+        "MILK_1_PERCENT",
+        "RICE_WHITE",
+        "RAISINS_GOLDEN",
+        "SALT",
+        "SUGAR",
+        "VANILLA_EXTRACT",
+        "CINNAMON_GROUND"
+      ],
+      "normalization_basis": "Source-explicit alternatives selected where listed. Genuinely unrestricted generic vegetable oil resolves SUNFLOWER_OIL; unspecified raisins resolves RAISINS_GOLDEN; generic vinegar resolves APPLE_CIDER_VINEGAR; generic mustard resolves MUSTARD_YELLOW. These are members of the named source category, not replacement of a specifically named food. Source wording/quantities stay unchanged; cooked quantities stay cooked and must not be assigned raw grams. Optional toppings/herbs not selected.",
+      "pdf_bytes": 4367674,
+      "source_recipe_printed_page": 21,
+      "source_recipe_pdf_page_index": 22,
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://www.fns.usda.gov/fdpir/harvest-recipes-usda-foods",
+      "rights_basis": "Official FNS-430 collection; selected card has no third-party copyright/licensing restriction. Publication credits USDA staff, tribal contributors and contracted support; credit is preserved as provenance, not treated as a license or exclusion. No public-domain or unrestricted commercial/derivative assertion. Attribution required by project; no photos, logos or trademarks imported.",
+      "source_step_facts": [
+        "Combine milk, cooked rice, raisins and salt in medium pot.",
+        "Boil; reduce heat and cook 15 minutes, stirring every 3 minutes.",
+        "Add sugar, vanilla and cinnamon; cook 5 minutes on low."
+      ]
+    },
+    {
+      "candidate_id": "HARV6-FRESH-TOMATO-SALSA",
+      "source_time_facts": {"total_minutes": null, "prep_minutes": null, "cook_minutes": null, "chill_minutes": 15, "evidence": "Harvest printed page 53, step 3."},
+      "recipe_name": "Fresh Tomato Salsa",
+      "source_collection": "USDA FNS A Harvest of Recipes with USDA Foods (FNS-430, May2013)",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_servings": 6,
+      "screen_decision": "VIABLE_SOURCE_SCREEN",
+      "remaining_issues": [
+        "Retail evidence association",
+        "Final corpus reviewer acceptance; preserve cooked ingredient amounts and source-explicit selections"
+      ],
+      "source_backed_equipment": [
+        "medium-size bowl"
+      ],
+      "notes": "Printed52/PDF54. Select freshTOMATO avoids cannedlowNa. LIME_JUICEexplicitalternative. Optional herbs/chili not required; source refrigerate15min.",
+      "pdf_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "source_access": "Downloaded primary 98-page PDF; exact SHA-256 verified. Both recipe pages visually checked after Poppler render; ingredients, options, quantities, directions and notices reviewed. Full-text notice searches and visual acknowledgments/back-cover review completed.",
+      "ingredient_facts": [
+        "1 cup tomatoes, finely chopped (or ½ can, about 8 ounces, low-sodium diced tomatoes)",
+        "½ cup apple, peeled and finely chopped",
+        "¼ cup onion, finely chopped",
+        "2 tablespoons lime (or lemon) juice",
+        "1 teaspoon garlic, finely chopped",
+        "½ teaspoon vegetable oil",
+        "¼ teaspoon salt",
+        "1 teaspoon fresh parsley or cilantro, finely chopped (if you have it)",
+        "1 tablespoon cayenne pepper or jalapeño chilies, chopped (if you have it)"
+      ],
+      "selected_required_codes": [
+        "TOMATO",
+        "APPLE",
+        "ONION_YELLOW",
+        "LIME_JUICE",
+        "GARLIC",
+        "SUNFLOWER_OIL",
+        "SALT"
+      ],
+      "normalization_basis": "Source-explicit alternatives selected where listed. Genuinely unrestricted generic vegetable oil resolves SUNFLOWER_OIL; unspecified raisins resolves RAISINS_GOLDEN; generic vinegar resolves APPLE_CIDER_VINEGAR; generic mustard resolves MUSTARD_YELLOW. These are members of the named source category, not replacement of a specifically named food. Source wording/quantities stay unchanged; cooked quantities stay cooked and must not be assigned raw grams. Optional toppings/herbs not selected.",
+      "pdf_bytes": 4367674,
+      "source_recipe_printed_page": 53,
+      "source_recipe_pdf_page_index": 54,
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://www.fns.usda.gov/fdpir/harvest-recipes-usda-foods",
+      "rights_basis": "Official FNS-430 collection; selected card has no third-party copyright/licensing restriction. Publication credits USDA staff, tribal contributors and contracted support; credit is preserved as provenance, not treated as a license or exclusion. No public-domain or unrestricted commercial/derivative assertion. Attribution required by project; no photos, logos or trademarks imported.",
+      "source_step_facts": [
+        "Combine produce and lime juice in medium bowl.",
+        "Add garlic, oil and salt; mix.",
+        "Cover; refrigerate 15 minutes."
+      ]
+    },
+    {
+      "candidate_id": "HARV6-GARDEN-PASTA-SALAD",
+      "source_time_facts": {"total_minutes": null, "prep_minutes": null, "cook_minutes": null, "chill_minutes_min": 30, "chill_minutes_max": 45, "evidence": "Harvest printed page 55, step 4. Source quantity is cooked macaroni; no cooking duration or dry-yield conversion supplied."},
+      "recipe_name": "Garden Pasta Salad",
+      "source_collection": "USDA FNS A Harvest of Recipes with USDA Foods (FNS-430, May2013)",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_servings": 6,
+      "screen_decision": "VIABLE_SOURCE_SCREEN",
+      "remaining_issues": [
+        "Retail evidence association",
+        "Final corpus reviewer acceptance; preserve cooked ingredient amounts and source-explicit selections"
+      ],
+      "source_backed_equipment": [
+        "medium-size bowl",
+        "separate bowl"
+      ],
+      "notes": "Printed54/PDF56.30-45min refrigeration.",
+      "pdf_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "source_access": "Downloaded primary 98-page PDF; exact SHA-256 verified. Both recipe pages visually checked after Poppler render; ingredients, options, quantities, directions and notices reviewed. Full-text notice searches and visual acknowledgments/back-cover review completed.",
+      "ingredient_facts": [
+        "½ cup macaroni, cooked",
+        "¼ cup onion, finely chopped",
+        "½ cup cucumber, finely chopped",
+        "¼ cup green pepper, diced",
+        "1 tablespoon vinegar",
+        "½ tablespoon vegetable oil",
+        "¼ teaspoon salt",
+        "¼ teaspoon pepper",
+        "1 teaspoon parsley, chopped (if you have it)"
+      ],
+      "selected_required_codes": [
+        "PASTA_DRY",
+        "ONION_YELLOW",
+        "CUCUMBER",
+        "BELL_PEPPER_GREEN",
+        "APPLE_CIDER_VINEGAR",
+        "SUNFLOWER_OIL",
+        "SALT",
+        "BLACK_PEPPER"
+      ],
+      "normalization_basis": "Source-explicit alternatives selected where listed. Genuinely unrestricted generic vegetable oil resolves SUNFLOWER_OIL; unspecified raisins resolves RAISINS_GOLDEN; generic vinegar resolves APPLE_CIDER_VINEGAR; generic mustard resolves MUSTARD_YELLOW. These are members of the named source category, not replacement of a specifically named food. Source wording/quantities stay unchanged; cooked quantities stay cooked and must not be assigned raw grams. Optional toppings/herbs not selected.",
+      "pdf_bytes": 4367674,
+      "source_recipe_printed_page": 55,
+      "source_recipe_pdf_page_index": 56,
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://www.fns.usda.gov/fdpir/harvest-recipes-usda-foods",
+      "rights_basis": "Official FNS-430 collection; selected card has no third-party copyright/licensing restriction. Publication credits USDA staff, tribal contributors and contracted support; credit is preserved as provenance, not treated as a license or exclusion. No public-domain or unrestricted commercial/derivative assertion. Attribution required by project; no photos, logos or trademarks imported.",
+      "source_step_facts": [
+        "Combine cooked macaroni and vegetables in medium bowl.",
+        "Mix dressing in separate bowl, then combine.",
+        "Cover; refrigerate 30–45 minutes."
+      ]
+    },
+    {
+      "candidate_id": "HARV6-HEARTY-BEEF-SOUP",
+      "recipe_name": "Hearty Beef Soup",
+      "source_collection": "USDA FNS A Harvest of Recipes with USDA Foods (FNS-430, May2013)",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_servings": 6,
+      "screen_decision": "VIABLE_SOURCE_SCREEN",
+      "remaining_issues": [
+        "Retail evidence association",
+        "Final corpus reviewer acceptance; preserve cooked ingredient amounts and source-explicit selections"
+      ],
+      "source_backed_equipment": [
+        "large pot"
+      ],
+      "notes": "Printed40/PDF42. Explicit cabbage alternative resolves CABBAGE_GREEN; fresh tomato alternative; PASTA_DRY; no specialty sauce. Source8-10min browning+20+20min simmer.",
+      "pdf_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "source_access": "Downloaded primary 98-page PDF; exact SHA-256 verified. Both recipe pages visually checked after Poppler render; ingredients, options, quantities, directions and notices reviewed. Full-text notice searches and visual acknowledgments/back-cover review completed.",
+      "ingredient_facts": [
+        "¼ pound beef round roast, thawed and chopped",
+        "1 tablespoon vegetable oil",
+        "3 cups water",
+        "2 cups winter squash, chopped (or 2 cups cabbage, finely chopped)",
+        "½ cup onions, chopped",
+        "1 celery stalk, finely chopped",
+        "1 teaspoon garlic, finely chopped",
+        "½ teaspoon dried oregano",
+        "1 tablespoon parsley, chopped (if you have it)",
+        "¼ cup macaroni, dry",
+        "1 large tomato, chopped (or 1 can, about15ounces, low-sodium diced tomatoes)",
+        "½ cup green pepper, finely chopped",
+        "½ teaspoon salt",
+        "½ teaspoon black pepper"
+      ],
+      "selected_required_codes": [
+        "BEEF_TOP_ROUND",
+        "SUNFLOWER_OIL",
+        "WATER",
+        "CABBAGE_GREEN",
+        "ONION_YELLOW",
+        "CELERY",
+        "GARLIC",
+        "OREGANO_DRIED",
+        "PASTA_DRY",
+        "TOMATO",
+        "BELL_PEPPER_GREEN",
+        "SALT",
+        "BLACK_PEPPER"
+      ],
+      "normalization_basis": "Source-explicit alternatives selected where listed. Genuinely unrestricted generic vegetable oil resolves SUNFLOWER_OIL; unspecified raisins resolves RAISINS_GOLDEN; generic vinegar resolves APPLE_CIDER_VINEGAR; generic mustard resolves MUSTARD_YELLOW. These are members of the named source category, not replacement of a specifically named food. Source wording/quantities stay unchanged; cooked quantities stay cooked and must not be assigned raw grams. Optional toppings/herbs not selected. Source beef round roast resolves existing BEEF_TOP_ROUND as named round member; explicit cabbage and fresh tomato alternatives selected.",
+      "pdf_bytes": 4367674,
+      "source_recipe_printed_page": 41,
+      "source_recipe_pdf_page_index": 42,
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://www.fns.usda.gov/fdpir/harvest-recipes-usda-foods",
+      "rights_basis": "Official FNS-430 collection; selected card has no third-party copyright/licensing restriction. Publication credits USDA staff, tribal contributors and contracted support; credit is preserved as provenance, not treated as a license or exclusion. No public-domain or unrestricted commercial/derivative assertion. Attribution required by project; no photos, logos or trademarks imported.",
+      "source_step_facts": [
+        "Brown beef in oil in large pot 8–10 minutes; drain fat.",
+        "Add water, selected cabbage and aromatics; boil then cook 20 minutes.",
+        "Add remaining ingredients; cook on low 20 minutes."
+      ]
+    },
+    {
+      "candidate_id": "HARV6-CHICKEN-STIR-FRY",
+      "recipe_name": "Chicken Stir-Fry",
+      "source_collection": "USDA FNS A Harvest of Recipes with USDA Foods (FNS-430, May2013)",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_servings": 6,
+      "screen_decision": "VIABLE_SOURCE_SCREEN",
+      "remaining_issues": [
+        "Retail evidence association",
+        "Final corpus reviewer acceptance; preserve cooked ingredient amounts and source-explicit selections"
+      ],
+      "source_backed_equipment": [
+        "large pan"
+      ],
+      "notes": "Printed72/PDF74. Freshcarrot option explicit. Optionalsoysauce notrequired;1minuteheat afteraddingchicken.",
+      "pdf_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "source_access": "Downloaded primary 98-page PDF; exact SHA-256 verified. Both recipe pages visually checked after Poppler render; ingredients, options, quantities, directions and notices reviewed. Full-text notice searches and visual acknowledgments/back-cover review completed.",
+      "ingredient_facts": [
+        "2 tablespoons vegetable oil",
+        "½ cup carrots, peeled, sliced thinly (or ½ can, about8ounces, low-sodium carrots, drained)",
+        "½ cup celery, sliced thin",
+        "¼ cup onion, cut into strips",
+        "1 green pepper, cut into strips",
+        "1 tablespoon garlic, finely chopped",
+        "1 tablespoon ginger, finely chopped (if you have it)",
+        "1 pound chicken, cooked, skin removed, and sliced into strips",
+        "½ teaspoon sugar",
+        "3 tablespoons soy sauce (if you have it)",
+        "3 cups cooked white rice (or brown rice)"
+      ],
+      "selected_required_codes": [
+        "SUNFLOWER_OIL",
+        "CARROT",
+        "CELERY",
+        "ONION_YELLOW",
+        "BELL_PEPPER_GREEN",
+        "GARLIC",
+        "CHICKEN_BREAST_COOKED",
+        "SUGAR",
+        "RICE_WHITE"
+      ],
+      "normalization_basis": "Source-explicit alternatives selected where listed. Genuinely unrestricted generic vegetable oil resolves SUNFLOWER_OIL; unspecified raisins resolves RAISINS_GOLDEN; generic vinegar resolves APPLE_CIDER_VINEGAR; generic mustard resolves MUSTARD_YELLOW. These are members of the named source category, not replacement of a specifically named food. Source wording/quantities stay unchanged; cooked quantities stay cooked and must not be assigned raw grams. Optional toppings/herbs not selected.",
+      "pdf_bytes": 4367674,
+      "source_recipe_printed_page": 73,
+      "source_recipe_pdf_page_index": 74,
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://www.fns.usda.gov/fdpir/harvest-recipes-usda-foods",
+      "rights_basis": "Official FNS-430 collection; selected card has no third-party copyright/licensing restriction. Publication credits USDA staff, tribal contributors and contracted support; credit is preserved as provenance, not treated as a license or exclusion. No public-domain or unrestricted commercial/derivative assertion. Attribution required by project; no photos, logos or trademarks imported.",
+      "source_step_facts": [
+        "Heat oil in large pan; stir vegetables and garlic until garlic browns slightly.",
+        "Add cooked chicken and sugar; stir about 1 minute.",
+        "Serve with cooked rice."
+      ]
+    },
+    {
+      "candidate_id": "HARV6-POTATO-SOUP",
+      "recipe_name": "Potato Soup",
+      "source_collection": "USDA FNS A Harvest of Recipes with USDA Foods (FNS-430, May2013)",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_servings": 6,
+      "screen_decision": "MISSING_EXISTING_FORM",
+      "remaining_issues": [
+        "Only global GREEN_PEAS_CANNED; no fresh/frozen pea code. Canned alternate explicitly lowNa needs separate market proof",
+        "Generic vegetableoil/chicken mapping"
+      ],
+      "source_backed_equipment": [
+        "large pot"
+      ],
+      "notes": "Printed42/PDF44. Not a generic impossibility claim.",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "1 cup onion, chopped",
+        "1 tablespoon garlic, finely chopped",
+        "1 tablespoon vegetable oil",
+        "¼ pound chicken, thawed, cut up, and skin removed",
+        "4 cups water",
+        "6 small red potatoes, chopped (or1can about15oz low-sodium slicedpotatoes)",
+        "¼ cup white rice, uncooked (or brown rice)",
+        "½ teaspoon chili powder (or paprika)",
+        "1 cup peas (or½can about8oz low-sodium greenpeas)",
+        "½ teaspoon cayenne or jalapeño chilies diced (if you have it)",
+        "½ cup fresh parsley or cilantro (if you have it)"
+      ]
+    },
+    {
+      "candidate_id": "HARV6-CHICKEN-NOODLE-SOUP",
+      "recipe_name": "Chicken Noodle Soup",
+      "source_collection": "USDA FNS A Harvest of Recipes with USDA Foods (FNS-430, May2013)",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_servings": 6,
+      "screen_decision": "MISSING_EXISTING_FORM",
+      "remaining_issues": [
+        "Egg mix not shell EGG; no egg mix code"
+      ],
+      "source_backed_equipment": [
+        "large pot",
+        "large bowl",
+        "medium-size bowl"
+      ],
+      "notes": "Printed34/PDF36. Credit Tod Robertson, Seminole Nation; acknowledgment is not a copyright restriction.",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "1 pound chicken breasts, thawed, skin and bone removed",
+        "6 cups water",
+        "½ teaspoon salt",
+        "¼ teaspoon black pepper",
+        "4 tablespoons egg mix",
+        "2 cups all-purpose flour"
+      ]
+    },
+    {
+      "candidate_id": "HARV4-GREEN-ONION-OMELET",
+      "recipe_name": "Green Onion Omelet",
+      "source_collection": "USDA FNS A Harvest of Recipes with USDA Foods (FNS-430, May2013)",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_servings": 4,
+      "screen_decision": "MISSING_EXISTING_FORM",
+      "remaining_issues": [
+        "Canned sliced potatoes absent; ham absent. EGG_WHITE does exist and is not a blocker."
+      ],
+      "source_backed_equipment": [
+        "large skillet",
+        "mixing bowl"
+      ],
+      "notes": "",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "1can about15oz low-sodium sliced potatoes drained",
+        "1Tbsp vegetableoil",
+        "1whole egg",
+        "3egg whites",
+        "3Tbsp1%lowfatmilk",
+        "¼tspsalt",
+        "½cupham diced",
+        "½can about8oz low-sodiumtomatoes drained",
+        "1Tbsp greenonion orwildonion chopped"
+      ]
+    },
+    {
+      "candidate_id": "HARV6-SWEET-POTATO-CASSEROLE",
+      "recipe_name": "Sweet Potato Casserole",
+      "source_collection": "USDA FNS A Harvest of Recipes with USDA Foods (FNS-430, May2013)",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_servings": 6,
+      "screen_decision": "MISSING_EXISTING_FORM",
+      "remaining_issues": [
+        "Canned lowNa sweetpotatoes absent; do not substitute fresh SWEET_POTATO"
+      ],
+      "source_backed_equipment": [
+        "small bowl",
+        "medium-size baking pan"
+      ],
+      "notes": "",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "2Tbsp1%lowfatmilk",
+        "1½tsp brownsugar",
+        "1tsp cinnamon",
+        "¼cup quickcooking oats dry",
+        "1can about15oz low-sodium sweetpotatoes drained chopped"
+      ]
+    },
+    {
+      "candidate_id": "HARV6-PUMPKIN-PARFAIT",
+      "recipe_name": "Pumpkin Parfait",
+      "source_collection": "USDA FNS A Harvest of Recipes with USDA Foods (FNS-430, May2013)",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_servings": 6,
+      "screen_decision": "MISSING_EXISTING_FORM",
+      "remaining_issues": [
+        "Canned pumpkin, flavoredvanillayogurt andricecrisps absent"
+      ],
+      "source_backed_equipment": [
+        "blender or fork",
+        "bowls",
+        "baking pan"
+      ],
+      "notes": "",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "1can about15oz low-sodium pumpkin",
+        "3cups fatfreeorlowfat vanilla yogurt",
+        "¼tsp cinnamon",
+        "¼tsp nutmeg",
+        "¼cupraisins",
+        "½cup quickcooking oats",
+        "½cup ricecrisps",
+        "1Tbsp vegetableoil",
+        "¼cup brownorwhitesugar"
+      ]
+    },
+    {
+      "candidate_id": "HARV6-MEATLOAF",
+      "recipe_name": "Meatloaf",
+      "source_collection": "USDA FNS A Harvest of Recipes with USDA Foods (FNS-430, May2013)",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_servings": 6,
+      "screen_decision": "MISSING_EXISTING_FORM",
+      "remaining_issues": [
+        "Egg mix absent; lowNa creamstyle corn market unresolved; unspecified spray lacks globalcode"
+      ],
+      "source_backed_equipment": [
+        "large pan",
+        "large iron skillet or loaf pan"
+      ],
+      "notes": "",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "1lb groundbeef",
+        "1can about15oz low-sodium creamstylecorn",
+        "½cuponion",
+        "1tspgarlic",
+        "½cupwater",
+        "½cupcornmeal",
+        "2Tbsp eggmix",
+        "¼tspsalt",
+        "¼tspblackpepper",
+        "Nonstickcookingspray"
+      ]
+    },
+    {
+      "candidate_id": "SNAP6-SPINACH-APPLE-SALAD",
+      "source_time_facts": {"total_minutes": null, "prep_minutes": null, "cook_minutes": null, "evidence": "Direct FNS card https://snaped.fns.usda.gov/node/2537 contains two combining directions, no numeric timing."},
+      "recipe_name": "Spinach Salad with Apples and Raisins",
+      "source_collection": "USDA FNS SNAP-Ed recipe page; exact original-source notices need review",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "source_servings": 6,
+      "screen_decision": "VIABLE_SOURCE_SCREEN",
+      "remaining_issues": [
+        "Follow linked originalsource for exact licensingnotices",
+        "Source package quantity ambiguity must remain verbatim"
+      ],
+      "source_backed_equipment": [],
+      "notes": "All foodconcepts represented by existingcatalogue except genericraisins->golden decision. No preparationform problem.",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "2/3 package baby spinach (10 ounces, washed. Could also use Kale or other greens)",
+        "1½ apples (chopped, can use1-2 apples)",
+        "1cup raisins",
+        "¼cupcanolaoil",
+        "¼cupapplecidervinegar",
+        "¼cupsugar",
+        "1/16tspgarlicpowder"
+      ],
+      "selected_required_codes": [
+        "SPINACH",
+        "APPLE",
+        "RAISINS_GOLDEN",
+        "CANOLA_OIL",
+        "APPLE_CIDER_VINEGAR",
+        "SUGAR",
+        "GARLIC_POWDER"
+      ],
+      "normalization_basis": "Source-explicit alternatives selected where listed. Genuinely unrestricted generic vegetable oil resolves SUNFLOWER_OIL; unspecified raisins resolves RAISINS_GOLDEN; generic vinegar resolves APPLE_CIDER_VINEGAR; generic mustard resolves MUSTARD_YELLOW. These are members of the named source category, not replacement of a specifically named food. Source wording/quantities stay unchanged; cooked quantities stay cooked and must not be assigned raw grams. Optional toppings/herbs not selected.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "rights_basis": "Reviewed primary directly FNS-hosted recipe text has no third-party copyright/licensing restriction. Apply accepted project direct-FNS risk posture; preserve identified source/contributor attribution. No public-domain or unrestricted commercial/derivative claim, no photos/logos/trademarks imported. Missing additional blanket commercial permission is not a blocker under approved policy."
+    },
+    {
+      "candidate_id": "SNAP6-PEACH-CRISP",
+      "source_time_facts": {"total_minutes": null, "prep_minutes": null, "cook_minutes": 20, "oven_fahrenheit": 375, "evidence": "Direct FNS Summer Recipes page, Peach Crisp steps 1 and 7."},
+      "recipe_name": "Peach Crisp",
+      "source_collection": "USDA FNS SNAP-Ed recipe page; exact original-source notices need review",
+      "source_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/4th-july",
+      "source_servings": 6,
+      "screen_decision": "VIABLE_SOURCE_SCREEN",
+      "remaining_issues": [
+        "Source attributes Pennsylvania Nutrition Education Network; inspect actual use restrictions rather than treat credit as prohibition"
+      ],
+      "source_backed_equipment": [
+        "baking pan",
+        "saucepan",
+        "small bowl"
+      ],
+      "notes": "Sourcefresh peaches and genericmargarine; no trans-fatfree source qualifier.",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "4 peaches (4cups sliced)",
+        "2Tbspmargarine",
+        "¾cupquickcookingoats",
+        "½cupsugar",
+        "¼cupflour",
+        "2tspcinnamon",
+        "1tsplemonjuice"
+      ],
+      "selected_required_codes": [
+        "PEACH",
+        "MARGARINE",
+        "OATS_ROLLED",
+        "SUGAR",
+        "FLOUR_WHEAT",
+        "CINNAMON_GROUND",
+        "LEMON"
+      ],
+      "normalization_basis": "Source-explicit alternatives selected where listed. Genuinely unrestricted generic vegetable oil resolves SUNFLOWER_OIL; unspecified raisins resolves RAISINS_GOLDEN; generic vinegar resolves APPLE_CIDER_VINEGAR; generic mustard resolves MUSTARD_YELLOW. These are members of the named source category, not replacement of a specifically named food. Source wording/quantities stay unchanged; cooked quantities stay cooked and must not be assigned raw grams. Optional toppings/herbs not selected.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/4th-july",
+      "rights_basis": "Reviewed primary directly FNS-hosted recipe text has no third-party copyright/licensing restriction. Apply accepted project direct-FNS risk posture; preserve identified source/contributor attribution. No public-domain or unrestricted commercial/derivative claim, no photos/logos/trademarks imported. Missing additional blanket commercial permission is not a blocker under approved policy."
+    },
+    {
+      "candidate_id": "SNAP6-SEARED-GREENS",
+      "source_time_facts": {"total_minutes": null, "prep_minutes": null, "cook_minutes": null, "steam_stage_minutes": 4, "evidence": "Direct FNS card https://snaped.fns.usda.gov/node/2488 step 3. Other saute/stir/standing stages untimed; 4 minutes is not the full cooking duration."},
+      "recipe_name": "Seared Greens",
+      "source_collection": "USDA FNS SNAP-Ed recipe page; exact original-source notices need review",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "source_servings": 6,
+      "screen_decision": "VIABLE_SOURCE_SCREEN",
+      "remaining_issues": [
+        "Originalsource licensingnotice review",
+        "Retailevidence association"
+      ],
+      "source_backed_equipment": [
+        "large deep pot or skillet with cover"
+      ],
+      "notes": "Explicit KALE and OLIVE_OIL options; actual catalogue code APPLE_CIDER_VINEGAR confirmed. No new ingredients.",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "8cups kale orcollardgreens (1½pounds)",
+        "2Tbspvegetableoil(oroliveoil)",
+        "4garliccloves",
+        "1cupwater",
+        "¼tspsalt",
+        "1tspblackpepper",
+        "2Tbspcidervinegar"
+      ],
+      "selected_required_codes": [
+        "KALE",
+        "OLIVE_OIL",
+        "GARLIC",
+        "WATER",
+        "SALT",
+        "BLACK_PEPPER",
+        "APPLE_CIDER_VINEGAR"
+      ],
+      "normalization_basis": "Source-explicit alternatives selected where listed. Genuinely unrestricted generic vegetable oil resolves SUNFLOWER_OIL; unspecified raisins resolves RAISINS_GOLDEN; generic vinegar resolves APPLE_CIDER_VINEGAR; generic mustard resolves MUSTARD_YELLOW. These are members of the named source category, not replacement of a specifically named food. Source wording/quantities stay unchanged; cooked quantities stay cooked and must not be assigned raw grams. Optional toppings/herbs not selected.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "rights_basis": "Reviewed primary directly FNS-hosted recipe text has no third-party copyright/licensing restriction. Apply accepted project direct-FNS risk posture; preserve identified source/contributor attribution. No public-domain or unrestricted commercial/derivative claim, no photos/logos/trademarks imported. Missing additional blanket commercial permission is not a blocker under approved policy."
+    },
+    {
+      "candidate_id": "SNAP6-ASPARAGUS-GREMOLATA",
+      "recipe_name": "Asparagus with Gremolata Sauce",
+      "source_collection": "USDA FNS SNAP-Ed recipe page; exact original-source notices need review",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "source_servings": 6,
+      "screen_decision": "VIABLE_SOURCE_SCREEN",
+      "remaining_issues": [
+        "Originalsource licensingnotice review",
+        "Retailevidence association"
+      ],
+      "source_backed_equipment": [
+        "large pot",
+        "heavy large skillet"
+      ],
+      "notes": "All purchaseconcepts existing; explicit butteralternate; gratedpeel andfreshjuice preparation nottwoextraSKUs.",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "2cupsasparagus washedtrimmed",
+        "2Tbspmargarine(orbutter)",
+        "2tsplemonpeelgrated",
+        "1garlicclove large minced",
+        "2Tbsplemonjuice fresh"
+      ],
+      "selected_required_codes": [
+        "ASPARAGUS",
+        "BUTTER_UNSALTED",
+        "LEMON",
+        "GARLIC"
+      ],
+      "normalization_basis": "Source-explicit alternatives selected where listed. Genuinely unrestricted generic vegetable oil resolves SUNFLOWER_OIL; unspecified raisins resolves RAISINS_GOLDEN; generic vinegar resolves APPLE_CIDER_VINEGAR; generic mustard resolves MUSTARD_YELLOW. These are members of the named source category, not replacement of a specifically named food. Source wording/quantities stay unchanged; cooked quantities stay cooked and must not be assigned raw grams. Optional toppings/herbs not selected.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "rights_basis": "Reviewed primary directly FNS-hosted recipe text has no third-party copyright/licensing restriction. Apply accepted project direct-FNS risk posture; preserve identified source/contributor attribution. No public-domain or unrestricted commercial/derivative claim, no photos/logos/trademarks imported. Missing additional blanket commercial permission is not a blocker under approved policy."
+    },
+    {
+      "candidate_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
+      "recipe_name": "Spring Vegetable Saute",
+      "source_collection": "USDA FNS SNAP-Ed recipe page; exact original-source notices need review",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "source_servings": 4,
+      "screen_decision": "PROMISING_NORMALIZATION_REVIEW",
+      "remaining_issues": [
+        "Sweetonion vs existingONION_YELLOW (notsilent cultivar change)",
+        "Originalsource notice review"
+      ],
+      "source_backed_equipment": [
+        "skillet with cover"
+      ],
+      "notes": "Explicitgreenbeans alternate resolves missing sugar snap peas.",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "1tspoliveoil",
+        "½cupsweetonion sliced",
+        "1garlicclove finelychopped",
+        "3newpotatoes tinyquartered",
+        "¾cupcarrot sliced",
+        "¾cupasparaguspieces",
+        "¾cupsugarsnappeas orgreenbeans",
+        "½cupradishes quartered",
+        "¼tspsalt",
+        "¼tspblackpepper",
+        "½tspdill dried"
+      ]
+    },
+    {
+      "candidate_id": "BREAKFAST6-EASY-BISCUITS",
+      "recipe_name": "Easy Whole-Wheat Drop Biscuits",
+      "source_collection": "CACFP Breakfast Planner pool; ICN mirrors used for negative ingredient screen only, not rights clearance",
+      "source_url": "https://theicn.org/cnrb/pdfs/CACFP_Breakfast_Planner_Family_Recipes_Ages_3-5/usdacacfp_breakfast_family_Easy-Whole-Wheat-Drop-Biscuits_ages3-18_508c.pdf",
+      "source_servings": 6,
+      "screen_decision": "MISSING_EXISTING_FORM",
+      "remaining_issues": [
+        "Drynonfatmilk and vegetable shortening absent"
+      ],
+      "source_backed_equipment": [],
+      "notes": "15minprep13mincook.",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "Nonstick cooking spray",
+        "½cupallpurposeflour",
+        "½cupwholewheatflour",
+        "2Tbspdrynonfatinstantmilk",
+        "½tspbakingpowder",
+        "¼tspsalt",
+        "2Tbspvegetableshortening",
+        "¼cup+2Tbspwater"
+      ]
+    },
+    {
+      "candidate_id": "BREAKFAST6-OVERNIGHT-OATS",
+      "recipe_name": "Easy Overnight Oats and Berries",
+      "source_collection": "CACFP Breakfast Planner pool; ICN mirrors used for negative ingredient screen only, not rights clearance",
+      "source_url": "https://theicn.org/cnrb/pdfs/cacfp_breakfast_planner_family_recipes_ages_6-18/usdacacfp_breakfast_family_Easy-Overnight-Oats-and-Berries_ages6-18_508c.pdf",
+      "source_servings": 6,
+      "screen_decision": "MISSING_EXISTING_FORM",
+      "remaining_issues": [
+        "Flavored nonfat vanilla Greek yogurt absent; blackberries absent if mixture required"
+      ],
+      "source_backed_equipment": [],
+      "notes": "15minprep;8-12hrrefrigeration; not reject plainmilk1%.",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "½cupmilk1%",
+        "1½cups nonfatvanillaGreekyogurt",
+        "1Tbsp+1tsp pasteurizedhoney",
+        "½tspvanillaextract",
+        "2cups6½ozquickoats",
+        "6cups1lb11ozblueberriesblackberriesraspberrieswholefrozenunsweetened"
+      ]
+    },
+    {
+      "candidate_id": "BREAKFAST6-PEACH-OATMEAL",
+      "recipe_name": "Peachy Oatmeal Bake",
+      "source_collection": "CACFP Breakfast Planner pool; ICN mirrors used for negative ingredient screen only, not rights clearance",
+      "source_url": "https://theicn.org/cnrb/pdfs/cacfp_breakfast_planner_family_recipes_ages_6-18/usdacacfp_breakfast_family_Peachy-Oatmeal-Bake_ages6-18_508c.pdf",
+      "source_servings": 6,
+      "screen_decision": "MISSING_EXISTING_FORM",
+      "remaining_issues": [
+        "Cannedpeaches lightsyrup and maplesyrup absent"
+      ],
+      "source_backed_equipment": [],
+      "notes": "10minprep30mincook.",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "Nonstickcookingspray",
+        "1½cupsrolledoatsdry",
+        "1cupmilk1%",
+        "4cups cannedpeaches inlightsyrup drained diced",
+        "2Tbspmaplesyrup",
+        "2tspcinnamon"
+      ]
+    },
+    {
+      "candidate_id": "BREAKFAST6-COTTAGE-FRUIT",
+      "recipe_name": "Cottage Cheese and Fruit Bowls",
+      "source_collection": "CACFP Breakfast Planner pool; ICN mirrors used for negative ingredient screen only, not rights clearance",
+      "source_url": "https://theicn.org/cnrb/pdfs/cacfp_breakfast_planner_family_recipes_ages_6-18/usdacacfp_breakfast_family_Cottage-Cheese-and-Fruit-Bowls_ages6-18_508c.pdf",
+      "source_servings": 6,
+      "screen_decision": "MISSING_EXISTING_FORM",
+      "remaining_issues": [
+        "Kiwi,granola,lowfatcottagecheese absent"
+      ],
+      "source_backed_equipment": [],
+      "notes": "15minprep0cook.",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "1cupkiwi",
+        "1cupblueberries",
+        "1cupstrawberries",
+        "1½cup cottagecheese lowfat smallcurd",
+        "¼cup+2Tbspgranola"
+      ]
+    },
+    {
+      "candidate_id": "BREAKFAST6-CITRUS-TOAST",
+      "recipe_name": "Cinnamon-Citrus French Toast Squares",
+      "source_collection": "CACFP Breakfast Planner pool; ICN mirrors used for negative ingredient screen only, not rights clearance",
+      "source_url": "https://theicn.org/cnrb/pdfs/cacfp_breakfast_planner_family_recipes_ages_6-18/usdacacfp_breakfast_family_Cinnamon-Citrus-French-Toast-Squares_ages6-18_508c.pdf",
+      "source_servings": 6,
+      "screen_decision": "MISSING_EXISTING_FORM",
+      "remaining_issues": [
+        "Maplesyrup absent; frozenOJconcentrate marketuncertain"
+      ],
+      "source_backed_equipment": [],
+      "notes": "15minprep25mincook.",
+      "pdf_sha256": null,
+      "source_access": "PRIMARY_WEB_TEXT; PDF binary/hash/visual QA not completed",
+      "ingredient_facts": [
+        "6sliceswholewheatbread1ozeach",
+        "1Tbsp+1tspmargarine",
+        "¼cupmaplesyrup",
+        "1tspcinnamon",
+        "2wholeeggs",
+        "½cupfrozenorangejuiceconcentrate",
+        "¼cupmilk1%",
+        "Nonstickcookingspray"
+      ]
+    },
+    {
+      "source_collection": "USDA FNS WIC Works recipe pages",
+      "pdf_sha256": null,
+      "source_access": "Official page content retrieved via web search index; direct open403. Not yet archived/visually checked.",
+      "screen_decision": "VIABLE_SOURCE_SCREEN",
+      "remaining_issues": [
+        "Exact page rights/third-party notice review",
+        "Archive exact primary page content; finalvisualQA",
+        "Retail evidence association"
+      ],
+      "candidate_id": "WIC6-GREEK-CUCUMBER-SAUCE",
+      "recipe_name": "Greek Style Cucumber Yogurt Sauce",
+      "source_url": "https://wicworks.fns.usda.gov/es/node/2074",
+      "source_servings": 6,
+      "ingredient_facts": [
+        "1 cucumber (medium)",
+        "1 cup plain low-fat or non-fat yogurt (regular or Greek style)",
+        "1 clove garlic (minced or 1 tsp garlic powder)",
+        "1 tablespoon lemon juice (fresh or bottled)",
+        "1 tablespoon dill (fresh, chopped or 1 tsp dry dill - see note below)",
+        "salt and pepper to taste"
+      ],
+      "selected_required_codes": [
+        "CUCUMBER",
+        "YOGURT_GREEK_LOW_FAT",
+        "GARLIC",
+        "LEMON",
+        "DILL_DRIED",
+        "SALT",
+        "BLACK_PEPPER"
+      ],
+      "normalization_basis": "Explicit lowfatGreek and1tspdrydill alternatives; preserve1Tbspfreshlemonjuice as preparation ofLEMON without inventing a wholefruit quantity. Salt/pepper remain source to-taste quantities.",
+      "source_backed_equipment": [
+        "knife",
+        "cutting board",
+        "grater",
+        "kitchen towel or paper towels and strainer",
+        "measuring cups and spoons",
+        "bowl",
+        "spoon or rubber spatula"
+      ],
+      "notes": "12min preparation. Not a renamed sourcevariant.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://wicworks.fns.usda.gov/es/node/2074",
+      "rights_basis": "Reviewed primary directly FNS-hosted recipe text has no third-party copyright/licensing restriction. Apply accepted project direct-FNS risk posture; preserve identified source/contributor attribution. No public-domain or unrestricted commercial/derivative claim, no photos/logos/trademarks imported. Missing additional blanket commercial permission is not a blocker under approved policy."
+    },
+    {
+      "source_collection": "USDA FNS WIC Works recipe pages",
+      "pdf_sha256": null,
+      "source_access": "Official page content retrieved via web search index; direct open403. Not yet archived/visually checked.",
+      "screen_decision": "VIABLE_SOURCE_SCREEN",
+      "remaining_issues": [
+        "Exact page rights/third-party notice review",
+        "Archive exact primary page content; finalvisualQA",
+        "Retail evidence association"
+      ],
+      "candidate_id": "WIC4-BUTTERNUT-SOUP",
+      "source_time_facts": {"total_minutes": 80, "prep_minutes": 20, "cook_minutes": 60, "roast_minutes_min": 40, "roast_minutes_max": 50, "cool_minutes": 10, "oven_fahrenheit": 425, "evidence": "WIC recipe time fields and steps 1/4; keep official 60-minute cook field distinct from roast-stage range."},
+      "recipe_name": "Butternut Squash Soup",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+      "source_servings": 4,
+      "ingredient_facts": [
+        "1 butternut squash (large - about 3 pounds)",
+        "1 teaspoon olive oil (may need a bit more or less depending on the size of the squash)",
+        "1 teaspoon salt",
+        "white pepper (optional)",
+        "3 cups milk (the amount depends on how thick or thin you like your soup!)",
+        "plain low-fat or non-fat yogurt (for an optional topping when serving)"
+      ],
+      "selected_required_codes": [
+        "BUTTERNUT_SQUASH",
+        "OLIVE_OIL",
+        "SALT",
+        "MILK_1_PERCENT"
+      ],
+      "normalization_basis": "Genericmilk not sourcefat% restriction: select existing MILK_1_PERCENT transparently; optionalwhitepepper/yogurt omitted. Preserve stated3cups and sourceconsistency caveat.",
+      "source_backed_equipment": [
+        "rimmed baking sheet",
+        "parchment paper",
+        "knife",
+        "cutting board",
+        "large spoon",
+        "blender",
+        "soup pot"
+      ],
+      "notes": "20minprep60mincook80mintotal.400? Source explicitly425F,roast40-50min,cool10min; no needinfer4->6scaling. Collection intro lists contributions from MarylandWIC and NationalOffice; this is authorship context not automaticallyexcludedlicensingnotice.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+      "rights_basis": "Reviewed primary directly FNS-hosted recipe text has no third-party copyright/licensing restriction. Apply accepted project direct-FNS risk posture; preserve identified source/contributor attribution. No public-domain or unrestricted commercial/derivative claim, no photos/logos/trademarks imported. Missing additional blanket commercial permission is not a blocker under approved policy."
+    },
+    {
+      "source_collection": "USDA FNS WIC Works recipe pages",
+      "pdf_sha256": null,
+      "source_access": "Official page content retrieved via web search index; direct open403. Not yet archived/visually checked.",
+      "screen_decision": "SOURCE_DATA_REVIEW_NEEDED",
+      "remaining_issues": [
+        "Sourceingredients3Tbsp dividedoil but directions only2Tbsp oil use visible;1Tbsp unexplained. Do not silentlychangequantity.",
+        "Redlentil preparationform and cannedtomato code traceability",
+        "Exactpage rightsnotice review"
+      ],
+      "candidate_id": "WIC4-MASOOR-DAL",
+      "recipe_name": "Masoor Dal",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/masoor-dal",
+      "source_servings": 4,
+      "ingredient_facts": [
+        "3 tablespoons olive oil (divided)",
+        "1½ cups onion (diced)",
+        "¼ cup jalapeno (minced)",
+        "1 tablespoon garlic (thinly sliced)",
+        "2 teaspoons ginger (minced)",
+        "1 cup red lentils (sorted and rinsed)",
+        "2 cups water",
+        "15 ounces diced tomatoes",
+        "1 teaspoon salt",
+        "1 teaspoon cumin (or cumin seeds)",
+        "1 teaspoon ground mustard",
+        "½ teaspoon tumeric",
+        "½ teaspoon paprika"
+      ],
+      "source_backed_equipment": [
+        "pot",
+        "potato masher",
+        "knife",
+        "cutting board",
+        "measuring cups and spoons",
+        "large spoon"
+      ]
+    }
+  ],
+  "selected_candidate_union": [
+    "APPLE",
+    "APPLE_CIDER_VINEGAR",
+    "ASPARAGUS",
+    "BAKING_POWDER",
+    "BEEF_TOP_ROUND",
+    "BELL_PEPPER_GREEN",
+    "BLACK_PEPPER",
+    "BUTTERNUT_SQUASH",
+    "BUTTER_UNSALTED",
+    "CABBAGE_GREEN",
+    "CANOLA_OIL",
+    "CARROT",
+    "CELERY",
+    "CHICKEN_BREAST_COOKED",
+    "CINNAMON_GROUND",
+    "CORN_SWEET",
+    "CUCUMBER",
+    "DILL_DRIED",
+    "EGG",
+    "FLOUR_WHEAT",
+    "FLOUR_WHOLE_WHEAT",
+    "GARLIC",
+    "GARLIC_POWDER",
+    "GREEN_ONION",
+    "HONEY",
+    "KALE",
+    "LEMON",
+    "LIME_JUICE",
+    "MARGARINE",
+    "MILK_1_PERCENT",
+    "MUSTARD_YELLOW",
+    "OATS_ROLLED",
+    "OLIVE_OIL",
+    "ONION_YELLOW",
+    "OREGANO_DRIED",
+    "PASTA_DRY",
+    "PEACH",
+    "POTATO",
+    "QUINOA",
+    "RAISINS_GOLDEN",
+    "RICE_WHITE",
+    "SALT",
+    "SPINACH",
+    "SUGAR",
+    "SUNFLOWER_OIL",
+    "TOMATO",
+    "VANILLA_EXTRACT",
+    "WATER",
+    "YOGURT_GREEK_LOW_FAT",
+    "ZUCCHINI"
+  ],
+  "viable_source_screen_count": 16,
+  "harvest_complete_pool_screen": {
+    "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+    "total_recipes": 41,
+    "reviewed_ingredient_lists": 41,
+    "method": "Full book primary extracted ingredient lists screened; decisive sourcefacts below explain rejects/review-needed records. Contributor acknowledgment is not treated as licensing prohibition. Sourcefacts compact, not archival fulltranscription. No claim that this finitepool is exhaustive ofall FNS recipes.",
+    "recipes": [
+      {
+        "printed_page": 12,
+        "recipe_name": "Corn Casserole",
+        "decisive_source_fact": "4 tablespoons egg mix",
+        "screen_result": "MISSING_FORM: egg mix; cream-style corn market unresolved"
+      },
+      {
+        "printed_page": 14,
+        "recipe_name": "Huevos Motuleños",
+        "decisive_source_fact": "1 cup pinto beans, dry; ½ cup (about4ounces) ham, cooked and diced",
+        "screen_result": "MISSING_FORM: drypinto andham; don'treplace cannedpinto"
+      },
+      {
+        "printed_page": 16,
+        "recipe_name": "Green Onion Omelet",
+        "decisive_source_fact": "1 can low-sodium sliced potatoes; ½ cup ham",
+        "screen_result": "MISSING_FORM: cannedpotatoes/ham; EGG_WHITE doesexist"
+      },
+      {
+        "printed_page": 18,
+        "recipe_name": "Pumpkin Parfait",
+        "decisive_source_fact": "1 can low-sodium pumpkin; vanilla yogurt; rice crisps",
+        "screen_result": "MISSING_FORM: cannedpumpkin/flavoredyogurt/ricecrisps"
+      },
+      {
+        "printed_page": 20,
+        "recipe_name": "Rice Pudding",
+        "decisive_source_fact": null,
+        "screen_result": "VIABLE"
+      },
+      {
+        "printed_page": 22,
+        "recipe_name": "Banaha Bread",
+        "decisive_source_fact": "1 teaspoon baking soda; 4 to6 handfuls corn shucks",
+        "screen_result": "MISSING_FORM: bakingsoda (andmaterialcornshuckexecution need)"
+      },
+      {
+        "printed_page": 24,
+        "recipe_name": "Banana Berry Muffins",
+        "decisive_source_fact": "2 tablespoons egg mix; ½ teaspoon baking soda; 4 tablespoons applesauce",
+        "screen_result": "MISSING_FORM: eggmix,bakingsoda; applesauce notgenericrawAPPLE"
+      },
+      {
+        "printed_page": 26,
+        "recipe_name": "Fabulous Homemade Bread",
+        "decisive_source_fact": "1½ packages active dry yeast",
+        "screen_result": "MISSING_FORM: yeast"
+      },
+      {
+        "printed_page": 28,
+        "recipe_name": "Garden Pan Bread",
+        "decisive_source_fact": "1 tablespoon egg mix",
+        "screen_result": "MISSING_FORM: eggmix"
+      },
+      {
+        "printed_page": 30,
+        "recipe_name": "Raisin Muffins",
+        "decisive_source_fact": "1 teaspoon baking soda",
+        "screen_result": "MISSING_FORM: bakingsoda; sourceallows sugarinsteadofmaplesyrup so notmapleblock"
+      },
+      {
+        "printed_page": 32,
+        "recipe_name": "Beef and Vegetable Soup",
+        "decisive_source_fact": "low-sodium canned carrots and slicedpotatoes",
+        "screen_result": "MISSING_FORM: requiredcannedcarrots/potatoes"
+      },
+      {
+        "printed_page": 34,
+        "recipe_name": "Chicken Noodle Soup",
+        "decisive_source_fact": "4 tablespoons egg mix",
+        "screen_result": "MISSING_FORM: eggmix"
+      },
+      {
+        "printed_page": 36,
+        "recipe_name": "Corn Soup",
+        "decisive_source_fact": "2 cans low-sodium cream syle corn",
+        "screen_result": "MARKET_REVIEW: requiredcreamstylecorn notcleared; don'tsubstituteordinarycorn"
+      },
+      {
+        "printed_page": 38,
+        "recipe_name": "Great Northern Bean Soup",
+        "decisive_source_fact": "¼ pound ham, chopped",
+        "screen_result": "MISSING_FORM: ham. Also source step adds salt absent ingredientquantity; datareview"
+      },
+      {
+        "printed_page": 40,
+        "recipe_name": "Hearty Beef Soup",
+        "decisive_source_fact": null,
+        "screen_result": "VIABLE"
+      },
+      {
+        "printed_page": 42,
+        "recipe_name": "Potato Soup",
+        "decisive_source_fact": "1 cup peas (or½canlow-sodiumgreenpeas)",
+        "screen_result": "MARKET_FORM_REVIEW: fresh/frozenpeas lacks exactglobalstate; lowNacannedalternative needs proof"
+      },
+      {
+        "printed_page": 44,
+        "recipe_name": "Pumpkin Soup",
+        "decisive_source_fact": "2 cans low-sodium pumpkin",
+        "screen_result": "MISSING_FORM: cannedpumpkin; sourcebrown sugaralternative avoidsmaplemissing"
+      },
+      {
+        "printed_page": 46,
+        "recipe_name": "Vegetable Soup (with Chicken)",
+        "decisive_source_fact": "1 can chicken; 1 can low-sodium peas",
+        "screen_result": "MISSING_FORM: cannedchicken; lowNapeasmarketreview"
+      },
+      {
+        "printed_page": 48,
+        "recipe_name": "Chicken Posole",
+        "decisive_source_fact": "2 cans low-sodium hominy; 1 can canned chicken",
+        "screen_result": "MISSING_FORM: hominy/cannedchicken"
+      },
+      {
+        "printed_page": 50,
+        "recipe_name": "Dirty Rice",
+        "decisive_source_fact": "2 tablespoons egg mix",
+        "screen_result": "MISSING_FORM: eggmix; lowNapea/beanformsalsorequireproof"
+      },
+      {
+        "printed_page": 52,
+        "recipe_name": "Fresh Tomato Salsa",
+        "decisive_source_fact": null,
+        "screen_result": "VIABLE"
+      },
+      {
+        "printed_page": 54,
+        "recipe_name": "Garden Pasta Salad",
+        "decisive_source_fact": null,
+        "screen_result": "VIABLE"
+      },
+      {
+        "printed_page": 56,
+        "recipe_name": "Green Bean and Rice Casserole",
+        "decisive_source_fact": "1 can low-sodium green beans",
+        "screen_result": "MARKET_REVIEW: cannedlowNa/noSaltgreenbeans notcleared; global noSaltcancodeexists so notnewcodeblock"
+      },
+      {
+        "printed_page": 58,
+        "recipe_name": "Mash’d Taters",
+        "decisive_source_fact": "4½ cups dehydrated potatoes; 4½ teaspoons light buttery spread",
+        "screen_result": "MISSING_FORM: dehydratedpotatoes/lightbutteryspread"
+      },
+      {
+        "printed_page": 60,
+        "recipe_name": "Roasted Potatoes",
+        "decisive_source_fact": null,
+        "screen_result": "VIABLE"
+      },
+      {
+        "printed_page": 62,
+        "recipe_name": "Sweet Potato Casserole",
+        "decisive_source_fact": "1 can low-sodium sweet potatoes",
+        "screen_result": "MISSING_FORM: cannedsweetpotatoes"
+      },
+      {
+        "printed_page": 64,
+        "recipe_name": "Baked Fish",
+        "decisive_source_fact": "Nonstick cooking spray",
+        "screen_result": "PROCESS_AID_REVIEW: allfoodsmapwithtilapiaexplicit; noexactglobalcodeforspray. Do notautodeletesourceingredient"
+      },
+      {
+        "printed_page": 66,
+        "recipe_name": "Beef and Vegetables",
+        "decisive_source_fact": "1 can low-sodium tomato sauce",
+        "screen_result": "MISSING_FORM: tomatosauce isnot automaticallytomatopasteorcrushedtomatoes"
+      },
+      {
+        "printed_page": 68,
+        "recipe_name": "Chicken Casserole",
+        "decisive_source_fact": "cannedchicken; pasteurizedprocessAmericancheese",
+        "screen_result": "MISSING_FORM: cannedchicken/Americancheese"
+      },
+      {
+        "printed_page": 70,
+        "recipe_name": "Chicken Salad",
+        "decisive_source_fact": "1 can (about12ounces) canned chicken",
+        "screen_result": "MISSING_FORM: cannedchicken notjustcookedbreast"
+      },
+      {
+        "printed_page": 72,
+        "recipe_name": "Chicken Stir-Fry",
+        "decisive_source_fact": null,
+        "screen_result": "VIABLE"
+      },
+      {
+        "printed_page": 74,
+        "recipe_name": "Citrus Tuna Melt",
+        "decisive_source_fact": "3 slices pasteurized process American cheese",
+        "screen_result": "MISSING_FORM: Americancheese"
+      },
+      {
+        "printed_page": 76,
+        "recipe_name": "Easy Beef Supper",
+        "decisive_source_fact": "2½ cups low-sodium tomato juice",
+        "screen_result": "MISSING_FORM: tomatojuice"
+      },
+      {
+        "printed_page": 78,
+        "recipe_name": "Meatloaf",
+        "decisive_source_fact": "2 tablespoons egg mix; low-sodiumcreamstylecorn",
+        "screen_result": "MISSING_FORM: eggmix; creamcornmarketreview"
+      },
+      {
+        "printed_page": 80,
+        "recipe_name": "Pot Roasted Beef",
+        "decisive_source_fact": "½ cup low-sodium tomato juice",
+        "screen_result": "MISSING_FORM: tomatojuice"
+      },
+      {
+        "printed_page": 82,
+        "recipe_name": "Soft Chicken Taco",
+        "decisive_source_fact": "4 soft tortillas,6-inch size",
+        "screen_result": "PROMISING: genericsofttortilla may resolveexistingwholewheat; genericoilallowed; sourceFreshTomatoSalsa subrecipe must be represented ratherthanSALSAjar; source4servings"
+      },
+      {
+        "printed_page": 84,
+        "recipe_name": "Spicy Quesadillas",
+        "decisive_source_fact": "¼ cup pasteurized process American cheese",
+        "screen_result": "MISSING_FORM: Americancheese"
+      },
+      {
+        "printed_page": 86,
+        "recipe_name": "Three Sisters Stew",
+        "decisive_source_fact": "low-sodiumtomatosauce; yellowsquash; lowNa vegetarianbeans",
+        "screen_result": "MISSING_FORM: sauce/yellowsquash/vegetarianbeans; freshgreen squashmayresolveZUCCHINIbutdoesnotfixotherrows"
+      },
+      {
+        "printed_page": 88,
+        "recipe_name": "Two Bean Chili",
+        "decisive_source_fact": "½ can low-sodium vegetarianbeans;2½cupslowNatomatojuice",
+        "screen_result": "MISSING_FORM: vegetarianbeans/tomatojuice"
+      },
+      {
+        "printed_page": 90,
+        "recipe_name": "Veggie Burgers",
+        "decisive_source_fact": "1 can low-sodiumwholekernelcorn; nonstickcookingspray",
+        "screen_result": "MARKET/PROCESS_AID_REVIEW: sourcecannedlowNacorn andspraynotcleared; don'tinventomission"
+      },
+      {
+        "printed_page": 92,
+        "recipe_name": "Winter Stew",
+        "decisive_source_fact": "cannedbeef; cannedapricots;lowNatomatojuice",
+        "screen_result": "MISSING_FORM: cannedbeef/apricots/tomatojuice"
+      }
+    ]
+  }
+}

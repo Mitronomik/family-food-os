@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-05",
+  "scope": "Consumables-correction replacement market evidence; exact fresh cauliflower is separate from frozen smoothie form. Bread is whole-wheat, not crispbread or mixed refined flour. No live stock/retailer integration.",
+  "observations": [
+    {
+      "code": "BREAD_WHOLE_WHEAT",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/hleb-remeslennyjj-iz-celnozernmuki-rossiya-550g-528673/",
+      "wording": "Хлеб АЮТИНСКИЙ ХЛЕБ Ремесленный из цельнозерн.муки, 550г; мука пшеничная хлебопекарная обойная (цельнозерновая), закваска из пшеничной цельнозерновой муки.",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Actual flour ingredients are whole-wheat; minor rye malt is listed last, not rye flour. Generic rye-wheat category does not erase ingredient statement. Region-neutral active catalogue with August 2026 reviews; SPB delivery expressly listed in official category FAQ. Transient sold-out label is not absence. At least one qualifying chain + ordinary bread plausibility gives RU_AVAILABLE, not three-chain RU_MASS_MARKET."
+    },
+    {
+      "code": "CAULIFLOWER",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/kapusta-cvetnaya-ves-011749-11749/",
+      "wording": "Капуста цветная, весовая; Овощи, фрукты / Овощи / Капуста; описание употребления в сыром виде",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Actual current official product is plain raw fresh cauliflower in produce, not frozen florets, riced or prepared meal. Existing frozen form evidence cannot stand in for this explicit fresh source choice. Current neutral catalogue + official SPB delivery evidence, no current stock assertion."
+    }
+  ],
+  "five_chain_search": {
+    "code": "BREAD_WHOLE_WHEAT",
+    "searched_chains": [
+      "Пятёрочка",
+      "Перекрёсток",
+      "Лента",
+      "О'КЕЙ",
+      "Магнит"
+    ],
+    "queries": [
+      "site:perekrestok.ru хлеб цельнозерновой пшеничный",
+      "site:lenta.com хлеб цельнозерновой пшеничный",
+      "site:5ka.ru хлеб цельнозерновой пшеничный",
+      "site:magnit.ru хлеб пшеничный цельнозерновой",
+      "site:okeydostavka.ru хлеб пшеничный цельнозерновой",
+      "domain-specific exact хлеб цельнозерновой searches for each baseline chain"
+    ],
+    "result": "One qualifying chain (Lenta). Magnit matching Aytinsky bread URLs explicitly other-city stores; excluded. Perekrestok expired flyers excluded. Pyaterochka returned crispbreads/wrong form; excluded. OKEY no qualifying current exact product result in this search. No product absence inferred.",
+    "excluded_urls": [
+      "https://magnit.ru/product/1000310438-ayutinskiy_khleb_khdeb_remeslennyy_iz_tselnozernovoy_muki_tselnozernovoy_pshenichnyy_v_narezke_0_55k",
+      "https://files.perekrestok.ru/static/files/e0/dd/31caceb4fd345f28ce8c02d075b6.pdf",
+      "https://5ka.ru/product/khlebtsy-dr-korner-grechnevye-s-vitaminami--3275648/"
+    ]
+  },
+  "deviled_eggs_form_review": {
+    "checked_at": "2026-09-05",
+    "method": "Independently reopened current official Lenta product pages and composition fields for each actual selected recipe form, plus current official chain presence in Saint Petersburg. This is a recipe-form review, not inherited code-level clearance or a current-stock claim.",
+    "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+    "region_evidence_wording": "Current official delivery section explicitly includes Санкт-Петербург in the chain's delivery cities; product pages are region-neutral and do not select another city's store.",
+    "rows": [
+      {
+        "food_ingredient_code": "EGG",
+        "source_form": "eggs (in shell)",
+        "observation_id": "research-panel-v3.json:1",
+        "evidence_url": "https://lenta.com/product/yajjco-kurinoe-s1-rossiya-10sht-680723/",
+        "observed_wording": "Яйцо куриное ЛЕНТА С1, 10шт; состав: яйца куриные",
+        "match": "PASS: ordinary shell chicken eggs, not liquid egg product; no count-to-weight conversion."
+      },
+      {
+        "food_ingredient_code": "MAYONNAISE_LOW_FAT",
+        "source_form": "light mayonnaise",
+        "observation_id": "research-lenta-okey-v2.json:19",
+        "evidence_url": "https://lenta.com/product/sous-majjoneznyjj-legkijj-20-dojj-pak-s-doz-rossiya-400g-214314/",
+        "observed_wording": "Соус майонезный CALVE Легкий 20%, 400г; жиры20г/100г; water, sunflower oil, egg yolk, vinegar and seasonings",
+        "match": "PASS: deliberately reduced-fat/light mayonnaise-style dressing, not regular57–67% mayonnaise or an arbitrary unrelated sauce. Source does not prescribe a specific percent; no equivalence of nutrition values is asserted."
+      },
+      {
+        "food_ingredient_code": "SALT",
+        "source_form": "1/8 tsp salt in explicit mustard alternative",
+        "observation_id": "research-x5-v3.json:2",
+        "evidence_url": "https://lenta.com/product/sol-pomol-1-kup-rossiya-1kg-491061/",
+        "observed_wording": "Соль ИЛЕЦКАЯ помол №1,1кг; соль поваренная пищевая молотая",
+        "match": "PASS: source-generic food salt, no iodine or reduced-sodium requirement."
+      },
+      {
+        "food_ingredient_code": "BLACK_PEPPER",
+        "source_form": "1/8 tsp pepper in explicit mustard alternative",
+        "observation_id": "research-lenta-okey-v2.json:34",
+        "evidence_url": "https://lenta.com/product/priprava-perec-chernyjj-molotyjj-vetnam-20g-611678/",
+        "observed_wording": "Перец черный ЛЕНТА молотый,20г; состав: перец черный",
+        "match": "PASS: plain ground black pepper is a member of generic source pepper; not a seasoning blend."
+      }
+    ]
+  },
+  "cauliflower_search": {
+    "queries": [
+      "site:lenta.com/product/ \"Капуста цветная\" свежая",
+      "site:5ka.ru \"Капуста цветная\" свежая",
+      "site:magnit.ru/product \"Капуста цветная\" свежая",
+      "site:okeydostavka.ru \"Капуста цветная\" свежая",
+      "site:perekrestok.ru \"Капуста цветная\" свежая"
+    ],
+    "finding": "Current official Lenta raw produce product qualifies with SPB presence. Other panel results were frozen/wrong forms, old flyers or no qualifying current result. Not absence.",
+    "excluded_urls": [
+      "https://www.perekrestok.ru/cat/search?page=2&search=бондюэль",
+      "https://files.perekrestok.ru/static/files/a5/27/0810a4a41460131e194bffca1618.pdf",
+      "https://5ka.ru/media/hosting/documents/isklyucheniya_21_06.pdf"
+    ]
+  }
+}
