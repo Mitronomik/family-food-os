@@ -1,3 +1,121 @@
+# PR4 — authorized refresh: current-source acquisition blocker
+
+## Current decision and FACT
+
+The [Orchestrator decision](https://github.com/Mitronomik/family-food-os/pull/10#issuecomment-5553524319)
+posted `2026-09-05T17:26:45Z` authorizes bounded fresh acquisition on this same
+PR. It supersedes the historical missing-timestamp stop below. No further
+permission to refresh the same corpus is needed. Accepted DATA2 is immutable.
+
+Starting head: `17d23b22340a76dfa79420e74b97ce5703fc29a8`.
+Accepted main: `2f5fba991f1f612ce7b4b8dfda8ebd41ad6333e7`.
+Existing synchronization: `dfcbce2814b46da45cf346762a778170ffc5b36c`.
+
+The three recovered historical completion records are reused exactly, without
+searching old logs again. The remaining sources were grouped into **22 distinct
+accepted artifacts for 27 recipes**, each requested once by the HTTPS client.
+Results: **20 TLS EOF failures / 2 HTTP 403 failures**; no complete successful
+source response. Request code was temporary curation tooling, not a new runtime
+service or committed ingestion subsystem.
+
+[Exact attempt evidence](pr4-provenance-refresh-attempt.json) records all 22
+accepted URLs/hashes and affected recipe IDs. Additional ordinary-client checks:
+
+- `SNAP6-HEAVENLY-DEVILED-EGGS`, exact
+  `https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf`, accepted SHA-256
+  `1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f`:
+  in-app browser **Access Denied**; Safari **secure connection failed**;
+  system curl **exit 35 / SSL_ERROR_SYSCALL**. A web reader returned a PDF
+  extraction labelled crawled seven months ago, which is not fresh evidence.
+- `WIC1-BEYOND-BASIC-GRILLED-CHEESE`, exact
+  `https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese/printable/print`,
+  accepted SHA-256
+  `357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334`:
+  in-app browser **Access Denied**; web reader **403**.
+- The in-app browser displayed the tnc-eggs PDF, but a complete-byte export was
+  not obtained through available supported controls. Display alone does not
+  establish fresh acquisition, byte equality, notices equality or a new hash.
+
+## ASSUMPTION
+
+No source disappearance, recipe drift or rights drift is inferred from these
+access failures. The cause could be temporary or environment-specific. Cached
+reader output, existing saved files, rendered viewer state and failed request
+times are not assigned a successful source retrieval timestamp.
+
+## BLOCKER
+
+**PR4 SOURCE DRIFT BLOCKER — subtype: current-source acquisition unavailable.**
+At least EasterMenu.pdf and the WIC printable source cannot currently be
+obtained as complete fresh representations through the tested permitted paths.
+No accepted/fresh hash comparison or authoritative fact diff exists for them.
+Zero authoritative drift cannot be certified; the result is **unassessed**, not
+an invented clean comparison. The 22-artifact refresh remains incomplete.
+
+Counts: historical records reused **3**; fresh byte-identical **0**;
+presentation-only successors **0**; changed-hash successor list **empty**.
+Production hashes/timestamps for failed requests are explicitly null. No new
+lineage was marked acceptable. Accepted rights posture is unchanged and was
+not reopened as the old blanket blocker.
+
+Production compiler/loader/JSON correction, ordered steps, equipment population,
+fresh DB seed runs and production counts remain pending this acquisition gate.
+There is no corrected Recipe/Version/Ingredient/Step/Equipment count to report.
+The accepted contract remains 30 / 30 / 189 / newly derived steps / 86, with
+81 existing FoodIngredient codes and 34 equipment codes. No schema change,
+new FoodIngredient, source replacement, future context or PR5 work occurred.
+
+## OPTIONS / RECOMMENDED DECISION
+
+1. Restore access to the same accepted URLs through a permitted retrieval path,
+   or provide freshly downloaded complete artifacts with a contemporaneous
+   URL/completion-UTC acquisition record. Compare each artifact under the already
+   authorized unchanged-content / presentation-successor rules.
+2. Retry this bounded refresh after the external access condition changes. No
+   new source selection or weaker provenance rule is needed.
+
+Recommended: make the current sources obtainable under option 1, then resume
+this same branch immediately through the full PR4 correction and verification
+matrix. Do not repeat the historical-log search or generate a timestamp for an
+old file. Authorization remains active; the missing input is source access.
+
+## Verification in this pass
+
+DATA2 validator: PASS. The exact 22-artifact / 27-recipe attempt mapping and
+three historical completion records are checked against accepted DATA2 and
+previous recovery evidence. Accepted DATA2 and production runtime/compiler/seed
+JSON remain byte-identical to the starting head. No production acceptance run
+is claimed. Current verification:
+
+- DATA2 focused: **164 passed in 4.19s**.
+- Preserved PR4 domain/application/architecture/migration/persistence, excluding
+  obsolete seed tests: **43 passed in 5.21s**.
+- Affected historical PR4-DATA/FoodIngredient regression: **82 passed in 3.01s**.
+- Ruff on all 24 Python files in PR #10 versus main: **24 files already formatted;
+  All checks passed!** No Python implementation was modified this pass.
+- Working/staged correction and PR-versus-main diff checks: **PASS**.
+- Staged scope: six task-local documentation/state files; no source binaries,
+  HTML, browser databases, credentials, local DBs or runtime changes.
+- Full PR4 seed suite, fresh first/second seed and full backend+launcher: **not
+  run**, source-acquisition stop before production correction. Frontend unchanged.
+- No GitHub CI run is claimed.
+
+## Implementation notes from independent read-only quantity audit
+
+After acquisition succeeds, join the 189 purchase-form source-quantity rows to
+the verbatim coverage CSV. Required/optional/conditional flags come from selected
+semantics. Correct the old parser's mixed ASCII fractions and full unit words;
+do not select an unselected frozen-spinach weight for a fresh bunch. Preserve
+`2/3 package (10 ounces)` ambiguity without a mass conversion. Keep cooked pasta
+and juice amounts with explicit preparation notes. Conditional retained water
+must preserve both the 1-or-2-tablespoon choice and the source browning trigger.
+These findings are implementation guidance, not a new DATA2 quantity decision.
+
+## Historical report before refresh authorization — superseded execution status
+
+The complete earlier report follows unchanged as evidence of the prior pass.
+Its instruction to seek a fresh-acquisition authorization is no longer current.
+
 # PR4 — DATA2 retrieval provenance blocker
 
 ## FACT

@@ -2,7 +2,8 @@
 
 The JSON files in this directory and the existing builder/loader still contain
 the obsolete PR10 corpus. They have not been regenerated from accepted DATA2
-because the explicit source-retrieval provenance gate requires stopping.
+because the authorized fresh-source acquisition could not obtain complete
+current representations through the tested permitted paths.
 Do not use these files as DATA2 production acceptance evidence.
 
 The authoritative successor is
@@ -17,8 +18,10 @@ The earlier rights decision is
 [superseded](../../../docs/family-food/pr4-rights-review.md) by the narrow
 direct-FNS project risk posture, with source-specific evidence and attribution.
 The current [provenance blocker and recovery options](../../../docs/family-food/pr4-retrieval-provenance-review.md)
-identify 27 recipes / 22 artifacts without recovered retrieval instants.
-Three exact source retrieval records have been recovered. No invented midnight
+record the authorized fresh retrieval attempts for 27 recipes / 22 artifacts:
+20 TLS EOF and 2 HTTP 403 failures. Three exact historical source retrieval
+records are reused. Fresh byte-identical artifacts and presentation-only
+successors accepted in this pass: zero; authoritative drift remains unassessed. No invented midnight
 instant, filesystem timestamp or generic ARS rationale is endorsed.
 
 After that blocker is resolved, the bounded compiler must consume repository-local
