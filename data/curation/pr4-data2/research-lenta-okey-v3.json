@@ -1,0 +1,397 @@
+{
+  "schema_version": 1,
+  "scope": "Follow-up ordinary purchase-concept research; supplements research-lenta-okey-v2.json. Parent owns source material-form and corpus decisions.",
+  "checked_at": "2026-09-05",
+  "observations": [
+    {
+      "code": "EDAMAME_FROZEN",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/boby-edamame-zam-rossiya-400g-909897/",
+      "wording": "Бобы эдамаме PREMIUM CLUB400г; состав бобы соевые эдамаме; режим охлаждения Замороженный",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Exact frozen edamame purchase concept; opened neutral page explicitly specifies frozen storage -18C."
+    },
+    {
+      "code": "TOFU_FIRM",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/tofu-rossiya-120g-695554/",
+      "wording": "Тофу ЛЕНТА LIFE120г; форма выпуска Кусок",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "UNCERTAIN",
+      "notes": "Plain soy tofu block evidenced; firmness grade not explicitly stated. Do not infer firm solely from block shape or nutrition."
+    },
+    {
+      "code": "RAISINS_GOLDEN",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/izyum-svetlyjj-ves-099410/",
+      "wording": "Изюм светлый весовой; состав изюм (виноград сушеный)",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Light raisins purchase concept; source chopped preparation need not be sold chopped."
+    },
+    {
+      "code": "YOGURT_PLAIN_LOW_FAT",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/jjogurt-naturalnyjj-15-st-bez-zmzh-rossiya-200g-212269/",
+      "wording": "Йогурт ТОЛЬЯТТИМОЛОКО Натуральный1,5%,200г",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Plain1.5%fat yogurt, no fruit/sugar listed. Current neutral index with August2026review; sold-out is transient catalogue-level observation."
+    },
+    {
+      "code": "BREAD_WHOLE_WHEAT",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/hleb-celnozernovojj-nar-rossiya-200g-524250/",
+      "wording": "Хлеб ХЛЕБОДАР Цельнозерновой200г; wholegrainflour, wheat1stgradeflour, rye flour",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "UNCERTAIN",
+      "notes": "Mixed wheat/rye bread; wholegrain flour first but exact whole-WHEAT content not stated. Not automatic replacement for source wholewheat bread."
+    },
+    {
+      "code": "SESAME_OIL",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/maslo-kunzhutnoe-nrafin-grand-finesse-avstriya-500g-165888/",
+      "wording": "Масло кунжутное KOTANYI Gourmet Grand Finesse нерафинированное500г",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Pure sesame oil; toastedseed flavor described. Not a blended flax/sesame oil."
+    },
+    {
+      "code": "HONEY",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/med-naturalnyjj-cvetochnyjj-dikorosy-rossiya-700g-916746/",
+      "wording": "Мед натуральный цветочный Дикоросы700г; состав мед натуральный",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Named current official neutral product listing; paired explicit Saint Petersburg delivery evidence. Catalogue compatibility, not live selected-store stock."
+    },
+    {
+      "code": "PINEAPPLE_CANNED_JUICE",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/ananasy-kolca-v-ss-vetnam--tailand-425ml-582233/",
+      "wording": "Ананасы DOLCE ALBERO кольца в собственном соку425мл",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "UNCERTAIN",
+      "notes": "Official title juicepacked and metalcan specified; composition includes sugar despite noaddedsugar attribute. Treat contradiction explicitly; not cleared for an unsweetened requirement. Rings versus diced is preparation-only if source permits cutting."
+    },
+    {
+      "code": "LEMON",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/limony-ves-94429",
+      "wording": "Лимоны весовые",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Named current official neutral product listing; paired explicit Saint Petersburg delivery evidence. Catalogue compatibility, not live selected-store stock."
+    },
+    {
+      "code": "FLOUR_WHOLE_WHEAT",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/muka-pshenichnaya-celnozernovaya-rossiya-1000g-888176",
+      "wording": "Мука пшеничная MAKFA цельнозерновая1кг",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Explicit whole wheat flour, unlike merely multigrain bread."
+    },
+    {
+      "code": "MINT_FRESH",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/myata-svezhaya-up-50g-582274/",
+      "wording": "Мята свежая50г; состав мята свежая",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Named current official neutral product listing; paired explicit Saint Petersburg delivery evidence. Catalogue compatibility, not live selected-store stock."
+    },
+    {
+      "code": "CILANTRO",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/kinza-svezhaya-up-50g-582308/",
+      "wording": "Кинза свежая50г",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Named current official neutral product listing; paired explicit Saint Petersburg delivery evidence. Catalogue compatibility, not live selected-store stock."
+    },
+    {
+      "code": "CELERY",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/029126-29126/",
+      "wording": "Сельдерей стебель весовой",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Exact celery stalk purchase concept, not root celery."
+    },
+    {
+      "code": "SESAME_SEEDS",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/496341-496341/",
+      "wording": "Кунжут семена BONVIDA220г; состав кунжут",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Named current official neutral product listing; paired explicit Saint Petersburg delivery evidence. Catalogue compatibility, not live selected-store stock."
+    },
+    {
+      "code": "MUSTARD_GROUND",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/gorchichnyjj-poroshok-rossiya-200g-680564/",
+      "wording": "Горчичный порошок ЛЕНТА200г",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Named current official neutral product listing; paired explicit Saint Petersburg delivery evidence. Catalogue compatibility, not live selected-store stock."
+    },
+    {
+      "code": "TURMERIC_GROUND",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/priprava-kurkuma-rossiya-15g-511731/",
+      "wording": "Приправа ИНДАНА Куркума15г",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Standalone dried spice package; not turmeric-containing preparedfood."
+    },
+    {
+      "code": "CORIANDER_SEED",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/355084-355084/",
+      "wording": "Кориандр KOTANYI целый20г; состав кориандр",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Named current official neutral product listing; paired explicit Saint Petersburg delivery evidence. Catalogue compatibility, not live selected-store stock."
+    },
+    {
+      "code": "NUTMEG_GROUND",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/priprava-muskatnyjj-oreh-molotyjj-rossiya-10g-509873/",
+      "wording": "Приправа СПЕЦ Мускатный орех молотый10г; состав мускатный орех молотый",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Named current official neutral product listing; paired explicit Saint Petersburg delivery evidence. Catalogue compatibility, not live selected-store stock."
+    },
+    {
+      "code": "CURRY_POWDER",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/priprava-karri-rossiya-15g-511732/",
+      "wording": "Приправа ИНДАНА Карри15г",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Dry packaged curry seasoning; parent must retain source restrictions if any salt-added constraint exists."
+    },
+    {
+      "code": "COCONUT_SHREDDED",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/struzhka-kokosovaya-rossiya-60g-177300/",
+      "wording": "Кокосовая стружка ПАРФЭ60г; состав кокосовая стружка",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Named current official neutral product listing; paired explicit Saint Petersburg delivery evidence. Catalogue compatibility, not live selected-store stock."
+    },
+    {
+      "code": "CRANBERRIES_DRIED",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/640069-640069/",
+      "wording": "Клюква сушеная весовая; состав клюква сахар растительное масло",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Sweetened dried cranberries explicitly evidenced; does not prove unsweetened if required."
+    },
+    {
+      "code": "APPLE_CIDER_VINEGAR",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/uksus-yablochnyjj-ispaniya-250ml-479839/",
+      "wording": "Уксус яблочный IBERICA Apple cider vinegar250мл",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Explicit apple cider vinegar; no inference from vinegar essence."
+    },
+    {
+      "code": "SUGAR",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/sahar-lenta-belyjj-gost-rossiya-1000g-717070/",
+      "wording": "Сахар ЛЕНТА белый ГОСТ1кг; сахар белый кристаллический",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Named current official neutral product listing; paired explicit Saint Petersburg delivery evidence. Catalogue compatibility, not live selected-store stock."
+    },
+    {
+      "code": "BAKING_POWDER",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/razryhlitel-testa-rossiya-10-gr-427560/",
+      "wording": "Разрыхлитель теста ЛЕНТА10г; мука, гидрокарбонатнатрия, лимоннаякислота",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Standalone bakingpowder; not plain baking soda."
+    },
+    {
+      "code": "BREADCRUMBS",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/suhari-panirovochnye-lenta-rossiya-200g-638246/",
+      "wording": "Сухари панировочные ЛЕНТА200г",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Named current official neutral product listing; paired explicit Saint Petersburg delivery evidence. Catalogue compatibility, not live selected-store stock."
+    },
+    {
+      "code": "VANILLA_EXTRACT",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/product/vanilin-rossiya-15g-693087/",
+      "wording": "Ванилин ЛЕНТА1,5г",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_index",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "UNCERTAIN",
+      "notes": "Wrongform exclusion: powdered vanillin is not source vanillaextract; standalone extract not established by current bounded official queries."
+    },
+    {
+      "code": "APPLE",
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "url": "https://lenta.com/catalog/yabloki-18244",
+      "wording": "Яблоки — current dedicated purchase category",
+      "checked_at": "2026-09-05",
+      "method": "current_official_region_neutral_category",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "notes": "Current dedicated apple category; preparation peeling/dicing not separate retailform."
+    }
+  ],
+  "search_queries": [
+    "site:lenta.com/product/ сироп агавы",
+    "site:lenta.com/product/ экстракт ванили",
+    "site:lenta.com/product/ эдамаме",
+    "site:lenta.com/product/ тофу",
+    "site:lenta.com/product/ ананасы соке",
+    "site:lenta.com/product/ изюм светлый",
+    "site:lenta.com/product/ хлеб цельнозерновой",
+    "site:lenta.com/product/ йогурт натуральный 1,5",
+    "site:lenta.com/product/ масло рапсовое",
+    "site:lenta.com/product/ масло кунжутное",
+    "site:lenta.com/product/ мед цветочный",
+    "Ананасы соку [domain:lenta.com]",
+    "Рапсовое масло Состав [domain:lenta.com]",
+    "агавы [domains:lenta.com,okeydostavka.ru]",
+    "экстракт ванильный [domains:lenta.com,okeydostavka.ru]",
+    "site:lenta.com/product/ яблоки вес",
+    "site:lenta.com/product/ лимоны",
+    "site:lenta.com/product/ мука цельнозерновая",
+    "site:lenta.com/product/ кинза",
+    "site:lenta.com/product/ мята свежая",
+    "site:lenta.com/product/ сельдерей",
+    "site:lenta.com/product Кунжут Состав",
+    "site:lenta.com Горчичный порошок",
+    "site:lenta.com Куркума приправа",
+    "site:lenta.com Кориандр целый",
+    "site:lenta.com Мускатный орех приправа",
+    "site:lenta.com/product/ карри",
+    "site:lenta.com/product/ клюква сушеная",
+    "site:lenta.com/product/ стружка кокосовая",
+    "site:lenta.com/product/ уксус яблочный",
+    "site:lenta.com/product/ сахар белый",
+    "site:lenta.com/product/ разрыхлитель теста",
+    "site:lenta.com/product/ сухари панировочные"
+  ],
+  "inconclusive_queries": [
+    {
+      "codes": [
+        "AGAVE_SYRUP",
+        "CANOLA_OIL"
+      ],
+      "retailers": [
+        "Лента",
+        "О'КЕЙ"
+      ],
+      "result": "No standalone matching official product observed in bounded queries; inconclusive, not NOT_FOUND. Composite product ingredient lists do not prove standalone availability."
+    }
+  ],
+  "exclusions": [
+    {
+      "url": "https://lenta.com/product/tofu-shelkovyjj-rossiya-160g-627159/",
+      "reason": "Silken tofu explicitly soft/puddinglike; not firm tofu."
+    },
+    {
+      "url": "https://lenta.com/product/hleb-rzhanojj-krajj-celnozernovojj-nar-rossiya-300g-673396/",
+      "reason": "Wholegrain rye mixedbread not exact wholewheatbread."
+    },
+    {
+      "url": "https://lenta.com/product/maslo-smes-lnyanoe-kunzhutnoe-rossiya-250ml-519265/",
+      "reason": "Blended flax/sesame oil not pure sesameoil."
+    },
+    {
+      "url": "https://lenta.com/product/dzhem-grusha-i-banan-s-ekstraktom-vanili-rossiya-300g-579869/",
+      "reason": "Vanillaextract only ingredient in compositejam; not purchasable standalone extract."
+    }
+  ]
+}

@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-05",
+  "status": "PROPOSED_REPLACEMENTS_PENDING_CORPUS_ACCEPTANCE",
+  "scope": "Supporting-operation research only. This does not modify runtime or mark final30 accepted.",
+  "replacements": [
+    {
+      "remove_recipe_source_id": "CACFP6-VEGETABLE-FRITTATA-BITES",
+      "proposed_recipe_source_id": "TNC6-EGGS-SPINACH",
+      "recipe_name": "Scrambled Eggs With Spinach",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+      "source_collection": "USDA FNS Team Nutrition Cooks",
+      "source_locator": "Family Handout, printedpage3/PDFpageindex4",
+      "source_sha256": "0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+      "source_servings": 6,
+      "source_total_minutes": 15,
+      "source_hands_on_minutes": 15,
+      "rights_review": {
+        "basis": "PROJECT_ACCEPTED_DIRECT_FNS_RISK_POSTURE_NOT_PUBLIC_DOMAIN_ASSERTION",
+        "evidence_url": "https://www.fns.usda.gov/tn/cooks",
+        "evidence_scope": "Collection page permits download and copies; not explicit unrestricted commercial derivative rights.",
+        "exact_source_notice_review": "20-page extracted text contains no copyright/permission/license term. Recipe leaf visually reviewed; no third-party copyright notice present. Final corpus reviewer must confirm retained risk posture."
+      },
+      "ingredients": [
+        {
+          "source_text": "1 teaspoon olive, canola, or vegetable oil",
+          "selected_code": "OLIVE_OIL",
+          "quantity": "1",
+          "unit": "teaspoon",
+          "selection_basis": "Explicit first source alternative; no substitution"
+        },
+        {
+          "source_text": "12 large eggs",
+          "selected_code": "EGG",
+          "quantity": "12",
+          "unit": "large egg",
+          "selection_basis": "Shell eggs explicitly used by source directions; no liquid/frozen retailform requirement"
+        },
+        {
+          "source_text": "3 cups rinsed chopped fresh spinach",
+          "selected_code": "SPINACH",
+          "quantity": "3",
+          "unit": "cup",
+          "preparation": "rinsed, chopped",
+          "purchase_concept": "fresh spinach",
+          "selection_basis": "Chop before measuring as source requires; kitchen preparation not prechoppedretailSKU"
+        }
+      ],
+      "excluded_source_optional_ingredients": [
+        "6 slices whole-wheat bread, toasted (optional)",
+        "ground pepper or other herbs and spices (optional)",
+        "Optional Add-In Ingredients panel"
+      ],
+      "source_step_facts": [
+        {
+          "source_step": 1,
+          "fact": "Handwashing and preparation of workspace"
+        },
+        {
+          "source_step": 2,
+          "fact": "Chop spinach"
+        },
+        {
+          "source_step": 3,
+          "fact": "Measure chopped spinach"
+        },
+        {
+          "source_step": 4,
+          "fact": "Toast optional bread",
+          "selected": false
+        },
+        {
+          "source_step": 5,
+          "fact": "Crack shell egg against small bowl or cup"
+        },
+        {
+          "source_step": 6,
+          "fact": "Transfer each egg into larger bowl"
+        },
+        {
+          "source_step": 7,
+          "fact": "Whisk eggs"
+        },
+        {
+          "source_step": 8,
+          "fact": "Heat skillet medium and add oil; nonstick caveat retained"
+        },
+        {
+          "source_step": 9,
+          "fact": "Pour eggs into skillet"
+        },
+        {
+          "source_step": 10,
+          "fact": "Add spinach"
+        },
+        {
+          "source_step": 11,
+          "fact": "Scramble with spatula until cooked"
+        },
+        {
+          "source_step": 12,
+          "fact": "Optional seasoning and serving",
+          "optional_seasoning_selected": false
+        }
+      ],
+      "source_backed_equipment": [
+        {
+          "code": "BOWL",
+          "evidence": "Steps5-7 small bowl/cup and larger bowl"
+        },
+        {
+          "code": "WHISK",
+          "evidence": "Step7 whisk; skillpage6 explicitly tool whisk orfork"
+        },
+        {
+          "code": "SKILLET",
+          "evidence": "Steps8-11"
+        },
+        {
+          "code": "SPATULA",
+          "evidence": "Step11"
+        }
+      ],
+      "verification": "Source quantities/options visually checked against Poppler-rendered PDFpageindex4. SHA verified locally. Globalcodes and final union to be validated in parent integration."
+    },
+    {
+      "remove_recipe_source_id": "CACFP6-CAULIFLOWER-RICE",
+      "proposed_recipe_source_id": "TNC6-APPLESAUCE",
+      "recipe_name": "Applesauce",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+      "preferred_family_handout_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+      "source_collection": "USDA FNS Team Nutrition Cooks",
+      "source_locator": "FamilyHandout,printedpage3/PDFpageindex4",
+      "source_sha256": "7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+      "source_servings": 6,
+      "source_total_minutes": 55,
+      "source_hands_on_minutes": 20,
+      "ingredients": [
+        {
+          "source_text": "6 apples, any variety, rinsed",
+          "selected_code": "APPLE",
+          "quantity": "6",
+          "unit": "apple",
+          "preparation": "rinsed; core, slice and dice per source",
+          "selection_basis": "Source explicitly any variety"
+        },
+        {
+          "source_text": "½ cup water",
+          "selected_code": "WATER",
+          "quantity": "0.5",
+          "unit": "cup",
+          "selection_basis": "Existing global WATER code; exactsourcequantity"
+        }
+      ],
+      "excluded_source_optional_ingredients": [
+        "½ teaspoon of cinnamon (optional)",
+        "Other optional spice suggestions"
+      ],
+      "source_step_facts": [
+        {
+          "source_step": 1,
+          "fact": "Handwashing/workspace preparation"
+        },
+        {
+          "source_step": 2,
+          "fact": "Optional peeling",
+          "selected": false
+        },
+        {
+          "source_step": 3,
+          "fact": "Core and slice apples"
+        },
+        {
+          "source_step": 4,
+          "fact": "Dice slices"
+        },
+        {
+          "source_step": 5,
+          "fact": "Measure water into pot"
+        },
+        {
+          "source_step": 6,
+          "fact": "Add apples, cover, cook mediumlow about25minutes"
+        },
+        {
+          "source_step": 7,
+          "fact": "Remove heat, cool about10minutes, stir"
+        },
+        {
+          "source_step": 8,
+          "fact": "Mash with masher or fork; optionalspices omitted"
+        },
+        {
+          "source_step": 9,
+          "fact": "Serve or store covered refrigerated up to4days"
+        }
+      ],
+      "source_backed_equipment": [
+        {
+          "code": "APPLE_CORER",
+          "evidence": "Step3 sourcealternative to chefknife"
+        },
+        {
+          "code": "POT_WITH_LID",
+          "evidence": "Steps5-7"
+        },
+        {
+          "code": "POTATO_MASHER",
+          "evidence": "Step8 sourcealternative to fork"
+        }
+      ],
+      "verification": "PrimaryFamilyHandoutPDFpage3/PDFindex4 visuallychecked afterPopplerrender; exacthashverified. Textcopyright/permission/licensesearch no matches.",
+      "rights_review": {
+        "basis": "PROJECT_ACCEPTED_DIRECT_FNS_RISK_POSTURE_NOT_PUBLIC_DOMAIN_ASSERTION",
+        "evidence_url": "https://www.fns.usda.gov/tn/cooks",
+        "evidence_scope": "Collection page permits download and copies; not explicit unrestricted commercial derivative rights.",
+        "exact_source_notice_review": "Downloaded FamilyHandout extracted text contains no copyright/permission/license term. Recipe leaf visually reviewed; no third-party copyright notice present. Accepted directFNS riskposture, notpublicdomainassertion."
+      }
+    }
+  ]
+}

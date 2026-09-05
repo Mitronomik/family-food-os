@@ -1,0 +1,1292 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-05",
+  "scope": "Final selected25 NEW source-card metadata for PR4-DATA2 curation handback only; no runtime/production seed changes. Retained5 old-card metadata remain in source-equipment-audit.json.",
+  "method": "Equipment unique normalized codes are ordered by first explicit selected preparation/cooking mention in main recipe, then necessary linked recipe-specific skill/equipment sections in document order. Choose one source-explicit alternative, preserve words/location, do not infer utensils from chopping/grating/covering/grilling verbs. Exclude consumable foil/parchment/wax paper, serving-only dishes/glasses, optional variants and generic safety/tutorial vocabulary not necessary to selected recipe. Times are exact source fields or labeled stages; never infer a missing preparation/overall duration.",
+  "hash_registry": "source-downloads.json",
+  "recipes": [
+    {
+      "recipe_source_id": "TNC6-EGGS-SPINACH",
+      "recipe_name": "Scrambled Eggs with Spinach",
+      "meal_type": "BREAKFAST",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+      "source_collection": "USDA FNS Team Nutrition Cooks! — Family Handouts",
+      "source_servings": 6,
+      "source_section": "Family Handout p3; supporting skill directions pp5,7,8",
+      "source_attribution": "USDA FNS, Team Nutrition Cooks! Scrambled Eggs with Spinach Family Handout.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. Collection permits downloading/copying materials; that wording is not extended to a blanket commercial/derivative grant.",
+      "rights_evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+      "rights_evidence_urls": [
+        "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+        "https://www.fns.usda.gov/tn/cooks"
+      ],
+      "notices_reviewed": "Full Family Handout PDF text and recipe-page visuals reviewed; no third-party copyright/licensing notice found. Supporting skill sections are part of the same reviewed handout.",
+      "source_time_facts": {
+        "total_minutes": 15,
+        "hands_on_minutes": 15,
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "evidence": "Family Handout recipe page 3 heading; hands-on includes cooking and is not prep-only."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "BOWL",
+          "source_words": "small bowl or cup; larger bowl",
+          "source_location": "Family Handout p3; supporting skill directions pp5,7,8 / p3 steps5–6"
+        },
+        {
+          "position": 2,
+          "equipment_code": "SKILLET",
+          "source_words": "skillet",
+          "source_location": "Family Handout p3; supporting skill directions pp5,7,8 / p3 step8"
+        },
+        {
+          "position": 3,
+          "equipment_code": "STOVETOP",
+          "source_words": "stove or cooktop",
+          "source_location": "Family Handout p3; supporting skill directions pp5,7,8 / p3 step8; stove selected"
+        },
+        {
+          "position": 4,
+          "equipment_code": "SPATULA",
+          "source_words": "spatula",
+          "source_location": "Family Handout p3; supporting skill directions pp5,7,8 / p3 step11"
+        },
+        {
+          "position": 5,
+          "equipment_code": "KNIFE",
+          "source_words": "knife; butter knife",
+          "source_location": "Family Handout p3; supporting skill directions pp5,7,8 / p5 How to Chop"
+        },
+        {
+          "position": 6,
+          "equipment_code": "CUTTING_BOARD",
+          "source_words": "cutting board",
+          "source_location": "Family Handout p3; supporting skill directions pp5,7,8 / p5 How to Chop"
+        },
+        {
+          "position": 7,
+          "equipment_code": "WHISK",
+          "source_words": "fork or whisk",
+          "source_location": "Family Handout p3; supporting skill directions pp5,7,8 / p7 How to Whisk; whisk selected"
+        },
+        {
+          "position": 8,
+          "equipment_code": "MEASURING_CUP",
+          "source_words": "measuring cups",
+          "source_location": "Family Handout p3; supporting skill directions pp5,7,8 / p8 How to Measure"
+        },
+        {
+          "position": 9,
+          "equipment_code": "MEASURING_SPOON",
+          "source_words": "measuring spoons",
+          "source_location": "Family Handout p3; supporting skill directions pp5,7,8 / p8 How to Measure"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "recipe_source_id": "TNC6-APPLESAUCE",
+      "recipe_name": "Applesauce",
+      "meal_type": "SNACK",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+      "source_collection": "USDA FNS Team Nutrition Cooks! — Family Handouts",
+      "source_servings": 6,
+      "source_section": "Family Handout p3; supporting skill directions pp6,8,9",
+      "source_attribution": "USDA FNS, Team Nutrition Cooks! Applesauce Family Handout.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. Collection permits downloading/copying materials; that wording is not extended to a blanket commercial/derivative grant.",
+      "rights_evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+      "rights_evidence_urls": [
+        "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+        "https://www.fns.usda.gov/tn/cooks"
+      ],
+      "notices_reviewed": "Full Family Handout PDF text and recipe-page visuals reviewed; no third-party copyright/licensing notice found. Supporting skill sections are part of the same reviewed handout.",
+      "source_time_facts": {
+        "total_minutes": 55,
+        "hands_on_minutes": 20,
+        "prep_minutes": null,
+        "cook_minutes": 25,
+        "cool_minutes": 10,
+        "evidence": "Family Handout recipe page 3 heading plus steps 6 and 7. Hands-on is not automatically prep-only."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "KNIFE",
+          "source_words": "chef's knife",
+          "source_location": "Family Handout p3; supporting skill directions pp6,8,9 / p3 step3; alternative to corer/slicer"
+        },
+        {
+          "position": 2,
+          "equipment_code": "POT",
+          "source_words": "pot",
+          "source_location": "Family Handout p3; supporting skill directions pp6,8,9 / p3 step5"
+        },
+        {
+          "position": 3,
+          "equipment_code": "STOVETOP",
+          "source_words": "stove",
+          "source_location": "Family Handout p3; supporting skill directions pp6,8,9 / p3 step6"
+        },
+        {
+          "position": 4,
+          "equipment_code": "POTATO_MASHER",
+          "source_words": "potato masher or fork",
+          "source_location": "Family Handout p3; supporting skill directions pp6,8,9 / p3 step8; masher selected"
+        },
+        {
+          "position": 5,
+          "equipment_code": "CUTTING_BOARD",
+          "source_words": "cutting board",
+          "source_location": "Family Handout p3; supporting skill directions pp6,8,9 / p6 How to Core and Slice"
+        },
+        {
+          "position": 6,
+          "equipment_code": "MEASURING_CUP",
+          "source_words": "liquid measuring cups",
+          "source_location": "Family Handout p3; supporting skill directions pp6,8,9 / p8 How to Measure Liquids"
+        },
+        {
+          "position": 7,
+          "equipment_code": "SPOON",
+          "source_words": "wooden spoon",
+          "source_location": "Family Handout p3; supporting skill directions pp6,8,9 / p9 How to Stir"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "recipe_source_id": "TNC6-CORN-ZUCCHINI-PANCAKES",
+      "recipe_name": "Corn and Zucchini Pancakes",
+      "meal_type": "BREAKFAST",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://www.fns.usda.gov/sites/default/files/resource-files/tnc-pancakes.pdf",
+      "source_collection": "USDA FNS Team Nutrition Cooks! — Family Handouts",
+      "source_servings": 6,
+      "source_section": "Family Handout p3; supporting skill directions pp6,7,9,10,11",
+      "source_attribution": "USDA FNS, Team Nutrition Cooks! Corn and Zucchini Pancakes Family Handout.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. Collection permits downloading/copying materials; that wording is not extended to a blanket commercial/derivative grant.",
+      "rights_evidence_url": "https://www.fns.usda.gov/sites/default/files/resource-files/tnc-pancakes.pdf",
+      "rights_evidence_urls": [
+        "https://www.fns.usda.gov/sites/default/files/resource-files/tnc-pancakes.pdf",
+        "https://www.fns.usda.gov/tn/cooks"
+      ],
+      "notices_reviewed": "Full Family Handout PDF text and recipe-page visuals reviewed; no third-party copyright/licensing notice found. Supporting skill sections are part of the same reviewed handout.",
+      "source_time_facts": {
+        "total_minutes": 35,
+        "hands_on_minutes": 35,
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "drain_minutes": 10,
+        "per_side_cook_minutes": 5,
+        "evidence": "Family Handout recipe page 3; repeat batches means 5+5 minutes is not total cooking time."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "COLANDER",
+          "source_words": "colander",
+          "source_location": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p3 step3"
+        },
+        {
+          "position": 2,
+          "equipment_code": "BOWL",
+          "source_words": "bowl",
+          "source_location": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p3 step3"
+        },
+        {
+          "position": 3,
+          "equipment_code": "SKILLET",
+          "source_words": "skillet",
+          "source_location": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p3 step10"
+        },
+        {
+          "position": 4,
+          "equipment_code": "STOVETOP",
+          "source_words": "stove or cooktop",
+          "source_location": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p3 step10; stove selected"
+        },
+        {
+          "position": 5,
+          "equipment_code": "MEASURING_CUP",
+          "source_words": "¼-cup measuring cup",
+          "source_location": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p3 step11"
+        },
+        {
+          "position": 6,
+          "equipment_code": "WHISK",
+          "source_words": "whisk or fork",
+          "source_location": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p6 How to Whisk; whisk selected"
+        },
+        {
+          "position": 7,
+          "equipment_code": "GRATER",
+          "source_words": "grater",
+          "source_location": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p7 How to Grate"
+        },
+        {
+          "position": 8,
+          "equipment_code": "CUTTING_BOARD",
+          "source_words": "cutting board",
+          "source_location": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p7 How to Grate"
+        },
+        {
+          "position": 9,
+          "equipment_code": "MEASURING_SPOON",
+          "source_words": "measuring spoons",
+          "source_location": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p9 How to Measure"
+        },
+        {
+          "position": 10,
+          "equipment_code": "KNIFE",
+          "source_words": "knife or fork",
+          "source_location": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p9 How to Measure; knife selected for leveling"
+        },
+        {
+          "position": 11,
+          "equipment_code": "SPOON",
+          "source_words": "spoon",
+          "source_location": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p9 How to Measure Flour"
+        },
+        {
+          "position": 12,
+          "equipment_code": "SPATULA",
+          "source_words": "spatula",
+          "source_location": "Family Handout p3; supporting skill directions pp6,7,9,10,11 / p11 How to Cook Pancakes step2"
+        }
+      ],
+      "quality_flags": [
+        "Recipe yields12pancakes,2per serving =6servings. Main recipe1.5Tbspoil retained; supporting skill suggests adding more only if needed but gives no quantity. Do not create an additional mandatory oil row or fabricate a quantity.",
+        "Source suggests snack or side; BREAKFAST is curator classification, not source restriction. Selected frozen corn excludes can-opener equipment."
+      ]
+    },
+    {
+      "recipe_source_id": "HARV6-ROASTED-POTATOES",
+      "recipe_name": "Roasted Potatoes",
+      "meal_type": "SIDE",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_collection": "USDA FNS FDPIR — A Harvest of Recipes with USDA Foods (FNS-430)",
+      "source_servings": 6,
+      "source_section": "Harvest printed p61",
+      "source_attribution": "USDA FNS FDPIR, A Harvest of Recipes with USDA Foods, FNS-430; collection acknowledgments retained.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "rights_evidence_urls": [
+        "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+        "https://www.fns.usda.gov/fdpir/harvest-recipes-usda-foods"
+      ],
+      "notices_reviewed": "Downloaded FNS-430 full text, acknowledgments/back cover and selected recipe spreads visually reviewed. No third-party copyright/licensing restriction on selected card. Tribal and contractor acknowledgments are preserved collection provenance, not public-domain proof.",
+      "source_time_facts": {
+        "total_minutes": null,
+        "prep_minutes": null,
+        "cook_minutes": 35,
+        "chill_minutes": 15,
+        "oven_fahrenheit": 350,
+        "evidence": "Harvest printed page 61, steps 3 to 5. Do not label 50 minutes as source total because chopping/preheating not timed."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "BOWL",
+          "source_words": "medium-size bowl",
+          "source_location": "Harvest printed p61 / step1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "OVEN",
+          "source_words": "oven",
+          "source_location": "Harvest printed p61 / step4"
+        },
+        {
+          "position": 3,
+          "equipment_code": "BAKING_SHEET",
+          "source_words": "cookie sheet",
+          "source_location": "Harvest printed p61 / step5"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "recipe_source_id": "HARV6-FRESH-TOMATO-SALSA",
+      "recipe_name": "Fresh Tomato Salsa",
+      "meal_type": "CONDIMENT",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_collection": "USDA FNS FDPIR — A Harvest of Recipes with USDA Foods (FNS-430)",
+      "source_servings": 6,
+      "source_section": "Harvest printed p53",
+      "source_attribution": "USDA FNS FDPIR, A Harvest of Recipes with USDA Foods, FNS-430; collection acknowledgments retained.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "rights_evidence_urls": [
+        "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+        "https://www.fns.usda.gov/fdpir/harvest-recipes-usda-foods"
+      ],
+      "notices_reviewed": "Downloaded FNS-430 full text, acknowledgments/back cover and selected recipe spreads visually reviewed. No third-party copyright/licensing restriction on selected card. Tribal and contractor acknowledgments are preserved collection provenance, not public-domain proof.",
+      "source_time_facts": {
+        "total_minutes": null,
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "chill_minutes": 15,
+        "evidence": "Harvest printed page 53, step 3."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "BOWL",
+          "source_words": "medium-size bowl",
+          "source_location": "Harvest printed p53 / step1"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "recipe_source_id": "HARV6-GARDEN-PASTA-SALAD",
+      "recipe_name": "Garden Pasta Salad",
+      "meal_type": "SIDE",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_collection": "USDA FNS FDPIR — A Harvest of Recipes with USDA Foods (FNS-430)",
+      "source_servings": 6,
+      "source_section": "Harvest printed p55",
+      "source_attribution": "USDA FNS FDPIR, A Harvest of Recipes with USDA Foods, FNS-430; collection acknowledgments retained.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "rights_evidence_urls": [
+        "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+        "https://www.fns.usda.gov/fdpir/harvest-recipes-usda-foods"
+      ],
+      "notices_reviewed": "Downloaded FNS-430 full text, acknowledgments/back cover and selected recipe spreads visually reviewed. No third-party copyright/licensing restriction on selected card. Tribal and contractor acknowledgments are preserved collection provenance, not public-domain proof.",
+      "source_time_facts": {
+        "total_minutes": null,
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "chill_minutes_min": 30,
+        "chill_minutes_max": 45,
+        "evidence": "Harvest printed page 55, step 4. Source quantity is cooked macaroni; no cooking duration or dry-yield conversion supplied."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "BOWL",
+          "source_words": "medium-size bowl; separate bowl",
+          "source_location": "Harvest printed p55 / steps1–2; two vessels, one normalized code"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "recipe_source_id": "SNAP6-SPINACH-APPLE-SALAD",
+      "recipe_name": "Spinach Salad with Apples and Raisins",
+      "meal_type": "SIDE",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_servings": 6,
+      "source_section": "Fall Recipes / same-titled recipe / directions",
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "total_minutes": null,
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "evidence": "Direct FNS card https://snaped.fns.usda.gov/node/2537 contains two combining directions, no numeric timing."
+      },
+      "equipment": [],
+      "quality_flags": [
+        "No equipment noun in the two combining directions; BOWL is not inferred."
+      ]
+    },
+    {
+      "recipe_source_id": "SNAP6-PEACH-CRISP",
+      "recipe_name": "Peach Crisp",
+      "meal_type": "DESSERT",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_servings": 6,
+      "source_section": "Summer Recipes / Peach Crisp / directions",
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "total_minutes": null,
+        "prep_minutes": null,
+        "cook_minutes": 20,
+        "oven_fahrenheit": 375,
+        "evidence": "Direct FNS Summer Recipes page, Peach Crisp steps 1 and 7."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "OVEN",
+          "source_words": "oven",
+          "source_location": "Summer Recipes / Peach Crisp / directions / step1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "BAKING_PAN",
+          "source_words": "baking pan",
+          "source_location": "Summer Recipes / Peach Crisp / directions / step3"
+        },
+        {
+          "position": 3,
+          "equipment_code": "SAUCEPAN",
+          "source_words": "saucepan",
+          "source_location": "Summer Recipes / Peach Crisp / directions / step4"
+        },
+        {
+          "position": 4,
+          "equipment_code": "BOWL",
+          "source_words": "small bowl",
+          "source_location": "Summer Recipes / Peach Crisp / directions / step5"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "recipe_source_id": "SNAP6-SEARED-GREENS",
+      "recipe_name": "Seared Greens",
+      "meal_type": "SIDE",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_servings": 6,
+      "source_section": "Spring Recipes / Seared Greens / directions",
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "total_minutes": null,
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "steam_stage_minutes": 4,
+        "evidence": "Direct FNS card https://snaped.fns.usda.gov/node/2488 step 3. Other saute/stir/standing stages untimed; 4 minutes is not the full cooking duration."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "POT",
+          "source_words": "large deep pot or skillet",
+          "source_location": "Spring Recipes / Seared Greens / directions / step2; pot selected"
+        },
+        {
+          "position": 2,
+          "equipment_code": "LID",
+          "source_words": "cover",
+          "source_location": "Spring Recipes / Seared Greens / directions / step2 explicit noun: with a cover"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "recipe_source_id": "WIC4-BUTTERNUT-SOUP",
+      "recipe_name": "Butternut Squash Soup",
+      "meal_type": "SOUP",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+      "source_collection": "USDA FNS WIC Works — Recipes",
+      "source_servings": 4,
+      "source_section": "WIC recipe / instructions and equipment notes",
+      "source_attribution": "USDA FNS WIC Works — Recipes; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. WIC submission policy requires permission to share; it is not an independent unlimited commercial/derivative grant. No linked recipe-level restrictive license was found on this selected card.",
+      "rights_evidence_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+      "rights_evidence_urls": [
+        "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+        "https://wicworks.fns.usda.gov/es/node/1807"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "total_minutes": 80,
+        "prep_minutes": 20,
+        "cook_minutes": 60,
+        "roast_minutes_min": 40,
+        "roast_minutes_max": 50,
+        "cool_minutes": 10,
+        "oven_fahrenheit": 425,
+        "evidence": "WIC recipe time fields and steps 1/4; keep official 60-minute cook field distinct from roast-stage range."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "OVEN",
+          "source_words": "oven",
+          "source_location": "WIC recipe / instructions and equipment notes / step1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "BAKING_SHEET",
+          "source_words": "rimmed baking sheet",
+          "source_location": "WIC recipe / instructions and equipment notes / step1"
+        },
+        {
+          "position": 3,
+          "equipment_code": "CUTTING_BOARD",
+          "source_words": "cutting board",
+          "source_location": "WIC recipe / instructions and equipment notes / step2 sub-instructions"
+        },
+        {
+          "position": 4,
+          "equipment_code": "KNIFE",
+          "source_words": "knife",
+          "source_location": "WIC recipe / instructions and equipment notes / step2 sub-instructions"
+        },
+        {
+          "position": 5,
+          "equipment_code": "SPOON",
+          "source_words": "large spoon (or ice cream scoop)",
+          "source_location": "WIC recipe / instructions and equipment notes / step2 sub-instructions; spoon selected"
+        },
+        {
+          "position": 6,
+          "equipment_code": "POT",
+          "source_words": "soup pot",
+          "source_location": "WIC recipe / instructions and equipment notes / step5 first blending alternative"
+        },
+        {
+          "position": 7,
+          "equipment_code": "IMMERSION_BLENDER",
+          "source_words": "immersion blender",
+          "source_location": "WIC recipe / instructions and equipment notes / step5 first blending alternative"
+        }
+      ],
+      "quality_flags": [
+        "Selected explicit soup-pot/immersion-blender option. Optional ice-cream scoop, parchment and alternate blenders excluded. Optional unquantified yogurt dollop omitted under source optional ingredient status."
+      ]
+    },
+    {
+      "recipe_source_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+      "recipe_name": "Overnight Oats with Cinnamon Apple",
+      "meal_type": "BREAKFAST",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+      "source_collection": "USDA FNS WIC Works — Recipes",
+      "source_servings": 1,
+      "source_section": "WIC recipe / instructions and equipment notes",
+      "source_attribution": "USDA FNS WIC Works — Recipes; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. WIC submission policy requires permission to share; it is not an independent unlimited commercial/derivative grant. No linked recipe-level restrictive license was found on this selected card.",
+      "rights_evidence_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+      "rights_evidence_urls": [
+        "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+        "https://wicworks.fns.usda.gov/es/node/1807"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "prep_minutes": 5,
+        "minimum_chill_minutes": 300
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "RESEALABLE_CONTAINER",
+          "source_words": "resealable container",
+          "source_location": "WIC recipe / instructions and equipment notes / instruction1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "MEASURING_CUP",
+          "source_words": "measuring cups and spoons",
+          "source_location": "WIC recipe / instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 3,
+          "equipment_code": "MEASURING_SPOON",
+          "source_words": "measuring cups and spoons",
+          "source_location": "WIC recipe / instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 4,
+          "equipment_code": "KNIFE",
+          "source_words": "knife",
+          "source_location": "WIC recipe / instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 5,
+          "equipment_code": "CUTTING_BOARD",
+          "source_words": "cutting board",
+          "source_location": "WIC recipe / instructions and equipment notes / equipment notes"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "recipe_source_id": "WIC4-ROASTED-CARROTS",
+      "recipe_name": "Roasted Carrots — standard version",
+      "meal_type": "SIDE",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/roasted-carrots-3-ways",
+      "source_collection": "USDA FNS WIC Works — Recipes",
+      "source_servings": 4,
+      "source_section": "WIC Roasted Carrots-3 ways / standard instructions and equipment notes",
+      "source_attribution": "USDA FNS WIC Works — Recipes; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. WIC submission policy requires permission to share; it is not an independent unlimited commercial/derivative grant. No linked recipe-level restrictive license was found on this selected card.",
+      "rights_evidence_url": "https://wicworks.fns.usda.gov/recipe/roasted-carrots-3-ways",
+      "rights_evidence_urls": [
+        "https://wicworks.fns.usda.gov/recipe/roasted-carrots-3-ways",
+        "https://wicworks.fns.usda.gov/es/node/1807"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "prep_minutes": 5,
+        "cook_minutes": 25,
+        "total_minutes": 30
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "OVEN",
+          "source_words": "oven",
+          "source_location": "WIC Roasted Carrots-3 ways / standard instructions and equipment notes / step2"
+        },
+        {
+          "position": 2,
+          "equipment_code": "BAKING_SHEET",
+          "source_words": "baking tray",
+          "source_location": "WIC Roasted Carrots-3 ways / standard instructions and equipment notes / step3"
+        },
+        {
+          "position": 3,
+          "equipment_code": "VEGETABLE_PEELER",
+          "source_words": "vegetable peeler",
+          "source_location": "WIC Roasted Carrots-3 ways / standard instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 4,
+          "equipment_code": "KNIFE",
+          "source_words": "knife",
+          "source_location": "WIC Roasted Carrots-3 ways / standard instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 5,
+          "equipment_code": "CUTTING_BOARD",
+          "source_words": "cutting board",
+          "source_location": "WIC Roasted Carrots-3 ways / standard instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 6,
+          "equipment_code": "MEASURING_SPOON",
+          "source_words": "measuring spoons",
+          "source_location": "WIC Roasted Carrots-3 ways / standard instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 7,
+          "equipment_code": "SPATULA",
+          "source_words": "spatula",
+          "source_location": "WIC Roasted Carrots-3 ways / standard instructions and equipment notes / equipment notes"
+        }
+      ],
+      "quality_flags": [
+        "Standard version only. OLIVE_OIL is final selected member of source-generic vegetable oil; olive wording in spicy-variant instruction is not evidence of a mandatory standard-form constraint. Optional sweet-version saucepan excluded."
+      ]
+    },
+    {
+      "recipe_source_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
+      "recipe_name": "Spinach and Cauliflower Smoothie",
+      "meal_type": "SNACK",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+      "source_collection": "USDA FNS WIC Works — Recipes",
+      "source_servings": 2,
+      "source_section": "WIC recipe / instructions and equipment notes",
+      "source_attribution": "USDA FNS WIC Works; Virginia Beach WIC.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. WIC submission policy requires permission to share; it is not an independent unlimited commercial/derivative grant. No linked recipe-level restrictive license was found on this selected card.",
+      "rights_evidence_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+      "rights_evidence_urls": [
+        "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+        "https://wicworks.fns.usda.gov/es/node/1807"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "prep_minutes": 5,
+        "blending_stage_minutes_range": [
+          1,
+          2
+        ]
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "BLENDER",
+          "source_words": "blender",
+          "source_location": "WIC recipe / instructions and equipment notes / step2"
+        },
+        {
+          "position": 2,
+          "equipment_code": "KNIFE",
+          "source_words": "knife",
+          "source_location": "WIC recipe / instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 3,
+          "equipment_code": "CUTTING_BOARD",
+          "source_words": "cutting board",
+          "source_location": "WIC recipe / instructions and equipment notes / equipment notes"
+        },
+        {
+          "position": 4,
+          "equipment_code": "MEASURING_CUP",
+          "source_words": "measuring cups",
+          "source_location": "WIC recipe / instructions and equipment notes / equipment notes"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "recipe_source_id": "SNAP8-HOMEMADE-MASHED-POTATOES",
+      "recipe_name": "Homemade Mashed Potatoes",
+      "meal_type": "SIDE",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/homemade-mashed-potatoes",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_servings": 8,
+      "source_section": "SNAP-Ed recipe / directions",
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/homemade-mashed-potatoes",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/homemade-mashed-potatoes"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "prep_minutes": null,
+        "cook_minutes": 15,
+        "total_minutes": null,
+        "evidence": "Directions step4; 15 minutes or until tender."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "SAUCEPAN",
+          "source_words": "medium saucepan",
+          "source_location": "SNAP-Ed recipe / directions / step1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "FORK",
+          "source_words": "fork or potato masher",
+          "source_location": "SNAP-Ed recipe / directions / mashing step; fork selected"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "recipe_source_id": "SNAP8-APPLE-CARROT-SOUP",
+      "recipe_name": "Apple Carrot Soup",
+      "meal_type": "SOUP",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_servings": 8,
+      "source_section": "SNAP-Ed recipe / directions",
+      "source_attribution": "USDA FNS SNAP-Ed; San Francisco Department of Public Health, Chinatown Public Health Center, Healthy and Delicious—Simple Ways to Low Fat Chinese Cooking (credit recovered from FNS Chinese New Year menu).",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "prep_minutes": null,
+        "cook_minutes_min": 180,
+        "cook_minutes_max": 240,
+        "total_minutes": null,
+        "evidence": "Directions: simmer 3–4 hours, until reduced to 8 cups."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "POT",
+          "source_words": "large pot",
+          "source_location": "SNAP-Ed recipe / directions / cooking directions"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "recipe_source_id": "SNAP6-WALDORF-SALAD",
+      "recipe_name": "Waldorf Salad",
+      "meal_type": "SIDE",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_servings": 6,
+      "source_section": "Fall Recipes / Waldorf Salad / directions",
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "total_minutes": null,
+        "nut_toasting_minutes_min": 12,
+        "nut_toasting_minutes_max": 15,
+        "evidence": "Fall page step2; nut-toasting stage, not a published total."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "OVEN",
+          "source_words": "oven",
+          "source_location": "Fall Recipes / Waldorf Salad / directions / step1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "BAKING_SHEET",
+          "source_words": "baking sheet",
+          "source_location": "Fall Recipes / Waldorf Salad / directions / step2"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "recipe_source_id": "SNAP4-BROWN-RICE-PILAF",
+      "recipe_name": "Brown Rice Pilaf",
+      "meal_type": "SIDE",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_servings": 4,
+      "source_section": "Valentine's Day menu / Brown Rice Pilaf / directions",
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "prep_minutes": null,
+        "cook_minutes": 30,
+        "total_minutes": null,
+        "evidence": "Rice cooker direction: about30 minutes, until water evaporates."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "RICE_COOKER",
+          "source_words": "rice cooker",
+          "source_location": "Valentine's Day menu / Brown Rice Pilaf / directions / cooking direction"
+        },
+        {
+          "position": 2,
+          "equipment_code": "FORK",
+          "source_words": "fork",
+          "source_location": "Valentine's Day menu / Brown Rice Pilaf / directions / fluffing direction"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "recipe_source_id": "SNAP5-KALE-NUTS-RAISINS",
+      "recipe_name": "Kale with Nuts and Raisins",
+      "meal_type": "SIDE",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://snaped.fns.usda.gov/node/1861",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_servings": 5,
+      "source_section": "SNAP-Ed node1861 / directions",
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/node/1861",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/node/1861"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "total_minutes": null,
+        "nut_toasting_minutes": 5,
+        "kale_cooking_minutes": 4,
+        "final_cooking_minutes": 1,
+        "evidence": "Directions steps3,5,6; do not infer non-overlap or total."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "OVEN",
+          "source_words": "oven",
+          "source_location": "SNAP-Ed node1861 / directions / preheating direction"
+        },
+        {
+          "position": 2,
+          "equipment_code": "BAKING_SHEET",
+          "source_words": "baking sheet",
+          "source_location": "SNAP-Ed node1861 / directions / nut toasting direction"
+        },
+        {
+          "position": 3,
+          "equipment_code": "SKILLET",
+          "source_words": "frying pan",
+          "source_location": "SNAP-Ed node1861 / directions / saute direction"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "recipe_source_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
+      "recipe_name": "Braised Chicken Thighs with Spinach",
+      "meal_type": "MAIN",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
+      "source_collection": "USDA FNS — Food and Physical Activity Checklist",
+      "source_servings": 4,
+      "source_section": "Food and Physical Activity Checklist handout p2",
+      "source_attribution": "USDA FNS What's Cooking? USDA Mixing Bowl, November2014, Food and Physical Activity Checklist handout p2.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "prep_minutes": null,
+        "cook_minutes": 70,
+        "total_minutes": null,
+        "chicken_browning_minutes_per_side": 8,
+        "onion_cooking_minutes": 5,
+        "braise_minutes": 30,
+        "selected_fresh_spinach_minutes": 2,
+        "evidence": "PDFp2 header says1hour10minutes. Retain header despite selected fresh alternative2minutes vs frozen10; do not silently recompute header."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "SKILLET",
+          "source_words": "skillet",
+          "source_location": "Food and Physical Activity Checklist handout p2 / step1"
+        },
+        {
+          "position": 2,
+          "equipment_code": "PLATE",
+          "source_words": "dinner plate",
+          "source_location": "Food and Physical Activity Checklist handout p2 / step1 holding partially cooked chicken; not serving-only"
+        }
+      ],
+      "quality_flags": [
+        "Source quantifies salt and pepper but directions omit their application. Preserve both ingredient rows; do not invent a seasoning step. Flag for human source-transcription review.",
+        "Source header cook time70minutes retained; stage math differs and fresh-spinach alternative is2minutes. Source four4oz prepared servings is distinct from four6oz bone-in thighs."
+      ]
+    },
+    {
+      "recipe_source_id": "SNAP4-DILLED-FISH-FILLETS",
+      "recipe_name": "Dilled Fish Fillets",
+      "meal_type": "MAIN",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_servings": 4,
+      "source_section": "SNAP-Ed recipe / Microwave Method",
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "prep_minutes": null,
+        "cook_minutes": 6,
+        "total_minutes": null,
+        "microwave_stages_minutes": [
+          3,
+          3
+        ],
+        "thaw_minutes": null,
+        "evidence": "Selected Microwave Method steps3–4; microwave-thaw alternative has no numeric duration."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "MICROWAVE",
+          "source_words": "microwave oven",
+          "source_location": "SNAP-Ed recipe / Microwave Method / step1 microwave-thaw alternative selected"
+        },
+        {
+          "position": 2,
+          "equipment_code": "BAKING_PAN",
+          "source_words": "glass-baking dish",
+          "source_location": "SNAP-Ed recipe / Microwave Method / step2"
+        },
+        {
+          "position": 3,
+          "equipment_code": "FORK",
+          "source_words": "fork",
+          "source_location": "SNAP-Ed recipe / Microwave Method / step4 doneness test"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "recipe_source_id": "SNAP8-SOMALI-SUMMER-SALAD",
+      "recipe_name": "Somali Summer Salad",
+      "meal_type": "SIDE",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_servings": 8,
+      "source_section": "Summer Recipes / Somali Summer Salad / directions",
+      "source_attribution": "USDA FNS SNAP-Ed; North Dakota Food and Culture: A Taste of World Cuisine, NDSU Extension, recipe page 24 (credit recovered from FNS Ramadan menu).",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "chill_minutes": null,
+        "note": "Chilled service specified but no numeric chilling interval; do not invent one."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "BOWL",
+          "source_words": "large bowl",
+          "source_location": "Summer Recipes / Somali Summer Salad / directions / step1"
+        }
+      ],
+      "quality_flags": []
+    },
+    {
+      "recipe_source_id": "SNAP3-GRILLED-FRUIT",
+      "recipe_name": "Grilled Fruit",
+      "meal_type": "DESSERT",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_servings": 3,
+      "source_section": "SNAP-Ed recipe / directions",
+      "source_attribution": "USDA FNS SNAP-Ed; University of Wyoming Cooperative Extension, Cent$ible Nutrition Program, Cooking for You or Two, page 196 (credit in earlier FNS Labor Day menu).",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "optional_wooden_skewer_soak_minutes": 30,
+        "note": "Cooking doneness cue is source-backed; no invented numeric cooking duration."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "SKEWER",
+          "source_words": "skewers",
+          "source_location": "SNAP-Ed recipe / directions / assembly direction"
+        }
+      ],
+      "quality_flags": [
+        "Only SKEWER is an explicit equipment noun. Grill/broil cooking verbs do not create inferred GRILL/OVEN rows. Nonwood skewer chosen, so wooden-skewer soak is conditional, not required."
+      ]
+    },
+    {
+      "recipe_source_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
+      "recipe_name": "Spring Vegetable Saute",
+      "meal_type": "SIDE",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_servings": 4,
+      "source_section": "Spring Recipes / Spring Vegetable Saute / directions",
+      "source_attribution": "USDA FNS SNAP-Ed; original MyPlate page credits US Department of Health and Human Services, National Cancer Institute.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "stage_minutes": [
+          2,
+          1,
+          4,
+          4
+        ],
+        "note": "Four source stage durations preserved; no independent source total duration stated."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "SKILLET",
+          "source_words": "skillet",
+          "source_location": "Spring Recipes / Spring Vegetable Saute / directions / step1"
+        }
+      ],
+      "quality_flags": [
+        "Source cover verb does not separately name a lid; no LID equipment inferred. Water1–2Tbsp is conditional only if browning, retained in ingredient audit."
+      ]
+    },
+    {
+      "recipe_source_id": "SNAP1-MICROWAVE-BAKED-POTATO",
+      "recipe_name": "Microwave Baked Potato",
+      "meal_type": "SIDE",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://snaped.fns.usda.gov/snap/recipes/Microwave_Baked_Potato.pdf",
+      "source_collection": "USDA FNS SNAP-Ed — Recipe Cards for Educators",
+      "source_servings": 1,
+      "source_section": "Recipe card PDF p1; duplicated card is one recipe",
+      "source_attribution": "USDA FNS SNAP-Ed Recipe Cards for Educators (2010); adapted from Montana State University Extension, Nutrition Education Programs, Buy Better. Eat Better. recipes.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/snap/recipes/Microwave_Baked_Potato.pdf",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/snap/recipes/Microwave_Baked_Potato.pdf"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "prep_minutes": null,
+        "cook_minutes_min": 7,
+        "cook_minutes_max": 8,
+        "rest_minutes_min": 1,
+        "rest_minutes_max": 3,
+        "total_minutes": null,
+        "evidence": "PDFp1 one-potato table and step4; batch2and4 cooking ranges retained in candidate v5, not linear scaling."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "MICROWAVE",
+          "source_words": "Microwave Baked Potato",
+          "source_location": "Recipe card PDF p1; duplicated card is one recipe / recipe title explicitly names cooking appliance; Spanish p2 also names horno microondas"
+        },
+        {
+          "position": 2,
+          "equipment_code": "FORK",
+          "source_words": "fork or knife",
+          "source_location": "Recipe card PDF p1; duplicated card is one recipe / step1; fork selected"
+        },
+        {
+          "position": 3,
+          "equipment_code": "MICROWAVE_SAFE_PLATE",
+          "source_words": "microwave safe plate",
+          "source_location": "Recipe card PDF p1; duplicated card is one recipe / step2"
+        }
+      ],
+      "quality_flags": [
+        "Microwave appliance explicitly named in title and Spanish plate instruction. Duplicate English cards and Spanish translation are one recipe. No-added-salt tomato sauce is an additional health suggestion, not a required topping."
+      ]
+    },
+    {
+      "recipe_source_id": "SNAP4-PEAR-ORANGE-SAUCE",
+      "recipe_name": "Pear in Orange Sauce",
+      "meal_type": "DESSERT",
+      "meal_type_basis": "Curator's descriptive categorization, not a nutrition or source-author classification.",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_servings": 4,
+      "source_section": "Fall Recipes / Pear in Orange Sauce / directions",
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes"
+      ],
+      "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license.",
+      "source_time_facts": {
+        "prep_minutes": null,
+        "cook_minutes": null,
+        "total_minutes": null,
+        "pear_cooking_minutes": 15,
+        "sauce_cooking_minutes": 5,
+        "cool_minutes": 5,
+        "evidence": "Fall page directions1–2; no supplied overall total."
+      },
+      "equipment": [
+        {
+          "position": 1,
+          "equipment_code": "DOUBLE_BOILER",
+          "source_words": "double boiler",
+          "source_location": "Fall Recipes / Pear in Orange Sauce / directions / step1"
+        }
+      ],
+      "quality_flags": []
+    }
+  ],
+  "counts": {
+    "recipes": 25,
+    "equipment_rows": 84,
+    "equipment_codes": [
+      "BAKING_PAN",
+      "BAKING_SHEET",
+      "BLENDER",
+      "BOWL",
+      "COLANDER",
+      "CUTTING_BOARD",
+      "DOUBLE_BOILER",
+      "FORK",
+      "GRATER",
+      "IMMERSION_BLENDER",
+      "KNIFE",
+      "LID",
+      "MEASURING_CUP",
+      "MEASURING_SPOON",
+      "MICROWAVE",
+      "MICROWAVE_SAFE_PLATE",
+      "OVEN",
+      "PLATE",
+      "POT",
+      "POTATO_MASHER",
+      "RESEALABLE_CONTAINER",
+      "RICE_COOKER",
+      "SAUCEPAN",
+      "SKEWER",
+      "SKILLET",
+      "SPATULA",
+      "SPOON",
+      "STOVETOP",
+      "VEGETABLE_PEELER",
+      "WHISK"
+    ]
+  }
+}

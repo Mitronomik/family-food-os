@@ -1,0 +1,94 @@
+{
+  "review_date": "2026-09-05",
+  "scope": "Bounded partial Lenta/O'KEY market research; not a completed 119-code audit and not production availability truth",
+  "regional_clearance": "NONE",
+  "access_findings": [
+    {
+      "chain": "LENTA",
+      "url": "https://lenta.com/info/shops/?citykey=spb&withRedirect=true",
+      "observed_wording": "Магазин в г. Москва и МО ул. 7-я Кожуховская, 9; По умолчанию на карте показаны магазины Лента в городе Москва и МО",
+      "checked_at": "2026-09-05",
+      "result": "Regional selector did not open or change selected city after accessibility, Playwright and visual-coordinate clicks. The citykey=spb URL did not establish SPB context. No hidden endpoint, cookie editing or protection bypass attempted."
+    },
+    {
+      "chain": "OKEY",
+      "url": "https://www.okeydostavka.ru/",
+      "observed_wording": "Forbidden",
+      "checked_at": "2026-09-05",
+      "result": "Live browser access denied. Web access to /spb failed; official okmarket.ru returned 403. No protection bypass attempted. IP and diagnostic request identifiers deliberately omitted."
+    },
+    {
+      "chain": "LENTA",
+      "url": "https://cdn.api.lenta.com/assets/a0f6281f-2ce6-4bd9-913b-5308f6267bd5/hm-1609-2309.html",
+      "observed_wording": "Каталог Из лета в Ленту; 03.09.2026 по 23.09.2026",
+      "checked_at": "2026-09-05",
+      "result": "Current promotional fallback links https://lenta.com/action/detail/7105/ and a generic products catalogue, not a regional SPB PDF or selected-store assortment. Not regional ingredient evidence."
+    }
+  ],
+  "observations": [
+    {
+      "food_ingredient_code": "CHICKEN_BROTH_LOW_SODIUM",
+      "chain": "LENTA",
+      "region": "Saint Petersburg / Leningrad Region requested; not established",
+      "region_proof": "None; generic SEO title is not selected-store proof",
+      "url": "https://lenta.com/product/bulon-kurinyjj-s-ponizhennym-soderzhaniem-soli-rossiya-80g-749090/",
+      "observed_wording": "Бульон DOSHIRAK Куриный, с пониженным содержанием соли, 80г",
+      "checked_at": "2026-09-05",
+      "status": "UNCERTAIN",
+      "notes": "Official search-index product result. Concentrated powder with salt as first ingredient. Reduced-salt claim does not establish an equivalent ready-to-use liquid low-sodium broth, its sodium level after preparation, or source-authorized preparation ratio. Direct web open failed. Not accepted as an exact-form match."
+    },
+    {
+      "food_ingredient_code": "MAYONNAISE_LOW_FAT",
+      "chain": "LENTA",
+      "region": "Saint Petersburg / Leningrad Region requested; not established",
+      "region_proof": "None; generic SEO title is not selected-store proof",
+      "url": "https://lenta.com/product/sous-majjoneznyjj-legkijj-20-dojj-pak-s-doz-rossiya-400g-214314/",
+      "observed_wording": "Соус майонезный CALVE Легкий 20%, 400г",
+      "checked_at": "2026-09-05",
+      "status": "UNCERTAIN",
+      "notes": "Official product page accessible. Potential reduced-fat mayonnaise-sauce candidate, but ingredient identity and SPB assortment are not cleared."
+    },
+    {
+      "food_ingredient_code": "PINTO_BEANS_CANNED_LOW_SODIUM",
+      "chain": "LENTA",
+      "region": "Saint Petersburg / Leningrad Region requested; not established",
+      "region_proof": "None",
+      "url": "https://lenta.com/product/fasol-krasnaya-pestraya-pinto-rossiya-450g-661029/",
+      "observed_wording": "Фасоль красная пестрая МИСТРАЛЬ Пинто, 450г",
+      "checked_at": "2026-09-05",
+      "status": "UNCERTAIN",
+      "notes": "Official indexed candidate is a dry-bean product, not canned low-sodium Pinto. Retrieved page reports bootstrap_error. It cannot clear required canned form; soaking/cooking is not an authorized silent substitution."
+    },
+    {
+      "food_ingredient_code": "CHEESE_CHEDDAR_REDUCED_FAT",
+      "chain": "LENTA",
+      "region": "Saint Petersburg / Leningrad Region requested; not established",
+      "region_proof": "None",
+      "url": "https://lenta.com/brand/-11090634/",
+      "observed_wording": "Сыр NATURA Сливочный Легкий 30%; Сыр NATURA Cheddar Чеддер 45%",
+      "checked_at": "2026-09-05",
+      "status": "UNCERTAIN",
+      "notes": "These are separate products. The light creamy cheese cannot be relabelled reduced-fat cheddar; the cheddar listing has no reviewed reduced-fat claim. Dry-matter fat percentage is not equivalent to total product fat. No regional clearance."
+    },
+    {
+      "food_ingredient_code": "MILK_1_PERCENT",
+      "chain": "LENTA",
+      "region": "Moscow, not target region",
+      "region_proof": "Live page header selected Москва и МО, ул. 7-я Кожуховская, 9",
+      "url": "https://lenta.com/product/moloko-pitevoe-pasterizovannoe-1-but-bez-zmzh-rossiya-900g-906643/",
+      "observed_wording": "Молоко пастеризованное АНФИСКИНО 1%, без змж, 900г",
+      "checked_at": "2026-09-05",
+      "status": "UNCERTAIN",
+      "notes": "Exact 1% milk product visibly listed with an add-to-basket affordance in https://lenta.com/catalog/moloko-128/, but only Moscow context was established. It must not count toward SPB availability. No cart change made."
+    }
+  ],
+  "targeted_searches_without_accepted_match": [
+    {
+      "food_ingredient_codes": ["ANCHO_CHILI_POWDER", "PIMIENTO_CANNED", "TURKEY_DRUMSTICK_SMOKED_COOKED", "CORN_CREAM_STYLE_NO_SALT", "ORANGE_JUICE_CONCENTRATE"],
+      "chains": ["LENTA", "OKEY"],
+      "checked_at": "2026-09-05",
+      "method": "Official-domain indexed searches for ancho/анчо/pimiento/пимиенто; smoked turkey drumstick; no-salt corn; frozen concentrated orange juice",
+      "result": "No exact-form regional primary-source match returned in the bounded search. This is UNCERTAIN, not proof of absence."
+    }
+  ]
+}

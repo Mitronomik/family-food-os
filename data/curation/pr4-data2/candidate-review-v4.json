@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-05",
+  "status": "PRIMARY_SOURCE_MAIN_DISH_SCREEN_NOT_ACCEPTED_CORPUS",
+  "candidates": [
+    {
+      "candidate_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
+      "source_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
+      "alternate_official_source_url": "https://snaped.fns.usda.gov/sites/default/files/documents/HowMuchFoodandPhysicalActivityHandouts.pdf",
+      "source_servings": 4,
+      "source_serving_text": "four 4-ounce servings",
+      "decision": "SOURCE_MAPPED",
+      "ingredient_facts": [
+        "chicken thighs bone-in skin removed: 4 pieces, 6 oz each",
+        "oil: 1 tsp",
+        "salt: 1/2 tsp",
+        "black pepper: 1/2 tsp",
+        "onion small peeled chopped: 1",
+        "garlic peeled minced: 3 cloves",
+        "dried thyme: 1/2 tsp",
+        "dried rosemary: 1/2 tsp",
+        "water: 1 cup",
+        "spinach: 10 oz frozen package OR 1 fresh bunch"
+      ],
+      "selected_required_codes": [
+        "CHICKEN_THIGH",
+        "SUNFLOWER_OIL",
+        "SALT",
+        "BLACK_PEPPER",
+        "ONION_YELLOW",
+        "GARLIC",
+        "THYME_DRIED",
+        "ROSEMARY_DRIED",
+        "WATER",
+        "SPINACH"
+      ],
+      "selection_basis": "Select generic oil member sunflower and explicit fresh spinach option (1 bunch). CHICKEN_THIGH canonical is skinless, not specified boneless. Preserve bone-in4x6oz source input; do not convert to edibleweight or confuse with four4oz prepared servings. Salt/pepper listed but no explicitapplicationinstruction; retain ingredient facts without inventing source steps.",
+      "step_facts": [
+        "Heat skillet medium-high; add oil and chicken top-down. Brown about8 minutes on each side; remove to dinner plate.",
+        "Reheat skillet medium; add onion, garlic and herbs, cook about5 minutes until onion soft/golden. Return chicken.",
+        "Add water, cover, cook about30 minutes.",
+        "Add selected fresh spinach and cook about2minutes until wilted; serve. Explicit frozen10oz alternative cooks about10minutes but is not selected."
+      ],
+      "source_backed_equipment": [
+        "skillet",
+        "dinner plate",
+        "cover"
+      ],
+      "time_minutes": {
+        "cook": 70
+      },
+      "rights_evidence_url": "https://snaped.fns.usda.gov/sites/default/files/documents/HowMuchFoodandPhysicalActivityHandouts.pdf",
+      "rights_basis": "Original FNS November2014 binary, full-text and recipe-page visual reviewed; no third-party copyright/licensing notice found. Apply accepted direct-FNS project risk posture, retain exact URL/hash/attribution, exclude photos/logos/trademarks. No public-domain or unrestricted commercial/derivative assertion.",
+      "remaining_issues": [
+        "Retail bone-in skinless thigh evidence",
+        "Source omits explicit salt/pepper application instruction; retain quantities without invented step",
+        "Fresh spinach1bunch is source-exact count, no fabricated bunch weight."
+      ],
+      "source_artifact": {
+        "artifact_kind": "ORIGINAL_PDF",
+        "local_artifact_name": "data2-snap-braised-chicken.pdf",
+        "sha256": "d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+        "bytes": 1000253,
+        "page_count": 2,
+        "recipe_pdf_page_index": 1,
+        "retrieved_at": "2026-09-05",
+        "review": "Complete PDF text reviewed and recipe page visually reviewed; exact ingredient amounts and four source directions corroborated."
+      },
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE"
+    },
+    {
+      "candidate_id": "SNAP4-BAKED-SALMON-HERBS-LEMON",
+      "source_url": "https://www.myplate.gov/recipes/supplemental-nutrition-assistance-program-snap/spicy-baked-fish",
+      "source_servings": 4,
+      "decision": "SOURCE_MAPPED_ARTIFACT_REVIEW_PENDING",
+      "ingredient_facts": [
+        "salmon fresh or frozen OR any white fish: 16 oz",
+        "paprika: 1/4 tsp",
+        "onion powder: 1/4 tsp",
+        "garlic powder: 1/4 tsp",
+        "black pepper: 1/8 tsp",
+        "dried oregano: 1/8 tsp",
+        "dried thyme: 1/8 tsp",
+        "lemon juice: 1 Tbsp",
+        "margarine melted: 1.5 Tbsp"
+      ],
+      "selected_required_codes": [
+        "SALMON_ATLANTIC",
+        "PAPRIKA",
+        "ONION_POWDER",
+        "GARLIC_POWDER",
+        "BLACK_PEPPER",
+        "OREGANO_DRIED",
+        "THYME_DRIED",
+        "LEMON",
+        "MARGARINE"
+      ],
+      "selection_basis": "Select salmon option and existing Atlantic salmon canonical member; no butter substitution for required margarine. All quantities source-exact. Actual global catalogue has LEMON, not LEMON_JUICE. Resolve juice preparation to LEMON while preserving source juice1Tbsp; do not invent whole-fruit count or gram conversion.",
+      "step_facts": [
+        "Wash hands; if frozen thaw fish refrigerated per package. Preheat350F.",
+        "Cut fish into4pieces; place13x9x2inchbakingpan.",
+        "Mix paprika, onion/garlic powders, pepper, oregano and thyme in smallbowl.",
+        "Sprinkle seasoning and lemonjuice over fish; drizzle meltedmargarine.",
+        "Bake20–25minutes until flakes easily withfork."
+      ],
+      "source_backed_equipment": [
+        "13x9x2 inch baking pan",
+        "small bowl",
+        "fork"
+      ],
+      "time_minutes": {
+        "bake_min": 20,
+        "bake_max": 25
+      },
+      "source_attribution": "Adapted from Spicy Baked Fish, Pumpkin Post and Banana Beat Newsletters, University of Massachusetts Extension Nutrition Education Program.",
+      "rights_basis": "Primary official MyPlate indexed complete card has contributor acknowledgment, not an actual third-party copyright/licensing notice. Live MyPlate access currently403/genericredirect; obtain actual primary artifact/notice review before final selection. Do not use independent myplate.food mirror as authoritative source.",
+      "remaining_issues": [
+        "Primary artifact/hash and actual notice review",
+        "Retail salmon/margarine evidence"
+      ]
+    },
+    {
+      "candidate_id": "SNAP4-DILLED-FISH-FILLETS",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
+      "source_servings": 4,
+      "decision": "SOURCE_MAPPED",
+      "ingredient_facts": [
+        "haddock OR cod fillets frozen: 1 lb",
+        "lemon juice: 1 Tbsp",
+        "dill weed dried: 1/8 tsp",
+        "salt: 1/8 tsp",
+        "black pepper: optional, unspecified amount"
+      ],
+      "selected_required_codes": [
+        "COD_ATLANTIC",
+        "LEMON",
+        "DILL_DRIED",
+        "SALT"
+      ],
+      "selection_basis": "Select explicit cod alternative and microwave method; omit explicitly optional black pepper. Frozen raw cod remains raw canonical COD_ATLANTIC with frozen procurement descriptor. No oil or margarine added. Preserve source microwave power category rather than inventing wattage. Actual global catalogue has LEMON, not LEMON_JUICE. Resolve juice preparation to LEMON while preserving source juice1Tbsp; do not invent whole-fruit count or gram conversion.",
+      "step_facts": [
+        "Thaw frozen fish refrigerated overnight or in microwave; wash hands; separate into4fillets/pieces.",
+        "Place in glass bakingdish, cover waxpaper.",
+        "Microwave medium3minutes; uncover, turn, sprinkle lemonjuice,drieddill,salt.",
+        "Cover, microwave medium3minutes or until fish flakes withfork."
+      ],
+      "source_alternate_method": "Skillet method: washhands,separate4pieces,placeheatedfrypan,seasonwithlemonjuice/seasonings,cover moderateheatabout5minutesuntilflakeswithfork.",
+      "source_backed_equipment": [
+        "microwave oven",
+        "glass baking dish",
+        "wax paper",
+        "fork"
+      ],
+      "time_minutes": {
+        "microwave": 6,
+        "thaw": "overnight refrigerated OR microwave thaw; source does not quantify microwave thaw"
+      },
+      "source_artifact": {
+        "artifact_kind": "BROWSER_SAVED_HTML_ONLY_NOT_RAW_HTTP_BODY",
+        "local_artifact_name": "data2-snap-dilled-fish.html",
+        "sha256": "43d44c84d7c007a0c32906210b13212ffb43fb7a62312e9fb43c819f8a8a63a3",
+        "bytes": 27316,
+        "retrieved_at": "2026-09-05",
+        "review": "Live official page and saved complete recipe ingredient/direction sections reviewed. No actual third-party copyright/licensing notice found."
+      },
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
+      "rights_basis": "Reviewed original direct-FNS HTML; no third-party copyright/licensing notice. Accepted project risk posture applies; exact attribution/URL/hash retained, no photo/logo/trademark import, no public-domain or unrestricted commercial/derivative assertion. Original MyPlate nutrition link is attribution, not required recipe content.",
+      "remaining_issues": [
+        "Retail evidence for frozen cod fillets and dried dill"
+      ]
+    }
+  ]
+}

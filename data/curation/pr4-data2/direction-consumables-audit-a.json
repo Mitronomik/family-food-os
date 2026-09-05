@@ -1,0 +1,4093 @@
+{
+  "schema_version": 1,
+  "status": "REVIEWED_WITH_CONCRETE_BLOCKERS",
+  "checked_at": "2026-09-05",
+  "reviewed_head": "66a3040",
+  "scope": "Independent actual-source consumables audit of first 15 recipes at reviewed head. This records defects, not approval of the corpus. Only this audit artifact is changed by the reviewer.",
+  "method": "All actual PDFs/HTML reopened, recipe ingredients/directions/notes/tips and supporting recipe skills read, all 15 source hashes checked against the current corpus. Honey Lime and Local Harvest page1 visually rechecked with Poppler. Ordinary operational food usages linked individually to existing reviewed source positions; no general semantic validator or culinary-convention inference.",
+  "recipes": [
+    {
+      "recipe_source_id": "CACFP6-CORN-EDAMAME-BLEND",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
+      "source_sha256": "314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef",
+      "artifact_name": "Corn_Edamame_Blend_6_Servings.pdf",
+      "artifact_hash_checked": true,
+      "status": "REVIEWED",
+      "reviewed_sections": [
+        {
+          "scope": "ingredient_list",
+          "status": "REVIEWED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "numbered_directions",
+          "status": "REVIEWED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "preparation_notes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "footnotes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "recipe_specific_tips",
+          "status": "REVIEWED",
+          "source_location": "Page1 Notes Section",
+          "conclusion": "Raw sesame-seed toasting uses the same quantified seeds, without added fat or another consumable."
+        },
+        {
+          "scope": "alternative_methods",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "supporting_instructions",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        }
+      ],
+      "rows": [
+        {
+          "row_id": "CACFP6-CORN-EDAMAME-BLEND:I1",
+          "source_location": "Page 1 directions 1",
+          "source_wording": "1 tsp Sesame oil",
+          "operational_source_wording": "Heat oil",
+          "concept": "SESAME_OIL",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 tsp Sesame oil",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "SESAME_OIL"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CORN-EDAMAME-BLEND:I2",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "⅔ cup or 3 oz Fresh onions, chopped",
+          "operational_source_wording": "Add onions and garlic.",
+          "concept": "ONION_YELLOW",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "⅔ cup or 3 oz Fresh onions, chopped",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "ONION_YELLOW"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CORN-EDAMAME-BLEND:I3",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "2 tsp Garlic, minced",
+          "operational_source_wording": "Add onions and garlic.",
+          "concept": "GARLIC",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 tsp Garlic, minced",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "GARLIC"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CORN-EDAMAME-BLEND:I4",
+          "source_location": "Page 1 directions 3",
+          "source_wording": "⅔ cup or 5 oz Frozen corn, thawed, drained",
+          "operational_source_wording": "Add corn.",
+          "concept": "CORN_SWEET",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "⅔ cup or 5 oz Frozen corn, thawed, drained",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "CORN_SWEET"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CORN-EDAMAME-BLEND:I5",
+          "source_location": "Page 1 directions 4",
+          "source_wording": "1 cup or 6 oz Frozen edamame, thawed, drained",
+          "operational_source_wording": "Add edamame.",
+          "concept": "EDAMAME_FROZEN",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 cup or 6 oz Frozen edamame, thawed, drained",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "EDAMAME_FROZEN"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CORN-EDAMAME-BLEND:I6",
+          "source_location": "Page 1 directions 5",
+          "source_wording": "1 ½ cups or 6 oz Fresh carrots, shredded",
+          "operational_source_wording": "Add carrots, coriander, sesame seeds, salt, and cilantro.",
+          "concept": "CARROT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 ½ cups or 6 oz Fresh carrots, shredded",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "CARROT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CORN-EDAMAME-BLEND:I7",
+          "source_location": "Page 1 directions 5",
+          "source_wording": "¼ tsp Ground coriander seeds",
+          "operational_source_wording": "Add carrots, coriander, sesame seeds, salt, and cilantro.",
+          "concept": "CORIANDER_SEED",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ tsp Ground coriander seeds",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [
+            "CORIANDER_SEED"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CORN-EDAMAME-BLEND:I8",
+          "source_location": "Page 1 directions 5 and Notes Section (toast raw seeds)",
+          "source_wording": "1 tsp Toasted sesame seeds (See Notes Section)",
+          "operational_source_wording": "toast sesame seeds in a small stock pot",
+          "concept": "SESAME_SEEDS",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 tsp Toasted sesame seeds",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            8
+          ],
+          "food_ingredient_codes": [
+            "SESAME_SEEDS"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CORN-EDAMAME-BLEND:I9",
+          "source_location": "Page 1 directions 5",
+          "source_wording": "¼ tsp Salt",
+          "operational_source_wording": "Add carrots, coriander, sesame seeds, salt, and cilantro.",
+          "concept": "SALT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ tsp Salt",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            9
+          ],
+          "food_ingredient_codes": [
+            "SALT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CORN-EDAMAME-BLEND:I10",
+          "source_location": "Page 1 directions 5",
+          "source_wording": "¼ cup or ½ oz Fresh cilantro, chopped",
+          "operational_source_wording": "Add carrots, coriander, sesame seeds, salt, and cilantro.",
+          "concept": "CILANTRO",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ cup or ½ oz Fresh cilantro, chopped",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            10
+          ],
+          "food_ingredient_codes": [
+            "CILANTRO"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_required_consumable_count": 0,
+      "conclusion": "No unresolved required edible consumable found in reviewed execution; explicitly omitted optional additions and nonfood/process materials separately classified."
+    },
+    {
+      "recipe_source_id": "CACFP6-LOCAL-HARVEST-BAKE",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Local_Harvest_Bake_6_Servings.pdf",
+      "source_sha256": "340444ab1ec4f626a34d6a2737fa04d12481ef21f8850ad7c1199c49c2b3786b",
+      "artifact_name": "Local_Harvest_Bake_6_Servings.pdf",
+      "artifact_hash_checked": true,
+      "status": "REVIEWED",
+      "reviewed_sections": [
+        {
+          "scope": "ingredient_list",
+          "status": "REVIEWED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "numbered_directions",
+          "status": "REVIEWED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "preparation_notes",
+          "status": "REVIEWED",
+          "source_location": "Page1 direction3 (visually rechecked)",
+          "conclusion": "Parchment AND pan-release spray required; no optional or OR language. Unquantified edible spray blocks retained recipe."
+        },
+        {
+          "scope": "footnotes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "recipe_specific_tips",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "alternative_methods",
+          "status": "REVIEWED",
+          "source_location": "Page1 conventional/convection oven alternatives",
+          "conclusion": "Only oven temperature/time alternatives. Neither waives pan spray."
+        },
+        {
+          "scope": "supporting_instructions",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        }
+      ],
+      "rows": [
+        {
+          "row_id": "CACFP6-LOCAL-HARVEST-BAKE:I1",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "2 cups or 8 oz Fresh butternut squash, peeled, cubed",
+          "operational_source_wording": "Toss butternut squash, beets, sweet potatoes, olive oil, salt, and garlic",
+          "concept": "BUTTERNUT_SQUASH",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 cups or 8 oz Fresh butternut squash, peeled, cubed",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "BUTTERNUT_SQUASH"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-LOCAL-HARVEST-BAKE:I2",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "2 cups or 8 oz Fresh beets, peeled, cubed",
+          "operational_source_wording": "Toss butternut squash, beets, sweet potatoes, olive oil, salt, and garlic",
+          "concept": "BEET",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 cups or 8 oz Fresh beets, peeled, cubed",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "BEET"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-LOCAL-HARVEST-BAKE:I3",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "2 cups or 8 oz Fresh sweet potatoes, peeled, cubed",
+          "operational_source_wording": "Toss butternut squash, beets, sweet potatoes, olive oil, salt, and garlic",
+          "concept": "SWEET_POTATO",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 cups or 8 oz Fresh sweet potatoes, peeled, cubed",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "SWEET_POTATO"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-LOCAL-HARVEST-BAKE:I4",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "1 Tbsp Olive oil",
+          "operational_source_wording": "olive oil",
+          "concept": "OLIVE_OIL",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 Tbsp Olive oil",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "OLIVE_OIL"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-LOCAL-HARVEST-BAKE:I5",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "¼ tsp Kosher salt or iodized salt",
+          "operational_source_wording": "salt",
+          "concept": "SALT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ tsp Kosher salt or iodized salt",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "SALT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-LOCAL-HARVEST-BAKE:I6",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "¾ tsp Fresh garlic, minced",
+          "operational_source_wording": "garlic",
+          "concept": "GARLIC",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¾ tsp Fresh garlic, minced",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "GARLIC"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-LOCAL-HARVEST-BAKE:I7",
+          "source_location": "Page 1 directions 6; Ingredients optional label",
+          "source_wording": "½ tsp Dried parsley (optional)",
+          "operational_source_wording": "Garnish with parsley.",
+          "concept": "PARSLEY_DRIED",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ tsp Dried parsley (optional)",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [
+            "PARSLEY_DRIED"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": "½ tsp Dried parsley (optional)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-LOCAL-HARVEST-BAKE:D1",
+          "source_location": "Page1 direction3",
+          "source_wording": "Spray lightly with pan release spray.",
+          "concept": "PAN_RELEASE_SPRAY",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "BLOCKED_UNQUANTIFIED_REQUIRED_EDIBLE",
+          "rationale": "Required edible pan-release coating has no quantified amount or ingredient-list row. Parchment accompanies it, not replaces it. Must reject/replace recipe or obtain authoritative quantity; no zero grams, negligible allowance, inferred oil substitution or source_limit waiver.",
+          "optionality_evidence": null,
+          "alternative_evidence": "No source OR/optional alternative. Parchment and spray are cumulative.",
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-LOCAL-HARVEST-BAKE:D2",
+          "source_location": "Page1 direction3",
+          "source_wording": "Line baking pan (9” x 13” x 2”) with a layer of parchment paper.",
+          "concept": "PARCHMENT_PAPER",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_PROCESS_CONSUMABLE",
+          "rationale": "Required nonfood disposable liner; not edible oil and does not remove the separate required spray.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_required_consumable_count": 1,
+      "conclusion": "BLOCKED: required unquantified edible pan-release spray remains unresolved; parchment is cumulative, not an authorized alternative."
+    },
+    {
+      "recipe_source_id": "CACFP6-TABBOULEH",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tabbouleh_6_Servings.pdf",
+      "source_sha256": "ef746c97415426316a78995b42a1e7f5a5d76c0078e6f006ab9940f0120cca49",
+      "artifact_name": "Tabbouleh_6_Servings.pdf",
+      "artifact_hash_checked": true,
+      "status": "REVIEWED",
+      "reviewed_sections": [
+        {
+          "scope": "ingredient_list",
+          "status": "REVIEWED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "numbered_directions",
+          "status": "REVIEWED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "preparation_notes",
+          "status": "REVIEWED",
+          "source_location": "Page1 direction1",
+          "conclusion": "Quinoa rinse water runs away through strainer; distinct from quantified absorbed cooking water."
+        },
+        {
+          "scope": "footnotes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "recipe_specific_tips",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "alternative_methods",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "supporting_instructions",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        }
+      ],
+      "rows": [
+        {
+          "row_id": "CACFP6-TABBOULEH:I1",
+          "source_location": "Page 1 directions 1-3, 8",
+          "source_wording": "⅓ cup or 3 oz Quinoa, dry",
+          "operational_source_wording": "Rinse quinoa",
+          "concept": "QUINOA",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "⅓ cup or 3 oz Quinoa, dry",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "QUINOA"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-TABBOULEH:I2",
+          "source_location": "Page 1 directions 2-3, 8",
+          "source_wording": "½ cup or 3 oz Bulgur wheat, dry",
+          "operational_source_wording": "bulgur wheat",
+          "concept": "BULGUR",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ cup or 3 oz Bulgur wheat, dry",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "BULGUR"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-TABBOULEH:I3",
+          "source_location": "Page 1 directions 2-3 (absorbed water)",
+          "source_wording": "1 ⅓ cups or 11 oz Water",
+          "operational_source_wording": "water is completely absorbed.",
+          "concept": "WATER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 ⅓ cups or 11 oz Water",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "WATER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "RETAINED"
+        },
+        {
+          "row_id": "CACFP6-TABBOULEH:I4",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "½ tsp Salt",
+          "operational_source_wording": "salt",
+          "concept": "SALT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ tsp Salt",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "SALT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-TABBOULEH:I5",
+          "source_location": "Page 1 directions 7",
+          "source_wording": "1 ½ cups or 9 ⅓ oz Fresh tomatoes, unpeeled, diced",
+          "operational_source_wording": "Combine tomatoes, cucumbers, parsley, onions, bell peppers, mint, and cumin",
+          "concept": "TOMATO",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 ½ cups or 9 ⅓ oz Fresh tomatoes, unpeeled, diced",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "TOMATO"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-TABBOULEH:I6",
+          "source_location": "Page 1 directions 7",
+          "source_wording": "1 cup or 4 ¾ oz Fresh cucumbers, peeled, seeded, diced",
+          "operational_source_wording": "cucumbers",
+          "concept": "CUCUMBER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 cup or 4 ¾ oz Fresh cucumbers, peeled, seeded, diced",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "CUCUMBER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-TABBOULEH:I7",
+          "source_location": "Page 1 directions 7",
+          "source_wording": "¼ cup or ½ oz Fresh parsley, chopped",
+          "operational_source_wording": "parsley",
+          "concept": "PARSLEY",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ cup or ½ oz Fresh parsley, chopped",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [
+            "PARSLEY"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-TABBOULEH:I8",
+          "source_location": "Page 1 directions 7",
+          "source_wording": "¼ cup or 1 ½ oz Fresh onions, diced",
+          "operational_source_wording": "onions",
+          "concept": "ONION_YELLOW",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ cup or 1 ½ oz Fresh onions, diced",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            8
+          ],
+          "food_ingredient_codes": [
+            "ONION_YELLOW"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-TABBOULEH:I9",
+          "source_location": "Page 1 directions 7",
+          "source_wording": "¼ cup or 1 ¼ oz Fresh red bell peppers, diced",
+          "operational_source_wording": "bell peppers",
+          "concept": "BELL_PEPPER_RED",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ cup or 1 ¼ oz Fresh red bell peppers, diced",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            9
+          ],
+          "food_ingredient_codes": [
+            "BELL_PEPPER_RED"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-TABBOULEH:I10",
+          "source_location": "Page 1 directions 7",
+          "source_wording": "¼ tsp Fresh mint, chopped",
+          "operational_source_wording": "mint",
+          "concept": "MINT_FRESH",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ tsp Fresh mint, chopped",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            10
+          ],
+          "food_ingredient_codes": [
+            "MINT_FRESH"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-TABBOULEH:I11",
+          "source_location": "Page 1 directions 7",
+          "source_wording": "¼ tsp Ground cumin",
+          "operational_source_wording": "cumin",
+          "concept": "CUMIN_GROUND",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ tsp Ground cumin",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            11
+          ],
+          "food_ingredient_codes": [
+            "CUMIN_GROUND"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-TABBOULEH:I12",
+          "source_location": "Page 1 directions 9",
+          "source_wording": "¼ cup or 2 oz Lemon juice",
+          "operational_source_wording": "Add lemon juice and olive oil.",
+          "concept": "LEMON",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ cup or 2 oz Lemon juice",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            12
+          ],
+          "food_ingredient_codes": [
+            "LEMON"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-TABBOULEH:I13",
+          "source_location": "Page 1 directions 9",
+          "source_wording": "2 ¼ tsp Olive oil",
+          "operational_source_wording": "Add lemon juice and olive oil.",
+          "concept": "OLIVE_OIL",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 ¼ tsp Olive oil",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            13
+          ],
+          "food_ingredient_codes": [
+            "OLIVE_OIL"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-TABBOULEH:D1",
+          "source_location": "Page1 direction1",
+          "source_wording": "Rinse quinoa in a fine mesh strainer until water runs clear, not cloudy.",
+          "concept": "QUINOA_RINSE_WATER",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "DISCARDED_PROCESS_WATER",
+          "rationale": "Source explicitly rinses through strainer; running rinse effluent discarded. Distinct from 1⅓cups absorbed cooking water.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "DISCARDED"
+        }
+      ],
+      "unresolved_required_consumable_count": 0,
+      "conclusion": "No unresolved required edible consumable found in reviewed execution; explicitly omitted optional additions and nonfood/process materials separately classified."
+    },
+    {
+      "recipe_source_id": "CACFP6-HONEY-LIME-CHICKEN",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Honey_Lime_Chicken_6_Servings.pdf",
+      "source_sha256": "df6b0bf8dd73975119a3d0b3ad1a9a447bc611e8dc9076c1548401e2cbcde634",
+      "artifact_name": "Honey_Lime_Chicken_6_Servings.pdf",
+      "artifact_hash_checked": true,
+      "status": "REVIEWED",
+      "reviewed_sections": [
+        {
+          "scope": "ingredient_list",
+          "status": "REVIEWED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "numbered_directions",
+          "status": "REVIEWED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "preparation_notes",
+          "status": "REVIEWED",
+          "source_location": "Page1 direction3 (visually rechecked)",
+          "conclusion": "Parchment AND pan-release spray required; no optional or OR language. Unquantified edible spray blocks retained recipe."
+        },
+        {
+          "scope": "footnotes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "recipe_specific_tips",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "alternative_methods",
+          "status": "REVIEWED",
+          "source_location": "Page1 conventional/convection oven alternatives",
+          "conclusion": "Only oven temperature/time alternatives. Neither waives pan spray."
+        },
+        {
+          "scope": "supporting_instructions",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        }
+      ],
+      "rows": [
+        {
+          "row_id": "CACFP6-HONEY-LIME-CHICKEN:I1",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "1 lb 7 oz Raw chicken thighs, boneless, skinless",
+          "operational_source_wording": "Combine chicken thighs, honey, lime juice, salt, pepper, and lime zest",
+          "concept": "CHICKEN_THIGH",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 lb 7 oz Raw chicken thighs, boneless, skinless",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "CHICKEN_THIGH"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-HONEY-LIME-CHICKEN:I2",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "⅓ cup or 3 ½ oz Honey",
+          "operational_source_wording": "honey",
+          "concept": "HONEY",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "⅓ cup or 3 ½ oz Honey",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "HONEY"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-HONEY-LIME-CHICKEN:I3",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "¼ cup or 2 oz Fresh lime juice",
+          "operational_source_wording": "lime juice",
+          "concept": "LIME_JUICE",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ cup or 2 oz Fresh lime juice",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "LIME_JUICE"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-HONEY-LIME-CHICKEN:I4",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "½ tsp Salt",
+          "operational_source_wording": "salt",
+          "concept": "SALT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ tsp Salt",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "SALT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-HONEY-LIME-CHICKEN:I5",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "¼ tsp Ground black or white pepper",
+          "operational_source_wording": "pepper",
+          "concept": "BLACK_PEPPER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ tsp Ground black or white pepper (black selected)",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "BLACK_PEPPER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-HONEY-LIME-CHICKEN:I6",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "⅛ cup Lime zest",
+          "operational_source_wording": "lime zest",
+          "concept": "LIME",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "⅛ cup Lime zest",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "LIME"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-HONEY-LIME-CHICKEN:D1",
+          "source_location": "Page1 direction3",
+          "source_wording": "lightly coated with pan release spray and lined with parchment paper.",
+          "concept": "PAN_RELEASE_SPRAY",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "BLOCKED_UNQUANTIFIED_REQUIRED_EDIBLE",
+          "rationale": "Required edible pan-release coating has no quantified amount or ingredient-list row. Parchment accompanies it, not replaces it. Must reject/replace recipe or obtain authoritative quantity; no zero grams, negligible allowance, inferred oil substitution or source_limit waiver.",
+          "optionality_evidence": null,
+          "alternative_evidence": "No source OR/optional alternative. Parchment and spray are cumulative.",
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-HONEY-LIME-CHICKEN:D2",
+          "source_location": "Page1 direction3",
+          "source_wording": "lined with parchment paper.",
+          "concept": "PARCHMENT_PAPER",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_PROCESS_CONSUMABLE",
+          "rationale": "Required nonfood disposable liner; not edible oil and does not remove the separate required spray.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_required_consumable_count": 1,
+      "conclusion": "BLOCKED: required unquantified edible pan-release spray remains unresolved; parchment is cumulative, not an authorized alternative."
+    },
+    {
+      "recipe_source_id": "CACFP6-CREAMY-COLESLAW",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf",
+      "source_sha256": "8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6",
+      "artifact_name": "Creamy_Coleslaw_6_Servings.pdf",
+      "artifact_hash_checked": true,
+      "status": "REVIEWED",
+      "reviewed_sections": [
+        {
+          "scope": "ingredient_list",
+          "status": "REVIEWED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "numbered_directions",
+          "status": "REVIEWED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "preparation_notes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "footnotes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "recipe_specific_tips",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "alternative_methods",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "supporting_instructions",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete six-serving card",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        }
+      ],
+      "rows": [
+        {
+          "row_id": "CACFP6-CREAMY-COLESLAW:I1",
+          "source_location": "Page 1 directions 1",
+          "source_wording": "½ cup or 5 oz Low-fat yogurt, plain",
+          "operational_source_wording": "Combine yogurt, mayonnaise, honey, vinegar, salt, and pepper",
+          "concept": "YOGURT_PLAIN_LOW_FAT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ cup or 5 oz Low-fat yogurt, plain",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "YOGURT_PLAIN_LOW_FAT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CREAMY-COLESLAW:I2",
+          "source_location": "Page 1 directions 1",
+          "source_wording": "¼ cup or 2 oz Low-fat mayonnaise",
+          "operational_source_wording": "mayonnaise",
+          "concept": "MAYONNAISE_LOW_FAT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ cup or 2 oz Low-fat mayonnaise",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "MAYONNAISE_LOW_FAT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CREAMY-COLESLAW:I3",
+          "source_location": "Page 1 directions 1",
+          "source_wording": "¼ cup or 2 ½ oz Honey",
+          "operational_source_wording": "honey",
+          "concept": "HONEY",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ cup or 2 ½ oz Honey",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "HONEY"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CREAMY-COLESLAW:I4",
+          "source_location": "Page 1 directions 1",
+          "source_wording": "⅛ cup Apple cider vinegar",
+          "operational_source_wording": "vinegar",
+          "concept": "APPLE_CIDER_VINEGAR",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "⅛ cup Apple cider vinegar",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "APPLE_CIDER_VINEGAR"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CREAMY-COLESLAW:I5",
+          "source_location": "Page 1 directions 1",
+          "source_wording": "¼ tsp Salt",
+          "operational_source_wording": "salt",
+          "concept": "SALT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ tsp Salt",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "SALT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CREAMY-COLESLAW:I6",
+          "source_location": "Page 1 directions 1",
+          "source_wording": "¼ tsp Ground black pepper",
+          "operational_source_wording": "pepper",
+          "concept": "BLACK_PEPPER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ tsp Ground black pepper",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "BLACK_PEPPER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CREAMY-COLESLAW:I7",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "4 cups or 6 oz Fresh green cabbage, chilled, shredded",
+          "operational_source_wording": "Combine cabbage, carrots, onions, and dried cranberries",
+          "concept": "CABBAGE_GREEN",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "4 cups or 6 oz Fresh green cabbage, chilled, shredded",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [
+            "CABBAGE_GREEN"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CREAMY-COLESLAW:I8",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "¾ cup or 1 ¼ oz Fresh purple cabbage, chilled, shredded",
+          "operational_source_wording": "cabbage",
+          "concept": "CABBAGE_RED",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¾ cup or 1 ¼ oz Fresh purple cabbage, chilled, shredded",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            8
+          ],
+          "food_ingredient_codes": [
+            "CABBAGE_RED"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CREAMY-COLESLAW:I9",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "¾ cup or 2 oz Fresh carrots, shredded",
+          "operational_source_wording": "carrots",
+          "concept": "CARROT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¾ cup or 2 oz Fresh carrots, shredded",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            9
+          ],
+          "food_ingredient_codes": [
+            "CARROT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CREAMY-COLESLAW:I10",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "½ cup or 1 oz Fresh green onions, diced",
+          "operational_source_wording": "onions",
+          "concept": "GREEN_ONION",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ cup or 1 oz Fresh green onions, diced",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            10
+          ],
+          "food_ingredient_codes": [
+            "GREEN_ONION"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "CACFP6-CREAMY-COLESLAW:I11",
+          "source_location": "Page 1 directions 2",
+          "source_wording": "½ cup or 2 ¼ oz Dried cranberries",
+          "operational_source_wording": "dried cranberries",
+          "concept": "CRANBERRIES_DRIED",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ cup or 2 ¼ oz Dried cranberries",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            11
+          ],
+          "food_ingredient_codes": [
+            "CRANBERRIES_DRIED"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_required_consumable_count": 0,
+      "conclusion": "No unresolved required edible consumable found in reviewed execution; explicitly omitted optional additions and nonfood/process materials separately classified."
+    },
+    {
+      "recipe_source_id": "TNC6-EGGS-SPINACH",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+      "source_sha256": "0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+      "artifact_name": "tnc-eggs.pdf",
+      "artifact_hash_checked": true,
+      "status": "REVIEWED",
+      "reviewed_sections": [
+        {
+          "scope": "ingredient_list",
+          "status": "REVIEWED",
+          "source_location": "Family Handout p3; supporting skill directions pp5,7,8",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "numbered_directions",
+          "status": "REVIEWED",
+          "source_location": "Family Handout p3; supporting skill directions pp5,7,8",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "preparation_notes",
+          "status": "REVIEWED",
+          "source_location": "Printed pp2-3,5-9",
+          "conclusion": "Full pictorial recipe, measured main recipe and chopping/cracking/whisking/measuring/scrambling skills read; listed oil used, not extra pan grease."
+        },
+        {
+          "scope": "footnotes",
+          "status": "REVIEWED",
+          "source_location": "Printed p3 ingredient batch note",
+          "conclusion": "Two eggs and half-cup spinach per child; no new food."
+        },
+        {
+          "scope": "recipe_specific_tips",
+          "status": "REVIEWED",
+          "source_location": "Printed p3 Optional Add-In Ingredients; p11 How to Season",
+          "conclusion": "Add-ins and seasoning expressly optional; extra small amount of saute oil conditional on omitted add-in variant."
+        },
+        {
+          "scope": "alternative_methods",
+          "status": "REVIEWED",
+          "source_location": "Printed pp3,10",
+          "conclusion": "Optional toast omitted; no inferred butter for toast."
+        },
+        {
+          "scope": "supporting_instructions",
+          "status": "REVIEWED",
+          "source_location": "Printed pp1-14 including complete skills/hygiene/table/worksheet pages",
+          "conclusion": "Soap, running water and paper towel hygiene instructions separate from edible recipe. Unselected meal suggestions/teaching prompts do not become required foods."
+        }
+      ],
+      "rows": [
+        {
+          "row_id": "TNC6-EGGS-SPINACH:I1",
+          "source_location": "Printed page 3 instructions 8; p8 How to Measure Oil",
+          "source_wording": "1 teaspoon olive, canola, or vegetable oil",
+          "operational_source_wording": "When the skillet is hot, add the oil.",
+          "concept": "OLIVE_OIL",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "OLIVE_OIL"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-EGGS-SPINACH:I2",
+          "source_location": "Printed page 3 instructions 5-7,9,11; pp6-7,9 skills",
+          "source_wording": "12 large eggs",
+          "operational_source_wording": "Whisk the eggs",
+          "concept": "EGG",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "12 large",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "EGG"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-EGGS-SPINACH:I3",
+          "source_location": "Printed page 3 instructions 2-3,10; pp5,8-9 skills",
+          "source_wording": "3 cups rinsed chopped fresh spinach",
+          "operational_source_wording": "Add the spinach to the eggs.",
+          "concept": "SPINACH",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "3 cups",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "SPINACH"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-EGGS-SPINACH:I4",
+          "source_location": "Printed page 3 instructions 4; p10 How to Toast (Optional)",
+          "source_wording": "6 slices whole-wheat bread, toasted (optional)",
+          "operational_source_wording": "Optional: If you'd like to make toast",
+          "concept": "6 slices whole-wheat bread, toasted (optional)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "6 slices",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+          "rationale": "Source explicitly marks the ingredient/add-in optional; omitted selection does not require invented quantity.",
+          "optionality_evidence": "6 slices whole-wheat bread, toasted (optional)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-EGGS-SPINACH:I5",
+          "source_location": "Printed page 3 optional ingredient and instruction12; p11 How to Season",
+          "source_wording": "ground pepper or other herbs and spices (optional)",
+          "operational_source_wording": "Season the scrambled eggs with spinach",
+          "concept": "ground pepper or other herbs and spices (optional)",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+          "rationale": "Source explicitly marks the ingredient/add-in optional; omitted selection does not require invented quantity.",
+          "optionality_evidence": "ground pepper or other herbs and spices (optional)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-EGGS-SPINACH:I6",
+          "source_location": "Printed page 3 Optional Add-In Ingredients",
+          "source_wording": "Sliced onion or scallions (¼ cup per 2 eggs)",
+          "operational_source_wording": "sliced onion or scallions",
+          "concept": "Sliced onion or scallions (¼ cup per 2 eggs)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ cup per 2 eggs",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+          "rationale": "Source explicitly marks the ingredient/add-in optional; omitted selection does not require invented quantity.",
+          "optionality_evidence": "Printed p3 heading: Optional Add-In Ingredients",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-EGGS-SPINACH:I7",
+          "source_location": "Printed page 3 Optional Add-In Ingredients",
+          "source_wording": "Sliced mushrooms (¼ cup per 2 eggs)",
+          "operational_source_wording": "sliced mushrooms",
+          "concept": "Sliced mushrooms (¼ cup per 2 eggs)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ cup per 2 eggs",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+          "rationale": "Source explicitly marks the ingredient/add-in optional; omitted selection does not require invented quantity.",
+          "optionality_evidence": "Printed p3 heading: Optional Add-In Ingredients",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-EGGS-SPINACH:I8",
+          "source_location": "Printed page 3 Optional Add-In Ingredients",
+          "source_wording": "Diced peppers or zucchini (¼ cup per 2 eggs)",
+          "operational_source_wording": "diced peppers or zucchini",
+          "concept": "Diced peppers or zucchini (¼ cup per 2 eggs)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ cup per 2 eggs",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            8
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+          "rationale": "Source explicitly marks the ingredient/add-in optional; omitted selection does not require invented quantity.",
+          "optionality_evidence": "Printed p3 heading: Optional Add-In Ingredients",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-EGGS-SPINACH:I9",
+          "source_location": "Printed page 3 Optional Add-In Ingredients",
+          "source_wording": "Herbs (½ teaspoon dried), such as basil or tarragon",
+          "operational_source_wording": "herbs",
+          "concept": "Herbs (½ teaspoon dried), such as basil or tarragon",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ teaspoon",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            9
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+          "rationale": "Source explicitly marks the ingredient/add-in optional; omitted selection does not require invented quantity.",
+          "optionality_evidence": "Printed p3 heading: Optional Add-In Ingredients",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-EGGS-SPINACH:I10",
+          "source_location": "Printed page 3 Optional Add-In Ingredients",
+          "source_wording": "Diced tomatoes (¼ cup per 2 eggs)",
+          "operational_source_wording": "diced tomatoes",
+          "concept": "Diced tomatoes (¼ cup per 2 eggs)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ cup per 2 eggs",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            10
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+          "rationale": "Source explicitly marks the ingredient/add-in optional; omitted selection does not require invented quantity.",
+          "optionality_evidence": "Printed p3 heading: Optional Add-In Ingredients",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-EGGS-SPINACH:I11",
+          "source_location": "Printed page 3 Optional Add-In Ingredients",
+          "source_wording": "Chopped kale (¼ cup per 2 eggs)",
+          "operational_source_wording": "chopped kale",
+          "concept": "Chopped kale (¼ cup per 2 eggs)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ cup per 2 eggs",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            11
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+          "rationale": "Source explicitly marks the ingredient/add-in optional; omitted selection does not require invented quantity.",
+          "optionality_evidence": "Printed p3 heading: Optional Add-In Ingredients",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-EGGS-SPINACH:I12",
+          "source_location": "Printed page 3 Optional Add-In Ingredients",
+          "source_wording": "Herbs (½ tablespoon chopped fresh basil, flat-leaf parsley, or cilantro leaves)",
+          "operational_source_wording": "herbs",
+          "concept": "Herbs (½ tablespoon chopped fresh basil, flat-leaf parsley, or cilantro leaves)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ tablespoon",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            12
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+          "rationale": "Source explicitly marks the ingredient/add-in optional; omitted selection does not require invented quantity.",
+          "optionality_evidence": "Printed p3 heading: Optional Add-In Ingredients",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-EGGS-SPINACH:D1",
+          "source_location": "Printed p4 How to Wash Your Hands steps2,5",
+          "source_wording": "Wet your hands with clean, running water",
+          "concept": "HANDWASHING_WATER",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "DISCARDED_PROCESS_WATER",
+          "rationale": "Explicit handwashing/rinsing process, discarded water not retained recipe food.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "DISCARDED"
+        },
+        {
+          "row_id": "TNC6-EGGS-SPINACH:D2",
+          "source_location": "Printed p4 How to Wash Your Hands step2",
+          "source_wording": "apply soap",
+          "concept": "SOAP",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_PROCESS_CONSUMABLE",
+          "rationale": "Source-explicit nonfood consumable; not FoodIngredient or an invented edible quantity.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-EGGS-SPINACH:D3",
+          "source_location": "Printed p4 How to Wash Your Hands step7",
+          "source_wording": "Turn off the faucet with a paper towel",
+          "concept": "PAPER_TOWEL",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_PROCESS_CONSUMABLE",
+          "rationale": "Source-explicit nonfood consumable; not FoodIngredient or an invented edible quantity.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-EGGS-SPINACH:D4",
+          "source_location": "Printed p11 How to Set a Table step1",
+          "source_wording": "Put the napkin and fork on the left side of the plate.",
+          "concept": "TABLE_NAPKIN",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "CONDITIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_PROCESS_CONSUMABLE",
+          "rationale": "Nonfood table-setting teaching instruction. Not a required edible recipe input; material (paper/cloth) is not specified.",
+          "optionality_evidence": null,
+          "alternative_evidence": "Table-setting supporting skill, not an extra cooking step.",
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-EGGS-SPINACH:D5",
+          "source_location": "Printed p3 Optional Add-In Ingredients intro",
+          "source_wording": "Cook the ingredients on medium-low in a small amount of oil first.",
+          "concept": "OPTIONAL_ADD_IN_SAUTE_OIL",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "CONDITIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_VARIANT_OMISSION",
+          "rationale": "Unquantified extra oil belongs exclusively to explicitly optional sauteed add-in variant. All those add-ins are omitted; no extra oil used by retained egg/spinach recipe.",
+          "optionality_evidence": "Heading: Optional Add-In Ingredients; Below are optional ingredients that can be added to this dish.",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-EGGS-SPINACH:D6",
+          "source_location": "Printed p6 How to Crack Eggs step8",
+          "source_wording": "wash everything that the raw egg touches with hot, soapy water.",
+          "concept": "EGG_CLEANUP_SOAP_WATER",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "DISCARDED_PROCESS_WATER",
+          "rationale": "Cleaning process after raw egg contact, not edible recipe liquid.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "DISCARDED"
+        }
+      ],
+      "unresolved_required_consumable_count": 0,
+      "conclusion": "No unresolved required edible consumable found in reviewed execution; explicitly omitted optional additions and nonfood/process materials separately classified."
+    },
+    {
+      "recipe_source_id": "TNC6-APPLESAUCE",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+      "source_sha256": "7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+      "artifact_name": "tnc-applesauce.pdf",
+      "artifact_hash_checked": true,
+      "status": "REVIEWED",
+      "reviewed_sections": [
+        {
+          "scope": "ingredient_list",
+          "status": "REVIEWED",
+          "source_location": "Family Handout p3; supporting skill directions pp6,8,9",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "numbered_directions",
+          "status": "REVIEWED",
+          "source_location": "Family Handout p3; supporting skill directions pp6,8,9",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "preparation_notes",
+          "status": "REVIEWED",
+          "source_location": "Printed pp2-3,5-10",
+          "conclusion": "Optional peel, core/slice/dice, measured half-cup water, simmer/cool/mash fully reviewed. No sugar needed."
+        },
+        {
+          "scope": "footnotes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Family Handout p3; supporting skill directions pp6,8,9",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "recipe_specific_tips",
+          "status": "REVIEWED",
+          "source_location": "Printed p3 intro and shopping list",
+          "conclusion": "Cinnamon/other spices optional. Yogurt, pancakes, toast, chicken/pork are serving suggestions, not recipe requirements."
+        },
+        {
+          "scope": "alternative_methods",
+          "status": "REVIEWED",
+          "source_location": "Printed pp3,5-7,10",
+          "conclusion": "Peel optional; slicer/knife and fork/masher alternatives introduce no edible quantity."
+        },
+        {
+          "scope": "supporting_instructions",
+          "status": "REVIEWED",
+          "source_location": "Printed pp1-14 including hygiene, rinse/core skills and meal worksheet",
+          "conclusion": "Running rinse/handwashing water, soap, paper towel, apple core/peel discard and table napkin reviewed; no new required edible material."
+        }
+      ],
+      "rows": [
+        {
+          "row_id": "TNC6-APPLESAUCE:I1",
+          "source_location": "Printed page 3 instructions 2-4,6,8; pp5-7,9-10 skills",
+          "source_wording": "6 apples, any variety, rinsed",
+          "operational_source_wording": "Add the diced apples to the pot with water",
+          "concept": "APPLE",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "6 apples",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "APPLE"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-APPLESAUCE:I2",
+          "source_location": "Printed page 3 instructions 5-6; pp8-9 measure/simmer",
+          "source_wording": "½ cup water",
+          "operational_source_wording": "Measure the water and pour the water in the pot.",
+          "concept": "WATER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "WATER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "RETAINED"
+        },
+        {
+          "row_id": "TNC6-APPLESAUCE:I3",
+          "source_location": "Printed page 3 instructions 8, Ingredients optional label",
+          "source_wording": "½ teaspoon of cinnamon (optional)",
+          "operational_source_wording": "If you'd like to add cinnamon or other spices",
+          "concept": "½ teaspoon of cinnamon (optional)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ teaspoon",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+          "rationale": "Source explicitly marks the ingredient/add-in optional; omitted selection does not require invented quantity.",
+          "optionality_evidence": "½ teaspoon of cinnamon (optional)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-APPLESAUCE:I4",
+          "source_location": "Printed page 3 instructions 8 and Shopping List optional spices",
+          "source_wording": "Dried spices, such as nutmeg, ginger, or cloves (optional)",
+          "operational_source_wording": "If you'd like to add cinnamon or other spices",
+          "concept": "Dried spices, such as nutmeg, ginger, or cloves (optional)",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+          "rationale": "Source explicitly marks the ingredient/add-in optional; omitted selection does not require invented quantity.",
+          "optionality_evidence": "Dried spices, such as nutmeg, ginger, or cloves (optional)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-APPLESAUCE:D1",
+          "source_location": "Printed p4 How to Wash Your Hands steps2,5",
+          "source_wording": "Wet your hands with clean, running water",
+          "concept": "HANDWASHING_WATER",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "DISCARDED_PROCESS_WATER",
+          "rationale": "Explicit handwashing/rinsing process, discarded water not retained recipe food.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "DISCARDED"
+        },
+        {
+          "row_id": "TNC6-APPLESAUCE:D2",
+          "source_location": "Printed p4 How to Wash Your Hands step2",
+          "source_wording": "apply soap",
+          "concept": "SOAP",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_PROCESS_CONSUMABLE",
+          "rationale": "Source-explicit nonfood consumable; not FoodIngredient or an invented edible quantity.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-APPLESAUCE:D3",
+          "source_location": "Printed p4 How to Wash Your Hands step7",
+          "source_wording": "Turn off the faucet with a paper towel",
+          "concept": "PAPER_TOWEL",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_PROCESS_CONSUMABLE",
+          "rationale": "Source-explicit nonfood consumable; not FoodIngredient or an invented edible quantity.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-APPLESAUCE:D4",
+          "source_location": "Printed p11 How to Set a Table step1",
+          "source_wording": "Put the napkin and fork on the left side of the plate.",
+          "concept": "TABLE_NAPKIN",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "CONDITIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_PROCESS_CONSUMABLE",
+          "rationale": "Nonfood table-setting teaching instruction. Not a required edible recipe input; material (paper/cloth) is not specified.",
+          "optionality_evidence": null,
+          "alternative_evidence": "Table-setting supporting skill, not an extra cooking step.",
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-APPLESAUCE:D5",
+          "source_location": "Printed p5 How to Rinse step1",
+          "source_wording": "Rinse the apples under cold, running tap water.",
+          "concept": "APPLE_RINSE_WATER",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "DISCARDED_PROCESS_WATER",
+          "rationale": "Explicit running rinse water discarded, distinct from measured retained half-cup cooking water.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "DISCARDED"
+        },
+        {
+          "row_id": "TNC6-APPLESAUCE:D6",
+          "source_location": "Printed p5 How to Rinse step3",
+          "source_wording": "Dry with a paper towel.",
+          "concept": "APPLE_DRYING_PAPER_TOWEL",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_PROCESS_CONSUMABLE",
+          "rationale": "Source-explicit nonfood consumable; not FoodIngredient or an invented edible quantity.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-APPLESAUCE:D7",
+          "source_location": "Printed p5 How to Peel step4",
+          "source_wording": "Throw away or compost the peel.",
+          "concept": "APPLE_PEEL_DISCARD",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "CONDITIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "DISCARDED_FOOD_PART",
+          "rationale": "Optional peeling discards existing apple peel; not an additional food quantity or edible-fraction estimate.",
+          "optionality_evidence": "Printed p3 step2 Optional: Peel the apples.",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "TNC6-APPLESAUCE:D8",
+          "source_location": "Printed p6 How to Core and Slice alternative step4",
+          "source_wording": "Throw away or compost the apple core and seeds.",
+          "concept": "APPLE_CORE_SEEDS_DISCARD",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "DISCARDED_FOOD_PART",
+          "rationale": "Waste from the already-counted apples; do not create an ingredient or infer a mass deduction.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_required_consumable_count": 0,
+      "conclusion": "No unresolved required edible consumable found in reviewed execution; explicitly omitted optional additions and nonfood/process materials separately classified."
+    },
+    {
+      "recipe_source_id": "SNAP4-SPANISH-FRITTATA",
+      "source_url": "https://snaped.fns.usda.gov/snap/MPMF/Handouts/HowMuchFoodandPhysicalActivityHandouts.pdf",
+      "source_sha256": "b2ac0732c26ad10426343c5aab115248b020983fa4dcad79f230ff146a02641c",
+      "artifact_name": "HowMuchFoodandPhysicalActivityHandouts.pdf",
+      "artifact_hash_checked": true,
+      "status": "REVIEWED",
+      "reviewed_sections": [
+        {
+          "scope": "ingredient_list",
+          "status": "REVIEWED",
+          "source_location": "Recipe page 2",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "numbered_directions",
+          "status": "REVIEWED",
+          "source_location": "Recipe page 2",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "preparation_notes",
+          "status": "REVIEWED",
+          "source_location": "PDF p2 directions2-3",
+          "conclusion": "Unquantified cold water covers potatoes then is explicitly drained. Discarded process water, not retained food or an optional cooking variant."
+        },
+        {
+          "scope": "footnotes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Recipe page 2",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "recipe_specific_tips",
+          "status": "REVIEWED",
+          "source_location": "PDF pp1,3,5 general nutrition handouts",
+          "conclusion": "General examples of foods/seasonings are educational, not extra required frittata ingredients."
+        },
+        {
+          "scope": "alternative_methods",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Recipe page 2",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "supporting_instructions",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Recipe page 2",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        }
+      ],
+      "rows": [
+        {
+          "row_id": "SNAP4-SPANISH-FRITTATA:I1",
+          "source_location": "PDF page 2 directions 2-3,5",
+          "source_wording": "1½ pounds (about 2) russet potatoes, scrubbed",
+          "operational_source_wording": "Put the potatoes in a non-stick skillet",
+          "concept": "POTATO",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1½ pounds (about 2) russet potatoes, scrubbed",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "POTATO"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-SPANISH-FRITTATA:I2",
+          "source_location": "PDF page 2 directions 4,6",
+          "source_wording": "6 large eggs",
+          "operational_source_wording": "Put the eggs, salt, and pepper in a bowl",
+          "concept": "EGG",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "6 large eggs",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "EGG"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-SPANISH-FRITTATA:I3",
+          "source_location": "PDF page 2 directions 5",
+          "source_wording": "2 teaspoons vegetable oil",
+          "operational_source_wording": "Add the oil.",
+          "concept": "SUNFLOWER_OIL",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 teaspoons vegetable oil",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "SUNFLOWER_OIL"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-SPANISH-FRITTATA:I4",
+          "source_location": "PDF page 2 directions 5",
+          "source_wording": "1 medium yellow onion, peeled and chopped",
+          "operational_source_wording": "Add onion",
+          "concept": "ONION_YELLOW",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 medium yellow onion, peeled and chopped",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "ONION_YELLOW"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-SPANISH-FRITTATA:I5",
+          "source_location": "PDF page 2 directions 4",
+          "source_wording": "½ teaspoon salt",
+          "operational_source_wording": "salt",
+          "concept": "SALT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ teaspoon salt",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "SALT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-SPANISH-FRITTATA:I6",
+          "source_location": "PDF page 2 directions 4",
+          "source_wording": "¼ teaspoon black pepper",
+          "operational_source_wording": "pepper",
+          "concept": "BLACK_PEPPER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ teaspoon black pepper",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "BLACK_PEPPER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP4-SPANISH-FRITTATA:I7",
+          "source_location": "PDF page 2 directions 2-3",
+          "source_wording": "cover with cold water; Drain the potatoes well",
+          "operational_source_wording": "cover with cold water; Drain the potatoes well",
+          "concept": "POTATO_BOILING_WATER_DISCARDED",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "DISCARDED_PROCESS_WATER",
+          "rationale": "Required boiling water explicitly drained in direction3; do not pretend optional or invent retained grams.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "DISCARDED"
+        }
+      ],
+      "unresolved_required_consumable_count": 0,
+      "conclusion": "No unresolved required edible consumable found in reviewed execution; explicitly omitted optional additions and nonfood/process materials separately classified."
+    },
+    {
+      "recipe_source_id": "FNS5-BAKED-LENTILS-CASSEROLE",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/lentils-casserole",
+      "source_sha256": "86b118c36ca73b75618e1656bbc96c2c06f59785ca7292efc47be0fe99cc4598",
+      "artifact_name": "data2-correction-baked-lentils.pdf",
+      "artifact_hash_checked": true,
+      "status": "REVIEWED",
+      "reviewed_sections": [
+        {
+          "scope": "ingredient_list",
+          "status": "REVIEWED",
+          "source_location": "Complete official Print PDF and linked recipe page",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "numbered_directions",
+          "status": "REVIEWED",
+          "source_location": "Complete official Print PDF and linked recipe page",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "preparation_notes",
+          "status": "REVIEWED",
+          "source_location": "Print p1 direction3",
+          "conclusion": "Lid OR foil; select lid. No oil/spray for casserole anywhere in all eight steps."
+        },
+        {
+          "scope": "footnotes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete official Print PDF and linked recipe page",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "recipe_specific_tips",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete official Print PDF and linked recipe page",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "alternative_methods",
+          "status": "REVIEWED",
+          "source_location": "Print p1 direction3",
+          "conclusion": "Foil is explicit nonfood alternative, omitted in lid execution."
+        },
+        {
+          "scope": "supporting_instructions",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Complete official Print PDF and linked recipe page",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        }
+      ],
+      "rows": [
+        {
+          "row_id": "FNS5-BAKED-LENTILS-CASSEROLE:I1",
+          "source_location": "Print page1 directions2-4",
+          "source_wording": "1 cup lentils, rinsed",
+          "operational_source_wording": "Combine lentils, water, seasonings, onion, and tomatoes.",
+          "concept": "LENTILS_DRY",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 cup lentils, rinsed",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "LENTILS_DRY"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS5-BAKED-LENTILS-CASSEROLE:I2",
+          "source_location": "Print page1 directions2-4",
+          "source_wording": "¾ cup water",
+          "operational_source_wording": "water",
+          "concept": "WATER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¾ cup water",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "WATER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "RETAINED"
+        },
+        {
+          "row_id": "FNS5-BAKED-LENTILS-CASSEROLE:I3",
+          "source_location": "Print page1 directions2",
+          "source_wording": "½ teaspoon salt",
+          "operational_source_wording": "seasonings",
+          "concept": "SALT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ teaspoon salt",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "SALT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS5-BAKED-LENTILS-CASSEROLE:I4",
+          "source_location": "Print page1 directions2; ingredient optional label",
+          "source_wording": "¼ teaspoon ground black pepper (optional)",
+          "operational_source_wording": "seasonings",
+          "concept": "¼ teaspoon ground black pepper (optional)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ teaspoon ground black pepper (optional)",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+          "rationale": "Source explicitly marks the ingredient/add-in optional; omitted selection does not require invented quantity.",
+          "optionality_evidence": "¼ teaspoon ground black pepper (optional)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS5-BAKED-LENTILS-CASSEROLE:I5",
+          "source_location": "Print page1 directions2; ingredient optional label",
+          "source_wording": "¼ teaspoon garlic powder (optional)",
+          "operational_source_wording": "seasonings",
+          "concept": "¼ teaspoon garlic powder (optional)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ teaspoon garlic powder (optional)",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+          "rationale": "Source explicitly marks the ingredient/add-in optional; omitted selection does not require invented quantity.",
+          "optionality_evidence": "¼ teaspoon garlic powder (optional)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS5-BAKED-LENTILS-CASSEROLE:I6",
+          "source_location": "Print page1 directions2",
+          "source_wording": "½ cup medium onion, chopped",
+          "operational_source_wording": "onion",
+          "concept": "ONION_YELLOW",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ cup medium onion, chopped",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "ONION_YELLOW"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS5-BAKED-LENTILS-CASSEROLE:I7",
+          "source_location": "Print page1 directions2",
+          "source_wording": "1 can low-sodium tomatoes (14.5 ounces)",
+          "operational_source_wording": "tomatoes",
+          "concept": "TOMATO_CANNED_NO_SALT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 can low-sodium tomatoes (14.5 ounces)",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [
+            "TOMATO_CANNED_NO_SALT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS5-BAKED-LENTILS-CASSEROLE:I8",
+          "source_location": "Print page1 directions5",
+          "source_wording": "2 medium carrots, thinly sliced",
+          "operational_source_wording": "add carrots",
+          "concept": "CARROT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 medium carrots, thinly sliced",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            8
+          ],
+          "food_ingredient_codes": [
+            "CARROT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS5-BAKED-LENTILS-CASSEROLE:I9",
+          "source_location": "Print page1 directions7; page2 direction8",
+          "source_wording": "½ cup shredded cheddar cheese",
+          "operational_source_wording": "sprinkle cheese on top",
+          "concept": "CHEESE_CHEDDAR",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ cup shredded cheddar cheese",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            9
+          ],
+          "food_ingredient_codes": [
+            "CHEESE_CHEDDAR"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "FNS5-BAKED-LENTILS-CASSEROLE:D1",
+          "source_location": "Print p1 direction3",
+          "source_wording": "cover tightly with lid or foil.",
+          "concept": "ALUMINUM_FOIL",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "CONDITIONAL",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_NONFOOD_ALTERNATIVE_NOT_SELECTED",
+          "rationale": "Select explicit lid alternative; foil is a nonfood disposable, not edible material or required food.",
+          "optionality_evidence": null,
+          "alternative_evidence": "lid or foil",
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_required_consumable_count": 0,
+      "conclusion": "No unresolved required edible consumable found in reviewed execution; explicitly omitted optional additions and nonfood/process materials separately classified."
+    },
+    {
+      "recipe_source_id": "HARV6-FRESH-TOMATO-SALSA",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "artifact_name": "HarvestofRecipes.pdf",
+      "artifact_hash_checked": true,
+      "status": "REVIEWED",
+      "reviewed_sections": [
+        {
+          "scope": "ingredient_list",
+          "status": "REVIEWED",
+          "source_location": "Harvest printed p53",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "numbered_directions",
+          "status": "REVIEWED",
+          "source_location": "Harvest printed p53",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "preparation_notes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Harvest printed p53",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "footnotes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Harvest printed p53",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "recipe_specific_tips",
+          "status": "REVIEWED",
+          "source_location": "Printed pp52-53",
+          "conclusion": "Read complete two-page recipe including intro and if-you-have-it optional herbs; serving accompaniments excluded."
+        },
+        {
+          "scope": "alternative_methods",
+          "status": "REVIEWED",
+          "source_location": "Printed p53 ingredients/directions1-2",
+          "conclusion": "Only stated alternatives/optional herbs; no invented extra food or cooking liquid."
+        },
+        {
+          "scope": "supporting_instructions",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Harvest printed p53",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        }
+      ],
+      "rows": [
+        {
+          "row_id": "HARV6-FRESH-TOMATO-SALSA:I1",
+          "source_location": "Printed p53 directions1",
+          "source_wording": "1 cup tomatoes, finely chopped (or ½ can, about 8 ounces, low-sodium diced tomatoes)",
+          "operational_source_wording": "combine tomato, apple, onion and lime juice",
+          "concept": "TOMATO",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "TOMATO"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-FRESH-TOMATO-SALSA:I2",
+          "source_location": "Printed p53 directions1",
+          "source_wording": "½ cup apple, peeled and finely chopped",
+          "operational_source_wording": "apple",
+          "concept": "APPLE",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "APPLE"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-FRESH-TOMATO-SALSA:I3",
+          "source_location": "Printed p53 directions1",
+          "source_wording": "¼ cup onion, finely chopped",
+          "operational_source_wording": "onion",
+          "concept": "ONION_YELLOW",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "ONION_YELLOW"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-FRESH-TOMATO-SALSA:I4",
+          "source_location": "Printed p53 directions1",
+          "source_wording": "2 tablespoons lime (or lemon) juice",
+          "operational_source_wording": "lime juice (or lemon juice)",
+          "concept": "LIME_JUICE",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 tablespoons",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "LIME_JUICE"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-FRESH-TOMATO-SALSA:I5",
+          "source_location": "Printed p53 directions2",
+          "source_wording": "1 teaspoon garlic, finely chopped",
+          "operational_source_wording": "Add garlic, vegetable oil, and salt",
+          "concept": "GARLIC",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "GARLIC"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-FRESH-TOMATO-SALSA:I6",
+          "source_location": "Printed p53 directions2",
+          "source_wording": "½ teaspoon vegetable oil",
+          "operational_source_wording": "vegetable oil",
+          "concept": "SUNFLOWER_OIL",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "SUNFLOWER_OIL"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-FRESH-TOMATO-SALSA:I7",
+          "source_location": "Printed p53 directions2",
+          "source_wording": "¼ teaspoon salt",
+          "operational_source_wording": "salt",
+          "concept": "SALT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [
+            "SALT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-FRESH-TOMATO-SALSA:I8",
+          "source_location": "Printed p53 directions2; ingredient if-you-have-it label",
+          "source_wording": "1 teaspoon fresh parsley or cilantro, finely chopped (if you have it)",
+          "operational_source_wording": "If using parsley, cilantro, cayenne pepper, or jalapeño chilies, add them too.",
+          "concept": "1 teaspoon fresh parsley or cilantro, finely chopped (if you have it)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 teaspoon",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            8
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+          "rationale": "Source explicitly marks the ingredient/add-in optional; omitted selection does not require invented quantity.",
+          "optionality_evidence": "1 teaspoon fresh parsley or cilantro, finely chopped (if you have it)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-FRESH-TOMATO-SALSA:I9",
+          "source_location": "Printed p53 directions2; ingredient if-you-have-it label",
+          "source_wording": "1 tablespoon cayenne pepper or jalapeño chilies, chopped (if you have it)",
+          "operational_source_wording": "If using parsley, cilantro, cayenne pepper, or jalapeño chilies, add them too.",
+          "concept": "1 tablespoon cayenne pepper or jalapeño chilies, chopped (if you have it)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 tablespoon",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            9
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+          "rationale": "Source explicitly marks the ingredient/add-in optional; omitted selection does not require invented quantity.",
+          "optionality_evidence": "1 tablespoon cayenne pepper or jalapeño chilies, chopped (if you have it)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-FRESH-TOMATO-SALSA:D1",
+          "source_location": "Printed p53 direction3",
+          "source_wording": "Cover bowl and refrigerate for 15 minutes.",
+          "concept": "UNSPECIFIED_BOWL_COVER",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_COVER_MATERIAL_UNSPECIFIED",
+          "rationale": "A cover is explicit but its material is unspecified. Do not assert plastic wrap/foil, an additional consumable, or edible quantity.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_required_consumable_count": 0,
+      "conclusion": "No unresolved required edible consumable found in reviewed execution; explicitly omitted optional additions and nonfood/process materials separately classified."
+    },
+    {
+      "recipe_source_id": "HARV6-GARDEN-PASTA-SALAD",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "artifact_name": "HarvestofRecipes.pdf",
+      "artifact_hash_checked": true,
+      "status": "REVIEWED",
+      "reviewed_sections": [
+        {
+          "scope": "ingredient_list",
+          "status": "REVIEWED",
+          "source_location": "Harvest printed p55",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "numbered_directions",
+          "status": "REVIEWED",
+          "source_location": "Harvest printed p55",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "preparation_notes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Harvest printed p55",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "footnotes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Harvest printed p55",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "recipe_specific_tips",
+          "status": "REVIEWED",
+          "source_location": "Printed pp54-55",
+          "conclusion": "Read complete two-page recipe including intro and if-you-have-it optional herbs; serving accompaniments excluded."
+        },
+        {
+          "scope": "alternative_methods",
+          "status": "REVIEWED",
+          "source_location": "Printed p55 optional parsley",
+          "conclusion": "Only stated alternatives/optional herbs; no invented extra food or cooking liquid."
+        },
+        {
+          "scope": "supporting_instructions",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Harvest printed p55",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        }
+      ],
+      "rows": [
+        {
+          "row_id": "HARV6-GARDEN-PASTA-SALAD:I1",
+          "source_location": "Printed p55 directions1",
+          "source_wording": "½ cup macaroni, cooked",
+          "operational_source_wording": "combine macaroni, onions, cucumbers, and green peppers.",
+          "concept": "PASTA_DRY",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ cup cooked",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "PASTA_DRY"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-GARDEN-PASTA-SALAD:I2",
+          "source_location": "Printed p55 directions1",
+          "source_wording": "¼ cup onion, finely chopped",
+          "operational_source_wording": "onions",
+          "concept": "ONION_YELLOW",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "ONION_YELLOW"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-GARDEN-PASTA-SALAD:I3",
+          "source_location": "Printed p55 directions1",
+          "source_wording": "½ cup cucumber, finely chopped",
+          "operational_source_wording": "cucumbers",
+          "concept": "CUCUMBER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "CUCUMBER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-GARDEN-PASTA-SALAD:I4",
+          "source_location": "Printed p55 directions1",
+          "source_wording": "¼ cup green pepper, diced",
+          "operational_source_wording": "green peppers",
+          "concept": "BELL_PEPPER_GREEN",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "BELL_PEPPER_GREEN"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-GARDEN-PASTA-SALAD:I5",
+          "source_location": "Printed p55 directions2-3",
+          "source_wording": "1 tablespoon vinegar",
+          "operational_source_wording": "mix vinegar, vegetable oil, salt, and pepper.",
+          "concept": "APPLE_CIDER_VINEGAR",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 tablespoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "APPLE_CIDER_VINEGAR"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-GARDEN-PASTA-SALAD:I6",
+          "source_location": "Printed p55 directions2-3",
+          "source_wording": "½ tablespoon vegetable oil",
+          "operational_source_wording": "vegetable oil",
+          "concept": "SUNFLOWER_OIL",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "½ tablespoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "SUNFLOWER_OIL"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-GARDEN-PASTA-SALAD:I7",
+          "source_location": "Printed p55 directions2-3",
+          "source_wording": "¼ teaspoon salt",
+          "operational_source_wording": "salt",
+          "concept": "SALT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [
+            "SALT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-GARDEN-PASTA-SALAD:I8",
+          "source_location": "Printed p55 directions2-3",
+          "source_wording": "¼ teaspoon pepper",
+          "operational_source_wording": "pepper",
+          "concept": "BLACK_PEPPER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "¼ teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            8
+          ],
+          "food_ingredient_codes": [
+            "BLACK_PEPPER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-GARDEN-PASTA-SALAD:I9",
+          "source_location": "Printed p55 directions2; if-you-have-it label",
+          "source_wording": "1 teaspoon parsley, chopped (if you have it)",
+          "operational_source_wording": "If using parsley, add that too.",
+          "concept": "1 teaspoon parsley, chopped (if you have it)",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 teaspoon",
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            9
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+          "rationale": "Source explicitly marks the ingredient/add-in optional; omitted selection does not require invented quantity.",
+          "optionality_evidence": "1 teaspoon parsley, chopped (if you have it)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "HARV6-GARDEN-PASTA-SALAD:D1",
+          "source_location": "Printed p55 direction4",
+          "source_wording": "Cover bowl and refrigerate for 30 to 45 minutes.",
+          "concept": "UNSPECIFIED_BOWL_COVER",
+          "edible": false,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": false,
+          "ingredient_source_positions": [],
+          "food_ingredient_codes": [],
+          "resolution": "NONFOOD_COVER_MATERIAL_UNSPECIFIED",
+          "rationale": "A cover is explicit but its material is unspecified. Do not assert plastic wrap/foil, an additional consumable, or edible quantity.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_required_consumable_count": 0,
+      "conclusion": "No unresolved required edible consumable found in reviewed execution; explicitly omitted optional additions and nonfood/process materials separately classified."
+    },
+    {
+      "recipe_source_id": "SNAP6-SPINACH-APPLE-SALAD",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "source_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "artifact_name": "data2-snap-fall.html",
+      "artifact_hash_checked": true,
+      "status": "REVIEWED",
+      "reviewed_sections": [
+        {
+          "scope": "ingredient_list",
+          "status": "REVIEWED",
+          "source_location": "Fall Recipes / same-titled recipe / directions",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "numbered_directions",
+          "status": "REVIEWED",
+          "source_location": "Fall Recipes / same-titled recipe / directions",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "preparation_notes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Fall Recipes / same-titled recipe / directions",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "footnotes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Fall Recipes / same-titled recipe / directions",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "recipe_specific_tips",
+          "status": "REVIEWED",
+          "source_location": "HTML same-recipe intro",
+          "conclusion": "Sugar omission is source-explicit, though current selection retains quantified sugar."
+        },
+        {
+          "scope": "alternative_methods",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Fall Recipes / same-titled recipe / directions",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "supporting_instructions",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Fall Recipes / same-titled recipe / directions",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        }
+      ],
+      "rows": [
+        {
+          "row_id": "SNAP6-SPINACH-APPLE-SALAD:I1",
+          "source_location": "Spinach Salad with Apples and Raisins / directions1",
+          "source_wording": "2/3 package baby spinach (10 ounces, washed. Could also use Kale or other greens)",
+          "operational_source_wording": "Combine spinach, apples and raisins.",
+          "concept": "SPINACH",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2/3 package (10 ounces)",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "SPINACH"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-SPINACH-APPLE-SALAD:I2",
+          "source_location": "Spinach Salad with Apples and Raisins / directions1",
+          "source_wording": "1 1/2 apples (chopped, can use 1-2 apples)",
+          "operational_source_wording": "apples",
+          "concept": "APPLE",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 1/2 apples (can use 1-2)",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "APPLE"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-SPINACH-APPLE-SALAD:I3",
+          "source_location": "Spinach Salad with Apples and Raisins / directions1",
+          "source_wording": "1 cup raisins",
+          "operational_source_wording": "raisins",
+          "concept": "RAISINS_GOLDEN",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "RAISINS_GOLDEN"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-SPINACH-APPLE-SALAD:I4",
+          "source_location": "Spinach Salad with Apples and Raisins / directions2",
+          "source_wording": "1/4 cup canola oil",
+          "operational_source_wording": "Mix all dressing ingredients",
+          "concept": "CANOLA_OIL",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/4 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "CANOLA_OIL"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-SPINACH-APPLE-SALAD:I5",
+          "source_location": "Spinach Salad with Apples and Raisins / directions2",
+          "source_wording": "1/4 cup apple cider vinegar",
+          "operational_source_wording": "Mix all dressing ingredients",
+          "concept": "APPLE_CIDER_VINEGAR",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/4 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "APPLE_CIDER_VINEGAR"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-SPINACH-APPLE-SALAD:I6",
+          "source_location": "Spinach Salad with Apples and Raisins / directions2 and intro optional omission",
+          "source_wording": "1/4 cup sugar",
+          "operational_source_wording": "Mix all dressing ingredients",
+          "concept": "SUGAR",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/4 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "SUGAR"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-SPINACH-APPLE-SALAD:I7",
+          "source_location": "Spinach Salad with Apples and Raisins / directions2",
+          "source_wording": "1/16 teaspoon garlic powder (pinch)",
+          "operational_source_wording": "Mix all dressing ingredients",
+          "concept": "GARLIC_POWDER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/16 teaspoon (pinch)",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [
+            "GARLIC_POWDER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_required_consumable_count": 0,
+      "conclusion": "No unresolved required edible consumable found in reviewed execution; explicitly omitted optional additions and nonfood/process materials separately classified."
+    },
+    {
+      "recipe_source_id": "SNAP6-PEACH-CRISP",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+      "source_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "artifact_name": "data2-snap-summer.html",
+      "artifact_hash_checked": true,
+      "status": "REVIEWED",
+      "reviewed_sections": [
+        {
+          "scope": "ingredient_list",
+          "status": "REVIEWED",
+          "source_location": "Summer Recipes / Peach Crisp / directions",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "numbered_directions",
+          "status": "REVIEWED",
+          "source_location": "Summer Recipes / Peach Crisp / directions",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "preparation_notes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Summer Recipes / Peach Crisp / directions",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "footnotes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Summer Recipes / Peach Crisp / directions",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "recipe_specific_tips",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Summer Recipes / Peach Crisp / directions",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "alternative_methods",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Summer Recipes / Peach Crisp / directions",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "supporting_instructions",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Summer Recipes / Peach Crisp / directions",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        }
+      ],
+      "rows": [
+        {
+          "row_id": "SNAP6-PEACH-CRISP:I1",
+          "source_location": "Peach Crisp / directions2-3",
+          "source_wording": "4 peaches (4 cups sliced)",
+          "operational_source_wording": "Spread the peach slices",
+          "concept": "PEACH",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "4 peaches (4 cups sliced)",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "PEACH"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-PEACH-CRISP:I2",
+          "source_location": "Peach Crisp / directions4-6",
+          "source_wording": "2 tablespoons margarine",
+          "operational_source_wording": "Melt the margarine in a saucepan.",
+          "concept": "MARGARINE",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 tablespoons",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "MARGARINE"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-PEACH-CRISP:I3",
+          "source_location": "Peach Crisp / directions5-6",
+          "source_wording": "3/4 cup quick-cooking oats",
+          "operational_source_wording": "mix everything but the peaches.",
+          "concept": "OATS_ROLLED",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "3/4 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "OATS_ROLLED"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-PEACH-CRISP:I4",
+          "source_location": "Peach Crisp / directions5-6",
+          "source_wording": "1/2 cup sugar",
+          "operational_source_wording": "mix everything but the peaches.",
+          "concept": "SUGAR",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/2 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "SUGAR"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-PEACH-CRISP:I5",
+          "source_location": "Peach Crisp / directions5-6",
+          "source_wording": "1/4 cup flour",
+          "operational_source_wording": "mix everything but the peaches.",
+          "concept": "FLOUR_WHEAT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/4 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "FLOUR_WHEAT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-PEACH-CRISP:I6",
+          "source_location": "Peach Crisp / directions5-6",
+          "source_wording": "2 teaspoons cinnamon",
+          "operational_source_wording": "mix everything but the peaches.",
+          "concept": "CINNAMON_GROUND",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 teaspoons",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "CINNAMON_GROUND"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-PEACH-CRISP:I7",
+          "source_location": "Peach Crisp / directions5-6",
+          "source_wording": "1 teaspoon lemon juice",
+          "operational_source_wording": "mix everything but the peaches.",
+          "concept": "LEMON",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [
+            "LEMON"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_required_consumable_count": 0,
+      "conclusion": "No unresolved required edible consumable found in reviewed execution; explicitly omitted optional additions and nonfood/process materials separately classified."
+    },
+    {
+      "recipe_source_id": "SNAP6-SEARED-GREENS",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "source_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "artifact_name": "data2-snap-spring.html",
+      "artifact_hash_checked": true,
+      "status": "REVIEWED",
+      "reviewed_sections": [
+        {
+          "scope": "ingredient_list",
+          "status": "REVIEWED",
+          "source_location": "Spring Recipes / Seared Greens / directions",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "numbered_directions",
+          "status": "REVIEWED",
+          "source_location": "Spring Recipes / Seared Greens / directions",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "preparation_notes",
+          "status": "REVIEWED",
+          "source_location": "HTML Seared Greens directions1-6",
+          "conclusion": "Clean greens, dry, then retain listed one cup steam water; no instruction to add extra water later or oil beyond list."
+        },
+        {
+          "scope": "footnotes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Spring Recipes / Seared Greens / directions",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "recipe_specific_tips",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Spring Recipes / Seared Greens / directions",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "alternative_methods",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Spring Recipes / Seared Greens / directions",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "supporting_instructions",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Spring Recipes / Seared Greens / directions",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        }
+      ],
+      "rows": [
+        {
+          "row_id": "SNAP6-SEARED-GREENS:I1",
+          "source_location": "Seared Greens / directions1-4",
+          "source_wording": "8 cups kale or collard greens (1 1/2 pounds)",
+          "operational_source_wording": "Add greens in pan",
+          "concept": "KALE",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "8 cups (1 1/2 pounds)",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "KALE"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-SEARED-GREENS:I2",
+          "source_location": "Seared Greens / directions2",
+          "source_wording": "2 tablespoons vegetable oil (or olive oil)",
+          "operational_source_wording": "sauté garlic in oil.",
+          "concept": "OLIVE_OIL",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 tablespoons",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "OLIVE_OIL"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-SEARED-GREENS:I3",
+          "source_location": "Seared Greens / directions2",
+          "source_wording": "4 garlic cloves (chopped)",
+          "operational_source_wording": "sauté garlic in oil.",
+          "concept": "GARLIC",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "4 cloves",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "GARLIC"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-SEARED-GREENS:I4",
+          "source_location": "Seared Greens / directions2-4",
+          "source_wording": "1 cup water",
+          "operational_source_wording": "with 1 cup water.",
+          "concept": "WATER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 cup",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "WATER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "RETAINED"
+        },
+        {
+          "row_id": "SNAP6-SEARED-GREENS:I5",
+          "source_location": "Seared Greens / directions4",
+          "source_wording": "1/4 teaspoon salt",
+          "operational_source_wording": "Add salt and pepper",
+          "concept": "SALT",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1/4 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "SALT"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-SEARED-GREENS:I6",
+          "source_location": "Seared Greens / directions4",
+          "source_wording": "1 teaspoon black pepper",
+          "operational_source_wording": "Add salt and pepper",
+          "concept": "BLACK_PEPPER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 teaspoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "BLACK_PEPPER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP6-SEARED-GREENS:I7",
+          "source_location": "Seared Greens / directions5",
+          "source_wording": "2 tablespoons vinegar, cider",
+          "operational_source_wording": "Sprinkle cider vinegar on mixture.",
+          "concept": "APPLE_CIDER_VINEGAR",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 tablespoons",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [
+            "APPLE_CIDER_VINEGAR"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_required_consumable_count": 0,
+      "conclusion": "No unresolved required edible consumable found in reviewed execution; explicitly omitted optional additions and nonfood/process materials separately classified."
+    },
+    {
+      "recipe_source_id": "SNAP8-SOMALI-SUMMER-SALAD",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+      "source_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "artifact_name": "data2-snap-summer.html",
+      "artifact_hash_checked": true,
+      "status": "REVIEWED",
+      "reviewed_sections": [
+        {
+          "scope": "ingredient_list",
+          "status": "REVIEWED",
+          "source_location": "Summer Recipes / Somali Summer Salad / directions",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "numbered_directions",
+          "status": "REVIEWED",
+          "source_location": "Summer Recipes / Somali Summer Salad / directions",
+          "conclusion": "Complete named recipe ingredient list and all operational directions read against actual hash-matching artifact."
+        },
+        {
+          "scope": "preparation_notes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Summer Recipes / Somali Summer Salad / directions",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "footnotes",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Summer Recipes / Somali Summer Salad / directions",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "recipe_specific_tips",
+          "status": "REVIEWED",
+          "source_location": "HTML same-recipe intro and final directions",
+          "conclusion": "Grilled meat/fish/tofu are serving suggestions, not selected additions. Salt/pepper explicitly optional."
+        },
+        {
+          "scope": "alternative_methods",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Summer Recipes / Somali Summer Salad / directions",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        },
+        {
+          "scope": "supporting_instructions",
+          "status": "NOT_PRESENT_NOT_USED",
+          "source_location": "Summer Recipes / Somali Summer Salad / directions",
+          "conclusion": "No additional recipe-specific operational instruction in this scope found or used beyond the separately identified source sections."
+        }
+      ],
+      "rows": [
+        {
+          "row_id": "SNAP8-SOMALI-SUMMER-SALAD:I1",
+          "source_location": "Somali Summer Salad / directions1",
+          "source_wording": "3 tablespoons olive oil",
+          "operational_source_wording": "combine oil and lemon juice.",
+          "concept": "OLIVE_OIL",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "3 tablespoons",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            1
+          ],
+          "food_ingredient_codes": [
+            "OLIVE_OIL"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP8-SOMALI-SUMMER-SALAD:I2",
+          "source_location": "Somali Summer Salad / directions1",
+          "source_wording": "1 tablespoon lemon juice",
+          "operational_source_wording": "combine oil and lemon juice.",
+          "concept": "LEMON",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "1 tablespoon",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            2
+          ],
+          "food_ingredient_codes": [
+            "LEMON"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP8-SOMALI-SUMMER-SALAD:I3",
+          "source_location": "Somali Summer Salad / directions2",
+          "source_wording": "3 apples",
+          "operational_source_wording": "Dice all the fruits and vegetables",
+          "concept": "APPLE",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "3 apples",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            3
+          ],
+          "food_ingredient_codes": [
+            "APPLE"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP8-SOMALI-SUMMER-SALAD:I4",
+          "source_location": "Somali Summer Salad / directions2",
+          "source_wording": "2 green peppers",
+          "operational_source_wording": "Dice all the fruits and vegetables",
+          "concept": "BELL_PEPPER_GREEN",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 peppers",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            4
+          ],
+          "food_ingredient_codes": [
+            "BELL_PEPPER_GREEN"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP8-SOMALI-SUMMER-SALAD:I5",
+          "source_location": "Somali Summer Salad / directions2",
+          "source_wording": "3 tomatoes",
+          "operational_source_wording": "Dice all the fruits and vegetables",
+          "concept": "TOMATO",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "3 tomatoes",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            5
+          ],
+          "food_ingredient_codes": [
+            "TOMATO"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP8-SOMALI-SUMMER-SALAD:I6",
+          "source_location": "Somali Summer Salad / directions2",
+          "source_wording": "2 cucumbers",
+          "operational_source_wording": "Dice all the fruits and vegetables",
+          "concept": "CUCUMBER",
+          "edible": true,
+          "quantity_explicit": true,
+          "quantity_text": "2 cucumbers",
+          "requirement": "REQUIRED",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            6
+          ],
+          "food_ingredient_codes": [
+            "CUCUMBER"
+          ],
+          "resolution": "ALREADY_STRUCTURED",
+          "rationale": "Named operational use is the measured source ingredient already in selection; no added quantity beyond that ingredient.",
+          "optionality_evidence": null,
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        },
+        {
+          "row_id": "SNAP8-SOMALI-SUMMER-SALAD:I7",
+          "source_location": "Somali Summer Salad / directions3 explicitly optional",
+          "source_wording": "salt and pepper (optional)",
+          "operational_source_wording": "Add salt and pepper to taste (optional).",
+          "concept": "salt and pepper (optional)",
+          "edible": true,
+          "quantity_explicit": false,
+          "quantity_text": null,
+          "requirement": "OPTIONAL",
+          "already_in_ingredient_list": true,
+          "ingredient_source_positions": [
+            7
+          ],
+          "food_ingredient_codes": [],
+          "resolution": "SOURCE_EXPLICIT_OPTIONAL_OMISSION",
+          "rationale": "Source explicitly marks the ingredient/add-in optional; omitted selection does not require invented quantity.",
+          "optionality_evidence": "salt and pepper (optional)",
+          "alternative_evidence": null,
+          "water_fate": "NOT_WATER"
+        }
+      ],
+      "unresolved_required_consumable_count": 0,
+      "conclusion": "No unresolved required edible consumable found in reviewed execution; explicitly omitted optional additions and nonfood/process materials separately classified."
+    }
+  ],
+  "summary": {
+    "recipes_reviewed": 15,
+    "unresolved_required_consumables": 2,
+    "blocked_recipe_ids": [
+      "CACFP6-LOCAL-HARVEST-BAKE",
+      "CACFP6-HONEY-LIME-CHICKEN"
+    ]
+  }
+}

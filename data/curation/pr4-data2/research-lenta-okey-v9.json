@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-05",
+  "scope": "Final Pear Orange Sauce replacement actual purchase forms. One-based filename:N references observations[N-1]. No live stock, price or retailer integration claim.",
+  "search_queries": [
+    "site:lenta.com/product/ \"Груши\" \"Конференция\"",
+    "site:lenta.com/product/ \"Груша Конференц\" \"весовая\"",
+    "site:lenta.com/product/ \"Груши\" \"весовые\"",
+    "site:lenta.com/product/ \"Апельсины\" \"весовые\""
+  ],
+  "exclusions": [
+    "Expired promotional PDFs excluded even where SPB/LO store addresses appear.",
+    "Canned fruit, juice drinks/nectar, dried fruits and frozen orange concentrate are not selected forms.",
+    "No retailer health claims, source-to-retail mass conversion, juicing yield or nutrient figures imported."
+  ],
+  "observations": [
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "code": "PEAR",
+      "url": "https://lenta.com/product/grusha-konferenc-ves-44185/",
+      "wording": "Груши Конференц, весовые; whole pears with elongated shape and juicy flesh.",
+      "notes": "Ordinary raw pear purchase member. Select four medium pears per source, peel and cut during preparation. Source does not require a cultivar; no count-to-mass conversion. Current indexed official product last month, no selected-city binding."
+    },
+    {
+      "retailer": "Лента",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "status": "AVAILABLE",
+      "code": "ORANGE",
+      "url": "https://lenta.com/product/apelsiny-dlya-soka-713677/",
+      "wording": "Апельсины для сока, весовые; sole ingredient апельсин, described for preparation of juice.",
+      "notes": "Whole raw oranges purchased and squeezed to prepare source 100% orange juice. Parent-approved existing ORANGE concept follows prepared-citrus-juice normalization, not boxed nectar or concentrate. Preserve three-quarter cup pure prepared juice; no invented whole-fruit count, juicing yield, added water or sugar. Current official neutral product indexed two weeks ago. Additional current ordinary orange listing /product/apelsiny-ves-11225/ indexed yesterday."
+    }
+  ]
+}

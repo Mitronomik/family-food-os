@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "research_scope": "Read-only primary-source market evidence for PYATEROCHKA and PEREKRESTOK; partial findings, not a completed ingredient audit",
+  "checked_at": "2026-09-05T08:07:21Z",
+  "target_region": "Saint Petersburg / Leningrad Region",
+  "availability_summary": "No current region-qualified AVAILABLE observation was established for either X5 chain. This is an evidence-access limitation, not a claim that products are absent from stores.",
+  "access_attempts": [
+    {
+      "retailer_chain": "PEREKRESTOK",
+      "evidence_url": "https://www.perekrestok.ru/",
+      "checked_at": "2026-09-05T08:04:51Z",
+      "status": "UNCERTAIN",
+      "method": "Web fetch followed by ordinary browser navigation",
+      "observed_text": "Пожалуйста, пройдите проверку, чтобы получить доступ к сайту.",
+      "notes": "The web fetch yielded no catalogue text; the browser presented a human-verification challenge before any regional catalogue could be selected. The challenge was not completed or bypassed. No session URL, device fingerprint, request identifier or IP is retained."
+    },
+    {
+      "retailer_chain": "PYATEROCHKA",
+      "evidence_url": "https://5ka.ru/",
+      "checked_at": "2026-09-05T08:05:39Z",
+      "status": "UNCERTAIN",
+      "method": "Web fetch followed by ordinary browser navigation",
+      "observed_text": "Пожалуйста, пройдите проверку, чтобы получить доступ к сайту.",
+      "notes": "Web fetch returned HTTP 403; the browser presented a human-verification challenge. No catalogue region was established. No challenge completion, account access, cart action or protection bypass was attempted. An indexed category URL also failed direct fetch."
+    }
+  ],
+  "observations": [
+    {
+      "food_ingredient_code": "EDAMAME_FROZEN",
+      "retailer_chain": "PEREKRESTOK",
+      "region": "Saint Petersburg / Leningrad Region",
+      "region_verified": false,
+      "region_evidence_url": null,
+      "region_observed_text": null,
+      "evidence_url": "https://files.perekrestok.ru/static/files/69/45/3c311371f7bcff0f6xdeac846a0c.pdf",
+      "observed_product_wording": "Бобы БЛИЖНЯЯ ДАЧА: Эдамаме соевые, зелёные, очищенные, замороженные, 300 г",
+      "checked_at": "2026-09-05",
+      "status": "UNCERTAIN",
+      "notes": "Official flyer surfaced through indexed primary-source search, but search metadata describes a publication approximately 1.8 years old and no SPB/LO region was established. Historical product/form lead only; cannot support current AVAILABLE or a mass-market count."
+    },
+    {
+      "food_ingredient_code": "EDAMAME_FROZEN",
+      "retailer_chain": "PEREKRESTOK",
+      "region": "Saint Petersburg / Leningrad Region",
+      "region_verified": false,
+      "region_evidence_url": null,
+      "region_observed_text": null,
+      "evidence_url": "https://files.perekrestok.ru/static/files/29/29/6aeec9e3c0dd9724a70d62700ed9.pdf",
+      "observed_product_wording": "Бобы эдамаме МАРКЕТ COLLECTION замороженные, 300 г",
+      "checked_at": "2026-09-05",
+      "status": "UNCERTAIN",
+      "notes": "Official indexed flyer, approximately 1.3 years old according to search metadata. No current SPB/LO context established; shelled form was not explicit in the retrieved wording. Not accepted as availability evidence."
+    }
+  ],
+  "excluded_evidence_leads": [
+    {
+      "retailer_chain": "PEREKRESTOK",
+      "evidence_url": "https://files.perekrestok.ru/static/files/1e/b9/cd0651a5369b51bf1871fa2ea0ea.pdf",
+      "region_observed_text": "Санкт-Петербург; Ленинградская обл.; Гатчина",
+      "date_observed_text": "Цены действительны с 22 по 28 апреля 2025 года.",
+      "reason": "Region-qualified but expired flyer. Retrieved milk wording was 2.5%, not the current corpus's 1% or skim milk concepts. Neither stale evidence nor a different fat specification is accepted as a match."
+    },
+    {
+      "retailer_chain": "PYATEROCHKA",
+      "evidence_url": "https://lp.5ka.ru/vbd/",
+      "reason": "Search returned a milk promotion with a Saint Petersburg legal address; a company's legal address is not evidence of regional product availability."
+    },
+    {
+      "retailer_chain": "PYATEROCHKA",
+      "evidence_url": "https://5ka.ru/catalog/sgushchenka--251C51975/",
+      "reason": "Indexed category discovered, but direct fetch failed and no SPB region was visible. Condensed milk is not substituted for 1% or skim milk."
+    }
+  ],
+  "bounded_search_log": [
+    "PEREKRESTOK official domain: edamame; Saint Petersburg milk; low-sodium broth; ancho; current 2026 Saint Petersburg catalogue",
+    "PYATEROCHKA official domain: Saint Petersburg catalogue; Saint Petersburg milk; edamame; Saint Petersburg salt/sugar/oil/spices",
+    "Empty or unrelated indexed search results are not NOT_FOUND stock observations."
+  ],
+  "follow_up_requirement": "A permitted current regional catalogue view, official current regional flyer, or independently reviewed store-level evidence is needed before any X5 observation can count towards the ingredient gate. Do not infer availability from retailer presence, historical flyers, legal addresses, generic national pages or culinary convention."
+}

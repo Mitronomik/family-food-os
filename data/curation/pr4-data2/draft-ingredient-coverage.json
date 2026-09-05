@@ -1,0 +1,3235 @@
+{
+  "schema_version": 1,
+  "status": "REVIEWED_SELECTION_PENDING_PROJECT_ACCEPT",
+  "checked_at": "2026-09-05",
+  "method": "Primary exact factual ingredient-list transcription, with alternatives and omitted optional ingredients retained. Typography and whitespace may be normalized; source quantities are not converted. Explicit direction-only food/water rows retained. Global codes express purchase concepts, not a claim that cooked/raw or fresh/frozen forms are equivalent. This draft is not a final corpus, rights clearance, market clearance, or runtime/seed payload.",
+  "selection_note": "Correction-pass selection; quantities and optionality reviewed against primary artifacts. Exact counts derived from rows; not authorized for runtime until ACCEPT + merge.",
+  "counts": {
+    "recipes": 30,
+    "historical_recipes": 3,
+    "new_recipes": 27,
+    "source_rows": 225,
+    "selected_food_concept_rows": 189,
+    "distinct_selected_existing_codes": 81,
+    "required_food_concept_rows": 185,
+    "selected_optional_food_concept_rows": 3,
+    "selected_conditional_food_concept_rows": 1
+  },
+  "selected_existing_codes": [
+    "ALMONDS_RAW",
+    "APPLE",
+    "APPLE_CIDER_VINEGAR",
+    "ASPARAGUS",
+    "BANANA",
+    "BELL_PEPPER_GREEN",
+    "BELL_PEPPER_RED",
+    "BLACK_PEPPER",
+    "BREADCRUMBS",
+    "BREAD_WHOLE_WHEAT",
+    "BULGUR",
+    "BUTTERNUT_SQUASH",
+    "BUTTER_UNSALTED",
+    "CABBAGE_GREEN",
+    "CABBAGE_RED",
+    "CANOLA_OIL",
+    "CARROT",
+    "CAULIFLOWER",
+    "CELERY",
+    "CHEESE_CHEDDAR",
+    "CHICKEN_THIGH",
+    "CILANTRO",
+    "CINNAMON_GROUND",
+    "COD_ATLANTIC",
+    "CORIANDER_SEED",
+    "CORN_SWEET",
+    "CRANBERRIES_DRIED",
+    "CUCUMBER",
+    "CUMIN_GROUND",
+    "DILL_DRIED",
+    "EDAMAME_FROZEN",
+    "EGG",
+    "FLOUR_WHEAT",
+    "GARLIC",
+    "GARLIC_POWDER",
+    "GINGER",
+    "GREEN_BEANS",
+    "GREEN_ONION",
+    "HONEY",
+    "KALE",
+    "LEMON",
+    "LENTILS_DRY",
+    "LIME_JUICE",
+    "MARGARINE",
+    "MAYONNAISE_LOW_FAT",
+    "MILK_1_PERCENT",
+    "MINT_FRESH",
+    "OATS_ROLLED",
+    "OLIVE_OIL",
+    "ONION_RED",
+    "ONION_YELLOW",
+    "ORANGE",
+    "PARSLEY",
+    "PARSLEY_DRIED",
+    "PASTA_DRY",
+    "PEACH",
+    "PEAR",
+    "PINEAPPLE",
+    "PORK_LOIN",
+    "POTATO",
+    "QUINOA",
+    "RADISH",
+    "RAISINS_GOLDEN",
+    "RICE_BROWN",
+    "ROSEMARY_DRIED",
+    "SALT",
+    "SESAME_OIL",
+    "SESAME_SEEDS",
+    "SPINACH",
+    "STRAWBERRY",
+    "SUGAR",
+    "SUNFLOWER_OIL",
+    "SWEET_POTATO",
+    "THYME_DRIED",
+    "TILAPIA_RAW",
+    "TOMATO",
+    "TOMATO_CANNED_NO_SALT",
+    "WALNUTS_RAW",
+    "WATER",
+    "YOGURT_GREEK_NONFAT",
+    "YOGURT_PLAIN_LOW_FAT"
+  ],
+  "recipes": [
+    {
+      "source_recipe_id": "CACFP6-CORN-EDAMAME-BLEND",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
+      "source_servings": 6,
+      "review_basis": "HISTORICAL_ACCEPTED_COVERAGE_VERBATIM_COPY_NOT_RETRANSCRIPTION",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "1 tsp Sesame oil",
+          "selected_codes": [
+            "SESAME_OIL"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 tsp Sesame oil",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CORN-EDAMAME-BLEND",
+            "source_ingredient_text": "1 tsp Sesame oil",
+            "normalized_concept": "sesame_oil",
+            "existing_food_ingredient_code": "SESAME_OIL",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 2,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "⅔ cup or 3 oz Fresh onions, chopped",
+          "selected_codes": [
+            "ONION_YELLOW"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "⅔ cup or 3 oz Fresh onions, chopped",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CORN-EDAMAME-BLEND",
+            "source_ingredient_text": "⅔ cup or 3 oz Fresh onions, chopped",
+            "normalized_concept": "onion_yellow",
+            "existing_food_ingredient_code": "ONION_YELLOW",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 3,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "2 tsp Garlic, minced",
+          "selected_codes": [
+            "GARLIC"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2 tsp Garlic, minced",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CORN-EDAMAME-BLEND",
+            "source_ingredient_text": "2 tsp Garlic, minced",
+            "normalized_concept": "garlic",
+            "existing_food_ingredient_code": "GARLIC",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 4,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "⅔ cup or 5 oz Frozen corn, thawed, drained",
+          "selected_codes": [
+            "CORN_SWEET"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "⅔ cup or 5 oz Frozen corn, thawed, drained",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CORN-EDAMAME-BLEND",
+            "source_ingredient_text": "⅔ cup or 5 oz Frozen corn, thawed, drained",
+            "normalized_concept": "corn_sweet",
+            "existing_food_ingredient_code": "CORN_SWEET",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 5,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "1 cup or 6 oz Frozen edamame, thawed, drained",
+          "selected_codes": [
+            "EDAMAME_FROZEN"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 cup or 6 oz Frozen edamame, thawed, drained",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CORN-EDAMAME-BLEND",
+            "source_ingredient_text": "1 cup or 6 oz Frozen edamame, thawed, drained",
+            "normalized_concept": "edamame_frozen",
+            "existing_food_ingredient_code": "EDAMAME_FROZEN",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 6,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "1 ½ cups or 6 oz Fresh carrots, shredded",
+          "selected_codes": [
+            "CARROT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 ½ cups or 6 oz Fresh carrots, shredded",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CORN-EDAMAME-BLEND",
+            "source_ingredient_text": "1 ½ cups or 6 oz Fresh carrots, shredded",
+            "normalized_concept": "carrot",
+            "existing_food_ingredient_code": "CARROT",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 7,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "¼ tsp Ground coriander seeds",
+          "selected_codes": [
+            "CORIANDER_SEED"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ tsp Ground coriander seeds",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CORN-EDAMAME-BLEND",
+            "source_ingredient_text": "¼ tsp Ground coriander seeds",
+            "normalized_concept": "coriander_seed",
+            "existing_food_ingredient_code": "CORIANDER_SEED",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 8,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "1 tsp Toasted sesame seeds",
+          "selected_codes": [
+            "SESAME_SEEDS"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 tsp Toasted sesame seeds",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CORN-EDAMAME-BLEND",
+            "source_ingredient_text": "1 tsp Toasted sesame seeds",
+            "normalized_concept": "sesame_seeds",
+            "existing_food_ingredient_code": "SESAME_SEEDS",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 9,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "¼ tsp Salt",
+          "selected_codes": [
+            "SALT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ tsp Salt",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CORN-EDAMAME-BLEND",
+            "source_ingredient_text": "¼ tsp Salt",
+            "normalized_concept": "salt",
+            "existing_food_ingredient_code": "SALT",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 10,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "¼ cup or ½ oz Fresh cilantro, chopped",
+          "selected_codes": [
+            "CILANTRO"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ cup or ½ oz Fresh cilantro, chopped",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CORN-EDAMAME-BLEND",
+            "source_ingredient_text": "¼ cup or ½ oz Fresh cilantro, chopped",
+            "normalized_concept": "cilantro",
+            "existing_food_ingredient_code": "CILANTRO",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [
+        "Historical optional rows retained as selected exactly as accepted; this is not a newly omitted source optional."
+      ],
+      "source_limitations": []
+    },
+    {
+      "source_recipe_id": "SNAP6-HEAVENLY-DEVILED-EGGS",
+      "source_url": "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
+      "source_servings": 6,
+      "review_basis": "Actual complete primary artifact and all recipe-specific instructions/notes re-reviewed in direction-consumables correction 2026-09-05.",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "Ingredients",
+          "source_text": "6 eggs (in shell)",
+          "selected_codes": [
+            "EGG"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "6",
+          "normalization_reason": "Literal source amount and existing canonical member; no weight or yield conversion."
+        },
+        {
+          "position": 2,
+          "source_section": "Ingredients",
+          "source_text": "2 tablespoons light mayonnaise",
+          "selected_codes": [
+            "MAYONNAISE_LOW_FAT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2 tablespoons",
+          "normalization_reason": "Literal source amount and existing canonical member; no weight or yield conversion."
+        },
+        {
+          "position": 3,
+          "source_section": "Ingredients; explicit Notes alternative selected",
+          "source_text": "1 teaspoon mustard",
+          "selected_codes": [],
+          "selection": "OMITTED_VARIANT",
+          "quantity_text": "1 teaspoon",
+          "normalization_reason": "Source explicitly permits 1/8 tsp each salt and pepper instead of 1 tsp mustard; two selected note rows preserve each amount without inventing a seasoning quantity. Existing black pepper is the selected member of source-generic pepper."
+        },
+        {
+          "position": 4,
+          "source_section": "Notes: salt allocation",
+          "source_text": "1/8 tsp each of salt and pepper may be substituted for 1 tsp mustard.",
+          "selected_codes": [
+            "SALT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/8 tsp",
+          "normalization_reason": "Source explicitly permits 1/8 tsp each salt and pepper instead of 1 tsp mustard; two selected note rows preserve each amount without inventing a seasoning quantity. Existing black pepper is the selected member of source-generic pepper."
+        },
+        {
+          "position": 5,
+          "source_section": "Notes: pepper allocation",
+          "source_text": "1/8 tsp each of salt and pepper may be substituted for 1 tsp mustard.",
+          "selected_codes": [
+            "BLACK_PEPPER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/8 tsp",
+          "normalization_reason": "Source explicitly permits 1/8 tsp each salt and pepper instead of 1 tsp mustard; two selected note rows preserve each amount without inventing a seasoning quantity. Existing black pepper is the selected member of source-generic pepper."
+        },
+        {
+          "position": 6,
+          "source_section": "Instruction 7 and Notes",
+          "source_text": "Garnish as desired; paprika, cayenne pepper, pickle relish, sliced scallions, or sliced green or black olives",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": null,
+          "normalization_reason": "Source says garnish as desired; all garnish choices omitted explicitly, without invented quantity."
+        },
+        {
+          "position": 7,
+          "source_section": "Instructions 1, 3, 4: discarded process water",
+          "source_text": "Cover with cold water; remove from heat and drain; crack eggs under cold water",
+          "selected_codes": [],
+          "selection": "OMITTED_VARIANT",
+          "quantity_text": null,
+          "normalization_reason": "Source explicitly drains boiling water; cracking/cooling water is discarded process use, not retained food or purchased WATER."
+        }
+      ],
+      "unresolved_issues": [],
+      "source_limitations": [
+        "Source directions name dressing while the ingredient table names light mayonnaise. Preserve that wording without introducing a second ingredient.",
+        "The source PDF has no separate prep/cook/total-time fields. The twelve-minute simmer is not a full preparation-time estimate.",
+        "Do not infer a knife or scissors from cut/split verbs: these objects are not named in the selected primary PDF recipe.",
+        "Actual PDF hash and visual recipe-page review are complete. All eight extracted pages were checked; no recipe-specific copyright/reuse restriction appeared. ONIE is credited, not declared a federal employee. No nutrition values from the unmodified source recipe are asserted for the selected salt/pepper alternative."
+      ]
+    },
+    {
+      "source_recipe_id": "CACFP6-TABBOULEH",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tabbouleh_6_Servings.pdf",
+      "source_servings": 6,
+      "review_basis": "HISTORICAL_ACCEPTED_COVERAGE_VERBATIM_COPY_NOT_RETRANSCRIPTION",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "⅓ cup or 3 oz Quinoa, dry",
+          "selected_codes": [
+            "QUINOA"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "⅓ cup or 3 oz Quinoa, dry",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-TABBOULEH",
+            "source_ingredient_text": "⅓ cup or 3 oz Quinoa, dry",
+            "normalized_concept": "quinoa",
+            "existing_food_ingredient_code": "QUINOA",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 2,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "½ cup or 3 oz Bulgur wheat, dry",
+          "selected_codes": [
+            "BULGUR"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ cup or 3 oz Bulgur wheat, dry",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-TABBOULEH",
+            "source_ingredient_text": "½ cup or 3 oz Bulgur wheat, dry",
+            "normalized_concept": "bulgur",
+            "existing_food_ingredient_code": "BULGUR",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 3,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "1 ⅓ cups or 11 oz Water",
+          "selected_codes": [
+            "WATER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 ⅓ cups or 11 oz Water",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-TABBOULEH",
+            "source_ingredient_text": "1 ⅓ cups or 11 oz Water",
+            "normalized_concept": "water",
+            "existing_food_ingredient_code": "WATER",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 4,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "½ tsp Salt",
+          "selected_codes": [
+            "SALT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ tsp Salt",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-TABBOULEH",
+            "source_ingredient_text": "½ tsp Salt",
+            "normalized_concept": "salt",
+            "existing_food_ingredient_code": "SALT",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 5,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "1 ½ cups or 9 ⅓ oz Fresh tomatoes, unpeeled, diced",
+          "selected_codes": [
+            "TOMATO"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 ½ cups or 9 ⅓ oz Fresh tomatoes, unpeeled, diced",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-TABBOULEH",
+            "source_ingredient_text": "1 ½ cups or 9 ⅓ oz Fresh tomatoes, unpeeled, diced",
+            "normalized_concept": "tomato",
+            "existing_food_ingredient_code": "TOMATO",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 6,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "1 cup or 4 ¾ oz Fresh cucumbers, peeled, seeded, diced",
+          "selected_codes": [
+            "CUCUMBER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 cup or 4 ¾ oz Fresh cucumbers, peeled, seeded, diced",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-TABBOULEH",
+            "source_ingredient_text": "1 cup or 4 ¾ oz Fresh cucumbers, peeled, seeded, diced",
+            "normalized_concept": "cucumber",
+            "existing_food_ingredient_code": "CUCUMBER",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 7,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "¼ cup or ½ oz Fresh parsley, chopped",
+          "selected_codes": [
+            "PARSLEY"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ cup or ½ oz Fresh parsley, chopped",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-TABBOULEH",
+            "source_ingredient_text": "¼ cup or ½ oz Fresh parsley, chopped",
+            "normalized_concept": "parsley",
+            "existing_food_ingredient_code": "PARSLEY",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 8,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "¼ cup or 1 ½ oz Fresh onions, diced",
+          "selected_codes": [
+            "ONION_YELLOW"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ cup or 1 ½ oz Fresh onions, diced",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-TABBOULEH",
+            "source_ingredient_text": "¼ cup or 1 ½ oz Fresh onions, diced",
+            "normalized_concept": "onion_yellow",
+            "existing_food_ingredient_code": "ONION_YELLOW",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 9,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "¼ cup or 1 ¼ oz Fresh red bell peppers, diced",
+          "selected_codes": [
+            "BELL_PEPPER_RED"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ cup or 1 ¼ oz Fresh red bell peppers, diced",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-TABBOULEH",
+            "source_ingredient_text": "¼ cup or 1 ¼ oz Fresh red bell peppers, diced",
+            "normalized_concept": "bell_pepper_red",
+            "existing_food_ingredient_code": "BELL_PEPPER_RED",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 10,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "¼ tsp Fresh mint, chopped",
+          "selected_codes": [
+            "MINT_FRESH"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ tsp Fresh mint, chopped",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-TABBOULEH",
+            "source_ingredient_text": "¼ tsp Fresh mint, chopped",
+            "normalized_concept": "mint_fresh",
+            "existing_food_ingredient_code": "MINT_FRESH",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 11,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "¼ tsp Ground cumin",
+          "selected_codes": [
+            "CUMIN_GROUND"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ tsp Ground cumin",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-TABBOULEH",
+            "source_ingredient_text": "¼ tsp Ground cumin",
+            "normalized_concept": "cumin_ground",
+            "existing_food_ingredient_code": "CUMIN_GROUND",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 12,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "¼ cup or 2 oz Lemon juice",
+          "selected_codes": [
+            "LEMON"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ cup or 2 oz Lemon juice",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-TABBOULEH",
+            "source_ingredient_text": "¼ cup or 2 oz Lemon juice",
+            "normalized_concept": "lemon",
+            "existing_food_ingredient_code": "LEMON",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 13,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "2 ¼ tsp Olive oil",
+          "selected_codes": [
+            "OLIVE_OIL"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2 ¼ tsp Olive oil",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-TABBOULEH",
+            "source_ingredient_text": "2 ¼ tsp Olive oil",
+            "normalized_concept": "olive_oil",
+            "existing_food_ingredient_code": "OLIVE_OIL",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [
+        "Historical optional rows retained as selected exactly as accepted; this is not a newly omitted source optional."
+      ],
+      "source_limitations": []
+    },
+    {
+      "source_recipe_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese/printable/print",
+      "source_servings": 1,
+      "review_basis": "Actual complete primary artifact and all recipe-specific instructions/notes re-reviewed in direction-consumables correction 2026-09-05.",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "Ingredients",
+          "source_text": "whole wheat bread (2 slices)",
+          "selected_codes": [
+            "BREAD_WHOLE_WHEAT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2 slices",
+          "normalization_reason": "Source count retained exactly; no grams, retailer-package or count-to-weight conversion."
+        },
+        {
+          "position": 2,
+          "source_section": "Ingredients",
+          "source_text": "1 T (tablespoon) harissa (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "1 tablespoon",
+          "normalization_reason": "Explicit optional label; no substitute spread selected."
+        },
+        {
+          "position": 3,
+          "source_section": "Ingredients",
+          "source_text": "3/4 c (cup) cheese (grated, try Muenster, Monterey jack or mozzarella)",
+          "selected_codes": [
+            "CHEESE_CHEDDAR"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "3/4 cup",
+          "normalization_reason": "Generic cheese is not restricted to the examples; cheddar is itself mentioned in the source flavor ideas. Selected ordinary natural cheddar, not a processed cheese product."
+        },
+        {
+          "position": 4,
+          "source_section": "Ingredients",
+          "source_text": "1/2 c (cup) broccoli and cauliflower (roasted, cut into small pieces or use fresh veggies of your choice)",
+          "selected_codes": [
+            "CAULIFLOWER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/2 cup",
+          "normalization_reason": "Select all 1/2 cup as fresh cauliflower under explicit fresh vegetables of choice alternative. No ratio invented, no roasting workflow silently omitted."
+        },
+        {
+          "position": 5,
+          "source_section": "Ingredients",
+          "source_text": "oil spray (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": null,
+          "normalization_reason": "Source explicitly permits nonstick-pan no-butter method; listed spray optional and step 2 conditional if needed."
+        }
+      ],
+      "unresolved_issues": [],
+      "source_limitations": [
+        "Main directions imply closing sandwich but do not separately state placing second bread slice; ingredient list explicitly has 2 slices and instruction 7 grills sandwich. Preserve source wording; do not author a new step.",
+        "Generic cheese permits cheddar; named examples are non-exhaustive. Do not claim cheese quantity is grams or corresponds to a fixed retailer package.",
+        "Half-cup fresh vegetables of choice permits fresh cauliflower as the sole vegetable; no roast yields, ingredient ratios or cooking aids inferred.",
+        "Fresh cauliflower is a preparation selection; use reviewed fresh CAULIFLOWER market evidence, not frozen smoothie evidence.",
+        "DAIRY is curation-only protein-family metadata supported by selected CHEESE_CHEDDAR, not an extension of PR4 MealTypeCode or any runtime schema.",
+        "Equipment notes list spoon, but its only explicit directional use is omitted optional harissa spreading; selected equipment retains nonstick pan and knife only. No replacement spoon action invented."
+      ]
+    },
+    {
+      "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf",
+      "source_servings": 6,
+      "review_basis": "HISTORICAL_ACCEPTED_COVERAGE_VERBATIM_COPY_NOT_RETRANSCRIPTION",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "½ cup or 5 oz Low-fat yogurt, plain",
+          "selected_codes": [
+            "YOGURT_PLAIN_LOW_FAT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ cup or 5 oz Low-fat yogurt, plain",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
+            "source_ingredient_text": "½ cup or 5 oz Low-fat yogurt, plain",
+            "normalized_concept": "yogurt_plain_low_fat",
+            "existing_food_ingredient_code": "YOGURT_PLAIN_LOW_FAT",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 2,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "¼ cup or 2 oz Low-fat mayonnaise",
+          "selected_codes": [
+            "MAYONNAISE_LOW_FAT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ cup or 2 oz Low-fat mayonnaise",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
+            "source_ingredient_text": "¼ cup or 2 oz Low-fat mayonnaise",
+            "normalized_concept": "mayonnaise_low_fat",
+            "existing_food_ingredient_code": "MAYONNAISE_LOW_FAT",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 3,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "¼ cup or 2 ½ oz Honey",
+          "selected_codes": [
+            "HONEY"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ cup or 2 ½ oz Honey",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
+            "source_ingredient_text": "¼ cup or 2 ½ oz Honey",
+            "normalized_concept": "honey",
+            "existing_food_ingredient_code": "HONEY",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 4,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "⅛ cup Apple cider vinegar",
+          "selected_codes": [
+            "APPLE_CIDER_VINEGAR"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "⅛ cup Apple cider vinegar",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
+            "source_ingredient_text": "⅛ cup Apple cider vinegar",
+            "normalized_concept": "apple_cider_vinegar",
+            "existing_food_ingredient_code": "APPLE_CIDER_VINEGAR",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 5,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "¼ tsp Salt",
+          "selected_codes": [
+            "SALT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ tsp Salt",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
+            "source_ingredient_text": "¼ tsp Salt",
+            "normalized_concept": "salt",
+            "existing_food_ingredient_code": "SALT",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 6,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "¼ tsp Ground black pepper",
+          "selected_codes": [
+            "BLACK_PEPPER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ tsp Ground black pepper",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
+            "source_ingredient_text": "¼ tsp Ground black pepper",
+            "normalized_concept": "black_pepper",
+            "existing_food_ingredient_code": "BLACK_PEPPER",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 7,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "4 cups or 6 oz Fresh green cabbage, chilled, shredded",
+          "selected_codes": [
+            "CABBAGE_GREEN"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "4 cups or 6 oz Fresh green cabbage, chilled, shredded",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
+            "source_ingredient_text": "4 cups or 6 oz Fresh green cabbage, chilled, shredded",
+            "normalized_concept": "cabbage_green",
+            "existing_food_ingredient_code": "CABBAGE_GREEN",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 8,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "¾ cup or 1 ¼ oz Fresh purple cabbage, chilled, shredded",
+          "selected_codes": [
+            "CABBAGE_RED"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¾ cup or 1 ¼ oz Fresh purple cabbage, chilled, shredded",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
+            "source_ingredient_text": "¾ cup or 1 ¼ oz Fresh purple cabbage, chilled, shredded",
+            "normalized_concept": "cabbage_red",
+            "existing_food_ingredient_code": "CABBAGE_RED",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 9,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "¾ cup or 2 oz Fresh carrots, shredded",
+          "selected_codes": [
+            "CARROT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¾ cup or 2 oz Fresh carrots, shredded",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
+            "source_ingredient_text": "¾ cup or 2 oz Fresh carrots, shredded",
+            "normalized_concept": "carrot",
+            "existing_food_ingredient_code": "CARROT",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 10,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "½ cup or 1 oz Fresh green onions, diced",
+          "selected_codes": [
+            "GREEN_ONION"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ cup or 1 oz Fresh green onions, diced",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
+            "source_ingredient_text": "½ cup or 1 oz Fresh green onions, diced",
+            "normalized_concept": "green_onion",
+            "existing_food_ingredient_code": "GREEN_ONION",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        },
+        {
+          "position": 11,
+          "source_section": "HISTORICAL_COVERAGE",
+          "source_text": "½ cup or 2 ¼ oz Dried cranberries",
+          "selected_codes": [
+            "CRANBERRIES_DRIED"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ cup or 2 ¼ oz Dried cranberries",
+          "normalization_reason": "Exact accepted historical coverage row retained; quantity remains embedded in verbatim source text, no re-normalization.",
+          "historical_row": {
+            "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
+            "source_ingredient_text": "½ cup or 2 ¼ oz Dried cranberries",
+            "normalized_concept": "cranberries_dried",
+            "existing_food_ingredient_code": "CRANBERRIES_DRIED",
+            "resolution_status": "RESOLVED_EXISTING",
+            "missing_reason": ""
+          }
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [
+        "Historical optional rows retained as selected exactly as accepted; this is not a newly omitted source optional."
+      ],
+      "source_limitations": [
+        {
+          "source_fact": "Source header says cooking 10 minutes although directions perform no cooking. Preserve reported field, flag mismatch; do not invent heating.",
+          "review_decision": "PRESERVE_SOURCE_AND_DISTINGUISH_CURATED_SELECTION"
+        }
+      ]
+    },
+    {
+      "source_recipe_id": "TNC6-EGGS-SPINACH",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+      "source_servings": 6,
+      "review_basis": "PRIMARY_SOURCE_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 teaspoon olive, canola, or vegetable oil",
+          "selected_codes": [
+            "OLIVE_OIL"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 teaspoon",
+          "normalization_reason": "Select explicit olive oil alternative."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "12 large eggs",
+          "selected_codes": [
+            "EGG"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "12 large",
+          "normalization_reason": "Shell eggs; not frozen liquid eggs."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "3 cups rinsed chopped fresh spinach",
+          "selected_codes": [
+            "SPINACH"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "3 cups",
+          "normalization_reason": "Select explicit fresh spinach; rinsed/chopped are preparation."
+        },
+        {
+          "position": 4,
+          "source_section": "INGREDIENTS",
+          "source_text": "6 slices whole-wheat bread, toasted (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "6 slices",
+          "normalization_reason": "Optional serving accompaniment omitted."
+        },
+        {
+          "position": 5,
+          "source_section": "INGREDIENTS",
+          "source_text": "ground pepper or other herbs and spices (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "not specified",
+          "normalization_reason": "Optional seasoning omitted."
+        },
+        {
+          "position": 6,
+          "source_section": "OPTIONAL_ADD_INS",
+          "source_text": "Sliced onion or scallions (¼ cup per 2 eggs)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "¼ cup per 2 eggs",
+          "normalization_reason": "Optional add-in not selected."
+        },
+        {
+          "position": 7,
+          "source_section": "OPTIONAL_ADD_INS",
+          "source_text": "Sliced mushrooms (¼ cup per 2 eggs)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "¼ cup per 2 eggs",
+          "normalization_reason": "Optional add-in not selected."
+        },
+        {
+          "position": 8,
+          "source_section": "OPTIONAL_ADD_INS",
+          "source_text": "Diced peppers or zucchini (¼ cup per 2 eggs)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "¼ cup per 2 eggs",
+          "normalization_reason": "Optional add-in not selected."
+        },
+        {
+          "position": 9,
+          "source_section": "OPTIONAL_ADD_INS",
+          "source_text": "Herbs (½ teaspoon dried), such as basil or tarragon",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "½ teaspoon",
+          "normalization_reason": "Optional add-in not selected."
+        },
+        {
+          "position": 10,
+          "source_section": "OPTIONAL_ADD_INS",
+          "source_text": "Diced tomatoes (¼ cup per 2 eggs)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "¼ cup per 2 eggs",
+          "normalization_reason": "Optional add-in not selected."
+        },
+        {
+          "position": 11,
+          "source_section": "OPTIONAL_ADD_INS",
+          "source_text": "Chopped kale (¼ cup per 2 eggs)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "¼ cup per 2 eggs",
+          "normalization_reason": "Optional add-in not selected."
+        },
+        {
+          "position": 12,
+          "source_section": "OPTIONAL_ADD_INS",
+          "source_text": "Herbs (½ tablespoon chopped fresh basil, flat-leaf parsley, or cilantro leaves)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "½ tablespoon",
+          "normalization_reason": "Optional add-in not selected."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [
+        "Recipe on PDF page index4 / printed3. Shopping list permits thawed frozen spinach as an alternative; fresh selected."
+      ],
+      "source_limitations": []
+    },
+    {
+      "source_recipe_id": "TNC6-APPLESAUCE",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+      "source_servings": 6,
+      "review_basis": "PRIMARY_SOURCE_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "6 apples, any variety, rinsed",
+          "selected_codes": [
+            "APPLE"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "6 apples",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "½ cup water",
+          "selected_codes": [
+            "WATER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ cup",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "½ teaspoon of cinnamon (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "½ teaspoon",
+          "normalization_reason": "Explicit optional cinnamon omitted."
+        },
+        {
+          "position": 4,
+          "source_section": "SHOPPING_LIST",
+          "source_text": "Dried spices, such as nutmeg, ginger, or cloves (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "not specified",
+          "normalization_reason": "Shopping-list optional spices omitted."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [
+        "Primary downloaded PDF text artifact data2-tnc-applesauce.txt, recipe printed3 / index4. No handwashing or rinsing water row added."
+      ],
+      "source_limitations": []
+    },
+    {
+      "source_recipe_id": "SNAP4-SPANISH-FRITTATA",
+      "source_url": "https://snaped.fns.usda.gov/snap/MPMF/Handouts/HowMuchFoodandPhysicalActivityHandouts.pdf",
+      "source_servings": 4,
+      "review_basis": "ACTUAL_PRIMARY_PDF_TEXT_AND_VISUAL_REVIEW_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "Ingredients",
+          "source_text": "1½ pounds (about 2) russet potatoes, scrubbed",
+          "selected_codes": [
+            "POTATO"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1½ pounds (about 2) russet potatoes, scrubbed",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 2,
+          "source_section": "Ingredients",
+          "source_text": "6 large eggs",
+          "selected_codes": [
+            "EGG"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "6 large eggs",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 3,
+          "source_section": "Ingredients",
+          "source_text": "2 teaspoons vegetable oil",
+          "selected_codes": [
+            "SUNFLOWER_OIL"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2 teaspoons vegetable oil",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select plain sunflower oil as a member of source-generic vegetable/oil concept."
+        },
+        {
+          "position": 4,
+          "source_section": "Ingredients",
+          "source_text": "1 medium yellow onion, peeled and chopped",
+          "selected_codes": [
+            "ONION_YELLOW"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 medium yellow onion, peeled and chopped",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 5,
+          "source_section": "Ingredients",
+          "source_text": "½ teaspoon salt",
+          "selected_codes": [
+            "SALT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ teaspoon salt",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 6,
+          "source_section": "Ingredients",
+          "source_text": "¼ teaspoon black pepper",
+          "selected_codes": [
+            "BLACK_PEPPER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ teaspoon black pepper",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 7,
+          "source_section": "Directions steps 2–3",
+          "source_text": "cover with cold water; Drain the potatoes well",
+          "selected_codes": [],
+          "selection": "OMITTED_VARIANT",
+          "quantity_text": "Unquantified discarded process water",
+          "normalization_reason": "Document discarded boiling medium; not a consumed required food quantity. No water quantity invented."
+        }
+      ],
+      "unresolved_issues": [],
+      "source_limitations": [
+        "Header cook time and individual step durations are not reconciled or silently recomputed.",
+        "Four 4-ounce servings is retained literally despite apparent yield tension with listed food quantities.",
+        "Unquantified potato-boiling water is drained process water, not invented consumed food quantity."
+      ]
+    },
+    {
+      "source_recipe_id": "FNS5-BAKED-LENTILS-CASSEROLE",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/lentils-casserole",
+      "source_servings": 5,
+      "review_basis": "ACTUAL_PRIMARY_PDF_TEXT_AND_VISUAL_REVIEW_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "Ingredients",
+          "source_text": "1 cup lentils, rinsed",
+          "selected_codes": [
+            "LENTILS_DRY"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 cup lentils, rinsed",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 2,
+          "source_section": "Ingredients",
+          "source_text": "¾ cup water",
+          "selected_codes": [
+            "WATER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¾ cup water",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 3,
+          "source_section": "Ingredients",
+          "source_text": "½ teaspoon salt",
+          "selected_codes": [
+            "SALT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ teaspoon salt",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 4,
+          "source_section": "Ingredients",
+          "source_text": "¼ teaspoon ground black pepper (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "¼ teaspoon ground black pepper (optional)",
+          "normalization_reason": "Explicit source-optional ingredient omitted; no invented seasoning, garnish quantity or replacement."
+        },
+        {
+          "position": 5,
+          "source_section": "Ingredients",
+          "source_text": "¼ teaspoon garlic powder (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "¼ teaspoon garlic powder (optional)",
+          "normalization_reason": "Explicit source-optional ingredient omitted; no invented seasoning, garnish quantity or replacement."
+        },
+        {
+          "position": 6,
+          "source_section": "Ingredients",
+          "source_text": "½ cup medium onion, chopped",
+          "selected_codes": [
+            "ONION_YELLOW"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ cup medium onion, chopped",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 7,
+          "source_section": "Ingredients",
+          "source_text": "1 can low-sodium tomatoes (14.5 ounces)",
+          "selected_codes": [
+            "TOMATO_CANNED_NO_SALT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 can low-sodium tomatoes (14.5 ounces)",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select no-added-salt canned tomatoes within source low-sodium canned tomato requirement; exact retailer ingredient lists reviewed, no salted tomato substitution."
+        },
+        {
+          "position": 8,
+          "source_section": "Ingredients",
+          "source_text": "2 medium carrots, thinly sliced",
+          "selected_codes": [
+            "CARROT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2 medium carrots, thinly sliced",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 9,
+          "source_section": "Ingredients",
+          "source_text": "½ cup shredded cheddar cheese",
+          "selected_codes": [
+            "CHEESE_CHEDDAR"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ cup shredded cheddar cheese",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        }
+      ],
+      "unresolved_issues": [],
+      "source_limitations": [
+        "Use this measured 14.5-ounce official version, not the older SNAP-Ed version whose tomato can has no size.",
+        "Optional pepper and garlic powder may be retained at their measured quantities or omitted explicitly.",
+        "No-salt-added tomatoes are a candidate narrower purchase selection; retailer ingredient evidence must establish the no-salt form without assuming every canned tomato qualifies."
+      ]
+    },
+    {
+      "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_servings": 6,
+      "review_basis": "PRIMARY_SOURCE_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 cup tomatoes, finely chopped (or ½ can, about 8 ounces, low-sodium diced tomatoes)",
+          "selected_codes": [
+            "TOMATO"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 cup",
+          "normalization_reason": "Select explicit fresh tomato branch; canned alternative not selected."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "½ cup apple, peeled and finely chopped",
+          "selected_codes": [
+            "APPLE"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ cup",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "¼ cup onion, finely chopped",
+          "selected_codes": [
+            "ONION_YELLOW"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ cup",
+          "normalization_reason": "Yellow onion member of generic onion family."
+        },
+        {
+          "position": 4,
+          "source_section": "INGREDIENTS",
+          "source_text": "2 tablespoons lime (or lemon) juice",
+          "selected_codes": [
+            "LIME_JUICE"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2 tablespoons",
+          "normalization_reason": "Select lime juice alternative; no volume-to-fruit yield invented."
+        },
+        {
+          "position": 5,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 teaspoon garlic, finely chopped",
+          "selected_codes": [
+            "GARLIC"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 teaspoon",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 6,
+          "source_section": "INGREDIENTS",
+          "source_text": "½ teaspoon vegetable oil",
+          "selected_codes": [
+            "SUNFLOWER_OIL"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ teaspoon",
+          "normalization_reason": "Sunflower member of vegetable oil family."
+        },
+        {
+          "position": 7,
+          "source_section": "INGREDIENTS",
+          "source_text": "¼ teaspoon salt",
+          "selected_codes": [
+            "SALT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ teaspoon",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 8,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 teaspoon fresh parsley or cilantro, finely chopped (if you have it)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "1 teaspoon",
+          "normalization_reason": "Both optional herb alternatives omitted."
+        },
+        {
+          "position": 9,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 tablespoon cayenne pepper or jalapeño chilies, chopped (if you have it)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "1 tablespoon",
+          "normalization_reason": "Both optional pepper alternatives omitted."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [
+        "PDF page index54."
+      ],
+      "source_limitations": []
+    },
+    {
+      "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_servings": 6,
+      "review_basis": "PRIMARY_SOURCE_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "½ cup macaroni, cooked",
+          "selected_codes": [
+            "PASTA_DRY"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ cup cooked",
+          "normalization_reason": "Purchasable dry pasta concept; source amount is cooked, NOT dry. No cooking yield or raw amount invented."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "¼ cup onion, finely chopped",
+          "selected_codes": [
+            "ONION_YELLOW"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ cup",
+          "normalization_reason": "Yellow onion member of generic onion family."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "½ cup cucumber, finely chopped",
+          "selected_codes": [
+            "CUCUMBER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ cup",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 4,
+          "source_section": "INGREDIENTS",
+          "source_text": "¼ cup green pepper, diced",
+          "selected_codes": [
+            "BELL_PEPPER_GREEN"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ cup",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 5,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 tablespoon vinegar",
+          "selected_codes": [
+            "APPLE_CIDER_VINEGAR"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 tablespoon",
+          "normalization_reason": "Apple cider vinegar selected member of unqualified vinegar family."
+        },
+        {
+          "position": 6,
+          "source_section": "INGREDIENTS",
+          "source_text": "½ tablespoon vegetable oil",
+          "selected_codes": [
+            "SUNFLOWER_OIL"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ tablespoon",
+          "normalization_reason": "Sunflower member of vegetable oil family."
+        },
+        {
+          "position": 7,
+          "source_section": "INGREDIENTS",
+          "source_text": "¼ teaspoon salt",
+          "selected_codes": [
+            "SALT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ teaspoon",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 8,
+          "source_section": "INGREDIENTS",
+          "source_text": "¼ teaspoon pepper",
+          "selected_codes": [
+            "BLACK_PEPPER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "¼ teaspoon",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 9,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 teaspoon parsley, chopped (if you have it)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "1 teaspoon",
+          "normalization_reason": "Optional parsley omitted."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [
+        "PDF page index56; directions combine already-cooked macaroni, no explicit cooking-water ingredient."
+      ],
+      "source_limitations": [
+        {
+          "source_fact": "Cooked macaroni input quantity retained; dry purchase amount is not established and must not be generated as ½ cup dry.",
+          "review_decision": "PRESERVE_SOURCE_NO_INVENTED_CONVERSION_OR_STEP",
+          "scope": "Source evidence is retained verbatim for technical curation. No purchase-weight conversion or missing source step is generated by DATA2; later runtime normalization must review this limitation."
+        }
+      ]
+    },
+    {
+      "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "source_servings": 6,
+      "review_basis": "PRIMARY_INDEXED_SOURCE_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "2/3 package baby spinach (10 ounces, washed. Could also use Kale or other greens)",
+          "selected_codes": [
+            "SPINACH"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2/3 package (10 ounces)",
+          "normalization_reason": "Fresh spinach branch selected. Ambiguous package10oz qualifier retained, not multiplied or recast to weight."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 1/2 apples (chopped, can use 1-2 apples)",
+          "selected_codes": [
+            "APPLE"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 1/2 apples (can use 1-2)",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 cup raisins",
+          "selected_codes": [
+            "RAISINS_GOLDEN"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 cup",
+          "normalization_reason": "Golden raisins selected member of generic raisin family; no golden-specific source claim."
+        },
+        {
+          "position": 4,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/4 cup canola oil",
+          "selected_codes": [
+            "CANOLA_OIL"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/4 cup",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 5,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/4 cup apple cider vinegar",
+          "selected_codes": [
+            "APPLE_CIDER_VINEGAR"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/4 cup",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 6,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/4 cup sugar",
+          "selected_codes": [
+            "SUGAR"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/4 cup",
+          "normalization_reason": "Retain listed sugar; introduction allows omission for tart variant but that variant is not selected."
+        },
+        {
+          "position": 7,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/16 teaspoon garlic powder (pinch)",
+          "selected_codes": [
+            "GARLIC_POWDER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/16 teaspoon (pinch)",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [],
+      "source_limitations": [
+        {
+          "source_fact": "Source spinach says 2/3 package (10 ounces); preserve exact dual notation without inventing package-size conversion.",
+          "review_decision": "PRESERVE_SOURCE_NO_INVENTED_CONVERSION_OR_STEP",
+          "scope": "Source evidence is retained verbatim for technical curation. No purchase-weight conversion or missing source step is generated by DATA2; later runtime normalization must review this limitation."
+        }
+      ]
+    },
+    {
+      "source_recipe_id": "SNAP6-PEACH-CRISP",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+      "source_servings": 6,
+      "review_basis": "PRIMARY_INDEXED_SOURCE_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "4 peaches (4 cups sliced)",
+          "selected_codes": [
+            "PEACH"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "4 peaches (4 cups sliced)",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "2 tablespoons margarine",
+          "selected_codes": [
+            "MARGARINE"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2 tablespoons",
+          "normalization_reason": "Generic margarine; no trans-fat-free requirement inferred."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "3/4 cup quick-cooking oats",
+          "selected_codes": [
+            "OATS_ROLLED"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "3/4 cup",
+          "normalization_reason": "Retain quick-cooking purchase form under rolled-oat canonical family."
+        },
+        {
+          "position": 4,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/2 cup sugar",
+          "selected_codes": [
+            "SUGAR"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/2 cup",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 5,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/4 cup flour",
+          "selected_codes": [
+            "FLOUR_WHEAT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/4 cup",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 6,
+          "source_section": "INGREDIENTS",
+          "source_text": "2 teaspoons cinnamon",
+          "selected_codes": [
+            "CINNAMON_GROUND"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2 teaspoons",
+          "normalization_reason": "Ground cinnamon selected spice form; preserve amount."
+        },
+        {
+          "position": 7,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 teaspoon lemon juice",
+          "selected_codes": [
+            "LEMON"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 teaspoon",
+          "normalization_reason": "Existing LEMON purchase concept for source lemon juice; juice preparation and source volume retained. Global catalogue has no LEMON_JUICE. No fruit-count/yield conversion invented."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [],
+      "source_limitations": []
+    },
+    {
+      "source_recipe_id": "SNAP6-SEARED-GREENS",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "source_servings": 6,
+      "review_basis": "PRIMARY_INDEXED_SOURCE_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "8 cups kale or collard greens (1 1/2 pounds)",
+          "selected_codes": [
+            "KALE"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "8 cups (1 1/2 pounds)",
+          "normalization_reason": "Select explicit kale alternative."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "2 tablespoons vegetable oil (or olive oil)",
+          "selected_codes": [
+            "OLIVE_OIL"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2 tablespoons",
+          "normalization_reason": "Select explicit olive oil alternative."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "4 garlic cloves (chopped)",
+          "selected_codes": [
+            "GARLIC"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "4 cloves",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 4,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 cup water",
+          "selected_codes": [
+            "WATER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 cup",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 5,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/4 teaspoon salt",
+          "selected_codes": [
+            "SALT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/4 teaspoon",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 6,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 teaspoon black pepper",
+          "selected_codes": [
+            "BLACK_PEPPER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 teaspoon",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 7,
+          "source_section": "INGREDIENTS",
+          "source_text": "2 tablespoons vinegar, cider",
+          "selected_codes": [
+            "APPLE_CIDER_VINEGAR"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2 tablespoons",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [],
+      "source_limitations": []
+    },
+    {
+      "source_recipe_id": "SNAP8-SOMALI-SUMMER-SALAD",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+      "source_servings": 8,
+      "review_basis": "PRIMARY_INDEXED_FNS_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "3 tablespoons olive oil",
+          "selected_codes": [
+            "OLIVE_OIL"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "3 tablespoons",
+          "normalization_reason": "Existing canonical food concept; source count/volume and preparation retained without conversion."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 tablespoon lemon juice",
+          "selected_codes": [
+            "LEMON"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 tablespoon",
+          "normalization_reason": "LEMON purchase concept for source juice; no fruit-count or gram conversion."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "3 apples",
+          "selected_codes": [
+            "APPLE"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "3 apples",
+          "normalization_reason": "Existing canonical food concept; source count/volume and preparation retained without conversion."
+        },
+        {
+          "position": 4,
+          "source_section": "INGREDIENTS",
+          "source_text": "2 green peppers",
+          "selected_codes": [
+            "BELL_PEPPER_GREEN"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2 peppers",
+          "normalization_reason": "Existing canonical food concept; source count/volume and preparation retained without conversion."
+        },
+        {
+          "position": 5,
+          "source_section": "INGREDIENTS",
+          "source_text": "3 tomatoes",
+          "selected_codes": [
+            "TOMATO"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "3 tomatoes",
+          "normalization_reason": "Existing canonical food concept; source count/volume and preparation retained without conversion."
+        },
+        {
+          "position": 6,
+          "source_section": "INGREDIENTS",
+          "source_text": "2 cucumbers",
+          "selected_codes": [
+            "CUCUMBER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2 cucumbers",
+          "normalization_reason": "Existing canonical food concept; source count/volume and preparation retained without conversion."
+        },
+        {
+          "position": 7,
+          "source_section": "INGREDIENTS",
+          "source_text": "salt and pepper (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "not specified",
+          "normalization_reason": "Explicit optional seasonings omitted; directions also labeloptional."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [
+        "Selected recipe within summer collection; standalone primary repeats same ingredient facts."
+      ],
+      "source_limitations": []
+    },
+    {
+      "source_recipe_id": "FNS2-ORANGE-PORK-CHOPS",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/orange-porkchops",
+      "source_servings": 2,
+      "review_basis": "ACTUAL_PRIMARY_PDF_TEXT_AND_VISUAL_REVIEW_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "Ingredients",
+          "source_text": "1 teaspoon oil",
+          "selected_codes": [
+            "SUNFLOWER_OIL"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 teaspoon oil",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select plain sunflower oil as a member of source-generic vegetable/oil concept."
+        },
+        {
+          "position": 2,
+          "source_section": "Ingredients",
+          "source_text": "2 pork chops",
+          "selected_codes": [
+            "PORK_LOIN"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2 pork chops",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select loin chops within source-generic pork chops; two pieces remain counts and no weight is invented."
+        },
+        {
+          "position": 3,
+          "source_section": "Ingredients",
+          "source_text": "1 medium sweet potato, peeled and cut into ½-inch slices",
+          "selected_codes": [
+            "SWEET_POTATO"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 medium sweet potato, peeled and cut into ½-inch slices",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 4,
+          "source_section": "Ingredients",
+          "source_text": "½ medium orange, sliced",
+          "selected_codes": [
+            "ORANGE"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ medium orange, sliced",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 5,
+          "source_section": "Ingredients",
+          "source_text": "1 dash cinnamon (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "1 dash cinnamon (optional)",
+          "normalization_reason": "Explicit source-optional ingredient omitted; no invented seasoning, garnish quantity or replacement."
+        },
+        {
+          "position": 6,
+          "source_section": "Ingredients",
+          "source_text": "1 dash salt (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "1 dash salt (optional)",
+          "normalization_reason": "Explicit source-optional ingredient omitted; no invented seasoning, garnish quantity or replacement."
+        },
+        {
+          "position": 7,
+          "source_section": "Ingredients",
+          "source_text": "1 dash black pepper (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "1 dash black pepper (optional)",
+          "normalization_reason": "Explicit source-optional ingredient omitted; no invented seasoning, garnish quantity or replacement."
+        }
+      ],
+      "unresolved_issues": [],
+      "source_limitations": [
+        "Retain two chops as a count, not invented grams or yield.",
+        "PORK_LOIN is a proposed selection of loin chops within generic pork chops; the market review must support that purchased cut.",
+        "Source says cover but does not name a cover type; do not infer foil or a specific lid.",
+        "All three dash seasonings are explicitly optional and omitted, not normalized to invented teaspoon fractions.",
+        "Brown rice is a separate serving suggestion, not an ingredient added to this recipe."
+      ]
+    },
+    {
+      "source_recipe_id": "WIC4-BUTTERNUT-SOUP",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+      "source_servings": 4,
+      "review_basis": "PRIMARY_INDEXED_SOURCE_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 butternut squash (large - about 3 pounds)",
+          "selected_codes": [
+            "BUTTERNUT_SQUASH"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 large (about 3 pounds)",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 teaspoon olive oil (may need a bit more or less depending on the size of the squash)",
+          "selected_codes": [
+            "OLIVE_OIL"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 teaspoon (size-dependent)",
+          "normalization_reason": "Baseline quantified source amount retained; no additional estimate."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 teaspoon salt",
+          "selected_codes": [
+            "SALT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 teaspoon",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 4,
+          "source_section": "INGREDIENTS",
+          "source_text": "white pepper (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "not specified",
+          "normalization_reason": "Optional white pepper omitted."
+        },
+        {
+          "position": 5,
+          "source_section": "INGREDIENTS",
+          "source_text": "3 cups milk (the amount depends on how thick or thin you like your soup!)",
+          "selected_codes": [
+            "MILK_1_PERCENT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "3 cups",
+          "normalization_reason": "Existing1%milk selected member of generic milk; source does not specify1%."
+        },
+        {
+          "position": 6,
+          "source_section": "INGREDIENTS",
+          "source_text": "plain low-fat or non-fat yogurt (for an optional topping when serving)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "not specified",
+          "normalization_reason": "Optional yogurt topping omitted despite serving suggestion in last instruction."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [
+        "Intro vegetarian broth/soy variation not selected; milk retained."
+      ],
+      "source_limitations": []
+    },
+    {
+      "source_recipe_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+      "source_servings": 1,
+      "review_basis": "PRIMARY_INDEXED_SOURCE_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/3 cup low-fat or non-fat milk (or soy beverage)",
+          "selected_codes": [
+            "MILK_1_PERCENT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/3 cup",
+          "normalization_reason": "Select low-fat dairy branch and existing1%member."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/4 cup oats (rolled or quick)",
+          "selected_codes": [
+            "OATS_ROLLED"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/4 cup",
+          "normalization_reason": "Select rolled oats branch."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/4 cup plain low-fat or non-fat yogurt",
+          "selected_codes": [
+            "YOGURT_PLAIN_LOW_FAT"
+          ],
+          "selection": "SELECTED_OPTIONAL",
+          "quantity_text": "1/4 cup",
+          "normalization_reason": "Select low-fat plain branch. Source introduction explicitly makes all foods other than oats and liquid optional; retain this measured named cinnamon-apple variant as selected optional food."
+        },
+        {
+          "position": 4,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 teaspoon cinnamon",
+          "selected_codes": [
+            "CINNAMON_GROUND"
+          ],
+          "selection": "SELECTED_OPTIONAL",
+          "quantity_text": "1 teaspoon",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion. Source introduction explicitly makes all foods other than oats and liquid optional; retain this measured named cinnamon-apple variant as selected optional food."
+        },
+        {
+          "position": 5,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 teaspoon vanilla extract (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "1 teaspoon",
+          "normalization_reason": "Explicit optional extract omitted."
+        },
+        {
+          "position": 6,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/2 apple (chopped)",
+          "selected_codes": [
+            "APPLE"
+          ],
+          "selection": "SELECTED_OPTIONAL",
+          "quantity_text": "1/2 apple",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion. Source introduction explicitly makes all foods other than oats and liquid optional; retain this measured named cinnamon-apple variant as selected optional food."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [
+        "Named cinnamon-apple variant selected; introductory flexibility does not remove selected apple/cinnamon/yogurt. Other named peanut-butter-banana, peaches-and-cream and cinnamon-raisin variants are not selected. Additional liquid for thinner texture is optional, no extra amount added."
+      ],
+      "source_limitations": [
+        {
+          "source_fact": "Source prose says all except oats and liquid optional. Selected apple, yogurt and cinnamon remain quantified choices, but are source-optional selections.",
+          "review_decision": "PRESERVE_SOURCE_AND_DISTINGUISH_CURATED_SELECTION"
+        }
+      ]
+    },
+    {
+      "source_recipe_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+      "source_url": "https://snaped.fns.usda.gov/node/2489",
+      "source_servings": 2,
+      "review_basis": "ACTUAL_PRIMARY_PDF_TEXT_AND_VISUAL_REVIEW_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "Ingredients",
+          "source_text": "1 cup kale or spinach",
+          "selected_codes": [
+            "SPINACH"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 cup kale or spinach",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 2,
+          "source_section": "Ingredients",
+          "source_text": "1 banana, medium",
+          "selected_codes": [
+            "BANANA"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 banana, medium",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 3,
+          "source_section": "Ingredients",
+          "source_text": "1 cup low fat milk (or optional coconut milk or almond milk)",
+          "selected_codes": [
+            "MILK_1_PERCENT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 cup low fat milk (or optional coconut milk or almond milk)",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 4,
+          "source_section": "Ingredients",
+          "source_text": "1 cup plain yogurt",
+          "selected_codes": [
+            "YOGURT_PLAIN_LOW_FAT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 cup plain yogurt",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select existing plain low-fat yogurt within source-generic plain yogurt; source does not require a specific yogurt fat percentage."
+        },
+        {
+          "position": 5,
+          "source_section": "Ingredients",
+          "source_text": "1 apple, medium (cored and sliced)",
+          "selected_codes": [
+            "APPLE"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 apple, medium (cored and sliced)",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 6,
+          "source_section": "Ingredients",
+          "source_text": "1 cup frozen fruit (all one fruit or a combination of mixed frozen fruit)",
+          "selected_codes": [
+            "STRAWBERRY"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 cup frozen fruit (all one fruit or a combination of mixed frozen fruit)",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select plain frozen strawberries under the explicit all-one-fruit option; retain one cup, no thawing yield or added sugar."
+        },
+        {
+          "position": 7,
+          "source_section": "Ingredients",
+          "source_text": "flax seeds, 1 Tablespoon (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "flax seeds, 1 Tablespoon (optional)",
+          "normalization_reason": "Explicit source-optional ingredient omitted; no invented seasoning, garnish quantity or replacement."
+        },
+        {
+          "position": 8,
+          "source_section": "Ingredients",
+          "source_text": "chia seeds, 1 Tablespoon (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "chia seeds, 1 Tablespoon (optional)",
+          "normalization_reason": "Explicit source-optional ingredient omitted; no invented seasoning, garnish quantity or replacement."
+        }
+      ],
+      "unresolved_issues": [],
+      "source_limitations": [
+        "Choose frozen strawberry only as explicitly permitted, subject to its separate frozen-form retailer evidence; this is not a mixed-fruit decomposition.",
+        "Low-fat plain yogurt is selected as a narrower member of source generic plain yogurt, with exact canonical low-fat market evidence required.",
+        "Flax and chia are source-explicit optional omissions. Generic whole flax seeds are not automatically mapped to global ground-flax code.",
+        "No preparation or cooking time is supplied; do not invent one.",
+        "No count-to-weight or milk/yogurt volume-to-mass conversion proposed.",
+        "Source review applies only to the approved narrow direct-FNS project risk posture; original contributor attribution does not establish broad commercial or derivative permission."
+      ]
+    },
+    {
+      "source_recipe_id": "SNAP3-GRILLED-FRUIT",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit",
+      "source_servings": 3,
+      "review_basis": "PRIMARY_INDEXED_FNS_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 cup pineapple chunks",
+          "selected_codes": [
+            "PINEAPPLE"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 cup",
+          "normalization_reason": "Fresh pineapple selected under generic source fruit; chunking is preparation."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 peach (cubed)",
+          "selected_codes": [
+            "PEACH"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 peach",
+          "normalization_reason": "Existing canonical food concept; source count/volume and preparation retained without conversion."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 banana (sliced)",
+          "selected_codes": [
+            "BANANA"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 banana",
+          "normalization_reason": "Existing canonical food concept; source count/volume and preparation retained without conversion."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [
+        "Source requires skewers; choose nonwooden skewers. Conditional wooden-skewer soaking water is an equipment preparation aid, not a selected FoodIngredient. No oil/sugar added by convention."
+      ],
+      "source_limitations": []
+    },
+    {
+      "source_recipe_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+      "source_servings": 2,
+      "review_basis": "PRIMARY_INDEXED_SOURCE_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 cup milk",
+          "selected_codes": [
+            "MILK_1_PERCENT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 cup",
+          "normalization_reason": "Select existing 1% milk as a member of source-generic milk; source does not state a low-fat/non-fat restriction for this row. No volume conversion."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/2 cup plain low-fat or non-fat yogurt (or vanilla flavored)",
+          "selected_codes": [
+            "YOGURT_PLAIN_LOW_FAT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/2 cup",
+          "normalization_reason": "Select plain low-fat branch, not flavored."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 banana (peeled and sliced)",
+          "selected_codes": [
+            "BANANA"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 banana",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 4,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 cup spinach",
+          "selected_codes": [
+            "SPINACH"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 cup",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 5,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 cup apple (chopped)",
+          "selected_codes": [
+            "APPLE"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 cup",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 6,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/2 cup cauliflower (frozen)",
+          "selected_codes": [
+            "CAULIFLOWER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/2 cup",
+          "normalization_reason": "Frozen purchase form retained even generic canonical code. Notes explicitly allow fresh steamed cauliflower; that alternative not selected."
+        },
+        {
+          "position": 7,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/2 cup oats",
+          "selected_codes": [
+            "OATS_ROLLED"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/2 cup",
+          "normalization_reason": "Rolled oats member of unqualified oats family."
+        },
+        {
+          "position": 8,
+          "source_section": "NOTES",
+          "source_text": "1/2 cup to 1 cup ice",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "1/2 cup to 1 cup",
+          "normalization_reason": "Optional cold-texture addition omitted."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [
+        "Notes permit frozen riced cauliflower and fresh steamed alternative; no unsupported raw-fresh match clears selected frozen form."
+      ],
+      "source_limitations": []
+    },
+    {
+      "source_recipe_id": "SNAP4-PEAR-ORANGE-SAUCE",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "source_servings": 4,
+      "review_basis": "PRIMARY_SOURCE_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "4 pears (medium)",
+          "selected_codes": [
+            "PEAR"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "4 medium pears",
+          "normalization_reason": "Whole raw pears; peel and steam as source directs."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "3/4 cup orange juice (100%)",
+          "selected_codes": [
+            "ORANGE"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "3/4 cup",
+          "normalization_reason": "Prepared 100% orange juice maps to the existing ORANGE purchase concept. Fresh fruit evidence establishes the preparation concept; preserve 3/4 cup juice, without inventing a whole-fruit count or yield conversion."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "4 teaspoons sugar",
+          "selected_codes": [
+            "SUGAR"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "4 teaspoons",
+          "normalization_reason": "Existing canonical sugar concept; preserve the source amount without conversion."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [
+        "Direct FNS Fall Recipes primary page, Pear in Orange Sauce, four servings. Double boiler is explicit equipment; no cooking-water ingredient inferred."
+      ],
+      "source_limitations": []
+    },
+    {
+      "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "source_servings": 4,
+      "review_basis": "PRIMARY_SOURCE_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 teaspoon olive oil",
+          "selected_codes": [
+            "OLIVE_OIL"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 teaspoon",
+          "normalization_reason": "Existing canonical food concept; preserve source quantity and preparation without conversion."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/2 cup sweet onion (sliced)",
+          "selected_codes": [
+            "ONION_RED"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/2 cup",
+          "normalization_reason": "Select sweet red Yalta onion member using exact retail evidence; do not claim arbitrary red/yellow onions satisfy sweet qualifier."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 garlic clove (finely chopped)",
+          "selected_codes": [
+            "GARLIC"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 clove",
+          "normalization_reason": "Existing canonical food concept; preserve source quantity and preparation without conversion."
+        },
+        {
+          "position": 4,
+          "source_section": "INGREDIENTS",
+          "source_text": "3 new potatoes (tiny, quartered)",
+          "selected_codes": [
+            "POTATO"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "3 tiny new potatoes",
+          "normalization_reason": "Retain young/new potato purchase descriptor and tiny size; no mature-potato equivalence or inventedmass."
+        },
+        {
+          "position": 5,
+          "source_section": "INGREDIENTS",
+          "source_text": "3/4 cup carrot (sliced)",
+          "selected_codes": [
+            "CARROT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "3/4 cup",
+          "normalization_reason": "Existing canonical food concept; preserve source quantity and preparation without conversion."
+        },
+        {
+          "position": 6,
+          "source_section": "INGREDIENTS",
+          "source_text": "3/4 cup asparagus pieces",
+          "selected_codes": [
+            "ASPARAGUS"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "3/4 cup",
+          "normalization_reason": "Existing canonical food concept; preserve source quantity and preparation without conversion."
+        },
+        {
+          "position": 7,
+          "source_section": "INGREDIENTS",
+          "source_text": "3/4 cup sugar snap peas, or green beans",
+          "selected_codes": [
+            "GREEN_BEANS"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "3/4 cup",
+          "normalization_reason": "Select explicit green-bean alternative, not sugar-snap pea substitution."
+        },
+        {
+          "position": 8,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/2 cup radishes (quartered)",
+          "selected_codes": [
+            "RADISH"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/2 cup",
+          "normalization_reason": "Existing canonical food concept; preserve source quantity and preparation without conversion."
+        },
+        {
+          "position": 9,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/4 teaspoon salt",
+          "selected_codes": [
+            "SALT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/4 teaspoon",
+          "normalization_reason": "Existing canonical food concept; preserve source quantity and preparation without conversion."
+        },
+        {
+          "position": 10,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/4 teaspoon black pepper",
+          "selected_codes": [
+            "BLACK_PEPPER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/4 teaspoon",
+          "normalization_reason": "Existing canonical food concept; preserve source quantity and preparation without conversion."
+        },
+        {
+          "position": 11,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/2 teaspoon dill (dried)",
+          "selected_codes": [
+            "DILL_DRIED"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/2 teaspoon",
+          "normalization_reason": "Existing canonical food concept; preserve source quantity and preparation without conversion."
+        },
+        {
+          "position": 12,
+          "source_section": "DIRECTIONS",
+          "source_text": "If the vegetables start to brown, add a Tablespoon or 2 of water.",
+          "selected_codes": [
+            "WATER"
+          ],
+          "selection": "SELECTED_CONDITIONAL",
+          "quantity_text": "1 or 2 tablespoons, only if vegetables start to brown",
+          "normalization_reason": "Source conditional execution water included with range and condition. Not fixed2Tbsp or unconditionally required."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [
+        "Full primary Spring page and standalone same recipe reviewed. Source instruction names peas after ingredient list permits green beans; selected explicit alternative retained without inventing new preparation."
+      ],
+      "source_limitations": []
+    },
+    {
+      "source_recipe_id": "FNS4-OVEN-FRIED-FISH",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/fish",
+      "source_servings": 4,
+      "review_basis": "ACTUAL_PRIMARY_PDF_TEXT_AND_VISUAL_REVIEW_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "Ingredients",
+          "source_text": "1 large egg, slightly beaten",
+          "selected_codes": [
+            "EGG"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 large egg, slightly beaten",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 2,
+          "source_section": "Ingredients",
+          "source_text": "½ teaspoon salt",
+          "selected_codes": [
+            "SALT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ teaspoon salt",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 3,
+          "source_section": "Ingredients",
+          "source_text": "½ teaspoon ground black pepper",
+          "selected_codes": [
+            "BLACK_PEPPER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ teaspoon ground black pepper",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 4,
+          "source_section": "Ingredients",
+          "source_text": "½ cup breadcrumbs",
+          "selected_codes": [
+            "BREADCRUMBS"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ cup breadcrumbs",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "position": 5,
+          "source_section": "Ingredients",
+          "source_text": "1 pound tilapia fillets, fresh or frozen and thawed (4 fillets)",
+          "selected_codes": [
+            "TILAPIA_RAW"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 pound tilapia fillets, fresh or frozen and thawed (4 fillets)",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select explicitly permitted frozen-and-thawed plain fillets, retaining the one-pound source weight."
+        },
+        {
+          "position": 6,
+          "source_section": "Ingredients",
+          "source_text": "1 tablespoon butter, melted",
+          "selected_codes": [
+            "BUTTER_UNSALTED"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 tablespoon butter, melted",
+          "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Unsalted butter is the selected member of source-generic butter; listed coating tablespoon retained."
+        },
+        {
+          "position": 7,
+          "source_section": "Ingredients",
+          "source_text": "lime or lemon slices (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "lime or lemon slices (optional)",
+          "normalization_reason": "Explicit source-optional ingredient omitted; no invented seasoning, garnish quantity or replacement."
+        }
+      ],
+      "unresolved_issues": [],
+      "source_limitations": [
+        "Frozen-and-thawed fillets are explicitly allowed; preserve selected purchase form in market audit.",
+        "The pan is coated using the listed tablespoon of butter, not an invented extra cooking spray.",
+        "Generic butter may be narrowed to existing unsalted butter without adding salt or changing source quantities."
+      ]
+    },
+    {
+      "source_recipe_id": "SNAP8-APPLE-CARROT-SOUP",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+      "source_servings": 8,
+      "review_basis": "PRIMARY_INDEXED_SOURCE_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 pound pork (lean, cut into chunks)",
+          "selected_codes": [
+            "PORK_LOIN"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 pound",
+          "normalization_reason": "Lean pork loin is selected member of unqualified lean pork family; no source cut claim."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "4 apples (with skin, cored and quartered)",
+          "selected_codes": [
+            "APPLE"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "4 apples",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "4 carrots (large, peeled and cut into chunks)",
+          "selected_codes": [
+            "CARROT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "4 large",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 4,
+          "source_section": "INGREDIENTS",
+          "source_text": "orange peel (dried, 1 teaspoon, optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "1 teaspoon",
+          "normalization_reason": "Explicit optional dried orange peel omitted."
+        },
+        {
+          "position": 5,
+          "source_section": "INGREDIENTS",
+          "source_text": "4 slices ginger",
+          "selected_codes": [
+            "GINGER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "4 slices",
+          "normalization_reason": "Source slice count retained, no thickness/weight invented."
+        },
+        {
+          "position": 6,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/2 teaspoon salt",
+          "selected_codes": [
+            "SALT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/2 teaspoon",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 7,
+          "source_section": "INGREDIENTS",
+          "source_text": "20 cups water",
+          "selected_codes": [
+            "WATER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "20 cups",
+          "normalization_reason": "Exact source20cups retained; directions reduce to8cups over3–4hours."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [],
+      "source_limitations": []
+    },
+    {
+      "source_recipe_id": "SNAP6-WALDORF-SALAD",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "source_servings": 6,
+      "review_basis": "PRIMARY_INDEXED_SOURCE_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/4 cup walnuts (chopped)",
+          "selected_codes": [
+            "WALNUTS_RAW"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/4 cup",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "2 apples (cored and diced)",
+          "selected_codes": [
+            "APPLE"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2 apples",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 cup celery (diced)",
+          "selected_codes": [
+            "CELERY"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 cup",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 4,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/2 cup raisins",
+          "selected_codes": [
+            "RAISINS_GOLDEN"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/2 cup",
+          "normalization_reason": "Golden member of generic raisin family, no golden-specific source claim."
+        },
+        {
+          "position": 5,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/4 cup plain yogurt, non-fat",
+          "selected_codes": [
+            "YOGURT_GREEK_NONFAT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/4 cup",
+          "normalization_reason": "Greek nonfat selected member of generic plain nonfat yogurt; source does not require Greek style, no nutrient equivalence claimed."
+        },
+        {
+          "position": 6,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/2 teaspoon sugar",
+          "selected_codes": [
+            "SUGAR"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/2 teaspoon",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 7,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 teaspoon lemon juice",
+          "selected_codes": [
+            "LEMON"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 teaspoon",
+          "normalization_reason": "Existing LEMON purchase concept for source lemon juice; juice preparation and source volume retained. Global catalogue has no LEMON_JUICE. No fruit-count/yield conversion invented."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [],
+      "source_limitations": []
+    },
+    {
+      "source_recipe_id": "SNAP4-BROWN-RICE-PILAF",
+      "source_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+      "source_servings": 4,
+      "review_basis": "PRIMARY_INDEXED_SOURCE_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 1/2 cups brown rice",
+          "selected_codes": [
+            "RICE_BROWN"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 1/2 cups",
+          "normalization_reason": "Plain uncooked brown rice, not parboiled-specific."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "3 cups water",
+          "selected_codes": [
+            "WATER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "3 cups",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/4 cup almonds (chopped)",
+          "selected_codes": [
+            "ALMONDS_RAW"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/4 cup",
+          "normalization_reason": "HTML chopped vs linkedPDF sliced; selected HTML source preserved."
+        },
+        {
+          "position": 4,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 teaspoon parsley (dried)",
+          "selected_codes": [
+            "PARSLEY_DRIED"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 teaspoon",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 5,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/2 teaspoon garlic powder",
+          "selected_codes": [
+            "GARLIC_POWDER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/2 teaspoon",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 6,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/4 teaspoon black pepper",
+          "selected_codes": [
+            "BLACK_PEPPER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/4 teaspoon",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [],
+      "source_limitations": []
+    },
+    {
+      "source_recipe_id": "SNAP5-KALE-NUTS-RAISINS",
+      "source_url": "https://snaped.fns.usda.gov/node/1861",
+      "source_servings": 5,
+      "review_basis": "PRIMARY_INDEXED_SOURCE_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/4 cup nuts, chopped",
+          "selected_codes": [
+            "WALNUTS_RAW"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/4 cup",
+          "normalization_reason": "Walnuts selected member of generic nut family; no nut substitution against fixed source species."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "2 tablespoons vegetable oil",
+          "selected_codes": [
+            "SUNFLOWER_OIL"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2 tablespoons",
+          "normalization_reason": "Sunflower member of vegetable oil family."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "2 cloves garlic, chopped",
+          "selected_codes": [
+            "GARLIC"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "2 cloves",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 4,
+          "source_section": "INGREDIENTS",
+          "source_text": "4 cups kale, stems removed and chopped (1 bunch)",
+          "selected_codes": [
+            "KALE"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "4 cups (1 bunch)",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 5,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/2 cup raisins",
+          "selected_codes": [
+            "RAISINS_GOLDEN"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/2 cup",
+          "normalization_reason": "Golden member of generic raisin family."
+        },
+        {
+          "position": 6,
+          "source_section": "INGREDIENTS",
+          "source_text": "salt (optional, to taste)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "to taste",
+          "normalization_reason": "Explicit optional salt omitted."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [],
+      "source_limitations": []
+    },
+    {
+      "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
+      "source_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
+      "source_servings": 4,
+      "review_basis": "PRIMARY_ORIGINAL_PDF_TEXT_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "4 (6-ounce) chicken thighs, bone-in, skin removed",
+          "selected_codes": [
+            "CHICKEN_THIGH"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "4 (6-ounce) thighs",
+          "normalization_reason": "Canonical skinless thigh does not imply boneless; preserve bone-in purchase state and6oz each, not4ozpreparedserving."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 teaspoon oil",
+          "selected_codes": [
+            "SUNFLOWER_OIL"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 teaspoon",
+          "normalization_reason": "Sunflower member of unqualified cooking oil family."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "½ teaspoon salt",
+          "selected_codes": [
+            "SALT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ teaspoon",
+          "normalization_reason": "Listed source amount retained although application omitted from directions."
+        },
+        {
+          "position": 4,
+          "source_section": "INGREDIENTS",
+          "source_text": "½ teaspoon black pepper",
+          "selected_codes": [
+            "BLACK_PEPPER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ teaspoon",
+          "normalization_reason": "Listed source amount retained although application omitted from directions."
+        },
+        {
+          "position": 5,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 small onion, peeled, chopped",
+          "selected_codes": [
+            "ONION_YELLOW"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 small",
+          "normalization_reason": "Yellow onion member of generic onion family."
+        },
+        {
+          "position": 6,
+          "source_section": "INGREDIENTS",
+          "source_text": "3 garlic cloves, peeled, minced",
+          "selected_codes": [
+            "GARLIC"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "3 cloves",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 7,
+          "source_section": "INGREDIENTS",
+          "source_text": "½ teaspoon dried thyme",
+          "selected_codes": [
+            "THYME_DRIED"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ teaspoon",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 8,
+          "source_section": "INGREDIENTS",
+          "source_text": "½ teaspoon dried rosemary",
+          "selected_codes": [
+            "ROSEMARY_DRIED"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "½ teaspoon",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 9,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 cup water",
+          "selected_codes": [
+            "WATER"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 cup",
+          "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion."
+        },
+        {
+          "position": 10,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 10-ounce package frozen or 1 bunch fresh spinach",
+          "selected_codes": [
+            "SPINACH"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 bunch fresh spinach",
+          "normalization_reason": "Select explicit fresh1bunch alternative under existing SPINACH; source frozen10-ounce alternative is unselected. No bunch weight invented."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [
+        "Original2-page checklist binary text reviewed from verified savedPDF; recipe pageindex1. Preserve actual lowercase sourceURL and source quantities."
+      ],
+      "source_limitations": [
+        {
+          "source_fact": "Salt and pepper listed but directions omit application; no invented source step.",
+          "review_decision": "PRESERVE_SOURCE_NO_INVENTED_CONVERSION_OR_STEP",
+          "scope": "Source evidence is retained verbatim for technical curation. No purchase-weight conversion or missing source step is generated by DATA2; later runtime normalization must review this limitation."
+        }
+      ]
+    },
+    {
+      "source_recipe_id": "SNAP4-DILLED-FISH-FILLETS",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
+      "source_servings": 4,
+      "review_basis": "PRIMARY_SAVED_HTML_INGREDIENT_TEXT_AND_PRIMARY_INDEXED_PASSOVER_REVIEWED_2026-09-05",
+      "rows": [
+        {
+          "position": 1,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 pound haddock or cod fillets (frozen)",
+          "selected_codes": [
+            "COD_ATLANTIC"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 pound",
+          "normalization_reason": "Select explicit frozen cod alternative and existing Atlantic cod member; no haddock or cooked fish substitution."
+        },
+        {
+          "position": 2,
+          "source_section": "INGREDIENTS",
+          "source_text": "1 tablespoon lemon juice",
+          "selected_codes": [
+            "LEMON"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1 tablespoon",
+          "normalization_reason": "Existing LEMON purchase concept for source juice; preserve juicevolume, no fruit count or grams invented."
+        },
+        {
+          "position": 3,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/8 teaspoon dill weed (dried)",
+          "selected_codes": [
+            "DILL_DRIED"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/8 teaspoon",
+          "normalization_reason": "Explicit dried dill."
+        },
+        {
+          "position": 4,
+          "source_section": "INGREDIENTS",
+          "source_text": "1/8 teaspoon salt",
+          "selected_codes": [
+            "SALT"
+          ],
+          "selection": "SELECTED_REQUIRED",
+          "quantity_text": "1/8 teaspoon",
+          "normalization_reason": "Exact source amount."
+        },
+        {
+          "position": 5,
+          "source_section": "INGREDIENTS",
+          "source_text": "black pepper (optional)",
+          "selected_codes": [],
+          "selection": "OMITTED_OPTIONAL",
+          "quantity_text": "not specified",
+          "normalization_reason": "Explicit optional black pepper omitted."
+        }
+      ],
+      "unresolved_issues": [],
+      "notes": [
+        "Microwave method selected; source skillet method retained as alternative only. No oil added by culinary convention."
+      ],
+      "source_limitations": []
+    }
+  ],
+  "research_stage_replacements": [
+    {
+      "removed_source_recipe_id": "SNAP6-ASPARAGUS-GREMOLATA",
+      "replacement_source_recipe_id": "SNAP8-SOMALI-SUMMER-SALAD",
+      "reason": "Required qualitative quantity in removed candidate; independently sourced quantified replacement."
+    },
+    {
+      "removed_source_recipe_id": "WIC6-GREEK-CUCUMBER-SAUCE",
+      "replacement_source_recipe_id": "USDA12-TOMATO-CUCUMBER-SALAD",
+      "reason": "Required qualitative quantity in removed candidate; independently sourced quantified replacement."
+    },
+    {
+      "removed_source_recipe_id": "WIC8-SWEET-SAVORY-BROCCOLI-SALAD",
+      "replacement_source_recipe_id": "SNAP3-GRILLED-FRUIT",
+      "reason": "Required qualitative quantity in removed candidate; independently sourced quantified replacement."
+    },
+    {
+      "removed_source_recipe_id": "WIC4-CAULIFLOWER-MASH",
+      "replacement_source_recipe_id": "SNAP4-SAUTEED-CAULIFLOWER-RICE",
+      "reason": "Required qualitative quantity in removed candidate; independently sourced quantified replacement."
+    },
+    {
+      "removed_source_recipe_id": "WIC8-EDAMAME-QUINOA-SALAD",
+      "replacement_source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
+      "reason": "Required qualitative quantity in removed candidate; independently sourced quantified replacement."
+    },
+    {
+      "removed_source_recipe_id": "USDA12-TOMATO-CUCUMBER-SALAD",
+      "replacement_source_recipe_id": "SNAP1-MICROWAVE-BAKED-POTATO",
+      "reason": "Direct FNS source chosen after original source link for Nutrition.gov salad could not be verified."
+    },
+    {
+      "removed_source_recipe_id": "SNAP4-SAUTEED-CAULIFLOWER-RICE",
+      "replacement_source_recipe_id": "SNAP4-PEAR-ORANGE-SAUCE",
+      "reason": "Direct FNS Fall Recipes page selected because the prior MyPlate original artifact could not be obtained for a reproducible source hash."
+    }
+  ]
+}

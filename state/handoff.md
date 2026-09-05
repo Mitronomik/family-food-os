@@ -2,6 +2,98 @@
 
 Updated: `2026-09-05`
 
+## Current execution — PR4 DATA2 integration
+
+PR4-DATA2 — COMPLETE. PR #13 merged after `PR4-DATA2 FINAL REVIEW: ACCEPT`.
+Accepted head: `918bf81b5da306fc65a57643de515ca1b3fbd1e4`.
+Merge commit / synchronized main: `2f5fba991f1f612ce7b4b8dfda8ebd41ad6333e7`.
+Final review submitted at `2026-09-05T16:06:13Z`; merged at
+`2026-09-05T16:26:20Z`.
+
+PR4 — IN PROGRESS on existing open PR #10, branch
+`migration/pr4-recipe-catalogue`; starting head
+`cd2285802c94735e0c9015042f9f4c0b52d68b85`.
+Current main is being synchronized by normal merge, with accepted DATA2
+preserved. No rebase, force-push, new PR or PR merge is authorized.
+
+Existing PR4 Recipe/domain/application/persistence code and migration
+`0024_food_recipe_catalogue` remain present. Production seed/compiler still
+require DATA2 correction. The prior rights blocker is superseded by accepted
+DATA2 source-specific review under the narrow direct-FNS project risk posture.
+Source retrieval instants are under investigation before seed regeneration;
+no date-only value may be converted into invented midnight provenance.
+
+PR4 is neither COMPLETE nor ready for final review. PR5 remains unauthorized.
+The accepted-main records below are retained as historical execution evidence;
+their pre-merge DATA2 status/next-action sentences are superseded here.
+
+
+## Immediate handoff — PR4-DATA2
+
+PR4-DATA2 — READY FOR REVIEW, not ACCEPTED or COMPLETE (`2026-09-05`).
+
+Issue #12; existing branch `data/pr4-data2-russia-spb-recuration` and
+[PR #13](https://github.com/Mitronomik/family-food-os/pull/13).
+Exact base: `26af749be0f6446de1d88cad2e2e03158a9830a0` (merged governance #9,
+historical PR4-DATA #8 and localization #11). This direction-consumables
+correction begins at reviewed head `66a30403e3463248bb9b66e5a40920ef3fb136b5`.
+The delivered head is recorded exactly in PR #13 after push, not as a
+self-referential commit hash in its own contents.
+
+Final: **30 recipes**, **28 retained / 2 replaced in this correction pass**;
+relative to historical PR4: **3 retained / 27 replaced**. Both forbidden ICN
+cards remain absent. **225 source-audit rows / 189 selected rows** (185 required,
+3 source-explicit optional, 1 conditional); exact **81 existing FoodIngredient**
+union within **80..120**, zero new codes and zero unresolved required rows.
+**86 source-backed equipment rows / 34 normalized codes**.
+
+Canonical PR4 meal types: **breakfast 3 / main 5 / side 5 / salad 6 /
+sandwich 1 / other 10**. Separate curation roles: **BREAKFAST 3 / MAIN_DISH 5 /
+SIDE_DISH 11 / SOUP 2 / DESSERT 3 / SNACK 4 / CONDIMENT 1 / SANDWICH 1**.
+**8 meal anchors**, **3 soups/substantial one-bowl meals**, **11 pure sides**;
+six primary-protein families: **DAIRY 1 / EGG 2 / FISH 2 / LEGUME_TOFU 1 /
+MEAT 1 / POULTRY 1** among anchors.
+
+All 30 actual sources were audited beyond ingredient lists: **281 consumable
+audit rows**. At the reviewed head, **9 recipes / 19 direction-only edible
+rows** included two required unquantified pan-release sprays. Honey Lime
+Chicken and Local Harvest Bake were replaced, not silently edited. The final
+corpus has **9 recipes / 24 direction-only edible rows**, all explicitly
+resolved; **zero unresolved required direction consumables**. Process water
+discarded after preparation is excluded from those direction-only edible
+counts; selected retained water is not.
+
+**83 non-water purchase forms: 3 RU_MASS_MARKET / 80 RU_AVAILABLE /
+0 SPECIALTY_OR_UNCLEAR**. Chain coverage: **70 one-chain / 10 two-chain /
+3 three-chain** forms. All five baseline chains assessed; Lenta concentration
+remains a limitation. Matrix: **187 raw / 179 unique observations,
+142 AVAILABLE / 37 UNCERTAIN** (includes rejected research).
+Compatibility is not momentary store stock.
+
+All final sources have nine reviewed consistency dimensions, including
+direction-only consumables; missing that ninth dimension fails closed. Exact
+artifacts/hashes, attribution and notices remain under the approved narrow
+direct-FNS project risk posture, including the ONIE-attributed deviled eggs.
+No unresolved selected-source rights blocker; no blanket public-domain or
+unrestricted commercial/derivative rights claim.
+
+Verification: final DATA2 validator **PASS**; focused DATA2 **164 passed in
+3.40s**; historical PR4-DATA/FoodIngredient affected suite **82 passed in 1.71s**;
+Ruff format **2 files already formatted**, Ruff check **All checks passed!**;
+`git diff --check` **PASS**. Five final artifacts reproduce byte-for-byte from
+reviewed source/form/consumable inputs. Final staged scope audit **PASS**: 24
+authorized text files, no runtime/database/binary or unrelated files. Full runtime suite
+and PR4 production seed execution are excluded from this isolated curation operation.
+
+Historical `data/curation/pr4/`, global seeds (183 ingredients / 172 aliases /
+183 profiles), PR4 runtime, migrations/API/frontend and local development DB
+remain unchanged. PR #10 remains at `cd2285802c94735e0c9015042f9f4c0b52d68b85`;
+it may consume DATA2 only after ACCEPT + merge. No RetailSKU/retailer production,
+Nutrition, Pantry, Planner, Shopping, Auth/PostgreSQL or AI work. PR5 unauthorized.
+Next action: project final review, not autonomous merge.
+
+See [final review evidence](../data/curation/pr4-data2/review-report.md) for sources, replacements and consumable resolutions.
+
 ## Project identity
 
 This repository is **FamilyFoodOS**.
@@ -16,62 +108,6 @@ Source provenance:
 - FamilyFoodOS repository: `Mitronomik/family-food-os`
 
 Do not continue CosmeticWorkshopOS product lifecycle work from this repository.
-
-## Current review candidate
-
-`PR4-DATA — Recipe Corpus FoodIngredient Coverage — COMPLETE`
-
-- GitHub PR `#8`: **MERGED**;
-- accepted head: `59cc1073ac1f951da5b172eb111ed162765b5eaf`;
-- merge commit and PR4 base: `704c588387a28e18ac1aa947ded398f168875ea0`;
-- final review: `PR4-DATA FINAL REVIEW: ACCEPT`.
-
-`PR4 — Verified Recipe Catalogue — READY FOR REVIEW`
-
-- branch: `migration/pr4-recipe-catalogue`;
-- original base:
-  `704c588387a28e18ac1aa947ded398f168875ea0`;
-- reviewed implementation head: `e3b31e9ef5e7ad30c252cb59a9edac8056efbe74`;
-- current main including merged governance PR #9:
-  `4a8b0a20f7793b890efa37741f035eb120909bc7`;
-- clean normal main-sync merge: `ac28dd4a3e972d943c53bd8d61cc6892dfb2e24b`;
-- subsequent blocker-report head is recorded in PR #10 and final agent report;
-- migration: `0024_food_recipe_catalogue` after `0023`;
-- structured seed counts: 30 Recipes, 30 immutable RecipeVersions,
-  365 RecipeIngredients, 315 RecipeSteps, 0 RecipeEquipment rows;
-- source mix: 3 Breakfasts, 8 Main Dishes, 11 Side Dishes, 3 Salads,
-  3 Sandwiches, 2 Standardized Recipes Project 2024;
-- all 30 source manifests have unique SHA-256 and six original servings;
-  existing rights bases/flags failed review and are NOT accepted clearance;
-- exact FoodIngredient coverage is the accepted 119-code manifest, with 0
-  unresolved required lines and 0 new FoodIngredients in PR4;
-- first seed run inserted `30/30/365/315/0`; second run inserted zero and
-  reported the same rows existing, both with zero conflicts;
-- scaling proof: 6→3 and 6→9 preserve identity/history/steps and exactly scale
-  600 g to 300/900 g and 1 pcs to 0.5/1.5 pcs;
-- v1→v2, unchanged v1 snapshot, current-v2 lookup and direct DB immutability
-  guards are covered;
-- aggregate rollback and successful/failed UoW terminality are covered;
-- focused/affected suite: `80 passed`; backend suite within the final regression:
-  `2174 passed`; mandatory backend + launcher regression: `2819 passed`;
-- Ruff format/check and `git diff --check`: passed.
-
-PR4 is not COMPLETE. The lifecycle label above is retained as requested; review
-result is **CHANGES REQUIRED / RIGHTS BLOCKED (Outcome B)**. See the
-[rights review](../docs/family-food/pr4-rights-review.md) for all affected
-collections, evidence, options and recommended decision. Obtain source-specific
-clearance or an explicit corpus decision before continuing. Do not merge PR #10.
-PR5 remains unauthorized. Equipment rows remain zero as a known defect.
-
-Seed and test results above are historical pre-correction evidence, not rerun
-results. This pass stopped implementation at the rights gate. Read-only JSON
-recount confirms `30/30/365/315/0` and 119 ingredient codes. Focused PR4,
-FoodIngredient, full regression and seed twice were not rerun under Outcome B;
-Ruff is N/A with no changed Python files. The ignored stale local development
-database is untouched and must not be staged.
-Read-only artifact/coverage assertions and `git diff --check` passed. Scope is
-governance synchronization plus five documentation/state files; runtime,
-generator, tests, manifests and corpus are unchanged from the reviewed head.
 
 ## Completed milestone
 
@@ -143,7 +179,7 @@ Before continuing:
     - `backend/app/db/migrations.py`
     - its migration-chain tests
 
-## Superseded PR3/PR4-DATA handoff history
+## Historical work record (superseded by immediate handoff above)
 
 `PR3 — FoodIngredient Catalogue — COMPLETE`
 
@@ -157,10 +193,9 @@ Closure evidence:
 - full backend + launcher regression: `2761 passed`;
 - Ruff and `git diff --check`: passed.
 
-`PR4-DATA — Recipe Corpus FoodIngredient Coverage — COMPLETE`
+`PR4-DATA — Recipe Corpus FoodIngredient Coverage — READY FOR REVIEW`
 
-This was a supporting data operation, not a product milestone. The historical
-review evidence below was accepted and merged as GitHub PR #8.
+This is a supporting data operation, not a product milestone.
 
 Branch: `data/pr4-recipe-ingredient-coverage`
 
@@ -230,7 +265,9 @@ Verification:
 
 ## Immediate next action
 
-Perform PR4 final review. Do not begin PR5.
+Complete PR4-DATA final review and merge. The next product milestone remains
+`PR4 — Recipe Catalogue`, and its implementation waits for PR4-DATA merge. PR5
+remains unauthorized.
 
 ## Persistence constraints
 

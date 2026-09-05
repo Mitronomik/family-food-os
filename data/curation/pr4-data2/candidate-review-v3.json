@@ -1,0 +1,772 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-05",
+  "status": "ADDITIONAL_PRIMARY_SOURCE_SCREEN_NOT_ACCEPTED_CORPUS",
+  "method": "Additional WIC Works and SNAP-Ed primary-source ingredient screen after the all-old market audit. Facts below are compact factual transcriptions, not an archived copy of the source. Source quantities and preparation states are preserved. SOURCE_MAPPED is not rights, market, quantity-normalization or final-corpus acceptance. No recipe photos, branding or source prose are licensed by this record.",
+  "rights_review": {
+    "tnc": {
+      "evidence_url": "https://www.fns.usda.gov/tn/cooks",
+      "result": "The collection expressly permits downloading and copying its materials. This is not an express unrestricted commercial/derivative grant. Apply the approved direct-FNS project risk posture, retain attribution, and exclude photos/logos/trademarks. Eggs and Applesauce binaries and recipe-page visuals were reviewed; no copyright or permission notice was found in their full text.",
+      "review_status": "REVIEWED_UNDER_PROJECT_RISK_POSTURE_NOT_PUBLIC_DOMAIN_ASSERTION"
+    },
+    "harvest": {
+      "evidence_url": "https://www.fns.usda.gov/fdpir/harvest-recipes-usda-foods",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "result": "Primary FNS-430 binary SHA-256 36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e verified (4,367,674 bytes, 98 pages). Both pages of each of the six mapped cards, acknowledgments and back cover visually reviewed. No third-party copyright/licensing restriction on selected cards. Tribal and contractor acknowledgments are provenance, not an automatic exclusion or a license. Apply accepted direct-FNS project risk posture; no public-domain or unrestricted commercial/derivative assertion.",
+      "review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE"
+    },
+    "wic": {
+      "evidence_url": "https://wicworks.fns.usda.gov/es/node/1807",
+      "result": "WIC submission policy requires permission to share, with verification and applicable image licenses; it is not a commercial/derivative grant. Reviewed direct-FNS recipes use accepted project risk posture. Preserve local credits and exclude source images/logos/trademarks. Edamame external original carries copyright but FAQ question6 independently permits recipe-only reuse with linkback (not recipe and photo together); explicit original link is required. No public-domain or unlimited commercial/derivative assertion.",
+      "review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE_WITH_SOURCE_SPECIFIC_CONDITIONS"
+    },
+    "snap": {
+      "evidence_url": "https://snaped.fns.usda.gov/resources",
+      "result": "Reviewed directly FNS-hosted recipe text carries no third-party copyright/licensing restriction. Apply the accepted direct-FNS project risk posture, preserving any recoverable original-author credits and exact source. A missing separate commercial grant is not a renewed blocker. SNAP's photo-gallery terms apply to photos, not a blanket recipe license; no images/logos/trademarks are imported. MyPlate links often return a generic replacement landing page or inaccessible content; this is recorded as an attribution-retrieval limitation, not proof of either restriction or unrestricted rights.",
+      "review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE"
+    }
+  },
+  "candidates": [
+    {
+      "candidate_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+      "source_servings": 1,
+      "decision": "SOURCE_MAPPED",
+      "ingredient_facts": [
+        "milk low/nonfat or soy: 1/3 cup",
+        "rolled or quick oats: 1/4 cup",
+        "plain low/nonfat yogurt: 1/4 cup",
+        "cinnamon: 1 tsp",
+        "vanilla extract optional: 1 tsp",
+        "apple chopped: 1/2"
+      ],
+      "selected_required_codes": [
+        "MILK_1_PERCENT",
+        "OATS_ROLLED",
+        "YOGURT_PLAIN_LOW_FAT",
+        "CINNAMON_GROUND",
+        "APPLE"
+      ],
+      "selection_basis": "Retain named cinnamon-apple version; omit explicitly optional vanilla. Milk 1% is a member of low-fat milk. Yogurt remains plain low-fat, not flavored. The introduction permits omitting everything except oats/liquid, but that permission is not used to generate artificial duplicate recipes.",
+      "step_facts": [
+        "Mix everything except apple in a resealable container; refrigerate covered overnight, at least 5 hours.",
+        "Chop and add apple at serving; source permits extra liquid for thinner texture."
+      ],
+      "source_backed_equipment": [
+        "resealable container",
+        "measuring cups and spoons",
+        "knife",
+        "cutting board"
+      ],
+      "time_minutes": {
+        "prep": 5,
+        "minimum_chill": 300
+      },
+      "remaining_issues": [
+        "Primary HTML artifact/hash",
+        "Retail evidence association"
+      ],
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+      "rights_basis": "Primary directly FNS-hosted recipe text reviewed; no third-party copyright/licensing restriction found. Any identified local-agency credit is preserved. Accepted project risk posture applies without asserting public domain or unrestricted commercial derivatives. No source imagery, logos or trademarks imported."
+    },
+    {
+      "candidate_id": "WIC6-CARAMELIZED-SWEET-POTATO-QUINOA",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/caramelized-sweet-potatoes-quinoa-greens",
+      "source_servings": 6,
+      "decision": "SOURCE_MAPPED",
+      "ingredient_facts": [
+        "sweet potatoes medium: 4",
+        "olive oil divided: 5 Tbsp",
+        "salt and pepper: to taste",
+        "onion medium chopped: 1",
+        "garlic minced: 2 cloves",
+        "fresh ginger peeled chopped: 1 inch",
+        "Indian curry powder mild: 2 Tbsp",
+        "leafy greens such as kale/chard/collards sliced: 3 cups",
+        "quinoa rinsed: 1.5 cups",
+        "low-sodium vegetable stock OR water: 3 cups",
+        "lemon juiced: 1/2"
+      ],
+      "selected_required_codes": [
+        "SWEET_POTATO",
+        "OLIVE_OIL",
+        "SALT",
+        "BLACK_PEPPER",
+        "ONION_YELLOW",
+        "GARLIC",
+        "GINGER",
+        "CURRY_POWDER",
+        "KALE",
+        "QUINOA",
+        "WATER",
+        "LEMON"
+      ],
+      "selection_basis": "Select explicitly allowed water and kale. Preserve mild Indian curry descriptor in market review. Chutney, yogurt and cucumber sides are optional in the introduction and omitted.",
+      "step_facts": [
+        "Wash produce; peel potatoes and slice 1/4 inch thick.",
+        "Toss potatoes with salt and 2 Tbsp oil; spread on parchment-covered baking sheet and cover with foil or another sheet.",
+        "Start in cold oven; set 450 F, bake 30 minutes; uncover 15 minutes, then flip and continue until both faces caramelize.",
+        "In medium pot heat 2 Tbsp oil; soften onion 2–3 minutes; add garlic, ginger, curry and greens.",
+        "Add quinoa and selected water; boil then cover and simmer about 15 minutes until absorbed. Fluff, season and add remaining 1 Tbsp oil.",
+        "Serve grain/greens topped with potatoes and lemon juice."
+      ],
+      "source_backed_equipment": [
+        "vegetable peeler",
+        "knife",
+        "cutting board",
+        "bowl",
+        "measuring cups and spoons",
+        "baking sheet",
+        "foil",
+        "spatula",
+        "spoon",
+        "fork",
+        "medium pot with lid",
+        "serving platter"
+      ],
+      "time_minutes": {
+        "prep": 20,
+        "cook": 50,
+        "total": 70
+      },
+      "remaining_issues": [
+        "Mild curry purchase descriptor evidence",
+        "Primary HTML artifact/hash",
+        "Retail evidence association"
+      ],
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://wicworks.fns.usda.gov/recipe/caramelized-sweet-potatoes-quinoa-greens",
+      "rights_basis": "Primary directly FNS-hosted recipe text reviewed; no third-party copyright/licensing restriction found. Any identified local-agency credit is preserved. Accepted project risk posture applies without asserting public domain or unrestricted commercial derivatives. No source imagery, logos or trademarks imported."
+    },
+    {
+      "candidate_id": "WIC4-ROASTED-CARROTS",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/roasted-carrots-3-ways",
+      "source_servings": 4,
+      "decision": "SOURCE_MAPPED",
+      "ingredient_facts": [
+        "carrots peeled in 2-inch pieces: 1 lb",
+        "vegetable oil: 1 Tbsp",
+        "garlic powder: 2 tsp",
+        "salt: 1.5 tsp",
+        "black pepper: 1 tsp"
+      ],
+      "selected_required_codes": [
+        "CARROT",
+        "OLIVE_OIL",
+        "GARLIC_POWDER",
+        "SALT",
+        "BLACK_PEPPER"
+      ],
+      "selection_basis": "Select the source's standard version, not spicy/sweet variants. Orchestrator's final selected member of unrestricted vegetable oil is OLIVE_OIL, without amount change. This is a documented generic-category member choice, not a claim that the standard source list explicitly mandates olive oil; olive wording occurs in a conditional spicy-version sentence.",
+      "step_facts": [
+        "Wash carrots and preheat 425 F.",
+        "Spread carrots on foil-lined baking tray; add oil and seasonings, toss evenly.",
+        "Bake 15 minutes, stir, then bake about 10 minutes more until tender and browning."
+      ],
+      "source_backed_equipment": [
+        "vegetable peeler",
+        "knife",
+        "cutting board",
+        "measuring spoons",
+        "baking tray",
+        "foil",
+        "spatula"
+      ],
+      "time_minutes": {
+        "prep": 5,
+        "cook": 25,
+        "total": 30
+      },
+      "remaining_issues": [
+        "Retail evidence association"
+      ],
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://wicworks.fns.usda.gov/recipe/roasted-carrots-3-ways",
+      "rights_basis": "Primary directly FNS-hosted recipe text reviewed; no third-party copyright/licensing restriction found. Any identified local-agency credit is preserved. Accepted project risk posture applies without asserting public domain or unrestricted commercial derivatives. No source imagery, logos or trademarks imported.",
+      "source_artifact": {
+        "artifact_kind": "BROWSER_SAVED_HTML_ONLY_NOT_RAW_HTTP_BODY",
+        "local_artifact_name": "data2-wic-roasted-carrots.html",
+        "sha256": "a91715ce573ab80385ae897e7966267e7a9c9732c76ac83a4328ed078201a7eb",
+        "bytes": 33957,
+        "retrieved_at": "2026-09-05",
+        "review": "Canonical URL and complete ingredient/direction/time sections verified in browser-saved HTML. No actual third-party copyright/licensing notice found. Scripts and other page assets are not part of proposed recipe data."
+      }
+    },
+    {
+      "candidate_id": "WIC4-RAINBOW-KEBABS",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/rainbow-kebabs",
+      "source_servings": 4,
+      "decision": "SOURCE_MAPPED_QUALITATIVE_AMOUNT_REVIEW",
+      "ingredient_facts": [
+        "boneless skinless chicken breasts cubed: 2",
+        "zucchini in 1/2-inch rounds: 1",
+        "mushrooms sliced: 8 oz",
+        "red bell peppers chopped: 2",
+        "red onion chopped: 1",
+        "olive oil OR cooking spray: amount unspecified",
+        "salt and pepper: amount unspecified",
+        "wooden skewers: 8, equipment not FoodIngredient"
+      ],
+      "selected_required_codes": [
+        "CHICKEN_BREAST",
+        "ZUCCHINI",
+        "MUSHROOM_WHITE",
+        "BELL_PEPPER_RED",
+        "ONION_RED",
+        "OLIVE_OIL",
+        "SALT",
+        "BLACK_PEPPER"
+      ],
+      "selection_basis": "Choose olive oil, not spray, and the source baking option. Preserve unspecified drizzle/seasoning quantities; do not invent amounts. Generic mushrooms select existing white mushrooms.",
+      "step_facts": [
+        "Soak wooden skewers at least 30 minutes.",
+        "Preheat oven to 350 F; thread chicken and vegetables onto skewers in the source order.",
+        "Drizzle olive oil and season; bake on sheet about 15–20 minutes until chicken reaches 165 F."
+      ],
+      "source_backed_equipment": [
+        "knife",
+        "two cutting boards",
+        "measuring cups and spoons",
+        "eight wooden skewers",
+        "tongs",
+        "baking sheet"
+      ],
+      "time_minutes": {
+        "prep": 15,
+        "cook": 15,
+        "total": 30,
+        "skewer_soak": 30
+      },
+      "remaining_issues": [
+        "Unquantified required oil/salt/pepper; preserve rather than invent",
+        "Primary HTML artifact/hash",
+        "Retail evidence association"
+      ],
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://wicworks.fns.usda.gov/recipe/rainbow-kebabs",
+      "rights_basis": "Primary directly FNS-hosted recipe text reviewed; no third-party copyright/licensing restriction found. Any identified local-agency credit is preserved. Accepted project risk posture applies without asserting public domain or unrestricted commercial derivatives. No source imagery, logos or trademarks imported."
+    },
+    {
+      "candidate_id": "WIC8-SWEET-SAVORY-BROCCOLI-SALAD",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/sweet-and-savory-broccoli-salad",
+      "source_servings": 8,
+      "decision": "SOURCE_MAPPED",
+      "ingredient_facts": [
+        "broccoli bite-size florets: 6 cups",
+        "cheddar shredded: 1.5 cups",
+        "raisins OR dried cranberries: 1/2 cup",
+        "sunflower seeds OR pecans/other nuts: 1/2 cup",
+        "plain low/nonfat yogurt: 1 cup",
+        "lemon juice: 1 Tbsp",
+        "salt and pepper: to taste"
+      ],
+      "selected_required_codes": [
+        "BROCCOLI",
+        "CHEESE_CHEDDAR",
+        "CRANBERRIES_DRIED",
+        "WALNUTS_RAW",
+        "YOGURT_PLAIN_LOW_FAT",
+        "LEMON",
+        "SALT",
+        "BLACK_PEPPER"
+      ],
+      "selection_basis": "Explicit dried-cranberry option and unrestricted other-nuts option selects walnuts. Source cheddar is ordinary, not reduced-fat. Shredding is preparation. Lemon source quantity remains juice, not whole-fruit grams.",
+      "step_facts": [
+        "Wash broccoli; combine all ingredients in large bowl.",
+        "Serve immediately or refrigerate covered overnight."
+      ],
+      "source_backed_equipment": [
+        "knife",
+        "cutting board",
+        "measuring cups and spoons",
+        "grater",
+        "large bowl",
+        "mixing spoon"
+      ],
+      "time_minutes": {
+        "prep": 10
+      },
+      "remaining_issues": [
+        "Primary HTML artifact/hash",
+        "Retail evidence association"
+      ],
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://wicworks.fns.usda.gov/recipe/sweet-and-savory-broccoli-salad",
+      "rights_basis": "Primary directly FNS-hosted recipe text reviewed; no third-party copyright/licensing restriction found. Any identified local-agency credit is preserved. Accepted project risk posture applies without asserting public domain or unrestricted commercial derivatives. No source imagery, logos or trademarks imported."
+    },
+    {
+      "candidate_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+      "source_servings": 2,
+      "decision": "SOURCE_MAPPED",
+      "ingredient_facts": [
+        "low/nonfat milk: 1 cup",
+        "plain low/nonfat yogurt OR vanilla: 1/2 cup",
+        "banana sliced: 1",
+        "spinach: 1 cup",
+        "apple chopped: 1 cup",
+        "frozen cauliflower: 1/2 cup",
+        "oats: 1/2 cup"
+      ],
+      "selected_required_codes": [
+        "MILK_1_PERCENT",
+        "YOGURT_PLAIN_LOW_FAT",
+        "BANANA",
+        "SPINACH",
+        "APPLE",
+        "CAULIFLOWER",
+        "OATS_ROLLED"
+      ],
+      "selection_basis": "Choose plain yogurt and frozen cauliflower. Freezing is preserved for retail review; the source also permits fresh steamed cauliflower but that alternative is not selected. Generic oats select rolled.",
+      "step_facts": [
+        "Wash produce; blend all ingredients on high about 1–2 minutes until smooth; divide into two glasses."
+      ],
+      "source_backed_equipment": [
+        "knife",
+        "cutting board",
+        "measuring cups",
+        "blender",
+        "two glasses"
+      ],
+      "time_minutes": {
+        "prep": 5
+      },
+      "source_attribution": "Virginia Beach WIC",
+      "remaining_issues": [
+        "Primary HTML artifact/hash",
+        "Retail evidence association"
+      ],
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+      "rights_basis": "Primary directly FNS-hosted recipe text reviewed; no third-party copyright/licensing restriction found. Any identified local-agency credit is preserved. Accepted project risk posture applies without asserting public domain or unrestricted commercial derivatives. No source imagery, logos or trademarks imported."
+    },
+    {
+      "candidate_id": "WIC4-CAULIFLOWER-MASH",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/one-bowl-cheesy-cauliflower-mash",
+      "source_servings": 4,
+      "decision": "SOURCE_MAPPED",
+      "ingredient_facts": [
+        "cauliflower large head: 1",
+        "water: 1/2 cup",
+        "low/nonfat milk OR plain lowfat yogurt/kefir: 2 Tbsp",
+        "butter: 1 Tbsp",
+        "cheddar shredded: 2/3 cup; note permits Colby/Swiss/mozzarella",
+        "garlic powder optional: 1/2 tsp",
+        "salt and pepper: to taste"
+      ],
+      "selected_required_codes": [
+        "CAULIFLOWER",
+        "WATER",
+        "MILK_1_PERCENT",
+        "BUTTER_UNSALTED",
+        "CHEESE_CHEDDAR",
+        "SALT",
+        "BLACK_PEPPER"
+      ],
+      "selection_basis": "Keep ordinary cheddar and choose milk; omit optional garlic. Source also expressly permits mozzarella, but final selection need not depend on unresolved reduced-fat/low-moisture forms.",
+      "step_facts": [
+        "Rinse and cut cauliflower into 1–2-inch pieces.",
+        "Microwave with water in large microwave-safe bowl on high about 6 minutes, until tender.",
+        "Drain; add milk and butter, mash; mix cheese and salt/pepper; serve warm."
+      ],
+      "source_backed_equipment": [
+        "knife",
+        "cutting board",
+        "measuring cups and spoons",
+        "cheese grater",
+        "microwave-safe large bowl",
+        "strainer",
+        "fork or potato masher"
+      ],
+      "time_minutes": {
+        "prep": 10,
+        "cook": 6,
+        "total": 16
+      },
+      "remaining_issues": [
+        "Primary HTML artifact/hash",
+        "Retail evidence association"
+      ],
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://wicworks.fns.usda.gov/recipe/one-bowl-cheesy-cauliflower-mash",
+      "rights_basis": "Primary directly FNS-hosted recipe text reviewed; no third-party copyright/licensing restriction found. Any identified local-agency credit is preserved. Accepted project risk posture applies without asserting public domain or unrestricted commercial derivatives. No source imagery, logos or trademarks imported."
+    },
+    {
+      "candidate_id": "WIC8-ROASTED-PUMPKIN-SEEDS",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/roasted-pumpkin-seeds",
+      "source_servings": 8,
+      "decision": "SOURCE_MAPPED_SEED_FORM_REVIEW",
+      "ingredient_facts": [
+        "cleaned pumpkin seeds: 2 cups",
+        "olive oil: 2 tsp",
+        "salt: 1/2 tsp",
+        "garlic powder: 1/2 tsp"
+      ],
+      "selected_required_codes": [
+        "PUMPKIN_SEEDS_RAW",
+        "OLIVE_OIL",
+        "SALT",
+        "GARLIC_POWDER"
+      ],
+      "selection_basis": "Standard garlic version only. Source discusses seeds removed from pumpkin with stringy pulp rinsed away, not explicitly hulled retail kernels. Preserve this distinction and verify global/source and retailer seed form before acceptance.",
+      "step_facts": [
+        "Rinse away pulp and dry seeds thoroughly.",
+        "Preheat 350 F; mix ingredients in bowl; spread on baking tray.",
+        "Bake about 15–20 minutes until golden, stirring halfway; cool."
+      ],
+      "source_backed_equipment": [
+        "measuring cups and spoons",
+        "large bowl",
+        "baking tray",
+        "spoon"
+      ],
+      "time_minutes": {
+        "prep": 5,
+        "cook": 20,
+        "total": 25
+      },
+      "remaining_issues": [
+        "Source whole-seed versus retail kernel form",
+        "Primary HTML artifact/hash",
+        "Retail evidence association"
+      ],
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://wicworks.fns.usda.gov/recipe/roasted-pumpkin-seeds",
+      "rights_basis": "Primary directly FNS-hosted recipe text reviewed; no third-party copyright/licensing restriction found. Any identified local-agency credit is preserved. Accepted project risk posture applies without asserting public domain or unrestricted commercial derivatives. No source imagery, logos or trademarks imported."
+    },
+    {
+      "candidate_id": "WIC8-EDAMAME-QUINOA-SALAD",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/edamame-quinoa-salad/printable/print",
+      "source_servings": 8,
+      "decision": "SOURCE_MAPPED",
+      "ingredient_facts": [
+        "quinoa OR brown rice/barley: 1 cup",
+        "water: 2 cups",
+        "salt: 1/4 tsp",
+        "celery sliced: 1/2 cup",
+        "corn fresh/frozen/canned: 3/4 cup",
+        "chickpeas prepared from dried OR canned: 3/4 cup",
+        "cilantro minced: 1/2 bunch",
+        "dried cranberries: 1/2 cup",
+        "frozen edamame shelled cooked: 6 oz",
+        "red bell pepper diced: 1",
+        "almonds sliced OR any nut: 1/2 cup",
+        "olive oil: 3 Tbsp, adjustable",
+        "lime juice: 5 Tbsp, adjustable",
+        "additional salt: to taste"
+      ],
+      "selected_required_codes": [
+        "QUINOA",
+        "WATER",
+        "SALT",
+        "CELERY",
+        "CORN_SWEET",
+        "CHICKPEAS_DRY",
+        "CILANTRO",
+        "CRANBERRIES_DRIED",
+        "EDAMAME_FROZEN",
+        "BELL_PEPPER_RED",
+        "ALMONDS_RAW",
+        "OLIVE_OIL",
+        "LIME_JUICE"
+      ],
+      "selection_basis": "Explicit prepared-from-dry chickpeas and frozen corn options, with cooked chickpea quantity retained; no invented dry-weight conversion. Source edamame is frozen, shelled, cooked; preserve purchase form.",
+      "step_facts": [
+        "Boil quinoa with water and initial salt in saucepan; cover on low 15–20 minutes.",
+        "Move to large bowl and fluff; mix remaining ingredients; season and chill."
+      ],
+      "source_backed_equipment": [
+        "knife",
+        "cutting board",
+        "measuring cups and spoons",
+        "pot with lid",
+        "large bowl",
+        "fork"
+      ],
+      "time_minutes": {
+        "prep": 10,
+        "cook": 20,
+        "total": 30
+      },
+      "source_attribution": "Page says adopted from a linked recipe; target not recovered from search-index text.",
+      "remaining_issues": [
+        "Retail evidence association"
+      ],
+      "external_source_url": "https://www.the-girl-who-ate-everything.com/edamame-quinoa-salad/",
+      "source_artifact": {
+        "artifact_kind": "BROWSER_SAVED_HTML_ONLY_NOT_RAW_HTTP_BODY",
+        "local_artifact_name": "data2-wic-edamame-quinoa.html",
+        "sha256": "160cea3efe545ccea249313e052e42b29260dd086cbd86d7fe083ccf97feb4fe",
+        "bytes": 33174,
+        "retrieved_at": "2026-09-05",
+        "review": "Live primary WIC page, source attribution link, complete ingredients and directions reviewed. HTML-only browser Save, not raw HTTP body hash."
+      },
+      "rights_review_status": "REVIEWED_WITH_EXTERNAL_RECIPE_ONLY_LINKBACK_PERMISSION",
+      "rights_evidence_url": "https://www.the-girl-who-ate-everything.com/faq/",
+      "rights_basis": "WIC directly links the original Christy Denney recipe. Original site carries a copyright notice. Independent primary FAQ question 6 permits using recipe OR photo with a link back; prohibits using both together. Curated recipe facts only, no source photo, and explicit original-source link comply with this stated condition under accepted direct-FNS posture. Permission is not represented as an express unrestricted commercial/derivative license or public domain."
+    },
+    {
+      "candidate_id": "SNAP8-HOMEMADE-MASHED-POTATOES",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/homemade-mashed-potatoes",
+      "source_servings": 8,
+      "decision": "SOURCE_MAPPED",
+      "ingredient_facts": [
+        "potatoes: 2 lb, 6 medium",
+        "low-fat milk: 1 cup",
+        "margarine OR butter: 3 Tbsp",
+        "salt: 1 tsp",
+        "ground pepper: 1/2 tsp",
+        "water in directions: enough to cover"
+      ],
+      "selected_required_codes": [
+        "POTATO",
+        "MILK_1_PERCENT",
+        "BUTTER_UNSALTED",
+        "SALT",
+        "BLACK_PEPPER",
+        "WATER"
+      ],
+      "selection_basis": "Choose explicit butter option; preserve milk up-to-source amount adjusted for creaminess and cooking-water quantity as source qualitative, not invented grams.",
+      "step_facts": [
+        "Peel and chunk potatoes; cover with water in medium saucepan and cook on medium about 15 minutes until tender.",
+        "Drain; mash with fork or masher, stir milk for smooth texture, then butter and seasonings."
+      ],
+      "source_backed_equipment": [
+        "medium saucepan",
+        "fork or potato masher"
+      ],
+      "remaining_issues": [
+        "Primary HTML artifact/hash",
+        "Retail evidence association"
+      ],
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/homemade-mashed-potatoes",
+      "rights_basis": "Direct official SNAP-Ed recipe text reviewed. No third-party copyright/licensing restriction appears on the reviewed card. Accepted direct-FNS project risk posture applies, not a public-domain or unrestricted commercial/derivative claim. Preserve source URL and available origin attribution; exclude source imagery and branding.",
+      "attribution_retrieval_note": "Original MyPlate route may now be unavailable or return a generic updated-guidelines landing page. Existing direct SNAP source remains the reviewed card; no inference of rights clearance from the redirect."
+    },
+    {
+      "candidate_id": "SNAP8-APPLE-CARROT-SOUP",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+      "original_url": "https://www.myplate.gov/recipes/supplemental-nutrition-assistance-program-snap/apple-carrot-soup",
+      "source_servings": 8,
+      "decision": "SOURCE_MAPPED",
+      "ingredient_facts": [
+        "lean pork chunks: 1 lb",
+        "apples cored quartered with skin: 4",
+        "large carrots peeled chunked: 4",
+        "dried orange peel optional: 1 tsp",
+        "ginger: 4 slices",
+        "salt: 1/2 tsp",
+        "water: 20 cups"
+      ],
+      "selected_required_codes": [
+        "PORK_LOIN",
+        "APPLE",
+        "CARROT",
+        "GINGER",
+        "SALT",
+        "WATER"
+      ],
+      "selection_basis": "Lean generic pork selects existing loin; omit optional dried peel. Preserve ginger slice count and original water quantity and long reduction time.",
+      "step_facts": [
+        "Boil all ingredients in large pot; reduce to medium and simmer 3–4 hours until liquid reduces to about 8 cups; skim surface fat and serve."
+      ],
+      "source_backed_equipment": [
+        "large pot"
+      ],
+      "source_attribution": "San Francisco Department of Public Health, Chinatown Public Health Center; Healthy & Delicious—Simple Ways to Low Fat Chinese Cooking (attributed in official older SNAP Chinese New Year PDF).",
+      "attribution_evidence_url": "https://snaped.fns.usda.gov/sites/default/files/documents/EnglishChineseNewYearMenu.pdf",
+      "remaining_issues": [
+        "Primary HTML/PDF artifact/hash",
+        "Retail evidence association"
+      ],
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+      "rights_basis": "Direct official SNAP-Ed recipe text reviewed. No third-party copyright/licensing restriction appears on the reviewed card. Accepted direct-FNS project risk posture applies, not a public-domain or unrestricted commercial/derivative claim. Preserve source URL and available origin attribution; exclude source imagery and branding.",
+      "attribution_retrieval_note": "Original MyPlate route may now be unavailable or return a generic updated-guidelines landing page. Existing direct SNAP source remains the reviewed card; no inference of rights clearance from the redirect."
+    },
+    {
+      "candidate_id": "SNAP6-WALDORF-SALAD",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "source_servings": 6,
+      "decision": "SOURCE_MAPPED_NONFAT_YOGURT_REVIEW",
+      "ingredient_facts": [
+        "walnuts chopped: 1/4 cup",
+        "apples cored diced: 2",
+        "celery diced: 1 cup",
+        "raisins: 1/2 cup",
+        "plain nonfat yogurt: 1/4 cup",
+        "sugar: 1/2 tsp",
+        "lemon juice: 1 tsp"
+      ],
+      "selected_required_codes": [
+        "WALNUTS_RAW",
+        "APPLE",
+        "CELERY",
+        "RAISINS_GOLDEN",
+        "YOGURT_GREEK_NONFAT",
+        "SUGAR",
+        "LEMON"
+      ],
+      "selection_basis": "Generic raisins select golden. Nonfat constraint must not be weakened to low-fat 2% yogurt. Greek nonfat is a member of the generic yogurt category but retailer nonfat evidence remains necessary. Toasting walnuts is preparation.",
+      "step_facts": [
+        "Toast walnuts on baking sheet at 350 F about 12–15 minutes, stirring.",
+        "Combine apples, celery, nuts and raisins; mix yogurt/sugar/lemon separately, toss together."
+      ],
+      "source_backed_equipment": [
+        "baking sheet"
+      ],
+      "remaining_issues": [
+        "Nonfat plain yogurt retailer evidence",
+        "Primary HTML artifact/hash"
+      ],
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "rights_basis": "Direct official SNAP-Ed recipe text reviewed. No third-party copyright/licensing restriction appears on the reviewed card. Accepted direct-FNS project risk posture applies, not a public-domain or unrestricted commercial/derivative claim. Preserve source URL and available origin attribution; exclude source imagery and branding.",
+      "attribution_retrieval_note": "Original MyPlate route may now be unavailable or return a generic updated-guidelines landing page. Existing direct SNAP source remains the reviewed card; no inference of rights clearance from the redirect."
+    },
+    {
+      "candidate_id": "SNAP4-BROWN-RICE-PILAF",
+      "source_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+      "source_servings": 4,
+      "decision": "SOURCE_MAPPED",
+      "ingredient_facts": [
+        "brown rice dry: 1.5 cups",
+        "water: 3 cups",
+        "almonds chopped: 1/4 cup",
+        "dried parsley: 1 tsp",
+        "garlic powder: 1/2 tsp",
+        "black pepper: 1/4 tsp"
+      ],
+      "selected_required_codes": [
+        "RICE_BROWN",
+        "WATER",
+        "ALMONDS_RAW",
+        "PARSLEY_DRIED",
+        "GARLIC_POWDER",
+        "BLACK_PEPPER"
+      ],
+      "selection_basis": "Source brown rice is not described as instant or parboiled. Chopping almonds is preparation. No ingredients omitted or replaced.",
+      "step_facts": [
+        "Wash hands; put all ingredients in rice cooker and cook about 30 minutes, until water evaporates; fluff with fork."
+      ],
+      "source_backed_equipment": [
+        "rice cooker",
+        "fork"
+      ],
+      "remaining_issues": [
+        "Primary HTML artifact/hash",
+        "Retail evidence association"
+      ],
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+      "rights_basis": "Direct official SNAP-Ed recipe text reviewed. No third-party copyright/licensing restriction appears on the reviewed card. Accepted direct-FNS project risk posture applies, not a public-domain or unrestricted commercial/derivative claim. Preserve source URL and available origin attribution; exclude source imagery and branding.",
+      "attribution_retrieval_note": "Original MyPlate route may now be unavailable or return a generic updated-guidelines landing page. Existing direct SNAP source remains the reviewed card; no inference of rights clearance from the redirect."
+    },
+    {
+      "candidate_id": "SNAP5-KALE-NUTS-RAISINS",
+      "source_url": "https://snaped.fns.usda.gov/node/1861",
+      "source_servings": 5,
+      "decision": "SOURCE_MAPPED",
+      "ingredient_facts": [
+        "nuts chopped: 1/4 cup",
+        "vegetable oil: 2 Tbsp",
+        "garlic chopped: 2 cloves",
+        "kale stems removed chopped: 4 cups, 1 bunch",
+        "raisins: 1/2 cup",
+        "salt optional: to taste"
+      ],
+      "selected_required_codes": [
+        "WALNUTS_RAW",
+        "SUNFLOWER_OIL",
+        "GARLIC",
+        "KALE",
+        "RAISINS_GOLDEN"
+      ],
+      "selection_basis": "Unrestricted nuts select walnuts; generic vegetable oil selects sunflower; generic raisins select golden. Source toast is kitchen preparation. Optional salt omitted.",
+      "step_facts": [
+        "Toast nuts on baking sheet 5 minutes at 350 F.",
+        "Heat oil in frying pan on medium; cook garlic and kale 4 minutes; add nuts and raisins and cook 1 minute."
+      ],
+      "source_backed_equipment": [
+        "baking sheet",
+        "frying pan"
+      ],
+      "remaining_issues": [
+        "Primary HTML artifact/hash",
+        "Retail evidence association"
+      ],
+      "rights_review_status": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+      "rights_evidence_url": "https://snaped.fns.usda.gov/node/1861",
+      "rights_basis": "Direct official SNAP-Ed recipe text reviewed. No third-party copyright/licensing restriction appears on the reviewed card. Accepted direct-FNS project risk posture applies, not a public-domain or unrestricted commercial/derivative claim. Preserve source URL and available origin attribution; exclude source imagery and branding.",
+      "attribution_retrieval_note": "Original MyPlate route may now be unavailable or return a generic updated-guidelines landing page. Existing direct SNAP source remains the reviewed card; no inference of rights clearance from the redirect."
+    }
+  ],
+  "additional_negative_screens": [
+    {
+      "source_url": "https://wicworks.fns.usda.gov/recipe/savory-garlicky-oatmeal-egg",
+      "reason": "Source lists 1 Tbsp oil and uses all of it in step 2; step 5 calls for remaining oil with none remaining. Do not invent extra amount."
+    },
+    {
+      "source_url": "https://wicworks.fns.usda.gov/recipe/golden-milk",
+      "reason": "Required dry ground ginger is not existing fresh GINGER; optional almond butter may be omitted but does not fix ginger form."
+    },
+    {
+      "source_url": "https://wicworks.fns.usda.gov/recipe/lightened-greens",
+      "reason": "Required smoked paprika cannot silently collapse to ordinary PAPRIKA."
+    },
+    {
+      "source_url": "https://wicworks.fns.usda.gov/recipe/springtime-barley-salad",
+      "reason": "Required canned no-salt chickpeas; no prepared-from-dry option on this card."
+    },
+    {
+      "source_url": "https://wicworks.fns.usda.gov/recipe/stewed-butternut-squash-spinach",
+      "reason": "Required garam masala absent from global catalogue."
+    },
+    {
+      "source_url": "https://wicworks.fns.usda.gov/recipe/easy-red-beans-and-rice",
+      "reason": "Source permits cooked-from-dry kidney beans, but global catalogue has only low-sodium canned kidney beans, not dry kidney beans; canned path still needs low-sodium market clearance."
+    },
+    {
+      "source_url": "https://wicworks.fns.usda.gov/recipe/power-bowl",
+      "reason": "Required Italian seasoning absent from global catalogue."
+    },
+    {
+      "source_url": "https://wicworks.fns.usda.gov/recipe/one-pan-roasted-green-veggies",
+      "reason": "Required Brussels sprouts absent from global catalogue."
+    },
+    {
+      "source_url": "https://wicworks.fns.usda.gov/recipe/breakfast-burrito",
+      "reason": "Required avocado absent from global catalogue."
+    },
+    {
+      "source_url": "https://wicworks.fns.usda.gov/recipe/fish-tacos-tangy-slaw",
+      "reason": "Required avocado absent from global catalogue."
+    },
+    {
+      "source_url": "https://wicworks.fns.usda.gov/recipe/tropical-oat-smoothie",
+      "reason": "Required kiwi and separate juice absent from catalogue; whole fruit and orange concentrate are not source-permitted juice replacements."
+    },
+    {
+      "source_url": "https://wicworks.fns.usda.gov/recipe/stewed-lentils",
+      "reason": "Required canned green chiles absent from catalogue."
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/node/1872",
+      "reason": "Required caraway seed absent from catalogue; not cumin or coriander."
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/stir-fried-beef",
+      "reason": "Required sirloin not existing top-round or shoulder cuts."
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/citrus-vegetables",
+      "reason": "Required fresh oregano not existing dried oregano."
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/spinach-potato-pancakes",
+      "reason": "Directions require greased griddle but do not identify or quantify the fat; avoid invented processing ingredient."
+    }
+  ]
+}
