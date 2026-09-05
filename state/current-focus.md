@@ -10,18 +10,27 @@ Merge commit / synchronized main: `2f5fba991f1f612ce7b4b8dfda8ebd41ad6333e7`.
 Final review submitted at `2026-09-05T16:06:13Z`; merged at
 `2026-09-05T16:26:20Z`.
 
-PR4 — IN PROGRESS on existing open PR #10, branch
+PR4 — BLOCKED (retrieval provenance) on existing open PR #10, branch
 `migration/pr4-recipe-catalogue`; starting head
 `cd2285802c94735e0c9015042f9f4c0b52d68b85`.
-Current main is being synchronized by normal merge, with accepted DATA2
-preserved. No rebase, force-push, new PR or PR merge is authorized.
+Current main was synchronized by normal merge
+`dfcbce2814b46da45cf346762a778170ffc5b36c`, with accepted DATA2 preserved. No rebase, force-push, new PR or PR merge is authorized.
 
 Existing PR4 Recipe/domain/application/persistence code and migration
 `0024_food_recipe_catalogue` remain present. Production seed/compiler still
 require DATA2 correction. The prior rights blocker is superseded by accepted
 DATA2 source-specific review under the narrow direct-FNS project risk posture.
-Source retrieval instants are under investigation before seed regeneration;
-no date-only value may be converted into invented midnight provenance.
+Three exact retrieval instants were recovered. For 27 recipes / 22 accepted
+artifacts, available evidence does not establish a real retrieval instant.
+The explicit provenance stop applies; runtime/compiler/seed correction has not
+proceeded. No date-only value was converted into invented midnight provenance.
+See [blocker, recovery evidence and options](../docs/family-food/pr4-retrieval-provenance-review.md).
+
+Current checks: DATA2 validator PASS; DATA2 focused 164 passed; affected
+PR4-DATA/FoodIngredient 82 passed; preserved PR4 tests excluding seed 43 passed.
+Fresh DATA2 seed, its exact step count and full backend/launcher acceptance
+remain pending. Final blocker-report head is recorded in PR #10 after push;
+this state file does not claim a self-referential commit hash.
 
 PR4 is neither COMPLETE nor ready for final review. PR5 remains unauthorized.
 The accepted-main records below are retained as historical execution evidence;
