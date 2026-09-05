@@ -26,7 +26,15 @@ jobs:
       - name: Apply approved PR4 scope reset
         run: |
           set -euo pipefail
-          python scripts/pr4_scope_reset_apply.py
+          python scripts/pr4_reset_payload_a.py
+          python scripts/pr4_reset_payload_b.py
+          python scripts/pr4_reset_payload_c.py
+          rm -f \
+            docs/family-food/pr4-github-actions-acquisition.json \
+            docs/family-food/pr4-provenance-refresh-attempt.json \
+            docs/family-food/pr4-retrieval-provenance-review.json \
+            docs/family-food/pr4-retrieval-provenance-review.md \
+            docs/family-food/pr4-rights-review.md
           python scripts/build_pr4_recipe_seed.py
           cp data/seed/recipes/recipes.json /tmp/recipes.first.json
           cp data/seed/recipes/source-manifest.json /tmp/manifest.first.json
@@ -88,12 +96,14 @@ jobs:
           ! grep -R "EXPECTED_MANIFEST_CODE_COUNT = 119\|365 RecipeIngredient\|315 RecipeStep" backend/app/seed scripts data/seed/recipes
 
       - name: Commit verified scope reset and remove temporary tooling
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          rm -f scripts/pr4_scope_reset_apply.py
-          rm -f .github/workflows/pr4-reset-bundle.yml
+          rm -f \
+            scripts/pr4_scope_reset_apply.py \
+            scripts/pr4_reset_payload_a.py \
+            scripts/pr4_reset_payload_b.py \
+            scripts/pr4_reset_payload_c.py \
+            .github/workflows/pr4-reset-bundle.yml
           git add -A
           git diff --cached --check
           git config user.name 'FamilyFoodOS Orchestrator'
