@@ -1,6 +1,34 @@
 # Handoff
 
-Updated: `2026-09-04`
+Updated: `2026-09-05`
+
+## Immediate handoff — PR4-DATA2
+
+Issue #12 authorizes supporting Russia/SPB re-curation only. Branch:
+`data/pr4-data2-russia-spb-recuration`; exact starting main:
+`26af749be0f6446de1d88cad2e2e03158a9830a0`, including merged PR #11 policy and
+PR #9 workflow. PR4-DATA/#8 is already merged; older status below is historical.
+
+**IN PROGRESS / BLOCKED — regional evidence access**, not READY FOR REVIEW.
+Read [DATA2 research handoff](../data/curation/pr4-data2/README.md) and its linked
+JSON files before continuing. Five-chain access/form probes and all30 source
+ingredient-list screening are partial research, not a completed119-concept
+retailer audit. No final replacement corpus has been accepted or generated.
+The two ICN sources must not enter a future DATA2 selection.
+
+Current source corpus and all global seeds are unchanged. Baseline curation
+and FoodIngredient suite: **82 passed in 2.25s**. Full runtime suite/Ruff are
+N/A for this isolated JSON/Markdown research. No criteria/tests weakened.
+
+Research-integrity checks passed: four JSON files, all 30 source IDs, 96 exact
+source/code pairs, nine unique UNCERTAIN observations. `git diff --check`
+passed; backend/scripts/seeds/previous corpus are unchanged from base.
+
+Resume when permitted current regional catalogue access or reviewable offline
+SPB/LO retailer evidence is available. Research PR is draft, not merge-ready.
+Exact blocker-report head/PR URL are recorded in the PR and final agent report.
+Do not modify PR #10 until DATA2 ACCEPT+merge, do not merge this research draft,
+and do not begin PR5. The ignored local SQLite database remains untouched.
 
 ## Project identity
 
@@ -87,7 +115,7 @@ Before continuing:
     - `backend/app/db/migrations.py`
     - its migration-chain tests
 
-## Current work
+## Historical work record (superseded by immediate handoff above)
 
 `PR3 — FoodIngredient Catalogue — COMPLETE`
 

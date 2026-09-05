@@ -1,6 +1,6 @@
 # Current focus
 
-Updated: `2026-09-04`
+Updated: `2026-09-05`
 
 ## Project
 
@@ -106,6 +106,36 @@ PR2-DOCS closure:
 
 ## Current active repository task
 
+`PR4-DATA2 — Russia/SPB Recipe Corpus Re-curation — IN PROGRESS`
+
+Execution result: **BLOCKED — current regional market evidence**, not ready
+for final review. Authorized by issue #12, on
+`data/pr4-data2-russia-spb-recuration`, strictly from
+`26af749be0f6446de1d88cad2e2e03158a9830a0` (main including merged policy PR #11).
+Governance PR #9 and PR4-DATA PR #8 are already merged. The historical task
+record below does not supersede this authorization.
+
+Research covers the five specified retailer chains and ingredient-form
+screening of all30 old recipes. Current SPB-qualified exact-form evidence was
+not established; do not convert access failures into stock-absence claims.
+See [DATA2 blocker and partial evidence](../data/curation/pr4-data2/README.md).
+
+No successor corpus or replacements accepted; the two ICN sources are barred
+from the future selection but the previous30-source artifact is unchanged.
+Baseline remains30 recipes /363 coverage rows /119 fixture codes /183 global
+FoodIngredients. No new FoodIngredient or runtime change. Baseline curation and
+FoodIngredient regressions: **82 passed**. This is not DATA2 acceptance.
+Research JSON/reference integrity and `git diff --check` passed; nine unique
+observations remain UNCERTAIN. No current AVAILABLE record accepted.
+
+Next allowed action: obtain permitted current SPB/LO catalogue access or
+reviewable offline regional evidence, then resume the same supporting task.
+The research PR is draft; no final ACCEPT or merge is claimed. PR #10 remains
+unchanged on its own branch and must consume DATA2 only after ACCEPT+merge.
+PR5 remains unauthorized.
+
+## Historical PR4-DATA task record (status superseded)
+
 `PR4-DATA — Recipe Corpus FoodIngredient Coverage — READY FOR REVIEW`
 
 This is a supporting data operation, not a product milestone.
@@ -128,7 +158,7 @@ not the production loader, enforces the unchanged `<=120` Gate 2 fixture limit.
 No Recipe schema, domain, persistence, migration, seed, scaling, API or frontend
 implementation was started. PR5 remains unauthorized.
 
-## Next action
+## Historical next action (superseded by current task above)
 
 Complete PR4-DATA final review and merge it before starting the next product
 milestone, `PR4 — Recipe Catalogue`. PR4 implementation is waiting for the

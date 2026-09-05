@@ -1,6 +1,35 @@
 # Progress
 
-Updated: `2026-09-04`
+Updated: `2026-09-05`
+
+## PR4-DATA2 — current supporting operation
+
+Status: **IN PROGRESS / BLOCKED — current SPB/LO retailer evidence**.
+Issue #12; branch `data/pr4-data2-russia-spb-recuration`; exact base
+`26af749be0f6446de1d88cad2e2e03158a9830a0`. PR #11 localization policy and
+PR #9 workflow are merged. PR4-DATA PR #8 is merged; prior task-era statuses
+retained below are historical, not current work authorization.
+
+Verified this pass:
+
+- read current contracts and created a separate branch at the exact base;
+- screened ingredient forms across all30 current source recipes;
+- investigated all five required official retailer chains and safe regional
+  fallback sources; no current SPB-qualified AVAILABLE record accepted;
+- recorded uncertainty and form mismatches without invented stock absence;
+- ran existing curation/FoodIngredient regressions: **82 passed in 2.25s**;
+- research JSON/reference checks passed: all 30 sources, 96 exact form checks,
+  nine unique UNCERTAIN observations; `git diff --check` passed;
+- preserved the previous30/363/119 corpus and183 global ingredients unchanged;
+- no final successor, replacement decision, market-class totals or final
+  acceptance claimed; the two ICN cards are excluded from future DATA2 selection;
+- isolated research JSON/Markdown only: full backend suite and Ruff N/A.
+
+See [blocker/options and evidence](../data/curation/pr4-data2/README.md).
+The evidence is delivered as a draft PR, not a completed operation. Current
+head and PR URL are in its metadata/final report. PR #10, its runtime/seed,
+global FoodIngredient data and PR5 remain untouched. Next step requires usable
+current regional evidence, not relaxed acceptance criteria.
 
 ## FamilyFoodOS bootstrap
 

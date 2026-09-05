@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "research_scope": "Bounded read-only access and exact-form probes; not a complete ingredient availability audit",
+  "checked_at": "2026-09-05T08:08:53Z",
+  "target_region": "Saint Petersburg / Leningrad Region",
+  "availability_summary": "No current region-qualified exact-form AVAILABLE observation accepted. Catalogue leads are not stock absence evidence.",
+  "access_attempts": [
+    {
+      "retailer_chain": "MAGNIT",
+      "evidence_url": "https://magnit.ru/product/1899800733-moloko_prostokvashino_pasterizovannoe_2_5_930ml?shopCode=381487&shopType=1",
+      "status": "UNCERTAIN",
+      "observed_text": "Page title names г Санкт-Петербург, ул 9-я Советская, д 39/24 литера а; live header says Выберите магазин или адрес, чтобы посмотреть актуальный каталог.",
+      "notes": "Official product card loads in ordinary browser. The SPB shopCode/title is a useful lead, but active catalogue store remained unset. Opening the store selector through accessibility, visible coordinates and semantic browser controls did not establish a regional selection. No account/cart action occurred."
+    },
+    {
+      "retailer_chain": "MAGNIT",
+      "evidence_url": "https://magnit.ru/shops",
+      "status": "UNCERTAIN",
+      "observed_text": "Адреса магазинов сети Магнит; Найти магазин по адресу; Выберите магазин или адрес.",
+      "notes": "Alternative official shop-list route inspected. Search for the public shop address Санкт-Петербург, 9-я Советская did not return a verified shop selection. No personal/home address, credentials or geolocation permission was supplied."
+    }
+  ],
+  "observations": [
+    {
+      "food_ingredient_code": "MILK_1_PERCENT",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "region_verified": false,
+      "evidence_url": "https://magnit.ru/product/1899800733-moloko_prostokvashino_pasterizovannoe_2_5_930ml?shopCode=381487&shopType=1",
+      "observed_product_wording": "Молоко Простоквашино пастеризованное 2.5% 930мл",
+      "checked_at": "2026-09-05T08:08:53Z",
+      "status": "UNCERTAIN",
+      "notes": "Observed live product fat is 2.5%, not required 1%; cannot substitute. A follow-up official UI search for молоко 1% did not reach a selected regional catalogue. This does not establish milk1% absence."
+    },
+    {
+      "food_ingredient_code": "MAYONNAISE_LOW_FAT",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "region_verified": false,
+      "evidence_url": "https://magnit.ru/product/1000077734-mayonez_makheev_provansal_s_limonnym_sokom_67_400ml?shopCode=784366&shopType=1",
+      "observed_product_wording": "Майонез Махеевъ Провансаль с лимонным соком 67% 380г",
+      "checked_at": "2026-09-05T08:08:53Z",
+      "status": "UNCERTAIN",
+      "notes": "Indexed official result has SPB shop address, but returned67% product is not low-fat mayonnaise. Neither the search word легкий in unrelated descriptive prose nor this product can satisfy the requested form."
+    }
+  ],
+  "bounded_search_log": [
+    "Official magnit.ru product searches with Санкт-Петербург and milk1%, light mayonnaise, light cheddar; results gave different fat specifications, not accepted matches.",
+    "Official domain searches for current September2026 SPB catalogue and no-salt beans did not establish a relevant regional source. Dates in product reviews/expiry descriptions are not flyer validity dates.",
+    "No empty search response was converted to a NOT_FOUND stock record."
+  ],
+  "follow_up_requirement": "Establish an active permitted SPB/LO catalogue/store view or current official regional evidence before assigning AVAILABLE or market classes."
+}
