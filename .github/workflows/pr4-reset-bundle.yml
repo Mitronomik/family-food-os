@@ -49,6 +49,20 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -e 'backend[test]' ruff
 
+      - name: Format final reset Python before tests
+        run: |
+          ruff format \
+            backend/app/domain/food_recipes.py \
+            backend/app/services/food_recipes.py \
+            backend/app/seed/food_recipes.py \
+            backend/app/persistence/sqlalchemy_core/food_recipe_tables.py \
+            backend/app/tests/test_food_recipe_domain.py \
+            backend/app/tests/test_food_recipe_application.py \
+            backend/app/tests/test_food_recipe_migration.py \
+            backend/app/tests/test_food_recipe_seed.py \
+            backend/app/tests/persistence/test_food_recipe_repository.py \
+            scripts/build_pr4_recipe_seed.py
+
       - name: Verify DATA2 handoff
         run: |
           set -euo pipefail
@@ -66,9 +80,8 @@ jobs:
             backend/app/tests/test_food_recipe_seed.py \
             backend/app/tests/persistence/test_food_recipe_repository.py
 
-      - name: Verify full backend regression
-        working-directory: backend
-        run: python -m pytest -q
+      - name: Verify full backend and launcher regression
+        run: python -m pytest -q backend/app/tests launcher/tests
 
       - name: Static and scope checks
         run: |
