@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "checked_at": "2026-09-05",
-  "status": "DRAFT_TENTATIVE30_PURCHASE_FORM_REVIEW_NOT_ACCEPTED_CORPUS",
+  "status": "REVIEWED_PURCHASE_FORMS_PENDING_PROJECT_ACCEPT",
   "method": "Per actual source purchase concept/form. Filename:N references observations arrays, ONE-BASED (N=1 is observations[0]). Five baseline chains assessed from the explicit research record panel; no qualifying evidence is UNCERTAIN, not NOT_FOUND. RU_MASS_MARKET requires3distinct chains. Positive one/two-chain ordinary concepts may be RU_AVAILABLE with explicit reason. Source cutting/peeling/squeezing preparation retained without inferred conversion. No rights acceptance or live stock claim.",
   "source_snapshot": {
     "old_manifest": "data/curation/pr4/recipe-corpus.json",
@@ -9,7 +9,8 @@
       "candidate-review-v2.json",
       "candidate-review-v3.json",
       "candidate-review-v4.json",
-      "candidate-review-v5.json"
+      "candidate-review-v5.json",
+      "correction-anchor-candidates.json"
     ],
     "excluded_candidate_ids": [
       "TNC6-GRAIN-BOWLS",
@@ -28,7 +29,7 @@
       "USDA12-TOMATO-CUCUMBER-SALAD",
       "SNAP4-SAUTEED-CAULIFLOWER-RICE"
     ],
-    "note": "Final parent-selected30 after v5 quantity/source-review corrections: Microwave Baked Potato and Pear Orange Sauce replace pending Tomato/Cucumber and Cauliflower Rice. Market evidence itself does not clear rights. Braised Chicken uses explicit fresh one-bunch spinach; TNC pancakes explicit frozen corn. Spring green beans uses reviewed plain frozen source-generic member. Roasted Carrots uses olive oil as generic vegetable-oil member. Corn/Edamame raw sesame seeds select source-explicit home-toasting preparation."
+    "note": "Correction-pass source selection replaces redundant sides with real meal anchors. Exact source descriptors/optionalities remain in ingredient audit; actual purchase concepts are separately reviewed. Existing evidence is reused only for the same actual form. No runtime authorization."
   },
   "recipe_ids": [
     "CACFP6-CORN-EDAMAME-BLEND",
@@ -38,38 +39,37 @@
     "CACFP6-CREAMY-COLESLAW",
     "TNC6-EGGS-SPINACH",
     "TNC6-APPLESAUCE",
-    "TNC6-CORN-ZUCCHINI-PANCAKES",
-    "HARV6-ROASTED-POTATOES",
+    "SNAP4-SPANISH-FRITTATA",
+    "FNS5-BAKED-LENTILS-CASSEROLE",
     "HARV6-FRESH-TOMATO-SALSA",
     "HARV6-GARDEN-PASTA-SALAD",
     "SNAP6-SPINACH-APPLE-SALAD",
     "SNAP6-PEACH-CRISP",
     "SNAP6-SEARED-GREENS",
+    "SNAP8-SOMALI-SUMMER-SALAD",
+    "FNS2-ORANGE-PORK-CHOPS",
     "WIC4-BUTTERNUT-SOUP",
     "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
-    "WIC4-ROASTED-CARROTS",
+    "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+    "SNAP3-GRILLED-FRUIT",
     "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
-    "SNAP8-HOMEMADE-MASHED-POTATOES",
+    "SNAP4-PEAR-ORANGE-SAUCE",
+    "SNAP4-SPRING-VEGETABLE-SAUTE",
+    "FNS4-OVEN-FRIED-FISH",
     "SNAP8-APPLE-CARROT-SOUP",
     "SNAP6-WALDORF-SALAD",
     "SNAP4-BROWN-RICE-PILAF",
     "SNAP5-KALE-NUTS-RAISINS",
     "SNAP4-BRAISED-CHICKEN-SPINACH",
-    "SNAP4-DILLED-FISH-FILLETS",
-    "SNAP8-SOMALI-SUMMER-SALAD",
-    "SNAP1-MICROWAVE-BAKED-POTATO",
-    "SNAP3-GRILLED-FRUIT",
-    "SNAP4-PEAR-ORANGE-SAUCE",
-    "SNAP4-SPRING-VEGETABLE-SAUTE"
+    "SNAP4-DILLED-FISH-FILLETS"
   ],
   "recipe_count": 30,
-  "required_code_count_including_water": 79,
+  "required_code_count_including_water": 82,
   "water_exemption": "WATER is preparation water, no retailer purchase evidence required.",
-  "purchase_form_row_count": 82,
+  "purchase_form_row_count": 85,
   "classification_counts": {
-    "RU_MASS_MARKET": 3,
-    "RU_AVAILABLE": 79,
-    "SPECIALTY_OR_UNCLEAR": 0
+    "RU_AVAILABLE": 82,
+    "RU_MASS_MARKET": 3
   },
   "unresolved_purchase_forms": [],
   "rows": [
@@ -126,11 +126,12 @@
         "TNC6-APPLESAUCE",
         "HARV6-FRESH-TOMATO-SALSA",
         "SNAP6-SPINACH-APPLE-SALAD",
+        "SNAP8-SOMALI-SUMMER-SALAD",
         "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+        "SNAP2-SIMPLE-GREEN-SMOOTHIE",
         "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
         "SNAP8-APPLE-CARROT-SOUP",
-        "SNAP6-WALDORF-SALAD",
-        "SNAP8-SOMALI-SUMMER-SALAD"
+        "SNAP6-WALDORF-SALAD"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v3.json:27"
@@ -264,57 +265,13 @@
       "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
     },
     {
-      "review_id": "BAKING_POWDER",
-      "food_ingredient_code": "BAKING_POWDER",
-      "purchase_form": "Baking powder, not baking soda",
-      "recipe_ids": [
-        "TNC6-CORN-ZUCCHINI-PANCAKES"
-      ],
-      "qualifying_refs": [
-        "research-lenta-okey-v3.json:24"
-      ],
-      "five_chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "qualifying_refs": [
-            "research-lenta-okey-v3.json:24"
-          ],
-          "note": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      },
-      "evidenced_chain_count": 1,
-      "classification": "RU_AVAILABLE",
-      "ordinary_retail_plausibility": "A named ordinary baking powder, not baking soda product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Baking powder, not baking soda) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
-    },
-    {
       "review_id": "BANANA",
       "food_ingredient_code": "BANANA",
       "purchase_form": "Fresh banana; peel and slice",
       "recipe_ids": [
-        "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
-        "SNAP3-GRILLED-FRUIT"
+        "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+        "SNAP3-GRILLED-FRUIT",
+        "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v6.json:2"
@@ -407,7 +364,6 @@
       "food_ingredient_code": "BELL_PEPPER_GREEN",
       "purchase_form": "Fresh sweet green bell pepper; dice/chop",
       "recipe_ids": [
-        "HARV6-ROASTED-POTATOES",
         "HARV6-GARDEN-PASTA-SALAD",
         "SNAP8-SOMALI-SUMMER-SALAD"
       ],
@@ -501,14 +457,13 @@
       "recipe_ids": [
         "CACFP6-HONEY-LIME-CHICKEN",
         "CACFP6-CREAMY-COLESLAW",
-        "HARV6-ROASTED-POTATOES",
+        "SNAP4-SPANISH-FRITTATA",
         "HARV6-GARDEN-PASTA-SALAD",
         "SNAP6-SEARED-GREENS",
-        "WIC4-ROASTED-CARROTS",
-        "SNAP8-HOMEMADE-MASHED-POTATOES",
+        "SNAP4-SPRING-VEGETABLE-SAUTE",
+        "FNS4-OVEN-FRIED-FISH",
         "SNAP4-BROWN-RICE-PILAF",
-        "SNAP4-BRAISED-CHICKEN-SPINACH",
-        "SNAP4-SPRING-VEGETABLE-SAUTE"
+        "SNAP4-BRAISED-CHICKEN-SPINACH"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v2.json:34"
@@ -599,9 +554,9 @@
     {
       "review_id": "BUTTER_UNSALTED",
       "food_ingredient_code": "BUTTER_UNSALTED",
-      "purchase_form": "Unsalted butter; choose explicit source butter alternative where offered",
+      "purchase_form": "Unsalted butter; select explicit butter alternative or narrower member of source-generic butter where reviewed",
       "recipe_ids": [
-        "SNAP8-HOMEMADE-MASHED-POTATOES"
+        "FNS4-OVEN-FRIED-FISH"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v4.json:7"
@@ -832,9 +787,9 @@
       "recipe_ids": [
         "CACFP6-CORN-EDAMAME-BLEND",
         "CACFP6-CREAMY-COLESLAW",
-        "WIC4-ROASTED-CARROTS",
-        "SNAP8-APPLE-CARROT-SOUP",
-        "SNAP4-SPRING-VEGETABLE-SAUTE"
+        "FNS5-BAKED-LENTILS-CASSEROLE",
+        "SNAP4-SPRING-VEGETABLE-SAUTE",
+        "SNAP8-APPLE-CARROT-SOUP"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v2.json:1",
@@ -1243,8 +1198,7 @@
       "food_ingredient_code": "CORN_SWEET",
       "purchase_form": "Plain frozen sweet corn kernels, selected among source fresh/frozen/canned options; thaw/drain where specified",
       "recipe_ids": [
-        "CACFP6-CORN-EDAMAME-BLEND",
-        "TNC6-CORN-ZUCCHINI-PANCAKES"
+        "CACFP6-CORN-EDAMAME-BLEND"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v4.json:18"
@@ -1429,8 +1383,8 @@
       "food_ingredient_code": "DILL_DRIED",
       "purchase_form": "Dried dill, selected explicit source alternative to fresh with source dry quantity",
       "recipe_ids": [
-        "SNAP4-DILLED-FISH-FILLETS",
-        "SNAP4-SPRING-VEGETABLE-SAUTE"
+        "SNAP4-SPRING-VEGETABLE-SAUTE",
+        "SNAP4-DILLED-FISH-FILLETS"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v4.json:14"
@@ -1521,7 +1475,8 @@
       "purchase_form": "Raw shell chicken eggs; cracking/whisking is preparation",
       "recipe_ids": [
         "TNC6-EGGS-SPINACH",
-        "TNC6-CORN-ZUCCHINI-PANCAKES"
+        "SNAP4-SPANISH-FRITTATA",
+        "FNS4-OVEN-FRIED-FISH"
       ],
       "qualifying_refs": [
         "research-x5-v2.json:1",
@@ -1613,63 +1568,17 @@
       "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
     },
     {
-      "review_id": "FLOUR_WHOLE_WHEAT",
-      "food_ingredient_code": "FLOUR_WHOLE_WHEAT",
-      "purchase_form": "Whole-wheat flour, not ordinary refined flour",
-      "recipe_ids": [
-        "TNC6-CORN-ZUCCHINI-PANCAKES"
-      ],
-      "qualifying_refs": [
-        "research-lenta-okey-v3.json:10"
-      ],
-      "five_chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "qualifying_refs": [
-            "research-lenta-okey-v3.json:10"
-          ],
-          "note": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      },
-      "evidenced_chain_count": 1,
-      "classification": "RU_AVAILABLE",
-      "ordinary_retail_plausibility": "A named ordinary whole-wheat flour, not ordinary refined flour product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Whole-wheat flour, not ordinary refined flour) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
-    },
-    {
       "review_id": "GARLIC",
       "food_ingredient_code": "GARLIC",
       "purchase_form": "Fresh garlic cloves; peel and mince",
       "recipe_ids": [
         "CACFP6-CORN-EDAMAME-BLEND",
         "CACFP6-LOCAL-HARVEST-BAKE",
-        "HARV6-ROASTED-POTATOES",
         "HARV6-FRESH-TOMATO-SALSA",
         "SNAP6-SEARED-GREENS",
+        "SNAP4-SPRING-VEGETABLE-SAUTE",
         "SNAP5-KALE-NUTS-RAISINS",
-        "SNAP4-BRAISED-CHICKEN-SPINACH",
-        "SNAP4-SPRING-VEGETABLE-SAUTE"
+        "SNAP4-BRAISED-CHICKEN-SPINACH"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v2.json:6",
@@ -1718,7 +1627,6 @@
       "purchase_form": "Plain dried ground garlic powder",
       "recipe_ids": [
         "SNAP6-SPINACH-APPLE-SALAD",
-        "WIC4-ROASTED-CARROTS",
         "SNAP4-BROWN-RICE-PILAF"
       ],
       "qualifying_refs": [
@@ -1854,8 +1762,7 @@
       "food_ingredient_code": "GREEN_ONION",
       "purchase_form": "Fresh green onion/scallions; trim/chop",
       "recipe_ids": [
-        "CACFP6-CREAMY-COLESLAW",
-        "TNC6-CORN-ZUCCHINI-PANCAKES"
+        "CACFP6-CREAMY-COLESLAW"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v4.json:11",
@@ -1996,9 +1903,9 @@
       "recipe_ids": [
         "CACFP6-TABBOULEH",
         "SNAP6-PEACH-CRISP",
+        "SNAP8-SOMALI-SUMMER-SALAD",
         "SNAP6-WALDORF-SALAD",
-        "SNAP4-DILLED-FISH-FILLETS",
-        "SNAP8-SOMALI-SUMMER-SALAD"
+        "SNAP4-DILLED-FISH-FILLETS"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v3.json:9",
@@ -2230,8 +2137,8 @@
       "recipe_ids": [
         "WIC4-BUTTERNUT-SOUP",
         "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
-        "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
-        "SNAP8-HOMEMADE-MASHED-POTATOES"
+        "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+        "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v2.json:14"
@@ -2426,10 +2333,9 @@
         "CACFP6-TABBOULEH",
         "TNC6-EGGS-SPINACH",
         "SNAP6-SEARED-GREENS",
-        "WIC4-BUTTERNUT-SOUP",
         "SNAP8-SOMALI-SUMMER-SALAD",
-        "SNAP4-SPRING-VEGETABLE-SAUTE",
-        "WIC4-ROASTED-CARROTS"
+        "WIC4-BUTTERNUT-SOUP",
+        "SNAP4-SPRING-VEGETABLE-SAUTE"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v4.json:9",
@@ -2523,7 +2429,8 @@
       "recipe_ids": [
         "CACFP6-CORN-EDAMAME-BLEND",
         "CACFP6-TABBOULEH",
-        "HARV6-ROASTED-POTATOES",
+        "SNAP4-SPANISH-FRITTATA",
+        "FNS5-BAKED-LENTILS-CASSEROLE",
         "HARV6-FRESH-TOMATO-SALSA",
         "HARV6-GARDEN-PASTA-SALAD",
         "SNAP4-BRAISED-CHICKEN-SPINACH"
@@ -2571,6 +2478,7 @@
       "food_ingredient_code": "ORANGE",
       "purchase_form": "Raw whole oranges squeezed to prepare 100% pure orange juice",
       "recipe_ids": [
+        "FNS2-ORANGE-PORK-CHOPS",
         "SNAP4-PEAR-ORANGE-SAUCE"
       ],
       "qualifying_refs": [
@@ -2661,8 +2569,8 @@
       "food_ingredient_code": "PARSLEY_DRIED",
       "purchase_form": "Plain dried parsley",
       "recipe_ids": [
-        "SNAP4-BROWN-RICE-PILAF",
-        "CACFP6-LOCAL-HARVEST-BAKE"
+        "CACFP6-LOCAL-HARVEST-BAKE",
+        "SNAP4-BROWN-RICE-PILAF"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v2.json:25"
@@ -2895,12 +2803,14 @@
     {
       "review_id": "PORK_LOIN",
       "food_ingredient_code": "PORK_LOIN",
-      "purchase_form": "Plain raw boneless pork loin, selected lean pork member; cut into chunks",
+      "purchase_form": "Plain raw boneless pork loin; selected member of generic lean pork and loin chops, source counts and preparation retained",
       "recipe_ids": [
+        "FNS2-ORANGE-PORK-CHOPS",
         "SNAP8-APPLE-CARROT-SOUP"
       ],
       "qualifying_refs": [
-        "research-lenta-okey-v4.json:24"
+        "research-lenta-okey-v4.json:24",
+        "research-correction-market.json:10"
       ],
       "five_chain_review": {
         "PYATEROCHKA": {
@@ -2916,7 +2826,8 @@
         "LENTA": {
           "status": "AVAILABLE",
           "qualifying_refs": [
-            "research-lenta-okey-v4.json:24"
+            "research-lenta-okey-v4.json:24",
+            "research-correction-market.json:10"
           ],
           "note": "Current appropriate catalogue/form evidence; no live stock claim."
         },
@@ -2935,16 +2846,14 @@
       "classification": "RU_AVAILABLE",
       "ordinary_retail_plausibility": "A named ordinary plain raw boneless pork loin, selected lean pork member; cut into chunks product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
       "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Plain raw boneless pork loin, selected lean pork member; cut into chunks) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
+      "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Correction review confirms raw boneless loin, not smoked/marinated pork. The source two chops remain two unweighed pieces; no count-to-weight conversion."
     },
     {
       "review_id": "POTATO",
       "food_ingredient_code": "POTATO",
       "purchase_form": "Fresh potatoes; peel/cube as specified",
       "recipe_ids": [
-        "HARV6-ROASTED-POTATOES",
-        "SNAP8-HOMEMADE-MASHED-POTATOES",
-        "SNAP1-MICROWAVE-BAKED-POTATO"
+        "SNAP4-SPANISH-FRITTATA"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v4.json:4"
@@ -3265,18 +3174,17 @@
         "CACFP6-TABBOULEH",
         "CACFP6-HONEY-LIME-CHICKEN",
         "CACFP6-CREAMY-COLESLAW",
-        "TNC6-CORN-ZUCCHINI-PANCAKES",
-        "HARV6-ROASTED-POTATOES",
+        "SNAP4-SPANISH-FRITTATA",
+        "FNS5-BAKED-LENTILS-CASSEROLE",
         "HARV6-FRESH-TOMATO-SALSA",
         "HARV6-GARDEN-PASTA-SALAD",
         "SNAP6-SEARED-GREENS",
         "WIC4-BUTTERNUT-SOUP",
-        "WIC4-ROASTED-CARROTS",
-        "SNAP8-HOMEMADE-MASHED-POTATOES",
+        "SNAP4-SPRING-VEGETABLE-SAUTE",
+        "FNS4-OVEN-FRIED-FISH",
         "SNAP8-APPLE-CARROT-SOUP",
         "SNAP4-BRAISED-CHICKEN-SPINACH",
-        "SNAP4-DILLED-FISH-FILLETS",
-        "SNAP4-SPRING-VEGETABLE-SAUTE"
+        "SNAP4-DILLED-FISH-FILLETS"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v4.json:17",
@@ -3477,6 +3385,7 @@
       "recipe_ids": [
         "TNC6-EGGS-SPINACH",
         "SNAP6-SPINACH-APPLE-SALAD",
+        "SNAP2-SIMPLE-GREEN-SMOOTHIE",
         "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
         "SNAP4-BRAISED-CHICKEN-SPINACH"
       ],
@@ -3525,8 +3434,8 @@
       "recipe_ids": [
         "SNAP6-SPINACH-APPLE-SALAD",
         "SNAP6-PEACH-CRISP",
-        "SNAP6-WALDORF-SALAD",
-        "SNAP4-PEAR-ORANGE-SAUCE"
+        "SNAP4-PEAR-ORANGE-SAUCE",
+        "SNAP6-WALDORF-SALAD"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v3.json:23",
@@ -3577,10 +3486,10 @@
       "food_ingredient_code": "SUNFLOWER_OIL",
       "purchase_form": "Refined sunflower cooking oil, selected source generic vegetable-oil member",
       "recipe_ids": [
-        "TNC6-CORN-ZUCCHINI-PANCAKES",
-        "HARV6-ROASTED-POTATOES",
+        "SNAP4-SPANISH-FRITTATA",
         "HARV6-FRESH-TOMATO-SALSA",
         "HARV6-GARDEN-PASTA-SALAD",
+        "FNS2-ORANGE-PORK-CHOPS",
         "SNAP5-KALE-NUTS-RAISINS",
         "SNAP4-BRAISED-CHICKEN-SPINACH"
       ],
@@ -3627,7 +3536,8 @@
       "food_ingredient_code": "SWEET_POTATO",
       "purchase_form": "Fresh sweet potatoes; peel/cube as specified",
       "recipe_ids": [
-        "CACFP6-LOCAL-HARVEST-BAKE"
+        "CACFP6-LOCAL-HARVEST-BAKE",
+        "FNS2-ORANGE-PORK-CHOPS"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v2.json:8"
@@ -3860,6 +3770,7 @@
       "recipe_ids": [
         "CACFP6-CREAMY-COLESLAW",
         "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+        "SNAP2-SIMPLE-GREEN-SMOOTHIE",
         "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE"
       ],
       "qualifying_refs": [
@@ -3901,49 +3812,286 @@
       "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
     },
     {
-      "review_id": "ZUCCHINI",
-      "food_ingredient_code": "ZUCCHINI",
-      "purchase_form": "Fresh zucchini/courgette; trim/shred as specified",
+      "review_id": "LENTILS_DRY",
+      "food_ingredient_code": "LENTILS_DRY",
+      "purchase_form": "Whole dry lentils; rinse as source preparation",
       "recipe_ids": [
-        "TNC6-CORN-ZUCCHINI-PANCAKES"
+        "FNS5-BAKED-LENTILS-CASSEROLE"
       ],
       "qualifying_refs": [
-        "research-lenta-okey-v4.json:3"
+        "research-correction-market.json:4",
+        "research-correction-market.json:5"
       ],
       "five_chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
           "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "PEREKRESTOK": {
           "status": "UNCERTAIN",
           "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "LENTA": {
           "status": "AVAILABLE",
           "qualifying_refs": [
-            "research-lenta-okey-v4.json:3"
+            "research-correction-market.json:4"
           ],
-          "note": "Current appropriate catalogue/form evidence; no live stock claim."
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
         },
         "OKEY": {
           "status": "UNCERTAIN",
           "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "MAGNIT": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-correction-market.json:5"
+          ],
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
+        }
+      },
+      "evidenced_chain_count": 2,
+      "classification": "RU_AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary Whole dry lentils; rinse as source preparation product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
+      "review_notes": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion."
+    },
+    {
+      "review_id": "TOMATO_CANNED_NO_SALT",
+      "food_ingredient_code": "TOMATO_CANNED_NO_SALT",
+      "purchase_form": "Canned tomatoes without added salt; source low-sodium canned tomato member",
+      "recipe_ids": [
+        "FNS5-BAKED-LENTILS-CASSEROLE"
+      ],
+      "qualifying_refs": [
+        "research-correction-market.json:6",
+        "research-correction-market.json:7"
+      ],
+      "five_chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-correction-market.json:6"
+          ],
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "MAGNIT": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-correction-market.json:7"
+          ],
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
+        }
+      },
+      "evidenced_chain_count": 2,
+      "classification": "RU_AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary Canned tomatoes without added salt; source low-sodium canned tomato member product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
+      "review_notes": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion."
+    },
+    {
+      "review_id": "CHEESE_CHEDDAR",
+      "food_ingredient_code": "CHEESE_CHEDDAR",
+      "purchase_form": "Natural regular-fat cheddar cheese; grate at home, not processed cheese or reduced-fat cheese",
+      "recipe_ids": [
+        "FNS5-BAKED-LENTILS-CASSEROLE"
+      ],
+      "qualifying_refs": [
+        "research-correction-market.json:8",
+        "research-correction-market.json:9"
+      ],
+      "five_chain_review": {
+        "PYATEROCHKA": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-correction-market.json:9"
+          ],
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-correction-market.json:8"
+          ],
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "MAGNIT": {
           "status": "UNCERTAIN",
           "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        }
+      },
+      "evidenced_chain_count": 2,
+      "classification": "RU_AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary Natural regular-fat cheddar cheese; grate at home, not processed cheese or reduced-fat cheese product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
+      "review_notes": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion."
+    },
+    {
+      "review_id": "BREADCRUMBS",
+      "food_ingredient_code": "BREADCRUMBS",
+      "purchase_form": "Plain dry wheat breadcrumbs for breading, not panko or seasoned coating mix",
+      "recipe_ids": [
+        "FNS4-OVEN-FRIED-FISH"
+      ],
+      "qualifying_refs": [
+        "research-correction-market.json:3"
+      ],
+      "five_chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-correction-market.json:3"
+          ],
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "MAGNIT": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         }
       },
       "evidenced_chain_count": 1,
       "classification": "RU_AVAILABLE",
-      "ordinary_retail_plausibility": "A named ordinary fresh zucchini/courgette; trim/shred as specified product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh zucchini/courgette; trim/shred as specified) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
+      "ordinary_retail_plausibility": "Ordinary Plain dry wheat breadcrumbs for breading, not panko or seasoned coating mix product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
+      "review_notes": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion."
+    },
+    {
+      "review_id": "TILAPIA_RAW",
+      "food_ingredient_code": "TILAPIA_RAW",
+      "purchase_form": "Plain frozen raw tilapia fillets, thawed for cooking as explicitly allowed by the source",
+      "recipe_ids": [
+        "FNS4-OVEN-FRIED-FISH"
+      ],
+      "qualifying_refs": [
+        "research-correction-market.json:2"
+      ],
+      "five_chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-correction-market.json:2"
+          ],
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "MAGNIT": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        }
+      },
+      "evidenced_chain_count": 1,
+      "classification": "RU_AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary Plain frozen raw tilapia fillets, thawed for cooking as explicitly allowed by the source product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
+      "review_notes": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion."
+    },
+    {
+      "review_id": "STRAWBERRY",
+      "food_ingredient_code": "STRAWBERRY",
+      "purchase_form": "Plain unsweetened frozen strawberries, source-explicit single frozen fruit choice",
+      "recipe_ids": [
+        "SNAP2-SIMPLE-GREEN-SMOOTHIE"
+      ],
+      "qualifying_refs": [
+        "research-correction-market.json:12",
+        "research-correction-market.json:13"
+      ],
+      "five_chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-correction-market.json:12"
+          ],
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "MAGNIT": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-correction-market.json:13"
+          ],
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
+        }
+      },
+      "evidenced_chain_count": 2,
+      "classification": "RU_AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary Plain unsweetened frozen strawberries, source-explicit single frozen fruit choice product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
+      "review_notes": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion."
     }
   ],
   "evidence_reference_format": {

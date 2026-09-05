@@ -2482,27 +2482,27 @@
     },
     {
       "coverage_line": 54,
-      "source_recipe_id": "TNC6-CORN-ZUCCHINI-PANCAKES",
-      "food_ingredient_code": "ZUCCHINI",
+      "source_recipe_id": "SNAP4-SPANISH-FRITTATA",
+      "food_ingredient_code": "POTATO",
       "source_position": 1,
-      "source_quantity_text": "3 medium-sized",
+      "source_quantity_text": "1½ pounds (about 2) russet potatoes, scrubbed",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "ZUCCHINI",
-      "purchase_concept": "Fresh zucchini/courgette; trim/shred as specified",
+      "purchase_form_review_id": "POTATO",
+      "purchase_concept": "Fresh potatoes; peel/cube as specified",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v4.json:3",
-          "purchase_concept": "Fresh zucchini/courgette; trim/shred as specified",
+          "observation_id": "research-lenta-okey-v4.json:4",
+          "purchase_concept": "Fresh potatoes; peel/cube as specified",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary fresh zucchini/courgette; trim/shred as specified product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "A named ordinary fresh potatoes; peel/cube as specified product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh zucchini/courgette; trim/shred as specified) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh potatoes; peel/cube as specified) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
       "chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
@@ -2528,58 +2528,12 @@
     },
     {
       "coverage_line": 55,
-      "source_recipe_id": "TNC6-CORN-ZUCCHINI-PANCAKES",
-      "food_ingredient_code": "CORN_SWEET",
-      "source_position": 2,
-      "source_quantity_text": "1½ cups",
-      "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Select explicit frozen corn branch; retain1½cups and exact source alternatives. No fresh-only or canned sodium evidence used.",
-      "review_status": "REVIEWED",
-      "purchase_form_review_id": "CORN_SWEET",
-      "purchase_concept": "Plain frozen sweet corn kernels, selected among source fresh/frozen/canned options; thaw/drain where specified",
-      "evidence_matches": [
-        {
-          "observation_id": "research-lenta-okey-v4.json:18",
-          "purchase_concept": "Plain frozen sweet corn kernels, selected among source fresh/frozen/canned options; thaw/drain where specified",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Select explicit frozen corn branch; retain1½cups and exact source alternatives. No fresh-only or canned sodium evidence used."
-        }
-      ],
-      "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary plain frozen sweet corn kernels, selected among source fresh/frozen/canned options; thaw/drain where specified product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Plain frozen sweet corn kernels, selected among source fresh/frozen/canned options; thaw/drain where specified) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      }
-    },
-    {
-      "coverage_line": 56,
-      "source_recipe_id": "TNC6-CORN-ZUCCHINI-PANCAKES",
+      "source_recipe_id": "SNAP4-SPANISH-FRITTATA",
       "food_ingredient_code": "EGG",
-      "source_position": 3,
-      "source_quantity_text": "3 large",
+      "source_position": 2,
+      "source_quantity_text": "6 large eggs",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Shell egg; whisking is preparation.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
       "review_status": "REVIEWED",
       "purchase_form_review_id": "EGG",
       "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
@@ -2588,19 +2542,19 @@
           "observation_id": "research-x5-v2.json:1",
           "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Shell egg; whisking is preparation."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
           "observation_id": "research-magnit-v2.json:4",
           "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Shell egg; whisking is preparation."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
           "observation_id": "research-panel-v3.json:1",
           "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Shell egg; whisking is preparation."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -2631,28 +2585,28 @@
       }
     },
     {
-      "coverage_line": 57,
-      "source_recipe_id": "TNC6-CORN-ZUCCHINI-PANCAKES",
-      "food_ingredient_code": "FLOUR_WHOLE_WHEAT",
-      "source_position": 4,
-      "source_quantity_text": "1 cup",
+      "coverage_line": 56,
+      "source_recipe_id": "SNAP4-SPANISH-FRITTATA",
+      "food_ingredient_code": "SUNFLOWER_OIL",
+      "source_position": 3,
+      "source_quantity_text": "2 teaspoons vegetable oil",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select plain sunflower oil as a member of source-generic vegetable/oil concept.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "FLOUR_WHOLE_WHEAT",
-      "purchase_concept": "Whole-wheat flour, not ordinary refined flour",
+      "purchase_form_review_id": "SUNFLOWER_OIL",
+      "purchase_concept": "Refined sunflower cooking oil, selected source generic vegetable-oil member",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v3.json:10",
-          "purchase_concept": "Whole-wheat flour, not ordinary refined flour",
+          "observation_id": "research-lenta-okey-v4.json:8",
+          "purchase_concept": "Refined sunflower cooking oil, selected source generic vegetable-oil member",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select plain sunflower oil as a member of source-generic vegetable/oil concept."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary whole-wheat flour, not ordinary refined flour product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "A named ordinary refined sunflower cooking oil, selected source generic vegetable-oil member product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Whole-wheat flour, not ordinary refined flour) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Refined sunflower cooking oil, selected source generic vegetable-oil member) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
       "chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
@@ -2677,13 +2631,59 @@
       }
     },
     {
+      "coverage_line": 57,
+      "source_recipe_id": "SNAP4-SPANISH-FRITTATA",
+      "food_ingredient_code": "ONION_YELLOW",
+      "source_position": 4,
+      "source_quantity_text": "1 medium yellow onion, peeled and chopped",
+      "ingredient_selection": "SELECTED_REQUIRED",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
+      "review_status": "REVIEWED",
+      "purchase_form_review_id": "ONION_YELLOW",
+      "purchase_concept": "Fresh ordinary yellow/brown bulb onion; peel/chop",
+      "evidence_matches": [
+        {
+          "observation_id": "research-magnit-v2.json:2",
+          "purchase_concept": "Fresh ordinary yellow/brown bulb onion; peel/chop",
+          "form_match_reviewed": true,
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        }
+      ],
+      "ordinary_retail_plausibility": true,
+      "ordinary_retail_rationale": "A named ordinary fresh ordinary yellow/brown bulb onion; peel/chop product/category is directly evidenced in MAGNIT. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "market_classification": "RU_AVAILABLE",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh ordinary yellow/brown bulb onion; peel/chop) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "LENTA": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "MAGNIT": {
+          "status": "AVAILABLE",
+          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
+        }
+      }
+    },
+    {
       "coverage_line": 58,
-      "source_recipe_id": "TNC6-CORN-ZUCCHINI-PANCAKES",
+      "source_recipe_id": "SNAP4-SPANISH-FRITTATA",
       "food_ingredient_code": "SALT",
       "source_position": 5,
-      "source_quantity_text": "¼ teaspoon",
+      "source_quantity_text": "½ teaspoon salt",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
       "review_status": "REVIEWED",
       "purchase_form_review_id": "SALT",
       "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
@@ -2692,19 +2692,19 @@
           "observation_id": "research-lenta-okey-v4.json:17",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
           "observation_id": "research-lenta-okey-v7.json:3",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
           "observation_id": "research-x5-v3.json:2",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -2736,27 +2736,27 @@
     },
     {
       "coverage_line": 59,
-      "source_recipe_id": "TNC6-CORN-ZUCCHINI-PANCAKES",
-      "food_ingredient_code": "BAKING_POWDER",
+      "source_recipe_id": "SNAP4-SPANISH-FRITTATA",
+      "food_ingredient_code": "BLACK_PEPPER",
       "source_position": 6,
-      "source_quantity_text": "½ teaspoon",
+      "source_quantity_text": "¼ teaspoon black pepper",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "BAKING_POWDER",
-      "purchase_concept": "Baking powder, not baking soda",
+      "purchase_form_review_id": "BLACK_PEPPER",
+      "purchase_concept": "Ground black pepper",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v3.json:24",
-          "purchase_concept": "Baking powder, not baking soda",
+          "observation_id": "research-lenta-okey-v2.json:34",
+          "purchase_concept": "Ground black pepper",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary baking powder, not baking soda product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "A named ordinary ground black pepper product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Baking powder, not baking soda) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Ground black pepper) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
       "chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
@@ -2782,125 +2782,105 @@
     },
     {
       "coverage_line": 60,
-      "source_recipe_id": "TNC6-CORN-ZUCCHINI-PANCAKES",
-      "food_ingredient_code": "GREEN_ONION",
-      "source_position": 7,
-      "source_quantity_text": "3 scallions",
+      "source_recipe_id": "FNS5-BAKED-LENTILS-CASSEROLE",
+      "food_ingredient_code": "LENTILS_DRY",
+      "source_position": 1,
+      "source_quantity_text": "1 cup lentils, rinsed",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Scallion is green onion.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "GREEN_ONION",
-      "purchase_concept": "Fresh green onion/scallions; trim/chop",
+      "purchase_form_review_id": "LENTILS_DRY",
+      "purchase_concept": "Whole dry lentils; rinse as source preparation",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v4.json:11",
-          "purchase_concept": "Fresh green onion/scallions; trim/chop",
+          "observation_id": "research-correction-market.json:4",
+          "purchase_concept": "Whole dry lentils; rinse as source preparation",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Scallion is green onion."
+          "rationale": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
-          "observation_id": "research-x5-v3.json:5",
-          "purchase_concept": "Fresh green onion/scallions; trim/chop",
+          "observation_id": "research-correction-market.json:5",
+          "purchase_concept": "Whole dry lentils; rinse as source preparation",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Scallion is green onion."
+          "rationale": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary fresh green onion/scallions; trim/chop product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "Ordinary Whole dry lentils; rinse as source preparation product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh green onion/scallions; trim/chop) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
       "chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "PEREKRESTOK": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "LENTA": {
           "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
+          "basis": "Qualifying official product plus SPB evidence, no live stock claim."
         },
         "OKEY": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "MAGNIT": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "status": "AVAILABLE",
+          "basis": "Qualifying official product plus SPB evidence, no live stock claim."
         }
       }
     },
     {
       "coverage_line": 61,
-      "source_recipe_id": "TNC6-CORN-ZUCCHINI-PANCAKES",
-      "food_ingredient_code": "SUNFLOWER_OIL",
-      "source_position": 8,
-      "source_quantity_text": "1½ tablespoons",
+      "source_recipe_id": "FNS5-BAKED-LENTILS-CASSEROLE",
+      "food_ingredient_code": "WATER",
+      "source_position": 2,
+      "source_quantity_text": "¾ cup water",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Sunflower is selected member of unqualified cooking oil family.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "SUNFLOWER_OIL",
-      "purchase_concept": "Refined sunflower cooking oil, selected source generic vegetable-oil member",
-      "evidence_matches": [
-        {
-          "observation_id": "research-lenta-okey-v4.json:8",
-          "purchase_concept": "Refined sunflower cooking oil, selected source generic vegetable-oil member",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Sunflower is selected member of unqualified cooking oil family."
-        }
-      ],
-      "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary refined sunflower cooking oil, selected source generic vegetable-oil member product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Refined sunflower cooking oil, selected source generic vegetable-oil member) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      }
+      "purchase_concept": "Household preparation/cooking water",
+      "evidence_matches": [],
+      "market_classification": "HOUSEHOLD_WATER",
+      "retention_reason": "Explicit source cooking/preparation water; no retailer purchase requirement. Preserve source amount/condition."
     },
     {
       "coverage_line": 62,
-      "source_recipe_id": "HARV6-ROASTED-POTATOES",
-      "food_ingredient_code": "POTATO",
-      "source_position": 1,
-      "source_quantity_text": "1 pound",
+      "source_recipe_id": "FNS5-BAKED-LENTILS-CASSEROLE",
+      "food_ingredient_code": "SALT",
+      "source_position": 3,
+      "source_quantity_text": "½ teaspoon salt",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "POTATO",
-      "purchase_concept": "Fresh potatoes; peel/cube as specified",
+      "purchase_form_review_id": "SALT",
+      "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v4.json:4",
-          "purchase_concept": "Fresh potatoes; peel/cube as specified",
+          "observation_id": "research-lenta-okey-v4.json:17",
+          "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "observation_id": "research-lenta-okey-v7.json:3",
+          "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
+          "form_match_reviewed": true,
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "observation_id": "research-x5-v3.json:2",
+          "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
+          "form_match_reviewed": true,
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary fresh potatoes; peel/cube as specified product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "A named ordinary ordinary food table salt; iodized-specific source option separately reviewed product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh potatoes; peel/cube as specified) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Ordinary food table salt; iodized-specific source option separately reviewed) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
       "chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
@@ -2926,12 +2906,12 @@
     },
     {
       "coverage_line": 63,
-      "source_recipe_id": "HARV6-ROASTED-POTATOES",
+      "source_recipe_id": "FNS5-BAKED-LENTILS-CASSEROLE",
       "food_ingredient_code": "ONION_YELLOW",
-      "source_position": 2,
-      "source_quantity_text": "½ cup",
+      "source_position": 6,
+      "source_quantity_text": "½ cup medium onion, chopped",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Yellow onion member of generic onion family.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
       "review_status": "REVIEWED",
       "purchase_form_review_id": "ONION_YELLOW",
       "purchase_concept": "Fresh ordinary yellow/brown bulb onion; peel/chop",
@@ -2940,7 +2920,7 @@
           "observation_id": "research-magnit-v2.json:2",
           "purchase_concept": "Fresh ordinary yellow/brown bulb onion; peel/chop",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Yellow onion member of generic onion family."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -2972,79 +2952,85 @@
     },
     {
       "coverage_line": 64,
-      "source_recipe_id": "HARV6-ROASTED-POTATOES",
-      "food_ingredient_code": "BELL_PEPPER_GREEN",
-      "source_position": 3,
-      "source_quantity_text": "½ cup",
+      "source_recipe_id": "FNS5-BAKED-LENTILS-CASSEROLE",
+      "food_ingredient_code": "TOMATO_CANNED_NO_SALT",
+      "source_position": 7,
+      "source_quantity_text": "1 can low-sodium tomatoes (14.5 ounces)",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select no-added-salt canned tomatoes within source low-sodium canned tomato requirement; exact retailer ingredient lists reviewed, no salted tomato substitution.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "BELL_PEPPER_GREEN",
-      "purchase_concept": "Fresh sweet green bell pepper; dice/chop",
+      "purchase_form_review_id": "TOMATO_CANNED_NO_SALT",
+      "purchase_concept": "Canned tomatoes without added salt; source low-sodium canned tomato member",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v4.json:13",
-          "purchase_concept": "Fresh sweet green bell pepper; dice/chop",
+          "observation_id": "research-correction-market.json:6",
+          "purchase_concept": "Canned tomatoes without added salt; source low-sodium canned tomato member",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select no-added-salt canned tomatoes within source low-sodium canned tomato requirement; exact retailer ingredient lists reviewed, no salted tomato substitution."
+        },
+        {
+          "observation_id": "research-correction-market.json:7",
+          "purchase_concept": "Canned tomatoes without added salt; source low-sodium canned tomato member",
+          "form_match_reviewed": true,
+          "rationale": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select no-added-salt canned tomatoes within source low-sodium canned tomato requirement; exact retailer ingredient lists reviewed, no salted tomato substitution."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary fresh sweet green bell pepper; dice/chop product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "Ordinary Canned tomatoes without added salt; source low-sodium canned tomato member product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh sweet green bell pepper; dice/chop) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
       "chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "PEREKRESTOK": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "LENTA": {
           "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
+          "basis": "Qualifying official product plus SPB evidence, no live stock claim."
         },
         "OKEY": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "MAGNIT": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "status": "AVAILABLE",
+          "basis": "Qualifying official product plus SPB evidence, no live stock claim."
         }
       }
     },
     {
       "coverage_line": 65,
-      "source_recipe_id": "HARV6-ROASTED-POTATOES",
-      "food_ingredient_code": "GARLIC",
-      "source_position": 4,
-      "source_quantity_text": "1 teaspoon",
+      "source_recipe_id": "FNS5-BAKED-LENTILS-CASSEROLE",
+      "food_ingredient_code": "CARROT",
+      "source_position": 8,
+      "source_quantity_text": "2 medium carrots, thinly sliced",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "GARLIC",
-      "purchase_concept": "Fresh garlic cloves; peel and mince",
+      "purchase_form_review_id": "CARROT",
+      "purchase_concept": "Fresh carrots; peel/shred/chop as specified",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v2.json:6",
-          "purchase_concept": "Fresh garlic cloves; peel and mince",
+          "observation_id": "research-lenta-okey-v2.json:1",
+          "purchase_concept": "Fresh carrots; peel/shred/chop as specified",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
-          "observation_id": "research-magnit-v2.json:3",
-          "purchase_concept": "Fresh garlic cloves; peel and mince",
+          "observation_id": "research-magnit-v2.json:1",
+          "purchase_concept": "Fresh carrots; peel/shred/chop as specified",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary fresh garlic cloves; peel and mince product/category is directly evidenced in LENTA, MAGNIT. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "A named ordinary fresh carrots; peel/shred/chop as specified product/category is directly evidenced in LENTA, MAGNIT. This is not a specialty-vendor-only or composite-ingredient inference.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh garlic cloves; peel and mince) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh carrots; peel/shred/chop as specified) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
       "chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
@@ -3070,156 +3056,58 @@
     },
     {
       "coverage_line": 66,
-      "source_recipe_id": "HARV6-ROASTED-POTATOES",
-      "food_ingredient_code": "SUNFLOWER_OIL",
-      "source_position": 5,
-      "source_quantity_text": "1 teaspoon",
+      "source_recipe_id": "FNS5-BAKED-LENTILS-CASSEROLE",
+      "food_ingredient_code": "CHEESE_CHEDDAR",
+      "source_position": 9,
+      "source_quantity_text": "½ cup shredded cheddar cheese",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Sunflower member of explicit vegetable oil family.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "SUNFLOWER_OIL",
-      "purchase_concept": "Refined sunflower cooking oil, selected source generic vegetable-oil member",
+      "purchase_form_review_id": "CHEESE_CHEDDAR",
+      "purchase_concept": "Natural regular-fat cheddar cheese; grate at home, not processed cheese or reduced-fat cheese",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v4.json:8",
-          "purchase_concept": "Refined sunflower cooking oil, selected source generic vegetable-oil member",
+          "observation_id": "research-correction-market.json:8",
+          "purchase_concept": "Natural regular-fat cheddar cheese; grate at home, not processed cheese or reduced-fat cheese",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Sunflower member of explicit vegetable oil family."
+          "rationale": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "observation_id": "research-correction-market.json:9",
+          "purchase_concept": "Natural regular-fat cheddar cheese; grate at home, not processed cheese or reduced-fat cheese",
+          "form_match_reviewed": true,
+          "rationale": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary refined sunflower cooking oil, selected source generic vegetable-oil member product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "Ordinary Natural regular-fat cheddar cheese; grate at home, not processed cheese or reduced-fat cheese product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Refined sunflower cooking oil, selected source generic vegetable-oil member) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
       "chain_review": {
         "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "status": "AVAILABLE",
+          "basis": "Qualifying official product plus SPB evidence, no live stock claim."
         },
         "PEREKRESTOK": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "LENTA": {
           "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
+          "basis": "Qualifying official product plus SPB evidence, no live stock claim."
         },
         "OKEY": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "MAGNIT": {
           "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         }
       }
     },
     {
       "coverage_line": 67,
-      "source_recipe_id": "HARV6-ROASTED-POTATOES",
-      "food_ingredient_code": "SALT",
-      "source_position": 6,
-      "source_quantity_text": "¼ teaspoon",
-      "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion.",
-      "review_status": "REVIEWED",
-      "purchase_form_review_id": "SALT",
-      "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
-      "evidence_matches": [
-        {
-          "observation_id": "research-lenta-okey-v4.json:17",
-          "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
-        },
-        {
-          "observation_id": "research-lenta-okey-v7.json:3",
-          "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
-        },
-        {
-          "observation_id": "research-x5-v3.json:2",
-          "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
-        }
-      ],
-      "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary ordinary food table salt; iodized-specific source option separately reviewed product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Ordinary food table salt; iodized-specific source option separately reviewed) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      }
-    },
-    {
-      "coverage_line": 68,
-      "source_recipe_id": "HARV6-ROASTED-POTATOES",
-      "food_ingredient_code": "BLACK_PEPPER",
-      "source_position": 7,
-      "source_quantity_text": "¼ teaspoon",
-      "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Black pepper selected generic pepper family.",
-      "review_status": "REVIEWED",
-      "purchase_form_review_id": "BLACK_PEPPER",
-      "purchase_concept": "Ground black pepper",
-      "evidence_matches": [
-        {
-          "observation_id": "research-lenta-okey-v2.json:34",
-          "purchase_concept": "Ground black pepper",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Black pepper selected generic pepper family."
-        }
-      ],
-      "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary ground black pepper product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Ground black pepper) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      }
-    },
-    {
-      "coverage_line": 69,
       "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
       "food_ingredient_code": "TOMATO",
       "source_position": 1,
@@ -3271,7 +3159,7 @@
       }
     },
     {
-      "coverage_line": 70,
+      "coverage_line": 68,
       "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
       "food_ingredient_code": "APPLE",
       "source_position": 2,
@@ -3317,7 +3205,7 @@
       }
     },
     {
-      "coverage_line": 71,
+      "coverage_line": 69,
       "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
       "food_ingredient_code": "ONION_YELLOW",
       "source_position": 3,
@@ -3363,7 +3251,7 @@
       }
     },
     {
-      "coverage_line": 72,
+      "coverage_line": 70,
       "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
       "food_ingredient_code": "LIME_JUICE",
       "source_position": 4,
@@ -3415,7 +3303,7 @@
       }
     },
     {
-      "coverage_line": 73,
+      "coverage_line": 71,
       "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
       "food_ingredient_code": "GARLIC",
       "source_position": 5,
@@ -3467,7 +3355,7 @@
       }
     },
     {
-      "coverage_line": 74,
+      "coverage_line": 72,
       "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
       "food_ingredient_code": "SUNFLOWER_OIL",
       "source_position": 6,
@@ -3513,7 +3401,7 @@
       }
     },
     {
-      "coverage_line": 75,
+      "coverage_line": 73,
       "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
       "food_ingredient_code": "SALT",
       "source_position": 7,
@@ -3571,7 +3459,7 @@
       }
     },
     {
-      "coverage_line": 76,
+      "coverage_line": 74,
       "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
       "food_ingredient_code": "PASTA_DRY",
       "source_position": 1,
@@ -3617,7 +3505,7 @@
       }
     },
     {
-      "coverage_line": 77,
+      "coverage_line": 75,
       "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
       "food_ingredient_code": "ONION_YELLOW",
       "source_position": 2,
@@ -3663,7 +3551,7 @@
       }
     },
     {
-      "coverage_line": 78,
+      "coverage_line": 76,
       "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
       "food_ingredient_code": "CUCUMBER",
       "source_position": 3,
@@ -3715,7 +3603,7 @@
       }
     },
     {
-      "coverage_line": 79,
+      "coverage_line": 77,
       "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
       "food_ingredient_code": "BELL_PEPPER_GREEN",
       "source_position": 4,
@@ -3761,7 +3649,7 @@
       }
     },
     {
-      "coverage_line": 80,
+      "coverage_line": 78,
       "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
       "food_ingredient_code": "APPLE_CIDER_VINEGAR",
       "source_position": 5,
@@ -3807,7 +3695,7 @@
       }
     },
     {
-      "coverage_line": 81,
+      "coverage_line": 79,
       "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
       "food_ingredient_code": "SUNFLOWER_OIL",
       "source_position": 6,
@@ -3853,7 +3741,7 @@
       }
     },
     {
-      "coverage_line": 82,
+      "coverage_line": 80,
       "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
       "food_ingredient_code": "SALT",
       "source_position": 7,
@@ -3911,7 +3799,7 @@
       }
     },
     {
-      "coverage_line": 83,
+      "coverage_line": 81,
       "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
       "food_ingredient_code": "BLACK_PEPPER",
       "source_position": 8,
@@ -3957,7 +3845,7 @@
       }
     },
     {
-      "coverage_line": 84,
+      "coverage_line": 82,
       "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
       "food_ingredient_code": "SPINACH",
       "source_position": 1,
@@ -4003,7 +3891,7 @@
       }
     },
     {
-      "coverage_line": 85,
+      "coverage_line": 83,
       "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
       "food_ingredient_code": "APPLE",
       "source_position": 2,
@@ -4049,7 +3937,7 @@
       }
     },
     {
-      "coverage_line": 86,
+      "coverage_line": 84,
       "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
       "food_ingredient_code": "RAISINS_GOLDEN",
       "source_position": 3,
@@ -4095,7 +3983,7 @@
       }
     },
     {
-      "coverage_line": 87,
+      "coverage_line": 85,
       "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
       "food_ingredient_code": "CANOLA_OIL",
       "source_position": 4,
@@ -4141,7 +4029,7 @@
       }
     },
     {
-      "coverage_line": 88,
+      "coverage_line": 86,
       "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
       "food_ingredient_code": "APPLE_CIDER_VINEGAR",
       "source_position": 5,
@@ -4187,7 +4075,7 @@
       }
     },
     {
-      "coverage_line": 89,
+      "coverage_line": 87,
       "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
       "food_ingredient_code": "SUGAR",
       "source_position": 6,
@@ -4245,7 +4133,7 @@
       }
     },
     {
-      "coverage_line": 90,
+      "coverage_line": 88,
       "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
       "food_ingredient_code": "GARLIC_POWDER",
       "source_position": 7,
@@ -4291,7 +4179,7 @@
       }
     },
     {
-      "coverage_line": 91,
+      "coverage_line": 89,
       "source_recipe_id": "SNAP6-PEACH-CRISP",
       "food_ingredient_code": "PEACH",
       "source_position": 1,
@@ -4337,7 +4225,7 @@
       }
     },
     {
-      "coverage_line": 92,
+      "coverage_line": 90,
       "source_recipe_id": "SNAP6-PEACH-CRISP",
       "food_ingredient_code": "MARGARINE",
       "source_position": 2,
@@ -4383,7 +4271,7 @@
       }
     },
     {
-      "coverage_line": 93,
+      "coverage_line": 91,
       "source_recipe_id": "SNAP6-PEACH-CRISP",
       "food_ingredient_code": "OATS_ROLLED",
       "source_position": 3,
@@ -4429,7 +4317,7 @@
       }
     },
     {
-      "coverage_line": 94,
+      "coverage_line": 92,
       "source_recipe_id": "SNAP6-PEACH-CRISP",
       "food_ingredient_code": "SUGAR",
       "source_position": 4,
@@ -4487,7 +4375,7 @@
       }
     },
     {
-      "coverage_line": 95,
+      "coverage_line": 93,
       "source_recipe_id": "SNAP6-PEACH-CRISP",
       "food_ingredient_code": "FLOUR_WHEAT",
       "source_position": 5,
@@ -4533,7 +4421,7 @@
       }
     },
     {
-      "coverage_line": 96,
+      "coverage_line": 94,
       "source_recipe_id": "SNAP6-PEACH-CRISP",
       "food_ingredient_code": "CINNAMON_GROUND",
       "source_position": 6,
@@ -4579,7 +4467,7 @@
       }
     },
     {
-      "coverage_line": 97,
+      "coverage_line": 95,
       "source_recipe_id": "SNAP6-PEACH-CRISP",
       "food_ingredient_code": "LEMON",
       "source_position": 7,
@@ -4631,7 +4519,7 @@
       }
     },
     {
-      "coverage_line": 98,
+      "coverage_line": 96,
       "source_recipe_id": "SNAP6-SEARED-GREENS",
       "food_ingredient_code": "KALE",
       "source_position": 1,
@@ -4677,7 +4565,7 @@
       }
     },
     {
-      "coverage_line": 99,
+      "coverage_line": 97,
       "source_recipe_id": "SNAP6-SEARED-GREENS",
       "food_ingredient_code": "OLIVE_OIL",
       "source_position": 2,
@@ -4729,7 +4617,7 @@
       }
     },
     {
-      "coverage_line": 100,
+      "coverage_line": 98,
       "source_recipe_id": "SNAP6-SEARED-GREENS",
       "food_ingredient_code": "GARLIC",
       "source_position": 3,
@@ -4781,7 +4669,7 @@
       }
     },
     {
-      "coverage_line": 101,
+      "coverage_line": 99,
       "source_recipe_id": "SNAP6-SEARED-GREENS",
       "food_ingredient_code": "WATER",
       "source_position": 4,
@@ -4795,7 +4683,7 @@
       "retention_reason": "Explicit source cooking/preparation water; no retailer purchase requirement. Preserve source amount/condition."
     },
     {
-      "coverage_line": 102,
+      "coverage_line": 100,
       "source_recipe_id": "SNAP6-SEARED-GREENS",
       "food_ingredient_code": "SALT",
       "source_position": 5,
@@ -4853,7 +4741,7 @@
       }
     },
     {
-      "coverage_line": 103,
+      "coverage_line": 101,
       "source_recipe_id": "SNAP6-SEARED-GREENS",
       "food_ingredient_code": "BLACK_PEPPER",
       "source_position": 6,
@@ -4899,7 +4787,7 @@
       }
     },
     {
-      "coverage_line": 104,
+      "coverage_line": 102,
       "source_recipe_id": "SNAP6-SEARED-GREENS",
       "food_ingredient_code": "APPLE_CIDER_VINEGAR",
       "source_position": 7,
@@ -4945,7 +4833,7 @@
       }
     },
     {
-      "coverage_line": 105,
+      "coverage_line": 103,
       "source_recipe_id": "SNAP8-SOMALI-SUMMER-SALAD",
       "food_ingredient_code": "OLIVE_OIL",
       "source_position": 1,
@@ -4997,7 +4885,7 @@
       }
     },
     {
-      "coverage_line": 106,
+      "coverage_line": 104,
       "source_recipe_id": "SNAP8-SOMALI-SUMMER-SALAD",
       "food_ingredient_code": "LEMON",
       "source_position": 2,
@@ -5049,7 +4937,7 @@
       }
     },
     {
-      "coverage_line": 107,
+      "coverage_line": 105,
       "source_recipe_id": "SNAP8-SOMALI-SUMMER-SALAD",
       "food_ingredient_code": "APPLE",
       "source_position": 3,
@@ -5095,7 +4983,7 @@
       }
     },
     {
-      "coverage_line": 108,
+      "coverage_line": 106,
       "source_recipe_id": "SNAP8-SOMALI-SUMMER-SALAD",
       "food_ingredient_code": "BELL_PEPPER_GREEN",
       "source_position": 4,
@@ -5141,7 +5029,7 @@
       }
     },
     {
-      "coverage_line": 109,
+      "coverage_line": 107,
       "source_recipe_id": "SNAP8-SOMALI-SUMMER-SALAD",
       "food_ingredient_code": "TOMATO",
       "source_position": 5,
@@ -5193,7 +5081,7 @@
       }
     },
     {
-      "coverage_line": 110,
+      "coverage_line": 108,
       "source_recipe_id": "SNAP8-SOMALI-SUMMER-SALAD",
       "food_ingredient_code": "CUCUMBER",
       "source_position": 6,
@@ -5245,28 +5133,126 @@
       }
     },
     {
-      "coverage_line": 111,
-      "source_recipe_id": "SNAP1-MICROWAVE-BAKED-POTATO",
-      "food_ingredient_code": "POTATO",
+      "coverage_line": 109,
+      "source_recipe_id": "FNS2-ORANGE-PORK-CHOPS",
+      "food_ingredient_code": "SUNFLOWER_OIL",
       "source_position": 1,
-      "source_quantity_text": "1 potato",
+      "source_quantity_text": "1 teaspoon oil",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "One ordinary potato, source count retained without inferred weight.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select plain sunflower oil as a member of source-generic vegetable/oil concept.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "POTATO",
-      "purchase_concept": "Fresh potatoes; peel/cube as specified",
+      "purchase_form_review_id": "SUNFLOWER_OIL",
+      "purchase_concept": "Refined sunflower cooking oil, selected source generic vegetable-oil member",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v4.json:4",
-          "purchase_concept": "Fresh potatoes; peel/cube as specified",
+          "observation_id": "research-lenta-okey-v4.json:8",
+          "purchase_concept": "Refined sunflower cooking oil, selected source generic vegetable-oil member",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: One ordinary potato, source count retained without inferred weight."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select plain sunflower oil as a member of source-generic vegetable/oil concept."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary fresh potatoes; peel/cube as specified product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "A named ordinary refined sunflower cooking oil, selected source generic vegetable-oil member product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh potatoes; peel/cube as specified) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Refined sunflower cooking oil, selected source generic vegetable-oil member) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "MAGNIT": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        }
+      }
+    },
+    {
+      "coverage_line": 110,
+      "source_recipe_id": "FNS2-ORANGE-PORK-CHOPS",
+      "food_ingredient_code": "PORK_LOIN",
+      "source_position": 2,
+      "source_quantity_text": "2 pork chops",
+      "ingredient_selection": "SELECTED_REQUIRED",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select loin chops within source-generic pork chops; two pieces remain counts and no weight is invented.",
+      "review_status": "REVIEWED",
+      "purchase_form_review_id": "PORK_LOIN",
+      "purchase_concept": "Plain raw boneless pork loin; selected member of generic lean pork and loin chops, source counts and preparation retained",
+      "evidence_matches": [
+        {
+          "observation_id": "research-lenta-okey-v4.json:24",
+          "purchase_concept": "Plain raw boneless pork loin; selected member of generic lean pork and loin chops, source counts and preparation retained",
+          "form_match_reviewed": true,
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Correction review confirms raw boneless loin, not smoked/marinated pork. The source two chops remain two unweighed pieces; no count-to-weight conversion. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select loin chops within source-generic pork chops; two pieces remain counts and no weight is invented."
+        },
+        {
+          "observation_id": "research-correction-market.json:10",
+          "purchase_concept": "Plain raw boneless pork loin; selected member of generic lean pork and loin chops, source counts and preparation retained",
+          "form_match_reviewed": true,
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Correction review confirms raw boneless loin, not smoked/marinated pork. The source two chops remain two unweighed pieces; no count-to-weight conversion. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select loin chops within source-generic pork chops; two pieces remain counts and no weight is invented."
+        }
+      ],
+      "ordinary_retail_plausibility": true,
+      "ordinary_retail_rationale": "A named ordinary plain raw boneless pork loin, selected lean pork member; cut into chunks product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "market_classification": "RU_AVAILABLE",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Plain raw boneless pork loin, selected lean pork member; cut into chunks) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "MAGNIT": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        }
+      }
+    },
+    {
+      "coverage_line": 111,
+      "source_recipe_id": "FNS2-ORANGE-PORK-CHOPS",
+      "food_ingredient_code": "SWEET_POTATO",
+      "source_position": 3,
+      "source_quantity_text": "1 medium sweet potato, peeled and cut into ½-inch slices",
+      "ingredient_selection": "SELECTED_REQUIRED",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
+      "review_status": "REVIEWED",
+      "purchase_form_review_id": "SWEET_POTATO",
+      "purchase_concept": "Fresh sweet potatoes; peel/cube as specified",
+      "evidence_matches": [
+        {
+          "observation_id": "research-lenta-okey-v2.json:8",
+          "purchase_concept": "Fresh sweet potatoes; peel/cube as specified",
+          "form_match_reviewed": true,
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        }
+      ],
+      "ordinary_retail_plausibility": true,
+      "ordinary_retail_rationale": "A named ordinary fresh sweet potatoes; peel/cube as specified product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "market_classification": "RU_AVAILABLE",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh sweet potatoes; peel/cube as specified) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
       "chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
@@ -5292,6 +5278,52 @@
     },
     {
       "coverage_line": 112,
+      "source_recipe_id": "FNS2-ORANGE-PORK-CHOPS",
+      "food_ingredient_code": "ORANGE",
+      "source_position": 4,
+      "source_quantity_text": "½ medium orange, sliced",
+      "ingredient_selection": "SELECTED_REQUIRED",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
+      "review_status": "REVIEWED",
+      "purchase_form_review_id": "ORANGE",
+      "purchase_concept": "Raw whole oranges squeezed to prepare 100% pure orange juice",
+      "evidence_matches": [
+        {
+          "observation_id": "research-lenta-okey-v9.json:2",
+          "purchase_concept": "Raw whole oranges squeezed to prepare 100% pure orange juice",
+          "form_match_reviewed": true,
+          "rationale": "Preserve source three-quarter cup prepared juice, not a whole-fruit count or mass. No added water/sugar, no boxed nectar/concentrate substitution. Parent-approved citrus preparation normalization. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        }
+      ],
+      "ordinary_retail_plausibility": true,
+      "ordinary_retail_rationale": "Named ordinary raw household fruit in current official Lenta catalogue; prepared form handled explicitly without yield assumptions.",
+      "market_classification": "RU_AVAILABLE",
+      "retention_reason": "RU_AVAILABLE: exact ordinary raw fruit is evidenced in one baseline chain; no three-chain mass-market claim.",
+      "chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "MAGNIT": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        }
+      }
+    },
+    {
+      "coverage_line": 113,
       "source_recipe_id": "WIC4-BUTTERNUT-SOUP",
       "food_ingredient_code": "BUTTERNUT_SQUASH",
       "source_position": 1,
@@ -5337,7 +5369,7 @@
       }
     },
     {
-      "coverage_line": 113,
+      "coverage_line": 114,
       "source_recipe_id": "WIC4-BUTTERNUT-SOUP",
       "food_ingredient_code": "OLIVE_OIL",
       "source_position": 2,
@@ -5389,7 +5421,7 @@
       }
     },
     {
-      "coverage_line": 114,
+      "coverage_line": 115,
       "source_recipe_id": "WIC4-BUTTERNUT-SOUP",
       "food_ingredient_code": "SALT",
       "source_position": 3,
@@ -5447,7 +5479,7 @@
       }
     },
     {
-      "coverage_line": 115,
+      "coverage_line": 116,
       "source_recipe_id": "WIC4-BUTTERNUT-SOUP",
       "food_ingredient_code": "MILK_1_PERCENT",
       "source_position": 5,
@@ -5493,7 +5525,7 @@
       }
     },
     {
-      "coverage_line": 116,
+      "coverage_line": 117,
       "source_recipe_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
       "food_ingredient_code": "MILK_1_PERCENT",
       "source_position": 1,
@@ -5539,7 +5571,7 @@
       }
     },
     {
-      "coverage_line": 117,
+      "coverage_line": 118,
       "source_recipe_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
       "food_ingredient_code": "OATS_ROLLED",
       "source_position": 2,
@@ -5609,13 +5641,13 @@
       }
     },
     {
-      "coverage_line": 118,
+      "coverage_line": 119,
       "source_recipe_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
       "food_ingredient_code": "YOGURT_PLAIN_LOW_FAT",
       "source_position": 3,
       "source_quantity_text": "1/4 cup",
-      "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Select low-fat plain branch.",
+      "ingredient_selection": "SELECTED_OPTIONAL",
+      "normalization_reason": "Select low-fat plain branch. Source introduction explicitly makes all foods other than oats and liquid optional; retain this measured named cinnamon-apple variant as selected optional food.",
       "review_status": "REVIEWED",
       "purchase_form_review_id": "YOGURT_PLAIN_LOW_FAT",
       "purchase_concept": "Plain unflavoured low-fat yogurt1.5%; no fruit/vanilla/sugar-flavoured alternative",
@@ -5624,7 +5656,7 @@
           "observation_id": "research-lenta-okey-v3.json:4",
           "purchase_concept": "Plain unflavoured low-fat yogurt1.5%; no fruit/vanilla/sugar-flavoured alternative",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Select low-fat plain branch."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Select low-fat plain branch. Source introduction explicitly makes all foods other than oats and liquid optional; retain this measured named cinnamon-apple variant as selected optional food."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -5655,13 +5687,13 @@
       }
     },
     {
-      "coverage_line": 119,
+      "coverage_line": 120,
       "source_recipe_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
       "food_ingredient_code": "CINNAMON_GROUND",
       "source_position": 4,
       "source_quantity_text": "1 teaspoon",
-      "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion.",
+      "ingredient_selection": "SELECTED_OPTIONAL",
+      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion. Source introduction explicitly makes all foods other than oats and liquid optional; retain this measured named cinnamon-apple variant as selected optional food.",
       "review_status": "REVIEWED",
       "purchase_form_review_id": "CINNAMON_GROUND",
       "purchase_concept": "Ground cinnamon",
@@ -5670,7 +5702,7 @@
           "observation_id": "research-lenta-okey-v2.json:36",
           "purchase_concept": "Ground cinnamon",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion. Source introduction explicitly makes all foods other than oats and liquid optional; retain this measured named cinnamon-apple variant as selected optional food."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -5701,13 +5733,13 @@
       }
     },
     {
-      "coverage_line": 120,
+      "coverage_line": 121,
       "source_recipe_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
       "food_ingredient_code": "APPLE",
       "source_position": 6,
       "source_quantity_text": "1/2 apple",
-      "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion.",
+      "ingredient_selection": "SELECTED_OPTIONAL",
+      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion. Source introduction explicitly makes all foods other than oats and liquid optional; retain this measured named cinnamon-apple variant as selected optional food.",
       "review_status": "REVIEWED",
       "purchase_form_review_id": "APPLE",
       "purchase_concept": "Whole fresh apples; washing, peeling where specified, coring and chopping are preparation",
@@ -5716,7 +5748,7 @@
           "observation_id": "research-lenta-okey-v3.json:27",
           "purchase_concept": "Whole fresh apples; washing, peeling where specified, coring and chopping are preparation",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion. Source introduction explicitly makes all foods other than oats and liquid optional; retain this measured named cinnamon-apple variant as selected optional food."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -5747,86 +5779,28 @@
       }
     },
     {
-      "coverage_line": 121,
-      "source_recipe_id": "WIC4-ROASTED-CARROTS",
-      "food_ingredient_code": "CARROT",
-      "source_position": 1,
-      "source_quantity_text": "1 pound",
-      "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion.",
-      "review_status": "REVIEWED",
-      "purchase_form_review_id": "CARROT",
-      "purchase_concept": "Fresh carrots; peel/shred/chop as specified",
-      "evidence_matches": [
-        {
-          "observation_id": "research-lenta-okey-v2.json:1",
-          "purchase_concept": "Fresh carrots; peel/shred/chop as specified",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
-        },
-        {
-          "observation_id": "research-magnit-v2.json:1",
-          "purchase_concept": "Fresh carrots; peel/shred/chop as specified",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
-        }
-      ],
-      "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary fresh carrots; peel/shred/chop as specified product/category is directly evidenced in LENTA, MAGNIT. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh carrots; peel/shred/chop as specified) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
-        }
-      }
-    },
-    {
       "coverage_line": 122,
-      "source_recipe_id": "WIC4-ROASTED-CARROTS",
-      "food_ingredient_code": "OLIVE_OIL",
-      "source_position": 2,
-      "source_quantity_text": "1 tablespoon",
+      "source_recipe_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+      "food_ingredient_code": "SPINACH",
+      "source_position": 1,
+      "source_quantity_text": "1 cup kale or spinach",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Olive oil selected as valid member of generic vegetable-oil ingredient. Standard direction says oil; olive is explicitly mentioned only for the unselected spicy variant. No standard-source conflict asserted.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "OLIVE_OIL",
-      "purchase_concept": "Pure olive oil; no non-olive blend",
+      "purchase_form_review_id": "SPINACH",
+      "purchase_concept": "Fresh spinach leaves; rinse/chop as specified",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v4.json:9",
-          "purchase_concept": "Pure olive oil; no non-olive blend",
+          "observation_id": "research-lenta-okey-v4.json:2",
+          "purchase_concept": "Fresh spinach leaves; rinse/chop as specified",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Olive oil selected as valid member of generic vegetable-oil ingredient. Standard direction says oil; olive is explicitly mentioned only for the unselected spicy variant. No standard-source conflict asserted."
-        },
-        {
-          "observation_id": "research-x5-v3.json:1",
-          "purchase_concept": "Pure olive oil; no non-olive blend",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Olive oil selected as valid member of generic vegetable-oil ingredient. Standard direction says oil; olive is explicitly mentioned only for the unselected spicy variant. No standard-source conflict asserted."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary pure olive oil; no non-olive blend product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "A named ordinary fresh spinach leaves; rinse/chop as specified product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Pure olive oil; no non-olive blend) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh spinach leaves; rinse/chop as specified) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
       "chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
@@ -5852,27 +5826,27 @@
     },
     {
       "coverage_line": 123,
-      "source_recipe_id": "WIC4-ROASTED-CARROTS",
-      "food_ingredient_code": "GARLIC_POWDER",
-      "source_position": 3,
-      "source_quantity_text": "2 teaspoons",
+      "source_recipe_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+      "food_ingredient_code": "BANANA",
+      "source_position": 2,
+      "source_quantity_text": "1 banana, medium",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "GARLIC_POWDER",
-      "purchase_concept": "Plain dried ground garlic powder",
+      "purchase_form_review_id": "BANANA",
+      "purchase_concept": "Fresh banana; peel and slice",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v4.json:15",
-          "purchase_concept": "Plain dried ground garlic powder",
+          "observation_id": "research-lenta-okey-v6.json:2",
+          "purchase_concept": "Fresh banana; peel and slice",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary plain dried ground garlic powder product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "A named ordinary fresh banana; peel and slice product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Plain dried ground garlic powder) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh banana; peel and slice) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
       "chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
@@ -5898,39 +5872,27 @@
     },
     {
       "coverage_line": 124,
-      "source_recipe_id": "WIC4-ROASTED-CARROTS",
-      "food_ingredient_code": "SALT",
-      "source_position": 4,
-      "source_quantity_text": "1 1/2 teaspoons",
+      "source_recipe_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+      "food_ingredient_code": "MILK_1_PERCENT",
+      "source_position": 3,
+      "source_quantity_text": "1 cup low fat milk (or optional coconut milk or almond milk)",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "SALT",
-      "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
+      "purchase_form_review_id": "MILK_1_PERCENT",
+      "purchase_concept": "Unflavoured cow milk1% fat; exact1% where source fixes it, selected lowfat option otherwise",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v4.json:17",
-          "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
+          "observation_id": "research-lenta-okey-v2.json:14",
+          "purchase_concept": "Unflavoured cow milk1% fat; exact1% where source fixes it, selected lowfat option otherwise",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
-        },
-        {
-          "observation_id": "research-lenta-okey-v7.json:3",
-          "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
-        },
-        {
-          "observation_id": "research-x5-v3.json:2",
-          "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary ordinary food table salt; iodized-specific source option separately reviewed product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "A named ordinary unflavoured cow milk1% fat; exact1% where source fixes it, selected lowfat option otherwise product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Ordinary food table salt; iodized-specific source option separately reviewed) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Unflavoured cow milk1% fat; exact1% where source fixes it, selected lowfat option otherwise) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
       "chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
@@ -5956,27 +5918,27 @@
     },
     {
       "coverage_line": 125,
-      "source_recipe_id": "WIC4-ROASTED-CARROTS",
-      "food_ingredient_code": "BLACK_PEPPER",
-      "source_position": 5,
-      "source_quantity_text": "1 teaspoon",
+      "source_recipe_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+      "food_ingredient_code": "YOGURT_PLAIN_LOW_FAT",
+      "source_position": 4,
+      "source_quantity_text": "1 cup plain yogurt",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select existing plain low-fat yogurt within source-generic plain yogurt; source does not require a specific yogurt fat percentage.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "BLACK_PEPPER",
-      "purchase_concept": "Ground black pepper",
+      "purchase_form_review_id": "YOGURT_PLAIN_LOW_FAT",
+      "purchase_concept": "Plain unflavoured low-fat yogurt1.5%; no fruit/vanilla/sugar-flavoured alternative",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v2.json:34",
-          "purchase_concept": "Ground black pepper",
+          "observation_id": "research-lenta-okey-v3.json:4",
+          "purchase_concept": "Plain unflavoured low-fat yogurt1.5%; no fruit/vanilla/sugar-flavoured alternative",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select existing plain low-fat yogurt within source-generic plain yogurt; source does not require a specific yogurt fat percentage."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary ground black pepper product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "ordinary_retail_rationale": "A named ordinary plain unflavoured low-fat yogurt1.5%; no fruit/vanilla/sugar-flavoured alternative product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
       "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Ground black pepper) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Plain unflavoured low-fat yogurt1.5%; no fruit/vanilla/sugar-flavoured alternative) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
       "chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
@@ -6002,6 +5964,104 @@
     },
     {
       "coverage_line": 126,
+      "source_recipe_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+      "food_ingredient_code": "APPLE",
+      "source_position": 5,
+      "source_quantity_text": "1 apple, medium (cored and sliced)",
+      "ingredient_selection": "SELECTED_REQUIRED",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
+      "review_status": "REVIEWED",
+      "purchase_form_review_id": "APPLE",
+      "purchase_concept": "Whole fresh apples; washing, peeling where specified, coring and chopping are preparation",
+      "evidence_matches": [
+        {
+          "observation_id": "research-lenta-okey-v3.json:27",
+          "purchase_concept": "Whole fresh apples; washing, peeling where specified, coring and chopping are preparation",
+          "form_match_reviewed": true,
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        }
+      ],
+      "ordinary_retail_plausibility": true,
+      "ordinary_retail_rationale": "A named ordinary whole fresh apples; washing, peeling where specified, coring and chopping are preparation product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "market_classification": "RU_AVAILABLE",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Whole fresh apples; washing, peeling where specified, coring and chopping are preparation) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "MAGNIT": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        }
+      }
+    },
+    {
+      "coverage_line": 127,
+      "source_recipe_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+      "food_ingredient_code": "STRAWBERRY",
+      "source_position": 6,
+      "source_quantity_text": "1 cup frozen fruit (all one fruit or a combination of mixed frozen fruit)",
+      "ingredient_selection": "SELECTED_REQUIRED",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select plain frozen strawberries under the explicit all-one-fruit option; retain one cup, no thawing yield or added sugar.",
+      "review_status": "REVIEWED",
+      "purchase_form_review_id": "STRAWBERRY",
+      "purchase_concept": "Plain unsweetened frozen strawberries, source-explicit single frozen fruit choice",
+      "evidence_matches": [
+        {
+          "observation_id": "research-correction-market.json:12",
+          "purchase_concept": "Plain unsweetened frozen strawberries, source-explicit single frozen fruit choice",
+          "form_match_reviewed": true,
+          "rationale": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select plain frozen strawberries under the explicit all-one-fruit option; retain one cup, no thawing yield or added sugar."
+        },
+        {
+          "observation_id": "research-correction-market.json:13",
+          "purchase_concept": "Plain unsweetened frozen strawberries, source-explicit single frozen fruit choice",
+          "form_match_reviewed": true,
+          "rationale": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select plain frozen strawberries under the explicit all-one-fruit option; retain one cup, no thawing yield or added sugar."
+        }
+      ],
+      "ordinary_retail_plausibility": true,
+      "ordinary_retail_rationale": "Ordinary Plain unsweetened frozen strawberries, source-explicit single frozen fruit choice product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
+      "market_classification": "RU_AVAILABLE",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
+      "chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "basis": "Qualifying official product plus SPB evidence, no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "MAGNIT": {
+          "status": "AVAILABLE",
+          "basis": "Qualifying official product plus SPB evidence, no live stock claim."
+        }
+      }
+    },
+    {
+      "coverage_line": 128,
       "source_recipe_id": "SNAP3-GRILLED-FRUIT",
       "food_ingredient_code": "PINEAPPLE",
       "source_position": 1,
@@ -6047,7 +6107,7 @@
       }
     },
     {
-      "coverage_line": 127,
+      "coverage_line": 129,
       "source_recipe_id": "SNAP3-GRILLED-FRUIT",
       "food_ingredient_code": "PEACH",
       "source_position": 2,
@@ -6093,7 +6153,7 @@
       }
     },
     {
-      "coverage_line": 128,
+      "coverage_line": 130,
       "source_recipe_id": "SNAP3-GRILLED-FRUIT",
       "food_ingredient_code": "BANANA",
       "source_position": 3,
@@ -6139,13 +6199,13 @@
       }
     },
     {
-      "coverage_line": 129,
+      "coverage_line": 131,
       "source_recipe_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
       "food_ingredient_code": "MILK_1_PERCENT",
       "source_position": 1,
       "source_quantity_text": "1 cup",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Select low-fat milk existing1%member.",
+      "normalization_reason": "Select existing 1% milk as a member of source-generic milk; source does not state a low-fat/non-fat restriction for this row. No volume conversion.",
       "review_status": "REVIEWED",
       "purchase_form_review_id": "MILK_1_PERCENT",
       "purchase_concept": "Unflavoured cow milk1% fat; exact1% where source fixes it, selected lowfat option otherwise",
@@ -6154,7 +6214,7 @@
           "observation_id": "research-lenta-okey-v2.json:14",
           "purchase_concept": "Unflavoured cow milk1% fat; exact1% where source fixes it, selected lowfat option otherwise",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Select low-fat milk existing1%member."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Select existing 1% milk as a member of source-generic milk; source does not state a low-fat/non-fat restriction for this row. No volume conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -6185,7 +6245,7 @@
       }
     },
     {
-      "coverage_line": 130,
+      "coverage_line": 132,
       "source_recipe_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
       "food_ingredient_code": "YOGURT_PLAIN_LOW_FAT",
       "source_position": 2,
@@ -6231,7 +6291,7 @@
       }
     },
     {
-      "coverage_line": 131,
+      "coverage_line": 133,
       "source_recipe_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
       "food_ingredient_code": "BANANA",
       "source_position": 3,
@@ -6277,7 +6337,7 @@
       }
     },
     {
-      "coverage_line": 132,
+      "coverage_line": 134,
       "source_recipe_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
       "food_ingredient_code": "SPINACH",
       "source_position": 4,
@@ -6323,7 +6383,7 @@
       }
     },
     {
-      "coverage_line": 133,
+      "coverage_line": 135,
       "source_recipe_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
       "food_ingredient_code": "APPLE",
       "source_position": 5,
@@ -6369,7 +6429,7 @@
       }
     },
     {
-      "coverage_line": 134,
+      "coverage_line": 136,
       "source_recipe_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
       "food_ingredient_code": "CAULIFLOWER",
       "source_position": 6,
@@ -6415,7 +6475,7 @@
       }
     },
     {
-      "coverage_line": 135,
+      "coverage_line": 137,
       "source_recipe_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
       "food_ingredient_code": "OATS_ROLLED",
       "source_position": 7,
@@ -6485,7 +6545,7 @@
       }
     },
     {
-      "coverage_line": 136,
+      "coverage_line": 138,
       "source_recipe_id": "SNAP4-PEAR-ORANGE-SAUCE",
       "food_ingredient_code": "PEAR",
       "source_position": 1,
@@ -6531,7 +6591,7 @@
       }
     },
     {
-      "coverage_line": 137,
+      "coverage_line": 139,
       "source_recipe_id": "SNAP4-PEAR-ORANGE-SAUCE",
       "food_ingredient_code": "ORANGE",
       "source_position": 2,
@@ -6577,7 +6637,7 @@
       }
     },
     {
-      "coverage_line": 138,
+      "coverage_line": 140,
       "source_recipe_id": "SNAP4-PEAR-ORANGE-SAUCE",
       "food_ingredient_code": "SUGAR",
       "source_position": 3,
@@ -6635,7 +6695,7 @@
       }
     },
     {
-      "coverage_line": 139,
+      "coverage_line": 141,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "OLIVE_OIL",
       "source_position": 1,
@@ -6687,7 +6747,7 @@
       }
     },
     {
-      "coverage_line": 140,
+      "coverage_line": 142,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "ONION_RED",
       "source_position": 2,
@@ -6733,7 +6793,7 @@
       }
     },
     {
-      "coverage_line": 141,
+      "coverage_line": 143,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "GARLIC",
       "source_position": 3,
@@ -6785,7 +6845,7 @@
       }
     },
     {
-      "coverage_line": 142,
+      "coverage_line": 144,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "POTATO",
       "source_position": 4,
@@ -6831,7 +6891,7 @@
       }
     },
     {
-      "coverage_line": 143,
+      "coverage_line": 145,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "CARROT",
       "source_position": 5,
@@ -6883,7 +6943,7 @@
       }
     },
     {
-      "coverage_line": 144,
+      "coverage_line": 146,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "ASPARAGUS",
       "source_position": 6,
@@ -6929,7 +6989,7 @@
       }
     },
     {
-      "coverage_line": 145,
+      "coverage_line": 147,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "GREEN_BEANS",
       "source_position": 7,
@@ -6975,7 +7035,7 @@
       }
     },
     {
-      "coverage_line": 146,
+      "coverage_line": 148,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "RADISH",
       "source_position": 8,
@@ -7021,7 +7081,7 @@
       }
     },
     {
-      "coverage_line": 147,
+      "coverage_line": 149,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "SALT",
       "source_position": 9,
@@ -7079,7 +7139,7 @@
       }
     },
     {
-      "coverage_line": 148,
+      "coverage_line": 150,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "BLACK_PEPPER",
       "source_position": 10,
@@ -7125,7 +7185,7 @@
       }
     },
     {
-      "coverage_line": 149,
+      "coverage_line": 151,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "DILL_DRIED",
       "source_position": 11,
@@ -7171,7 +7231,7 @@
       }
     },
     {
-      "coverage_line": 150,
+      "coverage_line": 152,
       "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
       "food_ingredient_code": "WATER",
       "source_position": 12,
@@ -7185,124 +7245,44 @@
       "retention_reason": "Explicit source cooking/preparation water; no retailer purchase requirement. Preserve source amount/condition."
     },
     {
-      "coverage_line": 151,
-      "source_recipe_id": "SNAP8-HOMEMADE-MASHED-POTATOES",
-      "food_ingredient_code": "POTATO",
-      "source_position": 1,
-      "source_quantity_text": "2 pounds (6 medium)",
-      "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion.",
-      "review_status": "REVIEWED",
-      "purchase_form_review_id": "POTATO",
-      "purchase_concept": "Fresh potatoes; peel/cube as specified",
-      "evidence_matches": [
-        {
-          "observation_id": "research-lenta-okey-v4.json:4",
-          "purchase_concept": "Fresh potatoes; peel/cube as specified",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
-        }
-      ],
-      "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary fresh potatoes; peel/cube as specified product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh potatoes; peel/cube as specified) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      }
-    },
-    {
-      "coverage_line": 152,
-      "source_recipe_id": "SNAP8-HOMEMADE-MASHED-POTATOES",
-      "food_ingredient_code": "MILK_1_PERCENT",
-      "source_position": 2,
-      "source_quantity_text": "1 cup",
-      "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "1%existingmember of low-fat milk; directions say enough for creaminess, baseline1cup retained.",
-      "review_status": "REVIEWED",
-      "purchase_form_review_id": "MILK_1_PERCENT",
-      "purchase_concept": "Unflavoured cow milk1% fat; exact1% where source fixes it, selected lowfat option otherwise",
-      "evidence_matches": [
-        {
-          "observation_id": "research-lenta-okey-v2.json:14",
-          "purchase_concept": "Unflavoured cow milk1% fat; exact1% where source fixes it, selected lowfat option otherwise",
-          "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: 1%existingmember of low-fat milk; directions say enough for creaminess, baseline1cup retained."
-        }
-      ],
-      "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary unflavoured cow milk1% fat; exact1% where source fixes it, selected lowfat option otherwise product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Unflavoured cow milk1% fat; exact1% where source fixes it, selected lowfat option otherwise) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      }
-    },
-    {
       "coverage_line": 153,
-      "source_recipe_id": "SNAP8-HOMEMADE-MASHED-POTATOES",
-      "food_ingredient_code": "BUTTER_UNSALTED",
-      "source_position": 3,
-      "source_quantity_text": "3 tablespoons",
+      "source_recipe_id": "FNS4-OVEN-FRIED-FISH",
+      "food_ingredient_code": "EGG",
+      "source_position": 1,
+      "source_quantity_text": "1 large egg, slightly beaten",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Select butter explicit alternative; unsalted member of generic butter.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
       "review_status": "REVIEWED",
-      "purchase_form_review_id": "BUTTER_UNSALTED",
-      "purchase_concept": "Unsalted butter; choose explicit source butter alternative where offered",
+      "purchase_form_review_id": "EGG",
+      "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
       "evidence_matches": [
         {
-          "observation_id": "research-lenta-okey-v4.json:7",
-          "purchase_concept": "Unsalted butter; choose explicit source butter alternative where offered",
+          "observation_id": "research-x5-v2.json:1",
+          "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Select butter explicit alternative; unsalted member of generic butter."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "observation_id": "research-magnit-v2.json:4",
+          "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
+          "form_match_reviewed": true,
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        },
+        {
+          "observation_id": "research-panel-v3.json:1",
+          "purchase_concept": "Raw shell chicken eggs; cracking/whisking is preparation",
+          "form_match_reviewed": true,
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
-      "ordinary_retail_rationale": "A named ordinary unsalted butter; choose explicit source butter alternative where offered product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "market_classification": "RU_AVAILABLE",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Unsalted butter; choose explicit source butter alternative where offered) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "ordinary_retail_rationale": "A named ordinary raw shell chicken eggs; cracking/whisking is preparation product/category is directly evidenced in PYATEROCHKA, MAGNIT, LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "market_classification": "RU_MASS_MARKET",
+      "retention_reason": "At least three distinct baseline chains evidenced for the actual purchase concept.",
       "chain_review": {
         "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "status": "AVAILABLE",
+          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
         },
         "PEREKRESTOK": {
           "status": "UNCERTAIN",
@@ -7317,19 +7297,19 @@
           "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
         },
         "MAGNIT": {
-          "status": "UNCERTAIN",
-          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "status": "AVAILABLE",
+          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
         }
       }
     },
     {
       "coverage_line": 154,
-      "source_recipe_id": "SNAP8-HOMEMADE-MASHED-POTATOES",
+      "source_recipe_id": "FNS4-OVEN-FRIED-FISH",
       "food_ingredient_code": "SALT",
-      "source_position": 4,
-      "source_quantity_text": "1 teaspoon",
+      "source_position": 2,
+      "source_quantity_text": "½ teaspoon salt",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
       "review_status": "REVIEWED",
       "purchase_form_review_id": "SALT",
       "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
@@ -7338,19 +7318,19 @@
           "observation_id": "research-lenta-okey-v4.json:17",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
           "observation_id": "research-lenta-okey-v7.json:3",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         },
         {
           "observation_id": "research-x5-v3.json:2",
           "purchase_concept": "Ordinary food table salt; iodized-specific source option separately reviewed",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -7382,12 +7362,12 @@
     },
     {
       "coverage_line": 155,
-      "source_recipe_id": "SNAP8-HOMEMADE-MASHED-POTATOES",
+      "source_recipe_id": "FNS4-OVEN-FRIED-FISH",
       "food_ingredient_code": "BLACK_PEPPER",
-      "source_position": 5,
-      "source_quantity_text": "1/2 teaspoon",
+      "source_position": 3,
+      "source_quantity_text": "½ teaspoon ground black pepper",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Existing canonical food concept; retain source preparation and quantity without conversion.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
       "review_status": "REVIEWED",
       "purchase_form_review_id": "BLACK_PEPPER",
       "purchase_concept": "Ground black pepper",
@@ -7396,7 +7376,7 @@
           "observation_id": "research-lenta-okey-v2.json:34",
           "purchase_concept": "Ground black pepper",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Existing canonical food concept; retain source preparation and quantity without conversion."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -7428,20 +7408,144 @@
     },
     {
       "coverage_line": 156,
-      "source_recipe_id": "SNAP8-HOMEMADE-MASHED-POTATOES",
-      "food_ingredient_code": "WATER",
-      "source_position": 6,
-      "source_quantity_text": "enough to cover potatoes",
+      "source_recipe_id": "FNS4-OVEN-FRIED-FISH",
+      "food_ingredient_code": "BREADCRUMBS",
+      "source_position": 4,
+      "source_quantity_text": "½ cup breadcrumbs",
       "ingredient_selection": "SELECTED_REQUIRED",
-      "normalization_reason": "Explicit cooking and then drained water; execution aid amount qualitative, not invented.",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion.",
       "review_status": "REVIEWED",
-      "purchase_concept": "Household preparation/cooking water",
-      "evidence_matches": [],
-      "market_classification": "HOUSEHOLD_WATER",
-      "retention_reason": "Explicit source cooking/preparation water; no retailer purchase requirement. Preserve source amount/condition."
+      "purchase_form_review_id": "BREADCRUMBS",
+      "purchase_concept": "Plain dry wheat breadcrumbs for breading, not panko or seasoned coating mix",
+      "evidence_matches": [
+        {
+          "observation_id": "research-correction-market.json:3",
+          "purchase_concept": "Plain dry wheat breadcrumbs for breading, not panko or seasoned coating mix",
+          "form_match_reviewed": true,
+          "rationale": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion."
+        }
+      ],
+      "ordinary_retail_plausibility": true,
+      "ordinary_retail_rationale": "Ordinary Plain dry wheat breadcrumbs for breading, not panko or seasoned coating mix product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
+      "market_classification": "RU_AVAILABLE",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
+      "chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "basis": "Qualifying official product plus SPB evidence, no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "MAGNIT": {
+          "status": "UNCERTAIN",
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        }
+      }
     },
     {
       "coverage_line": 157,
+      "source_recipe_id": "FNS4-OVEN-FRIED-FISH",
+      "food_ingredient_code": "TILAPIA_RAW",
+      "source_position": 5,
+      "source_quantity_text": "1 pound tilapia fillets, fresh or frozen and thawed (4 fillets)",
+      "ingredient_selection": "SELECTED_REQUIRED",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select explicitly permitted frozen-and-thawed plain fillets, retaining the one-pound source weight.",
+      "review_status": "REVIEWED",
+      "purchase_form_review_id": "TILAPIA_RAW",
+      "purchase_concept": "Plain frozen raw tilapia fillets, thawed for cooking as explicitly allowed by the source",
+      "evidence_matches": [
+        {
+          "observation_id": "research-correction-market.json:2",
+          "purchase_concept": "Plain frozen raw tilapia fillets, thawed for cooking as explicitly allowed by the source",
+          "form_match_reviewed": true,
+          "rationale": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Select explicitly permitted frozen-and-thawed plain fillets, retaining the one-pound source weight."
+        }
+      ],
+      "ordinary_retail_plausibility": true,
+      "ordinary_retail_rationale": "Ordinary Plain frozen raw tilapia fillets, thawed for cooking as explicitly allowed by the source product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
+      "market_classification": "RU_AVAILABLE",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
+      "chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "basis": "Qualifying official product plus SPB evidence, no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "MAGNIT": {
+          "status": "UNCERTAIN",
+          "basis": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        }
+      }
+    },
+    {
+      "coverage_line": 158,
+      "source_recipe_id": "FNS4-OVEN-FRIED-FISH",
+      "food_ingredient_code": "BUTTER_UNSALTED",
+      "source_position": 6,
+      "source_quantity_text": "1 tablespoon butter, melted",
+      "ingredient_selection": "SELECTED_REQUIRED",
+      "normalization_reason": "Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Unsalted butter is the selected member of source-generic butter; listed coating tablespoon retained.",
+      "review_status": "REVIEWED",
+      "purchase_form_review_id": "BUTTER_UNSALTED",
+      "purchase_concept": "Unsalted butter; select explicit butter alternative or narrower member of source-generic butter where reviewed",
+      "evidence_matches": [
+        {
+          "observation_id": "research-lenta-okey-v4.json:7",
+          "purchase_concept": "Unsalted butter; select explicit butter alternative or narrower member of source-generic butter where reviewed",
+          "form_match_reviewed": true,
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Source quantity retained literally; existing canonical concept, preparation does not imply a pre-cut retailer form. No grams, yield, raw/cooked or count-to-weight conversion. Unsalted butter is the selected member of source-generic butter; listed coating tablespoon retained."
+        }
+      ],
+      "ordinary_retail_plausibility": true,
+      "ordinary_retail_rationale": "A named ordinary unsalted butter; choose explicit source butter alternative where offered product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "market_classification": "RU_AVAILABLE",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Unsalted butter; choose explicit source butter alternative where offered) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "basis": "Current appropriate catalogue/form evidence; no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "MAGNIT": {
+          "status": "UNCERTAIN",
+          "basis": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        }
+      }
+    },
+    {
+      "coverage_line": 159,
       "source_recipe_id": "SNAP8-APPLE-CARROT-SOUP",
       "food_ingredient_code": "PORK_LOIN",
       "source_position": 1,
@@ -7450,13 +7554,19 @@
       "normalization_reason": "Lean pork loin is selected member of unqualified lean pork family; no source cut claim.",
       "review_status": "REVIEWED",
       "purchase_form_review_id": "PORK_LOIN",
-      "purchase_concept": "Plain raw boneless pork loin, selected lean pork member; cut into chunks",
+      "purchase_concept": "Plain raw boneless pork loin; selected member of generic lean pork and loin chops, source counts and preparation retained",
       "evidence_matches": [
         {
           "observation_id": "research-lenta-okey-v4.json:24",
-          "purchase_concept": "Plain raw boneless pork loin, selected lean pork member; cut into chunks",
+          "purchase_concept": "Plain raw boneless pork loin; selected member of generic lean pork and loin chops, source counts and preparation retained",
           "form_match_reviewed": true,
-          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Source normalization: Lean pork loin is selected member of unqualified lean pork family; no source cut claim."
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Correction review confirms raw boneless loin, not smoked/marinated pork. The source two chops remain two unweighed pieces; no count-to-weight conversion. Source normalization: Lean pork loin is selected member of unqualified lean pork family; no source cut claim."
+        },
+        {
+          "observation_id": "research-correction-market.json:10",
+          "purchase_concept": "Plain raw boneless pork loin; selected member of generic lean pork and loin chops, source counts and preparation retained",
+          "form_match_reviewed": true,
+          "rationale": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Correction review confirms raw boneless loin, not smoked/marinated pork. The source two chops remain two unweighed pieces; no count-to-weight conversion. Source normalization: Lean pork loin is selected member of unqualified lean pork family; no source cut claim."
         }
       ],
       "ordinary_retail_plausibility": true,
@@ -7487,7 +7597,7 @@
       }
     },
     {
-      "coverage_line": 158,
+      "coverage_line": 160,
       "source_recipe_id": "SNAP8-APPLE-CARROT-SOUP",
       "food_ingredient_code": "APPLE",
       "source_position": 2,
@@ -7533,7 +7643,7 @@
       }
     },
     {
-      "coverage_line": 159,
+      "coverage_line": 161,
       "source_recipe_id": "SNAP8-APPLE-CARROT-SOUP",
       "food_ingredient_code": "CARROT",
       "source_position": 3,
@@ -7585,7 +7695,7 @@
       }
     },
     {
-      "coverage_line": 160,
+      "coverage_line": 162,
       "source_recipe_id": "SNAP8-APPLE-CARROT-SOUP",
       "food_ingredient_code": "GINGER",
       "source_position": 5,
@@ -7631,7 +7741,7 @@
       }
     },
     {
-      "coverage_line": 161,
+      "coverage_line": 163,
       "source_recipe_id": "SNAP8-APPLE-CARROT-SOUP",
       "food_ingredient_code": "SALT",
       "source_position": 6,
@@ -7689,7 +7799,7 @@
       }
     },
     {
-      "coverage_line": 162,
+      "coverage_line": 164,
       "source_recipe_id": "SNAP8-APPLE-CARROT-SOUP",
       "food_ingredient_code": "WATER",
       "source_position": 7,
@@ -7703,7 +7813,7 @@
       "retention_reason": "Explicit source cooking/preparation water; no retailer purchase requirement. Preserve source amount/condition."
     },
     {
-      "coverage_line": 163,
+      "coverage_line": 165,
       "source_recipe_id": "SNAP6-WALDORF-SALAD",
       "food_ingredient_code": "WALNUTS_RAW",
       "source_position": 1,
@@ -7749,7 +7859,7 @@
       }
     },
     {
-      "coverage_line": 164,
+      "coverage_line": 166,
       "source_recipe_id": "SNAP6-WALDORF-SALAD",
       "food_ingredient_code": "APPLE",
       "source_position": 2,
@@ -7795,7 +7905,7 @@
       }
     },
     {
-      "coverage_line": 165,
+      "coverage_line": 167,
       "source_recipe_id": "SNAP6-WALDORF-SALAD",
       "food_ingredient_code": "CELERY",
       "source_position": 3,
@@ -7841,7 +7951,7 @@
       }
     },
     {
-      "coverage_line": 166,
+      "coverage_line": 168,
       "source_recipe_id": "SNAP6-WALDORF-SALAD",
       "food_ingredient_code": "RAISINS_GOLDEN",
       "source_position": 4,
@@ -7887,7 +7997,7 @@
       }
     },
     {
-      "coverage_line": 167,
+      "coverage_line": 169,
       "source_recipe_id": "SNAP6-WALDORF-SALAD",
       "food_ingredient_code": "YOGURT_GREEK_NONFAT",
       "source_position": 5,
@@ -7933,7 +8043,7 @@
       }
     },
     {
-      "coverage_line": 168,
+      "coverage_line": 170,
       "source_recipe_id": "SNAP6-WALDORF-SALAD",
       "food_ingredient_code": "SUGAR",
       "source_position": 6,
@@ -7991,7 +8101,7 @@
       }
     },
     {
-      "coverage_line": 169,
+      "coverage_line": 171,
       "source_recipe_id": "SNAP6-WALDORF-SALAD",
       "food_ingredient_code": "LEMON",
       "source_position": 7,
@@ -8043,7 +8153,7 @@
       }
     },
     {
-      "coverage_line": 170,
+      "coverage_line": 172,
       "source_recipe_id": "SNAP4-BROWN-RICE-PILAF",
       "food_ingredient_code": "RICE_BROWN",
       "source_position": 1,
@@ -8089,7 +8199,7 @@
       }
     },
     {
-      "coverage_line": 171,
+      "coverage_line": 173,
       "source_recipe_id": "SNAP4-BROWN-RICE-PILAF",
       "food_ingredient_code": "WATER",
       "source_position": 2,
@@ -8103,7 +8213,7 @@
       "retention_reason": "Explicit source cooking/preparation water; no retailer purchase requirement. Preserve source amount/condition."
     },
     {
-      "coverage_line": 172,
+      "coverage_line": 174,
       "source_recipe_id": "SNAP4-BROWN-RICE-PILAF",
       "food_ingredient_code": "ALMONDS_RAW",
       "source_position": 3,
@@ -8149,7 +8259,7 @@
       }
     },
     {
-      "coverage_line": 173,
+      "coverage_line": 175,
       "source_recipe_id": "SNAP4-BROWN-RICE-PILAF",
       "food_ingredient_code": "PARSLEY_DRIED",
       "source_position": 4,
@@ -8195,7 +8305,7 @@
       }
     },
     {
-      "coverage_line": 174,
+      "coverage_line": 176,
       "source_recipe_id": "SNAP4-BROWN-RICE-PILAF",
       "food_ingredient_code": "GARLIC_POWDER",
       "source_position": 5,
@@ -8241,7 +8351,7 @@
       }
     },
     {
-      "coverage_line": 175,
+      "coverage_line": 177,
       "source_recipe_id": "SNAP4-BROWN-RICE-PILAF",
       "food_ingredient_code": "BLACK_PEPPER",
       "source_position": 6,
@@ -8287,7 +8397,7 @@
       }
     },
     {
-      "coverage_line": 176,
+      "coverage_line": 178,
       "source_recipe_id": "SNAP5-KALE-NUTS-RAISINS",
       "food_ingredient_code": "WALNUTS_RAW",
       "source_position": 1,
@@ -8333,7 +8443,7 @@
       }
     },
     {
-      "coverage_line": 177,
+      "coverage_line": 179,
       "source_recipe_id": "SNAP5-KALE-NUTS-RAISINS",
       "food_ingredient_code": "SUNFLOWER_OIL",
       "source_position": 2,
@@ -8379,7 +8489,7 @@
       }
     },
     {
-      "coverage_line": 178,
+      "coverage_line": 180,
       "source_recipe_id": "SNAP5-KALE-NUTS-RAISINS",
       "food_ingredient_code": "GARLIC",
       "source_position": 3,
@@ -8431,7 +8541,7 @@
       }
     },
     {
-      "coverage_line": 179,
+      "coverage_line": 181,
       "source_recipe_id": "SNAP5-KALE-NUTS-RAISINS",
       "food_ingredient_code": "KALE",
       "source_position": 4,
@@ -8477,7 +8587,7 @@
       }
     },
     {
-      "coverage_line": 180,
+      "coverage_line": 182,
       "source_recipe_id": "SNAP5-KALE-NUTS-RAISINS",
       "food_ingredient_code": "RAISINS_GOLDEN",
       "source_position": 5,
@@ -8523,7 +8633,7 @@
       }
     },
     {
-      "coverage_line": 181,
+      "coverage_line": 183,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "CHICKEN_THIGH",
       "source_position": 1,
@@ -8569,7 +8679,7 @@
       }
     },
     {
-      "coverage_line": 182,
+      "coverage_line": 184,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "SUNFLOWER_OIL",
       "source_position": 2,
@@ -8615,7 +8725,7 @@
       }
     },
     {
-      "coverage_line": 183,
+      "coverage_line": 185,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "SALT",
       "source_position": 3,
@@ -8673,7 +8783,7 @@
       }
     },
     {
-      "coverage_line": 184,
+      "coverage_line": 186,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "BLACK_PEPPER",
       "source_position": 4,
@@ -8719,7 +8829,7 @@
       }
     },
     {
-      "coverage_line": 185,
+      "coverage_line": 187,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "ONION_YELLOW",
       "source_position": 5,
@@ -8765,7 +8875,7 @@
       }
     },
     {
-      "coverage_line": 186,
+      "coverage_line": 188,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "GARLIC",
       "source_position": 6,
@@ -8817,7 +8927,7 @@
       }
     },
     {
-      "coverage_line": 187,
+      "coverage_line": 189,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "THYME_DRIED",
       "source_position": 7,
@@ -8863,7 +8973,7 @@
       }
     },
     {
-      "coverage_line": 188,
+      "coverage_line": 190,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "ROSEMARY_DRIED",
       "source_position": 8,
@@ -8909,7 +9019,7 @@
       }
     },
     {
-      "coverage_line": 189,
+      "coverage_line": 191,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "WATER",
       "source_position": 9,
@@ -8923,7 +9033,7 @@
       "retention_reason": "Explicit source cooking/preparation water; no retailer purchase requirement. Preserve source amount/condition."
     },
     {
-      "coverage_line": 190,
+      "coverage_line": 192,
       "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
       "food_ingredient_code": "SPINACH",
       "source_position": 10,
@@ -8969,7 +9079,7 @@
       }
     },
     {
-      "coverage_line": 191,
+      "coverage_line": 193,
       "source_recipe_id": "SNAP4-DILLED-FISH-FILLETS",
       "food_ingredient_code": "COD_ATLANTIC",
       "source_position": 1,
@@ -9015,7 +9125,7 @@
       }
     },
     {
-      "coverage_line": 192,
+      "coverage_line": 194,
       "source_recipe_id": "SNAP4-DILLED-FISH-FILLETS",
       "food_ingredient_code": "LEMON",
       "source_position": 2,
@@ -9067,7 +9177,7 @@
       }
     },
     {
-      "coverage_line": 193,
+      "coverage_line": 195,
       "source_recipe_id": "SNAP4-DILLED-FISH-FILLETS",
       "food_ingredient_code": "DILL_DRIED",
       "source_position": 3,
@@ -9113,7 +9223,7 @@
       }
     },
     {
-      "coverage_line": 194,
+      "coverage_line": 196,
       "source_recipe_id": "SNAP4-DILLED-FISH-FILLETS",
       "food_ingredient_code": "SALT",
       "source_position": 4,

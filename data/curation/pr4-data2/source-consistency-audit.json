@@ -1,51 +1,44 @@
 {
   "schema_version": 1,
-  "status": "READY_FOR_REVIEW",
+  "status": "REVIEWED",
   "checked_at": "2026-09-05",
-  "base_sha": "26af749be0f6446de1d88cad2e2e03158a9830a0",
-  "scope": "Versioned successor curation fixture only. Pending project ACCEPT + merge; do not feed to PR4 runtime until then. No production RecipeVersion rows are created by DATA2.",
-  "count_semantics": "Source rows include explicit omitted optional/alternative and discarded process-water audit rows. Selected rows preserve required/optional/conditional status. Market summaries count required non-water code/form concepts. All counts and summaries derive from reviewed source inputs. Equipment codes are first explicit operational-use order, never inferred.",
-  "counts": {
-    "recipes": 30,
-    "retained": 5,
-    "replacements": 25,
-    "source_ingredient_rows": 226,
-    "selected_ingredient_rows": 195,
-    "distinct_food_ingredient_codes": 82,
-    "equipment_rows": 88,
-    "distinct_equipment_codes": 32,
-    "unresolved_required_rows": 0,
-    "new_food_ingredients": 0,
-    "meal_types": {
-      "breakfast": 3,
-      "main": 6,
-      "other": 9,
-      "salad": 6,
-      "side": 6
-    },
-    "curation_roles": {
-      "BREAKFAST": 3,
-      "CONDIMENT": 1,
-      "DESSERT": 3,
-      "MAIN_DISH": 6,
-      "SIDE_DISH": 12,
-      "SNACK": 3,
-      "SOUP": 2
-    },
-    "meal_anchors": 8,
-    "substantial_one_bowl_meals": 3,
-    "primary_protein_families": {
-      "EGG": 2,
-      "FISH": 2,
-      "LEGUME_TOFU": 1,
-      "MEAT": 1,
-      "POULTRY": 2
-    },
-    "pure_side_dishes": 12
+  "corpus_metadata": {
+    "schema_version": 1,
+    "status": "READY_FOR_REVIEW",
+    "checked_at": "2026-09-05",
+    "base_sha": "26af749be0f6446de1d88cad2e2e03158a9830a0",
+    "scope": "Versioned successor curation fixture only. Pending project ACCEPT + merge; do not feed to PR4 runtime until then. No production RecipeVersion rows are created by DATA2.",
+    "count_semantics": "Source rows include explicit omitted optional/alternative and discarded process-water audit rows. Selected rows preserve required/optional/conditional status. Market summaries count required non-water code/form concepts. All counts and summaries derive from reviewed source inputs. Equipment codes are first explicit operational-use order, never inferred."
   },
   "recipes": [
     {
-      "recipe_source_id": "CACFP6-CORN-EDAMAME-BLEND",
+      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
+      "source_section": "Complete six-serving card",
+      "source_attribution": "USDA FNS CACFP Home Childcare — Side Dishes; Corn and Edamame Blend",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Direct FNS CACFP card reviewed under the project risk classification approved in issue #12 and recipe-localization-and-substitution.md. Not a blanket public-domain or unrestricted commercial/derivative license assertion. Preserve attribution; no source photographs, logos or trademarks imported.",
+        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
+        "evidence_urls": [
+          "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
+          "https://github.com/Mitronomik/family-food-os/issues/12"
+        ],
+        "notices_reviewed": "Complete downloaded card and source-equipment audit reviewed; no recipe-specific third-party copyright/licensing restriction found. ICN cards excluded independently."
+      },
+      "source_artifact": {
+        "artifact_name": "Corn_Edamame_Blend_6_Servings.pdf",
+        "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+        "retrieval_method": "Historical bounded PDF download, SHA-256 and full card review recorded in source-equipment-audit.json"
+      },
+      "source_quality_flags": [],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "KEEP",
+        "reason": "Existing direct-FNS source passes the reviewed source-specific purchase-form evidence; preserve original ingredient transcription.",
+        "replaces_source_id": null
+      },
       "recipe_name": "Corn and Edamame Blend",
       "source_servings": 6,
       "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
@@ -84,36 +77,8 @@
         }
       ],
       "source_limits": [],
-      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
-      "source_section": "Complete six-serving card",
-      "source_attribution": "USDA FNS CACFP Home Childcare — Side Dishes; Corn and Edamame Blend",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Direct FNS CACFP card reviewed under the project risk classification approved in issue #12 and recipe-localization-and-substitution.md. Not a blanket public-domain or unrestricted commercial/derivative license assertion. Preserve attribution; no source photographs, logos or trademarks imported.",
-        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
-        "evidence_urls": [
-          "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
-          "https://github.com/Mitronomik/family-food-os/issues/12"
-        ],
-        "notices_reviewed": "Complete downloaded card and source-equipment audit reviewed; no recipe-specific third-party copyright/licensing restriction found. ICN cards excluded independently."
-      },
-      "source_artifact": {
-        "artifact_name": "Corn_Edamame_Blend_6_Servings.pdf",
-        "artifact_type": "DOWNLOADED_PRIMARY_PDF",
-        "retrieval_method": "Historical bounded PDF download, SHA-256 and full card review recorded in source-equipment-audit.json"
-      },
-      "source_quality_flags": [],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "KEEP",
-        "reason": "Existing direct-FNS source passes the reviewed source-specific purchase-form evidence; preserve original ingredient transcription.",
-        "replaces_source_id": null
-      },
-      "source_ingredient_rows": 10,
-      "selected_ingredient_rows": 10,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "CACFP6-CORN-EDAMAME-BLEND",
+      "selected_ingredient_codes": [
         "CARROT",
         "CILANTRO",
         "CORIANDER_SEED",
@@ -125,16 +90,36 @@
         "SESAME_OIL",
         "SESAME_SEEDS"
       ],
-      "market_summary": {
-        "required_concepts": 10,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 10,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     },
     {
-      "recipe_source_id": "CACFP6-LOCAL-HARVEST-BAKE",
+      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
+      "source_section": "Complete six-serving card",
+      "source_attribution": "USDA FNS CACFP Home Childcare — Side Dishes; Local Harvest Bake",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Direct FNS CACFP card reviewed under the project risk classification approved in issue #12 and recipe-localization-and-substitution.md. Not a blanket public-domain or unrestricted commercial/derivative license assertion. Preserve attribution; no source photographs, logos or trademarks imported.",
+        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Local_Harvest_Bake_6_Servings.pdf",
+        "evidence_urls": [
+          "https://fns-prod.azureedge.us/sites/default/files/resource-files/Local_Harvest_Bake_6_Servings.pdf",
+          "https://github.com/Mitronomik/family-food-os/issues/12"
+        ],
+        "notices_reviewed": "Complete downloaded card and source-equipment audit reviewed; no recipe-specific third-party copyright/licensing restriction found. ICN cards excluded independently."
+      },
+      "source_artifact": {
+        "artifact_name": "Local_Harvest_Bake_6_Servings.pdf",
+        "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+        "retrieval_method": "Historical bounded PDF download, SHA-256 and full card review recorded in source-equipment-audit.json"
+      },
+      "source_quality_flags": [],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "KEEP",
+        "reason": "Existing direct-FNS source passes the reviewed source-specific purchase-form evidence; preserve original ingredient transcription.",
+        "replaces_source_id": null
+      },
       "recipe_name": "Local Harvest Bake",
       "source_servings": 6,
       "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Local_Harvest_Bake_6_Servings.pdf",
@@ -178,22 +163,35 @@
         }
       ],
       "source_limits": [],
+      "recipe_source_id": "CACFP6-LOCAL-HARVEST-BAKE",
+      "selected_ingredient_codes": [
+        "BEET",
+        "BUTTERNUT_SQUASH",
+        "GARLIC",
+        "OLIVE_OIL",
+        "PARSLEY_DRIED",
+        "SALT",
+        "SWEET_POTATO"
+      ],
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+    },
+    {
       "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
       "source_section": "Complete six-serving card",
-      "source_attribution": "USDA FNS CACFP Home Childcare — Side Dishes; Local Harvest Bake",
+      "source_attribution": "USDA FNS CACFP Home Childcare — Side Dishes; Tabbouleh",
       "rights_review": {
         "status": "REVIEWED",
         "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
         "basis": "Direct FNS CACFP card reviewed under the project risk classification approved in issue #12 and recipe-localization-and-substitution.md. Not a blanket public-domain or unrestricted commercial/derivative license assertion. Preserve attribution; no source photographs, logos or trademarks imported.",
-        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Local_Harvest_Bake_6_Servings.pdf",
+        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tabbouleh_6_Servings.pdf",
         "evidence_urls": [
-          "https://fns-prod.azureedge.us/sites/default/files/resource-files/Local_Harvest_Bake_6_Servings.pdf",
+          "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tabbouleh_6_Servings.pdf",
           "https://github.com/Mitronomik/family-food-os/issues/12"
         ],
         "notices_reviewed": "Complete downloaded card and source-equipment audit reviewed; no recipe-specific third-party copyright/licensing restriction found. ICN cards excluded independently."
       },
       "source_artifact": {
-        "artifact_name": "Local_Harvest_Bake_6_Servings.pdf",
+        "artifact_name": "Tabbouleh_6_Servings.pdf",
         "artifact_type": "DOWNLOADED_PRIMARY_PDF",
         "retrieval_method": "Historical bounded PDF download, SHA-256 and full card review recorded in source-equipment-audit.json"
       },
@@ -205,27 +203,6 @@
         "reason": "Existing direct-FNS source passes the reviewed source-specific purchase-form evidence; preserve original ingredient transcription.",
         "replaces_source_id": null
       },
-      "source_ingredient_rows": 7,
-      "selected_ingredient_rows": 7,
-      "distinct_food_ingredient_codes": [
-        "BEET",
-        "BUTTERNUT_SQUASH",
-        "GARLIC",
-        "OLIVE_OIL",
-        "PARSLEY_DRIED",
-        "SALT",
-        "SWEET_POTATO"
-      ],
-      "market_summary": {
-        "required_concepts": 6,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 6,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
-    },
-    {
-      "recipe_source_id": "CACFP6-TABBOULEH",
       "recipe_name": "Tabbouleh",
       "source_servings": 6,
       "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tabbouleh_6_Servings.pdf",
@@ -269,36 +246,8 @@
         }
       ],
       "source_limits": [],
-      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
-      "source_section": "Complete six-serving card",
-      "source_attribution": "USDA FNS CACFP Home Childcare — Side Dishes; Tabbouleh",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Direct FNS CACFP card reviewed under the project risk classification approved in issue #12 and recipe-localization-and-substitution.md. Not a blanket public-domain or unrestricted commercial/derivative license assertion. Preserve attribution; no source photographs, logos or trademarks imported.",
-        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tabbouleh_6_Servings.pdf",
-        "evidence_urls": [
-          "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tabbouleh_6_Servings.pdf",
-          "https://github.com/Mitronomik/family-food-os/issues/12"
-        ],
-        "notices_reviewed": "Complete downloaded card and source-equipment audit reviewed; no recipe-specific third-party copyright/licensing restriction found. ICN cards excluded independently."
-      },
-      "source_artifact": {
-        "artifact_name": "Tabbouleh_6_Servings.pdf",
-        "artifact_type": "DOWNLOADED_PRIMARY_PDF",
-        "retrieval_method": "Historical bounded PDF download, SHA-256 and full card review recorded in source-equipment-audit.json"
-      },
-      "source_quality_flags": [],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "KEEP",
-        "reason": "Existing direct-FNS source passes the reviewed source-specific purchase-form evidence; preserve original ingredient transcription.",
-        "replaces_source_id": null
-      },
-      "source_ingredient_rows": 13,
-      "selected_ingredient_rows": 13,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "CACFP6-TABBOULEH",
+      "selected_ingredient_codes": [
         "BELL_PEPPER_RED",
         "BULGUR",
         "CUCUMBER",
@@ -313,16 +262,36 @@
         "TOMATO",
         "WATER"
       ],
-      "market_summary": {
-        "required_concepts": 12,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 12,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 1
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     },
     {
-      "recipe_source_id": "CACFP6-HONEY-LIME-CHICKEN",
+      "source_collection": "USDA FNS CACFP Home Childcare — Main Dishes",
+      "source_section": "Complete six-serving card",
+      "source_attribution": "USDA FNS CACFP Home Childcare — Main Dishes; Honey Lime Chicken",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Direct FNS CACFP card reviewed under the project risk classification approved in issue #12 and recipe-localization-and-substitution.md. Not a blanket public-domain or unrestricted commercial/derivative license assertion. Preserve attribution; no source photographs, logos or trademarks imported.",
+        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Honey_Lime_Chicken_6_Servings.pdf",
+        "evidence_urls": [
+          "https://fns-prod.azureedge.us/sites/default/files/resource-files/Honey_Lime_Chicken_6_Servings.pdf",
+          "https://github.com/Mitronomik/family-food-os/issues/12"
+        ],
+        "notices_reviewed": "Complete downloaded card and source-equipment audit reviewed; no recipe-specific third-party copyright/licensing restriction found. ICN cards excluded independently."
+      },
+      "source_artifact": {
+        "artifact_name": "Honey_Lime_Chicken_6_Servings.pdf",
+        "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+        "retrieval_method": "Historical bounded PDF download, SHA-256 and full card review recorded in source-equipment-audit.json"
+      },
+      "source_quality_flags": [],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "KEEP",
+        "reason": "Existing direct-FNS source passes the reviewed source-specific purchase-form evidence; preserve original ingredient transcription.",
+        "replaces_source_id": null
+      },
       "recipe_name": "Honey Lime Chicken",
       "source_servings": 6,
       "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Honey_Lime_Chicken_6_Servings.pdf",
@@ -373,22 +342,34 @@
           "review_decision": "PRESERVE_SOURCE_HEADER_AND_STAGE_RANGE_NO_REWRITTEN_STEP"
         }
       ],
-      "source_collection": "USDA FNS CACFP Home Childcare — Main Dishes",
+      "recipe_source_id": "CACFP6-HONEY-LIME-CHICKEN",
+      "selected_ingredient_codes": [
+        "BLACK_PEPPER",
+        "CHICKEN_THIGH",
+        "HONEY",
+        "LIME",
+        "LIME_JUICE",
+        "SALT"
+      ],
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+    },
+    {
+      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
       "source_section": "Complete six-serving card",
-      "source_attribution": "USDA FNS CACFP Home Childcare — Main Dishes; Honey Lime Chicken",
+      "source_attribution": "USDA FNS CACFP Home Childcare — Side Dishes; Creamy Coleslaw",
       "rights_review": {
         "status": "REVIEWED",
         "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
         "basis": "Direct FNS CACFP card reviewed under the project risk classification approved in issue #12 and recipe-localization-and-substitution.md. Not a blanket public-domain or unrestricted commercial/derivative license assertion. Preserve attribution; no source photographs, logos or trademarks imported.",
-        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Honey_Lime_Chicken_6_Servings.pdf",
+        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf",
         "evidence_urls": [
-          "https://fns-prod.azureedge.us/sites/default/files/resource-files/Honey_Lime_Chicken_6_Servings.pdf",
+          "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf",
           "https://github.com/Mitronomik/family-food-os/issues/12"
         ],
         "notices_reviewed": "Complete downloaded card and source-equipment audit reviewed; no recipe-specific third-party copyright/licensing restriction found. ICN cards excluded independently."
       },
       "source_artifact": {
-        "artifact_name": "Honey_Lime_Chicken_6_Servings.pdf",
+        "artifact_name": "Creamy_Coleslaw_6_Servings.pdf",
         "artifact_type": "DOWNLOADED_PRIMARY_PDF",
         "retrieval_method": "Historical bounded PDF download, SHA-256 and full card review recorded in source-equipment-audit.json"
       },
@@ -400,26 +381,6 @@
         "reason": "Existing direct-FNS source passes the reviewed source-specific purchase-form evidence; preserve original ingredient transcription.",
         "replaces_source_id": null
       },
-      "source_ingredient_rows": 6,
-      "selected_ingredient_rows": 6,
-      "distinct_food_ingredient_codes": [
-        "BLACK_PEPPER",
-        "CHICKEN_THIGH",
-        "HONEY",
-        "LIME",
-        "LIME_JUICE",
-        "SALT"
-      ],
-      "market_summary": {
-        "required_concepts": 6,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 6,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
-    },
-    {
-      "recipe_source_id": "CACFP6-CREAMY-COLESLAW",
       "recipe_name": "Creamy Coleslaw",
       "source_servings": 6,
       "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf",
@@ -456,36 +417,8 @@
           "review_decision": "PRESERVE_SOURCE_AND_DISTINGUISH_CURATED_SELECTION"
         }
       ],
-      "source_collection": "USDA FNS CACFP Home Childcare — Side Dishes",
-      "source_section": "Complete six-serving card",
-      "source_attribution": "USDA FNS CACFP Home Childcare — Side Dishes; Creamy Coleslaw",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Direct FNS CACFP card reviewed under the project risk classification approved in issue #12 and recipe-localization-and-substitution.md. Not a blanket public-domain or unrestricted commercial/derivative license assertion. Preserve attribution; no source photographs, logos or trademarks imported.",
-        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf",
-        "evidence_urls": [
-          "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf",
-          "https://github.com/Mitronomik/family-food-os/issues/12"
-        ],
-        "notices_reviewed": "Complete downloaded card and source-equipment audit reviewed; no recipe-specific third-party copyright/licensing restriction found. ICN cards excluded independently."
-      },
-      "source_artifact": {
-        "artifact_name": "Creamy_Coleslaw_6_Servings.pdf",
-        "artifact_type": "DOWNLOADED_PRIMARY_PDF",
-        "retrieval_method": "Historical bounded PDF download, SHA-256 and full card review recorded in source-equipment-audit.json"
-      },
-      "source_quality_flags": [],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "KEEP",
-        "reason": "Existing direct-FNS source passes the reviewed source-specific purchase-form evidence; preserve original ingredient transcription.",
-        "replaces_source_id": null
-      },
-      "source_ingredient_rows": 11,
-      "selected_ingredient_rows": 11,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "CACFP6-CREAMY-COLESLAW",
+      "selected_ingredient_codes": [
         "APPLE_CIDER_VINEGAR",
         "BLACK_PEPPER",
         "CABBAGE_GREEN",
@@ -498,16 +431,36 @@
         "SALT",
         "YOGURT_PLAIN_LOW_FAT"
       ],
-      "market_summary": {
-        "required_concepts": 11,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 11,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     },
     {
-      "recipe_source_id": "TNC6-EGGS-SPINACH",
+      "source_collection": "USDA FNS Team Nutrition Cooks! — Family Handouts",
+      "source_section": "Family Handout p3; supporting skill directions pp5,7,8",
+      "source_attribution": "USDA FNS, Team Nutrition Cooks! Scrambled Eggs with Spinach Family Handout.",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. Collection permits downloading/copying materials; that wording is not extended to a blanket commercial/derivative grant.",
+        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+        "evidence_urls": [
+          "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+          "https://www.fns.usda.gov/tn/cooks"
+        ],
+        "notices_reviewed": "Full Family Handout PDF text and recipe-page visuals reviewed; no third-party copyright/licensing notice found. Supporting skill sections are part of the same reviewed handout."
+      },
+      "source_artifact": {
+        "artifact_name": "tnc-eggs.pdf",
+        "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+        "retrieval_method": "Native browser PDF download; SHA-256 computed locally"
+      },
+      "source_quality_flags": [],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "REPLACE",
+        "reason": "Mandatory exclusion of ICN 2024 card: rights posture not cleared. Direct FNS Team Nutrition source has reviewed provenance and copying statement; no public-domain claim.",
+        "replaces_source_id": "CACFP6-VEGETABLE-FRITTATA-BITES"
+      },
       "recipe_name": "Scrambled Eggs with Spinach",
       "source_servings": 6,
       "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
@@ -591,22 +544,31 @@
         }
       ],
       "source_limits": [],
+      "recipe_source_id": "TNC6-EGGS-SPINACH",
+      "selected_ingredient_codes": [
+        "EGG",
+        "OLIVE_OIL",
+        "SPINACH"
+      ],
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+    },
+    {
       "source_collection": "USDA FNS Team Nutrition Cooks! — Family Handouts",
-      "source_section": "Family Handout p3; supporting skill directions pp5,7,8",
-      "source_attribution": "USDA FNS, Team Nutrition Cooks! Scrambled Eggs with Spinach Family Handout.",
+      "source_section": "Family Handout p3; supporting skill directions pp6,8,9",
+      "source_attribution": "USDA FNS, Team Nutrition Cooks! Applesauce Family Handout.",
       "rights_review": {
         "status": "REVIEWED",
         "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
         "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. Collection permits downloading/copying materials; that wording is not extended to a blanket commercial/derivative grant.",
-        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
         "evidence_urls": [
-          "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+          "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
           "https://www.fns.usda.gov/tn/cooks"
         ],
         "notices_reviewed": "Full Family Handout PDF text and recipe-page visuals reviewed; no third-party copyright/licensing notice found. Supporting skill sections are part of the same reviewed handout."
       },
       "source_artifact": {
-        "artifact_name": "tnc-eggs.pdf",
+        "artifact_name": "tnc-applesauce.pdf",
         "artifact_type": "DOWNLOADED_PRIMARY_PDF",
         "retrieval_method": "Native browser PDF download; SHA-256 computed locally"
       },
@@ -616,25 +578,8 @@
       "selection": {
         "decision": "REPLACE",
         "reason": "Mandatory exclusion of ICN 2024 card: rights posture not cleared. Direct FNS Team Nutrition source has reviewed provenance and copying statement; no public-domain claim.",
-        "replaces_source_id": "CACFP6-VEGETABLE-FRITTATA-BITES"
+        "replaces_source_id": "CACFP6-CAULIFLOWER-RICE"
       },
-      "source_ingredient_rows": 12,
-      "selected_ingredient_rows": 3,
-      "distinct_food_ingredient_codes": [
-        "EGG",
-        "OLIVE_OIL",
-        "SPINACH"
-      ],
-      "market_summary": {
-        "required_concepts": 3,
-        "RU_MASS_MARKET": 1,
-        "RU_AVAILABLE": 2,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
-    },
-    {
-      "recipe_source_id": "TNC6-APPLESAUCE",
       "recipe_name": "Applesauce",
       "source_servings": 6,
       "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
@@ -705,46 +650,12 @@
         }
       ],
       "source_limits": [],
-      "source_collection": "USDA FNS Team Nutrition Cooks! — Family Handouts",
-      "source_section": "Family Handout p3; supporting skill directions pp6,8,9",
-      "source_attribution": "USDA FNS, Team Nutrition Cooks! Applesauce Family Handout.",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. Collection permits downloading/copying materials; that wording is not extended to a blanket commercial/derivative grant.",
-        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
-        "evidence_urls": [
-          "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
-          "https://www.fns.usda.gov/tn/cooks"
-        ],
-        "notices_reviewed": "Full Family Handout PDF text and recipe-page visuals reviewed; no third-party copyright/licensing notice found. Supporting skill sections are part of the same reviewed handout."
-      },
-      "source_artifact": {
-        "artifact_name": "tnc-applesauce.pdf",
-        "artifact_type": "DOWNLOADED_PRIMARY_PDF",
-        "retrieval_method": "Native browser PDF download; SHA-256 computed locally"
-      },
-      "source_quality_flags": [],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "REPLACE",
-        "reason": "Mandatory exclusion of ICN 2024 card: rights posture not cleared. Direct FNS Team Nutrition source has reviewed provenance and copying statement; no public-domain claim.",
-        "replaces_source_id": "CACFP6-CAULIFLOWER-RICE"
-      },
-      "source_ingredient_rows": 4,
-      "selected_ingredient_rows": 2,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "TNC6-APPLESAUCE",
+      "selected_ingredient_codes": [
         "APPLE",
         "WATER"
       ],
-      "market_summary": {
-        "required_concepts": 1,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 1,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 1
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     },
     {
       "recipe_source_id": "SNAP4-SPANISH-FRITTATA",
@@ -855,9 +766,7 @@
         "reason": "Reduced-fat cheddar not cleared; independent egg/vegetable pancake source uses ordinary ingredients and an explicit frozen-corn alternative. Correction pass: Replace source-defined snack/side corn pancakes with a substantial six-egg/potato entree. Breakfast is an explicit curator occasion, not a source quotation; no side is relabelled as a main.",
         "replaces_source_id": "CACFP6-VEGETABLE-FRITTATA"
       },
-      "source_ingredient_rows": 7,
-      "selected_ingredient_rows": 6,
-      "distinct_food_ingredient_codes": [
+      "selected_ingredient_codes": [
         "BLACK_PEPPER",
         "EGG",
         "ONION_YELLOW",
@@ -865,13 +774,7 @@
         "SALT",
         "SUNFLOWER_OIL"
       ],
-      "market_summary": {
-        "required_concepts": 6,
-        "RU_MASS_MARKET": 1,
-        "RU_AVAILABLE": 5,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
+      "review_basis": "correction-anchor-candidates.json: actual primary PDF text, rendered pages, notices and factual fields independently reviewed"
     },
     {
       "recipe_source_id": "FNS5-BAKED-LENTILS-CASSEROLE",
@@ -957,9 +860,7 @@
         "reason": "Reduced-fat cheddar, low-moisture part-skim mozzarella, low-sodium broth, trans-fat-free margarine and specified parboiled rice not cleared; independently sourced roasted potato side. Correction pass: Replace a redundant plain potato side with the source-described hearty lentil, vegetable and cheese dinner in one dish; adds a genuine legume anchor with measured required foods.",
         "replaces_source_id": "CACFP6-RICE-VEGETABLE-CASSEROLE"
       },
-      "source_ingredient_rows": 9,
-      "selected_ingredient_rows": 7,
-      "distinct_food_ingredient_codes": [
+      "selected_ingredient_codes": [
         "CARROT",
         "CHEESE_CHEDDAR",
         "LENTILS_DRY",
@@ -968,16 +869,36 @@
         "TOMATO_CANNED_NO_SALT",
         "WATER"
       ],
-      "market_summary": {
-        "required_concepts": 6,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 6,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 1
-      }
+      "review_basis": "correction-anchor-candidates.json: actual primary PDF text, rendered pages, notices and factual fields independently reviewed"
     },
     {
-      "recipe_source_id": "HARV6-FRESH-TOMATO-SALSA",
+      "source_collection": "USDA FNS FDPIR — A Harvest of Recipes with USDA Foods (FNS-430)",
+      "source_section": "Harvest printed p53",
+      "source_attribution": "USDA FNS FDPIR, A Harvest of Recipes with USDA Foods, FNS-430; collection acknowledgments retained.",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+        "evidence_urls": [
+          "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+          "https://www.fns.usda.gov/fdpir/harvest-recipes-usda-foods"
+        ],
+        "notices_reviewed": "Downloaded FNS-430 full text, acknowledgments/back cover and selected recipe spreads visually reviewed. No third-party copyright/licensing restriction on selected card. Tribal and contractor acknowledgments are preserved collection provenance, not public-domain proof."
+      },
+      "source_artifact": {
+        "artifact_name": "HarvestofRecipes.pdf",
+        "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+        "retrieval_method": "Native browser PDF download; SHA-256 computed locally"
+      },
+      "source_quality_flags": [],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "REPLACE",
+        "reason": "Low-sodium canned black beans/salsa, ancho and reduced-fat cheddar not cleared; fresh tomato salsa provides a distinct condiment/vegetable preparation.",
+        "replaces_source_id": "CACFP6-MARINATED-BLACK-BEAN-SALAD"
+      },
       "recipe_name": "Fresh Tomato Salsa",
       "source_servings": 6,
       "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
@@ -1011,8 +932,21 @@
         }
       ],
       "source_limits": [],
+      "recipe_source_id": "HARV6-FRESH-TOMATO-SALSA",
+      "selected_ingredient_codes": [
+        "APPLE",
+        "GARLIC",
+        "LIME_JUICE",
+        "ONION_YELLOW",
+        "SALT",
+        "SUNFLOWER_OIL",
+        "TOMATO"
+      ],
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+    },
+    {
       "source_collection": "USDA FNS FDPIR — A Harvest of Recipes with USDA Foods (FNS-430)",
-      "source_section": "Harvest printed p53",
+      "source_section": "Harvest printed p55",
       "source_attribution": "USDA FNS FDPIR, A Harvest of Recipes with USDA Foods, FNS-430; collection acknowledgments retained.",
       "rights_review": {
         "status": "REVIEWED",
@@ -1035,30 +969,9 @@
       "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
       "selection": {
         "decision": "REPLACE",
-        "reason": "Low-sodium canned black beans/salsa, ancho and reduced-fat cheddar not cleared; fresh tomato salsa provides a distinct condiment/vegetable preparation.",
-        "replaces_source_id": "CACFP6-MARINATED-BLACK-BEAN-SALAD"
+        "reason": "Whole-wheat pasta and canned pimientos not cleared; generic macaroni source preserved, including its cooked-volume quantity rather than invented dry weight.",
+        "replaces_source_id": "CACFP6-MACARONI-SALAD"
       },
-      "source_ingredient_rows": 9,
-      "selected_ingredient_rows": 7,
-      "distinct_food_ingredient_codes": [
-        "APPLE",
-        "GARLIC",
-        "LIME_JUICE",
-        "ONION_YELLOW",
-        "SALT",
-        "SUNFLOWER_OIL",
-        "TOMATO"
-      ],
-      "market_summary": {
-        "required_concepts": 7,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 7,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
-    },
-    {
-      "recipe_source_id": "HARV6-GARDEN-PASTA-SALAD",
       "recipe_name": "Garden Pasta Salad",
       "source_servings": 6,
       "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
@@ -1099,36 +1012,8 @@
           "scope": "Source evidence is retained verbatim for technical curation. No purchase-weight conversion or missing source step is generated by DATA2; later runtime normalization must review this limitation."
         }
       ],
-      "source_collection": "USDA FNS FDPIR — A Harvest of Recipes with USDA Foods (FNS-430)",
-      "source_section": "Harvest printed p55",
-      "source_attribution": "USDA FNS FDPIR, A Harvest of Recipes with USDA Foods, FNS-430; collection acknowledgments retained.",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
-        "evidence_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
-        "evidence_urls": [
-          "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
-          "https://www.fns.usda.gov/fdpir/harvest-recipes-usda-foods"
-        ],
-        "notices_reviewed": "Downloaded FNS-430 full text, acknowledgments/back cover and selected recipe spreads visually reviewed. No third-party copyright/licensing restriction on selected card. Tribal and contractor acknowledgments are preserved collection provenance, not public-domain proof."
-      },
-      "source_artifact": {
-        "artifact_name": "HarvestofRecipes.pdf",
-        "artifact_type": "DOWNLOADED_PRIMARY_PDF",
-        "retrieval_method": "Native browser PDF download; SHA-256 computed locally"
-      },
-      "source_quality_flags": [],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "REPLACE",
-        "reason": "Whole-wheat pasta and canned pimientos not cleared; generic macaroni source preserved, including its cooked-volume quantity rather than invented dry weight.",
-        "replaces_source_id": "CACFP6-MACARONI-SALAD"
-      },
-      "source_ingredient_rows": 9,
-      "selected_ingredient_rows": 8,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "HARV6-GARDEN-PASTA-SALAD",
+      "selected_ingredient_codes": [
         "APPLE_CIDER_VINEGAR",
         "BELL_PEPPER_GREEN",
         "BLACK_PEPPER",
@@ -1138,16 +1023,37 @@
         "SALT",
         "SUNFLOWER_OIL"
       ],
-      "market_summary": {
-        "required_concepts": 8,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 8,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     },
     {
-      "recipe_source_id": "SNAP6-SPINACH-APPLE-SALAD",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_section": "Fall Recipes / same-titled recipe / directions",
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+        "evidence_urls": [
+          "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes"
+        ],
+        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
+      },
+      "source_artifact": {
+        "artifact_name": "data2-snap-fall.html",
+        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
+      },
+      "source_quality_flags": [
+        "No equipment noun in the two combining directions; BOWL is not inferred."
+      ],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "REPLACE",
+        "reason": "Panko breadcrumbs, whole-wheat roll and low-sodium soy sauce not cleared; independent raw-leaf salad with reviewed cold-use canola oil.",
+        "replaces_source_id": "CACFP6-ASIAN-TUNA-BURGER"
+      },
       "recipe_name": "Spinach Salad with Apples and Raisins",
       "source_servings": 6,
       "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
@@ -1179,37 +1085,8 @@
           "scope": "Source evidence is retained verbatim for technical curation. No purchase-weight conversion or missing source step is generated by DATA2; later runtime normalization must review this limitation."
         }
       ],
-      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
-      "source_section": "Fall Recipes / same-titled recipe / directions",
-      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
-        "evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
-        "evidence_urls": [
-          "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes"
-        ],
-        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
-      },
-      "source_artifact": {
-        "artifact_name": "data2-snap-fall.html",
-        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
-        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
-      },
-      "source_quality_flags": [
-        "No equipment noun in the two combining directions; BOWL is not inferred."
-      ],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "REPLACE",
-        "reason": "Panko breadcrumbs, whole-wheat roll and low-sodium soy sauce not cleared; independent raw-leaf salad with reviewed cold-use canola oil.",
-        "replaces_source_id": "CACFP6-ASIAN-TUNA-BURGER"
-      },
-      "source_ingredient_rows": 7,
-      "selected_ingredient_rows": 7,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "SNAP6-SPINACH-APPLE-SALAD",
+      "selected_ingredient_codes": [
         "APPLE",
         "APPLE_CIDER_VINEGAR",
         "CANOLA_OIL",
@@ -1218,16 +1095,35 @@
         "SPINACH",
         "SUGAR"
       ],
-      "market_summary": {
-        "required_concepts": 7,
-        "RU_MASS_MARKET": 1,
-        "RU_AVAILABLE": 6,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     },
     {
-      "recipe_source_id": "SNAP6-PEACH-CRISP",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_section": "Summer Recipes / Peach Crisp / directions",
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "evidence_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+        "evidence_urls": [
+          "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes"
+        ],
+        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
+      },
+      "source_artifact": {
+        "artifact_name": "data2-snap-summer.html",
+        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
+      },
+      "source_quality_flags": [],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "REPLACE",
+        "reason": "White whole-grain cornmeal and no-salt cream-style corn not cleared; add a source-backed baked fruit/oat dessert.",
+        "replaces_source_id": "CACFP6-CORN-PUDDING"
+      },
       "recipe_name": "Peach Crisp",
       "source_servings": 6,
       "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
@@ -1279,35 +1175,8 @@
         }
       ],
       "source_limits": [],
-      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
-      "source_section": "Summer Recipes / Peach Crisp / directions",
-      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
-        "evidence_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
-        "evidence_urls": [
-          "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes"
-        ],
-        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
-      },
-      "source_artifact": {
-        "artifact_name": "data2-snap-summer.html",
-        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
-        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
-      },
-      "source_quality_flags": [],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "REPLACE",
-        "reason": "White whole-grain cornmeal and no-salt cream-style corn not cleared; add a source-backed baked fruit/oat dessert.",
-        "replaces_source_id": "CACFP6-CORN-PUDDING"
-      },
-      "source_ingredient_rows": 7,
-      "selected_ingredient_rows": 7,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "SNAP6-PEACH-CRISP",
+      "selected_ingredient_codes": [
         "CINNAMON_GROUND",
         "FLOUR_WHEAT",
         "LEMON",
@@ -1316,16 +1185,35 @@
         "PEACH",
         "SUGAR"
       ],
-      "market_summary": {
-        "required_concepts": 7,
-        "RU_MASS_MARKET": 1,
-        "RU_AVAILABLE": 6,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     },
     {
-      "recipe_source_id": "SNAP6-SEARED-GREENS",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_section": "Spring Recipes / Seared Greens / directions",
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "evidence_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+        "evidence_urls": [
+          "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes"
+        ],
+        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
+      },
+      "source_artifact": {
+        "artifact_name": "data2-snap-spring.html",
+        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
+      },
+      "source_quality_flags": [],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "REPLACE",
+        "reason": "Required trans-fat-free margarine not cleared; retain independently sourced cooked greens without that restriction.",
+        "replaces_source_id": "CACFP6-SAUTEED-SPINACH-TOMATOES"
+      },
       "recipe_name": "Seared Greens",
       "source_servings": 6,
       "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
@@ -1365,35 +1253,8 @@
         }
       ],
       "source_limits": [],
-      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
-      "source_section": "Spring Recipes / Seared Greens / directions",
-      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
-        "evidence_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
-        "evidence_urls": [
-          "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes"
-        ],
-        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
-      },
-      "source_artifact": {
-        "artifact_name": "data2-snap-spring.html",
-        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
-        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
-      },
-      "source_quality_flags": [],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "REPLACE",
-        "reason": "Required trans-fat-free margarine not cleared; retain independently sourced cooked greens without that restriction.",
-        "replaces_source_id": "CACFP6-SAUTEED-SPINACH-TOMATOES"
-      },
-      "source_ingredient_rows": 7,
-      "selected_ingredient_rows": 7,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "SNAP6-SEARED-GREENS",
+      "selected_ingredient_codes": [
         "APPLE_CIDER_VINEGAR",
         "BLACK_PEPPER",
         "GARLIC",
@@ -1402,16 +1263,35 @@
         "SALT",
         "WATER"
       ],
-      "market_summary": {
-        "required_concepts": 6,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 6,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 1
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     },
     {
-      "recipe_source_id": "SNAP8-SOMALI-SUMMER-SALAD",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_section": "Summer Recipes / Somali Summer Salad / directions",
+      "source_attribution": "USDA FNS SNAP-Ed; North Dakota Food and Culture: A Taste of World Cuisine, NDSU Extension, recipe page 24 (credit recovered from FNS Ramadan menu).",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "evidence_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+        "evidence_urls": [
+          "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes"
+        ],
+        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
+      },
+      "source_artifact": {
+        "artifact_name": "data2-snap-summer.html",
+        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
+      },
+      "source_quality_flags": [],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "REPLACE",
+        "reason": "Unsweetened pineapple canned in 100% juice not cleared; independent fresh-produce salad has explicit optional salt/pepper omission.",
+        "replaces_source_id": "CACFP6-CARROT-RAISIN-SALAD"
+      },
       "recipe_name": "Somali Summer Salad",
       "source_servings": 8,
       "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
@@ -1444,35 +1324,8 @@
         }
       ],
       "source_limits": [],
-      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
-      "source_section": "Summer Recipes / Somali Summer Salad / directions",
-      "source_attribution": "USDA FNS SNAP-Ed; North Dakota Food and Culture: A Taste of World Cuisine, NDSU Extension, recipe page 24 (credit recovered from FNS Ramadan menu).",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
-        "evidence_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
-        "evidence_urls": [
-          "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes"
-        ],
-        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
-      },
-      "source_artifact": {
-        "artifact_name": "data2-snap-summer.html",
-        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
-        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
-      },
-      "source_quality_flags": [],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "REPLACE",
-        "reason": "Unsweetened pineapple canned in 100% juice not cleared; independent fresh-produce salad has explicit optional salt/pepper omission.",
-        "replaces_source_id": "CACFP6-CARROT-RAISIN-SALAD"
-      },
-      "source_ingredient_rows": 7,
-      "selected_ingredient_rows": 6,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "SNAP8-SOMALI-SUMMER-SALAD",
+      "selected_ingredient_codes": [
         "APPLE",
         "BELL_PEPPER_GREEN",
         "CUCUMBER",
@@ -1480,13 +1333,7 @@
         "OLIVE_OIL",
         "TOMATO"
       ],
-      "market_summary": {
-        "required_concepts": 6,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 6,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     },
     {
       "recipe_source_id": "FNS2-ORANGE-PORK-CHOPS",
@@ -1572,24 +1419,44 @@
         "reason": "Frozen liquid whole egg and reduced-fat cheddar not cleared; source-verified whole-potato microwave method adds a short single-serving preparation, not an invented quiche adaptation. Correction pass: Replace the single plain potato side with a measured pork-loin-chop main, sweet potato and orange; omit only source-explicit optional dash seasonings.",
         "replaces_source_id": "CACFP6-QUICHE-SELF-FORMING-CRUST"
       },
-      "source_ingredient_rows": 7,
-      "selected_ingredient_rows": 4,
-      "distinct_food_ingredient_codes": [
+      "selected_ingredient_codes": [
         "ORANGE",
         "PORK_LOIN",
         "SUNFLOWER_OIL",
         "SWEET_POTATO"
       ],
-      "market_summary": {
-        "required_concepts": 4,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 4,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
+      "review_basis": "correction-anchor-candidates.json: actual primary PDF text, rendered pages, notices and factual fields independently reviewed"
     },
     {
-      "recipe_source_id": "WIC4-BUTTERNUT-SOUP",
+      "source_collection": "USDA FNS WIC Works — Recipes",
+      "source_section": "WIC recipe / instructions and equipment notes",
+      "source_attribution": "USDA FNS WIC Works — Recipes; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. WIC submission policy requires permission to share; it is not an independent unlimited commercial/derivative grant. No linked recipe-level restrictive license was found on this selected card.",
+        "evidence_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+        "evidence_urls": [
+          "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+          "https://wicworks.fns.usda.gov/es/node/1807"
+        ],
+        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
+      },
+      "source_artifact": {
+        "artifact_name": "data2-wic-butternut-soup.html",
+        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
+      },
+      "source_quality_flags": [
+        "Selected explicit soup-pot/immersion-blender option. Optional ice-cream scoop, parchment and alternate blenders excluded. Optional unquantified yogurt dollop omitted under source optional ingredient status."
+      ],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "REPLACE",
+        "reason": "Ancho, low-sodium canned kidney beans, no-salt crushed tomato and low-sodium vegetable broth not cleared; select a quantified roast-and-blend vegetable soup.",
+        "replaces_source_id": "CACFP6-VEGETABLE-CHILI"
+      },
       "recipe_name": "Butternut Squash Soup",
       "source_servings": 4,
       "source_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
@@ -1662,6 +1529,16 @@
         }
       ],
       "source_limits": [],
+      "recipe_source_id": "WIC4-BUTTERNUT-SOUP",
+      "selected_ingredient_codes": [
+        "BUTTERNUT_SQUASH",
+        "MILK_1_PERCENT",
+        "OLIVE_OIL",
+        "SALT"
+      ],
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+    },
+    {
       "source_collection": "USDA FNS WIC Works — Recipes",
       "source_section": "WIC recipe / instructions and equipment notes",
       "source_attribution": "USDA FNS WIC Works — Recipes; reviewed recipe section gives no separate original contributor credit.",
@@ -1669,46 +1546,26 @@
         "status": "REVIEWED",
         "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
         "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. WIC submission policy requires permission to share; it is not an independent unlimited commercial/derivative grant. No linked recipe-level restrictive license was found on this selected card.",
-        "evidence_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+        "evidence_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
         "evidence_urls": [
-          "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+          "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
           "https://wicworks.fns.usda.gov/es/node/1807"
         ],
         "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
       },
       "source_artifact": {
-        "artifact_name": "data2-wic-butternut-soup.html",
+        "artifact_name": "data2-wic-overnight-oats.html",
         "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
         "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
       },
-      "source_quality_flags": [
-        "Selected explicit soup-pot/immersion-blender option. Optional ice-cream scoop, parchment and alternate blenders excluded. Optional unquantified yogurt dollop omitted under source optional ingredient status."
-      ],
+      "source_quality_flags": [],
       "checked_at": "2026-09-05",
       "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
       "selection": {
         "decision": "REPLACE",
-        "reason": "Ancho, low-sodium canned kidney beans, no-salt crushed tomato and low-sodium vegetable broth not cleared; select a quantified roast-and-blend vegetable soup.",
-        "replaces_source_id": "CACFP6-VEGETABLE-CHILI"
+        "reason": "Trans-fat-free margarine and vanilla requirements not cleared; source-explicit optional vanilla omission in an independently sourced oat breakfast.",
+        "replaces_source_id": "CACFP6-SPICED-OATMEAL"
       },
-      "source_ingredient_rows": 6,
-      "selected_ingredient_rows": 4,
-      "distinct_food_ingredient_codes": [
-        "BUTTERNUT_SQUASH",
-        "MILK_1_PERCENT",
-        "OLIVE_OIL",
-        "SALT"
-      ],
-      "market_summary": {
-        "required_concepts": 4,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 4,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
-    },
-    {
-      "recipe_source_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
       "recipe_name": "Overnight Oats - Cinnamon Apple",
       "source_servings": 1,
       "source_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
@@ -1768,49 +1625,15 @@
           "review_decision": "PRESERVE_SOURCE_AND_DISTINGUISH_CURATED_SELECTION"
         }
       ],
-      "source_collection": "USDA FNS WIC Works — Recipes",
-      "source_section": "WIC recipe / instructions and equipment notes",
-      "source_attribution": "USDA FNS WIC Works — Recipes; reviewed recipe section gives no separate original contributor credit.",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. WIC submission policy requires permission to share; it is not an independent unlimited commercial/derivative grant. No linked recipe-level restrictive license was found on this selected card.",
-        "evidence_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
-        "evidence_urls": [
-          "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
-          "https://wicworks.fns.usda.gov/es/node/1807"
-        ],
-        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
-      },
-      "source_artifact": {
-        "artifact_name": "data2-wic-overnight-oats.html",
-        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
-        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
-      },
-      "source_quality_flags": [],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "REPLACE",
-        "reason": "Trans-fat-free margarine and vanilla requirements not cleared; source-explicit optional vanilla omission in an independently sourced oat breakfast.",
-        "replaces_source_id": "CACFP6-SPICED-OATMEAL"
-      },
-      "source_ingredient_rows": 6,
-      "selected_ingredient_rows": 5,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+      "selected_ingredient_codes": [
         "APPLE",
         "CINNAMON_GROUND",
         "MILK_1_PERCENT",
         "OATS_ROLLED",
         "YOGURT_PLAIN_LOW_FAT"
       ],
-      "market_summary": {
-        "required_concepts": 2,
-        "RU_MASS_MARKET": 1,
-        "RU_AVAILABLE": 1,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     },
     {
       "recipe_source_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
@@ -1880,9 +1703,7 @@
         "reason": "Frozen carrot, orange concentrate, trans-fat-free margarine and vanilla forms not cleared; fresh whole carrots cut during source preparation need no pre-cut retail product. Correction pass: Replace a redundant plain roasted vegetable side with a source-defined fruit/greens snack using an explicit single frozen-fruit option. Select frozen strawberries, not the retained cauliflower/oat smoothie composition. This is not a meal anchor; four other new genuine anchors satisfy the guard without role inflation.",
         "replaces_source_id": "CACFP6-ORANGE-GLAZED-CARROTS"
       },
-      "source_ingredient_rows": 8,
-      "selected_ingredient_rows": 6,
-      "distinct_food_ingredient_codes": [
+      "selected_ingredient_codes": [
         "APPLE",
         "BANANA",
         "MILK_1_PERCENT",
@@ -1890,16 +1711,37 @@
         "STRAWBERRY",
         "YOGURT_PLAIN_LOW_FAT"
       ],
-      "market_summary": {
-        "required_concepts": 6,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 6,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
+      "review_basis": "correction-anchor-candidates.json: actual primary PDF text, rendered pages, notices and factual fields independently reviewed"
     },
     {
-      "recipe_source_id": "SNAP3-GRILLED-FRUIT",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_section": "SNAP-Ed recipe / directions",
+      "source_attribution": "USDA FNS SNAP-Ed; University of Wyoming Cooperative Extension, Cent$ible Nutrition Program, Cooking for You or Two, page 196 (credit in earlier FNS Labor Day menu).",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit",
+        "evidence_urls": [
+          "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit"
+        ],
+        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
+      },
+      "source_artifact": {
+        "artifact_name": "data2-snap-grilled-fruit.html",
+        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
+      },
+      "source_quality_flags": [
+        "Only SKEWER is an explicit equipment noun. Grill/broil cooking verbs do not create inferred GRILL/OVEN rows. Nonwood skewer chosen, so wooden-skewer soak is conditional, not required."
+      ],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "REPLACE",
+        "reason": "Whole-wheat bread, low-fat mozzarella and trans-fat-free margarine not cleared; independent grilling method with three ordinary fresh fruits.",
+        "replaces_source_id": "CACFP6-TUSCAN-GRILL-CHEESE"
+      },
       "recipe_name": "Grilled Fruit",
       "source_servings": 3,
       "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit",
@@ -1932,51 +1774,42 @@
         }
       ],
       "source_limits": [],
-      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
-      "source_section": "SNAP-Ed recipe / directions",
-      "source_attribution": "USDA FNS SNAP-Ed; University of Wyoming Cooperative Extension, Cent$ible Nutrition Program, Cooking for You or Two, page 196 (credit in earlier FNS Labor Day menu).",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
-        "evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit",
-        "evidence_urls": [
-          "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit"
-        ],
-        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
-      },
-      "source_artifact": {
-        "artifact_name": "data2-snap-grilled-fruit.html",
-        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
-        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
-      },
-      "source_quality_flags": [
-        "Only SKEWER is an explicit equipment noun. Grill/broil cooking verbs do not create inferred GRILL/OVEN rows. Nonwood skewer chosen, so wooden-skewer soak is conditional, not required."
-      ],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "REPLACE",
-        "reason": "Whole-wheat bread, low-fat mozzarella and trans-fat-free margarine not cleared; independent grilling method with three ordinary fresh fruits.",
-        "replaces_source_id": "CACFP6-TUSCAN-GRILL-CHEESE"
-      },
-      "source_ingredient_rows": 3,
-      "selected_ingredient_rows": 3,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "SNAP3-GRILLED-FRUIT",
+      "selected_ingredient_codes": [
         "BANANA",
         "PEACH",
         "PINEAPPLE"
       ],
-      "market_summary": {
-        "required_concepts": 3,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 3,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     },
     {
-      "recipe_source_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
+      "source_collection": "USDA FNS WIC Works — Recipes",
+      "source_section": "WIC recipe / instructions and equipment notes",
+      "source_attribution": "USDA FNS WIC Works; Virginia Beach WIC.",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. WIC submission policy requires permission to share; it is not an independent unlimited commercial/derivative grant. No linked recipe-level restrictive license was found on this selected card.",
+        "evidence_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+        "evidence_urls": [
+          "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+          "https://wicworks.fns.usda.gov/es/node/1807"
+        ],
+        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
+      },
+      "source_artifact": {
+        "artifact_name": "data2-wic-spinach-cauliflower-smoothie.html",
+        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
+      },
+      "source_quality_flags": [],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "REPLACE",
+        "reason": "Required frozen strawberry and vanilla forms not cleared; retain a distinct smoothie with evidenced frozen cauliflower and source-specified milk.",
+        "replaces_source_id": "CACFP6-STRAWBERRY-SMOOTHIE-BOWL"
+      },
       "recipe_name": "Spinach and Cauliflower Smoothie",
       "source_servings": 2,
       "source_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
@@ -2028,36 +1861,8 @@
         }
       ],
       "source_limits": [],
-      "source_collection": "USDA FNS WIC Works — Recipes",
-      "source_section": "WIC recipe / instructions and equipment notes",
-      "source_attribution": "USDA FNS WIC Works; Virginia Beach WIC.",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. WIC submission policy requires permission to share; it is not an independent unlimited commercial/derivative grant. No linked recipe-level restrictive license was found on this selected card.",
-        "evidence_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
-        "evidence_urls": [
-          "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
-          "https://wicworks.fns.usda.gov/es/node/1807"
-        ],
-        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
-      },
-      "source_artifact": {
-        "artifact_name": "data2-wic-spinach-cauliflower-smoothie.html",
-        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
-        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
-      },
-      "source_quality_flags": [],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "REPLACE",
-        "reason": "Required frozen strawberry and vanilla forms not cleared; retain a distinct smoothie with evidenced frozen cauliflower and source-specified milk.",
-        "replaces_source_id": "CACFP6-STRAWBERRY-SMOOTHIE-BOWL"
-      },
-      "source_ingredient_rows": 8,
-      "selected_ingredient_rows": 7,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
+      "selected_ingredient_codes": [
         "APPLE",
         "BANANA",
         "CAULIFLOWER",
@@ -2066,16 +1871,35 @@
         "SPINACH",
         "YOGURT_PLAIN_LOW_FAT"
       ],
-      "market_summary": {
-        "required_concepts": 7,
-        "RU_MASS_MARKET": 1,
-        "RU_AVAILABLE": 6,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     },
     {
-      "recipe_source_id": "SNAP4-PEAR-ORANGE-SAUCE",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_section": "Fall Recipes / Pear in Orange Sauce / directions",
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+        "evidence_urls": [
+          "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes"
+        ],
+        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
+      },
+      "source_artifact": {
+        "artifact_name": "data2-snap-fall.html",
+        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
+      },
+      "source_quality_flags": [],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "REPLACE",
+        "reason": "Frozen unsweetened green apples, orange concentrate, trans-fat-free margarine and vanilla not cleared; select quantified fresh-fruit cooked dessert.",
+        "replaces_source_id": "CACFP6-BAKED-SWEET-POTATOES-APPLES"
+      },
       "recipe_name": "Pear in Orange Sauce",
       "source_servings": 4,
       "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
@@ -2111,49 +1935,43 @@
         }
       ],
       "source_limits": [],
-      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
-      "source_section": "Fall Recipes / Pear in Orange Sauce / directions",
-      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
-        "evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
-        "evidence_urls": [
-          "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes"
-        ],
-        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
-      },
-      "source_artifact": {
-        "artifact_name": "data2-snap-fall.html",
-        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
-        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
-      },
-      "source_quality_flags": [],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "REPLACE",
-        "reason": "Frozen unsweetened green apples, orange concentrate, trans-fat-free margarine and vanilla not cleared; select quantified fresh-fruit cooked dessert.",
-        "replaces_source_id": "CACFP6-BAKED-SWEET-POTATOES-APPLES"
-      },
-      "source_ingredient_rows": 3,
-      "selected_ingredient_rows": 3,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "SNAP4-PEAR-ORANGE-SAUCE",
+      "selected_ingredient_codes": [
         "ORANGE",
         "PEAR",
         "SUGAR"
       ],
-      "market_summary": {
-        "required_concepts": 3,
-        "RU_MASS_MARKET": 1,
-        "RU_AVAILABLE": 2,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     },
     {
-      "recipe_source_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_section": "Spring Recipes / Spring Vegetable Saute / directions",
+      "source_attribution": "USDA FNS SNAP-Ed; original MyPlate page credits US Department of Health and Human Services, National Cancer Institute.",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "evidence_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+        "evidence_urls": [
+          "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes"
+        ],
+        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
+      },
+      "source_artifact": {
+        "artifact_name": "data2-snap-spring.html",
+        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
+      },
+      "source_quality_flags": [
+        "Source cover verb does not separately name a lid; no LID equipment inferred. Water1–2Tbsp is conditional only if browning, retained in ingredient audit."
+      ],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "REPLACE",
+        "reason": "Canned no-salt green beans not cleared; independent source permits generic green beans, with reviewed frozen member, sweet red onion and young potato forms.",
+        "replaces_source_id": "CACFP6-PIZZA-GREEN-BEANS"
+      },
       "recipe_name": "Spring Vegetable Saute",
       "source_servings": 4,
       "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
@@ -2191,37 +2009,8 @@
         }
       ],
       "source_limits": [],
-      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
-      "source_section": "Spring Recipes / Spring Vegetable Saute / directions",
-      "source_attribution": "USDA FNS SNAP-Ed; original MyPlate page credits US Department of Health and Human Services, National Cancer Institute.",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
-        "evidence_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
-        "evidence_urls": [
-          "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes"
-        ],
-        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
-      },
-      "source_artifact": {
-        "artifact_name": "data2-snap-spring.html",
-        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
-        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
-      },
-      "source_quality_flags": [
-        "Source cover verb does not separately name a lid; no LID equipment inferred. Water1–2Tbsp is conditional only if browning, retained in ingredient audit."
-      ],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "REPLACE",
-        "reason": "Canned no-salt green beans not cleared; independent source permits generic green beans, with reviewed frozen member, sweet red onion and young potato forms.",
-        "replaces_source_id": "CACFP6-PIZZA-GREEN-BEANS"
-      },
-      "source_ingredient_rows": 12,
-      "selected_ingredient_rows": 12,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
+      "selected_ingredient_codes": [
         "ASPARAGUS",
         "BLACK_PEPPER",
         "CARROT",
@@ -2235,13 +2024,7 @@
         "SALT",
         "WATER"
       ],
-      "market_summary": {
-        "required_concepts": 11,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 11,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 1
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     },
     {
       "recipe_source_id": "FNS4-OVEN-FRIED-FISH",
@@ -2332,9 +2115,7 @@
         "reason": "Low-sodium canned pinto beans, reduced-fat cheddar and parboiled brown rice not cleared; independently sourced boiled-and-mashed potato side. Correction pass: Replace another plain potato side with a second materially different fish preparation: breaded tilapia oven-baked using the measured source butter coating.",
         "replaces_source_id": "CACFP6-BEAN-BURRITO-BOWL"
       },
-      "source_ingredient_rows": 7,
-      "selected_ingredient_rows": 6,
-      "distinct_food_ingredient_codes": [
+      "selected_ingredient_codes": [
         "BLACK_PEPPER",
         "BREADCRUMBS",
         "BUTTER_UNSALTED",
@@ -2342,16 +2123,35 @@
         "SALT",
         "TILAPIA_RAW"
       ],
-      "market_summary": {
-        "required_concepts": 6,
-        "RU_MASS_MARKET": 1,
-        "RU_AVAILABLE": 5,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
+      "review_basis": "correction-anchor-candidates.json: actual primary PDF text, rendered pages, notices and factual fields independently reviewed"
     },
     {
-      "recipe_source_id": "SNAP8-APPLE-CARROT-SOUP",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_section": "SNAP-Ed recipe / directions",
+      "source_attribution": "USDA FNS SNAP-Ed; San Francisco Department of Public Health, Chinatown Public Health Center, Healthy and Delicious—Simple Ways to Low Fat Chinese Cooking (credit recovered from FNS Chinese New Year menu).",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+        "evidence_urls": [
+          "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup"
+        ],
+        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
+      },
+      "source_artifact": {
+        "artifact_name": "data2-snap-apple-carrot-soup.html",
+        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
+      },
+      "source_quality_flags": [],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "REPLACE",
+        "reason": "Low-sodium beef broth and parboiled brown rice not cleared; independently sourced long-simmer pork, apple and carrot soup. No beef or nutritional equivalence claimed.",
+        "replaces_source_id": "CACFP6-ROPA-VIEJA"
+      },
       "recipe_name": "Apple Carrot Soup",
       "source_servings": 8,
       "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
@@ -2385,21 +2185,33 @@
         }
       ],
       "source_limits": [],
+      "recipe_source_id": "SNAP8-APPLE-CARROT-SOUP",
+      "selected_ingredient_codes": [
+        "APPLE",
+        "CARROT",
+        "GINGER",
+        "PORK_LOIN",
+        "SALT",
+        "WATER"
+      ],
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+    },
+    {
       "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
-      "source_section": "SNAP-Ed recipe / directions",
-      "source_attribution": "USDA FNS SNAP-Ed; San Francisco Department of Public Health, Chinatown Public Health Center, Healthy and Delicious—Simple Ways to Low Fat Chinese Cooking (credit recovered from FNS Chinese New Year menu).",
+      "source_section": "Fall Recipes / Waldorf Salad / directions",
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
       "rights_review": {
         "status": "REVIEWED",
         "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
         "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
-        "evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+        "evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
         "evidence_urls": [
-          "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup"
+          "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes"
         ],
         "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
       },
       "source_artifact": {
-        "artifact_name": "data2-snap-apple-carrot-soup.html",
+        "artifact_name": "data2-snap-fall.html",
         "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
         "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
       },
@@ -2408,29 +2220,9 @@
       "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
       "selection": {
         "decision": "REPLACE",
-        "reason": "Low-sodium beef broth and parboiled brown rice not cleared; independently sourced long-simmer pork, apple and carrot soup. No beef or nutritional equivalence claimed.",
-        "replaces_source_id": "CACFP6-ROPA-VIEJA"
+        "reason": "Whole-wheat roll and canned tuna-in-water forms not cleared; independently sourced apple/walnut salad, not a tuna substitution claim.",
+        "replaces_source_id": "CACFP6-TUNA-SALAD-SANDWICH"
       },
-      "source_ingredient_rows": 7,
-      "selected_ingredient_rows": 6,
-      "distinct_food_ingredient_codes": [
-        "APPLE",
-        "CARROT",
-        "GINGER",
-        "PORK_LOIN",
-        "SALT",
-        "WATER"
-      ],
-      "market_summary": {
-        "required_concepts": 5,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 5,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 1
-      }
-    },
-    {
-      "recipe_source_id": "SNAP6-WALDORF-SALAD",
       "recipe_name": "Waldorf Salad",
       "source_servings": 6,
       "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
@@ -2471,35 +2263,8 @@
         }
       ],
       "source_limits": [],
-      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
-      "source_section": "Fall Recipes / Waldorf Salad / directions",
-      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
-        "evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
-        "evidence_urls": [
-          "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes"
-        ],
-        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
-      },
-      "source_artifact": {
-        "artifact_name": "data2-snap-fall.html",
-        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
-        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
-      },
-      "source_quality_flags": [],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "REPLACE",
-        "reason": "Whole-wheat roll and canned tuna-in-water forms not cleared; independently sourced apple/walnut salad, not a tuna substitution claim.",
-        "replaces_source_id": "CACFP6-TUNA-SALAD-SANDWICH"
-      },
-      "source_ingredient_rows": 7,
-      "selected_ingredient_rows": 7,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "SNAP6-WALDORF-SALAD",
+      "selected_ingredient_codes": [
         "APPLE",
         "CELERY",
         "LEMON",
@@ -2508,16 +2273,35 @@
         "WALNUTS_RAW",
         "YOGURT_GREEK_NONFAT"
       ],
-      "market_summary": {
-        "required_concepts": 7,
-        "RU_MASS_MARKET": 1,
-        "RU_AVAILABLE": 6,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     },
     {
-      "recipe_source_id": "SNAP4-BROWN-RICE-PILAF",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_section": "Valentine's Day menu / Brown Rice Pilaf / directions",
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "evidence_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+        "evidence_urls": [
+          "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day"
+        ],
+        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
+      },
+      "source_artifact": {
+        "artifact_name": "data2-snap-valentines.html",
+        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
+      },
+      "source_quality_flags": [],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "REPLACE",
+        "reason": "Low-sodium beef broth, chili blend and parboiled long-grain brown rice not cleared; independent water-based brown-rice source needs no invented broth substitution.",
+        "replaces_source_id": "CACFP6-SPANISH-RICE"
+      },
       "recipe_name": "Brown Rice Pilaf",
       "source_servings": 4,
       "source_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
@@ -2556,21 +2340,33 @@
         }
       ],
       "source_limits": [],
+      "recipe_source_id": "SNAP4-BROWN-RICE-PILAF",
+      "selected_ingredient_codes": [
+        "ALMONDS_RAW",
+        "BLACK_PEPPER",
+        "GARLIC_POWDER",
+        "PARSLEY_DRIED",
+        "RICE_BROWN",
+        "WATER"
+      ],
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
+    },
+    {
       "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
-      "source_section": "Valentine's Day menu / Brown Rice Pilaf / directions",
+      "source_section": "SNAP-Ed node1861 / directions",
       "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
       "rights_review": {
         "status": "REVIEWED",
         "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
         "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
-        "evidence_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+        "evidence_url": "https://snaped.fns.usda.gov/node/1861",
         "evidence_urls": [
-          "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day"
+          "https://snaped.fns.usda.gov/node/1861"
         ],
         "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
       },
       "source_artifact": {
-        "artifact_name": "data2-snap-valentines.html",
+        "artifact_name": "data2-snap-kale-nuts.html",
         "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
         "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
       },
@@ -2579,29 +2375,9 @@
       "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
       "selection": {
         "decision": "REPLACE",
-        "reason": "Low-sodium beef broth, chili blend and parboiled long-grain brown rice not cleared; independent water-based brown-rice source needs no invented broth substitution.",
-        "replaces_source_id": "CACFP6-SPANISH-RICE"
+        "reason": "Smoked cooked turkey drumstick and trans-fat-free margarine not cleared; frozen green beans were initially unresolved and later evidenced, which alone does not clear the remaining recipe forms.",
+        "replaces_source_id": "CACFP6-GREEN-BEANS-POTATOES-SMOKED-TURKEY"
       },
-      "source_ingredient_rows": 6,
-      "selected_ingredient_rows": 6,
-      "distinct_food_ingredient_codes": [
-        "ALMONDS_RAW",
-        "BLACK_PEPPER",
-        "GARLIC_POWDER",
-        "PARSLEY_DRIED",
-        "RICE_BROWN",
-        "WATER"
-      ],
-      "market_summary": {
-        "required_concepts": 5,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 5,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 1
-      }
-    },
-    {
-      "recipe_source_id": "SNAP5-KALE-NUTS-RAISINS",
       "recipe_name": "Kale with Nuts and Raisins",
       "source_servings": 5,
       "source_url": "https://snaped.fns.usda.gov/node/1861",
@@ -2649,51 +2425,46 @@
         }
       ],
       "source_limits": [],
-      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
-      "source_section": "SNAP-Ed node1861 / directions",
-      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
-        "evidence_url": "https://snaped.fns.usda.gov/node/1861",
-        "evidence_urls": [
-          "https://snaped.fns.usda.gov/node/1861"
-        ],
-        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
-      },
-      "source_artifact": {
-        "artifact_name": "data2-snap-kale-nuts.html",
-        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
-        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
-      },
-      "source_quality_flags": [],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "REPLACE",
-        "reason": "Smoked cooked turkey drumstick and trans-fat-free margarine not cleared; frozen green beans were initially unresolved and later evidenced, which alone does not clear the remaining recipe forms.",
-        "replaces_source_id": "CACFP6-GREEN-BEANS-POTATOES-SMOKED-TURKEY"
-      },
-      "source_ingredient_rows": 6,
-      "selected_ingredient_rows": 5,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "SNAP5-KALE-NUTS-RAISINS",
+      "selected_ingredient_codes": [
         "GARLIC",
         "KALE",
         "RAISINS_GOLDEN",
         "SUNFLOWER_OIL",
         "WALNUTS_RAW"
       ],
-      "market_summary": {
-        "required_concepts": 5,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 5,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     },
     {
-      "recipe_source_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
+      "source_collection": "USDA FNS — Food and Physical Activity Checklist",
+      "source_section": "Food and Physical Activity Checklist handout p2",
+      "source_attribution": "USDA FNS What's Cooking? USDA Mixing Bowl, November2014, Food and Physical Activity Checklist handout p2.",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "evidence_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
+        "evidence_urls": [
+          "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf"
+        ],
+        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
+      },
+      "source_artifact": {
+        "artifact_name": "data2-snap-braised-chicken.pdf",
+        "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+        "retrieval_method": "Native browser PDF download; local SHA-256"
+      },
+      "source_quality_flags": [
+        "Source quantifies salt and pepper but directions omit their application. Preserve both ingredient rows; do not invent a seasoning step. Flag for human source-transcription review.",
+        "Source header cook time70minutes retained; stage math differs and fresh-spinach alternative is2minutes. Source four4oz prepared servings is distinct from four6oz bone-in thighs."
+      ],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "REPLACE",
+        "reason": "Firm tofu form not cleared; retain a source-backed protein main using ordinary raw chicken thigh and fresh spinach.",
+        "replaces_source_id": "CACFP6-SOUTHWEST-TOFU-SCRAMBLE"
+      },
       "recipe_name": "Braised Chicken Thighs with Spinach",
       "source_servings": 4,
       "source_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
@@ -2744,38 +2515,8 @@
           "scope": "Source evidence is retained verbatim for technical curation. No purchase-weight conversion or missing source step is generated by DATA2; later runtime normalization must review this limitation."
         }
       ],
-      "source_collection": "USDA FNS — Food and Physical Activity Checklist",
-      "source_section": "Food and Physical Activity Checklist handout p2",
-      "source_attribution": "USDA FNS What's Cooking? USDA Mixing Bowl, November2014, Food and Physical Activity Checklist handout p2.",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
-        "evidence_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
-        "evidence_urls": [
-          "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf"
-        ],
-        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
-      },
-      "source_artifact": {
-        "artifact_name": "data2-snap-braised-chicken.pdf",
-        "artifact_type": "DOWNLOADED_PRIMARY_PDF",
-        "retrieval_method": "Native browser PDF download; local SHA-256"
-      },
-      "source_quality_flags": [
-        "Source quantifies salt and pepper but directions omit their application. Preserve both ingredient rows; do not invent a seasoning step. Flag for human source-transcription review.",
-        "Source header cook time70minutes retained; stage math differs and fresh-spinach alternative is2minutes. Source four4oz prepared servings is distinct from four6oz bone-in thighs."
-      ],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "REPLACE",
-        "reason": "Firm tofu form not cleared; retain a source-backed protein main using ordinary raw chicken thigh and fresh spinach.",
-        "replaces_source_id": "CACFP6-SOUTHWEST-TOFU-SCRAMBLE"
-      },
-      "source_ingredient_rows": 10,
-      "selected_ingredient_rows": 10,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
+      "selected_ingredient_codes": [
         "BLACK_PEPPER",
         "CHICKEN_THIGH",
         "GARLIC",
@@ -2787,16 +2528,35 @@
         "THYME_DRIED",
         "WATER"
       ],
-      "market_summary": {
-        "required_concepts": 9,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 9,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 1
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     },
     {
-      "recipe_source_id": "SNAP4-DILLED-FISH-FILLETS",
+      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
+      "source_section": "SNAP-Ed recipe / Microwave Method",
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "rights_review": {
+        "status": "REVIEWED",
+        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
+        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
+        "evidence_urls": [
+          "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets"
+        ],
+        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
+      },
+      "source_artifact": {
+        "artifact_name": "data2-snap-dilled-fish.html",
+        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
+      },
+      "source_quality_flags": [],
+      "checked_at": "2026-09-05",
+      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
+      "selection": {
+        "decision": "REPLACE",
+        "reason": "Cooked frozen chicken strips, ancho, low-sodium salsa and whole-wheat tortilla forms not cleared; introduce a verified frozen-cod main with four quantified ingredients.",
+        "replaces_source_id": "CACFP6-CHICKEN-FAJITA"
+      },
       "recipe_name": "Dilled Fish Fillets",
       "source_servings": 4,
       "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
@@ -2848,47 +2608,14 @@
         }
       ],
       "source_limits": [],
-      "source_collection": "USDA FNS SNAP-Ed — Recipes and seasonal menus",
-      "source_section": "SNAP-Ed recipe / Microwave Method",
-      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
-      "rights_review": {
-        "status": "REVIEWED",
-        "review_class": "REVIEWED_UNDER_ACCEPTED_DIRECT_FNS_RISK_POSTURE",
-        "basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
-        "evidence_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
-        "evidence_urls": [
-          "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets"
-        ],
-        "notices_reviewed": "Full directly FNS-hosted recipe section and available page/footer or PDF notices reviewed; no actual recipe-level third-party copyright/licensing restriction found. Contributor acknowledgment is retained and is not treated as an express commercial license."
-      },
-      "source_artifact": {
-        "artifact_name": "data2-snap-dilled-fish.html",
-        "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
-        "retrieval_method": "Native browser Save Page, HTML only; hash identifies saved source artifact, not an asserted byte-identical HTTP response"
-      },
-      "source_quality_flags": [],
-      "checked_at": "2026-09-05",
-      "ordinary_equipment_assessment": "Ordinary household tools/appliances explicitly named in the source; specialized restaurant equipment not required. A listed tool is a source-backed execution choice, not a new Equipment bounded context.",
-      "selection": {
-        "decision": "REPLACE",
-        "reason": "Cooked frozen chicken strips, ancho, low-sodium salsa and whole-wheat tortilla forms not cleared; introduce a verified frozen-cod main with four quantified ingredients.",
-        "replaces_source_id": "CACFP6-CHICKEN-FAJITA"
-      },
-      "source_ingredient_rows": 5,
-      "selected_ingredient_rows": 4,
-      "distinct_food_ingredient_codes": [
+      "recipe_source_id": "SNAP4-DILLED-FISH-FILLETS",
+      "selected_ingredient_codes": [
         "COD_ATLANTIC",
         "DILL_DRIED",
         "LEMON",
         "SALT"
       ],
-      "market_summary": {
-        "required_concepts": 4,
-        "RU_MASS_MARKET": 0,
-        "RU_AVAILABLE": 4,
-        "SPECIALTY_OR_UNCLEAR": 0,
-        "household_water": 0
-      }
+      "review_basis": "correction-source-audit.json: actual primary artifact recheck, all eight requested dimensions"
     }
   ]
 }

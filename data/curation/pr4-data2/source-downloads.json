@@ -169,6 +169,46 @@
       "size_bytes": 195741,
       "retrieval_method": "Native browser PDF download; local SHA-256",
       "visual_review": "Primary recipe page reviewed; PDF recipe rendered and visually inspected with Poppler"
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/snap/MPMF/Handouts/HowMuchFoodandPhysicalActivityHandouts.pdf",
+      "artifact_name": "HowMuchFoodandPhysicalActivityHandouts.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "retrieval_method": "Native browser PDF download; SHA-256 computed locally; recipe page 2 rendered with Poppler and inspected",
+      "sha256": "b2ac0732c26ad10426343c5aab115248b020983fa4dcad79f230ff146a02641c",
+      "visual_review": "Complete selected recipe and notices rendered and inspected in correction pass; see correction-anchor-candidates.json"
+    },
+    {
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/lentils-casserole",
+      "artifact_name": "data2-correction-baked-lentils.pdf",
+      "artifact_type": "BROWSER_PRINTED_PRIMARY_PAGE_PDF",
+      "retrieval_method": "Official page print download; two-page saved representation rendered with Poppler and inspected; hash identifies saved representation, not byte-identical HTTP HTML",
+      "sha256": "86b118c36ca73b75618e1656bbc96c2c06f59785ca7292efc47be0fe99cc4598",
+      "visual_review": "Complete selected recipe and notices rendered and inspected in correction pass; see correction-anchor-candidates.json"
+    },
+    {
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/orange-porkchops",
+      "artifact_name": "data2-correction-orange-pork-chops.pdf",
+      "artifact_type": "BROWSER_PRINTED_PRIMARY_PAGE_PDF",
+      "retrieval_method": "Official page print download; saved representation rendered with Poppler and inspected; hash identifies saved representation, not byte-identical HTTP HTML",
+      "sha256": "aa07563b660219b4173edc63cf6f76478e1bc71bff7f0c8a54fc5eaf5985a479",
+      "visual_review": "Complete selected recipe and notices rendered and inspected in correction pass; see correction-anchor-candidates.json"
+    },
+    {
+      "source_url": "https://snaped.fns.usda.gov/node/2489",
+      "artifact_name": "data2-correction-simple-green-smoothie.html",
+      "artifact_type": "SAVED_PRIMARY_HTML",
+      "retrieval_method": "Current official SNAP-Ed page saved through browser; SHA-256 computed locally. Orchestrator reviewed full visible HTML body and footer notices, confirming all eight source ingredient rows.",
+      "sha256": "240c8b7a10a0399cb70743d48f59c9d6b828c8e640e9cbfc1eec0762cf6108ca",
+      "visual_review": "Complete selected recipe and notices rendered and inspected in correction pass; see correction-anchor-candidates.json"
+    },
+    {
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/fish",
+      "artifact_name": "data2-correction-oven-fried-fish.pdf",
+      "artifact_type": "BROWSER_PRINTED_PRIMARY_PAGE_PDF",
+      "retrieval_method": "Official page print download; saved representation rendered with Poppler and inspected; hash identifies saved representation, not byte-identical HTTP HTML",
+      "sha256": "068b5b0d4c7e45ad498758501bcc8f67b7e5f69f9c27ea4db4af39b05cba069c",
+      "visual_review": "Complete selected recipe and notices rendered and inspected in correction pass; see correction-anchor-candidates.json"
     }
   ]
 }

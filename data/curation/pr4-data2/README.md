@@ -1,187 +1,125 @@
-# PR4-DATA2 — Russia/SPB technical recipe corpus
+# PR4-DATA2 — corrected Russia/SPB technical recipe corpus
 
-Status: **READY FOR REVIEW**, not ACCEPTED or COMPLETE.
-Reviewed: `2026-09-05`.
-[Issue #12](https://github.com/Mitronomik/family-food-os/issues/12) ·
-[existing PR #13](https://github.com/Mitronomik/family-food-os/pull/13).
-Branch: `data/pr4-data2-russia-spb-recuration`.
-Exact starting main: `26af749be0f6446de1d88cad2e2e03158a9830a0`.
-PR #9 governance and PR #11 localization policy are included in that base.
+PR4-DATA2 — READY FOR REVIEW, not ACCEPTED or COMPLETE (`2026-09-05`).
 
-This directory now contains an explicitly versioned successor to
-`data/curation/pr4/`. The historical corpus remains byte-unchanged.
-The initial regional-browser blocker is **superseded** by the
-[Orchestrator clarification](https://github.com/Mitronomik/family-food-os/issues/12#issuecomment-5550629546).
-Market compatibility is representation in ordinary SPB/LO retail, not an
-assertion of momentary store stock.
+Issue #12; existing branch `data/pr4-data2-russia-spb-recuration` and
+[PR #13](https://github.com/Mitronomik/family-food-os/pull/13).
+Exact base: `26af749be0f6446de1d88cad2e2e03158a9830a0` (merged governance #9,
+historical PR4-DATA #8 and localization #11). Correction begins at reviewed head
+`36c0cb82680fbc8a57ab4a78a41f363f3420d39d`; delivered head is the current branch
+HEAD, recorded exactly in PR #13 after push, not a self-referential commit hash.
 
-Do not consume this successor in PR #10 until DATA2 receives ACCEPT and is
-merged. No production Recipe, RecipeVersion, RecipeIngredient or equipment
-rows are created by this operation. PR5 remains unauthorized.
+Final: **30 recipes**, **25 retained / 5 replaced in this correction pass**;
+relative to historical PR4: **5 retained / 25 replaced**. Both forbidden ICN
+cards are absent. **226 source-audit rows / 195 selected rows** (190 required,
+4 source-explicit optional, 1 conditional); exact **82 existing FoodIngredient**
+union within **80..120**, zero new codes and zero unresolved required rows.
+**88 source-backed equipment rows / 32 normalized codes**.
 
-## Exact result
+Canonical PR4 meal types: **breakfast 3 / main 6 / side 6 / salad 6 /
+sandwich 0 / other 9**. Separate curation roles: **BREAKFAST 3 / MAIN_DISH 6 /
+SIDE_DISH 12 / SOUP 2 / DESSERT 3 / SNACK 3 / CONDIMENT 1**.
+**8 meal anchors**, **3 soups/substantial one-bowl meals**, **12 pure sides**;
+five primary-protein families: **EGG 2 / FISH 2 / LEGUME_TOFU 1 / MEAT 1 /
+POULTRY 2** among anchors. Local Harvest is a vegetable side, never a pork main.
 
-| Measure | Result |
-| --- | ---: |
-| Final recipes | 30 |
-| Original sources retained / replaced | 5 / 25 |
-| Mandatory-excluded ICN cards in successor | 0 |
-| Complete source audit rows, including unselected alternatives/optional notes | 223 |
-| Selected ingredient-coverage rows | 193 |
-| Selected required / optional / conditional rows | 191 / 1 / 1 |
-| Exact selected global FoodIngredient union | 79 (limit 120) |
-| New FoodIngredients / unresolved required code rows | 0 / 0 |
-| Existing global catalogue / aliases / nutrition profiles | 183 / 172 / 183, unchanged |
-| Reviewed non-water purchase forms | 82 |
-| Purchase forms RU_MASS_MARKET / RU_AVAILABLE / SPECIALTY_OR_UNCLEAR | 3 / 79 / 0 |
-| Source-backed equipment rows / unique normalized equipment codes | 96 / 33 |
+**85 non-water purchase forms: 3 RU_MASS_MARKET / 82 RU_AVAILABLE /
+0 SPECIALTY_OR_UNCLEAR**. Chain coverage: 71 one-chain, 11 two-chain,
+3 three-chain forms. All five baseline chains assessed; Lenta concentration
+remains a limitation. Matrix: 185 raw / 177 unique observations, 140 AVAILABLE /
+37 UNCERTAIN (includes rejected research). Compatibility is not momentary stock.
 
-Counts are curation evidence, **not PR4 runtime seed counts**. The old fixture
-remains 30 sources / 363 coverage rows / 119 codes. No old evidence was silently
-overwritten. Both ICN sources are absent from the successor:
-`CACFP6-VEGETABLE-FRITTATA-BITES` and `CACFP6-CAULIFLOWER-RICE`.
+All final sources re-audited for name, servings, ingredient concepts, meal role,
+diversity, times, equipment and limitations. Exact artifacts/hashes, attribution
+and notices retained under the approved narrow direct-FNS project risk posture.
+No unresolved selected-source rights blocker; no blanket public-domain or
+unrestricted commercial/derivative rights claim.
 
-The final descriptive meal grouping is 4 mains, 3 breakfasts, 2 soups,
-15 sides, 3 desserts, 2 snacks and 1 condiment. It includes pork, poultry, fish,
-eggs, grains, leafy/root vegetables and fruit, with skillet, oven, microwave,
-rice-cooker, simmering, blending and uncooked methods. These categories are
-curatorial judgments, not nutrition certification. This is a technical slice,
-not a balanced weekly plan, a taste-tested menu or a launch-size catalogue.
+Verification: final DATA2 validator **PASS**; focused DATA2 **104 passed in 2.54s**;
+historical PR4-DATA/FoodIngredient affected suite **82 passed in 2.43s**;
+Ruff format **2 files already formatted**, Ruff check **All checks passed!**;
+`git diff --check` and staged scope audit **PASS**. Five final artifacts reproduce
+byte-for-byte from reviewed source/form inputs. Full runtime suite and PR4
+production seed execution are excluded from this isolated curation operation.
 
-## Durable evidence and how to consume it
+Historical `data/curation/pr4/`, global seeds (183 ingredients / 172 aliases /
+183 profiles), PR4 runtime, migrations/API/frontend and local development DB
+remain unchanged. PR #10 remains at `cd2285802c94735e0c9015042f9f4c0b52d68b85`;
+it may consume DATA2 only after ACCEPT + merge. No RetailSKU/retailer production,
+Nutrition, Pantry, Planner, Shopping, Auth/PostgreSQL or AI work. PR5 unauthorized.
+Next action: project final review, not autonomous merge.
 
-- `recipe-corpus.json`: final 30 source IDs, URLs, names, servings, document
-  hashes, narrow reviewed rights bases, equipment order/evidence, source times,
-  meal/diversity assessments, selection decisions and per-recipe market counts.
-- `ingredient-coverage.csv`: all 193 **selected** ingredient rows, retaining
-  source wording and existing codes; no invented grams or yield conversions.
-- `draft-ingredient-coverage.json`: despite its historical filename, the
-  frozen source audit behind the final CSV. It retains all 223 source rows,
-  including omitted optional choices, alternatives, preparation aids and source
-  limitations. The validator rebuilds the CSV from these explicit selections.
-- `mvp0-food-ingredient-codes.txt`: exact sorted 79-code selected union.
-- `purchase-form-review.json`: one reviewed record per selected CSV food row,
-  joined to the actual source purchase form and a full five-chain assessment.
-- `draft-purchase-form-review.json`: reviewed human form-matching inputs,
-  preserving exact chosen members, applicability and evidence references.
-- `retailer-evidence-matrix.json`: deduplicated research observations plus
-  final source forms; raw IDs remain aliases for audit. Research observations
-  are not blanket clearance of all recipes sharing a canonical code.
-- `replacement-decisions.json` and [review-report.md](review-report.md):
-  all 25 slot replacements, reasons, complete 30-recipe summary and exact
-  one-retailer-only forms. A slot replacement is not a nutrition-equivalent
-  household substitution.
-- `source-downloads.json`: 19 downloaded new-source documents covering all
-  25 new recipes. Retained five PDF hashes are in `source-equipment-audit.json`.
-  PDF/HTML artifacts were reviewed locally; no source binaries/images are
-  committed. Browser-saved HTML hashes identify the saved artifact, not a
-  claimed byte-identical upstream HTTP response.
-- `recipe-review-metadata.json`: reviewed metadata for all 25 new sources.
-  `source-equipment-audit.json` preserves the complete historical 30-card audit.
-- `research-candidates.json`, `original-corpus-market-review.json`,
-  `candidate-review-v2.json` through `v5` and retailer research files preserve
-  exact historical source facts, unsuccessful candidates and excluded matches.
+## Durable evidence and regeneration
 
-## Market method and limitations
+- `source-consistency-audit.json`: independent reviewed facts for the final 30;
+  contains exact source times, role rationale, selection limitations, notices,
+  attribution and ordered explicit equipment. This is the human review input,
+  not a generated copy of recipe-corpus.json.
+- `correction-source-audit.json`: adversarial source audit of all reviewed-head
+  30, including the five now removed; `correction-anchor-candidates.json` holds
+  five new actual-source reviews and rejected candidate reasons.
+- `draft-ingredient-coverage.json`: 226 source rows, including source-explicit
+  optional/alternative omissions and discarded process water; no invented units,
+  grams, yields, seasonings or cooking steps. Selected rows rebuild the CSV.
+- `draft-purchase-form-review.json`: 85 actual purchase concepts/forms, exact
+  source matching, five-chain review and one-based observation references.
+- `research-correction-market.json`: new primary retailer/form/region evidence,
+  excluded wrong forms/cities and independent new-source notice/hash review.
+- `source-downloads.json`: 24 reviewed downloaded documents across research
+  history; not a final-recipe count. Retained five card hashes also appear in
+  `source-equipment-audit.json`. No source images or binaries are committed.
+- Generated final outputs: `recipe-corpus.json`, `ingredient-coverage.csv`,
+  `mvp0-food-ingredient-codes.txt`, `purchase-form-review.json`,
+  `retailer-evidence-matrix.json`. `--final-corpus` and `--final-evidence` on
+  `scripts/validate_pr4_data2.py` serialize these deterministically; the normal
+  validator byte-compares them to reviewed inputs. It never runs production seed.
+- `pr4-meal-type-contract.json`: verbatim, hash-pinned PR #10 MealTypeCode AST
+  excerpt plus full source-blob identity; compared to the reviewed Git object
+  when available. No production import or enum expansion.
+- `replacement-decisions.json`: all historical slot decisions plus the exact
+  correction-pass keep/replacement partition and reasons. Slot replacements are
+  fixture selection, not nutrition-equivalent household substitutions.
+- Older candidate reviews and `recipe-review-metadata.json` are historical
+  review snapshots, not current final metadata. The final independent source
+  audit takes precedence; historical `data/curation/pr4/` is untouched.
 
-Read [market-methodology.md](market-methodology.md).
-All 96 historical source-text/form-risk rows were preserved and reclassified:
-77 PURCHASE_FORM_CRITICAL, 19 PREPARATION_ONLY_OR_NOT_RETAIL_FORM.
-The complete original 30-card / 363-row audit is broader than those 96 flags.
-After source-specific updates, 6 original cards have complete market evidence,
-but one is mandatory-excluded ICN; only 5 are eligible keepers.
+See [review-report.md](review-report.md) for derived per-recipe counts, all
+replacements, anchors, source collections, limitations, equipment codes and
+one-chain forms. Structural tests cannot prove an invented human review; actual
+primary sources and hashes remain necessary review evidence.
 
-Current official neutral product/category pages qualify with current official
-SPB/LO chain presence; indexed official product wording qualifies when the live
-page is unavailable. Explicitly other-city pages, expired flyers and wrong forms
-do not qualify. Slicing/mincing/peeling are not new retail products. Canned/dry,
-specified dairy fat, sodium restrictions, frozen/fresh when required and other
-material forms remain separately reviewed. No CAPTCHA or TLS control was bypassed.
+## Market and rights boundaries
 
-Evidence totals are 172 raw observations, 166 unique code/chain/URL records,
-129 AVAILABLE and 37 UNCERTAIN; six duplicate aliases are retained.
-AVAILABLE unique observations by panel chain: Пятёрочка 3, Перекрёсток 0,
-Лента 113, О'КЕЙ 0, Магнит 13. Zero qualifying observations is **not absence**.
-These totals include rejected-candidate research, not just final ingredients.
+The [clarified market method](market-methodology.md) is unchanged. All historical
+96 source-text risk rows remain classified as 77 PURCHASE_FORM_CRITICAL and
+19 PREPARATION_ONLY_OR_NOT_RETAIL_FORM. Cutting/mincing are preparation, not new
+retail products; canned/dry, required frozen/fresh, sodium and dairy-fat forms
+remain material. Official neutral catalogue evidence plus official SPB/LO chain
+presence, or current indexed official pages, qualifies. Wrong-city pages,
+expired flyers and wrong forms do not. Browser blocks are not product absence.
 
-The final 82 forms have 72 one-chain, 7 two-chain and 3 three-chain reviews.
-The exact one-chain forms are listed in the review report. Evidence concentration
-in Lenta is a limitation: RU_AVAILABLE is not relabelled RU_MASS_MARKET.
-All five chains were assessed; no final form relies on a specialist-only seller.
-No prices, stock counts, fake SKU IDs, retailer connector or runtime dependency
-were introduced. Later Retail must refresh evidence.
+Direct-FNS sources are reviewed under the already-approved project risk
+classification, not treated as federally authored solely because of hosting.
+Third-party contributor attributions are retained, including university/extension
+and NVCSS sources. Team Nutrition's copying statement is not expanded into an
+unlimited commercial grant. No photographs, logos or nutrition panels imported.
 
-Examples of reviewable primary evidence are the
-[Lenta SPB-serving vegetable catalogue](https://lenta.com/catalog/ovoshchi-146/),
-[X5 delivery presence](https://rabota.x5.ru/dostavka/rabota-v-x5/) and
-[Magnit SPB oat listing](https://magnit.ru/product/1000142900-khlopya_ovsyanye_magnit_ekstra_400g?shopCode=784430&shopType=1).
-Exact product/form matches and dates, not these presence pages alone, determine
-each classification.
+## Source corrections and limits
 
-## Rights/provenance result
+Local Harvest now has only vegetable-side claims. Apple Carrot Soup correctly
+discloses pork. Corn pancakes were removed instead of relabelled as breakfast.
+Spanish Frittata is a substantial egg/potato entree; breakfast is a curator
+occasion, not an invented source statement. Its source yield/time tension stays
+visible. WIC smoothie source says exactly `1 cup milk`; selected 1% is a reviewed
+member of generic milk. Overnight Oats' named apple/cinnamon/yogurt options are
+selected optional rows, not falsely required foods. Simple Green Smoothie uses
+the source-explicit single frozen-fruit choice, frozen strawberry, and is a
+snack, not an anchor. Optional dash seasonings in Orange Pork Chops are omitted.
 
-All selected sources are directly FNS-hosted documents reviewed under the
-**already-approved project risk posture**, with attribution and document hashes.
-This is not a declaration that USDA branding or a government host proves public
-domain, nor an assertion of unrestricted commercial/derivative licensing.
-
-- Retained CACFP: 5 cards, exact card evidence and notice review.
-- Team Nutrition Cooks!: 3 handouts; collection explicitly permits downloading
-  and copying, without expanding that wording to an unlimited commercial grant.
-- FNS-430 Harvest: 3 recipes; collection PDF and acknowledgments reviewed.
-- WIC Works: 4 recipes; exact page and contributor/notice review.
-- SNAP-Ed seasonal recipes: 13; each actual recipe section reviewed.
-- SNAP-Ed educator card: 1; Montana State attribution preserved.
-- FNS Food and Physical Activity Checklist: 1; actual original PDF reviewed.
-
-No selected card carries an uncleared third-party restrictive notice found in
-the reviewed document. No unresolved selected-source rights blocker remains.
-Rejected ICN, inaccessible-origin and other unsuitable candidates remain
-research only. No photos, logos, trademarks or source marketing prose are
-imported as product assets.
-
-## Source-quality and normalization boundaries
-
-- Keep cooked macaroni volume as cooked volume, never the same amount of dry
-  pasta. No unreviewed dry/cooked yield is created.
-- Spinach/apple salad retains literal `2/3 package (10 ounces)`; DATA2 does not
-  manufacture a package-to-gram conversion.
-- Braised chicken lists quantified salt/pepper but omits their application in
-  its directions. This source omission is explicitly preserved, not patched
-  with an invented step.
-- TNC pancake supplementary guidance permits extra oil only if needed, without
-  a quantity; no additional mandatory ingredient or invented quantity is added.
-- The standard roasted-carrot variant permits generic vegetable oil; selected
-  olive oil is a member of that category, not a mandatory spicy-variant rule.
-- Explicit source options and optional omissions are recorded. Required
-  unquantified seasonings caused other candidates to be rejected.
-- Equipment is explicit-source evidence. Corn/edamame uses the source's
-  raw-sesame toasting alternative, so STOCK_POT is included. Serving-only
-  utensils and disposable paper/foil are excluded. No tool is inferred merely
-  from a chopping, mixing or grilling verb.
-- Null source times remain unknown. Stage times are not silently summed into
-  an invented active/preparation/total duration.
-
-These limitations are visible handback requirements for later PR4 normalization,
-not unresolved FoodIngredient codes or permission to invent production truth.
-
-## Verification
-
-`backend/.venv/bin/python scripts/validate_pr4_data2.py` checks the final
-successor as well as research integrity. `--research` alone is not acceptance.
-The validator rebuilds the selected coverage, exact union and form review
-deterministically, validates reference/schema integrity and rejects missing
-final artifacts. Offline tests cannot establish the truth of a fabricated
-human review; primary-source evidence remains reviewable.
-
-Exact final test/Ruff/diff results are recorded in [review-report.md](review-report.md)
-and PR #13. Affected historical PR4-DATA/FoodIngredient regression was rerun:
-**82 passed in 1.77s**. Full backend/launcher, seed execution and runtime
-immutability suites are not run: issue #12 explicitly excludes a full runtime
-suite for this isolated supporting curation operation. Existing seed tests
-remain part of the affected regression above.
-
-Scope: only DATA2 data/research, its offline validator/tests and execution state.
-No global seed, historical fixture, PR4 runtime, migration, API, frontend,
-nutrition, pantry, planner, shopping, retail production, Auth/PostgreSQL or AI
-change. Ignored local development database is untouched. PR #10 is unchanged.
+Cooked pasta remains cooked volume; prepared juice keeps its source volume,
+without invented raw yields. Null times stay unknown. Measured coating butter
+is not an invented spray quantity. Equipment must be explicitly named and used
+operationally; a plate explicitly used to invert the frittata is included, but
+serving-only utensils and inferred tools are not. Every other source limitation
+is preserved in the final audit and report. This is a diverse technical fixture,
+not a nutrition-certified, taste-tested or nutritionally balanced weekly plan.

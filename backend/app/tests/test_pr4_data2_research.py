@@ -1,6 +1,7 @@
 """Research integrity is not authorization or acceptance of a final corpus."""
 
 from collections import Counter
+from copy import deepcopy
 import csv
 import importlib.util
 import json
@@ -47,7 +48,8 @@ def synthetic_final(research_copy):
             "distinct_food_ingredient_codes": ["SALT"],
             "equipment": [],
             "source_attribution": "Synthetic fixture",
-            "meal_type": "TEST_ONLY",
+            "meal_type_code": "other",
+            "curation_role": "TEST_ONLY",
             "diversity_contribution": "Synthetic fixture",
             "source_times": {"test_only": True},
             "selection": {"decision": "REPLACE", "reason": "Schema test fixture only"},
@@ -233,31 +235,33 @@ def test_final_evidence_is_exact_and_reproducible_without_runtime():
     for filename, content in generated.items():
         assert (DIRECTORY / filename).read_text(encoding="utf-8") == content
     rows = validator.selected_source_rows()
-    assert len(rows) == 193
+    corpus = validator.read_json(DIRECTORY / "recipe-corpus.json")
+    assert len(rows) == corpus["counts"]["selected_ingredient_rows"]
     assert len({r["source_recipe_id"] for r in rows}) == 30
-    assert len({r["existing_food_ingredient_code"] for r in rows}) == 79
-    assert Counter(r["ingredient_selection"] for r in rows) == {
-        "SELECTED_REQUIRED": 191,
-        "SELECTED_OPTIONAL": 1,
-        "SELECTED_CONDITIONAL": 1,
-    }
+    assert 80 <= len({r["existing_food_ingredient_code"] for r in rows}) <= 120
+    assert all(r["ingredient_selection"] in validator.SELECTED for r in rows)
     matrix = json.loads(generated["retailer-evidence-matrix.json"])
-    assert len(matrix["final_source_forms"]) == 82
-    assert matrix["final_source_form_classification_counts"] == {
-        "RU_MASS_MARKET": 3,
-        "RU_AVAILABLE": 79,
-    }
+    assert matrix["final_source_form_classification_counts"] == dict(
+        Counter(r["classification"] for r in matrix["final_source_forms"])
+    )
+    assert not any(
+        r["classification"] == "SPECIALTY_OR_UNCLEAR"
+        for r in matrix["final_source_forms"]
+    )
 
 
-def test_final_corpus_exact_96_equipment_33_codes_and_preserved_catalogue():
+def test_final_corpus_derived_equipment_counts_and_preserved_catalogue():
     import hashlib
 
     corpus = validator.read_json(DIRECTORY / "recipe-corpus.json")
     assert corpus["counts"] == validator.corpus_counts(
         corpus["recipes"], validator.selected_source_rows(), DIRECTORY
     )
-    assert corpus["counts"]["equipment_rows"] == 96
-    assert corpus["counts"]["distinct_equipment_codes"] == 33
+    equipment = [e for r in corpus["recipes"] for e in r["equipment"]]
+    assert corpus["counts"]["equipment_rows"] == len(equipment)
+    assert corpus["counts"]["distinct_equipment_codes"] == len(
+        {e["equipment_code"] for e in equipment}
+    )
     corn = next(
         r
         for r in corpus["recipes"]
@@ -289,26 +293,27 @@ def test_final_source_metadata_exact_equipment_and_hash_registry():
     draft = validator.read_json(DIRECTORY / "draft-ingredient-coverage.json")
     ids = {r["source_recipe_id"] for r in draft["recipes"]}
     historical = validator.read_json(DIRECTORY / "source-equipment-audit.json")
-    old = [r for r in historical["recipes"] if r["recipe_source_id"] in ids]
-    new = validator.read_json(DIRECTORY / "recipe-review-metadata.json")["recipes"]
-    assert len(old) == 5
-    assert len(new) == 25
-    assert {r["recipe_source_id"] for r in old + new} == ids
-    assert sum(len(r["equipment"]) for r in old) == 11
-    assert sum(len(r["equipment"]) for r in new) == 84
+    reviewed = validator.read_json(DIRECTORY / "source-consistency-audit.json")[
+        "recipes"
+    ]
+    assert len(reviewed) == len(ids) == 30
+    assert {r["recipe_source_id"] for r in reviewed} == ids
     documents = validator.read_json(DIRECTORY / "source-downloads.json")["documents"]
-    urls = {r["source_url"] for r in documents}
-    for recipe in old + new:
+    artifacts = {(r["source_url"], r["sha256"]) for r in documents}
+    artifacts.update(
+        (r["source_url"], r["source_sha256"]) for r in historical["recipes"]
+    )
+    for recipe in reviewed:
         equipment = recipe["equipment"]
         assert [e["position"] for e in equipment] == list(range(1, len(equipment) + 1))
         assert len({e["equipment_code"] for e in equipment}) == len(equipment)
         assert json.loads(json.dumps(equipment)) == equipment
         assert all(e.get("evidence_snippet", e.get("source_words")) for e in equipment)
-    for recipe in new:
-        assert recipe["source_url"] in urls
+        assert (recipe["source_url"], recipe["source_sha256"]) in artifacts
         assert recipe["source_attribution"]
-        assert recipe["rights_basis"]
-        assert recipe["source_time_facts"]
+        assert recipe["rights_review"]["status"] == "REVIEWED"
+        assert recipe["rights_review"]["basis"]
+        assert recipe["source_times"]
 
 
 def test_final_form_join_rejects_two_competing_form_assignments(research_copy):
@@ -352,19 +357,24 @@ def test_matrix_is_exact_deterministic_and_round_trips():
     assert matrix == validator.build_matrix()
     assert json.loads(json.dumps(matrix)) == matrix
     assert matrix["status"] == "RESEARCH_EVIDENCE_NOT_ACCEPTED_CORPUS"
-    assert matrix["counts"] == {
-        "raw_observations": 172,
-        "observations": 166,
-        "duplicate_observations": 6,
-        "available": 129,
-        "uncertain": 37,
-        "available_by_chain": {
-            "PYATEROCHKA": 3,
-            "PEREKRESTOK": 0,
-            "LENTA": 113,
-            "OKEY": 0,
-            "MAGNIT": 13,
-        },
+    raw = validator.normalized_observations()
+    assert matrix["counts"]["raw_observations"] == len(raw)
+    assert matrix["counts"]["observations"] == len(matrix["observations"])
+    assert matrix["counts"]["duplicate_observations"] == len(raw) - len(
+        matrix["observations"]
+    )
+    assert matrix["counts"]["available"] == sum(
+        r["status"] == "AVAILABLE" for r in matrix["observations"]
+    )
+    assert matrix["counts"]["uncertain"] == sum(
+        r["status"] == "UNCERTAIN" for r in matrix["observations"]
+    )
+    assert matrix["counts"]["available_by_chain"] == {
+        chain: sum(
+            r["status"] == "AVAILABLE" and r["retailer_chain"] == chain
+            for r in matrix["observations"]
+        )
+        for chain in validator.CHAINS
     }
     for observation in matrix["observations"]:
         filename, index = observation["observation_id"].rsplit(":", 1)
@@ -600,6 +610,23 @@ def test_missing_v7_input_fails_research(research_copy):
     )
 
 
+def test_correction_market_input_is_required_and_normalized(research_copy):
+    raw = validator.normalized_observations(research_copy)
+    correction = [
+        r
+        for r in raw
+        if r["observation_id"].startswith("research-correction-market.json:")
+    ]
+    assert correction
+    assert {r["retailer_chain"] for r in correction} <= set(validator.CHAINS)
+    assert any(r["food_ingredient_code"] == "TILAPIA_RAW" for r in correction)
+    (research_copy / "research-correction-market.json").unlink()
+    assert (
+        "Missing research input: research-correction-market.json"
+        in validator.research_errors(research_copy)
+    )
+
+
 @pytest.mark.parametrize("observations", [[], None, ["not an object"], [{}]])
 def test_malformed_v7_observations_return_explicit_research_error(
     research_copy, observations
@@ -665,7 +692,7 @@ def test_more_than_120_actual_union_codes_fail_final_gate(synthetic_final):
         "\n".join(union) + "\n"
     )
     assert any(
-        "union <=120" in error for error in validator.final_errors(synthetic_final)
+        "union 80..120" in error for error in validator.final_errors(synthetic_final)
     )
 
 
@@ -687,8 +714,12 @@ def test_final_gate_rejects_empty_placeholder_files(research_copy):
     assert validator.final_errors(research_copy)
 
 
-def test_complete_synthetic_schema_is_not_research_acceptance(synthetic_final):
-    assert validator.final_errors(synthetic_final) == []
+def test_synthetic_schema_cannot_satisfy_source_and_diversity_acceptance(
+    synthetic_final,
+):
+    errors = validator.final_errors(synthetic_final)
+    assert any("union 80..120" in error for error in errors)
+    assert any("Diversity requires" in error for error in errors)
     assert all(
         r["recipe_source_id"].startswith("TEST-ONLY-")
         for r in validator.read_json(synthetic_final / "recipe-corpus.json")["recipes"]
@@ -706,7 +737,7 @@ def test_complete_synthetic_schema_is_not_research_acceptance(synthetic_final):
         ("forbidden", "Forbidden ICN recipe"),
         ("duplicate", "Exactly 30 unique"),
         ("unresolved", "Unresolved or empty"),
-        ("manifest", "exact sorted nonempty union"),
+        ("manifest", "exact sorted union"),
         ("form", "same-form"),
         ("panel", "full five-chain"),
         ("specialty", "fails market classification"),
@@ -788,3 +819,328 @@ def test_command_default_checks_final_gate_not_only_research():
     else:
         assert final.returncode == 0
         assert final.stdout.strip() == "PASS: final DATA2 gates"
+
+
+def test_pr4_vocabulary_is_parsed_from_pinned_runtime_source():
+    allowed = validator.pr4_meal_type_codes()
+    corpus = validator.read_json(DIRECTORY / "recipe-corpus.json")
+    assert {r["meal_type_code"] for r in corpus["recipes"]} <= allowed
+    assert all("meal_type" not in r and r["curation_role"] for r in corpus["recipes"])
+
+
+def test_pinned_vocabulary_works_without_pr4_git_object(research_copy, tmp_path):
+    # Directory outside Git simulates a source export/shallow checkout.
+    assert (
+        validator.pr4_meal_type_codes(research_copy, tmp_path)
+        == validator.pr4_meal_type_codes()
+    )
+
+
+def test_pinned_runtime_contract_cannot_be_expanded_locally(research_copy):
+    path = research_copy / "pr4-meal-type-contract.json"
+    document = validator.read_json(path)
+    document["enum_source"] += '    SOUP = "soup"\n'
+    write_json(path, document)
+    with pytest.raises(ValueError, match="pinned source integrity"):
+        validator.pr4_meal_type_codes(research_copy)
+
+
+@pytest.mark.parametrize("size", [79, 121])
+def test_actual_union_both_bounds_fail_even_when_manifest_is_exact(
+    synthetic_final, size
+):
+    with (ROOT / "data/seed/food_ingredients/ingredients.csv").open() as handle:
+        available = {r["canonical_code"] for r in csv.DictReader(handle)}
+    codes = ["SALT", *sorted(available - {"SALT"})[: size - 1]]
+    with (synthetic_final / "ingredient-coverage.csv").open("a", newline="") as handle:
+        writer = csv.writer(handle)
+        for code in codes[1:]:
+            writer.writerow(
+                ["TEST-ONLY-00", code, code.lower(), code, "RESOLVED_EXISTING", ""]
+            )
+    (synthetic_final / "mvp0-food-ingredient-codes.txt").write_text(
+        "\n".join(sorted(codes)) + "\n"
+    )
+    assert (
+        "Final manifest must be the exact sorted union 80..120"
+        in validator.final_errors(synthetic_final)
+    )
+
+
+def diversity_fixture():
+    """Test only bounded classification mechanics, never fake source acceptance."""
+    recipes, rows = [], []
+    for index in range(30):
+        anchor = index < 8
+        family, code = [
+            ("POULTRY", "CHICKEN_THIGH"),
+            ("FISH", "COD_ATLANTIC"),
+            ("MEAT", "PORK_LOIN"),
+            ("EGG", "EGG"),
+        ][index % 4]
+        side = 8 <= index < 20
+        recipe = {
+            "recipe_source_id": f"TEST-ONLY-DIVERSITY-{index}",
+            "meal_type_code": "breakfast"
+            if index < 3
+            else "main"
+            if anchor
+            else "side"
+            if side
+            else "other",
+            "curation_role": "BREAKFAST"
+            if index < 3
+            else "MAIN_DISH"
+            if anchor
+            else "SIDE_DISH"
+            if side
+            else "DESSERT",
+            "meal_anchor": anchor,
+            "substantial_one_bowl": index in {3, 4},
+            "pure_side_dish": side,
+            "primary_protein_family": family if anchor else None,
+            "protein_evidence_codes": [code] if anchor else [],
+            "role_evidence": "Synthetic unit-test role evidence, not source review",
+            "diversity_contribution": "Synthetic unit-test contribution",
+        }
+        recipes.append(recipe)
+        rows.append(
+            {
+                "source_recipe_id": recipe["recipe_source_id"],
+                "existing_food_ingredient_code": code if anchor else "CARROT",
+            }
+        )
+    return recipes, rows
+
+
+def test_diversity_guard_counts_reviewed_recipe_flags_not_typed_totals():
+    recipes, rows = diversity_fixture()
+    assert (
+        validator.diversity_errors(recipes, rows, validator.pr4_meal_type_codes()) == []
+    )
+    counts = validator.diversity_counts(recipes)
+    assert counts["meal_anchors"] == 8
+    assert counts["pure_side_dishes"] == 12
+    assert len(counts["primary_protein_families"]) == 4
+
+
+def test_existing_tilapia_concept_supports_fish_anchor():
+    recipes, rows = diversity_fixture()
+    recipes[1]["protein_evidence_codes"] = ["TILAPIA_RAW"]
+    recipes[1]["diversity_contribution"] = "Source-backed fish entree"
+    rows[1]["existing_food_ingredient_code"] = "TILAPIA_RAW"
+    assert (
+        validator.diversity_errors(recipes, rows, validator.pr4_meal_type_codes()) == []
+    )
+
+
+@pytest.mark.parametrize(
+    "mutation,expected",
+    [
+        ("anchor", ">=8 meal anchors"),
+        ("breakfast", ">=3 breakfasts"),
+        ("bowl", ">=2 soups/substantial one-bowl"),
+        ("families", ">=3 primary protein families"),
+        ("sides", "<=12 pure side dishes"),
+        ("dessert_anchor", "Unsupported meal-anchor"),
+        ("canonical", "violates PR4 contract"),
+        ("evidence", "Protein evidence is not selected"),
+        ("family_claim", "Primary protein family contradicts"),
+        ("prose_claim", "Diversity protein claim contradicts"),
+        ("fruit_bowl", "Unsupported soup/substantial one-bowl"),
+        ("hidden_side", "Source side role cannot be hidden"),
+    ],
+)
+def test_diversity_guard_rejects_each_blocker_class(mutation, expected):
+    recipes, rows = diversity_fixture()
+    if mutation == "anchor":
+        recipes[0]["meal_anchor"] = False
+    elif mutation == "breakfast":
+        recipes[0]["meal_type_code"] = "main"
+    elif mutation == "bowl":
+        recipes[3]["substantial_one_bowl"] = False
+    elif mutation == "families":
+        for recipe in recipes[:8]:
+            recipe["primary_protein_family"] = "POULTRY"
+    elif mutation == "sides":
+        recipes[20].update(
+            pure_side_dish=True, meal_type_code="side", curation_role="SIDE_DISH"
+        )
+    elif mutation == "dessert_anchor":
+        recipes[0]["curation_role"] = "DESSERT"
+    elif mutation == "canonical":
+        recipes[0]["meal_type_code"] = "MAIN_DISH"
+    elif mutation == "evidence":
+        recipes[0]["protein_evidence_codes"] = ["PORK_LOIN"]
+    elif mutation == "family_claim":
+        recipes[0]["primary_protein_family"] = "FISH"
+    elif mutation == "prose_claim":
+        recipes[8]["diversity_contribution"] = "Pork main"
+    elif mutation == "fruit_bowl":
+        recipes[20]["substantial_one_bowl"] = True
+    elif mutation == "hidden_side":
+        recipes[8]["pure_side_dish"] = False
+    assert any(
+        expected in error
+        for error in validator.diversity_errors(
+            recipes, rows, validator.pr4_meal_type_codes()
+        )
+    )
+
+
+@pytest.mark.parametrize("mutation", ["main", "pork", "anchor", "ingredient"])
+def test_local_harvest_regression_cannot_pass(mutation):
+    recipes, rows = diversity_fixture()
+    recipe = recipes[8]
+    recipe["recipe_source_id"] = "CACFP6-LOCAL-HARVEST-BAKE"
+    rows[8]["source_recipe_id"] = recipe["recipe_source_id"]
+    if mutation == "main":
+        recipe["meal_type_code"] = "main"
+    elif mutation == "pork":
+        recipe["diversity_contribution"] = "Vegetable bake with pork"
+    elif mutation == "anchor":
+        recipe["meal_anchor"] = True
+    elif mutation == "ingredient":
+        rows[8]["existing_food_ingredient_code"] = "PORK_LOIN"
+    assert (
+        "Local Harvest Bake is a vegetable side, not a pork main"
+        in validator.diversity_errors(recipes, rows, validator.pr4_meal_type_codes())
+    )
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("recipe_name", "Changed unsupported name"),
+        ("source_servings", 999),
+        ("meal_type_code", "main"),
+        ("diversity_contribution", "Invented cooking role"),
+        ("source_times", {"total_minutes": 999}),
+        ("source_limits", []),
+        ("equipment", []),
+    ],
+)
+def test_final_source_claims_must_match_independent_review(research_copy, field, value):
+    recipes = validator.read_json(research_copy / "recipe-corpus.json")["recipes"]
+    target = next(r for r in recipes if r.get(field) != value)
+    target[field] = value
+    errors = validator.source_consistency_errors(
+        recipes, validator.selected_source_rows(research_copy), research_copy
+    )
+    assert any(f"reviewed source fact {field}:" in error for error in errors)
+
+
+def test_keep_replacement_decisions_cover_both_corpora(research_copy):
+    recipes = validator.read_json(research_copy / "recipe-corpus.json")["recipes"]
+    assert validator.selection_errors(recipes, research_copy, ROOT) == []
+    path = research_copy / "replacement-decisions.json"
+    document = validator.read_json(path)
+    document["replacements"].pop()
+    write_json(path, document)
+    assert validator.selection_errors(recipes, research_copy, ROOT)
+
+
+def test_final_recipe_counts_are_derived_from_audit_not_historical_constants():
+    corpus = validator.read_json(DIRECTORY / "recipe-corpus.json")
+    rows = validator.selected_source_rows()
+    assert corpus["counts"] == validator.corpus_counts(
+        corpus["recipes"], rows, DIRECTORY
+    )
+    assert validator.source_consistency_errors(corpus["recipes"], rows, DIRECTORY) == []
+    assert (
+        validator.diversity_errors(
+            corpus["recipes"], rows, validator.pr4_meal_type_codes()
+        )
+        == []
+    )
+    changed = deepcopy(corpus["recipes"])
+    changed[0]["equipment"].append({"equipment_code": "TEST_ONLY"})
+    assert (
+        validator.corpus_counts(changed, rows, DIRECTORY)["equipment_rows"]
+        == corpus["counts"]["equipment_rows"] + 1
+    )
+
+
+def test_final_corpus_regenerates_byte_exactly_without_reading_manifest(research_copy):
+    expected = (research_copy / "recipe-corpus.json").read_text(encoding="utf-8")
+    (research_copy / "recipe-corpus.json").unlink()
+    assert validator.build_final_corpus(research_copy) == expected
+    assert validator.build_final_corpus(research_copy) == expected
+
+
+def test_summary_builder_uses_source_review_not_stale_manifest(research_copy):
+    expected = validator.reviewed_recipe_summaries(research_copy)
+    write_json(research_copy / "recipe-corpus.json", {"recipes": []})
+    assert validator.reviewed_recipe_summaries(research_copy) == expected
+    audit_path = research_copy / "source-consistency-audit.json"
+    audit = validator.read_json(audit_path)
+    audit["recipes"][0]["source_times"] = {"test_only_changed_review": True}
+    write_json(audit_path, audit)
+    assert validator.reviewed_recipe_summaries(research_copy)[0]["source_times"] == {
+        "test_only_changed_review": True
+    }
+
+
+def test_overnight_source_optional_foods_remain_selected_optional():
+    rows = [
+        r
+        for r in validator.selected_source_rows()
+        if r["source_recipe_id"] == "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE"
+    ]
+    assert {
+        r["existing_food_ingredient_code"]
+        for r in rows
+        if r["ingredient_selection"] == "SELECTED_OPTIONAL"
+    } == {"YOGURT_PLAIN_LOW_FAT", "CINNAMON_GROUND", "APPLE"}
+    assert {
+        r["existing_food_ingredient_code"]
+        for r in rows
+        if r["ingredient_selection"] == "SELECTED_REQUIRED"
+    } == {"MILK_1_PERCENT", "OATS_ROLLED"}
+    assert len(rows) == 5
+
+
+def test_spinach_cauliflower_smoothie_keeps_exact_generic_milk_source_text():
+    milk = next(
+        r
+        for r in validator.selected_source_rows()
+        if r["source_recipe_id"] == "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE"
+        and r["existing_food_ingredient_code"] == "MILK_1_PERCENT"
+    )
+    assert milk["source_ingredient_text"] == "1 cup milk"
+    assert milk["source_quantity_text"] == "1 cup"
+    assert (
+        "does not state a low-fat/non-fat restriction" in milk["normalization_reason"]
+    )
+
+
+def test_selected_local_harvest_has_only_reviewed_vegetable_side_claims():
+    recipes = validator.read_json(DIRECTORY / "recipe-corpus.json")["recipes"]
+    local = next(
+        r for r in recipes if r["recipe_source_id"] == "CACFP6-LOCAL-HARVEST-BAKE"
+    )
+    assert local["meal_type_code"] == "side"
+    assert local["curation_role"] == "SIDE_DISH"
+    assert local["meal_anchor"] is False
+    assert local["pure_side_dish"] is True
+    assert local["primary_protein_family"] is None
+    assert local["protein_evidence_codes"] == []
+    assert (
+        local["diversity_contribution"]
+        == "Oven-baked butternut squash, beet and sweet potato vegetable side."
+    )
+    assert {"BUTTERNUT_SQUASH", "BEET", "SWEET_POTATO"} <= set(
+        local["distinct_food_ingredient_codes"]
+    )
+
+
+@pytest.mark.parametrize("role", ["DESSERT", "SNACK", "CONDIMENT", "SIDE_DISH"])
+def test_non_breakfast_role_cannot_inflate_breakfast_count(role):
+    recipes, rows = diversity_fixture()
+    recipes[20].update(meal_type_code="breakfast", curation_role=role)
+    assert any(
+        "Curation role contradicts canonical meal type" in error
+        for error in validator.diversity_errors(
+            recipes, rows, validator.pr4_meal_type_codes()
+        )
+    )

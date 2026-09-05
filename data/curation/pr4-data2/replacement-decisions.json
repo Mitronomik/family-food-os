@@ -4,38 +4,201 @@
   "status": "REVIEWED_SELECTION_PENDING_PROJECT_ACCEPT",
   "authority": "GitHub issue #12 and its Orchestrator clarification; corpus re-curation is authorized, no runtime consumer substitution is authorized.",
   "interpretation": "Pairs identify technical fixture slots, not nutrition-equivalent servings or household substitution recommendations. Twenty-five original cards are replaced; five source cards remain. A rejected source form is not claimed absent from all Russian stores: qualifying evidence was not established in the reviewed panel. Exact source-form findings and failed product matches remain in original-corpus-market-review.json and research files.",
-  "kept_source_ids": ["CACFP6-CORN-EDAMAME-BLEND", "CACFP6-LOCAL-HARVEST-BAKE", "CACFP6-TABBOULEH", "CACFP6-HONEY-LIME-CHICKEN", "CACFP6-CREAMY-COLESLAW"],
+  "kept_source_ids": [
+    "CACFP6-CORN-EDAMAME-BLEND",
+    "CACFP6-LOCAL-HARVEST-BAKE",
+    "CACFP6-TABBOULEH",
+    "CACFP6-HONEY-LIME-CHICKEN",
+    "CACFP6-CREAMY-COLESLAW"
+  ],
   "replacements": [
-    {"removed": "CACFP6-SOUTHWEST-TOFU-SCRAMBLE", "replacement": "SNAP4-BRAISED-CHICKEN-SPINACH", "reason": "Firm tofu form not cleared; retain a source-backed protein main using ordinary raw chicken thigh and fresh spinach."},
-    {"removed": "CACFP6-SPICED-OATMEAL", "replacement": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE", "reason": "Trans-fat-free margarine and vanilla requirements not cleared; source-explicit optional vanilla omission in an independently sourced oat breakfast."},
-    {"removed": "CACFP6-STRAWBERRY-SMOOTHIE-BOWL", "replacement": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE", "reason": "Required frozen strawberry and vanilla forms not cleared; retain a distinct smoothie with evidenced frozen cauliflower and source-specified milk."},
-    {"removed": "CACFP6-BAKED-SWEET-POTATOES-APPLES", "replacement": "SNAP4-PEAR-ORANGE-SAUCE", "reason": "Frozen unsweetened green apples, orange concentrate, trans-fat-free margarine and vanilla not cleared; select quantified fresh-fruit cooked dessert."},
-    {"removed": "CACFP6-ORANGE-GLAZED-CARROTS", "replacement": "WIC4-ROASTED-CARROTS", "reason": "Frozen carrot, orange concentrate, trans-fat-free margarine and vanilla forms not cleared; fresh whole carrots cut during source preparation need no pre-cut retail product."},
-    {"removed": "CACFP6-PIZZA-GREEN-BEANS", "replacement": "SNAP4-SPRING-VEGETABLE-SAUTE", "reason": "Canned no-salt green beans not cleared; independent source permits generic green beans, with reviewed frozen member, sweet red onion and young potato forms."},
-    {"removed": "CACFP6-SAUTEED-SPINACH-TOMATOES", "replacement": "SNAP6-SEARED-GREENS", "reason": "Required trans-fat-free margarine not cleared; retain independently sourced cooked greens without that restriction."},
-    {"removed": "CACFP6-SPANISH-RICE", "replacement": "SNAP4-BROWN-RICE-PILAF", "reason": "Low-sodium beef broth, chili blend and parboiled long-grain brown rice not cleared; independent water-based brown-rice source needs no invented broth substitution."},
-    {"removed": "CACFP6-CHICKEN-FAJITA", "replacement": "SNAP4-DILLED-FISH-FILLETS", "reason": "Cooked frozen chicken strips, ancho, low-sodium salsa and whole-wheat tortilla forms not cleared; introduce a verified frozen-cod main with four quantified ingredients."},
-    {"removed": "CACFP6-RICE-VEGETABLE-CASSEROLE", "replacement": "HARV6-ROASTED-POTATOES", "reason": "Reduced-fat cheddar, low-moisture part-skim mozzarella, low-sodium broth, trans-fat-free margarine and specified parboiled rice not cleared; independently sourced roasted potato side."},
-    {"removed": "CACFP6-VEGETABLE-CHILI", "replacement": "WIC4-BUTTERNUT-SOUP", "reason": "Ancho, low-sodium canned kidney beans, no-salt crushed tomato and low-sodium vegetable broth not cleared; select a quantified roast-and-blend vegetable soup."},
-    {"removed": "CACFP6-VEGETABLE-FRITTATA", "replacement": "TNC6-CORN-ZUCCHINI-PANCAKES", "reason": "Reduced-fat cheddar not cleared; independent egg/vegetable pancake source uses ordinary ingredients and an explicit frozen-corn alternative."},
-    {"removed": "CACFP6-CARROT-RAISIN-SALAD", "replacement": "SNAP8-SOMALI-SUMMER-SALAD", "reason": "Unsweetened pineapple canned in 100% juice not cleared; independent fresh-produce salad has explicit optional salt/pepper omission."},
-    {"removed": "CACFP6-MACARONI-SALAD", "replacement": "HARV6-GARDEN-PASTA-SALAD", "reason": "Whole-wheat pasta and canned pimientos not cleared; generic macaroni source preserved, including its cooked-volume quantity rather than invented dry weight."},
-    {"removed": "CACFP6-MARINATED-BLACK-BEAN-SALAD", "replacement": "HARV6-FRESH-TOMATO-SALSA", "reason": "Low-sodium canned black beans/salsa, ancho and reduced-fat cheddar not cleared; fresh tomato salsa provides a distinct condiment/vegetable preparation."},
-    {"removed": "CACFP6-QUICHE-SELF-FORMING-CRUST", "replacement": "SNAP1-MICROWAVE-BAKED-POTATO", "reason": "Frozen liquid whole egg and reduced-fat cheddar not cleared; source-verified whole-potato microwave method adds a short single-serving preparation, not an invented quiche adaptation."},
-    {"removed": "CACFP6-ROPA-VIEJA", "replacement": "SNAP8-APPLE-CARROT-SOUP", "reason": "Low-sodium beef broth and parboiled brown rice not cleared; independently sourced long-simmer vegetable/fruit soup. No beef or nutritional equivalence claimed."},
-    {"removed": "CACFP6-CORN-PUDDING", "replacement": "SNAP6-PEACH-CRISP", "reason": "White whole-grain cornmeal and no-salt cream-style corn not cleared; add a source-backed baked fruit/oat dessert."},
-    {"removed": "CACFP6-GREEN-BEANS-POTATOES-SMOKED-TURKEY", "replacement": "SNAP5-KALE-NUTS-RAISINS", "reason": "Smoked cooked turkey drumstick and trans-fat-free margarine not cleared; frozen green beans were initially unresolved and later evidenced, which alone does not clear the remaining recipe forms."},
-    {"removed": "CACFP6-TUNA-SALAD-SANDWICH", "replacement": "SNAP6-WALDORF-SALAD", "reason": "Whole-wheat roll and canned tuna-in-water forms not cleared; independently sourced apple/walnut salad, not a tuna substitution claim."},
-    {"removed": "CACFP6-TUSCAN-GRILL-CHEESE", "replacement": "SNAP3-GRILLED-FRUIT", "reason": "Whole-wheat bread, low-fat mozzarella and trans-fat-free margarine not cleared; independent grilling method with three ordinary fresh fruits."},
-    {"removed": "CACFP6-ASIAN-TUNA-BURGER", "replacement": "SNAP6-SPINACH-APPLE-SALAD", "reason": "Panko breadcrumbs, whole-wheat roll and low-sodium soy sauce not cleared; independent raw-leaf salad with reviewed cold-use canola oil."},
-    {"removed": "CACFP6-BEAN-BURRITO-BOWL", "replacement": "SNAP8-HOMEMADE-MASHED-POTATOES", "reason": "Low-sodium canned pinto beans, reduced-fat cheddar and parboiled brown rice not cleared; independently sourced boiled-and-mashed potato side."},
-    {"removed": "CACFP6-VEGETABLE-FRITTATA-BITES", "replacement": "TNC6-EGGS-SPINACH", "reason": "Mandatory exclusion of ICN 2024 card: rights posture not cleared. Direct FNS Team Nutrition source has reviewed provenance and copying statement; no public-domain claim."},
-    {"removed": "CACFP6-CAULIFLOWER-RICE", "replacement": "TNC6-APPLESAUCE", "reason": "Mandatory exclusion of ICN 2024 card: rights posture not cleared. Direct FNS Team Nutrition source has reviewed provenance and copying statement; no public-domain claim."}
+    {
+      "removed": "CACFP6-SOUTHWEST-TOFU-SCRAMBLE",
+      "replacement": "SNAP4-BRAISED-CHICKEN-SPINACH",
+      "reason": "Firm tofu form not cleared; retain a source-backed protein main using ordinary raw chicken thigh and fresh spinach."
+    },
+    {
+      "removed": "CACFP6-SPICED-OATMEAL",
+      "replacement": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+      "reason": "Trans-fat-free margarine and vanilla requirements not cleared; source-explicit optional vanilla omission in an independently sourced oat breakfast."
+    },
+    {
+      "removed": "CACFP6-STRAWBERRY-SMOOTHIE-BOWL",
+      "replacement": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
+      "reason": "Required frozen strawberry and vanilla forms not cleared; retain a distinct smoothie with evidenced frozen cauliflower and source-specified milk."
+    },
+    {
+      "removed": "CACFP6-BAKED-SWEET-POTATOES-APPLES",
+      "replacement": "SNAP4-PEAR-ORANGE-SAUCE",
+      "reason": "Frozen unsweetened green apples, orange concentrate, trans-fat-free margarine and vanilla not cleared; select quantified fresh-fruit cooked dessert."
+    },
+    {
+      "removed": "CACFP6-ORANGE-GLAZED-CARROTS",
+      "replacement": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+      "reason": "Frozen carrot, orange concentrate, trans-fat-free margarine and vanilla forms not cleared; fresh whole carrots cut during source preparation need no pre-cut retail product. Correction pass: Replace a redundant plain roasted vegetable side with a source-defined fruit/greens snack using an explicit single frozen-fruit option. Select frozen strawberries, not the retained cauliflower/oat smoothie composition. This is not a meal anchor; four other new genuine anchors satisfy the guard without role inflation."
+    },
+    {
+      "removed": "CACFP6-PIZZA-GREEN-BEANS",
+      "replacement": "SNAP4-SPRING-VEGETABLE-SAUTE",
+      "reason": "Canned no-salt green beans not cleared; independent source permits generic green beans, with reviewed frozen member, sweet red onion and young potato forms."
+    },
+    {
+      "removed": "CACFP6-SAUTEED-SPINACH-TOMATOES",
+      "replacement": "SNAP6-SEARED-GREENS",
+      "reason": "Required trans-fat-free margarine not cleared; retain independently sourced cooked greens without that restriction."
+    },
+    {
+      "removed": "CACFP6-SPANISH-RICE",
+      "replacement": "SNAP4-BROWN-RICE-PILAF",
+      "reason": "Low-sodium beef broth, chili blend and parboiled long-grain brown rice not cleared; independent water-based brown-rice source needs no invented broth substitution."
+    },
+    {
+      "removed": "CACFP6-CHICKEN-FAJITA",
+      "replacement": "SNAP4-DILLED-FISH-FILLETS",
+      "reason": "Cooked frozen chicken strips, ancho, low-sodium salsa and whole-wheat tortilla forms not cleared; introduce a verified frozen-cod main with four quantified ingredients."
+    },
+    {
+      "removed": "CACFP6-RICE-VEGETABLE-CASSEROLE",
+      "replacement": "FNS5-BAKED-LENTILS-CASSEROLE",
+      "reason": "Reduced-fat cheddar, low-moisture part-skim mozzarella, low-sodium broth, trans-fat-free margarine and specified parboiled rice not cleared; independently sourced roasted potato side. Correction pass: Replace a redundant plain potato side with the source-described hearty lentil, vegetable and cheese dinner in one dish; adds a genuine legume anchor with measured required foods."
+    },
+    {
+      "removed": "CACFP6-VEGETABLE-CHILI",
+      "replacement": "WIC4-BUTTERNUT-SOUP",
+      "reason": "Ancho, low-sodium canned kidney beans, no-salt crushed tomato and low-sodium vegetable broth not cleared; select a quantified roast-and-blend vegetable soup."
+    },
+    {
+      "removed": "CACFP6-VEGETABLE-FRITTATA",
+      "replacement": "SNAP4-SPANISH-FRITTATA",
+      "reason": "Reduced-fat cheddar not cleared; independent egg/vegetable pancake source uses ordinary ingredients and an explicit frozen-corn alternative. Correction pass: Replace source-defined snack/side corn pancakes with a substantial six-egg/potato entree. Breakfast is an explicit curator occasion, not a source quotation; no side is relabelled as a main."
+    },
+    {
+      "removed": "CACFP6-CARROT-RAISIN-SALAD",
+      "replacement": "SNAP8-SOMALI-SUMMER-SALAD",
+      "reason": "Unsweetened pineapple canned in 100% juice not cleared; independent fresh-produce salad has explicit optional salt/pepper omission."
+    },
+    {
+      "removed": "CACFP6-MACARONI-SALAD",
+      "replacement": "HARV6-GARDEN-PASTA-SALAD",
+      "reason": "Whole-wheat pasta and canned pimientos not cleared; generic macaroni source preserved, including its cooked-volume quantity rather than invented dry weight."
+    },
+    {
+      "removed": "CACFP6-MARINATED-BLACK-BEAN-SALAD",
+      "replacement": "HARV6-FRESH-TOMATO-SALSA",
+      "reason": "Low-sodium canned black beans/salsa, ancho and reduced-fat cheddar not cleared; fresh tomato salsa provides a distinct condiment/vegetable preparation."
+    },
+    {
+      "removed": "CACFP6-QUICHE-SELF-FORMING-CRUST",
+      "replacement": "FNS2-ORANGE-PORK-CHOPS",
+      "reason": "Frozen liquid whole egg and reduced-fat cheddar not cleared; source-verified whole-potato microwave method adds a short single-serving preparation, not an invented quiche adaptation. Correction pass: Replace the single plain potato side with a measured pork-loin-chop main, sweet potato and orange; omit only source-explicit optional dash seasonings."
+    },
+    {
+      "removed": "CACFP6-ROPA-VIEJA",
+      "replacement": "SNAP8-APPLE-CARROT-SOUP",
+      "reason": "Low-sodium beef broth and parboiled brown rice not cleared; independently sourced long-simmer pork, apple and carrot soup. No beef or nutritional equivalence claimed."
+    },
+    {
+      "removed": "CACFP6-CORN-PUDDING",
+      "replacement": "SNAP6-PEACH-CRISP",
+      "reason": "White whole-grain cornmeal and no-salt cream-style corn not cleared; add a source-backed baked fruit/oat dessert."
+    },
+    {
+      "removed": "CACFP6-GREEN-BEANS-POTATOES-SMOKED-TURKEY",
+      "replacement": "SNAP5-KALE-NUTS-RAISINS",
+      "reason": "Smoked cooked turkey drumstick and trans-fat-free margarine not cleared; frozen green beans were initially unresolved and later evidenced, which alone does not clear the remaining recipe forms."
+    },
+    {
+      "removed": "CACFP6-TUNA-SALAD-SANDWICH",
+      "replacement": "SNAP6-WALDORF-SALAD",
+      "reason": "Whole-wheat roll and canned tuna-in-water forms not cleared; independently sourced apple/walnut salad, not a tuna substitution claim."
+    },
+    {
+      "removed": "CACFP6-TUSCAN-GRILL-CHEESE",
+      "replacement": "SNAP3-GRILLED-FRUIT",
+      "reason": "Whole-wheat bread, low-fat mozzarella and trans-fat-free margarine not cleared; independent grilling method with three ordinary fresh fruits."
+    },
+    {
+      "removed": "CACFP6-ASIAN-TUNA-BURGER",
+      "replacement": "SNAP6-SPINACH-APPLE-SALAD",
+      "reason": "Panko breadcrumbs, whole-wheat roll and low-sodium soy sauce not cleared; independent raw-leaf salad with reviewed cold-use canola oil."
+    },
+    {
+      "removed": "CACFP6-BEAN-BURRITO-BOWL",
+      "replacement": "FNS4-OVEN-FRIED-FISH",
+      "reason": "Low-sodium canned pinto beans, reduced-fat cheddar and parboiled brown rice not cleared; independently sourced boiled-and-mashed potato side. Correction pass: Replace another plain potato side with a second materially different fish preparation: breaded tilapia oven-baked using the measured source butter coating."
+    },
+    {
+      "removed": "CACFP6-VEGETABLE-FRITTATA-BITES",
+      "replacement": "TNC6-EGGS-SPINACH",
+      "reason": "Mandatory exclusion of ICN 2024 card: rights posture not cleared. Direct FNS Team Nutrition source has reviewed provenance and copying statement; no public-domain claim."
+    },
+    {
+      "removed": "CACFP6-CAULIFLOWER-RICE",
+      "replacement": "TNC6-APPLESAUCE",
+      "reason": "Mandatory exclusion of ICN 2024 card: rights posture not cleared. Direct FNS Team Nutrition source has reviewed provenance and copying statement; no public-domain claim."
+    }
   ],
   "selection_tradeoffs": [
-    "The core is a technical source/ingestion fixture, not a nutritionally balanced weekly menu or a launch-size product catalogue. It spans egg and oat breakfasts, poultry and fish mains, soups, cooked vegetables, grains, salads, a condiment, fruit desserts and a smoothie.",
+    "Diverse technical fixture, not a certified weekly plan: 8 real anchors across egg, fish, legume, meat and poultry families; 3 breakfasts, 2 soups plus lentil one-dish meal and at most12 pure sides. Selection is not optimized primarily for minimum ingredient union. The green smoothie is a distinct source-backed snack, not an inflated anchor.",
     "Most qualified concepts have only one evidenced panel chain. They are deliberately RU_AVAILABLE, not claimed RU_MASS_MARKET; commodity three-chain positives are retained where verified. Family practicality is an equipment/preparation assessment, not tested taste, cost, health, storage or child-safety certification.",
     "The original 119-code union is historical. Exact new union is mechanically derived from the selected rows; global183 catalogue remains unchanged. Unselected optional additions and source alternatives remain in the ingredient audit, not silently converted into required fixture ingredients.",
     "Additional rejected candidates and failures (unquantified required seasoning, missing global codes, wrong-form foods, source retrieval/notice gaps) remain in candidate-review-v2 through v5. No rejected candidate is a production recipe."
-  ]
+  ],
+  "correction_pass": {
+    "reviewed_head": "36c0cb82680fbc8a57ab4a78a41f363f3420d39d",
+    "retained_source_ids": [
+      "CACFP6-CORN-EDAMAME-BLEND",
+      "CACFP6-LOCAL-HARVEST-BAKE",
+      "CACFP6-TABBOULEH",
+      "CACFP6-HONEY-LIME-CHICKEN",
+      "CACFP6-CREAMY-COLESLAW",
+      "TNC6-EGGS-SPINACH",
+      "TNC6-APPLESAUCE",
+      "HARV6-FRESH-TOMATO-SALSA",
+      "HARV6-GARDEN-PASTA-SALAD",
+      "SNAP6-SPINACH-APPLE-SALAD",
+      "SNAP6-PEACH-CRISP",
+      "SNAP6-SEARED-GREENS",
+      "SNAP8-SOMALI-SUMMER-SALAD",
+      "WIC4-BUTTERNUT-SOUP",
+      "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+      "SNAP3-GRILLED-FRUIT",
+      "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
+      "SNAP4-PEAR-ORANGE-SAUCE",
+      "SNAP4-SPRING-VEGETABLE-SAUTE",
+      "SNAP8-APPLE-CARROT-SOUP",
+      "SNAP6-WALDORF-SALAD",
+      "SNAP4-BROWN-RICE-PILAF",
+      "SNAP5-KALE-NUTS-RAISINS",
+      "SNAP4-BRAISED-CHICKEN-SPINACH",
+      "SNAP4-DILLED-FISH-FILLETS"
+    ],
+    "replacements": [
+      {
+        "removed": "TNC6-CORN-ZUCCHINI-PANCAKES",
+        "replacement": "SNAP4-SPANISH-FRITTATA",
+        "reason": "Replace source-defined snack/side corn pancakes with a substantial six-egg/potato entree. Breakfast is an explicit curator occasion, not a source quotation; no side is relabelled as a main."
+      },
+      {
+        "removed": "HARV6-ROASTED-POTATOES",
+        "replacement": "FNS5-BAKED-LENTILS-CASSEROLE",
+        "reason": "Replace a redundant plain potato side with the source-described hearty lentil, vegetable and cheese dinner in one dish; adds a genuine legume anchor with measured required foods."
+      },
+      {
+        "removed": "SNAP1-MICROWAVE-BAKED-POTATO",
+        "replacement": "FNS2-ORANGE-PORK-CHOPS",
+        "reason": "Replace the single plain potato side with a measured pork-loin-chop main, sweet potato and orange; omit only source-explicit optional dash seasonings."
+      },
+      {
+        "removed": "WIC4-ROASTED-CARROTS",
+        "replacement": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+        "reason": "Replace a redundant plain roasted vegetable side with a source-defined fruit/greens snack using an explicit single frozen-fruit option. Select frozen strawberries, not the retained cauliflower/oat smoothie composition. This is not a meal anchor; four other new genuine anchors satisfy the guard without role inflation."
+      },
+      {
+        "removed": "SNAP8-HOMEMADE-MASHED-POTATOES",
+        "replacement": "FNS4-OVEN-FRIED-FISH",
+        "reason": "Replace another plain potato side with a second materially different fish preparation: breaded tilapia oven-baked using the measured source butter coating."
+      }
+    ]
+  }
 }

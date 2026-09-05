@@ -7,20 +7,29 @@ The default command fails closed unless the final successor exists and passes.
 from __future__ import annotations
 
 import argparse
+import ast
 from collections import Counter
 import csv
 from datetime import date
+import hashlib
 import json
 from io import StringIO
 from pathlib import Path
 import re
+import subprocess
 from urllib.parse import urlparse
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DIRECTORY = ROOT / "data/curation/pr4-data2"
 CHAINS = ("PYATEROCHKA", "PEREKRESTOK", "LENTA", "OKEY", "MAGNIT")
-CHAIN_NAMES = {"Лента": "LENTA", "О'КЕЙ": "OKEY"}
+CHAIN_NAMES = {
+    "Пятёрочка": "PYATEROCHKA",
+    "Перекрёсток": "PEREKRESTOK",
+    "Лента": "LENTA",
+    "О'КЕЙ": "OKEY",
+    "Магнит": "MAGNIT",
+}
 OBSERVATION_FILES = (
     "research-x5-v2.json",
     "research-x5-v3.json",
@@ -34,6 +43,7 @@ OBSERVATION_FILES = (
     "research-lenta-okey-v9.json",
     "research-magnit-v2.json",
     "research-panel-v3.json",
+    "research-correction-market.json",
 )
 FORBIDDEN = {
     "CACFP6-VEGETABLE-FRITTATA-BITES",
@@ -48,6 +58,268 @@ CSV_FIELDS = (
     "missing_reason",
 )
 SELECTED = {"SELECTED_REQUIRED", "SELECTED_OPTIONAL", "SELECTED_CONDITIONAL"}
+PR4_HEAD = "cd2285802c94735e0c9015042f9f4c0b52d68b85"
+PR4_ENUM_SHA256 = "86e61513ea1ae4373c1624d47e01e4bedf993ad6ccd433f0093d125da60a6552"
+SOURCE_FACT_FIELDS = (
+    "recipe_name",
+    "source_servings",
+    "source_url",
+    "source_sha256",
+    "meal_type_code",
+    "curation_role",
+    "meal_anchor",
+    "substantial_one_bowl",
+    "pure_side_dish",
+    "primary_protein_family",
+    "protein_evidence_codes",
+    "role_evidence",
+    "diversity_contribution",
+    "source_times",
+    "equipment",
+    "source_limits",
+)
+HANDBACK_METADATA_FIELDS = (
+    "source_collection",
+    "source_section",
+    "source_attribution",
+    "rights_review",
+    "source_artifact",
+    "source_quality_flags",
+    "checked_at",
+    "ordinary_equipment_assessment",
+    "selection",
+)
+PROTEIN_PATTERNS = {
+    "POULTRY": r"(?:CHICKEN|TURKEY)_(?!BROTH)[A-Z0-9_]+",
+    "FISH": r"(?:COD|SALMON|TUNA|TILAPIA)_[A-Z0-9_]+",
+    "MEAT": r"(?:BEEF|PORK)_(?!BROTH)[A-Z0-9_]+",
+    "EGG": r"EGG(?:_WHITE)?",
+    "LEGUME_TOFU": r"(?:TOFU|LENTILS|CHICKPEAS)_[A-Z0-9_]+|(?:WHITE|BLACK|KIDNEY|PINTO)_BEANS_[A-Z0-9_]+|BLACK_EYED_PEAS_DRY|GREEN_PEAS_CANNED|EDAMAME_FROZEN",
+    "GRAIN_VEGETABLE": r"(?:RICE|OATS|PASTA)_[A-Z0-9_]+|BUCKWHEAT|MILLET|BULGUR|QUINOA",
+}
+# These are curation consistency rules, not a parallel runtime enum.
+CURATION_ROLE_COMPATIBILITY = {
+    "BREAKFAST": {"breakfast"},
+    "MAIN_DISH": {"main"},
+    "SIDE_DISH": {"side", "salad"},
+    "SALAD": {"salad"},
+    "SANDWICH": {"sandwich"},
+    "SOUP": {"main", "other"},
+    "DESSERT": {"other"},
+    "SNACK": {"other"},
+    "CONDIMENT": {"other"},
+}
+
+
+def pr4_meal_type_codes(directory: Path = DIRECTORY, root: Path = ROOT) -> set[str]:
+    """Parse a pinned, verbatim runtime declaration without importing runtime.
+
+    Git-object comparison is an additional check when the reviewed PR exists
+    locally. A shallow/offline main checkout remains reproducible from the
+    integrity-pinned excerpt. No network or changing-branch lookup is performed.
+    """
+    document = read_json(directory / "pr4-meal-type-contract.json")
+    source = document["enum_source"]
+    if (
+        document.get("source_head") != PR4_HEAD
+        or document.get("source_path") != "backend/app/domain/food_recipes.py"
+        or hashlib.sha256(source.encode()).hexdigest() != PR4_ENUM_SHA256
+        or document.get("enum_source_sha256") != PR4_ENUM_SHA256
+    ):
+        raise ValueError("PR4 MealTypeCode pinned source integrity failed")
+    classes = [n for n in ast.parse(source).body if isinstance(n, ast.ClassDef)]
+    if len(classes) != 1 or classes[0].name != "MealTypeCode":
+        raise ValueError("PR4 MealTypeCode declaration missing")
+    values = {
+        node.value.value
+        for node in classes[0].body
+        if isinstance(node, ast.Assign)
+        and isinstance(node.value, ast.Constant)
+        and isinstance(node.value.value, str)
+    }
+    result = subprocess.run(
+        ["git", "show", f"{PR4_HEAD}:{document['source_path']}"],
+        cwd=root,
+        capture_output=True,
+        check=False,
+    )
+    if result.returncode == 0:
+        full_source = result.stdout.decode()
+        node = next(
+            n
+            for n in ast.parse(full_source).body
+            if isinstance(n, ast.ClassDef) and n.name == "MealTypeCode"
+        )
+        if ast.get_source_segment(full_source, node) + "\n" != source or hashlib.sha256(
+            result.stdout
+        ).hexdigest() != document.get("source_blob_sha256"):
+            raise ValueError("PR4 MealTypeCode differs from reviewed Git source")
+    return values
+
+
+def diversity_counts(recipes: list[dict]) -> dict:
+    anchors = [r for r in recipes if r.get("meal_anchor") is True]
+    return {
+        "meal_types": dict(
+            sorted(Counter(r.get("meal_type_code") for r in recipes).items())
+        ),
+        "curation_roles": dict(
+            sorted(Counter(r.get("curation_role") for r in recipes).items())
+        ),
+        "meal_anchors": len(anchors),
+        "substantial_one_bowl_meals": sum(
+            r.get("substantial_one_bowl") is True for r in recipes
+        ),
+        "primary_protein_families": dict(
+            sorted(
+                Counter(
+                    r["primary_protein_family"]
+                    for r in anchors
+                    if r.get("primary_protein_family")
+                ).items()
+            )
+        ),
+        "pure_side_dishes": sum(r.get("pure_side_dish") is True for r in recipes),
+    }
+
+
+def diversity_errors(
+    recipes: list[dict], source_rows: list[dict], allowed: set[str]
+) -> list[str]:
+    """Bounded factual guards, not a general semantic or nutrition validator."""
+    errors = []
+    for recipe in recipes:
+        recipe_id = recipe["recipe_source_id"]
+        codes = {
+            r["existing_food_ingredient_code"]
+            for r in source_rows
+            if r["source_recipe_id"] == recipe_id
+        }
+        if recipe.get("meal_type_code") not in allowed or "meal_type" in recipe:
+            errors.append(
+                f"Canonical meal_type_code violates PR4 contract: {recipe_id}"
+            )
+        compatible = CURATION_ROLE_COMPATIBILITY.get(recipe.get("curation_role"))
+        if (
+            compatible is not None and recipe.get("meal_type_code") not in compatible
+        ) or (
+            recipe.get("meal_type_code") == "breakfast"
+            and recipe.get("curation_role") != "BREAKFAST"
+        ):
+            errors.append(f"Curation role contradicts canonical meal type: {recipe_id}")
+        role_evidence = recipe.get("role_evidence")
+        if not nonempty_text(recipe.get("curation_role")) or not (
+            nonempty_text(role_evidence)
+            or isinstance(role_evidence, dict)
+            and all(
+                nonempty_text(role_evidence.get(key))
+                for key in ("source_words", "source_section", "curator_rationale")
+            )
+        ):
+            errors.append(f"Missing reviewed curation role evidence: {recipe_id}")
+        if any(
+            type(recipe.get(k)) is not bool
+            for k in ("meal_anchor", "substantial_one_bowl", "pure_side_dish")
+        ):
+            errors.append(f"Diversity flags must be explicit booleans: {recipe_id}")
+        anchor = recipe.get("meal_anchor") is True
+        family = recipe.get("primary_protein_family")
+        evidence = recipe.get("protein_evidence_codes", [])
+        if not isinstance(evidence, list) or not set(evidence) <= codes:
+            errors.append(
+                f"Protein evidence is not selected ingredient evidence: {recipe_id}"
+            )
+            evidence = []
+        if family is not None and (
+            family not in PROTEIN_PATTERNS
+            or not evidence
+            or any(
+                not re.fullmatch(PROTEIN_PATTERNS[family], code) for code in evidence
+            )
+        ):
+            errors.append(
+                f"Primary protein family contradicts selected codes: {recipe_id}"
+            )
+        if anchor and (
+            family is None
+            or recipe.get("pure_side_dish") is True
+            or recipe.get("meal_type_code")
+            not in {"breakfast", "main", "sandwich", "salad"}
+            or recipe.get("curation_role")
+            in {"SIDE_DISH", "DESSERT", "SNACK", "CONDIMENT"}
+        ):
+            errors.append(f"Unsupported meal-anchor claim: {recipe_id}")
+        if recipe.get("substantial_one_bowl") is True and not (
+            recipe.get("curation_role") == "SOUP" or anchor
+        ):
+            errors.append(f"Unsupported soup/substantial one-bowl claim: {recipe_id}")
+        if (
+            recipe.get("meal_type_code") == "side"
+            or recipe.get("curation_role") == "SIDE_DISH"
+        ) and recipe.get("pure_side_dish") is not True:
+            errors.append(
+                f"Source side role cannot be hidden from side count: {recipe_id}"
+            )
+        if recipe.get("pure_side_dish") is True and recipe.get(
+            "meal_type_code"
+        ) not in {"side", "salad"}:
+            errors.append(
+                f"Pure-side role contradicts canonical meal type: {recipe_id}"
+            )
+        # Positive diversity descriptions must not name absent protein foods.
+        # This deliberately narrow vocabulary catches the known corruption class;
+        # provenance and reviewed role checks remain necessary for other claims.
+        claims = str(recipe.get("diversity_contribution", "")).lower()
+        for words, pattern in (
+            (r"\bpork\b|\bswine\b", r"PORK_.*"),
+            (r"\bbeef\b", r"BEEF_(?!BROTH).*"),
+            (r"\bchicken\b", r"CHICKEN_(?!BROTH).*"),
+            (r"\bturkey\b", r"TURKEY_.*"),
+            (r"\bpoultry\b", PROTEIN_PATTERNS["POULTRY"]),
+            (r"\bfish\b|\bcod\b|\bsalmon\b|\btuna\b", PROTEIN_PATTERNS["FISH"]),
+            (r"\beggs?\b", PROTEIN_PATTERNS["EGG"]),
+            (r"\btofu\b", r"TOFU_.*"),
+        ):
+            if re.search(words, claims) and not any(
+                re.fullmatch(pattern, code) for code in codes
+            ):
+                errors.append(
+                    f"Diversity protein claim contradicts selected codes: {recipe_id}"
+                )
+        if recipe_id == "CACFP6-LOCAL-HARVEST-BAKE" and (
+            recipe.get("meal_type_code") != "side"
+            or recipe.get("curation_role") != "SIDE_DISH"
+            or anchor
+            or recipe.get("pure_side_dish") is not True
+            or family is not None
+            or any(
+                re.fullmatch(PROTEIN_PATTERNS[f], code)
+                for f in ("MEAT", "POULTRY", "FISH")
+                for code in codes
+            )
+            or re.search(r"\bpork\b|\bmain\b", claims)
+        ):
+            errors.append("Local Harvest Bake is a vegetable side, not a pork main")
+    counts = diversity_counts(recipes)
+    for condition, message in (
+        (counts["meal_anchors"] >= 8, "Diversity requires >=8 meal anchors"),
+        (
+            counts["meal_types"].get("breakfast", 0) >= 3,
+            "Diversity requires >=3 breakfasts",
+        ),
+        (
+            counts["substantial_one_bowl_meals"] >= 2,
+            "Diversity requires >=2 soups/substantial one-bowl meals",
+        ),
+        (
+            len(counts["primary_protein_families"]) >= 3,
+            "Diversity requires >=3 primary protein families",
+        ),
+        (counts["pure_side_dishes"] <= 12, "Diversity requires <=12 pure side dishes"),
+    ):
+        if not condition:
+            errors.append(message)
+    return errors
 
 
 def read_json(path: Path) -> dict:
@@ -591,6 +863,8 @@ def corpus_counts(
     draft = read_json(directory / "draft-ingredient-coverage.json")["recipes"]
     equipment = [item for recipe in recipes for item in recipe["equipment"]]
     decisions = Counter(r["selection"]["decision"] for r in recipes)
+    with (ROOT / "data/seed/food_ingredients/ingredients.csv").open() as handle:
+        global_codes = {r["canonical_code"] for r in csv.DictReader(handle)}
     return {
         "recipes": len(recipes),
         "retained": decisions["KEEP"],
@@ -602,10 +876,167 @@ def corpus_counts(
         ),
         "equipment_rows": len(equipment),
         "distinct_equipment_codes": len({e["equipment_code"] for e in equipment}),
-        "unresolved_required_rows": 0,
-        "new_food_ingredients": 0,
-        "meal_types": dict(Counter(r["meal_type"] for r in recipes)),
+        "unresolved_required_rows": sum(
+            r["ingredient_selection"] == "SELECTED_REQUIRED"
+            and r["resolution_status"] != "RESOLVED_EXISTING"
+            for r in source_rows
+        ),
+        "new_food_ingredients": len(
+            {r["existing_food_ingredient_code"] for r in source_rows} - global_codes
+        ),
+        **diversity_counts(recipes),
     }
+
+
+def reviewed_recipe_summaries(directory: Path = DIRECTORY) -> list[dict]:
+    """Derive final recipe facts and summaries from reviews, never the manifest.
+
+    The source consistency audit is the human-reviewed input; ingredient and
+    market summaries are calculated from the source-row/form joins. Additional
+    raw audit notes stay in the review artifact rather than leaking into runtime.
+    """
+    audited = read_json(directory / "source-consistency-audit.json")["recipes"]
+    source_recipes = {
+        r["source_recipe_id"]: r
+        for r in read_json(directory / "draft-ingredient-coverage.json")["recipes"]
+    }
+    rows = selected_source_rows(directory)
+    forms = json.loads(build_final_evidence(directory)["purchase-form-review.json"])[
+        "rows"
+    ]
+    recipes = []
+    for audit in audited:
+        recipe_id = audit["recipe_source_id"]
+        selected = [r for r in rows if r["source_recipe_id"] == recipe_id]
+        reviewed = [r for r in forms if r["source_recipe_id"] == recipe_id]
+        concepts = {
+            (r["food_ingredient_code"], r.get("purchase_form_review_id")): r[
+                "market_classification"
+            ]
+            for r in reviewed
+            if r["ingredient_selection"] == "SELECTED_REQUIRED"
+            and r["food_ingredient_code"] != "WATER"
+        }
+        categories = Counter(concepts.values())
+        recipes.append(
+            {
+                "recipe_source_id": recipe_id,
+                **{
+                    field: audit[field]
+                    for field in SOURCE_FACT_FIELDS + HANDBACK_METADATA_FIELDS
+                },
+                "source_ingredient_rows": len(source_recipes[recipe_id]["rows"]),
+                "selected_ingredient_rows": len(selected),
+                "distinct_food_ingredient_codes": sorted(
+                    {r["existing_food_ingredient_code"] for r in selected}
+                ),
+                "market_summary": {
+                    "required_concepts": len(concepts),
+                    "RU_MASS_MARKET": categories["RU_MASS_MARKET"],
+                    "RU_AVAILABLE": categories["RU_AVAILABLE"],
+                    "SPECIALTY_OR_UNCLEAR": categories["SPECIALTY_OR_UNCLEAR"],
+                    "household_water": len(
+                        {
+                            r["food_ingredient_code"]
+                            for r in reviewed
+                            if r["food_ingredient_code"] == "WATER"
+                        }
+                    ),
+                },
+            }
+        )
+    return recipes
+
+
+def build_final_corpus(directory: Path = DIRECTORY) -> str:
+    """Serialize only reviewed handback inputs; no network, database or writes."""
+    document = read_json(directory / "source-consistency-audit.json")
+    envelope = document["corpus_metadata"]
+    if set(envelope) != {
+        "schema_version",
+        "status",
+        "checked_at",
+        "base_sha",
+        "scope",
+        "count_semantics",
+    }:
+        raise ValueError("Reviewed corpus envelope fields are incomplete or unexpected")
+    recipes = reviewed_recipe_summaries(directory)
+    corpus = {
+        **envelope,
+        "counts": corpus_counts(recipes, selected_source_rows(directory), directory),
+        "recipes": recipes,
+    }
+    return json.dumps(corpus, ensure_ascii=False, indent=2) + "\n"
+
+
+def source_consistency_errors(
+    recipes: list[dict], source_rows: list[dict], directory: Path
+) -> list[str]:
+    """Compare final claims to the independently reviewed primary-source audit."""
+    document = read_json(directory / "source-consistency-audit.json")
+    audits = document["recipes"]
+    ids = [r["recipe_source_id"] for r in audits]
+    if (
+        document.get("status") != "REVIEWED"
+        or len(ids) != len(set(ids))
+        or set(ids) != {r["recipe_source_id"] for r in recipes}
+    ):
+        return ["Source consistency audit must review exactly the final recipes"]
+    by_id = {r["recipe_source_id"]: r for r in audits}
+    errors = []
+    for recipe in recipes:
+        recipe_id = recipe["recipe_source_id"]
+        audit = by_id[recipe_id]
+        for field in SOURCE_FACT_FIELDS:
+            if field not in audit or recipe.get(field) != audit[field]:
+                errors.append(
+                    f"Recipe differs from reviewed source fact {field}: {recipe_id}"
+                )
+        codes = sorted(
+            {
+                r["existing_food_ingredient_code"]
+                for r in source_rows
+                if r["source_recipe_id"] == recipe_id
+            }
+        )
+        if audit.get("selected_ingredient_codes") != codes:
+            errors.append(
+                f"Source consistency selected concepts differ from ingredient audit: {recipe_id}"
+            )
+    return errors
+
+
+def selection_errors(recipes: list[dict], directory: Path, root: Path) -> list[str]:
+    decisions = read_json(directory / "replacement-decisions.json")
+    with (root / "data/curation/pr4/ingredient-coverage.csv").open() as handle:
+        original_ids = {r["source_recipe_id"] for r in csv.DictReader(handle)}
+    kept = decisions["kept_source_ids"]
+    replacements = decisions["replacements"]
+    removed = [r["removed"] for r in replacements]
+    added = [r["replacement"] for r in replacements]
+    by_id = {r["recipe_source_id"]: r for r in recipes}
+    if (
+        len(kept) != len(set(kept))
+        or len(removed) != len(set(removed))
+        or len(added) != len(set(added))
+        or set(kept) & set(removed)
+        or set(kept) | set(removed) != original_ids
+        or set(kept) | set(added) != set(by_id)
+        or set(kept) & set(added)
+        or any(not nonempty_text(r.get("reason")) for r in replacements)
+    ):
+        return [
+            "Keep/replacement decisions must partition original and final corpus exactly"
+        ]
+    errors = []
+    for recipe_id, recipe in by_id.items():
+        expected = "KEEP" if recipe_id in kept else "REPLACE"
+        if recipe.get("selection", {}).get("decision") != expected:
+            errors.append(
+                f"Recipe selection contradicts keep/replacement decision: {recipe_id}"
+            )
+    return errors
 
 
 def metadata_errors(
@@ -617,6 +1048,8 @@ def metadata_errors(
         r["source_recipe_id"]: r
         for r in read_json(directory / "draft-ingredient-coverage.json")["recipes"]
     }
+    if set(draft) != {r["recipe_source_id"] for r in recipes}:
+        errors.append("Ingredient source audit must cover exactly final recipes")
     registry = {
         (r["source_url"], r["sha256"])
         for r in read_json(directory / "source-downloads.json")["documents"]
@@ -635,6 +1068,13 @@ def metadata_errors(
             for r in read_json(directory / "recipe-review-metadata.json")["recipes"]
         }
     )
+    current_audit = directory / "source-consistency-audit.json"
+    if current_audit.exists():
+        # Final correction-pass review supersedes earlier equipment decisions.
+        # Historical audit files remain unchanged and independently tested.
+        source_equipment.update(
+            {r["recipe_source_id"]: r for r in read_json(current_audit)["recipes"]}
+        )
     for recipe in recipes:
         recipe_id = recipe["recipe_source_id"]
         selected = [r for r in source_rows if r["source_recipe_id"] == recipe_id]
@@ -723,7 +1163,7 @@ def metadata_errors(
                     errors.append(f"Equipment not source-backed/selected: {recipe_id}")
         if (
             not nonempty_text(recipe.get("source_attribution"))
-            or not nonempty_text(recipe.get("meal_type"))
+            or not nonempty_text(recipe.get("meal_type_code"))
             or not nonempty_text(recipe.get("diversity_contribution"))
             or not isinstance(recipe.get("source_times"), (dict, str))
             or not isinstance(recipe.get("selection"), dict)
@@ -834,10 +1274,8 @@ def final_errors(directory: Path = DIRECTORY, root: Path = ROOT) -> list[str]:
         manifest = (
             (directory / "mvp0-food-ingredient-codes.txt").read_text().splitlines()
         )
-        if not union or len(union) > 120 or manifest != sorted(union):
-            errors.append(
-                "Final manifest must be the exact sorted nonempty union <=120"
-            )
+        if not 80 <= len(union) <= 120 or manifest != sorted(union):
+            errors.append("Final manifest must be the exact sorted union 80..120")
         document = read_json(directory / "purchase-form-review.json")
         reviews = document["rows"]
         if document.get("schema_version") != 1 or document.get("status") != "REVIEWED":
@@ -925,8 +1363,19 @@ def final_errors(directory: Path = DIRECTORY, root: Path = ROOT) -> list[str]:
                     "Five-chain positives disagree with form-qualified evidence"
                 )
         errors.extend(metadata_errors(recipes, expected_sources, reviews, directory))
+        errors.extend(
+            diversity_errors(
+                recipes, expected_sources, pr4_meal_type_codes(directory, root)
+            )
+        )
+        errors.extend(source_consistency_errors(recipes, expected_sources, directory))
+        errors.extend(selection_errors(recipes, directory, root))
         if corpus.get("counts") != corpus_counts(recipes, expected_sources, directory):
             errors.append("Final corpus counts disagree with reviewed rows/equipment")
+        if corpus_path.read_text(encoding="utf-8") != build_final_corpus(directory):
+            errors.append(
+                "Final corpus not reproducible from reviewed source artifacts"
+            )
     except (
         OSError,
         ValueError,
@@ -952,7 +1401,15 @@ def main() -> int:
         action="store_true",
         help="Serialize explicit source/form reviews as artifact-name/content JSON; not rights acceptance",
     )
+    parser.add_argument(
+        "--final-corpus",
+        action="store_true",
+        help="Serialize recipe corpus from reviewed source facts and exact source/form joins",
+    )
     args = parser.parse_args()
+    if args.final_corpus:
+        print(build_final_corpus(), end="")
+        return 0
     if args.final_evidence:
         print(json.dumps(build_final_evidence(), ensure_ascii=False))
         return 0

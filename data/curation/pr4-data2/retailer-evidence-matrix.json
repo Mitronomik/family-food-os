@@ -1123,9 +1123,12 @@
       "notes": "Canned product ingredient list has no added salt. This proves no added salt, not zero intrinsic sodium. Current neutral page/reviews 2026-09-03; transient sold-out is not a corpus availability blocker under issue clarification.",
       "stock_claim": false,
       "source_observation_ids": [
-        "research-lenta-okey-v2.json:16"
+        "research-lenta-okey-v2.json:16",
+        "research-correction-market.json:6"
       ],
-      "aliases": [],
+      "aliases": [
+        "research-correction-market.json:6"
+      ],
       "source_observations": [
         {
           "observation_id": "research-lenta-okey-v2.json:16",
@@ -1140,6 +1143,21 @@
           "evidence_method": "current_official_indexed_catalogue",
           "status": "AVAILABLE",
           "notes": "Canned product ingredient list has no added salt. This proves no added salt, not zero intrinsic sodium. Current neutral page/reviews 2026-09-03; transient sold-out is not a corpus availability blocker under issue clarification.",
+          "stock_claim": false
+        },
+        {
+          "observation_id": "research-correction-market.json:6",
+          "food_ingredient_code": "TOMATO_CANNED_NO_SALT",
+          "retailer_chain": "LENTA",
+          "region": "Saint Petersburg / Leningrad Region",
+          "checked_at": "2026-09-05",
+          "evidence_url": "https://lenta.com/product/tomaty-kusochkami-v-tomatnom-soke-zhb-italiya-400g-542921/",
+          "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+          "observed_product_wording": "Томаты DOLCE ALBERO кусочками в томатном соке, 400г; composition: cut tomatoes, tomato juice, citric acid.",
+          "purchase_concept": null,
+          "evidence_method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+          "status": "AVAILABLE",
+          "notes": "Current official neutral page indexed yesterday and product composition inspected. Canned cut tomatoes with no added salt in the complete declared ingredient list. Supports no-salt-added purchase selection, not sodium-free certification or a measured nutrient claim. Not tomato paste, ketchup, salted passata, or fresh tomatoes.",
           "stock_claim": false
         }
       ],
@@ -3619,9 +3637,12 @@
       "notes": "Named current official neutral product listing; paired explicit Saint Petersburg delivery evidence. Catalogue compatibility, not live selected-store stock.",
       "stock_claim": false,
       "source_observation_ids": [
-        "research-lenta-okey-v3.json:25"
+        "research-lenta-okey-v3.json:25",
+        "research-correction-market.json:3"
       ],
-      "aliases": [],
+      "aliases": [
+        "research-correction-market.json:3"
+      ],
       "source_observations": [
         {
           "observation_id": "research-lenta-okey-v3.json:25",
@@ -3636,6 +3657,21 @@
           "evidence_method": "current_official_region_neutral_index",
           "status": "AVAILABLE",
           "notes": "Named current official neutral product listing; paired explicit Saint Petersburg delivery evidence. Catalogue compatibility, not live selected-store stock.",
+          "stock_claim": false
+        },
+        {
+          "observation_id": "research-correction-market.json:3",
+          "food_ingredient_code": "BREADCRUMBS",
+          "retailer_chain": "LENTA",
+          "region": "Saint Petersburg / Leningrad Region",
+          "checked_at": "2026-09-05",
+          "evidence_url": "https://lenta.com/product/suhari-panirovochnye-lenta-rossiya-200g-638246/",
+          "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+          "observed_product_wording": "Сухари панировочные ЛЕНТА, 200г",
+          "purchase_concept": null,
+          "evidence_method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+          "status": "AVAILABLE",
+          "notes": "Current official neutral page indexed yesterday. Plain wheat breadcrumbs intended for breading fish/meat/vegetables, not seasoned mix, panko-only concept, or breadcrumbs hidden inside a ready meal. Ordinary grocery purchase concept.",
           "stock_claim": false
         }
       ],
@@ -6760,20 +6796,460 @@
         "AVAILABLE"
       ],
       "status_basis": "All raw observations agree; inspect each source form."
+    },
+    {
+      "observation_id": "research-correction-market.json:1",
+      "food_ingredient_code": "TILAPIA_RAW",
+      "retailer_chain": "LENTA",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "evidence_url": "https://lenta.com/product/tilapiya-file-premium-razmorozhennoe-rossiya-474037/",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "observed_product_wording": "Тилапия филе (из замороженного сырья) Премиум ЛЕНТА FRESH, весовая",
+      "purchase_concept": null,
+      "evidence_method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "status": "AVAILABLE",
+      "notes": "Current official neutral page indexed today. Plain raw thawed tilapia fillet, sole ingredient tilapia; not cooked fish or a prepared breaded product. Source explicitly permits fresh or frozen-and-thawed tilapia. No yield conversion.",
+      "stock_claim": false,
+      "source_observation_ids": [
+        "research-correction-market.json:1"
+      ],
+      "aliases": [],
+      "source_observations": [
+        {
+          "observation_id": "research-correction-market.json:1",
+          "food_ingredient_code": "TILAPIA_RAW",
+          "retailer_chain": "LENTA",
+          "region": "Saint Petersburg / Leningrad Region",
+          "checked_at": "2026-09-05",
+          "evidence_url": "https://lenta.com/product/tilapiya-file-premium-razmorozhennoe-rossiya-474037/",
+          "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+          "observed_product_wording": "Тилапия филе (из замороженного сырья) Премиум ЛЕНТА FRESH, весовая",
+          "purchase_concept": null,
+          "evidence_method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+          "status": "AVAILABLE",
+          "notes": "Current official neutral page indexed today. Plain raw thawed tilapia fillet, sole ingredient tilapia; not cooked fish or a prepared breaded product. Source explicitly permits fresh or frozen-and-thawed tilapia. No yield conversion.",
+          "stock_claim": false
+        }
+      ],
+      "source_statuses": [
+        "AVAILABLE"
+      ],
+      "status_basis": "All raw observations agree; inspect each source form."
+    },
+    {
+      "observation_id": "research-correction-market.json:2",
+      "food_ingredient_code": "TILAPIA_RAW",
+      "retailer_chain": "LENTA",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "evidence_url": "https://lenta.com/product/tilapiya-file-sm-rossiya-500g-428531/",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "observed_product_wording": "Тилапия замороженная ЛЕНТА филе, 500г",
+      "purchase_concept": null,
+      "evidence_method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "status": "AVAILABLE",
+      "notes": "Current official neutral page indexed two days ago. Raw frozen fillets, tilapia and drinking-water glaze. An explicitly source-permitted frozen-and-thawed alternative; not a second qualifying chain. No glaze-to-edible mass conversion.",
+      "stock_claim": false,
+      "source_observation_ids": [
+        "research-correction-market.json:2"
+      ],
+      "aliases": [],
+      "source_observations": [
+        {
+          "observation_id": "research-correction-market.json:2",
+          "food_ingredient_code": "TILAPIA_RAW",
+          "retailer_chain": "LENTA",
+          "region": "Saint Petersburg / Leningrad Region",
+          "checked_at": "2026-09-05",
+          "evidence_url": "https://lenta.com/product/tilapiya-file-sm-rossiya-500g-428531/",
+          "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+          "observed_product_wording": "Тилапия замороженная ЛЕНТА филе, 500г",
+          "purchase_concept": null,
+          "evidence_method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+          "status": "AVAILABLE",
+          "notes": "Current official neutral page indexed two days ago. Raw frozen fillets, tilapia and drinking-water glaze. An explicitly source-permitted frozen-and-thawed alternative; not a second qualifying chain. No glaze-to-edible mass conversion.",
+          "stock_claim": false
+        }
+      ],
+      "source_statuses": [
+        "AVAILABLE"
+      ],
+      "status_basis": "All raw observations agree; inspect each source form."
+    },
+    {
+      "observation_id": "research-correction-market.json:4",
+      "food_ingredient_code": "LENTILS_DRY",
+      "retailer_chain": "LENTA",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "evidence_url": "https://lenta.com/product/chechevica-zelenaya-prodovolstvennaya-kalibrovannaya-rossiya-450g-440340/",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "observed_product_wording": "Чечевица зеленая ЛЕНТА калиброванная, 450г",
+      "purchase_concept": null,
+      "evidence_method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "status": "AVAILABLE",
+      "notes": "Current official neutral page indexed today. Plain dry whole green lentils; select whole lentils within source generic lentils, not canned cooked lentils or split red lentils requiring an unreviewed method change.",
+      "stock_claim": false,
+      "source_observation_ids": [
+        "research-correction-market.json:4"
+      ],
+      "aliases": [],
+      "source_observations": [
+        {
+          "observation_id": "research-correction-market.json:4",
+          "food_ingredient_code": "LENTILS_DRY",
+          "retailer_chain": "LENTA",
+          "region": "Saint Petersburg / Leningrad Region",
+          "checked_at": "2026-09-05",
+          "evidence_url": "https://lenta.com/product/chechevica-zelenaya-prodovolstvennaya-kalibrovannaya-rossiya-450g-440340/",
+          "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+          "observed_product_wording": "Чечевица зеленая ЛЕНТА калиброванная, 450г",
+          "purchase_concept": null,
+          "evidence_method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+          "status": "AVAILABLE",
+          "notes": "Current official neutral page indexed today. Plain dry whole green lentils; select whole lentils within source generic lentils, not canned cooked lentils or split red lentils requiring an unreviewed method change.",
+          "stock_claim": false
+        }
+      ],
+      "source_statuses": [
+        "AVAILABLE"
+      ],
+      "status_basis": "All raw observations agree; inspect each source form."
+    },
+    {
+      "observation_id": "research-correction-market.json:5",
+      "food_ingredient_code": "LENTILS_DRY",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "evidence_url": "https://magnit.ru/product/1000108780-chechevitsa_zelenaya_tselaya_td_kholding_400g?shopCode=782972&shopType=1",
+      "region_evidence_url": "https://magnit.ru/product/1000108780-chechevitsa_zelenaya_tselaya_td_kholding_400g?shopCode=782972&shopType=1",
+      "observed_product_wording": "Чечевица зелёная целая Premiere of Taste, 400г",
+      "purchase_concept": null,
+      "evidence_method": "CURRENT_SEARCH_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "status": "AVAILABLE",
+      "notes": "Current official product indexed three weeks ago, explicitly Санкт-Петербург, Шушары, Вилеровский переулок, 8, литера А. Plain dry whole green lentils. Product title and body have a package-weight inconsistency (400g versus 0.45kg); no package mass is imported or used to normalize recipe quantities.",
+      "stock_claim": false,
+      "source_observation_ids": [
+        "research-correction-market.json:5"
+      ],
+      "aliases": [],
+      "source_observations": [
+        {
+          "observation_id": "research-correction-market.json:5",
+          "food_ingredient_code": "LENTILS_DRY",
+          "retailer_chain": "MAGNIT",
+          "region": "Saint Petersburg / Leningrad Region",
+          "checked_at": "2026-09-05",
+          "evidence_url": "https://magnit.ru/product/1000108780-chechevitsa_zelenaya_tselaya_td_kholding_400g?shopCode=782972&shopType=1",
+          "region_evidence_url": "https://magnit.ru/product/1000108780-chechevitsa_zelenaya_tselaya_td_kholding_400g?shopCode=782972&shopType=1",
+          "observed_product_wording": "Чечевица зелёная целая Premiere of Taste, 400г",
+          "purchase_concept": null,
+          "evidence_method": "CURRENT_SEARCH_INDEXED_OFFICIAL_SPB_PRODUCT",
+          "status": "AVAILABLE",
+          "notes": "Current official product indexed three weeks ago, explicitly Санкт-Петербург, Шушары, Вилеровский переулок, 8, литера А. Plain dry whole green lentils. Product title and body have a package-weight inconsistency (400g versus 0.45kg); no package mass is imported or used to normalize recipe quantities.",
+          "stock_claim": false
+        }
+      ],
+      "source_statuses": [
+        "AVAILABLE"
+      ],
+      "status_basis": "All raw observations agree; inspect each source form."
+    },
+    {
+      "observation_id": "research-correction-market.json:7",
+      "food_ingredient_code": "TOMATO_CANNED_NO_SALT",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "evidence_url": "https://magnit.ru/product/1000216768-tomaty_premier_of_taste_rezanye_v_sobstvennom_soku_400g?shopCode=784364&shopType=1",
+      "region_evidence_url": "https://magnit.ru/product/1000216768-tomaty_premier_of_taste_rezanye_v_sobstvennom_soku_400g?shopCode=784364&shopType=1",
+      "observed_product_wording": "Томаты резаные в собственном соку Premiere of Taste, 400г; composition: peeled cut tomatoes, directly pressed tomato juice, citric acid.",
+      "purchase_concept": null,
+      "evidence_method": "CURRENT_SEARCH_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "status": "AVAILABLE",
+      "notes": "Current official product indexed last month, explicitly Санкт-Петербург, Дачный проспект, 18, литера А. Official complete ingredient declaration contains no added salt. Consumer reviews are not relied on. No claim of zero naturally occurring sodium.",
+      "stock_claim": false,
+      "source_observation_ids": [
+        "research-correction-market.json:7"
+      ],
+      "aliases": [],
+      "source_observations": [
+        {
+          "observation_id": "research-correction-market.json:7",
+          "food_ingredient_code": "TOMATO_CANNED_NO_SALT",
+          "retailer_chain": "MAGNIT",
+          "region": "Saint Petersburg / Leningrad Region",
+          "checked_at": "2026-09-05",
+          "evidence_url": "https://magnit.ru/product/1000216768-tomaty_premier_of_taste_rezanye_v_sobstvennom_soku_400g?shopCode=784364&shopType=1",
+          "region_evidence_url": "https://magnit.ru/product/1000216768-tomaty_premier_of_taste_rezanye_v_sobstvennom_soku_400g?shopCode=784364&shopType=1",
+          "observed_product_wording": "Томаты резаные в собственном соку Premiere of Taste, 400г; composition: peeled cut tomatoes, directly pressed tomato juice, citric acid.",
+          "purchase_concept": null,
+          "evidence_method": "CURRENT_SEARCH_INDEXED_OFFICIAL_SPB_PRODUCT",
+          "status": "AVAILABLE",
+          "notes": "Current official product indexed last month, explicitly Санкт-Петербург, Дачный проспект, 18, литера А. Official complete ingredient declaration contains no added salt. Consumer reviews are not relied on. No claim of zero naturally occurring sodium.",
+          "stock_claim": false
+        }
+      ],
+      "source_statuses": [
+        "AVAILABLE"
+      ],
+      "status_basis": "All raw observations agree; inspect each source form."
+    },
+    {
+      "observation_id": "research-correction-market.json:8",
+      "food_ingredient_code": "CHEESE_CHEDDAR",
+      "retailer_chain": "LENTA",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "evidence_url": "https://lenta.com/product/syr-polutverdyjj-chedder-45-brusok-bez-zmzh-belarus-200g-734869/",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "observed_product_wording": "Сыр полутвердый БРЕСТ-ЛИТОВСК Чеддер 45%, без змж, 200г",
+      "purchase_concept": null,
+      "evidence_method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "status": "AVAILABLE",
+      "notes": "Current official neutral page indexed today. Ordinary natural semi-hard block cheddar made from milk, not processed cheese slices, cheese sauce, or reduced-fat cheese. Shredding is source preparation, not a required retail form. Dry-matter fat labeling is not converted to a recipe fat quantity.",
+      "stock_claim": false,
+      "source_observation_ids": [
+        "research-correction-market.json:8"
+      ],
+      "aliases": [],
+      "source_observations": [
+        {
+          "observation_id": "research-correction-market.json:8",
+          "food_ingredient_code": "CHEESE_CHEDDAR",
+          "retailer_chain": "LENTA",
+          "region": "Saint Petersburg / Leningrad Region",
+          "checked_at": "2026-09-05",
+          "evidence_url": "https://lenta.com/product/syr-polutverdyjj-chedder-45-brusok-bez-zmzh-belarus-200g-734869/",
+          "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+          "observed_product_wording": "Сыр полутвердый БРЕСТ-ЛИТОВСК Чеддер 45%, без змж, 200г",
+          "purchase_concept": null,
+          "evidence_method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+          "status": "AVAILABLE",
+          "notes": "Current official neutral page indexed today. Ordinary natural semi-hard block cheddar made from milk, not processed cheese slices, cheese sauce, or reduced-fat cheese. Shredding is source preparation, not a required retail form. Dry-matter fat labeling is not converted to a recipe fat quantity.",
+          "stock_claim": false
+        }
+      ],
+      "source_statuses": [
+        "AVAILABLE"
+      ],
+      "status_basis": "All raw observations agree; inspect each source form."
+    },
+    {
+      "observation_id": "research-correction-market.json:9",
+      "food_ingredient_code": "CHEESE_CHEDDAR",
+      "retailer_chain": "PYATEROCHKA",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "evidence_url": "https://5ka.ru/catalog/syr--251C13095/",
+      "region_evidence_url": "https://rabota.x5.ru/dostavka/rabota-v-x5/",
+      "observed_product_wording": "Official cheese category lists Сыр Le Superbe Чеддер 50% БЗМЖ 150г.",
+      "purchase_concept": null,
+      "evidence_method": "CURRENT_SEARCH_INDEXED_OFFICIAL_REGION_NEUTRAL_CATALOGUE_PLUS_OFFICIAL_SPB_PRESENCE",
+      "status": "AVAILABLE",
+      "notes": "Current search-indexed official region-neutral category, indexed three months ago; live open failed, so the underlying official category URL and exact product wording are retained for review. No city binding was shown. Separate current X5 official delivery-employment page identifies delivery from Pyaterochka and Perekrestok stores and picker operations in Saint Petersburg. Premium brand alone is not the plausibility basis: the ordinary Lenta Belarus-made cheddar corroborates a non-specialist canonical purchase concept.",
+      "stock_claim": false,
+      "source_observation_ids": [
+        "research-correction-market.json:9"
+      ],
+      "aliases": [],
+      "source_observations": [
+        {
+          "observation_id": "research-correction-market.json:9",
+          "food_ingredient_code": "CHEESE_CHEDDAR",
+          "retailer_chain": "PYATEROCHKA",
+          "region": "Saint Petersburg / Leningrad Region",
+          "checked_at": "2026-09-05",
+          "evidence_url": "https://5ka.ru/catalog/syr--251C13095/",
+          "region_evidence_url": "https://rabota.x5.ru/dostavka/rabota-v-x5/",
+          "observed_product_wording": "Official cheese category lists Сыр Le Superbe Чеддер 50% БЗМЖ 150г.",
+          "purchase_concept": null,
+          "evidence_method": "CURRENT_SEARCH_INDEXED_OFFICIAL_REGION_NEUTRAL_CATALOGUE_PLUS_OFFICIAL_SPB_PRESENCE",
+          "status": "AVAILABLE",
+          "notes": "Current search-indexed official region-neutral category, indexed three months ago; live open failed, so the underlying official category URL and exact product wording are retained for review. No city binding was shown. Separate current X5 official delivery-employment page identifies delivery from Pyaterochka and Perekrestok stores and picker operations in Saint Petersburg. Premium brand alone is not the plausibility basis: the ordinary Lenta Belarus-made cheddar corroborates a non-specialist canonical purchase concept.",
+          "stock_claim": false
+        }
+      ],
+      "source_statuses": [
+        "AVAILABLE"
+      ],
+      "status_basis": "All raw observations agree; inspect each source form."
+    },
+    {
+      "observation_id": "research-correction-market.json:10",
+      "food_ingredient_code": "PORK_LOIN",
+      "retailer_chain": "LENTA",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "evidence_url": "https://lenta.com/product/svinina-korejjka-premium-polufabrikat-ohlazhdennyjj-rossiya-70099/",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "observed_product_wording": "Корейка свиная Премиум ЛЕНТА FRESH; raw chilled boneless pork loin, sole ingredient pork.",
+      "purchase_concept": null,
+      "evidence_method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "status": "AVAILABLE",
+      "notes": "Current official neutral product indexed today and full attributes inspected: На кости — Нет; Режим охлаждения — Охлажденный; Часть туши — Корейка. Ordinary plain raw boneless loin can be selected for generic pork chops; not marinated pork, smoked loin, or a cooked product. Retain two source chops as counts; no invented slice thickness or mass. A stock-ended label is not treated as market absence or current availability.",
+      "stock_claim": false,
+      "source_observation_ids": [
+        "research-correction-market.json:10"
+      ],
+      "aliases": [],
+      "source_observations": [
+        {
+          "observation_id": "research-correction-market.json:10",
+          "food_ingredient_code": "PORK_LOIN",
+          "retailer_chain": "LENTA",
+          "region": "Saint Petersburg / Leningrad Region",
+          "checked_at": "2026-09-05",
+          "evidence_url": "https://lenta.com/product/svinina-korejjka-premium-polufabrikat-ohlazhdennyjj-rossiya-70099/",
+          "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+          "observed_product_wording": "Корейка свиная Премиум ЛЕНТА FRESH; raw chilled boneless pork loin, sole ingredient pork.",
+          "purchase_concept": null,
+          "evidence_method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+          "status": "AVAILABLE",
+          "notes": "Current official neutral product indexed today and full attributes inspected: На кости — Нет; Режим охлаждения — Охлажденный; Часть туши — Корейка. Ordinary plain raw boneless loin can be selected for generic pork chops; not marinated pork, smoked loin, or a cooked product. Retain two source chops as counts; no invented slice thickness or mass. A stock-ended label is not treated as market absence or current availability.",
+          "stock_claim": false
+        }
+      ],
+      "source_statuses": [
+        "AVAILABLE"
+      ],
+      "status_basis": "All raw observations agree; inspect each source form."
+    },
+    {
+      "observation_id": "research-correction-market.json:11",
+      "food_ingredient_code": "OREGANO_DRIED",
+      "retailer_chain": "LENTA",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "evidence_url": "https://lenta.com/product/oregano-dushica-dushica-izmelchennyjj-paket-avstriya-8g-153107/",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "observed_product_wording": "Орегано (душица) KOTANYI измельченный, 8г; sole ingredient oregano, shelf-stable grocery seasoning.",
+      "purchase_concept": null,
+      "evidence_method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "status": "AVAILABLE",
+      "notes": "Current official neutral product indexed two weeks ago. Standalone dried chopped herb in a spice packet, not fresh plant, sowing seeds, mixed Italian herbs, or oregano within a prepared sauce. Ordinary non-specialist seasoning. Five-chain queries also reviewed 5ka oregano, Perekrestok dried oregano, Okey oregano, Magnit oregano Saint Petersburg: other results were recipes, expired flyers, wrong-city pages, mixed seasoning or ready dishes, not qualifying product evidence. Supplemental classification RU_AVAILABLE. No health, price or nutrient claims imported.",
+      "stock_claim": false,
+      "source_observation_ids": [
+        "research-correction-market.json:11"
+      ],
+      "aliases": [],
+      "source_observations": [
+        {
+          "observation_id": "research-correction-market.json:11",
+          "food_ingredient_code": "OREGANO_DRIED",
+          "retailer_chain": "LENTA",
+          "region": "Saint Petersburg / Leningrad Region",
+          "checked_at": "2026-09-05",
+          "evidence_url": "https://lenta.com/product/oregano-dushica-dushica-izmelchennyjj-paket-avstriya-8g-153107/",
+          "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+          "observed_product_wording": "Орегано (душица) KOTANYI измельченный, 8г; sole ingredient oregano, shelf-stable grocery seasoning.",
+          "purchase_concept": null,
+          "evidence_method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+          "status": "AVAILABLE",
+          "notes": "Current official neutral product indexed two weeks ago. Standalone dried chopped herb in a spice packet, not fresh plant, sowing seeds, mixed Italian herbs, or oregano within a prepared sauce. Ordinary non-specialist seasoning. Five-chain queries also reviewed 5ka oregano, Perekrestok dried oregano, Okey oregano, Magnit oregano Saint Petersburg: other results were recipes, expired flyers, wrong-city pages, mixed seasoning or ready dishes, not qualifying product evidence. Supplemental classification RU_AVAILABLE. No health, price or nutrient claims imported.",
+          "stock_claim": false
+        }
+      ],
+      "source_statuses": [
+        "AVAILABLE"
+      ],
+      "status_basis": "All raw observations agree; inspect each source form."
+    },
+    {
+      "observation_id": "research-correction-market.json:12",
+      "food_ingredient_code": "STRAWBERRY",
+      "retailer_chain": "LENTA",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "evidence_url": "https://lenta.com/product/klubnika-zam-1500g-495854/",
+      "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+      "observed_product_wording": "Клубника замороженная BONVIDA, 1500г; sole ingredient клубника.",
+      "purchase_concept": null,
+      "evidence_method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+      "status": "AVAILABLE",
+      "notes": "Current official neutral product indexed today. Frozen single-fruit strawberries with no added sugar in the declared complete ingredient list, not syrup, jam, fruit puree, ice cream or mixed berries. Supports the frozen-fruit selection for Simple Green Smoothie; not evidence for fresh-only strawberries. Ordinary frozen-grocery plausibility, retain source cup quantity without converting from retailer package weight. No health claims, current inventory, prices or consumer reviews imported.",
+      "stock_claim": false,
+      "source_observation_ids": [
+        "research-correction-market.json:12"
+      ],
+      "aliases": [],
+      "source_observations": [
+        {
+          "observation_id": "research-correction-market.json:12",
+          "food_ingredient_code": "STRAWBERRY",
+          "retailer_chain": "LENTA",
+          "region": "Saint Petersburg / Leningrad Region",
+          "checked_at": "2026-09-05",
+          "evidence_url": "https://lenta.com/product/klubnika-zam-1500g-495854/",
+          "region_evidence_url": "https://lenta.com/catalog/ovoshchi-146/",
+          "observed_product_wording": "Клубника замороженная BONVIDA, 1500г; sole ingredient клубника.",
+          "purchase_concept": null,
+          "evidence_method": "CURRENT_OFFICIAL_REGION_NEUTRAL_PRODUCT_PLUS_OFFICIAL_SPB_PRESENCE",
+          "status": "AVAILABLE",
+          "notes": "Current official neutral product indexed today. Frozen single-fruit strawberries with no added sugar in the declared complete ingredient list, not syrup, jam, fruit puree, ice cream or mixed berries. Supports the frozen-fruit selection for Simple Green Smoothie; not evidence for fresh-only strawberries. Ordinary frozen-grocery plausibility, retain source cup quantity without converting from retailer package weight. No health claims, current inventory, prices or consumer reviews imported.",
+          "stock_claim": false
+        }
+      ],
+      "source_statuses": [
+        "AVAILABLE"
+      ],
+      "status_basis": "All raw observations agree; inspect each source form."
+    },
+    {
+      "observation_id": "research-correction-market.json:13",
+      "food_ingredient_code": "STRAWBERRY",
+      "retailer_chain": "MAGNIT",
+      "region": "Saint Petersburg / Leningrad Region",
+      "checked_at": "2026-09-05",
+      "evidence_url": "https://magnit.ru/product/1499919387-klubnika_zamorozhennaya_v_10?catalogType=1&shopCode=571452&shopType=1",
+      "region_evidence_url": "https://magnit.ru/product/1499919387-klubnika_zamorozhennaya_v_10?catalogType=1&shopCode=571452&shopType=1",
+      "observed_product_wording": "Клубника быстрозамороженная; sole ingredient клубника замороженная.",
+      "purchase_concept": null,
+      "evidence_method": "CURRENT_SEARCH_INDEXED_OFFICIAL_SPB_PRODUCT",
+      "status": "AVAILABLE",
+      "notes": "Current search-indexed official product (three months) explicitly identifies Saint Petersburg, проспект Науки, 10, корпус 1, литера А. Plain frozen single-fruit strawberries with no added sugar in the ingredient list. The selected product is strawberry, not another berry in the variant selector. Out-of-stock wording does not negate market representation or establish momentary availability. No consumer-review evidence, nutrient or mass conversion imported.",
+      "stock_claim": false,
+      "source_observation_ids": [
+        "research-correction-market.json:13"
+      ],
+      "aliases": [],
+      "source_observations": [
+        {
+          "observation_id": "research-correction-market.json:13",
+          "food_ingredient_code": "STRAWBERRY",
+          "retailer_chain": "MAGNIT",
+          "region": "Saint Petersburg / Leningrad Region",
+          "checked_at": "2026-09-05",
+          "evidence_url": "https://magnit.ru/product/1499919387-klubnika_zamorozhennaya_v_10?catalogType=1&shopCode=571452&shopType=1",
+          "region_evidence_url": "https://magnit.ru/product/1499919387-klubnika_zamorozhennaya_v_10?catalogType=1&shopCode=571452&shopType=1",
+          "observed_product_wording": "Клубника быстрозамороженная; sole ingredient клубника замороженная.",
+          "purchase_concept": null,
+          "evidence_method": "CURRENT_SEARCH_INDEXED_OFFICIAL_SPB_PRODUCT",
+          "status": "AVAILABLE",
+          "notes": "Current search-indexed official product (three months) explicitly identifies Saint Petersburg, проспект Науки, 10, корпус 1, литера А. Plain frozen single-fruit strawberries with no added sugar in the ingredient list. The selected product is strawberry, not another berry in the variant selector. Out-of-stock wording does not negate market representation or establish momentary availability. No consumer-review evidence, nutrient or mass conversion imported.",
+          "stock_claim": false
+        }
+      ],
+      "source_statuses": [
+        "AVAILABLE"
+      ],
+      "status_basis": "All raw observations agree; inspect each source form."
     }
   ],
   "counts": {
-    "raw_observations": 172,
-    "observations": 166,
-    "duplicate_observations": 6,
-    "available": 129,
+    "raw_observations": 185,
+    "observations": 177,
+    "duplicate_observations": 8,
+    "available": 140,
     "uncertain": 37,
     "available_by_chain": {
-      "PYATEROCHKA": 3,
+      "PYATEROCHKA": 4,
       "PEREKRESTOK": 0,
-      "LENTA": 113,
+      "LENTA": 120,
       "OKEY": 0,
-      "MAGNIT": 13
+      "MAGNIT": 16
     }
   },
   "final_source_forms": [
@@ -6844,7 +7320,8 @@
       "recipe_ids": [
         "CACFP6-CORN-EDAMAME-BLEND",
         "CACFP6-TABBOULEH",
-        "HARV6-ROASTED-POTATOES",
+        "SNAP4-SPANISH-FRITTATA",
+        "FNS5-BAKED-LENTILS-CASSEROLE",
         "HARV6-FRESH-TOMATO-SALSA",
         "HARV6-GARDEN-PASTA-SALAD",
         "SNAP4-BRAISED-CHICKEN-SPINACH"
@@ -6894,12 +7371,11 @@
       "recipe_ids": [
         "CACFP6-CORN-EDAMAME-BLEND",
         "CACFP6-LOCAL-HARVEST-BAKE",
-        "HARV6-ROASTED-POTATOES",
         "HARV6-FRESH-TOMATO-SALSA",
         "SNAP6-SEARED-GREENS",
+        "SNAP4-SPRING-VEGETABLE-SAUTE",
         "SNAP5-KALE-NUTS-RAISINS",
-        "SNAP4-BRAISED-CHICKEN-SPINACH",
-        "SNAP4-SPRING-VEGETABLE-SAUTE"
+        "SNAP4-BRAISED-CHICKEN-SPINACH"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v2.json:6",
@@ -6947,8 +7423,7 @@
       "food_ingredient_code": "CORN_SWEET",
       "purchase_form": "Plain frozen sweet corn kernels, selected among source fresh/frozen/canned options; thaw/drain where specified",
       "recipe_ids": [
-        "CACFP6-CORN-EDAMAME-BLEND",
-        "TNC6-CORN-ZUCCHINI-PANCAKES"
+        "CACFP6-CORN-EDAMAME-BLEND"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v4.json:18"
@@ -7040,9 +7515,9 @@
       "recipe_ids": [
         "CACFP6-CORN-EDAMAME-BLEND",
         "CACFP6-CREAMY-COLESLAW",
-        "WIC4-ROASTED-CARROTS",
-        "SNAP8-APPLE-CARROT-SOUP",
-        "SNAP4-SPRING-VEGETABLE-SAUTE"
+        "FNS5-BAKED-LENTILS-CASSEROLE",
+        "SNAP4-SPRING-VEGETABLE-SAUTE",
+        "SNAP8-APPLE-CARROT-SOUP"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v2.json:1",
@@ -7184,18 +7659,17 @@
         "CACFP6-TABBOULEH",
         "CACFP6-HONEY-LIME-CHICKEN",
         "CACFP6-CREAMY-COLESLAW",
-        "TNC6-CORN-ZUCCHINI-PANCAKES",
-        "HARV6-ROASTED-POTATOES",
+        "SNAP4-SPANISH-FRITTATA",
+        "FNS5-BAKED-LENTILS-CASSEROLE",
         "HARV6-FRESH-TOMATO-SALSA",
         "HARV6-GARDEN-PASTA-SALAD",
         "SNAP6-SEARED-GREENS",
         "WIC4-BUTTERNUT-SOUP",
-        "WIC4-ROASTED-CARROTS",
-        "SNAP8-HOMEMADE-MASHED-POTATOES",
+        "SNAP4-SPRING-VEGETABLE-SAUTE",
+        "FNS4-OVEN-FRIED-FISH",
         "SNAP8-APPLE-CARROT-SOUP",
         "SNAP4-BRAISED-CHICKEN-SPINACH",
-        "SNAP4-DILLED-FISH-FILLETS",
-        "SNAP4-SPRING-VEGETABLE-SAUTE"
+        "SNAP4-DILLED-FISH-FILLETS"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v4.json:17",
@@ -7383,7 +7857,8 @@
       "food_ingredient_code": "SWEET_POTATO",
       "purchase_form": "Fresh sweet potatoes; peel/cube as specified",
       "recipe_ids": [
-        "CACFP6-LOCAL-HARVEST-BAKE"
+        "CACFP6-LOCAL-HARVEST-BAKE",
+        "FNS2-ORANGE-PORK-CHOPS"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v2.json:8"
@@ -7432,10 +7907,9 @@
         "CACFP6-TABBOULEH",
         "TNC6-EGGS-SPINACH",
         "SNAP6-SEARED-GREENS",
-        "WIC4-BUTTERNUT-SOUP",
         "SNAP8-SOMALI-SUMMER-SALAD",
-        "SNAP4-SPRING-VEGETABLE-SAUTE",
-        "WIC4-ROASTED-CARROTS"
+        "WIC4-BUTTERNUT-SOUP",
+        "SNAP4-SPRING-VEGETABLE-SAUTE"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v4.json:9",
@@ -7527,8 +8001,8 @@
       "food_ingredient_code": "PARSLEY_DRIED",
       "purchase_form": "Plain dried parsley",
       "recipe_ids": [
-        "SNAP4-BROWN-RICE-PILAF",
-        "CACFP6-LOCAL-HARVEST-BAKE"
+        "CACFP6-LOCAL-HARVEST-BAKE",
+        "SNAP4-BROWN-RICE-PILAF"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v2.json:25"
@@ -7957,9 +8431,9 @@
       "recipe_ids": [
         "CACFP6-TABBOULEH",
         "SNAP6-PEACH-CRISP",
+        "SNAP8-SOMALI-SUMMER-SALAD",
         "SNAP6-WALDORF-SALAD",
-        "SNAP4-DILLED-FISH-FILLETS",
-        "SNAP8-SOMALI-SUMMER-SALAD"
+        "SNAP4-DILLED-FISH-FILLETS"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v3.json:9",
@@ -8147,14 +8621,13 @@
       "recipe_ids": [
         "CACFP6-HONEY-LIME-CHICKEN",
         "CACFP6-CREAMY-COLESLAW",
-        "HARV6-ROASTED-POTATOES",
+        "SNAP4-SPANISH-FRITTATA",
         "HARV6-GARDEN-PASTA-SALAD",
         "SNAP6-SEARED-GREENS",
-        "WIC4-ROASTED-CARROTS",
-        "SNAP8-HOMEMADE-MASHED-POTATOES",
+        "SNAP4-SPRING-VEGETABLE-SAUTE",
+        "FNS4-OVEN-FRIED-FISH",
         "SNAP4-BROWN-RICE-PILAF",
-        "SNAP4-BRAISED-CHICKEN-SPINACH",
-        "SNAP4-SPRING-VEGETABLE-SAUTE"
+        "SNAP4-BRAISED-CHICKEN-SPINACH"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v2.json:34"
@@ -8246,6 +8719,7 @@
       "recipe_ids": [
         "CACFP6-CREAMY-COLESLAW",
         "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+        "SNAP2-SIMPLE-GREEN-SMOOTHIE",
         "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE"
       ],
       "qualifying_refs": [
@@ -8477,8 +8951,7 @@
       "food_ingredient_code": "GREEN_ONION",
       "purchase_form": "Fresh green onion/scallions; trim/chop",
       "recipe_ids": [
-        "CACFP6-CREAMY-COLESLAW",
-        "TNC6-CORN-ZUCCHINI-PANCAKES"
+        "CACFP6-CREAMY-COLESLAW"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v4.json:11",
@@ -8571,7 +9044,8 @@
       "purchase_form": "Raw shell chicken eggs; cracking/whisking is preparation",
       "recipe_ids": [
         "TNC6-EGGS-SPINACH",
-        "TNC6-CORN-ZUCCHINI-PANCAKES"
+        "SNAP4-SPANISH-FRITTATA",
+        "FNS4-OVEN-FRIED-FISH"
       ],
       "qualifying_refs": [
         "research-x5-v2.json:1",
@@ -8624,6 +9098,7 @@
       "recipe_ids": [
         "TNC6-EGGS-SPINACH",
         "SNAP6-SPINACH-APPLE-SALAD",
+        "SNAP2-SIMPLE-GREEN-SMOOTHIE",
         "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
         "SNAP4-BRAISED-CHICKEN-SPINACH"
       ],
@@ -8673,11 +9148,12 @@
         "TNC6-APPLESAUCE",
         "HARV6-FRESH-TOMATO-SALSA",
         "SNAP6-SPINACH-APPLE-SALAD",
+        "SNAP8-SOMALI-SUMMER-SALAD",
         "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+        "SNAP2-SIMPLE-GREEN-SMOOTHIE",
         "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
         "SNAP8-APPLE-CARROT-SOUP",
-        "SNAP6-WALDORF-SALAD",
-        "SNAP8-SOMALI-SUMMER-SALAD"
+        "SNAP6-WALDORF-SALAD"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v3.json:27"
@@ -8718,14 +9194,14 @@
       "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
     },
     {
-      "review_id": "ZUCCHINI",
-      "food_ingredient_code": "ZUCCHINI",
-      "purchase_form": "Fresh zucchini/courgette; trim/shred as specified",
+      "review_id": "POTATO",
+      "food_ingredient_code": "POTATO",
+      "purchase_form": "Fresh potatoes; peel/cube as specified",
       "recipe_ids": [
-        "TNC6-CORN-ZUCCHINI-PANCAKES"
+        "SNAP4-SPANISH-FRITTATA"
       ],
       "qualifying_refs": [
-        "research-lenta-okey-v4.json:3"
+        "research-lenta-okey-v4.json:4"
       ],
       "five_chain_review": {
         "PYATEROCHKA": {
@@ -8741,7 +9217,7 @@
         "LENTA": {
           "status": "AVAILABLE",
           "qualifying_refs": [
-            "research-lenta-okey-v4.json:3"
+            "research-lenta-okey-v4.json:4"
           ],
           "note": "Current appropriate catalogue/form evidence; no live stock claim."
         },
@@ -8758,98 +9234,8 @@
       },
       "evidenced_chain_count": 1,
       "classification": "RU_AVAILABLE",
-      "ordinary_retail_plausibility": "A named ordinary fresh zucchini/courgette; trim/shred as specified product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh zucchini/courgette; trim/shred as specified) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
-    },
-    {
-      "review_id": "FLOUR_WHOLE_WHEAT",
-      "food_ingredient_code": "FLOUR_WHOLE_WHEAT",
-      "purchase_form": "Whole-wheat flour, not ordinary refined flour",
-      "recipe_ids": [
-        "TNC6-CORN-ZUCCHINI-PANCAKES"
-      ],
-      "qualifying_refs": [
-        "research-lenta-okey-v3.json:10"
-      ],
-      "five_chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "qualifying_refs": [
-            "research-lenta-okey-v3.json:10"
-          ],
-          "note": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      },
-      "evidenced_chain_count": 1,
-      "classification": "RU_AVAILABLE",
-      "ordinary_retail_plausibility": "A named ordinary whole-wheat flour, not ordinary refined flour product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Whole-wheat flour, not ordinary refined flour) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
-    },
-    {
-      "review_id": "BAKING_POWDER",
-      "food_ingredient_code": "BAKING_POWDER",
-      "purchase_form": "Baking powder, not baking soda",
-      "recipe_ids": [
-        "TNC6-CORN-ZUCCHINI-PANCAKES"
-      ],
-      "qualifying_refs": [
-        "research-lenta-okey-v3.json:24"
-      ],
-      "five_chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "qualifying_refs": [
-            "research-lenta-okey-v3.json:24"
-          ],
-          "note": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      },
-      "evidenced_chain_count": 1,
-      "classification": "RU_AVAILABLE",
-      "ordinary_retail_plausibility": "A named ordinary baking powder, not baking soda product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Baking powder, not baking soda) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "ordinary_retail_plausibility": "A named ordinary fresh potatoes; peel/cube as specified product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh potatoes; peel/cube as specified) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
       "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
     },
     {
@@ -8857,10 +9243,10 @@
       "food_ingredient_code": "SUNFLOWER_OIL",
       "purchase_form": "Refined sunflower cooking oil, selected source generic vegetable-oil member",
       "recipe_ids": [
-        "TNC6-CORN-ZUCCHINI-PANCAKES",
-        "HARV6-ROASTED-POTATOES",
+        "SNAP4-SPANISH-FRITTATA",
         "HARV6-FRESH-TOMATO-SALSA",
         "HARV6-GARDEN-PASTA-SALAD",
+        "FNS2-ORANGE-PORK-CHOPS",
         "SNAP5-KALE-NUTS-RAISINS",
         "SNAP4-BRAISED-CHICKEN-SPINACH"
       ],
@@ -8903,98 +9289,148 @@
       "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
     },
     {
-      "review_id": "POTATO",
-      "food_ingredient_code": "POTATO",
-      "purchase_form": "Fresh potatoes; peel/cube as specified",
+      "review_id": "LENTILS_DRY",
+      "food_ingredient_code": "LENTILS_DRY",
+      "purchase_form": "Whole dry lentils; rinse as source preparation",
       "recipe_ids": [
-        "HARV6-ROASTED-POTATOES",
-        "SNAP8-HOMEMADE-MASHED-POTATOES",
-        "SNAP1-MICROWAVE-BAKED-POTATO"
+        "FNS5-BAKED-LENTILS-CASSEROLE"
       ],
       "qualifying_refs": [
-        "research-lenta-okey-v4.json:4"
+        "research-correction-market.json:4",
+        "research-correction-market.json:5"
       ],
       "five_chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
           "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "PEREKRESTOK": {
           "status": "UNCERTAIN",
           "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "LENTA": {
           "status": "AVAILABLE",
           "qualifying_refs": [
-            "research-lenta-okey-v4.json:4"
+            "research-correction-market.json:4"
           ],
-          "note": "Current appropriate catalogue/form evidence; no live stock claim."
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
         },
         "OKEY": {
           "status": "UNCERTAIN",
           "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "MAGNIT": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-correction-market.json:5"
+          ],
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
         }
       },
-      "evidenced_chain_count": 1,
+      "evidenced_chain_count": 2,
       "classification": "RU_AVAILABLE",
-      "ordinary_retail_plausibility": "A named ordinary fresh potatoes; peel/cube as specified product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh potatoes; peel/cube as specified) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
+      "ordinary_retail_plausibility": "Ordinary Whole dry lentils; rinse as source preparation product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
+      "review_notes": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion."
     },
     {
-      "review_id": "BELL_PEPPER_GREEN",
-      "food_ingredient_code": "BELL_PEPPER_GREEN",
-      "purchase_form": "Fresh sweet green bell pepper; dice/chop",
+      "review_id": "TOMATO_CANNED_NO_SALT",
+      "food_ingredient_code": "TOMATO_CANNED_NO_SALT",
+      "purchase_form": "Canned tomatoes without added salt; source low-sodium canned tomato member",
       "recipe_ids": [
-        "HARV6-ROASTED-POTATOES",
-        "HARV6-GARDEN-PASTA-SALAD",
-        "SNAP8-SOMALI-SUMMER-SALAD"
+        "FNS5-BAKED-LENTILS-CASSEROLE"
       ],
       "qualifying_refs": [
-        "research-lenta-okey-v4.json:13"
+        "research-correction-market.json:6",
+        "research-correction-market.json:7"
       ],
       "five_chain_review": {
         "PYATEROCHKA": {
           "status": "UNCERTAIN",
           "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "PEREKRESTOK": {
           "status": "UNCERTAIN",
           "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "LENTA": {
           "status": "AVAILABLE",
           "qualifying_refs": [
-            "research-lenta-okey-v4.json:13"
+            "research-correction-market.json:6"
           ],
-          "note": "Current appropriate catalogue/form evidence; no live stock claim."
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
         },
         "OKEY": {
           "status": "UNCERTAIN",
           "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "MAGNIT": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-correction-market.json:7"
+          ],
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
+        }
+      },
+      "evidenced_chain_count": 2,
+      "classification": "RU_AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary Canned tomatoes without added salt; source low-sodium canned tomato member product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
+      "review_notes": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion."
+    },
+    {
+      "review_id": "CHEESE_CHEDDAR",
+      "food_ingredient_code": "CHEESE_CHEDDAR",
+      "purchase_form": "Natural regular-fat cheddar cheese; grate at home, not processed cheese or reduced-fat cheese",
+      "recipe_ids": [
+        "FNS5-BAKED-LENTILS-CASSEROLE"
+      ],
+      "qualifying_refs": [
+        "research-correction-market.json:8",
+        "research-correction-market.json:9"
+      ],
+      "five_chain_review": {
+        "PYATEROCHKA": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-correction-market.json:9"
+          ],
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-correction-market.json:8"
+          ],
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         },
         "MAGNIT": {
           "status": "UNCERTAIN",
           "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
         }
       },
-      "evidenced_chain_count": 1,
+      "evidenced_chain_count": 2,
       "classification": "RU_AVAILABLE",
-      "ordinary_retail_plausibility": "A named ordinary fresh sweet green bell pepper; dice/chop product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh sweet green bell pepper; dice/chop) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
+      "ordinary_retail_plausibility": "Ordinary Natural regular-fat cheddar cheese; grate at home, not processed cheese or reduced-fat cheese product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
+      "review_notes": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion."
     },
     {
       "review_id": "PASTA_DRY",
@@ -9040,6 +9476,52 @@
       "ordinary_retail_plausibility": "A named ordinary ordinary dry macaroni; source specifies cooked½cup final ingredient, not½cup dry input product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
       "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Ordinary dry macaroni; source specifies cooked½cup final ingredient, not½cup dry input) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
       "review_notes": "Source ingredient is½cup macaroni cooked. Market review supports dry purchasable macaroni only; data handback must preserve cooked quantity and an explicit source preparation basis, never silently use½cup dry."
+    },
+    {
+      "review_id": "BELL_PEPPER_GREEN",
+      "food_ingredient_code": "BELL_PEPPER_GREEN",
+      "purchase_form": "Fresh sweet green bell pepper; dice/chop",
+      "recipe_ids": [
+        "HARV6-GARDEN-PASTA-SALAD",
+        "SNAP8-SOMALI-SUMMER-SALAD"
+      ],
+      "qualifying_refs": [
+        "research-lenta-okey-v4.json:13"
+      ],
+      "five_chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-lenta-okey-v4.json:13"
+          ],
+          "note": "Current appropriate catalogue/form evidence; no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "MAGNIT": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        }
+      },
+      "evidenced_chain_count": 1,
+      "classification": "RU_AVAILABLE",
+      "ordinary_retail_plausibility": "A named ordinary fresh sweet green bell pepper; dice/chop product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh sweet green bell pepper; dice/chop) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
     },
     {
       "review_id": "RAISINS_GOLDEN",
@@ -9140,8 +9622,8 @@
       "recipe_ids": [
         "SNAP6-SPINACH-APPLE-SALAD",
         "SNAP6-PEACH-CRISP",
-        "SNAP6-WALDORF-SALAD",
-        "SNAP4-PEAR-ORANGE-SAUCE"
+        "SNAP4-PEAR-ORANGE-SAUCE",
+        "SNAP6-WALDORF-SALAD"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v3.json:23",
@@ -9193,7 +9675,6 @@
       "purchase_form": "Plain dried ground garlic powder",
       "recipe_ids": [
         "SNAP6-SPINACH-APPLE-SALAD",
-        "WIC4-ROASTED-CARROTS",
         "SNAP4-BROWN-RICE-PILAF"
       ],
       "qualifying_refs": [
@@ -9508,14 +9989,108 @@
       "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
     },
     {
+      "review_id": "PORK_LOIN",
+      "food_ingredient_code": "PORK_LOIN",
+      "purchase_form": "Plain raw boneless pork loin; selected member of generic lean pork and loin chops, source counts and preparation retained",
+      "recipe_ids": [
+        "FNS2-ORANGE-PORK-CHOPS",
+        "SNAP8-APPLE-CARROT-SOUP"
+      ],
+      "qualifying_refs": [
+        "research-lenta-okey-v4.json:24",
+        "research-correction-market.json:10"
+      ],
+      "five_chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-lenta-okey-v4.json:24",
+            "research-correction-market.json:10"
+          ],
+          "note": "Current appropriate catalogue/form evidence; no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "MAGNIT": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        }
+      },
+      "evidenced_chain_count": 1,
+      "classification": "RU_AVAILABLE",
+      "ordinary_retail_plausibility": "A named ordinary plain raw boneless pork loin, selected lean pork member; cut into chunks product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Plain raw boneless pork loin, selected lean pork member; cut into chunks) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced. Correction review confirms raw boneless loin, not smoked/marinated pork. The source two chops remain two unweighed pieces; no count-to-weight conversion."
+    },
+    {
+      "review_id": "ORANGE",
+      "food_ingredient_code": "ORANGE",
+      "purchase_form": "Raw whole oranges squeezed to prepare 100% pure orange juice",
+      "recipe_ids": [
+        "FNS2-ORANGE-PORK-CHOPS",
+        "SNAP4-PEAR-ORANGE-SAUCE"
+      ],
+      "qualifying_refs": [
+        "research-lenta-okey-v9.json:2"
+      ],
+      "five_chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-lenta-okey-v9.json:2"
+          ],
+          "note": "Current appropriate catalogue/form evidence; no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "MAGNIT": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        }
+      },
+      "evidenced_chain_count": 1,
+      "classification": "RU_AVAILABLE",
+      "ordinary_retail_plausibility": "Named ordinary raw household fruit in current official Lenta catalogue; prepared form handled explicitly without yield assumptions.",
+      "retention_reason": "RU_AVAILABLE: exact ordinary raw fruit is evidenced in one baseline chain; no three-chain mass-market claim.",
+      "review_notes": "Preserve source three-quarter cup prepared juice, not a whole-fruit count or mass. No added water/sugar, no boxed nectar/concentrate substitution. Parent-approved citrus preparation normalization."
+    },
+    {
       "review_id": "MILK_1_PERCENT",
       "food_ingredient_code": "MILK_1_PERCENT",
       "purchase_form": "Unflavoured cow milk1% fat; exact1% where source fixes it, selected lowfat option otherwise",
       "recipe_ids": [
         "WIC4-BUTTERNUT-SOUP",
         "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
-        "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
-        "SNAP8-HOMEMADE-MASHED-POTATOES"
+        "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+        "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v2.json:14"
@@ -9612,6 +10187,101 @@
       "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
     },
     {
+      "review_id": "BANANA",
+      "food_ingredient_code": "BANANA",
+      "purchase_form": "Fresh banana; peel and slice",
+      "recipe_ids": [
+        "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+        "SNAP3-GRILLED-FRUIT",
+        "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE"
+      ],
+      "qualifying_refs": [
+        "research-lenta-okey-v6.json:2"
+      ],
+      "five_chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-lenta-okey-v6.json:2"
+          ],
+          "note": "Current appropriate catalogue/form evidence; no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        },
+        "MAGNIT": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
+        }
+      },
+      "evidenced_chain_count": 1,
+      "classification": "RU_AVAILABLE",
+      "ordinary_retail_plausibility": "A named ordinary fresh banana; peel and slice product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
+      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh banana; peel and slice) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
+      "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
+    },
+    {
+      "review_id": "STRAWBERRY",
+      "food_ingredient_code": "STRAWBERRY",
+      "purchase_form": "Plain unsweetened frozen strawberries, source-explicit single frozen fruit choice",
+      "recipe_ids": [
+        "SNAP2-SIMPLE-GREEN-SMOOTHIE"
+      ],
+      "qualifying_refs": [
+        "research-correction-market.json:12",
+        "research-correction-market.json:13"
+      ],
+      "five_chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-correction-market.json:12"
+          ],
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "MAGNIT": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-correction-market.json:13"
+          ],
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
+        }
+      },
+      "evidenced_chain_count": 2,
+      "classification": "RU_AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary Plain unsweetened frozen strawberries, source-explicit single frozen fruit choice product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
+      "review_notes": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion."
+    },
+    {
       "review_id": "PINEAPPLE",
       "food_ingredient_code": "PINEAPPLE",
       "purchase_form": "Fresh whole raw pineapple, chunk during preparation",
@@ -9655,52 +10325,6 @@
       "ordinary_retail_plausibility": "Specific ordinary Fresh whole raw pineapple, chunk during preparation is named in a baseline grocery-chain product record; no specialist-only inference.",
       "retention_reason": "RU_AVAILABLE, not RU_MASS_MARKET: exact Fresh whole raw pineapple, chunk during preparation is evidenced at Lenta; fewer than three chains have qualifying proof.",
       "review_notes": "Source-generic pineapple chunks selected as fresh pineapple; preserve one cup prepared fruit, no fruit-count conversion."
-    },
-    {
-      "review_id": "BANANA",
-      "food_ingredient_code": "BANANA",
-      "purchase_form": "Fresh banana; peel and slice",
-      "recipe_ids": [
-        "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
-        "SNAP3-GRILLED-FRUIT"
-      ],
-      "qualifying_refs": [
-        "research-lenta-okey-v6.json:2"
-      ],
-      "five_chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "qualifying_refs": [
-            "research-lenta-okey-v6.json:2"
-          ],
-          "note": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      },
-      "evidenced_chain_count": 1,
-      "classification": "RU_AVAILABLE",
-      "ordinary_retail_plausibility": "A named ordinary fresh banana; peel and slice product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Fresh banana; peel and slice) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
     },
     {
       "review_id": "CAULIFLOWER__FROZEN",
@@ -9791,51 +10415,6 @@
       "ordinary_retail_plausibility": "Named ordinary raw household fruit in current official Lenta catalogue; prepared form handled explicitly without yield assumptions.",
       "retention_reason": "RU_AVAILABLE: exact ordinary raw fruit is evidenced in one baseline chain; no three-chain mass-market claim.",
       "review_notes": "Source-generic pears, ordinary cultivar member. No whole-fruit mass conversion."
-    },
-    {
-      "review_id": "ORANGE",
-      "food_ingredient_code": "ORANGE",
-      "purchase_form": "Raw whole oranges squeezed to prepare 100% pure orange juice",
-      "recipe_ids": [
-        "SNAP4-PEAR-ORANGE-SAUCE"
-      ],
-      "qualifying_refs": [
-        "research-lenta-okey-v9.json:2"
-      ],
-      "five_chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "qualifying_refs": [
-            "research-lenta-okey-v9.json:2"
-          ],
-          "note": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      },
-      "evidenced_chain_count": 1,
-      "classification": "RU_AVAILABLE",
-      "ordinary_retail_plausibility": "Named ordinary raw household fruit in current official Lenta catalogue; prepared form handled explicitly without yield assumptions.",
-      "retention_reason": "RU_AVAILABLE: exact ordinary raw fruit is evidenced in one baseline chain; no three-chain mass-market claim.",
-      "review_notes": "Preserve source three-quarter cup prepared juice, not a whole-fruit count or mass. No added water/sugar, no boxed nectar/concentrate substitution. Parent-approved citrus preparation normalization."
     },
     {
       "review_id": "ONION_RED__SWEET_YALTA",
@@ -10067,8 +10646,8 @@
       "food_ingredient_code": "DILL_DRIED",
       "purchase_form": "Dried dill, selected explicit source alternative to fresh with source dry quantity",
       "recipe_ids": [
-        "SNAP4-DILLED-FISH-FILLETS",
-        "SNAP4-SPRING-VEGETABLE-SAUTE"
+        "SNAP4-SPRING-VEGETABLE-SAUTE",
+        "SNAP4-DILLED-FISH-FILLETS"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v4.json:14"
@@ -10109,11 +10688,101 @@
       "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
     },
     {
+      "review_id": "BREADCRUMBS",
+      "food_ingredient_code": "BREADCRUMBS",
+      "purchase_form": "Plain dry wheat breadcrumbs for breading, not panko or seasoned coating mix",
+      "recipe_ids": [
+        "FNS4-OVEN-FRIED-FISH"
+      ],
+      "qualifying_refs": [
+        "research-correction-market.json:3"
+      ],
+      "five_chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-correction-market.json:3"
+          ],
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "MAGNIT": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        }
+      },
+      "evidenced_chain_count": 1,
+      "classification": "RU_AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary Plain dry wheat breadcrumbs for breading, not panko or seasoned coating mix product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
+      "review_notes": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion."
+    },
+    {
+      "review_id": "TILAPIA_RAW",
+      "food_ingredient_code": "TILAPIA_RAW",
+      "purchase_form": "Plain frozen raw tilapia fillets, thawed for cooking as explicitly allowed by the source",
+      "recipe_ids": [
+        "FNS4-OVEN-FRIED-FISH"
+      ],
+      "qualifying_refs": [
+        "research-correction-market.json:2"
+      ],
+      "five_chain_review": {
+        "PYATEROCHKA": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "PEREKRESTOK": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "LENTA": {
+          "status": "AVAILABLE",
+          "qualifying_refs": [
+            "research-correction-market.json:2"
+          ],
+          "note": "Qualifying official product plus SPB evidence, no live stock claim."
+        },
+        "OKEY": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        },
+        "MAGNIT": {
+          "status": "UNCERTAIN",
+          "qualifying_refs": [],
+          "note": "Five-chain search panel reviewed; no qualifying exact form record established here, not product absence."
+        }
+      },
+      "evidenced_chain_count": 1,
+      "classification": "RU_AVAILABLE",
+      "ordinary_retail_plausibility": "Ordinary Plain frozen raw tilapia fillets, thawed for cooking as explicitly allowed by the source product evidenced in a baseline major grocery chain with current SPB/LO presence; not a specialty-only supplier or ingredient hidden in a ready meal.",
+      "retention_reason": "Retain as RU_AVAILABLE from qualifying major-chain form evidence; fewer than three baseline chains are supported, so no RU_MASS_MARKET claim.",
+      "review_notes": "Purchase-critical source form checked against actual official product wording and ingredients. See research-correction-market.json for all five chain queries, exclusions and region evidence. Market compatibility is not momentary stock; no source quantity or form conversion."
+    },
+    {
       "review_id": "BUTTER_UNSALTED",
       "food_ingredient_code": "BUTTER_UNSALTED",
-      "purchase_form": "Unsalted butter; choose explicit source butter alternative where offered",
+      "purchase_form": "Unsalted butter; select explicit butter alternative or narrower member of source-generic butter where reviewed",
       "recipe_ids": [
-        "SNAP8-HOMEMADE-MASHED-POTATOES"
+        "FNS4-OVEN-FRIED-FISH"
       ],
       "qualifying_refs": [
         "research-lenta-okey-v4.json:7"
@@ -10151,51 +10820,6 @@
       "classification": "RU_AVAILABLE",
       "ordinary_retail_plausibility": "A named ordinary unsalted butter; choose explicit source butter alternative where offered product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
       "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Unsalted butter; choose explicit source butter alternative where offered) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
-      "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
-    },
-    {
-      "review_id": "PORK_LOIN",
-      "food_ingredient_code": "PORK_LOIN",
-      "purchase_form": "Plain raw boneless pork loin, selected lean pork member; cut into chunks",
-      "recipe_ids": [
-        "SNAP8-APPLE-CARROT-SOUP"
-      ],
-      "qualifying_refs": [
-        "research-lenta-okey-v4.json:24"
-      ],
-      "five_chain_review": {
-        "PYATEROCHKA": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "PEREKRESTOK": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "LENTA": {
-          "status": "AVAILABLE",
-          "qualifying_refs": [
-            "research-lenta-okey-v4.json:24"
-          ],
-          "note": "Current appropriate catalogue/form evidence; no live stock claim."
-        },
-        "OKEY": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        },
-        "MAGNIT": {
-          "status": "UNCERTAIN",
-          "qualifying_refs": [],
-          "note": "No qualifying regional evidence for this actual form in reviewed records; not an absence claim."
-        }
-      },
-      "evidenced_chain_count": 1,
-      "classification": "RU_AVAILABLE",
-      "ordinary_retail_plausibility": "A named ordinary plain raw boneless pork loin, selected lean pork member; cut into chunks product/category is directly evidenced in LENTA. This is not a specialty-vendor-only or composite-ingredient inference.",
-      "retention_reason": "Retain as RU_AVAILABLE: the specific ordinary purchase form (Plain raw boneless pork loin, selected lean pork member; cut into chunks) is directly evidenced in a baseline household grocery chain; fewer than three chains are supported, so no mass-market claim.",
       "review_notes": "Preparation-only cutting/peeling does not create a separate purchase code; no quantity conversion or production integration is introduced."
     },
     {
@@ -10651,13 +11275,13 @@
     }
   ],
   "final_source_form_classification_counts": {
-    "RU_AVAILABLE": 79,
+    "RU_AVAILABLE": 82,
     "RU_MASS_MARKET": 3
   },
   "final_coverage_classification_counts": {
     "HOUSEHOLD_WATER": 8,
-    "RU_AVAILABLE": 177,
-    "RU_MASS_MARKET": 8
+    "RU_AVAILABLE": 178,
+    "RU_MASS_MARKET": 9
   },
   "final_scope_note": "Explicit reviewed source-form and five-chain records for final coverage; raw observations remain research evidence, not universal code-level clearance. No live stock or production retailer integration."
 }
