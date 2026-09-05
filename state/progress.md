@@ -2,6 +2,34 @@
 
 Updated: `2026-09-05`
 
+## Latest execution — GitHub acquisition transport
+
+PR4-DATA2 — COMPLETE; PR #13 — MERGED at
+`2f5fba991f1f612ce7b4b8dfda8ebd41ad6333e7` (accepted head
+`918bf81b5da306fc65a57643de515ca1b3fbd1e4`).
+PR4 — BLOCKED (local Actions artifact delivery); PR #10 — OPEN; PR5 — UNAUTHORIZED.
+Starting head: `20608c689bfe29eab2b90ef8580e132e3f5611e6`; final head in PR #10.
+
+Authorized temporary GitHub workflow acquired **22/22 distinct artifacts** in
+runs `33988010354` and `33988433450`, both successful. Three historical instants
+remain unchanged. Fresh exact-hash: **9**; changed-hash pending review: **13**
+for **17 recipes**; runner acquisition failures: **0**. All historical URLs worked.
+Actual UTC completion/URL/hash metadata is now durable. Local ZIP delivery failed
+through gh/curl/connector-file URL/Node/Safari; no source review or clean drift
+claim is fabricated. Nine existing local files match exact runner hashes.
+
+Workflow removed in `e950dfe913bd3dfae45dd0890f534e7cf22b9a49`; final workflow
+diff against main is empty. Accepted DATA2 and production code/JSON unchanged.
+Next: obtain existing artifact `9975873265` locally, verify ZIP and all 22 files,
+then review 13 changed hashes and continue production correction. Artifact expires
+`2026-09-12T19:53:05Z`; do not repeat old-log recovery or re-curate the corpus.
+See [exact evidence](../docs/family-food/pr4-retrieval-provenance-review.md).
+Checks: DATA2 validator PASS; DATA2 164 passed; existing full PR4 including seed
+53 passed; affected regressions 82 passed; backend+launcher 2983 passed with
+localhost socket permission; Ruff 24 files and diff/scope PASS. These are baseline
+checks, not corrected DATA2 first/second seed acceptance.
+Previous execution statuses below are historical and superseded here.
+
 ## Latest execution — official equivalent fallback
 
 PR4-DATA2 — COMPLETE; PR #13 — MERGED at

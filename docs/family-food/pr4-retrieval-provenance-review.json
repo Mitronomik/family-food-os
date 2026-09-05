@@ -347,5 +347,327 @@
       "retrieval_evidence": null,
       "status": "MISSING_RETRIEVAL_INSTANT"
     }
-  ]
+  ],
+  "github_actions_refresh": {
+    "evidence_file": "pr4-github-actions-acquisition.json",
+    "run_id": 33988433450,
+    "status": "FRESH_RETRIEVAL_COMPLETE_LOCAL_ARTIFACT_DELIVERY_BLOCKED",
+    "sources": [
+      {
+        "recipe_source_ids": [
+          "SNAP6-HEAVENLY-DEVILED-EGGS"
+        ],
+        "accepted_data2_source_url": "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
+        "accepted_data2_sha256": "1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+        "production_retrieval_url": "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
+        "production_final_url": "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
+        "production_source_sha256": "1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+        "source_retrieved_at": "2026-09-05T19:52:56.806003+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+      },
+      {
+        "recipe_source_ids": [
+          "WIC1-BEYOND-BASIC-GRILLED-CHEESE"
+        ],
+        "accepted_data2_source_url": "https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese/printable/print",
+        "accepted_data2_sha256": "357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334",
+        "production_retrieval_url": "https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese/printable/print",
+        "production_final_url": "https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese/printable/print",
+        "production_source_sha256": "357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334",
+        "source_retrieved_at": "2026-09-05T19:52:56.908692+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+      },
+      {
+        "recipe_source_ids": [
+          "TNC6-EGGS-SPINACH"
+        ],
+        "accepted_data2_source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+        "accepted_data2_sha256": "0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+        "production_retrieval_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+        "production_final_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+        "production_source_sha256": "0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+        "source_retrieved_at": "2026-09-05T19:53:04.869350+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+      },
+      {
+        "recipe_source_ids": [
+          "TNC6-APPLESAUCE"
+        ],
+        "accepted_data2_source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+        "accepted_data2_sha256": "7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+        "production_retrieval_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+        "production_final_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+        "production_source_sha256": "7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+        "source_retrieved_at": "2026-09-05T19:53:02.342415+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+      },
+      {
+        "recipe_source_ids": [
+          "SNAP4-SPANISH-FRITTATA"
+        ],
+        "accepted_data2_source_url": "https://snaped.fns.usda.gov/snap/MPMF/Handouts/HowMuchFoodandPhysicalActivityHandouts.pdf",
+        "accepted_data2_sha256": "b2ac0732c26ad10426343c5aab115248b020983fa4dcad79f230ff146a02641c",
+        "production_retrieval_url": "https://snaped.fns.usda.gov/snap/MPMF/Handouts/HowMuchFoodandPhysicalActivityHandouts.pdf",
+        "production_final_url": "https://snaped.fns.usda.gov/snap/MPMF/Handouts/HowMuchFoodandPhysicalActivityHandouts.pdf",
+        "production_source_sha256": "b2ac0732c26ad10426343c5aab115248b020983fa4dcad79f230ff146a02641c",
+        "source_retrieved_at": "2026-09-05T19:52:57.170915+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+      },
+      {
+        "recipe_source_ids": [
+          "FNS5-BAKED-LENTILS-CASSEROLE"
+        ],
+        "accepted_data2_source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/lentils-casserole",
+        "accepted_data2_sha256": "86b118c36ca73b75618e1656bbc96c2c06f59785ca7292efc47be0fe99cc4598",
+        "production_retrieval_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/lentils-casserole",
+        "production_final_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/lentils-casserole",
+        "production_source_sha256": "5418c166bebc8da03e9be76814652e7e4749134be27f375ec3a0bd55d14f3275",
+        "source_retrieved_at": "2026-09-05T19:52:57.143798+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "HASH_CHANGED_REVIEW_REQUIRED"
+      },
+      {
+        "recipe_source_ids": [
+          "HARV6-FRESH-TOMATO-SALSA",
+          "HARV6-GARDEN-PASTA-SALAD"
+        ],
+        "accepted_data2_source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+        "accepted_data2_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+        "production_retrieval_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+        "production_final_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+        "production_source_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+        "source_retrieved_at": "2026-09-05T19:52:57.731687+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+      },
+      {
+        "recipe_source_ids": [
+          "SNAP6-SPINACH-APPLE-SALAD",
+          "SNAP4-PEAR-ORANGE-SAUCE",
+          "SNAP6-WALDORF-SALAD"
+        ],
+        "accepted_data2_source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+        "accepted_data2_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+        "production_retrieval_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+        "production_final_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+        "production_source_sha256": "ca64c3067cf70a01910765914e71e87c6c56312c7a806442c2ead1c54bd56c69",
+        "source_retrieved_at": "2026-09-05T19:52:57.663256+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "HASH_CHANGED_REVIEW_REQUIRED"
+      },
+      {
+        "recipe_source_ids": [
+          "SNAP6-PEACH-CRISP",
+          "SNAP8-SOMALI-SUMMER-SALAD"
+        ],
+        "accepted_data2_source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+        "accepted_data2_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+        "production_retrieval_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+        "production_final_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+        "production_source_sha256": "6f2fc6c351ca1526b29c5b44c27d25ec17b403ec5168819b790df48414768a8f",
+        "source_retrieved_at": "2026-09-05T19:52:58.028726+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "HASH_CHANGED_REVIEW_REQUIRED"
+      },
+      {
+        "recipe_source_ids": [
+          "SNAP6-SEARED-GREENS",
+          "SNAP4-SPRING-VEGETABLE-SAUTE"
+        ],
+        "accepted_data2_source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+        "accepted_data2_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+        "production_retrieval_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+        "production_final_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+        "production_source_sha256": "fa6a7b9e713999dbc8adf9d1cb18e33907cee7f71668b825fc86397d0cf34d19",
+        "source_retrieved_at": "2026-09-05T19:52:58.151416+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "HASH_CHANGED_REVIEW_REQUIRED"
+      },
+      {
+        "recipe_source_ids": [
+          "FNS2-ORANGE-PORK-CHOPS"
+        ],
+        "accepted_data2_source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/orange-porkchops",
+        "accepted_data2_sha256": "aa07563b660219b4173edc63cf6f76478e1bc71bff7f0c8a54fc5eaf5985a479",
+        "production_retrieval_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/orange-porkchops",
+        "production_final_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/orange-porkchops",
+        "production_source_sha256": "a18a0b3187bfb03f6bee5ca537d920a73b52728bf8ac1306fc4442af8a4d97d9",
+        "source_retrieved_at": "2026-09-05T19:52:58.266730+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "HASH_CHANGED_REVIEW_REQUIRED"
+      },
+      {
+        "recipe_source_ids": [
+          "WIC4-BUTTERNUT-SOUP"
+        ],
+        "accepted_data2_source_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+        "accepted_data2_sha256": "ee642490786720348eae5f18170c5dcb26a0c7b22b042fc829ab0dc6ee1e95e8",
+        "production_retrieval_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+        "production_final_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+        "production_source_sha256": "773eb1c56185960f7ff56b9608aca337b57841636121c56775e413f61495a898",
+        "source_retrieved_at": "2026-09-05T19:52:58.437303+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "HASH_CHANGED_REVIEW_REQUIRED"
+      },
+      {
+        "recipe_source_ids": [
+          "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE"
+        ],
+        "accepted_data2_source_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+        "accepted_data2_sha256": "0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+        "production_retrieval_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+        "production_final_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+        "production_source_sha256": "0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+        "source_retrieved_at": "2026-09-05T19:52:58.441621+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+      },
+      {
+        "recipe_source_ids": [
+          "SNAP2-SIMPLE-GREEN-SMOOTHIE"
+        ],
+        "accepted_data2_source_url": "https://snaped.fns.usda.gov/node/2489",
+        "accepted_data2_sha256": "240c8b7a10a0399cb70743d48f59c9d6b828c8e640e9cbfc1eec0762cf6108ca",
+        "production_retrieval_url": "https://snaped.fns.usda.gov/node/2489",
+        "production_final_url": "https://snaped.fns.usda.gov/node/2489",
+        "production_source_sha256": "ccb4e5e3c8d2d989507757df0297cfc81ecb679afdb4532c409198865aed6caf",
+        "source_retrieved_at": "2026-09-05T19:52:58.606122+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "HASH_CHANGED_REVIEW_REQUIRED"
+      },
+      {
+        "recipe_source_ids": [
+          "SNAP3-GRILLED-FRUIT"
+        ],
+        "accepted_data2_source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit",
+        "accepted_data2_sha256": "03269eead24a3965e76c71a9eed6b7b82b9d785845427fa9b8b445aee55cf6f9",
+        "production_retrieval_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit",
+        "production_final_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit",
+        "production_source_sha256": "a5e24565ab33be99ebdce32d8d33fd9313ecdd318299214573cc4b70ad06c739",
+        "source_retrieved_at": "2026-09-05T19:52:58.631896+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "HASH_CHANGED_REVIEW_REQUIRED"
+      },
+      {
+        "recipe_source_ids": [
+          "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE"
+        ],
+        "accepted_data2_source_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+        "accepted_data2_sha256": "439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6",
+        "production_retrieval_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+        "production_final_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+        "production_source_sha256": "439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6",
+        "source_retrieved_at": "2026-09-05T19:52:58.727404+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+      },
+      {
+        "recipe_source_ids": [
+          "FNS4-OVEN-FRIED-FISH"
+        ],
+        "accepted_data2_source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/fish",
+        "accepted_data2_sha256": "068b5b0d4c7e45ad498758501bcc8f67b7e5f69f9c27ea4db4af39b05cba069c",
+        "production_retrieval_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/fish",
+        "production_final_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/fish",
+        "production_source_sha256": "e7551e168dbdeb5b1b86348e23b5f06b02bcec72cae62b74bb1d66e2145b4e43",
+        "source_retrieved_at": "2026-09-05T19:52:58.869437+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "HASH_CHANGED_REVIEW_REQUIRED"
+      },
+      {
+        "recipe_source_ids": [
+          "SNAP8-APPLE-CARROT-SOUP"
+        ],
+        "accepted_data2_source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+        "accepted_data2_sha256": "1cc2ed9ddb3253b4a9a5ed9aa6609184e7381035977d00a542a00239f8261258",
+        "production_retrieval_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+        "production_final_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+        "production_source_sha256": "426d8ddce559cd11970b1e5e1e9716505af0ced41217fc7eb98f8b4a57fc0093",
+        "source_retrieved_at": "2026-09-05T19:52:58.882545+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "HASH_CHANGED_REVIEW_REQUIRED"
+      },
+      {
+        "recipe_source_ids": [
+          "SNAP4-BROWN-RICE-PILAF"
+        ],
+        "accepted_data2_source_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+        "accepted_data2_sha256": "f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281",
+        "production_retrieval_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+        "production_final_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+        "production_source_sha256": "7cccf08860c222aa69d1e5e00efb59a876e8e6a67603b91229d0d7c3d6c18b51",
+        "source_retrieved_at": "2026-09-05T19:52:59.030396+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "HASH_CHANGED_REVIEW_REQUIRED"
+      },
+      {
+        "recipe_source_ids": [
+          "SNAP5-KALE-NUTS-RAISINS"
+        ],
+        "accepted_data2_source_url": "https://snaped.fns.usda.gov/node/1861",
+        "accepted_data2_sha256": "7c2bb840618e0dfbe372e9ecdb697ad59d2fab36e0fbf07cabe347a93ea6a1a0",
+        "production_retrieval_url": "https://snaped.fns.usda.gov/node/1861",
+        "production_final_url": "https://snaped.fns.usda.gov/node/1861",
+        "production_source_sha256": "fd7b2a1381549e7bae17148ed99d110b17397cb4a1997eaebb815711ff056e16",
+        "source_retrieved_at": "2026-09-05T19:52:59.044169+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "HASH_CHANGED_REVIEW_REQUIRED"
+      },
+      {
+        "recipe_source_ids": [
+          "SNAP4-BRAISED-CHICKEN-SPINACH"
+        ],
+        "accepted_data2_source_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
+        "accepted_data2_sha256": "d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+        "production_retrieval_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
+        "production_final_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
+        "production_source_sha256": "d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+        "source_retrieved_at": "2026-09-05T19:52:59.163585+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+      },
+      {
+        "recipe_source_ids": [
+          "SNAP4-DILLED-FISH-FILLETS"
+        ],
+        "accepted_data2_source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
+        "accepted_data2_sha256": "43d44c84d7c007a0c32906210b13212ffb43fb7a62312e9fb43c819f8a8a63a3",
+        "production_retrieval_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
+        "production_final_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
+        "production_source_sha256": "cf244124ef9fae3ad938a3f9b120b00efafdb8c464a0796cd7cd5e5a64afd536",
+        "source_retrieved_at": "2026-09-05T19:52:59.202239+00:00",
+        "retrieval_method": "GITHUB_ACTIONS_CURL_OFFICIAL_SOURCE",
+        "lineage_kind": "FRESH_GITHUB_ACTIONS_RETRIEVAL",
+        "comparison_result": "HASH_CHANGED_REVIEW_REQUIRED"
+      }
+    ],
+    "historical_lineage_kind": "RECOVERED_HISTORICAL_COMPLETION",
+    "note": "The three prior recovered historical completion instants remain unchanged. The source_retrieved_at values above are actual runner curl completion instants; production seed has not adopted unreviewed successors."
+  }
 }

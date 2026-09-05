@@ -1,3 +1,125 @@
+# PR4 — GitHub acquisition complete; local artifact delivery blocked
+
+## FACT
+
+Starting head: `20608c689bfe29eab2b90ef8580e132e3f5611e6`. The latest user decision
+classifies the prior blocker as transport/environment and explicitly authorizes
+one temporary branch-only GitHub Actions workflow. No new data-authority decision
+was needed or inferred.
+
+Temporary workflow commit: `06a501ca67f084245ce2765b16f225fa2c4fe658`.
+Metadata-output correction: `f7ceffc7433d363e06d30297ca0a1e30bb5cd11e`.
+Removal commit: `e950dfe913bd3dfae45dd0890f534e7cf22b9a49`.
+The final `.github/workflows` diff against main is empty. No source binaries,
+HTML, helpers, secrets or permanent Actions infrastructure are committed.
+
+Both acquisition runs/jobs succeeded:
+
+- [Run 33988010354](https://github.com/Mitronomik/family-food-os/actions/runs/33988010354),
+  job `101365038318`, artifact `9975753388`, **34,147,513 bytes**.
+- [Run 33988433450](https://github.com/Mitronomik/family-food-os/actions/runs/33988433450),
+  job `101366179384`, artifact `9975873265`, **34,147,503 bytes**.
+
+Artifact name: `pr4-source-provenance-refresh`. Each contains one manifest plus
+22 complete source representations according to upload logs and runner manifest.
+The second run adds metadata-only log output because local ZIP delivery failed;
+it does not place source files or base64 binaries in logs.
+
+The GitHub connector successfully obtained the first ZIP as a reusable file
+reference. However, local `gh run download`, curl HTTP/1.1, connector-file curl,
+Node fetch and Safari could not save that ZIP locally: artifact storage returned
+EOF/TLS connection failure. Certificate verification remained enabled. These are
+local delivery failures, **not** GitHub runner source acquisition failures.
+
+[Durable exact acquisition evidence](pr4-github-actions-acquisition.json) records
+all 22 actual requested/effective URLs, HTTP 200 outcomes, MIME types, byte sizes,
+SHA-256 and real runner UTC completion instants. The full structured manifest was
+retrieved locally through metadata-only job logs using the GitHub connector.
+The [lineage record](pr4-retrieval-provenance-review.json) distinguishes recovered
+historical completion from fresh GitHub retrieval.
+
+Results: **3** historical artifacts retained; **22/22** fresh acquisitions,
+**9** exact-hash artifacts, **13** changed-hash artifacts affecting **17 recipes**;
+**0** runner acquisition failures, **0** accepted presentation successors.
+All 22 succeeded on their historical official URL with no redirect/fallback.
+The 9 exact-hash artifacts also match already-existing local source bytes after
+local SHA recomputation. Those files are not falsely reported as downloaded ZIP
+contents. The ZIP digest and its complete local file inventory remain unverified.
+The earlier cached Easter-page discrepancy is not relevant to the successfully
+retrieved byte-identical accepted Easter PDF.
+
+Changed-hash recipes requiring current-byte review:
+
+- `FNS5-BAKED-LENTILS-CASSEROLE`
+- `SNAP6-SPINACH-APPLE-SALAD`, `SNAP4-PEAR-ORANGE-SAUCE`, `SNAP6-WALDORF-SALAD`
+- `SNAP6-PEACH-CRISP`, `SNAP8-SOMALI-SUMMER-SALAD`
+- `SNAP6-SEARED-GREENS`, `SNAP4-SPRING-VEGETABLE-SAUTE`
+- `FNS2-ORANGE-PORK-CHOPS`
+- `WIC4-BUTTERNUT-SOUP`
+- `SNAP2-SIMPLE-GREEN-SMOOTHIE`
+- `SNAP3-GRILLED-FRUIT`
+- `FNS4-OVEN-FRIED-FISH`
+- `SNAP8-APPLE-CARROT-SOUP`
+- `SNAP4-BROWN-RICE-PILAF`
+- `SNAP5-KALE-NUTS-RAISINS`
+- `SNAP4-DILLED-FISH-FILLETS`
+
+## ASSUMPTION
+
+Changed hashes may reflect presentation changes, including browser-printed PDF
+versus current HTML representation. No such successor is approved by assumption.
+Acquisition is complete on the runner; local delivery may be environment-specific.
+
+## BLOCKER
+
+**PR4 ACQUISITION INFRASTRUCTURE BLOCKER — local Actions artifact delivery.**
+The 13 changed-hash current artifacts cannot yet be reviewed locally. Their
+recipe-relevant and rights-notice comparison remains unassessed. No authoritative
+or rights drift has been established, and zero drift is not asserted. Production
+compiler/loader/seed correction remains pending, preserving immutable accepted
+DATA2 and source selection. Production counts, new step count and fresh first/
+second seed acceptance are not claimed.
+
+## OPTIONS / RECOMMENDED DECISION
+
+Download the [existing second Actions artifact](https://github.com/Mitronomik/family-food-os/actions/runs/33988433450/artifacts/9975873265)
+through a working client and save its ZIP locally. Expected ZIP SHA-256:
+`bba69f93cdb9866402bf1e156c20c7b776b44b7b42b674b1a9b9c17617fa6f56`.
+It expires `2026-09-12T19:53:05Z`. Verify this digest, 23 ZIP entries, and every
+source hash against the durable runner manifest before content review.
+
+Recommended: deliver this existing artifact to the task-local workspace, then
+resume the 13 changed-hash comparisons and full PR4 correction immediately.
+No new corpus, fallback permission, historical-log recovery or permanent CI is
+needed. The temporary workflow has already been removed despite the local delivery
+failure, honoring the hard final-tree boundary. PR #10 remains open, PR4 blocked;
+PR5 and future bounded contexts remain unauthorized and untouched.
+
+## Verification
+
+The acquisition workflow and metadata output were syntax/structure checked before
+push; both real GitHub jobs passed. Current verification:
+
+- DATA2 validator: **PASS**; DATA2 focused: **164 passed in 3.88s**.
+- Full existing PR4 domain/application/architecture/persistence/migration/seed:
+  **53 passed in 6.61s**.
+- Affected historical PR4-DATA/FoodIngredient: **82 passed in 2.57s**.
+- Full backend + launcher: **2983 passed in 430.40s**, with localhost sockets
+  permitted. Initial sandbox run had 2700 passed / 162 failed / 121 errors,
+  including localhost-bind PermissionError; tests were not changed or weakened.
+- Ruff: **24 files already formatted; All checks passed!**
+- Exact manifest/UTC/accepted URL+hash/historical recovery validation: **PASS**.
+- Diff and staged scope: **PASS**, seven evidence/README/state files.
+- Final `.github/workflows` and accepted DATA2 diff against main: **EMPTY**.
+
+These passing suites preserve the existing implementation baseline. The corrected
+DATA2 first/second fresh seed and new production step count remain pending the
+mandatory source review gate; old seed test results are not new seed acceptance.
+
+---
+
+## Historical previous pass — local official equivalent attempts
+
 # PR4 — official equivalent acquisition remains unavailable
 
 ## FACT

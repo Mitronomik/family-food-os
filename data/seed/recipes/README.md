@@ -1,5 +1,14 @@
 # PR4 Recipe Catalogue seed — DATA2 integration pending
 
+Latest transport result: GitHub runner acquired all **22/22** remaining artifacts.
+Real completion instants and lineage are in
+[Actions evidence](../../../docs/family-food/pr4-github-actions-acquisition.json).
+Nine are byte-identical; thirteen require current-source comparison. The three
+historical instants are preserved. Local delivery of the Actions ZIP remains
+blocked, so the production JSON below is still obsolete and uncorrected. The
+one-time workflow was removed; final `.github/workflows` diff is empty. Earlier
+local-source acquisition failures below are historical, superseded by this result.
+
 Latest pass: official canonical/equivalent URLs are authorized by
 [Orchestrator](https://github.com/Mitronomik/family-food-os/pull/10#issuecomment-5554016049).
 Current Easter PDF/page/collection and linked MyPlate routes failed acquisition.
