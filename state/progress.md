@@ -273,7 +273,7 @@ Deliberately deferred:
 
 ## PR4-DATA — Recipe Corpus FoodIngredient Coverage
 
-Status: **READY FOR REVIEW**
+Status: **COMPLETE**
 
 PR4-DATA is a supporting data operation, not a product milestone. It runs on
 branch `data/pr4-recipe-ingredient-coverage` from accepted PR3 merge commit
@@ -317,6 +317,65 @@ Verification evidence:
 - Ruff format/check and `git diff --check`: passed.
 
 No FoodIngredient schema, migration, domain, repository, UoW, search, allergen,
-API or frontend behavior changed. No Recipe schema, domain, persistence or
-implementation was started. `PR4 — Recipe Catalogue` remains the next product
-milestone and waits for PR4-DATA acceptance/merge. PR5 remains unauthorized.
+API or frontend behavior changed in PR4-DATA, and no Recipe implementation was
+started in that supporting operation. PR4-DATA was then accepted and merged;
+PR5 remains unauthorized.
+
+Closure evidence:
+
+- final review: `PR4-DATA FINAL REVIEW: ACCEPT`;
+- GitHub PR `#8`: **MERGED**;
+- accepted head: `59cc1073ac1f951da5b172eb111ed162765b5eaf`;
+- merge commit: `704c588387a28e18ac1aa947ded398f168875ea0`.
+
+## PR4 — Verified Recipe Catalogue
+
+Status: **READY FOR REVIEW**
+
+Branch `migration/pr4-recipe-catalogue` is based on and currently has working-
+tree HEAD `704c588387a28e18ac1aa947ded398f168875ea0`. The review candidate appends
+migration `0024_food_recipe_catalogue` and adds the platform-owned Recipe,
+RecipeVersion, RecipeIngredient, RecipeStep and RecipeEquipment model without
+altering legacy recipe tables.
+
+Implementation evidence:
+
+- Recipe and RecipeVersion identities use application-generated UUIDv4;
+- complete version aggregates are written atomically through driver-independent
+  contracts and a Recipe Catalogue UoW over synchronous SQLAlchemy Core;
+- versions and version-owned children have direct SQLite update/delete guards;
+- v2 appends to v1, links through same-Recipe `created_from_version_id`, and
+  advances current verified lookup without changing the v1 snapshot;
+- deterministic read-only scaling uses exact Decimal arithmetic: 6→3 maps
+  600 g→300 g and 1 pcs→0.5 pcs; 6→9 maps 600 g→900 g and 1 pcs→1.5 pcs;
+- successful and failed commit/rollback terminality revokes repositories and a
+  later UoW remains clean;
+- no HTTP API, frontend, nutrition calculation or PR5+ context was added.
+
+Corpus and rights evidence:
+
+- 30 active Recipes and 30 current `SOURCE_VERIFIED` v1 records;
+- 365 RecipeIngredients, 315 RecipeSteps and 0 RecipeEquipment rows;
+- source mix: 3 Breakfasts, 8 Main Dishes, 11 Side Dishes, 3 Salads,
+  3 Sandwiches and 2 Standardized Recipes Project 2024 cards;
+- all 30 manifests have unique full SHA-256 values, original servings of six,
+  reviewed rights basis and USDA attribution evidence;
+- exact accepted FoodIngredient subset: 119 codes; unresolved required lines: 0;
+  FoodIngredients introduced by PR4: 0;
+- the 363-row PR4-DATA matrix becomes 365 RecipeIngredients: one non-consumable
+  Bean Burrito Bowl structural marker is omitted, while three water rows with
+  two explicit semicolon-plus quantities are each represented by two lines;
+
+Seed and verification evidence:
+
+- exact source-PDF rebuild matches both checked-in JSON artifacts byte-for-byte;
+- first fresh run inserted Recipes/Versions/Ingredients/Steps/Equipment
+  `30/30/365/315/0`, conflicts `0`;
+- second identical run inserted `0/0/0/0/0`, reported all rows existing, and
+  conflicts remained `0`;
+- PR4-focused and affected migration suite: `80 passed`;
+- backend suite within final regression: `2174 passed`;
+- full backend + launcher regression: `2819 passed`;
+- Ruff format/check and `git diff --check`: passed.
+
+PR4 remains a review candidate, not COMPLETE. PR5 is unauthorized.

@@ -104,15 +104,24 @@ PR2-DOCS closure:
 - full backend + launcher regression: `2761 passed`;
 - Ruff and `git diff --check`: passed.
 
+## PR4-DATA closure
+
+`PR4-DATA — Recipe Corpus FoodIngredient Coverage — COMPLETE`
+
+- GitHub PR `#8`: **MERGED**;
+- accepted head: `59cc1073ac1f951da5b172eb111ed162765b5eaf`;
+- merge commit: `704c588387a28e18ac1aa947ded398f168875ea0`;
+- final review: `PR4-DATA FINAL REVIEW: ACCEPT`.
+
 ## Current active repository task
 
-`PR4-DATA — Recipe Corpus FoodIngredient Coverage — READY FOR REVIEW`
+`PR4 — Verified Recipe Catalogue — READY FOR REVIEW`
 
-This is a supporting data operation, not a product milestone.
+Branch: `migration/pr4-recipe-catalogue`
 
-Branch: `data/pr4-recipe-ingredient-coverage`
+Base commit: `704c588387a28e18ac1aa947ded398f168875ea0`
 
-Base commit: `1a67fd96e9d2921ed986dc887081bbfe57c4dd83`
+Working-tree HEAD at verification: `704c588387a28e18ac1aa947ded398f168875ea0`
 
 The corrected 30-card USDA FNS CACFP corpus and all 363 source ingredient rows
 are frozen under `data/curation/pr4/`. Two minimal replacements reduce the
@@ -125,11 +134,25 @@ The global seed now contains 183 FoodIngredients and is no longer constrained
 by PR3's historical 80–120 technical-slice range. The bounded MVP0 manifest,
 not the production loader, enforces the unchanged `<=120` Gate 2 fixture limit.
 
-No Recipe schema, domain, persistence, migration, seed, scaling, API or frontend
-implementation was started. PR5 remains unauthorized.
+PR4 now implements the platform-owned verified Recipe Catalogue from this
+accepted frozen corpus. Migration `0024_food_recipe_catalogue` creates the five
+new catalogue tables beside the legacy recipe schema. The trusted offline seed
+contains exactly 30 active Recipes, 30 immutable source-verified v1 records,
+365 ordered ingredient lines, 315 source-derived steps and 0 inferred equipment
+rows. All ingredient lines resolve to the accepted 119-code subset without
+adding a FoodIngredient.
+
+Verification evidence:
+
+- PR4-focused and affected migration suite: `80 passed`;
+- backend suite within final regression: `2174 passed`;
+- mandatory backend + launcher regression: `2819 passed`;
+- checked-in seed rebuilt byte-for-byte from the exact 30 reviewed PDFs;
+- fresh seed run inserted `30/30/365/315/0`; identical rerun inserted zero;
+- Ruff format/check and `git diff --check`: passed.
+
+PR4 is READY FOR REVIEW, not complete. PR5 remains unauthorized.
 
 ## Next action
 
-Complete PR4-DATA final review and merge it before starting the next product
-milestone, `PR4 — Recipe Catalogue`. PR4 implementation is waiting for the
-PR4-DATA merge. PR5 remains unauthorized.
+Perform PR4 final review. Do not begin PR5.

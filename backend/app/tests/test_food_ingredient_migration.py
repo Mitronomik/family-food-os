@@ -41,7 +41,7 @@ def table_names(database_path: Path) -> set[str]:
 
 
 def test_migration_chain_ends_with_food_ingredient_catalogue():
-    assert expected_migration_ids()[-2:] == [
+    assert expected_migration_ids()[-3:-1] == [
         "0022_household_foundation",
         "0023_food_ingredient_catalogue",
     ]
@@ -83,7 +83,16 @@ def test_0022_database_upgrades_only_to_0023_and_preserves_existing_schema(tmp_p
             "PRAGMA table_info(household_members)"
         ).fetchall()
 
-    applied = apply_migrations(DatabaseConfig(path=database_path))
+    original = list(MIGRATION_MODULES)
+    try:
+        MIGRATION_MODULES[:] = original[
+            : original.index("app.migrations.versions.0023_food_ingredient_catalogue")
+            + 1
+        ]
+        applied = apply_migrations(DatabaseConfig(path=database_path))
+        expected_through_0023 = expected_migration_ids()
+    finally:
+        MIGRATION_MODULES[:] = original
 
     assert applied == ["0023_food_ingredient_catalogue"]
     with sqlite3.connect(database_path) as connection:
@@ -105,7 +114,7 @@ def test_0022_database_upgrades_only_to_0023_and_preserves_existing_schema(tmp_p
                 "SELECT migration_id FROM schema_migrations ORDER BY rowid"
             )
         ]
-    assert history == expected_migration_ids()
+    assert history == expected_through_0023
 
 
 def test_catalogue_foreign_keys_unique_constraints_and_indexes_are_real(tmp_path):

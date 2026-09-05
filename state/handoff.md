@@ -17,6 +17,43 @@ Source provenance:
 
 Do not continue CosmeticWorkshopOS product lifecycle work from this repository.
 
+## Current review candidate
+
+`PR4-DATA — Recipe Corpus FoodIngredient Coverage — COMPLETE`
+
+- GitHub PR `#8`: **MERGED**;
+- accepted head: `59cc1073ac1f951da5b172eb111ed162765b5eaf`;
+- merge commit and PR4 base: `704c588387a28e18ac1aa947ded398f168875ea0`;
+- final review: `PR4-DATA FINAL REVIEW: ACCEPT`.
+
+`PR4 — Verified Recipe Catalogue — READY FOR REVIEW`
+
+- branch: `migration/pr4-recipe-catalogue`;
+- base and working-tree HEAD at verification:
+  `704c588387a28e18ac1aa947ded398f168875ea0`;
+- migration: `0024_food_recipe_catalogue` after `0023`;
+- structured seed counts: 30 Recipes, 30 immutable RecipeVersions,
+  365 RecipeIngredients, 315 RecipeSteps, 0 RecipeEquipment rows;
+- source mix: 3 Breakfasts, 8 Main Dishes, 11 Side Dishes, 3 Salads,
+  3 Sandwiches, 2 Standardized Recipes Project 2024;
+- all 30 source manifests have unique SHA-256, six original servings, reviewed
+  rights basis and rights-evidence URL;
+- exact FoodIngredient coverage is the accepted 119-code manifest, with 0
+  unresolved required lines and 0 new FoodIngredients in PR4;
+- first seed run inserted `30/30/365/315/0`; second run inserted zero and
+  reported the same rows existing, both with zero conflicts;
+- scaling proof: 6→3 and 6→9 preserve identity/history/steps and exactly scale
+  600 g to 300/900 g and 1 pcs to 0.5/1.5 pcs;
+- v1→v2, unchanged v1 snapshot, current-v2 lookup and direct DB immutability
+  guards are covered;
+- aggregate rollback and successful/failed UoW terminality are covered;
+- focused/affected suite: `80 passed`; backend suite within the final regression:
+  `2174 passed`; mandatory backend + launcher regression: `2819 passed`;
+- Ruff format/check and `git diff --check`: passed.
+
+PR4 is not COMPLETE. The immediate action is PR4 final review. PR5 remains
+unauthorized; do not begin it.
+
 ## Completed milestone
 
 `PR2-C — Household Foundation — COMPLETE`
@@ -87,7 +124,7 @@ Before continuing:
     - `backend/app/db/migrations.py`
     - its migration-chain tests
 
-## Current work
+## Superseded PR3/PR4-DATA handoff history
 
 `PR3 — FoodIngredient Catalogue — COMPLETE`
 
@@ -101,9 +138,10 @@ Closure evidence:
 - full backend + launcher regression: `2761 passed`;
 - Ruff and `git diff --check`: passed.
 
-`PR4-DATA — Recipe Corpus FoodIngredient Coverage — READY FOR REVIEW`
+`PR4-DATA — Recipe Corpus FoodIngredient Coverage — COMPLETE`
 
-This is a supporting data operation, not a product milestone.
+This was a supporting data operation, not a product milestone. The historical
+review evidence below was accepted and merged as GitHub PR #8.
 
 Branch: `data/pr4-recipe-ingredient-coverage`
 
@@ -173,9 +211,7 @@ Verification:
 
 ## Immediate next action
 
-Complete PR4-DATA final review and merge. The next product milestone remains
-`PR4 — Recipe Catalogue`, and its implementation waits for PR4-DATA merge. PR5
-remains unauthorized.
+Perform PR4 final review. Do not begin PR5.
 
 ## Persistence constraints
 
