@@ -1,0 +1,546 @@
+{
+  "schema_version": 1,
+  "status": "PR4_SOURCE_DRIFT_BLOCKER",
+  "blocker_type": "CURRENT_SOURCE_ACQUISITION_UNAVAILABLE",
+  "recorded_at": "2026-09-05T17:41:16.040272+00:00",
+  "recorded_at_semantics": "Time this failure report was assembled; never a retrieval instant.",
+  "authorization_url": "https://github.com/Mitronomik/family-food-os/pull/10#issuecomment-5553524319",
+  "starting_head": "17d23b22340a76dfa79420e74b97ce5703fc29a8",
+  "accepted_main": "2f5fba991f1f612ce7b4b8dfda8ebd41ad6333e7",
+  "counts": {
+    "distinct_accepted_artifacts": 25,
+    "historical_completion_records_reused": 3,
+    "fresh_distinct_artifacts_attempted": 22,
+    "fresh_byte_identical_verified": 0,
+    "presentation_only_successors_verified": 0,
+    "fresh_artifacts_pending": 22,
+    "recipes_pending_fresh_artifacts": 27
+  },
+  "authoritative_drift": "NOT_ASSESSABLE_WITHOUT_COMPLETE_CURRENT_SOURCE_BYTES",
+  "rights_drift": "NOT_ASSESSABLE_WITHOUT_COMPLETE_CURRENT_SOURCE_BYTES",
+  "historical_completion_records": [
+    {
+      "source_id": "CACFP6-CORN-EDAMAME-BLEND",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
+      "sha256": "314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef",
+      "download_id": 33,
+      "download_state": 1,
+      "received_bytes": 413087,
+      "total_bytes": 413087,
+      "start_time_raw": 13432970139455069,
+      "end_time_raw": 13432970140896467,
+      "download_completed_at": "2026-09-04T04:35:40.896467+00:00"
+    },
+    {
+      "source_id": "CACFP6-TABBOULEH",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tabbouleh_6_Servings.pdf",
+      "sha256": "ef746c97415426316a78995b42a1e7f5a5d76c0078e6f006ab9940f0120cca49",
+      "download_id": 39,
+      "download_state": 1,
+      "received_bytes": 447061,
+      "total_bytes": 447061,
+      "start_time_raw": 13432970151108770,
+      "end_time_raw": 13432970152082224,
+      "download_completed_at": "2026-09-04T04:35:52.082224+00:00"
+    },
+    {
+      "source_id": "CACFP6-CREAMY-COLESLAW",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf",
+      "sha256": "8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6",
+      "download_id": 23,
+      "download_state": 1,
+      "received_bytes": 409403,
+      "total_bytes": 409403,
+      "start_time_raw": 13432970092470724,
+      "end_time_raw": 13432970093373753,
+      "download_completed_at": "2026-09-04T04:34:53.373753+00:00"
+    }
+  ],
+  "fresh_attempts": [
+    {
+      "artifact_id": "artifact-01",
+      "source_url": "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
+      "accepted_data2_sha256": "1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+      "recipe_source_ids": [
+        "SNAP6-HEAVENLY-DEVILED-EGGS"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED",
+      "additional_attempts": [
+        {
+          "method": "Codex in-app browser, exact URL",
+          "result": "Access Denied from source server; no source PDF acquired",
+          "reference": "18.9f477b5c.1788629465.1290b61a"
+        },
+        {
+          "method": "Safari, exact URL",
+          "result": "Cannot establish a secure connection to snaped.fns.usda.gov; no source PDF acquired"
+        },
+        {
+          "method": "System curl HTTPS, exact URL, TLS validation unchanged",
+          "result": "Exit 35: LibreSSL SSL_connect: SSL_ERROR_SYSCALL"
+        },
+        {
+          "method": "Web reader, exact URL",
+          "result": "Returned PDF extraction labelled crawled seven months ago; rejected as fresh acquisition evidence"
+        }
+      ]
+    },
+    {
+      "artifact_id": "artifact-02",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese/printable/print",
+      "accepted_data2_sha256": "357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334",
+      "recipe_source_ids": [
+        "WIC1-BEYOND-BASIC-GRILLED-CHEESE"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED",
+      "additional_attempts": [
+        {
+          "method": "Codex in-app browser, exact URL",
+          "result": "Access Denied from source server; no source HTML acquired",
+          "reference": "18.9f477b5c.1788629498.1290e580"
+        },
+        {
+          "method": "Web reader, exact URL",
+          "result": "403 Forbidden"
+        }
+      ]
+    },
+    {
+      "artifact_id": "artifact-03",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+      "accepted_data2_sha256": "0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+      "recipe_source_ids": [
+        "TNC6-EGGS-SPINACH"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED",
+      "additional_attempts": [
+        {
+          "method": "Codex in-app browser, exact URL",
+          "result": "PDF viewer displayed a 20-page document. No supported complete-byte export obtained; display alone does not establish fresh bytes, hash or completion provenance."
+        }
+      ]
+    },
+    {
+      "artifact_id": "artifact-04",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+      "accepted_data2_sha256": "7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+      "recipe_source_ids": [
+        "TNC6-APPLESAUCE"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-05",
+      "source_url": "https://snaped.fns.usda.gov/snap/MPMF/Handouts/HowMuchFoodandPhysicalActivityHandouts.pdf",
+      "accepted_data2_sha256": "b2ac0732c26ad10426343c5aab115248b020983fa4dcad79f230ff146a02641c",
+      "recipe_source_ids": [
+        "SNAP4-SPANISH-FRITTATA"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-06",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/lentils-casserole",
+      "accepted_data2_sha256": "86b118c36ca73b75618e1656bbc96c2c06f59785ca7292efc47be0fe99cc4598",
+      "recipe_source_ids": [
+        "FNS5-BAKED-LENTILS-CASSEROLE"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-07",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "accepted_data2_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "recipe_source_ids": [
+        "HARV6-FRESH-TOMATO-SALSA",
+        "HARV6-GARDEN-PASTA-SALAD"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-08",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "accepted_data2_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "recipe_source_ids": [
+        "SNAP6-SPINACH-APPLE-SALAD",
+        "SNAP4-PEAR-ORANGE-SAUCE",
+        "SNAP6-WALDORF-SALAD"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-09",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+      "accepted_data2_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "recipe_source_ids": [
+        "SNAP6-PEACH-CRISP",
+        "SNAP8-SOMALI-SUMMER-SALAD"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-10",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "accepted_data2_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "recipe_source_ids": [
+        "SNAP6-SEARED-GREENS",
+        "SNAP4-SPRING-VEGETABLE-SAUTE"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-11",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/orange-porkchops",
+      "accepted_data2_sha256": "aa07563b660219b4173edc63cf6f76478e1bc71bff7f0c8a54fc5eaf5985a479",
+      "recipe_source_ids": [
+        "FNS2-ORANGE-PORK-CHOPS"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-12",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+      "accepted_data2_sha256": "ee642490786720348eae5f18170c5dcb26a0c7b22b042fc829ab0dc6ee1e95e8",
+      "recipe_source_ids": [
+        "WIC4-BUTTERNUT-SOUP"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-13",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+      "accepted_data2_sha256": "0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+      "recipe_source_ids": [
+        "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "HTTP Error 403: Forbidden",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-14",
+      "source_url": "https://snaped.fns.usda.gov/node/2489",
+      "accepted_data2_sha256": "240c8b7a10a0399cb70743d48f59c9d6b828c8e640e9cbfc1eec0762cf6108ca",
+      "recipe_source_ids": [
+        "SNAP2-SIMPLE-GREEN-SMOOTHIE"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-15",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit",
+      "accepted_data2_sha256": "03269eead24a3965e76c71a9eed6b7b82b9d785845427fa9b8b445aee55cf6f9",
+      "recipe_source_ids": [
+        "SNAP3-GRILLED-FRUIT"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-16",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+      "accepted_data2_sha256": "439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6",
+      "recipe_source_ids": [
+        "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "HTTP Error 403: Forbidden",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-17",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/fish",
+      "accepted_data2_sha256": "068b5b0d4c7e45ad498758501bcc8f67b7e5f69f9c27ea4db4af39b05cba069c",
+      "recipe_source_ids": [
+        "FNS4-OVEN-FRIED-FISH"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-18",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+      "accepted_data2_sha256": "1cc2ed9ddb3253b4a9a5ed9aa6609184e7381035977d00a542a00239f8261258",
+      "recipe_source_ids": [
+        "SNAP8-APPLE-CARROT-SOUP"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-19",
+      "source_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+      "accepted_data2_sha256": "f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281",
+      "recipe_source_ids": [
+        "SNAP4-BROWN-RICE-PILAF"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-20",
+      "source_url": "https://snaped.fns.usda.gov/node/1861",
+      "accepted_data2_sha256": "7c2bb840618e0dfbe372e9ecdb697ad59d2fab36e0fbf07cabe347a93ea6a1a0",
+      "recipe_source_ids": [
+        "SNAP5-KALE-NUTS-RAISINS"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-21",
+      "source_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
+      "accepted_data2_sha256": "d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+      "recipe_source_ids": [
+        "SNAP4-BRAISED-CHICKEN-SPINACH"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    },
+    {
+      "artifact_id": "artifact-22",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
+      "accepted_data2_sha256": "43d44c84d7c007a0c32906210b13212ffb43fb7a62312e9fb43c819f8a8a63a3",
+      "recipe_source_ids": [
+        "SNAP4-DILLED-FISH-FILLETS"
+      ],
+      "status": "SOURCE_ACQUISITION_FAILED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "request_method": "Python urllib HTTPS GET of the exact accepted URL; read complete response before assigning completion time or hash.",
+      "production_source_sha256": null,
+      "source_retrieved_at": null,
+      "comparison_result": "NOT_COMPARED_SOURCE_RETRIEVAL_FAILED"
+    }
+  ],
+  "limitations": [
+    "Access failures do not prove sources disappeared or changed.",
+    "No old browser logs, mtime or Git history were searched in this refresh pass.",
+    "No TLS validation, browser security or system network settings were changed.",
+    "Native Chrome guest window required search-engine setup; no default setting was submitted and no source retrieval was claimed from that path.",
+    "No source byte payload, browser database, credentials or unrelated browsing data is included."
+  ],
+  "official_equivalent_fallback_pass": {
+    "starting_head": "7e155013a5c5a3fea42ec91930f7a1a6e06ef582",
+    "decision_url": "https://github.com/Mitronomik/family-food-os/pull/10#issuecomment-5554016049",
+    "decision_title": "ORCHESTRATOR DECISION — OFFICIAL CANONICAL EQUIVALENT URL FALLBACK AUTHORIZED",
+    "decision_created_at": "2026-09-05T18:48:54Z",
+    "status": "BLOCKED_CURRENT_SOURCE_ACQUISITION",
+    "primary_blocked_source_id": "SNAP6-HEAVENLY-DEVILED-EGGS",
+    "attempts": [
+      {
+        "production_retrieval_url": "https://snaped.fns.usda.gov/sites/default/files/documents/EnglishEaster508_1.pdf",
+        "attempt_started_at": "2026-09-05T19:11:50.650978+00:00",
+        "status": "FAILED",
+        "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+        "production_source_sha256": null,
+        "source_retrieved_at": null,
+        "production_final_url": null,
+        "comparison_result": "NOT_ASSESSED_NO_COMPLETE_ARTIFACT",
+        "affected_source_ids": [
+          "SNAP6-HEAVENLY-DEVILED-EGGS"
+        ],
+        "accepted_data2_source_url": "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
+        "accepted_data2_sha256": "1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+        "retrieval_method": "Python urllib HTTPS complete-body acquisition attempt; failed before complete source response."
+      },
+      {
+        "production_retrieval_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/heavenly-deviled-eggs",
+        "attempt_started_at": "2026-09-05T19:11:50.651565+00:00",
+        "status": "FAILED",
+        "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+        "production_source_sha256": null,
+        "source_retrieved_at": null,
+        "production_final_url": null,
+        "comparison_result": "NOT_ASSESSED_NO_COMPLETE_ARTIFACT",
+        "affected_source_ids": [
+          "SNAP6-HEAVENLY-DEVILED-EGGS"
+        ],
+        "accepted_data2_source_url": "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
+        "accepted_data2_sha256": "1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+        "retrieval_method": "Python urllib HTTPS complete-body acquisition attempt; failed before complete source response."
+      },
+      {
+        "production_retrieval_url": "https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese",
+        "attempt_started_at": "2026-09-05T19:11:50.651644+00:00",
+        "status": "FAILED",
+        "error": "HTTP Error 403: Forbidden",
+        "production_source_sha256": null,
+        "source_retrieved_at": null,
+        "production_final_url": null,
+        "comparison_result": "NOT_ASSESSED_NO_COMPLETE_ARTIFACT",
+        "retrieval_method": "Python urllib HTTPS complete-body acquisition attempt; failed before complete source response."
+      },
+      {
+        "production_retrieval_url": "https://www.fns.usda.gov/sites/default/files/resource-files/tnc-eggs.pdf",
+        "attempt_started_at": "2026-09-05T19:11:50.651702+00:00",
+        "status": "FAILED",
+        "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+        "production_source_sha256": null,
+        "source_retrieved_at": null,
+        "production_final_url": null,
+        "comparison_result": "NOT_ASSESSED_NO_COMPLETE_ARTIFACT",
+        "retrieval_method": "Python urllib HTTPS complete-body acquisition attempt; failed before complete source response."
+      },
+      {
+        "production_retrieval_url": "https://www.fns.usda.gov/sites/default/files/resource-files/tnc-applesauce.pdf",
+        "attempt_started_at": "2026-09-05T19:11:50.737797+00:00",
+        "status": "FAILED",
+        "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+        "production_source_sha256": null,
+        "source_retrieved_at": null,
+        "production_final_url": null,
+        "comparison_result": "NOT_ASSESSED_NO_COMPLETE_ARTIFACT",
+        "retrieval_method": "Python urllib HTTPS complete-body acquisition attempt; failed before complete source response."
+      },
+      {
+        "production_retrieval_url": "https://www.fns.usda.gov/sites/default/files/resource-files/HarvestofRecipes.pdf",
+        "attempt_started_at": "2026-09-05T19:11:55.675570+00:00",
+        "status": "FAILED",
+        "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+        "production_source_sha256": null,
+        "source_retrieved_at": null,
+        "production_final_url": null,
+        "comparison_result": "NOT_ASSESSED_NO_COMPLETE_ARTIFACT",
+        "retrieval_method": "Python urllib HTTPS complete-body acquisition attempt; failed before complete source response."
+      },
+      {
+        "production_retrieval_url": "https://myplate-stg.kwaps.platform.usda.gov/recipes/heavenly-deviled-eggs",
+        "attempt_started_at": "2026-09-05T19:12:00.688475+00:00",
+        "status": "FAILED",
+        "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+        "production_source_sha256": null,
+        "source_retrieved_at": null,
+        "production_final_url": null,
+        "comparison_result": "NOT_ASSESSED_NO_COMPLETE_ARTIFACT",
+        "affected_source_ids": [
+          "SNAP6-HEAVENLY-DEVILED-EGGS"
+        ],
+        "accepted_data2_source_url": "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
+        "accepted_data2_sha256": "1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+        "retrieval_method": "Python urllib HTTPS complete-body acquisition attempt; failed before complete source response."
+      }
+    ],
+    "additional_browser_checks": [
+      {
+        "url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/easter",
+        "result": "Access Denied",
+        "reference": "18.9f477b5c.1788635161.12b4e38e"
+      },
+      {
+        "url": "https://snaped.fns.usda.gov/sites/default/files/documents/EnglishEaster508_1.pdf",
+        "result": "Access Denied",
+        "reference": "18.9f477b5c.1788635418.12b654c4"
+      },
+      {
+        "url": "https://www.myplate.gov/recipes/supplemental-nutrition-assistance-program-snap/heavenly-deviled-eggs",
+        "result": "Forbidden; independent curl exited 35 SSL_ERROR_SYSCALL, HTTP status 000"
+      }
+    ],
+    "discovery_only_warning": "Search-reader text suggests an added handwashing direction in current Easter representations. This is cached discovery evidence, not a retrieved production artifact or an established fresh authoritative diff. USDA staging search result was discovery only and was not approved as a canonical production endpoint.",
+    "historical_retrieval_artifacts": 3,
+    "fresh_exact_hash_artifacts": 0,
+    "presentation_successors": 0,
+    "accepted_fallback_urls": [],
+    "authoritative_drift": "UNASSESSED",
+    "rights_drift": "UNASSESSED",
+    "changed_hash_successors": [],
+    "remaining_distinct_artifacts": 22,
+    "remaining_recipes": 27,
+    "limitations": "No proof of global source disappearance. Tested current official equivalent paths are inaccessible from available clients. Failed request attempt times are not source retrieval instants. No cached reader, old source bytes or denial response accepted as a production artifact."
+  }
+}

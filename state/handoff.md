@@ -2,6 +2,68 @@
 
 Updated: `2026-09-05`
 
+## Latest execution — official equivalent fallback
+
+PR4-DATA2 — COMPLETE; PR #13 — MERGED at
+`2f5fba991f1f612ce7b4b8dfda8ebd41ad6333e7` (accepted DATA2 head
+`918bf81b5da306fc65a57643de515ca1b3fbd1e4`).
+PR4 — BLOCKED; PR #10 — OPEN; PR5 — UNAUTHORIZED.
+Starting head: `7e155013a5c5a3fea42ec91930f7a1a6e06ef582`; the resulting head
+is recorded in PR #10 after push, avoiding self-referential commit hashes.
+
+The latest [official-equivalent authorization](https://github.com/Mitronomik/family-food-os/pull/10#issuecomment-5554016049)
+was applied. Current SNAP-Ed Easter PDF/recipe/collection and linked MyPlate
+paths did not yield complete current source bytes (403/Access Denied/TLS EOF).
+`SNAP6-HEAVENLY-DEVILED-EGGS` remains the concrete acquisition blocker.
+Historical artifacts reusable: 3; fresh byte-identical: 0; successors: 0.
+Authoritative and rights drift are unassessed. Accepted DATA2 and production
+implementation remain unchanged. No new permission to use official fallback
+URLs is needed; a working acquisition path is needed. See the
+[exact evidence and next action](../docs/family-food/pr4-retrieval-provenance-review.md).
+Current checks: DATA2 validator PASS; DATA2 164 passed; preserved PR4 excluding
+seed 43 passed; affected regressions 82 passed; Ruff 24 files and diff check PASS.
+Fresh seed/full corrected acceptance not run.
+The previous execution sections below are historical, superseded where they
+restrict retrieval to exact historical URLs. PR4 is not review-ready.
+
+## Current execution — PR4 DATA2 integration
+
+PR4-DATA2 — COMPLETE. PR #13 merged after `PR4-DATA2 FINAL REVIEW: ACCEPT`.
+Accepted head: `918bf81b5da306fc65a57643de515ca1b3fbd1e4`.
+Merge commit / synchronized main: `2f5fba991f1f612ce7b4b8dfda8ebd41ad6333e7`.
+Final review submitted at `2026-09-05T16:06:13Z`; merged at
+`2026-09-05T16:26:20Z`.
+
+PR4 — BLOCKED (current-source acquisition) on existing open PR #10,
+branch `migration/pr4-recipe-catalogue`; this refresh starts at
+`17d23b22340a76dfa79420e74b97ce5703fc29a8`.
+Existing accepted-main synchronization:
+`dfcbce2814b46da45cf346762a778170ffc5b36c`.
+
+The [Orchestrator decision](https://github.com/Mitronomik/family-food-os/pull/10#issuecomment-5553524319)
+authorizes bounded refresh; no further data permission is needed to acquire the
+same accepted sources. Three historical completion records are reused exactly.
+Fresh HTTPS acquisition attempted all 22 distinct remaining artifacts once:
+20 TLS EOF failures and 2 HTTP 403 failures. Exact-URL browser/Safari/curl
+fallbacks could not acquire EasterMenu.pdf; WIC printable returned Access Denied.
+No complete fresh artifact/hash/comparison was accepted. Drift remains
+unassessed, not asserted absent. No old-log search or invented timestamp.
+
+See [current source-access blocker and exact attempts](../docs/family-food/pr4-retrieval-provenance-review.md).
+Accepted DATA2, runtime, compiler, loader and production JSON remain unchanged.
+PR4 correction, new step count, equipment population and fresh seed/full
+regression acceptance remain pending access to current source bytes.
+DATA2 validator PASS; DATA2 focused 164 passed; preserved PR4 excluding seed
+43 passed; affected regression 82 passed. Ruff on 24 PR Python files and
+diff/scope checks PASS. Full seed/backend+launcher acceptance not run. Final
+correction head is recorded in PR #10 after push, without self-referential
+hashes inside state files.
+
+PR4 is neither COMPLETE nor ready for final review. PR5 remains unauthorized.
+The accepted-main records below are retained as historical execution evidence;
+their pre-merge DATA2 status/next-action sentences are superseded here.
+
+
 ## Immediate handoff — PR4-DATA2
 
 PR4-DATA2 — READY FOR REVIEW, not ACCEPTED or COMPLETE (`2026-09-05`).

@@ -1,0 +1,351 @@
+{
+  "status": "BLOCKED_MISSING_RETRIEVAL_INSTANTS",
+  "accepted_main": "2f5fba991f1f612ce7b4b8dfda8ebd41ad6333e7",
+  "accepted_data2_head": "918bf81b5da306fc65a57643de515ca1b3fbd1e4",
+  "synchronization_commit": "dfcbce2814b46da45cf346762a778170ffc5b36c",
+  "review_url": "https://github.com/Mitronomik/family-food-os/pull/13",
+  "accepted_review_submitted_at": "2026-09-05T16:06:13Z",
+  "method": "Read-only browser downloads/downloads_url_chains lookup by exact accepted source URL; require completed download, retained target file, exact accepted SHA-256 and received_bytes == total_bytes. Raw Chromium timestamps are microseconds since 1601-01-01T00:00:00Z. A temporary History/WAL snapshot was used for the locked active profile and deleted after the query. Only task-related rows were extracted. Filesystem timestamps and quarantine timestamps were not treated as retrieval evidence.",
+  "recovery_scope": "Checked repository-local DATA2/download/consistency evidence and historical curation, task curation scratch inputs, and available Chrome/Codex browser download databases. No completed exact-URL/hash-linked download record was established for the remaining sources. This does not assert that evidence cannot exist elsewhere.",
+  "counts": {
+    "accepted_recipes": 30,
+    "recovered_recipes": 3,
+    "unrecovered_recipes": 27,
+    "unrecovered_distinct_artifacts": 22
+  },
+  "sources": [
+    {
+      "source_id": "CACFP6-CORN-EDAMAME-BLEND",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
+      "artifact_name": "Corn_Edamame_Blend_6_Servings.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "source_sha256": "314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": {
+        "source_id": "CACFP6-CORN-EDAMAME-BLEND",
+        "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
+        "sha256": "314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef",
+        "download_id": 33,
+        "download_state": 1,
+        "received_bytes": 413087,
+        "total_bytes": 413087,
+        "start_time_raw": 13432970139455069,
+        "end_time_raw": 13432970140896467,
+        "download_completed_at": "2026-09-04T04:35:40.896467+00:00"
+      },
+      "status": "RECOVERED_DOWNLOAD_COMPLETION"
+    },
+    {
+      "source_id": "SNAP6-HEAVENLY-DEVILED-EGGS",
+      "source_url": "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
+      "artifact_name": "EasterMenu.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "source_sha256": "1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "CACFP6-TABBOULEH",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tabbouleh_6_Servings.pdf",
+      "artifact_name": "Tabbouleh_6_Servings.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "source_sha256": "ef746c97415426316a78995b42a1e7f5a5d76c0078e6f006ab9940f0120cca49",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": {
+        "source_id": "CACFP6-TABBOULEH",
+        "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tabbouleh_6_Servings.pdf",
+        "sha256": "ef746c97415426316a78995b42a1e7f5a5d76c0078e6f006ab9940f0120cca49",
+        "download_id": 39,
+        "download_state": 1,
+        "received_bytes": 447061,
+        "total_bytes": 447061,
+        "start_time_raw": 13432970151108770,
+        "end_time_raw": 13432970152082224,
+        "download_completed_at": "2026-09-04T04:35:52.082224+00:00"
+      },
+      "status": "RECOVERED_DOWNLOAD_COMPLETION"
+    },
+    {
+      "source_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese/printable/print",
+      "artifact_name": "Beyond Basic Grilled Cheese.html",
+      "artifact_type": "BROWSER_SAVED_PRIMARY_HTML",
+      "source_sha256": "357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "CACFP6-CREAMY-COLESLAW",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf",
+      "artifact_name": "Creamy_Coleslaw_6_Servings.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "source_sha256": "8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": {
+        "source_id": "CACFP6-CREAMY-COLESLAW",
+        "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf",
+        "sha256": "8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6",
+        "download_id": 23,
+        "download_state": 1,
+        "received_bytes": 409403,
+        "total_bytes": 409403,
+        "start_time_raw": 13432970092470724,
+        "end_time_raw": 13432970093373753,
+        "download_completed_at": "2026-09-04T04:34:53.373753+00:00"
+      },
+      "status": "RECOVERED_DOWNLOAD_COMPLETION"
+    },
+    {
+      "source_id": "TNC6-EGGS-SPINACH",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+      "artifact_name": "tnc-eggs.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "source_sha256": "0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "TNC6-APPLESAUCE",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+      "artifact_name": "tnc-applesauce.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "source_sha256": "7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "SNAP4-SPANISH-FRITTATA",
+      "source_url": "https://snaped.fns.usda.gov/snap/MPMF/Handouts/HowMuchFoodandPhysicalActivityHandouts.pdf",
+      "artifact_name": "HowMuchFoodandPhysicalActivityHandouts.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "source_sha256": "b2ac0732c26ad10426343c5aab115248b020983fa4dcad79f230ff146a02641c",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "FNS5-BAKED-LENTILS-CASSEROLE",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/lentils-casserole",
+      "artifact_name": "data2-correction-baked-lentils.pdf",
+      "artifact_type": "BROWSER_PRINTED_PRIMARY_PAGE_PDF",
+      "source_sha256": "86b118c36ca73b75618e1656bbc96c2c06f59785ca7292efc47be0fe99cc4598",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "HARV6-FRESH-TOMATO-SALSA",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "artifact_name": "HarvestofRecipes.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "source_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "HARV6-GARDEN-PASTA-SALAD",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "artifact_name": "HarvestofRecipes.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "source_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "SNAP6-SPINACH-APPLE-SALAD",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "artifact_name": "data2-snap-fall.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "source_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "SNAP6-PEACH-CRISP",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+      "artifact_name": "data2-snap-summer.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "source_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "SNAP6-SEARED-GREENS",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "artifact_name": "data2-snap-spring.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "source_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "SNAP8-SOMALI-SUMMER-SALAD",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+      "artifact_name": "data2-snap-summer.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "source_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "FNS2-ORANGE-PORK-CHOPS",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/orange-porkchops",
+      "artifact_name": "data2-correction-orange-pork-chops.pdf",
+      "artifact_type": "BROWSER_PRINTED_PRIMARY_PAGE_PDF",
+      "source_sha256": "aa07563b660219b4173edc63cf6f76478e1bc71bff7f0c8a54fc5eaf5985a479",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "WIC4-BUTTERNUT-SOUP",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+      "artifact_name": "data2-wic-butternut-soup.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "source_sha256": "ee642490786720348eae5f18170c5dcb26a0c7b22b042fc829ab0dc6ee1e95e8",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+      "artifact_name": "data2-wic-overnight-oats.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "source_sha256": "0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+      "source_url": "https://snaped.fns.usda.gov/node/2489",
+      "artifact_name": "data2-correction-simple-green-smoothie.html",
+      "artifact_type": "SAVED_PRIMARY_HTML",
+      "source_sha256": "240c8b7a10a0399cb70743d48f59c9d6b828c8e640e9cbfc1eec0762cf6108ca",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "SNAP3-GRILLED-FRUIT",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit",
+      "artifact_name": "data2-snap-grilled-fruit.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "source_sha256": "03269eead24a3965e76c71a9eed6b7b82b9d785845427fa9b8b445aee55cf6f9",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+      "artifact_name": "data2-wic-spinach-cauliflower-smoothie.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "source_sha256": "439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "SNAP4-PEAR-ORANGE-SAUCE",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "artifact_name": "data2-snap-fall.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "source_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "artifact_name": "data2-snap-spring.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "source_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "FNS4-OVEN-FRIED-FISH",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/fish",
+      "artifact_name": "data2-correction-oven-fried-fish.pdf",
+      "artifact_type": "BROWSER_PRINTED_PRIMARY_PAGE_PDF",
+      "source_sha256": "068b5b0d4c7e45ad498758501bcc8f67b7e5f69f9c27ea4db4af39b05cba069c",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "SNAP8-APPLE-CARROT-SOUP",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+      "artifact_name": "data2-snap-apple-carrot-soup.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "source_sha256": "1cc2ed9ddb3253b4a9a5ed9aa6609184e7381035977d00a542a00239f8261258",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "SNAP6-WALDORF-SALAD",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "artifact_name": "data2-snap-fall.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "source_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "SNAP4-BROWN-RICE-PILAF",
+      "source_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+      "artifact_name": "data2-snap-valentines.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "source_sha256": "f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "SNAP5-KALE-NUTS-RAISINS",
+      "source_url": "https://snaped.fns.usda.gov/node/1861",
+      "artifact_name": "data2-snap-kale-nuts.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "source_sha256": "7c2bb840618e0dfbe372e9ecdb697ad59d2fab36e0fbf07cabe347a93ea6a1a0",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
+      "source_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
+      "artifact_name": "data2-snap-braised-chicken.pdf",
+      "artifact_type": "DOWNLOADED_PRIMARY_PDF",
+      "source_sha256": "d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    },
+    {
+      "source_id": "SNAP4-DILLED-FISH-FILLETS",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
+      "artifact_name": "data2-snap-dilled-fish.html",
+      "artifact_type": "BROWSER_SAVED_SOURCE_HTML",
+      "source_sha256": "43d44c84d7c007a0c32906210b13212ffb43fb7a62312e9fb43c819f8a8a63a3",
+      "recorded_checked_at": "2026-09-05",
+      "retrieval_evidence": null,
+      "status": "MISSING_RETRIEVAL_INSTANT"
+    }
+  ]
+}
