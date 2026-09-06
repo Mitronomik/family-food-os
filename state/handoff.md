@@ -25,10 +25,10 @@ schema/API/frontend remain unchanged; migration head is `0025_pantry`.
 
 ## Next action
 
-Project review of DATA-A evidence, then **explicit authorization** of any
-DATA-B implementation. The recommendation is not implementation authority.
-PR7 MealPlan/Serving and all later milestones remain unauthorized. Do not merge
-without explicit post-review authorization. No separate DATA-A-CLOSE is needed.
+Do not begin DATA-B unless it receives a **separate explicit project
+authorization**. The DATA-A recommendation is evidence for that future decision,
+not implementation authority. PR7 MealPlan/Serving and all later milestones
+remain unauthorized. No separate DATA-A-CLOSE is needed.
 
 The unrelated tracked `.DS_Store` change predates DATA-A; leave it untouched
 and exclude it from commits. Tests seed temporary databases; no personal
