@@ -4,8 +4,6 @@ from datetime import datetime, timezone
 from uuid import uuid4
 
 import pytest
-from sqlalchemy import Column, ForeignKey, Integer, MetaData, Table, event
-
 from app.db.config import DatabaseConfig
 from app.domain.food_recipes import (
     Recipe,
@@ -22,6 +20,7 @@ from app.persistence.sqlalchemy_core.food_recipe_uow import (
 )
 from app.seed.food_recipes import load_seed_entries, seed_food_recipes
 from app.services.food_recipe_contracts import RecipeCataloguePersistenceConflictError
+from sqlalchemy import Column, ForeignKey, Integer, MetaData, Table, event
 
 NOW = datetime(2026, 9, 4, tzinfo=timezone.utc)
 PRIMARY_RECIPE_CODE = "CACFP6_CORN_EDAMAME_BLEND"
@@ -173,11 +172,10 @@ def test_successful_commit_and_rollback_revoke_repository_handles(recipe_engine)
 def test_failed_commit_revokes_discards_and_later_uow_is_clean(recipe_engine):
     _, engine = recipe_engine
     scope = SqlAlchemyRecipeCatalogueUnitOfWork(engine)
-    with pytest.raises(RecipeCataloguePersistenceConflictError):
-        with scope:
-            retained = scope._scope.adapter_connection
-            retained.execute(deferred_child_table.insert().values(id=1, parent_id=999))
-            scope.commit()
+    with pytest.raises(RecipeCataloguePersistenceConflictError), scope:
+        retained = scope._scope.adapter_connection
+        retained.execute(deferred_child_table.insert().values(id=1, parent_id=999))
+        scope.commit()
     assert retained.closed
     _assert_revoked(scope)
     service = create_food_recipe_catalogue_service(engine)
@@ -201,12 +199,11 @@ def test_failed_rollback_revokes_discards_and_later_uow_is_clean(recipe_engine):
         del connection
         raise RuntimeError("simulated rollback failure")
 
-    with pytest.raises(RuntimeError, match="simulated rollback failure"):
-        with scope:
-            retained = scope._scope.adapter_connection
-            scope.recipes.add(candidate)
-            event.listen(engine, "rollback", fail_rollback, once=True)
-            scope.rollback()
+    with pytest.raises(RuntimeError, match="simulated rollback failure"), scope:
+        retained = scope._scope.adapter_connection
+        scope.recipes.add(candidate)
+        event.listen(engine, "rollback", fail_rollback, once=True)
+        scope.rollback()
     assert retained.closed
     _assert_revoked(scope)
     with SqlAlchemyRecipeCatalogueReadScope(engine) as later:
@@ -243,11 +240,11 @@ def test_repository_rejects_cross_recipe_created_from_reference(recipe_engine):
             for item in second.equipment
         ),
     )
-    with SqlAlchemyRecipeCatalogueUnitOfWork(engine) as scope:
-        with pytest.raises(
-            RecipeCataloguePersistenceConflictError, match="same Recipe"
-        ):
-            scope.versions.add_detail(detail)
+    with (
+        SqlAlchemyRecipeCatalogueUnitOfWork(engine) as scope,
+        pytest.raises(RecipeCataloguePersistenceConflictError, match="same Recipe"),
+    ):
+        scope.versions.add_detail(detail)
 
 
 def test_repository_maps_duplicate_version_number_to_stable_conflict(recipe_engine):
@@ -277,6 +274,8 @@ def test_repository_maps_duplicate_version_number_to_stable_conflict(recipe_engi
         ),
     )
 
-    with SqlAlchemyRecipeCatalogueUnitOfWork(engine) as scope:
-        with pytest.raises(RecipeCataloguePersistenceConflictError):
-            scope.versions.add_detail(detail)
+    with (
+        SqlAlchemyRecipeCatalogueUnitOfWork(engine) as scope,
+        pytest.raises(RecipeCataloguePersistenceConflictError),
+    ):
+        scope.versions.add_detail(detail)

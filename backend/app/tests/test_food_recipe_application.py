@@ -1,9 +1,8 @@
-from dataclasses import replace
-from decimal import Decimal
 import sqlite3
+from dataclasses import replace
+from decimal import ROUND_HALF_UP, Decimal
 
 import pytest
-
 from app.db.config import DatabaseConfig
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_ingredient_composition import (
@@ -37,7 +36,7 @@ def _seed(code):
 
 def test_create_trusted_rejects_duplicate_code_and_normalized_name(catalogue):
     _, _, service = catalogue
-    existing = _seed("SPICED_OATMEAL")
+    existing = _seed("CACFP6_CORN_EDAMAME_BLEND")
 
     with pytest.raises(RecipeCatalogueConflictError, match="code"):
         service.create_trusted(existing)
@@ -46,14 +45,14 @@ def test_create_trusted_rejects_duplicate_code_and_normalized_name(catalogue):
             replace(
                 existing,
                 canonical_code="A_DISTINCT_CODE",
-                canonical_name="  SPICED   OATMEAL  ",
+                canonical_name="  CORN   AND   EDAMAME   BLEND  ",
             )
         )
 
 
 def test_unresolved_ingredient_rolls_back_complete_new_aggregate(catalogue):
     config, _, service = catalogue
-    source = _seed("SPICED_OATMEAL")
+    source = _seed("CACFP6_CORN_EDAMAME_BLEND")
     candidate = replace(
         source,
         canonical_code="ATOMIC_RECIPE",
@@ -89,15 +88,15 @@ def test_unresolved_ingredient_rolls_back_complete_new_aggregate(catalogue):
 def test_inactive_ingredient_rejects_append_without_partial_version(catalogue):
     _, engine, recipe_service = catalogue
     food_service = create_food_catalogue_service(engine)
-    food_service.deactivate(food_service.get_by_code("OATS_ROLLED").id)
-    recipe = recipe_service.get_by_code("SPICED_OATMEAL")
+    food_service.deactivate(food_service.get_by_code("CARROT").id)
+    recipe = recipe_service.get_by_code("CACFP6_CORN_EDAMAME_BLEND")
     before = recipe_service.list_versions(recipe.id)
 
-    with pytest.raises(FoodIngredientResolutionError, match="OATS_ROLLED"):
+    with pytest.raises(FoodIngredientResolutionError, match="CARROT"):
         recipe_service.append_trusted_version(
             recipe.id,
             replace(
-                _seed("SPICED_OATMEAL").version,
+                _seed("CACFP6_CORN_EDAMAME_BLEND").version,
                 source_version="inactive-fi-v2",
                 source_document_sha256="e" * 64,
                 change_note="Inactive FoodIngredient fixture.",
@@ -109,7 +108,7 @@ def test_inactive_ingredient_rejects_append_without_partial_version(catalogue):
 
 def test_current_verified_requires_active_recipe(catalogue):
     _, _, service = catalogue
-    recipe = service.get_by_code("SPICED_OATMEAL")
+    recipe = service.get_by_code("CACFP6_CORN_EDAMAME_BLEND")
 
     service.deactivate(recipe.id)
 
@@ -123,9 +122,9 @@ def test_current_verified_requires_active_recipe(catalogue):
 
 def test_service_scaling_preserves_identity_and_fractional_pieces(catalogue):
     _, _, service = catalogue
-    recipe = service.get_by_code("SPICED_OATMEAL")
+    recipe = service.get_by_code("CACFP6_CORN_EDAMAME_BLEND")
     original = service.get_current_verified(recipe.id)
-    scaled = service.scale_version(original.version.id, Decimal("3"))
+    scaled = service.scale_version(original.version.id, Decimal(3))
 
     assert scaled.version == original.version
     assert scaled.steps == original.steps
@@ -134,6 +133,8 @@ def test_service_scaling_preserves_identity_and_fractional_pieces(catalogue):
     ]
     assert all(
         scaled_line.quantity
-        == (original_line.quantity / Decimal("2")).quantize(Decimal("0.000001"))
+        == (original_line.quantity / Decimal(2)).quantize(
+            Decimal("0.000001"), rounding=ROUND_HALF_UP
+        )
         for original_line, scaled_line in zip(original.ingredients, scaled.ingredients)
     )

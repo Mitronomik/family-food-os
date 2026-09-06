@@ -71,7 +71,7 @@ class TrustedRecipeVersionSeed:
     source_recipe_id: str
     source_url: str
     source_version: str
-    source_retrieved_at: datetime
+    source_retrieved_at: datetime | None
     source_document_sha256: str
     source_original_servings: Decimal
     rights_review_status: RightsReviewStatus | str

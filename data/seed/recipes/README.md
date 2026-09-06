@@ -1,53 +1,17 @@
-# PR4 Recipe Catalogue seed — DATA2 integration pending
+# PR4 Recipe seed
 
-Latest transport result: GitHub runner acquired all **22/22** remaining artifacts.
-Real completion instants and lineage are in
-[Actions evidence](../../../docs/family-food/pr4-github-actions-acquisition.json).
-Nine are byte-identical; thirteen require current-source comparison. The three
-historical instants are preserved. Local delivery of the Actions ZIP remains
-blocked, so the production JSON below is still obsolete and uncorrected. The
-one-time workflow was removed; final `.github/workflows` diff is empty. Earlier
-local-source acquisition failures below are historical, superseded by this result.
+This directory is the deterministic production seed for the FamilyFoodOS PR4 Recipe Catalogue.
 
-Latest pass: official canonical/equivalent URLs are authorized by
-[Orchestrator](https://github.com/Mitronomik/family-food-os/pull/10#issuecomment-5554016049).
-Current Easter PDF/page/collection and linked MyPlate routes failed acquisition.
-The [current review](../../../docs/family-food/pr4-retrieval-provenance-review.md)
-records exact fallback URLs and outcomes. No fresh production artifact or
-successor was accepted; drift remains unassessed. The earlier attempts below
-remain historical evidence; their exact-URL restriction is superseded.
+Authoritative curation inputs are the merged `data/curation/pr4-data2/**` corpus plus the reviewed ordered-step handoff at `data/curation/pr4-runtime/recipe-steps.json`. The compiler is `scripts/build_pr4_recipe_seed.py` and performs no network access.
 
-The JSON files in this directory and the existing builder/loader still contain
-the obsolete PR10 corpus. They have not been regenerated from accepted DATA2
-because the authorized fresh-source acquisition could not obtain complete
-current representations through the tested permitted paths.
-Do not use these files as DATA2 production acceptance evidence.
+Expected technical-slice output:
 
-The authoritative successor is
-[`data/curation/pr4-data2/recipe-corpus.json`](../../curation/pr4-data2/recipe-corpus.json),
-accepted in PR #13 and merged at `2f5fba991f1f612ce7b4b8dfda8ebd41ad6333e7`.
-Its contract is exactly 30 recipes, 189 selected ingredient mappings, 81 existing
-FoodIngredient codes and 86 ordered source-backed equipment rows / 34 codes.
-Source servings vary. The exact production step count remains to be derived from
-reviewed source instructions; it is not an inherited invariant.
+- 30 `Recipe` records;
+- 30 immutable initial `RecipeVersion` records;
+- 189 `RecipeIngredient` rows using exactly 81 existing `FoodIngredient` codes;
+- 169 ordered source-derived `RecipeStep` rows;
+- 86 ordered `RecipeEquipment` rows across 34 normalized equipment codes.
 
-The earlier rights decision is
-[superseded](../../../docs/family-food/pr4-rights-review.md) by the narrow
-direct-FNS project risk posture, with source-specific evidence and attribution.
-The current [provenance blocker and recovery options](../../../docs/family-food/pr4-retrieval-provenance-review.md)
-record the authorized fresh retrieval attempts for 27 recipes / 22 artifacts:
-20 TLS EOF and 2 HTTP 403 failures. Three exact historical source retrieval
-records are reused. Fresh byte-identical artifacts and presentation-only
-successors accepted in this pass: zero; authoritative drift remains unassessed. No invented midnight
-instant, filesystem timestamp or generic ARS rationale is endorsed.
+`source_document_sha256`, source identity, servings, meal type and source-specific rights basis are inherited from accepted PR4-DATA2 evidence. `source_retrieved_at` is optional: three exact historical acquisition instants are retained where they were independently recovered; unknown instants remain `null` rather than being invented.
 
-After that blocker is resolved, the bounded compiler must consume repository-local
-accepted evidence and reviewed ordered step transcription, emit deterministic
-committed JSON, and run without network in production/tests. Preserve selected
-source quantities and optional/conditional wording, use only g/ml/pcs, and do not
-invent densities, food-specific weights, yields, instructions or equipment.
-Cooking measures (cup=240 ml, tablespoon=15 ml, teaspoon=5 ml, quart=960 ml) are
-a documented normalization convention, not exact physical equivalence.
-
-Fresh seed first/second run evidence is pending. PR4 is not COMPLETE, PR #10
-must not be merged, and PR5 remains unauthorized.
+Source binaries are not required at runtime. The checked-in JSON is reviewed structured data and the loader fails closed if it diverges from accepted DATA2 identities, hashes, servings, meal types, rights review or FoodIngredient coverage.

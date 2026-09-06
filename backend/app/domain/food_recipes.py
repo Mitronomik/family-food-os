@@ -1,10 +1,10 @@
 """Platform-owned verified Recipe Catalogue domain."""
 
+import re
 from dataclasses import dataclass, replace
 from datetime import datetime
 from decimal import Decimal
 from enum import StrEnum
-import re
 from uuid import UUID
 
 from app.domain.decimal_utils import parse_decimal, quantize_decimal
@@ -246,7 +246,7 @@ class RecipeVersion:
     source_recipe_id: str
     source_url: str
     source_version: str
-    source_retrieved_at: datetime
+    source_retrieved_at: datetime | None
     source_document_sha256: str
     source_original_servings: Decimal
     rights_review_status: RightsReviewStatus
@@ -341,13 +341,14 @@ class RecipeVersion:
                 field="source_document_sha256",
                 value=self.source_document_sha256,
             )
-        object.__setattr__(
-            self,
-            "source_retrieved_at",
-            normalize_utc_instant(
-                self.source_retrieved_at, field="source_retrieved_at"
-            ),
-        )
+        if self.source_retrieved_at is not None:
+            object.__setattr__(
+                self,
+                "source_retrieved_at",
+                normalize_utc_instant(
+                    self.source_retrieved_at, field="source_retrieved_at"
+                ),
+            )
         object.__setattr__(
             self,
             "created_at",

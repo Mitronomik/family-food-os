@@ -43,7 +43,7 @@ def upgrade(connection):
             source_recipe_id TEXT NOT NULL,
             source_url TEXT NOT NULL,
             source_version TEXT NOT NULL,
-            source_retrieved_at DATETIME NOT NULL,
+            source_retrieved_at DATETIME,
             source_document_sha256 TEXT NOT NULL,
             source_original_servings TEXT NOT NULL,
             rights_review_status TEXT NOT NULL,

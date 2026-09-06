@@ -1,12 +1,11 @@
-from dataclasses import asdict
-from decimal import Decimal
 import json
-from pathlib import Path
 import shutil
 import sqlite3
+from dataclasses import asdict
+from decimal import ROUND_HALF_UP, Decimal
+from pathlib import Path
 
 import pytest
-
 from app.db.config import DatabaseConfig
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_ingredient_composition import (
@@ -17,6 +16,7 @@ from app.persistence.sqlalchemy_core.food_recipe_composition import (
 )
 from app.seed.food_ingredients import seed_food_ingredients
 from app.seed.food_recipes import (
+    CURATION_DIRECTORY,
     DEFAULT_SEED_DIRECTORY,
     FoodRecipeSeedError,
     load_seed_entries,
@@ -28,9 +28,10 @@ from app.services.food_recipes import (
 )
 
 EXPECTED_RECIPE_COUNT = 30
-EXPECTED_INGREDIENT_COUNT = 365
-EXPECTED_STEP_COUNT = 315
-EXPECTED_EQUIPMENT_COUNT = 0
+EXPECTED_INGREDIENT_COUNT = 189
+EXPECTED_STEP_COUNT = 169
+EXPECTED_EQUIPMENT_COUNT = 86
+EXPECTED_FOOD_INGREDIENT_COUNT = 81
 
 
 def _copy_seed(tmp_path: Path) -> Path:
@@ -48,14 +49,19 @@ def _change_quantity(seed_directory: Path) -> None:
     )
 
 
-def test_checked_in_seed_matches_frozen_corpus_manifest_and_rights_review():
+def test_checked_in_seed_matches_accepted_data2_contract():
     entries = load_seed_entries()
     manifest = json.loads(
         (DEFAULT_SEED_DIRECTORY / "source-manifest.json").read_text(encoding="utf-8")
     )["sources"]
+    corpus = json.loads(
+        (CURATION_DIRECTORY / "recipe-corpus.json").read_text(encoding="utf-8")
+    )["recipes"]
 
-    assert len(entries) == len(manifest) == EXPECTED_RECIPE_COUNT
-    assert len({entry.canonical_code for entry in entries}) == EXPECTED_RECIPE_COUNT
+    assert len(entries) == len(manifest) == len(corpus) == EXPECTED_RECIPE_COUNT
+    assert {entry.version.source_recipe_id for entry in entries} == {
+        row["recipe_source_id"] for row in corpus
+    }
     assert (
         sum(len(entry.version.ingredients) for entry in entries)
         == EXPECTED_INGREDIENT_COUNT
@@ -65,54 +71,44 @@ def test_checked_in_seed_matches_frozen_corpus_manifest_and_rights_review():
         sum(len(entry.version.equipment_codes) for entry in entries)
         == EXPECTED_EQUIPMENT_COUNT
     )
-    assert len({source["source_document_sha256"] for source in manifest}) == 30
-    assert all(len(source["source_document_sha256"]) == 64 for source in manifest)
-    assert all(source["source_original_servings"] == 6 for source in manifest)
+    assert (
+        len(
+            {
+                ingredient.food_ingredient_code
+                for entry in entries
+                for ingredient in entry.version.ingredients
+            }
+        )
+        == EXPECTED_FOOD_INGREDIENT_COUNT
+    )
     assert all(source["rights_review_status"] == "REVIEWED" for source in manifest)
-    assert all(
-        source["rights_basis"] and source["rights_evidence_url"] for source in manifest
-    )
+    assert all(source["rights_basis"] for source in manifest)
+    assert all(source["rights_evidence_urls"] for source in manifest)
 
 
-def test_source_manifest_matches_frozen_corpus_and_accepted_food_ingredient_subset():
-    corpus = json.loads(
-        (
-            DEFAULT_SEED_DIRECTORY.parents[1]
-            / "curation"
-            / "pr4"
-            / "recipe-corpus.json"
-        ).read_text(encoding="utf-8")
-    )
+def test_source_manifest_preserves_accepted_hashes_and_optional_retrieval_instants():
     manifest = json.loads(
         (DEFAULT_SEED_DIRECTORY / "source-manifest.json").read_text(encoding="utf-8")
     )["sources"]
-    accepted_codes = {
-        line.strip()
-        for line in (
-            DEFAULT_SEED_DIRECTORY.parents[1]
-            / "curation"
-            / "pr4"
-            / "mvp0-food-ingredient-codes.txt"
+    corpus = json.loads(
+        (CURATION_DIRECTORY / "recipe-corpus.json").read_text(encoding="utf-8")
+    )["recipes"]
+    corpus_by_id = {row["recipe_source_id"]: row for row in corpus}
+
+    for source in manifest:
+        accepted = corpus_by_id[source["recipe_source_id"]]
+        assert source["source_url"] == accepted["source_url"]
+        assert source["source_document_sha256"] == accepted["source_sha256"]
+        assert source["accepted_data2_sha256"] == accepted["source_sha256"]
+        assert source["source_version"] == f"sha256:{accepted['source_sha256']}"
+        assert Decimal(str(source["source_original_servings"])) == Decimal(
+            str(accepted["source_servings"])
         )
-        .read_text(encoding="utf-8")
-        .splitlines()
-        if line.strip()
-    }
-    entries = load_seed_entries()
-    used_codes = {
-        ingredient.food_ingredient_code
-        for entry in entries
-        for ingredient in entry.version.ingredients
-    }
-
-    assert {
-        (item["recipe_source_id"], item["source_url"]) for item in corpus["recipes"]
-    } == {(item["recipe_source_id"], item["source_url"]) for item in manifest}
-    assert len(accepted_codes) == 119
-    assert used_codes == accepted_codes
+    assert sum(source["source_retrieved_at"] is not None for source in manifest) == 3
+    assert sum(source["source_retrieved_at"] is None for source in manifest) == 27
 
 
-def test_every_seed_recipe_has_complete_ordered_structure_and_provenance():
+def test_every_seed_recipe_has_complete_ordered_structure_and_reviewed_provenance():
     for entry in load_seed_entries():
         version = entry.version
         assert version.verification_status == "SOURCE_VERIFIED"
@@ -120,29 +116,22 @@ def test_every_seed_recipe_has_complete_ordered_structure_and_provenance():
         assert version.verified_at is not None
         assert version.rights_basis
         assert version.source_version == f"sha256:{version.source_document_sha256}"
-        assert version.source_original_servings == Decimal("6")
+        assert version.base_servings == version.source_original_servings
         assert version.ingredients
         assert version.steps
         assert all(item.source_amount_text for item in version.ingredients)
+        assert len(version.equipment_codes) == len(set(version.equipment_codes))
 
 
-def test_selected_alternatives_and_semicolon_plus_water_are_explicit():
+def test_conditional_direction_water_is_preserved_without_hiding_condition():
     entries = {entry.canonical_code: entry for entry in load_seed_entries()}
-    fajita = entries["CHICKEN_FAJITA"].version.ingredients
-    selected_lime = next(
-        item for item in fajita if item.food_ingredient_code == "LIME_JUICE"
-    )
-    assert selected_lime.quantity == Decimal("60")
-    assert selected_lime.unit == "ml"
-    assert "lime juice alternative" in selected_lime.normalization_note
-
-    baked = entries["BAKED_SWEET_POTATOES_APPLES"].version.ingredients
-    baked_water = [item for item in baked if item.food_ingredient_code == "WATER"]
-    assert [(item.quantity, item.unit) for item in baked_water] == [
-        (Decimal("56.699046"), "g"),
-        (Decimal("7.5"), "ml"),
-    ]
-    assert all("semicolon-plus" in item.normalization_note for item in baked_water)
+    ingredients = entries["SNAP4_SPRING_VEGETABLE_SAUTE"].version.ingredients
+    water = next(item for item in ingredients if item.food_ingredient_code == "WATER")
+    assert water.quantity == Decimal(30)
+    assert water.unit == "ml"
+    assert water.optional is True
+    assert "1–2 tablespoons" in water.normalization_note
+    assert "only if vegetables start to brown" in water.prep_note
 
 
 def test_seed_is_atomic_idempotent_and_has_exact_production_counts(tmp_path):
@@ -156,11 +145,11 @@ def test_seed_is_atomic_idempotent_and_has_exact_production_counts(tmp_path):
         "recipes_existing": 0,
         "versions_inserted": 30,
         "versions_existing": 0,
-        "ingredients_inserted": 365,
+        "ingredients_inserted": 189,
         "ingredients_existing": 0,
-        "steps_inserted": 315,
+        "steps_inserted": 169,
         "steps_existing": 0,
-        "equipment_inserted": 0,
+        "equipment_inserted": 86,
         "equipment_existing": 0,
         "conflicts": 0,
     }
@@ -170,11 +159,11 @@ def test_seed_is_atomic_idempotent_and_has_exact_production_counts(tmp_path):
         "versions_inserted": 0,
         "versions_existing": 30,
         "ingredients_inserted": 0,
-        "ingredients_existing": 365,
+        "ingredients_existing": 189,
         "steps_inserted": 0,
-        "steps_existing": 315,
+        "steps_existing": 169,
         "equipment_inserted": 0,
-        "equipment_existing": 0,
+        "equipment_existing": 86,
         "conflicts": 0,
     }
     with sqlite3.connect(config.path) as connection:
@@ -188,19 +177,7 @@ def test_seed_is_atomic_idempotent_and_has_exact_production_counts(tmp_path):
                 "food_recipe_equipment",
             )
         )
-        active_current = connection.execute(
-            """
-            SELECT COUNT(*) FROM food_recipes AS r
-            JOIN food_recipe_versions AS v ON v.recipe_id=r.id
-            WHERE r.is_active=1 AND v.verification_status='SOURCE_VERIFIED'
-              AND v.version_number=(
-                  SELECT MAX(v2.version_number) FROM food_recipe_versions AS v2
-                  WHERE v2.recipe_id=r.id AND v2.verification_status='SOURCE_VERIFIED'
-              )
-            """
-        ).fetchone()[0]
-    assert counts == (30, 30, 365, 315, 0)
-    assert active_current == 30
+    assert counts == (30, 30, 189, 169, 86)
 
 
 def test_seed_conflicts_when_same_provenance_has_changed_structure(tmp_path):
@@ -223,7 +200,7 @@ def test_seed_conflicts_when_same_provenance_has_changed_structure(tmp_path):
             connection.execute(
                 "SELECT COUNT(*) FROM food_recipe_ingredients"
             ).fetchone()[0]
-            == 365
+            == 189
         )
 
 
@@ -258,7 +235,7 @@ def test_seed_rerun_does_not_reactivate_deactivated_recipe(tmp_path):
     engine = create_sqlite_engine(config)
     try:
         service = create_food_recipe_catalogue_service(engine)
-        recipe = service.get_by_code("SPICED_OATMEAL")
+        recipe = service.get_by_code("CACFP6_CORN_EDAMAME_BLEND")
         service.deactivate(recipe.id)
     finally:
         engine.dispose()
@@ -273,20 +250,23 @@ def test_seed_rerun_does_not_reactivate_deactivated_recipe(tmp_path):
         engine.dispose()
 
 
-def test_seeded_recipe_scales_six_to_three_and_nine_without_persistence(tmp_path):
+def test_seeded_recipe_scales_non_six_serving_source_without_persistence(tmp_path):
     config = DatabaseConfig(path=tmp_path / "scale.sqlite")
     seed_food_recipes(config)
     engine = create_sqlite_engine(config)
     try:
         service = create_food_recipe_catalogue_service(engine)
-        recipe = service.get_by_code("SPICED_OATMEAL")
+        recipe = service.get_by_code("SNAP4_SPANISH_FRITTATA")
         original = service.get_current_verified(recipe.id)
-        half = service.scale_version(original.version.id, Decimal("3"))
-        one_and_half = service.scale_version(original.version.id, Decimal("9"))
-        assert half.ingredients[0].quantity == original.ingredients[0].quantity / 2
-        assert one_and_half.ingredients[0].quantity == original.ingredients[
-            0
-        ].quantity * Decimal("1.5")
+        assert original.version.base_servings == Decimal(4)
+        half = service.scale_version(original.version.id, Decimal(2))
+        one_and_half = service.scale_version(original.version.id, Decimal(6))
+        assert half.ingredients[0].quantity == (
+            original.ingredients[0].quantity / 2
+        ).quantize(Decimal("0.000001"), rounding=ROUND_HALF_UP)
+        assert one_and_half.ingredients[0].quantity == (
+            original.ingredients[0].quantity * Decimal("1.5")
+        ).quantize(Decimal("0.000001"), rounding=ROUND_HALF_UP)
         assert service.get_version_detail(original.version.id) == original
     finally:
         engine.dispose()
@@ -303,5 +283,4 @@ def test_invalid_seed_is_rejected_before_database_creation(tmp_path):
         seed_food_recipes(
             DatabaseConfig(path=tmp_path / "invalid.sqlite"), seed_directory=changed
         )
-
     assert not (tmp_path / "invalid.sqlite").exists()

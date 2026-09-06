@@ -1,7 +1,6 @@
 import sqlite3
 
 import pytest
-
 from app.db.config import DatabaseConfig
 from app.db.migrations import (
     MIGRATION_MODULES,
@@ -115,3 +114,14 @@ def test_recipe_ingredient_foreign_key_targets_food_ingredients(tmp_path):
         }
     assert "food_ingredients" in targets
     assert "ingredients" not in targets
+
+
+def test_recipe_source_retrieved_at_is_optional(tmp_path):
+    database = tmp_path / "source-retrieval.sqlite"
+    apply_migrations(DatabaseConfig(path=database))
+    with sqlite3.connect(database) as connection:
+        columns = {
+            row[1]: row
+            for row in connection.execute("PRAGMA table_info('food_recipe_versions')")
+        }
+    assert columns["source_retrieved_at"][3] == 0

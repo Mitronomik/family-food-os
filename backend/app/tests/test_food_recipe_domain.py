@@ -4,7 +4,6 @@ from decimal import Decimal
 from uuid import uuid1, uuid4
 
 import pytest
-
 from app.domain.errors import DomainValidationError
 from app.domain.food_recipes import (
     MealTypeCode,
@@ -30,7 +29,7 @@ def _detail() -> RecipeVersionDetail:
         id=uuid4(),
         recipe_id=recipe.id,
         version_number=1,
-        base_servings=Decimal("6"),
+        base_servings=Decimal(6),
         meal_type_code=MealTypeCode.MAIN,
         prep_time_minutes=None,
         cook_time_minutes=None,
@@ -48,7 +47,7 @@ def _detail() -> RecipeVersionDetail:
         source_version="sha256:test",
         source_retrieved_at=NOW,
         source_document_sha256="a" * 64,
-        source_original_servings=Decimal("6"),
+        source_original_servings=Decimal(6),
         rights_review_status=RightsReviewStatus.REVIEWED,
         rights_basis="Reviewed government work.",
         created_from_version_id=None,
@@ -61,7 +60,7 @@ def _detail() -> RecipeVersionDetail:
             version.id,
             uuid4(),
             1,
-            Decimal("600"),
+            Decimal(600),
             "g",
             "600 g rice",
             None,
@@ -74,7 +73,7 @@ def _detail() -> RecipeVersionDetail:
             version.id,
             uuid4(),
             2,
-            Decimal("1"),
+            Decimal(1),
             "pcs",
             "1 bay leaf",
             None,
@@ -95,8 +94,8 @@ def _detail() -> RecipeVersionDetail:
 def test_scaling_is_read_only_exact_decimal_and_does_not_round_pieces():
     original = _detail()
 
-    half = scale_recipe(original, Decimal("3"))
-    one_and_half = scale_recipe(original, Decimal("9"))
+    half = scale_recipe(original, Decimal(3))
+    one_and_half = scale_recipe(original, Decimal(9))
 
     assert [item.quantity for item in half.ingredients] == [
         Decimal("300.000000"),
@@ -114,8 +113,8 @@ def test_scaling_is_read_only_exact_decimal_and_does_not_round_pieces():
 @pytest.mark.parametrize(
     "target",
     [
-        Decimal("0"),
-        Decimal("-1"),
+        Decimal(0),
+        Decimal(-1),
         1.5,
         Decimal("NaN"),
         Decimal("Infinity"),
@@ -144,7 +143,7 @@ def test_recipe_and_version_require_uuidv4_identity():
 
 
 @pytest.mark.parametrize(
-    "value", [Decimal("0"), Decimal("-1"), 2.5, Decimal("NaN"), Decimal("1E+999999")]
+    "value", [Decimal(0), Decimal(-1), 2.5, Decimal("NaN"), Decimal("1E+999999")]
 )
 def test_version_rejects_invalid_base_servings(value):
     with pytest.raises(DomainValidationError):
@@ -174,7 +173,7 @@ def test_version_owned_children_reject_percent_duplicates_and_blank_steps():
     with pytest.raises(DomainValidationError, match="percent"):
         replace(detail.ingredients[0], unit="percent")
     with pytest.raises(DomainValidationError):
-        replace(detail.ingredients[0], quantity=Decimal("0"))
+        replace(detail.ingredients[0], quantity=Decimal(0))
     with pytest.raises(DomainValidationError):
         replace(detail.ingredients[0], quantity=1.5)
     with pytest.raises(DomainValidationError):
@@ -193,6 +192,11 @@ def test_version_owned_children_reject_percent_duplicates_and_blank_steps():
         )
     with pytest.raises(DomainValidationError, match="positions"):
         replace(detail, steps=(detail.steps[0], replace(detail.steps[0], id=uuid4())))
+
+
+def test_source_verified_may_preserve_unknown_retrieval_instant():
+    version = replace(_detail().version, source_retrieved_at=None)
+    assert version.source_retrieved_at is None
 
 
 def test_unknown_metadata_remains_none():

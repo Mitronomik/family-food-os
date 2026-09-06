@@ -62,7 +62,7 @@ food_recipe_versions_table = Table(
     Column("source_recipe_id", String, nullable=False),
     Column("source_url", String, nullable=False),
     Column("source_version", String, nullable=False),
-    Column("source_retrieved_at", UTCDateTime(), nullable=False),
+    Column("source_retrieved_at", UTCDateTime()),
     Column("source_document_sha256", String, nullable=False),
     Column("source_original_servings", DecimalText(), nullable=False),
     Column("rights_review_status", String, nullable=False),

@@ -1,81 +1,86 @@
-#!/usr/bin/env python3
-"""Build the bounded PR4 seed from reviewed local USDA source documents.
+"""Compile the accepted PR4-DATA2 corpus into the deterministic Recipe seed.
 
-This is a curation tool, not a runtime ingestion path. It requires the exact PDFs
-named by ``data/curation/pr4/recipe-corpus.json`` to be present in ``--source-dir``.
+This is an offline curation compiler. It performs no network access and never
+parses source websites at runtime. Recipe identities, ingredient selections,
+servings, metadata, equipment, rights review and accepted source hashes come
+from the merged PR4-DATA2 evidence. Ordered directions come from the reviewed
+PR4 runtime-step curation file.
 """
 
 from __future__ import annotations
 
-import argparse
-import csv
-from decimal import Decimal, ROUND_HALF_UP
-import hashlib
 import json
-from pathlib import Path
 import re
-import subprocess
-from urllib.parse import unquote, urlparse
+from decimal import ROUND_HALF_UP, Decimal
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CORPUS = ROOT / "data/curation/pr4/recipe-corpus.json"
-COVERAGE = ROOT / "data/curation/pr4/ingredient-coverage.csv"
+DATA2 = ROOT / "data/curation/pr4-data2"
+CORPUS = DATA2 / "recipe-corpus.json"
+COVERAGE = DATA2 / "draft-ingredient-coverage.json"
+STEP_CURATION = ROOT / "data/curation/pr4-runtime/recipe-steps.json"
 OUTPUT = ROOT / "data/seed/recipes"
-RETRIEVED_AT = "2026-09-04T00:00:00+00:00"
+VERIFIED_AT = "2026-09-05T16:06:13+00:00"
 SOURCE_NAME = "USDA_FNS"
-RIGHTS_EVIDENCE_URL = "https://www.ars.usda.gov/ott/templates-agreements/"
-RIGHTS_BASIS = (
-    "Reviewed each source card as an identified USDA Food and Nutrition Service "
-    "work produced by the stated USDA recipe project. USDA ARS copyright guidance "
-    "states that United States Government employee official-duty works are public "
-    "domain in the United States under 17 U.S.C. 105. No third-party copyright "
-    "notice was present on the reviewed card; retain USDA attribution."
-)
+EXPECTED_RECIPE_COUNT = 30
+EXPECTED_INGREDIENT_ROWS = 189
+EXPECTED_EQUIPMENT_ROWS = 86
+EXPECTED_FOOD_INGREDIENT_CODES = 81
+EXPECTED_STEP_ROWS = 169
+
+HISTORICAL_RETRIEVED_AT = {
+    "CACFP6-CORN-EDAMAME-BLEND": "2026-09-04T04:35:40.896467+00:00",
+    "CACFP6-TABBOULEH": "2026-09-04T04:35:52.082224+00:00",
+    "CACFP6-CREAMY-COLESLAW": "2026-09-04T04:34:53.373753+00:00",
+}
 
 FRACTIONS = {
     "¼": Decimal("0.25"),
     "½": Decimal("0.5"),
     "¾": Decimal("0.75"),
-    "⅐": Decimal("0.142857142857"),
-    "⅑": Decimal("0.111111111111"),
-    "⅒": Decimal("0.1"),
     "⅓": Decimal("0.333333333333"),
     "⅔": Decimal("0.666666666667"),
+    "⅛": Decimal("0.125"),
+    "⅜": Decimal("0.375"),
+    "⅝": Decimal("0.625"),
+    "⅞": Decimal("0.875"),
     "⅕": Decimal("0.2"),
     "⅖": Decimal("0.4"),
     "⅗": Decimal("0.6"),
     "⅘": Decimal("0.8"),
     "⅙": Decimal("0.166666666667"),
     "⅚": Decimal("0.833333333333"),
-    "⅛": Decimal("0.125"),
-    "⅜": Decimal("0.375"),
-    "⅝": Decimal("0.625"),
-    "⅞": Decimal("0.875"),
 }
-NUMBER = r"(?:\d+(?:\.\d+)?(?:\s+[\u00bc-\u00be\u2150-\u215e])?|[\u00bc-\u00be\u2150-\u215e]|\d+\s*/\s*\d+)"
+NUMBER = r"(?:\d+(?:\.\d+)?(?:\s*[¼½¾⅓⅔⅛⅜⅝⅞⅕⅖⅗⅘⅙⅚])?|[¼½¾⅓⅔⅛⅜⅝⅞⅕⅖⅗⅘⅙⅚]|\d+\s*/\s*\d+)"
 OUNCE_GRAMS = Decimal("28.349523125")
 POUND_GRAMS = Decimal("453.59237")
 VOLUME_ML = {
-    "tsp": Decimal("5"),
-    "teaspoon": Decimal("5"),
-    "teaspoons": Decimal("5"),
-    "tbsp": Decimal("15"),
-    "tablespoon": Decimal("15"),
-    "tablespoons": Decimal("15"),
-    "cup": Decimal("240"),
-    "cups": Decimal("240"),
-    "qt": Decimal("960"),
-    "quart": Decimal("960"),
-    "quarts": Decimal("960"),
+    "tsp": Decimal(5),
+    "teaspoon": Decimal(5),
+    "teaspoons": Decimal(5),
+    "tbsp": Decimal(15),
+    "tablespoon": Decimal(15),
+    "tablespoons": Decimal(15),
+    "cup": Decimal(240),
+    "cups": Decimal(240),
+    "qt": Decimal(960),
+    "quart": Decimal(960),
+    "quarts": Decimal(960),
 }
 
 
-def decimal_text(value: Decimal) -> str:
-    value = value.quantize(Decimal("0.000001"), rounding=ROUND_HALF_UP)
-    return format(value, "f")
+def _json(path: Path) -> dict[str, object]:
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise TypeError(f"Expected object in {path}")
+    return value
 
 
-def parse_number(raw: str) -> Decimal:
+def _decimal_text(value: Decimal) -> str:
+    return format(value.quantize(Decimal("0.000001"), rounding=ROUND_HALF_UP), "f")
+
+
+def _number(raw: str) -> Decimal:
     value = raw.strip()
     if "/" in value:
         numerator, denominator = value.replace(" ", "").split("/", 1)
@@ -87,388 +92,310 @@ def parse_number(raw: str) -> Decimal:
     return Decimal(value)
 
 
-def selected_branch(text: str) -> tuple[str, str | None]:
-    lowered = text.casefold()
-    if " or " not in lowered:
-        return text, None
-    if "(juice selected)" in lowered:
-        return text.split(" OR ", 1)[1], (
-            "Selected the source-authorized lime juice alternative recorded by PR4-DATA."
-        )
-    if any(
-        token in lowered
-        for token in (
-            "(fresh selected)",
-            "(ancho selected)",
-            "(canned selected)",
-            "cranberries selected",
-        )
-    ):
-        return text.split(" OR ", 1)[0], (
-            "Selected the source-authorized first alternative recorded by PR4-DATA."
-        )
-    if "cranberries selected" in lowered:
-        return text.rsplit(" or ", 1)[0], (
-            "Selected the source-authorized dried cranberry alternative recorded by PR4-DATA."
-        )
-    if "black selected" in lowered:
-        return text, (
-            "Selected the source-authorized black pepper alternative recorded by PR4-DATA."
-        )
-    return text, None
+def _normalize_quantity(
+    row: dict[str, object],
+) -> tuple[str, str, str, bool, str | None]:
+    source = str(row["source_text"])
+    quantity_text = str(row.get("quantity_text") or source)
+    selection = str(row["selection"])
+    optional = selection != "SELECTED_REQUIRED"
 
+    if selection == "SELECTED_CONDITIONAL":
+        return (
+            "30.000000",
+            "ml",
+            "Conditional source range is 1–2 tablespoons (15–30 ml) only if vegetables start to brown; quantity stores the source-explicit upper bound for deterministic planning.",
+            True,
+            "Use only if vegetables start to brown; source permits 1–2 tablespoons of water.",
+        )
 
-def normalize_ingredient(source_text: str) -> tuple[str, str, str | None, bool]:
-    text = re.sub(r"^Pico de Gallo:\s*", "", source_text)
-    text, branch_note = selected_branch(text)
-    optional = "(optional)" in source_text.casefold()
-
-    lb_match = re.search(
-        rf"(?P<lb>{NUMBER})\s*lb(?:\s*(?P<oz>{NUMBER})\s*oz)?", text, re.IGNORECASE
+    weight = re.search(
+        rf"(?P<number>{NUMBER})\s*(?P<unit>lb|lbs|pounds?|oz|ounces?)\b",
+        source,
+        re.IGNORECASE,
     )
-    if lb_match:
-        pounds = parse_number(lb_match.group("lb"))
-        ounces = (
-            parse_number(lb_match.group("oz")) if lb_match.group("oz") else Decimal(0)
+    if weight:
+        amount = _number(weight.group("number"))
+        unit = weight.group("unit").casefold()
+        total = amount * (
+            POUND_GRAMS if unit.startswith(("lb", "pound")) else OUNCE_GRAMS
         )
-        quantity = pounds * POUND_GRAMS + ounces * OUNCE_GRAMS
-        note = "Converted source avoirdupois pounds/ounces to grams exactly."
-        return decimal_text(quantity), "g", _notes(note, branch_note), optional
-
-    oz_match = re.search(rf"(?P<oz>{NUMBER})\s*oz\b", text, re.IGNORECASE)
-    if oz_match:
-        ounces = parse_number(oz_match.group("oz"))
-        each_match = re.search(
-            rf"^(?P<count>{NUMBER})\s+.*?{NUMBER}\s*oz\s+each", text, re.IGNORECASE
+        if unit.startswith(("lb", "pound")):
+            tail = source[weight.end() :]
+            ounces = re.match(
+                rf"\s*(?P<number>{NUMBER})\s*(?:oz|ounces?)\b", tail, re.IGNORECASE
+            )
+            if ounces:
+                total += _number(ounces.group("number")) * OUNCE_GRAMS
+        return (
+            _decimal_text(total),
+            "g",
+            "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            optional,
+            None,
         )
-        if each_match:
-            ounces *= parse_number(each_match.group("count"))
-        quantity = ounces * OUNCE_GRAMS
-        note = "Converted source avoirdupois ounces to grams exactly."
-        if each_match:
-            note += " Multiplied the stated per-item weight by the stated item count."
-        return decimal_text(quantity), "g", _notes(note, branch_note), optional
 
-    volume_tokens = list(
-        re.finditer(
-            rf"(?P<number>{NUMBER})\s*(?P<unit>tsp|teaspoons?|Tbsp|tablespoons?|cups?|qt|quarts?)\b",
-            text,
+    for candidate in (quantity_text, source):
+        matches = list(
+            re.finditer(
+                rf"(?P<number>{NUMBER})\s*(?P<unit>tsp|teaspoons?|tbsp|tablespoons?|cups?|qt|quarts?)\b",
+                candidate,
+                re.IGNORECASE,
+            )
+        )
+        if matches:
+            values = [
+                _number(match.group("number"))
+                * VOLUME_ML[match.group("unit").casefold()]
+                for match in matches
+            ]
+            total = (
+                sum(values, Decimal(0))
+                if (" plus " in candidate.casefold() or " and " in candidate.casefold())
+                else values[0]
+            )
+            return (
+                _decimal_text(total),
+                "ml",
+                "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+                optional,
+                None,
+            )
+
+    for candidate in (quantity_text, source):
+        count = re.search(
+            rf"(?<!\d)(?P<number>{NUMBER})\s*(?:slices?|eggs?|apples?|bananas?|peaches?|pears?|potatoes?|carrots?|tomatoes?|cucumbers?|peppers?|cloves?|fillets?|chops?|pieces?|bunch|medium|large|small)?\b",
+            candidate,
             re.IGNORECASE,
         )
-    )
-    if volume_tokens:
-        # When alternatives remain, only the first measure is authoritative for
-        # the selected concept. Semicolon-plus quantities are intentionally summed.
-        relevant = volume_tokens
-        if " or " in text.casefold() and branch_note is None:
-            relevant = volume_tokens[:1]
-        quantity = sum(
-            (
-                parse_number(match.group("number"))
-                * VOLUME_ML[match.group("unit").casefold()]
-            )
-            for match in relevant
-        )
-        note = "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml."
-        if len(relevant) > 1:
-            note += " Summed the source quantities explicitly joined in the ingredient line."
-        return decimal_text(quantity), "ml", _notes(note, branch_note), optional
-
-    count_match = re.match(rf"(?P<count>{NUMBER})\b", text)
-    if count_match:
-        return (
-            decimal_text(parse_number(count_match.group("count"))),
-            "pcs",
-            _notes(
+        if count:
+            return (
+                _decimal_text(_number(count.group("number"))),
+                "pcs",
                 "Preserved the source count without a food-specific mass conversion.",
-                branch_note,
-            ),
-            optional,
-        )
-    raise ValueError(f"Cannot normalize ingredient quantity: {source_text!r}")
+                optional,
+                None,
+            )
+    raise ValueError(f"Cannot normalize selected source quantity: {source!r}")
 
 
-def _notes(*values: str | None) -> str | None:
-    present = [value for value in values if value]
-    return " ".join(present) or None
-
-
-def normalized_components(
-    source_text: str,
-) -> list[tuple[str, str, str | None, bool]]:
-    parts = re.split(r";\s*plus\s+", source_text, maxsplit=1, flags=re.IGNORECASE)
-    if len(parts) == 1:
-        return [normalize_ingredient(source_text)]
-    first, additional = parts
-    first_value = normalize_ingredient(first)
-    additional_value = normalize_ingredient(additional)
-    return [
-        (
-            first_value[0],
-            first_value[1],
-            _notes(
-                first_value[2],
-                "Preserved the first component of the source's explicit semicolon-plus quantity.",
-            ),
-            first_value[3],
-        ),
-        (
-            additional_value[0],
-            additional_value[1],
-            _notes(
-                additional_value[2],
-                "Preserved the explicitly added component of the source's semicolon-plus quantity.",
-            ),
-            additional_value[3],
-        ),
-    ]
-
-
-def extract_text(pdf: Path) -> str:
-    result = subprocess.run(
-        ["pdftotext", "-raw", str(pdf), "-"],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    return result.stdout.replace("\f", "\n")
-
-
-def parse_minutes(text: str, label: str) -> int | None:
-    match = re.search(rf"{label} Time:\s*([^\n]+)", text, re.IGNORECASE)
-    if not match:
+def _minutes(value: object) -> int | None:
+    if value is None:
         return None
-    raw = match.group(1).strip()
-    minute_match = re.search(r"(\d+)\s*minutes?", raw, re.IGNORECASE)
-    if minute_match:
-        return int(minute_match.group(1))
-    if "hour" in raw.casefold():
-        values = [parse_number(value) for value in re.findall(NUMBER, raw)]
-        return int(max(values) * 60) if values else None
+    if isinstance(value, int) and not isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        minute = re.fullmatch(r"\s*(\d+)\s*minutes?\s*", value, re.IGNORECASE)
+        if minute:
+            return int(minute.group(1))
+        hour = re.fullmatch(r"\s*(\d+)\s*hours?\s*", value, re.IGNORECASE)
+        if hour:
+            return int(hour.group(1)) * 60
     return None
 
 
-def parse_steps(text: str) -> list[str]:
-    start = re.search(r"^Directions:?\s*$", text, re.MULTILINE)
-    if not start:
-        raise ValueError("Directions heading not found")
-    body = text[start.end() :]
-    lines = [line.strip() for line in body.splitlines()]
-    steps: list[str] = []
-    current: list[str] = []
-    synthetic: list[str] | None = None
-    expected_number = 1
-    index = 0
-    while index < len(lines):
-        line = lines[index]
-        index += 1
-        if not line or line.casefold() == "directions continued":
-            continue
-        if re.match(
-            r"^(?:Notes:?|Notes Section:?|Source:|NUTRITION INFORMATION|Variations?:?)",
-            line,
-            re.IGNORECASE,
-        ):
-            break
-        if re.match(r"^Ingredients(?: continued)?:?$", line, re.IGNORECASE):
-            continuation = next(
-                (
-                    offset
-                    for offset in range(index, len(lines))
-                    if lines[offset].casefold() == "directions continued"
-                ),
-                None,
-            )
-            terminal = next(
-                (
-                    offset
-                    for offset in range(index, len(lines))
-                    if re.match(
-                        r"^(?:Notes:?|Notes Section:?|Source:)",
-                        lines[offset],
-                        re.IGNORECASE,
-                    )
-                ),
-                len(lines),
-            )
-            if continuation is None or continuation > terminal:
-                break
-            index = continuation + 1
-            continue
-        stop_after_line = False
-        if " Source:" in line:
-            line = line.split(" Source:", 1)[0].strip()
-            stop_after_line = True
-        if (
-            "Food and Nutrition Service | USDA" in line
-            or line.startswith("United States Department of Agriculture")
-            or "CACFP Home Childcare" in line
-            or re.search(r"Page \d+ of \d+$", line)
-        ):
-            continue
-        if line == "Pico de Gallo Recipe":
-            if current:
-                steps.append(" ".join(current))
-                current = []
-            synthetic = ["Prepare the source Pico de Gallo subrecipe:"]
-            continue
-        numbered = re.match(r"^(\d+)\s+(.*)$", line)
-        if numbered and synthetic is None and int(numbered.group(1)) == expected_number:
-            if current:
-                steps.append(" ".join(current))
-            current = [numbered.group(2)]
-            expected_number += 1
-            if stop_after_line:
-                break
-            continue
-        if synthetic is not None:
-            synthetic.append(line)
-        elif current:
-            current.append(line)
-        if stop_after_line:
-            break
-    if current:
-        steps.append(" ".join(current))
-    if synthetic:
-        steps.append(" ".join(synthetic))
-    if not steps or any(not step.strip() for step in steps):
-        raise ValueError("No complete directions parsed")
-    return steps
+def _time_fields(
+    recipe: dict[str, object],
+) -> tuple[int | None, int | None, int | None]:
+    facts = recipe.get("source_times") or {}
+    if not isinstance(facts, dict):
+        return None, None, None
+    prep = facts.get("prep_minutes")
+    cook = facts.get("cook_minutes")
+    total = facts.get("total_minutes")
+    if prep is None:
+        prep = _minutes(facts.get("preparation"))
+    if cook is None:
+        cook = _minutes(facts.get("cooking"))
+    if total is None:
+        total = _minutes(facts.get("total"))
+    return (
+        prep if isinstance(prep, int) else None,
+        cook if isinstance(cook, int) else None,
+        total if isinstance(total, int) else None,
+    )
 
 
-def meal_type(record: dict[str, object]) -> str:
-    collection = str(record["source_collection"])
-    source_id = str(record["recipe_source_id"])
-    if "Breakfasts" in collection:
-        return "breakfast"
-    if "Side Dishes" in collection or source_id == "CACFP6-CAULIFLOWER-RICE":
-        return "side"
-    if "Salads" in collection:
-        return "salad"
-    if "Sandwiches" in collection:
-        return "sandwich"
-    return "main"
+def _canonical_code(source_id: str) -> str:
+    return re.sub(r"[^A-Z0-9]+", "_", source_id.upper()).strip("_")
 
 
-def load_coverage() -> dict[str, list[dict[str, str]]]:
-    grouped: dict[str, list[dict[str, str]]] = {}
-    with COVERAGE.open(encoding="utf-8", newline="") as handle:
-        for row in csv.DictReader(handle):
-            grouped.setdefault(row["source_recipe_id"], []).append(row)
-    return grouped
+def build(output_dir: Path = OUTPUT) -> None:
+    corpus_rows = _json(CORPUS)["recipes"]
+    coverage_payload = _json(COVERAGE)
+    coverage_rows = coverage_payload["recipes"]
+    step_payload = _json(STEP_CURATION)
+    step_rows = step_payload["recipes"]
+    if not all(
+        isinstance(value, list) for value in (corpus_rows, coverage_rows, step_rows)
+    ):
+        raise ValueError("PR4 curation inputs must contain recipe lists")
+    if (
+        len(corpus_rows) != EXPECTED_RECIPE_COUNT
+        or len(step_rows) != EXPECTED_RECIPE_COUNT
+    ):
+        raise ValueError("PR4 requires exactly 30 accepted recipes and step records")
 
+    coverage_by_id = {row["source_recipe_id"]: row for row in coverage_rows}
+    steps_by_id = {row["recipe_source_id"]: row for row in step_rows}
+    accepted_codes = set(coverage_payload["selected_existing_codes"])
+    if len(accepted_codes) != EXPECTED_FOOD_INGREDIENT_CODES:
+        raise ValueError("Accepted DATA2 FoodIngredient manifest must contain 81 codes")
 
-def build(source_dir: Path, output_dir: Path) -> None:
-    corpus = json.loads(CORPUS.read_text(encoding="utf-8"))["recipes"]
-    coverage = load_coverage()
-    recipes = []
-    manifest = []
-    for source in corpus:
-        source_id = source["recipe_source_id"]
-        filename = unquote(Path(urlparse(source["source_url"]).path).name)
-        pdf = source_dir / filename
-        if not pdf.is_file():
-            raise FileNotFoundError(f"Missing reviewed source document: {pdf}")
-        content = pdf.read_bytes()
-        if not content.startswith(b"%PDF"):
-            raise ValueError(f"Reviewed source is not a PDF: {pdf}")
-        digest = hashlib.sha256(content).hexdigest()
-        raw_text = extract_text(pdf)
-        ingredients = []
-        for row in coverage[source_id]:
-            code = row["existing_food_ingredient_code"]
-            if not code:
-                if row["normalized_concept"] == "authoritative_subrecipe_decomposition":
-                    continue
-                raise ValueError(f"Unresolved coverage row: {row}")
-            for quantity, unit, note, optional in normalized_components(
-                row["source_ingredient_text"]
-            ):
-                ingredients.append(
-                    {
-                        "food_ingredient_code": code,
-                        "quantity": quantity,
-                        "unit": unit,
-                        "source_amount_text": row["source_ingredient_text"],
-                        "normalization_note": note,
-                        "prep_note": None,
-                        "optional": optional,
-                    }
+    recipes: list[dict[str, object]] = []
+    sources: list[dict[str, object]] = []
+    used_codes: set[str] = set()
+    ingredient_count = equipment_count = step_count = 0
+
+    for recipe in corpus_rows:
+        source_id = recipe["recipe_source_id"]
+        coverage = coverage_by_id[source_id]
+        step_record = steps_by_id[source_id]
+        if step_record["accepted_data2_sha256"] != recipe["source_sha256"]:
+            raise ValueError(f"Step curation hash mismatch for {source_id}")
+
+        ingredients: list[dict[str, object]] = []
+        for row in coverage["rows"]:
+            if not str(row["selection"]).startswith("SELECTED"):
+                continue
+            selected_codes = row["selected_codes"]
+            if not isinstance(selected_codes, list) or len(selected_codes) != 1:
+                raise ValueError(
+                    f"Selected source row must resolve to one FoodIngredient: {source_id}"
                 )
-        source_version = f"sha256:{digest}"
+            code = str(selected_codes[0])
+            quantity, unit, normalization_note, optional, prep_note = (
+                _normalize_quantity(row)
+            )
+            ingredients.append(
+                {
+                    "food_ingredient_code": code,
+                    "quantity": quantity,
+                    "unit": unit,
+                    "source_amount_text": row["source_text"],
+                    "normalization_note": normalization_note,
+                    "prep_note": prep_note,
+                    "optional": optional,
+                }
+            )
+            used_codes.add(code)
+
+        steps = step_record["steps"]
+        if (
+            not isinstance(steps, list)
+            or not steps
+            or any(not isinstance(step, str) or not step.strip() for step in steps)
+        ):
+            raise ValueError(f"Missing ordered source-derived steps for {source_id}")
+        equipment = [
+            str(item["equipment_code"]).lower() for item in recipe["equipment"]
+        ]
+        prep_minutes, cook_minutes, total_minutes = _time_fields(recipe)
+        source_hash = str(recipe["source_sha256"])
+        source_retrieved_at = HISTORICAL_RETRIEVED_AT.get(str(source_id))
+        rights = recipe["rights_review"]
+
         version = {
-            "base_servings": "6.000000",
-            "meal_type_code": meal_type(source),
-            "prep_time_minutes": parse_minutes(raw_text, "Preparation"),
-            "cook_time_minutes": parse_minutes(raw_text, "Cooking"),
-            "total_time_minutes": None,
+            "base_servings": _decimal_text(Decimal(str(recipe["source_servings"]))),
+            "meal_type_code": recipe["meal_type_code"],
+            "prep_time_minutes": prep_minutes,
+            "cook_time_minutes": cook_minutes,
+            "total_time_minutes": total_minutes,
             "difficulty_code": None,
             "batch_friendly": None,
             "freezable": None,
             "storage_days_fridge": None,
             "storage_days_freezer": None,
             "verification_status": "SOURCE_VERIFIED",
-            "verified_at": RETRIEVED_AT,
+            "verified_at": VERIFIED_AT,
             "source_name": SOURCE_NAME,
             "source_recipe_id": source_id,
-            "source_url": source["source_url"],
-            "source_version": source_version,
-            "source_retrieved_at": RETRIEVED_AT,
-            "source_document_sha256": digest,
-            "source_original_servings": "6.000000",
+            "source_url": recipe["source_url"],
+            "source_version": f"sha256:{source_hash}",
+            "source_retrieved_at": source_retrieved_at,
+            "source_document_sha256": source_hash,
+            "source_original_servings": _decimal_text(
+                Decimal(str(recipe["source_servings"]))
+            ),
             "rights_review_status": "REVIEWED",
-            "rights_basis": RIGHTS_BASIS,
-            "change_note": "Initial verified transcription from the frozen PR4 USDA FNS corpus.",
+            "rights_basis": rights["basis"],
+            "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
             "ingredients": ingredients,
-            "steps": parse_steps(raw_text),
-            "equipment_codes": [],
+            "steps": steps,
+            "equipment_codes": equipment,
         }
         recipes.append(
             {
-                "canonical_code": source_id.removeprefix("CACFP6-").replace("-", "_"),
-                "canonical_name": source["recipe_name"],
+                "canonical_code": _canonical_code(str(source_id)),
+                "canonical_name": recipe["recipe_name"],
                 "version": version,
             }
         )
-        manifest.append(
+        sources.append(
             {
                 "recipe_source_id": source_id,
                 "source_name": SOURCE_NAME,
-                "source_url": source["source_url"],
-                "source_collection": source["source_collection"],
-                "source_version": source_version,
-                "source_original_servings": 6,
-                "source_retrieved_at": RETRIEVED_AT,
-                "source_document_sha256": digest,
+                "source_url": recipe["source_url"],
+                "source_version": f"sha256:{source_hash}",
+                "source_original_servings": recipe["source_servings"],
+                "source_retrieved_at": source_retrieved_at,
+                "accepted_data2_sha256": source_hash,
+                "source_document_sha256": source_hash,
                 "rights_review_status": "REVIEWED",
-                "rights_basis": RIGHTS_BASIS,
-                "rights_evidence_url": RIGHTS_EVIDENCE_URL,
+                "rights_basis": rights["basis"],
+                "rights_evidence_urls": rights.get("evidence_urls", []),
+                "source_attribution": recipe.get("source_attribution"),
+                "retrieval_method": (
+                    "RECOVERED_HISTORICAL_COMPLETION"
+                    if source_retrieved_at is not None
+                    else "ACCEPTED_DATA2_REVIEW_EVIDENCE"
+                ),
+                "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+                "step_extraction_source_sha256": step_record[
+                    "extraction_source_sha256"
+                ],
+                "step_comparison_result": step_record["comparison_result"],
             }
         )
+        ingredient_count += len(ingredients)
+        equipment_count += len(equipment)
+        step_count += len(steps)
+
+    if ingredient_count != EXPECTED_INGREDIENT_ROWS:
+        raise ValueError(
+            f"Expected 189 selected RecipeIngredient rows, got {ingredient_count}"
+        )
+    if equipment_count != EXPECTED_EQUIPMENT_ROWS:
+        raise ValueError(f"Expected 86 RecipeEquipment rows, got {equipment_count}")
+    if step_count != EXPECTED_STEP_ROWS:
+        raise ValueError(f"Expected 169 RecipeStep rows, got {step_count}")
+    if used_codes != accepted_codes:
+        raise ValueError(
+            "Production RecipeIngredient FoodIngredient set differs from accepted DATA2 manifest"
+        )
+
     output_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "recipes.json").write_text(
         json.dumps(
-            {"schema_version": 1, "recipes": recipes}, ensure_ascii=False, indent=2
+            {"schema_version": 2, "recipes": recipes}, ensure_ascii=False, indent=2
         )
         + "\n",
         encoding="utf-8",
     )
     (output_dir / "source-manifest.json").write_text(
         json.dumps(
-            {"schema_version": 1, "sources": manifest}, ensure_ascii=False, indent=2
+            {
+                "schema_version": 2,
+                "accepted_data2_checked_at": "2026-09-05",
+                "sources": sources,
+            },
+            ensure_ascii=False,
+            indent=2,
         )
         + "\n",
         encoding="utf-8",
     )
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--source-dir", type=Path, required=True)
-    parser.add_argument("--output-dir", type=Path, default=OUTPUT)
-    args = parser.parse_args()
-    build(args.source_dir, args.output_dir)
-
-
 if __name__ == "__main__":
-    main()
+    build()

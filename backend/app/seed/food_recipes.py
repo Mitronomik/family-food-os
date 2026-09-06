@@ -1,9 +1,9 @@
-"""Trusted, offline loader for the frozen PR4 verified recipe seed."""
+"""Trusted offline loader for the accepted PR4 Recipe Catalogue seed."""
 
+import json
 from dataclasses import asdict
 from datetime import datetime
 from decimal import Decimal, InvalidOperation
-import json
 from pathlib import Path
 
 from app.db.config import DatabaseConfig
@@ -22,9 +22,13 @@ from app.services.food_recipes import (
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_SEED_DIRECTORY = PROJECT_ROOT / "data" / "seed" / "recipes"
-CURATION_DIRECTORY = PROJECT_ROOT / "data" / "curation" / "pr4"
+CURATION_DIRECTORY = PROJECT_ROOT / "data" / "curation" / "pr4-data2"
 EXPECTED_RECIPE_COUNT = 30
-EXPECTED_MANIFEST_CODE_COUNT = 119
+EXPECTED_INGREDIENT_COUNT = 189
+EXPECTED_STEP_COUNT = 169
+EXPECTED_EQUIPMENT_COUNT = 86
+EXPECTED_EQUIPMENT_CODE_COUNT = 34
+EXPECTED_FOOD_INGREDIENT_CODE_COUNT = 81
 
 
 class FoodRecipeSeedError(ValueError):
@@ -47,15 +51,17 @@ def load_seed_entries(
             "source-manifest.json must contain exactly 30 sources."
         )
     if not isinstance(corpus_rows, list) or len(corpus_rows) != EXPECTED_RECIPE_COUNT:
-        raise FoodRecipeSeedError("Frozen PR4 corpus must contain exactly 30 sources.")
+        raise FoodRecipeSeedError(
+            "Accepted PR4-DATA2 corpus must contain exactly 30 recipes."
+        )
 
-    corpus_by_id = {row["recipe_source_id"]: row for row in corpus_rows}
-    manifest_by_id = {row["recipe_source_id"]: row for row in source_rows}
-    if (
-        len(corpus_by_id) != EXPECTED_RECIPE_COUNT
-        or len(manifest_by_id) != EXPECTED_RECIPE_COUNT
-    ):
-        raise FoodRecipeSeedError("Recipe source identities must be unique.")
+    corpus_by_id = _unique_by(corpus_rows, "recipe_source_id", "accepted DATA2 corpus")
+    manifest_by_id = _unique_by(source_rows, "recipe_source_id", "source manifest")
+    accepted_ids = set(corpus_by_id)
+    if set(manifest_by_id) != accepted_ids:
+        raise FoodRecipeSeedError(
+            "Source manifest identities differ from accepted PR4-DATA2."
+        )
 
     accepted_codes = {
         line.strip()
@@ -64,50 +70,80 @@ def load_seed_entries(
         .splitlines()
         if line.strip()
     }
-    if len(accepted_codes) != EXPECTED_MANIFEST_CODE_COUNT:
+    if len(accepted_codes) != EXPECTED_FOOD_INGREDIENT_CODE_COUNT:
         raise FoodRecipeSeedError(
-            "Accepted PR4 FoodIngredient manifest must contain 119 codes."
+            "Accepted PR4-DATA2 FoodIngredient manifest must contain 81 codes."
         )
 
     entries: list[TrustedRecipeSeed] = []
     used_codes: set[str] = set()
+    seen_source_ids: set[str] = set()
     seen_recipe_identities: set[tuple[str, str]] = set()
+    ingredient_count = 0
+    step_count = 0
+    equipment_count = 0
+    equipment_codes: set[str] = set()
+
     for index, row in enumerate(recipe_rows, start=1):
         if not isinstance(row, dict) or not isinstance(row.get("version"), dict):
             raise FoodRecipeSeedError(f"recipes.json record {index} is invalid.")
         version = row["version"]
         source_id = _required(version, "source_recipe_id", index)
+        if source_id in seen_source_ids:
+            raise FoodRecipeSeedError("Recipe source identities must be unique.")
+        seen_source_ids.add(source_id)
         manifest = manifest_by_id.get(source_id)
         corpus = corpus_by_id.get(source_id)
         if manifest is None or corpus is None:
             raise FoodRecipeSeedError(
-                f"recipes.json record {index} is outside the frozen corpus."
+                f"recipes.json record {index} is outside accepted PR4-DATA2."
             )
         _validate_provenance(version, manifest, corpus, index)
-        ingredients = tuple(
-            _ingredient(item, index, ingredient_index)
-            for ingredient_index, item in enumerate(
-                version.get("ingredients", []), start=1
-            )
-        )
+
+        ingredient_rows = version.get("ingredients")
         steps_raw = version.get("steps")
-        if not ingredients or not isinstance(steps_raw, list) or not steps_raw:
+        equipment_raw = version.get("equipment_codes")
+        if not isinstance(ingredient_rows, list) or not ingredient_rows:
             raise FoodRecipeSeedError(
-                f"recipes.json record {index} requires ingredients and steps."
+                f"recipes.json record {index} requires ingredients."
             )
-        steps = tuple(str(step) for step in steps_raw)
-        equipment_raw = version.get("equipment_codes", [])
+        if (
+            not isinstance(steps_raw, list)
+            or not steps_raw
+            or any(not isinstance(step, str) or not step.strip() for step in steps_raw)
+        ):
+            raise FoodRecipeSeedError(
+                f"recipes.json record {index} requires nonblank ordered steps."
+            )
         if not isinstance(equipment_raw, list):
             raise FoodRecipeSeedError(
                 f"recipes.json record {index} equipment is invalid."
             )
+
+        ingredients = tuple(
+            _ingredient(item, index, ingredient_index)
+            for ingredient_index, item in enumerate(ingredient_rows, start=1)
+        )
+        steps = tuple(step.strip() for step in steps_raw)
+        equipment = tuple(_equipment_code(code, index) for code in equipment_raw)
+        if len(set(equipment)) != len(equipment):
+            raise FoodRecipeSeedError(
+                f"recipes.json record {index} contains duplicate equipment codes."
+            )
+
         used_codes.update(item.food_ingredient_code for item in ingredients)
+        equipment_codes.update(equipment)
+        ingredient_count += len(ingredients)
+        step_count += len(steps)
+        equipment_count += len(equipment)
+
         canonical_code = _required(row, "canonical_code", index)
         canonical_name = _required(row, "canonical_name", index)
-        identity = (canonical_code, canonical_name.casefold())
+        identity = (canonical_code, " ".join(canonical_name.casefold().split()))
         if identity in seen_recipe_identities:
             raise FoodRecipeSeedError("Recipe seed identities must be unique.")
         seen_recipe_identities.add(identity)
+
         entries.append(
             TrustedRecipeSeed(
                 canonical_code=canonical_code,
@@ -141,8 +177,8 @@ def load_seed_entries(
                     source_recipe_id=source_id,
                     source_url=_required(version, "source_url", index),
                     source_version=_required(version, "source_version", index),
-                    source_retrieved_at=_instant(
-                        _required(version, "source_retrieved_at", index), index
+                    source_retrieved_at=_optional_instant(
+                        version.get("source_retrieved_at"), index
                     ),
                     source_document_sha256=_required(
                         version, "source_document_sha256", index
@@ -157,15 +193,36 @@ def load_seed_entries(
                     change_note=_required(version, "change_note", index),
                     ingredients=ingredients,
                     steps=steps,
-                    equipment_codes=tuple(str(code) for code in equipment_raw),
+                    equipment_codes=equipment,
                 ),
             )
+        )
+
+    if seen_source_ids != accepted_ids:
+        raise FoodRecipeSeedError(
+            "Recipe seed source IDs differ from accepted PR4-DATA2."
+        )
+    if ingredient_count != EXPECTED_INGREDIENT_COUNT:
+        raise FoodRecipeSeedError(
+            f"Recipe seed must contain 189 ingredients, got {ingredient_count}."
+        )
+    if step_count != EXPECTED_STEP_COUNT:
+        raise FoodRecipeSeedError(
+            f"Recipe seed must contain 169 steps, got {step_count}."
+        )
+    if equipment_count != EXPECTED_EQUIPMENT_COUNT:
+        raise FoodRecipeSeedError(
+            f"Recipe seed must contain 86 equipment rows, got {equipment_count}."
+        )
+    if len(equipment_codes) != EXPECTED_EQUIPMENT_CODE_COUNT:
+        raise FoodRecipeSeedError(
+            "Recipe seed must contain 34 distinct equipment codes."
         )
     if used_codes != accepted_codes:
         missing = sorted(accepted_codes - used_codes)
         extra = sorted(used_codes - accepted_codes)
         raise FoodRecipeSeedError(
-            f"Recipe seed FoodIngredient coverage differs from accepted manifest; missing={missing}, extra={extra}."
+            f"Recipe seed FoodIngredient coverage differs from accepted DATA2; missing={missing}, extra={extra}."
         )
     return tuple(entries)
 
@@ -183,6 +240,20 @@ def seed_food_recipes(
         return create_food_recipe_catalogue_service(engine).reconcile_seed(entries)
     finally:
         engine.dispose()
+
+
+def _unique_by(
+    rows: list[object], key: str, label: str
+) -> dict[str, dict[str, object]]:
+    result: dict[str, dict[str, object]] = {}
+    for row in rows:
+        if not isinstance(row, dict) or not isinstance(row.get(key), str):
+            raise FoodRecipeSeedError(f"Invalid row in {label}.")
+        value = row[key]
+        if value in result:
+            raise FoodRecipeSeedError(f"Duplicate {key} in {label}.")
+        result[value] = row
+    return result
 
 
 def _ingredient(
@@ -209,7 +280,7 @@ def _validate_provenance(
     corpus: dict[str, object],
     index: int,
 ) -> None:
-    fields = (
+    for field in (
         "source_name",
         "source_url",
         "source_version",
@@ -217,63 +288,62 @@ def _validate_provenance(
         "source_document_sha256",
         "rights_review_status",
         "rights_basis",
-    )
-    for field in fields:
+    ):
         if version.get(field) != manifest.get(field):
             raise FoodRecipeSeedError(
                 f"recipes.json record {index} {field} differs from source manifest."
             )
-    try:
-        source_servings = Decimal(str(version.get("source_original_servings")))
-        manifest_servings = Decimal(str(manifest.get("source_original_servings")))
-    except InvalidOperation as exc:
+
+    source_servings = _finite_decimal_value(
+        version.get("source_original_servings"), index
+    )
+    manifest_servings = _finite_decimal_value(
+        manifest.get("source_original_servings"), index
+    )
+    corpus_servings = _finite_decimal_value(corpus.get("source_servings"), index)
+    base_servings = _finite_decimal_value(version.get("base_servings"), index)
+    if not (source_servings == manifest_servings == corpus_servings == base_servings):
         raise FoodRecipeSeedError(
-            f"recipes.json record {index} has invalid source_original_servings."
-        ) from exc
-    if (
-        not source_servings.is_finite()
-        or not manifest_servings.is_finite()
-        or source_servings != manifest_servings
-    ):
-        raise FoodRecipeSeedError(
-            f"recipes.json record {index} source_original_servings differs from source manifest."
+            f"recipes.json record {index} servings differ from accepted DATA2."
         )
     if version.get("source_url") != corpus.get("source_url"):
         raise FoodRecipeSeedError(
-            f"recipes.json record {index} URL differs from frozen corpus."
+            f"recipes.json record {index} URL differs from accepted DATA2."
+        )
+    if version.get("meal_type_code") != corpus.get("meal_type_code"):
+        raise FoodRecipeSeedError(
+            f"recipes.json record {index} meal type differs from accepted DATA2."
         )
     digest = version.get("source_document_sha256")
-    if (
-        not isinstance(digest, str)
-        or len(digest) != 64
-        or any(character not in "0123456789abcdef" for character in digest)
-    ):
-        raise FoodRecipeSeedError(f"recipes.json record {index} has invalid SHA-256.")
-    if version.get("verification_status") != "SOURCE_VERIFIED":
+    if digest != corpus.get("source_sha256") or not _is_sha256(digest):
         raise FoodRecipeSeedError(
-            f"recipes.json record {index} is not SOURCE_VERIFIED."
+            f"recipes.json record {index} hash differs from accepted DATA2."
         )
-    if version.get("rights_review_status") != "REVIEWED" or not version.get(
+    if version.get("source_version") != f"sha256:{digest}":
+        raise FoodRecipeSeedError(
+            f"recipes.json record {index} source_version must identify accepted hash."
+        )
+    if (
+        version.get("verification_status") != "SOURCE_VERIFIED"
+        or version.get("verified_at") is None
+    ):
+        raise FoodRecipeSeedError(
+            f"recipes.json record {index} is not source verified."
+        )
+    rights = corpus.get("rights_review")
+    if not isinstance(rights, dict):
+        raise FoodRecipeSeedError(f"Accepted DATA2 rights record {index} is invalid.")
+    if version.get("rights_review_status") != "REVIEWED" or version.get(
         "rights_basis"
-    ):
-        raise FoodRecipeSeedError(f"recipes.json record {index} lacks rights review.")
-    if (
-        manifest.get("rights_evidence_url")
-        != "https://www.ars.usda.gov/ott/templates-agreements/"
-    ):
+    ) != rights.get("basis"):
         raise FoodRecipeSeedError(
-            f"source-manifest.json record {index} lacks reviewed rights evidence."
+            f"recipes.json record {index} rights review differs from accepted DATA2."
         )
-
-
-def _json(path: Path) -> dict[str, object]:
-    try:
-        value = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
-        raise FoodRecipeSeedError(f"Could not read trusted seed file {path}.") from exc
-    if not isinstance(value, dict):
-        raise FoodRecipeSeedError(f"Trusted seed file {path} must contain an object.")
-    return value
+    if manifest.get("accepted_data2_sha256") != digest:
+        raise FoodRecipeSeedError(
+            f"source-manifest.json record {index} lacks accepted DATA2 lineage."
+        )
+    _optional_instant(version.get("source_retrieved_at"), index)
 
 
 def _required(row: dict[str, object], field: str, index: int) -> str:
@@ -284,20 +354,23 @@ def _required(row: dict[str, object], field: str, index: int) -> str:
 
 
 def _decimal(row: dict[str, object], field: str, index: int) -> Decimal:
-    value = row.get(field)
-    if not isinstance(value, str):
+    return _finite_decimal_value(row.get(field), index)
+
+
+def _finite_decimal_value(value: object, index: int) -> Decimal:
+    if isinstance(value, bool) or value is None:
         raise FoodRecipeSeedError(
-            f"recipes.json record {index} {field} must be a decimal string."
+            f"recipes.json record {index} has invalid decimal value."
         )
     try:
-        parsed = Decimal(value)
-    except InvalidOperation as exc:
+        parsed = Decimal(str(value))
+    except (InvalidOperation, ValueError) as exc:
         raise FoodRecipeSeedError(
-            f"recipes.json record {index} {field} is invalid."
+            f"recipes.json record {index} has invalid decimal value."
         ) from exc
     if not parsed.is_finite():
         raise FoodRecipeSeedError(
-            f"recipes.json record {index} {field} must be finite."
+            f"recipes.json record {index} decimal must be finite."
         )
     return parsed
 
@@ -322,7 +395,13 @@ def _optional_bool(row: dict[str, object], field: str, index: int) -> bool | Non
     return None if row.get(field) is None else _bool(row, field, index)
 
 
-def _instant(value: str, index: int) -> datetime:
+def _optional_instant(value: object, index: int) -> datetime | None:
+    if value is None:
+        return None
+    if not isinstance(value, str):
+        raise FoodRecipeSeedError(
+            f"recipes.json record {index} has an invalid instant."
+        )
     try:
         instant = datetime.fromisoformat(value.replace("Z", "+00:00"))
     except ValueError as exc:
@@ -336,22 +415,38 @@ def _instant(value: str, index: int) -> datetime:
     return instant
 
 
-def _optional_instant(value: object, index: int) -> datetime | None:
-    if value is None:
-        return None
-    if not isinstance(value, str):
-        raise FoodRecipeSeedError(
-            f"recipes.json record {index} has an invalid verified_at."
-        )
-    return _instant(value, index)
-
-
 def _optional_text(value: object) -> str | None:
     if value is None:
         return None
     if not isinstance(value, str) or not value.strip():
         raise FoodRecipeSeedError("Optional text must be null or non-empty text.")
     return value.strip()
+
+
+def _equipment_code(value: object, index: int) -> str:
+    if not isinstance(value, str) or not value or value != value.lower():
+        raise FoodRecipeSeedError(
+            f"recipes.json record {index} equipment code must be lowercase text."
+        )
+    return value
+
+
+def _is_sha256(value: object) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 64
+        and all(c in "0123456789abcdef" for c in value)
+    )
+
+
+def _json(path: Path) -> dict[str, object]:
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise FoodRecipeSeedError(f"Could not read trusted seed file {path}.") from exc
+    if not isinstance(value, dict):
+        raise FoodRecipeSeedError(f"Trusted seed file {path} must contain an object.")
+    return value
 
 
 if __name__ == "__main__":
