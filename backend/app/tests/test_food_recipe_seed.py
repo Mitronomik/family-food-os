@@ -134,6 +134,58 @@ def test_conditional_direction_water_is_preserved_without_hiding_condition():
     assert "only if vegetables start to brown" in water.prep_note
 
 
+def test_loader_rejects_same_count_ingredient_mapping_drift(tmp_path):
+    changed = _copy_seed(tmp_path)
+    path = changed / "recipes.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    ingredients = payload["recipes"][0]["version"]["ingredients"]
+    ingredients[0]["food_ingredient_code"], ingredients[1]["food_ingredient_code"] = (
+        ingredients[1]["food_ingredient_code"],
+        ingredients[0]["food_ingredient_code"],
+    )
+    path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    with pytest.raises(FoodRecipeSeedError, match="ingredient 1 differs"):
+        load_seed_entries(changed)
+
+
+def test_loader_rejects_same_count_equipment_drift(tmp_path):
+    changed = _copy_seed(tmp_path)
+    path = changed / "recipes.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    equipment = payload["recipes"][0]["version"]["equipment_codes"]
+    assert len(equipment) >= 2
+    equipment[0], equipment[1] = equipment[1], equipment[0]
+    path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    with pytest.raises(FoodRecipeSeedError, match="equipment differs"):
+        load_seed_entries(changed)
+
+
+def test_loader_rejects_same_count_step_or_step_lineage_drift(tmp_path):
+    changed = _copy_seed(tmp_path)
+    recipes_path = changed / "recipes.json"
+    recipes = json.loads(recipes_path.read_text(encoding="utf-8"))
+    recipes["recipes"][0]["version"]["steps"][0] += " altered"
+    recipes_path.write_text(
+        json.dumps(recipes, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    with pytest.raises(FoodRecipeSeedError, match="steps differ"):
+        load_seed_entries(changed)
+
+    changed = _copy_seed(tmp_path / "lineage")
+    manifest_path = changed / "source-manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["sources"][0]["step_comparison_result"] = "STALE"
+    manifest_path.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    with pytest.raises(FoodRecipeSeedError, match="step lineage differs"):
+        load_seed_entries(changed)
+
+
 def test_seed_is_atomic_idempotent_and_has_exact_production_counts(tmp_path):
     config = DatabaseConfig(path=tmp_path / "seed.sqlite")
 

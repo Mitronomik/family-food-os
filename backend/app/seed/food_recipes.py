@@ -23,6 +23,10 @@ from app.services.food_recipes import (
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_SEED_DIRECTORY = PROJECT_ROOT / "data" / "seed" / "recipes"
 CURATION_DIRECTORY = PROJECT_ROOT / "data" / "curation" / "pr4-data2"
+COVERAGE_PATH = CURATION_DIRECTORY / "draft-ingredient-coverage.json"
+STEP_CURATION_PATH = (
+    PROJECT_ROOT / "data" / "curation" / "pr4-runtime" / "recipe-steps.json"
+)
 EXPECTED_RECIPE_COUNT = 30
 EXPECTED_INGREDIENT_COUNT = 189
 EXPECTED_STEP_COUNT = 169
@@ -41,9 +45,13 @@ def load_seed_entries(
     recipes_payload = _json(seed_directory / "recipes.json")
     manifest_payload = _json(seed_directory / "source-manifest.json")
     corpus_payload = _json(CURATION_DIRECTORY / "recipe-corpus.json")
+    coverage_payload = _json(COVERAGE_PATH)
+    step_payload = _json(STEP_CURATION_PATH)
     recipe_rows = recipes_payload.get("recipes")
     source_rows = manifest_payload.get("sources")
     corpus_rows = corpus_payload.get("recipes")
+    coverage_rows = coverage_payload.get("recipes")
+    step_rows = step_payload.get("recipes")
     if not isinstance(recipe_rows, list) or len(recipe_rows) != EXPECTED_RECIPE_COUNT:
         raise FoodRecipeSeedError("recipes.json must contain exactly 30 recipes.")
     if not isinstance(source_rows, list) or len(source_rows) != EXPECTED_RECIPE_COUNT:
@@ -54,13 +62,32 @@ def load_seed_entries(
         raise FoodRecipeSeedError(
             "Accepted PR4-DATA2 corpus must contain exactly 30 recipes."
         )
+    if (
+        not isinstance(coverage_rows, list)
+        or len(coverage_rows) != EXPECTED_RECIPE_COUNT
+    ):
+        raise FoodRecipeSeedError(
+            "Accepted PR4-DATA2 coverage must contain exactly 30 recipes."
+        )
+    if not isinstance(step_rows, list) or len(step_rows) != EXPECTED_RECIPE_COUNT:
+        raise FoodRecipeSeedError(
+            "Reviewed PR4 runtime steps must contain exactly 30 recipes."
+        )
 
     corpus_by_id = _unique_by(corpus_rows, "recipe_source_id", "accepted DATA2 corpus")
     manifest_by_id = _unique_by(source_rows, "recipe_source_id", "source manifest")
+    coverage_by_id = _unique_by(
+        coverage_rows, "source_recipe_id", "accepted DATA2 coverage"
+    )
+    steps_by_id = _unique_by(
+        step_rows, "recipe_source_id", "reviewed PR4 runtime steps"
+    )
     accepted_ids = set(corpus_by_id)
-    if set(manifest_by_id) != accepted_ids:
+    if not (
+        set(manifest_by_id) == set(coverage_by_id) == set(steps_by_id) == accepted_ids
+    ):
         raise FoodRecipeSeedError(
-            "Source manifest identities differ from accepted PR4-DATA2."
+            "Seed manifest/coverage/step identities differ from accepted PR4-DATA2."
         )
 
     accepted_codes = {
@@ -99,6 +126,14 @@ def load_seed_entries(
                 f"recipes.json record {index} is outside accepted PR4-DATA2."
             )
         _validate_provenance(version, manifest, corpus, index)
+        _validate_curation_structure(
+            version,
+            manifest,
+            corpus,
+            coverage_by_id[source_id],
+            steps_by_id[source_id],
+            index,
+        )
 
         ingredient_rows = version.get("ingredients")
         steps_raw = version.get("steps")
@@ -254,6 +289,99 @@ def _unique_by(
             raise FoodRecipeSeedError(f"Duplicate {key} in {label}.")
         result[value] = row
     return result
+
+
+def _validate_curation_structure(
+    version: dict[str, object],
+    manifest: dict[str, object],
+    corpus: dict[str, object],
+    coverage: dict[str, object],
+    step_record: dict[str, object],
+    index: int,
+) -> None:
+    ingredient_rows = version.get("ingredients")
+    coverage_rows = coverage.get("rows")
+    if not isinstance(ingredient_rows, list) or not isinstance(coverage_rows, list):
+        raise FoodRecipeSeedError(
+            f"recipes.json record {index} lacks reviewable ingredient curation."
+        )
+
+    selected_rows = [
+        row
+        for row in coverage_rows
+        if isinstance(row, dict)
+        and isinstance(row.get("selection"), str)
+        and row["selection"].startswith("SELECTED")
+    ]
+    if len(ingredient_rows) != len(selected_rows):
+        raise FoodRecipeSeedError(
+            f"recipes.json record {index} ingredient rows differ from accepted DATA2."
+        )
+    for ingredient_index, (actual, accepted) in enumerate(
+        zip(ingredient_rows, selected_rows, strict=True), start=1
+    ):
+        if not isinstance(actual, dict):
+            raise FoodRecipeSeedError(
+                f"recipes.json record {index} ingredient {ingredient_index} is invalid."
+            )
+        selected_codes = accepted.get("selected_codes")
+        if not isinstance(selected_codes, list) or len(selected_codes) != 1:
+            raise FoodRecipeSeedError(
+                f"Accepted DATA2 ingredient {ingredient_index} is not singly resolved."
+            )
+        selection = str(accepted["selection"])
+        expected_optional = selection != "SELECTED_REQUIRED"
+        if (
+            actual.get("food_ingredient_code") != selected_codes[0]
+            or actual.get("source_amount_text") != accepted.get("source_text")
+            or actual.get("optional") is not expected_optional
+        ):
+            raise FoodRecipeSeedError(
+                f"recipes.json record {index} ingredient {ingredient_index} differs from accepted DATA2."
+            )
+        if selection == "SELECTED_CONDITIONAL" and not _optional_text(
+            actual.get("prep_note")
+        ):
+            raise FoodRecipeSeedError(
+                f"recipes.json record {index} conditional ingredient loses its source condition."
+            )
+
+    equipment_raw = version.get("equipment_codes")
+    accepted_equipment = corpus.get("equipment")
+    if not isinstance(equipment_raw, list) or not isinstance(accepted_equipment, list):
+        raise FoodRecipeSeedError(
+            f"recipes.json record {index} lacks reviewable equipment curation."
+        )
+    expected_equipment = []
+    for item in accepted_equipment:
+        if not isinstance(item, dict) or not isinstance(
+            item.get("equipment_code"), str
+        ):
+            raise FoodRecipeSeedError(
+                f"Accepted DATA2 equipment for record {index} is invalid."
+            )
+        expected_equipment.append(item["equipment_code"].lower())
+    if equipment_raw != expected_equipment:
+        raise FoodRecipeSeedError(
+            f"recipes.json record {index} equipment differs from accepted DATA2."
+        )
+
+    steps_raw = version.get("steps")
+    reviewed_steps = step_record.get("steps")
+    if steps_raw != reviewed_steps:
+        raise FoodRecipeSeedError(
+            f"recipes.json record {index} steps differ from reviewed PR4 runtime curation."
+        )
+    if step_record.get("accepted_data2_sha256") != corpus.get("source_sha256"):
+        raise FoodRecipeSeedError(
+            f"Reviewed step record {index} is not tied to accepted DATA2 hash."
+        )
+    if manifest.get("step_extraction_source_sha256") != step_record.get(
+        "extraction_source_sha256"
+    ) or manifest.get("step_comparison_result") != step_record.get("comparison_result"):
+        raise FoodRecipeSeedError(
+            f"source-manifest.json record {index} step lineage differs from reviewed curation."
+        )
 
 
 def _ingredient(
