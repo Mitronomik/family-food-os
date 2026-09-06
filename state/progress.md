@@ -23,7 +23,9 @@ Canonical implementation order remains `docs/family-food/master-roadmap.md`.
 ## PR5 implementation evidence
 
 - Base: `main` / `b7fb609fc28dc46fa5891fc677272b6d21b58b58`.
-- Branch: `migration/pr5-pantry`; PR creation follows final regression.
+- Branch: `migration/pr5-pantry`; [PR #15](https://github.com/Mitronomik/family-food-os/pull/15) → `main`, OPEN.
+- Verified implementation commit: `d5b821ce9969ee2bf167333d9b48675d0f6d470f`.
+  Subsequent publication commit only records this PR/evidence in state files.
 - Contract: [Household Pantry core](../docs/family-food/pantry-core.md).
 - Dedicated PantryItem/current Decimal balance and immutable PantryMovement.
 - Add, FEFO ingredient consumption, waste, target adjustment, metadata-only
