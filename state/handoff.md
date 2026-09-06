@@ -2,87 +2,46 @@
 
 Updated: `2026-09-06`
 
-## Active agent harness
+## PR6 — Nutrition Core — READY FOR REVIEW
 
-The [agent harness](../docs/family-food/agent-harness.md) is the active repository
-governance/instruction design. [PR #17](https://github.com/Mitronomik/family-food-os/pull/17)
-carries this supporting governance change from the verified PR #16 merge/base
-`abcb1ca8d464477baed72cdf8e06a0d126b5e743`. The disposition ledger and
-[eval evidence](../docs/family-food/agent-harness-evals.md) document the result.
-It changes no runtime/schema/data, adds no product milestone and does not start
-PR6. The next separately bounded product work is PR6. UI harness P2 is not a
-PR6 blocker.
+- Accepted starting main: `0979181409d34e4a193d58b60f4bbc8fa8d1e974`
+  (PR #17 Agent Harness merged).
+- Branch: `feature/pr6-nutrition-core`; [PR #18](https://github.com/Mitronomik/family-food-os/pull/18) → `main`, OPEN.
+- Verified implementation commit: `0d08839216ddd40a3ef2f5fd84edb8f69b2447f6`.
+  The following publication commit only records delivery evidence in state files;
+  the fully verified runtime/test files are unchanged.
+- PR5 Pantry remains COMPLETE; accepted closure evidence is in
+  [progress](progress.md#pr5-closure).
+- The [Nutrition Core contract](../docs/family-food/nutrition-core.md) owns the
+  PR6 calculation/result policy and scientific source references.
 
-## PR5 — Pantry — COMPLETE
+Implemented on-demand Decimal FoodIngredient/RecipeVersion calculations and
+member reference targets. Existing canonical profiles and immutable recipe
+versions are reused. One SQLAlchemy Core read transaction supplies a coherent
+input snapshot; Household member reads remain Household-scoped. No schema,
+production data, API or frontend changes. Migration head is `0025_pantry`.
 
-## PR6 — Nutrition Core — AUTHORIZED / NOT STARTED
+Verified focused Nutrition: **131 passed in 2.56s**. Affected catalogue,
+Household and UoW: **225 passed in 10.20s**. Production audit: all 30 recipes
+INCOMPLETE; 123 missing-density rows, 35 unsupported piece-mass rows. Full
+reason counts and limitations are in the canonical contract. Required full
+backend + launcher regression: **3386 passed in 485.55s**, zero skips, with
+`AI_ENABLED=false` and loopback access.
 
-### PR5 closure evidence
+The prior sandbox run returned 3100 passed, 162 failed, 121 errors in 230.19s;
+all failure/error entries were launcher tests, with loopback bind denied
+(`PermissionError: [Errno 1] Operation not permitted`). No tests were weakened.
+Ruff/format pass for all 13 changed Python files. Working/staged diff checks
+and the final 18-file scope audit pass; publication changes only docs/state.
 
-- [PR #15](https://github.com/Mitronomik/family-food-os/pull/15): MERGED;
-- accepted/merged head: `4778b6e99fde027be7e70b8a8966db85394e100d`;
-- merge commit / verified main: `5f1bb47199ab661d58b92b8cbb9e40b4aeb7b0d0`;
-- fully tested implementation: `d5b821ce9969ee2bf167333d9b48675d0f6d470f`;
-- final project review: `PR5 FINAL REVIEW: ACCEPT — READY TO MERGE`.
+The only pre-existing unrelated local change is tracked `.DS_Store`; leave it
+untouched and exclude it from every PR commit. No personal database was audited:
+the coverage test seeded a temporary database from the accepted loaders.
 
-No PR carries unfinished Pantry work. The publication commit changed only state
-files; the accepted head and merge commit have identical file trees.
-PR5-CLOSE reuses PR #15's accepted verification: **267 passed** focused Pantry,
-**167 passed** affected Household/FoodIngredient/Recipe/UoW, **142 passed**
-migration selection and **3255 passed in 467.40s**, zero skips, full backend +
-launcher. Ruff/diff/staged scope: PASS. No new regression run is claimed.
-Details: [progress](progress.md#pr5-closure) and
-[accepted Pantry contract](../docs/family-food/pantry-core.md).
+## Next authorized action
 
-### PR6 scope and foundations
-
-Only PR6 Nutrition Core is newly authorized:
-
-```text
-FoodIngredient nutrition
-→ RecipeVersion nutrition
-→ Member target formula/config foundation
-```
-
-Read the [master roadmap](../docs/family-food/master-roadmap.md),
-[architecture](../docs/family-food/architecture.md) and the PR6 contract in the
-[migration plan](../docs/family-food/migration-plan.md) before implementation.
-
-**FoodIngredient:** nutrition truth starts from canonical platform-owned
-FoodIngredient nutrition data and its source/version/provenance. Do not use
-legacy Ingredient, RetailSKU, Pantry quantity or LLM-generated nutrition facts.
-
-**RecipeVersion:** derive nutrition deterministically through
-`RecipeVersion → RecipeIngredient → FoodIngredient nutrition`. RecipeVersion
-remains immutable/versioned. PR6 may calculate recipe totals and per-base-serving
-nutrition, versioned member target formula/config foundations, explicit
-warnings/uncertainty, provenance propagation and deterministic rounding/config
-versions within its canonical contract. Serving, member/day totals and week
-aggregates begin only in PR7.
-
-**Pantry:** PR5 is complete, but Pantry is outside PR6 nutrition calculation
-scope. PR6 must not consume stock, mutate Pantry, calculate Shopping or use
-expiry/FEFO as nutrition truth. Later Planner/Shopping contexts may use Pantry
-only when their milestones are authorized.
-
-**Persistence:** the current custom SQLite migration chain ends at
-`0025_pantry`. If PR6 needs new durable nutrition schema, its implementation PR
-must inspect the current chain and use the next authorized migration number.
-PR5-CLOSE and harness governance introduce no migration or schema.
-Continue the accepted synchronous SQLAlchemy Core / repository / project UoW
-boundary and custom SQLite migration authority.
-
-**Deterministic architecture:** `AI_ENABLED=false` must remain sufficient.
-Critical calculations belong to backend services/domain. LLM is not a source of
-truth for kcal, protein/fat/carbohydrates, nutrient values, serving mass or member
-targets. Preserve provenance and explicit uncertainty; do not invent nutrition
-facts or medical claims.
-
-### Next product work
-
-PR5-CLOSE is merged. PR6 remains AUTHORIZED / NOT STARTED and belongs to a
-separate bounded implementation task from merged `main`. Harness governance
-contains no PR6 implementation and does not change its scope or authorization.
-
-PR7 MealPlan / Serving, PR8 Planner and every later milestone remain unauthorized:
-Shopping, Prep, Retail, AI, Auth, PostgreSQL, consumer PWA and Billing.
+Review the delivered PR6 branch/PR against its canonical contract and acceptance
+evidence. Runtime verification is complete; final project acceptance is pending. PR6 is not COMPLETE. Never merge
+without explicit post-review authorization. PR7 MealPlan/Serving and all later
+milestones remain unauthorized. Source-backed density/piece-mass/fiber/estimation
+curation is a follow-up recommendation only, not work authorized inside PR6.
