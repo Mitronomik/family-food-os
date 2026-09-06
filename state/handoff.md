@@ -1,459 +1,141 @@
 # Handoff
 
-Updated: `2026-09-05`
-
-## Latest execution — GitHub acquisition transport
-
-PR4-DATA2 — COMPLETE; PR #13 — MERGED at
-`2f5fba991f1f612ce7b4b8dfda8ebd41ad6333e7` (accepted head
-`918bf81b5da306fc65a57643de515ca1b3fbd1e4`).
-PR4 — BLOCKED (local Actions artifact delivery); PR #10 — OPEN; PR5 — UNAUTHORIZED.
-Starting head: `20608c689bfe29eab2b90ef8580e132e3f5611e6`; final head in PR #10.
-
-Authorized temporary GitHub workflow acquired **22/22 distinct artifacts** in
-runs `33988010354` and `33988433450`, both successful. Three historical instants
-remain unchanged. Fresh exact-hash: **9**; changed-hash pending review: **13**
-for **17 recipes**; runner acquisition failures: **0**. All historical URLs worked.
-Actual UTC completion/URL/hash metadata is now durable. Local ZIP delivery failed
-through gh/curl/connector-file URL/Node/Safari; no source review or clean drift
-claim is fabricated. Nine existing local files match exact runner hashes.
-
-Workflow removed in `e950dfe913bd3dfae45dd0890f534e7cf22b9a49`; final workflow
-diff against main is empty. Accepted DATA2 and production code/JSON unchanged.
-Next: obtain existing artifact `9975873265` locally, verify ZIP and all 22 files,
-then review 13 changed hashes and continue production correction. Artifact expires
-`2026-09-12T19:53:05Z`; do not repeat old-log recovery or re-curate the corpus.
-See [exact evidence](../docs/family-food/pr4-retrieval-provenance-review.md).
-Checks: DATA2 validator PASS; DATA2 164 passed; existing full PR4 including seed
-53 passed; affected regressions 82 passed; backend+launcher 2983 passed with
-localhost socket permission; Ruff 24 files and diff/scope PASS. These are baseline
-checks, not corrected DATA2 first/second seed acceptance.
-Previous execution statuses below are historical and superseded here.
-
-## Latest execution — official equivalent fallback
-
-PR4-DATA2 — COMPLETE; PR #13 — MERGED at
-`2f5fba991f1f612ce7b4b8dfda8ebd41ad6333e7` (accepted DATA2 head
-`918bf81b5da306fc65a57643de515ca1b3fbd1e4`).
-PR4 — BLOCKED; PR #10 — OPEN; PR5 — UNAUTHORIZED.
-Starting head: `7e155013a5c5a3fea42ec91930f7a1a6e06ef582`; the resulting head
-is recorded in PR #10 after push, avoiding self-referential commit hashes.
-
-The latest [official-equivalent authorization](https://github.com/Mitronomik/family-food-os/pull/10#issuecomment-5554016049)
-was applied. Current SNAP-Ed Easter PDF/recipe/collection and linked MyPlate
-paths did not yield complete current source bytes (403/Access Denied/TLS EOF).
-`SNAP6-HEAVENLY-DEVILED-EGGS` remains the concrete acquisition blocker.
-Historical artifacts reusable: 3; fresh byte-identical: 0; successors: 0.
-Authoritative and rights drift are unassessed. Accepted DATA2 and production
-implementation remain unchanged. No new permission to use official fallback
-URLs is needed; a working acquisition path is needed. See the
-[exact evidence and next action](../docs/family-food/pr4-retrieval-provenance-review.md).
-Current checks: DATA2 validator PASS; DATA2 164 passed; preserved PR4 excluding
-seed 43 passed; affected regressions 82 passed; Ruff 24 files and diff check PASS.
-Fresh seed/full corrected acceptance not run.
-The previous execution sections below are historical, superseded where they
-restrict retrieval to exact historical URLs. PR4 is not review-ready.
-
-## Current execution — PR4 DATA2 integration
-
-PR4-DATA2 — COMPLETE. PR #13 merged after `PR4-DATA2 FINAL REVIEW: ACCEPT`.
-Accepted head: `918bf81b5da306fc65a57643de515ca1b3fbd1e4`.
-Merge commit / synchronized main: `2f5fba991f1f612ce7b4b8dfda8ebd41ad6333e7`.
-Final review submitted at `2026-09-05T16:06:13Z`; merged at
-`2026-09-05T16:26:20Z`.
-
-PR4 — BLOCKED (current-source acquisition) on existing open PR #10,
-branch `migration/pr4-recipe-catalogue`; this refresh starts at
-`17d23b22340a76dfa79420e74b97ce5703fc29a8`.
-Existing accepted-main synchronization:
-`dfcbce2814b46da45cf346762a778170ffc5b36c`.
-
-The [Orchestrator decision](https://github.com/Mitronomik/family-food-os/pull/10#issuecomment-5553524319)
-authorizes bounded refresh; no further data permission is needed to acquire the
-same accepted sources. Three historical completion records are reused exactly.
-Fresh HTTPS acquisition attempted all 22 distinct remaining artifacts once:
-20 TLS EOF failures and 2 HTTP 403 failures. Exact-URL browser/Safari/curl
-fallbacks could not acquire EasterMenu.pdf; WIC printable returned Access Denied.
-No complete fresh artifact/hash/comparison was accepted. Drift remains
-unassessed, not asserted absent. No old-log search or invented timestamp.
-
-See [current source-access blocker and exact attempts](../docs/family-food/pr4-retrieval-provenance-review.md).
-Accepted DATA2, runtime, compiler, loader and production JSON remain unchanged.
-PR4 correction, new step count, equipment population and fresh seed/full
-regression acceptance remain pending access to current source bytes.
-DATA2 validator PASS; DATA2 focused 164 passed; preserved PR4 excluding seed
-43 passed; affected regression 82 passed. Ruff on 24 PR Python files and
-diff/scope checks PASS. Full seed/backend+launcher acceptance not run. Final
-correction head is recorded in PR #10 after push, without self-referential
-hashes inside state files.
-
-PR4 is neither COMPLETE nor ready for final review. PR5 remains unauthorized.
-The accepted-main records below are retained as historical execution evidence;
-their pre-merge DATA2 status/next-action sentences are superseded here.
-
-
-## Immediate handoff — PR4-DATA2
-
-PR4-DATA2 — READY FOR REVIEW, not ACCEPTED or COMPLETE (`2026-09-05`).
-
-Issue #12; existing branch `data/pr4-data2-russia-spb-recuration` and
-[PR #13](https://github.com/Mitronomik/family-food-os/pull/13).
-Exact base: `26af749be0f6446de1d88cad2e2e03158a9830a0` (merged governance #9,
-historical PR4-DATA #8 and localization #11). This direction-consumables
-correction begins at reviewed head `66a30403e3463248bb9b66e5a40920ef3fb136b5`.
-The delivered head is recorded exactly in PR #13 after push, not as a
-self-referential commit hash in its own contents.
-
-Final: **30 recipes**, **28 retained / 2 replaced in this correction pass**;
-relative to historical PR4: **3 retained / 27 replaced**. Both forbidden ICN
-cards remain absent. **225 source-audit rows / 189 selected rows** (185 required,
-3 source-explicit optional, 1 conditional); exact **81 existing FoodIngredient**
-union within **80..120**, zero new codes and zero unresolved required rows.
-**86 source-backed equipment rows / 34 normalized codes**.
-
-Canonical PR4 meal types: **breakfast 3 / main 5 / side 5 / salad 6 /
-sandwich 1 / other 10**. Separate curation roles: **BREAKFAST 3 / MAIN_DISH 5 /
-SIDE_DISH 11 / SOUP 2 / DESSERT 3 / SNACK 4 / CONDIMENT 1 / SANDWICH 1**.
-**8 meal anchors**, **3 soups/substantial one-bowl meals**, **11 pure sides**;
-six primary-protein families: **DAIRY 1 / EGG 2 / FISH 2 / LEGUME_TOFU 1 /
-MEAT 1 / POULTRY 1** among anchors.
-
-All 30 actual sources were audited beyond ingredient lists: **281 consumable
-audit rows**. At the reviewed head, **9 recipes / 19 direction-only edible
-rows** included two required unquantified pan-release sprays. Honey Lime
-Chicken and Local Harvest Bake were replaced, not silently edited. The final
-corpus has **9 recipes / 24 direction-only edible rows**, all explicitly
-resolved; **zero unresolved required direction consumables**. Process water
-discarded after preparation is excluded from those direction-only edible
-counts; selected retained water is not.
-
-**83 non-water purchase forms: 3 RU_MASS_MARKET / 80 RU_AVAILABLE /
-0 SPECIALTY_OR_UNCLEAR**. Chain coverage: **70 one-chain / 10 two-chain /
-3 three-chain** forms. All five baseline chains assessed; Lenta concentration
-remains a limitation. Matrix: **187 raw / 179 unique observations,
-142 AVAILABLE / 37 UNCERTAIN** (includes rejected research).
-Compatibility is not momentary store stock.
-
-All final sources have nine reviewed consistency dimensions, including
-direction-only consumables; missing that ninth dimension fails closed. Exact
-artifacts/hashes, attribution and notices remain under the approved narrow
-direct-FNS project risk posture, including the ONIE-attributed deviled eggs.
-No unresolved selected-source rights blocker; no blanket public-domain or
-unrestricted commercial/derivative rights claim.
-
-Verification: final DATA2 validator **PASS**; focused DATA2 **164 passed in
-3.40s**; historical PR4-DATA/FoodIngredient affected suite **82 passed in 1.71s**;
-Ruff format **2 files already formatted**, Ruff check **All checks passed!**;
-`git diff --check` **PASS**. Five final artifacts reproduce byte-for-byte from
-reviewed source/form/consumable inputs. Final staged scope audit **PASS**: 24
-authorized text files, no runtime/database/binary or unrelated files. Full runtime suite
-and PR4 production seed execution are excluded from this isolated curation operation.
-
-Historical `data/curation/pr4/`, global seeds (183 ingredients / 172 aliases /
-183 profiles), PR4 runtime, migrations/API/frontend and local development DB
-remain unchanged. PR #10 remains at `cd2285802c94735e0c9015042f9f4c0b52d68b85`;
-it may consume DATA2 only after ACCEPT + merge. No RetailSKU/retailer production,
-Nutrition, Pantry, Planner, Shopping, Auth/PostgreSQL or AI work. PR5 unauthorized.
-Next action: project final review, not autonomous merge.
-
-See [final review evidence](../data/curation/pr4-data2/review-report.md) for sources, replacements and consumable resolutions.
-
-## Project identity
-
-This repository is **FamilyFoodOS**.
-
-It was bootstrapped from CosmeticWorkshopOS to reuse a verified engineering foundation.
-
-Source provenance:
-
-- source repository: `Mitronomik/cosmetic-workshop-os`
-- source commit: `0ac96deace602248e0d31e7e56c7aed7fb63c62b`
-- bootstrap tag: `bootstrap-cosmetic-workshop-2026-08-31`
-- FamilyFoodOS repository: `Mitronomik/family-food-os`
-
-Do not continue CosmeticWorkshopOS product lifecycle work from this repository.
-
-## Completed milestone
-
-`PR2-C — Household Foundation — COMPLETE`
-
-PR2-C implemented the first production FamilyFoodOS bounded context. Household
-and HouseholdMember now work through the real FastAPI → application service →
-repository contracts → Household-specific Unit of Work → synchronous
-SQLAlchemy Core → SQLite path. Migration `0022_household_foundation` adds the
-new tables beside every inherited table and leaves the custom migration runner
-as the sole SQLite schema authority.
-
-Closure evidence:
-
-- targeted Household/domain/persistence/API/migration suite: `196 passed`;
-- backend + launcher regression: `2684 passed`;
-- Ruff checks and formatting checks: passed;
-- `git diff --check`: passed;
-- final project review: `PR2-C FINAL REVIEW: ACCEPT`;
-- GitHub PR `#5`: **MERGED**;
-- accepted head: `13f7c7c480469853579912a7836680afc4734ad7`;
-- merge commit: `48c72aeba19a1e6ece0dc729f0a80de930be88a8`;
-- merged at: `2026-09-01T21:23:23Z`;
-- no remaining PR2-C blocker.
-
-The correction pass revokes Household repositories after every terminal UoW
-attempt, maps expected commit-time database failures to stable Household
-persistence errors, makes Decimal validation total for hostile numeric input,
-and validates future birth dates from an injected aware clock in the persisted
-Household timezone.
-
-`PR2-DOCS — Canonical Roadmap & PR2-C Closure Sync — COMPLETE`
-
-- GitHub PR `#6`: merged;
-- accepted head: `351a0a7e374312d6dda4b7e0e746d6a54579de61`;
-- merge commit: `a5b6ca5d210b2401a2fa7e4037a957ec7b846774`.
-
-## Canonical reading order
-
-Before continuing:
-
-1. `AGENTS.md`
-2. `docs/family-food/project-operating-manual.md`
-3. `state/current-focus.md`
-4. `docs/family-food/master-roadmap.md`
-5. relevant architecture/domain documents, including:
-   - `docs/family-food/architecture.md`
-   - `docs/decisions/0032-family-food-persistence-portability-and-shared-deployment-tenancy-gate.md`
-   - `docs/family-food/technical-spec.md`
-   - `docs/family-food/data-ingestion.md`
-   - `docs/family-food/migration-plan.md`
-6. `state/handoff.md`
-7. applicable scoped `AGENTS.md`, code and tests, including:
-   - `backend/app/AGENTS.md`
-   - `backend/app/persistence/AGENTS.md`
-8. PR2-B persistence foundation code and PR2-C Household code/tests:
-    - `backend/app/services/unit_of_work.py`
-    - `backend/app/persistence/sqlalchemy_core/engine.py`
-    - `backend/app/persistence/sqlalchemy_core/uow.py`
-    - `backend/app/persistence/sqlalchemy_core/types.py`
-    - `backend/app/tests/persistence/`
-    - `backend/app/domain/households.py`
-    - `backend/app/services/household_contracts.py`
-    - `backend/app/services/households.py`
-    - `backend/app/persistence/sqlalchemy_core/household_*.py`
-    - `backend/app/api/households.py`
-    - `backend/app/tests/test_household_*.py`
-9. existing custom migration runner:
-    - `backend/app/db/migrations.py`
-    - its migration-chain tests
-
-## Historical work record (superseded by immediate handoff above)
-
-`PR3 — FoodIngredient Catalogue — COMPLETE`
-
-Closure evidence:
-
-- GitHub PR `#7`: **MERGED**;
-- accepted head: `b4d886824989a67711fca0b28821e60934279e6b`;
-- merge commit: `1a67fd96e9d2921ed986dc887081bbfe57c4dd83`;
-- final review: `PR3 FINAL REVIEW: ACCEPT`;
-- PR3-focused suite: `77 passed`;
-- full backend + launcher regression: `2761 passed`;
-- Ruff and `git diff --check`: passed.
-
-`PR4-DATA — Recipe Corpus FoodIngredient Coverage — READY FOR REVIEW`
-
-This is a supporting data operation, not a product milestone.
-
-Branch: `data/pr4-recipe-ingredient-coverage`
-
-Base commit: `1a67fd96e9d2921ed986dc887081bbfe57c4dd83`
-
-Review evidence:
-
-- the initial 30-card union contained 126 concepts;
-- Roasted Potato and Turkey Hash (marginal 6) and Brown Rice Pilaf (marginal 3)
-  were replaced by Vegetable Frittata Bites (contribution 1) and Cauliflower
-  Rice (contribution 1), the minimum two-card correction that passes the gate;
-- `data/curation/pr4/ingredient-coverage.csv` retains all 363 source ingredient
-  rows, including optional ingredients, alternatives and the explicit Bean
-  Burrito Bowl subrecipe structure;
-- the exact `mvp0-food-ingredient-codes.txt` manifest contains 119 codes, within
-  the unchanged Gate 2 maximum of 120;
-- all source rows resolve, with 36 PR3 codes and 83 corpus-required additions;
-- the global seed contains 183 FoodIngredients, 172 aliases and 183 current
-  nutrition profiles, with 102 Foundation and 81 SR Legacy profiles in total;
-- the production loader validates a non-empty catalogue and all existing data
-  rules but no longer hard-codes PR3's historical 80–120 milestone range;
-- no Recipe implementation was made.
-
-## Completed PR3 implementation
-
-Domain/application:
-
-- `FoodIngredient`, `IngredientAlias` and `FoodNutritionProfile` use UUIDv4,
-  UTC instants, exact Decimal validation and Python-generated Unicode keys;
-- search supports exact canonical code/name/alias and bounded prefix/contains
-  matching with deterministic ordering and deduplication;
-- deactivation preserves aliases and nutrition provenance and is not reversed
-  by seed reruns;
-- nutrition source/version snapshots are immutable: identical snapshots are
-  idempotent, new versions become current and conflicts are explicit.
-
-Persistence:
-
-- migration `0023_food_ingredient_catalogue` follows
-  `0022_household_foundation`;
-- new tables are `food_ingredients`, `food_ingredient_aliases`,
-  `food_nutrition_profiles` and `food_ingredient_allergens`;
-- driver-independent contracts compose a Food Catalogue UoW/read scope over the
-  accepted synchronous SQLAlchemy Core foundation;
-- repository access is revoked after every terminal commit/rollback attempt;
-- legacy `ingredients`, catalogue and Household schemas remain unchanged.
-
-Seed/data:
-
-- `data/seed/food_ingredients/` contains `100` FoodIngredients, `89` aliases and
-  one current nutrition profile per ingredient;
-- authoritative sources are USDA FDC Foundation Foods `2026-04-30` (`87`
-  records) and final SR Legacy `2018-04` (`13` records);
-- first run inserts `100/89/100`; the second inserts `0/0/0` and reports every
-  row existing;
-- `греч` returns `BUCKWHEAT` first; `СВЕКЛА` resolves `BEET` through NFKC,
-  casefold and `ё → е` normalization;
-- allergen review, density, edible fraction and storage truth remain unknown
-  rather than receiving invented defaults.
-
-Verification:
-
-- direct PR3 focused suite: `75 passed`;
-- expanded PR3 + affected migration/lineage suite: `154 passed`;
-- full backend + launcher regression: `2759 passed`;
-- Ruff format/check and `git diff --check`: passed.
-
-## Immediate next action
-
-Complete PR4-DATA final review and merge. The next product milestone remains
-`PR4 — Recipe Catalogue`, and its implementation waits for PR4-DATA merge. PR5
-remains unauthorized.
-
-## Persistence constraints
-
-PR3 must continue to use:
-
-`synchronous SQLAlchemy 2.x Core`
-
-through this accepted dependency path:
-
-`application/domain → repository contracts → Unit of Work → synchronous SQLAlchemy Core → SQLite`
-
-Reuse, do not replace:
-
-- `backend/app/services/unit_of_work.py`;
-- `backend/app/persistence/sqlalchemy_core/engine.py`;
-- `backend/app/persistence/sqlalchemy_core/uow.py`;
-- `backend/app/persistence/sqlalchemy_core/types.py`.
-
-If PR3 discovers a genuine defect in these contracts, identify it explicitly
-instead of silently creating a parallel persistence path.
-
-New repository interfaces and the Unit of Work must not expose SQLAlchemy,
-DBAPI or `sqlite3` connection types through domain/application APIs.
-
-PR3 must not introduce ORM or async persistence. PostgreSQL remains deferred to
-`SHARED-1`; Auth and `HouseholdMembership` remain deferred to `SHARED-2`;
-Retail and AI remain later roadmap programs.
-
-## Migration constraints
-
-During the SQLite phase:
-
-- the existing custom migration runner is the sole schema authority;
-- do not introduce Alembic;
-- do not use `MetaData.create_all()` as production schema management;
-- do not create a second schema-version history.
-
-PR2-C added `0022_household_foundation` through the existing runner. PR3 must
-append its migration after `0022`; historical migrations remain immutable and
-new tables continue to coexist with inherited legacy tables.
-
-## Unit of Work contract
-
-```text
-application operation
-        ↓
-one Unit of Work
-        ↓
-one connection / transaction scope
-        ↓
-participating repositories
-        ↓
-commit or rollback
-```
-
-All reads participating in a write command use that active Unit of Work.
-Read-only operations use a consistent query scope and do not commit. Inherited
-`backend/app/db/session()` is transitional implementation evidence and is not
-the new food-domain Unit-of-Work contract.
-
-## PR2-C implementation and scope audit
-
-Implemented:
-
-- `Household` and `HouseholdMember`;
-- household-local timezone;
-- settings and constraints that genuinely belong to the Household foundation;
-- the first production food-domain migration after `0021`;
-- SQLAlchemy Core table definitions and repository adapters;
-- Household-scoped application operations;
-- minimal create/read/update API contracts and endpoints;
-- deterministic validation;
-- domain, application, repository and API tests.
-
-PR2-C did not:
-
-- replace the custom SQLite migration runner or introduce Alembic;
-- introduce PostgreSQL, Auth or pretend `household_id` is authorization;
-- add a fake `owner_id` for the no-Auth vertical slice;
-- use ORM or async SQLAlchemy;
-- expose SQLAlchemy or DBAPI types to domain/application code;
-- mechanically rename inherited `Client` to `HouseholdMember` or reuse inherited
-  Client tables as Household tables;
-- refactor unrelated inherited repositories;
-- begin Nutrition, Planner, Shopping, Pantry, Prep, Retail or AI;
-- begin consumer PWA redesign.
-
-Also deliberately deferred are FoodPreference/excluded-ingredient entities,
-member roles, meals-at-home scheduling, portion adjustment, and controlled
-Nutrition/Planner vocabularies for activity level and goal.
-
-## Preserved migration boundary
-
-The repository still intentionally contains inherited CosmeticWorkshopOS:
-
-- backend runtime;
-- frontend runtime;
-- SQLite schema;
-- source-run launcher, SQLite and Restore scaffolding;
-- tests;
-- nested legacy `AGENTS.md` files;
-- historical documentation and packaging evidence.
-
-This is preserved migration scaffolding, not the FamilyFoodOS food-domain
-specification. Do not mass-delete it and never mechanically rename legacy
-entities such as `Client → HouseholdMember`, `Order → MealPlan` or
-`ProductionBatch → PrepBatch`.
-
-The new Household bounded context is distinct from inherited Client semantics.
-Model and migrate it as new FamilyFoodOS behavior beside the legacy schema; do
-not treat legacy Client code or tables as its domain contract.
-
-## Public repository safety
-
-Never commit:
-
-- API keys;
-- tokens;
-- passwords;
-- `.env`;
-- private credentials;
-- real user personal data;
-- real health-related data;
-- local databases;
-- local development environments.
+Updated: `2026-09-06`
+
+## Current status
+
+`PR4 — Recipe Catalogue — READY FOR REVIEW`
+
+- PR: `https://github.com/Mitronomik/family-food-os/pull/10`
+- branch: `migration/pr4-recipe-catalogue`
+- base/main: `2f5fba991f1f612ce7b4b8dfda8ebd41ad6333e7`
+- PR4-DATA2: COMPLETE; PR #13 merged accepted head
+  `918bf81b5da306fc65a57643de515ca1b3fbd1e4`
+- PR5: UNAUTHORIZED
+
+Do not merge PR #10 without explicit user authorization after final review.
+
+## Authoritative PR4 decisions
+
+1. PR #13 is the accepted recipe-corpus/data handoff; it did not replace PR4
+   runtime.
+2. Keep the useful PR #10 Recipe Catalogue runtime/domain/persistence layer.
+3. Historical `data/curation/pr4` and the old 119-FI/all-servings-6 seed are not
+   production truth.
+4. Exact historical retrieval instant is not a PR4 publication hard gate.
+   `source_retrieved_at` is nullable; never invent an instant.
+5. Accepted DATA2 source ID/URL/hash/servings/rights/ingredient/equipment truth
+   remains authoritative for v1 production recipes.
+6. Fresh network acquisition and changed-current-page hash comparison belong to
+   later ingestion/data maintenance unless a real source-truth problem is found.
+7. The Recipe Catalogue remains deterministic/offline and works with
+   `AI_ENABLED=false`.
+
+## Implemented bounded context
+
+The PR adds the new platform-owned food context beside legacy recipe tables:
+
+- `Recipe`;
+- immutable/versioned `RecipeVersion`;
+- ordered `RecipeIngredient → FoodIngredient`;
+- ordered `RecipeStep`;
+- ordered source-backed `RecipeEquipment`;
+- verification and reviewed-rights metadata;
+- exact Decimal serving scaling;
+- deactivate/archive behavior;
+- append-version history;
+- driver-independent repository contracts;
+- synchronous SQLAlchemy Core repositories and UoW;
+- custom SQLite migration `0024_food_recipe_catalogue` after `0023`;
+- SQLite UPDATE/DELETE guards for version-owned immutable rows;
+- deterministic offline seed compiler and idempotent reconciliation.
+
+No Planner, MealPlan, Serving, Nutrition Engine, Pantry, Shopping, Retail,
+Auth/PostgreSQL, frontend or AI scope is introduced.
+
+## Accepted production corpus
+
+The generated seed is compiled from accepted `data/curation/pr4-data2/**` plus
+reviewed ordered steps in `data/curation/pr4-runtime/recipe-steps.json`.
+
+Exact acceptance counts:
+
+- Recipe: 30;
+- initial RecipeVersion: 30 SOURCE_VERIFIED;
+- RecipeIngredient: 189 = 185 required + 3 optional + 1 conditional;
+- RecipeStep: 169;
+- RecipeEquipment: 86;
+- distinct equipment codes: 34;
+- distinct FoodIngredient: 81;
+- new FoodIngredient: 0;
+- unresolved required ingredients: 0;
+- unresolved required direction-consumables: 0.
+
+The step count is 169, not 170. `SNAP3-GRILLED-FRUIT` has three active selected
+steps; the source wooden-skewer soaking note is conditional and omitted because
+accepted DATA2 explicitly selected a non-wood skewer.
+
+## Provenance boundary
+
+Required/reviewable production truth remains source-specific:
+
+- source identity and URL;
+- accepted source/document SHA-256;
+- source version;
+- original/base servings;
+- verification status and `verified_at`;
+- reviewed rights basis and attribution;
+- accepted source limitations.
+
+`source_retrieved_at` is an optional true UTC instant. Unknown remains `NULL`.
+The earlier TLS/403/ZIP acquisition work is historical execution evidence and
+is no longer a PR4 hard gate; temporary acquisition/reset files were removed
+from the final PR tree.
+
+## Verification evidence
+
+GitHub Actions run `34001179713` completed successfully.
+
+- DATA2 validator: `PASS: final DATA2 gates`;
+- DATA2 focused: `164 passed in 2.80s`;
+- focused PR4 suite: `55 passed in 21.93s`;
+- fresh first seed:
+  - recipes_inserted 30;
+  - versions_inserted 30;
+  - ingredients_inserted 189;
+  - steps_inserted 169;
+  - equipment_inserted 86;
+  - conflicts 0;
+- second identical seed:
+  - all inserted counts 0;
+  - recipes_existing 30;
+  - versions_existing 30;
+  - ingredients_existing 189;
+  - steps_existing 169;
+  - equipment_existing 86;
+  - conflicts 0;
+- full backend + launcher: `2983 passed, 2 skipped, 1 warning`;
+- Ruff: PASS after deterministic formatting/fixes;
+- compiler output regenerated twice byte-for-byte identically;
+- `git diff --check`: PASS;
+- exact final count gate: `30 189 169 86 81`;
+- final `.github/workflows` diff against main: empty.
+
+## Final-review checklist
+
+Before accepting PR4, adversarially verify the current PR head against main:
+
+1. final changed-file list contains no temporary workflow, payload, acquisition
+   bundle or reset patch;
+2. migration `0024` keeps `source_retrieved_at` nullable while source hash/URL/
+   source version remain required;
+3. final 30 source IDs exactly equal accepted DATA2;
+4. 189/169/86/81 counts match seed and loader invariants;
+5. conditional source semantics are preserved in existing fields without schema
+   expansion;
+6. immutability, UoW terminality and rollback behavior remain intact;
+7. no future bounded context leaked into PR4;
+8. PR body/state say READY FOR REVIEW, not COMPLETE.
+
+If final review accepts, wait for explicit merge authorization. Only after merge
+may PR5 Pantry begin.
