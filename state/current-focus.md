@@ -18,7 +18,7 @@ accepted head `4778b6e99fde027be7e70b8a8966db85394e100d`, merge commit
 
 - Starting accepted main: `0979181409d34e4a193d58b60f4bbc8fa8d1e974`
   (PR #17 Agent Harness merged).
-- Branch: `feature/pr6-nutrition-core`.
+- Branch: `feature/pr6-nutrition-core`; [PR #18](https://github.com/Mitronomik/family-food-os/pull/18) → `main`, OPEN.
 - Scope: on-demand FoodIngredient → RecipeVersion nutrition and member reference
   target foundation. Canonical policy and data gaps:
   [Nutrition Core](../docs/family-food/nutrition-core.md).
@@ -30,7 +30,7 @@ SQLite migration head remains `0025_pantry`. The 30 production recipes all expos
 incomplete totals because reviewed mass conversions are missing; source-backed
 data work is a separate follow-up recommendation.
 
-Required verification has passed. PR6 is ready for final review after PR delivery.
+Required verification has passed and PR #18 is open. PR6 is ready for final review.
 Implementation readiness is not PR6 COMPLETE; merge needs explicit post-review
 authorization. The [agent harness](../docs/family-food/agent-harness.md) remains
 active. PR7 MealPlan / Serving, PR8 Planner and every later milestone remain

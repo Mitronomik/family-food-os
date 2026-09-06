@@ -24,7 +24,10 @@ Canonical implementation order remains `docs/family-food/master-roadmap.md`.
 ## PR6 implementation evidence
 
 - Accepted starting main: `0979181409d34e4a193d58b60f4bbc8fa8d1e974` (PR #17 merged).
-- Branch: `feature/pr6-nutrition-core`; PR6 READY FOR REVIEW, final acceptance pending.
+- Branch: `feature/pr6-nutrition-core`; [PR #18](https://github.com/Mitronomik/family-food-os/pull/18) → `main`, OPEN.
+- Verified implementation commit: `0d08839216ddd40a3ef2f5fd84edb8f69b2447f6`.
+  The publication commit changes only state delivery evidence; verified runtime/tests
+  are byte-identical. PR6 READY FOR REVIEW, final acceptance pending.
 - Contract: [Nutrition Core](../docs/family-food/nutrition-core.md).
 - Read-only, Decimal ingredient/RecipeVersion nutrition and member reference
   targets, with versioned NASEM/DRI/Atwater inputs and explicit uncertainty.

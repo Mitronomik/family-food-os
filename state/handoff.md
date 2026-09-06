@@ -6,7 +6,10 @@ Updated: `2026-09-06`
 
 - Accepted starting main: `0979181409d34e4a193d58b60f4bbc8fa8d1e974`
   (PR #17 Agent Harness merged).
-- Branch: `feature/pr6-nutrition-core`.
+- Branch: `feature/pr6-nutrition-core`; [PR #18](https://github.com/Mitronomik/family-food-os/pull/18) → `main`, OPEN.
+- Verified implementation commit: `0d08839216ddd40a3ef2f5fd84edb8f69b2447f6`.
+  The following publication commit only records delivery evidence in state files;
+  the fully verified runtime/test files are unchanged.
 - PR5 Pantry remains COMPLETE; accepted closure evidence is in
   [progress](progress.md#pr5-closure).
 - The [Nutrition Core contract](../docs/family-food/nutrition-core.md) owns the
