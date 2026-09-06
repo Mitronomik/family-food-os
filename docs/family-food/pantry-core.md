@@ -146,7 +146,9 @@ Frontend: N/A. No PantryLot, supplier, retail package or conversion, Planner,
 Shopping, MealPlan/Serving, Nutrition Engine, Prep, AI, Auth, PostgreSQL, receipt
 or barcode workflow. Legacy inventory is not removed. No catalogue data changes.
 
-PR5 is COMPLETE.
-PR6 Nutrition Core is the next authorized milestone (AUTHORIZED / NOT STARTED).
+PR5 Pantry is COMPLETE. PR6 engine implementation is ACCEPTED / MERGED;
+PR6 milestone remains NOT COMPLETE pending data readiness / closure.
+Current evidence and next review: [nutrition data readiness](nutrition-data-readiness.md).
+DATA-B requires explicit authorization; PR7+ remain unauthorized.
 Pantry remains an input to later Planner/Shopping contexts only when those
 milestones are authorized.

@@ -1,6 +1,8 @@
 # PR6 Nutrition Core
 
-Status: canonical PR6 implementation/calculation contract; final review pending.
+Status: canonical PR6 implementation/calculation contract; engine ACCEPTED / MERGED
+in PR #18 at `7c449672c039c66b8d475064462eba2a9f6d38e6`.
+PR6 milestone NOT COMPLETE, pending data readiness / closure.
 Version: `FAMILY_FOOD_NUTRITION_V1`. Implementation is on demand with
 `AI_ENABLED=false`; no remote formula loading or LLM calculation.
 
@@ -232,12 +234,14 @@ not a requirement to invent conversions to make coverage green.
 
 PR7 can consume the engine and explicit diagnostic states, but **none of the 30
 accepted production recipes currently has a complete authoritative energy total**.
-Recommend a separately authorized, bounded source-backed unit-conversion/data
-readiness operation: resolve canonical density for volume rows and introduce
-reviewed piece-mass metadata/conversion rules, then review missing fiber and
-estimation flags and rerun this exact audit. This recommendation authorizes no
-data/schema change inside PR6. The accepted 30-recipe corpus and all nutrition,
-density and serving quantities remain untouched.
+The supporting
+[PR6-DATA-A audit](nutrition-data-readiness.md) now records source-backed
+conversion candidates, semantic/source-quantity blockers and an implementation
+recommendation. A global density is not generally safe for the accepted forms.
+Next action is project review and explicit authorization of DATA-B; no production
+data, schema or runtime change is authorized by the recommendation. Accepted
+recipe/source provenance and all nutrition, density and serving quantities remain
+unchanged in DATA-A.
 
 ## Verification and acceptance
 
@@ -249,5 +253,6 @@ profile history and import/schema boundaries. Exact executed test counts and
 required full backend/launcher regression evidence live in
 [state/progress.md](../../state/progress.md#pr6-implementation-evidence).
 
-Implementation readiness is not milestone completion. PR6 requires final review
-and explicit merge/closure acceptance; PR7 and later remain unauthorized.
+PR #18 engine implementation is ACCEPTED / MERGED. PR6 milestone remains NOT
+COMPLETE pending data readiness and explicit closure acceptance. PR7 and later
+remain unauthorized; DATA-A evidence does not pre-authorize DATA-B.

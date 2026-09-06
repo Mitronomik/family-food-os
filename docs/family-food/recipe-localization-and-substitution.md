@@ -451,5 +451,7 @@ Its scope was to:
 9. hand the accepted corpus back to PR4 for seed regeneration, equipment curation, tests and final review.
 
 The original PR5 prerequisite was PR4 correction, acceptance and merge; that
-gate is satisfied. PR5 Pantry is COMPLETE. PR6 Nutrition Core is now
-AUTHORIZED / NOT STARTED under the master roadmap.
+gate is satisfied. PR5 Pantry is COMPLETE. PR6 engine implementation is ACCEPTED / MERGED;
+PR6 milestone remains NOT COMPLETE pending data readiness / closure.
+Current evidence and next review: [nutrition data readiness](nutrition-data-readiness.md).
+DATA-B requires explicit authorization; PR7+ remain unauthorized.
