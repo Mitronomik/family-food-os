@@ -23,10 +23,9 @@ provenance, exact counts, source limitations and implementation recommendations:
 [nutrition data readiness](../docs/family-food/nutrition-data-readiness.md).
 Verification: [progress](progress.md#pr6-data-a-evidence).
 
-Next action: **project review of DATA-A evidence and explicit authorization of
-any DATA-B implementation**. DATA-B is not pre-authorized. This state is valid
-before and after DATA-A merge; no DATA-A-CLOSE operation is needed. Merge still
-requires explicit post-review authorization.
+Any DATA-B implementation requires a **separate explicit project authorization**.
+DATA-A evidence and its architecture recommendation do not authorize DATA-B.
+No DATA-A-CLOSE operation is required; this state is merge-stable.
 
 No production recipe/catalogue/nutrition seed, runtime, schema, API or frontend
 change is part of DATA-A. Migration head remains `0025_pantry`.
