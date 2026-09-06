@@ -2,18 +2,7 @@
 
 Updated: `2026-09-06`
 
-## Current operation — AGENT-HARNESS
-
-Supporting governance operation: `READY FOR FINAL REVIEW`.
-Base: PR #16 (PR5-CLOSE), merged `2026-09-06T09:39:32Z`; exact main
-`abcb1ca8d464477baed72cdf8e06a0d126b5e743`.
-Branch: `docs/agent-harness-audit`. Scope: instructions, docs and one PR delivery
-Skill. See [harness](../docs/family-food/agent-harness.md) and
-[eval matrix](../docs/family-food/agent-harness-evals.md).
-Immediate action: final review of the governance PR; no autonomous merge or PR6
-implementation in this task. This is not a numbered product milestone.
-
-## Current milestone
+## Latest completed milestone
 
 `PR5 — Pantry — COMPLETE`
 
@@ -53,9 +42,10 @@ FoodIngredient nutrition
 → Member target formula/config foundation
 ```
 
-PR5-CLOSE is merged. PR6 authorization is unchanged; this governance operation
-does not start it. A separate bounded PR6 task may use merged `main` and the
-[handoff](handoff.md).
+PR5-CLOSE is merged. The [agent harness](../docs/family-food/agent-harness.md)
+is the active repository governance/instruction design. Its supporting governance
+work does not start PR6 or add a product milestone. The next product work is a
+separately bounded PR6 task from merged `main`, using the [handoff](handoff.md).
 
 PR7 MealPlan / Serving, PR8 Planner and every later milestone remain unauthorized:
 Shopping, Prep, Retail, AI, Auth, PostgreSQL, consumer PWA and Billing.

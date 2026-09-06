@@ -2,15 +2,16 @@
 
 Updated: `2026-09-06`
 
-## AGENT-HARNESS — supporting governance review
+## Active agent harness
 
-PR #16 is merged at `abcb1ca8d464477baed72cdf8e06a0d126b5e743`; the harness
-branch `docs/agent-harness-audit` starts from that exact main SHA. Current scope
-is documentation/instructions only. Review the
-[harness disposition ledger](../docs/family-food/agent-harness.md) and
-[eval evidence](../docs/family-food/agent-harness-evals.md). Publication/readiness
-is not a product milestone closure. Stop for governance final review; do not
-merge autonomously or start PR6 in this task. UI harness P2 is not a PR6 blocker.
+The [agent harness](../docs/family-food/agent-harness.md) is the active repository
+governance/instruction design. [PR #17](https://github.com/Mitronomik/family-food-os/pull/17)
+carries this supporting governance change from the verified PR #16 merge/base
+`abcb1ca8d464477baed72cdf8e06a0d126b5e743`. The disposition ledger and
+[eval evidence](../docs/family-food/agent-harness-evals.md) document the result.
+It changes no runtime/schema/data, adds no product milestone and does not start
+PR6. The next separately bounded product work is PR6. UI harness P2 is not a
+PR6 blocker.
 
 ## PR5 — Pantry — COMPLETE
 
@@ -67,7 +68,7 @@ only when their milestones are authorized.
 **Persistence:** the current custom SQLite migration chain ends at
 `0025_pantry`. If PR6 needs new durable nutrition schema, its implementation PR
 must inspect the current chain and use the next authorized migration number.
-PR5-CLOSE creates no migration or schema; do not pre-create migration `0026` here.
+PR5-CLOSE and harness governance introduce no migration or schema.
 Continue the accepted synchronous SQLAlchemy Core / repository / project UoW
 boundary and custom SQLite migration authority.
 
@@ -77,11 +78,11 @@ truth for kcal, protein/fat/carbohydrates, nutrient values, serving mass or memb
 targets. Preserve provenance and explicit uncertainty; do not invent nutrition
 facts or medical claims.
 
-### Next gate
+### Next product work
 
-PR5-CLOSE is merged. The current AGENT-HARNESS task stops for its final review.
-PR6 remains separately authorized from merged `main`; this task does not start it.
-PR6 is AUTHORIZED / NOT STARTED; this branch contains no PR6 implementation.
+PR5-CLOSE is merged. PR6 remains AUTHORIZED / NOT STARTED and belongs to a
+separate bounded implementation task from merged `main`. Harness governance
+contains no PR6 implementation and does not change its scope or authorization.
 
 PR7 MealPlan / Serving, PR8 Planner and every later milestone remain unauthorized:
 Shopping, Prep, Retail, AI, Auth, PostgreSQL, consumer PWA and Billing.
