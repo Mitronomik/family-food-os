@@ -2,46 +2,34 @@
 
 Updated: `2026-09-06`
 
-## PR6 — Nutrition Core — READY FOR REVIEW
+PR6 engine implementation is **ACCEPTED / MERGED** in
+[PR #18](https://github.com/Mitronomik/family-food-os/pull/18), merge commit
+`7c449672c039c66b8d475064462eba2a9f6d38e6`.
+Accepted implementation: `0d08839216ddd40a3ef2f5fd84edb8f69b2447f6`;
+merged delivery head: `9dffb5fcbc8ec0b3d4a1f36f5349d68c944f2bbe`.
+PR6 milestone is **NOT COMPLETE**, pending data readiness / closure.
 
-- Accepted starting main: `0979181409d34e4a193d58b60f4bbc8fa8d1e974`
-  (PR #17 Agent Harness merged).
-- Branch: `feature/pr6-nutrition-core`; [PR #18](https://github.com/Mitronomik/family-food-os/pull/18) → `main`, OPEN.
-- Verified implementation commit: `0d08839216ddd40a3ef2f5fd84edb8f69b2447f6`.
-  The following publication commit only records delivery evidence in state files;
-  the fully verified runtime/test files are unchanged.
-- PR5 Pantry remains COMPLETE; accepted closure evidence is in
-  [progress](progress.md#pr5-closure).
-- The [Nutrition Core contract](../docs/family-food/nutrition-core.md) owns the
-  PR6 calculation/result policy and scientific source references.
+PR6-DATA-A evidence exists in `data/curation/pr6-data-a/`; the complete
+[nutrition data-readiness audit](../docs/family-food/nutrition-data-readiness.md)
+owns findings, source limitations, decision definitions, exact summary and the
+C+B architecture recommendation. All 189 rows are accounted for; 158 ml/pcs
+rows have one controlled conversion decision. Original recipe artifacts were
+reopened and hash-verified for all 30 recipes. Official FDC portions and bounded
+FAO/CNF evidence are committed as factual extracts, without source documents.
 
-Implemented on-demand Decimal FoodIngredient/RecipeVersion calculations and
-member reference targets. Existing canonical profiles and immutable recipe
-versions are reused. One SQLAlchemy Core read transaction supplies a coherent
-input snapshot; Household member reads remain Household-scoped. No schema,
-production data, API or frontend changes. Migration head is `0025_pantry`.
+The [progress record](progress.md#pr6-data-a-evidence) gives executed checks.
+Production Nutrition remains 30/30 INCOMPLETE; missing density 123 and
+unsupported piece mass 35. Source quantity and g-row food-form findings must
+not disappear when implementing conversions. Production seeds, runtime,
+schema/API/frontend remain unchanged; migration head is `0025_pantry`.
 
-Verified focused Nutrition: **131 passed in 2.56s**. Affected catalogue,
-Household and UoW: **225 passed in 10.20s**. Production audit: all 30 recipes
-INCOMPLETE; 123 missing-density rows, 35 unsupported piece-mass rows. Full
-reason counts and limitations are in the canonical contract. Required full
-backend + launcher regression: **3386 passed in 485.55s**, zero skips, with
-`AI_ENABLED=false` and loopback access.
+## Next action
 
-The prior sandbox run returned 3100 passed, 162 failed, 121 errors in 230.19s;
-all failure/error entries were launcher tests, with loopback bind denied
-(`PermissionError: [Errno 1] Operation not permitted`). No tests were weakened.
-Ruff/format pass for all 13 changed Python files. Working/staged diff checks
-and the final 18-file scope audit pass; publication changes only docs/state.
+Project review of DATA-A evidence, then **explicit authorization** of any
+DATA-B implementation. The recommendation is not implementation authority.
+PR7 MealPlan/Serving and all later milestones remain unauthorized. Do not merge
+without explicit post-review authorization. No separate DATA-A-CLOSE is needed.
 
-The only pre-existing unrelated local change is tracked `.DS_Store`; leave it
-untouched and exclude it from every PR commit. No personal database was audited:
-the coverage test seeded a temporary database from the accepted loaders.
-
-## Next authorized action
-
-Review the delivered PR6 branch/PR against its canonical contract and acceptance
-evidence. Runtime verification is complete; final project acceptance is pending. PR6 is not COMPLETE. Never merge
-without explicit post-review authorization. PR7 MealPlan/Serving and all later
-milestones remain unauthorized. Source-backed density/piece-mass/fiber/estimation
-curation is a follow-up recommendation only, not work authorized inside PR6.
+The unrelated tracked `.DS_Store` change predates DATA-A; leave it untouched
+and exclude it from commits. Tests seed temporary databases; no personal
+production database was used in this audit.

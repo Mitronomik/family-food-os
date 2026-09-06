@@ -1,0 +1,166 @@
+{
+  "total_recipes": 30,
+  "total_rows": 189,
+  "units": {
+    "g": 31,
+    "ml": 123,
+    "pcs": 35
+  },
+  "conversion_optionality": {
+    "ml": {
+      "required": {
+        "rows": 120,
+        "affected_recipes": 30
+      },
+      "optional": {
+        "rows": 3,
+        "affected_recipes": 2
+      }
+    },
+    "pcs": {
+      "required": {
+        "rows": 34,
+        "affected_recipes": 20
+      },
+      "optional": {
+        "rows": 1,
+        "affected_recipes": 1
+      }
+    }
+  },
+  "unique_conversion_foods": {
+    "ml": 55,
+    "pcs": 19,
+    "either": 65
+  },
+  "decisions": {
+    "DIRECT_RECIPE_MASS": {
+      "rows": 0,
+      "affected_recipes": 0
+    },
+    "FDC_EXACT_PORTION": {
+      "rows": 66,
+      "affected_recipes": 28
+    },
+    "FDC_COMPATIBLE_ESTIMATE": {
+      "rows": 39,
+      "affected_recipes": 20
+    },
+    "INFOODS_EXACT_OR_STRONG_MATCH": {
+      "rows": 0,
+      "affected_recipes": 0
+    },
+    "INFOODS_COMPATIBLE_ESTIMATE": {
+      "rows": 2,
+      "affected_recipes": 2
+    },
+    "OTHER_SOURCE_EXACT": {
+      "rows": 0,
+      "affected_recipes": 0
+    },
+    "OTHER_SOURCE_ESTIMATE": {
+      "rows": 2,
+      "affected_recipes": 2
+    },
+    "FOOD_FORM_MISMATCH": {
+      "rows": 12,
+      "affected_recipes": 11
+    },
+    "CANONICAL_IDENTITY_MISMATCH": {
+      "rows": 0,
+      "affected_recipes": 0
+    },
+    "MEASURE_OR_SIZE_AMBIGUOUS": {
+      "rows": 36,
+      "affected_recipes": 19
+    },
+    "NO_ACCEPTABLE_SOURCE": {
+      "rows": 1,
+      "affected_recipes": 1
+    }
+  },
+  "readiness": {
+    "implementation_ready_exact": {
+      "rows": 66,
+      "affected_recipes": 28
+    },
+    "implementation_ready_estimated": {
+      "rows": 0,
+      "affected_recipes": 0
+    },
+    "not_implementation_ready": {
+      "rows": 92,
+      "affected_recipes": 28
+    },
+    "candidate_exact": {
+      "rows": 66,
+      "affected_recipes": 28
+    },
+    "candidate_estimated": {
+      "rows": 43,
+      "affected_recipes": 20
+    },
+    "no_candidate": {
+      "rows": 49,
+      "affected_recipes": 25
+    }
+  },
+  "semantics": {
+    "MATCH": {
+      "rows": 63,
+      "affected_recipes": 24
+    },
+    "MATCH_WITH_FORM_QUALIFIER": {
+      "rows": 42,
+      "affected_recipes": 18
+    },
+    "ACCEPTED_SUBSTITUTION": {
+      "rows": 47,
+      "affected_recipes": 24
+    },
+    "FORM_MISMATCH": {
+      "rows": 17,
+      "affected_recipes": 15
+    },
+    "IDENTITY_MISMATCH": {
+      "rows": 1,
+      "affected_recipes": 1
+    },
+    "AMBIGUOUS": {
+      "rows": 19,
+      "affected_recipes": 16
+    }
+  },
+  "additional_blockers": {
+    "CONVERSION_ESTIMATION_PROPAGATION_NOT_IMPLEMENTED": {
+      "rows": 43,
+      "affected_recipes": 20
+    },
+    "PROFILE_REPRESENTATIVENESS_REVIEW": {
+      "rows": 15,
+      "affected_recipes": 13
+    },
+    "SOURCE_ALTERNATIVE_WEIGHT_MISAPPLIED": {
+      "rows": 1,
+      "affected_recipes": 1
+    },
+    "SOURCE_QUANTITY_AMBIGUOUS": {
+      "rows": 1,
+      "affected_recipes": 1
+    },
+    "SOURCE_QUANTITY_MISMATCH": {
+      "rows": 4,
+      "affected_recipes": 4
+    }
+  },
+  "runtime_conversion_issues": {
+    "MISSING_DENSITY": {
+      "rows": 123,
+      "affected_recipes": 30
+    },
+    "UNSUPPORTED_PIECE_MASS": {
+      "rows": 35,
+      "affected_recipes": 21
+    }
+  }
+}

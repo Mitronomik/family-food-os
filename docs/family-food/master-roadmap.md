@@ -39,7 +39,7 @@ PR4-DATA Recipe coverage support           COMPLETE
 PR4-DATA2 Russia/SPB corpus re-curation    COMPLETE
 PR4   Recipe Catalogue                     COMPLETE
 PR5   Pantry                               COMPLETE
-PR6   Nutrition Core                       READY FOR REVIEW
+PR6   Nutrition Core                       NOT COMPLETE (engine ACCEPTED / MERGED)
 ```
 
 PR2-C closure evidence:
@@ -71,14 +71,15 @@ PR5 closure evidence:
 - final regression gate: PASS — **3255 passed in 467.40s**, zero skips;
 - accepted PR #15 verification is reused by PR5-CLOSE; no regression rerun.
 
-The active product milestone is `PR6 — Nutrition Core — READY FOR REVIEW`.
-Its on-demand calculation contract and production coverage are recorded in
-[Nutrition Core](nutrition-core.md); final acceptance remains pending.
-PR6 is the only authorized product implementation milestone; PR7
-MealPlan / Serving, PR8 Planner and all later milestones remain unauthorized,
-including Shopping, Prep, Retail, AI, Auth, PostgreSQL, consumer PWA and Billing.
-PR5-CLOSE synchronizes status and records this authorization only; it changes no
-sequence, gate, architecture rule, quantitative target or milestone scope.
+PR6 engine implementation is ACCEPTED / MERGED in
+[PR #18](https://github.com/Mitronomik/family-food-os/pull/18), merge commit
+`7c449672c039c66b8d475064462eba2a9f6d38e6`. PR6 milestone is **NOT COMPLETE**,
+pending data readiness / closure. The [Nutrition Core](nutrition-core.md)
+contract remains active. PR6-DATA-A is supporting research, not a numbered
+milestone; its [audit evidence](nutrition-data-readiness.md) exists for project
+review and explicit authorization of a DATA-B implementation. DATA-B is not
+pre-authorized. PR7 MealPlan / Serving and all later milestones remain
+unauthorized. No roadmap order, gate or quantitative target changes.
 
 ## 3. North Star and core-loop contract
 
@@ -488,7 +489,7 @@ shopping-list generation, automatic purchase ingestion or computer vision.
 **Exit criteria:** a Household can maintain understandable Pantry state through
 transactional movements without exposure to industrial inventory concepts.
 
-### PR6 — Nutrition Core — READY FOR REVIEW
+### PR6 — Nutrition Core — engine ACCEPTED / MERGED; milestone NOT COMPLETE
 
 PR6 owns the deterministic Nutrition Core only through:
 

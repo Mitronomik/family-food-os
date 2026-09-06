@@ -16,7 +16,7 @@ PR4-DATA Recipe coverage support           COMPLETE
 PR4-DATA2 Russia/SPB corpus re-curation    COMPLETE
 PR4   Recipe Catalogue                     COMPLETE
 PR5   Pantry                               COMPLETE
-PR6   Nutrition Core                       READY FOR REVIEW
+PR6   Nutrition Core                       NOT COMPLETE (engine ACCEPTED / MERGED)
 ```
 
 Canonical implementation order remains `docs/family-food/master-roadmap.md`.
@@ -24,10 +24,12 @@ Canonical implementation order remains `docs/family-food/master-roadmap.md`.
 ## PR6 implementation evidence
 
 - Accepted starting main: `0979181409d34e4a193d58b60f4bbc8fa8d1e974` (PR #17 merged).
-- Branch: `feature/pr6-nutrition-core`; [PR #18](https://github.com/Mitronomik/family-food-os/pull/18) → `main`, OPEN.
+- [PR #18](https://github.com/Mitronomik/family-food-os/pull/18): ACCEPTED / MERGED; merge commit `7c449672c039c66b8d475064462eba2a9f6d38e6`.
+- Merged delivery head: `9dffb5fcbc8ec0b3d4a1f36f5349d68c944f2bbe`.
 - Verified implementation commit: `0d08839216ddd40a3ef2f5fd84edb8f69b2447f6`.
   The publication commit changes only state delivery evidence; verified runtime/tests
-  are byte-identical. PR6 READY FOR REVIEW, final acceptance pending.
+  are byte-identical. Engine implementation is ACCEPTED / MERGED.
+  PR6 milestone is NOT COMPLETE, pending data readiness / closure.
 - Contract: [Nutrition Core](../docs/family-food/nutrition-core.md).
 - Read-only, Decimal ingredient/RecipeVersion nutrition and member reference
   targets, with versioned NASEM/DRI/Atwater inputs and explicit uncertainty.
@@ -66,6 +68,69 @@ PASS. `git diff --cached --check` and final staged scope audit: PASS, 18 files
 (7 runtime, 6 tests, 2 canonical docs/status, 3 state). The only unrelated
 working-tree change is `.DS_Store`, excluded from staging/commits. No milestone
 completion or PR7 authorization is claimed.
+
+## PR6-DATA-A evidence
+
+Supporting research/data-curation starts from exact main
+`7c449672c039c66b8d475064462eba2a9f6d38e6` on
+`data/pr6-nutrition-conversion-audit`. The
+[nutrition data-readiness audit](../docs/family-food/nutrition-data-readiness.md)
+and its 290-record source manifest cover all 30 accepted RecipeVersions and
+189 ingredient rows: 31 g, 123 ml and 35 pcs. All 158 conversion rows have one
+controlled decision; all 189 have semantic review. Accepted original artifacts
+were reopened and their PR4 hashes verified for all 30 recipes.
+
+Numeric candidates: 66 exact, 43 estimated, 49 unresolved. Readiness: 66 exact,
+0 estimated, 92 not ready. Semantic findings include 17 form mismatches,
+1 identity mismatch and 19 ambiguities; source quantity findings affect six
+rows in five recipes. These are review findings, not production corrections.
+Exact affected-recipe counts and source limitations are in the canonical audit.
+
+Executed DATA-A verification on 2026-09-06 (`AI_ENABLED=false` for pytest):
+
+```sh
+python3 -m pytest -q backend/app/tests/test_pr6_data_a_research.py
+# 18 passed in 0.89s
+
+python3 -m pytest -q backend/app/tests/test_pr6_data_a_research.py backend/app/tests/test_pr4_data2_research.py backend/app/tests/test_pr4_data_coverage.py backend/app/tests/test_food_recipe_seed.py
+# 199 passed in 5.74s (18 research + 181 existing PR4/corpus/seed checks)
+
+python3 -m pytest -q -s backend/app/tests/test_nutrition_catalogue.py
+# 1 passed in 0.58s; 30 INCOMPLETE / 189 rows; MISSING_DENSITY 123/30 recipes,
+# UNSUPPORTED_PIECE_MASS 35/21; UNKNOWN_FIBER 30/21;
+# ESTIMATION_STATUS_UNKNOWN 189/30; OPTIONAL_INGREDIENT 4/2.
+
+python3 scripts/validate_pr6_data_a.py
+# PASS: exact stable-row coverage, source references, Decimal candidate
+# arithmetic, pinned summary and 450 protected-file SHA-256 checks.
+
+python3 -m ruff check scripts/validate_pr6_data_a.py backend/app/tests/test_pr6_data_a_research.py
+python3 -m ruff format --check scripts/validate_pr6_data_a.py backend/app/tests/test_pr6_data_a_research.py
+# PASS
+```
+
+The initial `.venv/bin/python` audit attempt could not import SQLAlchemy;
+the successful checks above use the available `python3` environment. No full
+backend/launcher run is claimed or required for this data/docs-only operation.
+
+Production seeds, accepted PR4 source evidence, runtime, schema, API and frontend
+remain byte-identical to the accepted base. Migration `0026` is absent.
+The unrelated `.DS_Store` change is excluded from delivery.
+`git diff --check`, `git diff --cached --check` and the staged scope audit PASS:
+13 intended files (three curation artifacts, five canonical docs, three state
+files, one offline validator and one focused test file). Documentation file links
+resolve. The post-staging focused rerun passed all 18 tests in 0.88s.
+
+PR6 engine implementation remains ACCEPTED / MERGED; PR6 milestone remains
+NOT COMPLETE. DATA-A evidence exists for project review. The next action is
+explicit project authorization of a bounded DATA-B implementation; none is
+pre-authorized. PR7+ remain unauthorized. No DATA-A-CLOSE operation is needed.
+
+## Historical delivery records
+
+The records below describe prior accepted operations and their then-current
+state. Their PR6 pre-implementation wording is historical, superseded by the
+PR6 acceptance and DATA-A evidence above; it grants no current authorization.
 
 ## AGENT-HARNESS governance evidence
 
