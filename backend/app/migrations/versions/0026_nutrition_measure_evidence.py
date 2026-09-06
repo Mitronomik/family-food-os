@@ -49,7 +49,7 @@ STATEMENTS = (
     """,
     """
     CREATE TABLE recipe_ingredient_nutrition_assessment_issues (
-        assessment_id CHAR(32) NOT NULL REFERENCES recipe_ingredient_nutrition_assessments(id) ON DELETE RESTRICT CHECK (length(assessment_id) = 32 AND assessment_id NOT GLOB '*[^0-9a-f]*'),
+        assessment_id CHAR(32) NOT NULL REFERENCES recipe_ingredient_nutrition_assessments(id) ON DELETE RESTRICT DEFERRABLE INITIALLY DEFERRED CHECK (length(assessment_id) = 32 AND assessment_id NOT GLOB '*[^0-9a-f]*'),
         position INTEGER NOT NULL CHECK ((typeof(position) = 'integer') AND (position > 0)),
         issue_code TEXT NOT NULL CHECK ((length(trim(issue_code)) > 0) AND (issue_code IN ('CONVERSION_ESTIMATE_NOT_ACCEPTED', 'PROFILE_REPRESENTATIVENESS_REVIEW', 'SOURCE_ALTERNATIVE_WEIGHT_MISAPPLIED', 'SOURCE_QUANTITY_AMBIGUOUS', 'SOURCE_QUANTITY_MISMATCH', 'FOOD_FORM_MISMATCH', 'IDENTITY_MISMATCH', 'MEASURE_OR_SIZE_AMBIGUOUS', 'NO_ACCEPTABLE_SOURCE'))),
         PRIMARY KEY (assessment_id, position),
@@ -70,6 +70,14 @@ STATEMENTS = (
     """,
     """
     CREATE TRIGGER recipe_ingredient_nutrition_assessments_no_delete BEFORE DELETE ON recipe_ingredient_nutrition_assessments BEGIN SELECT RAISE(ABORT, 'Nutrition evidence/review history is immutable'); END
+    """,
+    """
+    CREATE TRIGGER recipe_ingredient_nutrition_assessment_issues_no_late_insert
+    BEFORE INSERT ON recipe_ingredient_nutrition_assessment_issues
+    WHEN EXISTS (SELECT 1 FROM recipe_ingredient_nutrition_assessments WHERE id = NEW.assessment_id)
+    BEGIN
+        SELECT RAISE(ABORT, 'Nutrition assessment issue set is sealed');
+    END
     """,
     """
     CREATE TRIGGER recipe_ingredient_nutrition_assessment_issues_no_update BEFORE UPDATE ON recipe_ingredient_nutrition_assessment_issues BEGIN SELECT RAISE(ABORT, 'Nutrition evidence/review history is immutable'); END

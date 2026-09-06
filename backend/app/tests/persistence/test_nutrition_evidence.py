@@ -329,7 +329,6 @@ def test_evidence_sql_constraints(corpus, field, value):
         "second_current",
         "duplicate_version",
         "invalid_status",
-        "dangling_issue",
         "duplicate_issue",
         "update_evidence",
         "delete_evidence",
@@ -361,14 +360,6 @@ def test_database_constraints_and_immutable_history(seeded, failure):
                         assessment_version=2, is_current=False, status_code="INVALID"
                     )
                 db.execute(insert(AT).values(**values))
-            elif failure == "dangling_issue":
-                db.execute(
-                    insert(IT).values(
-                        assessment_id=uuid4(),
-                        position=1,
-                        issue_code="NO_ACCEPTABLE_SOURCE",
-                    )
-                )
             elif failure == "duplicate_issue":
                 blocked = (
                     db.execute(AT.select().where(AT.c.status_code == "BLOCKED"))
@@ -539,3 +530,110 @@ def test_source_hashes_fail_closed(tmp_path):
     source.write_text(source.read_text() + " ")
     with pytest.raises(NutritionEvidenceSeedError, match="hash mismatch"):
         load_seed_entries(root=tmp_path)
+
+
+@pytest.mark.parametrize(
+    "status",
+    ["APPROVED_EXACT", "APPROVED_NO_CONVERSION", "REVIEW_REQUIRED_ESTIMATE", "BLOCKED"],
+)
+@pytest.mark.parametrize("historical", [False, True])
+def test_late_issue_insert_cannot_change_published_assessment(
+    seeded, status, historical
+):
+    from app.domain.nutrition_evidence import NutritionAssessmentIssue
+
+    config, engine = seeded
+    with engine.connect() as db:
+        row = (
+            db.execute(AT.select().where(AT.c.status_code == status)).mappings().first()
+        )
+    with SqlAlchemyNutritionEvidenceUnitOfWork(engine) as write:
+        review = write.evidence.get_current_assessment(row["recipe_ingredient_id"])
+        if historical:
+            write.evidence.add_assessment(
+                replace(review, id=uuid4(), assessment_version=2)
+            )
+            write.commit()
+    # Use a new position and a new controlled code: failure must come from sealing,
+    # not the existing issue uniqueness/enum constraints.
+    novel_issue = next(
+        code for code in NutritionAssessmentIssue if code not in review.issues
+    )
+    before = dump(config)
+    with engine.begin() as db:
+        with pytest.raises(IntegrityError, match="issue set is sealed"):
+            db.execute(
+                insert(IT).values(
+                    assessment_id=review.id,
+                    position=len(review.issues) + 1,
+                    issue_code=novel_issue,
+                )
+            )
+    assert dump(config) == before
+
+
+def test_deferred_issue_reference_cannot_commit_without_assessment(corpus):
+    config, engine = corpus
+    before = dump(config)
+    with pytest.raises(IntegrityError, match="FOREIGN KEY"):
+        with engine.begin() as db:
+            db.execute(
+                insert(IT).values(
+                    assessment_id=uuid4(), position=1, issue_code="NO_ACCEPTABLE_SOURCE"
+                )
+            )
+            # The insert is permitted only while building an unpublished review.
+            assert db.execute(IT.select()).first() is not None
+    assert dump(config) == before
+
+
+def test_reassessment_seals_new_issues_and_rolls_back_failed_parent(seeded):
+    config, engine = seeded
+    with engine.connect() as db:
+        row = (
+            db.execute(AT.select().where(AT.c.status_code == "BLOCKED"))
+            .mappings()
+            .first()
+        )
+    with SqlAlchemyNutritionEvidenceUnitOfWork(engine) as write:
+        old = write.evidence.get_current_assessment(row["recipe_ingredient_id"])
+        issues = tuple(sorted(set(old.issues) | {"SOURCE_QUANTITY_AMBIGUOUS"}))
+        candidate = replace(old, id=uuid4(), assessment_version=2, issues=issues)
+        before = write.adapter_connection.execute(IT.select()).fetchall()
+        # Child insertion succeeds first; a failing parent must remove those
+        # children and undo the old current-marker retirement at the savepoint.
+        with pytest.raises(NutritionEvidenceConflictError):
+            write.evidence.add_assessment(
+                replace(candidate, nutrition_profile_id=uuid4())
+            )
+        assert write.adapter_connection.execute(IT.select()).fetchall() == before
+        assert write.evidence.get_current_assessment(old.recipe_ingredient_id) == old
+        write.evidence.add_assessment(candidate)
+        assert (
+            write.evidence.get_current_assessment(old.recipe_ingredient_id) == candidate
+        )
+        # Parent INSERT seals the set even before transaction commit.
+        from app.domain.nutrition_evidence import NutritionAssessmentIssue
+
+        novel_issue = next(
+            code for code in NutritionAssessmentIssue if code not in candidate.issues
+        )
+        with pytest.raises(IntegrityError, match="issue set is sealed"):
+            write.adapter_connection.execute(
+                insert(IT).values(
+                    assessment_id=candidate.id,
+                    position=len(candidate.issues) + 1,
+                    issue_code=novel_issue,
+                )
+            )
+        assert (
+            write.evidence.get_current_assessment(old.recipe_ingredient_id) == candidate
+        )
+        write.commit()
+    with sqlite3.connect(config.path) as db:
+        assert db.execute("PRAGMA foreign_key_check").fetchall() == []
+        old_issues = db.execute(
+            f"SELECT issue_code FROM {IT.name} WHERE assessment_id=? ORDER BY position",
+            (old.id.hex,),
+        ).fetchall()
+        assert tuple(code for (code,) in old_issues) == old.issues

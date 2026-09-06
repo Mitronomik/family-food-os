@@ -379,6 +379,13 @@ it does not belong to or prove a target FoodIngredient. Source quantity and gram
 numerator are Decimal text, with no pre-rounded density replacing the fraction.
 Changed evidence requires a new stable curated key and new immutable row.
 Evidence update/delete is rejected; ordered assessment issues also retain history.
+The repository inserts issues before their assessment under a deferred foreign
+key, then inserts the assessment to seal the issue set. A SQLite trigger rejects
+all later issue INSERTs for that assessment, whether current or historical;
+UPDATE/DELETE remain forbidden. A dangling issue cannot survive transaction commit.
+This correction is incorporated into migration 0026, without a new migration.
+Disposable databases from earlier B1 builds use a fresh schema or the tested
+accepted 0025→0026 path.
 
 An assessment binds one immutable RecipeIngredient and the exact local
 FoodNutritionProfile ID resolved from reviewed source name/id/version. The

@@ -28,8 +28,7 @@ All 43 estimates remain non-executable. Production audit v2 reports 30 INCOMPLET
 recipes and zero missing-assessment, missing-density or unsupported-piece reasons.
 Migration head is `0026_nutrition_measure_evidence`.
 
-The authorized deliverable is B1 for final project review; this changeset does not
-claim its own acceptance or merge. Merge requires explicit post-review user
-instruction. B2 decisions on quantity/form corrections, RecipeVersion v2,
-estimates and remaining profile/fiber uncertainty require separate authorization.
+B1 establishes the evidence/binding foundation without completing PR6.
+Quantity/form corrections, RecipeVersion v2, estimate policy and remaining
+profile/fiber uncertainty require separately authorized DATA-B2 decisions.
 No PR6 closure, later context, public API or frontend work is authorized here.

@@ -17,10 +17,7 @@ remain non-executable; 11 gram rows are blocked. Actual audit: 30 INCOMPLETE
 recipes. Production recipe/profile source files and all DATA-A research bytes
 are unchanged. No API/frontend or future context is introduced.
 
-The deliverable is B1 for final review; acceptance/merge is not claimed by this
-changeset. Do not merge without explicit post-review instruction. PR6 remains
-NOT COMPLETE. DATA-B2 is NOT AUTHORIZED; PR7+ remain UNAUTHORIZED. No separate
-DATA-B1-CLOSE is needed. Source corrections, RecipeVersion v2 and estimate policy
-belong to separately authorized follow-up decisions.
-
-Unrelated local `.DS_Store` modification is preserved and excluded from delivery.
+B1 establishes the evidence/binding foundation; PR6 remains NOT COMPLETE.
+DATA-B2 is NOT AUTHORIZED; PR7+ remain UNAUTHORIZED. No separate DATA-B1-CLOSE
+is needed. Source corrections, RecipeVersion v2 and estimate policy belong to
+separately authorized follow-up decisions.

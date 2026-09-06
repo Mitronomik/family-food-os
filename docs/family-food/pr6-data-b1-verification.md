@@ -152,6 +152,37 @@ Markdown file-link validation: PASS. No production RecipeVersion/ingredient,
 FoodNutritionProfile/source seed, FoodIngredient density or DATA-A research file
 was changed. `.DS_Store` is unrelated and excluded.
 
+## Review correction — sealed assessment issue sets
+
+Late issue INSERTs are now rejected at the SQLite boundary for all four assessment
+statuses, both current and historical, including assessments with zero issues.
+The repository writes the issues first using a deferred child foreign key;
+parent assessment INSERT seals the set immediately, including before commit.
+A dangling issue fails at commit, and a parent-insert failure rolls back its
+children and the previous current-marker retirement. The correction is contained
+in migration 0026 and repository write ordering; calculation/read policy and
+DATA-A/57-evidence/189-assessment/123-issue payloads are byte-identical to
+`8aae50a8d1251cce2ac75c8a2afe995fa5152eed`.
+
+The late-insert regression was first reproduced against the old implementation
+(`APPROVED_EXACT`: INSERT did not raise), then verified after the fix:
+
+```sh
+AI_ENABLED=false backend/.venv/bin/python -m pytest -q backend/app/tests/persistence/test_nutrition_evidence.py backend/app/tests/persistence/test_nutrition_read_scope.py backend/app/tests/persistence/test_unit_of_work.py backend/app/tests/test_nutrition_evidence_domain.py backend/app/tests/test_nutrition_application.py backend/app/tests/test_nutrition_catalogue.py backend/app/tests/test_nutrition_architecture.py
+# 102 passed in 23.31s.
+
+AI_ENABLED=false backend/.venv/bin/python -m pytest -q backend/app/tests/persistence/test_nutrition_evidence.py::test_reassessment_seals_new_issues_and_rolls_back_failed_parent
+# 1 passed in 0.67s after adding the explicit pre-commit sealing assertion.
+```
+
+Ruff/format for the three changed Python files and diff/staged scope checks PASS.
+Current focus and handoff use durable B1 outcome/boundary statements without a
+pending review/merge phase. PR6 remains NOT COMPLETE; DATA-B2 and PR7+ remain
+unauthorized. Per explicit user instruction, the earlier full regression
+(3467 passed at `8aae50a`) is retained as historical evidence, not rerun for this
+storage-only correction. The focused checks above cover the changed migration,
+write ordering, reassessment and failure paths.
+
 ## Exact changed files
 
 45 intended files, grouped by their repository paths:

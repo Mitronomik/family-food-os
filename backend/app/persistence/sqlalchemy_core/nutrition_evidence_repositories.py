@@ -93,7 +93,8 @@ class SqlAlchemyNutritionEvidenceRepository:
                         )
                         .values(is_current=False)
                     )
-                self._connection.execute(insert(assessment_table).values(**values))
+                # The deferred child FK lets issues precede their parent. Inserting
+                # the parent seals the set: later INSERTs (even before commit) fail.
                 if assessment.issues:
                     self._connection.execute(
                         insert(issue_table),
@@ -106,6 +107,7 @@ class SqlAlchemyNutritionEvidenceRepository:
                             for position, code in enumerate(assessment.issues, 1)
                         ],
                     )
+                self._connection.execute(insert(assessment_table).values(**values))
         except IntegrityError as exc:
             raise NutritionEvidenceConflictError(
                 "Assessment reference/version/current state conflicts."

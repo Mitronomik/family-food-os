@@ -137,7 +137,7 @@ Explicit B1 supporting-operation authorization starts from DATA-A accepted main
 All 43 estimate candidates remain non-executable. Production audit: all 30
 recipes INCOMPLETE, missing-assessment and old recipe density/piece warnings zero.
 
-Executed verification (`AI_ENABLED=false`): focused Nutrition/targets/DATA-A
+Initial B1 verification at `8aae50a` (`AI_ENABLED=false`): focused Nutrition/targets/DATA-A
 **212 passed in 25.40s**; affected catalogue/Recipe/Household/Pantry/migration/UoW
 **472 passed in 28.31s**; full backend + launcher with local loopback access:
 **3467 passed in 501.50s (0:08:21)**. Preliminary sandbox run: 3158 passed,
@@ -154,8 +154,18 @@ seed and DATA-A research bytes remain unchanged. Full commands, exact hash pins,
 warning/issue counts and changed-file inventory:
 [B1 verification report](../docs/family-food/pr6-data-b1-verification.md).
 
-PR6 engine and DATA-A are ACCEPTED / MERGED. B1 is established by this changeset;
-its own merge/acceptance is not claimed. PR6 remains NOT COMPLETE; DATA-B2 is
+Review correction seals issue sets at assessment INSERT using a deferred child
+FK and a late-insert rejection trigger. Regression first reproduced the old
+loophole, then focused persistence/migration/reassessment/UoW and affected
+Nutrition tests passed: **102 passed in 23.31s**; the additional pre-commit sealing
+assertion passed in its targeted rerun (**1 passed in 0.67s**). Ruff/format and
+diff/staged scope checks PASS. Calculation policy, DATA-A classifications and
+57/189/123 payloads remain byte-identical to `8aae50a`. Per user instruction,
+full regression was not repeated; its result above remains historical evidence.
+Current focus and handoff retain durable B1 outcomes and authorization boundaries.
+
+PR6 engine and DATA-A are ACCEPTED / MERGED. B1 is established by this changeset.
+PR6 remains NOT COMPLETE; DATA-B2 is
 NOT AUTHORIZED; PR7+ remain UNAUTHORIZED. No DATA-B1-CLOSE is required.
 
 ## Historical delivery records
