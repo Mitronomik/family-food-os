@@ -1,90 +1,42 @@
-"""Reproducible PR6 audit of the accepted production seed, never local user data."""
+"""Production audit v2 pins actual allowed results without a desired complete count."""
 
+import importlib.util
 import json
-from collections import Counter
+from pathlib import Path
 
 from app.db.config import DatabaseConfig
-from app.domain.nutrition import NutritionStatus, NutritionWarningCode
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
-from app.persistence.sqlalchemy_core.food_recipe_composition import (
-    create_food_recipe_catalogue_service,
-)
-from app.persistence.sqlalchemy_core.nutrition_composition import (
-    create_nutrition_service,
-)
 from app.seed.food_recipes import seed_food_recipes
+from app.seed.nutrition_measure_evidence import seed_nutrition_measure_evidence
 
-
-def audit_catalogue(engine):
-    recipes = create_food_recipe_catalogue_service(engine)
-    nutrition = create_nutrition_service(engine)
-    statuses, reasons, affected_recipes = Counter(), Counter(), Counter()
-    rows = []
-    for recipe in sorted(recipes.list_active(), key=lambda item: item.canonical_code):
-        detail = recipes.get_current_verified(recipe.id)
-        result = nutrition.recipe_version(detail.version.id)
-        statuses[result.status] += 1
-        row_reasons = Counter(warning.code for warning in result.warnings)
-        reasons.update(row_reasons)
-        affected_recipes.update(row_reasons.keys())
-        rows.append(
-            {
-                "recipe": recipe.canonical_code,
-                "source_version": detail.version.source_version,
-                "status": result.status,
-                "reasons": dict(sorted(row_reasons.items())),
-            }
-        )
-    return {
-        "recipes": len(rows),
-        "statuses": {code: statuses[code] for code in NutritionStatus},
-        "reason_occurrences": {
-            code: reasons[code]
-            for code in NutritionWarningCode
-            if code.value
-            in (
-                "MISSING_FOOD_INGREDIENT",
-                "MISSING_NUTRITION_PROFILE",
-                "MISSING_DENSITY",
-                "UNSUPPORTED_PIECE_MASS",
-                "UNKNOWN_FIBER",
-                "ESTIMATED_SOURCE",
-                "ESTIMATION_STATUS_UNKNOWN",
-                "OPTIONAL_INGREDIENT",
-            )
-        },
-        "reason_affected_recipes": dict(sorted(affected_recipes.items())),
-        "rows": rows,
-    }
+ROOT = Path(__file__).resolve().parents[3]
+SPEC = importlib.util.spec_from_file_location(
+    "audit_pr6_data_b1", ROOT / "scripts/audit_pr6_data_b1.py"
+)
+audit_module = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(audit_module)
+audit_catalogue = audit_module.audit_catalogue
 
 
 def test_production_30_recipe_nutrition_coverage(tmp_path, monkeypatch):
     monkeypatch.setenv("AI_ENABLED", "false")
     config = DatabaseConfig(path=tmp_path / "accepted-catalogue.sqlite")
     seed_food_recipes(config)
+    seed_nutrition_measure_evidence(config)
     engine = create_sqlite_engine(config)
     try:
         report = audit_catalogue(engine)
-        assert report["recipes"] == 30
-        assert report["statuses"] == {
-            "COMPLETE": 0,
-            "COMPLETE_WITH_WARNINGS": 0,
-            "CONDITIONAL": 0,
-            "INCOMPLETE": 30,
-        }
-        assert report["reason_occurrences"] == {
-            "MISSING_FOOD_INGREDIENT": 0,
-            "MISSING_NUTRITION_PROFILE": 0,
-            "MISSING_DENSITY": 123,
-            "UNSUPPORTED_PIECE_MASS": 35,
-            "UNKNOWN_FIBER": 30,
-            "ESTIMATED_SOURCE": 0,
-            "ESTIMATION_STATUS_UNKNOWN": 189,
-            "OPTIONAL_INGREDIENT": 4,
-        }
+        assert report == json.loads(audit_module.REPORT.read_text())
+        assert report["recipes"] == 30 and report["recipe_ingredient_rows"] == 189
+        assert report["assessment_status_counts"]["APPROVED_EXACT"] == 66
+        assert report["warning_occurrences"]["MISSING_NUTRITION_ASSESSMENT"] == 0
+        assert report["warning_occurrences"]["MISSING_DENSITY"] == 0
+        assert report["warning_occurrences"]["UNSUPPORTED_PIECE_MASS"] == 0
         print(
-            "\nPR6_CATALOGUE_AUDIT="
-            + json.dumps(report, ensure_ascii=False, sort_keys=True)
+            "PR6_DATA_B1_AUDIT="
+            + json.dumps(
+                {k: v for k, v in report.items() if k != "records"}, sort_keys=True
+            )
         )
     finally:
         engine.dispose()

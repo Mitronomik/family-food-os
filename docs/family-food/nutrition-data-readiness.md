@@ -1,9 +1,10 @@
 # PR6 nutrition data readiness
 
 Status: **PR6 engine implementation ACCEPTED / MERGED; PR6 milestone NOT COMPLETE**.
-PR6-DATA-A is a supporting research/data-curation operation. Its evidence exists
-for project review. DATA-B and PR7+ require explicit authorization; this document
-recommends implementation models but selects no production architecture.
+PR6-DATA-A is ACCEPTED / MERGED in PR #19 at
+`60908eb8270ef356eff8552855b4cc5d2aa9ee44`. The DATA-A findings below retain
+their historical meaning. The later **B1 DECISION** selects and establishes the
+exact evidence/binding foundation. DATA-B2 and PR7+ are NOT AUTHORIZED.
 
 ## FACT
 
@@ -291,7 +292,7 @@ Semantic classes are distinct from conversion classes and both are required.
 The presence of this audit does not accept its implementation recommendations,
 complete PR6, authorize DATA-B, or authorize PR7+.
 
-## OPEN QUESTION — smallest correct DATA-B
+## Historical DATA-A open question — smallest correct DATA-B
 
 ### Architecture comparison (recommendation, not implementation)
 
@@ -361,3 +362,146 @@ Focused checks and delivery scope results are recorded in
 [state/progress.md](../../state/progress.md#pr6-data-a-evidence). DATA-A uses the
 curation tier of [proportional verification](verification-policy.md). Full
 backend/launcher regression is not required because runtime remains byte-identical.
+
+
+## DECISION — PR6-DATA-B1 exact evidence and row binding
+
+Explicit B1 authorization selects the **C+B hybrid** and additive migration
+`0026_nutrition_measure_evidence`. This is a supporting operation, not a new
+numbered milestone. The implementation establishes immutable reusable
+`MeasureMassEvidence` plus versioned `RecipeIngredientNutritionAssessment`.
+No automatic form resolver, global density fill, piece-weight property, API,
+frontend or AI is introduced. PR6 remains NOT COMPLETE.
+
+Both relations are platform catalogue/review truth, with no Household owner.
+Evidence preserves its own food identity, source/release/form and edible basis;
+it does not belong to or prove a target FoodIngredient. Source quantity and gram
+numerator are Decimal text, with no pre-rounded density replacing the fraction.
+Changed evidence requires a new stable curated key and new immutable row.
+Evidence update/delete is rejected; ordered assessment issues also retain history.
+The repository inserts issues before their assessment under a deferred foreign
+key, then inserts the assessment to seal the issue set. A SQLite trigger rejects
+all later issue INSERTs for that assessment, whether current or historical;
+UPDATE/DELETE remain forbidden. A dangling issue cannot survive transaction commit.
+This correction is incorporated into migration 0026, without a new migration.
+Disposable databases from earlier B1 builds use a fresh schema or the tested
+accepted 0025→0026 path.
+
+An assessment binds one immutable RecipeIngredient and the exact local
+FoodNutritionProfile ID resolved from reviewed source name/id/version. The
+repository appends consecutive positive review versions and atomically retires
+the old current marker. A partial unique index prevents two current reviews.
+Only the marker can be retired; assessment facts cannot be overwritten or
+reactivated. The append transaction preserves the previous review on failure.
+An unassessed row has no mass authority, including a g row.
+
+Runtime compares the pinned profile ID to the current profile. Replacement
+invalidates the old assessment (`NUTRITION_ASSESSMENT_PROFILE_STALE`) until an
+explicit new review version is supplied. Old profile/review/evidence history
+remains available. One NutritionReadScope sees recipe, ingredient, current and
+pinned profiles, assessment, evidence and ordered issues in a coherent snapshot.
+Results expose all these immutable calculation inputs; no totals are persisted.
+The row policy has identifier `ROW_ASSESSMENT_EXACT_ONLY_B1_V1`.
+
+### Promotion authority and deterministic mapping
+
+Production artifacts live in
+[`data/seed/nutrition_measure_evidence`](../../data/seed/nutrition_measure_evidence/manifest.json).
+The manifest pins the exact DATA-A merged main above, SHA-256 for its row audit,
+source manifest and summary, production recipe/profile input hashes, and both
+promotion payload hashes. The offline promotion script translates existing
+controlled decisions without researching or reclassifying a row. Calculation
+never reads research JSON. The loader checks research bytes only for hashes.
+
+Stable descriptors identify recipe code, source name/id/hash version, position,
+food code, exact row fields and profile provenance/values. The loader resolves
+local UUIDs; no database UUID is committed in production artifacts. It fails on
+missing, stale or changed recipe/profile inputs, conflicting existing evidence
+or assessments, schema/hash errors, or an unresolved reference. All evidence,
+assessments and issues import in one UoW; no partial import survives.
+
+Only the 56 source records selected by numeric DATA-A candidates are promoted,
+as **57 immutable evidence records**. `FDC-PORTION-119620` supplies the same source
+portion for exact shredded cheddar and estimated grated cheddar; separate
+`:exact` / `:estimate` keys preserve both reviewed uncertainty classes. Other
+sources are reused within their class. Date-only retrieval records have null
+retrieval instants rather than fabricated times; the hashed DATA-A source keeps
+the original date. The INFOODS density is stored as its published gram numerator
+per 1 ml and remains estimated.
+
+Status derivation first preserves all additional blockers, then adds semantic
+and primary-decision issues. DATA-A's
+`CONVERSION_ESTIMATION_PROPAGATION_NOT_IMPLEMENTED` is explicitly mapped to
+`CONVERSION_ESTIMATE_NOT_ACCEPTED`; B1 represents the estimate but does not accept
+it. Semantic AMBIGUOUS adds `PROFILE_REPRESENTATIVENESS_REVIEW`, including four g
+rows where DATA-A had no additional-blocker entry. Form/identity and quantity
+issues remain distinct. Issues are unique and lexically ordered.
+
+| Current assessment status | Rows |
+| --- | ---: |
+| APPROVED_NO_CONVERSION | 20 |
+| APPROVED_EXACT | 66 |
+| REVIEW_REQUIRED_ESTIMATE | 37 |
+| BLOCKED | 66 |
+| Total | 189 |
+
+The 31 g rows comprise 20 approved and **11 blocked** rows. All 43 estimated
+candidates retain candidate evidence but no authoritative mass/nutrients:
+37 are review-required and six also have profile representativeness blockers.
+The remaining 49 conversion rows have no approved numeric source. Presence of
+candidate evidence grants no calculation permission, and no estimate tolerance
+or enabling flag exists in B1.
+
+### Production audit v2
+
+The [full deterministic report](../../data/seed/nutrition_measure_evidence/production-audit-v2.json)
+contains all 30 recipes and 189 rows. Actual recipe status counts remain:
+**0 COMPLETE, 0 COMPLETE_WITH_WARNINGS, 0 CONDITIONAL, 30 INCOMPLETE**.
+66 exact conversions execute; unresolved required contributions still prevent
+complete totals. The source quantities and RecipeVersion contents are unchanged.
+
+| Runtime warning | Row occurrences |
+| --- | ---: |
+| MISSING_NUTRITION_ASSESSMENT | 0 |
+| NUTRITION_ASSESSMENT_BLOCKED | 66 |
+| CONVERSION_ESTIMATE_NOT_ACCEPTED | 43 |
+| NUTRITION_ASSESSMENT_PROFILE_STALE | 0 |
+| MISSING_MEASURE_EVIDENCE | 0 |
+| UNKNOWN_FIBER | 30 |
+| ESTIMATION_STATUS_UNKNOWN | 189 |
+| ESTIMATED_SOURCE | 0 |
+| OPTIONAL_INGREDIENT | 4 |
+| MISSING_DENSITY / UNSUPPORTED_PIECE_MASS | 0 / 0 |
+| MISSING_FOOD_INGREDIENT / MISSING_NUTRITION_PROFILE | 0 / 0 |
+
+The **123 structured issue rows** contain: estimate non-acceptance 43, food form
+mismatch 17, identity mismatch 1, measure/size ambiguity 36, no acceptable source
+1, profile representativeness review 19, alternative weight misapplied 1, source
+quantity ambiguity 1 and source quantity mismatch 4. Counts overlap by row.
+
+Reproduce in an environment with the backend dependencies:
+
+```sh
+python3 scripts/promote_pr6_data_b1.py
+AI_ENABLED=false python3 scripts/audit_pr6_data_b1.py
+python3 scripts/validate_pr6_data_a.py --protected-revision 60908eb8270ef356eff8552855b4cc5d2aa9ee44
+```
+
+Import order is migrations → existing FoodIngredient seed → existing Recipe
+seed → `python3 -m app.seed.nutrition_measure_evidence` (from `backend/`). The B1
+loader does not duplicate or silently rerun prerequisite seed logic. First run
+inserts 57 evidence and 189 assessments with 123 issues; identical second run
+inserts zero and preserves the database dump. Fresh and populated 0025 upgrade
+paths preserve all earlier schema/data; migration registration includes required
+tables for backup/restore lineage validation. Rollback/recovery uses the existing
+pre-upgrade backup, never destructive down-migration of review history.
+
+### Remaining B2 decision boundary
+
+B1 does not correct source quantities, forms, food mappings or profile values,
+fill fiber, set profile estimation flags, or accept any estimated conversion.
+Those data defects remain enforced. Source quantity/food changes require a
+separately reviewed RecipeVersion v2; new rows do not inherit old assessments.
+DATA-B2 scope, estimate acceptance/rejection policy and PR6 closure criteria
+require separate authorization. DATA-B2 is NOT AUTHORIZED; PR7+ remain
+UNAUTHORIZED. No separate DATA-B1-CLOSE is required.

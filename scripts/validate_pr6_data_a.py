@@ -12,6 +12,7 @@ import csv
 from decimal import Decimal, ROUND_HALF_UP
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -176,7 +177,7 @@ def summary(rows):
     return result
 
 
-def validate(audit, manifest, root=ROOT, check_protected=True):
+def validate(audit, manifest, root=ROOT, check_protected=True, protected_revision=None):
     errors = []
 
     def require(condition, message):
@@ -443,13 +444,20 @@ def validate(audit, manifest, root=ROOT, check_protected=True):
             )
     if check_protected:
         for path, digest in audit["protected_file_sha256"].items():
+            payload = (
+                subprocess.check_output(
+                    ["git", "show", f"{protected_revision}:{path}"], cwd=root
+                )
+                if protected_revision
+                else (root / path).read_bytes()
+            )
             require(
-                (root / path).is_file()
-                and hashlib.sha256((root / path).read_bytes()).hexdigest() == digest,
+                hashlib.sha256(payload).hexdigest() == digest,
                 "protected file changed: " + path,
             )
         require(
-            not list((root / "backend/app/migrations").glob("0026*")),
+            protected_revision is not None
+            or not list((root / "backend/app/migrations/versions").glob("0026*")),
             "migration 0026 is prohibited",
         )
     return errors
@@ -458,12 +466,16 @@ def validate(audit, manifest, root=ROOT, check_protected=True):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--write-summary", action="store_true")
+    parser.add_argument(
+        "--protected-revision",
+        help="Verify historical DATA-A protected files at this Git revision after authorized runtime work.",
+    )
     args = parser.parse_args()
     audit, manifest = (
         read(DIRECTORY / "conversion-gap-audit.json"),
         read(DIRECTORY / "source-manifest.json"),
     )
-    errors = validate(audit, manifest)
+    errors = validate(audit, manifest, protected_revision=args.protected_revision)
     if errors:
         raise SystemExit("\n".join(errors))
     result = summary(audit["rows"])

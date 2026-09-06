@@ -142,3 +142,14 @@ def test_0025_registration_and_restore_required_tables():
     assert REQUIRED_TABLES_BY_MIGRATION["0025_pantry"] == frozenset(
         {"pantry_items", "pantry_movements"}
     )
+
+
+@pytest.fixture(autouse=True)
+def pantry_migration_boundary():
+    """Retain this historical 0024→0025 test; B1 separately verifies 0025→0026."""
+    original = MIGRATION_MODULES[:]
+    MIGRATION_MODULES[:] = original[:25]
+    try:
+        yield
+    finally:
+        MIGRATION_MODULES[:] = original

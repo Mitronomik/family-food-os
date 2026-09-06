@@ -26,6 +26,7 @@ from app.persistence.sqlalchemy_core.nutrition_read_scope import (
     SqlAlchemyNutritionReadScope,
 )
 from app.seed.food_recipes import seed_food_recipes
+from app.seed.nutrition_measure_evidence import seed_nutrition_measure_evidence
 from app.services.nutrition import NutritionInputNotFoundError
 
 
@@ -33,6 +34,7 @@ from app.services.nutrition import NutritionInputNotFoundError
 def nutrition_engine(tmp_path):
     config = DatabaseConfig(path=tmp_path / "nutrition.sqlite")
     seed_food_recipes(config)
+    seed_nutrition_measure_evidence(config)
     with sqlite3.connect(config.path, isolation_level=None) as connection:
         connection.execute("PRAGMA journal_mode=WAL")
     engine = create_sqlite_engine(config)
@@ -99,10 +101,10 @@ def test_recipe_calculation_has_one_connection_no_writes_and_no_schema_change(
             database.execute(
                 "SELECT migration_id FROM schema_migrations ORDER BY rowid DESC LIMIT 1"
             ).fetchone()[0]
-            == "0025_pantry"
+            == "0026_nutrition_measure_evidence"
         )
-    assert expected_migration_ids()[-1] == "0025_pantry"
-    assert len(expected_migration_ids()) == 25
+    assert expected_migration_ids()[-1] == "0026_nutrition_measure_evidence"
+    assert len(expected_migration_ids()) == 26
 
 
 def test_member_lookup_enforces_household_scope(nutrition_engine):

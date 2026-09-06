@@ -75,11 +75,12 @@ PR6 engine implementation is ACCEPTED / MERGED in
 [PR #18](https://github.com/Mitronomik/family-food-os/pull/18), merge commit
 `7c449672c039c66b8d475064462eba2a9f6d38e6`. PR6 milestone is **NOT COMPLETE**,
 pending data readiness / closure. The [Nutrition Core](nutrition-core.md)
-contract remains active. PR6-DATA-A is supporting research, not a numbered
-milestone; its [audit evidence](nutrition-data-readiness.md) exists for project
-review and explicit authorization of a DATA-B implementation. DATA-B is not
-pre-authorized. PR7 MealPlan / Serving and all later milestones remain
-unauthorized. No roadmap order, gate or quantitative target changes.
+contract remains active. PR6-DATA-A is ACCEPTED / MERGED in PR #19 at
+`60908eb8270ef356eff8552855b4cc5d2aa9ee44`. Supporting PR6-DATA-B1 establishes
+the exact evidence/row-binding foundation described in the
+[data-readiness decision](nutrition-data-readiness.md), without a new numbered
+milestone. DATA-B2 is NOT AUTHORIZED; no DATA-B1-CLOSE is required. PR7 MealPlan /
+Serving and all later milestones remain unauthorized. No roadmap order, gate or quantitative target changes.
 
 ## 3. North Star and core-loop contract
 

@@ -45,6 +45,9 @@ CURRENT_ALLOWED_TABLES = {
     "food_recipe_equipment",
     "pantry_items",
     "pantry_movements",
+    "nutrition_measure_evidence",
+    "recipe_ingredient_nutrition_assessments",
+    "recipe_ingredient_nutrition_assessment_issues",
     "sqlite_sequence",
 }
 

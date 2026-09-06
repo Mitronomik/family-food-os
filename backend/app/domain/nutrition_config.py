@@ -12,6 +12,7 @@ from types import MappingProxyType
 @dataclass(frozen=True)
 class NutritionConfig:
     version: str = "FAMILY_FOOD_NUTRITION_V1"
+    recipe_mass_policy_version: str = "ROW_ASSESSMENT_EXACT_ONLY_B1_V1"
     eer_version: str = "NASEM_EER_2023_V1"
     amdr_version: str = "DRI_AMDR_2002_2005_V1"
     fiber_version: str = "DRI_TOTAL_FIBER_AI_2002_2005_V1"

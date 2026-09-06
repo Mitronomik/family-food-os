@@ -1,0 +1,2510 @@
+{
+  "assessment_issue_occurrences": {
+    "CONVERSION_ESTIMATE_NOT_ACCEPTED": 43,
+    "FOOD_FORM_MISMATCH": 17,
+    "IDENTITY_MISMATCH": 1,
+    "MEASURE_OR_SIZE_AMBIGUOUS": 36,
+    "NO_ACCEPTABLE_SOURCE": 1,
+    "PROFILE_REPRESENTATIVENESS_REVIEW": 19,
+    "SOURCE_ALTERNATIVE_WEIGHT_MISAPPLIED": 1,
+    "SOURCE_QUANTITY_AMBIGUOUS": 1,
+    "SOURCE_QUANTITY_MISMATCH": 4
+  },
+  "assessment_status_counts": {
+    "APPROVED_EXACT": 66,
+    "APPROVED_NO_CONVERSION": 20,
+    "BLOCKED": 66,
+    "REVIEW_REQUIRED_ESTIMATE": 37
+  },
+  "recipe_ingredient_rows": 189,
+  "recipes": 30,
+  "records": [
+    {
+      "recipe": "CACFP6_CORN_EDAMAME_BLEND",
+      "rows": [
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-87779:exact",
+          "issues": [],
+          "mass_g": "4.5000000",
+          "position": 1,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "85.048569",
+          "position": 2,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-84479:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 3,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 4,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "170.097139",
+          "position": 5,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "170.097139",
+          "position": 6,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 7,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "CNF-2521:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 8,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92594:exact",
+          "issues": [],
+          "mass_g": "1.500000",
+          "position": 9,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "14.174762",
+          "position": 10,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "CACFP6_CREAMY_COLESLAW",
+      "rows": [
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "141.747616",
+          "position": 1,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "position": 2,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "70.873808",
+          "position": 3,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92599:exact",
+          "issues": [],
+          "mass_g": "29.875000",
+          "position": 4,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92594:exact",
+          "issues": [],
+          "mass_g": "1.500000",
+          "position": 5,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-87560:exact",
+          "issues": [],
+          "mass_g": "0.5750000",
+          "position": 6,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "170.097139",
+          "position": 7,
+          "warnings": [
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "35.436904",
+          "position": 8,
+          "warnings": [
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "56.699046",
+          "position": 9,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "28.349523",
+          "position": 10,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "position": 11,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "CACFP6_TABBOULEH",
+      "rows": [
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "85.048569",
+          "position": 1,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "85.048569",
+          "position": 2,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "311.844754",
+          "position": 3,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92594:exact",
+          "issues": [],
+          "mass_g": "3.000000",
+          "position": 4,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "position": 5,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 6,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "14.174762",
+          "position": 7,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "42.524285",
+          "position": 8,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "35.436904",
+          "position": 9,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 10,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 11,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 12,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-88669:exact",
+          "issues": [],
+          "mass_g": "10.1250000",
+          "position": 13,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:ef746c97415426316a78995b42a1e7f5a5d76c0078e6f006ab9940f0120cca49",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "FNS2_ORANGE_PORK_CHOPS",
+      "rows": [
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-87799:exact",
+          "issues": [],
+          "mass_g": "4.5000000",
+          "position": 1,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 2,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 3,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "position": 4,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:aa07563b660219b4173edc63cf6f76478e1bc71bff7f0c8a54fc5eaf5985a479",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "FNS4_OVEN_FRIED_FISH",
+      "rows": [
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-193781:exact",
+          "issues": [],
+          "mass_g": "50.3000000",
+          "position": 1,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92594:exact",
+          "issues": [],
+          "mass_g": "3.000000",
+          "position": 2,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-87560:exact",
+          "issues": [],
+          "mass_g": "1.1500000",
+          "position": 3,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-95194:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 4,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "453.592370",
+          "position": 5,
+          "warnings": [
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92512:exact",
+          "issues": [],
+          "mass_g": "14.2000000",
+          "position": 6,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:068b5b0d4c7e45ad498758501bcc8f67b7e5f69f9c27ea4db4af39b05cba069c",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "FNS5_BAKED_LENTILS_CASSEROLE",
+      "rows": [
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-90594:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-93025:exact",
+          "issues": [],
+          "mass_g": "180.000000",
+          "position": 2,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92594:exact",
+          "issues": [],
+          "mass_g": "3.000000",
+          "position": 3,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85855:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 4,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "411.068085",
+          "position": 5,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-86559:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 6,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-119620:exact",
+          "issues": [],
+          "mass_g": "52.5000000",
+          "position": 7,
+          "warnings": [
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:86b118c36ca73b75618e1656bbc96c2c06f59785ca7292efc47be0fe99cc4598",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "HARV6_FRESH_TOMATO_SALSA",
+      "rows": [
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "PROFILE_REPRESENTATIVENESS_REVIEW",
+            "SOURCE_ALTERNATIVE_WEIGHT_MISAPPLIED"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 2,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85855:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 3,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-82572:exact",
+          "issues": [],
+          "mass_g": "30.250000",
+          "position": 4,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-84479:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 5,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-87799:exact",
+          "issues": [],
+          "mass_g": "2.2500000",
+          "position": 6,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92594:exact",
+          "issues": [],
+          "mass_g": "1.500000",
+          "position": 7,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "HARV6_GARDEN_PASTA_SALAD",
+      "rows": [
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85855:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 2,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 3,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-86623:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 4,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92598:exact",
+          "issues": [],
+          "mass_g": "14.9000000",
+          "position": 5,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-87797:exact",
+          "issues": [],
+          "mass_g": "6.8000000",
+          "position": 6,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92594:exact",
+          "issues": [],
+          "mass_g": "1.500000",
+          "position": 7,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 8,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "SNAP2_SIMPLE_GREEN_SMOOTHIE",
+      "rows": [
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "INFOODS-SPINACH-RAW:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-93515:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 2,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-187514:exact",
+          "issues": [],
+          "mass_g": "246.0000000",
+          "position": 3,
+          "warnings": [
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-87497:exact",
+          "issues": [],
+          "mass_g": "245.000000",
+          "position": 4,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": "FDC-PORTION-89193:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "position": 5,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 6,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:240c8b7a10a0399cb70743d48f59c9d6b828c8e640e9cbfc1eec0762cf6108ca",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "SNAP3_GRILLED_FRUIT",
+      "rows": [
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-84287:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "position": 2,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 3,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:03269eead24a3965e76c71a9eed6b7b82b9d785845427fa9b8b445aee55cf6f9",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "SNAP4_BRAISED_CHICKEN_SPINACH",
+      "rows": [
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-87799:exact",
+          "issues": [],
+          "mass_g": "4.5000000",
+          "position": 2,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92594:exact",
+          "issues": [],
+          "mass_g": "3.000000",
+          "position": 3,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 4,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85862:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 5,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-84480:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 6,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 7,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-88455:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 8,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-93025:exact",
+          "issues": [],
+          "mass_g": "240.000000",
+          "position": 9,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 10,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "SNAP4_BROWN_RICE_PILAF",
+      "rows": [
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "SOURCE_QUANTITY_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-93025:exact",
+          "issues": [],
+          "mass_g": "720.000000",
+          "position": 2,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 3,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-87558:exact",
+          "issues": [],
+          "mass_g": "0.5000000",
+          "position": 4,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-88439:exact",
+          "issues": [],
+          "mass_g": "1.5500000",
+          "position": 5,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 6,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "SNAP4_DILLED_FISH_FILLETS",
+      "rows": [
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "453.592370",
+          "position": 1,
+          "warnings": [
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 2,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-88433:exact",
+          "issues": [],
+          "mass_g": "0.125000",
+          "position": 3,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92594:exact",
+          "issues": [],
+          "mass_g": "0.750000",
+          "position": 4,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:43d44c84d7c007a0c32906210b13212ffb43fb7a62312e9fb43c819f8a8a63a3",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "SNAP4_PEAR_ORANGE_SAUCE",
+      "rows": [
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": "FDC-PORTION-187517:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 2,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-187533:exact",
+          "issues": [],
+          "mass_g": "16.0000000",
+          "position": 3,
+          "warnings": [
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "SNAP4_SPANISH_FRITTATA",
+      "rows": [
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "IDENTITY_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-193781:exact",
+          "issues": [],
+          "mass_g": "301.8000000",
+          "position": 2,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-87799:exact",
+          "issues": [],
+          "mass_g": "9.0000000",
+          "position": 3,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85860:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 4,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92594:exact",
+          "issues": [],
+          "mass_g": "3.000000",
+          "position": 5,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 6,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:b2ac0732c26ad10426343c5aab115248b020983fa4dcad79f230ff146a02641c",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "SNAP4_SPRING_VEGETABLE_SAUTE",
+      "rows": [
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-88669:exact",
+          "issues": [],
+          "mass_g": "4.5000000",
+          "position": 1,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85856:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 2,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-84480:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 3,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 4,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-86557:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 5,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-83012:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 6,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85758:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 7,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 8,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92594:exact",
+          "issues": [],
+          "mass_g": "1.500000",
+          "position": 9,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 10,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-88433:exact",
+          "issues": [],
+          "mass_g": "0.500000",
+          "position": 11,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-93025:exact",
+          "issues": [],
+          "mass_g": "30.000000",
+          "position": 12,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "SNAP5_KALE_NUTS_RAISINS",
+      "rows": [
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-86201:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-87797:exact",
+          "issues": [],
+          "mass_g": "27.2000000",
+          "position": 2,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-84480:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 3,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-119057:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 4,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 5,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:7c2bb840618e0dfbe372e9ecdb697ad59d2fab36e0fbf07cabe347a93ea6a1a0",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "SNAP6_HEAVENLY_DEVILED_EGGS",
+      "rows": [
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": "FDC-PORTION-88737:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "position": 2,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92594:exact",
+          "issues": [],
+          "mass_g": "0.750000",
+          "position": 3,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 4,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "SNAP6_PEACH_CRISP",
+      "rows": [
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": "FDC-PORTION-119282:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": "FDC-PORTION-92887:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "position": 2,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 3,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-187534:exact",
+          "issues": [],
+          "mass_g": "94.0000000",
+          "position": 4,
+          "warnings": [
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85466:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 5,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-88429:exact",
+          "issues": [],
+          "mass_g": "5.2000000",
+          "position": 6,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 7,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "SNAP6_SEARED_GREENS",
+      "rows": [
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "SOURCE_QUANTITY_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-88667:exact",
+          "issues": [],
+          "mass_g": "27.0000000",
+          "position": 2,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-84480:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 3,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-93025:exact",
+          "issues": [],
+          "mass_g": "240.000000",
+          "position": 4,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92594:exact",
+          "issues": [],
+          "mass_g": "1.500000",
+          "position": 5,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 6,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92598:exact",
+          "issues": [],
+          "mass_g": "29.8000000",
+          "position": 7,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "SNAP6_SPINACH_APPLE_SALAD",
+      "rows": [
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "FOOD_FORM_MISMATCH",
+            "SOURCE_QUANTITY_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "PROFILE_REPRESENTATIVENESS_REVIEW",
+            "SOURCE_QUANTITY_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 2,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 3,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-90375:exact",
+          "issues": [],
+          "mass_g": "54.500000",
+          "position": 4,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92599:exact",
+          "issues": [],
+          "mass_g": "59.750000",
+          "position": 5,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-187534:exact",
+          "issues": [],
+          "mass_g": "47.0000000",
+          "position": 6,
+          "warnings": [
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-88439:exact",
+          "issues": [],
+          "mass_g": "0.1937500",
+          "position": 7,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "SNAP6_WALDORF_SALAD",
+      "rows": [
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-86201:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "position": 2,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85824:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 3,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 4,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "CNF-6979:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 5,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-187533:exact",
+          "issues": [],
+          "mass_g": "2.0000000",
+          "position": 6,
+          "warnings": [
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 7,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "SNAP8_APPLE_CARROT_SOUP",
+      "rows": [
+        {
+          "assessment": "APPROVED_NO_CONVERSION",
+          "evidence_key": null,
+          "issues": [],
+          "mass_g": "453.592370",
+          "position": 1,
+          "warnings": [
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "position": 2,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-86558:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 3,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 4,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92594:exact",
+          "issues": [],
+          "mass_g": "3.000000",
+          "position": 5,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-93025:exact",
+          "issues": [],
+          "mass_g": "4800.000000",
+          "position": 6,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:1cc2ed9ddb3253b4a9a5ed9aa6609184e7381035977d00a542a00239f8261258",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "SNAP8_SOMALI_SUMMER_SALAD",
+      "rows": [
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-88667:exact",
+          "issues": [],
+          "mass_g": "40.5000000",
+          "position": 1,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 2,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "position": 3,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 4,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "position": 5,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 6,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "TNC6_APPLESAUCE",
+      "rows": [
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-93025:exact",
+          "issues": [],
+          "mass_g": "120.000000",
+          "position": 2,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "TNC6_EGGS_SPINACH",
+      "rows": [
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-88669:exact",
+          "issues": [],
+          "mass_g": "4.5000000",
+          "position": 1,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-193781:exact",
+          "issues": [],
+          "mass_g": "603.6000000",
+          "position": 2,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "NO_ACCEPTABLE_SOURCE"
+          ],
+          "mass_g": null,
+          "position": 3,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "WIC1_BEYOND_BASIC_GRILLED_CHEESE",
+      "rows": [
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-91108:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-119620:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 2,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85818:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 3,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE",
+      "rows": [
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-187514:exact",
+          "issues": [],
+          "mass_g": "82.0000000",
+          "position": 1,
+          "warnings": [
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-93454:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 2,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-87497:exact",
+          "issues": [],
+          "mass_g": "61.250000",
+          "position": 3,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-88429:exact",
+          "issues": [],
+          "mass_g": "2.6000000",
+          "position": 4,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "PROFILE_REPRESENTATIVENESS_REVIEW",
+            "SOURCE_QUANTITY_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 5,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "WIC2_SPINACH_CAULIFLOWER_SMOOTHIE",
+      "rows": [
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-187514:exact",
+          "issues": [],
+          "mass_g": "246.0000000",
+          "position": 1,
+          "warnings": [
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-87497:exact",
+          "issues": [],
+          "mass_g": "122.500000",
+          "position": 2,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "position": 3,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "INFOODS-SPINACH-RAW:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 4,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": "FDC-PORTION-89190:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "position": 5,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 6,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-93454:estimate",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "position": 7,
+          "warnings": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6",
+      "status": "INCOMPLETE"
+    },
+    {
+      "recipe": "WIC4_BUTTERNUT_SOUP",
+      "rows": [
+        {
+          "assessment": "BLOCKED",
+          "evidence_key": null,
+          "issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "mass_g": null,
+          "position": 1,
+          "warnings": [
+            "NUTRITION_ASSESSMENT_BLOCKED",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-88669:exact",
+          "issues": [],
+          "mass_g": "4.5000000",
+          "position": 2,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-92594:exact",
+          "issues": [],
+          "mass_g": "6.000000",
+          "position": 3,
+          "warnings": [
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        },
+        {
+          "assessment": "APPROVED_EXACT",
+          "evidence_key": "FDC-PORTION-187514:exact",
+          "issues": [],
+          "mass_g": "738.0000000",
+          "position": 4,
+          "warnings": [
+            "UNKNOWN_FIBER",
+            "ESTIMATION_STATUS_UNKNOWN"
+          ]
+        }
+      ],
+      "source_version": "sha256:ee642490786720348eae5f18170c5dcb26a0c7b22b042fc829ab0dc6ee1e95e8",
+      "status": "INCOMPLETE"
+    }
+  ],
+  "schema_version": 2,
+  "statuses": {
+    "COMPLETE": 0,
+    "COMPLETE_WITH_WARNINGS": 0,
+    "CONDITIONAL": 0,
+    "INCOMPLETE": 30
+  },
+  "warning_occurrences": {
+    "CONVERSION_ESTIMATE_NOT_ACCEPTED": 43,
+    "ESTIMATED_SOURCE": 0,
+    "ESTIMATION_STATUS_UNKNOWN": 189,
+    "MISSING_DENSITY": 0,
+    "MISSING_FOOD_INGREDIENT": 0,
+    "MISSING_MEASURE_EVIDENCE": 0,
+    "MISSING_NUTRITION_ASSESSMENT": 0,
+    "MISSING_NUTRITION_PROFILE": 0,
+    "NUTRITION_ASSESSMENT_BLOCKED": 66,
+    "NUTRITION_ASSESSMENT_PROFILE_STALE": 0,
+    "OPTIONAL_INGREDIENT": 4,
+    "UNKNOWN_FIBER": 30,
+    "UNSUPPORTED_PIECE_MASS": 0
+  }
+}

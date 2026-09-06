@@ -1,35 +1,23 @@
 # Handoff
 
-Updated: `2026-09-06`
+Updated: `2026-09-07`
 
-PR6 engine implementation is **ACCEPTED / MERGED** in
-[PR #18](https://github.com/Mitronomik/family-food-os/pull/18), merge commit
-`7c449672c039c66b8d475064462eba2a9f6d38e6`.
-Accepted implementation: `0d08839216ddd40a3ef2f5fd84edb8f69b2447f6`;
-merged delivery head: `9dffb5fcbc8ec0b3d4a1f36f5349d68c944f2bbe`.
-PR6 milestone is **NOT COMPLETE**, pending data readiness / closure.
+PR6 engine (PR #18) and DATA-A (PR #19) are ACCEPTED / MERGED. B1 starts at
+`60908eb8270ef356eff8552855b4cc5d2aa9ee44` on
+`feature/pr6-data-b1-measure-evidence` and establishes the exact evidence/binding
+foundation through `0026_nutrition_measure_evidence`.
 
-PR6-DATA-A evidence exists in `data/curation/pr6-data-a/`; the complete
-[nutrition data-readiness audit](../docs/family-food/nutrition-data-readiness.md)
-owns findings, source limitations, decision definitions, exact summary and the
-C+B architecture recommendation. All 189 rows are accounted for; 158 ml/pcs
-rows have one controlled conversion decision. Original recipe artifacts were
-reopened and hash-verified for all 30 recipes. Official FDC portions and bounded
-FAO/CNF evidence are committed as factual extracts, without source documents.
+Canonical B1 architecture, mapping, import procedure and production audit:
+[nutrition-data-readiness.md](../docs/family-food/nutrition-data-readiness.md).
+Verification evidence: [progress](progress.md#pr6-data-b1-evidence).
 
-The [progress record](progress.md#pr6-data-a-evidence) gives executed checks.
-Production Nutrition remains 30/30 INCOMPLETE; missing density 123 and
-unsupported piece mass 35. Source quantity and g-row food-form findings must
-not disappear when implementing conversions. Production seeds, runtime,
-schema/API/frontend remain unchanged; migration head is `0025_pantry`.
+57 evidence records, 189 current assessments and 123 ordered issues. Statuses:
+66 exact, 20 approved g, 37 review-required estimates, 66 blocked. All 43 estimates
+remain non-executable; 11 gram rows are blocked. Actual audit: 30 INCOMPLETE
+recipes. Production recipe/profile source files and all DATA-A research bytes
+are unchanged. No API/frontend or future context is introduced.
 
-## Next action
-
-Do not begin DATA-B unless it receives a **separate explicit project
-authorization**. The DATA-A recommendation is evidence for that future decision,
-not implementation authority. PR7 MealPlan/Serving and all later milestones
-remain unauthorized. No separate DATA-A-CLOSE is needed.
-
-The unrelated tracked `.DS_Store` change predates DATA-A; leave it untouched
-and exclude it from commits. Tests seed temporary databases; no personal
-production database was used in this audit.
+B1 establishes the evidence/binding foundation; PR6 remains NOT COMPLETE.
+DATA-B2 is NOT AUTHORIZED; PR7+ remain UNAUTHORIZED. No separate DATA-B1-CLOSE
+is needed. Source corrections, RecipeVersion v2 and estimate policy belong to
+separately authorized follow-up decisions.

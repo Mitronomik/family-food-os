@@ -14,12 +14,19 @@ from app.persistence.sqlalchemy_core.food_recipe_repositories import (
 from app.persistence.sqlalchemy_core.household_repositories import (
     SqlAlchemyHouseholdMemberRepository,
 )
+from app.persistence.sqlalchemy_core.nutrition_evidence_repositories import (
+    SqlAlchemyNutritionEvidenceRepository,
+)
 from app.persistence.sqlalchemy_core.uow import SqlAlchemyReadOnlyScope
 
 
 class SqlAlchemyNutritionReadScope:
     def __init__(self, engine: Engine) -> None:
         self._scope = SqlAlchemyReadOnlyScope(engine)
+
+    @property
+    def evidence(self) -> SqlAlchemyNutritionEvidenceRepository:
+        return SqlAlchemyNutritionEvidenceRepository(self._scope.adapter_connection)
 
     @property
     def ingredients(self) -> SqlAlchemyFoodIngredientRepository:

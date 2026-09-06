@@ -1,6 +1,6 @@
 # Progress
 
-Updated: `2026-09-06`
+Updated: `2026-09-07`
 
 ## FamilyFoodOS milestone status
 
@@ -121,10 +121,52 @@ The unrelated `.DS_Store` change is excluded from delivery.
 files, one offline validator and one focused test file). Documentation file links
 resolve. The post-staging focused rerun passed all 18 tests in 0.88s.
 
-PR6 engine implementation remains ACCEPTED / MERGED; PR6 milestone remains
-NOT COMPLETE. DATA-A evidence exists for project review. The next action is
-explicit project authorization of a bounded DATA-B implementation; none is
+Historical DATA-A delivery state: PR6 engine implementation ACCEPTED / MERGED;
+PR6 milestone NOT COMPLETE. DATA-A evidence was supplied for project review;
+its next action required explicit authorization of bounded DATA-B work. None was
 pre-authorized. PR7+ remain unauthorized. No DATA-A-CLOSE operation is needed.
+
+## PR6-DATA-B1 evidence
+
+Explicit B1 supporting-operation authorization starts from DATA-A accepted main
+`60908eb8270ef356eff8552855b4cc5d2aa9ee44`, branch
+`feature/pr6-data-b1-measure-evidence`. Migration/head:
+`0026_nutrition_measure_evidence`. Foundation established by this changeset:
+57 immutable evidence records, 189 current assessments, 123 ordered issues;
+66 exact approvals, 20 clean g approvals, 37 estimate reviews, 66 blocked rows.
+All 43 estimate candidates remain non-executable. Production audit: all 30
+recipes INCOMPLETE, missing-assessment and old recipe density/piece warnings zero.
+
+Initial B1 verification at `8aae50a` (`AI_ENABLED=false`): focused Nutrition/targets/DATA-A
+**212 passed in 25.40s**; affected catalogue/Recipe/Household/Pantry/migration/UoW
+**472 passed in 28.31s**; full backend + launcher with local loopback access:
+**3467 passed in 501.50s (0:08:21)**. Preliminary sandbox run: 3158 passed,
+186 failed, 121 errors in 256.02s; outdated backend schema/config/audit assertions
+were corrected and launcher loopback access supplied for the final full rerun.
+Ruff/format (34 Python files), deterministic promotion/audit regeneration,
+diff/staged checks and staged scope audit PASS.
+
+Fresh and populated 0025→0026 upgrade preserve prior schema/data. Idempotent seed
+has zero second-run inserts and identical dump; late import/migration failures
+roll back; profile replacement invalidates review, explicit v2 restores authority,
+and an open snapshot retains old inputs coherently. All production recipe/profile
+seed and DATA-A research bytes remain unchanged. Full commands, exact hash pins,
+warning/issue counts and changed-file inventory:
+[B1 verification report](../docs/family-food/pr6-data-b1-verification.md).
+
+Review correction seals issue sets at assessment INSERT using a deferred child
+FK and a late-insert rejection trigger. Regression first reproduced the old
+loophole, then focused persistence/migration/reassessment/UoW and affected
+Nutrition tests passed: **102 passed in 23.31s**; the additional pre-commit sealing
+assertion passed in its targeted rerun (**1 passed in 0.67s**). Ruff/format and
+diff/staged scope checks PASS. Calculation policy, DATA-A classifications and
+57/189/123 payloads remain byte-identical to `8aae50a`. Per user instruction,
+full regression was not repeated; its result above remains historical evidence.
+Current focus and handoff retain durable B1 outcomes and authorization boundaries.
+
+PR6 engine and DATA-A are ACCEPTED / MERGED. B1 is established by this changeset.
+PR6 remains NOT COMPLETE; DATA-B2 is
+NOT AUTHORIZED; PR7+ remain UNAUTHORIZED. No DATA-B1-CLOSE is required.
 
 ## Historical delivery records
 
@@ -334,11 +376,8 @@ Ordered steps are durably reviewed in `data/curation/pr4-runtime/recipe-steps.js
 
 ## Current gate
 
-PR5 is COMPLETE.
-PR6 Nutrition Core is AUTHORIZED / NOT STARTED.
-
-PR5-CLOSE is merged and records accepted completion and authorization only.
-Harness governance does not start PR6; its implementation belongs in a separate
-bounded product PR. PR7 MealPlan / Serving, PR8 Planner and every later milestone
-remain unauthorized, including Shopping, Prep, Retail, AI, Auth, PostgreSQL,
-consumer PWA and Billing.
+PR5 is COMPLETE. PR6 engine and DATA-A are ACCEPTED / MERGED.
+B1 exact evidence/binding foundation is established by this changeset.
+PR6 milestone remains NOT COMPLETE; DATA-B2 is NOT AUTHORIZED and PR7+ remain
+UNAUTHORIZED. No separate DATA-B1-CLOSE is required. Current authorization and
+scope are in [current focus](current-focus.md).
