@@ -16,6 +16,7 @@ SPEC = importlib.util.spec_from_file_location(
 validator = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(validator)
 DIRECTORY = validator.DIRECTORY
+DATA_A_MAIN = "60908eb8270ef356eff8552855b4cc5d2aa9ee44"
 
 
 @pytest.fixture
@@ -28,7 +29,7 @@ def evidence():
 
 def test_complete_stable_corpus_and_source_integrity(evidence):
     audit, manifest = evidence
-    assert validator.validate(audit, manifest) == []
+    assert validator.validate(audit, manifest, protected_revision=DATA_A_MAIN) == []
     assert len(audit["rows"]) == 189
     assert len({r["recipe_canonical_code"] for r in audit["rows"]}) == 30
     assert Counter(r["recipe_unit"] for r in audit["rows"]) == {
@@ -49,7 +50,7 @@ def test_summary_is_deterministic_and_pinned(evidence):
     )
 
 
-def test_production_baseline_reproduces_from_accepted_loaders(tmp_path, monkeypatch):
+def test_accepted_corpus_without_b1_seed_now_fails_closed(tmp_path, monkeypatch):
     from app.db.config import DatabaseConfig
     from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
     from app.seed.food_recipes import seed_food_recipes
@@ -68,11 +69,15 @@ def test_production_baseline_reproduces_from_accepted_loaders(tmp_path, monkeypa
             "CONDITIONAL": 0,
             "INCOMPLETE": 30,
         }
-        assert report["reason_occurrences"]["MISSING_DENSITY"] == 123
-        assert report["reason_occurrences"]["UNSUPPORTED_PIECE_MASS"] == 35
-        assert report["reason_occurrences"]["ESTIMATION_STATUS_UNKNOWN"] == 189
-        assert report["reason_affected_recipes"]["MISSING_DENSITY"] == 30
-        assert report["reason_affected_recipes"]["UNSUPPORTED_PIECE_MASS"] == 21
+        assert report["warning_occurrences"]["MISSING_NUTRITION_ASSESSMENT"] == 189
+        assert report["warning_occurrences"]["MISSING_DENSITY"] == 0
+        assert report["warning_occurrences"]["UNSUPPORTED_PIECE_MASS"] == 0
+        assert report["warning_occurrences"]["ESTIMATION_STATUS_UNKNOWN"] == 189
+        assert all(
+            row["mass_g"] is None
+            for recipe in report["records"]
+            for row in recipe["rows"]
+        )
     finally:
         engine.dispose()
 
@@ -235,7 +240,7 @@ def test_protected_snapshot_is_exact_accepted_main_and_pr_scope(evidence):
         )
         assert hashlib.sha256(blob).hexdigest() == protected[path]
     changed = subprocess.check_output(
-        ["git", "diff", "--name-only", validator.BASE], cwd=ROOT, text=True
+        ["git", "diff", "--name-only", validator.BASE, DATA_A_MAIN], cwd=ROOT, text=True
     ).splitlines()
     allowed = {
         ".DS_Store",
@@ -253,4 +258,16 @@ def test_protected_snapshot_is_exact_accepted_main_and_pr_scope(evidence):
     assert all(
         p in allowed or p.startswith("data/curation/pr6-data-a/") for p in changed
     )
-    assert not list((ROOT / "backend/app/migrations").glob("0026*"))
+    historical_migrations = subprocess.check_output(
+        [
+            "git",
+            "ls-tree",
+            "-r",
+            "--name-only",
+            DATA_A_MAIN,
+            "backend/app/migrations/versions",
+        ],
+        cwd=ROOT,
+        text=True,
+    )
+    assert "/0026" not in historical_migrations

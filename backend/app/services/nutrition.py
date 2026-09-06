@@ -57,7 +57,32 @@ class NutritionService:
                 profile = scope.nutrition_profiles.get_current(ingredient_id)
                 if profile is not None:
                     profiles[ingredient_id] = profile
-            return calculate_recipe_nutrition(detail, ingredients, profiles)
+            assessments, evidence, pinned_profiles = {}, {}, {}
+            for row in detail.ingredients:
+                assessment = scope.evidence.get_current_assessment(row.id)
+                if assessment is None:
+                    continue
+                assessments[row.id] = assessment
+                profile_id = assessment.nutrition_profile_id
+                current = profiles.get(row.food_ingredient_id)
+                if profile_id not in pinned_profiles:
+                    pinned = (
+                        current
+                        if current is not None and current.id == profile_id
+                        else scope.nutrition_profiles.get_nutrition_profile_by_id(
+                            profile_id
+                        )
+                    )
+                    if pinned is not None:
+                        pinned_profiles[profile_id] = pinned
+                evidence_id = assessment.measure_evidence_id
+                if evidence_id is not None and evidence_id not in evidence:
+                    measure = scope.evidence.get_evidence(evidence_id)
+                    if measure is not None:
+                        evidence[evidence_id] = measure
+            return calculate_recipe_nutrition(
+                detail, ingredients, profiles, assessments, evidence, pinned_profiles
+            )
 
     def member_reference_target(
         self, household_id: UUID, member_id: UUID, *, as_of_date: date

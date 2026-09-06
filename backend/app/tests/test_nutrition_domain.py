@@ -6,11 +6,21 @@ import pytest
 from app.domain.nutrition import (
     NutritionStatus as Status,
     NutritionWarningCode as Code,
-    calculate_recipe_nutrition,
+    calculate_recipe_nutrition as calculate_reviewed_recipe,
     scale_food_nutrition,
 )
 from app.tests.test_food_ingredient_domain import ingredient, profile
 from app.tests.test_food_recipe_domain import _detail
+
+
+from app.tests.nutrition_evidence_fixtures import gram_assessments
+
+
+def calculate_recipe_nutrition(detail, ingredients, profiles):
+    # Existing aggregate regressions now explicitly review their synthetic g rows.
+    return calculate_reviewed_recipe(
+        detail, ingredients, profiles, gram_assessments(detail, profiles)
+    )
 
 
 def fixture_recipe(*, quantity="100", unit="g", optional=False, **profile_changes):
@@ -216,8 +226,8 @@ def test_all_profile_inputs_and_stable_row_warning_order_are_preserved():
     assert [
         (warning.recipe_ingredient_id, warning.code) for warning in result.warnings
     ] == [
-        (detail.ingredients[0].id, Code.MISSING_DENSITY),
-        (detail.ingredients[1].id, Code.MISSING_DENSITY),
+        (detail.ingredients[0].id, Code.MISSING_NUTRITION_ASSESSMENT),
+        (detail.ingredients[1].id, Code.MISSING_NUTRITION_ASSESSMENT),
         (detail.ingredients[1].id, Code.ESTIMATED_SOURCE),
     ]
 

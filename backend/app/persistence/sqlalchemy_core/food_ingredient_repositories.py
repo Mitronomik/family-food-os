@@ -267,6 +267,20 @@ class SqlAlchemyFoodNutritionProfileRepository:
                 "Nutrition provenance or current-profile state conflicts."
             ) from exc
 
+    def get_nutrition_profile_by_id(
+        self, profile_id: UUID
+    ) -> FoodNutritionProfile | None:
+        row = (
+            self._connection.execute(
+                select(food_nutrition_profiles_table).where(
+                    food_nutrition_profiles_table.c.id == profile_id
+                )
+            )
+            .mappings()
+            .one_or_none()
+        )
+        return None if row is None else _nutrition_from_row(row)
+
     def get_by_provenance(
         self,
         food_ingredient_id: UUID,

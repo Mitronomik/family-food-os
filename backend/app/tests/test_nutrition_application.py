@@ -8,6 +8,7 @@ import pytest
 
 from app.domain.nutrition import NutritionStatus
 from app.services.nutrition import NutritionInputNotFoundError, NutritionService
+from app.tests.nutrition_evidence_fixtures import gram_assessments
 from app.tests.test_household_domain import member
 from app.tests.test_nutrition_domain import fixture_recipe
 
@@ -20,7 +21,12 @@ class Reader:
         self.events.append((self.name, args))
         return self.value
 
+    def get_current_assessment(self, row_id):
+        self.events.append((self.name, (row_id,)))
+        return self.value.get(row_id)
+
     get_current = get
+    get_nutrition_profile_by_id = get
     get_detail = get
     get_member = get
 
@@ -37,6 +43,7 @@ def setup_service(*, missing=None):
                 ("ingredients", food),
                 ("nutrition_profiles", profile),
                 ("members", person),
+                ("evidence", gram_assessments(detail, {food.id: profile})),
             )
         }
     )
@@ -62,6 +69,7 @@ def test_recipe_uses_one_scope_and_resolves_repeated_food_only_once(monkeypatch)
         ("versions", (detail.version.id,)),
         ("ingredients", (food.id,)),
         ("nutrition_profiles", (food.id,)),
+        *(("evidence", (row.id,)) for row in detail.ingredients),
         "exit",
     ]
 

@@ -17,15 +17,16 @@ FoodIngredient + current FoodNutritionProfile
 `NutritionService` exposes `food_ingredient`, `recipe_version` and
 `member_reference_target` application operations. There are no public HTTP
 endpoints or frontend changes. The existing catalogue and Household models
-remain authoritative. No derived-result persistence, caches, second nutrition
-history or new schema is introduced; migration head remains `0025_pantry`.
+remain authoritative. No derived-result persistence or caches are introduced. B1 adds platform
+measure evidence and versioned row review through migration
+`0026_nutrition_measure_evidence`; see the [B1 decision](nutrition-data-readiness.md#decision--pr6-data-b1-exact-evidence-and-row-binding).
 
 A calculation enters `NutritionReadScope` once. The SQLAlchemy Core adapter
 composes existing repositories on one project `SqlAlchemyReadOnlyScope`
-connection/transaction, including the RecipeVersion read and all current-profile
-lookups. The accepted SQLite engine uses `autocommit=False`; even SELECTs share
-the transaction snapshot. Exit always rolls back and closes; no write UoW is
-needed. Contracts expose read methods and domain objects, never driver objects.
+connection/transaction, including the RecipeVersion, current/pinned profiles, row assessments,
+measure evidence and ordered assessment issues. The accepted SQLite engine uses `autocommit=False`; even SELECTs share
+the transaction snapshot. Calculation exit always rolls back and closes. A separate project write UoW
+imports reviewed evidence/assessments; calculation never writes. Contracts expose read methods and domain objects, never driver objects.
 Member lookups require both Household and member identifiers.
 
 Serving, MealPlan, member/day/week aggregation, Planner, Shopping, Pantry use,
@@ -39,7 +40,9 @@ For each nutrient, compute `profile_value × mass_g / profile.basis_grams`.
 The existing `FoodNutritionProfile` owns the current 100 g edible-portion basis,
 source kcal and nutrients. Ingredient kcal is never reconstructed from macros.
 
-- `g`: the normalized RecipeIngredient quantity is the exact gram input.
+For direct `NutritionService.food_ingredient` only:
+
+- `g`: the requested quantity is the exact gram input.
   No additional `edible_fraction` transformation is applied.
 - `ml`: multiply by the canonical positive `density_g_per_ml` only. Missing
   density produces `MISSING_DENSITY` and unavailable contribution values.
@@ -55,18 +58,37 @@ estimation flag, values and basis. Ingredient metadata includes the exact densit
 and update instant. A mismatched or non-current supplied profile is rejected.
 A missing current profile produces `MISSING_NUTRITION_PROFILE`, never zero.
 
-`RecipeIngredientNutrition` retains the immutable recipe row alongside its
-contribution, including normalization/source text, row ID, unit and optional flag.
-`RecipeVersionNutrition.version` retains version identity, base servings and
-recipe source/hash provenance. Every row's resolved profile is available even
-when its mass conversion fails. Repeated FoodIngredient references are loaded
-once per calculation, but warnings retain individual row context.
+RecipeVersion calculation is assessment-driven under
+`ROW_ASSESSMENT_EXACT_ONLY_B1_V1`. Missing review produces
+`MISSING_NUTRITION_ASSESSMENT` and no mass, even for g. Approved clean g uses its
+existing quantity. `APPROVED_EXACT` requires matching ml/pcs evidence, an explicit
+non-estimated source, no review blockers, and the still-current pinned profile.
+Mass is `row.quantity × evidence.gram_weight / evidence.normalized_input_quantity`
+in the private Decimal context with no intermediate quantization. FoodIngredient
+global density is never a recipe fallback.
 
-Results identify the inputs actually read, not the nutrition state that happened
-to exist when the RecipeVersion was published. Later on-demand calls may see a
-new current profile or density. No calculation overwrites catalogue history.
-A future authorized historical consumer must snapshot/reference exact inputs and
-config; PR6 does not promise historical replay from RecipeVersion ID alone.
+`REVIEW_REQUIRED_ESTIMATE` contributes no authoritative mass or nutrients and
+emits `CONVERSION_ESTIMATE_NOT_ACCEPTED`. `BLOCKED` emits
+`NUTRITION_ASSESSMENT_BLOCKED`, retaining every structured issue, including issues
+on g rows. Missing evidence emits `MISSING_MEASURE_EVIDENCE`; mismatched units or
+invalid authority fail closed. A changed current profile emits
+`NUTRITION_ASSESSMENT_PROFILE_STALE`; old review is not automatically rebound.
+
+`RecipeIngredientNutrition` retains the immutable row, contribution, full
+assessment (ID/version/status/ordered issues), selected measure evidence
+(ID/key, source name/id/version/form, numerator/denominator/unit and estimated
+flag), and exact pinned assessment profile. Contribution.profile is the current
+profile read. Historical pinned profile remains exposed after invalidation.
+`RecipeVersionNutrition.version` retains version identity, base servings and
+source/hash provenance. Repeated ingredient/profile inputs are read once per
+calculation where reusable; warnings retain individual row context.
+
+Results identify the coherent inputs actually read. Explicit reassessment for
+a new current profile creates a new version and retains history. Recipe rows
+remain immutable. New RecipeVersion rows start without assessments and fail
+closed until reviewed. No calculation changes catalogue or review history.
+A future historical consumer must retain these exact inputs/config references;
+RecipeVersion ID alone does not promise historical replay.
 
 ## Result semantics
 
@@ -118,6 +140,7 @@ requires a new configuration version, not a silent v1 edit.
 | `fiber_version` | `DRI_TOTAL_FIBER_AI_2002_2005_V1` |
 | `atwater_version` | `ATWATER_GENERAL_4_4_9_V1` |
 | `age_policy_version` | `COMPLETED_CHRONOLOGICAL_YEARS_V1` |
+| `recipe_mass_policy_version` | `ROW_ASSESSMENT_EXACT_ONLY_B1_V1` |
 | `rounding_version` | `DECIMAL_80_HALF_UP_6DP_V1` |
 
 Primary references, verified 2026-09-06:
@@ -201,11 +224,13 @@ Decimal quantities raise ValueError. Existing canonical recipe/profile validatio
 remains unchanged. Supported finite input precision fits the private context;
 no binary floating-point arithmetic participates.
 
-## Accepted production catalogue coverage
+## Historical PR6 engine production coverage (before B1)
 
-Audit uses a fresh temporary database seeded by the existing accepted loaders,
+The original engine audit used a fresh temporary database seeded by the accepted loaders,
 not a developer's local database. It evaluates all 30 current verified
-RecipeVersions and their 189 ingredient rows. Reproduce with:
+RecipeVersions and their 189 ingredient rows. The current command below now
+verifies the B1 audit; original audit code and results remain in DATA-A accepted
+main and its protected hashes:
 
 ```sh
 AI_ENABLED=false python3 -m pytest -q -s backend/app/tests/test_nutrition_catalogue.py
@@ -238,10 +263,24 @@ The supporting
 [PR6-DATA-A audit](nutrition-data-readiness.md) now records source-backed
 conversion candidates, semantic/source-quantity blockers and an implementation
 recommendation. A global density is not generally safe for the accepted forms.
-Next action is project review and explicit authorization of DATA-B; no production
-data, schema or runtime change is authorized by the recommendation. Accepted
-recipe/source provenance and all nutrition, density and serving quantities remain
-unchanged in DATA-A.
+The later B1 implementation establishes exact evidence and row assessments
+without changing production RecipeVersion or FoodNutritionProfile contents.
+
+## Current production coverage after B1
+
+[Audit v2](../../data/seed/nutrition_measure_evidence/production-audit-v2.json)
+reports 30 INCOMPLETE recipes, all other statuses zero; 189 current assessments,
+57 evidence records and 123 issue rows. Assessments: 66 APPROVED_EXACT,
+20 APPROVED_NO_CONVERSION, 37 REVIEW_REQUIRED_ESTIMATE and 66 BLOCKED.
+All 43 estimate candidates remain non-executable. Eleven g rows remain blocked.
+
+Runtime counts: missing assessment 0, blocked 66, estimate not accepted 43,
+stale profile 0, missing evidence 0, unknown fiber 30, unknown profile estimation
+189, estimated nutrient source 0, optional 4, missing ingredient/profile 0.
+Recipe missing-density/unsupported-piece warnings are both zero. Direct
+FoodIngredient behavior remains as above. Reproduction, exact source hashes,
+status derivation and remaining B2 blockers live in the
+[B1 decision](nutrition-data-readiness.md#decision--pr6-data-b1-exact-evidence-and-row-binding).
 
 ## Verification and acceptance
 
@@ -255,4 +294,5 @@ required full backend/launcher regression evidence live in
 
 PR #18 engine implementation is ACCEPTED / MERGED. PR6 milestone remains NOT
 COMPLETE pending data readiness and explicit closure acceptance. PR7 and later
-remain unauthorized; DATA-A evidence does not pre-authorize DATA-B.
+remain unauthorized. B1 is established by this changeset; DATA-B2 is NOT
+AUTHORIZED and no DATA-B1-CLOSE operation is required.

@@ -8,6 +8,12 @@ from uuid import UUID
 
 from app.domain.food_ingredients import FoodIngredient, FoodNutritionProfile
 from app.domain.food_recipes import RecipeIngredient, RecipeVersion, RecipeVersionDetail
+from app.domain.nutrition_evidence import (
+    AssessmentStatus,
+    MeasureMassEvidence,
+    NutritionAssessmentIssue,
+    RecipeIngredientNutritionAssessment,
+)
 from app.domain.nutrition_config import (
     CONFIG,
     MAX_INPUT,
@@ -28,6 +34,11 @@ class NutritionStatus(StrEnum):
 
 
 class NutritionWarningCode(StrEnum):
+    MISSING_NUTRITION_ASSESSMENT = "MISSING_NUTRITION_ASSESSMENT"
+    NUTRITION_ASSESSMENT_BLOCKED = "NUTRITION_ASSESSMENT_BLOCKED"
+    CONVERSION_ESTIMATE_NOT_ACCEPTED = "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+    NUTRITION_ASSESSMENT_PROFILE_STALE = "NUTRITION_ASSESSMENT_PROFILE_STALE"
+    MISSING_MEASURE_EVIDENCE = "MISSING_MEASURE_EVIDENCE"
     MISSING_FOOD_INGREDIENT = "MISSING_FOOD_INGREDIENT"
     MISSING_NUTRITION_PROFILE = "MISSING_NUTRITION_PROFILE"
     MISSING_DENSITY = "MISSING_DENSITY"
@@ -82,6 +93,9 @@ class IngredientNutrition:
 class RecipeIngredientNutrition:
     row: RecipeIngredient
     nutrition: IngredientNutrition
+    assessment: RecipeIngredientNutritionAssessment | None = None
+    measure_evidence: MeasureMassEvidence | None = None
+    assessment_profile: FoodNutritionProfile | None = None
 
 
 @dataclass(frozen=True)
@@ -123,6 +137,8 @@ def _ingredient(
     *,
     food_ingredient_id: UUID,
     row_id: UUID | None = None,
+    row_authority: tuple[Decimal | None, tuple[NutritionWarningCode, ...]]
+    | None = None,
 ) -> IngredientNutrition:
     require_positive_decimal(quantity)
     if unit not in (UnitCode.GRAM, UnitCode.MILLILITER, UnitCode.PIECE):
@@ -141,6 +157,14 @@ def _ingredient(
     mass = None
     if ingredient is None:
         warn(NutritionWarningCode.MISSING_FOOD_INGREDIENT)
+    if row_authority is not None:
+        mass, authority_warnings = row_authority
+        for code in authority_warnings:
+            warn(code)
+        if ingredient is None:
+            mass = None
+    elif ingredient is None:
+        pass
     elif unit == UnitCode.GRAM:
         mass = quantity  # Already normalized; no edible_fraction adjustment.
     elif unit == UnitCode.MILLILITER:
@@ -201,17 +225,91 @@ def scale_food_nutrition(
         return replace(result, values=_round_values(result.values))
 
 
+def _row_mass(
+    row: RecipeIngredient,
+    profile: FoodNutritionProfile | None,
+    assessment: RecipeIngredientNutritionAssessment | None,
+    evidence: MeasureMassEvidence | None,
+) -> tuple[Decimal | None, tuple[NutritionWarningCode, ...]]:
+    """Explicit row authority only. Candidate presence never grants permission."""
+    code = NutritionWarningCode
+    if assessment is None:
+        return None, (code.MISSING_NUTRITION_ASSESSMENT,)
+    if assessment.recipe_ingredient_id != row.id or not assessment.is_current:
+        return None, (code.NUTRITION_ASSESSMENT_BLOCKED,)
+    warnings = []
+    if profile is None or assessment.nutrition_profile_id != profile.id:
+        warnings.append(code.NUTRITION_ASSESSMENT_PROFILE_STALE)
+    if assessment.status_code == AssessmentStatus.BLOCKED:
+        warnings.append(code.NUTRITION_ASSESSMENT_BLOCKED)
+    if (
+        assessment.status_code == AssessmentStatus.REVIEW_REQUIRED_ESTIMATE
+        or NutritionAssessmentIssue.CONVERSION_ESTIMATE_NOT_ACCEPTED
+        in assessment.issues
+    ):
+        warnings.append(code.CONVERSION_ESTIMATE_NOT_ACCEPTED)
+    if warnings:
+        return None, tuple(warnings)
+    if assessment.issues:
+        return None, (code.NUTRITION_ASSESSMENT_BLOCKED,)
+    if assessment.status_code == AssessmentStatus.APPROVED_NO_CONVERSION:
+        return (
+            (row.quantity, ())
+            if row.unit == UnitCode.GRAM
+            else (None, (code.NUTRITION_ASSESSMENT_BLOCKED,))
+        )
+    if assessment.status_code == AssessmentStatus.APPROVED_EXACT:
+        if evidence is None or evidence.id != assessment.measure_evidence_id:
+            return None, (code.MISSING_MEASURE_EVIDENCE,)
+        if evidence.estimated:
+            return None, (code.CONVERSION_ESTIMATE_NOT_ACCEPTED,)
+        if (
+            row.unit not in (UnitCode.MILLILITER, UnitCode.PIECE)
+            or row.unit != evidence.normalized_input_unit
+        ):
+            return None, (code.NUTRITION_ASSESSMENT_BLOCKED,)
+        return (
+            row.quantity * evidence.gram_weight / evidence.normalized_input_quantity,
+            (),
+        )
+    return None, (code.NUTRITION_ASSESSMENT_BLOCKED,)
+
+
 def calculate_recipe_nutrition(
     detail: RecipeVersionDetail,
     ingredients: Mapping[UUID, FoodIngredient],
     profiles: Mapping[UUID, FoodNutritionProfile],
+    assessments: Mapping[UUID, RecipeIngredientNutritionAssessment] | None = None,
+    evidence: Mapping[UUID, MeasureMassEvidence] | None = None,
+    assessment_profiles: Mapping[UUID, FoodNutritionProfile] | None = None,
 ) -> RecipeVersionNutrition:
     """Mappings and detail must come from one coherent read view."""
+    assessments = {} if assessments is None else assessments
+    evidence = {} if evidence is None else evidence
+    assessment_profiles = {} if assessment_profiles is None else assessment_profiles
     with localcontext(calculation_context()):
         required: list[RecipeIngredientNutrition] = []
         optional: list[RecipeIngredientNutrition] = []
         warnings: list[NutritionWarning] = []
         for row in sorted(detail.ingredients, key=lambda item: item.position):
+            assessment = assessments.get(row.id)
+            measure = (
+                None
+                if assessment is None
+                else evidence.get(assessment.measure_evidence_id)
+            )
+            profile = profiles.get(row.food_ingredient_id)
+            pinned_profile = (
+                None
+                if assessment is None
+                else assessment_profiles.get(assessment.nutrition_profile_id)
+            )
+            if (
+                assessment is not None
+                and profile is not None
+                and assessment.nutrition_profile_id == profile.id
+            ):
+                pinned_profile = profile
             result = _ingredient(
                 ingredients.get(row.food_ingredient_id),
                 profiles.get(row.food_ingredient_id),
@@ -219,6 +317,7 @@ def calculate_recipe_nutrition(
                 row.unit,
                 food_ingredient_id=row.food_ingredient_id,
                 row_id=row.id,
+                row_authority=_row_mass(row, profile, assessment, measure),
             )
             warnings.extend(result.warnings)
             if row.optional:
@@ -230,7 +329,9 @@ def calculate_recipe_nutrition(
                     )
                 )
             (optional if row.optional else required).append(
-                RecipeIngredientNutrition(row, result)
+                RecipeIngredientNutrition(
+                    row, result, assessment, measure, pinned_profile
+                )
             )
         # None propagates per nutrient; never expose a diagnostic partial sum as a total.
         total = NutritionValues(
