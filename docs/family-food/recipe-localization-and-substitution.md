@@ -428,13 +428,17 @@ Do **not** add to PR4 solely because this document exists:
 
 Substitution implementation should be introduced only as a later bounded capability after its dependencies and acceptance tests are explicitly authorized. The core weekly loop remains the priority.
 
-## 17. Immediate next data operation
+## 17. Historical PR4-DATA2 authorization
 
-After this policy is accepted in `main`, authorize a bounded supporting operation:
+The following records the original supporting-operation authorization; PR4-DATA2
+and PR4 are now COMPLETE. Current status and authorization follow the
+[master roadmap](master-roadmap.md).
+
+The original bounded supporting operation was:
 
 `PR4-DATA2 — Russia/SPB Recipe Corpus Re-curation`
 
-It should:
+Its scope was to:
 
 1. audit all current 30 recipes for Russia/Saint-Petersburg ingredient compatibility;
 2. remove the two uncleared ICN sources;
@@ -446,4 +450,6 @@ It should:
 8. produce retailer-availability evidence as curation data, not RetailSKU production truth;
 9. hand the accepted corpus back to PR4 for seed regeneration, equipment curation, tests and final review.
 
-PR5 remains unauthorized until PR4 is corrected, accepted and merged.
+The original PR5 prerequisite was PR4 correction, acceptance and merge; that
+gate is satisfied. PR5 Pantry is COMPLETE. PR6 Nutrition Core is now
+AUTHORIZED / NOT STARTED under the master roadmap.

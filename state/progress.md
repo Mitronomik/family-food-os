@@ -15,15 +15,31 @@ PR3   FoodIngredient Catalogue             COMPLETE
 PR4-DATA Recipe coverage support           COMPLETE
 PR4-DATA2 Russia/SPB corpus re-curation    COMPLETE
 PR4   Recipe Catalogue                     COMPLETE
-PR5   Pantry                               READY FOR REVIEW
+PR5   Pantry                               COMPLETE
+PR6   Nutrition Core                       AUTHORIZED / NEXT
 ```
 
 Canonical implementation order remains `docs/family-food/master-roadmap.md`.
 
+## PR5 closure
+
+`PR5 — Pantry — COMPLETE`
+
+- [PR #15](https://github.com/Mitronomik/family-food-os/pull/15): MERGED;
+- accepted/merged head: `4778b6e99fde027be7e70b8a8966db85394e100d`;
+- merge commit / verified main: `5f1bb47199ab661d58b92b8cbb9e40b4aeb7b0d0`;
+- fully tested implementation: `d5b821ce9969ee2bf167333d9b48675d0f6d470f`;
+- final project review: `PR5 FINAL REVIEW: ACCEPT — READY TO MERGE`.
+
+PR5-CLOSE reuses the accepted verification from PR #15, recorded below; no new
+regression run is claimed. The publication commit changed only state files,
+and the accepted head and merge commit have identical file trees.
+PR6 Nutrition Core is AUTHORIZED / NEXT and NOT STARTED.
+
 ## PR5 implementation evidence
 
 - Base: `main` / `b7fb609fc28dc46fa5891fc677272b6d21b58b58`.
-- Branch: `migration/pr5-pantry`; [PR #15](https://github.com/Mitronomik/family-food-os/pull/15) → `main`, OPEN.
+- Branch: `migration/pr5-pantry`; [PR #15](https://github.com/Mitronomik/family-food-os/pull/15) → `main`, MERGED.
 - Verified implementation commit: `d5b821ce9969ee2bf167333d9b48675d0f6d470f`.
   Subsequent publication commit only records this PR/evidence in state files.
 - Contract: [Household Pantry core](../docs/family-food/pantry-core.md).
@@ -38,7 +54,7 @@ Canonical implementation order remains `docs/family-food/master-roadmap.md`.
   the accepted 30 Recipe / 30 Version / 189 RecipeIngredient catalogue and a
   Household. Fresh migration and foreign-key enablement are verified.
 
-### PR5 checks
+### PR5 accepted checks (reused by PR5-CLOSE)
 
 Runtime: local Python 3.12.13 via `backend/.venv/bin/python`; `PYTHONPATH=backend`.
 
@@ -73,12 +89,19 @@ command. No conversion, invented expiry, food-safety recommendation, automatic
 conflict retry or idempotency key. Supported service commands own ledger writes;
 raw repository primitives are internal. No frontend or future context work.
 
-Final project review and explicit merge permission are required; PR5 is not
-COMPLETE, and PR6 remains unauthorized.
+PR5 is COMPLETE. PR6 Nutrition Core is AUTHORIZED / NEXT and NOT STARTED.
+Its scope remains FoodIngredient nutrition → RecipeVersion nutrition → Member
+target formula/config foundation. Serving begins only in PR7.
 
 ## PR4-DATA2 closure
 
 PR #13 merged after `PR4-DATA2 FINAL REVIEW: ACCEPT`.
+
+The dated `2026-09-05` [DATA2 README](../data/curation/pr4-data2/README.md)
+and [correction review report](../data/curation/pr4-data2/review-report.md) remain
+historical evidence snapshots. Their review status, next-action instructions
+and PR5 authorization statements are superseded by the accepted closures here
+and the current master roadmap; they are not operative milestone gates.
 
 - accepted head: `918bf81b5da306fc65a57643de515ca1b3fbd1e4`;
 - merge/main commit: `2f5fba991f1f612ce7b4b8dfda8ebd41ad6333e7`;
@@ -183,7 +206,11 @@ Ordered steps are durably reviewed in `data/curation/pr4-runtime/recipe-steps.js
 
 ## Current gate
 
-PR4 is COMPLETE and merged. PR5 is READY FOR REVIEW on
-`migration/pr5-pantry` from `b7fb609fc28dc46fa5891fc677272b6d21b58b58`.
-Final Pantry review/acceptance is the next gate. PR6 and every later milestone
-remain unauthorized.
+PR5 is COMPLETE.
+PR6 Nutrition Core is AUTHORIZED / NEXT and NOT STARTED.
+
+PR5-CLOSE records accepted completion and authorization only; its next gate is
+final project review and merge. PR6 implementation belongs in a separate bounded
+PR after that gate. PR7 MealPlan / Serving, PR8 Planner and every later milestone
+remain unauthorized, including Shopping, Prep, Retail, AI, Auth, PostgreSQL,
+consumer PWA and Billing.
