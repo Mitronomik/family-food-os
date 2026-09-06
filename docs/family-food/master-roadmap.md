@@ -39,7 +39,7 @@ PR4-DATA Recipe coverage support           COMPLETE
 PR4-DATA2 Russia/SPB corpus re-curation    COMPLETE
 PR4   Recipe Catalogue                     COMPLETE
 PR5   Pantry                               COMPLETE
-PR6   Nutrition Core                       AUTHORIZED / NOT STARTED
+PR6   Nutrition Core                       READY FOR REVIEW
 ```
 
 PR2-C closure evidence:
@@ -71,9 +71,10 @@ PR5 closure evidence:
 - final regression gate: PASS — **3255 passed in 467.40s**, zero skips;
 - accepted PR #15 verification is reused by PR5-CLOSE; no regression rerun.
 
-The next product milestone is `PR6 — Nutrition Core — AUTHORIZED / NOT STARTED`.
-After PR5-CLOSE documentation review and merge, begin bounded PR6 from current
-merged `main`. PR6 is the only newly authorized product milestone; PR7
+The active product milestone is `PR6 — Nutrition Core — READY FOR REVIEW`.
+Its on-demand calculation contract and production coverage are recorded in
+[Nutrition Core](nutrition-core.md); final acceptance remains pending.
+PR6 is the only authorized product implementation milestone; PR7
 MealPlan / Serving, PR8 Planner and all later milestones remain unauthorized,
 including Shopping, Prep, Retail, AI, Auth, PostgreSQL, consumer PWA and Billing.
 PR5-CLOSE synchronizes status and records this authorization only; it changes no
@@ -487,7 +488,7 @@ shopping-list generation, automatic purchase ingestion or computer vision.
 **Exit criteria:** a Household can maintain understandable Pantry state through
 transactional movements without exposure to industrial inventory concepts.
 
-### PR6 — Nutrition Core — AUTHORIZED / NOT STARTED
+### PR6 — Nutrition Core — READY FOR REVIEW
 
 PR6 owns the deterministic Nutrition Core only through:
 

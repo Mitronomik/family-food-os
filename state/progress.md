@@ -16,10 +16,53 @@ PR4-DATA Recipe coverage support           COMPLETE
 PR4-DATA2 Russia/SPB corpus re-curation    COMPLETE
 PR4   Recipe Catalogue                     COMPLETE
 PR5   Pantry                               COMPLETE
-PR6   Nutrition Core                       AUTHORIZED / NOT STARTED
+PR6   Nutrition Core                       READY FOR REVIEW
 ```
 
 Canonical implementation order remains `docs/family-food/master-roadmap.md`.
+
+## PR6 implementation evidence
+
+- Accepted starting main: `0979181409d34e4a193d58b60f4bbc8fa8d1e974` (PR #17 merged).
+- Branch: `feature/pr6-nutrition-core`; PR6 READY FOR REVIEW, final acceptance pending.
+- Contract: [Nutrition Core](../docs/family-food/nutrition-core.md).
+- Read-only, Decimal ingredient/RecipeVersion nutrition and member reference
+  targets, with versioned NASEM/DRI/Atwater inputs and explicit uncertainty.
+- No schema/cache, API/frontend, catalogue truth changes or PR7+ implementation.
+  Migration head remains `0025_pantry`.
+- Production seed audit: 30/30 INCOMPLETE, other status counts zero. Reasons:
+  missing density 123, unsupported piece mass 35, missing ingredient/profile 0,
+  unknown fiber 30, estimated=true 0, estimation status unknown 189, optional 4.
+  These are overlapping row occurrences including optional rows; see the contract
+  for affected-recipe counts and the bounded follow-up recommendation.
+
+Executed verification (all with `AI_ENABLED=false`):
+
+```sh
+python3 -m pytest -q backend/app/tests/test_nutrition*.py backend/app/tests/persistence/test_nutrition*.py
+# 131 passed in 2.56s (115 domain/target including 3 family fixtures,
+# 8 application, 5 persistence, 2 architecture, 1 audit)
+
+python3 -m pytest -q backend/app/tests/test_food_ingredient*.py backend/app/tests/test_food_recipe*.py backend/app/tests/test_household*.py backend/app/tests/persistence/test_food_ingredient_repository.py backend/app/tests/persistence/test_food_recipe_repository.py backend/app/tests/persistence/test_household_repository.py backend/app/tests/persistence/test_unit_of_work.py
+# 225 passed in 10.20s; includes affected contexts, seed/migration compatibility,
+# their architecture tests and the shared Unit of Work.
+
+python3 -m pytest -q -s backend/app/tests/test_nutrition_catalogue.py
+# 1 passed; exact 30-version audit printed, no production data edits.
+
+python3 -m pytest -q backend/app/tests launcher/tests
+# Sandbox attempt: 3100 passed, 162 failed, 121 errors in 230.19s.
+# All failure/error entries are launcher tests; loopback bind was denied by
+# the sandbox (PermissionError: [Errno 1] Operation not permitted).
+# Required rerun with loopback access: 3386 passed in 485.55s (0:08:05),
+# zero skips; all 131 new Nutrition tests included. No runtime changes after this run.
+```
+
+Ruff check and format check: PASS, 13 changed Python files. `git diff --check`:
+PASS. `git diff --cached --check` and final staged scope audit: PASS, 18 files
+(7 runtime, 6 tests, 2 canonical docs/status, 3 state). The only unrelated
+working-tree change is `.DS_Store`, excluded from staging/commits. No milestone
+completion or PR7 authorization is claimed.
 
 ## AGENT-HARNESS governance evidence
 
