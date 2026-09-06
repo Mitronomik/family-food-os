@@ -15,10 +15,64 @@ PR3   FoodIngredient Catalogue             COMPLETE
 PR4-DATA Recipe coverage support           COMPLETE
 PR4-DATA2 Russia/SPB corpus re-curation    COMPLETE
 PR4   Recipe Catalogue                     COMPLETE
-PR5   Pantry                               AUTHORIZED / NEXT
+PR5   Pantry                               READY FOR REVIEW
 ```
 
 Canonical implementation order remains `docs/family-food/master-roadmap.md`.
+
+## PR5 implementation evidence
+
+- Base: `main` / `b7fb609fc28dc46fa5891fc677272b6d21b58b58`.
+- Branch: `migration/pr5-pantry`; PR creation follows final regression.
+- Contract: [Household Pantry core](../docs/family-food/pantry-core.md).
+- Dedicated PantryItem/current Decimal balance and immutable PantryMovement.
+- Add, FEFO ingredient consumption, waste, target adjustment, metadata-only
+  update, available quantity and expiring queries; eight HTTP route capabilities.
+- One UoW per command, exact Decimal-text compare-and-swap, non-negative balance,
+  positive unsigned movements, ledger reconciliation and Household isolation.
+- Additive migration `0025_pantry`, custom-runner/restore-lineage registration,
+  composite Household/item/unit FK and SQLite immutability guards.
+- Populated `0024 → 0025` upgrade preserves all previous rows/schema, including
+  the accepted 30 Recipe / 30 Version / 189 RecipeIngredient catalogue and a
+  Household. Fresh migration and foreign-key enablement are verified.
+
+### PR5 checks
+
+Runtime: local Python 3.12.13 via `backend/.venv/bin/python`; `PYTHONPATH=backend`.
+
+- Focused Pantry: **267 passed in 33.33s** — 98 domain, 50 application, 62 API,
+  51 persistence/UoW, 3 migration, 3 architecture.
+- Affected Household/FoodIngredient/Recipe domain/application/repository and
+  generic UoW regression: **167 passed in 9.52s**.
+- Backend migration selection (`pytest backend/app/tests -k migration -q`):
+  **142 passed, 2468 deselected in 13.60s**.
+- Focused tests include exact ledger reconciliation, insufficient stock with no
+  movement, multi-item rollback after second-write failure, overlapping writers,
+  commit/rollback failure discard, terminal handles and foreign UUID isolation.
+- Read-only adversarial review found epoch-string calendar coercion; strict ISO
+  validation and API negative regressions fix it. Signed zero normalizes to
+  `0.000`.
+- Full backend + launcher (`pytest backend/app/tests launcher/tests -q --tb=short`):
+  **3255 passed in 467.40s (0:07:47)**, zero skips, zero failures.
+  The initial sandbox run
+  blocked localhost socket binds; the authorized rerun enables localhost sockets.
+  Obsolete migration-tail/table/backup expectations were corrected while preserving
+  original historical cutoff coverage.
+- Ruff format/check: PASS for all 26 changed Python files.
+- `git diff --check`, `git diff --cached --check`: PASS.
+- Staged scope audit: PASS, exactly 30 reviewed files; no secrets, local DBs,
+  frontend/data/workflow changes or historical migration edits.
+
+### PR5 limitations and next gate
+
+No Auth: Household selection is not authorization. Quantity precision is 0.001
+for g/ml/pcs (fractional pcs supported), with max 999999999999.999 per item or
+command. No conversion, invented expiry, food-safety recommendation, automatic
+conflict retry or idempotency key. Supported service commands own ledger writes;
+raw repository primitives are internal. No frontend or future context work.
+
+Final project review and explicit merge permission are required; PR5 is not
+COMPLETE, and PR6 remains unauthorized.
 
 ## PR4-DATA2 closure
 
@@ -127,9 +181,7 @@ Ordered steps are durably reviewed in `data/curation/pr4-runtime/recipe-steps.js
 
 ## Current gate
 
-PR4 is COMPLETE; PR #10 is merged and no PR carries unfinished PR4 work.
-`PR5 — Pantry — AUTHORIZED / NEXT` is not started. After PR4-CLOSE review and
-merge, begin bounded PR5 from current merged `main`. The closure records the
-accepted evidence above without rerunning the full backend regression or
-changing production data. Later Nutrition, MealPlan/Serving, Planner, Shopping,
-Prep, Retail, AI, Auth/PostgreSQL and PWA remain unauthorized by this task.
+PR4 is COMPLETE and merged. PR5 is READY FOR REVIEW on
+`migration/pr5-pantry` from `b7fb609fc28dc46fa5891fc677272b6d21b58b58`.
+Final Pantry review/acceptance is the next gate. PR6 and every later milestone
+remain unauthorized.

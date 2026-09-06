@@ -34,7 +34,7 @@ def _table_shape(connection, table):
 
 
 def test_migration_chain_appends_0024_after_0023():
-    assert expected_migration_ids()[-2:] == [
+    assert expected_migration_ids()[22:24] == [
         "0023_food_ingredient_catalogue",
         "0024_food_recipe_catalogue",
     ]
@@ -42,7 +42,10 @@ def test_migration_chain_appends_0024_after_0023():
 
 def test_fresh_database_migrates_through_0024_without_future_tables(tmp_path):
     database = tmp_path / "fresh.sqlite"
-    assert apply_migrations(DatabaseConfig(path=database)) == expected_migration_ids()
+    assert (
+        _migrate_through(database, "0024_food_recipe_catalogue")
+        == expected_migration_ids()[:24]
+    )
     with sqlite3.connect(database) as connection:
         tables = {
             row[0]
@@ -71,7 +74,7 @@ def test_0023_to_0024_preserves_legacy_household_and_food_catalogue_shapes(tmp_p
     )
     with sqlite3.connect(database) as connection:
         before = {table: _table_shape(connection, table) for table in preserved}
-    assert apply_migrations(DatabaseConfig(path=database)) == [
+    assert _migrate_through(database, "0024_food_recipe_catalogue") == [
         "0024_food_recipe_catalogue"
     ]
     with sqlite3.connect(database) as connection:

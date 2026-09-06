@@ -34,7 +34,7 @@ def table_names(database_path):
 
 
 def test_household_foundation_remains_immediately_before_food_catalogue():
-    assert expected_migration_ids()[-3:-1] == [
+    assert expected_migration_ids()[21:23] == [
         "0022_household_foundation",
         "0023_food_ingredient_catalogue",
     ]
@@ -63,6 +63,7 @@ def test_database_at_0021_upgrades_only_to_household_foundation(tmp_path):
         "0022_household_foundation",
         "0023_food_ingredient_catalogue",
         "0024_food_recipe_catalogue",
+        "0025_pantry",
     ]
     assert before <= table_names(database_path)
     with sqlite3.connect(database_path) as connection:

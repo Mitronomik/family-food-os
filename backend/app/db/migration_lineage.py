@@ -108,6 +108,7 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
             "food_recipe_equipment",
         }
     ),
+    "0025_pantry": frozenset({"pantry_items", "pantry_movements"}),
 }
 
 # The foundational tables promised by migration `0001`. Stable FamilyFoodOS

@@ -43,6 +43,8 @@ CURRENT_ALLOWED_TABLES = {
     "food_recipe_ingredients",
     "food_recipe_steps",
     "food_recipe_equipment",
+    "pantry_items",
+    "pantry_movements",
     "sqlite_sequence",
 }
 
