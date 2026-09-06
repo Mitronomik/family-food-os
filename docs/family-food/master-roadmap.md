@@ -38,7 +38,8 @@ PR3   FoodIngredient Catalogue             COMPLETE
 PR4-DATA Recipe coverage support           COMPLETE
 PR4-DATA2 Russia/SPB corpus re-curation    COMPLETE
 PR4   Recipe Catalogue                     COMPLETE
-PR5   Pantry                               AUTHORIZED / NOT STARTED
+PR5   Pantry                               COMPLETE
+PR6   Nutrition Core                       AUTHORIZED / NOT STARTED
 ```
 
 PR2-C closure evidence:
@@ -60,10 +61,23 @@ PR4 closure evidence:
 - final project review: `PR4 FINAL REVIEW: ACCEPT — READY TO MERGE`;
 - final regression gate: PASS.
 
-The next product milestone is `PR5 — Pantry — AUTHORIZED / NOT STARTED`.
-After PR4-CLOSE documentation review and merge, begin bounded PR5 from current
-merged `main`. PR4-CLOSE synchronizes status only; it changes no sequence, gate,
-architecture rule, quantitative target or downstream authorization.
+PR5 closure evidence:
+
+- [PR #15](https://github.com/Mitronomik/family-food-os/pull/15): MERGED;
+- accepted/merged head: `4778b6e99fde027be7e70b8a8966db85394e100d`;
+- merge commit / verified main: `5f1bb47199ab661d58b92b8cbb9e40b4aeb7b0d0`;
+- fully tested implementation: `d5b821ce9969ee2bf167333d9b48675d0f6d470f`;
+- final project review: `PR5 FINAL REVIEW: ACCEPT — READY TO MERGE`;
+- final regression gate: PASS — **3255 passed in 467.40s**, zero skips;
+- accepted PR #15 verification is reused by PR5-CLOSE; no regression rerun.
+
+The next product milestone is `PR6 — Nutrition Core — AUTHORIZED / NOT STARTED`.
+After PR5-CLOSE documentation review and merge, begin bounded PR6 from current
+merged `main`. PR6 is the only newly authorized product milestone; PR7
+MealPlan / Serving, PR8 Planner and all later milestones remain unauthorized,
+including Shopping, Prep, Retail, AI, Auth, PostgreSQL, consumer PWA and Billing.
+PR5-CLOSE synchronizes status and records this authorization only; it changes no
+sequence, gate, architecture rule, quantitative target or milestone scope.
 
 ## 3. North Star and core-loop contract
 
@@ -178,7 +192,7 @@ changes them:
 
 ✅ PR3   FoodIngredient Catalogue
 ✅ PR4   Recipe Catalogue
-→ PR5   Pantry
+✅ PR5   Pantry
 → PR6   Nutrition Core
 → PR7   MealPlan / Serving + serving-nutrition integration
 → PR8   Planner v0
@@ -449,7 +463,7 @@ production truth or cosmetic 100-percent/phase invariants.
 every required ingredient resolves to one FoodIngredient; source/rights and
 verification status are reviewable; historical versions remain unchanged.
 
-### PR5 — Pantry
+### PR5 — Pantry — COMPLETE
 
 **Goal:** introduce simple Household-owned food-at-home state before Shopping
 and Planner consume Pantry facts.
@@ -473,7 +487,7 @@ shopping-list generation, automatic purchase ingestion or computer vision.
 **Exit criteria:** a Household can maintain understandable Pantry state through
 transactional movements without exposure to industrial inventory concepts.
 
-### PR6 — Nutrition Core
+### PR6 — Nutrition Core — AUTHORIZED / NOT STARTED
 
 PR6 owns the deterministic Nutrition Core only through:
 

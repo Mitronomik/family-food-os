@@ -1,10 +1,22 @@
 # PR5 — Household Pantry core
 
-Status: implemented for PR5 review; acceptance and merge are separate gates.
+Status: PR5 COMPLETE — accepted and merged.
+
+- [PR #15](https://github.com/Mitronomik/family-food-os/pull/15): MERGED;
+- accepted/merged head: `4778b6e99fde027be7e70b8a8966db85394e100d`;
+- merge commit / verified main: `5f1bb47199ab661d58b92b8cbb9e40b4aeb7b0d0`;
+- fully tested implementation: `d5b821ce9969ee2bf167333d9b48675d0f6d470f`;
+- final project review: `PR5 FINAL REVIEW: ACCEPT — READY TO MERGE`.
+
+Accepted verification baseline from PR #15: focused Pantry **267 passed**;
+affected Household/FoodIngredient/Recipe/UoW **167 passed**; migration selection
+**142 passed**; full backend + launcher **3255 passed in 467.40s**, zero skips.
+Ruff/diff/staged scope: PASS. PR5-CLOSE reuses this accepted evidence and does
+not claim a new regression run. This contract remains the accepted PR5 description.
 
 ## Context and goal
 
-PR5 starts from merged `main` at
+PR5 implementation started from merged `main` at
 `b7fb609fc28dc46fa5891fc677272b6d21b58b58`, after accepted Household,
 FoodIngredient and Recipe Catalogue. It records confirmed food-at-home facts:
 
@@ -134,5 +146,7 @@ Frontend: N/A. No PantryLot, supplier, retail package or conversion, Planner,
 Shopping, MealPlan/Serving, Nutrition Engine, Prep, AI, Auth, PostgreSQL, receipt
 or barcode workflow. Legacy inventory is not removed. No catalogue data changes.
 
-PR5 stops at READY FOR REVIEW. Project acceptance and explicit merge permission
-are required before closure; PR6 and later work remain unauthorized.
+PR5 is COMPLETE.
+PR6 Nutrition Core is the next authorized milestone (AUTHORIZED / NOT STARTED).
+Pantry remains an input to later Planner/Shopping contexts only when those
+milestones are authorized.
