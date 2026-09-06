@@ -1110,17 +1110,12 @@ QUESTION`; do not choose a new roadmap through code or an implementation PR.
 
 ## 16. Agent read and use protocol
 
-Before significant work, an agent reads:
-
-```text
-AGENTS.md
-→ docs/family-food/project-operating-manual.md
-→ state/current-focus.md
-→ docs/family-food/master-roadmap.md
-→ relevant architecture / ADR / domain documents
-→ relevant source code and tests
-→ state/handoff.md when continuing work
-```
+Use root `AGENTS.md` task routing: current focus, applicable scoped AGENTS,
+relevant canonical documents, code and tests. Read the Operating Manual, this
+roadmap and broader architecture references when interpreting authorization,
+gates, product/architecture decisions, cross-context design, source conflicts or
+substantial research; do not preload them for every ordinary correction.
+Read `state/handoff.md` only when continuing previous work.
 
 The agent identifies the current milestone, its prior gate, dependencies,
 non-goals and exit evidence before editing. It treats legacy source/history as

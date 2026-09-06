@@ -2,7 +2,7 @@
 
 Updated: `2026-09-06`
 
-## Current milestone
+## Latest completed milestone
 
 `PR5 — Pantry — COMPLETE`
 
@@ -42,9 +42,10 @@ FoodIngredient nutrition
 → Member target formula/config foundation
 ```
 
-PR5-CLOSE changes documentation/state only and stops for final project review.
-After its review and merge, the next agent may begin bounded PR6 from merged
-`main`, following the [handoff](handoff.md).
+PR5-CLOSE is merged. The [agent harness](../docs/family-food/agent-harness.md)
+is the active repository governance/instruction design. Its supporting governance
+work does not start PR6 or add a product milestone. The next product work is a
+separately bounded PR6 task from merged `main`, using the [handoff](handoff.md).
 
 PR7 MealPlan / Serving, PR8 Planner and every later milestone remain unauthorized:
 Shopping, Prep, Retail, AI, Auth, PostgreSQL, consumer PWA and Billing.

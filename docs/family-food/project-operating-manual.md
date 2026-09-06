@@ -3,46 +3,44 @@
 **Status:** canonical operational contract
 **Purpose:** rules for ChatGPT, Codex and other agents working on FamilyFoodOS.
 
-## 1. Required reading order
+## 1. Task-based reading
 
-Before any significant product, architecture, research or implementation task, read in this order:
+Ordinary repository work follows the root contract:
 
-1. `AGENTS.md`
-2. `docs/family-food/project-operating-manual.md`
-3. `docs/family-food/agent-git-pr-workflow.md`
-4. `state/current-focus.md`
-5. `docs/family-food/master-roadmap.md`
-6. the relevant canonical FamilyFoodOS documents:
-   - `docs/family-food/architecture.md`
-   - `docs/family-food/technical-spec.md`
-   - `docs/family-food/data-ingestion.md`
-   - `docs/family-food/migration-plan.md`
-7. relevant implementation code and tests
-8. `state/handoff.md` when continuing previous work
+`AGENTS.md → state/current-focus.md → applicable scoped AGENTS.md → relevant canonical docs → relevant code → relevant tests`
 
-Later, more focused canonical documents may be added under `docs/`. Read them when relevant.
+Read `state/handoff.md` only when continuing previous work. Load this Manual,
+the Master Roadmap and relevant architecture references when deciding milestone
+authorization, roadmap/gates, product or architecture, cross-context design,
+source-of-truth conflicts or substantial research. Broad documents are not a
+universal prerequisite for inspecting or correcting a current bounded context.
 
-Do not reconstruct project architecture from source code alone when a canonical document exists.
+Use the repository `family-food-pr-delivery` Skill for authorized PR delivery.
+Load `agent-git-pr-workflow.md` for unusual workflow questions or human review;
+it is not required before every implementation. Detailed routing and task/DoD
+requirements: [agent harness](agent-harness.md). Verification selection:
+[verification policy](verification-policy.md).
 
-## 2. Source-of-truth priority
+Do not reconstruct project architecture from legacy source code when a relevant
+canonical document exists.
 
-When information conflicts, use this order:
+## 2. Authority and conflicts
 
-1. latest explicit user-approved decision;
-2. repository `AGENTS.md`;
-3. current canonical `/docs`;
-4. this Operating Manual;
-5. older project documents;
-6. historical chat context;
-7. agent assumptions.
+Explicit user-approved instructions define the task/outcome. Root invariants
+and current canonical documents define durable project truth; the user may
+explicitly authorize changing it. If an ordinary task conflicts with that truth,
+stop and report the conflict rather than silently ignoring either source.
 
-Never silently change an approved architecture decision.
+Within repository guidance, root invariants govern, scoped rules add compatible
+local constraints and canonical documents own their stated subjects. This Manual
+is the broad operational reference. Older documents, chat and assumptions do not
+override current decisions. Skills are workflow guidance, subordinate to explicit
+user instructions and hard project constraints. Legacy source-product material
+is context, not current FamilyFoodOS product authority.
 
-If a change appears necessary, state:
-- current decision;
-- reason for changing it;
-- consequences;
-- proposed replacement.
+Never silently replace an approved decision. A proposed change must state the
+current decision, evidence/reason, consequences and proposed replacement, and
+receive explicit authorization before implementation depends on it.
 
 ## 3. Product mission
 
@@ -436,89 +434,37 @@ Required structure:
 - Tests
 - Acceptance criteria
 - Risks / limitations
+- Follow-up
 - Required final report
 
 Use `N/A` for irrelevant sections.
 
 Do not combine unrelated bounded contexts in one PR.
 
-Within that approved bounded task, Codex should execute routine implementation and Git mechanics autonomously according to:
-
-`docs/family-food/agent-git-pr-workflow.md`
-
-The default is not to return each ordinary staging/commit/push step to the user. The agent should implement, test, correct, verify, commit, push the feature branch and create/update the PR when those actions remain inside the authorized task.
-
-If resolution requires a new architecture, roadmap, scope, authoritative-data, licensing/rights or acceptance decision, Codex must stop with a concrete blocker instead of guessing.
+Within the approved task, use
+[family-food-pr-delivery](../../.agents/skills/family-food-pr-delivery/SKILL.md)
+for routine implementation and PR delivery. Task-local corrections and reversible
+Git mechanics do not require repeated approval. Stop when resolution needs a new
+architecture, roadmap, scope, authoritative-data, licensing/rights or acceptance
+decision. The [harness contract](agent-harness.md) retains task and DoD detail.
 
 ## 18. Git discipline
 
-`main` must remain working.
+Root `AGENTS.md` owns persistent Git and scope boundaries even when no Skill
+activates. The PR delivery Skill owns normal execution; the
+[Git/PR reference](agent-git-pr-workflow.md) owns unusual workflow questions,
+staging details and the human PR/report contract.
 
-Use small reviewable branches and PRs.
+Keep `main` working and use one bounded goal per feature-branch PR. No direct
+main push, autonomous self-merge, unauthorized history rewrite or next-milestone
+start. Do not weaken tests or silently change durable project truth.
 
-Canonical execution workflow:
-
-`docs/family-food/agent-git-pr-workflow.md`
-
-Default implementation lifecycle:
-
-```text
-read contracts
-→ implement bounded task
-→ focused tests
-→ fix implementation defects
-→ repeat verification
-→ full required regression/lint/build/diff checks
-→ staged scope audit
-→ commit feature branch
-→ push feature branch
-→ create/update Pull Request into main
-→ READY FOR FINAL REVIEW
-→ stop
-```
-
-Routine actions inside approved scope do not require repeated manual user confirmation.
-
-Agents MAY autonomously fix task-local implementation defects and make correction commits on the same feature branch.
-
-Agents MUST NOT:
-
-- push implementation commits directly to `main`;
-- merge their own PR without explicit post-review merge authorization;
-- force-push shared history without explicit authorization;
-- start the next milestone before current acceptance/merge unless canonical sequencing explicitly allows it;
-- weaken tests or acceptance criteria merely to obtain a green run;
-- silently change architecture, roadmap, scope, source-of-truth data, accepted corpus, migration authority or another gated decision.
-
-Before merge:
-
-- tests pass;
-- build passes;
-- diff is reviewed;
-- acceptance criteria are checked;
-- relevant documentation/state is updated.
-
-Before committing, audit staged scope and exclude local-only artifacts. At minimum use shell-equivalent checks for:
-
-```text
-git status --short
-git diff --cached --check
-git diff --cached --stat
-```
-
-Do not commit:
-
-- secrets;
-- API keys;
-- tokens;
-- real user personal data;
-- `.env`;
-- local databases;
-- local development environments.
-
-If a required verification cannot run, state the exact reason. Do not claim an unexecuted check passed.
-
-Implementation state is not acceptance state: an agent may set `READY FOR REVIEW` when implementation evidence is complete, but must not mark a milestone `COMPLETE` solely because code was committed or a PR was opened.
+Before review-ready state, satisfy the task's acceptance criteria and the
+[verification policy](verification-policy.md), audit the staged scope and update
+relevant docs/state. Report exact results and unavailable checks. Before merge,
+required review and verification evidence must be accepted. Implementation
+readiness is not acceptance: a commit or open PR never makes a milestone COMPLETE.
+Closure requires accepted review/merge evidence under its milestone contract.
 
 ## 19. Documentation and state
 

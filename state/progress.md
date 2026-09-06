@@ -16,10 +16,27 @@ PR4-DATA Recipe coverage support           COMPLETE
 PR4-DATA2 Russia/SPB corpus re-curation    COMPLETE
 PR4   Recipe Catalogue                     COMPLETE
 PR5   Pantry                               COMPLETE
-PR6   Nutrition Core                       AUTHORIZED / NEXT
+PR6   Nutrition Core                       AUTHORIZED / NOT STARTED
 ```
 
 Canonical implementation order remains `docs/family-food/master-roadmap.md`.
+
+## AGENT-HARNESS governance evidence
+
+PR #16 (PR5-CLOSE) merge was verified via GitHub and remote main on 2026-09-06:
+`abcb1ca8d464477baed72cdf8e06a0d126b5e743`, merged at `09:39:32Z`.
+[PR #17](https://github.com/Mitronomik/family-food-os/pull/17) carries the agent
+harness from that exact base: shorter root/scoped instructions, task routing,
+one PR delivery Skill, proportional verification policy,
+rule-disposition ledger and eight-case eval matrix. Roadmap edits are limited to
+reading navigation; UI instruction files remain unchanged (P2 follow-up).
+
+This is supporting governance, not a numbered milestone. No runtime/schema/data
+change or backend regression run is claimed. Verification evidence is recorded
+in [harness evals](../docs/family-food/agent-harness-evals.md). The harness
+establishes the active repository governance/instruction design and leaves
+product state unchanged: PR5 COMPLETE, PR6 AUTHORIZED / NOT STARTED,
+PR7+ unauthorized.
 
 ## PR5 closure
 
@@ -34,7 +51,7 @@ Canonical implementation order remains `docs/family-food/master-roadmap.md`.
 PR5-CLOSE reuses the accepted verification from PR #15, recorded below; no new
 regression run is claimed. The publication commit changed only state files,
 and the accepted head and merge commit have identical file trees.
-PR6 Nutrition Core is AUTHORIZED / NEXT and NOT STARTED.
+PR6 Nutrition Core is AUTHORIZED / NOT STARTED.
 
 ## PR5 implementation evidence
 
@@ -89,7 +106,7 @@ command. No conversion, invented expiry, food-safety recommendation, automatic
 conflict retry or idempotency key. Supported service commands own ledger writes;
 raw repository primitives are internal. No frontend or future context work.
 
-PR5 is COMPLETE. PR6 Nutrition Core is AUTHORIZED / NEXT and NOT STARTED.
+PR5 is COMPLETE. PR6 Nutrition Core is AUTHORIZED / NOT STARTED.
 Its scope remains FoodIngredient nutrition → RecipeVersion nutrition → Member
 target formula/config foundation. Serving begins only in PR7.
 
@@ -207,10 +224,10 @@ Ordered steps are durably reviewed in `data/curation/pr4-runtime/recipe-steps.js
 ## Current gate
 
 PR5 is COMPLETE.
-PR6 Nutrition Core is AUTHORIZED / NEXT and NOT STARTED.
+PR6 Nutrition Core is AUTHORIZED / NOT STARTED.
 
-PR5-CLOSE records accepted completion and authorization only; its next gate is
-final project review and merge. PR6 implementation belongs in a separate bounded
-PR after that gate. PR7 MealPlan / Serving, PR8 Planner and every later milestone
+PR5-CLOSE is merged and records accepted completion and authorization only.
+Harness governance does not start PR6; its implementation belongs in a separate
+bounded product PR. PR7 MealPlan / Serving, PR8 Planner and every later milestone
 remain unauthorized, including Shopping, Prep, Retail, AI, Auth, PostgreSQL,
 consumer PWA and Billing.
