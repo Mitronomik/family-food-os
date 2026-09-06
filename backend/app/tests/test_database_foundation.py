@@ -649,7 +649,8 @@ def test_user_mode_startup_creates_backup_before_migration_for_existing_database
     assert workspace_source == ("family-food-os",)
     assert "artifact_audit_operations" in backup_tables
     assert "households" in backup_tables
-    assert "food_ingredients" not in backup_tables
+    assert "food_ingredients" in backup_tables
+    assert "food_recipes" not in backup_tables
     assert result.applied_migrations == [expected_migration_ids()[-1]]
     tables = table_names(database_path)
     assert tables <= (CURRENT_ALLOWED_TABLES | {"legacy_marker"})

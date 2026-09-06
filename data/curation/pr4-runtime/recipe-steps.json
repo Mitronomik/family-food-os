@@ -1,0 +1,421 @@
+{
+  "schema_version": 1,
+  "status": "REVIEWED_PR4_RUNTIME_STEPS",
+  "source_basis": "Accepted PR4-DATA2 corpus plus source-derived ordered directions. For the three retained CACFP cards, steps are preserved from the prior source-hash-matched transcription. For other recipes, steps were transcribed from the official source artifact retrieved by the bounded GitHub Actions acquisition; optional/source-alternative wording is narrowed only where accepted DATA2 selected a source-explicit variant.",
+  "recipes": [
+    {
+      "recipe_source_id": "CACFP6-CORN-EDAMAME-BLEND",
+      "steps": [
+        "Heat oil in a medium non-stick saucepan over medium high heat.",
+        "Add onions and garlic. Sauté uncovered for 2 minutes.",
+        "Add corn. Sauté uncovered for 2 minutes stirring frequently.",
+        "Add edamame. Sauté uncovered over high heat for 2 minutes, stirring frequently.",
+        "Add carrots, coriander, sesame seeds, salt, and cilantro.",
+        "Sauté uncovered over high heat for 3 minutes, stirring frequently.",
+        "Critical Control Point: Heat to 140 °F or higher for at least 15 seconds.",
+        "Pour corn and edamame mixture into a baking dish (9” x13” x 2”).",
+        "Critical Control Point: Hold at 140 °F or higher until served.",
+        "Serve ½ cup (portion with ½ cup measuring cup or 4 oz spoodle)."
+      ],
+      "accepted_data2_sha256": "314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef",
+      "extraction_source_sha256": "314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef",
+      "comparison_result": "ACCEPTED_HASH_MATCHED_PRIOR_TRANSCRIPTION"
+    },
+    {
+      "recipe_source_id": "SNAP6-HEAVENLY-DEVILED-EGGS",
+      "steps": [
+        "Put eggs into a saucepan. Cover with cold water.",
+        "Bring eggs to a simmer (small bubbles) and cook for 12 minutes.",
+        "Remove from the heat and drain.",
+        "Crack eggs under cold water and allow to cool. Remove shells.",
+        "Split eggs in half, lengthwise and remove yolks.",
+        "Put yolks, dressing, salt, and pepper into a small zipper-lock plastic bag to mix.",
+        "Cut a small hole in a lower corner of the bag. Squeeze mixture into egg white halves."
+      ],
+      "accepted_data2_sha256": "1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+      "extraction_source_sha256": "1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+      "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "CACFP6-TABBOULEH",
+      "steps": [
+        "Rinse quinoa in a fine mesh strainer until water runs clear, not cloudy.",
+        "Combine quinoa, bulgur wheat, water, and salt in a large, covered stock pot.",
+        "Bring to a boil. Reduce heat to low. Simmer uncovered for 10-15 minutes until water is completely absorbed. Fluff.",
+        "Note: When done, quinoa will be soft, and a white ring will pop out of the kernel. The white ring will only appear when it is fully cooked.",
+        "Refrigerate and set aside for step 7.",
+        "Critical Control Point: Cool to 40 °F or lower within 4 hours.",
+        "Combine tomatoes, cucumbers, parsley, onions, bell peppers, mint, and cumin in a large bowl. Toss well.",
+        "Add cooled quinoa and bulgur wheat.",
+        "Add lemon juice and olive oil. Stir well.",
+        "Transfer all of ingredients into a large salad bowl.",
+        "Critical Control Point: Cool to 40 °F or lower within 4 hours.",
+        "Critical Control Point: Hold at 40 °F or below until served.",
+        "Serve ¾ cup (portion with ½ cup and ¼ cup measuring cups or 6 oz spoodle)."
+      ],
+      "accepted_data2_sha256": "ef746c97415426316a78995b42a1e7f5a5d76c0078e6f006ab9940f0120cca49",
+      "extraction_source_sha256": "ef746c97415426316a78995b42a1e7f5a5d76c0078e6f006ab9940f0120cca49",
+      "comparison_result": "ACCEPTED_HASH_MATCHED_PRIOR_TRANSCRIPTION"
+    },
+    {
+      "recipe_source_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE",
+      "steps": [
+        "Wash your hands before you begin.",
+        "Heat the non-stick pan on medium.",
+        "Lay one slice of bread in the pan.",
+        "Add half of the grated cheese, spreading it out evenly.",
+        "Add the vegetables and top with the remaining cheese, being sure to cover the vegetables.",
+        "Grill the sandwich three minutes on each side or until the slices have browned to perfection. Slice the sandwich on a diagonal and enjoy."
+      ],
+      "accepted_data2_sha256": "357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334",
+      "extraction_source_sha256": "357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334",
+      "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "CACFP6-CREAMY-COLESLAW",
+      "steps": [
+        "Dressing: Combine yogurt, mayonnaise, honey, vinegar, salt, and pepper in a medium mixing bowl. Stir well. Set aside for step 3.",
+        "Salad: Combine cabbage, carrots, onions, and dried cranberries in a large mixing bowl. Toss lightly. Set aside for step 3.",
+        "Five minutes before serving time pour dressing over vegetable mixture. Stir well.",
+        "Transfer coleslaw to a large serving dish.",
+        "Critical Control Point: Cool to 40 °F or lower within 4 hours.",
+        "Critical Control Point: Hold at 40 °F or below until served.",
+        "Serve ½ cup (portion with ½ cup measuring cup or 4 oz spoodle)."
+      ],
+      "accepted_data2_sha256": "8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6",
+      "extraction_source_sha256": "8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6",
+      "comparison_result": "ACCEPTED_HASH_MATCHED_PRIOR_TRANSCRIPTION"
+    },
+    {
+      "recipe_source_id": "TNC6-EGGS-SPINACH",
+      "steps": [
+        "Wash your hands with soap and water, then gather all your kitchen tools and ingredients and put them on a clean counter or other cooking surface.",
+        "Chop the spinach.",
+        "Measure the chopped spinach and set aside.",
+        "Crack one egg by hitting its midpoint quickly against the rim of a small bowl or cup.",
+        "Break the egg into the bowl or cup. Pour the egg into a larger bowl. Repeat with the remaining egg(s).",
+        "Whisk the eggs in the larger bowl until they are pale yellow.",
+        "Put the skillet on the stove or cooktop and turn the heat to medium. When the skillet is hot, add the oil. If using a nonstick skillet, you may need to add the oil before heating.",
+        "Carefully pour the eggs into the skillet.",
+        "Add the spinach to the eggs.",
+        "Drag the spatula across the bottom of the skillet to evenly scramble and cook the eggs and spinach.",
+        "Serve and enjoy the scrambled eggs with spinach."
+      ],
+      "accepted_data2_sha256": "0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+      "extraction_source_sha256": "0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+      "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "TNC6-APPLESAUCE",
+      "steps": [
+        "Wash your hands with soap and water, then gather all your kitchen tools and ingredients and put them on a clean counter or other cooking surface.",
+        "Use the apple corer or slicer to remove the core and cut the apple into slices. If you do not have a slicer, have a helper use a chef’s knife to take out the core and cut the apple into slices.",
+        "Dice the apple slices.",
+        "Measure the water and pour the water in the pot.",
+        "Add the diced apples to the pot with water, cover, and put the pot on the stove. Turn the heat to medium-low and cook until the apples are tender, about 25 minutes.",
+        "Take pot off the stove and set aside to cool a bit, about 10 minutes. Once it has cooled a bit, stir it to help the applesauce cool faster.",
+        "Mash the apples using a potato masher or fork.",
+        "Serve and enjoy the applesauce right away or store in the refrigerator in a lidded container. The applesauce will keep, covered and refrigerated, for up to 4 days."
+      ],
+      "accepted_data2_sha256": "7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+      "extraction_source_sha256": "7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+      "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP4-SPANISH-FRITTATA",
+      "steps": [
+        "Preheat the oven to 400 °F.",
+        "Put the potatoes in a non-stick skillet on the stove and cover with cold water. Turn the heat to medium-high and cook until the potatoes are easily pierced with a knife, about 15 minutes.",
+        "Drain the potatoes well, remove from the skillet, and set aside to cool. Then peel and cut into 1-inch cubes.",
+        "Put the eggs, salt, and pepper in a bowl and mix well with a whisk.",
+        "Return the skillet on the stove and turn the heat to medium-high. Add the oil. Add onion and cook about 5 minutes until soft. Add the cubed potatoes.",
+        "Pour the egg mixture over the potatoes and onions. Press down with a spatula to make an even layer and shake gently to prevent sticking. Lower to medium heat and cook about 7 minutes.",
+        "Transfer the skillet to the oven and cook until the frittata is completely set, about 5 minutes.",
+        "Gently loosen frittata from the pan. Place a serving plate over the skillet and carefully flip the frittata onto the plate.",
+        "Slice into 4 wedges. Serve warm."
+      ],
+      "accepted_data2_sha256": "b2ac0732c26ad10426343c5aab115248b020983fa4dcad79f230ff146a02641c",
+      "extraction_source_sha256": "b2ac0732c26ad10426343c5aab115248b020983fa4dcad79f230ff146a02641c",
+      "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "FNS5-BAKED-LENTILS-CASSEROLE",
+      "steps": [
+        "Preheat oven to 350°F.",
+        "Combine lentils, water, salt, onion, and tomatoes.",
+        "Place in 2 quart casserole dish and cover tightly with lid or foil.",
+        "Bake for 30 minutes.",
+        "Remove from oven and add carrots. Stir.",
+        "Cover and bake 30 minutes longer.",
+        "Remove cover and sprinkle cheese on top.",
+        "Bake uncovered 5 minutes, until cheese melts."
+      ],
+      "accepted_data2_sha256": "86b118c36ca73b75618e1656bbc96c2c06f59785ca7292efc47be0fe99cc4598",
+      "extraction_source_sha256": "5418c166bebc8da03e9be76814652e7e4749134be27f375ec3a0bd55d14f3275",
+      "comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "HARV6-FRESH-TOMATO-SALSA",
+      "steps": [
+        "In a medium-size bowl, combine tomato, apple, onion and lime juice. Mix well.",
+        "Add garlic, vegetable oil, and salt to bowl. Mix well.",
+        "Cover bowl and refrigerate for 15 minutes. Serve cold."
+      ],
+      "accepted_data2_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "extraction_source_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "HARV6-GARDEN-PASTA-SALAD",
+      "steps": [
+        "In a medium-size bowl, combine macaroni, onions, cucumbers, and green peppers. Mix well.",
+        "In a separate bowl, mix vinegar, vegetable oil, salt, and pepper.",
+        "Pour the prepared dressing over the pasta. Mix well.",
+        "Cover bowl and refrigerate for 30 to 45 minutes. Serve cold."
+      ],
+      "accepted_data2_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "extraction_source_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP6-SPINACH-APPLE-SALAD",
+      "steps": [
+        "Combine spinach, apples and raisins.",
+        "Mix all dressing ingredients and pour over salad just prior to serving."
+      ],
+      "accepted_data2_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "extraction_source_sha256": "ca64c3067cf70a01910765914e71e87c6c56312c7a806442c2ead1c54bd56c69",
+      "comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP6-PEACH-CRISP",
+      "steps": [
+        "Preheat the oven to 375 degrees F.",
+        "Slice the peaches.",
+        "Spread the peach slices on the bottom of the baking pan.",
+        "Melt the margarine in a saucepan.",
+        "In a small bowl, mix everything but the peaches. Stir until the mix is well blended.",
+        "Sprinkle the oat mix on top of the peaches.",
+        "Bake for 20 minutes."
+      ],
+      "accepted_data2_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "extraction_source_sha256": "6f2fc6c351ca1526b29c5b44c27d25ec17b403ec5168819b790df48414768a8f",
+      "comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP6-SEARED-GREENS",
+      "steps": [
+        "Clean the greens thoroughly and cut stems away. Dry well and tear into salad pieces or slice across leaf into 1/2 inch pieces.",
+        "In a large deep pot or skillet with a cover, sauté garlic in oil. Add greens in pan with 1 cup water.",
+        "Cover pan and steam for 4 minutes.",
+        "Uncover, stir constantly until greens shrink. Add salt and pepper and continue to stir on high until mixture is thoroughly wet.",
+        "Sprinkle cider vinegar on mixture. Cover.",
+        "Turn off heat. Let stand until ready to serve."
+      ],
+      "accepted_data2_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "extraction_source_sha256": "fa6a7b9e713999dbc8adf9d1cb18e33907cee7f71668b825fc86397d0cf34d19",
+      "comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP8-SOMALI-SUMMER-SALAD",
+      "steps": [
+        "In a large bowl, combine oil and lemon juice.",
+        "Dice all the fruits and vegetables and then add to the bowl.",
+        "Serve chilled.",
+        "Best served within 24 hours."
+      ],
+      "accepted_data2_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "extraction_source_sha256": "6f2fc6c351ca1526b29c5b44c27d25ec17b403ec5168819b790df48414768a8f",
+      "comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "FNS2-ORANGE-PORK-CHOPS",
+      "steps": [
+        "Preheat oven to 350°F.",
+        "Place sweet potato slices on half of a baking dish and place in oven.",
+        "Heat oil in a skillet over medium high heat. Brown pork chops on both sides.",
+        "Add pork chops to baking dish with sweet potato slices and top with orange slices.",
+        "Cover and bake for 20-30 minutes until pork chops are tender. Baking time will vary depending on thickness of pork chops."
+      ],
+      "accepted_data2_sha256": "aa07563b660219b4173edc63cf6f76478e1bc71bff7f0c8a54fc5eaf5985a479",
+      "extraction_source_sha256": "a18a0b3187bfb03f6bee5ca537d920a73b52728bf8ac1306fc4442af8a4d97d9",
+      "comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "WIC4-BUTTERNUT-SOUP",
+      "steps": [
+        "Preheat the oven to 425 degrees Fahrenheit and line a rimmed baking sheet with parchment paper.",
+        "Cut the butternut squash in half lengthwise and remove the seeds. Use a slip-free cutting board, or place a lightly damp tea towel beneath your cutting board to keep it from moving around. Use the knife to cut off the tip-top and very bottom ends of the squash. Stand the squash upright with the thickest flat side as the base. Carefully slice through it from top to bottom to divide it in half (your fingers should never be in the blade’s way). Use a large spoon to scoop out the seeds.",
+        "Place the butternut squash on the pan and drizzle each half with just enough olive oil to lightly coat the squash on the inside (about ½ teaspoon each). Rub the oil over the inside of the squash and sprinkle it with salt.",
+        "Turn the squash face down and roast until it's tender and completely cooked through, about 40 to 50 minutes (don’t worry if the skin or flesh browns—that’s good for flavor). Set the squash aside until it’s cool enough to handle, about 10 minutes. ( Don't let this cool too much, it's easier to work with while it's still warm.)",
+        "Scoop the squash into a soup pot, add milk, and blend with an immersion blender.",
+        "Warm the blended soup in the soup pot over medium heat, stirring often."
+      ],
+      "accepted_data2_sha256": "ee642490786720348eae5f18170c5dcb26a0c7b22b042fc829ab0dc6ee1e95e8",
+      "extraction_source_sha256": "773eb1c56185960f7ff56b9608aca337b57841636121c56775e413f61495a898",
+      "comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+      "steps": [
+        "Combine the milk, oats, yogurt, and cinnamon in a jar or resealable container and stir well. Cover and refrigerate overnight, or for at least 5 hours.",
+        "When you're ready to enjoy, chop and add the apple."
+      ],
+      "accepted_data2_sha256": "0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+      "extraction_source_sha256": "0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+      "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+      "steps": [
+        "In a blender, blend the spinach and low-fat milk.",
+        "Add in the rest of the ingredients, blending after each item.",
+        "Serve and enjoy, cold.",
+        "Reserve the leftover smoothie in the refrigerator for later in the day or the next day."
+      ],
+      "accepted_data2_sha256": "240c8b7a10a0399cb70743d48f59c9d6b828c8e640e9cbfc1eec0762cf6108ca",
+      "extraction_source_sha256": "ccb4e5e3c8d2d989507757df0297cfc81ecb679afdb4532c409198865aed6caf",
+      "comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP3-GRILLED-FRUIT",
+      "steps": [
+        "Wash hands with soap and water.",
+        "Place fruit chunks on a skewer to make kabobs.",
+        "Grill or broil on low heat until the fruit is hot and slightly golden."
+      ],
+      "accepted_data2_sha256": "03269eead24a3965e76c71a9eed6b7b82b9d785845427fa9b8b445aee55cf6f9",
+      "extraction_source_sha256": "a5e24565ab33be99ebdce32d8d33fd9313ecdd318299214573cc4b70ad06c739",
+      "comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
+      "steps": [
+        "Wash hands and then rinse fruits and vegetables before getting started.",
+        "Place all ingredients in a blender. Blend on high until smooth, about 1-2 minutes.",
+        "Pour into 2 glasses and enjoy as a snack."
+      ],
+      "accepted_data2_sha256": "439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6",
+      "extraction_source_sha256": "439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6",
+      "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP4-PEAR-ORANGE-SAUCE",
+      "steps": [
+        "Peel the pears and cook in a double boiler for 15 minutes.",
+        "Mix sugar and orange juice and cook over low flame for 5 minutes. Cool for 5 minutes.",
+        "Place steamed pears on individual plates. Pour ¼ juice mixture over each and serve."
+      ],
+      "accepted_data2_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "extraction_source_sha256": "ca64c3067cf70a01910765914e71e87c6c56312c7a806442c2ead1c54bd56c69",
+      "comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
+      "steps": [
+        "Heat the oil in a skillet. Cook the onion 2 minutes, add the garlic and cook another minute",
+        "Stir in the potatoes and carrots. Cover, turn the heat to low, and cook until almost tender, about 4 minutes.",
+        "If the vegetables start to brown, add a Tablespoon or 2 of water.",
+        "Now add the asparagus, peas, radishes, salt, pepper, and dill. Cook, stirring often, until just tender - about 4 minutes more.",
+        "Serve immediately."
+      ],
+      "accepted_data2_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "extraction_source_sha256": "fa6a7b9e713999dbc8adf9d1cb18e33907cee7f71668b825fc86397d0cf34d19",
+      "comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "FNS4-OVEN-FRIED-FISH",
+      "steps": [
+        "Preheat oven to 350°F.",
+        "In a small bowl, add egg, salt, and pepper and beat together.",
+        "Place the breadcrumbs in a separate bowl. Dip fish fillets in the egg mixture, then dip in the breadcrumbs to coat.",
+        "Melt butter in a shallow 9x13 inch baking pan for 1 minute in the oven. Tilt pan to coat with butter.",
+        "Arrange fish fillets in the pan.",
+        "Bake uncovered for 15-20 minutes, until fish flakes easily with a fork."
+      ],
+      "accepted_data2_sha256": "068b5b0d4c7e45ad498758501bcc8f67b7e5f69f9c27ea4db4af39b05cba069c",
+      "extraction_source_sha256": "e7551e168dbdeb5b1b86348e23b5f06b02bcec72cae62b74bb1d66e2145b4e43",
+      "comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP8-APPLE-CARROT-SOUP",
+      "steps": [
+        "Wash hands with soap and water.",
+        "In a large pot over high heat, combine pork, apples, carrots, ginger, salt, and water; bring to a boil.",
+        "Reduce heat to medium and simmer until soup reduces to about 8 cups of liquid, about 3 to 4 hours.",
+        "Skim fat from surface and serve.",
+        "Store leftover soup covered in refrigerator for up to 3 days."
+      ],
+      "accepted_data2_sha256": "1cc2ed9ddb3253b4a9a5ed9aa6609184e7381035977d00a542a00239f8261258",
+      "extraction_source_sha256": "426d8ddce559cd11970b1e5e1e9716505af0ced41217fc7eb98f8b4a57fc0093",
+      "comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP6-WALDORF-SALAD",
+      "steps": [
+        "Preheat oven to 350 degrees.",
+        "Place chopped walnuts on a baking sheet and bake for 12-15 minutes. Stir occasionally until they are evenly toasted.",
+        "Combine apples, celery, nuts, and raisins.",
+        "Stir together yogurt, sugar, and lemon juice. Pour over apple mixture and toss lightly.",
+        "Refrigerate leftovers within 2 hours."
+      ],
+      "accepted_data2_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "extraction_source_sha256": "ca64c3067cf70a01910765914e71e87c6c56312c7a806442c2ead1c54bd56c69",
+      "comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP4-BROWN-RICE-PILAF",
+      "steps": [
+        "Wash hands with soap and water.",
+        "Place all ingredients in a rice cooker and cook until the water evaporates, about 30 minutes.",
+        "Fluff cooked rice with a fork."
+      ],
+      "accepted_data2_sha256": "f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281",
+      "extraction_source_sha256": "7cccf08860c222aa69d1e5e00efb59a876e8e6a67603b91229d0d7c3d6c18b51",
+      "comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP5-KALE-NUTS-RAISINS",
+      "steps": [
+        "Wash hands with soap and water.",
+        "Heat oven to 350°F.",
+        "On a baking sheet, toast nuts for 5 minutes.",
+        "Heat oil in frying pan on medium heat.",
+        "Add garlic and kale to frying pan and cook for 4 minutes.",
+        "Add raisins and nuts and cook for 1 minute more."
+      ],
+      "accepted_data2_sha256": "7c2bb840618e0dfbe372e9ecdb697ad59d2fab36e0fbf07cabe347a93ea6a1a0",
+      "extraction_source_sha256": "fd7b2a1381549e7bae17148ed99d110b17397cb4a1997eaebb815711ff056e16",
+      "comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
+      "steps": [
+        "Heat skillet over medium-high heat. Add 1 teaspoon oil. Add chicken, top side down. Cook about 8 minutes on each side, or until deeply browned. Remove the chicken to a dinner plate and set aside.",
+        "Reheat skillet over medium heat. Add the onion, garlic, thyme, and rosemary. Cook about 5 minutes, until the onion is soft and golden. Return the chicken to the pan.",
+        "Add the water, and cover. Continue cooking for about 30 minutes.",
+        "Add the fresh spinach and cook about 2 minutes, until it wilts. Serve right away."
+      ],
+      "accepted_data2_sha256": "d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+      "extraction_source_sha256": "d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+      "comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP4-DILLED-FISH-FILLETS",
+      "steps": [
+        "Thaw frozen fish in microwave oven. Wash hands with soap and water. Then, separate into 4 fillets or pieces.",
+        "Place fish in a glass-baking dish. Cover with wax paper.",
+        "Cook at \"medium\" power in the microwave for 3 minutes. Remove cover, turn fish over, and sprinkle with lemon juice, dill, and salt.",
+        "Cover and continue cooking at \"medium\" power for 3 minutes or until fish flakes with a fork."
+      ],
+      "accepted_data2_sha256": "43d44c84d7c007a0c32906210b13212ffb43fb7a62312e9fb43c819f8a8a63a3",
+      "extraction_source_sha256": "cf244124ef9fae3ad938a3f9b120b00efafdb8c464a0796cd7cd5e5a64afd536",
+      "comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    }
+  ],
+  "counts": {
+    "recipes": 30,
+    "steps": 169
+  },
+  "scope": "Ordered source-derived directions for the accepted PR4-DATA2 final 30 only. This is curation evidence for deterministic offline seed compilation, not a network ingestion path. Optional ingredients/alternatives are narrowed only when DATA2 already selected a source-explicit variant."
+}

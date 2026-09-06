@@ -1,0 +1,623 @@
+{
+  "schema_version": 2,
+  "accepted_data2_checked_at": "2026-09-05",
+  "sources": [
+    {
+      "recipe_source_id": "CACFP6-CORN-EDAMAME-BLEND",
+      "source_name": "USDA_FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
+      "source_version": "sha256:314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef",
+      "source_original_servings": 6,
+      "source_retrieved_at": "2026-09-04T04:35:40.896467+00:00",
+      "accepted_data2_sha256": "314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef",
+      "source_document_sha256": "314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Direct FNS CACFP card reviewed under the project risk classification approved in issue #12 and recipe-localization-and-substitution.md. Not a blanket public-domain or unrestricted commercial/derivative license assertion. Preserve attribution; no source photographs, logos or trademarks imported.",
+      "rights_evidence_urls": [
+        "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
+        "https://github.com/Mitronomik/family-food-os/issues/12"
+      ],
+      "source_attribution": "USDA FNS CACFP Home Childcare — Side Dishes; Corn and Edamame Blend",
+      "retrieval_method": "RECOVERED_HISTORICAL_COMPLETION",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef",
+      "step_comparison_result": "ACCEPTED_HASH_MATCHED_PRIOR_TRANSCRIPTION"
+    },
+    {
+      "recipe_source_id": "SNAP6-HEAVENLY-DEVILED-EGGS",
+      "source_name": "USDA_FNS",
+      "source_url": "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
+      "source_version": "sha256:1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+      "source_original_servings": 6,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+      "source_document_sha256": "1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Approved narrow direct-FNS project risk posture, issue #12 and recipe-localization-and-substitution.md; no federal-employee authorship inference, blanket public-domain assertion or unrestricted commercial/derivative rights. Preserve actual attribution; no photos/logos/marks imported.",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
+        "https://github.com/Mitronomik/family-food-os/issues/12"
+      ],
+      "source_attribution": "ONIE Project - Oklahoma Nutrition Information and Education. Simple Healthy Recipes.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+      "step_comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "CACFP6-TABBOULEH",
+      "source_name": "USDA_FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tabbouleh_6_Servings.pdf",
+      "source_version": "sha256:ef746c97415426316a78995b42a1e7f5a5d76c0078e6f006ab9940f0120cca49",
+      "source_original_servings": 6,
+      "source_retrieved_at": "2026-09-04T04:35:52.082224+00:00",
+      "accepted_data2_sha256": "ef746c97415426316a78995b42a1e7f5a5d76c0078e6f006ab9940f0120cca49",
+      "source_document_sha256": "ef746c97415426316a78995b42a1e7f5a5d76c0078e6f006ab9940f0120cca49",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Direct FNS CACFP card reviewed under the project risk classification approved in issue #12 and recipe-localization-and-substitution.md. Not a blanket public-domain or unrestricted commercial/derivative license assertion. Preserve attribution; no source photographs, logos or trademarks imported.",
+      "rights_evidence_urls": [
+        "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tabbouleh_6_Servings.pdf",
+        "https://github.com/Mitronomik/family-food-os/issues/12"
+      ],
+      "source_attribution": "USDA FNS CACFP Home Childcare — Side Dishes; Tabbouleh",
+      "retrieval_method": "RECOVERED_HISTORICAL_COMPLETION",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "ef746c97415426316a78995b42a1e7f5a5d76c0078e6f006ab9940f0120cca49",
+      "step_comparison_result": "ACCEPTED_HASH_MATCHED_PRIOR_TRANSCRIPTION"
+    },
+    {
+      "recipe_source_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE",
+      "source_name": "USDA_FNS",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese/printable/print",
+      "source_version": "sha256:357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334",
+      "source_original_servings": 1,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334",
+      "source_document_sha256": "357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Approved narrow direct-FNS project risk posture, issue #12 and recipe-localization-and-substitution.md; no federal-employee authorship inference, blanket public-domain assertion or unrestricted commercial/derivative rights. Preserve actual attribution; no photos/logos/marks imported.",
+      "rights_evidence_urls": [
+        "https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese/printable/print",
+        "https://github.com/Mitronomik/family-food-os/issues/12"
+      ],
+      "source_attribution": "USDA Food and Nutrition Service, WIC Works Resource System. Complete native printable source identifies WIC Works and the canonical source URL; no separate contributor is identified in this representation.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334",
+      "step_comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "CACFP6-CREAMY-COLESLAW",
+      "source_name": "USDA_FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf",
+      "source_version": "sha256:8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6",
+      "source_original_servings": 6,
+      "source_retrieved_at": "2026-09-04T04:34:53.373753+00:00",
+      "accepted_data2_sha256": "8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6",
+      "source_document_sha256": "8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Direct FNS CACFP card reviewed under the project risk classification approved in issue #12 and recipe-localization-and-substitution.md. Not a blanket public-domain or unrestricted commercial/derivative license assertion. Preserve attribution; no source photographs, logos or trademarks imported.",
+      "rights_evidence_urls": [
+        "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf",
+        "https://github.com/Mitronomik/family-food-os/issues/12"
+      ],
+      "source_attribution": "USDA FNS CACFP Home Childcare — Side Dishes; Creamy Coleslaw",
+      "retrieval_method": "RECOVERED_HISTORICAL_COMPLETION",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6",
+      "step_comparison_result": "ACCEPTED_HASH_MATCHED_PRIOR_TRANSCRIPTION"
+    },
+    {
+      "recipe_source_id": "TNC6-EGGS-SPINACH",
+      "source_name": "USDA_FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+      "source_version": "sha256:0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+      "source_original_servings": 6,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+      "source_document_sha256": "0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. Collection permits downloading/copying materials; that wording is not extended to a blanket commercial/derivative grant.",
+      "rights_evidence_urls": [
+        "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+        "https://www.fns.usda.gov/tn/cooks"
+      ],
+      "source_attribution": "USDA FNS, Team Nutrition Cooks! Scrambled Eggs with Spinach Family Handout.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+      "step_comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "TNC6-APPLESAUCE",
+      "source_name": "USDA_FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+      "source_version": "sha256:7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+      "source_original_servings": 6,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+      "source_document_sha256": "7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. Collection permits downloading/copying materials; that wording is not extended to a blanket commercial/derivative grant.",
+      "rights_evidence_urls": [
+        "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+        "https://www.fns.usda.gov/tn/cooks"
+      ],
+      "source_attribution": "USDA FNS, Team Nutrition Cooks! Applesauce Family Handout.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+      "step_comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP4-SPANISH-FRITTATA",
+      "source_name": "USDA_FNS",
+      "source_url": "https://snaped.fns.usda.gov/snap/MPMF/Handouts/HowMuchFoodandPhysicalActivityHandouts.pdf",
+      "source_version": "sha256:b2ac0732c26ad10426343c5aab115248b020983fa4dcad79f230ff146a02641c",
+      "source_original_servings": 4,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "b2ac0732c26ad10426343c5aab115248b020983fa4dcad79f230ff146a02641c",
+      "source_document_sha256": "b2ac0732c26ad10426343c5aab115248b020983fa4dcad79f230ff146a02641c",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Direct FNS source reviewed under the narrow project risk posture approved in issue #12 and recipe-localization-and-substitution.md. This is not blanket public-domain or unrestricted commercial/derivative permission. Preserve external contributor attribution. No source photos, logos, marks or nutrition panel imported.",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/snap/MPMF/Handouts/HowMuchFoodandPhysicalActivityHandouts.pdf",
+        "https://github.com/Mitronomik/family-food-os/issues/12"
+      ],
+      "source_attribution": "USDA Food and Nutrition Service, MyPlate for My Family, November 2014; Spanish Frittata",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "b2ac0732c26ad10426343c5aab115248b020983fa4dcad79f230ff146a02641c",
+      "step_comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "FNS5-BAKED-LENTILS-CASSEROLE",
+      "source_name": "USDA_FNS",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/lentils-casserole",
+      "source_version": "sha256:86b118c36ca73b75618e1656bbc96c2c06f59785ca7292efc47be0fe99cc4598",
+      "source_original_servings": 5,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "86b118c36ca73b75618e1656bbc96c2c06f59785ca7292efc47be0fe99cc4598",
+      "source_document_sha256": "86b118c36ca73b75618e1656bbc96c2c06f59785ca7292efc47be0fe99cc4598",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Direct FNS source reviewed under the narrow project risk posture approved in issue #12 and recipe-localization-and-substitution.md. This is not blanket public-domain or unrestricted commercial/derivative permission. Preserve external contributor attribution. No source photos, logos, marks or nutrition panel imported.",
+      "rights_evidence_urls": [
+        "https://fns-prod.azureedge.us/americasharvest/budget/main/lentils-casserole",
+        "https://github.com/Mitronomik/family-food-os/issues/12"
+      ],
+      "source_attribution": "Let's Make Meatless Meals, University of Wisconsin Cooperative Extension Service, adapted by USDA Food and Nutrition Administration",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "5418c166bebc8da03e9be76814652e7e4749134be27f375ec3a0bd55d14f3275",
+      "step_comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "HARV6-FRESH-TOMATO-SALSA",
+      "source_name": "USDA_FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_version": "sha256:36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "source_original_servings": 6,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "source_document_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_urls": [
+        "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+        "https://www.fns.usda.gov/fdpir/harvest-recipes-usda-foods"
+      ],
+      "source_attribution": "USDA FNS FDPIR, A Harvest of Recipes with USDA Foods, FNS-430; collection acknowledgments retained.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "step_comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "HARV6-GARDEN-PASTA-SALAD",
+      "source_name": "USDA_FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+      "source_version": "sha256:36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "source_original_servings": 6,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "source_document_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_urls": [
+        "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+        "https://www.fns.usda.gov/fdpir/harvest-recipes-usda-foods"
+      ],
+      "source_attribution": "USDA FNS FDPIR, A Harvest of Recipes with USDA Foods, FNS-430; collection acknowledgments retained.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "step_comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP6-SPINACH-APPLE-SALAD",
+      "source_name": "USDA_FNS",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "source_version": "sha256:7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "source_original_servings": 6,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "source_document_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes"
+      ],
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "ca64c3067cf70a01910765914e71e87c6c56312c7a806442c2ead1c54bd56c69",
+      "step_comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP6-PEACH-CRISP",
+      "source_name": "USDA_FNS",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+      "source_version": "sha256:44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "source_original_servings": 6,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "source_document_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes"
+      ],
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "6f2fc6c351ca1526b29c5b44c27d25ec17b403ec5168819b790df48414768a8f",
+      "step_comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP6-SEARED-GREENS",
+      "source_name": "USDA_FNS",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "source_version": "sha256:63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "source_original_servings": 6,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "source_document_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes"
+      ],
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "fa6a7b9e713999dbc8adf9d1cb18e33907cee7f71668b825fc86397d0cf34d19",
+      "step_comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP8-SOMALI-SUMMER-SALAD",
+      "source_name": "USDA_FNS",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+      "source_version": "sha256:44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "source_original_servings": 8,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "source_document_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes"
+      ],
+      "source_attribution": "USDA FNS SNAP-Ed; North Dakota Food and Culture: A Taste of World Cuisine, NDSU Extension, recipe page 24 (credit recovered from FNS Ramadan menu).",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "6f2fc6c351ca1526b29c5b44c27d25ec17b403ec5168819b790df48414768a8f",
+      "step_comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "FNS2-ORANGE-PORK-CHOPS",
+      "source_name": "USDA_FNS",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/orange-porkchops",
+      "source_version": "sha256:aa07563b660219b4173edc63cf6f76478e1bc71bff7f0c8a54fc5eaf5985a479",
+      "source_original_servings": 2,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "aa07563b660219b4173edc63cf6f76478e1bc71bff7f0c8a54fc5eaf5985a479",
+      "source_document_sha256": "aa07563b660219b4173edc63cf6f76478e1bc71bff7f0c8a54fc5eaf5985a479",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Direct FNS source reviewed under the narrow project risk posture approved in issue #12 and recipe-localization-and-substitution.md. This is not blanket public-domain or unrestricted commercial/derivative permission. Preserve external contributor attribution. No source photos, logos, marks or nutrition panel imported.",
+      "rights_evidence_urls": [
+        "https://fns-prod.azureedge.us/americasharvest/budget/main/orange-porkchops",
+        "https://github.com/Mitronomik/family-food-os/issues/12"
+      ],
+      "source_attribution": "Simply Seniors Cookbook, Utah State University Cooperative Extension, adapted by USDA Food and Nutrition Administration",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "a18a0b3187bfb03f6bee5ca537d920a73b52728bf8ac1306fc4442af8a4d97d9",
+      "step_comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "WIC4-BUTTERNUT-SOUP",
+      "source_name": "USDA_FNS",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+      "source_version": "sha256:ee642490786720348eae5f18170c5dcb26a0c7b22b042fc829ab0dc6ee1e95e8",
+      "source_original_servings": 4,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "ee642490786720348eae5f18170c5dcb26a0c7b22b042fc829ab0dc6ee1e95e8",
+      "source_document_sha256": "ee642490786720348eae5f18170c5dcb26a0c7b22b042fc829ab0dc6ee1e95e8",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. WIC submission policy requires permission to share; it is not an independent unlimited commercial/derivative grant. No linked recipe-level restrictive license was found on this selected card.",
+      "rights_evidence_urls": [
+        "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+        "https://wicworks.fns.usda.gov/es/node/1807"
+      ],
+      "source_attribution": "USDA FNS WIC Works — Recipes; reviewed recipe section gives no separate original contributor credit.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "773eb1c56185960f7ff56b9608aca337b57841636121c56775e413f61495a898",
+      "step_comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+      "source_name": "USDA_FNS",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+      "source_version": "sha256:0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+      "source_original_servings": 1,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+      "source_document_sha256": "0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. WIC submission policy requires permission to share; it is not an independent unlimited commercial/derivative grant. No linked recipe-level restrictive license was found on this selected card.",
+      "rights_evidence_urls": [
+        "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+        "https://wicworks.fns.usda.gov/es/node/1807"
+      ],
+      "source_attribution": "USDA FNS WIC Works — Recipes; reviewed recipe section gives no separate original contributor credit.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+      "step_comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+      "source_name": "USDA_FNS",
+      "source_url": "https://snaped.fns.usda.gov/node/2489",
+      "source_version": "sha256:240c8b7a10a0399cb70743d48f59c9d6b828c8e640e9cbfc1eec0762cf6108ca",
+      "source_original_servings": 2,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "240c8b7a10a0399cb70743d48f59c9d6b828c8e640e9cbfc1eec0762cf6108ca",
+      "source_document_sha256": "240c8b7a10a0399cb70743d48f59c9d6b828c8e640e9cbfc1eec0762cf6108ca",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Direct FNS source reviewed under the narrow project risk posture approved in issue #12 and recipe-localization-and-substitution.md. This is not blanket public-domain or unrestricted commercial/derivative permission. Preserve external contributor attribution. No source photos, logos, marks or nutrition panel imported.",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/node/2489",
+        "https://github.com/Mitronomik/family-food-os/issues/12"
+      ],
+      "source_attribution": "USDA FNS SNAP-Ed, Simple Green Smoothie; original contributor Northern Valley Catholic Social Service, credited in the historical USDA Mixing Bowl print preserved by Cornell Cooperative Extension",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "ccb4e5e3c8d2d989507757df0297cfc81ecb679afdb4532c409198865aed6caf",
+      "step_comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP3-GRILLED-FRUIT",
+      "source_name": "USDA_FNS",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit",
+      "source_version": "sha256:03269eead24a3965e76c71a9eed6b7b82b9d785845427fa9b8b445aee55cf6f9",
+      "source_original_servings": 3,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "03269eead24a3965e76c71a9eed6b7b82b9d785845427fa9b8b445aee55cf6f9",
+      "source_document_sha256": "03269eead24a3965e76c71a9eed6b7b82b9d785845427fa9b8b445aee55cf6f9",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit"
+      ],
+      "source_attribution": "USDA FNS SNAP-Ed; University of Wyoming Cooperative Extension, Cent$ible Nutrition Program, Cooking for You or Two, page 196 (credit in earlier FNS Labor Day menu).",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "a5e24565ab33be99ebdce32d8d33fd9313ecdd318299214573cc4b70ad06c739",
+      "step_comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
+      "source_name": "USDA_FNS",
+      "source_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+      "source_version": "sha256:439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6",
+      "source_original_servings": 2,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6",
+      "source_document_sha256": "439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. WIC submission policy requires permission to share; it is not an independent unlimited commercial/derivative grant. No linked recipe-level restrictive license was found on this selected card.",
+      "rights_evidence_urls": [
+        "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+        "https://wicworks.fns.usda.gov/es/node/1807"
+      ],
+      "source_attribution": "USDA FNS WIC Works; Virginia Beach WIC.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6",
+      "step_comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP4-PEAR-ORANGE-SAUCE",
+      "source_name": "USDA_FNS",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "source_version": "sha256:7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "source_original_servings": 4,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "source_document_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes"
+      ],
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "ca64c3067cf70a01910765914e71e87c6c56312c7a806442c2ead1c54bd56c69",
+      "step_comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
+      "source_name": "USDA_FNS",
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "source_version": "sha256:63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "source_original_servings": 4,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "source_document_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes"
+      ],
+      "source_attribution": "USDA FNS SNAP-Ed; original MyPlate page credits US Department of Health and Human Services, National Cancer Institute.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "fa6a7b9e713999dbc8adf9d1cb18e33907cee7f71668b825fc86397d0cf34d19",
+      "step_comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "FNS4-OVEN-FRIED-FISH",
+      "source_name": "USDA_FNS",
+      "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/fish",
+      "source_version": "sha256:068b5b0d4c7e45ad498758501bcc8f67b7e5f69f9c27ea4db4af39b05cba069c",
+      "source_original_servings": 4,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "068b5b0d4c7e45ad498758501bcc8f67b7e5f69f9c27ea4db4af39b05cba069c",
+      "source_document_sha256": "068b5b0d4c7e45ad498758501bcc8f67b7e5f69f9c27ea4db4af39b05cba069c",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Direct FNS source reviewed under the narrow project risk posture approved in issue #12 and recipe-localization-and-substitution.md. This is not blanket public-domain or unrestricted commercial/derivative permission. Preserve external contributor attribution. No source photos, logos, marks or nutrition panel imported.",
+      "rights_evidence_urls": [
+        "https://fns-prod.azureedge.us/americasharvest/budget/main/fish",
+        "https://github.com/Mitronomik/family-food-os/issues/12"
+      ],
+      "source_attribution": "Eating Smart, Being Active, Colorado State University and University of California at Davis, adapted by USDA Food and Nutrition Administration",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "e7551e168dbdeb5b1b86348e23b5f06b02bcec72cae62b74bb1d66e2145b4e43",
+      "step_comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP8-APPLE-CARROT-SOUP",
+      "source_name": "USDA_FNS",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+      "source_version": "sha256:1cc2ed9ddb3253b4a9a5ed9aa6609184e7381035977d00a542a00239f8261258",
+      "source_original_servings": 8,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "1cc2ed9ddb3253b4a9a5ed9aa6609184e7381035977d00a542a00239f8261258",
+      "source_document_sha256": "1cc2ed9ddb3253b4a9a5ed9aa6609184e7381035977d00a542a00239f8261258",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup"
+      ],
+      "source_attribution": "USDA FNS SNAP-Ed; San Francisco Department of Public Health, Chinatown Public Health Center, Healthy and Delicious—Simple Ways to Low Fat Chinese Cooking (credit recovered from FNS Chinese New Year menu).",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "426d8ddce559cd11970b1e5e1e9716505af0ced41217fc7eb98f8b4a57fc0093",
+      "step_comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP6-WALDORF-SALAD",
+      "source_name": "USDA_FNS",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+      "source_version": "sha256:7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "source_original_servings": 6,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "source_document_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes"
+      ],
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "ca64c3067cf70a01910765914e71e87c6c56312c7a806442c2ead1c54bd56c69",
+      "step_comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP4-BROWN-RICE-PILAF",
+      "source_name": "USDA_FNS",
+      "source_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+      "source_version": "sha256:f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281",
+      "source_original_servings": 4,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281",
+      "source_document_sha256": "f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day"
+      ],
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "7cccf08860c222aa69d1e5e00efb59a876e8e6a67603b91229d0d7c3d6c18b51",
+      "step_comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP5-KALE-NUTS-RAISINS",
+      "source_name": "USDA_FNS",
+      "source_url": "https://snaped.fns.usda.gov/node/1861",
+      "source_version": "sha256:7c2bb840618e0dfbe372e9ecdb697ad59d2fab36e0fbf07cabe347a93ea6a1a0",
+      "source_original_servings": 5,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "7c2bb840618e0dfbe372e9ecdb697ad59d2fab36e0fbf07cabe347a93ea6a1a0",
+      "source_document_sha256": "7c2bb840618e0dfbe372e9ecdb697ad59d2fab36e0fbf07cabe347a93ea6a1a0",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/node/1861"
+      ],
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "fd7b2a1381549e7bae17148ed99d110b17397cb4a1997eaebb815711ff056e16",
+      "step_comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
+      "source_name": "USDA_FNS",
+      "source_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
+      "source_version": "sha256:d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+      "source_original_servings": 4,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+      "source_document_sha256": "d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf"
+      ],
+      "source_attribution": "USDA FNS What's Cooking? USDA Mixing Bowl, November2014, Food and Physical Activity Checklist handout p2.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+      "step_comparison_result": "BYTE_IDENTICAL_TO_ACCEPTED_DATA2"
+    },
+    {
+      "recipe_source_id": "SNAP4-DILLED-FISH-FILLETS",
+      "source_name": "USDA_FNS",
+      "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
+      "source_version": "sha256:43d44c84d7c007a0c32906210b13212ffb43fb7a62312e9fb43c819f8a8a63a3",
+      "source_original_servings": 4,
+      "source_retrieved_at": null,
+      "accepted_data2_sha256": "43d44c84d7c007a0c32906210b13212ffb43fb7a62312e9fb43c819f8a8a63a3",
+      "source_document_sha256": "43d44c84d7c007a0c32906210b13212ffb43fb7a62312e9fb43c819f8a8a63a3",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+      "rights_evidence_urls": [
+        "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets"
+      ],
+      "source_attribution": "USDA FNS SNAP-Ed — Recipes and seasonal menus; reviewed recipe section gives no separate original contributor credit.",
+      "retrieval_method": "ACCEPTED_DATA2_REVIEW_EVIDENCE",
+      "comparison_result": "ACCEPTED_DATA2_ARTIFACT",
+      "step_extraction_source_sha256": "cf244124ef9fae3ad938a3f9b120b00efafdb8c464a0796cd7cd5e5a64afd536",
+      "step_comparison_result": "RECIPE_RELEVANT_SELECTED_FACTS_AND_EQUIPMENT_MATCH_ACCEPTED_DATA2"
+    }
+  ]
+}

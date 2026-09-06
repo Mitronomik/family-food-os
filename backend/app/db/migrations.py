@@ -27,6 +27,7 @@ MIGRATION_MODULES = [
     "app.migrations.versions.0021_family_food_identity",
     "app.migrations.versions.0022_household_foundation",
     "app.migrations.versions.0023_food_ingredient_catalogue",
+    "app.migrations.versions.0024_food_recipe_catalogue",
 ]
 MIGRATION_TABLE = "schema_migrations"
 

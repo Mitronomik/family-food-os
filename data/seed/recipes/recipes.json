@@ -1,0 +1,2980 @@
+{
+  "schema_version": 2,
+  "recipes": [
+    {
+      "canonical_code": "CACFP6_CORN_EDAMAME_BLEND",
+      "canonical_name": "Corn and Edamame Blend",
+      "version": {
+        "base_servings": "6.000000",
+        "meal_type_code": "side",
+        "prep_time_minutes": 20,
+        "cook_time_minutes": 10,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "CACFP6-CORN-EDAMAME-BLEND",
+        "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
+        "source_version": "sha256:314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef",
+        "source_retrieved_at": "2026-09-04T04:35:40.896467+00:00",
+        "source_document_sha256": "314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef",
+        "source_original_servings": "6.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Direct FNS CACFP card reviewed under the project risk classification approved in issue #12 and recipe-localization-and-substitution.md. Not a blanket public-domain or unrestricted commercial/derivative license assertion. Preserve attribution; no source photographs, logos or trademarks imported.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "SESAME_OIL",
+            "quantity": "5.000000",
+            "unit": "ml",
+            "source_amount_text": "1 tsp Sesame oil",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "ONION_YELLOW",
+            "quantity": "85.048569",
+            "unit": "g",
+            "source_amount_text": "⅔ cup or 3 oz Fresh onions, chopped",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "GARLIC",
+            "quantity": "10.000000",
+            "unit": "ml",
+            "source_amount_text": "2 tsp Garlic, minced",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CORN_SWEET",
+            "quantity": "141.747616",
+            "unit": "g",
+            "source_amount_text": "⅔ cup or 5 oz Frozen corn, thawed, drained",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "EDAMAME_FROZEN",
+            "quantity": "170.097139",
+            "unit": "g",
+            "source_amount_text": "1 cup or 6 oz Frozen edamame, thawed, drained",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CARROT",
+            "quantity": "170.097139",
+            "unit": "g",
+            "source_amount_text": "1 ½ cups or 6 oz Fresh carrots, shredded",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CORIANDER_SEED",
+            "quantity": "1.250000",
+            "unit": "ml",
+            "source_amount_text": "¼ tsp Ground coriander seeds",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SESAME_SEEDS",
+            "quantity": "5.000000",
+            "unit": "ml",
+            "source_amount_text": "1 tsp Toasted sesame seeds",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SALT",
+            "quantity": "1.250000",
+            "unit": "ml",
+            "source_amount_text": "¼ tsp Salt",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CILANTRO",
+            "quantity": "14.174762",
+            "unit": "g",
+            "source_amount_text": "¼ cup or ½ oz Fresh cilantro, chopped",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Heat oil in a medium non-stick saucepan over medium high heat.",
+          "Add onions and garlic. Sauté uncovered for 2 minutes.",
+          "Add corn. Sauté uncovered for 2 minutes stirring frequently.",
+          "Add edamame. Sauté uncovered over high heat for 2 minutes, stirring frequently.",
+          "Add carrots, coriander, sesame seeds, salt, and cilantro.",
+          "Sauté uncovered over high heat for 3 minutes, stirring frequently.",
+          "Critical Control Point: Heat to 140 °F or higher for at least 15 seconds.",
+          "Pour corn and edamame mixture into a baking dish (9” x13” x 2”).",
+          "Critical Control Point: Hold at 140 °F or higher until served.",
+          "Serve ½ cup (portion with ½ cup measuring cup or 4 oz spoodle)."
+        ],
+        "equipment_codes": [
+          "nonstick_saucepan",
+          "stock_pot"
+        ]
+      }
+    },
+    {
+      "canonical_code": "SNAP6_HEAVENLY_DEVILED_EGGS",
+      "canonical_name": "Heavenly Deviled Eggs",
+      "version": {
+        "base_servings": "6.000000",
+        "meal_type_code": "other",
+        "prep_time_minutes": null,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP6-HEAVENLY-DEVILED-EGGS",
+        "source_url": "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
+        "source_version": "sha256:1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+        "source_retrieved_at": null,
+        "source_document_sha256": "1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+        "source_original_servings": "6.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Approved narrow direct-FNS project risk posture, issue #12 and recipe-localization-and-substitution.md; no federal-employee authorship inference, blanket public-domain assertion or unrestricted commercial/derivative rights. Preserve actual attribution; no photos/logos/marks imported.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "EGG",
+            "quantity": "6.000000",
+            "unit": "pcs",
+            "source_amount_text": "6 eggs (in shell)",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "MAYONNAISE_LOW_FAT",
+            "quantity": "30.000000",
+            "unit": "ml",
+            "source_amount_text": "2 tablespoons light mayonnaise",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SALT",
+            "quantity": "0.625000",
+            "unit": "ml",
+            "source_amount_text": "1/8 tsp each of salt and pepper may be substituted for 1 tsp mustard.",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BLACK_PEPPER",
+            "quantity": "0.625000",
+            "unit": "ml",
+            "source_amount_text": "1/8 tsp each of salt and pepper may be substituted for 1 tsp mustard.",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Put eggs into a saucepan. Cover with cold water.",
+          "Bring eggs to a simmer (small bubbles) and cook for 12 minutes.",
+          "Remove from the heat and drain.",
+          "Crack eggs under cold water and allow to cool. Remove shells.",
+          "Split eggs in half, lengthwise and remove yolks.",
+          "Put yolks, dressing, salt, and pepper into a small zipper-lock plastic bag to mix.",
+          "Cut a small hole in a lower corner of the bag. Squeeze mixture into egg white halves."
+        ],
+        "equipment_codes": [
+          "saucepan",
+          "zipper_lock_bag"
+        ]
+      }
+    },
+    {
+      "canonical_code": "CACFP6_TABBOULEH",
+      "canonical_name": "Tabbouleh",
+      "version": {
+        "base_servings": "6.000000",
+        "meal_type_code": "salad",
+        "prep_time_minutes": 240,
+        "cook_time_minutes": 15,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "CACFP6-TABBOULEH",
+        "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tabbouleh_6_Servings.pdf",
+        "source_version": "sha256:ef746c97415426316a78995b42a1e7f5a5d76c0078e6f006ab9940f0120cca49",
+        "source_retrieved_at": "2026-09-04T04:35:52.082224+00:00",
+        "source_document_sha256": "ef746c97415426316a78995b42a1e7f5a5d76c0078e6f006ab9940f0120cca49",
+        "source_original_servings": "6.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Direct FNS CACFP card reviewed under the project risk classification approved in issue #12 and recipe-localization-and-substitution.md. Not a blanket public-domain or unrestricted commercial/derivative license assertion. Preserve attribution; no source photographs, logos or trademarks imported.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "QUINOA",
+            "quantity": "85.048569",
+            "unit": "g",
+            "source_amount_text": "⅓ cup or 3 oz Quinoa, dry",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BULGUR",
+            "quantity": "85.048569",
+            "unit": "g",
+            "source_amount_text": "½ cup or 3 oz Bulgur wheat, dry",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "WATER",
+            "quantity": "311.844754",
+            "unit": "g",
+            "source_amount_text": "1 ⅓ cups or 11 oz Water",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SALT",
+            "quantity": "2.500000",
+            "unit": "ml",
+            "source_amount_text": "½ tsp Salt",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "TOMATO",
+            "quantity": "264.595549",
+            "unit": "g",
+            "source_amount_text": "1 ½ cups or 9 ⅓ oz Fresh tomatoes, unpeeled, diced",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CUCUMBER",
+            "quantity": "134.660235",
+            "unit": "g",
+            "source_amount_text": "1 cup or 4 ¾ oz Fresh cucumbers, peeled, seeded, diced",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "PARSLEY",
+            "quantity": "14.174762",
+            "unit": "g",
+            "source_amount_text": "¼ cup or ½ oz Fresh parsley, chopped",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "ONION_YELLOW",
+            "quantity": "42.524285",
+            "unit": "g",
+            "source_amount_text": "¼ cup or 1 ½ oz Fresh onions, diced",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BELL_PEPPER_RED",
+            "quantity": "35.436904",
+            "unit": "g",
+            "source_amount_text": "¼ cup or 1 ¼ oz Fresh red bell peppers, diced",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "MINT_FRESH",
+            "quantity": "1.250000",
+            "unit": "ml",
+            "source_amount_text": "¼ tsp Fresh mint, chopped",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CUMIN_GROUND",
+            "quantity": "1.250000",
+            "unit": "ml",
+            "source_amount_text": "¼ tsp Ground cumin",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "LEMON",
+            "quantity": "56.699046",
+            "unit": "g",
+            "source_amount_text": "¼ cup or 2 oz Lemon juice",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "OLIVE_OIL",
+            "quantity": "11.250000",
+            "unit": "ml",
+            "source_amount_text": "2 ¼ tsp Olive oil",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Rinse quinoa in a fine mesh strainer until water runs clear, not cloudy.",
+          "Combine quinoa, bulgur wheat, water, and salt in a large, covered stock pot.",
+          "Bring to a boil. Reduce heat to low. Simmer uncovered for 10-15 minutes until water is completely absorbed. Fluff.",
+          "Note: When done, quinoa will be soft, and a white ring will pop out of the kernel. The white ring will only appear when it is fully cooked.",
+          "Refrigerate and set aside for step 7.",
+          "Critical Control Point: Cool to 40 °F or lower within 4 hours.",
+          "Combine tomatoes, cucumbers, parsley, onions, bell peppers, mint, and cumin in a large bowl. Toss well.",
+          "Add cooled quinoa and bulgur wheat.",
+          "Add lemon juice and olive oil. Stir well.",
+          "Transfer all of ingredients into a large salad bowl.",
+          "Critical Control Point: Cool to 40 °F or lower within 4 hours.",
+          "Critical Control Point: Hold at 40 °F or below until served.",
+          "Serve ¾ cup (portion with ½ cup and ¼ cup measuring cups or 6 oz spoodle)."
+        ],
+        "equipment_codes": [
+          "fine_mesh_strainer",
+          "stock_pot",
+          "bowl"
+        ]
+      }
+    },
+    {
+      "canonical_code": "WIC1_BEYOND_BASIC_GRILLED_CHEESE",
+      "canonical_name": "Beyond Basic Grilled Cheese",
+      "version": {
+        "base_servings": "1.000000",
+        "meal_type_code": "sandwich",
+        "prep_time_minutes": 5,
+        "cook_time_minutes": 8,
+        "total_time_minutes": 13,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE",
+        "source_url": "https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese/printable/print",
+        "source_version": "sha256:357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334",
+        "source_retrieved_at": null,
+        "source_document_sha256": "357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334",
+        "source_original_servings": "1.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Approved narrow direct-FNS project risk posture, issue #12 and recipe-localization-and-substitution.md; no federal-employee authorship inference, blanket public-domain assertion or unrestricted commercial/derivative rights. Preserve actual attribution; no photos/logos/marks imported.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "BREAD_WHOLE_WHEAT",
+            "quantity": "2.000000",
+            "unit": "pcs",
+            "source_amount_text": "whole wheat bread (2 slices)",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CHEESE_CHEDDAR",
+            "quantity": "180.000000",
+            "unit": "ml",
+            "source_amount_text": "3/4 c (cup) cheese (grated, try Muenster, Monterey jack or mozzarella)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CAULIFLOWER",
+            "quantity": "120.000000",
+            "unit": "ml",
+            "source_amount_text": "1/2 c (cup) broccoli and cauliflower (roasted, cut into small pieces or use fresh veggies of your choice)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Wash your hands before you begin.",
+          "Heat the non-stick pan on medium.",
+          "Lay one slice of bread in the pan.",
+          "Add half of the grated cheese, spreading it out evenly.",
+          "Add the vegetables and top with the remaining cheese, being sure to cover the vegetables.",
+          "Grill the sandwich three minutes on each side or until the slices have browned to perfection. Slice the sandwich on a diagonal and enjoy."
+        ],
+        "equipment_codes": [
+          "nonstick_pan",
+          "knife"
+        ]
+      }
+    },
+    {
+      "canonical_code": "CACFP6_CREAMY_COLESLAW",
+      "canonical_name": "Creamy Coleslaw",
+      "version": {
+        "base_servings": "6.000000",
+        "meal_type_code": "salad",
+        "prep_time_minutes": 15,
+        "cook_time_minutes": 10,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
+        "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf",
+        "source_version": "sha256:8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6",
+        "source_retrieved_at": "2026-09-04T04:34:53.373753+00:00",
+        "source_document_sha256": "8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6",
+        "source_original_servings": "6.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Direct FNS CACFP card reviewed under the project risk classification approved in issue #12 and recipe-localization-and-substitution.md. Not a blanket public-domain or unrestricted commercial/derivative license assertion. Preserve attribution; no source photographs, logos or trademarks imported.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "YOGURT_PLAIN_LOW_FAT",
+            "quantity": "141.747616",
+            "unit": "g",
+            "source_amount_text": "½ cup or 5 oz Low-fat yogurt, plain",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "MAYONNAISE_LOW_FAT",
+            "quantity": "56.699046",
+            "unit": "g",
+            "source_amount_text": "¼ cup or 2 oz Low-fat mayonnaise",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "HONEY",
+            "quantity": "70.873808",
+            "unit": "g",
+            "source_amount_text": "¼ cup or 2 ½ oz Honey",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "APPLE_CIDER_VINEGAR",
+            "quantity": "30.000000",
+            "unit": "ml",
+            "source_amount_text": "⅛ cup Apple cider vinegar",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SALT",
+            "quantity": "1.250000",
+            "unit": "ml",
+            "source_amount_text": "¼ tsp Salt",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BLACK_PEPPER",
+            "quantity": "1.250000",
+            "unit": "ml",
+            "source_amount_text": "¼ tsp Ground black pepper",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CABBAGE_GREEN",
+            "quantity": "170.097139",
+            "unit": "g",
+            "source_amount_text": "4 cups or 6 oz Fresh green cabbage, chilled, shredded",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CABBAGE_RED",
+            "quantity": "35.436904",
+            "unit": "g",
+            "source_amount_text": "¾ cup or 1 ¼ oz Fresh purple cabbage, chilled, shredded",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CARROT",
+            "quantity": "56.699046",
+            "unit": "g",
+            "source_amount_text": "¾ cup or 2 oz Fresh carrots, shredded",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "GREEN_ONION",
+            "quantity": "28.349523",
+            "unit": "g",
+            "source_amount_text": "½ cup or 1 oz Fresh green onions, diced",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CRANBERRIES_DRIED",
+            "quantity": "63.786427",
+            "unit": "g",
+            "source_amount_text": "½ cup or 2 ¼ oz Dried cranberries",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Dressing: Combine yogurt, mayonnaise, honey, vinegar, salt, and pepper in a medium mixing bowl. Stir well. Set aside for step 3.",
+          "Salad: Combine cabbage, carrots, onions, and dried cranberries in a large mixing bowl. Toss lightly. Set aside for step 3.",
+          "Five minutes before serving time pour dressing over vegetable mixture. Stir well.",
+          "Transfer coleslaw to a large serving dish.",
+          "Critical Control Point: Cool to 40 °F or lower within 4 hours.",
+          "Critical Control Point: Hold at 40 °F or below until served.",
+          "Serve ½ cup (portion with ½ cup measuring cup or 4 oz spoodle)."
+        ],
+        "equipment_codes": [
+          "bowl"
+        ]
+      }
+    },
+    {
+      "canonical_code": "TNC6_EGGS_SPINACH",
+      "canonical_name": "Scrambled Eggs with Spinach",
+      "version": {
+        "base_servings": "6.000000",
+        "meal_type_code": "breakfast",
+        "prep_time_minutes": null,
+        "cook_time_minutes": null,
+        "total_time_minutes": 15,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "TNC6-EGGS-SPINACH",
+        "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+        "source_version": "sha256:0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+        "source_retrieved_at": null,
+        "source_document_sha256": "0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+        "source_original_servings": "6.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. Collection permits downloading/copying materials; that wording is not extended to a blanket commercial/derivative grant.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "OLIVE_OIL",
+            "quantity": "5.000000",
+            "unit": "ml",
+            "source_amount_text": "1 teaspoon olive, canola, or vegetable oil",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "EGG",
+            "quantity": "12.000000",
+            "unit": "pcs",
+            "source_amount_text": "12 large eggs",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SPINACH",
+            "quantity": "720.000000",
+            "unit": "ml",
+            "source_amount_text": "3 cups rinsed chopped fresh spinach",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Wash your hands with soap and water, then gather all your kitchen tools and ingredients and put them on a clean counter or other cooking surface.",
+          "Chop the spinach.",
+          "Measure the chopped spinach and set aside.",
+          "Crack one egg by hitting its midpoint quickly against the rim of a small bowl or cup.",
+          "Break the egg into the bowl or cup. Pour the egg into a larger bowl. Repeat with the remaining egg(s).",
+          "Whisk the eggs in the larger bowl until they are pale yellow.",
+          "Put the skillet on the stove or cooktop and turn the heat to medium. When the skillet is hot, add the oil. If using a nonstick skillet, you may need to add the oil before heating.",
+          "Carefully pour the eggs into the skillet.",
+          "Add the spinach to the eggs.",
+          "Drag the spatula across the bottom of the skillet to evenly scramble and cook the eggs and spinach.",
+          "Serve and enjoy the scrambled eggs with spinach."
+        ],
+        "equipment_codes": [
+          "bowl",
+          "skillet",
+          "stovetop",
+          "spatula",
+          "knife",
+          "cutting_board",
+          "whisk",
+          "measuring_cup",
+          "measuring_spoon"
+        ]
+      }
+    },
+    {
+      "canonical_code": "TNC6_APPLESAUCE",
+      "canonical_name": "Applesauce",
+      "version": {
+        "base_servings": "6.000000",
+        "meal_type_code": "other",
+        "prep_time_minutes": null,
+        "cook_time_minutes": 25,
+        "total_time_minutes": 55,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "TNC6-APPLESAUCE",
+        "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+        "source_version": "sha256:7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+        "source_retrieved_at": null,
+        "source_document_sha256": "7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+        "source_original_servings": "6.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. Collection permits downloading/copying materials; that wording is not extended to a blanket commercial/derivative grant.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "APPLE",
+            "quantity": "6.000000",
+            "unit": "pcs",
+            "source_amount_text": "6 apples, any variety, rinsed",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "WATER",
+            "quantity": "120.000000",
+            "unit": "ml",
+            "source_amount_text": "½ cup water",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Wash your hands with soap and water, then gather all your kitchen tools and ingredients and put them on a clean counter or other cooking surface.",
+          "Use the apple corer or slicer to remove the core and cut the apple into slices. If you do not have a slicer, have a helper use a chef’s knife to take out the core and cut the apple into slices.",
+          "Dice the apple slices.",
+          "Measure the water and pour the water in the pot.",
+          "Add the diced apples to the pot with water, cover, and put the pot on the stove. Turn the heat to medium-low and cook until the apples are tender, about 25 minutes.",
+          "Take pot off the stove and set aside to cool a bit, about 10 minutes. Once it has cooled a bit, stir it to help the applesauce cool faster.",
+          "Mash the apples using a potato masher or fork.",
+          "Serve and enjoy the applesauce right away or store in the refrigerator in a lidded container. The applesauce will keep, covered and refrigerated, for up to 4 days."
+        ],
+        "equipment_codes": [
+          "knife",
+          "pot",
+          "stovetop",
+          "potato_masher",
+          "cutting_board",
+          "measuring_cup",
+          "spoon"
+        ]
+      }
+    },
+    {
+      "canonical_code": "SNAP4_SPANISH_FRITTATA",
+      "canonical_name": "Spanish Frittata",
+      "version": {
+        "base_servings": "4.000000",
+        "meal_type_code": "breakfast",
+        "prep_time_minutes": null,
+        "cook_time_minutes": 30,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP4-SPANISH-FRITTATA",
+        "source_url": "https://snaped.fns.usda.gov/snap/MPMF/Handouts/HowMuchFoodandPhysicalActivityHandouts.pdf",
+        "source_version": "sha256:b2ac0732c26ad10426343c5aab115248b020983fa4dcad79f230ff146a02641c",
+        "source_retrieved_at": null,
+        "source_document_sha256": "b2ac0732c26ad10426343c5aab115248b020983fa4dcad79f230ff146a02641c",
+        "source_original_servings": "4.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Direct FNS source reviewed under the narrow project risk posture approved in issue #12 and recipe-localization-and-substitution.md. This is not blanket public-domain or unrestricted commercial/derivative permission. Preserve external contributor attribution. No source photos, logos, marks or nutrition panel imported.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "POTATO",
+            "quantity": "680.388555",
+            "unit": "g",
+            "source_amount_text": "1½ pounds (about 2) russet potatoes, scrubbed",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "EGG",
+            "quantity": "6.000000",
+            "unit": "pcs",
+            "source_amount_text": "6 large eggs",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SUNFLOWER_OIL",
+            "quantity": "10.000000",
+            "unit": "ml",
+            "source_amount_text": "2 teaspoons vegetable oil",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "ONION_YELLOW",
+            "quantity": "1.000000",
+            "unit": "pcs",
+            "source_amount_text": "1 medium yellow onion, peeled and chopped",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SALT",
+            "quantity": "2.500000",
+            "unit": "ml",
+            "source_amount_text": "½ teaspoon salt",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BLACK_PEPPER",
+            "quantity": "1.250000",
+            "unit": "ml",
+            "source_amount_text": "¼ teaspoon black pepper",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Preheat the oven to 400 °F.",
+          "Put the potatoes in a non-stick skillet on the stove and cover with cold water. Turn the heat to medium-high and cook until the potatoes are easily pierced with a knife, about 15 minutes.",
+          "Drain the potatoes well, remove from the skillet, and set aside to cool. Then peel and cut into 1-inch cubes.",
+          "Put the eggs, salt, and pepper in a bowl and mix well with a whisk.",
+          "Return the skillet on the stove and turn the heat to medium-high. Add the oil. Add onion and cook about 5 minutes until soft. Add the cubed potatoes.",
+          "Pour the egg mixture over the potatoes and onions. Press down with a spatula to make an even layer and shake gently to prevent sticking. Lower to medium heat and cook about 7 minutes.",
+          "Transfer the skillet to the oven and cook until the frittata is completely set, about 5 minutes.",
+          "Gently loosen frittata from the pan. Place a serving plate over the skillet and carefully flip the frittata onto the plate.",
+          "Slice into 4 wedges. Serve warm."
+        ],
+        "equipment_codes": [
+          "oven",
+          "nonstick_skillet",
+          "stovetop",
+          "knife",
+          "bowl",
+          "whisk",
+          "spatula",
+          "plate"
+        ]
+      }
+    },
+    {
+      "canonical_code": "FNS5_BAKED_LENTILS_CASSEROLE",
+      "canonical_name": "Baked Lentils Casserole",
+      "version": {
+        "base_servings": "5.000000",
+        "meal_type_code": "main",
+        "prep_time_minutes": null,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "FNS5-BAKED-LENTILS-CASSEROLE",
+        "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/lentils-casserole",
+        "source_version": "sha256:86b118c36ca73b75618e1656bbc96c2c06f59785ca7292efc47be0fe99cc4598",
+        "source_retrieved_at": null,
+        "source_document_sha256": "86b118c36ca73b75618e1656bbc96c2c06f59785ca7292efc47be0fe99cc4598",
+        "source_original_servings": "5.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Direct FNS source reviewed under the narrow project risk posture approved in issue #12 and recipe-localization-and-substitution.md. This is not blanket public-domain or unrestricted commercial/derivative permission. Preserve external contributor attribution. No source photos, logos, marks or nutrition panel imported.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "LENTILS_DRY",
+            "quantity": "240.000000",
+            "unit": "ml",
+            "source_amount_text": "1 cup lentils, rinsed",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "WATER",
+            "quantity": "180.000000",
+            "unit": "ml",
+            "source_amount_text": "¾ cup water",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SALT",
+            "quantity": "2.500000",
+            "unit": "ml",
+            "source_amount_text": "½ teaspoon salt",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "ONION_YELLOW",
+            "quantity": "120.000000",
+            "unit": "ml",
+            "source_amount_text": "½ cup medium onion, chopped",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "TOMATO_CANNED_NO_SALT",
+            "quantity": "411.068085",
+            "unit": "g",
+            "source_amount_text": "1 can low-sodium tomatoes (14.5 ounces)",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CARROT",
+            "quantity": "2.000000",
+            "unit": "pcs",
+            "source_amount_text": "2 medium carrots, thinly sliced",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CHEESE_CHEDDAR",
+            "quantity": "120.000000",
+            "unit": "ml",
+            "source_amount_text": "½ cup shredded cheddar cheese",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Preheat oven to 350°F.",
+          "Combine lentils, water, salt, onion, and tomatoes.",
+          "Place in 2 quart casserole dish and cover tightly with lid or foil.",
+          "Bake for 30 minutes.",
+          "Remove from oven and add carrots. Stir.",
+          "Cover and bake 30 minutes longer.",
+          "Remove cover and sprinkle cheese on top.",
+          "Bake uncovered 5 minutes, until cheese melts."
+        ],
+        "equipment_codes": [
+          "oven",
+          "casserole_dish",
+          "lid"
+        ]
+      }
+    },
+    {
+      "canonical_code": "HARV6_FRESH_TOMATO_SALSA",
+      "canonical_name": "Fresh Tomato Salsa",
+      "version": {
+        "base_servings": "6.000000",
+        "meal_type_code": "other",
+        "prep_time_minutes": null,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
+        "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+        "source_version": "sha256:36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+        "source_retrieved_at": null,
+        "source_document_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+        "source_original_servings": "6.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "TOMATO",
+            "quantity": "226.796185",
+            "unit": "g",
+            "source_amount_text": "1 cup tomatoes, finely chopped (or ½ can, about 8 ounces, low-sodium diced tomatoes)",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "APPLE",
+            "quantity": "120.000000",
+            "unit": "ml",
+            "source_amount_text": "½ cup apple, peeled and finely chopped",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "ONION_YELLOW",
+            "quantity": "60.000000",
+            "unit": "ml",
+            "source_amount_text": "¼ cup onion, finely chopped",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "LIME_JUICE",
+            "quantity": "30.000000",
+            "unit": "ml",
+            "source_amount_text": "2 tablespoons lime (or lemon) juice",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "GARLIC",
+            "quantity": "5.000000",
+            "unit": "ml",
+            "source_amount_text": "1 teaspoon garlic, finely chopped",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SUNFLOWER_OIL",
+            "quantity": "2.500000",
+            "unit": "ml",
+            "source_amount_text": "½ teaspoon vegetable oil",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SALT",
+            "quantity": "1.250000",
+            "unit": "ml",
+            "source_amount_text": "¼ teaspoon salt",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "In a medium-size bowl, combine tomato, apple, onion and lime juice. Mix well.",
+          "Add garlic, vegetable oil, and salt to bowl. Mix well.",
+          "Cover bowl and refrigerate for 15 minutes. Serve cold."
+        ],
+        "equipment_codes": [
+          "bowl"
+        ]
+      }
+    },
+    {
+      "canonical_code": "HARV6_GARDEN_PASTA_SALAD",
+      "canonical_name": "Garden Pasta Salad",
+      "version": {
+        "base_servings": "6.000000",
+        "meal_type_code": "salad",
+        "prep_time_minutes": null,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
+        "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+        "source_version": "sha256:36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+        "source_retrieved_at": null,
+        "source_document_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+        "source_original_servings": "6.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "PASTA_DRY",
+            "quantity": "120.000000",
+            "unit": "ml",
+            "source_amount_text": "½ cup macaroni, cooked",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "ONION_YELLOW",
+            "quantity": "60.000000",
+            "unit": "ml",
+            "source_amount_text": "¼ cup onion, finely chopped",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CUCUMBER",
+            "quantity": "120.000000",
+            "unit": "ml",
+            "source_amount_text": "½ cup cucumber, finely chopped",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BELL_PEPPER_GREEN",
+            "quantity": "60.000000",
+            "unit": "ml",
+            "source_amount_text": "¼ cup green pepper, diced",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "APPLE_CIDER_VINEGAR",
+            "quantity": "15.000000",
+            "unit": "ml",
+            "source_amount_text": "1 tablespoon vinegar",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SUNFLOWER_OIL",
+            "quantity": "7.500000",
+            "unit": "ml",
+            "source_amount_text": "½ tablespoon vegetable oil",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SALT",
+            "quantity": "1.250000",
+            "unit": "ml",
+            "source_amount_text": "¼ teaspoon salt",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BLACK_PEPPER",
+            "quantity": "1.250000",
+            "unit": "ml",
+            "source_amount_text": "¼ teaspoon pepper",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "In a medium-size bowl, combine macaroni, onions, cucumbers, and green peppers. Mix well.",
+          "In a separate bowl, mix vinegar, vegetable oil, salt, and pepper.",
+          "Pour the prepared dressing over the pasta. Mix well.",
+          "Cover bowl and refrigerate for 30 to 45 minutes. Serve cold."
+        ],
+        "equipment_codes": [
+          "bowl"
+        ]
+      }
+    },
+    {
+      "canonical_code": "SNAP6_SPINACH_APPLE_SALAD",
+      "canonical_name": "Spinach Salad with Apples and Raisins",
+      "version": {
+        "base_servings": "6.000000",
+        "meal_type_code": "salad",
+        "prep_time_minutes": null,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
+        "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+        "source_version": "sha256:7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+        "source_retrieved_at": null,
+        "source_document_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+        "source_original_servings": "6.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "SPINACH",
+            "quantity": "283.495231",
+            "unit": "g",
+            "source_amount_text": "2/3 package baby spinach (10 ounces, washed. Could also use Kale or other greens)",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "APPLE",
+            "quantity": "1.000000",
+            "unit": "pcs",
+            "source_amount_text": "1 1/2 apples (chopped, can use 1-2 apples)",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "RAISINS_GOLDEN",
+            "quantity": "240.000000",
+            "unit": "ml",
+            "source_amount_text": "1 cup raisins",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CANOLA_OIL",
+            "quantity": "60.000000",
+            "unit": "ml",
+            "source_amount_text": "1/4 cup canola oil",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "APPLE_CIDER_VINEGAR",
+            "quantity": "60.000000",
+            "unit": "ml",
+            "source_amount_text": "1/4 cup apple cider vinegar",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SUGAR",
+            "quantity": "60.000000",
+            "unit": "ml",
+            "source_amount_text": "1/4 cup sugar",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "GARLIC_POWDER",
+            "quantity": "0.312500",
+            "unit": "ml",
+            "source_amount_text": "1/16 teaspoon garlic powder (pinch)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Combine spinach, apples and raisins.",
+          "Mix all dressing ingredients and pour over salad just prior to serving."
+        ],
+        "equipment_codes": []
+      }
+    },
+    {
+      "canonical_code": "SNAP6_PEACH_CRISP",
+      "canonical_name": "Peach Crisp",
+      "version": {
+        "base_servings": "6.000000",
+        "meal_type_code": "other",
+        "prep_time_minutes": null,
+        "cook_time_minutes": 20,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP6-PEACH-CRISP",
+        "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+        "source_version": "sha256:44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+        "source_retrieved_at": null,
+        "source_document_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+        "source_original_servings": "6.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "PEACH",
+            "quantity": "960.000000",
+            "unit": "ml",
+            "source_amount_text": "4 peaches (4 cups sliced)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "MARGARINE",
+            "quantity": "30.000000",
+            "unit": "ml",
+            "source_amount_text": "2 tablespoons margarine",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "OATS_ROLLED",
+            "quantity": "180.000000",
+            "unit": "ml",
+            "source_amount_text": "3/4 cup quick-cooking oats",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SUGAR",
+            "quantity": "120.000000",
+            "unit": "ml",
+            "source_amount_text": "1/2 cup sugar",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "FLOUR_WHEAT",
+            "quantity": "60.000000",
+            "unit": "ml",
+            "source_amount_text": "1/4 cup flour",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CINNAMON_GROUND",
+            "quantity": "10.000000",
+            "unit": "ml",
+            "source_amount_text": "2 teaspoons cinnamon",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "LEMON",
+            "quantity": "5.000000",
+            "unit": "ml",
+            "source_amount_text": "1 teaspoon lemon juice",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Preheat the oven to 375 degrees F.",
+          "Slice the peaches.",
+          "Spread the peach slices on the bottom of the baking pan.",
+          "Melt the margarine in a saucepan.",
+          "In a small bowl, mix everything but the peaches. Stir until the mix is well blended.",
+          "Sprinkle the oat mix on top of the peaches.",
+          "Bake for 20 minutes."
+        ],
+        "equipment_codes": [
+          "oven",
+          "baking_pan",
+          "saucepan",
+          "bowl"
+        ]
+      }
+    },
+    {
+      "canonical_code": "SNAP6_SEARED_GREENS",
+      "canonical_name": "Seared Greens",
+      "version": {
+        "base_servings": "6.000000",
+        "meal_type_code": "side",
+        "prep_time_minutes": null,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP6-SEARED-GREENS",
+        "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+        "source_version": "sha256:63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+        "source_retrieved_at": null,
+        "source_document_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+        "source_original_servings": "6.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "KALE",
+            "quantity": "226.796185",
+            "unit": "g",
+            "source_amount_text": "8 cups kale or collard greens (1 1/2 pounds)",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "OLIVE_OIL",
+            "quantity": "30.000000",
+            "unit": "ml",
+            "source_amount_text": "2 tablespoons vegetable oil (or olive oil)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "GARLIC",
+            "quantity": "4.000000",
+            "unit": "pcs",
+            "source_amount_text": "4 garlic cloves (chopped)",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "WATER",
+            "quantity": "240.000000",
+            "unit": "ml",
+            "source_amount_text": "1 cup water",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SALT",
+            "quantity": "1.250000",
+            "unit": "ml",
+            "source_amount_text": "1/4 teaspoon salt",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BLACK_PEPPER",
+            "quantity": "5.000000",
+            "unit": "ml",
+            "source_amount_text": "1 teaspoon black pepper",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "APPLE_CIDER_VINEGAR",
+            "quantity": "30.000000",
+            "unit": "ml",
+            "source_amount_text": "2 tablespoons vinegar, cider",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Clean the greens thoroughly and cut stems away. Dry well and tear into salad pieces or slice across leaf into 1/2 inch pieces.",
+          "In a large deep pot or skillet with a cover, sauté garlic in oil. Add greens in pan with 1 cup water.",
+          "Cover pan and steam for 4 minutes.",
+          "Uncover, stir constantly until greens shrink. Add salt and pepper and continue to stir on high until mixture is thoroughly wet.",
+          "Sprinkle cider vinegar on mixture. Cover.",
+          "Turn off heat. Let stand until ready to serve."
+        ],
+        "equipment_codes": [
+          "pot",
+          "lid"
+        ]
+      }
+    },
+    {
+      "canonical_code": "SNAP8_SOMALI_SUMMER_SALAD",
+      "canonical_name": "Somali Summer Salad",
+      "version": {
+        "base_servings": "8.000000",
+        "meal_type_code": "salad",
+        "prep_time_minutes": null,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP8-SOMALI-SUMMER-SALAD",
+        "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+        "source_version": "sha256:44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+        "source_retrieved_at": null,
+        "source_document_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+        "source_original_servings": "8.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "OLIVE_OIL",
+            "quantity": "45.000000",
+            "unit": "ml",
+            "source_amount_text": "3 tablespoons olive oil",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "LEMON",
+            "quantity": "15.000000",
+            "unit": "ml",
+            "source_amount_text": "1 tablespoon lemon juice",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "APPLE",
+            "quantity": "3.000000",
+            "unit": "pcs",
+            "source_amount_text": "3 apples",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BELL_PEPPER_GREEN",
+            "quantity": "2.000000",
+            "unit": "pcs",
+            "source_amount_text": "2 green peppers",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "TOMATO",
+            "quantity": "3.000000",
+            "unit": "pcs",
+            "source_amount_text": "3 tomatoes",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CUCUMBER",
+            "quantity": "2.000000",
+            "unit": "pcs",
+            "source_amount_text": "2 cucumbers",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "In a large bowl, combine oil and lemon juice.",
+          "Dice all the fruits and vegetables and then add to the bowl.",
+          "Serve chilled.",
+          "Best served within 24 hours."
+        ],
+        "equipment_codes": [
+          "bowl"
+        ]
+      }
+    },
+    {
+      "canonical_code": "FNS2_ORANGE_PORK_CHOPS",
+      "canonical_name": "Orange Pork Chops",
+      "version": {
+        "base_servings": "2.000000",
+        "meal_type_code": "main",
+        "prep_time_minutes": null,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "FNS2-ORANGE-PORK-CHOPS",
+        "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/orange-porkchops",
+        "source_version": "sha256:aa07563b660219b4173edc63cf6f76478e1bc71bff7f0c8a54fc5eaf5985a479",
+        "source_retrieved_at": null,
+        "source_document_sha256": "aa07563b660219b4173edc63cf6f76478e1bc71bff7f0c8a54fc5eaf5985a479",
+        "source_original_servings": "2.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Direct FNS source reviewed under the narrow project risk posture approved in issue #12 and recipe-localization-and-substitution.md. This is not blanket public-domain or unrestricted commercial/derivative permission. Preserve external contributor attribution. No source photos, logos, marks or nutrition panel imported.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "SUNFLOWER_OIL",
+            "quantity": "5.000000",
+            "unit": "ml",
+            "source_amount_text": "1 teaspoon oil",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "PORK_LOIN",
+            "quantity": "2.000000",
+            "unit": "pcs",
+            "source_amount_text": "2 pork chops",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SWEET_POTATO",
+            "quantity": "1.000000",
+            "unit": "pcs",
+            "source_amount_text": "1 medium sweet potato, peeled and cut into ½-inch slices",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "ORANGE",
+            "quantity": "0.500000",
+            "unit": "pcs",
+            "source_amount_text": "½ medium orange, sliced",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Preheat oven to 350°F.",
+          "Place sweet potato slices on half of a baking dish and place in oven.",
+          "Heat oil in a skillet over medium high heat. Brown pork chops on both sides.",
+          "Add pork chops to baking dish with sweet potato slices and top with orange slices.",
+          "Cover and bake for 20-30 minutes until pork chops are tender. Baking time will vary depending on thickness of pork chops."
+        ],
+        "equipment_codes": [
+          "oven",
+          "baking_dish",
+          "skillet"
+        ]
+      }
+    },
+    {
+      "canonical_code": "WIC4_BUTTERNUT_SOUP",
+      "canonical_name": "Butternut Squash Soup",
+      "version": {
+        "base_servings": "4.000000",
+        "meal_type_code": "other",
+        "prep_time_minutes": 20,
+        "cook_time_minutes": 60,
+        "total_time_minutes": 80,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "WIC4-BUTTERNUT-SOUP",
+        "source_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+        "source_version": "sha256:ee642490786720348eae5f18170c5dcb26a0c7b22b042fc829ab0dc6ee1e95e8",
+        "source_retrieved_at": null,
+        "source_document_sha256": "ee642490786720348eae5f18170c5dcb26a0c7b22b042fc829ab0dc6ee1e95e8",
+        "source_original_servings": "4.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. WIC submission policy requires permission to share; it is not an independent unlimited commercial/derivative grant. No linked recipe-level restrictive license was found on this selected card.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "BUTTERNUT_SQUASH",
+            "quantity": "1360.777110",
+            "unit": "g",
+            "source_amount_text": "1 butternut squash (large - about 3 pounds)",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "OLIVE_OIL",
+            "quantity": "5.000000",
+            "unit": "ml",
+            "source_amount_text": "1 teaspoon olive oil (may need a bit more or less depending on the size of the squash)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SALT",
+            "quantity": "5.000000",
+            "unit": "ml",
+            "source_amount_text": "1 teaspoon salt",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "MILK_1_PERCENT",
+            "quantity": "720.000000",
+            "unit": "ml",
+            "source_amount_text": "3 cups milk (the amount depends on how thick or thin you like your soup!)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Preheat the oven to 425 degrees Fahrenheit and line a rimmed baking sheet with parchment paper.",
+          "Cut the butternut squash in half lengthwise and remove the seeds. Use a slip-free cutting board, or place a lightly damp tea towel beneath your cutting board to keep it from moving around. Use the knife to cut off the tip-top and very bottom ends of the squash. Stand the squash upright with the thickest flat side as the base. Carefully slice through it from top to bottom to divide it in half (your fingers should never be in the blade’s way). Use a large spoon to scoop out the seeds.",
+          "Place the butternut squash on the pan and drizzle each half with just enough olive oil to lightly coat the squash on the inside (about ½ teaspoon each). Rub the oil over the inside of the squash and sprinkle it with salt.",
+          "Turn the squash face down and roast until it's tender and completely cooked through, about 40 to 50 minutes (don’t worry if the skin or flesh browns—that’s good for flavor). Set the squash aside until it’s cool enough to handle, about 10 minutes. ( Don't let this cool too much, it's easier to work with while it's still warm.)",
+          "Scoop the squash into a soup pot, add milk, and blend with an immersion blender.",
+          "Warm the blended soup in the soup pot over medium heat, stirring often."
+        ],
+        "equipment_codes": [
+          "oven",
+          "baking_sheet",
+          "cutting_board",
+          "knife",
+          "spoon",
+          "pot",
+          "immersion_blender"
+        ]
+      }
+    },
+    {
+      "canonical_code": "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE",
+      "canonical_name": "Overnight Oats - Cinnamon Apple",
+      "version": {
+        "base_servings": "1.000000",
+        "meal_type_code": "breakfast",
+        "prep_time_minutes": 5,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+        "source_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+        "source_version": "sha256:0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+        "source_retrieved_at": null,
+        "source_document_sha256": "0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+        "source_original_servings": "1.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. WIC submission policy requires permission to share; it is not an independent unlimited commercial/derivative grant. No linked recipe-level restrictive license was found on this selected card.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "MILK_1_PERCENT",
+            "quantity": "80.000000",
+            "unit": "ml",
+            "source_amount_text": "1/3 cup low-fat or non-fat milk (or soy beverage)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "OATS_ROLLED",
+            "quantity": "60.000000",
+            "unit": "ml",
+            "source_amount_text": "1/4 cup oats (rolled or quick)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "YOGURT_PLAIN_LOW_FAT",
+            "quantity": "60.000000",
+            "unit": "ml",
+            "source_amount_text": "1/4 cup plain low-fat or non-fat yogurt",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": true
+          },
+          {
+            "food_ingredient_code": "CINNAMON_GROUND",
+            "quantity": "5.000000",
+            "unit": "ml",
+            "source_amount_text": "1 teaspoon cinnamon",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": true
+          },
+          {
+            "food_ingredient_code": "APPLE",
+            "quantity": "1.000000",
+            "unit": "pcs",
+            "source_amount_text": "1/2 apple (chopped)",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": true
+          }
+        ],
+        "steps": [
+          "Combine the milk, oats, yogurt, and cinnamon in a jar or resealable container and stir well. Cover and refrigerate overnight, or for at least 5 hours.",
+          "When you're ready to enjoy, chop and add the apple."
+        ],
+        "equipment_codes": [
+          "resealable_container",
+          "measuring_cup",
+          "measuring_spoon",
+          "knife",
+          "cutting_board"
+        ]
+      }
+    },
+    {
+      "canonical_code": "SNAP2_SIMPLE_GREEN_SMOOTHIE",
+      "canonical_name": "Simple Green Smoothie",
+      "version": {
+        "base_servings": "2.000000",
+        "meal_type_code": "other",
+        "prep_time_minutes": null,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+        "source_url": "https://snaped.fns.usda.gov/node/2489",
+        "source_version": "sha256:240c8b7a10a0399cb70743d48f59c9d6b828c8e640e9cbfc1eec0762cf6108ca",
+        "source_retrieved_at": null,
+        "source_document_sha256": "240c8b7a10a0399cb70743d48f59c9d6b828c8e640e9cbfc1eec0762cf6108ca",
+        "source_original_servings": "2.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Direct FNS source reviewed under the narrow project risk posture approved in issue #12 and recipe-localization-and-substitution.md. This is not blanket public-domain or unrestricted commercial/derivative permission. Preserve external contributor attribution. No source photos, logos, marks or nutrition panel imported.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "SPINACH",
+            "quantity": "240.000000",
+            "unit": "ml",
+            "source_amount_text": "1 cup kale or spinach",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BANANA",
+            "quantity": "1.000000",
+            "unit": "pcs",
+            "source_amount_text": "1 banana, medium",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "MILK_1_PERCENT",
+            "quantity": "240.000000",
+            "unit": "ml",
+            "source_amount_text": "1 cup low fat milk (or optional coconut milk or almond milk)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "YOGURT_PLAIN_LOW_FAT",
+            "quantity": "240.000000",
+            "unit": "ml",
+            "source_amount_text": "1 cup plain yogurt",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "APPLE",
+            "quantity": "1.000000",
+            "unit": "pcs",
+            "source_amount_text": "1 apple, medium (cored and sliced)",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "STRAWBERRY",
+            "quantity": "240.000000",
+            "unit": "ml",
+            "source_amount_text": "1 cup frozen fruit (all one fruit or a combination of mixed frozen fruit)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "In a blender, blend the spinach and low-fat milk.",
+          "Add in the rest of the ingredients, blending after each item.",
+          "Serve and enjoy, cold.",
+          "Reserve the leftover smoothie in the refrigerator for later in the day or the next day."
+        ],
+        "equipment_codes": [
+          "blender"
+        ]
+      }
+    },
+    {
+      "canonical_code": "SNAP3_GRILLED_FRUIT",
+      "canonical_name": "Grilled Fruit",
+      "version": {
+        "base_servings": "3.000000",
+        "meal_type_code": "other",
+        "prep_time_minutes": null,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP3-GRILLED-FRUIT",
+        "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit",
+        "source_version": "sha256:03269eead24a3965e76c71a9eed6b7b82b9d785845427fa9b8b445aee55cf6f9",
+        "source_retrieved_at": null,
+        "source_document_sha256": "03269eead24a3965e76c71a9eed6b7b82b9d785845427fa9b8b445aee55cf6f9",
+        "source_original_servings": "3.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "PINEAPPLE",
+            "quantity": "240.000000",
+            "unit": "ml",
+            "source_amount_text": "1 cup pineapple chunks",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "PEACH",
+            "quantity": "1.000000",
+            "unit": "pcs",
+            "source_amount_text": "1 peach (cubed)",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BANANA",
+            "quantity": "1.000000",
+            "unit": "pcs",
+            "source_amount_text": "1 banana (sliced)",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Wash hands with soap and water.",
+          "Place fruit chunks on a skewer to make kabobs.",
+          "Grill or broil on low heat until the fruit is hot and slightly golden."
+        ],
+        "equipment_codes": [
+          "skewer"
+        ]
+      }
+    },
+    {
+      "canonical_code": "WIC2_SPINACH_CAULIFLOWER_SMOOTHIE",
+      "canonical_name": "Spinach and Cauliflower Smoothie",
+      "version": {
+        "base_servings": "2.000000",
+        "meal_type_code": "other",
+        "prep_time_minutes": 5,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
+        "source_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+        "source_version": "sha256:439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6",
+        "source_retrieved_at": null,
+        "source_document_sha256": "439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6",
+        "source_original_servings": "2.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately. WIC submission policy requires permission to share; it is not an independent unlimited commercial/derivative grant. No linked recipe-level restrictive license was found on this selected card.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "MILK_1_PERCENT",
+            "quantity": "240.000000",
+            "unit": "ml",
+            "source_amount_text": "1 cup milk",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "YOGURT_PLAIN_LOW_FAT",
+            "quantity": "120.000000",
+            "unit": "ml",
+            "source_amount_text": "1/2 cup plain low-fat or non-fat yogurt (or vanilla flavored)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BANANA",
+            "quantity": "1.000000",
+            "unit": "pcs",
+            "source_amount_text": "1 banana (peeled and sliced)",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SPINACH",
+            "quantity": "240.000000",
+            "unit": "ml",
+            "source_amount_text": "1 cup spinach",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "APPLE",
+            "quantity": "240.000000",
+            "unit": "ml",
+            "source_amount_text": "1 cup apple (chopped)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CAULIFLOWER",
+            "quantity": "120.000000",
+            "unit": "ml",
+            "source_amount_text": "1/2 cup cauliflower (frozen)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "OATS_ROLLED",
+            "quantity": "120.000000",
+            "unit": "ml",
+            "source_amount_text": "1/2 cup oats",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Wash hands and then rinse fruits and vegetables before getting started.",
+          "Place all ingredients in a blender. Blend on high until smooth, about 1-2 minutes.",
+          "Pour into 2 glasses and enjoy as a snack."
+        ],
+        "equipment_codes": [
+          "blender",
+          "knife",
+          "cutting_board",
+          "measuring_cup"
+        ]
+      }
+    },
+    {
+      "canonical_code": "SNAP4_PEAR_ORANGE_SAUCE",
+      "canonical_name": "Pear in Orange Sauce",
+      "version": {
+        "base_servings": "4.000000",
+        "meal_type_code": "other",
+        "prep_time_minutes": null,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP4-PEAR-ORANGE-SAUCE",
+        "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+        "source_version": "sha256:7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+        "source_retrieved_at": null,
+        "source_document_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+        "source_original_servings": "4.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "PEAR",
+            "quantity": "4.000000",
+            "unit": "pcs",
+            "source_amount_text": "4 pears (medium)",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "ORANGE",
+            "quantity": "180.000000",
+            "unit": "ml",
+            "source_amount_text": "3/4 cup orange juice (100%)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SUGAR",
+            "quantity": "20.000000",
+            "unit": "ml",
+            "source_amount_text": "4 teaspoons sugar",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Peel the pears and cook in a double boiler for 15 minutes.",
+          "Mix sugar and orange juice and cook over low flame for 5 minutes. Cool for 5 minutes.",
+          "Place steamed pears on individual plates. Pour ¼ juice mixture over each and serve."
+        ],
+        "equipment_codes": [
+          "double_boiler"
+        ]
+      }
+    },
+    {
+      "canonical_code": "SNAP4_SPRING_VEGETABLE_SAUTE",
+      "canonical_name": "Spring Vegetable Saute",
+      "version": {
+        "base_servings": "4.000000",
+        "meal_type_code": "side",
+        "prep_time_minutes": null,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
+        "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+        "source_version": "sha256:63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+        "source_retrieved_at": null,
+        "source_document_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+        "source_original_servings": "4.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "OLIVE_OIL",
+            "quantity": "5.000000",
+            "unit": "ml",
+            "source_amount_text": "1 teaspoon olive oil",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "ONION_RED",
+            "quantity": "120.000000",
+            "unit": "ml",
+            "source_amount_text": "1/2 cup sweet onion (sliced)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "GARLIC",
+            "quantity": "1.000000",
+            "unit": "pcs",
+            "source_amount_text": "1 garlic clove (finely chopped)",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "POTATO",
+            "quantity": "3.000000",
+            "unit": "pcs",
+            "source_amount_text": "3 new potatoes (tiny, quartered)",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CARROT",
+            "quantity": "180.000000",
+            "unit": "ml",
+            "source_amount_text": "3/4 cup carrot (sliced)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "ASPARAGUS",
+            "quantity": "180.000000",
+            "unit": "ml",
+            "source_amount_text": "3/4 cup asparagus pieces",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "GREEN_BEANS",
+            "quantity": "180.000000",
+            "unit": "ml",
+            "source_amount_text": "3/4 cup sugar snap peas, or green beans",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "RADISH",
+            "quantity": "120.000000",
+            "unit": "ml",
+            "source_amount_text": "1/2 cup radishes (quartered)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SALT",
+            "quantity": "1.250000",
+            "unit": "ml",
+            "source_amount_text": "1/4 teaspoon salt",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BLACK_PEPPER",
+            "quantity": "1.250000",
+            "unit": "ml",
+            "source_amount_text": "1/4 teaspoon black pepper",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "DILL_DRIED",
+            "quantity": "2.500000",
+            "unit": "ml",
+            "source_amount_text": "1/2 teaspoon dill (dried)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "WATER",
+            "quantity": "30.000000",
+            "unit": "ml",
+            "source_amount_text": "If the vegetables start to brown, add a Tablespoon or 2 of water.",
+            "normalization_note": "Conditional source range is 1–2 tablespoons (15–30 ml) only if vegetables start to brown; quantity stores the source-explicit upper bound for deterministic planning.",
+            "prep_note": "Use only if vegetables start to brown; source permits 1–2 tablespoons of water.",
+            "optional": true
+          }
+        ],
+        "steps": [
+          "Heat the oil in a skillet. Cook the onion 2 minutes, add the garlic and cook another minute",
+          "Stir in the potatoes and carrots. Cover, turn the heat to low, and cook until almost tender, about 4 minutes.",
+          "If the vegetables start to brown, add a Tablespoon or 2 of water.",
+          "Now add the asparagus, peas, radishes, salt, pepper, and dill. Cook, stirring often, until just tender - about 4 minutes more.",
+          "Serve immediately."
+        ],
+        "equipment_codes": [
+          "skillet"
+        ]
+      }
+    },
+    {
+      "canonical_code": "FNS4_OVEN_FRIED_FISH",
+      "canonical_name": "Oven Fried Fish",
+      "version": {
+        "base_servings": "4.000000",
+        "meal_type_code": "main",
+        "prep_time_minutes": null,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "FNS4-OVEN-FRIED-FISH",
+        "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/fish",
+        "source_version": "sha256:068b5b0d4c7e45ad498758501bcc8f67b7e5f69f9c27ea4db4af39b05cba069c",
+        "source_retrieved_at": null,
+        "source_document_sha256": "068b5b0d4c7e45ad498758501bcc8f67b7e5f69f9c27ea4db4af39b05cba069c",
+        "source_original_servings": "4.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Direct FNS source reviewed under the narrow project risk posture approved in issue #12 and recipe-localization-and-substitution.md. This is not blanket public-domain or unrestricted commercial/derivative permission. Preserve external contributor attribution. No source photos, logos, marks or nutrition panel imported.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "EGG",
+            "quantity": "1.000000",
+            "unit": "pcs",
+            "source_amount_text": "1 large egg, slightly beaten",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SALT",
+            "quantity": "2.500000",
+            "unit": "ml",
+            "source_amount_text": "½ teaspoon salt",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BLACK_PEPPER",
+            "quantity": "2.500000",
+            "unit": "ml",
+            "source_amount_text": "½ teaspoon ground black pepper",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BREADCRUMBS",
+            "quantity": "120.000000",
+            "unit": "ml",
+            "source_amount_text": "½ cup breadcrumbs",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "TILAPIA_RAW",
+            "quantity": "453.592370",
+            "unit": "g",
+            "source_amount_text": "1 pound tilapia fillets, fresh or frozen and thawed (4 fillets)",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BUTTER_UNSALTED",
+            "quantity": "15.000000",
+            "unit": "ml",
+            "source_amount_text": "1 tablespoon butter, melted",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Preheat oven to 350°F.",
+          "In a small bowl, add egg, salt, and pepper and beat together.",
+          "Place the breadcrumbs in a separate bowl. Dip fish fillets in the egg mixture, then dip in the breadcrumbs to coat.",
+          "Melt butter in a shallow 9x13 inch baking pan for 1 minute in the oven. Tilt pan to coat with butter.",
+          "Arrange fish fillets in the pan.",
+          "Bake uncovered for 15-20 minutes, until fish flakes easily with a fork."
+        ],
+        "equipment_codes": [
+          "oven",
+          "bowl",
+          "baking_pan",
+          "fork"
+        ]
+      }
+    },
+    {
+      "canonical_code": "SNAP8_APPLE_CARROT_SOUP",
+      "canonical_name": "Apple Carrot Soup",
+      "version": {
+        "base_servings": "8.000000",
+        "meal_type_code": "other",
+        "prep_time_minutes": null,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP8-APPLE-CARROT-SOUP",
+        "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+        "source_version": "sha256:1cc2ed9ddb3253b4a9a5ed9aa6609184e7381035977d00a542a00239f8261258",
+        "source_retrieved_at": null,
+        "source_document_sha256": "1cc2ed9ddb3253b4a9a5ed9aa6609184e7381035977d00a542a00239f8261258",
+        "source_original_servings": "8.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "PORK_LOIN",
+            "quantity": "453.592370",
+            "unit": "g",
+            "source_amount_text": "1 pound pork (lean, cut into chunks)",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "APPLE",
+            "quantity": "4.000000",
+            "unit": "pcs",
+            "source_amount_text": "4 apples (with skin, cored and quartered)",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CARROT",
+            "quantity": "4.000000",
+            "unit": "pcs",
+            "source_amount_text": "4 carrots (large, peeled and cut into chunks)",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "GINGER",
+            "quantity": "4.000000",
+            "unit": "pcs",
+            "source_amount_text": "4 slices ginger",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SALT",
+            "quantity": "2.500000",
+            "unit": "ml",
+            "source_amount_text": "1/2 teaspoon salt",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "WATER",
+            "quantity": "4800.000000",
+            "unit": "ml",
+            "source_amount_text": "20 cups water",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Wash hands with soap and water.",
+          "In a large pot over high heat, combine pork, apples, carrots, ginger, salt, and water; bring to a boil.",
+          "Reduce heat to medium and simmer until soup reduces to about 8 cups of liquid, about 3 to 4 hours.",
+          "Skim fat from surface and serve.",
+          "Store leftover soup covered in refrigerator for up to 3 days."
+        ],
+        "equipment_codes": [
+          "pot"
+        ]
+      }
+    },
+    {
+      "canonical_code": "SNAP6_WALDORF_SALAD",
+      "canonical_name": "Waldorf Salad",
+      "version": {
+        "base_servings": "6.000000",
+        "meal_type_code": "salad",
+        "prep_time_minutes": null,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP6-WALDORF-SALAD",
+        "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+        "source_version": "sha256:7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+        "source_retrieved_at": null,
+        "source_document_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+        "source_original_servings": "6.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "WALNUTS_RAW",
+            "quantity": "60.000000",
+            "unit": "ml",
+            "source_amount_text": "1/4 cup walnuts (chopped)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "APPLE",
+            "quantity": "2.000000",
+            "unit": "pcs",
+            "source_amount_text": "2 apples (cored and diced)",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "CELERY",
+            "quantity": "240.000000",
+            "unit": "ml",
+            "source_amount_text": "1 cup celery (diced)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "RAISINS_GOLDEN",
+            "quantity": "120.000000",
+            "unit": "ml",
+            "source_amount_text": "1/2 cup raisins",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "YOGURT_GREEK_NONFAT",
+            "quantity": "60.000000",
+            "unit": "ml",
+            "source_amount_text": "1/4 cup plain yogurt, non-fat",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SUGAR",
+            "quantity": "2.500000",
+            "unit": "ml",
+            "source_amount_text": "1/2 teaspoon sugar",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "LEMON",
+            "quantity": "5.000000",
+            "unit": "ml",
+            "source_amount_text": "1 teaspoon lemon juice",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Preheat oven to 350 degrees.",
+          "Place chopped walnuts on a baking sheet and bake for 12-15 minutes. Stir occasionally until they are evenly toasted.",
+          "Combine apples, celery, nuts, and raisins.",
+          "Stir together yogurt, sugar, and lemon juice. Pour over apple mixture and toss lightly.",
+          "Refrigerate leftovers within 2 hours."
+        ],
+        "equipment_codes": [
+          "oven",
+          "baking_sheet"
+        ]
+      }
+    },
+    {
+      "canonical_code": "SNAP4_BROWN_RICE_PILAF",
+      "canonical_name": "Brown Rice Pilaf",
+      "version": {
+        "base_servings": "4.000000",
+        "meal_type_code": "side",
+        "prep_time_minutes": null,
+        "cook_time_minutes": 30,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP4-BROWN-RICE-PILAF",
+        "source_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+        "source_version": "sha256:f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281",
+        "source_retrieved_at": null,
+        "source_document_sha256": "f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281",
+        "source_original_servings": "4.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "RICE_BROWN",
+            "quantity": "120.000000",
+            "unit": "ml",
+            "source_amount_text": "1 1/2 cups brown rice",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "WATER",
+            "quantity": "720.000000",
+            "unit": "ml",
+            "source_amount_text": "3 cups water",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "ALMONDS_RAW",
+            "quantity": "60.000000",
+            "unit": "ml",
+            "source_amount_text": "1/4 cup almonds (chopped)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "PARSLEY_DRIED",
+            "quantity": "5.000000",
+            "unit": "ml",
+            "source_amount_text": "1 teaspoon parsley (dried)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "GARLIC_POWDER",
+            "quantity": "2.500000",
+            "unit": "ml",
+            "source_amount_text": "1/2 teaspoon garlic powder",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BLACK_PEPPER",
+            "quantity": "1.250000",
+            "unit": "ml",
+            "source_amount_text": "1/4 teaspoon black pepper",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Wash hands with soap and water.",
+          "Place all ingredients in a rice cooker and cook until the water evaporates, about 30 minutes.",
+          "Fluff cooked rice with a fork."
+        ],
+        "equipment_codes": [
+          "rice_cooker",
+          "fork"
+        ]
+      }
+    },
+    {
+      "canonical_code": "SNAP5_KALE_NUTS_RAISINS",
+      "canonical_name": "Kale with Nuts and Raisins",
+      "version": {
+        "base_servings": "5.000000",
+        "meal_type_code": "side",
+        "prep_time_minutes": null,
+        "cook_time_minutes": null,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP5-KALE-NUTS-RAISINS",
+        "source_url": "https://snaped.fns.usda.gov/node/1861",
+        "source_version": "sha256:7c2bb840618e0dfbe372e9ecdb697ad59d2fab36e0fbf07cabe347a93ea6a1a0",
+        "source_retrieved_at": null,
+        "source_document_sha256": "7c2bb840618e0dfbe372e9ecdb697ad59d2fab36e0fbf07cabe347a93ea6a1a0",
+        "source_original_servings": "5.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "WALNUTS_RAW",
+            "quantity": "60.000000",
+            "unit": "ml",
+            "source_amount_text": "1/4 cup nuts, chopped",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SUNFLOWER_OIL",
+            "quantity": "30.000000",
+            "unit": "ml",
+            "source_amount_text": "2 tablespoons vegetable oil",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "GARLIC",
+            "quantity": "2.000000",
+            "unit": "pcs",
+            "source_amount_text": "2 cloves garlic, chopped",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "KALE",
+            "quantity": "960.000000",
+            "unit": "ml",
+            "source_amount_text": "4 cups kale, stems removed and chopped (1 bunch)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "RAISINS_GOLDEN",
+            "quantity": "120.000000",
+            "unit": "ml",
+            "source_amount_text": "1/2 cup raisins",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Wash hands with soap and water.",
+          "Heat oven to 350°F.",
+          "On a baking sheet, toast nuts for 5 minutes.",
+          "Heat oil in frying pan on medium heat.",
+          "Add garlic and kale to frying pan and cook for 4 minutes.",
+          "Add raisins and nuts and cook for 1 minute more."
+        ],
+        "equipment_codes": [
+          "oven",
+          "baking_sheet",
+          "skillet"
+        ]
+      }
+    },
+    {
+      "canonical_code": "SNAP4_BRAISED_CHICKEN_SPINACH",
+      "canonical_name": "Braised Chicken Thighs with Spinach",
+      "version": {
+        "base_servings": "4.000000",
+        "meal_type_code": "main",
+        "prep_time_minutes": null,
+        "cook_time_minutes": 70,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
+        "source_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
+        "source_version": "sha256:d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+        "source_retrieved_at": null,
+        "source_document_sha256": "d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+        "source_original_servings": "4.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "CHICKEN_THIGH",
+            "quantity": "4.000000",
+            "unit": "pcs",
+            "source_amount_text": "4 (6-ounce) chicken thighs, bone-in, skin removed",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SUNFLOWER_OIL",
+            "quantity": "5.000000",
+            "unit": "ml",
+            "source_amount_text": "1 teaspoon oil",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SALT",
+            "quantity": "2.500000",
+            "unit": "ml",
+            "source_amount_text": "½ teaspoon salt",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "BLACK_PEPPER",
+            "quantity": "2.500000",
+            "unit": "ml",
+            "source_amount_text": "½ teaspoon black pepper",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "ONION_YELLOW",
+            "quantity": "1.000000",
+            "unit": "pcs",
+            "source_amount_text": "1 small onion, peeled, chopped",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "GARLIC",
+            "quantity": "3.000000",
+            "unit": "pcs",
+            "source_amount_text": "3 garlic cloves, peeled, minced",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "THYME_DRIED",
+            "quantity": "2.500000",
+            "unit": "ml",
+            "source_amount_text": "½ teaspoon dried thyme",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "ROSEMARY_DRIED",
+            "quantity": "2.500000",
+            "unit": "ml",
+            "source_amount_text": "½ teaspoon dried rosemary",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "WATER",
+            "quantity": "240.000000",
+            "unit": "ml",
+            "source_amount_text": "1 cup water",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SPINACH",
+            "quantity": "1.000000",
+            "unit": "pcs",
+            "source_amount_text": "1 10-ounce package frozen or 1 bunch fresh spinach",
+            "normalization_note": "Preserved the source count without a food-specific mass conversion.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Heat skillet over medium-high heat. Add 1 teaspoon oil. Add chicken, top side down. Cook about 8 minutes on each side, or until deeply browned. Remove the chicken to a dinner plate and set aside.",
+          "Reheat skillet over medium heat. Add the onion, garlic, thyme, and rosemary. Cook about 5 minutes, until the onion is soft and golden. Return the chicken to the pan.",
+          "Add the water, and cover. Continue cooking for about 30 minutes.",
+          "Add the fresh spinach and cook about 2 minutes, until it wilts. Serve right away."
+        ],
+        "equipment_codes": [
+          "skillet",
+          "plate"
+        ]
+      }
+    },
+    {
+      "canonical_code": "SNAP4_DILLED_FISH_FILLETS",
+      "canonical_name": "Dilled Fish Fillets",
+      "version": {
+        "base_servings": "4.000000",
+        "meal_type_code": "main",
+        "prep_time_minutes": null,
+        "cook_time_minutes": 6,
+        "total_time_minutes": null,
+        "difficulty_code": null,
+        "batch_friendly": null,
+        "freezable": null,
+        "storage_days_fridge": null,
+        "storage_days_freezer": null,
+        "verification_status": "SOURCE_VERIFIED",
+        "verified_at": "2026-09-05T16:06:13+00:00",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP4-DILLED-FISH-FILLETS",
+        "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
+        "source_version": "sha256:43d44c84d7c007a0c32906210b13212ffb43fb7a62312e9fb43c819f8a8a63a3",
+        "source_retrieved_at": null,
+        "source_document_sha256": "43d44c84d7c007a0c32906210b13212ffb43fb7a62312e9fb43c819f8a8a63a3",
+        "source_original_servings": "4.000000",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed directly FNS-hosted recipe under the accepted project risk posture, not a public-domain determination or unrestricted commercial/derivative license. No source photos, logos, trademarks or expressive marketing text imported. Exact source attribution and artifact hash retained separately.",
+        "change_note": "Initial production version compiled from accepted PR4-DATA2 curation and reviewed source-derived steps.",
+        "ingredients": [
+          {
+            "food_ingredient_code": "COD_ATLANTIC",
+            "quantity": "453.592370",
+            "unit": "g",
+            "source_amount_text": "1 pound haddock or cod fillets (frozen)",
+            "normalization_note": "Converted source avoirdupois weight to grams using exact pound/ounce constants.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "LEMON",
+            "quantity": "15.000000",
+            "unit": "ml",
+            "source_amount_text": "1 tablespoon lemon juice",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "DILL_DRIED",
+            "quantity": "0.625000",
+            "unit": "ml",
+            "source_amount_text": "1/8 teaspoon dill weed (dried)",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          },
+          {
+            "food_ingredient_code": "SALT",
+            "quantity": "0.625000",
+            "unit": "ml",
+            "source_amount_text": "1/8 teaspoon salt",
+            "normalization_note": "Converted source US recipe volume using 1 cup=240 ml, 1 Tbsp=15 ml, 1 tsp=5 ml, 1 qt=960 ml.",
+            "prep_note": null,
+            "optional": false
+          }
+        ],
+        "steps": [
+          "Thaw frozen fish in microwave oven. Wash hands with soap and water. Then, separate into 4 fillets or pieces.",
+          "Place fish in a glass-baking dish. Cover with wax paper.",
+          "Cook at \"medium\" power in the microwave for 3 minutes. Remove cover, turn fish over, and sprinkle with lemon juice, dill, and salt.",
+          "Cover and continue cooking at \"medium\" power for 3 minutes or until fish flakes with a fork."
+        ],
+        "equipment_codes": [
+          "microwave",
+          "baking_pan",
+          "fork"
+        ]
+      }
+    }
+  ]
+}

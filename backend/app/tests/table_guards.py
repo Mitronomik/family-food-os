@@ -38,6 +38,11 @@ CURRENT_ALLOWED_TABLES = {
     "food_ingredient_aliases",
     "food_nutrition_profiles",
     "food_ingredient_allergens",
+    "food_recipes",
+    "food_recipe_versions",
+    "food_recipe_ingredients",
+    "food_recipe_steps",
+    "food_recipe_equipment",
     "sqlite_sequence",
 }
 
