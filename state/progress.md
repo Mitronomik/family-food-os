@@ -21,6 +21,20 @@ PR6   Nutrition Core                       AUTHORIZED / NEXT
 
 Canonical implementation order remains `docs/family-food/master-roadmap.md`.
 
+## AGENT-HARNESS governance evidence
+
+PR #16 (PR5-CLOSE) merge was verified via GitHub and remote main on 2026-09-06:
+`abcb1ca8d464477baed72cdf8e06a0d126b5e743`, merged at `09:39:32Z`.
+Branch `docs/agent-harness-audit` uses that exact base. Implemented shorter root/
+scoped instructions, task routing, one PR delivery Skill, verification policy,
+rule-disposition ledger and eight-case eval matrix. Roadmap edits are limited to
+reading navigation; UI instruction files remain unchanged (P2 follow-up).
+
+This is supporting governance, not a numbered milestone. No runtime/schema/data
+change or backend regression run is claimed. Verification evidence is recorded
+in [harness evals](../docs/family-food/agent-harness-evals.md). Final review/merge
+remains separate. PR5 is COMPLETE, PR6 AUTHORIZED / NOT STARTED, PR7+ unauthorized.
+
 ## PR5 closure
 
 `PR5 — Pantry — COMPLETE`

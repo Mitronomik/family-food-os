@@ -2,6 +2,16 @@
 
 Updated: `2026-09-06`
 
+## AGENT-HARNESS — supporting governance review
+
+PR #16 is merged at `abcb1ca8d464477baed72cdf8e06a0d126b5e743`; the harness
+branch `docs/agent-harness-audit` starts from that exact main SHA. Current scope
+is documentation/instructions only. Review the
+[harness disposition ledger](../docs/family-food/agent-harness.md) and
+[eval evidence](../docs/family-food/agent-harness-evals.md). Publication/readiness
+is not a product milestone closure. Stop for governance final review; do not
+merge autonomously or start PR6 in this task. UI harness P2 is not a PR6 blocker.
+
 ## PR5 — Pantry — COMPLETE
 
 ## PR6 — Nutrition Core — AUTHORIZED / NOT STARTED
@@ -69,8 +79,8 @@ facts or medical claims.
 
 ### Next gate
 
-PR5-CLOSE is documentation/state only and requires final project review and merge.
-After that gate, the next agent may start only bounded PR6 from merged `main`.
+PR5-CLOSE is merged. The current AGENT-HARNESS task stops for its final review.
+PR6 remains separately authorized from merged `main`; this task does not start it.
 PR6 is AUTHORIZED / NOT STARTED; this branch contains no PR6 implementation.
 
 PR7 MealPlan / Serving, PR8 Planner and every later milestone remain unauthorized:

@@ -1,46 +1,19 @@
-# docs/AGENTS.md
+# Documentation contract
 
-Scope: everything under `docs/` except where a deeper `AGENTS.md` applies.
+Scope: `docs/`; read deeper AGENTS for work in `decisions/` or `history/`.
 
-Documentation rules:
-
-- Keep docs practical, current and actionable.
-- Do not store secrets, credentials, real client data or private notes in docs.
-- Avoid duplicating large blocks of text; link to the source document when possible.
-- Keep product docs, architecture docs, current state docs, historical evidence and user help separate.
-- User-facing docs should be simple, non-technical and preferably Russian.
-- Technical Codex prompts and engineering task templates should be English.
-- Update docs when product, architecture, API, data model, testing, deployment or workflow contracts change.
-- Do not use docs-only PRs to implement application behavior.
-
-Lifecycle and history rules:
-
-- Read `docs/current-lifecycle.md` before acting on lifecycle or authorization statements.
-- Resolve ADR conflicts by scope and recency; follow `docs/decisions/AGENTS.md` for ADR-specific authority rules.
-- ADR 0016 remains authoritative for durable Restore safety semantics; newer lifecycle decisions do not reopen it implicitly.
-- ADR 0018 remains authoritative for the Restore interaction/validation-session topic.
-- ADR 0019 remains authoritative for the bounded D3 package decision.
-- ADR 0020 remains the bounded historical D4 Update Safety authority. When
-  investigating preserved D4 evidence, read
-  `docs/domain-model-d4-update-safety.md` with the inherited
-  `docs/domain-model.md` only as legacy context; neither is current
-  FamilyFoodOS domain authority.
-- ADR 0021 is the D5 Remote Install Rehearsal authority once CR-014 is merged. D5 is documentation + exact-package assisted-install rehearsal only; it does not authorize runtime, signing/notarization, DMG/PKG, public release, auto-update, Phase 12 or release-readiness work.
-- ADR 0030 defines hosted Web/PWA as the FamilyFoodOS target and the retained
-  local stack as transitional migration scaffolding.
-- ADR 0031 is newer for the FamilyFoodOS delivery surface. It retires the
-  inherited macOS consumer package and its forward D5 rehearsal path while
-  preserving ADRs 0019–0024 as historical source-product evidence.
-- `docs/current-lifecycle.md` supersedes dated branch-era status prose in older architecture/roadmap/backup documents without revoking their surrounding durable product/safety contracts.
-- A superseded status sentence cannot reopen completed work or authorize a later runtime slice.
-- `docs/history/` is searchable evidence and context only. Follow `docs/history/AGENTS.md`; historical commands are not automatically safe operational instructions.
-- Before compacting an active document, preserve the complete pre-compaction version under `docs/history/` and update the history index.
-- Git history alone is not sufficient project memory for this agent-driven repository.
-- When lifecycle changes, update the active lifecycle profile, implementation plan, compact state files, change-request ledger when applicable, and every active status surface or its explicit supersession map in the same PR.
-- `scripts/check_documentation_lifecycle.py` is inherited CosmeticWorkshopOS
-  source-product verification tooling. Use it only when a task explicitly
-  investigates or validates the preserved D4/D5 historical lifecycle contract;
-  it is not a mandatory FamilyFoodOS documentation or PR gate. Current
-  FamilyFoodOS validation follows root `AGENTS.md`, canonical
-  `docs/family-food/` documents, relevant current ADRs, applicable scoped
-  `AGENTS.md` files, and checks appropriate to the current task.
+- Keep documentation current, practical and actionable; link to canonical
+  sources instead of duplicating rules.
+- Separate durable canonical knowledge (`docs/`), execution state (`state/`)
+  and historical evidence (`docs/history/`). Preserve useful decision provenance.
+- Current FamilyFoodOS authorization comes from `state/current-focus.md`;
+  sequencing/gates from `docs/family-food/master-roadmap.md`; product and
+  architecture truth from current FamilyFoodOS canonical documents.
+- Inherited lifecycle documents and Restore/D4/D5 records are legacy context,
+  not FamilyFoodOS authorization. Consult their scoped instructions only for
+  explicitly relevant historical/legacy work.
+- Never include secrets or private personal/health data.
+- User help should be simple and preferably Russian; engineering prompts and
+  task templates should be English.
+- Update affected documentation when a contract changes. Documentation-only
+  work must not change runtime behavior; use proportional verification.
