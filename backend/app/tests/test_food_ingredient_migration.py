@@ -40,8 +40,8 @@ def table_names(database_path: Path) -> set[str]:
         }
 
 
-def test_migration_chain_ends_with_food_ingredient_catalogue():
-    assert expected_migration_ids()[-3:-1] == [
+def test_migration_chain_keeps_food_ingredient_catalogue_after_household():
+    assert expected_migration_ids()[21:23] == [
         "0022_household_foundation",
         "0023_food_ingredient_catalogue",
     ]
@@ -52,9 +52,15 @@ def test_fresh_database_migrates_through_0023_with_only_authorized_new_tables(
 ):
     database_path = tmp_path / "fresh.sqlite"
 
-    assert (
-        apply_migrations(DatabaseConfig(path=database_path)) == expected_migration_ids()
-    )
+    original = list(MIGRATION_MODULES)
+    try:
+        MIGRATION_MODULES[:] = original[:23]
+        assert (
+            apply_migrations(DatabaseConfig(path=database_path))
+            == expected_migration_ids()
+        )
+    finally:
+        MIGRATION_MODULES[:] = original
     tables = table_names(database_path)
 
     assert CATALOGUE_TABLES <= tables

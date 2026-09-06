@@ -19,6 +19,8 @@ from app.api.demo_data import router as demo_data_router
 from app.api.exports import router as exports_router
 from app.api.health import router as health_router
 from app.api.households import create_households_router
+from app.api.pantry import create_pantry_router
+from app.persistence.sqlalchemy_core.pantry_composition import create_pantry_service
 from app.api.ingredients import router as ingredients_router
 from app.api.imports import router as imports_router
 from app.api.ingredient_lots import router as ingredient_lots_router
@@ -53,7 +55,9 @@ from app.version import resolve_effective_app_version
 APP_NAME = APP_SLUG
 APP_VERSION = resolve_effective_app_version()
 
-TAX_RATE_CONTEXT_BODY_FIELDS = frozenset({EXPECTED_PERCENT_FIELD, EXPECTED_EFFECTIVE_AT_FIELD})
+TAX_RATE_CONTEXT_BODY_FIELDS = frozenset(
+    {EXPECTED_PERCENT_FIELD, EXPECTED_EFFECTIVE_AT_FIELD}
+)
 
 
 def _omits_tax_rate_context(exc: RequestValidationError) -> bool:
@@ -79,7 +83,14 @@ async def _validation_error_response(request: Request, exc: RequestValidationErr
     issue = missing_tax_rate_context_error().issue
     return JSONResponse(
         status_code=422,
-        content={"detail": {"code": str(issue.code), "message": issue.message, "field": issue.field, "next_action": issue.next_action}},
+        content={
+            "detail": {
+                "code": str(issue.code),
+                "message": issue.message,
+                "field": issue.field,
+                "next_action": issue.next_action,
+            }
+        },
     )
 
 
@@ -124,6 +135,8 @@ def create_app() -> FastAPI:
     household_engine = create_sqlite_engine()
     app.state.household_engine = household_engine
     household_service = create_household_service(household_engine)
+    pantry_service = create_pantry_service(household_engine)
+    app.include_router(create_pantry_router(lambda: pantry_service), prefix="/api")
     app.include_router(alerts_router, prefix="/api")
     app.include_router(audit_logs_router, prefix="/api")
     app.include_router(backups_router, prefix="/api")
