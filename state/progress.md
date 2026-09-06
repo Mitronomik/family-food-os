@@ -14,8 +14,8 @@ PR2-DOCS Canonical Roadmap Sync            COMPLETE
 PR3   FoodIngredient Catalogue             COMPLETE
 PR4-DATA Recipe coverage support           COMPLETE
 PR4-DATA2 Russia/SPB corpus re-curation    COMPLETE
-PR4   Recipe Catalogue                     READY FOR REVIEW
-PR5   Pantry                               UNAUTHORIZED
+PR4   Recipe Catalogue                     COMPLETE
+PR5   Pantry                               AUTHORIZED / NEXT
 ```
 
 Canonical implementation order remains `docs/family-food/master-roadmap.md`.
@@ -50,13 +50,24 @@ Superseded as PR4 hard gates:
 
 `source_retrieved_at` is nullable. Known true instants are stored; unknown values remain `NULL`.
 
-## PR4 delivered candidate
+## PR4 closure
+
+`PR4 — Recipe Catalogue — COMPLETE`
+
+- GitHub PR [#10](https://github.com/Mitronomik/family-food-os/pull/10): MERGED;
+- merge commit: `e7a2e00615c8ef1f5bdb4634089e821542ba50dc`;
+- accepted/merged head: `0ac6c9d34a3cc54052c8fd01af3acfc49786242f`;
+- final project review: `PR4 FINAL REVIEW: ACCEPT — READY TO MERGE`;
+- final regression gate: PASS;
+- deterministic seed/idempotency and fail-closed curation validation remain accepted.
+
+## PR4 accepted implementation
 
 Latest fully tested implementation commit:
 
 `173b0f5479c7af2dd7095bf54f9393b2ff68ba55`
 
-PR #10 contains:
+Merged PR #10 delivered:
 
 - Recipe and immutable/versioned RecipeVersion;
 - ordered RecipeIngredient referencing `food_ingredients`;
@@ -77,12 +88,14 @@ Production seed counts:
 
 ```text
 30 Recipe
-30 RecipeVersion v1
+30 SOURCE_VERIFIED RecipeVersion v1
 189 RecipeIngredient
 169 RecipeStep
 86 RecipeEquipment
 34 equipment codes
-81 FoodIngredient codes
+81 referenced FoodIngredient codes
+0 unresolved required ingredients
+0 unresolved required direction-consumables
 ```
 
 Ordered steps are durably reviewed in `data/curation/pr4-runtime/recipe-steps.json`. The selected Grilled Fruit variant has three active steps; wooden-skewer soaking is conditional and not active because DATA2 selected a non-wood skewer.
@@ -114,4 +127,9 @@ Ordered steps are durably reviewed in `data/curation/pr4-runtime/recipe-steps.js
 
 ## Current gate
 
-PR4 is READY FOR PROJECT FINAL REVIEW, not COMPLETE. PR #10 remains OPEN and must not be merged without explicit post-review user authorization. PR5 remains UNAUTHORIZED.
+PR4 is COMPLETE; PR #10 is merged and no PR carries unfinished PR4 work.
+`PR5 — Pantry — AUTHORIZED / NEXT` is not started. After PR4-CLOSE review and
+merge, begin bounded PR5 from current merged `main`. The closure records the
+accepted evidence above without rerunning the full backend regression or
+changing production data. Later Nutrition, MealPlan/Serving, Planner, Shopping,
+Prep, Retail, AI, Auth/PostgreSQL and PWA remain unauthorized by this task.

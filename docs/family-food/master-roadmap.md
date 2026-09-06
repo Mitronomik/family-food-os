@@ -1,7 +1,7 @@
 # FamilyFoodOS — Master Roadmap
 
 **Status:** canonical repository sequencing and delivery-gate contract  
-**Updated:** `2026-09-02`
+**Updated:** `2026-09-06`
 
 ## 1. Authority
 
@@ -33,6 +33,12 @@ PR1   Identity Detox                       COMPLETE
 PR2-A Architecture & Persistence Contract COMPLETE
 PR2-B Persistence Foundation               COMPLETE
 PR2-C Household Foundation                 COMPLETE
+PR2-DOCS Canonical Roadmap Sync            COMPLETE
+PR3   FoodIngredient Catalogue             COMPLETE
+PR4-DATA Recipe coverage support           COMPLETE
+PR4-DATA2 Russia/SPB corpus re-curation    COMPLETE
+PR4   Recipe Catalogue                     COMPLETE
+PR5   Pantry                               AUTHORIZED / NOT STARTED
 ```
 
 PR2-C closure evidence:
@@ -43,14 +49,21 @@ PR2-C closure evidence:
 - merged at: `2026-09-01T21:23:23Z`;
 - final project review: `PR2-C FINAL REVIEW: ACCEPT`.
 
-The next product milestone is:
+PR3 FoodIngredient Catalogue is COMPLETE (PR #7 merged). Supporting
+PR4-DATA and PR4-DATA2 operations are COMPLETE; they do not add product milestones.
 
-`PR3 — FoodIngredient Catalogue`
+PR4 closure evidence:
 
-`PR2-DOCS — Canonical Roadmap & PR2-C Closure Sync` is a documentation-only
-governance operation between PR2-C and PR3. It is not a product milestone and
-does not alter the sequence below. PR3 implementation must wait until PR2-DOCS
-is reviewed and merged.
+- GitHub PR [#10](https://github.com/Mitronomik/family-food-os/pull/10): merged;
+- accepted/merged head: `0ac6c9d34a3cc54052c8fd01af3acfc49786242f`;
+- merge commit: `e7a2e00615c8ef1f5bdb4634089e821542ba50dc`;
+- final project review: `PR4 FINAL REVIEW: ACCEPT — READY TO MERGE`;
+- final regression gate: PASS.
+
+The next product milestone is `PR5 — Pantry — AUTHORIZED / NOT STARTED`.
+After PR4-CLOSE documentation review and merge, begin bounded PR5 from current
+merged `main`. PR4-CLOSE synchronizes status only; it changes no sequence, gate,
+architecture rule, quantitative target or downstream authorization.
 
 ## 3. North Star and core-loop contract
 
@@ -163,8 +176,8 @@ changes them:
 ✅ PR2-B Persistence Foundation
 ✅ PR2-C Household Foundation
 
-→ PR3   FoodIngredient Catalogue
-→ PR4   Recipe Catalogue
+✅ PR3   FoodIngredient Catalogue
+✅ PR4   Recipe Catalogue
 → PR5   Pantry
 → PR6   Nutrition Core
 → PR7   MealPlan / Serving + serving-nutrition integration
@@ -334,7 +347,7 @@ async persistence, Client reuse, FoodIngredient or later product context.
 `48c72aeba19a1e6ece0dc729f0a80de930be88a8`, and
 `PR2-C FINAL REVIEW: ACCEPT`.
 
-### PR3 — FoodIngredient Catalogue
+### PR3 — FoodIngredient Catalogue — COMPLETE
 
 PR3 introduces the canonical platform-owned food catalogue. It is not
 Household-owned.
@@ -401,7 +414,7 @@ duplicates; canonical and alias lookup works; invalid units/numbers are safely
 rejected; nutrition provenance is mandatory; deactivation is deterministic;
 and no schema, repository, API or seed couples `FoodIngredient` to RetailSKU.
 
-### PR4 — Recipe Catalogue
+### PR4 — Recipe Catalogue — COMPLETE
 
 **Goal:** introduce the verified platform recipe catalogue used by Nutrition,
 Planner, Shopping and Prep.
