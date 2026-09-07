@@ -2,22 +2,25 @@
 
 Updated: `2026-09-07`
 
-PR6 engine (PR #18) and DATA-A (PR #19) are ACCEPTED / MERGED. B1 starts at
-`60908eb8270ef356eff8552855b4cc5d2aa9ee44` on
-`feature/pr6-data-b1-measure-evidence` and establishes the exact evidence/binding
-foundation through `0026_nutrition_measure_evidence`.
+PR6 engine (#18) and DATA-A (#19) are ACCEPTED / MERGED. B1 is established by
+PR #20, merged at `2ce9917f51ac3161d4cb2839f6003e7a24bc96bd`.
 
-Canonical B1 architecture, mapping, import procedure and production audit:
-[nutrition-data-readiness.md](../docs/family-food/nutrition-data-readiness.md).
-Verification evidence: [progress](progress.md#pr6-data-b1-evidence).
+PR6-INFRA starts from that exact base on `infra/sqlite-rebuild-migration-runner`.
+This changeset establishes explicit SQLite `foreign_key_rebuild` migration mode.
+The runner owns the FK toggle, transaction, marker, pre-commit whole-database
+validation and FK restoration. Earlier completed migration work is committed
+before the special migration; failures leave a valid, resumable prefix.
 
-57 evidence records, 189 current assessments and 123 ordered issues. Statuses:
-66 exact, 20 approved g, 37 review-required estimates, 66 blocked. All 43 estimates
-remain non-executable; 11 gram rows are blocked. Actual audit: 30 INCOMPLETE
-recipes. Production recipe/profile source files and all DATA-A research bytes
-are unchanged. No API/frontend or future context is introduced.
+Canonical lifecycle, module restrictions and restoration-failure semantics:
+[architecture §13.1](../docs/family-food/architecture.md#131-sqlite-foreign-key-table-rebuild-capability-pr6-infra).
+Executed verification: [progress](progress.md#pr6-infra-verification).
 
-B1 establishes the evidence/binding foundation; PR6 remains NOT COMPLETE.
-DATA-B2 is NOT AUTHORIZED; PR7+ remain UNAUTHORIZED. No separate DATA-B1-CLOSE
-is needed. Source corrections, RecipeVersion v2 and estimate policy belong to
-separately authorized follow-up decisions.
+Migration head stays `0026_nutrition_measure_evidence`. Historical migrations,
+production schema and accepted catalogue/research/seed bytes are unchanged.
+No production rebuild migration exists in this operation; tests use synthetic
+modules only. B1 remains 57 evidence / 189 assessments / 123 issues across
+30 v1 RecipeVersions / 189 ingredient rows; estimates remain non-executable.
+
+PR6 remains NOT COMPLETE. B2-A is the next separately authorized product/data
+operation and must start from accepted main containing this capability. B2-B
+remains NOT AUTHORIZED; PR7+ remain UNAUTHORIZED. No INFRA-CLOSE is required.
