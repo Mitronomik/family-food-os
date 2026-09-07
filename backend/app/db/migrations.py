@@ -1,4 +1,5 @@
 from importlib import import_module
+import sqlite3
 
 from app.db.config import DatabaseConfig
 from app.db.connection import session
@@ -32,6 +33,86 @@ MIGRATION_MODULES = [
     "app.migrations.versions.0026_nutrition_measure_evidence",
 ]
 MIGRATION_TABLE = "schema_migrations"
+
+
+class MigrationRunnerError(RuntimeError):
+    """The migration connection or capability violates the runner contract."""
+
+
+class MigrationForeignKeyValidationError(MigrationRunnerError):
+    def __init__(self, migration_id, violations):
+        self.migration_id = migration_id
+        # SQLite columns: child table, child rowid, parent table, FK index.
+        self.violations = tuple(tuple(row) for row in violations)
+        super().__init__(
+            f"Migration {migration_id}: foreign_key_check failed: {self.violations!r}"
+        )
+
+
+def _insert_migration_marker(connection, migration_id):
+    connection.execute(
+        f"INSERT INTO {MIGRATION_TABLE} (migration_id) VALUES (?)",
+        (migration_id,),
+    )
+
+
+def _rebuild_authorizer(action, first, second, database, trigger):
+    # Rebuild modules use execute/executemany, never transaction control or
+    # executescript (whose implicit COMMIT would break schema/marker atomicity).
+    if action in (sqlite3.SQLITE_TRANSACTION, sqlite3.SQLITE_SAVEPOINT):
+        return sqlite3.SQLITE_DENY
+    if (
+        action == sqlite3.SQLITE_PRAGMA
+        and first.lower() == "foreign_keys"
+        and second is not None
+    ):
+        return sqlite3.SQLITE_DENY
+    if (
+        action in (sqlite3.SQLITE_INSERT, sqlite3.SQLITE_UPDATE, sqlite3.SQLITE_DELETE)
+        and first == MIGRATION_TABLE
+    ):
+        return sqlite3.SQLITE_DENY
+    return sqlite3.SQLITE_OK
+
+
+def _apply_foreign_key_rebuild(connection, migration):
+    """Own one opt-in rebuild and marker; earlier migrations form a durable prefix."""
+    if connection.in_transaction:
+        connection.commit()
+    committed = False
+    try:
+        if connection.execute("PRAGMA foreign_keys").fetchone()[0] != 1:
+            raise MigrationRunnerError("Rebuild requires initial foreign_keys=ON.")
+        connection.execute("PRAGMA foreign_keys=OFF")
+        if connection.execute("PRAGMA foreign_keys").fetchone()[0] != 0:
+            raise MigrationRunnerError("Could not disable foreign keys before rebuild.")
+        connection.execute("BEGIN")
+        connection.set_authorizer(_rebuild_authorizer)
+        try:
+            migration.upgrade(connection)
+        finally:
+            connection.set_authorizer(None)
+        _insert_migration_marker(connection, migration.MIGRATION_ID)
+        violations = connection.execute("PRAGMA foreign_key_check").fetchall()
+        if violations:
+            raise MigrationForeignKeyValidationError(migration.MIGRATION_ID, violations)
+        connection.commit()
+        committed = True
+    except BaseException:
+        connection.rollback()
+        raise
+    finally:
+        # session() disposes this dedicated connection even if restoration fails.
+        # A restoration failure after commit cannot undo the valid migration.
+        try:
+            connection.execute("PRAGMA foreign_keys=ON")
+            if connection.execute("PRAGMA foreign_keys").fetchone()[0] != 1:
+                raise MigrationRunnerError("foreign_keys readback is not ON")
+        except Exception as error:
+            raise MigrationRunnerError(
+                f"Migration {migration.MIGRATION_ID}: FK restoration failed; "
+                f"rebuild committed={committed}. Connection must be disposed."
+            ) from error
 
 
 def _ensure_migration_table(connection) -> None:
@@ -81,13 +162,18 @@ def apply_migrations(config: DatabaseConfig | None = None) -> list[str]:
         for module_name in MIGRATION_MODULES:
             migration = import_module(module_name)
             migration_id = migration.MIGRATION_ID
+            mode = getattr(migration, "SQLITE_MIGRATION_MODE", "standard")
+            if mode not in ("standard", "foreign_key_rebuild"):
+                raise MigrationRunnerError(
+                    f"Migration {migration_id}: unknown SQLite migration mode {mode!r}."
+                )
             if migration_id in existing:
                 continue
-            migration.upgrade(connection)
-            connection.execute(
-                f"INSERT INTO {MIGRATION_TABLE} (migration_id) VALUES (?)",
-                (migration_id,),
-            )
+            if mode == "foreign_key_rebuild":
+                _apply_foreign_key_rebuild(connection, migration)
+            else:
+                migration.upgrade(connection)
+                _insert_migration_marker(connection, migration_id)
             applied.append(migration_id)
     return applied
 

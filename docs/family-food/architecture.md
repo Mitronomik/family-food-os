@@ -759,6 +759,54 @@ Selecting SQLAlchemy Core does not require adding Alembic now. No physical
 database is governed by two independent migration histories. PR2-A creates or
 modifies no migration.
 
+### 13.1 SQLite foreign-key table-rebuild capability (PR6-INFRA)
+
+The custom SQLite runner remains the sole SQLite schema authority. A migration
+without `SQLITE_MIGRATION_MODE`, or with the value `"standard"`, uses the existing
+runner behavior. Historical migrations 0001–0026 are unchanged. Unknown mode
+values fail explicitly. This capability is SQLite infrastructure-specific; it
+does not introduce Alembic or change PostgreSQL/shared-deployment timing.
+
+A future migration requiring SQLite's
+[generalized table rebuild](https://www.sqlite.org/lang_altertable.html#otheralter) must explicitly
+declare `SQLITE_MIGRATION_MODE = "foreign_key_rebuild"`. The runner then:
+
+1. Commits any active transaction containing earlier completed migrations and
+   their markers, establishing a deliberate durable migration boundary.
+2. Verifies initial `foreign_keys=1`, disables foreign keys outside a transaction,
+   and verifies `foreign_keys=0` before executing the migration.
+3. Starts an explicit transaction, runs `upgrade(connection)`, and inserts the
+   migration marker in that same transaction.
+4. Executes whole-database `PRAGMA foreign_key_check` before commit. Any violation
+   aborts the rebuild; diagnostics retain child table/rowid, parent table and FK
+   index. Query errors and marker/upgrade failures also roll back the rebuild.
+5. Commits the validated schema/data changes and marker together, then restores
+   `foreign_keys=ON` outside the transaction and verifies readback. Error paths
+   also restore enforcement before the dedicated connection is disposed.
+
+Rebuild modules own only schema/data transformation, using `execute` or
+`executemany`. They must not control FK pragmas, transactions/savepoints,
+commit/rollback, or migration markers. In particular, `executescript` implicitly
+commits and is forbidden in this mode. During `upgrade`, a SQLite authorizer
+rejects transaction/savepoint control, FK-setting writes and marker-row writes.
+The runner removes that guard before its own marker/validation/commit operations.
+Modules are trusted repository code and must not replace the runner's authorizer
+or close its connection. The capability does not disable FK enforcement globally.
+
+A failed rebuild leaves the preceding completed migration prefix durable and
+the failed migration absent, allowing a later invocation to resume there.
+A fresh multi-migration invocation is **not** one atomic transaction. Each
+opt-in rebuild's schema/data changes and marker are atomic together. If restoring
+FK enforcement fails after a successful commit, the runner raises an explicit
+connection-state error reporting that the rebuild committed; it cannot undo that
+commit. The session closes the connection, and new FamilyFoodOS connections
+enable FK enforcement through the existing connection contract.
+
+PR6-INFRA adds this capability only. Production migration head remains
+`0026_nutrition_measure_evidence`; no production schema or catalogue data changes.
+The source-quantity operation PR6-DATA-B2-A must start from accepted main
+containing this capability, under its separate bounded authorization.
+
 ## 14. Deployment and tenancy phases
 
 ### Phase 1 — Local vertical slice

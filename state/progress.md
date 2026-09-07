@@ -21,6 +21,61 @@ PR6   Nutrition Core                       NOT COMPLETE (engine ACCEPTED / MERGE
 
 Canonical implementation order remains `docs/family-food/master-roadmap.md`.
 
+## PR6-INFRA verification
+
+Exact base: `2ce9917f51ac3161d4cb2839f6003e7a24bc96bd` (PR #20 merged).
+Branch: `infra/sqlite-rebuild-migration-runner`. This changeset establishes the
+explicit SQLite rebuild capability documented in
+[architecture §13.1](../docs/family-food/architecture.md#131-sqlite-foreign-key-table-rebuild-capability-pr6-infra).
+PR6 remains NOT COMPLETE. B2-A is the next separately authorized product/data
+operation, starting from accepted main containing this capability. B2-B remains
+NOT AUTHORIZED; PR7+ remain UNAUTHORIZED. No INFRA-CLOSE is required.
+
+Executed with `PYTHONPATH=backend AI_ENABLED=false` using
+`backend/.venv/bin/python -m pytest`:
+
+- New runner contract tests: **22 passed in 1.00s**. Real SQLite standard →
+  rebuild → standard behavior, FK OFF outside a transaction, explicit BEGIN,
+  schema + marker commit, pre-commit whole-database FK check, rollback on upgrade,
+  marker, check-query and FK-violation failures, restoration on all those paths,
+  initial/disable/restore setting failures, connection disposal, fresh failure /
+  resume, unknown modes, and prohibited module transaction/marker ownership.
+- Focused migration/startup/backup/restore selection: **261 passed in 52.25s**
+  with authorized local-loopback access. Selection: `test_migration_runner_rebuild`,
+  `test_database_foundation`, `test_migration_lineage`, persistence
+  `test_migration_coexistence` / `test_nutrition_evidence`,
+  `test_d4_a_startup_compatibility`, `test_backup_consistency`, and launcher
+  `test_restore_validation`, `test_restore_execution_coordinator_c4i`,
+  `test_restore_startup_recovery`.
+- The same focused sandbox attempt had **235 passed, 5 failed, 21 errors in
+  41.20s**; all failures/errors were launcher loopback socket permission denials.
+  No tests were weakened or skipped to resolve this environment restriction.
+- Full backend + launcher sandbox attempt (`--maxfail=1 --tb=short`):
+  **2862 passed, 1 failed in 197.22s**. The first failure was the launcher
+  backend-handshake test attempting a denied `127.0.0.1` bind.
+- Full backend + launcher with authorized local-loopback access:
+  **3498 passed in 496.89s (0:08:16)**, zero failures/errors/skips. Command:
+  `PYTHONPATH=backend AI_ENABLED=false backend/.venv/bin/python -m pytest -q backend/app/tests launcher/tests --tb=short`.
+- Static/scope checks: Ruff check and format check pass for the two changed
+  Python files; `git diff --check` and `git diff --cached --check` pass. Seven
+  intended files staged; unrelated `.DS_Store` excluded. Local documentation
+  links resolve; protected production paths are byte-identical to accepted base.
+- Populated prerequisite fixture: 30 v1 RecipeVersions / 189 RecipeIngredients /
+  B1 57 evidence / 189 assessments / 123 issues. Full SQL dump before/after an
+  opt-in no-op migration is identical after excluding only its synthetic marker;
+  this includes all existing IDs, values, indexes, triggers and FK relationships.
+- Accepted-runner comparison: loaded the original runner from exact base using
+  `git show`, migrated separate empty temporary databases with accepted and new
+  runners, and compared every `(type, name, tbl_name, sql)` schema object. All
+  **172 schema objects are identical**. Both chains have exactly 26 migrations,
+  head `0026_nutrition_measure_evidence`, empty FK checks and `[]` on second apply.
+  SHA-256 of the ordered schema JSON:
+  `9ec78400ce9efd57e2fa92c8fb6e6884cb105946e4a11491515557258255a727`.
+
+Production migrations 0001–0026 and all `data/` bytes are unchanged. No production
+migration ID, table, RecipeVersion, RecipeIngredient, FoodNutritionProfile or
+B1 payload changes. Synthetic migration modules exist only in tests.
+
 ## PR6 implementation evidence
 
 - Accepted starting main: `0979181409d34e4a193d58b60f4bbc8fa8d1e974` (PR #17 merged).

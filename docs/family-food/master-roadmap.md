@@ -79,8 +79,15 @@ contract remains active. PR6-DATA-A is ACCEPTED / MERGED in PR #19 at
 `60908eb8270ef356eff8552855b4cc5d2aa9ee44`. Supporting PR6-DATA-B1 establishes
 the exact evidence/row-binding foundation described in the
 [data-readiness decision](nutrition-data-readiness.md), without a new numbered
-milestone. DATA-B2 is NOT AUTHORIZED; no DATA-B1-CLOSE is required. PR7 MealPlan /
-Serving and all later milestones remain unauthorized. No roadmap order, gate or quantitative target changes.
+milestone. B1 is established by PR #20, merged at
+`2ce9917f51ac3161d4cb2839f6003e7a24bc96bd`. PR6-INFRA establishes the explicit
+SQLite table-rebuild capability in [architecture §13.1](architecture.md#131-sqlite-foreign-key-table-rebuild-capability-pr6-infra),
+without adding a migration or changing production schema/data. DATA-B2-A remains
+the next separately authorized product/data operation and must start from accepted
+main containing that capability; its implementation is outside PR6-INFRA.
+DATA-B2-B is NOT AUTHORIZED. No DATA-B1-CLOSE or INFRA-CLOSE is required.
+PR7 MealPlan / Serving and all later milestones remain unauthorized.
+No roadmap order, gate or quantitative target changes.
 
 ## 3. North Star and core-loop contract
 
