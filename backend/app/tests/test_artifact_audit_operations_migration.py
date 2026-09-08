@@ -31,7 +31,8 @@ HOUSEHOLD_MIGRATION_ID = "0022_household_foundation"
 FOOD_INGREDIENT_MIGRATION_ID = "0023_food_ingredient_catalogue"
 FOOD_RECIPE_MIGRATION_ID = "0024_food_recipe_catalogue"
 PANTRY_MIGRATION_ID = "0025_pantry"
-HEAD_MIGRATION_ID = "0026_nutrition_measure_evidence"
+NUTRITION_MIGRATION_ID = "0026_nutrition_measure_evidence"
+HEAD_MIGRATION_ID = "0027_recipe_same_source_revisions"
 TABLE = "artifact_audit_operations"
 
 
@@ -166,6 +167,7 @@ def test_a_database_at_0019_reports_0020_then_0021_pending(tmp_path):
         FOOD_INGREDIENT_MIGRATION_ID,
         FOOD_RECIPE_MIGRATION_ID,
         PANTRY_MIGRATION_ID,
+        NUTRITION_MIGRATION_ID,
         HEAD_MIGRATION_ID,
     ]
 
@@ -184,6 +186,7 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         FOOD_INGREDIENT_MIGRATION_ID,
         FOOD_RECIPE_MIGRATION_ID,
         PANTRY_MIGRATION_ID,
+        NUTRITION_MIGRATION_ID,
         HEAD_MIGRATION_ID,
     ]
     assert snapshot(database_path) == before
@@ -567,6 +570,7 @@ def test_user_mode_startup_backs_up_before_applying_0020(monkeypatch, tmp_path):
         FOOD_INGREDIENT_MIGRATION_ID,
         FOOD_RECIPE_MIGRATION_ID,
         PANTRY_MIGRATION_ID,
+        NUTRITION_MIGRATION_ID,
         HEAD_MIGRATION_ID,
     ]
     assert result.backup is not None

@@ -101,10 +101,10 @@ def test_recipe_calculation_has_one_connection_no_writes_and_no_schema_change(
             database.execute(
                 "SELECT migration_id FROM schema_migrations ORDER BY rowid DESC LIMIT 1"
             ).fetchone()[0]
-            == "0026_nutrition_measure_evidence"
+            == "0027_recipe_same_source_revisions"
         )
-    assert expected_migration_ids()[-1] == "0026_nutrition_measure_evidence"
-    assert len(expected_migration_ids()) == 26
+    assert expected_migration_ids()[-1] == "0027_recipe_same_source_revisions"
+    assert len(expected_migration_ids()) == 27
 
 
 def test_member_lookup_enforces_household_scope(nutrition_engine):

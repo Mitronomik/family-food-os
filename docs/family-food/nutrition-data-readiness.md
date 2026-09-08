@@ -3,8 +3,9 @@
 Status: **PR6 engine implementation ACCEPTED / MERGED; PR6 milestone NOT COMPLETE**.
 PR6-DATA-A is ACCEPTED / MERGED in PR #19 at
 `60908eb8270ef356eff8552855b4cc5d2aa9ee44`. The DATA-A findings below retain
-their historical meaning. The later **B1 DECISION** selects and establishes the
-exact evidence/binding foundation. DATA-B2 and PR7+ are NOT AUTHORIZED.
+their historical meaning. **B1** establishes the exact evidence/binding
+foundation; **B2-A** establishes the bounded same-source quantity corrections
+and audit v3 described below. B2-B is NOT AUTHORIZED; PR7+ remain UNAUTHORIZED.
 
 ## FACT
 
@@ -502,6 +503,144 @@ B1 does not correct source quantities, forms, food mappings or profile values,
 fill fiber, set profile estimation flags, or accept any estimated conversion.
 Those data defects remain enforced. Source quantity/food changes require a
 separately reviewed RecipeVersion v2; new rows do not inherit old assessments.
-DATA-B2 scope, estimate acceptance/rejection policy and PR6 closure criteria
-require separate authorization. DATA-B2 is NOT AUTHORIZED; PR7+ remain
-UNAUTHORIZED. No separate DATA-B1-CLOSE is required.
+This was B1's remaining boundary. The separately authorized B2-A quantity-only
+slice is established below. B2-B, estimate acceptance and PR6 closure remain
+outside that authorization; PR7+ remain UNAUTHORIZED.
+
+
+## DECISION — PR6-DATA-B2-A same-source quantity corrections
+
+B2-A starts from accepted main `74bc80eb3ef0e34e17751856638ac58bbccb840e`
+(PR #21 / PR6-INFRA). This changeset establishes same-source immutable revision
+support, six reviewed source-quantity corrections, explicit assessments for the
+new rows, and production audit v3. External provenance is distinct from internal
+RecipeVersion identity; [architecture §13.2](architecture.md#132-same-source-recipeversion-revisions-pr6-data-b2-a)
+owns the migration and deterministic repository contract.
+
+### Source re-review and publication gate
+
+All five accepted original artifacts were reopened on 2026-09-08 and their full
+SHA-256 values matched PR4/DATA-A. The salsa ingredient page (PDF p55 / printed
+p53) was also rendered and inspected. The accepted SNAP/WIC saved primary HTML
+ingredient lists and directions were reopened, not replaced with live or secondary
+recipes. Exact evidence references, old quantities, source text, reviewed results,
+normalization notes and changed-row Nutrition decisions are in the
+[six-row curation record](../../data/curation/pr6-data-b2a/source-quantity-corrections.json).
+DATA-A's original findings remain historically intact.
+
+| Recipe / position | Reviewed original source | v1 → v2 quantity | Outcome |
+| --- | --- | --- | --- |
+| HARV6_FRESH_TOMATO_SALSA:1 | Fresh branch is 1 cup; 8 oz belongs to the canned alternative | 226.796185 g → 240.000000 ml | CORRECTED / RESOLVED |
+| SNAP6_SPINACH_APPLE_SALAD:1 | 2/3 package, with the package specified as 10 oz | 283.495231 g → 188.996821 g | CORRECTED / RESOLVED |
+| SNAP6_SPINACH_APPLE_SALAD:2 | Primary amount 1 1/2 apples; parenthetical permits a 1–2 variation | 1.000000 pcs → 1.500000 pcs | CORRECTED / RESOLVED |
+| SNAP6_SEARED_GREENS:1 | 1 1/2 lb for the retained kale alternative | 226.796185 g → 680.388555 g | CORRECTED / RESOLVED |
+| WIC1_OVERNIGHT_OATS_CINNAMON_APPLE:5 | 1/2 apple, added in the instructions | 1.000000 pcs → 0.500000 pcs | CORRECTED / RESOLVED |
+| SNAP4_BROWN_RICE_PILAF:1 | 1 1/2 cups brown rice, before cooking | 120.000000 ml → 360.000000 ml | CORRECTED / RESOLVED |
+
+The salad apple value is the source's explicit primary amount. It is not a
+computed midpoint or an acceptance of range-selection policy. The spinach fraction
+modifies the package; the parenthetical specifies its 10-oz size. Retain exact
+avoirdupois constants (1 oz = 28.349523125 g, 1 lb = 453.59237 g) and round once
+HALF_UP to six places. Recipe volume retains the accepted 240-ml cup convention.
+No fresh tomato, apple or rice grams are inferred.
+
+All six findings are deterministically resolved, so all five affected recipes
+receive v2 with `created_from_version_id = v1.id`; 25 recipes remain on v1.
+No source-ambiguous finding remains in this bounded review. The loader nevertheless
+enforces the per-recipe gate: any `UNRESOLVED_SOURCE_AMBIGUITY` finding prevents
+that recipe's entire v2 and all its assessment promotion, even if another row is
+resolved. `CONFIRMED_CURRENT` does not itself request a correction.
+
+The only changed ingredient facts are the six reviewed quantities, the salsa
+unit g→ml, and normalization notes explaining those corrections. Source amount
+text, FoodIngredient, prep note, optional flags, steps and equipment are retained.
+Recipe metadata and external provenance are identical; v2 has new internal row
+identities, parent/change note and publication timestamps. v1 remains immutable.
+
+### Separate production promotion and historical replay
+
+[Correction manifest](../../data/seed/recipe_corrections/pr6-data-b2a/manifest.json)
+pins the starting main, DATA-A audit/source hashes, B1 manifest/evidence/assessment
+hashes, PR4 recipe seed, profile input and B2-A curation hash. `corrections.json`
+contains complete stable parent/revision descriptors; `assessments.json` contains
+new-row descriptors and explicit comparison proofs. No database UUIDs are committed.
+
+The original PR4 recipes.json and B1 evidence.json / assessments.json / manifest.json
+are byte-identical to accepted main. PR4 still creates 30 v1 versions / 189 rows;
+B1 still creates its historical 57 evidence / 189 assessments / 123 issues. Both
+can be rerun after v2 publication and resolve their historical v1 rows.
+
+B2-A adds **5 versions, 32 ingredient rows and 32 new assessments with 17 issue
+rows**. All 26 unchanged rows have explicit carry-forward assessments only after
+an offline deterministic comparison of FoodIngredient, quantity, unit, source
+amount text, normalization/prep notes, optional and pinned profile provenance and
+values. All six changed rows have separate new review decisions; their old B1
+status is not blindly copied. Every new assessment uses
+`source_audit_operation = PR6-DATA-B2-A` and a new local UUID.
+
+| New v2 assessment status | Rows |
+| --- | ---: |
+| APPROVED_NO_CONVERSION | 1 |
+| APPROVED_EXACT | 17 |
+| REVIEW_REQUIRED_ESTIMATE | 4 |
+| BLOCKED | 10 |
+
+Only the corrected kale g row now permits direct mass (680.388555 g), because its
+accepted kale choice has no independent B1 semantic/profile blocker. Corrected
+spinach stays blocked by baby/mature form mismatch. Both apple rows retain
+size/mass and cultivar/profile uncertainty. Fresh tomato gains an explicit
+measure ambiguity issue after its wrong grams become honest ml; cultivar/profile
+uncertainty remains. Rice volume remains blocked without exact mass evidence.
+No FoodIngredient/profile correction or new conversion evidence is introduced.
+
+The required PR4→B1→B2-A corrections→B2-A assessments chain, repeated in that
+order, yields zero second-pass inserts and an identical final database dump:
+35 total versions, 221 historical/current ingredient rows, 57 evidence,
+221 assessments and 140 issues. No v3 is created. Historical v1 Nutrition results
+are identical before and after publication; new v2 rows have no mass authority
+until their explicit assessments are imported. Assessment import also verifies
+the complete v2 contents and parent/provenance chain in its transaction.
+
+### Production audit v3
+
+[Audit v3](../../data/seed/recipe_corrections/pr6-data-b2a/production-audit-v3.json)
+is deterministic and covers **30 current RecipeVersions / 189 current rows**.
+Each recipe records current version number and historical version count. The
+six-finding matrix records RESOLVED/UNRESOLVED against its actual current owner.
+All six current outcomes are RESOLVED on v2.
+
+Actual Nutrition statuses: **0 COMPLETE, 0 COMPLETE_WITH_WARNINGS, 0 CONDITIONAL,
+30 INCOMPLETE**. Current assessment counts: **21 APPROVED_NO_CONVERSION,
+66 APPROVED_EXACT, 37 REVIEW_REQUIRED_ESTIMATE, 65 BLOCKED**. These are measured
+outcomes, not target completeness counts.
+
+Runtime warning occurrences: blocked 65, estimate not accepted 43, unknown fiber
+30, unknown profile estimation 189, optional ingredient 4; missing assessment,
+stale profile, missing evidence, estimated source, missing ingredient/profile,
+missing density and unsupported piece mass are all zero.
+
+There are **118 current structured issues**: estimate non-acceptance 43, form
+mismatch 17, identity mismatch 1, measure/size ambiguity 37, no acceptable source
+1, profile representativeness 19. Source alternative weight, source quantity
+ambiguity and source quantity mismatch are zero in current rows. Historical B1
+retains all 123 original issues, including those six source-quantity findings.
+
+Reproduce with backend dependencies (all databases used by the audit are isolated):
+
+```sh
+python3 scripts/promote_pr6_data_b2a.py
+AI_ENABLED=false python3 scripts/audit_pr6_data_b2a.py
+```
+
+Production import order after migrations and FoodIngredient/PR4/B1 seeds:
+
+```sh
+# From backend/, using the configured database
+AI_ENABLED=false python3 -m app.seed.recipe_corrections corrections
+AI_ENABLED=false python3 -m app.seed.recipe_corrections assessments
+```
+
+This slice accepts **0 estimated conversions** and starts **0 form/profile
+corrections**. All 43 DATA-A estimates remain non-executable. B1 and PR6-INFRA
+are established. **PR6 remains NOT COMPLETE; B2-B is NOT AUTHORIZED; PR7+ remain
+UNAUTHORIZED.** There is no separate B2-A-CLOSE operation.

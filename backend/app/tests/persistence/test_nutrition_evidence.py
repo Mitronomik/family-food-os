@@ -77,16 +77,22 @@ def seeded(corpus):
 
 
 @pytest.mark.parametrize("upgrade", [False, True])
-def test_fresh_and_0025_upgrade_preserve_every_existing_value(tmp_path, upgrade):
+def test_fresh_and_0025_upgrade_preserve_every_existing_value(
+    tmp_path, upgrade, monkeypatch
+):
+    # This historical test proves B1 itself, ending at its own migration.
+    monkeypatch.setattr("app.db.migrations.MIGRATION_MODULES", MIGRATION_MODULES[:26])
+    from app.db.migrations import MIGRATION_MODULES as b1_modules
+
     config = DatabaseConfig(path=tmp_path / "migration.sqlite")
     old_rows, old_schema = {}, {}
     if upgrade:
-        modules = MIGRATION_MODULES[:]
-        MIGRATION_MODULES[:] = modules[:25]
+        modules = b1_modules[:]
+        b1_modules[:] = modules[:25]
         try:
             seed_food_recipes(config)
         finally:
-            MIGRATION_MODULES[:] = modules
+            b1_modules[:] = modules
         with sqlite3.connect(config.path) as db:
             assert (
                 db.execute("SELECT COUNT(*) FROM food_recipe_ingredients").fetchone()[0]
@@ -138,7 +144,7 @@ def test_failed_migration_rolls_back_all_new_tables_and_marker(tmp_path, monkeyp
     finally:
         MIGRATION_MODULES[:] = modules
     before = dump(config)
-    migration = import_module(MIGRATION_MODULES[-1])
+    migration = import_module(next(m for m in MIGRATION_MODULES if m.endswith(HEAD)))
     monkeypatch.setattr(
         migration, "STATEMENTS", migration.STATEMENTS[:2] + ("INVALID SQL",)
     )
@@ -515,8 +521,8 @@ def test_new_recipe_version_has_no_inherited_row_authority(seeded):
     )
     assert recipes.get_version_detail(existing.version.id) == existing
     before = dump(config)
-    with pytest.raises(NutritionEvidenceSeedError, match="no longer current"):
-        seed_nutrition_measure_evidence(config)
+    result = seed_nutrition_measure_evidence(config)
+    assert result["inserted_assessments"] == result["inserted_evidence"] == 0
     assert dump(config) == before
 
 

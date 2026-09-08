@@ -280,16 +280,24 @@ class FoodRecipeCatalogueService:
                         "Existing Recipe differs from trusted seed."
                     )
                 counts["recipes_existing"] += 1
-                existing = scope.versions.get_by_provenance(
+                candidates = scope.versions.list_by_provenance(
                     recipe.id,
                     entry.version.source_name,
                     entry.version.source_recipe_id,
                     entry.version.source_version,
                 )
-                if existing is not None:
-                    if not _seed_matches(scope, existing, entry.version):
+                if candidates:
+                    existing = next(
+                        (
+                            detail
+                            for detail in candidates
+                            if _seed_matches(scope, detail, entry.version)
+                        ),
+                        None,
+                    )
+                    if existing is None:
                         raise RecipeCatalogueConflictError(
-                            "Same-provenance RecipeVersion differs; append a reviewed source version instead."
+                            "Same-provenance RecipeVersions differ from the trusted historical seed."
                         )
                     _increment_detail(counts, existing, inserted=False)
                     continue

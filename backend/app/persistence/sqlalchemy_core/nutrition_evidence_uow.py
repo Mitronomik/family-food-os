@@ -24,6 +24,11 @@ class SqlAlchemyNutritionEvidenceUnitOfWork(SqlAlchemyUnitOfWork):
         return SqlAlchemyFoodIngredientRepository(self.adapter_connection)
 
     @property
+    def food_ingredients(self):
+        """Recipe catalogue contract within this same atomic review scope."""
+        return self.ingredients
+
+    @property
     def nutrition_profiles(self):
         return SqlAlchemyFoodNutritionProfileRepository(self.adapter_connection)
 

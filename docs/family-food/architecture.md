@@ -802,10 +802,55 @@ connection-state error reporting that the rebuild committed; it cannot undo that
 commit. The session closes the connection, and new FamilyFoodOS connections
 enable FK enforcement through the existing connection contract.
 
-PR6-INFRA adds this capability only. Production migration head remains
-`0026_nutrition_measure_evidence`; no production schema or catalogue data changes.
-The source-quantity operation PR6-DATA-B2-A must start from accepted main
-containing this capability, under its separate bounded authorization.
+PR6-INFRA established this capability without changing production schema/data;
+its migration head was `0026_nutrition_measure_evidence`. B2-A starts from accepted
+PR6-INFRA main and uses that capability in production migration 0027 below.
+
+
+### 13.2 Same-source RecipeVersion revisions (PR6-DATA-B2-A)
+
+**External source provenance is not FamilyFoodOS internal revision identity.**
+A single source artifact may support several immutable reviewed RecipeVersions.
+`version_number`, `created_from_version_id` and `change_note` identify internal
+curation history. `source_name`, `source_recipe_id`, `source_url`, `source_version`,
+`source_document_sha256` and `source_retrieved_at` continue to describe the actual
+external artifact; normalization corrections must not fabricate new source values.
+
+Migration **`0027_recipe_same_source_revisions`** is the production head and
+explicitly declares `SQLITE_MIGRATION_MODE = "foreign_key_rebuild"`. It rebuilds
+only `food_recipe_versions`, copying all 27 columns verbatim and preserving every
+UUID, timestamp, provenance field and parent link. Ingredient/step/equipment FKs,
+B1 evidence/assessments/issues and all other tables remain intact. The external
+provenance UNIQUE is removed; `UNIQUE(recipe_id, version_number)` and immutable
+update/delete triggers remain. A non-unique provenance lookup index includes
+`version_number`. Core metadata reflects the same uniqueness/index contract.
+
+The §13.1 runner owns FK OFF before BEGIN, transformation, marker, whole-database
+`foreign_key_check`, commit and FK restoration. The module performs no transaction
+control, FK toggles, savepoints, executescript or marker insertion. A failed rebuild
+restores the old schema and values without a 0027 marker; the runner can resume.
+Fresh and real populated 0026→0027 paths are tested, including historical B1
+relationships. Recovery follows the existing backup/export policy; no destructive
+history-removing down migration is introduced.
+
+`list_by_provenance(recipe_id, source_name, source_recipe_id, source_version)`
+returns all matching details in `version_number ASC` order. Retained
+`get_by_provenance` means the latest internal revision of that artifact regardless
+of verification. Historical consumers must select an explicit version from the
+list. `get_current_verified` selects the highest verified version number.
+
+The original PR4 seed searches all same-provenance history for its exact trusted
+contents; it does not compare only to current v2. B1 explicitly resolves v1 and
+validates its full historical row/profile descriptor without requiring v1 to be
+current. Separate bounded B2-A loaders verify the complete reviewed parent and
+append v2 atomically, then create explicit assessments for every new row in a
+separate atomic import. Conflicting existing v2/assessments fail without repair.
+Both loaders return zero inserts on identical reruns. Calculation does not read
+curation/seed artifacts and never inherits an assessment through a parent link.
+
+Reviewed quantities, per-recipe publication gate, assessment decisions and audit:
+[nutrition data readiness](nutrition-data-readiness.md#decision--pr6-data-b2-a-same-source-quantity-corrections).
+
 
 ## 14. Deployment and tenancy phases
 
