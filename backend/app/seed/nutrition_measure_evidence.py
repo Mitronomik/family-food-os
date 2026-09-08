@@ -315,22 +315,20 @@ def load_seed_entries(seed_directory=DEFAULT_SEED_DIRECTORY, *, root=ROOT):
         ) from exc
 
 
-def _resolve(uow, descriptor, evidence):
+def _resolve(uow, descriptor, evidence, *, version_number=1):
+    """B1 pins historical v1; later promotions must supply an explicit number."""
     recipe = uow.recipes.get_by_code(descriptor["recipe_canonical_code"])
     _require(recipe is not None, "Unresolved recipe code.")
-    detail = uow.versions.get_by_provenance(
+    candidates = uow.versions.list_by_provenance(
         recipe.id,
         descriptor["recipe_source_name"],
         descriptor["recipe_source_id"],
         descriptor["recipe_source_version"],
     )
-    current = uow.versions.get_current_verified(recipe.id)
-    _require(
-        detail is not None
-        and current is not None
-        and current.version.id == detail.version.id,
-        "Pinned RecipeVersion is absent or no longer current.",
+    detail = next(
+        (d for d in candidates if d.version.version_number == version_number), None
     )
+    _require(detail is not None, "Pinned historical RecipeVersion is absent.")
     row = next(
         (
             r

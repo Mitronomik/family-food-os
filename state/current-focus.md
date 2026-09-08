@@ -1,31 +1,25 @@
 # Current focus
 
-Updated: `2026-09-07`
+Updated: `2026-09-08`
 
-## Accepted implementation and supporting operations
+- **PR6 engine — ACCEPTED / MERGED**, PR #18.
+- **DATA-A — ACCEPTED / MERGED**, PR #19; historical findings remain intact.
+- **B1 — established**, PR #20: protected 57 evidence / 189 assessments / 123 issues.
+- **PR6-INFRA — established**, PR #21 at
+  `74bc80eb3ef0e34e17751856638ac58bbccb840e`, the exact B2-A starting base.
+- **B2-A — same-source revision capability and all six reviewed source-quantity
+  corrections established by this changeset**. Five recipes receive immutable
+  v2 and 32 new explicit assessments; 25 recipes remain on v1.
+- Migration head: `0027_recipe_same_source_revisions`, using the established
+  `foreign_key_rebuild` runner mode. PR4 and B1 seed bytes remain unchanged and
+  resolve their historical v1 rows after v2 publication.
+- Audit v3: 30 current versions / 189 current rows; all 30 INCOMPLETE. All 43
+  estimated candidates remain non-executable. No form/profile repair started.
+- **PR6 — NOT COMPLETE; B2-B — NOT AUTHORIZED; PR7+ — UNAUTHORIZED.**
+  No separate B2-A-CLOSE operation exists and this changeset grants no later scope.
 
-- **PR6 engine — ACCEPTED / MERGED**, PR #18 at
-  `7c449672c039c66b8d475064462eba2a9f6d38e6`.
-- **PR6-DATA-A — ACCEPTED / MERGED**, PR #19 at
-  `60908eb8270ef356eff8552855b4cc5d2aa9ee44`.
-- **PR6-DATA-B1 — established**, PR #20 merged at
-  `2ce9917f51ac3161d4cb2839f6003e7a24bc96bd` (exact PR6-INFRA base).
-- **PR6-INFRA — SQLite runner supports explicit FK table-rebuild mode by this
-  changeset**. Authorization covers this infrastructure capability only; no
-  production migration or schema/data change. No separate INFRA-CLOSE is needed.
-- **PR6 milestone — NOT COMPLETE**. PR5 remains COMPLETE.
-- **PR6-DATA-B2-A — next separately authorized product/data operation**; it must
-  start from accepted `main` containing this runner capability. Its migration,
-  source review, RecipeVersion corrections and assessments are outside PR6-INFRA.
-- **PR6-DATA-B2-B — NOT AUTHORIZED**. PR7+ remain UNAUTHORIZED.
-
-Migration head remains `0026_nutrition_measure_evidence`. The 30 v1 recipes /
-189 ingredient rows and B1 57 evidence / 189 assessments / 123 issues are
-unchanged. All 43 estimates remain non-executable.
-
-Runner lifecycle and resumability:
-[architecture §13.1](../docs/family-food/architecture.md#131-sqlite-foreign-key-table-rebuild-capability-pr6-infra).
-Verification: [progress](progress.md#pr6-infra-verification).
-Nutrition decisions remain in
-[nutrition data readiness](../docs/family-food/nutrition-data-readiness.md) and
-[Nutrition Core](../docs/family-food/nutrition-core.md).
+Durable source decisions and exact counts:
+[nutrition data readiness](../docs/family-food/nutrition-data-readiness.md#decision--pr6-data-b2-a-same-source-quantity-corrections).
+Migration/repository contract:
+[architecture §13.2](../docs/family-food/architecture.md#132-same-source-recipeversion-revisions-pr6-data-b2-a).
+Executed verification: [progress](progress.md#pr6-data-b2-a-verification).

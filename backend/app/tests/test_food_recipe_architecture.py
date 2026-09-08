@@ -17,6 +17,8 @@ PRODUCTION_PATHS = [
     APP_ROOT / "persistence" / "sqlalchemy_core" / "food_recipe_composition.py",
     APP_ROOT / "migrations" / "versions" / "0024_food_recipe_catalogue.py",
     APP_ROOT / "seed" / "food_recipes.py",
+    APP_ROOT / "seed" / "recipe_corrections.py",
+    APP_ROOT / "migrations" / "versions" / "0027_recipe_same_source_revisions.py",
 ]
 
 

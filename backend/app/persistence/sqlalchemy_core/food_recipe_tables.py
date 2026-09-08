@@ -77,13 +77,6 @@ food_recipe_versions_table = Table(
     UniqueConstraint(
         "recipe_id", "version_number", name="uq_food_recipe_versions_number"
     ),
-    UniqueConstraint(
-        "recipe_id",
-        "source_name",
-        "source_recipe_id",
-        "source_version",
-        name="uq_food_recipe_versions_provenance",
-    ),
     CheckConstraint(
         "version_number > 0", name="ck_food_recipe_versions_number_positive"
     ),
@@ -185,7 +178,7 @@ Index(
     "idx_food_recipe_versions_current_verified",
     food_recipe_versions_table.c.recipe_id,
     food_recipe_versions_table.c.verification_status,
-    food_recipe_versions_table.c.version_number,
+    food_recipe_versions_table.c.version_number.desc(),
 )
 Index(
     "idx_food_recipe_ingredients_version_position",
@@ -196,4 +189,13 @@ Index(
     "idx_food_recipe_steps_version_position",
     food_recipe_steps_table.c.recipe_version_id,
     food_recipe_steps_table.c.position,
+)
+
+Index(
+    "idx_food_recipe_versions_provenance",
+    food_recipe_versions_table.c.recipe_id,
+    food_recipe_versions_table.c.source_name,
+    food_recipe_versions_table.c.source_recipe_id,
+    food_recipe_versions_table.c.source_version,
+    food_recipe_versions_table.c.version_number,
 )

@@ -143,7 +143,7 @@ class SqlAlchemyRecipeVersionRepository:
                 )
         except IntegrityError as exc:
             raise RecipeCataloguePersistenceConflictError(
-                "RecipeVersion identity, provenance, position, or reference conflicts."
+                "RecipeVersion identity, version number, position, or reference conflicts."
             ) from exc
         except DBAPIError as exc:
             raise RecipeCataloguePersistenceError(
@@ -219,6 +219,26 @@ class SqlAlchemyRecipeVersionRepository:
         )
         return None if version_id is None else self.get_detail(version_id)
 
+    def list_by_provenance(
+        self,
+        recipe_id: UUID,
+        source_name: str,
+        source_recipe_id: str,
+        source_version: str,
+    ) -> list[RecipeVersionDetail]:
+        """All immutable revisions of an external artifact, oldest first."""
+        version_ids = self._connection.scalars(
+            select(food_recipe_versions_table.c.id)
+            .where(
+                food_recipe_versions_table.c.recipe_id == recipe_id,
+                food_recipe_versions_table.c.source_name == source_name,
+                food_recipe_versions_table.c.source_recipe_id == source_recipe_id,
+                food_recipe_versions_table.c.source_version == source_version,
+            )
+            .order_by(food_recipe_versions_table.c.version_number.asc())
+        ).all()
+        return [self.get_detail(version_id) for version_id in version_ids]
+
     def get_by_provenance(
         self,
         recipe_id: UUID,
@@ -226,15 +246,14 @@ class SqlAlchemyRecipeVersionRepository:
         source_recipe_id: str,
         source_version: str,
     ) -> RecipeVersionDetail | None:
-        version_id = self._connection.scalar(
-            select(food_recipe_versions_table.c.id).where(
-                food_recipe_versions_table.c.recipe_id == recipe_id,
-                food_recipe_versions_table.c.source_name == source_name,
-                food_recipe_versions_table.c.source_recipe_id == source_recipe_id,
-                food_recipe_versions_table.c.source_version == source_version,
-            )
+        """Latest internal revision of this artifact, regardless of verification.
+
+        Historical callers must use list_by_provenance and select explicitly.
+        """
+        versions = self.list_by_provenance(
+            recipe_id, source_name, source_recipe_id, source_version
         )
-        return None if version_id is None else self.get_detail(version_id)
+        return versions[-1] if versions else None
 
 
 def _recipe_values(value: Recipe) -> dict[str, object]:

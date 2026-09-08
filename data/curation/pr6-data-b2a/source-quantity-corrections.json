@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "operation": "PR6-DATA-B2-A",
+  "reviewed_at": "2026-09-08T04:30:08+00:00",
+  "records": [
+    {
+      "recipe_canonical_code": "HARV6_FRESH_TOMATO_SALSA",
+      "parent_version_number": 1,
+      "ingredient_position": 1,
+      "source_name": "USDA_FNS",
+      "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
+      "source_version": "sha256:36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "source_document_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+      "source_audit_key": "HARV6_FRESH_TOMATO_SALSA:HARV6-FRESH-TOMATO-SALSA:sha256:36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e:1:TOMATO",
+      "source_evidence_reference": {
+        "manifest_id": "RECIPE-HARV6-FRESH-TOMATO-SALSA",
+        "url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+        "artifact_name": "HarvestofRecipes.pdf",
+        "location": "PDF page 55 / printed page 53, ingredient 1 and directions",
+        "reopened_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+        "retrieval_method": "REOPENED_ACCEPTED_HASH_VERIFIED_ARTIFACT"
+      },
+      "old_quantity": "226.796185",
+      "old_unit": "g",
+      "source_amount_text": "1 cup tomatoes, finely chopped (or ½ can, about 8 ounces, low-sodium diced tomatoes)",
+      "review_result": "EXPLICIT_SOURCE_QUANTITY_CONFIRMED",
+      "corrected_quantity": "240.000000",
+      "corrected_unit": "ml",
+      "corrected_normalization_note": "PR6-DATA-B2-A: selected fresh tomato branch, 1 cup = 240 ml; canned alternative mass is inapplicable.",
+      "resolution_status": "CORRECTED",
+      "review_note": "Selected fresh branch is explicitly 1 cup. The 8 ounces belong only to the parenthesized canned alternative. 1 cup × 240 ml/cup = 240 ml; no fresh tomato grams are stated.",
+      "nutrition_review": {
+        "status_code": "BLOCKED",
+        "semantic_compatibility_code": "AMBIGUOUS",
+        "conversion_decision_code": "MEASURE_OR_SIZE_AMBIGUOUS",
+        "evidence_key": null,
+        "issues": [
+          "MEASURE_OR_SIZE_AMBIGUOUS",
+          "PROFILE_REPRESENTATIVENESS_REVIEW"
+        ],
+        "review_note": "Fresh volume corrected; no reviewed exact mass evidence for the selected finely chopped tomato. Cultivar/profile representativeness remains unresolved."
+      }
+    },
+    {
+      "recipe_canonical_code": "SNAP6_SPINACH_APPLE_SALAD",
+      "parent_version_number": 1,
+      "ingredient_position": 1,
+      "source_name": "USDA_FNS",
+      "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
+      "source_version": "sha256:7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "source_document_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "source_audit_key": "SNAP6_SPINACH_APPLE_SALAD:SNAP6-SPINACH-APPLE-SALAD:sha256:7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0:1:SPINACH",
+      "source_evidence_reference": {
+        "manifest_id": "RECIPE-SNAP6-SPINACH-APPLE-SALAD",
+        "url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+        "artifact_name": "data2-snap-fall.html",
+        "location": "Spinach Salad with Apples and Raisins, ingredient 1 and directions",
+        "reopened_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+        "retrieval_method": "REOPENED_ACCEPTED_HASH_VERIFIED_ARTIFACT"
+      },
+      "old_quantity": "283.495231",
+      "old_unit": "g",
+      "source_amount_text": "2/3 package baby spinach (10 ounces, washed. Could also use Kale or other greens)",
+      "review_result": "EXPLICIT_SOURCE_QUANTITY_CONFIRMED",
+      "corrected_quantity": "188.996821",
+      "corrected_unit": "g",
+      "corrected_normalization_note": "PR6-DATA-B2-A: 2/3 of a 10-ounce package; exact oz = 28.349523125 g, rounded once HALF_UP to six places.",
+      "resolution_status": "CORRECTED",
+      "review_note": "Ingredient amount is 2/3 package; 10 ounces in parentheses specifies that package. Apply the explicit fraction to the package weight: (2/3) × 10 × 28.349523125 g = 188.996821 g after one six-place HALF_UP rounding. Directions do not replace the fraction.",
+      "nutrition_review": {
+        "status_code": "BLOCKED",
+        "semantic_compatibility_code": "FORM_MISMATCH",
+        "conversion_decision_code": "FOOD_FORM_MISMATCH",
+        "evidence_key": null,
+        "issues": [
+          "FOOD_FORM_MISMATCH"
+        ],
+        "review_note": "Package fraction corrected. Baby spinach versus the mature spinach profile remains a form blocker; the corrected g quantity is not approved mass authority."
+      }
+    },
+    {
+      "recipe_canonical_code": "SNAP6_SPINACH_APPLE_SALAD",
+      "parent_version_number": 1,
+      "ingredient_position": 2,
+      "source_name": "USDA_FNS",
+      "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
+      "source_version": "sha256:7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "source_document_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+      "source_audit_key": "SNAP6_SPINACH_APPLE_SALAD:SNAP6-SPINACH-APPLE-SALAD:sha256:7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0:2:APPLE",
+      "source_evidence_reference": {
+        "manifest_id": "RECIPE-SNAP6-SPINACH-APPLE-SALAD",
+        "url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+        "artifact_name": "data2-snap-fall.html",
+        "location": "Spinach Salad with Apples and Raisins, ingredient 2 and directions",
+        "reopened_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+        "retrieval_method": "REOPENED_ACCEPTED_HASH_VERIFIED_ARTIFACT"
+      },
+      "old_quantity": "1.000000",
+      "old_unit": "pcs",
+      "source_amount_text": "1 1/2 apples (chopped, can use 1-2 apples)",
+      "review_result": "EXPLICIT_SOURCE_QUANTITY_CONFIRMED",
+      "corrected_quantity": "1.500000",
+      "corrected_unit": "pcs",
+      "corrected_normalization_note": "PR6-DATA-B2-A: retain the explicit primary 1 1/2 apples; optional 1-2 variation is not selected. No piece-to-mass conversion.",
+      "resolution_status": "CORRECTED",
+      "review_note": "The primary ingredient amount is explicitly 1 1/2 apples. Parenthetical can use 1-2 apples is a permissive variation, not the primary amount. Retain the explicit primary 1 1/2; no midpoint is calculated and no range-selection policy is introduced.",
+      "nutrition_review": {
+        "status_code": "BLOCKED",
+        "semantic_compatibility_code": "AMBIGUOUS",
+        "conversion_decision_code": "MEASURE_OR_SIZE_AMBIGUOUS",
+        "evidence_key": null,
+        "issues": [
+          "MEASURE_OR_SIZE_AMBIGUOUS",
+          "PROFILE_REPRESENTATIVENESS_REVIEW"
+        ],
+        "review_note": "Explicit primary apple count corrected. Size/edible mass and cultivar/profile representativeness remain unreviewed; no grams inferred."
+      }
+    },
+    {
+      "recipe_canonical_code": "SNAP6_SEARED_GREENS",
+      "parent_version_number": 1,
+      "ingredient_position": 1,
+      "source_name": "USDA_FNS",
+      "source_recipe_id": "SNAP6-SEARED-GREENS",
+      "source_version": "sha256:63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "source_document_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "source_audit_key": "SNAP6_SEARED_GREENS:SNAP6-SEARED-GREENS:sha256:63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b:1:KALE",
+      "source_evidence_reference": {
+        "manifest_id": "RECIPE-SNAP6-SEARED-GREENS",
+        "url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+        "artifact_name": "data2-snap-spring.html",
+        "location": "Seared Greens, ingredient 1 and directions",
+        "reopened_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+        "retrieval_method": "REOPENED_ACCEPTED_HASH_VERIFIED_ARTIFACT"
+      },
+      "old_quantity": "226.796185",
+      "old_unit": "g",
+      "source_amount_text": "8 cups kale or collard greens (1 1/2 pounds)",
+      "review_result": "EXPLICIT_SOURCE_QUANTITY_CONFIRMED",
+      "corrected_quantity": "680.388555",
+      "corrected_unit": "g",
+      "corrected_normalization_note": "PR6-DATA-B2-A: source 1 1/2 pounds × exact 453.59237 g/lb = 680.388555 g.",
+      "resolution_status": "CORRECTED",
+      "review_note": "The selected kale alternative has an explicit 1 1/2 pounds alongside 8 cups. 1.5 × 453.59237 g/lb = 680.388555 g. Preserve the accepted kale choice and source preparation.",
+      "nutrition_review": {
+        "status_code": "APPROVED_NO_CONVERSION",
+        "semantic_compatibility_code": "ACCEPTED_SUBSTITUTION",
+        "conversion_decision_code": "DIRECT_RECIPE_MASS",
+        "evidence_key": null,
+        "issues": [],
+        "review_note": "Re-reviewed explicit source mass and retained accepted kale choice; B1 found no independent semantic/profile blocker. The corrected g row is approved without conversion evidence. No yield/refuse factor or profile change is introduced."
+      }
+    },
+    {
+      "recipe_canonical_code": "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE",
+      "parent_version_number": 1,
+      "ingredient_position": 5,
+      "source_name": "USDA_FNS",
+      "source_recipe_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+      "source_version": "sha256:0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+      "source_document_sha256": "0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+      "source_audit_key": "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE:WIC1-OVERNIGHT-OATS-CINNAMON-APPLE:sha256:0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8:5:APPLE",
+      "source_evidence_reference": {
+        "manifest_id": "RECIPE-WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+        "url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+        "artifact_name": "data2-wic-overnight-oats.html",
+        "location": "Overnight Oats - Cinnamon Apple, apple ingredient and instructions",
+        "reopened_sha256": "0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+        "retrieval_method": "REOPENED_ACCEPTED_HASH_VERIFIED_ARTIFACT"
+      },
+      "old_quantity": "1.000000",
+      "old_unit": "pcs",
+      "source_amount_text": "1/2 apple (chopped)",
+      "review_result": "EXPLICIT_SOURCE_QUANTITY_CONFIRMED",
+      "corrected_quantity": "0.500000",
+      "corrected_unit": "pcs",
+      "corrected_normalization_note": "PR6-DATA-B2-A: retain the explicit source 1/2 apple as 0.500000 pcs; no piece-to-mass conversion.",
+      "resolution_status": "CORRECTED",
+      "review_note": "The original ingredient list explicitly gives 1/2 apple (chopped); instructions add that apple when serving. Preserve the half-piece count without size or grams. Existing optional flag is outside this quantity-only review.",
+      "nutrition_review": {
+        "status_code": "BLOCKED",
+        "semantic_compatibility_code": "AMBIGUOUS",
+        "conversion_decision_code": "MEASURE_OR_SIZE_AMBIGUOUS",
+        "evidence_key": null,
+        "issues": [
+          "MEASURE_OR_SIZE_AMBIGUOUS",
+          "PROFILE_REPRESENTATIVENESS_REVIEW"
+        ],
+        "review_note": "Half-apple count corrected. Apple size/edible mass and cultivar/profile representativeness remain blockers; existing optional flag retained."
+      }
+    },
+    {
+      "recipe_canonical_code": "SNAP4_BROWN_RICE_PILAF",
+      "parent_version_number": 1,
+      "ingredient_position": 1,
+      "source_name": "USDA_FNS",
+      "source_recipe_id": "SNAP4-BROWN-RICE-PILAF",
+      "source_version": "sha256:f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281",
+      "source_document_sha256": "f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281",
+      "source_audit_key": "SNAP4_BROWN_RICE_PILAF:SNAP4-BROWN-RICE-PILAF:sha256:f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281:1:RICE_BROWN",
+      "source_evidence_reference": {
+        "manifest_id": "RECIPE-SNAP4-BROWN-RICE-PILAF",
+        "url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+        "artifact_name": "data2-snap-valentines.html",
+        "location": "Brown Rice Pilaf, ingredient 1 and directions",
+        "reopened_sha256": "f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281",
+        "retrieval_method": "REOPENED_ACCEPTED_HASH_VERIFIED_ARTIFACT"
+      },
+      "old_quantity": "120.000000",
+      "old_unit": "ml",
+      "source_amount_text": "1 1/2 cups brown rice",
+      "review_result": "EXPLICIT_SOURCE_QUANTITY_CONFIRMED",
+      "corrected_quantity": "360.000000",
+      "corrected_unit": "ml",
+      "corrected_normalization_note": "PR6-DATA-B2-A: source 1 1/2 cups × accepted 240 ml/cup = 360.000000 ml.",
+      "resolution_status": "CORRECTED",
+      "review_note": "The accepted HTML ingredient list gives 1 1/2 cups brown rice, cooked later in the directions. 1.5 × 240 ml/cup = 360 ml. No grams or cooked yield inferred.",
+      "nutrition_review": {
+        "status_code": "BLOCKED",
+        "semantic_compatibility_code": "MATCH",
+        "conversion_decision_code": "MEASURE_OR_SIZE_AMBIGUOUS",
+        "evidence_key": null,
+        "issues": [
+          "MEASURE_OR_SIZE_AMBIGUOUS"
+        ],
+        "review_note": "Mixed-fraction volume corrected. No existing exact evidence for the pinned brown-rice profile and source measure; no density or estimated mass accepted."
+      }
+    }
+  ]
+}

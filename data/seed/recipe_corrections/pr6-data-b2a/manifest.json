@@ -1,0 +1,33 @@
+{
+  "assessment_count": 32,
+  "input_sha256": {
+    "data/curation/pr6-data-a/conversion-gap-audit.json": "7e6d87782fef1e2afadf0f37f0ed71367d70e87bfa4c186d301539f461a36711",
+    "data/curation/pr6-data-a/source-manifest.json": "3e315270c391c593e7d27c6027bc53204decae382d6779364846ac3932fe1d52",
+    "data/curation/pr6-data-b2a/source-quantity-corrections.json": "16aa0868282233e85ebb4991999f543810acbb744d0692c61bd59ef2675e4b98",
+    "data/seed/food_ingredients/nutrition.csv": "2376f04ea872f0b38676e892926ee1052323d142fa4c0184c4f62d5830cdcb2c",
+    "data/seed/nutrition_measure_evidence/assessments.json": "b2d27ce952144115c8f5e8be239e196874c3ffbb53599c61748521618dfa363d",
+    "data/seed/nutrition_measure_evidence/evidence.json": "a7f62dec20c39618b47c950603f55007658944543048ef4ff550a38b7a23d8bd",
+    "data/seed/nutrition_measure_evidence/manifest.json": "df5f8873e65e8f97205d21de4beb2c8ef84db23d03211fd86b8daed6c9ccf9db",
+    "data/seed/recipes/recipes.json": "b21ff5b00ac318b63b287ef68a8e7efbff7bc3083e14fa233025313b707af918"
+  },
+  "issue_counts": {
+    "CONVERSION_ESTIMATE_NOT_ACCEPTED": 4,
+    "FOOD_FORM_MISMATCH": 2,
+    "MEASURE_OR_SIZE_AMBIGUOUS": 8,
+    "PROFILE_REPRESENTATIVENESS_REVIEW": 3
+  },
+  "operation": "PR6-DATA-B2-A",
+  "payload_sha256": {
+    "assessments.json": "f4baa0c1183539969a6a055481fe36cc313a385bad7e84ff605d8f870bd72f28",
+    "corrections.json": "cab6c8005c047fe0eb1bf6ee57964f9cc33bcd45d989ce30065d1dca5be503f5"
+  },
+  "recipe_version_count": 5,
+  "schema_version": 1,
+  "starting_main": "74bc80eb3ef0e34e17751856638ac58bbccb840e",
+  "status_counts": {
+    "APPROVED_EXACT": 17,
+    "APPROVED_NO_CONVERSION": 1,
+    "BLOCKED": 10,
+    "REVIEW_REQUIRED_ESTIMATE": 4
+  }
+}

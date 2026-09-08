@@ -436,3 +436,96 @@ B1 exact evidence/binding foundation is established by this changeset.
 PR6 milestone remains NOT COMPLETE; DATA-B2 is NOT AUTHORIZED and PR7+ remain
 UNAUTHORIZED. No separate DATA-B1-CLOSE is required. Current authorization and
 scope are in [current focus](current-focus.md).
+
+## PR6-DATA-B2-A verification
+
+Updated: `2026-09-08`. Persistence/migration + production curation verification
+under the explicit B2-A task. Exact starting branch HEAD and merge base:
+`74bc80eb3ef0e34e17751856638ac58bbccb840e`. Continued
+`data/pr6-b2a-source-quantity-corrections` by fast-forward from its previous
+pre-implementation base; unrelated `.DS_Store` remained modified and excluded.
+
+This changeset establishes the bounded result described in the
+[B2-A decision](../docs/family-food/nutrition-data-readiness.md#decision--pr6-data-b2-a-same-source-quantity-corrections):
+five immutable v1→v2 chains, all six source-quantity outcomes resolved,
+32 new ingredient rows with 32 explicit assessments, and audit v3. All original
+external provenance remains identical. PR4 v1 and B1 57/189/123 payloads remain
+byte-identical to the starting main; SHA-256 values are pinned in the
+[correction manifest](../data/seed/recipe_corrections/pr6-data-b2a/manifest.json).
+
+Executed evidence:
+
+- Initial Recipe seed/migration/repository suite: **30 passed**.
+- B2-A + B1 persistence + Nutrition architecture + runner focused suite:
+  **87 passed** (`AI_ENABLED=false python3 -m pytest
+  backend/app/tests/test_recipe_same_source_revisions.py
+  backend/app/tests/persistence/test_nutrition_evidence.py
+  backend/app/tests/test_nutrition_architecture.py
+  backend/app/tests/test_migration_runner_rebuild.py -q`).
+- Final lineage/startup/backup, read-scope, migration, architecture and B2-A
+  suite: **143 passed**. After aligning the existing current-verified index's
+  descending order in Core metadata, the affected B2-A + Nutrition read-scope
+  suite passed **23 tests**.
+- Actual 0027 migration runs through the established runner on empty and
+  populated 0026 databases. Before correction publication, every pre-existing
+  table row/value/UUID/timestamp is identical and all unrelated sqlite_master
+  definitions are unchanged. Both FK checks return `[]` with enforcement ON.
+  Observed connection events prove FK OFF before the active rebuild transaction,
+  then marker → whole-database FK check → commit → FK ON. Injecting failure
+  after the real rebuild restores the exact old dump and schema without a 0027
+  marker; resuming succeeds. Only RecipeVersion is rebuilt.
+- Schema inspection proves external provenance uniqueness removed, internal
+  `(recipe_id, version_number)` uniqueness retained, and matching non-unique
+  metadata/index inventory. Backup tests prove pre-migration copies retain the
+  old UNIQUE while the live database advances to 0027. Lineage explicitly maps
+  0027 to no new persistent table.
+- Exact PR4→B1→corrections→assessments double pass: second pass inserts zero
+  versions, evidence or assessments; database dump remains identical and no v3
+  exists. Historical v1 details and Nutrition outputs remain exactly equal.
+  New v2 rows initially have no mass authority; all 32 receive explicit new
+  assessments before current audit. The six changed rows use new review
+  decisions; 26 unchanged rows carry explicit row/profile equality proofs.
+  Parent corruption, conflicting v2/parent chain, conflicting review and partial
+  insert failures are rejected transactionally. An unresolved finding suppresses
+  its entire recipe's revision and assessment promotion in the publication-gate test.
+- `python3 scripts/promote_pr6_data_b2a.py` and
+  `AI_ENABLED=false python3 scripts/audit_pr6_data_b2a.py` reproduce committed
+  payloads/report without differences. Audit: 30 current versions / 189 rows;
+  30 INCOMPLETE, all other Nutrition statuses zero. Current assessments:
+  21 direct, 66 exact, 37 estimate-review, 65 blocked; 118 current issues.
+  All six matrix outcomes are RESOLVED on v2.
+- `python3 scripts/validate_pr6_data_a.py --protected-revision
+  60908eb8270ef356eff8552855b4cc5d2aa9ee44` passes and retains all 43 historical
+  estimate candidates. Direct git byte comparison confirms protected PR4/B1
+  inputs against the exact B2-A starting main.
+
+The first full sandbox run reported **171 failed / 3224 passed / 121 errors**:
+launcher localhost binds were denied (`PermissionError: [Errno 1]`); nine backend
+failures exposed stale head/count expectations and the missing 0027 lineage map.
+Those defects were corrected without weakening the checks. An initial loopback
+run, started before those fixes, was interrupted after **9 failed / 3115 passed**;
+it is not claimed as verification of the final files. Final full regression and
+publication scope results are recorded below.
+
+PR6 remains **NOT COMPLETE**. B2-B remains **NOT AUTHORIZED**; PR7+ remain
+**UNAUTHORIZED**. Accepted estimated conversions: **0**. Form/profile corrections
+started: **0**. No separate B2-A-CLOSE operation exists.
+
+Final complete regression on the final runtime/tests:
+
+```sh
+AI_ENABLED=false python3 -m pytest backend/app/tests launcher/tests -q
+```
+
+**3516 passed in 517.91s (0:08:37)** with explicitly authorized local loopback
+access. No test was weakened or skipped to bypass the sandbox failures.
+Ruff check and Ruff format check pass for all **22 changed Python files**.
+Relative documentation links and B2-A payload hashes validate; no database UUIDs
+occur in the committed curation/production artifacts. The bounded inventory is
+**34 intended files**, excluding `.DS_Store` and every protected PR4/B1/DATA-A
+payload, all API/frontend and FoodIngredient/Profile data.
+
+Final diff and staged-scope checks pass: `git diff --check` and
+`git diff --cached --check`; staged inventory exactly matches the 34 intended
+files. Only migration 0027 is added; protected source/seed files, local databases,
+credentials and unrelated `.DS_Store` are absent from the changeset.

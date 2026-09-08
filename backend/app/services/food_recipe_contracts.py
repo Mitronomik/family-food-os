@@ -26,13 +26,25 @@ class RecipeVersionRepository(Protocol):
     def get_detail(self, version_id: UUID) -> RecipeVersionDetail | None: ...
     def list_for_recipe(self, recipe_id: UUID) -> list[RecipeVersion]: ...
     def get_current_verified(self, recipe_id: UUID) -> RecipeVersionDetail | None: ...
+    def list_by_provenance(
+        self,
+        recipe_id: UUID,
+        source_name: str,
+        source_recipe_id: str,
+        source_version: str,
+    ) -> list[RecipeVersionDetail]:
+        """All revisions of this artifact ordered by version_number ASC."""
+        ...
+
     def get_by_provenance(
         self,
         recipe_id: UUID,
         source_name: str,
         source_recipe_id: str,
         source_version: str,
-    ) -> RecipeVersionDetail | None: ...
+    ) -> RecipeVersionDetail | None:
+        """Latest internal revision of this artifact, regardless of verification."""
+        ...
 
 
 class FoodIngredientLookup(Protocol):

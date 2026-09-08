@@ -266,7 +266,7 @@ recommendation. A global density is not generally safe for the accepted forms.
 The later B1 implementation establishes exact evidence and row assessments
 without changing production RecipeVersion or FoodNutritionProfile contents.
 
-## Current production coverage after B1
+## Historical production coverage after B1
 
 [Audit v2](../../data/seed/nutrition_measure_evidence/production-audit-v2.json)
 reports 30 INCOMPLETE recipes, all other statuses zero; 189 current assessments,
@@ -294,5 +294,32 @@ required full backend/launcher regression evidence live in
 
 PR #18 engine implementation is ACCEPTED / MERGED. PR6 milestone remains NOT
 COMPLETE pending data readiness and explicit closure acceptance. PR7 and later
-remain unauthorized. B1 is established by this changeset; DATA-B2 is NOT
-AUTHORIZED and no DATA-B1-CLOSE operation is required.
+remain unauthorized. B1 and PR6-INFRA are established. B2-A establishes the
+bounded quantity correction slice below; B2-B remains NOT AUTHORIZED.
+
+
+## Current production coverage after B2-A
+
+External provenance does not identify an internal RecipeVersion revision. The
+same accepted source artifact can support immutable v1 and a reviewed corrected
+v2; historical Nutrition remains bound to the historical row IDs and sealed B1
+reviews. `get_current_verified` selects the highest verified version. New v2
+rows never inherit assessment authority through `created_from_version_id`.
+
+B2-A publishes five same-source v2 versions and 32 explicit new row assessments:
+26 equal-row/profile carry-forwards and six new quantity review decisions.
+The separate loader verifies complete parent/v2 contents and row/profile
+provenance, requires new row identities, and fails atomically on conflicts.
+Before assessment import all 32 new rows lack mass authority. After import only
+the corrected kale g row gains approval; independent profile/form/measure
+blockers stay in force. Every historical v1 calculation remains reproducible.
+
+[Audit v3](../../data/seed/recipe_corrections/pr6-data-b2a/production-audit-v3.json)
+covers 30 current recipes / 189 current rows: 30 INCOMPLETE, all other statuses
+zero; current assessments 21 APPROVED_NO_CONVERSION, 66 APPROVED_EXACT,
+37 REVIEW_REQUIRED_ESTIMATE and 65 BLOCKED. All 43 estimated conversion
+candidates remain non-authoritative; no tolerance, enabling flag, midpoint rule,
+profile value/estimated-flag change or fiber fill is introduced. Detailed six-row
+source review, warning/issue counts and replay commands are canonical in the
+[B2-A decision](nutrition-data-readiness.md#decision--pr6-data-b2-a-same-source-quantity-corrections).
+PR6 remains NOT COMPLETE; B2-B remains NOT AUTHORIZED; PR7+ remain UNAUTHORIZED.

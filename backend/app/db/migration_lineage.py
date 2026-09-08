@@ -116,6 +116,8 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
             "recipe_ingredient_nutrition_assessment_issues",
         }
     ),
+    # 0027 rebuilds the existing RecipeVersion table; no new table survives.
+    "0027_recipe_same_source_revisions": frozenset(),
 }
 
 # The foundational tables promised by migration `0001`. Stable FamilyFoodOS

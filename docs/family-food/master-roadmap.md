@@ -80,13 +80,19 @@ contract remains active. PR6-DATA-A is ACCEPTED / MERGED in PR #19 at
 the exact evidence/row-binding foundation described in the
 [data-readiness decision](nutrition-data-readiness.md), without a new numbered
 milestone. B1 is established by PR #20, merged at
-`2ce9917f51ac3161d4cb2839f6003e7a24bc96bd`. PR6-INFRA establishes the explicit
-SQLite table-rebuild capability in [architecture §13.1](architecture.md#131-sqlite-foreign-key-table-rebuild-capability-pr6-infra),
-without adding a migration or changing production schema/data. DATA-B2-A remains
-the next separately authorized product/data operation and must start from accepted
-main containing that capability; its implementation is outside PR6-INFRA.
-DATA-B2-B is NOT AUTHORIZED. No DATA-B1-CLOSE or INFRA-CLOSE is required.
-PR7 MealPlan / Serving and all later milestones remain unauthorized.
+`2ce9917f51ac3161d4cb2839f6003e7a24bc96bd`. PR6-INFRA is established by
+PR #21 at `74bc80eb3ef0e34e17751856638ac58bbccb840e`, providing the explicit
+SQLite table-rebuild runner capability. B2-A starts from that exact accepted main.
+This changeset establishes migration `0027_recipe_same_source_revisions`,
+same-source immutable revision semantics, all six reviewed quantity corrections
+across five v2 recipes, explicit new-row assessments, and production audit v3.
+External source provenance is distinct from internal RecipeVersion revision identity.
+See the [B2-A decision](nutrition-data-readiness.md#decision--pr6-data-b2-a-same-source-quantity-corrections)
+and [architecture §13.2](architecture.md#132-same-source-recipeversion-revisions-pr6-data-b2-a).
+The original PR4/B1 payloads and historical v1 truth are preserved. No estimated
+conversion is accepted and no form/profile correction is started. PR6 remains
+NOT COMPLETE; DATA-B2-B is NOT AUTHORIZED; PR7 MealPlan / Serving and all later
+milestones remain UNAUTHORIZED. No separate B2-A-CLOSE operation exists.
 No roadmap order, gate or quantitative target changes.
 
 ## 3. North Star and core-loop contract
