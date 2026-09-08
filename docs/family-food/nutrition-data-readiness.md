@@ -5,7 +5,9 @@ PR6-DATA-A is ACCEPTED / MERGED in PR #19 at
 `60908eb8270ef356eff8552855b4cc5d2aa9ee44`. The DATA-A findings below retain
 their historical meaning. **B1** establishes the exact evidence/binding
 foundation; **B2-A** establishes the bounded same-source quantity corrections
-and audit v3 described below. B2-B is NOT AUTHORIZED; PR7+ remain UNAUTHORIZED.
+and audit v3 described below. **B2-B1** establishes the semantic/profile research
+audit at the end of this document. B2-B2 production corrections and estimate-policy
+implementation are NOT AUTHORIZED; PR7+ remain UNAUTHORIZED.
 
 ## FACT
 
@@ -644,3 +646,161 @@ This slice accepts **0 estimated conversions** and starts **0 form/profile
 corrections**. All 43 DATA-A estimates remain non-executable. B1 and PR6-INFRA
 are established. **PR6 remains NOT COMPLETE; B2-B is NOT AUTHORIZED; PR7+ remain
 UNAUTHORIZED.** There is no separate B2-A-CLOSE operation.
+
+## PR6-DATA-B2-B1 semantic/profile resolution audit
+
+This changeset establishes the **semantic/profile research audit only**, from
+exact accepted main `7f17b1372bbd2e9f97fc025ac26b3f04a15cf837`. DATA-A, B1 and B2-A
+above retain their historical findings and authorization boundaries. This new
+section records later source review; it does not retrospectively rewrite them.
+The [complete report and decision matrices](../../data/curation/pr6-data-b2b1/README.md),
+[row audit](../../data/curation/pr6-data-b2b1/semantic-profile-audit.json),
+[source manifest](../../data/curation/pr6-data-b2b1/source-manifest.json) and
+[derived summary](../../data/curation/pr6-data-b2b1/summary.json) own the exact
+research evidence. These artifacts do not load production truth.
+
+### FACT — current universe and model
+
+Audit v3 SHA-256 is
+`baac9e19b0b6cd3f6990a059a098ab5d69162b9c5459db0e61d9e59e4b547100`.
+The current target set is **17 FOOD_FORM_MISMATCH + 1 IDENTITY_MISMATCH + 19
+PROFILE_REPRESENTATIVENESS_REVIEW occurrences**, covering **37 distinct rows**
+in **23 recipes**, referencing **19 FoodIngredients**. These three issue sets
+happen to be disjoint here; other structured issues overlap them. Full current-use
+analysis contains **46 rows in 25 recipes**. It includes v2 descendants after
+B2-A and all nine non-target usages of affected foods. Twenty-five source recipe
+records were reopened against 21 distinct accepted artifact hashes, checked
+against PR4/DATA-A provenance, with ingredient/direction/alternative review.
+
+The database enforces one current FoodNutritionProfile per FoodIngredient;
+RecipeIngredient references FoodIngredient. Assessment authority pins the exact
+nutrition profile and fails closed on stale bindings. FoodProductType is not
+current canonical truth. See [architecture §6.2](architecture.md#62-canonical-food-catalogue),
+[migration 0023](../../backend/app/migrations/versions/0023_food_ingredient_catalogue.py)
+and [Nutrition domain](../../backend/app/domain/nutrition.py).
+
+| Primary resolution | Target rows |
+| --- | ---: |
+| CURRENT_PROFILE_CONFIRMED_COMPATIBLE | 0 |
+| REPLACE_CURRENT_PROFILE_SAFE | 8 |
+| REMAP_TO_EXISTING_FOOD_INGREDIENT | 0 |
+| ADD_NUTRITION_RELEVANT_FOOD_INGREDIENT | 11 |
+| EDIBLE_BASIS_OR_YIELD_REQUIRED | 3 |
+| SOURCE_FORM_AMBIGUOUS | 4 |
+| NO_ACCEPTABLE_PROFILE_SOURCE | 4 |
+| ARCHITECTURE_DECISION_REQUIRED | 7 |
+
+Seven proposed culinary-form concepts use twelve selected profile candidates:
+APPLE_PEELED, LEMON_JUICE, ORANGE_JUICE, PASTA_COOKED, SPINACH_BABY,
+STRAWBERRY_FROZEN_UNSWEETENED and CAULIFLOWER_FROZEN. They are platform food
+identities with explicit source provenance, not retail products or a second
+canonical layer. Eleven target rows would require immutable recipe revisions.
+No existing catalogue remap is recommended: undiluted orange concentrate does
+not represent ready-to-use juice, and red potato does not establish new maturity.
+
+Globally compatible replacement recommendations cover TOMATO (three uses),
+OATS_ROLLED (three uses, one targeted), MAYONNAISE_LOW_FAT (two uses) and PEACH
+(two uses). Their all-use proofs are explicit; source assumptions still require
+project review. The current APPLE concept is **not** globally safe to replace:
+salsa requires peeled apple, applesauce explicitly permits optional peeling,
+and other uses retain skin. Seven APPLE targets identify generic raw-with-skin
+FDC 171688 but require an ordered/atomic usage repair under the recommended
+architecture. Replacing Gala globally before that repair would be false.
+
+Original source review also establishes that the pear is peeled before steaming;
+a generic with-skin pear profile does not resolve the earlier Bartlett concern.
+Russet potatoes are weighed before boiling and subsequent peeling, so even a
+russet edible profile would not fix the gross/edible mass difference. The other
+yield cases are bone-in skinless chicken and whole squash with discarded parts.
+The four clear-form source gaps are thawed/drained corn, peeled/seeded cucumber,
+peeled pear and tiny new skin-on potatoes. The four source ambiguities are
+applesauce peel, orange-slice peel/consumption, cranberry sweetening and margarine
+formulation. No nutrient-closeness threshold resolves any of these questions.
+
+### ASSUMPTION — explicit source interpretation
+
+Generic fresh tomato is interpreted as ripe red culinary tomato. Specified
+chopping/coring retains skin unless the source instructs removal; explicit
+optional peeling remains unresolved. Cooked pasta retains the existing plain,
+unenriched interpretation, which must be reviewed with its source proposal.
+FNDDS generic peach and juice profiles are named representative-reference
+recommendations, not a general NFS fallback or cultivar/form equivalence policy.
+Generic peach derives from yellow raw peach; lemon juice NFS derives from raw
+juice; orange juice NFS combines ordinary and calcium-added packaged juices.
+Their exact inputs and limitations remain visible in the manifest.
+
+USDA Foundation April 2026 and SR Legacy April 2018 were searched before the
+FNDDS 2021–2023 release. FNDDS provides official generic references but cannot
+prove unspecified cranberry sweetening or margarine fat grade. CoFID workbook
+retrieval and AFCD rendered-content limitations are recorded; no search snippet
+was accepted as evidence. DTU analysed generic peach was inspected but its
+available-carbohydrate definition and rounded UI values were not silently
+substituted for USDA carbohydrate-by-difference. NO_ACCEPTABLE_PROFILE_SOURCE
+means no match established in that documented search, not worldwide absence.
+
+### RECOMMENDATION — representation for a separately authorized B2-B2
+
+**RECOMMENDED OPTION: A — nutrition-relevant FoodIngredient split.** Preserve one
+current profile and existing exact assessment binding. Add only distinct edible
+forms justified by original recipe and primary-source review; use existing
+same-source immutable revisions and source/version history. A concept split is
+not a purchase-mass conversion and does not infer Shopping/Pantry substitutability.
+
+**ALTERNATIVES REJECTED for this operation: B and C.** B (multiple current profile
+variants) needs a deterministic RecipeIngredient selector, migrated uniqueness,
+backfill and variant lifecycle. C (independent row nutrition references) adds a
+second authority path with new precedence, replay and stale-profile semantics.
+Both increase schema/runtime complexity without solving source ambiguity or
+edible yield. Full A/B/C comparison covers Nutrition, recipe truth, Shopping,
+Pantry, catalogue complexity, provenance and migration impact in the report.
+
+**CONSEQUENCES:** After explicit authorization, future production work would add
+approved concepts/profiles, revise mapped recipes, replace globally safe profiles
+with history preserved, and publish separately reviewed assessments for every
+new row or stale profile binding, including non-target usages. The APPLE repair
+must first remove the peeled conflict and resolve optional peeling. Current v2
+recipes would require later v3 where remapped; none is created here. Related
+Shopping/Pantry forms need future explicit mapping/yield work, not automatic
+aggregation, stock substitution or new inferred density/edible fractions.
+
+### OPEN QUESTION — approval and evidence still required
+
+Project review must approve or reject Option A and the exact named source
+candidates, particularly FNDDS generic peach/lemon/orange defaults. It must bind
+ambiguous source choices before implementation and approve the APPLE repair
+order. Four profile-source gaps and three yield cases require further evidence.
+Rejecting a candidate leaves its rows blocked; it does not authorize a fallback.
+No estimate-policy or edible-yield implementation is authorized by this audit.
+
+### Conversion boundary and reproducibility
+
+| Conversion after semantic resolution | Target rows |
+| --- | ---: |
+| DIRECT_G_MASS | 7 |
+| STILL_EXACT_EVIDENCE_NEEDED | 11 |
+| STILL_ESTIMATE_ONLY | 6 |
+| STILL_MEASURE_OR_SIZE_AMBIGUOUS | 10 |
+| STILL_EDIBLE_YIELD_REQUIRED | 3 |
+| ALREADY_EXACT / NOT_ASSESSED_IN_B2_B1 | 0 / 0 |
+
+DIRECT_G_MASS describes an explicit input quantity only. No current assessment
+becomes executable here. All **43** estimate descendants retain null executable
+mass; accepted estimates, new evidence, new assessments and new versions are
+all **zero**. Production remains **30 current RecipeVersions / 189 rows / 30
+INCOMPLETE**, with the other Nutrition statuses zero. Migration head remains
+**0027_recipe_same_source_revisions**. The validator compares 683 protected
+files to exact starting-main Git blobs, preventing curation from rebaselining
+production hashes. Validation and focused tests need no network.
+
+```sh
+python3 scripts/validate_pr6_data_b2b1.py
+AI_ENABLED=false python3 -m pytest -q backend/app/tests/test_pr6_data_b2b1_research.py
+python3 scripts/promote_pr6_data_b2a.py
+AI_ENABLED=false python3 scripts/audit_pr6_data_b2a.py
+```
+
+B2-B1 research is established by this changeset. **PR6 remains NOT COMPLETE;
+B2-B2 production semantic/profile corrections and estimate-policy implementation
+remain NOT AUTHORIZED; PR7+ remain UNAUTHORIZED.** No separate B2-B1-CLOSE
+operation is required. This recommendation does not amend the canonical
+architecture or grant production authority.
