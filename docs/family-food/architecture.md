@@ -251,6 +251,19 @@ RetailSKU candidates
 PriceSnapshot
 ```
 
+#### PROPOSED CHANGE — NOT YET APPROVED
+
+PR6-DATA-B2-B1 recommends using existing FoodIngredient identity for materially
+distinct nutrition forms (for example, fruit versus juice or dry versus cooked
+pasta), preserving one current profile per FoodIngredient. This is a proposed
+catalogue-granularity clarification, **not** an approved architecture change or
+an implementation authorization. It does not add FoodProductType, profile
+variants or independent row nutrition references. All-use compatibility, exact
+source provenance and separate edible-yield handling remain required. Shopping
+and Pantry must not infer fungibility or conversion from a conceptual relation.
+See the [research recommendation and A/B/C comparison](../../data/curation/pr6-data-b2b1/README.md#architecture-analysis)
+and [data-readiness audit](nutrition-data-readiness.md#pr6-data-b2-b1-semanticprofile-resolution-audit).
+
 ### 6.3 Recipe Catalogue
 
 Owns platform production `Recipe`, immutable/versioned `RecipeVersion`,

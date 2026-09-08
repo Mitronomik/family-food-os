@@ -1,6 +1,6 @@
 # Progress
 
-Updated: `2026-09-07`
+Updated: `2026-09-08`
 
 ## FamilyFoodOS milestone status
 
@@ -529,3 +529,56 @@ Final diff and staged-scope checks pass: `git diff --check` and
 `git diff --cached --check`; staged inventory exactly matches the 34 intended
 files. Only migration 0027 is added; protected source/seed files, local databases,
 credentials and unrelated `.DS_Store` are absent from the changeset.
+
+## PR6-DATA-B2-B1 verification
+
+Updated: `2026-09-08`. Exact starting main:
+`7f17b1372bbd2e9f97fc025ac26b3f04a15cf837`. Branch:
+`data/pr6-b2b1-semantic-profile-audit`.
+
+This changeset establishes the semantic/profile research audit: 37 target issue
+occurrences on 37 distinct current rows in 23 recipes, affecting 19 foods.
+All 46 current uses across 25 recipes are reviewed. Twenty-five original recipe
+records were reopened against 21 accepted artifact hashes, matching PR4/DATA-A.
+The [report](../data/curation/pr6-data-b2b1/README.md) owns the complete matrices,
+12 exact profile candidates, seven proposed forms, source limitations and A/B/C
+comparison. Option A is a RECOMMENDATION, not an architecture approval.
+
+Executed verification:
+
+- `python3 scripts/validate_pr6_data_b2b1.py`: PASS; exact B2-A v3 hash,
+  coverage/provenance, controlled decisions, Decimal source facts, all-use
+  compatibility proofs, deterministic summary, 683 protected baseline files,
+  migration 0027 and 43 non-executable estimates.
+- `AI_ENABLED=false python3 -m pytest -q
+  backend/app/tests/test_pr6_data_b2b1_research.py`: **35 passed**. Tests include
+  source/Decimal corruption, missing/historical/duplicate/non-target rows,
+  incomplete all-use proofs, protected-file mutation/rebaselining, forbidden
+  migration inventory and unauthorized production/estimate authority claims.
+  An initial collection failure used an incorrect test root path; corrected
+  before these successful runs. Existing pytest-asyncio configuration warning
+  remains; no test was skipped or weakened.
+- `python3 scripts/promote_pr6_data_b2a.py`: PASS, no-write deterministic payload
+  validation; five revisions and 32 assessments reproduce unchanged.
+- `AI_ENABLED=false python3 scripts/audit_pr6_data_b2a.py`: PASS, byte-identical
+  production audit v3. 30 current versions / 189 rows / 30 INCOMPLETE; COMPLETE,
+  COMPLETE_WITH_WARNINGS and CONDITIONAL are zero. Current assessments remain
+  66 exact, 21 direct, 37 estimate-review and 65 blocked. All 43 estimate
+  descendants retain null executable mass, including six with other blockers.
+- Ruff check and Ruff format check pass for the two new Python files. The only
+  initial lint issue was a local lambda assignment; corrected to a named helper.
+  No full backend/launcher regression is required for this research-only scope.
+
+PR6 engine and DATA-A remain ACCEPTED / MERGED. B1, PR6-INFRA and B2-A remain
+established; production bytes and audit are unchanged. B2-B1 research is
+established by this changeset. PR6 remains NOT COMPLETE. B2-B2 production
+corrections and estimate-policy implementation remain NOT AUTHORIZED; PR7+
+remain UNAUTHORIZED. No separate B2-B1-CLOSE operation is required.
+
+Final delivery checks: `git diff --check` and `git diff --cached --check` pass.
+The staged scope audit contains exactly the 11 allowed research/test/docs/state
+files; staged bytes match reviewed working files. No production seed/runtime/
+schema file, local database, credential, artifact cache or unrelated `.DS_Store`
+is staged. All 46 relative documentation links and heading anchors validate.
+The final focused run passes **35 tests**; Ruff check/format and the offline
+validator pass. Production B2-A audit reproduction remains byte-identical.
