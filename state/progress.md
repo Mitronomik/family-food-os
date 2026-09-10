@@ -667,3 +667,57 @@ schema file, local database, credential, artifact cache or unrelated `.DS_Store`
 is staged. All 46 relative documentation links and heading anchors validate.
 The final focused run passes **35 tests**; Ruff check/format and the offline
 validator pass. Production B2-A audit reproduction remains byte-identical.
+
+## PR6-NUTRIENT-VECTOR-A verification
+
+Date: `2026-09-10`. Exact starting main:
+`307ba3475581087b079ebcf2fa643e19a00bf06d` (PR #24 merged).
+Branch: `data/pr6-nutrient-vector-a-registry`. Scope: registry/provenance research,
+offline validator/tests and active docs/state only. The [report](../data/curation/pr6-nutrient-vector-a/README.md)
+owns the full canonical registry, mapping exceptions, source hashes and VECTOR-B
+recommendations. Current FDC Foundation April 2026 and SR Legacy April 2018
+were checked against official downloads; actual archive hashes match B2-B1.
+
+Established artifacts: 51 definitions, all 51 APPROVED_FOR_VECTOR_B, no blocked
+or deferred entries; 51 Russian names, no English fallback. 140 release-specific
+FDC mappings: 76 exact, 24 method-specific, 24 distinct/rejected, 6 conversion,
+10 unproven. INFOODS: 36 exact, 11 method-specific, 1 conversion, 3 unproven.
+All 183 accepted profile identities across seed history / 915 fields audited:
+870 source-confirmed, 45 absent fibres, no mismatches or ambiguous present values.
+There are 64 known zeros; 138 profiles have five confirmed values and 45 have
+four plus unknown fibre. No accepted historical-only profile was found; the
+original 100 profiles remain unchanged after the 83-profile expansion.
+
+Executed verification, data-curation tier:
+
+- `backend/.venv/bin/python scripts/validate_pr6_nutrient_vector_a.py
+  --write-summary`: PASS. Summary is derived from the validated artifacts.
+  Exact base, selected source rows/hashes, Decimal comparison, registry/mapping
+  integrity, all current/historical seed provenance and 961 protected files
+  are checked. Migration remains `0027_recipe_same_source_revisions`; all 43
+  estimated rows retain null executable mass.
+- `AI_ENABLED=false backend/.venv/bin/python -m pytest -q
+  backend/app/tests/test_pr6_nutrient_vector_a_registry.py`: **69 passed in 1.71s**.
+  Includes scientific collisions, unproven mapping rejection, poisoned IDs/source
+  amounts, Russian/code fallback, unit/Decimal boundaries, null vs zero, missing
+  fields/profiles and additional historical profile coverage. A disposable SQLite
+  database confirms the complete accepted inventory with no current-only filter;
+  a separate test replacement retains its prior historical profile. Definition
+  and conversion evidence references are required; USDA Handbook 74 preface
+  p. iii independently confirms the 4.184 energy unit factor.
+- The initial root `.venv` test invocation could not collect because SQLAlchemy
+  is absent there. The existing `backend/.venv` contains the project dependencies;
+  the successful run above uses it. No dependency or runtime files were changed.
+- Ruff check and format checks cover the new validator and focused test only.
+  Runtime, seeds, schema, B1/B2-A/B2-B1 bytes are unchanged; full backend/launcher
+  regression is not required for this bounded research surface.
+- `git diff --check` and `git diff --cached --check`: PASS. Staged scope is
+  exactly the 15 authorized files; the pre-existing `.DS_Store` modification is
+  excluded. `python3 scripts/validate_pr6_nutrient_vector_a.py --staged`: PASS,
+  including staged-byte agreement. Local documentation validation: **89 relative
+  links and heading anchors across 8 changed Markdown files**, all resolved.
+
+PR6-ARCH-COMPOSITION is MERGED / established. This changeset establishes VECTOR-A
+registry/provenance research for final review. PR6 / PR6-NUTRIENT-VECTOR remain
+NOT COMPLETE; VECTOR-B NOT AUTHORIZED; COMPOSITION-CORE / PR7+ UNAUTHORIZED.
+Nutrition v1 is current, migration head 0027, 43 estimates non-executable.

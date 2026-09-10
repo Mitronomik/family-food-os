@@ -2,54 +2,32 @@
 
 Updated: `2026-09-10`
 
-PR6-ARCH-COMPOSITION establishes the docs-only architecture contract from exact
-main `47299ceb2c740f40f69f3b02359ce71c8be6b1c1` (PR #23), on
-`docs/pr6-arch-composition`. No implementation or production data changed.
+PR6-NUTRIENT-VECTOR-A establishes registry/provenance research only from exact
+main `307ba3475581087b079ebcf2fa643e19a00bf06d` (PR #24 merged).
+Branch: `data/pr6-nutrient-vector-a-registry`. Next action is VECTOR-A final review.
+Do not autonomously merge, start VECTOR-B or implement any schema/runtime.
 
-Option A is now **DECISION / APPROVED**, dated 2026-09-10 in
-[Architecture §6.2](../docs/family-food/architecture.md#decision--option-a-approved-2026-09-10).
-FoodIngredient is the sole food identity. Different nutrition-relevant forms are
-separate foods; no mandatory FoodProductType Nutrition layer.
+The [complete report](../data/curation/pr6-nutrient-vector-a/README.md) contains
+the 51-entry Russian registry, source manifests/hashes, 140 FDC mappings, all
+915 legacy field observations and VECTOR-B recommendations. Key facts: 183
+accepted profiles across history (0 historical-only), 870 confirmed values,
+45 unknown fibres, 64 known zeros; no mismatches or ambiguous present values.
+Current Foundation release verified April 2026; SR Legacy April 2018.
+Source mapping gaps are explicit and must not be resolved by guessing.
 
-The [composition contract](../docs/family-food/food-composition-and-assembly.md)
-now defines atomic/composite, recursive versioned DAG and one calculation authority
-per version. Exact components have exact grams and pinned profile/composition
-versions. Declared-only lists lack quantitative composition: use the product's
-authoritative direct profile, never infer quantities from ingredient order.
+Keep FoodNutritionProfile as the single profile/version/provenance container.
+Absence of a value row means unknown only after complete atomic import/read;
+zero remains explicit. Preserve nutrient-level source locators and legacy
+projections; no second current-profile selector. Extra deployment profiles need
+their own full historical inventory/audit before a future backfill.
 
-Raw/input/cooked mass differ because preparation/cooking can remove parts or
-absorb/lose water and fat. recipe_input_mass_g refers to the actual process input
-form; pcs/ml need reviewed mass evidence. Yield and nutrient retention are distinct,
-versioned evidence; unknown retention cannot silently become 100%.
-NutrientVector extends macros to micronutrients without one SQL column per nutrient,
-with nutrient-level provenance and unknown != zero. Nutrition v1 remains valid
-current implementation and accepted PR #18 history; the new model is future target.
+Production runtime/schema/seeds, B1/B2-A/B2-B1 unchanged. Head migration is 0027;
+Nutrition v1 current; 43 estimates non-executable; 30 current recipes / 189 rows
+remain INCOMPLETE. PR6 / PR6-NUTRIENT-VECTOR NOT COMPLETE; VECTOR-B NOT AUTHORIZED;
+COMPOSITION-CORE / PR7+ UNAUTHORIZED. Old B2-B2 remains superseded/pending redesign.
 
-[Russian-language contract](../docs/family-food/russian-language-contract.md): all
-consumer **and admin** product text must be Russian. No English fallback; missing
-Russian food/recipe/nutrient/status/error text blocks publication. Machine codes
-and exact external provenance identifiers remain intact behind the display boundary.
-RU availability and familiarity are independent hard default-recipe gates; the
-30 current FNS recipes remain technical evidence, not final consumer catalogue.
-
-**Old PR6-DATA-B2-B2: SUPERSEDED / PENDING REDESIGN.** It cannot run next because
-NutrientVector, composition/mass/yield and RU catalogue/display must exist before
-redesigned source/profile promotion. PR #23 B2-B1 report, source candidates and
-matrices remain unchanged research evidence; architecture approval does not approve
-individual candidate values, FNDDS defaults or unresolved source choices.
-All 43 estimates remain non-executable. Migration head is still 0027; production
-baseline still has 30 current recipes / 189 rows / 30 INCOMPLETE.
-
-[Canonical merge order](../docs/family-food/master-roadmap.md#5-canonical-master-sequence):
-PR6-ARCH-COMPOSITION → PR6-NUTRIENT-VECTOR → PR6-COMPOSITION-CORE → PR6-RU-FOOD-DATA
-→ PR6-DATA-B2-B2-REDESIGNED → PR6-CLOSE → RECIPE-ASSEMBLY-A → RECIPE-ASSEMBLY-B
-→ PR7 MealPlan/Serving → PR8 Planner. Assembly uses verified Russian templates,
-exact grams and reproducible trace; deterministic validation does not confer kitchen
-verification. PR7 consumes RecipeVersion or validated RecipeAssembly without
-replicating Nutrition; Planner consumes valid candidates and does not invent recipes.
-
-PR6 remains **NOT COMPLETE**. The only next logical implementation operation is
-**PR6-NUTRIENT-VECTOR — NOT STARTED / requires separate authorization after merge**.
-PR7+ remain UNAUTHORIZED. Review readiness or merge grants no next-task permission.
-[Progress](progress.md#pr6-arch-composition-verification) records verification;
-[current focus](current-focus.md) owns execution authorization.
+Verification commands/results are in [progress](progress.md#pr6-nutrient-vector-a-verification).
+Use `backend/.venv/bin/python` for focused tests: root `.venv` lacks SQLAlchemy.
+Unrelated tracked `.DS_Store` modification is preserved and excluded from PR.
+Full external archives remain temporary, outside the repository; ordinary tests
+are offline and depend only on committed selected evidence plus accepted Git history.

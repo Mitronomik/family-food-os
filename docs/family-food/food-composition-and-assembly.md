@@ -192,8 +192,9 @@ Decimal value или unknown, provenance, version/release и estimation/uncertai
 state. Набор расширяется без новой database column на каждый nutrient: энергия,
 белки, жиры, углеводы, пищевые волокна, минералы, витамины и другие необходимые
 микронутриенты. Окончательный список не фиксируется здесь. Initial canonical
-registry обязан определить отдельно authorized `PR6-NUTRIENT-VECTOR` по
-авторитетным datasets и продуктовым требованиям.
+registry определён в bounded `PR6-NUTRIENT-VECTOR-A` по авторитетным
+datasets и продуктовым требованиям; см. [реестр и аудит](../../data/curation/pr6-nutrient-vector-a/README.md).
+VECTOR-B с normalized values/runtime требует отдельной авторизации.
 
 **Unknown != zero** для каждого macro/micronutrient. Отсутствие данных не
 становится нулём ради суммы. Нельзя склеить kcal производителя, белки USDA и
@@ -362,15 +363,20 @@ mass states, transformation/yield, RU catalogue и Russian display requirements.
 candidates не теряются, но прежний promotion plan напрямую не исполняется.
 
 Все **43 estimate candidates остаются non-executable** до отдельно утверждённой
-estimate/uncertainty policy. OPEN: initial nutrient registry, конкретные будущие
+estimate/uncertainty policy. Реестр и provenance audit установлены VECTOR-A; OPEN:
+конкретные будущие
 schema/migration/backfill contracts, exact source/profile promotion, source-form
 ambiguities, отсутствующее mass/yield/retention evidence и cross-source policy.
 Ничто из этого не решается вымышленными значениями или данным docs PR.
 
 Новый порядок и отдельные authorizations определяет
 [Master Roadmap](master-roadmap.md#5-canonical-master-sequence).
-PR6 — NOT COMPLETE; PR6-NUTRIENT-VECTOR — NOT STARTED / requires separate
-authorization after merge; PR7+ — UNAUTHORIZED.
+PR6 — NOT COMPLETE; PR6-NUTRIENT-VECTOR — NOT COMPLETE. VECTOR-A устанавливает
+реестр и аудит без runtime/schema. VECTOR-B — NOT AUTHORIZED;
+COMPOSITION-CORE и PR7+ — UNAUTHORIZED. Рекомендуемый container для values —
+существующий FoodNutritionProfile с сохранённой identity и историей, без второго
+current-profile selector. Отсутствие value row означает unknown только в полном
+атомарно опубликованном snapshot; явный ноль остаётся нулём.
 
 ## Архитектурные риски
 
