@@ -74,13 +74,48 @@ composite FoodIngredient не является переименованным Fo
 provenance сохраняется даже внутри выбранного authority path; она сама по себе
 не разрешает cross-source слияние.
 
+## Единственный владелец composition truth
+
+Recipe truth и reusable food identity не должны независимо хранить один и тот же
+количественный граф как два источника истины.
+
+- `RecipeVersion` владеет source-backed рецептурой: своими `RecipeIngredient`,
+  точными количествами/входными массами и process graph для этого рецепта.
+- `RecipeAssembly` владеет своим derived, воспроизводимым selected component/process
+  graph, сформированным из проверенных template/rules.
+- Food Catalogue владеет reusable `FoodIngredient` identity и самостоятельной
+  composition truth только тогда, когда состав является свойством самого
+  повторно используемого продукта, а не дубликатом конкретного RecipeVersion или
+  RecipeAssembly.
+
+Если приготовленный дома результат RecipeVersion/RecipeAssembly нужен как reusable
+Composite FoodIngredient, его версия должна **ссылаться на producer/output truth**:
+идентичность producer и его version, выходную food form, применённые transformation/
+yield/retention и выбранный authoritative output. Она не копирует независимо тот
+же список компонентов и количества. Изменение producer/version делает такую
+output-binding новой/stale согласно будущему versioning contract; старый graph не
+переписывается.
+
+Покупной/промышленный composite является самостоятельным продуктом: при
+`DECLARED_ONLY_COMPOSITION` он использует свой direct profile и сохранённую
+декларацию без придуманных долей; при действительно известном независимом exact
+составе может иметь собственный versioned composition. Это не создаёт второй
+рецептурный источник истины для домашнего producer.
+
+Графовые проверки должны учитывать producer/output bindings вместе с обычными
+composition links: self-reference или цикл через RecipeVersion/RecipeAssembly
+также fail closed. Точный persisted binding/schema относится к отдельно
+авторизованному PR6-COMPOSITION-CORE; этот docs PR фиксирует ownership boundary.
+
 ## Recursive DAG и versioning
 
 Exact composite может содержать atomic, другой exact composite или declared-only
 продукт с самостоятельным authoritative direct profile. Например, блюдо содержит
 макароны, мясо и соус; соус раскрывается на томаты, масло, лук, сахар, соль и перец.
 Вычисление следует выбранному authority каждого узла и не считает повторно его
-direct профиль и дочерние вклады.
+direct профиль и дочерние вклады. Если такой соус является результатом конкретного
+RecipeVersion/RecipeAssembly, его component/process graph принадлежит producer и
+повторно используемый FoodIngredient ссылается на этот output вместо копирования.
 
 Composition graph обязан быть DAG. A → A и A → B → C → A запрещены.
 Cycle detection проверяет достижимый граф закреплённых версий; при цикле —
@@ -203,17 +238,30 @@ Panel: Пятёрочка, Перекрёсток, Лента, О'КЕЙ, Маг
 Существующие исключения для водопроводной воды и category-level commodity evidence
 сохраняются; они не разрешают домысливать доступность других продуктов.
 
-Все food components default automatic consumer recipe должны иметь актуальное
-доказательство обычной российской розничной доступности. `RU_MASS_MARKET`
-предпочтителен. `RU_AVAILABLE` допустим в каталоге, но стандартная неделя не может
-зависеть от редкого продукта без подтверждённого обычного substitution path.
-`SPECIALTY_OR_UNCLEAR` запрещён как обязательный компонент default automatic recipe.
+RU availability применяется к **покупаемым terminal inputs** выбранного
+RecipeVersion/RecipeAssembly. Каждый обязательный продукт, который household должен
+купить для выполнения default recipe, имеет актуальное доказательство обычной
+российской розничной доступности. Если reusable composite готовится дома по
+проверенному producer/output path, он сам не обязан продаваться в магазине: gate
+рекурсивно проверяет его purchase-required terminal inputs. Если тот же composite
+выбран как готовый покупной продукт, availability evidence требуется уже для него.
+Выбор «сделать дома» и «купить готовым» является явным плановым решением, а не
+автоматической взаимозаменяемостью или Pantry/Shopping conversion.
+
+`RU_MASS_MARKET` предпочтителен. `RU_AVAILABLE` допустим в каталоге, но стандартная
+неделя не может зависеть от редкого purchase-required input без подтверждённого
+обычного substitution path. `SPECIALTY_OR_UNCLEAR` запрещён как обязательный
+покупаемый terminal input default automatic recipe. Производный домашний composite
+не проходит retail gate фиктивной записью о собственной продаже; его готовность
+доказывается producer/output и доступностью terminal inputs.
 
 До consumer Planner нужен базовый российский каталог: обычные свежие продукты,
 мясо, птица, рыба, яйца, молочные продукты, крупы, макароны, мука, хлеб, масла,
 овощи, фрукты, специи, простые соусы и распространённые составные полуфабрикаты.
 Каждая запись имеет правильные identity/form/composition mode, nutrition
-provenance, Russian display и market evidence; этот PR записей не добавляет.
+provenance, Russian display и market evidence там, где продукт является покупаемым
+terminal input; домашний derived output вместо фиктивной retail-доступности имеет
+проверяемый producer/output binding. Этот PR записей не добавляет.
 
 Доступности недостаточно. **`RU_RECIPE_FAMILIAR` — hard default-recipe gate**
 (точный internal code можно уточнить в data PR). Review проверяет обычные продукты,
@@ -276,9 +324,12 @@ curated substitutions, а также familiarity и Russian display gates.
 ### Границы Recipe, Planner, Shopping и Pantry
 
 Source-backed production RecipeVersion остаётся immutable authoritative recipe
-truth. Assembly — derived/reproducible state; оно не переписывает RecipeVersion
-и не создаёт тысячи near-duplicate versions. Публикация assembly как отдельного
-canonical recipe — отдельная trusted publication operation.
+truth и владеет своим recipe-specific component/process graph. Assembly —
+derived/reproducible state и владеет своим selected graph; оно не переписывает
+RecipeVersion и не создаёт тысячи near-duplicate versions. Reusable Composite
+FoodIngredient, произведённый таким процессом, ссылается на producer/output binding
+и не дублирует тот же graph. Публикация assembly как отдельного canonical recipe —
+отдельная trusted publication operation.
 
 Household constraints → Recipe Assembly / verified Recipe Catalogue → валидный
 candidate pool → Planner → MealPlan. Planner выбирает валидные candidates и не
@@ -286,7 +337,10 @@ candidate pool → Planner → MealPlan. Planner выбирает валидны
 RecipeAssembly как selection origin, переиспользует Nutrition и не дублирует её.
 
 Assembly определяет конечный набор FoodIngredient. Shopping агрегирует уже
-утверждённый состав и не изобретает substitutions. Pantry не превращает лимон
+утверждённый состав и не изобретает substitutions. Для make-at-home composite
+будущий Shopping использует purchase-required terminal inputs выбранного producer;
+для явно выбранного покупного composite — сам покупаемый FoodIngredient. Это не
+разрешает автоматически заменять один путь другим. Pantry не превращает лимон
 в сок без отдельной transformation/substitution logic. Shopping generation
 по-прежнему read-only к Pantry; новые правила состава не разрешают автоматическое
 списание, резервирование или смешение raw/cooked inventory.
@@ -323,7 +377,7 @@ authorization after merge; PR7+ — UNAUTHORIZED.
 | Риск | Обязательное ограничение |
 | --- | --- |
 | Catalogue explosion | Split только при изменении authoritative food truth, не из-за нарезки/бренда/упаковки как таковых. |
-| Composition double counting | Один calculation authority path на version. |
+| Composition double counting | Один calculation authority path на version; producer-owned recipe/assembly graph не дублируется в reusable FoodIngredient. |
 | Hidden yield assumptions | Versioned evidence; unknown остаётся unknown. |
 | Micronutrient false precision | Nutrient-level provenance, unknown != zero, явная retention uncertainty. |
 | Russian catalogue drift | Timestamped curation evidence; позже Retail live snapshots. |
