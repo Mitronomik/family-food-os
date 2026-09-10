@@ -15,6 +15,25 @@
 > платформа ingestion automation. Текущий порядок реализации определяет
 > `docs/family-food/master-roadmap.md`.
 
+> **DECISION / supersession — PR6-ARCH-COMPOSITION, 2026-09-10:** более поздний
+> [контракт состава](food-composition-and-assembly.md) утверждает FoodIngredient
+> как единственную canonical food identity. FoodProductType не является Nutrition
+> source of truth или обязательным промежуточным aggregate; composite
+> FoodIngredient не является переименованным FoodProductType. NutrientVector
+> supersedes фиксированную target macro model; пять полей Nutrition v1 остаются
+> текущей реализацией. Расширяемые macro/micronutrients, nutrient-level provenance,
+> distinct input/cooked masses и evidence-backed yield/retention обязательны для
+> следующей versioned архитектуры. Старые примеры полей/иерархий ниже читаются с
+> этим уточнением, не как новая schema authority.
+>
+> [Русский язык](russian-language-contract.md) обязателен во всём consumer/admin
+> output, включая названия, шаги, статусы, ошибки и PDF; English fallback запрещён.
+> [RU availability/familiarity](food-composition-and-assembly.md#ru-availability-и-familiarity-gates)
+> — позднее утверждённые hard consumer gates. Английские термины ниже — engineering
+> labels / machine codes, не готовый display text. Порядок implementation задаёт
+> [Master Roadmap](master-roadmap.md#5-canonical-master-sequence); этот docs PR
+> ничего из будущего runtime не реализует и не авторизует.
+
 ---
 
 # 1. Назначение документа
@@ -117,7 +136,10 @@
 
 # 5. Архитектурные уровни данных
 
-Каталог должен иметь минимум четыре уровня.
+Историческая четырёхуровневая схема 0.1 ниже **superseded** в части обязательного
+Food Product Type. Текущий путь: FoodIngredient → RetailMapping → RetailSKU →
+Price / Availability Snapshot; composition остаётся внутри FoodIngredient.
+Схема сохранена как контекст исходного ТЗ, не как действующее требование.
 
 ```text
 Canonical Ingredient
@@ -897,7 +919,11 @@ unit = piece
 quantity = 2
 ```
 
-Unit Conversion переводит это в базовую массу:
+Исторический пример приблизительной массы ниже не является mass authority.
+По PR6-ARCH-COMPOSITION `pcs → recipe_input_mass_g` требует food/form-specific
+reviewed evidence; при его отсутствии масса unknown, все 43 текущих estimates
+non-executable. Нельзя принимать эту иллюстрацию как default conversion:
+
 
 ```text
 ≈ 160 g
@@ -1509,7 +1535,9 @@ verified_at
 1. авторитетный структурированный источник;
 2. данные производителя;
 3. validated internal value;
-4. derived estimate.
+4. derived estimate — только при отдельно утверждённой versioned uncertainty
+   policy; этот исторический список не разрешает исполнение текущих 43 estimates
+   или молчаливое cross-source слияние nutrient values.
 
 ---
 

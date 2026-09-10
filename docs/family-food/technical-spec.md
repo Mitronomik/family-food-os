@@ -14,6 +14,25 @@
 > `docs/family-food/master-roadmap.md` и имеют приоритет там, где это ТЗ
 > конфликтует с ними по архитектуре или порядку реализации.
 
+> **DECISION / supersession — PR6-ARCH-COMPOSITION, 2026-09-10:** более поздний
+> [контракт состава](food-composition-and-assembly.md) утверждает FoodIngredient
+> как единственную canonical food identity. FoodProductType не является Nutrition
+> source of truth или обязательным промежуточным aggregate; composite
+> FoodIngredient не является переименованным FoodProductType. NutrientVector
+> supersedes фиксированную target macro model; пять полей Nutrition v1 остаются
+> текущей реализацией. Расширяемые macro/micronutrients, nutrient-level provenance,
+> distinct input/cooked masses и evidence-backed yield/retention обязательны для
+> следующей versioned архитектуры. Старые примеры полей/иерархий ниже читаются с
+> этим уточнением, не как новая schema authority.
+>
+> [Русский язык](russian-language-contract.md) обязателен во всём consumer/admin
+> output, включая названия, шаги, статусы, ошибки и PDF; English fallback запрещён.
+> [RU availability/familiarity](food-composition-and-assembly.md#ru-availability-и-familiarity-gates)
+> — позднее утверждённые hard consumer gates. Английские термины ниже — engineering
+> labels / machine codes, не готовый display text. Порядок implementation задаёт
+> [Master Roadmap](master-roadmap.md#5-canonical-master-sequence); этот docs PR
+> ничего из будущего runtime не реализует и не авторизует.
+
 ---
 
 # 1. Назначение проекта
@@ -1579,7 +1598,9 @@ PDF
 - распознавание чеков;
 - wearable integrations;
 - медицинские диеты;
-- полный учёт микронутриентов;
+- полный учёт микронутриентов — историческое ограничение 0.1; superseded в части
+  обязательной расширяемой macro/micronutrient target model решением выше.
+  Exhaustive nutrient registry этим docs PR не фиксируется;
 - социальную сеть;
 - marketplace рецептов;
 - AI-generated recipes без проверки;

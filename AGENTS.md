@@ -65,6 +65,14 @@ Read-only review excludes delivery. Task-contract/DoD requirements:
   not HouseholdMember, Order is not MealPlan, ProductionBatch is not PrepBatch,
   and cosmetic PackagingItem is not a retail food package. Introduce a new food
   context, move dependencies, test, then remove legacy only when authorized.
+- FoodIngredient is the sole canonical food identity. Raw/input/cooked mass and
+  food forms are not interchangeable; critical nutrition/composition/yield truth
+  requires deterministic provenance. See the
+  [composition contract](docs/family-food/food-composition-and-assembly.md).
+- All human-facing consumer/admin surfaces must be Russian. Internal machine
+  codes must not leak into UI/PDF/errors; missing Russian display text is a
+  data/product blocker, never permission for English fallback. See the
+  [Russian-language contract](docs/family-food/russian-language-contract.md).
 - Consumer UX is mobile-first and minimizes effort: the system proposes and the
   user confirms/changes. Administrative controls must not dominate navigation.
 
