@@ -2,27 +2,28 @@
 
 Updated: `2026-09-10`
 
-- **PR6-ARCH-COMPOSITION architecture contract established by this changeset.**
-  Exact starting main: `47299ceb2c740f40f69f3b02359ce71c8be6b1c1` (PR #23).
-  Authorized scope: docs / architecture / roadmap / governance / state only.
-- PR6 engine (PR #18), DATA-A (#19), B1 (#20), INFRA (#21), B2-A (#22) and
-  B2-B1 (#23) are ACCEPTED / MERGED. Research and implementation history remain.
-- Option A is **DECISION / APPROVED**, extended with composition DAG, mass states,
-  NutrientVector, evidence-backed yield/retention, Russian consumer/admin display,
-  RU catalogue/familiarity and deterministic Recipe Assembly requirements.
-- **Old PR6-DATA-B2-B2: SUPERSEDED / PENDING REDESIGN.** Its previous production
-  promotion plan cannot be executed directly.
-- Production runtime/schema/data unchanged. Migration head:
-  `0027_recipe_same_source_revisions`. Nutrition v1 remains current implementation.
-  30 current recipes / 189 rows remain production baseline, all 30 INCOMPLETE;
-  this FNS corpus is technical regression evidence, not final Russian consumer truth.
-  All **43 estimate candidates remain non-executable**.
-- **PR6 — NOT COMPLETE.** Next logical operation: **PR6-NUTRIENT-VECTOR — NOT
-  STARTED / requires separate authorization after merge. PR7+ — UNAUTHORIZED.**
-  No later implementation, estimate policy or automatic next PR is authorized.
+- **PR6-ARCH-COMPOSITION — MERGED / established**, PR #24, exact merge/main
+  `307ba3475581087b079ebcf2fa643e19a00bf06d`.
+- **PR6-NUTRIENT-VECTOR-A — nutrient registry/provenance audit established by
+  this changeset**, starting from that exact main. Authorized scope is only
+  research/data/docs, offline validator and focused tests. Immediate next action:
+  final re-review of VECTOR-A zero-provenance correction in existing PR #25;
+  no autonomous merge or automatic follow-on work.
+- 51 canonical nutrient definitions with Russian names; 183 accepted profiles
+  across all seed history / 915 fields audited. 870 source-confirmed values,
+  45 absent fibres, no numeric mismatches or ambiguous present values.
+  Zero correction: 64 SOURCE_REPORTED_ZERO (14 Foundation / 50 SR), all unresolved
+  for exact/censoring semantics. Exact normalized backfill is held; v1 unchanged.
+- Production runtime/schema/seeds unchanged; migration head
+  `0027_recipe_same_source_revisions`; `FAMILY_FOOD_NUTRITION_V1` current.
+  B1/B2-A/B2-B1 evidence and all **43 non-executable estimate candidates** retained.
+  Production stays 30 current recipes / 189 rows, all 30 INCOMPLETE.
+- **PR6 / PR6-NUTRIENT-VECTOR — NOT COMPLETE. VECTOR-B — NOT AUTHORIZED.
+  COMPOSITION-CORE — UNAUTHORIZED. PR7+ — UNAUTHORIZED.**
+  A/B are bounded parts of the existing operation, not new milestones.
 
-Canonical details: [composition and assembly](../docs/family-food/food-composition-and-assembly.md),
-[Russian language](../docs/family-food/russian-language-contract.md),
-[merge order](../docs/family-food/master-roadmap.md#5-canonical-master-sequence).
-Verified scope/checks: [progress](progress.md#pr6-arch-composition-verification).
-Continuation boundaries: [handoff](handoff.md).
+Canonical meaning and exceptions:
+[Nutrition](../docs/family-food/nutrition-core.md#pr6-nutrient-vector-a--registry-and-legacy-provenance),
+[report](../data/curation/pr6-nutrient-vector-a/README.md).
+Exact verification: [progress](progress.md#pr6-nutrient-vector-a-verification).
+Continuation: [handoff](handoff.md).

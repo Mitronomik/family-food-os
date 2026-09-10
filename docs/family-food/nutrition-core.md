@@ -365,6 +365,55 @@ nutrient/status/error display, including admin, API messages and PDF.
 Old PR6-DATA-B2-B2: **SUPERSEDED / PENDING REDESIGN**. All 43 estimates remain
 non-executable; production audit v3 still has 30 current recipes / 189 rows, all
 30 INCOMPLETE. Migration head remains `0027_recipe_same_source_revisions`.
-PR6 — NOT COMPLETE; PR6-NUTRIENT-VECTOR — NOT STARTED / requires separate
-authorization after merge; PR7+ — UNAUTHORIZED. The
+PR6 — NOT COMPLETE; PR6-NUTRIENT-VECTOR is being delivered in bounded A/B
+slices described below. VECTOR-B is NOT AUTHORIZED; PR7+ — UNAUTHORIZED. The
 [roadmap](master-roadmap.md#5-canonical-master-sequence) owns the new sequence.
+
+
+## PR6-NUTRIENT-VECTOR-A — registry and legacy provenance
+
+This changeset establishes the bounded registry/provenance audit from exact
+starting main `307ba3475581087b079ebcf2fa643e19a00bf06d` (merged PR #24).
+[The research report](../../data/curation/pr6-nutrient-vector-a/README.md) owns the
+51 canonical definitions, Russian names/units, release-specific source mappings,
+full legacy crosswalk, source hashes and implementation recommendations.
+USDA Foundation April 2026 and SR Legacy April 2018 were verified on 2026-09-10.
+
+All 183 accepted profile provenance identities across seed history are audited:
+915 field observations, 870 source-confirmed values and 45 absent fibres. No
+value mismatches or ambiguous present values were found. The original 100
+profiles were retained unchanged when 83 were added; no historical-only profile
+exists in this accepted corpus. Additional deployment-specific historical
+profiles require their own provenance inventory before backfill.
+
+Every legacy carbohydrate is source 1005, **CARBOHYDRATE_BY_DIFFERENCE**, not
+available carbohydrate. Energy preserves 81 SR 1008, 97 Foundation 2048 and
+5 Foundation 2047 observations; methods are not erased. RAE/retinol/beta-carotene,
+total folate/DFE/folic acid and fat totals/species remain distinct canonical codes.
+Unproven FDC/INFOODS mappings remain explicit exceptions, not guessed identifiers.
+
+Recommendation for separately authorized VECTOR-B: attach normalized nutrient
+values to the **existing FoodNutritionProfile** identity/version/provenance
+container. Keep one current-profile system and historical B1 FKs. No numeric
+value row means unknown. An explicit numeric 0 is a source-reported zero; it
+becomes authoritative exact zero for normalized import only when source provenance
+is sufficient under the approved import policy. All 64 audited zeros (14 Foundation,
+50 SR) remain unresolved and held from exact normalized backfill. No exact or
+non-censored zero is proven. See the [zero audit](../../data/curation/pr6-nutrient-vector-a/README.md#zero-provenance-correction--fact-open-question-and-decision).
+Atomic value-set import and complete reads remain required; query omission/failed import cannot
+be interpreted as source absence. Preserve uncertainty, nutrient-level source
+locator and immutable mapping metadata. Missing source IDs may only produce an
+explicit legacy projection with independently proved semantics. Ambiguous or
+mismatching values cannot be silently promoted or corrected.
+
+Canonical micrograms use `µg` (U+00B5), with Russian display `мкг`; the remaining
+units display as ккал/г/мг. English/code fallback is forbidden for all 51 entries.
+DIRECT_COMPONENT is a chemical/group definition, not certification of measurement;
+DERIVED_COMPONENT identifies operational/activity definitions. Source derivation
+and estimation state remain separate, and cross-source blending stays forbidden.
+
+Runtime/schema/seeds remain unchanged; FAMILY_FOOD_NUTRITION_V1 is current,
+migration head is 0027 and all 43 estimates are non-executable.
+PR6 and PR6-NUTRIENT-VECTOR are NOT COMPLETE. VECTOR-B is NOT AUTHORIZED;
+COMPOSITION-CORE and PR7+ remain UNAUTHORIZED. No implementation follows
+automatically from registry readiness.

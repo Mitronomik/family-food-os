@@ -865,5 +865,58 @@ migration head 0027, Nutrition v1 and B1/B2-A historical truth remain intact.
 [Canonical merge order](master-roadmap.md#5-canonical-master-sequence) now passes
 through NutrientVector, Composition Core, RU Food Data, redesigned B2-B2 and
 PR6-CLOSE, then Recipe Assembly A/B before PR7 and PR8. PR6 remains NOT COMPLETE;
-PR6-NUTRIENT-VECTOR is NOT STARTED and requires separate authorization after merge;
-PR7+ remain UNAUTHORIZED. Verified docs-only evidence: [progress](../../state/progress.md#pr6-arch-composition-verification).
+The later VECTOR-A slice below establishes registry/provenance research only;
+VECTOR-B, COMPOSITION-CORE and PR7+ remain unauthorized. Verified PR6-ARCH-COMPOSITION docs-only evidence: [progress](../../state/progress.md#pr6-arch-composition-verification).
+
+
+## PR6-NUTRIENT-VECTOR-A registry and provenance audit
+
+**Established by this changeset, research/data/docs only**, from exact main
+`307ba3475581087b079ebcf2fa643e19a00bf06d` (PR #24 merged).
+[Research report and full registry](../../data/curation/pr6-nutrient-vector-a/README.md),
+[source manifest](../../data/curation/pr6-nutrient-vector-a/source-manifest.json),
+[legacy crosswalk](../../data/curation/pr6-nutrient-vector-a/legacy-v1-crosswalk.json)
+and [derived summary](../../data/curation/pr6-nutrient-vector-a/summary.json) own
+the exact audit. Current USDA Foundation release was verified as April 2026;
+SR Legacy remains April 2018. FAO/INFOODS supplies external semantic identifiers,
+and МР 2.3.1.0253-21 supplies Russian terminology/product relevance, not targets.
+
+51/51 initial definitions are approved candidates for VECTOR-B, each with a
+Russian display name and one canonical unit (µg uses U+00B5). None is silently
+removed, and source mapping gaps do not delete definitions. FDC mappings:
+76 EXACT / 24 METHOD_SPECIFIC / 24 DISTINCT_COMPONENT / 6 UNIT_CONVERSION_REQUIRED /
+10 NO_ACCEPTABLE_MAPPING, counted by release. Three narrow INFOODS identifiers
+remain unproven (biotin, total choline, phylloquinone); no tag is invented.
+
+183 accepted profiles across all seed history produce 915 legacy observations:
+870 SOURCE_COMPONENT_CONFIRMED, 45 VALUE_ABSENT, zero mismatches, zero ambiguous
+present values, zero present values with unavailable source IDs. There are 64
+source-reported numeric zero observations; exact/censoring semantics remain
+unresolved for all 64 (14 Foundation / 50 SR). No exact/non-censored zero or
+explicit censored observation is established by available evidence. The original 100 profiles remain unchanged; the later
+83 were additions, leaving zero historical-only identities in the accepted
+corpus. The validator requires all historical identities and all five fields,
+and the focused test reads every profile without a current-only filter. Extra
+deployment-specific profiles must be exported/audited before backfill.
+
+All carbohydrates use by-difference 1005, not available carbohydrate. All energy
+IDs/amounts are verified independently: SR 1008 ×81, Foundation 2048 ×97 and
+2047 ×5. Energy calculation methods, vitamin A definitions, folate definitions
+and lipid totals/species are retained separately; the report lists every rejected
+or unproven mapping. No production micronutrient amount is created.
+
+The [Nutrition contract](nutrition-core.md#pr6-nutrient-vector-a--registry-and-legacy-provenance)
+records the recommendation: existing FoodNutritionProfile remains the version/
+provenance container; normalized values reference it and retain nutrient-level
+locators. No row means unknown after atomic complete import/read. Explicit numeric
+zero is source-reported; authoritative exact normalized zero requires sufficient
+provenance under an approved import policy. All 64 unresolved zeros are held from
+that backfill; production v1 values stay unchanged. Legacy projections never fake source IDs or resolve ambiguous
+semantics. Nutrient registry readiness does not resolve B2-B1 food-form mismatch,
+profile representativeness, yield/quantity gaps, recipe readiness or estimate policy.
+
+B1 evidence/assessments, B2-A RecipeVersions, B2-B1 research, production seeds,
+runtime and schema remain byte-identical. Migration head 0027; Nutrition v1 current;
+43 estimates non-executable. **PR6 / PR6-NUTRIENT-VECTOR — NOT COMPLETE;
+VECTOR-B — NOT AUTHORIZED; COMPOSITION-CORE / PR7+ — UNAUTHORIZED.**
+Executed checks: [progress](../../state/progress.md#pr6-nutrient-vector-a-verification).

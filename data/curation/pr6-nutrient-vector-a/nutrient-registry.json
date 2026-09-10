@@ -1,0 +1,1004 @@
+{
+  "deferred_extension_categories": [
+    "individual amino acids",
+    "additional fatty-acid species",
+    "individual carotenoids",
+    "additional vitamin K forms",
+    "other vitamers",
+    "organic acids",
+    "other validated food components"
+  ],
+  "entries": [
+    {
+      "canonical_code": "ALPHA_LINOLENIC_ACID",
+      "canonical_unit": "g",
+      "category": "lipid",
+      "definition": "Альфа-линоленовая кислота 18:3 n-3 cis,cis,cis; не общая 18:3 и не гамма-линоленовая кислота.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Альфа-линоленовая кислота",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "F18D3CN3",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART2",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "BETA_CAROTENE",
+      "canonical_unit": "µg",
+      "category": "vitamin",
+      "definition": "Бета-каротин как компонент пищи; не бета-каротиновые эквиваленты всех каротиноидов и не активность витамина А.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Бета-каротин",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "CARTB",
+      "notes": [],
+      "product_tracking_tier": "DETAILED_COMPONENT",
+      "source_evidence_refs": [
+        "INFOODS-OCEANIA",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "BIOTIN",
+      "canonical_unit": "µg",
+      "category": "vitamin",
+      "definition": "Биотин как пищевой витамин, без введения персональных норм.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Биотин",
+      "infoods_mapping_status": "NO_ACCEPTABLE_MAPPING",
+      "infoods_tagname": null,
+      "notes": [
+        "Exact INFOODS identifier was not recovered from selected authoritative documents; no tag is guessed. Definition remains supported by FDC and Russian MR."
+      ],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "CALCIUM",
+      "canonical_unit": "mg",
+      "category": "mineral",
+      "definition": "Общее содержание кальция, выраженное массой элемента; не масса его соли.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Кальций",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "CA",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-CONVERSIONS",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "CARBOHYDRATE_AVAILABLE",
+      "canonical_unit": "g",
+      "category": "proximate",
+      "definition": "Сумма аналитических масс сахаров, крахмала и гликогена, по массе компонентов; без пищевых волокон и без пересчёта в моносахаридные эквиваленты.",
+      "definition_kind": "DERIVED_COMPONENT",
+      "display_name_ru": "Усвояемые углеводы",
+      "infoods_mapping_status": "METHOD_SPECIFIC",
+      "infoods_tagname": "CHOAVL",
+      "notes": [
+        "CHOAVL is the chosen narrow mass-by-summation concept. CHOAVLDF, CHOAVLM, CHOCDF and CHOCSM are not aliases; no conversion by subtracting legacy fibre is authorized."
+      ],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-MATCHING",
+        "INFOODS-MATCHING",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "CARBOHYDRATE_BY_DIFFERENCE",
+      "canonical_unit": "g",
+      "category": "proximate",
+      "definition": "Остаток от 100 г после вычитания воды, белка, общего жира, золы и алкоголя при наличии; включает пищевые волокна.",
+      "definition_kind": "DERIVED_COMPONENT",
+      "display_name_ru": "Углеводы по разности",
+      "infoods_mapping_status": "METHOD_SPECIFIC",
+      "infoods_tagname": "CHOCDF",
+      "notes": [],
+      "product_tracking_tier": "V1_COMPATIBILITY",
+      "source_evidence_refs": [
+        "INFOODS-MATCHING",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "CHLORIDE",
+      "canonical_unit": "mg",
+      "category": "mineral",
+      "definition": "Содержание хлоридов, выраженное массой хлора в хлоридной форме; не масса хлорида натрия и не произвольное содержание всех соединений хлора.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Хлориды",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "CL",
+      "notes": [
+        "FDC 1088 is named Chlorine, Cl; the selected dictionary alone does not prove chloride-only semantics. Mapping withheld pending component/method evidence."
+      ],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-CONVERSIONS",
+        "INFOODS-CONVERSIONS",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "CHOLESTEROL",
+      "canonical_unit": "mg",
+      "category": "lipid",
+      "definition": "Холестерин как отдельный стерол; не все стеролы и не общий жир.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Холестерин",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "CHOLE",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-OCEANIA",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "CHOLINE_TOTAL",
+      "canonical_unit": "mg",
+      "category": "vitamin",
+      "definition": "Общий холин в конвенции источника: сумма холиновых фракций, выраженных массой холина; не только свободный холин и не масса фосфолипидов.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Холин, всего",
+      "infoods_mapping_status": "NO_ACCEPTABLE_MAPPING",
+      "infoods_tagname": null,
+      "notes": [
+        "Exact INFOODS identifier was not recovered from selected authoritative documents; no tag is guessed. Definition remains supported by FDC and Russian MR."
+      ],
+      "product_tracking_tier": "DETAILED_COMPONENT",
+      "source_evidence_refs": [
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "CHROMIUM",
+      "canonical_unit": "µg",
+      "category": "mineral",
+      "definition": "Содержание хрома, выраженное массой элемента; поле не делает выводов о валентности или биодоступности.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Хром",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "CR",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-CONVERSIONS",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "COPPER",
+      "canonical_unit": "mg",
+      "category": "mineral",
+      "definition": "Общее содержание меди, выраженное массой элемента.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Медь",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "CU",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-CONVERSIONS",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "DHA",
+      "canonical_unit": "g",
+      "category": "lipid",
+      "definition": "Докозагексаеновая кислота 22:6 n-3; отдельный вид, не сумма омега-3 кислот.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Докозагексаеновая кислота",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "F22D6N3",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART2",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "ENERGY_KCAL",
+      "canonical_unit": "kcal",
+      "category": "proximate",
+      "definition": "Физиологически доступная энергия пищи в килокалориях; конкретный метод расчёта остаётся обязательной частью происхождения значения.",
+      "definition_kind": "DERIVED_COMPONENT",
+      "display_name_ru": "Энергетическая ценность",
+      "infoods_mapping_status": "METHOD_SPECIFIC",
+      "infoods_tagname": "ENERC",
+      "notes": [],
+      "product_tracking_tier": "V1_COMPATIBILITY",
+      "source_evidence_refs": [
+        "INFOODS-ENERGY",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "EPA",
+      "canonical_unit": "g",
+      "category": "lipid",
+      "definition": "Эйкозапентаеновая кислота 20:5 n-3; отдельный вид, не сумма омега-3 кислот.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Эйкозапентаеновая кислота",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "F20D5N3",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART2",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "FATTY_ACIDS_MONOUNSATURATED_TOTAL",
+      "canonical_unit": "g",
+      "category": "lipid",
+      "definition": "Суммарная масса жирных кислот с одной двойной связью; набор изомеров и метод источника сохраняются.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Мононенасыщенные жирные кислоты, всего",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "FAMS",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART2",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "FATTY_ACIDS_POLYUNSATURATED_TOTAL",
+      "canonical_unit": "g",
+      "category": "lipid",
+      "definition": "Суммарная масса жирных кислот с несколькими двойными связями; не равна сумме только выбранных омега-3 видов.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Полиненасыщенные жирные кислоты, всего",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "FAPU",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART2",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "FATTY_ACIDS_SATURATED_TOTAL",
+      "canonical_unit": "g",
+      "category": "lipid",
+      "definition": "Суммарная масса насыщенных жирных кислот; не масса общего жира.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Насыщенные жирные кислоты, всего",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "FASAT",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART2",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "FATTY_ACIDS_TRANS_TOTAL",
+      "canonical_unit": "g",
+      "category": "lipid",
+      "definition": "Общая масса транс-изомеров жирных кислот по определению и аналитическому охвату источника.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Трансжирные кислоты, всего",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "FATRN",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART2",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "FAT_TOTAL",
+      "canonical_unit": "g",
+      "category": "proximate",
+      "definition": "Общие липиды пищи; метод выделения сохраняется. Не сумма масс жирных кислот и не триглицеридные эквиваленты NLEA.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Жиры",
+      "infoods_mapping_status": "METHOD_SPECIFIC",
+      "infoods_tagname": "FAT-",
+      "notes": [
+        "FAT- is intentionally the mixed/unknown-method vocabulary identifier; FAT (mixed-solvent extraction) is not asserted for every source row."
+      ],
+      "product_tracking_tier": "V1_COMPATIBILITY",
+      "source_evidence_refs": [
+        "INFOODS-MATCHING",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "FIBER_TOTAL_DIETARY",
+      "canonical_unit": "g",
+      "category": "proximate",
+      "definition": "Общие пищевые волокна как операционно определённая аналитическая группа; точный метод AOAC и включаемые фракции требуют сохранения. Не сырая клетчатка.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Пищевые волокна",
+      "infoods_mapping_status": "METHOD_SPECIFIC",
+      "infoods_tagname": "FIBTG",
+      "notes": [
+        "FIBTG is method-specific, not a default assertion that every FDC 1079 row used a particular AOAC method. Keep source analytical coverage and unknown method explicit."
+      ],
+      "product_tracking_tier": "V1_COMPATIBILITY",
+      "source_evidence_refs": [
+        "INFOODS-MATCHING",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "FLUORIDE",
+      "canonical_unit": "mg",
+      "category": "mineral",
+      "definition": "Фториды, выраженные массой фтора в принятой пищевой аналитической конвенции; не масса фторидной соли.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Фториды",
+      "infoods_mapping_status": "UNIT_CONVERSION_REQUIRED",
+      "infoods_tagname": "FD",
+      "notes": [
+        "Canonical mg chosen once, compatible with Russian display convention; FDC UG and INFOODS mcg require exact division by 1000 in VECTOR-B."
+      ],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-CONVERSIONS",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "FOLATE_DFE",
+      "canonical_unit": "µg",
+      "category": "vitamin",
+      "definition": "Пищевые фолатные эквиваленты DFE: пищевые фолаты + 1,7 × фолиевая кислота в пище; не общая масса фолатов.",
+      "definition_kind": "DERIVED_COMPONENT",
+      "display_name_ru": "Фолаты, пищевые эквиваленты",
+      "infoods_mapping_status": "METHOD_SPECIFIC",
+      "infoods_tagname": "FOLDFE",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART3",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "FOLATE_TOTAL",
+      "canonical_unit": "µg",
+      "category": "vitamin",
+      "definition": "Общая масса пищевых фолатов и фолиевой кислоты, без коэффициентов биодоступности DFE.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Фолаты, всего",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "FOL",
+      "notes": [],
+      "product_tracking_tier": "DETAILED_COMPONENT",
+      "source_evidence_refs": [
+        "INFOODS-PART3",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "FOLIC_ACID",
+      "canonical_unit": "µg",
+      "category": "vitamin",
+      "definition": "Фолиевая кислота как отдельная синтетическая форма; не общие пищевые фолаты и не DFE.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Фолиевая кислота",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "FOLAC",
+      "notes": [],
+      "product_tracking_tier": "DETAILED_COMPONENT",
+      "source_evidence_refs": [
+        "INFOODS-PART3",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "IODINE",
+      "canonical_unit": "µg",
+      "category": "mineral",
+      "definition": "Общее содержание йода, выраженное массой элемента, а не массой йодсодержащей соли.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Йод",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "ID",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-CONVERSIONS",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "IRON",
+      "canonical_unit": "mg",
+      "category": "mineral",
+      "definition": "Общее содержание железа, включая гемовые и негемовые формы, выраженное массой элемента.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Железо",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "FE",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-CONVERSIONS",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "LINOLEIC_ACID",
+      "canonical_unit": "g",
+      "category": "lipid",
+      "definition": "Линолевая кислота 18:2 n-6 cis,cis; не неопределённые 18:2, не конъюгированные и не транс-изомеры.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Линолевая кислота",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "F18D2CN6",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART2",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "MAGNESIUM",
+      "canonical_unit": "mg",
+      "category": "mineral",
+      "definition": "Общее содержание магния, выраженное массой элемента.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Магний",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "MG",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-CONVERSIONS",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "MANGANESE",
+      "canonical_unit": "mg",
+      "category": "mineral",
+      "definition": "Общее содержание марганца, выраженное массой элемента.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Марганец",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "MN",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-CONVERSIONS",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "MOLYBDENUM",
+      "canonical_unit": "µg",
+      "category": "mineral",
+      "definition": "Общее содержание молибдена, выраженное массой элемента.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Молибден",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "MO",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-CONVERSIONS",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "NIACIN",
+      "canonical_unit": "mg",
+      "category": "vitamin",
+      "definition": "Предобразованный ниацин (никотиновая кислота и никотинамид); без эквивалентов, рассчитанных из триптофана.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Ниацин",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "NIA",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART3",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "PANTOTHENIC_ACID",
+      "canonical_unit": "mg",
+      "category": "vitamin",
+      "definition": "Пантотеновая кислота в пищевой аналитической конвенции источника.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Пантотеновая кислота",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "PANTAC",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART3",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "PHOSPHORUS",
+      "canonical_unit": "mg",
+      "category": "mineral",
+      "definition": "Общее содержание фосфора, выраженное массой элемента; не масса фосфатов.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Фосфор",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "P",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-CONVERSIONS",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "POTASSIUM",
+      "canonical_unit": "mg",
+      "category": "mineral",
+      "definition": "Общее содержание калия, выраженное массой элемента.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Калий",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "K",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-CONVERSIONS",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "PROTEIN",
+      "canonical_unit": "g",
+      "category": "proximate",
+      "definition": "Общий белок в принятой конвенции расчёта из общего азота и коэффициента пересчёта; не сумма отдельных аминокислот.",
+      "definition_kind": "DERIVED_COMPONENT",
+      "display_name_ru": "Белки",
+      "infoods_mapping_status": "METHOD_SPECIFIC",
+      "infoods_tagname": "PROTCNT",
+      "notes": [
+        "PROTCNT supersedes older PROCNT spelling in FAO 2012. Nitrogen conversion factor must be recoverable from source evidence; no 6.25 fallback is introduced here."
+      ],
+      "product_tracking_tier": "V1_COMPATIBILITY",
+      "source_evidence_refs": [
+        "INFOODS-MATCHING",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "RETINOL",
+      "canonical_unit": "µg",
+      "category": "vitamin",
+      "definition": "Ретинол в конвенции пищевых таблиц (all-trans); отдельное вещество, не суммарная активность витамина А.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Ретинол",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "RETOL",
+      "notes": [],
+      "product_tracking_tier": "DETAILED_COMPONENT",
+      "source_evidence_refs": [
+        "INFOODS-PART4",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "RIBOFLAVIN",
+      "canonical_unit": "mg",
+      "category": "vitamin",
+      "definition": "Рибофлавин (витамин B2) в пищевой аналитической конвенции источника.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Витамин B2 (рибофлавин)",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "RIBF",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART4",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "SELENIUM",
+      "canonical_unit": "µg",
+      "category": "mineral",
+      "definition": "Общее содержание селена, включая органические и неорганические формы, выраженное массой элемента.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Селен",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "SE",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-CONVERSIONS",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "SODIUM",
+      "canonical_unit": "mg",
+      "category": "mineral",
+      "definition": "Общее содержание натрия, выраженное массой элемента; не масса поваренной соли.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Натрий",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "NA",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-CONVERSIONS",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "STARCH",
+      "canonical_unit": "g",
+      "category": "proximate",
+      "definition": "Масса крахмала как полимера, а не масса глюкозы после гидролиза; фракции и метод анализа сохраняются.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Крахмал",
+      "infoods_mapping_status": "METHOD_SPECIFIC",
+      "infoods_tagname": "STARCH",
+      "notes": [],
+      "product_tracking_tier": "DETAILED_COMPONENT",
+      "source_evidence_refs": [
+        "INFOODS-PART4",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "SUGARS_TOTAL",
+      "canonical_unit": "g",
+      "category": "proximate",
+      "definition": "Свободные моно- и дисахариды в общей массе сахаров; исключает крахмал, пищевые волокна и сахарные спирты. Метод определения сохраняется.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Сахара, всего",
+      "infoods_mapping_status": "METHOD_SPECIFIC",
+      "infoods_tagname": "SUGAR",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART4",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "THIAMIN",
+      "canonical_unit": "mg",
+      "category": "vitamin",
+      "definition": "Тиамин (витамин B1) в пищевой аналитической конвенции источника.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Витамин B1 (тиамин)",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "THIA",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART4",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "VITAMIN_A_RAE",
+      "canonical_unit": "µg",
+      "category": "vitamin",
+      "definition": "Активность витамина А в микрограммах RAE: ретинол + бета-каротин/12 + другие провитаминные каротиноиды/24 для пищевой матрицы; не масса ретинола и не RE.",
+      "definition_kind": "DERIVED_COMPONENT",
+      "display_name_ru": "Витамин А, эквивалент активности ретинола",
+      "infoods_mapping_status": "METHOD_SPECIFIC",
+      "infoods_tagname": "VITA_RAE",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-MATCHING",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "VITAMIN_B12",
+      "canonical_unit": "µg",
+      "category": "vitamin",
+      "definition": "Витамин B12, активные кобаламиновые формы пищи в конвенции источника.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Витамин B12",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "VITB12",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART4",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "VITAMIN_B6",
+      "canonical_unit": "mg",
+      "category": "vitamin",
+      "definition": "Общий витамин B6 в конвенции источника; не одна выбранная форма пиридоксина. Аналитический или расчётный метод сохраняется.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Витамин B6",
+      "infoods_mapping_status": "METHOD_SPECIFIC",
+      "infoods_tagname": "VITB6-",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART4",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "VITAMIN_C",
+      "canonical_unit": "mg",
+      "category": "vitamin",
+      "definition": "Общее содержание витамина С: L-аскорбиновая и L-дегидроаскорбиновая кислоты; не только восстановленная форма.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Витамин С",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "VITC",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART4",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "VITAMIN_D_D2_D3",
+      "canonical_unit": "µg",
+      "category": "vitamin",
+      "definition": "Сумма масс эргокальциферола D2 и холекальциферола D3; не отдельная форма и не сумма с 25-гидроксиметаболитами.",
+      "definition_kind": "DERIVED_COMPONENT",
+      "display_name_ru": "Витамин D, сумма D2 и D3",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "VITD",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART4",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "VITAMIN_E_ALPHA_TOCOPHEROL",
+      "canonical_unit": "mg",
+      "category": "vitamin",
+      "definition": "Альфа-токоферол как компонент; не сумма токоферолов и не альфа-токофероловые эквиваленты активности.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Витамин Е, альфа-токоферол",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "TOCPHA",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART4",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "VITAMIN_K_PHYLLOQUINONE",
+      "canonical_unit": "µg",
+      "category": "vitamin",
+      "definition": "Филлохинон (витамин К1); не менахиноны К2 и не сумма всех форм витамина К.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Витамин К1, филлохинон",
+      "infoods_mapping_status": "NO_ACCEPTABLE_MAPPING",
+      "infoods_tagname": null,
+      "notes": [
+        "Exact INFOODS identifier for this narrow component was not established in the selected authoritative documents; no tag is guessed. VITK denotes K1 + K2 and is rejected for phylloquinone."
+      ],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "WATER",
+      "canonical_unit": "g",
+      "category": "proximate",
+      "definition": "Вода (влага) в пищевом продукте на базисе профиля.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Вода",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "WATER",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-PART4",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    },
+    {
+      "canonical_code": "ZINC",
+      "canonical_unit": "mg",
+      "category": "mineral",
+      "definition": "Общее содержание цинка, выраженное массой элемента.",
+      "definition_kind": "DIRECT_COMPONENT",
+      "display_name_ru": "Цинк",
+      "infoods_mapping_status": "EXACT",
+      "infoods_tagname": "ZN",
+      "notes": [],
+      "product_tracking_tier": "INITIAL_FOOD_TRACKING",
+      "source_evidence_refs": [
+        "INFOODS-CONVERSIONS",
+        "FDC-FOUNDATION",
+        "FDC-DICTIONARY",
+        "RU-MR"
+      ],
+      "status": "APPROVED_FOR_VECTOR_B"
+    }
+  ],
+  "operation": "PR6-NUTRIENT-VECTOR-A",
+  "schema_version": 1,
+  "starting_main": "307ba3475581087b079ebcf2fa643e19a00bf06d",
+  "unit_display_ru": {
+    "g": "г",
+    "kcal": "ккал",
+    "mg": "мг",
+    "µg": "мкг"
+  }
+}

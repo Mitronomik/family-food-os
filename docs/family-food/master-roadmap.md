@@ -96,7 +96,7 @@ PR6-ARCH-COMPOSITION docs-only changeset. Its semantic/profile research covers
 remain evidence, not production authority. The research history is preserved.
 
 **DECISION — 2026-09-10:** PR6-ARCH-COMPOSITION architecture contract established
-by this changeset. Option A is approved and extended by the
+in merged PR #24. Option A is approved and extended by the
 [composition/mass/nutrient/assembly contract](food-composition-and-assembly.md)
 and [Russian-language invariant](russian-language-contract.md).
 **Old PR6-DATA-B2-B2: SUPERSEDED / PENDING REDESIGN.** Its former
@@ -105,8 +105,9 @@ form/profile corrections + explicit estimate policy plan cannot execute directly
 Production remains 30 current RecipeVersions / 189 rows, all 30 INCOMPLETE;
 Nutrition v1 remains the current implementation. Runtime/schema/data are unchanged,
 migration head remains 0027 and all 43 estimates remain non-executable.
-**PR6 — NOT COMPLETE. PR6-NUTRIENT-VECTOR — NOT STARTED / requires separate
-authorization after merge. PR7+ — UNAUTHORIZED.** No automatic next operation.
+**PR6 — NOT COMPLETE. PR6-NUTRIENT-VECTOR — NOT COMPLETE.** Bounded VECTOR-A
+registry/provenance research is established by this changeset; VECTOR-B is NOT
+AUTHORIZED. COMPOSITION-CORE and PR7+ are UNAUTHORIZED. No automatic next operation.
 The approved sequence changes are specified in §6.5; quantitative gates are retained.
 
 ## 3. North Star and core-loop contract
@@ -610,7 +611,11 @@ foundation are deterministic, versioned, provenance-aware and usable by PR7.
 #### PR6 supporting operations — later approved target
 
 These operations extend the target, preserving accepted Nutrition v1 history.
-All after this docs changeset are NOT STARTED and require separate authorization.
+PR6-ARCH-COMPOSITION is merged (#24). PR6-NUTRIENT-VECTOR is delivered as bounded
+slices A/B: A establishes [registry/provenance research](../../data/curation/pr6-nutrient-vector-a/README.md)
+without runtime/schema; B requires separate authorization after A review and merge.
+This split creates no milestone and changes no operation order. Later operations
+remain NOT STARTED and require separate authorization.
 
 | Operation | Bounded outcome and dependency |
 | --- | --- |
