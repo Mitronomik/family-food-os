@@ -1,6 +1,6 @@
 # Progress
 
-Updated: `2026-09-08`
+Updated: `2026-09-10`
 
 ## FamilyFoodOS milestone status
 
@@ -20,6 +20,87 @@ PR6   Nutrition Core                       NOT COMPLETE (engine ACCEPTED / MERGE
 ```
 
 Canonical implementation order remains `docs/family-food/master-roadmap.md`.
+
+## PR6-ARCH-COMPOSITION verification
+
+Exact starting main: `47299ceb2c740f40f69f3b02359ce71c8be6b1c1` (PR #23 merged).
+Branch: `docs/pr6-arch-composition`. This changeset establishes only the approved
+docs / architecture / roadmap / governance / state contract. PR6 remains NOT COMPLETE.
+The existing user checkout and its unrelated `.DS_Store` change are preserved;
+work is isolated in a separate worktree from the exact base.
+
+Approved user decisions and consequences: Option A is DECISION / APPROVED;
+FoodIngredient is sole identity; atomic/composite, exact/declared-only composition,
+recursive versioned DAG, distinct mass states, evidence-backed yield/retention,
+extensible NutrientVector with nutrient-level provenance/unknown != zero, RU
+availability/familiarity, full Russian consumer/admin display without English
+fallback, and deterministic RecipeTemplate/Assembly precede MealPlan/Serving.
+[Composition](../docs/family-food/food-composition-and-assembly.md) and
+[language](../docs/family-food/russian-language-contract.md) own the contracts;
+[roadmap §6.5](../docs/family-food/master-roadmap.md#65-pr6-arch-composition--approved-roadmap-differences)
+records the exact approved reorder and unchanged downstream gates.
+
+Exact changed-file scope (13 documentation/governance/state files):
+
+- `AGENTS.md`;
+- `docs/family-food/architecture.md`;
+- `docs/family-food/master-roadmap.md`;
+- `docs/family-food/nutrition-core.md`;
+- `docs/family-food/nutrition-data-readiness.md`;
+- `docs/family-food/recipe-localization-and-substitution.md`;
+- `docs/family-food/technical-spec.md`;
+- `docs/family-food/data-ingestion.md`;
+- `docs/family-food/food-composition-and-assembly.md` (new canonical owner);
+- `docs/family-food/russian-language-contract.md` (new canonical owner);
+- `state/current-focus.md`;
+- `state/progress.md`;
+- `state/handoff.md`.
+
+Production/runtime/schema/data impact: none. Nutrition v1 remains the current
+implementation; 30 current FNS recipes / 189 rows / 30 INCOMPLETE remain technical
+production baseline. All 43 estimates remain non-executable. Migration head:
+`0027_recipe_same_source_revisions`. Old PR6-DATA-B2-B2: **SUPERSEDED / PENDING
+REDESIGN**. Next logical operation: PR6-NUTRIENT-VECTOR — NOT STARTED / requires
+separate authorization after merge; PR7+ — UNAUTHORIZED.
+
+Verification executed on 2026-09-10, docs-only tier:
+
+- `git diff --check`: PASS after fixing newly added Markdown hard-break trailing
+  spaces. No whitespace defect remains.
+- `git diff --cached --check`: PASS; staged scope is exactly the 13 authorized
+  files. Runtime/data/schema/CI/dependency paths are absent from the staged diff.
+- Read-only Git-blob audit against exact base: all **957** baseline tracked files
+  outside the allowed documents are byte-identical. The audit uses `git ls-tree -r`
+  and hashes each worktree file as a Git blob; it covers runtime, schema,
+  migrations, seeds, all curation (including B2-B1), scripts, dependencies and CI.
+  Exact changed-file allowlist is the 13 files above, including the two additions.
+- Migration inventory: latest module is `0027_recipe_same_source_revisions`;
+  no 0028 exists. No production database is opened or modified.
+- Nutrition Core's entire prior document is preserved as an exact prefix before
+  the later target section; current config IDs and PR #18 history are unchanged.
+- Retained audit v3 SHA-256:
+  `baac9e19b0b6cd3f6990a059a098ab5d69162b9c5459db0e61d9e59e4b547100`.
+  Read-only JSON assertions confirm 30 records / 189 rows / 30 INCOMPLETE and
+  exactly 43 CONVERSION_ESTIMATE_NOT_ACCEPTED rows, each with mass_g=null.
+  These are checks of accepted evidence, not a fresh runtime audit execution.
+- Relative Markdown link and GitHub-style heading/explicit-anchor validation:
+  **109 links / 42 fragments PASS** across the exact changed-file scope.
+  Repository search found no inbound links using the renamed historical headings.
+- Static conflict audit with `rg` over root AGENTS, active `docs/family-food/*.md`
+  and state: no active unapproved Option A, old B2-B2-next instruction, mandatory
+  FoodProductType Nutrition layer, fixed-five-field final target or permitted
+  English fallback remains. Hits were inspected in context: historical B2-B1
+  recommendations are labelled and superseded; persistence Option A is unrelated;
+  migration-plan allows only later classification metadata; source TЗ diagrams
+  have explicit supersession notes. Unchanged curation report remains historical
+  research evidence, not an active implementation/architecture authority.
+- Roadmap regression audit: sequence from Gate 1 onward, PR9–PR15/Gates 2–3,
+  shared-deployment/PostgreSQL/Auth/Retail/AI/Billing sections and the acceptance
+  fixture section are byte-identical to base. Added qualitative gates and
+  pre-PR7 supporting operations are the explicit approved differences in §6.5.
+- No backend/frontend/launcher tests, builds, nutrition replay, dataset re-research
+  or localization runtime tests were run: no such behavior changed. This follows
+  the docs-only verification tier; later implementation must add its own gates.
 
 ## PR6-INFRA verification
 
@@ -531,6 +612,10 @@ files. Only migration 0027 is added; protected source/seed files, local database
 credentials and unrelated `.DS_Store` are absent from the changeset.
 
 ## PR6-DATA-B2-B1 verification
+
+Historical PR #23 evidence below is preserved. Option A was then a recommendation;
+[PR6-ARCH-COMPOSITION](#pr6-arch-composition-verification) now approves it and marks
+the old B2-B2 plan SUPERSEDED / PENDING REDESIGN.
 
 Updated: `2026-09-08`. Exact starting main:
 `7f17b1372bbd2e9f97fc025ac26b3f04a15cf837`. Branch:

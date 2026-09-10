@@ -3,7 +3,10 @@
 **Status:** canonical product/data policy  
 **Approved:** 2026-09-05  
 **Initial market:** Russia, Saint Petersburg  
-**Sequence impact:** none; `docs/family-food/master-roadmap.md` continues to control milestone order.
+**Later amendment:** PR6-ARCH-COMPOSITION, 2026-09-10.
+**Sequence:** the original 2026-09-05 policy did not reorder milestones; the later
+approved [Master Roadmap](master-roadmap.md#5-canonical-master-sequence) now places
+Recipe Assembly A/B before PR7. No implementation is authorized here.
 
 ## 1. Purpose
 
@@ -342,9 +345,10 @@ All accepted adaptations must pass deterministic validation against current auth
 
 ### Planner
 
-Before a substitution engine exists, Planner may satisfy preferences/exclusions by selecting a different verified RecipeVersion from the catalogue.
-
-Later, validated recipe adaptations can enlarge the candidate space without turning Planner into a recipe generator.
+Under PR6-ARCH-COMPOSITION, Recipe Assembly A/B precede PR7 and PR8. Planner
+consumes an already valid Russian consumer pool of verified RecipeVersions and
+validated RecipeAssemblies. It may satisfy preferences/exclusions by selecting
+a different verified recipe or allowed assembly, and never generates culinary truth.
 
 ### Shopping
 
@@ -455,3 +459,39 @@ gate is satisfied. PR5 Pantry is COMPLETE. PR6 engine implementation is ACCEPTED
 PR6 milestone remains NOT COMPLETE pending data readiness / closure.
 Current evidence and next review: [nutrition data readiness](nutrition-data-readiness.md).
 DATA-B requires explicit authorization; PR7+ remain unauthorized.
+
+## 18. PR6-ARCH-COMPOSITION — hard consumer gates
+
+**DECISION — 2026-09-10.** Availability is a hard consumer gate; RU familiarity
+is a hard default-recipe gate; Russian display is a hard publication gate for
+both consumer and administrator surfaces. The
+[composition contract](food-composition-and-assembly.md#ru-availability-и-familiarity-gates)
+owns RU food eligibility/familiarity and the
+[language contract](russian-language-contract.md) owns display text and no-English-fallback.
+
+Every default automatic recipe uses foods with current ordinary Russian retail
+evidence. RU_MASS_MARKET is preferred; RU_AVAILABLE must not make a standard week
+depend on a rare food without a verified ordinary substitution path.
+SPECIALTY_OR_UNCLEAR is not allowed as a required default automatic component.
+The existing 3-of-5 threshold, SPB panel, secondary ВкусВилл, water/category-evidence
+exceptions and dated-evidence discipline remain unchanged. This is curation,
+not live Retail runtime; assortment must be rechecked as it changes.
+
+RU_RECIPE_FAMILIAR review covers ordinary products, household equipment,
+understandable preparation and dish format, reasonable actions, no required
+specialty equipment/exotic dependency, family presentation and practical family
+cooking. There is no new arbitrary numeric time/ingredient threshold.
+International dishes remain eligible after curated familiarity/kitchen review.
+
+The current 30 FNS RecipeVersions remain a technical regression/architecture
+corpus for provenance, Nutrition tests and migration/history; they are not
+implicitly the final Russian consumer catalogue. PR4-DATA2 evidence is retained,
+but does not automatically satisfy the expanded consumer gates. No seed text or
+existing recipe is translated, republished or recategorized in production here.
+
+Future RecipeTemplate and Assembly rules must preserve food-form/composition
+truth, exact grams, yield/retention uncertainty, RU availability/familiarity and
+Russian display. Deterministic ASSEMBLY_VALIDATED is distinct from KITCHEN_VERIFIED;
+default output uses kitchen-verified templates/rules/variants and curated
+substitutions. Shopping still aggregates the validated final food set, and Pantry
+never equates fruit/juice or raw/cooked stock through a mere related_to link.

@@ -323,3 +323,48 @@ profile value/estimated-flag change or fiber fill is introduced. Detailed six-ro
 source review, warning/issue counts and replay commands are canonical in the
 [B2-A decision](nutrition-data-readiness.md#decision--pr6-data-b2-a-same-source-quantity-corrections).
 PR6 remains NOT COMPLETE; B2-B remains NOT AUTHORIZED; PR7+ remain UNAUTHORIZED.
+
+## Later approved target architecture — superseding implementation direction
+
+**DECISION — 2026-09-10, PR6-ARCH-COMPOSITION.** Nutrition v1 was a correct bounded
+engine for its accepted data contract. PR #18, the five-field `NutritionValues`,
+`FAMILY_FOOD_NUTRITION_V1`, B1 exact bindings, tests and historical results retain
+their meaning. Everything above describes the current implementation or labelled
+historical evidence, not the final nutrient target. No config ID is renamed here.
+
+The next versioned target is `NutrientDefinition → FoodNutritionProfileVersion →
+NutrientValue[]` / NutrientVector: extensible energy, macros, fiber, minerals,
+vitamins and other required micronutrients without a new SQL column per nutrient.
+Each value retains stable code, Russian display name, canonical unit, source
+nutrient identifier, Decimal value or unknown, provenance, release/version and
+estimation/uncertainty. `PR6-NUTRIENT-VECTOR` must define the initial registry from
+authoritative datasets and product requirements, with explicit v1 compatibility;
+this docs PR does not choose the exhaustive registry or persisted schema.
+
+Unknown != zero at nutrient level. Cross-source values cannot silently become
+one measured profile; a separately approved versioned policy is required.
+Calculation has one authority path per food version: direct profile or exact
+composition. Declared-only lists never supply inferred quantitative components.
+Exact recursive calculation is Decimal-only on a versioned DAG; cycles fail closed.
+Canonical input is the form-specific `recipe_input_mass_g`, with B1-compatible
+reviewed evidence for pcs/ml. Gross/raw/input/cooked mass are not interchangeable.
+
+Yield measures mass change; retention measures each nutrient's conservation or
+loss through a versioned transformation. `NutrientRetentionEvidence` is distinct
+from yield. Unknown retention preserves known input totals but does not permit
+exact cooked totals or hidden 100% retention; no universal cooking-loss percentage.
+The [composition contract](food-composition-and-assembly.md#nutrientvector-и-retention)
+owns the full mass/transformation/vector pipeline and uncertainty propagation.
+
+Nutrition consumes catalogue identity/composition and supplies calculations to
+Recipe Assembly and later PR7. PR7 supports selected immutable RecipeVersion or
+validated RecipeAssembly and consumes Nutrition without duplicating its logic.
+The [Russian-language contract](russian-language-contract.md) gates human-facing
+nutrient/status/error display, including admin, API messages and PDF.
+
+Old PR6-DATA-B2-B2: **SUPERSEDED / PENDING REDESIGN**. All 43 estimates remain
+non-executable; production audit v3 still has 30 current recipes / 189 rows, all
+30 INCOMPLETE. Migration head remains `0027_recipe_same_source_revisions`.
+PR6 — NOT COMPLETE; PR6-NUTRIENT-VECTOR — NOT STARTED / requires separate
+authorization after merge; PR7+ — UNAUTHORIZED. The
+[roadmap](master-roadmap.md#5-canonical-master-sequence) owns the new sequence.

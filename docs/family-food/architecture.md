@@ -2,9 +2,9 @@
 
 **Status:** canonical architecture contract for PR2 and subsequent FamilyFoodOS work
 
-**Version:** 1.1
+**Version:** 1.2
 
-**Decision date:** 2026-09-01
+**Decision dates:** 2026-09-01 (persistence); 2026-09-10 (PR6-ARCH-COMPOSITION)
 
 **Related decision:** ADR 0032, `FamilyFoodOS persistence portability and shared-deployment tenancy gate`
 
@@ -220,8 +220,9 @@ It must be implemented as a new food context and must not reuse or rename
 
 ### 6.2 Canonical Food Catalogue
 
-Owns the platform `FoodIngredient` catalogue, nutrition-profile references,
-aliases, accepted units, density, edible fraction, allergens, storage metadata
+Owns the platform `FoodIngredient` identity, food forms, composition relations,
+nutrition-profile references, aliases, accepted units, density, edible fraction,
+allergens, storage metadata
 and provenance.
 
 `CanonicalIngredient` is terminology used in earlier FamilyFoodOS Project
@@ -251,18 +252,29 @@ RetailSKU candidates
 PriceSnapshot
 ```
 
-#### PROPOSED CHANGE — NOT YET APPROVED
+#### DECISION — Option A approved, 2026-09-10
 
-PR6-DATA-B2-B1 recommends using existing FoodIngredient identity for materially
-distinct nutrition forms (for example, fruit versus juice or dry versus cooked
-pasta), preserving one current profile per FoodIngredient. This is a proposed
-catalogue-granularity clarification, **not** an approved architecture change or
-an implementation authorization. It does not add FoodProductType, profile
-variants or independent row nutrition references. All-use compatibility, exact
-source provenance and separate edible-yield handling remain required. Shopping
-and Pantry must not infer fungibility or conversion from a conceptual relation.
-See the [research recommendation and A/B/C comparison](../../data/curation/pr6-data-b2b1/README.md#architecture-analysis)
-and [data-readiness audit](nutrition-data-readiness.md#pr6-data-b2-b1-semanticprofile-resolution-audit).
+PR6-ARCH-COMPOSITION explicitly approves nutrition-relevant FoodIngredient splits:
+forms that cannot truthfully share a nutrition/composition contract are separate
+FoodIngredient identities. Fruit/juice, dry/cooked pasta and whole/peeled edible
+forms are not interchangeable. FoodIngredient remains the only canonical food
+identity; no mandatory FoodProductType Nutrition layer, independent row nutrition
+identity or silent profile-selector authority is introduced.
+
+The decision extends the B2-B1 Option A recommendation with atomic/composite,
+exact/declared-only composition, recursive versioned DAG, separate mass states,
+transformation/yield and retention evidence. Their canonical owner is
+[food composition and assembly](food-composition-and-assembly.md).
+Nutrition owns the extensible nutrient registry/vector and deterministic
+calculations; catalogue composition selects one authority path per version.
+Related foods do not imply Nutrition/Shopping/Pantry equivalence or substitution.
+
+Current one-current-profile v1 runtime and B1 bindings remain unchanged. The
+[B2-B1 A/B/C analysis](../../data/curation/pr6-data-b2b1/README.md#architecture-analysis)
+is preserved historical research; its old production promotion plan is
+**SUPERSEDED / PENDING REDESIGN**. Approval of the architecture does not approve
+individual source/profile candidates or authorize implementation. See the
+[later data-readiness decision](nutrition-data-readiness.md#pr6-arch-composition-later-approved-decisions).
 
 ### 6.3 Recipe Catalogue
 
@@ -286,16 +298,19 @@ FoodIngredient nutrition
 → Member/day/week aggregates
 ```
 
-It owns formulas, normalization/rounding policy, configuration version and
-calculation warnings. An LLM is never the source of truth for kcal, nutrients,
-serving mass or allergens. Uncertainty is represented explicitly rather than
+It owns nutrient definitions/vector, nutrient-level provenance, formulas,
+normalization/rounding policy, configuration version, retention uncertainty and
+calculation warnings. Current Nutrition v1 remains the bounded five-field
+implementation; [the later target](nutrition-core.md#later-approved-target-architecture--superseding-implementation-direction)
+extends it through a new versioned model. An LLM is never the source of truth for
+kcal, nutrients, serving mass or allergens. Uncertainty is represented explicitly rather than
 invented as precision.
 
 ### 6.5 MealPlan / Serving
 
 Owns `MealPlan`, day and meal-slot structure, references to selected immutable
-recipe versions, individualized `Serving` values, planner/configuration version
-references and generation-trace references.
+RecipeVersions or validated reproducible RecipeAssemblies, individualized `Serving`
+values, planner/configuration version references and generation-trace references.
 
 A recipe describes how food is made. A serving describes how much of a selected
 recipe is allocated to one household member for one meal. They are distinct
@@ -305,13 +320,15 @@ concepts and may evolve independently.
 
 The Planner is a deterministic application/domain engine.
 
-Inputs include household members, constraints and preferences, candidate recipe
-versions, nutrition, budget, cooking constraints, recent history, Pantry and a
-planning mode. Outputs include a complete seven-day MealPlan, individualized
+Inputs include household members, constraints and preferences, an already valid
+Russian consumer candidate pool from verified RecipeVersions / validated
+RecipeAssemblies, nutrition, budget, cooking constraints, recent history, Pantry
+and a planning mode. Outputs include a complete seven-day MealPlan, individualized
 Servings and trace/explanation metadata.
 
-Planner v0 uses deterministic filtering plus scoring/heuristics. OR-Tools or
-another solver is optional later and must demonstrate measurable improvement
+Planner selects candidates; it does not generate culinary truth or own Recipe
+Assembly rules. Planner v0 uses deterministic filtering plus scoring/heuristics.
+OR-Tools or another solver is optional later and must demonstrate measurable improvement
 over the baseline.
 
 Each generation records or durably references enough trace information to
@@ -444,6 +461,21 @@ instructions and relevant Pantry state. Confirmed mutations, such as skipping a
 meal or consuming Pantry, are delegated to the context that owns that state and
 use its transaction rules. The Today UI does not create a second copy of plan,
 prep or pantry truth.
+
+### 6.16 Recipe Assembly
+
+Owns derived deterministic construction from verified versioned templates/rules,
+allowed atomic/composite components and exact input grams. Nutrition remains in
+Nutrition; composition/form truth remains in Food Catalogue; source-backed
+immutable RecipeVersion remains in Recipe Catalogue. Assembly records reproducible
+trace and validation, including RU market/familiarity and Russian display gates.
+Kitchen verification is separate from deterministic validation. Publication as a
+canonical recipe is a separate trusted operation, never a silent RecipeVersion edit.
+
+The [composition contract](food-composition-and-assembly.md#recipetemplate-и-deterministic-assembly)
+owns details. This is an ownership boundary in the modular monolith, not a new
+deployed service. RECIPE-ASSEMBLY-A/B precede PR7 under the
+[roadmap](master-roadmap.md#5-canonical-master-sequence); none is implemented here.
 
 ## 7. Domain identifiers, timestamps and API identity
 
@@ -923,7 +955,7 @@ validation. Paid beta cannot bypass the shared-deployment gate.
 
 ```text
 Household + members + constraints/preferences
-+ Recipe Catalogue
++ verified Recipe Catalogue / validated Recipe Assembly candidate pool
 + Nutrition
 + Pantry
 + history
@@ -942,7 +974,7 @@ aggregate atomically after revalidating required versions.
 ```text
 MealPlan
 ↓
-RecipeVersion ingredients
+approved ingredient set from selected RecipeVersion / validated RecipeAssembly
 ↓
 scale by Servings
 ↓
@@ -1103,12 +1135,24 @@ Pantry movements / prepared inventory changes
     are persisted in UTC.
 26. `CanonicalIngredient` and `FoodIngredient` name one canonical platform food
     concept and must not be implemented as separate entities.
+27. One version chooses DIRECT_PROFILE or DERIVED_EXACT_COMPOSITION; composition
+    is a versioned DAG and declared ingredient order never proves quantities.
+28. Raw/input/cooked mass, yield and nutrient retention are distinct evidence;
+    unknown never silently becomes zero or 100% retention.
+29. All consumer/admin text is Russian, including food/recipe/nutrient names,
+    errors and PDF; English fallback is forbidden under the
+    [language contract](russian-language-contract.md).
+30. Default automatic recipes pass RU availability and familiarity gates and
+    use kitchen-verified templates/rules; validation is not kitchen proof.
 
 ## 18. Material facts, assumptions, decisions and open questions
 
-### FACT
+### FACT — historical PR2-A baseline
 
-- The current runtime is FastAPI plus direct SQLite persistence and a custom
+The facts below describe the PR2-A baseline. Later food Core adapters and
+migration head 0027 are documented above; PR6-ARCH-COMPOSITION changes no runtime.
+
+- The then-current runtime is FastAPI plus direct SQLite persistence and a custom
   sequential migration registry ending at `0021_family_food_identity`.
 - Current transaction helpers can share one SQLite connection and roll back
   multi-write workflows.

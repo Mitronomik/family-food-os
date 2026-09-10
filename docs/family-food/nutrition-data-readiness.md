@@ -6,8 +6,10 @@ PR6-DATA-A is ACCEPTED / MERGED in PR #19 at
 their historical meaning. **B1** establishes the exact evidence/binding
 foundation; **B2-A** establishes the bounded same-source quantity corrections
 and audit v3 described below. **B2-B1** establishes the semantic/profile research
-audit at the end of this document. B2-B2 production corrections and estimate-policy
-implementation are NOT AUTHORIZED; PR7+ remain UNAUTHORIZED.
+audit retained below. **PR6-ARCH-COMPOSITION** establishes the later approved target
+architecture: Option A is now approved; old B2-B2 is **SUPERSEDED / PENDING REDESIGN**.
+The [later decisions](#pr6-arch-composition-later-approved-decisions) control current
+direction. Estimate-policy implementation and PR7+ remain UNAUTHORIZED.
 
 ## FACT
 
@@ -738,7 +740,11 @@ available-carbohydrate definition and rounded UI values were not silently
 substituted for USDA carbohydrate-by-difference. NO_ACCEPTABLE_PROFILE_SOURCE
 means no match established in that documented search, not worldwide absence.
 
-### RECOMMENDATION — representation for a separately authorized B2-B2
+### Historical B2-B1 recommendation — old B2-B2 SUPERSEDED / PENDING REDESIGN
+
+The following is preserved as PR #23 research history. Option A approval and the
+replacement sequence are recorded in the [later decision](#pr6-arch-composition-later-approved-decisions);
+the old implementation plan below is not current direction or authorization.
 
 **RECOMMENDED OPTION: A — nutrition-relevant FoodIngredient split.** Preserve one
 current profile and existing exact assessment binding. Add only distinct edible
@@ -763,9 +769,10 @@ recipes would require later v3 where remapped; none is created here. Related
 Shopping/Pantry forms need future explicit mapping/yield work, not automatic
 aggregation, stock substitution or new inferred density/edible fractions.
 
-### OPEN QUESTION — approval and evidence still required
+### Historical B2-B1 open questions
 
-Project review must approve or reject Option A and the exact named source
+At the B2-B1 research point, project review needed to approve or reject Option A
+and the exact named source
 candidates, particularly FNDDS generic peach/lemon/orange defaults. It must bind
 ambiguous source choices before implementation and approve the APPLE repair
 order. Four profile-source gaps and three yield cases require further evidence.
@@ -802,5 +809,61 @@ AI_ENABLED=false python3 scripts/audit_pr6_data_b2a.py
 B2-B1 research is established by this changeset. **PR6 remains NOT COMPLETE;
 B2-B2 production semantic/profile corrections and estimate-policy implementation
 remain NOT AUTHORIZED; PR7+ remain UNAUTHORIZED.** No separate B2-B1-CLOSE
-operation is required. This recommendation does not amend the canonical
-architecture or grant production authority.
+operation is required. That research recommendation did not amend architecture
+or grant production authority. The later user decision below now amends the target,
+without changing research evidence or granting production implementation authority.
+
+## PR6-ARCH-COMPOSITION later approved decisions
+
+**Approval date: 2026-09-10.** Exact starting main:
+`47299ceb2c740f40f69f3b02359ce71c8be6b1c1`, merged PR #23.
+
+- **FACT — B2-B1 research:** 37 target rows / 23 recipes / 19 foods, with 46
+  current usages. The report, matrices, source extracts and A/B/C analysis stay
+  unchanged research evidence. Candidate profile values are not production truth.
+- **DECISION — Option A approved:** nutrition-relevant forms use separate
+  FoodIngredient when one truthful nutrition/composition contract is impossible.
+  FoodIngredient is the sole food identity; FoodProductType is not Nutrition truth.
+  [Architecture §6.2](architecture.md#decision--option-a-approved-2026-09-10)
+  records the approval, extending the original recommendation.
+- **DECISION — expanded composition/mass/nutrient architecture:** atomic/composite,
+  exact/declared-only, versioned recursive DAG, input grams, distinct gross/prepared/
+  cooked/serving masses, evidenced yield and nutrient-specific retention, and
+  extensible NutrientVector are canonical in the
+  [composition contract](food-composition-and-assembly.md). Unknown != zero;
+  declared order does not prove quantities; missing retention is not 100%.
+- **DECISION — old PR6-DATA-B2-B2: SUPERSEDED / PENDING REDESIGN.** The old
+  form/profile corrections + explicit estimate policy operation cannot run next.
+  NutrientVector, composition/mass/transformation/yield and the Russian catalogue/
+  display requirements precede re-curation. Retained candidates such as
+  LEMON_JUICE, APPLE_PEELED, SPINACH_BABY and CAULIFLOWER_FROZEN must be reclassified
+  against the new model before separately approved promotion; the old plan is
+  not directly executable.
+- **OPEN — estimate policy:** all 43 estimates remain non-executable. This
+  architecture decision accepts none and changes no assessment/evidence.
+- **OPEN — exact later source/profile promotion:** named FNDDS defaults, APPLE
+  repair/optional peel choice, source ambiguities, four profile-source gaps and
+  three yield cases remain review/evidence obligations under the redesigned model.
+  Approving Option A does not approve those individual source decisions.
+
+Consumer-ready data now requires Russian display readiness for every exposed
+entity; current RU availability evidence; food-form correctness; composition
+calculation authority; deterministic input grams; required nutrient-vector support;
+transformation/yield/retention readiness where needed; RU recipe familiarity;
+valid recipe/nutrition provenance; no critical cycle, hidden declared-only quantity
+inference or unresolved critical composition/yield issue. Default assemblies also
+require kitchen-verified templates/rules and curated substitutions.
+[Russian language](russian-language-contract.md) is a hard consumer/admin publication
+gate with no English fallback; [localization policy](recipe-localization-and-substitution.md)
+retains the existing market thresholds and adds familiarity.
+
+The 30 current FNS recipes remain the technical regression/architecture baseline,
+not automatically final Russian consumer truth. Audit v3 still records 189 rows
+and 30 INCOMPLETE recipes. No runtime/schema/seed/profile/RecipeVersion changes:
+migration head 0027, Nutrition v1 and B1/B2-A historical truth remain intact.
+
+[Canonical merge order](master-roadmap.md#5-canonical-master-sequence) now passes
+through NutrientVector, Composition Core, RU Food Data, redesigned B2-B2 and
+PR6-CLOSE, then Recipe Assembly A/B before PR7 and PR8. PR6 remains NOT COMPLETE;
+PR6-NUTRIENT-VECTOR is NOT STARTED and requires separate authorization after merge;
+PR7+ remain UNAUTHORIZED. Verified docs-only evidence: [progress](../../state/progress.md#pr6-arch-composition-verification).

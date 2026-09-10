@@ -1,7 +1,7 @@
 # FamilyFoodOS — Master Roadmap
 
 **Status:** canonical repository sequencing and delivery-gate contract  
-**Updated:** `2026-09-06`
+**Updated:** `2026-09-10`
 
 ## 1. Authority
 
@@ -82,31 +82,47 @@ the exact evidence/row-binding foundation described in the
 milestone. B1 is established by PR #20, merged at
 `2ce9917f51ac3161d4cb2839f6003e7a24bc96bd`. PR6-INFRA is established by
 PR #21 at `74bc80eb3ef0e34e17751856638ac58bbccb840e`, providing the explicit
-SQLite table-rebuild runner capability. B2-A starts from that exact accepted main.
-This changeset establishes migration `0027_recipe_same_source_revisions`,
-same-source immutable revision semantics, all six reviewed quantity corrections
-across five v2 recipes, explicit new-row assessments, and production audit v3.
-External source provenance is distinct from internal RecipeVersion revision identity.
-See the [B2-A decision](nutrition-data-readiness.md#decision--pr6-data-b2-a-same-source-quantity-corrections)
-and [architecture §13.2](architecture.md#132-same-source-recipeversion-revisions-pr6-data-b2-a).
-The original PR4/B1 payloads and historical v1 truth are preserved. No estimated
-conversion is accepted and no form/profile correction is started. PR6 remains
-NOT COMPLETE; DATA-B2-B is NOT AUTHORIZED; PR7 MealPlan / Serving and all later
-milestones remain UNAUTHORIZED. No separate B2-A-CLOSE operation exists.
-No roadmap order, gate or quantitative target changes.
+SQLite table-rebuild runner capability. B2-A is MERGED in PR #22 at
+`7f17b1372bbd2e9f97fc025ac26b3f04a15cf837`: migration
+`0027_recipe_same_source_revisions`, six quantity corrections across five immutable
+v2 recipes, explicit new-row assessments and production audit v3. External source
+provenance is distinct from internal RecipeVersion revision identity.
+See the [B2-A decision](nutrition-data-readiness.md#decision--pr6-data-b2-a-same-source-quantity-corrections).
+
+B2-B1 is MERGED in [PR #23](https://github.com/Mitronomik/family-food-os/pull/23) at
+`47299ceb2c740f40f69f3b02359ce71c8be6b1c1`, the exact starting main for this
+PR6-ARCH-COMPOSITION docs-only changeset. Its semantic/profile research covers
+37 target rows / 23 recipes / 19 foods and all 46 current usages; source candidates
+remain evidence, not production authority. The research history is preserved.
+
+**DECISION — 2026-09-10:** PR6-ARCH-COMPOSITION architecture contract established
+by this changeset. Option A is approved and extended by the
+[composition/mass/nutrient/assembly contract](food-composition-and-assembly.md)
+and [Russian-language invariant](russian-language-contract.md).
+**Old PR6-DATA-B2-B2: SUPERSEDED / PENDING REDESIGN.** Its former
+form/profile corrections + explicit estimate policy plan cannot execute directly.
+
+Production remains 30 current RecipeVersions / 189 rows, all 30 INCOMPLETE;
+Nutrition v1 remains the current implementation. Runtime/schema/data are unchanged,
+migration head remains 0027 and all 43 estimates remain non-executable.
+**PR6 — NOT COMPLETE. PR6-NUTRIENT-VECTOR — NOT STARTED / requires separate
+authorization after merge. PR7+ — UNAUTHORIZED.** No automatic next operation.
+The approved sequence changes are specified in §6.5; quantitative gates are retained.
 
 ## 3. North Star and core-loop contract
 
 FamilyFoodOS exists to remove the recurring cognitive and operational burden of
-feeding a household. The product is not a recipe generator and is not an
+feeding a household. The product includes a deterministic constructor from
+verified templates/rules; it is not a free-form LLM recipe generator or
 AI-dietitian. Its recurring product loop is:
 
 ```text
 Household
 → Members / Preferences / Constraints
 → FoodIngredient Catalogue
-→ Recipe Catalogue
+→ verified Recipe Catalogue / deterministic Recipe Assembly
 → Nutrition
+→ valid candidate pool
 → Planner
 → MealPlan
 → individualized Servings
@@ -196,6 +212,14 @@ changes them:
     treatment or therapeutic effectiveness.
 20. The mobile-first consumer surface keeps platform administration,
     ingestion, SKU matching and audit outside primary navigation.
+21. Food forms and raw/input/cooked masses are not interchangeable. Composition
+    is a versioned DAG; yield and nutrient retention have separate evidence.
+22. Target Nutrition uses an extensible macro/micronutrient vector with
+    nutrient-level provenance; unknown != zero. Current v1 remains valid.
+23. Consumer and admin surfaces are Russian; missing display text blocks
+    publication, never permits English fallback, including errors and PDF.
+24. Default automatic recipes pass RU availability/familiarity and use
+    kitchen-verified templates/rules; Planner consumes valid candidates.
 
 ## 5. Canonical master sequence
 
@@ -209,7 +233,20 @@ changes them:
 ✅ PR3   FoodIngredient Catalogue
 ✅ PR4   Recipe Catalogue
 ✅ PR5   Pantry
-→ PR6   Nutrition Core
+✅ PR6 Nutrition engine (PR #18; PR6 milestone NOT COMPLETE)
+✅ PR6-DATA-A
+✅ PR6-DATA-B1
+✅ PR6-INFRA
+✅ PR6-DATA-B2-A
+✅ PR6-DATA-B2-B1
+✅ PR6-ARCH-COMPOSITION (architecture contract established by this changeset)
+→ PR6-NUTRIENT-VECTOR
+→ PR6-COMPOSITION-CORE
+→ PR6-RU-FOOD-DATA
+→ PR6-DATA-B2-B2-REDESIGNED
+→ PR6-CLOSE
+→ RECIPE-ASSEMBLY-A
+→ RECIPE-ASSEMBLY-B
 → PR7   MealPlan / Serving + serving-nutrition integration
 → PR8   Planner v0
 
@@ -280,9 +317,10 @@ historical concept; they do not define a second aggregate.
 FoodIngredient != RetailSKU
 ```
 
-`FoodProductType` is not a mandatory MVP aggregate. A later Retail/catalogue
-classification may introduce product-form metadata only when a concrete
-downstream use case justifies it.
+FoodIngredient is the sole canonical food identity, including nutrition-relevant
+forms and atomic/composite foods. `FoodProductType` is not a mandatory intermediate
+aggregate or Nutrition truth layer. Any later Retail classification remains
+metadata; it cannot become a second food identity or Nutrition authority.
 
 ### 6.3 Deterministic core and AI
 
@@ -300,6 +338,43 @@ truth.
 The generic Shopping Engine precedes Retail. Shopping remains useful without a
 retailer connector. Retail enrichment maps a `FoodIngredient` to independently
 owned `RetailSKU` and timestamped price/availability data.
+
+### 6.5 PR6-ARCH-COMPOSITION — approved roadmap differences
+
+**DECISION — 2026-09-10.** The old PR6-DATA-B2-B2 plan is
+**SUPERSEDED / PENDING REDESIGN**, not the next implementation operation.
+NutrientVector, composition/mass/transformation/yield/retention contracts and RU
+catalogue/display readiness must precede redesigned production re-curation.
+The replacement supporting sequence is explicit in §5 and detailed under PR6.
+
+The intentional differences from exact base
+`47299ceb2c740f40f69f3b02359ce71c8be6b1c1` are:
+
+1. Insert PR6-ARCH-COMPOSITION → PR6-NUTRIENT-VECTOR → PR6-COMPOSITION-CORE →
+   PR6-RU-FOOD-DATA → PR6-DATA-B2-B2-REDESIGNED → PR6-CLOSE after accepted B2-B1.
+2. Insert RECIPE-ASSEMBLY-A/B after PR6-CLOSE and before PR7. PR7 selection
+   origins become immutable RecipeVersion or validated RecipeAssembly, reusing
+   Nutrition. PR8 consumes their valid Russian consumer candidate pool.
+3. Add qualitative consumer readiness obligations: Russian text, RU eligible
+   foods, familiar recipes/templates, valid Nutrition provenance, deterministic
+   input grams, no hidden raw/cooked equivalence or unresolved critical
+   composition/yield issue. Kitchen verification is separate from calculation.
+
+No quantitative gate is removed or reduced: Gate 1 still has 3 fixture households,
+30 verified recipes and 80+ foods; Gate 2 still has 1 Household / 3 members /
+30 recipes / 80–120 foods; Data Readiness still requires 50–80+ recipes and 100%
+required coverage with the broader 250–350-food target. Assembly counts do not
+silently replace the verified-recipe counts. The 30 current FNS recipes are
+technical evidence; consumer suitability requires its own readiness review.
+
+Gate 1 → Shopping → Prep → backend PDF → Consumer UX remains in place. PostgreSQL,
+Auth/HouseholdMembership, tenant isolation/shared deployment, full Data Program,
+Retail, Optional AI and Commercial/Billing timing remain unchanged. Shopping
+and Pantry ownership/mutation contracts are unchanged. These supporting PRs do
+not start the future full ingestion or live Retail programs.
+
+Every future operation requires separate bounded authorization; sequence position,
+review readiness or merge of this docs PR is not that authorization.
 
 ## 7. Milestone contracts
 
@@ -505,7 +580,7 @@ transactional movements without exposure to industrial inventory concepts.
 
 ### PR6 — Nutrition Core — engine ACCEPTED / MERGED; milestone NOT COMPLETE
 
-PR6 owns the deterministic Nutrition Core only through:
+The accepted PR6 engine v1 bounded contract runs through:
 
 ```text
 FoodIngredient nutrition
@@ -532,13 +607,53 @@ medical diagnosis/treatment, LLM calculation or undocumented nutrition truth.
 **Exit criteria:** FoodIngredient and RecipeVersion nutrition plus member target
 foundation are deterministic, versioned, provenance-aware and usable by PR7.
 
+#### PR6 supporting operations — later approved target
+
+These operations extend the target, preserving accepted Nutrition v1 history.
+All after this docs changeset are NOT STARTED and require separate authorization.
+
+| Operation | Bounded outcome and dependency |
+| --- | --- |
+| PR6-ARCH-COMPOSITION | Docs-only canonical architecture contract, Option A/composition/mass/vector/Russian gates and revised order; no runtime/data/schema changes. |
+| PR6-NUTRIENT-VECTOR | Extensible macro/micronutrient registry/vector, nutrient-level provenance and uncertainty, initial authoritative nutrient registry and explicit backward compatibility with Nutrition v1. |
+| PR6-COMPOSITION-CORE | Atomic/composite FoodIngredient; exact/declared-only composition; recursive versioned DAG; mass states; transformation/yield and retention evidence contracts. Depends on NutrientVector. |
+| PR6-RU-FOOD-DATA | Consumer-ready Russian food catalogue with Russian names, ordinary basic foods and composites where needed, RU availability evidence and nutrition/composition readiness. |
+| PR6-DATA-B2-B2-REDESIGNED | Migrate/re-curate affected existing recipe rows against the new form/composition/nutrient model; preserve history, re-review source/profile promotion, no direct execution of legacy B2-B2 assumptions. |
+| PR6-CLOSE | Explicit data-readiness/closure review after preceding dependencies; engine readiness alone is insufficient. |
+
+Persisted changes in those later PRs require explicit migration/backfill/history/
+backup/export strategy. Exact SQL fields and migrations are not designed here.
+Estimate/uncertainty acceptance remains OPEN; all 43 current estimates stay
+non-executable until separately approved. Closure must resolve required data
+readiness under the expanded qualitative gates without weakening existing criteria.
+
+### RECIPE-ASSEMBLY-A — verified Russian templates and rules
+
+After PR6-CLOSE: introduce a bounded versioned RecipeTemplate/rule catalogue with
+Russian display, RU familiarity classification, kitchen verification evidence,
+allowed combinations, curated substitutions and exact quantity rules. Templates
+cover atomic and composite components and the required transformation contracts.
+Exit requires reviewable provenance and kitchen-validated rules/variants, not
+arbitrary ingredient combinations. No Engine runtime is implied by this data step.
+
+### RECIPE-ASSEMBLY-B — deterministic Recipe Assembly Engine
+
+After A and before PR7: implement deterministic assembly, reproducible trace,
+exact input grams and integration with Nutrition/composition/yield/retention.
+The [assembly contract](food-composition-and-assembly.md#recipetemplate-и-deterministic-assembly)
+defines validation versus kitchen verification and immutable RecipeVersion versus
+derived assembly. Exit requires repeatable validated outputs and fail-closed
+invalid/missing evidence paths with `AI_ENABLED=false`, plus RU/display gates.
+Planner and MealPlan/Serving implementation remain separate later operations.
+
 ### PR7 — MealPlan / Serving + serving-nutrition integration
 
-PR7 introduces `MealPlan`, its day/slot structure and individualized `Serving`.
+PR7 follows PR6-CLOSE and RECIPE-ASSEMBLY-A/B. It introduces `MealPlan`, its day/slot
+structure and individualized `Serving`.
 It integrates:
 
 ```text
-RecipeVersion nutrition
+selected immutable RecipeVersion / validated RecipeAssembly nutrition
 → Serving nutrition
 → Member/day totals
 → week aggregates
@@ -549,11 +664,12 @@ and personalization history.
 
 **Data/capabilities:** `MealPlan`, `MealPlanDay`, `MealSlot` and `Serving`, with
 Household ownership, week start/local planning dates, selected immutable
-RecipeVersion references, per-member allocations, status and source/config
-revision references.
+RecipeVersion or validated RecipeAssembly origins, per-member allocations, status
+and source/config revision references.
 
 **Services:** manually assemble/read/update one coherent seven-day plan,
-calculate Serving nutrition from RecipeVersion nutrition, and aggregate
+calculate Serving nutrition from the selected origin through the existing Nutrition
+contract without duplicating Nutrition logic, and aggregate
 member/day/week totals. A plan revision advances when authoritative plan or
 Serving state changes.
 
@@ -575,8 +691,9 @@ bounded scoring/heuristics, complete seven-day output and traceable candidate,
 rejection, score, selection and warning evidence. Advanced optimization must
 prove value over this baseline.
 
-**Inputs:** Household/member constraints, exclusions/preferences, candidate
-RecipeVersions, Nutrition, Pantry, recent MealPlan history, budget/cooking
+**Inputs:** Household/member constraints, exclusions/preferences, already valid
+Russian consumer candidates from verified RecipeVersions / validated RecipeAssemblies,
+Nutrition, Pantry, recent MealPlan history, budget/cooking
 constraints and planning mode.
 
 **Output/services:** one complete seven-day MealPlan with individualized
@@ -588,8 +705,8 @@ warnings and duration.
 generation, member allocation, candidate rejection reasons, trace
 reproducibility, constrained failure reporting and fixture-household variation.
 
-**Non-goals:** OR-Tools or another advanced solver without measured benefit,
-Retail dependence, AI decisions, ShoppingList or PrepPlan.
+**Non-goals:** culinary recipe generation, OR-Tools or another advanced solver
+without measured benefit, Retail dependence, AI decisions, ShoppingList or PrepPlan.
 
 **Exit criteria:** all Gate 1 criteria below pass.
 
@@ -611,6 +728,11 @@ Gate 1 is passed only when all of the following are true:
 - Servings are individualized for Household members;
 - the planner trace is persisted or otherwise reproducible and explains the
   candidate pool, rejections, scores, selections and warnings.
+
+The path must additionally demonstrate form/composition authority, exact input
+grams, required nutrient provenance and explicit yield/retention uncertainty.
+Consumer use requires the qualitative gates in §6.5; the technical FNS corpus
+is not automatically accepted consumer truth.
 
 Passing isolated unit tests is necessary but not sufficient: the complete
 fixture path must be exercised through repository-backed application services.
@@ -835,7 +957,15 @@ Platform. Before real-family testing, the active catalogue must provide:
 - reviewable RecipeVersion source provenance and rights status;
 - reasonable weekly variety across the active corpus;
 - progress toward the broader FoodIngredient target of approximately
-  `250–350`, with that broader target explicit rather than hidden inside PR3.
+  `250–350`, with that broader target explicit rather than hidden inside PR3;
+- Russian display readiness on all consumer/admin surfaces, with no English fallback;
+- current RU market eligibility and food-form correctness;
+- one composition authority per food version, no critical composition cycle and
+  no inferred declared-only quantities;
+- deterministic recipe_input_mass_g, required nutrient-vector support and
+  transformation/yield/retention readiness where needed, without hidden raw/cooked
+  mass equivalence or unresolved critical composition/yield issues;
+- RU recipe/template familiarity and kitchen-verified default assembly rules.
 
 Bounded seed/import, curation and review work may satisfy this gate. Data
 Readiness does not require the complete automated Data Ingestion Platform; that
@@ -1054,8 +1184,8 @@ loop.
   Readiness when bounded curated data satisfies the explicit quality gate.
 - Consumer PWA work must not block proving the MVP0 backend vertical slice.
 - Advanced optimization must not block Planner v0.
-- `FoodProductType` must not block the FoodIngredient Catalogue without a
-  concrete downstream use case.
+- `FoodProductType` must not become a mandatory intermediate FoodIngredient
+  or Nutrition truth layer; any later classification remains separately justified metadata.
 
 ### Foundational obligations must not be postponed
 
@@ -1090,8 +1220,9 @@ read canonical contracts
 → run proportional verification
 → update durable docs/state
 → adversarial review
-→ merge
-→ begin the next milestone
+→ user-authorized merge
+→ separate bounded authorization for the next operation
+→ begin only that operation
 ```
 
 Parallel agents may work only inside the current authorized milestone/gate or
