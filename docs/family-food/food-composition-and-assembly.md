@@ -376,7 +376,10 @@ PR6 — NOT COMPLETE; PR6-NUTRIENT-VECTOR — NOT COMPLETE. VECTOR-A устан�
 COMPOSITION-CORE и PR7+ — UNAUTHORIZED. Рекомендуемый container для values —
 существующий FoodNutritionProfile с сохранённой identity и историей, без второго
 current-profile selector. Отсутствие value row означает unknown только в полном
-атомарно опубликованном snapshot; явный ноль остаётся нулём.
+атомарно опубликованном snapshot. Числовой `0` означает source-reported zero;
+для authoritative exact zero при normalized import нужны достаточные source
+provenance и approved import policy. Все 64 исследованных нуля пока unresolved;
+их exact backfill заблокирован. Production v1 values остаются без изменений.
 
 ## Архитектурные риски
 

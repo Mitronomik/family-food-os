@@ -11,6 +11,7 @@ from pathlib import Path
 import re
 import subprocess
 import unicodedata
+import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 DIRECTORY = Path("data/curation/pr6-nutrient-vector-a")
@@ -532,8 +533,405 @@ def validate_mappings(mapping_document, registry, manifest):
     )
 
 
+# Accepted byte snapshots, including complementary JSON of the same releases.
+# JSON adds evidence only: a missing JSON record never substitutes a CSV value.
+ZERO_SOURCE_FILES = {
+    "foundation.zip": ("FDC-FOUNDATION", RELEASE_HASHES["FDC-FOUNDATION"]),
+    "sr.zip": ("FDC-SR", RELEASE_HASHES["FDC-SR"]),
+    "dictionary.xlsx": (
+        "FDC-DICTIONARY",
+        "84597b955d1d0b9ea4b407b0cc24a32b84f7bbc0ee06ef38a1d24011f3a281b4",
+    ),
+    "downloads.html": (
+        "FDC-DOWNLOADS",
+        "8611bb2030246fb0062622991213fc841c6ceb83b8761e5e5a9e81381102ba5d",
+    ),
+    "foundation-doc.html": (
+        "FDC-FOUNDATION-DOC",
+        "cc5dc67ee71a71860ebdc5c59774aa0642ef9f2dfecb81094a674d9837d691c9",
+    ),
+    "foundation-json.zip": (
+        "FDC-FOUNDATION-JSON",
+        "186e988ec542e913f51ef62b86a47758e8cdd0d1dc3889e7b055581f3c09c77a",
+    ),
+    "sr-json.zip": (
+        "FDC-SR-JSON",
+        "0fe8ae486a2c8eb42cb96413f058deb51863a46c8fb8eeb4b1fb45006dd338ef",
+    ),
+}
+ZERO_EVIDENCE_HASH = "95190a0a2378aa04bafda5c0e3cc9230421704c97feeb5a4be480fabccaf91a3"
+SOURCE_VALUE_STATES = {"NONZERO_REPORTED", "ZERO_REPORTED", "VALUE_ABSENT"}
+CENSORING_STATES = {
+    "EXPLICIT_NOT_CENSORED",
+    "EXPLICIT_CENSORED",
+    "LOQ_METADATA_PRESENT_STATUS_UNSPECIFIED",
+    "NO_CENSORING_METADATA",
+    "NOT_APPLICABLE",
+    "NOT_REVIEWED_NONZERO",
+}
+ZERO_RESOLUTIONS = {"EXACT_ZERO_CONFIRMED", "BLOCKED_CENSORED", "UNRESOLVED"}
+
+
+def replay_zero_sources(directory, crosswalk):
+    """Reproduce selected evidence from hash-verified source bytes, without writes.
+
+    CSV fields remain strings. JSON numeric lexemes also remain strings so no
+    binary float/rounding can alter provenance. Hashes below are canonical row
+    hashes, distinct from raw archive/member hashes.
+    """
+    for filename, (_, sha) in ZERO_SOURCE_FILES.items():
+        require(
+            digest((directory / filename).read_bytes()) == sha,
+            f"Pinned source hash mismatch: {filename}",
+        )
+    zeros = [
+        r
+        for r in crosswalk["rows"]
+        if r["source_value"] is not None and decimal_text(r["source_value"]) == 0
+    ]
+    evidence = {"source_files": ZERO_SOURCE_FILES, "exports": {}, "observations": []}
+    # Convert tuples to the same JSON representation as committed evidence.
+    evidence["source_files"] = {k: list(v) for k, v in ZERO_SOURCE_FILES.items()}
+    for short, sid in [("foundation", "FDC-FOUNDATION"), ("sr", "FDC-SR")]:
+        with zipfile.ZipFile(directory / (short + ".zip")) as archive:
+            members = {
+                Path(n).name: n for n in archive.namelist() if n.endswith(".csv")
+            }
+            needed = ["food_nutrient.csv", "food_attribute.csv"]
+            needed += (
+                [
+                    "input_food.csv",
+                    "sub_sample_food.csv",
+                    "sub_sample_result.csv",
+                    "lab_method.csv",
+                    "lab_method_code.csv",
+                ]
+                if short == "foundation"
+                else ["food_nutrient_derivation.csv", "food_nutrient_source.csv"]
+            )
+            tables, table_info = {}, {}
+            for name in needed:
+                raw = archive.read(members[name])
+                reader = csv.DictReader(io.StringIO(raw.decode("utf-8-sig")))
+                tables[name] = list(reader)
+                table_info[name] = {
+                    "archive_member": members[name],
+                    "sha256": digest(raw),
+                    "columns": reader.fieldnames,
+                    "row_count": len(tables[name]),
+                }
+        with zipfile.ZipFile(directory / (short + "-json.zip")) as archive:
+            member = archive.namelist()[0]
+            raw = archive.read(member)
+            document = json.loads(raw, parse_int=str, parse_float=str)
+            root_key = next(iter(document))
+            foods = document[root_key]
+            food_index = {f["fdcId"]: f for f in foods if f is not None}
+            evidence["exports"][sid] = {
+                "csv_tables": table_info,
+                "json": {
+                    "archive_member": member,
+                    "sha256": digest(raw),
+                    "root_key": root_key,
+                    "food_slots": len(foods),
+                    "null_food_slots": foods.count(None),
+                },
+            }
+        for row in zeros:
+            if row["profile_source_data_type"] != RELEASES[sid][0]:
+                continue
+            fid, nid = row["profile_source_id"], row["source_nutrient_id"]
+            matches = [
+                r
+                for r in tables["food_nutrient.csv"]
+                if (r["id"], r["fdc_id"], r["nutrient_id"])
+                == (row["source_food_nutrient_id"], fid, nid)
+            ]
+            require(
+                len(matches) == 1 and matches[0]["amount"] == row["source_value"],
+                "Zero CSV replay identity/value mismatch",
+            )
+            source = matches[0]
+            food = food_index.get(fid)
+            matches = (
+                [n for n in food["foodNutrients"] if n["id"] == source["id"]]
+                if food
+                else []
+            )
+            require(len(matches) <= 1, "Duplicate JSON source row")
+            json_row = matches[0] if matches else None
+            if json_row:
+                require(
+                    json_row["nutrient"]["id"] == nid
+                    and decimal_text(json_row["amount"])
+                    == decimal_text(source["amount"])
+                    and json_row["nutrient"]["unitName"].upper() == row["source_unit"],
+                    "JSON/CSV zero identity/unit/value mismatch",
+                )
+            related = {}
+            examined_count = 0
+            if short == "foundation":
+                inputs = [r for r in tables["input_food.csv"] if r["fdc_id"] == fid]
+                sample_ids = {r["fdc_of_input_food"] for r in inputs}
+                subs = [
+                    r
+                    for r in tables["sub_sample_food.csv"]
+                    if r["fdc_id_of_sample_food"] in sample_ids
+                ]
+                child_ids = sample_ids | {r["fdc_id"] for r in subs}
+                examined_count = len(child_ids)
+                values = [
+                    r
+                    for r in tables["food_nutrient.csv"]
+                    if r["fdc_id"] in child_ids and r["nutrient_id"] == nid
+                ]
+                results = [
+                    r
+                    for r in tables["sub_sample_result.csv"]
+                    if r["food_nutrient_id"] in {v["id"] for v in values}
+                ]
+                used_children = {r["fdc_id"] for r in values}
+                used_subs = [r for r in subs if r["fdc_id"] in used_children]
+                used_samples = used_children | {
+                    r["fdc_id_of_sample_food"] for r in used_subs
+                }
+                methods = {r["lab_method_id"] for r in results}
+                related = {
+                    "input_food.csv": [
+                        r for r in inputs if r["fdc_of_input_food"] in used_samples
+                    ],
+                    "sub_sample_food.csv": used_subs,
+                    "food_nutrient.csv": values,
+                    "sub_sample_result.csv": results,
+                    "lab_method.csv": [
+                        r for r in tables["lab_method.csv"] if r["id"] in methods
+                    ],
+                    "lab_method_code.csv": [
+                        r
+                        for r in tables["lab_method_code.csv"]
+                        if r["lab_method_id"] in methods
+                    ],
+                    "food_attribute.csv": [
+                        r
+                        for r in tables["food_attribute.csv"]
+                        if r["fdc_id"] in child_ids | {fid}
+                    ],
+                }
+            else:
+                derivations = [
+                    r
+                    for r in tables["food_nutrient_derivation.csv"]
+                    if r["id"] == source["derivation_id"]
+                ]
+                related = {
+                    "food_nutrient_derivation.csv": derivations,
+                    "food_nutrient_source.csv": [
+                        r
+                        for r in tables["food_nutrient_source.csv"]
+                        if r["id"] in {d["source_id"] for d in derivations}
+                    ],
+                    "food_attribute.csv": [
+                        r for r in tables["food_attribute.csv"] if r["fdc_id"] == fid
+                    ],
+                }
+            evidence["observations"].append(
+                {
+                    "evidence_ref": row["evidence_ref"],
+                    "source_manifest_ref": sid,
+                    "csv_row": source,
+                    "csv_row_sha256": digest(canonical(source)),
+                    "json_food_nutrient": json_row,
+                    "json_match_state": "MATCHED"
+                    if json_row
+                    else "FOOD_ABSENT"
+                    if food is None
+                    else "NUTRIENT_ABSENT",
+                    "json_row_sha256": digest(canonical(json_row))
+                    if json_row
+                    else None,
+                    "examined_foundation_child_food_count": examined_count,
+                    "related_csv_rows": related,
+                }
+            )
+    evidence["observations"].sort(key=lambda e: e["evidence_ref"])
+    return evidence
+
+
+def source_value_state(source):
+    if source is None:
+        return "VALUE_ABSENT"
+    return (
+        "ZERO_REPORTED" if decimal_text(source["amount"]) == 0 else "NONZERO_REPORTED"
+    )
+
+
+def zero_semantics(evidence):
+    """Interpret only reviewed release evidence; no analytical-zero inference.
+
+    A bare LOQ number is conservatively metadata, not a censor flag. None of
+    these 64 exact rows has a documented observation-level censor/not-censor
+    marker. Adding such an adapter requires explicit evidence review, not a
+    guessed marker name or derivation-code heuristic.
+    """
+    records = [evidence["csv_row"], evidence["json_food_nutrient"] or {}]
+    records += evidence["related_csv_rows"].get("food_nutrient.csv", [])
+    loq_present = any(r.get("loq") not in (None, "") for r in records)
+    return {
+        "censoring_evidence_state": (
+            "LOQ_METADATA_PRESENT_STATUS_UNSPECIFIED"
+            if loq_present
+            else "NO_CENSORING_METADATA"
+        ),
+        "zero_resolution": "UNRESOLVED",
+        "exact_zero_evidence_refs": [],
+        "censoring_evidence_refs": [],
+    }
+
+
+def validate_zero_evidence(manifest):
+    evidence = manifest["zero_provenance_evidence"]
+    require(
+        digest(canonical(evidence)) == ZERO_EVIDENCE_HASH,
+        "Zero source evidence changed, stripped or invented",
+    )
+    sources = {s["id"]: s for s in manifest["sources"]}
+    for _, (sid, sha) in ZERO_SOURCE_FILES.items():
+        require(
+            sources[sid]["content_sha256"] == sha, "Zero source snapshot hash changed"
+        )
+    seen = set()
+    for e in evidence["observations"]:
+        require(e["evidence_ref"] not in seen, "Duplicate zero evidence")
+        seen.add(e["evidence_ref"])
+        require(
+            digest(canonical(e["csv_row"])) == e["csv_row_sha256"],
+            "Zero source row hash mismatch",
+        )
+        require(
+            (
+                digest(canonical(e["json_food_nutrient"]))
+                if e["json_food_nutrient"]
+                else None
+            )
+            == e["json_row_sha256"],
+            "Zero JSON row hash mismatch",
+        )
+    return {e["evidence_ref"]: e for e in evidence["observations"]}
+
+
+def validate_observation_semantics(row, source, zero_evidence):
+    state = source_value_state(source)
+    require(
+        row["source_value_state"] in SOURCE_VALUE_STATES
+        and row["source_value_state"] == state,
+        "Source value state does not replay the accepted observation",
+    )
+    require(
+        row["censoring_evidence_state"] in CENSORING_STATES,
+        "Unknown censoring evidence state",
+    )
+    if state == "ZERO_REPORTED":
+        e = zero_evidence.get(row["evidence_ref"])
+        require(
+            e is not None and e["csv_row"] == source,
+            "Zero source row identity/provenance mismatch",
+        )
+        require(
+            row["source_observation"]
+            == {"row": source, "row_sha256": digest(canonical(source))},
+            "Zero source row hash or available metadata lost",
+        )
+        require(
+            row["zero_provenance_ref"] == e["evidence_ref"], "Zero evidence link lost"
+        )
+        require(row["zero_resolution"] in ZERO_RESOLUTIONS, "Unknown zero resolution")
+        for key, expected in zero_semantics(e).items():
+            require(
+                row[key] == expected, "Unsupported exact zero or censoring assertion"
+            )
+    else:
+        require(
+            row["source_observation"] is None
+            and row["zero_provenance_ref"] is None
+            and row["zero_resolution"] == "NOT_APPLICABLE"
+            and row["exact_zero_evidence_refs"] == []
+            and row["censoring_evidence_refs"] == [],
+            "Nonzero/absent observation promoted to zero",
+        )
+        require(
+            row["censoring_evidence_state"]
+            == (
+                "NOT_APPLICABLE" if state == "VALUE_ABSENT" else "NOT_REVIEWED_NONZERO"
+            ),
+            "Censoring review scope overstated",
+        )
+
+
+def summarize_zeros(rows):
+    zeros = [r for r in rows if r["source_value_state"] == "ZERO_REPORTED"]
+    partition_states = CENSORING_STATES - {"NOT_APPLICABLE", "NOT_REVIEWED_NONZERO"}
+    partition = counts(zeros, "censoring_evidence_state", partition_states)
+    resolutions = counts(zeros, "zero_resolution", ZERO_RESOLUTIONS)
+    datasets = counts(zeros, "profile_source_data_type", {"Foundation", "SR Legacy"})
+    require(
+        sum(partition.values())
+        == sum(resolutions.values())
+        == sum(datasets.values())
+        == len(zeros),
+        "Zero categories/datasets do not partition the corpus",
+    )
+    return {
+        "source_reported_zero_observations": len(zeros),
+        "by_dataset": datasets,
+        "censoring_evidence_partition": partition,
+        "zero_resolution_partition": resolutions,
+        "unresolved_observations": [
+            r["audit_identity"] for r in zeros if r["zero_resolution"] == "UNRESOLVED"
+        ],
+    }
+
+
+def validate_summary(actual, expected):
+    require("known_zero_observations" not in actual, "Obsolete known-zero claim")
+    require(actual == expected, "Summary is not derived from artifacts")
+
+
+LEGACY_ROW_KEYS = {
+    "audit_identity",
+    "censoring_evidence_refs",
+    "censoring_evidence_state",
+    "evidence_ref",
+    "exact_zero_evidence_refs",
+    "food_ingredient_code",
+    "legacy_field",
+    "legacy_mapping_status",
+    "legacy_value",
+    "limitations",
+    "numeric_comparison",
+    "profile_basis_grams",
+    "profile_estimated",
+    "profile_source_data_type",
+    "profile_source_id",
+    "profile_source_name",
+    "profile_source_version",
+    "profile_verified_at",
+    "source_derivation_id",
+    "source_food_nutrient_id",
+    "source_nutrient_id",
+    "source_nutrient_name",
+    "source_observation",
+    "source_unit",
+    "source_value",
+    "source_value_state",
+    "target_nutrient_code",
+    "zero_provenance_ref",
+    "zero_resolution",
+}
+
+
 def validate_legacy(crosswalk, inventory, manifest):
     """Accept a complete provenance inventory, including any historical rows."""
+    zero_evidence = validate_zero_evidence(manifest)
     observations = {}
     foods = {}
     nutrients = {}
@@ -547,6 +945,10 @@ def validate_legacy(crosswalk, inventory, manifest):
     expected = {(*key, field) for key in inventory for field in FIELDS}
     seen = set()
     for row in crosswalk["rows"]:
+        require(
+            set(row) == LEGACY_ROW_KEYS,
+            "Unrecognized or missing legacy observation field",
+        )
         key = (
             row["food_ingredient_code"],
             row["profile_source_name"],
@@ -638,6 +1040,7 @@ def validate_legacy(crosswalk, inventory, manifest):
                 ),
                 "Unknown source component was invented",
             )
+        validate_observation_semantics(row, source, zero_evidence)
         comparison = compare_numeric(
             row["legacy_value"], source["amount"] if source else None
         )
@@ -662,6 +1065,15 @@ def validate_legacy(crosswalk, inventory, manifest):
             "Legacy evidence locator",
         )
     require(seen == expected, "Not every profile and all five fields were audited")
+    require(
+        {
+            r["evidence_ref"]
+            for r in crosswalk["rows"]
+            if r["source_value_state"] == "ZERO_REPORTED"
+        }
+        == set(zero_evidence),
+        "Zero evidence corpus incomplete",
+    )
 
 
 def counts(rows, field, statuses=None):
@@ -707,7 +1119,7 @@ def summarize(registry, mappings, crosswalk, manifest):
         "legacy_field_observations": len(rows),
         "legacy_mapping_counts": counts(rows, "legacy_mapping_status", LEGACY_STATUSES),
         "profiles_with_full_five_field_provenance": full,
-        "profiles_with_unresolved_provenance": unresolved,
+        "profiles_with_unresolved_component_mapping": unresolved,
         "profiles_with_absent_legacy_values": sorted(
             k
             for k, rs in groups.items()
@@ -716,10 +1128,7 @@ def summarize(registry, mappings, crosswalk, manifest):
         "historical_only_profile_count": manifest["profile_inventory"][
             "historical_only_count"
         ],
-        "known_zero_observations": sum(
-            r["legacy_value"] is not None and decimal_text(r["legacy_value"]) == 0
-            for r in rows
-        ),
+        "zero_provenance_audit": summarize_zeros(rows),
         "mismatch_rows": [
             r["audit_identity"]
             for r in rows
@@ -840,18 +1249,27 @@ def main():
         action="store_true",
         help="Verify staged scope and identical validated bytes",
     )
+    parser.add_argument(
+        "--source-directory",
+        type=Path,
+        help="Replay zero evidence from all pinned raw files (read-only)",
+    )
     args = parser.parse_args()
     directory = ROOT / DIRECTORY
     artifacts = [read_json(directory / name) for name in FILES[:4]]
     summary = validate_content(*artifacts)
+    if args.source_directory:
+        require(
+            replay_zero_sources(args.source_directory, artifacts[2])
+            == artifacts[3]["zero_provenance_evidence"],
+            "Zero raw-source replay differs",
+        )
+        print("PASS: seven pinned raw source hashes and complete zero-source replay")
     if args.write_summary:
         (directory / "summary.json").write_text(
             json.dumps(summary, ensure_ascii=False, sort_keys=True, indent=2) + "\n"
         )
-    require(
-        summary == read_json(directory / "summary.json"),
-        "Summary is not derived from artifacts",
-    )
+    validate_summary(read_json(directory / "summary.json"), summary)
     protected = validate_protected(staged=args.staged)
     print(
         f"PASS VECTOR-A: {summary['registry_candidate_count']} registry candidates; "

@@ -891,7 +891,9 @@ remain unproven (biotin, total choline, phylloquinone); no tag is invented.
 183 accepted profiles across all seed history produce 915 legacy observations:
 870 SOURCE_COMPONENT_CONFIRMED, 45 VALUE_ABSENT, zero mismatches, zero ambiguous
 present values, zero present values with unavailable source IDs. There are 64
-known zero observations. The original 100 profiles remain unchanged; the later
+source-reported numeric zero observations; exact/censoring semantics remain
+unresolved for all 64 (14 Foundation / 50 SR). No exact/non-censored zero or
+explicit censored observation is established by available evidence. The original 100 profiles remain unchanged; the later
 83 were additions, leaving zero historical-only identities in the accepted
 corpus. The validator requires all historical identities and all five fields,
 and the focused test reads every profile without a current-only filter. Extra
@@ -906,8 +908,10 @@ or unproven mapping. No production micronutrient amount is created.
 The [Nutrition contract](nutrition-core.md#pr6-nutrient-vector-a--registry-and-legacy-provenance)
 records the recommendation: existing FoodNutritionProfile remains the version/
 provenance container; normalized values reference it and retain nutrient-level
-locators. No row means unknown after atomic complete import/read; explicit zero
-means known zero. Legacy projections never fake source IDs or resolve ambiguous
+locators. No row means unknown after atomic complete import/read. Explicit numeric
+zero is source-reported; authoritative exact normalized zero requires sufficient
+provenance under an approved import policy. All 64 unresolved zeros are held from
+that backfill; production v1 values stay unchanged. Legacy projections never fake source IDs or resolve ambiguous
 semantics. Nutrient registry readiness does not resolve B2-B1 food-form mismatch,
 profile representativeness, yield/quantity gaps, recipe readiness or estimate policy.
 

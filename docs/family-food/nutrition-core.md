@@ -395,8 +395,12 @@ Unproven FDC/INFOODS mappings remain explicit exceptions, not guessed identifier
 Recommendation for separately authorized VECTOR-B: attach normalized nutrient
 values to the **existing FoodNutritionProfile** identity/version/provenance
 container. Keep one current-profile system and historical B1 FKs. No numeric
-value row means unknown; an explicit zero row means known zero. This requires
-atomic value-set import and complete reads; query omission/failed import cannot
+value row means unknown. An explicit numeric 0 is a source-reported zero; it
+becomes authoritative exact zero for normalized import only when source provenance
+is sufficient under the approved import policy. All 64 audited zeros (14 Foundation,
+50 SR) remain unresolved and held from exact normalized backfill. No exact or
+non-censored zero is proven. See the [zero audit](../../data/curation/pr6-nutrient-vector-a/README.md#zero-provenance-correction--fact-open-question-and-decision).
+Atomic value-set import and complete reads remain required; query omission/failed import cannot
 be interpreted as source absence. Preserve uncertainty, nutrient-level source
 locator and immutable mapping metadata. Missing source IDs may only produce an
 explicit legacy projection with independently proved semantics. Ambiguous or

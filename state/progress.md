@@ -684,7 +684,8 @@ FDC mappings: 76 exact, 24 method-specific, 24 distinct/rejected, 6 conversion,
 10 unproven. INFOODS: 36 exact, 11 method-specific, 1 conversion, 3 unproven.
 All 183 accepted profile identities across seed history / 915 fields audited:
 870 source-confirmed, 45 absent fibres, no mismatches or ambiguous present values.
-There are 64 known zeros; 138 profiles have five confirmed values and 45 have
+There are 64 source-reported numeric zeros (the original "known zeros" wording
+is superseded by the zero-provenance correction below); 138 profiles have five confirmed values and 45 have
 four plus unknown fibre. No accepted historical-only profile was found; the
 original 100 profiles remain unchanged after the 83-profile expansion.
 
@@ -721,3 +722,59 @@ PR6-ARCH-COMPOSITION is MERGED / established. This changeset establishes VECTOR-
 registry/provenance research for final review. PR6 / PR6-NUTRIENT-VECTOR remain
 NOT COMPLETE; VECTOR-B NOT AUTHORIZED; COMPOSITION-CORE / PR7+ UNAUTHORIZED.
 Nutrition v1 is current, migration head 0027, 43 estimates non-executable.
+
+## PR6-NUTRIENT-VECTOR-A zero-provenance correction
+
+Correction of the final-review blocker in existing PR #25, branch
+`data/pr6-nutrient-vector-a-registry`. Before edits GitHub showed OPEN,
+mergedAt=null, base `main` at `307ba3475581087b079ebcf2fa643e19a00bf06d`, and
+reviewed head `f8adf97382e737d71ee36813af21b22395f68413`; no intervening commits.
+The exact baseline replay passed: 183 profiles (102 Foundation / 81 SR),
+915 fields, 870 SOURCE_COMPONENT_CONFIRMED, 45 VALUE_ABSENT, zero numeric
+mismatches / ambiguous component mappings, 64 numeric source zeros, 961 protected
+files, migration 0027 and 43 non-executable estimates. Baseline focused tests:
+**69 passed in 1.68s** before edits.
+
+The [zero audit](../data/curation/pr6-nutrient-vector-a/README.md#zero-provenance-correction--fact-open-question-and-decision)
+records FACT / OPEN QUESTION / DECISION, all 64 exact source rows, orthogonal
+states, supplemental same-release metadata and complete reconciliation.
+`known_zero_observations` is removed: 64 SOURCE_REPORTED_ZERO = 14 Foundation +
+50 SR. Censoring partition: 0 explicitly non-censored, 0 explicitly censored,
+0 LOQ-present/status-unspecified, 64 without available censoring metadata.
+Resolution partition: 0 exact confirmed, 0 proven-censored blocked, 64 unresolved.
+None of these zeros is approved for authoritative exact normalized backfill.
+Absence of metadata is not evidence of exactness. Current v1 values are preserved.
+
+All five required original source hashes matched before analysis. Complementary
+JSON exports are from the same releases and have separate pinned hashes; they
+do not replace CSV truth. Thirteen Foundation and 50 SR zero records match JSON;
+pollock is absent from Foundation JSON. All 35 available same-component Foundation
+child measurements and their links/methods are retained. Child adjusted amounts
+are not reinterpreted as LOQ. Original FDC selected extracts/hashes are unchanged.
+
+Executed verification for the research/data/docs/tests/validator-only correction:
+
+- `python3 scripts/validate_pr6_nutrient_vector_a.py --source-directory
+  /tmp/pr6-vector-a --write-summary`: PASS; all seven pinned raw files verified
+  before parsing; all 64 observations and supplemental evidence replay exactly.
+- Offline VECTOR-A validator: PASS, including 961 protected files, migration
+  `0027_recipe_same_source_revisions` and all 43 null executable masses.
+- `AI_ENABLED=false backend/.venv/bin/python -m pytest -q
+  backend/app/tests/test_pr6_nutrient_vector_a_registry.py`: **104 passed in 4.66s**.
+  Includes unproven/censored zero promotion, raw LOQ loss in a synthetic trusted
+  snapshot, forged row hashes, invalid states, absent/missing/failed/filtered
+  states, aggregate partition mismatch, protected files, 0028 and estimate changes.
+- Ruff check and format/check: PASS for the validator and focused tests.
+- Comparison with reviewed HEAD: all 915 original source/profile fields and
+  numeric comparisons unchanged; original selected FDC extracts unchanged.
+- Local links/anchors: **91 resolved across 8 PR Markdown files**.
+- `git diff --check`: PASS. Correction touches 12 of the original 15 allowed
+  files; unrelated `.DS_Store` remains excluded. Full backend/launcher regression
+  is not required for this unchanged production surface.
+- `python3 scripts/validate_pr6_nutrient_vector_a.py --staged` and
+  `git diff --cached --check`: PASS; staged bytes match the validated artifacts.
+
+Production seed/schema/runtime, B1/B2 evidence, assessment/profile history and
+Nutrition v1 behavior remain unchanged. FAMILY_FOOD_NUTRITION_V1 is current.
+PR6 NOT COMPLETE; VECTOR-B NOT AUTHORIZED; COMPOSITION-CORE UNAUTHORIZED;
+PR7+ UNAUTHORIZED. Next action is final re-review of PR #25; no automatic merge.

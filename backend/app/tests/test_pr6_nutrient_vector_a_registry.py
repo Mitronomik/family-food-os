@@ -48,7 +48,7 @@ def test_complete_registry_audit_and_deterministic_summary(artifacts):
         "VALUE_ABSENT": 45,
     }
     assert len(first["profiles_with_full_five_field_provenance"]) == 138
-    assert first["profiles_with_unresolved_provenance"] == []
+    assert first["profiles_with_unresolved_component_mapping"] == []
 
 
 @pytest.mark.parametrize(
@@ -332,3 +332,263 @@ def test_unauthorized_diff_is_rejected(monkeypatch, path):
     monkeypatch.setattr(v, "git", changed_git)
     with pytest.raises(ValueError):
         v.validate_protected()
+
+
+def zero_row(artifacts):
+    return next(
+        r for r in artifacts[2]["rows"] if r["source_value_state"] == "ZERO_REPORTED"
+    )
+
+
+def test_zero_audit_is_reported_not_analytically_exact(artifacts):
+    result = v.validate_content(*artifacts)
+    audit = result["zero_provenance_audit"]
+    assert "known_zero_observations" not in result
+    assert audit["source_reported_zero_observations"] == 64
+    assert audit["by_dataset"] == {"Foundation": 14, "SR Legacy": 50}
+    assert audit["censoring_evidence_partition"] == {
+        "EXPLICIT_CENSORED": 0,
+        "EXPLICIT_NOT_CENSORED": 0,
+        "LOQ_METADATA_PRESENT_STATUS_UNSPECIFIED": 0,
+        "NO_CENSORING_METADATA": 64,
+    }
+    assert audit["zero_resolution_partition"] == {
+        "EXACT_ZERO_CONFIRMED": 0,
+        "BLOCKED_CENSORED": 0,
+        "UNRESOLVED": 64,
+    }
+    assert len(audit["unresolved_observations"]) == 64
+    assert (
+        sum(r["source_value_state"] == "NONZERO_REPORTED" for r in artifacts[2]["rows"])
+        == 806
+    )
+    assert (
+        sum(r["source_value_state"] == "VALUE_ABSENT" for r in artifacts[2]["rows"])
+        == 45
+    )
+
+
+@pytest.mark.parametrize(
+    "fault",
+    [
+        "exact_without_evidence",
+        "censored_to_exact",
+        "metadata_stripped",
+        "numeric_changed",
+        "row_hash_forged",
+        "absent_to_zero",
+        "value_state_unknown",
+        "censor_state_unknown",
+        "unresolved_counted_exact",
+        "source_identity",
+        "evidence_link",
+        "missing",
+        "failed_import",
+        "filtered_out",
+    ],
+)
+def test_zero_semantics_fail_closed(artifacts, fault):
+    row = zero_row(artifacts)
+    if fault == "exact_without_evidence":
+        row["zero_resolution"] = "EXACT_ZERO_CONFIRMED"
+    elif fault == "censored_to_exact":
+        row.update(
+            censoring_evidence_state="EXPLICIT_CENSORED",
+            zero_resolution="EXACT_ZERO_CONFIRMED",
+        )
+    elif fault == "metadata_stripped":
+        del row["source_observation"]["row"]["footnote"]
+    elif fault == "numeric_changed":
+        row["source_value"] = "0.01"
+    elif fault == "row_hash_forged":
+        row["source_observation"]["row_sha256"] = "0" * 64
+    elif fault == "absent_to_zero":
+        row = next(
+            r
+            for r in artifacts[2]["rows"]
+            if r["legacy_mapping_status"] == "VALUE_ABSENT"
+        )
+        row["source_value_state"] = "ZERO_REPORTED"
+    elif fault == "value_state_unknown":
+        row["source_value_state"] = "KNOWN_ZERO"
+    elif fault == "censor_state_unknown":
+        row["censoring_evidence_state"] = "ASSUME_NOT_CENSORED"
+    elif fault == "unresolved_counted_exact":
+        row.update(
+            censoring_evidence_state="EXPLICIT_NOT_CENSORED",
+            zero_resolution="EXACT_ZERO_CONFIRMED",
+            exact_zero_evidence_refs=["FDC-DICTIONARY"],
+        )
+    elif fault == "source_identity":
+        row["source_observation"]["row"]["id"] = "1"
+    elif fault == "evidence_link":
+        row["zero_provenance_ref"] = None
+    else:
+        row["source_value_state"] = fault.upper()
+    with pytest.raises(ValueError):
+        v.validate_content(*artifacts)
+
+
+def test_numeric_loq_is_not_itself_censoring_or_exactness(artifacts):
+    # Synthetic release-shape fixture, NOT an assertion about the accepted rows.
+    row = zero_row(artifacts)
+    evidence = deepcopy(
+        next(
+            e
+            for e in artifacts[3]["zero_provenance_evidence"]["observations"]
+            if e["evidence_ref"] == row["evidence_ref"]
+        )
+    )
+    evidence["json_food_nutrient"]["loq"] = "0.03"
+    interpreted = v.zero_semantics(evidence)
+    assert (
+        interpreted["censoring_evidence_state"]
+        == "LOQ_METADATA_PRESENT_STATUS_UNSPECIFIED"
+    )
+    assert interpreted["zero_resolution"] == "UNRESOLVED"
+    row.update(interpreted)
+    v.validate_observation_semantics(
+        row, evidence["csv_row"], {row["evidence_ref"]: evidence}
+    )
+    # Stripping the classification while raw LOQ remains must fail too, even
+    # before the independent immutable-evidence checksum guard is applied.
+    row["censoring_evidence_state"] = "NO_CENSORING_METADATA"
+    with pytest.raises(ValueError, match="censoring assertion"):
+        v.validate_observation_semantics(
+            row, evidence["csv_row"], {row["evidence_ref"]: evidence}
+        )
+
+
+@pytest.mark.parametrize(
+    "fault",
+    ["metadata", "row_hash", "related_result", "json_row", "duplicate", "missing"],
+)
+def test_zero_evidence_is_immutable_and_complete(artifacts, fault):
+    evidence = artifacts[3]["zero_provenance_evidence"]
+    entry = evidence["observations"][0]
+    if fault == "metadata":
+        entry["csv_row"].pop("min")
+    elif fault == "row_hash":
+        entry["csv_row_sha256"] = "0" * 64
+    elif fault == "related_result":
+        entry = next(
+            e
+            for e in evidence["observations"]
+            if e["related_csv_rows"].get("sub_sample_result.csv")
+        )
+        entry["related_csv_rows"]["sub_sample_result.csv"] = []
+    elif fault == "json_row":
+        entry["json_food_nutrient"] = None
+    elif fault == "duplicate":
+        evidence["observations"].append(deepcopy(entry))
+    else:
+        evidence["observations"].pop()
+    with pytest.raises(ValueError, match="Zero source evidence"):
+        v.validate_content(*artifacts)
+
+
+@pytest.mark.parametrize(
+    "fault", ["foundation_total", "partition", "unresolved_as_exact", "old_known_zero"]
+)
+def test_zero_summary_cannot_invent_authority_or_drop_observations(artifacts, fault):
+    expected = v.validate_content(*artifacts)
+    actual = deepcopy(expected)
+    audit = actual["zero_provenance_audit"]
+    if fault == "foundation_total":
+        audit["by_dataset"]["Foundation"] += 1
+    elif fault == "partition":
+        audit["censoring_evidence_partition"]["NO_CENSORING_METADATA"] -= 1
+    elif fault == "unresolved_as_exact":
+        audit["zero_resolution_partition"]["UNRESOLVED"] -= 1
+        audit["zero_resolution_partition"]["EXACT_ZERO_CONFIRMED"] += 1
+    else:
+        actual["known_zero_observations"] = 64
+    with pytest.raises(ValueError):
+        v.validate_summary(actual, expected)
+
+
+def test_source_replay_requires_exact_pinned_bytes_before_parsing(tmp_path, artifacts):
+    (tmp_path / "foundation.zip").write_bytes(b"different release or corrupt archive")
+    with pytest.raises(ValueError, match="Pinned source hash mismatch"):
+        v.replay_zero_sources(tmp_path, artifacts[2])
+
+
+@pytest.mark.parametrize(
+    "fault", ["migration_0028", "migration_head", "estimate_mass", "estimate_accepted"]
+)
+def test_protected_migration_and_estimate_guards_use_actual_files(
+    tmp_path, monkeypatch, fault
+):
+    # Preserve real repository files: only a disposable copy is poisoned. Git
+    # reports a clean scope so this also exercises the dedicated inventory/data
+    # guards independently of the earlier protected-diff guard.
+    migration = "backend/app/db/migrations.py"
+    audit_path = "data/seed/recipe_corrections/pr6-data-b2a/production-audit-v3.json"
+    for name in [migration, audit_path]:
+        target = tmp_path / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes((ROOT / name).read_bytes())
+    versions = tmp_path / "backend/app/migrations/versions"
+    versions.mkdir(parents=True)
+    real_git = v.git
+    monkeypatch.setattr(v, "git", lambda _root, *args: real_git(ROOT, *args))
+    if fault == "migration_0028":
+        (versions / "0028_nutrients.py").write_text("# unauthorized\n")
+    elif fault == "migration_head":
+        target = tmp_path / migration
+        target.write_text(
+            target.read_text().replace(v.MIGRATION_HEAD, "0028_nutrients")
+        )
+    else:
+        audit = v.read_json(tmp_path / audit_path)
+        row = next(
+            r
+            for record in audit["records"]
+            for r in record["rows"]
+            if "CONVERSION_ESTIMATE_NOT_ACCEPTED" in r["issues"]
+        )
+        if fault == "estimate_mass":
+            row["mass_g"] = "1"
+        else:
+            row["issues"].remove("CONVERSION_ESTIMATE_NOT_ACCEPTED")
+        (tmp_path / audit_path).write_bytes(v.canonical(audit))
+    with pytest.raises(ValueError, match="Migration|estimate candidates"):
+        v.validate_protected(tmp_path)
+
+
+def test_extra_known_zero_flag_cannot_bypass_controlled_states(artifacts):
+    zero_row(artifacts)["known_zero"] = True
+    with pytest.raises(ValueError, match="Unrecognized"):
+        v.validate_content(*artifacts)
+
+
+@pytest.mark.parametrize(
+    "field,state",
+    [
+        ("censoring_evidence_state", "NOT_APPLICABLE"),
+        ("zero_resolution", "NOT_APPLICABLE"),
+    ],
+)
+def test_zero_partition_rejects_unaccounted_observation(artifacts, field, state):
+    zero_row(artifacts)[field] = state
+    with pytest.raises(ValueError, match="partition"):
+        v.summarize_zeros(artifacts[2]["rows"])
+
+
+def test_stripped_loq_bytes_fail_even_when_synthetic_snapshot_was_trusted(
+    artifacts, monkeypatch
+):
+    # The real 64-row corpus has no LOQ. This fixture models an independently
+    # reviewed snapshot that did contain one, to exercise loss of raw metadata.
+    manifest = artifacts[3]
+    evidence = manifest["zero_provenance_evidence"]
+    entry = next(e for e in evidence["observations"] if e["json_food_nutrient"])
+    entry["json_food_nutrient"]["loq"] = "0.03"
+    entry["json_row_sha256"] = v.digest(v.canonical(entry["json_food_nutrient"]))
+    monkeypatch.setattr(v, "ZERO_EVIDENCE_HASH", v.digest(v.canonical(evidence)))
+    v.validate_zero_evidence(manifest)
+    del entry["json_food_nutrient"]["loq"]
+    # Forging a new row hash does not bypass the independently pinned snapshot.
+    entry["json_row_sha256"] = v.digest(v.canonical(entry["json_food_nutrient"]))
+    with pytest.raises(ValueError, match="stripped"):
+        v.validate_zero_evidence(manifest)

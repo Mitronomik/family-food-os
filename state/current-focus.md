@@ -7,10 +7,13 @@ Updated: `2026-09-10`
 - **PR6-NUTRIENT-VECTOR-A — nutrient registry/provenance audit established by
   this changeset**, starting from that exact main. Authorized scope is only
   research/data/docs, offline validator and focused tests. Immediate next action:
-  final review of VECTOR-A; no autonomous merge or automatic follow-on work.
+  final re-review of VECTOR-A zero-provenance correction in existing PR #25;
+  no autonomous merge or automatic follow-on work.
 - 51 canonical nutrient definitions with Russian names; 183 accepted profiles
   across all seed history / 915 fields audited. 870 source-confirmed values,
   45 absent fibres, no numeric mismatches or ambiguous present values.
+  Zero correction: 64 SOURCE_REPORTED_ZERO (14 Foundation / 50 SR), all unresolved
+  for exact/censoring semantics. Exact normalized backfill is held; v1 unchanged.
 - Production runtime/schema/seeds unchanged; migration head
   `0027_recipe_same_source_revisions`; `FAMILY_FOOD_NUTRITION_V1` current.
   B1/B2-A/B2-B1 evidence and all **43 non-executable estimate candidates** retained.

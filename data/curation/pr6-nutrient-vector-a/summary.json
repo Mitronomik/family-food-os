@@ -35,7 +35,6 @@
     "NO_ACCEPTABLE_MAPPING": 3,
     "UNIT_CONVERSION_REQUIRED": 1
   },
-  "known_zero_observations": 64,
   "legacy_field_observations": 915,
   "legacy_mapping_counts": {
     "DEFINITION_AMBIGUOUS": 0,
@@ -234,7 +233,7 @@
     "YOGURT_PLAIN_LOW_FAT:USDA_FDC:170886:2018-04",
     "ZUCCHINI:USDA_FDC:2685568:2026-04-30"
   ],
-  "profiles_with_unresolved_provenance": [],
+  "profiles_with_unresolved_component_mapping": [],
   "registry_candidate_count": 51,
   "registry_status_counts": {
     "APPROVED_FOR_VECTOR_B": 51,
@@ -247,5 +246,89 @@
     "present": 51
   },
   "schema_version": 1,
-  "starting_main": "307ba3475581087b079ebcf2fa643e19a00bf06d"
+  "starting_main": "307ba3475581087b079ebcf2fa643e19a00bf06d",
+  "zero_provenance_audit": {
+    "by_dataset": {
+      "Foundation": 14,
+      "SR Legacy": 50
+    },
+    "censoring_evidence_partition": {
+      "EXPLICIT_CENSORED": 0,
+      "EXPLICIT_NOT_CENSORED": 0,
+      "LOQ_METADATA_PRESENT_STATUS_UNSPECIFIED": 0,
+      "NO_CENSORING_METADATA": 64
+    },
+    "source_reported_zero_observations": 64,
+    "unresolved_observations": [
+      "APPLE_CIDER_VINEGAR:USDA_FDC:173469:2018-04:protein_g",
+      "APPLE_CIDER_VINEGAR:USDA_FDC:173469:2018-04:fat_g",
+      "APPLE_CIDER_VINEGAR:USDA_FDC:173469:2018-04:fiber_g",
+      "BAKING_POWDER:USDA_FDC:172803:2018-04:protein_g",
+      "BAKING_POWDER:USDA_FDC:172803:2018-04:fat_g",
+      "BEEF_BROTH_LOW_SODIUM:USDA_FDC:172889:2018-04:fiber_g",
+      "BEEF_GROUND_90:USDA_FDC:2514743:2026-04-30:carbohydrates_g",
+      "BEEF_SHOULDER:USDA_FDC:169480:2018-04:carbohydrates_g",
+      "BEEF_SHOULDER:USDA_FDC:169480:2018-04:fiber_g",
+      "BROWN_SUGAR:USDA_FDC:168833:2018-04:fat_g",
+      "BROWN_SUGAR:USDA_FDC:168833:2018-04:fiber_g",
+      "BUTTER_UNSALTED:USDA_FDC:173430:2018-04:fiber_g",
+      "CANOLA_OIL:USDA_FDC:172336:2018-04:protein_g",
+      "CANOLA_OIL:USDA_FDC:172336:2018-04:carbohydrates_g",
+      "CANOLA_OIL:USDA_FDC:172336:2018-04:fiber_g",
+      "CHEESE_CHEDDAR_REDUCED_FAT:USDA_FDC:171292:2018-04:fiber_g",
+      "CHICKEN_BREAST:USDA_FDC:2646170:2026-04-30:carbohydrates_g",
+      "CHICKEN_BREAST_COOKED:USDA_FDC:331960:2026-04-30:carbohydrates_g",
+      "CHICKEN_BROTH_LOW_SODIUM:USDA_FDC:172888:2018-04:fat_g",
+      "CHICKEN_BROTH_LOW_SODIUM:USDA_FDC:172888:2018-04:fiber_g",
+      "CHICKEN_THIGH:USDA_FDC:2646171:2026-04-30:carbohydrates_g",
+      "COD_ATLANTIC:USDA_FDC:2684444:2026-04-30:carbohydrates_g",
+      "EGG:USDA_FDC:748967:2026-04-30:fiber_g",
+      "EGG_WHITE:USDA_FDC:747997:2026-04-30:fat_g",
+      "HONEY:USDA_FDC:169640:2018-04:fat_g",
+      "MARGARINE:USDA_FDC:173587:2018-04:fiber_g",
+      "MAYONNAISE_LOW_FAT:USDA_FDC:171443:2018-04:carbohydrates_g",
+      "MAYONNAISE_LOW_FAT:USDA_FDC:171443:2018-04:fiber_g",
+      "OLIVE_OIL:USDA_FDC:171413:2018-04:protein_g",
+      "OLIVE_OIL:USDA_FDC:171413:2018-04:carbohydrates_g",
+      "OLIVE_OIL:USDA_FDC:171413:2018-04:fiber_g",
+      "POLLOCK_ALASKA:USDA_FDC:2768188:2026-04-30:fiber_g",
+      "PORK_LOIN:USDA_FDC:2646168:2026-04-30:carbohydrates_g",
+      "PORK_TENDERLOIN:USDA_FDC:2646169:2026-04-30:carbohydrates_g",
+      "SALMON_ATLANTIC:USDA_FDC:2684441:2026-04-30:carbohydrates_g",
+      "SALT:USDA_FDC:173468:2018-04:kcal",
+      "SALT:USDA_FDC:173468:2018-04:protein_g",
+      "SALT:USDA_FDC:173468:2018-04:fat_g",
+      "SALT:USDA_FDC:173468:2018-04:carbohydrates_g",
+      "SALT:USDA_FDC:173468:2018-04:fiber_g",
+      "SESAME_OIL:USDA_FDC:171016:2018-04:protein_g",
+      "SESAME_OIL:USDA_FDC:171016:2018-04:carbohydrates_g",
+      "SESAME_OIL:USDA_FDC:171016:2018-04:fiber_g",
+      "SOUR_CREAM_LOW_FAT:USDA_FDC:173442:2018-04:fiber_g",
+      "SUGAR:USDA_FDC:746784:2026-04-30:protein_g",
+      "SUNFLOWER_OIL:USDA_FDC:171025:2018-04:protein_g",
+      "SUNFLOWER_OIL:USDA_FDC:171025:2018-04:carbohydrates_g",
+      "SUNFLOWER_OIL:USDA_FDC:171025:2018-04:fiber_g",
+      "TILAPIA_RAW:USDA_FDC:2684442:2026-04-30:carbohydrates_g",
+      "TURKEY_DRUMSTICK_SMOKED_COOKED:USDA_FDC:167710:2018-04:carbohydrates_g",
+      "TURKEY_DRUMSTICK_SMOKED_COOKED:USDA_FDC:167710:2018-04:fiber_g",
+      "TURKEY_GROUND_93:USDA_FDC:2514747:2026-04-30:carbohydrates_g",
+      "VANILLA_EXTRACT:USDA_FDC:173471:2018-04:fiber_g",
+      "VEGETABLE_BROTH:USDA_FDC:171583:2018-04:fiber_g",
+      "VINEGAR_WHITE:USDA_FDC:172237:2018-04:protein_g",
+      "VINEGAR_WHITE:USDA_FDC:172237:2018-04:fat_g",
+      "VINEGAR_WHITE:USDA_FDC:172237:2018-04:fiber_g",
+      "WATER:USDA_FDC:173647:2018-04:kcal",
+      "WATER:USDA_FDC:173647:2018-04:protein_g",
+      "WATER:USDA_FDC:173647:2018-04:fat_g",
+      "WATER:USDA_FDC:173647:2018-04:carbohydrates_g",
+      "WATER:USDA_FDC:173647:2018-04:fiber_g",
+      "YOGURT_GREEK_LOW_FAT:USDA_FDC:170903:2018-04:fiber_g",
+      "YOGURT_PLAIN_LOW_FAT:USDA_FDC:170886:2018-04:fiber_g"
+    ],
+    "zero_resolution_partition": {
+      "BLOCKED_CENSORED": 0,
+      "EXACT_ZERO_CONFIRMED": 0,
+      "UNRESOLVED": 64
+    }
+  }
 }
