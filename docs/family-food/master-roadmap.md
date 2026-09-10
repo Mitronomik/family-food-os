@@ -239,7 +239,7 @@ changes them:
 ✅ PR6-INFRA
 ✅ PR6-DATA-B2-A
 ✅ PR6-DATA-B2-B1
-→ PR6-ARCH-COMPOSITION (architecture contract established by this changeset)
+✅ PR6-ARCH-COMPOSITION (architecture contract established by this changeset)
 → PR6-NUTRIENT-VECTOR
 → PR6-COMPOSITION-CORE
 → PR6-RU-FOOD-DATA
