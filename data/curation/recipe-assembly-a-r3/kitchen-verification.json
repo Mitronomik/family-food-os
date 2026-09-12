@@ -1,0 +1,114 @@
+{
+  "candidates": [
+    {
+      "base_variant_status": "NOT_REVIEWED",
+      "candidate_id": "R3-01",
+      "household_scaling_verified": false,
+      "optional_variant_status": "NOT_REVIEWED",
+      "published_servings": 100,
+      "substituted_variant_status": "NOT_ESTABLISHED",
+      "system_standardization": "AFRS_SYSTEM_ESTABLISHED"
+    },
+    {
+      "base_variant_status": "NOT_REVIEWED",
+      "candidate_id": "R3-02",
+      "household_scaling_verified": false,
+      "optional_variant_status": "NOT_REVIEWED",
+      "published_servings": 100,
+      "substituted_variant_status": "NOT_ESTABLISHED",
+      "system_standardization": "AFRS_SYSTEM_ESTABLISHED"
+    },
+    {
+      "base_variant_status": "NOT_REVIEWED",
+      "candidate_id": "R3-03",
+      "household_scaling_verified": false,
+      "optional_variant_status": "NOT_REVIEWED",
+      "published_servings": null,
+      "substituted_variant_status": "NOT_ESTABLISHED",
+      "system_standardization": "AFRS_SYSTEM_ESTABLISHED"
+    },
+    {
+      "base_variant_status": "NOT_REVIEWED",
+      "candidate_id": "R3-04",
+      "household_scaling_verified": false,
+      "optional_variant_status": "NOT_REVIEWED",
+      "published_servings": 100,
+      "substituted_variant_status": "NOT_ESTABLISHED",
+      "system_standardization": "AFRS_SYSTEM_ESTABLISHED"
+    },
+    {
+      "base_variant_status": "NOT_REVIEWED",
+      "candidate_id": "R3-05",
+      "household_scaling_verified": false,
+      "optional_variant_status": "NOT_REVIEWED",
+      "published_servings": 100,
+      "substituted_variant_status": "NOT_ESTABLISHED",
+      "system_standardization": "AFRS_SYSTEM_ESTABLISHED"
+    },
+    {
+      "base_variant_status": "NOT_REVIEWED",
+      "candidate_id": "R3-06",
+      "household_scaling_verified": false,
+      "optional_variant_status": "NOT_REVIEWED",
+      "published_servings": 50,
+      "substituted_variant_status": "NOT_ESTABLISHED",
+      "system_standardization": "NOT_ESTABLISHED"
+    },
+    {
+      "base_variant_status": "NOT_REVIEWED",
+      "candidate_id": "R3-07",
+      "household_scaling_verified": false,
+      "optional_variant_status": "NOT_REVIEWED",
+      "published_servings": 50,
+      "substituted_variant_status": "NOT_ESTABLISHED",
+      "system_standardization": "NOT_ESTABLISHED"
+    },
+    {
+      "base_variant_status": "NOT_REVIEWED",
+      "candidate_id": "R3-08",
+      "household_scaling_verified": false,
+      "optional_variant_status": "NOT_REVIEWED",
+      "published_servings": 25,
+      "substituted_variant_status": "NOT_ESTABLISHED",
+      "system_standardization": "NOT_ESTABLISHED"
+    },
+    {
+      "base_variant_status": "NOT_REVIEWED",
+      "candidate_id": "R3-09",
+      "household_scaling_verified": false,
+      "optional_variant_status": "NOT_REVIEWED",
+      "published_servings": 25,
+      "substituted_variant_status": "NOT_ESTABLISHED",
+      "system_standardization": "NOT_ESTABLISHED"
+    },
+    {
+      "base_variant_status": "NOT_REVIEWED",
+      "candidate_id": "R3-10",
+      "household_scaling_verified": false,
+      "optional_variant_status": "NOT_REVIEWED",
+      "published_servings": 8,
+      "substituted_variant_status": "NOT_ESTABLISHED",
+      "system_standardization": "NOT_ESTABLISHED"
+    },
+    {
+      "base_variant_status": "NOT_REVIEWED",
+      "candidate_id": "R3-11",
+      "household_scaling_verified": false,
+      "optional_variant_status": "NOT_REVIEWED",
+      "published_servings": 6,
+      "substituted_variant_status": "NOT_ESTABLISHED",
+      "system_standardization": "NOT_ESTABLISHED"
+    },
+    {
+      "base_variant_status": "NOT_REVIEWED",
+      "candidate_id": "R3-12",
+      "household_scaling_verified": false,
+      "optional_variant_status": "NOT_REVIEWED",
+      "published_servings": null,
+      "substituted_variant_status": "NOT_ESTABLISHED",
+      "system_standardization": "NOT_ESTABLISHED"
+    }
+  ],
+  "scope_ru": "Федеральное происхождение и общая стандартизация не объявляют каждую новую замену проверенной. После решающего предварительного отказа полная применимость к обеим веткам не исследовалась. Институциональное видео, урок или государственный хост не считаются протоколом тестирования.",
+  "system_evidence_ref": "../recipe-assembly-a-r2/sources/afrs-full-excerpt.pdf"
+}

@@ -1,0 +1,97 @@
+{
+  "policy": "RIGHTS-FACTS",
+  "policy_ref": "../../../docs/family-food/recipe-localization-and-substitution.md",
+  "reviews": [
+    {
+      "authorship_is_hosting": false,
+      "disposition": "ACCEPT",
+      "government_funding_is_federal_authorship": false,
+      "notice_ru": "На сохранённых федеральных страницах отдельного авторского уведомления нет; принято только использование фактов.",
+      "notice_status": "FEDERAL_FACTS_SCOPE",
+      "owner": "U.S. armed services; federal AFRS",
+      "publication_approved": false,
+      "reason_ru": "Прямой федеральный сборник той же редакции, что и принятый пакет; общее происхождение и право на факты подтверждены принятой проверкой.",
+      "source_id": "AFRS-2003"
+    },
+    {
+      "authorship_is_hosting": false,
+      "disposition": "DEFER",
+      "government_funding_is_federal_authorship": false,
+      "notice_ru": "Уведомление и разрешение на использование не доведены до принятого решения.",
+      "notice_status": "NOT_ESTABLISHED",
+      "owner": "USDA attribution on indexed card; not fully resolved",
+      "publication_approved": false,
+      "reason_ru": "Кандидат отклонён предварительно; авторство конкретного артефакта и ограниченное право на повторное использование не доведены до принятого решения. Хостинг и финансирование не подменяют авторство.",
+      "source_id": "SOURCE-06"
+    },
+    {
+      "authorship_is_hosting": false,
+      "disposition": "DEFER",
+      "government_funding_is_federal_authorship": false,
+      "notice_ru": "Уведомление и разрешение на использование не доведены до принятого решения.",
+      "notice_status": "NOT_ESTABLISHED",
+      "owner": "USDA attribution on indexed card; not fully resolved",
+      "publication_approved": false,
+      "reason_ru": "Кандидат отклонён предварительно; авторство конкретного артефакта и ограниченное право на повторное использование не доведены до принятого решения. Хостинг и финансирование не подменяют авторство.",
+      "source_id": "SOURCE-07"
+    },
+    {
+      "authorship_is_hosting": false,
+      "disposition": "DEFER",
+      "government_funding_is_federal_authorship": false,
+      "notice_ru": "Уведомление и разрешение на использование не доведены до принятого решения.",
+      "notice_status": "NOT_ESTABLISHED",
+      "owner": "USDA attribution on indexed card; not fully resolved",
+      "publication_approved": false,
+      "reason_ru": "Кандидат отклонён предварительно; авторство конкретного артефакта и ограниченное право на повторное использование не доведены до принятого решения. Хостинг и финансирование не подменяют авторство.",
+      "source_id": "SOURCE-08"
+    },
+    {
+      "authorship_is_hosting": false,
+      "disposition": "DEFER",
+      "government_funding_is_federal_authorship": false,
+      "notice_ru": "Уведомление и разрешение на использование не доведены до принятого решения.",
+      "notice_status": "NOT_ESTABLISHED",
+      "owner": "NFSMI, University of Mississippi; USDA/FNS grant; recipe credit USDA 2005",
+      "publication_approved": false,
+      "reason_ru": "Кандидат отклонён предварительно; авторство конкретного артефакта и ограниченное право на повторное использование не доведены до принятого решения. Хостинг и финансирование не подменяют авторство.",
+      "source_id": "SOURCE-09"
+    },
+    {
+      "authorship_is_hosting": false,
+      "disposition": "DEFER",
+      "government_funding_is_federal_authorship": false,
+      "notice_ru": "Уведомление и разрешение на использование не доведены до принятого решения.",
+      "notice_status": "NOT_ESTABLISHED",
+      "owner": "University of Maine Extension; adaptation with permission from University of Kentucky Extension and Rob Dumas",
+      "publication_approved": false,
+      "reason_ru": "Кандидат отклонён предварительно; авторство конкретного артефакта и ограниченное право на повторное использование не доведены до принятого решения. Хостинг и финансирование не подменяют авторство.",
+      "source_id": "SOURCE-10"
+    },
+    {
+      "authorship_is_hosting": false,
+      "copyright_holder": "South Dakota Board of Regents",
+      "copyright_year": 2024,
+      "disposition": "DEFER",
+      "government_funding_is_federal_authorship": false,
+      "notice_ru": "В оригинале указано авторское право две тысячи двадцать четвёртого года; правообладатель — совет регентов штата Южная Дакота. Финансирование министерством не отменяет уведомление.",
+      "notice_status": "COPYRIGHT_NOTICE_PRESENT",
+      "owner": "SDSU Extension lesson; recipe credited to University of Arkansas Extension FCS727",
+      "publication_approved": false,
+      "reason_ru": "Кандидат отклонён предварительно; авторство конкретного артефакта и ограниченное право на повторное использование не доведены до принятого решения. Хостинг и финансирование не подменяют авторство.",
+      "source_id": "SOURCE-11"
+    },
+    {
+      "authorship_is_hosting": false,
+      "disposition": "DEFER",
+      "government_funding_is_federal_authorship": false,
+      "notice_ru": "Уведомление и разрешение на использование не доведены до принятого решения.",
+      "notice_status": "NOT_ESTABLISHED",
+      "owner": "Administration for Community Living page; exact recipe author not established",
+      "publication_approved": false,
+      "reason_ru": "Кандидат отклонён предварительно; авторство конкретного артефакта и ограниченное право на повторное использование не доведены до принятого решения. Хостинг и финансирование не подменяют авторство.",
+      "source_id": "SOURCE-12"
+    }
+  ],
+  "scope_ru": "Только фактические сведения, атрибуция и собственные русские пояснения. Не лицензия на карточки, фотографии, логотипы или выразительный текст."
+}

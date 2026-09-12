@@ -1382,3 +1382,42 @@ Delivery: [PR #33](https://github.com/Mitronomik/family-food-os/pull/33),
 OPEN into main, not merged. Evidence commit:
 `bb9254143f2449eeb0e7786ce1f06af91afbe517`.
 R2 evidence READY FOR REVIEW; Assembly A BLOCKED. Stop for review.
+
+
+## RECIPE-ASSEMBLY-A-R3 — Third-Family Closure
+
+2026-09-12. PR33 MERGED at exact fetched main/base
+`f2b6bc9015a1b892bb533b5d322d981d5a1782bd`; R1/R2 COMPLETE AS BLOCKED RESEARCH,
+accepted ready count 2/3. This supersedes the historical OPEN PR33 delivery
+record above. R3 is the current authorized evidence operation on
+`codex/recipe-assembly-a-r3`.
+
+[R3 evidence](../data/curation/recipe-assembly-a-r3/README.md): twelve serious
+prefilter candidates, none passing, zero deep reviews. R3 BLOCKED; no third
+candidate; individually ready 2/3; final three empty. Optional/substitution gates
+remain OPEN. Exact published E00100 and F00400 method 1 batches remain frozen;
+all bytes of both accepted packages are preserved. No production mutation;
+migration 0029, Assembly A BLOCKED, B/PR7+ NOT STARTED.
+
+Executed verification:
+
+- `AI_ENABLED=false backend/.venv/bin/python scripts/audit_recipe_assembly_a_r3.py --database --adversarial --source-dir <originals>` — PASS; R3 BLOCKED, 2/3, no selected third. After tightening source-weight binding, the affected local semantic/adversarial audit was rerun and passed; production replay inputs were unchanged.
+- Disposable accepted DB replay matches PR6-CLOSE food/recipe reports byte-for-byte: 185 FoodIngredients, 63 exact Composition/profile pins, 188 seals, 40 non-executable estimate usages. Historical replay, five deferred forms and yield rows equal the accepted baseline; migration remains 0029.
+- Complete R1/R2 package file inventories and SHA-256 match exact merged base. Accepted input hashes and production scope pass; no production truth is published. Stable profile pins compare canonical code, Composition version, INPUT/kind and source/version/type/basis; random disposable UUIDs are not equated.
+- Full AFRS and SDSU original SHA-256/size pass. Five retained AFRS pages equal their original pages in the June 2003 system; extracted text equals the retained PDF. N50200 weight/issue alignment was rendered and visually inspected. Missing original hashes for indexed/text-only sources remain explicitly null.
+- Package hashes, no-float/Decimal conversions, source weight bindings, optional/group semantics, whole substitution branch rejection, Russian display, corrected market/familiarity policy and local links/anchors (88) — PASS.
+- Thirty adversarial cases rejected; complete synthetic positive control passed. Coverage includes missing Composition/mass, alternative-as-optional, processing medium, one-sided/inferred substitution, untested variant/unrelated family, estimates/density/piece/AP, specialty input, English display, household scaling, rights, incomplete branch, frozen bytes, runtime/schema/seed scope and false final-three states. The fixture is a validator test, not an additional donor.
+- `ruff check` and `ruff format --check` for the new script — PASS.
+- `git diff --check`, `git diff --cached --check` and exact staged 26-file scope audit — PASS; unrelated `.DS_Store` excluded. Scope is the R3 package, read-only auditor and five state/canonical documents only.
+- Full backend regression was not run because production code/data did not change. Direct original retrieval was unavailable for several rejected candidates; those sources were never promoted to publication authority.
+
+R3 research evidence READY FOR REVIEW; R3 result and Assembly A remain BLOCKED.
+Stop after delivery for review. No merge, follow-up donor search, food-data repair
+or migration 0030 is authorized.
+
+
+Delivery: [PR #34](https://github.com/Mitronomik/family-food-os/pull/34), OPEN
+into main, not merged. Evidence commit:
+`b2b9fe94737328bd2c16e3e0dc34b34802a185f7`.
+R3 research evidence READY FOR REVIEW; R3 result and Assembly A BLOCKED.
+Stop for review; no next-operation authorization.

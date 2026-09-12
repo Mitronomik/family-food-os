@@ -1,0 +1,89 @@
+{
+  "assembly_a": "BLOCKED",
+  "assembly_b": "NOT STARTED",
+  "candidate_individual_gates": {
+    "R3-01": false,
+    "R3-02": false,
+    "R3-03": false,
+    "R3-04": false,
+    "R3-05": false,
+    "R3-06": false,
+    "R3-07": false,
+    "R3-08": false,
+    "R3-09": false,
+    "R3-10": false,
+    "R3-11": false,
+    "R3-12": false
+  },
+  "collective_gates": {
+    "compatibility": "PASS",
+    "deterministic_quantities": "PASS",
+    "family_count": "OPEN",
+    "kitchen_verification": "PASS",
+    "optional_role": "OPEN",
+    "ordered_process": "PASS",
+    "required_roles": "PASS",
+    "ru_familiarity": "PASS",
+    "russian_display": "PASS",
+    "verified_substitution": "OPEN"
+  },
+  "decisive_prefilter_blockers": {
+    "R3-01": [
+      "MISSING_COMPOSITION"
+    ],
+    "R3-02": [
+      "FOOD_FORM_UNRESOLVED",
+      "MISSING_COMPOSITION"
+    ],
+    "R3-03": [
+      "FOOD_FORM_UNRESOLVED",
+      "MISSING_COMPOSITION"
+    ],
+    "R3-04": [
+      "FOOD_FORM_UNRESOLVED"
+    ],
+    "R3-05": [
+      "FOOD_FORM_UNRESOLVED"
+    ],
+    "R3-06": [
+      "MISSING_COMPOSITION"
+    ],
+    "R3-07": [
+      "FOOD_FORM_UNRESOLVED",
+      "MISSING_COMPOSITION"
+    ],
+    "R3-08": [
+      "FOOD_FORM_UNRESOLVED",
+      "MISSING_COMPOSITION"
+    ],
+    "R3-09": [
+      "FOOD_FORM_UNRESOLVED",
+      "MISSING_COMPOSITION"
+    ],
+    "R3-10": [
+      "FOOD_FORM_UNRESOLVED",
+      "MISSING_COMPOSITION"
+    ],
+    "R3-11": [
+      "REQUIRED_EXACT_MASS_UNRESOLVED"
+    ],
+    "R3-12": [
+      "MISSING_COMPOSITION"
+    ]
+  },
+  "evidence_ready_final_three": false,
+  "fixed_members": [
+    "R1-21",
+    "R1-23"
+  ],
+  "gate_scope_ru": "Пройденные критерии относятся только к двум принятым семействам в неизменном объёме; полного набора из трёх семейств нет.",
+  "implementation_authorized": false,
+  "individual_ready_count": 2,
+  "migration": "0029_food_composition_core",
+  "operation": "RECIPE-ASSEMBLY-A-R3",
+  "pr7": "NOT STARTED",
+  "selected_final_three": [],
+  "status": "BLOCKED",
+  "status_ru": "Исследование заблокировано: готовы два семейства из трёх; необязательная роль и проверенная замена в готовом третьем семействе не установлены.",
+  "third_candidate": null
+}

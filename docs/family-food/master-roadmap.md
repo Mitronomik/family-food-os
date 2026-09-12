@@ -1363,3 +1363,21 @@ production data or implementation authorization changes. The next action is R2
 review; neither another donor search nor food-data repair starts automatically.
 Even a future evidence-ready triple needs separate authorization for Assembly A
 implementation with `0030_recipe_template_catalogue`.
+
+
+### Assembly A third-family closure — R3 checkpoint
+
+2026-09-12. [PR33](https://github.com/Mitronomik/family-food-os/pull/33) MERGED,
+exact main `f2b6bc9015a1b892bb533b5d322d981d5a1782bd`; PR6 COMPLETE and R1/R2
+COMPLETE AS BLOCKED RESEARCH. The authorized bounded R3 research operation
+preserves both prior evidence packages and the exact ready scopes of R1-21/R1-23.
+[R3 package](../../data/curation/recipe-assembly-a-r3/README.md) records 12
+prefilter candidates, zero passing the prefilter, zero deep reviews. No third
+candidate; individually ready 2/3. Optional-role and verified-substitution gates
+remain OPEN; selected final three = []. R3 BLOCKED, prepared for research review.
+
+Assembly A is still BLOCKED; B and PR7+ remain NOT STARTED. Migration remains
+0029; no runtime/schema/data/seed change. This checkpoint neither completes
+Assembly A nor authorizes another search or food-data repair. Stop for review;
+a future evidence-ready set would require separate implementation authorization
+for `0030_recipe_template_catalogue` before Assembly A can resume.
