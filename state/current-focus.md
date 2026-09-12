@@ -3,33 +3,16 @@
 Updated: `2026-09-12`.
 
 - PR6 / PR6-CLOSE = COMPLETE.
-- [PR #32](https://github.com/Mitronomik/family-food-os/pull/32) and
-  [PR #33](https://github.com/Mitronomik/family-food-os/pull/33) = MERGED.
-- Exact fetched main / R3 base: `f2b6bc9015a1b892bb533b5d322d981d5a1782bd`.
-- R1 = COMPLETE AS BLOCKED RESEARCH, historical accepted result 1/3.
-- R2 = COMPLETE AS BLOCKED RESEARCH, accepted result 2/3.
-- R1-21 = INDIVIDUALLY_READY, exact E00100 published 100 portions.
-- R1-23 = INDIVIDUALLY_READY, exact F00400 Method 1 published 100 portions.
-- R3 = current authorized operation, evidence only; bounded research result BLOCKED.
-  Branch `codex/recipe-assembly-a-r3`; 12 prefilter candidates / 0 deep reviews;
-  third candidate none, individually ready 2/3, selected final three = [].
-- Optional role and verified substitution = OPEN for the final-three set.
-- RECIPE-ASSEMBLY-A = BLOCKED, not COMPLETE.
-- RECIPE-ASSEMBLY-B and PR7+ = NOT STARTED / unauthorized.
-- Migration = `0029_food_composition_core`; production truth unchanged.
+- PR #34 = MERGED at `a375f005b09880cf6a63cb5c8b1e964a0f558cb7`.
+- R1/R2/R3 = COMPLETE AS BLOCKED RESEARCH; individually ready remains 2/3.
+- PR #35 (R4 N50200 deep viability) is OPEN / not merged; its BLOCKED research result is not silently accepted into main.
+- Latest explicit user decision authorizes **RU-NORMATIVE-RECIPE-CORPUS** as the current operation.
+- Normative/base recipe cards may be retained/published as factual recipe data under the project-approved normative policy; provenance remains mandatory.
+- Current branch: `codex/ru-normative-recipe-corpus`, exact base `a375f005b09880cf6a63cb5c8b1e964a0f558cb7`.
+- This operation adds a pre-publication source corpus and importer; it does not publish RecipeVersion/RecipeTemplate truth.
+- Migration target becomes `0030_recipe_source_corpus`; future RecipeTemplate migration becomes `0031_recipe_template_catalogue`.
+- Assembly A remains BLOCKED; Assembly B / PR7+ remain NOT STARTED.
 
-[Canonical R3 decision](../docs/family-food/food-composition-and-assembly.md#recipe-assembly-a-r3--third-family-closure)
-and [R3 evidence](../data/curation/recipe-assembly-a-r3/README.md).
+[Corpus contract](../docs/family-food/ru-normative-recipe-corpus.md).
 
-Next authorized action: final review of the published bounded R3 research PR, then stop.
-No automatic donor search, food-data repair or implementation. Both accepted
-packages are frozen byte-for-byte. Household scaling remains unverified.
-Migration `0030_recipe_template_catalogue` and Assembly A implementation require
-separate explicit authorization. Never merge without post-review authorization.
-
-
-Delivery: [PR #34](https://github.com/Mitronomik/family-food-os/pull/34), OPEN
-into main, not merged. Evidence commit:
-`b2b9fe94737328bd2c16e3e0dc34b34802a185f7`.
-R3 research evidence READY FOR REVIEW; R3 result and Assembly A BLOCKED.
-Stop for review; no next-operation authorization.
+External source acquisition is an execution concern: no missing card may be fabricated. The importer stores every captured card losslessly even before structured FoodIngredient resolution.
