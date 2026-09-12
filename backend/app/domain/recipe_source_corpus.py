@@ -176,14 +176,15 @@ def card_from_dict(data: dict[str, Any]) -> SourceCardInput:
                 declared_nutrients=nutrients,
             )
         )
+    raw_text = data["raw_card_text"]
     return SourceCardInput(
         source_card_code=data["source_card_code"],
         name_ru=data["name_ru"],
         category_ru=data.get("category_ru"),
         source_recipe_basis=data.get("source_recipe_basis"),
         technology_text_ru=data.get("technology_text_ru"),
-        raw_card_text=data["raw_card_text"],
-        raw_card_sha256=data["raw_card_sha256"],
+        raw_card_text=raw_text,
+        raw_card_sha256=sha256(raw_text.encode("utf-8")).hexdigest(),
         capture_status=CorpusCaptureStatus(data["capture_status"]),
         variants=tuple(variants),
     )
