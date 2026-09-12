@@ -1,0 +1,24 @@
+{
+  "algorithm": "SHA-256",
+  "files": {
+    "README.md": "d0ca2af2a167f46bae2a90a424b95ebffcbb082590a4541c02adae6bcc164b05",
+    "baseline.json": "8b51a253d546ed9badf4a20dcb33da59d300274e28f5aa8a52a58ba30c3e3339",
+    "candidate-funnel.json": "4d252e003a0701fa1ce7bcc7722e391ae3bdd18812c2988854b6692bf9e95528",
+    "catalogue-inventory.json": "e6d675ce062b0f81c8d6e261a36da77c3c974cf8a303446ac25d05f780b52a2e",
+    "compatibility.json": "baa714c3aadcd9e5e64467e460c89757acf16422ce1bf3768fde1a820e7e9258",
+    "composition-readiness.json": "382daca3d0951008a6aca7e6e35bf88f4bd6c6592b7d7449b8b6529d620b21f3",
+    "final-three.json": "646e5dc127fe345b5db89ace2d7eccaf2918e6abe6ee1519f65f085ebe402037",
+    "kitchen-verification.json": "c25e3bc3d68d1508aa55f5e4d04461c05dcf33d5e27e1b03b86968395ae1e31d",
+    "market-evidence.json": "98b671a168e67661fe81bd3a969573ceb0b6e98d53a7b494c87d40c23aa36c3e",
+    "optional-role.json": "829fed32831614a0c0d62a8e93b9c6ef7c05431942110c3fc972fdf26c906070",
+    "pr33-receipt.json": "9f9499ea219e1bcefed8a33ad102d7dbeaca64b6490b65c25eb91f1a6972b364",
+    "quantity-authority.json": "357a9235cd99d72a16e204ca3ca0d3286e338f2de98e5a3aaeb86d8856bedb04",
+    "rights-review.json": "51bf9a0e73fa88ddc1cefac400d2aac84985365b97051831d021f16a5fd80710",
+    "ru-familiarity.json": "cd69ec4bbadc79659802c34635d4ce0052165d554991a5214158325494e3f18d",
+    "source-manifest.json": "ce2bac3cfeb84675e6963642b49a9b49dea0925331e1b26a51cf710b654581ad",
+    "source-observations.json": "d4484103b551c7074641ec069b2a3f45ea08f8577b56cd94836562533ce44d4f",
+    "sources/afrs-prefilter.pdf": "3022dbacfaac86cdd1d8a76b1d6c4a4536e86e2e6d783e2765e96cbafc2aed55",
+    "sources/afrs-prefilter.txt": "a379c670ea77dc02b292bcfe4a33aeb111e1d8ff4255d3c73212ac16db05eeb7",
+    "substitution-matrix.json": "88ad9a392b7256a3aac572ee6d3031dc33ea914d299881ac8183a3c5b75ddd47"
+  }
+}

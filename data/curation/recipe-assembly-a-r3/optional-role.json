@@ -1,0 +1,129 @@
+{
+  "gate_scope_ru": "Наличие слова о необязательности не закрывает общий критерий: нужны точная масса, совместимая форма и готовое семейство. Выбор внутри смеси не даёт права опускать произвольный её компонент. Вода для обработки и спрей не считаются пищевой ролью.",
+  "roles": [
+    {
+      "candidate_id": "R3-01",
+      "component_kind": "FOOD_COMPONENT",
+      "full_component_review": "NOT_ESTABLISHED",
+      "name_ru": "Грецкие орехи",
+      "quantity_refs": [
+        "R3-01:WALNUTS"
+      ],
+      "semantics": "OPTIONAL",
+      "source_semantics_ref": "source-observations.json:R3-01"
+    },
+    {
+      "candidate_id": "R3-02",
+      "component_kind": "FOOD_COMPONENT",
+      "full_component_review": "NOT_ESTABLISHED",
+      "name_ru": "Овощной гарнир",
+      "quantity_refs": [
+        "R3-02:GREEN_PEPPER",
+        "R3-02:TOMATO"
+      ],
+      "semantics": "OPTIONAL",
+      "source_semantics_ref": "source-observations.json:R3-02"
+    },
+    {
+      "candidate_id": "R3-03",
+      "component_kind": "FOOD_COMPONENT",
+      "full_component_review": "NOT_ESTABLISHED",
+      "name_ru": "Масло для овощей",
+      "quantity_refs": [
+        "R3-03:BUTTER_OR_MARGARINE"
+      ],
+      "semantics": "OPTIONAL",
+      "source_semantics_ref": "source-observations.json:R3-03"
+    },
+    {
+      "candidate_id": "R3-04",
+      "component_kind": "FOOD_COMPONENT",
+      "full_component_review": "NOT_ESTABLISHED",
+      "name_ru": "Смесь пряностей",
+      "quantity_refs": [
+        "R3-04:CINNAMON",
+        "R3-04:NUTMEG"
+      ],
+      "semantics": "OPTIONAL_GROUP",
+      "source_semantics_ref": "source-observations.json:R3-04"
+    },
+    {
+      "candidate_id": "R3-05",
+      "component_kind": null,
+      "full_component_review": "NOT_ESTABLISHED",
+      "name_ru": "Необязательного компонента нет",
+      "quantity_refs": [],
+      "semantics": "ABSENT",
+      "source_semantics_ref": "source-observations.json:R3-05"
+    },
+    {
+      "candidate_id": "R3-06",
+      "component_kind": "FOOD_COMPONENT",
+      "full_component_review": "NOT_ESTABLISHED",
+      "name_ru": "Зелёный перец",
+      "quantity_refs": [
+        "R3-06:GREEN_PEPPER"
+      ],
+      "semantics": "OPTIONAL",
+      "source_semantics_ref": "source-observations.json:R3-06"
+    },
+    {
+      "candidate_id": "R3-07",
+      "component_kind": "FOOD_COMPONENT",
+      "full_component_review": "NOT_ESTABLISHED",
+      "name_ru": "Поджаренный миндаль",
+      "quantity_refs": [
+        "R3-07:TOASTED_ALMONDS"
+      ],
+      "semantics": "OPTIONAL",
+      "source_semantics_ref": "source-observations.json:R3-07"
+    },
+    {
+      "candidate_id": "R3-08",
+      "component_kind": "FOOD_COMPONENT",
+      "full_component_review": "NOT_ESTABLISHED",
+      "name_ru": "Грецкие орехи",
+      "quantity_refs": [
+        "R3-08:WALNUTS"
+      ],
+      "semantics": "OPTIONAL",
+      "source_semantics_ref": "source-observations.json:R3-08"
+    },
+    {
+      "candidate_id": "R3-09",
+      "component_kind": "FOOD_COMPONENT",
+      "full_component_review": "NOT_ESTABLISHED",
+      "name_ru": "Мускатный орех или отдельная добавка сухофруктов",
+      "quantity_refs": [],
+      "semantics": "OPTIONAL_GROUP",
+      "source_semantics_ref": "source-observations.json:R3-09"
+    },
+    {
+      "candidate_id": "R3-10",
+      "component_kind": "FOOD_COMPONENT",
+      "full_component_review": "NOT_ESTABLISHED",
+      "name_ru": "Лимон и приправы",
+      "quantity_refs": [],
+      "semantics": "OPTIONAL",
+      "source_semantics_ref": "source-observations.json:R3-10"
+    },
+    {
+      "candidate_id": "R3-11",
+      "component_kind": "FOOD_COMPONENT",
+      "full_component_review": "NOT_ESTABLISHED",
+      "name_ru": "Смесь пряностей",
+      "quantity_refs": [],
+      "semantics": "OPTIONAL_GROUP",
+      "source_semantics_ref": "source-observations.json:R3-11"
+    },
+    {
+      "candidate_id": "R3-12",
+      "component_kind": "FOOD_COMPONENT",
+      "full_component_review": "NOT_ESTABLISHED",
+      "name_ru": "Петрушка",
+      "quantity_refs": [],
+      "semantics": "OPTIONAL",
+      "source_semantics_ref": "source-observations.json:R3-12"
+    }
+  ]
+}

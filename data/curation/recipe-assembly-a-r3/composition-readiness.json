@@ -1,0 +1,164 @@
+{
+  "expected_composition_count": 63,
+  "expected_food_count": 185,
+  "inventory_ref": "catalogue-inventory.json",
+  "pin_semantics_ru": "Сопоставляются код, русское имя, версия состава, состояние входа, вид и точные атрибуты профиля. Случайные идентификаторы одноразовой базы не являются постоянными ключами. Наличие состава у похожего продукта не разрешает другую форму.",
+  "witnesses": [
+    {
+      "candidate_id": "R3-01",
+      "required_witnesses": [
+        {
+          "food_code": "BROCCOLI",
+          "form_compatible": true,
+          "reason_ru": "Для брокколи нет текущей версии состава.",
+          "source_form": "BROCCOLI,FRESH,BUNCH"
+        }
+      ]
+    },
+    {
+      "candidate_id": "R3-02",
+      "required_witnesses": [
+        {
+          "food_code": "TURKEY_GROUND_93",
+          "form_compatible": false,
+          "reason_ru": "Девяносто процентов постного мяса не совпадают с существующим фаршем девяносто три процента; версии состава также нет.",
+          "source_form": "TURKEY,GROUND,90% LEAN,RAW"
+        }
+      ]
+    },
+    {
+      "candidate_id": "R3-03",
+      "required_witnesses": [
+        {
+          "food_code": null,
+          "form_compatible": false,
+          "reason_ru": "Нет точной идентичности прессованных сушёных овощей.",
+          "source_form": "Beans, green, dehydrated, compressed"
+        }
+      ]
+    },
+    {
+      "candidate_id": "R3-04",
+      "required_witnesses": [
+        {
+          "food_code": "SWEET_POTATO",
+          "form_compatible": false,
+          "reason_ru": "Консервированный батат в сиропе не равен существующему сырому батату.",
+          "source_form": "SWEET POTATOES,CANNED,W/SYRUP"
+        }
+      ]
+    },
+    {
+      "candidate_id": "R3-05",
+      "required_witnesses": [
+        {
+          "food_code": "TOMATO_CANNED_NO_SALT",
+          "form_compatible": false,
+          "reason_ru": "Слитая масса консервированных томатов не совпадает с принятой формой несолёных консервированных томатов с жидкостью.",
+          "source_form": "TOMATOES,CANNED,DICED,DRAINED"
+        }
+      ]
+    },
+    {
+      "candidate_id": "R3-06",
+      "required_witnesses": [
+        {
+          "food_code": "VINEGAR_WHITE",
+          "form_compatible": true,
+          "reason_ru": "Нет текущего состава белого уксуса.",
+          "source_form": "Vinegar, white"
+        },
+        {
+          "food_code": "MUSTARD_GROUND",
+          "form_compatible": true,
+          "reason_ru": "Нет текущего состава сухой горчицы.",
+          "source_form": "Mustard, dry"
+        }
+      ]
+    },
+    {
+      "candidate_id": "R3-07",
+      "required_witnesses": [
+        {
+          "food_code": "RICE_WHITE",
+          "form_compatible": true,
+          "reason_ru": "У белого риса нет текущей версии состава.",
+          "source_form": "Enriched white rice, long grain, regular"
+        },
+        {
+          "food_code": null,
+          "form_compatible": false,
+          "reason_ru": "Сок не равен целому апельсину; форма ранее отложена.",
+          "source_form": "Orange juice"
+        }
+      ]
+    },
+    {
+      "candidate_id": "R3-08",
+      "required_witnesses": [
+        {
+          "food_code": null,
+          "form_compatible": false,
+          "reason_ru": "Нет точной текущей идентичности и состава сухого обезжиренного молока.",
+          "source_form": "Milk, nonfat, dry"
+        }
+      ]
+    },
+    {
+      "candidate_id": "R3-09",
+      "required_witnesses": [
+        {
+          "food_code": "CARROT",
+          "form_compatible": false,
+          "reason_ru": "Сырая морковь не подтверждает состав консервированной или замороженной моркови.",
+          "source_form": "Carrots, canned sliced drained OR frozen sliced"
+        },
+        {
+          "food_code": "CORNSTARCH",
+          "form_compatible": true,
+          "reason_ru": "Для кукурузного крахмала нет текущей версии состава.",
+          "source_form": "Cornstarch"
+        }
+      ]
+    },
+    {
+      "candidate_id": "R3-10",
+      "required_witnesses": [
+        {
+          "food_code": null,
+          "form_compatible": false,
+          "reason_ru": "Нет однозначного состава выбранной смеси и точных масс отдельных продуктов.",
+          "source_form": "Eight cups of a seasonal vegetable mixture"
+        }
+      ]
+    },
+    {
+      "candidate_id": "R3-11",
+      "required_witnesses": [
+        {
+          "food_code": "SWEET_POTATO",
+          "form_compatible": true,
+          "reason_ru": "Штучная мера не даёт точной массы съедобной части.",
+          "source_form": "Four medium sweet potatoes"
+        }
+      ]
+    },
+    {
+      "candidate_id": "R3-12",
+      "required_witnesses": [
+        {
+          "food_code": "CUCUMBER",
+          "form_compatible": true,
+          "reason_ru": "Нет текущего состава огурца.",
+          "source_form": "Cucumbers"
+        },
+        {
+          "food_code": "VINEGAR_WHITE",
+          "form_compatible": true,
+          "reason_ru": "Нет текущего состава белого уксуса.",
+          "source_form": "White vinegar"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "retention_policy_ru": "Нулевой хеш означает недоступность исходных байтов, а не отсутствие контроля пакета. Собственные фактические записи хешируются отдельно. Не смешивать старые школьные карточки с более поздними версиями.",
+  "sources": [
+    {
+      "access": "RETAINED_PRIMARY_PDF",
+      "author": "U.S. armed services; federal AFRS",
+      "host": "U.S. Marine Corps",
+      "id": "AFRS-2003",
+      "lineage_ref": "../recipe-assembly-a-r2/sources/afrs-full-excerpt.pdf",
+      "notice_ru": "Издание июня две тысячи третьего года; технические даты создания файла не заменяют редакцию. Применимость общего раздела и федеральное происхождение сохранены в принятом пакете второго исследования.",
+      "original_bytes": 10602998,
+      "original_filename": "afrs-full.pdf",
+      "original_sha256": "2f6795b5fc39b167fb2913bfccb720948dd257f6a90ca3fa7e228d7fb87ec090",
+      "pages": [
+        1214,
+        1329,
+        1457,
+        1612,
+        1345
+      ],
+      "retained_pdf": "sources/afrs-prefilter.pdf",
+      "retained_text": "sources/afrs-prefilter.txt",
+      "retrieved_on": "2026-09-12",
+      "title": "Armed Forces Recipe Service; MCO P10110.42B",
+      "url": "https://www.marines.mil/portals/1/Publications/MCO%20P10110.42B.pdf",
+      "version": "June 2003"
+    },
+    {
+      "access": "PRIMARY_PUBLISHER_INDEXED_TEXT",
+      "author": "USDA attribution on indexed card; not fully resolved",
+      "full_artifact_reviewed": false,
+      "host": "ICN, University of Mississippi",
+      "id": "SOURCE-06",
+      "notice_ru": "Полный исходный файл не сохранён; контрольная сумма оригинала неизвестна. Фактическое наблюдение ограничено текстом первичного издателя в поисковом индексе. Не принято как основание для публикации шаблона.",
+      "original_bytes": null,
+      "original_filename": null,
+      "original_sha256": null,
+      "retrieved_on": "2026-09-12",
+      "title": "Creamy Cole Slaw",
+      "url": "https://theicn.org/resources/323/usda-recipes-for-schools/105516/creamy-cole-slaw-e-06.pdf",
+      "version": "E-06"
+    },
+    {
+      "access": "PRIMARY_PUBLISHER_INDEXED_TEXT",
+      "author": "USDA attribution on indexed card; not fully resolved",
+      "full_artifact_reviewed": false,
+      "host": "ICN, University of Mississippi",
+      "id": "SOURCE-07",
+      "notice_ru": "Полный исходный файл не сохранён; контрольная сумма оригинала неизвестна. Фактическое наблюдение ограничено текстом первичного издателя в поисковом индексе. Не принято как основание для публикации шаблона.",
+      "original_bytes": null,
+      "original_filename": null,
+      "original_sha256": null,
+      "retrieved_on": "2026-09-12",
+      "title": "Orange Rice Pilaf",
+      "url": "https://theicn.org/resources/323/usda-recipes-for-schools/105437/all-recipes_number.pdf",
+      "version": "B-21; legacy school 50/100"
+    },
+    {
+      "access": "PRIMARY_PUBLISHER_INDEXED_TEXT",
+      "author": "USDA attribution on indexed card; not fully resolved",
+      "full_artifact_reviewed": false,
+      "host": "ICN, University of Mississippi",
+      "id": "SOURCE-08",
+      "notice_ru": "Полный исходный файл не сохранён; контрольная сумма оригинала неизвестна. Фактическое наблюдение ограничено текстом первичного издателя в поисковом индексе. Не принято как основание для публикации шаблона.",
+      "original_bytes": null,
+      "original_filename": null,
+      "original_sha256": null,
+      "retrieved_on": "2026-09-12",
+      "title": "Banana Bread Squares",
+      "url": "https://theicn.org/resources/265/usda-recipes-for-child-care/107453/banana-bread-squares.pdf",
+      "version": "A-13; legacy childcare 25/50"
+    },
+    {
+      "access": "PRIMARY_PDF_TEXT",
+      "author": "NFSMI, University of Mississippi; USDA/FNS grant; recipe credit USDA 2005",
+      "full_artifact_reviewed": true,
+      "host": "ICN, University of Mississippi",
+      "id": "SOURCE-09",
+      "notice_ru": "Прочитан двухстраничный выпуск с рецептом на второй странице. Текстовый доступ к первичному документу; исходные байты не получены. Финансирование министерством не доказывает федеральное авторство.",
+      "original_bytes": null,
+      "original_filename": null,
+      "original_sha256": null,
+      "pages": [
+        2
+      ],
+      "retrieved_on": "2026-09-12",
+      "title": "Orange Glazed Carrots",
+      "url": "https://theicn.org/documentlibraryfiles/PDF/20080609021854.pdf",
+      "version": "I-12A; Mealtime Memo No. 8, 2007"
+    },
+    {
+      "access": "PRIMARY_PUBLISHER_INDEXED_TEXT",
+      "author": "University of Maine Extension; adaptation with permission from University of Kentucky Extension and Rob Dumas",
+      "full_artifact_reviewed": false,
+      "host": "University of Maine",
+      "id": "SOURCE-10",
+      "notice_ru": "Полный исходный файл не сохранён; контрольная сумма оригинала неизвестна. Фактическое наблюдение ограничено текстом первичного издателя в поисковом индексе. Не принято как основание для публикации шаблона.",
+      "original_bytes": null,
+      "original_filename": null,
+      "original_sha256": null,
+      "retrieved_on": "2026-09-12",
+      "title": "Seasonal Roasted Vegetables",
+      "url": "https://extension.umaine.edu/food-health/recipes/roasted-vegetables/",
+      "version": "University of Maine Extension; undated web recipe"
+    },
+    {
+      "access": "DOWNLOADED_PRIMARY_PDF",
+      "author": "SDSU Extension lesson; recipe credited to University of Arkansas Extension FCS727",
+      "full_artifact_reviewed": true,
+      "host": "South Dakota State University",
+      "id": "SOURCE-11",
+      "notice_ru": "Авторство урока и кредит рецепта различаются. Разрешение на повторную публикацию и применимость кухонной стандартизации не установлены. В пакет включены только фактические наблюдения; оформление, фотографии и текст урока не копируются.",
+      "original_bytes": 24806966,
+      "original_filename": "sweet-fries.pdf",
+      "original_sha256": "9ca2c7ab2af2afcadfccb097abf4dc2138823569b3927998f2a0d2989ba19d46",
+      "pages": [
+        5,
+        11
+      ],
+      "retrieved_on": "2026-09-12",
+      "title": "Sweet Potato Oven Fries",
+      "url": "https://extension.sdstate.edu/sites/default/files/2024-06/S-0001-38-Sweet_Potato-Schools_Adults.pdf",
+      "version": "SDSU lesson 2024; recipe p. 11; Arkansas FCS727 credit"
+    },
+    {
+      "access": "PRIMARY_WEB_TEXT",
+      "author": "Administration for Community Living page; exact recipe author not established",
+      "full_artifact_reviewed": false,
+      "host": "U.S. ACL",
+      "id": "SOURCE-12",
+      "notice_ru": "Прочитан раздел салата с огурцами и помидорами. Исходный файл страницы не сохранён; автор конкретного рецепта и кухонная стандартизация не установлены.",
+      "original_bytes": null,
+      "original_filename": null,
+      "original_sha256": null,
+      "retrieved_on": "2026-09-12",
+      "title": "Cucumber Tomato Salad",
+      "url": "https://olderindians.acl.gov/recipessalads",
+      "version": "ACL Older Indians; salads page"
+    }
+  ]
+}

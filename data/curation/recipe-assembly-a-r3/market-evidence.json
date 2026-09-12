@@ -1,0 +1,72 @@
+{
+  "accepted_correction_ref": "../recipe-assembly-a-r1/market-evidence.json",
+  "candidates": [
+    {
+      "candidate_id": "R3-01",
+      "decision": "NOT_REVIEWED",
+      "reason_ru": "Предварительный отказ по составу, форме или массе; готовность покупок полного семейства не заявлена."
+    },
+    {
+      "candidate_id": "R3-02",
+      "decision": "NOT_REVIEWED",
+      "reason_ru": "Предварительный отказ по составу, форме или массе; готовность покупок полного семейства не заявлена."
+    },
+    {
+      "candidate_id": "R3-03",
+      "decision": "NOT_REVIEWED",
+      "reason_ru": "Предварительный отказ по составу, форме или массе; готовность покупок полного семейства не заявлена."
+    },
+    {
+      "candidate_id": "R3-04",
+      "decision": "NOT_REVIEWED",
+      "reason_ru": "Предварительный отказ по составу, форме или массе; готовность покупок полного семейства не заявлена."
+    },
+    {
+      "candidate_id": "R3-05",
+      "decision": "NOT_REVIEWED",
+      "reason_ru": "Предварительный отказ по составу, форме или массе; готовность покупок полного семейства не заявлена."
+    },
+    {
+      "candidate_id": "R3-06",
+      "decision": "NOT_REVIEWED",
+      "reason_ru": "Предварительный отказ по составу, форме или массе; готовность покупок полного семейства не заявлена."
+    },
+    {
+      "candidate_id": "R3-07",
+      "decision": "NOT_REVIEWED",
+      "reason_ru": "Предварительный отказ по составу, форме или массе; готовность покупок полного семейства не заявлена."
+    },
+    {
+      "candidate_id": "R3-08",
+      "decision": "NOT_REVIEWED",
+      "reason_ru": "Предварительный отказ по составу, форме или массе; готовность покупок полного семейства не заявлена."
+    },
+    {
+      "candidate_id": "R3-09",
+      "decision": "NOT_REVIEWED",
+      "reason_ru": "Предварительный отказ по составу, форме или массе; готовность покупок полного семейства не заявлена."
+    },
+    {
+      "candidate_id": "R3-10",
+      "decision": "NOT_REVIEWED",
+      "reason_ru": "Предварительный отказ по составу, форме или массе; готовность покупок полного семейства не заявлена."
+    },
+    {
+      "candidate_id": "R3-11",
+      "decision": "NOT_REVIEWED",
+      "reason_ru": "Предварительный отказ по составу, форме или массе; готовность покупок полного семейства не заявлена."
+    },
+    {
+      "candidate_id": "R3-12",
+      "decision": "NOT_REVIEWED",
+      "reason_ru": "Предварительный отказ по составу, форме или массе; готовность покупок полного семейства не заявлена."
+    }
+  ],
+  "fixed_members_ref": "../recipe-assembly-a-r2/market-familiarity-carry-forward.json",
+  "mechanical_three_of_five": false,
+  "new_commodity_exception": false,
+  "new_market_search": false,
+  "policy_ref": "../../../docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+  "ru_available_implies_rare": false,
+  "scope_ru": "Принятые рыночные решения сохраняются только для неизменных форм двух готовых семейств. Свидетельства наличия похожих продуктов не исправляют отсутствующий состав и не переносятся на новые формы."
+}

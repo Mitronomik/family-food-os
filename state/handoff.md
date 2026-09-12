@@ -1,40 +1,44 @@
-# R2 handoff
+# R3 handoff
 
 Updated: `2026-09-12`.
 
-Current authorized operation: RECIPE-ASSEMBLY-A-R2, evidence only, branch
-`codex/recipe-assembly-a-r2`. Exact fetched main/base:
-`8730b9fcfdb56cec2215f7e70319241c83431371`.
-[PR #32](https://github.com/Mitronomik/family-food-os/pull/32) is MERGED;
-GitHub receipt records `2026-09-12T12:36:37Z` and head
-`6bfabf13846a350c3fe38147f4cc452cc1fae72d`.
-R1 is COMPLETE AS BLOCKED RESEARCH, accepted 1/3 (R1-21 only).
+Current authorized operation: RECIPE-ASSEMBLY-A-R3, research/evidence only.
+Branch `codex/recipe-assembly-a-r3`, exact fetched main/base
+`f2b6bc9015a1b892bb533b5d322d981d5a1782bd`.
+[PR #33](https://github.com/Mitronomik/family-food-os/pull/33) is MERGED;
+GitHub receipt records `2026-09-12T14:53:05Z`, accepted R2 head
+`5da808134e7fe7171ece0cc6d34a4b04db5e461f`.
+PR6 COMPLETE; R1/R2 COMPLETE AS BLOCKED RESEARCH. Historical OPEN PR33 wording
+in earlier progress records is superseded by this verified merge.
 
-[R2 package](../data/curation/recipe-assembly-a-r2/README.md) derives Outcome A:
-2/3 individually ready, R1-21 plus the exact 100-portion hot-water hard-cooked
-F00400 method 1. All R1 bytes and the oatmeal decision remain frozen.
-R1-13 rights ACCEPT in RIGHTS-FACTS scope and fresh minced garlic mass resolved;
-water + regular long-grain brown rice still lacks exact variant kitchen/process
-applicability. Table 27 oz differs from step 3's 29 oz per pan. No substitution
-passes both full branches; no reviewed optional component role. Final three = [].
+[R3 evidence](../data/curation/recipe-assembly-a-r3/README.md): bounded funnel
+exhausted at 12 preliminary candidates, zero passed the prefilter, zero deep
+reviews. No third candidate selected. R3 BLOCKED, individually ready 2/3,
+selected final three = []. Optional-role and verified-substitution gates OPEN.
+R1/R2 packages are byte-identical to main, including exact 100-portion E00100
+and exact 100-portion F00400 method 1. No broadening or household claim.
 
-Assembly A remains BLOCKED. Assembly B and PR7+ NOT STARTED. Production
-FoodIngredient/profile/vector/Composition/mass rows/RecipeVersion/runtime/seed
-are unchanged; migration remains 0029. No full backend regression is required.
-The [progress record](progress.md#recipe-assembly-a-r2--targeted-recovery) owns
-executed checks. The auditor is read-only; its database is disposable and uses
-`AI_ENABLED=false`. Full original PDFs are optional external inputs to
-`--source-dir`; hashes and necessary primary excerpts are retained in the package.
-No machine-specific download paths belong to the repository.
+The strongest structural near-hit, AFRS N50200, publishes optional green pepper
+OR tomato garnish with separate 2 lb EP weights. Both whole recipe branches
+still fail the shared required base: 90% lean turkey is not the current 93%
+concept, and the required Composition path is missing. None of the other donors
+passes current identity/form/Composition/exact-mass prefilter conditions.
+Institutional hosting, video or lesson instructions do not prove variant testing.
+No existing R1 near-miss was repaired, and the search must not be enlarged.
 
-Next allowed action: final review of the published bounded R2 PR, then stop. Do not merge,
-search another donor, repair food data or implement templates automatically.
-Prior detailed handoffs remain in Git history at the accepted base; their OPEN
-PR32/current R1 statements are superseded by this record. Unrelated `.DS_Store`
-is excluded from staging and delivery.
+Five exact AFRS pages are retained from the same June 2003 source as R2.
+The SDSU original PDF is hashed; only factual observations are republished.
+Some ICN and Maine observations are primary-publisher indexed text, not full
+artifact retrieval; unavailable original hashes remain null. Rights for those
+sources remain DEFER, and no new template publication is authorized.
 
+Production runtime/data/schema/seed/API/frontend remain unchanged, migration
+0029. Assembly A BLOCKED; B/PR7+ NOT STARTED. The read-only R3 auditor checks
+frozen evidence, full source hashes when supplied, partial-candidate blockers,
+collective derivation and adversarial guards. DB replay uses a disposable
+accepted DB and `AI_ENABLED=false`. Executed checks belong in
+[progress](progress.md#recipe-assembly-a-r3--third-family-closure).
 
-Delivery: [PR #33](https://github.com/Mitronomik/family-food-os/pull/33),
-OPEN into main, not merged. Evidence commit:
-`bb9254143f2449eeb0e7786ce1f06af91afbe517`.
-R2 evidence READY FOR REVIEW; Assembly A BLOCKED. Stop for review.
+Next allowed action: deliver and review the R3 PR, then stop. No autonomous merge,
+new donor search, data repair, RecipeTemplate schema or migration 0030.
+Unrelated `.DS_Store` remains excluded from staging and delivery.

@@ -610,3 +610,29 @@ These are evidence decisions, not changes to canonical nutrition/composition,
 accepted R1 bytes, production data, schema or runtime. Migration stays 0029.
 Assembly A remains BLOCKED; Assembly B / PR7+ NOT STARTED. Stop for R2 review.
 Resume implementation (0030) only after separate explicit authorization.
+
+
+### RECIPE-ASSEMBLY-A-R3 — Third-Family Closure
+
+2026-09-12. PR33 is MERGED at `f2b6bc9015a1b892bb533b5d322d981d5a1782bd`.
+R1 and R2 are COMPLETE AS BLOCKED RESEARCH. The user authorized only a bounded
+third-family evidence search; both accepted packages and the exact 100-portion
+E00100 / F00400 method 1 decisions remain byte-for-byte unchanged.
+
+[R3 evidence](../../data/curation/recipe-assembly-a-r3/README.md) exhausts the
+12-candidate prefilter; none passes, so zero deep reviews occur. R3 BLOCKED,
+2/3 individually ready; third candidate null and selected final three empty.
+AFRS N50200 supplies explicit optional pepper/tomato garnish with separate
+2 lb EP masses, but both full recipe branches retain incompatible turkey form
+and missing required Composition. Source OR and exact garnish weights do not
+close a substitution when the shared required base fails. Other candidates fail
+current form/Composition or exact masses. Unreviewed rights/testing/market gates
+remain unreviewed; they are not inferred from hosting or a recipe title.
+
+The final-three family-count, optional-role and verified-substitution gates
+remain OPEN. Other passing aggregate gates apply only to the two fixed members.
+No source text semantics, market exception, food identity or production data is
+relaxed. Migration stays 0029. Assembly A remains BLOCKED, not COMPLETE; B/PR7+
+NOT STARTED. Stop for R3 review. No further search, food repair or implementation
+is automatically authorized; any later Assembly A implementation with 0030
+requires separate explicit authorization.

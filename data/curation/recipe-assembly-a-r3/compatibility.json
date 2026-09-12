@@ -1,0 +1,125 @@
+{
+  "candidates": [
+    {
+      "candidate_id": "R3-01",
+      "complete_review": false,
+      "cooked_output_mass_g": null,
+      "household_scaling_verified": false,
+      "ordered_process_ru": [],
+      "process_status_ru": "Полная последовательность для публикации не утверждена: кандидат отклонён на предварительном этапе.",
+      "restriction_ru": "В составе обязательны брокколи, заправка, изюм, сухое молоко и уксус; совместимость всего состава не установлена.",
+      "yield_or_retention_claim": false
+    },
+    {
+      "candidate_id": "R3-02",
+      "complete_review": false,
+      "cooked_output_mass_g": null,
+      "household_scaling_verified": false,
+      "ordered_process_ru": [],
+      "process_status_ru": "Полная последовательность для публикации не утверждена: кандидат отклонён на предварительном этапе.",
+      "restriction_ru": "Дополнительно не закрыты моцарелла, булочка, белый перец, сухая горчица и соус. Точные массы гарнира не исправляют основу.",
+      "yield_or_retention_claim": false
+    },
+    {
+      "candidate_id": "R3-03",
+      "complete_review": false,
+      "cooked_output_mass_g": null,
+      "household_scaling_verified": false,
+      "ordered_process_ru": [],
+      "process_status_ru": "Полная последовательность для публикации не утверждена: кандидат отклонён на предварительном этапе.",
+      "restriction_ru": "Общая инструкция содержит разные овощи; принадлежность к одному семейству и точная масса воды не доказаны.",
+      "yield_or_retention_claim": false
+    },
+    {
+      "candidate_id": "R3-04",
+      "complete_review": false,
+      "cooked_output_mass_g": null,
+      "household_scaling_verified": false,
+      "ordered_process_ru": [],
+      "process_status_ru": "Полная последовательность для публикации не утверждена: кандидат отклонён на предварительном этапе.",
+      "restriction_ru": "Сухое молоко, коричневый сахар и мускатный орех также не имеют нужного состава; форма сливочного масла не уточнена.",
+      "yield_or_retention_claim": false
+    },
+    {
+      "candidate_id": "R3-05",
+      "complete_review": false,
+      "cooked_output_mass_g": null,
+      "household_scaling_verified": false,
+      "ordered_process_ru": [],
+      "process_status_ru": "Полная последовательность для публикации не утверждена: кандидат отклонён на предварительном этапе.",
+      "restriction_ru": "Для консервированного халапеньо нет состава. Карточка не разрешает необязательный пищевой компонент.",
+      "yield_or_retention_claim": false
+    },
+    {
+      "candidate_id": "R3-06",
+      "complete_review": false,
+      "cooked_output_mass_g": null,
+      "household_scaling_verified": false,
+      "ordered_process_ru": [],
+      "process_status_ru": "Полная последовательность для публикации не утверждена: кандидат отклонён на предварительном этапе.",
+      "restriction_ru": "Семена сельдерея и сниженная по калорийности салатная заправка не имеют подходящей текущей идентичности и состава.",
+      "yield_or_retention_claim": false
+    },
+    {
+      "candidate_id": "R3-07",
+      "complete_review": false,
+      "cooked_output_mass_g": null,
+      "household_scaling_verified": false,
+      "ordered_process_ru": [],
+      "process_status_ru": "Полная последовательность для публикации не утверждена: кандидат отклонён на предварительном этапе.",
+      "restriction_ru": "Поджаренный нарезанный миндаль не равен сырому миндалю на входе. Это старая школьная карточка, не вариант с бурым рисом две тысячи девятнадцатого года.",
+      "yield_or_retention_claim": false
+    },
+    {
+      "candidate_id": "R3-08",
+      "complete_review": false,
+      "cooked_output_mass_g": null,
+      "household_scaling_verified": false,
+      "ordered_process_ru": [],
+      "process_status_ru": "Полная последовательность для публикации не утверждена: кандидат отклонён на предварительном этапе.",
+      "restriction_ru": "Свежие яйца указаны в штуках; замороженное цельное яйцо не равно текущей сырой форме. Жир для выпечки, разрыхлитель и неуказанная масса спрея также не закрыты.",
+      "yield_or_retention_claim": false
+    },
+    {
+      "candidate_id": "R3-09",
+      "complete_review": false,
+      "cooked_output_mass_g": null,
+      "household_scaling_verified": false,
+      "ordered_process_ru": [],
+      "process_status_ru": "Полная последовательность для публикации не утверждена: кандидат отклонён на предварительном этапе.",
+      "restriction_ru": "Оба варианта моркови и необязательные добавки заданы мерами без принятого точного перевода в граммы.",
+      "yield_or_retention_claim": false
+    },
+    {
+      "candidate_id": "R3-10",
+      "complete_review": false,
+      "cooked_output_mass_g": null,
+      "household_scaling_verified": false,
+      "ordered_process_ru": [],
+      "process_status_ru": "Полная последовательность для публикации не утверждена: кандидат отклонён на предварительном этапе.",
+      "restriction_ru": "Восемь чашек произвольной смеси овощей и четыре зубчика чеснока не образуют точной массы входа. Видео не доказывает стандартизацию всех вариантов.",
+      "yield_or_retention_claim": false
+    },
+    {
+      "candidate_id": "R3-11",
+      "complete_review": false,
+      "cooked_output_mass_g": null,
+      "household_scaling_verified": false,
+      "ordered_process_ru": [],
+      "process_status_ru": "Полная последовательность для публикации не утверждена: кандидат отклонён на предварительном этапе.",
+      "restriction_ru": "Спрей без массы; необязательная смесь пряностей без точной массы. Задание преподавателю показать оба варианта не является протоколом их проверки.",
+      "yield_or_retention_claim": false
+    },
+    {
+      "candidate_id": "R3-12",
+      "complete_review": false,
+      "cooked_output_mass_g": null,
+      "household_scaling_verified": false,
+      "ordered_process_ru": [],
+      "process_status_ru": "Полная последовательность для публикации не утверждена: кандидат отклонён на предварительном этапе.",
+      "restriction_ru": "У необязательной петрушки после половины отсутствует единица меры; овощи заданы штуками. Федеральный хост сам по себе не доказывает стандартизацию.",
+      "yield_or_retention_claim": false
+    }
+  ],
+  "frozen_scope_ref": "../recipe-assembly-a-r2/final-readiness.json"
+}

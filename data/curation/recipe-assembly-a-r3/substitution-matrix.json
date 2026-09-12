@@ -1,0 +1,366 @@
+{
+  "paths": [
+    {
+      "branches": [],
+      "candidate_id": "R3-01",
+      "explanation_ru": "Явная замена не установлена.",
+      "family_provenance": "NOT_ESTABLISHED",
+      "source_ref": "source-observations.json:R3-01",
+      "source_rule": "ABSENT",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "branches": [
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Зелёный перец",
+          "process_compatible": null,
+          "rights": "ACCEPT",
+          "russian_display": true
+        },
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Томат",
+          "process_compatible": null,
+          "rights": "ACCEPT",
+          "russian_display": true
+        }
+      ],
+      "candidate_id": "R3-02",
+      "explanation_ru": "Источник разрешает замену, но независимо проверенные полные ветки не получены.",
+      "family_provenance": "SAME_PUBLISHED_PREPARATION",
+      "source_ref": "source-observations.json:R3-02",
+      "source_rule": "EXPLICIT_REPLACEMENT",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "branches": [
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Сливочное масло",
+          "process_compatible": null,
+          "rights": "ACCEPT",
+          "russian_display": true
+        },
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Маргарин",
+          "process_compatible": null,
+          "rights": "ACCEPT",
+          "russian_display": true
+        }
+      ],
+      "candidate_id": "R3-03",
+      "explanation_ru": "Источник разрешает замену, но независимо проверенные полные ветки не получены.",
+      "family_provenance": "NOT_ESTABLISHED",
+      "source_ref": "source-observations.json:R3-03",
+      "source_rule": "EXPLICIT_REPLACEMENT",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "branches": [
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Сливочное масло",
+          "process_compatible": null,
+          "rights": "ACCEPT",
+          "russian_display": true
+        },
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Маргарин",
+          "process_compatible": null,
+          "rights": "ACCEPT",
+          "russian_display": true
+        }
+      ],
+      "candidate_id": "R3-04",
+      "explanation_ru": "Источник разрешает замену, но независимо проверенные полные ветки не получены.",
+      "family_provenance": "SAME_PUBLISHED_PREPARATION",
+      "source_ref": "source-observations.json:R3-04",
+      "source_rule": "EXPLICIT_REPLACEMENT",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "branches": [
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Слитые консервированные томаты",
+          "process_compatible": null,
+          "rights": "ACCEPT",
+          "russian_display": true
+        },
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Свежие томаты",
+          "process_compatible": null,
+          "rights": "ACCEPT",
+          "russian_display": true
+        }
+      ],
+      "candidate_id": "R3-05",
+      "explanation_ru": "Источник разрешает замену, но независимо проверенные полные ветки не получены.",
+      "family_provenance": "SAME_PUBLISHED_PREPARATION",
+      "source_ref": "source-observations.json:R3-05",
+      "source_rule": "EXPLICIT_REPLACEMENT",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "branches": [
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Заправка сниженной калорийности",
+          "process_compatible": null,
+          "rights": "DEFER",
+          "russian_display": true
+        },
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Майонез пониженной жирности",
+          "process_compatible": null,
+          "rights": "DEFER",
+          "russian_display": true
+        }
+      ],
+      "candidate_id": "R3-06",
+      "explanation_ru": "Источник разрешает замену, но независимо проверенные полные ветки не получены.",
+      "family_provenance": "SAME_PUBLISHED_PREPARATION",
+      "source_ref": "source-observations.json:R3-06",
+      "source_rule": "EXPLICIT_REPLACEMENT",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "branches": [
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Обычный белый рис",
+          "process_compatible": null,
+          "rights": "DEFER",
+          "russian_display": true
+        },
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Пропаренный белый рис",
+          "process_compatible": null,
+          "rights": "DEFER",
+          "russian_display": true
+        }
+      ],
+      "candidate_id": "R3-07",
+      "explanation_ru": "Источник разрешает замену, но независимо проверенные полные ветки не получены.",
+      "family_provenance": "SAME_PUBLISHED_PREPARATION",
+      "source_ref": "source-observations.json:R3-07",
+      "source_rule": "EXPLICIT_REPLACEMENT",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "branches": [
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Размороженное цельное яйцо",
+          "process_compatible": null,
+          "rights": "DEFER",
+          "russian_display": true
+        },
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Свежее крупное яйцо",
+          "process_compatible": null,
+          "rights": "DEFER",
+          "russian_display": true
+        }
+      ],
+      "candidate_id": "R3-08",
+      "explanation_ru": "Источник разрешает замену, но независимо проверенные полные ветки не получены.",
+      "family_provenance": "SAME_PUBLISHED_PREPARATION",
+      "source_ref": "source-observations.json:R3-08",
+      "source_rule": "EXPLICIT_REPLACEMENT",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "branches": [
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Консервированная морковь",
+          "process_compatible": null,
+          "rights": "DEFER",
+          "russian_display": true
+        },
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Замороженная морковь",
+          "process_compatible": null,
+          "rights": "DEFER",
+          "russian_display": true
+        }
+      ],
+      "candidate_id": "R3-09",
+      "explanation_ru": "Источник разрешает замену, но независимо проверенные полные ветки не получены.",
+      "family_provenance": "SAME_PUBLISHED_PREPARATION",
+      "source_ref": "source-observations.json:R3-09",
+      "source_rule": "EXPLICIT_REPLACEMENT",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "branches": [
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Рапсовое масло",
+          "process_compatible": null,
+          "rights": "DEFER",
+          "russian_display": true
+        },
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Оливковое масло",
+          "process_compatible": null,
+          "rights": "DEFER",
+          "russian_display": true
+        }
+      ],
+      "candidate_id": "R3-10",
+      "explanation_ru": "Источник разрешает замену, но независимо проверенные полные ветки не получены.",
+      "family_provenance": "SAME_PUBLISHED_PREPARATION",
+      "source_ref": "source-observations.json:R3-10",
+      "source_rule": "EXPLICIT_REPLACEMENT",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "branches": [
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Рапсовое масло",
+          "process_compatible": null,
+          "rights": "DEFER",
+          "russian_display": true
+        },
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Оливковое масло",
+          "process_compatible": null,
+          "rights": "DEFER",
+          "russian_display": true
+        }
+      ],
+      "candidate_id": "R3-11",
+      "explanation_ru": "Источник разрешает замену, но независимо проверенные полные ветки не получены.",
+      "family_provenance": "SAME_PUBLISHED_PREPARATION",
+      "source_ref": "source-observations.json:R3-11",
+      "source_rule": "EXPLICIT_REPLACEMENT",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "branches": [
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Белый уксус",
+          "process_compatible": null,
+          "rights": "DEFER",
+          "russian_display": true
+        },
+        {
+          "complete_recipe_review": false,
+          "composition_complete": false,
+          "exact_mass_complete": false,
+          "kitchen_status": "NOT_ESTABLISHED",
+          "market_status": "NOT_REVIEWED",
+          "name_ru": "Красный винный уксус",
+          "process_compatible": null,
+          "rights": "DEFER",
+          "russian_display": true
+        }
+      ],
+      "candidate_id": "R3-12",
+      "explanation_ru": "Источник разрешает замену, но независимо проверенные полные ветки не получены.",
+      "family_provenance": "SAME_PUBLISHED_PREPARATION",
+      "source_ref": "source-observations.json:R3-12",
+      "source_rule": "EXPLICIT_REPLACEMENT",
+      "status": "NOT_ESTABLISHED"
+    }
+  ],
+  "scope_ru": "Зафиксировано по одному наиболее перспективному явному пути из источника; это не принятие остальных перечисленных вариантов. Каждая ветка означает полный рецепт с общими ингредиентами, а не только заменяемый продукт. Перец и томат имеют точные веса, но общая основа индейки не проходит. Разные карточки не объединялись по названию продукта."
+}

@@ -1,0 +1,305 @@
+{
+  "candidates": [
+    {
+      "deep_reviewed": false,
+      "household_scaling_verified": false,
+      "id": "R3-01",
+      "name_ru": "Салат из брокколи",
+      "reason_ru": "В составе обязательны брокколи, заправка, изюм, сухое молоко и уксус; совместимость всего состава не установлена.",
+      "required_inventory_complete": false,
+      "required_mass_complete": false,
+      "required_witnesses": [
+        {
+          "food_code": "BROCCOLI",
+          "form_compatible": true,
+          "reason_ru": "Для брокколи нет текущей версии состава.",
+          "source_form": "BROCCOLI,FRESH,BUNCH"
+        }
+      ],
+      "source_id": "AFRS-2003",
+      "source_title": "Broccoli Salad",
+      "source_variant": "M50400",
+      "stage": "PREFILTER_REJECTED",
+      "tier": 1
+    },
+    {
+      "deep_reviewed": false,
+      "household_scaling_verified": false,
+      "id": "R3-02",
+      "name_ru": "Запечённая котлета из индейки в булочке",
+      "reason_ru": "Дополнительно не закрыты моцарелла, булочка, белый перец, сухая горчица и соус. Точные массы гарнира не исправляют основу.",
+      "required_inventory_complete": false,
+      "required_mass_complete": false,
+      "required_witnesses": [
+        {
+          "food_code": "TURKEY_GROUND_93",
+          "form_compatible": false,
+          "reason_ru": "Девяносто процентов постного мяса не совпадают с существующим фаршем девяносто три процента; версии состава также нет.",
+          "source_form": "TURKEY,GROUND,90% LEAN,RAW"
+        }
+      ],
+      "source_id": "AFRS-2003",
+      "source_title": "Baked Turkey Melt",
+      "source_variant": "N50200",
+      "stage": "PREFILTER_REJECTED",
+      "tier": 1
+    },
+    {
+      "deep_reviewed": false,
+      "household_scaling_verified": false,
+      "id": "R3-03",
+      "name_ru": "Разогрев сушёных прессованных овощей",
+      "reason_ru": "Общая инструкция содержит разные овощи; принадлежность к одному семейству и точная масса воды не доказаны.",
+      "required_inventory_complete": false,
+      "required_mass_complete": false,
+      "required_witnesses": [
+        {
+          "food_code": null,
+          "form_compatible": false,
+          "reason_ru": "Нет точной идентичности прессованных сушёных овощей.",
+          "source_form": "Beans, green, dehydrated, compressed"
+        }
+      ],
+      "source_id": "AFRS-2003",
+      "source_title": "Guidelines for Heating Dehydrated, Compressed Vegetables",
+      "source_variant": "Q-G Vegetables No. 5",
+      "stage": "PREFILTER_REJECTED",
+      "tier": 1
+    },
+    {
+      "deep_reviewed": false,
+      "household_scaling_verified": false,
+      "id": "R3-04",
+      "name_ru": "Батат с молоком и пряностями",
+      "reason_ru": "Сухое молоко, коричневый сахар и мускатный орех также не имеют нужного состава; форма сливочного масла не уточнена.",
+      "required_inventory_complete": false,
+      "required_mass_complete": false,
+      "required_witnesses": [
+        {
+          "food_code": "SWEET_POTATO",
+          "form_compatible": false,
+          "reason_ru": "Консервированный батат в сиропе не равен существующему сырому батату.",
+          "source_form": "SWEET POTATOES,CANNED,W/SYRUP"
+        }
+      ],
+      "source_id": "AFRS-2003",
+      "source_title": "Sweet Potatoes Southern Style",
+      "source_variant": "Q06901",
+      "stage": "PREFILTER_REJECTED",
+      "tier": 1
+    },
+    {
+      "deep_reviewed": false,
+      "household_scaling_verified": false,
+      "id": "R3-05",
+      "name_ru": "Томатный соус с перцем",
+      "reason_ru": "Для консервированного халапеньо нет состава. Карточка не разрешает необязательный пищевой компонент.",
+      "required_inventory_complete": false,
+      "required_mass_complete": false,
+      "required_witnesses": [
+        {
+          "food_code": "TOMATO_CANNED_NO_SALT",
+          "form_compatible": false,
+          "reason_ru": "Слитая масса консервированных томатов не совпадает с принятой формой несолёных консервированных томатов с жидкостью.",
+          "source_form": "TOMATOES,CANNED,DICED,DRAINED"
+        }
+      ],
+      "source_id": "AFRS-2003",
+      "source_title": "Salsa",
+      "source_variant": "O00701",
+      "stage": "PREFILTER_REJECTED",
+      "tier": 1
+    },
+    {
+      "deep_reviewed": false,
+      "household_scaling_verified": false,
+      "id": "R3-06",
+      "name_ru": "Капустный салат со сливочной заправкой",
+      "reason_ru": "Семена сельдерея и сниженная по калорийности салатная заправка не имеют подходящей текущей идентичности и состава.",
+      "required_inventory_complete": false,
+      "required_mass_complete": false,
+      "required_witnesses": [
+        {
+          "food_code": "VINEGAR_WHITE",
+          "form_compatible": true,
+          "reason_ru": "Нет текущего состава белого уксуса.",
+          "source_form": "Vinegar, white"
+        },
+        {
+          "food_code": "MUSTARD_GROUND",
+          "form_compatible": true,
+          "reason_ru": "Нет текущего состава сухой горчицы.",
+          "source_form": "Mustard, dry"
+        }
+      ],
+      "source_id": "SOURCE-06",
+      "source_title": "Creamy Cole Slaw",
+      "source_variant": "E-06",
+      "stage": "PREFILTER_REJECTED",
+      "tier": 2
+    },
+    {
+      "deep_reviewed": false,
+      "household_scaling_verified": false,
+      "id": "R3-07",
+      "name_ru": "Рис с апельсиновым соком",
+      "reason_ru": "Поджаренный нарезанный миндаль не равен сырому миндалю на входе. Это старая школьная карточка, не вариант с бурым рисом две тысячи девятнадцатого года.",
+      "required_inventory_complete": false,
+      "required_mass_complete": false,
+      "required_witnesses": [
+        {
+          "food_code": "RICE_WHITE",
+          "form_compatible": true,
+          "reason_ru": "У белого риса нет текущей версии состава.",
+          "source_form": "Enriched white rice, long grain, regular"
+        },
+        {
+          "food_code": null,
+          "form_compatible": false,
+          "reason_ru": "Сок не равен целому апельсину; форма ранее отложена.",
+          "source_form": "Orange juice"
+        }
+      ],
+      "source_id": "SOURCE-07",
+      "source_title": "Orange Rice Pilaf",
+      "source_variant": "B-21; legacy school 50/100",
+      "stage": "PREFILTER_REJECTED",
+      "tier": 2
+    },
+    {
+      "deep_reviewed": false,
+      "household_scaling_verified": false,
+      "id": "R3-08",
+      "name_ru": "Банановый хлеб порционными кусочками",
+      "reason_ru": "Свежие яйца указаны в штуках; замороженное цельное яйцо не равно текущей сырой форме. Жир для выпечки, разрыхлитель и неуказанная масса спрея также не закрыты.",
+      "required_inventory_complete": false,
+      "required_mass_complete": false,
+      "required_witnesses": [
+        {
+          "food_code": null,
+          "form_compatible": false,
+          "reason_ru": "Нет точной текущей идентичности и состава сухого обезжиренного молока.",
+          "source_form": "Milk, nonfat, dry"
+        }
+      ],
+      "source_id": "SOURCE-08",
+      "source_title": "Banana Bread Squares",
+      "source_variant": "A-13; legacy childcare 25/50",
+      "stage": "PREFILTER_REJECTED",
+      "tier": 2
+    },
+    {
+      "deep_reviewed": false,
+      "household_scaling_verified": false,
+      "id": "R3-09",
+      "name_ru": "Морковь в апельсиновой глазури",
+      "reason_ru": "Оба варианта моркови и необязательные добавки заданы мерами без принятого точного перевода в граммы.",
+      "required_inventory_complete": false,
+      "required_mass_complete": false,
+      "required_witnesses": [
+        {
+          "food_code": "CARROT",
+          "form_compatible": false,
+          "reason_ru": "Сырая морковь не подтверждает состав консервированной или замороженной моркови.",
+          "source_form": "Carrots, canned sliced drained OR frozen sliced"
+        },
+        {
+          "food_code": "CORNSTARCH",
+          "form_compatible": true,
+          "reason_ru": "Для кукурузного крахмала нет текущей версии состава.",
+          "source_form": "Cornstarch"
+        }
+      ],
+      "source_id": "SOURCE-09",
+      "source_title": "Orange Glazed Carrots",
+      "source_variant": "I-12A; Mealtime Memo No. 8, 2007",
+      "stage": "PREFILTER_REJECTED",
+      "tier": 2
+    },
+    {
+      "deep_reviewed": false,
+      "household_scaling_verified": false,
+      "id": "R3-10",
+      "name_ru": "Запечённые сезонные овощи",
+      "reason_ru": "Восемь чашек произвольной смеси овощей и четыре зубчика чеснока не образуют точной массы входа. Видео не доказывает стандартизацию всех вариантов.",
+      "required_inventory_complete": false,
+      "required_mass_complete": false,
+      "required_witnesses": [
+        {
+          "food_code": null,
+          "form_compatible": false,
+          "reason_ru": "Нет однозначного состава выбранной смеси и точных масс отдельных продуктов.",
+          "source_form": "Eight cups of a seasonal vegetable mixture"
+        }
+      ],
+      "source_id": "SOURCE-10",
+      "source_title": "Seasonal Roasted Vegetables",
+      "source_variant": "University of Maine Extension; undated web recipe",
+      "stage": "PREFILTER_REJECTED",
+      "tier": 3
+    },
+    {
+      "deep_reviewed": false,
+      "household_scaling_verified": false,
+      "id": "R3-11",
+      "name_ru": "Батат, запечённый дольками",
+      "reason_ru": "Спрей без массы; необязательная смесь пряностей без точной массы. Задание преподавателю показать оба варианта не является протоколом их проверки.",
+      "required_inventory_complete": false,
+      "required_mass_complete": false,
+      "required_mass_witness": {
+        "authority": "UNRESOLVED_PIECE",
+        "grams": null,
+        "source_quantity": "4 medium sweet potatoes"
+      },
+      "required_witnesses": [
+        {
+          "food_code": "SWEET_POTATO",
+          "form_compatible": true,
+          "reason_ru": "Штучная мера не даёт точной массы съедобной части.",
+          "source_form": "Four medium sweet potatoes"
+        }
+      ],
+      "source_id": "SOURCE-11",
+      "source_title": "Sweet Potato Oven Fries",
+      "source_variant": "SDSU lesson 2024; recipe p. 11; Arkansas FCS727 credit",
+      "stage": "PREFILTER_REJECTED",
+      "tier": 3
+    },
+    {
+      "deep_reviewed": false,
+      "household_scaling_verified": false,
+      "id": "R3-12",
+      "name_ru": "Салат из огурцов и помидоров",
+      "reason_ru": "У необязательной петрушки после половины отсутствует единица меры; овощи заданы штуками. Федеральный хост сам по себе не доказывает стандартизацию.",
+      "required_inventory_complete": false,
+      "required_mass_complete": false,
+      "required_witnesses": [
+        {
+          "food_code": "CUCUMBER",
+          "form_compatible": true,
+          "reason_ru": "Нет текущего состава огурца.",
+          "source_form": "Cucumbers"
+        },
+        {
+          "food_code": "VINEGAR_WHITE",
+          "form_compatible": true,
+          "reason_ru": "Нет текущего состава белого уксуса.",
+          "source_form": "White vinegar"
+        }
+      ],
+      "source_id": "SOURCE-12",
+      "source_title": "Cucumber Tomato Salad",
+      "source_variant": "ACL Older Indians; salads page",
+      "stage": "PREFILTER_REJECTED",
+      "tier": 3
+    }
+  ],
+  "closed": true,
+  "counting_ru": "Поиск сочетаний необязательных компонентов и замен в указателе и тексте федерального сборника использован только для маршрутизации. Серьёзный кандидат — отдельная подготовка с зафиксированной проверкой формы, состава и структуры ниже. Двенадцать записей включают три отклонённых проверки допустимости институционального источника. Ни один кандидат не прошёл предварительные условия; углублённых проверок нет. Случайные результаты поиска и другие рецепты на тех же страницах не исследовались как доноры.",
+  "deep_count": 0,
+  "deep_limit": 5,
+  "scope_ru": "Ранее заблокированные близкие кандидаты не ремонтировались. Новые продукты и составы не создавались. После двенадцатой записи поиск остановлен.",
+  "serious_count": 12,
+  "serious_limit": 12,
+  "stop_reason": "BOUNDED_FUNNEL_EXHAUSTED"
+}
