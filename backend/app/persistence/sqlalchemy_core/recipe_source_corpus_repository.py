@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+from decimal import Decimal
 from uuid import UUID, uuid4
 
 from sqlalchemy import Connection, select
@@ -98,7 +99,11 @@ class SqlAlchemyRecipeSourceCorpusRepository:
                     position=variant.position,
                     variant_code=variant.variant_code,
                     label_ru=variant.label_ru,
-                    output_g=variant.output_g,
+                    output_g=(
+                        Decimal(variant.output_g)
+                        if variant.output_g is not None
+                        else None
+                    ),
                     output_text=variant.output_text,
                     created_at=now,
                 )
@@ -110,8 +115,10 @@ class SqlAlchemyRecipeSourceCorpusRepository:
                         variant_id=variant_id,
                         position=row.position,
                         name_ru=row.name_ru,
-                        gross_g=row.gross_g,
-                        net_g=row.net_g,
+                        gross_g=(
+                            Decimal(row.gross_g) if row.gross_g is not None else None
+                        ),
+                        net_g=Decimal(row.net_g) if row.net_g is not None else None,
                         quantity_text=row.quantity_text,
                         source_form_note=row.source_form_note,
                         optional=row.optional,
@@ -124,7 +131,7 @@ class SqlAlchemyRecipeSourceCorpusRepository:
                         id=uuid4(),
                         variant_id=variant_id,
                         nutrient_code=nutrient.nutrient_code,
-                        value=nutrient.value,
+                        value=Decimal(nutrient.value),
                         unit=nutrient.unit,
                         source_label=nutrient.source_label,
                         created_at=now,
