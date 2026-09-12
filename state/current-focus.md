@@ -2,26 +2,28 @@
 
 Updated: `2026-09-12`
 
-- **PR6-NUTRIENT-VECTOR-A — MERGED**, PR #25, main
-  `e35d87a24d5d8afb59509e566aa1ff4b7a58a11a`. Starting `origin/main` was fetched
-  and matched this SHA; no later nutrition/schema changes were present.
-- **PR6-NUTRIENT-VECTOR-B — implementation verified, ready for review**.
-  [PR #26](https://github.com/Mitronomik/family-food-os/pull/26), branch `codex/pr6-nutrient-vector-b`; current scope is the normalized sparse
-  nutrient vector owned by existing FoodNutritionProfile identities.
-- Migration `0027_recipe_same_source_revisions` → `0028_normalized_nutrient_vector`.
-  Measured upgrade: 51 definitions, 183 profiles, 806 values, 64 held zero
-  observations. All existing table rows and v1 readiness are unchanged.
-- Nutrition v1 / B1 history remain valid; production is 30 current recipes /
-  189 rows / 30 INCOMPLETE. Current classifications are 66 exact, 21 no-conversion,
-  37 review-required, 65 blocked; 43 estimates remain non-executable.
-- Full backend/launcher regression: **3699 passed**, no skips, `AI_ENABLED=false`.
-  Lint/format, affected-file mypy, migration/upgrade and provenance audits PASS.
-- **PR6 — NOT COMPLETE.** Review/merge of VECTOR-B is pending.
-  Composition Core is only the next roadmap candidate after acceptance/merge;
-  it is not this PR and needs separate authorization. RU ingestion, B2 redesign,
-  Recipe Assembly and PR7+ are outside the current scope.
+- **PR6-NUTRIENT-VECTOR-A — MERGED**, PR #25.
+- **PR6-NUTRIENT-VECTOR-B — MERGED**, PR #26, main
+  `b39d9f5786796dc689bdee8ae52a90cbcc4ebdfe`.
+- **PR6-COMPOSITION-CORE — AUTHORIZED / implementation verified, ready for review**.
+  Branch `codex/pr6-composition-core` starts at the verified remote main above.
+- Explicit user decision: exact positive finite Decimal component `input_mass_g`
+  is authoritative; total input mass is its exact sum. No persisted fractions,
+  fraction-sum invariant or approximated recurring ratios.
+- Migration `0028_normalized_nutrient_vector` → `0029_food_composition_core`.
+  Seven new infrastructure tables; production composition/yield/retention rows: 0.
+- Deterministic calculator: pinned sealed atomic vectors, immutable child DAG,
+  explicit mass states, separate reviewed yield and sparse nutrient retention,
+  per-nutrient availability and immutable replay. Nutrition v1 consumers unchanged.
+- Measured readiness unchanged: 30 recipes / 189 rows / 30 INCOMPLETE;
+  66 exact / 21 no-conversion / 37 review-required / 65 blocked;
+  all 43 estimates non-executable. All prior rows and 183 vector seals verified.
+- Final backend/launcher regression: **3758 passed**, no skips, `AI_ENABLED=false`.
+  Focused Composition Core: **59 passed**. Lint/format, mypy and audits PASS.
+- **PR6 — NOT COMPLETE.** No autonomous merge or automatic RU Food Data,
+  B2 redesign, Recipe Assembly, Serving or PR7+ work.
 
-Contract: [Nutrition Core](../docs/family-food/nutrition-core.md#pr6-nutrient-vector-b--normalized-immutable-snapshots).
-Evidence: [VECTOR-B audit](../data/curation/pr6-nutrient-vector-b/implementation-evidence.json).
-Verification: [progress](progress.md#pr6-nutrient-vector-b-verification).
+Contract: [Composition Core](../docs/family-food/food-composition-and-assembly.md#pr6-composition-core--concrete-runtime-contract).
+Evidence: [audit](../data/curation/pr6-composition-core/implementation-evidence.json).
+Verification: [progress](progress.md#pr6-composition-core-verification).
 Continuation: [handoff](handoff.md).

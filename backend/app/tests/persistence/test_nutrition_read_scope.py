@@ -101,10 +101,10 @@ def test_recipe_calculation_has_one_connection_no_writes_and_no_schema_change(
             database.execute(
                 "SELECT migration_id FROM schema_migrations ORDER BY rowid DESC LIMIT 1"
             ).fetchone()[0]
-            == "0028_normalized_nutrient_vector"
+            == "0029_food_composition_core"
         )
-    assert expected_migration_ids()[-1] == "0028_normalized_nutrient_vector"
-    assert len(expected_migration_ids()) == 28
+    assert expected_migration_ids()[-1] == "0029_food_composition_core"
+    assert len(expected_migration_ids()) == 29
 
 
 def test_member_lookup_enforces_household_scope(nutrition_engine):

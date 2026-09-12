@@ -106,9 +106,15 @@ At VECTOR-A merge, production remained 30 current RecipeVersions / 189 rows,
 all 30 INCOMPLETE, migration head 0027. VECTOR-B adds migration 0028 in its
 authorized implementation PR; Nutrition v1, readiness and all 43 non-executable
 estimates remain unchanged.
-**PR6 — NOT COMPLETE. PR6-NUTRIENT-VECTOR — NOT COMPLETE.** Bounded VECTOR-A
+**PR6 — NOT COMPLETE. PR6-NUTRIENT-VECTOR A/B — MERGED.** Bounded VECTOR-A
 registry/provenance research is merged in PR #25 at `e35d87a24d5d8afb59509e566aa1ff4b7a58a11a`;
-VECTOR-B is separately authorized on 2026-09-12 and pending implementation review/merge. COMPOSITION-CORE and PR7+ are UNAUTHORIZED. No automatic next operation.
+VECTOR-B is merged in PR #26 at
+`b39d9f5786796dc689bdee8ae52a90cbcc4ebdfe` (migration 0028).
+COMPOSITION-CORE is the separately authorized current bounded work on 2026-09-12;
+the mass-authoritative decision is explicitly approved. Its concrete contract is
+recorded in [Composition Core](food-composition-and-assembly.md#pr6-composition-core--concrete-runtime-contract).
+PR6 remains NOT COMPLETE. RU Food Data and later implementation, including PR7+,
+require separate authorization. No automatic next operation.
 The approved sequence changes are specified in §6.5; quantitative gates are retained.
 
 ## 3. North Star and core-loop contract

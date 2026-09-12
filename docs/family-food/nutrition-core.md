@@ -367,7 +367,7 @@ non-executable; production audit v3 still has 30 current recipes / 189 rows, all
 30 INCOMPLETE. At VECTOR-A merge, migration head was
 `0027_recipe_same_source_revisions`; VECTOR-B adds 0028 below.
 PR6 — NOT COMPLETE; PR6-NUTRIENT-VECTOR is being delivered in bounded A/B
-slices described below. VECTOR-B is authorized by the 2026-09-12 implementation task; PR7+ — UNAUTHORIZED. The
+slices described below. VECTOR-B is merged in PR #26; PR7+ — UNAUTHORIZED. The
 [roadmap](master-roadmap.md#5-canonical-master-sequence) owns the new sequence.
 
 
@@ -416,14 +416,14 @@ and estimation state remain separate, and cross-source blending stays forbidden.
 At VECTOR-A merge, runtime/schema/seeds were unchanged and migration head was
 0027. FAMILY_FOOD_NUTRITION_V1 remains current and all 43 estimates are non-executable.
 VECTOR-A is merged in PR #25 at `e35d87a24d5d8afb59509e566aa1ff4b7a58a11a`.
-PR6 and PR6-NUTRIENT-VECTOR remain NOT COMPLETE pending review/acceptance.
-The separately authorized VECTOR-B implementation is described below;
-COMPOSITION-CORE and PR7+ remain UNAUTHORIZED.
+PR6 remains NOT COMPLETE. VECTOR-A and VECTOR-B are merged;
+the VECTOR-B implementation is described below;
+COMPOSITION-CORE is separately authorized; PR7+ remain UNAUTHORIZED.
 
 
 ## PR6-NUTRIENT-VECTOR-B — normalized immutable snapshots
 
-**Authorized 2026-09-12; implementation pending review/merge.** Migration
+**MERGED in PR #26 at `b39d9f5786796dc689bdee8ae52a90cbcc4ebdfe`.** Migration
 `0028_normalized_nutrient_vector` augments the existing `FoodNutritionProfile`.
 It never creates another profile/version aggregate or current selector. Its
 100 g basis, UUID, FoodIngredient FK, five legacy fields, provenance and B1
@@ -502,3 +502,10 @@ are identical before/after. Current metrics are 66/21/37/65 approvals/review/blo
 30 recipes / 189 rows / 30 INCOMPLETE, 43 non-executable estimates.
 No API/UI, Composition Core, RU ingestion, B2 redesign, Recipe Assembly or
 Planner scope is introduced. PR6 remains NOT COMPLETE.
+
+
+Composition Core consumes these sealed vectors through explicit profile IDs and
+coexists with unchanged `FAMILY_FOOD_NUTRITION_V1`. Its mass-authoritative DAG,
+yield/retention, replay and result contracts are owned by the
+[composition contract](food-composition-and-assembly.md#pr6-composition-core--concrete-runtime-contract).
+There is no automatic recipe-consumer migration or production composition backfill.

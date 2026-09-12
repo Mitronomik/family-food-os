@@ -82,6 +82,7 @@ def test_database_at_0020_is_upgraded_to_family_food_identity(tmp_path):
         "0026_nutrition_measure_evidence",
         "0027_recipe_same_source_revisions",
         "0028_normalized_nutrient_vector",
+        "0029_food_composition_core",
     ]
     assert read_identity_settings(database_path)["product.name"][0] == "FamilyFoodOS"
     assert (

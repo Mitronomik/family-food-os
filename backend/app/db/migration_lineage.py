@@ -126,6 +126,17 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
             "nutrient_values",
         }
     ),
+    "0029_food_composition_core": frozenset(
+        {
+            "food_yield_models",
+            "food_retention_profiles",
+            "food_retention_values",
+            "food_transformations",
+            "food_composition_versions",
+            "food_composition_nodes",
+            "food_composition_steps",
+        }
+    ),
 }
 
 # The foundational tables promised by migration `0001`. Stable FamilyFoodOS
