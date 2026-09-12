@@ -18,8 +18,13 @@ Updated: `2026-09-12`.
 [Canonical recovery decision](../docs/family-food/food-composition-and-assembly.md#recipe-assembly-a-r2--targeted-recovery)
 and [R2 evidence](../data/curation/recipe-assembly-a-r2/README.md).
 
-Next authorized action: verify and deliver this R2 evidence PR, then stop for
-review. No automatic donor search, food-data repair, schema, RecipeTemplate seed,
+Next authorized action: final review of the published R2 evidence PR. No automatic donor search, food-data repair, schema, RecipeTemplate seed,
 Assembly B or PR7 work. Even an evidence-ready final three would require separate
 explicit authorization to resume Assembly A implementation with migration
 `0030_recipe_template_catalogue`. Never merge without post-review authorization.
+
+
+Delivery: [PR #33](https://github.com/Mitronomik/family-food-os/pull/33),
+OPEN into main, not merged. Evidence commit:
+`bb9254143f2449eeb0e7786ce1f06af91afbe517`.
+R2 evidence READY FOR REVIEW; Assembly A BLOCKED. Stop for review.

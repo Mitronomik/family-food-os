@@ -1375,4 +1375,10 @@ Executed verification:
 - Full backend regression was not run: production code/data did not change. Direct local TLS downloads were unavailable; browser downloads supplied the exact source bytes. No original HTML or unavailable Army-PDF byte hashes are invented.
 
 R2 evidence is ready for review. Assembly A remains BLOCKED, not COMPLETE.
-Deliver the feature branch/PR and stop; no autonomous merge or follow-up research.
+Feature branch and PR published; stop for review, with no autonomous merge or follow-up research.
+
+
+Delivery: [PR #33](https://github.com/Mitronomik/family-food-os/pull/33),
+OPEN into main, not merged. Evidence commit:
+`bb9254143f2449eeb0e7786ce1f06af91afbe517`.
+R2 evidence READY FOR REVIEW; Assembly A BLOCKED. Stop for review.

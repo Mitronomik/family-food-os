@@ -27,8 +27,14 @@ executed checks. The auditor is read-only; its database is disposable and uses
 `--source-dir`; hashes and necessary primary excerpts are retained in the package.
 No machine-specific download paths belong to the repository.
 
-Next allowed action: deliver/review the bounded R2 PR, then stop. Do not merge,
+Next allowed action: final review of the published bounded R2 PR, then stop. Do not merge,
 search another donor, repair food data or implement templates automatically.
 Prior detailed handoffs remain in Git history at the accepted base; their OPEN
 PR32/current R1 statements are superseded by this record. Unrelated `.DS_Store`
 is excluded from staging and delivery.
+
+
+Delivery: [PR #33](https://github.com/Mitronomik/family-food-os/pull/33),
+OPEN into main, not merged. Evidence commit:
+`bb9254143f2449eeb0e7786ce1f06af91afbe517`.
+R2 evidence READY FOR REVIEW; Assembly A BLOCKED. Stop for review.
