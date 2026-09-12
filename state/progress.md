@@ -1176,3 +1176,9 @@ Staged verification: `git diff --cached --check` PASS; exactly **25 intended
 files**, no backend/launcher/frontend/production seed/test changes and no
 `.DS_Store`. All 16 package file hashes verified against checksums.json.
 READY FOR PR6-CLOSE FINAL REVIEW. No merge or next operation.
+
+Delivery: branch `codex/pr6-close` pushed normally; [PR #30](https://github.com/Mitronomik/family-food-os/pull/30)
+opened into `main`, OPEN / not merged. Closure implementation/evidence commit:
+`c3590e67bac9d4b884f2f22df6aed7986f988d10`. This delivery receipt changes state
+only; measured evidence and verified runtime/data/test bytes remain unchanged.
+Stop for final review. RECIPE-ASSEMBLY-A remains NOT STARTED and separately gated.

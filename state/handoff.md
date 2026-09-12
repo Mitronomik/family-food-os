@@ -47,3 +47,7 @@ recipe totals. Gate 1 and broader catalogue readiness are not passed.
 explicit authorization.** Recipe Assembly B and PR7+ also NOT STARTED. Do not start
 any next operation automatically. Stop for review; never merge autonomously.
 Unrelated `.DS_Store` remains excluded.
+
+Delivery: [PR #30](https://github.com/Mitronomik/family-food-os/pull/30) is OPEN into
+main, not merged. Closure evidence commit: `c3590e67bac9d4b884f2f22df6aed7986f988d10`.
+The later delivery receipt changes state only. Stop for PR6-CLOSE final review.

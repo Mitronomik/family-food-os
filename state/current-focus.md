@@ -4,7 +4,7 @@ Updated: `2026-09-12`
 
 - **PR6 — COMPLETE. PR6-CLOSE — COMPLETE**, with explicit limits in the
   [canonical closure decision](../docs/family-food/pr6-closure.md).
-  This review/evidence publication is the current authorized operation; stop for PR review.
+  This review/evidence publication is OPEN in [PR #30](https://github.com/Mitronomik/family-food-os/pull/30); stop for final review.
 - **PR6-DATA-B2-B2-REDESIGNED — MERGED / delivered**, [PR #29](https://github.com/Mitronomik/family-food-os/pull/29).
   Exact fetched main / closure base: `3caa95e636c02e8f34657b1b6c885f646451114c`.
   Accepted PR29 head and merge trees match in full.
