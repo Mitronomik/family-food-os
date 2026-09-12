@@ -79,6 +79,7 @@ class SqlAlchemyRecipeSourceCorpusRepository:
             recipe_source_cards_table.insert().values(
                 id=card_id,
                 document_id=document_id,
+                source_section_code=card.source_section_code,
                 source_card_code=card.source_card_code,
                 name_ru=card.name_ru,
                 category_ru=card.category_ru,
