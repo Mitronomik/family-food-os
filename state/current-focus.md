@@ -18,6 +18,10 @@ Updated: `2026-09-12`.
 [Canonical R4 checkpoint](../docs/family-food/food-composition-and-assembly.md#recipe-assembly-a-r4--n50200-deep-viability)
 and [complete R4 evidence](../data/curation/recipe-assembly-a-r4-n50200/README.md).
 
-Next authorized action: deliver and review this research PR into main, then stop.
+Delivery: [PR #35](https://github.com/Mitronomik/family-food-os/pull/35), OPEN
+into main, not merged. Evidence commit:
+`678d8d0e4c3d5f67ccf6645e2f9f95a0719c01f2`.
+
+Next authorized action: review the published research PR, then stop.
 No automatic merge, production data PR, other donor search, Assembly B, PR7 or 0030.
 Household scaling remains false. Review-ready is not accepted milestone completion.

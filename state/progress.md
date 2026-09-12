@@ -1468,3 +1468,10 @@ No full backend regression: production runtime/data/schema are unchanged.
 Ready remains 2/3; third candidate none; family_count/optional_role/
 verified_substitution OPEN. Assembly A BLOCKED; B/PR7+ NOT STARTED; 0029.
 Stop for review after delivery. No self-merge or automatic data PR/search.
+
+Delivery: [PR #35](https://github.com/Mitronomik/family-food-os/pull/35), OPEN
+into exact accepted main, not merged. Evidence commit:
+`678d8d0e4c3d5f67ccf6645e2f9f95a0719c01f2`.
+All 28 intended files were reviewed and staged; unrelated `.DS_Store` excluded.
+`git diff --check` and `git diff --cached --check` — PASS before commit.
+R4 research evidence READY FOR REVIEW; R4 result and Assembly A BLOCKED.

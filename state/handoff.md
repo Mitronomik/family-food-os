@@ -20,5 +20,10 @@ Use `backend/.venv/bin/python` for the disposable accepted replay; root `.venv`
 has no SQLAlchemy. `gh` has a 401 authentication failure; GitHub connector works.
 Local `.DS_Store` is unrelated user work; preserve and do not stage it.
 
+Delivery: [PR #35](https://github.com/Mitronomik/family-food-os/pull/35), OPEN,
+not merged; evidence commit `678d8d0e4c3d5f67ccf6645e2f9f95a0719c01f2`.
+Staged scope: 28 intended files; unrelated `.DS_Store` excluded.
+Both `git diff --check` and `git diff --cached --check` passed before commit.
+
 Next: review this research PR, then stop. No self-merge or automatic production
 operation. Assembly A BLOCKED; B / PR7+ NOT STARTED; migration 0029.
