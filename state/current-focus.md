@@ -5,8 +5,9 @@ Updated: `2026-09-12`
 - **PR6-NUTRIENT-VECTOR-A — MERGED**, PR #25.
 - **PR6-NUTRIENT-VECTOR-B — MERGED**, PR #26, main
   `b39d9f5786796dc689bdee8ae52a90cbcc4ebdfe`.
-- **PR6-COMPOSITION-CORE — AUTHORIZED / implementation verified, ready for review**.
-  Branch `codex/pr6-composition-core` starts at the verified remote main above.
+- **PR6-COMPOSITION-CORE — READY FOR REVIEW, not merged**.
+  [PR #27](https://github.com/Mitronomik/family-food-os/pull/27), branch `codex/pr6-composition-core`,
+  starts at the verified remote main above.
 - Explicit user decision: exact positive finite Decimal component `input_mass_g`
   is authoritative; total input mass is its exact sum. No persisted fractions,
   fraction-sum invariant or approximated recurring ratios.

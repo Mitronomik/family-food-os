@@ -111,7 +111,8 @@ registry/provenance research is merged in PR #25 at `e35d87a24d5d8afb59509e566aa
 VECTOR-B is merged in PR #26 at
 `b39d9f5786796dc689bdee8ae52a90cbcc4ebdfe` (migration 0028).
 COMPOSITION-CORE is the separately authorized current bounded work on 2026-09-12;
-the mass-authoritative decision is explicitly approved. Its concrete contract is
+[PR #27](https://github.com/Mitronomik/family-food-os/pull/27) is ready for review, not merged.
+The mass-authoritative decision is explicitly approved. Its concrete contract is
 recorded in [Composition Core](food-composition-and-assembly.md#pr6-composition-core--concrete-runtime-contract).
 PR6 remains NOT COMPLETE. RU Food Data and later implementation, including PR7+,
 require separate authorization. No automatic next operation.

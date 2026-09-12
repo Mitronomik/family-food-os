@@ -928,5 +928,13 @@ Staged scope contains 29 task files, no `.DS_Store`, production seeds, secrets,
 local databases or environment files. `git diff --check`, staged diff/check and
 40 relevant local Markdown file links/new anchors PASS. Nutrition v1 runtime,
 VECTOR-B runtime/registry and existing seed artifacts remain byte-identical to
-base; no frontend/API files changed. PR publication receipt follows.
+base; no frontend/API files changed.
 PR6 remains NOT COMPLETE. No autonomous merge or next-operation authorization.
+
+
+Delivery: [PR #27](https://github.com/Mitronomik/family-food-os/pull/27) opened into `main`,
+branch `codex/pr6-composition-core`, implementation commit
+`657c692ce5ab8e49719ed9a164cda224cdfb296d`. Git push and the connected GitHub
+create-PR API succeeded. PR is ready for review, not merged. The delivery-receipt
+commit changes docs/state only; all verified runtime/test/audit bytes remain
+unchanged. No further implementation scope is authorized.

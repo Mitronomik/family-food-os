@@ -4,7 +4,8 @@ Updated: `2026-09-12`
 
 VECTOR-A / VECTOR-B are merged (PR #25 / #26). PR6-COMPOSITION-CORE is separately
 authorized and implemented on `codex/pr6-composition-core`; verification is
-complete and implementation is ready for review. PR publication follows. Actual fetched base:
+complete and [PR #27](https://github.com/Mitronomik/family-food-os/pull/27) is open, ready for review (not merged).
+Implementation commit: `657c692ce5ab8e49719ed9a164cda224cdfb296d`. Actual fetched base:
 `b39d9f5786796dc689bdee8ae52a90cbcc4ebdfe`. Local `main` was stale; the feature
 branch was created directly from verified `origin/main`. Migration 0028 → 0029.
 
@@ -52,7 +53,7 @@ Executed checks and results: [progress](progress.md#pr6-composition-core-verific
 
 Final checks: 3758 backend/launcher tests passed, zero skips; 59 focused tests
 passed; lint/format on 21 Python files and mypy on 9 runtime files passed.
-Next action after publication: review the Composition Core PR.
+Next action: review PR #27.
 No autonomous merge. No automatic RU Food Data start. No RecipeVersion binding,
 Recipe Assembly, API/UI, RU enrichment, B2 policy redesign, Serving, Planner,
 Shopping, Pantry, AI or PR7+ work is included or newly authorized.
