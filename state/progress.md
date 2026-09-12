@@ -1036,3 +1036,79 @@ This later delivery receipt changes state documents only; verified runtime,
 tests, source package and audit bytes remain unchanged. PR6 remains NOT COMPLETE.
 
 READY FOR PR6-RU-FOOD-DATA FINAL REVIEW
+
+## PR6-DATA-B2-B2-REDESIGNED — implementation and verification
+
+Starting main fetched before editing: `4180297d47d68a0e0d9efbe7a7a27f3900c4f388`.
+GitHub independently confirms PR #28 MERGED at that commit. Created requested
+`codex/pr6-data-b2-b2-redesigned` from origin/main; unrelated `.DS_Store` preserved.
+The complete accepted seed measured 185 foods and migration 0029; all 37 B2-B1
+identities and 46 uses re-resolve against this actual database.
+
+[The evidence package](../data/curation/pr6-data-b2-b2-redesigned/README.md)
+records two source-backed frozen-form revisions, three SR profile promotions,
+PEACH deferral, three exact mass records and complete all-use/assessment review.
+There were no prior compositions for the three profile candidates (PR28
+NOT_READY): first ATOMIC v1 is the applicable case, while synthetic old-v1 → v2
+replay is separately tested. No new FoodIngredient, new policy or schema change.
+The explicit populated-0029 data upgrade is atomic/idempotent and has tested
+native backup/restore replay. All historical data is preserved except the
+allowed 3 profile and 7 assessment current-marker retirements.
+
+Executed with AI_ENABLED=false where applicable:
+
+- `PYTHONPATH=backend:. backend/.venv/bin/python -m pytest -q
+  backend/app/tests/test_pr6_data_b2b2.py`: **27 passed in 10.27s**.
+  Covers complete production audit, 46-use guards, both immutable remaps,
+  six real publication-stage failure injections and retry, sealed profiles,
+  all-use reassessments/stale binding, conditional historical composition v2
+  replay, deferred/yield/APPLE/estimate boundaries, hash tampering, missing
+  frozen composition and changed exact evidence/carry-forward review on rerun.
+- `backend/.venv/bin/python scripts/validate_pr6_data_b2b2_sources.py --archive
+  /private/tmp/pr6-ru-research/SR-RELEASE.zip`: PASS; 5 complete source/portion
+  extracts, 6 CSV member hashes, archive SHA matches accepted SR 2018-04.
+- `backend/.venv/bin/python scripts/audit_pr6_data_b2b2.py`: PASS; populated
+  0029 upgrade, all historical rows/seals/compositions, no-op second command,
+  native backup/restore, integrity/FKs and full report reproducibility.
+- `backend/.venv/bin/python scripts/audit_pr6_ru_food_data.py`: PASS; unchanged
+  PR28 historical operation reproduces its accepted evidence.
+- `backend/.venv/bin/python scripts/validate_pr6_nutrient_vector_a.py --content-only`:
+  PASS for unchanged registry/mappings/legacy observations/zero evidence.
+- `backend/.venv/bin/python scripts/promote_pr6_data_b2a.py` and
+  `scripts/audit_pr6_data_b2a.py`: PASS; immutable correction chain and v3 audit.
+- `backend/.venv/bin/python scripts/audit_pr6_nutrient_vector_b.py` and
+  `scripts/audit_pr6_composition_core.py`: PASS; historical upgrades/readiness.
+- `ruff check` and `ruff format --check`: PASS on all six new Python files.
+- `mypy --follow-imports=silent --ignore-missing-imports --check-untyped-defs
+  --python-executable backend/.venv/bin/python` on
+  `backend/app/domain/b2b2_vector_import.py`, `backend/app/seed/b2b2.py`,
+  `backend/app/persistence/sqlalchemy_core/b2b2.py`: PASS (3 source files).
+
+Early task-local checks found wrong environment paths, a repository getter name,
+formatting and test comparisons that included the explicitly mutable profile
+current marker. These were corrected; actual seal/value/history byte comparisons
+remain enforced. A partial full-regression run was interrupted to add the final
+mass-evidence and frozen-composition prerequisite checks, and is not claimed as
+passing. The final full backend + launcher run passed: **3826 passed in 649.81s (0:10:49)**,
+zero skips. This includes FoodIngredient/profile, B1 evidence/assessment, B2-A
+immutable revisions, Nutrition catalogue, NutrientVector, Composition Core,
+all migration/rebuild/backup/restore/coexistence and PR28 RU regressions:
+`AI_ENABLED=false PYTHONPATH=backend:. backend/.venv/bin/python -m pytest -q
+backend/app/tests launcher/tests` (local loopback/process access enabled).
+
+Measured readiness: 71 exact / 23 no-conversion / 35 review-required / 60 blocked;
+29 INCOMPLETE + 1 CONDITIONAL, zero COMPLETE. Full before/after SHA-256 and all
+ten row deltas are retained; only seven assessment statuses improve. Three old
+estimate usages gain independent exact authority, while every original estimate
+record and the remaining 40 current non-executable usages retain their boundary.
+PR6 is NOT COMPLETE. All required checks pass; implementation is review-ready.
+Final identity audit: 37 unique target dispositions / 46 complete uses / no UUID
+curation keys. All 31 protected inputs and 56 checked local documentation links
+pass. Working/staged whitespace and the 19-file scope audit pass; `.DS_Store` is
+excluded. Origin/main was fetched again and remains the same verified SHA.
+A non-mutating Git push dry-run confirms feature-branch publication access.
+Delivery: feature branch pushed normally; [PR #29](https://github.com/Mitronomik/family-food-os/pull/29)
+opened into main. Implementation commit `d0a238ce32193d5884d61ee384d5eb7f242bcaed`.
+The delivery receipt updates state only; all tested runtime, data, scripts and
+tests remain byte-identical. PR6-DATA-B2-B2-REDESIGNED is REVIEW-READY;
+**READY FOR PR6-DATA-B2-B2-REDESIGNED FINAL REVIEW**. No merge or next operation.

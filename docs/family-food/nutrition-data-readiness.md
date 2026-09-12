@@ -920,3 +920,39 @@ runtime and schema remain byte-identical. Migration head 0027; Nutrition v1 curr
 43 estimates non-executable. **PR6 / PR6-NUTRIENT-VECTOR — NOT COMPLETE;
 VECTOR-B — NOT AUTHORIZED; COMPOSITION-CORE / PR7+ — UNAUTHORIZED.**
 Executed checks: [progress](../../state/progress.md#pr6-nutrient-vector-a-verification).
+
+## PR6-DATA-B2-B2-REDESIGNED — bounded production re-curation
+
+The authorized operation starts from merged PR #28 / fetched main
+`4180297d47d68a0e0d9efbe7a7a27f3900c4f388`, migration 0029, measured 185 foods.
+[The B2-B2 package](../../data/curation/pr6-data-b2-b2-redesigned/README.md) owns
+all 37 redesigned target dispositions and the complete 46-use review. B2-B1 and
+PR28 source evidence remain immutable historical records.
+
+Two new immutable v2 recipes correct only the frozen strawberry/cauliflower
+bindings. Same-ID exact unthawed strawberry cup evidence permits 149 g; cauliflower
+remains blocked because the available portion requires an unspecified piece size.
+Three existing-food profiles (light mayonnaise, dry rolled/quick oats, generic
+raw tomato) receive new exact SR 2018-04 profiles and sealed sparse vectors.
+PEACH/FNDDS is deferred: no new mapping, generic/default or blending policy.
+Profile-only changes append B1 assessment revisions, not RecipeVersions.
+All affected uses are explicitly re-reviewed before the current profile switch.
+
+The evidence includes full before/after reports: 66/21/37/65 → 71/23/35/60
+exact/no-conversion/review/blocked. Ten row changes are explained individually;
+seven improve assessment status. One recipe becomes CONDITIONAL; 29 remain
+INCOMPLETE. Three current estimate usages are independently superseded by new
+exact same-food/source-measure authority. All original estimate records are
+unchanged; 40 remaining current estimates are non-executable. Five deferred
+forms, APPLE and the three yield cases retain their blockers.
+
+The explicit `app.seed.b2b2` data upgrade applies to a populated 0029 database
+in one project UoW and also follows the accepted seed chain on fresh databases.
+It verifies pinned inputs, full before/after authority, all-use coverage, sealed
+vectors/compositions and exact evidence. A verified second run inserts nothing;
+partial/conflicting state fails closed. No schema/lineage expansion is needed.
+Backup/restore and failure/retry use the existing project transaction contract.
+Historical B1/B2-A loaders remain historical; use the new operation to reconcile
+an upgraded catalogue. Recovery after successful deployment restores the prior
+backup rather than deleting history. PR6 remains NOT COMPLETE; PR6-CLOSE is a
+separately authorized review/gate after reviewed merge.
