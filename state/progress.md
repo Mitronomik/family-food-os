@@ -1024,3 +1024,15 @@ no autonomous merge or B2-B2/Recipe Assembly/PR7 start.
 Staged review: `git diff --cached --check` PASS; exactly 19 intended files.
 No seed CSV/recipe data, old curation, migrations, dependencies, API/UI, private
 records or `.DS_Store` are staged. All staged paths and content were reviewed.
+
+Delivery: [PR #28](https://github.com/Mitronomik/family-food-os/pull/28) is OPEN,
+not merged, targeting exact main above from `codex/pr6-ru-food-data`.
+Implementation commit: `6da0d711d25a172c2b0e5ef308283dd0c698cee6`.
+The GitHub API published all 19 reviewed blobs; its tree SHA matched the staged
+local tree exactly: `8c519881f45229db6e5a657ed424b53c27e1d6e2`.
+Fetched remote branch and advanced the local branch to that identical commit;
+only the unrelated `.DS_Store` remained modified. GitHub confirms no merge conflict.
+This later delivery receipt changes state documents only; verified runtime,
+tests, source package and audit bytes remain unchanged. PR6 remains NOT COMPLETE.
+
+READY FOR PR6-RU-FOOD-DATA FINAL REVIEW

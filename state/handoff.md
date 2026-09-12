@@ -41,7 +41,9 @@ runtime or AI dependency. Synthetic tests are excluded from production counts.
 All required verification is green: full backend + launcher 3799 passed with
 AI_ENABLED=false, focused 41, affected 311, migration/backup 154; source replay,
 audits, Ruff/format and affected-runtime mypy pass. Exact commands/results are in
-[progress](progress.md). Status: REVIEW-READY. Next action: review the bounded PR
+[progress](progress.md). Status: REVIEW-READY in [PR #28](https://github.com/Mitronomik/family-food-os/pull/28).
+Implementation commit: `6da0d711d25a172c2b0e5ef308283dd0c698cee6`.
+Next action: review the bounded PR
 against main, including the two promotions and five deferrals; merge requires
 explicit post-review authorization. CLI HTTPS/SSH authentication is unavailable;
 delivery uses the authenticated GitHub connector with verified Git blob/tree hashes.

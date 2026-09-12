@@ -8,7 +8,8 @@ Updated: `2026-09-12`
   GitHub merged state independently verified; previous review-pending state is superseded.
 - Migration head: `0029_food_composition_core`.
 - **PR6-RU-FOOD-DATA — current authorized bounded operation**, branch
-  `codex/pr6-ru-food-data`. Implementation verified; REVIEW-READY, awaiting PR review.
+  `codex/pr6-ru-food-data`. Implementation verified; REVIEW-READY in
+  [PR #28](https://github.com/Mitronomik/family-food-os/pull/28), awaiting review.
 - Audit target: 81 existing food codes / 189 current recipe ingredient rows,
   required/optional uses separate; seven mandatory form research candidates.
 - Production additions: CAULIFLOWER_FROZEN and STRAWBERRY_FROZEN_UNSWEETENED;
