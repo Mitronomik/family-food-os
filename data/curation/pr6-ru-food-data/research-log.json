@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-09-12",
+  "nutrition": "Official SR and Foundation archives redownloaded and hash matched; all source food_nutrient rows retained for five form candidates. FNDDS proposals remain research only.",
+  "queries": [
+    "site.lenta.com капуста цветная замороженная",
+    "site.lenta.com клубника замороженная состав",
+    "шпинат беби Лента Перекресток",
+    "Шпинат бэби мытый Маркет",
+    "яблоки очищенные магазин Санкт-Петербург",
+    "яблоки очищенные site.5ka.ru",
+    "макароны отварные без соли магазин",
+    "сок лимонный Лента Сицилия",
+    "сок апельсиновый site.lenta.com/product/"
+  ],
+  "limitations": {
+    "APPLE_PEELED": "Raw peeled apple profile revalidated. Whole apples do not establish purchased peeled flesh. A reviewed preparation/output path is outside this ATOMIC-only operation.",
+    "LEMON_JUICE": "FNDDS 2709180 is a retained generic research proposal. No approved FNDDS mapping exists in the 51-code release-specific registry; no silent raw/packaged default or fresh-fruit yield.",
+    "ORANGE_JUICE": "FNDDS 2709186 combines ordinary and calcium-added packaged juice. No approved single exact form/default or FNDDS mappings; raw juice listing retrieval failed 401.",
+    "PASTA_COOKED": "SR cooked unenriched unsalted profile revalidated. Purchased meals include salt/oil/other components; dry pasta availability cannot replace a reviewed preparation/output path.",
+    "SPINACH_BABY": "Foundation baby spinach profile revalidated. Third-party baby-spinach lead lacks inspected primary retailer/SPB evidence; generic spinach is not proof of young leaves."
+  },
+  "primary_inspections": [
+    "https://fdc.nal.usda.gov/download-datasets/",
+    "https://lenta.com/product/kapusta-cvetnaya-zam-400g-645567/",
+    "https://lenta.com/product/klubnika-zam-300g-495855/",
+    "https://lenta.com/info/shops/?citykey=spb&withRedirect=true"
+  ],
+  "market_semantics": "Official chain-neutral listing plus official SPB/LO presence, as accepted PR4 methodology. AVAILABLE describes curation representation, never store stock. Old evidence keeps its exact 2026-09-05 date; no TTL invented."
+}

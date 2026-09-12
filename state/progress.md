@@ -1,6 +1,6 @@
 # Progress
 
-Updated: `2026-09-10`
+Updated: `2026-09-12`
 
 ## FamilyFoodOS milestone status
 
@@ -938,3 +938,89 @@ branch `codex/pr6-composition-core`, implementation commit
 create-PR API succeeded. PR is ready for review, not merged. The delivery-receipt
 commit changes docs/state only; all verified runtime/test/audit bytes remain
 unchanged. No further implementation scope is authorized.
+
+
+## PR6-RU-FOOD-DATA verification
+
+Exact fetched starting main: `d5b5ce3fdc4ec79de5454b3ed23b1d527772c0bc`.
+PR #27 is MERGED at that SHA, independently checked through GitHub; the previous
+COMPOSITION-CORE delivery receipt above is historical and superseded.
+Branch: `codex/pr6-ru-food-data`. Migration head before/after:
+`0029_food_composition_core`. PR6 remains NOT COMPLETE.
+
+The [version 1 package](../data/curation/pr6-ru-food-data/README.md) audits 81
+current food codes (185 required + 4 optional recipe rows) and seven candidates.
+PROMOTE: CAULIFLOWER_FROZEN / SR 170398 and
+STRAWBERRY_FROZEN_UNSWEETENED / SR 168173. DEFER: APPLE_PEELED,
+LEMON_JUICE, ORANGE_JUICE, PASTA_COOKED, SPINACH_BABY. Exact reasons, primary
+source extracts and market/form review are in the package; no rejection or
+forced seven-food promotion. Both official USDA archive downloads matched their
+pinned hashes; fresh official Lenta food and SPB/LO presence pages were inspected.
+
+[Reproducible implementation evidence](../data/curation/pr6-ru-food-data/implementation-evidence.json):
+183 existing foods/profiles/seals retained; 2 new foods/profiles/seals, 66 nutrient
+values and 60 ATOMIC versions. 60 RU_READY / 28 NOT_READY; all 88 researched
+records classify as 4 mass-market / 73 available / 11 specialty-or-unclear.
+Only three pass the separate food/market default gate; unknown nutrients and later
+recipe/preparation gates are not waived. Existing rows, registry, all 183 seals,
+B1/B2-A bindings and all historical truth are unchanged. No composite,
+transformation, yield or retention rows. The second complete RU seed inserts zero
+and leaves all database contents identical. Tests use disposable databases;
+synthetic adversarial profiles are excluded from production counts.
+
+Complete before/after readiness reports compare equal, including every row and
+source-quantity finding, and equal accepted B2-A production audit v3. Canonical JSON
+SHA-256 for both: `d209a2598bf452952314f82569d841abf57910eae3a00afa679a71883cc92490`.
+Baseline remains 30 recipes / 189 rows / 30 INCOMPLETE; 66 APPROVED_EXACT,
+21 APPROVED_NO_CONVERSION, 37 REVIEW_REQUIRED_ESTIMATE, 65 BLOCKED.
+All 43 estimate candidates remain non-executable. No existing profile replacement,
+recipe remapping, new migration, API/UI, AI, Retail or Assembly runtime changes.
+
+Executed on 2026-09-12, with `AI_ENABLED=false` for runtime checks:
+
+- `backend/.venv/bin/python scripts/audit_pr6_ru_food_data.py`: PASS. Actual full
+  baseline, all-row preservation, all 183 old seals read before/after, all 185
+  final seals read, 60 exact ATOMIC owners/profile pins replayed, no-op second
+  seed, clean foreign keys and scope audit. Retained JSON is the final execution.
+- `backend/.venv/bin/python scripts/validate_pr6_ru_food_sources.py
+  --source-directory /tmp/pr6-ru-research`: PASS, two primary archives and five
+  complete retained profile/nutrient/vocabulary/available-derivation extracts.
+- Focused `test_ru_food_data.py`: **41 passed in 4.67s**. Identity/name/alias,
+  candidate exclusion, package tamper, market panel/form/region/date/status,
+  Russian display, exact same-source sparse import/digest/zeros, transactional
+  rollback, sealed immutability, current-profile replacement replay and scope.
+  An earlier run had 40 passed / 1 failed because the static test used the wrong
+  repository parent directory; corrected the test path and reran all 41.
+- FoodIngredient domain/application/seed/repository, NutrientVector and registry,
+  Composition Core/domain migration, Nutrition domain/application/catalogue:
+  **311 passed in 20.45s**.
+- Migration lineage/rebuild, backup consistency/audit, FoodIngredient migration
+  and persistence migration coexistence: **154 passed in 21.60s**.
+- `scripts/validate_pr6_nutrient_vector_a.py --content-only`: PASS.
+- `scripts/promote_pr6_data_b2a.py` without write option and
+  `scripts/audit_pr6_data_b2a.py`: PASS; accepted artifacts not modified.
+- Ruff check and format check: PASS, all eight new Python files.
+- Mypy with `--follow-imports=silent --ignore-missing-imports
+  --check-untyped-defs --python-executable backend/.venv/bin/python`: PASS,
+  all five new runtime files (two domain, service, Core adapter, seed).
+  Initial constructor metadata, protocol typing and lint defects were corrected
+  before final passing verification and full-suite launch.
+
+Full backend + launcher command:
+`AI_ENABLED=false backend/.venv/bin/python -m pytest -q backend/app/tests launcher/tests`
+— **3799 passed in 632.45s (10:32), zero skips**.
+
+Final `git diff --check` passes; 27 relevant local Markdown file links resolve.
+A second `git fetch origin main` confirms the exact starting SHA is unchanged.
+HTTPS push could not obtain local credentials; SSH returned publickey denial and
+`gh` returned HTTP 401. Delivery uses the authenticated GitHub connector instead;
+remote blobs are compared to local Git blob hashes before publication.
+
+No production runtime/data/test changes were made after full-suite launch;
+remaining edits are documentation and the retained audit result. Delivery uses
+only intended files; unrelated local `.DS_Store` is excluded. Stop for review;
+no autonomous merge or B2-B2/Recipe Assembly/PR7 start.
+
+Staged review: `git diff --cached --check` PASS; exactly 19 intended files.
+No seed CSV/recipe data, old curation, migrations, dependencies, API/UI, private
+records or `.DS_Store` are staged. All staged paths and content were reviewed.

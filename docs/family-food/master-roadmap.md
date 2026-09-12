@@ -110,11 +110,16 @@ estimates remain unchanged.
 registry/provenance research is merged in PR #25 at `e35d87a24d5d8afb59509e566aa1ff4b7a58a11a`;
 VECTOR-B is merged in PR #26 at
 `b39d9f5786796dc689bdee8ae52a90cbcc4ebdfe` (migration 0028).
-COMPOSITION-CORE is the separately authorized current bounded work on 2026-09-12;
-[PR #27](https://github.com/Mitronomik/family-food-os/pull/27) is ready for review, not merged.
+COMPOSITION-CORE is MERGED in
+[PR #27](https://github.com/Mitronomik/family-food-os/pull/27), merge commit
+`d5b5ce3fdc4ec79de5454b3ed23b1d527772c0bc`; migration head is 0029.
+PR6-RU-FOOD-DATA is the explicitly authorized current bounded operation on
+`codex/pr6-ru-food-data`; its [evidence package](../../data/curation/pr6-ru-food-data/README.md)
+records food-form promotion and deferral without recipe remapping. Implementation
+is verified and review-ready; PR6 closure is not claimed.
 The mass-authoritative decision is explicitly approved. Its concrete contract is
 recorded in [Composition Core](food-composition-and-assembly.md#pr6-composition-core--concrete-runtime-contract).
-PR6 remains NOT COMPLETE. RU Food Data and later implementation, including PR7+,
+PR6 remains NOT COMPLETE. B2-B2-REDESIGNED and later implementation, including PR7+,
 require separate authorization. No automatic next operation.
 The approved sequence changes are specified in §6.5; quantitative gates are retained.
 

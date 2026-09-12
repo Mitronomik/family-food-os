@@ -498,3 +498,23 @@ rerun is deterministic. Successful deployment rollback uses a pre-upgrade backup
 not deletion of historical composition truth. Nutrition v1, B1 bindings and
 VECTOR-B registry/values/seals remain unchanged. No public API/UI or Recipe
 Assembly implementation is added. PR6 remains NOT COMPLETE.
+
+
+## PR6-RU-FOOD-DATA — bounded ATOMIC reconciliation
+
+The separately authorized RU operation supplies a reviewed repository food-data
+readiness package, using existing `FoodIngredient.canonical_name` as Russian
+primary display. No availability database context or second display column exists.
+Its explicit seed appends ATOMIC versions for approved direct-profile foods and
+pins the exact sealed profile ID resolved from source name/food ID/release.
+The reviewed natural reference is food code + version 1 + operation + exact
+profile provenance; local UUIDs remain database identities. Existing compositions,
+profiles, vectors and RecipeVersions are never rewritten.
+
+[The versioned package](../../data/curation/pr6-ru-food-data/README.md) owns the
+exact promotion/defer decisions, market references, sparse unknown inventory,
+source hashes and reproducible audit. RU_READY is food-data readiness with explicit
+unknowns; default eligibility additionally requires the unchanged market gate.
+Requested nutrient completeness and later recipe/assembly/kitchen gates still apply.
+No producer/output binding, composite, transformation, yield or retention data is
+introduced. Migration head remains 0029. PR6 remains NOT COMPLETE.
