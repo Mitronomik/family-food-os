@@ -21,8 +21,15 @@ Updated: `2026-09-12`.
 [Canonical R3 decision](../docs/family-food/food-composition-and-assembly.md#recipe-assembly-a-r3--third-family-closure)
 and [R3 evidence](../data/curation/recipe-assembly-a-r3/README.md).
 
-Next authorized action: deliver and review the bounded R3 research PR, then stop.
+Next authorized action: final review of the published bounded R3 research PR, then stop.
 No automatic donor search, food-data repair or implementation. Both accepted
 packages are frozen byte-for-byte. Household scaling remains unverified.
 Migration `0030_recipe_template_catalogue` and Assembly A implementation require
 separate explicit authorization. Never merge without post-review authorization.
+
+
+Delivery: [PR #34](https://github.com/Mitronomik/family-food-os/pull/34), OPEN
+into main, not merged. Evidence commit:
+`b2b9fe94737328bd2c16e3e0dc34b34802a185f7`.
+R3 research evidence READY FOR REVIEW; R3 result and Assembly A BLOCKED.
+Stop for review; no next-operation authorization.

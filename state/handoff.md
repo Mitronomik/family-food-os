@@ -39,6 +39,13 @@ collective derivation and adversarial guards. DB replay uses a disposable
 accepted DB and `AI_ENABLED=false`. Executed checks belong in
 [progress](progress.md#recipe-assembly-a-r3--third-family-closure).
 
-Next allowed action: deliver and review the R3 PR, then stop. No autonomous merge,
+Next allowed action: final review of the published R3 PR, then stop. No autonomous merge,
 new donor search, data repair, RecipeTemplate schema or migration 0030.
 Unrelated `.DS_Store` remains excluded from staging and delivery.
+
+
+Delivery: [PR #34](https://github.com/Mitronomik/family-food-os/pull/34), OPEN
+into main, not merged. Evidence commit:
+`b2b9fe94737328bd2c16e3e0dc34b34802a185f7`.
+R3 research evidence READY FOR REVIEW; R3 result and Assembly A BLOCKED.
+Stop for review; no next-operation authorization.
