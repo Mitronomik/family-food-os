@@ -2,25 +2,20 @@
 
 Updated: `2026-09-12`
 
-- **PR6-RU-FOOD-DATA — MERGED / delivered**, [PR #28](https://github.com/Mitronomik/family-food-os/pull/28).
-  GitHub merged state and fetched starting `origin/main` independently verified:
-  `4180297d47d68a0e0d9efbe7a7a27f3900c4f388`.
-- Verified populated production baseline: migration `0029_food_composition_core`,
-  185 FoodIngredients, 30 current recipes / 189 ingredient rows. PR28 contributes
-  exactly CAULIFLOWER_FROZEN and STRAWBERRY_FROZEN_UNSWEETENED.
-- **PR6-DATA-B2-B2-REDESIGNED — current explicitly authorized bounded operation**,
-  branch `codex/pr6-data-b2-b2-redesigned`. REVIEW-READY in
-  [PR #29](https://github.com/Mitronomik/family-food-os/pull/29); awaiting review.
-- Audit universe re-resolved: 37 target rows / 23 recipes / 19 original foods;
-  all 46 current uses retained. Only the two approved frozen forms may be remapped.
-- Five PR28-deferred forms, APPLE profile/bindings and three yield cases retain
-  their blockers. Estimates remain non-executable unless independently superseded
-  by reviewed exact evidence. No catalogue expansion or estimate execution policy.
-- Preflight clarification: none of the four candidate foods has a composition
-  v1 on this main (PR28 classified them NOT_READY). The v2 rule is conditional
-  on existing v1; the supported candidates receive their first ATOMIC v1.
-- **PR6 — NOT COMPLETE.** No autonomous merge or automatic PR6-CLOSE,
-  Recipe Assembly, Serving or PR7+ start. PR6-CLOSE is a later review/gate only.
+- **PR6 — COMPLETE. PR6-CLOSE — COMPLETE**, with explicit limits in the
+  [canonical closure decision](../docs/family-food/pr6-closure.md).
+  This review/evidence publication is OPEN in [PR #30](https://github.com/Mitronomik/family-food-os/pull/30); stop for final review.
+- **PR6-DATA-B2-B2-REDESIGNED — MERGED / delivered**, [PR #29](https://github.com/Mitronomik/family-food-os/pull/29).
+  Exact fetched main / closure base: `3caa95e636c02e8f34657b1b6c885f646451114c`.
+  Accepted PR29 head and merge trees match in full.
+- Migration remains `0029_food_composition_core`; no production runtime/schema/data changes.
+- All 20 closure criteria PASS. Measured: 30 recipes / 189 rows, 29 INCOMPLETE
+  + 1 CONDITIONAL; 40 current estimates non-executable. These remain technical
+  evidence, not a complete consumer/Planner corpus. Deferred forms and yield
+  cases stay blocked; legacy v1 is not exact normalized/cooked authority.
+- **Next roadmap candidate: RECIPE-ASSEMBLY-A — NOT STARTED / requires separate authorization.**
+  Recipe Assembly B and PR7+ NOT STARTED. Gate 1 is not passed.
+- No automatic next operation or autonomous merge.
 
-Evidence: [B2-B2 package](../data/curation/pr6-data-b2-b2-redesigned/README.md).
+Evidence: [closure package](../data/curation/pr6-close/README.md).
 Verification and continuation: [progress](progress.md), [handoff](handoff.md).

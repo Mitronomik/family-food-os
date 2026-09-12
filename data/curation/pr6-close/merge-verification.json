@@ -1,0 +1,10 @@
+{
+  "repository": "Mitronomik/family-food-os",
+  "number": 29,
+  "merged": true,
+  "merged_at": "2026-09-12T07:42:03Z",
+  "merge_commit_sha": "3caa95e636c02e8f34657b1b6c885f646451114c",
+  "head_sha": "8a80ce26e7155ab17a5623d07294fbfd1124d9bf",
+  "url": "https://github.com/Mitronomik/family-food-os/pull/29",
+  "verified_using": "Authenticated GitHub get_pr_info; independently checked fetched Git graph and trees"
+}

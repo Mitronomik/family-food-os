@@ -1,0 +1,97 @@
+{
+  "closure_base": "3caa95e636c02e8f34657b1b6c885f646451114c",
+  "date": "2026-09-12",
+  "executed": [
+    {
+      "command": "AI_ENABLED=false backend/.venv/bin/python scripts/audit_pr6_data_b2b2.py",
+      "exit_code": 0,
+      "result": "PASS",
+      "output": "checks/b2b2.json"
+    },
+    {
+      "command": "AI_ENABLED=false backend/.venv/bin/python scripts/audit_pr6_ru_food_data.py",
+      "exit_code": 0,
+      "result": "PASS",
+      "output": "checks/ru.json"
+    },
+    {
+      "command": "AI_ENABLED=false backend/.venv/bin/python scripts/audit_pr6_nutrient_vector_b.py",
+      "exit_code": 0,
+      "result": "PASS",
+      "output": "checks/vector-b.json"
+    },
+    {
+      "command": "AI_ENABLED=false backend/.venv/bin/python scripts/audit_pr6_composition_core.py",
+      "exit_code": 0,
+      "result": "PASS",
+      "output": "checks/composition.json"
+    },
+    {
+      "command": "AI_ENABLED=false backend/.venv/bin/python scripts/audit_pr6_data_b2a.py",
+      "exit_code": 0,
+      "result": "PASS",
+      "output": "checks/b2a.json"
+    },
+    {
+      "command": "AI_ENABLED=false backend/.venv/bin/python scripts/validate_pr6_nutrient_vector_a.py --content-only",
+      "exit_code": 0,
+      "result": "PASS",
+      "output": "checks/vector-a.txt"
+    },
+    {
+      "command": "AI_ENABLED=false PYTHONPATH=backend:. backend/.venv/bin/python -m pytest -q backend/app/tests/test_nutrition_targets.py backend/app/tests/test_nutrition_domain.py backend/app/tests/test_nutrition_application.py backend/app/tests/test_nutrition_catalogue.py backend/app/tests/test_nutrition_evidence_domain.py backend/app/tests/test_pr6_data_b2b2.py",
+      "exit_code": 0,
+      "result": "178 passed in 11.72s",
+      "output": "checks/focused-tests.txt"
+    },
+    {
+      "command": "AI_ENABLED=false PYTHONPATH=backend:. backend/.venv/bin/python -m pytest -q backend/app/tests/test_food_composition.py backend/app/tests/test_nutrient_vector.py backend/app/tests/persistence/test_nutrition_read_scope.py",
+      "exit_code": 0,
+      "result": "105 passed in 10.67s",
+      "output": "checks/authority-tests.txt"
+    },
+    {
+      "command": "AI_ENABLED=false backend/.venv/bin/python scripts/audit_pr6_close.py",
+      "exit_code": 0,
+      "result": "PASS: three regenerated measurement files reproduced byte-for-byte on an independent temporary DB"
+    },
+    {
+      "command": "ruff check scripts/audit_pr6_close.py",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "command": "ruff format --check scripts/audit_pr6_close.py",
+      "exit_code": 0,
+      "result": "PASS"
+    }
+  ],
+  "historical_full_regression": {
+    "result": "3826 passed with AI_ENABLED=false",
+    "seconds": "649.81",
+    "source": "PR29 body and accepted state/progress.md",
+    "reused": true,
+    "new_run": false,
+    "tested_implementation": "d0a238ce32193d5884d61ee384d5eb7f242bcaed",
+    "accepted_tree_sha_by_directory": {
+      "backend": "ce7b824e420263791f5026711eb6ef9168e28a91",
+      "launcher": "1cc8fdc760b4e744fc93ca803fe57fab097e69d0",
+      "frontend": "166368a199f70462f2c22cf6da72744ac76bdba0",
+      "data": "2b9eaf05d7208805df9bd8e39cb18dede70fcbb0",
+      "scripts": "5f18112b807d320e3c37adaa564346af10b76968"
+    },
+    "tree_proof_command": "git diff --name-only d0a238ce32193d5884d61ee384d5eb7f242bcaed 3caa95e636c02e8f34657b1b6c885f646451114c -- backend launcher frontend data scripts",
+    "tree_proof_output": "empty"
+  },
+  "task_local_corrections": [
+    "Initial closure audit used a text search to map deferred forms; the accepted row-resolution artifact stores null new_food_ingredient for deferrals. Replaced it with nine explicit reviewed row/form identities and re-ran successfully. No production/test change.",
+    "Legacy/normalized zero differences were reviewed against the explicit v1 compatibility contract. All retain uncertainty and normalized composition remains unknown; this is not a milestone blocker."
+  ],
+  "static_checks": {
+    "result": "PASS",
+    "evidence": "static-verification.json",
+    "local_links_and_anchors_checked": 128,
+    "production_runtime_schema_seed_tests_changed": false,
+    "git_diff_check": "PASS"
+  }
+}

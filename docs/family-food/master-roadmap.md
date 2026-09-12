@@ -39,7 +39,7 @@ PR4-DATA Recipe coverage support           COMPLETE
 PR4-DATA2 Russia/SPB corpus re-curation    COMPLETE
 PR4   Recipe Catalogue                     COMPLETE
 PR5   Pantry                               COMPLETE
-PR6   Nutrition Core                       NOT COMPLETE (engine ACCEPTED / MERGED)
+PR6   Nutrition Core                       COMPLETE (PR6-CLOSE evidence review)
 ```
 
 PR2-C closure evidence:
@@ -73,8 +73,8 @@ PR5 closure evidence:
 
 PR6 engine implementation is ACCEPTED / MERGED in
 [PR #18](https://github.com/Mitronomik/family-food-os/pull/18), merge commit
-`7c449672c039c66b8d475064462eba2a9f6d38e6`. PR6 milestone is **NOT COMPLETE**,
-pending data readiness / closure. The [Nutrition Core](nutrition-core.md)
+`7c449672c039c66b8d475064462eba2a9f6d38e6`. PR6 milestone is **COMPLETE** under
+the [PR6-CLOSE decision and limits](pr6-closure.md), submitted for human review. The [Nutrition Core](nutrition-core.md)
 contract remains active. PR6-DATA-A is ACCEPTED / MERGED in PR #19 at
 `60908eb8270ef356eff8552855b4cc5d2aa9ee44`. Supporting PR6-DATA-B1 establishes
 the exact evidence/row-binding foundation described in the
@@ -106,7 +106,7 @@ At VECTOR-A merge, production remained 30 current RecipeVersions / 189 rows,
 all 30 INCOMPLETE, migration head 0027. VECTOR-B adds migration 0028 in its
 authorized implementation PR; Nutrition v1, readiness and all 43 non-executable
 estimates remain unchanged.
-**PR6 — NOT COMPLETE. PR6-NUTRIENT-VECTOR A/B — MERGED.** Bounded VECTOR-A
+At that historical point PR6 remained NOT COMPLETE. **PR6-NUTRIENT-VECTOR A/B — MERGED.** Bounded VECTOR-A
 registry/provenance research is merged in PR #25 at `e35d87a24d5d8afb59509e566aa1ff4b7a58a11a`;
 VECTOR-B is merged in PR #26 at
 `b39d9f5786796dc689bdee8ae52a90cbcc4ebdfe` (migration 0028).
@@ -116,13 +116,17 @@ COMPOSITION-CORE is MERGED in
 PR6-RU-FOOD-DATA is MERGED in [PR #28](https://github.com/Mitronomik/family-food-os/pull/28)
 at `4180297d47d68a0e0d9efbe7a7a27f3900c4f388`; its
 [evidence package](../../data/curation/pr6-ru-food-data/README.md) preserves the two
-food-form promotions and five deferrals. PR6-DATA-B2-B2-REDESIGNED is the current
-explicitly authorized bounded re-curation on `codex/pr6-data-b2-b2-redesigned`.
-PR6 closure is not claimed.
-The mass-authoritative decision is explicitly approved. Its concrete contract is
-recorded in [Composition Core](food-composition-and-assembly.md#pr6-composition-core--concrete-runtime-contract).
-PR6 remains NOT COMPLETE. Later operations, including the PR6-CLOSE review/gate,
-Recipe Assembly and PR7+, require separate authorization. No automatic next operation.
+food-form promotions and five deferrals. PR6-DATA-B2-B2-REDESIGNED is **MERGED /
+delivered** in [PR #29](https://github.com/Mitronomik/family-food-os/pull/29) at
+`3caa95e636c02e8f34657b1b6c885f646451114c`, the exact PR6-CLOSE baseline.
+**PR6-CLOSE — COMPLETE; PR6 — COMPLETE**, with the explicit technical/corpus,
+legacy/normalized authority and downstream limits in [the closure decision](pr6-closure.md).
+All 20 reviewed criteria pass; this closure publication awaits human PR review.
+Migration remains `0029_food_composition_core`.
+The mass-authoritative decision is recorded in
+[Composition Core](food-composition-and-assembly.md#pr6-composition-core--concrete-runtime-contract).
+Next candidate: **RECIPE-ASSEMBLY-A — NOT STARTED / requires separate authorization**.
+Recipe Assembly B and PR7+ remain NOT STARTED. No automatic next operation.
 The approved sequence changes are specified in §6.5; quantitative gates are retained.
 
 ## 3. North Star and core-loop contract
@@ -249,7 +253,7 @@ changes them:
 ✅ PR3   FoodIngredient Catalogue
 ✅ PR4   Recipe Catalogue
 ✅ PR5   Pantry
-✅ PR6 Nutrition engine (PR #18; PR6 milestone NOT COMPLETE)
+✅ PR6 Nutrition Core (PR6-CLOSE COMPLETE; explicit limitations apply)
 ✅ PR6-DATA-A
 ✅ PR6-DATA-B1
 ✅ PR6-INFRA
@@ -259,9 +263,9 @@ changes them:
 ✅ PR6-NUTRIENT-VECTOR (A/B merged)
 ✅ PR6-COMPOSITION-CORE
 ✅ PR6-RU-FOOD-DATA
-→ PR6-DATA-B2-B2-REDESIGNED (current authorized operation)
-→ PR6-CLOSE
-→ RECIPE-ASSEMBLY-A
+✅ PR6-DATA-B2-B2-REDESIGNED (PR #29 merged / delivered)
+✅ PR6-CLOSE (COMPLETE; closure publication for human review)
+→ RECIPE-ASSEMBLY-A (next candidate; NOT STARTED / separate authorization)
 → RECIPE-ASSEMBLY-B
 → PR7   MealPlan / Serving + serving-nutrition integration
 → PR8   Planner v0
@@ -594,8 +598,10 @@ shopping-list generation, automatic purchase ingestion or computer vision.
 **Exit criteria:** a Household can maintain understandable Pantry state through
 transactional movements without exposure to industrial inventory concepts.
 
-### PR6 — Nutrition Core — engine ACCEPTED / MERGED; milestone NOT COMPLETE
+### PR6 — Nutrition Core — COMPLETE
 
+The [PR6-CLOSE decision](pr6-closure.md) establishes milestone completion with
+explicit limitations; it does not certify current FNS consumer readiness or Gate 1.
 The accepted PR6 engine v1 bounded contract runs through:
 
 ```text
@@ -628,9 +634,10 @@ foundation are deterministic, versioned, provenance-aware and usable by PR7.
 These operations extend the target, preserving accepted Nutrition v1 history.
 PR6-ARCH-COMPOSITION is merged (#24). PR6-NUTRIENT-VECTOR is delivered as bounded
 slices A/B: A establishes [registry/provenance research](../../data/curation/pr6-nutrient-vector-a/README.md)
-without runtime/schema; B requires separate authorization after A review and merge.
-This split creates no milestone and changes no operation order. Later operations
-remain NOT STARTED and require separate authorization.
+without runtime/schema; B was separately reviewed and merged.
+This split creates no milestone and changes no operation order. All supporting
+operations through PR6-CLOSE are delivered; Recipe Assembly and PR7+ remain
+NOT STARTED and require separate authorization.
 
 | Operation | Bounded outcome and dependency |
 | --- | --- |
@@ -638,14 +645,16 @@ remain NOT STARTED and require separate authorization.
 | PR6-NUTRIENT-VECTOR | Extensible macro/micronutrient registry/vector, nutrient-level provenance and uncertainty, initial authoritative nutrient registry and explicit backward compatibility with Nutrition v1. |
 | PR6-COMPOSITION-CORE | Atomic/composite FoodIngredient; exact/declared-only composition; recursive versioned DAG; mass states; transformation/yield and retention evidence contracts. Depends on NutrientVector. |
 | PR6-RU-FOOD-DATA | Consumer-ready Russian food catalogue with Russian names, ordinary basic foods and composites where needed, RU availability evidence and nutrition/composition readiness. |
-| PR6-DATA-B2-B2-REDESIGNED | Migrate/re-curate affected existing recipe rows against the new form/composition/nutrient model; preserve history, re-review source/profile promotion, no direct execution of legacy B2-B2 assumptions. |
-| PR6-CLOSE | Explicit data-readiness/closure review after preceding dependencies; engine readiness alone is insufficient. |
+| PR6-DATA-B2-B2-REDESIGNED | MERGED / delivered (#29). Migrate/re-curate affected existing recipe rows against the new form/composition/nutrient model; preserve history, re-review source/profile promotion, no direct execution of legacy B2-B2 assumptions. |
+| PR6-CLOSE | COMPLETE. [Reviewed 20-criterion decision](pr6-closure.md) after preceding dependencies; engine readiness alone is insufficient. Technical corpus limitations remain explicit. |
 
 Persisted changes in those later PRs require explicit migration/backfill/history/
 backup/export strategy. Exact SQL fields and migrations are not designed here.
-Estimate/uncertainty acceptance remains OPEN; all 43 current estimates stay
-non-executable until separately approved. Closure must resolve required data
-readiness under the expanded qualitative gates without weakening existing criteria.
+Estimate/uncertainty acceptance remains OPEN; all 40 remaining current estimate
+usages stay non-executable. PR29 independently superseded three usages with exact
+evidence without relabelling historical estimates. Closure verifies the expanded
+authority/fail-closed criteria; consumer/kitchen and later quantitative gates are
+not waived or claimed complete.
 
 ### RECIPE-ASSEMBLY-A — verified Russian templates and rules
 
