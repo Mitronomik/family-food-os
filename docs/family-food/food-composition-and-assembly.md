@@ -518,3 +518,23 @@ unknowns; default eligibility additionally requires the unchanged market gate.
 Requested nutrient completeness and later recipe/assembly/kitchen gates still apply.
 No producer/output binding, composite, transformation, yield or retention data is
 introduced. Migration head remains 0029. PR6 remains NOT COMPLETE.
+
+## PR6-DATA-B2-B2-REDESIGNED — direct-profile replacement facts
+
+The [bounded re-curation](../../data/curation/pr6-data-b2-b2-redesigned/README.md)
+appends three exact SR replacement profiles/vectors and corresponding ATOMIC
+compositions. Actual main has no existing composition for these three candidate
+foods: PR28 classified them NOT_READY. Their first publication is therefore v1;
+no historical composition is synthesized from an unresolved old profile.
+When an existing v1 pins an old profile, replacement must append v2 and retain
+v1 replay. This conditional case is exercised with explicitly synthetic fixtures;
+all 60 actual pre-existing compositions replay unchanged in the production audit.
+
+Composition replay continues to use exact pinned profile IDs and sealed vectors,
+never mutable current-profile selection. The only historical profile mutation is
+the catalogue's existing `is_current` retirement; old sealed values/provenance
+and old profile facts remain unchanged. New vectors use only positive compatible
+values under the accepted registry/zero policy. Recipe food-form corrections
+reuse the two PR28 compositions; no composite, transformation, yield or retention
+truth is introduced. The separate data upgrade uses one existing project UoW,
+requires a populated 0029 catalogue and leaves schema/lineage unchanged.

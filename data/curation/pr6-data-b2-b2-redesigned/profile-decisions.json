@@ -1,0 +1,163 @@
+{
+  "decisions": [
+    {
+      "all_current_uses": [
+        "CACFP6_CREAMY_COLESLAW:v1:2",
+        "SNAP6_HEAVENLY_DEVILED_EGGS:v1:2"
+      ],
+      "all_use_count": 2,
+      "composition": {
+        "baseline_ru_status": "NOT_READY",
+        "baseline_versions": 0,
+        "new_version": 1,
+        "reason": "Measured main has no existing composition: PR28 left this food NOT_READY. The task v2 rule is conditional on existing v1; append first ATOMIC v1. Never synthesize historical composition from the rejected old profile."
+      },
+      "decision": "PROMOTE",
+      "food_code": "MAYONNAISE_LOW_FAT",
+      "food_identity_review": [
+        "Low-fat/light mayonnaise category; no olive-oil formulation specified.",
+        "Low-fat/light mayonnaise category; no olive-oil formulation specified."
+      ],
+      "gates": {
+        "1": "PASS",
+        "10": "PASS",
+        "11": "PASS",
+        "12": "PASS",
+        "2": "PASS",
+        "3": "PASS",
+        "4": "PASS",
+        "5": "PASS",
+        "6": "PASS",
+        "7": "PASS",
+        "8": "PASS",
+        "9": "PASS"
+      },
+      "reason": "Exact SR 2018-04 generic/form authority supports every current use. Existing mapped positive source observations only; v1 projects the same authority. All affected assessments reviewed explicitly.",
+      "review_reference": "PR6-DATA-B2-B2-REDESIGNED:MAYONNAISE_LOW_FAT",
+      "semantic_support_reference": "data/curation/pr6-data-b2b1/source-manifest.json#FDC-2710220: low-fat/reduced-fat synonyms and SR 4641 input identify generic light mayonnaise; no FNDDS nutrient values or mapping used.",
+      "source_id": "173594",
+      "source_review_reference": "data/curation/pr6-data-b2b1/source-manifest.json#FDC-173594",
+      "zero_policy": "UNRESOLVED_ZERO observations remain unknown; mayonnaise source fiber zero becomes None, never exact zero."
+    },
+    {
+      "all_current_uses": [
+        "SNAP6_PEACH_CRISP:v1:3",
+        "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE:v2:2",
+        "WIC2_SPINACH_CAULIFLOWER_SMOOTHIE:v1:7"
+      ],
+      "all_use_count": 3,
+      "composition": {
+        "baseline_ru_status": "NOT_READY",
+        "baseline_versions": 0,
+        "new_version": 1,
+        "reason": "Measured main has no existing composition: PR28 left this food NOT_READY. The task v2 rule is conditional on existing v1; append first ATOMIC v1. Never synthesize historical composition from the rejected old profile."
+      },
+      "decision": "PROMOTE",
+      "food_code": "OATS_ROLLED",
+      "food_identity_review": [
+        "Dry rolled-oat family input; prepared only after measuring. No flavored instant oatmeal selected.",
+        "Source permits rolled or quick oats; notes prefer old-fashioned and distinguish instant. Accepted rolled option retained.",
+        "Dry rolled-oat family input; prepared only after measuring. No flavored instant oatmeal selected."
+      ],
+      "gates": {
+        "1": "PASS",
+        "10": "PASS",
+        "11": "PASS",
+        "12": "PASS",
+        "2": "PASS",
+        "3": "PASS",
+        "4": "PASS",
+        "5": "PASS",
+        "6": "PASS",
+        "7": "PASS",
+        "8": "PASS",
+        "9": "PASS"
+      },
+      "reason": "Exact SR 2018-04 generic/form authority supports every current use. Existing mapped positive source observations only; v1 projects the same authority. All affected assessments reviewed explicitly.",
+      "review_reference": "PR6-DATA-B2-B2-REDESIGNED:OATS_ROLLED",
+      "source_id": "173904",
+      "source_review_reference": "data/curation/pr6-data-b2b1/source-manifest.json#FDC-173904",
+      "zero_policy": "UNRESOLVED_ZERO observations remain unknown; mayonnaise source fiber zero becomes None, never exact zero."
+    },
+    {
+      "all_current_uses": [
+        "CACFP6_TABBOULEH:v1:5",
+        "HARV6_FRESH_TOMATO_SALSA:v2:1",
+        "SNAP8_SOMALI_SUMMER_SALAD:v1:5"
+      ],
+      "all_use_count": 3,
+      "composition": {
+        "baseline_ru_status": "NOT_READY",
+        "baseline_versions": 0,
+        "new_version": 1,
+        "reason": "Measured main has no existing composition: PR28 left this food NOT_READY. The task v2 rule is conditional on existing v1; append first ATOMIC v1. Never synthesize historical composition from the rejected old profile."
+      },
+      "decision": "PROMOTE",
+      "food_code": "TOMATO",
+      "food_identity_review": [
+        "Fresh generic tomato input, chopped/diced; no named cultivar. Canned alternatives are not selected.",
+        "Fresh generic tomato input, chopped/diced; no named cultivar. Canned alternatives are not selected.",
+        "Fresh generic tomato input, chopped/diced; no named cultivar. Canned alternatives are not selected."
+      ],
+      "gates": {
+        "1": "PASS",
+        "10": "PASS",
+        "11": "PASS",
+        "12": "PASS",
+        "2": "PASS",
+        "3": "PASS",
+        "4": "PASS",
+        "5": "PASS",
+        "6": "PASS",
+        "7": "PASS",
+        "8": "PASS",
+        "9": "PASS"
+      },
+      "reason": "Exact SR 2018-04 generic/form authority supports every current use. Existing mapped positive source observations only; v1 projects the same authority. All affected assessments reviewed explicitly.",
+      "review_reference": "PR6-DATA-B2-B2-REDESIGNED:TOMATO",
+      "source_id": "170457",
+      "source_review_reference": "data/curation/pr6-data-b2b1/source-manifest.json#FDC-170457",
+      "zero_policy": "UNRESOLVED_ZERO observations remain unknown; mayonnaise source fiber zero becomes None, never exact zero."
+    },
+    {
+      "all_current_uses": [
+        "SNAP3_GRILLED_FRUIT:v1:2",
+        "SNAP6_PEACH_CRISP:v1:1"
+      ],
+      "all_use_count": 2,
+      "composition": {
+        "baseline_ru_status": "NOT_READY",
+        "baseline_versions": 0,
+        "new_version": null,
+        "reason": "No composition publication: the profile is deferred at the source-mapping/default-policy gates."
+      },
+      "decision": "DEFER",
+      "food_code": "PEACH",
+      "food_identity_review": [
+        "Generic raw peach, pit excluded when cut. Recipe measures before heating; no cultivar specified.",
+        "Generic raw peach, pit excluded when cut. Recipe measures before heating; no cultivar specified."
+      ],
+      "gates": {
+        "1": "PASS",
+        "10": "NOT_PROMOTED: source mapping/default-policy gates fail; no publication inferred",
+        "11": "NOT_PROMOTED: source mapping/default-policy gates fail; no publication inferred",
+        "12": "NOT_PROMOTED: source mapping/default-policy gates fail; no publication inferred",
+        "2": "PASS",
+        "3": "UNAPPROVED: generic default requires policy; input food is yellow peach",
+        "4": "PASS",
+        "5": "FAIL: approved registry has no Survey (FNDDS) source mappings",
+        "6": "UNAPPROVED: no FNDDS default/precedence policy",
+        "7": "NOT_PROMOTED: source mapping/default-policy gates fail; no publication inferred",
+        "8": "NOT_PROMOTED: source mapping/default-policy gates fail; no publication inferred",
+        "9": "NOT_PROMOTED: source mapping/default-policy gates fail; no publication inferred"
+      },
+      "reason": "FNDDS registry mapping and generic/default source selection are not approved; retained generic label does not establish independent source authority. No new mapping/blending/default policy.",
+      "review_reference": "PR6-DATA-B2-B2-REDESIGNED:PEACH",
+      "source_id": "2709249",
+      "source_review_reference": "data/curation/pr6-data-b2b1/source-manifest.json#FDC-2709249",
+      "zero_policy": "UNRESOLVED_ZERO observations remain unknown; mayonnaise source fiber zero becomes None, never exact zero."
+    }
+  ],
+  "operation": "PR6-DATA-B2-B2-REDESIGNED",
+  "schema_version": 1
+}

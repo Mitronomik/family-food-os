@@ -113,14 +113,16 @@ VECTOR-B is merged in PR #26 at
 COMPOSITION-CORE is MERGED in
 [PR #27](https://github.com/Mitronomik/family-food-os/pull/27), merge commit
 `d5b5ce3fdc4ec79de5454b3ed23b1d527772c0bc`; migration head is 0029.
-PR6-RU-FOOD-DATA is the explicitly authorized current bounded operation on
-`codex/pr6-ru-food-data`; its [evidence package](../../data/curation/pr6-ru-food-data/README.md)
-records food-form promotion and deferral without recipe remapping. Implementation
-is verified and review-ready; PR6 closure is not claimed.
+PR6-RU-FOOD-DATA is MERGED in [PR #28](https://github.com/Mitronomik/family-food-os/pull/28)
+at `4180297d47d68a0e0d9efbe7a7a27f3900c4f388`; its
+[evidence package](../../data/curation/pr6-ru-food-data/README.md) preserves the two
+food-form promotions and five deferrals. PR6-DATA-B2-B2-REDESIGNED is the current
+explicitly authorized bounded re-curation on `codex/pr6-data-b2-b2-redesigned`.
+PR6 closure is not claimed.
 The mass-authoritative decision is explicitly approved. Its concrete contract is
 recorded in [Composition Core](food-composition-and-assembly.md#pr6-composition-core--concrete-runtime-contract).
-PR6 remains NOT COMPLETE. B2-B2-REDESIGNED and later implementation, including PR7+,
-require separate authorization. No automatic next operation.
+PR6 remains NOT COMPLETE. Later operations, including the PR6-CLOSE review/gate,
+Recipe Assembly and PR7+, require separate authorization. No automatic next operation.
 The approved sequence changes are specified in §6.5; quantitative gates are retained.
 
 ## 3. North Star and core-loop contract
@@ -254,10 +256,10 @@ changes them:
 ✅ PR6-DATA-B2-A
 ✅ PR6-DATA-B2-B1
 ✅ PR6-ARCH-COMPOSITION (architecture contract established by this changeset)
-→ PR6-NUTRIENT-VECTOR
-→ PR6-COMPOSITION-CORE
-→ PR6-RU-FOOD-DATA
-→ PR6-DATA-B2-B2-REDESIGNED
+✅ PR6-NUTRIENT-VECTOR (A/B merged)
+✅ PR6-COMPOSITION-CORE
+✅ PR6-RU-FOOD-DATA
+→ PR6-DATA-B2-B2-REDESIGNED (current authorized operation)
 → PR6-CLOSE
 → RECIPE-ASSEMBLY-A
 → RECIPE-ASSEMBLY-B

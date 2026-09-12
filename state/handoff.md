@@ -2,53 +2,52 @@
 
 Updated: `2026-09-12`
 
-PR #27 is MERGED, not review-pending. Exact fetched starting main and merge commit:
-`d5b5ce3fdc4ec79de5454b3ed23b1d527772c0bc`. GitHub merged state verified through the
-GitHub connector. Branch: `codex/pr6-ru-food-data`. Migration remains
-`0029_food_composition_core`; no schema change.
+PR #28 (PR6-RU-FOOD-DATA) is **MERGED / delivered**. GitHub merged state and
+fetched `origin/main` both resolve to `4180297d47d68a0e0d9efbe7a7a27f3900c4f388`.
+Current authorized operation: **PR6-DATA-B2-B2-REDESIGNED**, branch
+`codex/pr6-data-b2-b2-redesigned`. Migration remains `0029_food_composition_core`.
 
-PR6-RU-FOOD-DATA is the current explicitly authorized operation. Its
-[version 1 evidence package](../data/curation/pr6-ru-food-data/README.md) is bounded
-to 81 existing food codes and seven form candidates. 60 food-data records are
-RU_READY, 28 NOT_READY. RU_AVAILABLE does not independently permit default use;
-only three records pass the separate food/market default gate. Sparse nutrients,
-preparation, kitchen and later recipe gates remain independently required.
+[The bounded evidence package](../data/curation/pr6-data-b2-b2-redesigned/README.md)
+contains 37 unique target decisions, all 46 uses, source extracts, full immutable
+parent/revision/assessment comparisons and complete readiness before/after.
+The measured baseline is 185 foods / 30 current recipes / 189 rows.
 
-Promoted: CAULIFLOWER_FROZEN (SR 170398) and
-STRAWBERRY_FROZEN_UNSWEETENED (SR 168173), both April 2018 release. Each adds one
-profile and seal with 33 exact positive mapped source values. Fresh official Lenta
-food-form evidence plus official SPB/LO presence supports RU_AVAILABLE.
-Deferred: APPLE_PEELED and PASTA_COOKED (no exact purchase form or reviewed
-preparation/output path); SPINACH_BABY (primary market form proof unestablished);
-LEMON_JUICE / ORANGE_JUICE (unapproved FNDDS generic/default/blend and mappings).
-Five SR/Foundation source extracts were revalidated against redownloaded official
-archive hashes. FNDDS proposals remain research. PR4 reused evidence keeps its date.
+Implemented on disposable databases: two immutable smoothie v2 remaps; exact
+149 g unthawed strawberry cup evidence; frozen cauliflower remains mass-blocked
+because source portion specifies 1-inch pieces absent from the recipe. Fresh
+cauliflower remains unchanged. Three profile promotions: mayonnaise 173594,
+oats 173904, tomato 170457, all SR 2018-04; PEACH 2709249 DEFER for unapproved
+FNDDS mappings/default policy. Existing Russian food names remain unchanged.
 
-Seed/import: `app.seed.ru_food_data` is a separate explicit operation after the
-accepted food/recipe/B1/B2-A chain. Fixed package hashes, protected source hashes,
-deterministic gates and exact profile provenance resolve local IDs. One project
-UoW publishes profiles, sparse vectors and 60 ATOMIC versions. Seals/snapshots are
-append-only. Repeat import inserts zero and leaves database contents identical.
-Historical v1 backfill policy is unchanged; no current-profile selector is used
-for composition replay. Rollback of a failed run is transactional; successful
-operational recovery restores a pre-seed backup rather than deleting history.
+New publications: 3 profiles / 100 positive normalized values / 3 seals /
+3 ATOMIC compositions, 2 recipes / 13 ingredient rows, 3 mass evidence records,
+20 assessments. Only 3 old profile markers and 7 old assessment markers retire.
+All other historical facts remain identical. Each promoted food lacked a
+composition on main (PR28 NOT_READY); its first ATOMIC publication is v1.
+The task's conditional existing-v1 → new-v2 rule is verified with synthetic
+fixtures. All 185 old seals and 60 actual old compositions remain readable/replayable.
 
-Existing 183 foods/profiles/seals, all recipe versions/rows and B1/B2-A bindings
-are unchanged. Complete readiness reports match, including all 43 non-executable
-estimates. No new COMPOSITE/transformation/yield/retention rows, API/UI, Retail
-runtime or AI dependency. Synthetic tests are excluded from production counts.
+The explicit `app.seed.b2b2` command is the populated-0029 data upgrade, using
+one project UoW, pinned hashes and full before/after receipt. No schema migration
+0030 or historical migration edit. Fresh databases use the accepted seed chain
+then this same command. Rerun only the new reconciliation after profile changes;
+historical B1/B2-A loaders deliberately remain pinned to old authority. Failed
+publication rolls back; successful operational rollback uses the prior backup.
 
-All required verification is green: full backend + launcher 3799 passed with
-AI_ENABLED=false, focused 41, affected 311, migration/backup 154; source replay,
-audits, Ruff/format and affected-runtime mypy pass. Exact commands/results are in
-[progress](progress.md). Status: REVIEW-READY in [PR #28](https://github.com/Mitronomik/family-food-os/pull/28).
-Implementation commit: `6da0d711d25a172c2b0e5ef308283dd0c698cee6`.
-Next action: review the bounded PR
-against main, including the two promotions and five deferrals; merge requires
-explicit post-review authorization. CLI HTTPS/SSH authentication is unavailable;
-delivery uses the authenticated GitHub connector with verified Git blob/tree hashes.
-Unrelated local `.DS_Store` remains excluded.
+Full readiness: 66/21/37/65 → 71/23/35/60 exact/no-conversion/review/blocked.
+Seven row statuses improve; all ten row-report changes are explained. Overnight
+oats becomes CONDITIONAL; 29 recipes remain INCOMPLETE. Three estimate usages
+are independently superseded; all original estimated evidence stays historical
+and the remaining 40 usages are non-executable. APPLE, five deferred forms and
+three yield cases remain blocked. No new foods or estimate policy.
 
-**PR6 remains NOT COMPLETE.** No autonomous merge. After reviewed merge, the next
-roadmap candidate is PR6-DATA-B2-B2-REDESIGNED, requiring separate authorization.
-Do not start it, Recipe Assembly or PR7+ automatically.
+Verification: focused 27 passed; source replay and existing B2-A, VECTOR-A/B,
+Composition and RU audits pass; Ruff/format and 3-file runtime mypy pass.
+Full backend + launcher regression with AI_ENABLED=false: **3826 passed in 649.81s**,
+zero skips. All required checks pass.
+See [progress](progress.md) for exact commands. Implementation is review-ready;
+PR delivery follows. Unrelated `.DS_Store` stays excluded.
+
+**PR6 — NOT COMPLETE.** Publish the verified feature branch and PR into main;
+stop for review without merging. Do not start PR6-CLOSE automatically. After
+reviewed merge it is a separate review/gate, not assumed milestone completion.
