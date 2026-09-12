@@ -1,7 +1,7 @@
 # FamilyFoodOS — Master Roadmap
 
 **Status:** canonical repository sequencing and delivery-gate contract  
-**Updated:** `2026-09-10`
+**Updated:** `2026-09-12`
 
 ## 1. Authority
 
@@ -102,12 +102,13 @@ and [Russian-language invariant](russian-language-contract.md).
 **Old PR6-DATA-B2-B2: SUPERSEDED / PENDING REDESIGN.** Its former
 form/profile corrections + explicit estimate policy plan cannot execute directly.
 
-Production remains 30 current RecipeVersions / 189 rows, all 30 INCOMPLETE;
-Nutrition v1 remains the current implementation. Runtime/schema/data are unchanged,
-migration head remains 0027 and all 43 estimates remain non-executable.
+At VECTOR-A merge, production remained 30 current RecipeVersions / 189 rows,
+all 30 INCOMPLETE, migration head 0027. VECTOR-B adds migration 0028 in its
+authorized implementation PR; Nutrition v1, readiness and all 43 non-executable
+estimates remain unchanged.
 **PR6 — NOT COMPLETE. PR6-NUTRIENT-VECTOR — NOT COMPLETE.** Bounded VECTOR-A
-registry/provenance research is established by this changeset; VECTOR-B is NOT
-AUTHORIZED. COMPOSITION-CORE and PR7+ are UNAUTHORIZED. No automatic next operation.
+registry/provenance research is merged in PR #25 at `e35d87a24d5d8afb59509e566aa1ff4b7a58a11a`;
+VECTOR-B is separately authorized on 2026-09-12 and pending implementation review/merge. COMPOSITION-CORE and PR7+ are UNAUTHORIZED. No automatic next operation.
 The approved sequence changes are specified in §6.5; quantitative gates are retained.
 
 ## 3. North Star and core-loop contract

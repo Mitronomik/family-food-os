@@ -6,7 +6,7 @@ from typing import Any
 from uuid import UUID
 
 from sqlalchemy import case, exists, func, insert, literal, or_, select, update
-from sqlalchemy.engine import Connection
+from sqlalchemy.engine import Connection, RowMapping
 from sqlalchemy.exc import IntegrityError
 
 from app.domain.food_ingredients import (
@@ -178,7 +178,7 @@ class SqlAlchemyFoodIngredientRepository:
             )
 
     def _one_with_allergens(
-        self, row: Mapping[str, Any] | None
+        self, row: Mapping[str, Any] | RowMapping | None
     ) -> FoodIngredient | None:
         if row is None:
             return None
@@ -186,7 +186,7 @@ class SqlAlchemyFoodIngredientRepository:
         return _ingredient_from_row(row, codes)
 
     def _many_with_allergens(
-        self, rows: Sequence[Mapping[str, Any]]
+        self, rows: Sequence[Mapping[str, Any] | RowMapping]
     ) -> list[FoodIngredient]:
         allergen_map = self._allergen_map([row["id"] for row in rows])
         return [
@@ -266,6 +266,11 @@ class SqlAlchemyFoodNutritionProfileRepository:
             raise FoodCataloguePersistenceConflictError(
                 "Nutrition provenance or current-profile state conflicts."
             ) from exc
+        from app.persistence.sqlalchemy_core.nutrient_vector_repository import (
+            initialize_audited_profile,
+        )
+
+        initialize_audited_profile(self._connection, profile)
 
     def get_nutrition_profile_by_id(
         self, profile_id: UUID
@@ -384,7 +389,7 @@ def _nutrition_values(profile: FoodNutritionProfile) -> dict[str, object]:
 
 
 def _ingredient_from_row(
-    row: Mapping[str, Any], allergen_codes: tuple[str, ...]
+    row: Mapping[str, Any] | RowMapping, allergen_codes: tuple[str, ...]
 ) -> FoodIngredient:
     return FoodIngredient(
         id=row["id"],
@@ -404,7 +409,7 @@ def _ingredient_from_row(
     )
 
 
-def _alias_from_row(row: Mapping[str, Any]) -> IngredientAlias:
+def _alias_from_row(row: Mapping[str, Any] | RowMapping) -> IngredientAlias:
     return IngredientAlias(
         id=row["id"],
         food_ingredient_id=row["food_ingredient_id"],
@@ -415,7 +420,7 @@ def _alias_from_row(row: Mapping[str, Any]) -> IngredientAlias:
     )
 
 
-def _nutrition_from_row(row: Mapping[str, Any]) -> FoodNutritionProfile:
+def _nutrition_from_row(row: Mapping[str, Any] | RowMapping) -> FoodNutritionProfile:
     return FoodNutritionProfile(
         id=row["id"],
         food_ingredient_id=row["food_ingredient_id"],

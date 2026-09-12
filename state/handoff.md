@@ -1,39 +1,39 @@
 # Handoff
 
-Updated: `2026-09-10`
+Updated: `2026-09-12`
 
-PR6-NUTRIENT-VECTOR-A establishes registry/provenance research only from exact
-main `307ba3475581087b079ebcf2fa643e19a00bf06d` (PR #24 merged).
-Branch: `data/pr6-nutrient-vector-a-registry`. Existing PR #25; next action is VECTOR-A final re-review.
-Do not autonomously merge, start VECTOR-B or implement any schema/runtime.
+PR6-NUTRIENT-VECTOR-A is merged in PR #25 at
+`e35d87a24d5d8afb59509e566aa1ff4b7a58a11a`. The user separately authorized
+PR6-NUTRIENT-VECTOR-B. Branch: `codex/pr6-nutrient-vector-b`; implementation is verified and ready for review. Main was fetched and matches the task SHA.
 
-The [complete report](../data/curation/pr6-nutrient-vector-a/README.md) contains
-the 51-entry Russian registry, source manifests/hashes, 140 FDC mappings, all
-915 legacy field observations and VECTOR-B recommendations. Key facts: 183
-accepted profiles across history (0 historical-only), 870 confirmed values,
-45 unknown fibres, 64 source-reported zeros (14 Foundation / 50 SR); no numeric
-mismatches or ambiguous component mappings. Exact/censoring semantics remain
-unresolved for all 64: zero proven exact/non-censored, zero explicitly censored,
-zero LOQ-present/status-unspecified, 64 without available censoring metadata.
-See the report zero audit for row evidence, child adjusted amounts and JSON gaps.
-Current Foundation release verified April 2026; SR Legacy April 2018.
-Source mapping gaps are explicit and must not be resolved by guessing.
+The [concrete contract](../docs/family-food/nutrition-core.md#pr6-nutrient-vector-b--normalized-immutable-snapshots)
+describes migration 0028, immutable registry evidence, sparse Decimal values,
+deferred seal FK, triggers, complete reads and unaudited-profile handling.
+Existing FoodNutritionProfile remains the single profile/version container.
+Nutrition v1 consumers are unchanged; no API/UI or future-context work is included.
 
-Keep FoodNutritionProfile as the single profile/version/provenance container.
-Absence of a value row means unknown only after complete atomic import/read;
-source numeric zero remains reported evidence, never automatic exact authority.
-All 64 unresolved zeros are held from exact normalized backfill; v1 is unchanged.
-Preserve nutrient-level source locators and legacy
-projections; no second current-profile selector. Extra deployment profiles need
-their own full historical inventory/audit before a future backfill.
+The [reproducible audit](../data/curation/pr6-nutrient-vector-b/README.md) measures
+51 definitions / 183 profiles / 806 values. All 64 unresolved source zeros are
+retained in evidence and v1 and omitted from exact normalized values. All 45
+absent observations remain unknown. Every pre-existing table row, profile ID,
+current flag and B1 binding remains unchanged. Readiness is 30 recipes / 189 rows /
+30 INCOMPLETE; current statuses 66/21/37/65; 43 estimates remain non-executable.
+The older 20/66 counts were B1-era context, superseded by accepted B2-A.
 
-Production runtime/schema/seeds, B1/B2-A/B2-B1 unchanged. Head migration is 0027;
-Nutrition v1 current; 43 estimates non-executable; 30 current recipes / 189 rows
-remain INCOMPLETE. PR6 / PR6-NUTRIENT-VECTOR NOT COMPLETE; VECTOR-B NOT AUTHORIZED;
-COMPOSITION-CORE / PR7+ UNAUTHORIZED. Old B2-B2 remains superseded/pending redesign.
+Use `backend/.venv/bin/python`; root Python lacks the project SQLAlchemy runtime.
+VECTOR-A current content validation uses `--content-only`. Tests execute old
+research-only scope guards in disposable clones at each accepted research SHA;
+all content/provenance/zero-gate checks still run on current artifacts.
+Full backend/launcher regression: **3699 passed in 593.83s**, no skips,
+`AI_ENABLED=false`. Lint/format, mypy, upgrade/provenance/readiness audits PASS.
+Next action: deliver the verified branch/PR, then final review.
+Executed checks: [progress](progress.md#pr6-nutrient-vector-b-verification).
 
-Verification commands/results are in [progress](progress.md#pr6-nutrient-vector-a-verification).
-Use `backend/.venv/bin/python` for focused tests: root `.venv` lacks SQLAlchemy.
-Unrelated tracked `.DS_Store` modification is preserved and excluded from PR.
-Full external archives remain temporary, outside the repository; ordinary tests
-are offline and depend only on committed selected evidence plus accepted Git history.
+Unrelated tracked `.DS_Store` modification is preserved and excluded from delivery.
+No real-user/developer database was opened or mutated; all evidence uses temporary
+seeded SQLite databases. Migration fails atomically on extra unaudited existing
+profiles; do not invent an audit or silently skip them. New unaudited v1 profiles
+remain without a readable vector. Future enrichment is not authorized.
+
+PR6 remains NOT COMPLETE. No autonomous merge. Composition Core requires its own
+authorization after this PR is reviewed and merged; do not start it now.

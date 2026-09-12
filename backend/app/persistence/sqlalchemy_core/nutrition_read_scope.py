@@ -18,11 +18,18 @@ from app.persistence.sqlalchemy_core.nutrition_evidence_repositories import (
     SqlAlchemyNutritionEvidenceRepository,
 )
 from app.persistence.sqlalchemy_core.uow import SqlAlchemyReadOnlyScope
+from app.persistence.sqlalchemy_core.nutrient_vector_repository import (
+    SqlAlchemyNutrientVectorRepository,
+)
 
 
 class SqlAlchemyNutritionReadScope:
     def __init__(self, engine: Engine) -> None:
         self._scope = SqlAlchemyReadOnlyScope(engine)
+
+    @property
+    def nutrient_vectors(self) -> SqlAlchemyNutrientVectorRepository:
+        return SqlAlchemyNutrientVectorRepository(self._scope.adapter_connection)
 
     @property
     def evidence(self) -> SqlAlchemyNutritionEvidenceRepository:

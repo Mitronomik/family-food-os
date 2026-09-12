@@ -118,6 +118,14 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
     ),
     # 0027 rebuilds the existing RecipeVersion table; no new table survives.
     "0027_recipe_same_source_revisions": frozenset(),
+    "0028_normalized_nutrient_vector": frozenset(
+        {
+            "nutrient_registry_snapshots",
+            "nutrient_definitions",
+            "nutrition_vector_seals",
+            "nutrient_values",
+        }
+    ),
 }
 
 # The foundational tables promised by migration `0001`. Stable FamilyFoodOS

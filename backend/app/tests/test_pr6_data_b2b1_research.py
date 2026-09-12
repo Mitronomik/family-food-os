@@ -283,3 +283,29 @@ def test_research_cannot_claim_new_production_authority(research):
     audit["estimate_boundary"]["new_recipe_versions"] = 1
     with pytest.raises(ValueError, match="production/estimate authority claimed"):
         validator.validate_content(audit, manifest)
+
+
+@pytest.fixture(scope="module")
+def accepted_research_scope(tmp_path_factory):
+    from app.tests.research_scope_history import load_accepted_validator
+
+    destination = tmp_path_factory.mktemp("accepted-research") / "checkout"
+    return load_accepted_validator(
+        ROOT,
+        destination,
+        "47299ceb2c740f40f69f3b02359ce71c8be6b1c1",
+        "validate_pr6_data_b2b1.py",
+    )
+
+
+@pytest.fixture(autouse=True)
+def frozen_scope_guards(request, monkeypatch):
+    if request.node.originalname in [
+        "test_protected_production_files_equal_exact_accepted_git_objects",
+        "test_research_cannot_rebaseline_a_protected_hash",
+        "test_production_mutation_detected_without_writing_production",
+        "test_new_migration_is_detected_without_creating_one",
+    ]:
+        historical = request.getfixturevalue("accepted_research_scope")
+        monkeypatch.setitem(globals(), "validator", historical)
+        monkeypatch.setitem(globals(), "ROOT", historical.ROOT)

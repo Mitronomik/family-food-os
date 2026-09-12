@@ -5,10 +5,10 @@ from app.db.migrations import expected_migration_ids
 
 APP = Path(__file__).parents[1]
 BOUNDARY = [
-    *(APP / "domain").glob("nutrition*.py"),
-    *(APP / "services").glob("nutrition*.py"),
+    *(APP / "domain").glob("nutri*.py"),
+    *(APP / "services").glob("nutri*.py"),
 ]
-ADAPTERS = list((APP / "persistence" / "sqlalchemy_core").glob("nutrition*.py"))
+ADAPTERS = list((APP / "persistence" / "sqlalchemy_core").glob("nutri*.py"))
 
 
 def test_nutrition_has_no_driver_ai_or_future_context_dependency():
@@ -63,11 +63,12 @@ def test_nutrition_has_no_driver_ai_or_future_context_dependency():
 
 
 def test_b1_and_b2a_add_only_authorized_schema_and_no_api():
-    assert expected_migration_ids()[-2:] == [
+    assert expected_migration_ids()[-3:] == [
         "0026_nutrition_measure_evidence",
         "0027_recipe_same_source_revisions",
+        "0028_normalized_nutrient_vector",
     ]
-    assert len(expected_migration_ids()) == 27
+    assert len(expected_migration_ids()) == 28
     assert len(list((APP / "migrations" / "versions").glob("0026*"))) == 1
     assert not list((APP / "api").glob("*nutrition*"))
     assert not list((APP / "schemas").glob("*nutrition*"))

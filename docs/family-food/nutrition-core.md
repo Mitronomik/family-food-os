@@ -364,9 +364,10 @@ nutrient/status/error display, including admin, API messages and PDF.
 
 Old PR6-DATA-B2-B2: **SUPERSEDED / PENDING REDESIGN**. All 43 estimates remain
 non-executable; production audit v3 still has 30 current recipes / 189 rows, all
-30 INCOMPLETE. Migration head remains `0027_recipe_same_source_revisions`.
+30 INCOMPLETE. At VECTOR-A merge, migration head was
+`0027_recipe_same_source_revisions`; VECTOR-B adds 0028 below.
 PR6 — NOT COMPLETE; PR6-NUTRIENT-VECTOR is being delivered in bounded A/B
-slices described below. VECTOR-B is NOT AUTHORIZED; PR7+ — UNAUTHORIZED. The
+slices described below. VECTOR-B is authorized by the 2026-09-12 implementation task; PR7+ — UNAUTHORIZED. The
 [roadmap](master-roadmap.md#5-canonical-master-sequence) owns the new sequence.
 
 
@@ -412,8 +413,92 @@ DIRECT_COMPONENT is a chemical/group definition, not certification of measuremen
 DERIVED_COMPONENT identifies operational/activity definitions. Source derivation
 and estimation state remain separate, and cross-source blending stays forbidden.
 
-Runtime/schema/seeds remain unchanged; FAMILY_FOOD_NUTRITION_V1 is current,
-migration head is 0027 and all 43 estimates are non-executable.
-PR6 and PR6-NUTRIENT-VECTOR are NOT COMPLETE. VECTOR-B is NOT AUTHORIZED;
-COMPOSITION-CORE and PR7+ remain UNAUTHORIZED. No implementation follows
-automatically from registry readiness.
+At VECTOR-A merge, runtime/schema/seeds were unchanged and migration head was
+0027. FAMILY_FOOD_NUTRITION_V1 remains current and all 43 estimates are non-executable.
+VECTOR-A is merged in PR #25 at `e35d87a24d5d8afb59509e566aa1ff4b7a58a11a`.
+PR6 and PR6-NUTRIENT-VECTOR remain NOT COMPLETE pending review/acceptance.
+The separately authorized VECTOR-B implementation is described below;
+COMPOSITION-CORE and PR7+ remain UNAUTHORIZED.
+
+
+## PR6-NUTRIENT-VECTOR-B — normalized immutable snapshots
+
+**Authorized 2026-09-12; implementation pending review/merge.** Migration
+`0028_normalized_nutrient_vector` augments the existing `FoodNutritionProfile`.
+It never creates another profile/version aggregate or current selector. Its
+100 g basis, UUID, FoodIngredient FK, five legacy fields, provenance and B1
+assessment bindings retain their original values. Nutrition v1 calculation and
+API contracts continue unchanged alongside the internal vector read abstraction.
+
+The migration copies the exact hash-pinned VECTOR-A registry, crosswalk, mappings
+and selected source manifest into `nutrient_registry_snapshots`, identified by
+`PR6_NUTRIENT_VECTOR_A_V1`. These immutable bytes retain release hashes, source
+observations, uncertainty/censoring gaps and alternative energy evidence offline.
+`nutrient_definitions` holds the 51 approved stable project codes, Russian names,
+canonical units, definition metadata and registry version. Raw FDC IDs are
+mapping/provenance fields, never project primary keys. This is a persistence
+projection of VECTOR-A, not an independently curated second registry.
+
+`nutrient_values` has primary key `(profile_id, nutrient_code)`, non-null exact
+Decimal text and the selected immutable source observation/mapping. Existing
+`DecimalText` avoids SQLite numeric affinity and binary floating-point rounding.
+There are no nutrient-specific SQL columns or unknown numeric placeholder rows.
+The bounded backfill retains accepted six-place legacy amounts for confirmed
+nonzero observations. It does not import additional micronutrient amounts merely
+because definitions exist. Source amount, component name/ID/nbr/unit, observation
+ID, derivation, release, mapping version/status and estimation uncertainty remain
+recoverable. Semantic mapping agreement does not imply analytical measurement.
+
+The v1 compatibility import policy is versioned in
+`nutrient_vector_backfill_v1.py`. It requires agreement with the complete audited
+profile identity, values, basis, data type, verification instant and estimated
+flag. The exact crosswalk-selected energy row wins; alternatives are never
+summed or selected by order. No cross-source merging, inference or new energy
+precedence is introduced. The 64 unresolved source zeros are preserved verbatim
+in evidence and v1, but create no normalized numeric values. This policy grants
+no new exact-zero authority. Mismatch/ambiguous/absent observations and legacy
+projections remain explicit dispositions; no guessing or source substitution.
+
+`nutrition_vector_seals` is a dependent completeness marker keyed by the existing
+profile ID, not another profile identity. Values are inserted first; their FK
+to the seal is deferred until COMMIT. The seal is inserted last, with registry
+version, complete row count, deterministic SHA-256 and the full five-field
+observation/disposition history. A trigger verifies count and registry agreement.
+UPDATE/DELETE/REPLACE are forbidden for registry, definitions, seals and values;
+a seal also forbids later INSERT into its value set. There is no runtime vector
+writer/enrichment API. The existing profile `add` path initializes a matching
+audited profile in the same project UoW before it becomes visible. Runtime
+repositories never commit independently.
+
+`NutrientVectorReader` / `NutrientVectorReadScope` expose complete immutable domain
+objects using the existing nutrition read transaction. Reads are by explicit
+profile ID, including historical IDs; they never substitute a current profile.
+The adapter loads the seal and all values and verifies count/digest before
+returning the vector. Filtered, partially loaded or corrupt sets fail closed.
+Only a successfully read sealed set interprets missing nutrients as unknown:
+`vector.amount(code)` returns `None`, including all nutrients in a valid empty
+vector such as the audited salt profile. It never returns an invented zero.
+
+An existing deployment profile absent from the complete VECTOR-A audit, or
+whose snapshot differs, aborts migration atomically with an audit-required error.
+The runner rolls back schema, values, seals and migration marker; it retains the
+prior schema/data. A newly created unaudited v1 profile remains supported by v1
+but has no vector seal; vector reads raise `NutrientVectorUnavailableError`.
+Neither path silently claims complete coverage. Additional deployment audits and
+future enrichment/versioning policy require separately authorized work.
+
+Migration uses the existing standard transactional runner (`BEGIN` when needed,
+no `executescript`, independent COMMIT or schema rebuild). Fresh databases get
+the registry before the existing seed loader creates profiles. Populated 0027
+databases are augmented in place. The project migration chain is forward-only;
+there is no downgrade API. Failure/resume is tested. Operational rollback after
+a successful deployment uses the existing pre-upgrade backup/restore process,
+not deletion of historical profile data.
+
+[Measured evidence](../../data/curation/pr6-nutrient-vector-b/implementation-evidence.json):
+183 profiles examined/backfilled, 806 numeric values, 51 definitions, 64 held
+zeros, 45 absent fields. All pre-existing table rows and full production audit
+are identical before/after. Current metrics are 66/21/37/65 approvals/review/blocked,
+30 recipes / 189 rows / 30 INCOMPLETE, 43 non-executable estimates.
+No API/UI, Composition Core, RU ingestion, B2 redesign, Recipe Assembly or
+Planner scope is introduced. PR6 remains NOT COMPLETE.

@@ -778,3 +778,51 @@ Production seed/schema/runtime, B1/B2 evidence, assessment/profile history and
 Nutrition v1 behavior remain unchanged. FAMILY_FOOD_NUTRITION_V1 is current.
 PR6 NOT COMPLETE; VECTOR-B NOT AUTHORIZED; COMPOSITION-CORE UNAUTHORIZED;
 PR7+ UNAUTHORIZED. Next action is final re-review of PR #25; no automatic merge.
+
+## PR6-NUTRIENT-VECTOR-B verification
+
+Authorized implementation from fetched main
+`e35d87a24d5d8afb59509e566aa1ff4b7a58a11a` (PR #25 merged),
+branch `codex/pr6-nutrient-vector-b`. Migration head 0027 → 0028.
+
+Measured [evidence](../data/curation/pr6-nutrient-vector-b/implementation-evidence.json):
+51 approved definitions, 183 existing profiles examined/backfilled, 806 normalized
+values; 64 unresolved zeros retained and zero promoted; 45 absent fields.
+All pre-existing table rows and full runtime readiness report compare equal.
+Current B2-A classifications are 66 exact / 21 no-conversion / 37 review-required /
+65 blocked; 30 current versions / 189 rows / 30 INCOMPLETE and 43 non-executable
+estimates. The supplied older 20/66 regression context predates B2-A.
+
+Executed on 2026-09-12 (test runs use `AI_ENABLED=false`):
+
+- Initial targeted implementation/research/architecture/B2-A tests: 187 passed.
+- Expanded vector + nutrition architecture/read-scope + VECTOR-A tests: 155 passed.
+- `scripts/audit_pr6_nutrient_vector_b.py`: before/after equality and complete audit PASS.
+- `scripts/validate_pr6_nutrient_vector_a.py --content-only`: PASS.
+- Mypy for all ten new/affected runtime files, using the project interpreter,
+  `--follow-imports=silent --ignore-missing-imports --check-untyped-defs`: PASS.
+  Existing adapter annotations now explicitly accept SQLAlchemy RowMapping;
+  no conversion/behavior change was needed.
+- Full backend/launcher command: `AI_ENABLED=false backend/.venv/bin/python -m pytest -q backend/app/tests launcher/tests`:
+  **3699 passed in 593.83s (9:53), zero skips**. Final code verified.
+- The first full run found 23 schema-inventory/lineage/startup expectation failures
+  (3669 passed). Registered all four 0028 tables in restore lineage and the shared
+  table guard, and updated the exact prior/head backup expectations. All 23 passed
+  on immediate rerun; the full final run above then passed.
+- Startup/backup/migration-lineage focused run: **107 passed in 6.72s**.
+- `ruff check` and `ruff format --check` for all **25** changed Python files: PASS.
+- Accepted VECTOR-A JSON and production seeds are byte-identical to base main.
+- Updated documentation file links, `git diff --check`, staged scope and
+  `git diff --cached --check`: PASS. Unrelated `.DS_Store` excluded.
+- `origin/main` rechecked before delivery: still the exact base SHA above.
+
+Mypy command: `mypy --follow-imports=silent --ignore-missing-imports --check-untyped-defs --python-executable backend/.venv/bin/python`,
+covering migrations/lineage, vector domain/backfill, migration 0028, Core
+metadata/repository/read scope, existing profile repository and vector contracts.
+No type-check errors are suppressed in changed source files.
+
+Implementation is ready for review; PR6 is not complete and merge is not authorized.
+
+Full current content checks are retained. Old research-only scope guards are
+exercised unchanged on their exact accepted Git trees; future authorized runtime
+changes are not recast as changes inside those earlier research PRs.
