@@ -1,0 +1,14 @@
+{
+  "algorithm": "SHA-256",
+  "files": {
+    "README.md": "22c2ee1034e76287194213282a527b9c2e25de7e5799fd5ea44cbf323923965b",
+    "candidate-review.json": "d8a9715f4e3433795c175fa6eeaea3ff980b3d2b520ba89114cf141a832fda4c",
+    "implementation-evidence.json": "ae16e221699faa761057071dc6a00d97a5e66727e40b7ed03e9cd8531dcb8761",
+    "kitchen-verification.json": "856678c7e31f5f6654a4342ee483878e4f5b8ea40b12cf53a4d047179484bf7c",
+    "market-evidence.json": "85430774c869dd2b4cb35d0f1528c4460722bb4a4d0809b27aaf188c4f05bffa",
+    "research-observations.json": "ebf21e7c9597e1f94f5978c809e54266c3d0a151b3954a9747167d8872c34b46",
+    "ru-familiarity.json": "0cc56fce689e959cb4b8d936d1cdae3461d0405904ec5378ca7634ad6bc1914e",
+    "source-manifest.json": "1aefed9a91bef48f991ca60c50e8af5fa98e1f50253706f34877956779c7d247",
+    "template-decisions.json": "cce721703b240aba40ebe2ba4254fcbf1a8aaec5a091b112d33020466801a388"
+  }
+}

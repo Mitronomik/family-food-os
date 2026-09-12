@@ -1,0 +1,313 @@
+{
+  "candidates": [
+    {
+      "gate": "NOT_PASSED",
+      "reason": "Existing RU_AVAILABLE classification does not grant default eligibility without a reviewed ordinary substitution path; missing composition/form authority also prevents template readiness.",
+      "recipe_code": "CACFP6_CREAMY_COLESLAW",
+      "scope": "Required purchase inputs of fixed donor only; no assembled or generalized variant; no composite graph manufactured.",
+      "terminal_inputs": [
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:APPLE_CIDER_VINEGAR:research-lenta-okey-v3.json:22"
+          ],
+          "food_code": "APPLE_CIDER_VINEGAR",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Уксус яблочный"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:BLACK_PEPPER:research-lenta-okey-v2.json:34"
+          ],
+          "food_code": "BLACK_PEPPER",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Перец чёрный молотый"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:CABBAGE_GREEN:research-lenta-okey-v2.json:12",
+            "PR4:CABBAGE_GREEN:research-magnit-v2.json:7"
+          ],
+          "food_code": "CABBAGE_GREEN",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Капуста белокочанная"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:CABBAGE_RED:research-x5-v3.json:4"
+          ],
+          "food_code": "CABBAGE_RED",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Капуста краснокочанная"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:CARROT:research-lenta-okey-v2.json:1",
+            "PR4:CARROT:research-magnit-v2.json:1"
+          ],
+          "food_code": "CARROT",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Морковь"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": null,
+          "composition_version": null,
+          "evidence_refs": [
+            "PR4:CRANBERRIES_DRIED:research-lenta-okey-v3.json:21"
+          ],
+          "food_code": "CRANBERRIES_DRIED",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Клюква сушёная"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:GREEN_ONION:research-lenta-okey-v4.json:11",
+            "PR4:GREEN_ONION:research-x5-v3.json:5"
+          ],
+          "food_code": "GREEN_ONION",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Лук зелёный"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:HONEY:research-lenta-okey-v3.json:7"
+          ],
+          "food_code": "HONEY",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Мёд"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:MAYONNAISE_LOW_FAT:research-lenta-okey-v2.json:19"
+          ],
+          "food_code": "MAYONNAISE_LOW_FAT",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Майонез пониженной жирности"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:SALT:research-lenta-okey-v4.json:17",
+            "PR4:SALT:research-lenta-okey-v7.json:3",
+            "PR4:SALT:research-x5-v3.json:2"
+          ],
+          "food_code": "SALT",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Соль поваренная"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:YOGURT_PLAIN_LOW_FAT:research-lenta-okey-v3.json:4"
+          ],
+          "food_code": "YOGURT_PLAIN_LOW_FAT",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Йогурт натуральный пониженной жирности"
+        }
+      ]
+    },
+    {
+      "gate": "NOT_PASSED",
+      "reason": "Existing RU_AVAILABLE classification does not grant default eligibility without a reviewed ordinary substitution path; missing composition/form authority also prevents template readiness.",
+      "recipe_code": "SNAP4_SPRING_VEGETABLE_SAUTE",
+      "scope": "Required purchase inputs of fixed donor only; no assembled or generalized variant; no composite graph manufactured.",
+      "terminal_inputs": [
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:ASPARAGUS:research-lenta-okey-v4.json:6"
+          ],
+          "food_code": "ASPARAGUS",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Спаржа зелёная"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:BLACK_PEPPER:research-lenta-okey-v2.json:34"
+          ],
+          "food_code": "BLACK_PEPPER",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Перец чёрный молотый"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:CARROT:research-lenta-okey-v2.json:1",
+            "PR4:CARROT:research-magnit-v2.json:1"
+          ],
+          "food_code": "CARROT",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Морковь"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:DILL_DRIED:research-lenta-okey-v4.json:14"
+          ],
+          "food_code": "DILL_DRIED",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Укроп сушёный"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:GARLIC:research-lenta-okey-v2.json:6",
+            "PR4:GARLIC:research-magnit-v2.json:3"
+          ],
+          "food_code": "GARLIC",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Чеснок"
+        },
+        {
+          "classification": "SPECIALTY_OR_UNCLEAR",
+          "composition_kind": null,
+          "composition_version": null,
+          "evidence_refs": [
+            "PR4:GREEN_BEANS:research-lenta-okey-v8.json:5"
+          ],
+          "food_code": "GREEN_BEANS",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Фасоль зелёная стручковая"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:OLIVE_OIL:research-lenta-okey-v4.json:9",
+            "PR4:OLIVE_OIL:research-x5-v3.json:1"
+          ],
+          "food_code": "OLIVE_OIL",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Масло оливковое"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:ONION_RED:research-lenta-okey-v8.json:1"
+          ],
+          "food_code": "ONION_RED",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Лук красный"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": null,
+          "composition_version": null,
+          "evidence_refs": [
+            "PR4:POTATO:research-lenta-okey-v4.json:4",
+            "PR4:POTATO:research-lenta-okey-v8.json:2"
+          ],
+          "food_code": "POTATO",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Картофель"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:RADISH:research-lenta-okey-v8.json:3"
+          ],
+          "food_code": "RADISH",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Редис"
+        },
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:SALT:research-lenta-okey-v4.json:17",
+            "PR4:SALT:research-lenta-okey-v7.json:3",
+            "PR4:SALT:research-x5-v3.json:2"
+          ],
+          "food_code": "SALT",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Соль поваренная"
+        }
+      ]
+    },
+    {
+      "gate": "NOT_PASSED",
+      "reason": "Existing RU_AVAILABLE classification does not grant default eligibility without a reviewed ordinary substitution path; missing composition/form authority also prevents template readiness.",
+      "recipe_code": "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE",
+      "scope": "Required purchase inputs of fixed donor only; no assembled or generalized variant; no composite graph manufactured.",
+      "terminal_inputs": [
+        {
+          "classification": "RU_AVAILABLE",
+          "composition_kind": null,
+          "composition_version": null,
+          "evidence_refs": [
+            "PR4:MILK_1_PERCENT:research-lenta-okey-v2.json:14"
+          ],
+          "food_code": "MILK_1_PERCENT",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Молоко 1% жирности"
+        },
+        {
+          "classification": "RU_MASS_MARKET",
+          "composition_kind": "ATOMIC",
+          "composition_version": 1,
+          "evidence_refs": [
+            "PR4:OATS_ROLLED:research-lenta-okey-v5.json:4",
+            "PR4:OATS_ROLLED:research-lenta-okey-v2.json:33",
+            "PR4:OATS_ROLLED:research-lenta-okey-v5.json:3",
+            "PR4:OATS_ROLLED:research-x5-v2.json:3",
+            "PR4:OATS_ROLLED:research-panel-v3.json:3"
+          ],
+          "food_code": "OATS_ROLLED",
+          "reviewed_ordinary_substitution_path": null,
+          "russian_display": "Овсяные хлопья"
+        }
+      ]
+    }
+  ],
+  "fresh_market_retrieval": false,
+  "live_availability_claim": false,
+  "schema_version": 1,
+  "source": "data/curation/pr6-ru-food-data/market-evidence.json",
+  "source_hash_reference": "source-manifest.json",
+  "status": "DATED_ACCEPTED_REFERENCES_ONLY"
+}

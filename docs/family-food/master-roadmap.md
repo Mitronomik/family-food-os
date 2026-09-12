@@ -39,7 +39,7 @@ PR4-DATA Recipe coverage support           COMPLETE
 PR4-DATA2 Russia/SPB corpus re-curation    COMPLETE
 PR4   Recipe Catalogue                     COMPLETE
 PR5   Pantry                               COMPLETE
-PR6   Nutrition Core                       COMPLETE (PR6-CLOSE evidence review)
+PR6   Nutrition Core                       COMPLETE (PR6-CLOSE merged #30)
 ```
 
 PR2-C closure evidence:
@@ -74,7 +74,7 @@ PR5 closure evidence:
 PR6 engine implementation is ACCEPTED / MERGED in
 [PR #18](https://github.com/Mitronomik/family-food-os/pull/18), merge commit
 `7c449672c039c66b8d475064462eba2a9f6d38e6`. PR6 milestone is **COMPLETE** under
-the [PR6-CLOSE decision and limits](pr6-closure.md), submitted for human review. The [Nutrition Core](nutrition-core.md)
+the [PR6-CLOSE decision and limits](pr6-closure.md), merged in PR #30. The [Nutrition Core](nutrition-core.md)
 contract remains active. PR6-DATA-A is ACCEPTED / MERGED in PR #19 at
 `60908eb8270ef356eff8552855b4cc5d2aa9ee44`. Supporting PR6-DATA-B1 establishes
 the exact evidence/row-binding foundation described in the
@@ -121,11 +121,14 @@ delivered** in [PR #29](https://github.com/Mitronomik/family-food-os/pull/29) at
 `3caa95e636c02e8f34657b1b6c885f646451114c`, the exact PR6-CLOSE baseline.
 **PR6-CLOSE — COMPLETE; PR6 — COMPLETE**, with the explicit technical/corpus,
 legacy/normalized authority and downstream limits in [the closure decision](pr6-closure.md).
-All 20 reviewed criteria pass; this closure publication awaits human PR review.
+All 20 reviewed criteria pass; PR #30 is MERGED at
+`e8a75e5b828ef935292da593f9f4d5edbd199474` (verified 2026-09-12).
 Migration remains `0029_food_composition_core`.
 The mass-authoritative decision is recorded in
 [Composition Core](food-composition-and-assembly.md#pr6-composition-core--concrete-runtime-contract).
-Next candidate: **RECIPE-ASSEMBLY-A — NOT STARTED / requires separate authorization**.
+Current operation: **RECIPE-ASSEMBLY-A — AUTHORIZED / BLOCKED at evidence preflight**.
+The [preflight package](../../data/curation/recipe-assembly-a/README.md) records the
+three deferred candidate families; no catalogue runtime/schema/seed is delivered.
 Recipe Assembly B and PR7+ remain NOT STARTED. No automatic next operation.
 The approved sequence changes are specified in §6.5; quantitative gates are retained.
 
@@ -264,8 +267,8 @@ changes them:
 ✅ PR6-COMPOSITION-CORE
 ✅ PR6-RU-FOOD-DATA
 ✅ PR6-DATA-B2-B2-REDESIGNED (PR #29 merged / delivered)
-✅ PR6-CLOSE (COMPLETE; closure publication for human review)
-→ RECIPE-ASSEMBLY-A (next candidate; NOT STARTED / separate authorization)
+✅ PR6-CLOSE (COMPLETE; PR #30 merged)
+→ RECIPE-ASSEMBLY-A (authorized; BLOCKED at evidence preflight)
 → RECIPE-ASSEMBLY-B
 → PR7   MealPlan / Serving + serving-nutrition integration
 → PR8   Planner v0
@@ -636,8 +639,8 @@ PR6-ARCH-COMPOSITION is merged (#24). PR6-NUTRIENT-VECTOR is delivered as bounde
 slices A/B: A establishes [registry/provenance research](../../data/curation/pr6-nutrient-vector-a/README.md)
 without runtime/schema; B was separately reviewed and merged.
 This split creates no milestone and changes no operation order. All supporting
-operations through PR6-CLOSE are delivered; Recipe Assembly and PR7+ remain
-NOT STARTED and require separate authorization.
+operations through PR6-CLOSE are delivered. Assembly A is authorized but BLOCKED
+at evidence preflight; Assembly B and PR7+ remain NOT STARTED / unauthorized.
 
 | Operation | Bounded outcome and dependency |
 | --- | --- |
@@ -657,6 +660,12 @@ authority/fail-closed criteria; consumer/kitchen and later quantitative gates ar
 not waived or claimed complete.
 
 ### RECIPE-ASSEMBLY-A — verified Russian templates and rules
+
+2026-09-12 execution: explicitly authorized after reviewed PR30 merge; **BLOCKED**.
+Exactly three production families remain required. The bounded evidence review
+has not established three publishable families, so implementation stopped before
+migration 0030 or seed publication. This is not milestone completion or a change
+to the original exit criteria. See the [retained evidence](../../data/curation/recipe-assembly-a/README.md).
 
 After PR6-CLOSE: introduce a bounded versioned RecipeTemplate/rule catalogue with
 Russian display, RU familiarity classification, kitchen verification evidence,

@@ -1,0 +1,55 @@
+{
+  "checked_at": "2026-09-12",
+  "limit": "Bounded source verification; no claim that adequate evidence cannot exist elsewhere. No external source contributes executable rules.",
+  "observations": [
+    {
+      "finding": "2020 six-serving CACFP Home Childcare card specifies fixed cabbage/yogurt salad including dried cranberries. It includes exact ounce alternatives for several ingredients and ordered dressing/mixing/chilling instructions. No optional cranberry omission or replacement is specified. No exact generalized template testing scope established.",
+      "id": "COLESLAW_CARD",
+      "kitchen_scope": "NOT_ESTABLISHED_FOR_TEMPLATE_VARIANTS",
+      "locator": "page 1; Ingredients, Directions, Source",
+      "retrieval": "WEB_PDF_TEXT_INSPECTED",
+      "url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf"
+    },
+    {
+      "finding": "Fresh body unavailable through web tool. Accepted source-derived recipe and current v2 row evidence retained separately. Access failure is not evidence that the recipe was never tested.",
+      "id": "OVERNIGHT_SOURCE",
+      "retrieval": "HTTP_403",
+      "url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple"
+    },
+    {
+      "finding": "Fresh body unavailable through web tool. Official alternate source inspected separately; no historical hash equivalence asserted.",
+      "id": "SPRING_SOURCE",
+      "retrieval": "HTTP_403",
+      "url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes"
+    },
+    {
+      "finding": "Official recipe text includes green beans or sugar snap peas, and conditional one or two tablespoons water. It does not supply an exact gram resolution or kitchen-verification record for a reusable template. Indexed excerpt only, not a fresh binary hash.",
+      "id": "SPRING_OFFICIAL_ALTERNATE",
+      "locator": "Spring Vegetable Saute",
+      "retrieval": "WEB_INDEXED_PRIMARY_PDF_EXCERPT",
+      "url": "https://snaped.fns.usda.gov/sites/default/files/documents/EnglishEaster508_1.pdf"
+    },
+    {
+      "finding": "USDA explicitly describes recipes within the linked breakfast/snack menu planners as standardized, taste-tested and kid-approved in six-, 25- and 50-serving yields. This is positive evidence for that named collection, not blanket evidence for every FNS/WIC recipe or any generalized substitution. Exact membership, source-card version and selected variant would still need binding.",
+      "id": "USDA_TESTED_COLLECTION",
+      "locator": "introductory paragraphs",
+      "published_at": "2023-12-01",
+      "retrieval": "WEB_HTML_INSPECTED",
+      "url": "https://content.govdelivery.com/accounts/USFNS/bulletins/37d3aa8"
+    },
+    {
+      "finding": "Followed exact official bulletin link; collection body unavailable. No new exact candidate/variant provenance established.",
+      "id": "USDA_BREAKFAST_COLLECTION",
+      "retrieval": "HTTP_403",
+      "url": "https://www.fns.usda.gov/tn/its-breakfast-time"
+    },
+    {
+      "finding": "Followed exact official bulletin link; collection body unavailable. No new exact candidate/variant provenance established.",
+      "id": "USDA_SNACK_COLLECTION",
+      "retrieval": "HTTP_403",
+      "url": "https://www.fns.usda.gov/tn/lets-make-snack"
+    }
+  ],
+  "review_reference": "RECIPE-ASSEMBLY-A:external-preflight-v1",
+  "schema_version": 1
+}

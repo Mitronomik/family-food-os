@@ -1,0 +1,83 @@
+{
+  "base_sha": "e8a75e5b828ef935292da593f9f4d5edbd199474",
+  "external_review": {
+    "kind": "Dated retained review observations, not original HTTP response bytes or production rule authority",
+    "path": "research-observations.json"
+  },
+  "historical_sources": [
+    {
+      "current_version": 1,
+      "recipe_code": "CACFP6_CREAMY_COLESLAW",
+      "source_document_sha256": "8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6",
+      "source_name": "USDA_FNS",
+      "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
+      "source_retrieved_at": "2026-09-04 04:34:53.373753+00:00",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf",
+      "source_version": "sha256:8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6"
+    },
+    {
+      "current_version": 1,
+      "recipe_code": "SNAP4_SPRING_VEGETABLE_SAUTE",
+      "source_document_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+      "source_name": "USDA_FNS",
+      "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
+      "source_retrieved_at": null,
+      "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+      "source_version": "sha256:63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b"
+    },
+    {
+      "current_version": 2,
+      "recipe_code": "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE",
+      "source_document_sha256": "0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+      "source_name": "USDA_FNS",
+      "source_recipe_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+      "source_retrieved_at": null,
+      "source_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+      "source_version": "sha256:0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8"
+    }
+  ],
+  "input_files": [
+    {
+      "path": "data/curation/pr6-close/recipe-readiness.json",
+      "sha256": "899bca3fc4951cd0f9a6a932e305de07bcc652661b17870980fd0b37b099a632"
+    },
+    {
+      "path": "data/curation/pr6-close/food-readiness.json",
+      "sha256": "9ded14dd88947684296c743fe0435890ba2f9c3fb73f4dd568ef090c029272a7"
+    },
+    {
+      "path": "data/curation/pr6-close/closure-evidence.json",
+      "sha256": "c6b6597097ba4b587e264955e5b3321bd08e6c08664d80e6afe722867730fbd8"
+    },
+    {
+      "path": "data/curation/pr6-close/checksums.json",
+      "sha256": "4c5dcb4963bbb0b396cff94b4cc1f0509a51f1a7e6178f9e102260b6b71eb663"
+    },
+    {
+      "path": "data/curation/pr6-ru-food-data/food-readiness.json",
+      "sha256": "215aa5128ac406a69cb598a26c400987df0bb61d21c711885c99b657665be200"
+    },
+    {
+      "path": "data/curation/pr6-ru-food-data/market-evidence.json",
+      "sha256": "f6a43afba648f71652451f12e5e8b711afd83d19bd1d095144e51492b951661b"
+    },
+    {
+      "path": "data/seed/recipes/recipes.json",
+      "sha256": "b21ff5b00ac318b63b287ef68a8e7efbff7bc3083e14fa233025313b707af918"
+    },
+    {
+      "path": "data/curation/pr4-data2/source-downloads.json",
+      "sha256": "fbff750e5953830aad00bae0d0798b9a8491b0079921f3fe4ded159637e5b228"
+    },
+    {
+      "path": "data/curation/pr4-data2/source-equipment-audit.json",
+      "sha256": "05367ea6d4355893aa4538e797ad197df1a367ea71ff13bf609f146ac4ccb0b0"
+    },
+    {
+      "path": "data/curation/pr4-runtime/recipe-steps.json",
+      "sha256": "525a197bda36e8ee8fd99b598655d15bc21ba7f5acefd3747860e3feb981e8d1"
+    }
+  ],
+  "schema_version": 1,
+  "source_limit": "Historical artifact hashes and source-derived text are retained in accepted inputs. No original PDFs are tracked in data/. Missing historical retrieval instants remain null. Fresh inspections are not claimed byte-identical to original source artifacts."
+}
