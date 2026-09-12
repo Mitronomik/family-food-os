@@ -21,6 +21,7 @@ STATEMENTS = (
     """CREATE TABLE recipe_source_cards (
         id CHAR(32) NOT NULL PRIMARY KEY,
         document_id CHAR(32) NOT NULL REFERENCES recipe_source_documents(id) ON DELETE RESTRICT,
+        source_section_code TEXT NOT NULL DEFAULT '',
         source_card_code TEXT NOT NULL,
         name_ru TEXT NOT NULL,
         category_ru TEXT,
@@ -30,7 +31,7 @@ STATEMENTS = (
         raw_card_sha256 TEXT NOT NULL CHECK(length(raw_card_sha256)=64),
         capture_status TEXT NOT NULL CHECK(capture_status IN ('RAW_CAPTURED','STRUCTURED','PARTIAL')),
         created_at TEXT NOT NULL,
-        UNIQUE(document_id, source_card_code, raw_card_sha256)
+        UNIQUE(document_id, source_section_code, source_card_code, raw_card_sha256)
     )""",
     """CREATE TABLE recipe_source_card_variants (
         id CHAR(32) NOT NULL PRIMARY KEY,
@@ -66,7 +67,7 @@ STATEMENTS = (
         created_at TEXT NOT NULL,
         UNIQUE(variant_id, nutrient_code)
     )""",
-    "CREATE INDEX idx_recipe_source_cards_document ON recipe_source_cards(document_id, source_card_code)",
+    "CREATE INDEX idx_recipe_source_cards_document ON recipe_source_cards(document_id, source_section_code, source_card_code)",
     "CREATE INDEX idx_recipe_source_variants_card ON recipe_source_card_variants(card_id, position)",
     "CREATE INDEX idx_recipe_source_ingredients_variant ON recipe_source_card_ingredients(variant_id, position)",
     "CREATE INDEX idx_recipe_source_nutrients_variant ON recipe_source_declared_nutrients(variant_id, nutrient_code)",
