@@ -1421,3 +1421,50 @@ into main, not merged. Evidence commit:
 `b2b9fe94737328bd2c16e3e0dc34b34802a185f7`.
 R3 research evidence READY FOR REVIEW; R3 result and Assembly A BLOCKED.
 Stop for review; no next-operation authorization.
+
+
+## RECIPE-ASSEMBLY-A-R4 — N50200 deep viability
+
+2026-09-12. PR34 verified MERGED at exact accepted fetched main
+`a375f005b09880cf6a63cb5c8b1e964a0f558cb7`; R1/R2/R3 COMPLETE AS BLOCKED RESEARCH.
+R4 is the authorized one-candidate evidence operation on
+`codex/recipe-assembly-a-r4-n50200`.
+
+[Complete R4 evidence](../data/curation/recipe-assembly-a-r4-n50200/README.md)
+and [derived decision](../data/curation/recipe-assembly-a-r4-n50200/final-decision.json):
+R4 = BLOCKED. All 13 source rows bound, 11 required base rows retained; exact
+Weight EP grams computed with Decimal. Six current INPUT Composition paths
+reusable; seven selected rows lack Composition. No 90-to-93 turkey or arbitrary
+yellow-onion mapping. Generic onion and six primary missing-profile candidates
+reviewed without production promotion. Five exact mandatory input profile/market
+issues survive. Published cheese and patty process mass inconsistencies prevent
+kitchen verification for all three complete branches. Optional food semantics
+PASS; full substitutions UNVERIFIED. Dish identity is familiar, exact recipe
+familiarity/default eligibility NOT_ESTABLISHED. Data-enablement plan withheld.
+
+Executed verification:
+
+- `AI_ENABLED=false backend/.venv/bin/python scripts/audit_recipe_assembly_a_r4_n50200.py --database --adversarial` — PASS.
+- Same audit with `--source-dir <originals>` — PASS; full AFRS/SR/Foundation hashes,
+  exact page/extract lineage and turkey dataset search verified.
+- Disposable accepted replay exactly matches PR6 closure food/recipe reports:
+  185 foods, 63 Composition pins, 188 seals, 40 non-executable estimates,
+  historical replay/deferred/yield evidence and migration 0029 unchanged.
+- 51 adversarial negative cases rejected; positive all-gates control accepted.
+- Frozen R1/R2/R3 byte hashes, package hashes, no-float Decimal evidence,
+  Russian display and local links/anchors — PASS.
+- `ruff check scripts/audit_recipe_assembly_a_r4_n50200.py`, corresponding
+  `ruff format --check`, and unstaged whitespace check — PASS.
+
+Initial replay comparison exposed random disposable profile/food UUIDs and
+insertion timestamps. Auditor now compares all stable food/source/version/value/
+seal facts, excluding only those three volatile identity/storage fields;
+replayed semantic evidence passes. Root `.venv` lacked SQLAlchemy; actual
+verification used `backend/.venv`. Local `gh` returned 401; PR metadata was
+verified through the GitHub connector. Web-byte hashes unavailable for fresh
+retailer/manufacturer text remain null, with factual notes and access limits explicit.
+
+No full backend regression: production runtime/data/schema are unchanged.
+Ready remains 2/3; third candidate none; family_count/optional_role/
+verified_substitution OPEN. Assembly A BLOCKED; B/PR7+ NOT STARTED; 0029.
+Stop for review after delivery. No self-merge or automatic data PR/search.

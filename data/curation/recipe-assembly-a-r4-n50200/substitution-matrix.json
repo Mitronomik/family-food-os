@@ -1,0 +1,71 @@
+{
+  "after_planned_data_promotion": "NOT_ESTABLISHED",
+  "explanation_ru": "Карточка разрешает выбрать сладкий зелёный перец или томат после приготовления одной и той же основы. Проверяются два полных сэндвича со всеми обязательными продуктами. Пока основа не проходит проверку точных пищевых данных и российской закупки, эта возможность не считается проверенной заменой.",
+  "family": "N50200",
+  "from_variant": "GREEN_PEPPER_GARNISH",
+  "name_ru": "Замена овощного дополнения в полном сэндвиче",
+  "same_required_base": [
+    "N50200-01",
+    "N50200-02",
+    "N50200-03",
+    "N50200-04",
+    "N50200-05",
+    "N50200-06",
+    "N50200-07",
+    "N50200-08",
+    "N50200-09",
+    "N50200-10",
+    "N50200-11"
+  ],
+  "source_basis": "SAME_CARD_EXPLICIT_POST_COOK_GARNISH_CHOICE",
+  "status": "UNVERIFIED",
+  "substitution_kind": "COMPLETE_RECIPE_VARIANTS",
+  "to_variant": "TOMATO_GARNISH",
+  "variants": [
+    {
+      "composition_scope": "ALL_REQUIRED_BASE_AND_SELECTED_GARNISH",
+      "current_complete": false,
+      "family": "N50200",
+      "id": "GREEN_PEPPER_GARNISH",
+      "kitchen_ref": "GREEN_PEPPER_GARNISH",
+      "proposed_complete": false,
+      "row_ids": [
+        "N50200-01",
+        "N50200-02",
+        "N50200-03",
+        "N50200-04",
+        "N50200-05",
+        "N50200-06",
+        "N50200-07",
+        "N50200-08",
+        "N50200-09",
+        "N50200-10",
+        "N50200-11",
+        "N50200-13"
+      ]
+    },
+    {
+      "composition_scope": "ALL_REQUIRED_BASE_AND_SELECTED_GARNISH",
+      "current_complete": false,
+      "family": "N50200",
+      "id": "TOMATO_GARNISH",
+      "kitchen_ref": "TOMATO_GARNISH",
+      "proposed_complete": false,
+      "row_ids": [
+        "N50200-01",
+        "N50200-02",
+        "N50200-03",
+        "N50200-04",
+        "N50200-05",
+        "N50200-06",
+        "N50200-07",
+        "N50200-08",
+        "N50200-09",
+        "N50200-10",
+        "N50200-11",
+        "N50200-12"
+      ]
+    }
+  ],
+  "verified_curated_substitution": false
+}

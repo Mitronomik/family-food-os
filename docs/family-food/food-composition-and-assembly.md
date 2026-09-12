@@ -636,3 +636,35 @@ relaxed. Migration stays 0029. Assembly A remains BLOCKED, not COMPLETE; B/PR7+
 NOT STARTED. Stop for R3 review. No further search, food repair or implementation
 is automatically authorized; any later Assembly A implementation with 0030
 requires separate explicit authorization.
+
+
+### RECIPE-ASSEMBLY-A-R4 — N50200 Deep Viability
+
+2026-09-12. PR34 MERGED at `a375f005b09880cf6a63cb5c8b1e964a0f558cb7`;
+R1/R2/R3 COMPLETE AS BLOCKED RESEARCH. The user explicitly authorized exactly
+N50200 research, with all three accepted packages frozen. This supersedes the
+prior stop only for the bounded R4 investigation, not for production promotion.
+
+[R4 evidence](../../data/curation/recipe-assembly-a-r4-n50200/README.md) binds all
+13 source rows and replays the accepted disposable DB. R4 = BLOCKED.
+The source 90%-lean turkey cannot use the 93% identity; colour-unspecified fresh
+onion requires its own generic identity/profile. Current low-moisture mozzarella
+is not silently treated as generic part-skim. Five mandatory exact input
+profile/market issues survive; ordinary-category availability is distinguished
+from exact form compatibility. RU_AVAILABLE does not imply rarity.
+
+The optional post-cook food garnish passes semantics, with independently stated
+2 lb EP per branch. Both complete variants remain unverified. Same-edition AFRS
+standardization applies, but all three exact kitchen branches are NOT_ESTABLISHED:
+3 lb cheese conflicts with 100 half-ounce slices, and the patty mixture Weight
+conflicts with 100 five-ounce patties. Weight retains EP input authority; no
+piece-derived replacement, fabricated yield or household scaling is introduced.
+This applies the existing R2 process-consistency approach, not a new gate.
+
+Dish-level Russian familiarity is supported editorially; exact recipe eligibility
+is not established while mandatory form/market issues persist. Rights pass only
+in accepted AFRS RIGHTS-FACTS scope. An executable data-enablement plan is withheld;
+the required plan filename records that refusal, not an approved production delta.
+Ready remains 2/3; third candidate none; family_count/optional_role/verified_substitution
+remain OPEN for the accepted family set. Assembly A BLOCKED; B/PR7+ NOT STARTED;
+0029 unchanged. Stop for review; no automatic merge, new donor or production data PR.

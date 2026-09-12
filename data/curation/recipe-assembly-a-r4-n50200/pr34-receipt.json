@@ -1,0 +1,12 @@
+{
+  "base_ref": "main",
+  "base_sha": "f2b6bc9015a1b892bb533b5d322d981d5a1782bd",
+  "head_sha": "8a167bee3b8748d4280e69768b483dd9aa97238b",
+  "merge_commit_sha": "a375f005b09880cf6a63cb5c8b1e964a0f558cb7",
+  "merged": true,
+  "merged_at": "2026-09-12T18:53:01Z",
+  "number": 34,
+  "state": "closed",
+  "url": "https://github.com/Mitronomik/family-food-os/pull/34",
+  "verification": "GitHub connector get_pr_info plus fetched origin/main"
+}

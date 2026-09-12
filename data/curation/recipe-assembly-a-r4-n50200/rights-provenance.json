@@ -1,0 +1,15 @@
+{
+  "accepted_review_ref": "../recipe-assembly-a-r3/rights-review.json",
+  "decision": "PASS",
+  "family": "N50200",
+  "federal_authorship_scope": "U.S. armed services AFRS; accepted provenance, not host-only inference",
+  "independent_russian_rules": true,
+  "logos_photos_layout_reuse": false,
+  "policy": "AFRS RIGHTS-FACTS",
+  "reason_ru": "Сохранено принятое федеральное происхождение того же издания и ограниченное использование фактов рецепта. Русские формулировки составлены отдельно. Нового лицензионного решения или права на весь дизайн издания не заявлено.",
+  "recipe_publication_authorized": false,
+  "same_edition": true,
+  "source_facts_only": true,
+  "source_manifest_ref": "source-manifest.json",
+  "whole_artifact_license_claim": false
+}

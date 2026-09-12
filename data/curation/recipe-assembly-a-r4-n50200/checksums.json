@@ -1,0 +1,25 @@
+{
+  "files": {
+    "README.md": "cdd03a53d8c65e6a67ae48cd63ae1407c3e921b5db65b7d9b9a9c3dae46aacc8",
+    "baseline.json": "227171005ac4855e3b9ed5a0a22239277d8f7e100f3aa8a497861b462f63cc91",
+    "catalogue-readiness.json": "89e5363111ab4c33a37e5348dfedbd1095d8e7ad42c5243880d77d95fe21956c",
+    "data-enablement-plan.json": "38bfb46b8ee9ceb5936014682e2449094a32be619bf709ea2894451280343eff",
+    "final-decision.json": "f86360b76ccfe065179058c2c7df637fa3008389bd958fb92c161bf528b57659",
+    "kitchen-branches.json": "41d25602acaddb3a012dd9a5f50706e368e3044253984f0309b585ae5d1bcac9",
+    "market-evidence.json": "247604d98d9f0d7ac7d47328b1c0101d65bc6a9a5fa8ff739e9e910ed396b91a",
+    "optional-role.json": "688ec99234b45a7800de776d60ff2da1c9dd5cc3cb70c6e4a54b8a63ff6e2613",
+    "pr34-receipt.json": "950f9a4e6ab98894a631a58b11678e9a93edb24907846cb350aebf920cc479ce",
+    "profile-candidates.json": "20f6c57a0b5cc18faa57871a20c69f7a2bab24e596a1d20073b4833c0742ddb2",
+    "quantity-authority.json": "19cd24026d219c8c7cbf6002605113128c5b902b5781f8b6719b632e65f9af42",
+    "rights-provenance.json": "8d75d98a3b862d7cedcebdbda07c28694f3476b69c7e55f4d365a801a14bb476",
+    "ru-familiarity.json": "a4bc521c4dae7fbcf58f392f80d5cdd6a017883f1c3dbea3f54eec004f5d62ad",
+    "russian-display.json": "582291bfafe58d05690cacf82e98d945f452a7b570c2adccb81b85363dd45c55",
+    "source-bindings.json": "c2de761419fc7e96fc0472eec403e5c78982fcb36d98edc5cad6d6850c755f37",
+    "source-manifest.json": "cb120ba94f9accff268ef5f9a8d20039fa4fe0b385acde8a737c29c92bd3eb93",
+    "sources/fdc-candidates.json": "4ab8f56333f2114ddcc96d060c18e4ee9cebe0e6c6ee3ac6df8776e2857e76e9",
+    "sources/n50200.txt": "51c3a02c654498a09d1393b80d5a8fe4c5e81557db68f5ab409fa936cd100225",
+    "sources/turkey-dataset-search.json": "c5cc2e449642f9d3c93d2dc06ba466f3883efd74889dc7fb165b7557e2424e46",
+    "substitution-matrix.json": "36a98662ddb41a2d006d4dff70d70896c85623adfab8da17e2a6c3e9b3efc209",
+    "web-evidence.json": "68a85cb6ebc4e8d2107aebff71371c90ad7cd1bc35ed9f1ffaa8f93a2ba4909a"
+  }
+}

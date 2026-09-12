@@ -1,0 +1,130 @@
+{
+  "branches": [
+    {
+      "batch_portions": 100,
+      "branch_explicit": true,
+      "family": "N50200",
+      "household_scaling": false,
+      "id": "BASE_NO_GARNISH",
+      "independent_test_log_available": false,
+      "name_ru": "Без овощного дополнения",
+      "process_conflict_ref": "quantity-authority.json",
+      "rationale_ru": "Общий раздел того же издания подтверждает стандартизацию рецептов, а пятый шаг прямо разрешает эту ветку. Но точная загрузка сыра на сто порций расходится с указанием веса ломтика; масса смеси также не совпадает с массой ста указанных котлет. Отдельного протокола или разъяснения нет. Эти расхождения относятся к общей основе каждой ветки и не устраняются выбором овоща.",
+      "row_ids": [
+        "N50200-01",
+        "N50200-02",
+        "N50200-03",
+        "N50200-04",
+        "N50200-05",
+        "N50200-06",
+        "N50200-07",
+        "N50200-08",
+        "N50200-09",
+        "N50200-10",
+        "N50200-11"
+      ],
+      "scope": "EXACT_PUBLISHED_100_PORTION_METHOD",
+      "source_card": "AFRS-2003-N50200",
+      "source_method_steps": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "standardization_applies": true,
+      "standardization_ref": "../recipe-assembly-a-r2/sources/afrs-full-excerpt.txt",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "batch_portions": 100,
+      "branch_explicit": true,
+      "family": "N50200",
+      "household_scaling": false,
+      "id": "GREEN_PEPPER_GARNISH",
+      "independent_test_log_available": false,
+      "name_ru": "Со сладким зелёным перцем",
+      "process_conflict_ref": "quantity-authority.json",
+      "rationale_ru": "Общий раздел того же издания подтверждает стандартизацию рецептов, а пятый шаг прямо разрешает эту ветку. Но точная загрузка сыра на сто порций расходится с указанием веса ломтика; масса смеси также не совпадает с массой ста указанных котлет. Отдельного протокола или разъяснения нет. Эти расхождения относятся к общей основе каждой ветки и не устраняются выбором овоща.",
+      "row_ids": [
+        "N50200-01",
+        "N50200-02",
+        "N50200-03",
+        "N50200-04",
+        "N50200-05",
+        "N50200-06",
+        "N50200-07",
+        "N50200-08",
+        "N50200-09",
+        "N50200-10",
+        "N50200-11",
+        "N50200-13"
+      ],
+      "scope": "EXACT_PUBLISHED_100_PORTION_METHOD",
+      "source_card": "AFRS-2003-N50200",
+      "source_method_steps": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "standardization_applies": true,
+      "standardization_ref": "../recipe-assembly-a-r2/sources/afrs-full-excerpt.txt",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "batch_portions": 100,
+      "branch_explicit": true,
+      "family": "N50200",
+      "household_scaling": false,
+      "id": "TOMATO_GARNISH",
+      "independent_test_log_available": false,
+      "name_ru": "С томатом",
+      "process_conflict_ref": "quantity-authority.json",
+      "rationale_ru": "Общий раздел того же издания подтверждает стандартизацию рецептов, а пятый шаг прямо разрешает эту ветку. Но точная загрузка сыра на сто порций расходится с указанием веса ломтика; масса смеси также не совпадает с массой ста указанных котлет. Отдельного протокола или разъяснения нет. Эти расхождения относятся к общей основе каждой ветки и не устраняются выбором овоща.",
+      "row_ids": [
+        "N50200-01",
+        "N50200-02",
+        "N50200-03",
+        "N50200-04",
+        "N50200-05",
+        "N50200-06",
+        "N50200-07",
+        "N50200-08",
+        "N50200-09",
+        "N50200-10",
+        "N50200-11",
+        "N50200-12"
+      ],
+      "scope": "EXACT_PUBLISHED_100_PORTION_METHOD",
+      "source_card": "AFRS-2003-N50200",
+      "source_method_steps": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "standardization_applies": true,
+      "standardization_ref": "../recipe-assembly-a-r2/sources/afrs-full-excerpt.txt",
+      "status": "NOT_ESTABLISHED"
+    }
+  ],
+  "decision_basis": "The same standardized AFRS source explicitly publishes omission and both post-cook garnish choices. However, the exact 100-portion Weight loading conflicts with per-piece process instructions. As in accepted R2, collection standardization cannot silently reconcile that conflict. All three full branches remain NOT_ESTABLISHED.",
+  "household_scaling": false,
+  "limitation_ru": "Кухонная стандартизация источника не доказывает российскую закупку, готовность профилей, массу готового выхода или домашнее масштабирование. Указания по весу отдельных котлет и ломтиков сыра не заменяют массу загрузки.",
+  "process": {
+    "bake_minutes": [
+      "20",
+      "25"
+    ],
+    "internal_f": "165",
+    "internal_hold_seconds": 15,
+    "new_household_process": false,
+    "oven": "CONVECTION_HIGH_FAN_OPEN_VENT",
+    "oven_f": "325",
+    "patty_thickness_inch": "0.5",
+    "service_minimum_f": "140",
+    "source_process_mass_discrepancies_ref": "quantity-authority.json"
+  }
+}
