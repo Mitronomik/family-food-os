@@ -2,27 +2,24 @@
 
 Updated: `2026-09-12`.
 
-- PR6 = COMPLETE; PR6-CLOSE = COMPLETE.
-- Accepted BLOCKED checkpoint PR31 was merged under explicit user authorization.
-- Exact fetched merge/base: `3c854f55323c895c1bdc5aabd5f1146fb6514935`.
-- Branch: `codex/recipe-assembly-a-r1`.
-- RECIPE-ASSEMBLY-A = BLOCKED pending R1 evidence recovery.
-- RECIPE-ASSEMBLY-A-R1 = current authorized operation; research outcome BLOCKED,
-  CORRECTION authorized on the same branch/PR32. Canonical market interpretation
-  corrected: 23 screened, nine deep-reviewed, one individually ready (R1-21),
-  zero selected final three. No new donor search.
+- PR6 / PR6-CLOSE = COMPLETE.
+- [PR #32](https://github.com/Mitronomik/family-food-os/pull/32) = MERGED.
+- Exact fetched main / R2 base: `8730b9fcfdb56cec2215f7e70319241c83431371`.
+- R1 = COMPLETE AS BLOCKED RESEARCH; accepted baseline 1/3 individually ready,
+  only R1-21, fixed published 100-portion oatmeal batch; selected final three = [].
+- R2 = current authorized operation, targeted evidence recovery of R1-23/R1-13;
+  branch `codex/recipe-assembly-a-r2`. Research result: Outcome A, 2/3 individually
+  ready (R1-21 and R1-23); selected final three = [].
+- RECIPE-ASSEMBLY-A = BLOCKED, not COMPLETE.
 - RECIPE-ASSEMBLY-B = NOT STARTED / unauthorized.
 - PR7+ = NOT STARTED / unauthorized.
+- Migration = `0029_food_composition_core`; no production truth changes.
 
-[Evidence and residual blockers](../data/curation/recipe-assembly-a-r1/README.md).
-Next allowed action is verification/delivery of this correction to existing PR32,
-then final re-review. No automatic
-food-data fixes or RecipeTemplate schema/seed. No migration 0030, runtime change,
-production food/profile/vector/composition/RecipeVersion mutation or yield work.
-Migration stays 0029; 40 estimates, five deferred forms and three yield blockers
-remain preserved. Do not merge the new PR without explicit post-review approval.
+[Canonical recovery decision](../docs/family-food/food-composition-and-assembly.md#recipe-assembly-a-r2--targeted-recovery)
+and [R2 evidence](../data/curation/recipe-assembly-a-r2/README.md).
 
-Delivery: [PR #32](https://github.com/Mitronomik/family-food-os/pull/32), OPEN,
-not merged. Evidence commit `4c7f0712875bbb9ad86a1615d6ddb819178b026c`.
-Research evidence is ready for review; R1 and Assembly A remain BLOCKED.
-Stop for review. No next-phase or merge authorization.
+Next authorized action: verify and deliver this R2 evidence PR, then stop for
+review. No automatic donor search, food-data repair, schema, RecipeTemplate seed,
+Assembly B or PR7 work. Even an evidence-ready final three would require separate
+explicit authorization to resume Assembly A implementation with migration
+`0030_recipe_template_catalogue`. Never merge without post-review authorization.

@@ -1,0 +1,374 @@
+{
+  "candidate": "R1-13",
+  "gaps_ru": [
+    "VEGETABLE_BROTH существует, но low-sodium форма не доказана, Composition и точная масса отсутствуют.",
+    "Нет текущих точных identities для пропаренного длиннозёрного и среднезёрного бурого риса; RICE_BROWN их не подменяет.",
+    "У LIME_JUICE и TURMERIC_GROUND нет Composition. Два лайма не определяют массу сока; точная масса куркумы не установлена.",
+    "Рыночные доказательства базовой ветки не переносятся на другие формы/приправы; для них gate не пройден."
+  ],
+  "preferred_base": "BASE_WATER_REGULAR",
+  "r1_kitchen_supersession_ru": "R1 хранится без изменений. Его candidate-level kitchen PASS относился к стандартизованной публикации; R2 проверяет конкретную ветку и обнаруживает несогласованный шаг загрузки. Это не утверждение, что USDA не испытывало её: применимость испытаний не установлена.",
+  "reviewed_scope_ru": "25 порций, один исходный противень. Массы 50 порций отдельно сохранены как факты карточки, не новая проверенная бытовая шкала. Не исследуется полный декартов продукт альтернатив: каждая кандидатная замена проверена как две полные ветки, дополнительные комбинации не заявляются.",
+  "substitutions": [
+    {
+      "branches": [
+        "BASE_WATER_REGULAR",
+        "BROTH_REGULAR"
+      ],
+      "id": "WATER_BROTH",
+      "source_operator": "OR",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "branches": [
+        "BASE_WATER_REGULAR",
+        "WATER_PARBOILED"
+      ],
+      "id": "REGULAR_PARBOILED",
+      "source_operator": "OR",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "branches": [
+        "BASE_WATER_REGULAR",
+        "WATER_MEDIUM"
+      ],
+      "id": "REGULAR_MEDIUM",
+      "source_operator": "OR",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "branches": [
+        "BASE_CILANTRO_LIME",
+        "BASE_TURMERIC"
+      ],
+      "id": "SEASONING",
+      "source_operator": "OR",
+      "status": "NOT_ESTABLISHED"
+    }
+  ],
+  "variants": [
+    {
+      "household_kitchen_verified": false,
+      "id": "BASE_WATER_REGULAR",
+      "inputs": [
+        {
+          "food_code": "WATER",
+          "form_compatible": true,
+          "input_g": "1440",
+          "mass_authority": "FDC-PORTION-93025:exact",
+          "name_ru": "Вода питьевая"
+        },
+        {
+          "food_code": "SALT",
+          "form_compatible": true,
+          "input_g": "6",
+          "mass_authority": "FDC-PORTION-92594:exact",
+          "name_ru": "Соль столовая"
+        },
+        {
+          "food_code": "GARLIC",
+          "form_compatible": true,
+          "input_g": "35.43690390625",
+          "mass_authority": "FBG-A-2025-A5-GARLIC",
+          "name_ru": "Чеснок рубленый"
+        },
+        {
+          "food_code": "RICE_BROWN",
+          "form_compatible": true,
+          "input_g": "765.437124375",
+          "mass_authority": "DIRECT_SOURCE_WEIGHT",
+          "name_ru": "Рис бурый длиннозерный обычный, сухой"
+        }
+      ],
+      "kitchen_reason_ru": "Общая стандартизация проекта не доказывает испытание этой полной ветки. Таблица и шаг 3 имеют разные массы для непропаренного риса; отдельных подтверждений для вариаций нет.",
+      "kitchen_status": "NOT_ESTABLISHED",
+      "liquid": "WATER",
+      "market_status": "PASS",
+      "name_ru": "Рис бурый с водой, солью и чесноком",
+      "rice": "REGULAR_LONG_BROWN",
+      "rights": "ACCEPT",
+      "seasoning": "NONE",
+      "servings": 25
+    },
+    {
+      "household_kitchen_verified": false,
+      "id": "BROTH_REGULAR",
+      "inputs": [
+        {
+          "food_code": "VEGETABLE_BROTH",
+          "form_compatible": false,
+          "input_g": null,
+          "mass_authority": null,
+          "name_ru": "Овощной бульон с пониженным содержанием соли"
+        },
+        {
+          "food_code": "SALT",
+          "form_compatible": true,
+          "input_g": "6",
+          "mass_authority": "FDC-PORTION-92594:exact",
+          "name_ru": "Соль столовая"
+        },
+        {
+          "food_code": "GARLIC",
+          "form_compatible": true,
+          "input_g": "35.43690390625",
+          "mass_authority": "FBG-A-2025-A5-GARLIC",
+          "name_ru": "Чеснок рубленый"
+        },
+        {
+          "food_code": "RICE_BROWN",
+          "form_compatible": true,
+          "input_g": "765.437124375",
+          "mass_authority": "DIRECT_SOURCE_WEIGHT",
+          "name_ru": "Рис бурый длиннозерный обычный, сухой"
+        }
+      ],
+      "kitchen_reason_ru": "Общая стандартизация проекта не доказывает испытание этой полной ветки. Таблица и шаг 3 имеют разные массы для непропаренного риса; отдельных подтверждений для вариаций нет.",
+      "kitchen_status": "NOT_ESTABLISHED",
+      "liquid": "LOW_SODIUM_BROTH",
+      "market_status": "NOT_ESTABLISHED",
+      "name_ru": "Рис бурый на овощном бульоне",
+      "rice": "REGULAR_LONG_BROWN",
+      "rights": "ACCEPT",
+      "seasoning": "NONE",
+      "servings": 25
+    },
+    {
+      "household_kitchen_verified": false,
+      "id": "WATER_PARBOILED",
+      "inputs": [
+        {
+          "food_code": "WATER",
+          "form_compatible": true,
+          "input_g": "1440",
+          "mass_authority": "FDC-PORTION-93025:exact",
+          "name_ru": "Вода питьевая"
+        },
+        {
+          "food_code": "SALT",
+          "form_compatible": true,
+          "input_g": "6",
+          "mass_authority": "FDC-PORTION-92594:exact",
+          "name_ru": "Соль столовая"
+        },
+        {
+          "food_code": "GARLIC",
+          "form_compatible": true,
+          "input_g": "35.43690390625",
+          "mass_authority": "FBG-A-2025-A5-GARLIC",
+          "name_ru": "Чеснок рубленый"
+        },
+        {
+          "food_code": null,
+          "form_compatible": false,
+          "input_g": "822.136170625",
+          "mass_authority": "DIRECT_SOURCE_WEIGHT",
+          "name_ru": "Рис бурый длиннозёрный пропаренный сухой"
+        }
+      ],
+      "kitchen_reason_ru": "Общая стандартизация проекта не доказывает испытание этой полной ветки. Таблица и шаг 3 имеют разные массы для непропаренного риса; отдельных подтверждений для вариаций нет.",
+      "kitchen_status": "NOT_ESTABLISHED",
+      "liquid": "WATER",
+      "market_status": "NOT_ESTABLISHED",
+      "name_ru": "Рис бурый пропаренный на воде",
+      "rice": "PARBOILED_LONG_BROWN",
+      "rights": "ACCEPT",
+      "seasoning": "NONE",
+      "servings": 25
+    },
+    {
+      "household_kitchen_verified": false,
+      "id": "WATER_MEDIUM",
+      "inputs": [
+        {
+          "food_code": "WATER",
+          "form_compatible": true,
+          "input_g": "1440",
+          "mass_authority": "FDC-PORTION-93025:exact",
+          "name_ru": "Вода питьевая"
+        },
+        {
+          "food_code": "SALT",
+          "form_compatible": true,
+          "input_g": "6",
+          "mass_authority": "FDC-PORTION-92594:exact",
+          "name_ru": "Соль столовая"
+        },
+        {
+          "food_code": "GARLIC",
+          "form_compatible": true,
+          "input_g": "35.43690390625",
+          "mass_authority": "FBG-A-2025-A5-GARLIC",
+          "name_ru": "Чеснок рубленый"
+        },
+        {
+          "food_code": null,
+          "form_compatible": false,
+          "input_g": "850.485693750",
+          "mass_authority": "DIRECT_SOURCE_WEIGHT",
+          "name_ru": "Рис бурый среднезёрный обычный сухой"
+        }
+      ],
+      "kitchen_reason_ru": "Общая стандартизация проекта не доказывает испытание этой полной ветки. Таблица и шаг 3 имеют разные массы для непропаренного риса; отдельных подтверждений для вариаций нет.",
+      "kitchen_status": "NOT_ESTABLISHED",
+      "liquid": "WATER",
+      "market_status": "NOT_ESTABLISHED",
+      "name_ru": "Рис бурый среднезёрный на воде",
+      "rice": "MEDIUM_BROWN",
+      "rights": "ACCEPT",
+      "seasoning": "NONE",
+      "servings": 25
+    },
+    {
+      "household_kitchen_verified": false,
+      "id": "BASE_CILANTRO_LIME",
+      "inputs": [
+        {
+          "food_code": "WATER",
+          "form_compatible": true,
+          "input_g": "1440",
+          "mass_authority": "FDC-PORTION-93025:exact",
+          "name_ru": "Вода питьевая"
+        },
+        {
+          "food_code": "SALT",
+          "form_compatible": true,
+          "input_g": "6",
+          "mass_authority": "FDC-PORTION-92594:exact",
+          "name_ru": "Соль столовая"
+        },
+        {
+          "food_code": "GARLIC",
+          "form_compatible": true,
+          "input_g": "35.43690390625",
+          "mass_authority": "FBG-A-2025-A5-GARLIC",
+          "name_ru": "Чеснок рубленый"
+        },
+        {
+          "food_code": "RICE_BROWN",
+          "form_compatible": true,
+          "input_g": "765.437124375",
+          "mass_authority": "DIRECT_SOURCE_WEIGHT",
+          "name_ru": "Рис бурый длиннозерный обычный, сухой"
+        },
+        {
+          "food_code": "CILANTRO",
+          "form_compatible": true,
+          "input_g": "28.349523125",
+          "mass_authority": "DIRECT_SOURCE_WEIGHT",
+          "name_ru": "Кинза свежая мелко нарезанная"
+        },
+        {
+          "food_code": "LIME_JUICE",
+          "form_compatible": true,
+          "input_g": null,
+          "mass_authority": null,
+          "name_ru": "Сок двух свежих лаймов"
+        }
+      ],
+      "kitchen_reason_ru": "Общая стандартизация проекта не доказывает испытание этой полной ветки. Таблица и шаг 3 имеют разные массы для непропаренного риса; отдельных подтверждений для вариаций нет.",
+      "kitchen_status": "NOT_ESTABLISHED",
+      "liquid": "WATER",
+      "market_status": "NOT_ESTABLISHED",
+      "name_ru": "Рис бурый с кинзой и лаймом",
+      "rice": "REGULAR_LONG_BROWN",
+      "rights": "ACCEPT",
+      "seasoning": "CILANTRO_LIME",
+      "servings": 25
+    },
+    {
+      "household_kitchen_verified": false,
+      "id": "BASE_TURMERIC",
+      "inputs": [
+        {
+          "food_code": "WATER",
+          "form_compatible": true,
+          "input_g": "1440",
+          "mass_authority": "FDC-PORTION-93025:exact",
+          "name_ru": "Вода питьевая"
+        },
+        {
+          "food_code": "SALT",
+          "form_compatible": true,
+          "input_g": "6",
+          "mass_authority": "FDC-PORTION-92594:exact",
+          "name_ru": "Соль столовая"
+        },
+        {
+          "food_code": "GARLIC",
+          "form_compatible": true,
+          "input_g": "35.43690390625",
+          "mass_authority": "FBG-A-2025-A5-GARLIC",
+          "name_ru": "Чеснок рубленый"
+        },
+        {
+          "food_code": "RICE_BROWN",
+          "form_compatible": true,
+          "input_g": "765.437124375",
+          "mass_authority": "DIRECT_SOURCE_WEIGHT",
+          "name_ru": "Рис бурый длиннозерный обычный, сухой"
+        },
+        {
+          "food_code": "TURMERIC_GROUND",
+          "form_compatible": true,
+          "input_g": null,
+          "mass_authority": null,
+          "name_ru": "Куркума молотая"
+        }
+      ],
+      "kitchen_reason_ru": "Общая стандартизация проекта не доказывает испытание этой полной ветки. Таблица и шаг 3 имеют разные массы для непропаренного риса; отдельных подтверждений для вариаций нет.",
+      "kitchen_status": "NOT_ESTABLISHED",
+      "liquid": "WATER",
+      "market_status": "NOT_ESTABLISHED",
+      "name_ru": "Рис бурый с куркумой",
+      "rice": "REGULAR_LONG_BROWN",
+      "rights": "ACCEPT",
+      "seasoning": "TURMERIC",
+      "servings": 25
+    },
+    {
+      "household_kitchen_verified": false,
+      "id": "PUBLISHED_FIRST_BRANCH",
+      "inputs": [
+        {
+          "food_code": "VEGETABLE_BROTH",
+          "form_compatible": false,
+          "input_g": null,
+          "mass_authority": null,
+          "name_ru": "Овощной бульон с пониженным содержанием соли"
+        },
+        {
+          "food_code": "SALT",
+          "form_compatible": true,
+          "input_g": "6",
+          "mass_authority": "FDC-PORTION-92594:exact",
+          "name_ru": "Соль столовая"
+        },
+        {
+          "food_code": "GARLIC",
+          "form_compatible": true,
+          "input_g": "35.43690390625",
+          "mass_authority": "FBG-A-2025-A5-GARLIC",
+          "name_ru": "Чеснок рубленый"
+        },
+        {
+          "food_code": null,
+          "form_compatible": false,
+          "input_g": "822.136170625",
+          "mass_authority": "DIRECT_SOURCE_WEIGHT",
+          "name_ru": "Рис бурый длиннозёрный пропаренный сухой"
+        }
+      ],
+      "kitchen_reason_ru": "Первый набор таблицы согласуется с 29 oz и broth в инструкции; candidate-level standardized evidence применимо в этом узком опубликованном объёме. Exact identities/Composition/масса бульона всё равно не проходят.",
+      "kitchen_status": "PUBLISHED_BASE",
+      "liquid": "LOW_SODIUM_BROTH",
+      "market_status": "NOT_ESTABLISHED",
+      "name_ru": "Пропаренный бурый рис на овощном бульоне",
+      "rice": "PARBOILED_LONG_BROWN",
+      "rights": "ACCEPT",
+      "seasoning": "NONE",
+      "servings": 25
+    }
+  ]
+}

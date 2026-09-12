@@ -1,0 +1,11 @@
+{
+  "api_url": "https://api.github.com/repos/Mitronomik/family-food-os/pulls/32",
+  "retrieved_on": "2026-09-12",
+  "number": 32,
+  "state": "closed",
+  "merged": true,
+  "merged_at": "2026-09-12T12:36:37Z",
+  "merge_commit_sha": "8730b9fcfdb56cec2215f7e70319241c83431371",
+  "head_sha": "6bfabf13846a350c3fe38147f4cc452cc1fae72d",
+  "base_ref": "main"
+}

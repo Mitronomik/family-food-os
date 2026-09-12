@@ -1,0 +1,26 @@
+{
+  "artifact_ref": "source-manifest.json:rice",
+  "attribution_observed": [
+    "USDA on all three pages",
+    "Food and Nutrition Service footers",
+    "USDA Standardized Recipes Project SOURCE on page 3",
+    "2019 footer on pages 2 and 3"
+  ],
+  "author_owner_evidence": "Institutional USDA/FNS/project attribution in exact artifact; individual author/employment or contractor status is not established.",
+  "candidate": "R1-13",
+  "copyright_notice_in_artifact": null,
+  "decision_ru": "ACCEPT только в прежнем объёме RIGHTS-FACTS: фактические ингредиенты, количества и самостоятельно составленные русские правила с точной атрибуцией. Основание — сам документ USDA/FNS/проекта и разграничение фактов и выражения, а не домен ICN или предполагаемая лицензия на всё издание. Не обнаружено отдельного стороннего владельца рецепта; права на фото, логотипы и вёрстку не принимаются.",
+  "disposition": "ACCEPT",
+  "federal_employee_authorship_claim": false,
+  "host": "Institute of Child Nutrition",
+  "host_site_notice": "ICN site footer All Rights Reserved; not a recipe-specific author credit or grant.",
+  "host_transfer_ref": "web-evidence.json:icn_transfer",
+  "hosting_is_authorship": false,
+  "independent_ru_rule": "Выбрать одну опубликованную ветку жидкости и одну точную форму риса; соль и свежий измельчённый чеснок составляют общий вход. До публикации ветки с водой и обычным длиннозёрным рисом устранить расхождение массы загрузки с шагом 3. При выборе зелёной вариации кинза и сок указанных лаймов образуют пару; куркума — отдельная альтернатива.",
+  "license_notice_in_artifact": null,
+  "policy": "RIGHTS-FACTS",
+  "primary_policy_ref": "web-evidence.json:copyright",
+  "scope": "FACTUAL_DATA_AND_INDEPENDENT_RUSSIAN_RULES",
+  "third_party_author_in_artifact": null,
+  "whole_artifact_license": "NOT_ESTABLISHED"
+}

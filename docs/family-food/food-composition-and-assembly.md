@@ -572,3 +572,41 @@ corrects R1, not the canonical policy or production truth. Published alternative
 do not automatically inherit kitchen verification.
 No production truth or schema changes; migration remains 0029. The original
 Assembly A gate remains blocked, and Assembly B / PR7+ remain unauthorized.
+
+
+### RECIPE-ASSEMBLY-A-R2 — targeted recovery
+
+2026-09-12. PR32 is MERGED at `8730b9fcfdb56cec2215f7e70319241c83431371`; R1 is COMPLETE
+AS BLOCKED RESEARCH, accepted baseline 1/3. The [R2 evidence package](../../data/curation/recipe-assembly-a-r2/README.md)
+reopens only R1-23 and R1-13. Outcome A is derived: R1-21 and R1-23 individually
+ready, 2/3; selected final three = []. All R1 bytes remain unchanged.
+
+AFRS General Information A001 and F00400 are retained from the same official
+June 2003 system. Weight is EP, Issue is AP; 22 lb gives 9979.03214 g edible INPUT
+with the accepted Decimal constant. EGG's existing INPUT composition is used for
+whole edible egg, excluding shell. The source's 200 each is informational; no
+piece mass, cooked output, yield or household-scale claim follows. Only method 1
+(hot-water hard cooked), published 100 portions, is individually ready.
+
+Cooking Rice rights are ACCEPT solely under the existing RIGHTS-FACTS policy:
+factual data and independently authored Russian rules with USDA/FNS/project
+attribution; ICN hosting is not authorship or a whole-card license. USDA FBG's
+fresh-minced-garlic row supplies 2½ oz per ¼ cup. Exact rational scaling gives
+35.43690390625 g for the source's 2 Tbsp, retained solely as R2 mass evidence.
+No production measure row is created.
+
+R1's candidate-level kitchen label does not establish every rice alternative.
+The chosen water/regular-long-grain branch has exact current identities and
+input masses, but its 27 oz table weight differs from step 3's 29 oz per pan;
+separate applicable kitchen testing/process clarification is not established.
+Each proposed replacement is checked as a full variant. Missing form,
+Composition, mass and/or kitchen evidence keeps all substitutions unverified.
+The seasoning OR joins two variations, with cilantro AND lime in one branch;
+independent optional component omission is not proved. This does not mean the
+unseasoned base requires either variation. Collective optional-role and verified
+substitution gates stay open.
+
+These are evidence decisions, not changes to canonical nutrition/composition,
+accepted R1 bytes, production data, schema or runtime. Migration stays 0029.
+Assembly A remains BLOCKED; Assembly B / PR7+ NOT STARTED. Stop for R2 review.
+Resume implementation (0030) only after separate explicit authorization.

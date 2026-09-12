@@ -1,0 +1,31 @@
+{
+  "candidate": "R1-13",
+  "disposition": "ACCEPT",
+  "estimated": false,
+  "excluded": [
+    "FDC-PORTION-84479:estimate",
+    "FDC-PORTION-84480:estimate",
+    "cross-food portions",
+    "generic density",
+    "clove count conversion"
+  ],
+  "food_code": "GARLIC",
+  "form": "FRESH_MINCED",
+  "form_reason_ru": "Совпадает свежий сырой измельчённый чеснок. Измельчение без добавления масла/жидкости совместимо с GARLIC и его принятым INPUT профилем. Масса взята из точной опубликованной пары Weight/Measure FBG, не из оценки объёма зубчика.",
+  "input25_g": "35.43690390625",
+  "input50_g": "70.8738078125",
+  "normalization_ref": "scripts/build_pr4_recipe_seed.py: 15 ml/tbsp, 240 ml/cup; exact rational 2/4 tbsp, not density",
+  "oz_to_g": "28.349523125",
+  "precision_ru": "Точность здесь означает точное воспроизведение опубликованной пары и Decimal-арифметики, не отсутствие естественного разброса наполнения ложки. Другие формы и объёмы домашней посуды не получают authority.",
+  "production_mass_row_created": false,
+  "scale25_denominator": 2,
+  "scale25_numerator": 1,
+  "servings25_tbsp": "2",
+  "source_cups": "0.25",
+  "source_id": "FBG-A-2025-A5-GARLIC",
+  "source_mass_g": "70.8738078125",
+  "source_oz": "2.5",
+  "source_scope": "REVIEWED_R2_EVIDENCE_ONLY",
+  "tbsp_per_cup": "16",
+  "universal_density_g_ml": null
+}

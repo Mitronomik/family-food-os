@@ -1,0 +1,206 @@
+{
+  "egg_source_form_resolution_ref": "ep-ap-and-egg-decision.json",
+  "familiarity": [
+    {
+      "dish_family_identity_ru": "Бурый рис с приправами",
+      "equipment_preparation_ru": "Кастрюля/духовка знакомы; промышленную партию 25 порций нельзя считать проверенной домашней порцией.",
+      "evidence_or_rationale": "Редакционное сопоставление состава и процесса карточки с описанным домашним способом; ограничения указаны явно.",
+      "ingredient_form_familiarity_ru": "Рис, соль, чеснок обычны; выбран базовый вариант, экзотические приправы исключены из решения.",
+      "name_ru": "Бурый рис с приправами",
+      "review_date": "2026-09-12",
+      "reviewer": "Codex",
+      "reviewer_decision": "RU_RECIPE_FAMILIAR",
+      "target_user_relevance_ru": "Отварной/запечённый рис с чесноком как гарнир к семейному обеду.",
+      "template_candidate_code": "R1-13"
+    },
+    {
+      "dish_family_identity_ru": "Варёные яйца",
+      "equipment_preparation_ru": "Кастрюля, вода, извлечение и охлаждение знакомы; выбран горячий водный метод.",
+      "evidence_or_rationale": "Редакционное сопоставление состава и процесса карточки с описанным домашним способом; ограничения указаны явно.",
+      "ingredient_form_familiarity_ru": "Яйца в скорлупе и вода знакомы; знакомство не определяет массу съедобной части.",
+      "name_ru": "Варёные яйца",
+      "review_date": "2026-09-12",
+      "reviewer": "Codex",
+      "reviewer_decision": "RU_RECIPE_FAMILIAR",
+      "target_user_relevance_ru": "Яйца вкрутую — обычный завтрак или компонент семейного салата.",
+      "template_candidate_code": "R1-23"
+    }
+  ],
+  "market": {
+    "R1-13": [
+      {
+        "commodity_exception_applicable": true,
+        "commodity_exception_kind": "TAP_WATER",
+        "commodity_exception_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+        "decision_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+        "default_dependency_risk": "LOW",
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "WATER:EXCEPTION"
+        ],
+        "exact_form": "Beverages, water, tap, drinking",
+        "exact_form_resolved": true,
+        "food_code": "WATER",
+        "food_review_ref": "WATER",
+        "market_classification": "RU_MASS_MARKET",
+        "name_ru": "Вода питьевая",
+        "ordinary_retail_supported": true,
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "quantity_composition_gate_separate": true,
+        "review_date": "2026-09-12",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "row_id": "R1-13:1",
+        "source_form_ref": "quantity-authority.json#R1-13:1",
+        "source_form_resolved": true,
+        "specific_product_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+        "substitution_path_reviewed": false,
+        "substitution_policy_reason": null,
+        "substitution_required": false
+      },
+      {
+        "commodity_exception_applicable": true,
+        "commodity_exception_kind": "BASIC_COMMODITY",
+        "commodity_exception_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "decision_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "default_dependency_risk": "LOW",
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:SALT:research-lenta-okey-v4.json:17",
+          "PR4:SALT:research-lenta-okey-v7.json:3",
+          "PR4:SALT:research-x5-v3.json:2",
+          "SALT-LENTA",
+          "SALT-MAGNIT"
+        ],
+        "exact_form": "Salt, table",
+        "exact_form_resolved": true,
+        "food_code": "SALT",
+        "food_review_ref": "SALT",
+        "market_classification": "RU_AVAILABLE",
+        "name_ru": "Соль столовая",
+        "ordinary_retail_supported": true,
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "quantity_composition_gate_separate": true,
+        "review_date": "2026-09-12",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "row_id": "R1-13:2",
+        "source_form_ref": "quantity-authority.json#R1-13:2",
+        "source_form_resolved": true,
+        "specific_product_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "substitution_path_reviewed": false,
+        "substitution_policy_reason": null,
+        "substitution_required": false
+      },
+      {
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "decision_reason": "Свежий чеснок подтверждён двумя сетями; обычный ароматический компонент. Рыночное решение не разрешает estimate-порции рубленого чеснока.",
+        "default_dependency_risk": "LOW",
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:GARLIC:research-lenta-okey-v2.json:6",
+          "PR4:GARLIC:research-magnit-v2.json:3"
+        ],
+        "exact_form": "Garlic, raw",
+        "exact_form_resolved": true,
+        "food_code": "GARLIC",
+        "food_review_ref": "GARLIC",
+        "market_classification": "RU_AVAILABLE",
+        "name_ru": "Чеснок рубленый",
+        "ordinary_retail_supported": true,
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "quantity_composition_gate_separate": true,
+        "review_date": "2026-09-12",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "row_id": "R1-13:3",
+        "source_form_ref": "quantity-authority.json#R1-13:3",
+        "source_form_resolved": true,
+        "specific_product_reason": "Свежий чеснок подтверждён двумя сетями; обычный ароматический компонент. Рыночное решение не разрешает estimate-порции рубленого чеснока.",
+        "substitution_path_reviewed": false,
+        "substitution_policy_reason": null,
+        "substitution_required": false
+      },
+      {
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "decision_reason": "Обычный сухой бурый длиннозерный рис подтверждён в крупах массовой сети; сохранение этого конкретного зерна оправдано опубликованным вариантом. Пропаренный рис не включён.",
+        "default_dependency_risk": "LOW",
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:RICE_BROWN:research-lenta-okey-v2.json:32"
+        ],
+        "exact_form": "Rice, brown, long grain, unenriched, raw",
+        "exact_form_resolved": true,
+        "food_code": "RICE_BROWN",
+        "food_review_ref": "RICE_BROWN",
+        "market_classification": "RU_AVAILABLE",
+        "name_ru": "Рис бурый длиннозерный обычный, сухой",
+        "ordinary_retail_supported": true,
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "quantity_composition_gate_separate": true,
+        "review_date": "2026-09-12",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "row_id": "R1-13:4",
+        "source_form_ref": "quantity-authority.json#R1-13:4",
+        "source_form_resolved": true,
+        "specific_product_reason": "Обычный сухой бурый длиннозерный рис подтверждён в крупах массовой сети; сохранение этого конкретного зерна оправдано опубликованным вариантом. Пропаренный рис не включён.",
+        "substitution_path_reviewed": false,
+        "substitution_policy_reason": null,
+        "substitution_required": false
+      }
+    ],
+    "R1-23": [
+      {
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "decision_reason": "Обычные куриные яйца подтверждены тремя сетями; не жидкая или замороженная яичная масса. Масса съедобной части остаётся отдельным вопросом.",
+        "default_dependency_risk": "LOW",
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:EGG:research-x5-v2.json:1",
+          "PR4:EGG:research-magnit-v2.json:4",
+          "PR4:EGG:research-panel-v3.json:1"
+        ],
+        "exact_form": "Eggs, Grade A, Large, egg whole",
+        "exact_form_resolved": true,
+        "food_code": "EGG",
+        "food_review_ref": "EGG",
+        "market_classification": "RU_MASS_MARKET",
+        "name_ru": "Яйцо куриное целое",
+        "ordinary_retail_supported": true,
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "purchase_identity_scope": "Whole fresh shell egg is an ordinary purchase; edible input basis unresolved in immutable quantity-authority.json. Market PASS does not repair that blocker.",
+        "quantity_composition_gate_separate": true,
+        "review_date": "2026-09-12",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "row_id": "R1-23:1",
+        "source_form_ref": "quantity-authority.json#R1-23:1",
+        "source_form_resolved": false,
+        "specific_product_reason": "Обычные куриные яйца подтверждены тремя сетями; не жидкая или замороженная яичная масса. Масса съедобной части остаётся отдельным вопросом.",
+        "substitution_path_reviewed": false,
+        "substitution_policy_reason": null,
+        "substitution_required": false
+      }
+    ]
+  },
+  "new_market_search": false,
+  "note_ru": "Рыночные факты и familiarity из принятого R1, байт-замороженного baseline. R2 закрывает source EP/form для EGG отдельным первичным доказательством; market сам не чинит массу или Composition. Никаких новых требований трёх сетей к RU_AVAILABLE чесноку/рису или базовой соли.",
+  "review_date": "2026-09-12"
+}

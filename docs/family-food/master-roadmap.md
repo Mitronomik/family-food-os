@@ -1346,3 +1346,20 @@ apply independently of the unchanged availability classification.
 This is supporting work inside the unchanged Assembly A gate, not a roadmap
 reorder, milestone closure or authorization for schema. Assembly A remains
 BLOCKED pending evidence recovery; Assembly B and PR7+ remain NOT STARTED.
+
+
+### Assembly A targeted recovery — R2 checkpoint
+
+2026-09-12. PR32 is MERGED at exact main `8730b9fcfdb56cec2215f7e70319241c83431371`.
+R1 is COMPLETE AS BLOCKED RESEARCH (accepted 1/3); the historical R1 BLOCKED
+wording above describes its result, not unfinished research. The user authorized
+only R1-23/R1-13 recovery in R2. [R2 evidence](../../data/curation/recipe-assembly-a-r2/README.md)
+derives Outcome A: 2/3 individually ready; final three remain empty. The fixed
+100-portion oatmeal decision is unchanged. AFRS F00400 method 1 passes only its
+published 100-portion scope; the selected rice branch retains kitchen/process
+uncertainty. Collective optional/substitution gates remain open.
+Assembly A remains BLOCKED; Assembly B and PR7+ NOT STARTED. No roadmap gate,
+production data or implementation authorization changes. The next action is R2
+review; neither another donor search nor food-data repair starts automatically.
+Even a future evidence-ready triple needs separate authorization for Assembly A
+implementation with `0030_recipe_template_catalogue`.
