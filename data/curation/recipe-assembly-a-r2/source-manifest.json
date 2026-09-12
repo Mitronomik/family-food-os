@@ -1,0 +1,77 @@
+{
+  "afrs": {
+    "applicability": "General Information A001 and F00400 are in the SAME hashed original. Foreword supersedes 1993 edition and 1997/1999 changes.",
+    "edition": "June 2003",
+    "edition_is_not_pdf_modification_date": true,
+    "extraction": "pypdf: copy listed pages in order, without changing page content; pdftotext -layout for review text.",
+    "original_pdf_pages": [
+      1,
+      2,
+      3,
+      7,
+      8,
+      335
+    ],
+    "owner": "U.S. Department of Defense; coordinated Army, Navy, Air Force, Marine Corps",
+    "pages": 1691,
+    "pdf_created": "2006-09-25",
+    "pdf_modified": "2015-05-12",
+    "publisher": "U.S. Marine Corps",
+    "publisher_record": "https://www.marines.mil/News/Publications/MCPEL/Electronic-Library-Display/Article/900436/mco-p1011042b/",
+    "retained": "sources/afrs-full-excerpt.pdf",
+    "title": "MCO P10110.42B — Armed Forces Recipe Service"
+  },
+  "garlic": {
+    "extraction": "pdftoppm page 6, 144 dpi: x=144,y=358,W=612,H=44 header; x=144,y=620,W=612,H=46 garlic row. No photograph or other recipe copied.",
+    "original_pdf_page": 6,
+    "pages": 45,
+    "pdf_created": "2025-07-30",
+    "pdf_modified": "2025-07-31",
+    "printed_page": "A-5",
+    "publisher": "USDA FNS",
+    "retained": [
+      "sources/fbg-garlic-header.png",
+      "sources/fbg-garlic-row.png"
+    ],
+    "row_locator": "Practice Using the Recipe Analysis Workbook; Porcupine Sliders example; Fresh garlic, minced row",
+    "title": "USDA Food Buying Guide for Child Nutrition Programs — Appendix A"
+  },
+  "limitations": [
+    "R1 did not retain original Army F00400 or ICN PDF bytes. No byte equality to an absent R1 original is claimed.",
+    "Army card web text was compared to F00400 in the retained Marine Corps system; original Army PDF byte hash remains unavailable.",
+    "Full originals were downloaded with browser Alt-click after local TLS failures. --source-dir checks their exact hashes and facts; offline package retains necessary excerpts only."
+  ],
+  "originals": {
+    "afrs-full": {
+      "bytes": 10602998,
+      "filename": "afrs-full.pdf",
+      "sha256": "2f6795b5fc39b167fb2913bfccb720948dd257f6a90ca3fa7e228d7fb87ec090",
+      "url": "https://www.marines.mil/portals/1/Publications/MCO%20P10110.42B.pdf"
+    },
+    "fbg-a": {
+      "bytes": 7539201,
+      "filename": "fbg-a.pdf",
+      "sha256": "b63dcb52ce9f348191a14527dfc713e18b75fc9470eb28151a0db48b18e82bda",
+      "url": "https://foodbuyingguide.fns.usda.gov/Content/TablesFBG/USDA_FBG_Appendix_A.pdf"
+    },
+    "rice": {
+      "bytes": 487041,
+      "filename": "rice.pdf",
+      "sha256": "1addee28e832c877edcf92b87918694aa5c2beec0d2f04df490f9340c63294d6",
+      "url": "https://theicn.org/cnrb/pdfs/cacfp/Cooking_Rice_25-50_Draft3_F.pdf"
+    }
+  },
+  "retrieved_on": "2026-09-12",
+  "rice": {
+    "footer_year": 2019,
+    "host": "Institute of Child Nutrition",
+    "owner_attribution": "USDA / Food and Nutrition Service",
+    "pages": 3,
+    "pdf_created": "2019-07-19",
+    "pdf_modified": "2021-04-12",
+    "project": "USDA Standardized Recipes Project",
+    "retained": "source-facts.json: factual observations and independently authored Russian process; original photo/layout not republished.",
+    "title": "Cooking Rice — USDA Recipe for CACFP",
+    "visual_review": "All three original pages rendered and read; footer, SOURCE, ingredient columns and numbered instructions inspected."
+  }
+}

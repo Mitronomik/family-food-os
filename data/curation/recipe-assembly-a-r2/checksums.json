@@ -1,0 +1,23 @@
+{
+  "algorithm": "SHA-256",
+  "files": {
+    "README.md": "5f1db0d2cd6699cdab1cd64f13f65a300c2117c3a405943837a3593874a4321f",
+    "baseline.json": "c2e18b1b494ea51217226cc3724a8c41cb390db1a2b2e8ebd11b02bdfc756b14",
+    "composition-pins.json": "2f12654935fa35d862dd60f44db36f49867b265a07e531dba21a82c38dd82feb",
+    "ep-ap-and-egg-decision.json": "feb99e13820a3450f68eadfd82ac4d2ae609950f7d5b5d3bd96d9971e87c3faa",
+    "final-readiness.json": "8f619f566b39aa13aa79d8afcb75121c93bad086ae6a0e823b224d70cfaca828",
+    "garlic-mass-review.json": "0d86e519d31f7cc50f81cdf367855c956729beab2bd29d6d95118131c2795f5e",
+    "market-familiarity-carry-forward.json": "97cf2e6cb3adbc79ca4d723d71f09dd8218217f1ee175f0558337df882d62679",
+    "optional-role-decision.json": "c180a1df9d54c7d138ceb93bd2e51e194673f323c57098badf0dc349910c5812",
+    "pr32-receipt.json": "05c228142264190ef54bd6eaed85f55b334ba892f247d525199c0b88f271e54f",
+    "rice-rights-review.json": "7f7503cb959d9713df428566d6a54961cdf105c14f95bb38b76df8fe4faff258",
+    "rice-variant-matrix.json": "c5f784a8ba2aef219c073985316c676441a6b4e447bd7eca8e0fb471a1436a16",
+    "source-facts.json": "792e54b874cae27633b71c455fe91921d12ffbbb4f9ab44f4a4dcc6e7da455d2",
+    "source-manifest.json": "fe4aed58a74304a6f74e684a2e55c37d3d1bd342cafb083e6e7d87c58e1a006a",
+    "sources/afrs-full-excerpt.pdf": "d6a61d3362f2c383c409ebf218c8c5c3c506dc0207d3924828c1a603fc1eb0ce",
+    "sources/afrs-full-excerpt.txt": "6cc33f85afb117d85203f851e655456dcdad259c0d697536b4777dbe49b940ac",
+    "sources/fbg-garlic-header.png": "45e798ba65211ce8a396b512a2163273de13b3a3eaf7a375925a05ccf6a3a8cb",
+    "sources/fbg-garlic-row.png": "09ccde15a1ef830cf46f8e5905272476a457436b8ece2601f0f8ee993eeedf85",
+    "web-evidence.json": "7b7cd7c5cba3d14d5a311040fae12cff3b4ece57a4bc579f8f38a4153f87d289"
+  }
+}

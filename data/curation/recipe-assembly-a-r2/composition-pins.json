@@ -1,0 +1,123 @@
+{
+  "foods": [
+    {
+      "basis_grams": "100.000",
+      "canonical_code": "CILANTRO",
+      "canonical_name": "Кориандр свежий",
+      "estimated": null,
+      "input_state": "INPUT",
+      "kind": "ATOMIC",
+      "source_data_type": "SR Legacy",
+      "source_id": "169997",
+      "source_name": "USDA_FDC",
+      "source_version": "2018-04",
+      "version": 1
+    },
+    {
+      "basis_grams": "100.000",
+      "canonical_code": "EGG",
+      "canonical_name": "Яйцо куриное целое",
+      "estimated": null,
+      "input_state": "INPUT",
+      "kind": "ATOMIC",
+      "source_data_type": "Foundation",
+      "source_id": "748967",
+      "source_name": "USDA_FDC",
+      "source_version": "2026-04-30",
+      "version": 1
+    },
+    {
+      "basis_grams": "100.000",
+      "canonical_code": "GARLIC",
+      "canonical_name": "Чеснок",
+      "estimated": null,
+      "input_state": "INPUT",
+      "kind": "ATOMIC",
+      "source_data_type": "Foundation",
+      "source_id": "1104647",
+      "source_name": "USDA_FDC",
+      "source_version": "2026-04-30",
+      "version": 1
+    },
+    {
+      "basis_grams": null,
+      "canonical_code": "LIME_JUICE",
+      "canonical_name": "Сок лайма",
+      "estimated": null,
+      "input_state": null,
+      "kind": null,
+      "source_data_type": null,
+      "source_id": null,
+      "source_name": null,
+      "source_version": null,
+      "version": null
+    },
+    {
+      "basis_grams": "100.000",
+      "canonical_code": "RICE_BROWN",
+      "canonical_name": "Рис бурый длиннозёрный",
+      "estimated": null,
+      "input_state": "INPUT",
+      "kind": "ATOMIC",
+      "source_data_type": "Foundation",
+      "source_id": "2512380",
+      "source_name": "USDA_FDC",
+      "source_version": "2026-04-30",
+      "version": 1
+    },
+    {
+      "basis_grams": "100.000",
+      "canonical_code": "SALT",
+      "canonical_name": "Соль поваренная",
+      "estimated": null,
+      "input_state": "INPUT",
+      "kind": "ATOMIC",
+      "source_data_type": "SR Legacy",
+      "source_id": "173468",
+      "source_name": "USDA_FDC",
+      "source_version": "2018-04",
+      "version": 1
+    },
+    {
+      "basis_grams": null,
+      "canonical_code": "TURMERIC_GROUND",
+      "canonical_name": "Куркума молотая",
+      "estimated": null,
+      "input_state": null,
+      "kind": null,
+      "source_data_type": null,
+      "source_id": null,
+      "source_name": null,
+      "source_version": null,
+      "version": null
+    },
+    {
+      "basis_grams": null,
+      "canonical_code": "VEGETABLE_BROTH",
+      "canonical_name": "Бульон овощной",
+      "estimated": null,
+      "input_state": null,
+      "kind": null,
+      "source_data_type": null,
+      "source_id": null,
+      "source_name": null,
+      "source_version": null,
+      "version": null
+    },
+    {
+      "basis_grams": "100.000",
+      "canonical_code": "WATER",
+      "canonical_name": "Вода питьевая",
+      "estimated": null,
+      "input_state": "INPUT",
+      "kind": "ATOMIC",
+      "source_data_type": "SR Legacy",
+      "source_id": "173647",
+      "source_name": "USDA_FDC",
+      "source_version": "2018-04",
+      "version": 1
+    }
+  ],
+  "note_ru": "Измерено в одноразовой принятой БД. Ссылки на существующие INPUT Composition v1; неизвестные нутриенты не становятся нулём. Отсутствующий Composition не восстанавливается в R2.",
+  "pin_scope": "Semantic accepted pins: canonical food + composition version + INPUT/kind + source identity/version/type/basis. Fresh accepted loaders allocate new internal UUIDs, so per-DB UUID-bearing snapshot digests are not portable pins. measure() replays and validates all 63 internal snapshots and 188 seals within each DB; PR6-CLOSE reports must match accepted bytes."
+}

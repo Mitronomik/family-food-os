@@ -1,0 +1,52 @@
+{
+  "accepted_base": "8730b9fcfdb56cec2215f7e70319241c83431371",
+  "accepted_input_sha256": {
+    "data/curation/pr6-close/closure-evidence.json": "c6b6597097ba4b587e264955e5b3321bd08e6c08664d80e6afe722867730fbd8",
+    "data/curation/pr6-close/food-readiness.json": "9ded14dd88947684296c743fe0435890ba2f9c3fb73f4dd568ef090c029272a7",
+    "data/curation/pr6-close/recipe-readiness.json": "899bca3fc4951cd0f9a6a932e305de07bcc652661b17870980fd0b37b099a632",
+    "data/curation/pr6-nutrient-vector-a/source-manifest.json": "398d36cf901bed5701ded3dc7a8bd40e7bc03c3e995867d1b5930e09e0af5535",
+    "data/curation/pr6-ru-food-data/food-readiness.json": "215aa5128ac406a69cb598a26c400987df0bb61d21c711885c99b657665be200",
+    "data/seed/nutrition_measure_evidence/evidence.json": "a7f62dec20c39618b47c950603f55007658944543048ef4ff550a38b7a23d8bd",
+    "scripts/build_pr4_recipe_seed.py": "9bb6ba7118d6571b364d209818301e2d41915243dbb2064cdb3e050e0e023f38"
+  },
+  "assembly_a": "BLOCKED",
+  "assembly_b": "NOT STARTED",
+  "branch": "codex/recipe-assembly-a-r2",
+  "frozen_production_trees": {
+    "backend": "ce7b824e420263791f5026711eb6ef9168e28a91",
+    "data/seed": "7adddc78c7688332214b35638aaf042a0628bcbd",
+    "frontend": "166368a199f70462f2c22cf6da72744ac76bdba0"
+  },
+  "frozen_r1_sha256": {
+    "data/curation/recipe-assembly-a-r1/README.md": "9e4c5e3b2570036db6871e4f1a4be17fc018a93c8e483f873e96d99dafef89a8",
+    "data/curation/recipe-assembly-a-r1/baseline-verification.json": "aea0dea4f538cdfed5ea2117f69749f78036e7837df63b4798c50d1fb4613f1f",
+    "data/curation/recipe-assembly-a-r1/candidate-funnel.json": "9e2fb0a8cb72b5b1888f3afd7221c1f4946e0cd6fa5e3093130ea9ca9244bc65",
+    "data/curation/recipe-assembly-a-r1/catalogue-inventory.json": "a53ebf86395125d896bda77d1bebf01c4462b79e7f2c24cef03f02f423936ed0",
+    "data/curation/recipe-assembly-a-r1/checksums.json": "fa969b530c8877f4c357226f7a48b0a355b005e3d40c33e4f7135aad2382e901",
+    "data/curation/recipe-assembly-a-r1/composition-readiness.json": "8fa065aa4ff48b849fbae8d65f285c6a6b6c7519fbb8cb2e8995dadd6ddf8251",
+    "data/curation/recipe-assembly-a-r1/final-three.json": "d8e05234399730ecaf51ab7996ee073bc73e9debecd75b3ab063ba13bc01550f",
+    "data/curation/recipe-assembly-a-r1/implementation-readiness.json": "6829b3b985828b8e95aeebd9d4170683549cf48f82ddd9cbc33ecc1dd096bb5b",
+    "data/curation/recipe-assembly-a-r1/kitchen-verification.json": "dbdf71553870c6f2a03e4372f80fde76b8e72fb6a6d4b9bf0bf24db11503b4c9",
+    "data/curation/recipe-assembly-a-r1/market-evidence.json": "cd19884b1dda9c1bbb3d6d5b404429f14f6ac88a66a493154b54693751084c0f",
+    "data/curation/recipe-assembly-a-r1/quantity-authority.json": "4a7f5c1ad93189abeb0df9498a378c0a2a8c25e571d09a56efab26878c093f76",
+    "data/curation/recipe-assembly-a-r1/rights-review.json": "0d31c2c73b1f425eba41f6955c61f27332d7da22e7d67a323ff337f6775199b7",
+    "data/curation/recipe-assembly-a-r1/ru-familiarity.json": "6d64f683527a818675f178d9c8d9b31f928856edfb106c4b9273a215330e6dea",
+    "data/curation/recipe-assembly-a-r1/source-manifest.json": "6ffe0179aaa2a60b996fe4cd43f561e33ed803c2a0bc074434f78e859b30433b",
+    "data/curation/recipe-assembly-a-r1/source-observations.json": "9ffe18577b8ac1f72179f2ec440572d63b787b1b68b4ba12e7d622c611484e9c",
+    "data/curation/recipe-assembly-a-r1/substitution-compatibility.json": "2031dc33fe5c8d0607740aa595b8cea8b27bac54b93cdf8d0477aa48d03d88c9"
+  },
+  "migration": "0029_food_composition_core",
+  "operation": "RECIPE-ASSEMBLY-A-R2",
+  "pr32": "MERGED",
+  "pr7": "NOT STARTED",
+  "r1": "COMPLETE AS BLOCKED RESEARCH",
+  "r1_individually_ready": [
+    "R1-21"
+  ],
+  "r1_selected_final_three": [],
+  "researched_candidates": [
+    "R1-23",
+    "R1-13"
+  ],
+  "scope_ru": "Только два повторных исследования. Пример FBG используется исключительно как свидетельство массы чеснока, не как новый рецепт-донор. Все файлы R1 заморожены целиком, включая решение по овсяной каше на 100 порций."
+}

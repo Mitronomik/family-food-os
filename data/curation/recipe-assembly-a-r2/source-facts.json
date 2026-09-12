@@ -1,0 +1,167 @@
+{
+  "afrs": {
+    "card": "F00400",
+    "card_page": 335,
+    "control": {
+      "seconds": 15,
+      "temperature_f": "155"
+    },
+    "general_page": 8,
+    "issue_semantics": "AP",
+    "issue_value": null,
+    "kitchen_evidence": {
+      "page": 7,
+      "scope": "Published AFRS recipes developed, tested and standardized for 100 portions."
+    },
+    "lineage_comparison": {
+      "access": "PRIMARY_WEB_PDF_TEXT",
+      "army_url": "https://quartermaster.army.mil/jccoe/operations_directorate/quad/menu/recipes/section_f/F00400.pdf",
+      "compared_fields": [
+        "F00400",
+        "100 portions",
+        "2 Each",
+        "22 lbs / 200 each / blank Issue",
+        "149 cal / 12 g protein / 10 g fat",
+        "methods 1 and 2; notes 1 through 5",
+        "note 3: Refrigerate, 41 F",
+        "note 5: 5 lb 6–8 min; 15 lb 5–7 min"
+      ],
+      "excluded": "Search-result snippets with Store instead of Refrigerate are not a source revision. No historical A001 egg-piece equivalence is used.",
+      "original_byte_sha256": null,
+      "result": "ALL_REVIEWED_CARD_CONTENT_MATCHES"
+    },
+    "measure_each": 200,
+    "measure_semantics": "EP",
+    "method_id": 1,
+    "method_ru": "Яйца в корзинах покрывают горячей водой; после закипания уменьшают нагрев и выдерживают при слабом кипении 10–15 минут, затем вынимают и сразу подают.",
+    "portion_each": 2,
+    "servings": 100,
+    "source_food": "EGGS,WHOLE,FRESH",
+    "system": "MCO P10110.42B June 2003",
+    "weight_lb": "22",
+    "weight_semantics": "EP"
+  },
+  "garlic": {
+    "adjacent_rows_excluded": [
+      "brown rice 9½ oz",
+      "raw ground turkey 6 lb 15½ oz"
+    ],
+    "estimated": false,
+    "evidence_scope": "Same-food same-form mass observation only; not a donor recipe or generalized density.",
+    "food": "GARLIC",
+    "form": "FRESH_MINCED",
+    "qualifier": "PUBLISHED_WEIGHT_MEASURE_PAIR",
+    "source_cups": "0.25",
+    "source_id": "FBG-A-2025-A5-GARLIC",
+    "source_label": "Fresh garlic, minced",
+    "source_oz": "2.5"
+  },
+  "rice": {
+    "footer_year": 2019,
+    "garlic": {
+      "cups50": "0.25",
+      "fresh_review_ru": "В R1 уже принят свежий сырой чеснок. В карточке указан minced без canned/dried/powder/oil; сохраняется только свежая форма GARLIC, не баночная паста или порошок.",
+      "reviewed_form": "FRESH_MINCED",
+      "source_form": "Garlic, minced",
+      "tbsp25": "2"
+    },
+    "liquid_choices": [
+      {
+        "cups25": "6",
+        "cups50": "12",
+        "id": "WATER",
+        "name_ru": "Вода питьевая"
+      },
+      {
+        "cups25": "6",
+        "cups50": "12",
+        "id": "LOW_SODIUM_BROTH",
+        "name_ru": "Овощной бульон с пониженным содержанием соли"
+      }
+    ],
+    "method": {
+      "cooking_options": [
+        {
+          "minutes": 40,
+          "mode": "CONVENTIONAL_OVEN",
+          "temperature_f": "350"
+        },
+        {
+          "minutes": 40,
+          "mode": "CONVECTION_OVEN",
+          "temperature_f": "325"
+        },
+        {
+          "minutes": 25,
+          "mode": "STEAMER",
+          "pressure_lb": "5"
+        }
+      ],
+      "explicit_alternative_kitchen_test_record": false,
+      "liquid_cups_per_pan": "6",
+      "pan_inches": [
+        "12",
+        "20",
+        "2.5"
+      ],
+      "pans25": 1,
+      "pans50": 2,
+      "rest_minutes": 5,
+      "review_ru": "Отдельные массы всех трёх видов опубликованы. Шаг 3 всё же повторяет 29 oz и 4½ cup для каждого противня; шаги 1/4 называют broth. Ни отдельного режима для 27/30 oz, ни явной записи испытаний каждой альтернативы нет. Общая надпись Standardized Recipes не устраняет эту неопределённость.",
+      "separate_rice_variant_instructions": false,
+      "source_control_f": "140",
+      "source_control_seconds": 15,
+      "step3_rice_cups_per_pan": "4.5",
+      "step3_rice_oz_per_pan": "29",
+      "steps_1_4_liquid": "BROTH"
+    },
+    "output_mass_used": false,
+    "rice_choices": [
+      {
+        "id": "PARBOILED_LONG_BROWN",
+        "name_ru": "Рис бурый длиннозёрный пропаренный сухой",
+        "oz25": "29",
+        "oz50": "58"
+      },
+      {
+        "id": "MEDIUM_BROWN",
+        "name_ru": "Рис бурый среднезёрный обычный сухой",
+        "oz25": "30",
+        "oz50": "60"
+      },
+      {
+        "id": "REGULAR_LONG_BROWN",
+        "name_ru": "Рис бурый длиннозёрный обычный сухой",
+        "oz25": "27",
+        "oz50": "54"
+      }
+    ],
+    "salt": {
+      "tsp25": "1",
+      "tsp50": "2"
+    },
+    "seasoning": {
+      "cilantro_lime_operator": "AND",
+      "cilantro_oz25": "1",
+      "cilantro_oz50": "2",
+      "explicit_optional_component_label": false,
+      "lime_each25": 2,
+      "lime_each50": 4,
+      "operator": "OR",
+      "review_ru": "Шаги 1–9 описывают основное блюдо. Вариации идут далее: кинза И лайм, ИЛИ куркума. Выбор вариации не делает любой её компонент независимо отключаемым.",
+      "source_label": "Variation",
+      "steps": [
+        10,
+        11
+      ],
+      "turmeric_tsp25": "2",
+      "turmeric_tsp50": "4"
+    },
+    "servings": [
+      25,
+      50
+    ],
+    "source": "USDA Standardized Recipes Project",
+    "source_output_mass_is_approximate": true
+  }
+}

@@ -16,7 +16,7 @@ PR4-DATA Recipe coverage support           COMPLETE
 PR4-DATA2 Russia/SPB corpus re-curation    COMPLETE
 PR4   Recipe Catalogue                     COMPLETE
 PR5   Pantry                               COMPLETE
-PR6   Nutrition Core                       NOT COMPLETE (engine ACCEPTED / MERGED)
+PR6   Nutrition Core                       COMPLETE (PR6-CLOSE accepted)
 ```
 
 Canonical implementation order remains `docs/family-food/master-roadmap.md`.
@@ -1349,3 +1349,36 @@ Verification:
 Deliver correction to existing PR32 and update its body; stop for final re-review.
 PR6 COMPLETE; Assembly A BLOCKED; Assembly B / PR7+ NOT STARTED. No merge or
 next-phase authorization.
+
+
+## RECIPE-ASSEMBLY-A-R2 — targeted recovery
+
+2026-09-12. PR32 MERGED, exact fetched main/base
+`8730b9fcfdb56cec2215f7e70319241c83431371`; R1 COMPLETE AS BLOCKED RESEARCH,
+accepted 1/3. Branch `codex/recipe-assembly-a-r2`, only R1-23/R1-13 reopened.
+[R2 evidence](../data/curation/recipe-assembly-a-r2/README.md) derives Outcome A:
+2/3 individually ready (fixed R1-21 plus F00400 method 1 / 100 portions),
+selected final three = []. Rice rights and garlic mass recovered; exact base
+kitchen/process scope unresolved. Substitution and optional-role gates open.
+All R1 files remain byte-identical. No production runtime/data/schema/seed
+mutation; migration 0029; Assembly A BLOCKED; B/PR7 NOT STARTED.
+
+Executed verification:
+
+- `AI_ENABLED=false backend/.venv/bin/python scripts/audit_recipe_assembly_a_r2.py --database --adversarial --source-dir <originals>` — PASS; Outcome A, 2/3, selected 0. The source directory held the three exact originals named in the manifest; no production DB path is accepted.
+- Disposable accepted DB: PR6-CLOSE food/recipe reports match bytes; 185 foods / 63 compositions / 188 seals / 40 estimate usages; historical replay, five deferred forms and yield rows match the accepted baseline; migration 0029.
+- Stable Composition references compare canonical identity/version, INPUT/kind and profile source/version/type/basis. Fresh loader UUIDs and UUID-bearing snapshot hashes differ between disposable DBs; internal snapshot/seal correctness is independently verified by accepted replay, not by equating unrelated DB UUIDs.
+- All 19 adversarial cases rejected plus DEFER positive control passed: AP/EP, piece inference, revision mixing, wrong lb constant, garlic food/form/estimate/density, alternative/optional, OR kitchen assumption, incomplete substitution branches/Composition, household claims, unsupported rights and false final-three/count states.
+- Full original SHA-256/size, exact AFRS original-to-excerpt pages, source rice/garlic observations, whole-package and frozen R1/accepted-input hashes, no-float, Russian ingredient display and Decimal/rational arithmetic — PASS. Relevant source PDF pages rendered and visually reviewed.
+- Local links/anchors — 80 PASS. `ruff check` and `ruff format --check` for the new audit — PASS.
+- `git diff --check`, `git diff --cached --check`, staged 25-file scope audit — PASS; `.DS_Store` excluded. Changed scope is R2 evidence, its read-only auditor and five state/canonical documents only.
+- Full backend regression was not run: production code/data did not change. Direct local TLS downloads were unavailable; browser downloads supplied the exact source bytes. No original HTML or unavailable Army-PDF byte hashes are invented.
+
+R2 evidence is ready for review. Assembly A remains BLOCKED, not COMPLETE.
+Feature branch and PR published; stop for review, with no autonomous merge or follow-up research.
+
+
+Delivery: [PR #33](https://github.com/Mitronomik/family-food-os/pull/33),
+OPEN into main, not merged. Evidence commit:
+`bb9254143f2449eeb0e7786ce1f06af91afbe517`.
+R2 evidence READY FOR REVIEW; Assembly A BLOCKED. Stop for review.

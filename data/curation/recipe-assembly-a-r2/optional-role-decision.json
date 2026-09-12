@@ -1,0 +1,12 @@
+{
+  "base_without_seasoning_is_described": true,
+  "candidate": "R1-13",
+  "decision_ru": "В источнике есть базовые шаги без приправы и отдельные вариации. OR выбирает между парой кинза+лайм и куркумой; AND делает пару совместной в выбранной зелёной ветке. Это не доказательство произвольного отключения кинзы или лайма внутри этой ветки. Полностью проверенная необязательная компонентная роль для финальной тройки не установлена; сам выбор вариации не засчитывается.",
+  "eligible_optional_role": false,
+  "independent_component_omission_explicit": false,
+  "non_claim_ru": "ALTERNATIVE_REQUIRED_VARIANT относится к составу выбранной вариации; не означает, что все порции базового риса обязательно должны иметь приправу. Вода для варки яиц — технологическая среда, не OPTIONAL пищевой компонент.",
+  "optional_component_providers": [],
+  "scope": "WITHIN_SELECTED_SEASONING_VARIATION",
+  "semantics": "ALTERNATIVE_REQUIRED_VARIANT",
+  "source_ref": "source-facts.json:rice.seasoning"
+}

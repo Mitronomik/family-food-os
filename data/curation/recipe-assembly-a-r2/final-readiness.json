@@ -1,0 +1,142 @@
+{
+  "assembly_a": "BLOCKED",
+  "assembly_b": "NOT STARTED",
+  "candidate_gates": {
+    "R1-13": {
+      "exact_input_mass": true,
+      "food_form_composition": true,
+      "kitchen_scope": false,
+      "market_default": true,
+      "ordered_process": false,
+      "rights": true,
+      "ru_familiarity": true,
+      "russian_display": true,
+      "source_template_scope": true,
+      "transformation_dependencies": true
+    },
+    "R1-21": {
+      "exact_input_mass": true,
+      "food_form_composition": true,
+      "kitchen_scope": true,
+      "market_default": true,
+      "ordered_process": true,
+      "rights": true,
+      "ru_familiarity": true,
+      "russian_display": true,
+      "source_template_scope": true,
+      "transformation_dependencies": true
+    },
+    "R1-23": {
+      "exact_input_mass": true,
+      "food_form_composition": true,
+      "kitchen_scope": true,
+      "market_default": true,
+      "ordered_process": true,
+      "rights": true,
+      "ru_familiarity": true,
+      "russian_display": true,
+      "source_template_scope": true,
+      "transformation_dependencies": true
+    }
+  },
+  "collective_feature_gates": {
+    "compatibility": true,
+    "deterministic_quantities": true,
+    "family_count": false,
+    "optional_role": false,
+    "ordered_process": true,
+    "required_roles": true,
+    "verified_substitution": false
+  },
+  "evidence_ready_final_three": false,
+  "implementation_authorized": false,
+  "individually_ready": [
+    "R1-21",
+    "R1-23"
+  ],
+  "individually_ready_count": 2,
+  "migration": "0029_food_composition_core",
+  "operation": "RECIPE-ASSEMBLY-A-R2",
+  "outcome": "A",
+  "pr7": "NOT STARTED",
+  "required_family_count": 3,
+  "rice_variant_gates": {
+    "BASE_CILANTRO_LIME": {
+      "composition": false,
+      "exact_input_mass": false,
+      "food_form": true,
+      "kitchen_scope": false,
+      "process_compatible": false,
+      "rights": true,
+      "ru_availability": false,
+      "russian_display": true
+    },
+    "BASE_TURMERIC": {
+      "composition": false,
+      "exact_input_mass": false,
+      "food_form": true,
+      "kitchen_scope": false,
+      "process_compatible": false,
+      "rights": true,
+      "ru_availability": false,
+      "russian_display": true
+    },
+    "BASE_WATER_REGULAR": {
+      "composition": true,
+      "exact_input_mass": true,
+      "food_form": true,
+      "kitchen_scope": false,
+      "process_compatible": false,
+      "rights": true,
+      "ru_availability": true,
+      "russian_display": true
+    },
+    "BROTH_REGULAR": {
+      "composition": false,
+      "exact_input_mass": false,
+      "food_form": false,
+      "kitchen_scope": false,
+      "process_compatible": false,
+      "rights": true,
+      "ru_availability": false,
+      "russian_display": true
+    },
+    "PUBLISHED_FIRST_BRANCH": {
+      "composition": false,
+      "exact_input_mass": false,
+      "food_form": false,
+      "kitchen_scope": true,
+      "process_compatible": true,
+      "rights": true,
+      "ru_availability": false,
+      "russian_display": true
+    },
+    "WATER_MEDIUM": {
+      "composition": false,
+      "exact_input_mass": true,
+      "food_form": false,
+      "kitchen_scope": false,
+      "process_compatible": false,
+      "rights": true,
+      "ru_availability": false,
+      "russian_display": true
+    },
+    "WATER_PARBOILED": {
+      "composition": false,
+      "exact_input_mass": true,
+      "food_form": false,
+      "kitchen_scope": false,
+      "process_compatible": true,
+      "rights": true,
+      "ru_availability": false,
+      "russian_display": true
+    }
+  },
+  "selected_final_three": [],
+  "verified_substitutions": {
+    "REGULAR_MEDIUM": false,
+    "REGULAR_PARBOILED": false,
+    "SEASONING": false,
+    "WATER_BROTH": false
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "copyright": {
+    "access": "PRIMARY_PAGE_READ",
+    "observation_ru": "Факты, методы и простой список ингредиентов отделяются от охраняемой литературной формы, фотографии и составного издания. Применяется прежняя политика RIGHTS-FACTS; карточка целиком не лицензируется.",
+    "original_html_sha256": null,
+    "publisher": "U.S. Copyright Office",
+    "section": "What does copyright protect? / How do I protect my recipe?",
+    "url": "https://www.copyright.gov/help/faq/faq-protect.html"
+  },
+  "fdc": {
+    "access": "PRIMARY_PAGE_READ",
+    "observation_ru": "Значения Foundation Foods относятся к 100 г съедобного материала; отходы исключаются. Метаданные различают состояние пищи и отходы. Это подтверждает базис принятого профиля EGG, не меняет его значения.",
+    "original_html_sha256": null,
+    "publisher": "USDA ARS",
+    "section": "Weights; Food Descriptions",
+    "url": "https://fdc.nal.usda.gov/Foundation_Foods_Documentation/",
+    "version": "April 2024"
+  },
+  "icn_transfer": {
+    "access": "PRIMARY_PUBLISHER_SEARCH_INDEX_TEXT; direct web open failed",
+    "observation_ru": "ICN сообщает о переносе USDA Team Nutrition standardized recipes в Child Nutrition Recipe Box. Это подтверждает роль хостинга; не устанавливает авторство каждого сотрудника или blanket public-domain статус фотографии.",
+    "original_html_sha256": null,
+    "publication_date": "2019-09-17",
+    "publisher": "Institute of Child Nutrition",
+    "url": "https://theicn.org/team-nutritions-usda-standardized-recipes-will-be-moving-to-the-institute-of-child-nutritions-child-nutrition-recipe-box/"
+  },
+  "representation": "Reviewed primary-page factual paraphrases; observation hashes are package hashes, NOT original HTML hashes.",
+  "review_date": "2026-09-12"
+}
