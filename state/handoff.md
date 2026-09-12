@@ -1,5 +1,37 @@
 # Handoff
 
+Updated: `2026-09-12`.
+
+Current authorized operation: **RECIPE-ASSEMBLY-A-R1-CORRECTION — R1 BLOCKED**, correction delivery
+for review. PR31 merged by explicit user instruction; exact fetched merge/base
+`3c854f55323c895c1bdc5aabd5f1146fb6514935`. Branch `codex/recipe-assembly-a-r1`.
+[Package](../data/curation/recipe-assembly-a-r1/README.md): 23 donors screened,
+nine deep-reviewed. After the authorized market-policy CORRECTION, R1-21 is
+INDIVIDUALLY_READY for the fixed published 100-portion batch; selected_final_three
+remains empty. RU_AVAILABLE is not rarity; exact table salt passes the canonical
+commodity exception. Other mass/form/Composition, rights and kitchen facts remain
+unchanged. Collective substitution/three-family gates still fail.
+
+PR6 COMPLETE. Assembly A BLOCKED pending evidence recovery. Assembly B and PR7+
+NOT STARTED. No runtime/schema/seed change; head 0029. All PR6 blockers preserved.
+No schema, food-data fix, next phase or merge authorization follows from this
+research. Stop for review after PR delivery. Reproduce with
+`AI_ENABLED=false backend/.venv/bin/python scripts/audit_recipe_assembly_a_r1.py --database`.
+Source download limitations and source-versus-package hash distinctions are in
+the manifest; do not turn a web snapshot or publication label into blanket rights.
+
+
+Delivery: [PR #32](https://github.com/Mitronomik/family-food-os/pull/32), OPEN,
+not merged. Evidence commit `4c7f0712875bbb9ad86a1615d6ddb819178b026c`.
+Research evidence is ready for review; R1 and Assembly A remain BLOCKED.
+Stop for review. No next-phase or merge authorization.
+
+The preceding pre-correction evidence commit remains historical; current counts
+are one individually ready / zero selected. The following historical delivery-time record is preserved; its OPEN PR31 and
+prior-branch state are superseded by the explicit merge and R1 record above.
+
+# Historical Assembly A handoff (superseded by R1 below)
+
 Updated: `2026-09-12`
 
 Current operation: **RECIPE-ASSEMBLY-A — AUTHORIZED / BLOCKED at evidence preflight**.

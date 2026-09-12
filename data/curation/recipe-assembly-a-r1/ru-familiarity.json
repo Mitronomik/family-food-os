@@ -1,0 +1,115 @@
+{
+  "reviewer": "Codex — явный редакционный обзор для последующего ревью PR, не пользовательское исследование",
+  "review_date": "2026-09-12",
+  "method": "Reviewed rationale allowed by task: dish identity, user relevance, preparation and ingredient familiarity are assessed separately from translation, market and kitchen status. No claim of survey/interviews.",
+  "candidates": [
+    {
+      "template_candidate_code": "R1-05",
+      "name_ru": "Запечённые корнеплоды",
+      "dish_family_identity_ru": "Запечённые корнеплоды",
+      "target_user_relevance_ru": "Запечённые овощи как домашний гарнир; батат менее привычен, но способ и роль узнаваемы.",
+      "equipment_preparation_ru": "Духовка, нож, миска, форма обычны; спрей — отдельный неудобный компонент.",
+      "ingredient_form_familiarity_ru": "Тыква, свёкла, чеснок и зелень знакомы; батат не традиционная основа, однако доступность не подменяет знакомство.",
+      "reviewer_decision": "RU_RECIPE_FAMILIAR",
+      "evidence_or_rationale": "Редакционное сопоставление состава и процесса карточки с описанным домашним способом; ограничения указаны явно.",
+      "reviewer": "Codex",
+      "review_date": "2026-09-12"
+    },
+    {
+      "template_candidate_code": "R1-13",
+      "name_ru": "Бурый рис с приправами",
+      "dish_family_identity_ru": "Бурый рис с приправами",
+      "target_user_relevance_ru": "Отварной/запечённый рис с чесноком как гарнир к семейному обеду.",
+      "equipment_preparation_ru": "Кастрюля/духовка знакомы; промышленную партию 25 порций нельзя считать проверенной домашней порцией.",
+      "ingredient_form_familiarity_ru": "Рис, соль, чеснок обычны; выбран базовый вариант, экзотические приправы исключены из решения.",
+      "reviewer_decision": "RU_RECIPE_FAMILIAR",
+      "evidence_or_rationale": "Редакционное сопоставление состава и процесса карточки с описанным домашним способом; ограничения указаны явно.",
+      "reviewer": "Codex",
+      "review_date": "2026-09-12"
+    },
+    {
+      "template_candidate_code": "R1-15",
+      "name_ru": "Морковь с имбирём",
+      "dish_family_identity_ru": "Морковь с имбирём",
+      "target_user_relevance_ru": "Тушёная морковь с мягкой сладкой заправкой как овощной гарнир.",
+      "equipment_preparation_ru": "Нарезка и тушение в кастрюле знакомы.",
+      "ingredient_form_familiarity_ru": "Морковь, мёд и имбирь узнаваемы; наличие лимонного сока в каталоге — отдельный вопрос.",
+      "reviewer_decision": "RU_RECIPE_FAMILIAR",
+      "evidence_or_rationale": "Редакционное сопоставление состава и процесса карточки с описанным домашним способом; ограничения указаны явно.",
+      "reviewer": "Codex",
+      "review_date": "2026-09-12"
+    },
+    {
+      "template_candidate_code": "R1-16",
+      "name_ru": "Запечённая треска с овощной сальсой",
+      "dish_family_identity_ru": "Запечённая треска с овощной сальсой",
+      "target_user_relevance_ru": "Запечённое рыбное филе с помидорами и луком соответствует обычному семейному второму блюду.",
+      "equipment_preparation_ru": "Нож, миска, духовка и противень знакомы; партия 25 требует отдельной проверки масштаба.",
+      "ingredient_form_familiarity_ru": "Треска/тилапия, томат и лук знакомы; кинза и лайм не делают способ непонятным, но требуют отдельной доступности.",
+      "reviewer_decision": "RU_RECIPE_FAMILIAR",
+      "evidence_or_rationale": "Редакционное сопоставление состава и процесса карточки с описанным домашним способом; ограничения указаны явно.",
+      "reviewer": "Codex",
+      "review_date": "2026-09-12"
+    },
+    {
+      "template_candidate_code": "R1-17",
+      "name_ru": "Запечённая тилапия в панировке",
+      "dish_family_identity_ru": "Запечённая тилапия в панировке",
+      "target_user_relevance_ru": "Рыбное филе в панировке — понятное семейное блюдо.",
+      "equipment_preparation_ru": "Смазать, обвалять, запечь — обычные действия; конкретные сухари и спрей пока не разрешены.",
+      "ingredient_form_familiarity_ru": "Рыба, сухари, майонез и травы узнаваемы; точный состав промышленной смеси не доказан.",
+      "reviewer_decision": "RU_RECIPE_FAMILIAR",
+      "evidence_or_rationale": "Редакционное сопоставление состава и процесса карточки с описанным домашним способом; ограничения указаны явно.",
+      "reviewer": "Codex",
+      "review_date": "2026-09-12"
+    },
+    {
+      "template_candidate_code": "R1-18",
+      "name_ru": "Овощной гарнир из цветной капусты",
+      "dish_family_identity_ru": "Овощной гарнир из цветной капусты",
+      "target_user_relevance_ru": "Измельчённая цветная капуста как замена рисовому гарниру может быть понятна части аудитории, но привычность именно этого формата не подтверждена.",
+      "equipment_preparation_ru": "Сковорода обычна; измельчённый замороженный полуфабрикат менее привычен.",
+      "ingredient_form_familiarity_ru": "Овощи знакомы по отдельности; этого недостаточно для принятия всего семейства.",
+      "reviewer_decision": "UNCLEAR",
+      "evidence_or_rationale": "Редакционное сопоставление состава и процесса карточки с описанным домашним способом; ограничения указаны явно.",
+      "reviewer": "Codex",
+      "review_date": "2026-09-12"
+    },
+    {
+      "template_candidate_code": "R1-21",
+      "name_ru": "Овсяная каша на воде",
+      "dish_family_identity_ru": "Овсяная каша на воде",
+      "target_user_relevance_ru": "Овсяная каша на воде — узнаваемый домашний завтрак без зависимости от перевода иностранного названия.",
+      "equipment_preparation_ru": "Варка в кастрюле и выдержка после нагрева знакомы; источник проверен на 100 порций, домашний масштаб отдельно не доказан.",
+      "ingredient_form_familiarity_ru": "Овсяные хлопья, соль и питьевая вода — обычные продукты и формы.",
+      "reviewer_decision": "RU_RECIPE_FAMILIAR",
+      "evidence_or_rationale": "Редакционное сопоставление состава и процесса карточки с описанным домашним способом; ограничения указаны явно.",
+      "reviewer": "Codex",
+      "review_date": "2026-09-12"
+    },
+    {
+      "template_candidate_code": "R1-22",
+      "name_ru": "Пропаренный бурый рис",
+      "dish_family_identity_ru": "Пропаренный бурый рис",
+      "target_user_relevance_ru": "Рисовый гарнир узнаваем; бурый рис — вариант знакомой группы.",
+      "equipment_preparation_ru": "Варка под крышкой знакома; не переносим время на обычный непропаренный рис.",
+      "ingredient_form_familiarity_ru": "Рис, вода, соль, масло знакомы; точный пропаренный вид требует самостоятельной проверки.",
+      "reviewer_decision": "RU_RECIPE_FAMILIAR",
+      "evidence_or_rationale": "Редакционное сопоставление состава и процесса карточки с описанным домашним способом; ограничения указаны явно.",
+      "reviewer": "Codex",
+      "review_date": "2026-09-12"
+    },
+    {
+      "template_candidate_code": "R1-23",
+      "name_ru": "Варёные яйца",
+      "dish_family_identity_ru": "Варёные яйца",
+      "target_user_relevance_ru": "Яйца вкрутую — обычный завтрак или компонент семейного салата.",
+      "equipment_preparation_ru": "Кастрюля, вода, извлечение и охлаждение знакомы; выбран горячий водный метод.",
+      "ingredient_form_familiarity_ru": "Яйца в скорлупе и вода знакомы; знакомство не определяет массу съедобной части.",
+      "reviewer_decision": "RU_RECIPE_FAMILIAR",
+      "evidence_or_rationale": "Редакционное сопоставление состава и процесса карточки с описанным домашним способом; ограничения указаны явно.",
+      "reviewer": "Codex",
+      "review_date": "2026-09-12"
+    }
+  ]
+}

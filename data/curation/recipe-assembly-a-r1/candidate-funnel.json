@@ -1,0 +1,657 @@
+{
+  "operation": "RECIPE-ASSEMBLY-A-R1",
+  "status": "BLOCKED",
+  "screened_count": 23,
+  "deep_review_count": 9,
+  "target": 3,
+  "final_count": 0,
+  "strategy": "18 USDA/CACFP, 2 государственных стандартизованных и 3 простых AFRS. Прежние три PR31 не имеют приоритета. Tier 3: принятый аудит 30 RecipeVersions сохранён без повторного продвижения.",
+  "bounded_stop": "В новых источниках проверены ингредиенты и процесс, а не только названия. Ни одного готового набора из трёх; прекращён поиск после 23 доноров, а не после первых трёх отказов. Это результат ограниченного поиска, не доказательство отсутствия любых рецептов в мире.",
+  "candidates": [
+    {
+      "template_candidate_code": "R1-01",
+      "name_ru": "Пряная овсяная каша",
+      "source_id": "R1-01",
+      "tier": 1,
+      "review_depth": "SCREEN",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Нет Composition для молока 1%, маргарина, агавы, ванили и мускатного ореха; добавочная вода по густоте не имеет точной массы."
+      ],
+      "existing_codes_without_usable_composition": [
+        "MILK_1_PERCENT",
+        "MARGARINE",
+        "AGAVE_SYRUP",
+        "VANILLA_EXTRACT",
+        "NUTMEG_GROUND"
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
+    },
+    {
+      "template_candidate_code": "R1-02",
+      "name_ru": "Клубничная смузи-чаша",
+      "source_id": "R1-02",
+      "tier": 1,
+      "review_depth": "SCREEN",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Греческий йогурт с низкой жирностью нельзя заменить обезжиренным; у нужной формы, агавы и ванили нет Composition."
+      ],
+      "existing_codes_without_usable_composition": [
+        "YOGURT_GREEK_LOW_FAT",
+        "AGAVE_SYRUP",
+        "VANILLA_EXTRACT"
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
+    },
+    {
+      "template_candidate_code": "R1-03",
+      "name_ru": "Запечённый батат с яблоками",
+      "source_id": "R1-03",
+      "tier": 1,
+      "review_depth": "SCREEN",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Замороженные зелёные яблоки, концентрат апельсинового сока, маргарин и другие обязательные формы не имеют пути Composition. Клюква/изюм не образуют готовую замену."
+      ],
+      "existing_codes_without_usable_composition": [
+        "ORANGE_JUICE_CONCENTRATE",
+        "MARGARINE",
+        "CRANBERRIES_DRIED"
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
+    },
+    {
+      "template_candidate_code": "R1-04",
+      "name_ru": "Кукуруза с эдамаме",
+      "source_id": "R1-04",
+      "tier": 1,
+      "review_depth": "SCREEN",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Кукуруза замороженная после слива и поджаренный кунжут не имеют нужной Composition; чеснок задан объёмом, принятые порции estimate."
+      ],
+      "existing_codes_without_usable_composition": [
+        "CORN_SWEET",
+        "SESAME_SEEDS"
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
+    },
+    {
+      "template_candidate_code": "R1-05",
+      "name_ru": "Запечённые корнеплоды",
+      "source_id": "R1-05",
+      "tier": 1,
+      "review_depth": "DEEP",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Тыква и свёкла без Composition; чеснок без точной массы; спрей обязателен в процессе, но не определён по форме и граммам."
+      ],
+      "existing_codes_without_usable_composition": [
+        "BUTTERNUT_SQUASH",
+        "BEET"
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
+    },
+    {
+      "template_candidate_code": "R1-06",
+      "name_ru": "Стручковая фасоль с томатами",
+      "source_id": "R1-06",
+      "tier": 1,
+      "review_depth": "SCREEN",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Консервированная фасоль не равна свежей; GREEN_BEANS_CANNED_NO_SALT и орегано без Composition; кошерная соль не равна порции столовой."
+      ],
+      "existing_codes_without_usable_composition": [
+        "GREEN_BEANS_CANNED_NO_SALT",
+        "OREGANO_DRIED"
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
+    },
+    {
+      "template_candidate_code": "R1-07",
+      "name_ru": "Шпинат с томатами на сковороде",
+      "source_id": "R1-07",
+      "tier": 1,
+      "review_depth": "SCREEN",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Шпинат, маргарин, паста томатная и хлопья перца без Composition; молотый имбирь не равен свежему."
+      ],
+      "existing_codes_without_usable_composition": [
+        "SPINACH",
+        "MARGARINE",
+        "TOMATO_PASTE_NO_SALT"
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
+    },
+    {
+      "template_candidate_code": "R1-08",
+      "name_ru": "Рис по-испански",
+      "source_id": "R1-08",
+      "tier": 1,
+      "review_depth": "SCREEN",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Пропаренный рис не равен RICE_BROWN; несколько требуемых форм без Composition, чеснок без точной массы."
+      ],
+      "existing_codes_without_usable_composition": [
+        "BEEF_BROTH_LOW_SODIUM",
+        "TOMATO_PASTE_NO_SALT",
+        "LIME_JUICE"
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
+    },
+    {
+      "template_candidate_code": "R1-09",
+      "name_ru": "Овощная фриттата",
+      "source_id": "R1-09",
+      "tier": 1,
+      "review_depth": "SCREEN",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Грибы, шпинат, нежирный сыр, обезжиренное молоко, цельнозерновая мука без Composition; жидкие яйца не равны EGG."
+      ],
+      "existing_codes_without_usable_composition": [
+        "MUSHROOM_WHITE",
+        "SPINACH",
+        "CHEESE_CHEDDAR_REDUCED_FAT",
+        "MILK_SKIM",
+        "FLOUR_WHOLE_WHEAT"
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
+    },
+    {
+      "template_candidate_code": "R1-10",
+      "name_ru": "Морковный салат с изюмом",
+      "source_id": "R1-10",
+      "tier": 1,
+      "review_depth": "SCREEN",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Ананас консервированный в соке не равен свежему; у него, яблока, кокоса и мускатного ореха нет нужной Composition."
+      ],
+      "existing_codes_without_usable_composition": [
+        "PINEAPPLE_CANNED_JUICE",
+        "APPLE",
+        "COCONUT_SHREDDED",
+        "NUTMEG_GROUND"
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
+    },
+    {
+      "template_candidate_code": "R1-11",
+      "name_ru": "Киш с самоформирующейся корочкой",
+      "source_id": "R1-11",
+      "tier": 1,
+      "review_depth": "SCREEN",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Замороженная яичная масса не равна EGG; молоко, мука, сыр, шпинат и разрыхлитель без Composition."
+      ],
+      "existing_codes_without_usable_composition": [
+        "MILK_SKIM",
+        "FLOUR_WHOLE_WHEAT",
+        "SPINACH",
+        "BAKING_POWDER"
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
+    },
+    {
+      "template_candidate_code": "R1-12",
+      "name_ru": "Горячий бутерброд со шпинатом",
+      "source_id": "R1-12",
+      "tier": 1,
+      "review_depth": "SCREEN",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Обязателен SPINACH_BABY, одна из пяти сохранённых заблокированных форм; масса ломтиков хлеба не разрешена."
+      ],
+      "existing_codes_without_usable_composition": [],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
+    },
+    {
+      "template_candidate_code": "R1-13",
+      "name_ru": "Бурый рис с приправами",
+      "source_id": "R1-13",
+      "tier": 1,
+      "review_depth": "DEEP",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Обычный длиннозерный вариант риса совместим, но обязательный рубленый чеснок задан объёмом без exact-порции. Варианты бульона, других рисов и приправ не готовы."
+      ],
+      "existing_codes_without_usable_composition": [],
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "PASS",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "PASS",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
+    },
+    {
+      "template_candidate_code": "R1-14",
+      "name_ru": "Пилав из бурого риса",
+      "source_id": "R1-14",
+      "tier": 1,
+      "review_depth": "SCREEN",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Пропаренный рис, бульон, томатная паста, грибы, шпинат, пармезан, клюква и сельдерейная соль без нужной Composition."
+      ],
+      "existing_codes_without_usable_composition": [
+        "VEGETABLE_BROTH",
+        "MUSHROOM_WHITE",
+        "SPINACH",
+        "CRANBERRIES_DRIED"
+      ],
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
+    },
+    {
+      "template_candidate_code": "R1-15",
+      "name_ru": "Морковь с имбирём",
+      "source_id": "R1-15",
+      "tier": 1,
+      "review_depth": "DEEP",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Лимонный сок — сохранённая отсутствующая форма; маргарин без Composition. Замороженная морковь не имеет пути формы."
+      ],
+      "existing_codes_without_usable_composition": [
+        "MARGARINE"
+      ],
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
+    },
+    {
+      "template_candidate_code": "R1-16",
+      "name_ru": "Запечённая треска с овощной сальсой",
+      "source_id": "R1-16",
+      "tier": 1,
+      "review_depth": "DEEP",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Сок лайма без Composition; спрей без формы/массы. Треска не уточнена до атлантической; замена на тилапию не доказывает отдельную кухонную проверку."
+      ],
+      "existing_codes_without_usable_composition": [
+        "LIME_JUICE"
+      ],
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
+    },
+    {
+      "template_candidate_code": "R1-17",
+      "name_ru": "Запечённая тилапия в панировке",
+      "source_id": "R1-17",
+      "tier": 1,
+      "review_depth": "DEEP",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Цельнозерновая приправленная панировка не равна BREADCRUMBS; смесь прованских трав и спрей без формы/массы."
+      ],
+      "existing_codes_without_usable_composition": [],
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
+    },
+    {
+      "template_candidate_code": "R1-18",
+      "name_ru": "Овощной гарнир из цветной капусты",
+      "source_id": "R1-18",
+      "tier": 1,
+      "review_depth": "DEEP",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Размороженная измельчённая капуста после слива не разрешена как CAULIFLOWER_FROZEN без проверки состояния; гранулированный чеснок не приравнен к порошку; спрей без массы."
+      ],
+      "existing_codes_without_usable_composition": [],
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "NOT_PASSED",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
+    },
+    {
+      "template_candidate_code": "R1-19",
+      "name_ru": "Пряный картофель с бататом",
+      "source_id": "R1-19",
+      "tier": 2,
+      "review_depth": "SCREEN",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Красный картофель, луковый порошок, паприка и готовый бекон из индейки без Composition; ломтики бекона без точной массы."
+      ],
+      "existing_codes_without_usable_composition": [
+        "POTATO_RED",
+        "ONION_POWDER",
+        "PAPRIKA"
+      ],
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
+    },
+    {
+      "template_candidate_code": "R1-20",
+      "name_ru": "Капуста с яичной лапшой",
+      "source_id": "R1-20",
+      "tier": 2,
+      "review_depth": "SCREEN",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Маргарин, яичная лапша и сладкий лук без точного совместимого пути; сливочное масло не разрешённая замена маргарина."
+      ],
+      "existing_codes_without_usable_composition": [
+        "MARGARINE"
+      ],
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
+    },
+    {
+      "template_candidate_code": "R1-21",
+      "name_ru": "Овсяная каша на воде",
+      "source_id": "R1-21",
+      "tier": 2,
+      "review_depth": "DEEP",
+      "disposition": "INDIVIDUALLY_READY",
+      "remaining_blockers": [],
+      "existing_codes_without_usable_composition": [],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "PASS",
+        "exact_input_mass": "PASS",
+        "ru_familiarity": "PASS",
+        "market_default": "PASS",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
+    },
+    {
+      "template_candidate_code": "R1-22",
+      "name_ru": "Пропаренный бурый рис",
+      "source_id": "R1-22",
+      "tier": 2,
+      "review_depth": "DEEP",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "Пропаренный бурый рис не равен текущему обычному длиннозерному RICE_BROWN; salad oil не определяет конкретное масло."
+      ],
+      "existing_codes_without_usable_composition": [],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
+    },
+    {
+      "template_candidate_code": "R1-23",
+      "name_ru": "Варёные яйца",
+      "source_id": "R1-23",
+      "tier": 2,
+      "review_depth": "DEEP",
+      "disposition": "DEFER",
+      "remaining_blockers": [
+        "22 фунта на 200 яиц не устанавливают съедобную массу без скорлупы; универсальная масса штуки запрещена. Вода для варки — технологическая среда, не масса съеденного продукта."
+      ],
+      "existing_codes_without_usable_composition": [],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "PASS",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
+    }
+  ],
+  "prior_research_overlap": "Первые 12 карточек и название Cauliflower Rice встречались в раннем PR4 donor-research. Они заново просмотрены как первичные доноры Tier 1, а не объявлены принятыми RecipeVersions или новыми для репозитория. R1 не ограничивается тремя отложенными PR31. Остальные 10 кандидатов расширяют эту исходную подборку.",
+  "individually_ready_count": 1,
+  "correction_review": {
+    "operation": "RECIPE-ASSEMBLY-A-R1-CORRECTION",
+    "before_individually_ready_count": 0,
+    "after_individually_ready_count": 1,
+    "reviewed_donor_count": 23,
+    "new_donors": 0,
+    "reason": "Correct canonical classification/default suitability distinction; no search, no gate changes."
+  }
+}

@@ -557,3 +557,18 @@ is retained with its limited scope; it does not verify arbitrary FNS/WIC recipes
 or generalized variants. No source, quantity, composition, estimate, language,
 market or kitchen gate is weakened. Assembly A is BLOCKED, not COMPLETE;
 Assembly B and PR7+ remain NOT STARTED and require separate authorization.
+
+### RECIPE-ASSEMBLY-A-R1 — bounded donor recovery
+
+2026-09-12: after the explicitly authorized merge of checkpoint PR31, the
+[separate R1 evidence package](../../data/curation/recipe-assembly-a-r1/README.md)
+screens 23 institutional donors and deep-reviews nine. R1 is BLOCKED: no
+final three satisfy all gates. AFRS plain oatmeal supplies exact source input
+weights and existing atomic paths. The authorized R1 market correction applies
+the existing commodity/product-reason policy: R1-21 is INDIVIDUALLY_READY only
+for its published 100-portion batch; selected_final_three remains empty. SALT
+remains RU_AVAILABLE and passes default-use as an exact basic commodity. This
+corrects R1, not the canonical policy or production truth. Published alternatives
+do not automatically inherit kitchen verification.
+No production truth or schema changes; migration remains 0029. The original
+Assembly A gate remains blocked, and Assembly B / PR7+ remain unauthorized.

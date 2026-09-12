@@ -1,0 +1,189 @@
+{
+  "date": "2026-09-12",
+  "reviewer": "Codex",
+  "note": "Retained factual review notes, not originals; their package hash does not purport to hash remote PDF bytes. Full cards/photographs/logos/narrative are excluded. Web snapshots may reflect crawl time, not a current HTTP download.",
+  "observations": [
+    {
+      "source_id": "R1-01",
+      "reviewed_fact_ru": "Нет Composition для молока 1%, маргарина, агавы, ванили и мускатного ореха; добавочная вода по густоте не имеет точной массы.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": null
+    },
+    {
+      "source_id": "R1-02",
+      "reviewed_fact_ru": "Греческий йогурт с низкой жирностью нельзя заменить обезжиренным; у нужной формы, агавы и ванили нет Composition.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": null
+    },
+    {
+      "source_id": "R1-03",
+      "reviewed_fact_ru": "Замороженные зелёные яблоки, концентрат апельсинового сока, маргарин и другие обязательные формы не имеют пути Composition. Клюква/изюм не образуют готовую замену.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": null
+    },
+    {
+      "source_id": "R1-04",
+      "reviewed_fact_ru": "Кукуруза замороженная после слива и поджаренный кунжут не имеют нужной Composition; чеснок задан объёмом, принятые порции estimate.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": null
+    },
+    {
+      "source_id": "R1-05",
+      "reviewed_fact_ru": "Тыква и свёкла без Composition; чеснок без точной массы; спрей обязателен в процессе, но не определён по форме и граммам.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": "quantity-authority.json"
+    },
+    {
+      "source_id": "R1-06",
+      "reviewed_fact_ru": "Консервированная фасоль не равна свежей; GREEN_BEANS_CANNED_NO_SALT и орегано без Composition; кошерная соль не равна порции столовой.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": null
+    },
+    {
+      "source_id": "R1-07",
+      "reviewed_fact_ru": "Шпинат, маргарин, паста томатная и хлопья перца без Composition; молотый имбирь не равен свежему.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": null
+    },
+    {
+      "source_id": "R1-08",
+      "reviewed_fact_ru": "Пропаренный рис не равен RICE_BROWN; несколько требуемых форм без Composition, чеснок без точной массы.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": null
+    },
+    {
+      "source_id": "R1-09",
+      "reviewed_fact_ru": "Грибы, шпинат, нежирный сыр, обезжиренное молоко, цельнозерновая мука без Composition; жидкие яйца не равны EGG.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": null
+    },
+    {
+      "source_id": "R1-10",
+      "reviewed_fact_ru": "Ананас консервированный в соке не равен свежему; у него, яблока, кокоса и мускатного ореха нет нужной Composition.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": null
+    },
+    {
+      "source_id": "R1-11",
+      "reviewed_fact_ru": "Замороженная яичная масса не равна EGG; молоко, мука, сыр, шпинат и разрыхлитель без Composition.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": null
+    },
+    {
+      "source_id": "R1-12",
+      "reviewed_fact_ru": "Обязателен SPINACH_BABY, одна из пяти сохранённых заблокированных форм; масса ломтиков хлеба не разрешена.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": null
+    },
+    {
+      "source_id": "R1-13",
+      "reviewed_fact_ru": "Обычный длиннозерный вариант риса совместим, но обязательный рубленый чеснок задан объёмом без exact-порции. Варианты бульона, других рисов и приправ не готовы.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": "quantity-authority.json"
+    },
+    {
+      "source_id": "R1-14",
+      "reviewed_fact_ru": "Пропаренный рис, бульон, томатная паста, грибы, шпинат, пармезан, клюква и сельдерейная соль без нужной Composition.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": null
+    },
+    {
+      "source_id": "R1-15",
+      "reviewed_fact_ru": "Лимонный сок — сохранённая отсутствующая форма; маргарин без Composition. Замороженная морковь не имеет пути формы.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": "quantity-authority.json"
+    },
+    {
+      "source_id": "R1-16",
+      "reviewed_fact_ru": "Сок лайма без Composition; спрей без формы/массы. Треска не уточнена до атлантической; замена на тилапию не доказывает отдельную кухонную проверку.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": "quantity-authority.json"
+    },
+    {
+      "source_id": "R1-17",
+      "reviewed_fact_ru": "Цельнозерновая приправленная панировка не равна BREADCRUMBS; смесь прованских трав и спрей без формы/массы.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": "quantity-authority.json"
+    },
+    {
+      "source_id": "R1-18",
+      "reviewed_fact_ru": "Размороженная измельчённая капуста после слива не разрешена как CAULIFLOWER_FROZEN без проверки состояния; гранулированный чеснок не приравнен к порошку; спрей без массы.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": "quantity-authority.json"
+    },
+    {
+      "source_id": "R1-19",
+      "reviewed_fact_ru": "Красный картофель, луковый порошок, паприка и готовый бекон из индейки без Composition; ломтики бекона без точной массы.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": null
+    },
+    {
+      "source_id": "R1-20",
+      "reviewed_fact_ru": "Маргарин, яичная лапша и сладкий лук без точного совместимого пути; сливочное масло не разрешённая замена маргарина.",
+      "source_locus": "Ingredient table and process; full card.",
+      "source_weight_table_retained_in": null
+    },
+    {
+      "source_id": "R1-21",
+      "reviewed_fact_ru": "Карточка E00100 задаёт точные веса хлопьев, соли и воды; все три входа имеют Composition. Две подтверждённые сети соли не препятствуют default-use при применении канонического исключения базового продукта; подробное решение в market-evidence.json.",
+      "source_locus": "E00100 p3",
+      "source_weight_table_retained_in": "quantity-authority.json"
+    },
+    {
+      "source_id": "R1-22",
+      "reviewed_fact_ru": "Пропаренный бурый рис не равен текущему обычному длиннозерному RICE_BROWN; salad oil не определяет конкретное масло.",
+      "source_locus": "single-page card",
+      "source_weight_table_retained_in": "quantity-authority.json"
+    },
+    {
+      "source_id": "R1-23",
+      "reviewed_fact_ru": "22 фунта на 200 яиц не устанавливают съедобную массу без скорлупы; универсальная масса штуки запрещена. Вода для варки — технологическая среда, не масса съеденного продукта.",
+      "source_locus": "single-page card",
+      "source_weight_table_retained_in": "quantity-authority.json"
+    },
+    {
+      "source_id": "K-AFRS",
+      "reviewed_fact_ru": "Издатель прямо связывает рецепты данного издания с разработкой, испытаниями и стандартизацией; E00100 найден в индексе и на странице 3 раздела E. Только опубликованная версия."
+    },
+    {
+      "source_id": "K-CAULIFLOWER",
+      "reviewed_fact_ru": "Страница именованной стандартизованной подборки непосредственно ссылается на Cauliflower Rice 6 servings; карточка указывает USDA Standardization Recipe Project 2024."
+    },
+    {
+      "source_id": "K-TILAPIA",
+      "reviewed_fact_ru": "FNS называет конкретно Baked Tilapia Fish Fillets ages 3–5 стандартизованным рецептом. Карточка для этой возрастной группы указывает Easy Recipe Project. Новые замены не подтверждены."
+    },
+    {
+      "source_id": "K-HARVEST",
+      "reviewed_fact_ru": "Сообщение MDE о стандартизованных CACFP рецептах с новым выходом 6 порций прямо называет Local Harvest Bake и Pizza Green Beans. Это ограниченная связь с вариантом, не разрешение менять состав."
+    },
+    {
+      "source_id": "RIGHTS-FACTS",
+      "reviewed_fact_ru": "Различает фактический перечень ингредиентов и защищаемое литературное изложение/сборник. Основание ограниченного собственного пересказа фактов; не универсальная лицензия ICN или российское юридическое заключение."
+    },
+    {
+      "source_id": "AFRS-INDEX",
+      "reviewed_fact_ru": "Индекс связывает названия с кодами, включая E00505. F00400 — карточка Cooked Eggs, также названа в официальном учебном журнале подготовки поваров."
+    },
+    {
+      "source_id": "AFRS-TRAINING",
+      "reviewed_fact_ru": "Раздел D3 называет boiled eggs F00400; D8 называет oatmeal E00100. Дополнительное подтверждение идентичности, не отдельное испытание."
+    },
+    {
+      "source_id": "ICN-RIGHTS",
+      "reviewed_fact_ru": "У сайта есть общий copyright notice. Он не доказывает ни лицензию конкретной федеральной карточки, ни запрет повторного использования её фактов. Права доноров на ICN оставлены DEFER."
+    },
+    {
+      "source_id": "SALT-LENTA",
+      "reviewed_fact_ru": "Официальная карточка пищевой соли, точная форма без ароматизации; одна сеть. Региональная связь — принятая PR28 страница магазинов СПб/ЛО."
+    },
+    {
+      "source_id": "SALT-MAGNIT",
+      "reviewed_fact_ru": "Официальная карточка простой поваренной соли в Санкт-Петербурге; вторая сеть. Не импортируются цены или остатки."
+    },
+    {
+      "source_id": "SALT-5KA-LEAD",
+      "reviewed_fact_ru": "В поиске есть строка поваренной мелкой соли; полный документ не открыт. Не засчитывается третьей сетью."
+    }
+  ]
+}

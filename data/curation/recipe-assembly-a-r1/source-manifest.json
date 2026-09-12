@@ -1,0 +1,513 @@
+{
+  "operation": "RECIPE-ASSEMBLY-A-R1",
+  "accepted_merge_base": "3c854f55323c895c1bdc5aabd5f1146fb6514935",
+  "sources": [
+    {
+      "source_id": "R1-01",
+      "owner": "USDA/FNS",
+      "url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Spiced%20Oatmeal%206%20Servings.pdf",
+      "identity": "Spiced Oatmeal",
+      "version": "2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": "8ae03f676051c520106c856f0a8629810758698ad9ca18e3976bc1f94a62c79e",
+      "byte_count": 176590,
+      "retention": "Downloaded original PDF hashed; assets not committed.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-01"
+    },
+    {
+      "source_id": "R1-02",
+      "owner": "USDA/FNS",
+      "url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Strawberry%20Smoothie%20Bowl%206%20Servings.pdf",
+      "identity": "Strawberry Smoothie Bowl",
+      "version": "2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": "846bbf832f3df5535039fd21048d3cfb265a01d8b480b6f3408053cc8159c5c6",
+      "byte_count": 349488,
+      "retention": "Downloaded original PDF hashed; assets not committed.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-02"
+    },
+    {
+      "source_id": "R1-03",
+      "owner": "USDA/FNS",
+      "url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Baked_Sweet_Potatoes_Apples_6_Servings.pdf",
+      "identity": "Baked Sweet Potatoes and Apples",
+      "version": "2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": "7bf6e88ea4550fac85efd7f9a8966f8ff30ba31f8e48e1f0e90f3a1dd882a1f6",
+      "byte_count": 330507,
+      "retention": "Downloaded original PDF hashed; assets not committed.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-03"
+    },
+    {
+      "source_id": "R1-04",
+      "owner": "USDA/FNS",
+      "url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
+      "identity": "Corn and Edamame Blend",
+      "version": "2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": "314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef",
+      "byte_count": 413087,
+      "retention": "Downloaded original PDF hashed; assets not committed.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-04"
+    },
+    {
+      "source_id": "R1-05",
+      "owner": "USDA/FNS",
+      "url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Local_Harvest_Bake_6_Servings.pdf",
+      "identity": "Local Harvest Bake",
+      "version": "2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": "340444ab1ec4f626a34d6a2737fa04d12481ef21f8850ad7c1199c49c2b3786b",
+      "byte_count": 167610,
+      "retention": "Downloaded original PDF hashed; assets not committed.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-05"
+    },
+    {
+      "source_id": "R1-06",
+      "owner": "USDA/FNS",
+      "url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Pizza_Green_Beans_6_Servings.pdf",
+      "identity": "Pizza Green Beans",
+      "version": "2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": "4611a6f3adc4d3f0c9ba0dde9f209919076893dac06c43abdb7c135ec6b4c9df",
+      "byte_count": 353507,
+      "retention": "Downloaded original PDF hashed; assets not committed.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-06"
+    },
+    {
+      "source_id": "R1-07",
+      "owner": "USDA/FNS",
+      "url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Sauteed_Spinach_6_servings.pdf",
+      "identity": "Sautéed Spinach and Tomatoes",
+      "version": "2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": "33acf2b15058ccee676ed1e492d92bec53b0c216dc0aa0e40c714c8ad7ff0e72",
+      "byte_count": 194841,
+      "retention": "Downloaded original PDF hashed; assets not committed.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-07"
+    },
+    {
+      "source_id": "R1-08",
+      "owner": "USDA/FNS",
+      "url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Spanish_Rice_6_Servings.pdf",
+      "identity": "Spanish Rice",
+      "version": "2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": "cfcafe63e0c99d13b08ca5323cfb7e8508780c70a6d61deead6317a1e3a02d46",
+      "byte_count": 373843,
+      "retention": "Downloaded original PDF hashed; assets not committed.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-08"
+    },
+    {
+      "source_id": "R1-09",
+      "owner": "USDA/FNS",
+      "url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Vegetable_Frittata_6_Servings.pdf",
+      "identity": "Vegetable Frittata",
+      "version": "2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": "44fd200515663a2544a9b7ddfb0d2de2efe7f3d0d8fe407ff3674a6cfb59c338",
+      "byte_count": 364044,
+      "retention": "Downloaded original PDF hashed; assets not committed.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-09"
+    },
+    {
+      "source_id": "R1-10",
+      "owner": "USDA/FNS",
+      "url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Carrot%20Raisin%20Salad%206%20Servings.pdf",
+      "identity": "Carrot Raisin Salad",
+      "version": "2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": "f158ed6fae6b308abf951de1b7fdb967c1cef9c25ecdcad15f71875956db20af",
+      "byte_count": 222976,
+      "retention": "Downloaded original PDF hashed; assets not committed.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-10"
+    },
+    {
+      "source_id": "R1-11",
+      "owner": "USDA/FNS",
+      "url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Quiche_Self-Forming_Crust_6_Servings.pdf",
+      "identity": "Quiche with Self-Forming Crust",
+      "version": "2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": "edb35032a28decf27db80f7b35c97f2f44f65759fe069ab978cc1556b2ed844b",
+      "byte_count": 389478,
+      "retention": "Downloaded original PDF hashed; assets not committed.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-11"
+    },
+    {
+      "source_id": "R1-12",
+      "owner": "USDA/FNS",
+      "url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tuscan_Grill_Cheese_6_Servings.pdf",
+      "identity": "Tuscan Grill Cheese Sandwich",
+      "version": "2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": "576aedace7289fc37a4862b75848b04108add602f31946e5b87af3800d2c8354",
+      "byte_count": 314722,
+      "retention": "Downloaded original PDF hashed; assets not committed.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-12"
+    },
+    {
+      "source_id": "R1-13",
+      "owner": "USDA/FNS",
+      "url": "https://theicn.org/cnrb/pdfs/cacfp/Cooking_Rice_25-50_Draft3_F.pdf",
+      "identity": "Cooking Rice",
+      "version": "2019; USDA Standardized Recipes Project; 25/50",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Web text observation retained; original bytes unavailable to local TLS client, no byte hash invented.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-13"
+    },
+    {
+      "source_id": "R1-14",
+      "owner": "USDA/FNS",
+      "url": "https://theicn.org/cnrb/pdfs/schools/Brown_Rice_Pilaf_50-100_Draft3_F.pdf",
+      "identity": "Brown Rice Pilaf",
+      "version": "2019; USDA Standardized Recipes Project; 50/100",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Web text observation retained; original bytes unavailable to local TLS client, no byte hash invented.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-14"
+    },
+    {
+      "source_id": "R1-15",
+      "owner": "USDA/FNS",
+      "url": "https://theicn.org/cnrb/pdfs/cacfp/Gingered-Carrots.25-50(multicultural).Final.pdf",
+      "identity": "Gingered Carrots",
+      "version": "Team Nutrition CACFP Multicultural Recipe Project; 25/50",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Web text observation retained; original bytes unavailable to local TLS client, no byte hash invented.",
+      "link_check": "READ_MATCHING_ICN_HTML; PDF local download unavailable",
+      "evidence_location": "source-observations.json#R1-15",
+      "matching_html_url": "https://theicn.org/cnrb/recipes-for-centers-vegetables/gingered-carrots-for-usda-recipe-for-cacfp/"
+    },
+    {
+      "source_id": "R1-16",
+      "owner": "USDA/FNS",
+      "url": "https://theicn.org/cnrb/pdfs/2021_508c/Baked-Cod-Ole.25-50_508c_2021.pdf",
+      "identity": "Baked Cod Olé",
+      "version": "2021 accessible card; CACFP Multicultural; 25/50",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Web text observation retained; original bytes unavailable to local TLS client, no byte hash invented.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-16"
+    },
+    {
+      "source_id": "R1-17",
+      "owner": "USDA/FNS",
+      "url": "https://theicn.org/cnrb/pdfs/CACFP_Lunch_Supper_Recipes%28English%2941-50/CACFP-Lunch-Supper-quantity-Baked-Tilapia-Fish-Fillets-ages3-5.pdf",
+      "identity": "Baked Tilapia Fish Fillets",
+      "version": "CACFP Easy Recipe Project; ages 3–5; 25/50",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Web text observation retained; original bytes unavailable to local TLS client, no byte hash invented.",
+      "link_check": "READ_MATCHING_ICN_HTML; PDF local download unavailable",
+      "evidence_location": "source-observations.json#R1-17",
+      "matching_html_url": "https://theicn.org/cnrb/ages-3-5/age-3-5-25-50-servings/baked-tilapia-fish-fillets-usda-recipe-for-child-care-centers/"
+    },
+    {
+      "source_id": "R1-18",
+      "owner": "USDA/FNS",
+      "url": "https://theicn.org/cnrb/pdfs/cacfp/family-child-care-homes/12-03-2024/cauliflower-rice-6-servings-v2.pdf",
+      "identity": "Cauliflower Rice",
+      "version": "USDA Standardization Recipe Project 2024; 6 servings v2",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Web text observation retained; original bytes unavailable to local TLS client, no byte hash invented.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-18"
+    },
+    {
+      "source_id": "R1-19",
+      "owner": "Virginia Department of Education",
+      "url": "https://theicn.org/cnrb/pdfs/state-recipes-2023-05-24/Virginia-recipes/508_Virginia-DOE-Zesty-Breakfast-Potatoes-Recipe.pdf",
+      "identity": "Zesty Breakfast Potatoes",
+      "version": "FY2021 Cohort A; Virginia; 50/100",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Web text observation retained; original bytes unavailable to local TLS client, no byte hash invented.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-19",
+      "matching_html_url": "https://theicn.org/cnrb/recipes-for-schools/zesty-breakfast-potatoes-state-virginia-child-nutrition-agency-developed-recipe/?p=160528"
+    },
+    {
+      "source_id": "R1-20",
+      "owner": "Pennsylvania Department of Education",
+      "url": "https://theicn.org/cnrb/pdfs/state-recipes-2023-05-24/Pennsylvania-recipes/508_Pennsylvania-DOE-Haluski.pdf",
+      "identity": "Haluski",
+      "version": "FY2021 Cohort A; Pennsylvania; 50/100",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Web text observation retained; original bytes unavailable to local TLS client, no byte hash invented.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-20",
+      "matching_html_url": "https://theicn.org/cnrb/recipes-for-schools/haluski-state-pennsylvania-child-nutrition-agency-developed-recipe/"
+    },
+    {
+      "source_id": "R1-21",
+      "owner": "US Department of Defense / Armed Forces Recipe Service",
+      "url": "https://www.marines.mil/portals/1/Publications/MCO%20P10110.42B%20Cereals%20and%20Pasta%20Products.pdf",
+      "identity": "Hot Oatmeal E00100",
+      "version": "MCO P10110.42B; E00100; section E page 3",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Web text observation retained; original bytes unavailable to local TLS client, no byte hash invented.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-21"
+    },
+    {
+      "source_id": "R1-22",
+      "owner": "US Department of Defense / Armed Forces Recipe Service",
+      "url": "https://quartermaster.army.mil/jccoe/operations_directorate/quad/menu/recipes/section_e/E00505.pdf",
+      "identity": "Steamed Brown Rice E00505",
+      "version": "AFRS E00505; retrieved revision",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Web text observation retained; original bytes unavailable to local TLS client, no byte hash invented.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-22"
+    },
+    {
+      "source_id": "R1-23",
+      "owner": "US Department of Defense / Armed Forces Recipe Service",
+      "url": "https://quartermaster.army.mil/jccoe/operations_directorate/quad/menu/recipes/section_f/F00400.pdf",
+      "identity": "Cooked Eggs F00400",
+      "version": "AFRS F00400; retrieved revision",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Web text observation retained; original bytes unavailable to local TLS client, no byte hash invented.",
+      "link_check": "READ_PDF",
+      "evidence_location": "source-observations.json#R1-23"
+    },
+    {
+      "source_id": "K-AFRS",
+      "owner": "US Marine Corps",
+      "url": "https://www.marines.mil/News/Publications/MCPEL/Electronic-Library-Display/Article/900436/mco-p1011042b/",
+      "identity": "MCO P10110.42B publication record",
+      "version": "Retrieved 2026-09-12",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Reviewed excerpt/paraphrase only; raw response hash unavailable.",
+      "link_check": "READ_PRIMARY_PAGE_OR_PDF",
+      "evidence_location": "source-observations.json#K-AFRS"
+    },
+    {
+      "source_id": "K-CAULIFLOWER",
+      "owner": "Institute of Child Nutrition",
+      "url": "https://theicn.org/cnrb/new-and-revised-usda-standardized-recipes-december-2024/",
+      "identity": "New and Revised USDA Standardized Recipes, December 2024",
+      "version": "Retrieved 2026-09-12",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Reviewed excerpt/paraphrase only; raw response hash unavailable.",
+      "link_check": "READ_PRIMARY_PAGE_OR_PDF",
+      "evidence_location": "source-observations.json#K-CAULIFLOWER"
+    },
+    {
+      "source_id": "K-TILAPIA",
+      "owner": "USDA/FNS",
+      "url": "https://www.fns.usda.gov/resources?f%5B0%5D=program%3A45&f%5B1%5D=audience%3A370&f%5B2%5D=audience%3A362&page=3",
+      "identity": "Baked Tilapia Fish Fillets ages 3–5 cooking video resource, 2022-08-18",
+      "version": "Retrieved 2026-09-12",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Reviewed excerpt/paraphrase only; raw response hash unavailable.",
+      "link_check": "READ_PRIMARY_PAGE_OR_PDF",
+      "evidence_location": "source-observations.json#K-TILAPIA"
+    },
+    {
+      "source_id": "K-HARVEST",
+      "owner": "Michigan Department of Education",
+      "url": "https://resources.finalsite.net/images/v1601918679/wayprogramnet/xlo59nro23bg0ktzw5ui/October_CACFP_Newsletter.pdf",
+      "identity": "October CACFP Newsletter, 2020",
+      "version": "Retrieved 2026-09-12",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Reviewed excerpt/paraphrase only; raw response hash unavailable.",
+      "link_check": "READ_PRIMARY_PAGE_OR_PDF",
+      "evidence_location": "source-observations.json#K-HARVEST"
+    },
+    {
+      "source_id": "RIGHTS-FACTS",
+      "owner": "US Copyright Office",
+      "url": "https://www.copyright.gov/help/faq/faq-protect.html",
+      "identity": "What Does Copyright Protect? / recipes",
+      "version": "Retrieved 2026-09-12",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Reviewed excerpt/paraphrase only; raw response hash unavailable.",
+      "link_check": "READ_PRIMARY_PAGE_OR_PDF",
+      "evidence_location": "source-observations.json#RIGHTS-FACTS"
+    },
+    {
+      "source_id": "AFRS-INDEX",
+      "owner": "US Army JCCoE",
+      "url": "https://quartermaster.army.mil/jccoe/publications/recipes/index/full_index.pdf",
+      "identity": "AFRS full index",
+      "version": "Retrieved 2026-09-12",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Reviewed excerpt/paraphrase only; raw response hash unavailable.",
+      "link_check": "READ_PRIMARY_PAGE_OR_PDF",
+      "evidence_location": "source-observations.json#AFRS-INDEX"
+    },
+    {
+      "source_id": "AFRS-TRAINING",
+      "owner": "US Army JCCoE",
+      "url": "https://quartermaster.army.mil/jccoe/publications/92G_Credentialing/Log_Book.pdf",
+      "identity": "92G Credentialing Log Book",
+      "version": "Retrieved 2026-09-12",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Reviewed excerpt/paraphrase only; raw response hash unavailable.",
+      "link_check": "READ_PRIMARY_PAGE_OR_PDF",
+      "evidence_location": "source-observations.json#AFRS-TRAINING"
+    },
+    {
+      "source_id": "ICN-RIGHTS",
+      "owner": "Institute of Child Nutrition",
+      "url": "https://theicn.org/cnrb/contact-us/",
+      "identity": "Contact Us / footer",
+      "version": "Retrieved 2026-09-12",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Reviewed excerpt/paraphrase only; raw response hash unavailable.",
+      "link_check": "READ_PRIMARY_PAGE_OR_PDF",
+      "evidence_location": "source-observations.json#ICN-RIGHTS"
+    },
+    {
+      "source_id": "SALT-LENTA",
+      "owner": "Лента",
+      "url": "https://lenta.com/product/sol-pishchevaya-vyvarochnaya-sort-ekstra-rossiya-500g-601148/",
+      "identity": "Соль пищевая ЭКСТРА выварочная, 500 г",
+      "version": "Retrieved 2026-09-12",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Reviewed excerpt/paraphrase only; raw response hash unavailable.",
+      "link_check": "READ_PRIMARY_PAGE_OR_PDF",
+      "evidence_location": "source-observations.json#SALT-LENTA"
+    },
+    {
+      "source_id": "SALT-MAGNIT",
+      "owner": "Магнит",
+      "url": "https://magnit.ru/product/3367460002-sol_povarennaya_pishchevaya_1kg?shopCode=049868&shopType=1",
+      "identity": "Соль поваренная пищевая 1 кг; магазин СПб, проспект Ударников",
+      "version": "Retrieved 2026-09-12",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Reviewed excerpt/paraphrase only; raw response hash unavailable.",
+      "link_check": "READ_PRIMARY_PAGE_OR_PDF",
+      "evidence_location": "source-observations.json#SALT-MAGNIT"
+    },
+    {
+      "source_id": "SALT-5KA-LEAD",
+      "owner": "Пятёрочка",
+      "url": "https://5ka.ru/media/hosting/documents/isklyucheniya_21_06.pdf",
+      "identity": "Перечень исключений, соль мелкая код 3231335",
+      "version": "Retrieved 2026-09-12",
+      "retrieval_date": "2026-09-12",
+      "byte_sha256": null,
+      "byte_count": null,
+      "retention": "Reviewed excerpt/paraphrase only; raw response hash unavailable.",
+      "link_check": "SEARCH_SNIPPET_ONLY",
+      "evidence_location": "source-observations.json#SALT-5KA-LEAD"
+    }
+  ],
+  "input_files": [
+    {
+      "path": "data/curation/pr6-close/food-readiness.json",
+      "sha256": "9ded14dd88947684296c743fe0435890ba2f9c3fb73f4dd568ef090c029272a7"
+    },
+    {
+      "path": "data/curation/pr6-close/recipe-readiness.json",
+      "sha256": "899bca3fc4951cd0f9a6a932e305de07bcc652661b17870980fd0b37b099a632"
+    },
+    {
+      "path": "data/curation/pr6-close/closure-evidence.json",
+      "sha256": "c6b6597097ba4b587e264955e5b3321bd08e6c08664d80e6afe722867730fbd8"
+    },
+    {
+      "path": "data/curation/pr6-close/blocker-register.json",
+      "sha256": "516c657e200067013c66d4d39f4fee2e31d576e071ca4775869904e57a1499f0"
+    },
+    {
+      "path": "data/curation/pr6-ru-food-data/food-readiness.json",
+      "sha256": "215aa5128ac406a69cb598a26c400987df0bb61d21c711885c99b657665be200"
+    },
+    {
+      "path": "data/curation/pr6-ru-food-data/market-evidence.json",
+      "sha256": "f6a43afba648f71652451f12e5e8b711afd83d19bd1d095144e51492b951661b"
+    },
+    {
+      "path": "data/curation/pr6-data-b2-b2-redesigned/implementation-evidence.json",
+      "sha256": "4e37b6ea5fe81499f93793a2bf0cd772407efb9df3d6f33e80a12bf06a3d3c2b"
+    },
+    {
+      "path": "data/seed/nutrition_measure_evidence/evidence.json",
+      "sha256": "a7f62dec20c39618b47c950603f55007658944543048ef4ff550a38b7a23d8bd"
+    },
+    {
+      "path": "data/curation/recipe-assembly-a/checksums.json",
+      "sha256": "d65078f06cd6774b095bcb968e3b6c27b3379843aea0a5ed08f0d0e480bfaa68"
+    },
+    {
+      "path": "docs/family-food/recipe-localization-and-substitution.md",
+      "sha256": "89fbec5a7c8de476f28470acfbcc6b55769ef74c9cdb3290559fb1b03b1ec49d"
+    },
+    {
+      "path": "scripts/build_pr4_recipe_seed.py",
+      "sha256": "9bb6ba7118d6571b364d209818301e2d41915243dbb2064cdb3e050e0e023f38"
+    },
+    {
+      "path": "data/curation/pr6-data-b2a/source-quantity-corrections.json",
+      "sha256": "16aa0868282233e85ebb4991999f543810acbb744d0692c61bd59ef2675e4b98"
+    },
+    {
+      "path": "data/curation/pr4/recipe-corpus.json",
+      "sha256": "9c82b795931c66615b536bb1d4c59274d43396b38025576386f14cefe34291cc"
+    }
+  ],
+  "access_limitations": [
+    "Local TLS downloads for ICN and military sites failed; readable web cards were reviewed and are not classified as missing recipes.",
+    "The oversized full AFRS PDF could not be fetched via web; the official 40-page cereals section and named Army cards were readable.",
+    "R1-15 and R1-17 use matching ICN HTML transcriptions; raw PDF hashes unavailable.",
+    "SALT-5KA-LEAD is search-only, excluded from availability classification.",
+    "Screenshot attempts for R1-18/R1-22/R1-23 returned cache misses; text tables retained, ambiguity remains blocking. R1-05 local page visually inspected."
+  ]
+}

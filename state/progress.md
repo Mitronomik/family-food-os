@@ -1245,3 +1245,107 @@ Draft delivery: [PR #31](https://github.com/Mitronomik/family-food-os/pull/31),
 OPEN / DRAFT / not merged. Evidence commit:
 `cbccc22ea87a326256891545c715259a0d67e8cf`. This publishes the blocker report,
 not a review-ready RecipeTemplate implementation. Stop for evidence review.
+
+## RECIPE-ASSEMBLY-A-R1 — bounded evidence recovery
+
+2026-09-12. Accepted BLOCKED PR31 merged under explicit user authorization;
+exact fetched merge/base `3c854f55323c895c1bdc5aabd5f1146fb6514935`.
+Branch `codex/recipe-assembly-a-r1` created from that commit.
+[Evidence package](../data/curation/recipe-assembly-a-r1/README.md) records 23
+screened donors and nine detailed reviews. Thirteen names/cards overlap earlier
+PR4 donor research and were re-inspected; ten expand it. The three PR31 deferred
+candidates were not privileged. No final three established: **Assembly A BLOCKED;
+R1 BLOCKED**, not milestone completion. PR6 COMPLETE; Assembly B / PR7+ NOT STARTED.
+
+Positive evidence: exact source weights and existing compositions for AFRS plain
+oatmeal inputs; explicit standardized-card relationships; published optional and
+substitution leads. Remaining form/composition, exact mass, verified substitution
+and default market gates are retained. No automatic food-data remediation.
+
+Executed verification:
+
+- `AI_ENABLED=false backend/.venv/bin/python scripts/audit_recipe_assembly_a_r1.py --database`:
+  PASS for evidence consistency, not publication readiness. 23 screened / nine deep /
+  zero selected; 29 resolved and 24 unresolved mass rows (includes optional/process
+  rows; unresolved values are not treated as zero).
+- Disposable accepted DB reproduces PR6-CLOSE food/recipe reports byte-for-byte;
+  185 foods, 63 compositions, 188 seals; exact natural identities checked.
+  Migration head 0029; 40 estimates non-executable; five deferred forms absent;
+  three yield blockers and historical replay preserved. Existing PR6-CLOSE CLI
+  head guard unchanged; imported measurement function used under the R1 base guard.
+- Package SHA-256 inventory, accepted-input hashes, source/provenance review
+  completeness, no-float JSON audit, exact-weight/portion arithmetic, FoodIngredient
+  resolution, Composition pins/unknowns, market policy and Russian display checks PASS.
+- Five disposable-copy negative checks rejected package drift, incorrect source
+  weight, JSON float, cross-food portion and missing required terminal input.
+  Semantic cases recomputed package checksums before testing rejection.
+- `ruff check scripts/audit_recipe_assembly_a_r1.py`: PASS.
+- `ruff format --check scripts/audit_recipe_assembly_a_r1.py`: PASS after initial formatting.
+- `git diff --check`: PASS. Scope audit allows only R1 evidence/auditor and owning
+  docs/state; unrelated `.DS_Store` excluded from delivery.
+- Source checks: 12 primary PDF downloads hashed; remaining readable primary/ICN
+  sources reviewed through web text, with actual HTML fallback URLs retained.
+  Local ICN/military TLS failures, oversized full AFRS PDF, screenshot cache misses
+  and search-only third salt-chain evidence remain explicit limitations, not passes.
+- Full backend regression NOT RUN, as authorized for research-only scope.
+
+Research PR delivery follows; stop for review, no autonomous merge or implementation.
+
+Delivery: [PR #32](https://github.com/Mitronomik/family-food-os/pull/32), OPEN,
+not merged. Evidence commit `4c7f0712875bbb9ad86a1615d6ddb819178b026c`.
+Research evidence is ready for review; R1 and Assembly A remain BLOCKED.
+Stop for review. No next-phase or merge authorization.
+
+## RECIPE-ASSEMBLY-A-R1-CORRECTION — canonical market semantics
+
+2026-09-12. Continue existing `codex/recipe-assembly-a-r1` / PR32 from reviewed
+head `4741e91710e17b86dbc25c5e69ca58ea36c5c635`. Fetched `origin/main` and PR32
+base independently match `3c854f55323c895c1bdc5aabd5f1146fb6514935`.
+The preceding R1 zero-ready and universal RU_AVAILABLE failure statements are
+historical and superseded by this correction.
+
+Corrected R1 to follow canonical localization policy §5 and the composition
+contract's existing RU gate. Classification is unchanged and independent of
+ordinary retail, exact form, commodity exception, product reason, dependency
+risk and actual substitution requirement. Basic table salt remains RU_AVAILABLE
+and passes default-use using retained category evidence; no third chain/SKU is
+required. Sugar, specific basic oils and named single spices are reviewed
+individually. Water's explicit exception remains. Generic oil, unresolved salt
+choices and herb blends cannot inherit it. No donor/market search performed.
+
+**R1 BLOCKED; individually ready 1 (R1-21), selected final three 0.** All 23 donor
+dispositions recalculated; nine detailed gate records and eight near-misses.
+R1-21 passes every individual gate only for the published 100-portion water/oats/
+salt variant. No inferred household-scale, substitution or cooked-output authority.
+Fourteen screen-only donors retain their non-market failure and explicit
+NOT_REVIEWED terminal-level gates; they are not declared unavailable or ready.
+
+Counted residuals among nine deep reviews (overlapping): food/form/composition 7,
+exact mass 8, kitchen scope 2, rights 5, familiarity 1, actual form-specific market
+evidence 2 (margarine 72% vs retained 80%; olive-oil content of reduced-fat mayo
+unconfirmed). Unresolved identities are not counted twice as rare ingredients.
+Verified substitution is still a separate final-three feature gap, with zero
+providers; it is not an individual market obligation for every RU_AVAILABLE food.
+
+Verification:
+
+- `AI_ENABLED=false backend/.venv/bin/python scripts/audit_recipe_assembly_a_r1.py --database`:
+  evidence consistency PASS, R1 BLOCKED / individually ready 1 / selected 0;
+  29 exact and 24 unresolved mass rows unchanged. Disposable accepted DB reproduces
+  PR6-CLOSE food/recipe reports byte-for-byte: 185 foods / 63 compositions / 188 seals.
+  Migration 0029, 40 non-executable estimates, five deferred forms, three yield
+  blockers and historical replay unchanged.
+- Fourteen re-hashed temporary package mutations rejected: RU_AVAILABLE-only
+  refusal; commodity without identity; blanket oils/spices; lost water exception;
+  unreasoned substitution; specialty PASS; market repairs to mass/form/composition;
+  wrong ready count; omitted terminal; float; cross-food portion.
+- Package checksums and accepted-input hashes PASS; no-float audit PASS. Protected
+  quantity/Composition/rights/kitchen/familiarity/substitution/baseline/inventory
+  evidence equals the reviewed head. No production seed/schema/runtime change.
+- Ruff check and format check PASS. Changed/new local file links and anchors: 15 PASS.
+- Working and staged whitespace/scope checks performed before delivery. Unrelated
+  `.DS_Store` remains excluded. Full backend regression unnecessary and not run.
+
+Deliver correction to existing PR32 and update its body; stop for final re-review.
+PR6 COMPLETE; Assembly A BLOCKED; Assembly B / PR7+ NOT STARTED. No merge or
+next-phase authorization.

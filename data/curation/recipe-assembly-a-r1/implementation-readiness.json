@@ -1,0 +1,138 @@
+{
+  "operation": "RECIPE-ASSEMBLY-A-R1",
+  "status": "BLOCKED",
+  "assembly_a_status": "BLOCKED",
+  "screened": 23,
+  "deep_reviewed": 9,
+  "selected_count": 0,
+  "target": 3,
+  "smallest_residual_blocker_classes": [
+    {
+      "code": "FOOD_FORM_COMPOSITION",
+      "name_ru": "Точная форма / Composition",
+      "scope": "INDIVIDUAL",
+      "candidates": [
+        "R1-05",
+        "R1-15",
+        "R1-16",
+        "R1-17",
+        "R1-18",
+        "R1-22",
+        "R1-23"
+      ],
+      "deep_reviewed_affected": 7,
+      "selected_final_three_affected": 0
+    },
+    {
+      "code": "EXACT_INPUT_MASS",
+      "name_ru": "Точная входная масса",
+      "scope": "INDIVIDUAL",
+      "candidates": [
+        "R1-05",
+        "R1-13",
+        "R1-15",
+        "R1-16",
+        "R1-17",
+        "R1-18",
+        "R1-22",
+        "R1-23"
+      ],
+      "deep_reviewed_affected": 8,
+      "selected_final_three_affected": 0
+    },
+    {
+      "code": "KITCHEN_SCOPE",
+      "name_ru": "Применимая кухонная проверка опубликованного варианта",
+      "scope": "INDIVIDUAL",
+      "candidates": [
+        "R1-15",
+        "R1-16"
+      ],
+      "deep_reviewed_affected": 2,
+      "selected_final_three_affected": 0
+    },
+    {
+      "code": "RIGHTS",
+      "name_ru": "Права конкретного донора",
+      "scope": "INDIVIDUAL",
+      "candidates": [
+        "R1-13",
+        "R1-15",
+        "R1-16",
+        "R1-17",
+        "R1-18"
+      ],
+      "deep_reviewed_affected": 5,
+      "selected_final_three_affected": 0
+    },
+    {
+      "code": "RU_FAMILIARITY",
+      "name_ru": "Привычность семейства для российской аудитории",
+      "scope": "INDIVIDUAL",
+      "candidates": [
+        "R1-18"
+      ],
+      "deep_reviewed_affected": 1,
+      "selected_final_three_affected": 0
+    },
+    {
+      "code": "FORM_SPECIFIC_MARKET_EVIDENCE",
+      "name_ru": "Точное рыночное исполнение маргарина/майонеза не подтверждено наблюдением",
+      "scope": "INDIVIDUAL",
+      "candidates": [
+        "R1-15",
+        "R1-17"
+      ],
+      "deep_reviewed_affected": 2,
+      "selected_final_three_affected": 0,
+      "reason": "Не число сетей; 72% против retained 80% и отсутствие подтверждения оливкового масла. Неявные формы/спреи уже учтены в FOOD_FORM_COMPOSITION."
+    },
+    {
+      "code": "VERIFIED_VARIANT_SUBSTITUTION",
+      "name_ru": "Нет проверенной замены для совокупного требования трёх семейств",
+      "scope": "FINAL_THREE_FEATURE",
+      "candidates": [],
+      "deep_reviewed_affected": 0,
+      "selected_final_three_affected": 0,
+      "reviewed_substitution_provider_count": 0,
+      "target_family_count": 3,
+      "reason": "Не индивидуальный запрет всем RU_AVAILABLE. Требование хотя бы одной замены относится к будущей финальной тройке."
+    }
+  ],
+  "additional_candidate_specific_gates": [
+    "Rights and kitchen evidence unchanged; see counted residuals.",
+    "R1-18 familiarity UNCLEAR, unchanged.",
+    "No household-scale or substituted-variant kitchen verification inferred; limitation on the passing fixed variant, not a new automatic blocker."
+  ],
+  "positive_recovery": [
+    "Direct exact weights and existing compositions for all three inputs of R1-21.",
+    "Concrete standardized recipe linkage for Cooking Rice, Cauliflower Rice, Baked Tilapia and AFRS cards.",
+    "Source optional parsley and explicit substitution leads retained without production promotion.",
+    "R1-21 passes every individual gate after exact table-salt commodity exception; three-family and collective substitution gates still fail."
+  ],
+  "state": {
+    "PR6": "COMPLETE",
+    "RECIPE-ASSEMBLY-A": "BLOCKED pending R1 evidence recovery",
+    "RECIPE-ASSEMBLY-A-R1": "BLOCKED; authorized research outcome awaits PR review",
+    "RECIPE-ASSEMBLY-B": "NOT STARTED",
+    "PR7+": "NOT STARTED"
+  },
+  "production_changes": false,
+  "migration_head": "0029_food_composition_core",
+  "next_action": "Review evidence PR. No automatic food-data fixes, schema, RecipeTemplate seed, Assembly B or PR7. READY remains contingent on exactly three passing families.",
+  "check_semantics": "Auditor independently derives each candidate gate, ready count and residual counts. PASS for consistent evidence can coexist with R1 BLOCKED and one individually ready candidate.",
+  "individually_ready_count": 1,
+  "individually_ready": [
+    "R1-21"
+  ],
+  "selected_final_three": [],
+  "before_after": {
+    "reviewed_head": "4741e91710e17b86dbc25c5e69ca58ea36c5c635",
+    "before": 0,
+    "after": 1,
+    "final_three_before": 0,
+    "final_three_after": 0,
+    "cause": "Market-policy interpretation correction only; retained classifications unchanged."
+  },
+  "r1_21_result": "INDIVIDUALLY_READY; fixed published batch only, no substitute or household-scale authority added"
+}
