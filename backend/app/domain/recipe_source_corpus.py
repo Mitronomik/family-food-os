@@ -119,6 +119,7 @@ class SourceVariantInput:
 
 @dataclass(frozen=True)
 class SourceCardInput:
+    source_section_code: str
     source_card_code: str
     name_ru: str
     category_ru: str | None
@@ -178,6 +179,7 @@ def card_from_dict(data: dict[str, Any]) -> SourceCardInput:
         )
     raw_text = data["raw_card_text"]
     return SourceCardInput(
+        source_section_code=data.get("source_section_code", ""),
         source_card_code=data["source_card_code"],
         name_ru=data["name_ru"],
         category_ru=data.get("category_ru"),
