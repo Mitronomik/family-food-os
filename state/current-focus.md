@@ -18,3 +18,8 @@ food-data fixes or RecipeTemplate schema/seed. No migration 0030, runtime change
 production food/profile/vector/composition/RecipeVersion mutation or yield work.
 Migration stays 0029; 40 estimates, five deferred forms and three yield blockers
 remain preserved. Do not merge the new PR without explicit post-review approval.
+
+Delivery: [PR #32](https://github.com/Mitronomik/family-food-os/pull/32), OPEN,
+not merged. Evidence commit `4c7f0712875bbb9ad86a1615d6ddb819178b026c`.
+Research evidence is ready for review; R1 and Assembly A remain BLOCKED.
+Stop for review. No next-phase or merge authorization.

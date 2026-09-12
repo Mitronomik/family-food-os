@@ -17,6 +17,12 @@ research. Stop for review after PR delivery. Reproduce with
 Source download limitations and source-versus-package hash distinctions are in
 the manifest; do not turn a web snapshot or publication label into blanket rights.
 
+
+Delivery: [PR #32](https://github.com/Mitronomik/family-food-os/pull/32), OPEN,
+not merged. Evidence commit `4c7f0712875bbb9ad86a1615d6ddb819178b026c`.
+Research evidence is ready for review; R1 and Assembly A remain BLOCKED.
+Stop for review. No next-phase or merge authorization.
+
 The following historical delivery-time record is preserved; its OPEN PR31 and
 prior-branch state are superseded by the explicit merge and R1 record above.
 

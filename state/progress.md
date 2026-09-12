@@ -1290,3 +1290,8 @@ Executed verification:
 - Full backend regression NOT RUN, as authorized for research-only scope.
 
 Research PR delivery follows; stop for review, no autonomous merge or implementation.
+
+Delivery: [PR #32](https://github.com/Mitronomik/family-food-os/pull/32), OPEN,
+not merged. Evidence commit `4c7f0712875bbb9ad86a1615d6ddb819178b026c`.
+Research evidence is ready for review; R1 and Assembly A remain BLOCKED.
+Stop for review. No next-phase or merge authorization.
