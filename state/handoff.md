@@ -2,6 +2,33 @@
 
 Updated: `2026-09-12`
 
+Current operation: **RECIPE-ASSEMBLY-A — AUTHORIZED / BLOCKED at evidence preflight**.
+Branch `codex/recipe-assembly-a` starts from exact fetched `origin/main`
+`e8a75e5b828ef935292da593f9f4d5edbd199474`. GitHub connector independently confirms
+PR #30 MERGED at `2026-09-12T08:32:53Z`, with that merge commit. PR6 and PR6-CLOSE
+are COMPLETE. Migration source head is `0029_food_composition_core`.
+The user's 2026-09-12 task requires exactly three fully evidenced production
+RecipeTemplate families; stop BLOCKED if hard evidence gates cannot pass.
+RECIPE-ASSEMBLY-B and PR7+ remain NOT STARTED / unauthorized.
+
+Evidence is retained in [the Assembly A package](../data/curation/recipe-assembly-a/README.md).
+All 30 current recipes fail direct carry-forward of complete mass/form authority;
+three shortlisted candidates remain DEFERRED. No production templates, runtime,
+seed or migration 0030 were added. The original target remains exactly three.
+Resume only after exact candidate/variant evidence gaps are resolved; do not
+silently start schema-only work or a new food/yield research programme.
+
+
+Draft delivery: [PR #31](https://github.com/Mitronomik/family-food-os/pull/31),
+OPEN / DRAFT / not merged. Evidence commit:
+`cbccc22ea87a326256891545c715259a0d67e8cf`. This publishes the blocker report,
+not a review-ready RecipeTemplate implementation. Stop for evidence review.
+
+## Accepted PR6-CLOSE historical handoff
+
+The following is the delivery-time record; its OPEN/awaiting-review statements
+were superseded by the independently verified merge above.
+
 **PR6 — COMPLETE. PR6-CLOSE — COMPLETE**, with explicit limitations; this
 closure publication awaits human PR review. Branch: `codex/pr6-close`.
 PR6-DATA-B2-B2-REDESIGNED is MERGED / delivered in PR #29 at

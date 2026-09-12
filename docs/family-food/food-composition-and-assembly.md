@@ -538,3 +538,22 @@ values under the accepted registry/zero policy. Recipe food-form corrections
 reuse the two PR28 compositions; no composite, transformation, yield or retention
 truth is introduced. The separate data upgrade uses one existing project UoW,
 requires a populated 0029 catalogue and leaves schema/lineage unchanged.
+
+
+## RECIPE-ASSEMBLY-A — evidence preflight blocked
+
+2026-09-12: following reviewed PR30 merge, the user authorized exactly three
+production RecipeTemplate families. The [preflight package](../../data/curation/recipe-assembly-a/README.md)
+records a screen of all 30 accepted current RecipeVersions and three deferred
+candidate families. Existing row mass/form authority cannot be carried forward
+as three publishable templates; reviewed kitchen/variant scope, curated
+substitutions and default RU eligibility are also unestablished.
+
+No RecipeTemplate runtime, persisted schema, production seed or RecipeAssembly
+was introduced. Migration remains 0029; 0030 is still required if catalogue
+implementation resumes. The hard three-family gate caused the stop, not a
+schema-without-migration exception. Positive USDA collection-level testing evidence
+is retained with its limited scope; it does not verify arbitrary FNS/WIC recipes
+or generalized variants. No source, quantity, composition, estimate, language,
+market or kitchen gate is weakened. Assembly A is BLOCKED, not COMPLETE;
+Assembly B and PR7+ remain NOT STARTED and require separate authorization.

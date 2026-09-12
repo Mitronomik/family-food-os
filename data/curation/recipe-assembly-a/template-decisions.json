@@ -1,0 +1,45 @@
+{
+  "alternatives": [
+    {
+      "consequence": "Keep three families and all hard gates; obtain scoped evidence for existing or alternative candidates before implementation.",
+      "option": "Evidence-first resolution",
+      "recommended": true
+    },
+    {
+      "consequence": "Requires explicit changed task authorization; would not satisfy the original three-production-family acceptance criteria. Not implemented.",
+      "option": "Schema-only split",
+      "recommended": false
+    }
+  ],
+  "candidates_deferred": 3,
+  "decision": "Stop before catalogue schema/runtime/seed because the mandatory three-family evidence gate is not met. Keep the target and all publication gates unchanged.",
+  "migration": {
+    "current": "0029_food_composition_core",
+    "implemented": false,
+    "proposed": "0030_recipe_template_catalogue",
+    "reason": "No persisted catalogue is implemented on the explicit blocked-preflight path. This is not a schema-without-migration strategy; 0030 remains required when implementation resumes."
+  },
+  "operation": "RECIPE-ASSEMBLY-A",
+  "production_families_published": 0,
+  "production_family_target": 3,
+  "resume_requirements": [
+    "Provide or verify primary kitchen evidence bound to exact forms, quantities, processes and variant scope for three families.",
+    "Resolve form/composition and exact-gram gaps within separately authorized scope; no new FoodIngredient or yield/retention programme is started here.",
+    "Establish explicit curated substitution and compatibility scope, RU familiarity and terminal-input eligibility.",
+    "Then resume the original implementation and all required tests; Assembly B and PR7 remain unauthorized."
+  ],
+  "reviewed_at": "2026-09-12",
+  "schema_version": 1,
+  "status": "BLOCKED",
+  "unchanged_blockers": {
+    "absent_forms": [
+      "APPLE_PEELED",
+      "LEMON_JUICE",
+      "ORANGE_JUICE",
+      "PASTA_COOKED",
+      "SPINACH_BABY"
+    ],
+    "non_executable_current_estimates": 40,
+    "unresolved_yield_cases": 3
+  }
+}

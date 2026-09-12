@@ -1,0 +1,42 @@
+{
+  "candidates": [
+    {
+      "disposition": "DEFERRED",
+      "evidence_reference": "research-observations.json",
+      "food_forms_verified": null,
+      "process_verified": null,
+      "quantities_verified": null,
+      "recipe_code": "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE",
+      "status": "NOT_ESTABLISHED",
+      "template_version": null,
+      "verified_rule_variant_scope": null
+    },
+    {
+      "disposition": "DEFERRED",
+      "evidence_reference": "research-observations.json",
+      "food_forms_verified": null,
+      "process_verified": null,
+      "quantities_verified": null,
+      "recipe_code": "SNAP4_SPRING_VEGETABLE_SAUTE",
+      "status": "NOT_ESTABLISHED",
+      "template_version": null,
+      "verified_rule_variant_scope": null
+    },
+    {
+      "disposition": "DEFERRED",
+      "evidence_reference": "research-observations.json",
+      "food_forms_verified": null,
+      "process_verified": null,
+      "quantities_verified": null,
+      "recipe_code": "CACFP6_CREAMY_COLESLAW",
+      "status": "NOT_ESTABLISHED",
+      "template_version": null,
+      "verified_rule_variant_scope": null
+    }
+  ],
+  "positive_evidence_limit": "USDA_TESTED_COLLECTION supports its named collection only. SOURCE_VERIFIED, nutrition correctness, familiar foods and a generic source title cannot establish KITCHEN_VERIFIED. Null scope fields mean missing evidence, not a failed real kitchen trial.",
+  "production_verified_count": 0,
+  "review_reference": "RECIPE-ASSEMBLY-A:kitchen-preflight-v1",
+  "reviewed_at": "2026-09-12",
+  "schema_version": 1
+}

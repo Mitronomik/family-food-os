@@ -1182,3 +1182,66 @@ opened into `main`, OPEN / not merged. Closure implementation/evidence commit:
 `c3590e67bac9d4b884f2f22df6aed7986f988d10`. This delivery receipt changes state
 only; measured evidence and verified runtime/data/test bytes remain unchanged.
 Stop for final review. RECIPE-ASSEMBLY-A remains NOT STARTED and separately gated.
+
+
+## RECIPE-ASSEMBLY-A — authorized preflight
+
+2026-09-12: fetched `origin/main` and verified exact SHA
+`e8a75e5b828ef935292da593f9f4d5edbd199474`. GitHub connector confirms PR30
+MERGED at `2026-09-12T08:32:53Z` with the same merge commit. Created requested
+branch `codex/recipe-assembly-a` from that base. PR6 / PR6-CLOSE COMPLETE;
+Assembly A explicitly authorized, evidence preflight in progress. Assembly B and
+PR7+ NOT STARTED. Ordered migration source head remains 0029.
+Local `gh` returned HTTP 401; connected GitHub read succeeded. Git fetch/branch
+creation succeeded through the sandbox escalation flow. Unrelated `.DS_Store`
+remains excluded. No runtime or production data changes at this point.
+
+
+### RECIPE-ASSEMBLY-A — blocked preflight result
+
+**BLOCKED / not review-ready / not COMPLETE.** The user's explicit stop condition
+was reached: three production families could not be established from the bounded
+reviewed evidence. [Evidence package](../data/curation/recipe-assembly-a/README.md)
+records all 30 current RecipeVersions screened and three shortlisted families
+DEFERRED. Twenty-nine have unavailable required mass; the remaining oats v2
+lacks MILK_1_PERCENT composition authority. Kitchen scope, substitution and RU
+default eligibility are not inferred. Positive USDA collection testing evidence
+and source-access limitations are retained without granting candidate approval.
+
+No runtime/domain/persistence/API/frontend/seed or historical migration changes.
+Migration remains 0029; no production templates. 0030 is still required upon
+resuming catalogue implementation. Full implementation tests and full
+backend/launcher regression NOT RUN because the explicit evidence stop preceded
+implementation; those original acceptance gates remain unmet, not waived.
+
+Verification with `AI_ENABLED=false`:
+
+- Existing `audit_pr6_close.measure` on a disposable accepted database reproduces
+  recipe-readiness.json and food-readiness.json byte-for-byte. Its old CLI main-head
+  guard is unchanged; no actual user database is inspected. Preserved 188 seals,
+  63 compositions, 35 old / 37 final captured recipe snapshots; 40 estimates remain
+  non-executable and five deferred forms absent.
+- `python3 scripts/audit_recipe_assembly_a_preflight.py`: evidence consistency PASS,
+  production readiness false; 30 screened / zero carry-forward-ready / three deferred.
+- Disposable-copy corruption checks: accepted-input drift and package drift both
+  rejected, with no live evidence mutation.
+- `ruff check scripts/audit_recipe_assembly_a_preflight.py`: PASS.
+- `ruff format --check scripts/audit_recipe_assembly_a_preflight.py`: PASS after
+  formatting the new script. Initial format check correctly requested formatting.
+- Initial root `.venv` database invocation lacked SQLAlchemy; retry with
+  `backend/.venv` passed. Ruff is installed on PATH, not in backend/.venv.
+- Affected-runtime mypy is N/A: no runtime files changed.
+
+Draft publication records the blocker; it must not be described as the requested
+three-template implementation being ready for review. Assembly B and PR7+ remain
+NOT STARTED. No autonomous merge.
+
+Final pre-publication checks: `git diff --check` and staged whitespace PASS;
+16-file staged scope excludes runtime, production seed and `.DS_Store`.
+Local documentation verification: 71 links/anchors PASS.
+The committed auditor also reproduces the temporary baseline with `--database`: PASS.
+
+Draft delivery: [PR #31](https://github.com/Mitronomik/family-food-os/pull/31),
+OPEN / DRAFT / not merged. Evidence commit:
+`cbccc22ea87a326256891545c715259a0d67e8cf`. This publishes the blocker report,
+not a review-ready RecipeTemplate implementation. Stop for evidence review.

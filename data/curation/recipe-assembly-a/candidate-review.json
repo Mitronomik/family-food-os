@@ -1,0 +1,1196 @@
+{
+  "candidates": [
+    {
+      "disposition": "DEFERRED",
+      "evidence_rows": [
+        {
+          "assessment_status": "APPROVED_EXACT",
+          "food_code": "MILK_1_PERCENT",
+          "identity": "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE:v2:1",
+          "issues": [],
+          "mass_g": "82.0000000",
+          "optional": false
+        },
+        {
+          "assessment_status": "APPROVED_EXACT",
+          "food_code": "OATS_ROLLED",
+          "identity": "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE:v2:2",
+          "issues": [],
+          "mass_g": "20.250000",
+          "optional": false
+        },
+        {
+          "assessment_status": "APPROVED_EXACT",
+          "food_code": "YOGURT_PLAIN_LOW_FAT",
+          "identity": "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE:v2:3",
+          "issues": [],
+          "mass_g": "61.250000",
+          "optional": true
+        },
+        {
+          "assessment_status": "APPROVED_EXACT",
+          "food_code": "CINNAMON_GROUND",
+          "identity": "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE:v2:4",
+          "issues": [],
+          "mass_g": "2.6000000",
+          "optional": true
+        },
+        {
+          "assessment_status": "BLOCKED",
+          "food_code": "APPLE",
+          "identity": "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE:v2:5",
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "optional": true
+        }
+      ],
+      "kitchen_status": "NOT_ESTABLISHED",
+      "proposed_name_ru": "Овсянка на ночь с яблоком и корицей",
+      "reason": "Required MILK_1_PERCENT has no accepted composition. APPLE optional row remains blocked. Rolled/quick and milk/soy source alternatives do not establish exact replacement identities, gram rules or tested variant scope.",
+      "recipe_code": "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE",
+      "review_reference": "RECIPE-ASSEMBLY-A:preflight-v1:WIC1_OVERNIGHT_OATS_CINNAMON_APPLE",
+      "reviewed_at": "2026-09-12",
+      "ru_familiarity_status": "NOT_REVIEWED",
+      "rule_snapshot": null,
+      "selection_reason": "Only current recipe with all required row masses available; source provides optional components and milk/oat alternatives."
+    },
+    {
+      "disposition": "DEFERRED",
+      "evidence_rows": [
+        {
+          "assessment_status": "APPROVED_EXACT",
+          "food_code": "OLIVE_OIL",
+          "identity": "SNAP4_SPRING_VEGETABLE_SAUTE:v1:1",
+          "issues": [],
+          "mass_g": "4.5000000",
+          "optional": false
+        },
+        {
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "food_code": "ONION_RED",
+          "identity": "SNAP4_SPRING_VEGETABLE_SAUTE:v1:2",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "optional": false
+        },
+        {
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "food_code": "GARLIC",
+          "identity": "SNAP4_SPRING_VEGETABLE_SAUTE:v1:3",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "optional": false
+        },
+        {
+          "assessment_status": "BLOCKED",
+          "food_code": "POTATO",
+          "identity": "SNAP4_SPRING_VEGETABLE_SAUTE:v1:4",
+          "issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "mass_g": null,
+          "optional": false
+        },
+        {
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "food_code": "CARROT",
+          "identity": "SNAP4_SPRING_VEGETABLE_SAUTE:v1:5",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "optional": false
+        },
+        {
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "food_code": "ASPARAGUS",
+          "identity": "SNAP4_SPRING_VEGETABLE_SAUTE:v1:6",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "optional": false
+        },
+        {
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "food_code": "GREEN_BEANS",
+          "identity": "SNAP4_SPRING_VEGETABLE_SAUTE:v1:7",
+          "issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "mass_g": null,
+          "optional": false
+        },
+        {
+          "assessment_status": "BLOCKED",
+          "food_code": "RADISH",
+          "identity": "SNAP4_SPRING_VEGETABLE_SAUTE:v1:8",
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "optional": false
+        },
+        {
+          "assessment_status": "APPROVED_EXACT",
+          "food_code": "SALT",
+          "identity": "SNAP4_SPRING_VEGETABLE_SAUTE:v1:9",
+          "issues": [],
+          "mass_g": "1.500000",
+          "optional": false
+        },
+        {
+          "assessment_status": "BLOCKED",
+          "food_code": "BLACK_PEPPER",
+          "identity": "SNAP4_SPRING_VEGETABLE_SAUTE:v1:10",
+          "issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "mass_g": null,
+          "optional": false
+        },
+        {
+          "assessment_status": "APPROVED_EXACT",
+          "food_code": "DILL_DRIED",
+          "identity": "SNAP4_SPRING_VEGETABLE_SAUTE:v1:11",
+          "issues": [],
+          "mass_g": "0.500000",
+          "optional": false
+        },
+        {
+          "assessment_status": "APPROVED_EXACT",
+          "food_code": "WATER",
+          "identity": "SNAP4_SPRING_VEGETABLE_SAUTE:v1:12",
+          "issues": [],
+          "mass_g": "30.000000",
+          "optional": true
+        }
+      ],
+      "kitchen_status": "NOT_ESTABLISHED",
+      "proposed_name_ru": "Соте из весенних овощей",
+      "reason": "Eight required masses are unavailable. POTATO and GREEN_BEANS lack accepted compositions. Source conditional 1–2 tablespoons water has no reviewed exact resolution for this template; old stored upper bound is not a new template rule. No tested substitution/combination evidence was established.",
+      "recipe_code": "SNAP4_SPRING_VEGETABLE_SAUTE",
+      "review_reference": "RECIPE-ASSEMBLY-A:preflight-v1:SNAP4_SPRING_VEGETABLE_SAUTE",
+      "reviewed_at": "2026-09-12",
+      "ru_familiarity_status": "NOT_REVIEWED",
+      "rule_snapshot": null,
+      "selection_reason": "Existing source provides explicit green-bean/snap-pea choice and conditional optional water."
+    },
+    {
+      "disposition": "DEFERRED",
+      "evidence_rows": [
+        {
+          "assessment_status": "APPROVED_NO_CONVERSION",
+          "food_code": "YOGURT_PLAIN_LOW_FAT",
+          "identity": "CACFP6_CREAMY_COLESLAW:v1:1",
+          "issues": [],
+          "mass_g": "141.747616",
+          "optional": false
+        },
+        {
+          "assessment_status": "APPROVED_NO_CONVERSION",
+          "food_code": "MAYONNAISE_LOW_FAT",
+          "identity": "CACFP6_CREAMY_COLESLAW:v1:2",
+          "issues": [],
+          "mass_g": "56.699046",
+          "optional": false
+        },
+        {
+          "assessment_status": "APPROVED_NO_CONVERSION",
+          "food_code": "HONEY",
+          "identity": "CACFP6_CREAMY_COLESLAW:v1:3",
+          "issues": [],
+          "mass_g": "70.873808",
+          "optional": false
+        },
+        {
+          "assessment_status": "APPROVED_EXACT",
+          "food_code": "APPLE_CIDER_VINEGAR",
+          "identity": "CACFP6_CREAMY_COLESLAW:v1:4",
+          "issues": [],
+          "mass_g": "29.875000",
+          "optional": false
+        },
+        {
+          "assessment_status": "APPROVED_EXACT",
+          "food_code": "SALT",
+          "identity": "CACFP6_CREAMY_COLESLAW:v1:5",
+          "issues": [],
+          "mass_g": "1.500000",
+          "optional": false
+        },
+        {
+          "assessment_status": "APPROVED_EXACT",
+          "food_code": "BLACK_PEPPER",
+          "identity": "CACFP6_CREAMY_COLESLAW:v1:6",
+          "issues": [],
+          "mass_g": "0.5750000",
+          "optional": false
+        },
+        {
+          "assessment_status": "APPROVED_NO_CONVERSION",
+          "food_code": "CABBAGE_GREEN",
+          "identity": "CACFP6_CREAMY_COLESLAW:v1:7",
+          "issues": [],
+          "mass_g": "170.097139",
+          "optional": false
+        },
+        {
+          "assessment_status": "APPROVED_NO_CONVERSION",
+          "food_code": "CABBAGE_RED",
+          "identity": "CACFP6_CREAMY_COLESLAW:v1:8",
+          "issues": [],
+          "mass_g": "35.436904",
+          "optional": false
+        },
+        {
+          "assessment_status": "APPROVED_NO_CONVERSION",
+          "food_code": "CARROT",
+          "identity": "CACFP6_CREAMY_COLESLAW:v1:9",
+          "issues": [],
+          "mass_g": "56.699046",
+          "optional": false
+        },
+        {
+          "assessment_status": "APPROVED_NO_CONVERSION",
+          "food_code": "GREEN_ONION",
+          "identity": "CACFP6_CREAMY_COLESLAW:v1:10",
+          "issues": [],
+          "mass_g": "28.349523",
+          "optional": false
+        },
+        {
+          "assessment_status": "BLOCKED",
+          "food_code": "CRANBERRIES_DRIED",
+          "identity": "CACFP6_CREAMY_COLESLAW:v1:11",
+          "issues": [
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "mass_g": null,
+          "optional": false
+        }
+      ],
+      "kitchen_status": "NOT_ESTABLISHED",
+      "proposed_name_ru": "Капустный салат с йогуртовой заправкой",
+      "reason": "CRANBERRIES_DRIED is blocked for profile representativeness and has no accepted composition. Card gives a fixed recipe, not a reviewed cranberry replacement or optional omission. No exact tested generalized family/variant scope was established.",
+      "recipe_code": "CACFP6_CREAMY_COLESLAW",
+      "review_reference": "RECIPE-ASSEMBLY-A:preflight-v1:CACFP6_CREAMY_COLESLAW",
+      "reviewed_at": "2026-09-12",
+      "ru_familiarity_status": "NOT_REVIEWED",
+      "rule_snapshot": null,
+      "selection_reason": "Closest multi-ingredient fixed source among selected families: ten of eleven required masses available, explicit source weights and ordered process."
+    }
+  ],
+  "operation": "RECIPE-ASSEMBLY-A",
+  "production_template_count": 0,
+  "reviewed_at": "2026-09-12",
+  "schema_version": 1,
+  "scope": "All 30 accepted current RecipeVersions screened for direct carry-forward of mass/form authority; three evidence-oriented families shortlisted. This is not an exhaustive search of all possible primary culinary sources, and no template is published.",
+  "screened_recipe_count": 30,
+  "screening": [
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "CACFP6_CORN_EDAMAME_BLEND:v1:3",
+        "CACFP6_CORN_EDAMAME_BLEND:v1:4",
+        "CACFP6_CORN_EDAMAME_BLEND:v1:7",
+        "CACFP6_CORN_EDAMAME_BLEND:v1:8"
+      ],
+      "recipe_code": "CACFP6_CORN_EDAMAME_BLEND",
+      "required_foods_not_ru_mass_market": [
+        "CARROT",
+        "CILANTRO",
+        "CORIANDER_SEED",
+        "CORN_SWEET",
+        "EDAMAME_FROZEN",
+        "GARLIC",
+        "ONION_YELLOW",
+        "SALT",
+        "SESAME_OIL",
+        "SESAME_SEEDS"
+      ],
+      "required_foods_without_composition": [
+        "CORN_SWEET",
+        "SESAME_SEEDS"
+      ],
+      "required_row_count": 10,
+      "source_provenance": {
+        "source_document_sha256": "314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "CACFP6-CORN-EDAMAME-BLEND",
+        "source_retrieved_at": "2026-09-04 04:35:40.896467+00:00",
+        "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
+        "source_version": "sha256:314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "CACFP6_CREAMY_COLESLAW:v1:11"
+      ],
+      "recipe_code": "CACFP6_CREAMY_COLESLAW",
+      "required_foods_not_ru_mass_market": [
+        "APPLE_CIDER_VINEGAR",
+        "BLACK_PEPPER",
+        "CABBAGE_GREEN",
+        "CABBAGE_RED",
+        "CARROT",
+        "CRANBERRIES_DRIED",
+        "GREEN_ONION",
+        "HONEY",
+        "MAYONNAISE_LOW_FAT",
+        "SALT",
+        "YOGURT_PLAIN_LOW_FAT"
+      ],
+      "required_foods_without_composition": [
+        "CRANBERRIES_DRIED"
+      ],
+      "required_row_count": 11,
+      "source_provenance": {
+        "source_document_sha256": "8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "CACFP6-CREAMY-COLESLAW",
+        "source_retrieved_at": "2026-09-04 04:34:53.373753+00:00",
+        "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Creamy_Coleslaw_6_Servings.pdf",
+        "source_version": "sha256:8b8caa1c689cfe967701dcab271c6f1febc2bb3c4f78338183408efd54da43e6"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "CACFP6_TABBOULEH:v1:6",
+        "CACFP6_TABBOULEH:v1:10",
+        "CACFP6_TABBOULEH:v1:11",
+        "CACFP6_TABBOULEH:v1:12"
+      ],
+      "recipe_code": "CACFP6_TABBOULEH",
+      "required_foods_not_ru_mass_market": [
+        "BELL_PEPPER_RED",
+        "BULGUR",
+        "CUCUMBER",
+        "CUMIN_GROUND",
+        "LEMON",
+        "MINT_FRESH",
+        "OLIVE_OIL",
+        "ONION_YELLOW",
+        "PARSLEY",
+        "QUINOA",
+        "SALT",
+        "TOMATO"
+      ],
+      "required_foods_without_composition": [
+        "CUCUMBER",
+        "LEMON"
+      ],
+      "required_row_count": 13,
+      "source_provenance": {
+        "source_document_sha256": "ef746c97415426316a78995b42a1e7f5a5d76c0078e6f006ab9940f0120cca49",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "CACFP6-TABBOULEH",
+        "source_retrieved_at": "2026-09-04 04:35:52.082224+00:00",
+        "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tabbouleh_6_Servings.pdf",
+        "source_version": "sha256:ef746c97415426316a78995b42a1e7f5a5d76c0078e6f006ab9940f0120cca49"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "FNS2_ORANGE_PORK_CHOPS:v1:2",
+        "FNS2_ORANGE_PORK_CHOPS:v1:3",
+        "FNS2_ORANGE_PORK_CHOPS:v1:4"
+      ],
+      "recipe_code": "FNS2_ORANGE_PORK_CHOPS",
+      "required_foods_not_ru_mass_market": [
+        "ORANGE",
+        "PORK_LOIN",
+        "SUNFLOWER_OIL",
+        "SWEET_POTATO"
+      ],
+      "required_foods_without_composition": [
+        "ORANGE"
+      ],
+      "required_row_count": 4,
+      "source_provenance": {
+        "source_document_sha256": "aa07563b660219b4173edc63cf6f76478e1bc71bff7f0c8a54fc5eaf5985a479",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "FNS2-ORANGE-PORK-CHOPS",
+        "source_retrieved_at": null,
+        "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/orange-porkchops",
+        "source_version": "sha256:aa07563b660219b4173edc63cf6f76478e1bc71bff7f0c8a54fc5eaf5985a479"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "FNS4_OVEN_FRIED_FISH:v1:4"
+      ],
+      "recipe_code": "FNS4_OVEN_FRIED_FISH",
+      "required_foods_not_ru_mass_market": [
+        "BLACK_PEPPER",
+        "BREADCRUMBS",
+        "BUTTER_UNSALTED",
+        "SALT",
+        "TILAPIA_RAW"
+      ],
+      "required_foods_without_composition": [],
+      "required_row_count": 6,
+      "source_provenance": {
+        "source_document_sha256": "068b5b0d4c7e45ad498758501bcc8f67b7e5f69f9c27ea4db4af39b05cba069c",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "FNS4-OVEN-FRIED-FISH",
+        "source_retrieved_at": null,
+        "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/fish",
+        "source_version": "sha256:068b5b0d4c7e45ad498758501bcc8f67b7e5f69f9c27ea4db4af39b05cba069c"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "FNS5_BAKED_LENTILS_CASSEROLE:v1:1",
+        "FNS5_BAKED_LENTILS_CASSEROLE:v1:4",
+        "FNS5_BAKED_LENTILS_CASSEROLE:v1:6"
+      ],
+      "recipe_code": "FNS5_BAKED_LENTILS_CASSEROLE",
+      "required_foods_not_ru_mass_market": [
+        "CARROT",
+        "CHEESE_CHEDDAR",
+        "LENTILS_DRY",
+        "ONION_YELLOW",
+        "SALT",
+        "TOMATO_CANNED_NO_SALT"
+      ],
+      "required_foods_without_composition": [],
+      "required_row_count": 7,
+      "source_provenance": {
+        "source_document_sha256": "86b118c36ca73b75618e1656bbc96c2c06f59785ca7292efc47be0fe99cc4598",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "FNS5-BAKED-LENTILS-CASSEROLE",
+        "source_retrieved_at": null,
+        "source_url": "https://fns-prod.azureedge.us/americasharvest/budget/main/lentils-casserole",
+        "source_version": "sha256:86b118c36ca73b75618e1656bbc96c2c06f59785ca7292efc47be0fe99cc4598"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 2,
+      "missing_required_mass_rows": [
+        "HARV6_FRESH_TOMATO_SALSA:v2:1",
+        "HARV6_FRESH_TOMATO_SALSA:v2:2",
+        "HARV6_FRESH_TOMATO_SALSA:v2:3",
+        "HARV6_FRESH_TOMATO_SALSA:v2:5"
+      ],
+      "recipe_code": "HARV6_FRESH_TOMATO_SALSA",
+      "required_foods_not_ru_mass_market": [
+        "APPLE",
+        "GARLIC",
+        "LIME_JUICE",
+        "ONION_YELLOW",
+        "SALT",
+        "SUNFLOWER_OIL",
+        "TOMATO"
+      ],
+      "required_foods_without_composition": [
+        "APPLE",
+        "LIME_JUICE"
+      ],
+      "required_row_count": 7,
+      "source_provenance": {
+        "source_document_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "HARV6-FRESH-TOMATO-SALSA",
+        "source_retrieved_at": null,
+        "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+        "source_version": "sha256:36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "HARV6_GARDEN_PASTA_SALAD:v1:1",
+        "HARV6_GARDEN_PASTA_SALAD:v1:2",
+        "HARV6_GARDEN_PASTA_SALAD:v1:3",
+        "HARV6_GARDEN_PASTA_SALAD:v1:4",
+        "HARV6_GARDEN_PASTA_SALAD:v1:8"
+      ],
+      "recipe_code": "HARV6_GARDEN_PASTA_SALAD",
+      "required_foods_not_ru_mass_market": [
+        "APPLE_CIDER_VINEGAR",
+        "BELL_PEPPER_GREEN",
+        "BLACK_PEPPER",
+        "CUCUMBER",
+        "ONION_YELLOW",
+        "PASTA_DRY",
+        "SALT",
+        "SUNFLOWER_OIL"
+      ],
+      "required_foods_without_composition": [
+        "CUCUMBER",
+        "PASTA_DRY"
+      ],
+      "required_row_count": 8,
+      "source_provenance": {
+        "source_document_sha256": "36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "HARV6-GARDEN-PASTA-SALAD",
+        "source_retrieved_at": null,
+        "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/HarvestofRecipes.pdf",
+        "source_version": "sha256:36582eae02afef1fbb3e9b5ae3e1a2409c73bb84a60e8c40d53e486fad56169e"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 2,
+      "missing_required_mass_rows": [
+        "SNAP2_SIMPLE_GREEN_SMOOTHIE:v2:1",
+        "SNAP2_SIMPLE_GREEN_SMOOTHIE:v2:2",
+        "SNAP2_SIMPLE_GREEN_SMOOTHIE:v2:5"
+      ],
+      "recipe_code": "SNAP2_SIMPLE_GREEN_SMOOTHIE",
+      "required_foods_not_ru_mass_market": [
+        "APPLE",
+        "BANANA",
+        "MILK_1_PERCENT",
+        "SPINACH",
+        "STRAWBERRY_FROZEN_UNSWEETENED",
+        "YOGURT_PLAIN_LOW_FAT"
+      ],
+      "required_foods_without_composition": [
+        "APPLE",
+        "MILK_1_PERCENT",
+        "SPINACH"
+      ],
+      "required_row_count": 6,
+      "source_provenance": {
+        "source_document_sha256": "240c8b7a10a0399cb70743d48f59c9d6b828c8e640e9cbfc1eec0762cf6108ca",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP2-SIMPLE-GREEN-SMOOTHIE",
+        "source_retrieved_at": null,
+        "source_url": "https://snaped.fns.usda.gov/node/2489",
+        "source_version": "sha256:240c8b7a10a0399cb70743d48f59c9d6b828c8e640e9cbfc1eec0762cf6108ca"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "SNAP3_GRILLED_FRUIT:v1:1",
+        "SNAP3_GRILLED_FRUIT:v1:2",
+        "SNAP3_GRILLED_FRUIT:v1:3"
+      ],
+      "recipe_code": "SNAP3_GRILLED_FRUIT",
+      "required_foods_not_ru_mass_market": [
+        "BANANA",
+        "PEACH",
+        "PINEAPPLE"
+      ],
+      "required_foods_without_composition": [
+        "PEACH"
+      ],
+      "required_row_count": 3,
+      "source_provenance": {
+        "source_document_sha256": "03269eead24a3965e76c71a9eed6b7b82b9d785845427fa9b8b445aee55cf6f9",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP3-GRILLED-FRUIT",
+        "source_retrieved_at": null,
+        "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/grilled-fruit",
+        "source_version": "sha256:03269eead24a3965e76c71a9eed6b7b82b9d785845427fa9b8b445aee55cf6f9"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "SNAP4_BRAISED_CHICKEN_SPINACH:v1:1",
+        "SNAP4_BRAISED_CHICKEN_SPINACH:v1:4",
+        "SNAP4_BRAISED_CHICKEN_SPINACH:v1:5",
+        "SNAP4_BRAISED_CHICKEN_SPINACH:v1:6",
+        "SNAP4_BRAISED_CHICKEN_SPINACH:v1:7",
+        "SNAP4_BRAISED_CHICKEN_SPINACH:v1:8",
+        "SNAP4_BRAISED_CHICKEN_SPINACH:v1:10"
+      ],
+      "recipe_code": "SNAP4_BRAISED_CHICKEN_SPINACH",
+      "required_foods_not_ru_mass_market": [
+        "BLACK_PEPPER",
+        "CHICKEN_THIGH",
+        "GARLIC",
+        "ONION_YELLOW",
+        "ROSEMARY_DRIED",
+        "SALT",
+        "SPINACH",
+        "SUNFLOWER_OIL",
+        "THYME_DRIED"
+      ],
+      "required_foods_without_composition": [
+        "CHICKEN_THIGH",
+        "SPINACH"
+      ],
+      "required_row_count": 10,
+      "source_provenance": {
+        "source_document_sha256": "d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP4-BRAISED-CHICKEN-SPINACH",
+        "source_retrieved_at": null,
+        "source_url": "https://snaped.fns.usda.gov/sites/default/files/documents/howmuch_foodandphysicalactivitychecklist.pdf",
+        "source_version": "sha256:d01e18984463eb06b1065b71cf264aafefdac0a23717128c66db50d0a889b0c4"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 2,
+      "missing_required_mass_rows": [
+        "SNAP4_BROWN_RICE_PILAF:v2:1",
+        "SNAP4_BROWN_RICE_PILAF:v2:3",
+        "SNAP4_BROWN_RICE_PILAF:v2:6"
+      ],
+      "recipe_code": "SNAP4_BROWN_RICE_PILAF",
+      "required_foods_not_ru_mass_market": [
+        "ALMONDS_RAW",
+        "BLACK_PEPPER",
+        "GARLIC_POWDER",
+        "PARSLEY_DRIED",
+        "RICE_BROWN"
+      ],
+      "required_foods_without_composition": [],
+      "required_row_count": 6,
+      "source_provenance": {
+        "source_document_sha256": "f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP4-BROWN-RICE-PILAF",
+        "source_retrieved_at": null,
+        "source_url": "https://snaped.fns.usda.gov/resources/recipes-and-menus/healthy-thrifty-holiday-menus/valentines-day",
+        "source_version": "sha256:f9d3445e27e1b71672505f991e60373769f72596146b5d307e45088460356281"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "SNAP4_DILLED_FISH_FILLETS:v1:2"
+      ],
+      "recipe_code": "SNAP4_DILLED_FISH_FILLETS",
+      "required_foods_not_ru_mass_market": [
+        "COD_ATLANTIC",
+        "DILL_DRIED",
+        "LEMON",
+        "SALT"
+      ],
+      "required_foods_without_composition": [
+        "LEMON"
+      ],
+      "required_row_count": 4,
+      "source_provenance": {
+        "source_document_sha256": "43d44c84d7c007a0c32906210b13212ffb43fb7a62312e9fb43c819f8a8a63a3",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP4-DILLED-FISH-FILLETS",
+        "source_retrieved_at": null,
+        "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/dilled-fish-fillets",
+        "source_version": "sha256:43d44c84d7c007a0c32906210b13212ffb43fb7a62312e9fb43c819f8a8a63a3"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "SNAP4_PEAR_ORANGE_SAUCE:v1:1",
+        "SNAP4_PEAR_ORANGE_SAUCE:v1:2"
+      ],
+      "recipe_code": "SNAP4_PEAR_ORANGE_SAUCE",
+      "required_foods_not_ru_mass_market": [
+        "ORANGE",
+        "PEAR"
+      ],
+      "required_foods_without_composition": [
+        "ORANGE",
+        "PEAR"
+      ],
+      "required_row_count": 3,
+      "source_provenance": {
+        "source_document_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP4-PEAR-ORANGE-SAUCE",
+        "source_retrieved_at": null,
+        "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+        "source_version": "sha256:7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "SNAP4_SPANISH_FRITTATA:v1:1",
+        "SNAP4_SPANISH_FRITTATA:v1:4",
+        "SNAP4_SPANISH_FRITTATA:v1:6"
+      ],
+      "recipe_code": "SNAP4_SPANISH_FRITTATA",
+      "required_foods_not_ru_mass_market": [
+        "BLACK_PEPPER",
+        "ONION_YELLOW",
+        "POTATO",
+        "SALT",
+        "SUNFLOWER_OIL"
+      ],
+      "required_foods_without_composition": [
+        "POTATO"
+      ],
+      "required_row_count": 6,
+      "source_provenance": {
+        "source_document_sha256": "b2ac0732c26ad10426343c5aab115248b020983fa4dcad79f230ff146a02641c",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP4-SPANISH-FRITTATA",
+        "source_retrieved_at": null,
+        "source_url": "https://snaped.fns.usda.gov/snap/MPMF/Handouts/HowMuchFoodandPhysicalActivityHandouts.pdf",
+        "source_version": "sha256:b2ac0732c26ad10426343c5aab115248b020983fa4dcad79f230ff146a02641c"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "SNAP4_SPRING_VEGETABLE_SAUTE:v1:2",
+        "SNAP4_SPRING_VEGETABLE_SAUTE:v1:3",
+        "SNAP4_SPRING_VEGETABLE_SAUTE:v1:4",
+        "SNAP4_SPRING_VEGETABLE_SAUTE:v1:5",
+        "SNAP4_SPRING_VEGETABLE_SAUTE:v1:6",
+        "SNAP4_SPRING_VEGETABLE_SAUTE:v1:7",
+        "SNAP4_SPRING_VEGETABLE_SAUTE:v1:8",
+        "SNAP4_SPRING_VEGETABLE_SAUTE:v1:10"
+      ],
+      "recipe_code": "SNAP4_SPRING_VEGETABLE_SAUTE",
+      "required_foods_not_ru_mass_market": [
+        "ASPARAGUS",
+        "BLACK_PEPPER",
+        "CARROT",
+        "DILL_DRIED",
+        "GARLIC",
+        "GREEN_BEANS",
+        "OLIVE_OIL",
+        "ONION_RED",
+        "POTATO",
+        "RADISH",
+        "SALT"
+      ],
+      "required_foods_without_composition": [
+        "GREEN_BEANS",
+        "POTATO"
+      ],
+      "required_row_count": 11,
+      "source_provenance": {
+        "source_document_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP4-SPRING-VEGETABLE-SAUTE",
+        "source_retrieved_at": null,
+        "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+        "source_version": "sha256:63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "SNAP5_KALE_NUTS_RAISINS:v1:1",
+        "SNAP5_KALE_NUTS_RAISINS:v1:3",
+        "SNAP5_KALE_NUTS_RAISINS:v1:4",
+        "SNAP5_KALE_NUTS_RAISINS:v1:5"
+      ],
+      "recipe_code": "SNAP5_KALE_NUTS_RAISINS",
+      "required_foods_not_ru_mass_market": [
+        "GARLIC",
+        "KALE",
+        "RAISINS_GOLDEN",
+        "SUNFLOWER_OIL",
+        "WALNUTS_RAW"
+      ],
+      "required_foods_without_composition": [],
+      "required_row_count": 5,
+      "source_provenance": {
+        "source_document_sha256": "7c2bb840618e0dfbe372e9ecdb697ad59d2fab36e0fbf07cabe347a93ea6a1a0",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP5-KALE-NUTS-RAISINS",
+        "source_retrieved_at": null,
+        "source_url": "https://snaped.fns.usda.gov/node/1861",
+        "source_version": "sha256:7c2bb840618e0dfbe372e9ecdb697ad59d2fab36e0fbf07cabe347a93ea6a1a0"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "SNAP6_HEAVENLY_DEVILED_EGGS:v1:1",
+        "SNAP6_HEAVENLY_DEVILED_EGGS:v1:4"
+      ],
+      "recipe_code": "SNAP6_HEAVENLY_DEVILED_EGGS",
+      "required_foods_not_ru_mass_market": [
+        "BLACK_PEPPER",
+        "MAYONNAISE_LOW_FAT",
+        "SALT"
+      ],
+      "required_foods_without_composition": [],
+      "required_row_count": 4,
+      "source_provenance": {
+        "source_document_sha256": "1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP6-HEAVENLY-DEVILED-EGGS",
+        "source_retrieved_at": null,
+        "source_url": "https://snaped.fns.usda.gov/snap/cookbooks/EasterMenu.pdf",
+        "source_version": "sha256:1fdc16568f024a68c7fb8ef94349d7436b0a86c2a6cbd4b310ed1d117720e71f"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "SNAP6_PEACH_CRISP:v1:1",
+        "SNAP6_PEACH_CRISP:v1:2",
+        "SNAP6_PEACH_CRISP:v1:5",
+        "SNAP6_PEACH_CRISP:v1:7"
+      ],
+      "recipe_code": "SNAP6_PEACH_CRISP",
+      "required_foods_not_ru_mass_market": [
+        "CINNAMON_GROUND",
+        "FLOUR_WHEAT",
+        "LEMON",
+        "MARGARINE",
+        "PEACH"
+      ],
+      "required_foods_without_composition": [
+        "LEMON",
+        "MARGARINE",
+        "PEACH"
+      ],
+      "required_row_count": 7,
+      "source_provenance": {
+        "source_document_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP6-PEACH-CRISP",
+        "source_retrieved_at": null,
+        "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+        "source_version": "sha256:44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 2,
+      "missing_required_mass_rows": [
+        "SNAP6_SEARED_GREENS:v2:3",
+        "SNAP6_SEARED_GREENS:v2:6"
+      ],
+      "recipe_code": "SNAP6_SEARED_GREENS",
+      "required_foods_not_ru_mass_market": [
+        "APPLE_CIDER_VINEGAR",
+        "BLACK_PEPPER",
+        "GARLIC",
+        "KALE",
+        "OLIVE_OIL",
+        "SALT"
+      ],
+      "required_foods_without_composition": [],
+      "required_row_count": 7,
+      "source_provenance": {
+        "source_document_sha256": "63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP6-SEARED-GREENS",
+        "source_retrieved_at": null,
+        "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/spring-recipes",
+        "source_version": "sha256:63c343e2cb8c558bec54c0c449c9a02b7cf306b15b318816b886cfec1973179b"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 2,
+      "missing_required_mass_rows": [
+        "SNAP6_SPINACH_APPLE_SALAD:v2:1",
+        "SNAP6_SPINACH_APPLE_SALAD:v2:2",
+        "SNAP6_SPINACH_APPLE_SALAD:v2:3"
+      ],
+      "recipe_code": "SNAP6_SPINACH_APPLE_SALAD",
+      "required_foods_not_ru_mass_market": [
+        "APPLE",
+        "APPLE_CIDER_VINEGAR",
+        "CANOLA_OIL",
+        "GARLIC_POWDER",
+        "RAISINS_GOLDEN",
+        "SPINACH"
+      ],
+      "required_foods_without_composition": [
+        "APPLE",
+        "SPINACH"
+      ],
+      "required_row_count": 7,
+      "source_provenance": {
+        "source_document_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP6-SPINACH-APPLE-SALAD",
+        "source_retrieved_at": null,
+        "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+        "source_version": "sha256:7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "SNAP6_WALDORF_SALAD:v1:1",
+        "SNAP6_WALDORF_SALAD:v1:2",
+        "SNAP6_WALDORF_SALAD:v1:3",
+        "SNAP6_WALDORF_SALAD:v1:4",
+        "SNAP6_WALDORF_SALAD:v1:5",
+        "SNAP6_WALDORF_SALAD:v1:7"
+      ],
+      "recipe_code": "SNAP6_WALDORF_SALAD",
+      "required_foods_not_ru_mass_market": [
+        "APPLE",
+        "CELERY",
+        "LEMON",
+        "RAISINS_GOLDEN",
+        "WALNUTS_RAW",
+        "YOGURT_GREEK_NONFAT"
+      ],
+      "required_foods_without_composition": [
+        "APPLE",
+        "LEMON"
+      ],
+      "required_row_count": 7,
+      "source_provenance": {
+        "source_document_sha256": "7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP6-WALDORF-SALAD",
+        "source_retrieved_at": null,
+        "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/fall-recipes",
+        "source_version": "sha256:7e0c6b2d42e0b53280a09ffa83742b4acaae2ef0dc7e0f0e9a5342a8e67d28b0"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "SNAP8_APPLE_CARROT_SOUP:v1:2",
+        "SNAP8_APPLE_CARROT_SOUP:v1:3",
+        "SNAP8_APPLE_CARROT_SOUP:v1:4"
+      ],
+      "recipe_code": "SNAP8_APPLE_CARROT_SOUP",
+      "required_foods_not_ru_mass_market": [
+        "APPLE",
+        "CARROT",
+        "GINGER",
+        "PORK_LOIN",
+        "SALT"
+      ],
+      "required_foods_without_composition": [
+        "APPLE"
+      ],
+      "required_row_count": 6,
+      "source_provenance": {
+        "source_document_sha256": "1cc2ed9ddb3253b4a9a5ed9aa6609184e7381035977d00a542a00239f8261258",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP8-APPLE-CARROT-SOUP",
+        "source_retrieved_at": null,
+        "source_url": "https://snaped.fns.usda.gov/resources/nutrition-education-materials/recipes/apple-carrot-soup",
+        "source_version": "sha256:1cc2ed9ddb3253b4a9a5ed9aa6609184e7381035977d00a542a00239f8261258"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "SNAP8_SOMALI_SUMMER_SALAD:v1:2",
+        "SNAP8_SOMALI_SUMMER_SALAD:v1:3",
+        "SNAP8_SOMALI_SUMMER_SALAD:v1:4",
+        "SNAP8_SOMALI_SUMMER_SALAD:v1:5",
+        "SNAP8_SOMALI_SUMMER_SALAD:v1:6"
+      ],
+      "recipe_code": "SNAP8_SOMALI_SUMMER_SALAD",
+      "required_foods_not_ru_mass_market": [
+        "APPLE",
+        "BELL_PEPPER_GREEN",
+        "CUCUMBER",
+        "LEMON",
+        "OLIVE_OIL",
+        "TOMATO"
+      ],
+      "required_foods_without_composition": [
+        "APPLE",
+        "CUCUMBER",
+        "LEMON"
+      ],
+      "required_row_count": 6,
+      "source_provenance": {
+        "source_document_sha256": "44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "SNAP8-SOMALI-SUMMER-SALAD",
+        "source_retrieved_at": null,
+        "source_url": "https://snaped.fns.usda.gov/nutrition-education/snap-ed-recipes/summer-recipes",
+        "source_version": "sha256:44d5384c73f57e6dfc7f296df3fa7949dee353a6a7db69d54862682c37917db9"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "TNC6_APPLESAUCE:v1:1"
+      ],
+      "recipe_code": "TNC6_APPLESAUCE",
+      "required_foods_not_ru_mass_market": [
+        "APPLE"
+      ],
+      "required_foods_without_composition": [
+        "APPLE"
+      ],
+      "required_row_count": 2,
+      "source_provenance": {
+        "source_document_sha256": "7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "TNC6-APPLESAUCE",
+        "source_retrieved_at": null,
+        "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-applesauce.pdf",
+        "source_version": "sha256:7f3d7a1eff49eef1a57c255d768d4bee10ad323947375c87a9d3a215662c52fb"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "TNC6_EGGS_SPINACH:v1:3"
+      ],
+      "recipe_code": "TNC6_EGGS_SPINACH",
+      "required_foods_not_ru_mass_market": [
+        "OLIVE_OIL",
+        "SPINACH"
+      ],
+      "required_foods_without_composition": [
+        "SPINACH"
+      ],
+      "required_row_count": 3,
+      "source_provenance": {
+        "source_document_sha256": "0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "TNC6-EGGS-SPINACH",
+        "source_retrieved_at": null,
+        "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/tnc-eggs.pdf",
+        "source_version": "sha256:0694f544fc4864259a38ba29f5c5e57e84dd1e931cb30b17f7b2a096c1af0d63"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "WIC1_BEYOND_BASIC_GRILLED_CHEESE:v1:1",
+        "WIC1_BEYOND_BASIC_GRILLED_CHEESE:v1:2",
+        "WIC1_BEYOND_BASIC_GRILLED_CHEESE:v1:3"
+      ],
+      "recipe_code": "WIC1_BEYOND_BASIC_GRILLED_CHEESE",
+      "required_foods_not_ru_mass_market": [
+        "BREAD_WHOLE_WHEAT",
+        "CAULIFLOWER",
+        "CHEESE_CHEDDAR"
+      ],
+      "required_foods_without_composition": [
+        "CAULIFLOWER"
+      ],
+      "required_row_count": 3,
+      "source_provenance": {
+        "source_document_sha256": "357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "WIC1-BEYOND-BASIC-GRILLED-CHEESE",
+        "source_retrieved_at": null,
+        "source_url": "https://wicworks.fns.usda.gov/recipe/beyond-basic-grilled-cheese/printable/print",
+        "source_version": "sha256:357700264ce2a7340cdab55639c5bc76ef6b25a58120baa9152d5b8f55bfe334"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 2,
+      "missing_required_mass_rows": [],
+      "recipe_code": "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE",
+      "required_foods_not_ru_mass_market": [
+        "MILK_1_PERCENT"
+      ],
+      "required_foods_without_composition": [
+        "MILK_1_PERCENT"
+      ],
+      "required_row_count": 2,
+      "source_provenance": {
+        "source_document_sha256": "0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "WIC1-OVERNIGHT-OATS-CINNAMON-APPLE",
+        "source_retrieved_at": null,
+        "source_url": "https://wicworks.fns.usda.gov/recipe/overnight-oats-cinnamon-apple",
+        "source_version": "sha256:0a433494d6b545cf4b1128aa91226d4e2b3f7b4bee0b1010d68ff3c7fddaccd8"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 2,
+      "missing_required_mass_rows": [
+        "WIC2_SPINACH_CAULIFLOWER_SMOOTHIE:v2:3",
+        "WIC2_SPINACH_CAULIFLOWER_SMOOTHIE:v2:4",
+        "WIC2_SPINACH_CAULIFLOWER_SMOOTHIE:v2:5",
+        "WIC2_SPINACH_CAULIFLOWER_SMOOTHIE:v2:6"
+      ],
+      "recipe_code": "WIC2_SPINACH_CAULIFLOWER_SMOOTHIE",
+      "required_foods_not_ru_mass_market": [
+        "APPLE",
+        "BANANA",
+        "CAULIFLOWER_FROZEN",
+        "MILK_1_PERCENT",
+        "SPINACH",
+        "YOGURT_PLAIN_LOW_FAT"
+      ],
+      "required_foods_without_composition": [
+        "APPLE",
+        "MILK_1_PERCENT",
+        "SPINACH"
+      ],
+      "required_row_count": 7,
+      "source_provenance": {
+        "source_document_sha256": "439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "WIC2-SPINACH-CAULIFLOWER-SMOOTHIE",
+        "source_retrieved_at": null,
+        "source_url": "https://wicworks.fns.usda.gov/recipe/spinach-and-cauliflower-smoothie",
+        "source_version": "sha256:439e737595e3fa9b6d1e1b5a40f9b6257a11626e5b20e4522db10ea2f98a71c6"
+      }
+    },
+    {
+      "carry_forward_ready": false,
+      "current_version": 1,
+      "missing_required_mass_rows": [
+        "WIC4_BUTTERNUT_SOUP:v1:1"
+      ],
+      "recipe_code": "WIC4_BUTTERNUT_SOUP",
+      "required_foods_not_ru_mass_market": [
+        "BUTTERNUT_SQUASH",
+        "MILK_1_PERCENT",
+        "OLIVE_OIL",
+        "SALT"
+      ],
+      "required_foods_without_composition": [
+        "BUTTERNUT_SQUASH",
+        "MILK_1_PERCENT"
+      ],
+      "required_row_count": 4,
+      "source_provenance": {
+        "source_document_sha256": "ee642490786720348eae5f18170c5dcb26a0c7b22b042fc829ab0dc6ee1e95e8",
+        "source_name": "USDA_FNS",
+        "source_recipe_id": "WIC4-BUTTERNUT-SOUP",
+        "source_retrieved_at": null,
+        "source_url": "https://wicworks.fns.usda.gov/recipe/butternut-squash-soup",
+        "source_version": "sha256:ee642490786720348eae5f18170c5dcb26a0c7b22b042fc829ab0dc6ee1e95e8"
+      }
+    }
+  ],
+  "status": "BLOCKED"
+}

@@ -1,0 +1,30 @@
+{
+  "candidates": [
+    {
+      "evidence_reference": null,
+      "proposed_name_ru": "Овсянка на ночь с яблоком и корицей",
+      "rationale_ru": "Предварительное название не доказывает привычность блюда. Полная проверка конкретного варианта для российских семей не завершена: кандидат отложен по обязательным критериям.",
+      "recipe_code": "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE",
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "evidence_reference": null,
+      "proposed_name_ru": "Соте из весенних овощей",
+      "rationale_ru": "Предварительное название не доказывает привычность блюда. Полная проверка конкретного варианта для российских семей не завершена: кандидат отложен по обязательным критериям.",
+      "recipe_code": "SNAP4_SPRING_VEGETABLE_SAUTE",
+      "status": "NOT_REVIEWED"
+    },
+    {
+      "evidence_reference": null,
+      "proposed_name_ru": "Капустный салат с йогуртовой заправкой",
+      "rationale_ru": "Предварительное название не доказывает привычность блюда. Полная проверка конкретного варианта для российских семей не завершена: кандидат отложен по обязательным критериям.",
+      "recipe_code": "CACFP6_CREAMY_COLESLAW",
+      "status": "NOT_REVIEWED"
+    }
+  ],
+  "limit": "No familiarity classification is inferred from translation, ingredient availability or ordinary equipment. No consumer data is published.",
+  "review_reference": "RECIPE-ASSEMBLY-A:ru-familiarity-preflight-v1",
+  "reviewed_at": "2026-09-12",
+  "ru_recipe_familiar_count": 0,
+  "schema_version": 1
+}

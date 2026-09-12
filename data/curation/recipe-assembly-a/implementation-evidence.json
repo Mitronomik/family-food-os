@@ -1,0 +1,77 @@
+{
+  "base_sha": "e8a75e5b828ef935292da593f9f4d5edbd199474",
+  "branch": "codex/recipe-assembly-a",
+  "checks": {
+    "evidence_audit": "PASS; production_readiness=false",
+    "full_backend_launcher": "NOT_RUN; explicit blocked preflight, no implementation",
+    "local_markdown_links_anchors": {
+      "count": 71,
+      "result": "PASS"
+    },
+    "mypy_affected_runtime": "NOT_APPLICABLE; no affected runtime",
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS after initial formatting correction",
+    "source_and_package_drift_rejection": "PASS in disposable copies"
+  },
+  "database_verification": {
+    "command": "AI_ENABLED=false backend/.venv/bin/python scripts/audit_recipe_assembly_a_preflight.py --database",
+    "deferred_forms_absent": [
+      "APPLE_PEELED",
+      "LEMON_JUICE",
+      "ORANGE_JUICE",
+      "PASTA_COOKED",
+      "SPINACH_BABY"
+    ],
+    "historical_replay": {
+      "all_compositions": 63,
+      "all_recipe_input_snapshots": 37,
+      "all_seals": 188,
+      "captured_v1_inputs_replay": true,
+      "current_marker_retirements": {
+        "food_nutrition_profiles": 3,
+        "recipe_ingredient_nutrition_assessments": 7
+      },
+      "old_compositions": 60,
+      "old_recipe_input_snapshots": 35,
+      "old_seals": 185,
+      "preexisting_facts_preserved": true,
+      "read_only_inspection_preserved_all_tables": true,
+      "recipe_id_alone_historical_replay": false,
+      "requested_nutrients": 51
+    },
+    "known_yield_cases": 3,
+    "method": "AI_ENABLED=false PYTHONPATH=backend:scripts backend/.venv/bin/python; imported existing audit_pr6_close.measure into a temporary DatabaseConfig; compared encode(report) to accepted recipe-readiness.json and food-readiness.json byte-for-byte; no historical CLI head guard altered.",
+    "migration_head": "0029_food_composition_core",
+    "non_executable_estimate_usages": 40,
+    "recipe_food_reports_byte_identical": true,
+    "result": "PASS",
+    "scope": "Accepted baseline only; no RecipeTemplate migration/seed/replay/backup behavior exists to test."
+  },
+  "implementation": {
+    "assembly_engine_added": false,
+    "migration_0030_added": false,
+    "production_seed_added": false,
+    "production_templates_published": 0,
+    "public_api_frontend_added": false,
+    "runtime_added": false,
+    "schema_added": false
+  },
+  "limitations": [
+    "Initial root .venv database invocation failed: ModuleNotFoundError sqlalchemy. Retried successfully using backend/.venv.",
+    "backend/.venv/bin/ruff is absent; use installed ruff from PATH.",
+    "gh PR read returned HTTP 401; connected GitHub read succeeded.",
+    "Primary WIC/SNAP donor and USDA menu-planner pages returned HTTP 403 through web; not evidence that kitchen testing does not exist.",
+    "Required implementation domain/persistence/migration/seed/backup/full backend+launcher suites NOT RUN: implementation stopped at user-required evidence gate. No production acceptance PASS is claimed.",
+    "mypy on affected runtime: not applicable because no runtime is changed."
+  ],
+  "operation": "RECIPE-ASSEMBLY-A",
+  "pr30": {
+    "merge_commit_sha": "e8a75e5b828ef935292da593f9f4d5edbd199474",
+    "merged": true,
+    "merged_at": "2026-09-12T08:32:53Z",
+    "verification": "Git fetch origin main plus connected GitHub get_pr_info"
+  },
+  "schema_version": 1,
+  "status": "BLOCKED",
+  "verified_at": "2026-09-12"
+}
