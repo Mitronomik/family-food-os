@@ -1,0 +1,127 @@
+{
+  "date": "2026-09-12",
+  "reviewer": "Codex",
+  "substitutions": [
+    {
+      "source_id": "R1-03",
+      "rule_ru": "Клюква сушёная ↔ изюм",
+      "status": "DEFER",
+      "reason_ru": "Клюква без Composition; изюм без уточнения золотистого вида; другие ингредиенты также блокируют.",
+      "production_enabled": false,
+      "kitchen_verified_replacement": false
+    },
+    {
+      "source_id": "R1-05",
+      "rule_ru": "Соль кошерная ↔ йодированная",
+      "status": "DEFER",
+      "reason_ru": "Одинаковый объём не подтверждает одинаковую массу; форма не закреплена.",
+      "production_enabled": false,
+      "kitchen_verified_replacement": false
+    },
+    {
+      "source_id": "R1-07",
+      "rule_ru": "Имбирь свежий ↔ молотый",
+      "status": "DEFER",
+      "reason_ru": "Два разных объёма; молотая форма без текущего пути.",
+      "production_enabled": false,
+      "kitchen_verified_replacement": false
+    },
+    {
+      "source_id": "R1-09",
+      "rule_ru": "Яйца в скорлупе ↔ жидкая яичная масса",
+      "status": "DEFER",
+      "reason_ru": "Формы и точные входные массы не разрешены независимо.",
+      "production_enabled": false,
+      "kitchen_verified_replacement": false
+    },
+    {
+      "source_id": "R1-11",
+      "rule_ru": "Перец чёрный ↔ белый",
+      "status": "DEFER",
+      "reason_ru": "Белый перец без пути формы.",
+      "production_enabled": false,
+      "kitchen_verified_replacement": false
+    },
+    {
+      "source_id": "R1-13",
+      "rule_ru": "Вода ↔ овощной бульон; три формы бурого риса",
+      "status": "DEFER",
+      "reason_ru": "Бульон и две формы риса без Composition. Обычный вариант не даёт ANY_GRAIN.",
+      "production_enabled": false,
+      "kitchen_verified_replacement": false
+    },
+    {
+      "source_id": "R1-15",
+      "rule_ru": "Свежая ↔ замороженная морковь; свежий ↔ бутилированный лимонный сок",
+      "status": "DEFER",
+      "reason_ru": "Замороженная морковь и сок без пути формы; сведения о тестах замен не установлены.",
+      "production_enabled": false,
+      "kitchen_verified_replacement": false
+    },
+    {
+      "source_id": "R1-16",
+      "rule_ru": "Треска ↔ тилапия (также упомянут палтус)",
+      "status": "DEFER",
+      "reason_ru": "Это явная рекомендация источника. TILAPIA_RAW имеет путь, COD_ATLANTIC только условное уточнение. Лайм и спрей блокируют весь рецепт; нет независимой проверки заменённого варианта.",
+      "production_enabled": false,
+      "kitchen_verified_replacement": false
+    },
+    {
+      "source_id": "R1-19",
+      "rule_ru": "Оливковое ↔ салатное масло",
+      "status": "DEFER",
+      "reason_ru": "Неопределённый вид второго масла, непроверенная масса.",
+      "production_enabled": false,
+      "kitchen_verified_replacement": false
+    }
+  ],
+  "optional_roles": [
+    {
+      "source_id": "R1-05",
+      "name_ru": "Петрушка сушёная",
+      "source_locus": "ingredient line explicitly optional",
+      "production_enabled": false
+    },
+    {
+      "source_id": "R1-15",
+      "name_ru": "Петрушка сушёная",
+      "source_locus": "ingredient line optional",
+      "production_enabled": false
+    },
+    {
+      "source_id": "R1-13",
+      "name_ru": "Вариант приправы",
+      "source_locus": "notes: cilantro with lime OR turmeric",
+      "production_enabled": false
+    }
+  ],
+  "compatibility_rules": [
+    {
+      "source_id": "R1-13",
+      "name_ru": "Кинза требует лайма; вариант с куркумой выбирается вместо этой пары.",
+      "kind": "SOURCE_VARIANT_PAIRING",
+      "production_enabled": false
+    },
+    {
+      "source_id": "R1-21",
+      "name_ru": "Только овсяные хлопья и опубликованный водный вариант; молоко и другие крупы не входят в область проверки.",
+      "kind": "REVIEWED_SCOPE_RESTRICTION",
+      "production_enabled": false
+    },
+    {
+      "source_id": "R1-22",
+      "name_ru": "Пропаренный рис нельзя подставлять как обычный RICE_BROWN.",
+      "kind": "FORM_INCOMPATIBILITY",
+      "production_enabled": false
+    }
+  ],
+  "acceptance_coverage": {
+    "required_roles": "EVIDENCED_IN_DEFERRED_CANDIDATES",
+    "optional_role": "EVIDENCED_BUT_NOT_PRODUCTION_READY",
+    "verified_curated_substitution": "NOT_PASSED",
+    "compatibility": "EVIDENCED_BUT_NOT_PRODUCTION_READY",
+    "exact_quantity_rules": "R1-21 input batch only",
+    "ordered_process": "EVIDENCED_IN_DEFERRED_CANDIDATES"
+  },
+  "ready_substitution_count": 0
+}

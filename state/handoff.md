@@ -1,5 +1,27 @@
 # Handoff
 
+Updated: `2026-09-12`.
+
+Current authorized operation: **RECIPE-ASSEMBLY-A-R1 — BLOCKED**, evidence delivery
+for review. PR31 merged by explicit user instruction; exact fetched merge/base
+`3c854f55323c895c1bdc5aabd5f1146fb6514935`. Branch `codex/recipe-assembly-a-r1`.
+[Package](../data/curation/recipe-assembly-a-r1/README.md): 23 donors screened,
+nine deep-reviewed, zero final. AFRS oatmeal has exact input weights and existing
+Composition; market and collective substitution/three-family gates still fail.
+
+PR6 COMPLETE. Assembly A BLOCKED pending evidence recovery. Assembly B and PR7+
+NOT STARTED. No runtime/schema/seed change; head 0029. All PR6 blockers preserved.
+No schema, food-data fix, next phase or merge authorization follows from this
+research. Stop for review after PR delivery. Reproduce with
+`AI_ENABLED=false backend/.venv/bin/python scripts/audit_recipe_assembly_a_r1.py --database`.
+Source download limitations and source-versus-package hash distinctions are in
+the manifest; do not turn a web snapshot or publication label into blanket rights.
+
+The following historical delivery-time record is preserved; its OPEN PR31 and
+prior-branch state are superseded by the explicit merge and R1 record above.
+
+# Historical Assembly A handoff (superseded by R1 below)
+
 Updated: `2026-09-12`
 
 Current operation: **RECIPE-ASSEMBLY-A — AUTHORIZED / BLOCKED at evidence preflight**.

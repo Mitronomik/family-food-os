@@ -1,0 +1,49 @@
+{
+  "operation": "RECIPE-ASSEMBLY-A-R1",
+  "status": "BLOCKED",
+  "assembly_a_status": "BLOCKED",
+  "screened": 23,
+  "deep_reviewed": 9,
+  "selected_count": 0,
+  "target": 3,
+  "smallest_residual_blocker_classes": [
+    {
+      "code": "EXACT_FORM_COMPOSITION",
+      "name_ru": "Нет точного совместимого пути формы/Composition у обязательных компонентов большинства доноров."
+    },
+    {
+      "code": "EXACT_INPUT_MASS",
+      "name_ru": "Спрей, объём чеснока, съедобная масса яйца и неоднозначные состояния не разрешены точной массой."
+    },
+    {
+      "code": "VERIFIED_VARIANT_SUBSTITUTION",
+      "name_ru": "Есть опубликованные альтернативы, но нет замены с независимой проверкой формы, массы и применимой кухонной проверкой."
+    },
+    {
+      "code": "DEFAULT_MARKET_GATE",
+      "name_ru": "RU_AVAILABLE остаётся заблокированным без проверенной обычной замены; даже овсяная каша имеет этот остаток по соли."
+    }
+  ],
+  "additional_candidate_specific_gates": [
+    "ICN/state rights DEFER",
+    "kitchen linkage not established for some concrete variants",
+    "R1-18 familiarity UNCLEAR",
+    "No household-scale kitchen validation inferred from institutional batch"
+  ],
+  "positive_recovery": [
+    "Direct exact weights and existing compositions for all three inputs of R1-21.",
+    "Concrete standardized recipe linkage for Cooking Rice, Cauliflower Rice, Baked Tilapia and AFRS cards.",
+    "Source optional parsley and explicit substitution leads retained without production promotion."
+  ],
+  "state": {
+    "PR6": "COMPLETE",
+    "RECIPE-ASSEMBLY-A": "BLOCKED pending R1 evidence recovery",
+    "RECIPE-ASSEMBLY-A-R1": "BLOCKED; authorized research outcome awaits PR review",
+    "RECIPE-ASSEMBLY-B": "NOT STARTED",
+    "PR7+": "NOT STARTED"
+  },
+  "production_changes": false,
+  "migration_head": "0029_food_composition_core",
+  "next_action": "Review evidence PR. No automatic food-data fixes, schema, RecipeTemplate seed, Assembly B or PR7. READY remains contingent on exactly three passing families.",
+  "check_semantics": "Auditor exit zero means consistent BLOCKED evidence, never production readiness."
+}

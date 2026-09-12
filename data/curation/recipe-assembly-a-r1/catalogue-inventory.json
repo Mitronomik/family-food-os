@@ -1,0 +1,746 @@
+{
+  "base": "3c854f55323c895c1bdc5aabd5f1146fb6514935",
+  "foods": [
+    {
+      "food_code": "AGAVE_SYRUP",
+      "name_ru": "Сироп агавы"
+    },
+    {
+      "food_code": "ALMONDS_RAW",
+      "name_ru": "Миндаль сырой"
+    },
+    {
+      "food_code": "ANCHO_CHILI_POWDER",
+      "name_ru": "Перец анчо сушёный"
+    },
+    {
+      "food_code": "APPLE",
+      "name_ru": "Яблоко"
+    },
+    {
+      "food_code": "APPLE_CIDER_VINEGAR",
+      "name_ru": "Уксус яблочный"
+    },
+    {
+      "food_code": "APRICOT",
+      "name_ru": "Абрикос"
+    },
+    {
+      "food_code": "ARUGULA",
+      "name_ru": "Руккола"
+    },
+    {
+      "food_code": "ASPARAGUS",
+      "name_ru": "Спаржа зелёная"
+    },
+    {
+      "food_code": "BAKING_POWDER",
+      "name_ru": "Разрыхлитель теста"
+    },
+    {
+      "food_code": "BANANA",
+      "name_ru": "Банан"
+    },
+    {
+      "food_code": "BARLEY_PEARLED",
+      "name_ru": "Крупа перловая"
+    },
+    {
+      "food_code": "BASIL_DRIED",
+      "name_ru": "Базилик сушёный"
+    },
+    {
+      "food_code": "BAY_LEAF",
+      "name_ru": "Лавровый лист"
+    },
+    {
+      "food_code": "BEEF_BROTH_LOW_SODIUM",
+      "name_ru": "Бульон говяжий с пониженным содержанием соли"
+    },
+    {
+      "food_code": "BEEF_GROUND_90",
+      "name_ru": "Фарш говяжий 90%"
+    },
+    {
+      "food_code": "BEEF_SHOULDER",
+      "name_ru": "Говяжья лопатка"
+    },
+    {
+      "food_code": "BEEF_TOP_ROUND",
+      "name_ru": "Говядина верхняя часть бедра"
+    },
+    {
+      "food_code": "BEET",
+      "name_ru": "Свёкла"
+    },
+    {
+      "food_code": "BELL_PEPPER_GREEN",
+      "name_ru": "Перец сладкий зелёный"
+    },
+    {
+      "food_code": "BELL_PEPPER_RED",
+      "name_ru": "Перец сладкий красный"
+    },
+    {
+      "food_code": "BLACK_BEANS_CANNED",
+      "name_ru": "Фасоль чёрная консервированная"
+    },
+    {
+      "food_code": "BLACK_EYED_PEAS_DRY",
+      "name_ru": "Вигна сухая"
+    },
+    {
+      "food_code": "BLACK_PEPPER",
+      "name_ru": "Перец чёрный молотый"
+    },
+    {
+      "food_code": "BLUEBERRY",
+      "name_ru": "Голубика"
+    },
+    {
+      "food_code": "BREADCRUMBS",
+      "name_ru": "Сухари панировочные"
+    },
+    {
+      "food_code": "BREAD_WHOLE_WHEAT",
+      "name_ru": "Хлеб цельнозерновой пшеничный"
+    },
+    {
+      "food_code": "BROCCOLI",
+      "name_ru": "Брокколи"
+    },
+    {
+      "food_code": "BROWN_SUGAR",
+      "name_ru": "Сахар коричневый"
+    },
+    {
+      "food_code": "BUCKWHEAT",
+      "name_ru": "Гречневая крупа"
+    },
+    {
+      "food_code": "BULGUR",
+      "name_ru": "Булгур сухой"
+    },
+    {
+      "food_code": "BUTTERNUT_SQUASH",
+      "name_ru": "Тыква баттернат"
+    },
+    {
+      "food_code": "BUTTER_UNSALTED",
+      "name_ru": "Масло сливочное несолёное"
+    },
+    {
+      "food_code": "CABBAGE_GREEN",
+      "name_ru": "Капуста белокочанная"
+    },
+    {
+      "food_code": "CABBAGE_RED",
+      "name_ru": "Капуста краснокочанная"
+    },
+    {
+      "food_code": "CANOLA_OIL",
+      "name_ru": "Масло рапсовое"
+    },
+    {
+      "food_code": "CARROT",
+      "name_ru": "Морковь"
+    },
+    {
+      "food_code": "CASHEWS_RAW",
+      "name_ru": "Кешью сырой"
+    },
+    {
+      "food_code": "CAULIFLOWER",
+      "name_ru": "Капуста цветная"
+    },
+    {
+      "food_code": "CAULIFLOWER_FROZEN",
+      "name_ru": "Капуста цветная замороженная"
+    },
+    {
+      "food_code": "CELERY",
+      "name_ru": "Сельдерей стеблевой"
+    },
+    {
+      "food_code": "CHEESE_CHEDDAR",
+      "name_ru": "Сыр чеддер"
+    },
+    {
+      "food_code": "CHEESE_CHEDDAR_REDUCED_FAT",
+      "name_ru": "Сыр чеддер пониженной жирности"
+    },
+    {
+      "food_code": "CHEESE_MOZZARELLA_PART_SKIM",
+      "name_ru": "Сыр моцарелла частично обезжиренный"
+    },
+    {
+      "food_code": "CHERRY_SWEET",
+      "name_ru": "Черешня"
+    },
+    {
+      "food_code": "CHIA_SEEDS",
+      "name_ru": "Семена чиа сухие"
+    },
+    {
+      "food_code": "CHICKEN_BREAST",
+      "name_ru": "Грудка куриная без кожи"
+    },
+    {
+      "food_code": "CHICKEN_BREAST_COOKED",
+      "name_ru": "Куриная грудка приготовленная"
+    },
+    {
+      "food_code": "CHICKEN_BROTH_LOW_SODIUM",
+      "name_ru": "Бульон куриный с пониженным содержанием соли"
+    },
+    {
+      "food_code": "CHICKEN_THIGH",
+      "name_ru": "Бедро куриное без кожи"
+    },
+    {
+      "food_code": "CHICKPEAS_DRY",
+      "name_ru": "Нут сухой"
+    },
+    {
+      "food_code": "CHILI_POWDER",
+      "name_ru": "Смесь специй чили"
+    },
+    {
+      "food_code": "CILANTRO",
+      "name_ru": "Кориандр свежий"
+    },
+    {
+      "food_code": "CINNAMON_GROUND",
+      "name_ru": "Корица молотая"
+    },
+    {
+      "food_code": "COCONUT_SHREDDED",
+      "name_ru": "Кокос сушёный измельчённый"
+    },
+    {
+      "food_code": "COD_ATLANTIC",
+      "name_ru": "Треска атлантическая сырая"
+    },
+    {
+      "food_code": "CORIANDER_SEED",
+      "name_ru": "Семена кориандра"
+    },
+    {
+      "food_code": "CORNMEAL_WHOLE_GRAIN",
+      "name_ru": "Кукурузная мука цельнозерновая белая"
+    },
+    {
+      "food_code": "CORNSTARCH",
+      "name_ru": "Крахмал кукурузный"
+    },
+    {
+      "food_code": "CORN_CREAM_STYLE_NO_SALT",
+      "name_ru": "Кукуруза кремовая консервированная без соли"
+    },
+    {
+      "food_code": "CORN_FLOUR",
+      "name_ru": "Мука кукурузная"
+    },
+    {
+      "food_code": "CORN_SWEET",
+      "name_ru": "Кукуруза сладкая"
+    },
+    {
+      "food_code": "COTTAGE_CHEESE_FULL_FAT",
+      "name_ru": "Творог зернёный жирный"
+    },
+    {
+      "food_code": "CRANBERRIES_DRIED",
+      "name_ru": "Клюква сушёная"
+    },
+    {
+      "food_code": "CUCUMBER",
+      "name_ru": "Огурец"
+    },
+    {
+      "food_code": "CUMIN_GROUND",
+      "name_ru": "Кумин молотый"
+    },
+    {
+      "food_code": "CURRY_POWDER",
+      "name_ru": "Смесь специй карри"
+    },
+    {
+      "food_code": "DILL_DRIED",
+      "name_ru": "Укроп сушёный"
+    },
+    {
+      "food_code": "EDAMAME_FROZEN",
+      "name_ru": "Эдамаме замороженные"
+    },
+    {
+      "food_code": "EGG",
+      "name_ru": "Яйцо куриное целое"
+    },
+    {
+      "food_code": "EGGPLANT",
+      "name_ru": "Баклажан"
+    },
+    {
+      "food_code": "EGG_WHITE",
+      "name_ru": "Яичный белок"
+    },
+    {
+      "food_code": "FLAXSEED_GROUND",
+      "name_ru": "Семена льна молотые"
+    },
+    {
+      "food_code": "FLOUR_RYE",
+      "name_ru": "Мука ржаная"
+    },
+    {
+      "food_code": "FLOUR_WHEAT",
+      "name_ru": "Мука пшеничная"
+    },
+    {
+      "food_code": "FLOUR_WHOLE_WHEAT",
+      "name_ru": "Мука цельнозерновая пшеничная"
+    },
+    {
+      "food_code": "GARLIC",
+      "name_ru": "Чеснок"
+    },
+    {
+      "food_code": "GARLIC_POWDER",
+      "name_ru": "Чеснок сушёный молотый"
+    },
+    {
+      "food_code": "GINGER",
+      "name_ru": "Имбирь свежий"
+    },
+    {
+      "food_code": "GRAPES_RED",
+      "name_ru": "Виноград красный"
+    },
+    {
+      "food_code": "GREEN_BEANS",
+      "name_ru": "Фасоль зелёная стручковая"
+    },
+    {
+      "food_code": "GREEN_BEANS_CANNED_NO_SALT",
+      "name_ru": "Фасоль стручковая консервированная без соли"
+    },
+    {
+      "food_code": "GREEN_ONION",
+      "name_ru": "Лук зелёный"
+    },
+    {
+      "food_code": "GREEN_PEAS_CANNED",
+      "name_ru": "Горошек зелёный консервированный"
+    },
+    {
+      "food_code": "HAZELNUTS_RAW",
+      "name_ru": "Фундук сырой"
+    },
+    {
+      "food_code": "HONEY",
+      "name_ru": "Мёд"
+    },
+    {
+      "food_code": "HOT_SAUCE",
+      "name_ru": "Соус острый перечный"
+    },
+    {
+      "food_code": "JALAPENO",
+      "name_ru": "Перец халапеньо"
+    },
+    {
+      "food_code": "KALE",
+      "name_ru": "Капуста кейл"
+    },
+    {
+      "food_code": "KIDNEY_BEANS_CANNED_LOW_SODIUM",
+      "name_ru": "Фасоль красная консервированная с пониженным содержанием соли"
+    },
+    {
+      "food_code": "LEMON",
+      "name_ru": "Лимон"
+    },
+    {
+      "food_code": "LENTILS_DRY",
+      "name_ru": "Чечевица сухая"
+    },
+    {
+      "food_code": "LETTUCE_ROMAINE",
+      "name_ru": "Салат ромэн"
+    },
+    {
+      "food_code": "LIME",
+      "name_ru": "Лайм"
+    },
+    {
+      "food_code": "LIME_JUICE",
+      "name_ru": "Сок лайма"
+    },
+    {
+      "food_code": "MANDARIN",
+      "name_ru": "Мандарин"
+    },
+    {
+      "food_code": "MARGARINE",
+      "name_ru": "Маргарин"
+    },
+    {
+      "food_code": "MAYONNAISE_LOW_FAT",
+      "name_ru": "Майонез пониженной жирности"
+    },
+    {
+      "food_code": "MILK_1_PERCENT",
+      "name_ru": "Молоко 1% жирности"
+    },
+    {
+      "food_code": "MILK_2",
+      "name_ru": "Молоко 2%"
+    },
+    {
+      "food_code": "MILK_SKIM",
+      "name_ru": "Молоко обезжиренное"
+    },
+    {
+      "food_code": "MILK_WHOLE",
+      "name_ru": "Молоко цельное 3,25%"
+    },
+    {
+      "food_code": "MILLET",
+      "name_ru": "Просо цельное"
+    },
+    {
+      "food_code": "MINT_FRESH",
+      "name_ru": "Мята свежая"
+    },
+    {
+      "food_code": "MUSHROOM_WHITE",
+      "name_ru": "Шампиньоны"
+    },
+    {
+      "food_code": "MUSTARD_GROUND",
+      "name_ru": "Горчица молотая"
+    },
+    {
+      "food_code": "MUSTARD_YELLOW",
+      "name_ru": "Горчица жёлтая готовая"
+    },
+    {
+      "food_code": "NUTMEG_GROUND",
+      "name_ru": "Мускатный орех молотый"
+    },
+    {
+      "food_code": "OATS_ROLLED",
+      "name_ru": "Овсяные хлопья"
+    },
+    {
+      "food_code": "OLIVE_OIL",
+      "name_ru": "Масло оливковое"
+    },
+    {
+      "food_code": "ONION_POWDER",
+      "name_ru": "Лук сушёный молотый"
+    },
+    {
+      "food_code": "ONION_RED",
+      "name_ru": "Лук красный"
+    },
+    {
+      "food_code": "ONION_YELLOW",
+      "name_ru": "Лук репчатый жёлтый"
+    },
+    {
+      "food_code": "ORANGE",
+      "name_ru": "Апельсин"
+    },
+    {
+      "food_code": "ORANGE_JUICE_CONCENTRATE",
+      "name_ru": "Концентрат апельсинового сока"
+    },
+    {
+      "food_code": "OREGANO_DRIED",
+      "name_ru": "Орегано сушёный"
+    },
+    {
+      "food_code": "PAPRIKA",
+      "name_ru": "Паприка молотая"
+    },
+    {
+      "food_code": "PARSLEY",
+      "name_ru": "Петрушка свежая"
+    },
+    {
+      "food_code": "PARSLEY_DRIED",
+      "name_ru": "Петрушка сушёная"
+    },
+    {
+      "food_code": "PARSNIP",
+      "name_ru": "Пастернак"
+    },
+    {
+      "food_code": "PASTA_DRY",
+      "name_ru": "Макаронные изделия сухие"
+    },
+    {
+      "food_code": "PASTA_WHOLE_WHEAT",
+      "name_ru": "Макароны цельнозерновые"
+    },
+    {
+      "food_code": "PEACH",
+      "name_ru": "Персик"
+    },
+    {
+      "food_code": "PEANUTS_RAW",
+      "name_ru": "Арахис сырой"
+    },
+    {
+      "food_code": "PEAR",
+      "name_ru": "Груша"
+    },
+    {
+      "food_code": "PIMIENTO_CANNED",
+      "name_ru": "Пименто консервированный"
+    },
+    {
+      "food_code": "PINEAPPLE",
+      "name_ru": "Ананас"
+    },
+    {
+      "food_code": "PINEAPPLE_CANNED_JUICE",
+      "name_ru": "Ананас консервированный в соке"
+    },
+    {
+      "food_code": "PINTO_BEANS_CANNED_LOW_SODIUM",
+      "name_ru": "Фасоль пинто консервированная с пониженным содержанием соли"
+    },
+    {
+      "food_code": "PLUM",
+      "name_ru": "Слива"
+    },
+    {
+      "food_code": "POLLOCK_ALASKA",
+      "name_ru": "Минтай сырой"
+    },
+    {
+      "food_code": "PORK_LOIN",
+      "name_ru": "Свинина корейка без кости"
+    },
+    {
+      "food_code": "PORK_TENDERLOIN",
+      "name_ru": "Свиная вырезка"
+    },
+    {
+      "food_code": "POTATO",
+      "name_ru": "Картофель"
+    },
+    {
+      "food_code": "POTATO_RED",
+      "name_ru": "Картофель красный"
+    },
+    {
+      "food_code": "PUMPKIN_SEEDS_RAW",
+      "name_ru": "Семена тыквы сырые"
+    },
+    {
+      "food_code": "QUINOA",
+      "name_ru": "Киноа сухая"
+    },
+    {
+      "food_code": "RADISH",
+      "name_ru": "Редис"
+    },
+    {
+      "food_code": "RAISINS_GOLDEN",
+      "name_ru": "Изюм золотистый"
+    },
+    {
+      "food_code": "RASPBERRY",
+      "name_ru": "Малина"
+    },
+    {
+      "food_code": "RED_PEPPER_FLAKES",
+      "name_ru": "Хлопья красного перца"
+    },
+    {
+      "food_code": "RICE_BROWN",
+      "name_ru": "Рис бурый длиннозёрный"
+    },
+    {
+      "food_code": "RICE_WHITE",
+      "name_ru": "Рис белый длиннозёрный"
+    },
+    {
+      "food_code": "ROLL_WHOLE_WHEAT",
+      "name_ru": "Булочка цельнозерновая пшеничная"
+    },
+    {
+      "food_code": "ROSEMARY_DRIED",
+      "name_ru": "Розмарин сушёный"
+    },
+    {
+      "food_code": "SALMON_ATLANTIC",
+      "name_ru": "Лосось атлантический сырой"
+    },
+    {
+      "food_code": "SALSA",
+      "name_ru": "Сальса готовая"
+    },
+    {
+      "food_code": "SALT",
+      "name_ru": "Соль поваренная"
+    },
+    {
+      "food_code": "SESAME_OIL",
+      "name_ru": "Масло кунжутное"
+    },
+    {
+      "food_code": "SESAME_SEEDS",
+      "name_ru": "Семена кунжута обжаренные"
+    },
+    {
+      "food_code": "SHRIMP_RAW",
+      "name_ru": "Креветки сырые"
+    },
+    {
+      "food_code": "SOUR_CREAM_FULL_FAT",
+      "name_ru": "Сметана жирная"
+    },
+    {
+      "food_code": "SOUR_CREAM_LOW_FAT",
+      "name_ru": "Сметана пониженной жирности"
+    },
+    {
+      "food_code": "SOY_SAUCE_LOW_SODIUM",
+      "name_ru": "Соус соевый с пониженным содержанием соли"
+    },
+    {
+      "food_code": "SPINACH",
+      "name_ru": "Шпинат"
+    },
+    {
+      "food_code": "STRAWBERRY",
+      "name_ru": "Клубника"
+    },
+    {
+      "food_code": "STRAWBERRY_FROZEN_UNSWEETENED",
+      "name_ru": "Клубника замороженная без сахара"
+    },
+    {
+      "food_code": "SUGAR",
+      "name_ru": "Сахар-песок"
+    },
+    {
+      "food_code": "SUNFLOWER_OIL",
+      "name_ru": "Масло подсолнечное"
+    },
+    {
+      "food_code": "SUNFLOWER_SEEDS_RAW",
+      "name_ru": "Семена подсолнечника сырые"
+    },
+    {
+      "food_code": "SWEET_POTATO",
+      "name_ru": "Батат"
+    },
+    {
+      "food_code": "THYME_DRIED",
+      "name_ru": "Тимьян сушёный"
+    },
+    {
+      "food_code": "TILAPIA_RAW",
+      "name_ru": "Тилапия сырая"
+    },
+    {
+      "food_code": "TOFU_FIRM",
+      "name_ru": "Тофу твёрдый"
+    },
+    {
+      "food_code": "TOMATO",
+      "name_ru": "Томат"
+    },
+    {
+      "food_code": "TOMATO_CANNED_NO_SALT",
+      "name_ru": "Томаты консервированные без соли"
+    },
+    {
+      "food_code": "TOMATO_CRUSHED",
+      "name_ru": "Томаты протёртые консервированные"
+    },
+    {
+      "food_code": "TOMATO_PASTE_NO_SALT",
+      "name_ru": "Паста томатная без соли"
+    },
+    {
+      "food_code": "TORTILLA_WHOLE_WHEAT",
+      "name_ru": "Тортилья цельнозерновая пшеничная"
+    },
+    {
+      "food_code": "TUNA_CANNED_WATER",
+      "name_ru": "Тунец консервированный в воде"
+    },
+    {
+      "food_code": "TURKEY_DRUMSTICK_SMOKED_COOKED",
+      "name_ru": "Голень индейки копчёная приготовленная"
+    },
+    {
+      "food_code": "TURKEY_GROUND_93",
+      "name_ru": "Фарш из индейки 93%"
+    },
+    {
+      "food_code": "TURMERIC_GROUND",
+      "name_ru": "Куркума молотая"
+    },
+    {
+      "food_code": "TURNIP",
+      "name_ru": "Репа"
+    },
+    {
+      "food_code": "VANILLA_EXTRACT",
+      "name_ru": "Экстракт ванили"
+    },
+    {
+      "food_code": "VEGETABLE_BROTH",
+      "name_ru": "Бульон овощной"
+    },
+    {
+      "food_code": "VINEGAR_WHITE",
+      "name_ru": "Уксус белый дистиллированный"
+    },
+    {
+      "food_code": "WALNUTS_RAW",
+      "name_ru": "Орех грецкий сырой"
+    },
+    {
+      "food_code": "WATER",
+      "name_ru": "Вода питьевая"
+    },
+    {
+      "food_code": "WHITE_BEANS_DRY",
+      "name_ru": "Фасоль белая сухая"
+    },
+    {
+      "food_code": "WILD_RICE",
+      "name_ru": "Рис дикий сухой"
+    },
+    {
+      "food_code": "YOGURT_GREEK_LOW_FAT",
+      "name_ru": "Йогурт греческий натуральный пониженной жирности"
+    },
+    {
+      "food_code": "YOGURT_GREEK_NONFAT",
+      "name_ru": "Йогурт греческий обезжиренный"
+    },
+    {
+      "food_code": "YOGURT_PLAIN_LOW_FAT",
+      "name_ru": "Йогурт натуральный пониженной жирности"
+    },
+    {
+      "food_code": "YOGURT_PLAIN_WHOLE",
+      "name_ru": "Йогурт натуральный цельномолочный"
+    },
+    {
+      "food_code": "ZUCCHINI",
+      "name_ru": "Цукини"
+    }
+  ],
+  "authority": "Disposable accepted DB; deterministic natural identities, no UUID/timestamp copy."
+}

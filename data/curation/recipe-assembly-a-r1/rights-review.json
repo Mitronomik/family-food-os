@@ -1,0 +1,399 @@
+{
+  "reviewer": "Codex — ограниченное исследовательское решение по повторному использованию",
+  "date": "2026-09-12",
+  "policy_ref": "RIGHTS-FACTS",
+  "scope": "Фактические ингредиенты, количества и собственное русское изложение процесса с атрибуцией. Не лицензия на карточку целиком; не копирование выразительного текста.",
+  "donors": [
+    {
+      "source_id": "R1-01",
+      "decision": "ACCEPT",
+      "owner": "USDA/FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Spiced%20Oatmeal%206%20Servings.pdf",
+      "identity_version": "Spiced Oatmeal; 2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "sha256": "8ae03f676051c520106c856f0a8629810758698ad9ca18e3976bc1f94a62c79e",
+      "reason_ru": "Прямой федеральный источник с конкретной карточкой и без стороннего авторского кредита в проверенных фактах; ограниченное использование фактов и самостоятельных правил с атрибуцией. Основание RIGHTS-FACTS; не предполагается свободная лицензия всех материалов сайта.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-02",
+      "decision": "ACCEPT",
+      "owner": "USDA/FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Strawberry%20Smoothie%20Bowl%206%20Servings.pdf",
+      "identity_version": "Strawberry Smoothie Bowl; 2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "sha256": "846bbf832f3df5535039fd21048d3cfb265a01d8b480b6f3408053cc8159c5c6",
+      "reason_ru": "Прямой федеральный источник с конкретной карточкой и без стороннего авторского кредита в проверенных фактах; ограниченное использование фактов и самостоятельных правил с атрибуцией. Основание RIGHTS-FACTS; не предполагается свободная лицензия всех материалов сайта.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-03",
+      "decision": "ACCEPT",
+      "owner": "USDA/FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Baked_Sweet_Potatoes_Apples_6_Servings.pdf",
+      "identity_version": "Baked Sweet Potatoes and Apples; 2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "sha256": "7bf6e88ea4550fac85efd7f9a8966f8ff30ba31f8e48e1f0e90f3a1dd882a1f6",
+      "reason_ru": "Прямой федеральный источник с конкретной карточкой и без стороннего авторского кредита в проверенных фактах; ограниченное использование фактов и самостоятельных правил с атрибуцией. Основание RIGHTS-FACTS; не предполагается свободная лицензия всех материалов сайта.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-04",
+      "decision": "ACCEPT",
+      "owner": "USDA/FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Corn_Edamame_Blend_6_Servings.pdf",
+      "identity_version": "Corn and Edamame Blend; 2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "sha256": "314657ea1e58eff321c04824e6280b94ab8641b042884fae48be186efd6c46ef",
+      "reason_ru": "Прямой федеральный источник с конкретной карточкой и без стороннего авторского кредита в проверенных фактах; ограниченное использование фактов и самостоятельных правил с атрибуцией. Основание RIGHTS-FACTS; не предполагается свободная лицензия всех материалов сайта.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-05",
+      "decision": "ACCEPT",
+      "owner": "USDA/FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Local_Harvest_Bake_6_Servings.pdf",
+      "identity_version": "Local Harvest Bake; 2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "sha256": "340444ab1ec4f626a34d6a2737fa04d12481ef21f8850ad7c1199c49c2b3786b",
+      "reason_ru": "Прямой федеральный источник с конкретной карточкой и без стороннего авторского кредита в проверенных фактах; ограниченное использование фактов и самостоятельных правил с атрибуцией. Основание RIGHTS-FACTS; не предполагается свободная лицензия всех материалов сайта.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-06",
+      "decision": "ACCEPT",
+      "owner": "USDA/FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Pizza_Green_Beans_6_Servings.pdf",
+      "identity_version": "Pizza Green Beans; 2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "sha256": "4611a6f3adc4d3f0c9ba0dde9f209919076893dac06c43abdb7c135ec6b4c9df",
+      "reason_ru": "Прямой федеральный источник с конкретной карточкой и без стороннего авторского кредита в проверенных фактах; ограниченное использование фактов и самостоятельных правил с атрибуцией. Основание RIGHTS-FACTS; не предполагается свободная лицензия всех материалов сайта.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-07",
+      "decision": "ACCEPT",
+      "owner": "USDA/FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Sauteed_Spinach_6_servings.pdf",
+      "identity_version": "Sautéed Spinach and Tomatoes; 2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "sha256": "33acf2b15058ccee676ed1e492d92bec53b0c216dc0aa0e40c714c8ad7ff0e72",
+      "reason_ru": "Прямой федеральный источник с конкретной карточкой и без стороннего авторского кредита в проверенных фактах; ограниченное использование фактов и самостоятельных правил с атрибуцией. Основание RIGHTS-FACTS; не предполагается свободная лицензия всех материалов сайта.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-08",
+      "decision": "ACCEPT",
+      "owner": "USDA/FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Spanish_Rice_6_Servings.pdf",
+      "identity_version": "Spanish Rice; 2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "sha256": "cfcafe63e0c99d13b08ca5323cfb7e8508780c70a6d61deead6317a1e3a02d46",
+      "reason_ru": "Прямой федеральный источник с конкретной карточкой и без стороннего авторского кредита в проверенных фактах; ограниченное использование фактов и самостоятельных правил с атрибуцией. Основание RIGHTS-FACTS; не предполагается свободная лицензия всех материалов сайта.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-09",
+      "decision": "ACCEPT",
+      "owner": "USDA/FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Vegetable_Frittata_6_Servings.pdf",
+      "identity_version": "Vegetable Frittata; 2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "sha256": "44fd200515663a2544a9b7ddfb0d2de2efe7f3d0d8fe407ff3674a6cfb59c338",
+      "reason_ru": "Прямой федеральный источник с конкретной карточкой и без стороннего авторского кредита в проверенных фактах; ограниченное использование фактов и самостоятельных правил с атрибуцией. Основание RIGHTS-FACTS; не предполагается свободная лицензия всех материалов сайта.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-10",
+      "decision": "ACCEPT",
+      "owner": "USDA/FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Carrot%20Raisin%20Salad%206%20Servings.pdf",
+      "identity_version": "Carrot Raisin Salad; 2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "sha256": "f158ed6fae6b308abf951de1b7fdb967c1cef9c25ecdcad15f71875956db20af",
+      "reason_ru": "Прямой федеральный источник с конкретной карточкой и без стороннего авторского кредита в проверенных фактах; ограниченное использование фактов и самостоятельных правил с атрибуцией. Основание RIGHTS-FACTS; не предполагается свободная лицензия всех материалов сайта.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-11",
+      "decision": "ACCEPT",
+      "owner": "USDA/FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Quiche_Self-Forming_Crust_6_Servings.pdf",
+      "identity_version": "Quiche with Self-Forming Crust; 2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "sha256": "edb35032a28decf27db80f7b35c97f2f44f65759fe069ab978cc1556b2ed844b",
+      "reason_ru": "Прямой федеральный источник с конкретной карточкой и без стороннего авторского кредита в проверенных фактах; ограниченное использование фактов и самостоятельных правил с атрибуцией. Основание RIGHTS-FACTS; не предполагается свободная лицензия всех материалов сайта.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-12",
+      "decision": "ACCEPT",
+      "owner": "USDA/FNS",
+      "source_url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Tuscan_Grill_Cheese_6_Servings.pdf",
+      "identity_version": "Tuscan Grill Cheese Sandwich; 2020; CACFP Home Childcare 6-Serving Recipe Project",
+      "retrieval_date": "2026-09-12",
+      "sha256": "576aedace7289fc37a4862b75848b04108add602f31946e5b87af3800d2c8354",
+      "reason_ru": "Прямой федеральный источник с конкретной карточкой и без стороннего авторского кредита в проверенных фактах; ограниченное использование фактов и самостоятельных правил с атрибуцией. Основание RIGHTS-FACTS; не предполагается свободная лицензия всех материалов сайта.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-13",
+      "decision": "DEFER",
+      "owner": "USDA/FNS",
+      "source_url": "https://theicn.org/cnrb/pdfs/cacfp/Cooking_Rice_25-50_Draft3_F.pdf",
+      "identity_version": "Cooking Rice; 2019; USDA Standardized Recipes Project; 25/50",
+      "retrieval_date": "2026-09-12",
+      "sha256": null,
+      "reason_ru": "Размещение ICN и упоминание USDA не устанавливают права на конкретный материал; прямой федеральный оригинал/лицензия на предполагаемое использование не установлен. Для государственных рецептов грант USDA не делает штат федеральным автором.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-14",
+      "decision": "DEFER",
+      "owner": "USDA/FNS",
+      "source_url": "https://theicn.org/cnrb/pdfs/schools/Brown_Rice_Pilaf_50-100_Draft3_F.pdf",
+      "identity_version": "Brown Rice Pilaf; 2019; USDA Standardized Recipes Project; 50/100",
+      "retrieval_date": "2026-09-12",
+      "sha256": null,
+      "reason_ru": "Размещение ICN и упоминание USDA не устанавливают права на конкретный материал; прямой федеральный оригинал/лицензия на предполагаемое использование не установлен. Для государственных рецептов грант USDA не делает штат федеральным автором.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-15",
+      "decision": "DEFER",
+      "owner": "USDA/FNS",
+      "source_url": "https://theicn.org/cnrb/pdfs/cacfp/Gingered-Carrots.25-50(multicultural).Final.pdf",
+      "identity_version": "Gingered Carrots; Team Nutrition CACFP Multicultural Recipe Project; 25/50",
+      "retrieval_date": "2026-09-12",
+      "sha256": null,
+      "reason_ru": "Размещение ICN и упоминание USDA не устанавливают права на конкретный материал; прямой федеральный оригинал/лицензия на предполагаемое использование не установлен. Для государственных рецептов грант USDA не делает штат федеральным автором.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-16",
+      "decision": "DEFER",
+      "owner": "USDA/FNS",
+      "source_url": "https://theicn.org/cnrb/pdfs/2021_508c/Baked-Cod-Ole.25-50_508c_2021.pdf",
+      "identity_version": "Baked Cod Olé; 2021 accessible card; CACFP Multicultural; 25/50",
+      "retrieval_date": "2026-09-12",
+      "sha256": null,
+      "reason_ru": "Размещение ICN и упоминание USDA не устанавливают права на конкретный материал; прямой федеральный оригинал/лицензия на предполагаемое использование не установлен. Для государственных рецептов грант USDA не делает штат федеральным автором.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-17",
+      "decision": "DEFER",
+      "owner": "USDA/FNS",
+      "source_url": "https://theicn.org/cnrb/pdfs/CACFP_Lunch_Supper_Recipes%28English%2941-50/CACFP-Lunch-Supper-quantity-Baked-Tilapia-Fish-Fillets-ages3-5.pdf",
+      "identity_version": "Baked Tilapia Fish Fillets; CACFP Easy Recipe Project; ages 3–5; 25/50",
+      "retrieval_date": "2026-09-12",
+      "sha256": null,
+      "reason_ru": "Размещение ICN и упоминание USDA не устанавливают права на конкретный материал; прямой федеральный оригинал/лицензия на предполагаемое использование не установлен. Для государственных рецептов грант USDA не делает штат федеральным автором.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-18",
+      "decision": "DEFER",
+      "owner": "USDA/FNS",
+      "source_url": "https://theicn.org/cnrb/pdfs/cacfp/family-child-care-homes/12-03-2024/cauliflower-rice-6-servings-v2.pdf",
+      "identity_version": "Cauliflower Rice; USDA Standardization Recipe Project 2024; 6 servings v2",
+      "retrieval_date": "2026-09-12",
+      "sha256": null,
+      "reason_ru": "Размещение ICN и упоминание USDA не устанавливают права на конкретный материал; прямой федеральный оригинал/лицензия на предполагаемое использование не установлен. Для государственных рецептов грант USDA не делает штат федеральным автором.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-19",
+      "decision": "DEFER",
+      "owner": "Virginia Department of Education",
+      "source_url": "https://theicn.org/cnrb/pdfs/state-recipes-2023-05-24/Virginia-recipes/508_Virginia-DOE-Zesty-Breakfast-Potatoes-Recipe.pdf",
+      "identity_version": "Zesty Breakfast Potatoes; FY2021 Cohort A; Virginia; 50/100",
+      "retrieval_date": "2026-09-12",
+      "sha256": null,
+      "reason_ru": "Размещение ICN и упоминание USDA не устанавливают права на конкретный материал; прямой федеральный оригинал/лицензия на предполагаемое использование не установлен. Для государственных рецептов грант USDA не делает штат федеральным автором.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-20",
+      "decision": "DEFER",
+      "owner": "Pennsylvania Department of Education",
+      "source_url": "https://theicn.org/cnrb/pdfs/state-recipes-2023-05-24/Pennsylvania-recipes/508_Pennsylvania-DOE-Haluski.pdf",
+      "identity_version": "Haluski; FY2021 Cohort A; Pennsylvania; 50/100",
+      "retrieval_date": "2026-09-12",
+      "sha256": null,
+      "reason_ru": "Размещение ICN и упоминание USDA не устанавливают права на конкретный материал; прямой федеральный оригинал/лицензия на предполагаемое использование не установлен. Для государственных рецептов грант USDA не делает штат федеральным автором.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-21",
+      "decision": "ACCEPT",
+      "owner": "US Department of Defense / Armed Forces Recipe Service",
+      "source_url": "https://www.marines.mil/portals/1/Publications/MCO%20P10110.42B%20Cereals%20and%20Pasta%20Products.pdf",
+      "identity_version": "Hot Oatmeal E00100; MCO P10110.42B; E00100; section E page 3",
+      "retrieval_date": "2026-09-12",
+      "sha256": null,
+      "reason_ru": "Прямой федеральный источник с конкретной карточкой и без стороннего авторского кредита в проверенных фактах; ограниченное использование фактов и самостоятельных правил с атрибуцией. Основание RIGHTS-FACTS; не предполагается свободная лицензия всех материалов сайта.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-22",
+      "decision": "ACCEPT",
+      "owner": "US Department of Defense / Armed Forces Recipe Service",
+      "source_url": "https://quartermaster.army.mil/jccoe/operations_directorate/quad/menu/recipes/section_e/E00505.pdf",
+      "identity_version": "Steamed Brown Rice E00505; AFRS E00505; retrieved revision",
+      "retrieval_date": "2026-09-12",
+      "sha256": null,
+      "reason_ru": "Прямой федеральный источник с конкретной карточкой и без стороннего авторского кредита в проверенных фактах; ограниченное использование фактов и самостоятельных правил с атрибуцией. Основание RIGHTS-FACTS; не предполагается свободная лицензия всех материалов сайта.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    },
+    {
+      "source_id": "R1-23",
+      "decision": "ACCEPT",
+      "owner": "US Department of Defense / Armed Forces Recipe Service",
+      "source_url": "https://quartermaster.army.mil/jccoe/operations_directorate/quad/menu/recipes/section_f/F00400.pdf",
+      "identity_version": "Cooked Eggs F00400; AFRS F00400; retrieved revision",
+      "retrieval_date": "2026-09-12",
+      "sha256": null,
+      "reason_ru": "Прямой федеральный источник с конкретной карточкой и без стороннего авторского кредита в проверенных фактах; ограниченное использование фактов и самостоятельных правил с атрибуцией. Основание RIGHTS-FACTS; не предполагается свободная лицензия всех материалов сайта.",
+      "assets_excluded": [
+        "Фотографии",
+        "Логотипы",
+        "Дизайн карточек",
+        "Вступления и культурные рассказы",
+        "Дословное изложение процесса"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "algorithm": "SHA-256",
+  "files": {
+    "README.md": "58de3fcb4c177da698ace85e46bc555b91f88df43e8c40f5c2bab26045ff72aa",
+    "baseline-verification.json": "aea0dea4f538cdfed5ea2117f69749f78036e7837df63b4798c50d1fb4613f1f",
+    "candidate-funnel.json": "0e0b039604f1192d3063869af5c5a7cd636c8a4857a9037639247d3d753894f4",
+    "catalogue-inventory.json": "a53ebf86395125d896bda77d1bebf01c4462b79e7f2c24cef03f02f423936ed0",
+    "composition-readiness.json": "8fa065aa4ff48b849fbae8d65f285c6a6b6c7519fbb8cb2e8995dadd6ddf8251",
+    "final-three.json": "69f355334f7fd5aac3bc521eaa76196381dfc041324602fc572317cb28a7e711",
+    "implementation-readiness.json": "b3aca0b769f415022467032e52d6ce41772e630f3432e085353272277510ea4d",
+    "kitchen-verification.json": "dbdf71553870c6f2a03e4372f80fde76b8e72fb6a6d4b9bf0bf24db11503b4c9",
+    "market-evidence.json": "61532607503b397d762d4a13279c4bb4018f4581ae46e728645539de53949ba3",
+    "quantity-authority.json": "4a7f5c1ad93189abeb0df9498a378c0a2a8c25e571d09a56efab26878c093f76",
+    "rights-review.json": "0d31c2c73b1f425eba41f6955c61f27332d7da22e7d67a323ff337f6775199b7",
+    "ru-familiarity.json": "6d64f683527a818675f178d9c8d9b31f928856edfb106c4b9273a215330e6dea",
+    "source-manifest.json": "6ffe0179aaa2a60b996fe4cd43f561e33ed803c2a0bc074434f78e859b30433b",
+    "source-observations.json": "17574ca9a1614371d08fbb4b0e5375601f906ac3f288b39d50656993a3670698",
+    "substitution-compatibility.json": "2031dc33fe5c8d0607740aa595b8cea8b27bac54b93cdf8d0477aa48d03d88c9"
+  }
+}

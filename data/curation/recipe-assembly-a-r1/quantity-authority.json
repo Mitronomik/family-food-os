@@ -1,0 +1,768 @@
+{
+  "reviewer": "Codex, исследовательский обзор; не свидетельство собственных кухонных испытаний",
+  "date": "2026-09-12",
+  "constants_g": {
+    "oz": "28.349523125",
+    "lb": "453.59237"
+  },
+  "policy": "Decimal strings, no rounding. source_mass_g is a source weight, not approval of form or edible/input basis. Missing or unresolved remains null. No density, no midpoints, no implicit water equality. No arbitrary family scaling.",
+  "candidate_batches": {
+    "R1-05": {
+      "source_servings": 6,
+      "rows": [
+        {
+          "name_ru": "Тыква мускатная, очищенная",
+          "food_code": "BUTTERNUT_SQUASH",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "8",
+          "source_unit": "oz",
+          "source_mass_g": "226.796185000",
+          "recipe_input_mass_g": "226.796185000",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-05:1"
+        },
+        {
+          "name_ru": "Свёкла очищенная",
+          "food_code": "BEET",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "8",
+          "source_unit": "oz",
+          "source_mass_g": "226.796185000",
+          "recipe_input_mass_g": "226.796185000",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-05:2"
+        },
+        {
+          "name_ru": "Батат очищенный",
+          "food_code": "SWEET_POTATO",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "8",
+          "source_unit": "oz",
+          "source_mass_g": "226.796185000",
+          "recipe_input_mass_g": "226.796185000",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-05:3"
+        },
+        {
+          "name_ru": "Масло оливковое",
+          "food_code": "OLIVE_OIL",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "1",
+          "source_unit": "tbsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": "13.5",
+          "authority": "FDC-PORTION-88667:exact",
+          "issue_ru": null,
+          "row_id": "R1-05:4"
+        },
+        {
+          "name_ru": "Соль кошерная или йодированная",
+          "food_code": null,
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "0.25",
+          "source_unit": "tsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": null,
+          "authority": null,
+          "issue_ru": "Две формы; универсальная порция SALT не применяется.",
+          "row_id": "R1-05:5"
+        },
+        {
+          "name_ru": "Чеснок рубленый",
+          "food_code": "GARLIC",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "0.75",
+          "source_unit": "tsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": null,
+          "authority": null,
+          "issue_ru": "Принятые порции чеснока только estimate.",
+          "row_id": "R1-05:6"
+        },
+        {
+          "name_ru": "Петрушка сушёная",
+          "food_code": "PARSLEY_DRIED",
+          "role_ru": "Компонент",
+          "required": false,
+          "source_quantity": "0.5",
+          "source_unit": "tsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": "0.25",
+          "authority": "FDC-PORTION-87558:exact",
+          "issue_ru": null,
+          "row_id": "R1-05:7"
+        },
+        {
+          "name_ru": "Спрей для формы",
+          "food_code": null,
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": null,
+          "source_unit": null,
+          "source_mass_g": null,
+          "recipe_input_mass_g": null,
+          "authority": null,
+          "issue_ru": "Обязателен в шаге 3; состав и масса отсутствуют.",
+          "row_id": "R1-05:8"
+        }
+      ],
+      "all_required_input_masses_resolved": false
+    },
+    "R1-13": {
+      "source_servings": 25,
+      "rows": [
+        {
+          "name_ru": "Вода питьевая",
+          "food_code": "WATER",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "6",
+          "source_unit": "cup",
+          "source_mass_g": null,
+          "recipe_input_mass_g": "1440",
+          "authority": "FDC-PORTION-93025:exact",
+          "issue_ru": null,
+          "row_id": "R1-13:1"
+        },
+        {
+          "name_ru": "Соль столовая",
+          "food_code": "SALT",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "1",
+          "source_unit": "tsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": "6",
+          "authority": "FDC-PORTION-92594:exact",
+          "issue_ru": null,
+          "row_id": "R1-13:2"
+        },
+        {
+          "name_ru": "Чеснок рубленый",
+          "food_code": "GARLIC",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "2",
+          "source_unit": "tbsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": null,
+          "authority": null,
+          "issue_ru": "FDC-PORTION-84479 и 84480 имеют estimate, запрещены.",
+          "row_id": "R1-13:3"
+        },
+        {
+          "name_ru": "Рис бурый длиннозерный обычный, сухой",
+          "food_code": "RICE_BROWN",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "27",
+          "source_unit": "oz",
+          "source_mass_g": "765.437124375",
+          "recipe_input_mass_g": "765.437124375",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-13:4"
+        }
+      ],
+      "all_required_input_masses_resolved": false
+    },
+    "R1-15": {
+      "source_servings": 25,
+      "rows": [
+        {
+          "name_ru": "Вода питьевая",
+          "food_code": "WATER",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "32",
+          "source_unit": "fl_oz",
+          "source_mass_g": null,
+          "recipe_input_mass_g": null,
+          "authority": null,
+          "issue_ru": "fl oz — объём, даже под заголовком Weight; не масса oz.",
+          "row_id": "R1-15:1"
+        },
+        {
+          "name_ru": "Морковь очищенная свежая",
+          "food_code": "CARROT",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "41.5",
+          "source_unit": "oz",
+          "source_mass_g": "1176.5052096875",
+          "recipe_input_mass_g": "1176.5052096875",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-15:2"
+        },
+        {
+          "name_ru": "Мёд",
+          "food_code": "HONEY",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "0.25",
+          "source_unit": "cup",
+          "source_mass_g": null,
+          "recipe_input_mass_g": null,
+          "authority": null,
+          "issue_ru": "Exact-порция не завершена.",
+          "row_id": "R1-15:3"
+        },
+        {
+          "name_ru": "Сок лимона свежий или бутилированный",
+          "food_code": null,
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "4",
+          "source_unit": "tsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": null,
+          "authority": null,
+          "issue_ru": "LEMON_JUICE отсутствует; цельный лимон не замена.",
+          "row_id": "R1-15:4"
+        },
+        {
+          "name_ru": "Петрушка сушёная",
+          "food_code": "PARSLEY_DRIED",
+          "role_ru": "Компонент",
+          "required": false,
+          "source_quantity": "4",
+          "source_unit": "tsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": "2.0",
+          "authority": "FDC-PORTION-87558:exact",
+          "issue_ru": null,
+          "row_id": "R1-15:5"
+        },
+        {
+          "name_ru": "Маргарин",
+          "food_code": "MARGARINE",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "4",
+          "source_unit": "tsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": null,
+          "authority": null,
+          "issue_ru": "Без Composition и проверенной массы.",
+          "row_id": "R1-15:6"
+        },
+        {
+          "name_ru": "Имбирь свежий тёртый",
+          "food_code": "GINGER",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "2",
+          "source_unit": "tsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": null,
+          "authority": null,
+          "issue_ru": "Exact-масса не установлена.",
+          "row_id": "R1-15:7"
+        },
+        {
+          "name_ru": "Соль столовая",
+          "food_code": "SALT",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "0.5",
+          "source_unit": "tsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": "3.0",
+          "authority": "FDC-PORTION-92594:exact",
+          "issue_ru": null,
+          "row_id": "R1-15:8"
+        }
+      ],
+      "all_required_input_masses_resolved": false
+    },
+    "R1-16": {
+      "source_servings": 25,
+      "rows": [
+        {
+          "name_ru": "Сок лайма свежий или бутилированный",
+          "food_code": "LIME_JUICE",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "0.75",
+          "source_unit": "cup",
+          "source_mass_g": null,
+          "recipe_input_mass_g": null,
+          "authority": null,
+          "issue_ru": "Нет Composition и точной массы.",
+          "row_id": "R1-16:1"
+        },
+        {
+          "name_ru": "Масло оливковое",
+          "food_code": "OLIVE_OIL",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "2",
+          "source_unit": "tsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": "9.0",
+          "authority": "FDC-PORTION-88669:exact",
+          "issue_ru": null,
+          "row_id": "R1-16:2"
+        },
+        {
+          "name_ru": "Перец чёрный молотый",
+          "food_code": "BLACK_PEPPER",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "1",
+          "source_unit": "tsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": "2.3",
+          "authority": "FDC-PORTION-87560:exact",
+          "issue_ru": null,
+          "row_id": "R1-16:3"
+        },
+        {
+          "name_ru": "Соль столовая",
+          "food_code": "SALT",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "1",
+          "source_unit": "tsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": "6",
+          "authority": "FDC-PORTION-92594:exact",
+          "issue_ru": null,
+          "row_id": "R1-16:4"
+        },
+        {
+          "name_ru": "Помидоры свежие нарезанные",
+          "food_code": "TOMATO",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "30",
+          "source_unit": "oz",
+          "source_mass_g": "850.485693750",
+          "recipe_input_mass_g": "850.485693750",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-16:5"
+        },
+        {
+          "name_ru": "Лук зрелый очищенный",
+          "food_code": null,
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "23",
+          "source_unit": "oz",
+          "source_mass_g": "652.039031875",
+          "recipe_input_mass_g": null,
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": "Не выбираем ONION_YELLOW или ONION_RED без обоснования сорта.",
+          "row_id": "R1-16:6"
+        },
+        {
+          "name_ru": "Кинза свежая",
+          "food_code": "CILANTRO",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "2",
+          "source_unit": "oz",
+          "source_mass_g": "56.699046250",
+          "recipe_input_mass_g": "56.699046250",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-16:7"
+        },
+        {
+          "name_ru": "Спрей для формы",
+          "food_code": null,
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "1",
+          "source_unit": "spray",
+          "source_mass_g": null,
+          "recipe_input_mass_g": null,
+          "authority": null,
+          "issue_ru": "Состав и масса не определены.",
+          "row_id": "R1-16:8"
+        },
+        {
+          "name_ru": "Филе трески свежее или замороженное",
+          "food_code": null,
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "56.25",
+          "source_unit": "oz",
+          "source_mass_g": "1594.66067578125",
+          "recipe_input_mass_g": null,
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": "COD_ATLANTIC — только кандидат: вид и состояние после размораживания не закреплены.",
+          "row_id": "R1-16:9"
+        }
+      ],
+      "all_required_input_masses_resolved": false
+    },
+    "R1-17": {
+      "source_servings": 25,
+      "rows": [
+        {
+          "name_ru": "Спрей для формы",
+          "food_code": null,
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "2",
+          "source_unit": "spray",
+          "source_mass_g": null,
+          "recipe_input_mass_g": null,
+          "authority": null,
+          "issue_ru": "Состав и масса не определены.",
+          "row_id": "R1-17:1"
+        },
+        {
+          "name_ru": "Филе тилапии",
+          "food_code": "TILAPIA_RAW",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "56.25",
+          "source_unit": "oz",
+          "source_mass_g": "1594.66067578125",
+          "recipe_input_mass_g": "1594.66067578125",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-17:2"
+        },
+        {
+          "name_ru": "Сухари цельнозерновые с приправами",
+          "food_code": null,
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "3.2",
+          "source_unit": "oz",
+          "source_mass_g": "90.7184740000",
+          "recipe_input_mass_g": null,
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": "Не обычные BREADCRUMBS.",
+          "row_id": "R1-17:3"
+        },
+        {
+          "name_ru": "Смесь прованских трав",
+          "food_code": null,
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "4",
+          "source_unit": "tsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": null,
+          "authority": null,
+          "issue_ru": "Нет точного состава/формы и массы.",
+          "row_id": "R1-17:4"
+        },
+        {
+          "name_ru": "Майонез с пониженной жирностью",
+          "food_code": "MAYONNAISE_LOW_FAT",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "0.25",
+          "source_unit": "cup",
+          "source_mass_g": null,
+          "recipe_input_mass_g": null,
+          "authority": null,
+          "issue_ru": "Exact-порция не завершена.",
+          "row_id": "R1-17:5"
+        }
+      ],
+      "all_required_input_masses_resolved": false
+    },
+    "R1-18": {
+      "source_servings": 6,
+      "rows": [
+        {
+          "name_ru": "Сельдерей свежий нарезанный",
+          "food_code": "CELERY",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "2",
+          "source_unit": "oz",
+          "source_mass_g": "56.699046250",
+          "recipe_input_mass_g": "56.699046250",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-18:1"
+        },
+        {
+          "name_ru": "Лук жёлтый свежий",
+          "food_code": "ONION_YELLOW",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "2",
+          "source_unit": "oz",
+          "source_mass_g": "56.699046250",
+          "recipe_input_mass_g": "56.699046250",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-18:2"
+        },
+        {
+          "name_ru": "Морковь свежая",
+          "food_code": "CARROT",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "2",
+          "source_unit": "oz",
+          "source_mass_g": "56.699046250",
+          "recipe_input_mass_g": "56.699046250",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-18:3"
+        },
+        {
+          "name_ru": "Перец красный сладкий",
+          "food_code": "BELL_PEPPER_RED",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "2",
+          "source_unit": "oz",
+          "source_mass_g": "56.699046250",
+          "recipe_input_mass_g": "56.699046250",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-18:4"
+        },
+        {
+          "name_ru": "Капуста цветная измельчённая, размороженная, после слива",
+          "food_code": null,
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "10",
+          "source_unit": "oz",
+          "source_mass_g": "283.495231250",
+          "recipe_input_mass_g": null,
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": "CAULIFLOWER_FROZEN не подтверждает DRAINED-форму.",
+          "row_id": "R1-18:5"
+        },
+        {
+          "name_ru": "Масло оливковое",
+          "food_code": "OLIVE_OIL",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "1.5",
+          "source_unit": "tsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": "6.75",
+          "authority": "FDC-PORTION-88669:exact",
+          "issue_ru": null,
+          "row_id": "R1-18:6"
+        },
+        {
+          "name_ru": "Соль столовая",
+          "food_code": "SALT",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "0.25",
+          "source_unit": "tsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": "1.50",
+          "authority": "FDC-PORTION-92594:exact",
+          "issue_ru": null,
+          "row_id": "R1-18:7"
+        },
+        {
+          "name_ru": "Чеснок гранулированный",
+          "food_code": null,
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "0.25",
+          "source_unit": "tsp",
+          "source_mass_g": null,
+          "recipe_input_mass_g": null,
+          "authority": null,
+          "issue_ru": "Не приравниваем объём гранул к GARLIC_POWDER.",
+          "row_id": "R1-18:8"
+        },
+        {
+          "name_ru": "Кинза свежая",
+          "food_code": "CILANTRO",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "0.5",
+          "source_unit": "oz",
+          "source_mass_g": "14.1747615625",
+          "recipe_input_mass_g": "14.1747615625",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-18:9"
+        },
+        {
+          "name_ru": "Спрей для формы",
+          "food_code": null,
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": null,
+          "source_unit": null,
+          "source_mass_g": null,
+          "recipe_input_mass_g": null,
+          "authority": null,
+          "issue_ru": "Указан в процессе, масса отсутствует.",
+          "row_id": "R1-18:10"
+        }
+      ],
+      "all_required_input_masses_resolved": false
+    },
+    "R1-21": {
+      "source_servings": 100,
+      "rows": [
+        {
+          "name_ru": "Овсяные хлопья",
+          "food_code": "OATS_ROLLED",
+          "role_ru": "Крупа",
+          "required": true,
+          "source_quantity": "6",
+          "source_unit": "lb",
+          "source_mass_g": "2721.55422",
+          "recipe_input_mass_g": "2721.55422",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-21:1"
+        },
+        {
+          "name_ru": "Соль поваренная",
+          "food_code": "SALT",
+          "role_ru": "Приправа",
+          "required": true,
+          "source_quantity": "1.875",
+          "source_unit": "oz",
+          "source_mass_g": "53.155355859375",
+          "recipe_input_mass_g": "53.155355859375",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-21:2"
+        },
+        {
+          "name_ru": "Вода питьевая для варки",
+          "food_code": "WATER",
+          "role_ru": "Жидкость",
+          "required": true,
+          "source_quantity": "41.75",
+          "source_unit": "lb",
+          "source_mass_g": "18937.4814475",
+          "recipe_input_mass_g": "18937.4814475",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-21:3"
+        }
+      ],
+      "all_required_input_masses_resolved": true
+    },
+    "R1-22": {
+      "source_servings": 100,
+      "rows": [
+        {
+          "name_ru": "Рис бурый длиннозерный пропаренный",
+          "food_code": null,
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "9.75",
+          "source_unit": "lb",
+          "source_mass_g": "4422.5256075",
+          "recipe_input_mass_g": null,
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": "Обычный RICE_BROWN не подтверждает пропаренную форму.",
+          "row_id": "R1-22:1"
+        },
+        {
+          "name_ru": "Вода холодная",
+          "food_code": "WATER",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "25.125",
+          "source_unit": "lb",
+          "source_mass_g": "11396.50829625",
+          "recipe_input_mass_g": "11396.50829625",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-22:2"
+        },
+        {
+          "name_ru": "Соль поваренная",
+          "food_code": "SALT",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "1.875",
+          "source_unit": "oz",
+          "source_mass_g": "53.155355859375",
+          "recipe_input_mass_g": "53.155355859375",
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": null,
+          "row_id": "R1-22:3"
+        },
+        {
+          "name_ru": "Масло салатное",
+          "food_code": null,
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "1.5",
+          "source_unit": "oz",
+          "source_mass_g": "42.5242846875",
+          "recipe_input_mass_g": null,
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": "Источник не называет точный вид масла.",
+          "row_id": "R1-22:4"
+        }
+      ],
+      "all_required_input_masses_resolved": false
+    },
+    "R1-23": {
+      "source_servings": 100,
+      "rows": [
+        {
+          "name_ru": "Яйца целые свежие",
+          "food_code": "EGG",
+          "role_ru": "Компонент",
+          "required": true,
+          "source_quantity": "22",
+          "source_unit": "lb",
+          "source_mass_g": "9979.03214",
+          "recipe_input_mass_g": null,
+          "authority": "DIRECT_SOURCE_WEIGHT",
+          "issue_ru": "200 штук; весовая база съедобной части не установлена. Не делить на штуки как universal piece weight.",
+          "row_id": "R1-23:1"
+        },
+        {
+          "name_ru": "Вода для покрытия яиц при варке",
+          "food_code": "WATER",
+          "role_ru": "Компонент",
+          "required": false,
+          "source_quantity": null,
+          "source_unit": null,
+          "source_mass_g": null,
+          "recipe_input_mass_g": null,
+          "authority": null,
+          "issue_ru": "Технологическая среда слива; не компонент съедаемого результата и не yield evidence.",
+          "row_id": "R1-23:2"
+        }
+      ],
+      "all_required_input_masses_resolved": false
+    }
+  },
+  "exact_portion_refs": [
+    "data/seed/nutrition_measure_evidence/evidence.json#FDC-PORTION-92594:exact",
+    "data/seed/nutrition_measure_evidence/evidence.json#FDC-PORTION-88667:exact",
+    "data/seed/nutrition_measure_evidence/evidence.json#FDC-PORTION-88669:exact",
+    "data/seed/nutrition_measure_evidence/evidence.json#FDC-PORTION-87560:exact",
+    "data/seed/nutrition_measure_evidence/evidence.json#FDC-PORTION-87558:exact",
+    "data/seed/nutrition_measure_evidence/evidence.json#FDC-PORTION-93025:exact"
+  ],
+  "excluded_portions": [
+    "FDC-PORTION-84479:estimate",
+    "FDC-PORTION-84480:estimate"
+  ],
+  "water_note": "R1-13 uses accepted cup normalization and explicit FDC-PORTION-93025:exact same-food portion; not implicit 1 ml=1 g. R1-15 fluid ounces stay unresolved. AFRS water uses direct source pounds.",
+  "normalization_ref": "scripts/build_pr4_recipe_seed.py: tsp=5 ml, tbsp=15 ml, cup=240 ml; accepted project source-measure normalization, not an SI identity of every physical household utensil."
+}

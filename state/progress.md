@@ -1245,3 +1245,48 @@ Draft delivery: [PR #31](https://github.com/Mitronomik/family-food-os/pull/31),
 OPEN / DRAFT / not merged. Evidence commit:
 `cbccc22ea87a326256891545c715259a0d67e8cf`. This publishes the blocker report,
 not a review-ready RecipeTemplate implementation. Stop for evidence review.
+
+## RECIPE-ASSEMBLY-A-R1 — bounded evidence recovery
+
+2026-09-12. Accepted BLOCKED PR31 merged under explicit user authorization;
+exact fetched merge/base `3c854f55323c895c1bdc5aabd5f1146fb6514935`.
+Branch `codex/recipe-assembly-a-r1` created from that commit.
+[Evidence package](../data/curation/recipe-assembly-a-r1/README.md) records 23
+screened donors and nine detailed reviews. Thirteen names/cards overlap earlier
+PR4 donor research and were re-inspected; ten expand it. The three PR31 deferred
+candidates were not privileged. No final three established: **Assembly A BLOCKED;
+R1 BLOCKED**, not milestone completion. PR6 COMPLETE; Assembly B / PR7+ NOT STARTED.
+
+Positive evidence: exact source weights and existing compositions for AFRS plain
+oatmeal inputs; explicit standardized-card relationships; published optional and
+substitution leads. Remaining form/composition, exact mass, verified substitution
+and default market gates are retained. No automatic food-data remediation.
+
+Executed verification:
+
+- `AI_ENABLED=false backend/.venv/bin/python scripts/audit_recipe_assembly_a_r1.py --database`:
+  PASS for evidence consistency, not publication readiness. 23 screened / nine deep /
+  zero selected; 29 resolved and 24 unresolved mass rows (includes optional/process
+  rows; unresolved values are not treated as zero).
+- Disposable accepted DB reproduces PR6-CLOSE food/recipe reports byte-for-byte;
+  185 foods, 63 compositions, 188 seals; exact natural identities checked.
+  Migration head 0029; 40 estimates non-executable; five deferred forms absent;
+  three yield blockers and historical replay preserved. Existing PR6-CLOSE CLI
+  head guard unchanged; imported measurement function used under the R1 base guard.
+- Package SHA-256 inventory, accepted-input hashes, source/provenance review
+  completeness, no-float JSON audit, exact-weight/portion arithmetic, FoodIngredient
+  resolution, Composition pins/unknowns, market policy and Russian display checks PASS.
+- Five disposable-copy negative checks rejected package drift, incorrect source
+  weight, JSON float, cross-food portion and missing required terminal input.
+  Semantic cases recomputed package checksums before testing rejection.
+- `ruff check scripts/audit_recipe_assembly_a_r1.py`: PASS.
+- `ruff format --check scripts/audit_recipe_assembly_a_r1.py`: PASS after initial formatting.
+- `git diff --check`: PASS. Scope audit allows only R1 evidence/auditor and owning
+  docs/state; unrelated `.DS_Store` excluded from delivery.
+- Source checks: 12 primary PDF downloads hashed; remaining readable primary/ICN
+  sources reviewed through web text, with actual HTML fallback URLs retained.
+  Local ICN/military TLS failures, oversized full AFRS PDF, screenshot cache misses
+  and search-only third salt-chain evidence remain explicit limitations, not passes.
+- Full backend regression NOT RUN, as authorized for research-only scope.
+
+Research PR delivery follows; stop for review, no autonomous merge or implementation.

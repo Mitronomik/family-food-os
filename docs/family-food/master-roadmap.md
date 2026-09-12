@@ -1334,3 +1334,12 @@ deterministic household planning core
 
 The final product remains a household system that repeatedly earns trust in the
 next week, not a collection of disconnected recipes, integrations or AI demos.
+
+### Assembly A supporting evidence recovery — R1 checkpoint
+
+2026-09-12: user authorized merging PR31 and a bounded research-only donor recovery
+from its exact merge commit. [R1 evidence](../../data/curation/recipe-assembly-a-r1/README.md)
+records 23 screened / nine deep-reviewed / zero final candidates; **R1 BLOCKED**.
+This is supporting work inside the unchanged Assembly A gate, not a roadmap
+reorder, milestone closure or authorization for schema. Assembly A remains
+BLOCKED pending evidence recovery; Assembly B and PR7+ remain NOT STARTED.
