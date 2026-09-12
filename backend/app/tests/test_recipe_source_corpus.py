@@ -2,7 +2,7 @@ from hashlib import sha256
 
 import pytest
 
-from app.domain.recipe_source_corpus import card_from_dict
+from app.domain.recipe_source_corpus import CorpusCaptureStatus, SourceCardInput
 from app.services.recipe_source_corpus_import import split_normative_cards
 
 
@@ -28,15 +28,16 @@ def test_split_normative_cards_preserves_each_raw_block():
         ).hexdigest()
 
 
-def test_card_validation_rejects_fabricated_hash():
+def test_domain_rejects_fabricated_hash():
     with pytest.raises(ValueError, match="raw_card_sha256"):
-        card_from_dict(
-            {
-                "source_card_code": "1.1",
-                "name_ru": "Борщ",
-                "raw_card_text": "источник",
-                "raw_card_sha256": "0" * 64,
-                "capture_status": "RAW_CAPTURED",
-                "variants": [],
-            }
+        SourceCardInput(
+            source_card_code="1.1",
+            name_ru="Борщ",
+            category_ru=None,
+            source_recipe_basis=None,
+            technology_text_ru=None,
+            raw_card_text="источник",
+            raw_card_sha256="0" * 64,
+            capture_status=CorpusCaptureStatus.RAW_CAPTURED,
+            variants=(),
         )
