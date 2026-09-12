@@ -18,6 +18,12 @@ seed or migration 0030 were added. The original target remains exactly three.
 Resume only after exact candidate/variant evidence gaps are resolved; do not
 silently start schema-only work or a new food/yield research programme.
 
+
+Draft delivery: [PR #31](https://github.com/Mitronomik/family-food-os/pull/31),
+OPEN / DRAFT / not merged. Evidence commit:
+`cbccc22ea87a326256891545c715259a0d67e8cf`. This publishes the blocker report,
+not a review-ready RecipeTemplate implementation. Stop for evidence review.
+
 ## Accepted PR6-CLOSE historical handoff
 
 The following is the delivery-time record; its OPEN/awaiting-review statements

@@ -1240,3 +1240,8 @@ Final pre-publication checks: `git diff --check` and staged whitespace PASS;
 16-file staged scope excludes runtime, production seed and `.DS_Store`.
 Local documentation verification: 71 links/anchors PASS.
 The committed auditor also reproduces the temporary baseline with `--database`: PASS.
+
+Draft delivery: [PR #31](https://github.com/Mitronomik/family-food-os/pull/31),
+OPEN / DRAFT / not merged. Evidence commit:
+`cbccc22ea87a326256891545c715259a0d67e8cf`. This publishes the blocker report,
+not a review-ready RecipeTemplate implementation. Stop for evidence review.

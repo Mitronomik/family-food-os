@@ -23,3 +23,8 @@ Updated: `2026-09-12`
 
 Evidence: [closure package](../data/curation/pr6-close/README.md).
 Verification and continuation: [progress](progress.md), [handoff](handoff.md).
+
+Draft delivery: [PR #31](https://github.com/Mitronomik/family-food-os/pull/31),
+OPEN / DRAFT / not merged. Evidence commit:
+`cbccc22ea87a326256891545c715259a0d67e8cf`. This publishes the blocker report,
+not a review-ready RecipeTemplate implementation. Stop for evidence review.
