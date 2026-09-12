@@ -55,6 +55,7 @@ recipe_source_cards_table = Table(
         ForeignKey("recipe_source_documents.id", ondelete="RESTRICT"),
         nullable=False,
     ),
+    Column("source_section_code", String, nullable=False, server_default=""),
     Column("source_card_code", String, nullable=False),
     Column("name_ru", String, nullable=False),
     Column("category_ru", String),
@@ -66,6 +67,7 @@ recipe_source_cards_table = Table(
     Column("created_at", UTCDateTime(), nullable=False),
     UniqueConstraint(
         "document_id",
+        "source_section_code",
         "source_card_code",
         "raw_card_sha256",
         name="uq_recipe_source_card_revision",
@@ -141,6 +143,7 @@ recipe_source_declared_nutrients_table = Table(
 Index(
     "idx_recipe_source_cards_document",
     recipe_source_cards_table.c.document_id,
+    recipe_source_cards_table.c.source_section_code,
     recipe_source_cards_table.c.source_card_code,
 )
 Index(
