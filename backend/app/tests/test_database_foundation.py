@@ -656,17 +656,15 @@ def test_user_mode_startup_creates_backup_before_migration_for_existing_database
     assert "nutrition_measure_evidence" in backup_tables
     assert "recipe_ingredient_nutrition_assessments" in backup_tables
     assert "recipe_ingredient_nutrition_assessment_issues" in backup_tables
-    # The backup preserves the pre-rebuild schema; only the live DB advances.
-    with sqlite3.connect(result.backup.backup_path) as backup_connection:
-        backup_version_sql = backup_connection.execute(
-            "SELECT sql FROM sqlite_master WHERE name='food_recipe_versions'"
-        ).fetchone()[0]
-    with sqlite3.connect(database_path) as migrated_connection:
-        migrated_version_sql = migrated_connection.execute(
-            "SELECT sql FROM sqlite_master WHERE name='food_recipe_versions'"
-        ).fetchone()[0]
-    assert "uq_food_recipe_versions_provenance" in backup_version_sql
-    assert "uq_food_recipe_versions_provenance" not in migrated_version_sql
+    # The backup remains at 0027; only the live DB gains the normalized vector.
+    assert "nutrient_values" not in backup_tables
+    assert "nutrition_vector_seals" not in backup_tables
+    assert {
+        "nutrient_registry_snapshots",
+        "nutrient_definitions",
+        "nutrient_values",
+        "nutrition_vector_seals",
+    } <= table_names(database_path)
     assert result.applied_migrations == [expected_migration_ids()[-1]]
     tables = table_names(database_path)
     assert tables <= (CURRENT_ALLOWED_TABLES | {"legacy_marker"})

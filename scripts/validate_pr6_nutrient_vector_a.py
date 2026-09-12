@@ -1254,7 +1254,14 @@ def main():
         type=Path,
         help="Replay zero evidence from all pinned raw files (read-only)",
     )
+    parser.add_argument(
+        "--content-only",
+        action="store_true",
+        help="Validate immutable VECTOR-A evidence in a later authorized implementation; omit the old research-only diff gate",
+    )
     args = parser.parse_args()
+    if args.content_only and args.staged:
+        parser.error("--content-only cannot validate --staged research scope")
     directory = ROOT / DIRECTORY
     artifacts = [read_json(directory / name) for name in FILES[:4]]
     summary = validate_content(*artifacts)
@@ -1270,6 +1277,11 @@ def main():
             json.dumps(summary, ensure_ascii=False, sort_keys=True, indent=2) + "\n"
         )
     validate_summary(read_json(directory / "summary.json"), summary)
+    if args.content_only:
+        print(
+            "PASS VECTOR-A content: registry, mappings, all historical observations and zero evidence"
+        )
+        return
     protected = validate_protected(staged=args.staged)
     print(
         f"PASS VECTOR-A: {summary['registry_candidate_count']} registry candidates; "

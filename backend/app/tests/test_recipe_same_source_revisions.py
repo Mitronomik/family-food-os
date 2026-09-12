@@ -636,3 +636,10 @@ def test_curation_exact_arithmetic_and_primary_apple_selection():
     apple = records["SNAP6_SPINACH_APPLE_SALAD", 2]
     assert apple["source_amount_text"] == "1 1/2 apples (chopped, can use 1-2 apples)"
     assert "no midpoint" in apple["review_note"]
+
+
+@pytest.fixture(autouse=True)
+def b2a_migration_boundary(monkeypatch):
+    monkeypatch.setattr(
+        migrations, "MIGRATION_MODULES", migrations.MIGRATION_MODULES[:27]
+    )

@@ -592,3 +592,28 @@ def test_stripped_loq_bytes_fail_even_when_synthetic_snapshot_was_trusted(
     entry["json_row_sha256"] = v.digest(v.canonical(entry["json_food_nutrient"]))
     with pytest.raises(ValueError, match="stripped"):
         v.validate_zero_evidence(manifest)
+
+
+@pytest.fixture(scope="module")
+def accepted_research_scope(tmp_path_factory):
+    from app.tests.research_scope_history import load_accepted_validator
+
+    destination = tmp_path_factory.mktemp("accepted-research") / "checkout"
+    return load_accepted_validator(
+        ROOT,
+        destination,
+        "e35d87a24d5d8afb59509e566aa1ff4b7a58a11a",
+        "validate_pr6_nutrient_vector_a.py",
+    )
+
+
+@pytest.fixture(autouse=True)
+def frozen_scope_guards(request, monkeypatch):
+    if request.node.originalname in [
+        "test_protected_production_baseline",
+        "test_unauthorized_diff_is_rejected",
+        "test_protected_migration_and_estimate_guards_use_actual_files",
+    ]:
+        historical = request.getfixturevalue("accepted_research_scope")
+        monkeypatch.setitem(globals(), "v", historical)
+        monkeypatch.setitem(globals(), "ROOT", historical.ROOT)

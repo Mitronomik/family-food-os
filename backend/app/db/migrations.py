@@ -32,6 +32,7 @@ MIGRATION_MODULES = [
     "app.migrations.versions.0025_pantry",
     "app.migrations.versions.0026_nutrition_measure_evidence",
     "app.migrations.versions.0027_recipe_same_source_revisions",
+    "app.migrations.versions.0028_normalized_nutrient_vector",
 ]
 MIGRATION_TABLE = "schema_migrations"
 

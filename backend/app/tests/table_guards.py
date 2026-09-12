@@ -48,6 +48,10 @@ CURRENT_ALLOWED_TABLES = {
     "nutrition_measure_evidence",
     "recipe_ingredient_nutrition_assessments",
     "recipe_ingredient_nutrition_assessment_issues",
+    "nutrient_registry_snapshots",
+    "nutrient_definitions",
+    "nutrition_vector_seals",
+    "nutrient_values",
     "sqlite_sequence",
 }
 
