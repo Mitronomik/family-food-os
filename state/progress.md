@@ -855,7 +855,7 @@ confirm head `0028_normalized_nutrient_vector`.
 - Canonical composition/architecture and food domain/service inspection found
   no normalized coefficient invariant. Task section 5 explicitly requires a
   decision instead of inventing normalization. Proposal and consequences:
-  [approved follow-up decision](handoff.md#approved-mass-authority-and-implemented-contract).
+  [approved follow-up decision](../docs/family-food/food-composition-and-assembly.md#pr6-composition-core--concrete-runtime-contract).
 - Changes so far are delivery-state synchronization only. Runtime/schema and
   production data are unchanged; Composition Core tests/full regression have
   not been run because Composition Core is not implemented.
@@ -1112,3 +1112,67 @@ opened into main. Implementation commit `d0a238ce32193d5884d61ee384d5eb7f242bcae
 The delivery receipt updates state only; all tested runtime, data, scripts and
 tests remain byte-identical. PR6-DATA-B2-B2-REDESIGNED is REVIEW-READY;
 **READY FOR PR6-DATA-B2-B2-REDESIGNED FINAL REVIEW**. No merge or next operation.
+
+## PR6-CLOSE — closure verification
+
+Exact main fetched before editing and again before delivery:
+`3caa95e636c02e8f34657b1b6c885f646451114c`. Authenticated GitHub metadata confirms
+PR #29 MERGED at `2026-09-12T07:42:03Z`, head
+`8a80ce26e7155ab17a5623d07294fbfd1124d9bf`. Merge and accepted head full tree:
+`f953fb4d3693c4eead77fad301342359dc8bd206`. `git diff --name-only
+ d0a238ce32193d5884d61ee384d5eb7f242bcaed 3caa95e636c02e8f34657b1b6c885f646451114c
+ -- backend launcher frontend data scripts` is empty. The accepted **3826 passed
+with AI_ENABLED=false** is reused historical PR29 evidence; no full rerun.
+
+**PR6 COMPLETE; PR6-CLOSE COMPLETE** under the
+[20-criterion closure decision](../docs/family-food/pr6-closure.md).
+Measured 30 current recipes / 189 rows / 82 required foods in the inventory;
+71 exact, 23 direct-g, 35 review-required, 60 blocked; 29 INCOMPLETE + 1 CONDITIONAL.
+No current stale profile links. All 40 estimates, nine rows for five deferred
+forms and three named yield cases remain non-executable. All 188 seals / 63
+compositions read/replay; 185 old seals / 60 old compositions preserved. All 35
+pre-upgrade and 37 final RecipeVersion input/config snapshots replay. Migration
+remains `0029_food_composition_core`. No production behavior/schema/data changes.
+
+Exact commands and retained outputs are in
+[verification.json](../data/curation/pr6-close/verification.json):
+
+- B2-B2 populated production audit, PR28 RU audit, VECTOR-A content audit,
+  VECTOR-B upgrade, Composition Core upgrade and B2-A catalogue/readiness audit:
+  **PASS**, each with `AI_ENABLED=false`, using the existing scripts without write flags.
+- Nutrition domain/application/catalogue/evidence, target/config and B2-B2 focused
+  tests: **178 passed in 11.72s**. Includes adult/child, sex/PAL, age/growth/fiber
+  boundaries, missing/unsupported inputs, explicit reference-estimate warnings,
+  deterministic precision/config and current/historical authority.
+- Composition, NutrientVector and coherent Nutrition read-scope tests:
+  **105 passed in 10.67s**. Missing yield/retention, sparse unknowns, corrupt seals,
+  immutability, explicit profile pins, stale bindings and history/snapshot behavior.
+- New read-only `scripts/audit_pr6_close.py`: **PASS**; independent regeneration
+  and comparison of all three measured JSON files. No user database or network.
+  Its first development run failed the deferred-form coverage assertion because
+  the old artifact stores null new-food fields for deferrals; nine exact reviewed
+  row identities replaced the heuristic. Production data/tests were unchanged.
+- Ruff check and format check on the audit script: **PASS**.
+
+Legacy zero differences are explicitly reviewed, not hidden: 185 nutrient
+occurrences retain v1 uncertainty; normalized composition never substitutes them
+for unknown. Distinct accepted result/config contracts provide the boundary;
+no new unified API or exact-zero policy is imposed for closure. Sparse food vectors,
+optional combinations, Russian consumer/kitchen readiness and Gate 1 remain limited
+as documented. Empty milestone blocker register does not erase those limitations.
+
+`gh` metadata access returned HTTP 401; authenticated GitHub connector provided
+independent merge verification. Routine fetch succeeded through the required Git
+metadata sandbox escalation. Unrelated `.DS_Store` remains excluded.
+
+Final documentation/scope checks: `git diff --check` PASS; **128 local links and
+anchors** checked, including every criterion's canonical reference. The check
+found an older progress link to a removed handoff anchor; it now points to the
+canonical Composition Core contract. Full changed-path allowlist excludes all
+production runtime/schema/seed/test paths and unrelated `.DS_Store`. Exact
+static results are retained in the closure package.
+
+Staged verification: `git diff --cached --check` PASS; exactly **25 intended
+files**, no backend/launcher/frontend/production seed/test changes and no
+`.DS_Store`. All 16 package file hashes verified against checksums.json.
+READY FOR PR6-CLOSE FINAL REVIEW. No merge or next operation.

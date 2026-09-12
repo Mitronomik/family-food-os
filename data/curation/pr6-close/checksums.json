@@ -1,0 +1,18 @@
+{
+  "README.md": "037d4497b471104e7514d4a07d31d6dcedba0f4dbf6a403c310e644a62796a71",
+  "blocker-register.json": "516c657e200067013c66d4d39f4fee2e31d576e071ca4775869904e57a1499f0",
+  "checks/authority-tests.txt": "bc4caf7b40bd605ebc479094f66a5dea2c75a17b736fb1e02f2a578ccf1a495d",
+  "checks/b2a.json": "24695ea8bb8a3be4826f12f6974d11eb5c87a54a1b0d76dcaaf0411cad2f980d",
+  "checks/b2b2.json": "5eabf52e198f68a74c29003b3c8a363a6ee4570ae9c1acf755c8935f189216a8",
+  "checks/composition.json": "f76b0af9282fb7044021ac7ed6080351c7196aa14940e4ffd44c5f909a2013c0",
+  "checks/focused-tests.txt": "257400273aa05a845b3ed734ac08089b94f09c15ed3f42cf4dc97f6673232443",
+  "checks/ru.json": "9a56f99924c92c9ef4900821e63a86c4f76eb6ee60988cbe4030713f23db1c9d",
+  "checks/vector-a.txt": "e23982d65c525af2d581636b4af31ce9dfc6526ae3a55d158071671a64ba38d4",
+  "checks/vector-b.json": "e44709eca5dedab603f596895c39bc2a75dd0eeb497fb4dd4e706094e1ccfecd",
+  "closure-evidence.json": "c6b6597097ba4b587e264955e5b3321bd08e6c08664d80e6afe722867730fbd8",
+  "food-readiness.json": "9ded14dd88947684296c743fe0435890ba2f9c3fb73f4dd568ef090c029272a7",
+  "merge-verification.json": "4b7fde1d900432a5d0fadd086d8cd85ba1ad3b7aceaf5d804f468de24abd98a4",
+  "recipe-readiness.json": "899bca3fc4951cd0f9a6a932e305de07bcc652661b17870980fd0b37b099a632",
+  "static-verification.json": "73c0424f5c7ea3e3796cfe757aa2c0e6dde54d9951be190e0a2a4dd8d1983590",
+  "verification.json": "b70c4bd5dd44d45f67fe0d7d7538b72f843fa7a124b5c2164884dcc2e1b285b6"
+}

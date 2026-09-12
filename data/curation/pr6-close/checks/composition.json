@@ -1,0 +1,114 @@
+{
+  "ai_dependency": 0,
+  "all_existing_table_rows_unchanged": true,
+  "atomic_composition_rows": 0,
+  "base_main_sha": "b39d9f5786796dc689bdee8ae52a90cbcc4ebdfe",
+  "composite_composition_rows": 0,
+  "composition_table_counts": {
+    "food_composition_nodes": 0,
+    "food_composition_steps": 0,
+    "food_composition_versions": 0,
+    "food_retention_profiles": 0,
+    "food_retention_values": 0,
+    "food_transformations": 0,
+    "food_yield_models": 0
+  },
+  "existing_food_ingredient_rows_changed": 0,
+  "existing_food_nutrition_profile_rows_changed": 0,
+  "existing_nutrient_registry_rows_changed": 0,
+  "existing_nutrient_value_rows_changed": 0,
+  "existing_nutrient_vector_seals_changed": 0,
+  "existing_profile_seals_verified": 183,
+  "historical_b1_bindings_changed": 0,
+  "migration_head_after": "0029_food_composition_core",
+  "migration_head_before": "0028_normalized_nutrient_vector",
+  "production_composition_rows_seeded_backfilled": 0,
+  "public_api_changes": 0,
+  "readiness_after": {
+    "assessment_issue_occurrences": {
+      "CONVERSION_ESTIMATE_NOT_ACCEPTED": 43,
+      "FOOD_FORM_MISMATCH": 17,
+      "IDENTITY_MISMATCH": 1,
+      "MEASURE_OR_SIZE_AMBIGUOUS": 37,
+      "NO_ACCEPTABLE_SOURCE": 1,
+      "PROFILE_REPRESENTATIVENESS_REVIEW": 19,
+      "SOURCE_ALTERNATIVE_WEIGHT_MISAPPLIED": 0,
+      "SOURCE_QUANTITY_AMBIGUOUS": 0,
+      "SOURCE_QUANTITY_MISMATCH": 0
+    },
+    "assessment_status_counts": {
+      "APPROVED_EXACT": 66,
+      "APPROVED_NO_CONVERSION": 21,
+      "BLOCKED": 65,
+      "REVIEW_REQUIRED_ESTIMATE": 37
+    },
+    "recipe_ingredient_rows": 189,
+    "recipes": 30,
+    "schema_version": 3,
+    "statuses": {
+      "COMPLETE": 0,
+      "COMPLETE_WITH_WARNINGS": 0,
+      "CONDITIONAL": 0,
+      "INCOMPLETE": 30
+    },
+    "warning_occurrences": {
+      "CONVERSION_ESTIMATE_NOT_ACCEPTED": 43,
+      "ESTIMATED_SOURCE": 0,
+      "ESTIMATION_STATUS_UNKNOWN": 189,
+      "MISSING_DENSITY": 0,
+      "MISSING_FOOD_INGREDIENT": 0,
+      "MISSING_MEASURE_EVIDENCE": 0,
+      "MISSING_NUTRITION_ASSESSMENT": 0,
+      "MISSING_NUTRITION_PROFILE": 0,
+      "NUTRITION_ASSESSMENT_BLOCKED": 65,
+      "NUTRITION_ASSESSMENT_PROFILE_STALE": 0,
+      "OPTIONAL_INGREDIENT": 4,
+      "UNKNOWN_FIBER": 30,
+      "UNSUPPORTED_PIECE_MASS": 0
+    }
+  },
+  "readiness_before": {
+    "assessment_issue_occurrences": {
+      "CONVERSION_ESTIMATE_NOT_ACCEPTED": 43,
+      "FOOD_FORM_MISMATCH": 17,
+      "IDENTITY_MISMATCH": 1,
+      "MEASURE_OR_SIZE_AMBIGUOUS": 37,
+      "NO_ACCEPTABLE_SOURCE": 1,
+      "PROFILE_REPRESENTATIVENESS_REVIEW": 19,
+      "SOURCE_ALTERNATIVE_WEIGHT_MISAPPLIED": 0,
+      "SOURCE_QUANTITY_AMBIGUOUS": 0,
+      "SOURCE_QUANTITY_MISMATCH": 0
+    },
+    "assessment_status_counts": {
+      "APPROVED_EXACT": 66,
+      "APPROVED_NO_CONVERSION": 21,
+      "BLOCKED": 65,
+      "REVIEW_REQUIRED_ESTIMATE": 37
+    },
+    "recipe_ingredient_rows": 189,
+    "recipes": 30,
+    "schema_version": 3,
+    "statuses": {
+      "COMPLETE": 0,
+      "COMPLETE_WITH_WARNINGS": 0,
+      "CONDITIONAL": 0,
+      "INCOMPLETE": 30
+    },
+    "warning_occurrences": {
+      "CONVERSION_ESTIMATE_NOT_ACCEPTED": 43,
+      "ESTIMATED_SOURCE": 0,
+      "ESTIMATION_STATUS_UNKNOWN": 189,
+      "MISSING_DENSITY": 0,
+      "MISSING_FOOD_INGREDIENT": 0,
+      "MISSING_MEASURE_EVIDENCE": 0,
+      "MISSING_NUTRITION_ASSESSMENT": 0,
+      "MISSING_NUTRITION_PROFILE": 0,
+      "NUTRITION_ASSESSMENT_BLOCKED": 65,
+      "NUTRITION_ASSESSMENT_PROFILE_STALE": 0,
+      "OPTIONAL_INGREDIENT": 4,
+      "UNKNOWN_FIBER": 30,
+      "UNSUPPORTED_PIECE_MASS": 0
+    }
+  },
+  "ui_changes": 0
+}

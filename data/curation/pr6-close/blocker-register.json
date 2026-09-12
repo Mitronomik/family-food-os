@@ -1,0 +1,183 @@
+{
+  "operation": "PR6-CLOSE",
+  "decision": "PR6 COMPLETE",
+  "pr6_status": "COMPLETE",
+  "decision_owner": "Explicit repository closure review; not inferred from passing tests",
+  "closure_base": "3caa95e636c02e8f34657b1b6c885f646451114c",
+  "criteria": [
+    {
+      "id": 1,
+      "criterion": "FoodIngredient calculation deterministic",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/nutrition-core.md#ingredient-calculation-and-provenance",
+      "evidence": "Direct scaling repeats with private Decimal context; focused domain tests. Determinism does not certify normalized authority.",
+      "blocker_ids": []
+    },
+    {
+      "id": 2,
+      "criterion": "RecipeVersion calculation deterministic",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/nutrition-core.md#result-semantics",
+      "evidence": "All 30 current results repeat identically; required failures propagate null totals, optional contributions remain separate.",
+      "blocker_ids": []
+    },
+    {
+      "id": 3,
+      "criterion": "Member target/config deterministic and versioned",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/nutrition-core.md#formulaconfig-and-primary-sources",
+      "evidence": "16 adult/child sex/PAL fixture outputs retained; focused tests cover growth, birthdays, missing inputs and versions.",
+      "blocker_ids": []
+    },
+    {
+      "id": 4,
+      "criterion": "AI_ENABLED=false sufficient",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/master-roadmap.md#4-immutable-architecture-rules",
+      "evidence": "All executed runtime audits/tests use AI_ENABLED=false. No network calculation or AI dependency.",
+      "blocker_ids": []
+    },
+    {
+      "id": 5,
+      "criterion": "Decimal rounding/config deterministic",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/nutrition-core.md#decimal-and-rounding-policy",
+      "evidence": "Private precision 80, HALF_UP, six-place result boundary; domain, member and composition context-independence tests pass.",
+      "blocker_ids": []
+    },
+    {
+      "id": 6,
+      "criterion": "Nutrition provenance retained",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/nutrition-core.md#ingredient-calculation-and-provenance",
+      "evidence": "Profiles, exact source versions, recipe source hashes, assessments and measure keys retained. Null retrieval instants remain null.",
+      "blocker_ids": []
+    },
+    {
+      "id": 7,
+      "criterion": "NutrientVector registry/provenance/seals immutable and replayable",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/nutrition-core.md#pr6-nutrient-vector-b--normalized-immutable-snapshots",
+      "evidence": "188 seals read; all 185 old seals unchanged. Only approved profile selector metadata retires. All 51 definitions requested in composition replay; corruption/immutability tests pass.",
+      "blocker_ids": []
+    },
+    {
+      "id": 8,
+      "criterion": "Unknown nutrient differs from zero",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/nutrition-core.md#result-semantics",
+      "evidence": "None remains distinct from Decimal zero. Complete sealed reads return None for absent codes; missing composition contributions propagate unknown. The retained legacy/normalized boundary is evaluated separately in criterion 9.",
+      "blocker_ids": []
+    },
+    {
+      "id": 9,
+      "criterion": "Unresolved source zero cannot silently acquire exact authority",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/nutrition-core.md#pr6-nutrient-vector-b--normalized-immutable-snapshots",
+      "evidence": "PASS in the explicitly separate versioned contracts: normalized imports hold unresolved zeros and composition returns UNKNOWN, never legacy fallback. All 185 retained v1 zero occurrences carry ESTIMATION_STATUS_UNKNOWN; direct results are COMPLETE_WITH_WARNINGS. They remain source-reported legacy values, not certified exact normalized zeros.",
+      "blocker_ids": []
+    },
+    {
+      "id": 10,
+      "criterion": "FoodIngredient form identity authoritative",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/food-composition-and-assembly.md#принцип-и-food-identity",
+      "evidence": "Separate approved frozen forms; all five deferred forms absent. Nine directly affected current rows have no mass/nutrients; no parent fallback executes.",
+      "blocker_ids": []
+    },
+    {
+      "id": 11,
+      "criterion": "Mass states not silently equated",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/food-composition-and-assembly.md#pr6-composition-core--concrete-runtime-contract",
+      "evidence": "Composition state continuity is enforced; row assessments block known gross/edible/form mismatches. v1 required-input totals are not cooked mass or cooked totals.",
+      "blocker_ids": []
+    },
+    {
+      "id": 12,
+      "criterion": "Composition replay pins immutable profile/vector versions",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/food-composition-and-assembly.md#pr6-composition-core--concrete-runtime-contract",
+      "evidence": "All 63 ATOMIC compositions replay against explicit profile IDs; all 60 old compositions unchanged. No mutable profile fallback.",
+      "blocker_ids": []
+    },
+    {
+      "id": 13,
+      "criterion": "Missing yield/retention explicit unknown",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/food-composition-and-assembly.md#pr6-composition-core--concrete-runtime-contract",
+      "evidence": "Three named rows remain blocked with null mass and nutrients. Production has no yield/retention facts; focused missing-yield/retention tests verify unknown propagation.",
+      "blocker_ids": []
+    },
+    {
+      "id": 14,
+      "criterion": "Row-specific exact mass or fail closed",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/nutrition-data-readiness.md#decision--pr6-data-b1-exact-evidence-and-row-binding",
+      "evidence": "71 exact and 23 direct-g assessments; all other current row masses unavailable. No global recipe density fallback.",
+      "blocker_ids": []
+    },
+    {
+      "id": 15,
+      "criterion": "Estimate cannot execute as exact authority",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/nutrition-core.md#ingredient-calculation-and-provenance",
+      "evidence": "40 current usages = 35 review-required + 5 blocked; all have null mass/nutrients. Three independently superseded usages do not relabel old evidence.",
+      "blocker_ids": []
+    },
+    {
+      "id": 16,
+      "criterion": "Stale assessment/profile binding fails closed",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/nutrition-core.md#ingredient-calculation-and-provenance",
+      "evidence": "Zero stale current links; focused stale/review replacement tests pass. Old pinned profile remains diagnostic after invalidation.",
+      "blocker_ids": []
+    },
+    {
+      "id": 17,
+      "criterion": "Historical truth remains replayable",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/nutrition-core.md#ingredient-calculation-and-provenance",
+      "evidence": "All old rows preserved; 35 pre-upgrade captured RecipeVersion input/config snapshots replay, all 37 post-upgrade snapshots replay. RecipeVersion ID alone is expressly not historical replay; consumers must retain exact snapshots/refs.",
+      "blocker_ids": []
+    },
+    {
+      "id": 18,
+      "criterion": "Downstream distinguishes authoritative/usable from incomplete/blocked without guessing",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/master-roadmap.md#pr6--nutrition-core--complete",
+      "evidence": "Existing result types/configurations distinguish FAMILY_FOOD_NUTRITION_V1 input arithmetic from FOOD_COMPOSITION_V1 requested-set authority. v1 exposes status, nullable nutrients, optional separation, exact inputs and source uncertainty. Composition exposes per-nutrient availability, mass state and pinned replay. No automatic conversion between them exists; no additional guard is required for the approved scope.",
+      "blocker_ids": []
+    },
+    {
+      "id": 19,
+      "criterion": "Unresolved current data cannot enter Planner/Serving as authoritative",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/nutrition-core.md#later-approved-target-architecture--superseding-implementation-direction",
+      "evidence": "All unresolved required current rows return null mass/nutrients and INCOMPLETE totals; optional blockers are excluded. The normalized path never falls back to legacy values. Later consumers must honor those existing contracts, source uncertainty and explicit versions; ignoring them would violate the interface, not reveal missing Nutrition truth.",
+      "blocker_ids": []
+    },
+    {
+      "id": 20,
+      "criterion": "RU/data obligations partitioned across PR6, Assembly and later gates",
+      "result": "PASS",
+      "canonical_reference": "docs/family-food/master-roadmap.md#65-pr6-arch-composition--approved-roadmap-differences",
+      "evidence": "Technical nutrition authority is PR6-owned. Russian display, market readiness, kitchen verification and gate counts remain separate explicit obligations; none waived or newly reclassified.",
+      "blocker_ids": []
+    }
+  ],
+  "blockers": [],
+  "reviewed_non_blocking_findings": [
+    {
+      "id": "LEGACY-ZERO-BOUNDARY",
+      "classification": "Accepted versioned compatibility, not an authority promotion",
+      "evidence": "closure-evidence.json:legacy_zero_boundary and legacy_numeric_normalized_unknown_occurrences",
+      "interpretation": "Preserving explicit uncertain v1 zeros is required by the accepted VECTOR-B compatibility contract. Distinct result/config types and fail-closed normalized reads already enforce the approved boundary. A unified v1/vector recipe API or automatic consumer migration is not a closure requirement. No new architecture is imposed."
+    },
+    {
+      "id": "CORPUS-INCOMPLETENESS",
+      "classification": "Safely bounded technical data",
+      "interpretation": "29 INCOMPLETE recipes, 40 estimates, nine deferred-form rows and three yield cases remain non-authoritative through existing null/status behavior. Their resolution is not required to close the Nutrition bounded context; no consumer/gate completeness is claimed."
+    }
+  ]
+}

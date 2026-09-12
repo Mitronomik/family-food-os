@@ -1,0 +1,925 @@
+{
+  "ai_dependency": 0,
+  "all_existing_rows_preserved": true,
+  "base_main_sha": "d5b5ce3fdc4ec79de5454b3ed23b1d527772c0bc",
+  "candidate_count": 7,
+  "composition_checks": [
+    {
+      "food_code": "ALMONDS_RAW",
+      "natural_reference": {
+        "food_code": "ALMONDS_RAW",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2346393",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "APPLE_CIDER_VINEGAR",
+      "natural_reference": {
+        "food_code": "APPLE_CIDER_VINEGAR",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "173469",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 2
+    },
+    {
+      "food_code": "ASPARAGUS",
+      "natural_reference": {
+        "food_code": "ASPARAGUS",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2710823",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "BANANA",
+      "natural_reference": {
+        "food_code": "BANANA",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "1105314",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "BELL_PEPPER_GREEN",
+      "natural_reference": {
+        "food_code": "BELL_PEPPER_GREEN",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2258588",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "BELL_PEPPER_RED",
+      "natural_reference": {
+        "food_code": "BELL_PEPPER_RED",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2258590",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "BLACK_PEPPER",
+      "natural_reference": {
+        "food_code": "BLACK_PEPPER",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "170931",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "BREADCRUMBS",
+      "natural_reference": {
+        "food_code": "BREADCRUMBS",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "174928",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "BREAD_WHOLE_WHEAT",
+      "natural_reference": {
+        "food_code": "BREAD_WHOLE_WHEAT",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "172688",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "BULGUR",
+      "natural_reference": {
+        "food_code": "BULGUR",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2710820",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "BUTTER_UNSALTED",
+      "natural_reference": {
+        "food_code": "BUTTER_UNSALTED",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "173430",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 4
+    },
+    {
+      "food_code": "CABBAGE_GREEN",
+      "natural_reference": {
+        "food_code": "CABBAGE_GREEN",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2346407",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 4
+    },
+    {
+      "food_code": "CABBAGE_RED",
+      "natural_reference": {
+        "food_code": "CABBAGE_RED",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2346408",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 4
+    },
+    {
+      "food_code": "CANOLA_OIL",
+      "natural_reference": {
+        "food_code": "CANOLA_OIL",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "172336",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 2
+    },
+    {
+      "food_code": "CARROT",
+      "natural_reference": {
+        "food_code": "CARROT",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2258586",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "CAULIFLOWER_FROZEN",
+      "natural_reference": {
+        "food_code": "CAULIFLOWER_FROZEN",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "170398",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "COMPLETE",
+      "vector_value_count": 33
+    },
+    {
+      "food_code": "CELERY",
+      "natural_reference": {
+        "food_code": "CELERY",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2346405",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 4
+    },
+    {
+      "food_code": "CHEESE_CHEDDAR",
+      "natural_reference": {
+        "food_code": "CHEESE_CHEDDAR",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "328637",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 4
+    },
+    {
+      "food_code": "CILANTRO",
+      "natural_reference": {
+        "food_code": "CILANTRO",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "169997",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "CINNAMON_GROUND",
+      "natural_reference": {
+        "food_code": "CINNAMON_GROUND",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "171320",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "COD_ATLANTIC",
+      "natural_reference": {
+        "food_code": "COD_ATLANTIC",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2684444",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 3
+    },
+    {
+      "food_code": "CORIANDER_SEED",
+      "natural_reference": {
+        "food_code": "CORIANDER_SEED",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "170922",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "CUMIN_GROUND",
+      "natural_reference": {
+        "food_code": "CUMIN_GROUND",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "170923",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "DILL_DRIED",
+      "natural_reference": {
+        "food_code": "DILL_DRIED",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "171322",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "EDAMAME_FROZEN",
+      "natural_reference": {
+        "food_code": "EDAMAME_FROZEN",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "168410",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "EGG",
+      "natural_reference": {
+        "food_code": "EGG",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "748967",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 4
+    },
+    {
+      "food_code": "FLOUR_WHEAT",
+      "natural_reference": {
+        "food_code": "FLOUR_WHEAT",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "790018",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "GARLIC",
+      "natural_reference": {
+        "food_code": "GARLIC",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "1104647",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "GARLIC_POWDER",
+      "natural_reference": {
+        "food_code": "GARLIC_POWDER",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "171325",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "GINGER",
+      "natural_reference": {
+        "food_code": "GINGER",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "169231",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "GREEN_ONION",
+      "natural_reference": {
+        "food_code": "GREEN_ONION",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "170005",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "HONEY",
+      "natural_reference": {
+        "food_code": "HONEY",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "169640",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 4
+    },
+    {
+      "food_code": "KALE",
+      "natural_reference": {
+        "food_code": "KALE",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "323505",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "LENTILS_DRY",
+      "natural_reference": {
+        "food_code": "LENTILS_DRY",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2644283",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 4
+    },
+    {
+      "food_code": "MINT_FRESH",
+      "natural_reference": {
+        "food_code": "MINT_FRESH",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "173475",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "OLIVE_OIL",
+      "natural_reference": {
+        "food_code": "OLIVE_OIL",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "171413",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 2
+    },
+    {
+      "food_code": "ONION_RED",
+      "natural_reference": {
+        "food_code": "ONION_RED",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "790577",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "ONION_YELLOW",
+      "natural_reference": {
+        "food_code": "ONION_YELLOW",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "790646",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "PARSLEY",
+      "natural_reference": {
+        "food_code": "PARSLEY",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "170416",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "PARSLEY_DRIED",
+      "natural_reference": {
+        "food_code": "PARSLEY_DRIED",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "170930",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "PINEAPPLE",
+      "natural_reference": {
+        "food_code": "PINEAPPLE",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2346398",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "PORK_LOIN",
+      "natural_reference": {
+        "food_code": "PORK_LOIN",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2646168",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 3
+    },
+    {
+      "food_code": "QUINOA",
+      "natural_reference": {
+        "food_code": "QUINOA",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "168874",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "RADISH",
+      "natural_reference": {
+        "food_code": "RADISH",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2747665",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "RAISINS_GOLDEN",
+      "natural_reference": {
+        "food_code": "RAISINS_GOLDEN",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "168164",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "RICE_BROWN",
+      "natural_reference": {
+        "food_code": "RICE_BROWN",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2512380",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "ROSEMARY_DRIED",
+      "natural_reference": {
+        "food_code": "ROSEMARY_DRIED",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "171333",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "SALT",
+      "natural_reference": {
+        "food_code": "SALT",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "173468",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "INCOMPLETE",
+      "vector_value_count": 0
+    },
+    {
+      "food_code": "SESAME_OIL",
+      "natural_reference": {
+        "food_code": "SESAME_OIL",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "171016",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 2
+    },
+    {
+      "food_code": "STRAWBERRY_FROZEN_UNSWEETENED",
+      "natural_reference": {
+        "food_code": "STRAWBERRY_FROZEN_UNSWEETENED",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "168173",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "COMPLETE",
+      "vector_value_count": 33
+    },
+    {
+      "food_code": "SUGAR",
+      "natural_reference": {
+        "food_code": "SUGAR",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "746784",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 3
+    },
+    {
+      "food_code": "SUNFLOWER_OIL",
+      "natural_reference": {
+        "food_code": "SUNFLOWER_OIL",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "171025",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 2
+    },
+    {
+      "food_code": "SWEET_POTATO",
+      "natural_reference": {
+        "food_code": "SWEET_POTATO",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2346404",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 4
+    },
+    {
+      "food_code": "THYME_DRIED",
+      "natural_reference": {
+        "food_code": "THYME_DRIED",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "170938",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "TILAPIA_RAW",
+      "natural_reference": {
+        "food_code": "TILAPIA_RAW",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2684442",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 3
+    },
+    {
+      "food_code": "TOMATO_CANNED_NO_SALT",
+      "natural_reference": {
+        "food_code": "TOMATO_CANNED_NO_SALT",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "170138",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "WALNUTS_RAW",
+      "natural_reference": {
+        "food_code": "WALNUTS_RAW",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "2346394",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 5
+    },
+    {
+      "food_code": "WATER",
+      "natural_reference": {
+        "food_code": "WATER",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "173647",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "INCOMPLETE",
+      "vector_value_count": 0
+    },
+    {
+      "food_code": "YOGURT_GREEK_NONFAT",
+      "natural_reference": {
+        "food_code": "YOGURT_GREEK_NONFAT",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "330137",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2026-04-30",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 4
+    },
+    {
+      "food_code": "YOGURT_PLAIN_LOW_FAT",
+      "natural_reference": {
+        "food_code": "YOGURT_PLAIN_LOW_FAT",
+        "operation": "PR6-RU-FOOD-DATA",
+        "profile_source_id": "170886",
+        "profile_source_name": "USDA_FDC",
+        "profile_source_version": "2018-04",
+        "version": 1
+      },
+      "status": "PARTIAL",
+      "vector_value_count": 4
+    }
+  ],
+  "default_food_gate_eligible_count": 3,
+  "defer_count": 5,
+  "estimate_candidates_accepted": 0,
+  "existing_assessments_changed": 0,
+  "existing_food_ingredient_count": 183,
+  "existing_recipe_rows_changed": 0,
+  "existing_recipe_versions_changed": 0,
+  "existing_vector_seals_preserved": 183,
+  "existing_vector_seals_verified_after": 183,
+  "existing_vector_seals_verified_before": 183,
+  "full_readiness_sha256_after": "d209a2598bf452952314f82569d841abf57910eae3a00afa679a71883cc92490",
+  "full_readiness_sha256_before": "d209a2598bf452952314f82569d841abf57910eae3a00afa679a71883cc92490",
+  "market_classification_counts": {
+    "RU_AVAILABLE": 73,
+    "RU_MASS_MARKET": 4,
+    "SPECIALTY_OR_UNCLEAR": 11
+  },
+  "migration_head_after": "0029_food_composition_core",
+  "migration_head_before": "0029_food_composition_core",
+  "new_atomic_composition_count": 60,
+  "new_composite_composition_count": 0,
+  "new_food_ingredient_count": 2,
+  "new_nutrient_value_count": 66,
+  "new_nutrition_profile_count": 2,
+  "new_retention_count": 0,
+  "new_transformation_count": 0,
+  "new_vector_seal_count": 2,
+  "new_yield_count": 0,
+  "package_sha256": {
+    "food-readiness.json": "215aa5128ac406a69cb598a26c400987df0bb61d21c711885c99b657665be200",
+    "market-evidence.json": "f6a43afba648f71652451f12e5e8b711afd83d19bd1d095144e51492b951661b",
+    "research-log.json": "06d314500299071906632eb2944199e7de3e12082c61deca06e02c75fe222dc6",
+    "source-manifest.json": "a1f7238a161cca8b3752e2579032293462320686bb68aeaf6304002a906bc307"
+  },
+  "population": "Accepted production seed on a disposable database; synthetic fixtures excluded.",
+  "promote_count": 2,
+  "public_api_changes": 0,
+  "readiness_after": {
+    "assessment_issue_occurrences": {
+      "CONVERSION_ESTIMATE_NOT_ACCEPTED": 43,
+      "FOOD_FORM_MISMATCH": 17,
+      "IDENTITY_MISMATCH": 1,
+      "MEASURE_OR_SIZE_AMBIGUOUS": 37,
+      "NO_ACCEPTABLE_SOURCE": 1,
+      "PROFILE_REPRESENTATIVENESS_REVIEW": 19,
+      "SOURCE_ALTERNATIVE_WEIGHT_MISAPPLIED": 0,
+      "SOURCE_QUANTITY_AMBIGUOUS": 0,
+      "SOURCE_QUANTITY_MISMATCH": 0
+    },
+    "assessment_status_counts": {
+      "APPROVED_EXACT": 66,
+      "APPROVED_NO_CONVERSION": 21,
+      "BLOCKED": 65,
+      "REVIEW_REQUIRED_ESTIMATE": 37
+    },
+    "recipe_ingredient_rows": 189,
+    "recipes": 30,
+    "schema_version": 3,
+    "statuses": {
+      "COMPLETE": 0,
+      "COMPLETE_WITH_WARNINGS": 0,
+      "CONDITIONAL": 0,
+      "INCOMPLETE": 30
+    },
+    "warning_occurrences": {
+      "CONVERSION_ESTIMATE_NOT_ACCEPTED": 43,
+      "ESTIMATED_SOURCE": 0,
+      "ESTIMATION_STATUS_UNKNOWN": 189,
+      "MISSING_DENSITY": 0,
+      "MISSING_FOOD_INGREDIENT": 0,
+      "MISSING_MEASURE_EVIDENCE": 0,
+      "MISSING_NUTRITION_ASSESSMENT": 0,
+      "MISSING_NUTRITION_PROFILE": 0,
+      "NUTRITION_ASSESSMENT_BLOCKED": 65,
+      "NUTRITION_ASSESSMENT_PROFILE_STALE": 0,
+      "OPTIONAL_INGREDIENT": 4,
+      "UNKNOWN_FIBER": 30,
+      "UNSUPPORTED_PIECE_MASS": 0
+    }
+  },
+  "readiness_before": {
+    "assessment_issue_occurrences": {
+      "CONVERSION_ESTIMATE_NOT_ACCEPTED": 43,
+      "FOOD_FORM_MISMATCH": 17,
+      "IDENTITY_MISMATCH": 1,
+      "MEASURE_OR_SIZE_AMBIGUOUS": 37,
+      "NO_ACCEPTABLE_SOURCE": 1,
+      "PROFILE_REPRESENTATIVENESS_REVIEW": 19,
+      "SOURCE_ALTERNATIVE_WEIGHT_MISAPPLIED": 0,
+      "SOURCE_QUANTITY_AMBIGUOUS": 0,
+      "SOURCE_QUANTITY_MISMATCH": 0
+    },
+    "assessment_status_counts": {
+      "APPROVED_EXACT": 66,
+      "APPROVED_NO_CONVERSION": 21,
+      "BLOCKED": 65,
+      "REVIEW_REQUIRED_ESTIMATE": 37
+    },
+    "recipe_ingredient_rows": 189,
+    "recipes": 30,
+    "schema_version": 3,
+    "statuses": {
+      "COMPLETE": 0,
+      "COMPLETE_WITH_WARNINGS": 0,
+      "CONDITIONAL": 0,
+      "INCOMPLETE": 30
+    },
+    "warning_occurrences": {
+      "CONVERSION_ESTIMATE_NOT_ACCEPTED": 43,
+      "ESTIMATED_SOURCE": 0,
+      "ESTIMATION_STATUS_UNKNOWN": 189,
+      "MISSING_DENSITY": 0,
+      "MISSING_FOOD_INGREDIENT": 0,
+      "MISSING_MEASURE_EVIDENCE": 0,
+      "MISSING_NUTRITION_ASSESSMENT": 0,
+      "MISSING_NUTRITION_PROFILE": 0,
+      "NUTRITION_ASSESSMENT_BLOCKED": 65,
+      "NUTRITION_ASSESSMENT_PROFILE_STALE": 0,
+      "OPTIONAL_INGREDIENT": 4,
+      "UNKNOWN_FIBER": 30,
+      "UNSUPPORTED_PIECE_MASS": 0
+    }
+  },
+  "registered_migration_head": "0029_food_composition_core",
+  "reject_count": 0,
+  "retail_runtime_changes": 0,
+  "ru_ready_food_count": 60,
+  "second_seed_database_identical": true,
+  "second_seed_inserts": {
+    "atomic_compositions": 0,
+    "ingredients": 0,
+    "nutrient_values": 0,
+    "profiles": 0,
+    "vector_seals": 0
+  },
+  "target_existing_food_count": 81,
+  "ui_changes": 0
+}

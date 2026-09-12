@@ -2,7 +2,9 @@
 
 Status: canonical PR6 implementation/calculation contract; engine ACCEPTED / MERGED
 in PR #18 at `7c449672c039c66b8d475064462eba2a9f6d38e6`.
-PR6 milestone NOT COMPLETE, pending data readiness / closure.
+PR6 milestone **COMPLETE** under the [PR6-CLOSE decision](pr6-closure.md),
+with explicit legacy/normalized authority and corpus limitations. Subsequent
+sections retain their labelled historical milestones; the closure owns current status.
 Version: `FAMILY_FOOD_NUTRITION_V1`. Implementation is on demand with
 `AI_ENABLED=false`; no remote formula loading or LLM calculation.
 
@@ -282,7 +284,7 @@ FoodIngredient behavior remains as above. Reproduction, exact source hashes,
 status derivation and remaining B2 blockers live in the
 [B1 decision](nutrition-data-readiness.md#decision--pr6-data-b1-exact-evidence-and-row-binding).
 
-## Verification and acceptance
+## Historical engine verification and acceptance
 
 Focused tests cover ingredient scaling and precision, aggregate failure states,
 optional rows, provenance, member equations for all four PAL categories and both
@@ -298,7 +300,7 @@ remain unauthorized. B1 and PR6-INFRA are established. B2-A establishes the
 bounded quantity correction slice below; B2-B remains NOT AUTHORIZED.
 
 
-## Current production coverage after B2-A
+## Historical production coverage after B2-A
 
 External provenance does not identify an internal RecipeVersion revision. The
 same accepted source artifact can support immutable v1 and a reviewed corrected

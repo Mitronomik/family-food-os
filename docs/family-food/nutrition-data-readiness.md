@@ -1,6 +1,9 @@
 # PR6 nutrition data readiness
 
-Status: **PR6 engine implementation ACCEPTED / MERGED; PR6 milestone NOT COMPLETE**.
+Status: **PR6 COMPLETE** under the [PR6-CLOSE decision](pr6-closure.md).
+PR29 is MERGED / delivered at `3caa95e636c02e8f34657b1b6c885f646451114c`;
+the historical programme evidence below retains its original dates and scope.
+Closure does not certify FNS consumer readiness or authorize Recipe Assembly.
 PR6-DATA-A is ACCEPTED / MERGED in PR #19 at
 `60908eb8270ef356eff8552855b4cc5d2aa9ee44`. The DATA-A findings below retain
 their historical meaning. **B1** establishes the exact evidence/binding
