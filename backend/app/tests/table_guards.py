@@ -52,6 +52,13 @@ CURRENT_ALLOWED_TABLES = {
     "nutrient_definitions",
     "nutrition_vector_seals",
     "nutrient_values",
+    "food_yield_models",
+    "food_retention_profiles",
+    "food_retention_values",
+    "food_transformations",
+    "food_composition_versions",
+    "food_composition_nodes",
+    "food_composition_steps",
     "sqlite_sequence",
 }
 

@@ -85,7 +85,10 @@ def test_registry_matches_all_approved_definitions(database, bundle):
             "SELECT bundle_json FROM nutrient_registry_snapshots"
         ).fetchone()[0]
         assert json.loads(stored) == bundle
-    assert migrations.expected_migration_ids()[-1] == MIGRATION.MIGRATION_ID
+    assert migrations.expected_migration_ids()[-2:] == [
+        MIGRATION.MIGRATION_ID,
+        "0029_food_composition_core",
+    ]
 
 
 def test_all_64_zeros_preserve_evidence_and_v1_but_never_numeric_rows(database, bundle):
@@ -386,7 +389,10 @@ def test_unknown_deployment_profile_aborts_upgrade_without_half_schema(
     with pytest.raises(ValueError, match="отдельный аудит"):
         migrations.apply_migrations(config)
     assert snapshot(config) == before
-    assert migrations.pending_migration_ids(config) == [MIGRATION.MIGRATION_ID]
+    assert migrations.pending_migration_ids(config) == [
+        MIGRATION.MIGRATION_ID,
+        "0029_food_composition_core",
+    ]
 
 
 def test_mid_backfill_failure_rolls_back_and_resume_is_deterministic(
@@ -410,7 +416,10 @@ def test_mid_backfill_failure_rolls_back_and_resume_is_deterministic(
             migrations.apply_migrations(config)
     assert len(calls) == 10
     assert snapshot(config) == before
-    assert migrations.apply_migrations(config) == [MIGRATION.MIGRATION_ID]
+    assert migrations.apply_migrations(config) == [
+        MIGRATION.MIGRATION_ID,
+        "0029_food_composition_core",
+    ]
     after = snapshot(config)
     assert all(after[name] == rows for name, rows in before.items())
     assert len(after["nutrient_values"]) == 806

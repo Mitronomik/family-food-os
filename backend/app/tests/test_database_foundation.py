@@ -656,15 +656,31 @@ def test_user_mode_startup_creates_backup_before_migration_for_existing_database
     assert "nutrition_measure_evidence" in backup_tables
     assert "recipe_ingredient_nutrition_assessments" in backup_tables
     assert "recipe_ingredient_nutrition_assessment_issues" in backup_tables
-    # The backup remains at 0027; only the live DB gains the normalized vector.
-    assert "nutrient_values" not in backup_tables
-    assert "nutrition_vector_seals" not in backup_tables
+    # The backup remains at 0028; only the live DB gains Composition Core.
     assert {
         "nutrient_registry_snapshots",
         "nutrient_definitions",
         "nutrient_values",
         "nutrition_vector_seals",
-    } <= table_names(database_path)
+    } <= backup_tables
+    composition_tables = {
+        "food_composition_versions",
+        "food_composition_nodes",
+        "food_composition_steps",
+        "food_transformations",
+        "food_yield_models",
+        "food_retention_profiles",
+        "food_retention_values",
+    }
+    assert not composition_tables & backup_tables
+    assert composition_tables <= table_names(database_path)
+    with sqlite3.connect(result.backup.backup_path) as backup_connection:
+        assert (
+            backup_connection.execute(
+                "SELECT migration_id FROM schema_migrations ORDER BY rowid DESC LIMIT 1"
+            ).fetchone()[0]
+            == "0028_normalized_nutrient_vector"
+        )
     assert result.applied_migrations == [expected_migration_ids()[-1]]
     tables = table_names(database_path)
     assert tables <= (CURRENT_ALLOWED_TABLES | {"legacy_marker"})

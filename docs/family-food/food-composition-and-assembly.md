@@ -12,10 +12,12 @@ RecipeTemplate/RecipeAssembly, российской доступностью и 
 [русский языковой контракт](russian-language-contract.md) — всеми отображаемыми
 текстами, [Master Roadmap](master-roadmap.md#5-canonical-master-sequence) — порядком.
 
-Этот changeset устанавливает документационную архитектуру. Runtime, schema,
+Исходный PR6-ARCH-COMPOSITION установил документационную архитектуру. Runtime, schema,
 миграции, production seeds, значения нутриентов, FoodIngredient, RecipeVersion,
-profiles, assessments и MeasureMassEvidence не меняются. Концептуальные имена
-ниже не определяют SQL columns, persisted schema или окончательные имена сущностей.
+profiles, assessments и MeasureMassEvidence в том PR не менялись. Концептуальные имена
+исходного архитектурного решения не определяли SQL columns, persisted schema
+или окончательные имена сущностей. Concrete runtime contract ниже фиксирует
+результат отдельно разрешённой реализации Composition Core.
 Каждый последующий implementation PR требует отдельной bounded authorization.
 
 ## Принцип и food identity
@@ -104,8 +106,10 @@ output-binding новой/stale согласно будущему versioning con
 
 Графовые проверки должны учитывать producer/output bindings вместе с обычными
 composition links: self-reference или цикл через RecipeVersion/RecipeAssembly
-также fail closed. Точный persisted binding/schema относится к отдельно
-авторизованному PR6-COMPOSITION-CORE; этот docs PR фиксирует ownership boundary.
+также fail closed. Ownership boundary остаётся обязательной. В разрешённом PR6-COMPOSITION-CORE
+реализуется самостоятельный catalogue composition; конкретный producer/output
+binding к RecipeVersion/RecipeAssembly отложен явным заданием пользователя.
+Этот PR не создаёт и не копирует producer-owned graph.
 
 ## Recursive DAG и versioning
 
@@ -194,7 +198,7 @@ state. Набор расширяется без новой database column на 
 микронутриенты. Окончательный список не фиксируется здесь. Initial canonical
 registry определён в bounded `PR6-NUTRIENT-VECTOR-A` по авторитетным
 datasets и продуктовым требованиям; см. [реестр и аудит](../../data/curation/pr6-nutrient-vector-a/README.md).
-VECTOR-B с normalized values/runtime требует отдельной авторизации.
+VECTOR-B с normalized values/runtime принят и merged в PR #26.
 
 **Unknown != zero** для каждого macro/micronutrient. Отсутствие данных не
 становится нулём ради суммы. Нельзя склеить kcal производителя, белки USDA и
@@ -371,9 +375,9 @@ ambiguities, отсутствующее mass/yield/retention evidence и cross-s
 
 Новый порядок и отдельные authorizations определяет
 [Master Roadmap](master-roadmap.md#5-canonical-master-sequence).
-PR6 — NOT COMPLETE; PR6-NUTRIENT-VECTOR — NOT COMPLETE. VECTOR-A устанавливает
-реестр и аудит без runtime/schema. VECTOR-B — NOT AUTHORIZED;
-COMPOSITION-CORE и PR7+ — UNAUTHORIZED. Рекомендуемый container для values —
+PR6 — NOT COMPLETE. VECTOR-A и VECTOR-B merged в PR #25 / #26.
+COMPOSITION-CORE отдельно авторизован 2026-09-12; реализация описана ниже.
+PR7+ — UNAUTHORIZED. Действующий container для atomic values —
 существующий FoodNutritionProfile с сохранённой identity и историей, без второго
 current-profile selector. Отсутствие value row означает unknown только в полном
 атомарно опубликованном snapshot. Числовой `0` означает source-reported zero;
@@ -392,3 +396,105 @@ provenance и approved import policy. Все 64 исследованных ну�
 | Russian catalogue drift | Timestamped curation evidence; позже Retail live snapshots. |
 | Recipe generator becomes LLM | Детерминированные templates/rules; optional AI отдельно; kitchen/culinary validation не выводится из расчёта. |
 | Localization leakage | Обязательный русский display layer, запрет English fallback, будущие automated leakage gates. |
+
+
+## PR6-COMPOSITION-CORE — concrete runtime contract
+
+**DECISION — 2026-09-12, explicitly approved after preflight:** exact composition
+is **mass-authoritative**. Each node persists an exact positive finite Decimal
+`input_mass_g` and the exact child composition version ID. Total input mass is
+the deterministic exact sum of node masses. There are no persisted normalized
+fractions and no `sum(fractions) == 1` invariant. Ratios such as `1/3` are never
+approximated into authoritative component fractions. This resolves the task's
+reference to an undefined normalization invariant; it supersedes the unapproved
+fraction proposal recorded during preflight.
+
+`FoodCompositionVersion` belongs to FoodIngredient, with immutable UUID and
+positive version number unique within that food. `ATOMIC` pins exactly one
+existing FoodNutritionProfile/sealed vector; `COMPOSITE` pins ordered node IDs,
+child version IDs, input masses and their explicit child-output mass states.
+ATOMIC is the direct-profile calculation path; a declared-only product may use
+its own authoritative direct profile, but no declaration parsing or inferred
+quantitative graph is introduced. No second food identity or nutrient registry
+is created. Steps pin ordered transformation version IDs.
+
+`RAW`, `INPUT`, `DRAINED`, `COOKED`, `YIELDED`, `GROSS_PURCHASE`,
+`PREPARED_PRE_COOK`, `DISCARD` and `SERVING` are explicit internal mass-state
+codes. The latter codes represent mass concepts only; they do not implement
+Serving or other future contexts. Each node's state must match its child's
+calculated output state. Composite `input_state` describes the combined input
+basis; it does not relabel individual child foods. Consecutive transformation
+input/output states and yield/retention evidence states must agree. There is
+no global transition matrix and no automatic raw/edible/cooked conversion.
+
+A transformation retains immutable ID/version, process type, input/output
+states and source/version/evidence/review references. Optional YieldModel and
+NutrientRetentionProfile references are pinned. Yield must be finite positive
+Decimal. Sparse retention factors reference the existing canonical nutrient
+codes; they are finite nonnegative Decimal with no arbitrary upper bound.
+Each factor also retains its own evidence/review reference. Required absence
+is represented explicitly rather than granting an implicit factor of one.
+Every applied transformation requires yield to calculate output mass, including
+an unchanged-mass process (reviewed factor `1`). Every requested nutrient needs
+its own retention factor to declare the transformed amount known.
+
+`CompositionCalculator.calculate(root_version_id, nutrient_codes=...)` is the
+single driver-independent entry point for future consumers. The nonempty,
+explicit requested nutrient set defines result completeness, without expanding
+the sparse registry into a dense matrix. It reads full sealed atomic vectors,
+checks canonical definition/unit/registry compatibility, aggregates child nutrient
+amount × node input mass / child output mass, then separately multiplies nutrient
+amounts by retention and output mass by yield. It never persists these derived
+ratios or calculated vectors as new base nutrient authority.
+
+The versioned calculation configuration is `FOOD_COMPOSITION_V1`. Finite source
+mass sums and products use sufficient private Decimal precision to remain exact.
+Division uses a private precision of 80 with `ROUND_HALF_UP`, independent of
+caller precision, rounding, flags and traps. Following the existing Nutrition
+output convention, nutrient amounts/concentrations round once to six places at
+the root result boundary. Recursive child results are not quantized. Component
+masses and calculated output masses are not quantized; intermediate amount and
+mass evidence is retained. Six-place result representation does not certify
+measurement accuracy or promote estimated/unreviewed source observations.
+
+Result semantics for the explicitly requested set:
+
+- `COMPLETE`: all requested nutrient amounts and output concentrations available.
+- `PARTIAL`: at least one requested amount/concentration available and at least
+  one unavailable; known values do not include unknown child contributions.
+- `INCOMPLETE`: no requested amount/concentration available, including unknown
+  output mass. Known input or retained amounts remain diagnostic evidence.
+
+Each result nutrient carries amount and concentration or `None`, plus explicit
+`AVAILABLE`/`UNKNOWN` availability. Missing input contributions and retention
+never become zero; a reviewed zero retention remains an explicit numeric zero.
+Missing yield leaves output mass/concentration unknown. Structural corruption,
+missing pinned dependencies, incompatible states/definitions, cycles and unavailable
+or corrupt atomic vectors fail closed with exceptions rather than an empty
+apparently authoritative vector. Stable issue codes accompany sparse unknowns.
+
+Replay contains the calculation version, request set, all composition snapshots,
+node/step identities and masses, atomic profile IDs and full vector provenance,
+registry identity, transformations, yield/retention snapshots, ordered stages and
+issues. Mutable `is_current` profile metadata is excluded. No timestamp or random
+identity is created during calculation. Iterative DAG traversal is cycle-safe
+without a Python recursion-depth limit; shared children remain valid.
+
+Migration `0029_food_composition_core` creates seven empty tables: composition
+versions/nodes/steps, transformations, yield models, retention profiles/values.
+Repositories use synchronous SQLAlchemy Core on the project UoW connection and
+never commit. Nodes/steps/factors are inserted before their owning snapshot;
+deferred FKs prevent committing an unpublished set. Owning snapshots check row
+counts; readers also verify deterministic SHA-256 over complete domain snapshots.
+SQL triggers forbid UPDATE/DELETE/REPLACE and inserts after publication, including
+replacement via alternate unique keys. SQL recursive cycle guards complement
+build-time full-DAG validation and runtime defense. The nutrient vector seal FK
+and profile-owner validation bind atomic food/profile identity.
+
+No production composition/yield/retention data is seeded or backfilled. Migration
+uses the existing transactional runner, registered lineage/table inventories and
+native backup/restore contract. Injected failure rolls back schema/data/marker;
+rerun is deterministic. Successful deployment rollback uses a pre-upgrade backup,
+not deletion of historical composition truth. Nutrition v1, B1 bindings and
+VECTOR-B registry/values/seals remain unchanged. No public API/UI or Recipe
+Assembly implementation is added. PR6 remains NOT COMPLETE.

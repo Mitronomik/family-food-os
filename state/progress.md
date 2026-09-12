@@ -832,3 +832,109 @@ implementation commit `265aa247726d7520a7914d16ecabe6c607419f34` pushed on
 `codex/pr6-nutrient-vector-b`. This delivery receipt changes state documents only;
 verified runtime/test bytes are unchanged. Local `gh` returned HTTP 401; Git push
 and the connected GitHub API succeeded. No publication blocker remains.
+
+## PR6-COMPOSITION-CORE preflight
+
+Executed 2026-09-12 on fetched `origin/main`
+`b39d9f5786796dc689bdee8ae52a90cbcc4ebdfe` (PR #26 merge).
+`git fetch origin main` succeeded. Local `main` was stale; created
+`codex/pr6-composition-core` directly from the verified remote base, preserving
+unrelated `.DS_Store`. Runner registration and the disposable-database audit
+confirm head `0028_normalized_nutrient_vector`.
+
+- `AI_ENABLED=false backend/.venv/bin/python scripts/audit_pr6_nutrient_vector_b.py
+  > /private/tmp/pr6-composition-core-baseline.json`: PASS, exit 0.
+  This reruns the existing 0027 → 0028 audit on temporary seeded databases;
+  its embedded VECTOR-B base SHA describes that older migration, not this task.
+- Re-measured baseline: 51 definitions / 183 profiles / 806 values;
+  30 current recipes / 189 ingredient rows / 30 INCOMPLETE;
+  66 APPROVED_EXACT / 21 APPROVED_NO_CONVERSION /
+  37 REVIEW_REQUIRED_ESTIMATE / 65 BLOCKED. All 43 estimates remain
+  non-executable. The audit verifies unchanged prior tables/readiness and clean
+  foreign keys. No developer or real-user database is opened.
+- Canonical composition/architecture and food domain/service inspection found
+  no normalized coefficient invariant. Task section 5 explicitly requires a
+  decision instead of inventing normalization. Proposal and consequences:
+  [approved follow-up decision](handoff.md#approved-mass-authority-and-implemented-contract).
+- Changes so far are delivery-state synchronization only. Runtime/schema and
+  production data are unchanged; Composition Core tests/full regression have
+  not been run because Composition Core is not implemented.
+- `git diff --check` and changed Markdown local file-link validation: PASS.
+
+Implementation and PR delivery remain pending the normalization decision.
+PR6 is NOT COMPLETE; no merge or later milestone is authorized.
+
+
+## PR6-COMPOSITION-CORE verification
+
+The user explicitly resolved the preflight normalization ambiguity: exact
+component `input_mass_g` is authoritative; no normalized fractions are persisted.
+Implementation uses verified base `b39d9f5786796dc689bdee8ae52a90cbcc4ebdfe`
+(PR #26 merged), branch `codex/pr6-composition-core`, migration 0028 → 0029.
+
+[Reproducible measured evidence](../data/curation/pr6-composition-core/README.md):
+all seven new table counts are zero; all existing rows/readiness unchanged;
+all 183 vector seals verified; 30 recipes / 189 rows / 30 INCOMPLETE;
+66/21/37/65 classifications and 43 non-executable estimates. No production
+composition data is invented, and no existing profile/vector/B1 binding changes.
+
+Executed checks (2026-09-12, runtime tests with `AI_ENABLED=false`):
+
+- `backend/.venv/bin/python scripts/audit_pr6_composition_core.py`: PASS.
+  Real 0028 → 0029, all prior row values compared, full before/after readiness,
+  every vector seal read, clean foreign keys, zero production composition rows.
+- `backend/.venv/bin/python -m pytest -q backend/app/tests/test_food_composition.py
+  backend/app/tests/test_food_composition_migration.py`: **59 passed in 7.56s**.
+  Includes direct/two/multi-hop cycle rejection, shared DAG reuse, corrupted
+  persisted cycles, snapshot digest corruption, sparse unknown/zero distinctions,
+  independent yield/retention, explicit mass-state chains, profile/child/process
+  historical replay, physical database insertion-order independence, caller
+  Decimal context/traps, exact Decimal roundtrip, rollback and deferred-FK failure.
+- Migration/backup/rebuild corrections: **64 passed in 7.58s**. Existing assertions
+  retain their exact scope and now enumerate migration 0029 and its seven tables.
+  Injected mid-migration failure restores schema, existing data and marker;
+  deterministic resume and native backup schema preservation are tested.
+- `backend/.venv/bin/python scripts/validate_pr6_nutrient_vector_a.py --content-only`:
+  PASS, including registry, mappings, historical observations and zero evidence.
+- `ruff check` and `ruff format --check` on all **21 changed Python files**: PASS.
+- `mypy --follow-imports=silent --ignore-missing-imports --check-untyped-defs
+  --python-executable backend/.venv/bin/python` on all **9 new/affected runtime
+  files** (domain, services/contracts, Core adapters/scopes/metadata, 0029,
+  migration runner and lineage): PASS.
+
+The first full backend/launcher run finished with **3751 passed, 1 failed in
+622.58s**. The remaining failure was
+`test_user_mode_startup_creates_backup_before_migration_for_existing_database`:
+its backup expectation still described 0027. Updated it to assert an intact 0028
+backup (including VECTOR-B), with all seven composition tables only in the live
+0029 database. Immediate targeted rerun: **1 passed in 0.65s**.
+
+Final full-suite verification uses frozen runtime/migration/adapter/audit bytes.
+During that run, only the focused caller-context fixture was strengthened with
+an explicit recurring division (`12 / 1.3`), precision 2 and an Inexact trap.
+The complete strengthened Composition Core suite passed separately (59 tests,
+above); runtime bytes remained unchanged. No weaker assertion or skipped test
+was introduced.
+
+Final full command:
+`AI_ENABLED=false backend/.venv/bin/python -m pytest -q backend/app/tests launcher/tests`
+— **3758 passed in 606.21s (10:06), zero skips**. The strengthened focused
+suite separately passed 59 tests against the same runtime. All 9 runtime files,
+migrations, adapters and audit bytes were checked unchanged against hashes taken
+at full-suite launch. All required checks are green.
+
+`origin/main` fetched again before delivery: still the exact base SHA above.
+Staged scope contains 29 task files, no `.DS_Store`, production seeds, secrets,
+local databases or environment files. `git diff --check`, staged diff/check and
+40 relevant local Markdown file links/new anchors PASS. Nutrition v1 runtime,
+VECTOR-B runtime/registry and existing seed artifacts remain byte-identical to
+base; no frontend/API files changed.
+PR6 remains NOT COMPLETE. No autonomous merge or next-operation authorization.
+
+
+Delivery: [PR #27](https://github.com/Mitronomik/family-food-os/pull/27) opened into `main`,
+branch `codex/pr6-composition-core`, implementation commit
+`657c692ce5ab8e49719ed9a164cda224cdfb296d`. Git push and the connected GitHub
+create-PR API succeeded. PR is ready for review, not merged. The delivery-receipt
+commit changes docs/state only; all verified runtime/test/audit bytes remain
+unchanged. No further implementation scope is authorized.

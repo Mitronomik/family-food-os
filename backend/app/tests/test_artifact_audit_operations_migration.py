@@ -33,7 +33,8 @@ FOOD_RECIPE_MIGRATION_ID = "0024_food_recipe_catalogue"
 PANTRY_MIGRATION_ID = "0025_pantry"
 NUTRITION_MIGRATION_ID = "0026_nutrition_measure_evidence"
 RECIPE_REVISION_MIGRATION_ID = "0027_recipe_same_source_revisions"
-HEAD_MIGRATION_ID = "0028_normalized_nutrient_vector"
+VECTOR_MIGRATION_ID = "0028_normalized_nutrient_vector"
+HEAD_MIGRATION_ID = "0029_food_composition_core"
 TABLE = "artifact_audit_operations"
 
 
@@ -170,6 +171,7 @@ def test_a_database_at_0019_reports_0020_then_0021_pending(tmp_path):
         PANTRY_MIGRATION_ID,
         NUTRITION_MIGRATION_ID,
         RECIPE_REVISION_MIGRATION_ID,
+        VECTOR_MIGRATION_ID,
         HEAD_MIGRATION_ID,
     ]
 
@@ -190,6 +192,7 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         PANTRY_MIGRATION_ID,
         NUTRITION_MIGRATION_ID,
         RECIPE_REVISION_MIGRATION_ID,
+        VECTOR_MIGRATION_ID,
         HEAD_MIGRATION_ID,
     ]
     assert snapshot(database_path) == before
@@ -216,6 +219,13 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         "nutrient_definitions",
         "nutrition_vector_seals",
         "nutrient_values",
+        "food_yield_models",
+        "food_retention_profiles",
+        "food_retention_values",
+        "food_transformations",
+        "food_composition_versions",
+        "food_composition_nodes",
+        "food_composition_steps",
     }
 
 
@@ -579,6 +589,7 @@ def test_user_mode_startup_backs_up_before_applying_0020(monkeypatch, tmp_path):
         PANTRY_MIGRATION_ID,
         NUTRITION_MIGRATION_ID,
         RECIPE_REVISION_MIGRATION_ID,
+        VECTOR_MIGRATION_ID,
         HEAD_MIGRATION_ID,
     ]
     assert result.backup is not None
