@@ -1339,7 +1339,10 @@ next week, not a collection of disconnected recipes, integrations or AI demos.
 
 2026-09-12: user authorized merging PR31 and a bounded research-only donor recovery
 from its exact merge commit. [R1 evidence](../../data/curation/recipe-assembly-a-r1/README.md)
-records 23 screened / nine deep-reviewed / zero final candidates; **R1 BLOCKED**.
+records 23 screened / nine deep-reviewed / one individually ready (R1-21) /
+zero selected final candidates after the authorized market-policy correction;
+**R1 BLOCKED**. Existing basic-commodity exceptions and specific product reasons
+apply independently of the unchanged availability classification.
 This is supporting work inside the unchanged Assembly A gate, not a roadmap
 reorder, milestone closure or authorization for schema. Assembly A remains
 BLOCKED pending evidence recovery; Assembly B and PR7+ remain NOT STARTED.

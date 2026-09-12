@@ -8,12 +8,15 @@ Updated: `2026-09-12`.
 - Branch: `codex/recipe-assembly-a-r1`.
 - RECIPE-ASSEMBLY-A = BLOCKED pending R1 evidence recovery.
 - RECIPE-ASSEMBLY-A-R1 = current authorized operation; research outcome BLOCKED,
-  evidence prepared for PR review. 23 screened, nine deep-reviewed, zero final.
+  CORRECTION authorized on the same branch/PR32. Canonical market interpretation
+  corrected: 23 screened, nine deep-reviewed, one individually ready (R1-21),
+  zero selected final three. No new donor search.
 - RECIPE-ASSEMBLY-B = NOT STARTED / unauthorized.
 - PR7+ = NOT STARTED / unauthorized.
 
 [Evidence and residual blockers](../data/curation/recipe-assembly-a-r1/README.md).
-Next allowed action is review/delivery of this bounded evidence PR. No automatic
+Next allowed action is verification/delivery of this correction to existing PR32,
+then final re-review. No automatic
 food-data fixes or RecipeTemplate schema/seed. No migration 0030, runtime change,
 production food/profile/vector/composition/RecipeVersion mutation or yield work.
 Migration stays 0029; 40 estimates, five deferred forms and three yield blockers

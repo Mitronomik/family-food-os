@@ -52,6 +52,11 @@ def git(*args):
 
 def scope_audit():
     require(git("merge-base", BASE, "HEAD") == BASE, "Wrong accepted merge ancestor")
+    require(git("rev-parse", "origin/main") == BASE, "Exact main base changed")
+    require(
+        git("merge-base", REVIEWED_HEAD, "HEAD") == REVIEWED_HEAD,
+        "Wrong correction ancestor",
+    )
     allowed = {
         "scripts/audit_recipe_assembly_a_r1.py",
         "state/current-focus.md",
@@ -121,6 +126,468 @@ def database_audit(package):
     )
 
 
+REVIEWED_HEAD = "4741e91710e17b86dbc25c5e69ca58ea36c5c635"
+BASIC_COMMODITIES = {
+    "SALT",
+    "SUGAR",
+    "OLIVE_OIL",
+    "SUNFLOWER_OIL",
+    "BLACK_PEPPER",
+    "PARSLEY_DRIED",
+    "GARLIC_POWDER",
+    "CUMIN_GROUND",
+}
+PROTECTED = (
+    "quantity-authority.json",
+    "composition-readiness.json",
+    "rights-review.json",
+    "kitchen-verification.json",
+    "ru-familiarity.json",
+    "substitution-compatibility.json",
+    "baseline-verification.json",
+    "catalogue-inventory.json",
+)
+
+
+def reviewed(name):
+    return json.loads(
+        git("show", f"{REVIEWED_HEAD}:data/curation/recipe-assembly-a-r1/{name}")
+    )
+
+
+def default_gate(review):
+    """Use independent reviewed facts, not the classification as a verdict."""
+    if review["market_classification"] == "SPECIALTY_OR_UNCLEAR":
+        return "NOT_PASSED"
+    if not review["exact_form_resolved"] or not review["ordinary_retail_supported"]:
+        return "NOT_PASSED"
+    if review["default_dependency_risk"] == "RARE_DEPENDENCY":
+        return (
+            "PASS"
+            if review["substitution_required"] and review["substitution_path_reviewed"]
+            else "NOT_PASSED"
+        )
+    if review["default_dependency_risk"] != "LOW":
+        return "NOT_PASSED"
+    supported_reason = (
+        review["market_classification"] == "RU_MASS_MARKET"
+        or review["commodity_exception_applicable"]
+        or bool(review["specific_product_reason"])
+    )
+    return "PASS" if supported_reason else "NOT_PASSED"
+
+
+def candidate_gates(docs):
+    quantities = docs["quantity-authority.json"]["candidate_batches"]
+    composition = {
+        f["food_code"]: f for f in docs["composition-readiness.json"]["foods"]
+    }
+    kitchen = {
+        r["template_candidate_code"]: r
+        for r in docs["kitchen-verification.json"]["records"]
+    }
+    rights = {r["source_id"]: r for r in docs["rights-review.json"]["donors"]}
+    familiar = {
+        r["template_candidate_code"]: r
+        for r in docs["ru-familiarity.json"]["candidates"]
+    }
+    terminal = docs["market-evidence.json"]["candidate_terminal_inputs"]
+    old = {
+        r["template_candidate_code"]: r
+        for r in reviewed("candidate-funnel.json")["candidates"]
+    }
+    gates = {}
+    for code, candidate in old.items():
+        g = {
+            "rights": "PASS" if rights[code]["decision"] == "ACCEPT" else "NOT_PASSED",
+            "kitchen_scope": "PASS"
+            if kitchen[code]["status"] == "KITCHEN_VERIFIED"
+            else "NOT_PASSED",
+        }
+        for field in (
+            "food_form_composition",
+            "exact_input_mass",
+            "ru_familiarity",
+            "market_default",
+            "source_template_scope",
+            "ordered_process",
+            "russian_display",
+            "transformation_dependencies",
+        ):
+            g[field] = "NOT_REVIEWED"
+        if code in quantities:
+            rows = [r for r in quantities[code]["rows"] if r["required"]]
+            ts = terminal[code]
+            g.update(
+                food_form_composition="PASS"
+                if all(
+                    r["food_code"]
+                    and composition.get(r["food_code"], {}).get("version")
+                    for r in rows
+                )
+                and all(r["source_form_resolved"] for r in ts)
+                else "NOT_PASSED",
+                exact_input_mass="PASS"
+                if all(r["recipe_input_mass_g"] is not None for r in rows)
+                else "NOT_PASSED",
+                ru_familiarity="PASS"
+                if familiar[code]["reviewer_decision"] == "RU_RECIPE_FAMILIAR"
+                else "NOT_PASSED",
+                market_default="PASS"
+                if all(default_gate(r) == "PASS" for r in ts)
+                else "NOT_PASSED",
+                source_template_scope="PASS",
+                ordered_process="PASS",
+                russian_display="PASS"
+                if all(re.search(r"[А-Яа-яЁё]", r["name_ru"]) for r in rows)
+                else "NOT_PASSED",
+                transformation_dependencies="PASS",
+            )
+        else:
+            # Preserve the already evidenced screen failure. No invented complete terminal inventory.
+            require(candidate["remaining_blockers"], "Screen evidence lost")
+            g["food_form_composition"] = "NOT_PASSED"
+        gates[code] = g
+    return gates
+
+
+def residuals(gates, market):
+    deep = set(market["candidate_terminal_inputs"])
+    rows = []
+    for key, title in (
+        ("food_form_composition", "Точная форма / Composition"),
+        ("exact_input_mass", "Точная входная масса"),
+        ("kitchen_scope", "Применимая кухонная проверка опубликованного варианта"),
+        ("rights", "Права конкретного донора"),
+        ("ru_familiarity", "Привычность семейства для российской аудитории"),
+    ):
+        affected = sorted(c for c in deep if gates[c][key] != "PASS")
+        rows.append(
+            dict(
+                code=key.upper(),
+                name_ru=title,
+                scope="INDIVIDUAL",
+                candidates=affected,
+                deep_reviewed_affected=len(affected),
+                selected_final_three_affected=0,
+            )
+        )
+    # Unresolved identity is already counted under form/composition; do not duplicate it as rarity.
+    affected = sorted(
+        c
+        for c, ts in market["candidate_terminal_inputs"].items()
+        if any(
+            t["default_dependency_risk"] == "UNRESOLVED_PRODUCT_EVIDENCE" for t in ts
+        )
+    )
+    rows.append(
+        dict(
+            code="FORM_SPECIFIC_MARKET_EVIDENCE",
+            name_ru="Точное рыночное исполнение маргарина/майонеза не подтверждено наблюдением",
+            scope="INDIVIDUAL",
+            candidates=affected,
+            deep_reviewed_affected=len(affected),
+            selected_final_three_affected=0,
+            reason="Не число сетей; 72% против retained 80% и отсутствие подтверждения оливкового масла. Неявные формы/спреи уже учтены в FOOD_FORM_COMPOSITION.",
+        )
+    )
+    rows.append(
+        dict(
+            code="VERIFIED_VARIANT_SUBSTITUTION",
+            name_ru="Нет проверенной замены для совокупного требования трёх семейств",
+            scope="FINAL_THREE_FEATURE",
+            candidates=[],
+            deep_reviewed_affected=0,
+            selected_final_three_affected=0,
+            reviewed_substitution_provider_count=0,
+            target_family_count=3,
+            reason="Не индивидуальный запрет всем RU_AVAILABLE. Требование хотя бы одной замены относится к будущей финальной тройке.",
+        )
+    )
+    return rows
+
+
+def market_and_readiness_audit(docs):
+    market = docs["market-evidence.json"]
+    originals = reviewed("market-evidence.json")
+    old_foods = {r["food_code"]: r for r in originals["foods"]}
+    retained_foods = {
+        r["food_code"]: r
+        for r in read(ROOT / "data/curation/pr6-ru-food-data/food-readiness.json")[
+            "rows"
+        ]
+    }
+    observations = {
+        r["id"]: r
+        for r in read(ROOT / "data/curation/pr6-ru-food-data/market-evidence.json")[
+            "observations"
+        ]
+    }
+    source_ids = {r["source_id"] for r in docs["source-manifest.json"]["sources"]}
+    food_reviews = {r["food_code"]: r for r in market["foods"]}
+    require(
+        BASIC_COMMODITIES | {"WATER", "CANOLA_OIL", "SESAME_OIL"}
+        <= food_reviews.keys(),
+        "Commodity review coverage lost",
+    )
+    required_fields = (
+        "market_classification",
+        "ordinary_retail_supported",
+        "commodity_exception_applicable",
+        "specific_product_reason",
+        "default_dependency_risk",
+        "substitution_required",
+        "substitution_path_reviewed",
+        "default_gate_result",
+        "evidence_refs",
+        "decision_reason",
+    )
+    all_reviews = market["foods"] + [
+        t for ts in market["candidate_terminal_inputs"].values() for t in ts
+    ]
+    for r in all_reviews:
+        require(
+            all(
+                type(r[k]) is bool
+                for k in (
+                    "exact_form_resolved",
+                    "ordinary_retail_supported",
+                    "commodity_exception_applicable",
+                    "substitution_required",
+                    "substitution_path_reviewed",
+                )
+            ),
+            "Market dimensions must be explicit booleans",
+        )
+        require(
+            r["default_dependency_risk"]
+            in {
+                "LOW",
+                "RARE_DEPENDENCY",
+                "UNRESOLVED_FORM",
+                "UNRESOLVED_PRODUCT_EVIDENCE",
+            },
+            "Unknown dependency-risk decision",
+        )
+        require(
+            all(k in r for k in required_fields), "Missing explicit market dimension"
+        )
+        require(
+            r["decision_reason"] and r["evidence_refs"] and r["policy_refs"],
+            "Unreasoned market decision",
+        )
+        code = r["food_code"]
+        ordinary_evidence = code == "WATER" or any(
+            ref in observations
+            and observations[ref]["food_code"] == code
+            and observations[ref]["status"] == "AVAILABLE"
+            for ref in r["evidence_refs"]
+        )
+        require(
+            r["ordinary_retail_supported"] == ordinary_evidence,
+            "Ordinary-retail flag contradicts retained same-food evidence",
+        )
+        if r["exact_form_resolved"]:
+            require(
+                code in retained_foods
+                and r["exact_form"] == retained_foods[code]["food_form"],
+                "Commodity/input exact form unresolved",
+            )
+        for ref in r["evidence_refs"]:
+            require(
+                ref in observations or ref in source_ids, "Unretained market evidence"
+            )
+        if r["commodity_exception_applicable"]:
+            require(
+                r["exact_form_resolved"] and r["commodity_exception_reason"],
+                "Commodity exception without exact identity/reason",
+            )
+            if r["commodity_exception_kind"] == "TAP_WATER":
+                require(
+                    code == "WATER" and "WATER:EXCEPTION" in r["evidence_refs"],
+                    "Incorrect water exception",
+                )
+            else:
+                require(
+                    r["commodity_exception_kind"] == "BASIC_COMMODITY"
+                    and code in BASIC_COMMODITIES,
+                    "Blanket oil/spice commodity exception",
+                )
+                require(
+                    any(
+                        ref in observations
+                        and observations[ref]["food_code"] == code
+                        and observations[ref]["status"] == "AVAILABLE"
+                        for ref in r["evidence_refs"]
+                    ),
+                    "Commodity ordinary evidence absent",
+                )
+        else:
+            require(
+                r["commodity_exception_kind"] == "NONE"
+                and r["commodity_exception_reason"] is None,
+                "Inconsistent exception",
+            )
+        if code == "WATER":
+            require(
+                r["commodity_exception_applicable"]
+                and r["commodity_exception_kind"] == "TAP_WATER"
+                and default_gate(r) == "PASS",
+                "Water exception lost",
+            )
+        if code == "SALT" and r["exact_form_resolved"]:
+            require(
+                r["commodity_exception_applicable"]
+                and r["default_dependency_risk"] == "LOW",
+                "Table salt exception lost",
+            )
+        if r["substitution_required"]:
+            require(
+                r["default_dependency_risk"] == "RARE_DEPENDENCY"
+                and r["substitution_policy_reason"] == "DOCUMENTED_RARE_REQUIRED_INPUT",
+                "Substitution without explicit rarity policy reason",
+            )
+        else:
+            require(
+                r["default_dependency_risk"] != "RARE_DEPENDENCY"
+                and r["substitution_policy_reason"] is None,
+                "Rare dependency escaped substitution policy",
+            )
+        require(
+            not r["substitution_path_reviewed"],
+            "Correction created substitution authority",
+        )
+        require(
+            r["default_gate_result"] == default_gate(r),
+            "Default gate contradicts explicit facts (classification alone is insufficient)",
+        )
+    for code, f in food_reviews.items():
+        cls = (
+            old_foods[code]["classification"]
+            if code in old_foods
+            else retained_foods[code]["market_classification"]
+        )
+        require(f["market_classification"] == cls, "Market classification changed")
+    require(
+        market["candidate_terminal_inputs"].keys()
+        == originals["candidate_terminal_inputs"].keys(),
+        "Terminal coverage changed",
+    )
+    for code, terminals in market["candidate_terminal_inputs"].items():
+        original = {
+            r["row_id"]: r for r in originals["candidate_terminal_inputs"][code]
+        }
+        require(
+            {r["row_id"] for r in terminals} == original.keys(),
+            "Terminal input omission",
+        )
+        for r in terminals:
+            o = original[r["row_id"]]
+            require(
+                r["food_code"] == o["food_code"]
+                and r["source_form_resolved"] == o["form_resolved"],
+                "Market PASS repaired source form",
+            )
+            require(
+                r["market_classification"] == o["classification"],
+                "Terminal classification changed",
+            )
+            if not r["source_form_resolved"] and r["row_id"] != "R1-23:1":
+                require(
+                    not r["exact_form_resolved"]
+                    and not r["commodity_exception_applicable"]
+                    and r["default_gate_result"] == "NOT_PASSED",
+                    "Unresolved source choice collapsed to commodity",
+                )
+            else:
+                f = food_reviews[r["food_code"]]
+                require(
+                    all(r[k] == f[k] for k in required_fields),
+                    "Terminal decision disagrees with reviewed exact food",
+                )
+    salt = market["salt_r1_decision"]
+    require(
+        salt["classification"] == "RU_AVAILABLE"
+        and salt["distinct_verified_chains"] == 2
+        and salt["default_gate_result"] == "PASS",
+        "Salt classification/default distinction lost",
+    )
+    for name in PROTECTED:
+        require(
+            docs[name] == reviewed(name),
+            f"Market correction altered protected evidence: {name}",
+        )
+    gates = candidate_gates(docs)
+    ready = sorted(c for c, g in gates.items() if all(v == "PASS" for v in g.values()))
+    final = docs["final-three.json"]
+    require(final["candidate_gates"] == gates, "Candidate gates disagree with evidence")
+    require(
+        sorted(r["template_candidate_code"] for r in final["individually_ready"])
+        == ready,
+        "Individually-ready count disagrees with gates",
+    )
+    deep = set(market["candidate_terminal_inputs"])
+    require(
+        {r["template_candidate_code"] for r in final["near_misses"]}
+        == deep - set(ready),
+        "Near-miss disposition mismatch",
+    )
+    for r in final["individually_ready"] + final["near_misses"]:
+        is_ready = r["template_candidate_code"] in ready
+        require(
+            bool(r["remaining_blockers"]) != is_ready and not r["production_enabled"],
+            "Incorrect ready blockers/publication",
+        )
+    # Current unchanged substitution evidence supplies no validated replacement; never weaken the collective gate.
+    require(
+        final["selected_final_three"] == [] and final["required_family_count"] == 3,
+        "Final-three target or collective gate weakened",
+    )
+    require(
+        docs["substitution-compatibility.json"]["ready_substitution_count"] == 0,
+        "Substitution evidence changed",
+    )
+    require(
+        final["collective_feature_gates"]["verified_substitution"] == "NOT_PASSED",
+        "Collective substitution requirement lost",
+    )
+    funnel = docs["candidate-funnel.json"]
+    for c in funnel["candidates"]:
+        code = c["template_candidate_code"]
+        require(
+            c["individual_gates"] == gates[code], "Screen/deep recomputation mismatch"
+        )
+        require(
+            c["disposition"] == ("INDIVIDUALLY_READY" if code in ready else "DEFER"),
+            "Candidate disposition mismatch",
+        )
+    report = docs["implementation-readiness.json"]
+    require(report["individually_ready"] == ready, "Readiness identity list mismatch")
+    require(
+        report["selected_count"]
+        == funnel["final_count"]
+        == len(final["selected_final_three"]),
+        "Final-selected count mismatch",
+    )
+    require(
+        report["individually_ready_count"]
+        == funnel["individually_ready_count"]
+        == len(ready),
+        "Readiness count mismatch",
+    )
+    require(
+        report["smallest_residual_blocker_classes"] == residuals(gates, market),
+        "Residual blocker counts mismatch",
+    )
+    for name in (
+        "final-three.json",
+        "implementation-readiness.json",
+        "candidate-funnel.json",
+    ):
+        require(docs[name]["status"] == "BLOCKED", "Unsupported R1 READY")
+    return ready
+
+
 def audit(package):
     files = {
         p.name for p in package.iterdir() if p.is_file() and p.name != "checksums.json"
@@ -179,7 +646,7 @@ def audit(package):
             re.search(r"[А-Яа-яЁё]", c["name_ru"]), "Missing Russian candidate display"
         )
         require(
-            c["remaining_blockers"] and c["disposition"] == "DEFER",
+            bool(c["remaining_blockers"]) == (c["disposition"] == "DEFER"),
             "Unsupported candidate approval",
         )
         for code in c["existing_codes_without_usable_composition"]:
@@ -331,56 +798,7 @@ def audit(package):
             f["reviewer_decision"] in {"RU_RECIPE_FAMILIAR", "NOT_FAMILIAR", "UNCLEAR"},
             "Invalid familiarity",
         )
-    market = docs["market-evidence.json"]
-    for code, terminals in market["candidate_terminal_inputs"].items():
-        require(
-            {r["row_id"] for r in terminals}
-            == {r["row_id"] for r in quantities[code]["rows"] if r["required"]},
-            "Terminal input omission",
-        )
-        for r in terminals:
-            require(
-                r["classification"]
-                == accepted.get(r["food_code"], {}).get(
-                    "ru_classification", "SPECIALTY_OR_UNCLEAR"
-                ),
-                "Unsupported market promotion",
-            )
-            if r["classification"] != "RU_MASS_MARKET":
-                require(
-                    r["policy_gate"] == "NOT_PASSED", "RU_AVAILABLE default promotion"
-                )
-    salt_chains = {r["chain"] for r in market["new_observations"] if r["counted"]}
-    require(
-        len(salt_chains) == market["salt_r1_decision"]["distinct_verified_chains"] == 2,
-        "Salt chain count mismatch",
-    )
-    final = docs["final-three.json"]
-    require(
-        final["selected"] == [] and final["required_family_count"] == 3,
-        "Unsupported final three",
-    )
-    require(
-        {r["template_candidate_code"] for r in final["near_misses"]} == deep,
-        "Missing near-miss record",
-    )
-    require(
-        all(
-            r["remaining_blockers"] and not r["production_enabled"]
-            for r in final["near_misses"]
-        ),
-        "Premature near-miss approval",
-    )
-    require(
-        docs["substitution-compatibility.json"]["ready_substitution_count"] == 0,
-        "Invented substitution",
-    )
-    for name in (
-        "final-three.json",
-        "implementation-readiness.json",
-        "candidate-funnel.json",
-    ):
-        require(docs[name]["status"] == "BLOCKED", "Decision mismatch")
+    ready = market_and_readiness_audit(docs)
     scope_audit()
     print(
         json.dumps(
@@ -389,6 +807,7 @@ def audit(package):
                 operation_status="BLOCKED",
                 screened=23,
                 deep_reviewed=9,
+                individually_ready=len(ready),
                 selected=0,
                 resolved_mass_rows=exact,
                 unresolved_mass_rows=unresolved,
@@ -399,14 +818,139 @@ def audit(package):
     )
 
 
+def adversarial_audit(package):
+    """Mutate disposable package copies and re-hash them, exercising semantic guards."""
+    import copy
+    import contextlib
+    import io
+    import shutil
+
+    cases = (
+        "available_alone",
+        "commodity_without_identity",
+        "all_oils",
+        "all_spices",
+        "water_exception_lost",
+        "unreasoned_substitution",
+        "specialty_pass",
+        "market_repairs_mass",
+        "market_repairs_form",
+        "market_repairs_composition",
+        "ready_count",
+        "terminal_omission",
+        "float",
+        "cross_food_portion",
+    )
+    for case in cases:
+        with TemporaryDirectory() as directory:
+            target = Path(directory) / "package"
+            shutil.copytree(package, target)
+            docs = {p.name: read(p) for p in target.glob("*.json")}
+            market = docs["market-evidence.json"]
+            food = {r["food_code"]: r for r in market["foods"]}
+            terminal = market["candidate_terminal_inputs"]
+            if case == "available_alone":
+                # Same RU_AVAILABLE class, low risk, ordinary evidence and product reason: must pass.
+                terminal["R1-13"][2]["default_gate_result"] = "NOT_PASSED"
+            elif case == "commodity_without_identity":
+                food["SALT"]["exact_form_resolved"] = False
+            elif case == "all_oils":
+                food["CANOLA_OIL"].update(
+                    commodity_exception_applicable=True,
+                    commodity_exception_kind="BASIC_COMMODITY",
+                    commodity_exception_reason="All oils",
+                    default_dependency_risk="LOW",
+                    default_gate_result="PASS",
+                )
+            elif case == "all_spices":
+                retained = next(
+                    r
+                    for r in read(
+                        ROOT / "data/curation/pr6-ru-food-data/food-readiness.json"
+                    )["rows"]
+                    if r["food_code"] == "CORIANDER_SEED"
+                )
+                invented = copy.deepcopy(food["BLACK_PEPPER"])
+                invented.update(
+                    food_code="CORIANDER_SEED",
+                    exact_form=retained["food_form"],
+                    evidence_refs=retained["market_evidence_refs"],
+                    commodity_exception_reason="All spices",
+                )
+                market["foods"].append(invented)
+            elif case == "water_exception_lost":
+                food["WATER"].update(
+                    commodity_exception_applicable=False,
+                    commodity_exception_kind="NONE",
+                    commodity_exception_reason=None,
+                )
+            elif case == "unreasoned_substitution":
+                food["GARLIC"]["substitution_required"] = True
+            elif case == "specialty_pass":
+                food["LIME_JUICE"]["default_gate_result"] = "PASS"
+            elif case == "market_repairs_mass":
+                egg = docs["quantity-authority.json"]["candidate_batches"]["R1-23"][
+                    "rows"
+                ][0]
+                egg.update(recipe_input_mass_g=egg["source_mass_g"], issue_ru=None)
+                docs["quantity-authority.json"]["candidate_batches"]["R1-23"][
+                    "all_required_input_masses_resolved"
+                ] = True
+            elif case == "market_repairs_form":
+                terminal["R1-22"][0].update(
+                    food_code="RICE_BROWN", source_form_resolved=True
+                )
+            elif case == "market_repairs_composition":
+                next(
+                    r
+                    for r in docs["composition-readiness.json"]["foods"]
+                    if r["food_code"] == "MARGARINE"
+                )["version"] = 1
+            elif case == "ready_count":
+                docs["final-three.json"]["individually_ready"] = []
+            elif case == "terminal_omission":
+                terminal["R1-21"].pop()
+            elif case == "float":
+                docs["quantity-authority.json"]["candidate_batches"]["R1-21"]["rows"][
+                    0
+                ]["source_quantity"] = float("6")
+            elif case == "cross_food_portion":
+                docs["quantity-authority.json"]["candidate_batches"]["R1-16"]["rows"][
+                    2
+                ].update(authority="FDC-PORTION-88669:exact", recipe_input_mass_g="4.5")
+            for name, value in docs.items():
+                if name != "checksums.json":
+                    (target / name).write_text(
+                        json.dumps(value, ensure_ascii=False, indent=2) + "\n"
+                    )
+            checks = {
+                p.name: digest(p)
+                for p in target.iterdir()
+                if p.is_file() and p.name != "checksums.json"
+            }
+            (target / "checksums.json").write_text(json.dumps(dict(files=checks)))
+            error = None
+            try:
+                with contextlib.redirect_stdout(io.StringIO()):
+                    audit(target)
+            except ValueError as exc:
+                error = str(exc)
+            require(error is not None, f"Adversarial package accepted: {case}")
+            print(f"Adversarial {case}: REJECTED ({error})")
+    print(f"Adversarial semantic package-copy checks: {len(cases)} PASS")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--database", action="store_true")
+    parser.add_argument("--adversarial", action="store_true")
     parser.add_argument("--package", type=Path, default=PACKAGE)
     args = parser.parse_args()
     audit(args.package)
     if args.database:
         database_audit(args.package)
+    if args.adversarial:
+        adversarial_audit(args.package)
 
 
 if __name__ == "__main__":

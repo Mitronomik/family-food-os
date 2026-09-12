@@ -2,8 +2,7 @@
   "operation": "RECIPE-ASSEMBLY-A-R1",
   "status": "BLOCKED",
   "required_family_count": 3,
-  "selected": [],
-  "reason_ru": "Ни один кандидат не закрывает все ворота, включая доступность; ровно три не установлены. R1-21 сохраняется как положительный пример точных входов и Composition, но не выдается за готовое семейство.",
+  "reason_ru": "После исправления рыночной модели R1-21 проходит индивидуальные ворота в пределах опубликованной партии. Финальная тройка пуста: требуется ровно три семейства и совокупное покрытие optional/проверенной замены. Результат R1 остаётся BLOCKED.",
   "near_misses": [
     {
       "template_candidate_code": "R1-05",
@@ -50,7 +49,26 @@
       "remaining_blockers": [
         "Тыква и свёкла без Composition; чеснок без точной массы; спрей обязателен в процессе, но не определён по форме и граммам."
       ],
-      "production_enabled": false
+      "production_enabled": false,
+      "individual_gate_result": "NOT_PASSED",
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "disposition": "DEFER",
+      "remaining_gate_blockers": [
+        "food_form_composition",
+        "exact_input_mass",
+        "market_default"
+      ]
     },
     {
       "template_candidate_code": "R1-13",
@@ -89,7 +107,25 @@
         "Обычный длиннозерный вариант риса совместим, но обязательный рубленый чеснок задан объёмом без exact-порции. Варианты бульона, других рисов и приправ не готовы.",
         "Rights disposition DEFER."
       ],
-      "production_enabled": false
+      "production_enabled": false,
+      "individual_gate_result": "NOT_PASSED",
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "PASS",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "PASS",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "disposition": "DEFER",
+      "remaining_gate_blockers": [
+        "rights",
+        "exact_input_mass"
+      ]
     },
     {
       "template_candidate_code": "R1-15",
@@ -137,7 +173,28 @@
         "Rights disposition DEFER.",
         "Concrete base-variant kitchen verification NOT_ESTABLISHED."
       ],
-      "production_enabled": false
+      "production_enabled": false,
+      "individual_gate_result": "NOT_PASSED",
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "disposition": "DEFER",
+      "remaining_gate_blockers": [
+        "rights",
+        "kitchen_scope",
+        "food_form_composition",
+        "exact_input_mass",
+        "market_default"
+      ]
     },
     {
       "template_candidate_code": "R1-16",
@@ -187,7 +244,28 @@
         "Rights disposition DEFER.",
         "Concrete base-variant kitchen verification NOT_ESTABLISHED."
       ],
-      "production_enabled": false
+      "production_enabled": false,
+      "individual_gate_result": "NOT_PASSED",
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "disposition": "DEFER",
+      "remaining_gate_blockers": [
+        "rights",
+        "kitchen_scope",
+        "food_form_composition",
+        "exact_input_mass",
+        "market_default"
+      ]
     },
     {
       "template_candidate_code": "R1-17",
@@ -228,7 +306,27 @@
         "Цельнозерновая приправленная панировка не равна BREADCRUMBS; смесь прованских трав и спрей без формы/массы.",
         "Rights disposition DEFER."
       ],
-      "production_enabled": false
+      "production_enabled": false,
+      "individual_gate_result": "NOT_PASSED",
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "disposition": "DEFER",
+      "remaining_gate_blockers": [
+        "rights",
+        "food_form_composition",
+        "exact_input_mass",
+        "market_default"
+      ]
     },
     {
       "template_candidate_code": "R1-18",
@@ -279,43 +377,28 @@
         "Rights disposition DEFER.",
         "RU_RECIPE_FAMILIAR not established."
       ],
-      "production_enabled": false
-    },
-    {
-      "template_candidate_code": "R1-21",
-      "name_ru": "Овсяная каша на воде",
-      "source_identity_version": "Hot Oatmeal E00100; MCO P10110.42B; E00100; section E page 3",
-      "rights_decision": "ACCEPT",
-      "kitchen_verification_ref": "kitchen-verification.json#R1-21",
-      "required_roles": [
-        "Овсяные хлопья",
-        "Соль поваренная",
-        "Вода питьевая для варки"
-      ],
-      "optional_roles": [],
-      "exact_food_ingredient_candidates": [
-        "OATS_ROLLED",
-        "SALT",
-        "WATER"
-      ],
-      "exact_input_grams_rules_ref": "quantity-authority.json#R1-21",
-      "substitution_rules_ref": "substitution-compatibility.json",
-      "compatibility_rules_ref": "substitution-compatibility.json",
-      "ordered_process_rules_ru": [
-        "Добавить хлопья и соль в кипящую воду, размешивая комки.",
-        "После повторного закипания уменьшить нагрев; варить 1–3 минуты с помешиванием.",
-        "Выключить нагрев; выдержать 10 минут."
-      ],
-      "process_scope": "Research synopsis; original card remains authoritative; not a complete runnable consumer recipe.",
-      "required_transformation_dependencies": "No transformation/yield truth promoted. Prepared edible inputs must match source form; cooked-output mass and nutrients remain unknown. Gross-to-edible or drained mappings with no authority stay blocked.",
-      "composition_authority_ref": "composition-readiness.json#R1-21",
-      "ru_familiarity": "RU_RECIPE_FAMILIAR",
-      "terminal_input_availability_ref": "market-evidence.json#R1-21",
-      "russian_display_completeness": "Research names/roles/rationale present; production display gate not passed for unresolved ingredient identities.",
-      "remaining_blockers": [
-        "Все три входа имеют точные веса и Composition. Соль остаётся RU_AVAILABLE: подтверждены две сети, третья только поисковая зацепка; обычная проверенная замена отсутствует."
-      ],
-      "production_enabled": false
+      "production_enabled": false,
+      "individual_gate_result": "NOT_PASSED",
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "NOT_PASSED",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "disposition": "DEFER",
+      "remaining_gate_blockers": [
+        "rights",
+        "food_form_composition",
+        "exact_input_mass",
+        "ru_familiarity",
+        "market_default"
+      ]
     },
     {
       "template_candidate_code": "R1-22",
@@ -353,7 +436,26 @@
       "remaining_blockers": [
         "Пропаренный бурый рис не равен текущему обычному длиннозерному RICE_BROWN; salad oil не определяет конкретное масло."
       ],
-      "production_enabled": false
+      "production_enabled": false,
+      "individual_gate_result": "NOT_PASSED",
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "disposition": "DEFER",
+      "remaining_gate_blockers": [
+        "food_form_composition",
+        "exact_input_mass",
+        "market_default"
+      ]
     },
     {
       "template_candidate_code": "R1-23",
@@ -386,7 +488,365 @@
       "remaining_blockers": [
         "22 фунта на 200 яиц не устанавливают съедобную массу без скорлупы; универсальная масса штуки запрещена. Вода для варки — технологическая среда, не масса съеденного продукта."
       ],
-      "production_enabled": false
+      "production_enabled": false,
+      "individual_gate_result": "NOT_PASSED",
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "PASS",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "disposition": "DEFER",
+      "remaining_gate_blockers": [
+        "food_form_composition",
+        "exact_input_mass"
+      ]
     }
-  ]
+  ],
+  "individually_ready": [
+    {
+      "template_candidate_code": "R1-21",
+      "name_ru": "Овсяная каша на воде",
+      "source_identity_version": "Hot Oatmeal E00100; MCO P10110.42B; E00100; section E page 3",
+      "rights_decision": "ACCEPT",
+      "kitchen_verification_ref": "kitchen-verification.json#R1-21",
+      "required_roles": [
+        "Овсяные хлопья",
+        "Соль поваренная",
+        "Вода питьевая для варки"
+      ],
+      "optional_roles": [],
+      "exact_food_ingredient_candidates": [
+        "OATS_ROLLED",
+        "SALT",
+        "WATER"
+      ],
+      "exact_input_grams_rules_ref": "quantity-authority.json#R1-21",
+      "substitution_rules_ref": "substitution-compatibility.json",
+      "compatibility_rules_ref": "substitution-compatibility.json",
+      "ordered_process_rules_ru": [
+        "Добавить хлопья и соль в кипящую воду, размешивая комки.",
+        "После повторного закипания уменьшить нагрев; варить 1–3 минуты с помешиванием.",
+        "Выключить нагрев; выдержать 10 минут."
+      ],
+      "process_scope": "Research synopsis; original card remains authoritative; not a complete runnable consumer recipe.",
+      "required_transformation_dependencies": "No transformation/yield truth promoted. Prepared edible inputs must match source form; cooked-output mass and nutrients remain unknown. Gross-to-edible or drained mappings with no authority stay blocked.",
+      "composition_authority_ref": "composition-readiness.json#R1-21",
+      "ru_familiarity": "RU_RECIPE_FAMILIAR",
+      "terminal_input_availability_ref": "market-evidence.json#R1-21",
+      "russian_display_completeness": "PASS for the fixed published input-only variant; Russian ingredient, role and process text retained.",
+      "remaining_blockers": [],
+      "production_enabled": false,
+      "individual_gate_result": "PASS",
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "PASS",
+        "exact_input_mass": "PASS",
+        "ru_familiarity": "PASS",
+        "market_default": "PASS",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "disposition": "INDIVIDUALLY_READY",
+      "implementation_scope": "Only AFRS E00100 published institutional batch of 100 portions, exact OATS_ROLLED/SALT/WATER input grams and source process. No household scaling, cooked output/yield authority, substitutions, seed or runtime publication.",
+      "substitution_requirement": "No individual market substitution is required for these ordinary exact inputs. Final-three collective substitution gate remains unmet."
+    }
+  ],
+  "selected_final_three": [],
+  "candidate_gates": {
+    "R1-01": {
+      "rights": "PASS",
+      "kitchen_scope": "NOT_PASSED",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_REVIEWED",
+      "ru_familiarity": "NOT_REVIEWED",
+      "market_default": "NOT_REVIEWED",
+      "source_template_scope": "NOT_REVIEWED",
+      "ordered_process": "NOT_REVIEWED",
+      "russian_display": "NOT_REVIEWED",
+      "transformation_dependencies": "NOT_REVIEWED"
+    },
+    "R1-02": {
+      "rights": "PASS",
+      "kitchen_scope": "NOT_PASSED",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_REVIEWED",
+      "ru_familiarity": "NOT_REVIEWED",
+      "market_default": "NOT_REVIEWED",
+      "source_template_scope": "NOT_REVIEWED",
+      "ordered_process": "NOT_REVIEWED",
+      "russian_display": "NOT_REVIEWED",
+      "transformation_dependencies": "NOT_REVIEWED"
+    },
+    "R1-03": {
+      "rights": "PASS",
+      "kitchen_scope": "NOT_PASSED",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_REVIEWED",
+      "ru_familiarity": "NOT_REVIEWED",
+      "market_default": "NOT_REVIEWED",
+      "source_template_scope": "NOT_REVIEWED",
+      "ordered_process": "NOT_REVIEWED",
+      "russian_display": "NOT_REVIEWED",
+      "transformation_dependencies": "NOT_REVIEWED"
+    },
+    "R1-04": {
+      "rights": "PASS",
+      "kitchen_scope": "NOT_PASSED",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_REVIEWED",
+      "ru_familiarity": "NOT_REVIEWED",
+      "market_default": "NOT_REVIEWED",
+      "source_template_scope": "NOT_REVIEWED",
+      "ordered_process": "NOT_REVIEWED",
+      "russian_display": "NOT_REVIEWED",
+      "transformation_dependencies": "NOT_REVIEWED"
+    },
+    "R1-05": {
+      "rights": "PASS",
+      "kitchen_scope": "PASS",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_PASSED",
+      "ru_familiarity": "PASS",
+      "market_default": "NOT_PASSED",
+      "source_template_scope": "PASS",
+      "ordered_process": "PASS",
+      "russian_display": "PASS",
+      "transformation_dependencies": "PASS"
+    },
+    "R1-06": {
+      "rights": "PASS",
+      "kitchen_scope": "PASS",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_REVIEWED",
+      "ru_familiarity": "NOT_REVIEWED",
+      "market_default": "NOT_REVIEWED",
+      "source_template_scope": "NOT_REVIEWED",
+      "ordered_process": "NOT_REVIEWED",
+      "russian_display": "NOT_REVIEWED",
+      "transformation_dependencies": "NOT_REVIEWED"
+    },
+    "R1-07": {
+      "rights": "PASS",
+      "kitchen_scope": "NOT_PASSED",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_REVIEWED",
+      "ru_familiarity": "NOT_REVIEWED",
+      "market_default": "NOT_REVIEWED",
+      "source_template_scope": "NOT_REVIEWED",
+      "ordered_process": "NOT_REVIEWED",
+      "russian_display": "NOT_REVIEWED",
+      "transformation_dependencies": "NOT_REVIEWED"
+    },
+    "R1-08": {
+      "rights": "PASS",
+      "kitchen_scope": "NOT_PASSED",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_REVIEWED",
+      "ru_familiarity": "NOT_REVIEWED",
+      "market_default": "NOT_REVIEWED",
+      "source_template_scope": "NOT_REVIEWED",
+      "ordered_process": "NOT_REVIEWED",
+      "russian_display": "NOT_REVIEWED",
+      "transformation_dependencies": "NOT_REVIEWED"
+    },
+    "R1-09": {
+      "rights": "PASS",
+      "kitchen_scope": "NOT_PASSED",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_REVIEWED",
+      "ru_familiarity": "NOT_REVIEWED",
+      "market_default": "NOT_REVIEWED",
+      "source_template_scope": "NOT_REVIEWED",
+      "ordered_process": "NOT_REVIEWED",
+      "russian_display": "NOT_REVIEWED",
+      "transformation_dependencies": "NOT_REVIEWED"
+    },
+    "R1-10": {
+      "rights": "PASS",
+      "kitchen_scope": "NOT_PASSED",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_REVIEWED",
+      "ru_familiarity": "NOT_REVIEWED",
+      "market_default": "NOT_REVIEWED",
+      "source_template_scope": "NOT_REVIEWED",
+      "ordered_process": "NOT_REVIEWED",
+      "russian_display": "NOT_REVIEWED",
+      "transformation_dependencies": "NOT_REVIEWED"
+    },
+    "R1-11": {
+      "rights": "PASS",
+      "kitchen_scope": "NOT_PASSED",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_REVIEWED",
+      "ru_familiarity": "NOT_REVIEWED",
+      "market_default": "NOT_REVIEWED",
+      "source_template_scope": "NOT_REVIEWED",
+      "ordered_process": "NOT_REVIEWED",
+      "russian_display": "NOT_REVIEWED",
+      "transformation_dependencies": "NOT_REVIEWED"
+    },
+    "R1-12": {
+      "rights": "PASS",
+      "kitchen_scope": "NOT_PASSED",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_REVIEWED",
+      "ru_familiarity": "NOT_REVIEWED",
+      "market_default": "NOT_REVIEWED",
+      "source_template_scope": "NOT_REVIEWED",
+      "ordered_process": "NOT_REVIEWED",
+      "russian_display": "NOT_REVIEWED",
+      "transformation_dependencies": "NOT_REVIEWED"
+    },
+    "R1-13": {
+      "rights": "NOT_PASSED",
+      "kitchen_scope": "PASS",
+      "food_form_composition": "PASS",
+      "exact_input_mass": "NOT_PASSED",
+      "ru_familiarity": "PASS",
+      "market_default": "PASS",
+      "source_template_scope": "PASS",
+      "ordered_process": "PASS",
+      "russian_display": "PASS",
+      "transformation_dependencies": "PASS"
+    },
+    "R1-14": {
+      "rights": "NOT_PASSED",
+      "kitchen_scope": "PASS",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_REVIEWED",
+      "ru_familiarity": "NOT_REVIEWED",
+      "market_default": "NOT_REVIEWED",
+      "source_template_scope": "NOT_REVIEWED",
+      "ordered_process": "NOT_REVIEWED",
+      "russian_display": "NOT_REVIEWED",
+      "transformation_dependencies": "NOT_REVIEWED"
+    },
+    "R1-15": {
+      "rights": "NOT_PASSED",
+      "kitchen_scope": "NOT_PASSED",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_PASSED",
+      "ru_familiarity": "PASS",
+      "market_default": "NOT_PASSED",
+      "source_template_scope": "PASS",
+      "ordered_process": "PASS",
+      "russian_display": "PASS",
+      "transformation_dependencies": "PASS"
+    },
+    "R1-16": {
+      "rights": "NOT_PASSED",
+      "kitchen_scope": "NOT_PASSED",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_PASSED",
+      "ru_familiarity": "PASS",
+      "market_default": "NOT_PASSED",
+      "source_template_scope": "PASS",
+      "ordered_process": "PASS",
+      "russian_display": "PASS",
+      "transformation_dependencies": "PASS"
+    },
+    "R1-17": {
+      "rights": "NOT_PASSED",
+      "kitchen_scope": "PASS",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_PASSED",
+      "ru_familiarity": "PASS",
+      "market_default": "NOT_PASSED",
+      "source_template_scope": "PASS",
+      "ordered_process": "PASS",
+      "russian_display": "PASS",
+      "transformation_dependencies": "PASS"
+    },
+    "R1-18": {
+      "rights": "NOT_PASSED",
+      "kitchen_scope": "PASS",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_PASSED",
+      "ru_familiarity": "NOT_PASSED",
+      "market_default": "NOT_PASSED",
+      "source_template_scope": "PASS",
+      "ordered_process": "PASS",
+      "russian_display": "PASS",
+      "transformation_dependencies": "PASS"
+    },
+    "R1-19": {
+      "rights": "NOT_PASSED",
+      "kitchen_scope": "PASS",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_REVIEWED",
+      "ru_familiarity": "NOT_REVIEWED",
+      "market_default": "NOT_REVIEWED",
+      "source_template_scope": "NOT_REVIEWED",
+      "ordered_process": "NOT_REVIEWED",
+      "russian_display": "NOT_REVIEWED",
+      "transformation_dependencies": "NOT_REVIEWED"
+    },
+    "R1-20": {
+      "rights": "NOT_PASSED",
+      "kitchen_scope": "PASS",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_REVIEWED",
+      "ru_familiarity": "NOT_REVIEWED",
+      "market_default": "NOT_REVIEWED",
+      "source_template_scope": "NOT_REVIEWED",
+      "ordered_process": "NOT_REVIEWED",
+      "russian_display": "NOT_REVIEWED",
+      "transformation_dependencies": "NOT_REVIEWED"
+    },
+    "R1-21": {
+      "rights": "PASS",
+      "kitchen_scope": "PASS",
+      "food_form_composition": "PASS",
+      "exact_input_mass": "PASS",
+      "ru_familiarity": "PASS",
+      "market_default": "PASS",
+      "source_template_scope": "PASS",
+      "ordered_process": "PASS",
+      "russian_display": "PASS",
+      "transformation_dependencies": "PASS"
+    },
+    "R1-22": {
+      "rights": "PASS",
+      "kitchen_scope": "PASS",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_PASSED",
+      "ru_familiarity": "PASS",
+      "market_default": "NOT_PASSED",
+      "source_template_scope": "PASS",
+      "ordered_process": "PASS",
+      "russian_display": "PASS",
+      "transformation_dependencies": "PASS"
+    },
+    "R1-23": {
+      "rights": "PASS",
+      "kitchen_scope": "PASS",
+      "food_form_composition": "NOT_PASSED",
+      "exact_input_mass": "NOT_PASSED",
+      "ru_familiarity": "PASS",
+      "market_default": "PASS",
+      "source_template_scope": "PASS",
+      "ordered_process": "PASS",
+      "russian_display": "PASS",
+      "transformation_dependencies": "PASS"
+    }
+  },
+  "collective_feature_gates": {
+    "family_count": "NOT_PASSED",
+    "required_roles": "PASS_IN_INDIVIDUALLY_READY",
+    "optional_role": "NOT_PASSED",
+    "verified_substitution": "NOT_PASSED",
+    "compatibility": "PASS_IN_INDIVIDUALLY_READY",
+    "deterministic_quantities": "PASS_IN_INDIVIDUALLY_READY",
+    "ordered_process": "PASS_IN_INDIVIDUALLY_READY"
+  }
 }

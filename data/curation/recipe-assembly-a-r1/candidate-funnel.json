@@ -24,7 +24,20 @@
         "AGAVE_SYRUP",
         "VANILLA_EXTRACT",
         "NUTMEG_GROUND"
-      ]
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
     },
     {
       "template_candidate_code": "R1-02",
@@ -40,7 +53,20 @@
         "YOGURT_GREEK_LOW_FAT",
         "AGAVE_SYRUP",
         "VANILLA_EXTRACT"
-      ]
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
     },
     {
       "template_candidate_code": "R1-03",
@@ -56,7 +82,20 @@
         "ORANGE_JUICE_CONCENTRATE",
         "MARGARINE",
         "CRANBERRIES_DRIED"
-      ]
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
     },
     {
       "template_candidate_code": "R1-04",
@@ -71,7 +110,20 @@
       "existing_codes_without_usable_composition": [
         "CORN_SWEET",
         "SESAME_SEEDS"
-      ]
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
     },
     {
       "template_candidate_code": "R1-05",
@@ -86,7 +138,20 @@
       "existing_codes_without_usable_composition": [
         "BUTTERNUT_SQUASH",
         "BEET"
-      ]
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
     },
     {
       "template_candidate_code": "R1-06",
@@ -101,7 +166,20 @@
       "existing_codes_without_usable_composition": [
         "GREEN_BEANS_CANNED_NO_SALT",
         "OREGANO_DRIED"
-      ]
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
     },
     {
       "template_candidate_code": "R1-07",
@@ -117,7 +195,20 @@
         "SPINACH",
         "MARGARINE",
         "TOMATO_PASTE_NO_SALT"
-      ]
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
     },
     {
       "template_candidate_code": "R1-08",
@@ -133,7 +224,20 @@
         "BEEF_BROTH_LOW_SODIUM",
         "TOMATO_PASTE_NO_SALT",
         "LIME_JUICE"
-      ]
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
     },
     {
       "template_candidate_code": "R1-09",
@@ -151,7 +255,20 @@
         "CHEESE_CHEDDAR_REDUCED_FAT",
         "MILK_SKIM",
         "FLOUR_WHOLE_WHEAT"
-      ]
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
     },
     {
       "template_candidate_code": "R1-10",
@@ -168,7 +285,20 @@
         "APPLE",
         "COCONUT_SHREDDED",
         "NUTMEG_GROUND"
-      ]
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
     },
     {
       "template_candidate_code": "R1-11",
@@ -185,7 +315,20 @@
         "FLOUR_WHOLE_WHEAT",
         "SPINACH",
         "BAKING_POWDER"
-      ]
+      ],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
     },
     {
       "template_candidate_code": "R1-12",
@@ -197,7 +340,20 @@
       "remaining_blockers": [
         "Обязателен SPINACH_BABY, одна из пяти сохранённых заблокированных форм; масса ломтиков хлеба не разрешена."
       ],
-      "existing_codes_without_usable_composition": []
+      "existing_codes_without_usable_composition": [],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
     },
     {
       "template_candidate_code": "R1-13",
@@ -209,7 +365,20 @@
       "remaining_blockers": [
         "Обычный длиннозерный вариант риса совместим, но обязательный рубленый чеснок задан объёмом без exact-порции. Варианты бульона, других рисов и приправ не готовы."
       ],
-      "existing_codes_without_usable_composition": []
+      "existing_codes_without_usable_composition": [],
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "PASS",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "PASS",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
     },
     {
       "template_candidate_code": "R1-14",
@@ -226,7 +395,20 @@
         "MUSHROOM_WHITE",
         "SPINACH",
         "CRANBERRIES_DRIED"
-      ]
+      ],
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
     },
     {
       "template_candidate_code": "R1-15",
@@ -240,7 +422,20 @@
       ],
       "existing_codes_without_usable_composition": [
         "MARGARINE"
-      ]
+      ],
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
     },
     {
       "template_candidate_code": "R1-16",
@@ -254,7 +449,20 @@
       ],
       "existing_codes_without_usable_composition": [
         "LIME_JUICE"
-      ]
+      ],
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "NOT_PASSED",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
     },
     {
       "template_candidate_code": "R1-17",
@@ -266,7 +474,20 @@
       "remaining_blockers": [
         "Цельнозерновая приправленная панировка не равна BREADCRUMBS; смесь прованских трав и спрей без формы/массы."
       ],
-      "existing_codes_without_usable_composition": []
+      "existing_codes_without_usable_composition": [],
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
     },
     {
       "template_candidate_code": "R1-18",
@@ -278,7 +499,20 @@
       "remaining_blockers": [
         "Размороженная измельчённая капуста после слива не разрешена как CAULIFLOWER_FROZEN без проверки состояния; гранулированный чеснок не приравнен к порошку; спрей без массы."
       ],
-      "existing_codes_without_usable_composition": []
+      "existing_codes_without_usable_composition": [],
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "NOT_PASSED",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
     },
     {
       "template_candidate_code": "R1-19",
@@ -294,7 +528,20 @@
         "POTATO_RED",
         "ONION_POWDER",
         "PAPRIKA"
-      ]
+      ],
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
     },
     {
       "template_candidate_code": "R1-20",
@@ -308,7 +555,20 @@
       ],
       "existing_codes_without_usable_composition": [
         "MARGARINE"
-      ]
+      ],
+      "individual_gates": {
+        "rights": "NOT_PASSED",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_REVIEWED",
+        "ru_familiarity": "NOT_REVIEWED",
+        "market_default": "NOT_REVIEWED",
+        "source_template_scope": "NOT_REVIEWED",
+        "ordered_process": "NOT_REVIEWED",
+        "russian_display": "NOT_REVIEWED",
+        "transformation_dependencies": "NOT_REVIEWED"
+      },
+      "market_correction_review": "NOT_REVIEWED_AT_TERMINAL_LEVEL; existing non-market screen blocker preserved; no universal classification failure"
     },
     {
       "template_candidate_code": "R1-21",
@@ -316,11 +576,22 @@
       "source_id": "R1-21",
       "tier": 2,
       "review_depth": "DEEP",
-      "disposition": "DEFER",
-      "remaining_blockers": [
-        "Все три входа имеют точные веса и Composition. Соль остаётся RU_AVAILABLE: подтверждены две сети, третья только поисковая зацепка; обычная проверенная замена отсутствует."
-      ],
-      "existing_codes_without_usable_composition": []
+      "disposition": "INDIVIDUALLY_READY",
+      "remaining_blockers": [],
+      "existing_codes_without_usable_composition": [],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "PASS",
+        "exact_input_mass": "PASS",
+        "ru_familiarity": "PASS",
+        "market_default": "PASS",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
     },
     {
       "template_candidate_code": "R1-22",
@@ -332,7 +603,20 @@
       "remaining_blockers": [
         "Пропаренный бурый рис не равен текущему обычному длиннозерному RICE_BROWN; salad oil не определяет конкретное масло."
       ],
-      "existing_codes_without_usable_composition": []
+      "existing_codes_without_usable_composition": [],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "NOT_PASSED",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
     },
     {
       "template_candidate_code": "R1-23",
@@ -344,8 +628,30 @@
       "remaining_blockers": [
         "22 фунта на 200 яиц не устанавливают съедобную массу без скорлупы; универсальная масса штуки запрещена. Вода для варки — технологическая среда, не масса съеденного продукта."
       ],
-      "existing_codes_without_usable_composition": []
+      "existing_codes_without_usable_composition": [],
+      "individual_gates": {
+        "rights": "PASS",
+        "kitchen_scope": "PASS",
+        "food_form_composition": "NOT_PASSED",
+        "exact_input_mass": "NOT_PASSED",
+        "ru_familiarity": "PASS",
+        "market_default": "PASS",
+        "source_template_scope": "PASS",
+        "ordered_process": "PASS",
+        "russian_display": "PASS",
+        "transformation_dependencies": "PASS"
+      },
+      "market_correction_review": "RECOMPUTED_FROM_EXPLICIT_TERMINALS"
     }
   ],
-  "prior_research_overlap": "Первые 12 карточек и название Cauliflower Rice встречались в раннем PR4 donor-research. Они заново просмотрены как первичные доноры Tier 1, а не объявлены принятыми RecipeVersions или новыми для репозитория. R1 не ограничивается тремя отложенными PR31. Остальные 10 кандидатов расширяют эту исходную подборку."
+  "prior_research_overlap": "Первые 12 карточек и название Cauliflower Rice встречались в раннем PR4 donor-research. Они заново просмотрены как первичные доноры Tier 1, а не объявлены принятыми RecipeVersions или новыми для репозитория. R1 не ограничивается тремя отложенными PR31. Остальные 10 кандидатов расширяют эту исходную подборку.",
+  "individually_ready_count": 1,
+  "correction_review": {
+    "operation": "RECIPE-ASSEMBLY-A-R1-CORRECTION",
+    "before_individually_ready_count": 0,
+    "after_individually_ready_count": 1,
+    "reviewed_donor_count": 23,
+    "new_donors": 0,
+    "reason": "Correct canonical classification/default suitability distinction; no search, no gate changes."
+  }
 }

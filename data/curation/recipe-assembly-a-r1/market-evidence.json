@@ -1,6 +1,11 @@
 {
   "date": "2026-09-12",
-  "policy_ref": "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+  "correction": "RECIPE-ASSEMBLY-A-R1-CORRECTION",
+  "reviewed_head": "4741e91710e17b86dbc25c5e69ca58ea36c5c635",
+  "policy_refs": [
+    "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+    "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+  ],
   "panel": [
     "Пятёрочка",
     "Перекрёсток",
@@ -8,329 +13,833 @@
     "О’КЕЙ",
     "Магнит"
   ],
-  "rule": "3 distinct qualifying chains => RU_MASS_MARKET; 1–2 => RU_AVAILABLE; 0 or unresolved form => SPECIALTY_OR_UNCLEAR. RU_AVAILABLE does not pass default gate without ordinary reviewed substitution. Accepted regional evidence is reused, not re-dated.",
+  "rule": "Classification and default suitability are independent. RU_AVAILABLE is not rarity. Exact ordinary non-specialist inputs may pass via a specific product reason or reviewed basic-commodity exception; a genuinely rare required input requires a reviewed ordinary substitution. SPECIALTY_OR_UNCLEAR fails. No new source search or classification change.",
   "foods": [
     {
       "food_code": "BEET",
       "name_ru": "Свёкла",
       "exact_form": null,
-      "classification": "SPECIALTY_OR_UNCLEAR",
-      "accepted_market_evidence_refs": [],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "exact_form_resolved": false,
+      "market_classification": "SPECIALTY_OR_UNCLEAR",
+      "ordinary_retail_supported": false,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": null,
+      "default_dependency_risk": "UNRESOLVED_FORM",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "NOT_PASSED",
+      "evidence_refs": [
+        "R1-05"
+      ],
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Сохранённый класс SPECIALTY_OR_UNCLEAR; нет достаточных retained сведений по точной форме свёклы.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "BELL_PEPPER_RED",
       "name_ru": "Перец сладкий красный",
       "exact_form": "Peppers, bell, red, raw",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": "Обычный свежий сладкий красный перец подтверждён Магнитом; в рецепте сохраняется именно красный овощ без особого сорта/бренда. Менее трёх сетей — ограничение покрытия панели, не свидетельство редкости.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:BELL_PEPPER_RED:research-magnit-v2.json:9"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Обычный свежий сладкий красный перец подтверждён Магнитом; в рецепте сохраняется именно красный овощ без особого сорта/бренда. Менее трёх сетей — ограничение покрытия панели, не свидетельство редкости.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "BLACK_PEPPER",
       "name_ru": "Перец чёрный молотый",
       "exact_form": "Spices, pepper, black",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": true,
+      "commodity_exception_kind": "BASIC_COMMODITY",
+      "commodity_exception_reason": "Одиночная приправа — чёрный молотый перец, состав прямо указан. Не белый перец и не перечная смесь.",
+      "specific_product_reason": "Одиночная приправа — чёрный молотый перец, состав прямо указан. Не белый перец и не перечная смесь.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:BLACK_PEPPER:research-lenta-okey-v2.json:34"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Одиночная приправа — чёрный молотый перец, состав прямо указан. Не белый перец и не перечная смесь.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "BUTTERNUT_SQUASH",
       "name_ru": "Тыква баттернат",
       "exact_form": "Squash, winter, butternut, raw",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": "Весовая тыква Баттернат в обычной сети; сохранение конкретного вида обосновано фиксированным овощным гарниром, без specialist-закупки. Composition этой формы остаётся отдельным блокером.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:BUTTERNUT_SQUASH:research-lenta-okey-v2.json:7"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Весовая тыква Баттернат в обычной сети; сохранение конкретного вида обосновано фиксированным овощным гарниром, без specialist-закупки. Composition этой формы остаётся отдельным блокером.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+      "review_date": "2026-09-12"
+    },
+    {
+      "food_code": "CANOLA_OIL",
+      "name_ru": "Масло рапсовое",
+      "exact_form": "Oil, canola",
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": null,
+      "default_dependency_risk": "UNRESOLVED_PRODUCT_EVIDENCE",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "NOT_PASSED",
+      "evidence_refs": [
+        "PR4:CANOLA_OIL:research-lenta-okey-v6.json:5"
+      ],
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Retained нерафинированное рапсовое масло прямо не предназначено для нагрева; blanket oil exception не разрешает его в горячем блюде.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "CARROT",
       "name_ru": "Морковь",
       "exact_form": "Carrots, mature, raw",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": "Свежая весовая морковь подтверждена двумя обычными сетями; точный стандартный овощ для нарезки, без специального SKU.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:CARROT:research-lenta-okey-v2.json:1",
         "PR4:CARROT:research-magnit-v2.json:1"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Свежая весовая морковь подтверждена двумя обычными сетями; точный стандартный овощ для нарезки, без специального SKU.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "CELERY",
       "name_ru": "Сельдерей стеблевой",
       "exact_form": "Celery, raw",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": "Свежие стебли сельдерея подтверждены обычной сетью; фиксированный овощной компонент, без специального сорта или промышленной обработки.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:CELERY:research-lenta-okey-v3.json:13"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Свежие стебли сельдерея подтверждены обычной сетью; фиксированный овощной компонент, без специального сорта или промышленной обработки.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "CILANTRO",
       "name_ru": "Кориандр свежий",
       "exact_form": "Coriander (cilantro) leaves, raw",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": "Свежая кинза подтверждена обычной сетью; небольшая ароматическая роль в фиксированных вариантах, не specialist-ингредиент. Не заменяется другой зеленью.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:CILANTRO:research-lenta-okey-v3.json:12"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Свежая кинза подтверждена обычной сетью; небольшая ароматическая роль в фиксированных вариантах, не specialist-ингредиент. Не заменяется другой зеленью.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+      "review_date": "2026-09-12"
+    },
+    {
+      "food_code": "CUMIN_GROUND",
+      "name_ru": "Кумин молотый",
+      "exact_form": "Spices, cumin seed",
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": true,
+      "commodity_exception_kind": "BASIC_COMMODITY",
+      "commodity_exception_reason": "Принятая карточка молотого кумина (зиры), отдельной специи. Решение по этой форме, не разрешение всем специям.",
+      "specific_product_reason": "Принятая карточка молотого кумина (зиры), отдельной специи. Решение по этой форме, не разрешение всем специям.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
+        "PR4:CUMIN_GROUND:research-x5-v3.json:8"
+      ],
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Принятая карточка молотого кумина (зиры), отдельной специи. Решение по этой форме, не разрешение всем специям.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "EGG",
       "name_ru": "Яйцо куриное целое",
       "exact_form": "Eggs, Grade A, Large, egg whole",
-      "classification": "RU_MASS_MARKET",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_MASS_MARKET",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": "Обычные куриные яйца подтверждены тремя сетями; не жидкая или замороженная яичная масса. Масса съедобной части остаётся отдельным вопросом.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:EGG:research-x5-v2.json:1",
         "PR4:EGG:research-magnit-v2.json:4",
         "PR4:EGG:research-panel-v3.json:1"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": true,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Обычные куриные яйца подтверждены тремя сетями; не жидкая или замороженная яичная масса. Масса съедобной части остаётся отдельным вопросом.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "GARLIC",
       "name_ru": "Чеснок",
       "exact_form": "Garlic, raw",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": "Свежий чеснок подтверждён двумя сетями; обычный ароматический компонент. Рыночное решение не разрешает estimate-порции рубленого чеснока.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:GARLIC:research-lenta-okey-v2.json:6",
         "PR4:GARLIC:research-magnit-v2.json:3"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Свежий чеснок подтверждён двумя сетями; обычный ароматический компонент. Рыночное решение не разрешает estimate-порции рубленого чеснока.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+      "review_date": "2026-09-12"
+    },
+    {
+      "food_code": "GARLIC_POWDER",
+      "name_ru": "Чеснок сушёный молотый",
+      "exact_form": "Spices, garlic powder",
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": true,
+      "commodity_exception_kind": "BASIC_COMMODITY",
+      "commodity_exception_reason": "Сушёный молотый чеснок, единственный ингредиент. Не свежий и не гранулированный чеснок.",
+      "specific_product_reason": "Сушёный молотый чеснок, единственный ингредиент. Не свежий и не гранулированный чеснок.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
+        "PR4:GARLIC_POWDER:research-lenta-okey-v4.json:15"
+      ],
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Сушёный молотый чеснок, единственный ингредиент. Не свежий и не гранулированный чеснок.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "GINGER",
       "name_ru": "Имбирь свежий",
       "exact_form": "Ginger root, raw",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": "Свежий корень имбиря прямо подтверждён в обычном овощном ассортименте; точная ароматическая форма для этой карточки, без specialty-закупки.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:GINGER:research-lenta-okey-v2.json:9"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Свежий корень имбиря прямо подтверждён в обычном овощном ассортименте; точная ароматическая форма для этой карточки, без specialty-закупки.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "HONEY",
       "name_ru": "Мёд",
       "exact_form": "Honey",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": "Натуральный цветочный мёд с однокомпонентным составом в обычной сети; сохранение источникового подсластителя обосновано фиксированным рецептом, не требует редкого сорта.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:HONEY:research-lenta-okey-v3.json:7"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Натуральный цветочный мёд с однокомпонентным составом в обычной сети; сохранение источникового подсластителя обосновано фиксированным рецептом, не требует редкого сорта.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "LIME_JUICE",
       "name_ru": "Сок лайма",
       "exact_form": "Lime juice, raw",
-      "classification": "SPECIALTY_OR_UNCLEAR",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": false,
+      "market_classification": "SPECIALTY_OR_UNCLEAR",
+      "ordinary_retail_supported": false,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": null,
+      "default_dependency_risk": "UNRESOLVED_FORM",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "NOT_PASSED",
+      "evidence_refs": [
         "PR4:LIME_JUICE:research-lenta-okey-v4.json:19",
         "PR4:LIME_JUICE:research-x5-v3.json:7"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Точная покупаемая форма не подтверждена принятым рынком; SPECIALTY_OR_UNCLEAR остаётся закрытым. Лайм не равен соку.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "MARGARINE",
       "name_ru": "Маргарин",
       "exact_form": "Margarine, 80% fat, stick, includes regular and hydrogenated corn and soybean oils",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": null,
+      "default_dependency_risk": "UNRESOLVED_PRODUCT_EVIDENCE",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "NOT_PASSED",
+      "evidence_refs": [
         "PR4:MARGARINE:research-lenta-okey-v4.json:10"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Обычная сеть подтверждает семейство продукта, но не точный профиль: маргарин 72% против retained формы 80%. <3 сети не причина отказа.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "MAYONNAISE_LOW_FAT",
       "name_ru": "Майонез пониженной жирности",
       "exact_form": "Mayonnaise, reduced fat, with olive oil",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": null,
+      "default_dependency_risk": "UNRESOLVED_PRODUCT_EVIDENCE",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "NOT_PASSED",
+      "evidence_refs": [
         "PR4:MAYONNAISE_LOW_FAT:research-lenta-okey-v2.json:19"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Обычная сеть подтверждает лёгкий майонез, но retained точная форма содержит оливковое масло; в наблюдении CALVE 20% этот состав не подтверждён. <3 сети не причина отказа.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "OATS_ROLLED",
       "name_ru": "Овсяные хлопья",
       "exact_form": "Oats, whole grain, rolled, old fashioned",
-      "classification": "RU_MASS_MARKET",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_MASS_MARKET",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": "Обычные цельные овсяные хлопья подтверждены принятыми наблюдениями трёх сетей и PR29 формой; не instant-смесь и не новая форма хлопьев.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:OATS_ROLLED:research-lenta-okey-v5.json:4",
         "PR4:OATS_ROLLED:research-lenta-okey-v2.json:33",
         "PR4:OATS_ROLLED:research-lenta-okey-v5.json:3",
         "PR4:OATS_ROLLED:research-x5-v2.json:3",
         "PR4:OATS_ROLLED:research-panel-v3.json:3"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": true,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Обычные цельные овсяные хлопья подтверждены принятыми наблюдениями трёх сетей и PR29 формой; не instant-смесь и не новая форма хлопьев.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "OLIVE_OIL",
       "name_ru": "Масло оливковое",
       "exact_form": "Oil, olive, salad or cooking",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": true,
+      "commodity_exception_kind": "BASIC_COMMODITY",
+      "commodity_exception_reason": "Чистое оливковое масло для салата/готовки; принятые карточки рафинированного и нерафинированного масла. Не ароматизированная смесь и не неопределённое salad oil.",
+      "specific_product_reason": "Чистое оливковое масло для салата/готовки; принятые карточки рафинированного и нерафинированного масла. Не ароматизированная смесь и не неопределённое salad oil.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:OLIVE_OIL:research-lenta-okey-v4.json:9",
         "PR4:OLIVE_OIL:research-x5-v3.json:1"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Чистое оливковое масло для салата/готовки; принятые карточки рафинированного и нерафинированного масла. Не ароматизированная смесь и не неопределённое salad oil.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "ONION_YELLOW",
       "name_ru": "Лук репчатый жёлтый",
       "exact_form": "Onions, yellow, raw",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": "Свежий репчатый лук с золотистой шелухой подтверждён Магнитом; обычная точная форма для овощного гарнира.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:ONION_YELLOW:research-magnit-v2.json:2"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Свежий репчатый лук с золотистой шелухой подтверждён Магнитом; обычная точная форма для овощного гарнира.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "PARSLEY_DRIED",
       "name_ru": "Петрушка сушёная",
       "exact_form": "Spices, parsley, dried",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": true,
+      "commodity_exception_kind": "BASIC_COMMODITY",
+      "commodity_exception_reason": "Обычная сушёная петрушка; принятая точная форма одной приправы. Не смесь трав и не свежая петрушка.",
+      "specific_product_reason": "Обычная сушёная петрушка; принятая точная форма одной приправы. Не смесь трав и не свежая петрушка.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:PARSLEY_DRIED:research-lenta-okey-v2.json:25"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Обычная сушёная петрушка; принятая точная форма одной приправы. Не смесь трав и не свежая петрушка.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "RICE_BROWN",
       "name_ru": "Рис бурый длиннозёрный",
       "exact_form": "Rice, brown, long grain, unenriched, raw",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": "Обычный сухой бурый длиннозерный рис подтверждён в крупах массовой сети; сохранение этого конкретного зерна оправдано опубликованным вариантом. Пропаренный рис не включён.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:RICE_BROWN:research-lenta-okey-v2.json:32"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Обычный сухой бурый длиннозерный рис подтверждён в крупах массовой сети; сохранение этого конкретного зерна оправдано опубликованным вариантом. Пропаренный рис не включён.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "SALT",
       "name_ru": "Соль поваренная",
       "exact_form": "Salt, table",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": true,
+      "commodity_exception_kind": "BASIC_COMMODITY",
+      "commodity_exception_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+      "specific_product_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:SALT:research-lenta-okey-v4.json:17",
         "PR4:SALT:research-lenta-okey-v7.json:3",
-        "PR4:SALT:research-x5-v3.json:2"
+        "PR4:SALT:research-x5-v3.json:2",
+        "SALT-LENTA",
+        "SALT-MAGNIT"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+      "review_date": "2026-09-12"
+    },
+    {
+      "food_code": "SESAME_OIL",
+      "name_ru": "Масло кунжутное",
+      "exact_form": "Oil, sesame, salad or cooking",
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": null,
+      "default_dependency_risk": "UNRESOLVED_PRODUCT_EVIDENCE",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "NOT_PASSED",
+      "evidence_refs": [
+        "PR4:SESAME_OIL:research-lenta-okey-v8.json:6"
+      ],
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Нерафинированное кунжутное масло подтверждено в сети; применение как базового масла нагрева отдельно не проверено. Не считаем редким из-за числа сетей и не применяем blanket oil exception.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+      "review_date": "2026-09-12"
+    },
+    {
+      "food_code": "SUGAR",
+      "name_ru": "Сахар-песок",
+      "exact_form": "Sugars, granulated",
+      "exact_form_resolved": true,
+      "market_classification": "RU_MASS_MARKET",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": true,
+      "commodity_exception_kind": "BASIC_COMMODITY",
+      "commodity_exception_reason": "Белый сахар-песок: базовая категория и три принятые сети; не сироп, подсластитель или коричневый сахар.",
+      "specific_product_reason": "Белый сахар-песок: базовая категория и три принятые сети; не сироп, подсластитель или коричневый сахар.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
+        "PR4:SUGAR:research-lenta-okey-v3.json:23",
+        "PR4:SUGAR:research-x5-v2.json:2",
+        "PR4:SUGAR:research-panel-v3.json:2"
+      ],
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Белый сахар-песок: базовая категория и три принятые сети; не сироп, подсластитель или коричневый сахар.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+      "review_date": "2026-09-12"
+    },
+    {
+      "food_code": "SUNFLOWER_OIL",
+      "name_ru": "Масло подсолнечное",
+      "exact_form": "Oil, sunflower, linoleic, (approx. 65%)",
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": true,
+      "commodity_exception_kind": "BASIC_COMMODITY",
+      "commodity_exception_reason": "Принятая карточка рафинированного дезодорированного подсолнечного масла; базовое кулинарное масло. Не любое масло или смесь.",
+      "specific_product_reason": "Принятая карточка рафинированного дезодорированного подсолнечного масла; базовое кулинарное масло. Не любое масло или смесь.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
+        "PR4:SUNFLOWER_OIL:research-lenta-okey-v4.json:8"
+      ],
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Принятая карточка рафинированного дезодорированного подсолнечного масла; базовое кулинарное масло. Не любое масло или смесь.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "SWEET_POTATO",
       "name_ru": "Батат",
       "exact_form": "Sweet potatoes, orange flesh, without skin, raw",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": "Весовой батат с оранжевой мякотью в обычной сети; конкретный овощ фиксированного гарнира и положительный RU familiarity обзор, без импортного specialist-магазина.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:SWEET_POTATO:research-lenta-okey-v2.json:8"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Весовой батат с оранжевой мякотью в обычной сети; конкретный овощ фиксированного гарнира и положительный RU familiarity обзор, без импортного specialist-магазина.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "TILAPIA_RAW",
       "name_ru": "Тилапия сырая",
       "exact_form": "Fish, tilapia, farm raised, raw",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": "Филе тилапии в обычной заморозке сети; конкретный основной белковый компонент опубликованной карточки, а не специализированный рыбный продукт. Сохранённая форма и Composition не изменены.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:TILAPIA_RAW:research-correction-market.json:2"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Филе тилапии в обычной заморозке сети; конкретный основной белковый компонент опубликованной карточки, а не специализированный рыбный продукт. Сохранённая форма и Composition не изменены.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "TOMATO",
       "name_ru": "Томат",
       "exact_form": "Tomato, roma",
-      "classification": "RU_AVAILABLE",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": false,
+      "commodity_exception_kind": "NONE",
+      "commodity_exception_reason": null,
+      "specific_product_reason": "Свежие томаты, включая сливовидные, подтверждены двумя сетями; обычная точная овощная форма, без заданного редкого сорта.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "PR4:TOMATO:research-lenta-okey-v2.json:2",
         "PR4:TOMATO:research-magnit-v2.json:10"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": false,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Свежие томаты, включая сливовидные, подтверждены двумя сетями; обычная точная овощная форма, без заданного редкого сорта.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     },
     {
       "food_code": "WATER",
       "name_ru": "Вода питьевая",
       "exact_form": "Beverages, water, tap, drinking",
-      "classification": "RU_MASS_MARKET",
-      "accepted_market_evidence_refs": [
+      "exact_form_resolved": true,
+      "market_classification": "RU_MASS_MARKET",
+      "ordinary_retail_supported": true,
+      "commodity_exception_applicable": true,
+      "commodity_exception_kind": "TAP_WATER",
+      "commodity_exception_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+      "specific_product_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+      "default_dependency_risk": "LOW",
+      "substitution_required": false,
+      "substitution_policy_reason": null,
+      "substitution_path_reviewed": false,
+      "default_gate_result": "PASS",
+      "evidence_refs": [
         "WATER:EXCEPTION"
       ],
-      "accepted_evidence_path": "data/curation/pr6-ru-food-data/market-evidence.json",
-      "default_ready": true,
-      "required_substitution_path_reviewed": false,
+      "policy_refs": [
+        "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+        "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+      ],
+      "decision_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+      "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
       "review_date": "2026-09-12"
     }
   ],
@@ -363,478 +872,1670 @@
   "salt_r1_decision": {
     "classification": "RU_AVAILABLE",
     "distinct_verified_chains": 2,
-    "default_ready": false,
-    "reason": "Новое исследование не достигло порога 3; отсутствие третьей проверки не означает отсутствия соли в продаже."
+    "default_gate_result": "PASS",
+    "reason": "Canonical §5 basic table-salt exception with exact SALT and retained ordinary category evidence; no third SKU/network required. Substitution not required."
   },
   "candidate_terminal_inputs": {
     "R1-05": [
       {
-        "row_id": "R1-05:1",
-        "name_ru": "Тыква мускатная, очищенная",
         "food_code": "BUTTERNUT_SQUASH",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Тыква мускатная, очищенная",
+        "exact_form": "Squash, winter, butternut, raw",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Весовая тыква Баттернат в обычной сети; сохранение конкретного вида обосновано фиксированным овощным гарниром, без specialist-закупки. Composition этой формы остаётся отдельным блокером.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:BUTTERNUT_SQUASH:research-lenta-okey-v2.json:7"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Весовая тыква Баттернат в обычной сети; сохранение конкретного вида обосновано фиксированным овощным гарниром, без specialist-закупки. Composition этой формы остаётся отдельным блокером.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-05:1",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-05:1",
+        "food_review_ref": "BUTTERNUT_SQUASH",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-05:2",
-        "name_ru": "Свёкла очищенная",
         "food_code": "BEET",
-        "form_resolved": true,
-        "classification": "SPECIALTY_OR_UNCLEAR",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Свёкла очищенная",
+        "exact_form": null,
+        "exact_form_resolved": false,
+        "market_classification": "SPECIALTY_OR_UNCLEAR",
+        "ordinary_retail_supported": false,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_FORM",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "R1-05"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Сохранённый класс SPECIALTY_OR_UNCLEAR; нет достаточных retained сведений по точной форме свёклы.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-05:2",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-05:2",
+        "food_review_ref": "BEET",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-05:3",
-        "name_ru": "Батат очищенный",
         "food_code": "SWEET_POTATO",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Батат очищенный",
+        "exact_form": "Sweet potatoes, orange flesh, without skin, raw",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Весовой батат с оранжевой мякотью в обычной сети; конкретный овощ фиксированного гарнира и положительный RU familiarity обзор, без импортного specialist-магазина.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:SWEET_POTATO:research-lenta-okey-v2.json:8"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Весовой батат с оранжевой мякотью в обычной сети; конкретный овощ фиксированного гарнира и положительный RU familiarity обзор, без импортного specialist-магазина.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-05:3",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-05:3",
+        "food_review_ref": "SWEET_POTATO",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-05:4",
-        "name_ru": "Масло оливковое",
         "food_code": "OLIVE_OIL",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Масло оливковое",
+        "exact_form": "Oil, olive, salad or cooking",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": true,
+        "commodity_exception_kind": "BASIC_COMMODITY",
+        "commodity_exception_reason": "Чистое оливковое масло для салата/готовки; принятые карточки рафинированного и нерафинированного масла. Не ароматизированная смесь и не неопределённое salad oil.",
+        "specific_product_reason": "Чистое оливковое масло для салата/готовки; принятые карточки рафинированного и нерафинированного масла. Не ароматизированная смесь и не неопределённое salad oil.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:OLIVE_OIL:research-lenta-okey-v4.json:9",
+          "PR4:OLIVE_OIL:research-x5-v3.json:1"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Чистое оливковое масло для салата/готовки; принятые карточки рафинированного и нерафинированного масла. Не ароматизированная смесь и не неопределённое salad oil.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-05:4",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-05:4",
+        "food_review_ref": "OLIVE_OIL",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-05:5",
+        "food_code": null,
         "name_ru": "Соль кошерная или йодированная",
-        "food_code": null,
-        "form_resolved": false,
-        "classification": "SPECIALTY_OR_UNCLEAR",
-        "note_ru": "Две формы; универсальная порция SALT не применяется.",
-        "policy_gate": "NOT_PASSED"
+        "exact_form": null,
+        "exact_form_resolved": false,
+        "market_classification": "SPECIALTY_OR_UNCLEAR",
+        "ordinary_retail_supported": false,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_FORM",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "R1-05"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Не разрешён точный source input/form или edible basis; market exception не исправляет этот блокер. Две формы; универсальная порция SALT не применяется.",
+        "reviewer": "Codex",
+        "review_date": "2026-09-12",
+        "row_id": "R1-05:5",
+        "source_form_resolved": false,
+        "source_form_ref": "quantity-authority.json#R1-05:5",
+        "food_review_ref": null,
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-05:6",
-        "name_ru": "Чеснок рубленый",
         "food_code": "GARLIC",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": "Принятые порции чеснока только estimate.",
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Чеснок рубленый",
+        "exact_form": "Garlic, raw",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Свежий чеснок подтверждён двумя сетями; обычный ароматический компонент. Рыночное решение не разрешает estimate-порции рубленого чеснока.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:GARLIC:research-lenta-okey-v2.json:6",
+          "PR4:GARLIC:research-magnit-v2.json:3"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Свежий чеснок подтверждён двумя сетями; обычный ароматический компонент. Рыночное решение не разрешает estimate-порции рубленого чеснока.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-05:6",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-05:6",
+        "food_review_ref": "GARLIC",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-05:8",
-        "name_ru": "Спрей для формы",
         "food_code": null,
-        "form_resolved": false,
-        "classification": "SPECIALTY_OR_UNCLEAR",
-        "note_ru": "Обязателен в шаге 3; состав и масса отсутствуют.",
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Спрей для формы",
+        "exact_form": null,
+        "exact_form_resolved": false,
+        "market_classification": "SPECIALTY_OR_UNCLEAR",
+        "ordinary_retail_supported": false,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_FORM",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "R1-05"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Не разрешён точный source input/form или edible basis; market exception не исправляет этот блокер. Обязателен в шаге 3; состав и масса отсутствуют.",
+        "reviewer": "Codex",
+        "review_date": "2026-09-12",
+        "row_id": "R1-05:8",
+        "source_form_resolved": false,
+        "source_form_ref": "quantity-authority.json#R1-05:8",
+        "food_review_ref": null,
+        "quantity_composition_gate_separate": true
       }
     ],
     "R1-13": [
       {
-        "row_id": "R1-13:1",
-        "name_ru": "Вода питьевая",
         "food_code": "WATER",
-        "form_resolved": true,
-        "classification": "RU_MASS_MARKET",
-        "note_ru": null,
-        "policy_gate": "PASS"
+        "name_ru": "Вода питьевая",
+        "exact_form": "Beverages, water, tap, drinking",
+        "exact_form_resolved": true,
+        "market_classification": "RU_MASS_MARKET",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": true,
+        "commodity_exception_kind": "TAP_WATER",
+        "commodity_exception_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+        "specific_product_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "WATER:EXCEPTION"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-13:1",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-13:1",
+        "food_review_ref": "WATER",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-13:2",
-        "name_ru": "Соль столовая",
         "food_code": "SALT",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Соль столовая",
+        "exact_form": "Salt, table",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": true,
+        "commodity_exception_kind": "BASIC_COMMODITY",
+        "commodity_exception_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "specific_product_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:SALT:research-lenta-okey-v4.json:17",
+          "PR4:SALT:research-lenta-okey-v7.json:3",
+          "PR4:SALT:research-x5-v3.json:2",
+          "SALT-LENTA",
+          "SALT-MAGNIT"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-13:2",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-13:2",
+        "food_review_ref": "SALT",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-13:3",
-        "name_ru": "Чеснок рубленый",
         "food_code": "GARLIC",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": "FDC-PORTION-84479 и 84480 имеют estimate, запрещены.",
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Чеснок рубленый",
+        "exact_form": "Garlic, raw",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Свежий чеснок подтверждён двумя сетями; обычный ароматический компонент. Рыночное решение не разрешает estimate-порции рубленого чеснока.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:GARLIC:research-lenta-okey-v2.json:6",
+          "PR4:GARLIC:research-magnit-v2.json:3"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Свежий чеснок подтверждён двумя сетями; обычный ароматический компонент. Рыночное решение не разрешает estimate-порции рубленого чеснока.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-13:3",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-13:3",
+        "food_review_ref": "GARLIC",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-13:4",
-        "name_ru": "Рис бурый длиннозерный обычный, сухой",
         "food_code": "RICE_BROWN",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Рис бурый длиннозерный обычный, сухой",
+        "exact_form": "Rice, brown, long grain, unenriched, raw",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Обычный сухой бурый длиннозерный рис подтверждён в крупах массовой сети; сохранение этого конкретного зерна оправдано опубликованным вариантом. Пропаренный рис не включён.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:RICE_BROWN:research-lenta-okey-v2.json:32"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Обычный сухой бурый длиннозерный рис подтверждён в крупах массовой сети; сохранение этого конкретного зерна оправдано опубликованным вариантом. Пропаренный рис не включён.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-13:4",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-13:4",
+        "food_review_ref": "RICE_BROWN",
+        "quantity_composition_gate_separate": true
       }
     ],
     "R1-15": [
       {
-        "row_id": "R1-15:1",
-        "name_ru": "Вода питьевая",
         "food_code": "WATER",
-        "form_resolved": true,
-        "classification": "RU_MASS_MARKET",
-        "note_ru": "fl oz — объём, даже под заголовком Weight; не масса oz.",
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Вода питьевая",
+        "exact_form": "Beverages, water, tap, drinking",
+        "exact_form_resolved": true,
+        "market_classification": "RU_MASS_MARKET",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": true,
+        "commodity_exception_kind": "TAP_WATER",
+        "commodity_exception_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+        "specific_product_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "WATER:EXCEPTION"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-15:1",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-15:1",
+        "food_review_ref": "WATER",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-15:2",
-        "name_ru": "Морковь очищенная свежая",
         "food_code": "CARROT",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Морковь очищенная свежая",
+        "exact_form": "Carrots, mature, raw",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Свежая весовая морковь подтверждена двумя обычными сетями; точный стандартный овощ для нарезки, без специального SKU.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:CARROT:research-lenta-okey-v2.json:1",
+          "PR4:CARROT:research-magnit-v2.json:1"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Свежая весовая морковь подтверждена двумя обычными сетями; точный стандартный овощ для нарезки, без специального SKU.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-15:2",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-15:2",
+        "food_review_ref": "CARROT",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-15:3",
-        "name_ru": "Мёд",
         "food_code": "HONEY",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": "Exact-порция не завершена.",
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Мёд",
+        "exact_form": "Honey",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Натуральный цветочный мёд с однокомпонентным составом в обычной сети; сохранение источникового подсластителя обосновано фиксированным рецептом, не требует редкого сорта.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:HONEY:research-lenta-okey-v3.json:7"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Натуральный цветочный мёд с однокомпонентным составом в обычной сети; сохранение источникового подсластителя обосновано фиксированным рецептом, не требует редкого сорта.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-15:3",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-15:3",
+        "food_review_ref": "HONEY",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-15:4",
-        "name_ru": "Сок лимона свежий или бутилированный",
         "food_code": null,
-        "form_resolved": false,
-        "classification": "SPECIALTY_OR_UNCLEAR",
-        "note_ru": "LEMON_JUICE отсутствует; цельный лимон не замена.",
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Сок лимона свежий или бутилированный",
+        "exact_form": null,
+        "exact_form_resolved": false,
+        "market_classification": "SPECIALTY_OR_UNCLEAR",
+        "ordinary_retail_supported": false,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_FORM",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "R1-15"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Не разрешён точный source input/form или edible basis; market exception не исправляет этот блокер. LEMON_JUICE отсутствует; цельный лимон не замена.",
+        "reviewer": "Codex",
+        "review_date": "2026-09-12",
+        "row_id": "R1-15:4",
+        "source_form_resolved": false,
+        "source_form_ref": "quantity-authority.json#R1-15:4",
+        "food_review_ref": null,
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-15:6",
-        "name_ru": "Маргарин",
         "food_code": "MARGARINE",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": "Без Composition и проверенной массы.",
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Маргарин",
+        "exact_form": "Margarine, 80% fat, stick, includes regular and hydrogenated corn and soybean oils",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_PRODUCT_EVIDENCE",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "PR4:MARGARINE:research-lenta-okey-v4.json:10"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Обычная сеть подтверждает семейство продукта, но не точный профиль: маргарин 72% против retained формы 80%. <3 сети не причина отказа.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-15:6",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-15:6",
+        "food_review_ref": "MARGARINE",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-15:7",
-        "name_ru": "Имбирь свежий тёртый",
         "food_code": "GINGER",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": "Exact-масса не установлена.",
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Имбирь свежий тёртый",
+        "exact_form": "Ginger root, raw",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Свежий корень имбиря прямо подтверждён в обычном овощном ассортименте; точная ароматическая форма для этой карточки, без specialty-закупки.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:GINGER:research-lenta-okey-v2.json:9"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Свежий корень имбиря прямо подтверждён в обычном овощном ассортименте; точная ароматическая форма для этой карточки, без specialty-закупки.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-15:7",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-15:7",
+        "food_review_ref": "GINGER",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-15:8",
-        "name_ru": "Соль столовая",
         "food_code": "SALT",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Соль столовая",
+        "exact_form": "Salt, table",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": true,
+        "commodity_exception_kind": "BASIC_COMMODITY",
+        "commodity_exception_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "specific_product_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:SALT:research-lenta-okey-v4.json:17",
+          "PR4:SALT:research-lenta-okey-v7.json:3",
+          "PR4:SALT:research-x5-v3.json:2",
+          "SALT-LENTA",
+          "SALT-MAGNIT"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-15:8",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-15:8",
+        "food_review_ref": "SALT",
+        "quantity_composition_gate_separate": true
       }
     ],
     "R1-16": [
       {
-        "row_id": "R1-16:1",
-        "name_ru": "Сок лайма свежий или бутилированный",
         "food_code": "LIME_JUICE",
-        "form_resolved": false,
-        "classification": "SPECIALTY_OR_UNCLEAR",
-        "note_ru": "Нет Composition и точной массы.",
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Сок лайма свежий или бутилированный",
+        "exact_form": "Lime juice, raw",
+        "exact_form_resolved": false,
+        "market_classification": "SPECIALTY_OR_UNCLEAR",
+        "ordinary_retail_supported": false,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_FORM",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "PR4:LIME_JUICE:research-lenta-okey-v4.json:19",
+          "PR4:LIME_JUICE:research-x5-v3.json:7"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Не разрешён точный source input/form или edible basis; market exception не исправляет этот блокер. Нет Composition и точной массы.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-16:1",
+        "source_form_resolved": false,
+        "source_form_ref": "quantity-authority.json#R1-16:1",
+        "food_review_ref": "LIME_JUICE",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-16:2",
-        "name_ru": "Масло оливковое",
         "food_code": "OLIVE_OIL",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Масло оливковое",
+        "exact_form": "Oil, olive, salad or cooking",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": true,
+        "commodity_exception_kind": "BASIC_COMMODITY",
+        "commodity_exception_reason": "Чистое оливковое масло для салата/готовки; принятые карточки рафинированного и нерафинированного масла. Не ароматизированная смесь и не неопределённое salad oil.",
+        "specific_product_reason": "Чистое оливковое масло для салата/готовки; принятые карточки рафинированного и нерафинированного масла. Не ароматизированная смесь и не неопределённое salad oil.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:OLIVE_OIL:research-lenta-okey-v4.json:9",
+          "PR4:OLIVE_OIL:research-x5-v3.json:1"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Чистое оливковое масло для салата/готовки; принятые карточки рафинированного и нерафинированного масла. Не ароматизированная смесь и не неопределённое salad oil.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-16:2",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-16:2",
+        "food_review_ref": "OLIVE_OIL",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-16:3",
-        "name_ru": "Перец чёрный молотый",
         "food_code": "BLACK_PEPPER",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Перец чёрный молотый",
+        "exact_form": "Spices, pepper, black",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": true,
+        "commodity_exception_kind": "BASIC_COMMODITY",
+        "commodity_exception_reason": "Одиночная приправа — чёрный молотый перец, состав прямо указан. Не белый перец и не перечная смесь.",
+        "specific_product_reason": "Одиночная приправа — чёрный молотый перец, состав прямо указан. Не белый перец и не перечная смесь.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:BLACK_PEPPER:research-lenta-okey-v2.json:34"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Одиночная приправа — чёрный молотый перец, состав прямо указан. Не белый перец и не перечная смесь.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-16:3",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-16:3",
+        "food_review_ref": "BLACK_PEPPER",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-16:4",
-        "name_ru": "Соль столовая",
         "food_code": "SALT",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Соль столовая",
+        "exact_form": "Salt, table",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": true,
+        "commodity_exception_kind": "BASIC_COMMODITY",
+        "commodity_exception_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "specific_product_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:SALT:research-lenta-okey-v4.json:17",
+          "PR4:SALT:research-lenta-okey-v7.json:3",
+          "PR4:SALT:research-x5-v3.json:2",
+          "SALT-LENTA",
+          "SALT-MAGNIT"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-16:4",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-16:4",
+        "food_review_ref": "SALT",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-16:5",
-        "name_ru": "Помидоры свежие нарезанные",
         "food_code": "TOMATO",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Помидоры свежие нарезанные",
+        "exact_form": "Tomato, roma",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Свежие томаты, включая сливовидные, подтверждены двумя сетями; обычная точная овощная форма, без заданного редкого сорта.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:TOMATO:research-lenta-okey-v2.json:2",
+          "PR4:TOMATO:research-magnit-v2.json:10"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Свежие томаты, включая сливовидные, подтверждены двумя сетями; обычная точная овощная форма, без заданного редкого сорта.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-16:5",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-16:5",
+        "food_review_ref": "TOMATO",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-16:6",
+        "food_code": null,
         "name_ru": "Лук зрелый очищенный",
-        "food_code": null,
-        "form_resolved": false,
-        "classification": "SPECIALTY_OR_UNCLEAR",
-        "note_ru": "Не выбираем ONION_YELLOW или ONION_RED без обоснования сорта.",
-        "policy_gate": "NOT_PASSED"
+        "exact_form": null,
+        "exact_form_resolved": false,
+        "market_classification": "SPECIALTY_OR_UNCLEAR",
+        "ordinary_retail_supported": false,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_FORM",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "R1-16"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Не разрешён точный source input/form или edible basis; market exception не исправляет этот блокер. Не выбираем ONION_YELLOW или ONION_RED без обоснования сорта.",
+        "reviewer": "Codex",
+        "review_date": "2026-09-12",
+        "row_id": "R1-16:6",
+        "source_form_resolved": false,
+        "source_form_ref": "quantity-authority.json#R1-16:6",
+        "food_review_ref": null,
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-16:7",
-        "name_ru": "Кинза свежая",
         "food_code": "CILANTRO",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Кинза свежая",
+        "exact_form": "Coriander (cilantro) leaves, raw",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Свежая кинза подтверждена обычной сетью; небольшая ароматическая роль в фиксированных вариантах, не specialist-ингредиент. Не заменяется другой зеленью.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:CILANTRO:research-lenta-okey-v3.json:12"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Свежая кинза подтверждена обычной сетью; небольшая ароматическая роль в фиксированных вариантах, не specialist-ингредиент. Не заменяется другой зеленью.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-16:7",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-16:7",
+        "food_review_ref": "CILANTRO",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-16:8",
+        "food_code": null,
         "name_ru": "Спрей для формы",
-        "food_code": null,
-        "form_resolved": false,
-        "classification": "SPECIALTY_OR_UNCLEAR",
-        "note_ru": "Состав и масса не определены.",
-        "policy_gate": "NOT_PASSED"
+        "exact_form": null,
+        "exact_form_resolved": false,
+        "market_classification": "SPECIALTY_OR_UNCLEAR",
+        "ordinary_retail_supported": false,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_FORM",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "R1-16"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Не разрешён точный source input/form или edible basis; market exception не исправляет этот блокер. Состав и масса не определены.",
+        "reviewer": "Codex",
+        "review_date": "2026-09-12",
+        "row_id": "R1-16:8",
+        "source_form_resolved": false,
+        "source_form_ref": "quantity-authority.json#R1-16:8",
+        "food_review_ref": null,
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-16:9",
-        "name_ru": "Филе трески свежее или замороженное",
         "food_code": null,
-        "form_resolved": false,
-        "classification": "SPECIALTY_OR_UNCLEAR",
-        "note_ru": "COD_ATLANTIC — только кандидат: вид и состояние после размораживания не закреплены.",
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Филе трески свежее или замороженное",
+        "exact_form": null,
+        "exact_form_resolved": false,
+        "market_classification": "SPECIALTY_OR_UNCLEAR",
+        "ordinary_retail_supported": false,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_FORM",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "R1-16"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Не разрешён точный source input/form или edible basis; market exception не исправляет этот блокер. COD_ATLANTIC — только кандидат: вид и состояние после размораживания не закреплены.",
+        "reviewer": "Codex",
+        "review_date": "2026-09-12",
+        "row_id": "R1-16:9",
+        "source_form_resolved": false,
+        "source_form_ref": "quantity-authority.json#R1-16:9",
+        "food_review_ref": null,
+        "quantity_composition_gate_separate": true
       }
     ],
     "R1-17": [
       {
-        "row_id": "R1-17:1",
+        "food_code": null,
         "name_ru": "Спрей для формы",
-        "food_code": null,
-        "form_resolved": false,
-        "classification": "SPECIALTY_OR_UNCLEAR",
-        "note_ru": "Состав и масса не определены.",
-        "policy_gate": "NOT_PASSED"
+        "exact_form": null,
+        "exact_form_resolved": false,
+        "market_classification": "SPECIALTY_OR_UNCLEAR",
+        "ordinary_retail_supported": false,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_FORM",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "R1-17"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Не разрешён точный source input/form или edible basis; market exception не исправляет этот блокер. Состав и масса не определены.",
+        "reviewer": "Codex",
+        "review_date": "2026-09-12",
+        "row_id": "R1-17:1",
+        "source_form_resolved": false,
+        "source_form_ref": "quantity-authority.json#R1-17:1",
+        "food_review_ref": null,
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-17:2",
-        "name_ru": "Филе тилапии",
         "food_code": "TILAPIA_RAW",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Филе тилапии",
+        "exact_form": "Fish, tilapia, farm raised, raw",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Филе тилапии в обычной заморозке сети; конкретный основной белковый компонент опубликованной карточки, а не специализированный рыбный продукт. Сохранённая форма и Composition не изменены.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:TILAPIA_RAW:research-correction-market.json:2"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Филе тилапии в обычной заморозке сети; конкретный основной белковый компонент опубликованной карточки, а не специализированный рыбный продукт. Сохранённая форма и Composition не изменены.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-17:2",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-17:2",
+        "food_review_ref": "TILAPIA_RAW",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-17:3",
+        "food_code": null,
         "name_ru": "Сухари цельнозерновые с приправами",
-        "food_code": null,
-        "form_resolved": false,
-        "classification": "SPECIALTY_OR_UNCLEAR",
-        "note_ru": "Не обычные BREADCRUMBS.",
-        "policy_gate": "NOT_PASSED"
+        "exact_form": null,
+        "exact_form_resolved": false,
+        "market_classification": "SPECIALTY_OR_UNCLEAR",
+        "ordinary_retail_supported": false,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_FORM",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "R1-17"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Не разрешён точный source input/form или edible basis; market exception не исправляет этот блокер. Не обычные BREADCRUMBS.",
+        "reviewer": "Codex",
+        "review_date": "2026-09-12",
+        "row_id": "R1-17:3",
+        "source_form_resolved": false,
+        "source_form_ref": "quantity-authority.json#R1-17:3",
+        "food_review_ref": null,
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-17:4",
+        "food_code": null,
         "name_ru": "Смесь прованских трав",
-        "food_code": null,
-        "form_resolved": false,
-        "classification": "SPECIALTY_OR_UNCLEAR",
-        "note_ru": "Нет точного состава/формы и массы.",
-        "policy_gate": "NOT_PASSED"
+        "exact_form": null,
+        "exact_form_resolved": false,
+        "market_classification": "SPECIALTY_OR_UNCLEAR",
+        "ordinary_retail_supported": false,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_FORM",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "R1-17"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Не разрешён точный source input/form или edible basis; market exception не исправляет этот блокер. Нет точного состава/формы и массы.",
+        "reviewer": "Codex",
+        "review_date": "2026-09-12",
+        "row_id": "R1-17:4",
+        "source_form_resolved": false,
+        "source_form_ref": "quantity-authority.json#R1-17:4",
+        "food_review_ref": null,
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-17:5",
-        "name_ru": "Майонез с пониженной жирностью",
         "food_code": "MAYONNAISE_LOW_FAT",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": "Exact-порция не завершена.",
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Майонез с пониженной жирностью",
+        "exact_form": "Mayonnaise, reduced fat, with olive oil",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_PRODUCT_EVIDENCE",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "PR4:MAYONNAISE_LOW_FAT:research-lenta-okey-v2.json:19"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Обычная сеть подтверждает лёгкий майонез, но retained точная форма содержит оливковое масло; в наблюдении CALVE 20% этот состав не подтверждён. <3 сети не причина отказа.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-17:5",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-17:5",
+        "food_review_ref": "MAYONNAISE_LOW_FAT",
+        "quantity_composition_gate_separate": true
       }
     ],
     "R1-18": [
       {
-        "row_id": "R1-18:1",
-        "name_ru": "Сельдерей свежий нарезанный",
         "food_code": "CELERY",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Сельдерей свежий нарезанный",
+        "exact_form": "Celery, raw",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Свежие стебли сельдерея подтверждены обычной сетью; фиксированный овощной компонент, без специального сорта или промышленной обработки.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:CELERY:research-lenta-okey-v3.json:13"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Свежие стебли сельдерея подтверждены обычной сетью; фиксированный овощной компонент, без специального сорта или промышленной обработки.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-18:1",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-18:1",
+        "food_review_ref": "CELERY",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-18:2",
-        "name_ru": "Лук жёлтый свежий",
         "food_code": "ONION_YELLOW",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Лук жёлтый свежий",
+        "exact_form": "Onions, yellow, raw",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Свежий репчатый лук с золотистой шелухой подтверждён Магнитом; обычная точная форма для овощного гарнира.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:ONION_YELLOW:research-magnit-v2.json:2"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Свежий репчатый лук с золотистой шелухой подтверждён Магнитом; обычная точная форма для овощного гарнира.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-18:2",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-18:2",
+        "food_review_ref": "ONION_YELLOW",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-18:3",
-        "name_ru": "Морковь свежая",
         "food_code": "CARROT",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Морковь свежая",
+        "exact_form": "Carrots, mature, raw",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Свежая весовая морковь подтверждена двумя обычными сетями; точный стандартный овощ для нарезки, без специального SKU.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:CARROT:research-lenta-okey-v2.json:1",
+          "PR4:CARROT:research-magnit-v2.json:1"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Свежая весовая морковь подтверждена двумя обычными сетями; точный стандартный овощ для нарезки, без специального SKU.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-18:3",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-18:3",
+        "food_review_ref": "CARROT",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-18:4",
-        "name_ru": "Перец красный сладкий",
         "food_code": "BELL_PEPPER_RED",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Перец красный сладкий",
+        "exact_form": "Peppers, bell, red, raw",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Обычный свежий сладкий красный перец подтверждён Магнитом; в рецепте сохраняется именно красный овощ без особого сорта/бренда. Менее трёх сетей — ограничение покрытия панели, не свидетельство редкости.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:BELL_PEPPER_RED:research-magnit-v2.json:9"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Обычный свежий сладкий красный перец подтверждён Магнитом; в рецепте сохраняется именно красный овощ без особого сорта/бренда. Менее трёх сетей — ограничение покрытия панели, не свидетельство редкости.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-18:4",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-18:4",
+        "food_review_ref": "BELL_PEPPER_RED",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-18:5",
+        "food_code": null,
         "name_ru": "Капуста цветная измельчённая, размороженная, после слива",
-        "food_code": null,
-        "form_resolved": false,
-        "classification": "SPECIALTY_OR_UNCLEAR",
-        "note_ru": "CAULIFLOWER_FROZEN не подтверждает DRAINED-форму.",
-        "policy_gate": "NOT_PASSED"
+        "exact_form": null,
+        "exact_form_resolved": false,
+        "market_classification": "SPECIALTY_OR_UNCLEAR",
+        "ordinary_retail_supported": false,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_FORM",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "R1-18"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Не разрешён точный source input/form или edible basis; market exception не исправляет этот блокер. CAULIFLOWER_FROZEN не подтверждает DRAINED-форму.",
+        "reviewer": "Codex",
+        "review_date": "2026-09-12",
+        "row_id": "R1-18:5",
+        "source_form_resolved": false,
+        "source_form_ref": "quantity-authority.json#R1-18:5",
+        "food_review_ref": null,
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-18:6",
-        "name_ru": "Масло оливковое",
         "food_code": "OLIVE_OIL",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Масло оливковое",
+        "exact_form": "Oil, olive, salad or cooking",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": true,
+        "commodity_exception_kind": "BASIC_COMMODITY",
+        "commodity_exception_reason": "Чистое оливковое масло для салата/готовки; принятые карточки рафинированного и нерафинированного масла. Не ароматизированная смесь и не неопределённое salad oil.",
+        "specific_product_reason": "Чистое оливковое масло для салата/готовки; принятые карточки рафинированного и нерафинированного масла. Не ароматизированная смесь и не неопределённое salad oil.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:OLIVE_OIL:research-lenta-okey-v4.json:9",
+          "PR4:OLIVE_OIL:research-x5-v3.json:1"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Чистое оливковое масло для салата/готовки; принятые карточки рафинированного и нерафинированного масла. Не ароматизированная смесь и не неопределённое salad oil.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-18:6",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-18:6",
+        "food_review_ref": "OLIVE_OIL",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-18:7",
-        "name_ru": "Соль столовая",
         "food_code": "SALT",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Соль столовая",
+        "exact_form": "Salt, table",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": true,
+        "commodity_exception_kind": "BASIC_COMMODITY",
+        "commodity_exception_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "specific_product_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:SALT:research-lenta-okey-v4.json:17",
+          "PR4:SALT:research-lenta-okey-v7.json:3",
+          "PR4:SALT:research-x5-v3.json:2",
+          "SALT-LENTA",
+          "SALT-MAGNIT"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-18:7",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-18:7",
+        "food_review_ref": "SALT",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-18:8",
+        "food_code": null,
         "name_ru": "Чеснок гранулированный",
-        "food_code": null,
-        "form_resolved": false,
-        "classification": "SPECIALTY_OR_UNCLEAR",
-        "note_ru": "Не приравниваем объём гранул к GARLIC_POWDER.",
-        "policy_gate": "NOT_PASSED"
+        "exact_form": null,
+        "exact_form_resolved": false,
+        "market_classification": "SPECIALTY_OR_UNCLEAR",
+        "ordinary_retail_supported": false,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_FORM",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "R1-18"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Не разрешён точный source input/form или edible basis; market exception не исправляет этот блокер. Не приравниваем объём гранул к GARLIC_POWDER.",
+        "reviewer": "Codex",
+        "review_date": "2026-09-12",
+        "row_id": "R1-18:8",
+        "source_form_resolved": false,
+        "source_form_ref": "quantity-authority.json#R1-18:8",
+        "food_review_ref": null,
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-18:9",
-        "name_ru": "Кинза свежая",
         "food_code": "CILANTRO",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Кинза свежая",
+        "exact_form": "Coriander (cilantro) leaves, raw",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Свежая кинза подтверждена обычной сетью; небольшая ароматическая роль в фиксированных вариантах, не specialist-ингредиент. Не заменяется другой зеленью.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:CILANTRO:research-lenta-okey-v3.json:12"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Свежая кинза подтверждена обычной сетью; небольшая ароматическая роль в фиксированных вариантах, не specialist-ингредиент. Не заменяется другой зеленью.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-18:9",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-18:9",
+        "food_review_ref": "CILANTRO",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-18:10",
-        "name_ru": "Спрей для формы",
         "food_code": null,
-        "form_resolved": false,
-        "classification": "SPECIALTY_OR_UNCLEAR",
-        "note_ru": "Указан в процессе, масса отсутствует.",
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Спрей для формы",
+        "exact_form": null,
+        "exact_form_resolved": false,
+        "market_classification": "SPECIALTY_OR_UNCLEAR",
+        "ordinary_retail_supported": false,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_FORM",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "R1-18"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Не разрешён точный source input/form или edible basis; market exception не исправляет этот блокер. Указан в процессе, масса отсутствует.",
+        "reviewer": "Codex",
+        "review_date": "2026-09-12",
+        "row_id": "R1-18:10",
+        "source_form_resolved": false,
+        "source_form_ref": "quantity-authority.json#R1-18:10",
+        "food_review_ref": null,
+        "quantity_composition_gate_separate": true
       }
     ],
     "R1-21": [
       {
-        "row_id": "R1-21:1",
-        "name_ru": "Овсяные хлопья",
         "food_code": "OATS_ROLLED",
-        "form_resolved": true,
-        "classification": "RU_MASS_MARKET",
-        "note_ru": null,
-        "policy_gate": "PASS"
+        "name_ru": "Овсяные хлопья",
+        "exact_form": "Oats, whole grain, rolled, old fashioned",
+        "exact_form_resolved": true,
+        "market_classification": "RU_MASS_MARKET",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Обычные цельные овсяные хлопья подтверждены принятыми наблюдениями трёх сетей и PR29 формой; не instant-смесь и не новая форма хлопьев.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:OATS_ROLLED:research-lenta-okey-v5.json:4",
+          "PR4:OATS_ROLLED:research-lenta-okey-v2.json:33",
+          "PR4:OATS_ROLLED:research-lenta-okey-v5.json:3",
+          "PR4:OATS_ROLLED:research-x5-v2.json:3",
+          "PR4:OATS_ROLLED:research-panel-v3.json:3"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Обычные цельные овсяные хлопья подтверждены принятыми наблюдениями трёх сетей и PR29 формой; не instant-смесь и не новая форма хлопьев.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-21:1",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-21:1",
+        "food_review_ref": "OATS_ROLLED",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-21:2",
-        "name_ru": "Соль поваренная",
         "food_code": "SALT",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Соль поваренная",
+        "exact_form": "Salt, table",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": true,
+        "commodity_exception_kind": "BASIC_COMMODITY",
+        "commodity_exception_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "specific_product_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:SALT:research-lenta-okey-v4.json:17",
+          "PR4:SALT:research-lenta-okey-v7.json:3",
+          "PR4:SALT:research-x5-v3.json:2",
+          "SALT-LENTA",
+          "SALT-MAGNIT"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-21:2",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-21:2",
+        "food_review_ref": "SALT",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-21:3",
-        "name_ru": "Вода питьевая для варки",
         "food_code": "WATER",
-        "form_resolved": true,
-        "classification": "RU_MASS_MARKET",
-        "note_ru": null,
-        "policy_gate": "PASS"
+        "name_ru": "Вода питьевая для варки",
+        "exact_form": "Beverages, water, tap, drinking",
+        "exact_form_resolved": true,
+        "market_classification": "RU_MASS_MARKET",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": true,
+        "commodity_exception_kind": "TAP_WATER",
+        "commodity_exception_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+        "specific_product_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "WATER:EXCEPTION"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-21:3",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-21:3",
+        "food_review_ref": "WATER",
+        "quantity_composition_gate_separate": true
       }
     ],
     "R1-22": [
       {
-        "row_id": "R1-22:1",
+        "food_code": null,
         "name_ru": "Рис бурый длиннозерный пропаренный",
-        "food_code": null,
-        "form_resolved": false,
-        "classification": "SPECIALTY_OR_UNCLEAR",
-        "note_ru": "Обычный RICE_BROWN не подтверждает пропаренную форму.",
-        "policy_gate": "NOT_PASSED"
+        "exact_form": null,
+        "exact_form_resolved": false,
+        "market_classification": "SPECIALTY_OR_UNCLEAR",
+        "ordinary_retail_supported": false,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_FORM",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "R1-22"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Не разрешён точный source input/form или edible basis; market exception не исправляет этот блокер. Обычный RICE_BROWN не подтверждает пропаренную форму.",
+        "reviewer": "Codex",
+        "review_date": "2026-09-12",
+        "row_id": "R1-22:1",
+        "source_form_resolved": false,
+        "source_form_ref": "quantity-authority.json#R1-22:1",
+        "food_review_ref": null,
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-22:2",
-        "name_ru": "Вода холодная",
         "food_code": "WATER",
-        "form_resolved": true,
-        "classification": "RU_MASS_MARKET",
-        "note_ru": null,
-        "policy_gate": "PASS"
+        "name_ru": "Вода холодная",
+        "exact_form": "Beverages, water, tap, drinking",
+        "exact_form_resolved": true,
+        "market_classification": "RU_MASS_MARKET",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": true,
+        "commodity_exception_kind": "TAP_WATER",
+        "commodity_exception_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+        "specific_product_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "WATER:EXCEPTION"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Питьевая водопроводная вода: явное исключение §5; розничные сети не требуются.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-22:2",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-22:2",
+        "food_review_ref": "WATER",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-22:3",
-        "name_ru": "Соль поваренная",
         "food_code": "SALT",
-        "form_resolved": true,
-        "classification": "RU_AVAILABLE",
-        "note_ru": null,
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Соль поваренная",
+        "exact_form": "Salt, table",
+        "exact_form_resolved": true,
+        "market_classification": "RU_AVAILABLE",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": true,
+        "commodity_exception_kind": "BASIC_COMMODITY",
+        "commodity_exception_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "specific_product_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:SALT:research-lenta-okey-v4.json:17",
+          "PR4:SALT:research-lenta-okey-v7.json:3",
+          "PR4:SALT:research-x5-v3.json:2",
+          "SALT-LENTA",
+          "SALT-MAGNIT"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Обычная пищевая поваренная соль без смеси приправ. Сохранены Лента и Магнит; SKU/третья сеть не добавляют существенной информации о базовой категории. Не распространяется на неразрешённый выбор kosher/iodized.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-22:3",
+        "source_form_resolved": true,
+        "source_form_ref": "quantity-authority.json#R1-22:3",
+        "food_review_ref": "SALT",
+        "quantity_composition_gate_separate": true
       },
       {
-        "row_id": "R1-22:4",
-        "name_ru": "Масло салатное",
         "food_code": null,
-        "form_resolved": false,
-        "classification": "SPECIALTY_OR_UNCLEAR",
-        "note_ru": "Источник не называет точный вид масла.",
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Масло салатное",
+        "exact_form": null,
+        "exact_form_resolved": false,
+        "market_classification": "SPECIALTY_OR_UNCLEAR",
+        "ordinary_retail_supported": false,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": null,
+        "default_dependency_risk": "UNRESOLVED_FORM",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "NOT_PASSED",
+        "evidence_refs": [
+          "R1-22"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Не разрешён точный source input/form или edible basis; market exception не исправляет этот блокер. Источник не называет точный вид масла.",
+        "reviewer": "Codex",
+        "review_date": "2026-09-12",
+        "row_id": "R1-22:4",
+        "source_form_resolved": false,
+        "source_form_ref": "quantity-authority.json#R1-22:4",
+        "food_review_ref": null,
+        "quantity_composition_gate_separate": true
       }
     ],
     "R1-23": [
       {
-        "row_id": "R1-23:1",
-        "name_ru": "Яйца целые свежие",
         "food_code": "EGG",
-        "form_resolved": false,
-        "classification": "RU_MASS_MARKET",
-        "note_ru": "200 штук; весовая база съедобной части не установлена. Не делить на штуки как universal piece weight.",
-        "policy_gate": "NOT_PASSED"
+        "name_ru": "Яйцо куриное целое",
+        "exact_form": "Eggs, Grade A, Large, egg whole",
+        "exact_form_resolved": true,
+        "market_classification": "RU_MASS_MARKET",
+        "ordinary_retail_supported": true,
+        "commodity_exception_applicable": false,
+        "commodity_exception_kind": "NONE",
+        "commodity_exception_reason": null,
+        "specific_product_reason": "Обычные куриные яйца подтверждены тремя сетями; не жидкая или замороженная яичная масса. Масса съедобной части остаётся отдельным вопросом.",
+        "default_dependency_risk": "LOW",
+        "substitution_required": false,
+        "substitution_policy_reason": null,
+        "substitution_path_reviewed": false,
+        "default_gate_result": "PASS",
+        "evidence_refs": [
+          "PR4:EGG:research-x5-v2.json:1",
+          "PR4:EGG:research-magnit-v2.json:4",
+          "PR4:EGG:research-panel-v3.json:1"
+        ],
+        "policy_refs": [
+          "docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+          "docs/family-food/food-composition-and-assembly.md#ru-availability-и-familiarity-gates"
+        ],
+        "decision_reason": "Обычные куриные яйца подтверждены тремя сетями; не жидкая или замороженная яичная масса. Масса съедобной части остаётся отдельным вопросом.",
+        "reviewer": "Codex — редакционный пересмотр retained evidence по канонической политике",
+        "review_date": "2026-09-12",
+        "row_id": "R1-23:1",
+        "source_form_resolved": false,
+        "source_form_ref": "quantity-authority.json#R1-23:1",
+        "food_review_ref": "EGG",
+        "quantity_composition_gate_separate": true,
+        "purchase_identity_scope": "Whole fresh shell egg is an ordinary purchase; edible input basis unresolved in immutable quantity-authority.json. Market PASS does not repair that blocker."
       }
     ]
   },
-  "unresolved_terminal_policy": "A missing exact form is recorded explicitly; no nearest food, raw/cooked, juice/fruit, fat-level or powder/granule fallback. No RetailSKU, price, live stock or production availability persistence."
+  "screened_donor_market_scope": "All 23 dispositions recomputed. Nine deep donors have full retained terminal inventories. Fourteen screen-only donors already fail immutable food/form/composition evidence; their uncompleted market reviews remain NOT_REVIEWED, not universal RU_AVAILABLE failures.",
+  "exception_scope": "Finite reviewed exact food/forms only. Unresolved kosher/iodized choice, generic salad oil, herb blends, unsupported heated canola/sesame use do not inherit an exception.",
+  "no_runtime_effect": "Research decisions only; no production default_pool_eligible field, catalogue classification or source fact changed."
 }
