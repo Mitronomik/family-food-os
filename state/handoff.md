@@ -45,9 +45,11 @@ Verification: focused 27 passed; source replay and existing B2-A, VECTOR-A/B,
 Composition and RU audits pass; Ruff/format and 3-file runtime mypy pass.
 Full backend + launcher regression with AI_ENABLED=false: **3826 passed in 649.81s**,
 zero skips. All required checks pass.
-See [progress](progress.md) for exact commands. Implementation is review-ready;
-PR delivery follows. Unrelated `.DS_Store` stays excluded.
+See [progress](progress.md) for exact commands. **REVIEW-READY in
+[PR #29](https://github.com/Mitronomik/family-food-os/pull/29)**, opened into main.
+Implementation commit: `d0a238ce32193d5884d61ee384d5eb7f242bcaed`.
+This delivery receipt changes state only; tested runtime/data/test bytes are unchanged.
+Unrelated `.DS_Store` stays excluded.
 
-**PR6 — NOT COMPLETE.** Publish the verified feature branch and PR into main;
-stop for review without merging. Do not start PR6-CLOSE automatically. After
+**PR6 — NOT COMPLETE.** Stop for final review without merging. Do not start PR6-CLOSE automatically. After
 reviewed merge it is a separate review/gate, not assumed milestone completion.

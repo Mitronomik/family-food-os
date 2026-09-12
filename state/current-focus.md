@@ -9,7 +9,8 @@ Updated: `2026-09-12`
   185 FoodIngredients, 30 current recipes / 189 ingredient rows. PR28 contributes
   exactly CAULIFLOWER_FROZEN and STRAWBERRY_FROZEN_UNSWEETENED.
 - **PR6-DATA-B2-B2-REDESIGNED — current explicitly authorized bounded operation**,
-  branch `codex/pr6-data-b2-b2-redesigned`. Implementation and required verification passed; PR delivery follows.
+  branch `codex/pr6-data-b2-b2-redesigned`. REVIEW-READY in
+  [PR #29](https://github.com/Mitronomik/family-food-os/pull/29); awaiting review.
 - Audit universe re-resolved: 37 target rows / 23 recipes / 19 original foods;
   all 46 current uses retained. Only the two approved frozen forms may be remapped.
 - Five PR28-deferred forms, APPLE profile/bindings and three yield cases retain
