@@ -2,59 +2,53 @@
 
 Updated: `2026-09-12`
 
-VECTOR-A / VECTOR-B are merged (PR #25 / #26). PR6-COMPOSITION-CORE is separately
-authorized and implemented on `codex/pr6-composition-core`; verification is
-complete and [PR #27](https://github.com/Mitronomik/family-food-os/pull/27) is open, ready for review (not merged).
-Implementation commit: `657c692ce5ab8e49719ed9a164cda224cdfb296d`. Actual fetched base:
-`b39d9f5786796dc689bdee8ae52a90cbcc4ebdfe`. Local `main` was stale; the feature
-branch was created directly from verified `origin/main`. Migration 0028 → 0029.
+PR #27 is MERGED, not review-pending. Exact fetched starting main and merge commit:
+`d5b5ce3fdc4ec79de5454b3ed23b1d527772c0bc`. GitHub merged state verified through the
+GitHub connector. Branch: `codex/pr6-ru-food-data`. Migration remains
+`0029_food_composition_core`; no schema change.
 
-## Approved mass authority and implemented contract
+PR6-RU-FOOD-DATA is the current explicitly authorized operation. Its
+[version 1 evidence package](../data/curation/pr6-ru-food-data/README.md) is bounded
+to 81 existing food codes and seven form candidates. 60 food-data records are
+RU_READY, 28 NOT_READY. RU_AVAILABLE does not independently permit default use;
+only three records pass the separate food/market default gate. Sparse nutrients,
+preparation, kitchen and later recipe gates remain independently required.
 
-The user resolved the preflight ambiguity explicitly: persist exact positive
-finite Decimal `input_mass_g` per component, derive total input mass by exact
-summation, persist no normalized fractions and never approximate `1/3` as an
-authoritative fraction. The earlier fraction proposal was never implemented.
-The [canonical contract](../docs/family-food/food-composition-and-assembly.md#pr6-composition-core--concrete-runtime-contract)
-records this decision and all implemented result/persistence semantics.
+Promoted: CAULIFLOWER_FROZEN (SR 170398) and
+STRAWBERRY_FROZEN_UNSWEETENED (SR 168173), both April 2018 release. Each adds one
+profile and seal with 33 exact positive mapped source values. Fresh official Lenta
+food-form evidence plus official SPB/LO presence supports RU_AVAILABLE.
+Deferred: APPLE_PEELED and PASTA_COOKED (no exact purchase form or reviewed
+preparation/output path); SPINACH_BABY (primary market form proof unestablished);
+LEMON_JUICE / ORANGE_JUICE (unapproved FNDDS generic/default/blend and mappings).
+Five SR/Foundation source extracts were revalidated against redownloaded official
+archive hashes. FNDDS proposals remain research. PR4 reused evidence keeps its date.
 
-FoodIngredient remains the sole food identity. Atomic versions pin an existing
-profile/sealed vector; composites pin immutable child versions, node IDs/order,
-masses/states and ordered transformation steps. Build-time and SQL DAG checks
-reject cycles; iterative runtime traversal also catches corrupted cycles and
-allows shared-child reuse. Unknowns never become zero. Yield and sparse retention
-are independent reviewed evidence with pinned immutable identities and provenance.
+Seed/import: `app.seed.ru_food_data` is a separate explicit operation after the
+accepted food/recipe/B1/B2-A chain. Fixed package hashes, protected source hashes,
+deterministic gates and exact profile provenance resolve local IDs. One project
+UoW publishes profiles, sparse vectors and 60 ATOMIC versions. Seals/snapshots are
+append-only. Repeat import inserts zero and leaves database contents identical.
+Historical v1 backfill policy is unchanged; no current-profile selector is used
+for composition replay. Rollback of a failed run is transactional; successful
+operational recovery restores a pre-seed backup rather than deleting history.
 
-The reusable `CompositionCalculator` takes an explicit immutable root and a
-nonempty requested nutrient-code set. It returns frozen domain results with
-COMPLETE/PARTIAL/INCOMPLETE, per-nutrient availability, mass/basis, stable issues
-and deterministic replay evidence. Structural corruption/missing dependencies
-fail closed. Known input/retained amounts remain diagnostic when output yield is
-unknown. Calculation creates no random IDs/timestamps and excludes mutable
-current-profile flags. Decimal mass sums/products are exact; divisions use a
-private 80-digit context, root nutrient output rounds once to six places.
+Existing 183 foods/profiles/seals, all recipe versions/rows and B1/B2-A bindings
+are unchanged. Complete readiness reports match, including all 43 non-executable
+estimates. No new COMPOSITE/transformation/yield/retention rows, API/UI, Retail
+runtime or AI dependency. Synthetic tests are excluded from production counts.
 
-Migration 0029 creates seven empty tables. Repositories share the existing Core
-UoW connection and never commit independently. Snapshot-last writes, deferred FKs,
-row counts and deterministic digests protect completeness; triggers protect
-UPDATE/DELETE/REPLACE and late append. Migrations are forward-only; operational
-rollback uses the existing pre-upgrade backup. No production backfill occurs.
+All required verification is green: full backend + launcher 3799 passed with
+AI_ENABLED=false, focused 41, affected 311, migration/backup 154; source replay,
+audits, Ruff/format and affected-runtime mypy pass. Exact commands/results are in
+[progress](progress.md). Status: REVIEW-READY in [PR #28](https://github.com/Mitronomik/family-food-os/pull/28).
+Implementation commit: `6da0d711d25a172c2b0e5ef308283dd0c698cee6`.
+Next action: review the bounded PR
+against main, including the two promotions and five deferrals; merge requires
+explicit post-review authorization. CLI HTTPS/SSH authentication is unavailable;
+delivery uses the authenticated GitHub connector with verified Git blob/tree hashes.
+Unrelated local `.DS_Store` remains excluded.
 
-## Evidence and delivery
-
-[Audit](../data/curation/pr6-composition-core/README.md) uses temporary accepted
-seed databases through real 0028. Every prior table/row and full readiness report
-is unchanged by 0029; foreign keys are clean and all 183 vector seals read validly.
-Current readiness is 30 recipes / 189 rows / 30 INCOMPLETE; classifications
-66/21/37/65, all 43 estimates non-executable. Production counts for every new
-composition table are zero; synthetic tests are not reported as production data.
-Use `backend/.venv/bin/python`; `ruff` and `mypy` are available on PATH.
-Executed checks and results: [progress](progress.md#pr6-composition-core-verification).
-
-Final checks: 3758 backend/launcher tests passed, zero skips; 59 focused tests
-passed; lint/format on 21 Python files and mypy on 9 runtime files passed.
-Next action: review PR #27.
-No autonomous merge. No automatic RU Food Data start. No RecipeVersion binding,
-Recipe Assembly, API/UI, RU enrichment, B2 policy redesign, Serving, Planner,
-Shopping, Pantry, AI or PR7+ work is included or newly authorized.
-PR6 remains NOT COMPLETE. Unrelated `.DS_Store` remains excluded from delivery.
+**PR6 remains NOT COMPLETE.** No autonomous merge. After reviewed merge, the next
+roadmap candidate is PR6-DATA-B2-B2-REDESIGNED, requiring separate authorization.
+Do not start it, Recipe Assembly or PR7+ automatically.

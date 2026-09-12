@@ -2,29 +2,26 @@
 
 Updated: `2026-09-12`
 
-- **PR6-NUTRIENT-VECTOR-A — MERGED**, PR #25.
-- **PR6-NUTRIENT-VECTOR-B — MERGED**, PR #26, main
-  `b39d9f5786796dc689bdee8ae52a90cbcc4ebdfe`.
-- **PR6-COMPOSITION-CORE — READY FOR REVIEW, not merged**.
-  [PR #27](https://github.com/Mitronomik/family-food-os/pull/27), branch `codex/pr6-composition-core`,
-  starts at the verified remote main above.
-- Explicit user decision: exact positive finite Decimal component `input_mass_g`
-  is authoritative; total input mass is its exact sum. No persisted fractions,
-  fraction-sum invariant or approximated recurring ratios.
-- Migration `0028_normalized_nutrient_vector` → `0029_food_composition_core`.
-  Seven new infrastructure tables; production composition/yield/retention rows: 0.
-- Deterministic calculator: pinned sealed atomic vectors, immutable child DAG,
-  explicit mass states, separate reviewed yield and sparse nutrient retention,
-  per-nutrient availability and immutable replay. Nutrition v1 consumers unchanged.
-- Measured readiness unchanged: 30 recipes / 189 rows / 30 INCOMPLETE;
-  66 exact / 21 no-conversion / 37 review-required / 65 blocked;
-  all 43 estimates non-executable. All prior rows and 183 vector seals verified.
-- Final backend/launcher regression: **3758 passed**, no skips, `AI_ENABLED=false`.
-  Focused Composition Core: **59 passed**. Lint/format, mypy and audits PASS.
-- **PR6 — NOT COMPLETE.** No autonomous merge or automatic RU Food Data,
-  B2 redesign, Recipe Assembly, Serving or PR7+ work.
+- **PR6-COMPOSITION-CORE — MERGED**, [PR #27](https://github.com/Mitronomik/family-food-os/pull/27),
+  merge commit / verified starting `origin/main`:
+  `d5b5ce3fdc4ec79de5454b3ed23b1d527772c0bc`.
+  GitHub merged state independently verified; previous review-pending state is superseded.
+- Migration head: `0029_food_composition_core`.
+- **PR6-RU-FOOD-DATA — current authorized bounded operation**, branch
+  `codex/pr6-ru-food-data`. Implementation verified; REVIEW-READY in
+  [PR #28](https://github.com/Mitronomik/family-food-os/pull/28), awaiting review.
+- Audit target: 81 existing food codes / 189 current recipe ingredient rows,
+  required/optional uses separate; seven mandatory form research candidates.
+- Production additions: CAULIFLOWER_FROZEN and STRAWBERRY_FROZEN_UNSWEETENED;
+  2 profiles, 66 nutrient values, 2 seals, 60 ATOMIC composition references.
+  APPLE_PEELED, LEMON_JUICE, ORANGE_JUICE, PASTA_COOKED, SPINACH_BABY deferred.
+- Repository curation evidence only; existing Russian canonical_name is primary
+  display. No new availability schema or migration 0030.
+- Current recipe/profile/assessment truth unchanged; all 183 old vector seals
+  retained/readable. Full readiness report identical: 30 / 189 / 30 INCOMPLETE;
+  66 exact / 21 no-conversion / 37 review-required / 65 blocked; 43 estimates non-executable.
+- **PR6 — NOT COMPLETE.** Stop for PR review; no autonomous merge or automatic
+  B2-B2, Recipe Assembly, Serving or PR7+ start.
 
-Contract: [Composition Core](../docs/family-food/food-composition-and-assembly.md#pr6-composition-core--concrete-runtime-contract).
-Evidence: [audit](../data/curation/pr6-composition-core/implementation-evidence.json).
-Verification: [progress](progress.md#pr6-composition-core-verification).
-Continuation: [handoff](handoff.md).
+Evidence and limitations: [RU package](../data/curation/pr6-ru-food-data/README.md).
+Verification: [progress](progress.md). Continuation: [handoff](handoff.md).
