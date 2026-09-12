@@ -826,3 +826,9 @@ Implementation is ready for review; PR6 is not complete and merge is not authori
 Full current content checks are retained. Old research-only scope guards are
 exercised unchanged on their exact accepted Git trees; future authorized runtime
 changes are not recast as changes inside those earlier research PRs.
+
+Delivery: [PR #26](https://github.com/Mitronomik/family-food-os/pull/26) opened into `main`;
+implementation commit `265aa247726d7520a7914d16ecabe6c607419f34` pushed on
+`codex/pr6-nutrient-vector-b`. This delivery receipt changes state documents only;
+verified runtime/test bytes are unchanged. Local `gh` returned HTTP 401; Git push
+and the connected GitHub API succeeded. No publication blocker remains.

@@ -6,7 +6,7 @@ Updated: `2026-09-12`
   `e35d87a24d5d8afb59509e566aa1ff4b7a58a11a`. Starting `origin/main` was fetched
   and matched this SHA; no later nutrition/schema changes were present.
 - **PR6-NUTRIENT-VECTOR-B — implementation verified, ready for review**.
-  Branch `codex/pr6-nutrient-vector-b`; current scope is the normalized sparse
+  [PR #26](https://github.com/Mitronomik/family-food-os/pull/26), branch `codex/pr6-nutrient-vector-b`; current scope is the normalized sparse
   nutrient vector owned by existing FoodNutritionProfile identities.
 - Migration `0027_recipe_same_source_revisions` → `0028_normalized_nutrient_vector`.
   Measured upgrade: 51 definitions, 183 profiles, 806 values, 64 held zero

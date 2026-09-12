@@ -26,7 +26,9 @@ research-only scope guards in disposable clones at each accepted research SHA;
 all content/provenance/zero-gate checks still run on current artifacts.
 Full backend/launcher regression: **3699 passed in 593.83s**, no skips,
 `AI_ENABLED=false`. Lint/format, mypy, upgrade/provenance/readiness audits PASS.
-Next action: deliver the verified branch/PR, then final review.
+[PR #26](https://github.com/Mitronomik/family-food-os/pull/26) is open, ready for final review.
+Implementation commit: `265aa247726d7520a7914d16ecabe6c607419f34`.
+Next action: review this PR; do not merge without explicit post-review authorization.
 Executed checks: [progress](progress.md#pr6-nutrient-vector-b-verification).
 
 Unrelated tracked `.DS_Store` modification is preserved and excluded from delivery.
