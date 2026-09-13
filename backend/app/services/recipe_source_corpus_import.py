@@ -14,9 +14,7 @@ from app.domain.recipe_source_corpus import (
     document_from_dict,
 )
 
-_CARD = re.compile(
-    r"(?im)^\s*Технологическая(?:\s+карта)?\s+(?:N|№)\s*([^\n]+)"
-)
+_CARD = re.compile(r"(?im)^\s*Технологическая(?:\s+карта)?\s+(?:N|№)\s*([^\n]+)")
 _APPENDIX = re.compile(r"(?im)^\s*Приложение\s+([5-8])(?:\s|\.|$)")
 _NAME = re.compile(
     r"(?im)^\s*Наименование(?:\s+кулинарного\s+изделия\s*\(блюда\)|\s+блюда)\s*:\s*(.+)$"
@@ -117,7 +115,9 @@ def extract_sudact_card_links(html: str, appendix_url: str) -> dict[str, str]:
         code = _canonical_card_code(match.group(1))
         previous = found.get(code)
         if previous is not None and previous != absolute:
-            raise ValueError(f"Multiple Sudact URLs for card {code}: {previous} / {absolute}")
+            raise ValueError(
+                f"Multiple Sudact URLs for card {code}: {previous} / {absolute}"
+            )
         found[code] = absolute
     return found
 
@@ -131,7 +131,9 @@ def split_normative_cards(
 ) -> list[dict[str, Any]]:
     """Capture every card block losslessly; structure enrichment may happen later."""
     matches = list(_CARD.finditer(text))
-    appendix_matches = list(_APPENDIX.finditer(text)) if source_section_code is None else []
+    appendix_matches = (
+        list(_APPENDIX.finditer(text)) if source_section_code is None else []
+    )
     cards: list[dict[str, Any]] = []
     for index, match in enumerate(matches):
         start = match.start()
