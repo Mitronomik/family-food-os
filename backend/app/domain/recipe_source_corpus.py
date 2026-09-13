@@ -121,6 +121,7 @@ class SourceVariantInput:
 class SourceCardInput:
     source_section_code: str
     source_card_code: str
+    source_page_url: str | None
     name_ru: str
     category_ru: str | None
     source_recipe_basis: str | None
@@ -131,8 +132,14 @@ class SourceCardInput:
     variants: tuple[SourceVariantInput, ...]
 
     def __post_init__(self) -> None:
+        if not self.source_section_code.strip():
+            raise ValueError("source_section_code is required")
         if not self.source_card_code or not self.name_ru or not self.raw_card_text:
             raise ValueError("Card code/name/raw text are required")
+        if self.source_page_url is not None and not self.source_page_url.startswith(
+            ("https://", "http://", "file://")
+        ):
+            raise ValueError("source_page_url must be HTTP(S), file://, or null")
         expected = sha256(self.raw_card_text.encode("utf-8")).hexdigest()
         if self.raw_card_sha256 != expected:
             raise ValueError("raw_card_sha256 does not match raw_card_text")
@@ -179,8 +186,9 @@ def card_from_dict(data: dict[str, Any]) -> SourceCardInput:
         )
     raw_text = data["raw_card_text"]
     return SourceCardInput(
-        source_section_code=data.get("source_section_code", ""),
+        source_section_code=data.get("source_section_code", "BOOTSTRAP"),
         source_card_code=data["source_card_code"],
+        source_page_url=data.get("source_page_url"),
         name_ru=data["name_ru"],
         category_ru=data.get("category_ru"),
         source_recipe_basis=data.get("source_recipe_basis"),
