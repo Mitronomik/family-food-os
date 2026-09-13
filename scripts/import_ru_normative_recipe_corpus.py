@@ -216,7 +216,9 @@ def main() -> int:
     if selected_modes == 0:
         args.sudact_manifest = DEFAULT_MANIFEST
     elif selected_modes != 1:
-        parser.error("choose exactly one of --bundle, --source, --url, --sudact-manifest")
+        parser.error(
+            "choose exactly one of --bundle, --source, --url, --sudact-manifest"
+        )
 
     if args.bundle:
         bundle = json.loads(args.bundle.read_text())
