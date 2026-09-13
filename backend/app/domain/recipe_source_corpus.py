@@ -32,6 +32,10 @@ class CorpusCaptureStatus(StrEnum):
     PARTIAL = "PARTIAL"
 
 
+class CorpusImportConflictError(ValueError):
+    """An existing immutable source revision differs from a repeat import."""
+
+
 @dataclass(frozen=True)
 class SourceDocumentInput:
     source_code: str
@@ -164,6 +168,8 @@ def document_from_dict(data: dict[str, Any]) -> SourceDocumentInput:
 
 
 def card_from_dict(data: dict[str, Any]) -> SourceCardInput:
+    if "raw_card_sha256" not in data:
+        raise ValueError("raw_card_sha256 is required")
     variants: list[SourceVariantInput] = []
     for variant in data.get("variants", []):
         ingredients = tuple(
@@ -193,7 +199,7 @@ def card_from_dict(data: dict[str, Any]) -> SourceCardInput:
         source_recipe_basis=data.get("source_recipe_basis"),
         technology_text_ru=data.get("technology_text_ru"),
         raw_card_text=raw_text,
-        raw_card_sha256=sha256(raw_text.encode("utf-8")).hexdigest(),
+        raw_card_sha256=data["raw_card_sha256"],
         capture_status=CorpusCaptureStatus(data["capture_status"]),
         variants=tuple(variants),
     )

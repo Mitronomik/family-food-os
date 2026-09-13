@@ -154,3 +154,20 @@ def test_domain_rejects_fabricated_hash():
             capture_status=CorpusCaptureStatus.RAW_CAPTURED,
             variants=(),
         )
+
+
+def test_bundle_rejects_mutated_raw_text_with_stale_declared_hash():
+    bundle = json.loads(BOOTSTRAP.read_text())
+    validate_bundle(bundle)
+    bundle["cards"][0]["raw_card_text"] += "\nподменённый текст"
+    with pytest.raises(
+        ValueError, match="raw_card_sha256 does not match raw_card_text"
+    ):
+        validate_bundle(bundle)
+
+
+def test_bundle_requires_declared_card_hash():
+    bundle = json.loads(BOOTSTRAP.read_text())
+    del bundle["cards"][0]["raw_card_sha256"]
+    with pytest.raises(ValueError, match="raw_card_sha256 is required"):
+        validate_bundle(bundle)
