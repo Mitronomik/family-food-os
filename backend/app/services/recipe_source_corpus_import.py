@@ -28,6 +28,7 @@ _LINK_CODE = re.compile(
     r"(?i)Технологическая(?:\s+карта)?\s+(?:N|№)\s*([0-9]+(?:\.[0-9]+)?[а-яa-z]?)"
 )
 _CARD_PATH_MARKERS = ("/tekhnologicheskaia-karta-n-", "/tekhnologicheskaia-n-")
+_SUDACT_NAV_PREFIX = "←"
 
 
 class _TextHTMLParser(HTMLParser):
@@ -170,6 +171,26 @@ def split_normative_cards(
     return cards
 
 
+def _trim_sudact_page_chrome(card: dict[str, Any]) -> dict[str, Any]:
+    """Remove mirror navigation/footer text while retaining the normative card body."""
+    lines = card["raw_card_text"].splitlines()
+    stop = next(
+        (index for index, line in enumerate(lines) if line.startswith(_SUDACT_NAV_PREFIX)),
+        None,
+    )
+    if stop is None:
+        raise ValueError(
+            "Sudact card page boundary not found; refusing to capture page chrome"
+        )
+    raw = "\n".join(lines[:stop]).strip()
+    if not raw:
+        raise ValueError("Sudact card body is empty after page-boundary trimming")
+    cleaned = dict(card)
+    cleaned["raw_card_text"] = raw
+    cleaned["raw_card_sha256"] = sha256(raw.encode("utf-8")).hexdigest()
+    return cleaned
+
+
 def extract_single_normative_card(
     text: str,
     *,
@@ -195,7 +216,7 @@ def extract_single_normative_card(
         if not row["name_ru"].startswith("Технологическая карта ")
     ]
     selected = with_name[-1] if with_name else matching[-1]
-    return selected
+    return _trim_sudact_page_chrome(selected)
 
 
 def validate_manifest(manifest: dict[str, Any]) -> dict[tuple[str, str], str]:
@@ -232,12 +253,12 @@ def validate_bundle(bundle: dict[str, Any]):
     cards = tuple(card_from_dict(card) for card in bundle["cards"])
     if not cards:
         raise ValueError("Recipe source corpus bundle must contain at least one card")
-    seen: set[tuple[str, str, str]] = set()
+    seen: set[tuple[str, str]] = set()
     for card in cards:
-        key = (card.source_section_code, card.source_card_code, card.raw_card_sha256)
+        key = (card.source_section_code, card.source_card_code)
         if key in seen:
             raise ValueError(
-                f"Duplicate card revision: {card.source_section_code}:{card.source_card_code}"
+                f"Duplicate card identity: {card.source_section_code}:{card.source_card_code}"
             )
         seen.add(key)
     return document, cards
