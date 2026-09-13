@@ -8,6 +8,11 @@
 
 **Related decision:** ADR 0032, `FamilyFoodOS persistence portability and shared-deployment tenancy gate`
 
+> **Later canonical addendum — 2026-09-13:**
+> [Architecture Compatibility Addendum](architecture-addendum-2026-09-13.md)
+> must be read with this document for MealPlan/Planner mixed-source authority,
+> `MealRole` vs Recipe classification and Meal Pattern Catalogue ownership.
+
 ## 1. Authority and scope
 
 This document is the canonical target architecture for the FamilyFoodOS food

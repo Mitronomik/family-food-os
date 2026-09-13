@@ -13,6 +13,11 @@
 > `docs/family-food/architecture.md` и
 > `docs/family-food/master-roadmap.md` и имеют приоритет там, где это ТЗ
 > конфликтует с ними по архитектуре или порядку реализации.
+>
+> **Later canonical addenda — 2026-09-13:** read this historical source together
+> with [Technical Specification Addendum](technical-spec-addendum-2026-09-13.md),
+> [Architecture Compatibility Addendum](architecture-addendum-2026-09-13.md) and
+> [Master Roadmap Addendum](master-roadmap-addendum-2026-09-13.md).
 
 > **DECISION / supersession — PR6-ARCH-COMPOSITION, 2026-09-10:** более поздний
 > [контракт состава](food-composition-and-assembly.md) утверждает FoodIngredient

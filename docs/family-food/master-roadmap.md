@@ -1,7 +1,12 @@
 # FamilyFoodOS — Master Roadmap
 
-**Status:** canonical repository sequencing and delivery-gate contract  
+**Status:** canonical repository sequencing and delivery-gate contract
 **Updated:** `2026-09-12`
+
+> **Later canonical addendum — 2026-09-13:**
+> [Master Roadmap Addendum](master-roadmap-addendum-2026-09-13.md) must be read
+> with this roadmap for PR7+ meal-pattern, mixed-source/replan and security scope,
+> including the required Meal Pattern Catalogue supporting operation.
 
 ## 1. Authority
 
