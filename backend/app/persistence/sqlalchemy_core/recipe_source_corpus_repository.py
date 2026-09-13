@@ -81,6 +81,7 @@ class SqlAlchemyRecipeSourceCorpusRepository:
                 document_id=document_id,
                 source_section_code=card.source_section_code,
                 source_card_code=card.source_card_code,
+                source_page_url=card.source_page_url,
                 name_ru=card.name_ru,
                 category_ru=card.category_ru,
                 source_recipe_basis=card.source_recipe_basis,
@@ -101,7 +102,7 @@ class SqlAlchemyRecipeSourceCorpusRepository:
                     variant_code=variant.variant_code,
                     label_ru=variant.label_ru,
                     output_g=(
-                        Decimal(variant.output_g)
+                        _decimal(variant.output_g)
                         if variant.output_g is not None
                         else None
                     ),
@@ -116,10 +117,8 @@ class SqlAlchemyRecipeSourceCorpusRepository:
                         variant_id=variant_id,
                         position=row.position,
                         name_ru=row.name_ru,
-                        gross_g=(
-                            Decimal(row.gross_g) if row.gross_g is not None else None
-                        ),
-                        net_g=Decimal(row.net_g) if row.net_g is not None else None,
+                        gross_g=_decimal(row.gross_g) if row.gross_g is not None else None,
+                        net_g=_decimal(row.net_g) if row.net_g is not None else None,
                         quantity_text=row.quantity_text,
                         source_form_note=row.source_form_note,
                         optional=row.optional,
@@ -132,9 +131,13 @@ class SqlAlchemyRecipeSourceCorpusRepository:
                         id=uuid4(),
                         variant_id=variant_id,
                         nutrient_code=nutrient.nutrient_code,
-                        value=Decimal(nutrient.value),
+                        value=_decimal(nutrient.value),
                         unit=nutrient.unit,
                         source_label=nutrient.source_label,
                         created_at=now,
                     )
                 )
+
+
+def _decimal(value: str) -> Decimal:
+    return Decimal(value.replace(",", "."))
