@@ -59,19 +59,20 @@ def test_sudact_link_parser_is_appendix_scoped_and_normalizes_suffixes():
     }
 
 
-def test_mr_manifest_has_all_212_section_scoped_cards():
+def test_mr_manifest_has_all_214_section_scoped_cards():
     manifest = json.loads(MANIFEST.read_text())
     lookup = validate_manifest(manifest)
-    assert manifest["expected_total_cards"] == 212
+    assert manifest["expected_total_cards"] == 214
     assert {row["expected_card_count"] for row in manifest["appendices"]} == {
         33,
         45,
-        58,
+        60,
         76,
     }
-    assert len(lookup) == 212
+    assert len(lookup) == 214
     assert lookup[("APPENDIX_5", "8.1")] == "Холодные блюда"
     assert lookup[("APPENDIX_6", "8.1")] == "Холодные блюда"
+    assert lookup[("APPENDIX_8", "2.24")] == "Мясные блюда"
 
 
 def test_domain_rejects_fabricated_hash():
