@@ -145,23 +145,180 @@ jobs:
           print(json.dumps(summary, ensure_ascii=False))
           PY
 
-      - name: Persist repository-local 214-card bundle once
+      - name: Finalize durable corpus and repository state
+        env:
+          ACCEPTED_MAIN: 7388d19677cffbf5cd6cb192eabc0b93cad870f7
         run: |
+          set -euo pipefail
+          export TESTED_HEAD="$(git rev-parse HEAD)"
+          branch='codex/ru-normative-recipe-corpus'
           snapshot='data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json'
-          if git ls-files --error-unmatch "$snapshot" >/dev/null 2>&1; then
-            cmp -s /tmp/ru-normative-corpus/mr_2_4_0162_19.bundle.json "$snapshot" || {
-              echo 'Repository-local corpus snapshot differs from fresh acquisition.' >&2
-              exit 1
-            }
-            echo 'Repository-local corpus snapshot matches fresh acquisition.'
-            exit 0
+
+          git fetch origin "$branch"
+          if [ "$(git rev-parse "origin/$branch")" != "$TESTED_HEAD" ]; then
+            echo 'Branch advanced during verification; refusing stale finalization.' >&2
+            exit 1
           fi
+
           cp /tmp/ru-normative-corpus/mr_2_4_0162_19.bundle.json "$snapshot"
+
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          roadmap_path = Path('docs/family-food/master-roadmap.md')
+          roadmap = roadmap_path.read_text()
+          roadmap = roadmap.replace(
+              '0030_recipe_template_catalogue', '0031_recipe_template_catalogue'
+          )
+          roadmap = roadmap.replace(
+              'migration 0030 or seed publication.',
+              'RecipeTemplate migration or seed publication. The supporting source-corpus '
+              'operation occupies `0030_recipe_source_corpus`; future RecipeTemplate schema '
+              'is therefore `0031_recipe_template_catalogue`.',
+          )
+          roadmap = roadmap.replace(
+              'or 0030 implementation.',
+              'or RecipeTemplate implementation.',
+          )
+          anchor = (
+              'See the [retained evidence](../../data/curation/recipe-assembly-a/README.md).\n'
+          )
+          addition = (
+              '\n`0030_recipe_source_corpus` is a bounded pre-publication source-corpus '\
+              'supporting operation introduced by PR #36. It preserves normative source '\
+              'cards for later deterministic resolution/review and does not complete '\
+              'Assembly A, publish RecipeTemplate/RecipeVersion, or start the later full '\
+              'Data Program.\n'
+          )
+          if addition.strip() not in roadmap:
+              if anchor not in roadmap:
+                  raise SystemExit('Roadmap Assembly-A anchor not found')
+              roadmap = roadmap.replace(anchor, anchor + addition, 1)
+          if '0030_recipe_template_catalogue' in roadmap:
+              raise SystemExit('Stale 0030 RecipeTemplate migration remains in roadmap')
+          roadmap_path.write_text(roadmap)
+
+          corpus_path = Path('docs/family-food/ru-normative-recipe-corpus.md')
+          corpus = corpus_path.read_text()
+          marker = '\n## Bootstrap\n'
+          snapshot_section = '''\n## Зафиксированный полный snapshot\n\nПосле live acquisition полный очищенный source bundle сохраняется в репозитории:\n\n`data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json`\n\nОн содержит ровно 214 section-scoped карт и позволяет восстановить source-corpus\nБД офлайн через `--bundle`, без повторного обращения к HTML-зеркалу. Для Sudact\n`raw_card_text` обрезается строго до первой навигационной границы `←`; navigation,\nfooter, scripts и copyright chrome зеркала не являются нормативной source truth.\nЕсли ожидаемая граница страницы отсутствует, acquisition завершается fail-closed.\n\n'''
+          if snapshot_section.strip() not in corpus:
+              if marker not in corpus:
+                  raise SystemExit('Corpus Bootstrap marker not found')
+              corpus = corpus.replace(marker, snapshot_section + marker, 1)
+          corpus_path.write_text(corpus)
+
+          snapshot = Path('data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json')
+          bundle = json.loads(snapshot.read_text())
+          if len(bundle['cards']) != 214:
+              raise SystemExit('Durable snapshot card count is not 214')
+          if any(
+              any(line.startswith('←') for line in card['raw_card_text'].splitlines())
+              or 'Все права защищены' in card['raw_card_text']
+              or 'window.yaContextCb' in card['raw_card_text']
+              for card in bundle['cards']
+          ):
+              raise SystemExit('Durable snapshot contains mirror page chrome')
+          snapshot_sha = hashlib.sha256(snapshot.read_bytes()).hexdigest()
+          verification = {
+              'operation': 'RU_NORMATIVE_RECIPE_SOURCE_CORPUS',
+              'accepted_main': os.environ['ACCEPTED_MAIN'],
+              'tested_head': os.environ['TESTED_HEAD'],
+              'github_actions_run_id': os.environ['GITHUB_RUN_ID'],
+              'focused_tests': 'PASS',
+              'ruff': 'PASS',
+              'full_backend_launcher_regression': 'PASS',
+              'live_acquisition': 'PASS',
+              'cards': 214,
+              'unique_section_card_keys': 214,
+              'repeat_inserted_cards': 0,
+              'page_chrome_rows': 0,
+              'migration': '0030_recipe_source_corpus',
+              'future_recipe_template_migration': '0031_recipe_template_catalogue',
+              'snapshot_path': str(snapshot),
+              'snapshot_sha256': snapshot_sha,
+              'production_recipe_versions_mutated': False,
+              'assembly_a': 'BLOCKED',
+              'assembly_b': 'NOT STARTED',
+              'pr7_plus': 'NOT STARTED',
+          }
+          verification_path = Path('data/curation/ru-normative-recipe-corpus/verification.json')
+          verification_path.parent.mkdir(parents=True, exist_ok=True)
+          verification_path.write_text(
+              json.dumps(verification, ensure_ascii=False, indent=2) + '\n'
+          )
+          PY
+
+          cat > state/current-focus.md <<EOF
+          # Current focus
+
+          Updated: \`2026-09-13\`.
+
+          - PR6 / PR6-CLOSE = COMPLETE.
+          - [PR #34](https://github.com/Mitronomik/family-food-os/pull/34) = MERGED.
+          - [PR #35](https://github.com/Mitronomik/family-food-os/pull/35) = MERGED.
+          - Exact accepted main after PR #35: \`$ACCEPTED_MAIN\`.
+          - R1 / R2 / R3 / R4 = COMPLETE AS BLOCKED RESEARCH; R1/R2/R3 evidence packages remain frozen.
+          - R1-21 and R1-23 = INDIVIDUALLY_READY, unchanged exact published 100-portion scopes.
+          - ready = 2/3; third_candidate = none.
+          - OPEN Assembly-A evidence gates: family_count, optional_role, verified_substitution.
+          - R4-N50200 = COMPLETE AS BLOCKED RESEARCH; no executable production-data enablement plan was issued.
+          - Current authorized operation: [PR #36](https://github.com/Mitronomik/family-food-os/pull/36), Russian normative recipe source corpus and bulk importer; OPEN / REVIEW-READY, not merged.
+          - PR #36 is synchronized on accepted main. Runtime/acquisition verification head: \`$TESTED_HEAD\`.
+          - Live acquisition = PASS: exactly 214/214 section-scoped cards; exact repeat import inserted 0; page-chrome rows 0.
+          - Focused tests, Ruff, full \`backend/app/tests + launcher/tests\` regression, migration/import invariants and artifact capture = PASS on the verified head.
+          - Durable cleaned source snapshot: \`data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json\`.
+          - Current accepted main migration remains \`0029_food_composition_core\` until PR #36 is merged.
+          - PR #36 introduces \`0030_recipe_source_corpus\`; future RecipeTemplate schema is \`0031_recipe_template_catalogue\`.
+          - Source-corpus ingestion does not publish RecipeVersion/RecipeTemplate and does not replace FoodIngredient/Nutrition/Composition deterministic truth.
+          - Assembly A = BLOCKED; Assembly B and PR7+ = NOT STARTED.
+
+          [Canonical R4 checkpoint](../docs/family-food/food-composition-and-assembly.md#recipe-assembly-a-r4--n50200-deep-viability),
+          [complete R4 evidence](../data/curation/recipe-assembly-a-r4-n50200/README.md), and
+          [Russian normative source-corpus contract](../docs/family-food/ru-normative-recipe-corpus.md).
+
+          Next authorized action: final human review / merge decision for PR #36, then stop.
+          No automatic merge, Assembly B, PR7, RecipeTemplate publication, production recipe publication or new donor/data-repair operation is authorized.
+          EOF
+          sed -i 's/^          //' state/current-focus.md
+
+          cat > state/handoff.md <<EOF
+          # Handoff
+
+          Updated: \`2026-09-13\`.
+
+          PR #35 is MERGED; accepted main is \`$ACCEPTED_MAIN\`.
+          R1/R2/R3/R4 are COMPLETE AS BLOCKED RESEARCH. Assembly A remains BLOCKED at 2/3 individually ready families (R1-21, R1-23); family_count, optional_role and verified_substitution remain open. Assembly B and PR7+ are NOT STARTED.
+
+          Current bounded operation is [PR #36](https://github.com/Mitronomik/family-food-os/pull/36) on \`codex/ru-normative-recipe-corpus\`.
+          Verified runtime/acquisition head: \`$TESTED_HEAD\`.
+          It adds the pre-publication Russian normative recipe source corpus and migration \`0030_recipe_source_corpus\`; future RecipeTemplate migration is \`0031_recipe_template_catalogue\`.
+
+          Final verification on the synchronized head: focused tests PASS; Ruff PASS; full backend + launcher regression PASS; live Sudact acquisition PASS at exactly 214/214 section-scoped cards; exact repeat import inserted 0; DB invariants PASS; mirror navigation/footer/scripts are excluded from all 214 raw card bodies. The cleaned durable bundle is \`data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json\` with SHA-256 recorded in \`data/curation/ru-normative-recipe-corpus/verification.json\`.
+
+          PR #36 remains pre-publication only: no FoodIngredient/Nutrition/Composition authority changes, no RecipeVersion/RecipeTemplate publication, no Planner/MealPlan/Shopping/Prep/API/UI, no Assembly B or PR7 start.
+
+          Next: final review / merge decision for PR #36. Do not self-merge and do not start the next milestone automatically.
+          EOF
+          sed -i 's/^          //' state/handoff.md
+
+          git rm .github/workflows/ru-normative-corpus-acquire.yml
+          git diff --check
+          git add \
+            "$snapshot" \
+            docs/family-food/master-roadmap.md \
+            docs/family-food/ru-normative-recipe-corpus.md \
+            data/curation/ru-normative-recipe-corpus/verification.json \
+            state/current-focus.md \
+            state/handoff.md
+          git diff --cached --check
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add "$snapshot"
-          git commit -m 'data: persist 214-card normative corpus snapshot'
-          git push origin HEAD:codex/ru-normative-recipe-corpus
+          git commit -m 'data: finalize verified 214-card normative corpus'
+          git push origin HEAD:"$branch"
 
       - name: Upload acquisition evidence
         if: always()
