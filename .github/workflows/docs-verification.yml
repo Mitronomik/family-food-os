@@ -76,6 +76,7 @@ jobs:
           set -euo pipefail
           base='${{ steps.base.outputs.base }}'
           python - "${base}" <<'PY'
+          import os
           import re
           import subprocess
           import sys

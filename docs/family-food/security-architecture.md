@@ -1,7 +1,7 @@
 # FamilyFoodOS — Security Architecture & Secure-by-Design Contract
 
-**Status:** canonical security architecture contract  
-**Decision date:** 2026-09-13  
+**Status:** canonical security architecture contract
+**Decision date:** 2026-09-13
 **Applies to:** API, persistence, Auth, imports, Retail, AI, hosted deployment, CI/CD and operations
 
 ## 1. Security objective

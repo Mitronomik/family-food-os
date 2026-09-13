@@ -1,6 +1,6 @@
 # FamilyFoodOS — Technical Specification Addendum, 2026-09-13
 
-**Status:** canonical addendum to the historical MVP technical specification  
+**Status:** canonical addendum to the historical MVP technical specification
 **Purpose:** remove ambiguity introduced by later product/security decisions without rewriting historical source text
 
 ## 1. Authority
@@ -59,11 +59,12 @@ Exact schema belongs to PR7 and must follow `meal-pattern-programs.md`.
 
 ## 4. Meal frequency / meal type refinement
 
-Historical recipe categories such as `breakfast`, `lunch`, `dinner` and `snack`
-remain useful recipe/meal-role metadata. They must **not** be interpreted as a
-fixed global daily schedule.
+Historical examples such as `breakfast`, `lunch`, `dinner` and `snack` are
+not a frozen shared enum. Recipe classification and a member's planning
+`MealRole` are separate concepts and neither may be inferred from the other
+without explicit deterministic suitability rules.
 
-The product must represent, at minimum in its initial validated configuration
+The product must represent, at minimum in its initial supported configuration
 range, 1–6 eating opportunities per member/day and heterogeneous member
 patterns.
 

@@ -28,7 +28,7 @@ Authorized documentation outcomes:
 
 - preserve the current FastAPI/Python, SQLAlchemy Core/UoW and ordered SQLite migration architecture; no greenfield reboot;
 - integrate Household-first product strategy, household reconciliation, mixed meal sources, Reality/replan and execution/mental-load metrics;
-- require configurable member meal patterns (initial validated range 1–6 eating opportunities/day, heterogeneous by member) rather than dinner-only or fixed three-meal domain logic;
+- require configurable member meal patterns (initial supported product range 1–6 eating opportunities/day, heterogeneous by member) rather than dinner-only or fixed three-meal domain logic;
 - define a deterministic, versioned, curated wellness Meal Pattern Recommender that requires user acceptance and does not invent therapeutic diets;
 - establish a canonical secure-by-design contract covering object authorization, importer/SSRF boundaries, Retail, Auth, AI/prompt injection/tool abuse, privacy/children data and supply-chain/release controls;
 - record the external TAS/RBS/bootstrap package as research/reference, not repository architecture authority;
@@ -42,4 +42,13 @@ Compatibility correction included in PR #37:
 - `meal-pattern-programs.md`, `master-roadmap-addendum-2026-09-13.md` and `technical-spec-addendum-2026-09-13.md` reference and enforce the same rules;
 - no runtime/schema/migration/corpus change is introduced by this correction.
 
-Next authorized action: human re-review of corrected PR #37. Stop after review-ready publication. Merge requires separate explicit post-review authorization. No automatic merge, Assembly B, PR7, Retail, AI, Auth, new production recipe publication or new donor/data-repair operation is authorized by this documentation work.
+Review-blocker resolution included in PR #37:
+
+- mixed-source authority/capability matrix separates PR7 representation from Planner auto-selection; PR8 baseline auto-selects only RecipeVersion/RecipeAssembly-backed sources, while LEFTOVER/PREPARED/READY_MEAL/out-of-home sources remain gated by their authoritative state;
+- `MealPatternProgram` ownership is assigned to the platform Meal Pattern Catalogue, while accepted member selection remains Household-owned;
+- required supporting operation `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` is inserted after Assembly B and before PR7 without changing numbered milestone order;
+- `validated 1–6` terminology is corrected to an initial supported product range; evidence/safety remains program-specific;
+- canonical base documents link to their 2026-09-13 addenda;
+- `.github/workflows/docs-verification.yml` implements the required docs-tier `git diff --check`, staged `git diff --cached --check`, scope listing and repository-relative link gate.
+
+Next authorized action: current-head docs verification must PASS, then human re-review of corrected PR #37. Merge requires separate explicit post-review authorization. No automatic merge, Assembly B, PR7, Retail, AI, Auth, new production recipe publication or new donor/data-repair operation is authorized by this documentation work.

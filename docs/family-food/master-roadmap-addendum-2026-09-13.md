@@ -1,7 +1,7 @@
 # FamilyFoodOS — Master Roadmap Addendum, 2026-09-13
 
-**Status:** canonical addendum to `master-roadmap.md`  
-**Authority:** later explicit user-approved product/security decisions  
+**Status:** canonical addendum to `master-roadmap.md`
+**Authority:** later explicit user-approved product/security decisions
 **Sequence effect:** no reboot and no reordering of the existing numbered product milestones
 
 ## 1. Purpose
@@ -46,7 +46,51 @@ not change FoodIngredient/Nutrition/Composition authority.
 Recipe Assembly A remains blocked on its existing evidence gates. Assembly B and
 PR7+ remain not started unless separately authorized.
 
-## 4. PR7 scope amendment — MealPlan / Serving
+## 4. Required supporting operation before PR7 — PR7-SUPPORT-MEAL-PATTERN-CATALOGUE
+
+This is a bounded supporting operation, not a new numbered product milestone.
+The numbered sequence remains unchanged.
+
+Required order:
+
+```text
+RECIPE-ASSEMBLY-B
+→ PR7-SUPPORT-MEAL-PATTERN-CATALOGUE
+→ PR7 MealPlan / Serving
+→ PR8 Planner v0
+```
+
+**Goal:** make the deterministic recommender consume reviewed platform truth
+instead of forcing PR8 to invent its own program corpus.
+
+**Owns:**
+
+- Meal Pattern Catalogue domain/persistence contract;
+- versioned `MealPatternProgram` publication lifecycle;
+- focused platform-scoped repository;
+- deterministic validator;
+- initial curated wellness program data needed by PR8 fixtures;
+- provenance/evidence, eligibility, safety review and Russian display text.
+
+**Non-goals:**
+
+- no Planner ranking/reconciliation implementation;
+- no clinical/therapeutic diet module;
+- no AI-generated program truth;
+- no child program without its own approved age-specific evidence;
+- no new microservice or datastore.
+
+**Exit criteria:** every published program used by PR8 has an immutable version,
+explicit target population/eligibility, provenance/evidence, safety review,
+Russian consumer text and deterministic validation. The corpus must be sufficient
+for the authorized PR8 fixture scenarios; when no safe eligible program exists,
+the recommender must return a bounded unsupported outcome rather than add filler
+data.
+
+Any schema change in this supporting operation uses the next authorized forward
+migration and does not rewrite accepted migration history.
+
+## 5. PR7 scope amendment — MealPlan / Serving
 
 PR7 must establish a planning model that is flexible enough for the product from
 the first implementation.
@@ -55,7 +99,7 @@ In addition to the existing MealPlan/Serving requirements, PR7 must be able to
 represent:
 
 - configurable member meal opportunities;
-- initial validated range of 1–6 eating occasions/day without hardcoded
+- initial supported product range of 1–6 eating occasions/day without hardcoded
   breakfast/lunch/dinner-only schema;
 - different patterns for different HouseholdMembers;
 - participation of a subset of members in a Household meal event;
@@ -103,14 +147,14 @@ The exact enum/table/API design remains the PR7 implementation responsibility
 within `architecture.md`, `architecture-addendum-2026-09-13.md` and
 `meal-pattern-programs.md`.
 
-## 5. PR8 scope amendment — Planner v0
+## 6. PR8 scope amendment — Planner v0
 
 PR8 remains deterministic filters + scoring/heuristics first.
 
 In addition to the older Planner v0 requirements, it must establish a bounded
 baseline for:
 
-### 5.1 Meal Pattern Recommender v0
+### 6.1 Meal Pattern Recommender v0
 
 - input: structured member profile/goals/activity/schedule/preferences supported
   by the wellness product;
@@ -121,7 +165,7 @@ baseline for:
 - no universal rule such as `weight_loss -> five meals`;
 - adult programs do not silently apply to children outside eligibility.
 
-### 5.2 Household reconciliation
+### 6.2 Household reconciliation
 
 Planner should compile accepted member patterns into household meal events and
 reward shared preparation where hard constraints allow it.
@@ -129,17 +173,28 @@ reward shared preparation where hard constraints allow it.
 Planner may vary Serving/final validated variant while keeping one shared base.
 Hard exclusions dominate sharedness.
 
-### 5.3 Meal source selection
+### 6.3 Meal source selection
 
-Planner may deliberately use leftovers/prepared/ready/out-of-home sources rather
-than require a fresh Recipe in every slot.
+The PR8 baseline automatically selects only source kinds whose required authority
+already exists at that milestone: `COOK_RECIPE` and validated `ASSEMBLY`.
 
-Planner records an explicit source choice and source reference where the source
-requires one. It must use authoritative represented supply/state and must not
-invent a RecipeVersion or future PreparedBatch/Pantry/Retail state merely to make
-a source option selectable.
+PR8 may preserve/render user-fixed non-recipe events represented by PR7, but
+representation does not make a source automatic Planner supply:
 
-### 5.4 Replan foundation
+- `LEFTOVER` / `PREPARED`: no automatic selection until authoritative
+  leftover/prepared inventory and quantity exist, normally after PR10 confirmed
+  Prep execution or another separately approved supply operation;
+- `READY_MEAL`: no automatic selection until an owning ready-food/product model
+  provides the required identity and truth; Retail is not pulled forward;
+- `ORDER_OUT` / `EAT_OUT`: may be explicit user schedule decisions, while
+  autonomous selection is deferred to a later explicit decision.
+
+Unknown nutrition or cost remains unknown and cannot be silently credited toward
+nutrition or budget targets. Planner records an explicit source choice/reference
+and must not invent RecipeVersion, PreparedBatch, Pantry, Retail, provider or
+price state merely to make an option selectable.
+
+### 6.4 Replan foundation
 
 PR8 should define a versioned deterministic replan/change contract for future
 meal slots. It may start with schedule/participation/source changes that are
@@ -148,7 +203,7 @@ possible with PR8 state.
 Richer preservation of PreparedBatch/freezer/perishable state is extended when
 PR10 Prep exists; PR8 must not invent state from future contexts.
 
-## 6. Gate 1 — Planning Core amendment
+## 7. Gate 1 — Planning Core amendment
 
 Gate 1 still occurs after PR8. It additionally requires evidence that:
 
@@ -162,11 +217,13 @@ Gate 1 still occurs after PR8. It additionally requires evidence that:
   program;
 - Recipe Catalogue meal classification remains distinct from MealRole;
 - mixed-source MealPlans do not require synthetic RecipeVersions.
+- `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` is complete before PR7/PR8 consume published programs;
+- Planner automatic source selection follows the authority gates in `architecture-addendum-2026-09-13.md`.
 
 The original core Gate 1 requirements (exclusions, complete week, individualized
 servings, trace, deterministic behavior) remain.
 
-## 7. PR9 Shopping amendment
+## 8. PR9 Shopping amendment
 
 No sequence change.
 
@@ -177,7 +234,7 @@ silently count the same demand twice.
 
 Retail/package optimization remains later.
 
-## 8. PR10 Prep / Freezer amendment
+## 9. PR10 Prep / Freezer amendment
 
 No sequence change.
 
@@ -192,7 +249,7 @@ Prep should evolve toward an explicit dependency graph with:
 A sophisticated scheduler/solver is optional and requires evidence that a simpler
 baseline is inadequate.
 
-## 9. PR13 consumer UX amendment
+## 10. PR13 consumer UX amendment
 
 Consumer UX must expose the new product flexibility without turning onboarding
 into a nutrition dashboard.
@@ -207,7 +264,7 @@ Required direction:
 - "plans changed" / replan flow becomes a first-class weekly action;
 - replan shows an understandable diff and does not silently rewrite history.
 
-## 10. PR15 Feedback / History amendment
+## 11. PR15 Feedback / History amendment
 
 Feedback should be able to capture adherence to the accepted pattern and later
 improve deterministic ranking.
@@ -225,7 +282,7 @@ Real-family analytics should include:
 
 No LLM is required for these signals.
 
-## 11. Shared deployment security amendment
+## 12. Shared deployment security amendment
 
 SHARED-1/2/3 remain in the same sequence but must satisfy
 `security-architecture.md`.
@@ -241,7 +298,7 @@ In particular before multiple real households share a deployment:
 Passkeys/WebAuthn are the preferred phishing-resistant path when the chosen IdP
 and product UX support them; admin/support requires strong MFA/passkey.
 
-## 12. Data/Importer security amendment
+## 13. Data/Importer security amendment
 
 Existing controlled platform corpus ingestion keeps its current trust contract.
 
@@ -249,7 +306,7 @@ Any future arbitrary user URL/file import is a new hostile-content boundary and
 must not ship until the sandbox/SSRF/file-parser controls in
 `security-architecture.md` exist.
 
-## 13. Retail security amendment
+## 14. Retail security amendment
 
 Retail still begins after generic Shopping and product evidence.
 
@@ -265,7 +322,7 @@ Before connector enablement:
 
 Checkout/write actions require server revalidation and explicit user confirmation.
 
-## 14. AI security amendment
+## 15. AI security amendment
 
 AI still begins after deterministic Planner/core value.
 
@@ -284,7 +341,7 @@ privileges.
 Direct and indirect prompt-injection/tool-abuse regression tests are required
 before tool-enabled runtime AI.
 
-## 15. Supply-chain / release security amendment
+## 16. Supply-chain / release security amendment
 
 Security controls mature with risk rather than waiting for a final hardening PR.
 
@@ -301,7 +358,7 @@ Before shared staging/production, the project must plan/enable appropriate:
 
 This does not authorize a new platform stack.
 
-## 16. Canonical supporting documents
+## 17. Canonical supporting documents
 
 Future work in these scopes must read:
 
@@ -312,7 +369,7 @@ Future work in these scopes must read:
 - `../research/household-food-os-package-integration-2026-09-13.md` for the
   source-integration rationale.
 
-## 17. Next-step rule
+## 18. Next-step rule
 
 This addendum changes future requirements, not current execution authorization.
 

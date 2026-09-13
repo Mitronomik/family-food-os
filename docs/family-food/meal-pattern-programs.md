@@ -1,7 +1,7 @@
 # FamilyFoodOS — Meal Pattern Programs & Recommendation Contract
 
-**Status:** canonical product/domain contract  
-**Decision date:** 2026-09-13  
+**Status:** canonical product/domain contract
+**Decision date:** 2026-09-13
 **Applies to:** HouseholdMember planning profile, MealPlan/Serving, Planner, Nutrition integration and onboarding
 
 ## 1. Why this contract exists
@@ -72,7 +72,7 @@ from a curated program or from a custom user configuration.
 The initial product must be able to plan one to six eating occasions per day for
 a member without schema redesign.
 
-The model should remain extensible; `6` is an initial validated UX/product range,
+The model should remain extensible; `6` is an initial supported product range,
 not a permanent database-law maximum.
 
 A member may use a different count on different days where schedule rules allow
@@ -207,7 +207,27 @@ MealPatternProgram
 Not every program needs every field. Missing evidence must not be converted into
 invented precision.
 
-## 8. Program examples are data, not architecture
+## 8. Ownership and publication readiness
+
+`MealPatternProgram` is platform-owned data in the Meal Pattern Catalogue
+boundary. The catalogue owns immutable/versioned program truth, Russian display
+text, eligibility, provenance/evidence, safety review and lifecycle status.
+Planner only reads published eligible program versions.
+
+`MemberMealPatternSelection` is Household-owned state. It records an accepted
+program ID/version or `CUSTOM`, user overrides, recommender version when relevant
+and history; it is not part of the platform catalogue.
+
+Before PR7/PR8 rely on production programs, the required supporting operation
+`PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` establishes the catalogue
+schema/repository/validator and initial curated evidence-reviewed program data.
+This operation is a bounded prerequisite, not a new product milestone or network
+service.
+
+A program that has not passed that readiness path cannot be ranked as production
+truth. Missing safe candidates produce an unsupported/safety result.
+
+## 9. Program examples are data, not architecture
 
 The architecture may support program families such as:
 
@@ -231,7 +251,7 @@ Each production program requires:
 - tests;
 - versioning.
 
-## 9. Medical and safety boundary
+## 10. Medical and safety boundary
 
 The MVP recommender is a wellness/productivity feature, not a clinical diet
 prescriber.
@@ -252,7 +272,7 @@ rather than improvise.
 A future medical module would require a separate evidence, regulatory and safety
 contract.
 
-## 10. Children and age-specific programs
+## 11. Children and age-specific programs
 
 Child nutrition requires age-specific rules and cannot inherit adult frequency
 logic by default.
@@ -271,7 +291,7 @@ Until a child program has an approved evidence package, the product may support
 manual schedule configuration without issuing a normative automated
 recommendation.
 
-## 11. Relationship to Nutrition Engine
+## 12. Relationship to Nutrition Engine
 
 MealPatternProgram does not own nutrient truth.
 
@@ -288,12 +308,12 @@ Engine calculates the resulting numbers.
 
 The program never stores a second competing nutrition calculation.
 
-## 12. Relationship to Planner
+## 13. Relationship to Planner
 
 Planner receives the accepted member selections and compiles them into household
 meal events.
 
-### 12.1 MealRole is not RecipeVersion.meal_type_code
+### 13.1 MealRole is not RecipeVersion.meal_type_code
 
 The planning role and the already implemented Recipe Catalogue classification
 are separate concepts.
@@ -345,7 +365,7 @@ Planner must support heterogeneous households. Example:
 
 This is the practical meaning of household reconciliation.
 
-## 13. Common-base objective
+## 14. Common-base objective
 
 When multiple members participate in the same household event, Planner should
 prefer one shared preparation where possible.
@@ -360,7 +380,7 @@ It may vary:
 
 It may not vary away a hard safety constraint after selection.
 
-## 14. User control and explanation
+## 15. User control and explanation
 
 The consumer flow should be:
 
@@ -380,7 +400,7 @@ Explanations should be concrete and non-clinical, for example:
 - "добавляет перекус вокруг тренировки";
 - "меньше отдельных приёмов пищи — проще соблюдать при вашем графике".
 
-## 15. Versioning and history
+## 16. Versioning and history
 
 The member selection should retain:
 
@@ -394,7 +414,7 @@ Historical MealPlans retain the pattern/program version used to generate them.
 Changing a member's pattern changes future planning; it must not rewrite old
 plans.
 
-## 16. Tests and invariants
+## 17. Tests and invariants
 
 Implementation must cover at least:
 
@@ -414,12 +434,14 @@ Implementation must cover at least:
   than being repurposed as a member schedule enum;
 - MealPlan history retaining the accepted program version.
 
-## 17. Roadmap integration
+## 18. Roadmap integration
 
 This contract does not create a new microservice or re-platform the backend.
 
 Expected implementation ownership:
 
+- `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE`: publish the initial reviewed platform
+  program catalogue and deterministic validation before PR7/PR8 consume it;
 - PR7 / MealPlan-Serving domain: model meal opportunities, participation and
   accepted member pattern reference;
 - PR8 / Planner v0: deterministic recommendation v0, household compilation and

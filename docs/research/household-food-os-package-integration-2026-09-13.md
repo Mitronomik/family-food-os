@@ -1,7 +1,7 @@
 # Research Integration Review — Household Food OS package, 2026-09-13
 
-**Status:** evidence/integration record, not a runtime specification  
-**Repository:** FamilyFoodOS  
+**Status:** evidence/integration record, not a runtime specification
+**Repository:** FamilyFoodOS
 **Reviewed against main:** `077d054373cc5f8e1813acdc2cbacb3746e1c11a` (PR #36 merged)
 
 ## 1. Source package reviewed
@@ -213,11 +213,15 @@ re-checked before external publication or investment/legal use.
 
 ## 11. Repository changes created from this review
 
-Canonical additions:
+Canonical additions/companions:
 
 - `docs/family-food/product-strategy.md`;
 - `docs/family-food/meal-pattern-programs.md`;
-- `docs/family-food/security-architecture.md`.
+- `docs/family-food/security-architecture.md`;
+- `docs/family-food/security-tooling-plan.md`;
+- `docs/family-food/architecture-addendum-2026-09-13.md`;
+- `docs/family-food/master-roadmap-addendum-2026-09-13.md`;
+- `docs/family-food/technical-spec-addendum-2026-09-13.md`.
 
 Governance/state should point agents to these documents before implementation in
 their scopes.
@@ -231,14 +235,15 @@ These are future authorized-scope implications, not automatic work:
 
 1. PR7 must not hardcode breakfast/lunch/dinner or dinner-only structure.
 2. PR7 should retain member pattern/program version in planning history.
-3. PR8 should accept heterogeneous member schedules and implement deterministic
+3. `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` must establish reviewed program truth before PR7/PR8 consume it.
+4. PR8 should accept heterogeneous member schedules and implement deterministic
    recommendation/reconciliation behavior at a bounded baseline.
-4. Planning should acquire a versioned replan contract; richer preservation of
+5. Planning should acquire a versioned replan contract; richer preservation of
    prepared batches/perishables grows when Prep exists.
-5. Shared deployment/Auth work must use the new security contract.
-6. Arbitrary external URL/file import must pass the importer sandbox security
+6. Shared deployment/Auth work must use the new security contract.
+7. Arbitrary external URL/file import must pass the importer sandbox security
    gate.
-7. Retail and AI must pass their respective trust-boundary gates before runtime
+8. Retail and AI must pass their respective trust-boundary gates before runtime
    enablement.
 
 The Master Roadmap sequence itself is not rebooted.

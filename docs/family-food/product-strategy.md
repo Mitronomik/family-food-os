@@ -1,7 +1,7 @@
 # FamilyFoodOS — Product Strategy Contract
 
-**Status:** canonical product-strategy contract  
-**Decision date:** 2026-09-13  
+**Status:** canonical product-strategy contract
+**Decision date:** 2026-09-13
 **Applies to:** Planner, MealPlan/Serving, Shopping, Prep, consumer UX, validation and product metrics
 
 ## 1. Authority and purpose
@@ -15,7 +15,7 @@ repository architecture, migration strategy or sequencing contract.
 
 The following repository contracts remain authoritative within their scopes:
 
-- `architecture.md` — architecture, ownership and persistence boundaries;
+- `architecture.md` + `architecture-addendum-2026-09-13.md` — architecture, ownership, mixed-source authority and persistence boundaries;
 - `master-roadmap.md` — milestone order and delivery gates;
 - `food-composition-and-assembly.md` — food identity, composition and assembly;
 - `nutrition-core.md` — deterministic Nutrition truth;
@@ -85,7 +85,7 @@ actually followed.
 ## 5. Flexible meal pattern, not dinner-only planning
 
 The first usable product must support a configurable daily meal pattern per
-member. Initial validated product range is one to six planned eating occasions
+member. Initial supported product range is one to six planned eating occasions
 per day, while the domain model remains extensible rather than encoding six as a
 permanent architectural maximum.
 
@@ -129,6 +129,12 @@ EAT_OUT
 
 The exact enum/API representation belongs to the owning implementation PR, but
 Planning must not assume every slot has a Recipe.
+
+Representable source kinds are not automatically Planner-selectable. Automatic
+selection is enabled only when the source's identity, quantity/supply, nutrition
+and other required truth have an owning authoritative model. PR8 baseline
+automatically chooses RecipeVersion/RecipeAssembly-backed sources; other source
+families follow the capability gates in `architecture-addendum-2026-09-13.md`.
 
 ## 7. Household Reconciliation
 

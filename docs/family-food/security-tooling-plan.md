@@ -1,7 +1,7 @@
 # FamilyFoodOS — Security Tooling Plan
 
-**Status:** implementation-planning companion to `security-architecture.md`  
-**Decision date:** 2026-09-13  
+**Status:** implementation-planning companion to `security-architecture.md`
+**Decision date:** 2026-09-13
 **Principle:** add security controls by trust-boundary/risk trigger; do not create scanner/platform sprawl
 
 ## 1. Purpose

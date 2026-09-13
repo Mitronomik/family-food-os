@@ -51,7 +51,8 @@ For product/Planner/MealPlan/Serving work that touches meal frequency, member
 schedules, household reconciliation, meal source or replan, also read:
 
 - [Product Strategy](docs/family-food/product-strategy.md);
-- [Meal Pattern Programs](docs/family-food/meal-pattern-programs.md).
+- [Meal Pattern Programs](docs/family-food/meal-pattern-programs.md);
+- [Architecture Compatibility Addendum](docs/family-food/architecture-addendum-2026-09-13.md).
 
 For Auth, shared deployment, arbitrary external import, Retail, AI/tools,
 security-sensitive API changes or production release controls, read:
@@ -83,6 +84,13 @@ Read-only review excludes delivery. Task-contract/DoD requirements:
   Shared-base/variant behavior may reduce duplicate cooking, but hard exclusions
   always dominate sharedness. Leftovers, prepared food, ready food and eating
   outside may be legitimate meal sources; not every meal slot implies a Recipe.
+  Representability does not grant automatic Planner availability: each source
+  follows the authority/capability matrix in the architecture addendum, and
+  unknown nutrition/cost/supply stays unknown.
+- `MealPatternProgram` is platform-owned curated catalogue truth;
+  `MemberMealPatternSelection` is Household-owned accepted state. The required
+  `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` supporting operation establishes reviewed
+  program truth before PR7/PR8 consume it; Planner never invents program data.
 - Replanning is a versioned Planning capability, not silent history mutation.
   Changes to accepted plan revisions make incompatible Shopping/Prep/PDF derived
   outputs stale and require explicit regeneration.
