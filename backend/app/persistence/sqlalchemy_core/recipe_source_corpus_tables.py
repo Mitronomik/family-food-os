@@ -74,8 +74,7 @@ recipe_source_cards_table = Table(
         "document_id",
         "source_section_code",
         "source_card_code",
-        "raw_card_sha256",
-        name="uq_recipe_source_card_revision",
+        name="uq_recipe_source_card_identity",
     ),
     CheckConstraint(
         "length(source_section_code)>0", name="ck_recipe_source_card_section"
