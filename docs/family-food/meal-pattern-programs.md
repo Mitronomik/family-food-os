@@ -293,6 +293,34 @@ The program never stores a second competing nutrition calculation.
 Planner receives the accepted member selections and compiles them into household
 meal events.
 
+### 12.1 MealRole is not RecipeVersion.meal_type_code
+
+The planning role and the already implemented Recipe Catalogue classification
+are separate concepts.
+
+Canonical invariant:
+
+```text
+MealRole != RecipeVersion.meal_type_code
+```
+
+Current `RecipeVersion.meal_type_code` values such as `breakfast`, `main`,
+`side`, `salad`, `sandwich` and `other` classify catalogue recipes/components.
+They are not the HouseholdMember schedule enum and must not be renamed, migrated
+or expanded with `DINNER`, `LUNCH`, `PRE_WORKOUT` or similar values merely to
+express meal opportunities.
+
+Planner/selection uses an explicit deterministic suitability rule or mapping
+between a `MealRole` and compatible RecipeVersion/RecipeAssembly candidates.
+For example, a dinner event may compose `MAIN` plus compatible `SIDE`/`SALAD`
+components, while a breakfast role may prefer the existing `breakfast` class
+plus other explicitly approved compatible candidates.
+
+The exact mapping/versioning belongs to the owning implementation PR. It must not
+create a second source of Recipe Catalogue truth.
+
+See `architecture-addendum-2026-09-13.md` for the canonical compatibility rule.
+
 Conceptually:
 
 ```text
@@ -382,6 +410,8 @@ Implementation must cover at least:
 - user rejection / custom override;
 - unsupported/safety state instead of improvised medical recommendation;
 - no adult program automatically applied to a child outside its eligibility;
+- existing `RecipeVersion.meal_type_code` remains recipe classification rather
+  than being repurposed as a member schedule enum;
 - MealPlan history retaining the accepted program version.
 
 ## 17. Roadmap integration
