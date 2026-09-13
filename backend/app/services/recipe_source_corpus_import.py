@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
+import re
 from hashlib import sha256
 from html.parser import HTMLParser
-import re
-from typing import Any
+from typing import Any, ClassVar
 from urllib.parse import urljoin, urlparse
 
 from app.domain.recipe_source_corpus import (
@@ -32,22 +32,24 @@ _LINK_CODE = re.compile(
 
 
 class _TextHTMLParser(HTMLParser):
-    _BREAK_TAGS = {
-        "article",
-        "br",
-        "div",
-        "h1",
-        "h2",
-        "h3",
-        "h4",
-        "li",
-        "p",
-        "section",
-        "table",
-        "td",
-        "th",
-        "tr",
-    }
+    _BREAK_TAGS: ClassVar[frozenset[str]] = frozenset(
+        {
+            "article",
+            "br",
+            "div",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "li",
+            "p",
+            "section",
+            "table",
+            "td",
+            "th",
+            "tr",
+        }
+    )
 
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
