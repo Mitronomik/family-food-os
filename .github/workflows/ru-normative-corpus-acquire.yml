@@ -63,6 +63,7 @@ jobs:
           PYTHONPATH: backend:.
           AI_ENABLED: "false"
         run: |
+          set -o pipefail
           mkdir -p /tmp/ru-normative-corpus
           python scripts/import_ru_normative_recipe_corpus.py \
             --database /tmp/ru-normative-corpus/corpus.sqlite \
@@ -75,6 +76,7 @@ jobs:
           PYTHONPATH: backend:.
           AI_ENABLED: "false"
         run: |
+          set -o pipefail
           python scripts/import_ru_normative_recipe_corpus.py \
             --database /tmp/ru-normative-corpus/corpus.sqlite \
             --bundle /tmp/ru-normative-corpus/mr_2_4_0162_19.bundle.json \
@@ -129,9 +131,10 @@ jobs:
           PY
 
       - name: Upload acquisition evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: ru-normative-corpus-acquisition
           path: /tmp/ru-normative-corpus/
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 7
