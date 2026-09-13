@@ -30,7 +30,8 @@ class SqlAlchemyRecipeSourceCorpusRepository:
         existing = self._connection.execute(
             select(recipe_source_documents_table.c.id).where(
                 recipe_source_documents_table.c.source_code == document.source_code,
-                recipe_source_documents_table.c.source_version == document.source_version,
+                recipe_source_documents_table.c.source_version
+                == document.source_version,
                 recipe_source_documents_table.c.raw_bytes_sha256
                 == document.raw_bytes_sha256,
             )
@@ -117,7 +118,9 @@ class SqlAlchemyRecipeSourceCorpusRepository:
                         variant_id=variant_id,
                         position=row.position,
                         name_ru=row.name_ru,
-                        gross_g=_decimal(row.gross_g) if row.gross_g is not None else None,
+                        gross_g=_decimal(row.gross_g)
+                        if row.gross_g is not None
+                        else None,
                         net_g=_decimal(row.net_g) if row.net_g is not None else None,
                         quantity_text=row.quantity_text,
                         source_form_note=row.source_form_note,
