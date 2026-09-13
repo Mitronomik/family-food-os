@@ -115,6 +115,11 @@ jobs:
               for card in bundle['cards']
           }
           assert len(keys) == 214
+          for card in bundle['cards']:
+              raw = card['raw_card_text']
+              assert not any(line.startswith('←') for line in raw.splitlines())
+              assert 'Все права защищены' not in raw
+              assert 'window.yaContextCb' not in raw
 
           db = sqlite3.connect(root / 'corpus.sqlite')
           try:
@@ -131,6 +136,7 @@ jobs:
               'unique_section_card_keys': 214,
               'first_inserted_cards': 214,
               'repeat_inserted_cards': 0,
+              'page_chrome_rows': 0,
               'production_recipe_versions_fresh_db': 0,
           }
           (root / 'verification-summary.json').write_text(
@@ -143,7 +149,11 @@ jobs:
         run: |
           snapshot='data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json'
           if git ls-files --error-unmatch "$snapshot" >/dev/null 2>&1; then
-            echo 'Repository-local corpus snapshot already exists; no commit required.'
+            cmp -s /tmp/ru-normative-corpus/mr_2_4_0162_19.bundle.json "$snapshot" || {
+              echo 'Repository-local corpus snapshot differs from fresh acquisition.' >&2
+              exit 1
+            }
+            echo 'Repository-local corpus snapshot matches fresh acquisition.'
             exit 0
           fi
           cp /tmp/ru-normative-corpus/mr_2_4_0162_19.bundle.json "$snapshot"
