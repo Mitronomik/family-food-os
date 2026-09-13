@@ -59,12 +59,16 @@ jobs:
             echo 'No changed paths found.' >&2
             exit 1
           fi
-          git reset --mixed HEAD
-          git add -- "${changed[@]}"
-          git diff --cached --check
+          tmp_index="$(mktemp)"
+          rm -f "${tmp_index}"
+          export GIT_INDEX_FILE="${tmp_index}"
+          git read-tree "${base}"
+          git add -A
+          git diff --cached --check "${base}"
           printf 'Staged paths:\n'
-          git diff --cached --name-only | sed 's/^/  /'
-          git reset --mixed HEAD
+          git diff --cached --name-only "${base}" | sed 's/^/  /'
+          rm -f "${tmp_index}"
+          unset GIT_INDEX_FILE
 
       - name: Repository-relative Markdown link gate
         shell: bash
@@ -72,7 +76,6 @@ jobs:
           set -euo pipefail
           base='${{ steps.base.outputs.base }}'
           python - "${base}" <<'PY'
-          import os
           import re
           import subprocess
           import sys
