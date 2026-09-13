@@ -20,6 +20,11 @@ than guessing. Skills provide workflow guidance and never override explicit user
 instructions or hard constraints, including competing Skill/policy priority lists.
 Legacy business rules apply only to explicitly scoped CosmeticWorkshopOS work.
 
+A reference architecture, research package or bootstrap scaffold does not replace
+accepted repository architecture merely because it is newer or more detailed.
+Re-platforming, datastore changes, service extraction and roadmap reordering need
+an explicit approved project decision.
+
 ## Read by task
 
 Ordinary work starts with:
@@ -34,9 +39,24 @@ Load the [Operating Manual](docs/family-food/project-operating-manual.md),
 [Master Roadmap](docs/family-food/master-roadmap.md) and relevant architecture
 references for milestone authorization, gate interpretation, product/architecture
 decisions, cross-context design, source-of-truth conflicts or substantial
-research. Ordinary bounded corrections do not require this broad preload.
-The detailed [Git/PR reference](docs/family-food/agent-git-pr-workflow.md) is for
-unusual workflow questions and human review, not mandatory reading for every task.
+research. The later approved
+[roadmap addendum](docs/family-food/master-roadmap-addendum-2026-09-13.md)
+must be read with the Master Roadmap for PR7+ scope, meal-pattern/replan and
+security-gate work. Ordinary bounded corrections do not require this broad
+preload. The detailed
+[Git/PR reference](docs/family-food/agent-git-pr-workflow.md) is for unusual
+workflow questions and human review, not mandatory reading for every task.
+
+For product/Planner/MealPlan/Serving work that touches meal frequency, member
+schedules, household reconciliation, meal source or replan, also read:
+
+- [Product Strategy](docs/family-food/product-strategy.md);
+- [Meal Pattern Programs](docs/family-food/meal-pattern-programs.md).
+
+For Auth, shared deployment, arbitrary external import, Retail, AI/tools,
+security-sensitive API changes or production release controls, read:
+
+- [Security Architecture](docs/family-food/security-architecture.md).
 
 For authorized implementation, fixes or content updates that deliver a PR, use
 [family-food-pr-delivery](.agents/skills/family-food-pr-delivery/SKILL.md).
@@ -53,6 +73,19 @@ Read-only review excludes delivery. Task-contract/DoD requirements:
   passes validation and review or an explicit trusted-source policy before
   becoming production truth. Preserve source/version history and auditability.
   The MVP makes no diagnosis, treatment or therapeutic-effectiveness claims.
+- Meal frequency is configurable per HouseholdMember; no Planner, MealPlan or UI
+  may hardcode dinner-only or a universal three-meal day as domain truth. The
+  initial product must represent one to six meal opportunities and heterogeneous
+  member patterns without schema redesign. A deterministic recommender may rank
+  only curated/versioned wellness programs, requires user acceptance and must
+  return an unsupported/safety state rather than invent a therapeutic diet.
+- Household planning optimizes shared execution as well as individual targets.
+  Shared-base/variant behavior may reduce duplicate cooking, but hard exclusions
+  always dominate sharedness. Leftovers, prepared food, ready food and eating
+  outside may be legitimate meal sources; not every meal slot implies a Recipe.
+- Replanning is a versioned Planning capability, not silent history mutation.
+  Changes to accepted plan revisions make incompatible Shopping/Prep/PDF derived
+  outputs stale and require explicit regeneration.
 - New food runtime follows `UI → API → services/domain → repositories → database`.
   Domain/services do not import SQLAlchemy. Food persistence uses synchronous
   SQLAlchemy 2.x Core, repositories and the project UoW. The custom SQLite
@@ -75,13 +108,19 @@ Read-only review excludes delivery. Task-contract/DoD requirements:
   [Russian-language contract](docs/family-food/russian-language-contract.md).
 - Consumer UX is mobile-first and minimizes effort: the system proposes and the
   user confirms/changes. Administrative controls must not dominate navigation.
+- External content, provider payloads and AI output are untrusted until the
+  owning boundary validates them. Security-sensitive work follows
+  [security-architecture.md](docs/family-food/security-architecture.md): complete
+  mediation, least privilege, no direct LLM DB/shell/filesystem/general-network/
+  payment authority, object authorization and secure-by-default gates.
 
 ## Scope, delivery and verification
 
 Current authorization belongs in `state/current-focus.md`; milestone order and
-gates belong in the Master Roadmap. Follow the migration plan for replacement
-strategy. No future context, AI, Retail, optimization, native app or shared/SaaS
-infrastructure may start before its gate and authorization.
+gates belong in the Master Roadmap plus any later canonical addendum. Follow the
+migration plan for replacement strategy. No future context, AI, Retail,
+optimization, native app or shared/SaaS infrastructure may start before its gate
+and authorization.
 
 Keep `main` working. One feature branch/PR has one bounded goal. Never push work
 directly to `main`. Never autonomously merge your own PR; merge requires explicit
