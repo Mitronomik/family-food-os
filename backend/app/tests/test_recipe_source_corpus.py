@@ -3,7 +3,6 @@ from hashlib import sha256
 from pathlib import Path
 
 import pytest
-
 from app.domain.recipe_source_corpus import CorpusCaptureStatus, SourceCardInput
 from app.services.recipe_source_corpus_import import (
     extract_sudact_card_links,
