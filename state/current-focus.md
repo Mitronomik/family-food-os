@@ -3,26 +3,30 @@
 Updated: `2026-09-13`.
 
 - PR6 / PR6-CLOSE = COMPLETE.
-- [PR #34](https://github.com/Mitronomik/family-food-os/pull/34) = MERGED.
-- [PR #35](https://github.com/Mitronomik/family-food-os/pull/35) = MERGED.
-- Exact accepted main after PR #35: `7388d19677cffbf5cd6cb192eabc0b93cad870f7`.
-- R1 / R2 / R3 / R4 = COMPLETE AS BLOCKED RESEARCH; R1/R2/R3 evidence packages remain frozen.
-- R1-21 and R1-23 = INDIVIDUALLY_READY, unchanged exact published 100-portion scopes.
-- ready = 2/3; third_candidate = none.
-- OPEN Assembly-A evidence gates: family_count, optional_role, verified_substitution.
-- R4-N50200 = COMPLETE AS BLOCKED RESEARCH; no executable production-data enablement plan was issued.
-- Current authorized operation: [PR #36](https://github.com/Mitronomik/family-food-os/pull/36), Russian normative recipe source corpus and bulk importer; OPEN / READY FOR FINAL RE-REVIEW, not merged.
-- PR #36 is synchronized on accepted main. Runtime/acquisition verification head: `5f95530472e83748b67dd9efa9fa4542aeb5c546`.
-- Live acquisition = PASS: exactly 214/214 section-scoped cards; exact repeat import inserted 0; page-chrome rows 0.
-- Historical full `backend/app/tests + launcher/tests` regression and live acquisition = PASS at `5f95530472e83748b67dd9efa9fa4542aeb5c546` (run `34744992334`); not rerun for the bounded correction.
-- Review `5190228147` corrections verified: declared bundle hashes required/validated; conflicting repeat payload raises `CorpusImportConflictError` before writes.
-- New correction verification: 105 focused corpus/persistence/migration tests PASS with `AI_ENABLED=false`; Ruff check/format PASS; offline CLI 214 first / 0 repeat, both adversarial failures leave DB unchanged.
-- Frozen 214-card bundle remains byte-identical. Six stale hashes in the separate bootstrap fixture corrected; all texts/structured facts unchanged.
-- Durable cleaned source snapshot: `data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json`.
-- Current accepted main migration remains `0029_food_composition_core` until PR #36 is merged.
-- PR #36 introduces `0030_recipe_source_corpus`; future RecipeTemplate schema is `0031_recipe_template_catalogue`.
-- Source-corpus ingestion does not publish RecipeVersion/RecipeTemplate and does not replace FoodIngredient/Nutrition/Composition deterministic truth.
-- Assembly A = BLOCKED; Assembly B and PR7+ = NOT STARTED.
+- PR #34 = MERGED.
+- PR #35 = MERGED.
+- PR #36 — Russian normative recipe source corpus and bulk importer = MERGED.
+- Exact accepted main after PR #36: `077d054373cc5f8e1813acdc2cbacb3746e1c11a`.
+- Current accepted SQLite migration head: `0030_recipe_source_corpus`.
+- Future RecipeTemplate schema reservation remains `0031_recipe_template_catalogue`; no RecipeTemplate runtime is authorized by PR #36.
+- The 214-card source corpus remains evidence/source material; it does not publish RecipeVersion/RecipeTemplate and does not replace FoodIngredient/Nutrition/Composition truth.
+- R1 / R2 / R3 / R4 remain COMPLETE AS BLOCKED RESEARCH; R1/R2/R3 evidence packages remain frozen.
+- R1-21 and R1-23 remain INDIVIDUALLY_READY; ready = 2/3; third_candidate = none.
+- OPEN Assembly-A evidence gates remain: family_count, optional_role, verified_substitution.
+- Assembly A remains BLOCKED; Assembly B and PR7+ remain NOT STARTED.
 
-Next authorized action: final human re-review of PR36 corrections. Stop after publishing this correction; merge requires separate explicit post-review authorization.
-No automatic merge, Assembly B, PR7, RecipeTemplate publication, production recipe publication or new donor/data-repair operation is authorized.
+Current authorized operation: documentation-only integration of the September 2026 Household Food OS product/security research and the explicit user decision for flexible member meal patterns plus a deterministic meal-pattern recommender.
+
+Authorized documentation outcomes:
+
+- preserve the current FastAPI/Python, SQLAlchemy Core/UoW and ordered SQLite migration architecture; no greenfield reboot;
+- integrate Household-first product strategy, household reconciliation, mixed meal sources, Reality/replan and execution/mental-load metrics;
+- require configurable member meal patterns (initial validated range 1–6 eating opportunities/day, heterogeneous by member) rather than dinner-only or fixed three-meal domain logic;
+- define a deterministic, versioned, curated wellness Meal Pattern Recommender that requires user acceptance and does not invent therapeutic diets;
+- establish a canonical secure-by-design contract covering object authorization, importer/SSRF boundaries, Retail, Auth, AI/prompt injection/tool abuse, privacy/children data and supply-chain/release controls;
+- record the external TAS/RBS/bootstrap package as research/reference, not repository architecture authority;
+- amend future PR7/PR8 and later security-gate requirements without automatically starting those milestones.
+
+Current branch for this bounded docs operation: `docs/product-security-integration-final`.
+
+Next authorized action: complete proportional docs-only verification and publish the documentation integration for human review. Stop after review-ready publication. No automatic merge, Assembly B, PR7, Retail, AI, Auth, new production recipe publication or new donor/data-repair operation is authorized by this documentation work.
