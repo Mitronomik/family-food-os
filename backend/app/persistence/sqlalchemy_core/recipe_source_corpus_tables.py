@@ -14,7 +14,11 @@ from sqlalchemy import (
     UniqueConstraint,
 )
 
-from app.persistence.sqlalchemy_core.types import DecimalText, UTCDateTime, entity_uuid_type
+from app.persistence.sqlalchemy_core.types import (
+    DecimalText,
+    UTCDateTime,
+    entity_uuid_type,
+)
 
 recipe_source_corpus_metadata = MetaData()
 
