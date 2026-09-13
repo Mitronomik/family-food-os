@@ -10,15 +10,18 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   acquire-and-verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
-      - name: Checkout
+      - name: Checkout synchronized feature branch
         uses: actions/checkout@v4
+        with:
+          ref: codex/ru-normative-recipe-corpus
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -30,7 +33,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -e './backend[test]' ruff
 
-      - name: Focused tests
+      - name: Focused corpus tests
         env:
           PYTHONPATH: backend
           AI_ENABLED: "false"
@@ -57,6 +60,12 @@ jobs:
             backend/app/tests/test_recipe_source_corpus.py \
             backend/app/tests/persistence/test_recipe_source_corpus_persistence.py \
             scripts/import_ru_normative_recipe_corpus.py
+
+      - name: Full backend and launcher regression
+        env:
+          PYTHONPATH: backend:.
+          AI_ENABLED: "false"
+        run: python -m pytest backend/app/tests launcher/tests
 
       - name: Acquire and import all 214 cards
         env:
@@ -129,6 +138,20 @@ jobs:
           )
           print(json.dumps(summary, ensure_ascii=False))
           PY
+
+      - name: Persist repository-local 214-card bundle once
+        run: |
+          snapshot='data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json'
+          if git ls-files --error-unmatch "$snapshot" >/dev/null 2>&1; then
+            echo 'Repository-local corpus snapshot already exists; no commit required.'
+            exit 0
+          fi
+          cp /tmp/ru-normative-corpus/mr_2_4_0162_19.bundle.json "$snapshot"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$snapshot"
+          git commit -m 'data: persist 214-card normative corpus snapshot'
+          git push origin HEAD:codex/ru-normative-recipe-corpus
 
       - name: Upload acquisition evidence
         if: always()
