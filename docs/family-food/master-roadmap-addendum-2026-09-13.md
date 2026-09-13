@@ -65,6 +65,21 @@ represent:
   `READY_MEAL`, `ORDER_OUT`, `EAT_OUT` or equivalent approved representation);
 - immutable plan history/revision semantics.
 
+PR7 must preserve the existing Recipe Catalogue classification contract.
+`MealRole`/meal-opportunity semantics are **not** `RecipeVersion.meal_type_code`.
+The current recipe enum (`breakfast`, `main`, `side`, `salad`, `sandwich`,
+`other`) must not be renamed, migrated or expanded merely to express member
+schedules. A deterministic suitability/mapping layer bridges planning roles to
+compatible RecipeVersion/RecipeAssembly candidates.
+
+A MealPlan event must have an explicit source kind. RecipeVersion or
+RecipeAssembly reference requirements are conditional on that source kind; PR7
+must not create fake RecipeVersions for leftovers, prepared/ready food,
+`ORDER_OUT` or `EAT_OUT` solely to satisfy a universal recipe foreign key.
+
+The canonical compatibility rules are in
+`architecture-addendum-2026-09-13.md`.
+
 PR7 does **not** need to implement the complete recommendation algorithm. It
 creates the domain/history boundary needed by PR8.
 
@@ -79,10 +94,14 @@ At minimum the domain/tests must represent:
 - 5 meals;
 - 6 meal opportunities;
 - heterogeneous household schedules;
-- one shared meal event with different member Servings.
+- one shared meal event with different member Servings;
+- a cooked event referencing an immutable RecipeVersion;
+- a non-recipe source event without a fake RecipeVersion;
+- existing RecipeVersion meal classification remaining unchanged by MealRole.
 
 The exact enum/table/API design remains the PR7 implementation responsibility
-within `architecture.md` and `meal-pattern-programs.md`.
+within `architecture.md`, `architecture-addendum-2026-09-13.md` and
+`meal-pattern-programs.md`.
 
 ## 5. PR8 scope amendment — Planner v0
 
@@ -115,6 +134,11 @@ Hard exclusions dominate sharedness.
 Planner may deliberately use leftovers/prepared/ready/out-of-home sources rather
 than require a fresh Recipe in every slot.
 
+Planner records an explicit source choice and source reference where the source
+requires one. It must use authoritative represented supply/state and must not
+invent a RecipeVersion or future PreparedBatch/Pantry/Retail state merely to make
+a source option selectable.
+
 ### 5.4 Replan foundation
 
 PR8 should define a versioned deterministic replan/change contract for future
@@ -135,7 +159,9 @@ Gate 1 still occurs after PR8. It additionally requires evidence that:
 - shared household meal behavior is tested;
 - simple replan/version behavior is reproducible;
 - medical/unsupported cases fail safely rather than generating a pseudo-clinical
-  program.
+  program;
+- Recipe Catalogue meal classification remains distinct from MealRole;
+- mixed-source MealPlans do not require synthetic RecipeVersions.
 
 The original core Gate 1 requirements (exclusions, complete week, individualized
 servings, trace, deterministic behavior) remain.
@@ -279,6 +305,7 @@ This does not authorize a new platform stack.
 
 Future work in these scopes must read:
 
+- `architecture-addendum-2026-09-13.md`;
 - `product-strategy.md`;
 - `meal-pattern-programs.md`;
 - `security-architecture.md`;
