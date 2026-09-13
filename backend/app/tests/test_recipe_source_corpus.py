@@ -22,12 +22,12 @@ def test_split_normative_cards_preserves_raw_blocks_and_appendix_context():
 Технология приготовления: Вымыть, нарезать на порции.
 Сведения о пищевой ценности
 Приложение 6
-ТЕХНОЛОГИЧЕСКАЯ КАРТА N 8.1
-Наименование блюда: Помидоры свежие
+ТЕХНОЛОГИЧЕСКАЯ N 1.1б
+Наименование блюда: Борщ с капустой и картофелем на курином бульоне
 Источник рецептуры: Нормативный источник
 """
     cards = split_normative_cards(text)
-    assert [row["source_card_code"] for row in cards] == ["8.1", "8.1"]
+    assert [row["source_card_code"] for row in cards] == ["8.1", "1.1б"]
     assert [row["source_section_code"] for row in cards] == [
         "APPENDIX_5",
         "APPENDIX_6",
@@ -41,21 +41,25 @@ def test_split_normative_cards_preserves_raw_blocks_and_appendix_context():
         )
 
 
-def test_sudact_link_parser_is_appendix_scoped_and_normalizes_suffixes():
+def test_sudact_link_parser_accepts_karta_and_omitted_karta_slugs():
     html = """
-    <a href="/law/x/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.2a/">
-      Технологическая карта N 1.2а
-    </a>
     <a href="/law/x/prilozhenie-6/supy/tekhnologicheskaia-karta-n-1.2a/">
       Технологическая карта N 1.2а
+    </a>
+    <a href="/law/x/prilozhenie-6/supy/tekhnologicheskaia-n-1.1b/">
+      Технологическая N 1.1б
+    </a>
+    <a href="/law/x/prilozhenie-7/supy/tekhnologicheskaia-n-1.1b/">
+      Технологическая N 1.1б
     </a>
     """
     links = extract_sudact_card_links(
         html,
-        "https://sudact.ru/law/x/prilozhenie-5/",
+        "https://sudact.ru/law/x/prilozhenie-6/",
     )
     assert links == {
-        "1.2а": "https://sudact.ru/law/x/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.2a/"
+        "1.1б": "https://sudact.ru/law/x/prilozhenie-6/supy/tekhnologicheskaia-n-1.1b/",
+        "1.2а": "https://sudact.ru/law/x/prilozhenie-6/supy/tekhnologicheskaia-karta-n-1.2a/",
     }
 
 
@@ -71,7 +75,7 @@ def test_mr_manifest_has_all_214_section_scoped_cards():
     }
     assert len(lookup) == 214
     assert lookup[("APPENDIX_5", "8.1")] == "Холодные блюда"
-    assert lookup[("APPENDIX_6", "8.1")] == "Холодные блюда"
+    assert lookup[("APPENDIX_6", "1.1б")] == "Супы"
     assert lookup[("APPENDIX_8", "2.24")] == "Мясные блюда"
 
 
