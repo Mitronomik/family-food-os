@@ -216,7 +216,7 @@ def _nonnegative_decimal(value: str, field: str) -> Decimal:
 
 def _decimal(value: str, field: str) -> Decimal:
     if not isinstance(value, str):
-        raise ValueError(f"{field} must be a decimal string")
+        raise TypeError(f"{field} must be a decimal string")
     try:
         parsed = Decimal(value.replace(",", "."))
     except (InvalidOperation, AttributeError) as exc:
