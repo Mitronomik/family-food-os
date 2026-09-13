@@ -1,0 +1,10 @@
+{
+  "automatic_next_operation": false,
+  "candidate_inventory_ref": "profile-candidates.json",
+  "changes": [],
+  "is_executable_plan": false,
+  "production_delta": null,
+  "reason_ru": "План изменения производственных данных не сформирован: остались непищевые препятствия и неполные привязки профилей. Перечень исследованных кандидатов сохранён отдельно; он не является разрешённой минимальной дельтой.",
+  "separate_review_required": true,
+  "status": "WITHHELD_NON_DATA_GATES"
+}

@@ -1,0 +1,331 @@
+{
+  "corrected_policy_ref": "../recipe-assembly-a-r1/market-evidence.json",
+  "policy_ref": "../../../docs/family-food/recipe-localization-and-substitution.md#5-ingredient-market-compatibility-classification",
+  "production_enablement_allowed": false,
+  "reviewed_before_production": true,
+  "rows": [
+    {
+      "commodity_exception_applicable": false,
+      "default_dependency_risk": "EXACT_FORM_UNESTABLISHED",
+      "default_gate_result": "BLOCKED",
+      "evidence_refs": [
+        "MARKET-TURKEY",
+        "MARKET-TURKEY-MAKER",
+        "MARKET-TURKEY-MAGNIT",
+        "TURKEY-90"
+      ],
+      "exact_form_supported": false,
+      "food_code": "TURKEY_GROUND_90",
+      "live_selected_store_stock_verified": false,
+      "market_classification": "SPECIALTY_OR_UNCLEAR",
+      "ordinary_retail_supported": true,
+      "panel_chains": [],
+      "purchase_required": true,
+      "region": "RU-SPB/LO",
+      "required": true,
+      "reviewed_on": "2026-09-12",
+      "reviewer_rationale_ru": "Фарш из индейки — обычная категория. Но десять граммов жира в пищевой маркировке не удостоверяют точную спецификацию девяносто процентов нежирного мяса; карточка не предлагает другую мясную основу.",
+      "row_id": "N50200-01",
+      "source_published_substitution_available": false,
+      "specific_product_reason": null,
+      "substitution_required": true
+    },
+    {
+      "commodity_exception_applicable": false,
+      "default_dependency_risk": "LOW_CATALOGUE_LEVEL",
+      "default_gate_result": "PASS",
+      "evidence_refs": [
+        "MARKET-VEGETABLES"
+      ],
+      "exact_form_supported": true,
+      "food_code": "ONION_RAW_GENERIC",
+      "live_selected_store_stock_verified": false,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "panel_chains": [
+        "LENTA"
+      ],
+      "purchase_required": true,
+      "region": "RU-SPB/LO",
+      "required": true,
+      "reviewed_on": "2026-09-12",
+      "reviewer_rationale_ru": "Обычный свежий репчатый лук есть в российской сети; цвет для общей идентичности не выбирается. Нарезка выполняется при подготовке.",
+      "row_id": "N50200-02",
+      "source_published_substitution_available": false,
+      "specific_product_reason": "Обычный свежий репчатый лук есть в российской сети; цвет для общей идентичности не выбирается. Нарезка выполняется при подготовке.",
+      "substitution_required": false
+    },
+    {
+      "commodity_exception_applicable": false,
+      "default_dependency_risk": "LOW_CATALOGUE_LEVEL",
+      "default_gate_result": "PASS",
+      "evidence_refs": [
+        "MARKET-PARSLEY"
+      ],
+      "exact_form_supported": true,
+      "food_code": "PARSLEY",
+      "live_selected_store_stock_verified": false,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "panel_chains": [
+        "LENTA"
+      ],
+      "purchase_required": true,
+      "region": "RU-SPB/LO",
+      "required": true,
+      "reviewed_on": "2026-09-12",
+      "reviewer_rationale_ru": "Свежая петрушка — обычная зелень в продуктовой сети; специальный бренд не нужен.",
+      "row_id": "N50200-03",
+      "source_published_substitution_available": false,
+      "specific_product_reason": "Свежая петрушка — обычная зелень в продуктовой сети; специальный бренд не нужен.",
+      "substitution_required": false
+    },
+    {
+      "commodity_exception_applicable": false,
+      "default_dependency_risk": "LOW_CATALOGUE_LEVEL",
+      "default_gate_result": "PASS",
+      "evidence_refs": [
+        "MARKET-CRUMBS"
+      ],
+      "exact_form_supported": true,
+      "food_code": "BREADCRUMBS",
+      "live_selected_store_stock_verified": false,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "panel_chains": [
+        "LENTA"
+      ],
+      "purchase_required": true,
+      "region": "RU-SPB/LO",
+      "required": true,
+      "reviewed_on": "2026-09-12",
+      "reviewer_rationale_ru": "Обычные нейтральные сухие панировочные сухари продаются в продуктовой сети; мелкий помол не требует ресторанной закупки.",
+      "row_id": "N50200-04",
+      "source_published_substitution_available": false,
+      "specific_product_reason": "Обычные нейтральные сухие панировочные сухари продаются в продуктовой сети; мелкий помол не требует ресторанной закупки.",
+      "substitution_required": false
+    },
+    {
+      "commodity_exception_applicable": true,
+      "default_dependency_risk": "LOW_CATALOGUE_LEVEL",
+      "default_gate_result": "PASS",
+      "evidence_refs": [
+        "MARKET-SALT"
+      ],
+      "exact_form_supported": true,
+      "food_code": "SALT",
+      "live_selected_store_stock_verified": false,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "panel_chains": [
+        "LENTA"
+      ],
+      "purchase_required": true,
+      "region": "RU-SPB/LO",
+      "required": true,
+      "reviewed_on": "2026-09-12",
+      "reviewer_rationale_ru": "Базовая пищевая соль; применимо товарное исключение.",
+      "row_id": "N50200-05",
+      "source_published_substitution_available": false,
+      "specific_product_reason": "Базовая пищевая соль; применимо товарное исключение.",
+      "substitution_required": false
+    },
+    {
+      "commodity_exception_applicable": true,
+      "default_dependency_risk": "LOW_CATALOGUE_LEVEL",
+      "default_gate_result": "PASS",
+      "evidence_refs": [
+        "MARKET-GARLIC"
+      ],
+      "exact_form_supported": true,
+      "food_code": "GARLIC_POWDER",
+      "live_selected_store_stock_verified": false,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "panel_chains": [
+        "LENTA"
+      ],
+      "purchase_required": true,
+      "region": "RU-SPB/LO",
+      "required": true,
+      "reviewed_on": "2026-09-12",
+      "reviewer_rationale_ru": "Одиночная обычная сухая приправа, состав прямо указан; применимо товарное исключение.",
+      "row_id": "N50200-06",
+      "source_published_substitution_available": false,
+      "specific_product_reason": "Одиночная обычная сухая приправа, состав прямо указан; применимо товарное исключение.",
+      "substitution_required": false
+    },
+    {
+      "commodity_exception_applicable": true,
+      "default_dependency_risk": "LOW_CATALOGUE_LEVEL",
+      "default_gate_result": "PASS",
+      "evidence_refs": [
+        "MARKET-PEPPER-WHITE",
+        "MARKET-PEPPER-WHITE-CATEGORY"
+      ],
+      "exact_form_supported": true,
+      "food_code": "WHITE_PEPPER",
+      "live_selected_store_stock_verified": false,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "panel_chains": [
+        "LENTA"
+      ],
+      "purchase_required": true,
+      "region": "RU-SPB/LO",
+      "required": true,
+      "reviewed_on": "2026-09-12",
+      "reviewer_rationale_ru": "Точная белая молотая приправа присутствует в обычной сети. Продуктовая карточка и категория расходятся по наличию; это не доказательство редкости и не обещание остатка в конкретном магазине.",
+      "row_id": "N50200-07",
+      "source_published_substitution_available": false,
+      "specific_product_reason": "Точная белая молотая приправа присутствует в обычной сети. Продуктовая карточка и категория расходятся по наличию; это не доказательство редкости и не обещание остатка в конкретном магазине.",
+      "substitution_required": false
+    },
+    {
+      "commodity_exception_applicable": false,
+      "default_dependency_risk": "SPECIALIST_SUPPLY_ONLY_EVIDENCED",
+      "default_gate_result": "BLOCKED",
+      "evidence_refs": [
+        "MARKET-WORCESTER",
+        "MARKET-WORCESTER-SPB"
+      ],
+      "exact_form_supported": false,
+      "food_code": "WORCESTERSHIRE_SAUCE",
+      "live_selected_store_stock_verified": false,
+      "market_classification": "SPECIALTY_OR_UNCLEAR",
+      "ordinary_retail_supported": false,
+      "panel_chains": [],
+      "purchase_required": true,
+      "region": "RU-SPB/LO",
+      "required": true,
+      "reviewed_on": "2026-09-12",
+      "reviewer_rationale_ru": "Подтверждённые петербургские предложения относятся к профессиональным поставщикам. Обычная розничная закупка не установлена; отсутствие выдачи не доказывает отсутствие во всей России. В карточке нет замены этой обязательной приправы.",
+      "row_id": "N50200-08",
+      "source_published_substitution_available": false,
+      "specific_product_reason": null,
+      "substitution_required": true
+    },
+    {
+      "commodity_exception_applicable": false,
+      "default_dependency_risk": "EXACT_FORM_UNESTABLISHED",
+      "default_gate_result": "BLOCKED",
+      "evidence_refs": [
+        "MARKET-MUSTARD",
+        "MUSTARD-US",
+        "MUSTARD-RU-FORMS"
+      ],
+      "exact_form_supported": false,
+      "food_code": "MUSTARD_GROUND",
+      "live_selected_store_stock_verified": false,
+      "market_classification": "SPECIALTY_OR_UNCLEAR",
+      "ordinary_retail_supported": true,
+      "panel_chains": [],
+      "purchase_required": true,
+      "region": "RU-SPB/LO",
+      "required": true,
+      "reviewed_on": "2026-09-12",
+      "reviewer_rationale_ru": "Сухой горчичный порошок обычен, но его жировая и технологическая форма не связана с профилем молотых семян. Исключение для специй не устраняет расхождение формы.",
+      "row_id": "N50200-09",
+      "source_published_substitution_available": false,
+      "specific_product_reason": null,
+      "substitution_required": true
+    },
+    {
+      "commodity_exception_applicable": false,
+      "default_dependency_risk": "EXACT_FORM_UNESTABLISHED",
+      "default_gate_result": "BLOCKED",
+      "evidence_refs": [
+        "MARKET-CHEESE"
+      ],
+      "exact_form_supported": false,
+      "food_code": "CHEESE_MOZZARELLA_PART_SKIM_GENERIC",
+      "live_selected_store_stock_verified": false,
+      "market_classification": "SPECIALTY_OR_UNCLEAR",
+      "ordinary_retail_supported": true,
+      "panel_chains": [],
+      "purchase_required": true,
+      "region": "RU-SPB/LO",
+      "required": true,
+      "reviewed_on": "2026-09-12",
+      "reviewer_rationale_ru": "Обычная розница продаёт моцареллу, включая протеиновую в воде. Ни название, ни процент жирности не подтверждают точную форму частично обезжиренного молока с подходящей влажностью.",
+      "row_id": "N50200-10",
+      "source_published_substitution_available": false,
+      "specific_product_reason": null,
+      "substitution_required": true
+    },
+    {
+      "commodity_exception_applicable": false,
+      "default_dependency_risk": "EXACT_FORM_UNESTABLISHED",
+      "default_gate_result": "BLOCKED",
+      "evidence_refs": [
+        "MARKET-BUN"
+      ],
+      "exact_form_supported": false,
+      "food_code": "SANDWICH_BUN",
+      "live_selected_store_stock_verified": false,
+      "market_classification": "SPECIALTY_OR_UNCLEAR",
+      "ordinary_retail_supported": true,
+      "panel_chains": [],
+      "purchase_required": true,
+      "region": "RU-SPB/LO",
+      "required": true,
+      "reviewed_on": "2026-09-12",
+      "reviewer_rationale_ru": "Булочки для гамбургеров обычны и семейно уместны. Проверенная булочка содержит кунжут; точная совместимость с предложенным профилем простой булочки не установлена.",
+      "row_id": "N50200-11",
+      "source_published_substitution_available": false,
+      "specific_product_reason": null,
+      "substitution_required": true
+    },
+    {
+      "commodity_exception_applicable": false,
+      "default_dependency_risk": "LOW_CATALOGUE_LEVEL",
+      "default_gate_result": "PASS",
+      "evidence_refs": [
+        "MARKET-VEGETABLES"
+      ],
+      "exact_form_supported": true,
+      "food_code": "TOMATO",
+      "live_selected_store_stock_verified": false,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "panel_chains": [
+        "LENTA"
+      ],
+      "purchase_required": true,
+      "region": "RU-SPB/LO",
+      "required": false,
+      "reviewed_on": "2026-09-12",
+      "reviewer_rationale_ru": "Свежие томаты — обычная овощная категория; ломтики подготавливаются дома и не требуют специальной фасовки.",
+      "row_id": "N50200-12",
+      "source_published_substitution_available": true,
+      "specific_product_reason": "Свежие томаты — обычная овощная категория; ломтики подготавливаются дома и не требуют специальной фасовки.",
+      "substitution_required": false
+    },
+    {
+      "commodity_exception_applicable": false,
+      "default_dependency_risk": "LOW_CATALOGUE_LEVEL",
+      "default_gate_result": "PASS",
+      "evidence_refs": [
+        "MARKET-PEPPER-GREEN"
+      ],
+      "exact_form_supported": true,
+      "food_code": "BELL_PEPPER_GREEN",
+      "live_selected_store_stock_verified": false,
+      "market_classification": "RU_AVAILABLE",
+      "ordinary_retail_supported": true,
+      "panel_chains": [
+        "LENTA"
+      ],
+      "purchase_required": true,
+      "region": "RU-SPB/LO",
+      "required": false,
+      "reviewed_on": "2026-09-12",
+      "reviewer_rationale_ru": "Прямо подтверждён свежий сладкий зелёный перец; нарезка не меняет закупочный вид.",
+      "row_id": "N50200-13",
+      "source_published_substitution_available": true,
+      "specific_product_reason": "Прямо подтверждён свежий сладкий зелёный перец; нарезка не меняет закупочный вид.",
+      "substitution_required": false
+    }
+  ],
+  "rule": "RU_AVAILABLE is not rare; no mechanical 3/5 default requirement. Exact ordinary form plus product reason or basic commodity exception can pass. An unresolved or specialty required input with no source-verified ordinary substitute fails. No home producer path exists for this card."
+}

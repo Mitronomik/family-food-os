@@ -1,0 +1,105 @@
+{
+  "assembly_a": "BLOCKED",
+  "assembly_b": "NOT STARTED",
+  "current_composition_gaps": [
+    "N50200-01",
+    "N50200-02",
+    "N50200-07",
+    "N50200-08",
+    "N50200-09",
+    "N50200-10",
+    "N50200-11"
+  ],
+  "dependent_failures": [
+    "RU_EXACT_RECIPE_FAMILIARITY",
+    "VERIFIED_CURATED_SUBSTITUTION"
+  ],
+  "gates": {
+    "complete_variant_substitution": false,
+    "exact_ep_mass": true,
+    "input_without_estimates_yield_retention": true,
+    "kitchen_branches": false,
+    "mandatory_market": false,
+    "optional_semantics": true,
+    "profile_authority": false,
+    "rights": true,
+    "ru_familiarity": false,
+    "source_identity": true
+  },
+  "migration": "0029_food_composition_core",
+  "minimal_root_blockers": [
+    {
+      "gates": [
+        "PROFILE_AUTHORITY_OR_COMPATIBILITY",
+        "EXACT_ORDINARY_RU_MARKET"
+      ],
+      "id": "BLOCK-N50200-01",
+      "row_ids": [
+        "N50200-01"
+      ]
+    },
+    {
+      "gates": [
+        "EXACT_ORDINARY_RU_MARKET"
+      ],
+      "id": "BLOCK-N50200-08",
+      "row_ids": [
+        "N50200-08"
+      ]
+    },
+    {
+      "gates": [
+        "EXACT_ORDINARY_RU_MARKET"
+      ],
+      "id": "BLOCK-N50200-09",
+      "row_ids": [
+        "N50200-09"
+      ]
+    },
+    {
+      "gates": [
+        "EXACT_ORDINARY_RU_MARKET"
+      ],
+      "id": "BLOCK-N50200-10",
+      "row_ids": [
+        "N50200-10"
+      ]
+    },
+    {
+      "gates": [
+        "PROFILE_AUTHORITY_OR_COMPATIBILITY",
+        "EXACT_ORDINARY_RU_MARKET"
+      ],
+      "id": "BLOCK-N50200-11",
+      "row_ids": [
+        "N50200-11"
+      ]
+    },
+    {
+      "gates": [
+        "KITCHEN_ALL_THREE_BRANCHES"
+      ],
+      "id": "BLOCK-PUBLISHED-PROCESS-MASS",
+      "row_ids": [
+        "N50200-01",
+        "N50200-02",
+        "N50200-03",
+        "N50200-04",
+        "N50200-05",
+        "N50200-06",
+        "N50200-07",
+        "N50200-08",
+        "N50200-09",
+        "N50200-10",
+        "N50200-11"
+      ]
+    }
+  ],
+  "next_operation_authorized": false,
+  "operation": "RECIPE-ASSEMBLY-A-R4-N50200",
+  "pr7_plus": "NOT STARTED",
+  "production_delta": null,
+  "ready_count": 2,
+  "result": "BLOCKED",
+  "third_candidate": null
+}

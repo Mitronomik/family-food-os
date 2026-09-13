@@ -1381,3 +1381,22 @@ Assembly A is still BLOCKED; B and PR7+ remain NOT STARTED. Migration remains
 Assembly A nor authorizes another search or food-data repair. Stop for review;
 a future evidence-ready set would require separate implementation authorization
 for `0030_recipe_template_catalogue` before Assembly A can resume.
+
+
+### Assembly A N50200 deep viability — R4 checkpoint
+
+2026-09-12. [PR34](https://github.com/Mitronomik/family-food-os/pull/34) MERGED at
+`a375f005b09880cf6a63cb5c8b1e964a0f558cb7`. R1/R2/R3 COMPLETE AS BLOCKED RESEARCH.
+The explicitly authorized current operation is R4-N50200, one-candidate research
+with frozen R1/R2/R3 and no production promotion.
+
+[The complete R4 review](../../data/curation/recipe-assembly-a-r4-n50200/README.md)
+returns BLOCKED: mandatory exact form/market and profile issues plus published
+process mass inconsistencies. Optional garnish semantics pass, but full recipe
+substitution and exact kitchen verification do not. The data-enablement plan is
+withheld. Dish familiarity alone does not satisfy exact recipe default eligibility.
+
+Ready = 2/3; third candidate none; family_count/optional_role/verified_substitution
+OPEN. Assembly A BLOCKED, B and PR7+ NOT STARTED, migration 0029 unchanged.
+This checkpoint adds no milestone or gate. Next: review the research PR and stop;
+no automatic donor search, production N50200 data PR or 0030 implementation.

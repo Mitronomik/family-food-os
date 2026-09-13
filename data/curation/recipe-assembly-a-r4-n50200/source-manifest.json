@@ -1,0 +1,25 @@
+{
+  "afrs": {
+    "card": "N50200",
+    "id": "AFRS-2003-N50200",
+    "original_bytes": 10602998,
+    "original_sha256": "2f6795b5fc39b167fb2913bfccb720948dd257f6a90ca3fa7e228d7fb87ec090",
+    "page": 1329,
+    "publisher": "U.S. armed services",
+    "rechecked_on": "2026-09-12",
+    "retained_pdf": "../recipe-assembly-a-r3/sources/afrs-prefilter.pdf",
+    "retained_pdf_page": 2,
+    "retrieved_on": "2026-09-12",
+    "rights_scope": "RIGHTS-FACTS",
+    "standardization_pages": [
+      4,
+      5
+    ],
+    "standardization_pdf": "../recipe-assembly-a-r2/sources/afrs-full-excerpt.pdf",
+    "title": "Armed Forces Recipe Service, Baked Turkey Melt",
+    "url": "https://www.marines.mil/portals/1/Publications/MCO%20P10110.42B.pdf",
+    "version": "June 2003",
+    "yield_portions": 100
+  },
+  "evidence_only": true
+}

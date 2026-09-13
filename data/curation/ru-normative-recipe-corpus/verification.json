@@ -1,0 +1,24 @@
+{
+  "source_code": "RU_MR_2_4_0162_19",
+  "source_version": "2019-12-30",
+  "appendix_card_counts": {
+    "APPENDIX_5": 76,
+    "APPENDIX_6": 45,
+    "APPENDIX_7": 33,
+    "APPENDIX_8": 60
+  },
+  "total_cards": 214,
+  "unique_section_card_keys": 214,
+  "first_import_inserted_cards": 214,
+  "repeat_import_inserted_cards": 0,
+  "source_documents_count": 1,
+  "source_cards_count": 214,
+  "migration": "0030_recipe_source_corpus",
+  "production_recipe_versions_fresh_db": 0,
+  "ai_enabled": false,
+  "verification_scope": "PRE_SYNC_LIVE_ACQUISITION",
+  "verified_head": "a0d828105f7d04525abcd11a4571e0a2a1f53c3c",
+  "workflow_run_id": 34740127689,
+  "status": "PASS",
+  "note": "This records the successful live acquisition before synchronization with merged PR #35. The synchronized head must be re-verified before final PR #36 acceptance."
+}

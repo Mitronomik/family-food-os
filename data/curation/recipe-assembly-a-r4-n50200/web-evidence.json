@@ -1,0 +1,403 @@
+{
+  "failed_access": [
+    {
+      "result": "retrieval internal error; no absence inference",
+      "url": "https://www.perekrestok.ru/cat/search?search=Ворчестер"
+    },
+    {
+      "result": "retrieval internal error; no absence inference",
+      "url": "https://lenta.com/search/?search=вустерский"
+    }
+  ],
+  "negative_evidence_limitation": "Search is bounded, not proof of global nonexistence. Unestablished exact ordinary supply fails this default gate.",
+  "search_scope": "Exactly N50200 ingredient identities, primary nutrient datasets and RU/SPB terminal input market; no donor search.",
+  "sources": [
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "basis_grams": "112",
+        "carbohydrate_g": null,
+        "fat_g": "11",
+        "fat_percent": "10",
+        "fiber_g": null,
+        "ingredients": [
+          "ground turkey",
+          "rosemary extract"
+        ],
+        "kcal": "170",
+        "lean_percent": "90",
+        "limitation": "Carbohydrate/fibre cells blank in retrieved primary text, not zero. Product-specific antioxidant declaration. No claim of generic nutrient equivalence or Russian retail availability.",
+        "product_code": "223620",
+        "protein_g": "18",
+        "raw": true
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "TURKEY-90",
+      "publisher": "Hormel Foodservice",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "JENNIE-O raw ground turkey 90% lean #223620",
+      "url": "https://www.hormelfoodservice.com/products/jennie-o-all-natural-raw-ground-turkey-90-lean-4-5-lb/",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "colours": [
+          "Yellow",
+          "White",
+          "Red"
+        ],
+        "conclusion": "No universal yellow default; later 2016 document cannot retroactively specify N50200 colour.",
+        "n50200_procurement_link": false,
+        "purchaser_specifies_colour": true
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "ONION-CID",
+      "publisher": "USDA AMS",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Onions, bulb, ready-to-use",
+      "url": "https://www.ams.usda.gov/sites/default/files/media/A-A-20193D_Onions_Bulb_RTU.pdf",
+      "version": "A-A-20193D; 2016-06-16"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "limitation": "Terminology, not nutrient equivalence between full-fat seed meal and partially defatted flour.",
+        "synonyms": [
+          "MUSTARD FLOUR",
+          "MUSTARD, POWDERED",
+          "MUSTARD, DRY"
+        ]
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MUSTARD-FDA",
+      "publisher": "FDA",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Mustard flour",
+      "url": "https://hfpappexternal.fda.gov/scripts/fdcc/index.cfm?id=MUSTARDFLOUR&set=FoodSubstances",
+      "version": "Page updated 2026-07-28"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "ingredients": "Ground mustard",
+        "process": "Mustard seeds ground to fine powder",
+        "scope": "Supports US dry ground-seed candidate; not a historical AFRS procurement specification or Russian availability proof."
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MUSTARD-US",
+      "publisher": "McCormick",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Culinary ground mustard",
+      "url": "https://www.mccormick.com/products/mccormick-culinary-ground-mustard-1-lb",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "limitation": "Industrial oilseed processing exists; this does not identify the Lenta product as a particular extraction process.",
+        "products": [
+          "горчичное масло",
+          "горчичный порошок",
+          "жмых"
+        ]
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MUSTARD-RU-FORMS",
+      "publisher": "Сарепта",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Пищевые ингредиенты",
+      "url": "https://sarepta.ru/sotrudnichestvo/pokupatelyam-vesovoy-produktsii/",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "ingredients": "Мясо голени индейки",
+        "lean_90_claim": false,
+        "limitation": "Rounded nutrition 10 g fat is not a guaranteed lean/form specification. No absence-in-all-Russia claim.",
+        "per_100g": {
+          "carbohydrate_g": "0",
+          "fat_g": "10",
+          "protein_g": "15"
+        },
+        "stock": "Товар закончился"
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MARKET-TURKEY",
+      "publisher": "Лента",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Фарш из голени индейки Индилайт",
+      "url": "https://lenta.com/product/farsh-indejjki-iz-goleni-ohl-lotok-gvu-rossiya-450g-570168/",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "basis_g": "100",
+        "fat_g": "18",
+        "ingredients": [
+          "мясо индейки",
+          "кожа индейки"
+        ],
+        "lean_90_claim": false,
+        "protein_g": "16"
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MARKET-TURKEY-MAKER",
+      "publisher": "Индилайт",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Фарш классический",
+      "url": "https://www.indilight.ru/catalog/farsh-klassicheskiy-iz-indeyki/",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "display_region": "Краснодар",
+        "limitation": "Counterevidence to universal rarity of turkey mince. Not SPB or exact 90/10 evidence.",
+        "observed": "Фарш Индилайт из голени индейки 450г"
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MARKET-TURKEY-MAGNIT",
+      "publisher": "Магнит",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Фарш",
+      "url": "https://magnit.ru/catalog/64299-testmmfarsh",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "audience": "профессиональные закупщики",
+        "minimum_order_rub": "10000",
+        "observed": "Соус ворчестер, 1л*6шт, Appel",
+        "ordinary_panel_retail": false
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MARKET-WORCESTER",
+      "publisher": "EuroFoods",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Соусы оптом в Санкт-Петербурге",
+      "url": "https://efspb.ru/catalog/sousy-bulony-zapravki/sousy-pasty/",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_INDEXED_TEXT_FULL_FETCH_FAILED",
+      "facts": {
+        "observed": "Соус Ворчестер, стекло 140 мл",
+        "scope": "Restaurant/bar supplier; indexed primary catalogue text only"
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MARKET-WORCESTER-SPB",
+      "publisher": "Комплекс-Бар",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Соусы в Санкт-Петербурге",
+      "url": "https://spb.complexbar.ru/catalog/sousy/",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "ingredients": "Белый перец молотый",
+        "scope": "Exact ordinary spice SKU; catalogue evidence, not current selected-store stock.",
+        "stock": "Товар закончился"
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MARKET-PEPPER-WHITE",
+      "publisher": "Лента",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Белый молотый перец",
+      "url": "https://lenta.com/product/perec-belyjj-molotyjj-vetnam-20g-662695/",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "conflict": "Product page out of stock; category listing orderable. Does not prove selected SPB store stock.",
+        "observed": "Белый молотый перец Котани 20 г; есть кнопка корзины"
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MARKET-PEPPER-WHITE-CATEGORY",
+      "publisher": "Лента",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Каталог перца",
+      "url": "https://lenta.com/catalog/maslo-sousy-specii-20824/?filter.vid-bakalejjnogo-izdeliya-17=-6936060",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "ingredients": "Горчичный порошок высшего сорта",
+        "limitation": "USDA ground seed fat 36.24 g/100 g; form/profile equivalence not established. Cannot infer defatting solely from nutrient difference.",
+        "per_100g": {
+          "carbohydrate_g": "33",
+          "fat_g": "11",
+          "protein_g": "37"
+        },
+        "stock": "В корзину"
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MARKET-MUSTARD",
+      "publisher": "Лента",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Горчичный порошок",
+      "url": "https://lenta.com/product/gorchichnyjj-poroshok-rossiya-200g-680564/",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "form": "Шарики в воде, без лактозы",
+        "ingredients": "Молоко пастеризованное, соль, ферменты; заливка вода и соль",
+        "limitation": "Low-fat/high-protein marketing and dry-matter fat percentage do not establish exact AFRS/USDA part-skim form; no moisture or milk-standardization specification.",
+        "part_skim_specification": false,
+        "per_100g": {
+          "carbohydrate_g": "4",
+          "fat_g": "12.2",
+          "protein_g": "21"
+        },
+        "stock": "В корзину"
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MARKET-CHEESE",
+      "publisher": "Лента",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Моцарелла протеиновая Чильеджина без лактозы 32%",
+      "url": "https://lenta.com/product/syr-proteinovyjj-mocarella-v-vode-chiledzhina-blakt-32-bez-zmzh-rossiya-180g-731014/",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "form": "Пшеничная булочка с кунжутом",
+        "ingredients_include": [
+          "пшеничная мука",
+          "вода",
+          "кунжут",
+          "маргарин",
+          "сахар",
+          "дрожжи"
+        ],
+        "limitation": "Ordinary hamburger-bun category established; sesame declaration not silently mapped to USDA plain bun profile. Package/piece weight not recipe mass.",
+        "stock": "В корзину"
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MARKET-BUN",
+      "publisher": "Лента",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Булочка для гамбургера",
+      "url": "https://lenta.com/product/bulochka-dlya-gamburgera-sp-rossiya-60g-359092/",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "observed": [
+          "Лук репчатый",
+          "Лук красный",
+          "Лук белый",
+          "Томаты"
+        ],
+        "scope": "Region-neutral catalogue with explicit SPB service, not selected address stock.",
+        "spb_delivery_explicit": true
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MARKET-VEGETABLES",
+      "publisher": "Лента",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Овощи",
+      "url": "https://lenta.com/catalog/ovoshchi-146/",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "form": "Свежая весовая петрушка"
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MARKET-PARSLEY",
+      "publisher": "Лента",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Петрушка свежая",
+      "url": "https://lenta.com/product/petrushka-zl-ves-590476/",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "form": "Обычные сухие сухари для панировки; не смесь приправ и не панко",
+        "ingredients": "Мука пшеничная хлебопекарная",
+        "stock": "В корзину"
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MARKET-CRUMBS",
+      "publisher": "Лента",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Сухари панировочные",
+      "url": "https://lenta.com/product/638246-638246/",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "ingredients": "Чеснок сушеный молотый"
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MARKET-GARLIC",
+      "publisher": "Лента",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Чеснок сушёный молотый",
+      "url": "https://lenta.com/product/chesnok-sushenyjj-molotyjj-rossiya-10g-561764/",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "form": "Соль пищевая молотая"
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MARKET-SALT",
+      "publisher": "Лента",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Соль поваренная пищевая",
+      "url": "https://lenta.com/product/sol-pomol-1-kup-rossiya-1kg-491061/",
+      "version": "undated; reviewed 2026-09-12"
+    },
+    {
+      "access": "PRIMARY_PAGE_TEXT",
+      "facts": {
+        "form": "Свежий сладкий зелёный перец",
+        "sweet_explicit": true
+      },
+      "hash_limitation": "Original response bytes not retained; these independently written factual notes are package-hashed.",
+      "id": "MARKET-PEPPER-GREEN",
+      "publisher": "Лента",
+      "raw_sha256": null,
+      "reviewed_on": "2026-09-12",
+      "title": "Перец зелёный свежий",
+      "url": "https://lenta.com/product/perec-zelenyjj-ves-41206/",
+      "version": "undated; reviewed 2026-09-12"
+    }
+  ]
+}

@@ -3,26 +3,26 @@
 Updated: `2026-09-13`.
 
 - PR6 / PR6-CLOSE = COMPLETE.
-- PR #34 = MERGED at `a375f005b09880cf6a63cb5c8b1e964a0f558cb7`.
-- R1 / R2 / R3 = COMPLETE AS BLOCKED RESEARCH; R1-21 and R1-23 remain the two individually-ready fixed 100-portion evidence families.
-- PR #35 / R4-N50200 is OPEN, not merged. Final review result: **ACCEPT / READY TO MERGE** on head `e61c82b6a832c98a5c8f65a21bd26417e4b24549`; research result remains BLOCKED, ready 2/3, no production-data plan.
-- Latest explicit user decision authorizes **RU-NORMATIVE-RECIPE-CORPUS** as the current implementation operation.
-- Normative/base recipe cards may be retained/published as factual recipe data under the project-approved normative policy; provenance remains mandatory.
-- Current branch: `codex/ru-normative-recipe-corpus`; PR #36 is OPEN and must merge only after PR #35 and re-synchronization with the resulting `main`.
-- This operation adds a pre-publication source corpus and bulk importer; it does not publish RecipeVersion/RecipeTemplate truth.
-- Complete MR 2.4.0162-19 manifest for appendices 5–8 contains **214 section-scoped cards**: 76 + 45 + 33 + 60. Repeated card numbers across appendices are distinct by `source_section_code`.
-- Migration target becomes `0030_recipe_source_corpus`; future RecipeTemplate migration becomes `0031_recipe_template_catalogue`.
-- Bulk acquisition is fail-closed: the Sudact mode must retrieve exactly the 214-card manifest before writing the document revision. Direct PDF/text import is also appendix-aware.
-- The current execution environment has no outbound source-download capability and the Opera connector is not connected, so a live 214-page crawl has not been executed here; no missing card is fabricated or reported as imported.
-- Assembly A remains BLOCKED; Assembly B / PR7+ remain NOT STARTED.
+- [PR #34](https://github.com/Mitronomik/family-food-os/pull/34) = MERGED.
+- [PR #35](https://github.com/Mitronomik/family-food-os/pull/35) = MERGED.
+- Exact accepted main after PR #35: `7388d19677cffbf5cd6cb192eabc0b93cad870f7`.
+- R1 / R2 / R3 / R4 = COMPLETE AS BLOCKED RESEARCH; R1/R2/R3 evidence packages remain frozen.
+- R1-21 and R1-23 = INDIVIDUALLY_READY, unchanged exact published 100-portion scopes.
+- ready = 2/3; third_candidate = none.
+- OPEN Assembly-A evidence gates: family_count, optional_role, verified_substitution.
+- R4-N50200 = COMPLETE AS BLOCKED RESEARCH; no executable production-data enablement plan was issued.
+- Current authorized operation: [PR #36](https://github.com/Mitronomik/family-food-os/pull/36), Russian normative recipe source corpus and bulk importer.
+  Branch `codex/ru-normative-recipe-corpus`; pre-publication source corpus only.
+- Verified live acquisition on pre-sync PR #36 head `a0d828105f7d04525abcd11a4571e0a2a1f53c3c`: 214/214 section-scoped cards acquired and imported; exact repeat import inserted 0 cards; focused tests, Ruff, DB invariants and artifact upload PASS.
+- PR #36 is being synchronized onto merged PR #35 main and must be re-verified on the synchronized head before final acceptance.
+- Current accepted main migration remains `0029_food_composition_core` until PR #36 is merged.
+- PR #36 proposes `0030_recipe_source_corpus`; future RecipeTemplate schema becomes `0031_recipe_template_catalogue` if PR #36 is accepted and merged.
+- Source-corpus ingestion does not publish RecipeVersion/RecipeTemplate and does not replace FoodIngredient/Nutrition/Composition deterministic truth.
+- Assembly A = BLOCKED; Assembly B and PR7+ = NOT STARTED.
 
-[Corpus contract](../docs/family-food/ru-normative-recipe-corpus.md).
+[Canonical R4 checkpoint](../docs/family-food/food-composition-and-assembly.md#recipe-assembly-a-r4--n50200-deep-viability),
+[complete R4 evidence](../data/curation/recipe-assembly-a-r4-n50200/README.md), and
+[Russian normative source-corpus contract](../docs/family-food/ru-normative-recipe-corpus.md).
 
-Merge order / next state transition:
-
-1. merge accepted PR #35;
-2. verify new main and synchronize/rebase PR #36;
-3. run affected repository verification for #36 and, in a network-enabled execution environment, execute the fail-closed 214-card acquisition/import;
-4. final-review PR #36 before merge.
-
-Never merge either PR autonomously.
+Next authorized action: finish synchronization and verification of PR #36, then stop for final review.
+No automatic merge, Assembly B, PR7, RecipeTemplate publication, or production recipe publication is authorized.
