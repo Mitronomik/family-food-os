@@ -170,8 +170,7 @@ def card_from_dict(data: dict[str, Any]) -> SourceCardInput:
             SourceIngredientInput(**row) for row in variant.get("ingredients", [])
         )
         nutrients = tuple(
-            SourceNutrientInput(**row)
-            for row in variant.get("declared_nutrients", [])
+            SourceNutrientInput(**row) for row in variant.get("declared_nutrients", [])
         )
         variants.append(
             SourceVariantInput(
