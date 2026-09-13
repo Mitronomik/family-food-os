@@ -55,8 +55,9 @@ recipe_source_cards_table = Table(
         ForeignKey("recipe_source_documents.id", ondelete="RESTRICT"),
         nullable=False,
     ),
-    Column("source_section_code", String, nullable=False, server_default=""),
+    Column("source_section_code", String, nullable=False),
     Column("source_card_code", String, nullable=False),
+    Column("source_page_url", String),
     Column("name_ru", String, nullable=False),
     Column("category_ru", String),
     Column("source_recipe_basis", Text),
@@ -71,6 +72,9 @@ recipe_source_cards_table = Table(
         "source_card_code",
         "raw_card_sha256",
         name="uq_recipe_source_card_revision",
+    ),
+    CheckConstraint(
+        "length(source_section_code)>0", name="ck_recipe_source_card_section"
     ),
     CheckConstraint("length(raw_card_sha256)=64", name="ck_recipe_source_card_hash"),
 )
