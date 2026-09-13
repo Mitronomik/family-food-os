@@ -32,6 +32,14 @@ Authorized documentation outcomes:
 - define a deterministic, versioned, curated wellness Meal Pattern Recommender that requires user acceptance and does not invent therapeutic diets;
 - establish a canonical secure-by-design contract covering object authorization, importer/SSRF boundaries, Retail, Auth, AI/prompt injection/tool abuse, privacy/children data and supply-chain/release controls;
 - record the external TAS/RBS/bootstrap package as research/reference, not repository architecture authority;
-- amend future PR7/PR8 and later security-gate requirements without automatically starting those milestones.
+- amend future PR7/PR8 and later security-gate requirements without automatically starting those milestones;
+- preserve the implemented Recipe Catalogue classification contract: `MealRole` is not `RecipeVersion.meal_type_code`, and future planning uses deterministic suitability/mapping rather than repurposing the existing recipe enum;
+- make MealPlan source explicit so RecipeVersion/RecipeAssembly references are conditional on source kind and leftovers/prepared/ready/out-of-home events do not require synthetic recipes.
 
-Next authorized action: human review of PR #37. Stop after review-ready publication. Merge requires separate explicit post-review authorization. No automatic merge, Assembly B, PR7, Retail, AI, Auth, new production recipe publication or new donor/data-repair operation is authorized by this documentation work.
+Compatibility correction included in PR #37:
+
+- `docs/family-food/architecture-addendum-2026-09-13.md` is the canonical compatibility addendum for these PR7/PR8 seams;
+- `meal-pattern-programs.md`, `master-roadmap-addendum-2026-09-13.md` and `technical-spec-addendum-2026-09-13.md` reference and enforce the same rules;
+- no runtime/schema/migration/corpus change is introduced by this correction.
+
+Next authorized action: human re-review of corrected PR #37. Stop after review-ready publication. Merge requires separate explicit post-review authorization. No automatic merge, Assembly B, PR7, Retail, AI, Auth, new production recipe publication or new donor/data-repair operation is authorized by this documentation work.
