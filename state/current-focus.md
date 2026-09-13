@@ -3,33 +3,25 @@
 Updated: `2026-09-12`.
 
 - PR6 / PR6-CLOSE = COMPLETE.
-- [PR #32](https://github.com/Mitronomik/family-food-os/pull/32) and
-  [PR #33](https://github.com/Mitronomik/family-food-os/pull/33) = MERGED.
-- Exact fetched main / R3 base: `f2b6bc9015a1b892bb533b5d322d981d5a1782bd`.
-- R1 = COMPLETE AS BLOCKED RESEARCH, historical accepted result 1/3.
-- R2 = COMPLETE AS BLOCKED RESEARCH, accepted result 2/3.
-- R1-21 = INDIVIDUALLY_READY, exact E00100 published 100 portions.
-- R1-23 = INDIVIDUALLY_READY, exact F00400 Method 1 published 100 portions.
-- R3 = current authorized operation, evidence only; bounded research result BLOCKED.
-  Branch `codex/recipe-assembly-a-r3`; 12 prefilter candidates / 0 deep reviews;
-  third candidate none, individually ready 2/3, selected final three = [].
-- Optional role and verified substitution = OPEN for the final-three set.
-- RECIPE-ASSEMBLY-A = BLOCKED, not COMPLETE.
-- RECIPE-ASSEMBLY-B and PR7+ = NOT STARTED / unauthorized.
+- [PR #34](https://github.com/Mitronomik/family-food-os/pull/34) = MERGED.
+- Exact accepted fetched main: `a375f005b09880cf6a63cb5c8b1e964a0f558cb7`.
+- R1 / R2 / R3 = COMPLETE AS BLOCKED RESEARCH; all three evidence packages frozen.
+- R1-21 and R1-23 = INDIVIDUALLY_READY, unchanged exact published 100-portion scopes.
+- ready = 2/3; third_candidate = none.
+- OPEN: family_count, optional_role, verified_substitution.
+- R4-N50200 = current authorized operation, research/evidence only.
+  Branch `codex/recipe-assembly-a-r4-n50200`; deep review of exactly N50200.
+  Research result BLOCKED; data-enablement contract withheld.
+- Assembly A = BLOCKED; Assembly B and PR7+ = NOT STARTED.
 - Migration = `0029_food_composition_core`; production truth unchanged.
 
-[Canonical R3 decision](../docs/family-food/food-composition-and-assembly.md#recipe-assembly-a-r3--third-family-closure)
-and [R3 evidence](../data/curation/recipe-assembly-a-r3/README.md).
+[Canonical R4 checkpoint](../docs/family-food/food-composition-and-assembly.md#recipe-assembly-a-r4--n50200-deep-viability)
+and [complete R4 evidence](../data/curation/recipe-assembly-a-r4-n50200/README.md).
 
-Next authorized action: final review of the published bounded R3 research PR, then stop.
-No automatic donor search, food-data repair or implementation. Both accepted
-packages are frozen byte-for-byte. Household scaling remains unverified.
-Migration `0030_recipe_template_catalogue` and Assembly A implementation require
-separate explicit authorization. Never merge without post-review authorization.
-
-
-Delivery: [PR #34](https://github.com/Mitronomik/family-food-os/pull/34), OPEN
+Delivery: [PR #35](https://github.com/Mitronomik/family-food-os/pull/35), OPEN
 into main, not merged. Evidence commit:
-`b2b9fe94737328bd2c16e3e0dc34b34802a185f7`.
-R3 research evidence READY FOR REVIEW; R3 result and Assembly A BLOCKED.
-Stop for review; no next-operation authorization.
+`678d8d0e4c3d5f67ccf6645e2f9f95a0719c01f2`.
+
+Next authorized action: review the published research PR, then stop.
+No automatic merge, production data PR, other donor search, Assembly B, PR7 or 0030.
+Household scaling remains false. Review-ready is not accepted milestone completion.

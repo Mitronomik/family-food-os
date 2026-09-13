@@ -1,0 +1,23 @@
+{
+  "added_after_cooking": true,
+  "closure_contribution": false,
+  "component_kind": "FOOD_COMPONENT",
+  "exact_included_mass_required": true,
+  "family": "N50200",
+  "included_row_ids": [
+    "N50200-13",
+    "N50200-12"
+  ],
+  "name_ru": "Овощное дополнение по желанию",
+  "omission_explicit": true,
+  "optional": true,
+  "reason_ru": "Овощное дополнение съедобно; его можно не добавлять. При включении выбирается ровно один овощ с отдельной точной массой. Отказ от дополнения не меняет котлету, сыр, булочку или их приготовление. Готовность обязательной основы проверяется отдельно.",
+  "required_base_unchanged": true,
+  "role": "GARNISH",
+  "selection_cardinality": [
+    0,
+    1
+  ],
+  "semantics_result": "PASS",
+  "source_statement": "Garnish with slice of fresh green pepper or tomato (optional)."
+}

@@ -1,0 +1,851 @@
+{
+  "family": "N50200",
+  "onion_decision": "NEW_GENERIC_ONION_IDENTITY_REQUIRED",
+  "onion_reason": "AFRS is colour-unspecified bulb onion, not green onion or dried powder. USDA generic Onions, raw (170000) matches that granularity. The 2016 CID demonstrates colour is separately specified, but is not a 2003 procurement binding. No colour-specific identity or equivalence asserted.",
+  "rows": [
+    {
+      "current_composition": null,
+      "current_profile": null,
+      "existing_catalogue_candidates": [
+        {
+          "current_profile": {
+            "basis_grams": "100.000",
+            "canonical_code": "TURKEY_GROUND_93",
+            "carbohydrates_g": "0.000000",
+            "estimated": null,
+            "fat_g": "9.591000",
+            "fiber_g": null,
+            "is_current": 1,
+            "kcal": "157.589700",
+            "protein_g": "17.343750",
+            "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+            "source_data_type": "Foundation",
+            "source_id": "2514747",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30",
+            "value_count": 3,
+            "value_sha256": "25b838bf14f44c084cd48ac2ddf9adf914da5fbd086f878c7b71c179ec4029b0",
+            "verified_at": "2026-09-02 00:00:00.000000"
+          },
+          "food_code": "TURKEY_GROUND_93",
+          "present": true
+        }
+      ],
+      "food_code": "TURKEY_GROUND_90",
+      "identity_disposition": "NEW_FOOD_INGREDIENT_REQUIRED",
+      "market_ref": "N50200-01",
+      "market_status": {
+        "default_gate_result": "BLOCKED",
+        "market_classification": "SPECIALTY_OR_UNCLEAR"
+      },
+      "mass_authority_ref": "N50200-01",
+      "name_ru": "Фарш из сырой индейки, 90% нежирного мяса",
+      "onion_colour": "NOT_APPLICABLE",
+      "profile_candidate_ref": "PROFILE-01",
+      "remaining_blocker_ru": "Идентичность ясна; точного продукта в базе нет. Профиль и обычная российская закупка не подтверждены полностью.",
+      "required": true,
+      "role": "PROTEIN",
+      "row_id": "N50200-01",
+      "source_ep_weight": "25-1/2 lbs",
+      "source_form": "TURKEY,GROUND,90% LEAN,RAW",
+      "source_identity_established": true,
+      "source_identity_evidence": [
+        "AFRS-2003-N50200"
+      ]
+    },
+    {
+      "current_composition": null,
+      "current_profile": null,
+      "existing_catalogue_candidates": [
+        {
+          "current_profile": {
+            "basis_grams": "100.000",
+            "canonical_code": "ONION_YELLOW",
+            "carbohydrates_g": "8.610000",
+            "estimated": null,
+            "fat_g": "0.050000",
+            "fiber_g": "1.900000",
+            "is_current": 1,
+            "kcal": "36.000000",
+            "protein_g": "0.830000",
+            "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+            "source_data_type": "Foundation",
+            "source_id": "790646",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30",
+            "value_count": 5,
+            "value_sha256": "88a3883d1cd915fcf950416eaff23892643efb328bdae98aabbac8a0ffd54e52",
+            "verified_at": "2026-09-02 00:00:00.000000"
+          },
+          "food_code": "ONION_YELLOW",
+          "present": true
+        },
+        {
+          "current_profile": {
+            "basis_grams": "100.000",
+            "canonical_code": "ONION_RED",
+            "carbohydrates_g": "9.930000",
+            "estimated": null,
+            "fat_g": "0.100000",
+            "fiber_g": "2.200000",
+            "is_current": 1,
+            "kcal": "42.000000",
+            "protein_g": "0.940000",
+            "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+            "source_data_type": "Foundation",
+            "source_id": "790577",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30",
+            "value_count": 5,
+            "value_sha256": "4d7b46771ba3b76a8517eae291815d4f9c8499c3d773a20318d2a22b16030db1",
+            "verified_at": "2026-09-04 00:00:00.000000"
+          },
+          "food_code": "ONION_RED",
+          "present": true
+        },
+        {
+          "current_profile": {
+            "basis_grams": "100.000",
+            "canonical_code": "GREEN_ONION",
+            "carbohydrates_g": "7.340000",
+            "estimated": null,
+            "fat_g": "0.190000",
+            "fiber_g": "2.600000",
+            "is_current": 1,
+            "kcal": "32.000000",
+            "protein_g": "1.830000",
+            "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+            "source_data_type": "SR Legacy",
+            "source_id": "170005",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04",
+            "value_count": 5,
+            "value_sha256": "5bcbb623843cf3c8dffcd189cee26b2d55ba4b3468ffa07b876fd189eb23c81a",
+            "verified_at": "2026-09-04 00:00:00.000000"
+          },
+          "food_code": "GREEN_ONION",
+          "present": true
+        }
+      ],
+      "food_code": "ONION_RAW_GENERIC",
+      "identity_disposition": "NEW_FOOD_INGREDIENT_REQUIRED",
+      "market_ref": "N50200-02",
+      "market_status": {
+        "default_gate_result": "PASS",
+        "market_classification": "RU_AVAILABLE"
+      },
+      "mass_authority_ref": "N50200-02",
+      "name_ru": "Лук репчатый свежий, измельчённый, без уточнения цвета",
+      "onion_colour": null,
+      "profile_candidate_ref": "PROFILE-02",
+      "remaining_blocker_ru": "Нужна общая идентичность репчатого лука и её собственный профиль; жёлтый или красный цвет источником не задан.",
+      "required": true,
+      "role": "AROMATIC",
+      "row_id": "N50200-02",
+      "source_ep_weight": "2-7/8 lbs",
+      "source_form": "ONIONS,FRESH,CHOPPED",
+      "source_identity_established": true,
+      "source_identity_evidence": [
+        "AFRS-2003-N50200",
+        "ONION-CID"
+      ]
+    },
+    {
+      "current_composition": {
+        "basis_grams": "100.000",
+        "canonical_code": "PARSLEY",
+        "canonical_name": "Петрушка свежая",
+        "estimated": null,
+        "input_state": "INPUT",
+        "kind": "ATOMIC",
+        "source_data_type": "SR Legacy",
+        "source_id": "170416",
+        "source_name": "USDA_FDC",
+        "source_version": "2018-04",
+        "version": 1
+      },
+      "current_profile": {
+        "basis_grams": "100.000",
+        "canonical_code": "PARSLEY",
+        "carbohydrates_g": "6.330000",
+        "estimated": null,
+        "fat_g": "0.790000",
+        "fiber_g": "3.300000",
+        "is_current": 1,
+        "kcal": "36.000000",
+        "protein_g": "2.970000",
+        "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+        "source_data_type": "SR Legacy",
+        "source_id": "170416",
+        "source_name": "USDA_FDC",
+        "source_version": "2018-04",
+        "value_count": 5,
+        "value_sha256": "c984f93ed4b3c358046967d981be3afdc1a69522a0083e00dcecbc801745148b",
+        "verified_at": "2026-09-02 00:00:00.000000"
+      },
+      "existing_catalogue_candidates": [
+        {
+          "current_profile": {
+            "basis_grams": "100.000",
+            "canonical_code": "PARSLEY",
+            "carbohydrates_g": "6.330000",
+            "estimated": null,
+            "fat_g": "0.790000",
+            "fiber_g": "3.300000",
+            "is_current": 1,
+            "kcal": "36.000000",
+            "protein_g": "2.970000",
+            "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+            "source_data_type": "SR Legacy",
+            "source_id": "170416",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04",
+            "value_count": 5,
+            "value_sha256": "c984f93ed4b3c358046967d981be3afdc1a69522a0083e00dcecbc801745148b",
+            "verified_at": "2026-09-02 00:00:00.000000"
+          },
+          "food_code": "PARSLEY",
+          "present": true
+        }
+      ],
+      "food_code": "PARSLEY",
+      "identity_disposition": "EXACT_EXISTING",
+      "market_ref": "N50200-03",
+      "market_status": {
+        "default_gate_result": "PASS",
+        "market_classification": "RU_AVAILABLE"
+      },
+      "mass_authority_ref": "N50200-03",
+      "name_ru": "Петрушка свежая, измельчённая",
+      "onion_colour": "NOT_APPLICABLE",
+      "profile_candidate_ref": "PROFILE-03",
+      "remaining_blocker_ru": null,
+      "required": true,
+      "role": "HERB",
+      "row_id": "N50200-03",
+      "source_ep_weight": "3-1/2 oz",
+      "source_form": "PARSLEY,FRESH,BUNCH,CHOPPED",
+      "source_identity_established": true,
+      "source_identity_evidence": [
+        "AFRS-2003-N50200"
+      ]
+    },
+    {
+      "current_composition": {
+        "basis_grams": "100.000",
+        "canonical_code": "BREADCRUMBS",
+        "canonical_name": "Сухари панировочные",
+        "estimated": null,
+        "input_state": "INPUT",
+        "kind": "ATOMIC",
+        "source_data_type": "SR Legacy",
+        "source_id": "174928",
+        "source_name": "USDA_FDC",
+        "source_version": "2018-04",
+        "version": 1
+      },
+      "current_profile": {
+        "basis_grams": "100.000",
+        "canonical_code": "BREADCRUMBS",
+        "carbohydrates_g": "71.980000",
+        "estimated": null,
+        "fat_g": "5.300000",
+        "fiber_g": "4.500000",
+        "is_current": 1,
+        "kcal": "395.000000",
+        "protein_g": "13.350000",
+        "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+        "source_data_type": "SR Legacy",
+        "source_id": "174928",
+        "source_name": "USDA_FDC",
+        "source_version": "2018-04",
+        "value_count": 5,
+        "value_sha256": "607fc239e8c1c631dbc4cb52e7a269f906b9a6ac1cb19c50f204ebfbcbdb0529",
+        "verified_at": "2026-09-04 00:00:00.000000"
+      },
+      "existing_catalogue_candidates": [
+        {
+          "current_profile": {
+            "basis_grams": "100.000",
+            "canonical_code": "BREADCRUMBS",
+            "carbohydrates_g": "71.980000",
+            "estimated": null,
+            "fat_g": "5.300000",
+            "fiber_g": "4.500000",
+            "is_current": 1,
+            "kcal": "395.000000",
+            "protein_g": "13.350000",
+            "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+            "source_data_type": "SR Legacy",
+            "source_id": "174928",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04",
+            "value_count": 5,
+            "value_sha256": "607fc239e8c1c631dbc4cb52e7a269f906b9a6ac1cb19c50f204ebfbcbdb0529",
+            "verified_at": "2026-09-04 00:00:00.000000"
+          },
+          "food_code": "BREADCRUMBS",
+          "present": true
+        }
+      ],
+      "food_code": "BREADCRUMBS",
+      "identity_disposition": "EXACT_EXISTING",
+      "market_ref": "N50200-04",
+      "market_status": {
+        "default_gate_result": "PASS",
+        "market_classification": "RU_AVAILABLE"
+      },
+      "mass_authority_ref": "N50200-04",
+      "name_ru": "Сухари панировочные сухие, мелкого помола",
+      "onion_colour": "NOT_APPLICABLE",
+      "profile_candidate_ref": "PROFILE-04",
+      "remaining_blocker_ru": null,
+      "required": true,
+      "role": "BINDER",
+      "row_id": "N50200-04",
+      "source_ep_weight": "3-1/8 lbs",
+      "source_form": "BREADCRUMBS,DRY,GROUND,FINE",
+      "source_identity_established": true,
+      "source_identity_evidence": [
+        "AFRS-2003-N50200"
+      ]
+    },
+    {
+      "current_composition": {
+        "basis_grams": "100.000",
+        "canonical_code": "SALT",
+        "canonical_name": "Соль поваренная",
+        "estimated": null,
+        "input_state": "INPUT",
+        "kind": "ATOMIC",
+        "source_data_type": "SR Legacy",
+        "source_id": "173468",
+        "source_name": "USDA_FDC",
+        "source_version": "2018-04",
+        "version": 1
+      },
+      "current_profile": {
+        "basis_grams": "100.000",
+        "canonical_code": "SALT",
+        "carbohydrates_g": "0.000000",
+        "estimated": null,
+        "fat_g": "0.000000",
+        "fiber_g": "0.000000",
+        "is_current": 1,
+        "kcal": "0.000000",
+        "protein_g": "0.000000",
+        "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+        "source_data_type": "SR Legacy",
+        "source_id": "173468",
+        "source_name": "USDA_FDC",
+        "source_version": "2018-04",
+        "value_count": 0,
+        "value_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "verified_at": "2026-09-02 00:00:00.000000"
+      },
+      "existing_catalogue_candidates": [
+        {
+          "current_profile": {
+            "basis_grams": "100.000",
+            "canonical_code": "SALT",
+            "carbohydrates_g": "0.000000",
+            "estimated": null,
+            "fat_g": "0.000000",
+            "fiber_g": "0.000000",
+            "is_current": 1,
+            "kcal": "0.000000",
+            "protein_g": "0.000000",
+            "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+            "source_data_type": "SR Legacy",
+            "source_id": "173468",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04",
+            "value_count": 0,
+            "value_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "verified_at": "2026-09-02 00:00:00.000000"
+          },
+          "food_code": "SALT",
+          "present": true
+        }
+      ],
+      "food_code": "SALT",
+      "identity_disposition": "EXACT_EXISTING",
+      "market_ref": "N50200-05",
+      "market_status": {
+        "default_gate_result": "PASS",
+        "market_classification": "RU_AVAILABLE"
+      },
+      "mass_authority_ref": "N50200-05",
+      "name_ru": "Соль поваренная",
+      "onion_colour": "NOT_APPLICABLE",
+      "profile_candidate_ref": "PROFILE-05",
+      "remaining_blocker_ru": null,
+      "required": true,
+      "role": "SEASONING",
+      "row_id": "N50200-05",
+      "source_ep_weight": "1-1/4 oz",
+      "source_form": "SALT",
+      "source_identity_established": true,
+      "source_identity_evidence": [
+        "AFRS-2003-N50200"
+      ]
+    },
+    {
+      "current_composition": {
+        "basis_grams": "100.000",
+        "canonical_code": "GARLIC_POWDER",
+        "canonical_name": "Чеснок сушёный молотый",
+        "estimated": null,
+        "input_state": "INPUT",
+        "kind": "ATOMIC",
+        "source_data_type": "SR Legacy",
+        "source_id": "171325",
+        "source_name": "USDA_FDC",
+        "source_version": "2018-04",
+        "version": 1
+      },
+      "current_profile": {
+        "basis_grams": "100.000",
+        "canonical_code": "GARLIC_POWDER",
+        "carbohydrates_g": "72.730000",
+        "estimated": null,
+        "fat_g": "0.730000",
+        "fiber_g": "9.000000",
+        "is_current": 1,
+        "kcal": "331.000000",
+        "protein_g": "16.550000",
+        "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+        "source_data_type": "SR Legacy",
+        "source_id": "171325",
+        "source_name": "USDA_FDC",
+        "source_version": "2018-04",
+        "value_count": 5,
+        "value_sha256": "b3aa0024c9bfa453438f42976e92417f18f234c253bc681f0f12229fe7ee0a82",
+        "verified_at": "2026-09-04 00:00:00.000000"
+      },
+      "existing_catalogue_candidates": [
+        {
+          "current_profile": {
+            "basis_grams": "100.000",
+            "canonical_code": "GARLIC_POWDER",
+            "carbohydrates_g": "72.730000",
+            "estimated": null,
+            "fat_g": "0.730000",
+            "fiber_g": "9.000000",
+            "is_current": 1,
+            "kcal": "331.000000",
+            "protein_g": "16.550000",
+            "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+            "source_data_type": "SR Legacy",
+            "source_id": "171325",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04",
+            "value_count": 5,
+            "value_sha256": "b3aa0024c9bfa453438f42976e92417f18f234c253bc681f0f12229fe7ee0a82",
+            "verified_at": "2026-09-04 00:00:00.000000"
+          },
+          "food_code": "GARLIC_POWDER",
+          "present": true
+        }
+      ],
+      "food_code": "GARLIC_POWDER",
+      "identity_disposition": "EXACT_EXISTING",
+      "market_ref": "N50200-06",
+      "market_status": {
+        "default_gate_result": "PASS",
+        "market_classification": "RU_AVAILABLE"
+      },
+      "mass_authority_ref": "N50200-06",
+      "name_ru": "Чеснок сушёный молотый",
+      "onion_colour": "NOT_APPLICABLE",
+      "profile_candidate_ref": "PROFILE-06",
+      "remaining_blocker_ru": null,
+      "required": true,
+      "role": "SEASONING",
+      "row_id": "N50200-06",
+      "source_ep_weight": "1-1/4 oz",
+      "source_form": "GARLIC POWDER",
+      "source_identity_established": true,
+      "source_identity_evidence": [
+        "AFRS-2003-N50200"
+      ]
+    },
+    {
+      "current_composition": null,
+      "current_profile": null,
+      "existing_catalogue_candidates": [
+        {
+          "current_profile": null,
+          "food_code": "WHITE_PEPPER",
+          "present": false
+        }
+      ],
+      "food_code": "WHITE_PEPPER",
+      "identity_disposition": "NEW_FOOD_INGREDIENT_REQUIRED",
+      "market_ref": "N50200-07",
+      "market_status": {
+        "default_gate_result": "PASS",
+        "market_classification": "RU_AVAILABLE"
+      },
+      "mass_authority_ref": "N50200-07",
+      "name_ru": "Перец белый молотый",
+      "onion_colour": "NOT_APPLICABLE",
+      "profile_candidate_ref": "PROFILE-07",
+      "remaining_blocker_ru": "Нужны отдельная идентичность белого перца, профиль, вектор и атомарный состав.",
+      "required": true,
+      "role": "SEASONING",
+      "row_id": "N50200-07",
+      "source_ep_weight": "1/2 oz",
+      "source_form": "PEPPER,WHITE,GROUND",
+      "source_identity_established": true,
+      "source_identity_evidence": [
+        "AFRS-2003-N50200"
+      ]
+    },
+    {
+      "current_composition": null,
+      "current_profile": null,
+      "existing_catalogue_candidates": [
+        {
+          "current_profile": null,
+          "food_code": "WORCESTERSHIRE_SAUCE",
+          "present": false
+        }
+      ],
+      "food_code": "WORCESTERSHIRE_SAUCE",
+      "identity_disposition": "NEW_FOOD_INGREDIENT_REQUIRED",
+      "market_ref": "N50200-08",
+      "market_status": {
+        "default_gate_result": "BLOCKED",
+        "market_classification": "SPECIALTY_OR_UNCLEAR"
+      },
+      "mass_authority_ref": "N50200-08",
+      "name_ru": "Соус вустерский",
+      "onion_colour": "NOT_APPLICABLE",
+      "profile_candidate_ref": "PROFILE-08",
+      "remaining_blocker_ru": "Нет идентичности и состава; обычная розничная закупка в Петербурге не установлена.",
+      "required": true,
+      "role": "SEASONING",
+      "row_id": "N50200-08",
+      "source_ep_weight": "8-1/2 oz",
+      "source_form": "WORCESTERSHIRE SAUCE",
+      "source_identity_established": true,
+      "source_identity_evidence": [
+        "AFRS-2003-N50200"
+      ]
+    },
+    {
+      "current_composition": null,
+      "current_profile": {
+        "basis_grams": "100.000",
+        "canonical_code": "MUSTARD_GROUND",
+        "carbohydrates_g": "28.090000",
+        "estimated": null,
+        "fat_g": "36.240000",
+        "fiber_g": "12.200000",
+        "is_current": 1,
+        "kcal": "508.000000",
+        "protein_g": "26.080000",
+        "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+        "source_data_type": "SR Legacy",
+        "source_id": "170929",
+        "source_name": "USDA_FDC",
+        "source_version": "2018-04",
+        "value_count": 5,
+        "value_sha256": "33b40afef3fbebbb300c8a577871d2715899d924c18c4991659345be5d0a14c6",
+        "verified_at": "2026-09-04 00:00:00.000000"
+      },
+      "existing_catalogue_candidates": [
+        {
+          "current_profile": {
+            "basis_grams": "100.000",
+            "canonical_code": "MUSTARD_GROUND",
+            "carbohydrates_g": "28.090000",
+            "estimated": null,
+            "fat_g": "36.240000",
+            "fiber_g": "12.200000",
+            "is_current": 1,
+            "kcal": "508.000000",
+            "protein_g": "26.080000",
+            "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+            "source_data_type": "SR Legacy",
+            "source_id": "170929",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04",
+            "value_count": 5,
+            "value_sha256": "33b40afef3fbebbb300c8a577871d2715899d924c18c4991659345be5d0a14c6",
+            "verified_at": "2026-09-04 00:00:00.000000"
+          },
+          "food_code": "MUSTARD_GROUND",
+          "present": true
+        }
+      ],
+      "food_code": "MUSTARD_GROUND",
+      "identity_disposition": "EXISTING_REQUIRES_COMPOSITION",
+      "market_ref": "N50200-09",
+      "market_status": {
+        "default_gate_result": "BLOCKED",
+        "market_classification": "SPECIALTY_OR_UNCLEAR"
+      },
+      "mass_authority_ref": "N50200-09",
+      "name_ru": "Горчица сухая молотая",
+      "onion_colour": "NOT_APPLICABLE",
+      "profile_candidate_ref": "PROFILE-09",
+      "remaining_blocker_ru": "Профиль молотых семян есть, состава нет; соответствие российского порошка этому профилю не доказано.",
+      "required": true,
+      "role": "SEASONING",
+      "row_id": "N50200-09",
+      "source_ep_weight": "3/4 oz",
+      "source_form": "MUSTARD,DRY",
+      "source_identity_established": true,
+      "source_identity_evidence": [
+        "AFRS-2003-N50200",
+        "MUSTARD-FDA",
+        "MUSTARD-US"
+      ]
+    },
+    {
+      "current_composition": null,
+      "current_profile": null,
+      "existing_catalogue_candidates": [
+        {
+          "current_profile": {
+            "basis_grams": "100.000",
+            "canonical_code": "CHEESE_MOZZARELLA_PART_SKIM",
+            "carbohydrates_g": "4.440000",
+            "estimated": null,
+            "fat_g": "20.400000",
+            "fiber_g": null,
+            "is_current": 1,
+            "kcal": "298.000000",
+            "protein_g": "23.700000",
+            "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+            "source_data_type": "Foundation",
+            "source_id": "329370",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30",
+            "value_count": 4,
+            "value_sha256": "676d370cc31e4eb9a471242909bc8bb84b04e0dc05c892d941784b2ae1c543d2",
+            "verified_at": "2026-09-04 00:00:00.000000"
+          },
+          "food_code": "CHEESE_MOZZARELLA_PART_SKIM",
+          "present": true
+        }
+      ],
+      "food_code": "CHEESE_MOZZARELLA_PART_SKIM_GENERIC",
+      "identity_disposition": "FORM_SPLIT_REQUIRED",
+      "market_ref": "N50200-10",
+      "market_status": {
+        "default_gate_result": "BLOCKED",
+        "market_classification": "SPECIALTY_OR_UNCLEAR"
+      },
+      "mass_authority_ref": "N50200-10",
+      "name_ru": "Моцарелла из частично обезжиренного молока",
+      "onion_colour": "NOT_APPLICABLE",
+      "profile_candidate_ref": "PROFILE-10",
+      "remaining_blocker_ru": "Текущий профиль уточняет низкую влажность, которой нет в строке источника. Нужны отдельное разрешение формы и точная российская закупка.",
+      "required": true,
+      "role": "CHEESE",
+      "row_id": "N50200-10",
+      "source_ep_weight": "3 lbs",
+      "source_form": "CHEESE,MOZZARELLA,PART SKIM",
+      "source_identity_established": true,
+      "source_identity_evidence": [
+        "AFRS-2003-N50200"
+      ]
+    },
+    {
+      "current_composition": null,
+      "current_profile": null,
+      "existing_catalogue_candidates": [
+        {
+          "current_profile": null,
+          "food_code": "SANDWICH_BUN",
+          "present": false
+        }
+      ],
+      "food_code": "SANDWICH_BUN",
+      "identity_disposition": "NEW_FOOD_INGREDIENT_REQUIRED",
+      "market_ref": "N50200-11",
+      "market_status": {
+        "default_gate_result": "BLOCKED",
+        "market_classification": "SPECIALTY_OR_UNCLEAR"
+      },
+      "mass_authority_ref": "N50200-11",
+      "name_ru": "Булочка для гамбургера, разрезанная",
+      "onion_colour": "NOT_APPLICABLE",
+      "profile_candidate_ref": "PROFILE-11",
+      "remaining_blocker_ru": "Нет идентичности и состава. Обычная булочка с кунжутом не доказывает соответствие профилю простой булочки.",
+      "required": true,
+      "role": "BREAD",
+      "row_id": "N50200-11",
+      "source_ep_weight": "9-1/2 lbs",
+      "source_form": "ROLL,SANDWICH BUNS,SPLIT",
+      "source_identity_established": true,
+      "source_identity_evidence": [
+        "AFRS-2003-N50200"
+      ]
+    },
+    {
+      "current_composition": {
+        "basis_grams": "100.000",
+        "canonical_code": "TOMATO",
+        "canonical_name": "Томат",
+        "estimated": null,
+        "input_state": "INPUT",
+        "kind": "ATOMIC",
+        "source_data_type": "SR Legacy",
+        "source_id": "170457",
+        "source_name": "USDA_FDC",
+        "source_version": "2018-04",
+        "version": 1
+      },
+      "current_profile": {
+        "basis_grams": "100.000",
+        "canonical_code": "TOMATO",
+        "carbohydrates_g": "3.890000",
+        "estimated": null,
+        "fat_g": "0.200000",
+        "fiber_g": "1.200000",
+        "is_current": 1,
+        "kcal": "18.000000",
+        "protein_g": "0.880000",
+        "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+        "source_data_type": "SR Legacy",
+        "source_id": "170457",
+        "source_name": "USDA_FDC",
+        "source_version": "2018-04",
+        "value_count": 32,
+        "value_sha256": "879d9aeb304296907fe8427a1dd749d7eba232f09cb6645f6aab578d517f3523",
+        "verified_at": "2026-09-12 06:42:55.000000"
+      },
+      "existing_catalogue_candidates": [
+        {
+          "current_profile": {
+            "basis_grams": "100.000",
+            "canonical_code": "TOMATO",
+            "carbohydrates_g": "3.890000",
+            "estimated": null,
+            "fat_g": "0.200000",
+            "fiber_g": "1.200000",
+            "is_current": 1,
+            "kcal": "18.000000",
+            "protein_g": "0.880000",
+            "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+            "source_data_type": "SR Legacy",
+            "source_id": "170457",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04",
+            "value_count": 32,
+            "value_sha256": "879d9aeb304296907fe8427a1dd749d7eba232f09cb6645f6aab578d517f3523",
+            "verified_at": "2026-09-12 06:42:55.000000"
+          },
+          "food_code": "TOMATO",
+          "present": true
+        }
+      ],
+      "food_code": "TOMATO",
+      "identity_disposition": "EXACT_EXISTING",
+      "market_ref": "N50200-12",
+      "market_status": {
+        "default_gate_result": "PASS",
+        "market_classification": "RU_AVAILABLE"
+      },
+      "mass_authority_ref": "N50200-12",
+      "name_ru": "Томат свежий, ломтиками",
+      "onion_colour": "NOT_APPLICABLE",
+      "profile_candidate_ref": "PROFILE-12",
+      "remaining_blocker_ru": null,
+      "required": false,
+      "role": "GARNISH",
+      "row_id": "N50200-12",
+      "source_ep_weight": "2 lbs",
+      "source_form": "TOMATOES,FRESH,SLICED",
+      "source_identity_established": true,
+      "source_identity_evidence": [
+        "AFRS-2003-N50200"
+      ]
+    },
+    {
+      "current_composition": {
+        "basis_grams": "100.000",
+        "canonical_code": "BELL_PEPPER_GREEN",
+        "canonical_name": "Перец сладкий зелёный",
+        "estimated": null,
+        "input_state": "INPUT",
+        "kind": "ATOMIC",
+        "source_data_type": "Foundation",
+        "source_id": "2258588",
+        "source_name": "USDA_FDC",
+        "source_version": "2026-04-30",
+        "version": 1
+      },
+      "current_profile": {
+        "basis_grams": "100.000",
+        "canonical_code": "BELL_PEPPER_GREEN",
+        "carbohydrates_g": "4.778100",
+        "estimated": null,
+        "fat_g": "0.106300",
+        "fiber_g": "0.941900",
+        "is_current": 1,
+        "kcal": "19.692148",
+        "protein_g": "0.715000",
+        "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+        "source_data_type": "Foundation",
+        "source_id": "2258588",
+        "source_name": "USDA_FDC",
+        "source_version": "2026-04-30",
+        "value_count": 5,
+        "value_sha256": "1826ec76a8a61a2afd297a8e8c28e6edda4245f64dcf1342566c649801224585",
+        "verified_at": "2026-09-04 00:00:00.000000"
+      },
+      "existing_catalogue_candidates": [
+        {
+          "current_profile": {
+            "basis_grams": "100.000",
+            "canonical_code": "BELL_PEPPER_GREEN",
+            "carbohydrates_g": "4.778100",
+            "estimated": null,
+            "fat_g": "0.106300",
+            "fiber_g": "0.941900",
+            "is_current": 1,
+            "kcal": "19.692148",
+            "protein_g": "0.715000",
+            "registry_version": "PR6_NUTRIENT_VECTOR_A_V1",
+            "source_data_type": "Foundation",
+            "source_id": "2258588",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30",
+            "value_count": 5,
+            "value_sha256": "1826ec76a8a61a2afd297a8e8c28e6edda4245f64dcf1342566c649801224585",
+            "verified_at": "2026-09-04 00:00:00.000000"
+          },
+          "food_code": "BELL_PEPPER_GREEN",
+          "present": true
+        }
+      ],
+      "food_code": "BELL_PEPPER_GREEN",
+      "identity_disposition": "EXACT_EXISTING",
+      "market_ref": "N50200-13",
+      "market_status": {
+        "default_gate_result": "PASS",
+        "market_classification": "RU_AVAILABLE"
+      },
+      "mass_authority_ref": "N50200-13",
+      "name_ru": "Перец сладкий зелёный, свежий, тонкими ломтиками",
+      "onion_colour": "NOT_APPLICABLE",
+      "profile_candidate_ref": "PROFILE-13",
+      "remaining_blocker_ru": null,
+      "required": false,
+      "role": "GARNISH",
+      "row_id": "N50200-13",
+      "source_ep_weight": "2 lbs",
+      "source_form": "PEPPERS,GREEN,FRESH,MEDIUM,SLICED,THIN",
+      "source_identity_established": true,
+      "source_identity_evidence": [
+        "AFRS-2003-N50200"
+      ]
+    }
+  ],
+  "source_version": "June 2003"
+}
