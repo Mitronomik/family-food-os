@@ -1,0 +1,252 @@
+name: PR36 migration compatibility patch
+
+on:
+  push:
+    branches:
+      - codex/ru-normative-recipe-corpus
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/ru-normative-recipe-corpus
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Apply exact migration compatibility fixes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def one(path, old, new):
+              p = Path(path)
+              text = p.read_text()
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{path}: expected exactly one anchor, got {count}: {old!r}')
+              p.write_text(text.replace(old, new, 1))
+
+          def alln(path, old, new, expected):
+              p = Path(path)
+              text = p.read_text()
+              count = text.count(old)
+              if count != expected:
+                  raise SystemExit(f'{path}: expected {expected} anchors, got {count}: {old!r}')
+              p.write_text(text.replace(old, new))
+
+          # Production restore-lineage contract: migration 0030 promises five tables.
+          one(
+              'backend/app/db/migration_lineage.py',
+              '''    "0029_food_composition_core": frozenset(\n        {\n            "food_yield_models",\n            "food_retention_profiles",\n            "food_retention_values",\n            "food_transformations",\n            "food_composition_versions",\n            "food_composition_nodes",\n            "food_composition_steps",\n        }\n    ),\n}\n''',
+              '''    "0029_food_composition_core": frozenset(\n        {\n            "food_yield_models",\n            "food_retention_profiles",\n            "food_retention_values",\n            "food_transformations",\n            "food_composition_versions",\n            "food_composition_nodes",\n            "food_composition_steps",\n        }\n    ),\n    "0030_recipe_source_corpus": frozenset(\n        {\n            "recipe_source_documents",\n            "recipe_source_cards",\n            "recipe_source_card_variants",\n            "recipe_source_card_ingredients",\n            "recipe_source_declared_nutrients",\n        }\n    ),\n}\n''',
+          )
+
+          one(
+              'backend/app/tests/table_guards.py',
+              '''    "food_composition_steps",\n    "sqlite_sequence",\n''',
+              '''    "food_composition_steps",\n    "recipe_source_documents",\n    "recipe_source_cards",\n    "recipe_source_card_variants",\n    "recipe_source_card_ingredients",\n    "recipe_source_declared_nutrients",\n    "sqlite_sequence",\n''',
+          )
+
+          one(
+              'backend/app/tests/persistence/test_nutrition_read_scope.py',
+              '''        assert (\n            database.execute(\n                "SELECT migration_id FROM schema_migrations ORDER BY rowid DESC LIMIT 1"\n            ).fetchone()[0]\n            == "0029_food_composition_core"\n        )\n    assert expected_migration_ids()[-1] == "0029_food_composition_core"\n    assert len(expected_migration_ids()) == 29\n''',
+              '''        assert (\n            database.execute(\n                "SELECT migration_id FROM schema_migrations ORDER BY rowid DESC LIMIT 1"\n            ).fetchone()[0]\n            == expected_migration_ids()[-1]\n        )\n''',
+          )
+
+          one(
+              'backend/app/tests/test_family_food_identity_migration.py',
+              '''        "0028_normalized_nutrient_vector",\n        "0029_food_composition_core",\n    ]\n''',
+              '''        "0028_normalized_nutrient_vector",\n        "0029_food_composition_core",\n        "0030_recipe_source_corpus",\n    ]\n''',
+          )
+
+          one(
+              'backend/app/tests/test_food_composition_migration.py',
+              'MIGRATION = import_module("app.migrations.versions.0029_food_composition_core")\n',
+              'MIGRATION = import_module("app.migrations.versions.0029_food_composition_core")\nSOURCE_CORPUS_MIGRATION_ID = "0030_recipe_source_corpus"\n',
+          )
+          one(
+              'backend/app/tests/test_food_composition_migration.py',
+              '    assert report["migration_head_after"] == MIGRATION.MIGRATION_ID\n',
+              '    assert report["migration_head_after"] == SOURCE_CORPUS_MIGRATION_ID\n',
+          )
+          one(
+              'backend/app/tests/test_food_composition_migration.py',
+              '    assert migrations.expected_migration_ids()[-1] == MIGRATION.MIGRATION_ID\n',
+              '''    assert migrations.expected_migration_ids()[-2:] == [\n        MIGRATION.MIGRATION_ID,\n        SOURCE_CORPUS_MIGRATION_ID,\n    ]\n''',
+          )
+          one(
+              'backend/app/tests/test_food_composition_migration.py',
+              '    assert migrations.pending_migration_ids(config) == [MIGRATION.MIGRATION_ID]\n    assert migrations.apply_migrations(config) == [MIGRATION.MIGRATION_ID]\n',
+              '''    assert migrations.pending_migration_ids(config) == [\n        MIGRATION.MIGRATION_ID,\n        SOURCE_CORPUS_MIGRATION_ID,\n    ]\n    assert migrations.apply_migrations(config) == [\n        MIGRATION.MIGRATION_ID,\n        SOURCE_CORPUS_MIGRATION_ID,\n    ]\n''',
+          )
+
+          one(
+              'backend/app/tests/test_household_migration.py',
+              '''        "0028_normalized_nutrient_vector",\n        "0029_food_composition_core",\n    ]\n''',
+              '''        "0028_normalized_nutrient_vector",\n        "0029_food_composition_core",\n        "0030_recipe_source_corpus",\n    ]\n''',
+          )
+
+          one(
+              'backend/app/tests/test_migration_runner_rebuild.py',
+              'HEAD = "0029_food_composition_core"\n',
+              'HEAD = "0030_recipe_source_corpus"\n',
+          )
+          one(
+              'backend/app/tests/test_migration_runner_rebuild.py',
+              '    assert len(accepted) == 29 and accepted[-1] == HEAD\n',
+              '    assert accepted[-1] == HEAD and len(accepted) == len(set(accepted))\n',
+          )
+
+          one(
+              'backend/app/tests/test_nutrient_vector.py',
+              '''    assert migrations.expected_migration_ids()[-2:] == [\n        MIGRATION.MIGRATION_ID,\n        "0029_food_composition_core",\n    ]\n''',
+              '''    assert migrations.expected_migration_ids()[-3:] == [\n        MIGRATION.MIGRATION_ID,\n        "0029_food_composition_core",\n        "0030_recipe_source_corpus",\n    ]\n''',
+          )
+          alln(
+              'backend/app/tests/test_nutrient_vector.py',
+              '''        MIGRATION.MIGRATION_ID,\n        "0029_food_composition_core",\n    ]\n''',
+              '''        MIGRATION.MIGRATION_ID,\n        "0029_food_composition_core",\n        "0030_recipe_source_corpus",\n    ]\n''',
+              2,
+          )
+
+          one(
+              'backend/app/tests/test_nutrition_architecture.py',
+              '''def test_b1_and_b2a_add_only_authorized_schema_and_no_api():\n    assert expected_migration_ids()[-4:] == [\n        "0026_nutrition_measure_evidence",\n        "0027_recipe_same_source_revisions",\n        "0028_normalized_nutrient_vector",\n        "0029_food_composition_core",\n    ]\n    assert len(expected_migration_ids()) == 29\n''',
+              '''def test_b1_and_b2a_add_only_authorized_schema_and_no_api():\n    migration_ids = expected_migration_ids()\n    start = migration_ids.index("0026_nutrition_measure_evidence")\n    assert migration_ids[start : start + 4] == [\n        "0026_nutrition_measure_evidence",\n        "0027_recipe_same_source_revisions",\n        "0028_normalized_nutrient_vector",\n        "0029_food_composition_core",\n    ]\n''',
+          )
+
+          one(
+              'scripts/audit_pr6_data_b2b2.py',
+              'from app.db.config import DatabaseConfig  # noqa: E402\n',
+              'from app.db.config import DatabaseConfig  # noqa: E402\nfrom app.db.migrations import expected_migration_ids  # noqa: E402\n',
+          )
+          one(
+              'scripts/audit_pr6_data_b2b2.py',
+              '    assert head(config) == "0029_food_composition_core"\n',
+              '    assert head(config) == expected_migration_ids()[-1]\n',
+          )
+
+          one(
+              'scripts/audit_pr6_ru_food_data.py',
+              'BASE = "d5b5ce3fdc4ec79de5454b3ed23b1d527772c0bc"\n',
+              'BASE = "d5b5ce3fdc4ec79de5454b3ed23b1d527772c0bc"\nACCEPTED_HEAD = "4180297d47d68a0e0d9efbe7a7a27f3900c4f388"\n',
+          )
+          one(
+              'scripts/audit_pr6_ru_food_data.py',
+              '''def scope_audit():\n    paths = subprocess.check_output(\n        ["git", "diff", "--name-only", BASE], cwd=ROOT, text=True\n    ).splitlines()\n    paths += subprocess.check_output(\n        ["git", "ls-files", "--others", "--exclude-standard"], cwd=ROOT, text=True\n    ).splitlines()\n''',
+              '''def scope_audit():\n    # This is a historical PR28 scope audit. Pin both ends so later accepted\n    # migrations/data do not become false positives in the frozen PR28 proof.\n    paths = subprocess.check_output(\n        ["git", "diff", "--name-only", BASE, ACCEPTED_HEAD], cwd=ROOT, text=True\n    ).splitlines()\n''',
+          )
+
+          one(
+              'backend/app/tests/test_ru_food_data.py',
+              '''    assert (\n        result["migration_head_before"]\n        == result["migration_head_after"]\n        == "0029_food_composition_core"\n    )\n''',
+              '''    assert (\n        result["migration_head_before"]\n        == result["migration_head_after"]\n        == result["registered_migration_head"]\n    )\n''',
+          )
+
+          one(
+              'backend/app/tests/test_database_foundation.py',
+              '''    try:\n        MIGRATION_MODULES[:] = original[:-1]\n        apply_migrations(DatabaseConfig(path=database_path))\n''',
+              '''    try:\n        cutoff = next(\n            index\n            for index, module_name in enumerate(original)\n            if module_name.endswith("0028_normalized_nutrient_vector")\n        )\n        MIGRATION_MODULES[:] = original[: cutoff + 1]\n        apply_migrations(DatabaseConfig(path=database_path))\n''',
+          )
+          one(
+              'backend/app/tests/test_database_foundation.py',
+              '    # The backup remains at 0028; only the live DB gains Composition Core.\n',
+              '    # The backup remains at 0028; the live DB gains 0029 and later migrations.\n',
+          )
+          one(
+              'backend/app/tests/test_database_foundation.py',
+              '    assert result.applied_migrations == [expected_migration_ids()[-1]]\n',
+              '    assert result.applied_migrations == expected_migration_ids()[-2:]\n',
+          )
+
+          artifact = 'backend/app/tests/test_artifact_audit_operations_migration.py'
+          one(
+              artifact,
+              'HEAD_MIGRATION_ID = "0029_food_composition_core"\n',
+              'COMPOSITION_MIGRATION_ID = "0029_food_composition_core"\nHEAD_MIGRATION_ID = "0030_recipe_source_corpus"\n',
+          )
+          alln(
+              artifact,
+              '''        VECTOR_MIGRATION_ID,\n        HEAD_MIGRATION_ID,\n''',
+              '''        VECTOR_MIGRATION_ID,\n        COMPOSITION_MIGRATION_ID,\n        HEAD_MIGRATION_ID,\n''',
+              3,
+          )
+          one(
+              artifact,
+              '''        "food_composition_steps",\n    }\n''',
+              '''        "food_composition_steps",\n        "recipe_source_documents",\n        "recipe_source_cards",\n        "recipe_source_card_variants",\n        "recipe_source_card_ingredients",\n        "recipe_source_declared_nutrients",\n    }\n''',
+          )
+          PY
+
+      - name: Install backend and lint tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e './backend[test]' ruff
+      - name: Ruff changed Python
+        run: |
+          ruff check \
+            backend/app/db/migration_lineage.py \
+            backend/app/tests/table_guards.py \
+            backend/app/tests/persistence/test_nutrition_read_scope.py \
+            backend/app/tests/test_artifact_audit_operations_migration.py \
+            backend/app/tests/test_database_foundation.py \
+            backend/app/tests/test_family_food_identity_migration.py \
+            backend/app/tests/test_food_composition_migration.py \
+            backend/app/tests/test_household_migration.py \
+            backend/app/tests/test_migration_runner_rebuild.py \
+            backend/app/tests/test_nutrient_vector.py \
+            backend/app/tests/test_nutrition_architecture.py \
+            backend/app/tests/test_ru_food_data.py \
+            scripts/audit_pr6_data_b2b2.py \
+            scripts/audit_pr6_ru_food_data.py
+          ruff format --check \
+            backend/app/db/migration_lineage.py \
+            backend/app/tests/table_guards.py \
+            backend/app/tests/persistence/test_nutrition_read_scope.py \
+            backend/app/tests/test_artifact_audit_operations_migration.py \
+            backend/app/tests/test_database_foundation.py \
+            backend/app/tests/test_family_food_identity_migration.py \
+            backend/app/tests/test_food_composition_migration.py \
+            backend/app/tests/test_household_migration.py \
+            backend/app/tests/test_migration_runner_rebuild.py \
+            backend/app/tests/test_nutrient_vector.py \
+            backend/app/tests/test_nutrition_architecture.py \
+            backend/app/tests/test_ru_food_data.py \
+            scripts/audit_pr6_data_b2b2.py \
+            scripts/audit_pr6_ru_food_data.py
+      - name: Re-run migration/audit regression subset
+        env:
+          PYTHONPATH: backend:.
+          AI_ENABLED: "false"
+        run: |
+          python -m pytest \
+            backend/app/tests/persistence/test_nutrition_read_scope.py \
+            backend/app/tests/test_artifact_audit_operations_migration.py \
+            backend/app/tests/test_database_foundation.py \
+            backend/app/tests/test_family_food_identity_migration.py \
+            backend/app/tests/test_food_composition_migration.py \
+            backend/app/tests/test_household_migration.py \
+            backend/app/tests/test_migration_lineage.py \
+            backend/app/tests/test_migration_runner_rebuild.py \
+            backend/app/tests/test_nutrient_vector.py \
+            backend/app/tests/test_nutrition_architecture.py \
+            backend/app/tests/test_pr6_data_b2b2.py \
+            backend/app/tests/test_ru_food_data.py
+      - name: Commit only green compatibility fixes and remove patch harness
+        run: |
+          set -euo pipefail
+          git rm .github/workflows/pr36-migration-compat.yml
+          git diff --check
+          git add backend/app scripts
+          git diff --cached --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'fix: align migration compatibility contracts with source corpus'
+          git push origin HEAD:codex/ru-normative-recipe-corpus
