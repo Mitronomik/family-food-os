@@ -32,7 +32,7 @@ STATEMENTS = (
         raw_card_sha256 TEXT NOT NULL CHECK(length(raw_card_sha256)=64),
         capture_status TEXT NOT NULL CHECK(capture_status IN ('RAW_CAPTURED','STRUCTURED','PARTIAL')),
         created_at TEXT NOT NULL,
-        UNIQUE(document_id, source_section_code, source_card_code, raw_card_sha256)
+        UNIQUE(document_id, source_section_code, source_card_code)
     )""",
     """CREATE TABLE recipe_source_card_variants (
         id CHAR(32) NOT NULL PRIMARY KEY,
