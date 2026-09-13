@@ -1,0 +1,134 @@
+name: RU normative corpus acquisition
+
+on:
+  push:
+    branches:
+      - codex/ru-normative-recipe-corpus
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acquire-and-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install backend and verification tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e './backend[test]' ruff
+
+      - name: Focused tests
+        env:
+          PYTHONPATH: backend
+          AI_ENABLED: "false"
+        run: |
+          python -m pytest \
+            backend/app/tests/test_recipe_source_corpus.py \
+            backend/app/tests/persistence/test_recipe_source_corpus.py
+
+      - name: Ruff
+        run: |
+          ruff check \
+            backend/app/domain/recipe_source_corpus.py \
+            backend/app/services/recipe_source_corpus_import.py \
+            backend/app/persistence/sqlalchemy_core/recipe_source_corpus_repository.py \
+            backend/app/persistence/sqlalchemy_core/recipe_source_corpus_tables.py \
+            backend/app/tests/test_recipe_source_corpus.py \
+            backend/app/tests/persistence/test_recipe_source_corpus.py \
+            scripts/import_ru_normative_recipe_corpus.py
+          ruff format --check \
+            backend/app/domain/recipe_source_corpus.py \
+            backend/app/services/recipe_source_corpus_import.py \
+            backend/app/persistence/sqlalchemy_core/recipe_source_corpus_repository.py \
+            backend/app/persistence/sqlalchemy_core/recipe_source_corpus_tables.py \
+            backend/app/tests/test_recipe_source_corpus.py \
+            backend/app/tests/persistence/test_recipe_source_corpus.py \
+            scripts/import_ru_normative_recipe_corpus.py
+
+      - name: Acquire and import all 214 cards
+        env:
+          PYTHONPATH: backend:.
+          AI_ENABLED: "false"
+        run: |
+          mkdir -p /tmp/ru-normative-corpus
+          python scripts/import_ru_normative_recipe_corpus.py \
+            --database /tmp/ru-normative-corpus/corpus.sqlite \
+            --sudact-manifest data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19_manifest.json \
+            --export-bundle /tmp/ru-normative-corpus/mr_2_4_0162_19.bundle.json \
+            | tee /tmp/ru-normative-corpus/import-first.json
+
+      - name: Repeat exact bundle import
+        env:
+          PYTHONPATH: backend:.
+          AI_ENABLED: "false"
+        run: |
+          python scripts/import_ru_normative_recipe_corpus.py \
+            --database /tmp/ru-normative-corpus/corpus.sqlite \
+            --bundle /tmp/ru-normative-corpus/mr_2_4_0162_19.bundle.json \
+            | tee /tmp/ru-normative-corpus/import-repeat.json
+
+      - name: Assert corpus and DB invariants
+        env:
+          PYTHONPATH: backend:.
+        run: |
+          python - <<'PY'
+          import json
+          import sqlite3
+          from pathlib import Path
+
+          root = Path('/tmp/ru-normative-corpus')
+          first = json.loads((root / 'import-first.json').read_text())
+          repeat = json.loads((root / 'import-repeat.json').read_text())
+          bundle = json.loads((root / 'mr_2_4_0162_19.bundle.json').read_text())
+
+          assert first['inserted_cards'] == 214, first
+          assert first['card_count'] == 214, first
+          assert repeat['inserted_cards'] == 0, repeat
+          assert repeat['card_count'] == 214, repeat
+          assert len(bundle['cards']) == 214
+          keys = {
+              (card['source_section_code'], card['source_card_code'])
+              for card in bundle['cards']
+          }
+          assert len(keys) == 214
+
+          db = sqlite3.connect(root / 'corpus.sqlite')
+          try:
+              assert db.execute('SELECT COUNT(*) FROM recipe_source_documents').fetchone()[0] == 1
+              assert db.execute('SELECT COUNT(*) FROM recipe_source_cards').fetchone()[0] == 214
+              assert db.execute("SELECT COUNT(*) FROM schema_migrations WHERE migration_id='0030_recipe_source_corpus'").fetchone()[0] == 1
+              production_count = db.execute('SELECT COUNT(*) FROM food_recipe_versions').fetchone()[0]
+              assert production_count == 0, production_count
+          finally:
+              db.close()
+
+          summary = {
+              'cards': 214,
+              'unique_section_card_keys': 214,
+              'first_inserted_cards': 214,
+              'repeat_inserted_cards': 0,
+              'production_recipe_versions_fresh_db': 0,
+          }
+          (root / 'verification-summary.json').write_text(
+              json.dumps(summary, ensure_ascii=False, indent=2) + '\n'
+          )
+          print(json.dumps(summary, ensure_ascii=False))
+          PY
+
+      - name: Upload acquisition evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: ru-normative-corpus-acquisition
+          path: /tmp/ru-normative-corpus/
+          if-no-files-found: error
+          retention-days: 7
