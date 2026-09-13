@@ -664,8 +664,10 @@ not waived or claimed complete.
 2026-09-12 execution: explicitly authorized after reviewed PR30 merge; **BLOCKED**.
 Exactly three production families remain required. The bounded evidence review
 has not established three publishable families, so implementation stopped before
-migration 0030 or seed publication. This is not milestone completion or a change
+RecipeTemplate migration or seed publication. The supporting source-corpus operation occupies `0030_recipe_source_corpus`; future RecipeTemplate schema is therefore `0031_recipe_template_catalogue`. This is not milestone completion or a change
 to the original exit criteria. See the [retained evidence](../../data/curation/recipe-assembly-a/README.md).
+
+`0030_recipe_source_corpus` is a bounded pre-publication source-corpus supporting operation introduced by PR #36. It preserves normative source cards for later deterministic resolution/review and does not complete Assembly A, publish RecipeTemplate/RecipeVersion, or start the later full Data Program.
 
 After PR6-CLOSE: introduce a bounded versioned RecipeTemplate/rule catalogue with
 Russian display, RU familiarity classification, kitchen verification evidence,
@@ -1362,7 +1364,7 @@ Assembly A remains BLOCKED; Assembly B and PR7+ NOT STARTED. No roadmap gate,
 production data or implementation authorization changes. The next action is R2
 review; neither another donor search nor food-data repair starts automatically.
 Even a future evidence-ready triple needs separate authorization for Assembly A
-implementation with `0030_recipe_template_catalogue`.
+implementation with `0031_recipe_template_catalogue`.
 
 
 ### Assembly A third-family closure — R3 checkpoint
@@ -1380,7 +1382,7 @@ Assembly A is still BLOCKED; B and PR7+ remain NOT STARTED. Migration remains
 0029; no runtime/schema/data/seed change. This checkpoint neither completes
 Assembly A nor authorizes another search or food-data repair. Stop for review;
 a future evidence-ready set would require separate implementation authorization
-for `0030_recipe_template_catalogue` before Assembly A can resume.
+for `0031_recipe_template_catalogue` before Assembly A can resume.
 
 
 ### Assembly A N50200 deep viability — R4 checkpoint
@@ -1399,4 +1401,4 @@ withheld. Dish familiarity alone does not satisfy exact recipe default eligibili
 Ready = 2/3; third candidate none; family_count/optional_role/verified_substitution
 OPEN. Assembly A BLOCKED, B and PR7+ NOT STARTED, migration 0029 unchanged.
 This checkpoint adds no milestone or gate. Next: review the research PR and stop;
-no automatic donor search, production N50200 data PR or 0030 implementation.
+no automatic donor search, production N50200 data PR or RecipeTemplate implementation.

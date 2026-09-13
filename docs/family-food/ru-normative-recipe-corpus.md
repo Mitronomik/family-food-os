@@ -105,6 +105,15 @@ Crawler сначала сверяет каждый appendix index с manifest, �
 Повтор того же source snapshot идемпотентен; новая редакция/изменившийся snapshot
 создаёт новую document revision.
 
+## Зафиксированный полный snapshot
+
+После live acquisition полный очищенный source bundle сохраняется в репозитории:
+
+`data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json`
+
+Он содержит ровно 214 section-scoped карт и позволяет восстановить source-corpus БД офлайн через `--bundle`, без повторного обращения к HTML-зеркалу. Для Sudact `raw_card_text` обрезается строго до первой навигационной границы `←`; navigation, footer, scripts и copyright chrome зеркала не являются нормативной source truth. Если ожидаемая граница страницы отсутствует, acquisition завершается fail-closed.
+
+
 ## Bootstrap
 
 `data/seed/ru_normative_recipe_corpus/bootstrap.json` содержит шесть

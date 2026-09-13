@@ -11,18 +11,15 @@ Updated: `2026-09-13`.
 - ready = 2/3; third_candidate = none.
 - OPEN Assembly-A evidence gates: family_count, optional_role, verified_substitution.
 - R4-N50200 = COMPLETE AS BLOCKED RESEARCH; no executable production-data enablement plan was issued.
-- Current authorized operation: [PR #36](https://github.com/Mitronomik/family-food-os/pull/36), Russian normative recipe source corpus and bulk importer.
-  Branch `codex/ru-normative-recipe-corpus`; pre-publication source corpus only.
-- Verified live acquisition on pre-sync PR #36 head `a0d828105f7d04525abcd11a4571e0a2a1f53c3c`: 214/214 section-scoped cards acquired and imported; exact repeat import inserted 0 cards; focused tests, Ruff, DB invariants and artifact upload PASS.
-- PR #36 is being synchronized onto merged PR #35 main and must be re-verified on the synchronized head before final acceptance.
+- Current authorized operation: [PR #36](https://github.com/Mitronomik/family-food-os/pull/36), Russian normative recipe source corpus and bulk importer; OPEN / REVIEW-READY, not merged.
+- PR #36 is synchronized on accepted main. Runtime/acquisition verification head: `5f95530472e83748b67dd9efa9fa4542aeb5c546`.
+- Live acquisition = PASS: exactly 214/214 section-scoped cards; exact repeat import inserted 0; page-chrome rows 0.
+- Focused tests, Ruff, full `backend/app/tests + launcher/tests` regression, migration/import invariants and artifact capture = PASS on the verified head.
+- Durable cleaned source snapshot: `data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json`.
 - Current accepted main migration remains `0029_food_composition_core` until PR #36 is merged.
-- PR #36 proposes `0030_recipe_source_corpus`; future RecipeTemplate schema becomes `0031_recipe_template_catalogue` if PR #36 is accepted and merged.
+- PR #36 introduces `0030_recipe_source_corpus`; future RecipeTemplate schema is `0031_recipe_template_catalogue`.
 - Source-corpus ingestion does not publish RecipeVersion/RecipeTemplate and does not replace FoodIngredient/Nutrition/Composition deterministic truth.
 - Assembly A = BLOCKED; Assembly B and PR7+ = NOT STARTED.
 
-[Canonical R4 checkpoint](../docs/family-food/food-composition-and-assembly.md#recipe-assembly-a-r4--n50200-deep-viability),
-[complete R4 evidence](../data/curation/recipe-assembly-a-r4-n50200/README.md), and
-[Russian normative source-corpus contract](../docs/family-food/ru-normative-recipe-corpus.md).
-
-Next authorized action: finish synchronization and verification of PR #36, then stop for final review.
-No automatic merge, Assembly B, PR7, RecipeTemplate publication, or production recipe publication is authorized.
+Next authorized action: final human review / merge decision for PR #36, then stop.
+No automatic merge, Assembly B, PR7, RecipeTemplate publication, production recipe publication or new donor/data-repair operation is authorized.
