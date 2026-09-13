@@ -48,8 +48,8 @@ signal, а не поводом подменить расчёт исходным 
 - `APPENDIX_5` — 76 технологических карт;
 - `APPENDIX_6` — 45;
 - `APPENDIX_7` — 33;
-- `APPENDIX_8` — 58;
-- всего — **212 section-scoped карт**.
+- `APPENDIX_8` — 60;
+- всего — **214 section-scoped карт**.
 
 Manifest находится в
 `data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19_manifest.json` и содержит
@@ -98,7 +98,7 @@ AI_ENABLED=false PYTHONPATH=backend:. backend/.venv/bin/python \
 ```
 
 Crawler сначала сверяет каждый appendix index с manifest, затем получает каждую
-из 212 страниц, сохраняет `source_page_url`, raw-card text и SHA-256 и только
+из 214 страниц, сохраняет `source_page_url`, raw-card text и SHA-256 и только
 после полного прохода импортирует документ. Если хотя бы одна ожидаемая карта
 недоступна, операция завершается ошибкой до записи неполного corpus snapshot.
 
@@ -110,7 +110,7 @@ Crawler сначала сверяет каждый appendix index с manifest, �
 `data/seed/ru_normative_recipe_corpus/bootstrap.json` содержит шесть
 структурированных карт, фактически предоставленных пользователем в исходной
 постановке задачи. Это regression/bootstrap fixture для проверки схемы и
-структурированных полей. Он не заменяет полный manifest из 212 карт.
+структурированных полей. Он не заменяет полный manifest из 214 карт.
 
 ## Граница публикации
 
