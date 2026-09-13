@@ -27,6 +27,7 @@ _TECH = re.compile(
 _LINK_CODE = re.compile(
     r"(?i)Технологическая(?:\s+карта)?\s+(?:N|№)\s*([0-9]+(?:\.[0-9]+)?[а-яa-z]?)"
 )
+_CARD_PATH_MARKERS = ("/tekhnologicheskaia-karta-n-", "/tekhnologicheskaia-n-")
 
 
 class _TextHTMLParser(HTMLParser):
@@ -107,7 +108,7 @@ def extract_sudact_card_links(html: str, appendix_url: str) -> dict[str, str]:
         parsed = urlparse(absolute)
         if not parsed.path.startswith(appendix_path):
             continue
-        if "/tekhnologicheskaia-karta-n-" not in parsed.path:
+        if not any(marker in parsed.path for marker in _CARD_PATH_MARKERS):
             continue
         match = _LINK_CODE.search(" ".join(label.split()))
         if match is None:
