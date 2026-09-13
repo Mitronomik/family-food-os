@@ -21,8 +21,9 @@ STATEMENTS = (
     """CREATE TABLE recipe_source_cards (
         id CHAR(32) NOT NULL PRIMARY KEY,
         document_id CHAR(32) NOT NULL REFERENCES recipe_source_documents(id) ON DELETE RESTRICT,
-        source_section_code TEXT NOT NULL DEFAULT '',
+        source_section_code TEXT NOT NULL CHECK(length(source_section_code)>0),
         source_card_code TEXT NOT NULL,
+        source_page_url TEXT,
         name_ru TEXT NOT NULL,
         category_ru TEXT,
         source_recipe_basis TEXT,
