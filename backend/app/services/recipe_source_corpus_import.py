@@ -17,6 +17,7 @@ from app.domain.recipe_source_corpus import (
 _CARD = re.compile(
     r"(?im)^\s*Технологическая(?:\s+карта)?\s+(?:N|№)\s*([^\n]+)"
 )
+_APPENDIX = re.compile(r"(?im)^\s*Приложение\s+([5-8])(?:\s|\.|$)")
 _NAME = re.compile(
     r"(?im)^\s*Наименование(?:\s+кулинарного\s+изделия\s*\(блюда\)|\s+блюда)\s*:\s*(.+)$"
 )
@@ -122,18 +123,20 @@ def extract_sudact_card_links(html: str, appendix_url: str) -> dict[str, str]:
 def split_normative_cards(
     text: str,
     *,
-    source_section_code: str = "DOCUMENT",
+    source_section_code: str | None = None,
     source_page_url: str | None = None,
     category_ru: str | None = None,
 ) -> list[dict[str, Any]]:
     """Capture every card block losslessly; structure enrichment may happen later."""
     matches = list(_CARD.finditer(text))
+    appendix_matches = list(_APPENDIX.finditer(text)) if source_section_code is None else []
     cards: list[dict[str, Any]] = []
     for index, match in enumerate(matches):
         start = match.start()
         end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
         raw = text[start:end].strip()
         code = _canonical_card_code(" ".join(match.group(1).split()))
+        section = source_section_code or _section_for_position(appendix_matches, start)
         name_match = _NAME.search(raw)
         basis_match = _BASIS.search(raw)
         tech_match = _TECH.search(raw)
@@ -146,7 +149,7 @@ def split_normative_cards(
         technology = " ".join(tech_match.group(1).split()) if tech_match else None
         cards.append(
             {
-                "source_section_code": source_section_code,
+                "source_section_code": section,
                 "source_card_code": code,
                 "source_page_url": source_page_url,
                 "name_ru": name,
@@ -181,7 +184,11 @@ def extract_single_normative_card(
     matching = [row for row in candidates if row["source_card_code"] == expected]
     if not matching:
         raise ValueError(f"Card {source_section_code}:{expected} not found in page")
-    with_name = [row for row in matching if not row["name_ru"].startswith("Технологическая карта ")]
+    with_name = [
+        row
+        for row in matching
+        if not row["name_ru"].startswith("Технологическая карта ")
+    ]
     selected = with_name[-1] if with_name else matching[-1]
     return selected
 
@@ -229,6 +236,13 @@ def validate_bundle(bundle: dict[str, Any]):
             )
         seen.add(key)
     return document, cards
+
+
+def _section_for_position(matches: list[re.Match[str]], position: int) -> str:
+    preceding = [match for match in matches if match.start() < position]
+    if not preceding:
+        return "DOCUMENT"
+    return f"APPENDIX_{preceding[-1].group(1)}"
 
 
 def _canonical_card_code(value: str) -> str:
