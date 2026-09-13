@@ -612,7 +612,12 @@ def build_supported_older_database(database_path: Path) -> None:
     database_path.parent.mkdir(parents=True, exist_ok=True)
     original = list(MIGRATION_MODULES)
     try:
-        MIGRATION_MODULES[:] = original[:-1]
+        cutoff = next(
+            index
+            for index, module_name in enumerate(original)
+            if module_name.endswith("0028_normalized_nutrient_vector")
+        )
+        MIGRATION_MODULES[:] = original[: cutoff + 1]
         apply_migrations(DatabaseConfig(path=database_path))
     finally:
         MIGRATION_MODULES[:] = original
@@ -656,7 +661,7 @@ def test_user_mode_startup_creates_backup_before_migration_for_existing_database
     assert "nutrition_measure_evidence" in backup_tables
     assert "recipe_ingredient_nutrition_assessments" in backup_tables
     assert "recipe_ingredient_nutrition_assessment_issues" in backup_tables
-    # The backup remains at 0028; only the live DB gains Composition Core.
+    # The backup remains at 0028; the live DB gains 0029 and later migrations.
     assert {
         "nutrient_registry_snapshots",
         "nutrient_definitions",
@@ -681,7 +686,7 @@ def test_user_mode_startup_creates_backup_before_migration_for_existing_database
             ).fetchone()[0]
             == "0028_normalized_nutrient_vector"
         )
-    assert result.applied_migrations == [expected_migration_ids()[-1]]
+    assert result.applied_migrations == expected_migration_ids()[-2:]
     tables = table_names(database_path)
     assert tables <= (CURRENT_ALLOWED_TABLES | {"legacy_marker"})
     assert_no_forbidden_future_tables(tables)

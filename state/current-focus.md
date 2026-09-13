@@ -1,27 +1,28 @@
 # Current focus
 
-Updated: `2026-09-12`.
+Updated: `2026-09-13`.
 
 - PR6 / PR6-CLOSE = COMPLETE.
 - [PR #34](https://github.com/Mitronomik/family-food-os/pull/34) = MERGED.
-- Exact accepted fetched main: `a375f005b09880cf6a63cb5c8b1e964a0f558cb7`.
-- R1 / R2 / R3 = COMPLETE AS BLOCKED RESEARCH; all three evidence packages frozen.
+- [PR #35](https://github.com/Mitronomik/family-food-os/pull/35) = MERGED.
+- Exact accepted main after PR #35: `7388d19677cffbf5cd6cb192eabc0b93cad870f7`.
+- R1 / R2 / R3 / R4 = COMPLETE AS BLOCKED RESEARCH; R1/R2/R3 evidence packages remain frozen.
 - R1-21 and R1-23 = INDIVIDUALLY_READY, unchanged exact published 100-portion scopes.
 - ready = 2/3; third_candidate = none.
-- OPEN: family_count, optional_role, verified_substitution.
-- R4-N50200 = current authorized operation, research/evidence only.
-  Branch `codex/recipe-assembly-a-r4-n50200`; deep review of exactly N50200.
-  Research result BLOCKED; data-enablement contract withheld.
+- OPEN Assembly-A evidence gates: family_count, optional_role, verified_substitution.
+- R4-N50200 = COMPLETE AS BLOCKED RESEARCH; no executable production-data enablement plan was issued.
+- Current authorized operation: [PR #36](https://github.com/Mitronomik/family-food-os/pull/36), Russian normative recipe source corpus and bulk importer; OPEN / READY FOR FINAL RE-REVIEW, not merged.
+- PR #36 is synchronized on accepted main. Runtime/acquisition verification head: `5f95530472e83748b67dd9efa9fa4542aeb5c546`.
+- Live acquisition = PASS: exactly 214/214 section-scoped cards; exact repeat import inserted 0; page-chrome rows 0.
+- Historical full `backend/app/tests + launcher/tests` regression and live acquisition = PASS at `5f95530472e83748b67dd9efa9fa4542aeb5c546` (run `34744992334`); not rerun for the bounded correction.
+- Review `5190228147` corrections verified: declared bundle hashes required/validated; conflicting repeat payload raises `CorpusImportConflictError` before writes.
+- New correction verification: 105 focused corpus/persistence/migration tests PASS with `AI_ENABLED=false`; Ruff check/format PASS; offline CLI 214 first / 0 repeat, both adversarial failures leave DB unchanged.
+- Frozen 214-card bundle remains byte-identical. Six stale hashes in the separate bootstrap fixture corrected; all texts/structured facts unchanged.
+- Durable cleaned source snapshot: `data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json`.
+- Current accepted main migration remains `0029_food_composition_core` until PR #36 is merged.
+- PR #36 introduces `0030_recipe_source_corpus`; future RecipeTemplate schema is `0031_recipe_template_catalogue`.
+- Source-corpus ingestion does not publish RecipeVersion/RecipeTemplate and does not replace FoodIngredient/Nutrition/Composition deterministic truth.
 - Assembly A = BLOCKED; Assembly B and PR7+ = NOT STARTED.
-- Migration = `0029_food_composition_core`; production truth unchanged.
 
-[Canonical R4 checkpoint](../docs/family-food/food-composition-and-assembly.md#recipe-assembly-a-r4--n50200-deep-viability)
-and [complete R4 evidence](../data/curation/recipe-assembly-a-r4-n50200/README.md).
-
-Delivery: [PR #35](https://github.com/Mitronomik/family-food-os/pull/35), OPEN
-into main, not merged. Evidence commit:
-`678d8d0e4c3d5f67ccf6645e2f9f95a0719c01f2`.
-
-Next authorized action: review the published research PR, then stop.
-No automatic merge, production data PR, other donor search, Assembly B, PR7 or 0030.
-Household scaling remains false. Review-ready is not accepted milestone completion.
+Next authorized action: final human re-review of PR36 corrections. Stop after publishing this correction; merge requires separate explicit post-review authorization.
+No automatic merge, Assembly B, PR7, RecipeTemplate publication, production recipe publication or new donor/data-repair operation is authorized.

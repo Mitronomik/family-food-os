@@ -1,0 +1,22 @@
+{
+  "operation": "RU_NORMATIVE_RECIPE_SOURCE_CORPUS",
+  "accepted_main": "7388d19677cffbf5cd6cb192eabc0b93cad870f7",
+  "tested_head": "5f95530472e83748b67dd9efa9fa4542aeb5c546",
+  "github_actions_run_id": "34744992334",
+  "focused_tests": "PASS",
+  "ruff": "PASS",
+  "full_backend_launcher_regression": "PASS",
+  "live_acquisition": "PASS",
+  "cards": 214,
+  "unique_section_card_keys": 214,
+  "repeat_inserted_cards": 0,
+  "page_chrome_rows": 0,
+  "migration": "0030_recipe_source_corpus",
+  "future_recipe_template_migration": "0031_recipe_template_catalogue",
+  "snapshot_path": "data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json",
+  "snapshot_sha256": "ee0aad55080ba09294625af57800172862a53293518f7869e1b974ed7e9ab0b7",
+  "production_recipe_versions_mutated": false,
+  "assembly_a": "BLOCKED",
+  "assembly_b": "NOT STARTED",
+  "pr7_plus": "NOT STARTED"
+}

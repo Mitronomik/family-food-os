@@ -19,7 +19,7 @@ from app.db.migrations import (
 from app.seed.food_recipes import seed_food_recipes
 from app.seed.nutrition_measure_evidence import seed_nutrition_measure_evidence
 
-HEAD = "0029_food_composition_core"
+HEAD = "0030_recipe_source_corpus"
 REBUILD = "synthetic_rebuild"
 
 
@@ -246,7 +246,7 @@ def test_fresh_accepted_chain_failure_and_resume(tmp_path, monkeypatch, observed
     config = DatabaseConfig(path=tmp_path / "fresh-resume.sqlite")
     prefix = list(migrations.MIGRATION_MODULES)
     accepted = expected_migration_ids()
-    assert len(accepted) == 29 and accepted[-1] == HEAD
+    assert accepted[-1] == HEAD and len(accepted) == len(set(accepted))
 
     def fail(db):
         assert db.in_transaction

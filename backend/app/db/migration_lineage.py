@@ -137,6 +137,15 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
             "food_composition_steps",
         }
     ),
+    "0030_recipe_source_corpus": frozenset(
+        {
+            "recipe_source_documents",
+            "recipe_source_cards",
+            "recipe_source_card_variants",
+            "recipe_source_card_ingredients",
+            "recipe_source_declared_nutrients",
+        }
+    ),
 }
 
 # The foundational tables promised by migration `0001`. Stable FamilyFoodOS

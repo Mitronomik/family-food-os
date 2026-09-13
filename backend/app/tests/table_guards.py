@@ -59,6 +59,11 @@ CURRENT_ALLOWED_TABLES = {
     "food_composition_versions",
     "food_composition_nodes",
     "food_composition_steps",
+    "recipe_source_documents",
+    "recipe_source_cards",
+    "recipe_source_card_variants",
+    "recipe_source_card_ingredients",
+    "recipe_source_declared_nutrients",
     "sqlite_sequence",
 }
 

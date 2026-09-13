@@ -11,12 +11,13 @@ from scripts.audit_pr6_nutrient_vector_b import snapshot
 from app.tests.table_guards import assert_only_current_tables
 
 MIGRATION = import_module("app.migrations.versions.0029_food_composition_core")
+SOURCE_CORPUS_MIGRATION_ID = "0030_recipe_source_corpus"
 
 
 def test_real_0028_upgrade_preserves_every_row_readiness_and_vector_digest(tmp_path):
     report = measure(DatabaseConfig(path=tmp_path / "upgrade.sqlite"))
     assert report["migration_head_before"] == "0028_normalized_nutrient_vector"
-    assert report["migration_head_after"] == MIGRATION.MIGRATION_ID
+    assert report["migration_head_after"] == SOURCE_CORPUS_MIGRATION_ID
     assert report["readiness_before"] == report["readiness_after"]
     assert report["all_existing_table_rows_unchanged"]
     assert report["existing_profile_seals_verified"] == 183
@@ -30,7 +31,10 @@ def test_fresh_schema_foreign_keys_lineage_and_backup_inventory(tmp_path):
 
     config = DatabaseConfig(path=tmp_path / "fresh.sqlite")
     assert migrations.apply_migrations(config) == migrations.expected_migration_ids()
-    assert migrations.expected_migration_ids()[-1] == MIGRATION.MIGRATION_ID
+    assert migrations.expected_migration_ids()[-2:] == [
+        MIGRATION.MIGRATION_ID,
+        SOURCE_CORPUS_MIGRATION_ID,
+    ]
     with sqlite3.connect(config.path) as db:
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
         names = {
@@ -113,8 +117,14 @@ def test_mid_migration_schema_data_marker_rollback_and_deterministic_resume(
             migrations.apply_migrations(config)
     assert snapshot(config) == before
     assert schema(config) == schema_before
-    assert migrations.pending_migration_ids(config) == [MIGRATION.MIGRATION_ID]
-    assert migrations.apply_migrations(config) == [MIGRATION.MIGRATION_ID]
+    assert migrations.pending_migration_ids(config) == [
+        MIGRATION.MIGRATION_ID,
+        SOURCE_CORPUS_MIGRATION_ID,
+    ]
+    assert migrations.apply_migrations(config) == [
+        MIGRATION.MIGRATION_ID,
+        SOURCE_CORPUS_MIGRATION_ID,
+    ]
     after, schema_after = snapshot(config), schema(config)
     assert all(after[name] == rows for name, rows in before.items())
     assert migrations.apply_migrations(config) == []

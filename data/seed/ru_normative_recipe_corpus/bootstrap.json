@@ -1,0 +1,122 @@
+{
+  "document": {
+    "source_code": "RU_NORMATIVE_BOOTSTRAP_2026_09_12",
+    "title_ru": "Российские нормативные технологические карты — утверждённый bootstrap",
+    "authority_ru": "Проектное решение пользователя; первичные нормативные источники перечислены в картах",
+    "source_url": "https://base.garant.ru/73535214/",
+    "source_version": "bootstrap-2026-09-12",
+    "retrieved_at": "2026-09-12T00:00:00+00:00",
+    "raw_format": "JSON",
+    "raw_bytes_sha256": "d4c2ac3833ce9ecd4bc54b8dc4f08e957cf4eb3bb75d88048ff6ae627296c748",
+    "raw_text_sha256": "d4c2ac3833ce9ecd4bc54b8dc4f08e957cf4eb3bb75d88048ff6ae627296c748",
+    "publication_policy": "NORMATIVE_BASE_RECIPE_APPROVED"
+  },
+  "cards": [
+    {
+      "source_card_code": "1.1",
+      "name_ru": "Борщ с капустой и картофелем вегетарианский",
+      "category_ru": "Супы",
+      "source_recipe_basis": "МР 2.4.0162-19; Картотека блюд диетического питания оптимизированного состава 2008",
+      "technology_text_ru": null,
+      "raw_card_text": "Технологическая карта N 1.1\nНаименование блюда: Борщ с капустой и картофелем вегетарианский\nИсточник рецептуры: МР 2.4.0162-19; Картотека блюд диетического питания оптимизированного состава 2008\nПродукты: свёкла 40 г; капуста белокочанная 20 г; картофель 20 г; морковь 12.5 г; лук репчатый 10 г; масло растительное рафинированное 5 г; сахар 2.5 г; соль поваренная йодированная 0.3 г; вода питьевая 200 г.\nВыход 250 г.\nПищевая ценность: Б 1.9 г; Ж 6.1 г; У 12.5 г; 111 ккал; Ca 67.9 мг; Mg 14 мг; P 69 мг; Fe 1.1 мг; B1 0.1 мг; C 34.3 мг.",
+      "raw_card_sha256": "fb0e17d811878a9f90f2df849ecc8d0cc1b5648883fa1708e441cebc09962ad9",
+      "capture_status": "STRUCTURED",
+      "variants": [{
+        "variant_code": "OUTPUT_250G", "label_ru": "Порция 250 г", "position": 1, "output_g": "250", "output_text": "250 г",
+        "ingredients": [
+          {"position":1,"name_ru":"Свёкла","gross_g":null,"net_g":"40","quantity_text":"40 г","source_form_note":null,"optional":false},
+          {"position":2,"name_ru":"Капуста белокочанная","gross_g":null,"net_g":"20","quantity_text":"20 г","source_form_note":null,"optional":false},
+          {"position":3,"name_ru":"Картофель","gross_g":null,"net_g":"20","quantity_text":"20 г","source_form_note":null,"optional":false},
+          {"position":4,"name_ru":"Морковь","gross_g":null,"net_g":"12.5","quantity_text":"12.5 г","source_form_note":null,"optional":false},
+          {"position":5,"name_ru":"Лук репчатый","gross_g":null,"net_g":"10","quantity_text":"10 г","source_form_note":null,"optional":false},
+          {"position":6,"name_ru":"Масло растительное рафинированное","gross_g":null,"net_g":"5","quantity_text":"5 г","source_form_note":null,"optional":false},
+          {"position":7,"name_ru":"Сахар","gross_g":null,"net_g":"2.5","quantity_text":"2.5 г","source_form_note":null,"optional":false},
+          {"position":8,"name_ru":"Соль поваренная йодированная","gross_g":null,"net_g":"0.3","quantity_text":"0.3 г","source_form_note":null,"optional":false},
+          {"position":9,"name_ru":"Вода питьевая","gross_g":null,"net_g":"200","quantity_text":"200 г","source_form_note":null,"optional":false}
+        ],
+        "declared_nutrients": [
+          {"nutrient_code":"PROTEIN_G","value":"1.9","unit":"g","source_label":"Белки"},
+          {"nutrient_code":"FAT_G","value":"6.1","unit":"g","source_label":"Жиры"},
+          {"nutrient_code":"CARBOHYDRATE_G","value":"12.5","unit":"g","source_label":"Углеводы"},
+          {"nutrient_code":"ENERGY_KCAL","value":"111","unit":"kcal","source_label":"Калорийность"},
+          {"nutrient_code":"CALCIUM_MG","value":"67.9","unit":"mg","source_label":"Ca"},
+          {"nutrient_code":"MAGNESIUM_MG","value":"14","unit":"mg","source_label":"Mg"},
+          {"nutrient_code":"PHOSPHORUS_MG","value":"69","unit":"mg","source_label":"P"},
+          {"nutrient_code":"IRON_MG","value":"1.1","unit":"mg","source_label":"Fe"},
+          {"nutrient_code":"VITAMIN_B1_MG","value":"0.1","unit":"mg","source_label":"B1"},
+          {"nutrient_code":"VITAMIN_C_MG","value":"34.3","unit":"mg","source_label":"C"}
+        ]
+      }]
+    },
+    {
+      "source_card_code": "1.2а",
+      "name_ru": "Щи из свежей капусты вегетарианские",
+      "category_ru": "Супы",
+      "source_recipe_basis": "МР 2.4.0162-19; приказ ДЗМ N 653 от 11.09.2017",
+      "technology_text_ru": null,
+      "raw_card_text": "Технологическая карта N 1.2а\nНаименование блюда: Щи из свежей капусты вегетарианские\nПродукты: капуста 49 г; картофель 26 г; морковь 11 г; помидоры 11.7 г; лук 5 г; масло растительное 4 г; вода 221 г. Выход 250 г. Пищевая ценность: Б 1.7 г; Ж 4.2 г; У 8.3 г; 79 ккал; Ca 80.4 мг; Mg 28.9 мг; P 51.6 мг; Fe 0.9 мг; B1 0.2 мг; C 19.2 мг.",
+      "raw_card_sha256": "cccb4e46842661e6fab6b2792df15de17a812cc8e2798632d91bb0d5166fbc34",
+      "capture_status": "STRUCTURED",
+      "variants": [{"variant_code":"OUTPUT_250G","label_ru":"Порция 250 г","position":1,"output_g":"250","output_text":"250 г","ingredients":[
+        {"position":1,"name_ru":"Капуста белокочанная","gross_g":null,"net_g":"49","quantity_text":"49 г","source_form_note":null,"optional":false},
+        {"position":2,"name_ru":"Картофель","gross_g":null,"net_g":"26","quantity_text":"26 г","source_form_note":null,"optional":false},
+        {"position":3,"name_ru":"Морковь","gross_g":null,"net_g":"11","quantity_text":"11 г","source_form_note":null,"optional":false},
+        {"position":4,"name_ru":"Помидоры","gross_g":null,"net_g":"11.7","quantity_text":"11.7 г","source_form_note":null,"optional":false},
+        {"position":5,"name_ru":"Лук репчатый","gross_g":null,"net_g":"5","quantity_text":"5 г","source_form_note":null,"optional":false},
+        {"position":6,"name_ru":"Масло растительное","gross_g":null,"net_g":"4","quantity_text":"4 г","source_form_note":null,"optional":false},
+        {"position":7,"name_ru":"Вода питьевая","gross_g":null,"net_g":"221","quantity_text":"221 г","source_form_note":null,"optional":false}],"declared_nutrients":[
+        {"nutrient_code":"PROTEIN_G","value":"1.7","unit":"g","source_label":"Белки"},{"nutrient_code":"FAT_G","value":"4.2","unit":"g","source_label":"Жиры"},{"nutrient_code":"CARBOHYDRATE_G","value":"8.3","unit":"g","source_label":"Углеводы"},{"nutrient_code":"ENERGY_KCAL","value":"79","unit":"kcal","source_label":"Калорийность"},{"nutrient_code":"CALCIUM_MG","value":"80.4","unit":"mg","source_label":"Ca"},{"nutrient_code":"MAGNESIUM_MG","value":"28.9","unit":"mg","source_label":"Mg"},{"nutrient_code":"PHOSPHORUS_MG","value":"51.6","unit":"mg","source_label":"P"},{"nutrient_code":"IRON_MG","value":"0.9","unit":"mg","source_label":"Fe"},{"nutrient_code":"VITAMIN_B1_MG","value":"0.2","unit":"mg","source_label":"B1"},{"nutrient_code":"VITAMIN_C_MG","value":"19.2","unit":"mg","source_label":"C"}] }]
+    },
+    {
+      "source_card_code": "2.8",
+      "name_ru": "Котлеты мясные паровые",
+      "category_ru": "Мясные блюда",
+      "source_recipe_basis": "МР 2.4.0162-19; Картотека блюд диетического питания оптимизированного состава 2008",
+      "technology_text_ru": null,
+      "raw_card_text": "Технологическая карта N 2.8\nНаименование блюда: Котлеты мясные паровые\nНа 100 г: говядина 74 г; хлеб пшеничный 18 г; вода 22 г; соль йодированная 0.9 г; масло сливочное 4 г. Пищевая ценность: Б 15.2 г; Ж 14.9 г; У 8.7 г; 231 ккал; Ca 17.8 мг; Mg 32.3 мг; P 191 мг; Fe 1.9 мг; B1 0.1 мг; C 0.5 мг.",
+      "raw_card_sha256": "f6eb5280b553e2426e66a3cdc4853205b9effa4c34ce432e75b45b1e619428f5",
+      "capture_status": "STRUCTURED",
+      "variants": [{"variant_code":"OUTPUT_100G","label_ru":"Порция 100 г","position":1,"output_g":"100","output_text":"100 г","ingredients":[
+        {"position":1,"name_ru":"Говядина","gross_g":null,"net_g":"74","quantity_text":"74 г","source_form_note":null,"optional":false},{"position":2,"name_ru":"Хлеб пшеничный","gross_g":null,"net_g":"18","quantity_text":"18 г","source_form_note":null,"optional":false},{"position":3,"name_ru":"Вода питьевая","gross_g":null,"net_g":"22","quantity_text":"22 г","source_form_note":null,"optional":false},{"position":4,"name_ru":"Соль поваренная йодированная","gross_g":null,"net_g":"0.9","quantity_text":"0.9 г","source_form_note":null,"optional":false},{"position":5,"name_ru":"Масло сливочное","gross_g":null,"net_g":"4","quantity_text":"4 г","source_form_note":null,"optional":false}],"declared_nutrients":[
+        {"nutrient_code":"PROTEIN_G","value":"15.2","unit":"g","source_label":"Белки"},{"nutrient_code":"FAT_G","value":"14.9","unit":"g","source_label":"Жиры"},{"nutrient_code":"CARBOHYDRATE_G","value":"8.7","unit":"g","source_label":"Углеводы"},{"nutrient_code":"ENERGY_KCAL","value":"231","unit":"kcal","source_label":"Калорийность"},{"nutrient_code":"CALCIUM_MG","value":"17.8","unit":"mg","source_label":"Ca"},{"nutrient_code":"MAGNESIUM_MG","value":"32.3","unit":"mg","source_label":"Mg"},{"nutrient_code":"PHOSPHORUS_MG","value":"191","unit":"mg","source_label":"P"},{"nutrient_code":"IRON_MG","value":"1.9","unit":"mg","source_label":"Fe"}] }]
+    },
+    {
+      "source_card_code": "6.4",
+      "name_ru": "Каша гречневая молочная",
+      "category_ru": "Каши",
+      "source_recipe_basis": "МР 2.4.0162-19",
+      "technology_text_ru": null,
+      "raw_card_text": "Технологическая карта N 6.4\nНаименование блюда: Каша гречневая молочная\nПорция 200 г: гречка 38 г; молоко 3.2% 96 г; вода 64 г; сахар 4 г; масло растительное 4 г; соль 0.7 г. Б 7.6 г; Ж 7.2 г; У 30.3 г; 216 ккал; Ca 129.8 мг; Mg 90.3 мг; P 201.9 мг; Fe 2.7 мг.",
+      "raw_card_sha256": "08d9b3e70ae1a20845d33d7aa5f865a79d379b0cd9c19dc3ec17bd452d729b8f",
+      "capture_status": "STRUCTURED",
+      "variants": [{"variant_code":"OUTPUT_200G","label_ru":"Порция 200 г","position":1,"output_g":"200","output_text":"200 г","ingredients":[
+        {"position":1,"name_ru":"Крупа гречневая","gross_g":null,"net_g":"38","quantity_text":"38 г","source_form_note":null,"optional":false},{"position":2,"name_ru":"Молоко цельное 3,2%","gross_g":null,"net_g":"96","quantity_text":"96 г","source_form_note":null,"optional":false},{"position":3,"name_ru":"Вода питьевая","gross_g":null,"net_g":"64","quantity_text":"64 г","source_form_note":null,"optional":false},{"position":4,"name_ru":"Сахар","gross_g":null,"net_g":"4","quantity_text":"4 г","source_form_note":null,"optional":false},{"position":5,"name_ru":"Масло растительное","gross_g":null,"net_g":"4","quantity_text":"4 г","source_form_note":null,"optional":false},{"position":6,"name_ru":"Соль","gross_g":null,"net_g":"0.7","quantity_text":"0.7 г","source_form_note":null,"optional":false}],"declared_nutrients":[
+        {"nutrient_code":"PROTEIN_G","value":"7.6","unit":"g","source_label":"Белки"},{"nutrient_code":"FAT_G","value":"7.2","unit":"g","source_label":"Жиры"},{"nutrient_code":"CARBOHYDRATE_G","value":"30.3","unit":"g","source_label":"Углеводы"},{"nutrient_code":"ENERGY_KCAL","value":"216","unit":"kcal","source_label":"Калорийность"},{"nutrient_code":"CALCIUM_MG","value":"129.8","unit":"mg","source_label":"Ca"},{"nutrient_code":"MAGNESIUM_MG","value":"90.3","unit":"mg","source_label":"Mg"},{"nutrient_code":"PHOSPHORUS_MG","value":"201.9","unit":"mg","source_label":"P"},{"nutrient_code":"IRON_MG","value":"2.7","unit":"mg","source_label":"Fe"}] }]
+    },
+    {
+      "source_card_code": "ОМЛЕТ-70",
+      "name_ru": "Омлет натуральный запечённый",
+      "category_ru": "Блюда из яиц",
+      "source_recipe_basis": "МР 2.4.0162-19",
+      "technology_text_ru": null,
+      "raw_card_text": "Омлет натуральный запечённый. Порция 70 г: яйцо 53 г; молоко 23 г; сливочное масло 3.3 г; соль йодированная 0.2 г. Б 7.4 г; Ж 8.5 г; У 1.5 г; 112 ккал; Ca 58 мг; Mg 9.6 мг; P 123.2 мг; Fe 1.4 мг.",
+      "raw_card_sha256": "e20ebd54a18d895787be32b4b3afae05066e7cd8766ad9d70b87854dd6f61ec3",
+      "capture_status": "STRUCTURED",
+      "variants": [{"variant_code":"OUTPUT_70G","label_ru":"Порция 70 г","position":1,"output_g":"70","output_text":"70 г","ingredients":[
+        {"position":1,"name_ru":"Яйцо","gross_g":null,"net_g":"53","quantity_text":"53 г","source_form_note":null,"optional":false},{"position":2,"name_ru":"Молоко","gross_g":null,"net_g":"23","quantity_text":"23 г","source_form_note":null,"optional":false},{"position":3,"name_ru":"Масло сливочное","gross_g":null,"net_g":"3.3","quantity_text":"3.3 г","source_form_note":null,"optional":false},{"position":4,"name_ru":"Соль поваренная йодированная","gross_g":null,"net_g":"0.2","quantity_text":"0.2 г","source_form_note":null,"optional":false}],"declared_nutrients":[
+        {"nutrient_code":"PROTEIN_G","value":"7.4","unit":"g","source_label":"Белки"},{"nutrient_code":"FAT_G","value":"8.5","unit":"g","source_label":"Жиры"},{"nutrient_code":"CARBOHYDRATE_G","value":"1.5","unit":"g","source_label":"Углеводы"},{"nutrient_code":"ENERGY_KCAL","value":"112","unit":"kcal","source_label":"Калорийность"},{"nutrient_code":"CALCIUM_MG","value":"58","unit":"mg","source_label":"Ca"},{"nutrient_code":"MAGNESIUM_MG","value":"9.6","unit":"mg","source_label":"Mg"},{"nutrient_code":"PHOSPHORUS_MG","value":"123.2","unit":"mg","source_label":"P"},{"nutrient_code":"IRON_MG","value":"1.4","unit":"mg","source_label":"Fe"}] }]
+    },
+    {
+      "source_card_code": "СЫРНИКИ-100+25",
+      "name_ru": "Сырники с повидлом",
+      "category_ru": "Блюда из творога",
+      "source_recipe_basis": "Сборник рецептур блюд и кулинарных изделий 1996; технологическая карта",
+      "technology_text_ru": null,
+      "raw_card_text": "Сырники с повидлом. Состав: творог, пшеничная мука, яйцо, сахар, сливочное масло, повидло. Выход варианта: 100 г сырников + 25 г повидла. Б 18.8 г; Ж 12.8 г; У 34.2 г; 323 ккал; Ca 154.3 мг; Mg 24.47 мг; Fe 0.91 мг. Массы отдельных ингредиентов в принятом bootstrap-источнике не зафиксированы и не выдумываются.",
+      "raw_card_sha256": "0b8f339cf84404856d051eb8c55189c926c244c93cf162dd930094ac1b4f2a8b",
+      "capture_status": "PARTIAL",
+      "variants": [{"variant_code":"OUTPUT_125G","label_ru":"100 г сырников + 25 г повидла","position":1,"output_g":"125","output_text":"100 г сырников + 25 г повидла","ingredients":[],"declared_nutrients":[
+        {"nutrient_code":"PROTEIN_G","value":"18.8","unit":"g","source_label":"Белки"},{"nutrient_code":"FAT_G","value":"12.8","unit":"g","source_label":"Жиры"},{"nutrient_code":"CARBOHYDRATE_G","value":"34.2","unit":"g","source_label":"Углеводы"},{"nutrient_code":"ENERGY_KCAL","value":"323","unit":"kcal","source_label":"Калорийность"},{"nutrient_code":"CALCIUM_MG","value":"154.3","unit":"mg","source_label":"Ca"},{"nutrient_code":"MAGNESIUM_MG","value":"24.47","unit":"mg","source_label":"Mg"},{"nutrient_code":"IRON_MG","value":"0.91","unit":"mg","source_label":"Fe"}] }]
+    }
+  ]
+}

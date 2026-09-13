@@ -1475,3 +1475,69 @@ into exact accepted main, not merged. Evidence commit:
 All 28 intended files were reviewed and staged; unrelated `.DS_Store` excluded.
 `git diff --check` and `git diff --cached --check` — PASS before commit.
 R4 research evidence READY FOR REVIEW; R4 result and Assembly A BLOCKED.
+
+
+## PR36 final provenance/idempotency corrections
+
+2026-09-13. Review `5190228147`, existing PR36 branch
+`codex/ru-normative-recipe-corpus`; accepted main
+`7388d19677cffbf5cd6cb192eabc0b93cad870f7`; prior head
+`874879db6467eaebd045b853a1727fde539d1503`.
+
+Bundle-provided card hashes are now required and passed unchanged to domain
+validation. Missing/stale hashes fail. Existing document identity now compares
+all persisted immutable document/card/child facts before returning idempotent 0;
+conflicting facts raise `CorpusImportConflictError` before any write. No update
+semantics, schema or shared persistence/UoW changes.
+[Canonical comparison contract](../docs/family-food/ru-normative-recipe-corpus.md).
+
+New verification on the correction runtime (with `AI_ENABLED=false`):
+
+```bash
+/Users/volkilli/Projects/family-food-os/backend/.venv/bin/python -m pytest -q \
+  backend/app/tests/test_recipe_source_corpus.py \
+  backend/app/tests/persistence/test_recipe_source_corpus_persistence.py \
+  backend/app/tests/test_food_composition_migration.py \
+  backend/app/tests/test_migration_lineage.py \
+  backend/app/tests/test_migration_runner_rebuild.py \
+  backend/app/tests/persistence/test_migration_coexistence.py --tb=short
+```
+
+Result: **105 passed in 11.59s**. Includes exact bootstrap/frozen repeats,
+34 parameterized metadata/card/structured-child conflict cases, late frozen-card
+conflict, unchanged complete DB dumps, and zero additional SQLite changes even
+when the caller catches the conflict and commits the transaction. Decimal values,
+equivalent timestamp offsets and reordered unordered collections repeat correctly.
+Fresh/upgrade/lineage/migration-coexistence checks PASS.
+
+Ruff check and `ruff format --check` on the four changed Python files: PASS
+(`All checks passed!`; `4 files already formatted`).
+Offline CLI smoke with the frozen `--bundle` and a disposable database: first
+import 214, repeat 0, same document ID; stale-hash and valid-rehash conflicting
+bundles each exit 1, with the complete DB dump unchanged after each failure.
+SQLite foreign keys/integrity PASS; production `food_recipe_versions` remains 0;
+migration head `0030_recipe_source_corpus`.
+
+Initial focused run: 4 failed / 7 passed / 35 errors. Strict validation exposed
+six pre-existing stale hashes in `bootstrap.json`; all six were corrected to the
+existing UTF-8 raw texts, with no text/structured/document change. The new test
+also incorrectly indexed the set returned by `current_migrations`; corrected.
+Second run: 1 failed / 45 passed due to treating pooled SQLite `total_changes()`
+as transaction-local; the assertion now measures its delta. The final 105-test
+run above passes; no acceptance criterion was weakened.
+
+Frozen 214-card bundle is byte-identical to prior head, SHA-256
+`ee0aad55080ba09294625af57800172862a53293518f7869e1b974ed7e9ab0b7`.
+No production data/schema changes in this correction. Only the six bootstrap
+hash literals changed among source data files.
+
+Historical full backend + launcher regression and live 214-card acquisition:
+PASS at `5f95530472e83748b67dd9efa9fa4542aeb5c546`, GitHub Actions
+run `34744992334`, retained in
+[the original receipt](../data/curation/ru-normative-recipe-corpus/verification.json).
+Not rerun: this correction is confined to corpus domain/repository validation,
+with no shared runtime/persistence/startup changes or remaining regression concern.
+
+PR36: **READY FOR FINAL RE-REVIEW**, not merged. Assembly A BLOCKED; Assembly B
+and PR7+ NOT STARTED. Same-origin/redirect hardening remains follow-up.
+Stop after correction publication; no merge or next milestone authorization.

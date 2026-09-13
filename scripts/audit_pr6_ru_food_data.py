@@ -28,6 +28,7 @@ from app.services.food_composition import CompositionCalculator  # noqa: E402
 from audit_pr6_nutrient_vector_b import snapshot, readiness  # noqa: E402
 
 BASE = "d5b5ce3fdc4ec79de5454b3ed23b1d527772c0bc"
+ACCEPTED_HEAD = "4180297d47d68a0e0d9efbe7a7a27f3900c4f388"
 
 
 def seed_baseline(config):
@@ -218,7 +219,7 @@ def measure(config):
 
 def scope_audit():
     paths = subprocess.check_output(
-        ["git", "diff", "--name-only", BASE], cwd=ROOT, text=True
+        ["git", "diff", "--name-only", BASE, ACCEPTED_HEAD], cwd=ROOT, text=True
     ).splitlines()
     paths += subprocess.check_output(
         ["git", "ls-files", "--others", "--exclude-standard"], cwd=ROOT, text=True

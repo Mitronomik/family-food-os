@@ -1,29 +1,23 @@
 # Handoff
 
-Updated: `2026-09-12`.
+Updated: `2026-09-13`.
 
-R4-N50200 evidence review follows merged PR34 at exact accepted main
-`a375f005b09880cf6a63cb5c8b1e964a0f558cb7`.
-Branch: `codex/recipe-assembly-a-r4-n50200`.
-R1/R2/R3 COMPLETE AS BLOCKED RESEARCH and frozen byte-identically.
-Ready 2/3: R1-21 and R1-23; third candidate none.
+PR #35 is MERGED; accepted main is `7388d19677cffbf5cd6cb192eabc0b93cad870f7`.
+R1/R2/R3/R4 are COMPLETE AS BLOCKED RESEARCH. Assembly A remains BLOCKED at 2/3 individually ready families (R1-21, R1-23); family_count, optional_role and verified_substitution remain open. Assembly B and PR7+ are NOT STARTED.
 
-[Read R4 evidence](../data/curation/recipe-assembly-a-r4-n50200/README.md)
-and [derived decision](../data/curation/recipe-assembly-a-r4-n50200/final-decision.json).
-R4 = BLOCKED. Optional garnish semantics pass, but complete substitutions and
-all exact kitchen branches remain unverified. Five mandatory input form/market
-issues and the shared published process mass conflict prevent data-only recovery.
-Generic onion is a proposed new colour-unspecified identity; never select yellow
-or map 90% turkey to 93%. No production promotion is authorized.
+Current bounded operation is [PR #36](https://github.com/Mitronomik/family-food-os/pull/36) on `codex/ru-normative-recipe-corpus`.
+Verified runtime/acquisition head: `5f95530472e83748b67dd9efa9fa4542aeb5c546`.
+It adds the pre-publication Russian normative recipe source corpus and migration `0030_recipe_source_corpus`; future RecipeTemplate migration is `0031_recipe_template_catalogue`.
 
-Use `backend/.venv/bin/python` for the disposable accepted replay; root `.venv`
-has no SQLAlchemy. `gh` has a 401 authentication failure; GitHub connector works.
-Local `.DS_Store` is unrelated user work; preserve and do not stage it.
+Historical verification on the synchronized runtime/acquisition head (not a new correction run): focused tests PASS; Ruff PASS; full backend + launcher regression PASS; live acquisition PASS at exactly 214/214 section-scoped cards; exact repeat import inserted 0; DB invariants PASS; mirror navigation/footer/scripts are excluded from all 214 raw card bodies. The cleaned durable bundle is `data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json` with SHA-256 recorded in `data/curation/ru-normative-recipe-corpus/verification.json`.
 
-Delivery: [PR #35](https://github.com/Mitronomik/family-food-os/pull/35), OPEN,
-not merged; evidence commit `678d8d0e4c3d5f67ccf6645e2f9f95a0719c01f2`.
-Staged scope: 28 intended files; unrelated `.DS_Store` excluded.
-Both `git diff --check` and `git diff --cached --check` passed before commit.
+PR #36 remains pre-publication only: no FoodIngredient/Nutrition/Composition authority changes, no RecipeVersion/RecipeTemplate publication, no Planner/MealPlan/Shopping/Prep/API/UI, no Assembly B or PR7 start.
 
-Next: review this research PR, then stop. No self-merge or automatic production
-operation. Assembly A BLOCKED; B / PR7+ NOT STARTED; migration 0029.
+Review `5190228147` corrections are complete and READY FOR FINAL RE-REVIEW on the same PR36 branch, based on prior head `874879db6467eaebd045b853a1727fde539d1503`.
+New evidence: 105 focused tests PASS with `AI_ENABLED=false`, Ruff check/format PASS, offline CLI imports 214 then 0 under the same document ID. Stale-hash and valid-rehash conflicting bundles both fail; complete DB dumps remain unchanged. Migration remains 0030 and production recipe versions remain unchanged (0 in the disposable replay).
+The six-card bootstrap had six stale hashes hidden by the old reader; only those hash literals were corrected. The frozen 214-card bundle remains byte-identical at `ee0aad55080ba09294625af57800172862a53293518f7869e1b974ed7e9ab0b7`.
+[Exact correction verification and initial failures](progress.md#pr36-final-provenanceidempotency-corrections).
+Full regression was not rerun: shared runtime/persistence/startup infrastructure is unchanged. Keep the previous successful run as historical evidence only.
+
+Worktree: `/private/tmp/ff-pr36-final`; Python runtime: `/Users/volkilli/Projects/family-food-os/backend/.venv/bin/python`. The primary checkout and unrelated `.DS_Store` were preserved.
+Next: final human re-review of PR36. Do not self-merge or start the next milestone. Same-origin/redirect hardening remains a separate follow-up.
