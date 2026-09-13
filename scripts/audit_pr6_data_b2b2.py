@@ -12,6 +12,7 @@ from uuid import UUID
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "backend"), str(ROOT / "scripts")]
+from app.db import migrations  # noqa: E402
 from app.db.config import DatabaseConfig  # noqa: E402
 from app.seed.b2b2 import PACKAGE, OPERATION, upgrade_b2b2  # noqa: E402
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine  # noqa: E402
@@ -22,8 +23,20 @@ from audit_pr6_ru_food_data import seed_baseline, seed_ru_food_data, head  # noq
 
 
 def baseline(config):
-    seed_baseline(config)
-    seed_ru_food_data(config)
+    # This is a frozen PR29 replay. Later migrations must not change the
+    # historical implementation-evidence receipt being verified here.
+    original = migrations.MIGRATION_MODULES
+    cutoff = next(
+        index
+        for index, module_name in enumerate(original)
+        if module_name.endswith("0029_food_composition_core")
+    )
+    try:
+        migrations.MIGRATION_MODULES = original[: cutoff + 1]
+        seed_baseline(config)
+        seed_ru_food_data(config)
+    finally:
+        migrations.MIGRATION_MODULES = original
 
 
 def replay(config):

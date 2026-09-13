@@ -86,7 +86,7 @@ def test_actual_production_audit_preservation_full_readiness_and_two_runs(tmp_pa
     assert (
         result["migration_head_before"]
         == result["migration_head_after"]
-        == "0029_food_composition_core"
+        == result["registered_migration_head"]
     )
     assert (
         result["readiness_after"]["warning_occurrences"][

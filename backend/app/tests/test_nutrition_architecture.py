@@ -63,13 +63,14 @@ def test_nutrition_has_no_driver_ai_or_future_context_dependency():
 
 
 def test_b1_and_b2a_add_only_authorized_schema_and_no_api():
-    assert expected_migration_ids()[-4:] == [
+    migration_ids = expected_migration_ids()
+    start = migration_ids.index("0026_nutrition_measure_evidence")
+    assert migration_ids[start : start + 4] == [
         "0026_nutrition_measure_evidence",
         "0027_recipe_same_source_revisions",
         "0028_normalized_nutrient_vector",
         "0029_food_composition_core",
     ]
-    assert len(expected_migration_ids()) == 29
     assert len(list((APP / "migrations" / "versions").glob("0026*"))) == 1
     assert not list((APP / "api").glob("*nutrition*"))
     assert not list((APP / "schemas").glob("*nutrition*"))

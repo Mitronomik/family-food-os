@@ -85,9 +85,10 @@ def test_registry_matches_all_approved_definitions(database, bundle):
             "SELECT bundle_json FROM nutrient_registry_snapshots"
         ).fetchone()[0]
         assert json.loads(stored) == bundle
-    assert migrations.expected_migration_ids()[-2:] == [
+    assert migrations.expected_migration_ids()[-3:] == [
         MIGRATION.MIGRATION_ID,
         "0029_food_composition_core",
+        "0030_recipe_source_corpus",
     ]
 
 
@@ -392,6 +393,7 @@ def test_unknown_deployment_profile_aborts_upgrade_without_half_schema(
     assert migrations.pending_migration_ids(config) == [
         MIGRATION.MIGRATION_ID,
         "0029_food_composition_core",
+        "0030_recipe_source_corpus",
     ]
 
 
@@ -419,6 +421,7 @@ def test_mid_backfill_failure_rolls_back_and_resume_is_deterministic(
     assert migrations.apply_migrations(config) == [
         MIGRATION.MIGRATION_ID,
         "0029_food_composition_core",
+        "0030_recipe_source_corpus",
     ]
     after = snapshot(config)
     assert all(after[name] == rows for name, rows in before.items())
