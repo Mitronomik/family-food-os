@@ -1,0 +1,74 @@
+name: PR36 migration compatibility patch v4
+
+on:
+  push:
+    branches:
+      - codex/ru-normative-recipe-corpus
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/ru-normative-recipe-corpus
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Apply patch
+        run: python scripts/pr36_migration_compat_patch.py
+      - name: Install test tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e './backend[test]'
+      - name: Compile patched Python
+        run: python -m compileall -q backend/app/db backend/app/tests scripts
+      - name: Run targeted regression
+        id: targeted
+        continue-on-error: true
+        env:
+          PYTHONPATH: backend:.
+          AI_ENABLED: "false"
+        run: |
+          set -o pipefail
+          python -m pytest -q \
+            backend/app/tests/persistence/test_nutrition_read_scope.py \
+            backend/app/tests/test_artifact_audit_operations_migration.py \
+            backend/app/tests/test_database_foundation.py \
+            backend/app/tests/test_family_food_identity_migration.py \
+            backend/app/tests/test_food_composition_migration.py \
+            backend/app/tests/test_household_migration.py \
+            backend/app/tests/test_migration_lineage.py \
+            backend/app/tests/test_migration_runner_rebuild.py \
+            backend/app/tests/test_nutrient_vector.py \
+            backend/app/tests/test_nutrition_architecture.py \
+            backend/app/tests/test_pr6_data_b2b2.py \
+            backend/app/tests/test_ru_food_data.py \
+            2>&1 | tee /tmp/pr36-targeted.log
+      - name: Upload targeted regression log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr36-targeted-regression
+          path: /tmp/pr36-targeted.log
+          retention-days: 7
+      - name: Fail if targeted regression failed
+        if: steps.targeted.outcome != 'success'
+        run: exit 1
+      - name: Commit green compatibility fixes
+        if: steps.targeted.outcome == 'success'
+        run: |
+          set -euo pipefail
+          git rm .github/workflows/pr36-migration-compat-v4.yml scripts/pr36_migration_compat_patch.py
+          git diff --check
+          git add backend/app scripts
+          git diff --cached --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'fix: align migration compatibility contracts with source corpus'
+          git push origin HEAD:codex/ru-normative-recipe-corpus
