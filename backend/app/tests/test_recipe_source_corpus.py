@@ -11,7 +11,7 @@ from app.services.recipe_source_corpus_import import (
     validate_manifest,
 )
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 MANIFEST = ROOT / "data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19_manifest.json"
 
 
