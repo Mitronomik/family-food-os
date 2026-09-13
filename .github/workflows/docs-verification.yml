@@ -1,0 +1,121 @@
+name: Docs verification
+
+on:
+  pull_request:
+    paths:
+      - '**/*.md'
+      - 'state/**'
+      - 'AGENTS.md'
+      - '.github/workflows/docs-verification.yml'
+  push:
+    branches:
+      - 'docs/product-security-integration-final'
+
+permissions:
+  contents: read
+
+jobs:
+  docs-verification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - name: Resolve comparison base
+        id: base
+        shell: bash
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          git fetch origin main --no-tags
+          if [[ -n "${PR_BASE_SHA}" ]]; then
+            base="${PR_BASE_SHA}"
+          else
+            base="origin/main"
+          fi
+          echo "base=${base}" >> "${GITHUB_OUTPUT}"
+          echo "Verification base: ${base}"
+          echo "Verification head: $(git rev-parse HEAD)"
+
+      - name: Diff whitespace gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='${{ steps.base.outputs.base }}'
+          git diff --check "${base}"...HEAD
+
+      - name: Staged scope and whitespace audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='${{ steps.base.outputs.base }}'
+          mapfile -t changed < <(git diff --name-only "${base}"...HEAD)
+          printf 'Changed paths:\n'
+          printf '  %s\n' "${changed[@]}"
+          if (( ${#changed[@]} == 0 )); then
+            echo 'No changed paths found.' >&2
+            exit 1
+          fi
+          git reset --mixed HEAD
+          git add -- "${changed[@]}"
+          git diff --cached --check
+          printf 'Staged paths:\n'
+          git diff --cached --name-only | sed 's/^/  /'
+          git reset --mixed HEAD
+
+      - name: Repository-relative Markdown link gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='${{ steps.base.outputs.base }}'
+          python - "${base}" <<'PY'
+          import os
+          import re
+          import subprocess
+          import sys
+          from pathlib import Path
+          from urllib.parse import unquote
+
+          base = sys.argv[1]
+          changed = subprocess.check_output(
+              ['git', 'diff', '--name-only', f'{base}...HEAD'], text=True
+          ).splitlines()
+          md_files = [Path(p) for p in changed if p.endswith('.md') and Path(p).exists()]
+          link_re = re.compile(r'(?<!!)\[[^\]]+\]\(([^)]+)\)')
+          failures = []
+          for path in md_files:
+              text = path.read_text(encoding='utf-8')
+              for raw in link_re.findall(text):
+                  target = raw.strip()
+                  if target.startswith('<') and target.endswith('>'):
+                      target = target[1:-1].strip()
+                  if not target or target.startswith(('#', 'http://', 'https://', 'mailto:')):
+                      continue
+                  if ' "' in target:
+                      target = target.split(' "', 1)[0]
+                  target = unquote(target.split('#', 1)[0].split('?', 1)[0])
+                  if not target:
+                      continue
+                  resolved = (Path('.') / target.lstrip('/')) if target.startswith('/') else (path.parent / target)
+                  if not resolved.exists():
+                      failures.append(f'{path}: {raw} -> {resolved}')
+          if failures:
+              print('Broken repository-relative Markdown links:', file=sys.stderr)
+              for item in failures:
+                  print(f'  {item}', file=sys.stderr)
+              raise SystemExit(1)
+          print(f'Checked repository-relative links in {len(md_files)} changed Markdown files: PASS')
+          PY
+
+      - name: Verification summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'git diff --check: PASS'
+          echo 'git diff --cached --check: PASS'
+          echo 'staged scope audit: PASS'
+          echo 'repository-relative Markdown links: PASS'
+          echo "tested revision: $(git rev-parse HEAD)"
