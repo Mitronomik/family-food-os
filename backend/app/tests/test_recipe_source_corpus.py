@@ -68,9 +68,10 @@ window.yaContextCb.push(() => {});
     assert card["raw_card_text"].endswith("0,5")
     assert "←" not in card["raw_card_text"]
     assert "Все права защищены" not in card["raw_card_text"]
-    assert card["raw_card_sha256"] == sha256(
-        card["raw_card_text"].encode("utf-8")
-    ).hexdigest()
+    assert (
+        card["raw_card_sha256"]
+        == sha256(card["raw_card_text"].encode("utf-8")).hexdigest()
+    )
 
 
 def test_single_sudact_card_fails_closed_without_page_boundary():
