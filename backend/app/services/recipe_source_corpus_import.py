@@ -175,7 +175,11 @@ def _trim_sudact_page_chrome(card: dict[str, Any]) -> dict[str, Any]:
     """Remove mirror navigation/footer text while retaining the normative card body."""
     lines = card["raw_card_text"].splitlines()
     stop = next(
-        (index for index, line in enumerate(lines) if line.startswith(_SUDACT_NAV_PREFIX)),
+        (
+            index
+            for index, line in enumerate(lines)
+            if line.startswith(_SUDACT_NAV_PREFIX)
+        ),
         None,
     )
     if stop is None:
