@@ -37,7 +37,7 @@ jobs:
         run: |
           python -m pytest \
             backend/app/tests/test_recipe_source_corpus.py \
-            backend/app/tests/persistence/test_recipe_source_corpus.py
+            backend/app/tests/persistence/test_recipe_source_corpus_persistence.py
 
       - name: Ruff
         run: |
@@ -47,7 +47,7 @@ jobs:
             backend/app/persistence/sqlalchemy_core/recipe_source_corpus_repository.py \
             backend/app/persistence/sqlalchemy_core/recipe_source_corpus_tables.py \
             backend/app/tests/test_recipe_source_corpus.py \
-            backend/app/tests/persistence/test_recipe_source_corpus.py \
+            backend/app/tests/persistence/test_recipe_source_corpus_persistence.py \
             scripts/import_ru_normative_recipe_corpus.py
           ruff format --check \
             backend/app/domain/recipe_source_corpus.py \
@@ -55,7 +55,7 @@ jobs:
             backend/app/persistence/sqlalchemy_core/recipe_source_corpus_repository.py \
             backend/app/persistence/sqlalchemy_core/recipe_source_corpus_tables.py \
             backend/app/tests/test_recipe_source_corpus.py \
-            backend/app/tests/persistence/test_recipe_source_corpus.py \
+            backend/app/tests/persistence/test_recipe_source_corpus_persistence.py \
             scripts/import_ru_normative_recipe_corpus.py
 
       - name: Acquire and import all 214 cards
