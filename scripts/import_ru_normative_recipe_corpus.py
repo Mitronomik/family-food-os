@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Import Russian normative recipe source snapshots into the source corpus DB.
 
 The command never publishes RecipeVersion/RecipeTemplate rows. It preserves raw
@@ -8,13 +7,13 @@ card text and optional structured source facts for later deterministic review.
 from __future__ import annotations
 
 import argparse
-from datetime import datetime, timezone
-from hashlib import sha256
 import json
-from pathlib import Path
 import subprocess
 import sys
 import time
+from datetime import datetime, timezone
+from hashlib import sha256
+from pathlib import Path
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,8 +36,7 @@ from app.services.recipe_source_corpus_import import (
 )
 
 DEFAULT_MANIFEST = (
-    ROOT
-    / "data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19_manifest.json"
+    ROOT / "data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19_manifest.json"
 )
 
 
@@ -55,7 +53,7 @@ def _download_url(url: str, *, attempts: int = 3) -> bytes:
                     "Accept": "text/html,application/pdf;q=0.9,*/*;q=0.8",
                 },
             )
-            with urlopen(request, timeout=60) as response:  # noqa: S310 - curator URL
+            with urlopen(request, timeout=60) as response:
                 return response.read()
         except Exception as exc:  # noqa: BLE001 - preserve final acquisition failure
             error = exc
@@ -132,7 +130,8 @@ def _bundle_from_sudact_manifest(path: Path) -> dict:
         unexpected = sorted(set(discovered) - expected_codes)
         if missing or unexpected:
             raise ValueError(
-                f"Sudact index drift for {section}; missing={missing}, unexpected={unexpected}"
+                f"Sudact index drift for {section}; missing={missing}, "
+                f"unexpected={unexpected}"
             )
         if len(discovered) != appendix["expected_card_count"]:
             raise ValueError(
@@ -165,7 +164,8 @@ def _bundle_from_sudact_manifest(path: Path) -> dict:
 
     if len(cards) != manifest["expected_total_cards"]:
         raise ValueError(
-            f"Sudact corpus count drift: {len(cards)} != {manifest['expected_total_cards']}"
+            f"Sudact corpus count drift: {len(cards)} != "
+            f"{manifest['expected_total_cards']}"
         )
     root_url = manifest["appendices"][0]["url"].split("/prilozhenie-5/")[0] + "/"
     canonical_text = "\n\u241e\n".join(text_snapshot)
