@@ -12,6 +12,7 @@ now incomplete or conflicts with approved decisions.
 Read together with:
 
 - `architecture.md`;
+- `architecture-addendum-2026-09-13.md`;
 - `master-roadmap.md`;
 - `master-roadmap-addendum-2026-09-13.md`;
 - `product-strategy.md`;
@@ -69,6 +70,21 @@ patterns.
 Examples include dinner-only, breakfast-only, breakfast+dinner, 3 meals, 5 or 6
 planned eating opportunities.
 
+The already implemented Recipe Catalogue contract is more specific and remains
+unchanged: `RecipeVersion.meal_type_code` currently classifies recipe/component
+kind with values such as `breakfast`, `main`, `side`, `salad`, `sandwich` and
+`other`. This field is **not** the member schedule `MealRole`.
+
+Canonical invariant:
+
+```text
+RecipeVersion.meal_type_code != MealRole
+```
+
+PR7/PR8 must bridge these concepts through deterministic suitability/mapping
+logic rather than rewriting the accepted Recipe Catalogue enum. See
+`architecture-addendum-2026-09-13.md`.
+
 ## 5. Planner refinement
 
 The Planner receives accepted member meal patterns and compiles them into a
@@ -103,6 +119,18 @@ EAT_OUT
 ```
 
 The owning implementation PR chooses exact names/storage.
+
+The source kind is explicit. A RecipeVersion/RecipeAssembly reference is
+required only for source types that actually use one; non-recipe source types
+must not create synthetic/provenance-free recipes merely to satisfy a universal
+foreign key.
+
+Shopping ingredient demand is likewise source-aware: leftovers/prepared supply
+must not be counted as a fresh recipe purchase a second time, while
+`ORDER_OUT`/`EAT_OUT` do not create grocery ingredient demand unless a later
+explicit contract says otherwise.
+
+See `architecture-addendum-2026-09-13.md` for the canonical compatibility rules.
 
 ## 7. Meal-pattern recommendation
 
