@@ -35,9 +35,10 @@ def test_split_normative_cards_preserves_raw_blocks_and_appendix_context():
     assert cards[0]["name_ru"] == "Помидоры свежие"
     assert cards[0]["technology_text_ru"] == "Вымыть, нарезать на порции."
     for card in cards:
-        assert card["raw_card_sha256"] == sha256(
-            card["raw_card_text"].encode()
-        ).hexdigest()
+        assert (
+            card["raw_card_sha256"]
+            == sha256(card["raw_card_text"].encode()).hexdigest()
+        )
 
 
 def test_sudact_link_parser_is_appendix_scoped_and_normalizes_suffixes():
