@@ -32,7 +32,11 @@ Goal:
 2. determine whether the optional rice can be bound to a truthful cooked-garnish producer/transformation without hidden raw/cooked equivalence or unsupported institutional-batch scaling;
 3. seek evidence sufficient to decide complete carrot-vs-turnip substitution applicability under the already accepted Assembly-A gate.
 
-Current delivery branch: `research/v22-13-267-enable-a`.
+Current delivery:
+
+- [PR #41](https://github.com/Mitronomik/family-food-os/pull/41) — `research: evaluate USSR82-267 enablement blockers` — OPEN / HUMAN REVIEW.
+- Branch: `research/v22-13-267-enable-a`.
+- Base: accepted `main` after PR #40, `3144997f0464a741eb429325db6497887309a32b`.
 
 Scope is research/data enablement + state only. No runtime/domain code, schema/migration, production seed, FoodIngredient mutation, Nutrition/Composition promotion, RecipeVersion/RecipeTemplate/RecipeAssembly publication or accepted prior evidence package is changed.
 
@@ -103,7 +107,7 @@ No accepted R1/R2/R3/R4/Candidate-A status or historical evidence package is rew
 
 ## Next-step rule
 
-Current next action is proportional docs/data verification and human review of the `V22-13-267-ENABLE-A` delivery. Merge requires separate explicit post-review authorization.
+Current next action is human review of PR #41 after proportional docs/data verification. Merge requires separate explicit post-review authorization.
 
 If accepted, the remaining work has split into two bounded problems, neither authorized automatically:
 
