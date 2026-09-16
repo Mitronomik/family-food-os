@@ -1,0 +1,97 @@
+{
+  "operation": "V22-13-267-ENABLE-A",
+  "reviewed": "2026-09-16",
+  "accepted_base": "3144997f0464a741eb429325db6497887309a32b",
+  "candidate": "USSR82-267",
+  "scope": "column II; source-authorized water branch; carrot fixed branch; turnip alternate branch; optional rice semantics preserved",
+  "external_checkpoint_sha256": "a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97",
+  "decisions": [
+    {
+      "source_external_id": "ING-0024",
+      "source_name": "Крупа рисовая",
+      "candidate_canonical_code": "RICE_GROATS_POLISHED",
+      "identity_decision": "DISTINCT_IDENTITY_SUPPORTED",
+      "reuse_existing_foodingredient": false,
+      "reason": "ГОСТ 6292-93 defines rice groats as a food category; ГОСТ Р 702.1.029-2022 explicitly covers polished rice produced from long-, medium- and short-grain rice. Current RICE_WHITE is long-grain and is therefore too narrow for the unqualified source term.",
+      "production_profile_decision": "BLOCKED",
+      "production_profile_reason": "The v22.13 legacy reference profile is retained as evidence but is not accepted FamilyFoodOS Nutrition authority. Current market labels differ by grain type, so one observed SKU cannot stand in for a generic composition profile.",
+      "v22_reference_profile_evidence_only": {
+        "protein_g_100g": "7.0",
+        "fat_g_100g": "0.6",
+        "carbs_g_100g": "77.3",
+        "kcal_100g": "323",
+        "calcium_mg_100g": "24",
+        "magnesium_mg_100g": "21",
+        "phosphorus_mg_100g": "97",
+        "iron_mg_100g": "1.8",
+        "vitamin_b1_mg_100g": "0.08",
+        "vitamin_b2_mg_100g": "0.04",
+        "vitamin_c_mg_100g": "0"
+      },
+      "ru_market_decision": "CATEGORY_MASS_MARKET_SUPPORTED",
+      "default_pool_eligible": "NO",
+      "blocker_after_operation": "ACCEPTED_FULL_NUTRIENT_PROFILE_PROVENANCE"
+    },
+    {
+      "source_external_id": "ING-0034",
+      "source_name": "Молоко пастеризованное 3,2%",
+      "candidate_canonical_code": "MILK_PASTEURIZED_3_2",
+      "identity_decision": "DISTINCT_IDENTITY_SUPPORTED",
+      "reuse_existing_foodingredient": false,
+      "reason": "ГОСТ 31450-2013 explicitly recognizes drinking milk at 3.2% fat and distinguishes pasteurized processing. Current 3.25% and 2% FoodIngredients are not exact identity matches.",
+      "production_profile_decision": "BLOCKED",
+      "production_profile_reason": "Current Russian product labels and standards support the identity and macros, but this operation does not establish an accepted full nutrient-vector authority with the required provenance. The external v22.13 micronutrient profile is not promoted.",
+      "v22_reference_profile_evidence_only": {
+        "protein_g_100g": "2.8",
+        "fat_g_100g": "3.2",
+        "carbs_g_100g": "4.7",
+        "kcal_100g": "58",
+        "calcium_mg_100g": "121",
+        "magnesium_mg_100g": "14",
+        "phosphorus_mg_100g": "91",
+        "iron_mg_100g": "0.1",
+        "vitamin_b1_mg_100g": "0.03",
+        "vitamin_b2_mg_100g": "0.13",
+        "vitamin_c_mg_100g": "1"
+      },
+      "observed_current_label_example": {
+        "protein_g_100g": "3",
+        "fat_g_100g": "3.2",
+        "carbs_g_100g": "4.7",
+        "kcal_100g": "60"
+      },
+      "ru_market_decision": "RU_MASS_MARKET_SUPPORTED",
+      "default_pool_eligible": "NO",
+      "blocker_after_operation": "ACCEPTED_FULL_NUTRIENT_PROFILE_PROVENANCE"
+    },
+    {
+      "source_external_id": "ING-0041",
+      "source_name": "Петрушка (корень)",
+      "candidate_canonical_code": "PARSLEY_ROOT_RAW",
+      "identity_decision": "DISTINCT_IDENTITY_SUPPORTED",
+      "reuse_existing_foodingredient": false,
+      "reason": "The edible root is a different food form from current fresh parsley leaf; current Russian suppliers list parsley root separately.",
+      "production_profile_decision": "BLOCKED",
+      "production_profile_reason": "The v22.13 legacy reference profile is evidence only. This operation does not establish a primary/accepted full nutrient profile for the root form.",
+      "v22_reference_profile_evidence_only": {
+        "protein_g_100g": "1.5",
+        "fat_g_100g": "0",
+        "carbs_g_100g": "11",
+        "kcal_100g": "47",
+        "calcium_mg_100g": "86",
+        "magnesium_mg_100g": "41",
+        "phosphorus_mg_100g": "82",
+        "iron_mg_100g": "1.8",
+        "vitamin_b1_mg_100g": "0.08",
+        "vitamin_b2_mg_100g": "0.10",
+        "vitamin_c_mg_100g": "35"
+      },
+      "ru_market_decision": "RU_AVAILABLE_SPECIALTY_SUPPORTED",
+      "default_pool_eligible": "NO",
+      "market_limit": "Bounded search found SPB/LO B2B and e-commerce availability, not accepted ordinary mass-market chain evidence.",
+      "blocker_after_operation": "ACCEPTED_FULL_NUTRIENT_PROFILE_AND_DEFAULT_AVAILABILITY"
+    }
+  ],
+  "production_foodingredient_mutation": "NO",
+  "nutrition_profile_promoted": "NO"
+}

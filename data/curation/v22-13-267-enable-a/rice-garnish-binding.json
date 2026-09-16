@@ -1,0 +1,53 @@
+{
+  "operation": "V22-13-267-ENABLE-A",
+  "candidate": "USSR82-267",
+  "source_fact": {
+    "recipe_267_rice_input_net_g_column_II": "20",
+    "role": "OPTIONAL_GARNISH_INPUT",
+    "source_semantics": "Use crumbly rice as garnish; soup may be prepared without rice."
+  },
+  "producer_candidates": [
+    {
+      "source_recipe_id": "USSR82-747",
+      "name": "Рис отварной",
+      "source_quantities": {
+        "rice_groats_net_g_I": "352",
+        "rice_groats_net_g_II_III": "360",
+        "fat_net_g_I": "60",
+        "fat_net_g_II_III": "45",
+        "output_g": "1000"
+      },
+      "process_observation": "Rice is boiled in salted water, drained/rinsed, then mixed with fat and heated.",
+      "binding_decision": "NOT_ACCEPTED"
+    },
+    {
+      "source_recipe_id": "USSR82-748",
+      "name": "Рис припущенный",
+      "source_quantities": {
+        "rice_groats_net_g_I": "340",
+        "rice_groats_net_g_II": "345",
+        "rice_groats_net_g_III": "350",
+        "broth_or_water_g_I": "715",
+        "broth_or_water_g_II": "725",
+        "broth_or_water_g_III": "735",
+        "fat_g_I": "60",
+        "fat_g_II": "45",
+        "fat_g_III": "35",
+        "output_g": "1000"
+      },
+      "process_observation": "Half of the recipe fat goes into the liquid before rice; the rest is added to cooked rice.",
+      "binding_decision": "NOT_ACCEPTED"
+    }
+  ],
+  "decision": "BINDING_BLOCKED",
+  "reasons": [
+    "Recipe 267 gives 20 g raw rice as a garnish input but does not identify a numbered garnish producer or an exact cooked garnish output mass.",
+    "Recipes 747/748 are published batch recipes with their own added fat (and salt/liquid process). Binding either one without an explicit source link can double-count or reallocate the 20 g butter already present in recipe 267.",
+    "The accepted Assembly-A policy does not authorize proportional scaling from a published institutional batch to a 20 g raw-rice child producer merely because a ratio can be calculated.",
+    "Raw rice nutrition therefore cannot be re-labelled as cooked garnish nutrition."
+  ],
+  "allowed_future_shape": "A versioned producer/transformation binding may be introduced only after the exact child process, added-fat allocation, input/output mass state and applicable scaling authority are established.",
+  "optional_role_source_semantics": "ESTABLISHED",
+  "optional_role_production_gate": "OPEN",
+  "production_binding_published": "NO"
+}

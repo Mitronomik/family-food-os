@@ -1,0 +1,38 @@
+{
+  "operation": "V22-13-267-ENABLE-A",
+  "reviewed": "2026-09-16",
+  "records": [
+    {
+      "target": "RICE_GROATS_POLISHED",
+      "classification": "CATEGORY_MASS_MARKET_SUPPORTED",
+      "sources": [
+        "https://protect.gost.ru/gost/details/73a682a9-d6a1-4bfe-a689-a85cd0a99664",
+        "https://protect.gost.ru/gost/details/0103de9d-59f9-4cdb-a2ec-a931f398ec24",
+        "https://lenta.com/product/ris-kruglozernyjj-shlifovannyjj-rossiya-800g-86146/",
+        "https://lenta.com/product/ris-dlinnozernyjj-shlifovannyjj-80g5-pak-rossiya-400g-373590/"
+      ],
+      "observation": "Russian standards and a current mass-market chain show polished rice across multiple grain types. This supports a generic category identity but also demonstrates why an unqualified source term must not be forced into current long-grain RICE_WHITE."
+    },
+    {
+      "target": "MILK_PASTEURIZED_3_2",
+      "classification": "RU_MASS_MARKET_SUPPORTED",
+      "sources": [
+        "https://base.garant.ru/70754088/",
+        "https://lenta.com/product/moloko-lenta-pasterizovannoe-32-pet-bez-zmzh-rossiya-900ml-671968/",
+        "https://rskrf.ru/goods/sitnikovskoe/"
+      ],
+      "observation": "3.2% pasteurized drinking milk is a standardized and current retail form. Market evidence is identity/availability evidence, not a complete nutrient-vector source."
+    },
+    {
+      "target": "PARSLEY_ROOT_RAW",
+      "classification": "RU_AVAILABLE_SPECIALTY_SUPPORTED",
+      "sources": [
+        "https://sofiiskayabaza.ru/zelen/zelen-dlya-konservatsiy",
+        "https://fruitonline.ru/vegetables/koren-petrushki-svezhij-1-kg.html"
+      ],
+      "observation": "Fresh parsley root is commercially available, including an SPB/LO B2B supplier. The bounded search does not establish ordinary mass-market-chain coverage, so default automatic eligibility is not granted."
+    }
+  ],
+  "no_live_stock_commitment": true,
+  "no_price_authority": true
+}

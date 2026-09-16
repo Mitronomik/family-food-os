@@ -1,0 +1,152 @@
+{
+  "operation": "V22-13-267-ENABLE-A",
+  "reviewed": "2026-09-16",
+  "accepted_base": "3144997f0464a741eb429325db6497887309a32b",
+  "sources": [
+    {
+      "id": "V22_13_CHECKPOINT",
+      "type": "USER_SUPPLIED_EXTERNAL_CHECKPOINT",
+      "sha256": "a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97",
+      "used_for": [
+        "ingredient external IDs",
+        "reference profiles as evidence only",
+        "recipe 267 row mapping"
+      ],
+      "production_authority": "NO"
+    },
+    {
+      "id": "GOST_6292_93",
+      "url": "https://protect.gost.ru/gost/details/73a682a9-d6a1-4bfe-a689-a85cd0a99664",
+      "issuer": "Росстандарт",
+      "original_sha256": null,
+      "used_for": [
+        "rice-groats category identity"
+      ],
+      "production_nutrition_authority": "NO"
+    },
+    {
+      "id": "GOST_R_702_1_029_2022",
+      "url": "https://protect.gost.ru/gost/details/0103de9d-59f9-4cdb-a2ec-a931f398ec24",
+      "issuer": "Росстандарт",
+      "original_sha256": null,
+      "used_for": [
+        "polished rice grain-type breadth"
+      ],
+      "production_nutrition_authority": "NO"
+    },
+    {
+      "id": "GOST_31450_2013",
+      "url": "https://base.garant.ru/70754088/",
+      "issuer": "Interstate standard, text publication",
+      "original_sha256": null,
+      "used_for": [
+        "3.2% pasteurized drinking-milk identity"
+      ],
+      "production_nutrition_authority": "NO"
+    },
+    {
+      "id": "LENTA_MILK_3_2",
+      "url": "https://lenta.com/product/moloko-lenta-pasterizovannoe-32-pet-bez-zmzh-rossiya-900ml-671968/",
+      "issuer": "Лента",
+      "original_sha256": null,
+      "used_for": [
+        "current exact-form retail evidence",
+        "label macros as observation"
+      ],
+      "production_nutrition_authority": "NO"
+    },
+    {
+      "id": "LENTA_RICE_ROUND",
+      "url": "https://lenta.com/product/ris-kruglozernyjj-shlifovannyjj-rossiya-800g-86146/",
+      "issuer": "Лента",
+      "original_sha256": null,
+      "used_for": [
+        "current polished round-grain rice evidence"
+      ],
+      "production_nutrition_authority": "NO"
+    },
+    {
+      "id": "LENTA_RICE_LONG",
+      "url": "https://lenta.com/product/ris-dlinnozernyjj-shlifovannyjj-80g5-pak-rossiya-400g-373590/",
+      "issuer": "Лента",
+      "original_sha256": null,
+      "used_for": [
+        "current polished long-grain rice evidence"
+      ],
+      "production_nutrition_authority": "NO"
+    },
+    {
+      "id": "SPB_PARSLEY_ROOT",
+      "url": "https://sofiiskayabaza.ru/zelen/zelen-dlya-konservatsiy",
+      "issuer": "Софийская база СПб",
+      "original_sha256": null,
+      "used_for": [
+        "SPB/LO parsley-root availability"
+      ],
+      "production_nutrition_authority": "NO"
+    },
+    {
+      "id": "FRUITONLINE_PARSLEY_ROOT",
+      "url": "https://fruitonline.ru/vegetables/koren-petrushki-svezhij-1-kg.html",
+      "issuer": "FruitOnline",
+      "original_sha256": null,
+      "used_for": [
+        "parsley-root commercial-form corroboration"
+      ],
+      "production_nutrition_authority": "NO"
+    },
+    {
+      "id": "USSR82_ORDER_310",
+      "url": "https://internet-law.ru/documents/dop_documents/1/sanpi_44121/0/prika.html",
+      "issuer": "secondary legal publication of USSR Ministry of Trade collection",
+      "original_sha256": null,
+      "used_for": [
+        "recipe 267 source facts",
+        "collection standardization context"
+      ],
+      "rights_scope": "FACTS_ONLY_RESEARCH"
+    },
+    {
+      "id": "USSR82_RICE_747",
+      "url": "https://interdoka.ru/kulinaria/1982/12_bluda_garniri/1_goriachie/1_krupi/1_4.html",
+      "issuer": "secondary transcription/mirror",
+      "original_sha256": null,
+      "used_for": [
+        "candidate cooked-rice producer facts"
+      ],
+      "rights_scope": "FACTS_ONLY_RESEARCH"
+    },
+    {
+      "id": "USSR82_RICE_748",
+      "url": "https://interdoka.ru/kulinaria/1982/12_bluda_garniri/1_goriachie/1_krupi/1_5.html",
+      "issuer": "secondary transcription/mirror",
+      "original_sha256": null,
+      "used_for": [
+        "candidate cooked-rice producer facts"
+      ],
+      "rights_scope": "FACTS_ONLY_RESEARCH"
+    },
+    {
+      "id": "USSR73_ORDER_1",
+      "url": "https://internet-law.ru/documents/dop_documents/67/metod_46134/0/prika.html",
+      "issuer": "secondary legal publication of USSR Ministry of Trade collection",
+      "original_sha256": null,
+      "used_for": [
+        "cross-edition carrot/turnip and optional-rice corroboration"
+      ],
+      "rights_scope": "FACTS_ONLY_RESEARCH"
+    },
+    {
+      "id": "ANFIMOVA_1987",
+      "url": "https://djvu.online/file/JLUK9asW6jXD4",
+      "issuer": "digital copy of professional culinary textbook",
+      "original_sha256": null,
+      "used_for": [
+        "culinary-family corroboration"
+      ],
+      "rights_scope": "FACTS_ONLY_RESEARCH"
+    }
+  ],
+  "rights_decision": "NEEDS_SEPARATE_PUBLICATION_REVIEW",
+  "no_source_assets_committed": true
+}
