@@ -24,7 +24,11 @@ Updated: `2026-09-16`.
 
 `V22-13-MAP-A` — map all 363 external v22.13 ingredient/reference identities against current FamilyFoodOS `FoodIngredient` truth and classify all 350 recipe candidates without promoting external Nutrition/Composition or publishing recipes/templates/assemblies.
 
-Delivery branch: `data/v22-13-map-a`.
+Current delivery:
+
+- [PR #39](https://github.com/Mitronomik/family-food-os/pull/39) — `data: map v22.13 identities and recipe candidates` — OPEN / VERIFICATION PENDING.
+- Branch: `data/v22-13-map-a`.
+- Base: accepted `main` after PR #38, `a852b169323cd4061c150107d7b75aebd67a9bc7`.
 
 Scope is research/data curation plus state only. No runtime/domain code, schema/migration, production seed, FoodIngredient mutation, Nutrition/Composition promotion, RecipeVersion/RecipeTemplate/RecipeAssembly publication or accepted PR #36 source-corpus row is changed.
 
@@ -84,7 +88,7 @@ No accepted R1/R2/R3/R4 status or historical evidence package is rewritten.
 
 ## Next-step rule
 
-Current next action is human review of the `V22-13-MAP-A` delivery and proportional docs/data verification. Merge requires separate explicit post-review authorization.
+Current next action is current-head proportional docs/data verification followed by human review of PR #39. Merge requires separate explicit post-review authorization.
 
 If this mapping is accepted, the proposed next bounded research operation is `V22-13-CANDIDATE-A`: take a small candidate set and attempt to close one Assembly-A evidence objective at a time (`family_count`, `optional_role`, `verified_substitution`). It is **not** authorized to start automatically.
 
