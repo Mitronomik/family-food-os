@@ -1,0 +1,70 @@
+{
+  "operation": "V22-13-CANDIDATE-A",
+  "source": "1982 collection approved by USSR Ministry of Trade Order N 310",
+  "recipes": {
+    "USSR82-267": {
+      "variant_II": {
+        "carrot_net_g": "320",
+        "turnip_net_g": "360",
+        "parsley_root_net_g": "10",
+        "onion_net_g": "20",
+        "wheat_flour_net_g": "20",
+        "rice_groats_net_g": "20",
+        "butter_net_g": "20",
+        "milk_net_g": "150",
+        "egg_net_g": "10",
+        "broth_or_water_net_g": "700",
+        "dish_output_g": "1000"
+      },
+      "source_rules": [
+        "carrot OR turnip is an explicit source alternative",
+        "turnip has an extra blanching step before the shared puree process",
+        "rice is served as crumbly rice garnish",
+        "source explicitly says the soup may be prepared without rice"
+      ],
+      "familyfoodos_interpretation": [
+        "optional rice semantics are source-established but not production-ready until rice identity and cooked-garnish transformation are authoritative",
+        "carrot/turnip is a source alternative, not yet a verified FamilyFoodOS substitution",
+        "water is selected as the bounded liquid branch to avoid inventing a stock identity"
+      ]
+    },
+    "USSR82-459": {
+      "variant_I_II": {
+        "egg_net_g": "120",
+        "fat_net_g": "10",
+        "output_g": "114"
+      },
+      "variant_III": {
+        "egg_net_g": "80",
+        "fat_net_g": "10",
+        "output_g": "79"
+      },
+      "source_rules": [
+        "10 g table margarine OR 10 g butter",
+        "fry 3-5 minutes until white is set and yolk remains semi-liquid"
+      ],
+      "familyfoodos_interpretation": [
+        "butter identity exists",
+        "external milk margarine remains a new-food candidate",
+        "source OR is not proof of tested substitution applicability"
+      ]
+    },
+    "USSR82-323": {
+      "variant_III_butter": {
+        "potato_net_input_g": "258",
+        "cooked_potato_output_g": "250",
+        "butter_g": "10",
+        "dish_output_g": "260"
+      },
+      "source_rules": [
+        "full recipe also lists young potato and butter/sauce/sour-cream serving alternatives"
+      ],
+      "familyfoodos_interpretation": [
+        "MAP-A direct lead represents only a fixed branch",
+        "raw-to-cooked transformation/output evidence must be version-bound before production nutrition"
+      ]
+    }
+  },
+  "retention_applied": "NO",
+  "production_quantity_rules_published": "NO"
+}

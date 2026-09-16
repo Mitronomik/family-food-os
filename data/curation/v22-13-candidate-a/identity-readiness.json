@@ -1,0 +1,92 @@
+{
+  "operation": "V22-13-CANDIDATE-A",
+  "candidate": "USSR82-267",
+  "preferred_scope": "variant II, water branch",
+  "rows": [
+    {
+      "external_id": "ING-0035",
+      "source_name": "Морковь красная",
+      "source_net_g": "320",
+      "map_state": "ALIAS_EXISTING",
+      "food_code": "CARROT",
+      "identity_gate": "PASS"
+    },
+    {
+      "external_id": "ING-0077",
+      "source_name": "Репа",
+      "source_net_g": "360",
+      "map_state": "EXACT_EXISTING",
+      "food_code": "TURNIP",
+      "identity_gate": "PASS"
+    },
+    {
+      "external_id": "ING-0041",
+      "source_name": "Петрушка (корень)",
+      "source_net_g": "10",
+      "map_state": "FORM_SPLIT_CANDIDATE",
+      "food_code": null,
+      "identity_gate": "BLOCKED"
+    },
+    {
+      "external_id": "ING-0028",
+      "source_name": "Лук репчатый",
+      "source_net_g": "20",
+      "map_state": "ALIAS_EXISTING",
+      "food_code": "ONION_YELLOW",
+      "identity_gate": "PASS"
+    },
+    {
+      "external_id": "ING-0036",
+      "source_name": "Мука пшеничная в/с",
+      "source_net_g": "20",
+      "map_state": "ALIAS_EXISTING",
+      "food_code": "FLOUR_WHEAT",
+      "identity_gate": "PASS"
+    },
+    {
+      "external_id": "ING-0024",
+      "source_name": "Крупа рисовая",
+      "source_net_g": "20",
+      "map_state": "FORM_SPLIT_CANDIDATE",
+      "food_code": null,
+      "identity_gate": "BLOCKED",
+      "role": "OPTIONAL_GARNISH_INPUT"
+    },
+    {
+      "external_id": "ING-0032",
+      "source_name": "Масло сливочное несоленое",
+      "source_net_g": "20",
+      "map_state": "EXACT_EXISTING",
+      "food_code": "BUTTER_UNSALTED",
+      "identity_gate": "PASS"
+    },
+    {
+      "external_id": "ING-0034",
+      "source_name": "Молоко пастеризованное 3,2%",
+      "source_net_g": "150",
+      "map_state": "FORM_SPLIT_CANDIDATE",
+      "food_code": null,
+      "identity_gate": "BLOCKED"
+    },
+    {
+      "external_id": "ING-0071",
+      "source_name": "Яйцо куриное",
+      "source_net_g": "10",
+      "map_state": "ALIAS_EXISTING",
+      "food_code": "EGG",
+      "identity_gate": "PASS",
+      "note": "Source already gives net grams; no pcs-to-g inference is needed."
+    },
+    {
+      "external_id": "ING-0006",
+      "source_name": "Вода",
+      "source_net_g": "700",
+      "map_state": "ALIAS_EXISTING",
+      "food_code": "WATER",
+      "identity_gate": "PASS",
+      "note": "Choose the source-authorized water branch; do not substitute finished-stock proxy for water."
+    }
+  ],
+  "external_nutrition_promoted": "NO",
+  "food_catalogue_mutated": "NO"
+}

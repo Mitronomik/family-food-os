@@ -1,0 +1,73 @@
+{
+  "operation": "V22-13-CANDIDATE-A",
+  "reviewed": "2026-09-16",
+  "sources": [
+    {
+      "source_id": "USSR82_ORDER_310_COLLECTION_PDF",
+      "url": "https://www.mosculport.ru/templates/kitchen_instr/recipes_master.pdf",
+      "owner_or_issuer": "USSR Ministry of Trade / collection developed by NIIOT with Ministry food-service administration and practitioners",
+      "access_mode": "web indexed PDF text",
+      "original_sha256": null,
+      "used_for": [
+        "Order N 310 context",
+        "collection introduction",
+        "recipe 267",
+        "recipe 459"
+      ],
+      "observations": [
+        "Order N 310 approved the collection and described it as the main technological normative document alongside standards/instructions.",
+        "The introduction says recipes were recalculated/refined on the basis of production trials/workups and that net/gross quantities and outputs are normative.",
+        "This is positive collection-level standardization evidence, not proof that every listed alternative branch was separately kitchen-tested."
+      ]
+    },
+    {
+      "source_id": "ORDER_310_LEGAL_TEXT",
+      "url": "https://internet-law.ru/documents/dop_documents/1/sanpi_44121/0/prika.html",
+      "owner_or_issuer": "secondary legal publication of USSR Ministry of Trade order/collection text",
+      "access_mode": "web text",
+      "original_sha256": null,
+      "used_for": [
+        "order and introduction cross-check",
+        "recipe 267 text cross-check"
+      ]
+    },
+    {
+      "source_id": "INTERDOKA_323",
+      "url": "https://interdoka.ru/kulinaria/1982/3_bluda_katof_ovosh_gribi/1_otvarnoy/1.html",
+      "owner_or_issuer": "secondary transcription/mirror",
+      "access_mode": "web text",
+      "original_sha256": null,
+      "used_for": [
+        "recipe 323 branch/output cross-check"
+      ]
+    },
+    {
+      "source_id": "USSR1973_ORDER_1_COLLECTION",
+      "url": "https://internet-law.ru/documents/dop_documents/67/metod_46134/0/prika.html",
+      "owner_or_issuer": "secondary legal publication of USSR Ministry of Trade 1973 collection",
+      "access_mode": "web text",
+      "original_sha256": null,
+      "used_for": [
+        "independent historical corroboration of natural fried eggs margarine-or-butter structure"
+      ],
+      "limit": "Corroboration of a source alternative does not establish FamilyFoodOS kitchen-tested substitution."
+    },
+    {
+      "source_id": "V22_13_CHECKPOINT",
+      "url": null,
+      "owner_or_issuer": "user-supplied external checkpoint",
+      "access_mode": "local uploaded XLSX/ZIP",
+      "sha256": "a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97",
+      "used_for": [
+        "row-level optional/choice-group semantics",
+        "raw status",
+        "mapping lead selection"
+      ],
+      "limit": "External nutrient profiles are not production Nutrition authority."
+    }
+  ],
+  "rights_decision": {
+    "status": "NEEDS_SEPARATE_PUBLICATION_REVIEW",
+    "reason": "The collection is government-approved but also names a developer collective; Candidate-A keeps factual quantities/rules as research evidence and does not republish source expressive text, layout, images or claim public-domain status."
+  }
+}
