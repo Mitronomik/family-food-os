@@ -5,68 +5,57 @@ Updated: `2026-09-16`.
 ## Accepted repository state
 
 - PR6 / PR6-CLOSE = COMPLETE.
-- PR #34–#43 = MERGED.
-- Exact accepted `main` after PR #43: `c428899e703f2bf5addd5f910d53ad40617244c5`.
+- PR #34–#44 = MERGED.
+- Exact accepted `main` after PR #44: `25a496977d19666f812f76792a68aee92732186e`.
 - Current accepted SQLite migration head: `0030_recipe_source_corpus`.
 - Future RecipeTemplate schema reservation remains `0031_recipe_template_catalogue`.
 - R1 / R2 / R3 / R4 remain COMPLETE AS BLOCKED RESEARCH.
 - R1-21 and R1-23 remain INDIVIDUALLY_READY; accepted ready count remains 2/3.
-- Assembly A remains BLOCKED; Assembly B, `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` and PR7+ remain NOT STARTED.
+- Assembly A remains BLOCKED and is described operationally as `HUMAN_EVIDENCE_BLOCKED__2_OF_3`.
 - OPEN Assembly-A gates remain `family_count`, `optional_role`, `verified_substitution`.
+- Assembly B, `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` and PR7+ remain NOT STARTED.
 
-## Current authorized operation
+## Accepted recovery decision
 
-`RECIPE-ASSEMBLY-A-RECOVERY-B` — bounded recovery decision after PR #43 reached
-the source-only boundary for `USSR82-267`.
+Merged PR #44 (`RECIPE-ASSEMBLY-A-RECOVERY-B`) established that no retained
+source-only alternate removes the accepted complete-variant kitchen-evidence
+requirement.
 
-Goal:
+Accepted recovery order:
 
-1. compare the strongest retained recovery paths without relaxing any Assembly-A gate;
-2. determine whether switching away from `USSR82-267` removes the evidence-type blocker;
-3. stop source-only churn when the remaining evidence requires physical kitchen execution.
+1. `USSR82-267 — Суп-пюре из моркови или репы` remains the preferred third-family recovery candidate.
+2. `R1-05 — Local Harvest Bake` remains the first fallback if measured 267 verification fails.
+3. `USSR82-369 — Грибы в сметанном соусе` remains the second fallback.
 
-Current delivery:
+No acceptance criterion, architecture rule or production authority was changed.
+No additional source-only recovery PR for 267 is recommended.
 
-- Branch: `research/recipe-assembly-a-recovery-b`.
-- Base: accepted `main` after PR #43, `c428899e703f2bf5addd5f910d53ad40617244c5`.
-- [PR #44](https://github.com/Mitronomik/family-food-os/pull/44) — `research: decide Assembly A recovery boundary` — OPEN / READY FOR HUMAN REVIEW.
+## Current authorization boundary
 
-Scope is research/data-curation + state only. No runtime/domain code, schema/migration,
-production seed, FoodIngredient/Nutrition/Composition promotion, RecipeVersion,
-RecipeTemplate or RecipeAssembly publication is authorized.
+No runtime/data-promotion implementation is automatically authorized by merging
+PR #44.
 
-## Recovery decision
+The preferred next evidence path remains the measured protocol from PR #43:
 
-Accepted ready families remain `R1-21` and `R1-23`.
+`data/curation/v22-13-267-kitchen-a/kitchen-verification-protocol.json`
 
-The bounded comparison covers:
+Required human evidence includes:
 
-- `USSR82-267` — preferred recovery path;
-- `R1-05 — Local Harvest Bake` — first fallback;
-- `USSR82-369 — Грибы в сметанном соусе` — second fallback;
-- the remaining MAP-A optional/substitution shortlists at screening level.
+- exact carrot-branch execution measurements;
+- exact turnip-branch execution measurements, including blanching;
+- measured 20 g raw-rice garnish transformation/process binding;
+- service/evaluation with and without the optional garnish.
 
-No retained alternate eliminates the accepted complete-variant kitchen evidence
-requirement. Candidate switching would add food/composition/process debt without
-closing `verified_substitution`.
-
-Assembly A is therefore described more precisely as:
-
-`HUMAN_EVIDENCE_BLOCKED__2_OF_3`.
-
-This does not change architecture or acceptance criteria. It records the kind of
-evidence still missing.
+Repository agents may validate and retain supplied measurements, but may not
+claim physical execution, invent measured values or infer successful variant
+testing from source publication.
 
 ## Next-step rule
 
-No additional source-only recovery PR is recommended.
+- measured PR #43 protocol evidence supplied → separately authorize `V22-13-267-KITCHEN-B`;
+- measured 267 execution fails → separately authorize `R1-05-RECOVERY`;
+- no measured evidence available → remain BLOCKED.
 
-- If measured PR #43 protocol evidence is supplied, a separately authorized
-  `V22-13-267-KITCHEN-B` may validate and retain it.
-- If measured 267 execution fails, a separately authorized `R1-05-RECOVERY`
-  may activate the first fallback.
-- If measured execution is unavailable, Assembly A remains BLOCKED.
-
-`V22-13-267-PROFILE-B` remains deferred until the kitchen decision. No automatic
-Assembly B, Meal Pattern Catalogue support, PR7, Retail, AI, Auth or bulk data
-promotion is authorized.
+`V22-13-267-PROFILE-B` remains deferred until the kitchen decision.
+Do not start Assembly B, Meal Pattern Catalogue support, PR7, PR8, Retail, AI,
+Auth or bulk data promotion automatically.
