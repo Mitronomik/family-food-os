@@ -1,0 +1,88 @@
+source_recipe_id,recipe_name,external_raw_status,mapping_class,strict_raw_triage,mapped_existing_rows,new_food_rows,form_split_rows,composite_process_rows,unresolved_rows,optional_rows,choice_groups,family_count_lead,optional_role_lead,substitution_lead,production_ready
+USSR82-341,"Овощи, припущенные в молочном или сметанном соусе",READY_RAW,PROCESS_REVIEW,NO,14,6,0,6,0,0,3,NO,NO,NO,NO
+USSR82-342,Капуста тушеная,READY_RAW,PROCESS_REVIEW,YES,5,1,0,1,0,0,0,NO,NO,NO,NO
+USSR82-343,"Капуста, тушенная с грибами",READY_RAW,IDENTITY_REVIEW,NO,3,3,3,4,3,0,1,NO,NO,NO,NO
+USSR82-344,"Свекла, тушенная в сметане или соусе",READY_RAW,IDENTITY_REVIEW,NO,5,3,0,2,2,0,1,NO,NO,NO,NO
+USSR82-345,"Свекла, тушенная с яблоками",READY_RAW,PROCESS_REVIEW,NO,5,0,0,1,0,0,0,NO,NO,NO,NO
+USSR82-346,"Морковь, тушенная с рисом и черносливом",READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,6,3,7,0,0,0,0,YES,NO,NO,NO
+USSR82-347,"Картофель и овощи, тушенные в соусе",READY_RAW,PROCESS_REVIEW,NO,13,6,2,9,0,0,1,NO,NO,NO,NO
+USSR82-348,Рагу из овощей,NO_RELATIONSHIPS,RAW_EVIDENCE_REVIEW,NO,0,0,0,0,0,0,0,NO,NO,NO,NO
+USSR82-349,Рагу овощное с кашей,READY_RAW,PROCESS_REVIEW,NO,6,1,2,1,0,0,1,NO,NO,NO,NO
+USSR82-350,"Картофель, тушенный с грибами и луком или луком и помидорами",READY_RAW,PROCESS_REVIEW,NO,12,14,2,6,0,0,2,NO,NO,NO,NO
+USSR82-351,"Картофель, тушенный с сухофруктами",READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,4,2,1,0,0,0,0,YES,NO,NO,NO
+USSR82-352,Грибы с картофелем или с картофелем и помидорами,READY_RAW,IDENTITY_REVIEW,NO,10,9,3,2,2,0,2,NO,NO,NO,NO
+USSR82-353,"Картофель, жаренный ломтиками (из отварного)",READY_RAW,IDENTITY_REVIEW,NO,3,5,0,0,1,0,0,NO,NO,NO,NO
+USSR82-354,"Картофель, жаренный брусочками, или дольками, или кубиками, или ломтиками",READY_RAW,IDENTITY_REVIEW,NO,3,5,0,0,1,0,0,NO,NO,NO,NO
+USSR82-355,"Картофель, жаренный во фритюре брусочками",READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,5,5,0,0,0,0,1,YES,NO,YES,NO
+USSR82-356,"Картофель, жаренный с луком или грибами и луком",READY_RAW,IDENTITY_REVIEW,NO,5,7,2,6,2,0,3,NO,NO,NO,NO
+USSR82-357,Котлеты картофельные,READY_RAW,IDENTITY_REVIEW,YES,3,0,0,0,1,0,0,NO,NO,NO,NO
+USSR82-358,Котлеты картофельные с творогом,READY_RAW,IDENTITY_REVIEW,NO,5,4,1,0,1,0,2,NO,NO,NO,NO
+USSR82-359,Зразы картофельные,READY_RAW,IDENTITY_REVIEW,NO,16,9,4,9,3,0,3,NO,NO,NO,NO
+USSR82-360,Крокеты картофельные,READY_RAW,IDENTITY_REVIEW,NO,11,4,3,9,3,0,2,NO,NO,NO,NO
+USSR82-361,Котлеты морковные,READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,3,3,1,0,0,0,0,YES,NO,NO,NO
+USSR82-362,Котлеты свекольные,READY_RAW,IDENTITY_REVIEW,NO,5,10,3,9,3,0,1,NO,NO,NO,NO
+USSR82-363,Котлеты капустные,READY_RAW,IDENTITY_REVIEW,NO,10,12,5,6,4,0,2,NO,NO,NO,NO
+USSR82-364,Шницель из капусты,READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,4,1,1,0,0,0,0,YES,NO,NO,NO
+USSR82-365,Капуста жареная,READY_RAW,CATALOGUE_EXTENSION_LEAD,NO,10,6,4,0,0,0,2,NO,NO,NO,NO
+USSR82-366,Оладьи из тыквы,PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,3,3,1,0,1,0,0,NO,NO,NO,NO
+USSR82-367,"Помидоры, баклажаны и другие овощи жареные",READY_RAW,IDENTITY_REVIEW,NO,10,6,0,9,3,0,2,NO,NO,NO,NO
+USSR82-368,Кабачки жареные с помидорами или с помидорами и грибами,READY_RAW,IDENTITY_REVIEW,NO,11,8,2,6,3,0,2,NO,NO,NO,NO
+USSR82-369,Грибы в сметанном соусе,READY_RAW,PROCESS_REVIEW,NO,2,4,1,1,0,1,1,NO,YES,NO,NO
+USSR82-370,Грибы в сметанном соусе с картофелем,READY_RAW,PROCESS_REVIEW,YES,6,2,0,3,0,0,1,NO,NO,YES,NO
+USSR82-371,Драники,PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,3,1,0,0,2,0,0,NO,NO,NO,NO
+USSR82-372,"Картофель, запеченный в сметанном соусе",READY_RAW,PROCESS_REVIEW,NO,5,7,0,3,0,0,1,NO,NO,NO,NO
+USSR82-373,"Картофель, запеченный в сметанном соусе с грибами, или луком, или грибами и луком",READY_RAW,PROCESS_REVIEW,NO,2,3,0,1,0,0,0,NO,NO,NO,NO
+USSR82-374,"Картофель, запеченный с яйцом и помидорами",READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,16,9,0,0,0,0,2,YES,NO,YES,NO
+USSR82-375,"Картофель, запеченный с окороком и грибами",READY_RAW,PROCESS_REVIEW,NO,4,3,1,1,0,0,0,NO,NO,NO,NO
+USSR82-376,Картофельное пюре запеченное,READY_RAW,IDENTITY_REVIEW,NO,5,3,0,3,3,0,1,NO,NO,NO,NO
+USSR82-377,"Картофельные пирожки с грибами, или морковью, или другим фаршем",READY_RAW,IDENTITY_REVIEW,NO,16,6,1,3,3,0,1,NO,NO,NO,NO
+USSR82-378,Картофельные ватрушки с фаршем,READY_RAW,IDENTITY_REVIEW,NO,15,5,1,0,1,0,0,NO,NO,NO,NO
+USSR82-379,"Картофельные котлеты, запеченные под соусом",READY_RAW,PROCESS_REVIEW,NO,2,6,0,6,0,0,2,NO,NO,NO,NO
+USSR82-380,Рулет или запеканка картофельные с овощами или овощами и грибами,READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,3,1,3,0,0,0,0,YES,NO,NO,NO
+USSR82-381,Запеканка капустная,READY_RAW,IDENTITY_REVIEW,NO,8,5,3,9,6,0,2,NO,NO,NO,NO
+USSR82-382,Морковная запеканка с творогом или без творога,READY_RAW,IDENTITY_REVIEW,NO,12,8,4,6,7,0,1,NO,NO,NO,NO
+USSR82-383,Пудинг из моркови,READY_RAW,IDENTITY_REVIEW,NO,12,5,7,6,6,0,1,NO,NO,NO,NO
+USSR82-384,Суфле из моркови,READY_RAW,PROCESS_REVIEW,NO,7,3,0,0,0,0,1,NO,NO,NO,NO
+USSR82-385,Запеканка из моркови и фасоли,READY_RAW,IDENTITY_REVIEW,NO,8,3,3,0,9,0,1,NO,NO,NO,NO
+USSR82-386,Запеканка овощная,READY_RAW,IDENTITY_REVIEW,NO,20,7,3,9,6,0,1,NO,NO,NO,NO
+USSR82-387,Пудинг овощной,READY_RAW,IDENTITY_REVIEW,NO,13,9,6,6,5,0,1,NO,NO,NO,NO
+USSR82-388,Запеканка из тыквы,READY_RAW,IDENTITY_REVIEW,NO,5,6,6,6,5,0,2,NO,NO,NO,NO
+USSR82-389,Пудинг из тыквы и яблок,READY_RAW,IDENTITY_REVIEW,NO,6,3,2,1,1,0,1,NO,NO,NO,NO
+USSR82-390,Солянка овощная,READY_RAW,IDENTITY_REVIEW,NO,1,2,2,1,1,0,0,NO,NO,NO,NO
+USSR82-391,Голубцы овощные,READY_RAW,PROCESS_REVIEW,NO,14,5,5,6,0,0,2,NO,NO,NO,NO
+USSR82-392,"Капуста цветная, или белокочанная, или савойская, запеченная под соусом",READY_RAW,PROCESS_REVIEW,NO,14,3,0,3,0,0,1,NO,NO,NO,NO
+USSR82-393,"Кабачки, запеченные под соусом",READY_RAW,PROCESS_REVIEW,NO,8,6,0,6,0,0,1,NO,NO,NO,NO
+USSR82-394,"Кабачки и цветная капуста, запеченные под соусом",READY_RAW,PROCESS_REVIEW,NO,11,6,0,6,0,0,1,NO,NO,NO,NO
+USSR82-395,Котлеты овощные под молочным соусом,READY_RAW,PROCESS_REVIEW,NO,2,2,0,4,0,0,1,NO,NO,NO,NO
+USSR82-396,Грибы в сметанном соусе запеченные,READY_RAW,PROCESS_REVIEW,NO,1,4,1,1,0,0,1,NO,NO,NO,NO
+USSR82-397,"Помидоры, фаршированные грибами и рисом или рисом и морковью",READY_RAW,IDENTITY_REVIEW,NO,12,5,5,10,6,0,2,NO,NO,NO,NO
+USSR82-398,"Свекла, фаршированная овощами, под соусом",READY_RAW,IDENTITY_REVIEW,NO,6,0,0,4,1,0,2,NO,NO,NO,NO
+USSR82-399,"Перец, фаршированный овощами",READY_RAW,IDENTITY_REVIEW,NO,9,2,2,1,2,0,0,NO,NO,NO,NO
+USSR82-400,"Перец, фаршированный овощами и рисом",READY_RAW,IDENTITY_REVIEW,NO,12,0,3,9,3,0,1,NO,NO,NO,NO
+USSR82-401,"Репа или кабачки, фаршированные овощами и рисом",READY_RAW,IDENTITY_REVIEW,NO,13,5,3,9,3,0,2,NO,NO,NO,NO
+USSR82-402,"Кабачки, фаршированные овощами",READY_RAW,IDENTITY_REVIEW,NO,18,3,3,9,6,0,1,NO,NO,NO,NO
+USSR82-403,"Баклажаны, фаршированные овощами",READY_RAW,IDENTITY_REVIEW,NO,21,1,7,8,3,0,4,NO,NO,NO,NO
+USSR82-404,"Тыква, запеченная с яйцом",READY_RAW,PROCESS_REVIEW,NO,4,6,0,0,0,0,1,NO,NO,NO,NO
+USSR82-405,Каша рассыпчатая,READY_RAW,PROCESS_REVIEW,NO,6,3,3,9,0,0,1,NO,NO,NO,NO
+USSR82-406,"Каша рассыпчатая с луком, шпиком или яйцом",READY_RAW,PROCESS_REVIEW,NO,12,9,0,9,0,0,1,NO,NO,NO,NO
+USSR82-407,Каша рассыпчатая с грибами и луком,READY_RAW,PROCESS_REVIEW,NO,3,3,3,3,0,0,0,NO,NO,NO,NO
+USSR82-408,Каша рассыпчатая с мозгами или печенью,READY_RAW,PROCESS_REVIEW,NO,6,12,0,6,0,0,0,NO,NO,NO,NO
+USSR82-409,"Хлопья или зерна кукурузные, или пшеничные и другие с молоком",PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,0,0,2,0,0,0,1,NO,NO,NO,NO
+USSR82-410,Каша рассыпчатая из концентрата,READY_RAW,PROCESS_REVIEW,NO,5,1,0,3,0,0,1,NO,NO,NO,NO
+USSR82-411,Каша вязкая,READY_RAW,PROCESS_REVIEW,NO,6,3,0,6,0,0,1,NO,NO,NO,NO
+USSR82-412,Каша вязкая с тыквой,READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,10,10,8,0,0,0,2,YES,NO,YES,NO
+USSR82-413,Каша вязкая с черносливом,READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,21,9,12,0,0,0,2,YES,NO,YES,NO
+USSR82-414,Каша вязкая с морковью,READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,8,6,6,0,0,0,2,YES,NO,YES,NO
+USSR82-415,Каша из концентрата вязкая,READY_RAW,PROCESS_REVIEW,NO,5,1,0,3,0,0,1,NO,NO,NO,NO
+USSR82-416,Клецки манные с сыром или со сметаной,READY_RAW,IDENTITY_REVIEW,NO,5,5,1,0,1,0,0,NO,NO,NO,NO
+USSR82-417,Каша жидкая,READY_RAW,PROCESS_REVIEW,NO,6,3,0,6,0,0,1,NO,NO,NO,NO
+USSR82-418,Крупеник,READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,4,2,2,0,0,0,0,YES,NO,NO,NO
+USSR82-419,"Запеканка рисовая, манная, пшенная, пшеничная",READY_RAW,IDENTITY_REVIEW,NO,16,14,10,8,8,0,3,NO,NO,NO,NO
+USSR82-420,Запеканка рисовая с творогом,PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,8,9,4,6,4,0,2,NO,NO,NO,NO
+USSR82-421,"Запеканка рисовая, пшенная, пшеничная с тыквой",READY_RAW,IDENTITY_REVIEW,NO,16,14,10,0,8,0,2,NO,NO,NO,NO
+USSR82-422,Запеканка со свежими плодами,READY_RAW,IDENTITY_REVIEW,NO,80,8,48,32,16,0,2,NO,NO,NO,NO
+USSR82-423,Пудинг с консервированными плодами,PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,16,6,5,3,3,0,2,NO,NO,NO,NO
+USSR82-424,"Пудинг рисовый, манный, пшенный",PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,24,19,18,12,8,0,2,NO,NO,NO,NO
+USSR82-425,"Биточки или котлеты пшенные, пшеничные, перловые, ячневые",READY_RAW,IDENTITY_REVIEW,NO,7,6,5,4,2,0,2,NO,NO,NO,NO
+USSR82-426,"Биточки или котлеты манные, рисовые",READY_RAW,IDENTITY_REVIEW,NO,5,6,5,4,2,0,2,NO,NO,NO,NO
+USSR82-427,Котлеты или биточки перловые с творогом,READY_RAW,IDENTITY_REVIEW,NO,7,4,2,6,2,0,1,NO,NO,NO,NO

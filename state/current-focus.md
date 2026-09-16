@@ -9,10 +9,12 @@ Updated: `2026-09-16`.
 - PR #35 = MERGED.
 - PR #36 — Russian normative recipe source corpus and bulk importer = MERGED.
 - PR #37 — Household Food OS product/security integration = MERGED.
-- Exact accepted `main` after PR #37: `38de460dfcbf84997a1d9275314c4f3dab7e1d00`.
+- PR #38 — v22.13 normative recipe dataset preflight = MERGED.
+- Exact accepted `main` after PR #38: `a852b169323cd4061c150107d7b75aebd67a9bc7`.
 - Current accepted SQLite migration head: `0030_recipe_source_corpus`.
-- Future RecipeTemplate schema reservation remains `0031_recipe_template_catalogue`; no RecipeTemplate runtime is authorized by PR #36/#37.
+- Future RecipeTemplate schema reservation remains `0031_recipe_template_catalogue`; no RecipeTemplate runtime is authorized by PR #36/#37/#38.
 - The PR #36 214-card `RU_MR_2_4_0162_19` corpus remains evidence/source material; it does not publish RecipeVersion/RecipeTemplate and does not replace FoodIngredient/Nutrition/Composition truth.
+- The v22.13 checkpoint remains a separate hash-pinned external evidence/reference source; its `USSR82-*` lineage is not merged into the PR #36 source identity.
 - R1 / R2 / R3 / R4 remain COMPLETE AS BLOCKED RESEARCH; frozen accepted evidence remains unchanged.
 - R1-21 and R1-23 remain INDIVIDUALLY_READY; accepted ready count remains 2/3.
 - OPEN Assembly-A gates remain `family_count`, `optional_role`, `verified_substitution`.
@@ -20,57 +22,74 @@ Updated: `2026-09-16`.
 
 ## Current authorized operation
 
-`V22-13-DATA-INTEGRATION-PREFLIGHT` — read-only research/evidence review of the externally supplied `russian_normative_recipes_v22_13_checkpoint.zip` against current FamilyFoodOS food identity, Nutrition, Composition, Recipe/source provenance and Recipe Assembly A contracts.
+`V22-13-MAP-A` — map all 363 external v22.13 ingredient/reference identities against current FamilyFoodOS `FoodIngredient` truth and classify all 350 recipe candidates without promoting external Nutrition/Composition or publishing recipes/templates/assemblies.
 
 Current delivery:
 
-- [PR #38](https://github.com/Mitronomik/family-food-os/pull/38) — `research: preflight v22.13 normative recipe dataset` — OPEN / HUMAN REVIEW REQUIRED.
-- Branch: `research/v22-13-data-integration-preflight`.
-- Base: accepted `main` after PR #37, `38de460dfcbf84997a1d9275314c4f3dab7e1d00`.
-- Scope is research/docs/state only. No runtime/domain code, schema/migration, production seed, FoodIngredient, Nutrition/Composition profile, RecipeVersion/RecipeTemplate/RecipeAssembly or accepted source-corpus row is modified.
+- [PR #39](https://github.com/Mitronomik/family-food-os/pull/39) — `data: map v22.13 identities and recipe candidates` — OPEN / READY FOR HUMAN REVIEW.
+- Branch: `data/v22-13-map-a`.
+- Base: accepted `main` after PR #38, `a852b169323cd4061c150107d7b75aebd67a9bc7`.
 
-External package is **not committed** by this operation. Exact reviewed ZIP SHA-256:
+Scope is research/data curation plus state only. No runtime/domain code, schema/migration, production seed, FoodIngredient mutation, Nutrition/Composition promotion, RecipeVersion/RecipeTemplate/RecipeAssembly publication or accepted PR #36 source-corpus row is changed.
 
-`a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97`
-
-Detailed workbook hashes and findings are retained in:
+The accepted preflight is:
 
 `docs/research/russian-normative-recipes-v22-13-preflight-2026-09-16.md`.
 
-## Current preflight findings
+Exact reviewed source checkpoint SHA-256 remains:
 
-- v22.13 contains 350 recipes and 6,179 ingredient contribution rows.
-- 292 recipes are marked `READY_RAW` by the external checkpoint; this is raw/reference completeness, not FamilyFoodOS production readiness.
-- The checkpoint contains 363 external ingredient/reference identities; they are not automatically FamilyFoodOS `FoodIngredient` identities.
-- 99 reference records remain `UNRESOLVED`; 62 are `C_PROXY`; open reference queue = 58; open field-level nutrient gaps = 578.
-- Raw numeric coverage is high, but strict A/B evidence coverage is materially lower.
-- Retention coefficients are explicitly not applied; process/retention/cooked-state review remains separate.
-- Optional/source-choice structure is useful: 41 optional rows across 13 recipes and 1,665 choice-group rows across 171 recipes.
-- Source-listed alternatives do not by themselves satisfy FamilyFoodOS `verified_substitution`.
-- A strict internal raw-data triage filter yields 64 leads, but no recipe/family is promoted to production status by this preflight.
-- v22.13 source lineage is distinct from the PR #36 `RU_MR_2_4_0162_19` corpus and must remain separate unless later evidence proves an exact source relationship.
+`a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97`.
 
-Integration decision in PR #38:
+## V22-13-MAP-A findings
 
-- **ADOPT** v22.13 as hash-pinned external evidence/reference material;
-- **MAP** its ingredient, recipe and nutrient evidence through FamilyFoodOS authorities before use;
-- **NEEDS_REVIEW** for proxy/unresolved/form/process/retention/source-rights/RU-familiarity/kitchen/substitution debt;
-- **REJECT** direct production import or any interpretation of `READY_RAW`/`READY` as RecipeVersion/RecipeTemplate readiness.
+All **363 / 363** external ingredient/reference identities are classified into one explicit mapping state:
 
-## Assembly A status after v22.13 preflight
+- `EXACT_EXISTING`: 25;
+- `ALIAS_EXISTING`: 27;
+- `NEW_FOOD_CANDIDATE`: 103;
+- `FORM_SPLIT_CANDIDATE`: 68;
+- `COMPOSITE_OR_PROCESS_OUTPUT`: 114;
+- `UNRESOLVED`: 25;
+- `REJECT_TECHNICAL`: 1.
+
+The 52 exact/alias mappings reuse FamilyFoodOS identity only; every mapping row explicitly keeps `nutrition_profile_promoted=NO`.
+
+Across 6,177 nutrient-input-eligible contribution rows, exact/alias identity mappings cover 2,591 rows (~41.95%) and 386,274.014 g of 777,592.011 g represented input mass (~49.68%). These are mapping-coverage metrics, not Nutrition authority.
+
+All **350 / 350** recipes are classified:
+
+- `DIRECT_EXISTING_MAP_LEAD`: 3;
+- `CATALOGUE_EXTENSION_LEAD`: 65;
+- `PROCESS_REVIEW`: 88;
+- `IDENTITY_REVIEW`: 134;
+- `RAW_EVIDENCE_REVIEW`: 60.
+
+The PR #38 strict raw-data triage set remains 64 recipes and decomposes after mapping into 3 direct-existing leads, 42 catalogue-extension leads, 12 process-review leads and 7 identity-review leads. Every recipe row explicitly keeps `production_ready=NO`.
+
+Direct existing-identity leads are:
+
+- `USSR82-323` — `Картофель отварной`;
+- `USSR82-442` — `Макаронные изделия отварные`;
+- `USSR82-453` — `Яйца вареные`.
+
+They are candidate leads only. Rights/source lineage, exact quantity/form authority, kitchen verification, yield/retention/output semantics, RU familiarity where required and publication gates remain separate.
+
+Detailed mapping package is under `data/curation/v22-13-map-a/`.
+
+## Assembly A status after mapping
 
 Assembly A remains **BLOCKED**.
 
-- `family_count` = OPEN. Candidate funnel is much larger, but a third production-ready family is not established.
-- `optional_role` = OPEN. The checkpoint contains explicit promising optional-role evidence, but candidate-specific mapping/source/rights/kitchen review remains required.
-- `verified_substitution` = OPEN. Choice groups/source alternatives are not equivalent to tested substitution compatibility.
+- `family_count` = OPEN. Mapping yields 45 strict-raw direct/catalogue-extension leads, but no third production-ready family is established.
+- `optional_role` = OPEN. Seven `READY_RAW` recipes contain explicit optional rows; none closes the original candidate-specific identity/source/rights/kitchen evidence gate.
+- `verified_substitution` = OPEN. Fifteen strict-raw recipes contain explicit choice groups; a source-listed alternative is not a tested FamilyFoodOS substitution rule.
 
-No accepted R1/R2/R3/R4 status or historical evidence package is rewritten by this preflight.
+No accepted R1/R2/R3/R4 status or historical evidence package is rewritten.
 
 ## Next-step rule
 
-Next authorized action: human review of PR #38 and its docs-verification evidence.
+Current next action is human review of PR #39. Final-head proportional docs/data verification must PASS before merge. Merge requires separate explicit post-review authorization.
 
-If the preflight is accepted, the proposed next supporting operation is `V22-13-MAP-A` (map 363 external ingredient/reference identities and classify all 350 recipe candidates). **It is not authorized by this preflight and must not start automatically.**
+If this mapping is accepted, the proposed next bounded research operation is `V22-13-CANDIDATE-A`: take a small candidate set and attempt to close one Assembly-A evidence objective at a time (`family_count`, `optional_role`, `verified_substitution`). It is **not** authorized to start automatically.
 
-Merge of PR #38 requires separate explicit post-review authorization. No automatic Assembly B, `V22-13-MAP-A`, PR7, RecipeTemplate/RecipeVersion publication, Nutrition promotion, Retail, AI, Auth or new production-data operation is authorized.
+No automatic Assembly B, PR7, RecipeTemplate/RecipeVersion publication, FoodIngredient/catalogue mutation, Nutrition promotion, Retail, AI, Auth or bulk production-data import is authorized by this operation.
