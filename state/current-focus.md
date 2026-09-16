@@ -13,101 +13,129 @@ Updated: `2026-09-16`.
 - PR #39 — v22.13 identity mapping and recipe-candidate classification = MERGED.
 - PR #40 — bounded v22.13 Assembly-A candidate recovery = MERGED.
 - PR #41 — USSR82-267 enablement blocker review = MERGED.
-- PR #41 merge commit: `2b71c76c523c1b8a1ebeda9c5a2ba8fdc7157ced`.
-- Current `main` before PR #42 branch: `63e35817503723e4cdc6a82c9000a13f1360d271`. Its tree is byte-identical to the PR #41 merge tree after immediate removal of an accidentally-created temporary placeholder on `main`.
+- PR #42 — USSR82-267 profile-authority review = MERGED.
+- Exact accepted `main` after PR #42: `c9fcaa782a9cb6b1a48d877fb251f3ee69cb4e7d`.
 - Current accepted SQLite migration head: `0030_recipe_source_corpus`.
-- Future RecipeTemplate schema reservation remains `0031_recipe_template_catalogue`; no RecipeTemplate runtime is authorized by PR #36–#41.
+- Future RecipeTemplate schema reservation remains `0031_recipe_template_catalogue`; no RecipeTemplate runtime is authorized by PR #36–#42.
 - The PR #36 214-card `RU_MR_2_4_0162_19` corpus remains evidence/source material; it does not publish RecipeVersion/RecipeTemplate and does not replace FoodIngredient/Nutrition/Composition truth.
 - The v22.13 checkpoint remains a separate hash-pinned external evidence/reference source; its `USSR82-*` lineage is not merged into the PR #36 source identity.
 - R1 / R2 / R3 / R4 remain COMPLETE AS BLOCKED RESEARCH; frozen accepted evidence remains unchanged.
 - R1-21 and R1-23 remain INDIVIDUALLY_READY; accepted ready count remains 2/3.
 - OPEN Assembly-A gates remain `family_count`, `optional_role`, `verified_substitution`.
-- Assembly A remains BLOCKED; Assembly B and PR7+ remain NOT STARTED.
+- Assembly A remains BLOCKED; Assembly B, `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` and PR7+ remain NOT STARTED.
 
 ## Current authorized operation
 
-`V22-13-267-PROFILE-A` — production-profile authority review for the three exact food forms isolated by PR #41 for `USSR82-267 — Суп-пюре из моркови или репы`.
+`V22-13-267-KITCHEN-A` — bounded kitchen/process evidence review for
+`USSR82-267 — Суп-пюре из моркови или репы`, following accepted PR #42.
 
 Current delivery:
 
-- [PR #42](https://github.com/Mitronomik/family-food-os/pull/42) — `research: resolve USSR82-267 profile authority` — OPEN / READY FOR HUMAN REVIEW.
-- Branch: `research/v22-13-267-profile-a`.
-- Base: `63e35817503723e4cdc6a82c9000a13f1360d271`.
-- Scope is research/data authority + state only. No runtime/domain code, schema/migration, production seed, FoodIngredient mutation, Nutrition/Composition promotion, RecipeVersion/RecipeTemplate/RecipeAssembly publication or accepted prior evidence package is changed.
+- [PR #43](https://github.com/Mitronomik/family-food-os/pull/43) — `research: resolve USSR82-267 kitchen/process evidence` — OPEN / READY FOR HUMAN REVIEW.
+- Branch: `research/v22-13-267-kitchen-a`.
+- Base: accepted `main` after PR #42, `c9fcaa782a9cb6b1a48d877fb251f3ee69cb4e7d`.
+- Scope is research/data evidence + proposed measurement protocol + state only. No physical kitchen execution, runtime/domain code, schema/migration, production seed, FoodIngredient mutation, Nutrition/Composition promotion or RecipeVersion/RecipeTemplate/RecipeAssembly publication is claimed.
 
 Exact reviewed external checkpoint SHA-256 remains:
 
 `a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97`.
 
-## V22-13-267-PROFILE-A findings
+## V22-13-267-KITCHEN-A findings
 
-### `RICE_GROATS_POLISHED`
+### Complete carrot / turnip branches
 
-Official CREA food `000100 — Riso, brillato / Rice polished, raw` is an acceptable **profile-source candidate** for the generic polished-rice identity:
+The 1982 Ministry collection, 1973 Ministry collection and 1987 professional
+culinary textbook strongly corroborate one carrot-or-turnip soup-puree family.
 
-- 100 g basis, `Oryza sativa`, edible part 100%;
-- 334 kcal, protein 6.7 g, fat 0.4 g, available carbohydrate 80.4 g, total fibre 1.0 g;
-- analytical/method metadata are exposed per nutrient;
-- source-imputed zero values are explicitly withheld rather than promoted.
+The selected scope remains the published recipe-267 column-II + water batch:
 
-Decision: `SOURCE_CANDIDATE_ACCEPTABLE_MAPPING_PENDING`.
+- carrot 320 g **or** turnip 360 g;
+- parsley root 10 g;
+- onion 20 g;
+- wheat flour 20 g;
+- optional rice-groats garnish input 20 g;
+- butter 20 g;
+- milk 150 g;
+- egg 10 g;
+- water 700 g;
+- published dish output 1000 g.
 
-No FoodNutritionProfile/NutrientVector/Composition is created.
+The turnip branch has a branch-specific 1–2 minute blanching step.
 
-### `PARSLEY_ROOT_RAW`
+The bounded search did not recover a retained candidate-specific record that
+separately establishes successful execution/testing of both complete selected
+branches. Repeated normative/professional publication and collection-level
+standardization therefore remain strong culinary evidence, not the accepted
+complete-variant kitchen-verification evidence.
 
-Norwegian Food Composition Table food `06.051 — Parsley root, Norwegian, raw` is an acceptable exact-form **profile-source candidate**:
+Decision:
 
-- standardized parsley-root / raw classification;
-- 46 kcal, protein 1.7 g, fat 0.3 g, carbohydrate 7.3 g, fibre 4.0 g per 100 g;
-- source IDs are retained per nutrient;
-- estimated-natural-zero and missing source classes remain non-authoritative.
+`MEASURED_COMPLETE_VARIANT_KITCHEN_VERIFICATION_REQUIRED`.
 
-The official API is not versioned, so any future production import must pin the exact source response/snapshot and retrieval/version identity.
+`verified_substitution` remains OPEN.
 
-Decision: `SOURCE_CANDIDATE_ACCEPTABLE_MAPPING_PENDING`.
+### Optional crumbly-rice garnish
 
-PR #41's separate default-pool Russian market-eligibility limitation remains.
+The 1973 Ministry collection strengthens the process evidence for crumbly rice:
 
-### `MILK_PASTEURIZED_3_2`
+- per 1 kg raw rice: 2.10 L water, 28 g salt, 180% cooking gain and 2.80 kg output;
+- target moisture 70% with ±1.5 percentage-point tolerance;
+- the same source states that required liquid varies with vessel size/shape;
+- recipe 203 independently gives 72 g rice + 151 g water → 200 g cooked rice and 90 g + 189 g → 250 g.
 
-Current Russian retailer labels support the exact pasteurized 3.2% identity and show strong macro convergence, but retail product labels do not establish a generic category-level canonical profile.
+The base process does not require separate added fat; fat may be added. This means
+mandatory-fat double counting is no longer the primary garnish blocker.
 
-NIZP PZH documents a comprehensive 1045-food full composition database, IV edition 2017, distributed under a license agreement. No licensed XLSX is present in the repository, so this operation does not assert an exact milk row or import any values from that database.
+For protocol planning only, the per-kilogram table arithmetically corresponds to
+20 g raw rice → 42 ml base water, 0.56 g salt and 56 g theoretical output.
+Those are not production values: the source itself makes the small-vessel liquid
+requirement equipment-sensitive.
 
-Decision: `BLOCKED_GENERIC_PROFILE_AUTHORITY`.
+Decision:
 
-No cross-source hybrid profile is constructed.
+`INSTITUTIONAL_CRUMBLY_RICE_PROCESS_ESTABLISHED__EXACT_20G_BINDING_BLOCKED`.
 
-### Production-data decision
+Source optionality remains established; production `optional_role` remains OPEN.
 
-`data/curation/v22-13-267-profile-a/data-enablement-plan.json` records:
+### Proposed verification protocol
 
-- `status = WITHHELD_IMPLEMENTATION_AND_MILK_AUTHORITY`;
-- `production_delta = null`.
+`data/curation/v22-13-267-kitchen-a/kitchen-verification-protocol.json` defines a
+future measured test but explicitly records `PROPOSED_NOT_EXECUTED`.
 
-Two source candidates are now strong enough for a later bounded source-pin/mapping/import operation. Milk profile authority remains a true data blocker.
+It requires:
 
-## Assembly A status after profile-authority review
+1. the exact published 1000 g carrot branch;
+2. the exact published 1000 g turnip branch with the blanching step;
+3. retained actual input/output masses, equipment, timing and deviations;
+4. a separately measured 20 g raw-rice garnish transformation without added fat;
+5. service evaluation with and without the optional garnish;
+6. no inference of nutrient retention from kitchen execution.
+
+No physical test is claimed by PR #43.
+
+## Assembly A status after KITCHEN-A research
 
 Assembly A remains **BLOCKED** at 2/3 individually-ready families.
 
-- `family_count` = OPEN.
-- `optional_role` = OPEN.
-- `verified_substitution` = OPEN.
+- `family_count` = OPEN. Recipe 267 remains not individually ready.
+- `optional_role` = OPEN. Source semantics are clear; exact measured garnish binding is not.
+- `verified_substitution` = OPEN. Both complete branches still require applicable retained kitchen evidence.
 
-Profile-source discovery does not close PR #41's indepent carrot/turnip complete-variant kitchen requirement or cooked-rice-garnish process/batch binding.
+No accepted R1/R2/R3/R4 or PR40–PR42 evidence is rewritten.
 
 ## Next-step rule
 
-Exact-head proportional docs/data verification is PASS for the current PR #42 delivery. Current next action is human review. Merge requires separate explicit post-review authorization.
+Exact-head proportional docs/data verification is PASS for PR #43. Current next
+action is human review. Merge requires separate explicit post-review authorization.
 
-If accepted, the proposed next bounded operation is `V22-13-267-KITCHEN-A`:
+The source-only path for recipe 267 has reached a practical boundary:
 
-1. obtain/run candidate-specific complete carrot/turnip kitchen verification under the accepted substitution gate;
-2. clarify the exact optional-rice garnish process/batch applicability without unsupported institutional-batch scaling or hidden fat allocation;
-3. decide whether recipe 267 is still viable as the third Assembly-A family before implementing new production food profiles.
+- if measured human kitchen execution is available, a separately authorized
+  `V22-13-267-KITCHEN-B` may execute and retain the PR #43 protocol;
+- if measured execution is not available, a separately authorized
+  `RECIPE-ASSEMBLY-A-RECOVERY-B` should stop the 267 source-only path and choose
+  the smallest alternate route capable of closing the remaining gates.
 
-Only if recipe 267 remains viable should a later bounded `V22-13-267-PROFILE-B` implement the actually needed approved FoodIngredient/profile/vector/composition additions.
-
-No automatic Assembly B, `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE`, PR7, RecipeTemplate/RecipeVersion publication, Retail, AI, Auth or bulk production-data import is authorized.
+`V22-13-267-PROFILE-B` is not justified before the kitchen decision. No automatic
+Assembly B, `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE`, PR7, Retail, AI, Auth or bulk
+production-data import is authorized.

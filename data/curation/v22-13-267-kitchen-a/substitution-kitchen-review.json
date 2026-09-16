@@ -1,0 +1,70 @@
+{
+  "operation": "V22-13-267-KITCHEN-A",
+  "reviewed": "2026-09-16",
+  "accepted_base": "c9fcaa782a9cb6b1a48d877fb251f3ee69cb4e7d",
+  "candidate": "USSR82-267",
+  "pair": [
+    "CARROT",
+    "TURNIP"
+  ],
+  "selected_scope": "column II; source-authorized water branch; 1000 g published batch",
+  "complete_branch_facts": {
+    "shared_inputs_net_g": {
+      "parsley_root": "10",
+      "onion": "20",
+      "wheat_flour": "20",
+      "rice_groats_optional_garnish_input": "20",
+      "butter": "20",
+      "milk": "150",
+      "egg": "10",
+      "water": "700"
+    },
+    "dish_output_g": "1000",
+    "carrot_branch": {
+      "carrot_net_g": "320",
+      "extra_branch_step": null
+    },
+    "turnip_branch": {
+      "turnip_net_g": "360",
+      "extra_branch_step": "Blanch turnip for 1–2 minutes before the shared process."
+    }
+  },
+  "source_evidence": [
+    {
+      "source_id": "USSR82_ORDER_310",
+      "finding": "Recipe 267 publishes carrot 320 g OR turnip 360 g in the same recipe family, gives the turnip-only blanching step, a 1000 g output and optional crumbly-rice garnish semantics.",
+      "evidence_scope": "EXACT_RECIPE_FAMILY_AND_PROCESS"
+    },
+    {
+      "source_id": "USSR73_ORDER_1",
+      "finding": "The earlier Ministry collection repeats the carrot-or-turnip family and optional rice service semantics.",
+      "evidence_scope": "CROSS_EDITION_CULINARY_FAMILY"
+    },
+    {
+      "source_id": "ANFIMOVA_1987",
+      "finding": "A professional culinary textbook again treats carrot or turnip as one soup-puree family with shared puree process and crumbly-rice garnish.",
+      "evidence_scope": "PROFESSIONAL_CULINARY_CORROBORATION"
+    }
+  ],
+  "bounded_search_for_completed_variant_test": {
+    "result": "NOT_FOUND",
+    "meaning": "The bounded review found repeated normative/professional treatment and training tasks, but no retained candidate-specific record that separately identifies successful execution/testing of both complete carrot and turnip branches under the selected recipe-267 scope.",
+    "not_proof_of": "This does not prove that historical testing never occurred."
+  },
+  "non_qualifying_evidence": [
+    {
+      "source_id": "MEGAOBUCHALKA_LAB_ASSIGNMENT",
+      "finding": "A teaching assignment requires students to prepare soup-puree from carrot or turnip and perform brakerazh.",
+      "why_not_gate_evidence": "It is an assignment/procedure, not a retained completed result for both exact branches."
+    }
+  ],
+  "branch_kitchen_status": {
+    "carrot": "PROCESS_AND_SOURCE_STANDARDIZATION_STRONG__EXACT_VARIANT_TEST_NOT_ESTABLISHED",
+    "turnip": "PROCESS_AND_SOURCE_STANDARDIZATION_STRONG__EXACT_VARIANT_TEST_NOT_ESTABLISHED"
+  },
+  "verified_substitution": "OPEN",
+  "decision": "MEASURED_COMPLETE_VARIANT_KITCHEN_VERIFICATION_REQUIRED",
+  "reason": "Accepted Assembly-A policy requires applicable evidence for the complete variants. Repeated source OR semantics and collection-level standardization do not by themselves prove that both selected branches were separately executed and accepted as an interchangeable FamilyFoodOS production rule.",
+  "architecture_change": "NO",
+  "production_rule_published": "NO"
+}

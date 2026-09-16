@@ -1,0 +1,11 @@
+{
+  "algorithm": "sha256",
+  "files": {
+    "README.md": "a18cefba2b4f2173434eebf31462c4fa97882e24f42b15d528ff2dc5c207b044",
+    "substitution-kitchen-review.json": "852549402cc0a826964b2ee0ae722b5865281f8db92a55286fc7d7c3ec261844",
+    "rice-process-review.json": "6c8c73da2051f10c6e6c64c5793077aaab5dfe57f292d4502ff83dbd5a3ad9a7",
+    "kitchen-verification-protocol.json": "d665776b6b3b98e33acf560e8cbdffb87d7f24ca4fdefe8cf2b678c127f5bf58",
+    "source-manifest.json": "7f39f014374f6b1f7601f8777acffb7090eec1ae16b14f3c78f3b771b982c08f",
+    "decision.json": "8bf1f7ffc82ff73efe22dd4702207fa204f3cb98b38c69885efcea3484253987"
+  }
+}

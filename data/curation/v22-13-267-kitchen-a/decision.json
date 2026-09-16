@@ -1,0 +1,41 @@
+{
+  "operation": "V22-13-267-KITCHEN-A",
+  "reviewed": "2026-09-16",
+  "accepted_base": "c9fcaa782a9cb6b1a48d877fb251f3ee69cb4e7d",
+  "candidate": "USSR82-267",
+  "candidate_status": "DEFER_UNTIL_MEASURED_KITCHEN_VERIFICATION",
+  "facts_now_established": [
+    "Carrot/turnip is a strong cross-edition professional recipe family with exact distinct masses and a branch-specific turnip blanching step.",
+    "Rice is source-optional garnish, not a hidden required soup component.",
+    "A plain institutional crumbly-rice transformation exists without mandatory separate fat.",
+    "Published rice liquid/output guidance is equipment-sensitive; 20 g household-scale exact transformation is not established by arithmetic alone."
+  ],
+  "gates": {
+    "family_count": "OPEN",
+    "optional_role": "OPEN",
+    "verified_substitution": "OPEN"
+  },
+  "assembly_a": {
+    "status": "BLOCKED",
+    "individual_ready_count": 2,
+    "accepted_ready_families": [
+      "R1-21",
+      "R1-23"
+    ]
+  },
+  "production_delta": null,
+  "profile_b_now": "NOT_JUSTIFIED_YET",
+  "reason_profile_b_deferred": "Recipe 267 still lacks the measured kitchen/process evidence needed to justify production food/profile implementation solely for this recovery family.",
+  "next_if_human_kitchen_execution_is_available": {
+    "code": "V22-13-267-KITCHEN-B",
+    "authorized_automatically": false,
+    "goal": "Execute and retain the measured two-branch soup verification plus 20 g rice-garnish transformation using the KITCHEN-A protocol."
+  },
+  "next_if_human_kitchen_execution_is_not_available": {
+    "code": "RECIPE-ASSEMBLY-A-RECOVERY-B",
+    "authorized_automatically": false,
+    "goal": "Stop spending source-only PRs on USSR82-267 and choose the smallest alternate path that can close the remaining Assembly-A gates without weakening them."
+  },
+  "source_only_research": "BOUNDED_CURRENT_SEARCH_EXHAUSTED_FOR_GATE_CLOSURE",
+  "assembly_b_pr7_started": false
+}

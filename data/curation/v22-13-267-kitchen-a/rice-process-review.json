@@ -1,0 +1,64 @@
+{
+  "operation": "V22-13-267-KITCHEN-A",
+  "reviewed": "2026-09-16",
+  "accepted_base": "c9fcaa782a9cb6b1a48d877fb251f3ee69cb4e7d",
+  "candidate": "USSR82-267",
+  "source_recipe_267": {
+    "raw_rice_input_g": "20",
+    "role": "OPTIONAL_GARNISH_INPUT",
+    "source_semantics": "Use crumbly rice as garnish; soup may be prepared without rice."
+  },
+  "institutional_process_evidence": {
+    "source_id": "USSR73_ORDER_1",
+    "table_per_kg_raw_rice": {
+      "water_l": "2.10",
+      "salt_g": "28",
+      "cooking_gain_percent": "180",
+      "output_kg": "2.80",
+      "moisture_percent": "70",
+      "moisture_tolerance_percent_points": "1.5"
+    },
+    "equipment_caveat": "The same source states that liquid demand varies with vessel size/shape: large kettles need less and small/low vessels more than the table value.",
+    "scaling_statement": "The source instructs calculating liquid by multiplying the table amount by the quantity of groats, but the vessel caveat prevents treating the 20 g result as an exact household rule without measured verification."
+  },
+  "published_small_batch_reference": {
+    "source_recipe": "USSR73-203 — Каша рисовая рассыпчатая",
+    "rows": [
+      {
+        "raw_rice_g": "72",
+        "water_g": "151",
+        "cooked_porridge_g": "200"
+      },
+      {
+        "raw_rice_g": "90",
+        "water_g": "189",
+        "cooked_porridge_g": "250"
+      }
+    ],
+    "process": "Rice is put into salted boiling water and cooked at a weak boil; after swelling, the vessel is covered and cooking finishes for 30–40 minutes. Fat may be added during cooking, so a no-added-fat base process is not excluded.",
+    "use_limit": "These published quantities corroborate the transformation family but do not directly authorize a separate 20 g household batch."
+  },
+  "derived_20g_arithmetic_reference_only": {
+    "water_from_table_g_assuming_1g_per_ml_for_recording_only": null,
+    "water_from_table_ml": "42.0",
+    "salt_g": "0.56",
+    "theoretical_output_g": "56.0",
+    "authority": "NOT_PRODUCTION_AUTHORITY",
+    "reason": "The source itself makes water demand vessel-dependent and permits output/moisture tolerance. These calculations are only protocol starting references and are not published as exact recipe data."
+  },
+  "fat_allocation_update": {
+    "previous_concern": "Binding recipes 747/748 could double-count or reallocate recipe 267's butter because those candidate producers contain their own fat.",
+    "new_evidence": "The 1973 crumbly-rice process allows a plain base rice preparation; fat may be added but is not required by the base transformation.",
+    "decision": "A future garnish producer can be tested without separate added fat, so mandatory-fat double-counting is no longer the primary blocker."
+  },
+  "decision": "INSTITUTIONAL_CRUMBLY_RICE_PROCESS_ESTABLISHED__EXACT_20G_BINDING_BLOCKED",
+  "optional_role_source_semantics": "ESTABLISHED",
+  "optional_role_production_gate": "OPEN",
+  "remaining_blockers": [
+    "MEASURED_SMALL_VESSEL_WATER_INPUT",
+    "MEASURED_COOKED_OUTPUT_MASS",
+    "RECORDED_PROCESS_EQUIPMENT_AND_DURATION",
+    "SELECTED_PROCESS_BINDING_TO_RECIPE_267"
+  ],
+  "production_binding_published": "NO"
+}
