@@ -27,7 +27,7 @@ Updated: `2026-09-16`.
 
 Current delivery:
 
-- [PR #40](https://github.com/Mitronomik/family-food-os/pull/40) — `research: narrow v22.13 Assembly A candidate recovery` — OPEN / HUMAN REVIEW REQUIRED.
+- [PR #40](https://github.com/Mitronomik/family-food-os/pull/40) — `research: narrow v22.13 Assembly A candidate recovery` — OPEN / READY FOR HUMAN REVIEW.
 - Branch: `research/v22-13-candidate-a`.
 - Base: accepted `main` after PR #39, `2707fab16f003c9942d0eb09edf99c790d98a16f`.
 - Scope is research/data curation + state only. No runtime/domain code, schema/migration, production seed, FoodIngredient mutation, Nutrition/Composition promotion, RecipeVersion/RecipeTemplate/RecipeAssembly publication or accepted prior evidence package is changed.
@@ -88,9 +88,9 @@ Assembly A remains **BLOCKED** at 2/3 individually-ready families.
 
 No accepted R1/R2/R3/R4 status or historical evidence package is rewritten.
 
-## Next-step rule
+## Verification and next-step rule
 
-Current next action: proportional verification and human review of PR #40. Merge requires separate explicit post-review authorization.
+Exact-head proportional docs/data verification is PASS for the current PR #40 delivery. Current next action is human review. Merge requires separate explicit post-review authorization.
 
 If Candidate-A is accepted, the proposed next bounded operation is `V22-13-267-ENABLE-A`:
 
