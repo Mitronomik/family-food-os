@@ -1,9 +1,9 @@
 # V22-13-267-PROFILE-A — profile authority review
 
-**Status:** research/data authority; no production mutation  
-**Reviewed:** 2026-09-16  
-**Delivery base:** `63e35817503723e4cdc6a82c9000a13f1360d271`  
-**Accepted PR #41 merge:** `2b71c76c523c1b8a1ebeda9c5a2ba8fdc7157ced`  
+**Status:** research/data authority; no production mutation
+**Reviewed:** 2026-09-16
+**Delivery base:** `63e35817503723e4cdc6a82c9000a13f1360d271`
+**Accepted PR #41 merge:** `2b71c76c523c1b8a1ebeda9c5a2ba8fdc7157ced`
 **External checkpoint:** `a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97`
 
 ## Goal
