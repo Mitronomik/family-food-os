@@ -30,7 +30,7 @@ Updated: `2026-09-16`.
 
 Current delivery:
 
-- [PR #42](https://github.com/Mitronomik/family-food-os/pull/42) — `research: resolve USSR82-267 profile authority` — OPEN / VERIFICATION IN PROGRESS.
+- [PR #42](https://github.com/Mitronomik/family-food-os/pull/42) — `research: resolve USSR82-267 profile authority` — OPEN / READY FOR HUMAN REVIEW.
 - Branch: `research/v22-13-267-profile-a`.
 - Base: `63e35817503723e4cdc6a82c9000a13f1360d271`.
 - Scope is research/data authority + state only. No runtime/domain code, schema/migration, production seed, FoodIngredient mutation, Nutrition/Composition promotion, RecipeVersion/RecipeTemplate/RecipeAssembly publication or accepted prior evidence package is changed.
@@ -96,11 +96,11 @@ Assembly A remains **BLOCKED** at 2/3 individually-ready families.
 - `optional_role` = OPEN.
 - `verified_substitution` = OPEN.
 
-Profile-source discovery does not close PR #41's independent carrot/turnip complete-variant kitchen requirement or cooked-rice-garnish process/batch binding.
+Profile-source discovery does not close PR #41's indepent carrot/turnip complete-variant kitchen requirement or cooked-rice-garnish process/batch binding.
 
 ## Next-step rule
 
-Current next action is proportional verification and human review of PR #42. Merge requires separate explicit post-review authorization.
+Exact-head proportional docs/data verification is PASS for the current PR #42 delivery. Current next action is human review. Merge requires separate explicit post-review authorization.
 
 If accepted, the proposed next bounded operation is `V22-13-267-KITCHEN-A`:
 
