@@ -1,0 +1,118 @@
+{
+  "operation": "V22-13-CANDIDATE-A",
+  "reviewed": "2026-09-16",
+  "accepted_base": "2707fab16f003c9942d0eb09edf99c790d98a16f",
+  "source_checkpoint_sha256": "a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97",
+  "accepted_ready_families": [
+    {
+      "code": "R1-21",
+      "name": "Овсяная каша E00100",
+      "status": "INDIVIDUALLY_READY",
+      "scope": "published 100 portions only"
+    },
+    {
+      "code": "R1-23",
+      "name": "Яйца вкрутую F00400 method 1",
+      "status": "INDIVIDUALLY_READY",
+      "scope": "published 100 portions only"
+    }
+  ],
+  "candidates": [
+    {
+      "source_recipe_id": "USSR82-267",
+      "name": "Суп-пюре из моркови или репы",
+      "role": "PRIMARY_THIRD_FAMILY_RECOVERY_LEAD",
+      "target_objectives": [
+        "family_count",
+        "optional_role",
+        "verified_substitution"
+      ],
+      "source_recipe_status": "READY_RAW",
+      "decision": "CONTINUE_BOUNDED_RECOVERY",
+      "preferred_review_scope": "variant II; water branch; carrot fixed branch plus turnip alternate branch; rice optionality preserved",
+      "source_semantics": {
+        "optional_rice": "ESTABLISHED_AT_SOURCE_LEVEL",
+        "carrot_or_turnip": "ESTABLISHED_AT_SOURCE_LEVEL",
+        "variant_specific_verified_substitution": "NOT_ESTABLISHED",
+        "collection_level_production_trial_context": "POSITIVE_BUT_NOT_VARIANT_SPECIFIC"
+      },
+      "blocking_classes": [
+        "RICE_GROATS_FOOD_FORM",
+        "MILK_3_2_FOOD_FORM",
+        "PARSLEY_ROOT_FOOD_FORM",
+        "OPTIONAL_RICE_COOKED_GARNISH_TRANSFORMATION",
+        "VARIANT_SPECIFIC_KITCHEN_SUBSTITUTION",
+        "RIGHTS_PUBLICATION_SCOPE",
+        "RU_FAMILIARITY_EDITORIAL_REVIEW"
+      ],
+      "production_ready": "NO"
+    },
+    {
+      "source_recipe_id": "USSR82-459",
+      "name": "Яичница глазунья (натуральная)",
+      "role": "SECONDARY_SUBSTITUTION_LEAD",
+      "target_objectives": [
+        "verified_substitution"
+      ],
+      "source_recipe_status": "READY_RAW",
+      "decision": "KEEP_AS_SECONDARY_LEAD",
+      "source_semantics": {
+        "butter_or_margarine_10g": "ESTABLISHED_AT_SOURCE_LEVEL",
+        "cross_edition_structure": "CORROBORATED_1973_AND_1980_COLLECTIONS",
+        "variant_specific_verified_substitution": "NOT_ESTABLISHED",
+        "optional_food_role": "NOT_ESTABLISHED"
+      },
+      "blocking_classes": [
+        "MILK_MARGARINE_IDENTITY",
+        "VARIANT_SPECIFIC_KITCHEN_SUBSTITUTION",
+        "RIGHTS_PUBLICATION_SCOPE"
+      ],
+      "overlap_note": "Egg-based family overlaps accepted R1-23, so it is not preferred as the third final family.",
+      "production_ready": "NO"
+    },
+    {
+      "source_recipe_id": "USSR82-323",
+      "name": "Картофель отварной",
+      "role": "FAMILY_COUNT_FALLBACK",
+      "target_objectives": [
+        "family_count"
+      ],
+      "source_recipe_status": "READY_RAW",
+      "decision": "DEFER_AS_FINAL_THIRD",
+      "source_semantics": {
+        "fixed_branch": "III + butter is low identity debt",
+        "source_output_mass": "explicit cooked potato and final dish output exist",
+        "optional_food_role": "NOT_ESTABLISHED",
+        "verified_substitution": "NOT_ESTABLISHED_FOR_FAMILYFOODOS"
+      },
+      "blocking_classes": [
+        "RAW_TO_COOKED_TRANSFORMATION_BINDING",
+        "KITCHEN_SCOPE",
+        "RIGHTS_PUBLICATION_SCOPE",
+        "RU_FAMILIARITY_EDITORIAL_REVIEW"
+      ],
+      "why_not_primary": "It can improve family_count only; the accepted two ready families still leave optional_role and verified_substitution uncovered.",
+      "production_ready": "NO"
+    }
+  ],
+  "assembly_a": {
+    "status": "BLOCKED",
+    "individual_ready_count": 2,
+    "family_count": "OPEN",
+    "optional_role": "OPEN",
+    "verified_substitution": "OPEN",
+    "primary_recovery_lead": "USSR82-267",
+    "why": "Candidate-A establishes source semantics and a bounded recovery path, but does not establish a third individually ready family or a tested substitution rule."
+  },
+  "proposed_follow_up": {
+    "code": "V22-13-267-ENABLE-A",
+    "authorized": false,
+    "goal": "Resolve the three candidate-specific food-form identities and the optional-rice process binding, then re-evaluate fixed and alternate branches without publishing a template.",
+    "bounded_identity_targets": [
+      "Крупа рисовая",
+      "Молоко пастеризованное 3,2%",
+      "Петрушка (корень)"
+    ],
+    "additional_gate": "Find candidate-specific evidence sufficient for the carrot/turnip full-variant kitchen/substitution applicability; otherwise verified_substitution remains open."
+  }
+}
