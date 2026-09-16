@@ -26,7 +26,7 @@ Updated: `2026-09-16`.
 
 Current delivery:
 
-- [PR #39](https://github.com/Mitronomik/family-food-os/pull/39) — `data: map v22.13 identities and recipe candidates` — OPEN / VERIFICATION PENDING.
+- [PR #39](https://github.com/Mitronomik/family-food-os/pull/39) — `data: map v22.13 identities and recipe candidates` — OPEN / READY FOR HUMAN REVIEW.
 - Branch: `data/v22-13-map-a`.
 - Base: accepted `main` after PR #38, `a852b169323cd4061c150107d7b75aebd67a9bc7`.
 
@@ -88,7 +88,7 @@ No accepted R1/R2/R3/R4 status or historical evidence package is rewritten.
 
 ## Next-step rule
 
-Current next action is current-head proportional docs/data verification followed by human review of PR #39. Merge requires separate explicit post-review authorization.
+Current next action is human review of PR #39. Final-head proportional docs/data verification must PASS before merge. Merge requires separate explicit post-review authorization.
 
 If this mapping is accepted, the proposed next bounded research operation is `V22-13-CANDIDATE-A`: take a small candidate set and attempt to close one Assembly-A evidence objective at a time (`family_count`, `optional_role`, `verified_substitution`). It is **not** authorized to start automatically.
 
