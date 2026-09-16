@@ -1,0 +1,39 @@
+{
+  "accepted_base": "c428899e703f2bf5addd5f910d53ad40617244c5",
+  "fallback_order": [
+    "R1-05",
+    "USSR82-369"
+  ],
+  "forbidden_automatic_starts": [
+    "V22-13-267-PROFILE-B",
+    "RECIPE-ASSEMBLY-B",
+    "PR7-SUPPORT-MEAL-PATTERN-CATALOGUE",
+    "PR7",
+    "PR8",
+    "RETAIL",
+    "AI",
+    "AUTH"
+  ],
+  "next_actions": [
+    {
+      "authorized_automatically": false,
+      "condition": "MEASURED_267_PROTOCOL_EVIDENCE_AVAILABLE",
+      "operation": "V22-13-267-KITCHEN-B"
+    },
+    {
+      "authorized_automatically": false,
+      "condition": "MEASURED_267_PROTOCOL_FAILS",
+      "operation": "R1-05-RECOVERY"
+    },
+    {
+      "condition": "NO_MEASURED_EVIDENCE_AVAILABLE",
+      "operation": null,
+      "result": "REMAIN_BLOCKED"
+    }
+  ],
+  "operation": "RECIPE-ASSEMBLY-A-RECOVERY-B",
+  "production_delta": null,
+  "selected_recovery_candidate": "USSR82-267",
+  "source_only_work": "STOP",
+  "status": "BLOCKED_ON_HUMAN_MEASUREMENT"
+}

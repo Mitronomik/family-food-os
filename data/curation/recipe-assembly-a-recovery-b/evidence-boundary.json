@@ -1,0 +1,35 @@
+{
+  "accepted_base": "c428899e703f2bf5addd5f910d53ad40617244c5",
+  "gate_change": {
+    "authorized": false,
+    "note": "Replacing measured complete-variant evidence with source OR wording would change accepted Assembly-A acceptance criteria."
+  },
+  "hard_rules_preserved": [
+    "SOURCE_ALTERNATIVE_IS_NOT_KITCHEN_VERIFIED_SUBSTITUTION",
+    "KITCHEN_VERIFIED_REQUIRES_APPLICABLE_RETAINED_EVIDENCE",
+    "PROPOSED_PROTOCOL_IS_NOT_EXECUTED_EVIDENCE",
+    "UNKNOWN_MASS_OR_PROCESS_IS_NOT_INFERRED",
+    "NO_GATE_RELAXATION_TO_FORCE_PROGRESS"
+  ],
+  "human_evidence_required": {
+    "candidate": "USSR82-267",
+    "minimum_measurements": [
+      "carrot branch actual inputs/process/output",
+      "turnip branch actual inputs/process/output including blanching",
+      "20 g raw-rice garnish water/salt/process/cooked output",
+      "service/evaluation with garnish and without garnish"
+    ],
+    "protocol_owner": "HUMAN_OPERATOR",
+    "repository_agents_may": [
+      "validate supplied measurements",
+      "retain provenance and protocol version",
+      "derive deterministic decisions only after evidence is supplied"
+    ],
+    "repository_agents_may_not": [
+      "claim physical execution",
+      "invent measured masses or sensory results",
+      "infer complete-variant testing from repeated publication"
+    ]
+  },
+  "operation": "RECIPE-ASSEMBLY-A-RECOVERY-B"
+}

@@ -1,23 +1,35 @@
 # Handoff
 
-Updated: `2026-09-13`.
+Updated: `2026-09-16`.
 
-PR #35 is MERGED; accepted main is `7388d19677cffbf5cd6cb192eabc0b93cad870f7`.
-R1/R2/R3/R4 are COMPLETE AS BLOCKED RESEARCH. Assembly A remains BLOCKED at 2/3 individually ready families (R1-21, R1-23); family_count, optional_role and verified_substitution remain open. Assembly B and PR7+ are NOT STARTED.
+Accepted main after merged PR #43 is `c428899e703f2bf5addd5f910d53ad40617244c5`. PR #43 established that the
+source-only path for `USSR82-267 — Суп-пюре из моркови или репы` cannot close the
+remaining Assembly-A kitchen gates without measured human execution.
 
-Current bounded operation is [PR #36](https://github.com/Mitronomik/family-food-os/pull/36) on `codex/ru-normative-recipe-corpus`.
-Verified runtime/acquisition head: `5f95530472e83748b67dd9efa9fa4542aeb5c546`.
-It adds the pre-publication Russian normative recipe source corpus and migration `0030_recipe_source_corpus`; future RecipeTemplate migration is `0031_recipe_template_catalogue`.
+Assembly A remains 2/3 individually-ready families: `R1-21` and `R1-23`.
+`family_count`, `optional_role`, and `verified_substitution` remain OPEN.
+Assembly B, `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE`, PR7+ are NOT STARTED.
 
-Historical verification on the synchronized runtime/acquisition head (not a new correction run): focused tests PASS; Ruff PASS; full backend + launcher regression PASS; live acquisition PASS at exactly 214/214 section-scoped cards; exact repeat import inserted 0; DB invariants PASS; mirror navigation/footer/scripts are excluded from all 214 raw card bodies. The cleaned durable bundle is `data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json` with SHA-256 recorded in `data/curation/ru-normative-recipe-corpus/verification.json`.
+Current bounded operation is `RECIPE-ASSEMBLY-A-RECOVERY-B` on branch
+`research/recipe-assembly-a-recovery-b`.
 
-PR #36 remains pre-publication only: no FoodIngredient/Nutrition/Composition authority changes, no RecipeVersion/RecipeTemplate publication, no Planner/MealPlan/Shopping/Prep/API/UI, no Assembly B or PR7 start.
+The recovery comparison keeps `USSR82-267` as preferred candidate. `R1-05 —
+Local Harvest Bake` is first fallback and `USSR82-369 — Грибы в сметанном соусе`
+is second fallback. Neither retained alternate removes the need for applicable
+complete-variant kitchen evidence; both add new data/process debt.
 
-Review `5190228147` corrections are complete and READY FOR FINAL RE-REVIEW on the same PR36 branch, based on prior head `874879db6467eaebd045b853a1727fde539d1503`.
-New evidence: 105 focused tests PASS with `AI_ENABLED=false`, Ruff check/format PASS, offline CLI imports 214 then 0 under the same document ID. Stale-hash and valid-rehash conflicting bundles both fail; complete DB dumps remain unchanged. Migration remains 0030 and production recipe versions remain unchanged (0 in the disposable replay).
-The six-card bootstrap had six stale hashes hidden by the old reader; only those hash literals were corrected. The frozen 214-card bundle remains byte-identical at `ee0aad55080ba09294625af57800172862a53293518f7869e1b974ed7e9ab0b7`.
-[Exact correction verification and initial failures](progress.md#pr36-final-provenanceidempotency-corrections).
-Full regression was not rerun: shared runtime/persistence/startup infrastructure is unchanged. Keep the previous successful run as historical evidence only.
+The precise blocker is now `HUMAN_EVIDENCE_BLOCKED__2_OF_3`. This is a status
+description, not a relaxed gate. No agent may fabricate physical execution.
 
-Worktree: `/private/tmp/ff-pr36-final`; Python runtime: `/Users/volkilli/Projects/family-food-os/backend/.venv/bin/python`. The primary checkout and unrelated `.DS_Store` were preserved.
-Next: final human re-review of PR36. Do not self-merge or start the next milestone. Same-origin/redirect hardening remains a separate follow-up.
+The PR #43 protocol in
+`data/curation/v22-13-267-kitchen-a/kitchen-verification-protocol.json` remains
+the preferred next evidence path. It requires the exact published carrot branch,
+the exact turnip branch, and a measured 20 g raw-rice garnish transformation.
+
+Next conditional action:
+- supplied measured evidence → separately authorize `V22-13-267-KITCHEN-B`;
+- failed measured 267 evidence → separately authorize `R1-05-RECOVERY`;
+- no measurement → remain BLOCKED.
+
+Do not start `V22-13-267-PROFILE-B`, Assembly B, Meal Pattern Catalogue support,
+PR7, Retail, AI or Auth automatically.
