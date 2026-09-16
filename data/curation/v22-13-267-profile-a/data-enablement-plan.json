@@ -1,0 +1,30 @@
+{
+  "operation": "V22-13-267-PROFILE-A",
+  "status": "WITHHELD_IMPLEMENTATION_AND_MILK_AUTHORITY",
+  "production_delta": null,
+  "accepted_source_candidate_outcomes": {
+    "RICE_GROATS_POLISHED": "SOURCE_CANDIDATE_ACCEPTABLE_MAPPING_PENDING",
+    "PARSLEY_ROOT_RAW": "SOURCE_CANDIDATE_ACCEPTABLE_MAPPING_PENDING",
+    "MILK_PASTEURIZED_3_2": "BLOCKED_GENERIC_PROFILE_AUTHORITY"
+  },
+  "why_no_production_delta": [
+    "This operation reviews profile provenance; it does not implement a new source importer/seed or mutate FoodIngredient truth.",
+    "CREA and Matvaretabellen candidates still require deterministic nutrient mappings and pinned source snapshots before production insertion.",
+    "MILK_PASTEURIZED_3_2 still lacks an accepted accessible generic category-level profile authority.",
+    "PARSLEY_ROOT_RAW remains outside accepted default-pool market eligibility from PR41.",
+    "Recipe 267 still has independent kitchen/substitution and cooked-rice-garnish blockers."
+  ],
+  "next_operation": {
+    "code": "V22-13-267-KITCHEN-A",
+    "authorized_automatically": false,
+    "goal": "Resolve candidate-specific carrot/turnip complete-variant kitchen applicability and the exact optional-rice garnish process/batch contract before spending another PR on production profile implementation."
+  },
+  "possible_later_operation": {
+    "code": "V22-13-267-PROFILE-B",
+    "authorized_automatically": false,
+    "condition": "Only if recipe 267 remains the chosen recovery family after kitchen review and production food/profile insertion is still necessary.",
+    "goal": "Pin/import approved source snapshots, implement deterministic nutrient mappings, create any explicitly approved FoodIngredient/profile/vector/composition data and verify idempotency."
+  },
+  "accepted_base": "63e35817503723e4cdc6a82c9000a13f1360d271",
+  "pr41_merge_sha": "2b71c76c523c1b8a1ebeda9c5a2ba8fdc7157ced"
+}

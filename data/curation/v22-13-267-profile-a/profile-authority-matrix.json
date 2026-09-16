@@ -1,0 +1,167 @@
+{
+  "operation": "V22-13-267-PROFILE-A",
+  "reviewed": "2026-09-16",
+  "accepted_base": "63e35817503723e4cdc6a82c9000a13f1360d271",
+  "candidate": "USSR82-267",
+  "external_checkpoint_sha256": "a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97",
+  "decisions": [
+    {
+      "candidate_canonical_code": "RICE_GROATS_POLISHED",
+      "source_form": "Крупа рисовая",
+      "profile_authority_decision": "SOURCE_CANDIDATE_ACCEPTABLE_MAPPING_PENDING",
+      "production_profile_promoted": "NO",
+      "preferred_source": {
+        "source_name": "CREA Tabelle di Composizione degli Alimenti",
+        "source_food_id": "000100",
+        "source_food_name": "Riso, brillato",
+        "source_food_name_en": "Rice polished, raw",
+        "scientific_name": "Oryza sativa",
+        "source_release": "December 2019",
+        "basis_grams": "100",
+        "edible_part_percent": "100",
+        "url": "https://www.alimentinutrizione.it/tabelle-nutrizionali/000100"
+      },
+      "v1_profile_candidate": {
+        "kcal": "334",
+        "protein_g": "6.7",
+        "fat_g": "0.4",
+        "carbohydrates_g": "80.4",
+        "fiber_g": "1.0"
+      },
+      "additional_analytical_candidate_values": {
+        "calcium_mg": "24",
+        "magnesium_mg": "20",
+        "phosphorus_mg": "94",
+        "iron_mg": "0.8",
+        "thiamin_mg": "0.11",
+        "riboflavin_mg": "0.03"
+      },
+      "withheld_source_values": [
+        {
+          "source_nutrient": "Vitamin C",
+          "source_value": "0 mg",
+          "reason": "Source marks the zero as imputed; FamilyFoodOS exact-zero authority is not established."
+        },
+        {
+          "source_nutrient": "Cholesterol",
+          "source_value": "0 mg",
+          "reason": "Source marks the zero as imputed; do not convert an imputation to authoritative zero."
+        }
+      ],
+      "identity_fit": "HIGH",
+      "reason": "The official source identity is generic raw polished Oryza sativa and does not impose a long-grain-only subtype, matching the accepted RICE_GROATS_POLISHED concept better than current long-grain RICE_WHITE.",
+      "rights_use_note": "The CREA page requires clear indication of the original source when data/text are copied or reproduced. Any future import must retain attribution and source/version provenance.",
+      "remaining_blockers": [
+        "PINNED_SOURCE_SNAPSHOT_OR_ARCHIVE",
+        "DETERMINISTIC_SOURCE_TO_PROJECT_NUTRIENT_MAPPING",
+        "BOUNDED_PRODUCTION_IMPORT_IMPLEMENTATION",
+        "SEALED_VECTOR_AND_ATOMIC_COMPOSITION_CREATION"
+      ]
+    },
+    {
+      "candidate_canonical_code": "PARSLEY_ROOT_RAW",
+      "source_form": "Петрушка (корень)",
+      "profile_authority_decision": "SOURCE_CANDIDATE_ACCEPTABLE_MAPPING_PENDING",
+      "production_profile_promoted": "NO",
+      "preferred_source": {
+        "source_name": "Norwegian Food Composition Table / Matvaretabellen",
+        "source_food_id": "06.051",
+        "source_food_name": "Parsley root, Norwegian, raw",
+        "scientific_name": "Petroselinum crispum (Mill.) A.W.Hill convar. radicosum (Alef.) Danert",
+        "source_release": "Matvaretabellen 2026",
+        "basis_grams": "100",
+        "edible_part_percent": "91",
+        "url": "https://www.matvaretabellen.no/en/parsley-root-norwegian-raw/"
+      },
+      "v1_profile_candidate": {
+        "kcal": "46",
+        "protein_g": "1.7",
+        "fat_g": "0.3",
+        "carbohydrates_g": "7.3",
+        "fiber_g": "4.0"
+      },
+      "additional_candidate_values": {
+        "calcium_mg": "42",
+        "magnesium_mg": "36",
+        "phosphorus_mg": "81",
+        "iron_mg": "0.8",
+        "thiamin_mg": "0.03",
+        "riboflavin_mg": "0.04",
+        "vitamin_c_mg": "52"
+      },
+      "withheld_source_values": [
+        {
+          "source_class": "source code 50",
+          "reason": "Matvaretabellen defines these as estimated naturally occurring zeros, not analysed values; FamilyFoodOS must not promote them as exact zeros."
+        },
+        {
+          "source_class": "missing source code 10",
+          "reason": "Missing/unknown values remain unknown."
+        }
+      ],
+      "identity_fit": "HIGH",
+      "reason": "The source explicitly classifies raw turnip-rooted parsley / parsley root and is distinct from leaf parsley.",
+      "source_provenance_note": "Core macros, fiber, B1, B2, vitamin C and several minerals cite source 202; the page identifies this as Norwegian nutrient analysis of vegetables and berries. Derived fields retain their calculation-source identifiers.",
+      "api_note": "Matvaretabellen exposes foods/nutrients/sources through JSON/EDN APIs, requests citation, updates annually, and states that the APIs are not versioned. A future production import therefore needs a pinned snapshot/retrieval instant rather than a mutable-current endpoint only.",
+      "market_note": "PR41 found bounded Russian availability but not accepted ordinary mass-market default-pool evidence; profile-source acceptability does not close that separate gate.",
+      "remaining_blockers": [
+        "PINNED_API_SNAPSHOT",
+        "DETERMINISTIC_SOURCE_TO_PROJECT_NUTRIENT_MAPPING",
+        "BOUNDED_PRODUCTION_IMPORT_IMPLEMENTATION",
+        "SEALED_VECTOR_AND_ATOMIC_COMPOSITION_CREATION",
+        "DEFAULT_POOL_MARKET_ELIGIBILITY_IF_REQUIRED"
+      ]
+    },
+    {
+      "candidate_canonical_code": "MILK_PASTEURIZED_3_2",
+      "source_form": "Молоко пастеризованное 3,2%",
+      "profile_authority_decision": "BLOCKED_GENERIC_PROFILE_AUTHORITY",
+      "production_profile_promoted": "NO",
+      "market_label_evidence": {
+        "source": "Lenta current product catalogue",
+        "examples": [
+          {
+            "brand_or_listing": "ЛЕНТА",
+            "url": "https://lenta.com/product/moloko-lenta-pasterizovannoe-32-pet-bez-zmzh-rossiya-900ml-671968/",
+            "kcal": "60",
+            "protein_g": "3.0",
+            "fat_g": "3.2",
+            "carbohydrates_g": "4.7"
+          },
+          {
+            "brand_or_listing": "БЕЛЫЕ РОСЫ",
+            "url": "https://lenta.com/product/moloko-pitevoe-pasteriz-32-paket-bez-zmzh-rossiya-900ml-546948/",
+            "kcal": "60",
+            "protein_g": "3.0",
+            "fat_g": "3.2",
+            "carbohydrates_g": "4.7"
+          }
+        ],
+        "limit": "Retail labels support exact-form existence and macro convergence but are product labels, not by themselves a reviewed generic category-level full profile authority."
+      },
+      "potential_full_source": {
+        "source_name": "NIZP PZH-PIB full Food Composition Tables",
+        "edition": "IV, 2017",
+        "url": "https://www.pzh.gov.pl/uslugi/tabele-wartosci-odzywczej-produktow/baza-danych-wersja-pelna/",
+        "access": "LICENSE_AGREEMENT_XLSX",
+        "decision": "NOT_ACQUIRED_NOT_REVIEWED_FOR_EXACT_ROW",
+        "note": "The official site describes a full 1045-food database with extensive nutrients on a 100 g edible basis, distributed under a license agreement. FamilyFoodOS does not possess a licensed dataset in this operation, so no exact milk row or values are asserted/imported."
+      },
+      "reason": "A single or several retailer labels cannot silently become a generic canonical FoodNutritionProfile, and no reviewed accessible category-level full profile source for the exact pasteurized 3.2% identity is pinned in this operation.",
+      "remaining_blockers": [
+        "ACQUIRE_OR_IDENTIFY_ACCEPTABLE_GENERIC_PROFILE_SOURCE",
+        "VERIFY_EXACT_FOOD_IDENTITY_ROW",
+        "DETERMINISTIC_SOURCE_TO_PROJECT_NUTRIENT_MAPPING",
+        "BOUNDED_PRODUCTION_IMPORT_IMPLEMENTATION",
+        "SEALED_VECTOR_AND_ATOMIC_COMPOSITION_CREATION"
+      ]
+    }
+  ],
+  "summary": {
+    "source_candidate_acceptable_mapping_pending": 2,
+    "profile_authority_blocked": 1,
+    "production_profiles_promoted": 0,
+    "production_delta": null
+  },
+  "pr41_merge_sha": "2b71c76c523c1b8a1ebeda9c5a2ba8fdc7157ced"
+}
