@@ -5,57 +5,65 @@ Updated: `2026-09-16`.
 ## Accepted repository state
 
 - PR6 / PR6-CLOSE = COMPLETE.
-- PR #34–#44 = MERGED.
-- Exact accepted `main` after PR #44: `25a496977d19666f812f76792a68aee92732186e`.
+- PR #31–#45 = MERGED as accepted research/governance history.
+- Exact accepted `main` after PR #45: `e87583b440e7121623622331c0fa136953bdc122`.
 - Current accepted SQLite migration head: `0030_recipe_source_corpus`.
-- Future RecipeTemplate schema reservation remains `0031_recipe_template_catalogue`.
-- R1 / R2 / R3 / R4 remain COMPLETE AS BLOCKED RESEARCH.
-- R1-21 and R1-23 remain INDIVIDUALLY_READY; accepted ready count remains 2/3.
-- Assembly A remains BLOCKED and is described operationally as `HUMAN_EVIDENCE_BLOCKED__2_OF_3`.
-- OPEN Assembly-A gates remain `family_count`, `optional_role`, `verified_substitution`.
-- Assembly B, `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` and PR7+ remain NOT STARTED.
+- Future RecipeTemplate schema reservation remains `0031_recipe_template_catalogue` unless a later implementation decision changes the migration plan.
+- R1 / R2 / R3 / R4 and later Assembly-A recovery packages remain accepted historical research.
+- The earlier `HUMAN_EVIDENCE_BLOCKED__2_OF_3` state describes the old mandatory-kitchen-validation policy and no longer blocks Planning Core under the 2026-09-16 user-approved decision.
 
-## Accepted recovery decision
+## Current authorized governance decision
 
-Merged PR #44 (`RECIPE-ASSEMBLY-A-RECOVERY-B`) established that no retained
-source-only alternate removes the accepted complete-variant kitchen-evidence
-requirement.
+The user explicitly approved two corrections on 2026-09-16:
 
-Accepted recovery order:
+1. technical ingredient/recipe/nutrition datasets and seed corpora are replaceable external bootstrap/evidence artifacts; FamilyFoodOS must not be designed around their schemas, counts or source-specific identities;
+2. deterministic Recipe Constructor / Recipe Assembly remains desirable, but mandatory personal kitchen execution is replaced by deterministic validation plus web corroboration for constructed-recipe publication.
 
-1. `USSR82-267 — Суп-пюре из моркови или репы` remains the preferred third-family recovery candidate.
-2. `R1-05 — Local Harvest Bake` remains the first fallback if measured 267 verification fails.
-3. `USSR82-369 — Грибы в сметанном соусе` remains the second fallback.
+Canonical decision draft:
 
-No acceptance criterion, architecture rule or production authority was changed.
-No additional source-only recovery PR for 267 is recommended.
+`docs/family-food/master-roadmap-addendum-2026-09-16.md`
+
+The decision preserves provenance, rights, mass/form, Nutrition uncertainty, Russian display and `AI_ENABLED=false` rules. Web sources provide validation evidence; they are not Planner runtime dependencies and are not permission to copy external recipe prose.
+
+## Recipe Constructor validation direction
+
+Constructed candidates use:
+
+```text
+constructor/template rules
+→ deterministic structural/data validation
+→ external recipe discovery
+→ normalized ingredient/ratio/yield/method comparison
+→ WEB_CORROBORATED / REVIEW_REQUIRED / REJECTED
+```
+
+Default corroboration requires at least two independent relevant external recipes. A single-source exception requires an explicit reviewed high-trust policy.
+
+`KITCHEN_TESTED` becomes optional additional evidence, not a roadmap prerequisite. Future `USER_VALIDATED` evidence may accumulate from real household use.
+
+## Roadmap correction
+
+Recipe Assembly research PR #31–#45 remains immutable historical evidence but is removed as a blocking prerequisite for Planning Core.
+
+After review/merge of the current governance/docs PR, the next software operation is:
+
+`PR7-SUPPORT-MEAL-PATTERN-CATALOGUE`
+
+Then:
+
+```text
+PR7-SUPPORT-MEAL-PATTERN-CATALOGUE
+→ PR7 MealPlan / Serving
+→ PR8 Planner v0
+→ GATE 1 — Planning Core
+```
+
+Recipe Constructor / Assembly may proceed later or in separately authorized bounded PRs without forcing PR7/PR8 to wait for physical kitchen evidence.
 
 ## Current authorization boundary
 
-No runtime/data-promotion implementation is automatically authorized by merging
-PR #44.
+This branch is docs/governance only. Do not implement runtime/schema/data promotion as part of this PR.
 
-The preferred next evidence path remains the measured protocol from PR #43:
+Do not start Retail, AI Gateway, Auth/shared deployment, bulk catalogue expansion or unrelated milestones automatically.
 
-`data/curation/v22-13-267-kitchen-a/kitchen-verification-protocol.json`
-
-Required human evidence includes:
-
-- exact carrot-branch execution measurements;
-- exact turnip-branch execution measurements, including blanching;
-- measured 20 g raw-rice garnish transformation/process binding;
-- service/evaluation with and without the optional garnish.
-
-Repository agents may validate and retain supplied measurements, but may not
-claim physical execution, invent measured values or infer successful variant
-testing from source publication.
-
-## Next-step rule
-
-- measured PR #43 protocol evidence supplied → separately authorize `V22-13-267-KITCHEN-B`;
-- measured 267 execution fails → separately authorize `R1-05-RECOVERY`;
-- no measured evidence available → remain BLOCKED.
-
-`V22-13-267-PROFILE-B` remains deferred until the kitchen decision.
-Do not start Assembly B, Meal Pattern Catalogue support, PR7, PR8, Retail, AI,
-Auth or bulk data promotion automatically.
+After this decision PR is reviewed and merged, `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` is the next authorized software operation; PR7 itself starts only after that support operation is accepted according to the roadmap/addenda.
