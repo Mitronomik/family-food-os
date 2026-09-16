@@ -1,0 +1,99 @@
+{
+  "operation": "V22-13-267-PROFILE-A",
+  "reviewed": "2026-09-16",
+  "accepted_base": "63e35817503723e4cdc6a82c9000a13f1360d271",
+  "sources": [
+    {
+      "id": "CREA_RICE_000100",
+      "type": "OFFICIAL_FOOD_COMPOSITION_TABLE",
+      "url": "https://www.alimentinutrizione.it/tabelle-nutrizionali/000100",
+      "issuer": "CREA Centro di ricerca Alimenti e Nutrizione",
+      "source_food_id": "000100",
+      "source_release": "December 2019",
+      "retrieved_at_date": "2026-09-16",
+      "original_sha256": null,
+      "used_for": [
+        "RICE_GROATS_POLISHED identity/profile source candidate",
+        "nutrient-method review"
+      ],
+      "production_authority": "CANDIDATE_ONLY",
+      "rights_use": "Page states reproduction/copying requires clear indication of the original source; future production use must retain attribution and pin the actual imported snapshot."
+    },
+    {
+      "id": "MATVARETABELLEN_PARSLEY_ROOT_06051",
+      "type": "OFFICIAL_FOOD_COMPOSITION_TABLE",
+      "url": "https://www.matvaretabellen.no/en/parsley-root-norwegian-raw/",
+      "issuer": "Norwegian Food Safety Authority / Matvaretabellen",
+      "source_food_id": "06.051",
+      "source_release": "Matvaretabellen 2026",
+      "retrieved_at_date": "2026-09-16",
+      "original_sha256": null,
+      "used_for": [
+        "PARSLEY_ROOT_RAW exact form/profile source candidate",
+        "per-nutrient provenance review"
+      ],
+      "production_authority": "CANDIDATE_ONLY",
+      "api_note": "The official API exposes foods, nutrients and sources but is not versioned; annual updates occur. Future import must pin a response snapshot/retrieval instant and cite Matvaretabellen."
+    },
+    {
+      "id": "MATVARETABELLEN_API",
+      "type": "OFFICIAL_API_DOCUMENTATION",
+      "url": "https://www.matvaretabellen.no/en/api/",
+      "issuer": "Norwegian Food Safety Authority / Matvaretabellen",
+      "retrieved_at_date": "2026-09-16",
+      "original_sha256": null,
+      "used_for": [
+        "future source replay/snapshot strategy"
+      ],
+      "production_authority": "NO_DIRECT_NUTRIENT_VALUES"
+    },
+    {
+      "id": "LENTA_MILK_32",
+      "type": "OFFICIAL_RETAIL_LABEL",
+      "url": "https://lenta.com/product/moloko-lenta-pasterizovannoe-32-pet-bez-zmzh-rossiya-900ml-671968/",
+      "issuer": "Лента",
+      "retrieved_at_date": "2026-09-16",
+      "original_sha256": null,
+      "used_for": [
+        "MILK_PASTEURIZED_3_2 exact-form market and label macro observation"
+      ],
+      "production_authority": "NO_GENERIC_CATEGORY_PROFILE"
+    },
+    {
+      "id": "LENTA_WHITE_DEWS_MILK_32",
+      "type": "OFFICIAL_RETAIL_LABEL",
+      "url": "https://lenta.com/product/moloko-pitevoe-pasteriz-32-paket-bez-zmzh-rossiya-900ml-546948/",
+      "issuer": "Лента",
+      "retrieved_at_date": "2026-09-16",
+      "original_sha256": null,
+      "used_for": [
+        "cross-product macro-label corroboration for pasteurized 3.2% milk"
+      ],
+      "production_authority": "NO_GENERIC_CATEGORY_PROFILE"
+    },
+    {
+      "id": "NIZP_PZH_FULL_DB",
+      "type": "OFFICIAL_LICENSED_FOOD_COMPOSITION_DATABASE_DESCRIPTION",
+      "url": "https://www.pzh.gov.pl/uslugi/tabele-wartosci-odzywczej-produktow/baza-danych-wersja-pelna/",
+      "issuer": "Narodowy Instytut Zdrowia Publicznego PZH – PIB",
+      "source_release": "IV edition, 2017",
+      "retrieved_at_date": "2026-09-16",
+      "original_sha256": null,
+      "used_for": [
+        "potential future full-profile source discovery for milk"
+      ],
+      "production_authority": "NOT_ACQUIRED",
+      "access_limit": "Official full 1045-food XLSX is distributed under a license agreement; no licensed file is present in this operation, so no exact food row or nutrient value is asserted from it."
+    },
+    {
+      "id": "V22_13_CHECKPOINT",
+      "type": "USER_SUPPLIED_EXTERNAL_CHECKPOINT",
+      "sha256": "a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97",
+      "used_for": [
+        "candidate source-form identity and legacy reference context"
+      ],
+      "production_authority": "NO"
+    }
+  ],
+  "pr41_merge_sha": "2b71c76c523c1b8a1ebeda9c5a2ba8fdc7157ced"
+}
