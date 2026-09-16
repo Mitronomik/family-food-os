@@ -11,7 +11,7 @@ Assembly A remains 2/3 individually-ready families: `R1-21` and `R1-23`.
 Assembly B, `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE`, PR7+ are NOT STARTED.
 
 Current bounded operation is `RECIPE-ASSEMBLY-A-RECOVERY-B` on branch
-`research/recipe-assembly-a-recovery-b`.
+`research/recipe-assembly-a-recovery-b`, delivered as [PR #44](https://github.com/Mitronomik/family-food-os/pull/44).
 
 The recovery comparison keeps `USSR82-267` as preferred candidate. `R1-05 —
 Local Harvest Bake` is first fallback and `USSR82-369 — Грибы в сметанном соусе`
