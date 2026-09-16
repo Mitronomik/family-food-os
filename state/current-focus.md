@@ -11,9 +11,10 @@ Updated: `2026-09-16`.
 - PR #37 — Household Food OS product/security integration = MERGED.
 - PR #38 — v22.13 normative recipe dataset preflight = MERGED.
 - PR #39 — v22.13 identity mapping and recipe-candidate classification = MERGED.
-- Exact accepted `main` after PR #39: `2707fab16f003c9942d0eb09edf99c790d98a16f`.
+- PR #40 — bounded v22.13 Assembly-A candidate recovery = MERGED.
+- Exact accepted `main` after PR #40: `3144997f0464a741eb429325db6497887309a32b`.
 - Current accepted SQLite migration head: `0030_recipe_source_corpus`.
-- Future RecipeTemplate schema reservation remains `0031_recipe_template_catalogue`; no RecipeTemplate runtime is authorized by PR #36–#39.
+- Future RecipeTemplate schema reservation remains `0031_recipe_template_catalogue`; no RecipeTemplate runtime is authorized by PR #36–#40.
 - The PR #36 214-card `RU_MR_2_4_0162_19` corpus remains evidence/source material; it does not publish RecipeVersion/RecipeTemplate and does not replace FoodIngredient/Nutrition/Composition truth.
 - The v22.13 checkpoint remains a separate hash-pinned external evidence/reference source; its `USSR82-*` lineage is not merged into the PR #36 source identity.
 - R1 / R2 / R3 / R4 remain COMPLETE AS BLOCKED RESEARCH; frozen accepted evidence remains unchanged.
@@ -23,81 +24,94 @@ Updated: `2026-09-16`.
 
 ## Current authorized operation
 
-`V22-13-CANDIDATE-A` — review a very small candidate set from the accepted PR #39 MAP-A funnel and attempt to reduce the open Assembly-A evidence objectives without changing production food/nutrition/composition truth or publishing templates/assemblies.
+`V22-13-267-ENABLE-A` — bounded enablement review for `USSR82-267 — Суп-пюре из моркови или репы`, following accepted Candidate-A.
+
+Goal:
+
+1. resolve the exact identity/form meaning of `Крупа рисовая`, `Молоко пастеризованное 3,2%`, and `Петрушка (корень)` without silent reuse of narrower current foods;
+2. determine whether the optional rice can be bound to a truthful cooked-garnish producer/transformation without hidden raw/cooked equivalence or unsupported institutional-batch scaling;
+3. seek evidence sufficient to decide complete carrot-vs-turnip substitution applicability under the already accepted Assembly-A gate.
 
 Current delivery:
 
-- [PR #40](https://github.com/Mitronomik/family-food-os/pull/40) — `research: narrow v22.13 Assembly A candidate recovery` — OPEN / READY FOR HUMAN REVIEW.
-- Branch: `research/v22-13-candidate-a`.
-- Base: accepted `main` after PR #39, `2707fab16f003c9942d0eb09edf99c790d98a16f`.
-- Scope is research/data curation + state only. No runtime/domain code, schema/migration, production seed, FoodIngredient mutation, Nutrition/Composition promotion, RecipeVersion/RecipeTemplate/RecipeAssembly publication or accepted prior evidence package is changed.
+- [PR #41](https://github.com/Mitronomik/family-food-os/pull/41) — `research: evaluate USSR82-267 enablement blockers` — OPEN / HUMAN REVIEW.
+- Branch: `research/v22-13-267-enable-a`.
+- Base: accepted `main` after PR #40, `3144997f0464a741eb429325db6497887309a32b`.
 
-The accepted MAP-A package is:
+Scope is research/data enablement + state only. No runtime/domain code, schema/migration, production seed, FoodIngredient mutation, Nutrition/Composition promotion, RecipeVersion/RecipeTemplate/RecipeAssembly publication or accepted prior evidence package is changed.
 
-`data/curation/v22-13-map-a/`.
-
-Exact reviewed source checkpoint SHA-256 remains:
+Exact reviewed external checkpoint SHA-256 remains:
 
 `a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97`.
 
-## V22-13-CANDIDATE-A findings
+## V22-13-267-ENABLE-A findings
 
-Exactly three leads are reviewed:
+### Food/form identities
 
-1. `USSR82-267` — `Суп-пюре из моркови или репы` — PRIMARY third-family recovery lead.
-2. `USSR82-459` — `Яичница глазунья (натуральная)` — SECONDARY source-choice/substitution lead.
-3. `USSR82-323` — `Картофель отварной` — `family_count` fallback.
+The three previous source-label ambiguities are now narrowed to distinct future identity candidates:
 
-For `USSR82-267`, the source establishes at source level:
+- `Крупа рисовая` → candidate `RICE_GROATS_POLISHED`. Russian standards define rice groats broadly enough to include multiple grain types, so the unqualified source term must not silently reuse current long-grain `RICE_WHITE`.
+- `Молоко пастеризованное 3,2%` → candidate `MILK_PASTEURIZED_3_2`. The exact fat class + pasteurized form is standardized and current mass-market evidence exists; current 3.25%/2% identities are not exact replacements.
+- `Петрушка (корень)` → candidate `PARSLEY_ROOT_RAW`. Root is distinct from current parsley leaf; current availability is supported, but bounded evidence is specialty/B2B/e-commerce rather than accepted ordinary mass-market default coverage.
 
-- carrot **or** turnip as an explicit alternative with exact distinct net masses;
-- rice as a separate garnish and an explicit permission to prepare the soup without rice;
-- exact source net masses for the bounded column-II branch;
-- broth **or** water as the liquid branch.
+These are **research identity decisions only**. No FoodIngredient is created. The v22.13 reference nutrient rows remain evidence only and no new full production nutrient-vector authority is accepted.
 
-The bounded recovery scope is column II + the source-authorized water branch. Carrot is the fixed branch for recovery review and turnip remains the source alternate branch.
+### Optional rice binding
 
-Already reusable FamilyFoodOS identities in that bounded scope include `CARROT`, `TURNIP`, `ONION_YELLOW`, `FLOUR_WHEAT`, `BUTTER_UNSALTED`, `EGG`, and `WATER`.
+The 1982 collection contains candidate rice producers (`USSR82-747 — Рис отварной` and `USSR82-748 — Рис припущенный`), but neither can be silently bound to recipe 267:
 
-Three exact food/form blockers remain:
+- recipe 267 gives only 20 g raw rice and no numbered garnish producer/output mass;
+- 747/748 contain their own fat and salt/liquid process;
+- recipe 267 already contains 20 g butter;
+- accepted Assembly-A evidence does not authorize proportional scaling from those published institutional batches.
 
-- `Крупа рисовая` — current generic source identity is not silently mapped to long-grain `RICE_WHITE`;
-- `Молоко пастеризованное 3,2%` — not silently mapped to current 3.25%, 2%, or another milk identity;
-- `Петрушка (корень)` — not current parsley leaf.
+Therefore the producer/transformation decision is `BINDING_BLOCKED`. Raw rice nutrition is not relabelled as cooked-garnish nutrition. Source optional-rice semantics remain established, while the production `optional_role` gate remains OPEN.
 
-Additional candidate-specific blockers remain:
+### Carrot / turnip evidence
 
-- optional rice needs a truthful cooked-garnish producer/transformation binding;
-- collection-level standardization evidence does not prove that complete carrot and turnip branches are a tested interchangeable FamilyFoodOS substitution pair;
-- publication-rights scope remains separate;
-- RU familiarity/editorial publication review remains separate.
+The carrot-or-turnip family is strongly corroborated across:
 
-For `USSR82-459`, the source has an exact 10 g table-margarine **or** 10 g butter choice, and an older collection corroborates that source structure. This remains source-choice evidence, not a verified substitution. The specific margarine identity is not current catalogue truth, the candidate has no clean optional-food role, and the family overlaps accepted egg family R1-23.
+- the 1982 Ministry collection;
+- the 1973 Ministry collection;
+- a 1987 professional culinary textbook.
 
-For `USSR82-323`, the fixed column-III + butter branch has low identity debt and explicit source input/output masses, but raw-to-cooked transformation binding, kitchen, rights and RU review remain. It can help `family_count` only and does not cover the collective optional/substitution requirements.
+This supports a canonical culinary-family relationship and Russian familiarity, but the bounded review still does not establish candidate-specific complete-variant kitchen/testing evidence required by the accepted FamilyFoodOS `verified_substitution` gate.
 
-Detailed evidence is under `data/curation/v22-13-candidate-a/`.
+`verified_substitution` therefore remains OPEN.
 
-## Assembly A status after Candidate-A
+### Production-data decision
+
+`data/curation/v22-13-267-enable-a/data-enablement-plan.json` records:
+
+- `status = WITHHELD_AUTHORITY_GATES`;
+- `production_delta = null`.
+
+Reasons:
+
+- no accepted new full nutrient/profile authority for the three exact food forms;
+- parsley-root default availability remains limited;
+- rice-garnish producer/output/fat allocation remains ambiguous;
+- complete carrot/turnip variant verification remains unestablished.
+
+No accepted architecture or gate is relaxed to force progress.
+
+## Assembly A status after enablement review
 
 Assembly A remains **BLOCKED** at 2/3 individually-ready families.
 
-- `family_count` = OPEN. `USSR82-267` is now the primary third-family recovery lead, but is not individually ready.
-- `optional_role` = OPEN. Optional rice semantics are established at source level for `USSR82-267`, but the production template/process/identity/kitchen gate is not satisfied.
-- `verified_substitution` = OPEN. Carrot/turnip and margarine/butter are source alternatives, but complete tested FamilyFoodOS substitution applicability is not established.
+- `family_count` = OPEN. Recipe 267 remains the primary third-family recovery lead but is not individually ready.
+- `optional_role` = OPEN. Source optional-rice semantics are established, but authoritative cooked-garnish binding is blocked.
+- `verified_substitution` = OPEN. Cross-edition family evidence is strong, but the accepted tested-complete-variant requirement is not met.
 
-No accepted R1/R2/R3/R4 status or historical evidence package is rewritten.
+No accepted R1/R2/R3/R4/Candidate-A status or historical evidence package is rewritten.
 
-## Verification and next-step rule
+## Next-step rule
 
-Exact-head proportional docs/data verification is PASS for the current PR #40 delivery. Current next action is human review. Merge requires separate explicit post-review authorization.
+Current next action is human review of PR #41 after proportional docs/data verification. Merge requires separate explicit post-review authorization.
 
-If Candidate-A is accepted, the proposed next bounded operation is `V22-13-267-ENABLE-A`:
+If accepted, the remaining work has split into two bounded problems, neither authorized automatically:
 
-1. resolve only the three exact food/form blockers for recipe 267 (`Крупа рисовая`, `Молоко пастеризованное 3,2%`, `Петрушка (корень)`);
-2. define the optional-rice producer/transformation binding without treating raw rice nutrition as cooked-garnish nutrition;
-3. search for candidate-specific evidence sufficient to decide complete carrot-vs-turnip kitchen/substitution applicability.
+- `V22-13-267-PROFILE-A` — obtain/review production-grade full profile provenance for the three exact forms and decide any FoodIngredient/Nutrition/Composition promotion;
+- `V22-13-267-KITCHEN-A` — obtain/run candidate-specific complete carrot/turnip kitchen verification and clarify exact optional-rice garnish process/batch applicability.
 
-If candidate-specific kitchen/substitution evidence remains absent, `verified_substitution` stays OPEN even if the three food/form blockers are resolved.
-
-`V22-13-267-ENABLE-A` is not authorized to start automatically. No automatic Assembly B, PR7, RecipeTemplate/RecipeVersion publication, FoodIngredient/catalogue mutation, Nutrition promotion, Retail, AI, Auth or bulk production-data import is authorized by this operation.
+No automatic Assembly B, PR7, RecipeTemplate/RecipeVersion publication, FoodIngredient/catalogue mutation, Nutrition promotion, Retail, AI, Auth or bulk production-data import is authorized.

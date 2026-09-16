@@ -1,0 +1,37 @@
+{
+  "operation": "V22-13-267-ENABLE-A",
+  "status": "WITHHELD_AUTHORITY_GATES",
+  "production_delta": null,
+  "why_no_production_delta": [
+    "All three food/form concepts are semantically resolvable, but none has an accepted new production full nutrient-vector authority in this operation.",
+    "Parsley root is not yet ordinary default-pool eligible under the accepted Russian food-market policy.",
+    "Optional rice lacks an exact source-authorized cooked-garnish producer/output binding without batch scaling or fat-allocation ambiguity.",
+    "Carrot-vs-turnip remains a strong source family alternative but lacks candidate-specific applicable kitchen/testing evidence required by the accepted verified_substitution gate."
+  ],
+  "resolved_research_questions": [
+    "Крупа рисовая is broader than current long-grain RICE_WHITE and should be a distinct identity if later promoted.",
+    "Молоко пастеризованное 3,2% is a distinct standardized and mass-market Russian form.",
+    "Петрушка (корень) is distinct from parsley leaf and commercially available, but current evidence is specialty/limited for default use.",
+    "Recipes 747/748 are plausible rice-output producers but cannot be silently bound to recipe 267.",
+    "1973/1982/1987 evidence strongly corroborates the carrot-or-turnip culinary family without satisfying the project-specific tested-substitution gate."
+  ],
+  "assembly_a": {
+    "status": "BLOCKED",
+    "individual_ready_count": 2,
+    "family_count": "OPEN",
+    "optional_role": "OPEN",
+    "verified_substitution": "OPEN"
+  },
+  "proposed_follow_ups": [
+    {
+      "code": "V22-13-267-PROFILE-A",
+      "authorized": false,
+      "goal": "Obtain and review production-grade full nutrient/profile provenance for the three exact food forms and decide which, if any, may be promoted."
+    },
+    {
+      "code": "V22-13-267-KITCHEN-A",
+      "authorized": false,
+      "goal": "Run or obtain a candidate-specific kitchen verification package for the complete carrot and turnip branches and clarify the exact optional-rice garnish process/batch applicability."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "algorithm": "sha256",
+  "files": {
+    "README.md": "c3a65eb8aed6094e335bcd3adb03bb8b46bba52c9a5e448473e067e34fd225f0",
+    "data-enablement-plan.json": "146e84756453884767d42a6a9ae465689215159e3c0ae246e99662d59e7fb733",
+    "food-form-decisions.json": "47c724cd3c40d13bc71e4050222fcf34e206e8b5a0ef132e08269f04fa57aa08",
+    "market-evidence.json": "1e6f3969f6543b7c74c9f5c1ade07bb6dd9bd8420b360601b28cb50ff6005288",
+    "rice-garnish-binding.json": "b87a63969692c3a8eed93fac546e8d9e4a2486bb5d831864d3f340d3b3228e38",
+    "source-manifest.json": "1e8e85a428725569d5795677490e2271b5c9cfe7e16949c24a4fade2dc6e6f92",
+    "substitution-evidence.json": "a3f637ba123d14caf34e061945c325102849088544dac63bccac4dc1ef0c81ff"
+  }
+}

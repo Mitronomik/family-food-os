@@ -1,0 +1,30 @@
+{
+  "operation": "V22-13-267-ENABLE-A",
+  "candidate": "USSR82-267",
+  "pair": [
+    "CARROT",
+    "TURNIP"
+  ],
+  "source_evidence": [
+    {
+      "source": "USSR Ministry of Trade collection / Order N 310",
+      "edition": "1982 collection",
+      "finding": "Recipe 267 lists carrot 320 g OR turnip 360 g in the same family; turnip has an extra 1–2 minute blanching step."
+    },
+    {
+      "source": "USSR Ministry of Trade collection / Order N 1",
+      "edition": "1973 collection",
+      "finding": "Recipe 135 repeats carrot 320 g OR turnip 360 g and the same optional rice service semantics."
+    },
+    {
+      "source": "Анфимова Н.А., Захарова Т.И., Татарская Л.Л., Кулинария",
+      "edition": "1987",
+      "finding": "Professional textbook again describes one soup-puree family prepared from carrot or turnip and served with crumbly rice."
+    }
+  ],
+  "culinary_family_evidence": "STRONG_CROSS_EDITION",
+  "variant_specific_kitchen_testing": "NOT_ESTABLISHED",
+  "verified_substitution": "OPEN",
+  "reason": "Repeated professional source treatment establishes a canonical culinary alternative, but accepted FamilyFoodOS policy requires applicable evidence for complete variants. No source found in this bounded review identifies separate testing/measurement of the full carrot and turnip branches as an interchangeable production rule.",
+  "architecture_change": "NO"
+}
