@@ -1,0 +1,44 @@
+{
+  "accepted_base": "c428899e703f2bf5addd5f910d53ad40617244c5",
+  "external_corrobation": [
+    {
+      "authority": "CORROBORATION_ONLY_RETAINED_R1_EVIDENCE_OWNS_DECISION",
+      "id": "USDA_LOCAL_HARVEST_BAKE_6",
+      "url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/Local_Harvest_Bake_6_Servings.pdf",
+      "use": "Current USDA/FNS recipe identity and ingredient/optional-alternative wording."
+    },
+    {
+      "authority": "PROCESS_CONTEXT_ONLY",
+      "id": "ICN_CACFP_STANDARDIZATION_GUIDE",
+      "url": "https://theicn.org/icn-resources-a-z/step-by-step-recipe-standardization-guide-for-the-child-and-adult-care-food-program/",
+      "use": "Current official training context that recipe standardization includes verification, evaluation and quantity adjustment."
+    },
+    {
+      "authority": "PROCESS_CONTEXT_ONLY",
+      "id": "ICN_STANDARDIZED_RECIPE_DEFINITION",
+      "url": "https://theicn.org/memo-may-2023/",
+      "use": "Standardized recipe definition as tried/adapted/retried for repeatable quality/yield."
+    },
+    {
+      "authority": "FACTS_ONLY_RESEARCH",
+      "id": "USSR82_369",
+      "url": "https://internet-law.ru/documents/dop_documents/1/sanpi_44121/0/prika.html",
+      "use": "Recipe 369 optional onion and mushroom-alternative source facts."
+    }
+  ],
+  "no_external_assets_committed": true,
+  "operation": "RECIPE-ASSEMBLY-A-RECOVERY-B",
+  "production_authority_promoted": false,
+  "repository_evidence": [
+    "data/curation/v22-13-267-kitchen-a/",
+    "data/curation/v22-13-267-profile-a/",
+    "data/curation/v22-13-267-enable-a/",
+    "data/curation/v22-13-candidate-a/",
+    "data/curation/v22-13-map-a/",
+    "data/curation/recipe-assembly-a-r1/",
+    "data/curation/recipe-assembly-a-r2/",
+    "docs/family-food/food-composition-and-assembly.md",
+    "docs/family-food/recipe-localization-and-substitution.md"
+  ],
+  "reviewed": "2026-09-16"
+}

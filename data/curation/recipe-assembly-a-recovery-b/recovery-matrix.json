@@ -1,0 +1,79 @@
+{
+  "accepted_base": "c428899e703f2bf5addd5f910d53ad40617244c5",
+  "assembly_a": {
+    "individual_ready_count": 2,
+    "individually_ready": [
+      "R1-21",
+      "R1-23"
+    ],
+    "open_collective_gates": [
+      "family_count",
+      "optional_role",
+      "verified_substitution"
+    ],
+    "status": "HUMAN_EVIDENCE_BLOCKED__2_OF_3",
+    "target_family_count": 3
+  },
+  "candidates": [
+    {
+      "candidate": "USSR82-267",
+      "data_debt": [
+        "MILK_PASTEURIZED_3_2_GENERIC_PROFILE_AUTHORITY",
+        "RICE_AND_PARSLEY_PROFILE_MAPPING_IMPLEMENTATION_DEFERRED"
+      ],
+      "disposition": "KEEP_PREFERRED_RECOVERY",
+      "human_measurement_required": true,
+      "kitchen_evidence": "MEASURED_COMPLETE_VARIANT_KITCHEN_VERIFICATION_REQUIRED",
+      "name_ru": "Суп-пюре из моркови или репы",
+      "optional_role": "SOURCE_ESTABLISHED_PRODUCTION_OPEN",
+      "process_debt": [
+        "EXACT_20G_RICE_GARNISH_MEASUREMENT"
+      ],
+      "source_only_remaining_value": "EXHAUSTED",
+      "substitution": "STRONG_SOURCE_FAMILY_COMPLETE_VARIANT_TEST_NOT_ESTABLISHED"
+    },
+    {
+      "candidate": "R1-05",
+      "data_debt": [
+        "BUTTERNUT_SQUASH_COMPOSITION",
+        "BEET_COMPOSITION",
+        "SALT_FORM_AND_MASS",
+        "MINCED_GARLIC_EXACT_MASS",
+        "PAN_RELEASE_SPRAY_FORM_AND_MASS"
+      ],
+      "disposition": "FIRST_FALLBACK",
+      "human_measurement_required": true,
+      "kitchen_evidence": "BASE_PUBLISHED_VARIANT_SCOPE_PASS__SUBSTITUTED_VARIANT_NOT_ESTABLISHED",
+      "name_ru": "Запечённые корнеплоды / Local Harvest Bake",
+      "optional_role": "EXPLICIT_DRY_PARSLEY",
+      "source_only_remaining_value": "INSUFFICIENT_TO_CLOSE_SUBSTITUTION",
+      "substitution": "KOSHER_OR_IODIZED_SALT_SOURCE_ALTERNATIVE_NOT_VERIFIED_REPLACEMENT"
+    },
+    {
+      "candidate": "USSR82-369",
+      "data_debt": [
+        "MUSHROOM_FORM_BRANCHES",
+        "SOUR_CREAM_SAUCE_COMPOSITE_PROCESS",
+        "SOUR_CREAM_FORM",
+        "MARGARINE_FORM",
+        "DETERMINISTIC_OPTIONAL_ONION_QUANTITY_RULE"
+      ],
+      "disposition": "SECOND_FALLBACK",
+      "human_measurement_required": true,
+      "kitchen_evidence": "COMPLETE_VARIANT_TEST_NOT_ESTABLISHED",
+      "name_ru": "Грибы в сметанном соусе",
+      "optional_role": "SOURCE_OPTIONAL_SAUTEED_ONION_10_20_G",
+      "source_only_remaining_value": "HIGHER_DEBT_SAME_EVIDENCE_BLOCKER",
+      "substitution": "MUSHROOM_ALTERNATIVES_SOURCE_ONLY"
+    }
+  ],
+  "decision": {
+    "next_if_267_measurement_fails": "R1-05-RECOVERY",
+    "next_if_measurement_available": "V22-13-267-KITCHEN-B",
+    "next_if_measurement_unavailable": "REMAIN_BLOCKED",
+    "reason": "No retained alternate removes the measured complete-variant evidence requirement; switching adds data/process debt.",
+    "switch_candidate_now": false
+  },
+  "operation": "RECIPE-ASSEMBLY-A-RECOVERY-B",
+  "reviewed": "2026-09-16"
+}
