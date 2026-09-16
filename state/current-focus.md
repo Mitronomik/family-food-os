@@ -29,7 +29,7 @@ Current delivery:
 
 - Branch: `research/recipe-assembly-a-recovery-b`.
 - Base: accepted `main` after PR #43, `c428899e703f2bf5addd5f910d53ad40617244c5`.
-- [PR #44](https://github.com/Mitronomik/family-food-os/pull/44) — `research: decide Assembly A recovery boundary` — OPEN / HUMAN REVIEW.
+- [PR #44](https://github.com/Mitronomik/family-food-os/pull/44) — `research: decide Assembly A recovery boundary` — OPEN / READY FOR HUMAN REVIEW.
 
 Scope is research/data-curation + state only. No runtime/domain code, schema/migration,
 production seed, FoodIngredient/Nutrition/Composition promotion, RecipeVersion,
