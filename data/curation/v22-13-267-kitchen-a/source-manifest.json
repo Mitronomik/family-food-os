@@ -1,0 +1,70 @@
+{
+  "operation": "V22-13-267-KITCHEN-A",
+  "reviewed": "2026-09-16",
+  "accepted_base": "c9fcaa782a9cb6b1a48d877fb251f3ee69cb4e7d",
+  "sources": [
+    {
+      "id": "USSR82_ORDER_310",
+      "type": "NORMATIVE_RECIPE_COLLECTION_TEXT",
+      "url": "https://internet-law.ru/documents/dop_documents/1/sanpi_44121/0/prika.html",
+      "issuer": "USSR Ministry of Trade / secondary legal publication",
+      "retrieved_at_date": "2026-09-16",
+      "used_for": [
+        "USSR82-267 exact quantities",
+        "carrot/turnip process",
+        "optional rice source semantics"
+      ],
+      "rights_scope": "FACTS_ONLY_RESEARCH"
+    },
+    {
+      "id": "USSR73_ORDER_1",
+      "type": "NORMATIVE_RECIPE_COLLECTION_TEXT",
+      "url": "https://internet-law.ru/documents/dop_documents/67/metod_46134/0/prika.html",
+      "issuer": "USSR Ministry of Trade / secondary legal publication",
+      "retrieved_at_date": "2026-09-16",
+      "used_for": [
+        "cross-edition carrot/turnip family",
+        "crumbly-rice liquid/salt/output table",
+        "vessel-size liquid caveat",
+        "recipe 203 small published rice batch/process"
+      ],
+      "rights_scope": "FACTS_ONLY_RESEARCH"
+    },
+    {
+      "id": "ANFIMOVA_1987",
+      "type": "PROFESSIONAL_CULINARY_TEXTBOOK_DIGITAL_COPY",
+      "url": "https://djvu.online/file/JLUK9asW6jXD4",
+      "issuer": "Digital copy of professional culinary textbook",
+      "retrieved_at_date": "2026-09-16",
+      "used_for": [
+        "culinary-family corroboration",
+        "soup-puree process and quality context",
+        "crumbly-rice garnish context"
+      ],
+      "rights_scope": "FACTS_ONLY_RESEARCH"
+    },
+    {
+      "id": "MEGAOBUCHALKA_LAB_ASSIGNMENT",
+      "type": "SECONDARY_TRAINING_ASSIGNMENT",
+      "url": "https://megaobuchalka.com/11/64668.html",
+      "issuer": "Secondary educational publication",
+      "retrieved_at_date": "2026-09-16",
+      "used_for": [
+        "bounded search for kitchen/brakerazh execution evidence"
+      ],
+      "decision": "NON_QUALIFYING_AS_COMPLETED_TEST",
+      "reason": "The page describes an assignment to prepare the dish and conduct brakerazh; it does not retain completed results for the exact carrot and turnip branches."
+    },
+    {
+      "id": "V22_13_CHECKPOINT",
+      "type": "USER_SUPPLIED_EXTERNAL_CHECKPOINT",
+      "sha256": "a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97",
+      "used_for": [
+        "candidate lineage and row identity"
+      ],
+      "production_authority": "NO"
+    }
+  ],
+  "source_search_decision": "NO_NEW_SOURCE_ONLY_EVIDENCE_SUFFICIENT_TO_CLOSE_COMPLETE_VARIANT_KITCHEN_GATE_IN_BOUNDED_SEARCH",
+  "no_source_assets_committed": true
+}

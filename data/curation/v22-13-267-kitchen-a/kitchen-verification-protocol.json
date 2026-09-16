@@ -1,0 +1,92 @@
+{
+  "operation": "V22-13-267-KITCHEN-A",
+  "status": "PROPOSED_NOT_EXECUTED",
+  "purpose": "Create the minimum retained measurement protocol that could close the candidate-specific kitchen/substitution and optional-rice process evidence gaps without changing source quantities or inventing yield.",
+  "preconditions": [
+    "Use the accepted USSR82-267 column-II + water scope.",
+    "Use exact FoodIngredient/form identities approved by later production-data work; if an exact form is unavailable, the execution is invalid rather than substituted silently.",
+    "Do not proportionally scale the soup recipe: test the published 1000 g batch.",
+    "Record every input and output mass, equipment item and deviation."
+  ],
+  "soup_branches": [
+    {
+      "id": "CARROT_267_II_WATER",
+      "inputs_net_g": {
+        "carrot": "320",
+        "parsley_root": "10",
+        "onion": "20",
+        "wheat_flour": "20",
+        "butter": "20",
+        "milk": "150",
+        "egg": "10",
+        "water": "700"
+      },
+      "branch_step": null,
+      "source_output_g": "1000"
+    },
+    {
+      "id": "TURNIP_267_II_WATER",
+      "inputs_net_g": {
+        "turnip": "360",
+        "parsley_root": "10",
+        "onion": "20",
+        "wheat_flour": "20",
+        "butter": "20",
+        "milk": "150",
+        "egg": "10",
+        "water": "700"
+      },
+      "branch_step": "Blanch turnip for 1–2 minutes before the shared process.",
+      "source_output_g": "1000"
+    }
+  ],
+  "required_measurements_per_soup_branch": [
+    "Exact measured net input mass for every food and process water.",
+    "Equipment identity and vessel size/shape.",
+    "Start/end timestamps for blanching, sautéing/stewing/pureeing/final heating as actually performed.",
+    "Final cooked output mass before serving.",
+    "Any discarded/drained mass or unplanned added water; if present, record rather than normalize away.",
+    "Observed quality against the retained soup-puree criteria."
+  ],
+  "retained_quality_criteria": [
+    "Homogeneous pureed mass without flour lumps or unpureed pieces.",
+    "No surface film.",
+    "Elastic, thick-cream-like consistency.",
+    "Colour appropriate to the principal vegetable.",
+    "Delicate, moderately salted flavour characteristic of the selected vegetable and milk-based soup."
+  ],
+  "rice_garnish_test": {
+    "raw_rice_g": "20",
+    "added_fat_g": "0",
+    "starting_reference_not_authority": {
+      "water_ml_from_1973_table": "42.0",
+      "salt_g_from_1973_table": "0.56",
+      "theoretical_output_g_from_1973_table": "56.0"
+    },
+    "instructions": [
+      "Use a defined household vessel and record its size/shape.",
+      "Record all water actually added; do not force 42 ml if the source-consistent process requires adjustment.",
+      "Record whether any water is drained and its mass where measurable.",
+      "Record cooked rice output mass.",
+      "Record cooking time and whether the rice remains crumbly/free-flowing.",
+      "Do not add separate fat: recipe 267 already owns its butter; this test selects the source-compatible plain-rice path."
+    ],
+    "pass_evidence_needed": "A retained measured input/output/process record sufficient to define a versioned 20 g raw-rice → cooked crumbly-rice garnish transformation for the selected vessel/method."
+  },
+  "optional_role_check": {
+    "method": "From each verified soup branch, evaluate service both with the separately prepared rice garnish and without it; do not alter the base soup composition.",
+    "goal": "Confirm that rice is a true independently optional serving role under the selected recipe-family process rather than a hidden required thickener/component."
+  },
+  "substitution_gate_check": {
+    "pass_requires": [
+      "Both complete carrot and turnip branches independently satisfy the retained process and quality criteria.",
+      "The turnip-only blanching difference is encoded as a branch-specific rule rather than discarded.",
+      "No unreviewed ingredients, quantity changes or process repairs are introduced.",
+      "The retained record identifies the exact recipe scope, date, executor/reviewer and measured outputs."
+    ],
+    "meaning_of_pass": "Evidence for a curated carrot↔turnip family substitution rule at the tested published batch scope only; no automatic household rescaling."
+  },
+  "nutrition_boundary": "Kitchen execution may establish process/yield evidence. Nutrient retention remains a separate authority; no hidden 100% retention is inferred.",
+  "execution_owner": "HUMAN_KITCHEN_EXECUTION_REQUIRED",
+  "executed_in_this_operation": false
+}
