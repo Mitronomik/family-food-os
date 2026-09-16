@@ -145,14 +145,23 @@ coverage that remains after R1-21 + R1-23.
 
 ## Source and rights boundary
 
-Order N 310 approved the collection and described it as  the main technological normative document alongside the applicable standards and instructions. The collection introduction says the formulations were recalculated/refined based on production workups. Secondary legal text: 
+Order N 310 approved the collection and described it as the main technological
+normative document alongside the applicable standards and instructions. The
+collection introduction says the formulations were recalculated/refined based on
+production workups. Secondary legal text:
 `https://internet-law.ru/documents/dop_documents/1/sanpi_44121/0/prika.html`.
 
-The collection also names a developer collective. Candidate-A therefore makes no claim that the entire publication is public domain or freely republishable. We keep only factual quantities, identifiers, bounded process observations and source URLs as research evidence. Expressive source text, layout, images and complete source assets are not imported. Publication rights remain a separate gate.
+The collection also names a developer collective. Candidate-A therefore makes no
+claim that the entire publication is public domain or freely republicable. We keep
+only factual quantities, identifiers, bounded process observations and source URLs
+as research evidence. Expressive source text, layout, images and complete source
+assets are not imported. Publication rights remain a separate gate.
 
 ## Decision
 
-`USSR82-267` is the **primary third-family recovery lead**. It is the strongest reviewed candidate because one family potentially contributes both missing collective capabilities without relaxing the architecture:
+`USSR82-267` is the **primary third-family recovery lead**. It is the strongest
+reviewed candidate because one family potentially contributes both missing
+collective capabilities without relaxing the architecture:
 
 ```text
 fixed carrot branch
@@ -160,15 +169,20 @@ fixed carrot branch
 + explicit carrot/turnip alternate branch
 ```
 
-But it is **not individually ready**. The next useful work is not RecipeTemplate implementation and not bulk FoodIngredient creation.
+But it is **not individually ready**. The next useful work is not RecipeTemplate
+implementation and not bulk FoodIngredient creation.
 
 Proposed next bounded operation, requiring separate authorization:
 
-`Vr2-13-267-ENABLE-A`
+`V22-13-267-ENABLE-A`
 
-Goal: resolve only the three exact food/form blockers for recipe 267 (`ĞšÑ€ÑƒĞ¿Ğ° Ñ€Ğ¸ÑĞ¾Ğ²Ğ°Ñ`, `ĞœĞ¾Ğ»Ğ¾ĞºĞ¾ Ğ¿Ğ°ÑÑ‚ĞµÑ€Ğ¸Ğ·Ğ¾Ğ²Ğ°Ğ½Ğ½Ğ¾Ğµ 3,2%`, `ÑŸĞµÑ‚Ñ€ÑƒÑˆĞºĞ° (ĞºĞ¾Ñ€ĞµĞ½ÑŒ)`), define the optional rice producer/transformation binding, and search for candidate-specific evidence sufficient to decide full carrot-vs-turnip kitchen/substitution applicability.
+Goal: resolve only the three exact food/form blockers for recipe 267 (`ĞšÑ€ÑƒĞ¿Ğ°
+Ñ€Ğ¸ÑĞ¾Ğ²Ğ°Ñ`, `ĞœĞ¾Ğ»Ğ¾ĞºĞ¾ Ğ¿Ğ°ÑÑ‚ĞµÑ€Ğ¸Ğ·Ğ¾Ğ²Ğ°Ğ½Ğ½Ğ¾Ğµ 3,2%`, `ĞŸĞµÑ‚Ñ€ÑƒÑˆĞºĞ° (ĞºĞ¾Ñ€ĞµĞ½ÑŒ)`), define the optional
+rice producer/transformation binding, and search for candidate-specific evidence
+sufficient to decide full carrot-vs-turnip kitchen/substitution applicability.
 
-If variant-specific kitchen evidence is still absent, `verified_substitution` remains OPEN even after the food-form blockers are solved.
+If variant-specific kitchen evidence is still absent, `verified_substitution`
+remains OPEN even after the food-form blockers are solved.
 
 ## Non-goals
 
@@ -183,4 +197,7 @@ If variant-specific kitchen evidence is still absent, `verified_substitution` re
 ## Files
 
 - `candidate-decisions.json` â€” three-candidate decision and gate state;
-- `identity-readiness.json` â€”"Ù^XİØ[™Y]KLÈY[]H][™›ØÚÙ\œÎÂ‹H]X[]K\›ØÙ\ÜË\™]šY]ËšœÛÛ˜8 %Ûİ\˜ÙH]X[]Y\ËÜ›ØÙ\ÜÈ›İ[™\šY\ÎÂ‹HÛİ\˜ÙK[ØœÙ\˜][ÛœËšœÛÛ˜8 %Ûİ\˜ÙHT“ËØœÙ\˜][ÛœÈ[™šYÚÈ[Z]][ÛœÎÂ‹HÚXÚÜİ[\ËšœÛÛ˜8 %[YÜš]H[œÈ›Üˆ\È›İ[™Y]šY[˜ÙHXÚØYÙK‚
+- `identity-readiness.json` â€” exact candidate-267 identity path and blockers;
+- `quantity-process-review.json` â€” source quantities/process boundaries;
+- `source-observations.json` â€” source URLs, observations and rights limitations;
+- `checksums.json` â€” integrity pins for this bounded evidence package.
