@@ -1,0 +1,88 @@
+source_recipe_id,recipe_name,external_raw_status,mapping_class,strict_raw_triage,mapped_existing_rows,new_food_rows,form_split_rows,composite_process_rows,unresolved_rows,optional_rows,choice_groups,family_count_lead,optional_role_lead,substitution_lead,production_ready
+USSR82-428,"Котлеты или биточки рисовые, пшенные с морковью",READY_RAW,IDENTITY_REVIEW,NO,6,4,4,4,4,0,2,NO,NO,NO,NO
+USSR82-429,Плов с изюмом,PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,6,2,2,0,6,0,0,NO,NO,NO,NO
+USSR82-430,Бобовые отварные,READY_RAW,IDENTITY_REVIEW,YES,0,0,0,0,1,0,0,NO,NO,NO,NO
+USSR82-431,Бобовые с жиром,READY_RAW,PROCESS_REVIEW,YES,0,3,0,3,0,0,0,NO,NO,NO,NO
+USSR82-432,Бобовые с жиром и луком,PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,3,1,2,3,0,0,0,NO,NO,NO,NO
+USSR82-433,Бобовые с копченой грудинкой или корейкой,PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,4,0,6,6,0,0,2,NO,NO,NO,NO
+USSR82-434,Бобовые в соусе,READY_RAW,PROCESS_REVIEW,NO,0,2,0,10,0,0,1,NO,NO,NO,NO
+USSR82-435,Бобовые в соусе со шпиком,READY_RAW,PROCESS_REVIEW,NO,0,2,0,6,0,0,1,NO,NO,NO,NO
+USSR82-436,Бобовые с тушеной капустой,READY_RAW,PROCESS_REVIEW,NO,0,2,1,6,0,0,0,NO,NO,NO,NO
+USSR82-437,Пюре из бобовых,READY_RAW,IDENTITY_REVIEW,NO,0,0,0,0,1,0,0,NO,NO,NO,NO
+USSR82-438,"Пюре из бобовых с жиром, с грудинкой, с корейкой, со шпиком и луком, с жиром и луком",READY_RAW,PROCESS_REVIEW,NO,4,6,4,10,0,0,0,NO,NO,NO,NO
+USSR82-439,Пюре из бобовых и картофеля,READY_RAW,PROCESS_REVIEW,NO,1,2,1,1,0,0,0,NO,NO,NO,NO
+USSR82-440,Запеканка из бобовых и картофеля,READY_RAW,IDENTITY_REVIEW,NO,3,1,1,2,2,0,0,NO,NO,NO,NO
+USSR82-441,Фасоль с яйцом,PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,14,0,2,0,0,0,1,NO,NO,NO,NO
+USSR82-442,Макаронные изделия отварные,READY_RAW,DIRECT_EXISTING_MAP_LEAD,YES,1,0,0,0,0,0,0,YES,NO,NO,NO
+USSR82-443,Макароны отварные с жиром или сметаной,READY_RAW,IDENTITY_REVIEW,NO,6,6,0,6,3,0,1,NO,NO,NO,NO
+USSR82-444,"Макароны с сыром, брынзой или творогом",READY_RAW,PROCESS_REVIEW,NO,0,2,0,1,0,0,0,NO,NO,NO,NO
+USSR82-445,Макароны с томатом,READY_RAW,PROCESS_REVIEW,YES,3,3,0,6,0,0,0,NO,NO,NO,NO
+USSR82-446,Макароны отварные с овощами,READY_RAW,PROCESS_REVIEW,YES,5,2,1,4,0,0,0,NO,NO,NO,NO
+USSR82-447,Макароны отварные с грибами,READY_RAW,PROCESS_REVIEW,NO,2,2,2,2,0,0,0,NO,NO,NO,NO
+USSR82-448,Макароны с ветчиной и с томатом,READY_RAW,PROCESS_REVIEW,NO,6,4,4,6,0,0,1,NO,NO,NO,NO
+USSR82-449,"Макароны, запеченные с яйцом",READY_RAW,PROCESS_REVIEW,YES,2,4,2,2,0,0,0,NO,NO,NO,NO
+USSR82-450,"Макароны, запеченные с сыром",READY_RAW,PROCESS_REVIEW,NO,2,6,0,2,0,0,1,NO,NO,NO,NO
+USSR82-451,Макаронник,READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,10,4,3,0,0,0,1,YES,NO,YES,NO
+USSR82-452,Лапшевник с творогом,READY_RAW,IDENTITY_REVIEW,NO,9,6,2,0,4,0,1,NO,NO,NO,NO
+USSR82-453,Яйца вареные,READY_RAW,DIRECT_EXISTING_MAP_LEAD,YES,1,0,0,0,0,0,0,YES,NO,NO,NO
+USSR82-454,"Яйца с помидорами, фаршированными ветчиной и грибами",READY_RAW,PROCESS_REVIEW,NO,3,2,3,3,0,0,3,NO,NO,NO,NO
+USSR82-455,Яйца с ветчиной на гренках,PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,1,2,3,2,0,1,2,NO,NO,NO,NO
+USSR82-456,Яичная кашка (натуральная),PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,7,5,3,2,0,0,2,NO,NO,NO,NO
+USSR82-457,Яичная кашка с овощами или грибами,READY_RAW,PROCESS_REVIEW,NO,16,2,0,2,0,0,1,NO,NO,NO,NO
+USSR82-458,Яичная кашка с мясными продуктами,READY_RAW,PROCESS_REVIEW,NO,0,4,6,2,0,0,1,NO,NO,NO,NO
+USSR82-459,Яичница глазунья (натуральная),READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,6,3,0,0,0,0,1,YES,NO,YES,NO
+USSR82-460,Яичница глазунья со шпиком,READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,3,3,0,0,0,0,0,YES,NO,NO,NO
+USSR82-461,Яичница глазунья с луком,READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,8,6,0,0,0,0,0,YES,NO,NO,NO
+USSR82-462,Яичница глазунья с жареным картофелем,READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,4,2,0,0,0,0,0,YES,NO,NO,NO
+USSR82-463,Яичница глазунья с сыром,READY_RAW,CATALOGUE_EXTENSION_LEAD,NO,2,4,0,0,0,0,0,NO,NO,NO,NO
+USSR82-464,Яичница глазунья с черным хлебом,READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,2,4,0,0,0,0,0,YES,NO,NO,NO
+USSR82-465,Яичница глазунья с овощами или грибами,READY_RAW,PROCESS_REVIEW,NO,2,2,0,2,0,0,0,NO,NO,NO,NO
+USSR82-466,Яичница глазунья с мясными продуктами,READY_RAW,IDENTITY_REVIEW,NO,2,6,8,0,2,0,1,NO,NO,NO,NO
+USSR82-467,Омлет (натуральный),READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,2,1,1,0,0,0,0,YES,NO,NO,NO
+USSR82-468,Омлет из яичного порошка,READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,4,4,3,0,0,0,1,YES,NO,YES,NO
+USSR82-469,Омлет со шпиком,READY_RAW,CATALOGUE_EXTENSION_LEAD,NO,6,6,2,0,0,0,1,NO,NO,NO,NO
+USSR82-470,Омлет с луком,READY_RAW,CATALOGUE_EXTENSION_LEAD,NO,8,7,2,0,0,0,3,NO,NO,NO,NO
+USSR82-471,Омлет с сыром,READY_RAW,PROCESS_REVIEW,NO,1,2,0,1,0,0,0,NO,NO,NO,NO
+USSR82-472,"Омлет, смешанный с мясными продуктами",READY_RAW,PROCESS_REVIEW,NO,2,8,8,2,0,0,2,NO,NO,NO,NO
+USSR82-473,"Омлет, фаршированный овощами или грибами",READY_RAW,IDENTITY_REVIEW,NO,16,10,0,6,2,0,2,NO,NO,NO,NO
+USSR82-474,"Омлет, фаршированный мясными продуктами",PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,8,16,8,14,6,0,3,NO,NO,NO,NO
+USSR82-487,"Творог с молоком, сливками, сметаной, сахаром или сметаной и сахаром",READY_RAW,IDENTITY_REVIEW,NO,2,0,2,0,7,0,0,NO,NO,NO,NO
+USSR82-491,Вареники ленивые отварные,READY_RAW,IDENTITY_REVIEW,NO,4,2,0,2,2,0,1,NO,NO,NO,NO
+USSR82-492,Сырники из творога,READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,3,2,1,0,0,0,0,YES,NO,NO,NO
+USSR82-497,Пудинг из творога (запеченный),PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,6,10,2,14,5,0,2,NO,NO,NO,NO
+USSR82-499,Запеканка из творога,READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,2,3,2,0,0,0,0,YES,NO,NO,NO
+USSR82-501,Рыба (филе) отварная,READY_RAW,IDENTITY_REVIEW,NO,2,0,1,2,1,0,0,NO,NO,NO,NO
+USSR82-506,Рыба (филе) припущенная,READY_RAW,PROCESS_REVIEW,NO,6,47,6,21,0,0,5,NO,NO,NO,NO
+USSR82-517,"Рыба, тушенная в томате с овощами",PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,24,48,6,12,15,0,2,NO,NO,NO,NO
+USSR82-519,Рыба жареная,READY_RAW,IDENTITY_REVIEW,YES,1,0,0,0,2,0,0,NO,NO,NO,NO
+USSR82-533,"Рыба, запеченная с картофелем по-русски",READY_RAW,IDENTITY_REVIEW,NO,2,1,0,1,1,0,0,NO,NO,NO,NO
+USSR82-541,Котлеты или биточки рыбные,READY_RAW,IDENTITY_REVIEW,YES,0,0,3,0,2,0,0,NO,NO,NO,NO
+USSR82-547,Тефтели рыбные,READY_RAW,IDENTITY_REVIEW,NO,2,0,2,2,2,0,0,NO,NO,NO,NO
+USSR82-548,Фрикадельки рыбные с томатным соусом,READY_RAW,PROCESS_REVIEW,NO,8,8,4,14,0,0,4,NO,NO,NO,NO
+USSR82-568,Мясо отварное,READY_RAW,IDENTITY_REVIEW,NO,2,0,0,0,1,0,0,NO,NO,NO,NO
+USSR82-577,Котлеты натуральные паровые,READY_RAW,PROCESS_REVIEW,NO,1,2,0,1,0,0,0,NO,NO,NO,NO
+USSR82-598,Бефстроганов,PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,2,1,1,1,1,0,0,NO,NO,NO,NO
+USSR82-631,Жаркое по-домашнему,READY_RAW,IDENTITY_REVIEW,NO,2,1,0,1,1,0,0,NO,NO,NO,NO
+USSR82-632,Гуляш,READY_RAW,IDENTITY_REVIEW,NO,2,1,0,1,1,0,0,NO,NO,NO,NO
+USSR82-637,Азу,READY_RAW,IDENTITY_REVIEW,NO,4,1,1,1,1,0,0,NO,NO,NO,NO
+USSR82-642,Плов,READY_RAW,IDENTITY_REVIEW,NO,6,9,3,3,6,0,1,NO,NO,NO,NO
+USSR82-658,"Котлеты, биточки, шницели",READY_RAW,CATALOGUE_EXTENSION_LEAD,NO,1,2,2,0,0,0,0,NO,NO,NO,NO
+USSR82-661,Котлеты домашние,PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,5,3,3,0,0,0,0,NO,NO,NO,NO
+USSR82-668,Тефтели (1-й вариант),PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,6,14,4,18,0,0,4,NO,NO,NO,NO
+USSR82-669,Тефтели (2-й вариант),READY_RAW,CATALOGUE_EXTENSION_LEAD,NO,3,3,1,0,0,0,0,NO,NO,NO,NO
+USSR82-671,Биточки паровые,READY_RAW,PROCESS_REVIEW,NO,9,12,6,21,0,6,5,NO,YES,NO,NO
+USSR82-680,Запеканка картофельная или рулет картофельный с мясом или субпродуктами,READY_RAW,PROCESS_REVIEW,NO,4,16,2,6,0,0,2,NO,NO,NO,NO
+USSR82-690,Голубцы с мясом и рисом,READY_RAW,PROCESS_REVIEW,NO,4,4,2,4,0,0,1,NO,NO,NO,NO
+USSR82-697,"Птица, дичь или кролик отварные с гарниром",READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,1,1,0,0,0,0,0,YES,NO,NO,NO
+USSR82-702,"Рагу из птицы, дичи, кролика или субпродуктов",READY_RAW,PROCESS_REVIEW,YES,4,3,0,1,0,0,0,NO,NO,NO,NO
+USSR82-720,Котлеты по-киевски,READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,2,2,1,0,0,0,0,YES,NO,NO,NO
+USSR82-732,"Котлеты рубленые из птицы, дичи или кролика с гарниром",READY_RAW,CATALOGUE_EXTENSION_LEAD,NO,0,3,3,0,0,0,0,NO,NO,NO,NO
+USSR82-736,"Биточки рубленые из птицы, дичи или кролика паровые под белым соусом с рисом",READY_RAW,PROCESS_REVIEW,NO,1,2,2,2,0,0,0,NO,NO,NO,NO
+USSR82-738,Фрикадельки из кур или бройлеров-цыплят,READY_RAW,PROCESS_REVIEW,NO,1,2,2,1,0,0,0,NO,NO,NO,NO
+USSR82-740,Суфле из кур или бройлеров-цыплят,READY_RAW,PROCESS_REVIEW,NO,2,1,0,2,0,0,0,NO,NO,NO,NO
+USSR82-1081,Блины,READY_RAW,CATALOGUE_EXTENSION_LEAD,YES,5,2,0,0,0,0,0,YES,NO,NO,NO
+USSR82-1082,Блинчики-полуфабрикат (оболочка),READY_RAW,IDENTITY_REVIEW,YES,4,0,1,0,1,0,0,NO,NO,NO,NO
+USSR82-1083,"Блинчики с мясным, ливерным, творожным, яблочным фаршем, джемом, повидлом или вареньем",READY_RAW,PROCESS_REVIEW,NO,1,2,0,1,0,0,0,NO,NO,NO,NO
+USSR82-1085,Оладьи,PARTIAL_RAW,RAW_EVIDENCE_REVIEW,NO,3,3,0,1,2,0,2,NO,NO,NO,NO
+USSR82-1091,Пирожки печеные из дрожжевого теста,READY_RAW,IDENTITY_REVIEW,NO,1,2,0,1,1,0,0,NO,NO,NO,NO
+USSR82-1098,Ватрушки,READY_RAW,PROCESS_REVIEW,NO,1,2,0,2,0,0,0,NO,NO,NO,NO

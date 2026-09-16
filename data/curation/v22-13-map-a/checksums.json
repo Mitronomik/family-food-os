@@ -1,0 +1,16 @@
+{
+  "source_checkpoint_sha256": "a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97",
+  "repository_blob_algorithm": "git_blob_sha1",
+  "files": {
+    "README.md": "04906ace47f650890b00b10c615d0f42df12e1c4",
+    "ingredient-mapping-part1.csv": "b9d1c37951074956c113f61c83494cc1eba30c0a",
+    "ingredient-mapping-part2.csv": "04d12c8435651e0663313fd50f9d0670bb49e53e",
+    "ingredient-mapping-part3.csv": "2e18976ebba9e79405b8be4d993a13c90133e539",
+    "ingredient-mapping-part4.csv": "97f087e0f7329624033b5a55aa209e498ebd212c",
+    "recipe-candidates-part1.csv": "f4f8554997a681deed9e02b229622954e4fa3da3",
+    "recipe-candidates-part2.csv": "6028359f027260a58e908f2bd0c44fc3c5151f9a",
+    "recipe-candidates-part3.csv": "6255255abed00478443a02acb86fa02802052a17",
+    "recipe-candidates-part4.csv": "640717fe1e511fd5647afacf0972cb4b7abb12da",
+    "summary.json": "0da0712a8f30e2a0c74b3a0427c7ce435a45cc41"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "operation": "V22-13-MAP-A",
+  "repository_base": "a852b169323cd4061c150107d7b75aebd67a9bc7",
+  "source_checkpoint_sha256": "a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97",
+  "mapping_method_version": "v22-13-map-a/1",
+  "ingredient_identity_count": 363,
+  "ingredient_mapping_counts": {
+    "COMPOSITE_OR_PROCESS_OUTPUT": 114,
+    "UNRESOLVED": 25,
+    "ALIAS_EXISTING": 27,
+    "NEW_FOOD_CANDIDATE": 103,
+    "EXACT_EXISTING": 25,
+    "FORM_SPLIT_CANDIDATE": 68,
+    "REJECT_TECHNICAL": 1
+  },
+  "eligible_contribution_rows": 6177,
+  "eligible_contribution_mass_g": 777592.011,
+  "contribution_rows_by_mapping_state": {
+    "EXACT_EXISTING": 1173,
+    "ALIAS_EXISTING": 1418,
+    "FORM_SPLIT_CANDIDATE": 829,
+    "COMPOSITE_OR_PROCESS_OUTPUT": 839,
+    "NEW_FOOD_CANDIDATE": 1411,
+    "UNRESOLVED": 507
+  },
+  "contribution_row_pct_by_mapping_state": {
+    "EXACT_EXISTING": 18.9898,
+    "ALIAS_EXISTING": 22.9561,
+    "FORM_SPLIT_CANDIDATE": 13.4208,
+    "COMPOSITE_OR_PROCESS_OUTPUT": 13.5826,
+    "NEW_FOOD_CANDIDATE": 22.8428,
+    "UNRESOLVED": 8.2079
+  },
+  "contribution_mass_g_by_mapping_state": {
+    "EXACT_EXISTING": 97252.547,
+    "ALIAS_EXISTING": 289021.467,
+    "FORM_SPLIT_CANDIDATE": 55557.3,
+    "COMPOSITE_OR_PROCESS_OUTPUT": 131145.0,
+    "NEW_FOOD_CANDIDATE": 93805.097,
+    "UNRESOLVED": 110810.6
+  },
+  "contribution_mass_pct_by_mapping_state": {
+    "EXACT_EXISTING": 12.5069,
+    "ALIAS_EXISTING": 37.1688,
+    "FORM_SPLIT_CANDIDATE": 7.1448,
+    "COMPOSITE_OR_PROCESS_OUTPUT": 16.8655,
+    "NEW_FOOD_CANDIDATE": 12.0635,
+    "UNRESOLVED": 14.2505
+  },
+  "recipe_count": 350,
+  "recipe_mapping_counts": {
+    "CATALOGUE_EXTENSION_LEAD": 65,
+    "RAW_EVIDENCE_REVIEW": 60,
+    "IDENTITY_REVIEW": 134,
+    "PROCESS_REVIEW": 88,
+    "DIRECT_EXISTING_MAP_LEAD": 3
+  },
+  "strict_raw_triage_count": 64,
+  "strict_raw_triage_mapping_counts": {
+    "CATALOGUE_EXTENSION_LEAD": 42,
+    "PROCESS_REVIEW": 12,
+    "IDENTITY_REVIEW": 7,
+    "DIRECT_EXISTING_MAP_LEAD": 3
+  },
+  "assembly_a": {
+    "status": "BLOCKED",
+    "family_count": "OPEN",
+    "optional_role": "OPEN",
+    "verified_substitution": "OPEN",
+    "family_count_strong_mapping_leads": 45,
+    "optional_role_ready_raw_leads": 7,
+    "substitution_strict_raw_leads": 15
+  },
+  "candidate_shortlists": {
+    "family_count": [
+      {"id":"USSR82-323","name":"Картофель отварной","class":"DIRECT_EXISTING_MAP_LEAD","extension_rows":0,"choice_groups":0},
+      {"id":"USSR82-442","name":"Макаронные изделия отварные","class":"DIRECT_EXISTING_MAP_LEAD","extension_rows":0,"choice_groups":0},
+      {"id":"USSR82-453","name":"Яйца вареные","class":"DIRECT_EXISTING_MAP_LEAD","extension_rows":0,"choice_groups":0},
+      {"id":"USSR82-263","name":"Суп молочный с картофельными клецками","class":"CATALOGUE_EXTENSION_LEAD","extension_rows":1,"choice_groups":0},
+      {"id":"USSR82-59","name":"Салат из свежих помидоров и огурцов","class":"CATALOGUE_EXTENSION_LEAD","extension_rows":1,"choice_groups":0},
+      {"id":"USSR82-95","name":"Салат из моркови или моркови с яблоками, финиками или черносливом","class":"CATALOGUE_EXTENSION_LEAD","extension_rows":1,"choice_groups":0},
+      {"id":"USSR82-58","name":"Салат из свежих помидоров","class":"CATALOGUE_EXTENSION_LEAD","extension_rows":1,"choice_groups":0},
+      {"id":"USSR82-71","name":"Салат картофельный","class":"CATALOGUE_EXTENSION_LEAD","extension_rows":1,"choice_groups":0},
+      {"id":"USSR82-326","name":"Картофельное пюре","class":"CATALOGUE_EXTENSION_LEAD","extension_rows":1,"choice_groups":0},
+      {"id":"USSR82-55","name":"Салат из свежих огурцов","class":"CATALOGUE_EXTENSION_LEAD","extension_rows":1,"choice_groups":0},
+      {"id":"USSR82-697","name":"Птица, дичь или кролик отварные с гарниром","class":"CATALOGUE_EXTENSION_LEAD","extension_rows":1,"choice_groups":0},
+      {"id":"USSR82-288","name":"Омлет натуральный","class":"CATALOGUE_EXTENSION_LEAD","extension_rows":2,"choice_groups":0},
+      {"id":"USSR82-1081","name":"Блины","class":"CATALOGUE_EXTENSION_LEAD","extension_rows":2,"choice_groups":0},
+      {"id":"USSR82-364","name":"Шницель из капусты","class":"CATALOGUE_EXTENSION_LEAD","extension_rows":2,"choice_groups":0},
+      {"id":"USSR82-462","name":"Яичница глазунья с жареным картофелем","class":"CATALOGUE_EXTENSION_LEAD","extension_rows":2,"choice_groups":0}
+    ],
+    "optional_role": [
+      {"id":"USSR82-317","name":"Суп из плодов или ягод сушеных","status":"READY_RAW","class":"CATALOGUE_EXTENSION_LEAD","optional_rows":17,"proxy_rows":17},
+      {"id":"USSR82-267","name":"Суп-пюре из моркови или репы","status":"READY_RAW","class":"PROCESS_REVIEW","optional_rows":2,"proxy_rows":3},
+      {"id":"USSR82-309","name":"Щи зеленые с яйцом","status":"READY_RAW","class":"IDENTITY_REVIEW","optional_rows":1,"proxy_rows":3},
+      {"id":"USSR82-369","name":"Грибы в сметанном соусе","status":"READY_RAW","class":"PROCESS_REVIEW","optional_rows":1,"proxy_rows":5},
+      {"id":"USSR82-310","name":"Щи зеленые с мясом","status":"READY_RAW","class":"IDENTITY_REVIEW","optional_rows":4,"proxy_rows":6},
+      {"id":"USSR82-251","name":"Солянка домашняя","status":"READY_RAW","class":"IDENTITY_REVIEW","optional_rows":1,"proxy_rows":15},
+      {"id":"USSR82-671","name":"Биточки паровые","status":"READY_RAW","class":"PROCESS_REVIEW","optional_rows":6,"proxy_rows":15},
+      {"id":"USSR82-297","name":"Хлебный квас","status":"PARTIAL_RAW","class":"RAW_EVIDENCE_REVIEW","optional_rows":1,"proxy_rows":0},
+      {"id":"USSR82-321","name":"Суп фруктовый консервированный","status":"PARTIAL_RAW","class":"RAW_EVIDENCE_REVIEW","optional_rows":2,"proxy_rows":0},
+      {"id":"USSR82-249","name":"Суп гороховый из концентратов","status":"PARTIAL_RAW","class":"RAW_EVIDENCE_REVIEW","optional_rows":1,"proxy_rows":1}
+    ],
+    "verified_substitution": [
+      {"id":"USSR82-374","name":"Картофель, запеченный с яйцом и помидорами","class":"CATALOGUE_EXTENSION_LEAD","choice_groups":2,"choice_rows":12,"extension_rows":9},
+      {"id":"USSR82-414","name":"Каша вязкая с морковью","class":"CATALOGUE_EXTENSION_LEAD","choice_groups":2,"choice_rows":10,"extension_rows":12},
+      {"id":"USSR82-412","name":"Каша вязкая с тыквой","class":"CATALOGUE_EXTENSION_LEAD","choice_groups":2,"choice_rows":12,"extension_rows":18},
+      {"id":"USSR82-413","name":"Каша вязкая с черносливом","class":"CATALOGUE_EXTENSION_LEAD","choice_groups":2,"choice_rows":24,"extension_rows":21},
+      {"id":"USSR82-285","name":"Овощи и яйца","class":"PROCESS_REVIEW","choice_groups":1,"choice_rows":2,"extension_rows":0},
+      {"id":"USSR82-258","name":"Суп молочный с макаронными изделиями","class":"CATALOGUE_EXTENSION_LEAD","choice_groups":1,"choice_rows":3,"extension_rows":3},
+      {"id":"USSR82-333","name":"Артишоки отварные","class":"PROCESS_REVIEW","choice_groups":1,"choice_rows":3,"extension_rows":0},
+      {"id":"USSR82-459","name":"Яичница глазунья (натуральная)","class":"CATALOGUE_EXTENSION_LEAD","choice_groups":1,"choice_rows":6,"extension_rows":3},
+      {"id":"USSR82-355","name":"Картофель, жаренный во фритюре брусочками","class":"CATALOGUE_EXTENSION_LEAD","choice_groups":1,"choice_rows":4,"extension_rows":5},
+      {"id":"USSR82-370","name":"Грибы в сметанном соусе с картофелем","class":"PROCESS_REVIEW","choice_groups":1,"choice_rows":6,"extension_rows":2}
+    ]
+  },
+  "invariants": [
+    "No external identity becomes FoodIngredient solely by name similarity.",
+    "Identity mapping never promotes external nutrient values into FamilyFoodOS Nutrition authority.",
+    "READY_RAW and READY remain external checkpoint statuses only.",
+    "Composite/process outputs require producer/composition/process truth.",
+    "Assembly A gates remain open until their original evidence requirements pass."
+  ]
+}
