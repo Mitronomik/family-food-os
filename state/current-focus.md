@@ -31,7 +31,7 @@ Updated: `2026-09-16`.
 
 Current delivery:
 
-- [PR #43](https://github.com/Mitronomik/family-food-os/pull/43) — `research: resolve USSR82-267 kitchen/process evidence` — OPEN / VERIFICATION PENDING.
+- [PR #43](https://github.com/Mitronomik/family-food-os/pull/43) — `research: resolve USSR82-267 kitchen/process evidence` — OPEN / READY FOR HUMAN REVIEW.
 - Branch: `research/v22-13-267-kitchen-a`.
 - Base: accepted `main` after PR #42, `c9fcaa782a9cb6b1a48d877fb251f3ee69cb4e7d`.
 - Scope is research/data evidence + proposed measurement protocol + state only. No physical kitchen execution, runtime/domain code, schema/migration, production seed, FoodIngredient mutation, Nutrition/Composition promotion or RecipeVersion/RecipeTemplate/RecipeAssembly publication is claimed.
@@ -125,8 +125,8 @@ No accepted R1/R2/R3/R4 or PR40–PR42 evidence is rewritten.
 
 ## Next-step rule
 
-Current next action is exact-head proportional verification and human review of
-PR #43. Merge requires separate explicit post-review authorization.
+Exact-head proportional docs/data verification is PASS for PR #43. Current next
+action is human review. Merge requires separate explicit post-review authorization.
 
 The source-only path for recipe 267 has reached a practical boundary:
 
