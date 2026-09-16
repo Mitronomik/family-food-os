@@ -42,8 +42,12 @@ decisions, cross-context design, source-of-truth conflicts or substantial
 research. The later approved
 [roadmap addendum](docs/family-food/master-roadmap-addendum-2026-09-13.md)
 must be read with the Master Roadmap for PR7+ scope, meal-pattern/replan and
-security-gate work. Ordinary bounded corrections do not require this broad
-preload. The detailed
+security-gate work. The later
+[2026-09-16 roadmap addendum](docs/family-food/master-roadmap-addendum-2026-09-16.md)
+must also be read for external-dataset independence, Recipe Constructor/web
+corroboration policy and the removal of Recipe Assembly research as a blocking
+prerequisite for Planning Core. Ordinary bounded corrections do not require this
+broad preload. The detailed
 [Git/PR reference](docs/family-food/agent-git-pr-workflow.md) is for unusual
 workflow questions and human review, not mandatory reading for every task.
 
@@ -73,7 +77,14 @@ Read-only review excludes delivery. Task-contract/DoD requirements:
 - Production recipes retain verifiable provenance. Untrusted parsed/AI data
   passes validation and review or an explicit trusted-source policy before
   becoming production truth. Preserve source/version history and auditability.
-  The MVP makes no diagnosis, treatment or therapeutic-effectiveness claims.
+  Constructed recipes use deterministic validation plus the canonical web
+  corroboration publication policy; mandatory personal kitchen execution is not
+  a Planning Core prerequisite. The MVP makes no diagnosis, treatment or
+  therapeutic-effectiveness claims.
+- Technical seed/corpus datasets are replaceable external bootstrap/evidence
+  artifacts, not FamilyFoodOS architecture. Dataset schemas, source-specific IDs,
+  record counts and source quirks must not become hidden domain or Planner
+  invariants. Canonical platform contracts own normalized product truth.
 - Meal frequency is configurable per HouseholdMember; no Planner, MealPlan or UI
   may hardcode dinner-only or a universal three-meal day as domain truth. The
   initial product must represent one to six meal opportunities and heterogeneous
@@ -125,7 +136,7 @@ Read-only review excludes delivery. Task-contract/DoD requirements:
 ## Scope, delivery and verification
 
 Current authorization belongs in `state/current-focus.md`; milestone order and
-gates belong in the Master Roadmap plus any later canonical addendum. Follow the
+gates belong in the Master Roadmap plus all later canonical addenda. Follow the
 migration plan for replacement strategy. No future context, AI, Retail,
 optimization, native app or shared/SaaS infrastructure may start before its gate
 and authorization.
