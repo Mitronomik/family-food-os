@@ -1,7 +1,7 @@
 # FamilyFoodOS — Master Roadmap Addendum, 2026-09-16
 
-**Status:** canonical addendum to `master-roadmap.md` and the 2026-09-13 addendum  
-**Authority:** later explicit user-approved product/data decision  
+**Status:** canonical addendum to `master-roadmap.md` and the 2026-09-13 addendum
+**Authority:** later explicit user-approved product/data decision
 **Sequence effect:** Recipe Assembly research is removed as a blocking prerequisite for Planning Core; the Recipe Constructor remains a separately deliverable product capability.
 
 ## 1. Purpose
