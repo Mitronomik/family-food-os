@@ -92,6 +92,15 @@ class MealPlanService:
         recommender_version: str | None = None,
         has_user_overrides: bool = False,
     ) -> MemberMealPatternSelectionDetail:
+        try:
+            source_kind = MemberMealPatternSourceKind(source_kind)
+        except (TypeError, ValueError) as exc:
+            raise MealPlanValidationError("Unsupported meal-pattern selection source kind.") from exc
+        if has_user_overrides and schedule is None:
+            raise MealPlanValidationError(
+                "A selection marked with user overrides requires the resolved override schedule."
+            )
+
         household, member = self._load_household_member(household_id, member_id)
         accepted_at = self._clock()
         resolved_schedule = schedule
