@@ -1,0 +1,26 @@
+{
+  "reviewed_on": "2026-09-17",
+  "policy": "MEAL_PATTERN_WELLNESS_V1",
+  "sources": [
+    {
+      "code": "USDA_NESR_DGAC2025_SR09",
+      "source_name": "USDA Nutrition Evidence Systematic Review",
+      "source_title": "Frequency of Meals and/or Snacking and Consuming a Dietary Pattern Aligned with the Dietary Guidelines for Americans: A Systematic Review",
+      "source_url": "https://nesr.usda.gov/2025-dietary-guidelines-advisory-committee-systematic-reviews/frequency-meals-snacks_diet-quality",
+      "source_version": "November 2024; DOI 10.52570/NESR.DGAC2025.SR09",
+      "retrieved_on": "2026-09-17",
+      "evidence_scope": "FREQUENCY_OUTCOME_UNCERTAINTY",
+      "review_note_ru": "Систематический обзор не позволяет сделать общий вывод, что определённая частота приёмов пищи лучше соответствует рекомендациям по качеству рациона; это ограничивает продуктовые заявления о превосходстве режима."
+    },
+    {
+      "code": "USDA_NESR_DGAC2025_SR10",
+      "source_name": "USDA Nutrition Evidence Systematic Review",
+      "source_title": "Frequency of Meals and/or Snacking and Energy Intake: A Systematic Review",
+      "source_url": "https://nesr.usda.gov/2025-dietary-guidelines-advisory-committee-systematic-reviews/frequency-meals-snacks_energy-intake",
+      "source_version": "November 2024; DOI 10.52570/NESR.DGAC2025.SR10",
+      "retrieved_on": "2026-09-17",
+      "evidence_scope": "FREQUENCY_OUTCOME_UNCERTAINTY",
+      "review_note_ru": "Систематический обзор не позволяет сделать общий вывод о влиянии числа приёмов пищи или перекусов на энергетическое потребление; каталог использует частоту как планировочный режим, а не как обещание эффекта."
+    }
+  ]
+}

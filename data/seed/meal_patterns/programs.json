@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "programs": [
+    {
+      "code": "ADULT_REGULAR_3",
+      "version": {
+        "lifecycle": "PUBLISHED",
+        "scope": "WELLNESS_SCHEDULE",
+        "display_name_ru": "Три основных приёма пищи",
+        "explanation_ru": "Нейтральный режим для планирования завтрака, обеда и ужина. FamilyFoodOS не утверждает, что три приёма пищи полезнее другой подходящей частоты.",
+        "min_age_years": 19,
+        "max_age_years": null,
+        "review_status": "REVIEWED",
+        "reviewed_at": "2026-09-17T04:19:00+00:00",
+        "published_at": "2026-09-17T04:19:00+00:00",
+        "change_note": "Initial reviewed adult scheduling program.",
+        "opportunity_roles": ["BREAKFAST", "LUNCH", "DINNER"],
+        "tags": [
+          ["CONTEXT", "GENERAL_WELLNESS_SCHEDULE"]
+        ],
+        "evidence_codes": [
+          "USDA_NESR_DGAC2025_SR09",
+          "USDA_NESR_DGAC2025_SR10"
+        ]
+      }
+    },
+    {
+      "code": "ADULT_REGULAR_3_PLUS_SNACK",
+      "version": {
+        "lifecycle": "PUBLISHED",
+        "scope": "WELLNESS_SCHEDULE",
+        "display_name_ru": "Три приёма пищи и перекус",
+        "explanation_ru": "Нейтральный режим для планирования трёх основных приёмов пищи и одного перекуса. FamilyFoodOS не приписывает дополнительному перекусу универсальное преимущество для здоровья или контроля энергии.",
+        "min_age_years": 19,
+        "max_age_years": null,
+        "review_status": "REVIEWED",
+        "reviewed_at": "2026-09-17T04:19:00+00:00",
+        "published_at": "2026-09-17T04:19:00+00:00",
+        "change_note": "Initial reviewed adult scheduling program.",
+        "opportunity_roles": ["BREAKFAST", "LUNCH", "SNACK", "DINNER"],
+        "tags": [
+          ["CONTEXT", "GENERAL_WELLNESS_SCHEDULE"]
+        ],
+        "evidence_codes": [
+          "USDA_NESR_DGAC2025_SR09",
+          "USDA_NESR_DGAC2025_SR10"
+        ]
+      }
+    }
+  ]
+}
