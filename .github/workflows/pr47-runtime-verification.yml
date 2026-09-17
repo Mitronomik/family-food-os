@@ -39,6 +39,18 @@ jobs:
                   raise SystemExit(f"{path}: expected one old fragment, found {count}")
               file.write_text(text.replace(old, new, 1), encoding="utf-8")
 
+          def replace_exact_count(path: str, old: str, new: str, expected: int) -> None:
+              file = Path(path)
+              text = file.read_text(encoding="utf-8")
+              count = text.count(old)
+              if count == 0 and text.count(new) >= expected:
+                  return
+              if count != expected:
+                  raise SystemExit(
+                      f"{path}: expected {expected} old fragments, found {count}"
+                  )
+              file.write_text(text.replace(old, new), encoding="utf-8")
+
           artifact = "backend/app/tests/test_artifact_audit_operations_migration.py"
           replace_once(
               artifact,
@@ -55,6 +67,15 @@ jobs:
               '        "meal_pattern_tags",\n'
               '        "meal_pattern_evidence",\n'
               '    }',
+          )
+          replace_exact_count(
+              artifact,
+              '        COMPOSITION_MIGRATION_ID,\n'
+              '        HEAD_MIGRATION_ID,',
+              '        COMPOSITION_MIGRATION_ID,\n'
+              '        "0030_recipe_source_corpus",\n'
+              '        HEAD_MIGRATION_ID,',
+              3,
           )
 
           nutrient = "backend/app/tests/test_nutrient_vector.py"
@@ -100,6 +121,13 @@ jobs:
               '        "0031_meal_pattern_catalogue",\n'
               '    ]',
           )
+
+          foundation = "backend/app/tests/test_database_foundation.py"
+          replace_once(
+              foundation,
+              "assert result.applied_migrations == expected_migration_ids()[-2:]",
+              "assert result.applied_migrations == expected_migration_ids()[-3:]",
+          )
           PY
 
           git diff --check
@@ -109,8 +137,8 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add backend/app/tests/test_artifact_audit_operations_migration.py backend/app/tests/test_nutrient_vector.py
-          git commit -m "test: sync migration head regression contracts"
+          git add backend/app/tests/test_artifact_audit_operations_migration.py backend/app/tests/test_nutrient_vector.py backend/app/tests/test_database_foundation.py
+          git commit -m "test: sync remaining migration regression contracts"
           git push origin HEAD:feature/pr7-support-meal-pattern-catalogue
 
   focused-meal-pattern:
