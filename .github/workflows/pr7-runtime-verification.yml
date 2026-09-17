@@ -6,20 +6,252 @@ on:
       - feature/pr7-mealplan-serving
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: pr7-runtime-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  repair-pr7-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: feature/pr7-mealplan-serving
+          fetch-depth: 0
+
+      - name: Synchronize PR7 migration contracts and revision invariants
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace_exact(path: str, old: str, new: str, expected: int = 1) -> None:
+              file = Path(path)
+              text = file.read_text(encoding="utf-8")
+              count = text.count(old)
+              if count == 0 and new in text:
+                  return
+              if count != expected:
+                  raise SystemExit(f"{path}: expected {expected} matches, found {count}")
+              file.write_text(text.replace(old, new), encoding="utf-8")
+
+          def append_once(path: str, marker: str, addition: str) -> None:
+              file = Path(path)
+              text = file.read_text(encoding="utf-8")
+              if marker in text:
+                  return
+              if not text.endswith("\n"):
+                  text += "\n"
+              file.write_text(text + "\n" + addition.strip() + "\n", encoding="utf-8")
+
+          # Confirmed full-regression failures: advance only current-head expectations.
+          replace_exact(
+              "backend/app/tests/persistence/test_recipe_source_corpus_persistence.py",
+              'assert max(current_migrations(config)) == "0031_meal_pattern_catalogue"',
+              'assert max(current_migrations(config)) == "0032_meal_plan_serving"',
+          )
+
+          artifact = "backend/app/tests/test_artifact_audit_operations_migration.py"
+          replace_exact(
+              artifact,
+              'HEAD_MIGRATION_ID = "0031_meal_pattern_catalogue"',
+              'HEAD_MIGRATION_ID = "0032_meal_plan_serving"',
+          )
+          replace_exact(
+              artifact,
+              '        "0030_recipe_source_corpus",\n        HEAD_MIGRATION_ID,',
+              '        "0030_recipe_source_corpus",\n'
+              '        "0031_meal_pattern_catalogue",\n'
+              '        HEAD_MIGRATION_ID,',
+              expected=3,
+          )
+          replace_exact(
+              artifact,
+              '        "meal_pattern_evidence",\n    }',
+              '        "meal_pattern_evidence",\n'
+              '        "member_meal_pattern_selections",\n'
+              '        "member_meal_pattern_opportunities",\n'
+              '        "meal_plans",\n'
+              '        "meal_plan_member_selections",\n'
+              '        "meal_plan_events",\n'
+              '        "servings",\n'
+              '    }',
+          )
+
+          replace_exact(
+              "backend/app/tests/test_database_foundation.py",
+              "assert result.applied_migrations == expected_migration_ids()[-3:]",
+              "assert result.applied_migrations == expected_migration_ids()[-4:]",
+          )
+
+          replace_exact(
+              "backend/app/tests/test_family_food_identity_migration.py",
+              '        "0031_meal_pattern_catalogue",\n    ]',
+              '        "0031_meal_pattern_catalogue",\n'
+              '        "0032_meal_plan_serving",\n'
+              '    ]',
+          )
+
+          composition = "backend/app/tests/test_food_composition_migration.py"
+          replace_exact(
+              composition,
+              'MEAL_PATTERN_MIGRATION_ID = "0031_meal_pattern_catalogue"',
+              'MEAL_PATTERN_MIGRATION_ID = "0031_meal_pattern_catalogue"\n'
+              'MEAL_PLAN_MIGRATION_ID = "0032_meal_plan_serving"',
+          )
+          replace_exact(
+              composition,
+              'assert report["migration_head_after"] == MEAL_PATTERN_MIGRATION_ID',
+              'assert report["migration_head_after"] == MEAL_PLAN_MIGRATION_ID',
+          )
+          replace_exact(
+              composition,
+              "assert migrations.expected_migration_ids()[-3:] == [",
+              "assert migrations.expected_migration_ids()[-4:] == [",
+          )
+          replace_exact(
+              composition,
+              '        MEAL_PATTERN_MIGRATION_ID,\n    ]',
+              '        MEAL_PATTERN_MIGRATION_ID,\n'
+              '        MEAL_PLAN_MIGRATION_ID,\n'
+              '    ]',
+              expected=3,
+          )
+
+          replace_exact(
+              "backend/app/tests/test_household_migration.py",
+              '        "0031_meal_pattern_catalogue",\n    ]',
+              '        "0031_meal_pattern_catalogue",\n'
+              '        "0032_meal_plan_serving",\n'
+              '    ]',
+          )
+
+          meal_pattern = "backend/app/tests/test_meal_pattern_migration.py"
+          replace_exact(
+              meal_pattern,
+              'def test_migration_chain_appends_0031_after_current_main_head():\n'
+              '    assert expected_migration_ids()[-2:] == [\n'
+              '        "0030_recipe_source_corpus",\n'
+              '        "0031_meal_pattern_catalogue",\n'
+              '    ]',
+              'def test_migration_chain_keeps_0031_between_0030_and_0032():\n'
+              '    assert expected_migration_ids()[-3:] == [\n'
+              '        "0030_recipe_source_corpus",\n'
+              '        "0031_meal_pattern_catalogue",\n'
+              '        "0032_meal_plan_serving",\n'
+              '    ]',
+          )
+          replace_exact(
+              meal_pattern,
+              '    assert apply_migrations(config) == ["0031_meal_pattern_catalogue"]',
+              '    assert apply_migrations(config) == [\n'
+              '        "0031_meal_pattern_catalogue",\n'
+              '        "0032_meal_plan_serving",\n'
+              '    ]',
+          )
+
+          replace_exact(
+              "backend/app/tests/test_migration_runner_rebuild.py",
+              'HEAD = "0031_meal_pattern_catalogue"',
+              'HEAD = "0032_meal_plan_serving"',
+          )
+
+          nutrient = "backend/app/tests/test_nutrient_vector.py"
+          replace_exact(
+              nutrient,
+              '    assert migrations.expected_migration_ids()[-4:] == [\n'
+              '        MIGRATION.MIGRATION_ID,\n'
+              '        "0029_food_composition_core",\n'
+              '        "0030_recipe_source_corpus",\n'
+              '        "0031_meal_pattern_catalogue",\n'
+              '    ]',
+              '    assert migrations.expected_migration_ids()[-5:] == [\n'
+              '        MIGRATION.MIGRATION_ID,\n'
+              '        "0029_food_composition_core",\n'
+              '        "0030_recipe_source_corpus",\n'
+              '        "0031_meal_pattern_catalogue",\n'
+              '        "0032_meal_plan_serving",\n'
+              '    ]',
+          )
+          replace_exact(
+              nutrient,
+              '        "0031_meal_pattern_catalogue",\n    ]',
+              '        "0031_meal_pattern_catalogue",\n'
+              '        "0032_meal_plan_serving",\n'
+              '    ]',
+              expected=2,
+          )
+
+          # Persistence boundary owns a linear immutable history, even for direct repository use.
+          repo = "backend/app/persistence/sqlalchemy_core/meal_plan_repositories.py"
+          replace_exact(
+              repo,
+              '''        if selection.supersedes_selection_id is not None:\n            previous = (\n                self._connection.execute(\n                    select(member_meal_pattern_selections_table).where(\n                        member_meal_pattern_selections_table.c.id\n                        == selection.supersedes_selection_id\n                    )\n                )\n                .mappings()\n                .one_or_none()\n            )\n            if (\n                previous is None\n                or previous["household_id"] != selection.household_id\n                or previous["member_id"] != selection.member_id\n            ):\n                raise MealPlanPersistenceConflictError(\n                    "supersedes_selection_id must reference the same Household member."\n                )''',
+              '''        if selection.version_number == 1:\n            if selection.supersedes_selection_id is not None:\n                raise MealPlanPersistenceConflictError(\n                    "Selection version 1 must not supersede another selection."\n                )\n        elif selection.supersedes_selection_id is None:\n            raise MealPlanPersistenceConflictError(\n                "Selection revisions after version 1 require the previous selection."\n            )\n        if selection.supersedes_selection_id is not None:\n            previous = (\n                self._connection.execute(\n                    select(member_meal_pattern_selections_table).where(\n                        member_meal_pattern_selections_table.c.id\n                        == selection.supersedes_selection_id\n                    )\n                )\n                .mappings()\n                .one_or_none()\n            )\n            if (\n                previous is None\n                or previous["household_id"] != selection.household_id\n                or previous["member_id"] != selection.member_id\n                or previous["version_number"] != selection.version_number - 1\n            ):\n                raise MealPlanPersistenceConflictError(\n                    "supersedes_selection_id must reference the immediately previous selection version."\n                )''',
+          )
+          replace_exact(
+              repo,
+              '''        if plan.supersedes_plan_id is not None:\n            previous = (\n                self._connection.execute(\n                    select(\n                        meal_plans_table.c.household_id,\n                        meal_plans_table.c.week_start,\n                    ).where(meal_plans_table.c.id == plan.supersedes_plan_id)\n                )\n                .mappings()\n                .one_or_none()\n            )\n            if (\n                previous is None\n                or previous["household_id"] != plan.household_id\n                or previous["week_start"] != plan.week_start\n            ):\n                raise MealPlanPersistenceConflictError(\n                    "supersedes_plan_id must reference the same Household week."\n                )''',
+              '''        if plan.revision_number == 1:\n            if plan.supersedes_plan_id is not None:\n                raise MealPlanPersistenceConflictError(\n                    "MealPlan revision 1 must not supersede another plan."\n                )\n        elif plan.supersedes_plan_id is None:\n            raise MealPlanPersistenceConflictError(\n                "MealPlan revisions after revision 1 require the previous plan."\n            )\n        if plan.supersedes_plan_id is not None:\n            previous = (\n                self._connection.execute(\n                    select(\n                        meal_plans_table.c.household_id,\n                        meal_plans_table.c.week_start,\n                        meal_plans_table.c.revision_number,\n                    ).where(meal_plans_table.c.id == plan.supersedes_plan_id)\n                )\n                .mappings()\n                .one_or_none()\n            )\n            if (\n                previous is None\n                or previous["household_id"] != plan.household_id\n                or previous["week_start"] != plan.week_start\n                or previous["revision_number"] != plan.revision_number - 1\n            ):\n                raise MealPlanPersistenceConflictError(\n                    "supersedes_plan_id must reference the immediately previous MealPlan revision."\n                )''',
+          )
+
+          append_once(
+              "backend/app/tests/persistence/test_meal_plan_repository.py",
+              "def test_selection_and_plan_revision_chains_reject_gaps",
+              '''def test_selection_and_plan_revision_chains_reject_gaps(meal_plan_engine):\n    _, engine = meal_plan_engine\n    household = _household()\n    member = _member(household.id)\n    _seed_household(engine, household, member)\n    first_selection = _selection(household.id, member.id)\n    with SqlAlchemyMealPlanUnitOfWork(engine) as scope:\n        scope.selections.add_detail(first_selection)\n        scope.commit()\n\n    missing_link = _selection(household.id, member.id, version=2)\n    with pytest.raises(MealPlanPersistenceConflictError, match="require the previous selection"):\n        with SqlAlchemyMealPlanUnitOfWork(engine) as scope:\n            scope.selections.add_detail(missing_link)\n            scope.commit()\n\n    skipped_selection = _selection(\n        household.id,\n        member.id,\n        version=3,\n        supersedes=first_selection.selection.id,\n    )\n    with pytest.raises(MealPlanPersistenceConflictError, match="immediately previous selection"):\n        with SqlAlchemyMealPlanUnitOfWork(engine) as scope:\n            scope.selections.add_detail(skipped_selection)\n            scope.commit()\n\n    first_plan = _plan(household.id, member.id, first_selection.selection.id)\n    with SqlAlchemyMealPlanUnitOfWork(engine) as scope:\n        scope.plans.add_detail(first_plan)\n        scope.commit()\n\n    missing_plan_link = _plan(\n        household.id,\n        member.id,\n        first_selection.selection.id,\n        revision=2,\n    )\n    with pytest.raises(MealPlanPersistenceConflictError, match="require the previous plan"):\n        with SqlAlchemyMealPlanUnitOfWork(engine) as scope:\n            scope.plans.add_detail(missing_plan_link)\n            scope.commit()\n\n    skipped_plan = _plan(\n        household.id,\n        member.id,\n        first_selection.selection.id,\n        revision=3,\n        supersedes=first_plan.plan.id,\n    )\n    with pytest.raises(MealPlanPersistenceConflictError, match="immediately previous MealPlan"):\n        with SqlAlchemyMealPlanUnitOfWork(engine) as scope:\n            scope.plans.add_detail(skipped_plan)\n            scope.commit()''',
+          )
+
+          git_files = [
+              "backend/app/persistence/sqlalchemy_core/meal_plan_repositories.py",
+              "backend/app/tests/persistence/test_meal_plan_repository.py",
+              "backend/app/tests/persistence/test_recipe_source_corpus_persistence.py",
+              "backend/app/tests/test_artifact_audit_operations_migration.py",
+              "backend/app/tests/test_database_foundation.py",
+              "backend/app/tests/test_family_food_identity_migration.py",
+              "backend/app/tests/test_food_composition_migration.py",
+              "backend/app/tests/test_household_migration.py",
+              "backend/app/tests/test_meal_pattern_migration.py",
+              "backend/app/tests/test_migration_runner_rebuild.py",
+              "backend/app/tests/test_nutrient_vector.py",
+          ]
+          print("Synchronized:", *git_files, sep="\n- ")
+          PY
+
+          git diff --check
+          if git diff --quiet; then
+            echo "PR7 contracts already synchronized."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            backend/app/persistence/sqlalchemy_core/meal_plan_repositories.py \
+            backend/app/tests/persistence/test_meal_plan_repository.py \
+            backend/app/tests/persistence/test_recipe_source_corpus_persistence.py \
+            backend/app/tests/test_artifact_audit_operations_migration.py \
+            backend/app/tests/test_database_foundation.py \
+            backend/app/tests/test_family_food_identity_migration.py \
+            backend/app/tests/test_food_composition_migration.py \
+            backend/app/tests/test_household_migration.py \
+            backend/app/tests/test_meal_pattern_migration.py \
+            backend/app/tests/test_migration_runner_rebuild.py \
+            backend/app/tests/test_nutrient_vector.py
+          git commit -m "test: sync PR7 migration and revision contracts"
+          git push origin HEAD:feature/pr7-mealplan-serving
+
   focused-pr7:
+    needs: repair-pr7-contracts
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          ref: feature/pr7-mealplan-serving
           fetch-depth: 0
 
       - name: Set up Python 3.12
@@ -51,12 +283,14 @@ jobs:
           if-no-files-found: error
 
   backend-regression:
+    needs: repair-pr7-contracts
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          ref: feature/pr7-mealplan-serving
           fetch-depth: 0
 
       - name: Set up Python 3.12
@@ -81,12 +315,14 @@ jobs:
           if-no-files-found: error
 
   launcher-regression:
+    needs: repair-pr7-contracts
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          ref: feature/pr7-mealplan-serving
           fetch-depth: 0
 
       - name: Set up Python 3.12
