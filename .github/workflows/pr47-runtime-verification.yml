@@ -9,12 +9,38 @@ permissions:
   contents: read
 
 jobs:
+  source-snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Upload migration regression sources
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr51-migration-regression-sources
+          path: |
+            backend/app/tests/persistence/test_recipe_source_corpus_persistence.py
+            backend/app/tests/test_artifact_audit_operations_migration.py
+            backend/app/tests/test_database_foundation.py
+            backend/app/tests/test_family_food_identity_migration.py
+            backend/app/tests/test_food_composition_migration.py
+            backend/app/tests/test_household_migration.py
+            backend/app/tests/test_migration_runner_rebuild.py
+            backend/app/tests/test_nutrient_vector.py
+          if-no-files-found: error
+
   focused-meal-pattern:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
@@ -42,6 +68,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
@@ -70,6 +98,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
