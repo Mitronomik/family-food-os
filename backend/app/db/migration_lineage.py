@@ -35,8 +35,21 @@ from app.identity import WORKSPACE_SOURCE, WORKSPACE_SOURCE_SETTING_KEY
 
 FAMILY_FOOD_IDENTITY_MIGRATION_ID = "0021_family_food_identity"
 
+# The two columns `_ensure_migration_table` creates. A candidate whose migration
+# table has some other shape is not one this application wrote, and reading
+# `migration_id` out of it would be a guess rather than a fact.
 EXPECTED_MIGRATION_TABLE_COLUMNS: tuple[str, ...] = ("migration_id", "applied_at")
 
+# The tables each migration adds, keyed by migration ID. This is the minimum
+# required-table mapping for a supported known migration prefix: a candidate that
+# records `0007_recipes` must actually contain the recipe tables, or its history
+# is describing a schema the file does not have.
+#
+# `0017_import_apply_status` and `0019_production_batch_tax_rate_snapshots` are
+# deliberately mapped to no *new* table. `0017` rebuilds `import_sources` and
+# `import_drafts` through `*_new` scratch tables that are renamed over the
+# originals, and `0019` only adds columns. Neither leaves a table behind that
+# `0016` had not already required.
 REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
     "0001_infrastructure": frozenset({"app_settings", "audit_logs"}),
     "0002_ingredients": frozenset({"ingredients"}),
@@ -103,6 +116,7 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
             "recipe_ingredient_nutrition_assessment_issues",
         }
     ),
+    # 0027 rebuilds the existing RecipeVersion table; no new table survives.
     "0027_recipe_same_source_revisions": frozenset(),
     "0028_normalized_nutrient_vector": frozenset(
         {
@@ -153,6 +167,9 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
     ),
 }
 
+# The foundational tables promised by migration `0001`. Stable FamilyFoodOS
+# identity is checked separately because table presence alone cannot distinguish
+# an unmarked CosmeticWorkshopOS-era database from this product.
 WORKSPACE_IDENTITY_TABLES: frozenset[str] = frozenset(
     {MIGRATION_TABLE, "app_settings", "audit_logs"}
 )
@@ -174,7 +191,13 @@ LineageRejection = Literal[
 
 @dataclass(frozen=True)
 class MigrationLineage:
-    """The verdict on one candidate's recorded migration history."""
+    """The verdict on one candidate's recorded migration history.
+
+    `applied_ids` is populated only for an accepted `known_prefix`. A rejected
+    lineage deliberately does not hand its caller a list to reason further about:
+    the reason code is the complete answer, and the launcher's job is to reject,
+    not to work around what it found.
+    """
 
     status: LineageStatus
     rejection: LineageRejection | None = None
@@ -186,6 +209,11 @@ class MigrationLineage:
 
     @property
     def is_current_head(self) -> bool:
+        """Whether the candidate already sits at the application's head schema.
+
+        `False` for an accepted older prefix, which is exactly the case that will
+        take the ordinary `before_migration` backup during restored startup.
+        """
         return (
             self.is_known_prefix and list(self.applied_ids) == expected_migration_ids()
         )
@@ -196,6 +224,7 @@ def _rejected(reason: LineageRejection) -> MigrationLineage:
 
 
 def migration_table_exists(connection: sqlite3.Connection) -> bool:
+    """Whether the migration-history table is present, without creating it."""
     row = connection.execute(
         "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ?",
         (MIGRATION_TABLE,),
@@ -213,6 +242,19 @@ def table_exists(connection: sqlite3.Connection, name: str) -> bool:
 def has_family_food_workspace_identity(
     connection: sqlite3.Connection, applied_ids: tuple[str, ...] | list[str]
 ) -> bool:
+    """Whether a known lineage carries the complete FamilyFoodOS identity.
+
+    Restore accepts the candidate only when the identity migration is present
+    in its already-validated lineage *and* ``app_settings`` contains exactly one
+    stable machine marker with the canonical value. Missing tables, missing or
+    duplicate rows, malformed settings storage and any other value all fail
+    closed. ``product.name`` is deliberately not read: it is human-facing and
+    mutable.
+
+    The caller supplies the IDs returned by :func:`inspect_migration_lineage`.
+    This function neither repairs the settings table nor runs the identity
+    migration; it only reads through the caller's read-only connection.
+    """
     if FAMILY_FOOD_IDENTITY_MIGRATION_ID not in applied_ids:
         return False
     try:
@@ -238,6 +280,12 @@ def _migration_table_shape_matches(connection: sqlite3.Connection) -> bool:
 
 
 def read_recorded_migration_ids(connection: sqlite3.Connection) -> list[str]:
+    """Every recorded migration ID, in the order the table stores them.
+
+    `rowid` order, not `migration_id` order. The point of this read is to notice
+    a *reordered* history, and sorting the rows here would erase the very
+    evidence the caller is looking for.
+    """
     rows = connection.execute(
         f"SELECT migration_id FROM {MIGRATION_TABLE} ORDER BY rowid"
     ).fetchall()
@@ -245,6 +293,15 @@ def read_recorded_migration_ids(connection: sqlite3.Connection) -> list[str]:
 
 
 def classify_recorded_migration_ids(recorded: list[str]) -> MigrationLineage:
+    """Classify a recorded history against the application's migration chain.
+
+    Accepted only when `recorded` is an exact ordered prefix of the expected
+    chain — same IDs, same order, starting at the first, with nothing missing in
+    between. Every other shape gets its own reason code, because the launcher's
+    user-safe categories differ: a newer schema is a *supported file this
+    application is too old for*, while an unknown ID is a file it does not
+    recognize at all.
+    """
     if not recorded:
         return _rejected("migration-history-empty")
     if len(set(recorded)) != len(recorded):
@@ -261,6 +318,11 @@ def classify_recorded_migration_ids(recorded: list[str]) -> MigrationLineage:
         if migration_id not in expected_positions
     ]
     if unknown:
+        # A history that contains the complete known chain *plus* extra IDs is a
+        # database written by a later version of this application. Anything else
+        # is simply not a history this application produced. The distinction
+        # matters to the user-facing category and to nothing else — both are
+        # rejected before the working database is touched.
         if set(expected).issubset(set(recorded)):
             return _rejected("schema-newer-than-application")
         return _rejected("unknown-migration-id")
@@ -275,6 +337,13 @@ def classify_recorded_migration_ids(recorded: list[str]) -> MigrationLineage:
 
 
 def inspect_migration_lineage(connection: sqlite3.Connection) -> MigrationLineage:
+    """Read and classify one candidate's lineage through a read-only connection.
+
+    The connection is the caller's, and it is expected to be opened
+    `mode=ro`. Nothing here writes, so passing a writable connection would not
+    change the outcome — but the read-only open is what makes that a property of
+    the file rather than a promise of this function.
+    """
     try:
         if not migration_table_exists(connection):
             return _rejected("migration-table-missing")
@@ -289,6 +358,12 @@ def inspect_migration_lineage(connection: sqlite3.Connection) -> MigrationLineag
 def required_tables_for_prefix(
     applied_ids: tuple[str, ...] | list[str],
 ) -> frozenset[str]:
+    """The tables a database recording exactly `applied_ids` must contain.
+
+    Union of the foundational tables and everything each recorded migration creates.
+    Unknown IDs contribute nothing, because `classify_recorded_migration_ids`
+    has already rejected any history that contains one.
+    """
     required = set(WORKSPACE_IDENTITY_TABLES)
     for migration_id in applied_ids:
         required |= REQUIRED_TABLES_BY_MIGRATION.get(migration_id, frozenset())
@@ -298,6 +373,12 @@ def required_tables_for_prefix(
 def missing_required_tables(
     connection: sqlite3.Connection, applied_ids: tuple[str, ...] | list[str]
 ) -> frozenset[str]:
+    """Which required tables the candidate does not actually have.
+
+    A recorded history is a claim; this is the check that the file backs the
+    claim up. An empty result means every table the recorded prefix promises is
+    present.
+    """
     present = {
         row[0]
         for row in connection.execute(
