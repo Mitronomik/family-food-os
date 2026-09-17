@@ -1,6 +1,6 @@
 """Household-owned meal-pattern selection and MealPlan/Serving domain."""
 
-from collections import Counter, defaultdict
+from collections import defaultdict
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta
 from decimal import Decimal, localcontext
@@ -637,12 +637,15 @@ def validate_complete_plan(
             field="events",
             value=sorted(actual_dates),
         )
-    pin_by_member = {item.member_id: item.selection_id for item in detail.member_selections}
-    event_by_id = {event.id: event for event in detail.events}
-    roles_by_member_date: dict[tuple[UUID, date], list[MealRole]] = defaultdict(list)
+    pin_by_member = {
+        item.member_id: item.selection_id for item in detail.member_selections
+    }
+    participants_by_event: dict[UUID, set[UUID]] = defaultdict(set)
     for serving in detail.servings:
-        event = event_by_id[serving.event_id]
-        roles_by_member_date[(serving.member_id, event.local_date)].append(event.role)
+        participants_by_event[serving.event_id].add(serving.member_id)
+    ordered_events = sorted(
+        detail.events, key=lambda event: (event.local_date, event.position)
+    )
     for member_id, selection_id in pin_by_member.items():
         selection_detail = selection_details.get(selection_id)
         if selection_detail is None:
@@ -667,14 +670,19 @@ def validate_complete_plan(
                 value=selection_id,
             )
         for local_date in detail.horizon_dates:
-            expected = Counter(selection_detail.roles_for_weekday(local_date.isoweekday()))
-            actual = Counter(roles_by_member_date.get((member_id, local_date), ()))
+            expected = selection_detail.roles_for_weekday(local_date.isoweekday())
+            actual = tuple(
+                event.role
+                for event in ordered_events
+                if event.local_date == local_date
+                and member_id in participants_by_event[event.id]
+            )
             if actual != expected:
                 raise _issue(
                     DomainIssueCode.INVALID_CODE,
-                    "Member event roles must match the accepted resolved schedule.",
+                    "Member event roles and order must match the accepted resolved schedule.",
                     field="servings",
-                    value=(member_id, local_date, dict(actual), dict(expected)),
+                    value=(member_id, local_date, actual, expected),
                 )
 
 
@@ -712,7 +720,9 @@ def _aggregate_values(values: tuple[NutritionValues, ...]) -> NutritionValues:
         )
 
 
-def _aggregate_status(statuses: tuple[NutritionStatus, ...], values: NutritionValues) -> NutritionStatus:
+def _aggregate_status(
+    statuses: tuple[NutritionStatus, ...], values: NutritionValues
+) -> NutritionStatus:
     if any(getattr(values, name) is None for name in NUTRIENTS):
         return NutritionStatus.INCOMPLETE
     if any(status is NutritionStatus.CONDITIONAL for status in statuses):
@@ -731,7 +741,10 @@ def calculate_meal_plan_nutrition(
     serving_results: list[ServingNutrition] = []
     for serving in detail.servings:
         event = event_by_id[serving.event_id]
-        if event.source_kind is MealSourceKind.COOK_RECIPE and event.recipe_version_id is not None:
+        if (
+            event.source_kind is MealSourceKind.COOK_RECIPE
+            and event.recipe_version_id is not None
+        ):
             nutrition = recipe_nutrition_by_version_id.get(event.recipe_version_id)
             if nutrition is None:
                 values = NutritionValues()
@@ -766,7 +779,9 @@ def calculate_meal_plan_nutrition(
     for result in member_days:
         grouped_weeks[result.member_id].append(result)
     member_weeks: list[MemberWeekNutrition] = []
-    for member_id, results in sorted(grouped_weeks.items(), key=lambda item: item[0].hex):
+    for member_id, results in sorted(
+        grouped_weeks.items(), key=lambda item: item[0].hex
+    ):
         values = _aggregate_values(tuple(item.values for item in results))
         status = _aggregate_status(tuple(item.status for item in results), values)
         member_weeks.append(MemberWeekNutrition(member_id, values, status))
