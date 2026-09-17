@@ -92,9 +92,6 @@ meal_pattern_opportunities_table = Table(
     ),
     Column("position", Integer, primary_key=True, nullable=False),
     Column("role_code", String, nullable=False),
-    UniqueConstraint(
-        "version_id", "role_code", name="uq_meal_pattern_opportunities_role"
-    ),
     CheckConstraint("position > 0", name="ck_meal_pattern_opportunities_position"),
     CheckConstraint(
         "role_code IN ('BREAKFAST','LUNCH','DINNER','SNACK','PRE_WORKOUT','POST_WORKOUT','OTHER')",
