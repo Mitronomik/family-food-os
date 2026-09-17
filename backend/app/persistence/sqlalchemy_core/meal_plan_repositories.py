@@ -60,7 +60,11 @@ class SqlAlchemyMemberMealPatternSelectionRepository:
                 .mappings()
                 .one_or_none()
             )
-            if previous is None or previous["household_id"] != selection.household_id or previous["member_id"] != selection.member_id:
+            if (
+                previous is None
+                or previous["household_id"] != selection.household_id
+                or previous["member_id"] != selection.member_id
+            ):
                 raise MealPlanPersistenceConflictError(
                     "supersedes_selection_id must reference the same Household member."
                 )
@@ -179,17 +183,28 @@ class SqlAlchemyMealPlanRepository:
                     "MealPlan member selection pins must remain inside one Household."
                 )
         if plan.supersedes_plan_id is not None:
-            previous_household = self._connection.scalar(
-                select(meal_plans_table.c.household_id).where(
-                    meal_plans_table.c.id == plan.supersedes_plan_id
+            previous = (
+                self._connection.execute(
+                    select(
+                        meal_plans_table.c.household_id,
+                        meal_plans_table.c.week_start,
+                    ).where(meal_plans_table.c.id == plan.supersedes_plan_id)
                 )
+                .mappings()
+                .one_or_none()
             )
-            if previous_household != plan.household_id:
+            if (
+                previous is None
+                or previous["household_id"] != plan.household_id
+                or previous["week_start"] != plan.week_start
+            ):
                 raise MealPlanPersistenceConflictError(
-                    "supersedes_plan_id must reference the same Household."
+                    "supersedes_plan_id must reference the same Household week."
                 )
         try:
-            self._connection.execute(insert(meal_plans_table).values(**_plan_values(plan)))
+            self._connection.execute(
+                insert(meal_plans_table).values(**_plan_values(plan))
+            )
             if detail.member_selections:
                 self._connection.execute(
                     insert(meal_plan_member_selections_table),
@@ -272,14 +287,19 @@ class SqlAlchemyMealPlanRepository:
             ).mappings()
         )
         event_ids = [event["id"] for event in events]
-        servings = []
+        servings: list[Mapping[str, Any]] = []
         if event_ids:
             servings = list(
                 self._connection.execute(
-                    select(servings_table)
-                    .where(servings_table.c.event_id.in_(event_ids))
-                    .order_by(servings_table.c.event_id, servings_table.c.member_id)
+                    select(servings_table).where(servings_table.c.event_id.in_(event_ids))
                 ).mappings()
+            )
+            event_order = {event_id: index for index, event_id in enumerate(event_ids)}
+            servings.sort(
+                key=lambda item: (
+                    event_order[item["event_id"]],
+                    item["member_id"].hex,
+                )
             )
         return MealPlanDetail(
             plan=_plan_from_row(row),
@@ -321,7 +341,9 @@ def _selection_from_row(row: Mapping[str, Any]) -> MemberMealPatternSelection:
     )
 
 
-def _opportunity_values(value: MemberMealPatternOpportunitySnapshot) -> dict[str, object]:
+def _opportunity_values(
+    value: MemberMealPatternOpportunitySnapshot,
+) -> dict[str, object]:
     return {
         "selection_id": value.selection_id,
         "weekday": value.weekday,
@@ -330,7 +352,9 @@ def _opportunity_values(value: MemberMealPatternOpportunitySnapshot) -> dict[str
     }
 
 
-def _opportunity_from_row(row: Mapping[str, Any]) -> MemberMealPatternOpportunitySnapshot:
+def _opportunity_from_row(
+    row: Mapping[str, Any],
+) -> MemberMealPatternOpportunitySnapshot:
     return MemberMealPatternOpportunitySnapshot(
         selection_id=row["selection_id"],
         weekday=row["weekday"],
@@ -375,7 +399,9 @@ def _pin_values(value: MealPlanMemberSelection) -> dict[str, object]:
 
 def _pin_from_row(row: Mapping[str, Any]) -> MealPlanMemberSelection:
     return MealPlanMemberSelection(
-        plan_id=row["plan_id"], member_id=row["member_id"], selection_id=row["selection_id"]
+        plan_id=row["plan_id"],
+        member_id=row["member_id"],
+        selection_id=row["selection_id"],
     )
 
 
