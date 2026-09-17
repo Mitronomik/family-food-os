@@ -262,3 +262,58 @@ def test_append_only_triggers_reject_history_mutation(meal_plan_engine):
                 "UPDATE member_meal_pattern_selections SET version_number = 99 WHERE id = ?",
                 (selection.selection.id.hex,),
             )
+
+def test_selection_and_plan_revision_chains_reject_gaps(meal_plan_engine):
+    _, engine = meal_plan_engine
+    household = _household()
+    member = _member(household.id)
+    _seed_household(engine, household, member)
+    first_selection = _selection(household.id, member.id)
+    with SqlAlchemyMealPlanUnitOfWork(engine) as scope:
+        scope.selections.add_detail(first_selection)
+        scope.commit()
+
+    missing_link = _selection(household.id, member.id, version=2)
+    with pytest.raises(MealPlanPersistenceConflictError, match="require the previous selection"):
+        with SqlAlchemyMealPlanUnitOfWork(engine) as scope:
+            scope.selections.add_detail(missing_link)
+            scope.commit()
+
+    skipped_selection = _selection(
+        household.id,
+        member.id,
+        version=3,
+        supersedes=first_selection.selection.id,
+    )
+    with pytest.raises(MealPlanPersistenceConflictError, match="immediately previous selection"):
+        with SqlAlchemyMealPlanUnitOfWork(engine) as scope:
+            scope.selections.add_detail(skipped_selection)
+            scope.commit()
+
+    first_plan = _plan(household.id, member.id, first_selection.selection.id)
+    with SqlAlchemyMealPlanUnitOfWork(engine) as scope:
+        scope.plans.add_detail(first_plan)
+        scope.commit()
+
+    missing_plan_link = _plan(
+        household.id,
+        member.id,
+        first_selection.selection.id,
+        revision=2,
+    )
+    with pytest.raises(MealPlanPersistenceConflictError, match="require the previous plan"):
+        with SqlAlchemyMealPlanUnitOfWork(engine) as scope:
+            scope.plans.add_detail(missing_plan_link)
+            scope.commit()
+
+    skipped_plan = _plan(
+        household.id,
+        member.id,
+        first_selection.selection.id,
+        revision=3,
+        supersedes=first_plan.plan.id,
+    )
+    with pytest.raises(MealPlanPersistenceConflictError, match="immediately previous MealPlan"):
+        with SqlAlchemyMealPlanUnitOfWork(engine) as scope:
+            scope.plans.add_detail(skipped_plan)
+            scope.commit()

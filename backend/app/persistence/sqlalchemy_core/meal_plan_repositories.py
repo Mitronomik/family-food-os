@@ -49,6 +49,15 @@ class SqlAlchemyMemberMealPatternSelectionRepository:
             raise MealPlanPersistenceConflictError(
                 "Meal-pattern selection member must belong to the selection Household."
             )
+        if selection.version_number == 1:
+            if selection.supersedes_selection_id is not None:
+                raise MealPlanPersistenceConflictError(
+                    "Selection version 1 must not supersede another selection."
+                )
+        elif selection.supersedes_selection_id is None:
+            raise MealPlanPersistenceConflictError(
+                "Selection revisions after version 1 require the previous selection."
+            )
         if selection.supersedes_selection_id is not None:
             previous = (
                 self._connection.execute(
@@ -64,9 +73,10 @@ class SqlAlchemyMemberMealPatternSelectionRepository:
                 previous is None
                 or previous["household_id"] != selection.household_id
                 or previous["member_id"] != selection.member_id
+                or previous["version_number"] != selection.version_number - 1
             ):
                 raise MealPlanPersistenceConflictError(
-                    "supersedes_selection_id must reference the same Household member."
+                    "supersedes_selection_id must reference the immediately previous selection version."
                 )
         try:
             self._connection.execute(
@@ -182,12 +192,22 @@ class SqlAlchemyMealPlanRepository:
                 raise MealPlanPersistenceConflictError(
                     "MealPlan member selection pins must remain inside one Household."
                 )
+        if plan.revision_number == 1:
+            if plan.supersedes_plan_id is not None:
+                raise MealPlanPersistenceConflictError(
+                    "MealPlan revision 1 must not supersede another plan."
+                )
+        elif plan.supersedes_plan_id is None:
+            raise MealPlanPersistenceConflictError(
+                "MealPlan revisions after revision 1 require the previous plan."
+            )
         if plan.supersedes_plan_id is not None:
             previous = (
                 self._connection.execute(
                     select(
                         meal_plans_table.c.household_id,
                         meal_plans_table.c.week_start,
+                        meal_plans_table.c.revision_number,
                     ).where(meal_plans_table.c.id == plan.supersedes_plan_id)
                 )
                 .mappings()
@@ -197,9 +217,10 @@ class SqlAlchemyMealPlanRepository:
                 previous is None
                 or previous["household_id"] != plan.household_id
                 or previous["week_start"] != plan.week_start
+                or previous["revision_number"] != plan.revision_number - 1
             ):
                 raise MealPlanPersistenceConflictError(
-                    "supersedes_plan_id must reference the same Household week."
+                    "supersedes_plan_id must reference the immediately previous MealPlan revision."
                 )
         try:
             self._connection.execute(
