@@ -3,7 +3,7 @@ from pathlib import Path
 from app.domain.food_recipes import MealTypeCode
 from app.domain.meal_patterns import MealRole
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[2]
 
 
 def test_meal_role_remains_distinct_from_recipe_classification():
