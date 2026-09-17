@@ -66,8 +66,6 @@ def upgrade(connection):
             position INTEGER NOT NULL,
             role_code TEXT NOT NULL,
             PRIMARY KEY (version_id, position),
-            CONSTRAINT uq_meal_pattern_opportunities_role
-                UNIQUE (version_id, role_code),
             FOREIGN KEY (version_id)
                 REFERENCES meal_pattern_program_versions(id) ON DELETE RESTRICT,
             CHECK (length(version_id) = 32),

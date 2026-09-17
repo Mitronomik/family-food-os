@@ -1,69 +1,55 @@
 # Current focus
 
-Updated: `2026-09-16`.
+Updated: `2026-09-17`.
 
 ## Accepted repository state
 
 - PR6 / PR6-CLOSE = COMPLETE.
-- PR #31–#45 = MERGED as accepted research/governance history.
-- Exact accepted `main` after PR #45: `e87583b440e7121623622331c0fa136953bdc122`.
-- Current accepted SQLite migration head: `0030_recipe_source_corpus`.
-- Future RecipeTemplate schema reservation remains `0031_recipe_template_catalogue` unless a later implementation decision changes the migration plan.
-- R1 / R2 / R3 / R4 and later Assembly-A recovery packages remain accepted historical research.
-- The earlier `HUMAN_EVIDENCE_BLOCKED__2_OF_3` state describes the old mandatory-kitchen-validation policy and no longer blocks Planning Core under the 2026-09-16 user-approved decision.
+- PR #31–#45 remain accepted historical research/governance evidence.
+- PR #46 is MERGED; `main` includes the dataset-independence and web-corroboration governance correction.
+- Verified implementation base for the current operation: `dbacd07453c4939f703d01f1bbc7897c0a3162eb`.
+- Accepted SQLite migration head on `main` at that base is `0030_recipe_source_corpus`.
+- `0031_recipe_template_catalogue` was only an unused reservation; the current operation uses `0031_meal_pattern_catalogue`. Future RecipeTemplate work is therefore reserved as `0032_recipe_template_catalogue` unless a later approved decision changes it.
 
-## Current authorized governance decision
+## Current authorized operation
 
-The user explicitly approved two corrections on 2026-09-16:
+`PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` (Issue #47) is ACTIVE on `feature/pr7-support-meal-pattern-catalogue`.
 
-1. technical ingredient/recipe/nutrition datasets and seed corpora are replaceable external bootstrap/evidence artifacts; FamilyFoodOS must not be designed around their schemas, counts or source-specific identities;
-2. deterministic Recipe Constructor / Recipe Assembly remains desirable, but mandatory personal kitchen execution is replaced by deterministic validation plus web corroboration for constructed-recipe publication.
+Goal: establish platform-owned immutable/versioned `MealPatternProgram` truth that downstream PR7/PR8 can consume without inventing meal-frequency policy inside MealPlan or Planner.
 
-Canonical decision draft:
+The bounded implementation includes:
 
-`docs/family-food/master-roadmap-addendum-2026-09-16.md`
+- deterministic Meal Pattern domain validation;
+- stable program identity plus immutable version snapshots;
+- lifecycle `DRAFT / PUBLISHED / INACTIVE`;
+- Russian consumer text;
+- explicit age/eligibility metadata;
+- ordered semantic meal opportunities where the same role may repeat at different positions;
+- provenance/evidence and review metadata;
+- synchronous SQLAlchemy Core repositories/UoW;
+- migration `0031_meal_pattern_catalogue`;
+- a small reviewed adult wellness/schedule seed.
 
-The decision preserves provenance, rights, mass/form, Nutrition uncertainty, Russian display and `AI_ENABLED=false` rules. Web sources provide validation evidence; they are not Planner runtime dependencies and are not permission to copy external recipe prose.
+Current seed evidence is based on USDA/NESR 2025-DGAC systematic reviews that do not support a universal claim that a particular meal/snack frequency is superior for diet quality or energy intake. The seed therefore treats frequency as a planning schedule, not a therapeutic or outcome promise.
 
-## Recipe Constructor validation direction
+Children are intentionally unsupported by the initial automated catalogue: the reviewed seed starts at age 19. No adult program may be silently inherited by a child.
 
-Constructed candidates use:
+## Architecture boundary
 
-```text
-constructor/template rules
-→ deterministic structural/data validation
-→ external recipe discovery
-→ normalized ingredient/ratio/yield/method comparison
-→ WEB_CORROBORATED / REVIEW_REQUIRED / REJECTED
-```
+This operation does **not** add `MemberMealPatternSelection`, MealPlan, MealSlot, Serving, Planner ranking, Recipe Constructor/Assembly, Shopping, Retail, AI, Auth or frontend UI.
 
-Default corroboration requires at least two independent relevant external recipes. A single-source exception requires an explicit reviewed high-trust policy.
+`MealPatternProgram` is platform-owned. Future `MemberMealPatternSelection` remains Household-owned state in PR7.
 
-`KITCHEN_TESTED` becomes optional additional evidence, not a roadmap prerequisite. Future `USER_VALIDATED` evidence may accumulate from real household use.
+Technical ingredient/recipe/nutrition datasets and seed corpora remain replaceable external/bootstrap evidence artifacts. They do not define FamilyFoodOS domain invariants.
 
-## Roadmap correction
-
-Recipe Assembly research PR #31–#45 remains immutable historical evidence but is removed as a blocking prerequisite for Planning Core.
-
-After review/merge of the current governance/docs PR, the next software operation is:
-
-`PR7-SUPPORT-MEAL-PATTERN-CATALOGUE`
-
-Then:
+## Active sequence
 
 ```text
-PR7-SUPPORT-MEAL-PATTERN-CATALOGUE
-→ PR7 MealPlan / Serving
-→ PR8 Planner v0
-→ GATE 1 — Planning Core
+PR6 / Nutrition Core                          COMPLETE
+→ PR7-SUPPORT-MEAL-PATTERN-CATALOGUE         ACTIVE (#47)
+→ PR7 MealPlan / Serving                     NOT STARTED
+→ PR8 Planner v0                             NOT STARTED
+→ GATE 1 — Planning Core                     NOT STARTED
 ```
 
-Recipe Constructor / Assembly may proceed later or in separately authorized bounded PRs without forcing PR7/PR8 to wait for physical kitchen evidence.
-
-## Current authorization boundary
-
-This branch is docs/governance only. Do not implement runtime/schema/data promotion as part of this PR.
-
-Do not start Retail, AI Gateway, Auth/shared deployment, bulk catalogue expansion or unrelated milestones automatically.
-
-After this decision PR is reviewed and merged, `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` is the next authorized software operation; PR7 itself starts only after that support operation is accepted according to the roadmap/addenda.
+After #47 is reviewed and merged, stop. PR7 starts only with separate explicit authorization.
