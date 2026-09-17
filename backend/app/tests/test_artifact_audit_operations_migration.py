@@ -35,7 +35,7 @@ NUTRITION_MIGRATION_ID = "0026_nutrition_measure_evidence"
 RECIPE_REVISION_MIGRATION_ID = "0027_recipe_same_source_revisions"
 VECTOR_MIGRATION_ID = "0028_normalized_nutrient_vector"
 COMPOSITION_MIGRATION_ID = "0029_food_composition_core"
-HEAD_MIGRATION_ID = "0030_recipe_source_corpus"
+HEAD_MIGRATION_ID = "0031_meal_pattern_catalogue"
 TABLE = "artifact_audit_operations"
 
 
@@ -234,6 +234,11 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         "recipe_source_card_variants",
         "recipe_source_card_ingredients",
         "recipe_source_declared_nutrients",
+        "meal_pattern_programs",
+        "meal_pattern_program_versions",
+        "meal_pattern_opportunities",
+        "meal_pattern_tags",
+        "meal_pattern_evidence",
     }
 
 
