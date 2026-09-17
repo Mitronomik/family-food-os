@@ -1,0 +1,109 @@
+name: PR7 runtime verification
+
+on:
+  push:
+    branches:
+      - feature/pr7-mealplan-serving
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr7-runtime-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-pr7:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/pyproject.toml
+
+      - name: Install backend test dependencies
+        run: python -m pip install -e "backend[test]"
+
+      - name: Focused PR7 verification
+        run: >-
+          python -m pytest
+          backend/app/tests/test_meal_plans.py
+          backend/app/tests/persistence/test_meal_plan_repository.py
+          backend/app/tests/test_migration_lineage.py
+          --junitxml=pr7-focused.xml
+
+      - name: Upload focused diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr7-focused-junit
+          path: pr7-focused.xml
+          if-no-files-found: error
+
+  backend-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/pyproject.toml
+
+      - name: Install backend test dependencies
+        run: python -m pip install -e "backend[test]"
+
+      - name: Full backend regression
+        run: python -m pytest backend/app/tests --junitxml=backend-regression.xml
+
+      - name: Upload backend diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-regression-junit
+          path: backend-regression.xml
+          if-no-files-found: error
+
+  launcher-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/pyproject.toml
+
+      - name: Install backend test dependencies
+        run: python -m pip install -e "backend[test]"
+
+      - name: Full launcher regression
+        run: python -m pytest launcher/tests --junitxml=launcher-regression.xml
+
+      - name: Upload launcher diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: launcher-regression-junit
+          path: launcher-regression.xml
+          if-no-files-found: error
