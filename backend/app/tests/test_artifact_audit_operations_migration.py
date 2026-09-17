@@ -174,6 +174,7 @@ def test_a_database_at_0019_reports_0020_then_0021_pending(tmp_path):
         RECIPE_REVISION_MIGRATION_ID,
         VECTOR_MIGRATION_ID,
         COMPOSITION_MIGRATION_ID,
+        "0030_recipe_source_corpus",
         HEAD_MIGRATION_ID,
     ]
 
@@ -196,6 +197,7 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         RECIPE_REVISION_MIGRATION_ID,
         VECTOR_MIGRATION_ID,
         COMPOSITION_MIGRATION_ID,
+        "0030_recipe_source_corpus",
         HEAD_MIGRATION_ID,
     ]
     assert snapshot(database_path) == before
@@ -604,6 +606,7 @@ def test_user_mode_startup_backs_up_before_applying_0020(monkeypatch, tmp_path):
         RECIPE_REVISION_MIGRATION_ID,
         VECTOR_MIGRATION_ID,
         COMPOSITION_MIGRATION_ID,
+        "0030_recipe_source_corpus",
         HEAD_MIGRATION_ID,
     ]
     assert result.backup is not None
