@@ -64,6 +64,11 @@ CURRENT_ALLOWED_TABLES = {
     "recipe_source_card_variants",
     "recipe_source_card_ingredients",
     "recipe_source_declared_nutrients",
+    "meal_pattern_programs",
+    "meal_pattern_program_versions",
+    "meal_pattern_opportunities",
+    "meal_pattern_tags",
+    "meal_pattern_evidence",
     "sqlite_sequence",
 }
 
