@@ -36,6 +36,8 @@ jobs:
         run: >-
           python -m pytest
           backend/app/tests/test_meal_plans.py
+          backend/app/tests/test_meal_plan_application.py
+          backend/app/tests/test_meal_plan_migration.py
           backend/app/tests/persistence/test_meal_plan_repository.py
           backend/app/tests/test_migration_lineage.py
           --junitxml=pr7-focused.xml
