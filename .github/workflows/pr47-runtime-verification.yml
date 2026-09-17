@@ -6,44 +6,122 @@ on:
       - feature/pr7-support-meal-pattern-catalogue
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: pr51-runtime-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  source-snapshot:
+  repair-regression-contracts:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          ref: feature/pr7-support-meal-pattern-catalogue
           fetch-depth: 0
 
-      - name: Upload migration regression sources
-        uses: actions/upload-artifact@v4
-        with:
-          name: pr51-migration-regression-sources
-          path: |
-            backend/app/tests/persistence/test_recipe_source_corpus_persistence.py
-            backend/app/tests/test_artifact_audit_operations_migration.py
-            backend/app/tests/test_database_foundation.py
-            backend/app/tests/test_family_food_identity_migration.py
-            backend/app/tests/test_food_composition_migration.py
-            backend/app/tests/test_household_migration.py
-            backend/app/tests/test_migration_runner_rebuild.py
-            backend/app/tests/test_nutrient_vector.py
-          if-no-files-found: error
+      - name: Advance stale migration-head expectations
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path: str, old: str, new: str) -> None:
+              file = Path(path)
+              text = file.read_text(encoding="utf-8")
+              count = text.count(old)
+              if count == 0 and new in text:
+                  return
+              if count != 1:
+                  raise SystemExit(f"{path}: expected one old fragment, found {count}")
+              file.write_text(text.replace(old, new, 1), encoding="utf-8")
+
+          artifact = "backend/app/tests/test_artifact_audit_operations_migration.py"
+          replace_once(
+              artifact,
+              'HEAD_MIGRATION_ID = "0030_recipe_source_corpus"',
+              'HEAD_MIGRATION_ID = "0031_meal_pattern_catalogue"',
+          )
+          replace_once(
+              artifact,
+              '        "recipe_source_declared_nutrients",\n    }',
+              '        "recipe_source_declared_nutrients",\n'
+              '        "meal_pattern_programs",\n'
+              '        "meal_pattern_program_versions",\n'
+              '        "meal_pattern_opportunities",\n'
+              '        "meal_pattern_tags",\n'
+              '        "meal_pattern_evidence",\n'
+              '    }',
+          )
+
+          nutrient = "backend/app/tests/test_nutrient_vector.py"
+          replace_once(
+              nutrient,
+              '    assert migrations.expected_migration_ids()[-3:] == [\n'
+              '        MIGRATION.MIGRATION_ID,\n'
+              '        "0029_food_composition_core",\n'
+              '        "0030_recipe_source_corpus",\n'
+              '    ]',
+              '    assert migrations.expected_migration_ids()[-4:] == [\n'
+              '        MIGRATION.MIGRATION_ID,\n'
+              '        "0029_food_composition_core",\n'
+              '        "0030_recipe_source_corpus",\n'
+              '        "0031_meal_pattern_catalogue",\n'
+              '    ]',
+          )
+          replace_once(
+              nutrient,
+              '    assert migrations.pending_migration_ids(config) == [\n'
+              '        MIGRATION.MIGRATION_ID,\n'
+              '        "0029_food_composition_core",\n'
+              '        "0030_recipe_source_corpus",\n'
+              '    ]',
+              '    assert migrations.pending_migration_ids(config) == [\n'
+              '        MIGRATION.MIGRATION_ID,\n'
+              '        "0029_food_composition_core",\n'
+              '        "0030_recipe_source_corpus",\n'
+              '        "0031_meal_pattern_catalogue",\n'
+              '    ]',
+          )
+          replace_once(
+              nutrient,
+              '    assert migrations.apply_migrations(config) == [\n'
+              '        MIGRATION.MIGRATION_ID,\n'
+              '        "0029_food_composition_core",\n'
+              '        "0030_recipe_source_corpus",\n'
+              '    ]',
+              '    assert migrations.apply_migrations(config) == [\n'
+              '        MIGRATION.MIGRATION_ID,\n'
+              '        "0029_food_composition_core",\n'
+              '        "0030_recipe_source_corpus",\n'
+              '        "0031_meal_pattern_catalogue",\n'
+              '    ]',
+          )
+          PY
+
+          git diff --check
+          if git diff --quiet; then
+            echo "Regression contracts already synchronized."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add backend/app/tests/test_artifact_audit_operations_migration.py backend/app/tests/test_nutrient_vector.py
+          git commit -m "test: sync migration head regression contracts"
+          git push origin HEAD:feature/pr7-support-meal-pattern-catalogue
 
   focused-meal-pattern:
+    needs: repair-regression-contracts
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          ref: feature/pr7-support-meal-pattern-catalogue
           fetch-depth: 0
 
       - name: Set up Python 3.12
@@ -67,12 +145,14 @@ jobs:
           backend/app/tests/test_migration_lineage.py
 
   backend-regression:
+    needs: repair-regression-contracts
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          ref: feature/pr7-support-meal-pattern-catalogue
           fetch-depth: 0
 
       - name: Set up Python 3.12
@@ -97,12 +177,14 @@ jobs:
           if-no-files-found: error
 
   launcher-regression:
+    needs: repair-regression-contracts
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          ref: feature/pr7-support-meal-pattern-catalogue
           fetch-depth: 0
 
       - name: Set up Python 3.12
