@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: pr51-runtime-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   source-snapshot:
     runs-on: ubuntu-latest
