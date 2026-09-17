@@ -1,4 +1,4 @@
-name: PR47 runtime verification
+name: PR51 runtime verification
 
 on:
   push:
@@ -54,7 +54,15 @@ jobs:
         run: python -m pip install -e "backend[test]"
 
       - name: Full backend regression
-        run: python -m pytest backend/app/tests
+        run: python -m pytest backend/app/tests --junitxml=backend-regression.xml
+
+      - name: Upload backend regression diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-regression-junit
+          path: backend-regression.xml
+          if-no-files-found: error
 
   launcher-regression:
     runs-on: ubuntu-latest
@@ -74,4 +82,12 @@ jobs:
         run: python -m pip install -e "backend[test]"
 
       - name: Full launcher regression
-        run: python -m pytest launcher/tests
+        run: python -m pytest launcher/tests --junitxml=launcher-regression.xml
+
+      - name: Upload launcher regression diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: launcher-regression-junit
+          path: launcher-regression.xml
+          if-no-files-found: error
