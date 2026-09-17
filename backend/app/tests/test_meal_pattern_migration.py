@@ -14,6 +14,14 @@ PATTERN_TABLES = {
     "meal_pattern_tags",
     "meal_pattern_evidence",
 }
+PLAN_TABLES = {
+    "member_meal_pattern_selections",
+    "member_meal_pattern_opportunities",
+    "meal_plans",
+    "meal_plan_member_selections",
+    "meal_plan_events",
+    "servings",
+}
 
 
 def _run_with_chain_through(config, suffix, operation):
@@ -62,8 +70,7 @@ def test_populated_0030_database_upgrades_without_rewriting_existing_food_data(t
         }
     assert after == before
     assert PATTERN_TABLES <= tables
-    assert "meal_plans" not in tables
-    assert "member_meal_pattern_selections" not in tables
+    assert PLAN_TABLES <= tables
 
 
 @pytest.mark.parametrize(
