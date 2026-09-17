@@ -6,55 +6,72 @@ Updated: `2026-09-17`.
 
 - PR6 / PR6-CLOSE = COMPLETE.
 - PR #31–#45 remain accepted historical research/governance evidence.
-- PR #46 is MERGED; `main` includes the dataset-independence and web-corroboration governance correction.
+- PR #46 is MERGED; dataset-independence and web-corroboration governance is active.
 - Issue #47 / `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` = COMPLETE through merged PR #51.
-- Accepted `main` after PR #51: `0648d9483bd9261451194668c274b3c08ad716b3`.
-- Accepted SQLite migration head: `0031_meal_pattern_catalogue`.
-- The canonical post-PR51 sequencing decision is `docs/family-food/master-roadmap-addendum-2026-09-17-post-pr51.md`.
-- Migration `0032` is reserved for the next authorized PR7 MealPlan / Serving persistence change; the future RecipeTemplate reservation moves to `0033_recipe_template_catalogue`.
+- PR #52 / `POST-PR51-STATE-SYNC` = COMPLETE.
+- Accepted implementation base for PR7: `ded1cca29e165e0c459288d8de58df114abdeabb`.
+- Accepted SQLite migration head on that base: `0031_meal_pattern_catalogue`.
+- Migration number `0032` is reserved for PR7 MealPlan / Serving persistence; future RecipeTemplate reservation is `0033_recipe_template_catalogue`.
 
 ## Current authorized operation
 
-`POST-PR51-STATE-SYNC` is the only active operation.
+`PR7 — MealPlan / Serving` is ACTIVE under Issue #53.
 
-Goal: synchronize repository roadmap/state after merged PR #51 and persist the approved migration-number reservation without changing runtime, schema, seed data or product behavior.
+Branch:
 
-Scope:
+`feature/pr7-mealplan-serving`
 
-- record Issue #47 / PR #51 as COMPLETE;
-- record accepted `main` and migration head `0031_meal_pattern_catalogue`;
-- identify PR7 MealPlan / Serving as the next functional milestone;
-- reserve migration number `0032` for PR7;
-- move the future RecipeTemplate reservation to `0033_recipe_template_catalogue`;
-- update continuation state for the next agent.
+Goal: establish Household-owned accepted member meal-pattern state and a manually constructible, revisioned seven-day MealPlan with explicit source kinds, individualized Servings and deterministic Serving/member/day/week nutrition reads before PR8 automation.
 
-## Next functional operation
+## PR7 bounded scope
 
-`PR7 — MealPlan / Serving` is **NEXT / NOT STARTED**.
-
-PR7 implementation is not authorized by this docs-only synchronization. It requires a separate explicit user authorization after this state-sync PR is reviewed and merged.
-
-When authorized, PR7 will own Household-owned accepted planning state, including `MemberMealPatternSelection`, manually constructible MealPlan/Serving structures and member participation/portion allocation. It must consume the published Meal Pattern Catalogue without moving PR8 Planner ranking/recommendation logic forward.
+- immutable/versioned `MemberMealPatternSelection` history;
+- exact published MealPatternProgramVersion provenance or `CUSTOM`;
+- resolved seven-day member schedule snapshot with heterogeneous/day-specific 1–6 opportunity support without a permanent DB max-six law;
+- append-only MealPlan revisions and pinned member-selection provenance;
+- Household meal events with explicit `MealRole` and source kind;
+- `COOK_RECIPE` pins immutable RecipeVersion; non-recipe sources do not require fake RecipeVersions;
+- member participation via individualized Decimal Servings;
+- Serving nutrition plus member/day/week aggregation through the existing Nutrition contract with unknown propagation;
+- Household-scoped repositories/UoW/read scopes using synchronous SQLAlchemy Core;
+- forward migration `0032_meal_plan_serving` (or a more precise bounded suffix if implementation evidence requires it);
+- focused + migration + full backend/launcher verification required before review-ready.
 
 ## Architecture boundary
 
 - `MealPatternProgram` remains platform-owned catalogue truth.
-- `MemberMealPatternSelection` remains Household-owned state owned by PR7.
+- `MemberMealPatternSelection` is Household-owned accepted state.
 - `MealRole != RecipeVersion.meal_type_code`.
-- Nutrition Engine remains authoritative for nutrient targets/calculations.
-- The initial product must represent heterogeneous member schedules and one to six meal opportunities without making `6` a permanent schema maximum.
-- Technical ingredient/recipe/nutrition datasets and seed corpora remain replaceable external/bootstrap evidence artifacts.
-- No Planner ranking, Shopping, Prep, Retail, AI, Auth/shared deployment or frontend work is authorized by this sync.
+- `Recipe != Serving`.
+- `representable != Planner-selectable` for non-recipe sources.
+- Nutrition Engine remains authoritative for nutrient truth; PR7 may scale/aggregate its outputs but must not duplicate formulas.
+- true instants are UTC; plan dates are Household-local calendar dates.
+- technical datasets/seeds remain replaceable artifacts, not domain invariants.
+- deterministic core works with `AI_ENABLED=false`.
+
+## Explicit non-goals
+
+Do not add or start:
+
+- PR8 automatic Planner generation/recommender ranking/reconciliation;
+- Recipe Constructor / RecipeAssembly implementation;
+- Shopping / Prep / authoritative leftover or PreparedBatch supply;
+- Retail / ready-food provider integration;
+- AI Gateway;
+- Auth/PostgreSQL/shared deployment;
+- frontend/onboarding UI;
+- medical/therapeutic planning;
+- legacy `Order` rename/reuse as MealPlan.
 
 ## Active sequence
 
 ```text
 PR6 / Nutrition Core                          COMPLETE
 → PR7-SUPPORT-MEAL-PATTERN-CATALOGUE         COMPLETE (#47 / PR #51)
-→ POST-PR51-STATE-SYNC                       ACTIVE
-→ PR7 MealPlan / Serving                     NEXT / NOT STARTED
+→ POST-PR51-STATE-SYNC                       COMPLETE (#52)
+→ PR7 MealPlan / Serving                     ACTIVE (#53)
 → PR8 Planner v0                             NOT STARTED
 → GATE 1 — Planning Core                     NOT STARTED
 ```
 
-After this docs/state synchronization is reviewed and merged, stop. Do not begin PR7 automatically.
+After PR7 is review-ready and merged, stop. Do not begin PR8 automatically; it requires separate explicit authorization.
