@@ -1,7 +1,7 @@
 # FamilyFoodOS — Master Roadmap Addendum, 2026-09-17 post-PR51
 
-**Status:** canonical addendum to `master-roadmap.md` and later roadmap addenda  
-**Authority:** explicit user-approved post-PR51 sequencing decision  
+**Status:** canonical addendum to `master-roadmap.md` and later roadmap addenda
+**Authority:** explicit user-approved post-PR51 sequencing decision
 **Scope:** close the Meal Pattern Catalogue supporting operation, define the next bounded milestone, and resolve the next SQLite migration-number reservation.
 
 ## 1. Verified repository state
