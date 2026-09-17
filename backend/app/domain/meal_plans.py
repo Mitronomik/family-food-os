@@ -3,7 +3,7 @@
 from collections import defaultdict
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta
-from decimal import Decimal, localcontext
+from decimal import Decimal
 from enum import StrEnum
 from uuid import UUID
 
@@ -15,9 +15,10 @@ from app.domain.nutrition import (
     NutritionStatus,
     NutritionValues,
     RecipeVersionNutrition,
-    rounded,
+    aggregate_nutrition_status,
+    aggregate_nutrition_values,
+    scale_nutrition_values,
 )
-from app.domain.nutrition_config import NUTRIENTS, calculation_context
 
 _PORTION_QUANT = Decimal("0.000001")
 INITIAL_MAX_OPPORTUNITIES_PER_DAY = 6
@@ -243,6 +244,16 @@ class MemberMealPatternSelection:
             raise _issue(
                 DomainIssueCode.INVALID_BOOLEAN,
                 "has_user_overrides must be boolean.",
+                field="has_user_overrides",
+                value=self.has_user_overrides,
+            )
+        if (
+            source_kind is MemberMealPatternSourceKind.CUSTOM
+            and self.has_user_overrides
+        ):
+            raise _issue(
+                DomainIssueCode.INVALID_BOOLEAN,
+                "CUSTOM selection has no program template to override.",
                 field="has_user_overrides",
                 value=self.has_user_overrides,
             )
@@ -563,6 +574,7 @@ class MealPlanDetail:
                 )
         pinned_members = set(member_ids)
         seen_servings: set[tuple[UUID, UUID]] = set()
+        participating_event_ids: set[UUID] = set()
         for serving in self.servings:
             if serving.event_id not in event_by_id:
                 raise _issue(
@@ -587,6 +599,17 @@ class MealPlanDetail:
                     value=key,
                 )
             seen_servings.add(key)
+            participating_event_ids.add(serving.event_id)
+        missing_participation = [
+            event.id for event in self.events if event.id not in participating_event_ids
+        ]
+        if missing_participation:
+            raise _issue(
+                DomainIssueCode.REQUIRED_FIELD,
+                "Every Household meal event requires at least one participant Serving.",
+                field="servings",
+                value=missing_participation,
+            )
 
     @property
     def horizon_dates(self) -> tuple[date, ...]:
@@ -686,57 +709,11 @@ def validate_complete_plan(
                 )
 
 
-def _scale_values(values: NutritionValues, factor: Decimal) -> NutritionValues:
-    with localcontext(calculation_context()):
-        return NutritionValues(
-            **{
-                name: None
-                if (value := getattr(values, name)) is None
-                else rounded(value * factor)
-                for name in NUTRIENTS
-            }
-        )
-
-
-def _aggregate_values(values: tuple[NutritionValues, ...]) -> NutritionValues:
-    if not values:
-        return NutritionValues(
-            kcal=Decimal("0"),
-            protein_g=Decimal("0"),
-            fat_g=Decimal("0"),
-            carbohydrates_g=Decimal("0"),
-            fiber_g=Decimal("0"),
-        )
-    with localcontext(calculation_context()):
-        return NutritionValues(
-            **{
-                name: None
-                if any(getattr(item, name) is None for item in values)
-                else rounded(
-                    sum((getattr(item, name) for item in values), Decimal("0"))
-                )
-                for name in NUTRIENTS
-            }
-        )
-
-
-def _aggregate_status(
-    statuses: tuple[NutritionStatus, ...], values: NutritionValues
-) -> NutritionStatus:
-    if any(getattr(values, name) is None for name in NUTRIENTS):
-        return NutritionStatus.INCOMPLETE
-    if any(status is NutritionStatus.CONDITIONAL for status in statuses):
-        return NutritionStatus.CONDITIONAL
-    if any(status is NutritionStatus.COMPLETE_WITH_WARNINGS for status in statuses):
-        return NutritionStatus.COMPLETE_WITH_WARNINGS
-    return NutritionStatus.COMPLETE
-
-
 def calculate_meal_plan_nutrition(
     detail: MealPlanDetail,
     recipe_nutrition_by_version_id: dict[UUID, RecipeVersionNutrition],
 ) -> MealPlanNutrition:
-    """Scale existing Nutrition truth; unsupported source nutrition stays unknown."""
+    """Compose existing Nutrition truth; unsupported source nutrition stays unknown."""
     event_by_id = {event.id: event for event in detail.events}
     serving_results: list[ServingNutrition] = []
     for serving in detail.servings:
@@ -750,15 +727,11 @@ def calculate_meal_plan_nutrition(
                 values = NutritionValues()
                 status = NutritionStatus.INCOMPLETE
             else:
-                values = _scale_values(
+                values = scale_nutrition_values(
                     nutrition.per_base_serving,
                     serving.portion_servings,
                 )
-                status = (
-                    NutritionStatus.INCOMPLETE
-                    if any(getattr(values, name) is None for name in NUTRIENTS)
-                    else nutrition.status
-                )
+                status = aggregate_nutrition_status((nutrition.status,), values)
         else:
             values = NutritionValues()
             status = NutritionStatus.INCOMPLETE
@@ -771,8 +744,10 @@ def calculate_meal_plan_nutrition(
     for (member_id, local_date), results in sorted(
         grouped_days.items(), key=lambda item: (item[0][0].hex, item[0][1])
     ):
-        values = _aggregate_values(tuple(item.values for item in results))
-        status = _aggregate_status(tuple(item.status for item in results), values)
+        values = aggregate_nutrition_values(item.values for item in results)
+        status = aggregate_nutrition_status(
+            (item.status for item in results), values
+        )
         member_days.append(MemberDayNutrition(member_id, local_date, values, status))
 
     grouped_weeks: dict[UUID, list[MemberDayNutrition]] = defaultdict(list)
@@ -782,8 +757,10 @@ def calculate_meal_plan_nutrition(
     for member_id, results in sorted(
         grouped_weeks.items(), key=lambda item: item[0].hex
     ):
-        values = _aggregate_values(tuple(item.values for item in results))
-        status = _aggregate_status(tuple(item.status for item in results), values)
+        values = aggregate_nutrition_values(item.values for item in results)
+        status = aggregate_nutrition_status(
+            (item.status for item in results), values
+        )
         member_weeks.append(MemberWeekNutrition(member_id, values, status))
 
     return MealPlanNutrition(
