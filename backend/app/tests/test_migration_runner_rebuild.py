@@ -19,7 +19,7 @@ from app.db.migrations import (
 from app.seed.food_recipes import seed_food_recipes
 from app.seed.nutrition_measure_evidence import seed_nutrition_measure_evidence
 
-HEAD = "0030_recipe_source_corpus"
+HEAD = "0031_meal_pattern_catalogue"
 REBUILD = "synthetic_rebuild"
 
 

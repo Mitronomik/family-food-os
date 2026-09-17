@@ -1,57 +1,42 @@
 # Handoff
 
-Updated: `2026-09-16`.
+Updated: `2026-09-17`.
 
-Accepted `main` after merged PR #45 is
-`e87583b440e7121623622331c0fa136953bdc122`.
+## Accepted base and governance
 
-## Latest user-approved decision
+`main` includes merged PR #46. The verified implementation base for Issue #47 is:
 
-On 2026-09-16 the user corrected the product/data direction:
+`dbacd07453c4939f703d01f1bbc7897c0a3162eb`
 
-- the current technical ingredient/recipe/nutrition datasets and seed corpora are external replaceable bootstrap/evidence artifacts; FamilyFoodOS is not architected around them;
-- deterministic Recipe Constructor / Recipe Assembly remains valuable;
-- mandatory personal cooking/kitchen execution is not a publication or Planning Core prerequisite;
-- constructed recipes are validated through deterministic checks plus web corroboration against relevant external recipes;
-- web evidence compares normalized recipe identity, ingredient sets/ratios, yield/servings where available and key method/process, without copying external prose;
-- default corroboration requires at least two independent relevant sources unless an explicitly reviewed high-trust single-source policy applies;
-- `KITCHEN_TESTED` is optional extra evidence; future real-household use may produce `USER_VALIDATED` evidence.
+The 2026-09-16 addendum is canonical: technical ingredient/recipe/nutrition datasets are replaceable bootstrap/evidence artifacts; Recipe Constructor validation uses deterministic checks plus web corroboration; mandatory personal kitchen execution is not a Planning Core prerequisite.
 
-Canonical durable decision is being recorded in:
+PR #31–#45 remain historical evidence and must not be rewritten to hide the old policy.
 
-`docs/family-food/master-roadmap-addendum-2026-09-16.md`
+## Active operation
 
-## Effect on previous Assembly work
+Issue #47 / `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` is the only active milestone operation.
 
-PR #31–#45 remain accepted historical research/evidence. Their earlier
-`HUMAN_EVIDENCE_BLOCKED__2_OF_3` result accurately records the old mandatory-kitchen policy, but that policy no longer blocks the service roadmap after the new user decision.
+Branch: `feature/pr7-support-meal-pattern-catalogue`.
 
-Do not delete or rewrite those evidence packages to pretend the old decision never existed.
+The operation introduces platform-owned immutable/versioned Meal Pattern Catalogue truth with deterministic validation, Russian display text, structured age/eligibility, ordered semantic meal opportunities, provenance/evidence, SQLAlchemy Core persistence and the next forward migration `0031_meal_pattern_catalogue`.
 
-## Active sequence after governance merge
+The accepted `main` migration head before this operation is `0030_recipe_source_corpus`. The old unused RecipeTemplate reservation moves to `0032_recipe_template_catalogue`; no existing migration history is rewritten.
 
-```text
-PR6 / Nutrition Core                          COMPLETE
-→ PR7-SUPPORT-MEAL-PATTERN-CATALOGUE
-→ PR7 MealPlan / Serving
-→ PR8 Planner v0
-→ GATE 1 — Planning Core
-```
+Initial curated catalogue data is intentionally small and adult-only (19+). It is a reviewed seed artifact, not an architecture invariant. USDA/NESR evidence is used to preserve uncertainty about meal/snack frequency rather than to claim one frequency is universally superior.
 
-Recipe Constructor / Assembly becomes a separately scoped capability and may be implemented later/in parallel only when separately authorized. It must not force PR7/PR8 to wait for physical kitchen evidence.
+Child catalogue eligibility must fail closed until separate age-specific evidence and an approved program exist.
 
-## Current branch boundary
+## Non-goals / stop conditions
 
-The current operation is docs/governance synchronization only:
+Do not add or start:
 
-- record dataset independence;
-- record deterministic + web-corroborated Recipe Constructor validation;
-- supersede mandatory kitchen verification as a roadmap gate;
-- point agents/state to the corrected software critical path.
+- `MemberMealPatternSelection` (PR7 owns it);
+- MealPlan / MealSlot / Serving;
+- Planner ranking/recommendation logic;
+- Recipe Constructor / Assembly implementation;
+- Shopping / Prep / Retail;
+- AI Gateway;
+- Auth/shared deployment;
+- frontend/onboarding UI.
 
-No runtime/schema/data-promotion changes belong in this PR.
-
-After review/merge, the next authorized software operation is
-`PR7-SUPPORT-MEAL-PATTERN-CATALOGUE`.
-
-Do not start Retail, AI Gateway, Auth/shared deployment or unrelated catalogue expansion automatically.
+After #47 is review-ready and merged, stop. PR7 requires separate explicit user authorization.

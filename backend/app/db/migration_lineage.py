@@ -146,6 +146,15 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
             "recipe_source_declared_nutrients",
         }
     ),
+    "0031_meal_pattern_catalogue": frozenset(
+        {
+            "meal_pattern_programs",
+            "meal_pattern_program_versions",
+            "meal_pattern_opportunities",
+            "meal_pattern_tags",
+            "meal_pattern_evidence",
+        }
+    ),
 }
 
 # The foundational tables promised by migration `0001`. Stable FamilyFoodOS
