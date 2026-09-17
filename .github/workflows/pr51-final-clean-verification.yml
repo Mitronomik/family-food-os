@@ -1,0 +1,86 @@
+name: PR51 final clean verification
+
+on:
+  push:
+    branches:
+      - ci/pr51-final-verification-7d944207
+
+permissions:
+  contents: read
+
+env:
+  PR51_FINAL_SHA: 7d9442075d7f616c338baf1d2f73745f7fcee88b
+
+jobs:
+  focused-meal-pattern:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact clean PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.PR51_FINAL_SHA }}
+          fetch-depth: 0
+      - name: Assert exact SHA
+        run: test "$(git rev-parse HEAD)" = "$PR51_FINAL_SHA"
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/pyproject.toml
+      - name: Install backend test dependencies
+        run: python -m pip install -e "backend[test]"
+      - name: Focused Meal Pattern verification
+        run: >-
+          python -m pytest
+          backend/app/tests/test_meal_pattern_domain.py
+          backend/app/tests/test_meal_pattern_application.py
+          backend/app/tests/test_meal_pattern_migration.py
+          backend/app/tests/test_meal_pattern_seed.py
+          backend/app/tests/test_meal_pattern_architecture.py
+          backend/app/tests/test_migration_lineage.py
+
+  backend-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact clean PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.PR51_FINAL_SHA }}
+          fetch-depth: 0
+      - name: Assert exact SHA
+        run: test "$(git rev-parse HEAD)" = "$PR51_FINAL_SHA"
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/pyproject.toml
+      - name: Install backend test dependencies
+        run: python -m pip install -e "backend[test]"
+      - name: Full backend regression
+        run: python -m pytest backend/app/tests
+
+  launcher-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact clean PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.PR51_FINAL_SHA }}
+          fetch-depth: 0
+      - name: Assert exact SHA
+        run: test "$(git rev-parse HEAD)" = "$PR51_FINAL_SHA"
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/pyproject.toml
+      - name: Install backend test dependencies
+        run: python -m pip install -e "backend[test]"
+      - name: Full launcher regression
+        run: python -m pytest launcher/tests
