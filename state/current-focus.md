@@ -7,49 +7,54 @@ Updated: `2026-09-17`.
 - PR6 / PR6-CLOSE = COMPLETE.
 - PR #31–#45 remain accepted historical research/governance evidence.
 - PR #46 is MERGED; `main` includes the dataset-independence and web-corroboration governance correction.
-- Verified implementation base for the current operation: `dbacd07453c4939f703d01f1bbc7897c0a3162eb`.
-- Accepted SQLite migration head on `main` at that base is `0030_recipe_source_corpus`.
-- `0031_recipe_template_catalogue` was only an unused reservation; the current operation uses `0031_meal_pattern_catalogue`. Future RecipeTemplate work is therefore reserved as `0032_recipe_template_catalogue` unless a later approved decision changes it.
+- Issue #47 / `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` = COMPLETE through merged PR #51.
+- Accepted `main` after PR #51: `0648d9483bd9261451194668c274b3c08ad716b3`.
+- Accepted SQLite migration head: `0031_meal_pattern_catalogue`.
+- The canonical post-PR51 sequencing decision is `docs/family-food/master-roadmap-addendum-2026-09-17-post-pr51.md`.
+- Migration `0032` is reserved for the next authorized PR7 MealPlan / Serving persistence change; the future RecipeTemplate reservation moves to `0033_recipe_template_catalogue`.
 
 ## Current authorized operation
 
-`PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` (Issue #47) is ACTIVE on `feature/pr7-support-meal-pattern-catalogue`.
+`POST-PR51-STATE-SYNC` is the only active operation.
 
-Goal: establish platform-owned immutable/versioned `MealPatternProgram` truth that downstream PR7/PR8 can consume without inventing meal-frequency policy inside MealPlan or Planner.
+Goal: synchronize repository roadmap/state after merged PR #51 and persist the approved migration-number reservation without changing runtime, schema, seed data or product behavior.
 
-The bounded implementation includes:
+Scope:
 
-- deterministic Meal Pattern domain validation;
-- stable program identity plus immutable version snapshots;
-- lifecycle `DRAFT / PUBLISHED / INACTIVE`;
-- Russian consumer text;
-- explicit age/eligibility metadata;
-- ordered semantic meal opportunities where the same role may repeat at different positions;
-- provenance/evidence and review metadata;
-- synchronous SQLAlchemy Core repositories/UoW;
-- migration `0031_meal_pattern_catalogue`;
-- a small reviewed adult wellness/schedule seed.
+- record Issue #47 / PR #51 as COMPLETE;
+- record accepted `main` and migration head `0031_meal_pattern_catalogue`;
+- identify PR7 MealPlan / Serving as the next functional milestone;
+- reserve migration number `0032` for PR7;
+- move the future RecipeTemplate reservation to `0033_recipe_template_catalogue`;
+- update continuation state for the next agent.
 
-Current seed evidence is based on USDA/NESR 2025-DGAC systematic reviews that do not support a universal claim that a particular meal/snack frequency is superior for diet quality or energy intake. The seed therefore treats frequency as a planning schedule, not a therapeutic or outcome promise.
+## Next functional operation
 
-Children are intentionally unsupported by the initial automated catalogue: the reviewed seed starts at age 19. No adult program may be silently inherited by a child.
+`PR7 — MealPlan / Serving` is **NEXT / NOT STARTED**.
+
+PR7 implementation is not authorized by this docs-only synchronization. It requires a separate explicit user authorization after this state-sync PR is reviewed and merged.
+
+When authorized, PR7 will own Household-owned accepted planning state, including `MemberMealPatternSelection`, manually constructible MealPlan/Serving structures and member participation/portion allocation. It must consume the published Meal Pattern Catalogue without moving PR8 Planner ranking/recommendation logic forward.
 
 ## Architecture boundary
 
-This operation does **not** add `MemberMealPatternSelection`, MealPlan, MealSlot, Serving, Planner ranking, Recipe Constructor/Assembly, Shopping, Retail, AI, Auth or frontend UI.
-
-`MealPatternProgram` is platform-owned. Future `MemberMealPatternSelection` remains Household-owned state in PR7.
-
-Technical ingredient/recipe/nutrition datasets and seed corpora remain replaceable external/bootstrap evidence artifacts. They do not define FamilyFoodOS domain invariants.
+- `MealPatternProgram` remains platform-owned catalogue truth.
+- `MemberMealPatternSelection` remains Household-owned state owned by PR7.
+- `MealRole != RecipeVersion.meal_type_code`.
+- Nutrition Engine remains authoritative for nutrient targets/calculations.
+- The initial product must represent heterogeneous member schedules and one to six meal opportunities without making `6` a permanent schema maximum.
+- Technical ingredient/recipe/nutrition datasets and seed corpora remain replaceable external/bootstrap evidence artifacts.
+- No Planner ranking, Shopping, Prep, Retail, AI, Auth/shared deployment or frontend work is authorized by this sync.
 
 ## Active sequence
 
 ```text
 PR6 / Nutrition Core                          COMPLETE
-→ PR7-SUPPORT-MEAL-PATTERN-CATALOGUE         ACTIVE (#47)
-→ PR7 MealPlan / Serving                     NOT STARTED
+→ PR7-SUPPORT-MEAL-PATTERN-CATALOGUE         COMPLETE (#47 / PR #51)
+→ POST-PR51-STATE-SYNC                       ACTIVE
+→ PR7 MealPlan / Serving                     NEXT / NOT STARTED
 → PR8 Planner v0                             NOT STARTED
 → GATE 1 — Planning Core                     NOT STARTED
 ```
 
-After #47 is reviewed and merged, stop. PR7 starts only with separate explicit authorization.
+After this docs/state synchronization is reviewed and merged, stop. Do not begin PR7 automatically.
