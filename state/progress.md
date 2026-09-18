@@ -19,11 +19,26 @@ PR5   Pantry                               COMPLETE
 PR6   Nutrition Core                       COMPLETE (PR6-CLOSE accepted)
 PR7-SUPPORT Meal Pattern Catalogue          COMPLETE (#47 / PR #51)
 PR7   MealPlan / Serving                    COMPLETE (#53 / PR #54)
-PR8   Planner v0                            NEXT / NOT STARTED
+PR8   Planner v0                            ACTIVE (#57)
 GATE 1 Planning Core                        NOT STARTED
 ```
 
 Canonical implementation order remains `docs/family-food/master-roadmap.md`.
+
+
+## PR8 Planner v0 kickoff
+
+User authorization recorded after merged PR #56.
+
+- Issue: #57 — `PR8 — Planner v0 deterministic week generation and trace`.
+- Accepted implementation base: `3ca80a7815301689baa409b1c129471a03a01f68`.
+- Accepted migration head remains `0032_meal_plan_serving`.
+- `0033_recipe_template_catalogue` remains a future reservation; PR8 has no schema migration by default.
+- PR8 is filters + deterministic scoring/heuristics, complete-week generation, individualized Servings, household reconciliation, Meal Pattern Recommender v0 and reproducible trace.
+- Generation-time hard exclusions/preferences are explicit Planner request values for v0 because no canonical persisted member preference/exclusion model exists.
+- Gate 1 remains NOT STARTED and requires separate closure after PR8 merge.
+- PR9 and later milestones remain NOT STARTED.
+
 
 
 ## PR7 MealPlan / Serving closure
