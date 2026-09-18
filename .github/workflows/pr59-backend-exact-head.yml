@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: 6b029149be6852e49b6c010e8f625c652a689702
-          fetch-depth: 1
+          fetch-depth: 0
 
       - name: Assert exact tested SHA
         shell: bash
@@ -43,7 +43,9 @@ jobs:
         env:
           AI_ENABLED: "false"
           PYTHONUNBUFFERED: "1"
+        shell: bash
         run: |
+          set -euo pipefail
           python -m pytest backend/app/tests -vv -ra --tb=short --durations=50 --junitxml=pr59-backend.xml 2>&1 | tee pr59-backend.log
 
       - name: Verification summary
