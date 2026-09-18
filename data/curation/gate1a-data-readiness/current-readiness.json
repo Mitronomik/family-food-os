@@ -1,0 +1,1796 @@
+{
+  "accepted_starting_sha": "ce5cf6e2faaf9159e74d8c235f334d47743ab2a0",
+  "recipe_count": 30,
+  "recipes": [
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-84479:estimate",
+          "food_code": "GARLIC",
+          "new_external_primary_evidence_required": true,
+          "position": 3,
+          "quantity": "10.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "CORN_SWEET",
+          "new_external_primary_evidence_required": true,
+          "position": 4,
+          "quantity": "141.747616",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "g"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "CORIANDER_SEED",
+          "new_external_primary_evidence_required": true,
+          "position": 7,
+          "quantity": "1.250000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "CNF-2521:estimate",
+          "food_code": "SESAME_SEEDS",
+          "new_external_primary_evidence_required": true,
+          "position": 8,
+          "quantity": "5.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "side",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "CACFP6_CORN_EDAMAME_BLEND",
+      "recipe_version_id": "298b4169-d4ba-4fa1-b348-cd5dfc5b38e3",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "CRANBERRIES_DRIED",
+          "new_external_primary_evidence_required": true,
+          "position": 11,
+          "quantity": "63.786427",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "g"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "salad",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "CACFP6_CREAMY_COLESLAW",
+      "recipe_version_id": "dfd0737e-f41a-4c2b-8c7c-c771cb8ab98e",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "CUCUMBER",
+          "new_external_primary_evidence_required": true,
+          "position": 6,
+          "quantity": "134.660235",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "g"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "MINT_FRESH",
+          "new_external_primary_evidence_required": true,
+          "position": 10,
+          "quantity": "1.250000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "CUMIN_GROUND",
+          "new_external_primary_evidence_required": true,
+          "position": 11,
+          "quantity": "1.250000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "LEMON",
+          "new_external_primary_evidence_required": true,
+          "position": 12,
+          "quantity": "56.699046",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "g"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "salad",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "CACFP6_TABBOULEH",
+      "recipe_version_id": "f6aa981d-c9c7-402d-8a56-9833abd89c53",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "PORK_LOIN",
+          "new_external_primary_evidence_required": true,
+          "position": 2,
+          "quantity": "2.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "SWEET_POTATO",
+          "new_external_primary_evidence_required": true,
+          "position": 3,
+          "quantity": "1.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "ORANGE",
+          "new_external_primary_evidence_required": true,
+          "position": 4,
+          "quantity": "0.500000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "main",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "FNS2_ORANGE_PORK_CHOPS",
+      "recipe_version_id": "b694862c-44ad-43a4-a26c-d6e01fbf1b51",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-95194:estimate",
+          "food_code": "BREADCRUMBS",
+          "new_external_primary_evidence_required": true,
+          "position": 4,
+          "quantity": "120.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "main",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "FNS4_OVEN_FRIED_FISH",
+      "recipe_version_id": "65d33e16-6741-4711-9520-3153c0c2f255",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-90594:estimate",
+          "food_code": "LENTILS_DRY",
+          "new_external_primary_evidence_required": true,
+          "position": 1,
+          "quantity": "240.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85855:estimate",
+          "food_code": "ONION_YELLOW",
+          "new_external_primary_evidence_required": true,
+          "position": 4,
+          "quantity": "120.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-86559:estimate",
+          "food_code": "CARROT",
+          "new_external_primary_evidence_required": true,
+          "position": 6,
+          "quantity": "2.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "main",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "FNS5_BAKED_LENTILS_CASSEROLE",
+      "recipe_version_id": "b5a99344-c59d-4e22-920e-c7d9e2c3bd35",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "TOMATO",
+          "new_external_primary_evidence_required": true,
+          "position": 1,
+          "quantity": "240.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "APPLE",
+          "new_external_primary_evidence_required": true,
+          "position": 2,
+          "quantity": "120.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85855:estimate",
+          "food_code": "ONION_YELLOW",
+          "new_external_primary_evidence_required": true,
+          "position": 3,
+          "quantity": "60.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-84479:estimate",
+          "food_code": "GARLIC",
+          "new_external_primary_evidence_required": true,
+          "position": 5,
+          "quantity": "5.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "other",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "HARV6_FRESH_TOMATO_SALSA",
+      "recipe_version_id": "f0a4d20d-e9b7-4bde-ad3a-7ac2a29f445c",
+      "technical_gate1_suitable": false,
+      "version_number": 2
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "PASTA_DRY",
+          "new_external_primary_evidence_required": true,
+          "position": 1,
+          "quantity": "120.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85855:estimate",
+          "food_code": "ONION_YELLOW",
+          "new_external_primary_evidence_required": true,
+          "position": 2,
+          "quantity": "60.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "CUCUMBER",
+          "new_external_primary_evidence_required": true,
+          "position": 3,
+          "quantity": "120.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-86623:estimate",
+          "food_code": "BELL_PEPPER_GREEN",
+          "new_external_primary_evidence_required": true,
+          "position": 4,
+          "quantity": "60.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "BLACK_PEPPER",
+          "new_external_primary_evidence_required": true,
+          "position": 8,
+          "quantity": "1.250000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "salad",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "HARV6_GARDEN_PASTA_SALAD",
+      "recipe_version_id": "e0674b94-d1ac-4faf-bcd4-0838c27ed0b6",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "INFOODS-SPINACH-RAW:estimate",
+          "food_code": "SPINACH",
+          "new_external_primary_evidence_required": true,
+          "position": 1,
+          "quantity": "240.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-93515:estimate",
+          "food_code": "BANANA",
+          "new_external_primary_evidence_required": true,
+          "position": 2,
+          "quantity": "1.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": "FDC-PORTION-89193:estimate",
+          "food_code": "APPLE",
+          "new_external_primary_evidence_required": true,
+          "position": 5,
+          "quantity": "1.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "other",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "SNAP2_SIMPLE_GREEN_SMOOTHIE",
+      "recipe_version_id": "a8337d03-f702-4e05-812a-1996efde1f4a",
+      "technical_gate1_suitable": false,
+      "version_number": 2
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-84287:estimate",
+          "food_code": "PINEAPPLE",
+          "new_external_primary_evidence_required": true,
+          "position": 1,
+          "quantity": "240.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "PEACH",
+          "new_external_primary_evidence_required": true,
+          "position": 2,
+          "quantity": "1.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "BANANA",
+          "new_external_primary_evidence_required": true,
+          "position": 3,
+          "quantity": "1.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "other",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "SNAP3_GRILLED_FRUIT",
+      "recipe_version_id": "b76b4ab2-fe33-41d8-ba74-c287a5cbcdb3",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "CHICKEN_THIGH",
+          "new_external_primary_evidence_required": true,
+          "position": 1,
+          "quantity": "4.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "BLACK_PEPPER",
+          "new_external_primary_evidence_required": true,
+          "position": 4,
+          "quantity": "2.500000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85862:estimate",
+          "food_code": "ONION_YELLOW",
+          "new_external_primary_evidence_required": true,
+          "position": 5,
+          "quantity": "1.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-84480:estimate",
+          "food_code": "GARLIC",
+          "new_external_primary_evidence_required": true,
+          "position": 6,
+          "quantity": "3.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "THYME_DRIED",
+          "new_external_primary_evidence_required": true,
+          "position": 7,
+          "quantity": "2.500000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-88455:estimate",
+          "food_code": "ROSEMARY_DRIED",
+          "new_external_primary_evidence_required": true,
+          "position": 8,
+          "quantity": "2.500000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "SPINACH",
+          "new_external_primary_evidence_required": true,
+          "position": 10,
+          "quantity": "1.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "main",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "SNAP4_BRAISED_CHICKEN_SPINACH",
+      "recipe_version_id": "22fa8976-3b3c-4e38-a656-8391a5af16be",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "RICE_BROWN",
+          "new_external_primary_evidence_required": true,
+          "position": 1,
+          "quantity": "360.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "ALMONDS_RAW",
+          "new_external_primary_evidence_required": true,
+          "position": 3,
+          "quantity": "60.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "BLACK_PEPPER",
+          "new_external_primary_evidence_required": true,
+          "position": 6,
+          "quantity": "1.250000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "side",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "SNAP4_BROWN_RICE_PILAF",
+      "recipe_version_id": "514b163c-9b78-4b35-90d3-b8655f0bd049",
+      "technical_gate1_suitable": false,
+      "version_number": 2
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "LEMON",
+          "new_external_primary_evidence_required": true,
+          "position": 2,
+          "quantity": "15.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "main",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "SNAP4_DILLED_FISH_FILLETS",
+      "recipe_version_id": "f282f7cd-3dd1-4ff1-a745-22db0a3d9469",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": "FDC-PORTION-187517:estimate",
+          "food_code": "PEAR",
+          "new_external_primary_evidence_required": true,
+          "position": 1,
+          "quantity": "4.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "ORANGE",
+          "new_external_primary_evidence_required": true,
+          "position": 2,
+          "quantity": "180.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "other",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "SNAP4_PEAR_ORANGE_SAUCE",
+      "recipe_version_id": "f5fa56d7-db3b-4142-a3de-329a6785a140",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "IDENTITY_MISMATCH"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "POTATO",
+          "new_external_primary_evidence_required": true,
+          "position": 1,
+          "quantity": "680.388555",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "g"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85860:estimate",
+          "food_code": "ONION_YELLOW",
+          "new_external_primary_evidence_required": true,
+          "position": 4,
+          "quantity": "1.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "BLACK_PEPPER",
+          "new_external_primary_evidence_required": true,
+          "position": 6,
+          "quantity": "1.250000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "breakfast",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "SNAP4_SPANISH_FRITTATA",
+      "recipe_version_id": "fbd2bd41-d3c6-4a34-b0e3-0dc440c6fcef",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85856:estimate",
+          "food_code": "ONION_RED",
+          "new_external_primary_evidence_required": true,
+          "position": 2,
+          "quantity": "120.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-84480:estimate",
+          "food_code": "GARLIC",
+          "new_external_primary_evidence_required": true,
+          "position": 3,
+          "quantity": "1.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "POTATO",
+          "new_external_primary_evidence_required": true,
+          "position": 4,
+          "quantity": "3.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-86557:estimate",
+          "food_code": "CARROT",
+          "new_external_primary_evidence_required": true,
+          "position": 5,
+          "quantity": "180.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-83012:estimate",
+          "food_code": "ASPARAGUS",
+          "new_external_primary_evidence_required": true,
+          "position": 6,
+          "quantity": "180.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85758:estimate",
+          "food_code": "GREEN_BEANS",
+          "new_external_primary_evidence_required": true,
+          "position": 7,
+          "quantity": "180.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "RADISH",
+          "new_external_primary_evidence_required": true,
+          "position": 8,
+          "quantity": "120.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "BLACK_PEPPER",
+          "new_external_primary_evidence_required": true,
+          "position": 10,
+          "quantity": "1.250000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "side",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "SNAP4_SPRING_VEGETABLE_SAUTE",
+      "recipe_version_id": "ef9300cb-704b-4e27-8b01-6ceac505ea78",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-86201:estimate",
+          "food_code": "WALNUTS_RAW",
+          "new_external_primary_evidence_required": true,
+          "position": 1,
+          "quantity": "60.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-84480:estimate",
+          "food_code": "GARLIC",
+          "new_external_primary_evidence_required": true,
+          "position": 3,
+          "quantity": "2.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-119057:estimate",
+          "food_code": "KALE",
+          "new_external_primary_evidence_required": true,
+          "position": 4,
+          "quantity": "960.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "RAISINS_GOLDEN",
+          "new_external_primary_evidence_required": true,
+          "position": 5,
+          "quantity": "120.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "side",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "SNAP5_KALE_NUTS_RAISINS",
+      "recipe_version_id": "d413b56c-5c14-45dc-8cca-63650e3675c8",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "EGG",
+          "new_external_primary_evidence_required": true,
+          "position": 1,
+          "quantity": "6.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "BLACK_PEPPER",
+          "new_external_primary_evidence_required": true,
+          "position": 4,
+          "quantity": "0.625000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "other",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "SNAP6_HEAVENLY_DEVILED_EGGS",
+      "recipe_version_id": "83879891-5ff9-46b8-b715-14f24e28589a",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": "FDC-PORTION-119282:estimate",
+          "food_code": "PEACH",
+          "new_external_primary_evidence_required": true,
+          "position": 1,
+          "quantity": "960.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": "FDC-PORTION-92887:estimate",
+          "food_code": "MARGARINE",
+          "new_external_primary_evidence_required": true,
+          "position": 2,
+          "quantity": "30.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85466:estimate",
+          "food_code": "FLOUR_WHEAT",
+          "new_external_primary_evidence_required": true,
+          "position": 5,
+          "quantity": "60.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "LEMON",
+          "new_external_primary_evidence_required": true,
+          "position": 7,
+          "quantity": "5.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "other",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "SNAP6_PEACH_CRISP",
+      "recipe_version_id": "1ece28ab-8bdd-46a6-a535-3bc45ddab9fa",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-84480:estimate",
+          "food_code": "GARLIC",
+          "new_external_primary_evidence_required": true,
+          "position": 3,
+          "quantity": "4.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "BLACK_PEPPER",
+          "new_external_primary_evidence_required": true,
+          "position": 6,
+          "quantity": "5.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "side",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "SNAP6_SEARED_GREENS",
+      "recipe_version_id": "8c012005-c500-4757-81af-00f53fad9f3d",
+      "technical_gate1_suitable": false,
+      "version_number": 2
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "SPINACH",
+          "new_external_primary_evidence_required": true,
+          "position": 1,
+          "quantity": "188.996821",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "g"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "APPLE",
+          "new_external_primary_evidence_required": true,
+          "position": 2,
+          "quantity": "1.500000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "RAISINS_GOLDEN",
+          "new_external_primary_evidence_required": true,
+          "position": 3,
+          "quantity": "240.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "salad",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "SNAP6_SPINACH_APPLE_SALAD",
+      "recipe_version_id": "19c8c313-c81d-48ac-b112-65128b3e2512",
+      "technical_gate1_suitable": false,
+      "version_number": 2
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-86201:estimate",
+          "food_code": "WALNUTS_RAW",
+          "new_external_primary_evidence_required": true,
+          "position": 1,
+          "quantity": "60.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "APPLE",
+          "new_external_primary_evidence_required": true,
+          "position": 2,
+          "quantity": "2.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85824:estimate",
+          "food_code": "CELERY",
+          "new_external_primary_evidence_required": true,
+          "position": 3,
+          "quantity": "240.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "RAISINS_GOLDEN",
+          "new_external_primary_evidence_required": true,
+          "position": 4,
+          "quantity": "120.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "CNF-6979:estimate",
+          "food_code": "YOGURT_GREEK_NONFAT",
+          "new_external_primary_evidence_required": true,
+          "position": 5,
+          "quantity": "60.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "LEMON",
+          "new_external_primary_evidence_required": true,
+          "position": 7,
+          "quantity": "5.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "salad",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "SNAP6_WALDORF_SALAD",
+      "recipe_version_id": "b73a9120-d830-47ec-b9cc-ffe34f60ea3a",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "APPLE",
+          "new_external_primary_evidence_required": true,
+          "position": 2,
+          "quantity": "4.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-86558:estimate",
+          "food_code": "CARROT",
+          "new_external_primary_evidence_required": true,
+          "position": 3,
+          "quantity": "4.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "GINGER",
+          "new_external_primary_evidence_required": true,
+          "position": 4,
+          "quantity": "4.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "other",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "SNAP8_APPLE_CARROT_SOUP",
+      "recipe_version_id": "4962df56-9c3e-4906-9d16-ca339215a9de",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "LEMON",
+          "new_external_primary_evidence_required": true,
+          "position": 2,
+          "quantity": "15.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "APPLE",
+          "new_external_primary_evidence_required": true,
+          "position": 3,
+          "quantity": "3.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "BELL_PEPPER_GREEN",
+          "new_external_primary_evidence_required": true,
+          "position": 4,
+          "quantity": "2.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "TOMATO",
+          "new_external_primary_evidence_required": true,
+          "position": 5,
+          "quantity": "3.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "CUCUMBER",
+          "new_external_primary_evidence_required": true,
+          "position": 6,
+          "quantity": "2.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "salad",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "SNAP8_SOMALI_SUMMER_SALAD",
+      "recipe_version_id": "7264a1eb-f6ee-4a7d-9dde-157bb1ad3683",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "APPLE",
+          "new_external_primary_evidence_required": true,
+          "position": 1,
+          "quantity": "6.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "other",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "TNC6_APPLESAUCE",
+      "recipe_version_id": "7fe8b3fa-7fbe-4b2f-98a8-905dfde6c279",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "NO_ACCEPTABLE_SOURCE"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "SPINACH",
+          "new_external_primary_evidence_required": true,
+          "position": 3,
+          "quantity": "720.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "breakfast",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "TNC6_EGGS_SPINACH",
+      "recipe_version_id": "1427a100-8f22-4897-a054-34fb90876ec5",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-91108:estimate",
+          "food_code": "BREAD_WHOLE_WHEAT",
+          "new_external_primary_evidence_required": true,
+          "position": 1,
+          "quantity": "2.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-119620:estimate",
+          "food_code": "CHEESE_CHEDDAR",
+          "new_external_primary_evidence_required": true,
+          "position": 2,
+          "quantity": "180.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "FDC-PORTION-85818:estimate",
+          "food_code": "CAULIFLOWER",
+          "new_external_primary_evidence_required": true,
+          "position": 3,
+          "quantity": "120.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "sandwich",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "WIC1_BEYOND_BASIC_GRILLED_CHEESE",
+      "recipe_version_id": "17e7f133-c089-4f57-9cec-0dcd905d0155",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    },
+    {
+      "blocking_ingredient_positions": [],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": "112.007500",
+      "meal_type_code": "breakfast",
+      "nutrition_status": "CONDITIONAL",
+      "recipe_code": "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE",
+      "recipe_version_id": "5fa90e21-cff9-4139-808d-a0da10e0b070",
+      "technical_gate1_suitable": true,
+      "version_number": 2
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "BANANA",
+          "new_external_primary_evidence_required": true,
+          "position": 3,
+          "quantity": "1.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "pcs"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED"
+          ],
+          "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "evidence_key": "INFOODS-SPINACH-RAW:estimate",
+          "food_code": "SPINACH",
+          "new_external_primary_evidence_required": true,
+          "position": 4,
+          "quantity": "240.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "CONVERSION_ESTIMATE_NOT_ACCEPTED",
+            "PROFILE_REPRESENTATIVENESS_REVIEW"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": "FDC-PORTION-89190:estimate",
+          "food_code": "APPLE",
+          "new_external_primary_evidence_required": true,
+          "position": 5,
+          "quantity": "240.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        },
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "MEASURE_OR_SIZE_AMBIGUOUS"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "CAULIFLOWER_FROZEN",
+          "new_external_primary_evidence_required": true,
+          "position": 6,
+          "quantity": "120.000000",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "ml"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "other",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "WIC2_SPINACH_CAULIFLOWER_SMOOTHIE",
+      "recipe_version_id": "8dbb8940-0fa0-49a6-b68c-46c5d2e739a8",
+      "technical_gate1_suitable": false,
+      "version_number": 2
+    },
+    {
+      "blocking_ingredient_positions": [
+        {
+          "accepted_repository_evidence_resolves": false,
+          "assessment_issues": [
+            "FOOD_FORM_MISMATCH"
+          ],
+          "assessment_status": "BLOCKED",
+          "evidence_key": null,
+          "food_code": "BUTTERNUT_SQUASH",
+          "new_external_primary_evidence_required": true,
+          "position": 1,
+          "quantity": "1360.777110",
+          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "unit": "g"
+        }
+      ],
+      "consumer_publication_ready": false,
+      "kcal_per_base_serving": null,
+      "meal_type_code": "other",
+      "nutrition_status": "INCOMPLETE",
+      "recipe_code": "WIC4_BUTTERNUT_SOUP",
+      "recipe_version_id": "2aaa6261-4ccf-4543-bdf0-9c400620e75e",
+      "technical_gate1_suitable": false,
+      "version_number": 1
+    }
+  ],
+  "schema_version": 1,
+  "seed_chain": [
+    "seed_food_recipes",
+    "seed_nutrition_measure_evidence",
+    "seed_recipe_corrections",
+    "seed_correction_assessments",
+    "seed_ru_food_data",
+    "upgrade_b2b2"
+  ]
+}

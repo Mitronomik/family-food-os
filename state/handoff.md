@@ -12,6 +12,15 @@ Current bounded operation:
 
 `GATE1-A — Planning Core candidate data readiness` — ACTIVE under Issue #61.
 
+The exact `ce5cf6e2` implementation-base audit is now reproducible in
+`data/curation/gate1a-data-readiness/`. It finds 29 `INCOMPLETE` versions and
+one technically eligible conditional breakfast version. The minimum actual
+three-meal capacity is eight versions (three breakfast, four main, one
+sandwich), leaving a seven-version evidence gap. Existing accepted rows do not
+contain enough exact same-form mass authority to bind that set without
+promoting rejected estimates or inventing form/piece truth. Gate1-A is therefore
+not review-ready; no schema, production truth, Gate1-CLOSE or PR9 work started.
+
 Accepted starting main:
 
 `792d855448e16edcf36b41e0f6e321346fb915ed`

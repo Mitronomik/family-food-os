@@ -21,6 +21,15 @@ Goal: close only the authoritative Nutrition/data gap required to exercise a suc
 
 Issue #61 is the bounded execution contract.
 
+The exact-base fresh audit now records an evidence-capacity blocker: 29 current
+versions are `INCOMPLETE`; the only technically eligible version is one
+`breakfast` candidate. The three-meal fixture needs three breakfast, four main
+and one sandwich versions under the repetition cap. No accepted exact evidence
+on the starting tree closes the minimum seven-version gap. See
+`data/curation/gate1a-data-readiness/`; Gate1-A remains active/not review-ready
+pending authoritative primary evidence, with no production-data or schema
+change made by the audit.
+
 ## GATE1-A bounded scope
 
 - recompute the exact current blocker matrix for all 30 current verified RecipeVersions from a fresh migrated/seeded database;
