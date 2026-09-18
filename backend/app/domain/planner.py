@@ -35,7 +35,6 @@ class PlannerFailureCode(StrEnum):
     MISSING_REFERENCE_ENERGY = "MISSING_REFERENCE_ENERGY"
     NO_ELIGIBLE_CANDIDATE = "NO_ELIGIBLE_CANDIDATE"
     INVALID_FIXED_EVENT = "INVALID_FIXED_EVENT"
-    AUTHORITATIVE_INPUT_INVALID = "AUTHORITATIVE_INPUT_INVALID"
 
 
 @dataclass(frozen=True)
@@ -149,6 +148,7 @@ class CandidateTrace:
     position: int
     role: MealRole
     participant_member_ids: tuple[UUID, ...]
+    excluded_member_ids: tuple[UUID, ...]
     recipe_version_id: UUID
     rejection_codes: tuple[PlannerRejectionCode, ...]
     score_components: tuple[tuple[str, str], ...]
@@ -175,6 +175,7 @@ class PlannerTrace:
     config_version: str
     compatibility_version: str
     recent_plan_ids: tuple[UUID, ...]
+    recent_recipe_usage: tuple[tuple[UUID, int], ...]
     applied_exclusions: tuple[tuple[UUID, tuple[UUID, ...]], ...]
     candidate_pool_ids: tuple[UUID, ...]
     request_fingerprint: str
@@ -280,6 +281,12 @@ def _trace(
         config.version,
         config.compatibility_version,
         request.recent_plan_ids,
+        tuple(
+            sorted(
+                Counter(request.recent_recipe_version_ids).items(),
+                key=lambda x: x[0].hex,
+            )
+        ),
         exclusions,
         pool,
         request_hash,
@@ -298,6 +305,12 @@ def _trace(
         config.version,
         config.compatibility_version,
         request.recent_plan_ids,
+        tuple(
+            sorted(
+                Counter(request.recent_recipe_version_ids).items(),
+                key=lambda x: x[0].hex,
+            )
+        ),
         exclusions,
         pool,
         request_hash,
@@ -401,7 +414,8 @@ def generate_week(
             )
         fixed[key] = event
 
-    counts = Counter(request.recent_recipe_version_ids)
+    historical_counts = Counter(request.recent_recipe_version_ids)
+    current_week_counts: Counter[UUID] = Counter()
     traces: list[CandidateTrace] = []
     provisional: list[
         tuple[
@@ -449,7 +463,10 @@ def generate_week(
                     or candidate.kcal_per_serving <= 0
                 ):
                     base_rejections.append(PlannerRejectionCode.NUTRITION_UNAVAILABLE)
-                if counts[candidate.recipe_version_id] >= config.max_recipe_repetitions:
+                if (
+                    current_week_counts[candidate.recipe_version_id]
+                    >= config.max_recipe_repetitions
+                ):
                     base_rejections.append(PlannerRejectionCode.MAX_REPETITIONS)
                 compatible = tuple(
                     sorted(
@@ -462,8 +479,11 @@ def generate_week(
                         key=lambda x: x.hex,
                     )
                 )
+                excluded = tuple(
+                    sorted(remaining - set(compatible), key=lambda value: value.hex)
+                )
                 rejected = list(base_rejections)
-                if len(compatible) != len(remaining):
+                if not compatible:
                     rejected.append(PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT)
                 components: tuple[tuple[str, str], ...] = ()
                 total = None
@@ -485,10 +505,11 @@ def generate_week(
                     time_score = -(
                         config.time_weight * Decimal(candidate.total_time_minutes or 0)
                     )
-                    historical = (
-                        config.repetition_weight * counts[candidate.recipe_version_id]
+                    repeated_uses = (
+                        historical_counts[candidate.recipe_version_id]
+                        + current_week_counts[candidate.recipe_version_id]
                     )
-                    repetition = -historical
+                    repetition = -(config.repetition_weight * repeated_uses)
                     total = preference + pantry + batch + time_score + repetition
                     components = tuple(
                         (k, str(v))
@@ -515,7 +536,8 @@ def generate_week(
                         local_date,
                         trace_position,
                         role,
-                        tuple(sorted(remaining, key=lambda x: x.hex)),
+                        compatible,
+                        excluded,
                         candidate.recipe_version_id,
                         tuple(rejected),
                         components,
@@ -534,7 +556,7 @@ def generate_week(
             _, _, _, selected, group, _ = min(
                 choices, key=lambda x: (-x[0], -x[1], x[2])
             )
-            counts[selected.recipe_version_id] += 1
+            current_week_counts[selected.recipe_version_id] += 1
             for index in range(len(traces) - 1, -1, -1):
                 item = traces[index]
                 if (

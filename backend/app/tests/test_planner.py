@@ -28,6 +28,7 @@ from app.domain.planner import (
     PlannerFailure,
     PlannerFailureCode,
     PlannerRequest,
+    PlannerRejectionCode,
     PlannerSuccess,
     FixedPlannerEvent,
     generate_week,
@@ -212,6 +213,30 @@ def test_recent_history_penalty_changes_selection_deterministically() -> None:
     assert without.events[0].recipe_version_id == uid(10)
     assert with_history.events[0].recipe_version_id == uid(15)
     assert with_history.trace.recent_plan_ids == (uid(90),)
+    assert with_history.trace.recent_recipe_usage == ((uid(10), 1),)
+
+
+def test_prior_week_uses_do_not_consume_current_week_hard_cap() -> None:
+    member_id = uid(2)
+    value = PlannerRequest(
+        uid(1),
+        date(2026, 9, 14),
+        (
+            MemberPlannerConstraints(
+                member_id, selection(member_id, (MealRole.DINNER,)), Decimal("2000")
+            ),
+        ),
+        (candidate(11, MealTypeCode.MAIN),),
+        recent_recipe_version_ids=(uid(11), uid(11), uid(11)),
+    )
+    result = generate_week(value, PlannerConfig(max_recipe_repetitions=7))
+    assert isinstance(result, PlannerSuccess)
+    assert len(result.events) == 7
+    assert result.trace.recent_recipe_usage == ((uid(11), 3),)
+    assert all(
+        PlannerRejectionCode.MAX_REPETITIONS not in item.rejection_codes
+        for item in result.trace.candidates
+    )
 
 
 def test_incompatible_members_split_and_subset_fixed_event_is_preserved() -> None:
@@ -262,6 +287,18 @@ def test_incompatible_members_split_and_subset_fixed_event_is_preserved() -> Non
     ]
     assert len(tuesday) == 2
     assert {event.participant_member_ids for event in tuesday} == {(first,), (second,)}
+    selected = [item for item in result.trace.candidates if item.selected]
+    assert selected and all(not item.rejection_codes for item in selected)
+    assert any(item.excluded_member_ids for item in selected)
+    repeated = generate_week(
+        PlannerRequest(
+            uid(1), date(2026, 9, 14), members, candidates, fixed_events=(fixed,)
+        ),
+        PlannerConfig(max_recipe_repetitions=10),
+    )
+    assert isinstance(repeated, PlannerSuccess)
+    assert repeated.events == result.events
+    assert repeated.trace.fingerprint == result.trace.fingerprint
 
     now = datetime(2026, 9, 18, tzinfo=timezone.utc)
     plan_id = uid(500)

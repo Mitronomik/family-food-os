@@ -173,14 +173,10 @@ class PlannerService:
         self, command: AuthoritativeGenerationRequest
     ) -> PlannerRequest:
         """Resolve caller constraints against current Household-scoped truth."""
-        household = self._households.get_household(command.household_id)
-        if household.id != command.household_id:
+        state = self._households.get_household(command.household_id)
+        if state.household.id != command.household_id:
             raise PlannerAuthoritativeInputError("Household scope mismatch")
-        active = {
-            member.id: member
-            for member in self._households.list_household_members(command.household_id)
-            if member.active
-        }
+        active = {member.id: member for member in state.members if member.active}
         requested = {item.member_id: item for item in command.members}
         if (
             not requested

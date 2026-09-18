@@ -49,10 +49,12 @@ Household-scoped Pantry. Pantry identities are a read-only score signal.
 
 The bounded history horizon is exactly the current revision for the immediately
 preceding semantic week (`HISTORY_HORIZON_WEEKS = 1`). Its exact plan revision ID
-and immutable RecipeVersion selections enter the request and trace. Historical
-uses and selections earlier in the generated week share the configured
-repetition counter; history is never mutated. No prior plan is deterministic
-empty history. The obsolete unvalidated `previous_plan_id` input was removed.
+and immutable RecipeVersion usage counts enter the readable trace. Historical
+counts affect only the soft repetition score. A separate current-week counter
+both contributes to that score and alone enforces `max_recipe_repetitions`, so
+last week's use cannot consume this week's hard allowance. History is never
+mutated; no prior plan is deterministic empty history. The obsolete unvalidated
+`previous_plan_id` input was removed.
 
 ## Reconciliation, score and Serving
 
@@ -79,7 +81,8 @@ nutrition is not credited.
 
 The readable trace exposes Household/week, member→selection pins, config and
 compatibility versions, exact history plan IDs, applied exclusions, candidate
-pool, candidate participant groups, rejections, score components/totals,
+pool, exact recent RecipeVersion usage, compatible and excluded participant
+groups, rejections, score components/totals,
 selected RecipeVersions, final/fixed source events, warnings and explicit failure
 code/reason. SHA-256 covers all deterministic fields. Diagnostic duration is
 reported separately and excluded from the fingerprint.
@@ -92,8 +95,10 @@ and missing/unsafe eligibility return unsupported states.
 
 ## Gate 1 fixture and limitations
 
-The checked-in repository path still observes 30 verified recipes and 80+
-FoodIngredients through SQLite repositories/Nutrition. All 30 authoritative
+The checked-in repository fixture invokes `generate_authoritative` over three
+real migrated SQLite Households, persisted members/current selections, Recipe,
+Nutrition, Pantry and prior-MealPlan repositories. It observes 30 verified
+recipes and 80+ FoodIngredients. All 30 authoritative
 RecipeVersion Nutrition results remain `INCOMPLETE` with unknown kcal, so the
 three materially different fixture households truthfully return reproducible
 `NO_ELIGIBLE_CANDIDATE` without a partial revision. Synthetic tests prove the

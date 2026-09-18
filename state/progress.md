@@ -57,8 +57,10 @@ User authorization recorded after merged PR #56.
 - PR #59 correction composes current authoritative inputs, supports deterministic
   participant splitting/subset fixed events, consumes the immediately preceding
   week, exposes readable trace provenance, and validates PlannerConfig strictly.
-- Corrected focused Planner/application/recommender/architecture/Gate suite:
-  **24 passed**. Corrected affected-context suite: **290 passed**. Exact full
+- Final-correction focused Planner/application/recommender/architecture/Gate
+  suite: **25 passed**. The Gate fixture now uses the authoritative application
+  entrypoint over real migrated Household/selection/Recipe/Nutrition/Pantry and
+  MealPlan state. Corrected affected-context suite: **291 passed**. Exact full
   backend collection remains pending GitHub Actions because Cloud lacks `httpx`
   (`3162 collected`, six API-module collection errors). No ignored subset is
   presented as the full gate.

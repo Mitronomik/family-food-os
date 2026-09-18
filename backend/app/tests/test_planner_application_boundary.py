@@ -5,6 +5,7 @@ from types import SimpleNamespace
 import pytest
 
 from app.domain.food_recipes import MealTypeCode
+from app.domain.households import HouseholdState
 from app.domain.meal_patterns import MealRole
 from app.domain.nutrition import NutritionStatus, NutritionValues
 from app.domain.planner import PlannerConfig
@@ -25,10 +26,10 @@ class Households:
         self.household_id, self.member_id = household_id, member_id
 
     def get_household(self, household_id):
-        return SimpleNamespace(id=self.household_id)
-
-    def list_household_members(self, household_id):
-        return [SimpleNamespace(id=self.member_id, active=True)]
+        return HouseholdState(
+            household=SimpleNamespace(id=self.household_id),
+            members=(SimpleNamespace(id=self.member_id, active=True),),
+        )
 
 
 class Recipes:
