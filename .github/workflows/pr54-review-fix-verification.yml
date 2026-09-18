@@ -1,0 +1,73 @@
+name: PR54 review-fix verification
+
+on:
+  push:
+    branches:
+      - ci/pr54-review-fixes-eea7c7bf
+
+permissions:
+  contents: read
+
+jobs:
+  focused-pr7:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: eea7c7bf61d1e20c5cfbce7a59a6e78e8dbcae70
+          fetch-depth: 0
+      - name: Assert exact PR head
+        run: test "$(git rev-parse HEAD)" = "eea7c7bf61d1e20c5cfbce7a59a6e78e8dbcae70"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/pyproject.toml
+      - run: python -m pip install -e "backend[test]"
+      - name: Focused PR7 verification
+        run: >-
+          python -m pytest
+          backend/app/tests/test_meal_plans.py
+          backend/app/tests/test_meal_plan_application.py
+          backend/app/tests/test_meal_plan_migration.py
+          backend/app/tests/persistence/test_meal_plan_repository.py
+          backend/app/tests/test_migration_lineage.py
+
+  backend-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: eea7c7bf61d1e20c5cfbce7a59a6e78e8dbcae70
+          fetch-depth: 0
+      - name: Assert exact PR head
+        run: test "$(git rev-parse HEAD)" = "eea7c7bf61d1e20c5cfbce7a59a6e78e8dbcae70"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/pyproject.toml
+      - run: python -m pip install -e "backend[test]"
+      - name: Full backend regression
+        run: python -m pytest backend/app/tests
+
+  launcher-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: eea7c7bf61d1e20c5cfbce7a59a6e78e8dbcae70
+          fetch-depth: 0
+      - name: Assert exact PR head
+        run: test "$(git rev-parse HEAD)" = "eea7c7bf61d1e20c5cfbce7a59a6e78e8dbcae70"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/pyproject.toml
+      - run: python -m pip install -e "backend[test]"
+      - name: Full launcher regression
+        run: python -m pytest launcher/tests
