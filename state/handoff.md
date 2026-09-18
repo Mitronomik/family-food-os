@@ -20,13 +20,13 @@ Future RecipeTemplate reservation remains:
 
 `0033_recipe_template_catalogue`
 
-Issue #57 is the complete bounded task contract and owns implementation acceptance.
+Issue #57 is the bounded PR8 task contract, subject to canonical repository contracts and any later explicit user-approved decision.
 
 ## Current operation
 
 PR8 must establish a deterministic household week-planning baseline before Gate 1.
 
-Core implementation decisions already fixed by Issue #57:
+PR8 implementation constraints and default baseline from Issue #57:
 
 - Planner is filters + bounded scoring/heuristics first; no advanced solver;
 - Meal Pattern Recommender ranks only reviewed/published curated program versions and never activates them automatically;
@@ -38,7 +38,7 @@ Core implementation decisions already fixed by Issue #57:
 - current persisted HouseholdMember has no canonical exclusions/preferences model, so PR8 may accept explicit validated generation-time member constraints and must include them in request/trace evidence;
 - hard exclusions dominate scoring/sharedness;
 - Serving math uses existing Nutrition truth and Decimal semantics; no invented meal-role calorie percentages and no therapeutic goal adjustment;
-- preferred v0 Serving baseline is member-wide weekly normalization against existing reference energy truth after the semantic week is selected;
+- preferred v0 Serving baseline is member-wide weekly normalization against existing reference energy truth after the semantic week is selected; an equivalent smaller deterministic heuristic may be used only with documented implementation evidence as allowed by Issue #57;
 - budget/cost is not scored as zero while cost truth is unavailable;
 - Pantry is read-only Planner signal; no reservation/consumption/Shopping behavior;
 - complete week or bounded failure only; no partial MealPlan write;
