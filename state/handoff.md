@@ -8,9 +8,9 @@ PR #56 is MERGED. The user explicitly authorized the next milestone.
 
 `PR8 — Planner v0` is ACTIVE under Issue #57.
 
-Accepted PR8 implementation base:
+Accepted PR8 implementation base (later Cloud authorization):
 
-`3ca80a7815301689baa409b1c129471a03a01f68`
+`64061b20cc7f9c6106ffbc577871616c53720892`
 
 Accepted SQLite migration head:
 
@@ -88,3 +88,14 @@ Gate 1 is not automatically COMPLETE merely because PR8 tests pass.
 After PR8 is review-ready and merged, stop.
 
 Gate 1 requires separate review/closure. Do not begin PR9 automatically.
+
+## PR8 implementation handoff
+
+The review-ready implementation uses `planner-v0.1`, explicit compatibility
+`meal-role-recipe-v1`, `meal-pattern-recommender-v1`, member-wide weekly Decimal
+normalization, in-memory complete-week reconciliation, bounded failures and
+fingerprinted traces. It adds no migration; SQLite head remains `0032` and the
+`0033_recipe_template_catalogue` reservation is untouched. See
+`docs/family-food/planner-v0.md` for the exact algorithm and repository-backed
+fixture result. Gate 1 remains NOT STARTED because all 30 current verified recipe
+nutrition results have unknown kcal and therefore correctly fail eligibility.

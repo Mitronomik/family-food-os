@@ -8,7 +8,7 @@ Updated: `2026-09-18`.
 - Issue #47 / `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` = COMPLETE through merged PR #51.
 - PR7 / Issue #53 = COMPLETE through merged PR #54.
 - Post-PR54 state synchronization/cleanup = COMPLETE through merged PRs #55 and #56.
-- Accepted PR8 implementation base: `3ca80a7815301689baa409b1c129471a03a01f68`.
+- Accepted PR8 implementation base: `64061b20cc7f9c6106ffbc577871616c53720892`.
 - Accepted SQLite migration head: `0032_meal_plan_serving`.
 - Future RecipeTemplate reservation remains `0033_recipe_template_catalogue`.
 

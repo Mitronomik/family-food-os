@@ -31,13 +31,35 @@ Canonical implementation order remains `docs/family-food/master-roadmap.md`.
 User authorization recorded after merged PR #56.
 
 - Issue: #57 — `PR8 — Planner v0 deterministic week generation and trace`.
-- Accepted implementation base: `3ca80a7815301689baa409b1c129471a03a01f68`.
+- Accepted implementation base (later Cloud authorization):
+  `64061b20cc7f9c6106ffbc577871616c53720892`.
 - Accepted migration head remains `0032_meal_plan_serving`.
 - `0033_recipe_template_catalogue` remains a future reservation; PR8 has no schema migration by default.
 - PR8 is filters + deterministic scoring/heuristics, complete-week generation, individualized Servings, household reconciliation, Meal Pattern Recommender v0 and reproducible trace.
 - Generation-time hard exclusions/preferences are explicit Planner request values for v0 because no canonical persisted member preference/exclusion model exists.
 - Gate 1 remains NOT STARTED and requires separate closure after PR8 merge.
 - PR9 and later milestones remain NOT STARTED.
+
+## PR8 Planner v0 implementation evidence
+
+- Cloud-authorized starting SHA: `64061b20cc7f9c6106ffbc577871616c53720892`.
+- Deterministic `planner-v0.1`, compatibility `meal-role-recipe-v1`, curated
+  recommender `meal-pattern-recommender-v1`, bounded failures and reproducible
+  trace are implemented without a schema change.
+- The preferred member-wide weekly energy normalization delegates successful
+  append-only persistence to the existing PR7 MealPlan service only after the
+  complete week is reconciled in memory.
+- Repository-backed evidence loads 30 verified recipes and 80+ FoodIngredients.
+  The current authoritative Nutrition result is `INCOMPLETE`/unknown kcal for all
+  30 recipes, so the three representative households correctly produce explicit
+  bounded failures. This keeps Gate 1 NOT STARTED rather than inventing values.
+- Canonical implementation detail: `docs/family-food/planner-v0.md`.
+- Focused Planner/Gate fixture suite: **9 passed**. Affected-context suite:
+  **272 passed**. The dependency-available backend regression excluding API
+  modules that require unavailable `httpx`: **2557 passed**. Full collection is
+  environment-blocked by missing `httpx`; network installation is blocked by
+  the Cloud proxy. The legacy documentation lifecycle checker also reports its
+  pre-existing CosmeticWorkshopOS closed-blob/state mismatch.
 
 
 
