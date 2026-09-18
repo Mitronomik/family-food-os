@@ -20,11 +20,39 @@ PR6   Nutrition Core                       COMPLETE (PR6-CLOSE accepted)
 PR7-SUPPORT Meal Pattern Catalogue          COMPLETE (#47 / PR #51)
 PR7   MealPlan / Serving                    COMPLETE (#53 / PR #54)
 PR8   Planner v0                            COMPLETE (#57 / PR #59)
+GATE1-A candidate data readiness           ACTIVE (#61)
 GATE 1 Planning Core                        NOT STARTED
 ```
 
 Canonical implementation order remains `docs/family-food/master-roadmap.md`.
 
+
+## GATE1-A Planning Core candidate data readiness kickoff
+
+User authorization recorded after merged PR #60.
+
+- Issue: #61 — `GATE1-A — Planning Core candidate data readiness`.
+- Accepted starting main:
+  `792d855448e16edcf36b41e0f6e321346fb915ed`.
+- Accepted migration head remains `0032_meal_plan_serving`.
+- `0033_recipe_template_catalogue` remains reserved and untouched.
+- Gate1-A is a bounded data-readiness operation, not Gate1-CLOSE and not PR9.
+- Current authoritative blocker: all 30 current verified RecipeVersions return
+  `INCOMPLETE` Nutrition with unknown kcal in the PR8 repository fixture.
+- First required step is a fresh current-truth blocker matrix for all 30 recipes;
+  historical PR6 audits are prioritization evidence only.
+- Repair target must be the smallest Planner-compatible authoritative subset
+  justified by current evidence and a role-capacity proof under
+  `meal-role-recipe-v2` / `max_recipe_repetitions=3`.
+- At least one real SQLite-backed Household must reach a persisted complete
+  seven-day MealPlan with individualized positive Decimal Servings before
+  Gate1-A is review-ready.
+- Estimates/unknowns may not be promoted to exact; Planner eligibility may not be
+  weakened to accept `INCOMPLETE`.
+- No schema/migration is expected by default. If a schema change proves necessary,
+  stop for a separate migration decision rather than consuming `0033`.
+- After Gate1-A merge, stop for separate Gate1-CLOSE review. PR9 remains
+  **NOT STARTED**.
 
 ## PR8 Planner v0 closure
 
