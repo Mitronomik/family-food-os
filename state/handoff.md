@@ -55,7 +55,7 @@ Current data-readiness blocker:
 - all 30 current verified RecipeVersions have `INCOMPLETE` Nutrition with unknown kcal;
 - therefore the authoritative repository fixture cannot yet demonstrate a successful complete week with individualized Servings.
 
-Per the 2026-09-16 roadmap addendum, if Gate 1 lacks enough valid candidates, the next authorized work may be a **bounded data-gap closure** through curation/import/evidence. Do not invent missing nutrition, reinterpret unknown as zero, redesign Planner around the seed corpus, or silently start RecipeTemplate/Assembly.
+Per the 2026-09-16 roadmap addendum, if Gate 1 lacks enough valid candidates, a future separately authorized **bounded data-gap closure** through curation/import/evidence may be required. Do not invent missing nutrition, reinterpret unknown as zero, redesign Planner around the seed corpus, or silently start RecipeTemplate/Assembly.
 
 ## Next action
 
