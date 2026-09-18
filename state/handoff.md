@@ -91,11 +91,13 @@ Gate 1 requires separate review/closure. Do not begin PR9 automatically.
 
 ## PR8 implementation handoff
 
-The review-ready implementation uses `planner-v0.1`, explicit compatibility
-`meal-role-recipe-v1`, `meal-pattern-recommender-v1`, member-wide weekly Decimal
+The corrected implementation uses `planner-v0.2`, explicit compatibility
+`meal-role-recipe-v2`, `meal-pattern-recommender-v2`, member-wide weekly Decimal
 normalization, in-memory complete-week reconciliation, bounded failures and
 fingerprinted traces. It adds no migration; SQLite head remains `0032` and the
 `0033_recipe_template_catalogue` reservation is untouched. See
 `docs/family-food/planner-v0.md` for the exact algorithm and repository-backed
 fixture result. Gate 1 remains NOT STARTED because all 30 current verified recipe
 nutrition results have unknown kcal and therefore correctly fail eligibility.
+PR #59 final re-review remains conditional only on exact-head full backend
+verification in GitHub Actions because the Cloud image lacks `httpx`.

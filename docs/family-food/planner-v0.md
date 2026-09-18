@@ -1,96 +1,102 @@
 # Planner v0 deterministic baseline
 
-Status: PR8 implementation contract. Gate 1 remains a separate review and is
-not closed by this document.
+Status: corrected PR8 implementation contract for Issue #57. Gate 1 remains a
+separate review and is not closed here.
 
-## Boundary and versions
+## Boundaries and versions
 
-`app.domain.planner` owns driver-independent request, result, configuration and
-trace values plus the bounded heuristic. `app.services.planner` owns the
-application facade and Meal Pattern Recommender. Successful generation delegates
-one append-only revision write to the existing PR7 `MealPlanService`; failure is
-returned before any write. No Planner table, migration, service process, AI,
-Retail or optimizer was introduced.
+The pure `app.domain.planner.generate_week` heuristic accepts an already composed
+`PlannerRequest`. Production callers use
+`PlannerService.generate_authoritative(AuthoritativeGenerationRequest)`, whose
+caller can supply only member IDs, generation-time exclusions/preferences and
+fixed events. The application service resolves current Household-scoped truth
+from the existing Household, Meal Pattern/MealPlan, Recipe, Nutrition and Pantry
+services before invoking the pure core. It never accepts caller assertions about
+selection snapshots, RecipeVersion currency/verification, kcal/status or Pantry.
 
-- Planner configuration: `planner-v0.1`.
-- compatibility mapping: `meal-role-recipe-v1`.
-- recommender: `meal-pattern-recommender-v1`.
+- planner/config: `planner-v0.2`;
+- compatibility: `meal-role-recipe-v2`;
+- recommender: `meal-pattern-recommender-v2`.
 
-`MealRole` remains distinct from `RecipeVersion.meal_type_code`. The compatibility
-table is explicit and versioned in Planner code. It maps breakfast primarily to
-`breakfast`/`sandwich`, lunch to `main`/`salad`/`sandwich`, dinner to
-`main`/`salad`/`side`, snacks and workout opportunities to bounded compatible
-catalogue classifications, and `OTHER` to all existing classifications. It does
-not rewrite Recipe truth.
+No Planner table, migration, process, AI, Retail or optimizer was introduced.
+Successful generation delegates one append-only revision write to PR7
+`MealPlanService`; failure is returned before any write.
 
-## Generation and trace
+## Configuration and compatibility
 
-The request pins the Household, Monday, accepted member schedule snapshots,
-reference-energy values, immutable recipe candidates, per-member exclusions and
-preferences, read-only Pantry ingredient identities, optional user-fixed events,
-and the prior plan identity for replan evidence. These generation-time values do
-not create a persisted preference schema.
+Versions must be non-empty lowercase version-safe identifiers. Every weight must
+be a finite, non-negative `Decimal` (float is rejected), and the repetition bound
+must be a positive non-bool integer.
 
-Members' seven-day opportunities are reconciled by local date, role and repeated
-role occurrence. Compatible opportunities share one event and candidate only
-after the union of participant hard exclusions passes. The deterministic
-candidate order is immutable RecipeVersion UUID. Hard rejection codes are:
+`MealRole` remains distinct from Recipe classification. Without RecipeAssembly or
+an independent standalone-meal authority, component classifications are not
+promoted into whole meals. Version 2 permits:
 
-- `NOT_VERIFIED`;
-- `ROLE_INCOMPATIBLE`;
-- `MEMBER_EXCLUDED_INGREDIENT`;
-- `NUTRITION_UNAVAILABLE`;
-- `MAX_REPETITIONS`.
+- breakfast: `breakfast`, `sandwich`;
+- lunch: `main`, `sandwich`;
+- dinner: `main` only;
+- snack: `sandwich` only;
+- workout/other roles: unsupported and therefore bounded failure.
 
-Eligible candidates receive these configured score components: preference
-`+20` per participating member, Pantry overlap `+4` per ingredient, batch
-compatibility `+2`, known time `-0.01` per minute, and repetition `-7` per prior
-use. Highest score wins; exact ties use ascending RecipeVersion UUID. Cost is not
-scored because authoritative cost truth is unavailable. Pantry is only a scoring
-signal and is never reserved or consumed.
+In particular, `salad` and `side` cannot silently become an entire dinner.
 
-After the semantic week is selected, each member receives one Decimal multiplier:
-`7 × daily reference energy / sum(selected base-serving kcal)`. That same
-member-wide multiplier is applied to all of the member's recipe-backed events,
-with six-decimal half-up quantization. Missing/non-positive reference energy or
-recipe kcal produces a bounded failure; unknown non-recipe nutrition is never
-credited. This is the Issue #57 preferred weekly-normalization baseline and does
-not invent meal-role calorie percentages or therapeutic adjustments.
+## Authoritative composition and history
 
-The trace contains both version strings, a SHA-256 canonical request fingerprint,
-every candidate rejection/score/selection, explicit warnings, selected immutable
-RecipeVersion IDs, and a SHA-256 trace fingerprint. Identical input and config
-produce identical events and fingerprints. Duration is deliberately not part of
-the deterministic trace.
+The production boundary loads active Household members, each member's current
+accepted selection, current active Recipes/current verified immutable versions,
+authoritative RecipeVersion Nutrition, current reference-energy targets and the
+Household-scoped Pantry. Pantry identities are a read-only score signal.
 
-## Fixed events, replan and bounded failure
+The bounded history horizon is exactly the current revision for the immediately
+preceding semantic week (`HISTORY_HORIZON_WEEKS = 1`). Its exact plan revision ID
+and immutable RecipeVersion selections enter the request and trace. Historical
+uses and selections earlier in the generated week share the configured
+repetition counter; history is never mutated. No prior plan is deterministic
+empty history. The obsolete unvalidated `previous_plan_id` input was removed.
 
-Planner autonomously selects only `COOK_RECIPE`. A user-fixed non-recipe event
-must identify an existing semantic opportunity and exact participants; Planner
-preserves its source kind/reference/explicit portions and never manufactures a
-RecipeVersion or supply. A generated plan, including a replan request with a
-previous plan pin, uses the existing append-only revision operation. The old
-revision is not mutated.
+## Reconciliation, score and Serving
 
-Invalid input or an infeasible opportunity returns a typed failure and trace.
-Because selection and Serving reconciliation finish in memory before delegation
-to `MealPlanService`, infeasible generation cannot persist a partial MealPlan.
+For each local-date/role/occurrence opportunity, fixed non-recipe decisions are
+removed first and may cover any non-empty participant subset. The remaining
+members are grouped greedily: evaluate each eligible recipe's compatible member
+subset, choose the largest subset, then highest score, then ascending immutable
+RecipeVersion UUID; repeat until all participants are assigned or bounded failure
+is proven. Thus sharedness is preferred, never mandatory, and exclusions are
+never weakened.
 
-## Repository-backed fixture evidence and limitations
+Hard evidence codes are `NOT_VERIFIED`, `ROLE_INCOMPATIBLE`,
+`MEMBER_EXCLUDED_INGREDIENT`, `NUTRITION_UNAVAILABLE` and `MAX_REPETITIONS`.
+Scores are preference `+20` per member, Pantry overlap `+4` per ingredient, batch
+`+2`, time `-0.01` per minute and repetition `-7` per historical/current use.
+Cost stays unknown/unscored.
 
-The PR8 fixture test loads the checked-in catalogue through the real SQLite
-migration/seed/repository and Nutrition service path. It verifies 30 current
-verified recipes and at least 80 FoodIngredients, then exercises three materially
-different one-, two- and three-member schedule shapes. At this repository state,
-all 30 catalogue RecipeVersions correctly yield `INCOMPLETE` Nutrition with
-unknown kcal. All three fixture outcomes are therefore explicit
-`NO_ELIGIBLE_CANDIDATE` failures with reproducible traces—not partial plans and
-not invented kcal. Unit fixtures separately prove successful heterogeneous
-complete-week generation, shared events, individualized allocation, exclusions
-and repeatability.
+After selection, each member receives one six-decimal Decimal multiplier:
+`7 × daily reference energy / sum(selected recipe base-serving kcal)`. Unknown or
+non-positive authoritative energy yields bounded failure; fixed non-recipe
+nutrition is not credited.
 
-This evidence does not declare Gate 1 complete. A future bounded authoritative
-nutrition/data correction must make an adequate recipe pool eligible before the
-repository-backed households can demonstrate successful complete plans. That is
-a data-readiness limitation, not a reason for Planner persistence or a schema
-migration.
+## Trace and recommender
+
+The readable trace exposes Household/week, member→selection pins, config and
+compatibility versions, exact history plan IDs, applied exclusions, candidate
+pool, candidate participant groups, rejections, score components/totals,
+selected RecipeVersions, final/fixed source events, warnings and explicit failure
+code/reason. SHA-256 covers all deterministic fields. Diagnostic duration is
+reported separately and excluded from the fingerprint.
+
+`MealPatternRecommenderService` reads only the catalogue's current published,
+eligible programs. Evidence per result contains program/version IDs, deterministic
+score, only actually matched authoritative tag reasons, and cautions. It cannot
+activate a program; acceptance remains PR7 `accept_member_pattern`. Medical input
+and missing/unsafe eligibility return unsupported states.
+
+## Gate 1 fixture and limitations
+
+The checked-in repository path still observes 30 verified recipes and 80+
+FoodIngredients through SQLite repositories/Nutrition. All 30 authoritative
+RecipeVersion Nutrition results remain `INCOMPLETE` with unknown kcal, so the
+three materially different fixture households truthfully return reproducible
+`NO_ELIGIBLE_CANDIDATE` without a partial revision. Synthetic tests prove the
+successful shared, deterministic split, subset-fixed and individualized Serving
+paths. This does not complete Gate 1; authoritative nutrition/data readiness must
+be corrected in separately authorized work.

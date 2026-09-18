@@ -2,13 +2,23 @@ from datetime import date, datetime, timezone
 from decimal import Decimal
 from uuid import UUID
 
+import pytest
+
 from app.domain.food_recipes import MealTypeCode
 from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import (
+    HouseholdMealEvent,
+    MealPlan,
+    MealPlanDetail,
+    MealPlanMemberSelection,
+    MealPlanStatus,
     MemberMealPatternOpportunitySnapshot,
     MemberMealPatternSelection,
     MemberMealPatternSelectionDetail,
     MemberMealPatternSourceKind,
+    MealSourceKind,
+    Serving,
+    validate_complete_plan,
 )
 from app.domain.nutrition import NutritionStatus
 from app.domain.planner import (
@@ -19,9 +29,10 @@ from app.domain.planner import (
     PlannerFailureCode,
     PlannerRequest,
     PlannerSuccess,
+    FixedPlannerEvent,
     generate_week,
 )
-from app.services.planner import PlannerService, RecommenderRequest, recommend_patterns
+from app.services.planner import RecommenderRequest, recommend_patterns
 
 
 def uid(number: int) -> UUID:
@@ -123,18 +134,9 @@ def test_hard_exclusion_precedes_sharedness_and_is_explained() -> None:
         item for item in result.trace.candidates if item.recipe_version_id == uid(11)
     ]
     assert excluded_traces
-    assert all(
+    assert any(
         "MEMBER_EXCLUDED_INGREDIENT" in {code.value for code in item.rejection_codes}
         for item in excluded_traces
-        if len(
-            next(
-                event
-                for event in result.events
-                if event.local_date == item.local_date
-                and event.position == item.position
-            ).participant_member_ids
-        )
-        == 2
     )
 
 
@@ -172,12 +174,138 @@ def test_recommender_fails_safe_for_medical_request() -> None:
     assert result.requires_user_acceptance is True
 
 
-def test_application_facade_never_writes_an_infeasible_partial_plan() -> None:
-    class NeverCalledMealPlans:
-        def create_plan_revision(self, **kwargs):
-            raise AssertionError(f"partial write attempted: {kwargs}")
+@pytest.mark.parametrize(
+    "changes,error",
+    [
+        ({"preference_weight": 1.0}, TypeError),
+        ({"pantry_weight": Decimal("NaN")}, ValueError),
+        ({"time_weight": Decimal("Infinity")}, ValueError),
+        ({"repetition_weight": Decimal("-1")}, ValueError),
+        ({"max_recipe_repetitions": 0}, ValueError),
+        ({"max_recipe_repetitions": True}, ValueError),
+        ({"version": ""}, ValueError),
+        ({"compatibility_version": "bad version"}, ValueError),
+    ],
+)
+def test_planner_config_rejects_invalid_values(changes, error) -> None:
+    with pytest.raises(error):
+        PlannerConfig(**changes)
 
-    invalid = PlannerRequest(uid(1), date(2026, 9, 14), (), ())
-    result, persisted = PlannerService(NeverCalledMealPlans()).generate(invalid)  # type: ignore[arg-type]
-    assert isinstance(result, PlannerFailure)
-    assert persisted is None
+
+def test_recent_history_penalty_changes_selection_deterministically() -> None:
+    value = request()
+    configured = PlannerConfig(max_recipe_repetitions=20)
+    without = generate_week(value, configured)
+    with_history = generate_week(
+        PlannerRequest(
+            value.household_id,
+            value.week_start,
+            value.members,
+            value.candidates,
+            recent_plan_ids=(uid(90),),
+            recent_recipe_version_ids=(uid(10),),
+        ),
+        configured,
+    )
+    assert isinstance(without, PlannerSuccess)
+    assert isinstance(with_history, PlannerSuccess)
+    assert without.events[0].recipe_version_id == uid(10)
+    assert with_history.events[0].recipe_version_id == uid(15)
+    assert with_history.trace.recent_plan_ids == (uid(90),)
+
+
+def test_incompatible_members_split_and_subset_fixed_event_is_preserved() -> None:
+    first, second = uid(2), uid(3)
+    members = (
+        MemberPlannerConstraints(
+            first,
+            selection(first, (MealRole.DINNER,)),
+            Decimal("2000"),
+            frozenset({uid(51)}),
+        ),
+        MemberPlannerConstraints(
+            second,
+            selection(second, (MealRole.DINNER,)),
+            Decimal("2200"),
+            frozenset({uid(50)}),
+        ),
+    )
+    candidates = (
+        candidate(11, MealTypeCode.MAIN, ingredients=frozenset({uid(50)})),
+        candidate(12, MealTypeCode.MAIN, ingredients=frozenset({uid(51)})),
+    )
+    fixed = FixedPlannerEvent(
+        date(2026, 9, 14),
+        MealRole.DINNER,
+        1,
+        MealSourceKind.EAT_OUT,
+        "решение пользователя",
+        frozenset({first}),
+        ((first, Decimal("1")),),
+    )
+    result = generate_week(
+        PlannerRequest(
+            uid(1), date(2026, 9, 14), members, candidates, fixed_events=(fixed,)
+        ),
+        PlannerConfig(max_recipe_repetitions=10),
+    )
+    assert isinstance(result, PlannerSuccess)
+    monday = [event for event in result.events if event.local_date == date(2026, 9, 14)]
+    assert [event.source_kind for event in monday] == [
+        MealSourceKind.EAT_OUT,
+        MealSourceKind.COOK_RECIPE,
+    ]
+    assert monday[0].participant_member_ids == (first,)
+    assert monday[1].participant_member_ids == (second,)
+    tuesday = [
+        event for event in result.events if event.local_date == date(2026, 9, 15)
+    ]
+    assert len(tuesday) == 2
+    assert {event.participant_member_ids for event in tuesday} == {(first,), (second,)}
+
+    now = datetime(2026, 9, 18, tzinfo=timezone.utc)
+    plan_id = uid(500)
+    domain_events = []
+    servings = []
+    for index, event in enumerate(result.events, start=1):
+        event_id = uid(500 + index)
+        domain_events.append(
+            HouseholdMealEvent(
+                event_id,
+                plan_id,
+                event.local_date,
+                event.position,
+                event.role,
+                event.source_kind,
+                event.recipe_version_id,
+                event.source_reference,
+                now,
+            )
+        )
+        servings.extend(
+            Serving(uid(700 + len(servings)), event_id, member_id, portion, now)
+            for member_id, portion in event.portions
+        )
+    detail = MealPlanDetail(
+        MealPlan(
+            plan_id,
+            uid(1),
+            date(2026, 9, 14),
+            1,
+            MealPlanStatus.CONFIRMED,
+            "planner-v0.2",
+            None,
+            now,
+        ),
+        tuple(
+            MealPlanMemberSelection(
+                plan_id, member.member_id, member.selection.selection.id
+            )
+            for member in members
+        ),
+        tuple(domain_events),
+        tuple(servings),
+    )
+    validate_complete_plan(
+        detail, {member.selection.selection.id: member.selection for member in members}
+    )

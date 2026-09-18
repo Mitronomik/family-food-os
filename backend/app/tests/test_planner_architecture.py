@@ -9,9 +9,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def test_planner_compatibility_is_explicit_and_does_not_merge_role_enums() -> None:
     assert set(ROLE_COMPATIBILITY_V1) == set(MealRole)
-    assert all(
-        types and types <= set(MealTypeCode) for types in ROLE_COMPATIBILITY_V1.values()
-    )
+    assert all(types <= set(MealTypeCode) for types in ROLE_COMPATIBILITY_V1.values())
     assert {role.value for role in MealRole}.isdisjoint(
         {value.value for value in MealTypeCode}
     )

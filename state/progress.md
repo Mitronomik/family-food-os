@@ -43,8 +43,8 @@ User authorization recorded after merged PR #56.
 ## PR8 Planner v0 implementation evidence
 
 - Cloud-authorized starting SHA: `64061b20cc7f9c6106ffbc577871616c53720892`.
-- Deterministic `planner-v0.1`, compatibility `meal-role-recipe-v1`, curated
-  recommender `meal-pattern-recommender-v1`, bounded failures and reproducible
+- Deterministic `planner-v0.2`, compatibility `meal-role-recipe-v2`, curated
+  recommender `meal-pattern-recommender-v2`, bounded failures and reproducible
   trace are implemented without a schema change.
 - The preferred member-wide weekly energy normalization delegates successful
   append-only persistence to the existing PR7 MealPlan service only after the
@@ -54,12 +54,14 @@ User authorization recorded after merged PR #56.
   30 recipes, so the three representative households correctly produce explicit
   bounded failures. This keeps Gate 1 NOT STARTED rather than inventing values.
 - Canonical implementation detail: `docs/family-food/planner-v0.md`.
-- Focused Planner/Gate fixture suite: **9 passed**. Affected-context suite:
-  **272 passed**. The dependency-available backend regression excluding API
-  modules that require unavailable `httpx`: **2557 passed**. Full collection is
-  environment-blocked by missing `httpx`; network installation is blocked by
-  the Cloud proxy. The legacy documentation lifecycle checker also reports its
-  pre-existing CosmeticWorkshopOS closed-blob/state mismatch.
+- PR #59 correction composes current authoritative inputs, supports deterministic
+  participant splitting/subset fixed events, consumes the immediately preceding
+  week, exposes readable trace provenance, and validates PlannerConfig strictly.
+- Corrected focused Planner/application/recommender/architecture/Gate suite:
+  **24 passed**. Corrected affected-context suite: **290 passed**. Exact full
+  backend collection remains pending GitHub Actions because Cloud lacks `httpx`
+  (`3162 collected`, six API-module collection errors). No ignored subset is
+  presented as the full gate.
 
 
 
