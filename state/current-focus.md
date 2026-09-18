@@ -15,7 +15,7 @@ Updated: `2026-09-18`.
 
 ## Current authorized operation
 
-No product milestone or gate implementation is currently authorized beyond this post-PR59 state synchronization.
+No product milestone or gate implementation is currently authorized.
 
 The next eligible roadmap operation is:
 
