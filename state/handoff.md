@@ -14,12 +14,15 @@ Current bounded operation:
 
 The exact `ce5cf6e2` implementation-base audit is now reproducible in
 `data/curation/gate1a-data-readiness/`. It finds 29 `INCOMPLETE` versions and
-one technically eligible conditional breakfast version. The minimum actual
-three-meal capacity is eight versions (three breakfast, four main, one
-sandwich), leaving a seven-version evidence gap. Existing accepted rows do not
-contain enough exact same-form mass authority to bind that set without
-promoting rejected estimates or inventing form/piece truth. Gate1-A is therefore
-not review-ready; no schema, production truth, Gate1-CLOSE or PR9 work started.
+one Planner-eligible conditional breakfast with positive kcal. The generic
+three-meal minimum is seven versions (2 breakfast + 4 main + 1 sandwich), a
+six-version repair gap. The actual hard-exclusion fixture needs eight versions
+(3 breakfast + 5 main), a seven-version repair gap; its excluded sandwich would
+force a split and supplies no net capacity. Repository matching finds nine
+blocker rows with legally reusable accepted exact evidence, including two in the
+selected target set, but every selected recipe retains new-evidence or immutable
+revision work. Gate1-A is therefore not review-ready; no schema, production
+truth, Gate1-CLOSE or PR9 work started.
 
 Accepted starting main:
 

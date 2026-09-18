@@ -31,28 +31,54 @@ publication readiness. The complete row-level matrix is
 
 ## Candidate-capacity proof
 
-Under `planner-v0.2`, `meal-role-recipe-v2` and
-`max_recipe_repetitions=3`, seven opportunities for one role require
-`ceil(7 / 3) = 3` independently eligible versions. A seven-day schedule with
-BREAKFAST, LUNCH and DINNER has 21 automatic recipe opportunities:
+The audit now exhaustively assigns participant sets to compatible candidates
+under `planner-v0.2`, `meal-role-recipe-v2` and
+`max_recipe_repetitions=3`. The generic seven-day BREAKFAST/LUNCH/DINNER lower
+bound is **seven** versions: two `breakfast`, four `main`, and the one available
+`sandwich`. A concrete allocation is six breakfasts to the two breakfast
+versions, one breakfast plus two lunches to the sandwich, and the remaining 12
+lunch/dinner events to four main versions. This explicitly uses the sandwich in
+both compatible roles and keeps every count at or below three.
 
-* BREAKFAST accepts `breakfast` or `sandwich` and requires capacity 7;
-* LUNCH accepts `main` or `sandwich`, DINNER accepts only `main`, and together
-  require capacity 14;
-* DINNER alone requires at least three `main` versions;
-* because the catalogue has only one `sandwich`, the smallest feasible set is
-  three `breakfast`, four `main`, and one `sandwich` version (eight versions).
+The actual hard-exclusion fixture has two participants at all 21 opportunities
+and excludes the sandwich ingredient for the child. Using that sandwich causes a
+split and cannot reduce the shared capacity bound. The exhaustive result is
+**eight** versions: three breakfast and five main; the sandwich is not needed.
+The heterogeneous fixture removes the fixed-event participant before automatic
+assignment and retains the generic seven-version bound. These fixture definitions
+and computed results are embedded in `current-readiness.json`.
 
-An allocation proving sufficiency is 7 breakfast uses across three breakfast
-versions, 12 lunch/dinner uses across four main versions, and 2 lunch uses of the
-sandwich version. Every version is used no more than three times. Fewer than
-eight cannot work with the actual catalogue classifications: at least three
-breakfast-capable versions are needed, while the 14 lunch/dinner uses need five
-versions and only the single sandwich can overlap the breakfast-capable set.
+Current eligibility is the conditional oatmeal breakfast only. Therefore the
+generic gap is six versions, while the governing hard-exclusion fixture gap is
+seven: both remaining breakfasts and all five current mains. The sandwich is a
+generic-only alternate, not a replacement for actual exclusion-fixture capacity.
 
-The current eligible inventory is one breakfast and zero main/sandwich versions.
-Therefore the minimum truthful repair set is seven versions: the other two
-breakfasts, four of five mains, and the sole sandwich.
+## Evidence classification and selected targets
+
+Planner eligibility is recorded separately from Nutrition status and requires
+the production rule actually used by Planner: status other than `INCOMPLETE`,
+non-null kcal, and kcal greater than zero. Consumer readiness remains false.
+
+For each blocker the audit searches current assessments, non-estimated exact
+measure evidence attached to current `APPROVED_EXACT` assessments, the exact
+FoodIngredient/profile/unit identity, and persisted composition snapshots.
+Reusable evidence is reported only when food identity, pinned profile, unit and
+normalized evidence unit match. Current blocker totals are:
+
+* `NEW_PRIMARY_EVIDENCE_REQUIRED`: 69;
+* `IMMUTABLE_RECIPE_REVISION_REQUIRED`: 15;
+* `ALREADY_ACCEPTED_EVIDENCE_REBIND`: 9;
+* `PROFILE_OR_FORM_DATA_REPAIR`: 1.
+
+The actual-fixture target set is forced by catalogue capacity rather than raw
+blocker count: `TNC6_EGGS_SPINACH`, `SNAP4_SPANISH_FRITTATA`, and all five mains
+(`FNS2_ORANGE_PORK_CHOPS`, `FNS4_OVEN_FRIED_FISH`,
+`FNS5_BAKED_LENTILS_CASSEROLE`, `SNAP4_BRAISED_CHICKEN_SPINACH`,
+`SNAP4_DILLED_FISH_FILLETS`). The matrix's `repair_plan` gives every exact target
+row and required class. Two selected black-pepper rows can reuse accepted exact
+`FDC-PORTION-87560:exact`; the remaining selected rows require new primary
+evidence or an immutable recipe correction. The sandwich remains the generic
+alternate but itself has only one accepted rebind and two new-evidence rows.
 
 ## Evidence-backed stop
 
@@ -61,12 +87,12 @@ rollback behavior, or repair replay to claim. Each accepted historical data
 operation retains its own idempotency/rollback evidence; the audit deliberately
 uses their required fresh-install order rather than replaying an old loader over
 newer replacement profiles. The row matrix proves that the
-minimum seven-version repair cannot be obtained by rebinding already accepted
-exact repository evidence. Examples include missing exact same-form authority
-for spinach volume, piece-size ambiguity, a lemon/juice form mismatch, and
-several explicitly rejected compatible-form estimates. Promoting any of these
-rows would violate the accepted rule that `REVIEW_REQUIRED_ESTIMATE` is not
-exact authority.
+minimum actual-fixture repair cannot be obtained solely by rebinding accepted
+exact evidence. Some exact evidence is reusable, but it does not resolve whole
+target recipes. Remaining examples include missing exact same-form authority for
+spinach volume, piece-size ambiguity, a lemon/juice form mismatch, and explicitly
+rejected compatible-form estimates. Promoting any estimate would violate the
+accepted evidence contract.
 
 Closing the gap therefore requires a new bounded primary-source evidence package
 and, where source recipe form or quantity truth changes, new immutable

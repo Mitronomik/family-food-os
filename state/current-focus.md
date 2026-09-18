@@ -22,10 +22,14 @@ Goal: close only the authoritative Nutrition/data gap required to exercise a suc
 Issue #61 is the bounded execution contract.
 
 The exact-base fresh audit now records an evidence-capacity blocker: 29 current
-versions are `INCOMPLETE`; the only technically eligible version is one
-`breakfast` candidate. The three-meal fixture needs three breakfast, four main
-and one sandwich versions under the repetition cap. No accepted exact evidence
-on the starting tree closes the minimum seven-version gap. See
+versions are `INCOMPLETE`; the only Planner-eligible version is one conditional
+`breakfast` candidate with positive kcal. The generic three-meal lower bound is
+two breakfast + four main + one sandwich (seven versions; six repairs). The
+actual two-participant hard-exclusion fixture needs three breakfast + five main
+(eight versions; seven repairs), because the excluded sandwich would force a
+split without reducing shared demand. Repository search finds nine blocker rows
+with reusable accepted exact evidence, including two selected black-pepper rows,
+but no selected recipe is fully resolved without new authority. See
 `data/curation/gate1a-data-readiness/`; Gate1-A remains active/not review-ready
 pending authoritative primary evidence, with no production-data or schema
 change made by the audit.

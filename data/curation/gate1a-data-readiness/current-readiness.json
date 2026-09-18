@@ -1,5 +1,41 @@
 {
   "accepted_starting_sha": "ce5cf6e2faaf9159e74d8c235f334d47743ab2a0",
+  "capacity": {
+    "fixture_contract": {
+      "fixed_event": "day 1 DINNER for child",
+      "hard_exclusion_food": "sandwich candidate ingredient"
+    },
+    "generic_three_meal": {
+      "allocation": {
+        "sandwich_breakfast_uses": 1,
+        "sandwich_lunch_uses": 2
+      },
+      "breakfast": 2,
+      "main": 4,
+      "sandwich": 1,
+      "total": 7
+    },
+    "hard_exclusion": {
+      "allocation": {
+        "sandwich_breakfast_uses": 0,
+        "sandwich_lunch_uses": 0
+      },
+      "breakfast": 3,
+      "main": 5,
+      "sandwich": 0,
+      "total": 8
+    },
+    "heterogeneous_with_subset_fixed_event": {
+      "allocation": {
+        "sandwich_breakfast_uses": 1,
+        "sandwich_lunch_uses": 2
+      },
+      "breakfast": 2,
+      "main": 4,
+      "sandwich": 1,
+      "total": 7
+    }
+  },
   "recipe_count": 30,
   "recipes": [
     {
@@ -10,13 +46,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "6e83ade5-0f38-4eb3-9c6f-8b9389ba8b05",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "7f5e6515-28d4-4089-967b-298ae9ac4f23",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-84479:estimate",
           "food_code": "GARLIC",
+          "food_identity": {
+            "canonical_code": "GARLIC",
+            "canonical_name": "Чеснок",
+            "id": "a5696758-21ed-4e79-a9bd-2c9f7aa9f900"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "7f5e6515-28d4-4089-967b-298ae9ac4f23",
+            "is_current": true,
+            "source_id": "1104647",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 3,
           "quantity": "10.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -25,13 +84,28 @@
             "FOOD_FORM_MISMATCH"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "CORN_SWEET",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "CORN_SWEET",
+            "canonical_name": "Кукуруза сладкая",
+            "id": "4497ae09-f9e2-480f-bce8-b4d028c095ba"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "fe10bf72-87ec-42d8-b25f-32f57eb3c3cd",
+            "is_current": true,
+            "source_id": "2710826",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 4,
           "quantity": "141.747616",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "g"
         },
         {
@@ -40,13 +114,36 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "b48309de-4f52-43e7-9981-214df3813ca2",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "9c46b4ea-92c0-4e3f-a494-76e27398ab3d",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "CORIANDER_SEED",
+          "food_identity": {
+            "canonical_code": "CORIANDER_SEED",
+            "canonical_name": "Семена кориандра",
+            "id": "d8725347-4969-468b-9c2b-dcfd4283f5c7"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "9c46b4ea-92c0-4e3f-a494-76e27398ab3d",
+            "is_current": true,
+            "source_id": "170922",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 7,
           "quantity": "1.250000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -55,13 +152,28 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [],
           "evidence_key": "CNF-2521:estimate",
           "food_code": "SESAME_SEEDS",
+          "food_identity": {
+            "canonical_code": "SESAME_SEEDS",
+            "canonical_name": "Семена кунжута обжаренные",
+            "id": "b82e8008-a0f4-46a5-ae97-10142d70b49c"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "f4a3efb5-e370-4f69-b2e8-323069379bef",
+            "is_current": true,
+            "source_id": "170151",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 8,
           "quantity": "5.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         }
       ],
@@ -69,8 +181,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "side",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "CACFP6_CORN_EDAMAME_BLEND",
-      "recipe_version_id": "298b4169-d4ba-4fa1-b348-cd5dfc5b38e3",
+      "recipe_version_id": "251f4628-f36b-4bf1-ab09-d132d5db1e80",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -82,13 +196,28 @@
             "PROFILE_REPRESENTATIVENESS_REVIEW"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "CRANBERRIES_DRIED",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "CRANBERRIES_DRIED",
+            "canonical_name": "Клюква сушёная",
+            "id": "af973465-a161-4418-abad-37668f603091"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "bf888fee-b7be-4506-8d54-7b9bb38c5d9e",
+            "is_current": true,
+            "source_id": "171723",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 11,
           "quantity": "63.786427",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "PROFILE_OR_FORM_DATA_REPAIR",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "g"
         }
       ],
@@ -96,8 +225,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "salad",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "CACFP6_CREAMY_COLESLAW",
-      "recipe_version_id": "dfd0737e-f41a-4c2b-8c7c-c771cb8ab98e",
+      "recipe_version_id": "9e856315-02ac-4a07-b599-a9e91c9267e8",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -109,13 +240,28 @@
             "FOOD_FORM_MISMATCH"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "CUCUMBER",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "CUCUMBER",
+            "canonical_name": "Огурец",
+            "id": "dbce868b-42fb-4268-9cc5-4fcf51cc3d90"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "5b3fc5e8-6b11-4356-b159-84ffe94f86e8",
+            "is_current": true,
+            "source_id": "2346406",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 6,
           "quantity": "134.660235",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "g"
         },
         {
@@ -124,13 +270,36 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "4617fd29-eed9-4bff-8d1a-7ebdf2cbcc1f",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "4b732666-8c60-43bf-aa24-25dcf0997818",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "MINT_FRESH",
+          "food_identity": {
+            "canonical_code": "MINT_FRESH",
+            "canonical_name": "Мята свежая",
+            "id": "02f66d98-f608-4db8-ac2f-38c951dc99ff"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "4b732666-8c60-43bf-aa24-25dcf0997818",
+            "is_current": true,
+            "source_id": "173475",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 10,
           "quantity": "1.250000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -139,13 +308,36 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "7470efa3-5cf6-4438-a21e-8b91078e26c2",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "119ceec7-9470-440f-8456-33b6d1a868ea",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "CUMIN_GROUND",
+          "food_identity": {
+            "canonical_code": "CUMIN_GROUND",
+            "canonical_name": "Кумин молотый",
+            "id": "f58cbcf7-6e0b-45ad-8dcd-60d17eac84b4"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "119ceec7-9470-440f-8456-33b6d1a868ea",
+            "is_current": true,
+            "source_id": "170923",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 11,
           "quantity": "1.250000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -154,13 +346,28 @@
             "FOOD_FORM_MISMATCH"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "LEMON",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "LEMON",
+            "canonical_name": "Лимон",
+            "id": "834fcdc7-67f6-4a4b-ab09-9c9d272376cf"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "6e6bdf41-f3b4-4b32-8479-40c1902f7b6a",
+            "is_current": true,
+            "source_id": "167746",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 12,
           "quantity": "56.699046",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "g"
         }
       ],
@@ -168,8 +375,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "salad",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "CACFP6_TABBOULEH",
-      "recipe_version_id": "f6aa981d-c9c7-402d-8a56-9833abd89c53",
+      "recipe_version_id": "2ed3ec97-1a7e-4801-8a16-b35ee75229ca",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -181,13 +390,36 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "389098c1-3a4d-4976-bb82-99cedeef86cf",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "8ed51cb0-fd0b-4d4a-82dc-85a14736e695",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "PORK_LOIN",
+          "food_identity": {
+            "canonical_code": "PORK_LOIN",
+            "canonical_name": "Свинина корейка без кости",
+            "id": "c9461a35-2317-49a6-835c-989f9317fd20"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "8ed51cb0-fd0b-4d4a-82dc-85a14736e695",
+            "is_current": true,
+            "source_id": "2646168",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 2,
           "quantity": "2.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -196,13 +428,36 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "5e3dc54c-c64c-4387-a603-4cf30c432aac",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "27323a99-eac1-4908-8c49-847af994b40a",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "SWEET_POTATO",
+          "food_identity": {
+            "canonical_code": "SWEET_POTATO",
+            "canonical_name": "Батат",
+            "id": "f2e728b9-79e7-47b7-875d-54c89bf2a283"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "27323a99-eac1-4908-8c49-847af994b40a",
+            "is_current": true,
+            "source_id": "2346404",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 3,
           "quantity": "1.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -212,13 +467,28 @@
             "PROFILE_REPRESENTATIVENESS_REVIEW"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "ORANGE",
+          "food_identity": {
+            "canonical_code": "ORANGE",
+            "canonical_name": "Апельсин",
+            "id": "8d99c128-8bc8-4464-8dac-2162e2e37517"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "22962665-8532-4bbf-8854-2b1d0755f7f4",
+            "is_current": true,
+            "source_id": "746771",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 4,
           "quantity": "0.500000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         }
       ],
@@ -226,8 +496,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "main",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "FNS2_ORANGE_PORK_CHOPS",
-      "recipe_version_id": "b694862c-44ad-43a4-a26c-d6e01fbf1b51",
+      "recipe_version_id": "0ff2a436-40e1-4054-af83-e1889a566e09",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -239,13 +511,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "acb0c5d1-cefb-4cec-a466-448726823d5c",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "71d2dc57-6f8a-4fba-a3a6-c21aebb95ce4",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-95194:estimate",
           "food_code": "BREADCRUMBS",
+          "food_identity": {
+            "canonical_code": "BREADCRUMBS",
+            "canonical_name": "Сухари панировочные",
+            "id": "6ac2691e-a108-4848-9d51-7d9e0a09b63d"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "71d2dc57-6f8a-4fba-a3a6-c21aebb95ce4",
+            "is_current": true,
+            "source_id": "174928",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 4,
           "quantity": "120.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         }
       ],
@@ -253,8 +548,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "main",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "FNS4_OVEN_FRIED_FISH",
-      "recipe_version_id": "65d33e16-6741-4711-9520-3153c0c2f255",
+      "recipe_version_id": "60ff55ae-9775-4800-8d7b-59e7fb8cdbaf",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -266,13 +563,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "36d650e3-6d81-42d6-baa4-3d19bec0733d",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "fb18165b-08bc-47c7-918f-61fa30f78b8b",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-90594:estimate",
           "food_code": "LENTILS_DRY",
+          "food_identity": {
+            "canonical_code": "LENTILS_DRY",
+            "canonical_name": "Чечевица сухая",
+            "id": "dca2af8a-78b7-48e8-a2e9-e4f87a0f9d76"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "fb18165b-08bc-47c7-918f-61fa30f78b8b",
+            "is_current": true,
+            "source_id": "2644283",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 1,
           "quantity": "240.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -281,13 +601,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "47c3325c-f26c-465a-bffb-14ea055e8c9d",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "38f440a3-1f39-4e52-a25e-793f5bbbf4e3",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-85855:estimate",
           "food_code": "ONION_YELLOW",
+          "food_identity": {
+            "canonical_code": "ONION_YELLOW",
+            "canonical_name": "Лук репчатый жёлтый",
+            "id": "16ed0412-01b2-45ef-8867-1a2e15f91ed8"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "38f440a3-1f39-4e52-a25e-793f5bbbf4e3",
+            "is_current": true,
+            "source_id": "790646",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 4,
           "quantity": "120.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -296,13 +639,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "986ff482-0de5-4660-8fc5-8dfbcd8576d1",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "77a4beaa-e92e-4890-918b-aa23bebc1466",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-86559:estimate",
           "food_code": "CARROT",
+          "food_identity": {
+            "canonical_code": "CARROT",
+            "canonical_name": "Морковь",
+            "id": "45c4495c-f431-4681-96ac-f60d04c839de"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "77a4beaa-e92e-4890-918b-aa23bebc1466",
+            "is_current": true,
+            "source_id": "2258586",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 6,
           "quantity": "2.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         }
       ],
@@ -310,8 +676,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "main",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "FNS5_BAKED_LENTILS_CASSEROLE",
-      "recipe_version_id": "b5a99344-c59d-4e22-920e-c7d9e2c3bd35",
+      "recipe_version_id": "711534b8-736a-488c-a9d2-cdfa06c93073",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -323,13 +691,36 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "0061edc1-8494-4373-88eb-2f523224733e",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "12c639c1-b144-488f-aff2-f3a1fe3881a1",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "TOMATO",
+          "food_identity": {
+            "canonical_code": "TOMATO",
+            "canonical_name": "Томат",
+            "id": "1de67d1f-8013-49d9-a9f4-5de1ee3cc62e"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "12c639c1-b144-488f-aff2-f3a1fe3881a1",
+            "is_current": true,
+            "source_id": "170457",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 1,
           "quantity": "240.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -338,13 +729,28 @@
             "FOOD_FORM_MISMATCH"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "APPLE",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "APPLE",
+            "canonical_name": "Яблоко",
+            "id": "01837d6f-f7f7-44c1-9fa6-22e91962a7d7"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "7d7cc7de-bc2c-469f-b9c9-26bbb2eb6406",
+            "is_current": true,
+            "source_id": "1750341",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 2,
           "quantity": "120.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -353,13 +759,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "47c3325c-f26c-465a-bffb-14ea055e8c9d",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "38f440a3-1f39-4e52-a25e-793f5bbbf4e3",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-85855:estimate",
           "food_code": "ONION_YELLOW",
+          "food_identity": {
+            "canonical_code": "ONION_YELLOW",
+            "canonical_name": "Лук репчатый жёлтый",
+            "id": "16ed0412-01b2-45ef-8867-1a2e15f91ed8"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "38f440a3-1f39-4e52-a25e-793f5bbbf4e3",
+            "is_current": true,
+            "source_id": "790646",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 3,
           "quantity": "60.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -368,13 +797,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "6e83ade5-0f38-4eb3-9c6f-8b9389ba8b05",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "7f5e6515-28d4-4089-967b-298ae9ac4f23",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-84479:estimate",
           "food_code": "GARLIC",
+          "food_identity": {
+            "canonical_code": "GARLIC",
+            "canonical_name": "Чеснок",
+            "id": "a5696758-21ed-4e79-a9bd-2c9f7aa9f900"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "7f5e6515-28d4-4089-967b-298ae9ac4f23",
+            "is_current": true,
+            "source_id": "1104647",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 5,
           "quantity": "5.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         }
       ],
@@ -382,8 +834,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "other",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "HARV6_FRESH_TOMATO_SALSA",
-      "recipe_version_id": "f0a4d20d-e9b7-4bde-ad3a-7ac2a29f445c",
+      "recipe_version_id": "b02f6019-e7d9-4f2f-8246-f953fa73618b",
       "technical_gate1_suitable": false,
       "version_number": 2
     },
@@ -395,13 +849,28 @@
             "FOOD_FORM_MISMATCH"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "PASTA_DRY",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "PASTA_DRY",
+            "canonical_name": "Макаронные изделия сухие",
+            "id": "f00da5bb-a9bc-4658-8acf-e6ff1201e65c"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "c9a5274a-94c4-4e52-b8cb-d8d7c756f5c2",
+            "is_current": true,
+            "source_id": "168927",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 1,
           "quantity": "120.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -410,13 +879,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "47c3325c-f26c-465a-bffb-14ea055e8c9d",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "38f440a3-1f39-4e52-a25e-793f5bbbf4e3",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-85855:estimate",
           "food_code": "ONION_YELLOW",
+          "food_identity": {
+            "canonical_code": "ONION_YELLOW",
+            "canonical_name": "Лук репчатый жёлтый",
+            "id": "16ed0412-01b2-45ef-8867-1a2e15f91ed8"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "38f440a3-1f39-4e52-a25e-793f5bbbf4e3",
+            "is_current": true,
+            "source_id": "790646",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 2,
           "quantity": "60.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -425,13 +917,28 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "CUCUMBER",
+          "food_identity": {
+            "canonical_code": "CUCUMBER",
+            "canonical_name": "Огурец",
+            "id": "dbce868b-42fb-4268-9cc5-4fcf51cc3d90"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "5b3fc5e8-6b11-4356-b159-84ffe94f86e8",
+            "is_current": true,
+            "source_id": "2346406",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 3,
           "quantity": "120.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -440,28 +947,76 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "946e3d42-f5f5-4b28-ad8d-16b1bd7f8407",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "bd388cb0-441f-44a8-a888-6110ea00962b",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-86623:estimate",
           "food_code": "BELL_PEPPER_GREEN",
+          "food_identity": {
+            "canonical_code": "BELL_PEPPER_GREEN",
+            "canonical_name": "Перец сладкий зелёный",
+            "id": "0c4486d5-1fb4-4900-b5ec-8d0c6aac58aa"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "bd388cb0-441f-44a8-a888-6110ea00962b",
+            "is_current": true,
+            "source_id": "2258588",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 4,
           "quantity": "60.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
-          "accepted_repository_evidence_resolves": false,
+          "accepted_repository_evidence_resolves": true,
           "assessment_issues": [
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "90e6f323-1b84-4e74-af3a-141a8888c421",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "f976eae9-e311-47ac-baf4-8886a1bfead3",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "BLACK_PEPPER",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "BLACK_PEPPER",
+            "canonical_name": "Перец чёрный молотый",
+            "id": "eb5bc05a-bd5a-46ee-b3da-fe411b4fb435"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "f976eae9-e311-47ac-baf4-8886a1bfead3",
+            "is_current": true,
+            "source_id": "170931",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 8,
           "quantity": "1.250000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "ALREADY_ACCEPTED_EVIDENCE_REBIND",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [
+            "FDC-PORTION-87560:exact"
+          ],
           "unit": "ml"
         }
       ],
@@ -469,8 +1024,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "salad",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "HARV6_GARDEN_PASTA_SALAD",
-      "recipe_version_id": "e0674b94-d1ac-4faf-bcd4-0838c27ed0b6",
+      "recipe_version_id": "e25b6b60-f755-40bf-9af6-3e98a6df5acb",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -482,13 +1039,28 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [],
           "evidence_key": "INFOODS-SPINACH-RAW:estimate",
           "food_code": "SPINACH",
+          "food_identity": {
+            "canonical_code": "SPINACH",
+            "canonical_name": "Шпинат",
+            "id": "47655c7d-9334-48d4-afca-2dccc9ed7cbf"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "f7fbe506-8717-47fd-b84b-bf724f43e226",
+            "is_current": true,
+            "source_id": "1999633",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 1,
           "quantity": "240.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -497,13 +1069,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "7279668c-a95e-4898-bd2d-a458796a5c30",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "966050c3-4e58-4d1d-9a1e-2e75927fc0b2",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-93515:estimate",
           "food_code": "BANANA",
+          "food_identity": {
+            "canonical_code": "BANANA",
+            "canonical_name": "Банан",
+            "id": "ffbeee5b-637e-4001-8f86-b278caffcb9c"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "966050c3-4e58-4d1d-9a1e-2e75927fc0b2",
+            "is_current": true,
+            "source_id": "1105314",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 2,
           "quantity": "1.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -513,13 +1108,28 @@
             "PROFILE_REPRESENTATIVENESS_REVIEW"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": "FDC-PORTION-89193:estimate",
           "food_code": "APPLE",
+          "food_identity": {
+            "canonical_code": "APPLE",
+            "canonical_name": "Яблоко",
+            "id": "01837d6f-f7f7-44c1-9fa6-22e91962a7d7"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "7d7cc7de-bc2c-469f-b9c9-26bbb2eb6406",
+            "is_current": true,
+            "source_id": "1750341",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 5,
           "quantity": "1.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         }
       ],
@@ -527,8 +1137,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "other",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "SNAP2_SIMPLE_GREEN_SMOOTHIE",
-      "recipe_version_id": "a8337d03-f702-4e05-812a-1996efde1f4a",
+      "recipe_version_id": "e94bdb01-ae2e-4918-b5e4-4c4b25dd488b",
       "technical_gate1_suitable": false,
       "version_number": 2
     },
@@ -540,13 +1152,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "8bcf4302-3d68-4ccb-9284-d15ebd87cdcb",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "f9a57c45-a543-4571-b89e-66ecf08907af",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-84287:estimate",
           "food_code": "PINEAPPLE",
+          "food_identity": {
+            "canonical_code": "PINEAPPLE",
+            "canonical_name": "Ананас",
+            "id": "e40b167e-f8a9-4199-8b12-dd64946e270a"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "f9a57c45-a543-4571-b89e-66ecf08907af",
+            "is_current": true,
+            "source_id": "2346398",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 1,
           "quantity": "240.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -556,13 +1191,28 @@
             "PROFILE_REPRESENTATIVENESS_REVIEW"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "PEACH",
+          "food_identity": {
+            "canonical_code": "PEACH",
+            "canonical_name": "Персик",
+            "id": "6fe90e47-1522-45db-bd9b-34c7c0f7d96a"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "fb92f319-82bb-422d-905c-6864038e4518",
+            "is_current": true,
+            "source_id": "325430",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 2,
           "quantity": "1.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -571,13 +1221,36 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "7279668c-a95e-4898-bd2d-a458796a5c30",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "966050c3-4e58-4d1d-9a1e-2e75927fc0b2",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "BANANA",
+          "food_identity": {
+            "canonical_code": "BANANA",
+            "canonical_name": "Банан",
+            "id": "ffbeee5b-637e-4001-8f86-b278caffcb9c"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "966050c3-4e58-4d1d-9a1e-2e75927fc0b2",
+            "is_current": true,
+            "source_id": "1105314",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 3,
           "quantity": "1.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         }
       ],
@@ -585,8 +1258,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "other",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "SNAP3_GRILLED_FRUIT",
-      "recipe_version_id": "b76b4ab2-fe33-41d8-ba74-c287a5cbcdb3",
+      "recipe_version_id": "5b0ed741-8a51-443d-80d5-279c8aefe22d",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -598,28 +1273,68 @@
             "FOOD_FORM_MISMATCH"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "CHICKEN_THIGH",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "CHICKEN_THIGH",
+            "canonical_name": "Бедро куриное без кожи",
+            "id": "68d99e60-d3f4-4ffc-a244-ea7c81d20f51"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "85b906aa-004c-4d6d-85ae-b254267c45e1",
+            "is_current": true,
+            "source_id": "2646171",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 1,
           "quantity": "4.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
-          "accepted_repository_evidence_resolves": false,
+          "accepted_repository_evidence_resolves": true,
           "assessment_issues": [
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "90e6f323-1b84-4e74-af3a-141a8888c421",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "f976eae9-e311-47ac-baf4-8886a1bfead3",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "BLACK_PEPPER",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "BLACK_PEPPER",
+            "canonical_name": "Перец чёрный молотый",
+            "id": "eb5bc05a-bd5a-46ee-b3da-fe411b4fb435"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "f976eae9-e311-47ac-baf4-8886a1bfead3",
+            "is_current": true,
+            "source_id": "170931",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 4,
           "quantity": "2.500000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "ALREADY_ACCEPTED_EVIDENCE_REBIND",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [
+            "FDC-PORTION-87560:exact"
+          ],
           "unit": "ml"
         },
         {
@@ -628,13 +1343,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "47c3325c-f26c-465a-bffb-14ea055e8c9d",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "38f440a3-1f39-4e52-a25e-793f5bbbf4e3",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-85862:estimate",
           "food_code": "ONION_YELLOW",
+          "food_identity": {
+            "canonical_code": "ONION_YELLOW",
+            "canonical_name": "Лук репчатый жёлтый",
+            "id": "16ed0412-01b2-45ef-8867-1a2e15f91ed8"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "38f440a3-1f39-4e52-a25e-793f5bbbf4e3",
+            "is_current": true,
+            "source_id": "790646",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 5,
           "quantity": "1.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -643,13 +1381,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "6e83ade5-0f38-4eb3-9c6f-8b9389ba8b05",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "7f5e6515-28d4-4089-967b-298ae9ac4f23",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-84480:estimate",
           "food_code": "GARLIC",
+          "food_identity": {
+            "canonical_code": "GARLIC",
+            "canonical_name": "Чеснок",
+            "id": "a5696758-21ed-4e79-a9bd-2c9f7aa9f900"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "7f5e6515-28d4-4089-967b-298ae9ac4f23",
+            "is_current": true,
+            "source_id": "1104647",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 6,
           "quantity": "3.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -658,13 +1419,36 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "932a8814-d39e-481d-89cf-0dc76afc9625",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "7a5316bf-0549-4fc6-927e-4ed1e5fd7e3f",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "THYME_DRIED",
+          "food_identity": {
+            "canonical_code": "THYME_DRIED",
+            "canonical_name": "Тимьян сушёный",
+            "id": "0c91aed4-d7bf-4954-aa77-1e3700895548"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "7a5316bf-0549-4fc6-927e-4ed1e5fd7e3f",
+            "is_current": true,
+            "source_id": "170938",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 7,
           "quantity": "2.500000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -673,13 +1457,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "e7f35ddc-95d0-4f7e-9fef-aac456179ee6",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "3cf55445-5766-4e1d-979e-21c225dc90c2",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-88455:estimate",
           "food_code": "ROSEMARY_DRIED",
+          "food_identity": {
+            "canonical_code": "ROSEMARY_DRIED",
+            "canonical_name": "Розмарин сушёный",
+            "id": "1ffad52b-9207-402a-bd3b-5889c06b6d44"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "3cf55445-5766-4e1d-979e-21c225dc90c2",
+            "is_current": true,
+            "source_id": "171333",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 8,
           "quantity": "2.500000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -688,13 +1495,28 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "SPINACH",
+          "food_identity": {
+            "canonical_code": "SPINACH",
+            "canonical_name": "Шпинат",
+            "id": "47655c7d-9334-48d4-afca-2dccc9ed7cbf"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "f7fbe506-8717-47fd-b84b-bf724f43e226",
+            "is_current": true,
+            "source_id": "1999633",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 10,
           "quantity": "1.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         }
       ],
@@ -702,8 +1524,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "main",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "SNAP4_BRAISED_CHICKEN_SPINACH",
-      "recipe_version_id": "22fa8976-3b3c-4e38-a656-8391a5af16be",
+      "recipe_version_id": "31139e13-9fef-4c0d-a343-90d4eb87847c",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -715,13 +1539,36 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "cfba74c5-aaf2-4385-87e6-2e566c37c53a",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "1ff79eff-6bdd-4ae9-a855-0e537004cd1f",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "RICE_BROWN",
+          "food_identity": {
+            "canonical_code": "RICE_BROWN",
+            "canonical_name": "Рис бурый длиннозёрный",
+            "id": "41c599fd-90a7-4d28-9e4d-813dd239b7f5"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "1ff79eff-6bdd-4ae9-a855-0e537004cd1f",
+            "is_current": true,
+            "source_id": "2512380",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 1,
           "quantity": "360.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -730,28 +1577,76 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "32f7bbde-464b-412a-b690-e8bdd11c479c",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "00643548-7b9e-4842-b58c-bc4d14b3f5e3",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "ALMONDS_RAW",
+          "food_identity": {
+            "canonical_code": "ALMONDS_RAW",
+            "canonical_name": "Миндаль сырой",
+            "id": "6303af8e-a64e-40cc-bb08-7180adf748ff"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "00643548-7b9e-4842-b58c-bc4d14b3f5e3",
+            "is_current": true,
+            "source_id": "2346393",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 3,
           "quantity": "60.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
-          "accepted_repository_evidence_resolves": false,
+          "accepted_repository_evidence_resolves": true,
           "assessment_issues": [
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "90e6f323-1b84-4e74-af3a-141a8888c421",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "f976eae9-e311-47ac-baf4-8886a1bfead3",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "BLACK_PEPPER",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "BLACK_PEPPER",
+            "canonical_name": "Перец чёрный молотый",
+            "id": "eb5bc05a-bd5a-46ee-b3da-fe411b4fb435"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "f976eae9-e311-47ac-baf4-8886a1bfead3",
+            "is_current": true,
+            "source_id": "170931",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 6,
           "quantity": "1.250000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "ALREADY_ACCEPTED_EVIDENCE_REBIND",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [
+            "FDC-PORTION-87560:exact"
+          ],
           "unit": "ml"
         }
       ],
@@ -759,8 +1654,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "side",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "SNAP4_BROWN_RICE_PILAF",
-      "recipe_version_id": "514b163c-9b78-4b35-90d3-b8655f0bd049",
+      "recipe_version_id": "968551d6-3947-43f1-88c3-4299e37b0f61",
       "technical_gate1_suitable": false,
       "version_number": 2
     },
@@ -772,13 +1669,28 @@
             "FOOD_FORM_MISMATCH"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "LEMON",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "LEMON",
+            "canonical_name": "Лимон",
+            "id": "834fcdc7-67f6-4a4b-ab09-9c9d272376cf"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "6e6bdf41-f3b4-4b32-8479-40c1902f7b6a",
+            "is_current": true,
+            "source_id": "167746",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 2,
           "quantity": "15.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         }
       ],
@@ -786,8 +1698,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "main",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "SNAP4_DILLED_FISH_FILLETS",
-      "recipe_version_id": "f282f7cd-3dd1-4ff1-a745-22db0a3d9469",
+      "recipe_version_id": "0bd432ad-ced0-49fc-a6aa-42a01b2be7ba",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -800,13 +1714,28 @@
             "PROFILE_REPRESENTATIVENESS_REVIEW"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": "FDC-PORTION-187517:estimate",
           "food_code": "PEAR",
+          "food_identity": {
+            "canonical_code": "PEAR",
+            "canonical_name": "Груша",
+            "id": "d1fb41ce-cf47-48f9-ae25-871d3e8f4b3c"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "9e5aca2a-20ea-44fb-9e0e-620126f9c602",
+            "is_current": true,
+            "source_id": "746773",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 1,
           "quantity": "4.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -815,13 +1744,28 @@
             "FOOD_FORM_MISMATCH"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "ORANGE",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "ORANGE",
+            "canonical_name": "Апельсин",
+            "id": "8d99c128-8bc8-4464-8dac-2162e2e37517"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "22962665-8532-4bbf-8854-2b1d0755f7f4",
+            "is_current": true,
+            "source_id": "746771",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 2,
           "quantity": "180.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         }
       ],
@@ -829,8 +1773,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "other",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "SNAP4_PEAR_ORANGE_SAUCE",
-      "recipe_version_id": "f5fa56d7-db3b-4142-a3de-329a6785a140",
+      "recipe_version_id": "713825c4-f78f-40cd-9f34-9bf97ec604d7",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -842,13 +1788,28 @@
             "IDENTITY_MISMATCH"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "POTATO",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "POTATO",
+            "canonical_name": "Картофель",
+            "id": "2e141776-b4e2-440c-862e-368852d407c8"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "edccbdce-3d8b-48d1-9bce-c91f38b362aa",
+            "is_current": true,
+            "source_id": "2346403",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 1,
           "quantity": "680.388555",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "g"
         },
         {
@@ -857,28 +1818,76 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "47c3325c-f26c-465a-bffb-14ea055e8c9d",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "38f440a3-1f39-4e52-a25e-793f5bbbf4e3",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-85860:estimate",
           "food_code": "ONION_YELLOW",
+          "food_identity": {
+            "canonical_code": "ONION_YELLOW",
+            "canonical_name": "Лук репчатый жёлтый",
+            "id": "16ed0412-01b2-45ef-8867-1a2e15f91ed8"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "38f440a3-1f39-4e52-a25e-793f5bbbf4e3",
+            "is_current": true,
+            "source_id": "790646",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 4,
           "quantity": "1.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
-          "accepted_repository_evidence_resolves": false,
+          "accepted_repository_evidence_resolves": true,
           "assessment_issues": [
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "90e6f323-1b84-4e74-af3a-141a8888c421",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "f976eae9-e311-47ac-baf4-8886a1bfead3",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "BLACK_PEPPER",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "BLACK_PEPPER",
+            "canonical_name": "Перец чёрный молотый",
+            "id": "eb5bc05a-bd5a-46ee-b3da-fe411b4fb435"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "f976eae9-e311-47ac-baf4-8886a1bfead3",
+            "is_current": true,
+            "source_id": "170931",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 6,
           "quantity": "1.250000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "ALREADY_ACCEPTED_EVIDENCE_REBIND",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [
+            "FDC-PORTION-87560:exact"
+          ],
           "unit": "ml"
         }
       ],
@@ -886,8 +1895,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "breakfast",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "SNAP4_SPANISH_FRITTATA",
-      "recipe_version_id": "fbd2bd41-d3c6-4a34-b0e3-0dc440c6fcef",
+      "recipe_version_id": "e3286d3f-6bc0-48c0-9de5-b2350c809741",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -899,13 +1910,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "f8f0dcb0-f265-42fc-9402-562e240d77d5",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "47278df8-06c9-4fbb-82ea-9eb5ce3930a6",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-85856:estimate",
           "food_code": "ONION_RED",
+          "food_identity": {
+            "canonical_code": "ONION_RED",
+            "canonical_name": "Лук красный",
+            "id": "3d46aa6b-fd9a-494f-825a-8594d87b8e38"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "47278df8-06c9-4fbb-82ea-9eb5ce3930a6",
+            "is_current": true,
+            "source_id": "790577",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 2,
           "quantity": "120.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -914,13 +1948,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "6e83ade5-0f38-4eb3-9c6f-8b9389ba8b05",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "7f5e6515-28d4-4089-967b-298ae9ac4f23",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-84480:estimate",
           "food_code": "GARLIC",
+          "food_identity": {
+            "canonical_code": "GARLIC",
+            "canonical_name": "Чеснок",
+            "id": "a5696758-21ed-4e79-a9bd-2c9f7aa9f900"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "7f5e6515-28d4-4089-967b-298ae9ac4f23",
+            "is_current": true,
+            "source_id": "1104647",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 3,
           "quantity": "1.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -929,13 +1986,28 @@
             "FOOD_FORM_MISMATCH"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "POTATO",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "POTATO",
+            "canonical_name": "Картофель",
+            "id": "2e141776-b4e2-440c-862e-368852d407c8"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "edccbdce-3d8b-48d1-9bce-c91f38b362aa",
+            "is_current": true,
+            "source_id": "2346403",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 4,
           "quantity": "3.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -944,13 +2016,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "986ff482-0de5-4660-8fc5-8dfbcd8576d1",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "77a4beaa-e92e-4890-918b-aa23bebc1466",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-86557:estimate",
           "food_code": "CARROT",
+          "food_identity": {
+            "canonical_code": "CARROT",
+            "canonical_name": "Морковь",
+            "id": "45c4495c-f431-4681-96ac-f60d04c839de"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "77a4beaa-e92e-4890-918b-aa23bebc1466",
+            "is_current": true,
+            "source_id": "2258586",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 5,
           "quantity": "180.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -959,13 +2054,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "c8540107-38e0-4f27-a359-50e6d4a0628b",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "b8023f60-6c9b-4aa2-a4b9-9604546962b8",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-83012:estimate",
           "food_code": "ASPARAGUS",
+          "food_identity": {
+            "canonical_code": "ASPARAGUS",
+            "canonical_name": "Спаржа зелёная",
+            "id": "073d839b-1304-4b63-984c-9171051f1f84"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "b8023f60-6c9b-4aa2-a4b9-9604546962b8",
+            "is_current": true,
+            "source_id": "2710823",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 6,
           "quantity": "180.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -974,13 +2092,28 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [],
           "evidence_key": "FDC-PORTION-85758:estimate",
           "food_code": "GREEN_BEANS",
+          "food_identity": {
+            "canonical_code": "GREEN_BEANS",
+            "canonical_name": "Фасоль зелёная стручковая",
+            "id": "056e2912-437a-44d7-8071-2693e8d9f1d8"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "2ceda1b2-5515-43f8-a07e-14eeb677a4d5",
+            "is_current": true,
+            "source_id": "2346400",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 7,
           "quantity": "180.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -989,28 +2122,76 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "2f1be0c2-a32a-4ea2-983f-0d3e6a390404",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "78c33c6f-6261-4bcf-a7ac-6b6788a2c85d",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "RADISH",
+          "food_identity": {
+            "canonical_code": "RADISH",
+            "canonical_name": "Редис",
+            "id": "16ca9dc9-1627-41f1-9fe6-c4a80b834c56"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "78c33c6f-6261-4bcf-a7ac-6b6788a2c85d",
+            "is_current": true,
+            "source_id": "2747665",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 8,
           "quantity": "120.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
-          "accepted_repository_evidence_resolves": false,
+          "accepted_repository_evidence_resolves": true,
           "assessment_issues": [
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "90e6f323-1b84-4e74-af3a-141a8888c421",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "f976eae9-e311-47ac-baf4-8886a1bfead3",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "BLACK_PEPPER",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "BLACK_PEPPER",
+            "canonical_name": "Перец чёрный молотый",
+            "id": "eb5bc05a-bd5a-46ee-b3da-fe411b4fb435"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "f976eae9-e311-47ac-baf4-8886a1bfead3",
+            "is_current": true,
+            "source_id": "170931",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 10,
           "quantity": "1.250000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "ALREADY_ACCEPTED_EVIDENCE_REBIND",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [
+            "FDC-PORTION-87560:exact"
+          ],
           "unit": "ml"
         }
       ],
@@ -1018,8 +2199,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "side",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "SNAP4_SPRING_VEGETABLE_SAUTE",
-      "recipe_version_id": "ef9300cb-704b-4e27-8b01-6ceac505ea78",
+      "recipe_version_id": "ff22916a-0ca0-48fe-9c69-85c4dd0a9ce4",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -1031,13 +2214,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "645cb0bd-ec65-49ce-81a1-4b11a9e6af5d",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "bdf9e9ce-483e-40ee-bfab-bc963e4e8167",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-86201:estimate",
           "food_code": "WALNUTS_RAW",
+          "food_identity": {
+            "canonical_code": "WALNUTS_RAW",
+            "canonical_name": "Орех грецкий сырой",
+            "id": "8d440688-a8f9-4861-bb34-8d4be54f334f"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "bdf9e9ce-483e-40ee-bfab-bc963e4e8167",
+            "is_current": true,
+            "source_id": "2346394",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 1,
           "quantity": "60.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -1046,13 +2252,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "6e83ade5-0f38-4eb3-9c6f-8b9389ba8b05",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "7f5e6515-28d4-4089-967b-298ae9ac4f23",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-84480:estimate",
           "food_code": "GARLIC",
+          "food_identity": {
+            "canonical_code": "GARLIC",
+            "canonical_name": "Чеснок",
+            "id": "a5696758-21ed-4e79-a9bd-2c9f7aa9f900"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "7f5e6515-28d4-4089-967b-298ae9ac4f23",
+            "is_current": true,
+            "source_id": "1104647",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 3,
           "quantity": "2.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -1061,13 +2290,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "bae84c4a-d014-4e33-ab69-da21f67e17c4",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "7d04e9d5-2671-40d7-8050-b9ef536c98fa",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-119057:estimate",
           "food_code": "KALE",
+          "food_identity": {
+            "canonical_code": "KALE",
+            "canonical_name": "Капуста кейл",
+            "id": "c1ec0f8f-2152-495d-b202-e35cfd3c813d"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "7d04e9d5-2671-40d7-8050-b9ef536c98fa",
+            "is_current": true,
+            "source_id": "323505",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 4,
           "quantity": "960.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -1076,13 +2328,36 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "73f64021-27e8-40f2-be07-54198a14f984",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "83a521f2-3ab4-407f-97ab-0b987edefe48",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "RAISINS_GOLDEN",
+          "food_identity": {
+            "canonical_code": "RAISINS_GOLDEN",
+            "canonical_name": "Изюм золотистый",
+            "id": "0d0da8a0-0298-4079-88a9-6bb78790fefa"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "83a521f2-3ab4-407f-97ab-0b987edefe48",
+            "is_current": true,
+            "source_id": "168164",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 5,
           "quantity": "120.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         }
       ],
@@ -1090,41 +2365,93 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "side",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "SNAP5_KALE_NUTS_RAISINS",
-      "recipe_version_id": "d413b56c-5c14-45dc-8cca-63650e3675c8",
+      "recipe_version_id": "4336ccb0-3359-404b-9334-296b5494e034",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
     {
       "blocking_ingredient_positions": [
         {
-          "accepted_repository_evidence_resolves": false,
+          "accepted_repository_evidence_resolves": true,
           "assessment_issues": [
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "0f8c64e8-6d43-4608-9cdd-44d2bbd2c8fc",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "922d0db4-5f72-4b1c-bce2-fd4316724ce8",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "EGG",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "EGG",
+            "canonical_name": "Яйцо куриное целое",
+            "id": "5ffe2b1c-3503-46ee-8991-9a4a6e19aed5"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "922d0db4-5f72-4b1c-bce2-fd4316724ce8",
+            "is_current": true,
+            "source_id": "748967",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 1,
           "quantity": "6.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "ALREADY_ACCEPTED_EVIDENCE_REBIND",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [
+            "FDC-PORTION-193781:exact"
+          ],
           "unit": "pcs"
         },
         {
-          "accepted_repository_evidence_resolves": false,
+          "accepted_repository_evidence_resolves": true,
           "assessment_issues": [
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "90e6f323-1b84-4e74-af3a-141a8888c421",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "f976eae9-e311-47ac-baf4-8886a1bfead3",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "BLACK_PEPPER",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "BLACK_PEPPER",
+            "canonical_name": "Перец чёрный молотый",
+            "id": "eb5bc05a-bd5a-46ee-b3da-fe411b4fb435"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "f976eae9-e311-47ac-baf4-8886a1bfead3",
+            "is_current": true,
+            "source_id": "170931",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 4,
           "quantity": "0.625000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "ALREADY_ACCEPTED_EVIDENCE_REBIND",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [
+            "FDC-PORTION-87560:exact"
+          ],
           "unit": "ml"
         }
       ],
@@ -1132,8 +2459,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "other",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "SNAP6_HEAVENLY_DEVILED_EGGS",
-      "recipe_version_id": "83879891-5ff9-46b8-b715-14f24e28589a",
+      "recipe_version_id": "7140488a-dff9-472d-a471-c9cc20dfe901",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -1146,13 +2475,28 @@
             "PROFILE_REPRESENTATIVENESS_REVIEW"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": "FDC-PORTION-119282:estimate",
           "food_code": "PEACH",
+          "food_identity": {
+            "canonical_code": "PEACH",
+            "canonical_name": "Персик",
+            "id": "6fe90e47-1522-45db-bd9b-34c7c0f7d96a"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "fb92f319-82bb-422d-905c-6864038e4518",
+            "is_current": true,
+            "source_id": "325430",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 1,
           "quantity": "960.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -1162,13 +2506,28 @@
             "PROFILE_REPRESENTATIVENESS_REVIEW"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": "FDC-PORTION-92887:estimate",
           "food_code": "MARGARINE",
+          "food_identity": {
+            "canonical_code": "MARGARINE",
+            "canonical_name": "Маргарин",
+            "id": "9d05b686-2aa0-4a45-aa0d-e29720b1deb2"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "c2584a81-9143-4fce-8c82-87847b318564",
+            "is_current": true,
+            "source_id": "173587",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 2,
           "quantity": "30.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -1177,13 +2536,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "87960de4-5c94-4dbc-9817-09d6eedf2a65",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "87e53bdd-e7e7-45cf-ba5c-239b0e755b7f",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-85466:estimate",
           "food_code": "FLOUR_WHEAT",
+          "food_identity": {
+            "canonical_code": "FLOUR_WHEAT",
+            "canonical_name": "Мука пшеничная",
+            "id": "e31e552e-03d0-443f-9296-8a31b413f1df"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "87e53bdd-e7e7-45cf-ba5c-239b0e755b7f",
+            "is_current": true,
+            "source_id": "790018",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 5,
           "quantity": "60.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -1192,13 +2574,28 @@
             "FOOD_FORM_MISMATCH"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "LEMON",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "LEMON",
+            "canonical_name": "Лимон",
+            "id": "834fcdc7-67f6-4a4b-ab09-9c9d272376cf"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "6e6bdf41-f3b4-4b32-8479-40c1902f7b6a",
+            "is_current": true,
+            "source_id": "167746",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 7,
           "quantity": "5.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         }
       ],
@@ -1206,8 +2603,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "other",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "SNAP6_PEACH_CRISP",
-      "recipe_version_id": "1ece28ab-8bdd-46a6-a535-3bc45ddab9fa",
+      "recipe_version_id": "26d4f6ca-f29f-46e8-8e44-4ecb4e07d5e3",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -1219,28 +2618,76 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "6e83ade5-0f38-4eb3-9c6f-8b9389ba8b05",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "7f5e6515-28d4-4089-967b-298ae9ac4f23",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-84480:estimate",
           "food_code": "GARLIC",
+          "food_identity": {
+            "canonical_code": "GARLIC",
+            "canonical_name": "Чеснок",
+            "id": "a5696758-21ed-4e79-a9bd-2c9f7aa9f900"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "7f5e6515-28d4-4089-967b-298ae9ac4f23",
+            "is_current": true,
+            "source_id": "1104647",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 3,
           "quantity": "4.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
-          "accepted_repository_evidence_resolves": false,
+          "accepted_repository_evidence_resolves": true,
           "assessment_issues": [
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "90e6f323-1b84-4e74-af3a-141a8888c421",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "f976eae9-e311-47ac-baf4-8886a1bfead3",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "BLACK_PEPPER",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "BLACK_PEPPER",
+            "canonical_name": "Перец чёрный молотый",
+            "id": "eb5bc05a-bd5a-46ee-b3da-fe411b4fb435"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "f976eae9-e311-47ac-baf4-8886a1bfead3",
+            "is_current": true,
+            "source_id": "170931",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 6,
           "quantity": "5.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "ALREADY_ACCEPTED_EVIDENCE_REBIND",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [
+            "FDC-PORTION-87560:exact"
+          ],
           "unit": "ml"
         }
       ],
@@ -1248,8 +2695,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "side",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "SNAP6_SEARED_GREENS",
-      "recipe_version_id": "8c012005-c500-4757-81af-00f53fad9f3d",
+      "recipe_version_id": "ca985c54-b645-4596-8ffd-f5d5b7f927a5",
       "technical_gate1_suitable": false,
       "version_number": 2
     },
@@ -1261,13 +2710,28 @@
             "FOOD_FORM_MISMATCH"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "SPINACH",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "SPINACH",
+            "canonical_name": "Шпинат",
+            "id": "47655c7d-9334-48d4-afca-2dccc9ed7cbf"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "f7fbe506-8717-47fd-b84b-bf724f43e226",
+            "is_current": true,
+            "source_id": "1999633",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 1,
           "quantity": "188.996821",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "g"
         },
         {
@@ -1277,13 +2741,28 @@
             "PROFILE_REPRESENTATIVENESS_REVIEW"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "APPLE",
+          "food_identity": {
+            "canonical_code": "APPLE",
+            "canonical_name": "Яблоко",
+            "id": "01837d6f-f7f7-44c1-9fa6-22e91962a7d7"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "7d7cc7de-bc2c-469f-b9c9-26bbb2eb6406",
+            "is_current": true,
+            "source_id": "1750341",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 2,
           "quantity": "1.500000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -1292,13 +2771,36 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "73f64021-27e8-40f2-be07-54198a14f984",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "83a521f2-3ab4-407f-97ab-0b987edefe48",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "RAISINS_GOLDEN",
+          "food_identity": {
+            "canonical_code": "RAISINS_GOLDEN",
+            "canonical_name": "Изюм золотистый",
+            "id": "0d0da8a0-0298-4079-88a9-6bb78790fefa"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "83a521f2-3ab4-407f-97ab-0b987edefe48",
+            "is_current": true,
+            "source_id": "168164",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 3,
           "quantity": "240.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         }
       ],
@@ -1306,8 +2808,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "salad",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "SNAP6_SPINACH_APPLE_SALAD",
-      "recipe_version_id": "19c8c313-c81d-48ac-b112-65128b3e2512",
+      "recipe_version_id": "d384586e-7a38-495a-bb2d-08748f7ad700",
       "technical_gate1_suitable": false,
       "version_number": 2
     },
@@ -1319,13 +2823,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "645cb0bd-ec65-49ce-81a1-4b11a9e6af5d",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "bdf9e9ce-483e-40ee-bfab-bc963e4e8167",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-86201:estimate",
           "food_code": "WALNUTS_RAW",
+          "food_identity": {
+            "canonical_code": "WALNUTS_RAW",
+            "canonical_name": "Орех грецкий сырой",
+            "id": "8d440688-a8f9-4861-bb34-8d4be54f334f"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "bdf9e9ce-483e-40ee-bfab-bc963e4e8167",
+            "is_current": true,
+            "source_id": "2346394",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 1,
           "quantity": "60.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -1335,13 +2862,28 @@
             "PROFILE_REPRESENTATIVENESS_REVIEW"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "APPLE",
+          "food_identity": {
+            "canonical_code": "APPLE",
+            "canonical_name": "Яблоко",
+            "id": "01837d6f-f7f7-44c1-9fa6-22e91962a7d7"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "7d7cc7de-bc2c-469f-b9c9-26bbb2eb6406",
+            "is_current": true,
+            "source_id": "1750341",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 2,
           "quantity": "2.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -1350,13 +2892,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "304cf407-a726-4ef0-8ef5-f6cf326b2c12",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "6a806d29-a684-4fa0-8706-9d4899c9d60c",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-85824:estimate",
           "food_code": "CELERY",
+          "food_identity": {
+            "canonical_code": "CELERY",
+            "canonical_name": "Сельдерей стеблевой",
+            "id": "e925fdd0-5180-4d83-9d37-fcef3619c1cb"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "6a806d29-a684-4fa0-8706-9d4899c9d60c",
+            "is_current": true,
+            "source_id": "2346405",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 3,
           "quantity": "240.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -1365,13 +2930,36 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "73f64021-27e8-40f2-be07-54198a14f984",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "83a521f2-3ab4-407f-97ab-0b987edefe48",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "RAISINS_GOLDEN",
+          "food_identity": {
+            "canonical_code": "RAISINS_GOLDEN",
+            "canonical_name": "Изюм золотистый",
+            "id": "0d0da8a0-0298-4079-88a9-6bb78790fefa"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "83a521f2-3ab4-407f-97ab-0b987edefe48",
+            "is_current": true,
+            "source_id": "168164",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 4,
           "quantity": "120.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -1380,13 +2968,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "c0b79cf6-94de-482f-884c-59c27cb04c49",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "0f8b2b80-855f-4031-bab5-6f54c5077372",
+              "version": 1
+            }
+          ],
           "evidence_key": "CNF-6979:estimate",
           "food_code": "YOGURT_GREEK_NONFAT",
+          "food_identity": {
+            "canonical_code": "YOGURT_GREEK_NONFAT",
+            "canonical_name": "Йогурт греческий обезжиренный",
+            "id": "8f64c1fd-8628-4d44-806e-51502520846e"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "0f8b2b80-855f-4031-bab5-6f54c5077372",
+            "is_current": true,
+            "source_id": "330137",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 5,
           "quantity": "60.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -1395,13 +3006,28 @@
             "FOOD_FORM_MISMATCH"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "LEMON",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "LEMON",
+            "canonical_name": "Лимон",
+            "id": "834fcdc7-67f6-4a4b-ab09-9c9d272376cf"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "6e6bdf41-f3b4-4b32-8479-40c1902f7b6a",
+            "is_current": true,
+            "source_id": "167746",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 7,
           "quantity": "5.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         }
       ],
@@ -1409,8 +3035,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "salad",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "SNAP6_WALDORF_SALAD",
-      "recipe_version_id": "b73a9120-d830-47ec-b9cc-ffe34f60ea3a",
+      "recipe_version_id": "625c34e4-b0fa-452f-a8d4-0941d4ea82e9",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -1423,13 +3051,28 @@
             "PROFILE_REPRESENTATIVENESS_REVIEW"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "APPLE",
+          "food_identity": {
+            "canonical_code": "APPLE",
+            "canonical_name": "Яблоко",
+            "id": "01837d6f-f7f7-44c1-9fa6-22e91962a7d7"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "7d7cc7de-bc2c-469f-b9c9-26bbb2eb6406",
+            "is_current": true,
+            "source_id": "1750341",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 2,
           "quantity": "4.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -1438,13 +3081,36 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "986ff482-0de5-4660-8fc5-8dfbcd8576d1",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "77a4beaa-e92e-4890-918b-aa23bebc1466",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-86558:estimate",
           "food_code": "CARROT",
+          "food_identity": {
+            "canonical_code": "CARROT",
+            "canonical_name": "Морковь",
+            "id": "45c4495c-f431-4681-96ac-f60d04c839de"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "77a4beaa-e92e-4890-918b-aa23bebc1466",
+            "is_current": true,
+            "source_id": "2258586",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 3,
           "quantity": "4.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -1453,13 +3119,36 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "694d3e87-de50-4dc1-9fa4-e3e0602c3bf6",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "eada26d5-73ba-4c17-9ac2-fc1f0bb95e70",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "GINGER",
+          "food_identity": {
+            "canonical_code": "GINGER",
+            "canonical_name": "Имбирь свежий",
+            "id": "bb378158-0d5c-4215-a76c-5dca639cbadc"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "eada26d5-73ba-4c17-9ac2-fc1f0bb95e70",
+            "is_current": true,
+            "source_id": "169231",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 4,
           "quantity": "4.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         }
       ],
@@ -1467,8 +3156,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "other",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "SNAP8_APPLE_CARROT_SOUP",
-      "recipe_version_id": "4962df56-9c3e-4906-9d16-ca339215a9de",
+      "recipe_version_id": "a3df7a2d-747b-46df-84f5-7234e6480bc0",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -1480,13 +3171,28 @@
             "FOOD_FORM_MISMATCH"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "LEMON",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "LEMON",
+            "canonical_name": "Лимон",
+            "id": "834fcdc7-67f6-4a4b-ab09-9c9d272376cf"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "6e6bdf41-f3b4-4b32-8479-40c1902f7b6a",
+            "is_current": true,
+            "source_id": "167746",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 2,
           "quantity": "15.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -1496,13 +3202,28 @@
             "PROFILE_REPRESENTATIVENESS_REVIEW"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "APPLE",
+          "food_identity": {
+            "canonical_code": "APPLE",
+            "canonical_name": "Яблоко",
+            "id": "01837d6f-f7f7-44c1-9fa6-22e91962a7d7"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "7d7cc7de-bc2c-469f-b9c9-26bbb2eb6406",
+            "is_current": true,
+            "source_id": "1750341",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 3,
           "quantity": "3.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -1511,13 +3232,36 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "946e3d42-f5f5-4b28-ad8d-16b1bd7f8407",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "bd388cb0-441f-44a8-a888-6110ea00962b",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "BELL_PEPPER_GREEN",
+          "food_identity": {
+            "canonical_code": "BELL_PEPPER_GREEN",
+            "canonical_name": "Перец сладкий зелёный",
+            "id": "0c4486d5-1fb4-4900-b5ec-8d0c6aac58aa"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "bd388cb0-441f-44a8-a888-6110ea00962b",
+            "is_current": true,
+            "source_id": "2258588",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 4,
           "quantity": "2.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -1526,13 +3270,36 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "0061edc1-8494-4373-88eb-2f523224733e",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "12c639c1-b144-488f-aff2-f3a1fe3881a1",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "TOMATO",
+          "food_identity": {
+            "canonical_code": "TOMATO",
+            "canonical_name": "Томат",
+            "id": "1de67d1f-8013-49d9-a9f4-5de1ee3cc62e"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "12c639c1-b144-488f-aff2-f3a1fe3881a1",
+            "is_current": true,
+            "source_id": "170457",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 5,
           "quantity": "3.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -1541,13 +3308,28 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "CUCUMBER",
+          "food_identity": {
+            "canonical_code": "CUCUMBER",
+            "canonical_name": "Огурец",
+            "id": "dbce868b-42fb-4268-9cc5-4fcf51cc3d90"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "5b3fc5e8-6b11-4356-b159-84ffe94f86e8",
+            "is_current": true,
+            "source_id": "2346406",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 6,
           "quantity": "2.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         }
       ],
@@ -1555,8 +3337,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "salad",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "SNAP8_SOMALI_SUMMER_SALAD",
-      "recipe_version_id": "7264a1eb-f6ee-4a7d-9dde-157bb1ad3683",
+      "recipe_version_id": "f6985bbb-fc55-4a22-a97c-fa38d56c0a9c",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -1569,13 +3353,28 @@
             "PROFILE_REPRESENTATIVENESS_REVIEW"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "APPLE",
+          "food_identity": {
+            "canonical_code": "APPLE",
+            "canonical_name": "Яблоко",
+            "id": "01837d6f-f7f7-44c1-9fa6-22e91962a7d7"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "7d7cc7de-bc2c-469f-b9c9-26bbb2eb6406",
+            "is_current": true,
+            "source_id": "1750341",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 1,
           "quantity": "6.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         }
       ],
@@ -1583,8 +3382,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "other",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "TNC6_APPLESAUCE",
-      "recipe_version_id": "7fe8b3fa-7fbe-4b2f-98a8-905dfde6c279",
+      "recipe_version_id": "0fb547b0-e802-499d-9a7d-c52e2d3e9813",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -1596,13 +3397,28 @@
             "NO_ACCEPTABLE_SOURCE"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "SPINACH",
+          "food_identity": {
+            "canonical_code": "SPINACH",
+            "canonical_name": "Шпинат",
+            "id": "47655c7d-9334-48d4-afca-2dccc9ed7cbf"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "f7fbe506-8717-47fd-b84b-bf724f43e226",
+            "is_current": true,
+            "source_id": "1999633",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 3,
           "quantity": "720.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         }
       ],
@@ -1610,8 +3426,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "breakfast",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "TNC6_EGGS_SPINACH",
-      "recipe_version_id": "1427a100-8f22-4897-a054-34fb90876ec5",
+      "recipe_version_id": "710077d1-5944-49d9-9dd5-7aacebbb01e3",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -1623,28 +3441,76 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "9d85c0db-9b9d-401e-ab7d-c6ffa9a4a8b0",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "dee80d32-d540-4920-a989-71959f58361d",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-91108:estimate",
           "food_code": "BREAD_WHOLE_WHEAT",
+          "food_identity": {
+            "canonical_code": "BREAD_WHOLE_WHEAT",
+            "canonical_name": "Хлеб цельнозерновой пшеничный",
+            "id": "932fa849-ea8a-4226-9b7a-8a9a3f5a77b2"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "dee80d32-d540-4920-a989-71959f58361d",
+            "is_current": true,
+            "source_id": "172688",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 1,
           "quantity": "2.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
-          "accepted_repository_evidence_resolves": false,
+          "accepted_repository_evidence_resolves": true,
           "assessment_issues": [
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [
+            {
+              "id": "3b65dcb5-4d6a-4a0e-a155-9043614bafbb",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "74842589-d4f8-47c9-b416-de31264cba9c",
+              "version": 1
+            }
+          ],
           "evidence_key": "FDC-PORTION-119620:estimate",
           "food_code": "CHEESE_CHEDDAR",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "CHEESE_CHEDDAR",
+            "canonical_name": "Сыр чеддер",
+            "id": "c540fc27-0edd-4b93-baf5-83e26e9338c6"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "74842589-d4f8-47c9-b416-de31264cba9c",
+            "is_current": true,
+            "source_id": "328637",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 2,
           "quantity": "180.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "ALREADY_ACCEPTED_EVIDENCE_REBIND",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [
+            "FDC-PORTION-119620:exact"
+          ],
           "unit": "ml"
         },
         {
@@ -1653,13 +3519,28 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [],
           "evidence_key": "FDC-PORTION-85818:estimate",
           "food_code": "CAULIFLOWER",
+          "food_identity": {
+            "canonical_code": "CAULIFLOWER",
+            "canonical_name": "Капуста цветная",
+            "id": "b7345584-f76f-4e80-9dcf-f0124c62c46c"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "b0b32655-77c3-4f7b-9f03-54c12b64f772",
+            "is_current": true,
+            "source_id": "2685573",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 3,
           "quantity": "120.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         }
       ],
@@ -1667,8 +3548,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "sandwich",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "WIC1_BEYOND_BASIC_GRILLED_CHEESE",
-      "recipe_version_id": "17e7f133-c089-4f57-9cec-0dcd905d0155",
+      "recipe_version_id": "88e45579-c1f2-4aa4-b342-2f97ed8d52cd",
       "technical_gate1_suitable": false,
       "version_number": 1
     },
@@ -1678,8 +3561,10 @@
       "kcal_per_base_serving": "112.007500",
       "meal_type_code": "breakfast",
       "nutrition_status": "CONDITIONAL",
+      "planner_eligible": true,
+      "positive_kcal_available": true,
       "recipe_code": "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE",
-      "recipe_version_id": "5fa90e21-cff9-4139-808d-a0da10e0b070",
+      "recipe_version_id": "4d942cb0-e2b1-49d3-9011-a5f1aeb92afd",
       "technical_gate1_suitable": true,
       "version_number": 2
     },
@@ -1691,13 +3576,36 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "7279668c-a95e-4898-bd2d-a458796a5c30",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "966050c3-4e58-4d1d-9a1e-2e75927fc0b2",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "BANANA",
+          "food_identity": {
+            "canonical_code": "BANANA",
+            "canonical_name": "Банан",
+            "id": "ffbeee5b-637e-4001-8f86-b278caffcb9c"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "966050c3-4e58-4d1d-9a1e-2e75927fc0b2",
+            "is_current": true,
+            "source_id": "1105314",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 3,
           "quantity": "1.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "pcs"
         },
         {
@@ -1706,13 +3614,28 @@
             "CONVERSION_ESTIMATE_NOT_ACCEPTED"
           ],
           "assessment_status": "REVIEW_REQUIRED_ESTIMATE",
+          "composition_versions": [],
           "evidence_key": "INFOODS-SPINACH-RAW:estimate",
           "food_code": "SPINACH",
+          "food_identity": {
+            "canonical_code": "SPINACH",
+            "canonical_name": "Шпинат",
+            "id": "47655c7d-9334-48d4-afca-2dccc9ed7cbf"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "f7fbe506-8717-47fd-b84b-bf724f43e226",
+            "is_current": true,
+            "source_id": "1999633",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 4,
           "quantity": "240.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -1722,13 +3645,28 @@
             "PROFILE_REPRESENTATIVENESS_REVIEW"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": "FDC-PORTION-89190:estimate",
           "food_code": "APPLE",
+          "food_identity": {
+            "canonical_code": "APPLE",
+            "canonical_name": "Яблоко",
+            "id": "01837d6f-f7f7-44c1-9fa6-22e91962a7d7"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "7d7cc7de-bc2c-469f-b9c9-26bbb2eb6406",
+            "is_current": true,
+            "source_id": "1750341",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 5,
           "quantity": "240.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         },
         {
@@ -1737,13 +3675,36 @@
             "MEASURE_OR_SIZE_AMBIGUOUS"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [
+            {
+              "id": "5e807ea3-02a1-4669-ae1f-455c5fa60c7c",
+              "input_state": "INPUT",
+              "kind": "ATOMIC",
+              "profile_id": "6bb64ec6-e002-4d86-b81b-faf647ee29fb",
+              "version": 1
+            }
+          ],
           "evidence_key": null,
           "food_code": "CAULIFLOWER_FROZEN",
+          "food_identity": {
+            "canonical_code": "CAULIFLOWER_FROZEN",
+            "canonical_name": "Капуста цветная замороженная",
+            "id": "1b227db7-d03b-4163-b5c8-d14c8f86d9f5"
+          },
           "new_external_primary_evidence_required": true,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "6bb64ec6-e002-4d86-b81b-faf647ee29fb",
+            "is_current": true,
+            "source_id": "170398",
+            "source_name": "USDA_FDC",
+            "source_version": "2018-04"
+          },
           "position": 6,
           "quantity": "120.000000",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "ml"
         }
       ],
@@ -1751,8 +3712,10 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "other",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "WIC2_SPINACH_CAULIFLOWER_SMOOTHIE",
-      "recipe_version_id": "8dbb8940-0fa0-49a6-b68c-46c5d2e739a8",
+      "recipe_version_id": "3d458bae-4188-4c52-aeff-f75e52d69fe9",
       "technical_gate1_suitable": false,
       "version_number": 2
     },
@@ -1764,13 +3727,28 @@
             "FOOD_FORM_MISMATCH"
           ],
           "assessment_status": "BLOCKED",
+          "composition_versions": [],
           "evidence_key": null,
           "food_code": "BUTTERNUT_SQUASH",
-          "new_external_primary_evidence_required": true,
+          "food_identity": {
+            "canonical_code": "BUTTERNUT_SQUASH",
+            "canonical_name": "Тыква баттернат",
+            "id": "42f40f21-9fd0-41c6-8b46-bc87f5415b5d"
+          },
+          "new_external_primary_evidence_required": false,
+          "nutrition_profile": {
+            "estimated": null,
+            "id": "d7a76c34-d650-4677-9c48-bddbaa3e8bc9",
+            "is_current": true,
+            "source_id": "2685570",
+            "source_name": "USDA_FDC",
+            "source_version": "2026-04-30"
+          },
           "position": 1,
           "quantity": "1360.777110",
-          "repair_class": "EVIDENCE_OR_IMMUTABLE_RECIPE_REVISION",
+          "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
           "required_authority": "exact input grams for the stated food form, backed by an authoritative profile and, for non-gram units, an exact same-form measure",
+          "reusable_exact_evidence_keys": [],
           "unit": "g"
         }
       ],
@@ -1778,12 +3756,183 @@
       "kcal_per_base_serving": null,
       "meal_type_code": "other",
       "nutrition_status": "INCOMPLETE",
+      "planner_eligible": false,
+      "positive_kcal_available": false,
       "recipe_code": "WIC4_BUTTERNUT_SOUP",
-      "recipe_version_id": "2aaa6261-4ccf-4543-bdf0-9c400620e75e",
+      "recipe_version_id": "c7be944f-3c7b-4903-b050-4212a110c023",
       "technical_gate1_suitable": false,
       "version_number": 1
     }
   ],
+  "repair_plan": {
+    "current_eligible_recipe_codes": [
+      "WIC1_OVERNIGHT_OATS_CINNAMON_APPLE"
+    ],
+    "generic_only_alternate": "WIC1_BEYOND_BASIC_GRILLED_CHEESE",
+    "selected_actual_fixture_targets": [
+      {
+        "blocking_rows": [
+          {
+            "food_code": "PORK_LOIN",
+            "position": 2,
+            "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
+            "reusable_exact_evidence_keys": []
+          },
+          {
+            "food_code": "SWEET_POTATO",
+            "position": 3,
+            "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
+            "reusable_exact_evidence_keys": []
+          },
+          {
+            "food_code": "ORANGE",
+            "position": 4,
+            "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
+            "reusable_exact_evidence_keys": []
+          }
+        ],
+        "meal_type_code": "main",
+        "recipe_code": "FNS2_ORANGE_PORK_CHOPS"
+      },
+      {
+        "blocking_rows": [
+          {
+            "food_code": "BREADCRUMBS",
+            "position": 4,
+            "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
+            "reusable_exact_evidence_keys": []
+          }
+        ],
+        "meal_type_code": "main",
+        "recipe_code": "FNS4_OVEN_FRIED_FISH"
+      },
+      {
+        "blocking_rows": [
+          {
+            "food_code": "LENTILS_DRY",
+            "position": 1,
+            "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
+            "reusable_exact_evidence_keys": []
+          },
+          {
+            "food_code": "ONION_YELLOW",
+            "position": 4,
+            "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
+            "reusable_exact_evidence_keys": []
+          },
+          {
+            "food_code": "CARROT",
+            "position": 6,
+            "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
+            "reusable_exact_evidence_keys": []
+          }
+        ],
+        "meal_type_code": "main",
+        "recipe_code": "FNS5_BAKED_LENTILS_CASSEROLE"
+      },
+      {
+        "blocking_rows": [
+          {
+            "food_code": "CHICKEN_THIGH",
+            "position": 1,
+            "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
+            "reusable_exact_evidence_keys": []
+          },
+          {
+            "food_code": "BLACK_PEPPER",
+            "position": 4,
+            "repair_class": "ALREADY_ACCEPTED_EVIDENCE_REBIND",
+            "reusable_exact_evidence_keys": [
+              "FDC-PORTION-87560:exact"
+            ]
+          },
+          {
+            "food_code": "ONION_YELLOW",
+            "position": 5,
+            "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
+            "reusable_exact_evidence_keys": []
+          },
+          {
+            "food_code": "GARLIC",
+            "position": 6,
+            "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
+            "reusable_exact_evidence_keys": []
+          },
+          {
+            "food_code": "THYME_DRIED",
+            "position": 7,
+            "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
+            "reusable_exact_evidence_keys": []
+          },
+          {
+            "food_code": "ROSEMARY_DRIED",
+            "position": 8,
+            "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
+            "reusable_exact_evidence_keys": []
+          },
+          {
+            "food_code": "SPINACH",
+            "position": 10,
+            "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
+            "reusable_exact_evidence_keys": []
+          }
+        ],
+        "meal_type_code": "main",
+        "recipe_code": "SNAP4_BRAISED_CHICKEN_SPINACH"
+      },
+      {
+        "blocking_rows": [
+          {
+            "food_code": "LEMON",
+            "position": 2,
+            "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
+            "reusable_exact_evidence_keys": []
+          }
+        ],
+        "meal_type_code": "main",
+        "recipe_code": "SNAP4_DILLED_FISH_FILLETS"
+      },
+      {
+        "blocking_rows": [
+          {
+            "food_code": "POTATO",
+            "position": 1,
+            "repair_class": "IMMUTABLE_RECIPE_REVISION_REQUIRED",
+            "reusable_exact_evidence_keys": []
+          },
+          {
+            "food_code": "ONION_YELLOW",
+            "position": 4,
+            "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
+            "reusable_exact_evidence_keys": []
+          },
+          {
+            "food_code": "BLACK_PEPPER",
+            "position": 6,
+            "repair_class": "ALREADY_ACCEPTED_EVIDENCE_REBIND",
+            "reusable_exact_evidence_keys": [
+              "FDC-PORTION-87560:exact"
+            ]
+          }
+        ],
+        "meal_type_code": "breakfast",
+        "recipe_code": "SNAP4_SPANISH_FRITTATA"
+      },
+      {
+        "blocking_rows": [
+          {
+            "food_code": "SPINACH",
+            "position": 3,
+            "repair_class": "NEW_PRIMARY_EVIDENCE_REQUIRED",
+            "reusable_exact_evidence_keys": []
+          }
+        ],
+        "meal_type_code": "breakfast",
+        "recipe_code": "TNC6_EGGS_SPINACH"
+      }
+    ],
+    "selection_reason": "The hard-exclusion fixture lower bound requires all three breakfast and all five main catalogue versions; the current eligible oatmeal supplies one breakfast slot. The sandwich is lower capacity under the exclusion split and remains only the generic-fixture alternate."
+  },
   "schema_version": 1,
   "seed_chain": [
     "seed_food_recipes",
