@@ -31,7 +31,6 @@ PR6 / Nutrition Core                          COMPLETE
 → PR7-SUPPORT-MEAL-PATTERN-CATALOGUE         COMPLETE (#47 / PR #51)
 → POST-PR51-STATE-SYNC                       COMPLETE (#52)
 → PR7 MealPlan / Serving                     COMPLETE (#53 / PR #54)
-→ POST-PR54-STATE-SYNC                       CURRENT DOCS/STATE SYNC
 → PR8 Planner v0                             NEXT / NOT STARTED
 → GATE 1 — Planning Core                     NOT STARTED
 ```
