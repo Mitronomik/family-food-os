@@ -4,69 +4,91 @@ Updated: `2026-09-18`.
 
 ## Accepted base and governance
 
-PR #59 is MERGED.
+PR #60 is MERGED.
 
-- PR8 / Issue #57 = COMPLETE.
-- Issue #57 is CLOSED / completed.
-- Accepted PR8 product merge commit: `aabe1f5d72a108110d92d8132bc4a45d7cc51d9c`.
-- Merged PR8 delivery head: `6b029149be6852e49b6c010e8f625c652a689702`.
-- Accepted SQLite migration head: `0032_meal_plan_serving`.
-- Future RecipeTemplate reservation remains `0033_recipe_template_catalogue`.
+The user explicitly authorized **GATE 1 — Planning Core** work.
 
-PR8 introduced no schema/migration.
+Current bounded operation:
 
-## Accepted PR8 evidence
+`GATE1-A — Planning Core candidate data readiness` — ACTIVE under Issue #61.
 
-The merged implementation uses:
+Accepted starting main:
+
+`792d855448e16edcf36b41e0f6e321346fb915ed`
+
+Accepted SQLite migration head:
+
+`0032_meal_plan_serving`
+
+Future RecipeTemplate reservation remains:
+
+`0033_recipe_template_catalogue`
+
+## Why GATE1-A exists
+
+PR8 is COMPLETE and the deterministic Planning Core is implemented and verified.
+
+Accepted PR8 evidence:
 
 - `planner-v0.2`;
 - `meal-role-recipe-v2`;
 - `meal-pattern-recommender-v2`;
-- authoritative application composition over Household, accepted Meal Pattern selections, current verified RecipeVersions, Nutrition, Pantry and recent MealPlan history;
-- deterministic greedy Household reconciliation with safe participant splitting;
-- member-wide weekly Decimal Serving normalization;
-- bounded failure with no partial MealPlan persistence;
-- readable deterministic Planner trace.
-
-Verification accepted on the final delivery head:
-
-- focused Planner/application/recommender/architecture/Gate suite: **25 passed**;
-- affected Household / MealPattern / Recipe / Nutrition / MealPlan / Pantry suite: **291 passed**;
-- Docs verification run `35363385855`: GREEN;
+- repository-backed authoritative application composition;
+- deterministic trace;
+- focused suite: **25 passed**;
+- affected-context suite: **291 passed**;
 - exact-head full backend run `35364987805`: **3317 passed, 1 warning in 537.77s (8:57)**.
 
-Launcher was not rerun because PR8 changed no launcher/startup/API bootstrap surface.
+Current authoritative blocker:
 
-## Gate 1 status
+- the accepted 30-recipe corpus is present and verified;
+- all 30 current RecipeVersion Nutrition results are `INCOMPLETE` with unknown kcal in the PR8 repository fixture;
+- therefore no repository-backed fixture yet demonstrates the successful complete-week → individualized-Serving path required by the Planning Core gate.
 
-`GATE 1 — Planning Core` is the next eligible roadmap operation but remains **NOT STARTED** and is not authorized by the PR59 merge.
+The 2026-09-16 roadmap addendum permits a bounded data-gap closure when available data cannot supply enough valid candidates. It forbids redesigning Planner around the dataset or inventing missing truth.
 
-The accepted repository-backed fixture already proves:
+## GATE1-A execution contract
 
-- 3 materially different Households;
-- 30 current verified recipes;
-- 80+ FoodIngredient;
-- authoritative application composition;
-- deterministic trace;
-- fail-closed behavior with no partial plan.
+Issue #61 owns the bounded task.
 
-Current data-readiness blocker:
+The first implementation step must recompute current truth from the exact base. Historical PR6 audits may guide prioritization but are not current authority.
 
-- all 30 current verified RecipeVersions have `INCOMPLETE` Nutrition with unknown kcal;
-- therefore the authoritative repository fixture cannot yet demonstrate a successful complete week with individualized Servings.
+Required operation:
 
-Per the 2026-09-16 roadmap addendum, if Gate 1 lacks enough valid candidates, a future separately authorized **bounded data-gap closure** through curation/import/evidence may be required. Do not invent missing nutrition, reinterpret unknown as zero, redesign Planner around the seed corpus, or silently start RecipeTemplate/Assembly.
+1. fresh-database current 30-recipe blocker matrix;
+2. mathematical role-capacity proof under current Planner compatibility/repetition rules and actual Gate fixtures;
+3. smallest truthful repair target selection;
+4. bounded authoritative data/evidence repair with no schema change by default;
+5. real `PlannerService.generate_authoritative()` fixture proving at least one persisted complete seven-day MealPlan with individualized positive Decimal Servings;
+6. explicit hard-exclusion repository fixture and deterministic trace;
+7. reproducible evidence package;
+8. focused/affected/full-backend verification.
 
-## Next action
+Historical audit inspection suggests nearby candidates exist in the required `main`, `breakfast` and `sandwich` classifications, but Issue #61 explicitly forbids selecting targets until the current matrix is recomputed.
 
-No product implementation is currently authorized.
+## Invariants
 
-If the user explicitly authorizes Gate 1 work, first define the bounded Gate 1 evidence/data-readiness operation and its acceptance criteria from the canonical roadmap/addenda before modifying runtime/data.
+- `AI_ENABLED=false`;
+- Nutrition/mass/form/kcal remain deterministic backend truth;
+- unknown != zero;
+- no REVIEW_REQUIRED_ESTIMATE is accepted merely for convenience;
+- no global density/piece-mass shortcut that violates composition/measure authority;
+- Planner eligibility is not weakened to accept `INCOMPLETE`;
+- immutable RecipeVersion truth is not mutated in place;
+- unresolved recipes remain explicit;
+- no Retail/Shopping/Prep/AI/Auth/frontend scope;
+- no `0033` consumption.
 
-PR9 remains **NOT STARTED** and must not begin until Gate 1 is separately reviewed and accepted.
+## Gate status
+
+GATE1-A being ACTIVE does **not** mean Gate 1 is COMPLETE.
+
+After GATE1-A merge, perform a separate **Gate1-CLOSE** evidence review against the canonical roadmap.
+
+PR9 remains **NOT STARTED** until Gate1-CLOSE is explicitly accepted.
 
 ## Stop condition
 
-After the post-PR59 state synchronization is reviewed/merged, stop.
+After GATE1-A is review-ready/merged, stop for Gate1-CLOSE.
 
-Do not begin Gate 1, nutrition remediation or PR9 automatically.
+Do not begin PR9 automatically.
