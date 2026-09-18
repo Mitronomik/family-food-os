@@ -354,6 +354,7 @@ def test_serving_nutrition_scales_recipe_truth_and_non_recipe_stays_unknown():
         servings,
     )
     recipe_nutrition = SimpleNamespace(
+        version=SimpleNamespace(id=recipe_version_id),
         per_base_serving=NutritionValues(
             kcal=Decimal("400"),
             protein_g=Decimal("30"),
@@ -376,3 +377,58 @@ def test_serving_nutrition_scales_recipe_truth_and_non_recipe_stays_unknown():
     assert external_result.values.kcal is None
     assert result.member_weeks[0].status is NutritionStatus.INCOMPLETE
     assert result.member_weeks[0].values.kcal is None
+
+
+def test_serving_nutrition_rejects_mismatched_recipe_version_truth():
+    household_id = uuid4()
+    member_id = uuid4()
+    selection = _selection_detail(
+        household_id=household_id,
+        member_id=member_id,
+        roles=(MealRole.DINNER,),
+    )
+    plan = MealPlan(
+        uuid4(),
+        household_id,
+        WEEK_START,
+        1,
+        MealPlanStatus.DRAFT,
+        "manual-v1",
+        None,
+        NOW,
+    )
+    recipe_version_id = uuid4()
+    event = HouseholdMealEvent(
+        uuid4(),
+        plan.id,
+        WEEK_START,
+        1,
+        MealRole.DINNER,
+        MealSourceKind.COOK_RECIPE,
+        recipe_version_id,
+        None,
+        NOW,
+    )
+    detail = MealPlanDetail(
+        plan,
+        (MealPlanMemberSelection(plan.id, member_id, selection.selection.id),),
+        (event,),
+        (Serving(uuid4(), event.id, member_id, Decimal("1"), NOW),),
+    )
+    mismatched = SimpleNamespace(
+        version=SimpleNamespace(id=uuid4()),
+        per_base_serving=NutritionValues(
+            kcal=Decimal("400"),
+            protein_g=Decimal("30"),
+            fat_g=Decimal("10"),
+            carbohydrates_g=Decimal("50"),
+            fiber_g=Decimal("5"),
+        ),
+        status=NutritionStatus.COMPLETE,
+    )
+
+    with pytest.raises(DomainValidationError, match="Recipe nutrition must match"):
+        calculate_meal_plan_nutrition(
+            detail,
+            {recipe_version_id: mismatched},
+        )

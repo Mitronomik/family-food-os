@@ -123,9 +123,20 @@ class MealPlanService:
                 raise MealPlanValidationError(
                     "The selected program version is not published and age-eligible for this member."
                 )
+            template = tuple(item.role for item in program.opportunities)
+            canonical_schedule = {weekday: template for weekday in range(1, 8)}
             if resolved_schedule is None:
-                template = tuple(item.role for item in program.opportunities)
-                resolved_schedule = {weekday: template for weekday in range(1, 8)}
+                resolved_schedule = canonical_schedule
+            elif not has_user_overrides:
+                supplied_schedule = {
+                    weekday: tuple(roles)
+                    for weekday, roles in resolved_schedule.items()
+                }
+                if supplied_schedule != canonical_schedule:
+                    raise MealPlanValidationError(
+                        "PROGRAM schedule differs from the published program; "
+                        "set has_user_overrides=True for an override snapshot."
+                    )
         else:
             if program_version_id is not None:
                 raise MealPlanValidationError(
@@ -176,6 +187,13 @@ class MealPlanService:
         if detail is None:
             raise MealPatternSelectionNotFoundError(member_id)
         return detail
+
+    def get_member_pattern_history(
+        self, household_id: UUID, member_id: UUID
+    ) -> tuple[MemberMealPatternSelection, ...]:
+        with self._read_scope_factory() as scope:
+            history = scope.selections.list_history(household_id, member_id)
+        return tuple(history)
 
     def create_plan_revision(
         self,

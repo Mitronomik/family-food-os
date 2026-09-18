@@ -372,3 +372,124 @@ def test_manual_week_creates_revision_and_shared_event_servings():
     )
     assert revised.plan.revision_number == 2
     assert revised.plan.supersedes_plan_id == detail.plan.id
+
+
+def test_program_override_requires_truthful_flag_and_preserves_day_specific_snapshot():
+    household = _household()
+    member = _member(household.id)
+    program = _program()
+    service, _, _ = _service(household, [member], program)
+    override = {
+        weekday: (
+            (MealRole.BREAKFAST, MealRole.DINNER)
+            if weekday == 1
+            else (MealRole.BREAKFAST, MealRole.LUNCH, MealRole.DINNER)
+        )
+        for weekday in range(1, 8)
+    }
+
+    with pytest.raises(MealPlanValidationError, match="has_user_overrides=True"):
+        service.accept_member_pattern(
+            household_id=household.id,
+            member_id=member.id,
+            source_kind=MemberMealPatternSourceKind.PROGRAM,
+            program_version_id=program.version.id,
+            schedule=override,
+        )
+
+    detail = service.accept_member_pattern(
+        household_id=household.id,
+        member_id=member.id,
+        source_kind=MemberMealPatternSourceKind.PROGRAM,
+        program_version_id=program.version.id,
+        schedule=override,
+        has_user_overrides=True,
+    )
+
+    assert detail.selection.program_version_id == program.version.id
+    assert detail.selection.has_user_overrides is True
+    assert detail.roles_for_weekday(1) == (
+        MealRole.BREAKFAST,
+        MealRole.DINNER,
+    )
+    assert detail.roles_for_weekday(2) == (
+        MealRole.BREAKFAST,
+        MealRole.LUNCH,
+        MealRole.DINNER,
+    )
+
+
+def test_member_pattern_history_read_is_household_scoped():
+    household = _household()
+    member = _member(household.id)
+    service, _, _ = _service(household, [member])
+
+    first = service.accept_member_pattern(
+        household_id=household.id,
+        member_id=member.id,
+        source_kind=MemberMealPatternSourceKind.CUSTOM,
+        schedule={weekday: (MealRole.DINNER,) for weekday in range(1, 8)},
+    )
+    second = service.accept_member_pattern(
+        household_id=household.id,
+        member_id=member.id,
+        source_kind=MemberMealPatternSourceKind.CUSTOM,
+        schedule={
+            weekday: (MealRole.BREAKFAST, MealRole.DINNER)
+            for weekday in range(1, 8)
+        },
+    )
+
+    assert service.get_member_pattern_history(household.id, member.id) == (
+        first.selection,
+        second.selection,
+    )
+    assert service.get_member_pattern_history(uuid4(), member.id) == ()
+
+
+def test_complete_manual_week_supports_three_member_household():
+    household = _household()
+    members = [_member(household.id) for _ in range(3)]
+    service, _, _ = _service(household, members)
+    selections = [
+        service.accept_member_pattern(
+            household_id=household.id,
+            member_id=member.id,
+            source_kind=MemberMealPatternSourceKind.CUSTOM,
+            schedule={weekday: (MealRole.DINNER,) for weekday in range(1, 8)},
+        )
+        for member in members
+    ]
+    events = [
+        MealEventDraft(
+            local_date=date.fromordinal(WEEK_START.toordinal() + offset),
+            position=1,
+            role=MealRole.DINNER,
+            source_kind=MealSourceKind.EAT_OUT,
+            source_reference="manual",
+            servings={
+                members[0].id: Decimal("1.25"),
+                members[1].id: Decimal("1.00"),
+                members[2].id: Decimal("0.75"),
+            },
+        )
+        for offset in range(7)
+    ]
+
+    detail = service.create_plan_revision(
+        household_id=household.id,
+        week_start=WEEK_START,
+        member_selection_ids={
+            member.id: selection.selection.id
+            for member, selection in zip(members, selections, strict=True)
+        },
+        events=events,
+    )
+
+    assert len(detail.member_selections) == 3
+    first_event_servings = [
+        serving
+        for serving in detail.servings
+        if serving.event_id == detail.events[0].id
+    ]
+    assert len(first_event_servings) == 3

@@ -726,6 +726,13 @@ def calculate_meal_plan_nutrition(
             if nutrition is None:
                 values = NutritionValues()
                 status = NutritionStatus.INCOMPLETE
+            elif nutrition.version.id != event.recipe_version_id:
+                raise _issue(
+                    DomainIssueCode.INVALID_IDENTIFIER,
+                    "Recipe nutrition must match the event RecipeVersion.",
+                    field="recipe_version_id",
+                    value=event.recipe_version_id,
+                )
             else:
                 values = scale_nutrition_values(
                     nutrition.per_base_serving,
