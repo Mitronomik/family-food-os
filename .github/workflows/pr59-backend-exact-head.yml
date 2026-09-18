@@ -1,0 +1,55 @@
+name: PR59 exact-head backend verification
+
+on:
+  push:
+    branches:
+      - ci/pr59-backend-exact-6b029149
+
+permissions:
+  contents: read
+
+jobs:
+  backend-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout exact PR59 head
+        uses: actions/checkout@v4
+        with:
+          ref: 6b029149be6852e49b6c010e8f625c652a689702
+          fetch-depth: 1
+
+      - name: Assert exact tested SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          actual="$(git rev-parse HEAD)"
+          echo "TESTED_SHA=$actual"
+          test "$actual" = "6b029149be6852e49b6c010e8f625c652a689702"
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/pyproject.toml
+
+      - name: Install backend test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e './backend[test]'
+
+      - name: Full backend regression
+        env:
+          AI_ENABLED: "false"
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python -m pytest backend/app/tests -vv -ra --tb=short --durations=50 --junitxml=pr59-backend.xml 2>&1 | tee pr59-backend.log
+
+      - name: Verification summary
+        if: always()
+        run: |
+          echo "Exact PR head: 6b029149be6852e49b6c010e8f625c652a689702"
+          if [ -f pr59-backend.xml ]; then
+            grep -o '<testsuite[^>]*' pr59-backend.xml | head -1 || true
+          fi
