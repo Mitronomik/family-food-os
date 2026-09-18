@@ -1,56 +1,63 @@
 # Handoff
 
-Updated: `2026-09-17`.
+Updated: `2026-09-18`.
 
 ## Accepted base and governance
 
-PR #52 is MERGED. PR7 is explicitly authorized by the user under Issue #53.
+PR #54 is MERGED and Issue #53 is CLOSED / COMPLETE.
 
-Accepted PR7 base:
+Accepted `main`:
 
-`ded1cca29e165e0c459288d8de58df114abdeabb`
+`3b1c8393c22461a1570d664ba5dcb035ec6cf633`
+
+Merged PR7 delivery head:
+
+`eea7c7bf61d1e20c5cfbce7a59a6e78e8dbcae70`
 
 Accepted SQLite migration head:
 
-`0031_meal_pattern_catalogue`
-
-PR7 branch:
-
-`feature/pr7-mealplan-serving`
-
-Next reserved migration:
-
 `0032_meal_plan_serving`
 
-Future RecipeTemplate reservation remains `0033_recipe_template_catalogue`.
+Future RecipeTemplate reservation remains:
+
+`0033_recipe_template_catalogue`
 
 Canonical later decisions remain active:
 
 - `master-roadmap-addendum-2026-09-13.md` for flexible meal patterns, mixed sources and PR7/PR8 amendments;
 - `master-roadmap-addendum-2026-09-16.md` for dataset independence and Recipe Constructor/web-corroboration policy;
-- `master-roadmap-addendum-2026-09-17-post-pr51.md` for PR7 sequencing and migration reservation.
+- `master-roadmap-addendum-2026-09-17-post-pr51.md` for the PR7 sequence and migration reservation, now fulfilled by merged PR7.
 
-## Current operation
+## Completed operation
 
-`PR7 — MealPlan / Serving` / Issue #53 is ACTIVE.
+`PR7 — MealPlan / Serving` / Issue #53 is COMPLETE through merged PR #54.
 
-Goal: create the Household-owned planning/history boundary that PR8 can automate later.
+PR7 established:
 
-Implementation contract is in GitHub Issue #53. Core requirements:
+- immutable/versioned Household-owned `MemberMealPatternSelection` history;
+- exact PROGRAM-version or CUSTOM provenance with resolved seven-day snapshots;
+- append-only Household/week MealPlan revisions with exact member-selection pins;
+- explicit household meal source kinds;
+- immutable RecipeVersion references for `COOK_RECIPE` without fake recipe requirements for non-recipe sources;
+- individualized positive Decimal Servings defining participation;
+- deterministic Serving/member/day/week nutrition composition through existing Nutrition truth with unknown propagation;
+- Household-scoped SQLAlchemy Core repository/UoW/read boundaries;
+- forward migration `0032_meal_plan_serving`.
 
-- immutable/versioned `MemberMealPatternSelection` history;
-- PROGRAM selection pins exact published `MealPatternProgramVersion`; CUSTOM remains available;
-- persist the resolved accepted seven-day schedule snapshot so historical user overrides remain reproducible;
-- initial validation supports 1–6 opportunities/day, but DB schema must not hardcode max six;
-- append-only MealPlan revisions scoped by Household/week;
-- each plan revision pins exact member-selection snapshots;
-- Household events carry local date, deterministic position, `MealRole`, explicit source kind and conditional source reference;
-- `COOK_RECIPE` requires immutable RecipeVersion; non-recipe sources do not require fake RecipeVersions;
-- Servings define member participation and exact positive Decimal allocation;
-- Serving nutrition and member/day/week aggregates scale existing Nutrition outputs; unknown stays unknown;
-- synchronous SQLAlchemy Core repositories/UoW/read scopes; domain/services remain driver-independent;
-- migration `0032` must preserve populated 0031 databases and update lineage/schema guards/legacy head expectations;
-- full backend + launcher regressions are required before review-ready because persistence/migration/startup compatibility changes.
+Final PR7 verification evidence recorded on PR #54:
+
+- focused PR7 verification: 60 passed;
+- full launcher regression: GREEN;
+- full backend regression on exact final PR head: 3292 passed, 1 warning in 664.05s (11:04);
+- no PR8 / Shopping / Prep / Retail / AI / Auth / frontend scope was pulled forward.
+
+## Next eligible operation
+
+`PR8 — Planner v0` is NEXT / NOT STARTED.
+
+No PR8 implementation is authorized by this handoff. Start it only after a separate explicit user authorization with a bounded task contract.
+
+PR8 must consume the accepted PR7 model rather than rewrite it and must preserve the existing deterministic / `AI_ENABLED=false` architecture.
 
 ## Canonical invariants
 
@@ -61,21 +68,10 @@ Implementation contract is in GitHub Issue #53. Core requirements:
 - Nutrition Engine is the only nutrient truth authority.
 - true instants are UTC; planning dates are Household-local calendar dates.
 - every Household-owned read/write is Household-scoped.
-- deterministic core works with `AI_ENABLED=false`.
 - no existing migration history rewrite.
 
-## Explicit non-goals / stop conditions
+## Stop condition
 
-Do not pull forward:
+After this post-PR54 state synchronization is reviewed and merged, stop.
 
-- PR8 Planner generation, recommender ranking or automated reconciliation;
-- RecipeTemplate / RecipeAssembly implementation;
-- Shopping / Prep / PreparedBatch / authoritative leftover supply;
-- Retail / ready-food provider truth;
-- AI Gateway;
-- Auth/PostgreSQL/shared deployment;
-- consumer frontend/onboarding;
-- medical/therapeutic planning;
-- legacy Order reuse as MealPlan.
-
-After PR7 is review-ready and merged, stop. PR8 requires separate explicit user authorization.
+Do not start PR8, Gate 1, Shopping, Prep, Retail, AI, Auth/PostgreSQL, frontend/onboarding or another future milestone automatically.

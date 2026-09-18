@@ -1,6 +1,6 @@
 # Progress
 
-Updated: `2026-09-12`
+Updated: `2026-09-18`
 
 ## FamilyFoodOS milestone status
 
@@ -17,9 +17,28 @@ PR4-DATA2 Russia/SPB corpus re-curation    COMPLETE
 PR4   Recipe Catalogue                     COMPLETE
 PR5   Pantry                               COMPLETE
 PR6   Nutrition Core                       COMPLETE (PR6-CLOSE accepted)
+PR7-SUPPORT Meal Pattern Catalogue          COMPLETE (#47 / PR #51)
+PR7   MealPlan / Serving                    COMPLETE (#53 / PR #54)
+PR8   Planner v0                            NEXT / NOT STARTED
+GATE 1 Planning Core                        NOT STARTED
 ```
 
 Canonical implementation order remains `docs/family-food/master-roadmap.md`.
+
+
+## PR7 MealPlan / Serving closure
+
+PR #54 is MERGED; Issue #53 is CLOSED / COMPLETE.
+
+- Accepted merge commit / `main`: `3b1c8393c22461a1570d664ba5dcb035ec6cf633`.
+- Merged PR7 delivery head: `eea7c7bf61d1e20c5cfbce7a59a6e78e8dbcae70`.
+- Accepted SQLite migration head: `0032_meal_plan_serving`.
+- Focused PR7 verification: **60 passed**.
+- Full launcher regression: **GREEN**.
+- Full backend regression on the exact final PR head: **3292 passed, 1 warning in 664.05s (11:04)**.
+- PR7 preserved the deterministic `AI_ENABLED=false` core and did not pull PR8, Shopping, Prep, Retail, AI, Auth/PostgreSQL or frontend scope forward.
+- `PR8 — Planner v0` is the next eligible milestone but remains **NOT STARTED** and requires separate explicit authorization.
+
 
 ## PR6-ARCH-COMPOSITION verification
 
