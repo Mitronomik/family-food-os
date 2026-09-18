@@ -19,51 +19,53 @@ PR5   Pantry                               COMPLETE
 PR6   Nutrition Core                       COMPLETE (PR6-CLOSE accepted)
 PR7-SUPPORT Meal Pattern Catalogue          COMPLETE (#47 / PR #51)
 PR7   MealPlan / Serving                    COMPLETE (#53 / PR #54)
-PR8   Planner v0                            ACTIVE (#57)
+PR8   Planner v0                            COMPLETE (#57 / PR #59)
 GATE 1 Planning Core                        NOT STARTED
 ```
 
 Canonical implementation order remains `docs/family-food/master-roadmap.md`.
 
 
-## PR8 Planner v0 kickoff
+## PR8 Planner v0 closure
 
-User authorization recorded after merged PR #56.
+PR8 / Issue #57 is COMPLETE through merged PR #59.
 
-- Issue: #57 — `PR8 — Planner v0 deterministic week generation and trace`.
-- Accepted implementation base (later Cloud authorization):
+- Cloud-authorized implementation base:
   `64061b20cc7f9c6106ffbc577871616c53720892`.
-- Accepted migration head remains `0032_meal_plan_serving`.
-- `0033_recipe_template_catalogue` remains a future reservation; PR8 has no schema migration by default.
-- PR8 is filters + deterministic scoring/heuristics, complete-week generation, individualized Servings, household reconciliation, Meal Pattern Recommender v0 and reproducible trace.
-- Generation-time hard exclusions/preferences are explicit Planner request values for v0 because no canonical persisted member preference/exclusion model exists.
-- Gate 1 remains NOT STARTED and requires separate closure after PR8 merge.
-- PR9 and later milestones remain NOT STARTED.
-
-## PR8 Planner v0 implementation evidence
-
-- Cloud-authorized starting SHA: `64061b20cc7f9c6106ffbc577871616c53720892`.
-- Deterministic `planner-v0.2`, compatibility `meal-role-recipe-v2`, curated
-  recommender `meal-pattern-recommender-v2`, bounded failures and reproducible
-  trace are implemented without a schema change.
-- The preferred member-wide weekly energy normalization delegates successful
-  append-only persistence to the existing PR7 MealPlan service only after the
-  complete week is reconciled in memory.
-- Repository-backed evidence loads 30 verified recipes and 80+ FoodIngredients.
-  The current authoritative Nutrition result is `INCOMPLETE`/unknown kcal for all
-  30 recipes, so the three representative households correctly produce explicit
-  bounded failures. This keeps Gate 1 NOT STARTED rather than inventing values.
+- Merged PR8 delivery head:
+  `6b029149be6852e49b6c010e8f625c652a689702`.
+- Accepted PR8 product merge commit:
+  `aabe1f5d72a108110d92d8132bc4a45d7cc51d9c`.
+- Issue #57 is CLOSED / completed.
+- Accepted migration head remains `0032_meal_plan_serving`;
+  `0033_recipe_template_catalogue` remains reserved and untouched.
+- Deterministic `planner-v0.2`, compatibility `meal-role-recipe-v2` and
+  `meal-pattern-recommender-v2` are merged without a schema change.
+- The authoritative application path composes Household, current accepted member
+  patterns, current verified RecipeVersions, Nutrition, Pantry and bounded recent
+  MealPlan history before deterministic planning.
+- Household reconciliation supports safe deterministic participant splitting and
+  subset fixed events. Successful planning uses individualized Decimal Servings;
+  infeasible planning writes no partial MealPlan.
 - Canonical implementation detail: `docs/family-food/planner-v0.md`.
-- PR #59 correction composes current authoritative inputs, supports deterministic
-  participant splitting/subset fixed events, consumes the immediately preceding
-  week, exposes readable trace provenance, and validates PlannerConfig strictly.
-- Final-correction focused Planner/application/recommender/architecture/Gate
-  suite: **25 passed**. The Gate fixture now uses the authoritative application
-  entrypoint over real migrated Household/selection/Recipe/Nutrition/Pantry and
-  MealPlan state. Corrected affected-context suite: **291 passed**. Exact full
-  backend collection remains pending GitHub Actions because Cloud lacks `httpx`
-  (`3162 collected`, six API-module collection errors). No ignored subset is
-  presented as the full gate.
+- Focused Planner/application/recommender/architecture/Gate suite:
+  **25 passed**.
+- Affected Household / MealPattern / Recipe / Nutrition / MealPlan / Pantry suite:
+  **291 passed**.
+- Docs verification run `35363385855`: **GREEN**.
+- Exact-head full backend run `35364987805` on
+  `6b029149be6852e49b6c010e8f625c652a689702`:
+  **3317 passed, 1 warning in 537.77s (8:57)**.
+- Launcher was not rerun because PR8 changed no launcher/startup/API bootstrap
+  surface.
+
+Gate 1 remains **NOT STARTED**. Its current authoritative data-readiness blocker
+is that all 30 current verified RecipeVersions still produce `INCOMPLETE`
+Nutrition with unknown kcal, so the repository-backed fixture fails closed with
+bounded `NO_ELIGIBLE_CANDIDATE` rather than fabricating energy or persisting a
+partial plan. Per the 2026-09-16 roadmap addendum, any required candidate/data gap
+must be closed through separately authorized bounded curation/import/evidence
+work. PR9 remains **NOT STARTED**.
 
 
 
