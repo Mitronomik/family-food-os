@@ -6,7 +6,9 @@ Updated: `2026-09-18`.
 
 PR #54 is MERGED and Issue #53 is CLOSED / COMPLETE.
 
-Accepted `main`:
+Post-PR54 state synchronization is COMPLETE through merged PR #55.
+
+Accepted PR7 product merge commit:
 
 `3b1c8393c22461a1570d664ba5dcb035ec6cf633`
 
@@ -72,6 +74,6 @@ PR8 must consume the accepted PR7 model rather than rewrite it and must preserve
 
 ## Stop condition
 
-After this post-PR54 state synchronization is reviewed and merged, stop.
+`PR8 — Planner v0` remains NOT STARTED. Begin it only after separate explicit user authorization and a bounded task contract.
 
-Do not start PR8, Gate 1, Shopping, Prep, Retail, AI, Auth/PostgreSQL, frontend/onboarding or another future milestone automatically.
+Do not start Gate 1, Shopping, Prep, Retail, AI, Auth/PostgreSQL, frontend/onboarding or another future milestone automatically.
