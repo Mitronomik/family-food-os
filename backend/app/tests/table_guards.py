@@ -69,6 +69,12 @@ CURRENT_ALLOWED_TABLES = {
     "meal_pattern_opportunities",
     "meal_pattern_tags",
     "meal_pattern_evidence",
+    "member_meal_pattern_selections",
+    "member_meal_pattern_opportunities",
+    "meal_plans",
+    "meal_plan_member_selections",
+    "meal_plan_events",
+    "servings",
     "sqlite_sequence",
 }
 

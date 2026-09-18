@@ -35,7 +35,7 @@ NUTRITION_MIGRATION_ID = "0026_nutrition_measure_evidence"
 RECIPE_REVISION_MIGRATION_ID = "0027_recipe_same_source_revisions"
 VECTOR_MIGRATION_ID = "0028_normalized_nutrient_vector"
 COMPOSITION_MIGRATION_ID = "0029_food_composition_core"
-HEAD_MIGRATION_ID = "0031_meal_pattern_catalogue"
+HEAD_MIGRATION_ID = "0032_meal_plan_serving"
 TABLE = "artifact_audit_operations"
 
 
@@ -175,6 +175,7 @@ def test_a_database_at_0019_reports_0020_then_0021_pending(tmp_path):
         VECTOR_MIGRATION_ID,
         COMPOSITION_MIGRATION_ID,
         "0030_recipe_source_corpus",
+        "0031_meal_pattern_catalogue",
         HEAD_MIGRATION_ID,
     ]
 
@@ -198,6 +199,7 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         VECTOR_MIGRATION_ID,
         COMPOSITION_MIGRATION_ID,
         "0030_recipe_source_corpus",
+        "0031_meal_pattern_catalogue",
         HEAD_MIGRATION_ID,
     ]
     assert snapshot(database_path) == before
@@ -241,6 +243,12 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         "meal_pattern_opportunities",
         "meal_pattern_tags",
         "meal_pattern_evidence",
+        "member_meal_pattern_selections",
+        "member_meal_pattern_opportunities",
+        "meal_plans",
+        "meal_plan_member_selections",
+        "meal_plan_events",
+        "servings",
     }
 
 
@@ -607,6 +615,7 @@ def test_user_mode_startup_backs_up_before_applying_0020(monkeypatch, tmp_path):
         VECTOR_MIGRATION_ID,
         COMPOSITION_MIGRATION_ID,
         "0030_recipe_source_corpus",
+        "0031_meal_pattern_catalogue",
         HEAD_MIGRATION_ID,
     ]
     assert result.backup is not None

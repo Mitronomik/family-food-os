@@ -1,6 +1,6 @@
 """Deterministic, on-demand FoodIngredient and RecipeVersion nutrition."""
 
-from collections.abc import Mapping
+from collections.abc import Iterable, Mapping
 from dataclasses import dataclass, replace
 from decimal import Decimal, localcontext
 from enum import StrEnum
@@ -127,6 +127,71 @@ def _round_values(values: NutritionValues) -> NutritionValues:
     return NutritionValues(
         **{name: rounded(getattr(values, name)) for name in NUTRIENTS}
     )
+
+
+def scale_nutrition_values(
+    values: NutritionValues, factor: Decimal
+) -> NutritionValues:
+    """Scale authoritative Nutrition values; unknown nutrients stay unknown."""
+    require_positive_decimal(factor)
+    with localcontext(calculation_context()):
+        return _round_values(
+            NutritionValues(
+                **{
+                    name: None
+                    if (value := getattr(values, name)) is None
+                    else value * factor
+                    for name in NUTRIENTS
+                }
+            )
+        )
+
+
+def aggregate_nutrition_values(
+    values: Iterable[NutritionValues],
+) -> NutritionValues:
+    """Aggregate Nutrition values with nutrient-level unknown propagation."""
+    items = tuple(values)
+    if not items:
+        return NutritionValues(
+            kcal=Decimal("0"),
+            protein_g=Decimal("0"),
+            fat_g=Decimal("0"),
+            carbohydrates_g=Decimal("0"),
+            fiber_g=Decimal("0"),
+        )
+    with localcontext(calculation_context()):
+        return _round_values(
+            NutritionValues(
+                **{
+                    name: None
+                    if any(getattr(item, name) is None for item in items)
+                    else sum(
+                        (getattr(item, name) for item in items),
+                        Decimal("0"),
+                    )
+                    for name in NUTRIENTS
+                }
+            )
+        )
+
+
+def aggregate_nutrition_status(
+    statuses: Iterable[NutritionStatus], values: NutritionValues
+) -> NutritionStatus:
+    """Combine source statuses without upgrading incomplete Nutrition truth."""
+    source_statuses = tuple(statuses)
+    if any(getattr(values, name) is None for name in NUTRIENTS) or any(
+        status is NutritionStatus.INCOMPLETE for status in source_statuses
+    ):
+        return NutritionStatus.INCOMPLETE
+    if any(status is NutritionStatus.CONDITIONAL for status in source_statuses):
+        return NutritionStatus.CONDITIONAL
+    if any(
+        status is NutritionStatus.COMPLETE_WITH_WARNINGS for status in source_statuses
+    ):
+        return NutritionStatus.COMPLETE_WITH_WARNINGS
+    return NutritionStatus.COMPLETE
 
 
 def _ingredient(

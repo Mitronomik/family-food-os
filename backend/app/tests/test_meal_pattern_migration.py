@@ -14,6 +14,14 @@ PATTERN_TABLES = {
     "meal_pattern_tags",
     "meal_pattern_evidence",
 }
+PLAN_TABLES = {
+    "member_meal_pattern_selections",
+    "member_meal_pattern_opportunities",
+    "meal_plans",
+    "meal_plan_member_selections",
+    "meal_plan_events",
+    "servings",
+}
 
 
 def _run_with_chain_through(config, suffix, operation):
@@ -26,10 +34,11 @@ def _run_with_chain_through(config, suffix, operation):
         MIGRATION_MODULES[:] = original
 
 
-def test_migration_chain_appends_0031_after_current_main_head():
-    assert expected_migration_ids()[-2:] == [
+def test_migration_chain_keeps_0031_between_0030_and_0032():
+    assert expected_migration_ids()[-3:] == [
         "0030_recipe_source_corpus",
         "0031_meal_pattern_catalogue",
+        "0032_meal_plan_serving",
     ]
 
 
@@ -43,7 +52,10 @@ def test_populated_0030_database_upgrades_without_rewriting_existing_food_data(t
             "food_ingredients": connection.execute("SELECT COUNT(*) FROM food_ingredients").fetchone()[0],
         }
 
-    assert apply_migrations(config) == ["0031_meal_pattern_catalogue"]
+    assert apply_migrations(config) == [
+        "0031_meal_pattern_catalogue",
+        "0032_meal_plan_serving",
+    ]
     assert apply_migrations(config) == []
     with sqlite3.connect(config.path) as connection:
         after = {
@@ -58,8 +70,7 @@ def test_populated_0030_database_upgrades_without_rewriting_existing_food_data(t
         }
     assert after == before
     assert PATTERN_TABLES <= tables
-    assert "meal_plans" not in tables
-    assert "member_meal_pattern_selections" not in tables
+    assert PLAN_TABLES <= tables
 
 
 @pytest.mark.parametrize(
