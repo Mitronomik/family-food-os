@@ -1,0 +1,893 @@
+{
+  "schema_version": 1,
+  "operation": "GATE1-A-RU",
+  "starting_main": "9a76a97790b676f36c4c982af825721c3ef2c67e",
+  "checkpoint": {
+    "file": "russian_normative_recipes_v22_5_checkpoint.zip",
+    "sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+    "relationship_to_repo": "Older source-data checkpoint; v22.13 repository mapping decisions remain authoritative for identity classification."
+  },
+  "profile_policy": {
+    "source": "User-supplied checkpoint reference profiles",
+    "zero_policy": "Numeric zero retained only in Nutrition v1 fields when explicitly source-reported; sparse NutrientVector omits zero observations and records them as held observations.",
+    "fiber": "unknown unless source explicitly provides it"
+  },
+  "profiles": [
+    {
+      "external_id": "ING-0034",
+      "canonical_code": "MILK_PASTEURIZED_3_2",
+      "canonical_name_ru": "Молоко пастеризованное 3,2%",
+      "category_code": "dairy",
+      "aliases_ru": [
+        "молоко 3,2%"
+      ],
+      "basis_grams": "100",
+      "protein_g": "2.8",
+      "fat_g": "3.2",
+      "carbohydrates_g": "4.7",
+      "kcal": "58",
+      "calcium_mg": "121",
+      "magnesium_mg": "14",
+      "phosphorus_mg": "91",
+      "iron_mg": "0.1",
+      "thiamin_mg": "0.03",
+      "riboflavin_mg": "0.13",
+      "vitamin_c_mg": "1",
+      "fiber_g": null,
+      "exactness_tier": "A_REFERENCE",
+      "profile_quality": "legacy_reference_composition",
+      "source_url": "https://kvakino.narod.ru/eda/eda_tabl.htm",
+      "source_name": "RNR_V22_5_REFERENCE",
+      "source_id": "ING-0034",
+      "source_version": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
+      "verified_at": "2026-09-19T07:30:00+00:00",
+      "estimated": false,
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+    },
+    {
+      "external_id": "ING-0030",
+      "canonical_code": "MARGARINE_MILK",
+      "canonical_name_ru": "Маргарин молочный столовый",
+      "category_code": "fats_oils",
+      "aliases_ru": [
+        "маргарин молочный"
+      ],
+      "basis_grams": "100",
+      "protein_g": "0.3",
+      "fat_g": "82.3",
+      "carbohydrates_g": "1",
+      "kcal": "746",
+      "calcium_mg": "12",
+      "magnesium_mg": "1",
+      "phosphorus_mg": "8",
+      "iron_mg": "0",
+      "thiamin_mg": "0",
+      "riboflavin_mg": "0",
+      "vitamin_c_mg": "0",
+      "fiber_g": null,
+      "exactness_tier": "A_REFERENCE",
+      "profile_quality": "legacy_reference_composition",
+      "source_url": "https://kvakino.narod.ru/eda/eda_tabl.htm",
+      "source_name": "RNR_V22_5_REFERENCE",
+      "source_id": "ING-0030",
+      "source_version": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
+      "verified_at": "2026-09-19T07:30:00+00:00",
+      "estimated": false,
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+    },
+    {
+      "external_id": "ING-0056",
+      "canonical_code": "COTTAGE_CHEESE_9",
+      "canonical_name_ru": "Творог 9%",
+      "category_code": "dairy",
+      "aliases_ru": [
+        "творог полужирный"
+      ],
+      "basis_grams": "100",
+      "protein_g": "16.7",
+      "fat_g": "9",
+      "carbohydrates_g": "1.3",
+      "kcal": "156",
+      "calcium_mg": "164",
+      "magnesium_mg": "23",
+      "phosphorus_mg": "220",
+      "iron_mg": "0.4",
+      "thiamin_mg": "0.04",
+      "riboflavin_mg": "0.27",
+      "vitamin_c_mg": "0.5",
+      "fiber_g": null,
+      "exactness_tier": "A_REFERENCE",
+      "profile_quality": "legacy_reference_composition",
+      "source_url": "https://kvakino.narod.ru/eda/eda_tabl.htm",
+      "source_name": "RNR_V22_5_REFERENCE",
+      "source_id": "ING-0056",
+      "source_version": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
+      "verified_at": "2026-09-19T07:30:00+00:00",
+      "estimated": false,
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+    },
+    {
+      "external_id": "ING-0047",
+      "canonical_code": "SOUR_CREAM_30",
+      "canonical_name_ru": "Сметана 30%",
+      "category_code": "dairy",
+      "aliases_ru": [
+        "сметана 30 процентов"
+      ],
+      "basis_grams": "100",
+      "protein_g": "2.6",
+      "fat_g": "30",
+      "carbohydrates_g": "2.8",
+      "kcal": "293",
+      "calcium_mg": "85",
+      "magnesium_mg": "7",
+      "phosphorus_mg": "59",
+      "iron_mg": "0.3",
+      "thiamin_mg": "0.02",
+      "riboflavin_mg": "0.1",
+      "vitamin_c_mg": "0.2",
+      "fiber_g": null,
+      "exactness_tier": "A_REFERENCE",
+      "profile_quality": "legacy_reference_composition",
+      "source_url": "https://kvakino.narod.ru/eda/eda_tabl.htm",
+      "source_name": "RNR_V22_5_REFERENCE",
+      "source_id": "ING-0047",
+      "source_version": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
+      "verified_at": "2026-09-19T07:30:00+00:00",
+      "estimated": false,
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+    },
+    {
+      "external_id": "ING-0097",
+      "canonical_code": "YEAST_COMPRESSED",
+      "canonical_name_ru": "Дрожжи хлебопекарные прессованные",
+      "category_code": "staples",
+      "aliases_ru": [
+        "дрожжи прессованные"
+      ],
+      "basis_grams": "100",
+      "protein_g": "8.4",
+      "fat_g": "1.9",
+      "carbohydrates_g": "18.1",
+      "kcal": "105",
+      "calcium_mg": "19",
+      "magnesium_mg": "40",
+      "phosphorus_mg": "336",
+      "iron_mg": "3.2",
+      "thiamin_mg": "1.88",
+      "riboflavin_mg": "1.12",
+      "vitamin_c_mg": "0.12",
+      "fiber_g": null,
+      "exactness_tier": "B_REFERENCE",
+      "profile_quality": "legacy_USDA_compressed_yeast_serving_converted",
+      "source_url": "https://www.uhhospitals.org/health-information/health-and-wellness-library/article/nutritionfacts-v1/leavening-agents-yeast-bakers-compressed-1-cake-06-oz",
+      "source_name": "RNR_V22_5_REFERENCE",
+      "source_id": "ING-0097",
+      "source_version": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
+      "verified_at": "2026-09-19T07:30:00+00:00",
+      "estimated": false,
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+    },
+    {
+      "external_id": "ING-0024",
+      "canonical_code": "RICE_GROATS_POLISHED",
+      "canonical_name_ru": "Крупа рисовая шлифованная",
+      "category_code": "grains",
+      "aliases_ru": [
+        "крупа рисовая"
+      ],
+      "basis_grams": "100",
+      "protein_g": "7",
+      "fat_g": "0.6",
+      "carbohydrates_g": "77.3",
+      "kcal": "323",
+      "calcium_mg": "24",
+      "magnesium_mg": "21",
+      "phosphorus_mg": "97",
+      "iron_mg": "1.8",
+      "thiamin_mg": "0.08",
+      "riboflavin_mg": "0.04",
+      "vitamin_c_mg": "0",
+      "fiber_g": null,
+      "exactness_tier": "A_REFERENCE",
+      "profile_quality": "legacy_reference_composition",
+      "source_url": "https://kvakino.narod.ru/eda/eda_tabl.htm",
+      "source_name": "RNR_V22_5_REFERENCE",
+      "source_id": "ING-0024",
+      "source_version": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
+      "verified_at": "2026-09-19T07:30:00+00:00",
+      "estimated": false,
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+    },
+    {
+      "external_id": "ING-0038",
+      "canonical_code": "CUCUMBER_PICKLED_SALTED",
+      "canonical_name_ru": "Огурцы солёные",
+      "category_code": "vegetables",
+      "aliases_ru": [
+        "огурец солёный",
+        "огурцы соленые"
+      ],
+      "basis_grams": "100",
+      "protein_g": "2.8",
+      "fat_g": "0",
+      "carbohydrates_g": "1.3",
+      "kcal": "19",
+      "calcium_mg": "25",
+      "magnesium_mg": "4",
+      "phosphorus_mg": "20",
+      "iron_mg": "1.2",
+      "thiamin_mg": "0",
+      "riboflavin_mg": "0",
+      "vitamin_c_mg": "0",
+      "fiber_g": null,
+      "exactness_tier": "B_MULTI_SOURCE_REFERENCE",
+      "profile_quality": "legacy_reference_composition+v22_4_field_fill",
+      "source_url": "https://kvakino.narod.ru/eda/eda_tabl.htm",
+      "secondary_evidence_url": "https://www.ars.usda.gov/ARSUserFiles/80400535/Data/SR/SR28/reports/sr28fg11.pdf",
+      "source_name": "RNR_V22_5_REFERENCE",
+      "source_id": "ING-0038",
+      "source_version": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
+      "verified_at": "2026-09-19T07:30:00+00:00",
+      "estimated": false,
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+    },
+    {
+      "external_id": "ING-0014",
+      "canonical_code": "COOKING_FAT",
+      "canonical_name_ru": "Жир кулинарный",
+      "category_code": "fats_oils",
+      "aliases_ru": [],
+      "basis_grams": "100",
+      "protein_g": "0",
+      "fat_g": "99.7",
+      "carbohydrates_g": "0",
+      "kcal": "897",
+      "calcium_mg": "0",
+      "magnesium_mg": "0",
+      "phosphorus_mg": "0",
+      "iron_mg": "0",
+      "thiamin_mg": "0",
+      "riboflavin_mg": "0",
+      "vitamin_c_mg": "0",
+      "fiber_g": null,
+      "exactness_tier": "A_REFERENCE",
+      "profile_quality": "legacy_reference_composition_alias_fix",
+      "source_url": "https://kvakino.narod.ru/eda/eda_tabl.htm",
+      "source_name": "RNR_V22_5_REFERENCE",
+      "source_id": "ING-0014",
+      "source_version": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
+      "verified_at": "2026-09-19T07:30:00+00:00",
+      "estimated": false,
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+    },
+    {
+      "external_id": "ING-0025",
+      "canonical_code": "CHICKEN_CATEGORY_I",
+      "canonical_name_ru": "Курица I категории",
+      "category_code": "poultry",
+      "aliases_ru": [
+        "куры I категории"
+      ],
+      "basis_grams": "100",
+      "protein_g": "18.2",
+      "fat_g": "18.4",
+      "carbohydrates_g": "0.7",
+      "kcal": "241",
+      "calcium_mg": "16",
+      "magnesium_mg": "27",
+      "phosphorus_mg": "228",
+      "iron_mg": "3",
+      "thiamin_mg": "0.07",
+      "riboflavin_mg": "0.15",
+      "vitamin_c_mg": "0",
+      "fiber_g": null,
+      "exactness_tier": "A_REFERENCE",
+      "profile_quality": "legacy_reference_composition_1976_source_typo_normalized",
+      "source_url": "https://kvakino.narod.ru/eda/eda_tabl.htm",
+      "source_name": "RNR_V22_5_REFERENCE",
+      "source_id": "ING-0025",
+      "source_version": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
+      "verified_at": "2026-09-19T07:30:00+00:00",
+      "estimated": false,
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+    },
+    {
+      "external_id": "ING-0063",
+      "canonical_code": "BREAD_WHEAT_HIGH_GRADE",
+      "canonical_name_ru": "Хлеб пшеничный из муки высшего сорта",
+      "category_code": "grains",
+      "aliases_ru": [
+        "хлеб пшеничный"
+      ],
+      "basis_grams": "100",
+      "protein_g": "7.6",
+      "fat_g": "0.6",
+      "carbohydrates_g": "52.3",
+      "kcal": "233",
+      "calcium_mg": "20",
+      "magnesium_mg": "14",
+      "phosphorus_mg": "65",
+      "iron_mg": "0.9",
+      "thiamin_mg": "0.11",
+      "riboflavin_mg": "0.06",
+      "vitamin_c_mg": "0",
+      "fiber_g": null,
+      "exactness_tier": "A_REFERENCE",
+      "profile_quality": "legacy_reference_composition_1976",
+      "source_url": "https://kvakino.narod.ru/eda/eda_tabl.htm",
+      "source_name": "RNR_V22_5_REFERENCE",
+      "source_id": "ING-0063",
+      "source_version": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
+      "verified_at": "2026-09-19T07:30:00+00:00",
+      "estimated": false,
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+    }
+  ],
+  "recipes": [
+    {
+      "source_recipe_id": "USSR82-467",
+      "canonical_code": "RU82_467_OMELET_NATURAL",
+      "canonical_name_ru": "Омлет натуральный",
+      "meal_type_code": "breakfast",
+      "selected_variant": "selected_1982_variant",
+      "output_g": "110",
+      "base_servings": "1",
+      "source_name": "USSR82_RNR_V22_5_CAPTURE",
+      "source_url": "https://www.interdoka.ru/kulinaria/1982/7_bluda_yaca/4_omlet/15.html",
+      "source_version": "sha256:e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_document_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_original_servings": "1",
+      "source_retrieved_at": "2026-09-19T07:30:00+00:00",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "User-authorized publication of normative/base recipe facts per docs/family-food/ru-normative-recipe-corpus.md. The retained source artifact is the user-supplied v22.5 checkpoint cross-checked against the 1982 collection; publisher layout, images, logos and editorial material are not imported.",
+      "change_note": "GATE1-A-RU initial immutable Russian normative RecipeVersion for the bounded Planning Core fixture.",
+      "ingredients": [
+        {
+          "external_id": "ING-0071",
+          "food_ingredient_code": "EGG",
+          "quantity_g": "80",
+          "source_amount_text": "Яйцо — 80 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0034",
+          "food_ingredient_code": "MILK_PASTEURIZED_3_2",
+          "quantity_g": "30",
+          "source_amount_text": "Молоко — 30 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0030",
+          "food_ingredient_code": "MARGARINE_MILK",
+          "quantity_g": "5",
+          "source_amount_text": "Маргарин — 5 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0032",
+          "food_ingredient_code": "BUTTER_UNSALTED",
+          "quantity_g": "5",
+          "source_amount_text": "Масло сливочное — 5 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        }
+      ],
+      "steps_ru": [
+        "Смешать яйца с молоком и солью до однородной омлетной смеси.",
+        "Вылить смесь на разогретую сковороду с маргарином и готовить, перемешивая, пока масса не загустеет; затем подрумянить.",
+        "Перед подачей полить растопленным сливочным маслом."
+      ]
+    },
+    {
+      "source_recipe_id": "USSR82-492",
+      "canonical_code": "RU82_492_SYRNIKI",
+      "canonical_name_ru": "Сырники из творога",
+      "meal_type_code": "breakfast",
+      "selected_variant": "1-й вариант, со сметаной",
+      "output_g": "170",
+      "base_servings": "1",
+      "source_name": "USSR82_RNR_V22_5_CAPTURE",
+      "source_url": "https://www.interdoka.ru/kulinaria/1982/8_bluda_tvorog/12.html",
+      "source_version": "sha256:e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_document_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_original_servings": "1",
+      "source_retrieved_at": "2026-09-19T07:30:00+00:00",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "User-authorized publication of normative/base recipe facts per docs/family-food/ru-normative-recipe-corpus.md. The retained source artifact is the user-supplied v22.5 checkpoint cross-checked against the 1982 collection; publisher layout, images, logos and editorial material are not imported.",
+      "change_note": "GATE1-A-RU initial immutable Russian normative RecipeVersion for the bounded Planning Core fixture.",
+      "ingredients": [
+        {
+          "external_id": "ING-0056",
+          "food_ingredient_code": "COTTAGE_CHEESE_9",
+          "quantity_g": "135",
+          "source_amount_text": "Творог — 135 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0036",
+          "food_ingredient_code": "FLOUR_WHEAT",
+          "quantity_g": "20",
+          "source_amount_text": "Мука пшеничная — 20 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0071",
+          "food_ingredient_code": "EGG",
+          "quantity_g": "5",
+          "source_amount_text": "Яйцо — 5 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0042",
+          "food_ingredient_code": "SUGAR",
+          "quantity_g": "15",
+          "source_amount_text": "Сахар — 15 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0030",
+          "food_ingredient_code": "MARGARINE_MILK",
+          "quantity_g": "5",
+          "source_amount_text": "Маргарин столовый — 5 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0047",
+          "food_ingredient_code": "SOUR_CREAM_30",
+          "quantity_g": "20",
+          "source_amount_text": "Сметана — 20 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        }
+      ],
+      "steps_ru": [
+        "Протёртый творог смешать с двумя третями муки, яйцом, сахаром и солью.",
+        "Сформовать валик, нарезать порции, запанировать в оставшейся муке и придать форму сырников.",
+        "Обжарить сырники с двух сторон и довести до готовности в жарочном шкафу 5–7 минут.",
+        "Подать со сметаной."
+      ]
+    },
+    {
+      "source_recipe_id": "USSR82-1081",
+      "canonical_code": "RU82_1081_BLINI",
+      "canonical_name_ru": "Блины",
+      "meal_type_code": "breakfast",
+      "selected_variant": "III — с маслом",
+      "output_g": "160",
+      "base_servings": "1",
+      "source_name": "USSR82_RNR_V22_5_CAPTURE",
+      "source_url": "https://www.interdoka.ru/kulinaria/1982/16_muchnye_bluda/1.html",
+      "source_version": "sha256:e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_document_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_original_servings": "1",
+      "source_retrieved_at": "2026-09-19T07:30:00+00:00",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "User-authorized publication of normative/base recipe facts per docs/family-food/ru-normative-recipe-corpus.md. The retained source artifact is the user-supplied v22.5 checkpoint cross-checked against the 1982 collection; publisher layout, images, logos and editorial material are not imported.",
+      "change_note": "GATE1-A-RU initial immutable Russian normative RecipeVersion for the bounded Planning Core fixture.",
+      "ingredients": [
+        {
+          "external_id": "ING-0036",
+          "food_ingredient_code": "FLOUR_WHEAT",
+          "quantity_g": "75",
+          "source_amount_text": "Мука пшеничная — 75 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0042",
+          "food_ingredient_code": "SUGAR",
+          "quantity_g": "3",
+          "source_amount_text": "Сахар — 3 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0006",
+          "food_ingredient_code": "WATER",
+          "quantity_g": "118",
+          "source_amount_text": "Вода — 118 г",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0097",
+          "food_ingredient_code": "YEAST_COMPRESSED",
+          "quantity_g": "3",
+          "source_amount_text": "Дрожжи прессованные — 3 г нетто",
+          "source_profile_quality": "legacy_USDA_compressed_yeast_serving_converted",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0050",
+          "food_ingredient_code": "SALT",
+          "quantity_g": "1.5",
+          "source_amount_text": "Соль — 1,5 г нетто",
+          "source_profile_quality": "exact_zero_tracked",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0030",
+          "food_ingredient_code": "MARGARINE_MILK",
+          "quantity_g": "5",
+          "source_amount_text": "Маргарин столовый — 5 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0032",
+          "food_ingredient_code": "BUTTER_UNSALTED",
+          "quantity_g": "10",
+          "source_amount_text": "Масло сливочное — 10 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        }
+      ],
+      "steps_ru": [
+        "Растворить соль и сахар в части тёплой воды, добавить разведённые прессованные дрожжи.",
+        "Соединить с оставшейся водой и мукой, перемешать до однородности, ввести растопленный маргарин.",
+        "Оставить тесто в тёплом месте для брожения на 3–4 часа, периодически обминая.",
+        "Выпекать блины с обеих сторон на разогретой смазанной поверхности.",
+        "Подать со сливочным маслом."
+      ]
+    },
+    {
+      "source_recipe_id": "USSR82-208",
+      "canonical_code": "RU82_208_RASSOLNIK_LENINGRAD",
+      "canonical_name_ru": "Рассольник ленинградский",
+      "meal_type_code": "main",
+      "selected_variant": "selected_1982_variant",
+      "output_g": "1000",
+      "base_servings": "1",
+      "source_name": "USSR82_RNR_V22_5_CAPTURE",
+      "source_url": "https://www.interdoka.ru/kulinaria/1982/2_supy/1_goriachie/3_rassolniki/3.html",
+      "source_version": "sha256:e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_document_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_original_servings": "1",
+      "source_retrieved_at": "2026-09-19T07:30:00+00:00",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "User-authorized publication of normative/base recipe facts per docs/family-food/ru-normative-recipe-corpus.md. The retained source artifact is the user-supplied v22.5 checkpoint cross-checked against the 1982 collection; publisher layout, images, logos and editorial material are not imported.",
+      "change_note": "GATE1-A-RU initial immutable Russian normative RecipeVersion for the bounded Planning Core fixture.",
+      "ingredients": [
+        {
+          "external_id": "ING-0019",
+          "food_ingredient_code": "POTATO",
+          "quantity_g": "300",
+          "source_amount_text": "Картофель — 300 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0024",
+          "food_ingredient_code": "RICE_GROATS_POLISHED",
+          "quantity_g": "20",
+          "source_amount_text": "Крупа рисовая — 20 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0035",
+          "food_ingredient_code": "CARROT",
+          "quantity_g": "40",
+          "source_amount_text": "Морковь — 40 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0028",
+          "food_ingredient_code": "ONION_YELLOW",
+          "quantity_g": "20",
+          "source_amount_text": "Лук репчатый — 20 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0038",
+          "food_ingredient_code": "CUCUMBER_PICKLED_SALTED",
+          "quantity_g": "60",
+          "source_amount_text": "Огурцы солёные — 60 г нетто",
+          "source_profile_quality": "legacy_reference_composition+v22_4_field_fill",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0030",
+          "food_ingredient_code": "MARGARINE_MILK",
+          "quantity_g": "20",
+          "source_amount_text": "Маргарин столовый — 20 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": null,
+          "food_ingredient_code": "WATER",
+          "quantity_g": "750",
+          "source_amount_text": "Бульон или вода — 750 г; для Gate1 выбран водный вариант",
+          "source_profile_quality": "SOURCE_RECIPE_DIRECT",
+          "source_state": "INPUT"
+        }
+      ],
+      "steps_ru": [
+        "Подготовить рисовую крупу; картофель нарезать, морковь и лук подготовить для пассерования, солёные огурцы припустить.",
+        "В кипящую воду заложить крупу и картофель, затем добавить пассерованные морковь и лук.",
+        "Добавить припущенные солёные огурцы и довести суп до готовности; маргарин использовать для пассерования овощей."
+      ]
+    },
+    {
+      "source_recipe_id": "USSR82-263",
+      "canonical_code": "RU82_263_MILK_SOUP_POTATO_DUMPLINGS",
+      "canonical_name_ru": "Суп молочный с картофельными клёцками",
+      "meal_type_code": "main",
+      "selected_variant": "single",
+      "output_g": "1000",
+      "base_servings": "1",
+      "source_name": "USSR82_RNR_V22_5_CAPTURE",
+      "source_url": "https://www.interdoka.ru/kulinaria/1982/2_supy/1_goriachie/8_molochnye/6.html",
+      "source_version": "sha256:e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_document_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_original_servings": "1",
+      "source_retrieved_at": "2026-09-19T07:30:00+00:00",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "User-authorized publication of normative/base recipe facts per docs/family-food/ru-normative-recipe-corpus.md. The retained source artifact is the user-supplied v22.5 checkpoint cross-checked against the 1982 collection; publisher layout, images, logos and editorial material are not imported.",
+      "change_note": "GATE1-A-RU initial immutable Russian normative RecipeVersion for the bounded Planning Core fixture.",
+      "ingredients": [
+        {
+          "external_id": "ING-0034",
+          "food_ingredient_code": "MILK_PASTEURIZED_3_2",
+          "quantity_g": "600",
+          "source_amount_text": "Молоко — 600 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0006",
+          "food_ingredient_code": "WATER",
+          "quantity_g": "190",
+          "source_amount_text": "Вода — 190 г",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0019",
+          "food_ingredient_code": "POTATO",
+          "quantity_g": "150",
+          "source_amount_text": "Картофель для протирания — 150 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0019",
+          "food_ingredient_code": "POTATO",
+          "quantity_g": "110",
+          "source_amount_text": "Картофель для отваривания — 110 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0050",
+          "food_ingredient_code": "SALT",
+          "quantity_g": "1.7",
+          "source_amount_text": "Соль — 1,7 г нетто",
+          "source_profile_quality": "exact_zero_tracked",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0032",
+          "food_ingredient_code": "BUTTER_UNSALTED",
+          "quantity_g": "20",
+          "source_amount_text": "Масло сливочное — 20 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        }
+      ],
+      "steps_ru": [
+        "Часть картофеля очистить, протереть и отжать; другую часть предварительно отварить, очистить и протереть.",
+        "Соединить обе картофельные массы с солью, перемешать и сформовать небольшие круглые клёцки.",
+        "Сварить клёцки в воде, предназначенной для супа, добавить молоко и довести до кипения.",
+        "Перед подачей заправить сливочным маслом."
+      ]
+    },
+    {
+      "source_recipe_id": "USSR82-364",
+      "canonical_code": "RU82_364_CABBAGE_SCHNITZEL",
+      "canonical_name_ru": "Шницель из капусты",
+      "meal_type_code": "main",
+      "selected_variant": "III — с маслом",
+      "output_g": "155",
+      "base_servings": "1",
+      "source_name": "USSR82_RNR_V22_5_CAPTURE",
+      "source_url": "https://www.interdoka.ru/kulinaria/1982/5_bluda_ovoshi/6_zharenye/4.html",
+      "source_version": "sha256:e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_document_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_original_servings": "1",
+      "source_retrieved_at": "2026-09-19T07:30:00+00:00",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "User-authorized publication of normative/base recipe facts per docs/family-food/ru-normative-recipe-corpus.md. The retained source artifact is the user-supplied v22.5 checkpoint cross-checked against the 1982 collection; publisher layout, images, logos and editorial material are not imported.",
+      "change_note": "GATE1-A-RU initial immutable Russian normative RecipeVersion for the bounded Planning Core fixture.",
+      "ingredients": [
+        {
+          "external_id": "ING-0017",
+          "food_ingredient_code": "CABBAGE_GREEN",
+          "quantity_g": "180",
+          "source_amount_text": "Капуста белокочанная — 180 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0036",
+          "food_ingredient_code": "FLOUR_WHEAT",
+          "quantity_g": "5",
+          "source_amount_text": "Мука пшеничная — 5 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0071",
+          "food_ingredient_code": "EGG",
+          "quantity_g": "5",
+          "source_amount_text": "Яйцо — 5 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0053",
+          "food_ingredient_code": "BREADCRUMBS",
+          "quantity_g": "15",
+          "source_amount_text": "Сухари — 15 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0014",
+          "food_ingredient_code": "COOKING_FAT",
+          "quantity_g": "10",
+          "source_amount_text": "Жир кулинарный — 10 г нетто",
+          "source_profile_quality": "legacy_reference_composition_alias_fix",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0032",
+          "food_ingredient_code": "BUTTER_UNSALTED",
+          "quantity_g": "5",
+          "source_amount_text": "Масло сливочное — 5 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        }
+      ],
+      "steps_ru": [
+        "Зачищенный кочан капусты без кочерыги отварить 10–12 минут в подсоленной воде, слегка охладить и разобрать на листья.",
+        "Срезать или отбить утолщённые части листьев, сложить по два листа и сформовать овальные шницели.",
+        "Запанировать в муке, смочить яйцом и запанировать в сухарях.",
+        "Обжарить с обеих сторон на кулинарном жире и подать со сливочным маслом."
+      ]
+    },
+    {
+      "source_recipe_id": "USSR82-697",
+      "canonical_code": "RU82_697_BOILED_CHICKEN",
+      "canonical_name_ru": "Курица отварная",
+      "meal_type_code": "main",
+      "selected_variant": "III, курица, основной продукт без гарнира/соуса",
+      "output_g": "75",
+      "base_servings": "1",
+      "source_name": "USSR82_RNR_V22_5_CAPTURE",
+      "source_url": "https://www.interdoka.ru/kulinaria/1982/11_bluda_ptica/1.html",
+      "source_version": "sha256:e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_document_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_original_servings": "1",
+      "source_retrieved_at": "2026-09-19T07:30:00+00:00",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "User-authorized publication of normative/base recipe facts per docs/family-food/ru-normative-recipe-corpus.md. The retained source artifact is the user-supplied v22.5 checkpoint cross-checked against the 1982 collection; publisher layout, images, logos and editorial material are not imported.",
+      "change_note": "GATE1-A-RU initial immutable Russian normative RecipeVersion for the bounded Planning Core fixture.",
+      "ingredients": [
+        {
+          "external_id": "ING-0025",
+          "food_ingredient_code": "CHICKEN_CATEGORY_I",
+          "quantity_g": "107",
+          "source_amount_text": "Курица — 107 г нетто",
+          "source_profile_quality": "legacy_reference_composition_1976_source_typo_normalized",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0028",
+          "food_ingredient_code": "ONION_YELLOW",
+          "quantity_g": "2",
+          "source_amount_text": "Лук репчатый — 2 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        }
+      ],
+      "steps_ru": [
+        "Подготовленную курицу залить горячей водой, быстро довести до кипения и снять пену.",
+        "Добавить репчатый лук и варить при слабом кипении под крышкой до готовности.",
+        "Охладить готовую птицу и отделить порцию варёной курицы согласно выбранной III колонке; подать натуральной без гарнира и соуса."
+      ]
+    },
+    {
+      "source_recipe_id": "USSR82-720",
+      "canonical_code": "RU82_720_CHICKEN_KIEV",
+      "canonical_name_ru": "Котлета по-киевски",
+      "meal_type_code": "main",
+      "selected_variant": "основное изделие без гарнира",
+      "output_g": "128",
+      "base_servings": "1",
+      "source_name": "USSR82_RNR_V22_5_CAPTURE",
+      "source_url": "https://www.interdoka.ru/kulinaria/1982/11_bluda_ptica/24.html",
+      "source_version": "sha256:e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_document_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_original_servings": "1",
+      "source_retrieved_at": "2026-09-19T07:30:00+00:00",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "User-authorized publication of normative/base recipe facts per docs/family-food/ru-normative-recipe-corpus.md. The retained source artifact is the user-supplied v22.5 checkpoint cross-checked against the 1982 collection; publisher layout, images, logos and editorial material are not imported.",
+      "change_note": "GATE1-A-RU initial immutable Russian normative RecipeVersion for the bounded Planning Core fixture.",
+      "ingredients": [
+        {
+          "external_id": "ING-0025",
+          "food_ingredient_code": "CHICKEN_CATEGORY_I",
+          "quantity_g": "83",
+          "source_amount_text": "Курица, мякоть без кожи — 83 г нетто",
+          "source_profile_quality": "legacy_reference_composition_1976_source_typo_normalized",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0032",
+          "food_ingredient_code": "BUTTER_UNSALTED",
+          "quantity_g": "30",
+          "source_amount_text": "Масло сливочное — 30 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0071",
+          "food_ingredient_code": "EGG",
+          "quantity_g": "10",
+          "source_amount_text": "Яйцо — 10 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0063",
+          "food_ingredient_code": "BREAD_WHEAT_HIGH_GRADE",
+          "quantity_g": "25",
+          "source_amount_text": "Хлеб пшеничный — 25 г нетто",
+          "source_profile_quality": "legacy_reference_composition_1976",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0014",
+          "food_ingredient_code": "COOKING_FAT",
+          "quantity_g": "15",
+          "source_amount_text": "Жир кулинарный — 15 г нетто",
+          "source_profile_quality": "legacy_reference_composition_alias_fix",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        }
+      ],
+      "steps_ru": [
+        "Подготовленное куриное филе нафаршировать сливочным маслом.",
+        "Смочить полуфабрикат в яйце и дважды запанировать в белой хлебной панировке.",
+        "Жарить во фритюре на кулинарном жире 5–7 минут до румяной корочки и довести до готовности в жарочном шкафу.",
+        "Подать основное изделие без гарнира; дополнительное сливочное масло и гарнир в выбранный Gate1-вариант не входят."
+      ]
+    }
+  ],
+  "fallback": {
+    "source_recipe_id": "USSR82-453",
+    "status": "NOT_USED_INITIAL"
+  }
+}
