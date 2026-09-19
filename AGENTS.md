@@ -47,7 +47,13 @@ security-gate work. The later
 must also be read for external-dataset independence, Recipe Constructor/web
 corroboration policy and the removal of Recipe Assembly research as a blocking
 prerequisite for Planning Core. Ordinary bounded corrections do not require this
-broad preload. The detailed
+broad preload.
+The latest
+[2026-09-19 DATA-CORPUS-V1 addendum](docs/family-food/master-roadmap-addendum-2026-09-19-data-corpus.md)
+and [DATA-CORPUS-V1 contract](docs/family-food/data-corpus-v1.md) must be read for
+food/nutrition/recipe corpus curation, publication, authority, rights or Gate1
+catalogue work. They supersede the former Gate1-only minimal-data sequence while
+leaving the generalized ingestion platform later. The detailed
 [Git/PR reference](docs/family-food/agent-git-pr-workflow.md) is for unusual
 workflow questions and human review, not mandatory reading for every task.
 
