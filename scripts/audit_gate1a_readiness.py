@@ -6,11 +6,13 @@ import json
 from pathlib import Path
 import sys
 from itertools import product
+from itertools import combinations
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "backend"))
 
 from app.db.config import DatabaseConfig  # noqa: E402
+from app.domain.nutrition_evidence import MeasureMassEvidence  # noqa: E402
 from app.persistence.sqlalchemy_core.b2b2 import B2B2UnitOfWork  # noqa: E402
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine  # noqa: E402
 from app.persistence.sqlalchemy_core.food_recipe_composition import (  # noqa: E402
@@ -39,6 +41,7 @@ from app.seed.recipe_corrections import (  # noqa: E402
     seed_recipe_corrections,
 )
 from app.seed.ru_food_data import seed_ru_food_data  # noqa: E402
+from scripts.gate1a_fixture_spec import GATE1_ROLE_SHAPES  # noqa: E402
 from sqlalchemy import select  # noqa: E402
 
 
@@ -99,42 +102,81 @@ def capacity_audit():
         (role, ("member-1",))
         for _day, role in product(range(7), ("BREAKFAST", "LUNCH", "DINNER"))
     )
-    exclusion = tuple(
+    proposed_exclusion = tuple(
         (role, ("adult", "child"))
         for _day, role in product(range(7), ("BREAKFAST", "LUNCH", "DINNER"))
     )
-    # Fixture 3 has a heterogeneous second member and one fixed subset event; the
-    # fixed participant is removed before automatic candidate assignment.
-    fixed = []
-    for day, role in product(range(7), ("BREAKFAST", "LUNCH", "DINNER")):
-        participants = ["adult"]
-        if role != "LUNCH":
-            participants.append("child")
-        if day == 0 and role == "DINNER":
-            participants.remove("child")
-        fixed.append((role, tuple(participants)))
+    repository = []
+    for household in GATE1_ROLE_SHAPES:
+        slots = []
+        for _day in range(7):
+            for role in ROLE_TYPES:
+                participants = tuple(
+                    f"member-{index}"
+                    for index, roles in enumerate(household, 1)
+                    if role in {item.value for item in roles}
+                )
+                if participants:
+                    slots.append((role, participants))
+        repository.append(minimum_candidate_capacity(tuple(slots)))
     return {
-        "generic_three_meal": minimum_candidate_capacity(generic),
-        "hard_exclusion": minimum_candidate_capacity(
-            exclusion, sandwich_excluded_members=frozenset({"child"})
-        ),
-        "heterogeneous_with_subset_fixed_event": minimum_candidate_capacity(
-            tuple(fixed)
-        ),
-        "fixture_contract": {
-            "hard_exclusion_food": "sandwich candidate ingredient",
-            "fixed_event": "day 1 DINNER for child",
+        "generic_minimum_capacity": minimum_candidate_capacity(generic),
+        "current_repository_fixture": {
+            "role_shapes": [
+                [[role.value for role in member] for member in household]
+                for household in GATE1_ROLE_SHAPES
+            ],
+            "fixed_events": [],
+            "explicit_hard_exclusions": [],
+            "capacity_by_household": repository,
+        },
+        "proposed_gate1_hard_exclusion_scenario": {
+            "status": "PROPOSED_NOT_CURRENT_REPOSITORY_FIXTURE",
+            "excluded_food_code": "BREAD_WHOLE_WHEAT",
+            "excluded_candidate_recipe_code": "WIC1_BEYOND_BASIC_GRILLED_CHEESE",
+            "capacity": minimum_candidate_capacity(
+                proposed_exclusion, sandwich_excluded_members=frozenset({"child"})
+            ),
         },
     }
 
 
-def _classification(scope, contribution, profile):
+def reusable_evidence_compatibility(row, food_code, assessment, evidence):
+    """Apply narrow structured rules; uncertainty is an explicit rejection."""
+    target = " ".join(filter(None, (row.source_amount_text, row.prep_note))).casefold()
+    issues = set() if assessment is None else {item.value for item in assessment.issues}
+    if evidence.source_type != "FOOD_PORTION" or evidence.estimated:
+        return False, "NOT_EXACT_FOOD_PORTION"
+    if not evidence.edible_basis or evidence.gram_weight <= 0:
+        return False, "MISSING_EDIBLE_MASS_AUTHORITY"
+    if issues & {"FOOD_FORM_MISMATCH", "IDENTITY_MISMATCH"}:
+        return False, "CURRENT_IDENTITY_OR_FORM_MISMATCH"
+    if food_code == "CHEESE_CHEDDAR" and "cheddar" not in target:
+        return False, "TARGET_FOOD_IDENTITY_NOT_EXPLICIT"
+    description = (evidence.food_description or "").casefold()
+    modifier = (evidence.form_modifier or "").casefold()
+    if row.unit.value == "pcs":
+        if "large" in description and "large" not in target:
+            return False, "SOURCE_SIZE_QUALIFIER_NOT_ESTABLISHED"
+        if "without shell" in modifier and "egg" not in target:
+            return False, "SOURCE_EDIBLE_FORM_NOT_ESTABLISHED"
+    if row.unit.value == "ml" and "tsp" in modifier:
+        if not any(token in target for token in ("tsp", "teaspoon")):
+            return False, "SOURCE_MEASURE_TYPE_NOT_ESTABLISHED"
+    if row.unit.value == "ml" and evidence.source_measure_text.casefold() == "cup":
+        if not any(token in target for token in ("cup", " c ", "c (")):
+            return False, "SOURCE_MEASURE_TYPE_NOT_ESTABLISHED"
+    return True, "COMPATIBLE_EXACT_AUTHORITY"
+
+
+def _classification(scope, contribution, profile, food_code):
     row = contribution.row
     assessment = contribution.assessment
     issues = set() if assessment is None else {item.value for item in assessment.issues}
-    reusable = (
+    candidates = (
         scope.adapter_connection.execute(
-            select(evidence_table.c.evidence_key)
+            select(evidence_table)
+            .distinct()
             .select_from(
                 evidence_table.join(
                     assessment_table,
@@ -156,11 +198,31 @@ def _classification(scope, contribution, profile):
             )
             .order_by(evidence_table.c.evidence_key)
         )
-        .scalars()
+        .mappings()
         .all()
     )
+    decisions = []
+    reusable = []
+    for raw in candidates:
+        candidate = MeasureMassEvidence(**raw)
+        compatible, reason = reusable_evidence_compatibility(
+            row, food_code, assessment, candidate
+        )
+        decisions.append(
+            {
+                "evidence_key": candidate.evidence_key,
+                "compatible": compatible,
+                "reason": reason,
+            }
+        )
+        if compatible:
+            reusable.append(candidate.evidence_key)
     if reusable:
         repair_class = "ALREADY_ACCEPTED_EVIDENCE_REBIND"
+    elif any(
+        item["reason"] == "TARGET_FOOD_IDENTITY_NOT_EXPLICIT" for item in decisions
+    ):
+        repair_class = "IMMUTABLE_RECIPE_REVISION_REQUIRED"
     elif issues & {"FOOD_FORM_MISMATCH", "IDENTITY_MISMATCH"}:
         repair_class = "IMMUTABLE_RECIPE_REVISION_REQUIRED"
     elif issues == {"PROFILE_REPRESENTATIVENESS_REVIEW"}:
@@ -169,7 +231,7 @@ def _classification(scope, contribution, profile):
         repair_class = "ASSESSMENT_PUBLICATION_REPAIR"
     else:
         repair_class = "NEW_PRIMARY_EVIDENCE_REQUIRED"
-    return repair_class, list(dict.fromkeys(reusable))
+    return repair_class, list(dict.fromkeys(reusable)), decisions
 
 
 def _plain(value):
@@ -178,6 +240,113 @@ def _plain(value):
     if hasattr(value, "value"):
         return value.value
     return str(value)
+
+
+REPAIR_COST_ORDER = (
+    "IMMUTABLE_RECIPE_REVISION_REQUIRED",
+    "NEW_PRIMARY_EVIDENCE_REQUIRED",
+    "PROFILE_OR_FORM_DATA_REPAIR",
+    "ASSESSMENT_PUBLICATION_REPAIR",
+    "ALREADY_ACCEPTED_EVIDENCE_REBIND",
+)
+
+
+def _candidate_cost(row):
+    counts = {
+        code: sum(
+            blocker["repair_class"] == code
+            for blocker in row["blocking_ingredient_positions"]
+        )
+        for code in REPAIR_COST_ORDER
+    }
+    return counts, tuple(counts[code] for code in REPAIR_COST_ORDER)
+
+
+def repair_plan(rows):
+    eligible = [row for row in rows if row["planner_eligible"]]
+    noneligible = [row for row in rows if not row["planner_eligible"]]
+    breakfasts = [row for row in noneligible if row["meal_type_code"] == "breakfast"]
+    mains = [row for row in noneligible if row["meal_type_code"] == "main"]
+    sandwiches = [row for row in noneligible if row["meal_type_code"] == "sandwich"]
+    comparisons = []
+    for row in noneligible:
+        if row["meal_type_code"] not in {"breakfast", "main", "sandwich"}:
+            continue
+        counts, cost = _candidate_cost(row)
+        comparisons.append(
+            {
+                "recipe_code": row["recipe_code"],
+                "meal_type_code": row["meal_type_code"],
+                "repair_operations": counts,
+                "lexicographic_cost": list(cost),
+                "semantic_selection_open": bool(
+                    counts["NEW_PRIMARY_EVIDENCE_REQUIRED"]
+                    or counts["IMMUTABLE_RECIPE_REVISION_REQUIRED"]
+                ),
+                "blocking_rows": [
+                    {
+                        "position": blocker["position"],
+                        "food_code": blocker["food_code"],
+                        "repair_class": blocker["repair_class"],
+                    }
+                    for blocker in row["blocking_ingredient_positions"]
+                ],
+            }
+        )
+    sets = []
+    for breakfast_set in combinations(breakfasts, 1):
+        for main_set in combinations(mains, 4):
+            for sandwich_set in combinations(sandwiches, 1):
+                chosen = breakfast_set + main_set + sandwich_set
+                total = tuple(
+                    sum(_candidate_cost(row)[1][index] for row in chosen)
+                    for index in range(len(REPAIR_COST_ORDER))
+                )
+                sets.append(
+                    (total, tuple(sorted(row["recipe_code"] for row in chosen)))
+                )
+    sets.sort()
+    best_cost = sets[0][0]
+    best_sets = [codes for cost, codes in sets if cost == best_cost]
+    proposed_codes = tuple(
+        sorted(
+            row["recipe_code"]
+            for row in noneligible
+            if row["meal_type_code"] in {"breakfast", "main"}
+        )
+    )
+    sandwich = sandwiches[0]
+    excluded_occurrences = [
+        row["recipe_code"]
+        for row in rows
+        if "BREAD_WHOLE_WHEAT" in row["food_ingredient_codes"]
+    ]
+    return {
+        "repair_cost_policy": {
+            "comparison": "lexicographic ascending",
+            "dimension_order_highest_cost_first": list(REPAIR_COST_ORDER),
+        },
+        "current_eligible_recipe_codes": [row["recipe_code"] for row in eligible],
+        "candidate_comparison": sorted(
+            comparisons, key=lambda item: (item["meal_type_code"], item["recipe_code"])
+        ),
+        "generic_minimum_repair_gap": 6,
+        "generic_minimum_cost_candidate_sets": [list(codes) for codes in best_sets],
+        "generic_minimum_cost": list(best_cost),
+        "generic_target_selection_status": (
+            "TARGET_SELECTION_BLOCKED_PENDING_PRIMARY_EVIDENCE_REVIEW"
+        ),
+        "proposed_exclusion_repair_set": list(proposed_codes),
+        "proposed_exclusion_additional_candidates": sorted(
+            set(proposed_codes) - set(best_sets[0])
+        ),
+        "proposed_exclusion_authority": {
+            "excluded_food_code": "BREAD_WHOLE_WHEAT",
+            "occurs_in_recipe_codes": excluded_occurrences,
+            "sandwich_recipe_code": sandwich["recipe_code"],
+            "effect": "Only the sandwich candidate contains the excluded food.",
+        },
+    }
 
 
 def seed_current(config: DatabaseConfig) -> None:
@@ -210,8 +379,8 @@ def audit(config: DatabaseConfig) -> dict[str, object]:
                     evidence = contribution.measure_evidence
                     food = scope.ingredients.get(contribution.row.food_ingredient_id)
                     profile = contribution.assessment_profile
-                    repair_class, reusable = _classification(
-                        scope, contribution, profile
+                    repair_class, reusable, compatibility = _classification(
+                        scope, contribution, profile, food.canonical_code
                     )
                     compositions = (
                         scope.adapter_connection.execute(
@@ -278,6 +447,7 @@ def audit(config: DatabaseConfig) -> dict[str, object]:
                             ),
                             "accepted_repository_evidence_resolves": bool(reusable),
                             "reusable_exact_evidence_keys": reusable,
+                            "reusable_evidence_compatibility": compatibility,
                             "new_external_primary_evidence_required": repair_class
                             == "NEW_PRIMARY_EVIDENCE_REQUIRED",
                             "repair_class": repair_class,
@@ -294,6 +464,12 @@ def audit(config: DatabaseConfig) -> dict[str, object]:
                         if result.per_base_serving.kcal is not None
                         else None,
                         "blocking_ingredient_positions": blockers,
+                        "food_ingredient_codes": [
+                            scope.ingredients.get(
+                                item.food_ingredient_id
+                            ).canonical_code
+                            for item in detail.ingredients
+                        ],
                         "technical_gate1_suitable": result.status.value != "INCOMPLETE",
                         "positive_kcal_available": result.per_base_serving.kcal
                         is not None
@@ -304,13 +480,6 @@ def audit(config: DatabaseConfig) -> dict[str, object]:
                         "consumer_publication_ready": False,
                     }
                 )
-        eligible = [row for row in rows if row["planner_eligible"]]
-        selected_codes = {
-            row["recipe_code"]
-            for row in rows
-            if row["meal_type_code"] in {"breakfast", "main"}
-            and not row["planner_eligible"]
-        }
         return {
             "schema_version": 1,
             "accepted_starting_sha": "ce5cf6e2faaf9159e74d8c235f334d47743ab2a0",
@@ -324,38 +493,7 @@ def audit(config: DatabaseConfig) -> dict[str, object]:
             ],
             "recipe_count": len(rows),
             "capacity": capacity_audit(),
-            "repair_plan": {
-                "current_eligible_recipe_codes": [
-                    row["recipe_code"] for row in eligible
-                ],
-                "selected_actual_fixture_targets": [
-                    {
-                        "recipe_code": row["recipe_code"],
-                        "meal_type_code": row["meal_type_code"],
-                        "blocking_rows": [
-                            {
-                                "position": blocker["position"],
-                                "food_code": blocker["food_code"],
-                                "repair_class": blocker["repair_class"],
-                                "reusable_exact_evidence_keys": blocker[
-                                    "reusable_exact_evidence_keys"
-                                ],
-                            }
-                            for blocker in row["blocking_ingredient_positions"]
-                        ],
-                    }
-                    for row in rows
-                    if row["recipe_code"] in selected_codes
-                ],
-                "generic_only_alternate": "WIC1_BEYOND_BASIC_GRILLED_CHEESE",
-                "selection_reason": (
-                    "The hard-exclusion fixture lower bound requires all three "
-                    "breakfast and all five main catalogue versions; the current "
-                    "eligible oatmeal supplies one breakfast slot. The sandwich "
-                    "is lower capacity under the exclusion split and remains only "
-                    "the generic-fixture alternate."
-                ),
-            },
+            "repair_plan": repair_plan(rows),
             "recipes": rows,
         }
     finally:

@@ -1,6 +1,6 @@
 # Current focus
 
-Updated: `2026-09-18`.
+Updated: `2026-09-19`.
 
 ## Accepted repository state
 
@@ -9,7 +9,9 @@ Updated: `2026-09-18`.
 - PR7 / Issue #53 = COMPLETE through merged PR #54.
 - PR8 / Issue #57 = COMPLETE through merged PR #59.
 - Post-PR59 state synchronization = COMPLETE through merged PR #60.
-- Accepted current main / Gate1-A base: `792d855448e16edcf36b41e0f6e321346fb915ed`.
+- Historical Gate1-A authorization base: `792d855448e16edcf36b41e0f6e321346fb915ed`.
+- Actual Gate1-A implementation/audit base after merged PR #62:
+  `ce5cf6e2faaf9159e74d8c235f334d47743ab2a0`.
 - Accepted SQLite migration head: `0032_meal_plan_serving`.
 - Future RecipeTemplate reservation remains `0033_recipe_template_catalogue`.
 
@@ -25,11 +27,13 @@ The exact-base fresh audit now records an evidence-capacity blocker: 29 current
 versions are `INCOMPLETE`; the only Planner-eligible version is one conditional
 `breakfast` candidate with positive kcal. The generic three-meal lower bound is
 two breakfast + four main + one sandwich (seven versions; six repairs). The
-actual two-participant hard-exclusion fixture needs three breakfast + five main
-(eight versions; seven repairs), because the excluded sandwich would force a
-split without reducing shared demand. Repository search finds nine blocker rows
-with reusable accepted exact evidence, including two selected black-pepper rows,
-but no selected recipe is fully resolved without new authority. See
+current repository fixture has no fixed event or explicit hard exclusion and its
+largest shape has the same seven-version bound. A separately labelled proposed
+`BREAD_WHOLE_WHEAT` exclusion scenario would need eight versions, but is not
+current fixture truth. Semantic compatibility leaves seven legally reusable
+exact blocker rows, all black-pepper measures; egg-size and cheddar-identity
+false positives are rejected. Generic target selection remains blocked pending
+primary-evidence review. See
 `data/curation/gate1a-data-readiness/`; Gate1-A remains active/not review-ready
 pending authoritative primary evidence, with no production-data or schema
 change made by the audit.

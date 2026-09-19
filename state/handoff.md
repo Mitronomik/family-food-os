@@ -1,6 +1,6 @@
 # Handoff
 
-Updated: `2026-09-18`.
+Updated: `2026-09-19`.
 
 ## Accepted base and governance
 
@@ -16,17 +16,21 @@ The exact `ce5cf6e2` implementation-base audit is now reproducible in
 `data/curation/gate1a-data-readiness/`. It finds 29 `INCOMPLETE` versions and
 one Planner-eligible conditional breakfast with positive kcal. The generic
 three-meal minimum is seven versions (2 breakfast + 4 main + 1 sandwich), a
-six-version repair gap. The actual hard-exclusion fixture needs eight versions
-(3 breakfast + 5 main), a seven-version repair gap; its excluded sandwich would
-force a split and supplies no net capacity. Repository matching finds nine
-blocker rows with legally reusable accepted exact evidence, including two in the
-selected target set, but every selected recipe retains new-evidence or immutable
-revision work. Gate1-A is therefore not review-ready; no schema, production
-truth, Gate1-CLOSE or PR9 work started.
+six-version repair gap. The current repository fixture has no fixed event or
+explicit exclusion; its largest shape has the same bound. A separately proposed
+`BREAD_WHOLE_WHEAT` exclusion scenario needs eight versions and seven repairs,
+but is not current fixture evidence. Semantic checks reduce legal exact reuse to
+seven black-pepper rows; unspecified eggs and non-explicit cheddar are rejected.
+Generic target selection is blocked pending primary-evidence review. Gate1-A is
+not review-ready; no schema, production truth, Gate1-CLOSE or PR9 work started.
 
-Accepted starting main:
+Historical Gate1-A authorization base:
 
 `792d855448e16edcf36b41e0f6e321346fb915ed`
+
+Actual Gate1-A implementation/audit base after merged PR #62:
+
+`ce5cf6e2faaf9159e74d8c235f334d47743ab2a0`
 
 Accepted SQLite migration head:
 
@@ -54,7 +58,8 @@ Accepted PR8 evidence:
 Current authoritative blocker:
 
 - the accepted 30-recipe corpus is present and verified;
-- all 30 current RecipeVersion Nutrition results are `INCOMPLETE` with unknown kcal in the PR8 repository fixture;
+- the fresh Gate1-A audit finds 29 current RecipeVersions `INCOMPLETE` and one
+  Planner-eligible `CONDITIONAL` oatmeal version with positive kcal;
 - therefore no repository-backed fixture yet demonstrates the successful complete-week → individualized-Serving path required by the Planning Core gate.
 
 The 2026-09-16 roadmap addendum permits a bounded data-gap closure when available data cannot supply enough valid candidates. It forbids redesigning Planner around the dataset or inventing missing truth.

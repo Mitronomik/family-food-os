@@ -29,7 +29,7 @@ row is optional. This is technical Planner eligibility, not a claim of consumer
 publication readiness. The complete row-level matrix is
 [`current-readiness.json`](current-readiness.json).
 
-## Candidate-capacity proof
+## Capacity: observed fixture versus models
 
 The audit now exhaustively assigns participant sets to compatible candidates
 under `planner-v0.2`, `meal-role-recipe-v2` and
@@ -40,18 +40,19 @@ versions, one breakfast plus two lunches to the sandwich, and the remaining 12
 lunch/dinner events to four main versions. This explicitly uses the sandwich in
 both compatible roles and keeps every count at or below three.
 
-The actual hard-exclusion fixture has two participants at all 21 opportunities
-and excludes the sandwich ingredient for the child. Using that sandwich causes a
-split and cannot reduce the shared capacity bound. The exhaustive result is
-**eight** versions: three breakfast and five main; the sandwich is not needed.
-The heterogeneous fixture removes the fixed-event participant before automatic
-assignment and retains the generic seven-version bound. These fixture definitions
-and computed results are embedded in `current-readiness.json`.
+The current repository fixture is read from the shared specification used by
+`test_planner_gate1_fixtures.py`. Its three household shapes require respectively
+3, 6 and 7 eligible versions. It currently has no fixed event and no explicit
+hard exclusion. Its largest shape is the generic three-meal case, so its repair
+gap from the one eligible oatmeal is six versions.
 
-Current eligibility is the conditional oatmeal breakfast only. Therefore the
-generic gap is six versions, while the governing hard-exclusion fixture gap is
-seven: both remaining breakfasts and all five current mains. The sandwich is a
-generic-only alternate, not a replacement for actual exclusion-fixture capacity.
+A harder scenario is retained only as a **proposal**, never as observed fixture
+truth. It excludes real `BREAD_WHOLE_WHEAT`, which occurs only in the sole
+sandwich candidate `WIC1_BEYOND_BASIC_GRILLED_CHEESE`, for one of two participants
+at all opportunities. Planner split semantics make its minimum eight versions
+(3 breakfast + 5 main); the sandwich supplies no net shared capacity. This
+scenario would add one candidate beyond the generic path, but it is not yet a
+repository-backed Gate1 fixture.
 
 ## Evidence classification and selected targets
 
@@ -62,23 +63,31 @@ non-null kcal, and kcal greater than zero. Consumer readiness remains false.
 For each blocker the audit searches current assessments, non-estimated exact
 measure evidence attached to current `APPROVED_EXACT` assessments, the exact
 FoodIngredient/profile/unit identity, and persisted composition snapshots.
-Reusable evidence is reported only when food identity, pinned profile, unit and
-normalized evidence unit match. Current blocker totals are:
+Reusable evidence additionally must pass deterministic source-measure, size,
+form, edible-basis, preparation and target-source-text checks. Unproved semantic
+compatibility fails closed. Current blocker totals are:
 
-* `NEW_PRIMARY_EVIDENCE_REQUIRED`: 69;
-* `IMMUTABLE_RECIPE_REVISION_REQUIRED`: 15;
-* `ALREADY_ACCEPTED_EVIDENCE_REBIND`: 9;
+* `NEW_PRIMARY_EVIDENCE_REQUIRED`: 70;
+* `IMMUTABLE_RECIPE_REVISION_REQUIRED`: 16;
+* `ALREADY_ACCEPTED_EVIDENCE_REBIND`: 7;
 * `PROFILE_OR_FORM_DATA_REPAIR`: 1.
 
-The actual-fixture target set is forced by catalogue capacity rather than raw
-blocker count: `TNC6_EGGS_SPINACH`, `SNAP4_SPANISH_FRITTATA`, and all five mains
-(`FNS2_ORANGE_PORK_CHOPS`, `FNS4_OVEN_FRIED_FISH`,
-`FNS5_BAKED_LENTILS_CASSEROLE`, `SNAP4_BRAISED_CHICKEN_SPINACH`,
-`SNAP4_DILLED_FISH_FILLETS`). The matrix's `repair_plan` gives every exact target
-row and required class. Two selected black-pepper rows can reuse accepted exact
-`FDC-PORTION-87560:exact`; the remaining selected rows require new primary
-evidence or an immutable recipe correction. The sandwich remains the generic
-alternate but itself has only one accepted rebind and two new-evidence rows.
+All seven legal reuses are teaspoon-derived black-pepper rows using
+`FDC-PORTION-87560:exact`. Unspecified `6 eggs (in shell)` correctly rejects the
+large-egg evidence; the explicit `6 large eggs` control accepts it. The grilled
+cheese source permits Muenster, Monterey Jack or mozzarella but does not establish
+cheddar, so exact cheddar cup evidence is rejected and an immutable recipe-truth
+decision is required.
+
+Candidate comparison uses lexicographic ascending counts, highest-authority cost
+first: immutable revision, new primary evidence, deterministic profile/form or
+assessment repair, then accepted exact rebind. The current generic minimum-cost
+set is recorded in JSON and contains one remaining breakfast, four of five mains,
+and the sole sandwich (six repairs). Because every such set depends on authority
+not yet present, its status is
+`TARGET_SELECTION_BLOCKED_PENDING_PRIMARY_EVIDENCE_REVIEW`; it is a deterministic
+comparison result, not authorization to publish those repairs. The proposed
+exclusion scenario's seven-repair set is reported separately.
 
 ## Evidence-backed stop
 
@@ -87,7 +96,7 @@ rollback behavior, or repair replay to claim. Each accepted historical data
 operation retains its own idempotency/rollback evidence; the audit deliberately
 uses their required fresh-install order rather than replaying an old loader over
 newer replacement profiles. The row matrix proves that the
-minimum actual-fixture repair cannot be obtained solely by rebinding accepted
+minimum generic repair cannot be obtained solely by rebinding accepted
 exact evidence. Some exact evidence is reusable, but it does not resolve whole
 target recipes. Remaining examples include missing exact same-form authority for
 spinach volume, piece-size ambiguity, a lemon/juice form mismatch, and explicitly

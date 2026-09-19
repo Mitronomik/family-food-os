@@ -35,6 +35,7 @@ from app.services.planner import (
     GenerationMemberConstraints,
     PlannerService,
 )
+from scripts.gate1a_fixture_spec import GATE1_ROLE_SHAPES
 
 
 def meal_plan_service(engine):
@@ -72,16 +73,7 @@ def test_three_gate1_households_use_authoritative_application_boundary(
         )
 
         outcomes = []
-        shapes = (
-            ((MealRole.DINNER,),),
-            ((MealRole.BREAKFAST, MealRole.DINNER), (MealRole.DINNER,)),
-            (
-                (MealRole.BREAKFAST, MealRole.LUNCH, MealRole.DINNER),
-                (MealRole.BREAKFAST, MealRole.DINNER),
-                (MealRole.DINNER,),
-            ),
-        )
-        for household_number, roles_by_member in enumerate(shapes, 1):
+        for household_number, roles_by_member in enumerate(GATE1_ROLE_SHAPES, 1):
             household = households.create_household(
                 name=f"Семья {household_number}", timezone_name="Europe/Moscow"
             )

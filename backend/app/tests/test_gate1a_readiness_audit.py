@@ -7,18 +7,24 @@ from pathlib import Path
 import pytest
 
 from app.db.config import DatabaseConfig
-from scripts.audit_gate1a_readiness import audit, capacity_audit
+from app.persistence.sqlalchemy_core.b2b2 import B2B2UnitOfWork
+from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
+from scripts.gate1a_fixture_spec import GATE1_ROLE_SHAPES
+from scripts.audit_gate1a_readiness import (
+    audit,
+    capacity_audit,
+    reusable_evidence_compatibility,
+)
 
 
 @pytest.fixture(scope="module")
 def current_audit(tmp_path_factory):
-    return audit(
-        DatabaseConfig(path=tmp_path_factory.mktemp("gate1a") / "audit.sqlite")
-    )
+    config = DatabaseConfig(path=tmp_path_factory.mktemp("gate1a") / "audit.sqlite")
+    return audit(config), config
 
 
 def test_generic_capacity_uses_one_sandwich_across_breakfast_and_lunch() -> None:
-    capacity = capacity_audit()["generic_three_meal"]
+    capacity = capacity_audit()["generic_minimum_capacity"]
 
     assert capacity == {
         "total": 7,
@@ -29,27 +35,79 @@ def test_generic_capacity_uses_one_sandwich_across_breakfast_and_lunch() -> None
     }
 
 
-def test_actual_exclusion_and_fixed_event_fixture_capacity() -> None:
+def test_repository_fixture_and_proposed_exclusion_are_separate() -> None:
     capacity = capacity_audit()
 
-    assert capacity["hard_exclusion"] == {
+    repository = capacity["current_repository_fixture"]
+    assert repository["role_shapes"] == [
+        [[role.value for role in member] for member in household]
+        for household in GATE1_ROLE_SHAPES
+    ]
+    assert repository["fixed_events"] == []
+    assert repository["explicit_hard_exclusions"] == []
+    assert [item["total"] for item in repository["capacity_by_household"]] == [3, 6, 7]
+
+    proposed = capacity["proposed_gate1_hard_exclusion_scenario"]
+    assert proposed["status"] == "PROPOSED_NOT_CURRENT_REPOSITORY_FIXTURE"
+    assert proposed["excluded_food_code"] == "BREAD_WHOLE_WHEAT"
+    assert proposed["capacity"] == {
         "total": 8,
         "breakfast": 3,
         "main": 5,
         "sandwich": 0,
         "allocation": {"sandwich_breakfast_uses": 0, "sandwich_lunch_uses": 0},
     }
-    assert capacity["heterogeneous_with_subset_fixed_event"] == {
-        "total": 7,
-        "breakfast": 2,
-        "main": 4,
-        "sandwich": 1,
-        "allocation": {"sandwich_breakfast_uses": 1, "sandwich_lunch_uses": 2},
-    }
+
+
+def test_reusable_evidence_requires_semantic_size_form_and_identity(
+    current_audit,
+) -> None:
+    _, config = current_audit
+    engine = create_sqlite_engine(config)
+    try:
+        with B2B2UnitOfWork(engine) as scope:
+
+            def detail(code):
+                recipe = scope.recipes.get_by_code(code)
+                return scope.versions.get_current_verified(recipe.id)
+
+            egg_evidence = scope.evidence.get_by_key("FDC-PORTION-193781:exact")
+            deviled = detail("SNAP6_HEAVENLY_DEVILED_EGGS")
+            deviled_row = deviled.ingredients[0]
+            deviled_assessment = scope.evidence.get_current_assessment(deviled_row.id)
+            assert reusable_evidence_compatibility(
+                deviled_row, "EGG", deviled_assessment, egg_evidence
+            ) == (False, "SOURCE_SIZE_QUALIFIER_NOT_ESTABLISHED")
+
+            frittata = detail("SNAP4_SPANISH_FRITTATA")
+            large_egg_row = frittata.ingredients[1]
+            large_egg_assessment = scope.evidence.get_current_assessment(
+                large_egg_row.id
+            )
+            assert reusable_evidence_compatibility(
+                large_egg_row, "EGG", large_egg_assessment, egg_evidence
+            ) == (True, "COMPATIBLE_EXACT_AUTHORITY")
+
+            pepper_evidence = scope.evidence.get_by_key("FDC-PORTION-87560:exact")
+            pepper_row = frittata.ingredients[5]
+            pepper_assessment = scope.evidence.get_current_assessment(pepper_row.id)
+            assert reusable_evidence_compatibility(
+                pepper_row, "BLACK_PEPPER", pepper_assessment, pepper_evidence
+            ) == (True, "COMPATIBLE_EXACT_AUTHORITY")
+
+            cheese_evidence = scope.evidence.get_by_key("FDC-PORTION-119620:exact")
+            sandwich = detail("WIC1_BEYOND_BASIC_GRILLED_CHEESE")
+            cheese_row = sandwich.ingredients[1]
+            cheese_assessment = scope.evidence.get_current_assessment(cheese_row.id)
+            assert reusable_evidence_compatibility(
+                cheese_row, "CHEESE_CHEDDAR", cheese_assessment, cheese_evidence
+            ) == (False, "TARGET_FOOD_IDENTITY_NOT_EXPLICIT")
+    finally:
+        engine.dispose()
 
 
 def test_fresh_current_readiness_matrix(current_audit) -> None:
-    result = current_audit
+    result, _ = current_audit
 
     assert result["accepted_starting_sha"] == (
         "ce5cf6e2faaf9159e74d8c235f334d47743ab2a0"
@@ -87,17 +145,34 @@ def test_fresh_current_readiness_matrix(current_audit) -> None:
         == (blocker["repair_class"] == "NEW_PRIMARY_EVIDENCE_REQUIRED")
         for blocker in blockers
     )
-
-    selected = result["repair_plan"]["selected_actual_fixture_targets"]
-    assert len(selected) == 7
-    assert Counter(row["meal_type_code"] for row in selected) == {
-        "breakfast": 2,
-        "main": 5,
+    assert Counter(blocker["repair_class"] for blocker in blockers) == {
+        "NEW_PRIMARY_EVIDENCE_REQUIRED": 70,
+        "IMMUTABLE_RECIPE_REVISION_REQUIRED": 16,
+        "ALREADY_ACCEPTED_EVIDENCE_REBIND": 7,
+        "PROFILE_OR_FORM_DATA_REPAIR": 1,
     }
+    reusable = [
+        (row["recipe_code"], blocker["position"], blocker["food_code"])
+        for row in result["recipes"]
+        for blocker in row["blocking_ingredient_positions"]
+        if blocker["accepted_repository_evidence_resolves"]
+    ]
+    assert len(reusable) == 7
+    assert {food_code for _, _, food_code in reusable} == {"BLACK_PEPPER"}
+
+    plan = result["repair_plan"]
+    assert plan["generic_minimum_repair_gap"] == 6
+    assert plan["generic_target_selection_status"] == (
+        "TARGET_SELECTION_BLOCKED_PENDING_PRIMARY_EVIDENCE_REVIEW"
+    )
+    assert len(plan["generic_minimum_cost_candidate_sets"][0]) == 6
+    assert plan["proposed_exclusion_authority"]["occurs_in_recipe_codes"] == [
+        "WIC1_BEYOND_BASIC_GRILLED_CHEESE"
+    ]
 
 
 def test_committed_matrix_matches_fresh_current_truth(current_audit) -> None:
-    result = current_audit
+    result, _ = current_audit
     committed = json.loads(
         (
             Path(__file__).resolve().parents[3]
