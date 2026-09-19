@@ -1,0 +1,517 @@
+{
+  "artifact": "GATE1-A-RU selected recipe source snapshot",
+  "original_collection": {
+    "authority": "Министерство торговли СССР",
+    "digital_reference_url": "https://djvu.online/file/0CASHYOi1w9Oh",
+    "edition": "1982",
+    "title": "Сборник рецептур блюд и кулинарных изделий для предприятий общественного питания"
+  },
+  "recipes": [
+    {
+      "category": "Блюда из яиц",
+      "mass_coverage_pct": "100",
+      "output_g": "110",
+      "raw_status": "READY_RAW",
+      "recipe_name": "Омлет (натуральный)",
+      "recipe_no": "467",
+      "retention_applied": null,
+      "row_coverage_pct": "100",
+      "rows": [
+        {
+          "AmountStatus": "source_net_for_calc",
+          "Amount_g": "80",
+          "CanonicalIngredient": "Яйцо куриное",
+          "Optional": "NO",
+          "OriginalIngredient": "Яйцо",
+          "OriginalIngredientID": "ING-0071",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/7_bluda_yaca/4_omlet/15.html"
+        },
+        {
+          "AmountStatus": "source_net_for_calc",
+          "Amount_g": "30",
+          "CanonicalIngredient": "Молоко 3,2%",
+          "Notes": "выбран вариант молока, а не воды",
+          "Optional": "NO",
+          "OriginalIngredient": "Молоко",
+          "OriginalIngredientID": "ING-0034",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/7_bluda_yaca/4_omlet/15.html"
+        },
+        {
+          "AmountStatus": "source_net_for_calc",
+          "Amount_g": "5",
+          "CanonicalIngredient": "Маргарин столовый",
+          "Optional": "NO",
+          "OriginalIngredient": "Маргарин",
+          "OriginalIngredientID": "ING-0030",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/7_bluda_yaca/4_omlet/15.html"
+        },
+        {
+          "AmountStatus": "source_net_for_calc",
+          "Amount_g": "5",
+          "CanonicalIngredient": "Масло сливочное",
+          "Optional": "NO",
+          "OriginalIngredient": "Масло сливочное",
+          "OriginalIngredientID": "ING-0032",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/7_bluda_yaca/4_omlet/15.html"
+        }
+      ],
+      "source_recipe_id": "USSR82-467",
+      "state_review_rows": "0",
+      "variant": "selected_1982_variant",
+      "technology_evidence_url": "https://interdoka.ru/kulinaria/1982/7_bluda_yaca/4_omlet/15.html"
+    },
+    {
+      "category": "Блюда из творога",
+      "mass_coverage_pct": "100",
+      "output_g": "170",
+      "raw_status": "READY_RAW",
+      "recipe_name": "Сырники из творога",
+      "recipe_no": "492",
+      "retention_applied": null,
+      "row_coverage_pct": "100",
+      "rows": [
+        {
+          "AmountStatus": "verified_net",
+          "Amount_g": "135",
+          "CanonicalIngredient": "Творог 9%",
+          "Optional": "NO",
+          "OriginalIngredient": "Творог",
+          "OriginalIngredientID": "ING-0056",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/8_bluda_tvorog/12.html"
+        },
+        {
+          "AmountStatus": "verified_net",
+          "Amount_g": "20",
+          "CanonicalIngredient": "Мука пшеничная",
+          "Notes": "2/3 в массу, остальное для панировки",
+          "Optional": "NO",
+          "OriginalIngredient": "Мука пшеничная",
+          "OriginalIngredientID": "ING-0036",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/8_bluda_tvorog/12.html"
+        },
+        {
+          "AmountStatus": "verified_net",
+          "Amount_g": "5",
+          "CanonicalIngredient": "Яйцо куриное",
+          "Optional": "NO",
+          "OriginalIngredient": "Яйцо",
+          "OriginalIngredientID": "ING-0071",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/8_bluda_tvorog/12.html"
+        },
+        {
+          "AmountStatus": "verified_net",
+          "Amount_g": "15",
+          "CanonicalIngredient": "Сахар",
+          "Optional": "NO",
+          "OriginalIngredient": "Сахар",
+          "OriginalIngredientID": "ING-0042",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/8_bluda_tvorog/12.html"
+        },
+        {
+          "AmountStatus": "verified_net",
+          "Amount_g": "5",
+          "CanonicalIngredient": "Маргарин столовый",
+          "Notes": "для обжаривания",
+          "Optional": "NO",
+          "OriginalIngredient": "Маргарин столовый",
+          "OriginalIngredientID": "ING-0030",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/8_bluda_tvorog/12.html"
+        },
+        {
+          "AmountStatus": "verified_net",
+          "Amount_g": "20",
+          "CanonicalIngredient": "Сметана 30%",
+          "Notes": "для подачи",
+          "Optional": "NO",
+          "OriginalIngredient": "Сметана",
+          "OriginalIngredientID": "ING-0047",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/8_bluda_tvorog/12.html"
+        }
+      ],
+      "source_recipe_id": "USSR82-492",
+      "state_review_rows": "0",
+      "variant": "1-й вариант, со сметаной",
+      "technology_evidence_url": "https://interdoka.ru/kulinaria/1982/8_bluda_tvorog/12.html"
+    },
+    {
+      "category": "Мучные изделия",
+      "mass_coverage_pct": "100",
+      "output_g": "160",
+      "raw_status": "READY_RAW",
+      "recipe_name": "Блины",
+      "recipe_no": "1081",
+      "retention_applied": null,
+      "row_coverage_pct": "100",
+      "rows": [
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "75",
+          "CanonicalIngredient": "Мука пшеничная",
+          "Optional": "NO",
+          "OriginalIngredient": "Мука пшеничная",
+          "OriginalIngredientID": "ING-0036"
+        },
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "3",
+          "CanonicalIngredient": "Сахар",
+          "Optional": "NO",
+          "OriginalIngredient": "Сахар",
+          "OriginalIngredientID": "ING-0042"
+        },
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "118",
+          "CanonicalIngredient": "Вода",
+          "Optional": "NO",
+          "OriginalIngredient": "Вода",
+          "OriginalIngredientID": "ING-0006"
+        },
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "3",
+          "CanonicalIngredient": "Дрожжи прессованные",
+          "Optional": "NO",
+          "OriginalIngredient": "Дрожжи прессованные",
+          "OriginalIngredientID": "ING-0097"
+        },
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "1.5",
+          "CanonicalIngredient": "Соль поваренная",
+          "Optional": "NO",
+          "OriginalIngredient": "Соль",
+          "OriginalIngredientID": "ING-0050"
+        },
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "5",
+          "CanonicalIngredient": "Маргарин столовый",
+          "Optional": "NO",
+          "OriginalIngredient": "Маргарин столовый для выпечки",
+          "OriginalIngredientID": "ING-0030"
+        },
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "10",
+          "CanonicalIngredient": "Масло сливочное",
+          "Optional": "NO",
+          "OriginalIngredient": "Масло сливочное при отпуске",
+          "OriginalIngredientID": "ING-0032"
+        }
+      ],
+      "source_recipe_id": "USSR82-1081",
+      "state_review_rows": "0",
+      "variant": "III — с маслом",
+      "technology_evidence_url": "https://bliny.shashlik-piknik.ru/retseptura-blinov-po-sborniku-retseptur/"
+    },
+    {
+      "category": "Супы",
+      "mass_coverage_pct": "100",
+      "output_g": "1000",
+      "raw_status": "READY_RAW",
+      "recipe_name": "Рассольник ленинградский",
+      "recipe_no": "208",
+      "retention_applied": null,
+      "row_coverage_pct": "100",
+      "rows": [
+        {
+          "AmountStatus": "source_net_for_calc",
+          "Amount_g": "300",
+          "CanonicalIngredient": "Картофель",
+          "Optional": "NO",
+          "OriginalIngredient": "Картофель",
+          "OriginalIngredientID": "ING-0019",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/2_supi/2_zapravochnie/4_rassolniki/3.html"
+        },
+        {
+          "AmountStatus": "source_net_for_calc",
+          "Amount_g": "20",
+          "CanonicalIngredient": "Крупа рисовая",
+          "Notes": "выбран разрешенный вариант крупы",
+          "Optional": "NO",
+          "OriginalIngredient": "Крупа рисовая",
+          "OriginalIngredientID": "ING-0024",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/2_supi/2_zapravochnie/4_rassolniki/3.html"
+        },
+        {
+          "AmountStatus": "source_net_for_calc",
+          "Amount_g": "40",
+          "CanonicalIngredient": "Морковь",
+          "Optional": "NO",
+          "OriginalIngredient": "Морковь",
+          "OriginalIngredientID": "ING-0035",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/2_supi/2_zapravochnie/4_rassolniki/3.html"
+        },
+        {
+          "AmountStatus": "source_net_for_calc",
+          "Amount_g": "20",
+          "CanonicalIngredient": "Лук репчатый",
+          "Optional": "NO",
+          "OriginalIngredient": "Лук",
+          "OriginalIngredientID": "ING-0028",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/2_supi/2_zapravochnie/4_rassolniki/3.html"
+        },
+        {
+          "AmountStatus": "source_net_for_calc",
+          "Amount_g": "60",
+          "CanonicalIngredient": "Огурец соленый",
+          "Optional": "NO",
+          "OriginalIngredient": "Огурцы соленые",
+          "OriginalIngredientID": "ING-0038",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/2_supi/2_zapravochnie/4_rassolniki/3.html"
+        },
+        {
+          "AmountStatus": "source_net_for_calc",
+          "Amount_g": "20",
+          "CanonicalIngredient": "Маргарин столовый",
+          "Optional": "NO",
+          "OriginalIngredient": "Маргарин",
+          "OriginalIngredientID": "ING-0030",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/2_supi/2_zapravochnie/4_rassolniki/3.html"
+        }
+      ],
+      "source_recipe_id": "USSR82-208",
+      "state_review_rows": "0",
+      "variant": "selected_1982_variant",
+      "technology_evidence_url": "https://djvu.online/file/0CASHYOi1w9Oh"
+    },
+    {
+      "category": "Супы",
+      "mass_coverage_pct": "100",
+      "output_g": "1000",
+      "raw_status": "READY_RAW",
+      "recipe_name": "Суп молочный с картофельными клецками",
+      "recipe_no": "263",
+      "retention_applied": null,
+      "row_coverage_pct": "100",
+      "rows": [
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "600",
+          "CanonicalIngredient": "Молоко 3,2%",
+          "Optional": "NO",
+          "OriginalIngredient": "Молоко",
+          "OriginalIngredientID": "ING-0034",
+          "RelationshipSourceURL": "https://studopedia.net/17_42318_supi-s-makaronnimi-izdeliyami-domashney-lapshoy.html"
+        },
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "190",
+          "CanonicalIngredient": "Вода",
+          "Optional": "NO",
+          "OriginalIngredient": "Вода",
+          "OriginalIngredientID": "ING-0006",
+          "RelationshipSourceURL": "https://studopedia.net/17_42318_supi-s-makaronnimi-izdeliyami-domashney-lapshoy.html"
+        },
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "150",
+          "CanonicalIngredient": "Картофель",
+          "Notes": "gross 400; losses from grating/squeezing 50%",
+          "Optional": "NO",
+          "OriginalIngredient": "Картофель для протирания",
+          "OriginalIngredientID": "ING-0019",
+          "RelationshipSourceURL": "https://studopedia.net/17_42318_supi-s-makaronnimi-izdeliyami-domashney-lapshoy.html"
+        },
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "110",
+          "CanonicalIngredient": "Картофель",
+          "Optional": "NO",
+          "OriginalIngredient": "Картофель для отваривания",
+          "OriginalIngredientID": "ING-0019",
+          "RelationshipSourceURL": "https://studopedia.net/17_42318_supi-s-makaronnimi-izdeliyami-domashney-lapshoy.html"
+        },
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "1.7",
+          "CanonicalIngredient": "Соль поваренная",
+          "Optional": "NO",
+          "OriginalIngredient": "Соль",
+          "OriginalIngredientID": "ING-0050",
+          "RelationshipSourceURL": "https://studopedia.net/17_42318_supi-s-makaronnimi-izdeliyami-domashney-lapshoy.html"
+        },
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "20",
+          "CanonicalIngredient": "Масло сливочное",
+          "Optional": "NO",
+          "OriginalIngredient": "Масло сливочное",
+          "OriginalIngredientID": "ING-0032",
+          "RelationshipSourceURL": "https://studopedia.net/17_42318_supi-s-makaronnimi-izdeliyami-domashney-lapshoy.html"
+        }
+      ],
+      "source_recipe_id": "USSR82-263",
+      "state_review_rows": "0",
+      "variant": "single",
+      "technology_evidence_url": "https://meganorm.ru/mega_doc/dop_norm/0/sanpin_42-125-5204-90_ustroystvo_soderzhanie_i_organizatsiya/0/prikaz_mintorga_sssr_ot_12_12_1980_N_310_o_vvedenii_sbornika.html"
+    },
+    {
+      "category": "Картофель, овощи и грибы",
+      "mass_coverage_pct": "100",
+      "output_g": "155",
+      "raw_status": "READY_RAW",
+      "recipe_name": "Шницель из капусты",
+      "recipe_no": "364",
+      "retention_applied": null,
+      "row_coverage_pct": "100",
+      "rows": [
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "180",
+          "CanonicalIngredient": "Капуста белокочанная",
+          "Optional": "NO",
+          "OriginalIngredient": "Капуста белокочанная",
+          "OriginalIngredientID": "ING-0017"
+        },
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "5",
+          "CanonicalIngredient": "Мука пшеничная",
+          "Optional": "NO",
+          "OriginalIngredient": "Мука пшеничная",
+          "OriginalIngredientID": "ING-0036"
+        },
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "5",
+          "CanonicalIngredient": "Яйцо куриное",
+          "Optional": "NO",
+          "OriginalIngredient": "Яйца",
+          "OriginalIngredientID": "ING-0071"
+        },
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "15",
+          "CanonicalIngredient": "Сухари панировочные",
+          "Optional": "NO",
+          "OriginalIngredient": "Сухари",
+          "OriginalIngredientID": "ING-0053"
+        },
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "10",
+          "CanonicalIngredient": "Жир кулинарный",
+          "Optional": "NO",
+          "OriginalIngredient": "Жир кулинарный",
+          "OriginalIngredientID": "ING-0014"
+        },
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "5",
+          "CanonicalIngredient": "Масло сливочное",
+          "Optional": "NO",
+          "OriginalIngredient": "Масло сливочное",
+          "OriginalIngredientID": "ING-0032"
+        }
+      ],
+      "source_recipe_id": "USSR82-364",
+      "state_review_rows": "0",
+      "variant": "III — с маслом",
+      "technology_evidence_url": "https://studopedia.net/6_116752_rashoda-sirya-vihoda-polufabrikatov-i-gotovih-izdeliy.html"
+    },
+    {
+      "category": "Птица и кролик",
+      "mass_coverage_pct": "100",
+      "output_g": "75",
+      "raw_status": "READY_RAW",
+      "recipe_name": "Птица, дичь или кролик отварные с гарниром",
+      "recipe_no": "697",
+      "retention_applied": null,
+      "row_coverage_pct": "100",
+      "rows": [
+        {
+          "AmountStatus": "verified_net",
+          "Amount_g": "107",
+          "CanonicalIngredient": "Курица",
+          "Notes": "нетто сырья; масса готовой отварной птицы 75 г",
+          "Optional": "NO",
+          "OriginalIngredient": "Курица",
+          "OriginalIngredientID": "ING-0025",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/11_bluda_ptica/1.html"
+        },
+        {
+          "AmountStatus": "verified_net",
+          "Amount_g": "2",
+          "CanonicalIngredient": "Лук репчатый",
+          "Optional": "NO",
+          "OriginalIngredient": "Лук репчатый",
+          "OriginalIngredientID": "ING-0028",
+          "RelationshipSourceURL": "https://www.interdoka.ru/kulinaria/1982/11_bluda_ptica/1.html"
+        }
+      ],
+      "source_recipe_id": "USSR82-697",
+      "state_review_rows": "0",
+      "variant": "III, курица, основной продукт без гарнира/соуса",
+      "technology_evidence_url": "https://www.interdoka.ru/kulinaria/1982/11_bluda_ptica/1.html"
+    },
+    {
+      "category": "Птица и кролик",
+      "mass_coverage_pct": "100",
+      "output_g": "128",
+      "raw_status": "READY_RAW",
+      "recipe_name": "Котлеты по-киевски",
+      "recipe_no": "720",
+      "retention_applied": null,
+      "row_coverage_pct": "100",
+      "rows": [
+        {
+          "AmountStatus": "verified_net",
+          "Amount_g": "83",
+          "CanonicalIngredient": "Курица",
+          "Notes": "мякоть без кожи; косточка 7 г хранится как несъедобная технологическая часть",
+          "Optional": "NO",
+          "OriginalIngredient": "Курица",
+          "OriginalIngredientID": "ING-0025",
+          "RelationshipSourceURL": "https://interdoka.ru/kulinaria/1982/11_bluda_ptica/24.html"
+        },
+        {
+          "AmountStatus": "verified_net",
+          "Amount_g": "30",
+          "CanonicalIngredient": "Масло сливочное",
+          "Notes": "начинка",
+          "Optional": "NO",
+          "OriginalIngredient": "Масло сливочное",
+          "OriginalIngredientID": "ING-0032",
+          "RelationshipSourceURL": "https://interdoka.ru/kulinaria/1982/11_bluda_ptica/24.html"
+        },
+        {
+          "AmountStatus": "verified_net",
+          "Amount_g": "10",
+          "CanonicalIngredient": "Яйцо куриное",
+          "Optional": "NO",
+          "OriginalIngredient": "Яйцо",
+          "OriginalIngredientID": "ING-0071",
+          "RelationshipSourceURL": "https://interdoka.ru/kulinaria/1982/11_bluda_ptica/24.html"
+        },
+        {
+          "AmountStatus": "verified_net",
+          "Amount_g": "25",
+          "CanonicalIngredient": "Хлеб пшеничный",
+          "Notes": "белая панировка",
+          "Optional": "NO",
+          "OriginalIngredient": "Хлеб пшеничный",
+          "OriginalIngredientID": "ING-0063",
+          "RelationshipSourceURL": "https://interdoka.ru/kulinaria/1982/11_bluda_ptica/24.html"
+        },
+        {
+          "AmountStatus": "verified_net",
+          "Amount_g": "15",
+          "CanonicalIngredient": "Жир кулинарный",
+          "Notes": "для фритюра",
+          "Optional": "NO",
+          "OriginalIngredient": "Жир кулинарный",
+          "OriginalIngredientID": "ING-0014",
+          "RelationshipSourceURL": "https://interdoka.ru/kulinaria/1982/11_bluda_ptica/24.html"
+        }
+      ],
+      "source_recipe_id": "USSR82-720",
+      "state_review_rows": "0",
+      "variant": "основное изделие без гарнира",
+      "technology_evidence_url": "https://www.interdoka.ru/kulinaria/1982/11_bluda_ptica/24.html"
+    }
+  ],
+  "schema_version": 1,
+  "source_checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+}
