@@ -78,7 +78,7 @@ Breakfast:
 Main:
 - `USSR82-208` — Рассольник ленинградский
 - `USSR82-263` — Суп молочный с картофельными клецками
-- `USSR82-364` — Шницель из капусты
+- `USSR82-462` — Яичница глазунья с жареным картофелем
 - `USSR82-697` — selected chicken main-product variant without garnish/sauce
 - `USSR82-720` — Котлеты по-киевски, main product without garnish
 
