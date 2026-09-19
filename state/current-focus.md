@@ -17,13 +17,13 @@ Updated: `2026-09-19`.
 
 ## Current authorized operation
 
-`GATE1-A-E1 — Primary-source authority review for minimum candidate set` is **ACTIVE** under Issue #64.
+`GATE1-A-RU — Russian normative corpus acceptance and minimal Gate1 delivery` is **ACTIVE** under Issue #64.
 
-Goal: determine whether the six-recipe generic minimum repair set identified by PR #63 can be made authoritative using exact primary evidence and the existing FamilyFoodOS data model.
+Goal: reuse the already supplied/mapped Russian normative corpus, publish only the smallest clean Russian recipe/data subset needed for Gate1, and prove a complete repository-backed week with individualized Servings.
 
 Issue #64 is the bounded execution contract.
 
-This operation is **research/evidence only**. It does not publish production FoodIngredient, Nutrition, measure-evidence, assessment or RecipeVersion truth.
+This operation is a **bounded production Gate1 data slice**. Production publication is permitted only for the selected Russian subset and only with authoritative identity/profile/provenance. No broad 350-recipe import is authorized.
 
 ## Accepted Gate1-A audit baseline
 
@@ -48,25 +48,26 @@ Merged PR #63 established:
 
 PR #63 changed no production truth, schema, migration or Planner behavior.
 
-## GATE1-A-E1 primary scope
+## GATE1-A-RU primary scope
 
-Primary candidates:
+Selected Russian Gate1 subset:
 
-1. `FNS2_ORANGE_PORK_CHOPS`
-2. `FNS4_OVEN_FRIED_FISH`
-3. `FNS5_BAKED_LENTILS_CASSEROLE`
-4. `SNAP4_DILLED_FISH_FILLETS`
-5. `TNC6_EGGS_SPINACH`
-6. `WIC1_BEYOND_BASIC_GRILLED_CHEESE`
+Breakfast:
+1. `USSR82-467` — Омлет (натуральный)
+2. `USSR82-492` — Сырники из творога
+3. `USSR82-1081` — Блины
 
-For each blocking row, E1 must produce a terminal evidence decision and a candidate-level outcome.
+Main:
+4. `USSR82-208` — Рассольник ленинградский
+5. `USSR82-263` — Суп молочный с картофельными клецками
+6. `USSR82-364` — Шницель из капусты
+7. `USSR82-697` — selected chicken main-product variant without garnish/sauce
+8. `USSR82-720` — Котлеты по-киевски, main product without garnish
 
-Allowed fallback review is limited to:
+First bounded breakfast fallback if exact authority blocks one selected breakfast:
+- `USSR82-453` — Яйца вареные.
 
-- `SNAP4_SPANISH_FRITTATA`;
-- `SNAP4_BRAISED_CHICKEN_SPINACH`.
-
-Fallback may start only when a primary candidate is explicitly evidence-blocked and only to the minimum extent required to recover a feasible Planner set.
+Reuse the existing v22.13 mapping/curation work. The currently uploaded v22.5 checkpoint is an older source-data artifact and must not be imported wholesale over v22.13 decisions.
 
 ## Architecture / authority boundary
 
@@ -76,8 +77,8 @@ Fallback may start only when a primary candidate is explicitly evidence-blocked 
 - unknown != zero;
 - do not promote `REVIEW_REQUIRED_ESTIMATE` to exact;
 - no arbitrary cheese, vegetable, cultivar, form, raw/cooked or size substitution;
-- no production data repair in E1;
-- no new RecipeVersion publication in E1;
+- production FoodIngredient/profile/RecipeVersion changes are allowed only for the selected Gate1 subset;
+- no broad catalogue publication or ingestion-platform work;
 - no schema/migration change;
 - migration `0033_recipe_template_catalogue` remains untouched;
 - no Planner/MealRole compatibility changes;
@@ -91,16 +92,13 @@ PR6 / Nutrition Core                          COMPLETE
 → PR7 MealPlan / Serving                     COMPLETE (#53 / PR #54)
 → PR8 Planner v0                             COMPLETE (#57 / PR #59)
 → GATE1-A audit/readiness baseline           COMPLETE (PR #63)
-→ GATE1-A-E1 primary-source evidence         ACTIVE (#64)
-→ GATE1-A production data repair             NOT STARTED
+→ GATE1-A-RU minimal Russian corpus          ACTIVE (#64)
 → GATE1-CLOSE — Planning Core                NOT STARTED
 → PR9 Shopping Engine                        NOT STARTED
 ```
 
 ## Stop condition
 
-After GATE1-A-E1 is review-ready and merged, stop.
+After the GATE1-A-RU production data PR is review-ready/merged, stop for separate Gate1-CLOSE review.
 
-Do not implement production repairs automatically.
-
-A separate bounded production data-repair operation must be authorized from the accepted E1 evidence package.
+Do not start PR9 automatically.
