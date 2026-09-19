@@ -9,7 +9,7 @@ from itertools import product
 from itertools import combinations
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "backend"))
+sys.path[:0] = [str(ROOT), str(ROOT / "backend")]
 
 from app.db.config import DatabaseConfig  # noqa: E402
 from app.domain.nutrition_evidence import MeasureMassEvidence  # noqa: E402
