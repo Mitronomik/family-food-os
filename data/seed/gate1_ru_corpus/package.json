@@ -43,7 +43,8 @@
       "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
       "verified_at": "2026-09-19T07:30:00+00:00",
       "estimated": false,
-      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "mass_state": "INPUT"
     },
     {
       "external_id": "ING-0030",
@@ -75,7 +76,8 @@
       "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
       "verified_at": "2026-09-19T07:30:00+00:00",
       "estimated": false,
-      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "mass_state": "INPUT"
     },
     {
       "external_id": "ING-0056",
@@ -107,7 +109,8 @@
       "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
       "verified_at": "2026-09-19T07:30:00+00:00",
       "estimated": false,
-      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "mass_state": "INPUT"
     },
     {
       "external_id": "ING-0047",
@@ -139,7 +142,8 @@
       "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
       "verified_at": "2026-09-19T07:30:00+00:00",
       "estimated": false,
-      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "mass_state": "INPUT"
     },
     {
       "external_id": "ING-0097",
@@ -171,7 +175,8 @@
       "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
       "verified_at": "2026-09-19T07:30:00+00:00",
       "estimated": false,
-      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "mass_state": "INPUT"
     },
     {
       "external_id": "ING-0024",
@@ -203,7 +208,8 @@
       "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
       "verified_at": "2026-09-19T07:30:00+00:00",
       "estimated": false,
-      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "mass_state": "RAW"
     },
     {
       "external_id": "ING-0038",
@@ -237,7 +243,8 @@
       "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
       "verified_at": "2026-09-19T07:30:00+00:00",
       "estimated": false,
-      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "mass_state": "INPUT"
     },
     {
       "external_id": "ING-0014",
@@ -267,7 +274,8 @@
       "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
       "verified_at": "2026-09-19T07:30:00+00:00",
       "estimated": false,
-      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "mass_state": "INPUT"
     },
     {
       "external_id": "ING-0025",
@@ -299,7 +307,8 @@
       "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
       "verified_at": "2026-09-19T07:30:00+00:00",
       "estimated": false,
-      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "mass_state": "RAW"
     },
     {
       "external_id": "ING-0063",
@@ -331,7 +340,8 @@
       "source_data_type": "USER_SUPPLIED_REFERENCE_TRANSCRIPTION",
       "verified_at": "2026-09-19T07:30:00+00:00",
       "estimated": false,
-      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
+      "checkpoint_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "mass_state": "INPUT"
     }
   ],
   "recipes": [
