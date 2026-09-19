@@ -63,6 +63,20 @@ def test_gate1_ru_package_is_bounded_and_hash_pinned() -> None:
     )
 
 
+def test_gate1_ru_package_rejects_changed_package(tmp_path) -> None:
+    folder = tmp_path / "gate1-ru-package"
+    shutil.copytree(PACKAGE_DIR, folder)
+    package = folder / "package.json"
+    payload = json.loads(package.read_text(encoding="utf-8"))
+    payload["profiles"][0]["kcal"] = "999"
+    package.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(Gate1RuCorpusError, match="package hash"):
+        load_gate1_ru_package(package, folder / "source-snapshot.json")
+
+
 def test_gate1_ru_package_rejects_changed_selected_snapshot(tmp_path) -> None:
     folder = tmp_path / "gate1-ru-package"
     shutil.copytree(PACKAGE_DIR, folder)
