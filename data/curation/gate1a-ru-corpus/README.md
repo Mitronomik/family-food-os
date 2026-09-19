@@ -115,10 +115,24 @@ Source-reported numeric zero values are retained in Nutrition v1 where required
 by the existing profile contract but are held out of the sparse vector as
 `SOURCE_REPORTED_ZERO_HELD`; unknown is never synthesized as zero.
 
+The checkpoint's `carbohydrates_g` field is also **not** normalized into
+`CARBOHYDRATE_AVAILABLE` or `CARBOHYDRATE_BY_DIFFERENCE`, because the
+selected source layer does not establish that analytical-method distinction.
+The legacy Nutrition v1 snapshot retains the reported carbohydrate value for the
+existing deterministic Planner contract, while the sparse NutrientVector records
+the method ambiguity explicitly.
+
 ## Mass / transformation boundary
 
 All 40 selected RecipeIngredient inputs are source-backed gram quantities.
 No cup/piece/medium-size conversion is used.
+
+For these institutional recipes, `base_servings=1` means one selected normative
+source batch/variant. It does **not** assert that a 1000 g soup batch is one
+human eating portion. PR7 Serving multipliers may therefore be fractional
+multipliers of the source batch. A future consumer-serving policy may add
+human-friendly portion/output metadata, but Gate1 does not invent a serving
+count that the source did not state.
 
 Recipe Nutrition is calculated from exact input grams and current canonical
 profiles. The external checkpoint explicitly did not apply general retention
