@@ -1,7 +1,7 @@
 # FamilyFoodOS — Master Roadmap Addendum, 2026-09-19 — DATA-CORPUS-V1
 
-**Status:** canonical addendum to `master-roadmap.md` and later addenda  
-**Authority:** explicit user-approved product/data sequencing decision on 2026-09-19  
+**Status:** canonical addendum to `master-roadmap.md` and later addenda
+**Authority:** explicit user-approved product/data sequencing decision on 2026-09-19
 **Execution issue:** #67 — `DATA-CORPUS-V1 — reusable authoritative food and recipe corpus`
 
 ## 1. Purpose
