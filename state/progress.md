@@ -21,11 +21,56 @@ PR7-SUPPORT Meal Pattern Catalogue          COMPLETE (#47 / PR #51)
 PR7   MealPlan / Serving                    COMPLETE (#53 / PR #54)
 PR8   Planner v0                            COMPLETE (#57 / PR #59)
 GATE1-A candidate data readiness           ACTIVE (#61)
+GATE1-A-E1 primary-source evidence          ACTIVE (#64)
 GATE 1 Planning Core                        NOT STARTED
 ```
 
 Canonical implementation order remains `docs/family-food/master-roadmap.md`.
 
+
+## GATE1-A-E1 primary-source evidence kickoff
+
+PR #63 is MERGED; accepted post-PR63 main:
+
+`7408d161575870149f0d1938e1f126bb41561537`.
+
+User authorization to continue Gate1-A is recorded as bounded Issue #64:
+
+`GATE1-A-E1 — Primary-source authority review for minimum candidate set`.
+
+Accepted PR63 audit baseline:
+
+- 30 current verified RecipeVersions;
+- 29 `INCOMPLETE` / 1 `CONDITIONAL`;
+- only current Planner-eligible candidate:
+  `WIC1_OVERNIGHT_OATS_CINNAMON_APPLE:v2`;
+- generic/current-largest fixture capacity = 7 versions;
+- generic repair gap = 6;
+- target selection remains
+  `TARGET_SELECTION_BLOCKED_PENDING_PRIMARY_EVIDENCE_REVIEW`;
+- final blocker classification:
+  70 new-primary-evidence / 16 immutable-revision / 7 exact-rebind /
+  1 profile-or-form repair.
+
+E1 reviews only the six current minimum-set candidates:
+
+- `FNS2_ORANGE_PORK_CHOPS`;
+- `FNS4_OVEN_FRIED_FISH`;
+- `FNS5_BAKED_LENTILS_CASSEROLE`;
+- `SNAP4_DILLED_FISH_FILLETS`;
+- `TNC6_EGGS_SPINACH`;
+- `WIC1_BEYOND_BASIC_GRILLED_CHEESE`.
+
+Fallback review is conditional and limited to
+`SNAP4_SPANISH_FRITTATA` and `SNAP4_BRAISED_CHICKEN_SPINACH`.
+
+E1 is research/evidence only: no production FoodIngredient/Nutrition/evidence/
+assessment/RecipeVersion publication, no schema/migration, no Planner change.
+Migration head remains `0032_meal_plan_serving`; `0033_recipe_template_catalogue`
+remains reserved.
+
+After E1 review/merge, stop for a separately authorized production data-repair
+operation. Gate1-CLOSE and PR9 remain **NOT STARTED**.
 
 ## GATE1-A Planning Core candidate data readiness kickoff
 
@@ -37,8 +82,9 @@ User authorization recorded after merged PR #60.
 - Accepted migration head remains `0032_meal_plan_serving`.
 - `0033_recipe_template_catalogue` remains reserved and untouched.
 - Gate1-A is a bounded data-readiness operation, not Gate1-CLOSE and not PR9.
-- Current authoritative blocker: all 30 current verified RecipeVersions return
-  `INCOMPLETE` Nutrition with unknown kcal in the PR8 repository fixture.
+- Historical PR8 kickoff blocker was 30/30 unknown-kcal. PR #63 supersedes that
+  execution-state snapshot with the fresh Gate1-A result: 29 `INCOMPLETE` and
+  one Planner-eligible `CONDITIONAL` oatmeal.
 - First required step is a fresh current-truth blocker matrix for all 30 recipes;
   historical PR6 audits are prioritization evidence only.
 - Repair target must be the smallest Planner-compatible authoritative subset
