@@ -348,68 +348,49 @@
       "technology_evidence_url": "https://meganorm.ru/mega_doc/dop_norm/0/sanpin_42-125-5204-90_ustroystvo_soderzhanie_i_organizatsiya/0/prikaz_mintorga_sssr_ot_12_12_1980_N_310_o_vvedenii_sbornika.html"
     },
     {
-      "category": "Картофель, овощи и грибы",
+      "category": "Блюда из яиц",
       "mass_coverage_pct": "100",
-      "output_g": "155",
+      "output_g": "140",
       "raw_status": "READY_RAW",
-      "recipe_name": "Шницель из капусты",
-      "recipe_no": "364",
+      "recipe_name": "Яичница глазунья с жареным картофелем",
+      "recipe_no": "462",
       "retention_applied": null,
       "row_coverage_pct": "100",
       "rows": [
         {
           "AmountStatus": "verified_primary_net",
-          "Amount_g": "180",
-          "CanonicalIngredient": "Капуста белокочанная",
-          "Optional": "NO",
-          "OriginalIngredient": "Капуста белокочанная",
-          "OriginalIngredientID": "ING-0017"
-        },
-        {
-          "AmountStatus": "verified_primary_net",
-          "Amount_g": "5",
-          "CanonicalIngredient": "Мука пшеничная",
-          "Optional": "NO",
-          "OriginalIngredient": "Мука пшеничная",
-          "OriginalIngredientID": "ING-0036"
-        },
-        {
-          "AmountStatus": "verified_primary_net",
-          "Amount_g": "5",
+          "Amount_g": "80",
           "CanonicalIngredient": "Яйцо куриное",
           "Optional": "NO",
-          "OriginalIngredient": "Яйца",
-          "OriginalIngredientID": "ING-0071"
+          "OriginalIngredient": "Яйцо",
+          "OriginalIngredientID": "ING-0071",
+          "RelationshipSourceURL": "https://studopedia.net/19_52760_ochishchenniy-kartofel-varyat-odnim-iz-sposobov-privedennih-vishe.html"
+        },
+        {
+          "AmountStatus": "verified_primary_net",
+          "Amount_g": "110",
+          "CanonicalIngredient": "Картофель",
+          "Notes": "сырой картофель; выход жареного картофеля с жиром 76 г",
+          "Optional": "NO",
+          "OriginalIngredient": "Картофель",
+          "OriginalIngredientID": "ING-0019",
+          "RelationshipSourceURL": "https://studopedia.net/19_52760_ochishchenniy-kartofel-varyat-odnim-iz-sposobov-privedennih-vishe.html"
         },
         {
           "AmountStatus": "verified_primary_net",
           "Amount_g": "15",
-          "CanonicalIngredient": "Сухари панировочные",
+          "CanonicalIngredient": "Маргарин столовый",
+          "Notes": "для жарки картофеля",
           "Optional": "NO",
-          "OriginalIngredient": "Сухари",
-          "OriginalIngredientID": "ING-0053"
-        },
-        {
-          "AmountStatus": "verified_primary_net",
-          "Amount_g": "10",
-          "CanonicalIngredient": "Жир кулинарный",
-          "Optional": "NO",
-          "OriginalIngredient": "Жир кулинарный",
-          "OriginalIngredientID": "ING-0014"
-        },
-        {
-          "AmountStatus": "verified_primary_net",
-          "Amount_g": "5",
-          "CanonicalIngredient": "Масло сливочное",
-          "Optional": "NO",
-          "OriginalIngredient": "Масло сливочное",
-          "OriginalIngredientID": "ING-0032"
+          "OriginalIngredient": "Маргарин столовый",
+          "OriginalIngredientID": "ING-0030",
+          "RelationshipSourceURL": "https://studopedia.net/19_52760_ochishchenniy-kartofel-varyat-odnim-iz-sposobov-privedennih-vishe.html"
         }
       ],
-      "source_recipe_id": "USSR82-364",
+      "source_recipe_id": "USSR82-462",
       "state_review_rows": "0",
-      "variant": "III — с маслом",
-      "technology_evidence_url": "https://studopedia.net/6_116752_rashoda-sirya-vihoda-polufabrikatov-i-gotovih-izdeliy.html"
+      "variant": "II",
+      "technology_evidence_url": "https://studopedia.net/19_52760_ochishchenniy-kartofel-varyat-odnim-iz-sposobov-privedennih-vishe.html"
     },
     {
       "category": "Птица и кролик",
