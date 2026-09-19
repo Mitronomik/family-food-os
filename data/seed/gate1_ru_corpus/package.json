@@ -345,8 +345,8 @@
       "base_servings": "1",
       "source_name": "USSR82_RNR_V22_5_CAPTURE",
       "source_url": "https://www.interdoka.ru/kulinaria/1982/7_bluda_yaca/4_omlet/15.html",
-      "source_version": "sha256:e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
-      "source_document_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_version": "sha256:60a6261cd3696e95975667e9bdb878f8c92304e3634bfa9864f2321e8777d508",
+      "source_document_sha256": "60a6261cd3696e95975667e9bdb878f8c92304e3634bfa9864f2321e8777d508",
       "source_original_servings": "1",
       "source_retrieved_at": "2026-09-19T07:30:00+00:00",
       "rights_review_status": "REVIEWED",
@@ -390,7 +390,9 @@
         "Смешать яйца с молоком и солью до однородной омлетной смеси.",
         "Вылить смесь на разогретую сковороду с маргарином и готовить, перемешивая, пока масса не загустеет; затем подрумянить.",
         "Перед подачей полить растопленным сливочным маслом."
-      ]
+      ],
+      "source_capture_path": "data/seed/gate1_ru_corpus/source-snapshot.json",
+      "technology_evidence_url": "https://interdoka.ru/kulinaria/1982/7_bluda_yaca/4_omlet/15.html"
     },
     {
       "source_recipe_id": "USSR82-492",
@@ -402,8 +404,8 @@
       "base_servings": "1",
       "source_name": "USSR82_RNR_V22_5_CAPTURE",
       "source_url": "https://www.interdoka.ru/kulinaria/1982/8_bluda_tvorog/12.html",
-      "source_version": "sha256:e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
-      "source_document_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_version": "sha256:60a6261cd3696e95975667e9bdb878f8c92304e3634bfa9864f2321e8777d508",
+      "source_document_sha256": "60a6261cd3696e95975667e9bdb878f8c92304e3634bfa9864f2321e8777d508",
       "source_original_servings": "1",
       "source_retrieved_at": "2026-09-19T07:30:00+00:00",
       "rights_review_status": "REVIEWED",
@@ -464,7 +466,9 @@
         "Сформовать валик, нарезать порции, запанировать в оставшейся муке и придать форму сырников.",
         "Обжарить сырники с двух сторон и довести до готовности в жарочном шкафу 5–7 минут.",
         "Подать со сметаной."
-      ]
+      ],
+      "source_capture_path": "data/seed/gate1_ru_corpus/source-snapshot.json",
+      "technology_evidence_url": "https://interdoka.ru/kulinaria/1982/8_bluda_tvorog/12.html"
     },
     {
       "source_recipe_id": "USSR82-1081",
@@ -476,8 +480,8 @@
       "base_servings": "1",
       "source_name": "USSR82_RNR_V22_5_CAPTURE",
       "source_url": "https://www.interdoka.ru/kulinaria/1982/16_muchnye_bluda/1.html",
-      "source_version": "sha256:e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
-      "source_document_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_version": "sha256:60a6261cd3696e95975667e9bdb878f8c92304e3634bfa9864f2321e8777d508",
+      "source_document_sha256": "60a6261cd3696e95975667e9bdb878f8c92304e3634bfa9864f2321e8777d508",
       "source_original_servings": "1",
       "source_retrieved_at": "2026-09-19T07:30:00+00:00",
       "rights_review_status": "REVIEWED",
@@ -547,7 +551,9 @@
         "Оставить тесто в тёплом месте для брожения на 3–4 часа, периодически обминая.",
         "Выпекать блины с обеих сторон на разогретой смазанной поверхности.",
         "Подать со сливочным маслом."
-      ]
+      ],
+      "source_capture_path": "data/seed/gate1_ru_corpus/source-snapshot.json",
+      "technology_evidence_url": "https://bliny.shashlik-piknik.ru/retseptura-blinov-po-sborniku-retseptur/"
     },
     {
       "source_recipe_id": "USSR82-208",
@@ -559,8 +565,8 @@
       "base_servings": "1",
       "source_name": "USSR82_RNR_V22_5_CAPTURE",
       "source_url": "https://www.interdoka.ru/kulinaria/1982/2_supy/1_goriachie/3_rassolniki/3.html",
-      "source_version": "sha256:e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
-      "source_document_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_version": "sha256:60a6261cd3696e95975667e9bdb878f8c92304e3634bfa9864f2321e8777d508",
+      "source_document_sha256": "60a6261cd3696e95975667e9bdb878f8c92304e3634bfa9864f2321e8777d508",
       "source_original_servings": "1",
       "source_retrieved_at": "2026-09-19T07:30:00+00:00",
       "rights_review_status": "REVIEWED",
@@ -628,7 +634,9 @@
         "Подготовить рисовую крупу; картофель нарезать, морковь и лук подготовить для пассерования, солёные огурцы припустить.",
         "В кипящую воду заложить крупу и картофель, затем добавить пассерованные морковь и лук.",
         "Добавить припущенные солёные огурцы и довести суп до готовности; маргарин использовать для пассерования овощей."
-      ]
+      ],
+      "source_capture_path": "data/seed/gate1_ru_corpus/source-snapshot.json",
+      "technology_evidence_url": "https://djvu.online/file/0CASHYOi1w9Oh"
     },
     {
       "source_recipe_id": "USSR82-263",
@@ -640,8 +648,8 @@
       "base_servings": "1",
       "source_name": "USSR82_RNR_V22_5_CAPTURE",
       "source_url": "https://www.interdoka.ru/kulinaria/1982/2_supy/1_goriachie/8_molochnye/6.html",
-      "source_version": "sha256:e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
-      "source_document_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_version": "sha256:60a6261cd3696e95975667e9bdb878f8c92304e3634bfa9864f2321e8777d508",
+      "source_document_sha256": "60a6261cd3696e95975667e9bdb878f8c92304e3634bfa9864f2321e8777d508",
       "source_original_servings": "1",
       "source_retrieved_at": "2026-09-19T07:30:00+00:00",
       "rights_review_status": "REVIEWED",
@@ -702,7 +710,9 @@
         "Соединить обе картофельные массы с солью, перемешать и сформовать небольшие круглые клёцки.",
         "Сварить клёцки в воде, предназначенной для супа, добавить молоко и довести до кипения.",
         "Перед подачей заправить сливочным маслом."
-      ]
+      ],
+      "source_capture_path": "data/seed/gate1_ru_corpus/source-snapshot.json",
+      "technology_evidence_url": "https://meganorm.ru/mega_doc/dop_norm/0/sanpin_42-125-5204-90_ustroystvo_soderzhanie_i_organizatsiya/0/prikaz_mintorga_sssr_ot_12_12_1980_N_310_o_vvedenii_sbornika.html"
     },
     {
       "source_recipe_id": "USSR82-364",
@@ -714,8 +724,8 @@
       "base_servings": "1",
       "source_name": "USSR82_RNR_V22_5_CAPTURE",
       "source_url": "https://www.interdoka.ru/kulinaria/1982/5_bluda_ovoshi/6_zharenye/4.html",
-      "source_version": "sha256:e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
-      "source_document_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_version": "sha256:60a6261cd3696e95975667e9bdb878f8c92304e3634bfa9864f2321e8777d508",
+      "source_document_sha256": "60a6261cd3696e95975667e9bdb878f8c92304e3634bfa9864f2321e8777d508",
       "source_original_servings": "1",
       "source_retrieved_at": "2026-09-19T07:30:00+00:00",
       "rights_review_status": "REVIEWED",
@@ -776,7 +786,9 @@
         "Срезать или отбить утолщённые части листьев, сложить по два листа и сформовать овальные шницели.",
         "Запанировать в муке, смочить яйцом и запанировать в сухарях.",
         "Обжарить с обеих сторон на кулинарном жире и подать со сливочным маслом."
-      ]
+      ],
+      "source_capture_path": "data/seed/gate1_ru_corpus/source-snapshot.json",
+      "technology_evidence_url": "https://studopedia.net/6_116752_rashoda-sirya-vihoda-polufabrikatov-i-gotovih-izdeliy.html"
     },
     {
       "source_recipe_id": "USSR82-697",
@@ -788,8 +800,8 @@
       "base_servings": "1",
       "source_name": "USSR82_RNR_V22_5_CAPTURE",
       "source_url": "https://www.interdoka.ru/kulinaria/1982/11_bluda_ptica/1.html",
-      "source_version": "sha256:e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
-      "source_document_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_version": "sha256:60a6261cd3696e95975667e9bdb878f8c92304e3634bfa9864f2321e8777d508",
+      "source_document_sha256": "60a6261cd3696e95975667e9bdb878f8c92304e3634bfa9864f2321e8777d508",
       "source_original_servings": "1",
       "source_retrieved_at": "2026-09-19T07:30:00+00:00",
       "rights_review_status": "REVIEWED",
@@ -817,7 +829,9 @@
         "Подготовленную курицу залить горячей водой, быстро довести до кипения и снять пену.",
         "Добавить репчатый лук и варить при слабом кипении под крышкой до готовности.",
         "Охладить готовую птицу и отделить порцию варёной курицы согласно выбранной III колонке; подать натуральной без гарнира и соуса."
-      ]
+      ],
+      "source_capture_path": "data/seed/gate1_ru_corpus/source-snapshot.json",
+      "technology_evidence_url": "https://www.interdoka.ru/kulinaria/1982/11_bluda_ptica/1.html"
     },
     {
       "source_recipe_id": "USSR82-720",
@@ -829,8 +843,8 @@
       "base_servings": "1",
       "source_name": "USSR82_RNR_V22_5_CAPTURE",
       "source_url": "https://www.interdoka.ru/kulinaria/1982/11_bluda_ptica/24.html",
-      "source_version": "sha256:e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
-      "source_document_sha256": "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe",
+      "source_version": "sha256:60a6261cd3696e95975667e9bdb878f8c92304e3634bfa9864f2321e8777d508",
+      "source_document_sha256": "60a6261cd3696e95975667e9bdb878f8c92304e3634bfa9864f2321e8777d508",
       "source_original_servings": "1",
       "source_retrieved_at": "2026-09-19T07:30:00+00:00",
       "rights_review_status": "REVIEWED",
@@ -883,11 +897,18 @@
         "Смочить полуфабрикат в яйце и дважды запанировать в белой хлебной панировке.",
         "Жарить во фритюре на кулинарном жире 5–7 минут до румяной корочки и довести до готовности в жарочном шкафу.",
         "Подать основное изделие без гарнира; дополнительное сливочное масло и гарнир в выбранный Gate1-вариант не входят."
-      ]
+      ],
+      "source_capture_path": "data/seed/gate1_ru_corpus/source-snapshot.json",
+      "technology_evidence_url": "https://www.interdoka.ru/kulinaria/1982/11_bluda_ptica/24.html"
     }
   ],
   "fallback": {
     "source_recipe_id": "USSR82-453",
     "status": "NOT_USED_INITIAL"
+  },
+  "source_snapshot": {
+    "path": "data/seed/gate1_ru_corpus/source-snapshot.json",
+    "sha256": "60a6261cd3696e95975667e9bdb878f8c92304e3634bfa9864f2321e8777d508",
+    "derivation": "Bounded extraction of selected source rows/scenarios from the user-supplied v22.5 checkpoint; technology corroborated against the 1982 collection/transcriptions."
   }
 }
