@@ -12,7 +12,7 @@ Accepted post-PR63 main:
 
 Current bounded operation:
 
-`GATE1-A-E1 — Primary-source authority review for minimum candidate set` — ACTIVE under Issue #64.
+`GATE1-A-RU — Russian normative corpus acceptance and minimal Gate1 delivery` — ACTIVE under Issue #64.
 
 Gate1-A / Issue #61 remains ACTIVE.
 
@@ -55,39 +55,43 @@ It established:
 
 PR #63 changed no production truth, schema, migration or Planner behavior.
 
-## GATE1-A-E1 purpose
+## GATE1-A-RU purpose
 
-E1 is the evidence step required before production repair.
+The user has superseded the previous six-FNS evidence-repair direction.
 
-Primary candidate set:
+Repository inspection proves that Russian normative data work already exists:
 
-- `FNS2_ORANGE_PORK_CHOPS`
-- `FNS4_OVEN_FRIED_FISH`
-- `FNS5_BAKED_LENTILS_CASSEROLE`
-- `SNAP4_DILLED_FISH_FILLETS`
-- `TNC6_EGGS_SPINACH`
-- `WIC1_BEYOND_BASIC_GRILLED_CHEESE`
+- committed 214-card `RU_MR_2_4_0162_19` source corpus;
+- v22.13 preflight/mapping over the 350-recipe USSR82 checkpoint;
+- identity mapping for all 363 external ingredient identities;
+- candidate/profile curation packages.
 
-Issue #64 owns the exact row-level blockers, source hierarchy, terminal dispositions, acceptance criteria and evidence-package requirements.
+The production Recipe Catalogue still contains no `USSR82-*` RecipeVersions. The missing step is a bounded publication/integration, not another broad research pass.
 
-The evidence review must determine whether the generic six-repair set is actually supportable by exact authority under the current model.
+Selected Gate1 subset:
 
-## Bounded fallback
+Breakfast:
+- `USSR82-467` — Омлет (натуральный)
+- `USSR82-492` — Сырники из творога
+- `USSR82-1081` — Блины
 
-Fallback is conditional, not an automatic extension of scope.
+Main:
+- `USSR82-208` — Рассольник ленинградский
+- `USSR82-263` — Суп молочный с картофельными клецками
+- `USSR82-364` — Шницель из капусты
+- `USSR82-697` — selected chicken main-product variant without garnish/sauce
+- `USSR82-720` — Котлеты по-киевски, main product without garnish
 
-Allowed fallback candidates:
+First bounded breakfast fallback:
+- `USSR82-453` — Яйца вареные.
 
-- `SNAP4_SPANISH_FRITTATA` — breakfast;
-- `SNAP4_BRAISED_CHICKEN_SPINACH` — main.
+This 3-breakfast + 5-main set provides capacity 9 / 15 under max repetitions=3 and avoids the artificial sandwich dependency.
 
-A fallback candidate may be researched only after a primary candidate receives a terminal `BLOCKED` outcome and only if it is needed to restore a feasible minimum Planner set.
+## GATE1-A-RU invariants
 
-No other recipe search is authorized.
-
-## E1 invariants
-
-- research/evidence only;
+- reuse existing v22.13 mapping/curation before doing any new mapping;
+- current v22.5 upload is older source evidence and must not overwrite later mapping decisions;
+- production publication is limited to the selected Gate1 subset;
 - primary publisher/original recipe source first;
 - official exact food-composition/portion evidence second;
 - accepted repository evidence may be reused only when exact form/profile/measure semantics match;
@@ -97,31 +101,26 @@ No other recipe search is authorized.
 - no estimate promotion;
 - no inferred yield/retention;
 - no arbitrary alternative selection;
-- no production FoodIngredient/Nutrition/evidence/assessment/RecipeVersion changes;
+- production FoodIngredient/Nutrition/RecipeVersion changes are permitted only where required by the selected subset and backed by accepted authority;
 - no schema/migration;
 - no `0033` consumption;
 - no Planner changes;
 - no Gate1-CLOSE;
 - no PR9.
 
-## Required E1 outcome
+## Required GATE1-A-RU outcome
 
-For every primary blocker, produce a terminal evidence disposition.
+Publish the smallest authoritative Russian subset needed to make Gate1 executable.
 
-For every primary candidate, derive:
-
-- `EVIDENCE_READY_FOR_DATA_REPAIR`;
-- `EVIDENCE_READY_REQUIRES_IMMUTABLE_RECIPE_REVISION`;
-- or `BLOCKED`.
-
-Then determine whether an evidence-ready minimum Planner candidate set exists.
-
-If primary evidence is insufficient, activate only the minimum permitted fallback review.
+Required outcome:
+- selected/fallback Russian RecipeVersions have non-INCOMPLETE Nutrition and positive kcal;
+- repository-backed Planner persists a complete seven-day week for at least one real fixture household;
+- individualized positive Decimal Servings are persisted;
+- exclusions and deterministic trace remain correct;
+- current incomplete FNS recipes remain explicitly incomplete.
 
 ## Stop condition
 
-After E1 is review-ready/merged, stop.
+After the GATE1-A-RU production data PR is review-ready/merged, stop for separate Gate1-CLOSE review.
 
-Do not implement the resulting production repair plan automatically.
-
-The next production data-repair operation requires separate bounded authorization.
+Do not start PR9 automatically.
