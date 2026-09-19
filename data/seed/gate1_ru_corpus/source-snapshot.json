@@ -58,7 +58,46 @@
       "source_recipe_id": "USSR82-467",
       "state_review_rows": "0",
       "variant": "selected_1982_variant",
-      "technology_evidence_url": "https://interdoka.ru/kulinaria/1982/7_bluda_yaca/4_omlet/15.html"
+      "technology_evidence_url": "https://interdoka.ru/kulinaria/1982/7_bluda_yaca/4_omlet/15.html",
+      "published_ingredients": [
+        {
+          "external_id": "ING-0071",
+          "food_ingredient_code": "EGG",
+          "quantity_g": "80",
+          "source_amount_text": "Яйцо — 80 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0034",
+          "food_ingredient_code": "MILK_PASTEURIZED_3_2",
+          "quantity_g": "30",
+          "source_amount_text": "Молоко — 30 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0030",
+          "food_ingredient_code": "MARGARINE_MILK",
+          "quantity_g": "5",
+          "source_amount_text": "Маргарин — 5 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0032",
+          "food_ingredient_code": "BUTTER_UNSALTED",
+          "quantity_g": "5",
+          "source_amount_text": "Масло сливочное — 5 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        }
+      ],
+      "steps_ru": [
+        "Смешать яйца с молоком и солью до однородной омлетной смеси.",
+        "Вылить смесь на разогретую сковороду с маргарином и готовить, перемешивая, пока масса не загустеет; затем подрумянить.",
+        "Перед подачей полить растопленным сливочным маслом."
+      ]
     },
     {
       "category": "Блюда из творога",
@@ -131,7 +170,63 @@
       "source_recipe_id": "USSR82-492",
       "state_review_rows": "0",
       "variant": "1-й вариант, со сметаной",
-      "technology_evidence_url": "https://interdoka.ru/kulinaria/1982/8_bluda_tvorog/12.html"
+      "technology_evidence_url": "https://interdoka.ru/kulinaria/1982/8_bluda_tvorog/12.html",
+      "published_ingredients": [
+        {
+          "external_id": "ING-0056",
+          "food_ingredient_code": "COTTAGE_CHEESE_9",
+          "quantity_g": "135",
+          "source_amount_text": "Творог — 135 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0036",
+          "food_ingredient_code": "FLOUR_WHEAT",
+          "quantity_g": "20",
+          "source_amount_text": "Мука пшеничная — 20 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0071",
+          "food_ingredient_code": "EGG",
+          "quantity_g": "5",
+          "source_amount_text": "Яйцо — 5 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0042",
+          "food_ingredient_code": "SUGAR",
+          "quantity_g": "15",
+          "source_amount_text": "Сахар — 15 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0030",
+          "food_ingredient_code": "MARGARINE_MILK",
+          "quantity_g": "5",
+          "source_amount_text": "Маргарин столовый — 5 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0047",
+          "food_ingredient_code": "SOUR_CREAM_30",
+          "quantity_g": "20",
+          "source_amount_text": "Сметана — 20 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        }
+      ],
+      "steps_ru": [
+        "Протёртый творог смешать с двумя третями муки, яйцом, сахаром и солью.",
+        "Сформовать валик, нарезать порции, запанировать в оставшейся муке и придать форму сырников.",
+        "Обжарить сырники с двух сторон и довести до готовности в жарочном шкафу 5–7 минут.",
+        "Подать со сметаной."
+      ]
     },
     {
       "category": "Мучные изделия",
@@ -203,7 +298,72 @@
       "source_recipe_id": "USSR82-1081",
       "state_review_rows": "0",
       "variant": "III — с маслом",
-      "technology_evidence_url": "https://bliny.shashlik-piknik.ru/retseptura-blinov-po-sborniku-retseptur/"
+      "technology_evidence_url": "https://bliny.shashlik-piknik.ru/retseptura-blinov-po-sborniku-retseptur/",
+      "published_ingredients": [
+        {
+          "external_id": "ING-0036",
+          "food_ingredient_code": "FLOUR_WHEAT",
+          "quantity_g": "75",
+          "source_amount_text": "Мука пшеничная — 75 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0042",
+          "food_ingredient_code": "SUGAR",
+          "quantity_g": "3",
+          "source_amount_text": "Сахар — 3 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0006",
+          "food_ingredient_code": "WATER",
+          "quantity_g": "118",
+          "source_amount_text": "Вода — 118 г",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0097",
+          "food_ingredient_code": "YEAST_COMPRESSED",
+          "quantity_g": "3",
+          "source_amount_text": "Дрожжи прессованные — 3 г нетто",
+          "source_profile_quality": "legacy_USDA_compressed_yeast_serving_converted",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0050",
+          "food_ingredient_code": "SALT",
+          "quantity_g": "1.5",
+          "source_amount_text": "Соль — 1,5 г нетто",
+          "source_profile_quality": "exact_zero_tracked",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0030",
+          "food_ingredient_code": "MARGARINE_MILK",
+          "quantity_g": "5",
+          "source_amount_text": "Маргарин столовый — 5 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0032",
+          "food_ingredient_code": "BUTTER_UNSALTED",
+          "quantity_g": "10",
+          "source_amount_text": "Масло сливочное — 10 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        }
+      ],
+      "steps_ru": [
+        "Растворить соль и сахар в части тёплой воды, добавить разведённые прессованные дрожжи.",
+        "Соединить с оставшейся водой и мукой, перемешать до однородности, ввести растопленный маргарин.",
+        "Оставить тесто в тёплом месте для брожения на 3–4 часа, периодически обминая.",
+        "Выпекать блины с обеих сторон на разогретой смазанной поверхности.",
+        "Подать со сливочным маслом."
+      ]
     },
     {
       "category": "Супы",
@@ -274,7 +434,70 @@
       "source_recipe_id": "USSR82-208",
       "state_review_rows": "0",
       "variant": "selected_1982_variant",
-      "technology_evidence_url": "https://djvu.online/file/0CASHYOi1w9Oh"
+      "technology_evidence_url": "https://djvu.online/file/0CASHYOi1w9Oh",
+      "published_ingredients": [
+        {
+          "external_id": "ING-0019",
+          "food_ingredient_code": "POTATO",
+          "quantity_g": "300",
+          "source_amount_text": "Картофель — 300 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0024",
+          "food_ingredient_code": "RICE_GROATS_POLISHED",
+          "quantity_g": "20",
+          "source_amount_text": "Крупа рисовая — 20 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0035",
+          "food_ingredient_code": "CARROT",
+          "quantity_g": "40",
+          "source_amount_text": "Морковь — 40 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0028",
+          "food_ingredient_code": "ONION_YELLOW",
+          "quantity_g": "20",
+          "source_amount_text": "Лук репчатый — 20 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0038",
+          "food_ingredient_code": "CUCUMBER_PICKLED_SALTED",
+          "quantity_g": "60",
+          "source_amount_text": "Огурцы солёные — 60 г нетто",
+          "source_profile_quality": "legacy_reference_composition+v22_4_field_fill",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0030",
+          "food_ingredient_code": "MARGARINE_MILK",
+          "quantity_g": "20",
+          "source_amount_text": "Маргарин столовый — 20 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": null,
+          "food_ingredient_code": "WATER",
+          "quantity_g": "750",
+          "source_amount_text": "Бульон или вода — 750 г; для Gate1 выбран водный вариант",
+          "source_profile_quality": "SOURCE_RECIPE_DIRECT",
+          "source_state": "INPUT"
+        }
+      ],
+      "steps_ru": [
+        "Подготовить рисовую крупу; картофель нарезать, морковь и лук подготовить для пассерования, солёные огурцы припустить.",
+        "В кипящую воду заложить крупу и картофель, затем добавить пассерованные морковь и лук.",
+        "Добавить припущенные солёные огурцы и довести суп до готовности; маргарин использовать для пассерования овощей."
+      ]
     },
     {
       "category": "Супы",
@@ -345,7 +568,63 @@
       "source_recipe_id": "USSR82-263",
       "state_review_rows": "0",
       "variant": "single",
-      "technology_evidence_url": "https://meganorm.ru/mega_doc/dop_norm/0/sanpin_42-125-5204-90_ustroystvo_soderzhanie_i_organizatsiya/0/prikaz_mintorga_sssr_ot_12_12_1980_N_310_o_vvedenii_sbornika.html"
+      "technology_evidence_url": "https://meganorm.ru/mega_doc/dop_norm/0/sanpin_42-125-5204-90_ustroystvo_soderzhanie_i_organizatsiya/0/prikaz_mintorga_sssr_ot_12_12_1980_N_310_o_vvedenii_sbornika.html",
+      "published_ingredients": [
+        {
+          "external_id": "ING-0034",
+          "food_ingredient_code": "MILK_PASTEURIZED_3_2",
+          "quantity_g": "600",
+          "source_amount_text": "Молоко — 600 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0006",
+          "food_ingredient_code": "WATER",
+          "quantity_g": "190",
+          "source_amount_text": "Вода — 190 г",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0019",
+          "food_ingredient_code": "POTATO",
+          "quantity_g": "150",
+          "source_amount_text": "Картофель для протирания — 150 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0019",
+          "food_ingredient_code": "POTATO",
+          "quantity_g": "110",
+          "source_amount_text": "Картофель для отваривания — 110 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0050",
+          "food_ingredient_code": "SALT",
+          "quantity_g": "1.7",
+          "source_amount_text": "Соль — 1,7 г нетто",
+          "source_profile_quality": "exact_zero_tracked",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0032",
+          "food_ingredient_code": "BUTTER_UNSALTED",
+          "quantity_g": "20",
+          "source_amount_text": "Масло сливочное — 20 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        }
+      ],
+      "steps_ru": [
+        "Часть картофеля очистить, протереть и отжать; другую часть предварительно отварить, очистить и протереть.",
+        "Соединить обе картофельные массы с солью, перемешать и сформовать небольшие круглые клёцки.",
+        "Сварить клёцки в воде, предназначенной для супа, добавить молоко и довести до кипения.",
+        "Перед подачей заправить сливочным маслом."
+      ]
     },
     {
       "category": "Блюда из яиц",
@@ -390,7 +669,37 @@
       "source_recipe_id": "USSR82-462",
       "state_review_rows": "0",
       "variant": "II",
-      "technology_evidence_url": "https://studopedia.net/19_52760_ochishchenniy-kartofel-varyat-odnim-iz-sposobov-privedennih-vishe.html"
+      "technology_evidence_url": "https://studopedia.net/19_52760_ochishchenniy-kartofel-varyat-odnim-iz-sposobov-privedennih-vishe.html",
+      "published_ingredients": [
+        {
+          "external_id": "ING-0071",
+          "food_ingredient_code": "EGG",
+          "quantity_g": "80",
+          "source_amount_text": "Яйцо — 80 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0019",
+          "food_ingredient_code": "POTATO",
+          "quantity_g": "110",
+          "source_amount_text": "Картофель сырой — 110 г нетто; выход жареного картофеля с жиром 76 г",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_INPUT_OK_OUTPUT_KNOWN"
+        },
+        {
+          "external_id": "ING-0030",
+          "food_ingredient_code": "MARGARINE_MILK",
+          "quantity_g": "15",
+          "source_amount_text": "Маргарин столовый — 15 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        }
+      ],
+      "steps_ru": [
+        "Сырой картофель нарезать тонкими ломтиками и обжарить на маргарине.",
+        "На жареный картофель выпустить яйца и жарить глазунью до готовности."
+      ]
     },
     {
       "category": "Птица и кролик",
@@ -425,7 +734,30 @@
       "source_recipe_id": "USSR82-697",
       "state_review_rows": "0",
       "variant": "III, курица, основной продукт без гарнира/соуса",
-      "technology_evidence_url": "https://www.interdoka.ru/kulinaria/1982/11_bluda_ptica/1.html"
+      "technology_evidence_url": "https://www.interdoka.ru/kulinaria/1982/11_bluda_ptica/1.html",
+      "published_ingredients": [
+        {
+          "external_id": "ING-0025",
+          "food_ingredient_code": "CHICKEN_CATEGORY_I",
+          "quantity_g": "107",
+          "source_amount_text": "Курица — 107 г нетто",
+          "source_profile_quality": "legacy_reference_composition_1976_source_typo_normalized",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0028",
+          "food_ingredient_code": "ONION_YELLOW",
+          "quantity_g": "2",
+          "source_amount_text": "Лук репчатый — 2 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        }
+      ],
+      "steps_ru": [
+        "Подготовленную курицу залить горячей водой, быстро довести до кипения и снять пену.",
+        "Добавить репчатый лук и варить при слабом кипении под крышкой до готовности.",
+        "Охладить готовую птицу и отделить порцию варёной курицы согласно выбранной III колонке; подать натуральной без гарнира и соуса."
+      ]
     },
     {
       "category": "Птица и кролик",
@@ -490,7 +822,55 @@
       "source_recipe_id": "USSR82-720",
       "state_review_rows": "0",
       "variant": "основное изделие без гарнира",
-      "technology_evidence_url": "https://www.interdoka.ru/kulinaria/1982/11_bluda_ptica/24.html"
+      "technology_evidence_url": "https://www.interdoka.ru/kulinaria/1982/11_bluda_ptica/24.html",
+      "published_ingredients": [
+        {
+          "external_id": "ING-0025",
+          "food_ingredient_code": "CHICKEN_CATEGORY_I",
+          "quantity_g": "83",
+          "source_amount_text": "Курица, мякоть без кожи — 83 г нетто",
+          "source_profile_quality": "legacy_reference_composition_1976_source_typo_normalized",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0032",
+          "food_ingredient_code": "BUTTER_UNSALTED",
+          "quantity_g": "30",
+          "source_amount_text": "Масло сливочное — 30 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0071",
+          "food_ingredient_code": "EGG",
+          "quantity_g": "10",
+          "source_amount_text": "Яйцо — 10 г нетто",
+          "source_profile_quality": "legacy_reference_composition",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0063",
+          "food_ingredient_code": "BREAD_WHEAT_HIGH_GRADE",
+          "quantity_g": "25",
+          "source_amount_text": "Хлеб пшеничный — 25 г нетто",
+          "source_profile_quality": "legacy_reference_composition_1976",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        },
+        {
+          "external_id": "ING-0014",
+          "food_ingredient_code": "COOKING_FAT",
+          "quantity_g": "15",
+          "source_amount_text": "Жир кулинарный — 15 г нетто",
+          "source_profile_quality": "legacy_reference_composition_alias_fix",
+          "source_state": "RAW_OR_UNSPECIFIED_OK"
+        }
+      ],
+      "steps_ru": [
+        "Подготовленное куриное филе нафаршировать сливочным маслом.",
+        "Смочить полуфабрикат в яйце и дважды запанировать в белой хлебной панировке.",
+        "Жарить во фритюре на кулинарном жире 5–7 минут до румяной корочки и довести до готовности в жарочном шкафу.",
+        "Подать основное изделие без гарнира; дополнительное сливочное масло и гарнир в выбранный Gate1-вариант не входят."
+      ]
     }
   ],
   "schema_version": 1,
