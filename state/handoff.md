@@ -4,11 +4,11 @@ Updated: `2026-09-19`.
 
 ## Accepted base and governance
 
-PR #63 is MERGED.
+PR #63 and PR #65 are MERGED.
 
-Accepted post-PR63 main:
+Accepted post-PR65 GATE1-A-RU base:
 
-`7408d161575870149f0d1938e1f126bb41561537`
+`9a76a97790b676f36c4c982af825721c3ef2c67e`
 
 Current bounded operation:
 
