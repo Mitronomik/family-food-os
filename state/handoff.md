@@ -4,13 +4,16 @@ Updated: `2026-09-19`.
 
 ## Accepted base and governance
 
-Accepted main before DATA-CORPUS-V1 governance:
+DATA-CORPUS-V1 / DC0 is COMPLETE through merged PR #68.
 
-`9a76a97790b676f36c4c982af825721c3ef2c67e`
+Accepted post-PR68 main:
+
+`b1ce3e02394bad847f0c4063fe9faf520e208622`
 
 Current bounded operation:
 
-`DATA-CORPUS-V1 / DC0 — Contract and governance` — ACTIVE under Issue #67.
+`DATA-CORPUS-V1 / DC1 — Source authority + coverage inventory` — ACTIVE under
+Issue #67.
 
 Accepted SQLite migration head:
 
@@ -24,127 +27,58 @@ Gate1-CLOSE is NOT STARTED.
 
 PR9 is NOT STARTED.
 
-## User decision that changed sequencing
+## Closed superseded work
 
-On 2026-09-19 the user explicitly chose to stop optimizing catalogue truth only
-for Gate1.
+PR #66 — `feat: publish minimal Russian corpus for Gate1 planning` — was closed
+without merge on 2026-09-19.
 
-New direction:
+Closing it accepted none of its proposed production data. Its branch remains
+historical implementation evidence only; reusable mechanics may be recovered
+selectively later if they conform to DATA-CORPUS-V1.
 
-```text
-build reusable authoritative corpus
-→ publish normal production FoodIngredient/Nutrition/RecipeVersion truth
-→ audit readiness
-→ use ordinary corpus subsets for Gate1 and later gates
-```
+## DC1 task
 
-This supersedes the minimal-eight-recipe strategy in Issue #64 / current PR #66
-to the extent they limited catalogue work only to Gate1 needs.
+Build the coverage/authority inventory required by Issue #67.
 
-Canonical details:
+Required outputs:
+
+1. initial `50–80+` useful recipe candidates;
+2. exact selected source variants/branches;
+3. deduplicated required FoodIngredient/form demand;
+4. explicit reuse of existing accepted FoodIngredient/profile truth;
+5. authoritative source/status for each missing demanded form;
+6. rights/use status;
+7. exact unresolved blocker inventory;
+8. proposed small DC2 food-publication batches;
+9. proposed small DC3 recipe-publication batches.
+
+Canonical rules for source hierarchy, authority, food/form semantics, rights,
+publication and verification are owned by:
 
 - `docs/family-food/data-corpus-v1.md`;
 - `docs/family-food/master-roadmap-addendum-2026-09-19-data-corpus.md`;
 - Issue #67.
 
-## Relationship to PR #66
+Do not restate or alter those rules in this handoff.
 
-PR #66 is not mergeable in its current form.
+## Scope boundary
 
-Its ten new profiles were selected to satisfy the old minimal Gate1 subset and
-include authority/provenance choices that the new corpus program must re-evaluate.
+DC1 is evidence/curation only.
 
-Do not use #66 as production truth.
+No broad production FoodIngredient/Nutrition/Composition/RecipeVersion
+publication or schema/migration change belongs in DC1.
 
-Reusable mechanics may later be recovered:
+DC2/DC3 production work starts only as separately reviewable batches after the
+DC1 package identifies exact demand and authority.
 
-- immutable selected-source snapshot/hash validation;
-- deterministic publication/idempotency structure;
-- Planner fixture structure;
-- persisted-week/Serving proof.
+## Verification expectation
 
-Underlying food/profile/recipe truth must come from accepted DATA-CORPUS-V1
-batches.
-
-## DATA-CORPUS-V1 phases
-
-### DC0 — current
-
-Docs/governance only:
-
-- canonical corpus contract;
-- roadmap addendum;
-- current-focus/handoff sync;
-- AGENTS routing;
-- source authority policy.
-
-### DC1 — next after reviewed merge
-
-Evidence/curation:
-
-- select initial `50–80+` useful recipe candidates;
-- preserve exact source variants;
-- build deduplicated canonical food/form demand;
-- reuse current mappings/production profiles;
-- assign authoritative sources;
-- record rights/use state;
-- identify exact blockers;
-- propose small DC2/DC3 batches.
-
-No invented values and no production publication in DC1 unless a separate
-bounded production authorization is created.
-
-### DC2 / DC3
-
-Small reviewable production batches:
-
-- DC2: authoritative FoodIngredient/Nutrition/NutrientVector/ATOMIC Composition;
-- DC3: source-backed RecipeVersion resolution/publication.
-
-No one giant import.
-
-### DC4
-
-Corpus readiness audit, then Gate1 fixture selection from ordinary production
-catalogue truth.
-
-## Authority notes
-
-FIC/FGBUN 2024/reference database is a preferred Russian authority candidate,
-but current public materials are not treated as an open bulk-data licence.
-Record rights/use before bulk retention.
-
-USDA FoodData Central is an accepted open official baseline candidate where exact
-food/form semantics match.
-
-Retail/mirror/secondary sources are corroboration by default.
-
-The project still forbids:
-
-- LLM numeric truth;
-- unknown → zero;
-- estimate → exact;
-- arbitrary food/form substitution;
-- hidden raw/cooked mass equivalence;
-- arbitrary cross-source nutrient merging.
-
-## Verification for DC0
-
-Per `verification-policy.md`, DC0 is docs/state only.
-
-Required before review-ready:
-
-- stale-state/link audit;
-- exact changed-file scope audit;
-- diff whitespace checks;
-- no runtime/schema/data claim.
-
-No backend regression is required solely for DC0.
+DC1 must produce a reviewable, reproducible evidence package with explicit
+coverage and unresolved inventory. Follow the canonical DATA-CORPUS-V1 contract
+and `docs/family-food/verification-policy.md` for exact verification rules.
 
 ## Stop condition
 
-After DC0 review/merge, stop.
+After DC1 is review-ready/merged, stop.
 
-Proceed only to DC1 under Issue #67.
-
-Do not automatically start production data batches, Gate1-CLOSE or PR9.
+Do not automatically start DC2, DC3, DC4, Gate1-CLOSE or PR9.
