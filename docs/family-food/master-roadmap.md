@@ -8,6 +8,16 @@
 > with this roadmap for PR7+ meal-pattern, mixed-source/replan and security scope,
 > including the required Meal Pattern Catalogue supporting operation.
 
+> **Later canonical addendum — 2026-09-16:**
+> [External Dataset Independence / Recipe Constructor Addendum](master-roadmap-addendum-2026-09-16.md)
+> must also be read for dataset independence and Recipe Constructor publication policy.
+>
+> **Latest canonical addendum — 2026-09-19:**
+> [DATA-CORPUS-V1 Addendum](master-roadmap-addendum-2026-09-19-data-corpus.md)
+> supersedes the Gate1-only minimal-data sequence: the reusable authoritative food
+> and recipe corpus is now built before Gate1-CLOSE, while the generalized Data
+> Ingestion Platform remains later.
+
 ## 1. Authority
 
 This document is the repository-local source of truth for FamilyFoodOS product
