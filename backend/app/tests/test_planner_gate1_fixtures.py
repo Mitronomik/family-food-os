@@ -200,8 +200,8 @@ def test_three_gate1_households_complete_authoritative_week(
             )
             assert persisted.servings
             assert all(
-                isinstance(serving.quantity_multiplier, Decimal)
-                and serving.quantity_multiplier > 0
+                isinstance(serving.portion_servings, Decimal)
+                and serving.portion_servings > 0
                 for serving in persisted.servings
             )
             assert all(
