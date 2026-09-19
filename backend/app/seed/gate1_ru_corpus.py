@@ -1,134 +1,251 @@
-"""Bounded Russian normative Gate1 publication; no schema or Planner changes."""
+"""Bounded Russian normative recipe publication for the Gate 1 planning fixture."""
 
-from dataclasses import asdict
-from datetime import datetime, timezone
+from dataclasses import replace
+from datetime import datetime
 from decimal import Decimal
 import hashlib
 import json
 from pathlib import Path
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 from app.db.config import DatabaseConfig, REPOSITORY_ROOT
-from app.domain.food_ingredients import IngredientAlias, normalize_unicode_search_key
+from app.domain.food_composition import (
+    CompositionKind,
+    CompositionProvenance,
+    FoodCompositionVersion,
+    MassState,
+)
+from app.domain.food_ingredients import (
+    FoodIngredient,
+    FoodNutritionProfile,
+    IngredientAlias,
+    normalize_unicode_search_key,
+)
+from app.domain.food_recipes import (
+    MealTypeCode,
+    Recipe,
+    RecipeIngredient,
+    RecipeStep,
+    RecipeVersion,
+    RecipeVersionDetail,
+    RightsReviewStatus,
+    VerificationStatus,
+)
 from app.domain.nutrition_evidence import (
     AssessmentStatus,
     ConversionDecision,
     RecipeIngredientNutritionAssessment,
     SemanticCompatibility,
 )
-from app.domain.nutrient_vector_backfill_v1 import canonical_json, value_set_digest
+from app.domain.nutrient_vector_backfill_v1 import canonical_json
 from app.domain.units import UnitCode
+from app.persistence.sqlalchemy_core.b2b2 import B2B2UnitOfWork
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
-from app.persistence.sqlalchemy_core.food_recipe_composition import (
-    create_food_recipe_catalogue_service,
-)
-from app.persistence.sqlalchemy_core.nutrition_evidence_uow import (
-    SqlAlchemyNutritionEvidenceUnitOfWork,
-)
-from app.persistence.sqlalchemy_core.ru_food_data import SqlAlchemyRuFoodUnitOfWork
+from app.services.food_composition import CompositionCalculator
 from app.services.food_recipes import (
     TrustedRecipeIngredientSeed,
     TrustedRecipeSeed,
     TrustedRecipeVersionSeed,
+    _seed_matches,
 )
-from app.services.ru_food_data import reconcile_ru_food_data
 
 OPERATION = "GATE1-A-RU"
-BASE = "9a76a97790b676f36c4c982af825721c3ef2c67e"
-CHECKPOINT = "e720944aeb66e25fd666884576b10904d00f848fa655fae03f718a163108a1fe"
-PACKAGE = REPOSITORY_ROOT / "data/seed/gate1_ru_corpus/package.json"
-SOURCE_SNAPSHOT = REPOSITORY_ROOT / "data/seed/gate1_ru_corpus/source-snapshot.json"
-REVIEWED_AT = datetime(2026, 9, 19, 7, 30, tzinfo=timezone.utc)
-NUTRIENTS = (
-    ("kcal", "ENERGY_KCAL", "Калорийность", "kcal", "METHOD_SPECIFIC"),
-    ("protein_g", "PROTEIN", "Белки", "g", "METHOD_SPECIFIC"),
-    ("fat_g", "FAT_TOTAL", "Жиры", "g", "METHOD_SPECIFIC"),
+STARTING_MAIN = "9a76a97790b676f36c4c982af825721c3ef2c67e"
+PACKAGE_DIR = REPOSITORY_ROOT / "data/seed/gate1_ru_corpus"
+PACKAGE_PATH = PACKAGE_DIR / "package.json"
+SNAPSHOT_PATH = PACKAGE_DIR / "source-snapshot.json"
+EXPECTED_PROFILE_CODES = {
+    "BREAD_WHEAT_HIGH_GRADE",
+    "CHICKEN_CATEGORY_I",
+    "COOKING_FAT",
+    "COTTAGE_CHEESE_9",
+    "CUCUMBER_PICKLED_SALTED",
+    "MARGARINE_MILK",
+    "MILK_PASTEURIZED_3_2",
+    "RICE_GROATS_POLISHED",
+    "SOUR_CREAM_30",
+    "YEAST_COMPRESSED",
+}
+EXPECTED_RECIPE_IDS = {
+    "USSR82-208",
+    "USSR82-263",
+    "USSR82-462",
+    "USSR82-467",
+    "USSR82-492",
+    "USSR82-697",
+    "USSR82-720",
+    "USSR82-1081",
+}
+EXPECTED_RECIPE_COUNT = 8
+EXPECTED_PROFILE_COUNT = 10
+EXPECTED_INGREDIENT_ROWS = 40
+EXPECTED_EXISTING_MAPPINGS = {
+    "ING-0006": "WATER",
+    "ING-0019": "POTATO",
+    "ING-0028": "ONION_YELLOW",
+    "ING-0032": "BUTTER_UNSALTED",
+    "ING-0035": "CARROT",
+    "ING-0036": "FLOUR_WHEAT",
+    "ING-0042": "SUGAR",
+    "ING-0050": "SALT",
+    "ING-0071": "EGG",
+}
+_NUTRIENTS = (
+    ("kcal", "ENERGY_KCAL", "kcal", "Энергетическая ценность", "METHOD_SPECIFIC"),
+    ("protein_g", "PROTEIN", "g", "Белки", "METHOD_SPECIFIC"),
+    ("fat_g", "FAT_TOTAL", "g", "Жиры", "METHOD_SPECIFIC"),
     (
         "carbohydrates_g",
         "CARBOHYDRATE_AVAILABLE",
-        "Углеводы",
         "g",
+        "Углеводы",
         "METHOD_SPECIFIC",
     ),
-    ("calcium_mg", "CALCIUM", "Кальций", "mg", "EXACT"),
-    ("magnesium_mg", "MAGNESIUM", "Магний", "mg", "EXACT"),
-    ("phosphorus_mg", "PHOSPHORUS", "Фосфор", "mg", "EXACT"),
-    ("iron_mg", "IRON", "Железо", "mg", "EXACT"),
-    ("thiamin_mg", "THIAMIN", "Витамин B1", "mg", "EXACT"),
-    ("riboflavin_mg", "RIBOFLAVIN", "Витамин B2", "mg", "EXACT"),
-    ("vitamin_c_mg", "VITAMIN_C", "Витамин C", "mg", "EXACT"),
+    ("calcium_mg", "CALCIUM", "mg", "Кальций", "EXACT"),
+    ("magnesium_mg", "MAGNESIUM", "mg", "Магний", "EXACT"),
+    ("phosphorus_mg", "PHOSPHORUS", "mg", "Фосфор", "EXACT"),
+    ("iron_mg", "IRON", "mg", "Железо", "EXACT"),
+    ("thiamin_mg", "THIAMIN", "mg", "Витамин B1", "EXACT"),
+    ("riboflavin_mg", "RIBOFLAVIN", "mg", "Витамин B2", "EXACT"),
+    ("vitamin_c_mg", "VITAMIN_C", "mg", "Витамин C", "EXACT"),
 )
 
 
 class Gate1RuCorpusError(ValueError):
-    """Stable bounded-data error for the Gate1 Russian corpus operation."""
+    """Stable fail-closed error for the bounded Gate1 Russian data operation."""
 
 
-def require(ok: bool, message: str) -> None:
-    if not ok:
+def _require(condition: bool, message: str) -> None:
+    if not condition:
         raise Gate1RuCorpusError(message)
 
 
-def dec(value: str) -> Decimal:
-    result = Decimal(value)
-    require(
-        result.is_finite() and result >= 0,
-        "Некорректное числовое значение Gate1 RU.",
-    )
-    return result
+def _sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def load_package(path: Path = PACKAGE) -> dict:
-    data = json.loads(path.read_text(encoding="utf-8"))
-    require(
-        data.get("schema_version") == 1 and data.get("operation") == OPERATION,
-        "Неверный пакет Gate1 RU.",
-    )
-    require(data.get("starting_main") == BASE, "Изменена стартовая база Gate1 RU.")
-    require(
-        data.get("checkpoint", {}).get("sha256") == CHECKPOINT,
-        "Изменён исходный checkpoint Gate1 RU.",
-    )
-    require(
-        len(data.get("profiles", [])) == 10 and len(data.get("recipes", [])) == 8,
-        "Gate1 RU остаётся bounded 10 foods / 8 recipes.",
-    )
-
-    snapshot = data.get("source_snapshot", {})
-    expected_snapshot = snapshot.get("sha256")
-    require(
-        isinstance(expected_snapshot, str) and len(expected_snapshot) == 64,
-        "Нет hash selected-source snapshot.",
-    )
-    actual_snapshot = hashlib.sha256(SOURCE_SNAPSHOT.read_bytes()).hexdigest()
-    require(
-        actual_snapshot == expected_snapshot,
-        "Изменён selected-source snapshot Gate1 RU.",
-    )
-    require(
-        all(
-            row.get("source_document_sha256") == expected_snapshot
-            and row.get("source_version") == f"sha256:{expected_snapshot}"
-            for row in data["recipes"]
-        ),
-        "Recipe provenance не закреплена selected-source snapshot.",
-    )
-    require(
-        sum(row["meal_type_code"] == "breakfast" for row in data["recipes"]) == 3,
-        "Gate1 RU требует три завтрака.",
-    )
-    require(
-        sum(row["meal_type_code"] == "main" for row in data["recipes"]) == 5,
-        "Gate1 RU требует пять основных блюд.",
-    )
-    return data
+def _read_json(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
-def vector_payload(row: dict) -> tuple[list[dict], str]:
+def _instant(value: str) -> datetime:
+    parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    _require(parsed.utcoffset() is not None, "Gate1 RU instant must be timezone-aware.")
+    return parsed
+
+
+def _decimal(value: str) -> Decimal:
+    parsed = Decimal(value)
+    _require(parsed.is_finite() and parsed >= 0, "Gate1 RU numeric value is invalid.")
+    return parsed
+
+
+def load_gate1_ru_package(
+    package_path: Path = PACKAGE_PATH,
+    snapshot_path: Path = SNAPSHOT_PATH,
+) -> dict:
+    package = _read_json(package_path)
+    snapshot = _read_json(snapshot_path)
+    _require(package.get("schema_version") == 1, "Invalid Gate1 RU package schema.")
+    _require(package.get("operation") == OPERATION, "Invalid Gate1 RU operation.")
+    _require(
+        package.get("starting_main") == STARTING_MAIN,
+        "Gate1 RU starting main differs from the authorized base.",
+    )
+    source_snapshot = package.get("source_snapshot") or {}
+    _require(
+        source_snapshot.get("path")
+        == "data/seed/gate1_ru_corpus/source-snapshot.json",
+        "Gate1 RU source snapshot path differs.",
+    )
+    _require(
+        source_snapshot.get("sha256") == _sha256(snapshot_path),
+        "Gate1 RU source snapshot hash differs.",
+    )
+    _require(
+        snapshot.get("source_checkpoint_sha256")
+        == package.get("checkpoint", {}).get("sha256"),
+        "Gate1 RU checkpoint lineage differs.",
+    )
+    profiles = package.get("profiles")
+    recipes = package.get("recipes")
+    mappings = package.get("existing_mappings")
+    _require(
+        isinstance(profiles, list)
+        and len(profiles) == EXPECTED_PROFILE_COUNT
+        and {row["canonical_code"] for row in profiles} == EXPECTED_PROFILE_CODES,
+        "Gate1 RU profile scope differs.",
+    )
+    _require(
+        isinstance(recipes, list)
+        and len(recipes) == EXPECTED_RECIPE_COUNT
+        and {row["source_recipe_id"] for row in recipes} == EXPECTED_RECIPE_IDS,
+        "Gate1 RU recipe scope differs.",
+    )
+    _require(
+        sum(len(row["ingredients"]) for row in recipes) == EXPECTED_INGREDIENT_ROWS,
+        "Gate1 RU ingredient-row count differs.",
+    )
+    _require(
+        isinstance(mappings, list)
+        and {row["external_id"]: row["canonical_code"] for row in mappings}
+        == EXPECTED_EXISTING_MAPPINGS,
+        "Gate1 RU accepted v22.13 mappings differ.",
+    )
+    snapshot_by_id = {row["source_recipe_id"]: row for row in snapshot["recipes"]}
+    _require(
+        set(snapshot_by_id) == EXPECTED_RECIPE_IDS,
+        "Gate1 RU snapshot scope differs.",
+    )
+    for recipe in recipes:
+        _require(
+            recipe["source_document_sha256"] == source_snapshot["sha256"]
+            and recipe["source_version"] == f"sha256:{source_snapshot['sha256']}",
+            "RecipeVersion provenance is not pinned to the selected snapshot.",
+        )
+        source = snapshot_by_id[recipe["source_recipe_id"]]
+        _require(
+            source.get("published_ingredients") == recipe["ingredients"]
+            and source.get("steps_ru") == recipe["steps_ru"],
+            f"Selected source snapshot differs for {recipe['source_recipe_id']}.",
+        )
+    profile_by_external = {row["external_id"]: row for row in profiles}
+    _require(
+        len(profile_by_external) == len(profiles),
+        "Gate1 RU external profile identity is duplicated.",
+    )
+    for recipe in recipes:
+        for ingredient in recipe["ingredients"]:
+            external_id = ingredient.get("external_id")
+            code = ingredient["food_ingredient_code"]
+            if external_id is None:
+                _require(
+                    code == "WATER",
+                    "Only the explicit water branch may lack v22 ID.",
+                )
+            elif external_id in profile_by_external:
+                _require(
+                    profile_by_external[external_id]["canonical_code"] == code,
+                    "Gate1 RU new-form binding differs from the reviewed profile.",
+                )
+            else:
+                _require(
+                    EXPECTED_EXISTING_MAPPINGS.get(external_id) == code,
+                    "Gate1 RU existing FoodIngredient binding differs from v22.13.",
+                )
+            quantity = _decimal(ingredient["quantity_g"])
+            _require(quantity > 0, "Gate1 RU recipe input mass must be positive.")
+    return package
+
+
+def _vector_payload(row: dict) -> tuple[list[dict], str]:
     values: list[dict] = []
     observations: list[dict] = []
-    for field, code, label, unit, status in NUTRIENTS:
-        amount = dec(row[field])
+    for field, canonical_code, unit, label, mapping_status in _NUTRIENTS:
+        raw = row.get(field)
+        if raw is None:
+            continue
+        amount = _decimal(raw)
         observation = {
             "audit_identity": f"{OPERATION}:{row['external_id']}:{field}",
             "profile_source_name": row["source_name"],
@@ -138,176 +255,89 @@ def vector_payload(row: dict) -> tuple[list[dict], str]:
             "source_nutrient_id": field,
             "source_nutrient_name": label,
             "source_unit": unit,
-            "source_value": row[field],
+            "source_value": raw,
             "source_food_nutrient_id": f"{row['external_id']}:{field}",
             "source_derivation_id": None,
             "source_observation": {
-                "checkpoint_sha256": CHECKPOINT,
-                "profile_quality": row["profile_quality"],
+                "checkpoint_sha256": row["checkpoint_sha256"],
                 "exactness_tier": row["exactness_tier"],
+                "profile_quality": row["profile_quality"],
                 "source_url": row["source_url"],
                 "secondary_evidence_url": row.get("secondary_evidence_url"),
             },
             "source_review_reference": (
                 f"data/seed/gate1_ru_corpus/package.json#{row['external_id']}"
             ),
-            "source_archive_id": "russian_normative_recipes_v22_5_checkpoint.zip",
+            "source_archive_id": row["checkpoint_sha256"],
             "uncertainty": (
-                "Проверенная транскрипция пользовательского checkpoint; "
-                "отсутствующие значения остаются unknown, нули не уплотняют "
-                "sparse vector."
+                "User-supplied reference transcription; exact food/form binding "
+                "reviewed for the bounded Gate1 subset. Retention is not inferred."
             ),
         }
-        observations.append(
-            {
-                "origin": (
-                    "SOURCE_REPORTED_ZERO_HELD"
-                    if amount == 0
-                    else "SOURCE_COMPONENT_CONFIRMED"
-                ),
-                "observation": observation,
-            }
-        )
-        if amount == 0:
-            continue
         mapping = {
-            "canonical_code": code,
             "source_name": row["source_name"],
             "source_release": row["source_version"],
             "source_data_type": row["source_data_type"],
             "source_nutrient_id": field,
+            "canonical_code": canonical_code,
             "source_nutrient_name": label,
             "source_nutrient_nbr": field,
             "source_unit": unit,
-            "mapping_status": status,
+            "canonical_unit": unit,
+            "mapping_status": mapping_status,
             "unit_conversion_required": False,
         }
+        if amount == 0:
+            observations.append(
+                {"origin": "SOURCE_REPORTED_ZERO_HELD", "observation": observation}
+            )
+            continue
+        observations.append(
+            {"origin": "SOURCE_COMPONENT_CONFIRMED", "observation": observation}
+        )
         values.append(
             {
-                "nutrient_code": code,
+                "nutrient_code": canonical_code,
                 "amount": amount,
                 "provenance_json": canonical_json(
                     {"observation": observation, "mapping": mapping}
                 ),
             }
         )
-    return (
-        sorted(values, key=lambda item: item["nutrient_code"]),
-        canonical_json(observations),
+    return sorted(values, key=lambda item: item["nutrient_code"]), canonical_json(
+        observations
     )
 
 
-def food_entries(data: dict) -> tuple[dict, ...]:
-    entries: list[dict] = []
-    for row in data["profiles"]:
-        values, observations = vector_payload(row)
-        profile = {
-            key: dec(row[key]) if row[key] is not None else None
-            for key in (
-                "basis_grams",
-                "kcal",
-                "protein_g",
-                "fat_g",
-                "carbohydrates_g",
-                "fiber_g",
-            )
-        }
-        profile.update(
-            source_name=row["source_name"],
-            source_id=row["source_id"],
-            source_version=row["source_version"],
-            source_data_type=row["source_data_type"],
-            verified_at=datetime.fromisoformat(row["verified_at"]),
-            estimated=bool(row["estimated"]),
-        )
-        decision = {
-            "food_code": row["canonical_code"],
-            "canonical_name_ru": row["canonical_name_ru"],
-            "decision": "PROMOTE",
-            "mass_state": "INPUT",
-            "vector_reference": {
-                "value_count": len(values),
-                "value_sha256": value_set_digest(values),
-            },
-            "review_reference": f"{OPERATION}:{row['external_id']}",
-        }
-        entries.append(
-            {
-                "row": decision,
-                "profile": profile,
-                "values": values,
-                "observations": observations,
-                "category_code": row["category_code"],
-            }
-        )
-    return tuple(entries)
-
-
-def seed_foods(config: DatabaseConfig | None, data: dict) -> dict[str, int]:
-    engine = create_sqlite_engine(config)
-    try:
-        result = reconcile_ru_food_data(
-            lambda: SqlAlchemyRuFoodUnitOfWork(engine),
-            food_entries(data),
-        )
-        with SqlAlchemyRuFoodUnitOfWork(engine) as uow:
-            for row in data["profiles"]:
-                food = uow.ingredients.get_by_code(row["canonical_code"])
-                require(
-                    food is not None,
-                    f"Нет FoodIngredient {row['canonical_code']}.",
-                )
-                for alias in row["aliases_ru"]:
-                    normalized = normalize_unicode_search_key(alias)
-                    existing = uow.aliases.get_by_key(normalized)
-                    if existing is None:
-                        require(
-                            uow.ingredients.get_by_name_key(normalized) is None,
-                            f"Alias занят: {alias}",
-                        )
-                        uow.aliases.add(
-                            IngredientAlias(
-                                uuid4(),
-                                food.id,
-                                alias,
-                                normalized,
-                                "ru",
-                                REVIEWED_AT,
-                            )
-                        )
-                    else:
-                        require(
-                            existing.food_ingredient_id == food.id,
-                            f"Alias ведёт на другой продукт: {alias}",
-                        )
-            uow.commit()
-        return result
-    finally:
-        engine.dispose()
-
-
-def recipe_seed(row: dict) -> TrustedRecipeSeed:
-    ingredients = tuple(
-        TrustedRecipeIngredientSeed(
-            food_ingredient_code=item["food_ingredient_code"],
-            quantity=dec(item["quantity_g"]),
-            unit=UnitCode.GRAM,
-            source_amount_text=item["source_amount_text"],
-            normalization_note=(
-                "Прямая нормативная масса нетто; без преобразования объёма/штук "
-                "в граммы."
-            ),
-            prep_note=None,
-            optional=False,
-        )
-        for item in row["ingredients"]
+def _profile(row: dict, ingredient_id: UUID) -> FoodNutritionProfile:
+    return FoodNutritionProfile(
+        id=uuid4(),
+        food_ingredient_id=ingredient_id,
+        basis_grams=_decimal(row["basis_grams"]),
+        kcal=_decimal(row["kcal"]),
+        protein_g=_decimal(row["protein_g"]),
+        fat_g=_decimal(row["fat_g"]),
+        carbohydrates_g=_decimal(row["carbohydrates_g"]),
+        fiber_g=None if row.get("fiber_g") is None else _decimal(row["fiber_g"]),
+        source_name=row["source_name"],
+        source_id=row["source_id"],
+        source_version=row["source_version"],
+        source_data_type=row["source_data_type"],
+        verified_at=_instant(row["verified_at"]),
+        estimated=row["estimated"],
+        is_current=True,
+        created_at=_instant(row["verified_at"]),
     )
+
+
+def _recipe_seed(row: dict) -> TrustedRecipeSeed:
+    instant = _instant(row["source_retrieved_at"])
     return TrustedRecipeSeed(
         canonical_code=row["canonical_code"],
         canonical_name=row["canonical_name_ru"],
         version=TrustedRecipeVersionSeed(
-            base_servings=dec(row["base_servings"]),
-            meal_type_code=row["meal_type_code"],
+            base_servings=Decimal(row["base_servings"]),
+            meal_type_code=MealTypeCode(row["meal_type_code"]),
             prep_time_minutes=None,
             cook_time_minutes=None,
             total_time_minutes=None,
@@ -316,139 +346,374 @@ def recipe_seed(row: dict) -> TrustedRecipeSeed:
             freezable=None,
             storage_days_fridge=None,
             storage_days_freezer=None,
-            verification_status="SOURCE_VERIFIED",
-            verified_at=REVIEWED_AT,
+            verification_status=VerificationStatus.SOURCE_VERIFIED,
+            verified_at=instant,
             source_name=row["source_name"],
             source_recipe_id=row["source_recipe_id"],
             source_url=row["source_url"],
             source_version=row["source_version"],
-            source_retrieved_at=datetime.fromisoformat(row["source_retrieved_at"]),
+            source_retrieved_at=instant,
             source_document_sha256=row["source_document_sha256"],
-            source_original_servings=dec(row["source_original_servings"]),
-            rights_review_status=row["rights_review_status"],
+            source_original_servings=Decimal(row["source_original_servings"]),
+            rights_review_status=RightsReviewStatus.REVIEWED,
             rights_basis=row["rights_basis"],
             change_note=row["change_note"],
-            ingredients=ingredients,
+            ingredients=tuple(
+                TrustedRecipeIngredientSeed(
+                    food_ingredient_code=item["food_ingredient_code"],
+                    quantity=Decimal(item["quantity_g"]),
+                    unit=UnitCode.GRAM,
+                    source_amount_text=item["source_amount_text"],
+                    normalization_note=(
+                        "Exact net gram input preserved from the sealed "
+                        "GATE1-A-RU source snapshot."
+                    ),
+                    prep_note=None,
+                    optional=False,
+                )
+                for item in row["ingredients"]
+            ),
             steps=tuple(row["steps_ru"]),
             equipment_codes=(),
         ),
     )
 
 
-def seed_recipes(config: DatabaseConfig | None, data: dict) -> dict:
-    engine = create_sqlite_engine(config)
-    try:
-        service = create_food_recipe_catalogue_service(engine)
-        return asdict(
-            service.reconcile_seed(tuple(recipe_seed(row) for row in data["recipes"]))
+def _new_recipe_detail(
+    uow: B2B2UnitOfWork, seed: TrustedRecipeSeed
+) -> RecipeVersionDetail:
+    now = seed.version.verified_at
+    assert now is not None
+    recipe = Recipe(
+        id=uuid4(),
+        canonical_code=seed.canonical_code,
+        canonical_name=seed.canonical_name,
+        canonical_name_key=normalize_unicode_search_key(
+            seed.canonical_name, field="canonical_name"
+        ),
+        is_active=True,
+        created_at=now,
+        updated_at=now,
+    )
+    version_id = uuid4()
+    version = RecipeVersion(
+        id=version_id,
+        recipe_id=recipe.id,
+        version_number=1,
+        base_servings=seed.version.base_servings,
+        meal_type_code=MealTypeCode(seed.version.meal_type_code),
+        prep_time_minutes=None,
+        cook_time_minutes=None,
+        total_time_minutes=None,
+        difficulty_code=None,
+        batch_friendly=None,
+        freezable=None,
+        storage_days_fridge=None,
+        storage_days_freezer=None,
+        verification_status=VerificationStatus.SOURCE_VERIFIED,
+        verified_at=now,
+        source_name=seed.version.source_name,
+        source_recipe_id=seed.version.source_recipe_id,
+        source_url=seed.version.source_url,
+        source_version=seed.version.source_version,
+        source_retrieved_at=seed.version.source_retrieved_at,
+        source_document_sha256=seed.version.source_document_sha256,
+        source_original_servings=seed.version.source_original_servings,
+        rights_review_status=RightsReviewStatus.REVIEWED,
+        rights_basis=seed.version.rights_basis,
+        created_from_version_id=None,
+        change_note=seed.version.change_note,
+        created_at=now,
+    )
+    ingredients = []
+    for position, item in enumerate(seed.version.ingredients, 1):
+        food = uow.ingredients.get_by_code(item.food_ingredient_code)
+        _require(
+            food is not None and food.is_active,
+            f"Missing food {item.food_ingredient_code}.",
         )
-    finally:
-        engine.dispose()
+        ingredients.append(
+            RecipeIngredient(
+                id=uuid4(),
+                recipe_version_id=version_id,
+                food_ingredient_id=food.id,
+                position=position,
+                quantity=item.quantity,
+                unit=UnitCode.GRAM,
+                source_amount_text=item.source_amount_text,
+                normalization_note=item.normalization_note,
+                prep_note=None,
+                optional=False,
+                created_at=now,
+            )
+        )
+    steps = tuple(
+        RecipeStep(
+            id=uuid4(),
+            recipe_version_id=version_id,
+            position=position,
+            instruction=instruction,
+            stage_code=None,
+            created_at=now,
+        )
+        for position, instruction in enumerate(seed.version.steps, 1)
+    )
+    return RecipeVersionDetail(
+        recipe=recipe,
+        version=version,
+        ingredients=tuple(ingredients),
+        steps=steps,
+        equipment=(),
+    )
 
 
-def seed_assessments(config: DatabaseConfig | None, data: dict) -> dict[str, int]:
-    engine = create_sqlite_engine(config)
+def _ensure_food(
+    uow: B2B2UnitOfWork, row: dict
+) -> tuple[FoodIngredient, FoodNutritionProfile, bool]:
+    now = _instant(row["verified_at"])
+    code = row["canonical_code"]
+    ingredient = uow.ingredients.get_by_code(code)
+    inserted = ingredient is None
+    if ingredient is None:
+        key = normalize_unicode_search_key(row["canonical_name_ru"])
+        _require(
+            uow.ingredients.get_by_name_key(key) is None
+            and uow.aliases.get_by_key(key) is None,
+            f"FoodIngredient name collision for {code}.",
+        )
+        ingredient = FoodIngredient(
+            id=uuid4(),
+            canonical_code=code,
+            canonical_name=row["canonical_name_ru"],
+            canonical_name_key=key,
+            category_code=row["category_code"],
+            default_unit=UnitCode.GRAM,
+            density_g_per_ml=None,
+            edible_fraction=None,
+            allergens_reviewed=False,
+            allergen_codes=(),
+            storage_profile_code=None,
+            is_active=True,
+            created_at=now,
+            updated_at=now,
+        )
+        uow.ingredients.add(ingredient)
+    else:
+        _require(
+            ingredient.is_active
+            and ingredient.canonical_name == row["canonical_name_ru"]
+            and ingredient.category_code == row["category_code"]
+            and ingredient.default_unit is UnitCode.GRAM,
+            f"Persisted FoodIngredient differs for {code}.",
+        )
+    for alias_text in row["aliases_ru"]:
+        key = normalize_unicode_search_key(alias_text, field="alias")
+        existing_alias = uow.aliases.get_by_key(key)
+        canonical = uow.ingredients.get_by_name_key(key)
+        _require(
+            canonical is None or canonical.id == ingredient.id,
+            f"Alias collision for {code}.",
+        )
+        if existing_alias is None:
+            uow.aliases.add(
+                IngredientAlias(uuid4(), ingredient.id, alias_text, key, "ru", now)
+            )
+        else:
+            _require(
+                existing_alias.food_ingredient_id == ingredient.id,
+                f"Alias owner differs for {code}.",
+            )
+    expected = _profile(row, ingredient.id)
+    profile = uow.nutrition_profiles.get_by_provenance(
+        ingredient.id,
+        expected.source_name,
+        expected.source_id,
+        expected.source_version,
+    )
+    if profile is None:
+        _require(
+            uow.nutrition_profiles.get_current(ingredient.id) is None,
+            f"Unexpected current profile for new Gate1 RU food {code}.",
+        )
+        profile = expected
+        uow.nutrition_profiles.add(profile)
+        values, observations = _vector_payload(row)
+        uow.publish_vector(profile, values, observations)
+    else:
+        _require(
+            profile.snapshot_values() == expected.snapshot_values(),
+            f"Profile differs for {code}.",
+        )
+    vector = uow.nutrient_vectors.get(profile.id)
+    _require(
+        vector.amount("ENERGY_KCAL") is not None
+        and vector.amount("ENERGY_KCAL") > 0,
+        f"Energy vector missing for {code}.",
+    )
+    provenance = CompositionProvenance(
+        OPERATION,
+        "1",
+        f"data/seed/gate1_ru_corpus/package.json#{code}",
+        f"Issue #64 / v22.13 mapping / {row['external_id']}",
+    )
+    expected_composition = FoodCompositionVersion(
+        id=uuid4(),
+        food_ingredient_id=ingredient.id,
+        version=1,
+        kind=CompositionKind.ATOMIC,
+        input_state=MassState(row["mass_state"]),
+        provenance=provenance,
+        profile_id=profile.id,
+    )
+    composition = uow.compositions.find_version(ingredient.id, 1)
+    if composition is None:
+        composition = expected_composition
+        uow.compositions.add_versions((composition,))
+    else:
+        _require(
+            composition == replace(expected_composition, id=composition.id),
+            f"Composition differs for {code}.",
+        )
+    result = CompositionCalculator(
+        uow.compositions, uow.nutrient_vectors
+    ).calculate(composition.id, nutrient_codes=("ENERGY_KCAL",))
+    _require(
+        result.nutrients[0].amount is not None,
+        f"Composition energy missing for {code}.",
+    )
+    return ingredient, profile, inserted
+
+
+def _ensure_recipe(
+    uow: B2B2UnitOfWork, row: dict
+) -> tuple[RecipeVersionDetail, bool]:
+    seed = _recipe_seed(row)
+    recipe = uow.recipes.get_by_code(seed.canonical_code)
+    if recipe is None:
+        key = normalize_unicode_search_key(
+            seed.canonical_name, field="canonical_name"
+        )
+        _require(
+            uow.recipes.get_by_name_key(key) is None,
+            f"Recipe name collision for {seed.canonical_code}.",
+        )
+        detail = _new_recipe_detail(uow, seed)
+        uow.recipes.add(detail.recipe)
+        uow.versions.add_detail(detail)
+        return detail, True
+    _require(
+        recipe.is_active and recipe.canonical_name == seed.canonical_name,
+        f"Persisted Recipe differs for {seed.canonical_code}.",
+    )
+    matches = uow.versions.list_by_provenance(
+        recipe.id,
+        seed.version.source_name,
+        seed.version.source_recipe_id,
+        seed.version.source_version,
+    )
+    _require(
+        len(matches) <= 1,
+        f"Duplicate Gate1 RU provenance for {seed.canonical_code}.",
+    )
+    if matches:
+        detail = matches[0]
+        _require(
+            _seed_matches(uow, detail, seed.version),
+            f"RecipeVersion differs for {seed.canonical_code}.",
+        )
+        return detail, False
+    _require(
+        not uow.versions.list_for_recipe(recipe.id),
+        f"Unexpected prior RecipeVersion history for {seed.canonical_code}.",
+    )
+    raise Gate1RuCorpusError(
+        f"Recipe {seed.canonical_code} exists without the reviewed immutable version."
+    )
+
+
+def _ensure_assessments(
+    uow: B2B2UnitOfWork, detail: RecipeVersionDetail
+) -> int:
     inserted = 0
-    existing_count = 0
-    try:
-        with SqlAlchemyNutritionEvidenceUnitOfWork(engine) as uow:
-            for recipe_row in data["recipes"]:
-                recipe = uow.recipes.get_by_code(recipe_row["canonical_code"])
-                require(
-                    recipe is not None and recipe.is_active,
-                    "Нет опубликованного Gate1 RU Recipe.",
-                )
-                detail = uow.versions.get_current_verified(recipe.id)
-                require(
-                    detail is not None
-                    and detail.version.source_recipe_id
-                    == recipe_row["source_recipe_id"],
-                    "Изменена provenance Gate1 RU RecipeVersion.",
-                )
-                for item in detail.ingredients:
-                    food = uow.ingredients.get(item.food_ingredient_id)
-                    profile = (
-                        None
-                        if food is None
-                        else uow.nutrition_profiles.get_current(food.id)
-                    )
-                    require(
-                        food is not None and profile is not None,
-                        "Gate1 RU строка потеряла FoodIngredient/profile.",
-                    )
-                    key = (
-                        f"{recipe_row['source_recipe_id']}:"
-                        f"v{detail.version.version_number}:{item.position}"
-                    )
-                    current = uow.evidence.get_current_assessment(item.id)
-                    if current is not None:
-                        require(
-                            current.nutrition_profile_id == profile.id
-                            and current.status_code
-                            is AssessmentStatus.APPROVED_NO_CONVERSION
-                            and current.semantic_compatibility_code
-                            is SemanticCompatibility.MATCH
-                            and current.conversion_decision_code
-                            is ConversionDecision.DIRECT_RECIPE_MASS
-                            and current.measure_evidence_id is None
-                            and current.source_audit_operation == OPERATION
-                            and current.source_audit_key == key
-                            and not current.issues,
-                            f"Конфликт assessment {key}",
-                        )
-                        existing_count += 1
-                        continue
-                    uow.evidence.add_assessment(
-                        RecipeIngredientNutritionAssessment(
-                            id=uuid4(),
-                            recipe_ingredient_id=item.id,
-                            nutrition_profile_id=profile.id,
-                            assessment_version=1,
-                            is_current=True,
-                            status_code=AssessmentStatus.APPROVED_NO_CONVERSION,
-                            semantic_compatibility_code=SemanticCompatibility.MATCH,
-                            conversion_decision_code=(
-                                ConversionDecision.DIRECT_RECIPE_MASS
-                            ),
-                            measure_evidence_id=None,
-                            source_audit_operation=OPERATION,
-                            source_audit_key=key,
-                            review_note=(
-                                "Нормативная масса нетто выражена в граммах; "
-                                "binding проверен по v22.13 mapping и bounded "
-                                "Gate1-A-RU package."
-                            ),
-                            reviewed_at=REVIEWED_AT,
-                            created_at=REVIEWED_AT,
-                            issues=(),
-                        )
-                    )
-                    inserted += 1
-            uow.commit()
-        return {
-            "assessments_inserted": inserted,
-            "assessments_existing": existing_count,
-        }
-    finally:
-        engine.dispose()
+    reviewed_at = detail.version.verified_at
+    assert reviewed_at is not None
+    for row in detail.ingredients:
+        profile = uow.nutrition_profiles.get_current(row.food_ingredient_id)
+        _require(profile is not None, "Recipe row lacks current nutrition profile.")
+        expected = RecipeIngredientNutritionAssessment(
+            id=uuid4(),
+            recipe_ingredient_id=row.id,
+            nutrition_profile_id=profile.id,
+            assessment_version=1,
+            is_current=True,
+            status_code=AssessmentStatus.APPROVED_NO_CONVERSION,
+            semantic_compatibility_code=SemanticCompatibility.MATCH,
+            conversion_decision_code=ConversionDecision.DIRECT_RECIPE_MASS,
+            measure_evidence_id=None,
+            source_audit_operation=OPERATION,
+            source_audit_key=(
+                f"{detail.recipe.canonical_code}:"
+                f"v{detail.version.version_number}:{row.position}"
+            ),
+            review_note=(
+                "Direct source net gram input from the sealed Russian normative "
+                "Gate1 snapshot; no household measure conversion, yield inference "
+                "or retention assumption is used."
+            ),
+            reviewed_at=reviewed_at,
+            created_at=reviewed_at,
+            issues=(),
+        )
+        current = uow.evidence.get_current_assessment(row.id)
+        if current is None:
+            uow.evidence.add_assessment(expected)
+            inserted += 1
+        else:
+            _require(
+                current == replace(expected, id=current.id),
+                (
+                    "Nutrition assessment differs for "
+                    f"{detail.recipe.canonical_code}:{row.position}."
+                ),
+            )
+    return inserted
 
 
 def seed_gate1_ru_corpus(
     config: DatabaseConfig | None = None,
-) -> dict[str, dict]:
-    data = load_package()
-    return {
-        "foods": seed_foods(config, data),
-        "recipes": seed_recipes(config, data),
-        "assessments": seed_assessments(config, data),
+    *,
+    package_path: Path = PACKAGE_PATH,
+    snapshot_path: Path = SNAPSHOT_PATH,
+) -> dict[str, int]:
+    """Publish the selected Gate1 Russian corpus after the accepted baseline seed chain.
+
+    This operation deliberately does not run migrations or historical seeds. The
+    caller must establish the accepted current baseline first. All Gate1-RU writes
+    share one project transaction.
+    """
+    package = load_gate1_ru_package(package_path, snapshot_path)
+    engine = create_sqlite_engine(config)
+    counters = {
+        "food_ingredients_inserted": 0,
+        "recipes_inserted": 0,
+        "recipe_versions_inserted": 0,
+        "assessments_inserted": 0,
     }
+    try:
+        with B2B2UnitOfWork(engine) as uow:
+            for row in package["profiles"]:
+                _, _, inserted = _ensure_food(uow, row)
+                counters["food_ingredients_inserted"] += int(inserted)
+            for row in package["recipes"]:
+                detail, inserted = _ensure_recipe(uow, row)
+                counters["recipes_inserted"] += int(inserted)
+                counters["recipe_versions_inserted"] += int(inserted)
+                counters["assessments_inserted"] += _ensure_assessments(uow, detail)
+            uow.commit()
+        return counters
+    finally:
+        engine.dispose()
 
 
 if __name__ == "__main__":
-    print(
-        json.dumps(
-            seed_gate1_ru_corpus(),
-            ensure_ascii=False,
-            sort_keys=True,
-        )
-    )
+    print(json.dumps(seed_gate1_ru_corpus(), ensure_ascii=False, sort_keys=True))
