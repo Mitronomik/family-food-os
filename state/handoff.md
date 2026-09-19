@@ -4,21 +4,13 @@ Updated: `2026-09-19`.
 
 ## Accepted base and governance
 
-PR #63 is MERGED.
+Accepted main before DATA-CORPUS-V1 governance:
 
-Accepted post-PR63 main:
-
-`7408d161575870149f0d1938e1f126bb41561537`
+`9a76a97790b676f36c4c982af825721c3ef2c67e`
 
 Current bounded operation:
 
-`GATE1-A-E1 — Primary-source authority review for minimum candidate set` — ACTIVE under Issue #64.
-
-Gate1-A / Issue #61 remains ACTIVE.
-
-Gate1-CLOSE is NOT STARTED.
-
-PR9 is NOT STARTED.
+`DATA-CORPUS-V1 / DC0 — Contract and governance` — ACTIVE under Issue #67.
 
 Accepted SQLite migration head:
 
@@ -28,100 +20,131 @@ Future RecipeTemplate reservation remains:
 
 `0033_recipe_template_catalogue`
 
-## Accepted PR63 evidence baseline
+Gate1-CLOSE is NOT STARTED.
 
-PR #63 is accepted audit/blocker evidence only.
+PR9 is NOT STARTED.
 
-It established:
+## User decision that changed sequencing
 
-- 30 current verified RecipeVersions;
-- 29 `INCOMPLETE`;
-- 1 `CONDITIONAL`;
-- one current Planner-eligible oatmeal candidate with positive kcal;
-- generic/current-largest fixture minimum:
-  7 eligible versions;
-- generic repair gap:
-  6 versions;
-- current repository fixture capacities:
-  3 / 6 / 7;
-- no current fixed-event or hard-exclusion fixture;
-- target selection:
-  `TARGET_SELECTION_BLOCKED_PENDING_PRIMARY_EVIDENCE_REVIEW`;
-- final blocker classes:
-  70 `NEW_PRIMARY_EVIDENCE_REQUIRED`;
-  16 `IMMUTABLE_RECIPE_REVISION_REQUIRED`;
-  7 `ALREADY_ACCEPTED_EVIDENCE_REBIND`;
-  1 `PROFILE_OR_FORM_DATA_REPAIR`.
+On 2026-09-19 the user explicitly chose to stop optimizing catalogue truth only
+for Gate1.
 
-PR #63 changed no production truth, schema, migration or Planner behavior.
+New direction:
 
-## GATE1-A-E1 purpose
+```text
+build reusable authoritative corpus
+→ publish normal production FoodIngredient/Nutrition/RecipeVersion truth
+→ audit readiness
+→ use ordinary corpus subsets for Gate1 and later gates
+```
 
-E1 is the evidence step required before production repair.
+This supersedes the minimal-eight-recipe strategy in Issue #64 / current PR #66
+to the extent they limited catalogue work only to Gate1 needs.
 
-Primary candidate set:
+Canonical details:
 
-- `FNS2_ORANGE_PORK_CHOPS`
-- `FNS4_OVEN_FRIED_FISH`
-- `FNS5_BAKED_LENTILS_CASSEROLE`
-- `SNAP4_DILLED_FISH_FILLETS`
-- `TNC6_EGGS_SPINACH`
-- `WIC1_BEYOND_BASIC_GRILLED_CHEESE`
+- `docs/family-food/data-corpus-v1.md`;
+- `docs/family-food/master-roadmap-addendum-2026-09-19-data-corpus.md`;
+- Issue #67.
 
-Issue #64 owns the exact row-level blockers, source hierarchy, terminal dispositions, acceptance criteria and evidence-package requirements.
+## Relationship to PR #66
 
-The evidence review must determine whether the generic six-repair set is actually supportable by exact authority under the current model.
+PR #66 is not mergeable in its current form.
 
-## Bounded fallback
+Its ten new profiles were selected to satisfy the old minimal Gate1 subset and
+include authority/provenance choices that the new corpus program must re-evaluate.
 
-Fallback is conditional, not an automatic extension of scope.
+Do not use #66 as production truth.
 
-Allowed fallback candidates:
+Reusable mechanics may later be recovered:
 
-- `SNAP4_SPANISH_FRITTATA` — breakfast;
-- `SNAP4_BRAISED_CHICKEN_SPINACH` — main.
+- immutable selected-source snapshot/hash validation;
+- deterministic publication/idempotency structure;
+- Planner fixture structure;
+- persisted-week/Serving proof.
 
-A fallback candidate may be researched only after a primary candidate receives a terminal `BLOCKED` outcome and only if it is needed to restore a feasible minimum Planner set.
+Underlying food/profile/recipe truth must come from accepted DATA-CORPUS-V1
+batches.
 
-No other recipe search is authorized.
+## DATA-CORPUS-V1 phases
 
-## E1 invariants
+### DC0 — current
 
-- research/evidence only;
-- primary publisher/original recipe source first;
-- official exact food-composition/portion evidence second;
-- accepted repository evidence may be reused only when exact form/profile/measure semantics match;
-- no search-snippet authority;
-- no retailer measurement authority by default;
-- no LLM numeric facts;
-- no estimate promotion;
-- no inferred yield/retention;
-- no arbitrary alternative selection;
-- no production FoodIngredient/Nutrition/evidence/assessment/RecipeVersion changes;
-- no schema/migration;
-- no `0033` consumption;
-- no Planner changes;
-- no Gate1-CLOSE;
-- no PR9.
+Docs/governance only:
 
-## Required E1 outcome
+- canonical corpus contract;
+- roadmap addendum;
+- current-focus/handoff sync;
+- AGENTS routing;
+- source authority policy.
 
-For every primary blocker, produce a terminal evidence disposition.
+### DC1 — next after reviewed merge
 
-For every primary candidate, derive:
+Evidence/curation:
 
-- `EVIDENCE_READY_FOR_DATA_REPAIR`;
-- `EVIDENCE_READY_REQUIRES_IMMUTABLE_RECIPE_REVISION`;
-- or `BLOCKED`.
+- select initial `50–80+` useful recipe candidates;
+- preserve exact source variants;
+- build deduplicated canonical food/form demand;
+- reuse current mappings/production profiles;
+- assign authoritative sources;
+- record rights/use state;
+- identify exact blockers;
+- propose small DC2/DC3 batches.
 
-Then determine whether an evidence-ready minimum Planner candidate set exists.
+No invented values and no production publication in DC1 unless a separate
+bounded production authorization is created.
 
-If primary evidence is insufficient, activate only the minimum permitted fallback review.
+### DC2 / DC3
+
+Small reviewable production batches:
+
+- DC2: authoritative FoodIngredient/Nutrition/NutrientVector/ATOMIC Composition;
+- DC3: source-backed RecipeVersion resolution/publication.
+
+No one giant import.
+
+### DC4
+
+Corpus readiness audit, then Gate1 fixture selection from ordinary production
+catalogue truth.
+
+## Authority notes
+
+FIC/FGBUN 2024/reference database is a preferred Russian authority candidate,
+but current public materials are not treated as an open bulk-data licence.
+Record rights/use before bulk retention.
+
+USDA FoodData Central is an accepted open official baseline candidate where exact
+food/form semantics match.
+
+Retail/mirror/secondary sources are corroboration by default.
+
+The project still forbids:
+
+- LLM numeric truth;
+- unknown → zero;
+- estimate → exact;
+- arbitrary food/form substitution;
+- hidden raw/cooked mass equivalence;
+- arbitrary cross-source nutrient merging.
+
+## Verification for DC0
+
+Per `verification-policy.md`, DC0 is docs/state only.
+
+Required before review-ready:
+
+- stale-state/link audit;
+- exact changed-file scope audit;
+- diff whitespace checks;
+- no runtime/schema/data claim.
+
+No backend regression is required solely for DC0.
 
 ## Stop condition
 
-After E1 is review-ready/merged, stop.
+After DC0 review/merge, stop.
 
-Do not implement the resulting production repair plan automatically.
+Proceed only to DC1 under Issue #67.
 
-The next production data-repair operation requires separate bounded authorization.
+Do not automatically start production data batches, Gate1-CLOSE or PR9.
