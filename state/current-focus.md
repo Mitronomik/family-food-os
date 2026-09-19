@@ -10,8 +10,8 @@ Updated: `2026-09-19`.
 - PR8 / Issue #57 = COMPLETE through merged PR #59.
 - Post-PR59 state synchronization = COMPLETE through merged PR #60.
 - Gate1-A audit/evidence baseline = COMPLETE through merged PR #63.
-- Accepted post-PR63 main / GATE1-A-E1 base:
-  `7408d161575870149f0d1938e1f126bb41561537`.
+- Accepted post-PR65 main / GATE1-A-RU base:
+  `9a76a97790b676f36c4c982af825721c3ef2c67e`.
 - Accepted SQLite migration head: `0032_meal_plan_serving`.
 - Future RecipeTemplate reservation remains `0033_recipe_template_catalogue`.
 
