@@ -54,6 +54,8 @@ STARTING_MAIN = "9a76a97790b676f36c4c982af825721c3ef2c67e"
 PACKAGE_DIR = REPOSITORY_ROOT / "data/seed/gate1_ru_corpus"
 PACKAGE_PATH = PACKAGE_DIR / "package.json"
 SNAPSHOT_PATH = PACKAGE_DIR / "source-snapshot.json"
+PACKAGE_SHA256 = "cd5e4a98cd0f0a33d21995ff3666b3c3afcfbd0d5e92ed6e0eb27a68277d05da"
+SNAPSHOT_SHA256 = "5140f286d5b3e3f1d811ba9c57a1ab5cf0b5a6e7ecad5d8176987952cb396331"
 EXPECTED_PROFILE_CODES = {
     "BREAD_WHEAT_HIGH_GRADE",
     "CHICKEN_CATEGORY_I",
@@ -137,6 +139,11 @@ def load_gate1_ru_package(
     package_path: Path = PACKAGE_PATH,
     snapshot_path: Path = SNAPSHOT_PATH,
 ) -> dict:
+    _require(_sha256(package_path) == PACKAGE_SHA256, "Gate1 RU package hash differs.")
+    _require(
+        _sha256(snapshot_path) == SNAPSHOT_SHA256,
+        "Gate1 RU source snapshot hash differs.",
+    )
     package = _read_json(package_path)
     snapshot = _read_json(snapshot_path)
     _require(package.get("schema_version") == 1, "Invalid Gate1 RU package schema.")
@@ -152,8 +159,8 @@ def load_gate1_ru_package(
         "Gate1 RU source snapshot path differs.",
     )
     _require(
-        source_snapshot.get("sha256") == _sha256(snapshot_path),
-        "Gate1 RU source snapshot hash differs.",
+        source_snapshot.get("sha256") == SNAPSHOT_SHA256,
+        "Gate1 RU package declares a different source snapshot hash.",
     )
     _require(
         snapshot.get("source_checkpoint_sha256")
