@@ -94,13 +94,6 @@ _NUTRIENTS = (
     ("kcal", "ENERGY_KCAL", "kcal", "Энергетическая ценность", "METHOD_SPECIFIC"),
     ("protein_g", "PROTEIN", "g", "Белки", "METHOD_SPECIFIC"),
     ("fat_g", "FAT_TOTAL", "g", "Жиры", "METHOD_SPECIFIC"),
-    (
-        "carbohydrates_g",
-        "CARBOHYDRATE_AVAILABLE",
-        "g",
-        "Углеводы",
-        "METHOD_SPECIFIC",
-    ),
     ("calcium_mg", "CALCIUM", "mg", "Кальций", "EXACT"),
     ("magnesium_mg", "MAGNESIUM", "mg", "Магний", "EXACT"),
     ("phosphorus_mg", "PHOSPHORUS", "mg", "Фосфор", "EXACT"),
@@ -302,6 +295,27 @@ def _vector_payload(row: dict) -> tuple[list[dict], str]:
                 "provenance_json": canonical_json(
                     {"observation": observation, "mapping": mapping}
                 ),
+            }
+        )
+    observations.append(
+        {
+            "origin": "METHOD_AMBIGUOUS_HELD",
+            "field": "carbohydrates_g",
+            "source_value": row["carbohydrates_g"],
+            "reason": (
+                "The checkpoint does not establish whether the reported carbohydrate "
+                "field is CHOAVL, CHOCDF or another analytical convention. The value "
+                "remains in the legacy Nutrition v1 snapshot for deterministic Planner "
+                "compatibility but is not normalized into the sparse NutrientVector."
+            ),
+        }
+    )
+    if row.get("fiber_g") is None:
+        observations.append(
+            {
+                "origin": "VALUE_ABSENT",
+                "field": "fiber_g",
+                "reason": "The selected reference profile provides no exact fibre value.",
             }
         )
     return sorted(values, key=lambda item: item["nutrient_code"]), canonical_json(
