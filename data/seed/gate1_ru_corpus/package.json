@@ -894,5 +894,52 @@
     "path": "data/seed/gate1_ru_corpus/source-snapshot.json",
     "sha256": "3e3a767d27bc4cda9fa5c1ab8d3928a57fb7f6dded3ca0d523b2f5934b730c08",
     "derivation": "Bounded extraction of selected source rows/scenarios from the user-supplied v22.5 checkpoint; technology corroborated against the 1982 collection/transcriptions."
-  }
+  },
+  "existing_mappings": [
+    {
+      "external_id": "ING-0071",
+      "canonical_code": "EGG",
+      "v22_13_state": "ALIAS_EXISTING"
+    },
+    {
+      "external_id": "ING-0032",
+      "canonical_code": "BUTTER_UNSALTED",
+      "v22_13_state": "EXACT_EXISTING"
+    },
+    {
+      "external_id": "ING-0036",
+      "canonical_code": "FLOUR_WHEAT",
+      "v22_13_state": "ALIAS_EXISTING"
+    },
+    {
+      "external_id": "ING-0042",
+      "canonical_code": "SUGAR",
+      "v22_13_state": "EXACT_EXISTING"
+    },
+    {
+      "external_id": "ING-0006",
+      "canonical_code": "WATER",
+      "v22_13_state": "ALIAS_EXISTING"
+    },
+    {
+      "external_id": "ING-0050",
+      "canonical_code": "SALT",
+      "v22_13_state": "EXACT_EXISTING"
+    },
+    {
+      "external_id": "ING-0019",
+      "canonical_code": "POTATO",
+      "v22_13_state": "EXACT_EXISTING"
+    },
+    {
+      "external_id": "ING-0035",
+      "canonical_code": "CARROT",
+      "v22_13_state": "ALIAS_EXISTING"
+    },
+    {
+      "external_id": "ING-0028",
+      "canonical_code": "ONION_YELLOW",
+      "v22_13_state": "ALIAS_EXISTING"
+    }
+  ]
 }
