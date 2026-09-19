@@ -2,6 +2,10 @@
 
 from collections import Counter
 from decimal import Decimal
+import json
+import shutil
+
+import pytest
 
 from app.db.config import DatabaseConfig
 from app.domain.nutrition import NutritionStatus
@@ -18,6 +22,8 @@ from app.persistence.sqlalchemy_core.nutrition_composition import (
 from app.seed.gate1_ru_corpus import (
     EXPECTED_PROFILE_CODES,
     EXPECTED_RECIPE_IDS,
+    PACKAGE_DIR,
+    Gate1RuCorpusError,
     load_gate1_ru_package,
     seed_gate1_ru_corpus,
 )
@@ -55,6 +61,20 @@ def test_gate1_ru_package_is_bounded_and_hash_pinned() -> None:
         row["source_document_sha256"] == package["source_snapshot"]["sha256"]
         for row in package["recipes"]
     )
+
+
+def test_gate1_ru_package_rejects_changed_selected_snapshot(tmp_path) -> None:
+    folder = tmp_path / "gate1-ru-package"
+    shutil.copytree(PACKAGE_DIR, folder)
+    snapshot = folder / "source-snapshot.json"
+    payload = json.loads(snapshot.read_text(encoding="utf-8"))
+    payload["recipes"][0]["output_g"] = "999"
+    snapshot.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(Gate1RuCorpusError, match="snapshot hash"):
+        load_gate1_ru_package(folder / "package.json", snapshot)
 
 
 def test_gate1_ru_seed_is_idempotent_and_nutrition_ready(tmp_path) -> None:
@@ -116,6 +136,7 @@ def test_gate1_ru_seed_is_idempotent_and_nutrition_ready(tmp_path) -> None:
                 assert profile is not None
                 vector = scope.nutrient_vectors.get(profile.id)
                 assert vector.amount("ENERGY_KCAL") is not None
+                assert vector.amount("CARBOHYDRATE_AVAILABLE") is None
                 composition = scope.compositions.find_version(food.id, 1)
                 assert composition is not None
                 assert composition.profile_id == profile.id
