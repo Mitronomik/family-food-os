@@ -1,8 +1,8 @@
 # FamilyFoodOS — DATA-CORPUS-V1 Contract
 
-**Status:** canonical data-corpus contract  
-**Decision date:** 2026-09-19  
-**Authority:** later explicit user-approved product/data decision  
+**Status:** canonical data-corpus contract
+**Decision date:** 2026-09-19
+**Authority:** later explicit user-approved product/data decision
 **Execution issue:** #67 — `DATA-CORPUS-V1 — reusable authoritative food and recipe corpus`
 
 ## 1. Purpose
