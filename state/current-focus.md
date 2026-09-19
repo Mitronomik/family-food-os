@@ -9,75 +9,79 @@ Updated: `2026-09-19`.
 - PR7 / Issue #53 = COMPLETE through merged PR #54.
 - PR8 / Issue #57 = COMPLETE through merged PR #59.
 - Post-PR59 state synchronization = COMPLETE through merged PR #60.
-- Historical Gate1-A authorization base: `792d855448e16edcf36b41e0f6e321346fb915ed`.
-- Actual Gate1-A implementation/audit base after merged PR #62:
-  `ce5cf6e2faaf9159e74d8c235f334d47743ab2a0`.
+- Gate1-A audit/evidence baseline = COMPLETE through merged PR #63.
+- Accepted post-PR63 main / GATE1-A-E1 base:
+  `7408d161575870149f0d1938e1f126bb41561537`.
 - Accepted SQLite migration head: `0032_meal_plan_serving`.
 - Future RecipeTemplate reservation remains `0033_recipe_template_catalogue`.
 
 ## Current authorized operation
 
-`GATE1-A — Planning Core candidate data readiness` is **ACTIVE** under Issue #61.
+`GATE1-A-E1 — Primary-source authority review for minimum candidate set` is **ACTIVE** under Issue #64.
 
-Goal: close only the authoritative Nutrition/data gap required to exercise a successful repository-backed Planning Core fixture, while preserving the full 30-recipe corpus, provenance, uncertainty and deterministic Planner contracts.
+Goal: determine whether the six-recipe generic minimum repair set identified by PR #63 can be made authoritative using exact primary evidence and the existing FamilyFoodOS data model.
 
-Issue #61 is the bounded execution contract.
+Issue #64 is the bounded execution contract.
 
-The exact-base fresh audit now records an evidence-capacity blocker: 29 current
-versions are `INCOMPLETE`; the only Planner-eligible version is one conditional
-`breakfast` candidate with positive kcal. The generic three-meal lower bound is
-two breakfast + four main + one sandwich (seven versions; six repairs). The
-current repository fixture has no fixed event or explicit hard exclusion and its
-largest shape has the same seven-version bound. A separately labelled proposed
-`BREAD_WHOLE_WHEAT` exclusion scenario would need eight versions, but is not
-current fixture truth. Semantic compatibility leaves seven legally reusable
-exact blocker rows, all black-pepper measures; egg-size and cheddar-identity
-false positives are rejected. Generic target selection remains blocked pending
-primary-evidence review. See
-`data/curation/gate1a-data-readiness/`; Gate1-A remains active/not review-ready
-pending authoritative primary evidence, with no production-data or schema
-change made by the audit.
+This operation is **research/evidence only**. It does not publish production FoodIngredient, Nutrition, measure-evidence, assessment or RecipeVersion truth.
 
-## GATE1-A bounded scope
+## Accepted Gate1-A audit baseline
 
-- recompute the exact current blocker matrix for all 30 current verified RecipeVersions from a fresh migrated/seeded database;
-- prove the minimum Planner-compatible candidate capacity required by the actual Gate 1 fixture schedules, `meal-role-recipe-v2` and `max_recipe_repetitions=3`;
-- select the smallest evidence-backed repair subset instead of attempting to make all 30 recipes complete;
-- repair only authoritative data/evidence/seed/immutable RecipeVersion truth justified by current evidence;
-- update the real SQLite-backed Gate fixture so at least one Household reaches a persisted complete seven-day MealPlan with individualized positive Decimal Servings;
-- keep an explicit hard-exclusion repository fixture and deterministic trace evidence;
-- preserve unresolved recipes as unresolved;
-- produce durable machine-readable readiness/capacity/before-after evidence;
-- run focused/affected and exact-head full backend verification before review-ready.
+Merged PR #63 established:
 
-## Architecture / migration boundary
+- 30 current verified RecipeVersions;
+- 29 `INCOMPLETE`;
+- 1 `CONDITIONAL`;
+- only current Planner-eligible candidate:
+  `WIC1_OVERNIGHT_OATS_CINNAMON_APPLE:v2`;
+- generic/current-largest fixture capacity:
+  7 eligible versions = 2 breakfast + 4 main + 1 sandwich;
+- generic repair gap:
+  6 versions;
+- current target-selection status:
+  `TARGET_SELECTION_BLOCKED_PENDING_PRIMARY_EVIDENCE_REVIEW`;
+- current repository fixture capacities:
+  3 / 6 / 7;
+- current repository fixture has no fixed event and no explicit hard exclusion;
+- blocker classification:
+  70 new-primary-evidence / 16 immutable-revision / 7 accepted exact rebind / 1 profile-or-form repair.
 
-- deterministic core must work with `AI_ENABLED=false`;
-- Planner behavior must not be weakened to compensate for incomplete data;
-- unknown Nutrition remains unknown and never becomes zero;
-- estimates are not promoted to exact merely to obtain GREEN;
-- current RecipeVersions are immutable; recipe-truth corrections publish a new version;
-- provenance/version history remains append-only;
-- technical fixture data is evidence, not architecture;
-- no schema/migration is expected by default;
-- migration `0033_recipe_template_catalogue` must not be consumed or renumbered;
-- if a schema change is proven necessary, stop and request a separate migration decision.
+PR #63 changed no production truth, schema, migration or Planner behavior.
 
-## Explicit non-goals
+## GATE1-A-E1 primary scope
 
-Do not add or start:
+Primary candidates:
 
-- Gate1-CLOSE declaration;
-- PR9 Shopping Engine;
-- Prep / Freezer / PDF;
-- Retail;
-- AI Gateway / LLM;
-- Auth/PostgreSQL/shared deployment;
-- frontend;
-- RecipeTemplate / RecipeAssembly implementation;
-- advanced solver;
-- therapeutic/medical planning;
-- broad catalogue expansion or an attempt to make all 30 recipes consumer-ready.
+1. `FNS2_ORANGE_PORK_CHOPS`
+2. `FNS4_OVEN_FRIED_FISH`
+3. `FNS5_BAKED_LENTILS_CASSEROLE`
+4. `SNAP4_DILLED_FISH_FILLETS`
+5. `TNC6_EGGS_SPINACH`
+6. `WIC1_BEYOND_BASIC_GRILLED_CHEESE`
+
+For each blocking row, E1 must produce a terminal evidence decision and a candidate-level outcome.
+
+Allowed fallback review is limited to:
+
+- `SNAP4_SPANISH_FRITTATA`;
+- `SNAP4_BRAISED_CHICKEN_SPINACH`.
+
+Fallback may start only when a primary candidate is explicitly evidence-blocked and only to the minimum extent required to recover a feasible Planner set.
+
+## Architecture / authority boundary
+
+- deterministic core remains `AI_ENABLED=false`;
+- exact mass/form/profile/nutrition authority must come from accepted repository truth or exact primary evidence;
+- search snippets, LLM-generated numbers and convenience estimates are not authority;
+- unknown != zero;
+- do not promote `REVIEW_REQUIRED_ESTIMATE` to exact;
+- no arbitrary cheese, vegetable, cultivar, form, raw/cooked or size substitution;
+- no production data repair in E1;
+- no new RecipeVersion publication in E1;
+- no schema/migration change;
+- migration `0033_recipe_template_catalogue` remains untouched;
+- no Planner/MealRole compatibility changes;
+- no Shopping / Prep / Retail / AI / Auth/PostgreSQL / frontend scope.
 
 ## Active sequence
 
@@ -86,13 +90,17 @@ PR6 / Nutrition Core                          COMPLETE
 → PR7-SUPPORT-MEAL-PATTERN-CATALOGUE         COMPLETE (#47 / PR #51)
 → PR7 MealPlan / Serving                     COMPLETE (#53 / PR #54)
 → PR8 Planner v0                             COMPLETE (#57 / PR #59)
-→ GATE1-A candidate data readiness           ACTIVE (#61)
+→ GATE1-A audit/readiness baseline           COMPLETE (PR #63)
+→ GATE1-A-E1 primary-source evidence         ACTIVE (#64)
+→ GATE1-A production data repair             NOT STARTED
 → GATE1-CLOSE — Planning Core                NOT STARTED
 → PR9 Shopping Engine                        NOT STARTED
 ```
 
 ## Stop condition
 
-After GATE1-A is review-ready and merged, stop for a separate Gate1-CLOSE review.
+After GATE1-A-E1 is review-ready and merged, stop.
 
-Do not begin PR9 automatically.
+Do not implement production repairs automatically.
+
+A separate bounded production data-repair operation must be authorized from the accepted E1 evidence package.
