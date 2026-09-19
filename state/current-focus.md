@@ -17,21 +17,6 @@ Updated: `2026-09-19`.
 - Accepted SQLite migration head: `0032_meal_plan_serving`.
 - Future RecipeTemplate reservation remains `0033_recipe_template_catalogue`.
 
-## Canonical data strategy
-
-FamilyFoodOS builds a reusable authoritative food + recipe corpus needed by the
-service itself, then uses verified subsets of that ordinary production corpus for
-Gate1 and later gates.
-
-Canonical contracts:
-
-- `docs/family-food/data-corpus-v1.md`;
-- `docs/family-food/master-roadmap-addendum-2026-09-19-data-corpus.md`;
-- Issue #67.
-
-The former Gate1-only minimal-eight publication strategy in Issue #64 / PR #66
-is historical and no longer active.
-
 ## Current authorized operation
 
 `DATA-CORPUS-V1 / DC1 — Source authority + coverage inventory` is **ACTIVE**
@@ -45,67 +30,36 @@ Required outcome:
 - preserve exact source card/variant/branch identity;
 - build the deduplicated required FoodIngredient/form demand;
 - reuse existing accepted mappings and production profiles first;
-- assign an authoritative source candidate/status for every demanded food/form;
-- record rights/use status;
-- classify exact mass/form/process/nutrition blockers;
+- assign authoritative source/status and rights/use status for demanded food/forms;
+- classify exact unresolved mass/form/process/nutrition blockers;
 - produce proposed small DC2 food-publication batches;
 - produce proposed small DC3 recipe-publication batches.
 
-DC1 must not invent missing values or silently resolve ambiguity.
+Follow the canonical rules in:
 
-## DC1 authority boundaries
+- `docs/family-food/data-corpus-v1.md`;
+- `docs/family-food/master-roadmap-addendum-2026-09-19-data-corpus.md`;
+- Issue #67.
 
-- deterministic core remains `AI_ENABLED=false`;
-- FoodIngredient remains the sole canonical food identity;
-- exact raw/input/cooked forms are not interchangeable;
-- unknown != zero;
-- estimate != exact;
-- no arbitrary cross-source nutrient synthesis;
-- no arbitrary source alternative selection;
-- source-declared recipe nutrition remains reference/cross-check evidence unless a
-  canonical contract explicitly grants authority;
-- FIC/FGBUN material is a preferred Russian exact-authority candidate where
-  identity/basis/version and retained-use scope are reviewable;
-- FIC 2024 / the official database is not treated as automatically licensed for
-  bulk copying;
-- USDA FoodData Central is an accepted open official baseline candidate where
-  exact semantics match;
-- manufacturer labels establish exact product truth, not generic category truth
-  by default;
-- retailer pages, mirrors, snippets and secondary tables are corroboration/
-  discovery by default;
-- no LLM numeric authority.
+Those sources own source hierarchy, authority, rights, publication and
+verification policy. Do not duplicate or redefine those rules in state files.
 
-## Production boundary
+## Scope boundary
 
-DC1 does **not** authorize broad production publication.
+DC1 does not publish broad production FoodIngredient/Nutrition/Composition/
+RecipeVersion truth and does not authorize schema/migration changes.
 
-No production FoodIngredient/Nutrition/NutrientVector/Composition/RecipeVersion
-change is made merely because DC1 identifies a usable candidate.
-
-Production publication starts only through separately reviewable DC2/DC3 batches
-under the DATA-CORPUS-V1 contract.
-
-No schema/migration change is expected in DC1.
-
-If evidence reveals a genuine schema limitation, stop before consuming a new
-migration number.
+Any later production publication must occur through separately reviewable
+DC2/DC3 batches under the canonical DATA-CORPUS-V1 contract.
 
 ## Relationship to PR #66
 
-PR #66 was closed without merge on 2026-09-19.
+PR #66 was closed without merge on 2026-09-19 and is historical implementation
+evidence only.
 
-Its branch remains historical implementation evidence only.
-
-Reusable mechanics may be recovered selectively later, including:
-
-- immutable selected-source snapshot/hash validation;
-- deterministic publication/idempotency structure;
-- Planner fixture structure;
-- persisted-week/Serving proof.
-
-Its ten proposed profiles and selected Gate1-specific production truth are not
-accepted production data.
+Its proposed production nutrition/profile/recipe truth is not accepted.
+Reusable mechanics may be recovered selectively later if they conform to
+DATA-CORPUS-V1.
 
 ## Active sequence
 
@@ -129,6 +83,5 @@ PR6 / Nutrition Core                          COMPLETE
 DC1 ends with a reviewable evidence/curation package and exact proposed DC2/DC3
 batch plan.
 
-Do not automatically start DC2 production publication, DC3 recipe publication,
-Gate1-CLOSE, PR9, Retail, AI, Auth/PostgreSQL or the generalized Data Ingestion
-Platform.
+Do not automatically start DC2, DC3, DC4, Gate1-CLOSE, PR9, Retail, AI,
+Auth/PostgreSQL or the generalized Data Ingestion Platform.
