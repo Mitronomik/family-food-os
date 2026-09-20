@@ -150,6 +150,19 @@ python scripts/test_data_corpus_v1_dc1.py /tmp/data-corpus-v1-dc1
 
 Source XLSX files are not committed by this package; exact required SHA-256 values are enforced by the generator and recorded in `source-artifacts.json`.
 
+### Source availability contract
+
+Raw source XLSX bytes are intentionally **not** repository-local truth. Under the current source-governance boundary they are retained as an **operator-managed external evidence bundle**.
+
+A valid rebuild therefore requires:
+
+- the exact filenames listed in `source-artifacts.json`;
+- every file to match its recorded SHA-256 before parsing;
+- delivery to CI through a temporary authenticated HTTPS URL stored as an Actions secret;
+- missing, changed or unavailable source bytes to fail closed rather than fall back to generated CSV/JSON.
+
+Any GitHub Actions artifact containing the ZIP is an **ephemeral audit copy only**, not canonical long-term source storage. Reconstructing the package later requires access to the operator-managed source files whose per-file hashes are recorded here.
+
 ## Verification invariants
 
 The generator fails closed on:
