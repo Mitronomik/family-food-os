@@ -35,8 +35,8 @@ for all 11 generated files; full PR39 metadata is 350/363; production nutrition
 metadata is 183 rows with exact Git blob identity; DC2/DC3 partitions reconcile
 exactly and all 96 demands have explicit authority status.
 
-Current heavy verification for generator/generated-package bytes at
-`2901d39465bde05179161e897b0e99b213bf604a`: exact PR39 mapping inputs and
+Current heavy verification applies to generator/generated-package bytes
+finalized at `78c81ff7f55c6878be9112b75f766c78fe73c639`: exact PR39 mapping inputs and
 production nutrition seed were restored byte-for-byte; raw XLSX source hashes
 were enforced by the current generator; two independent builds PASS; validator
 A/B PASS; 15-case adversarial suite PASS; A==B deterministic comparison PASS.
