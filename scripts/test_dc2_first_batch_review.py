@@ -2,6 +2,7 @@
 
 import json
 import unittest
+from collections import Counter
 from pathlib import Path
 
 from build_dc2_first_batch_review import require, sha, unique
@@ -27,18 +28,37 @@ def validate():
         require(sha(GEN / name) == digest, "modified output")
         hashed.add(name)
     require(hashed == expected, "incomplete manifest")
-    for i in json.loads((GEN / "input-receipt.json").read_text())["repository_inputs"]:
-        require(sha(ROOT / i["path"]) == i["sha256"], "changed repository input")
+
+    lock = json.loads((PKG / "input-lock.json").read_text())
+    receipt = json.loads((GEN / "input-receipt.json").read_text())
+    summary = json.loads((GEN / "summary.json").read_text())
+
+    require(lock["inputs"] == receipt["external_inputs"], "external input receipt drift")
+    require(summary["base_commit"] == lock["base_commit"], "base commit drift")
+    require(summary["queue"] == lock["queue"], "queue drift")
+
+    for item in receipt["repository_inputs"]:
+        require(sha(ROOT / item["path"]) == item["sha256"], "changed repository input")
+
     groups = json.loads((GEN / "group-reviews.json").read_text())
     occurrences = json.loads((GEN / "occurrence-reviews.json").read_text())
     profiles = json.loads((GEN / "profile-reviews.json").read_text())
+    routes = json.loads((GEN / "route-impact.json").read_text())
     decisions = unique(json.loads((PKG / "decisions.json").read_text()))
+
     require(
         len(groups) == 25 and len(occurrences) == 1532 and len(profiles) == 24,
         "missing review rows",
     )
+    groups_by_id = unique(groups)
     unique(occurrences)
     unique(profiles)
+    unique(routes)
+
+    require(set(groups_by_id) == set(decisions), "decision/group coverage drift")
+    for decision in decisions.values():
+        require(decision["publication_ready"] is False, "decision publication promotion")
+
     for row in occurrences:
         require(row["decision_id"] in decisions, "dangling decision")
         require(
@@ -47,21 +67,80 @@ def validate():
         )
         require(
             row["candidate_book_record_ids"]
-            == next(
-                g["candidate_book_record_ids"]
-                for g in groups
-                if g["id"] == row["decision_id"]
-            ),
+            == groups_by_id[row["decision_id"]]["candidate_book_record_ids"],
             "candidate drift",
         )
+
     for row in groups + occurrences + profiles:
         require(row["publication_ready"] is False, "publication promotion")
-    for g in groups:
+
+    for group in groups:
         require(
-            g["occurrence_count"]
-            == sum(r["decision_id"] == g["id"] for r in occurrences),
+            group["occurrence_count"]
+            == sum(row["decision_id"] == group["id"] for row in occurrences),
             "occurrence count drift",
         )
+        for profile in group["existing_profile_evidence"]:
+            require(profile["reuse_approved"] is False, "existing profile reuse promotion")
+
+    for profile in profiles:
+        require(
+            profile["canonical_nutrient_mapping"] is None,
+            "canonical nutrient mapping promotion",
+        )
+
+    for route in routes:
+        require(route["actually_unblocked"] is False, "route promotion")
+
+    candidate_record_ids = {
+        record_id
+        for group in groups
+        for record_id in group["candidate_book_record_ids"]
+    }
+    require(
+        candidate_record_ids == {profile["id"] for profile in profiles},
+        "candidate/profile coverage drift",
+    )
+
+    expected_dispositions = dict(
+        sorted(Counter(row["disposition"] for row in decisions.values()).items())
+    )
+    expected_scope_routes = sum(
+        route["all_dependencies_in_review_scope"] for route in routes
+    )
+    expected_visual_profiles = sum(
+        profile["visual_review_id"] is not None for profile in profiles
+    )
+
+    require(summary["reviewed_groups"] == len(groups), "summary group count drift")
+    require(
+        summary["occurrences_accounted_under_group_review"] == len(occurrences),
+        "summary occurrence count drift",
+    )
+    require(
+        summary["exact_book_record_candidates"] == len(profiles),
+        "summary profile count drift",
+    )
+    require(
+        summary["visual_profile_candidates"] == expected_visual_profiles,
+        "summary visual profile count drift",
+    )
+    require(
+        summary["dispositions"] == expected_dispositions,
+        "summary disposition count drift",
+    )
+    require(
+        summary["affected_material_routes"] == len(routes),
+        "summary route count drift",
+    )
+    require(
+        summary["routes_all_dependencies_in_review_scope"] == expected_scope_routes,
+        "summary scoped-route count drift",
+    )
+    require(summary["publication_ready_foods"] == 0, "summary publication promotion")
+    require(summary["actually_unblocked_recipes"] == 0, "summary recipe promotion")
+    require(summary["production_changed"] is False, "summary production promotion")
+
     return groups, profiles
 
 
