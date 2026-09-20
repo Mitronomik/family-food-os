@@ -14,6 +14,11 @@ EXPECTED_RELATIONSHIPS = 991
 EXPECTED_DEMANDS = 96
 EXPECTED_EXISTING = 33
 EXPECTED_DC2_REQUIRED = 63
+EXPECTED_PR39_CANDIDATES = 350
+EXPECTED_PR39_MAPPINGS = 363
+EXPECTED_PRODUCTION_NUTRITION_ROWS = 183
+EXPECTED_SAFE_SIMPLE = 5
+EXPECTED_REVIEW_REQUIRED = 63
 
 
 def fail(msg: str) -> None:
@@ -61,6 +66,7 @@ def validate(pkg: Path, *, check_checksums: bool=True) -> dict[str,int]:
     for part in relationship_parts: rels.extend(read_csv(part))
     summary=json.loads((pkg/'summary.json').read_text(encoding='utf-8'))
     plan=json.loads((pkg/'batch-plan.json').read_text(encoding='utf-8'))
+    artifacts=json.loads((pkg/'source-artifacts.json').read_text(encoding='utf-8'))
 
     if len(candidates)!=EXPECTED_CANDIDATES: fail(f"candidate count: {len(candidates)}")
     if len(rels)!=EXPECTED_RELATIONSHIPS: fail(f"relationship count: {len(rels)}")
@@ -92,11 +98,17 @@ def validate(pkg: Path, *, check_checksums: bool=True) -> dict[str,int]:
         if int(c['source_relationship_rows_v22_5'])!=len(actual): fail(f"candidate {rid} relationship summary mismatch")
         if int(c['source_relationship_rows_v22_5'])<=0 or int(c['source_calc_rows_v22_13'])<=0: fail(f"candidate {rid} has zero relationship/calc rows")
         if c['production_ready']!='NO': fail(f"candidate {rid} incorrectly marked production-ready")
-        if c['variant_selection_status']=='SINGLE_VARIANT_NO_EXPLICIT_ALTERNATIVE':
+        if c['variant_selection_status']=='SIMPLE_SOURCE_BRANCH_CANDIDATE':
             if int(c['source_variant_count'])!=1 or c['choice_groups'] or int(c['optional_row_count'])!=0 or c['boundary_review_reasons']:
-                fail(f"candidate {rid} assigned simple/exact-like status with unresolved alternative/boundary")
-        elif c['variant_selection_status']!='MULTI_OR_ALTERNATIVE_REVIEW_REQUIRED':
+                fail(f"candidate {rid} assigned simple status with unresolved source-structure alternative/boundary")
+            if c['relationship_compatibility_status']!='CALC_ROWS_MATCH_RELATIONSHIP_ROWS_MATCH':
+                fail(f"candidate {rid} assigned simple status with unresolved relationship compatibility")
+            if c['semantic_label_review_ids']:
+                fail(f"candidate {rid} assigned simple status with semantic-label debt")
+        elif c['variant_selection_status']!='REVIEW_REQUIRED':
             fail(f"candidate {rid} unknown variant-selection status")
+        if c['variant_selection_status']=='REVIEW_REQUIRED' and c['proposed_dc3_batch']!='DC3-C_REVIEW_REQUIRED':
+            fail(f"candidate {rid} review-required status escaped review batch")
         if int(c['source_variant_count'])>1 and c['single_variant_required_ids']:
             fail(f"candidate {rid} has selected-variant dependencies despite unresolved multi-variant state")
 
@@ -104,6 +116,30 @@ def validate(pkg: Path, *, check_checksums: bool=True) -> dict[str,int]:
     dc2=sum(r['map_state'] in {'NEW_FOOD_CANDIDATE','FORM_SPLIT_CANDIDATE'} for r in demands)
     if existing!=EXPECTED_EXISTING or dc2!=EXPECTED_DC2_REQUIRED: fail(f"mapping split drift {existing}/{dc2}")
     if any(r['production_ready']!='NO' for r in demands): fail('food demand marked production-ready')
+    for r in demands:
+        state=r['map_state']
+        assignment=r.get('authority_assignment_status','')
+        if not assignment: fail(f"food demand {r['external_ingredient_id']} missing authority assignment status")
+        if state in {'EXACT_EXISTING','ALIAS_EXISTING'}:
+            if r['current_profile_presence_status']!='PRESENT_IN_REQUIRED_PRODUCTION_SEED':
+                fail(f"existing mapping {r['external_ingredient_id']} lacks required production profile")
+            if r['profile_suitability_for_recipe_form']!='PROFILE_PRESENT_FORM_REVIEW_REQUIRED':
+                fail(f"existing mapping {r['external_ingredient_id']} profile/form status is not review-required")
+            if not r['authority_source_candidate'] or not r['authority_record_candidate']:
+                fail(f"existing mapping {r['external_ingredient_id']} lacks exact current profile provenance")
+            if r['proposed_dc2_batch']!='REUSE_EXISTING_PROFILE_FORM_REVIEW':
+                fail(f"existing mapping {r['external_ingredient_id']} prematurely bypasses profile/form review")
+        else:
+            if assignment.startswith('BLOCKED_'):
+                if r['authority_source_candidate'] or r['authority_record_candidate']:
+                    fail(f"blocked demand {r['external_ingredient_id']} carries premature authority record")
+            elif assignment=='CANDIDATE_SOURCE_FAMILY_IDENTIFIED_EXACT_RECORD_UNPINNED':
+                if not r['authority_source_candidate'] or r['authority_record_candidate']:
+                    fail(f"candidate-family assignment malformed for {r['external_ingredient_id']}")
+            else:
+                fail(f"unexpected authority assignment status for {r['external_ingredient_id']}: {assignment}")
+    if any(r['proposed_dc2_batch']=='REUSE_NO_DC2_WRITE' for r in demands):
+        fail('legacy REUSE_NO_DC2_WRITE is forbidden before exact profile/form review')
 
     # Summary must be derived/reconcilable with serialized facts.
     cs=summary['candidate_selection']; fs=summary['food_demand']
@@ -115,8 +151,8 @@ def validate(pkg: Path, *, check_checksums: bool=True) -> dict[str,int]:
         'dc2':dc2,
         'one_variant':sum(int(r['source_variant_count'])==1 for r in candidates),
         'multi_variant':sum(int(r['source_variant_count'])>1 for r in candidates),
-        'simple':sum(r['variant_selection_status']=='SINGLE_VARIANT_NO_EXPLICIT_ALTERNATIVE' for r in candidates),
-        'review':sum(r['variant_selection_status']=='MULTI_OR_ALTERNATIVE_REVIEW_REQUIRED' for r in candidates),
+        'simple':sum(r['variant_selection_status']=='SIMPLE_SOURCE_BRANCH_CANDIDATE' for r in candidates),
+        'review':sum(r['variant_selection_status']=='REVIEW_REQUIRED' for r in candidates),
     }
     actual_summary={
         'candidate_count':cs['recipe_family_count'],
@@ -126,10 +162,26 @@ def validate(pkg: Path, *, check_checksums: bool=True) -> dict[str,int]:
         'dc2':fs['dc2_required_identity_count'],
         'one_variant':cs['source_variant_structure']['one_source_variant'],
         'multi_variant':cs['source_variant_structure']['multiple_source_variants'],
-        'simple':cs['source_variant_structure']['single_variant_no_explicit_alternative'],
-        'review':cs['source_variant_structure']['multi_or_alternative_review_required'],
+        'simple':cs['source_variant_structure']['safe_simple_source_branch_candidate'],
+        'review':cs['source_variant_structure']['review_required'],
     }
     if expected_summary!=actual_summary: fail(f"summary mismatch expected={expected_summary} actual={actual_summary}")
+    if expected_summary['simple']!=EXPECTED_SAFE_SIMPLE or expected_summary['review']!=EXPECTED_REVIEW_REQUIRED:
+        fail(f"safe branch split drift {expected_summary['simple']}/{expected_summary['review']}")
+
+    repo_meta=artifacts.get('repository',{})
+    loaded=repo_meta.get('mapping_rows_loaded',{})
+    if loaded.get('candidate_rows_total_from_full_pr39_package')!=EXPECTED_PR39_CANDIDATES:
+        fail('source-artifacts does not prove full 350-row PR39 candidate input')
+    if loaded.get('ingredient_mapping_rows_total_from_full_pr39_package')!=EXPECTED_PR39_MAPPINGS:
+        fail('source-artifacts does not prove full 363-row PR39 mapping input')
+    nutrition_meta=artifacts.get('production_nutrition_seed',{})
+    if nutrition_meta.get('row_count')!=EXPECTED_PRODUCTION_NUTRITION_ROWS:
+        fail('source-artifacts production nutrition row count mismatch')
+    if nutrition_meta.get('relevant_existing_profiles_identified')!=EXPECTED_EXISTING:
+        fail('source-artifacts does not prove current profiles for all 33 existing mappings')
+    if not nutrition_meta.get('git_blob_sha1'):
+        fail('source-artifacts missing production nutrition seed blob identity')
 
     # Batches must partition exactly once.
     for section, universe, field, listkey in [
