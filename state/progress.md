@@ -1,5 +1,24 @@
 # Progress
 
+## Partial nutrition profiles — CI correction receipt
+
+Initial PR #76 CI on pre-fix heads exposed two task-local regressions:
+
+- profile reads during historical migration-prefix tests attempted to query the
+  new observation table before migration 0034 existed;
+- two new domain fixtures exercised a partial profile with the legacy
+  `is_current=true` default instead of the required non-current state.
+
+Corrections:
+- repository reads now consult the migration history and treat accepted pre-0034
+  complete profiles as having no new observation rows;
+- partial-profile fixtures explicitly use `is_current=false`; a separate test
+  proves that a partial profile cannot become current through the legacy selector.
+
+The acceptance contract is unchanged. Final-head CI must rerun focused
+migration/vector tests, full backend, full launcher, Russian methodology, DC1 and
+Docs verification before review readiness is claimed.
+
 ## Partial nutrition profile storage — 2026-09-20
 
 User approved the ten-step Russian-data integration sequence and authorized step 1
