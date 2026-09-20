@@ -812,9 +812,9 @@ def main() -> None:
     dc3_lines = "\n".join(f"- `{k}`: **{v}**" for k, v in summary["candidate_selection"]["dc3_batch_counts"].items())
     readme = f"""# DATA-CORPUS-V1 / DC1 — recovered source authority + coverage inventory
 
-**Status:** evidence/curation only for Issue #67.  
-**Repository base:** `{EXPECTED_BASE}` (merged PR #69).  
-**Production publication:** **NO**.  
+**Status:** evidence/curation only for Issue #67.
+**Repository base:** `{EXPECTED_BASE}` (merged PR #69).
+**Production publication:** **NO**.
 **DC2 / DC3:** **NOT STARTED**.
 
 ## Recovery result
