@@ -216,7 +216,7 @@ def source_observation(
 
 def test_partial_profile_requires_explicit_unknown_state_for_legacy_core_fields():
     with pytest.raises(DomainValidationError) as exc_info:
-        profile(carbohydrates_g=None)
+        profile(carbohydrates_g=None, is_current=False)
 
     assert exc_info.value.issue.field == "carbohydrates_g"
     assert exc_info.value.issue.code == DomainIssueCode.REQUIRED_FIELD
@@ -229,6 +229,7 @@ def test_partial_profile_preserves_below_detection_and_method_incompatible_sourc
         protein_g=None,
         fat_g=None,
         carbohydrates_g=None,
+        is_current=False,
         observations=(
             source_observation(
                 profile_id,
