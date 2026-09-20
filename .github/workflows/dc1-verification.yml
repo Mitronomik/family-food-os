@@ -66,7 +66,21 @@ jobs:
           )
           "$py" -m py_compile "${scripts[@]}"
           "$ruff" check "${scripts[@]}"
-          "$ruff" format --check "${scripts[@]}"
+          if ! "$ruff" format --check "${scripts[@]}"; then
+            "$ruff" format "${scripts[@]}"
+            exit 1
+          fi
+
+      - name: Upload Ruff-formatted scripts on formatting failure
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: dc1-ruff-formatted-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            scripts/build_data_corpus_v1_dc1.py
+            scripts/validate_data_corpus_v1_dc1.py
+            scripts/test_data_corpus_v1_dc1.py
+          retention-days: 1
 
       - name: Validate committed DC1 package
         shell: bash
