@@ -130,8 +130,9 @@ Current review-fix verification:
 - committed adversarial harness:
   `scripts/test_data_corpus_v1_dc1.py`.
 
-Current heavy verification for the generator/generated-package bytes at
-`2901d39465bde05179161e897b0e99b213bf604a`:
+Current heavy verification applies to the generator/generated-package bytes
+finalized on branch head `78c81ff7f55c6878be9112b75f766c78fe73c639` before the following state-only
+finalization commits:
 
 - exact repository PR39 mapping inputs restored byte-for-byte: PASS;
 - exact production nutrition seed restored byte-for-byte: PASS;
@@ -142,9 +143,11 @@ Current heavy verification for the generator/generated-package bytes at
 - 15-case adversarial suite: PASS;
 - build A == build B: PASS.
 
-The generated package committed through `2901d394...` is the output of that
-current generator. Subsequent delivery changes are state-only and do not alter
-the generator or generated package bytes covered by this evidence.
+The generated package at `78c81ff...` is the output of the current generator.
+Subsequent finalization commits are state-only and do not alter the generator or
+generated package bytes covered by this evidence. Final-head automatic package
+verification rechecks checksums, validator behavior and the formatted
+15-case adversarial suite.
 
 Raw source XLSX bytes are operator-managed external evidence. Exact required
 filenames/hashes are recorded in `source-artifacts.json`. The ZIP/container
