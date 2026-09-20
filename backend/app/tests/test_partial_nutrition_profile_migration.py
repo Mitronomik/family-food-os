@@ -131,7 +131,17 @@ def test_populated_0032_database_upgrades_without_rewriting_profiles_or_vectors(
                 "SELECT migration_id FROM schema_migrations ORDER BY rowid"
             )
         ]
+        trigger_sql = connection.execute(
+            """
+            SELECT sql
+            FROM sqlite_master
+            WHERE type = 'trigger'
+              AND name = 'food_composition_versions_complete'
+            """
+        ).fetchone()[0]
     assert history[-1] == MIGRATION_ID
+    assert "food_nutrition_profiles" in trigger_sql
+    assert "food_composition_versions" in trigger_sql
 
     # Operational recovery proof: restore the exact pre-migration database copy.
     shutil.copy2(backup, database)
