@@ -147,6 +147,44 @@ def incomplete_input_metadata(pkg: Path) -> None:
     )
 
 
+def source_target_with_exact_record(pkg: Path) -> None:
+    path = pkg / "food-demand.csv"
+    fields, rows = read_csv(path)
+    row = next(
+        r
+        for r in rows
+        if r["authority_assignment_status"]
+        == "SOURCE_FAMILY_SEARCH_TARGET_EXACT_RECORD_UNVERIFIED"
+    )
+    row["authority_record_candidate"] = "SHOULD-NOT-EXIST"
+    write_csv(path, fields, rows)
+
+
+def legacy_identified_source_family_status(pkg: Path) -> None:
+    path = pkg / "food-demand.csv"
+    fields, rows = read_csv(path)
+    row = next(
+        r
+        for r in rows
+        if r["authority_assignment_status"]
+        == "SOURCE_FAMILY_SEARCH_TARGET_EXACT_RECORD_UNVERIFIED"
+    )
+    row["authority_assignment_status"] = (
+        "CANDIDATE_SOURCE_FAMILY_IDENTIFIED_EXACT_RECORD_UNPINNED"
+    )
+    write_csv(path, fields, rows)
+
+
+def invalid_source_bundle_policy(pkg: Path) -> None:
+    path = pkg / "source-artifacts.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    data["source_bundle_contract"]["bundle_hash_policy"] = "ZIP_HASH_IS_CANONICAL"
+    path.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("package")
@@ -169,6 +207,9 @@ def main() -> None:
         ("premature profile reuse", premature_profile_reuse),
         ("missing authority assignment", missing_authority_assignment),
         ("incomplete full-input metadata", incomplete_input_metadata),
+        ("source target with exact record", source_target_with_exact_record),
+        ("legacy identified source-family status", legacy_identified_source_family_status),
+        ("invalid source bundle policy", invalid_source_bundle_policy),
     ]
     for name, mutate in cases:
         expect_rejected(package, name, mutate)
