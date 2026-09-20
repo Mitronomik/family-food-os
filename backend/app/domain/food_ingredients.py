@@ -3,6 +3,7 @@
 from dataclasses import dataclass, replace
 from datetime import datetime, timezone
 from decimal import Decimal
+from enum import StrEnum
 import re
 import unicodedata
 from uuid import UUID
@@ -233,6 +234,123 @@ def _bounded_nutrient(value: object, *, field: str, maximum: Decimal) -> Decimal
     return quantize_decimal(parsed, NUTRIENT_QUANT, field=field)
 
 
+def _optional_bounded_nutrient(
+    value: object, *, field: str, maximum: Decimal
+) -> Decimal | None:
+    if value is None:
+        return None
+    return _bounded_nutrient(value, field=field, maximum=maximum)
+
+
+class NutritionObservationState(StrEnum):
+    VALUE = "value"
+    MISSING = "missing"
+    BELOW_DETECTION = "below_detection"
+    METHOD_INCOMPATIBLE = "method_incompatible"
+
+
+_LEGACY_NUTRITION_FIELDS = frozenset(
+    {"kcal", "protein_g", "fat_g", "carbohydrates_g", "fiber_g"}
+)
+
+
+@dataclass(frozen=True)
+class NutritionSourceObservation:
+    id: UUID
+    profile_id: UUID
+    source_field: str
+    state: NutritionObservationState
+    source_literal: str | None
+    method_reference: str | None
+    source_locator: str
+    created_at: datetime
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "id", _uuid4(self.id, field="id"))
+        object.__setattr__(
+            self, "profile_id", _uuid4(self.profile_id, field="profile_id")
+        )
+        source_field = _required_text(
+            self.source_field, field="source_field", maximum=80
+        )
+        if source_field not in _LEGACY_NUTRITION_FIELDS:
+            raise _issue(
+                DomainIssueCode.INVALID_CODE,
+                "source_field is not a supported legacy nutrition field.",
+                field="source_field",
+                value=self.source_field,
+                next_action="Use kcal, protein_g, fat_g, carbohydrates_g or fiber_g.",
+            )
+        object.__setattr__(self, "source_field", source_field)
+        try:
+            state = (
+                self.state
+                if isinstance(self.state, NutritionObservationState)
+                else NutritionObservationState(self.state)
+            )
+        except (TypeError, ValueError) as exc:
+            raise _issue(
+                DomainIssueCode.INVALID_CODE,
+                "state is not a supported nutrition observation state.",
+                field="state",
+                value=self.state,
+                next_action=(
+                    "Use value, missing, below_detection or method_incompatible."
+                ),
+            ) from exc
+        object.__setattr__(self, "state", state)
+
+        literal = self.source_literal
+        if state == NutritionObservationState.MISSING:
+            if literal is not None:
+                raise _issue(
+                    DomainIssueCode.INVALID_CODE,
+                    "Missing observations cannot carry a source literal.",
+                    field="source_literal",
+                    value=literal,
+                    next_action="Use null for a genuinely missing source value.",
+                )
+        else:
+            if not isinstance(literal, str) or not literal.strip():
+                raise _issue(
+                    DomainIssueCode.REQUIRED_FIELD,
+                    "Non-missing observations must preserve the source literal.",
+                    field="source_literal",
+                    value=literal,
+                    next_action="Preserve the exact source token as text.",
+                )
+
+        if self.method_reference is not None:
+            object.__setattr__(
+                self,
+                "method_reference",
+                _required_text(
+                    self.method_reference, field="method_reference", maximum=240
+                ),
+            )
+        if (
+            state == NutritionObservationState.METHOD_INCOMPATIBLE
+            and self.method_reference is None
+        ):
+            raise _issue(
+                DomainIssueCode.REQUIRED_FIELD,
+                "Method-incompatible observations require a method reference.",
+                field="method_reference",
+                value=self.method_reference,
+                next_action="Record the source method or reviewed method disposition.",
+            )
+        object.__setattr__(
+            self,
+            "source_locator",
+            _required_text(self.source_locator, field="source_locator", maximum=1000),
+        )
+        object.__setattr__(
+            self,
+            "created_at",
+            normalize_utc_instant(self.created_at, field="created_at"),
+        )
+
+
 @dataclass(frozen=True)
 class FoodIngredient:
     id: UUID
@@ -381,10 +499,10 @@ class FoodNutritionProfile:
     id: UUID
     food_ingredient_id: UUID
     basis_grams: Decimal
-    kcal: Decimal
-    protein_g: Decimal
-    fat_g: Decimal
-    carbohydrates_g: Decimal
+    kcal: Decimal | None
+    protein_g: Decimal | None
+    fat_g: Decimal | None
+    carbohydrates_g: Decimal | None
     fiber_g: Decimal | None
     source_name: str
     source_id: str
@@ -394,6 +512,7 @@ class FoodNutritionProfile:
     estimated: bool | None
     is_current: bool
     created_at: datetime
+    observations: tuple[NutritionSourceObservation, ...] = ()
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "id", _uuid4(self.id, field="id"))
@@ -413,22 +532,16 @@ class FoodNutritionProfile:
             )
         object.__setattr__(self, "basis_grams", basis)
         object.__setattr__(
-            self, "kcal", _bounded_nutrient(self.kcal, field="kcal", maximum=MAX_KCAL)
+            self,
+            "kcal",
+            _optional_bounded_nutrient(self.kcal, field="kcal", maximum=MAX_KCAL),
         )
-        for field in ("protein_g", "fat_g", "carbohydrates_g"):
+        for field in ("protein_g", "fat_g", "carbohydrates_g", "fiber_g"):
             object.__setattr__(
                 self,
                 field,
-                _bounded_nutrient(
+                _optional_bounded_nutrient(
                     getattr(self, field), field=field, maximum=MAX_MACRO_GRAMS
-                ),
-            )
-        if self.fiber_g is not None:
-            object.__setattr__(
-                self,
-                "fiber_g",
-                _bounded_nutrient(
-                    self.fiber_g, field="fiber_g", maximum=MAX_MACRO_GRAMS
                 ),
             )
         for field in ("source_name", "source_id", "source_version"):
@@ -469,6 +582,73 @@ class FoodNutritionProfile:
             "created_at",
             normalize_utc_instant(self.created_at, field="created_at"),
         )
+        observations = tuple(self.observations)
+        if any(
+            not isinstance(observation, NutritionSourceObservation)
+            for observation in observations
+        ):
+            raise _issue(
+                DomainIssueCode.INVALID_CODE,
+                "observations must contain NutritionSourceObservation values.",
+                field="observations",
+                value=self.observations,
+                next_action="Use validated source-observation values.",
+            )
+        if any(observation.profile_id != self.id for observation in observations):
+            raise _issue(
+                DomainIssueCode.INVALID_IDENTIFIER,
+                "Nutrition observation profile_id must match the profile.",
+                field="observations",
+                value=self.observations,
+                next_action="Bind every observation to this profile id.",
+            )
+        fields = [observation.source_field for observation in observations]
+        if len(fields) != len(set(fields)):
+            raise _issue(
+                DomainIssueCode.INVALID_CODE,
+                "A profile cannot contain duplicate source-field observations.",
+                field="observations",
+                value=fields,
+                next_action="Keep one immutable source observation per legacy field.",
+            )
+        by_field = {observation.source_field: observation for observation in observations}
+        for field in ("kcal", "protein_g", "fat_g", "carbohydrates_g"):
+            value = getattr(self, field)
+            observation = by_field.get(field)
+            if value is None and (
+                observation is None
+                or observation.state == NutritionObservationState.VALUE
+            ):
+                raise _issue(
+                    DomainIssueCode.REQUIRED_FIELD,
+                    f"Partial profile field {field} requires an explicit unknown-state observation.",
+                    field=field,
+                    value=value,
+                    next_action=(
+                        "Record missing, below_detection or method_incompatible "
+                        "source evidence instead of inventing a number."
+                    ),
+                )
+            if value is not None and observation is not None and (
+                observation.state != NutritionObservationState.VALUE
+            ):
+                raise _issue(
+                    DomainIssueCode.INVALID_CODE,
+                    f"Numeric profile field {field} conflicts with its source observation state.",
+                    field=field,
+                    value=value,
+                    next_action="Keep numeric values only for VALUE observations.",
+                )
+        object.__setattr__(
+            self, "observations", tuple(sorted(observations, key=lambda item: item.source_field))
+        )
+
+    @property
+    def legacy_core_complete(self) -> bool:
+        return all(
+            getattr(self, field) is not None
+            for field in ("kcal", "protein_g", "fat_g", "carbohydrates_g")
+        )
 
     @property
     def provenance_key(self) -> tuple[UUID, str, str, str]:
@@ -490,6 +670,7 @@ class FoodNutritionProfile:
             self.source_data_type,
             self.verified_at,
             self.estimated,
+            self.observations,
         )
 
 
