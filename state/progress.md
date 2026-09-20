@@ -1,5 +1,24 @@
 # Progress
 
+## PR73 blocker corrections — 2026-09-20
+
+The user explicitly authorized correction of all PR73 blockers and completion
+of the bounded exact-input evidence review. This does not authorize merge or
+production publication.
+
+Review hardening now:
+- validates form-level authority remains unassigned/unaccepted;
+- pins mapping source identity/accounting/net-mass/retention/version/context
+  semantics and exact allowed flags;
+- records School2022 §1.5 heat-loss treatment in a separate machine-readable
+  policy without granting canonical retention authority;
+- adds adversarial tests that refresh receipts/checksums before attempting
+  authority promotion;
+- makes current-focus merge-stable.
+
+Reverify the final PR head and stop after review/merge pending explicit scope for
+a production DC2 publication payload.
+
 ## Exact source-input mappings — 2026-09-20
 
 Base PR72 merge: `0322d0a74a0edf53802adc394446011a7d8acc06`.
