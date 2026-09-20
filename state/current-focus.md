@@ -58,8 +58,8 @@ Recovered reconciliation:
 - 63 `REVIEW_REQUIRED`;
 - 33 existing mappings have identified current USDA FDC profile provenance but
   remain `PROFILE_PRESENT_FORM_REVIEW_REQUIRED`;
-- 28 non-existing identities have an official source-family candidate with the
-  exact record still unpinned;
+- 28 non-existing identities have a preferred source-family **search target**;
+  exact source presence, record identity and form compatibility remain unverified;
 - 35 identities are blocked on identity/form semantics before exact authority
   can be assigned.
 
@@ -78,23 +78,29 @@ manual `workflow_dispatch` operation that:
 - checks out an explicit `target_ref`;
 - receives the temporary authenticated bundle URL only through the
   `DC1_SOURCE_BUNDLE_URL` Actions secret;
-- validates the fixed bundle SHA-256 and every generator-enforced source hash;
+- validates the exact expected file set;
+- treats the ZIP/container hash as diagnostic only;
+- enforces the canonical per-file SHA-256 values inside the generator;
+- never uploads the raw source ZIP as a GitHub Actions artifact;
 - rebuilds twice, validates both outputs, runs adversarial checks, and proves
   deterministic and committed-package equivalence.
 
-Actions artifacts are ephemeral audit copies only, not canonical source storage.
+Only regenerated package outputs may be retained as CI artifacts. Raw source
+bytes remain operator-managed external evidence.
 
-Accepted full-rebuild evidence for the current generator/package bytes:
+Current heavy verification for generator/generated-package bytes at
+`2901d39465bde05179161e897b0e99b213bf604a`:
 
-- revision `e5f8ce41b2e6bdcfb961f44a7fb67d513de2d7c9`;
-- DC1 corpus verification run #20 / `35503379105`;
-- package verification: PASS;
-- full source rebuild: PASS;
-- build A == build B: PASS;
-- regenerated package == committed package: PASS.
+- exact repository mapping/nutrition inputs restored byte-for-byte;
+- raw XLSX per-file hashes enforced by the generator: PASS;
+- build A: PASS;
+- build B: PASS;
+- validator A/B: PASS;
+- 15-case adversarial suite: PASS;
+- build A == build B: PASS.
 
-Later delivery commits are limited to workflow/state governance and do not change
-the generator or generated package bytes covered by that evidence.
+Final automatic GitHub package verification is required on the review head.
+Subsequent state-only commits do not invalidate the heavy data/script evidence.
 
 ## Open DC1 blockers retained
 
@@ -102,7 +108,8 @@ the generator or generated package bytes covered by that evidence.
 - 20 candidate families have additional v22.13 non-calculation relationship rows;
 - 20 used external identities have v22.5/v22.13 label differences requiring review;
 - all 33 existing profiles still require exact recipe-form suitability review;
-- candidate source-family assignment is not exact-record authority closure;
+- preferred source-family search targets are not evidence that a compatible
+  source record exists and are not exact-record authority closure;
 - the original 68-family funnel has assortment gaps for a realistic family week.
 
 These are recorded blockers, not permission to invent or auto-expand data.
