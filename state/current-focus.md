@@ -4,40 +4,46 @@ Updated: `2026-09-20`.
 
 ## Accepted state
 
-PR72 is merged at `0322d0a74a0edf53802adc394446011a7d8acc06`.
-PR73 contains the bounded `dc2-exact-input-v1` evidence review for exact
-School2022 input forms and mass safeguards. On 2026-09-20 the user explicitly
-authorized correction of all PR73 blockers and completion of this bounded review.
-This does not authorize merge, production publication or the next milestone.
+PR73 is merged at `a9472c2a0bb0534b70b41c541aa0ac9b4cb26ba0`.
+PR74 contains the bounded five-profile preparation/evidence review. On
+2026-09-20 the user explicitly authorized correction of all PR74 blockers and
+completion of this bounded review. This does not authorize merge, source reuse,
+the proposed profile/schema design, a migration or production publication.
 
 SQLite head remains `0032_meal_plan_serving`; reserved
 `0033_recipe_template_catalogue` remains unchanged.
 
 ## Current authorized boundary
 
-The PR73 exact-input review package is complete/review-ready:
+The PR74 preparation/evidence package is complete/review-ready:
 
-- 211 source occurrences across sugar, carrot, cabbage, beet and polished rice;
-- four execution routes remain held because two source rows are suspicious;
-- canonical FoodIngredient IDs remain unassigned;
-- nutrient equivalence and calculation readiness remain false;
-- retained fraction remains unknown;
-- source net mass remains normative accounting evidence, not certified physical
-  pre-heat mass;
-- School2022 §1.5 heat-loss semantics are recorded separately in
-  `source-nutrition-policy.json` and grant no canonical retention authority.
+- five exact Book2002 source records are selected from accepted review metadata;
+- repository-verifiable source states are 60 observations:
+  45 `published_positive` and 15 `below_detection`;
+- all five retain a source-native carbohydrate incompatible with the current
+  mandatory legacy `FoodNutritionProfile.carbohydrates_g` projection;
+- sugar additionally has below-detection protein and fat;
+- canonical nutrient values imported: 0;
+- production profiles imported: 0;
+- source reuse remains `BLOCKED_PENDING_RIGHTS_REVIEW`;
+- no outbound rights request was sent;
+- no database write is claimed or performed by the compatibility probe;
+- external numeric payload and A/B full-build hashes are not retained in the
+  repository and are explicitly not merge acceptance evidence.
 
-See [exact mappings](../data/curation/dc2-exact-input-mappings/README.md).
+See [profile payload preparation](../data/curation/dc2-first-profile-payload/README.md),
+[verification receipt](../data/curation/dc2-first-profile-payload/verification-receipt.json)
+and [profile compatibility proposal](../data/curation/dc2-first-profile-payload/profile-compatibility-proposal.md).
 
-Review/merge of this evidence package does not authorize a DC2 production
-publication payload.
+The compatibility proposal remains **proposed / decision required**. Review or
+merge of PR74 does not accept an unknown-macro profile contract or migration.
 
 ## Stop boundary
 
-After PR73 review/merge, stop pending explicit scope for exact canonical
-FoodIngredient/profile equivalence, nutrient-method decisions, source reuse
-scope and an independently reviewed DC2 publication payload through existing
-profile/vector/ATOMIC contracts.
+After PR74 review/merge, stop for an explicit architecture decision on the
+profile/unknown-macro representation and migration strategy, plus a separate
+source-reuse decision. Only after those decisions may a separately authorized
+DC2 production publication implementation begin.
 
-Do not start DC3, DC4, Gate1-CLOSE, PR9/Shopping, Retail, AI,
-Auth/PostgreSQL, schema migration or generalized ingestion automatically.
+Do not start a migration, production publication, DC3, DC4, Gate1-CLOSE,
+PR9/Shopping, Retail, AI, Auth/PostgreSQL or generalized ingestion automatically.

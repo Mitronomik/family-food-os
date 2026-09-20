@@ -1,0 +1,65 @@
+{
+  "acceptance_evidence": "repository_metadata_only",
+  "builder_sha256": "95009e09ecc1a2f09b15b3b5f6d9402e4266eb3ba078320c90bcb378b5fb8128",
+  "database_write_attempted": false,
+  "domain_blockers": [
+    {
+      "database_write_attempted": false,
+      "source_code": "10.1.1",
+      "unsupported_legacy_fields": [
+        "protein_g",
+        "fat_g",
+        "carbohydrates_g"
+      ]
+    },
+    {
+      "database_write_attempted": false,
+      "source_code": "6.5.3",
+      "unsupported_legacy_fields": [
+        "carbohydrates_g"
+      ]
+    },
+    {
+      "database_write_attempted": false,
+      "source_code": "8.1.2.1",
+      "unsupported_legacy_fields": [
+        "carbohydrates_g"
+      ]
+    },
+    {
+      "database_write_attempted": false,
+      "source_code": "8.1.5.1",
+      "unsupported_legacy_fields": [
+        "carbohydrates_g"
+      ]
+    },
+    {
+      "database_write_attempted": false,
+      "source_code": "8.1.5.12",
+      "unsupported_legacy_fields": [
+        "carbohydrates_g"
+      ]
+    }
+  ],
+  "external_full_build_a_b_hashes": null,
+  "external_full_build_claim_used_for_acceptance": false,
+  "external_inputs": [
+    {
+      "path": "packages/reference-profiles/normalized/profiles.jsonl",
+      "root": "corpus",
+      "sha256": "66a8474fa63a2aac2a4c07ba822971806d257fd070d8a86c0bd07e123513feaf"
+    },
+    {
+      "path": "packages/source-closure/raw/skurikhin-tutelyan-nstu.pdf",
+      "root": "corpus",
+      "sha256": "e9c302fea52547222b778a3313d876135190131a4f2a04bf59f9b0751a4388d5"
+    }
+  ],
+  "identity_plan_sha256": "0f3f07ffe529db1f563132df5e206d79e55c2ec8e2d77ec1fa80e5b1c1e0645e",
+  "input_lock_sha256": "b66bf73657b683fdabb9cc80b1d8b752d79cca5734fc4b1afb816bef430394e5",
+  "numeric_payload_retained_in_repository": false,
+  "production_publication_ready": false,
+  "profile_review_sha256": "929361bf4233ef0a0383be0c4324e5e4ca7bd3c0974c7e3be270cdab73ef038a",
+  "rights_review_sha256": "864626c2b042fbe413d28195603b69a4fdc972ef9de3615cccf6258fc4337dfe",
+  "verification_summary_sha256": "f2b5889b72677f756363d3a7f240022278437714d1febd611eeed2e8c9a86b57"
+}
