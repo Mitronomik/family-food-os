@@ -1,12 +1,19 @@
 {
-  "builder_sha256": "ba8b56dd2582645726e131f5592a99568d1b40347a7964b292ea13b3569282a1",
+  "acceptance_evidence": "repository_metadata_only",
+  "approved_policies": [
+    "RU_SOURCE_NATIVE_STRICT_V1",
+    "RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1"
+  ],
   "canonical_profiles_imported": 0,
   "explicit_zero_estimates": 3,
+  "external_trial_a_b_hashes": null,
+  "external_trial_claim_used_for_acceptance": false,
+  "numeric_trial_retained_in_repository": false,
   "policy_results": 50,
   "production_ready": false,
   "profiles": 5,
-  "reference_profiles_sha256": "66a8474fa63a2aac2a4c07ba822971806d257fd070d8a86c0bd07e123513feaf",
   "source_core_observations": 25,
   "source_native_available_carbohydrate_accepted_per_policy": 5,
+  "source_rights_status": "BLOCKED_PENDING_RIGHTS_REVIEW",
   "strict_unknown_values": 3
 }
