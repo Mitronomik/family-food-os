@@ -1,6 +1,6 @@
 # Current focus
 
-Updated: `2026-09-19`.
+Updated: `2026-09-20`.
 
 ## Accepted repository state
 
@@ -8,80 +8,93 @@ Updated: `2026-09-19`.
 - Issue #47 / `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` = COMPLETE through merged PR #51.
 - PR7 / Issue #53 = COMPLETE through merged PR #54.
 - PR8 / Issue #57 = COMPLETE through merged PR #59.
-- Post-PR59 state synchronization = COMPLETE through merged PR #60.
 - Gate1-A audit/evidence baseline = COMPLETE through merged PR #63.
 - DATA-CORPUS-V1 / DC0 = COMPLETE through merged PR #68.
-- Accepted post-PR68 main:
-  `b1ce3e02394bad847f0c4063fe9faf520e208622`.
+- Post-DC0 state activation = COMPLETE through merged PR #69.
+- Accepted current main:
+  `d8c76a64483e3d5814e702be33c12cbe2e144160`.
 - PR #66 = CLOSED / NOT MERGED / SUPERSEDED by DATA-CORPUS-V1.
 - Accepted SQLite migration head: `0032_meal_plan_serving`.
 - Future RecipeTemplate reservation remains `0033_recipe_template_catalogue`.
 
 ## Current authorized operation
 
-`DATA-CORPUS-V1 / DC1 — Source authority + coverage inventory` is **ACTIVE**
+`DATA-CORPUS-V1 / DC1 — Source authority + coverage inventory` remains **ACTIVE**
 under Issue #67.
 
-DC1 is evidence/curation work.
+The recovered DC1 delivery is **REVIEW-READY**, not merged and not COMPLETE.
 
-Required outcome:
+Delivery branch:
 
-- select an initial `50–80+` useful recipe candidate set;
-- preserve exact source card/variant/branch identity;
-- build the deduplicated required FoodIngredient/form demand;
-- reuse existing accepted mappings and production profiles first;
-- assign authoritative source/status and rights/use status for demanded food/forms;
-- classify exact unresolved mass/form/process/nutrition blockers;
-- produce proposed small DC2 food-publication batches;
-- produce proposed small DC3 recipe-publication batches.
+`data/data-corpus-v1-dc1`
 
-Follow the canonical rules in:
+## Recovered DC1 package
 
-- `docs/family-food/data-corpus-v1.md`;
-- `docs/family-food/master-roadmap-addendum-2026-09-19-data-corpus.md`;
-- Issue #67.
+Canonical evidence package:
 
-Those sources own source hierarchy, authority, rights, publication and
-verification policy. Do not duplicate or redefine those rules in state files.
+`data/curation/data-corpus-v1-dc1/`
+
+Pre-rebuild recovery checkpoint:
+
+`data/curation/data-corpus-v1-dc1/recovery/pre-rebuild-b7bc19e8881ddc90/`
+
+Reproducible tooling:
+
+- `scripts/build_data_corpus_v1_dc1.py`;
+- `scripts/validate_data_corpus_v1_dc1.py`.
+
+Recovered reconciliation:
+
+- 68 candidate recipe families;
+- 991 retained source relationship/calculation rows;
+- 96 external ingredient identities;
+- 33 accepted existing/alias identity mappings;
+- 63 identities requiring later DC2-level closure if pursued;
+- 31 one-source-Variant / 37 multiple-source-Variant families structurally;
+- 26 `SINGLE_VARIANT_NO_EXPLICIT_ALTERNATIVE`;
+- 42 `MULTI_OR_ALTERNATIVE_REVIEW_REQUIRED`.
+
+A single source `Variant` is not treated as an exact publication decision.
+
+## Open DC1 blockers retained
+
+- exact v22.13 row-nutrient shards were not available to recovery;
+- 20 candidate families have additional v22.13 non-calculation relationship rows;
+- 20 used external identities have v22.5/v22.13 label differences requiring review;
+- the original 68-family funnel has assortment gaps for a realistic family week.
+
+These are recorded blockers, not permission to invent or auto-expand data.
+
+Follow canonical authority, rights and publication rules in
+`docs/family-food/data-corpus-v1.md` and Issue #67.
 
 ## Scope boundary
 
-DC1 does not publish broad production FoodIngredient/Nutrition/Composition/
-RecipeVersion truth and does not authorize schema/migration changes.
+DC1 is evidence/curation only.
 
-Any later production publication must occur through separately reviewable
-DC2/DC3 batches under the canonical DATA-CORPUS-V1 contract.
+No production FoodIngredient/Nutrition/Composition/RecipeVersion truth, schema,
+migration, Planner, API or UI is changed by this delivery.
 
-## Relationship to PR #66
-
-PR #66 was closed without merge on 2026-09-19 and is historical implementation
-evidence only.
-
-Its proposed production nutrition/profile/recipe truth is not accepted.
-Reusable mechanics may be recovered selectively later if they conform to
-DATA-CORPUS-V1.
+DC2 and DC3 remain **NOT STARTED**.
 
 ## Active sequence
 
 ```text
-PR6 / Nutrition Core                          COMPLETE
-→ PR7-SUPPORT-MEAL-PATTERN-CATALOGUE         COMPLETE
-→ PR7 MealPlan / Serving                     COMPLETE
-→ PR8 Planner v0                             COMPLETE
-→ Gate1-A audit/readiness baseline           COMPLETE
-→ DATA-CORPUS-V1 / DC0                       COMPLETE (PR #68)
-→ DC1 source authority + coverage inventory  ACTIVE (#67)
-→ DC2 food publication batches               NOT STARTED
-→ DC3 recipe publication batches             NOT STARTED
-→ DC4 readiness audit + Gate1 consumption    NOT STARTED
-→ GATE1-CLOSE — Planning Core                NOT STARTED
-→ PR9 Shopping Engine                        NOT STARTED
+PR8 Planner v0                             COMPLETE
+→ Gate1-A audit baseline                  COMPLETE
+→ DATA-CORPUS-V1 / DC0                    COMPLETE
+→ DC1 source authority + coverage         ACTIVE / REVIEW-READY
+→ DC2 food publication batches            NOT STARTED
+→ DC3 recipe publication batches          NOT STARTED
+→ DC4 readiness audit + Gate1 consumption NOT STARTED
+→ GATE1-CLOSE                             NOT STARTED
+→ PR9 Shopping Engine                     NOT STARTED
 ```
 
 ## Stop condition
 
-DC1 ends with a reviewable evidence/curation package and exact proposed DC2/DC3
-batch plan.
+Review/merge the DC1 evidence package only.
 
-Do not automatically start DC2, DC3, DC4, Gate1-CLOSE, PR9, Retail, AI,
-Auth/PostgreSQL or the generalized Data Ingestion Platform.
+After DC1 review/merge, stop. Do not automatically start DC2, DC3, DC4,
+Gate1-CLOSE, PR9, Retail, AI, Auth/PostgreSQL or the generalized Data Ingestion
+Platform.
