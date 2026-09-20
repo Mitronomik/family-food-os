@@ -1,6 +1,37 @@
 # Progress
 
-Updated: `2026-09-18`
+Updated: `2026-09-20`
+
+## DATA-CORPUS-V1 / DC1 recovery and delivery
+
+DC1 recovery is review-ready on `data/data-corpus-v1-dc1` from accepted main
+`d8c76a64483e3d5814e702be33c12cbe2e144160`.
+
+- preserved the inconsistent pre-rebuild package under
+  `data/curation/data-corpus-v1-dc1/recovery/pre-rebuild-b7bc19e8881ddc90/`;
+- recovered the root cause: truncated text-rendered XLSX rows had been treated as
+  complete source shards, causing missing recipe compositions to become zero demand;
+- rebuilt directly from raw XLSX bytes plus accepted PR #39 mappings;
+- recovered 68 recipe families / 991 relationship rows / 96 external identities;
+- 33 existing/alias mappings are reused as identity decisions; 63 identities
+  remain later DC2-level work if pursued;
+- source structure is 31 one-Variant / 37 multi-Variant, but safe curation status
+  is 26 simple / 42 review-required after ChoiceGroup, optional and boundary checks;
+- full v22.13 row-level equality remains blocked because exact v22.13 row-nutrient
+  shards were unavailable; 20 recipes show additional non-calc relationships;
+- the original 68-family funnel is preserved and its assortment skew is recorded
+  rather than automatically expanding scope.
+
+Reproducible tooling:
+
+- `scripts/build_data_corpus_v1_dc1.py`;
+- `scripts/validate_data_corpus_v1_dc1.py`.
+
+Verification: package checksum PASS; Python compile PASS; package validator PASS;
+same-input double build byte-identical before runtime restart; required fail-closed
+mutation cases rejected. No production data/schema/migration/Planner/API/UI change.
+
+DC1 remains ACTIVE / REVIEW-READY. DC2/DC3 are NOT STARTED. Stop after review/merge.
 
 ## FamilyFoodOS milestone status
 
