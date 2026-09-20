@@ -21,4 +21,5 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - run: python scripts/build_dc2_profile_payload.py --validate-repository
       - run: python scripts/test_dc2_profile_payload.py
