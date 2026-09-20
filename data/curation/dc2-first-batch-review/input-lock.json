@@ -1,0 +1,23 @@
+{
+  "base_commit": "9b1d5c73da4f1d779336a35e0e7e2c2d32363e85",
+  "queue": "DC2-REVIEW-001",
+  "corpus_version": "0.3.0",
+  "inputs": [
+    {
+      "path": "packages/recipe-closure/normalized/food-identities.jsonl",
+      "sha256": "e7e05183f41ccbe4c6cbb1e8efcc5b7ebd0c12c4bfe090510ab2594afb21ebb5"
+    },
+    {
+      "path": "packages/reference-profiles/normalized/profiles.jsonl",
+      "sha256": "66a8474fa63a2aac2a4c07ba822971806d257fd070d8a86c0bd07e123513feaf"
+    },
+    {
+      "path": "packages/book2002/normalized/food-profiles.jsonl",
+      "sha256": "67f4d5d50d99539da05b45adc32fd5fa46e05b74ebb94d465cc20c6f497cf9e4"
+    },
+    {
+      "path": "packages/consensus-profiles/normalized/profiles.jsonl",
+      "sha256": "ef45d958a5b9df78957ef521e042878feb2df5fd03044d867ccb03a6ebee0e77"
+    }
+  ]
+}

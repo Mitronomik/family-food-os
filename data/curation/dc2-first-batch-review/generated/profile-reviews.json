@@ -1,0 +1,616 @@
+[
+  {
+    "basis_g": 100,
+    "basis_reviewed": true,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {
+      "ash_g": "published_positive",
+      "carbohydrates_g": "published_positive",
+      "cholesterol_mg": "published_positive",
+      "energy_kcal": "published_positive",
+      "fat_g": "published_positive",
+      "fiber_g": "missing",
+      "organic_acids_g": "missing",
+      "protein_g": "published_positive",
+      "saturated_fat_g": "published_positive",
+      "starch_g": "missing",
+      "sugars_g": "published_positive",
+      "water_g": "published_positive"
+    },
+    "id": "book2002:p103:row5",
+    "pages": [
+      103,
+      104
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "5.1.5",
+    "value_type": "published_compositional_profile_not_individual_laboratory_measurement",
+    "visual_review_id": "rp:book2002:5.1.5",
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": "100",
+    "basis_reviewed": false,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {},
+    "id": "book2002:p103:row6",
+    "pages": [
+      103,
+      104
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "5.1.6",
+    "value_type": "unreviewed_ocr_candidate",
+    "visual_review_id": null,
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": 100,
+    "basis_reviewed": true,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {
+      "ash_g": "below_detection",
+      "carbohydrates_g": "below_detection",
+      "cholesterol_mg": "below_detection",
+      "energy_kcal": "published_positive",
+      "fat_g": "published_positive",
+      "fiber_g": "missing",
+      "organic_acids_g": "missing",
+      "protein_g": "below_detection",
+      "saturated_fat_g": "published_positive",
+      "starch_g": "missing",
+      "sugars_g": "below_detection",
+      "water_g": "published_positive"
+    },
+    "id": "book2002:p107:row5",
+    "pages": [
+      107,
+      108
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "5.4.13",
+    "value_type": "published_compositional_profile_not_individual_laboratory_measurement",
+    "visual_review_id": "rp:book2002:5.4.13",
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": 100,
+    "basis_reviewed": true,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {
+      "ash_g": "published_positive",
+      "carbohydrates_g": "published_positive",
+      "cholesterol_mg": "below_detection",
+      "energy_kcal": "published_positive",
+      "fat_g": "published_positive",
+      "fiber_g": "published_positive",
+      "organic_acids_g": "below_detection",
+      "protein_g": "published_positive",
+      "saturated_fat_g": "published_positive",
+      "starch_g": "published_positive",
+      "sugars_g": "published_positive",
+      "water_g": "published_positive"
+    },
+    "id": "book2002:p111:row13",
+    "pages": [
+      111,
+      112
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "6.1.3.1",
+    "value_type": "published_compositional_profile_not_individual_laboratory_measurement",
+    "visual_review_id": "rp:book2002:6.1.3.1",
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": "100",
+    "basis_reviewed": false,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {},
+    "id": "book2002:p111:row14",
+    "pages": [
+      111,
+      112
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "6.1.3.2.1",
+    "value_type": "unreviewed_ocr_candidate",
+    "visual_review_id": null,
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": 100,
+    "basis_reviewed": true,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {
+      "ash_g": "published_positive",
+      "carbohydrates_g": "published_positive",
+      "cholesterol_mg": "below_detection",
+      "energy_kcal": "published_positive",
+      "fat_g": "published_positive",
+      "fiber_g": "published_positive",
+      "organic_acids_g": "below_detection",
+      "protein_g": "published_positive",
+      "saturated_fat_g": "published_positive",
+      "starch_g": "published_positive",
+      "sugars_g": "published_positive",
+      "water_g": "published_positive"
+    },
+    "id": "book2002:p111:row3",
+    "pages": [
+      111,
+      112
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "6.1.2.1",
+    "value_type": "published_compositional_profile_not_individual_laboratory_measurement",
+    "visual_review_id": "rp:book2002:6.1.2.1",
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": "100",
+    "basis_reviewed": false,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {},
+    "id": "book2002:p115:row7",
+    "pages": [
+      115,
+      116
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "6.1.3.5.1",
+    "value_type": "unreviewed_ocr_candidate",
+    "visual_review_id": null,
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": "100",
+    "basis_reviewed": false,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {},
+    "id": "book2002:p117:row14",
+    "pages": [
+      117,
+      118
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "6.1.3.8.1",
+    "value_type": "unreviewed_ocr_candidate",
+    "visual_review_id": null,
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": "100",
+    "basis_reviewed": false,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {},
+    "id": "book2002:p119:row1",
+    "pages": [
+      119,
+      120
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "6.1.3.10.1",
+    "value_type": "unreviewed_ocr_candidate",
+    "visual_review_id": null,
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": 100,
+    "basis_reviewed": true,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {
+      "ash_g": "published_positive",
+      "carbohydrates_g": "published_positive",
+      "cholesterol_mg": "below_detection",
+      "energy_kcal": "published_positive",
+      "fat_g": "published_positive",
+      "fiber_g": "published_positive",
+      "organic_acids_g": "below_detection",
+      "protein_g": "published_positive",
+      "saturated_fat_g": "published_positive",
+      "starch_g": "published_positive",
+      "sugars_g": "published_positive",
+      "water_g": "published_positive"
+    },
+    "id": "book2002:p121:row19",
+    "pages": [
+      121,
+      122
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "6.5.3",
+    "value_type": "published_compositional_profile_not_individual_laboratory_measurement",
+    "visual_review_id": "rp:book2002:6.5.3",
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": 100,
+    "basis_reviewed": true,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {
+      "ash_g": "published_positive",
+      "carbohydrates_g": "published_positive",
+      "cholesterol_mg": "below_detection",
+      "energy_kcal": "published_positive",
+      "fat_g": "published_positive",
+      "fiber_g": "published_positive",
+      "organic_acids_g": "published_positive",
+      "protein_g": "published_positive",
+      "saturated_fat_g": "below_detection",
+      "starch_g": "published_positive",
+      "sugars_g": "published_positive",
+      "water_g": "published_positive"
+    },
+    "id": "book2002:p131:row1",
+    "pages": [
+      131,
+      132
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "8.1.2.1",
+    "value_type": "published_compositional_profile_not_individual_laboratory_measurement",
+    "visual_review_id": "rp:book2002:8.1.2.1",
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": 100,
+    "basis_reviewed": true,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {
+      "ash_g": "published_positive",
+      "carbohydrates_g": "published_positive",
+      "cholesterol_mg": "below_detection",
+      "energy_kcal": "published_positive",
+      "fat_g": "published_positive",
+      "fiber_g": "published_positive",
+      "organic_acids_g": "published_positive",
+      "protein_g": "published_positive",
+      "saturated_fat_g": "below_detection",
+      "starch_g": "published_positive",
+      "sugars_g": "published_positive",
+      "water_g": "published_positive"
+    },
+    "id": "book2002:p133:row15",
+    "pages": [
+      133,
+      134
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "8.1.3.4",
+    "value_type": "published_compositional_profile_not_individual_laboratory_measurement",
+    "visual_review_id": "rp:book2002:8.1.3.4",
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": 100,
+    "basis_reviewed": true,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {
+      "ash_g": "published_positive",
+      "carbohydrates_g": "published_positive",
+      "cholesterol_mg": "below_detection",
+      "energy_kcal": "published_positive",
+      "fat_g": "published_positive",
+      "fiber_g": "published_positive",
+      "organic_acids_g": "published_positive",
+      "protein_g": "published_positive",
+      "saturated_fat_g": "published_positive",
+      "starch_g": "published_positive",
+      "sugars_g": "published_positive",
+      "water_g": "published_positive"
+    },
+    "id": "book2002:p135:row3",
+    "pages": [
+      135,
+      136
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "8.1.4.1",
+    "value_type": "published_compositional_profile_not_individual_laboratory_measurement",
+    "visual_review_id": "rp:book2002:8.1.4.1",
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": 100,
+    "basis_reviewed": true,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {
+      "ash_g": "published_positive",
+      "carbohydrates_g": "published_positive",
+      "cholesterol_mg": "below_detection",
+      "energy_kcal": "published_positive",
+      "fat_g": "published_positive",
+      "fiber_g": "published_positive",
+      "organic_acids_g": "published_positive",
+      "protein_g": "published_positive",
+      "saturated_fat_g": "below_detection",
+      "starch_g": "published_positive",
+      "sugars_g": "published_positive",
+      "water_g": "published_positive"
+    },
+    "id": "book2002:p139:row5",
+    "pages": [
+      139,
+      140
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "8.1.5.1",
+    "value_type": "published_compositional_profile_not_individual_laboratory_measurement",
+    "visual_review_id": "rp:book2002:8.1.5.1",
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": 100,
+    "basis_reviewed": true,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {
+      "ash_g": "published_positive",
+      "carbohydrates_g": "published_positive",
+      "cholesterol_mg": "below_detection",
+      "energy_kcal": "published_positive",
+      "fat_g": "published_positive",
+      "fiber_g": "published_positive",
+      "organic_acids_g": "published_positive",
+      "protein_g": "published_positive",
+      "saturated_fat_g": "below_detection",
+      "starch_g": "published_positive",
+      "sugars_g": "published_positive",
+      "water_g": "published_positive"
+    },
+    "id": "book2002:p141:row1",
+    "pages": [
+      141,
+      142
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "8.1.5.12",
+    "value_type": "published_compositional_profile_not_individual_laboratory_measurement",
+    "visual_review_id": "rp:book2002:8.1.5.12",
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": "100",
+    "basis_reviewed": false,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {},
+    "id": "book2002:p145:row9",
+    "pages": [
+      145,
+      146
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "8.1.6.16",
+    "value_type": "unreviewed_ocr_candidate",
+    "visual_review_id": null,
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": 100,
+    "basis_reviewed": true,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {
+      "ash_g": "published_positive",
+      "carbohydrates_g": "published_positive",
+      "cholesterol_mg": "below_detection",
+      "energy_kcal": "published_positive",
+      "fat_g": "below_detection",
+      "fiber_g": "below_detection",
+      "organic_acids_g": "below_detection",
+      "protein_g": "below_detection",
+      "saturated_fat_g": "below_detection",
+      "starch_g": "below_detection",
+      "sugars_g": "published_positive",
+      "water_g": "published_positive"
+    },
+    "id": "book2002:p163:row1",
+    "pages": [
+      163,
+      164
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "10.1.1",
+    "value_type": "published_compositional_profile_not_individual_laboratory_measurement",
+    "visual_review_id": "rp:book2002:10.1.1",
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": "100",
+    "basis_reviewed": false,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {},
+    "id": "book2002:p171:row19",
+    "pages": [
+      171,
+      172
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "10.11.8",
+    "value_type": "unreviewed_ocr_candidate",
+    "visual_review_id": null,
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": 100,
+    "basis_reviewed": true,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {
+      "ash_g": "published_positive",
+      "carbohydrates_g": "published_positive",
+      "cholesterol_mg": "published_positive",
+      "energy_kcal": "published_positive",
+      "fat_g": "published_positive",
+      "fiber_g": "below_detection",
+      "organic_acids_g": "published_positive",
+      "protein_g": "published_positive",
+      "saturated_fat_g": "published_positive",
+      "starch_g": "below_detection",
+      "sugars_g": "published_positive",
+      "water_g": "published_positive"
+    },
+    "id": "book2002:p29:row6",
+    "pages": [
+      29,
+      30
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "1.2.1.2",
+    "value_type": "published_compositional_profile_not_individual_laboratory_measurement",
+    "visual_review_id": "rp:book2002:1.2.1.2",
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": 100,
+    "basis_reviewed": true,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {
+      "ash_g": "published_positive",
+      "carbohydrates_g": "published_positive",
+      "cholesterol_mg": "published_positive",
+      "energy_kcal": "published_positive",
+      "fat_g": "published_positive",
+      "fiber_g": "below_detection",
+      "organic_acids_g": "published_positive",
+      "protein_g": "published_positive",
+      "saturated_fat_g": "published_positive",
+      "starch_g": "below_detection",
+      "sugars_g": "published_positive",
+      "water_g": "published_positive"
+    },
+    "id": "book2002:p29:row8",
+    "pages": [
+      29,
+      30
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "1.2.1.4",
+    "value_type": "published_compositional_profile_not_individual_laboratory_measurement",
+    "visual_review_id": "rp:book2002:1.2.1.4",
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": 100,
+    "basis_reviewed": true,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {
+      "ash_g": "published_positive",
+      "carbohydrates_g": "published_positive",
+      "cholesterol_mg": "published_positive",
+      "energy_kcal": "published_positive",
+      "fat_g": "published_positive",
+      "fiber_g": "below_detection",
+      "organic_acids_g": "published_positive",
+      "protein_g": "published_positive",
+      "saturated_fat_g": "published_positive",
+      "starch_g": "below_detection",
+      "sugars_g": "published_positive",
+      "water_g": "published_positive"
+    },
+    "id": "book2002:p41:row2",
+    "pages": [
+      41,
+      42
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "1.4.2.1",
+    "value_type": "published_compositional_profile_not_individual_laboratory_measurement",
+    "visual_review_id": "rp:book2002:1.4.2.1",
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": "100",
+    "basis_reviewed": false,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {},
+    "id": "book2002:p51:row1",
+    "pages": [
+      51,
+      52
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "2.1.1",
+    "value_type": "unreviewed_ocr_candidate",
+    "visual_review_id": null,
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": "100",
+    "basis_reviewed": false,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {},
+    "id": "book2002:p53:row3",
+    "pages": [
+      53,
+      54
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "3.1.3",
+    "value_type": "unreviewed_ocr_candidate",
+    "visual_review_id": null,
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  },
+  {
+    "basis_g": "100",
+    "basis_reviewed": false,
+    "canonical_nutrient_mapping": null,
+    "carbohydrate_disposition": "SOURCE_NATIVE_METHOD_NOT_CANONICAL_CHOAVL_OR_CHOCDF",
+    "field_states": {},
+    "id": "book2002:p53:row8",
+    "pages": [
+      53,
+      54
+    ],
+    "publication_ready": false,
+    "rights_disposition": "REFERENCE_ONLY_PUBLICATION_USE_UNRESOLVED",
+    "source_code": "3.1.8",
+    "value_type": "unreviewed_ocr_candidate",
+    "visual_review_id": null,
+    "zero_disposition": "NONDETECTION_NOT_EXACT_ZERO"
+  }
+]

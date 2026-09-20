@@ -1,0 +1,27 @@
+{
+  "actually_unblocked_recipes": 0,
+  "affected_material_routes": 359,
+  "base_commit": "9b1d5c73da4f1d779336a35e0e7e2c2d32363e85",
+  "dispositions": {
+    "AMBIGUOUS_SOURCE_FORM": 5,
+    "EXISTING_IDENTITY_CANDIDATE_ONLY": 1,
+    "REJECT_BREAD_PROXY": 1,
+    "REJECT_COMPOSITE_ALIAS": 1,
+    "REJECT_FAT_MISMATCH": 1,
+    "REJECT_GENERIC_SUBSTITUTION": 1,
+    "REJECT_OVER_SPECIFIC_PROFILE": 3,
+    "REJECT_PREPARED_DRINK_PROXY": 1,
+    "SECTION_AND_FORM_REVIEW": 3,
+    "SOURCE_RECORD_IDENTIFIED": 5,
+    "SOURCE_RECORD_NEEDS_REVIEW": 1,
+    "SOURCE_RECORD_NOT_IDENTIFIED": 2
+  },
+  "exact_book_record_candidates": 24,
+  "occurrences_accounted_under_group_review": 1532,
+  "production_changed": false,
+  "publication_ready_foods": 0,
+  "queue": "DC2-REVIEW-001",
+  "reviewed_groups": 25,
+  "routes_all_dependencies_in_review_scope": 91,
+  "visual_profile_candidates": 14
+}
