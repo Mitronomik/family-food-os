@@ -278,19 +278,19 @@ def authority_assignment(
     )
     if latin_only:
         return {
-            "authority_source_candidate": "USDA_FDC_OFFICIAL_DATASET",
+            "authority_source_candidate": "USDA_FDC_SEARCH_TARGET",
             "authority_record_candidate": "",
-            "authority_assignment_status": "CANDIDATE_SOURCE_FAMILY_IDENTIFIED_EXACT_RECORD_UNPINNED",
-            "authority_search_strategy": "PIN_EXACT_USDA_FDC_RECORD_AND_FORM",
+            "authority_assignment_status": "SOURCE_FAMILY_SEARCH_TARGET_EXACT_RECORD_UNVERIFIED",
+            "authority_search_strategy": "SEARCH_USDA_FDC_THEN_PIN_EXACT_RECORD_AND_FORM",
             "profile_suitability_for_recipe_form": "NOT_APPLICABLE_NO_ACCEPTED_PROFILE",
-            "rights_status": "OPEN_REUSE_CANDIDATE_RECORD_UNPINNED",
+            "rights_status": "OPEN_REUSE_SEARCH_TARGET_RECORD_UNPINNED",
         }
 
     return {
-        "authority_source_candidate": "FIC_FGBUN_2024_OFFICIAL_COMPOSITION_FAMILY",
+        "authority_source_candidate": "FIC_FGBUN_2024_SEARCH_TARGET",
         "authority_record_candidate": "",
-        "authority_assignment_status": "CANDIDATE_SOURCE_FAMILY_IDENTIFIED_EXACT_RECORD_UNPINNED",
-        "authority_search_strategy": "PIN_EXACT_FIC_FGBUN_RECORD_AND_REVIEW_RIGHTS",
+        "authority_assignment_status": "SOURCE_FAMILY_SEARCH_TARGET_EXACT_RECORD_UNVERIFIED",
+        "authority_search_strategy": "SEARCH_FIC_FGBUN_THEN_PIN_EXACT_RECORD_AND_REVIEW_RIGHTS",
         "profile_suitability_for_recipe_form": "NOT_APPLICABLE_NO_ACCEPTED_PROFILE",
         "rights_status": "BLOCKED_PENDING_RIGHTS_REVIEW",
     }
@@ -1019,7 +1019,7 @@ def main() -> None:
             "dc2": {
                 "REUSE_EXISTING_PROFILE_FORM_REVIEW": "Accepted identity mapping and current profile provenance identified; exact recipe-form suitability must be reviewed before deciding whether any DC2 write is unnecessary.",
                 "DC2-A_HIGH_IMPACT": "Non-proxy/new identity with >=4 candidate families or >=2 safe simple candidate families; exact authority record still requires pinning.",
-                "DC2-B_STANDARD_EXTENSION": "Other non-proxy new identities with candidate source family identified where possible; exact authority record still requires pinning.",
+                "DC2-B_STANDARD_EXTENSION": "Other non-proxy new identities with a preferred source-family search target; exact source presence, record identity, form compatibility and authority still require verification.",
                 "DC2-C_IDENTITY_FORM_REVIEW": "Form split, proxy, or v22.5/v22.13 label-difference item; identity/form semantics must close before exact authority assignment.",
             },
             "dc3": {
@@ -1062,7 +1062,8 @@ def main() -> None:
             "repository_retention": "NOT_COMMITTED_TO_GIT_UNDER_CURRENT_SOURCE_GOVERNANCE",
             "required_file_identity": "EXACT_FILENAMES_AND_SHA256_FROM_LOCAL_SOURCE_FILES",
             "ci_delivery": "TEMPORARY_AUTHENTICATED_HTTPS_URL_VIA_ACTIONS_SECRET",
-            "actions_artifact_role": "EPHEMERAL_AUDIT_COPY_ONLY_NOT_CANONICAL_STORAGE",
+            "actions_artifact_role": "RAW_SOURCE_BUNDLE_UPLOAD_FORBIDDEN_IN_PUBLIC_REPOSITORY; REGENERATED_PACKAGE_ARTIFACT_ALLOWED",
+            "bundle_hash_policy": "ZIP_CONTAINER_HASH_IS_DIAGNOSTIC_ONLY; CANONICAL_SOURCE_IDENTITY_IS_EXACT_FILE_SET_PLUS_PER_FILE_SHA256",
             "rebuild_rule": "REBUILD_ONLY_FROM_FILES_MATCHING_RECORDED_SHA256; UNKNOWN_OR_MISSING_SOURCE_FAILS_CLOSED",
         },
         "local_source_files": [
@@ -1309,9 +1310,9 @@ Every demand row has one explicit authority state:
 
 {authority_lines}
 
-For existing mappings, `authority_source_candidate` records the exact current production profile provenance and record ID. For unresolved/new forms, an official source family is recorded only where identity/form semantics permit it; otherwise authority assignment is blocked explicitly until identity/form review closes.
+For existing mappings, `authority_source_candidate` records the exact current production profile provenance and record ID. For unresolved/new forms, the field is only a **preferred source-family search target** after identity/form blockers are cleared; it does not assert that a compatible source record exists.
 
-`FIC_FGBUN_2024_OFFICIAL_COMPOSITION_FAMILY` and `USDA_FDC_OFFICIAL_DATASET` are source-family candidates, not exact-record verification. FIC/FGBUN rights remain blocked pending exact retained-use review; USDA exact-record/form compatibility still must be pinned.
+`FIC_FGBUN_2024_SEARCH_TARGET` and `USDA_FDC_SEARCH_TARGET` mean "search here first", not source authority or exact-record verification. FIC/FGBUN presence, record identity, form compatibility and retained-use rights still require review; USDA exact-record/form compatibility still must be pinned.
 
 ## Files
 
@@ -1357,9 +1358,10 @@ A valid rebuild therefore requires:
 - the exact filenames listed in `source-artifacts.json`;
 - every file to match its recorded SHA-256 before parsing;
 - delivery to CI through a temporary authenticated HTTPS URL stored as an Actions secret;
+- the ZIP/container hash to be treated as diagnostic only, never as canonical source identity;
 - missing, changed or unavailable source bytes to fail closed rather than fall back to generated CSV/JSON.
 
-Any GitHub Actions artifact containing the ZIP is an **ephemeral audit copy only**, not canonical long-term source storage. Reconstructing the package later requires access to the operator-managed source files whose per-file hashes are recorded here.
+The raw source ZIP must **not** be uploaded as a GitHub Actions artifact in this public repository. Only regenerated package outputs may be retained as CI artifacts. Reconstructing the package later requires access to the operator-managed source files whose exact filenames and per-file hashes are recorded here.
 
 ## Verification invariants
 
@@ -1387,7 +1389,7 @@ A second build from the same inputs must be byte-identical for all generated pac
 3. **{len(compat_gap)}** candidates have additional v22.13 non-calc relationship rows; exact v22.13 row shards were not available here, so full row-level compatibility remains unproven.
 4. **{len(exact_label_diffs)}** used identities have a v22.5/v22.13 label difference requiring review; `ING-0069` is the clearest explicit conflict example.
 5. All **{len(existing_demands)}** existing mapped profiles have identified current provenance, but exact recipe-form suitability still requires review.
-6. Candidate-source-family assignments with unpinned records are not authority closure.
+6. Preferred source-family search targets with unpinned records are not evidence that a compatible source record exists and are not authority closure.
 7. The original 68-family funnel has assortment gaps for a realistic family week; DC1 records the gap but does not widen scope automatically.
 
 ## Stop condition
