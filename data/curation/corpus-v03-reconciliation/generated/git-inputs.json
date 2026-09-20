@@ -1,0 +1,27 @@
+[
+  {
+    "commit": "c23227be12605c27f3621b38e839085f141ceb8b",
+    "path": "data/curation/data-corpus-v1-dc1/candidate-recipes.csv",
+    "sha256": "81266d3615b0400a52fd0709c3e3b9722a759ab6ce9b1f35bad63b7a4250fc2b"
+  },
+  {
+    "commit": "c23227be12605c27f3621b38e839085f141ceb8b",
+    "path": "data/curation/data-corpus-v1-dc1/food-demand.csv",
+    "sha256": "d58cb19cfbb8875e15c27fc5721022ff2e36da1e410269defa6182cd630bc553"
+  },
+  {
+    "commit": "d8c76a64483e3d5814e702be33c12cbe2e144160",
+    "path": "data/seed/food_ingredients/ingredients.csv",
+    "sha256": "55058e511e3db14c97382e295e2a617a5a156041e49d2a7ab9772811bd06aaf3"
+  },
+  {
+    "commit": "d8c76a64483e3d5814e702be33c12cbe2e144160",
+    "path": "data/seed/food_ingredients/aliases.csv",
+    "sha256": "d4d9d1f35ffed5c17e393eb4351fda20526297deea4fcd955eb920be435a0bea"
+  },
+  {
+    "commit": "d8c76a64483e3d5814e702be33c12cbe2e144160",
+    "path": "data/seed/food_ingredients/nutrition.csv",
+    "sha256": "2376f04ea872f0b38676e892926ee1052323d142fa4c0184c4f62d5830cdcb2c"
+  }
+]

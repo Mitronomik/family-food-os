@@ -1,0 +1,748 @@
+{
+  "version": "1.0",
+  "as_of": "2026-09-20",
+  "base_commit": "d8c76a64483e3d5814e702be33c12cbe2e144160",
+  "tasks": [
+    {
+      "id": "P01",
+      "roadmap": "DC1",
+      "title": "Принять и согласовать существующие пакеты",
+      "dependencies": [],
+      "owner": "Orchestrator + Data",
+      "goal": "Принять и согласовать существующие пакеты",
+      "scope": "Проверить финальный head PR70; сопоставить его 68 семейств/96 identities с v0.3 по изданию, карте, варианту и форме. Сохранить различия и историческое происхождение.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "Версионированная crosswalk-таблица: exact match / historical only / new / conflict / unresolved; каждое исходное ID учтено ровно один раз. PR70 не объявлен merged без факта merge."
+      ],
+      "tests": [
+        "Повторная сборка crosswalk; дубли, потеря строк, смешение советского и российского происхождения отклоняются."
+      ],
+      "rollback": "Откатить только новый crosswalk; исходные пакеты неизменны.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P02",
+      "roadmap": "DC1",
+      "title": "Закрепить выпуск и права использования",
+      "dependencies": [
+        "P01"
+      ],
+      "owner": "Data + Reviewer",
+      "goal": "Закрепить выпуск и права использования",
+      "scope": "Манифест v0.3, исходные хеши, область допустимого хранения и публикации по источникам; устойчивое внешнее хранилище исходников. Не коммитить весь архив в публичный Git.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "Для каждого источника есть disposition; в репозиторий идут разрешённые производные данные, манифесты и инструменты. При недоступном источнике сборка использует проверенный snapshot либо явно останавливается."
+      ],
+      "tests": [
+        "Проверка хешей, два offline rebuild, missing/tampered source rejection."
+      ],
+      "rollback": "Вернуть прежний manifest pointer, не удалять источники.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P03",
+      "roadmap": "DC1→DC2",
+      "title": "Согласовать семантику нутриентов",
+      "dependencies": [
+        "P02"
+      ],
+      "owner": "Domain + Data",
+      "goal": "Согласовать семантику нутриентов",
+      "scope": "Отдельное решение по углеводам Book2002 и аналитическому ненахождению; source-native показатели сохранить. Уточнить совместимость с NutrientVector, без автоматической миграции.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "Ноль, below_detection, missing различимы; source carbohydrate не переименован в несовместимый canonical nutrient; каждый расчёт использует принятую версию политики."
+      ],
+      "tests": [
+        "Тесты несовместимых определений/единиц/баз, trace/zero/missing и subset coverage."
+      ],
+      "rollback": "Отключить новую политику выбора, сохранить наблюдения и прежние версии.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P04",
+      "roadmap": "DC1→DC2",
+      "title": "Сформировать точный спрос на продукты и формы",
+      "dependencies": [
+        "P01",
+        "P02"
+      ],
+      "owner": "Data",
+      "goal": "Сформировать точный спрос на продукты и формы",
+      "scope": "Связать выбранные ветви рецептур с FoodIngredient UUID; повторно использовать принятую identity только при точной форме. Приоритизировать общие зависимости и разнообразие недели.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "По каждой обязательной строке: выбранная альтернатива, масса/единица, форма, authority record, права, blocker. Список конкретных DC2/DC3 партий, а не квота произвольных рецептов."
+      ],
+      "tests": [
+        "Аудит альтернатив, обязательных подрецептов, циклов, количества и формы; всё unresolved явно."
+      ],
+      "rollback": "Вернуть предыдущую версию mappings.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P05",
+      "roadmap": "DC2",
+      "title": "Довести профили выбранных партий",
+      "dependencies": [
+        "P03",
+        "P04"
+      ],
+      "owner": "Data + независимый QA",
+      "goal": "Довести профили выбранных партий",
+      "scope": "Проверить OCR, названия, единицы и базу в исходных страницах; связать с точной food/form identity; разрешать конфликт доказательством, а не усреднением.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "Каждый обязательный профиль партии имеет проверяемые значения и статусы. 52 manual и 382 dual-OCR не объявляются готовыми автоматически. Исключённые 2177 FIC profiles не попадают в публикацию."
+      ],
+      "tests": [
+        "Source-to-value replay, field coverage, negative mappings, единицы/масса, независимая проверка исправлений."
+      ],
+      "rollback": "Отозвать ошибочное mapping-решение новой версией.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P06",
+      "roadmap": "DC2",
+      "title": "Опубликовать атомарные продукты малыми партиями",
+      "dependencies": [
+        "P05"
+      ],
+      "owner": "Domain + Data",
+      "goal": "Опубликовать атомарные продукты малыми партиями",
+      "scope": "Обычно 25–60 точных форм на PR, размер определяется сложностью. FoodIngredient → FoodNutritionProfile → sealed NutrientVector → ATOMIC Composition через существующий UoW.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "Все связи и владельцы валидны; fresh/repeat/conflict import; история неизменна. Никаких новых платформенных identity из source-ID. Изменение схемы — отдельное обоснованное решение."
+      ],
+      "tests": [
+        "Транзакционный rollback, повтор без дублей, конфликт без частичной записи, Nutrition/Composition regression."
+      ],
+      "rollback": "Вернуть current selectors к предыдущим принятым версиям; новые версии сохраняются для аудита.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P07",
+      "roadmap": "DC3",
+      "title": "Замкнуть рецепты и опубликовать RecipeVersion",
+      "dependencies": [
+        "P06"
+      ],
+      "owner": "Data + Domain",
+      "goal": "Замкнуть рецепты и опубликовать RecipeVersion",
+      "scope": "Обычно 10–20 рецептур на PR; конкретные ветви и подрецепты. Отдельно численные, аллергенные и процессные проверки; общие компоненты не дублировать.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "100% обязательных links и input mass; происхождение и права; один путь расчёта; raw/cooked и потери не применены дважды; опубликованный химсостав отделён от рассчитанного. Unknown allergen не даёт разрешение при исключении."
+      ],
+      "tests": [
+        "DAG/альтернативы, рецепт→профили→порция, масса/выход, источник vs расчёт, immutable version, exclusions negative tests."
+      ],
+      "rollback": "Снять новые версии с текущего каталога, не переписывая исторические планы.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P08",
+      "roadmap": "DC4",
+      "title": "Проверить продуктовую пригодность каталога",
+      "dependencies": [
+        "P07"
+      ],
+      "owner": "QA + Data",
+      "goal": "Проверить продуктовую пригодность каталога",
+      "scope": "Наращивать обычный рабочий каталог до 50–80+ пригодных RecipeVersion и закрывать всё активное food demand; пороги не заменяют полный source accounting.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "Покрытие ролей и разнообразия, 100% обязательных продуктов; нутриенты по отдельным полям; отчёт пригодности nutrition/allergen/shopping/prep/storage отдельно. Нельзя объявить 377 ветвей 377 готовыми блюдами."
+      ],
+      "tests": [
+        "Аудит всей опубликованной части; контрпримеры, детерминированные проверки покрытия."
+      ],
+      "rollback": "Отозвать acceptance report, дефекты исправить отдельными data batches.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P09",
+      "roadmap": "GATE1-CLOSE",
+      "title": "Доказать Planning Core на принятом каталоге",
+      "dependencies": [
+        "P08"
+      ],
+      "owner": "Domain + QA",
+      "goal": "Доказать Planning Core на принятом каталоге",
+      "scope": "Использовать существующий Planner v0; повторно использовать годные fixture mechanics, не production truth закрытого PR66.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "3 различные семьи; 30 проверенных рецептов; 80+ foods; хотя бы одна успешная полная неделя, для каждого сценария полная неделя либо обоснованная infeasibility. Индивидуальные порции, исключения, 1/2/3/5/6 opportunities, неоднородные расписания, воспроизводимый trace."
+      ],
+      "tests": [
+        "Repository-backed services; repeat/replan; отсутствие частичных записей; AI_ENABLED=false; актуальные обязательные gate checks."
+      ],
+      "rollback": "Gate остаётся открытым при провале; production данные не откатывать ради зелёного fixture.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P10",
+      "roadmap": "PR9",
+      "title": "Реализовать Shopping Engine",
+      "dependencies": [
+        "P09"
+      ],
+      "owner": "Domain",
+      "goal": "Реализовать Shopping Engine",
+      "scope": "RecipeVersion/Serving → закупочная масса → агрегация → вычитание Pantry → revisioned ShoppingList. Цены, наличие и Retail исключены.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "Реальные сервисы воспроизводят количества и предупреждения; pantry не мутирует при построении; mixed sources не удваивают спрос; изменение плана делает список устаревшим."
+      ],
+      "tests": [
+        "Decimal/units/forms, incompatible conversions, pantry subtraction, tenant isolation, stale revisions; валидные кейсы из 376 маршрутов."
+      ],
+      "rollback": "Вернуть прошлую версию сервиса, пересоздать производные списки; исходные движения pantry сохранить.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P11",
+      "roadmap": "PR10 support",
+      "title": "Привязать бытовое хранение к продуктам и процессам",
+      "dependencies": [
+        "P08"
+      ],
+      "owner": "Research + Data + Domain",
+      "goal": "Привязать бытовое хранение к продуктам и процессам",
+      "scope": "Довести точные food-class/recipe/process bindings; 9 правил длительности требуют условий. Подготовить versioned rule contract отдельно от исполнения партий.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "Нет универсального срока; охлаждение, температура, упаковка, часы и состояние известны либо рекомендация недоступна. Промышленные сроки не подставлены в бытовые."
+      ],
+      "tests": [
+        "Отсутствующие условия, нарушение температуры, другой batch/household, неверные часы отклоняются."
+      ],
+      "rollback": "Отключить предложения сроков; фактические наблюдения сохранить.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P12",
+      "roadmap": "PR10",
+      "title": "Реализовать PrepPlan",
+      "dependencies": [
+        "P10",
+        "P11"
+      ],
+      "owner": "Domain",
+      "goal": "Реализовать PrepPlan",
+      "scope": "Планировать последовательность, общие операции, оборудование, активное/пассивное время только где подтверждено; generation без изменения запасов.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "Связанный с версиями PrepPlan воспроизводим; unsupported freezer сценарии явно недоступны; подтверждение приготовления не подменено генерацией плана."
+      ],
+      "tests": [
+        "Граф операций, время/ресурсы/масштабирование, отсутствие side effects, staleness, isolation."
+      ],
+      "rollback": "Отключить planner adapter и регенерировать производные планы.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P13",
+      "roadmap": "PR10 extension",
+      "title": "Подтверждение приготовления и учёт остатков",
+      "dependencies": [
+        "P12"
+      ],
+      "owner": "Domain",
+      "goal": "Подтверждение приготовления и учёт остатков",
+      "scope": "Отдельная задача внутри Prep capability: confirmed execution, партии, движения, порции остатков, условия хранения; после неё разрешать LEFTOVER/PREPARED supply.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "Повтор подтверждения не удваивает запас; генерация плана не создаёт партии; съеденное/списанное не используется повторно. Нет выдуманных пользовательских записей."
+      ],
+      "tests": [
+        "Транзакции и idempotency, расход/остаток, cross-household guards, безопасный unsupported при неизвестных условиях."
+      ],
+      "rollback": "Отключить автоматическое использование остатков, исправлять движения компенсационными событиями.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P14",
+      "roadmap": "PR10-PDF / Gate2",
+      "title": "Backend PDF и проверка всей backend-цепочки",
+      "dependencies": [
+        "P12"
+      ],
+      "owner": "Domain + QA",
+      "goal": "Backend PDF и проверка всей backend-цепочки",
+      "scope": "Отдельно renderer PR, затем Gate2 review. Для PDF хватает PrepPlan; расширение confirmed execution не должно скрыто менять условия Gate2.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "1 семья/3 участника/30 рецептов/80–120 foods в fixture, 7 дней, порции, nutrition, Shopping, Prep, читаемый PDF. AI=false, Retail=none. Fixture union не ограничивает весь каталог."
+      ],
+      "tests": [
+        "Полный сервисный E2E, source revisions, stale PDF, повторный render, проверка содержимого и вида."
+      ],
+      "rollback": "Отключить renderer, регенерировать артефакты; источники/планы сохранить.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P15",
+      "roadmap": "PR11→PR12→PR13→PR14",
+      "title": "Пользовательский цикл в PWA",
+      "dependencies": [
+        "P14"
+      ],
+      "owner": "Frontend + Domain + QA",
+      "goal": "Пользовательский цикл в PWA",
+      "scope": "Четыре отдельные задачи: shell; onboarding; Сегодня/Неделя/Купить/Заготовки/Дома и replan; PDF/печать. На русском, расчёты в backend.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "Mobile-first поток работает без админки каталога; изменения недели инвалидируют производные данные; минимум ручного ввода."
+      ],
+      "tests": [
+        "Responsive/a11y, ошибки/пустые состояния, onboarding/replan, Shopping/Pantry/Prep/PDF E2E."
+      ],
+      "rollback": "Откатить соответствующий frontend release, сохранив версии серверных данных.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P16",
+      "roadmap": "PR15 / Gate3",
+      "title": "История, feedback и следующая неделя",
+      "dependencies": [
+        "P15"
+      ],
+      "owner": "Domain + Frontend + QA",
+      "goal": "История, feedback и следующая неделя",
+      "scope": "События понравилось/заменено/пропущено/остаток и пересобираемые preference projections; использовать существующую историю MealPlan.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "Следующая неделя учитывает настоящие события; feedback хранит household/member/meal/version; никаких фиктивных historical данных в рабочем каталоге."
+      ],
+      "tests": [
+        "Детерминированный replay projections, isolation, исторические links, полный двухнедельный consumer loop."
+      ],
+      "rollback": "Отключить новый ranking input, события сохранить; projection пересобираема.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P17",
+      "roadmap": "Data Readiness",
+      "title": "Проверить каталог под реальные семьи",
+      "dependencies": [
+        "P16"
+      ],
+      "owner": "Data + QA",
+      "goal": "Проверить каталог под реальные семьи",
+      "scope": "Проверить применимость к выбранным сценариям, русские тексты, права, формы, исключения, состав и процессы; продолжать весь реестр источников, без замены его малой выборкой.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "50–80+ применимых recipes, 100% required demand; критические unknown не спрятаны; отдельные разрешённые возрастные/методические сценарии; точный перечень неподдерживаемого."
+      ],
+      "tests": [
+        "Corpus-wide quality report и сценарии семей; обновление source/version/rights."
+      ],
+      "rollback": "Исключить неподдерживаемые сценарии/версии из набора, сохранить evidence.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P18",
+      "roadmap": "SHARED-1→2→3 / Gate4",
+      "title": "Подготовить совместное развёртывание",
+      "dependencies": [
+        "P17"
+      ],
+      "owner": "Domain + Security + QA",
+      "goal": "Подготовить совместное развёртывание",
+      "scope": "Отдельные PR: PostgreSQL; Auth/HouseholdMembership; tenant isolation, hosting, backups/restore/monitoring. Следовать security architecture.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "Две независимые семьи не читают/меняют чужие данные; миграция и restore проверены до реальных семей."
+      ],
+      "tests": [
+        "Migration parity, authz/BOLA negative cases, restore drill, monitoring checks."
+      ],
+      "rollback": "Проверенный deployment/migration rollback по отдельному cutover plan.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P19",
+      "roadmap": "Real Family Testing",
+      "title": "Проверить повторное использование сервиса",
+      "dependencies": [
+        "P18"
+      ],
+      "owner": "Product + QA",
+      "goal": "Проверить повторное использование сервиса",
+      "scope": "10–30 домохозяйств после Gate4; заранее определить метрики выполнимости, замен, prep, отходов, Week2/Week4.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "Есть наблюдаемый повторный цикл, причины отказов и приоритеты улучшений; никаких обещаний бюджетной оптимизации без цен."
+      ],
+      "tests": [
+        "Согласованные метрики/приёмка пилота и качество событий."
+      ],
+      "rollback": "Остановить набор/откатить релиз; пользовательские данные по принятой политике.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    },
+    {
+      "id": "P20",
+      "roadmap": "Nutrition supporting decision",
+      "title": "Подключить российскую методику потребностей",
+      "dependencies": [
+        "P03"
+      ],
+      "owner": "Domain + Research",
+      "goal": "Подключить российскую методику потребностей",
+      "scope": "Отдельно утвердить method-version и область применимости 735 scalar references; не заменять текущие NASEM/USDA алгоритмы автоматически.",
+      "non_goals": [
+        "Автоматическое merge/deploy",
+        "Цены и наличие",
+        "Генеративные численные данные",
+        "Перепроектирование core"
+      ],
+      "architecture_constraints": [
+        "FoodIngredient единственная canonical identity",
+        "UI → API → services/domain → repositories → database",
+        "AI_ENABLED=false",
+        "История append-only; синхронный SQLAlchemy Core/UoW; миграции только отдельно согласованным путём"
+      ],
+      "data_api_ui_impact": "Определить конкретный diff в task contract перед реализацией; P01–P05 evidence/contract only; публикация P06–P07 через существующие сервисы; новые контексты только в своём milestone.",
+      "acceptance_criteria": [
+        "Группы/возраст/пол/активность/единицы и неоднозначности разрешены для поддержанных сценариев; unsupported вне диапазона; wellness без лечебных назначений."
+      ],
+      "tests": [
+        "Границы возрастов/активности, несовместимые показатели, historical method pins, нет silent fallback."
+      ],
+      "rollback": "Вернуть прежний selector для новых планов; старые планы сохраняют method-version.",
+      "risks": [
+        "Source authority не равна runtime readiness",
+        "Смена main или PR head требует повторной сверки"
+      ],
+      "follow_up": "Только следующая разрешённая зависимая задача после review; phase labels не являются номерами GitHub PR.",
+      "status": "proposed_not_authorized_for_execution"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "version": "1.0",
+  "base_commit": "d8c76a64483e3d5814e702be33c12cbe2e144160",
+  "pr70_commit": "c23227be12605c27f3621b38e839085f141ceb8b",
+  "corpus_version": "0.3.0",
+  "corpus_manifest_sha256": "dcb72b053fafdf127b97dc1ff635eb1bca02c61c61c5f2b00435f1305831109e",
+  "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+  "source_distribution": "operator-managed; rights not granted by this manifest",
+  "inputs": [
+    {
+      "path": "packages/recipe-closure/normalized/food-identities.jsonl",
+      "sha256": "e7e05183f41ccbe4c6cbb1e8efcc5b7ebd0c12c4bfe090510ab2594afb21ebb5"
+    },
+    {
+      "path": "packages/recipe-closure/normalized/ingredient-bindings.jsonl",
+      "sha256": "d61c0525a2dc62008026441b2fd28dcd8a062289bdab6f8e071c0b728df9332e"
+    },
+    {
+      "path": "packages/recipe-closure/normalized/resolved-executions.jsonl",
+      "sha256": "8ab17cf36bee41caa1d07457f9b7608ab052e79a89010e0c54422fbd25400792"
+    },
+    {
+      "path": "packages/recipe-closure/normalized/source-food-equivalence-groups.jsonl",
+      "sha256": "a1eb2e98a64db3b63ef9afd87218cc5c93417c6c38cfceca07d21df666c8662d"
+    },
+    {
+      "path": "packages/book2002/normalized/food-profiles.jsonl",
+      "sha256": "67f4d5d50d99539da05b45adc32fd5fa46e05b74ebb94d465cc20c6f497cf9e4"
+    },
+    {
+      "path": "packages/reference-profiles/normalized/profiles.jsonl",
+      "sha256": "66a8474fa63a2aac2a4c07ba822971806d257fd070d8a86c0bd07e123513feaf"
+    },
+    {
+      "path": "packages/consensus-profiles/normalized/profiles.jsonl",
+      "sha256": "ef45d958a5b9df78957ef521e042878feb2df5fd03044d867ccb03a6ebee0e77"
+    },
+    {
+      "path": "reports/capability-readiness.json",
+      "sha256": "c4da0e1f73081f515a862629a2663132ebeb85560273907be4713fae931e5ca4"
+    },
+    {
+      "path": "reports/reference-layer-overlap.json",
+      "sha256": "3d9d753649b42d57d5de7dd26ec54ec5f21b2a8f4f0ddf482defa9a18132fdd6"
+    }
+  ]
+}

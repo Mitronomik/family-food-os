@@ -1678,3 +1678,24 @@ with no shared runtime/persistence/startup changes or remaining regression conce
 PR36: **READY FOR FINAL RE-REVIEW**, not merged. Assembly A BLOCKED; Assembly B
 and PR7+ NOT STARTED. Same-origin/redirect hardening remains follow-up.
 Stop after correction publication; no merge or next milestone authorization.
+
+## Corpus v0.3 reconciliation — 2026-09-20 branch work
+
+The user authorized a separate evidence/curation PR integrating the local v0.3
+corpus with the existing DC1 work. This bounded operation does not authorize
+DC2/DC3 production publication or a roadmap reorder.
+
+Base: `d8c76a64483e3d5814e702be33c12cbe2e144160`. PR #70 was OPEN / NOT MERGED
+at reconciliation, pinned at `c23227be12605c27f3621b38e839085f141ceb8b`.
+Do not count that branch as accepted main or overwrite its recovery package.
+
+See [integration plan](../docs/family-food/corpus-v03-integration-plan.md) and
+[reconciliation package](../data/curation/corpus-v03-reconciliation/README.md).
+The package accounts for all 68 historical PR70 families, 479 v0.3 cards,
+1473 routes and 2693 food occurrences. Lexical review groups are not canonical
+food identities. The 46 review queues are not publication-ready batches.
+
+Next permitted work in this branch: verify and deliver this bounded PR for
+review. After acceptance, resolve exact form/source/rights/nutrient decisions
+for a separately authorized first DC2 batch. No automatic merge, DC2/DC3,
+Gate1 closure or PR9. Preserve the broader source-accounting backlog.

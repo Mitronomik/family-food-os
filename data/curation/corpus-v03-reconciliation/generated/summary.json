@@ -1,0 +1,30 @@
+{
+  "accepted_seed_food_rows": 183,
+  "accepted_seed_nutrition_rows": 183,
+  "base_commit": "d8c76a64483e3d5814e702be33c12cbe2e144160",
+  "corpus_version": "0.3.0",
+  "exact_cross_edition_joins": 0,
+  "food_occurrences_not_canonical_foods": 2693,
+  "lexical_review_groups_not_food_equivalence": 184,
+  "nonclinical_material_routes": 377,
+  "nonclinical_procurement_routes": 376,
+  "pr70_commit": "c23227be12605c27f3621b38e839085f141ceb8b",
+  "pr70_food_identities": 96,
+  "pr70_merged": false,
+  "pr70_recipe_families": 68,
+  "production_changed": false,
+  "publication_ready_foods": 0,
+  "publication_ready_recipes": 0,
+  "reference_unique_source_codes": 412,
+  "remaining": [
+    "review queues are not accepted publication manifests",
+    "exact forms and authority unresolved",
+    "nutrient semantics and source zero policy unresolved",
+    "source retention/publication rights unresolved",
+    "menu role/diversity acceptance not performed",
+    "allergen and household storage readiness not granted"
+  ],
+  "source_book_records": 1113,
+  "v03_cards": 479,
+  "v03_routes": 1473
+}
