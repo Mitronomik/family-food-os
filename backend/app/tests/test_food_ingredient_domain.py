@@ -12,6 +12,7 @@ from app.domain.food_ingredients import (
     NutritionObservationState,
     NutritionSourceObservation,
     normalize_unicode_search_key,
+    validate_nutrition_profile_observations,
 )
 from app.domain.units import UnitCode
 
@@ -215,8 +216,10 @@ def source_observation(
 
 
 def test_partial_profile_requires_explicit_unknown_state_for_legacy_core_fields():
+    value = profile(carbohydrates_g=None, is_current=False)
+
     with pytest.raises(DomainValidationError) as exc_info:
-        profile(carbohydrates_g=None, is_current=False)
+        validate_nutrition_profile_observations(value, ())
 
     assert exc_info.value.issue.field == "carbohydrates_g"
     assert exc_info.value.issue.code == DomainIssueCode.REQUIRED_FIELD
@@ -230,7 +233,10 @@ def test_partial_profile_preserves_below_detection_and_method_incompatible_sourc
         fat_g=None,
         carbohydrates_g=None,
         is_current=False,
-        observations=(
+    )
+    observations = validate_nutrition_profile_observations(
+        value,
+        (
             source_observation(
                 profile_id,
                 "protein_g",
@@ -257,30 +263,29 @@ def test_partial_profile_preserves_below_detection_and_method_incompatible_sourc
     assert value.fat_g is None
     assert value.carbohydrates_g is None
     assert value.legacy_core_complete is False
-    assert [item.source_field for item in value.observations] == [
+    assert [item.source_field for item in observations] == [
         "carbohydrates_g",
         "fat_g",
         "protein_g",
     ]
-    assert value.observations[0].source_literal == "99.8"
+    assert observations[0].source_literal == "99.8"
 
 
 def test_complete_legacy_profile_remains_complete_and_compatible():
     value = profile()
 
     assert value.legacy_core_complete is True
-    assert value.observations == ()
+    assert not hasattr(value, "observations")
 
 
 def test_numeric_profile_value_cannot_conflict_with_unknown_observation_state():
-    profile_id = uuid4()
+    value = profile()
     with pytest.raises(DomainValidationError) as exc_info:
-        profile(
-            id=profile_id,
-            protein_g="11",
-            observations=(
+        validate_nutrition_profile_observations(
+            value,
+            (
                 source_observation(
-                    profile_id,
+                    value.id,
                     "protein_g",
                     NutritionObservationState.BELOW_DETECTION,
                     source_literal="0",
@@ -312,20 +317,10 @@ def test_source_observation_preserves_literal_and_requires_method_when_incompati
 
 
 def test_partial_profile_cannot_be_current_in_legacy_selector():
-    profile_id = uuid4()
     with pytest.raises(DomainValidationError) as exc_info:
         profile(
-            id=profile_id,
             protein_g=None,
             is_current=True,
-            observations=(
-                source_observation(
-                    profile_id,
-                    "protein_g",
-                    NutritionObservationState.BELOW_DETECTION,
-                    source_literal="0",
-                ),
-            ),
         )
 
     assert exc_info.value.issue.field == "is_current"
