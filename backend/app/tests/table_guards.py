@@ -37,6 +37,7 @@ CURRENT_ALLOWED_TABLES = {
     "food_ingredients",
     "food_ingredient_aliases",
     "food_nutrition_profiles",
+    "food_nutrition_profile_observations",
     "food_ingredient_allergens",
     "food_recipes",
     "food_recipe_versions",
