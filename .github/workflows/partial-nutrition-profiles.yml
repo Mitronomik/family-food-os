@@ -1,0 +1,52 @@
+name: Partial nutrition profiles
+
+on:
+  pull_request:
+    paths:
+      - 'backend/app/domain/food_ingredients.py'
+      - 'backend/app/db/migrations.py'
+      - 'backend/app/db/migration_lineage.py'
+      - 'backend/app/migrations/versions/0034_partial_nutrition_profiles.py'
+      - 'backend/app/persistence/sqlalchemy_core/food_ingredient_tables.py'
+      - 'backend/app/persistence/sqlalchemy_core/food_ingredient_repositories.py'
+      - 'backend/app/tests/test_food_ingredient_domain.py'
+      - 'backend/app/tests/persistence/test_food_ingredient_repository.py'
+      - 'backend/app/tests/test_partial_nutrition_profile_migration.py'
+      - 'backend/app/tests/test_migration_lineage.py'
+      - 'backend/app/tests/test_migration_runner_rebuild.py'
+      - 'backend/app/tests/test_nutrient_vector.py'
+      - 'docs/family-food/**'
+      - 'state/**'
+      - '.github/workflows/partial-nutrition-profiles.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      AI_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e './backend[test]'
+      - name: Focused partial-profile and migration verification
+        run: >-
+          python -m pytest -q
+          backend/app/tests/test_food_ingredient_domain.py
+          backend/app/tests/test_food_ingredient_application.py
+          backend/app/tests/persistence/test_food_ingredient_repository.py
+          backend/app/tests/test_food_ingredient_migration.py
+          backend/app/tests/test_partial_nutrition_profile_migration.py
+          backend/app/tests/test_nutrient_vector.py
+          backend/app/tests/test_food_composition.py
+          backend/app/tests/test_migration_lineage.py
+          backend/app/tests/test_migration_runner_rebuild.py
+          backend/app/tests/persistence/test_migration_coexistence.py
+      - name: Full backend regression
+        run: python -m pytest -q backend/app/tests
+      - name: Full launcher regression
+        run: python -m pytest -q launcher/tests
