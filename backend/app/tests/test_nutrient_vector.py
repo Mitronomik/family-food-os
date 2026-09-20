@@ -399,6 +399,7 @@ def test_unknown_deployment_profile_aborts_upgrade_without_half_schema(
         "0030_recipe_source_corpus",
         "0031_meal_pattern_catalogue",
         "0032_meal_plan_serving",
+        "0034_partial_nutrition_profiles",
     ]
 
 
@@ -429,6 +430,7 @@ def test_mid_backfill_failure_rolls_back_and_resume_is_deterministic(
         "0030_recipe_source_corpus",
         "0031_meal_pattern_catalogue",
         "0032_meal_plan_serving",
+        "0034_partial_nutrition_profiles",
     ]
     after = snapshot(config)
     assert all(after[name] == rows for name, rows in before.items())
