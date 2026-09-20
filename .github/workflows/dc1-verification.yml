@@ -257,6 +257,14 @@ jobs:
           build_dc1 /tmp/dc1-build-a
           build_dc1 /tmp/dc1-build-b
 
+      - name: Preserve regenerated package for review
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: dc1-regenerated-package-${{ github.event.pull_request.head.sha || github.sha }}
+          path: /tmp/dc1-build-a
+          retention-days: 1
+          if-no-files-found: error
+
       - name: Validate rebuilds and adversarial behavior
         shell: bash
         run: |
