@@ -1,36 +1,67 @@
 {
-  "repository_baseline": {
-    "main_merge_pr69": "d8c76a64483e3d5814e702be33c12cbe2e144160",
-    "v22_13_map_a_pr": 39,
-    "v22_13_checkpoint_sha256": "a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97",
-    "ru_source_corpus_pr": 36
-  },
-  "library_artifacts": [
+  "local_source_files": [
+    {
+      "name": "russian_normative_recipes_v22_13_integrity_audit.xlsx",
+      "sha256": "4353aec58e2610e3a9b4d46b970888cd17e1aabcd6ebea2af6ed0c323865d47f",
+      "use": "v22.13 integrity/semantic-repair cross-check only"
+    },
+    {
+      "name": "russian_normative_recipes_v22_13_manifest.xlsx",
+      "sha256": "f57eb053f11f6230ad733824dbf4d3bba523be13d9418c7ab0932e58046aa9f0",
+      "use": "v22.13 checkpoint/integrity/file-inventory cross-check only"
+    },
     {
       "name": "russian_normative_recipes_v22_13_mass_nutrients.xlsx",
       "sha256": "5ea78ead82568f8aff019a4076215c6598675783cb81e0d1d5b4f913016de4cc",
-      "use": "v22.13 cross-check/reference evidence only"
+      "use": "v22.13 coverage/identity cross-check only; nutrient values not production authority"
+    },
+    {
+      "name": "russian_normative_recipes_v22_5_manifest.xlsx",
+      "sha256": "0dbd9983e64d5966ab5a182b38f912928e4a64d15de866d8409ace452e61468c",
+      "use": "v22.5 shard-count/join-contract validation"
     },
     {
       "name": "russian_normative_recipes_v22_5_row_nutrients_part1.xlsx",
       "sha256": "72a70f31b6b59454a94d78b73bdf2d43119f04799b266773bb34917e9cb3961e",
-      "use": "relationship/variant inventory and demand counting only; no nutrition authority"
+      "use": "raw relationship/calculation-row extraction only; nutrient values not production authority"
     },
     {
       "name": "russian_normative_recipes_v22_5_row_nutrients_part2.xlsx",
       "sha256": "5603956719b07aeeb93d4b348d08796dc23fc9b2a4f5a6b828da2619a576f9ae",
-      "use": "relationship/variant inventory and demand counting only; no nutrition authority"
+      "use": "raw relationship/calculation-row extraction only; nutrient values not production authority"
     },
     {
       "name": "russian_normative_recipes_v22_5_row_nutrients_part3.xlsx",
       "sha256": "7678d809f5ea1c68e1521d8460f213412f7fab13074ea45d9ce856fc37d4c11e",
-      "use": "relationship/variant inventory and demand counting only; no nutrition authority"
+      "use": "raw relationship/calculation-row extraction only; nutrient values not production authority"
     },
     {
       "name": "russian_normative_recipes_v22_5_row_nutrients_part4.xlsx",
       "sha256": "06bd3be3bf5c7b923808df08285032ee27d823f970e7ce047e4c56a6c8d0eb56",
-      "use": "relationship/variant inventory and demand counting only; no nutrition authority"
+      "use": "raw relationship/calculation-row extraction only; nutrient values not production authority"
     }
   ],
-  "authority_note": "External workbook nutrient values are not promoted. Merged PR #39 is the accepted identity/readiness baseline."
+  "missing_artifact_effect": "Full row-level equality between v22.5 relationship rows and v22.13 relationship rows cannot be claimed. v22.5 candidate rows match v22.13 CalcRows and accepted PR39 aggregate mapping counts; extra non-calc v22.13 relationship rows remain an explicit compatibility blocker.",
+  "missing_source_artifacts": [
+    "russian_normative_recipes_v22_13_row_nutrients_part1.xlsx",
+    "russian_normative_recipes_v22_13_row_nutrients_part2.xlsx",
+    "russian_normative_recipes_v22_13_row_nutrients_part3.xlsx",
+    "russian_normative_recipes_v22_13_row_nutrients_part4.xlsx"
+  ],
+  "production_nutrition_promotion": "NONE",
+  "repository": {
+    "accepted_mapping_checkpoint_sha256": "a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97",
+    "accepted_mapping_pr": 39,
+    "base_main": "d8c76a64483e3d5814e702be33c12cbe2e144160",
+    "mapping_input_contract": [
+      "data/curation/v22-13-map-a/recipe-candidates-part*.csv",
+      "data/curation/v22-13-map-a/ingredient-mapping-part*.csv"
+    ],
+    "mapping_rows_loaded": {
+      "candidate_rows_total_from_provided_shards": 68,
+      "ingredient_mapping_rows_total_from_provided_shards": 96,
+      "relevant_candidate_rows": 68,
+      "relevant_external_identity_rows": 96
+    }
+  }
 }
