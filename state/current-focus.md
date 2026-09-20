@@ -88,8 +88,9 @@ manual `workflow_dispatch` operation that:
 Only regenerated package outputs may be retained as CI artifacts. Raw source
 bytes remain operator-managed external evidence.
 
-Current heavy verification for generator/generated-package bytes at
-`2901d39465bde05179161e897b0e99b213bf604a`:
+Current heavy verification applies to the generator/generated-package bytes
+finalized on branch head `78c81ff7f55c6878be9112b75f766c78fe73c639` before the following state-only
+finalization commits:
 
 - exact repository mapping/nutrition inputs restored byte-for-byte;
 - raw XLSX per-file hashes enforced by the generator: PASS;
