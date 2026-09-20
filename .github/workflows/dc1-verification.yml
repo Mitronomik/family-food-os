@@ -28,6 +28,7 @@ env:
   DC1_PACKAGE: data/curation/data-corpus-v1-dc1
   DC1_MAPPING_DIR: data/curation/v22-13-map-a
   DC1_NUTRITION_SEED: data/seed/food_ingredients/nutrition.csv
+  DC1_SOURCE_BUNDLE_SHA256: 5cc8e4d1d86a1f53b444742c06a2f9e7a509f8701438ace6591bfe7a3e5a88e6
 
 jobs:
   package-verification:
@@ -136,7 +137,7 @@ jobs:
 
   full-rebuild:
     name: full-rebuild-from-source-bundle
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
     needs: package-verification
     runs-on: ubuntu-latest
     steps:
@@ -162,22 +163,38 @@ jobs:
       - name: Download and authenticate source bundle
         shell: bash
         env:
-          SOURCE_BUNDLE_URL: ${{ inputs.source_bundle_url }}
-          SOURCE_BUNDLE_SHA256: ${{ inputs.source_bundle_sha256 }}
+          PR_SOURCE_BUNDLE_URL: ${{ secrets.DC1_SOURCE_BUNDLE_URL }}
+          DISPATCH_SOURCE_BUNDLE_URL: ${{ inputs.source_bundle_url }}
+          DISPATCH_SOURCE_BUNDLE_SHA256: ${{ inputs.source_bundle_sha256 }}
         run: |
           set -euo pipefail
-          if [[ ! "$SOURCE_BUNDLE_URL" =~ ^https:// ]]; then
-            echo 'source_bundle_url must use HTTPS' >&2
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            source_bundle_url="$DISPATCH_SOURCE_BUNDLE_URL"
+            source_bundle_sha256="$DISPATCH_SOURCE_BUNDLE_SHA256"
+          else
+            source_bundle_url="$PR_SOURCE_BUNDLE_URL"
+            source_bundle_sha256="$DC1_SOURCE_BUNDLE_SHA256"
+          fi
+
+          if [[ -z "$source_bundle_url" ]]; then
+            echo 'DC1_SOURCE_BUNDLE_URL repository secret is required for PR full rebuild verification.' >&2
             exit 1
           fi
-          if [[ ! "$SOURCE_BUNDLE_SHA256" =~ ^[0-9a-fA-F]{64}$ ]]; then
-            echo 'source_bundle_sha256 must be exactly 64 hexadecimal characters' >&2
+          if [[ ! "$source_bundle_url" =~ ^https:// ]]; then
+            echo 'source bundle URL must use HTTPS' >&2
             exit 1
           fi
-          curl --fail --show-error --silent --location             --proto '=https' --tlsv1.2             "$SOURCE_BUNDLE_URL"             --output /tmp/dc1-source-bundle.zip
+          if [[ ! "$source_bundle_sha256" =~ ^[0-9a-fA-F]{64}$ ]]; then
+            echo 'source bundle SHA-256 must be exactly 64 hexadecimal characters' >&2
+            exit 1
+          fi
+          curl --fail --show-error --silent --location \
+            --proto '=https' --tlsv1.2 \
+            "$source_bundle_url" \
+            --output /tmp/dc1-source-bundle.zip
           actual="$(sha256sum /tmp/dc1-source-bundle.zip | awk '{print $1}')"
-          if [[ "${actual,,}" != "${SOURCE_BUNDLE_SHA256,,}" ]]; then
-            echo "source bundle SHA-256 mismatch: expected $SOURCE_BUNDLE_SHA256 got $actual" >&2
+          if [[ "${actual,,}" != "${source_bundle_sha256,,}" ]]; then
+            echo "source bundle SHA-256 mismatch: expected $source_bundle_sha256 got $actual" >&2
             exit 1
           fi
 
