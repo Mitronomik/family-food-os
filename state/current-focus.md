@@ -1,29 +1,60 @@
 # Current focus
 
-Updated:2026-09-20. Accepted main base:
-`a9472c2a0bb0534b70b41c541aa0ac9b4cb26ba0` (PR73).
+Updated: `2026-09-20`.
 
-The user explicitly approved Russian calculation/accounting methodologies and
-adaptation of the rest of the nutrition chain. Current bounded implementation:
-versioned Russian methodology domain and internal service operations.
+## Accepted state
 
-Implemented: source-native available carbohydrates with method preservation;
-strict/explicit published-zero-estimate policies; held/missing distinction;
-MR2021 appendix3 energy component accounting; reviewed group-reference selector;
-unit/definition-safe comparison; pinned ATOMIC/vector read integration and
-household-scoped optional Russian reference service.
+PR74 is merged at `4c9598b623b9042924bb1f8d864c56d3d0a407c4`.
+PR75 is synchronized with that accepted main state.
 
-See [methodology contract](../docs/family-food/russian-nutrition-methodologies.md).
-322 affected/new regression tests pass; real SQLite read path and AI=false tested.
-Five locked Russian source profiles were evaluated under both policies locally;
-no book numbers published in Git and no canonical profiles imported.
+On 2026-09-20 the user explicitly confirmed authorization to implement the PR75
+Russian nutrition methodology layer and adapt the nutrition service toward a
+working/effective state. The same decision explicitly approves the opt-in
+`RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1` policy.
 
-PR74 remains a separate open preparation PR; this branch starts directly from
-accepted main. Do not assume PR74 merged or changes profile representation.
+SQLite head remains `0032_meal_plan_serving`; reserved
+`0033_recipe_template_catalogue` remains unchanged.
 
-Remaining authorized dependencies: partial-profile persistence and new registry
-version, publication/review of exact Russian reference rows and food profiles,
-then explicit methodology selection in Planner/API/UI. These are not enabled by
-this internal calculation-layer PR. Existing V1 defaults/history and schema0032
-remain unchanged;0033 stays reserved. No clinical, Retail or live production
-publication. Stop for PR review; no autonomous merge.
+## Current authorized boundary
+
+PR75 implements an explicit, versioned Russian methodology/internal-service layer:
+
+- source-native available carbohydrate remains distinct from total carbohydrate;
+- `RU_SOURCE_NATIVE_STRICT_V1` keeps below-detection values unavailable;
+- `RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1` may interpret a literal printed
+  source zero that remains `below_detection` as numeric `0` only with
+  `estimated=true`, preserved censoring provenance, unknown detection limit and
+  explicit warnings;
+- the estimated-zero policy is not exact-zero authority, allergen absence or a
+  default Planner/API/UI truth without pinned methodology;
+- MR 2.3.1.0253-21 Appendix 3 energy coefficients are a separate versioned
+  calculation path; published energy remains separate;
+- Russian population references remain group references, not individualized or
+  clinical targets;
+- new services are explicit/opt-in and do not replace existing V1/NASEM defaults.
+
+PR75 now binds its five-profile methodology trial to accepted PR74 evidence:
+PR74 input/verification receipts, nonnumeric profile reviews and
+`BLOCKED_PENDING_RIGHTS_REVIEW`. Numeric source output remains outside Git.
+
+The numeric-free
+[trial receipt](../data/curation/russian-methodology/trial-verification-receipt.json)
+is the merge-review evidence. External local A/B trial hashes are not required
+for merge acceptance and do not establish publication rights.
+
+See
+[Russian methodology contract](../docs/family-food/russian-nutrition-methodologies.md).
+
+## Stop boundary
+
+Review/merge of PR75 does not authorize:
+
+- profile/schema migration or partial-profile persistence;
+- a new nutrient registry publication;
+- Book2002 source reuse or production profile publication;
+- Russian target-table publication;
+- Planner/API/UI default methodology changes;
+- DC3, DC4, Gate1-CLOSE or PR9.
+
+Those remain separately gated despite the approved PR75 calculation/service layer.
+No autonomous merge.
