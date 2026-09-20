@@ -5,7 +5,7 @@ from datetime import datetime
 from typing import Any
 from uuid import UUID
 
-from sqlalchemy import case, column, exists, func, insert, literal, or_, select, table, update
+from sqlalchemy import case, exists, func, insert, literal, or_, select, update
 from sqlalchemy.engine import Connection, RowMapping
 from sqlalchemy.exc import IntegrityError
 
@@ -14,6 +14,7 @@ from app.domain.food_ingredients import (
     FoodNutritionProfile,
     IngredientAlias,
     NutritionSourceObservation,
+    validate_nutrition_profile_observations,
 )
 from app.persistence.sqlalchemy_core.food_ingredient_tables import (
     food_ingredient_aliases_table,
@@ -257,17 +258,24 @@ class SqlAlchemyFoodNutritionProfileRepository:
     def __init__(self, connection: Connection) -> None:
         self._connection = connection
 
-    def add(self, profile: FoodNutritionProfile) -> None:
+    def add(
+        self,
+        profile: FoodNutritionProfile,
+        observations: tuple[NutritionSourceObservation, ...] = (),
+    ) -> None:
+        validated_observations = validate_nutrition_profile_observations(
+            profile, observations
+        )
         try:
             self._connection.execute(
                 insert(food_nutrition_profiles_table).values(
                     **_nutrition_values(profile)
                 )
             )
-            if profile.observations:
+            if validated_observations:
                 self._connection.execute(
                     insert(food_nutrition_profile_observations_table),
-                    [_observation_values(value) for value in profile.observations],
+                    [_observation_values(value) for value in validated_observations],
                 )
         except IntegrityError as exc:
             raise FoodCataloguePersistenceConflictError(
@@ -296,7 +304,7 @@ class SqlAlchemyFoodNutritionProfileRepository:
             .mappings()
             .one_or_none()
         )
-        return None if row is None else self._nutrition_from_row(row)
+        return None if row is None else _nutrition_from_row(row)
 
     def get_by_provenance(
         self,
@@ -318,7 +326,7 @@ class SqlAlchemyFoodNutritionProfileRepository:
             .mappings()
             .one_or_none()
         )
-        return None if row is None else self._nutrition_from_row(row)
+        return None if row is None else _nutrition_from_row(row)
 
     def get_current(self, food_ingredient_id: UUID) -> FoodNutritionProfile | None:
         row = (
@@ -332,7 +340,7 @@ class SqlAlchemyFoodNutritionProfileRepository:
             .mappings()
             .one_or_none()
         )
-        return None if row is None else self._nutrition_from_row(row)
+        return None if row is None else _nutrition_from_row(row)
 
     def clear_current(self, food_ingredient_id: UUID) -> None:
         self._connection.execute(
@@ -345,39 +353,18 @@ class SqlAlchemyFoodNutritionProfileRepository:
             .values(is_current=False)
         )
 
-
-    def _nutrition_from_row(
-        self, row: Mapping[str, Any] | RowMapping
-    ) -> FoodNutritionProfile:
-        # The same application code is used by upgrade/replay tests against older
-        # accepted migration prefixes. Before 0034 the observation table does not
-        # exist, and historical complete profiles correctly have no such rows.
-        migrations = table("schema_migrations", column("migration_id"))
-        partial_storage_available = (
-            self._connection.execute(
-                select(migrations.c.migration_id).where(
-                    migrations.c.migration_id == "0034_partial_nutrition_profiles"
-                )
-            ).first()
-            is not None
-        )
-        observations = ()
-        if partial_storage_available:
-            observations = tuple(
-                _observation_from_row(item)
-                for item in self._connection.execute(
-                    select(food_nutrition_profile_observations_table)
-                    .where(
-                        food_nutrition_profile_observations_table.c.profile_id
-                        == row["id"]
-                    )
-                    .order_by(
-                        food_nutrition_profile_observations_table.c.source_field,
-                        food_nutrition_profile_observations_table.c.id,
-                    )
-                ).mappings()
+    def list_observations(
+        self, profile_id: UUID
+    ) -> tuple[NutritionSourceObservation, ...]:
+        rows = self._connection.execute(
+            select(food_nutrition_profile_observations_table)
+            .where(food_nutrition_profile_observations_table.c.profile_id == profile_id)
+            .order_by(
+                food_nutrition_profile_observations_table.c.source_field,
+                food_nutrition_profile_observations_table.c.id,
             )
-        return _nutrition_from_row(row, observations)
+        ).mappings()
+        return tuple(_observation_from_row(row) for row in rows)
 
 
 def _escape_like(value: str) -> str:
@@ -494,10 +481,7 @@ def _observation_from_row(
     )
 
 
-def _nutrition_from_row(
-    row: Mapping[str, Any] | RowMapping,
-    observations: tuple[NutritionSourceObservation, ...] = (),
-) -> FoodNutritionProfile:
+def _nutrition_from_row(row: Mapping[str, Any] | RowMapping) -> FoodNutritionProfile:
     return FoodNutritionProfile(
         id=row["id"],
         food_ingredient_id=row["food_ingredient_id"],
@@ -515,5 +499,4 @@ def _nutrition_from_row(
         estimated=row["estimated"],
         is_current=row["is_current"],
         created_at=row["created_at"],
-        observations=observations,
     )
