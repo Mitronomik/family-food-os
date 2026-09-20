@@ -1,5 +1,25 @@
 # Handoff
 
+## PR75 Russian methodology sync — 2026-09-20
+
+PR74 is accepted at `4c9598b623b9042924bb1f8d864c56d3d0a407c4`; PR75 has been
+synchronized with that main state.
+
+The user explicitly confirmed authorization for the PR75 Russian methodology
+implementation and explicitly approved
+`RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1`. The policy is opt-in only:
+below-detection provenance and unknown detection limit remain, interpreted zero
+is estimated, and it is not exact-zero/allergen/default-Planner authority.
+
+PR75 trial evidence is now bound to accepted PR74 input/verification receipts and
+nonnumeric profile reviews. A numeric-free CI receipt owns merge-review evidence;
+the earlier external byte-identical trial claim is not required for acceptance.
+Source reuse remains blocked and no canonical profiles are imported.
+
+After PR75 review/merge, schema/profile persistence, registry publication,
+source-use approval, target-table publication and Planner/API/UI enablement remain
+separate gated work.
+
 ## Russian methodology layer — 2026-09-20
 
 User approved Russian method support and broader compatibility adaptation.
