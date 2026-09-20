@@ -106,10 +106,10 @@ food_nutrition_profiles_table = Table(
         nullable=False,
     ),
     Column("basis_grams", DecimalText(), nullable=False),
-    Column("kcal", DecimalText(), nullable=False),
-    Column("protein_g", DecimalText(), nullable=False),
-    Column("fat_g", DecimalText(), nullable=False),
-    Column("carbohydrates_g", DecimalText(), nullable=False),
+    Column("kcal", DecimalText(), nullable=True),
+    Column("protein_g", DecimalText(), nullable=True),
+    Column("fat_g", DecimalText(), nullable=True),
+    Column("carbohydrates_g", DecimalText(), nullable=True),
     Column("fiber_g", DecimalText(), nullable=True),
     Column("source_name", String, nullable=False),
     Column("source_id", String, nullable=False),
@@ -131,26 +131,75 @@ food_nutrition_profiles_table = Table(
         name="ck_food_nutrition_profiles_basis",
     ),
     CheckConstraint(
-        "CAST(kcal AS NUMERIC) >= 0 AND CAST(kcal AS NUMERIC) <= 1000",
+        "kcal IS NULL OR (CAST(kcal AS NUMERIC) >= 0 "
+        "AND CAST(kcal AS NUMERIC) <= 1000)",
         name="ck_food_nutrition_profiles_kcal",
     ),
     CheckConstraint(
-        "CAST(protein_g AS NUMERIC) >= 0 AND CAST(protein_g AS NUMERIC) <= 100",
+        "protein_g IS NULL OR (CAST(protein_g AS NUMERIC) >= 0 "
+        "AND CAST(protein_g AS NUMERIC) <= 100)",
         name="ck_food_nutrition_profiles_protein",
     ),
     CheckConstraint(
-        "CAST(fat_g AS NUMERIC) >= 0 AND CAST(fat_g AS NUMERIC) <= 100",
+        "fat_g IS NULL OR (CAST(fat_g AS NUMERIC) >= 0 "
+        "AND CAST(fat_g AS NUMERIC) <= 100)",
         name="ck_food_nutrition_profiles_fat",
     ),
     CheckConstraint(
-        "CAST(carbohydrates_g AS NUMERIC) >= 0 "
-        "AND CAST(carbohydrates_g AS NUMERIC) <= 100",
+        "carbohydrates_g IS NULL OR (CAST(carbohydrates_g AS NUMERIC) >= 0 "
+        "AND CAST(carbohydrates_g AS NUMERIC) <= 100)",
         name="ck_food_nutrition_profiles_carbohydrates",
     ),
     CheckConstraint(
         "fiber_g IS NULL OR (CAST(fiber_g AS NUMERIC) >= 0 "
         "AND CAST(fiber_g AS NUMERIC) <= 100)",
         name="ck_food_nutrition_profiles_fiber",
+    ),
+)
+
+food_nutrition_profile_observations_table = Table(
+    "food_nutrition_profile_observations",
+    food_catalogue_metadata,
+    Column("id", entity_uuid_type(), primary_key=True, nullable=False),
+    Column(
+        "profile_id",
+        entity_uuid_type(),
+        ForeignKey("food_nutrition_profiles.id", ondelete="RESTRICT"),
+        nullable=False,
+    ),
+    Column("source_field", String, nullable=False),
+    Column("state", String, nullable=False),
+    Column("source_literal", String, nullable=True),
+    Column("method_reference", String, nullable=True),
+    Column("source_locator", String, nullable=False),
+    Column("created_at", UTCDateTime(), nullable=False),
+    UniqueConstraint(
+        "profile_id",
+        "source_field",
+        name="uq_food_nutrition_profile_observation_field",
+    ),
+    CheckConstraint(
+        "source_field IN ('kcal', 'protein_g', 'fat_g', 'carbohydrates_g', 'fiber_g')",
+        name="ck_food_nutrition_profile_observation_field",
+    ),
+    CheckConstraint(
+        "state IN ('value', 'missing', 'below_detection', 'method_incompatible')",
+        name="ck_food_nutrition_profile_observation_state",
+    ),
+    CheckConstraint(
+        "(state = 'missing' AND source_literal IS NULL) OR "
+        "(state != 'missing' AND source_literal IS NOT NULL "
+        "AND length(source_literal) > 0)",
+        name="ck_food_nutrition_profile_observation_literal",
+    ),
+    CheckConstraint(
+        "state != 'method_incompatible' OR "
+        "(method_reference IS NOT NULL AND length(trim(method_reference)) > 0)",
+        name="ck_food_nutrition_profile_observation_method",
+    ),
+    CheckConstraint(
+        "length(trim(source_locator)) > 0",
+        name="ck_food_nutrition_profile_observation_locator",
     ),
 )
 
@@ -182,6 +231,11 @@ Index(
     "idx_food_ingredient_aliases_ingredient",
     food_ingredient_aliases_table.c.food_ingredient_id,
     food_ingredient_aliases_table.c.alias_key,
+)
+Index(
+    "idx_food_nutrition_profile_observations_profile",
+    food_nutrition_profile_observations_table.c.profile_id,
+    food_nutrition_profile_observations_table.c.source_field,
 )
 Index(
     "idx_food_nutrition_profiles_ingredient_current",
