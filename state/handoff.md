@@ -84,8 +84,8 @@ Current reconciliation:
 - safe publication-branch split: 5 simple / 63 review-required;
 - 33 existing mappings have exact current USDA FDC profile provenance identified,
   but recipe-form suitability remains review-required;
-- 28 non-existing identities have an official source-family candidate with exact
-  record still unpinned;
+- 28 non-existing identities have a preferred source-family search target;
+  exact source presence, record identity and form compatibility remain unverified;
 - 35 identities are blocked on identity/form semantics before exact authority
   assignment.
 
@@ -111,7 +111,8 @@ Recorded blockers include:
 - 63 candidate families needing variant/choice/optional/boundary/compatibility/
   semantic review;
 - all 33 existing profiles still need exact recipe-form suitability review;
-- candidate source-family assignment is not exact-record authority closure;
+- preferred source-family search targets are not evidence that a compatible
+  source record exists and are not exact-record authority closure;
 - assortment gaps in the preserved 68-family funnel.
 
 ## Verification evidence
@@ -129,26 +130,30 @@ Current review-fix verification:
 - committed adversarial harness:
   `scripts/test_data_corpus_v1_dc1.py`.
 
-Accepted heavy verification for the current generator/generated-package bytes:
+Current heavy verification for the generator/generated-package bytes at
+`2901d39465bde05179161e897b0e99b213bf604a`:
 
-- revision `e5f8ce41b2e6bdcfb961f44a7fb67d513de2d7c9`;
-- DC1 corpus verification run #20 / `35503379105`;
-- Python compile + Ruff: PASS;
-- committed package checksum/validator/adversarial suite: PASS;
-- authenticated source bundle/file-set/hash validation: PASS;
-- two independent full rebuilds: PASS;
-- build A == build B: PASS;
-- regenerated package == committed package: PASS.
+- exact repository PR39 mapping inputs restored byte-for-byte: PASS;
+- exact production nutrition seed restored byte-for-byte: PASS;
+- raw XLSX generator source-hash enforcement: PASS;
+- build A: PASS;
+- build B: PASS;
+- validator A/B: PASS;
+- 15-case adversarial suite: PASS;
+- build A == build B: PASS.
 
-Subsequent delivery changes are workflow/state governance only and do not alter
-the generator or generated package bytes covered by that heavy evidence.
+The generated package committed through `2901d394...` is the output of that
+current generator. Subsequent delivery changes are state-only and do not alter
+the generator or generated package bytes covered by this evidence.
 
 Raw source XLSX bytes are operator-managed external evidence. Exact required
-filenames/hashes are recorded in `source-artifacts.json`; Actions artifacts are
-ephemeral audit copies only. Automatic PR CI runs package verification, while
-full raw-source rebuild is manual `workflow_dispatch` against an explicit
-`target_ref`, using the temporary authenticated URL only through the
-`DC1_SOURCE_BUNDLE_URL` repository secret.
+filenames/hashes are recorded in `source-artifacts.json`. The ZIP/container
+hash is diagnostic only; canonical source identity is the exact file set plus
+per-file SHA-256. The raw source ZIP must not be uploaded as a GitHub Actions
+artifact in this public repository. Automatic PR CI runs package verification;
+full raw-source rebuild is manual `workflow_dispatch` against explicit
+`target_ref`, using the temporary authenticated URL only through
+`DC1_SOURCE_BUNDLE_URL`.
 
 Final Docs verification and automatic package verification must be GREEN on the
 review head before merge.
