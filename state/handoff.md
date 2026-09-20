@@ -29,9 +29,14 @@ DC2, DC3, DC4, Gate1-CLOSE and PR9 are NOT STARTED.
 
 ## Recovery checkpoint
 
-The inconsistent pre-rebuild GitHub package is preserved unchanged under:
+The inconsistent pre-rebuild GitHub package is preserved for recovery under:
 
 `data/curation/data-corpus-v1-dc1/recovery/pre-rebuild-b7bc19e8881ddc90/`
+
+The exact original pre-rebuild bytes remain available at commit
+`b7bc19e8881ddc90b95bd8d13c75e72ee4623295`. The copied recovery README was
+later whitespace-normalized only for repository Docs verification; its metrics/data
+content was not changed.
 
 Known pre-rebuild commit:
 
@@ -124,12 +129,29 @@ Current review-fix verification:
 - committed adversarial harness:
   `scripts/test_data_corpus_v1_dc1.py`.
 
-The current runtime cannot resolve `github.com`, so the updated generator,
-validator and adversarial harness could not be executed from a fresh local
-checkout after these review fixes. Do not reuse the earlier pre-fix py_compile /
-double-build receipts as final-head execution evidence.
+Accepted heavy verification for the current generator/generated-package bytes:
 
-Final GitHub Docs verification must be GREEN on the exact PR head before merge.
+- revision `e5f8ce41b2e6bdcfb961f44a7fb67d513de2d7c9`;
+- DC1 corpus verification run #20 / `35503379105`;
+- Python compile + Ruff: PASS;
+- committed package checksum/validator/adversarial suite: PASS;
+- authenticated source bundle/file-set/hash validation: PASS;
+- two independent full rebuilds: PASS;
+- build A == build B: PASS;
+- regenerated package == committed package: PASS.
+
+Subsequent delivery changes are workflow/state governance only and do not alter
+the generator or generated package bytes covered by that heavy evidence.
+
+Raw source XLSX bytes are operator-managed external evidence. Exact required
+filenames/hashes are recorded in `source-artifacts.json`; Actions artifacts are
+ephemeral audit copies only. Automatic PR CI runs package verification, while
+full raw-source rebuild is manual `workflow_dispatch` against an explicit
+`target_ref`, using the temporary authenticated URL only through the
+`DC1_SOURCE_BUNDLE_URL` repository secret.
+
+Final Docs verification and automatic package verification must be GREEN on the
+review head before merge.
 
 ## Scope boundary
 
