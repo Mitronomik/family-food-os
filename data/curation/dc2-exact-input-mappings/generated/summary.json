@@ -1,0 +1,14 @@
+{
+  "affected_routes": 4,
+  "by_form": {
+    "school2022:input-form:beet": 12,
+    "school2022:input-form:cabbage": 24,
+    "school2022:input-form:carrot": 69,
+    "school2022:input-form:rice": 17,
+    "school2022:input-form:sugar": 89
+  },
+  "nutrient_calculation_ready": 0,
+  "occurrences": 211,
+  "publication_ready": 0,
+  "source_table_hold_occurrences": 2
+}

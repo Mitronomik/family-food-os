@@ -1,0 +1,22 @@
+[
+  {
+    "demand_id": "ru-school2022:recipe:54-8с:row:3:demand:1",
+    "kind": "suspected_source_duplicate_prefix"
+  },
+  {
+    "demand_id": "ru-school2022:recipe:54-9с:row:3:demand:1",
+    "kind": "suspected_source_duplicate_prefix"
+  },
+  {
+    "demand_id": "ru-school2022:recipe:54-20м:row:3:demand:1",
+    "kind": "broth_aromatic_retention_unknown"
+  },
+  {
+    "demand_id": "ru-school2022:recipe:54-43м:row:3:demand:1",
+    "kind": "broth_aromatic_retention_unknown"
+  },
+  {
+    "demand_id": "ru-school2022:recipe:54-8г:row:1:demand:1",
+    "kind": "preserve_exact_mass_ratio"
+  }
+]

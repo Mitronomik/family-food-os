@@ -1,0 +1,12 @@
+{
+  "canonical_retention_authority_granted": false,
+  "id": "school2022:source-published-nutrition-heat-loss:v1",
+  "source_generalized_heat_loss_reuse_for_independent_raw_input_calculation_allowed": false,
+  "source_id": "ru-school2022",
+  "source_locator": {
+    "pdf_page": 4,
+    "section": "1.5"
+  },
+  "source_published_nutrition_heat_loss_status": "generalized_heat_losses_already_accounted_in_source_published_values",
+  "source_published_values_second_heat_loss_application_allowed": false
+}

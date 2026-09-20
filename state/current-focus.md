@@ -4,34 +4,40 @@ Updated: `2026-09-20`.
 
 ## Accepted state
 
-PR70 and PR71 are merged. Accepted base:
-`9b1d5c73da4f1d779336a35e0e7e2c2d32363e85`.
-PR6/PR7/PR8, DC0 and DC1 recovery/reconciliation evidence are accepted.
-No production DC2/DC3 publication, DC4, Gate1-CLOSE or PR9 completion is implied.
+PR72 is merged at `0322d0a74a0edf53802adc394446011a7d8acc06`.
+PR73 contains the bounded `dc2-exact-input-v1` evidence review for exact
+School2022 input forms and mass safeguards. On 2026-09-20 the user explicitly
+authorized correction of all PR73 blockers and completion of this bounded review.
+This does not authorize merge, production publication or the next milestone.
+
 SQLite head remains `0032_meal_plan_serving`; reserved
 `0033_recipe_template_catalogue` remains unchanged.
 
 ## Current authorized boundary
 
-The bounded first DC2 source/form review package is complete in the PR #72
-changeset. It reviews `DC2-REVIEW-001`; it does not publish production data or
-change canonical nutrient/rights authority. See
-[first-batch review](../data/curation/dc2-first-batch-review/README.md).
+The PR73 exact-input review package is complete/review-ready:
 
-25 groups cover 1532 source occurrences, 24 book candidates and 14 prior visual
-profiles. Group-level decisions are not 1532 individually accepted mappings.
-359 routes are affected; 91 have all dependencies in review scope; 0 are newly
-production-ready. Required policy and source decisions remain explicit in
-[publication conditions](../data/curation/dc2-first-batch-review/publication-decisions.md).
+- 211 source occurrences across sugar, carrot, cabbage, beet and polished rice;
+- four execution routes remain held because two source rows are suspicious;
+- canonical FoodIngredient IDs remain unassigned;
+- nutrient equivalence and calculation readiness remain false;
+- retained fraction remains unknown;
+- source net mass remains normative accounting evidence, not certified physical
+  pre-heat mass;
+- School2022 §1.5 heat-loss semantics are recorded separately in
+  `source-nutrition-policy.json` and grant no canonical retention authority.
 
-Review/merge of this evidence package does not authorize production publication
-or the next milestone.
+See [exact mappings](../data/curation/dc2-exact-input-mappings/README.md).
+
+Review/merge of this evidence package does not authorize a DC2 production
+publication payload.
 
 ## Stop boundary
 
-After PR #72 review/merge, stop pending explicit scope for closing the concrete
-form/source/rights/nutrient-method conditions and preparing a separately reviewed
-DC2 publication payload through existing profile/vector/ATOMIC contracts.
+After PR73 review/merge, stop pending explicit scope for exact canonical
+FoodIngredient/profile equivalence, nutrient-method decisions, source reuse
+scope and an independently reviewed DC2 publication payload through existing
+profile/vector/ATOMIC contracts.
 
 Do not start DC3, DC4, Gate1-CLOSE, PR9/Shopping, Retail, AI,
-Auth/PostgreSQL or generalized ingestion automatically.
+Auth/PostgreSQL, schema migration or generalized ingestion automatically.

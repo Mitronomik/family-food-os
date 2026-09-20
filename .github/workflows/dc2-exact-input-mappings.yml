@@ -1,0 +1,20 @@
+name: DC2 exact input mappings
+on:
+  pull_request:
+    paths:
+      - 'data/curation/dc2-exact-input-mappings/**'
+      - 'data/curation/dc2-first-batch-review/generated/occurrence-reviews.json'
+      - 'data/curation/corpus-v03-reconciliation/generated/route-index.jsonl'
+      - 'scripts/*dc2_exact_input_mappings.py'
+      - '.github/workflows/dc2-exact-input-mappings.yml'
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/test_dc2_exact_input_mappings.py

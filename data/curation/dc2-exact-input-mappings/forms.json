@@ -1,0 +1,70 @@
+[
+  {
+    "book_candidate_id": "book2002:p163:row1",
+    "book_source_code": "10.1.1",
+    "canonical_food_id": null,
+    "display_name_ru": "Сахар-песок",
+    "evidence_pdf_pages": [
+      4,
+      271
+    ],
+    "expected_occurrences": 89,
+    "id": "school2022:input-form:sugar",
+    "nutrient_equivalence_accepted": false,
+    "source_input_form": "dry_granulated"
+  },
+  {
+    "book_candidate_id": "book2002:p139:row5",
+    "book_source_code": "8.1.5.1",
+    "canonical_food_id": null,
+    "display_name_ru": "Морковь",
+    "evidence_pdf_pages": [
+      4
+    ],
+    "expected_occurrences": 69,
+    "id": "school2022:input-form:carrot",
+    "nutrient_equivalence_accepted": false,
+    "source_input_form": "raw_root"
+  },
+  {
+    "book_candidate_id": "book2002:p131:row1",
+    "book_source_code": "8.1.2.1",
+    "canonical_food_id": null,
+    "display_name_ru": "Капуста белокочанная",
+    "evidence_pdf_pages": [
+      4
+    ],
+    "expected_occurrences": 24,
+    "id": "school2022:input-form:cabbage",
+    "nutrient_equivalence_accepted": false,
+    "source_input_form": "fresh_head"
+  },
+  {
+    "book_candidate_id": "book2002:p141:row1",
+    "book_source_code": "8.1.5.12",
+    "canonical_food_id": null,
+    "display_name_ru": "Свёкла",
+    "evidence_pdf_pages": [
+      4
+    ],
+    "expected_occurrences": 12,
+    "id": "school2022:input-form:beet",
+    "nutrient_equivalence_accepted": false,
+    "source_input_form": "raw_root"
+  },
+  {
+    "book_candidate_id": "book2002:p121:row19",
+    "book_source_code": "6.5.3",
+    "canonical_food_id": null,
+    "display_name_ru": "Крупа рисовая шлифованная",
+    "evidence_pdf_pages": [
+      4,
+      262,
+      271
+    ],
+    "expected_occurrences": 17,
+    "id": "school2022:input-form:rice",
+    "nutrient_equivalence_accepted": false,
+    "source_input_form": "dry_polished"
+  }
+]
