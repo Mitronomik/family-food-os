@@ -5,10 +5,8 @@ import argparse
 import csv
 import hashlib
 import json
-import math
 import re
 from collections import Counter, defaultdict
-from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Iterable
@@ -23,6 +21,9 @@ EXPECTED_ELIGIBLE_ROWS = 6177
 EXPECTED_CANDIDATES = 68
 EXPECTED_RELEVANT_ROWS = 991
 EXPECTED_EXTERNAL_IDS = 96
+EXPECTED_PR39_CANDIDATES = 350
+EXPECTED_PR39_MAPPINGS = 363
+EXPECTED_PRODUCTION_NUTRITION_ROWS = 183
 
 SOURCE_HASHES = {
     "russian_normative_recipes_v22_5_row_nutrients_part1.xlsx": "72a70f31b6b59454a94d78b73bdf2d43119f04799b266773bb34917e9cb3961e",
@@ -186,38 +187,77 @@ def map_state_bucket(mapping: dict[str, str]) -> str:
     die(f"unknown map_state {state}")
 
 
-def authority_strategy(mapping: dict[str, str], semantic_status: str) -> tuple[str, str, str]:
+def authority_assignment(
+    mapping: dict[str, str],
+    semantic_status: str,
+    profile: dict[str, str] | None,
+) -> dict[str, str]:
     state = mapping["map_state"]
     tier = mapping["external_exactness_tier"]
+    name = mapping["external_name"]
+
     if state in EXISTING_STATES:
-        return (
-            "REUSE_ACCEPTED_IDENTITY_MAPPING",
-            "CURRENT_PROFILE_SUITABILITY_NOT_REVALIDATED_IN_DC1",
-            "CURRENT_REPOSITORY_TRUTH",
-        )
+        if profile is None:
+            die(f"accepted mapping {mapping['external_ingredient_id']} has no current production nutrition profile")
+        source = f"{profile['source_name']}:{profile['source_id']}@{profile['source_version']}:{profile['source_data_type']}"
+        return {
+            "authority_source_candidate": source,
+            "authority_record_candidate": profile["source_id"],
+            "authority_assignment_status": "EXISTING_PROFILE_PROVENANCE_IDENTIFIED_FORM_REVIEW_REQUIRED",
+            "authority_search_strategy": "",
+            "profile_suitability_for_recipe_form": "PROFILE_PRESENT_FORM_REVIEW_REQUIRED",
+            "rights_status": "OPEN_REUSE_CURRENT_PROFILE" if profile["source_name"] == "USDA_FDC" else "CURRENT_PROFILE_RIGHTS_REQUIRE_REVIEW",
+        }
+
     if semantic_status == "V22_5_V22_13_LABEL_DIFFERENCE_REVIEW_REQUIRED":
-        return (
-            "IDENTITY_SEMANTICS_REVIEW_THEN_SOURCE_VERIFICATION",
-            "NOT_VERIFIED_DC1",
-            "PENDING_SELECTED_SOURCE_REVIEW",
-        )
+        return {
+            "authority_source_candidate": "",
+            "authority_record_candidate": "",
+            "authority_assignment_status": "BLOCKED_IDENTITY_SEMANTICS_BEFORE_AUTHORITY",
+            "authority_search_strategy": "RESOLVE_IDENTITY_SEMANTICS_THEN_ASSIGN_AUTHORITY",
+            "profile_suitability_for_recipe_form": "NOT_APPLICABLE_NO_ACCEPTED_PROFILE",
+            "rights_status": "UNRESOLVED_UNTIL_IDENTITY_REVIEW",
+        }
+
     if state == "FORM_SPLIT_CANDIDATE":
-        return (
-            "FORM_DECISION_THEN_SOURCE_VERIFICATION",
-            "NOT_VERIFIED_DC1",
-            "PENDING_SELECTED_SOURCE_REVIEW",
-        )
+        return {
+            "authority_source_candidate": "",
+            "authority_record_candidate": "",
+            "authority_assignment_status": "BLOCKED_FORM_SELECTION_BEFORE_AUTHORITY",
+            "authority_search_strategy": "SELECT_EXACT_FORM_THEN_ASSIGN_AUTHORITY",
+            "profile_suitability_for_recipe_form": "NOT_APPLICABLE_NO_ACCEPTED_PROFILE",
+            "rights_status": "UNRESOLVED_UNTIL_FORM_SELECTION",
+        }
+
     if tier == "C_PROXY":
-        return (
-            "IDENTITY_DECISION_THEN_SOURCE_VERIFICATION",
-            "NOT_VERIFIED_DC1",
-            "PENDING_SELECTED_SOURCE_REVIEW",
-        )
-    return (
-        "PIN_COMPATIBLE_OFFICIAL_SOURCE",
-        "NOT_VERIFIED_DC1",
-        "PENDING_SELECTED_SOURCE_REVIEW",
-    )
+        return {
+            "authority_source_candidate": "",
+            "authority_record_candidate": "",
+            "authority_assignment_status": "BLOCKED_PROXY_IDENTITY_BEFORE_AUTHORITY",
+            "authority_search_strategy": "RESOLVE_PROXY_IDENTITY_THEN_ASSIGN_AUTHORITY",
+            "profile_suitability_for_recipe_form": "NOT_APPLICABLE_NO_ACCEPTED_PROFILE",
+            "rights_status": "UNRESOLVED_UNTIL_IDENTITY_REVIEW",
+        }
+
+    latin_only = bool(re.search(r"[A-Za-z]", name)) and not bool(re.search(r"[А-Яа-яЁё]", name))
+    if latin_only:
+        return {
+            "authority_source_candidate": "USDA_FDC_OFFICIAL_DATASET",
+            "authority_record_candidate": "",
+            "authority_assignment_status": "CANDIDATE_SOURCE_FAMILY_IDENTIFIED_EXACT_RECORD_UNPINNED",
+            "authority_search_strategy": "PIN_EXACT_USDA_FDC_RECORD_AND_FORM",
+            "profile_suitability_for_recipe_form": "NOT_APPLICABLE_NO_ACCEPTED_PROFILE",
+            "rights_status": "OPEN_REUSE_CANDIDATE_RECORD_UNPINNED",
+        }
+
+    return {
+        "authority_source_candidate": "FIC_FGBUN_2024_OFFICIAL_COMPOSITION_FAMILY",
+        "authority_record_candidate": "",
+        "authority_assignment_status": "CANDIDATE_SOURCE_FAMILY_IDENTIFIED_EXACT_RECORD_UNPINNED",
+        "authority_search_strategy": "PIN_EXACT_FIC_FGBUN_RECORD_AND_REVIEW_RIGHTS",
+        "profile_suitability_for_recipe_form": "NOT_APPLICABLE_NO_ACCEPTED_PROFILE",
+        "rights_status": "BLOCKED_PENDING_RIGHTS_REVIEW",
+    }
 
 
 def main() -> None:
@@ -228,7 +268,7 @@ def main() -> None:
     ap.add_argument("--v22-13-audit", required=True)
     ap.add_argument("--v22-13-manifest", required=True)
     ap.add_argument("--mapping-dir", required=True)
-    ap.add_argument("--nutrition-seed")
+    ap.add_argument("--nutrition-seed", required=True)
     ap.add_argument("--output", required=True)
     args = ap.parse_args()
 
@@ -239,7 +279,7 @@ def main() -> None:
     manifest13 = Path(args.v22_13_manifest)
     mapping_dir = Path(args.mapping_dir)
     out = Path(args.output)
-    nutrition_seed = Path(args.nutrition_seed) if args.nutrition_seed else None
+    nutrition_seed = Path(args.nutrition_seed)
 
     if len(row_shards) != 4:
         die(f"expected exactly 4 row shards, got {len(row_shards)}")
@@ -273,6 +313,20 @@ def main() -> None:
         die(f"missing accepted PR39 mapping CSV shards under {mapping_dir}")
     all_candidates = load_csv_objects(candidate_paths)
     all_mappings = load_csv_objects(mapping_paths)
+    if len(all_candidates) != EXPECTED_PR39_CANDIDATES:
+        die(f"full PR39 candidate package mismatch: expected {EXPECTED_PR39_CANDIDATES}, got {len(all_candidates)}")
+    if len(all_mappings) != EXPECTED_PR39_MAPPINGS:
+        die(f"full PR39 mapping package mismatch: expected {EXPECTED_PR39_MAPPINGS}, got {len(all_mappings)}")
+    mapping_summary_path = mapping_dir / "summary.json"
+    if not mapping_summary_path.exists():
+        die("missing accepted PR39 summary.json")
+    mapping_summary = json.loads(mapping_summary_path.read_text(encoding="utf-8"))
+    if mapping_summary.get("recipe_count") != EXPECTED_PR39_CANDIDATES:
+        die("PR39 summary recipe_count mismatch")
+    if mapping_summary.get("ingredient_identity_count") != EXPECTED_PR39_MAPPINGS:
+        die("PR39 summary ingredient_identity_count mismatch")
+    if mapping_summary.get("source_checkpoint_sha256") != EXPECTED_PR39_CHECKPOINT:
+        die("PR39 summary source checkpoint mismatch")
     lead_candidates = [r for r in all_candidates if r.get("mapping_class") in CANDIDATE_CLASSES]
     if len(lead_candidates) != EXPECTED_CANDIDATES:
         die(f"candidate universe mismatch: expected {EXPECTED_CANDIDATES}, got {len(lead_candidates)}")
@@ -285,6 +339,16 @@ def main() -> None:
     mapping_by_id = {r["external_ingredient_id"]: r for r in all_mappings}
     if len(mapping_by_id) != len(all_mappings):
         die("unexplained duplicate external_ingredient_id in accepted mapping input")
+
+    if not nutrition_seed.exists():
+        die(f"missing production nutrition seed: {nutrition_seed}")
+    nutrition_rows = load_csv_objects([nutrition_seed])
+    if len(nutrition_rows) != EXPECTED_PRODUCTION_NUTRITION_ROWS:
+        die(f"production nutrition seed row count mismatch: expected {EXPECTED_PRODUCTION_NUTRITION_ROWS}, got {len(nutrition_rows)}")
+    nutrition_by_code = {r["canonical_code"]: r for r in nutrition_rows}
+    if len(nutrition_by_code) != len(nutrition_rows):
+        die("duplicate canonical_code in production nutrition seed")
+    nutrition_seed_blob_sha1 = git_blob_sha1_bytes(nutrition_seed.read_bytes())
 
     # Read full raw XLSX row layer directly. Never use text-rendered spreadsheet prefixes.
     all_relationship_rows: list[dict[str, object]] = []
@@ -396,8 +460,8 @@ def main() -> None:
         if any(normalize_text(c) in {"sauce", "garnish"} for c in choices):
             boundary_reasons.append("CHOICE_GROUP_GARNISH_SAUCE_BOUNDARY")
 
-        simple = len(variants) == 1 and not choices and not optional_rows and not boundary_reasons
-        structural_status = "SINGLE_VARIANT_NO_EXPLICIT_ALTERNATIVE" if simple else "MULTI_OR_ALTERNATIVE_REVIEW_REQUIRED"
+        structural_simple = len(variants) == 1 and not choices and not optional_rows and not boundary_reasons
+        source_structure_status = "SINGLE_VARIANT_NO_EXPLICIT_ALTERNATIVE" if structural_simple else "MULTI_OR_ALTERNATIVE_STRUCTURE_REVIEW"
 
         # Per-variant mandatory set (non-optional, non-choice), and all alternatives union.
         per_variant_required: dict[str, set[str]] = {}
@@ -415,7 +479,6 @@ def main() -> None:
         choice_ids = {clean(r["ResolvedIngredientID"]) for r in rs if clean(r["ChoiceGroup"])}
         optional_ids = {clean(r["ResolvedIngredientID"]) for r in rs if clean(r["Optional"]).upper() == "YES"}
         alternative_only = all_union - common_required
-        selected_variant_required = next(iter(per_variant_required.values())) if simple else set()
 
         # v22.5 label vs accepted v22.13 reference label is a compatibility review signal, not an identity remap.
         semantic_review_ids = []
@@ -441,6 +504,14 @@ def main() -> None:
             if relationship_rows_13 == len(rs)
             else "CALC_ROWS_MATCH_V22_13_HAS_ADDITIONAL_NONCALC_RELATIONSHIPS"
         )
+        safe_simple = (
+            structural_simple
+            and compatibility_status == "CALC_ROWS_MATCH_RELATIONSHIP_ROWS_MATCH"
+            and not semantic_review_ids
+        )
+        variant_selection_status = "SIMPLE_SOURCE_BRANCH_CANDIDATE" if safe_simple else "REVIEW_REQUIRED"
+        selected_variant_required = next(iter(per_variant_required.values())) if safe_simple else set()
+
         compatibility_rows.append({
             "source_recipe_id": rid,
             "recipe_name": clean(rs[0]["RecipeName"]),
@@ -461,12 +532,12 @@ def main() -> None:
         if any(mapping_by_id[i]["map_state"] not in EXISTING_STATES | EXTENSION_STATES for i in all_union):
             die(f"candidate {rid} contains a mapping state outside DC1 lead contract")
 
-        if simple and not dc2_ids:
-            dc3_batch = "DC3-A_SIMPLE_NO_DC2_WRITE"
-        elif simple:
-            dc3_batch = "DC3-B_SIMPLE_AFTER_DC2"
+        if safe_simple and not dc2_ids:
+            dc3_batch = "DC3-A_CLEAN_BRANCH_EXISTING_PROFILE_REVIEW"
+        elif safe_simple:
+            dc3_batch = "DC3-B_CLEAN_BRANCH_AFTER_DC2"
         else:
-            dc3_batch = "DC3-C_VARIANT_BOUNDARY_REVIEW"
+            dc3_batch = "DC3-C_REVIEW_REQUIRED"
 
         candidate_output.append({
             "source_recipe_id": rid,
@@ -484,7 +555,8 @@ def main() -> None:
             "choice_groups": ordered_join(choices),
             "optional_row_count": len(optional_rows),
             "boundary_review_reasons": ordered_join(boundary_reasons),
-            "variant_selection_status": structural_status,
+            "source_structure_status": source_structure_status,
+            "variant_selection_status": variant_selection_status,
             "single_variant_required_ids": ordered_join(selected_variant_required),
             "common_required_across_variants_ids": ordered_join(common_required),
             "choice_group_ingredient_ids": ordered_join(choice_ids),
@@ -509,12 +581,7 @@ def main() -> None:
     for r in relevant_rows:
         source_rows_by_iid[clean(r["ResolvedIngredientID"])].append(r)
 
-    nutrition_codes = set()
-    if nutrition_seed:
-        with nutrition_seed.open(encoding="utf-8-sig", newline="") as f:
-            nutrition_codes = {r["canonical_code"] for r in csv.DictReader(f)}
-
-    simple_ids = {r["source_recipe_id"] for r in candidate_output if r["variant_selection_status"] == "SINGLE_VARIANT_NO_EXPLICIT_ALTERNATIVE"}
+    simple_ids = {r["source_recipe_id"] for r in candidate_output if r["variant_selection_status"] == "SIMPLE_SOURCE_BRANCH_CANDIDATE"}
     category_counts = Counter(r["category"] for r in candidate_output)
 
     for iid in sorted(external_ids_used):
@@ -540,19 +607,18 @@ def main() -> None:
         recipes = sorted({clean(r["SourceRecipeID"]) for r in rs}, key=lambda s: (int(s.split("-")[-1]), s))
         simple_recipes = sorted(set(recipes) & simple_ids, key=lambda s: (int(s.split("-")[-1]), s))
         input_mass = sum((decimal_value(r["Amount_g"], field=f"{iid}/Amount_g") for r in rs), Decimal(0))
-        search_strategy, profile_status, rights_status = authority_strategy(mapping, semantic_status)
         food_code = mapping["familyfoodos_food_code"]
-        if food_code and nutrition_seed:
-            profile_presence = "PRESENT_IN_PROVIDED_CURRENT_SEED_EXTRACT_NOT_FORM_REVALIDATED" if food_code in nutrition_codes else "NOT_PRESENT_IN_PROVIDED_SEED_EXTRACT_REVIEW_REQUIRED"
-        elif food_code:
-            profile_presence = "NOT_CHECKED_BY_GENERATOR"
+        profile = nutrition_by_code.get(food_code) if food_code else None
+        assignment = authority_assignment(mapping, semantic_status, profile)
+        if food_code:
+            profile_presence = "PRESENT_IN_REQUIRED_PRODUCTION_SEED" if profile is not None else "MISSING_REQUIRED_PRODUCTION_PROFILE"
         else:
             profile_presence = "NOT_APPLICABLE_NO_ACCEPTED_FOOD_MAPPING"
 
         # Proposed DC2 grouping is triage only, never publication approval.
         if mapping["map_state"] in EXISTING_STATES:
-            dc2_batch = "REUSE_NO_DC2_WRITE"
-        elif semantic_status == "V22_5_V22_13_LABEL_DIFFERENCE_REVIEW_REQUIRED" or mapping["map_state"] == "FORM_SPLIT_CANDIDATE" or mapping["external_exactness_tier"] == "C_PROXY":
+            dc2_batch = "REUSE_EXISTING_PROFILE_FORM_REVIEW"
+        elif assignment["authority_assignment_status"].startswith("BLOCKED_"):
             dc2_batch = "DC2-C_IDENTITY_FORM_REVIEW"
         elif len(recipes) >= 4 or len(simple_recipes) >= 2:
             dc2_batch = "DC2-A_HIGH_IMPACT"
@@ -577,11 +643,12 @@ def main() -> None:
             "semantic_compatibility_status": semantic_status,
             "accepted_identity_mapping_status": "REUSE_ACCEPTED_MAPPING" if mapping["map_state"] in EXISTING_STATES else "NO_ACCEPTED_FAMILYFOODOS_IDENTITY_YET",
             "current_profile_presence_status": profile_presence,
-            "profile_suitability_for_recipe_form": profile_status,
-            "authority_source_candidate": "CURRENT_REPOSITORY_PROFILE_PROVENANCE" if mapping["map_state"] in EXISTING_STATES else "",
-            "authority_source_verification_status": "NOT_REVALIDATED_FOR_THIS_RECIPE_SOURCE_FORM" if mapping["map_state"] in EXISTING_STATES else "NOT_SELECTED_OR_VERIFIED_DC1",
-            "authority_search_strategy": "" if mapping["map_state"] in EXISTING_STATES else search_strategy,
-            "rights_status": rights_status,
+            "profile_suitability_for_recipe_form": assignment["profile_suitability_for_recipe_form"],
+            "authority_source_candidate": assignment["authority_source_candidate"],
+            "authority_record_candidate": assignment["authority_record_candidate"],
+            "authority_assignment_status": assignment["authority_assignment_status"],
+            "authority_search_strategy": assignment["authority_search_strategy"],
+            "rights_status": assignment["rights_status"],
             "production_ready": "NO",
             "proposed_dc2_batch": dc2_batch,
         })
@@ -608,12 +675,12 @@ def main() -> None:
     assert_partition(dc2_groups, external_ids_used, "DC2")
     assert_partition(dc3_groups, candidate_ids, "DC3")
 
-    simple_candidates = [r for r in candidate_output if r["variant_selection_status"] == "SINGLE_VARIANT_NO_EXPLICIT_ALTERNATIVE"]
-    review_candidates = [r for r in candidate_output if r["variant_selection_status"] != "SINGLE_VARIANT_NO_EXPLICIT_ALTERNATIVE"]
-    if len(simple_candidates) != 26 or len(review_candidates) != 42:
-        die(f"structural variant classification drift: expected 26/42, got {len(simple_candidates)}/{len(review_candidates)}")
-    if any(r["proposed_dc3_batch"] != "DC3-C_VARIANT_BOUNDARY_REVIEW" for r in review_candidates):
-        die("a candidate with unresolved alternatives was assigned an exact/simple DC3 status")
+    simple_candidates = [r for r in candidate_output if r["variant_selection_status"] == "SIMPLE_SOURCE_BRANCH_CANDIDATE"]
+    review_candidates = [r for r in candidate_output if r["variant_selection_status"] == "REVIEW_REQUIRED"]
+    if len(simple_candidates) != 5 or len(review_candidates) != 63:
+        die(f"safe branch classification drift: expected 5/63, got {len(simple_candidates)}/{len(review_candidates)}")
+    if any(r["proposed_dc3_batch"] != "DC3-C_REVIEW_REQUIRED" for r in review_candidates):
+        die("a candidate with unresolved alternative/compatibility/semantic debt escaped review")
 
     existing_demands = [r for r in demand_rows if r["map_state"] in EXISTING_STATES]
     work_demands = [r for r in demand_rows if r["map_state"] in EXTENSION_STATES]
@@ -673,8 +740,8 @@ def main() -> None:
             "source_variant_structure": {
                 "one_source_variant": sum(r["source_variant_count"] == 1 for r in candidate_output),
                 "multiple_source_variants": sum(r["source_variant_count"] > 1 for r in candidate_output),
-                "single_variant_no_explicit_alternative": len(simple_candidates),
-                "multi_or_alternative_review_required": len(review_candidates),
+                "safe_simple_source_branch_candidate": len(simple_candidates),
+                "review_required": len(review_candidates),
             },
             "source_relationship_rows_v22_5": len(relevant_rows),
             "v22_13_extra_noncalc_relationship_gap_recipe_count": len(compat_gap),
@@ -707,15 +774,15 @@ def main() -> None:
         "dc3": {k: {"count": len(v), "source_recipe_ids": sorted(v, key=lambda s: (int(s.split('-')[-1]), s))} for k, v in sorted(dc3_groups.items())},
         "rules": {
             "dc2": {
-                "REUSE_NO_DC2_WRITE": "Accepted existing identity mapping; no DC2 write authorized by this package.",
+                "REUSE_EXISTING_PROFILE_FORM_REVIEW": "Accepted identity mapping and current profile provenance identified; exact recipe-form suitability must be reviewed before deciding whether any DC2 write is unnecessary.",
                 "DC2-A_HIGH_IMPACT": "Non-proxy/new identity with >=4 candidate families or >=2 structurally simple candidate families; source verification still required.",
                 "DC2-B_STANDARD_EXTENSION": "Other non-proxy new identities; source verification still required.",
                 "DC2-C_IDENTITY_FORM_REVIEW": "Form split, proxy, or v22.5/v22.13 label-difference item; identity/form semantics first.",
             },
             "dc3": {
-                "DC3-A_SIMPLE_NO_DC2_WRITE": "One source variant, no choice/optional/boundary signal, and no DC2 identity dependency. Still not production-ready.",
-                "DC3-B_SIMPLE_AFTER_DC2": "One source variant with no explicit alternative/boundary signal, but has DC2 identity dependency.",
-                "DC3-C_VARIANT_BOUNDARY_REVIEW": "Multiple variants, ChoiceGroup, optional row, or garnish/sauce boundary review required before any exact publication branch.",
+                "DC3-A_CLEAN_BRANCH_EXISTING_PROFILE_REVIEW": "Source structure, v22.5/v22.13 relationship count and semantic labels are clean, with no new identity dependency; existing profile/form review is still required.",
+                "DC3-B_CLEAN_BRANCH_AFTER_DC2": "Source structure, relationship count and semantic labels are clean, but at least one new/form identity still needs DC2 closure.",
+                "DC3-C_REVIEW_REQUIRED": "Variant, ChoiceGroup, optional, boundary, relationship-compatibility or semantic-label review is unresolved.",
             },
         },
     }
@@ -730,11 +797,18 @@ def main() -> None:
                 "data/curation/v22-13-map-a/ingredient-mapping-part*.csv",
             ],
             "mapping_rows_loaded": {
-                "candidate_rows_total_from_provided_shards": len(all_candidates),
-                "ingredient_mapping_rows_total_from_provided_shards": len(all_mappings),
+                "candidate_rows_total_from_full_pr39_package": len(all_candidates),
+                "ingredient_mapping_rows_total_from_full_pr39_package": len(all_mappings),
                 "relevant_candidate_rows": len(lead_candidates),
                 "relevant_external_identity_rows": len(external_ids_used),
             },
+        },
+        "production_nutrition_seed": {
+            "path": "data/seed/food_ingredients/nutrition.csv",
+            "row_count": len(nutrition_rows),
+            "git_blob_sha1": nutrition_seed_blob_sha1,
+            "relevant_existing_profiles_identified": len([r for r in demand_rows if r["map_state"] in EXISTING_STATES]),
+            "profile_form_suitability_policy": "PRESENCE_AND_PROVENANCE_IDENTIFIED; RECIPE_FORM_SUITABILITY_REQUIRES_REVIEW",
         },
         "local_source_files": [
             {
@@ -769,7 +843,7 @@ def main() -> None:
         "source_recipe_id", "recipe_name", "category", "external_raw_status", "mapping_class", "strict_raw_triage",
         "source_relationship_rows_v22_5", "source_calc_rows_v22_13", "source_relationship_rows_v22_13",
         "relationship_compatibility_status", "source_variant_count", "source_variants", "choice_groups", "optional_row_count",
-        "boundary_review_reasons", "variant_selection_status", "single_variant_required_ids",
+        "boundary_review_reasons", "source_structure_status", "variant_selection_status", "single_variant_required_ids",
         "common_required_across_variants_ids", "choice_group_ingredient_ids", "optional_ingredient_ids",
         "alternative_or_variant_only_ids", "all_variant_union_ingredient_ids", "existing_mapping_ids", "dc2_required_ids",
         "semantic_label_review_ids", "production_ready", "proposed_dc3_batch",
@@ -780,7 +854,8 @@ def main() -> None:
         "candidate_recipe_ids", "candidate_row_count", "candidate_input_mass_g", "simple_candidate_recipe_count",
         "simple_candidate_recipe_ids", "semantic_compatibility_status", "accepted_identity_mapping_status",
         "current_profile_presence_status", "profile_suitability_for_recipe_form", "authority_source_candidate",
-        "authority_source_verification_status", "authority_search_strategy", "rights_status", "production_ready", "proposed_dc2_batch",
+        "authority_record_candidate", "authority_assignment_status", "authority_search_strategy", "rights_status",
+        "production_ready", "proposed_dc2_batch",
     ]
     compatibility_fields = [
         "source_recipe_id", "recipe_name", "v22_5_candidate_rows", "v22_13_calc_rows", "v22_13_relationship_rows",
@@ -988,8 +1063,8 @@ After review/merge of this evidence package, stop. DC2 and DC3 remain **NOT STAR
         "dc2_required_identities": len(work_demands),
         "one_source_variant": summary["candidate_selection"]["source_variant_structure"]["one_source_variant"],
         "multiple_source_variants": summary["candidate_selection"]["source_variant_structure"]["multiple_source_variants"],
-        "structurally_simple": len(simple_candidates),
-        "variant_or_boundary_review": len(review_candidates),
+        "safe_simple_source_branch_candidates": len(simple_candidates),
+        "review_required": len(review_candidates),
         "v22_13_extra_noncalc_relationship_gap_recipes": len(compat_gap),
         "semantic_label_review_ids": len(exact_label_diffs),
         "output": str(out),
