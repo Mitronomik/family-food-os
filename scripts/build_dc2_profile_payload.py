@@ -115,7 +115,8 @@ def validate_cell(cell):
 
 
 def _load_seed():
-    rows = list(csv.DictReader(INGREDIENT_SEED.open()))
+    with INGREDIENT_SEED.open() as source:
+        rows = list(csv.DictReader(source))
     by_code = {row["canonical_code"]: row for row in rows}
     if len(by_code) != len(rows):
         raise ValueError("duplicate ingredient seed code")
