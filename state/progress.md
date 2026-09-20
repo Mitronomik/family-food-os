@@ -15,8 +15,9 @@ DC1 recovery is review-ready on `data/data-corpus-v1-dc1` from accepted main
 - recovered 68 recipe families / 991 relationship rows / 96 external identities;
 - 33 existing/alias mappings are reused as identity decisions; 63 identities
   remain later DC2-level work if pursued;
-- source structure is 31 one-Variant / 37 multi-Variant, but safe curation status
-  is 26 simple / 42 review-required after ChoiceGroup, optional and boundary checks;
+- source structure is 31 one-Variant / 37 multi-Variant; after ChoiceGroup,
+  optional, boundary, relationship-compatibility and semantic-label checks the
+  safe branch split is 5 simple / 63 review-required;
 - full v22.13 row-level equality remains blocked because exact v22.13 row-nutrient
   shards were unavailable; 20 recipes show additional non-calc relationships;
 - the original 68-family funnel is preserved and its assortment skew is recorded
@@ -27,9 +28,14 @@ Reproducible tooling:
 - `scripts/build_data_corpus_v1_dc1.py`;
 - `scripts/validate_data_corpus_v1_dc1.py`.
 
-Verification: package checksum PASS; Python compile PASS; package validator PASS;
-same-input double build byte-identical before runtime restart; required fail-closed
-mutation cases rejected. No production data/schema/migration/Planner/API/UI change.
+Review-fix verification: exact GitHub package audit PASS; checksum manifest PASS
+for all 11 generated files; full PR39 metadata is 350/363; production nutrition
+metadata is 183 rows with exact Git blob identity; DC2/DC3 partitions reconcile
+exactly and all 96 demands have explicit authority status. The updated Python
+generator/validator/adversarial harness were not executed from a fresh checkout
+because the current runtime cannot resolve github.com; earlier pre-fix execution
+receipts are not reused as final-head execution evidence. No production
+data/schema/migration/Planner/API/UI change.
 
 DC1 remains ACTIVE / REVIEW-READY. DC2/DC3 are NOT STARTED. Stop after review/merge.
 
