@@ -1,84 +1,130 @@
 # Handoff
 
-Updated: `2026-09-19`.
+Updated: `2026-09-20`.
 
 ## Accepted base and governance
 
-DATA-CORPUS-V1 / DC0 is COMPLETE through merged PR #68.
+Accepted current main:
 
-Accepted post-PR68 main:
-
-`b1ce3e02394bad847f0c4063fe9faf520e208622`
+`d8c76a64483e3d5814e702be33c12cbe2e144160`
 
 Current bounded operation:
 
 `DATA-CORPUS-V1 / DC1 — Source authority + coverage inventory` — ACTIVE under
 Issue #67.
 
-Accepted SQLite migration head:
+Recovered implementation is REVIEW-READY on:
+
+`data/data-corpus-v1-dc1`
+
+Accepted SQLite migration head remains:
 
 `0032_meal_plan_serving`
 
-Future RecipeTemplate reservation remains:
+Reserved future migration remains:
 
 `0033_recipe_template_catalogue`
 
-Gate1-CLOSE is NOT STARTED.
+DC2, DC3, DC4, Gate1-CLOSE and PR9 are NOT STARTED.
 
-PR9 is NOT STARTED.
+## Recovery checkpoint
 
-## Closed superseded work
+The inconsistent pre-rebuild GitHub package is preserved unchanged under:
 
-PR #66 — `feat: publish minimal Russian corpus for Gate1 planning` — was closed
-without merge on 2026-09-19.
+`data/curation/data-corpus-v1-dc1/recovery/pre-rebuild-b7bc19e8881ddc90/`
 
-Closing it accepted none of its proposed production data. Its branch remains
-historical implementation evidence only; reusable mechanics may be recovered
-selectively later if they conform to DATA-CORPUS-V1.
+Known pre-rebuild commit:
 
-## DC1 task
+`b7bc19e8881ddc90b95bd8d13c75e72ee4623295`
 
-Build the coverage/authority inventory required by Issue #67.
+Recovery checkpoint completion commit:
 
-Required outputs:
+`0c311848341da397b837abf12fcca4b442de8acd`
 
-1. initial `50–80+` useful recipe candidates;
-2. exact selected source variants/branches;
-3. deduplicated required FoodIngredient/form demand;
-4. explicit reuse of existing accepted FoodIngredient/profile truth;
-5. authoritative source/status for each missing demanded form;
-6. rights/use status;
-7. exact unresolved blocker inventory;
-8. proposed small DC2 food-publication batches;
-9. proposed small DC3 recipe-publication batches.
+The old package is historical evidence only.
 
-Canonical rules for source hierarchy, authority, food/form semantics, rights,
-publication and verification are owned by:
+## Root cause recovered
 
-- `docs/family-food/data-corpus-v1.md`;
-- `docs/family-food/master-roadmap-addendum-2026-09-19-data-corpus.md`;
-- Issue #67.
+The interrupted package consumed a text-rendered spreadsheet view as if it were
+the complete v22.5 relationship-row shards.
 
-Do not restate or alter those rules in this handoff.
+The raw source contract requires:
+
+`1550 + 1550 + 1550 + 1529 = 6179` rows.
+
+Direct raw-XLSX parsing recovers all 68 candidate families and 991 relevant
+source relationship/calculation rows. Missing rendered rows had previously been
+misinterpreted as zero ingredient demand.
+
+## Rebuilt package
+
+Evidence package:
+
+`data/curation/data-corpus-v1-dc1/`
+
+Generator and validator:
+
+- `scripts/build_data_corpus_v1_dc1.py`;
+- `scripts/validate_data_corpus_v1_dc1.py`.
+
+Current reconciliation:
+
+- 68 candidate families;
+- 991 relationship/calculation rows;
+- 96 external ingredient identities;
+- 33 accepted existing/alias mappings;
+- 63 identities requiring later DC2-level closure if pursued;
+- structural source-Variant split: 31 one / 37 multiple;
+- publication-safety split: 26 simple / 42 review-required.
+
+The previous 95-demand result is not retained: it depended on unsafe
+display-name deduplication. In particular `ING-0014` and `ING-0069` remain
+separate identities; the v22.5/v22.13 label conflict is explicit evidence debt.
+
+## Compatibility limits
+
+For all 68 candidates:
+
+- v22.5 calculation rows match v22.13 `CalcRows`;
+- accepted PR #39 mapping aggregates are reproduced;
+- v22.5 Variant counts match v22.13 `VariantBlocks`.
+
+Full row-level relationship equivalence is not claimed because the exact
+v22.13 row-nutrient shards were unavailable during recovery.
+
+Recorded blockers include:
+
+- 20 candidates with additional v22.13 non-calculation relationship rows;
+- 20 used identities with v22.5/v22.13 label differences;
+- 42 candidate families needing variant/choice/optional/boundary review;
+- assortment gaps in the preserved 68-family funnel.
+
+## Verification evidence
+
+Recovered package verification:
+
+- package SHA-256 manifest: PASS;
+- `python -m py_compile` for generator + validator: PASS;
+- package validator: PASS with
+  `68 / 991 / 96 / 33 / 63 / 31-37 / 26-42`;
+- two independent builds from the same inputs were byte-identical before the
+  runtime restart;
+- fail-closed mutation checks rejected candidate/relationship loss, ID mismatch,
+  duplicate relationships, zero substitution, summary drift, batch omission,
+  batch overlap and false simple/exact classification.
+
+Exact GitHub blob SHAs for regenerated package/tool files were checked against
+the preserved local snapshots during delivery.
+
+Final GitHub Docs verification must be GREEN on the exact PR head before merge.
 
 ## Scope boundary
 
-DC1 is evidence/curation only.
-
-No broad production FoodIngredient/Nutrition/Composition/RecipeVersion
-publication or schema/migration change belongs in DC1.
-
-DC2/DC3 production work starts only as separately reviewable batches after the
-DC1 package identifies exact demand and authority.
-
-## Verification expectation
-
-DC1 must produce a reviewable, reproducible evidence package with explicit
-coverage and unresolved inventory. Follow the canonical DATA-CORPUS-V1 contract
-and `docs/family-food/verification-policy.md` for exact verification rules.
+No production FoodIngredient/Nutrition/Composition/RecipeVersion publication,
+schema, migration, Planner, API or UI change belongs to this PR.
 
 ## Stop condition
 
-After DC1 is review-ready/merged, stop.
+After DC1 review/merge, stop.
 
 Do not automatically start DC2, DC3, DC4, Gate1-CLOSE or PR9.
