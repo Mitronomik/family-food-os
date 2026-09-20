@@ -527,3 +527,41 @@ Historical V1 values/registry/calculations remain unchanged. Runtime persistence
 profile/schema migration, catalogue publication, source reuse and Planner/API/UI
 default changes are separate gated operations; no clinical scope, exact-zero
 claim, allergen absence or source permission is inferred.
+
+
+## Partial nutrition profile storage — 2026-09-20
+
+**DECISION — user-approved implementation plan after merged PR #75.** The food
+catalogue may persist a new immutable `FoodNutritionProfile` version with
+unavailable legacy kcal/protein/fat/carbohydrate values instead of inventing
+numeric zero. Historical complete profiles, their IDs, current selectors, V1
+calculations, NutrientVector seals and ATOMIC references keep their existing
+meaning and bytes/Decimal values.
+
+A partial profile stores the unavailable legacy field as SQL `NULL` and records
+one immutable source observation for every unavailable legacy core field.
+Supported source states are `missing`, `below_detection` and
+`method_incompatible`; a usable source number may use `value`. The observation
+retains the exact source literal when one exists, reviewed method reference where
+required, source locator and creation instant. `below_detection` remains source
+truth even when the separately approved
+`RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1` later interprets a literal printed
+zero as an estimated calculation value.
+
+This storage slice does **not** define new canonical nutrient meanings. A partial
+profile cannot become `is_current=true` through the legacy current-profile
+selector and does not receive a V1 NutrientVector seal automatically. That keeps
+existing Nutrition/Planner consumers on complete legacy profiles until the next
+bounded registry/adapter and publication steps provide an explicit compatible
+authority path.
+
+SQLite migration `0034_partial_nutrition_profiles` rebuilds only
+`food_nutrition_profiles` to make legacy numeric columns nullable and adds
+`food_nutrition_profile_observations`. Existing profile/vector/composition IDs
+are preserved. Operational rollback remains backup/restore, and migration tests
+exercise populated upgrade, transactional failure and restore/re-upgrade.
+
+`0033_recipe_template_catalogue` remains reserved for its original task and is
+not used by this change. Because accepted migration history is an ordered prefix,
+the future `0033` module must be appended after already accepted `0034` in
+`MIGRATION_MODULES` rather than inserted before it.
