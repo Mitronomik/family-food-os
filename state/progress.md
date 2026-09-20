@@ -31,11 +31,24 @@ Reproducible tooling:
 Review-fix verification: exact GitHub package audit PASS; checksum manifest PASS
 for all 11 generated files; full PR39 metadata is 350/363; production nutrition
 metadata is 183 rows with exact Git blob identity; DC2/DC3 partitions reconcile
-exactly and all 96 demands have explicit authority status. The updated Python
-generator/validator/adversarial harness were not executed from a fresh checkout
-because the current runtime cannot resolve github.com; earlier pre-fix execution
-receipts are not reused as final-head execution evidence. No production
-data/schema/migration/Planner/API/UI change.
+exactly and all 96 demands have explicit authority status.
+
+Accepted heavy verification for current generator/generated-package bytes:
+`e5f8ce41b2e6bdcfb961f44a7fb67d513de2d7c9`, DC1 corpus verification run
+#20 / `35503379105`. Python compile/Ruff, package checksums/validator, 12-case
+adversarial suite, authenticated source hash checks, two independent rebuilds,
+A==B deterministic comparison and regenerated==committed comparison all PASS.
+
+Raw XLSX source bytes remain operator-managed external evidence. Required
+filenames/SHA-256 values are repository evidence; ephemeral Actions artifacts are
+not canonical source storage. Automatic PR CI now verifies the committed package;
+full raw-source rebuild is manual `workflow_dispatch` against an explicit
+`target_ref` and receives its temporary URL only through
+`DC1_SOURCE_BUNDLE_URL`.
+
+Later delivery commits are workflow/state governance only and do not change the
+generator or generated package bytes covered by the heavy verification above.
+No production data/schema/migration/Planner/API/UI change.
 
 DC1 remains ACTIVE / REVIEW-READY. DC2/DC3 are NOT STARTED. Stop after review/merge.
 
