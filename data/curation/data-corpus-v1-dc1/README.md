@@ -1,8 +1,8 @@
 # DATA-CORPUS-V1 / DC1 — recovered source authority + coverage inventory
 
-**Status:** evidence/curation only for Issue #67.  
-**Repository base:** `d8c76a64483e3d5814e702be33c12cbe2e144160` (merged PR #69).  
-**Production publication:** **NO**.  
+**Status:** evidence/curation only for Issue #67.
+**Repository base:** `d8c76a64483e3d5814e702be33c12cbe2e144160` (merged PR #69).
+**Production publication:** **NO**.
 **DC2 / DC3:** **NOT STARTED**.
 
 ## Recovery result
