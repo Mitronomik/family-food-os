@@ -1,7 +1,7 @@
 # DATA-CORPUS-V1 / DC1 — source authority + coverage inventory
 
-Status: evidence/curation package for Issue #67.  
-Repository base: `d8c76a64483e3d5814e702be33c12cbe2e144160` (merged PR #69).  
+Status: evidence/curation package for Issue #67.
+Repository base: `d8c76a64483e3d5814e702be33c12cbe2e144160` (merged PR #69).
 Production publication: **NO**. Schema/migration/runtime/API/UI changes: **NO**.
 
 ## FACT — selection
