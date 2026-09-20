@@ -25,6 +25,21 @@
       "path": "backend/app/domain/food_ingredients.py",
       "root": "repo",
       "sha256": "65b7ad6df4af48336e04a881e82da9ea5fda365f3467e92a0c1c909ff5c8f115"
+    },
+    {
+      "path": "data/curation/dc2-first-batch-review/generated/profile-reviews.json",
+      "root": "repo",
+      "sha256": "929361bf4233ef0a0383be0c4324e5e4ca7bd3c0974c7e3be270cdab73ef038a"
+    },
+    {
+      "path": "backend/app/domain/decimal_utils.py",
+      "root": "repo",
+      "sha256": "9836848d629245aba935e7035e53df5b137f11810d1d727c249249b0c68fe485"
+    },
+    {
+      "path": "backend/app/domain/errors.py",
+      "root": "repo",
+      "sha256": "d63e3298202db6663cd86afdced6be0249c1124342014981b2a5d434d6cdc6b7"
     }
   ]
 }
