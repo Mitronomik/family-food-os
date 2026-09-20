@@ -1,5 +1,16 @@
 # Handoff
 
+## PR76 final verification trigger — 2026-09-20
+
+Final task-local corrections are complete: historical regression jobs restore
+full Git history for provenance tests, and the current-table guard now includes
+`food_nutrition_profile_observations`. No production/domain semantics changed in
+these last corrections.
+
+The next `Partial nutrition profiles` workflow run on this exact head is the
+final acceptance target. After it, do not modify the branch; record review
+evidence only in the PR.
+
 ## Partial nutrition profile storage handoff — 2026-09-20
 
 Accepted base: PR75 merge `33659866348bbc56d705bb764bb3c864c2cce0be`.
