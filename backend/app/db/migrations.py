@@ -37,6 +37,10 @@ MIGRATION_MODULES = [
     "app.migrations.versions.0030_recipe_source_corpus",
     "app.migrations.versions.0031_meal_pattern_catalogue",
     "app.migrations.versions.0032_meal_plan_serving",
+    # 0033_recipe_template_catalogue remains reserved for its original task.
+    # Keep future 0033 appended after this accepted migration so existing
+    # databases with 0034 remain an exact historical prefix.
+    "app.migrations.versions.0034_partial_nutrition_profiles",
 ]
 MIGRATION_TABLE = "schema_migrations"
 
