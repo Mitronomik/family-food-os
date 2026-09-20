@@ -15,7 +15,7 @@ The preserved pre-rebuild package is under `recovery/pre-rebuild-b7bc19e8881ddc9
 
 ## FACT — input contract
 
-Rebuild now requires the full accepted PR #39 package:
+Rebuild requires the full accepted PR #39 package:
 
 - recipe candidate rows loaded: **350**;
 - ingredient mapping identities loaded: **363**;
@@ -61,25 +61,11 @@ This recovery preserves external identity boundaries instead of deduplicating by
 
 - external ingredient IDs used: **96**;
 - accepted existing/alias mappings: **33**;
-- identities requiring later DC2-level identity/form/source closure if pursued: **63**.
+- identities requiring DC2-level identity/form/source work: **63**.
 
-The earlier journal number 95 came from collapsing two external IDs with the same displayed label. That is unsafe: `ING-0014` and `ING-0069` remain separate, and v22.5 candidate rows use `ING-0069` with the label `Шпик` while v22.13/PR39 calls the identity `Жир кулинарный`.
+The earlier journal number 95 came from collapsing two external IDs with the same displayed label. That is unsafe: `ING-0014` and `ING-0069` must remain separate, and v22.5 candidate rows use `ING-0069` with the label `Шпик` while v22.13/PR39 calls the identity `Жир кулинарный`. DC1 records this as a semantic review blocker rather than guessing equivalence.
 
-Existing PR39 mappings are reused as identity decisions only. The mandatory production nutrition seed identifies exact current USDA FDC profile provenance for all 33 existing mappings, but recipe-form suitability remains review-required. No row is classified as `REUSE_NO_DC2_WRITE`.
-
-## FACT — authority assignment state
-
-Every demand row now has one explicit authority state:
-
-- `BLOCKED_FORM_SELECTION_BEFORE_AUTHORITY`: **18**
-- `BLOCKED_IDENTITY_SEMANTICS_BEFORE_AUTHORITY`: **13**
-- `BLOCKED_PROXY_IDENTITY_BEFORE_AUTHORITY`: **4**
-- `CANDIDATE_SOURCE_FAMILY_IDENTIFIED_EXACT_RECORD_UNPINNED`: **28**
-- `EXISTING_PROFILE_PROVENANCE_IDENTIFIED_FORM_REVIEW_REQUIRED`: **33**
-
-For existing mappings, `authority_source_candidate` records the exact current production profile provenance and record ID. For unresolved/new forms, an official source family is recorded only where identity/form semantics permit it; otherwise authority assignment is blocked explicitly until identity/form review closes.
-
-`FIC_FGBUN_2024_OFFICIAL_COMPOSITION_FAMILY` and `USDA_FDC_OFFICIAL_DATASET` are source-family candidates, not exact-record verification. FIC/FGBUN rights remain blocked pending exact retained-use review; USDA exact-record/form compatibility still must be pinned.
+Existing PR39 FoodIngredient mappings are reused as identity decisions only. The current production nutrition seed is mandatory input: exact profile provenance is identified for all existing mappings, but recipe-form suitability remains explicitly review-required. No row is classified as `REUSE_NO_DC2_WRITE`.
 
 ## DECISION — proposed DC2 triage
 
@@ -88,7 +74,7 @@ For existing mappings, `authority_source_candidate` records the exact current pr
 - `DC2-C_IDENTITY_FORM_REVIEW`: **35**
 - `REUSE_EXISTING_PROFILE_FORM_REVIEW`: **33**
 
-This is prioritization only. It does not authorize a production write or assert that profile/form/authority review is closed.
+This is prioritization only. It does not authorize a production write or assert that authority/rights are closed.
 
 ## DECISION — proposed DC3 triage
 
@@ -113,20 +99,36 @@ Category counts in the original 68-family funnel:
 - Супы: **23**
 - Холодные блюда: **6**
 
-The funnel is visibly skewed toward soups, vegetables/potatoes and egg dishes. Standalone meat/poultry breadth is limited. This remains a later variety blocker; DC1 does not expand the candidate universe automatically.
+The funnel is visibly skewed toward soups, vegetables/potatoes and egg dishes. Standalone meat/poultry breadth is limited. This is a DC3 variety blocker for a realistic family week, but DC1 does not expand the candidate universe automatically.
+
+## FACT — authority assignment state
+
+Every demand row has one explicit authority state:
+
+- `BLOCKED_FORM_SELECTION_BEFORE_AUTHORITY`: **18**
+- `BLOCKED_IDENTITY_SEMANTICS_BEFORE_AUTHORITY`: **13**
+- `BLOCKED_PROXY_IDENTITY_BEFORE_AUTHORITY`: **4**
+- `CANDIDATE_SOURCE_FAMILY_IDENTIFIED_EXACT_RECORD_UNPINNED`: **28**
+- `EXISTING_PROFILE_PROVENANCE_IDENTIFIED_FORM_REVIEW_REQUIRED`: **33**
+
+For existing mappings, `authority_source_candidate` records the exact current production profile provenance and record ID. For unresolved/new forms, an official source family is recorded only where identity/form semantics permit it; otherwise authority assignment is blocked explicitly until identity/form review closes.
+
+`FIC_FGBUN_2024_OFFICIAL_COMPOSITION_FAMILY` and `USDA_FDC_OFFICIAL_DATASET` are source-family candidates, not exact-record verification. FIC/FGBUN rights remain blocked pending exact retained-use review; USDA exact-record/form compatibility still must be pinned.
 
 ## Files
 
 - `candidate-recipes.csv` — 68 candidates, relationship counts, source structure, compatibility/semantic status and DC3 triage.
 - `food-demand.csv` — one row per external ingredient identity with current-profile provenance or explicit authority assignment/blocker.
 - `compatibility.csv` — v22.5 vs v22.13 count/semantic compatibility status.
-- `source-relationships-part1.csv` … `part4.csv` — all 991 retained source relationship/calculation rows, excluding nutrient values.
+- `source-relationships-part1.csv` … `part4.csv` — all 991 retained source relationship/calculation rows, sharded by original v22.5 row file and excluding nutrient values.
 - `batch-plan.json` — exact non-overlapping DC2/DC3 triage partitions.
 - `source-artifacts.json` — full PR39 input counts, production nutrition seed identity, XLSX hashes and missing-v22.13-row-shard blocker.
 - `summary.json` — machine-readable reconciliation totals.
 - `checksums.sha256` — deterministic hashes of generated package files.
 
 ## Rebuild
+
+The package is generated from raw XLSX bytes plus the accepted PR #39 mapping package. Example:
 
 ```bash
 python scripts/build_data_corpus_v1_dc1.py \
@@ -146,29 +148,33 @@ python scripts/validate_data_corpus_v1_dc1.py /tmp/data-corpus-v1-dc1
 python scripts/test_data_corpus_v1_dc1.py /tmp/data-corpus-v1-dc1
 ```
 
+Source XLSX files are not committed by this package; exact required SHA-256 values are enforced by the generator and recorded in `source-artifacts.json`.
+
 ## Verification invariants
 
-The generator/validator fail closed on:
+The generator fails closed on:
 
 - row-shard truncation or candidate loss;
-- incomplete PR39 inputs (must be 350 recipe rows / 363 ingredient identities);
 - missing mapping IDs or duplicate mapping identities;
 - duplicate source relationship rows;
 - blank/non-positive candidate ingredient amounts;
-- missing/duplicate current nutrition profiles for accepted existing mappings;
 - v22.5/v22.13 calculation-row or variant-block mismatch;
+- incomplete PR39 inputs (must be 350 recipe rows / 363 ingredient identities);
+- missing/duplicate current nutrition profiles for accepted existing mappings;
 - disagreement with accepted PR39 per-recipe mapping aggregates;
 - summary/batch partition omission or overlap;
-- any simple DC3 triage while ChoiceGroup, optional, multi-variant, garnish/sauce boundary, relationship compatibility or semantic-label debt remains unresolved;
+- assignment of a simple DC3 triage status while ChoiceGroup, optional, multi-variant, garnish/sauce boundary, relationship compatibility or semantic-label debt remains unresolved;
 - any existing mapping that bypasses profile/form review;
 - any demand row without an explicit authority assignment state.
+
+A second build from the same inputs must be byte-identical for all generated package files.
 
 ## OPEN blockers
 
 1. **63** candidate families still require variant/choice/optional/boundary/compatibility/semantic review before exact publication-branch selection.
-2. **63** non-existing identities require later DC2-level closure if their dependent recipes are pursued.
+2. **63** external identities require DC2-level closure if their dependent recipes are pursued.
 3. **20** candidates have additional v22.13 non-calc relationship rows; exact v22.13 row shards were not available here, so full row-level compatibility remains unproven.
-4. **20** used identities have a v22.5/v22.13 label difference requiring review.
+4. **20** used identities have a v22.5/v22.13 label difference requiring review; `ING-0069` is the clearest explicit conflict example.
 5. All **33** existing mapped profiles have identified current provenance, but exact recipe-form suitability still requires review.
 6. Candidate-source-family assignments with unpinned records are not authority closure.
 7. The original 68-family funnel has assortment gaps for a realistic family week; DC1 records the gap but does not widen scope automatically.
