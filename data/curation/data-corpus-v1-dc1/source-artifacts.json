@@ -70,5 +70,13 @@
       "relevant_candidate_rows": 68,
       "relevant_external_identity_rows": 96
     }
+  },
+  "source_bundle_contract": {
+    "actions_artifact_role": "EPHEMERAL_AUDIT_COPY_ONLY_NOT_CANONICAL_STORAGE",
+    "availability": "OPERATOR_MANAGED_EXTERNAL_SOURCE_BUNDLE",
+    "ci_delivery": "TEMPORARY_AUTHENTICATED_HTTPS_URL_VIA_ACTIONS_SECRET",
+    "rebuild_rule": "REBUILD_ONLY_FROM_FILES_MATCHING_RECORDED_SHA256; UNKNOWN_OR_MISSING_SOURCE_FAILS_CLOSED",
+    "repository_retention": "NOT_COMMITTED_TO_GIT_UNDER_CURRENT_SOURCE_GOVERNANCE",
+    "required_file_identity": "EXACT_FILENAMES_AND_SHA256_FROM_LOCAL_SOURCE_FILES"
   }
 }
