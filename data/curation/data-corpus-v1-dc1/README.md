@@ -143,6 +143,7 @@ python scripts/build_data_corpus_v1_dc1.py \
   --output /tmp/data-corpus-v1-dc1
 
 python scripts/validate_data_corpus_v1_dc1.py /tmp/data-corpus-v1-dc1
+python scripts/test_data_corpus_v1_dc1.py /tmp/data-corpus-v1-dc1
 ```
 
 ## Verification invariants
