@@ -19,3 +19,4 @@ Known pre-rebuild symptoms:
 - README mixed numbers from different computations.
 
 Do not edit files in this recovery directory during rebuild.
+Note: after the recovery checkpoint was created, repository docs verification required removal of Markdown hard-break trailing spaces from this copied README. The exact original pre-rebuild bytes remain preserved in commit `b7bc19e8881ddc90b95bd8d13c75e72ee4623295`; no data/metric content was changed by that formatting correction.
