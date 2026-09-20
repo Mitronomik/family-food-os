@@ -392,7 +392,7 @@ def partial_profile(ingredient_id):
             created_at=NOW,
         ),
     )
-    return FoodNutritionProfile(
+    profile = FoodNutritionProfile(
         id=profile_id,
         food_ingredient_id=ingredient_id,
         basis_grams=Decimal("100"),
@@ -409,8 +409,8 @@ def partial_profile(ingredient_id):
         estimated=None,
         is_current=False,
         created_at=NOW,
-        observations=observations,
     )
+    return profile, observations
 
 
 def test_partial_nutrition_profile_roundtrips_without_zero_substitution(
@@ -422,18 +422,22 @@ def test_partial_nutrition_profile_roundtrips_without_zero_substitution(
     with SqlAlchemyFoodCatalogueReadScope(engine) as read:
         original_current = read.nutrition_profiles.get_current(ingredient.id)
 
-    partial = partial_profile(ingredient.id)
+    partial, source_observations = partial_profile(ingredient.id)
     with SqlAlchemyFoodCatalogueUnitOfWork(engine) as write:
-        write.nutrition_profiles.add(partial)
+        write.nutrition_profiles.add(partial, source_observations)
         write.commit()
 
     with SqlAlchemyFoodCatalogueReadScope(engine) as read:
         actual = read.nutrition_profiles.get_nutrition_profile_by_id(partial.id)
+        persisted_observations = read.nutrition_profiles.list_observations(partial.id)
         current = read.nutrition_profiles.get_current(ingredient.id)
 
     assert actual == partial
     assert current == original_current
     assert actual is not None and actual.legacy_core_complete is False
+    assert persisted_observations == tuple(
+        sorted(source_observations, key=lambda item: item.source_field)
+    )
     assert actual.protein_g is None
     assert actual.fat_g is None
     assert actual.carbohydrates_g is None
@@ -485,12 +489,12 @@ def test_partial_profile_source_observations_are_immutable(catalogue_engine):
             source_id="partial-test-current",
         )
     )
-    partial = partial_profile(ingredient.id)
+    partial, source_observations = partial_profile(ingredient.id)
     with SqlAlchemyFoodCatalogueUnitOfWork(engine) as write:
-        write.nutrition_profiles.add(partial)
+        write.nutrition_profiles.add(partial, source_observations)
         write.commit()
 
-    observation_id = partial.observations[0].id.hex
+    observation_id = source_observations[0].id.hex
     with sqlite3.connect(config.path) as connection:
         with pytest.raises(sqlite3.IntegrityError, match="неизменяемо"):
             connection.execute(
