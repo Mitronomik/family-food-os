@@ -1,0 +1,18 @@
+name: DC2 first batch review
+on:
+  pull_request:
+    paths:
+      - 'data/curation/dc2-first-batch-review/**'
+      - 'scripts/*dc2_first_batch_review.py'
+      - '.github/workflows/dc2-first-batch-review.yml'
+permissions:
+  contents: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/test_dc2_first_batch_review.py

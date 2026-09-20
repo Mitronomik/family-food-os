@@ -1,5 +1,17 @@
 # Progress
 
+## Current update — first DC2 batch review, 2026-09-20
+
+PR71 merged at `9b1d5c73da4f1d779336a35e0e7e2c2d32363e85`.
+The user authorized the next source/form review stage. See
+[first-batch review](../data/curation/dc2-first-batch-review/README.md) and
+[current focus](current-focus.md), which supersede older execution statuses below.
+25 group decisions account for1532 occurrences and24 source-record candidates;
+14 profiles have earlier visual evidence. No publication, accepted canonical
+mapping or nutrient-policy change. The next exact blockers are documented in
+publication-decisions.md; do not restart source discovery without reading them.
+
+
 Updated: `2026-09-20`
 
 ## DATA-CORPUS-V1 / DC1 recovery and delivery

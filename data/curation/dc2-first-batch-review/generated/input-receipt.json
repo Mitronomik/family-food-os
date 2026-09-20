@@ -1,0 +1,42 @@
+{
+  "external_inputs": [
+    {
+      "path": "packages/recipe-closure/normalized/food-identities.jsonl",
+      "sha256": "e7e05183f41ccbe4c6cbb1e8efcc5b7ebd0c12c4bfe090510ab2594afb21ebb5"
+    },
+    {
+      "path": "packages/reference-profiles/normalized/profiles.jsonl",
+      "sha256": "66a8474fa63a2aac2a4c07ba822971806d257fd070d8a86c0bd07e123513feaf"
+    },
+    {
+      "path": "packages/book2002/normalized/food-profiles.jsonl",
+      "sha256": "67f4d5d50d99539da05b45adc32fd5fa46e05b74ebb94d465cc20c6f497cf9e4"
+    },
+    {
+      "path": "packages/consensus-profiles/normalized/profiles.jsonl",
+      "sha256": "ef45d958a5b9df78957ef521e042878feb2df5fd03044d867ccb03a6ebee0e77"
+    }
+  ],
+  "repository_inputs": [
+    {
+      "path": "data/curation/dc2-first-batch-review/decisions.json",
+      "sha256": "64825a0cf76cdcffd4405c0043f1a61ba5e9b5015a17d13d56156e3033f7e5c3"
+    },
+    {
+      "path": "data/curation/corpus-v03-reconciliation/generated/food-review-groups.jsonl",
+      "sha256": "8cd3a73ac852f8728ecdb557a7c7c0ba226655553a596469e488f954acd619b8"
+    },
+    {
+      "path": "data/curation/corpus-v03-reconciliation/generated/review-batches.json",
+      "sha256": "e2f80ef32a60e93ee500bb9c5c6473b4030606eeab642f322d3f0127db165d6a"
+    },
+    {
+      "path": "data/curation/corpus-v03-reconciliation/generated/route-index.jsonl",
+      "sha256": "75cb482ada694a654df86cd284330e2792d04636dca6dc966678fcaf48340820"
+    },
+    {
+      "path": "data/seed/food_ingredients/nutrition.csv",
+      "sha256": "2376f04ea872f0b38676e892926ee1052323d142fa4c0184c4f62d5830cdcb2c"
+    }
+  ]
+}

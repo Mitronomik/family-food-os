@@ -1,0 +1,343 @@
+[
+  {
+    "id": "dc2-review:ac9d6405de26775ad608",
+    "review_group_id": "label-review:ac9d6405de26775ad608",
+    "label": "соль поваренная йодированная",
+    "book_source_codes": [],
+    "platform_code_candidates": [
+      "SALT"
+    ],
+    "disposition": "REJECT_GENERIC_SUBSTITUTION",
+    "reason_ru": "Обычная соль из книги не доказывает йодированную форму. Руссоль подтверждает конкретный товар, не всю категорию.",
+    "required_action_ru": "Точная спецификация йодированной соли, full profile и область переноса на ингредиент.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:0611a1b7ac680b4aabc0",
+    "review_group_id": "label-review:0611a1b7ac680b4aabc0",
+    "label": "вода",
+    "book_source_codes": [],
+    "platform_code_candidates": [
+      "WATER"
+    ],
+    "disposition": "EXISTING_IDENTITY_CANDIDATE_ONLY",
+    "reason_ru": "WATER имеет USDA tap drinking профиль; это не российская численная authority и не доказательство выпитой технологической воды.",
+    "required_action_ru": "Разделить компонент, варочную/промывную воду, поглощение и потери; принять путь authority отдельно.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:f9488f0bc6429a47b12b",
+    "review_group_id": "label-review:f9488f0bc6429a47b12b",
+    "label": "масло сливочное",
+    "book_source_codes": [
+      "5.1.5",
+      "5.1.6"
+    ],
+    "platform_code_candidates": [],
+    "disposition": "AMBIGUOUS_SOURCE_FORM",
+    "reason_ru": "Школьный §1.4 задаёт 72.5%, но не выбирает солёное/несолёное. Нельзя молча выбрать 5.1.5.",
+    "required_action_ru": "Подтвердить солёность и тип масла в исходной спецификации или оформить явно новый вариант рецепта.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:c06eac9ee49ead8a46ed",
+    "review_group_id": "label-review:c06eac9ee49ead8a46ed",
+    "label": "сахар-песок",
+    "book_source_codes": [
+      "10.1.1"
+    ],
+    "platform_code_candidates": [
+      "SUGAR"
+    ],
+    "disposition": "SOURCE_RECORD_IDENTIFIED",
+    "reason_ru": "Точная российская запись сахар-песок; профиль SUGAR в seed остаётся USDA.",
+    "required_action_ru": "Проверить тип сахара при сопоставлении; принять семантику below_detection и углеводов; sealed vector.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:8214cfa2ad65998701e9",
+    "review_group_id": "label-review:8214cfa2ad65998701e9",
+    "label": "лук репчатый",
+    "book_source_codes": [
+      "8.1.3.4"
+    ],
+    "platform_code_candidates": [
+      "ONION_YELLOW"
+    ],
+    "disposition": "REJECT_OVER_SPECIFIC_PROFILE",
+    "reason_ru": "Российская запись Лук репка не задаёт жёлтый сорт принятого профиля.",
+    "required_action_ru": "Generic onion identity review; сырой съедобный input отдельно от пассерованного.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:1ef43ec41d874f9d5ce5",
+    "review_group_id": "label-review:1ef43ec41d874f9d5ce5",
+    "label": "морковь",
+    "book_source_codes": [
+      "8.1.5.1"
+    ],
+    "platform_code_candidates": [
+      "CARROT"
+    ],
+    "disposition": "SOURCE_RECORD_IDENTIFIED",
+    "reason_ru": "Есть визуально проверенная запись Морковь, 100г съедобной части; не химсостав варёной моркови.",
+    "required_action_ru": "Проверить зрелость и форму каждого входа; сохранить процессный путь и не применять очистку дважды.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:db84ea5b310b4ac94ddf",
+    "review_group_id": "label-review:db84ea5b310b4ac94ddf",
+    "label": "масло подсолнечное",
+    "book_source_codes": [
+      "5.4.13"
+    ],
+    "platform_code_candidates": [
+      "SUNFLOWER_OIL"
+    ],
+    "disposition": "REJECT_OVER_SPECIFIC_PROFILE",
+    "reason_ru": "Seed profile linoleic approx65%; generic source не доказывает этот subtype.",
+    "required_action_ru": "Уточнить рафинацию/тип масла и используемую/оставшуюся при жарке долю; не смешивать отсутствующую клетчатку с нулём.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:69f91741a4c2027f00bd",
+    "review_group_id": "label-review:69f91741a4c2027f00bd",
+    "label": "молоко",
+    "book_source_codes": [
+      "1.2.1.2",
+      "1.2.1.4"
+    ],
+    "platform_code_candidates": [],
+    "disposition": "AMBIGUOUS_SOURCE_FORM",
+    "reason_ru": "Школьный §1.4 задаёт 2.5%; книга разделяет пастеризованное и стерилизованное.",
+    "required_action_ru": "Подтвердить обработку; вне школьного scope не переносить 2.5% автоматически.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:6362b9a2160b35801bb5",
+    "review_group_id": "label-review:6362b9a2160b35801bb5",
+    "label": "картофель",
+    "book_source_codes": [
+      "8.1.4.1"
+    ],
+    "platform_code_candidates": [
+      "POTATO"
+    ],
+    "disposition": "REJECT_OVER_SPECIFIC_PROFILE",
+    "reason_ru": "Seed описывает gold without skin raw; общая российская запись не определяет этот сорт.",
+    "required_action_ru": "Generic potato identity; edible input vs gross purchase; отдельно варёный/сырой/очищенный этап.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:5080f64e5d37ea5c9738",
+    "review_group_id": "label-review:5080f64e5d37ea5c9738",
+    "label": "яйцо куриное",
+    "book_source_codes": [
+      "2.1.1"
+    ],
+    "platform_code_candidates": [],
+    "disposition": "SECTION_AND_FORM_REVIEW",
+    "reason_ru": "Код2.1.1 требует заголовка куриных яиц; одинаковое имя Яйцо целое существует и в другом разделе.",
+    "required_action_ru": "Подтвердить species/часть/состояние и перевод штуки→съедобная масса; скорлупа не часть профиля.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:b91626a52dbb2f02267b",
+    "review_group_id": "label-review:b91626a52dbb2f02267b",
+    "label": "сметана",
+    "book_source_codes": [
+      "1.4.2.1"
+    ],
+    "platform_code_candidates": [
+      "SOUR_CREAM_FULL_FAT"
+    ],
+    "disposition": "REJECT_FAT_MISMATCH",
+    "reason_ru": "Школьный source fat15%; existing full-fat профиль имеет fat17.99g/100g.",
+    "required_action_ru": "Отдельная точная 15% identity/profile; не присваивать существующий full-fat.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:6a2ff88bba6be77bff63",
+    "review_group_id": "label-review:6a2ff88bba6be77bff63",
+    "label": "томатное пюре",
+    "book_source_codes": [
+      "8.1.6.16"
+    ],
+    "platform_code_candidates": [],
+    "disposition": "AMBIGUOUS_SOURCE_FORM",
+    "reason_ru": "Книга различает консервированное пюре и пасту. Концентрация source ingredient не установлена.",
+    "required_action_ru": "Подтвердить содержание сухих веществ и состав, не заменять пастой.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:a86a5e83439b536ec55c",
+    "review_group_id": "label-review:a86a5e83439b536ec55c",
+    "label": "лавровый лист",
+    "book_source_codes": [],
+    "platform_code_candidates": [
+      "BAY_LEAF"
+    ],
+    "disposition": "SOURCE_RECORD_NOT_IDENTIFIED",
+    "reason_ru": "Точная запись российского профиля в проверяемом наборе не идентифицирована; ниже по источнику не предполагается отсутствие вообще.",
+    "required_action_ru": "Получить точный источник сухого листа; отделить извлекаемые листья и съеденную долю.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:770ec7e08c40b8fadab9",
+    "review_group_id": "label-review:770ec7e08c40b8fadab9",
+    "label": "мука пшеничная высший сорт",
+    "book_source_codes": [
+      "6.1.2.1",
+      "6.1.3.1"
+    ],
+    "platform_code_candidates": [],
+    "disposition": "AMBIGUOUS_SOURCE_FORM",
+    "reason_ru": "Есть отдельные записи муки из твёрдой и мягкой пшеницы.",
+    "required_action_ru": "Подтвердить вид зерна и состояние; подсушивание/заваривание относится к процессу.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:3430dcc24d8a9bb11609",
+    "review_group_id": "label-review:3430dcc24d8a9bb11609",
+    "label": "хлеб пшеничный",
+    "book_source_codes": [
+      "6.1.3.2.1",
+      "6.1.3.5.1",
+      "6.1.3.8.1",
+      "6.1.3.10.1"
+    ],
+    "platform_code_candidates": [],
+    "disposition": "AMBIGUOUS_SOURCE_FORM",
+    "reason_ru": "Пшеничный хлеб имеет разные сорта муки, подовый/формовой; общее имя недостаточно.",
+    "required_action_ru": "Выбрать точную спецификацию исходного хлеба, влажность/подсушивание отдельно.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:b1e510d5f2768b38587d",
+    "review_group_id": "label-review:b1e510d5f2768b38587d",
+    "label": "капуста белокочанная",
+    "book_source_codes": [
+      "8.1.2.1"
+    ],
+    "platform_code_candidates": [
+      "CABBAGE_GREEN"
+    ],
+    "disposition": "SOURCE_RECORD_IDENTIFIED",
+    "reason_ru": "Визуальная запись исправляет OCR-название; не квашеная/варёная капуста.",
+    "required_action_ru": "Подтвердить сырой edible input и область очищения; процессные потери отдельно.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:24a537c02d85bcd659e4",
+    "review_group_id": "label-review:24a537c02d85bcd659e4",
+    "label": "чай черный байховый",
+    "book_source_codes": [],
+    "platform_code_candidates": [],
+    "disposition": "REJECT_PREPARED_DRINK_PROXY",
+    "reason_ru": "Готовые чайные напитки книги не заменяют сухой чайный лист.",
+    "required_action_ru": "Найти точный профиль сухого чая и доказанный путь экстракции для напитка.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:2ad65486eb776479414a",
+    "review_group_id": "label-review:2ad65486eb776479414a",
+    "label": "мед пчелиный",
+    "book_source_codes": [
+      "10.11.8"
+    ],
+    "platform_code_candidates": [],
+    "disposition": "SOURCE_RECORD_NEEDS_REVIEW",
+    "reason_ru": "Запись найдена в извлечённой книге, наличие кода не означает полную visual/unit проверку.",
+    "required_action_ru": "Проверить исходную строку и профиль, форму/состав мёда.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:5f79e541cf6ac6de12ff",
+    "review_group_id": "label-review:5f79e541cf6ac6de12ff",
+    "label": "сухари панировочные",
+    "book_source_codes": [],
+    "platform_code_candidates": [
+      "BREADCRUMBS"
+    ],
+    "disposition": "REJECT_BREAD_PROXY",
+    "reason_ru": "Сливочные и армейские сухари не доказаны как панировочные.",
+    "required_action_ru": "Подтвердить точный состав панировочных сухарей и поглощение/остаток панировки.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:3a3000fc62dab9d10157",
+    "review_group_id": "label-review:3a3000fc62dab9d10157",
+    "label": "кислота лимонная",
+    "book_source_codes": [],
+    "platform_code_candidates": [],
+    "disposition": "SOURCE_RECORD_NOT_IDENTIFIED",
+    "reason_ru": "Точная российская профильная запись не идентифицирована; раствор отличается от сухого вещества.",
+    "required_action_ru": "Подтвердить сухая/раствор, концентрация, распределение массы и source authority.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:4b678c16c0e7d0e018b2",
+    "review_group_id": "label-review:4b678c16c0e7d0e018b2",
+    "label": "крупа рисовая",
+    "book_source_codes": [
+      "6.5.3"
+    ],
+    "platform_code_candidates": [],
+    "disposition": "SOURCE_RECORD_IDENTIFIED",
+    "reason_ru": "Есть визуально проверенная запись сухой крупы; варёная каша отдельная форма.",
+    "required_action_ru": "Подтвердить зерно/обработку; не подменять cooked rice, гидратацию учитывать один раз.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:727c004b45d331b98bba",
+    "review_group_id": "label-review:727c004b45d331b98bba",
+    "label": "оленина 1 категории",
+    "book_source_codes": [
+      "3.1.8"
+    ],
+    "platform_code_candidates": [],
+    "disposition": "SECTION_AND_FORM_REVIEW",
+    "reason_ru": "В OCR категории пропущен знак; identity не выводить из неполной строки.",
+    "required_action_ru": "Проверить скан категории, часть туши, съедобную основу и состояние.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:cddffb38251fb3c80e95",
+    "review_group_id": "label-review:cddffb38251fb3c80e95",
+    "label": "говядина 1 категории",
+    "book_source_codes": [
+      "3.1.3"
+    ],
+    "platform_code_candidates": [],
+    "disposition": "SECTION_AND_FORM_REVIEW",
+    "reason_ru": "Средняя категория туши не профиль произвольного отруба; OCR категории требует проверки.",
+    "required_action_ru": "Подтвердить категорию/часть туши/нетто, мясо с костью и без различать.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:63245635abccfd245598",
+    "review_group_id": "label-review:63245635abccfd245598",
+    "label": "бульон (вода)",
+    "book_source_codes": [],
+    "platform_code_candidates": [],
+    "disposition": "REJECT_COMPOSITE_ALIAS",
+    "reason_ru": "Бульон и вода — альтернативы; нельзя считать одной food identity.",
+    "required_action_ru": "Разрешить выбранную ветвь; бульон требует собственный dependency graph и профиль.",
+    "publication_ready": false
+  },
+  {
+    "id": "dc2-review:59c7ea3a3e526a80b835",
+    "review_group_id": "label-review:59c7ea3a3e526a80b835",
+    "label": "свекла",
+    "book_source_codes": [
+      "8.1.5.12"
+    ],
+    "platform_code_candidates": [
+      "BEET"
+    ],
+    "disposition": "SOURCE_RECORD_IDENTIFIED",
+    "reason_ru": "Есть визуальная запись Свекла; source operation может предварительно отваривать/запекать её.",
+    "required_action_ru": "Сопоставить место измерения массы с raw/cooked; не применить сырой профиль к готовой массе без process model.",
+    "publication_ready": false
+  }
+]
