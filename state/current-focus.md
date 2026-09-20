@@ -41,7 +41,9 @@ Pre-rebuild recovery checkpoint:
 Reproducible tooling:
 
 - `scripts/build_data_corpus_v1_dc1.py`;
-- `scripts/validate_data_corpus_v1_dc1.py`.
+- `scripts/validate_data_corpus_v1_dc1.py`;
+- `scripts/test_data_corpus_v1_dc1.py`;
+- `.github/workflows/dc1-verification.yml`.
 
 Recovered reconciliation:
 
@@ -63,6 +65,36 @@ Recovered reconciliation:
 
 A single source `Variant` is not treated as an exact publication decision.
 Relationship compatibility and semantic-label debt also force review.
+
+## Source-bundle and verification contract
+
+Raw XLSX source bytes are operator-managed external evidence, not repository-local
+truth. Exact required filenames and SHA-256 values are recorded in
+`data/curation/data-corpus-v1-dc1/source-artifacts.json`.
+
+Automatic PR CI runs package verification only. Full raw-source rebuild is a
+manual `workflow_dispatch` operation that:
+
+- checks out an explicit `target_ref`;
+- receives the temporary authenticated bundle URL only through the
+  `DC1_SOURCE_BUNDLE_URL` Actions secret;
+- validates the fixed bundle SHA-256 and every generator-enforced source hash;
+- rebuilds twice, validates both outputs, runs adversarial checks, and proves
+  deterministic and committed-package equivalence.
+
+Actions artifacts are ephemeral audit copies only, not canonical source storage.
+
+Accepted full-rebuild evidence for the current generator/package bytes:
+
+- revision `e5f8ce41b2e6bdcfb961f44a7fb67d513de2d7c9`;
+- DC1 corpus verification run #20 / `35503379105`;
+- package verification: PASS;
+- full source rebuild: PASS;
+- build A == build B: PASS;
+- regenerated package == committed package: PASS.
+
+Later delivery commits are limited to workflow/state governance and do not change
+the generator or generated package bytes covered by that evidence.
 
 ## Open DC1 blockers retained
 
