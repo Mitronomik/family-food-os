@@ -9,6 +9,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGE = ROOT / 'data/curation/dc2-exact-input-mappings'
 VERSION = 'dc2-exact-input-v1'
+SOURCE_NUTRITION_POLICY = {
+    'canonical_retention_authority_granted': False,
+    'id': 'school2022:source-published-nutrition-heat-loss:v1',
+    'source_generalized_heat_loss_reuse_for_independent_raw_input_calculation_allowed': False,
+    'source_id': 'ru-school2022',
+    'source_locator': {'pdf_page': 4, 'section': '1.5'},
+    'source_published_nutrition_heat_loss_status':
+        'generalized_heat_losses_already_accounted_in_source_published_values',
+    'source_published_values_second_heat_loss_application_allowed': False,
+}
 
 
 def sha(path):
@@ -151,12 +161,22 @@ def validate_committed():
     for name, value in checksums.items():
         if value != sha(output/name):
             raise ValueError('output checksum mismatch')
+    policy = read(PACKAGE/'source-nutrition-policy.json')
+    if policy != SOURCE_NUTRITION_POLICY:
+        raise ValueError('source nutrition policy drift')
     mappings = read(output/'mappings.json')
     unique(mappings)
     if any(r['publication_ready'] or r['nutrient_calculation_ready'] or r['canonical_food_id'] is not None or r['retained_fraction'] is not None for r in mappings):
         raise ValueError('unauthorized authority')
     prior = unique(read(ROOT/'data/curation/dc2-first-batch-review/generated/occurrence-reviews.json'))
     forms = unique(read(PACKAGE/'forms.json'))
+    if any(
+        form['canonical_food_id'] is not None
+        or form['nutrient_equivalence_accepted'] is not False
+        for form in forms.values()
+    ):
+        raise ValueError('unauthorized form authority')
+    exceptions = unique(read(PACKAGE/'exceptions.json'), 'demand_id')
     for r in mappings:
         old = prior[r['food_identity_id']]
         if (old['source_id'] != 'ru-school2022' or old['source_demand_id'] != r['demand_id']
@@ -164,15 +184,31 @@ def validate_committed():
                 or r['book_candidate_id'] != forms[r['source_input_form_id']]['book_candidate_id']
                 or r['book_candidate_id'] not in old['candidate_book_record_ids']):
             raise ValueError('mapping crosswalk mismatch')
-        if (r['additional_cold_loss_application_allowed']
-                or r['physical_net_weighing_stage'] != 'not_established_by_accounting_table'
-                or r['nutrient_equivalence_accepted']):
-            raise ValueError('unsupported mass or nutrient assertion')
-    exceptions = unique(read(PACKAGE/'exceptions.json'), 'demand_id')
-    for r in mappings:
+        if (
+            r['additional_cold_loss_application_allowed']
+            or r['physical_net_weighing_stage'] != 'not_established_by_accounting_table'
+            or r['nutrient_equivalence_accepted']
+            or r['source_identity_status'] != 'source_supported_review_proposal'
+            or r['source_accounting_basis'] != 'standard_raw_material_consumption_gross_net'
+            or r['net_mass_semantics_override']
+            != 'normative_source_net_not_certified_physical_preheat_mass'
+            or r['retained_fraction_status'] != 'unknown'
+            or r['transformation_version'] != VERSION
+            or r['preparation_context_sha256'] != old['preparation_context_sha256']
+        ):
+            raise ValueError('unsupported mapping semantics')
         e = exceptions.get(r['demand_id'])
+        expected_flags = [e['kind']] if e else []
+        if r['source_input_form_id'].endswith(':beet'):
+            expected_flags.append('peeling_after_heat_or_unspecified_physical_net_stage')
+        if r['source_input_form_id'].endswith(':rice'):
+            expected_flags.append(
+                'hydration_and_drain_path_requires_recipe_specific_coefficients'
+            )
+        if sorted(r['flags']) != sorted(expected_flags):
+            raise ValueError('mapping flag drift')
         expected = bool(e and e['kind'] == 'suspected_source_duplicate_prefix')
-        if r['material_use_hold'] != expected or (e and e['kind'] not in r['flags']):
+        if r['material_use_hold'] != expected:
             raise ValueError('lost exception')
     held = {r['food_identity_id'] for r in mappings if r['material_use_hold']}
     routes = read(output/'route-holds.json')
