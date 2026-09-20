@@ -1,5 +1,22 @@
 # Handoff
 
+## PR74 blocker corrections handoff — 2026-09-20
+
+PR74 is a preparation/evidence PR only. User authorization is limited to fixing
+its blockers and completing the reviewable package. The unknown-macro/profile
+design remains proposed and no migration or publication is authorized.
+
+Repository evidence now pins all probe dependencies, validates identity-plan
+semantics, blocks rights/readiness promotion and retains a numeric-free receipt.
+The accepted source-state scope is five Book2002 records / 60 fields /
+45 positive / 15 below detection. All five remain incompatible with current
+legacy carbohydrate projection; sugar additionally lacks exact protein/fat.
+Imported profiles and canonical numeric values remain zero.
+
+External numeric payload and full-build A/B hashes are not repository acceptance
+evidence. After review/merge, stop for explicit profile/schema and source-reuse
+decisions.
+
 ## First profile payload compatibility — 2026-09-20
 
 PR73 merged at a9472c2a0bb0534b70b41c541aa0ac9b4cb26ba0; user authorized
