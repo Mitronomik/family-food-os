@@ -1,5 +1,31 @@
 # Progress
 
+## Partial nutrition profile storage — 2026-09-20
+
+User approved the ten-step Russian-data integration sequence and authorized step 1
+as an implementation PR.
+
+Implemented on branch `feat/partial-nutrition-profiles` from merged PR75 main:
+
+- `FoodNutritionProfile` legacy kcal/protein/fat/carbohydrate values may be
+  explicitly unavailable;
+- unavailable core fields require immutable source-observation evidence;
+- source states are `value`, `missing`, `below_detection` and
+  `method_incompatible`;
+- partial profiles stay non-current under the legacy selector and do not receive
+  V1 vector seals automatically;
+- migration `0034_partial_nutrition_profiles` rebuilds profile storage and adds
+  immutable observation rows;
+- old profile IDs/values, vector seals and ATOMIC references are preserved;
+- `0033_recipe_template_catalogue` remains reserved and unused.
+
+Verification target includes populated upgrade, actual migration failure rollback,
+backup/restore/re-upgrade, focused profile/vector regressions, full backend and
+full launcher suites with `AI_ENABLED=false`.
+
+No Russian production profile/source-use/publication is included. After merge,
+step 2 is the new nutrient registry/adapters version.
+
 ## PR75 Russian methodology sync — 2026-09-20
 
 PR75 was synchronized with merged PR74 main without force-push. User authorization
