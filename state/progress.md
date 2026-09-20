@@ -1,5 +1,26 @@
 # Progress
 
+## PR74 blocker corrections — 2026-09-20
+
+User explicitly authorized correction of all PR74 blockers and completion of this
+bounded five-profile preparation/evidence review only. No profile/schema proposal,
+migration, rights disposition, merge or production publication was approved.
+
+The package now:
+- locks every repository dependency used by the identity/domain probe;
+- validates identity-plan rows against accepted PR73 forms and the current
+  ingredient seed;
+- fails closed on rights/status promotion and false import/readiness claims;
+- derives 5/60/45/15 source-state evidence from accepted nonnumeric profile-review
+  metadata;
+- records a numeric-free verification receipt with exact dependency/input hashes
+  and five domain blockers;
+- explicitly excludes unretained external A/B build hashes from merge acceptance.
+
+No production data/schema/runtime/API/UI/Planner behavior changed. Reverify the
+final PR head and stop after review/merge for separate architecture and rights
+decisions.
+
 ## First profile payload compatibility — 2026-09-20
 
 PR73 merged at a9472c2a0bb0534b70b41c541aa0ac9b4cb26ba0; user authorized
