@@ -58,10 +58,17 @@
       "data/curation/v22-13-map-a/ingredient-mapping-part*.csv"
     ],
     "mapping_rows_loaded": {
-      "candidate_rows_total_from_provided_shards": 68,
-      "ingredient_mapping_rows_total_from_provided_shards": 96,
+      "candidate_rows_total_from_full_pr39_package": 350,
+      "ingredient_mapping_rows_total_from_full_pr39_package": 363,
       "relevant_candidate_rows": 68,
       "relevant_external_identity_rows": 96
     }
+  },
+  "production_nutrition_seed": {
+    "path": "data/seed/food_ingredients/nutrition.csv",
+    "row_count": 183,
+    "git_blob_sha1": "fbaff2c983cbf1a59c7952fa9acb7d8296a710e6",
+    "relevant_existing_profiles_identified": 33,
+    "profile_form_suitability_policy": "PRESENCE_AND_PROVENANCE_IDENTIFIED; RECIPE_FORM_SUITABILITY_REQUIRES_REVIEW"
   }
 }
