@@ -1,49 +1,96 @@
 {
-  "operation": "DATA-CORPUS-V1-DC1",
-  "repository_base": "d8c76a64483e3d5814e702be33c12cbe2e144160",
-  "execution_issue": 67,
+  "assortment": {
+    "assessment": "INITIAL_68_FUNNEL_SKEWED_REVIEW_REQUIRED",
+    "category_counts": {
+      "Блюда из творога": 2,
+      "Блюда из яиц": 11,
+      "Картофель, овощи и грибы": 14,
+      "Крупы и каши": 4,
+      "Макаронные изделия": 2,
+      "Мучные изделия": 1,
+      "Мясные блюда": 2,
+      "Птица и кролик": 3,
+      "Супы": 23,
+      "Холодные блюда": 6
+    },
+    "observations": [
+      "Candidate funnel is dominated by soups and potato/vegetable/mushroom dishes.",
+      "Egg dishes are well represented relative to standalone meat/poultry families.",
+      "This DC1 package preserves the 68-family funnel and does not expand it automatically; realistic weekly variety remains a DC3 curation blocker."
+    ]
+  },
   "candidate_selection": {
-    "rule": "All merged PR #39 DIRECT_EXISTING_MAP_LEAD + CATALOGUE_EXTENSION_LEAD recipes",
-    "recipe_family_count": 68,
-    "ready_raw_count": 68,
-    "strict_raw_triage_yes": 45,
-    "strict_raw_triage_no": 23,
-    "variant_selection": {
-      "exact_single_or_preselected": 27,
-      "multi_variant_review_required": 41
-    },
     "dc3_batch_counts": {
-      "DC3-B_LOW_DEBT_EXACT_VARIANT": 8,
-      "DC3-C_EXACT_VARIANT_AFTER_DC2": 16,
-      "DC3-D_VARIANT_SELECTION_REVIEW": 41,
-      "DC3-A_ZERO_NEW_PROFILE": 3
-    }
+      "DC3-A_SIMPLE_NO_DC2_WRITE": 3,
+      "DC3-B_SIMPLE_AFTER_DC2": 23,
+      "DC3-C_VARIANT_BOUNDARY_REVIEW": 42
+    },
+    "ready_raw_external_status_count": 68,
+    "ready_raw_is_production_ready": false,
+    "recipe_family_count": 68,
+    "rule": "All accepted PR39 DIRECT_EXISTING_MAP_LEAD + CATALOGUE_EXTENSION_LEAD recipes",
+    "source_relationship_rows_v22_5": 991,
+    "source_variant_structure": {
+      "multi_or_alternative_review_required": 42,
+      "multiple_source_variants": 37,
+      "one_source_variant": 31,
+      "single_variant_no_explicit_alternative": 26
+    },
+    "strict_raw_triage_no": 23,
+    "strict_raw_triage_yes": 45,
+    "v22_13_extra_noncalc_relationship_gap_recipe_count": 20
   },
+  "compatibility": {
+    "candidate_recipes_with_v22_13_additional_noncalc_relationship_rows": 20,
+    "exact_v22_13_row_shards_available_to_this_recovery": false,
+    "row_level_full_relationship_equivalence_claimed": false,
+    "v22_5_candidate_calc_rows_match_v22_13_calc_rows_for_all_68": true,
+    "v22_5_rows_reproduce_pr39_mapping_aggregates_for_all_68": true
+  },
+  "execution_issue": 67,
   "food_demand": {
-    "external_identity_count": 55,
-    "deduplicated_demand_count": 55,
-    "existing_accepted_identity_profile_demands": 23,
-    "dc2_required_demands": 32,
-    "proposed_dc2_batch_counts": {
-      "REUSE_NO_DC2_WRITE": 23,
-      "DC2-A_HIGH_IMPACT": 15,
-      "DC2-B_COMMON_EXTENSION": 7,
-      "DC2-C_IDENTITY_FORM_REVIEW": 10
+    "accepted_existing_identity_mapping_count": 33,
+    "dc2_batch_counts": {
+      "DC2-A_HIGH_IMPACT": 6,
+      "DC2-B_STANDARD_EXTENSION": 22,
+      "DC2-C_IDENTITY_FORM_REVIEW": 35,
+      "REUSE_NO_DC2_WRITE": 33
     },
-    "source_strategy_counts": {
-      "REUSE_CURRENT_ACCEPTED_PROFILE": 23,
-      "RU_PRIMARY_OFFICIAL_CANDIDATE": 11,
-      "RU_PRIMARY_OFFICIAL_CANDIDATE_AFTER_FORM_SPLIT": 8,
-      "OFFICIAL_SOURCE_AFTER_IDENTITY_REVIEW": 6,
-      "OFFICIAL_SOURCE_REQUIRED_AFTER_FORM_SPLIT": 5,
-      "OFFICIAL_PRIMARY_SOURCE_TO_VERIFY": 2
+    "dc2_required_identity_count": 63,
+    "deduplication_policy": "NO_NAME_BASED_DEDUP; one demand row per accepted external identity until equivalence is proven",
+    "demand_row_count": 96,
+    "external_identity_count": 96,
+    "mapping_state_counts": {
+      "ALIAS_EXISTING": 15,
+      "EXACT_EXISTING": 18,
+      "FORM_SPLIT_CANDIDATE": 23,
+      "NEW_FOOD_CANDIDATE": 40
     },
-    "rights_status_counts": {
-      "ACCEPTED_REPOSITORY_TRUTH": 23,
-      "BLOCKED_PENDING_RIGHTS_REVIEW": 19,
-      "REFERENCE_ONLY": 6,
-      "UNRESOLVED": 7
-    }
+    "semantic_label_difference_review_count": 20,
+    "semantic_label_difference_review_ids": [
+      "ING-0020",
+      "ING-0025",
+      "ING-0029",
+      "ING-0030",
+      "ING-0032",
+      "ING-0034",
+      "ING-0035",
+      "ING-0036",
+      "ING-0038",
+      "ING-0042",
+      "ING-0046",
+      "ING-0053",
+      "ING-0055",
+      "ING-0056",
+      "ING-0063",
+      "ING-0064",
+      "ING-0069",
+      "ING-0076",
+      "ING-0083",
+      "ING-0097"
+    ]
   },
-  "stop_condition": "DC1 evidence only. DC2/DC3 production publication remains NOT STARTED and requires separate reviewable batches."
+  "operation": "DATA-CORPUS-V1-DC1-RECOVERED",
+  "repository_base": "d8c76a64483e3d5814e702be33c12cbe2e144160",
+  "stop_condition": "DC1 evidence only. DC2/DC3 remain NOT STARTED and require separate reviewable production batches."
 }
