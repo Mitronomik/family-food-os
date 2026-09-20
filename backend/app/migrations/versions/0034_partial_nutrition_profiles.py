@@ -3,6 +3,18 @@
 MIGRATION_ID = "0034_partial_nutrition_profiles"
 SQLITE_MIGRATION_MODE = "foreign_key_rebuild"
 
+# Migration 0029 owns this trigger. SQLite leaves a dependent trigger invalid
+# while its referenced parent table is dropped during a rebuild, so preserve
+# the accepted trigger semantics explicitly across the table swap.
+COMPOSITION_PROFILE_TRIGGER = """
+CREATE TRIGGER food_composition_versions_complete BEFORE INSERT ON food_composition_versions
+    WHEN NEW.node_count != (SELECT count(*) FROM food_composition_nodes WHERE composition_id = NEW.id)
+      OR NEW.step_count != (SELECT count(*) FROM food_composition_steps WHERE composition_id = NEW.id)
+      OR (NEW.kind = 'ATOMIC' AND NOT EXISTS(SELECT 1 FROM food_nutrition_profiles
+          WHERE id = NEW.profile_id AND food_ingredient_id = NEW.food_ingredient_id))
+    BEGIN SELECT RAISE(ABORT, 'Состав неполон или профиль принадлежит другому продукту.'); END
+"""
+
 
 def upgrade(connection):
     """Rebuild profile storage and add immutable source-observation rows.
@@ -11,6 +23,10 @@ def upgrade(connection):
     Existing profile IDs and all dependent NutrientVector/Composition references
     remain unchanged.
     """
+
+    # Drop only the cross-context trigger that directly references the table
+    # being rebuilt. It is recreated with the exact accepted 0029 semantics below.
+    connection.execute("DROP TRIGGER IF EXISTS food_composition_versions_complete")
 
     connection.execute(
         """
@@ -135,6 +151,8 @@ def upgrade(connection):
             WHERE is_current = 1
         """
     )
+
+    connection.execute(COMPOSITION_PROFILE_TRIGGER)
 
     connection.execute(
         """
