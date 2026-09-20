@@ -1,5 +1,18 @@
 # Progress
 
+## Partial nutrition profiles — migration-tail correction
+
+The next CI generation confirmed repository compatibility and domain-state fixes.
+Only two historical VECTOR-B tests remained red because their expected migration
+lists stopped at `0032_meal_plan_serving`.
+
+Those expectations now include `0034_partial_nutrition_profiles`. Their actual
+rollback/resume behavior, audited VECTOR-B semantics and assertions are unchanged;
+only the accepted migration tail advanced.
+
+No functional acceptance criterion was weakened. The next CI run is the final
+verification target for PR #76.
+
 ## Partial nutrition profiles — CI correction receipt
 
 Initial PR #76 CI on pre-fix heads exposed two task-local regressions:
