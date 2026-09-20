@@ -108,12 +108,12 @@ Every demand row has one explicit authority state:
 - `BLOCKED_FORM_SELECTION_BEFORE_AUTHORITY`: **18**
 - `BLOCKED_IDENTITY_SEMANTICS_BEFORE_AUTHORITY`: **13**
 - `BLOCKED_PROXY_IDENTITY_BEFORE_AUTHORITY`: **4**
-- `CANDIDATE_SOURCE_FAMILY_IDENTIFIED_EXACT_RECORD_UNPINNED`: **28**
 - `EXISTING_PROFILE_PROVENANCE_IDENTIFIED_FORM_REVIEW_REQUIRED`: **33**
+- `SOURCE_FAMILY_SEARCH_TARGET_EXACT_RECORD_UNVERIFIED`: **28**
 
-For existing mappings, `authority_source_candidate` records the exact current production profile provenance and record ID. For unresolved/new forms, an official source family is recorded only where identity/form semantics permit it; otherwise authority assignment is blocked explicitly until identity/form review closes.
+For existing mappings, `authority_source_candidate` records the exact current production profile provenance and record ID. For unresolved/new forms, the field is only a **preferred source-family search target** after identity/form blockers are cleared; it does not assert that a compatible source record exists.
 
-`FIC_FGBUN_2024_OFFICIAL_COMPOSITION_FAMILY` and `USDA_FDC_OFFICIAL_DATASET` are source-family candidates, not exact-record verification. FIC/FGBUN rights remain blocked pending exact retained-use review; USDA exact-record/form compatibility still must be pinned.
+`FIC_FGBUN_2024_SEARCH_TARGET` and `USDA_FDC_SEARCH_TARGET` mean "search here first", not source authority or exact-record verification. FIC/FGBUN presence, record identity, form compatibility and retained-use rights still require review; USDA exact-record/form compatibility still must be pinned.
 
 ## Files
 
@@ -159,9 +159,10 @@ A valid rebuild therefore requires:
 - the exact filenames listed in `source-artifacts.json`;
 - every file to match its recorded SHA-256 before parsing;
 - delivery to CI through a temporary authenticated HTTPS URL stored as an Actions secret;
+- the ZIP/container hash to be treated as diagnostic only, never as canonical source identity;
 - missing, changed or unavailable source bytes to fail closed rather than fall back to generated CSV/JSON.
 
-Any GitHub Actions artifact containing the ZIP is an **ephemeral audit copy only**, not canonical long-term source storage. Reconstructing the package later requires access to the operator-managed source files whose per-file hashes are recorded here.
+The raw source ZIP must **not** be uploaded as a GitHub Actions artifact in this public repository. Only regenerated package outputs may be retained as CI artifacts. Reconstructing the package later requires access to the operator-managed source files whose exact filenames and per-file hashes are recorded here.
 
 ## Verification invariants
 
@@ -189,7 +190,7 @@ A second build from the same inputs must be byte-identical for all generated pac
 3. **20** candidates have additional v22.13 non-calc relationship rows; exact v22.13 row shards were not available here, so full row-level compatibility remains unproven.
 4. **20** used identities have a v22.5/v22.13 label difference requiring review; `ING-0069` is the clearest explicit conflict example.
 5. All **33** existing mapped profiles have identified current provenance, but exact recipe-form suitability still requires review.
-6. Candidate-source-family assignments with unpinned records are not authority closure.
+6. Preferred source-family search targets with unpinned records are not evidence that a compatible source record exists and are not authority closure.
 7. The original 68-family funnel has assortment gaps for a realistic family week; DC1 records the gap but does not widen scope automatically.
 
 ## Stop condition
