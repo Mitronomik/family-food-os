@@ -512,7 +512,6 @@ class FoodNutritionProfile:
     estimated: bool | None
     is_current: bool
     created_at: datetime
-    observations: tuple[NutritionSourceObservation, ...] = ()
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "id", _uuid4(self.id, field="id"))
@@ -596,66 +595,6 @@ class FoodNutritionProfile:
             "created_at",
             normalize_utc_instant(self.created_at, field="created_at"),
         )
-        observations = tuple(self.observations)
-        if any(
-            not isinstance(observation, NutritionSourceObservation)
-            for observation in observations
-        ):
-            raise _issue(
-                DomainIssueCode.INVALID_CODE,
-                "observations must contain NutritionSourceObservation values.",
-                field="observations",
-                value=self.observations,
-                next_action="Use validated source-observation values.",
-            )
-        if any(observation.profile_id != self.id for observation in observations):
-            raise _issue(
-                DomainIssueCode.INVALID_IDENTIFIER,
-                "Nutrition observation profile_id must match the profile.",
-                field="observations",
-                value=self.observations,
-                next_action="Bind every observation to this profile id.",
-            )
-        fields = [observation.source_field for observation in observations]
-        if len(fields) != len(set(fields)):
-            raise _issue(
-                DomainIssueCode.INVALID_CODE,
-                "A profile cannot contain duplicate source-field observations.",
-                field="observations",
-                value=fields,
-                next_action="Keep one immutable source observation per legacy field.",
-            )
-        by_field = {observation.source_field: observation for observation in observations}
-        for field in ("kcal", "protein_g", "fat_g", "carbohydrates_g"):
-            value = getattr(self, field)
-            observation = by_field.get(field)
-            if value is None and (
-                observation is None
-                or observation.state == NutritionObservationState.VALUE
-            ):
-                raise _issue(
-                    DomainIssueCode.REQUIRED_FIELD,
-                    f"Partial profile field {field} requires an explicit unknown-state observation.",
-                    field=field,
-                    value=value,
-                    next_action=(
-                        "Record missing, below_detection or method_incompatible "
-                        "source evidence instead of inventing a number."
-                    ),
-                )
-            if value is not None and observation is not None and (
-                observation.state != NutritionObservationState.VALUE
-            ):
-                raise _issue(
-                    DomainIssueCode.INVALID_CODE,
-                    f"Numeric profile field {field} conflicts with its source observation state.",
-                    field=field,
-                    value=value,
-                    next_action="Keep numeric values only for VALUE observations.",
-                )
-        object.__setattr__(
-            self, "observations", tuple(sorted(observations, key=lambda item: item.source_field))
-        )
 
     @property
     def legacy_core_complete(self) -> bool:
@@ -684,8 +623,75 @@ class FoodNutritionProfile:
             self.source_data_type,
             self.verified_at,
             self.estimated,
-            self.observations,
         )
+
+
+def validate_nutrition_profile_observations(
+    profile: FoodNutritionProfile,
+    observations: tuple[NutritionSourceObservation, ...],
+) -> tuple[NutritionSourceObservation, ...]:
+    """Validate immutable source-state evidence without changing profile shape."""
+
+    observations = tuple(observations)
+    if any(
+        not isinstance(observation, NutritionSourceObservation)
+        for observation in observations
+    ):
+        raise _issue(
+            DomainIssueCode.INVALID_CODE,
+            "observations must contain NutritionSourceObservation values.",
+            field="observations",
+            value=observations,
+            next_action="Use validated source-observation values.",
+        )
+    if any(observation.profile_id != profile.id for observation in observations):
+        raise _issue(
+            DomainIssueCode.INVALID_IDENTIFIER,
+            "Nutrition observation profile_id must match the profile.",
+            field="observations",
+            value=observations,
+            next_action="Bind every observation to this profile id.",
+        )
+    fields = [observation.source_field for observation in observations]
+    if len(fields) != len(set(fields)):
+        raise _issue(
+            DomainIssueCode.INVALID_CODE,
+            "A profile cannot contain duplicate source-field observations.",
+            field="observations",
+            value=fields,
+            next_action="Keep one immutable source observation per legacy field.",
+        )
+
+    by_field = {observation.source_field: observation for observation in observations}
+    for field in ("kcal", "protein_g", "fat_g", "carbohydrates_g"):
+        value = getattr(profile, field)
+        observation = by_field.get(field)
+        if value is None and (
+            observation is None
+            or observation.state == NutritionObservationState.VALUE
+        ):
+            raise _issue(
+                DomainIssueCode.REQUIRED_FIELD,
+                f"Partial profile field {field} requires an explicit unknown-state observation.",
+                field=field,
+                value=value,
+                next_action=(
+                    "Record missing, below_detection or method_incompatible "
+                    "source evidence instead of inventing a number."
+                ),
+            )
+        if value is not None and observation is not None and (
+            observation.state != NutritionObservationState.VALUE
+        ):
+            raise _issue(
+                DomainIssueCode.INVALID_CODE,
+                f"Numeric profile field {field} conflicts with its source observation state.",
+                field=field,
+                value=value,
+                next_action="Keep numeric values only for VALUE observations.",
+            )
+
+    return tuple(sorted(observations, key=lambda item: item.source_field))
 
 
 def deactivate_food_ingredient(
