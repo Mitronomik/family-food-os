@@ -1,0 +1,30 @@
+{
+  "base_commit": "a9472c2a0bb0534b70b41c541aa0ac9b4cb26ba0",
+  "inputs": [
+    {
+      "path": "packages/reference-profiles/normalized/profiles.jsonl",
+      "root": "corpus",
+      "sha256": "66a8474fa63a2aac2a4c07ba822971806d257fd070d8a86c0bd07e123513feaf"
+    },
+    {
+      "path": "packages/source-closure/raw/skurikhin-tutelyan-nstu.pdf",
+      "root": "corpus",
+      "sha256": "e9c302fea52547222b778a3313d876135190131a4f2a04bf59f9b0751a4388d5"
+    },
+    {
+      "path": "data/curation/dc2-exact-input-mappings/forms.json",
+      "root": "repo",
+      "sha256": "9e1bfce7520914a12a81319a9d23741538bb905f073f206a614ab6fdb42bb9da"
+    },
+    {
+      "path": "data/seed/food_ingredients/ingredients.csv",
+      "root": "repo",
+      "sha256": "55058e511e3db14c97382e295e2a617a5a156041e49d2a7ab9772811bd06aaf3"
+    },
+    {
+      "path": "backend/app/domain/food_ingredients.py",
+      "root": "repo",
+      "sha256": "65b7ad6df4af48336e04a881e82da9ea5fda365f3467e92a0c1c909ff5c8f115"
+    }
+  ]
+}

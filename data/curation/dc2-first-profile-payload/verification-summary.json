@@ -1,0 +1,16 @@
+{
+  "additional_reviewed_source_fields_per_profile": 6,
+  "canonical_numeric_values": 0,
+  "domain_rejections": 5,
+  "full_book_nutrient_coverage": false,
+  "imported_profiles": 0,
+  "observations": 60,
+  "profiles": 5,
+  "required_source_fields_per_profile": 6,
+  "rights_status": "BLOCKED_PENDING_RIGHTS_REVIEW",
+  "scope": "all twelve fields in five reviewed reference profiles; additional book columns remain separate",
+  "source_states": {
+    "below_detection": 15,
+    "published_positive": 45
+  }
+}

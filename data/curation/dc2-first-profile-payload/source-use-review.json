@@ -1,0 +1,45 @@
+{
+  "decision_id": "dc2-book2002-five-foods-use-review-2026-09-20",
+  "evidence": [
+    {
+      "finding": "exact2002 edition; free viewer access does not establish derivative reuse permission",
+      "url": "https://search.rsl.ru/ru/record/01001844793"
+    },
+    {
+      "finding": "different2024 edition ISBN978-5-6051148-5-7; do not transfer terms to2002",
+      "url": "https://deli.ru/product/himicheskiy-sostav-rossiyskih-pischevyh-produktov-spravochnik-2"
+    },
+    {
+      "finding": "official Request database in Excel form, email and purpose; reuse license not established",
+      "url": "https://ion.ru/nauka/baza-dannykh-khimicheskogo-sostava/1-1-baza-dannykh/1.1_baza%20dannih.html"
+    }
+  ],
+  "explicit_reuse_permission": "not_found",
+  "factual_use_legal_conclusion": "not_adjudicated",
+  "outbound_request_sent": false,
+  "production_use_disposition": "pending_scope_review",
+  "public_redistribution_disposition": "pending_scope_review",
+  "request_scope": [
+    "machine extraction",
+    "internal retention",
+    "commercial calculations",
+    "public values and derived JSON",
+    "attribution",
+    "edition and method",
+    "future expansion"
+  ],
+  "rights_status": "BLOCKED_PENDING_RIGHTS_REVIEW",
+  "scope_food_codes": [
+    "10.1.1",
+    "8.1.5.1",
+    "8.1.2.1",
+    "8.1.5.12",
+    "6.5.3"
+  ],
+  "source_edition": "ISBN 5-94343-028-8",
+  "unblock_options": [
+    "existing permission covering intended scope",
+    "documented bounded factual-use disposition",
+    "official export with explicit terms"
+  ]
+}

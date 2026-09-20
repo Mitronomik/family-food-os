@@ -1,0 +1,20 @@
+name: DC2 profile payload compatibility
+on:
+  pull_request:
+    paths:
+      - 'data/curation/dc2-first-profile-payload/**'
+      - 'scripts/*dc2_profile_payload.py'
+      - 'backend/app/domain/food_ingredients.py'
+      - 'backend/app/domain/decimal_utils.py'
+      - '.github/workflows/dc2-profile-payload.yml'
+permissions:
+  contents: read
+jobs:
+  compatibility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/test_dc2_profile_payload.py

@@ -1,5 +1,25 @@
 # Progress
 
+## First profile payload compatibility — 2026-09-20
+
+PR73 merged at a9472c2a0bb0534b70b41c541aa0ac9b4cb26ba0; user authorized
+first numeric payload. Local package prepared:5profiles,60observations,
+45positive/15below detection. All12 reviewed fields per profile retained.
+Ten tests passed; two complete builds byte-identical. Actual domain probes
+reject all5 before DB writes (mandatory legacy carbohydrate; sugar macros).
+No successful domain import or idempotence/rollback DB test is claimed.
+
+Reproduce with scripts/build_dc2_profile_payload.py and immutable corpus-v03;
+output outside repository to a new empty directory. Local deliverables folder
+contains dc2-first-profile-payload-v1-final. Source values remain private while reuse
+scope pending; repository stores tooling, metadata and decision proposal.
+
+Read data/curation/dc2-first-profile-payload/profile-compatibility-proposal.md.
+Next requires explicit profile/schema compatibility approval; cannot solve by
+untyped carbohydrate assignment, USDA substitution or below-detection→zero.
+Official FIC Excel request route documented; no message/purchase made.
+
+
 ## PR73 blocker corrections — 2026-09-20
 
 The user explicitly authorized correction of all PR73 blockers and completion
