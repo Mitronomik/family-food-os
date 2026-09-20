@@ -1,8 +1,10 @@
 # Russian nutrition methodologies — versioned calculation policy
 
-Status: implementation contract authorized by the user on2026-09-20 after the
-DC2 profile compatibility finding. This adds an explicitly selected Russian
+Status: implementation contract explicitly confirmed by the user on 2026-09-20
+during PR75 review, after PR74 merged. This adds an explicitly selected Russian
 method path; historical V1 calculations and registry snapshots are immutable.
+The same confirmation explicitly approves
+`RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1` under the constraints below.
 
 ## Decision and scope
 
@@ -17,8 +19,14 @@ This bounded implementation delivers domain interpretation, energy accounting,
 reference selection/comparison and internal read-only services. It does not
 publish book data, alter persisted profiles, change the HTTP/UI/Planner default,
 or replace NASEM personal estimates with population table entries. No migration
-is introduced and reserved0033 remains unchanged. PR74 remains a separate
-unmerged payload-preparation PR; this branch is independently based on PR73 main.
+is introduced and reserved0033 remains unchanged.
+
+PR74 is accepted at
+`4c9598b623b9042924bb1f8d864c56d3d0a407c4`. Its five-profile preparation,
+rights block, input lock and numeric-free verification receipt are upstream
+evidence for this methodology layer. PR75 does not weaken or supersede PR74's
+`BLOCKED_PENDING_RIGHTS_REVIEW`, zero imported profiles or zero canonical
+numeric-value publication.
 
 ## Components and uncertainty
 
@@ -35,12 +43,22 @@ policy, not a claim that all methods are analytically identical. The book2002
 general method does not prove the exact method of every row.
 
 `RU_SOURCE_NATIVE_STRICT_V1` preserves below-detection as unavailable.
-`RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1` is an explicitly selected alternative:
-a literal published zero with below-detection state can be used as estimated0,
-with the original state, unknown detection limit and estimate warning retained.
+`RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1` is an explicitly selected and
+user-approved alternative: a literal published zero with below-detection state
+may be interpreted as numeric `0` only as an **estimate**. The original
+`below_detection` state remains in lineage, detection limit remains unknown,
+`estimated=true` is mandatory and the estimate warning remains attached.
 Missing, held and unsupported-method observations cannot use this rule.
-Neither policy proves allergen absence or supplies an upper confidence bound.
-Source estimated/unknown-estimation flags are preserved independently.
+
+This estimated zero is never:
+- an exact analytical zero;
+- evidence of allergen absence;
+- permission to erase censoring provenance;
+- a default Planner/API/UI truth without the methodology version being pinned;
+- a substitute for source-use rights or profile publication authority.
+
+Neither policy supplies an upper confidence bound. Source estimated/unknown-
+estimation flags are preserved independently.
 
 Amounts use Decimal. Aggregation scales matching edible input forms, retains
 all inputs/methods and propagates unavailable values. It is not a cooked-output
@@ -119,10 +137,11 @@ no silent default migration is authorized by adding these operations.
 | Allergens | Unknown is not absent | Retain composition propagation and reviewed source claims; analytical nutrient zero cannot certify safety |
 | Planning | New method outputs are explicit | Pin methodology in planning revisions before enabling Russian targets/defaults; replay must reproduce old plans |
 
-The user has authorized Russian adaptation; these are implementation dependencies,
-not a request to approve the same methodology again. Source-rights decisions,
-merges and live publication remain separate. This PR completes the calculation
-policy layer, not all persistence/catalogue/Planner integration.
+The user has authorized the PR75 Russian methodology implementation and confirmed
+the published-zero estimate policy above. Source-rights decisions, schema/profile
+migration, production publication, Planner/API/UI enablement and later milestones
+remain separately gated. This PR completes the bounded calculation-policy and
+internal-service layer, not all persistence/catalogue/Planner integration.
 
 ## Verification and rollback
 
@@ -132,8 +151,17 @@ selection, RE/RAE/NE rejection, household isolation, repeated receipts and actua
 SQLite composition/vector reads. V1 Nutrition/targets/composition regressions
 must pass. AI is not required.
 
-`trial_ru_nutrition_methods.py` runs both policies on five checksum-pinned book
-reference profiles and keeps numeric output outside the public repository.
-It demonstrates method interpretation only, not profile import or recipe readiness.
-Rollback disables new explicit method calls and reverts optional new modules;
-no stored data or historical results need rewriting.
+`trial_ru_nutrition_methods.py` can run both policies on the five PR74-pinned
+external profiles and keeps numeric output outside the public repository. Merge
+acceptance does not depend on an unretained local A/B trial. Instead,
+[the numeric-free receipt](../../data/curation/russian-methodology/trial-verification-receipt.json)
+is validated in CI against accepted PR74 nonnumeric profile evidence, PR74 input/
+verification receipts and current methodology code. It proves the reviewable
+5-profile / 25-core-observation / 50-policy-evaluation shape, 3 strict unknowns,
+3 approved estimated-zero interpretations and zero canonical profile imports
+without committing source numeric tables.
+
+An external trial remains useful operator evidence when the source corpus is
+available, but it does not establish rights, publication readiness, profile
+import or recipe readiness. Rollback disables new explicit method calls and
+reverts optional new modules; no stored data or historical results need rewriting.
