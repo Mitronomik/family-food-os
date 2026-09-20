@@ -1057,6 +1057,14 @@ def main() -> None:
             ),
             "profile_form_suitability_policy": "PRESENCE_AND_PROVENANCE_IDENTIFIED; RECIPE_FORM_SUITABILITY_REQUIRES_REVIEW",
         },
+        "source_bundle_contract": {
+            "availability": "OPERATOR_MANAGED_EXTERNAL_SOURCE_BUNDLE",
+            "repository_retention": "NOT_COMMITTED_TO_GIT_UNDER_CURRENT_SOURCE_GOVERNANCE",
+            "required_file_identity": "EXACT_FILENAMES_AND_SHA256_FROM_LOCAL_SOURCE_FILES",
+            "ci_delivery": "TEMPORARY_AUTHENTICATED_HTTPS_URL_VIA_ACTIONS_SECRET",
+            "actions_artifact_role": "EPHEMERAL_AUDIT_COPY_ONLY_NOT_CANONICAL_STORAGE",
+            "rebuild_rule": "REBUILD_ONLY_FROM_FILES_MATCHING_RECORDED_SHA256; UNKNOWN_OR_MISSING_SOURCE_FAILS_CLOSED",
+        },
         "local_source_files": [
             {
                 "name": name,
@@ -1339,6 +1347,19 @@ python scripts/test_data_corpus_v1_dc1.py /tmp/data-corpus-v1-dc1
 ```
 
 Source XLSX files are not committed by this package; exact required SHA-256 values are enforced by the generator and recorded in `source-artifacts.json`.
+
+### Source availability contract
+
+Raw source XLSX bytes are intentionally **not** repository-local truth. Under the current source-governance boundary they are retained as an **operator-managed external evidence bundle**.
+
+A valid rebuild therefore requires:
+
+- the exact filenames listed in `source-artifacts.json`;
+- every file to match its recorded SHA-256 before parsing;
+- delivery to CI through a temporary authenticated HTTPS URL stored as an Actions secret;
+- missing, changed or unavailable source bytes to fail closed rather than fall back to generated CSV/JSON.
+
+Any GitHub Actions artifact containing the ZIP is an **ephemeral audit copy only**, not canonical long-term source storage. Reconstructing the package later requires access to the operator-managed source files whose per-file hashes are recorded here.
 
 ## Verification invariants
 
