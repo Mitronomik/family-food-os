@@ -5,7 +5,7 @@ from datetime import datetime
 from typing import Any
 from uuid import UUID
 
-from sqlalchemy import case, exists, func, insert, literal, or_, select, update
+from sqlalchemy import case, column, exists, func, insert, literal, or_, select, table, update
 from sqlalchemy.engine import Connection, RowMapping
 from sqlalchemy.exc import IntegrityError
 
@@ -349,19 +349,34 @@ class SqlAlchemyFoodNutritionProfileRepository:
     def _nutrition_from_row(
         self, row: Mapping[str, Any] | RowMapping
     ) -> FoodNutritionProfile:
-        observations = tuple(
-            _observation_from_row(item)
-            for item in self._connection.execute(
-                select(food_nutrition_profile_observations_table)
-                .where(
-                    food_nutrition_profile_observations_table.c.profile_id == row["id"]
+        # The same application code is used by upgrade/replay tests against older
+        # accepted migration prefixes. Before 0034 the observation table does not
+        # exist, and historical complete profiles correctly have no such rows.
+        migrations = table("schema_migrations", column("migration_id"))
+        partial_storage_available = (
+            self._connection.execute(
+                select(migrations.c.migration_id).where(
+                    migrations.c.migration_id == "0034_partial_nutrition_profiles"
                 )
-                .order_by(
-                    food_nutrition_profile_observations_table.c.source_field,
-                    food_nutrition_profile_observations_table.c.id,
-                )
-            ).mappings()
+            ).first()
+            is not None
         )
+        observations = ()
+        if partial_storage_available:
+            observations = tuple(
+                _observation_from_row(item)
+                for item in self._connection.execute(
+                    select(food_nutrition_profile_observations_table)
+                    .where(
+                        food_nutrition_profile_observations_table.c.profile_id
+                        == row["id"]
+                    )
+                    .order_by(
+                        food_nutrition_profile_observations_table.c.source_field,
+                        food_nutrition_profile_observations_table.c.id,
+                    )
+                ).mappings()
+            )
         return _nutrition_from_row(row, observations)
 
 
