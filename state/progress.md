@@ -1741,3 +1741,33 @@ with no shared runtime/persistence/startup changes or remaining regression conce
 PR36: **READY FOR FINAL RE-REVIEW**, not merged. Assembly A BLOCKED; Assembly B
 and PR7+ NOT STARTED. Same-origin/redirect hardening remains follow-up.
 Stop after correction publication; no merge or next milestone authorization.
+
+## Corpus v0.3 reconciliation — 2026-09-20 branch work
+
+The user authorized a separate evidence/curation PR integrating the local v0.3
+corpus with the existing DC1 work. This bounded operation does not authorize
+DC2/DC3 production publication or a roadmap reorder.
+
+Base: `d8c76a64483e3d5814e702be33c12cbe2e144160`. PR #70 was OPEN / NOT MERGED
+at reconciliation, pinned at `c23227be12605c27f3621b38e839085f141ceb8b`.
+That was the capture-time state. PR70 is now accepted as recorded below; its recovery package remains unchanged.
+
+See [integration plan](../docs/family-food/corpus-v03-integration-plan.md) and
+[reconciliation package](../data/curation/corpus-v03-reconciliation/README.md).
+The package accounts for all 68 historical PR70 families, 479 v0.3 cards,
+1473 routes and 2693 food occurrences. Lexical review groups are not canonical
+food identities. The 46 review queues are not publication-ready batches.
+
+Original delivery boundary: review-ready, without merge authorization at that time.
+The later authorization below supersedes only the PR71 merge boundary.
+
+## PR70 accepted; PR71 synchronization — 2026-09-20
+
+PR70 merged as `b9768984392982bd05d28fc0f7793453fe8378b5`. Final PR70 head `514c6b1` and the historical
+`c23227b` reconciliation pin have identical trees. No source input correction
+or numerical regeneration is implied by the merge.
+
+The user authorized updating, verifying and merging PR71 after PR70.
+Current focus/handoff are synchronized; historical receipts remain preserved.
+The integration remains curation-only. No production/catalogue/schema/API/UI/
+Planner change, no DC2/DC3 publication and no Gate1 closure are included.

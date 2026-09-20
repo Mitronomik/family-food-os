@@ -2,6 +2,33 @@
 
 Updated: `2026-09-20`.
 
+## Current handoff after PR70 merge
+
+Accepted main is `b9768984392982bd05d28fc0f7793453fe8378b5` (merged PR #70).
+PR #71 is being synchronized and verified for the user-authorized merge.
+See [current focus](current-focus.md), [integration plan](../docs/family-food/corpus-v03-integration-plan.md)
+and [reconciliation package](../data/curation/corpus-v03-reconciliation/README.md).
+
+The PR70 recovery artifacts and source input hashes are preserved. Its final
+head `514c6b1` has the same tree as the historical `c23227b` input pin used by
+v0.3 reconciliation. Generated historical merge-status flags remain capture
+metadata, not live project state. All current statuses are owned by this section
+and current-focus; the receipt below is historical.
+
+Reconciliation retains 547 crosswalk records, 2693 food occurrences and 46
+review queues, all without production publication. Exact form/source/rights/
+nutrient decisions are next proposed work, not automatically authorized.
+After the authorized PR71 merge, stop. DC2/DC3/DC4, Gate1 and PR9 remain open.
+
+## Preserved pre-merge PR70 handoff receipt — historical
+
+The following text records the earlier delivery state. Its REVIEW-READY and
+not-merged wording is superseded by the current handoff above.
+
+### Original handoff
+
+Updated: `2026-09-20`.
+
 ## Accepted base and governance
 
 Accepted current main:

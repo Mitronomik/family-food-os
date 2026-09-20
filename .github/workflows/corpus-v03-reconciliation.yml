@@ -1,0 +1,19 @@
+name: Corpus v0.3 reconciliation
+on:
+  pull_request:
+    paths:
+      - 'data/curation/corpus-v03-reconciliation/**'
+      - 'scripts/*corpus_v03_reconciliation.py'
+      - '.github/workflows/corpus-v03-reconciliation.yml'
+permissions:
+  contents: read
+jobs:
+  metadata:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/validate_corpus_v03_reconciliation.py data/curation/corpus-v03-reconciliation/generated
+      - run: python scripts/test_corpus_v03_reconciliation.py
