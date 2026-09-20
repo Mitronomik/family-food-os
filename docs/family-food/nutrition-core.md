@@ -515,9 +515,15 @@ There is no automatic recipe-consumer migration or production composition backfi
 
 ## Russian methodology extension — 2026-09-20
 
-The user approved source-native Russian methodology support and compatibility
-review across the Nutrition chain. The [versioned Russian policy contract](russian-nutrition-methodologies.md)
-owns new explicit interpretation, energy and group-reference operations.
+The user explicitly confirmed PR75 source-native Russian methodology support and
+the opt-in `RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1` policy during review
+after PR74 merged. The [versioned Russian policy contract](russian-nutrition-methodologies.md)
+owns explicit interpretation, energy and group-reference operations. A printed
+source zero that remains `below_detection` may become numeric only under that
+pinned policy and only as `estimated=true`; censoring provenance, unknown
+detection limit and warnings remain authoritative.
+
 Historical V1 values/registry/calculations remain unchanged. Runtime persistence,
-catalogue publication and Planner-default changes are separate implementation
-dependencies; no clinical scope or source permission is inferred.
+profile/schema migration, catalogue publication, source reuse and Planner/API/UI
+default changes are separate gated operations; no clinical scope, exact-zero
+claim, allergen absence or source permission is inferred.
