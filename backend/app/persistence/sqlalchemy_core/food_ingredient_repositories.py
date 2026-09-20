@@ -13,11 +13,13 @@ from app.domain.food_ingredients import (
     FoodIngredient,
     FoodNutritionProfile,
     IngredientAlias,
+    NutritionSourceObservation,
 )
 from app.persistence.sqlalchemy_core.food_ingredient_tables import (
     food_ingredient_aliases_table,
     food_ingredient_allergens_table,
     food_ingredients_table,
+    food_nutrition_profile_observations_table,
     food_nutrition_profiles_table,
 )
 from app.services.food_ingredient_contracts import (
@@ -262,15 +264,25 @@ class SqlAlchemyFoodNutritionProfileRepository:
                     **_nutrition_values(profile)
                 )
             )
+            if profile.observations:
+                self._connection.execute(
+                    insert(food_nutrition_profile_observations_table),
+                    [_observation_values(value) for value in profile.observations],
+                )
         except IntegrityError as exc:
             raise FoodCataloguePersistenceConflictError(
-                "Nutrition provenance or current-profile state conflicts."
+                "Nutrition provenance, source-observation, or current-profile state conflicts."
             ) from exc
-        from app.persistence.sqlalchemy_core.nutrient_vector_repository import (
-            initialize_audited_profile,
-        )
 
-        initialize_audited_profile(self._connection, profile)
+        # Historical V1 vector bootstrap requires complete legacy kcal/P/F/C fields.
+        # Partial profiles remain intentionally unsealed until a compatible reviewed
+        # registry/publication path is introduced by a later bounded PR.
+        if profile.legacy_core_complete:
+            from app.persistence.sqlalchemy_core.nutrient_vector_repository import (
+                initialize_audited_profile,
+            )
+
+            initialize_audited_profile(self._connection, profile)
 
     def get_nutrition_profile_by_id(
         self, profile_id: UUID
@@ -284,7 +296,7 @@ class SqlAlchemyFoodNutritionProfileRepository:
             .mappings()
             .one_or_none()
         )
-        return None if row is None else _nutrition_from_row(row)
+        return None if row is None else self._nutrition_from_row(row)
 
     def get_by_provenance(
         self,
@@ -306,7 +318,7 @@ class SqlAlchemyFoodNutritionProfileRepository:
             .mappings()
             .one_or_none()
         )
-        return None if row is None else _nutrition_from_row(row)
+        return None if row is None else self._nutrition_from_row(row)
 
     def get_current(self, food_ingredient_id: UUID) -> FoodNutritionProfile | None:
         row = (
@@ -320,7 +332,7 @@ class SqlAlchemyFoodNutritionProfileRepository:
             .mappings()
             .one_or_none()
         )
-        return None if row is None else _nutrition_from_row(row)
+        return None if row is None else self._nutrition_from_row(row)
 
     def clear_current(self, food_ingredient_id: UUID) -> None:
         self._connection.execute(
@@ -332,6 +344,25 @@ class SqlAlchemyFoodNutritionProfileRepository:
             )
             .values(is_current=False)
         )
+
+
+    def _nutrition_from_row(
+        self, row: Mapping[str, Any] | RowMapping
+    ) -> FoodNutritionProfile:
+        observations = tuple(
+            _observation_from_row(item)
+            for item in self._connection.execute(
+                select(food_nutrition_profile_observations_table)
+                .where(
+                    food_nutrition_profile_observations_table.c.profile_id == row["id"]
+                )
+                .order_by(
+                    food_nutrition_profile_observations_table.c.source_field,
+                    food_nutrition_profile_observations_table.c.id,
+                )
+            ).mappings()
+        )
+        return _nutrition_from_row(row, observations)
 
 
 def _escape_like(value: str) -> str:
@@ -364,6 +395,19 @@ def _alias_values(alias: IngredientAlias) -> dict[str, object]:
         "alias_key": alias.alias_key,
         "language_code": alias.language_code,
         "created_at": alias.created_at,
+    }
+
+
+def _observation_values(value: NutritionSourceObservation) -> dict[str, object]:
+    return {
+        "id": value.id,
+        "profile_id": value.profile_id,
+        "source_field": value.source_field,
+        "state": value.state.value,
+        "source_literal": value.source_literal,
+        "method_reference": value.method_reference,
+        "source_locator": value.source_locator,
+        "created_at": value.created_at,
     }
 
 
@@ -420,7 +464,25 @@ def _alias_from_row(row: Mapping[str, Any] | RowMapping) -> IngredientAlias:
     )
 
 
-def _nutrition_from_row(row: Mapping[str, Any] | RowMapping) -> FoodNutritionProfile:
+def _observation_from_row(
+    row: Mapping[str, Any] | RowMapping,
+) -> NutritionSourceObservation:
+    return NutritionSourceObservation(
+        id=row["id"],
+        profile_id=row["profile_id"],
+        source_field=row["source_field"],
+        state=row["state"],
+        source_literal=row["source_literal"],
+        method_reference=row["method_reference"],
+        source_locator=row["source_locator"],
+        created_at=row["created_at"],
+    )
+
+
+def _nutrition_from_row(
+    row: Mapping[str, Any] | RowMapping,
+    observations: tuple[NutritionSourceObservation, ...] = (),
+) -> FoodNutritionProfile:
     return FoodNutritionProfile(
         id=row["id"],
         food_ingredient_id=row["food_ingredient_id"],
@@ -438,4 +500,5 @@ def _nutrition_from_row(row: Mapping[str, Any] | RowMapping) -> FoodNutritionPro
         estimated=row["estimated"],
         is_current=row["is_current"],
         created_at=row["created_at"],
+        observations=observations,
     )
