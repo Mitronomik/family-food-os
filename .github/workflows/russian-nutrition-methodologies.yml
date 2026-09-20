@@ -4,6 +4,10 @@ on:
     paths:
       - 'backend/**'
       - 'data/curation/russian-methodology/**'
+      - 'data/curation/dc2-first-batch-review/generated/profile-reviews.json'
+      - 'data/curation/dc2-first-profile-payload/verification-summary.json'
+      - 'data/curation/dc2-first-profile-payload/verification-receipt.json'
+      - 'data/curation/dc2-first-profile-payload/input-lock.json'
       - 'scripts/trial_ru_nutrition_methods.py'
       - '.github/workflows/russian-nutrition-methodologies.yml'
 permissions:
@@ -19,6 +23,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install -e './backend[test]'
+      - run: python scripts/trial_ru_nutrition_methods.py --validate-repository
       - run: >-
           python -m pytest -q
           backend/app/tests/test_nutrition_methodology.py
