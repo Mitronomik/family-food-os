@@ -1,5 +1,20 @@
 # Progress
 
+## PR75 Russian methodology sync — 2026-09-20
+
+PR75 was synchronized with merged PR74 main without force-push. User authorization
+for the Russian calculation/service layer and the opt-in
+`RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1` policy is now explicit and durable.
+
+The methodology trial now consumes PR74 evidence rather than the older PR72 lock.
+Repository acceptance uses a numeric-free receipt derived from five reviewed
+profiles / 25 core observations / 50 policy evaluations, with 3 strict unknowns,
+3 approved estimated-zero interpretations and 0 canonical profile imports.
+External numeric A/B hashes are not merge acceptance evidence.
+
+No schema/migration, source rights, profile publication, Russian norm-table
+publication or Planner/API/UI default change is included.
+
 ## Russian methodology layer — 2026-09-20
 
 User approved Russian method support and broader compatibility adaptation.
