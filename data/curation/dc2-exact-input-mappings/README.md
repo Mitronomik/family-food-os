@@ -1,7 +1,9 @@
 # DC2: exact source-input mappings and mass safeguards
 
 Base: `0322d0a74a0edf53802adc394446011a7d8acc06` (PR72 merged).
-Version: `dc2-exact-input-v1`. User authorized continuation after PR72.
+Version: `dc2-exact-input-v1`. On 2026-09-20 the user explicitly authorized
+correction of all PR73 blockers and completion of this bounded evidence review.
+This authorization does not include merge or production publication.
 
 ## Task contract
 
@@ -54,6 +56,14 @@ loss is applied. Rice drainage and absorption need recipe-specific treatment.
 - PDF p4 §1.5 says published nutrition already accounts for generalized heat
   losses. Published values and independent raw-input calculations must stay
   separate; no second application of those losses to published values.
+  The machine-readable rule is
+  `source-nutrition-policy.json`: source published values already include the
+  generalized heat-loss treatment, those losses may not be applied a second
+  time to the published values, and that source-level treatment is not reusable
+  as canonical retention authority for an independent raw-input calculation.
+  The mapping field `additional_cold_loss_application_allowed=false` is a
+  separate defensive guard for cold/preparation-loss adjustment and is not the
+  §1.5 heat-loss contract.
 
 These findings are professional-source evidence about institutional recipes,
 not domestic storage advice. No new storage/allergen facts are inferred.
@@ -71,8 +81,9 @@ python3 scripts/build_dc2_exact_input_mappings.py --validate-committed
 ```
 
 A full build verifies external input hashes. Offline CI verifies repository
-inputs, output checksums, exact coverage, authority restrictions, exception
-propagation and route completeness. Offline checks do not substitute for reading
+inputs, output checksums, exact coverage, authority restrictions, form-level
+authority, source/mass semantics, §1.5 heat-loss policy, exception propagation
+and route completeness. Offline checks do not substitute for reading
 the external PDF or rerunning extraction.
 
 ## Dictionary and integration order
@@ -86,6 +97,8 @@ retained fraction unknown, disposition and version.
 `route-holds.json`: overlay keyed by existing execution ID. False dominates any
 older material-ready assertion. Apply before selecting any recipe for import.
 `input-receipt.json`: locked inputs plus builder/configuration hashes.
+`source-nutrition-policy.json`: exact machine-readable §1.5 heat-loss semantics;
+it does not grant canonical retention authority or nutrient equivalence.
 `summary.json` and `checksums.json`: quantitative receipt and integrity.
 Page-record hashes use sorted, indented UTF-8 JSON plus final newline, exactly
 as implemented by `dumps`; they are not PDF-page image checksums.
