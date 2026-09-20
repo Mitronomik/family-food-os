@@ -1,8 +1,10 @@
 # First five source-native profile payloads
 
 Base: `a9472c2a0bb0534b70b41c541aa0ac9b4cb26ba0` (PR73 merged).
-User authorized first importable batch preparation, separate source-native
-carbohydrate semantics and isolated verification. No production write authorized.
+On 2026-09-20 the user explicitly authorized correction of all PR74 blockers
+and completion of this bounded five-profile preparation/evidence review.
+This does not approve the proposed profile/schema design, merge, source reuse,
+a migration or production publication.
 
 ## Outcome and task contract
 
@@ -13,19 +15,24 @@ Non-goals: changing runtime schema, registry, Planner, seed or source-use author
 Source quantities/prices/availability and additional book columns are outside this
 bounded profile batch. The full corpus programme is not capped at five foods.
 
-The local build produced five profiles and60 source observations:45 positive,
-15 below detection; zero missing in this particular twelve-field subset. Other
-book columns are not thereby complete. Every amount retains its exact source
-value, unit, state, definition, locator and PDF fingerprint. Book-native
-carbohydrates are retained with `unspecified_with_book_general_method`, never
-mapped silently to CHOAVL/CHOCDF or backfilled from USDA.
+Accepted repository metadata independently identifies the same five reviewed
+Book2002 records and their 60 field states: 45 `published_positive` and 15
+`below_detection`; zero missing in this twelve-field subset. Other book columns
+are not thereby complete. The external numeric corpus can be used by the builder
+to preserve exact source values, units, states, definitions, locators and PDF
+fingerprints, but those numeric values are intentionally not retained in this
+public repository while reuse scope remains unresolved. Book-native carbohydrates
+remain source-native and are never mapped silently to CHOAVL/CHOCDF or backfilled
+from USDA.
 
-**Result: candidate payload prepared; production-profile import BLOCKED.**
-Current FoodNutritionProfile requires numeric energy/protein/fat/carbohydrate,
-including NOT NULL persisted fields. All five lack a compatible legacy
-carbohydrate projection; sugar also lacks exact protein/fat amounts. Real domain
-construction rejects them before any database write. Sparse vectors do not solve
-the mandatory owning profile. No fresh/replay/rollback database success is claimed.
+**Result: preparation tooling/metadata is reviewable; production-profile import
+BLOCKED.** Current `FoodNutritionProfile` requires numeric
+energy/protein/fat/carbohydrate. All five selected records retain a
+method-incompatible source-native carbohydrate; the accepted source-state metadata
+also marks sugar protein/fat below detection. The current domain constructor is
+therefore incompatible with the proposed legacy profile projection before any
+database write. Sparse vectors do not solve the mandatory owning profile.
+No fresh/replay/rollback database success is claimed.
 
 ## Identity plan
 
@@ -50,12 +57,19 @@ The output must be outside this public repository, in a new empty directory.
 It contains profiles.json, domain-probe.json, summary.json, receipt.json and
 checksums.json. Source snapshot and original packages are never overwritten.
 Rebuild to another empty directory and compare files byte-for-byte.
-`input-lock.json` pins the reviewed source rows, PDF, form plan, seed and exact
-profile implementation. A source/runtime change requires a reviewed lock update.
+`input-lock.json` pins the external source rows/PDF and every repository dependency
+used by the identity/domain probe. A source/runtime change requires a reviewed
+lock update. `verification-receipt.json` is numeric-free and ties current accepted
+source-state metadata, dependency hashes, identity plan, rights status and domain
+blockers to this repository revision.
 
-The numeric package remains local pending the source-use disposition below;
-repository stores reproducible tooling, metadata and compatibility evidence.
-This distribution choice does not declare factual extraction unlawful.
+The numeric package remains external pending the source-use disposition below;
+repository stores reproducible tooling and nonnumeric compatibility evidence.
+No external A/B output hashes were retained in repository-accessible evidence,
+so the earlier operator-reported byte-identical full-build result is explicitly
+**not** used as merge acceptance evidence. A future full rebuild may establish
+that evidence when the operator-managed corpus is available. This distribution
+choice does not declare factual extraction unlawful.
 
 ## Dictionary
 
@@ -75,12 +89,16 @@ Summary counts source observation coverage separately from canonical readiness.
 
 ## Verification / acceptance
 
-Ten offline tests cover source-state integrity, nonfinite/negative amounts,
-legacy carbohydrate rejection, missing sugar macros, changed inputs and safe
-output handling. Two full builds produced byte-identical results. Independent
-architecture audit confirmed the profile-owner and registry constraints.
+Repository CI runs the committed metadata validator plus 17 offline tests.
+Coverage includes source-state integrity, nonfinite/negative amounts, legacy
+carbohydrate rejection, missing sugar macros, dependency locks, identity-plan
+drift, rights promotion, false import/readiness claims, verification-receipt
+drift and safe output handling. The numeric-free receipt derives the
+5-profile/60-observation/45-positive/15-below-detection scope from accepted
+profile-review metadata and records five domain blockers with zero DB writes.
+External full-build A/B hashes are unavailable and are not acceptance evidence.
 
-Prepared payload acceptance is met. Successful isolated domain import is not met;
+Preparation tooling/metadata acceptance is met. Successful isolated domain import is not met;
 it must follow the explicit contract decision in
 [profile compatibility proposal](profile-compatibility-proposal.md).
 Existing sparse-vector APIs accept only registered components and do not authorize
