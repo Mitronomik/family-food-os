@@ -756,6 +756,7 @@ def main() -> None:
             "mapping_state_counts": dict(sorted(Counter(r["map_state"] for r in demand_rows).items())),
             "semantic_label_difference_review_count": len(exact_label_diffs),
             "semantic_label_difference_review_ids": exact_label_diffs,
+            "authority_assignment_counts": dict(sorted(Counter(r["authority_assignment_status"] for r in demand_rows).items())),
             "dc2_batch_counts": dict(sorted(Counter(r["proposed_dc2_batch"] for r in demand_rows).items())),
         },
         "compatibility": {
@@ -775,9 +776,9 @@ def main() -> None:
         "rules": {
             "dc2": {
                 "REUSE_EXISTING_PROFILE_FORM_REVIEW": "Accepted identity mapping and current profile provenance identified; exact recipe-form suitability must be reviewed before deciding whether any DC2 write is unnecessary.",
-                "DC2-A_HIGH_IMPACT": "Non-proxy/new identity with >=4 candidate families or >=2 structurally simple candidate families; source verification still required.",
-                "DC2-B_STANDARD_EXTENSION": "Other non-proxy new identities; source verification still required.",
-                "DC2-C_IDENTITY_FORM_REVIEW": "Form split, proxy, or v22.5/v22.13 label-difference item; identity/form semantics first.",
+                "DC2-A_HIGH_IMPACT": "Non-proxy/new identity with >=4 candidate families or >=2 safe simple candidate families; exact authority record still requires pinning.",
+                "DC2-B_STANDARD_EXTENSION": "Other non-proxy new identities with candidate source family identified where possible; exact authority record still requires pinning.",
+                "DC2-C_IDENTITY_FORM_REVIEW": "Form split, proxy, or v22.5/v22.13 label-difference item; identity/form semantics must close before exact authority assignment.",
             },
             "dc3": {
                 "DC3-A_CLEAN_BRANCH_EXISTING_PROFILE_REVIEW": "Source structure, v22.5/v22.13 relationship count and semantic labels are clean, with no new identity dependency; existing profile/form review is still required.",
@@ -885,6 +886,7 @@ def main() -> None:
     cat_lines = "\n".join(f"- {k}: **{v}**" for k, v in assortment["category_counts"].items())
     dc2_lines = "\n".join(f"- `{k}`: **{v}**" for k, v in summary["food_demand"]["dc2_batch_counts"].items())
     dc3_lines = "\n".join(f"- `{k}`: **{v}**" for k, v in summary["candidate_selection"]["dc3_batch_counts"].items())
+    authority_lines = "\n".join(f"- `{k}`: **{v}**" for k, v in summary["food_demand"]["authority_assignment_counts"].items())
     readme = f"""# DATA-CORPUS-V1 / DC1 — recovered source authority + coverage inventory
 
 **Status:** evidence/curation only for Issue #67.
@@ -898,7 +900,22 @@ This package was rebuilt from raw XLSX bytes and accepted PR #39 mapping files a
 
 The prior package used a text-rendered spreadsheet view as if it were the complete row shard. The raw v22.5 manifest requires four shards with **1550 / 1550 / 1550 / 1529 = 6179** rows. Raw XLSX parsing finds **{len(relevant_rows)}** candidate relationship/calculation rows for all **{len(candidate_output)}** candidates. The corrupted package had silently treated missing rendered rows as zero ingredient demand.
 
-The preserved pre-rebuild package is under `recovery/pre-rebuild-b7bc19e8881ddc90/`.
+The preserved pre-rebuild package is under `recovery/pre-rebuild-b7bc19e8881ddc90/`. The exact original pre-rebuild bytes remain available at commit `b7bc19e8881ddc90b95bd8d13c75e72ee4623295`; the recovery-directory README itself was later whitespace-normalized for repository docs checks.
+
+## FACT — input contract
+
+Rebuild requires the full accepted PR #39 package:
+
+- recipe candidate rows loaded: **{len(all_candidates)}**;
+- ingredient mapping identities loaded: **{len(all_mappings)}**;
+- relevant candidate subset: **{len(lead_candidates)}**;
+- relevant external identities: **{len(external_ids_used)}**.
+
+The current production nutrition seed is also mandatory input:
+
+- production nutrition rows: **{len(nutrition_rows)}**;
+- existing mapped profiles identified: **{len(existing_demands)}**;
+- current seed Git blob: `{nutrition_seed_blob_sha1}`.
 
 ## FACT — candidate universe
 
@@ -959,21 +976,24 @@ Category counts in the original 68-family funnel:
 
 The funnel is visibly skewed toward soups, vegetables/potatoes and egg dishes. Standalone meat/poultry breadth is limited. This is a DC3 variety blocker for a realistic family week, but DC1 does not expand the candidate universe automatically.
 
-## Authority and rights boundary
+## FACT — authority assignment state
 
-- External v22.5/v22.13 nutrient values are not promoted to FamilyFoodOS production Nutrition.
-- Existing PR39 mappings mean accepted identity mapping, not automatic nutrition-profile/form approval.
-- Every demand row has an explicit authority-assignment state: identified current production profile provenance, identified official source family with exact record still unpinned, or an explicit identity/form blocker before authority can be assigned.
-- FIC/FGBUN and USDA entries recorded as source-family candidates are not exact-record verification. Rights remain explicit and unresolved where required.
+Every demand row has one explicit authority state:
+
+{authority_lines}
+
+For existing mappings, `authority_source_candidate` records the exact current production profile provenance and record ID. For unresolved/new forms, an official source family is recorded only where identity/form semantics permit it; otherwise authority assignment is blocked explicitly until identity/form review closes.
+
+`FIC_FGBUN_2024_OFFICIAL_COMPOSITION_FAMILY` and `USDA_FDC_OFFICIAL_DATASET` are source-family candidates, not exact-record verification. FIC/FGBUN rights remain blocked pending exact retained-use review; USDA exact-record/form compatibility still must be pinned.
 
 ## Files
 
-- `candidate-recipes.csv` — 68 candidates, full relationship counts, variant/choice/optional/boundary status and DC3 triage.
-- `food-demand.csv` — one row per external ingredient identity; no unsafe name-based deduplication.
+- `candidate-recipes.csv` — 68 candidates, relationship counts, source structure, compatibility/semantic status and DC3 triage.
+- `food-demand.csv` — one row per external ingredient identity with current-profile provenance or explicit authority assignment/blocker.
 - `compatibility.csv` — v22.5 vs v22.13 count/semantic compatibility status.
-- `source-relationships-part1.csv` … `part4.csv` — all {len(relationship_output)} retained source relationship/calculation rows for the 68 candidates, sharded by original v22.5 row file and excluding nutrient values.
+- `source-relationships-part1.csv` … `part4.csv` — all {len(relationship_output)} retained source relationship/calculation rows, sharded by original v22.5 row file and excluding nutrient values.
 - `batch-plan.json` — exact non-overlapping DC2/DC3 triage partitions.
-- `source-artifacts.json` — input hashes, source usage limits and missing v22.13 row-shard blocker.
+- `source-artifacts.json` — full PR39 input counts, production nutrition seed identity, XLSX hashes and missing-v22.13-row-shard blocker.
 - `summary.json` — machine-readable reconciliation totals.
 - `checksums.sha256` — deterministic hashes of generated package files.
 
@@ -1013,7 +1033,9 @@ The generator fails closed on:
 - missing/duplicate current nutrition profiles for accepted existing mappings;
 - disagreement with accepted PR39 per-recipe mapping aggregates;
 - summary/batch partition omission or overlap;
-- assignment of a simple DC3 triage status while ChoiceGroup, optional, multi-variant, garnish/sauce boundary, relationship compatibility or semantic-label debt remains unresolved.
+- assignment of a simple DC3 triage status while ChoiceGroup, optional, multi-variant, garnish/sauce boundary, relationship compatibility or semantic-label debt remains unresolved;
+- any existing mapping that bypasses profile/form review;
+- any demand row without an explicit authority assignment state.
 
 A second build from the same inputs must be byte-identical for all generated package files.
 
@@ -1023,7 +1045,9 @@ A second build from the same inputs must be byte-identical for all generated pac
 2. **{len(work_demands)}** external identities require DC2-level closure if their dependent recipes are pursued.
 3. **{len(compat_gap)}** candidates have additional v22.13 non-calc relationship rows; exact v22.13 row shards were not available here, so full row-level compatibility remains unproven.
 4. **{len(exact_label_diffs)}** used identities have a v22.5/v22.13 label difference requiring review; `ING-0069` is the clearest explicit conflict example.
-5. The original 68-family funnel has assortment gaps for a realistic family week; DC1 records the gap but does not widen scope automatically.
+5. All **{len(existing_demands)}** existing mapped profiles have identified current provenance, but exact recipe-form suitability still requires review.
+6. Candidate-source-family assignments with unpinned records are not authority closure.
+7. The original 68-family funnel has assortment gaps for a realistic family week; DC1 records the gap but does not widen scope automatically.
 
 ## Stop condition
 
