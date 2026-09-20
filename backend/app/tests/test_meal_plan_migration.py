@@ -5,6 +5,7 @@ from app.db.config import DatabaseConfig
 from app.db.migrations import MIGRATION_MODULES, apply_migrations, expected_migration_ids
 
 MIGRATION_ID = "0032_meal_plan_serving"
+PARTIAL_PROFILE_MIGRATION_ID = "0034_partial_nutrition_profiles"
 NEW_TABLES = {
     "member_meal_pattern_selections",
     "member_meal_pattern_opportunities",
@@ -17,8 +18,13 @@ NEW_TABLES = {
 
 def _apply_through_0031(config):
     original = list(MIGRATION_MODULES)
+    cutoff = next(
+        index
+        for index, module_name in enumerate(original)
+        if module_name.endswith("0031_meal_pattern_catalogue")
+    )
     try:
-        MIGRATION_MODULES[:] = original[:-1]
+        MIGRATION_MODULES[:] = original[: cutoff + 1]
         applied = apply_migrations(config)
     finally:
         MIGRATION_MODULES[:] = original
@@ -30,10 +36,11 @@ def test_0032_is_current_head_and_fresh_migration_is_repeat_safe(tmp_path):
 
     applied = apply_migrations(config)
 
-    assert applied[-1] == MIGRATION_ID
-    assert expected_migration_ids()[-2:] == [
+    assert applied[-1] == PARTIAL_PROFILE_MIGRATION_ID
+    assert expected_migration_ids()[-3:] == [
         "0031_meal_pattern_catalogue",
         MIGRATION_ID,
+        PARTIAL_PROFILE_MIGRATION_ID,
     ]
     assert apply_migrations(config) == []
     with sqlite3.connect(config.path) as connection:
@@ -80,7 +87,10 @@ def test_populated_0031_upgrade_preserves_existing_rows(tmp_path):
         )
         connection.commit()
 
-    assert apply_migrations(config) == [MIGRATION_ID]
+    assert apply_migrations(config) == [
+        MIGRATION_ID,
+        PARTIAL_PROFILE_MIGRATION_ID,
+    ]
 
     with sqlite3.connect(config.path) as connection:
         assert connection.execute(
