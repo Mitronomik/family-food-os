@@ -577,6 +577,20 @@ class FoodNutritionProfile:
                 value=self.is_current,
                 next_action="Provide true or false.",
             )
+        if self.is_current and any(
+            getattr(self, field) is None
+            for field in ("kcal", "protein_g", "fat_g", "carbohydrates_g")
+        ):
+            raise _issue(
+                DomainIssueCode.INVALID_BOOLEAN,
+                "Partial nutrition profiles cannot become current through the legacy selector.",
+                field="is_current",
+                value=self.is_current,
+                next_action=(
+                    "Persist the partial profile as non-current until a compatible "
+                    "versioned registry/publication path is selected."
+                ),
+            )
         object.__setattr__(
             self,
             "created_at",
