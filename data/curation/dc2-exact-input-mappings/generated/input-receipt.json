@@ -1,0 +1,48 @@
+{
+  "builder_sha256": "121268ccb17c0a46a0fed74f929fd4abf9e7995923c64079ec758e1ee3e4885a",
+  "config_sha256": {
+    "exceptions.json": "7467f23d029251b91c5302fcfd7f99bd0912ddcf628ad0e3b59a56b090127d88",
+    "forms.json": "9e1bfce7520914a12a81319a9d23741538bb905f073f206a614ab6fdb42bb9da"
+  },
+  "lock": {
+    "base_commit": "0322d0a74a0edf53802adc394446011a7d8acc06",
+    "inputs": [
+      {
+        "path": "packages/recipe-closure/normalized/food-identities.jsonl",
+        "root": "corpus",
+        "sha256": "e7e05183f41ccbe4c6cbb1e8efcc5b7ebd0c12c4bfe090510ab2594afb21ebb5"
+      },
+      {
+        "path": "packages/recipe-closure/normalized/ingredient-bindings.jsonl",
+        "root": "corpus",
+        "sha256": "d61c0525a2dc62008026441b2fd28dcd8a062289bdab6f8e071c0b728df9332e"
+      },
+      {
+        "path": "packages/recipe-closure/normalized/resolved-executions.jsonl",
+        "root": "corpus",
+        "sha256": "8ab17cf36bee41caa1d07457f9b7608ab052e79a89010e0c54422fbd25400792"
+      },
+      {
+        "path": "packages/school2022/extracted/pages.jsonl",
+        "root": "corpus",
+        "sha256": "dcd326a3ac814c5a01204be95f3e4a6d6806843f1311c1abb22231953a2261a3"
+      },
+      {
+        "path": "packages/school2022/raw/source.pdf",
+        "root": "corpus",
+        "sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d"
+      },
+      {
+        "path": "data/curation/dc2-first-batch-review/generated/occurrence-reviews.json",
+        "root": "repo",
+        "sha256": "ca18a5d8ee656a87cb46fd1bcc9c3076fce342cb7e0e7a4d78e7afc7f01d4783"
+      },
+      {
+        "path": "data/curation/corpus-v03-reconciliation/generated/route-index.jsonl",
+        "root": "repo",
+        "sha256": "75cb482ada694a654df86cd284330e2792d04636dca6dc966678fcaf48340820"
+      }
+    ]
+  },
+  "transformation_version": "dc2-exact-input-v1"
+}

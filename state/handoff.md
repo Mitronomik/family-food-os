@@ -1,5 +1,22 @@
 # Handoff
 
+## Exact source-input mappings — 2026-09-20
+
+Base PR72 merge: `0322d0a74a0edf53802adc394446011a7d8acc06`.
+Continuation authorized by user. Prepared211 school2022 occurrence annotations:
+sugar89, carrot69, cabbage24, beet12, rice17. Two suspicious source rows hold
+four execution routes. Source evidence confirms polished rice and puree20%.
+Immutable corpus0.3.0 and previous packages preserved. No runtime publication.
+
+Verification: eight offline tests (including adversarial authority, mass,
+exception, route, summary and manifest changes); two full builds byte-identical.
+Independent source audit identified exceptions and validator gaps, now covered.
+See [package](../data/curation/dc2-exact-input-mappings/README.md).
+Next: review this bounded overlay, resolve nutrient method/reuse and exact
+canonical profile equivalence before a separately reviewed production payload.
+The user has not yet answered the nutrient-method choice; no approval inferred.
+
+
 ## PR72 review hardening handoff — 2026-09-20
 
 The first DC2 source/form review remains evidence-only. Review blockers were
