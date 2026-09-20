@@ -205,7 +205,7 @@
   "rules": {
     "dc2": {
       "DC2-A_HIGH_IMPACT": "Non-proxy/new identity with >=4 candidate families or >=2 safe simple candidate families; exact authority record still requires pinning.",
-      "DC2-B_STANDARD_EXTENSION": "Other non-proxy new identities with candidate source family identified where possible; exact authority record still requires pinning.",
+      "DC2-B_STANDARD_EXTENSION": "Other non-proxy new identities with a preferred source-family search target; exact source presence, record identity, form compatibility and authority still require verification.",
       "DC2-C_IDENTITY_FORM_REVIEW": "Form split, proxy, or v22.5/v22.13 label-difference item; identity/form semantics must close before exact authority assignment.",
       "REUSE_EXISTING_PROFILE_FORM_REVIEW": "Accepted identity mapping and current profile provenance identified; exact recipe-form suitability must be reviewed before deciding whether any DC2 write is unnecessary."
     },
