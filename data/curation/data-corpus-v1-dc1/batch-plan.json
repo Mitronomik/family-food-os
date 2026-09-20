@@ -1,109 +1,147 @@
 {
   "dc2": {
-    "REUSE_NO_DC2_WRITE": {
-      "count": 23,
-      "demand_keys": [
-        "FFOS:BUTTER_UNSALTED",
-        "FFOS:EGG",
-        "FFOS:POTATO",
-        "FFOS:CARROT",
-        "FFOS:SUGAR",
-        "FFOS:WATER",
-        "FFOS:FLOUR_WHEAT",
-        "FFOS:ONION_YELLOW",
-        "FFOS:CABBAGE_GREEN",
-        "FFOS:GREEN_ONION",
-        "FFOS:GREEN_PEAS_CANNED",
-        "FFOS:SALT",
-        "FFOS:TURNIP",
-        "FFOS:CAULIFLOWER",
-        "FFOS:CUCUMBER",
-        "FFOS:GREEN_BEANS",
-        "FFOS:TOMATO",
-        "FFOS:APPLE",
-        "FFOS:BARLEY_PEARLED",
-        "FFOS:BUCKWHEAT",
-        "FFOS:CINNAMON_GROUND",
-        "FFOS:PASTA_DRY",
-        "FFOS:SPINACH"
-      ]
-    },
     "DC2-A_HIGH_IMPACT": {
-      "count": 15,
-      "demand_keys": [
-        "EXTERNAL_FORM:маргарин_молочный",
-        "EXTERNAL_FORM:молоко_пастеризованное_3_2",
-        "EXTERNAL_FORM:сметана_30",
-        "EXTERNAL_FORM:сухари_сливочные_аппроксимация_панировки",
-        "EXTERNAL_FORM:жир_кулинарный",
-        "EXTERNAL_FORM:крупа_манная",
-        "EXTERNAL_FORM:крупа_рисовая",
-        "EXTERNAL_FORM:куры_i_категории",
-        "EXTERNAL_FORM:петрушка_корень",
-        "EXTERNAL_FORM:говядина_котлетная",
-        "EXTERNAL_FORM:творог_полужирный",
-        "EXTERNAL_FORM:хлеб_пшеничный_из_муки_высшего_сорта",
-        "EXTERNAL_FORM:жир_животный_топленый",
-        "EXTERNAL_FORM:огурцы_соленые",
-        "EXTERNAL_FORM:сметана_20_жирности"
+      "count": 6,
+      "external_ingredient_ids": [
+        "ING-0014",
+        "ING-0021",
+        "ING-0073",
+        "ING-0145",
+        "ING-0229",
+        "ING-0236"
       ]
     },
-    "DC2-B_COMMON_EXTENSION": {
-      "count": 7,
-      "demand_keys": [
-        "EXTERNAL_FORM:брюква",
-        "EXTERNAL_FORM:салат_листовой",
-        "EXTERNAL_FORM:тыква",
-        "EXTERNAL_FORM:leavening_agents_yeast_baker_s_compressed",
-        "EXTERNAL_FORM:горох_лущеный",
-        "EXTERNAL_FORM:горох_овощной_лопатка",
-        "EXTERNAL_FORM:изюм"
+    "DC2-B_STANDARD_EXTENSION": {
+      "count": 22,
+      "external_ingredient_ids": [
+        "ING-0011",
+        "ING-0013",
+        "ING-0079",
+        "ING-0093",
+        "ING-0104",
+        "ING-0116",
+        "ING-0163",
+        "ING-0175",
+        "ING-0180",
+        "ING-0192",
+        "ING-0195",
+        "ING-0197",
+        "ING-0209",
+        "ING-0210",
+        "ING-0237",
+        "ING-0238",
+        "ING-0240",
+        "ING-0241",
+        "ING-0242",
+        "ING-0248",
+        "ING-0267",
+        "ING-0295"
       ]
     },
     "DC2-C_IDENTITY_FORM_REVIEW": {
-      "count": 10,
-      "demand_keys": [
-        "EXTERNAL_FORM:сельдерей_корень",
-        "EXTERNAL_FORM:лук_порей",
-        "EXTERNAL_FORM:чернослив",
-        "EXTERNAL_FORM:fat_chicken",
-        "EXTERNAL_FORM:баранина_котлетная",
-        "EXTERNAL_FORM:крупа_пшенная",
-        "EXTERNAL_FORM:майонез",
-        "EXTERNAL_FORM:свинина_котлетная",
-        "EXTERNAL_FORM:свинокопчености",
-        "EXTERNAL_FORM:сыр_российский_proxy_для_твердого_сыра"
+      "count": 35,
+      "external_ingredient_ids": [
+        "ING-0009",
+        "ING-0023",
+        "ING-0024",
+        "ING-0025",
+        "ING-0030",
+        "ING-0034",
+        "ING-0038",
+        "ING-0041",
+        "ING-0044",
+        "ING-0046",
+        "ING-0047",
+        "ING-0053",
+        "ING-0055",
+        "ING-0056",
+        "ING-0063",
+        "ING-0066",
+        "ING-0069",
+        "ING-0074",
+        "ING-0076",
+        "ING-0083",
+        "ING-0097",
+        "ING-0107",
+        "ING-0112",
+        "ING-0113",
+        "ING-0119",
+        "ING-0137",
+        "ING-0162",
+        "ING-0190",
+        "ING-0191",
+        "ING-0207",
+        "ING-0221",
+        "ING-0234",
+        "ING-0235",
+        "ING-0246",
+        "ING-0294"
+      ]
+    },
+    "REUSE_NO_DC2_WRITE": {
+      "count": 33,
+      "external_ingredient_ids": [
+        "ING-0006",
+        "ING-0012",
+        "ING-0017",
+        "ING-0018",
+        "ING-0019",
+        "ING-0020",
+        "ING-0022",
+        "ING-0026",
+        "ING-0027",
+        "ING-0028",
+        "ING-0029",
+        "ING-0032",
+        "ING-0035",
+        "ING-0036",
+        "ING-0037",
+        "ING-0042",
+        "ING-0050",
+        "ING-0058",
+        "ING-0064",
+        "ING-0070",
+        "ING-0071",
+        "ING-0077",
+        "ING-0078",
+        "ING-0117",
+        "ING-0142",
+        "ING-0144",
+        "ING-0227",
+        "ING-0228",
+        "ING-0230",
+        "ING-0239",
+        "ING-0243",
+        "ING-0244",
+        "ING-0245"
       ]
     }
   },
   "dc3": {
-    "DC3-A_ZERO_NEW_PROFILE": {
+    "DC3-A_SIMPLE_NO_DC2_WRITE": {
       "count": 3,
-      "recipe_ids": [
+      "source_recipe_ids": [
         "USSR82-323",
         "USSR82-442",
         "USSR82-453"
       ]
     },
-    "DC3-B_LOW_DEBT_EXACT_VARIANT": {
-      "count": 8,
-      "recipe_ids": [
+    "DC3-B_SIMPLE_AFTER_DC2": {
+      "count": 23,
+      "source_recipe_ids": [
         "USSR82-55",
         "USSR82-58",
         "USSR82-59",
         "USSR82-71",
         "USSR82-95",
-        "USSR82-263",
-        "USSR82-326",
-        "USSR82-697"
-      ]
-    },
-    "DC3-C_EXACT_VARIANT_AFTER_DC2": {
-      "count": 16,
-      "recipe_ids": [
         "USSR82-101",
         "USSR82-208",
+        "USSR82-263",
         "USSR82-265",
+        "USSR82-318",
+        "USSR82-320",
+        "USSR82-322",
+        "USSR82-326",
         "USSR82-351",
         "USSR82-361",
         "USSR82-364",
@@ -112,16 +150,13 @@
         "USSR82-467",
         "USSR82-492",
         "USSR82-499",
-        "USSR82-658",
         "USSR82-669",
-        "USSR82-720",
-        "USSR82-732",
         "USSR82-1081"
       ]
     },
-    "DC3-D_VARIANT_SELECTION_REVIEW": {
-      "count": 41,
-      "recipe_ids": [
+    "DC3-C_VARIANT_BOUNDARY_REVIEW": {
+      "count": 42,
+      "source_recipe_ids": [
         "USSR82-184",
         "USSR82-258",
         "USSR82-259",
@@ -138,10 +173,7 @@
         "USSR82-312",
         "USSR82-314",
         "USSR82-317",
-        "USSR82-318",
         "USSR82-319",
-        "USSR82-320",
-        "USSR82-322",
         "USSR82-324",
         "USSR82-325",
         "USSR82-328",
@@ -162,8 +194,25 @@
         "USSR82-464",
         "USSR82-468",
         "USSR82-469",
-        "USSR82-470"
+        "USSR82-470",
+        "USSR82-658",
+        "USSR82-697",
+        "USSR82-720",
+        "USSR82-732"
       ]
+    }
+  },
+  "rules": {
+    "dc2": {
+      "DC2-A_HIGH_IMPACT": "Non-proxy/new identity with >=4 candidate families or >=2 structurally simple candidate families; source verification still required.",
+      "DC2-B_STANDARD_EXTENSION": "Other non-proxy new identities; source verification still required.",
+      "DC2-C_IDENTITY_FORM_REVIEW": "Form split, proxy, or v22.5/v22.13 label-difference item; identity/form semantics first.",
+      "REUSE_NO_DC2_WRITE": "Accepted existing identity mapping; no DC2 write authorized by this package."
+    },
+    "dc3": {
+      "DC3-A_SIMPLE_NO_DC2_WRITE": "One source variant, no choice/optional/boundary signal, and no DC2 identity dependency. Still not production-ready.",
+      "DC3-B_SIMPLE_AFTER_DC2": "One source variant with no explicit alternative/boundary signal, but has DC2 identity dependency.",
+      "DC3-C_VARIANT_BOUNDARY_REVIEW": "Multiple variants, ChoiceGroup, optional row, or garnish/sauce boundary review required before any exact publication branch."
     }
   }
 }
