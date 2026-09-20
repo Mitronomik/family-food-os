@@ -9,6 +9,9 @@ on:
       - 'scripts/build_data_corpus_v1_dc1.py'
       - 'scripts/validate_data_corpus_v1_dc1.py'
       - 'scripts/test_data_corpus_v1_dc1.py'
+      - 'state/current-focus.md'
+      - 'state/handoff.md'
+      - 'state/progress.md'
       - '.github/workflows/dc1-verification.yml'
   workflow_dispatch:
     inputs:
