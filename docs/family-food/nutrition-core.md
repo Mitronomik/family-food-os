@@ -511,3 +511,19 @@ coexists with unchanged `FAMILY_FOOD_NUTRITION_V1`. Its mass-authoritative DAG,
 yield/retention, replay and result contracts are owned by the
 [composition contract](food-composition-and-assembly.md#pr6-composition-core--concrete-runtime-contract).
 There is no automatic recipe-consumer migration or production composition backfill.
+
+
+## Russian methodology extension — 2026-09-20
+
+The user explicitly confirmed PR75 source-native Russian methodology support and
+the opt-in `RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1` policy during review
+after PR74 merged. The [versioned Russian policy contract](russian-nutrition-methodologies.md)
+owns explicit interpretation, energy and group-reference operations. A printed
+source zero that remains `below_detection` may become numeric only under that
+pinned policy and only as `estimated=true`; censoring provenance, unknown
+detection limit and warnings remain authoritative.
+
+Historical V1 values/registry/calculations remain unchanged. Runtime persistence,
+profile/schema migration, catalogue publication, source reuse and Planner/API/UI
+default changes are separate gated operations; no clinical scope, exact-zero
+claim, allergen absence or source permission is inferred.

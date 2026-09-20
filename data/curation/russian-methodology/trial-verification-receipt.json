@@ -1,0 +1,23 @@
+{
+  "acceptance_evidence": "repository_metadata_only",
+  "approved_zero_policy": "RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1",
+  "approved_zero_policy_constraints": [
+    "original_state_remains_below_detection",
+    "detection_limit_remains_unknown",
+    "interpreted_amount_is_estimated_not_exact",
+    "not_allergen_absence",
+    "not_default_planner_truth_without_pinned_methodology"
+  ],
+  "canonical_profiles_imported": 0,
+  "external_trial_a_b_hashes": null,
+  "external_trial_claim_used_for_acceptance": false,
+  "methodology_module_sha256": "a0885973aadb78bf7112b2f5210806d827217589143e07770d6090bc962b873a",
+  "numeric_trial_retained_in_repository": false,
+  "pr74_input_lock_sha256": "b66bf73657b683fdabb9cc80b1d8b752d79cca5734fc4b1afb816bef430394e5",
+  "pr74_verification_receipt_sha256": "0a816ec83e7025fdeffc4de7bfac42aef004de132289ec0eb85c31df13223ddf",
+  "profile_review_sha256": "929361bf4233ef0a0383be0c4324e5e4ca7bd3c0974c7e3be270cdab73ef038a",
+  "production_ready": false,
+  "source_rights_status": "BLOCKED_PENDING_RIGHTS_REVIEW",
+  "trial_builder_sha256": "d0f3255176fddba61b801bb12c8cd17fc2e0b6368b90fd93f9dcd27248e7f0ab",
+  "trial_summary_sha256": "498fdecf76bd414eb2f1c1fb937e496bb19e5846962939114285b76c69e2333b"
+}

@@ -668,3 +668,19 @@ the required plan filename records that refusal, not an approved production delt
 Ready remains 2/3; third candidate none; family_count/optional_role/verified_substitution
 remain OPEN for the accepted family set. Assembly A BLOCKED; B/PR7+ NOT STARTED;
 0029 unchanged. Stop for review; no automatic merge, new donor or production data PR.
+
+
+## Russian methodology extension — 2026-09-20
+
+The user explicitly confirmed PR75 source-native Russian methodology support and
+the opt-in `RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1` policy during review
+after PR74 merged. The [versioned Russian policy contract](russian-nutrition-methodologies.md)
+owns explicit interpretation, energy and group-reference operations. A printed
+source zero that remains `below_detection` may become numeric only under that
+pinned policy and only as `estimated=true`; censoring provenance, unknown
+detection limit and warnings remain authoritative.
+
+Historical V1 values/registry/calculations remain unchanged. Runtime persistence,
+profile/schema migration, catalogue publication, source reuse and Planner/API/UI
+default changes are separate gated operations; no clinical scope, exact-zero
+claim, allergen absence or source permission is inferred.

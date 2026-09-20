@@ -1,44 +1,47 @@
 # Progress
 
-## PR74 blocker corrections — 2026-09-20
+## PR75 Russian methodology sync — 2026-09-20
 
-User explicitly authorized correction of all PR74 blockers and completion of this
-bounded five-profile preparation/evidence review only. No profile/schema proposal,
-migration, rights disposition, merge or production publication was approved.
+PR75 was synchronized with merged PR74 main without force-push. User authorization
+for the Russian calculation/service layer and the opt-in
+`RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1` policy is now explicit and durable.
 
-The package now:
-- locks every repository dependency used by the identity/domain probe;
-- validates identity-plan rows against accepted PR73 forms and the current
-  ingredient seed;
-- fails closed on rights/status promotion and false import/readiness claims;
-- derives 5/60/45/15 source-state evidence from accepted nonnumeric profile-review
-  metadata;
-- records a numeric-free verification receipt with exact dependency/input hashes
-  and five domain blockers;
-- explicitly excludes unretained external A/B build hashes from merge acceptance.
+The methodology trial now consumes PR74 evidence rather than the older PR72 lock.
+Repository acceptance uses a numeric-free receipt derived from five reviewed
+profiles / 25 core observations / 50 policy evaluations, with 3 strict unknowns,
+3 approved estimated-zero interpretations and 0 canonical profile imports.
+External numeric A/B hashes are not merge acceptance evidence.
 
-No production data/schema/runtime/API/UI/Planner behavior changed. Reverify the
-final PR head and stop after review/merge for separate architecture and rights
-decisions.
+No schema/migration, source rights, profile publication, Russian norm-table
+publication or Planner/API/UI default change is included.
 
-## First profile payload compatibility — 2026-09-20
+## Preserved pre-PR74-sync Russian methodology receipt — historical
 
-PR73 merged at a9472c2a0bb0534b70b41c541aa0ac9b4cb26ba0; user authorized
-first numeric payload. Local package prepared:5profiles,60observations,
-45positive/15below detection. All12 reviewed fields per profile retained.
-Ten tests passed; two complete builds byte-identical. Actual domain probes
-reject all5 before DB writes (mandatory legacy carbohydrate; sugar macros).
-No successful domain import or idempotence/rollback DB test is claimed.
+The following block records the original PR75 branch state before PR74 merged.
+Its base/status, local A/B-trial and “PR74 not presumed merged” wording are
+superseded by the PR75 synchronized section above. It is historical evidence only.
 
-Reproduce with scripts/build_dc2_profile_payload.py and immutable corpus-v03;
-output outside repository to a new empty directory. Local deliverables folder
-contains dc2-first-profile-payload-v1-final. Source values remain private while reuse
-scope pending; repository stores tooling, metadata and decision proposal.
+### Original Russian methodology layer — 2026-09-20
 
-Read data/curation/dc2-first-profile-payload/profile-compatibility-proposal.md.
-Next requires explicit profile/schema compatibility approval; cannot solve by
-untyped carbohydrate assignment, USDA substitution or below-detection→zero.
-Official FIC Excel request route documented; no message/purchase made.
+User approved Russian method support and broader compatibility adaptation.
+Base a9472c2a0bb0534b70b41c541aa0ac9b4cb26ba0. New policy layer and internal
+services preserve V1 rather than relabel its USDA/NASEM semantics.
+322 focused/regression tests passed; SQLite vector/ATOMIC read tested.
+Independent audits caught held-observation provenance and energy partition issues;
+fixed with explicit held state, original evidence receipt, basis/form checks and
+reviewed disjoint energy partition requirement.
+
+Five locked book profiles:25 core observations,50 evaluations;5 source-native
+available carbs accepted per policy,3 unknowns in strict mode,3 explicitly marked
+zero estimates in alternate mode. Two final trial files byte-identical. Numeric
+trial stays in local deliverables/ru-methodology-trial-v1-final.json outside Git.
+No source profiles imported, no automatic Russian norm table enabled.
+
+Read docs/family-food/russian-nutrition-methodologies.md before continuation.
+The next implementation dependencies (already directionally authorized) are
+partial-profile persistence/registry, accepted target tables and method selection
+in Planner/API/UI. Source rights and scientific mapping remain separate gates.
+PR74 is not presumed merged. No new migration or live production write.
 
 
 ## PR73 blocker corrections — 2026-09-20
