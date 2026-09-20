@@ -1,23 +1,23 @@
-name: DC2 profile payload compatibility
+name: DC2 profile payload historical compatibility
+
 on:
-  pull_request:
-    paths:
-      - 'data/curation/dc2-first-profile-payload/**'
-      - 'scripts/*dc2_profile_payload.py'
-      - 'backend/app/domain/errors.py'
-      - 'data/seed/food_ingredients/ingredients.csv'
-      - 'data/curation/dc2-first-batch-review/generated/profile-reviews.json'
-      - 'data/curation/dc2-exact-input-mappings/forms.json'
-      - 'backend/app/domain/food_ingredients.py'
-      - 'backend/app/domain/decimal_utils.py'
-      - '.github/workflows/dc2-profile-payload.yml'
+  workflow_dispatch:
+    inputs:
+      target_ref:
+        description: Exact historical ref to verify (normally accepted PR74 merge)
+        required: true
+        default: '4c9598b623b9042924bb1f8d864c56d3d0a407c4'
+
 permissions:
   contents: read
+
 jobs:
   compatibility:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ inputs.target_ref }}
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
