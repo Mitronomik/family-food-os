@@ -998,17 +998,17 @@ For existing mappings, `authority_source_candidate` records the exact current pr
 The package is generated from raw XLSX bytes plus the accepted PR #39 mapping package. Example:
 
 ```bash
-python scripts/build_data_corpus_v1_dc1.py \
-  --row-shard /path/russian_normative_recipes_v22_5_row_nutrients_part1.xlsx \
-  --row-shard /path/russian_normative_recipes_v22_5_row_nutrients_part2.xlsx \
-  --row-shard /path/russian_normative_recipes_v22_5_row_nutrients_part3.xlsx \
-  --row-shard /path/russian_normative_recipes_v22_5_row_nutrients_part4.xlsx \
-  --v22-5-manifest /path/russian_normative_recipes_v22_5_manifest.xlsx \
-  --v22-13-mass /path/russian_normative_recipes_v22_13_mass_nutrients.xlsx \
-  --v22-13-audit /path/russian_normative_recipes_v22_13_integrity_audit.xlsx \
-  --v22-13-manifest /path/russian_normative_recipes_v22_13_manifest.xlsx \
-  --mapping-dir data/curation/v22-13-map-a \
-  --nutrition-seed data/seed/food_ingredients/nutrition.csv \
+python scripts/build_data_corpus_v1_dc1.py \\
+  --row-shard /path/russian_normative_recipes_v22_5_row_nutrients_part1.xlsx \\
+  --row-shard /path/russian_normative_recipes_v22_5_row_nutrients_part2.xlsx \\
+  --row-shard /path/russian_normative_recipes_v22_5_row_nutrients_part3.xlsx \\
+  --row-shard /path/russian_normative_recipes_v22_5_row_nutrients_part4.xlsx \\
+  --v22-5-manifest /path/russian_normative_recipes_v22_5_manifest.xlsx \\
+  --v22-13-mass /path/russian_normative_recipes_v22_13_mass_nutrients.xlsx \\
+  --v22-13-audit /path/russian_normative_recipes_v22_13_integrity_audit.xlsx \\
+  --v22-13-manifest /path/russian_normative_recipes_v22_13_manifest.xlsx \\
+  --mapping-dir data/curation/v22-13-map-a \\
+  --nutrition-seed data/seed/food_ingredients/nutrition.csv \\
   --output /tmp/data-corpus-v1-dc1
 
 python scripts/validate_data_corpus_v1_dc1.py /tmp/data-corpus-v1-dc1
