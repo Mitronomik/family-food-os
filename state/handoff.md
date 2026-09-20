@@ -74,8 +74,15 @@ Current reconciliation:
 - 96 external ingredient identities;
 - 33 accepted existing/alias mappings;
 - 63 identities requiring later DC2-level closure if pursued;
+- full accepted PR39 input contract: 350 recipe rows / 363 ingredient identities;
 - structural source-Variant split: 31 one / 37 multiple;
-- publication-safety split: 26 simple / 42 review-required.
+- safe publication-branch split: 5 simple / 63 review-required;
+- 33 existing mappings have exact current USDA FDC profile provenance identified,
+  but recipe-form suitability remains review-required;
+- 28 non-existing identities have an official source-family candidate with exact
+  record still unpinned;
+- 35 identities are blocked on identity/form semantics before exact authority
+  assignment.
 
 The previous 95-demand result is not retained: it depended on unsafe
 display-name deduplication. In particular `ING-0014` and `ING-0069` remain
@@ -96,25 +103,31 @@ Recorded blockers include:
 
 - 20 candidates with additional v22.13 non-calculation relationship rows;
 - 20 used identities with v22.5/v22.13 label differences;
-- 42 candidate families needing variant/choice/optional/boundary review;
+- 63 candidate families needing variant/choice/optional/boundary/compatibility/
+  semantic review;
+- all 33 existing profiles still need exact recipe-form suitability review;
+- candidate source-family assignment is not exact-record authority closure;
 - assortment gaps in the preserved 68-family funnel.
 
 ## Verification evidence
 
-Recovered package verification:
+Current review-fix verification:
 
-- package SHA-256 manifest: PASS;
-- `python -m py_compile` for generator + validator: PASS;
-- package validator: PASS with
-  `68 / 991 / 96 / 33 / 63 / 31-37 / 26-42`;
-- two independent builds from the same inputs were byte-identical before the
-  runtime restart;
-- fail-closed mutation checks rejected candidate/relationship loss, ID mismatch,
-  duplicate relationships, zero substitution, summary drift, batch omission,
-  batch overlap and false simple/exact classification.
+- exact GitHub package audit: PASS for 68 candidates / 991 relationships /
+  96 demands / 33 existing mappings / 63 non-existing mappings;
+- safe branch split: 5 simple / 63 review-required;
+- full PR39 input metadata: 350 / 363;
+- current production nutrition seed metadata: 183 rows and exact Git blob identity;
+- DC2/DC3 batch partitions: exact coverage with no overlap;
+- authority assignment state present for all 96 demands;
+- package SHA-256 manifest: PASS for all 11 generated artifacts;
+- committed adversarial harness:
+  `scripts/test_data_corpus_v1_dc1.py`.
 
-Exact GitHub blob SHAs for regenerated package/tool files were checked against
-the preserved local snapshots during delivery.
+The current runtime cannot resolve `github.com`, so the updated generator,
+validator and adversarial harness could not be executed from a fresh local
+checkout after these review fixes. Do not reuse the earlier pre-fix py_compile /
+double-build receipts as final-head execution evidence.
 
 Final GitHub Docs verification must be GREEN on the exact PR head before merge.
 
