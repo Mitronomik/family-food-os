@@ -1,6 +1,9 @@
-# Proposed DC2 profile compatibility change — decision required
+# DC2 profile compatibility change — staged implementation contract
 
-Status: proposed; not an implemented migration or accepted runtime contract.
+Status: the storage/migration slice was explicitly authorized by the user's
+post-PR75 implementation plan and is implemented in the bounded partial-profile
+PR. Registry/adapters, transactional publication and production food publication
+remain later separate steps of that approved sequence.
 
 ## Concrete conflict
 
@@ -62,9 +65,14 @@ source reuse. Alternative: keep current model and leave this five-profile batch
 blocked until exact compatible Russian source profiles are obtained. Never fill
 its mandatory fields with unrelated USDA values under a Russian source label.
 
-## Proposed decision for the user
+## Current decision boundary
 
-Approve this separate profile-unknown/compatibility implementation, preserving
-current profiles and holding production publication until source reuse and exact
-component mappings are resolved. Approval would authorize code and schema
-preparation in an isolated checkout, not deployment or unreviewed merge.
+The user approved the implementation sequence beginning with partial-profile
+storage. This bounded slice permits explicit unknown legacy macro storage,
+immutable source-observation state and migration `0034`, while preserving all
+existing current profiles and holding production publication.
+
+The remaining items in this document are not collapsed into this PR:
+new registry/adapters are the next bounded step; transactional profile/vector/
+ATOMIC publication follows separately; Book2002 source-use approval and actual
+production publication remain independent gates.
