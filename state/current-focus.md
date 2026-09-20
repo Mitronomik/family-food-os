@@ -1,108 +1,43 @@
 # Current focus
 
-Updated: `2026-09-19`.
+Updated: `2026-09-20`.
 
-## Accepted repository state
+## Accepted state
 
-- PR6 / PR6-CLOSE = COMPLETE.
-- Issue #47 / `PR7-SUPPORT-MEAL-PATTERN-CATALOGUE` = COMPLETE through merged PR #51.
-- PR7 / Issue #53 = COMPLETE through merged PR #54.
-- PR8 / Issue #57 = COMPLETE through merged PR #59.
-- Post-PR59 state synchronization = COMPLETE through merged PR #60.
-- Gate1-A audit/evidence baseline = COMPLETE through merged PR #63.
-- DATA-CORPUS-V1 / DC0 = COMPLETE through merged PR #68.
-- Accepted post-PR68 main:
-  `b1ce3e02394bad847f0c4063fe9faf520e208622`.
-- PR #66 = CLOSED / NOT MERGED / SUPERSEDED by DATA-CORPUS-V1.
-- Accepted SQLite migration head: `0032_meal_plan_serving`.
-- Future RecipeTemplate reservation remains `0033_recipe_template_catalogue`.
+PR6, PR7 supporting meal-pattern catalogue, PR7 and PR8 are COMPLETE.
+Gate1-A audit baseline and DATA-CORPUS-V1 / DC0 are COMPLETE.
+PR #70 is MERGED at `b9768984392982bd05d28fc0f7793453fe8378b5`.
+Its accepted DC1 recovery package remains in `data/curation/data-corpus-v1-dc1/`.
+This accepts evidence/curation, not production food or recipe truth.
+Issue #67 remains open; the broader corpus program is not complete.
+SQLite head remains `0032_meal_plan_serving`; `0033_recipe_template_catalogue`
+remains reserved. PR #66 remains closed without merge and superseded.
 
 ## Current authorized operation
 
-`DATA-CORPUS-V1 / DC1 — Source authority + coverage inventory` is **ACTIVE**
-under Issue #67.
-
-DC1 is evidence/curation work.
-
-Required outcome:
-
-- select an initial `50–80+` useful recipe candidate set;
-- preserve exact source card/variant/branch identity;
-- build the deduplicated required FoodIngredient/form demand;
-- reuse existing accepted mappings and production profiles first;
-- assign authoritative source/status and rights/use status for demanded food/forms;
-- classify exact unresolved mass/form/process/nutrition blockers;
-- produce proposed small DC2 food-publication batches;
-- produce proposed small DC3 recipe-publication batches.
-
-Follow the canonical rules in:
-
-- `docs/family-food/data-corpus-v1.md`;
-- `docs/family-food/master-roadmap-addendum-2026-09-19-data-corpus.md`;
-- Issue #67.
-
-Those sources own source hierarchy, authority, rights, publication and
-verification policy. Do not duplicate or redefine those rules in state files.
-
-## Scope boundary
-
-DC1 does not publish broad production FoodIngredient/Nutrition/Composition/
-RecipeVersion truth and does not authorize schema/migration changes.
-
-Any later production publication must occur through separately reviewable
-DC2/DC3 batches under the canonical DATA-CORPUS-V1 contract.
-
-## Relationship to PR #66
-
-PR #66 was closed without merge on 2026-09-19 and is historical implementation
-evidence only.
-
-Its proposed production nutrition/profile/recipe truth is not accepted.
-Reusable mechanics may be recovered selectively later if they conform to
-DATA-CORPUS-V1.
-
-## Active sequence
-
-```text
-PR6 / Nutrition Core                          COMPLETE
-→ PR7-SUPPORT-MEAL-PATTERN-CATALOGUE         COMPLETE
-→ PR7 MealPlan / Serving                     COMPLETE
-→ PR8 Planner v0                             COMPLETE
-→ Gate1-A audit/readiness baseline           COMPLETE
-→ DATA-CORPUS-V1 / DC0                       COMPLETE (PR #68)
-→ DC1 source authority + coverage inventory  ACTIVE (#67)
-→ DC2 food publication batches               NOT STARTED
-→ DC3 recipe publication batches             NOT STARTED
-→ DC4 readiness audit + Gate1 consumption    NOT STARTED
-→ GATE1-CLOSE — Planning Core                NOT STARTED
-→ PR9 Shopping Engine                        NOT STARTED
-```
-
-## Stop condition
-
-DC1 ends with a reviewable evidence/curation package and exact proposed DC2/DC3
-batch plan.
-
-Do not automatically start DC2, DC3, DC4, Gate1-CLOSE, PR9, Retail, AI,
-Auth/PostgreSQL or the generalized Data Ingestion Platform.
-
-## Corpus v0.3 reconciliation — 2026-09-20 branch work
-
-The user authorized a separate evidence/curation PR integrating the local v0.3
-corpus with the existing DC1 work. This bounded operation does not authorize
-DC2/DC3 production publication or a roadmap reorder.
-
-Base: `d8c76a64483e3d5814e702be33c12cbe2e144160`. PR #70 was OPEN / NOT MERGED
-at reconciliation, pinned at `c23227be12605c27f3621b38e839085f141ceb8b`.
-Do not count that branch as accepted main or overwrite its recovery package.
+Finish PR #71 after merging the accepted PR #70 base, synchronize state,
+verify the updated PR and merge it under the user's explicit instruction.
+No new product milestone or production publication is authorized by that instruction.
 
 See [integration plan](../docs/family-food/corpus-v03-integration-plan.md) and
 [reconciliation package](../data/curation/corpus-v03-reconciliation/README.md).
-The package accounts for all 68 historical PR70 families, 479 v0.3 cards,
-1473 routes and 2693 food occurrences. Lexical review groups are not canonical
-food identities. The 46 review queues are not publication-ready batches.
+PR #71 accounts for all 68 historical PR70 families, 479 v0.3 cards,
+1473 routes and 2693 food occurrences. Its 46 queues are review queues,
+not publication manifests; lexical groups are not canonical food equivalence.
 
-Next permitted work in this branch: verify and deliver this bounded PR for
-review. After acceptance, resolve exact form/source/rights/nutrient decisions
-for a separately authorized first DC2 batch. No automatic merge, DC2/DC3,
-Gate1 closure or PR9. Preserve the broader source-accounting backlog.
+The generated package retains its original historical comparison pins
+`main@d8c76a6` and `PR70@c23227b`. Its `pr70_merged=false` describes that
+capture, not current GitHub status. The accepted PR70 head `514c6b1` has
+byte-identical source inputs; do not rewrite historical receipts.
+
+## Sequence and next boundary
+
+DC1 recovery evidence is accepted through #70; v0.3 reconciliation is delivered
+through #71, pending completion of this authorized merge operation.
+DC2/DC3/DC4, Gate1-CLOSE and PR9 remain NOT STARTED.
+
+After #71 merge, the next proposed bounded task is to resolve exact food/form,
+source, rights and nutrient-method decisions for a useful first DC2 party.
+That task and any production publication require their own explicit scope.
+Stop after #71 merge; do not start DC2/DC3, Shopping, Retail, AI, Auth/PostgreSQL
+or generalized ingestion. Follow the canonical DATA-CORPUS-V1 contract.

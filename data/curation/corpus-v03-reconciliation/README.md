@@ -7,6 +7,15 @@
 [План продолжения](../../../docs/family-food/corpus-v03-integration-plan.md) и
 `implementation-backlog.json` содержат 20 задач с критериями и откатом.
 
+## Текущий статус и исторические pins
+
+PR70 принят в main как `b9768984392982bd05d28fc0f7793453fe8378b5`.
+`input-lock.json`, `git-inputs.json` и `summary.json` сохраняют исходную
+сверку до merge. Поле `pr70_merged=false` относится только к тому снимку.
+Финальный head PR70 `514c6b1` имеет тот же tree, что pin `c23227b`;
+никакие численные данные или mappings от принятия PR не изменились.
+Актуальный статус проекта хранится в `state/`, а не в generated receipts.
+
 ## Scope и фактический результат
 
 Учтены 68 исторических семейств PR70, 96 его ingredient identities, 479 карт
