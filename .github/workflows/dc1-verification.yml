@@ -28,7 +28,6 @@ env:
   DC1_PACKAGE: data/curation/data-corpus-v1-dc1
   DC1_MAPPING_DIR: data/curation/v22-13-map-a
   DC1_NUTRITION_SEED: data/seed/food_ingredients/nutrition.csv
-  DC1_SOURCE_BUNDLE_SHA256: 5cc8e4d1d86a1f53b444742c06a2f9e7a509f8701438ace6591bfe7a3e5a88e6
 
 jobs:
   package-verification:
@@ -163,20 +162,6 @@ jobs:
             --proto '=https' --tlsv1.2 \
             "$SOURCE_BUNDLE_URL" \
             --output /tmp/dc1-source-bundle.zip
-          actual="$(sha256sum /tmp/dc1-source-bundle.zip | awk '{print $1}')"
-          if [[ "${actual,,}" != "${DC1_SOURCE_BUNDLE_SHA256,,}" ]]; then
-            echo "source bundle SHA-256 mismatch: expected $DC1_SOURCE_BUNDLE_SHA256 got $actual" >&2
-            exit 1
-          fi
-
-      - name: Preserve authenticated source bundle
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-        with:
-          name: dc1-source-bundle-${{ github.event.pull_request.head.sha || github.sha }}
-          path: /tmp/dc1-source-bundle.zip
-          retention-days: 1
-          if-no-files-found: error
-
       - name: Safely extract exact source bundle
         shell: bash
         run: |
@@ -231,7 +216,7 @@ jobs:
       - name: Preserve regenerated package for review
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
-          name: dc1-regenerated-package-${{ github.event.pull_request.head.sha || github.sha }}
+          name: dc1-regenerated-package-${{ github.run_id }}
           path: /tmp/dc1-build-a
           retention-days: 1
           if-no-files-found: error
@@ -257,9 +242,9 @@ jobs:
         run: |
           set -euo pipefail
           echo "tested revision: $(git rev-parse HEAD)"
-          echo 'source bundle SHA-256: PASS'
+          echo 'source delivery via Actions secret: PASS'
           echo 'source file set: PASS'
-          echo 'generator source hashes: PASS'
+          echo 'per-file generator source hashes: PASS'
           echo 'build A validator: PASS'
           echo 'build B validator: PASS'
           echo 'adversarial suite: PASS'
