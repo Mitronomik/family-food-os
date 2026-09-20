@@ -15,7 +15,13 @@ External numeric A/B hashes are not merge acceptance evidence.
 No schema/migration, source rights, profile publication, Russian norm-table
 publication or Planner/API/UI default change is included.
 
-## Russian methodology layer — 2026-09-20
+## Preserved pre-PR74-sync Russian methodology receipt — historical
+
+The following block records the original PR75 branch state before PR74 merged.
+Its base/status, local A/B-trial and “PR74 not presumed merged” wording are
+superseded by the PR75 synchronized section above. It is historical evidence only.
+
+### Original Russian methodology layer — 2026-09-20
 
 User approved Russian method support and broader compatibility adaptation.
 Base a9472c2a0bb0534b70b41c541aa0ac9b4cb26ba0. New policy layer and internal
