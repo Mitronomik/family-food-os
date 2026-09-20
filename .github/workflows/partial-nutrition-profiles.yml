@@ -15,6 +15,7 @@ on:
       - 'backend/app/tests/test_migration_lineage.py'
       - 'backend/app/tests/test_migration_runner_rebuild.py'
       - 'backend/app/tests/test_nutrient_vector.py'
+      - 'backend/app/tests/table_guards.py'
       - 'docs/family-food/**'
       - 'state/**'
       - '.github/workflows/partial-nutrition-profiles.yml'
