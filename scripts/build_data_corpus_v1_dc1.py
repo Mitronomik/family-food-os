@@ -998,3 +998,450 @@ def main() -> None:
             "row_level_full_relationship_equivalence_claimed": False,
         },
         "assortment": assortment,
+        "stop_condition": "DC1 evidence only. DC2/DC3 remain NOT STARTED and require separate reviewable production batches.",
+    }
+
+    batch_plan = {
+        "dc2": {
+            k: {"count": len(v), "external_ingredient_ids": sorted(v)}
+            for k, v in sorted(dc2_groups.items())
+        },
+        "dc3": {
+            k: {
+                "count": len(v),
+                "source_recipe_ids": sorted(
+                    v, key=lambda s: (int(s.split("-")[-1]), s)
+                ),
+            }
+            for k, v in sorted(dc3_groups.items())
+        },
+        "rules": {
+            "dc2": {
+                "REUSE_EXISTING_PROFILE_FORM_REVIEW": "Accepted identity mapping and current profile provenance identified; exact recipe-form suitability must be reviewed before deciding whether any DC2 write is unnecessary.",
+                "DC2-A_HIGH_IMPACT": "Non-proxy/new identity with >=4 candidate families or >=2 safe simple candidate families; exact authority record still requires pinning.",
+                "DC2-B_STANDARD_EXTENSION": "Other non-proxy new identities with candidate source family identified where possible; exact authority record still requires pinning.",
+                "DC2-C_IDENTITY_FORM_REVIEW": "Form split, proxy, or v22.5/v22.13 label-difference item; identity/form semantics must close before exact authority assignment.",
+            },
+            "dc3": {
+                "DC3-A_CLEAN_BRANCH_EXISTING_PROFILE_REVIEW": "Source structure, v22.5/v22.13 relationship count and semantic labels are clean, with no new identity dependency; existing profile/form review is still required.",
+                "DC3-B_CLEAN_BRANCH_AFTER_DC2": "Source structure, relationship count and semantic labels are clean, but at least one new/form identity still needs DC2 closure.",
+                "DC3-C_REVIEW_REQUIRED": "Variant, ChoiceGroup, optional, boundary, relationship-compatibility or semantic-label review is unresolved.",
+            },
+        },
+    }
+
+    source_artifacts = {
+        "repository": {
+            "base_main": EXPECTED_BASE,
+            "accepted_mapping_pr": 39,
+            "accepted_mapping_checkpoint_sha256": EXPECTED_PR39_CHECKPOINT,
+            "mapping_input_contract": [
+                "data/curation/v22-13-map-a/recipe-candidates-part*.csv",
+                "data/curation/v22-13-map-a/ingredient-mapping-part*.csv",
+            ],
+            "mapping_rows_loaded": {
+                "candidate_rows_total_from_full_pr39_package": len(all_candidates),
+                "ingredient_mapping_rows_total_from_full_pr39_package": len(
+                    all_mappings
+                ),
+                "relevant_candidate_rows": len(lead_candidates),
+                "relevant_external_identity_rows": len(external_ids_used),
+            },
+        },
+        "production_nutrition_seed": {
+            "path": "data/seed/food_ingredients/nutrition.csv",
+            "row_count": len(nutrition_rows),
+            "git_blob_sha1": nutrition_seed_blob_sha1,
+            "relevant_existing_profiles_identified": len(
+                [r for r in demand_rows if r["map_state"] in EXISTING_STATES]
+            ),
+            "profile_form_suitability_policy": "PRESENCE_AND_PROVENANCE_IDENTIFIED; RECIPE_FORM_SUITABILITY_REQUIRES_REVIEW",
+        },
+        "local_source_files": [
+            {
+                "name": name,
+                "sha256": digest,
+                "use": (
+                    "raw relationship/calculation-row extraction only; nutrient values not production authority"
+                    if "v22_5_row_nutrients" in name
+                    else "v22.5 shard-count/join-contract validation"
+                    if name == "russian_normative_recipes_v22_5_manifest.xlsx"
+                    else "v22.13 coverage/identity cross-check only; nutrient values not production authority"
+                    if name == "russian_normative_recipes_v22_13_mass_nutrients.xlsx"
+                    else "v22.13 integrity/semantic-repair cross-check only"
+                    if name == "russian_normative_recipes_v22_13_integrity_audit.xlsx"
+                    else "v22.13 checkpoint/integrity/file-inventory cross-check only"
+                ),
+            }
+            for name, digest in sorted(source_hashes.items())
+        ],
+        "missing_source_artifacts": [
+            "russian_normative_recipes_v22_13_row_nutrients_part1.xlsx",
+            "russian_normative_recipes_v22_13_row_nutrients_part2.xlsx",
+            "russian_normative_recipes_v22_13_row_nutrients_part3.xlsx",
+            "russian_normative_recipes_v22_13_row_nutrients_part4.xlsx",
+        ],
+        "missing_artifact_effect": "Full row-level equality between v22.5 relationship rows and v22.13 relationship rows cannot be claimed. v22.5 candidate rows match v22.13 CalcRows and accepted PR39 aggregate mapping counts; extra non-calc v22.13 relationship rows remain an explicit compatibility blocker.",
+        "production_nutrition_promotion": "NONE",
+    }
+
+    out.mkdir(parents=True, exist_ok=True)
+    candidate_fields = [
+        "source_recipe_id",
+        "recipe_name",
+        "category",
+        "external_raw_status",
+        "mapping_class",
+        "strict_raw_triage",
+        "source_relationship_rows_v22_5",
+        "source_calc_rows_v22_13",
+        "source_relationship_rows_v22_13",
+        "relationship_compatibility_status",
+        "source_variant_count",
+        "source_variants",
+        "choice_groups",
+        "optional_row_count",
+        "boundary_review_reasons",
+        "source_structure_status",
+        "variant_selection_status",
+        "single_variant_required_ids",
+        "common_required_across_variants_ids",
+        "choice_group_ingredient_ids",
+        "optional_ingredient_ids",
+        "alternative_or_variant_only_ids",
+        "all_variant_union_ingredient_ids",
+        "existing_mapping_ids",
+        "dc2_required_ids",
+        "semantic_label_review_ids",
+        "production_ready",
+        "proposed_dc3_batch",
+    ]
+    demand_fields = [
+        "external_ingredient_id",
+        "v22_13_external_name",
+        "v22_5_canonical_labels",
+        "v22_5_original_labels",
+        "external_exactness_tier",
+        "map_state",
+        "familyfoodos_food_code",
+        "mapping_confidence",
+        "candidate_recipe_count",
+        "candidate_recipe_ids",
+        "candidate_row_count",
+        "candidate_input_mass_g",
+        "simple_candidate_recipe_count",
+        "simple_candidate_recipe_ids",
+        "semantic_compatibility_status",
+        "accepted_identity_mapping_status",
+        "current_profile_presence_status",
+        "profile_suitability_for_recipe_form",
+        "authority_source_candidate",
+        "authority_record_candidate",
+        "authority_assignment_status",
+        "authority_search_strategy",
+        "rights_status",
+        "production_ready",
+        "proposed_dc2_batch",
+    ]
+    compatibility_fields = [
+        "source_recipe_id",
+        "recipe_name",
+        "v22_5_candidate_rows",
+        "v22_13_calc_rows",
+        "v22_13_relationship_rows",
+        "v22_13_extra_noncalc_relationship_rows",
+        "v22_5_variant_count",
+        "v22_13_variant_blocks",
+        "compatibility_status",
+        "semantic_label_review_ids",
+        "explicit_label_conflict_example",
+        "row_level_v22_13_relationship_equivalence_proven",
+    ]
+    relationship_fields = [
+        "source_shard",
+        "relationship_source",
+        "source_recipe_id",
+        "recipe_no",
+        "recipe_name",
+        "category",
+        "variant",
+        "original_ingredient_id",
+        "resolved_ingredient_id",
+        "v22_5_canonical_ingredient",
+        "original_ingredient",
+        "amount_g",
+        "amount_status",
+        "choice_group",
+        "optional",
+        "relationship_source_url",
+        "nutrient_input_eligible",
+    ]
+
+    write_csv(out / "candidate-recipes.csv", candidate_output, candidate_fields)
+    write_csv(out / "food-demand.csv", demand_rows, demand_fields)
+    write_csv(out / "compatibility.csv", compatibility_rows, compatibility_fields)
+    relationship_part_names = []
+    for part_no, shard in enumerate(row_shards, start=1):
+        part_name = f"source-relationships-part{part_no}.csv"
+        relationship_part_names.append(part_name)
+        part_rows = [r for r in relationship_output if r["source_shard"] == shard.name]
+        write_csv(out / part_name, part_rows, relationship_fields)
+    write_json(out / "batch-plan.json", batch_plan)
+    write_json(out / "source-artifacts.json", source_artifacts)
+    write_json(out / "summary.json", summary)
+
+    # README numbers are generated solely from summary/data.
+    cat_lines = "\n".join(
+        f"- {k}: **{v}**" for k, v in assortment["category_counts"].items()
+    )
+    dc2_lines = "\n".join(
+        f"- `{k}`: **{v}**"
+        for k, v in summary["food_demand"]["dc2_batch_counts"].items()
+    )
+    dc3_lines = "\n".join(
+        f"- `{k}`: **{v}**"
+        for k, v in summary["candidate_selection"]["dc3_batch_counts"].items()
+    )
+    authority_lines = "\n".join(
+        f"- `{k}`: **{v}**"
+        for k, v in summary["food_demand"]["authority_assignment_counts"].items()
+    )
+    readme = f"""# DATA-CORPUS-V1 / DC1 — recovered source authority + coverage inventory
+
+**Status:** evidence/curation only for Issue #67.
+**Repository base:** `{EXPECTED_BASE}` (merged PR #69).
+**Production publication:** **NO**.
+**DC2 / DC3:** **NOT STARTED**.
+
+## Recovery result
+
+This package was rebuilt from raw XLSX bytes and accepted PR #39 mapping files after a completeness defect was found in the interrupted DC1 package.
+
+The prior package used a text-rendered spreadsheet view as if it were the complete row shard. The raw v22.5 manifest requires four shards with **1550 / 1550 / 1550 / 1529 = 6179** rows. Raw XLSX parsing finds **{len(relevant_rows)}** candidate relationship/calculation rows for all **{len(candidate_output)}** candidates. The corrupted package had silently treated missing rendered rows as zero ingredient demand.
+
+The preserved pre-rebuild package is under `recovery/pre-rebuild-b7bc19e8881ddc90/`. The exact original pre-rebuild bytes remain available at commit `b7bc19e8881ddc90b95bd8d13c75e72ee4623295`; the recovery-directory README itself was later whitespace-normalized for repository docs checks.
+
+## FACT — input contract
+
+Rebuild requires the full accepted PR #39 package:
+
+- recipe candidate rows loaded: **{len(all_candidates)}**;
+- ingredient mapping identities loaded: **{len(all_mappings)}**;
+- relevant candidate subset: **{len(lead_candidates)}**;
+- relevant external identities: **{len(external_ids_used)}**.
+
+The current production nutrition seed is also mandatory input:
+
+- production nutrition rows: **{len(nutrition_rows)}**;
+- existing mapped profiles identified: **{len(existing_demands)}**;
+- current seed Git blob: `{nutrition_seed_blob_sha1}`.
+
+## FACT — candidate universe
+
+The candidate universe is unchanged: all accepted PR #39 `DIRECT_EXISTING_MAP_LEAD` + `CATALOGUE_EXTENSION_LEAD` rows.
+
+- recipe families: **{len(candidate_output)}**;
+- PR39 external status `READY_RAW`: **{len(candidate_output)}**; this is **not** production readiness;
+- strict raw triage YES: **{summary["candidate_selection"]["strict_raw_triage_yes"]}**;
+- one source `Variant`: **{summary["candidate_selection"]["source_variant_structure"]["one_source_variant"]}**;
+- multiple source `Variant` values: **{summary["candidate_selection"]["source_variant_structure"]["multiple_source_variants"]}**;
+- structurally one-variant/no-choice/no-optional/no-boundary families: **26**;
+- safe simple source-branch candidates after relationship-compatibility and semantic-label checks: **{len(simple_candidates)}**;
+- families requiring variant/choice/optional/boundary/compatibility/semantic review: **{len(review_candidates)}**.
+
+A single `Variant` value is not treated as an exact publication decision. Relationship-count gaps or semantic-label debt also force review.
+
+## FACT — source compatibility
+
+For all 68 candidates:
+
+- v22.5 candidate rows equal v22.13 `CalcRows`;
+- v22.5 rows reproduce the accepted PR #39 mapping-state row aggregates;
+- v22.5 variant count equals v22.13 `VariantBlocks`.
+
+However **{len(compat_gap)}** candidates have more v22.13 `RelationshipRows` than v22.5 calculation rows. Exact v22.13 row-shard files were not available to this recovery environment. Therefore full row-level relationship equivalence is **not** claimed.
+
+`compatibility.csv` carries this blocker explicitly.
+
+## FACT — food/form demand
+
+This recovery preserves external identity boundaries instead of deduplicating by label:
+
+- external ingredient IDs used: **{len(demand_rows)}**;
+- accepted existing/alias mappings: **{len(existing_demands)}**;
+- identities requiring DC2-level identity/form/source work: **{len(work_demands)}**.
+
+The earlier journal number 95 came from collapsing two external IDs with the same displayed label. That is unsafe: `ING-0014` and `ING-0069` must remain separate, and v22.5 candidate rows use `ING-0069` with the label `Шпик` while v22.13/PR39 calls the identity `Жир кулинарный`. DC1 records this as a semantic review blocker rather than guessing equivalence.
+
+Existing PR39 FoodIngredient mappings are reused as identity decisions only. The current production nutrition seed is mandatory input: exact profile provenance is identified for all existing mappings, but recipe-form suitability remains explicitly review-required. No row is classified as `REUSE_NO_DC2_WRITE`.
+
+## DECISION — proposed DC2 triage
+
+{dc2_lines}
+
+This is prioritization only. It does not authorize a production write or assert that authority/rights are closed.
+
+## DECISION — proposed DC3 triage
+
+{dc3_lines}
+
+No source branch is selected merely because it reduces data debt. All batch membership is evidence triage only.
+
+## Assortment review — preserve, do not auto-expand
+
+Category counts in the original 68-family funnel:
+
+{cat_lines}
+
+The funnel is visibly skewed toward soups, vegetables/potatoes and egg dishes. Standalone meat/poultry breadth is limited. This is a DC3 variety blocker for a realistic family week, but DC1 does not expand the candidate universe automatically.
+
+## FACT — authority assignment state
+
+Every demand row has one explicit authority state:
+
+{authority_lines}
+
+For existing mappings, `authority_source_candidate` records the exact current production profile provenance and record ID. For unresolved/new forms, an official source family is recorded only where identity/form semantics permit it; otherwise authority assignment is blocked explicitly until identity/form review closes.
+
+`FIC_FGBUN_2024_OFFICIAL_COMPOSITION_FAMILY` and `USDA_FDC_OFFICIAL_DATASET` are source-family candidates, not exact-record verification. FIC/FGBUN rights remain blocked pending exact retained-use review; USDA exact-record/form compatibility still must be pinned.
+
+## Files
+
+- `candidate-recipes.csv` — 68 candidates, relationship counts, source structure, compatibility/semantic status and DC3 triage.
+- `food-demand.csv` — one row per external ingredient identity with current-profile provenance or explicit authority assignment/blocker.
+- `compatibility.csv` — v22.5 vs v22.13 count/semantic compatibility status.
+- `source-relationships-part1.csv` … `part4.csv` — all {len(relationship_output)} retained source relationship/calculation rows, sharded by original v22.5 row file and excluding nutrient values.
+- `batch-plan.json` — exact non-overlapping DC2/DC3 triage partitions.
+- `source-artifacts.json` — full PR39 input counts, production nutrition seed identity, XLSX hashes and missing-v22.13-row-shard blocker.
+- `summary.json` — machine-readable reconciliation totals.
+- `checksums.sha256` — deterministic hashes of generated package files.
+
+## Rebuild
+
+The package is generated from raw XLSX bytes plus the accepted PR #39 mapping package. Example:
+
+```bash
+python scripts/build_data_corpus_v1_dc1.py \\
+  --row-shard /path/russian_normative_recipes_v22_5_row_nutrients_part1.xlsx \\
+  --row-shard /path/russian_normative_recipes_v22_5_row_nutrients_part2.xlsx \\
+  --row-shard /path/russian_normative_recipes_v22_5_row_nutrients_part3.xlsx \\
+  --row-shard /path/russian_normative_recipes_v22_5_row_nutrients_part4.xlsx \\
+  --v22-5-manifest /path/russian_normative_recipes_v22_5_manifest.xlsx \\
+  --v22-13-mass /path/russian_normative_recipes_v22_13_mass_nutrients.xlsx \\
+  --v22-13-audit /path/russian_normative_recipes_v22_13_integrity_audit.xlsx \\
+  --v22-13-manifest /path/russian_normative_recipes_v22_13_manifest.xlsx \\
+  --mapping-dir data/curation/v22-13-map-a \\
+  --nutrition-seed data/seed/food_ingredients/nutrition.csv \\
+  --output /tmp/data-corpus-v1-dc1
+
+python scripts/validate_data_corpus_v1_dc1.py /tmp/data-corpus-v1-dc1
+python scripts/test_data_corpus_v1_dc1.py /tmp/data-corpus-v1-dc1
+```
+
+Source XLSX files are not committed by this package; exact required SHA-256 values are enforced by the generator and recorded in `source-artifacts.json`.
+
+## Verification invariants
+
+The generator fails closed on:
+
+- row-shard truncation or candidate loss;
+- missing mapping IDs or duplicate mapping identities;
+- duplicate source relationship rows;
+- blank/non-positive candidate ingredient amounts;
+- v22.5/v22.13 calculation-row or variant-block mismatch;
+- incomplete PR39 inputs (must be 350 recipe rows / 363 ingredient identities);
+- missing/duplicate current nutrition profiles for accepted existing mappings;
+- disagreement with accepted PR39 per-recipe mapping aggregates;
+- summary/batch partition omission or overlap;
+- assignment of a simple DC3 triage status while ChoiceGroup, optional, multi-variant, garnish/sauce boundary, relationship compatibility or semantic-label debt remains unresolved;
+- any existing mapping that bypasses profile/form review;
+- any demand row without an explicit authority assignment state.
+
+A second build from the same inputs must be byte-identical for all generated package files.
+
+## OPEN blockers
+
+1. **{len(review_candidates)}** candidate families still require variant/choice/optional/boundary/compatibility/semantic review before exact publication-branch selection.
+2. **{len(work_demands)}** external identities require DC2-level closure if their dependent recipes are pursued.
+3. **{len(compat_gap)}** candidates have additional v22.13 non-calc relationship rows; exact v22.13 row shards were not available here, so full row-level compatibility remains unproven.
+4. **{len(exact_label_diffs)}** used identities have a v22.5/v22.13 label difference requiring review; `ING-0069` is the clearest explicit conflict example.
+5. All **{len(existing_demands)}** existing mapped profiles have identified current provenance, but exact recipe-form suitability still requires review.
+6. Candidate-source-family assignments with unpinned records are not authority closure.
+7. The original 68-family funnel has assortment gaps for a realistic family week; DC1 records the gap but does not widen scope automatically.
+
+## Stop condition
+
+After review/merge of this evidence package, stop. DC2 and DC3 remain **NOT STARTED** and require separate reviewable production operations.
+"""
+    (out / "README.md").write_text(readme, encoding="utf-8")
+
+    # All generated artifacts except checksum itself. Recovery directory is outside this output during generation.
+    generated_names = [
+        "README.md",
+        "candidate-recipes.csv",
+        "food-demand.csv",
+        "compatibility.csv",
+        *relationship_part_names,
+        "batch-plan.json",
+        "source-artifacts.json",
+        "summary.json",
+    ]
+    checksum_lines = [f"{sha256(out / name)}  {name}" for name in generated_names]
+    (out / "checksums.sha256").write_text(
+        "\n".join(checksum_lines) + "\n", encoding="utf-8"
+    )
+
+    # Final self-reconciliation from serialized outputs, not in-memory assumptions.
+    with (out / "candidate-recipes.csv").open(encoding="utf-8", newline="") as f:
+        serialized_candidates = list(csv.DictReader(f))
+    with (out / "food-demand.csv").open(encoding="utf-8", newline="") as f:
+        serialized_demands = list(csv.DictReader(f))
+    serialized_summary = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+    serialized_plan = json.loads((out / "batch-plan.json").read_text(encoding="utf-8"))
+    if (
+        len(serialized_candidates)
+        != serialized_summary["candidate_selection"]["recipe_family_count"]
+    ):
+        die("serialized summary candidate count mismatch")
+    if len(serialized_demands) != serialized_summary["food_demand"]["demand_row_count"]:
+        die("serialized summary demand count mismatch")
+    for section, universe_field, id_field in [
+        ("dc2", serialized_demands, "external_ingredient_id"),
+        ("dc3", serialized_candidates, "source_recipe_id"),
+    ]:
+        flattened = []
+        key = "external_ingredient_ids" if section == "dc2" else "source_recipe_ids"
+        for group in serialized_plan[section].values():
+            flattened.extend(group[key])
+        if sorted(flattened) != sorted(r[id_field] for r in universe_field):
+            die(f"serialized {section} batch plan does not reconcile")
+
+    print(
+        json.dumps(
+            {
+                "status": "PASS",
+                "candidate_families": len(candidate_output),
+                "source_relationship_rows": len(relevant_rows),
+                "external_ingredient_ids": len(demand_rows),
+                "accepted_existing_identity_mappings": len(existing_demands),
+                "dc2_required_identities": len(work_demands),
+                "one_source_variant": summary["candidate_selection"][
+                    "source_variant_structure"
+                ]["one_source_variant"],
+                "multiple_source_variants": summary["candidate_selection"][
+                    "source_variant_structure"
+                ]["multiple_source_variants"],
+                "safe_simple_source_branch_candidates": len(simple_candidates),
+                "review_required": len(review_candidates),
+                "v22_13_extra_noncalc_relationship_gap_recipes": len(compat_gap),
+                "semantic_label_review_ids": len(exact_label_diffs),
+                "output": str(out),
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
