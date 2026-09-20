@@ -909,10 +909,11 @@ The candidate universe is unchanged: all accepted PR #39 `DIRECT_EXISTING_MAP_LE
 - strict raw triage YES: **{summary['candidate_selection']['strict_raw_triage_yes']}**;
 - one source `Variant`: **{summary['candidate_selection']['source_variant_structure']['one_source_variant']}**;
 - multiple source `Variant` values: **{summary['candidate_selection']['source_variant_structure']['multiple_source_variants']}**;
-- structurally simple single-variant families after ChoiceGroup/optional/boundary review: **{len(simple_candidates)}**;
-- families requiring variant/choice/optional/boundary review: **{len(review_candidates)}**.
+- structurally one-variant/no-choice/no-optional/no-boundary families: **26**;
+- safe simple source-branch candidates after relationship-compatibility and semantic-label checks: **{len(simple_candidates)}**;
+- families requiring variant/choice/optional/boundary/compatibility/semantic review: **{len(review_candidates)}**.
 
-A single `Variant` value is not treated as an exact publication decision. Five one-variant families still require review because of explicit ChoiceGroup or garnish/sauce boundaries.
+A single `Variant` value is not treated as an exact publication decision. Relationship-count gaps or semantic-label debt also force review.
 
 ## FACT — source compatibility
 
@@ -936,7 +937,7 @@ This recovery preserves external identity boundaries instead of deduplicating by
 
 The earlier journal number 95 came from collapsing two external IDs with the same displayed label. That is unsafe: `ING-0014` and `ING-0069` must remain separate, and v22.5 candidate rows use `ING-0069` with the label `Шпик` while v22.13/PR39 calls the identity `Жир кулинарный`. DC1 records this as a semantic review blocker rather than guessing equivalence.
 
-Existing PR39 FoodIngredient mappings are reused as identity decisions only. DC1 does **not** claim that a current nutrition profile is automatically suitable for every recipe source form; profile/form suitability remains explicitly not revalidated here.
+Existing PR39 FoodIngredient mappings are reused as identity decisions only. The current production nutrition seed is mandatory input: exact profile provenance is identified for all existing mappings, but recipe-form suitability remains explicitly review-required. No row is classified as `REUSE_NO_DC2_WRITE`.
 
 ## DECISION — proposed DC2 triage
 
@@ -962,8 +963,8 @@ The funnel is visibly skewed toward soups, vegetables/potatoes and egg dishes. S
 
 - External v22.5/v22.13 nutrient values are not promoted to FamilyFoodOS production Nutrition.
 - Existing PR39 mappings mean accepted identity mapping, not automatic nutrition-profile/form approval.
-- New/form-split/proxy rows retain `NOT_VERIFIED_DC1`; `authority_search_strategy` is only the next verification strategy, not a verified source.
-- Rights for future external authority rows remain `PENDING_SELECTED_SOURCE_REVIEW` until an exact source is selected and reviewed under the canonical DATA-CORPUS-V1 policy.
+- Every demand row has an explicit authority-assignment state: identified current production profile provenance, identified official source family with exact record still unpinned, or an explicit identity/form blocker before authority can be assigned.
+- FIC/FGBUN and USDA entries recorded as source-family candidates are not exact-record verification. Rights remain explicit and unresolved where required.
 
 ## Files
 
@@ -991,6 +992,7 @@ python scripts/build_data_corpus_v1_dc1.py \
   --v22-13-audit /path/russian_normative_recipes_v22_13_integrity_audit.xlsx \
   --v22-13-manifest /path/russian_normative_recipes_v22_13_manifest.xlsx \
   --mapping-dir data/curation/v22-13-map-a \
+  --nutrition-seed data/seed/food_ingredients/nutrition.csv \
   --output /tmp/data-corpus-v1-dc1
 
 python scripts/validate_data_corpus_v1_dc1.py /tmp/data-corpus-v1-dc1
@@ -1007,15 +1009,17 @@ The generator fails closed on:
 - duplicate source relationship rows;
 - blank/non-positive candidate ingredient amounts;
 - v22.5/v22.13 calculation-row or variant-block mismatch;
+- incomplete PR39 inputs (must be 350 recipe rows / 363 ingredient identities);
+- missing/duplicate current nutrition profiles for accepted existing mappings;
 - disagreement with accepted PR39 per-recipe mapping aggregates;
 - summary/batch partition omission or overlap;
-- assignment of a simple/exact DC3 triage status while ChoiceGroup, optional, multi-variant or garnish/sauce boundary remains unresolved.
+- assignment of a simple DC3 triage status while ChoiceGroup, optional, multi-variant, garnish/sauce boundary, relationship compatibility or semantic-label debt remains unresolved.
 
 A second build from the same inputs must be byte-identical for all generated package files.
 
 ## OPEN blockers
 
-1. **{len(review_candidates)}** candidate families still require variant/choice/optional/boundary review before exact publication-branch selection.
+1. **{len(review_candidates)}** candidate families still require variant/choice/optional/boundary/compatibility/semantic review before exact publication-branch selection.
 2. **{len(work_demands)}** external identities require DC2-level closure if their dependent recipes are pursued.
 3. **{len(compat_gap)}** candidates have additional v22.13 non-calc relationship rows; exact v22.13 row shards were not available here, so full row-level compatibility remains unproven.
 4. **{len(exact_label_diffs)}** used identities have a v22.5/v22.13 label difference requiring review; `ING-0069` is the clearest explicit conflict example.
