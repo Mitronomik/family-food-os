@@ -204,10 +204,10 @@
   },
   "rules": {
     "dc2": {
-      "REUSE_EXISTING_PROFILE_FORM_REVIEW": "Accepted identity mapping and current profile provenance identified; exact recipe-form suitability must be reviewed before deciding whether any DC2 write is unnecessary.",
       "DC2-A_HIGH_IMPACT": "Non-proxy/new identity with >=4 candidate families or >=2 safe simple candidate families; exact authority record still requires pinning.",
       "DC2-B_STANDARD_EXTENSION": "Other non-proxy new identities with candidate source family identified where possible; exact authority record still requires pinning.",
-      "DC2-C_IDENTITY_FORM_REVIEW": "Form split, proxy, or v22.5/v22.13 label-difference item; identity/form semantics must close before exact authority assignment."
+      "DC2-C_IDENTITY_FORM_REVIEW": "Form split, proxy, or v22.5/v22.13 label-difference item; identity/form semantics must close before exact authority assignment.",
+      "REUSE_EXISTING_PROFILE_FORM_REVIEW": "Accepted identity mapping and current profile provenance identified; exact recipe-form suitability must be reviewed before deciding whether any DC2 write is unnecessary."
     },
     "dc3": {
       "DC3-A_CLEAN_BRANCH_EXISTING_PROFILE_REVIEW": "Source structure, v22.5/v22.13 relationship count and semantic labels are clean, with no new identity dependency; existing profile/form review is still required.",
