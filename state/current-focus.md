@@ -50,17 +50,27 @@ Recovered reconciliation:
 - 96 external ingredient identities;
 - 33 accepted existing/alias identity mappings;
 - 63 identities requiring later DC2-level closure if pursued;
+- full accepted PR39 inputs required: 350 recipe rows / 363 ingredient identities;
 - 31 one-source-Variant / 37 multiple-source-Variant families structurally;
-- 26 `SINGLE_VARIANT_NO_EXPLICIT_ALTERNATIVE`;
-- 42 `MULTI_OR_ALTERNATIVE_REVIEW_REQUIRED`.
+- 5 `SIMPLE_SOURCE_BRANCH_CANDIDATE`;
+- 63 `REVIEW_REQUIRED`;
+- 33 existing mappings have identified current USDA FDC profile provenance but
+  remain `PROFILE_PRESENT_FORM_REVIEW_REQUIRED`;
+- 28 non-existing identities have an official source-family candidate with the
+  exact record still unpinned;
+- 35 identities are blocked on identity/form semantics before exact authority
+  can be assigned.
 
 A single source `Variant` is not treated as an exact publication decision.
+Relationship compatibility and semantic-label debt also force review.
 
 ## Open DC1 blockers retained
 
 - exact v22.13 row-nutrient shards were not available to recovery;
 - 20 candidate families have additional v22.13 non-calculation relationship rows;
 - 20 used external identities have v22.5/v22.13 label differences requiring review;
+- all 33 existing profiles still require exact recipe-form suitability review;
+- candidate source-family assignment is not exact-record authority closure;
 - the original 68-family funnel has assortment gaps for a realistic family week.
 
 These are recorded blockers, not permission to invent or auto-expand data.
