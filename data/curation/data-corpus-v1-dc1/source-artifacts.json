@@ -49,6 +49,13 @@
     "russian_normative_recipes_v22_13_row_nutrients_part4.xlsx"
   ],
   "production_nutrition_promotion": "NONE",
+  "production_nutrition_seed": {
+    "git_blob_sha1": "fbaff2c983cbf1a59c7952fa9acb7d8296a710e6",
+    "path": "data/seed/food_ingredients/nutrition.csv",
+    "profile_form_suitability_policy": "PRESENCE_AND_PROVENANCE_IDENTIFIED; RECIPE_FORM_SUITABILITY_REQUIRES_REVIEW",
+    "relevant_existing_profiles_identified": 33,
+    "row_count": 183
+  },
   "repository": {
     "accepted_mapping_checkpoint_sha256": "a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97",
     "accepted_mapping_pr": 39,
@@ -63,12 +70,5 @@
       "relevant_candidate_rows": 68,
       "relevant_external_identity_rows": 96
     }
-  },
-  "production_nutrition_seed": {
-    "path": "data/seed/food_ingredients/nutrition.csv",
-    "row_count": 183,
-    "git_blob_sha1": "fbaff2c983cbf1a59c7952fa9acb7d8296a710e6",
-    "relevant_existing_profiles_identified": 33,
-    "profile_form_suitability_policy": "PRESENCE_AND_PROVENANCE_IDENTIFIED; RECIPE_FORM_SUITABILITY_REQUIRES_REVIEW"
   }
 }
