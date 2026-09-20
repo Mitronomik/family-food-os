@@ -1,0 +1,36 @@
+{
+  "repository_baseline": {
+    "main_merge_pr69": "d8c76a64483e3d5814e702be33c12cbe2e144160",
+    "v22_13_map_a_pr": 39,
+    "v22_13_checkpoint_sha256": "a42beb529d9e3f4d219908f37fdb2ed430229cee43c18d414ff817ed1ac81b97",
+    "ru_source_corpus_pr": 36
+  },
+  "library_artifacts": [
+    {
+      "name": "russian_normative_recipes_v22_13_mass_nutrients.xlsx",
+      "sha256": "5ea78ead82568f8aff019a4076215c6598675783cb81e0d1d5b4f913016de4cc",
+      "use": "v22.13 cross-check/reference evidence only"
+    },
+    {
+      "name": "russian_normative_recipes_v22_5_row_nutrients_part1.xlsx",
+      "sha256": "72a70f31b6b59454a94d78b73bdf2d43119f04799b266773bb34917e9cb3961e",
+      "use": "relationship/variant inventory and demand counting only; no nutrition authority"
+    },
+    {
+      "name": "russian_normative_recipes_v22_5_row_nutrients_part2.xlsx",
+      "sha256": "5603956719b07aeeb93d4b348d08796dc23fc9b2a4f5a6b828da2619a576f9ae",
+      "use": "relationship/variant inventory and demand counting only; no nutrition authority"
+    },
+    {
+      "name": "russian_normative_recipes_v22_5_row_nutrients_part3.xlsx",
+      "sha256": "7678d809f5ea1c68e1521d8460f213412f7fab13074ea45d9ce856fc37d4c11e",
+      "use": "relationship/variant inventory and demand counting only; no nutrition authority"
+    },
+    {
+      "name": "russian_normative_recipes_v22_5_row_nutrients_part4.xlsx",
+      "sha256": "06bd3be3bf5c7b923808df08285032ee27d823f970e7ce047e4c56a6c8d0eb56",
+      "use": "relationship/variant inventory and demand counting only; no nutrition authority"
+    }
+  ],
+  "authority_note": "External workbook nutrient values are not promoted. Merged PR #39 is the accepted identity/readiness baseline."
+}

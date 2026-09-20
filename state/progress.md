@@ -1,8 +1,71 @@
 # Progress
 
-Updated: `2026-09-18`
+Updated: `2026-09-20`
 
-## FamilyFoodOS milestone status
+## DATA-CORPUS-V1 / DC1 recovery and delivery
+
+DC1 recovery is review-ready on `data/data-corpus-v1-dc1` from accepted main
+`d8c76a64483e3d5814e702be33c12cbe2e144160`.
+
+- preserved the inconsistent pre-rebuild package under
+  `data/curation/data-corpus-v1-dc1/recovery/pre-rebuild-b7bc19e8881ddc90/`;
+- recovered the root cause: truncated text-rendered XLSX rows had been treated as
+  complete source shards, causing missing recipe compositions to become zero demand;
+- rebuilt directly from raw XLSX bytes plus accepted PR #39 mappings;
+- recovered 68 recipe families / 991 relationship rows / 96 external identities;
+- 33 existing/alias mappings are reused as identity decisions; 63 identities
+  remain later DC2-level work if pursued;
+- source structure is 31 one-Variant / 37 multi-Variant; after ChoiceGroup,
+  optional, boundary, relationship-compatibility and semantic-label checks the
+  safe branch split is 5 simple / 63 review-required;
+- full v22.13 row-level equality remains blocked because exact v22.13 row-nutrient
+  shards were unavailable; 20 recipes show additional non-calc relationships;
+- the original 68-family funnel is preserved and its assortment skew is recorded
+  rather than automatically expanding scope.
+
+Reproducible tooling:
+
+- `scripts/build_data_corpus_v1_dc1.py`;
+- `scripts/validate_data_corpus_v1_dc1.py`;
+- `scripts/test_data_corpus_v1_dc1.py`;
+- `.github/workflows/dc1-verification.yml`.
+
+Review-fix verification: exact GitHub package audit PASS; checksum manifest PASS
+for all 11 generated files; full PR39 metadata is 350/363; production nutrition
+metadata is 183 rows with exact Git blob identity; DC2/DC3 partitions reconcile
+exactly and all 96 demands have explicit authority status.
+
+Current heavy verification applies to generator/generated-package bytes
+finalized at `78c81ff7f55c6878be9112b75f766c78fe73c639`: exact PR39 mapping inputs and
+production nutrition seed were restored byte-for-byte; raw XLSX source hashes
+were enforced by the current generator; two independent builds PASS; validator
+A/B PASS; 15-case adversarial suite PASS; A==B deterministic comparison PASS.
+
+The 28 previously labelled source-family "identified" rows are now explicitly
+`SOURCE_FAMILY_SEARCH_TARGET_EXACT_RECORD_UNVERIFIED`: they are search
+priorities only, not evidence that a compatible FIC/USDA record exists.
+
+Raw XLSX source bytes remain operator-managed external evidence. Canonical source
+identity is the exact expected file set plus per-file SHA-256; ZIP/container hash
+is diagnostic only. The raw source ZIP is forbidden as a GitHub Actions artifact
+in this public repository; only regenerated package outputs may be retained.
+Automatic PR CI verifies the committed package; full raw-source rebuild is manual
+`workflow_dispatch` against explicit `target_ref`, using the temporary URL
+only through `DC1_SOURCE_BUNDLE_URL`.
+
+Later state-only commits do not change generator/generated-package bytes covered
+by the heavy verification above. No production data/schema/migration/Planner/API/UI change.
+
+DC1 remains ACTIVE / REVIEW-READY. DC2/DC3 are NOT STARTED. Stop after review/merge.
+
+## Historical milestone receipts
+
+The sections below are historical accepted progress snapshots. They do **not**
+represent the current authorized operation. Current authorization and sequencing
+are defined by `state/current-focus.md` and the latest canonical DATA-CORPUS-V1
+documents.
+
+## FamilyFoodOS milestone status — historical snapshot
 
 ```text
 PR0   Frozen Fork                          COMPLETE
@@ -20,8 +83,8 @@ PR6   Nutrition Core                       COMPLETE (PR6-CLOSE accepted)
 PR7-SUPPORT Meal Pattern Catalogue          COMPLETE (#47 / PR #51)
 PR7   MealPlan / Serving                    COMPLETE (#53 / PR #54)
 PR8   Planner v0                            COMPLETE (#57 / PR #59)
-GATE1-A candidate data readiness           ACTIVE (#61)
-GATE1-A-E1 primary-source evidence          ACTIVE (#64)
+GATE1-A candidate data readiness           ACTIVE AT TIME OF SNAPSHOT (#61)
+GATE1-A-E1 primary-source evidence          ACTIVE AT TIME OF SNAPSHOT (#64)
 GATE 1 Planning Core                        NOT STARTED
 ```
 

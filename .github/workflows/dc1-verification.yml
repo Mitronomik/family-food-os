@@ -1,0 +1,252 @@
+name: DC1 corpus verification
+
+on:
+  pull_request:
+    paths:
+      - 'data/curation/data-corpus-v1-dc1/**'
+      - 'data/curation/v22-13-map-a/**'
+      - 'data/seed/food_ingredients/nutrition.csv'
+      - 'scripts/build_data_corpus_v1_dc1.py'
+      - 'scripts/validate_data_corpus_v1_dc1.py'
+      - 'scripts/test_data_corpus_v1_dc1.py'
+      - 'state/current-focus.md'
+      - 'state/handoff.md'
+      - 'state/progress.md'
+      - '.github/workflows/dc1-verification.yml'
+  workflow_dispatch:
+    inputs:
+      target_ref:
+        description: 'Branch, tag or exact commit SHA to verify'
+        required: true
+        default: 'main'
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  DC1_PACKAGE: data/curation/data-corpus-v1-dc1
+  DC1_MAPPING_DIR: data/curation/v22-13-map-a
+  DC1_NUTRITION_SEED: data/seed/food_ingredients/nutrition.csv
+
+jobs:
+  package-verification:
+    name: package-verification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact requested revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ inputs.target_ref || github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+
+      - name: Create isolated Python environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import sys
+          if sys.version_info < (3, 12):
+              raise SystemExit(f"Python >=3.12 required, got {sys.version}")
+          PY
+          python3 -m venv .venv-dc1-ci
+          .venv-dc1-ci/bin/python -m pip install --disable-pip-version-check --upgrade pip
+          .venv-dc1-ci/bin/python -m pip install --disable-pip-version-check             'openpyxl==3.1.5'             'ruff==0.16.8'
+
+      - name: Python compile and Ruff
+        shell: bash
+        run: |
+          set -euo pipefail
+          py=.venv-dc1-ci/bin/python
+          ruff=.venv-dc1-ci/bin/ruff
+          scripts=(
+            scripts/build_data_corpus_v1_dc1.py
+            scripts/validate_data_corpus_v1_dc1.py
+            scripts/test_data_corpus_v1_dc1.py
+          )
+          "$py" -m py_compile "${scripts[@]}"
+          "$ruff" check "${scripts[@]}"
+          if ! "$ruff" format --check "${scripts[@]}"; then
+            "$ruff" format "${scripts[@]}"
+            exit 1
+          fi
+
+      - name: Upload Ruff-formatted scripts on formatting failure
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: dc1-ruff-formatted-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            scripts/build_data_corpus_v1_dc1.py
+            scripts/validate_data_corpus_v1_dc1.py
+            scripts/test_data_corpus_v1_dc1.py
+          retention-days: 1
+
+      - name: Validate committed DC1 package
+        shell: bash
+        run: |
+          set -euo pipefail
+          py=.venv-dc1-ci/bin/python
+          (
+            cd "$DC1_PACKAGE"
+            sha256sum -c checksums.sha256
+          )
+          "$py" scripts/validate_data_corpus_v1_dc1.py "$DC1_PACKAGE"
+          "$py" scripts/test_data_corpus_v1_dc1.py "$DC1_PACKAGE"
+
+      - name: Diff whitespace and changed-path visibility
+        shell: bash
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          base="${PR_BASE_SHA:-origin/main}"
+          git fetch origin main --no-tags
+          git diff --check "$base"...HEAD
+          mapfile -t changed < <(git diff --name-only "$base"...HEAD)
+          printf 'Changed paths:\n'
+          printf '  %s\n' "${changed[@]}"
+
+      - name: Package verification summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "tested revision: $(git rev-parse HEAD)"
+          echo 'py_compile: PASS'
+          echo 'ruff check/format: PASS'
+          echo 'checksums: PASS'
+          echo 'package validator: PASS'
+          echo 'adversarial suite: PASS'
+          echo 'diff whitespace / changed-path visibility: PASS'
+
+  full-rebuild:
+    name: full-rebuild-from-source-bundle
+    if: github.event_name == 'workflow_dispatch'
+    needs: package-verification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact requested revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ inputs.target_ref || github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+
+      - name: Create isolated Python environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import sys
+          if sys.version_info < (3, 12):
+              raise SystemExit(f"Python >=3.12 required, got {sys.version}")
+          PY
+          python3 -m venv .venv-dc1-ci
+          .venv-dc1-ci/bin/python -m pip install --disable-pip-version-check --upgrade pip
+          .venv-dc1-ci/bin/python -m pip install --disable-pip-version-check 'openpyxl==3.1.5'
+
+      - name: Download and authenticate source bundle
+        shell: bash
+        env:
+          SOURCE_BUNDLE_URL: ${{ secrets.DC1_SOURCE_BUNDLE_URL }}
+        run: |
+          set -euo pipefail
+          if [[ -z "$SOURCE_BUNDLE_URL" ]]; then
+            echo 'DC1_SOURCE_BUNDLE_URL repository secret is required for manual full rebuild verification.' >&2
+            exit 1
+          fi
+          if [[ ! "$SOURCE_BUNDLE_URL" =~ ^https:// ]]; then
+            echo 'source bundle URL must use HTTPS' >&2
+            exit 1
+          fi
+          curl --fail --show-error --silent --location \
+            --proto '=https' --tlsv1.2 \
+            "$SOURCE_BUNDLE_URL" \
+            --output /tmp/dc1-source-bundle.zip
+      - name: Safely extract exact source bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/dc1-source
+          .venv-dc1-ci/bin/python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+
+          archive = Path('/tmp/dc1-source-bundle.zip')
+          dest = Path('/tmp/dc1-source').resolve()
+          expected = {
+              'russian_normative_recipes_v22_5_row_nutrients_part1.xlsx',
+              'russian_normative_recipes_v22_5_row_nutrients_part2.xlsx',
+              'russian_normative_recipes_v22_5_row_nutrients_part3.xlsx',
+              'russian_normative_recipes_v22_5_row_nutrients_part4.xlsx',
+              'russian_normative_recipes_v22_5_manifest.xlsx',
+              'russian_normative_recipes_v22_13_mass_nutrients.xlsx',
+              'russian_normative_recipes_v22_13_integrity_audit.xlsx',
+              'russian_normative_recipes_v22_13_manifest.xlsx',
+          }
+          with ZipFile(archive) as zf:
+              names = set(zf.namelist())
+              if names != expected:
+                  missing = sorted(expected - names)
+                  extra = sorted(names - expected)
+                  raise SystemExit(f'source bundle file set mismatch; missing={missing} extra={extra}')
+              for info in zf.infolist():
+                  target = (dest / info.filename).resolve()
+                  if target.parent != dest:
+                      raise SystemExit(f'unsafe ZIP path: {info.filename}')
+                  if info.is_dir():
+                      raise SystemExit(f'unexpected directory in source bundle: {info.filename}')
+                  with zf.open(info) as src, target.open('wb') as out:
+                      while chunk := src.read(1024 * 1024):
+                          out.write(chunk)
+          PY
+
+      - name: Rebuild twice from exact sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          py=.venv-dc1-ci/bin/python
+          src=/tmp/dc1-source
+          build_dc1() {
+            out="$1"
+            "$py" scripts/build_data_corpus_v1_dc1.py               --row-shard "$src/russian_normative_recipes_v22_5_row_nutrients_part1.xlsx"               --row-shard "$src/russian_normative_recipes_v22_5_row_nutrients_part2.xlsx"               --row-shard "$src/russian_normative_recipes_v22_5_row_nutrients_part3.xlsx"               --row-shard "$src/russian_normative_recipes_v22_5_row_nutrients_part4.xlsx"               --v22-5-manifest "$src/russian_normative_recipes_v22_5_manifest.xlsx"               --v22-13-mass "$src/russian_normative_recipes_v22_13_mass_nutrients.xlsx"               --v22-13-audit "$src/russian_normative_recipes_v22_13_integrity_audit.xlsx"               --v22-13-manifest "$src/russian_normative_recipes_v22_13_manifest.xlsx"               --mapping-dir "$DC1_MAPPING_DIR"               --nutrition-seed "$DC1_NUTRITION_SEED"               --output "$out"
+          }
+          build_dc1 /tmp/dc1-build-a
+          build_dc1 /tmp/dc1-build-b
+
+      - name: Preserve regenerated package for review
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: dc1-regenerated-package-${{ github.run_id }}
+          path: /tmp/dc1-build-a
+          retention-days: 1
+          if-no-files-found: error
+
+      - name: Validate rebuilds and adversarial behavior
+        shell: bash
+        run: |
+          set -euo pipefail
+          py=.venv-dc1-ci/bin/python
+          "$py" scripts/validate_data_corpus_v1_dc1.py /tmp/dc1-build-a
+          "$py" scripts/validate_data_corpus_v1_dc1.py /tmp/dc1-build-b
+          "$py" scripts/test_data_corpus_v1_dc1.py /tmp/dc1-build-a
+
+      - name: Prove deterministic and committed equivalence
+        shell: bash
+        run: |
+          set -euo pipefail
+          diff -ru /tmp/dc1-build-a /tmp/dc1-build-b
+          diff -ru --exclude=recovery "$DC1_PACKAGE" /tmp/dc1-build-a
+
+      - name: Full rebuild summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "tested revision: $(git rev-parse HEAD)"
+          echo 'source delivery via Actions secret: PASS'
+          echo 'source file set: PASS'
+          echo 'per-file generator source hashes: PASS'
+          echo 'build A validator: PASS'
+          echo 'build B validator: PASS'
+          echo 'adversarial suite: PASS'
+          echo 'A == B deterministic comparison: PASS'
+          echo 'generated == committed package comparison: PASS'

@@ -1,0 +1,49 @@
+{
+  "operation": "DATA-CORPUS-V1-DC1",
+  "repository_base": "d8c76a64483e3d5814e702be33c12cbe2e144160",
+  "execution_issue": 67,
+  "candidate_selection": {
+    "rule": "All merged PR #39 DIRECT_EXISTING_MAP_LEAD + CATALOGUE_EXTENSION_LEAD recipes",
+    "recipe_family_count": 68,
+    "ready_raw_count": 68,
+    "strict_raw_triage_yes": 45,
+    "strict_raw_triage_no": 23,
+    "variant_selection": {
+      "exact_single_or_preselected": 27,
+      "multi_variant_review_required": 41
+    },
+    "dc3_batch_counts": {
+      "DC3-B_LOW_DEBT_EXACT_VARIANT": 8,
+      "DC3-C_EXACT_VARIANT_AFTER_DC2": 16,
+      "DC3-D_VARIANT_SELECTION_REVIEW": 41,
+      "DC3-A_ZERO_NEW_PROFILE": 3
+    }
+  },
+  "food_demand": {
+    "external_identity_count": 55,
+    "deduplicated_demand_count": 55,
+    "existing_accepted_identity_profile_demands": 23,
+    "dc2_required_demands": 32,
+    "proposed_dc2_batch_counts": {
+      "REUSE_NO_DC2_WRITE": 23,
+      "DC2-A_HIGH_IMPACT": 15,
+      "DC2-B_COMMON_EXTENSION": 7,
+      "DC2-C_IDENTITY_FORM_REVIEW": 10
+    },
+    "source_strategy_counts": {
+      "REUSE_CURRENT_ACCEPTED_PROFILE": 23,
+      "RU_PRIMARY_OFFICIAL_CANDIDATE": 11,
+      "RU_PRIMARY_OFFICIAL_CANDIDATE_AFTER_FORM_SPLIT": 8,
+      "OFFICIAL_SOURCE_AFTER_IDENTITY_REVIEW": 6,
+      "OFFICIAL_SOURCE_REQUIRED_AFTER_FORM_SPLIT": 5,
+      "OFFICIAL_PRIMARY_SOURCE_TO_VERIFY": 2
+    },
+    "rights_status_counts": {
+      "ACCEPTED_REPOSITORY_TRUTH": 23,
+      "BLOCKED_PENDING_RIGHTS_REVIEW": 19,
+      "REFERENCE_ONLY": 6,
+      "UNRESOLVED": 7
+    }
+  },
+  "stop_condition": "DC1 evidence only. DC2/DC3 production publication remains NOT STARTED and requires separate reviewable batches."
+}
