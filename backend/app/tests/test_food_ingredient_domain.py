@@ -308,3 +308,23 @@ def test_source_observation_preserves_literal_and_requires_method_when_incompati
             source_literal="71.2",
         )
     assert exc_info.value.issue.field == "method_reference"
+
+
+def test_partial_profile_cannot_be_current_in_legacy_selector():
+    profile_id = uuid4()
+    with pytest.raises(DomainValidationError) as exc_info:
+        profile(
+            id=profile_id,
+            protein_g=None,
+            is_current=True,
+            observations=(
+                source_observation(
+                    profile_id,
+                    "protein_g",
+                    NutritionObservationState.BELOW_DETECTION,
+                    source_literal="0",
+                ),
+            ),
+        )
+
+    assert exc_info.value.issue.field == "is_current"
