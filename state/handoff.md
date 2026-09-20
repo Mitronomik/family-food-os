@@ -1,5 +1,13 @@
 # Handoff
 
+## PR72 review hardening handoff — 2026-09-20
+
+The first DC2 source/form review remains evidence-only. Review blockers were
+addressed by expanding CI input triggers, adding fail-closed committed-output
+validation for input receipt/routes/summary, and making current-focus valid
+before and after PR72 merge. Reverify the final head; after review/merge stop
+pending explicit authorization for a production DC2 publication payload.
+
 ## Current update — first DC2 batch review, 2026-09-20
 
 PR71 merged at `9b1d5c73da4f1d779336a35e0e7e2c2d32363e85`.
