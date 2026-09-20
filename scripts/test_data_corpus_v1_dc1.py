@@ -78,7 +78,10 @@ def summary_drift(pkg: Path) -> None:
     path = pkg / "summary.json"
     data = json.loads(path.read_text(encoding="utf-8"))
     data["candidate_selection"]["recipe_family_count"] += 1
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    path.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
 
 
 def batch_omission(pkg: Path) -> None:
@@ -87,7 +90,10 @@ def batch_omission(pkg: Path) -> None:
     group = next(iter(data["dc2"].values()))
     group["external_ingredient_ids"].pop()
     group["count"] = len(group["external_ingredient_ids"])
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    path.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
 
 
 def batch_overlap(pkg: Path) -> None:
@@ -97,7 +103,10 @@ def batch_overlap(pkg: Path) -> None:
     duplicate_id = groups[0]["external_ingredient_ids"][0]
     groups[1]["external_ingredient_ids"].append(duplicate_id)
     groups[1]["count"] = len(groups[1]["external_ingredient_ids"])
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    path.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
 
 
 def false_simple_status(pkg: Path) -> None:
@@ -112,7 +121,9 @@ def false_simple_status(pkg: Path) -> None:
 def premature_profile_reuse(pkg: Path) -> None:
     path = pkg / "food-demand.csv"
     fields, rows = read_csv(path)
-    row = next(r for r in rows if r["map_state"] in {"EXACT_EXISTING", "ALIAS_EXISTING"})
+    row = next(
+        r for r in rows if r["map_state"] in {"EXACT_EXISTING", "ALIAS_EXISTING"}
+    )
     row["proposed_dc2_batch"] = "REUSE_NO_DC2_WRITE"
     write_csv(path, fields, rows)
 
@@ -130,7 +141,10 @@ def incomplete_input_metadata(pkg: Path) -> None:
     loaded = data["repository"]["mapping_rows_loaded"]
     loaded["candidate_rows_total_from_full_pr39_package"] = 68
     loaded["ingredient_mapping_rows_total_from_full_pr39_package"] = 96
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    path.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
 
 
 def main() -> None:
