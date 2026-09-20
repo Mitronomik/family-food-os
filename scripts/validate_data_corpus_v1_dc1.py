@@ -229,13 +229,22 @@ def validate(pkg: Path, *, check_checksums: bool = True) -> dict[str, int]:
                 fail(
                     f"blocked demand {ingredient_id} carries premature authority record"
                 )
-        elif assignment == "CANDIDATE_SOURCE_FAMILY_IDENTIFIED_EXACT_RECORD_UNPINNED":
+        elif assignment == "SOURCE_FAMILY_SEARCH_TARGET_EXACT_RECORD_UNVERIFIED":
             if not row["authority_source_candidate"]:
-                fail(f"candidate-family assignment missing source for {ingredient_id}")
+                fail(f"source-family search target missing for {ingredient_id}")
+            if not row["authority_source_candidate"].endswith("_SEARCH_TARGET"):
+                fail(
+                    f"source-family search target {ingredient_id} uses non-search-target label"
+                )
             if row["authority_record_candidate"]:
                 fail(
-                    f"candidate-family assignment pretends exact record for {ingredient_id}"
+                    f"source-family search target pretends exact record for {ingredient_id}"
                 )
+        elif assignment == "CANDIDATE_SOURCE_FAMILY_IDENTIFIED_EXACT_RECORD_UNPINNED":
+            fail(
+                f"legacy source-family identified status is forbidden for {ingredient_id}; "
+                "use search-target semantics until an exact compatible record is verified"
+            )
         else:
             fail(f"unexpected authority assignment for {ingredient_id}: {assignment}")
 
@@ -303,6 +312,25 @@ def validate(pkg: Path, *, check_checksums: bool = True) -> dict[str, int]:
         != EXPECTED_PR39_MAPPINGS
     ):
         fail("source-artifacts does not prove full 363-row PR39 mapping input")
+
+    source_contract = artifacts.get("source_bundle_contract", {})
+    if source_contract.get("availability") != "OPERATOR_MANAGED_EXTERNAL_SOURCE_BUNDLE":
+        fail("source-artifacts source bundle availability contract mismatch")
+    if (
+        source_contract.get("required_file_identity")
+        != "EXACT_FILENAMES_AND_SHA256_FROM_LOCAL_SOURCE_FILES"
+    ):
+        fail("source-artifacts canonical source identity contract mismatch")
+    if (
+        source_contract.get("bundle_hash_policy")
+        != "ZIP_CONTAINER_HASH_IS_DIAGNOSTIC_ONLY; CANONICAL_SOURCE_IDENTITY_IS_EXACT_FILE_SET_PLUS_PER_FILE_SHA256"
+    ):
+        fail("source-artifacts ZIP hash policy mismatch")
+    if (
+        source_contract.get("actions_artifact_role")
+        != "RAW_SOURCE_BUNDLE_UPLOAD_FORBIDDEN_IN_PUBLIC_REPOSITORY; REGENERATED_PACKAGE_ARTIFACT_ALLOWED"
+    ):
+        fail("source-artifacts raw source artifact policy mismatch")
 
     nutrition_meta = artifacts.get("production_nutrition_seed", {})
     if nutrition_meta.get("row_count") != EXPECTED_PRODUCTION_NUTRITION_ROWS:
