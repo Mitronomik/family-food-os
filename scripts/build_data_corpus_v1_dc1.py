@@ -352,12 +352,10 @@ def main() -> None:
 
     # Read full raw XLSX row layer directly. Never use text-rendered spreadsheet prefixes.
     all_relationship_rows: list[dict[str, object]] = []
-    shard_counts = []
     for shard, expected in zip(row_shards, EXPECTED_SHARD_ROWS):
         rows = xlsx_table(shard, "v22_RowNutrients")
         for row in rows:
             row["__source_shard"] = shard.name
-        shard_counts.append(len(rows))
         if len(rows) != expected:
             die(f"row-shard completeness failure for {shard.name}: expected {expected}, got {len(rows)}")
         all_relationship_rows.extend(rows)
@@ -434,10 +432,8 @@ def main() -> None:
             die(f"variant-count mismatch for {rid}: v22.5={len(variants)}, v22.13={cov['VariantBlocks']}")
 
         buckets = Counter()
-        row_ids = []
         for r in rs:
             iid = clean(r["ResolvedIngredientID"])
-            row_ids.append(iid)
             external_ids_used.add(iid)
             buckets[map_state_bucket(mapping_by_id[iid])] += 1
         expected_counts = {
