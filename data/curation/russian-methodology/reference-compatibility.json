@@ -1,0 +1,72 @@
+{
+  "version": "RU_REFERENCE_COMPATIBILITY_V1",
+  "status": "definition_compatibility_only_not_norm_publication",
+  "source_document": "МР 2.3.1.0253-21, таблицы 9–17 и приложение 3",
+  "runtime_policy": "Exact reviewed definition, daily basis, sex, age, life-stage and KFA applicability; no implicit US activity mapping, no clinical defaults, no interpolation.",
+  "comparisons": [
+    {
+      "reference_definition": "available_carbohydrate",
+      "food_definition": "CARBOHYDRATE_BY_DIFFERENCE",
+      "compatible": false,
+      "reason": "Total by difference includes fibre; no implicit fibre subtraction."
+    },
+    {
+      "reference_definition": "available_carbohydrate",
+      "food_definition": "CARBOHYDRATE_AVAILABLE",
+      "compatible": true,
+      "condition": "Reviewed available-carbohydrate target; source method policy remains explicit."
+    },
+    {
+      "reference_definition": "vitamin_a_retinol_equivalent",
+      "food_definition": "VITAMIN_A_RAE",
+      "compatible": false,
+      "reason": "RE and RAE use different provitamin conversion conventions."
+    },
+    {
+      "reference_definition": "niacin_equivalent",
+      "food_definition": "NIACIN",
+      "compatible": false,
+      "reason": "Preformed niacin excludes the tryptophan contribution to niacin equivalents."
+    },
+    {
+      "reference_definition": "tocopherol_equivalent",
+      "food_definition": "VITAMIN_E_ALPHA_TOCOPHEROL",
+      "compatible": false,
+      "reason": "Equivalence requires source-specific definition review; identical mg units do not establish equivalence."
+    },
+    {
+      "reference_definition": "folates_source_unspecified",
+      "food_definition": "FOLATE_DFE",
+      "compatible": false,
+      "reason": "Do not infer dietary folate equivalents from an unspecified folate label."
+    }
+  ],
+  "excluded_defaults": [
+    "label_daily_reference_as_personal_target",
+    "regional_or_occupational_adjustments_without_applicability",
+    "therapeutic_targets",
+    "pregnancy_or_lactation_inferred_from_sex",
+    "unreviewed_corpus_rows"
+  ],
+  "required_row_evidence": [
+    "source_id",
+    "source_version",
+    "locator",
+    "review_reference",
+    "definition_code",
+    "unit",
+    "basis",
+    "age_boundaries",
+    "sex",
+    "life_stage",
+    "physical_activity_coefficient_or_explicit_independence"
+  ],
+  "publication_note": "This file publishes no numeric population norms. ReviewedRussianReferenceTable is a trusted domain boundary, not an external-payload authorization mechanism. A publisher must verify evidence and review before constructing it.",
+  "source_url": "https://ion.ru/upload/medialibrary/e70/xq18hm3mm1f1b3izde8kcb5136l8373z/Нормы%20физиологических%20потребностей%202021.pdf",
+  "source_sha256": "cf96c7ea7fab087d16b478b2c8c097406d7572e495b2beb43405e4fd05917d79",
+  "scope_limits": [
+    "Scalar reviewed references only; inequalities and ranges require an explicit separate contract.",
+    "Age in completed years only; infant month-specific references unsupported.",
+    "The caller supplies approved exact age boundaries; source ambiguity is not resolved by this selector."
+  ]
+}

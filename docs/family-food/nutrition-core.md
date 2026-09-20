@@ -511,3 +511,13 @@ coexists with unchanged `FAMILY_FOOD_NUTRITION_V1`. Its mass-authoritative DAG,
 yield/retention, replay and result contracts are owned by the
 [composition contract](food-composition-and-assembly.md#pr6-composition-core--concrete-runtime-contract).
 There is no automatic recipe-consumer migration or production composition backfill.
+
+
+## Russian methodology extension — 2026-09-20
+
+The user approved source-native Russian methodology support and compatibility
+review across the Nutrition chain. The [versioned Russian policy contract](russian-nutrition-methodologies.md)
+owns new explicit interpretation, energy and group-reference operations.
+Historical V1 values/registry/calculations remain unchanged. Runtime persistence,
+catalogue publication and Planner-default changes are separate implementation
+dependencies; no clinical scope or source permission is inferred.

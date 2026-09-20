@@ -1,0 +1,35 @@
+name: Russian nutrition methodologies
+on:
+  pull_request:
+    paths:
+      - 'backend/**'
+      - 'data/curation/russian-methodology/**'
+      - 'scripts/trial_ru_nutrition_methods.py'
+      - '.github/workflows/russian-nutrition-methodologies.yml'
+permissions:
+  contents: read
+jobs:
+  methods:
+    runs-on: ubuntu-latest
+    env:
+      AI_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e './backend[test]'
+      - run: >-
+          python -m pytest -q
+          backend/app/tests/test_nutrition_methodology.py
+          backend/app/tests/test_russian_energy.py
+          backend/app/tests/test_russian_reference_targets.py
+          backend/app/tests/test_reference_comparison.py
+          backend/app/tests/test_nutrition_methodology_service.py
+          backend/app/tests/test_russian_reference_service.py
+          backend/app/tests/test_nutrition_domain.py
+          backend/app/tests/test_nutrition_targets.py
+          backend/app/tests/test_nutrition_application.py
+          backend/app/tests/test_nutrition_architecture.py
+          backend/app/tests/test_nutrient_vector.py
+          backend/app/tests/test_food_composition.py

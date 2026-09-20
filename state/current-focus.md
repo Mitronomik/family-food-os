@@ -1,43 +1,29 @@
 # Current focus
 
-Updated: `2026-09-20`.
+Updated:2026-09-20. Accepted main base:
+`a9472c2a0bb0534b70b41c541aa0ac9b4cb26ba0` (PR73).
 
-## Accepted state
+The user explicitly approved Russian calculation/accounting methodologies and
+adaptation of the rest of the nutrition chain. Current bounded implementation:
+versioned Russian methodology domain and internal service operations.
 
-PR72 is merged at `0322d0a74a0edf53802adc394446011a7d8acc06`.
-PR73 contains the bounded `dc2-exact-input-v1` evidence review for exact
-School2022 input forms and mass safeguards. On 2026-09-20 the user explicitly
-authorized correction of all PR73 blockers and completion of this bounded review.
-This does not authorize merge, production publication or the next milestone.
+Implemented: source-native available carbohydrates with method preservation;
+strict/explicit published-zero-estimate policies; held/missing distinction;
+MR2021 appendix3 energy component accounting; reviewed group-reference selector;
+unit/definition-safe comparison; pinned ATOMIC/vector read integration and
+household-scoped optional Russian reference service.
 
-SQLite head remains `0032_meal_plan_serving`; reserved
-`0033_recipe_template_catalogue` remains unchanged.
+See [methodology contract](../docs/family-food/russian-nutrition-methodologies.md).
+322 affected/new regression tests pass; real SQLite read path and AI=false tested.
+Five locked Russian source profiles were evaluated under both policies locally;
+no book numbers published in Git and no canonical profiles imported.
 
-## Current authorized boundary
+PR74 remains a separate open preparation PR; this branch starts directly from
+accepted main. Do not assume PR74 merged or changes profile representation.
 
-The PR73 exact-input review package is complete/review-ready:
-
-- 211 source occurrences across sugar, carrot, cabbage, beet and polished rice;
-- four execution routes remain held because two source rows are suspicious;
-- canonical FoodIngredient IDs remain unassigned;
-- nutrient equivalence and calculation readiness remain false;
-- retained fraction remains unknown;
-- source net mass remains normative accounting evidence, not certified physical
-  pre-heat mass;
-- School2022 §1.5 heat-loss semantics are recorded separately in
-  `source-nutrition-policy.json` and grant no canonical retention authority.
-
-See [exact mappings](../data/curation/dc2-exact-input-mappings/README.md).
-
-Review/merge of this evidence package does not authorize a DC2 production
-publication payload.
-
-## Stop boundary
-
-After PR73 review/merge, stop pending explicit scope for exact canonical
-FoodIngredient/profile equivalence, nutrient-method decisions, source reuse
-scope and an independently reviewed DC2 publication payload through existing
-profile/vector/ATOMIC contracts.
-
-Do not start DC3, DC4, Gate1-CLOSE, PR9/Shopping, Retail, AI,
-Auth/PostgreSQL, schema migration or generalized ingestion automatically.
+Remaining authorized dependencies: partial-profile persistence and new registry
+version, publication/review of exact Russian reference rows and food profiles,
+then explicit methodology selection in Planner/API/UI. These are not enabled by
+this internal calculation-layer PR. Existing V1 defaults/history and schema0032
+remain unchanged;0033 stays reserved. No clinical, Retail or live production
+publication. Stop for PR review; no autonomous merge.

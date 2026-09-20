@@ -668,3 +668,13 @@ the required plan filename records that refusal, not an approved production delt
 Ready remains 2/3; third candidate none; family_count/optional_role/verified_substitution
 remain OPEN for the accepted family set. Assembly A BLOCKED; B/PR7+ NOT STARTED;
 0029 unchanged. Stop for review; no automatic merge, new donor or production data PR.
+
+
+## Russian methodology extension — 2026-09-20
+
+The user approved source-native Russian methodology support and compatibility
+review across the Nutrition chain. The [versioned Russian policy contract](russian-nutrition-methodologies.md)
+owns new explicit interpretation, energy and group-reference operations.
+Historical V1 values/registry/calculations remain unchanged. Runtime persistence,
+catalogue publication and Planner-default changes are separate implementation
+dependencies; no clinical scope or source permission is inferred.

@@ -1,5 +1,28 @@
 # Handoff
 
+## Russian methodology layer — 2026-09-20
+
+User approved Russian method support and broader compatibility adaptation.
+Base a9472c2a0bb0534b70b41c541aa0ac9b4cb26ba0. New policy layer and internal
+services preserve V1 rather than relabel its USDA/NASEM semantics.
+322 focused/regression tests passed; SQLite vector/ATOMIC read tested.
+Independent audits caught held-observation provenance and energy partition issues;
+fixed with explicit held state, original evidence receipt, basis/form checks and
+reviewed disjoint energy partition requirement.
+
+Five locked book profiles:25 core observations,50 evaluations;5 source-native
+available carbs accepted per policy,3 unknowns in strict mode,3 explicitly marked
+zero estimates in alternate mode. Two final trial files byte-identical. Numeric
+trial stays in local deliverables/ru-methodology-trial-v1-final.json outside Git.
+No source profiles imported, no automatic Russian norm table enabled.
+
+Read docs/family-food/russian-nutrition-methodologies.md before continuation.
+The next implementation dependencies (already directionally authorized) are
+partial-profile persistence/registry, accepted target tables and method selection
+in Planner/API/UI. Source rights and scientific mapping remain separate gates.
+PR74 is not presumed merged. No new migration or live production write.
+
+
 ## PR73 blocker corrections handoff — 2026-09-20
 
 User authorization is now explicit for fixing PR73 blockers and completing this
