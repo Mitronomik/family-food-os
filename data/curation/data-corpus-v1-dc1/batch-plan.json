@@ -1,18 +1,17 @@
 {
   "dc2": {
     "DC2-A_HIGH_IMPACT": {
-      "count": 6,
+      "count": 5,
       "external_ingredient_ids": [
         "ING-0014",
         "ING-0021",
         "ING-0073",
         "ING-0145",
-        "ING-0229",
-        "ING-0236"
+        "ING-0229"
       ]
     },
     "DC2-B_STANDARD_EXTENSION": {
-      "count": 22,
+      "count": 23,
       "external_ingredient_ids": [
         "ING-0011",
         "ING-0013",
@@ -28,6 +27,7 @@
         "ING-0197",
         "ING-0209",
         "ING-0210",
+        "ING-0236",
         "ING-0237",
         "ING-0238",
         "ING-0240",
@@ -78,7 +78,7 @@
         "ING-0294"
       ]
     },
-    "REUSE_NO_DC2_WRITE": {
+    "REUSE_EXISTING_PROFILE_FORM_REVIEW": {
       "count": 33,
       "external_ingredient_ids": [
         "ING-0006",
@@ -118,51 +118,35 @@
     }
   },
   "dc3": {
-    "DC3-A_SIMPLE_NO_DC2_WRITE": {
-      "count": 3,
+    "DC3-A_CLEAN_BRANCH_EXISTING_PROFILE_REVIEW": {
+      "count": 1,
       "source_recipe_ids": [
-        "USSR82-323",
-        "USSR82-442",
         "USSR82-453"
       ]
     },
-    "DC3-B_SIMPLE_AFTER_DC2": {
-      "count": 23,
+    "DC3-B_CLEAN_BRANCH_AFTER_DC2": {
+      "count": 4,
       "source_recipe_ids": [
         "USSR82-55",
         "USSR82-58",
         "USSR82-59",
-        "USSR82-71",
-        "USSR82-95",
-        "USSR82-101",
-        "USSR82-208",
-        "USSR82-263",
-        "USSR82-265",
-        "USSR82-318",
-        "USSR82-320",
-        "USSR82-322",
-        "USSR82-326",
-        "USSR82-351",
-        "USSR82-361",
-        "USSR82-364",
-        "USSR82-380",
-        "USSR82-418",
-        "USSR82-467",
-        "USSR82-492",
-        "USSR82-499",
-        "USSR82-669",
-        "USSR82-1081"
+        "USSR82-71"
       ]
     },
-    "DC3-C_VARIANT_BOUNDARY_REVIEW": {
-      "count": 42,
+    "DC3-C_REVIEW_REQUIRED": {
+      "count": 63,
       "source_recipe_ids": [
+        "USSR82-95",
+        "USSR82-101",
         "USSR82-184",
+        "USSR82-208",
         "USSR82-258",
         "USSR82-259",
         "USSR82-260",
         "USSR82-261",
+        "USSR82-263",
         "USSR82-264",
+        "USSR82-265",
         "USSR82-282",
         "USSR82-283",
         "USSR82-284",
@@ -173,18 +157,29 @@
         "USSR82-312",
         "USSR82-314",
         "USSR82-317",
+        "USSR82-318",
         "USSR82-319",
+        "USSR82-320",
+        "USSR82-322",
+        "USSR82-323",
         "USSR82-324",
         "USSR82-325",
+        "USSR82-326",
         "USSR82-328",
         "USSR82-340",
         "USSR82-346",
+        "USSR82-351",
         "USSR82-355",
+        "USSR82-361",
+        "USSR82-364",
         "USSR82-365",
         "USSR82-374",
+        "USSR82-380",
         "USSR82-412",
         "USSR82-413",
         "USSR82-414",
+        "USSR82-418",
+        "USSR82-442",
         "USSR82-451",
         "USSR82-459",
         "USSR82-460",
@@ -192,27 +187,32 @@
         "USSR82-462",
         "USSR82-463",
         "USSR82-464",
+        "USSR82-467",
         "USSR82-468",
         "USSR82-469",
         "USSR82-470",
+        "USSR82-492",
+        "USSR82-499",
         "USSR82-658",
+        "USSR82-669",
         "USSR82-697",
         "USSR82-720",
-        "USSR82-732"
+        "USSR82-732",
+        "USSR82-1081"
       ]
     }
   },
   "rules": {
     "dc2": {
-      "DC2-A_HIGH_IMPACT": "Non-proxy/new identity with >=4 candidate families or >=2 structurally simple candidate families; source verification still required.",
-      "DC2-B_STANDARD_EXTENSION": "Other non-proxy new identities; source verification still required.",
-      "DC2-C_IDENTITY_FORM_REVIEW": "Form split, proxy, or v22.5/v22.13 label-difference item; identity/form semantics first.",
-      "REUSE_NO_DC2_WRITE": "Accepted existing identity mapping; no DC2 write authorized by this package."
+      "REUSE_EXISTING_PROFILE_FORM_REVIEW": "Accepted identity mapping and current profile provenance identified; exact recipe-form suitability must be reviewed before deciding whether any DC2 write is unnecessary.",
+      "DC2-A_HIGH_IMPACT": "Non-proxy/new identity with >=4 candidate families or >=2 safe simple candidate families; exact authority record still requires pinning.",
+      "DC2-B_STANDARD_EXTENSION": "Other non-proxy new identities with candidate source family identified where possible; exact authority record still requires pinning.",
+      "DC2-C_IDENTITY_FORM_REVIEW": "Form split, proxy, or v22.5/v22.13 label-difference item; identity/form semantics must close before exact authority assignment."
     },
     "dc3": {
-      "DC3-A_SIMPLE_NO_DC2_WRITE": "One source variant, no choice/optional/boundary signal, and no DC2 identity dependency. Still not production-ready.",
-      "DC3-B_SIMPLE_AFTER_DC2": "One source variant with no explicit alternative/boundary signal, but has DC2 identity dependency.",
-      "DC3-C_VARIANT_BOUNDARY_REVIEW": "Multiple variants, ChoiceGroup, optional row, or garnish/sauce boundary review required before any exact publication branch."
+      "DC3-A_CLEAN_BRANCH_EXISTING_PROFILE_REVIEW": "Source structure, v22.5/v22.13 relationship count and semantic labels are clean, with no new identity dependency; existing profile/form review is still required.",
+      "DC3-B_CLEAN_BRANCH_AFTER_DC2": "Source structure, relationship count and semantic labels are clean, but at least one new/form identity still needs DC2 closure.",
+      "DC3-C_REVIEW_REQUIRED": "Variant, ChoiceGroup, optional, boundary, relationship-compatibility or semantic-label review is unresolved."
     }
   }
 }
