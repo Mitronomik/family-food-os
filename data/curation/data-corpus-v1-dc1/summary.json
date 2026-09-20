@@ -1,34 +1,72 @@
 {
-  "operation": "DATA-CORPUS-V1-DC1-RECOVERED",
-  "repository_base": "d8c76a64483e3d5814e702be33c12cbe2e144160",
-  "execution_issue": 67,
-  "candidate_selection": {
-    "rule": "All accepted PR39 DIRECT_EXISTING_MAP_LEAD + CATALOGUE_EXTENSION_LEAD recipes",
-    "recipe_family_count": 68,
-    "ready_raw_external_status_count": 68,
-    "ready_raw_is_production_ready": false,
-    "strict_raw_triage_yes": 45,
-    "strict_raw_triage_no": 23,
-    "source_variant_structure": {
-      "one_source_variant": 31,
-      "multiple_source_variants": 37,
-      "safe_simple_source_branch_candidate": 5,
-      "review_required": 63
+  "assortment": {
+    "assessment": "INITIAL_68_FUNNEL_SKEWED_REVIEW_REQUIRED",
+    "category_counts": {
+      "Блюда из творога": 2,
+      "Блюда из яиц": 11,
+      "Картофель, овощи и грибы": 14,
+      "Крупы и каши": 4,
+      "Макаронные изделия": 2,
+      "Мучные изделия": 1,
+      "Мясные блюда": 2,
+      "Птица и кролик": 3,
+      "Супы": 23,
+      "Холодные блюда": 6
     },
-    "source_relationship_rows_v22_5": 991,
-    "v22_13_extra_noncalc_relationship_gap_recipe_count": 20,
+    "observations": [
+      "Candidate funnel is dominated by soups and potato/vegetable/mushroom dishes.",
+      "Egg dishes are well represented relative to standalone meat/poultry families.",
+      "This DC1 package preserves the 68-family funnel and does not expand it automatically; realistic weekly variety remains a DC3 curation blocker."
+    ]
+  },
+  "candidate_selection": {
     "dc3_batch_counts": {
       "DC3-A_CLEAN_BRANCH_EXISTING_PROFILE_REVIEW": 1,
       "DC3-B_CLEAN_BRANCH_AFTER_DC2": 4,
       "DC3-C_REVIEW_REQUIRED": 63
-    }
+    },
+    "ready_raw_external_status_count": 68,
+    "ready_raw_is_production_ready": false,
+    "recipe_family_count": 68,
+    "rule": "All accepted PR39 DIRECT_EXISTING_MAP_LEAD + CATALOGUE_EXTENSION_LEAD recipes",
+    "source_relationship_rows_v22_5": 991,
+    "source_variant_structure": {
+      "multiple_source_variants": 37,
+      "one_source_variant": 31,
+      "review_required": 63,
+      "safe_simple_source_branch_candidate": 5
+    },
+    "strict_raw_triage_no": 23,
+    "strict_raw_triage_yes": 45,
+    "v22_13_extra_noncalc_relationship_gap_recipe_count": 20
   },
+  "compatibility": {
+    "candidate_recipes_with_v22_13_additional_noncalc_relationship_rows": 20,
+    "exact_v22_13_row_shards_available_to_this_recovery": false,
+    "row_level_full_relationship_equivalence_claimed": false,
+    "v22_5_candidate_calc_rows_match_v22_13_calc_rows_for_all_68": true,
+    "v22_5_rows_reproduce_pr39_mapping_aggregates_for_all_68": true
+  },
+  "execution_issue": 67,
   "food_demand": {
-    "external_identity_count": 96,
+    "accepted_existing_identity_mapping_count": 33,
+    "authority_assignment_counts": {
+      "BLOCKED_FORM_SELECTION_BEFORE_AUTHORITY": 18,
+      "BLOCKED_IDENTITY_SEMANTICS_BEFORE_AUTHORITY": 13,
+      "BLOCKED_PROXY_IDENTITY_BEFORE_AUTHORITY": 4,
+      "CANDIDATE_SOURCE_FAMILY_IDENTIFIED_EXACT_RECORD_UNPINNED": 28,
+      "EXISTING_PROFILE_PROVENANCE_IDENTIFIED_FORM_REVIEW_REQUIRED": 33
+    },
+    "dc2_batch_counts": {
+      "DC2-A_HIGH_IMPACT": 5,
+      "DC2-B_STANDARD_EXTENSION": 23,
+      "DC2-C_IDENTITY_FORM_REVIEW": 35,
+      "REUSE_EXISTING_PROFILE_FORM_REVIEW": 33
+    },
+    "dc2_required_identity_count": 63,
     "deduplication_policy": "NO_NAME_BASED_DEDUP; one demand row per accepted external identity until equivalence is proven",
     "demand_row_count": 96,
-    "accepted_existing_identity_mapping_count": 33,
-    "dc2_required_identity_count": 63,
+    "external_identity_count": 96,
     "mapping_state_counts": {
       "ALIAS_EXISTING": 15,
       "EXACT_EXISTING": 18,
@@ -57,47 +95,9 @@
       "ING-0076",
       "ING-0083",
       "ING-0097"
-    ],
-    "authority_assignment_counts": {
-      "BLOCKED_FORM_SELECTION_BEFORE_AUTHORITY": 18,
-      "BLOCKED_IDENTITY_SEMANTICS_BEFORE_AUTHORITY": 13,
-      "BLOCKED_PROXY_IDENTITY_BEFORE_AUTHORITY": 4,
-      "CANDIDATE_SOURCE_FAMILY_IDENTIFIED_EXACT_RECORD_UNPINNED": 28,
-      "EXISTING_PROFILE_PROVENANCE_IDENTIFIED_FORM_REVIEW_REQUIRED": 33
-    },
-    "dc2_batch_counts": {
-      "DC2-A_HIGH_IMPACT": 5,
-      "DC2-B_STANDARD_EXTENSION": 23,
-      "DC2-C_IDENTITY_FORM_REVIEW": 35,
-      "REUSE_EXISTING_PROFILE_FORM_REVIEW": 33
-    }
-  },
-  "compatibility": {
-    "v22_5_candidate_calc_rows_match_v22_13_calc_rows_for_all_68": true,
-    "v22_5_rows_reproduce_pr39_mapping_aggregates_for_all_68": true,
-    "candidate_recipes_with_v22_13_additional_noncalc_relationship_rows": 20,
-    "exact_v22_13_row_shards_available_to_this_recovery": false,
-    "row_level_full_relationship_equivalence_claimed": false
-  },
-  "assortment": {
-    "assessment": "INITIAL_68_FUNNEL_SKEWED_REVIEW_REQUIRED",
-    "category_counts": {
-      "Блюда из творога": 2,
-      "Блюда из яиц": 11,
-      "Картофель, овощи и грибы": 14,
-      "Крупы и каши": 4,
-      "Макаронные изделия": 2,
-      "Мучные изделия": 1,
-      "Мясные блюда": 2,
-      "Птица и кролик": 3,
-      "Супы": 23,
-      "Холодные блюда": 6
-    },
-    "observations": [
-      "Candidate funnel is dominated by soups and potato/vegetable/mushroom dishes.",
-      "Egg dishes are well represented relative to standalone meat/poultry families.",
-      "This DC1 package preserves the 68-family funnel and does not expand it automatically; realistic weekly variety remains a DC3 curation blocker."
     ]
   },
+  "operation": "DATA-CORPUS-V1-DC1-RECOVERED",
+  "repository_base": "d8c76a64483e3d5814e702be33c12cbe2e144160",
   "stop_condition": "DC1 evidence only. DC2/DC3 remain NOT STARTED and require separate reviewable production batches."
 }
