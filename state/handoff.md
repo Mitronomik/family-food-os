@@ -1,5 +1,26 @@
 # Handoff
 
+## Partial nutrition profile storage handoff — 2026-09-20
+
+Accepted base: PR75 merge `33659866348bbc56d705bb764bb3c864c2cce0be`.
+Current branch: `feat/partial-nutrition-profiles`.
+
+This is plan step 1 only. Partial profiles persist SQL NULL plus immutable source
+observation state/literal/method/locator; they remain non-current for the legacy
+selector and intentionally have no automatic V1 vector seal. Existing complete
+profiles and pinned vector/composition history must remain unchanged.
+
+Schema work is `0034_partial_nutrition_profiles`; reserved
+`0033_recipe_template_catalogue` is not consumed. Future 0033 must be appended
+after accepted 0034 in the explicit migration list to preserve existing exact
+prefix histories.
+
+Required final verification: focused domain/repository/migration/vector tests,
+populated upgrade + failure rollback + backup restore/re-upgrade, full backend and
+full launcher regression, AI disabled.
+
+Do not start registry/adapters (plan step 2) until this PR is reviewed/merged.
+
 ## PR75 Russian methodology sync — 2026-09-20
 
 PR74 is accepted at `4c9598b623b9042924bb1f8d864c56d3d0a407c4`; PR75 has been
