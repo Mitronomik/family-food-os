@@ -686,7 +686,7 @@ def test_user_mode_startup_creates_backup_before_migration_for_existing_database
             ).fetchone()[0]
             == "0028_normalized_nutrient_vector"
         )
-    assert result.applied_migrations == expected_migration_ids()[-4:]
+    assert result.applied_migrations == expected_migration_ids()[-5:]
     tables = table_names(database_path)
     assert tables <= (CURRENT_ALLOWED_TABLES | {"legacy_marker"})
     assert_no_forbidden_future_tables(tables)
