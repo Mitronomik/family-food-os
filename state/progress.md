@@ -26,33 +26,46 @@ DC1 recovery is review-ready on `data/data-corpus-v1-dc1` from accepted main
 Reproducible tooling:
 
 - `scripts/build_data_corpus_v1_dc1.py`;
-- `scripts/validate_data_corpus_v1_dc1.py`.
+- `scripts/validate_data_corpus_v1_dc1.py`;
+- `scripts/test_data_corpus_v1_dc1.py`;
+- `.github/workflows/dc1-verification.yml`.
 
 Review-fix verification: exact GitHub package audit PASS; checksum manifest PASS
 for all 11 generated files; full PR39 metadata is 350/363; production nutrition
 metadata is 183 rows with exact Git blob identity; DC2/DC3 partitions reconcile
 exactly and all 96 demands have explicit authority status.
 
-Accepted heavy verification for current generator/generated-package bytes:
-`e5f8ce41b2e6bdcfb961f44a7fb67d513de2d7c9`, DC1 corpus verification run
-#20 / `35503379105`. Python compile/Ruff, package checksums/validator, 12-case
-adversarial suite, authenticated source hash checks, two independent rebuilds,
-A==B deterministic comparison and regenerated==committed comparison all PASS.
+Current heavy verification for generator/generated-package bytes at
+`2901d39465bde05179161e897b0e99b213bf604a`: exact PR39 mapping inputs and
+production nutrition seed were restored byte-for-byte; raw XLSX source hashes
+were enforced by the current generator; two independent builds PASS; validator
+A/B PASS; 15-case adversarial suite PASS; A==B deterministic comparison PASS.
 
-Raw XLSX source bytes remain operator-managed external evidence. Required
-filenames/SHA-256 values are repository evidence; ephemeral Actions artifacts are
-not canonical source storage. Automatic PR CI now verifies the committed package;
-full raw-source rebuild is manual `workflow_dispatch` against an explicit
-`target_ref` and receives its temporary URL only through
-`DC1_SOURCE_BUNDLE_URL`.
+The 28 previously labelled source-family "identified" rows are now explicitly
+`SOURCE_FAMILY_SEARCH_TARGET_EXACT_RECORD_UNVERIFIED`: they are search
+priorities only, not evidence that a compatible FIC/USDA record exists.
 
-Later delivery commits are workflow/state governance only and do not change the
-generator or generated package bytes covered by the heavy verification above.
-No production data/schema/migration/Planner/API/UI change.
+Raw XLSX source bytes remain operator-managed external evidence. Canonical source
+identity is the exact expected file set plus per-file SHA-256; ZIP/container hash
+is diagnostic only. The raw source ZIP is forbidden as a GitHub Actions artifact
+in this public repository; only regenerated package outputs may be retained.
+Automatic PR CI verifies the committed package; full raw-source rebuild is manual
+`workflow_dispatch` against explicit `target_ref`, using the temporary URL
+only through `DC1_SOURCE_BUNDLE_URL`.
+
+Later state-only commits do not change generator/generated-package bytes covered
+by the heavy verification above. No production data/schema/migration/Planner/API/UI change.
 
 DC1 remains ACTIVE / REVIEW-READY. DC2/DC3 are NOT STARTED. Stop after review/merge.
 
-## FamilyFoodOS milestone status
+## Historical milestone receipts
+
+The sections below are historical accepted progress snapshots. They do **not**
+represent the current authorized operation. Current authorization and sequencing
+are defined by `state/current-focus.md` and the latest canonical DATA-CORPUS-V1
+documents.
+
+## FamilyFoodOS milestone status — historical snapshot
 
 ```text
 PR0   Frozen Fork                          COMPLETE
@@ -70,8 +83,8 @@ PR6   Nutrition Core                       COMPLETE (PR6-CLOSE accepted)
 PR7-SUPPORT Meal Pattern Catalogue          COMPLETE (#47 / PR #51)
 PR7   MealPlan / Serving                    COMPLETE (#53 / PR #54)
 PR8   Planner v0                            COMPLETE (#57 / PR #59)
-GATE1-A candidate data readiness           ACTIVE (#61)
-GATE1-A-E1 primary-source evidence          ACTIVE (#64)
+GATE1-A candidate data readiness           ACTIVE AT TIME OF SNAPSHOT (#61)
+GATE1-A-E1 primary-source evidence          ACTIVE AT TIME OF SNAPSHOT (#64)
 GATE 1 Planning Core                        NOT STARTED
 ```
 
