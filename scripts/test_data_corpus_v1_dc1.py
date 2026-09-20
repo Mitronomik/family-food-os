@@ -10,7 +10,6 @@ from pathlib import Path
 
 import validate_data_corpus_v1_dc1 as validator
 
-
 Mutation = Callable[[Path], None]
 
 
