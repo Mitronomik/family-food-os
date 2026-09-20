@@ -1012,6 +1012,7 @@ python scripts/build_data_corpus_v1_dc1.py \
   --output /tmp/data-corpus-v1-dc1
 
 python scripts/validate_data_corpus_v1_dc1.py /tmp/data-corpus-v1-dc1
+python scripts/test_data_corpus_v1_dc1.py /tmp/data-corpus-v1-dc1
 ```
 
 Source XLSX files are not committed by this package; exact required SHA-256 values are enforced by the generator and recorded in `source-artifacts.json`.
