@@ -4,6 +4,10 @@ on:
     paths:
       - 'data/curation/dc2-first-profile-payload/**'
       - 'scripts/*dc2_profile_payload.py'
+      - 'backend/app/domain/errors.py'
+      - 'data/seed/food_ingredients/ingredients.csv'
+      - 'data/curation/dc2-first-batch-review/generated/profile-reviews.json'
+      - 'data/curation/dc2-exact-input-mappings/forms.json'
       - 'backend/app/domain/food_ingredients.py'
       - 'backend/app/domain/decimal_utils.py'
       - '.github/workflows/dc2-profile-payload.yml'
