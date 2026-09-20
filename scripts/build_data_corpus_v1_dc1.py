@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 from __future__ import annotations
 
 import argparse
@@ -7,9 +6,9 @@ import hashlib
 import json
 import re
 from collections import Counter, defaultdict
+from collections.abc import Iterable
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
-from typing import Iterable
 
 from openpyxl import load_workbook
 
