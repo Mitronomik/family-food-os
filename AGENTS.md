@@ -169,7 +169,7 @@ failure/fix or a concrete unresolved concern, not merely because checks exist.
 Before runtime implementation that changes a persisted identity/version, migration
 boundary, cross-context transaction, authoritative data publication path or another
 high-coupling immutable contract, create a **docs-only Implementation Contract Gate**
-first. The gate must be reviewed before runtime code starts.
+first. The gate must be reviewed and merged before runtime code starts.
 
 The contract must record the accepted base and bounded goal, dependency inventory,
 preservation matrix, fresh/replay/conflict semantics where persistence is involved,
