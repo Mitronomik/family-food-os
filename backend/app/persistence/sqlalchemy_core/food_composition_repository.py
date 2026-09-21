@@ -185,6 +185,7 @@ class SqlAlchemyFoodCompositionRepository:
             self._connection.execute(
                 insert(t.retention_values).values(
                     profile_id=value.id,
+                    registry_version=REGISTRY_V1,
                     nutrient_code=factor.nutrient_code,
                     factor=factor.factor,
                     provenance_json=snapshot_json(factor.provenance),
