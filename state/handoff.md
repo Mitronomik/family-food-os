@@ -22,7 +22,8 @@ Two further preflight boundaries are frozen:
 
 - the current vector reader decodes historical V1/FDC-shaped provenance; Step 3
   must add source-neutral V2 provenance decoding without fabricating FDC fields
-  or rewriting V1 evidence;
+  or rewriting V1 evidence; `source_nutrient_nbr` becomes optional legacy/source
+  metadata for V2 while historical V1 reads retain their exact value;
 - legacy CompositionCalculator intentionally reads V1 definitions. Step 3 must
   not make it V2-aware. V2 ATOMIC validation uses the version-aware vector reader
   and NutritionMethodologyService; transformation applicability remains Step 7.
