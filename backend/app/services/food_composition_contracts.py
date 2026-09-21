@@ -11,7 +11,10 @@ from app.domain.food_composition import (
     NutrientRetentionProfile,
 )
 from app.domain.nutrient_vector import NutrientDefinition
-from app.services.nutrient_vector_contracts import NutrientVectorReader
+from app.services.nutrient_vector_contracts import (
+    NutrientRegistryReader,
+    NutrientVectorReader,
+)
 
 
 class CompositionReader(Protocol):
@@ -35,6 +38,9 @@ class CompositionReadScope(Protocol):
 
     @property
     def nutrient_vectors(self) -> NutrientVectorReader: ...
+
+    @property
+    def nutrient_registry(self) -> NutrientRegistryReader: ...
 
     def __enter__(self) -> Self: ...
 
