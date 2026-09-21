@@ -3,7 +3,7 @@
 from typing import Any, Self
 from uuid import UUID
 
-from sqlalchemy import insert, select
+from sqlalchemy import column, insert, select, table
 
 from app.domain.food_composition import FoodCompositionVersion
 from app.domain.food_ingredients import FoodNutritionProfile
@@ -25,6 +25,18 @@ from app.persistence.sqlalchemy_core.nutrient_vector_tables import (
     vector_seals,
 )
 from app.persistence.sqlalchemy_core.uow import SqlAlchemyUnitOfWork
+
+
+def _versioned_registry_schema_available(connection) -> bool:
+    migrations = table("schema_migrations", column("migration_id"))
+    return (
+        connection.execute(
+            select(migrations.c.migration_id).where(
+                migrations.c.migration_id == "0035_versioned_nutrient_registry"
+            )
+        ).first()
+        is not None
+    )
 
 
 class RuCompositionRepository(SqlAlchemyFoodCompositionRepository):
@@ -73,10 +85,14 @@ class SqlAlchemyRuFoodUnitOfWork(SqlAlchemyUnitOfWork):
     ) -> None:
         """Seal last; caller has validated the hash-pinned reviewed operation."""
         if values:
-            self.adapter_connection.execute(
-                insert(nutrient_values),
-                [dict(v, profile_id=profile.id) for v in values],
-            )
+            versioned = _versioned_registry_schema_available(self.adapter_connection)
+            rows = []
+            for value in values:
+                row = dict(value, profile_id=profile.id)
+                if versioned:
+                    row["registry_version"] = REGISTRY_VERSION
+                rows.append(row)
+            self.adapter_connection.execute(insert(nutrient_values), rows)
         self.adapter_connection.execute(
             insert(vector_seals).values(
                 profile_id=profile.id,
