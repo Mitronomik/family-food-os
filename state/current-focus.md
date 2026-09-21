@@ -45,7 +45,9 @@ Canonical Step 3 contract:
 - V2 registry identity is explicit and fixed to `RU_NUTRIENT_REGISTRY_V2`;
 - ATOMIC composition version is explicit input, never silently auto-incremented;
 - one existing project UoW owns the whole fresh write;
-- exact replay is zero-write; conflicting or partial pre-existing state fails closed.
+- exact replay is zero-write; conflicting or partial pre-existing state fails closed;
+- V2 provenance uses a source-neutral envelope/decoder; V1 persisted provenance and decoder remain unchanged;
+- legacy CompositionCalculator remains V1-pinned; V2 transformation/composition calculation is not Step 3.
 
 ## Acceptance
 
