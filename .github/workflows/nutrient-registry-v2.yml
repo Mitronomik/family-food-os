@@ -24,6 +24,12 @@ on:
       - 'backend/app/tests/test_artifact_audit_operations_migration.py'
       - 'backend/app/tests/test_database_foundation.py'
       - 'backend/app/tests/test_meal_pattern_migration.py'
+      - 'scripts/audit_pr6_composition_core.py'
+      - 'backend/app/tests/test_family_food_identity_migration.py'
+      - 'backend/app/tests/test_meal_plan_migration.py'
+      - 'backend/app/tests/test_food_composition_migration.py'
+      - 'backend/app/tests/test_household_migration.py'
+      - 'backend/app/tests/persistence/test_recipe_source_corpus_persistence.py'
       - '.github/workflows/nutrient-registry-v2.yml'
   pull_request:
     paths:
