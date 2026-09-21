@@ -2,6 +2,24 @@
 name: Nutrient registry V2
 
 on:
+  push:
+    paths:
+      - 'backend/app/domain/nutrient_vector.py'
+      - 'backend/app/domain/nutrient_method_adapters.py'
+      - 'backend/app/db/migrations.py'
+      - 'backend/app/db/migration_lineage.py'
+      - 'backend/app/migrations/versions/0035_versioned_nutrient_registry.py'
+      - 'backend/app/persistence/sqlalchemy_core/nutrient_vector_tables.py'
+      - 'backend/app/persistence/sqlalchemy_core/nutrient_vector_repository.py'
+      - 'backend/app/persistence/sqlalchemy_core/nutrition_read_scope.py'
+      - 'backend/app/persistence/sqlalchemy_core/food_composition_repository.py'
+      - 'backend/app/persistence/sqlalchemy_core/food_composition_scope.py'
+      - 'backend/app/services/nutrient_vector_contracts.py'
+      - 'backend/app/services/food_composition_contracts.py'
+      - 'backend/app/services/nutrition_methodology.py'
+      - 'data/curation/nutrient-registry-v2/**'
+      - 'data/curation/russian-methodology/reference-compatibility.json'
+      - '.github/workflows/nutrient-registry-v2.yml'
   pull_request:
     paths:
       - 'backend/app/domain/nutrient_vector.py'
