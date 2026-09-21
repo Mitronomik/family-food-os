@@ -6,6 +6,7 @@ from app.persistence.sqlalchemy_core.food_composition_repository import (
     SqlAlchemyFoodCompositionRepository,
 )
 from app.persistence.sqlalchemy_core.nutrient_vector_repository import (
+    SqlAlchemyNutrientRegistryRepository,
     SqlAlchemyNutrientVectorRepository,
 )
 from app.persistence.sqlalchemy_core.uow import (
@@ -26,6 +27,10 @@ class SqlAlchemyCompositionReadScope(SqlAlchemyReadOnlyScope):
     @property
     def nutrient_vectors(self) -> SqlAlchemyNutrientVectorRepository:
         return SqlAlchemyNutrientVectorRepository(self.adapter_connection)
+
+    @property
+    def nutrient_registry(self) -> SqlAlchemyNutrientRegistryRepository:
+        return SqlAlchemyNutrientRegistryRepository(self.adapter_connection)
 
 
 class SqlAlchemyCompositionUnitOfWork(SqlAlchemyUnitOfWork):
