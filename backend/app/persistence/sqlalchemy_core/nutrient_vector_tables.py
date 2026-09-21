@@ -1,6 +1,14 @@
-"""Core read/write metadata; migration 0028 remains the SQLite schema authority."""
+"""Versioned nutrient-vector metadata; migrations 0028/0035 own SQLite schema."""
 
-from sqlalchemy import Column, ForeignKey, Integer, String, Table
+from sqlalchemy import (
+    Column,
+    ForeignKey,
+    ForeignKeyConstraint,
+    Integer,
+    PrimaryKeyConstraint,
+    String,
+    Table,
+)
 
 from app.persistence.sqlalchemy_core.food_ingredient_tables import (
     food_catalogue_metadata,
@@ -17,16 +25,17 @@ registry_snapshots = Table(
 nutrient_definitions = Table(
     "nutrient_definitions",
     food_catalogue_metadata,
-    Column("code", String, primary_key=True),
-    Column("display_name_ru", String, nullable=False),
-    Column("unit", String, nullable=False),
     Column(
         "registry_version",
         String,
         ForeignKey("nutrient_registry_snapshots.version", ondelete="RESTRICT"),
         nullable=False,
     ),
+    Column("code", String, nullable=False),
+    Column("display_name_ru", String, nullable=False),
+    Column("unit", String, nullable=False),
     Column("definition_json", String, nullable=False),
+    PrimaryKeyConstraint("registry_version", "code"),
 )
 nutrient_values = Table(
     "nutrient_values",
@@ -42,14 +51,15 @@ nutrient_values = Table(
         ),
         primary_key=True,
     ),
-    Column(
-        "nutrient_code",
-        String,
-        ForeignKey("nutrient_definitions.code", ondelete="RESTRICT"),
-        primary_key=True,
-    ),
+    Column("registry_version", String, nullable=False),
+    Column("nutrient_code", String, primary_key=True),
     Column("amount", DecimalText(), nullable=False),
     Column("provenance_json", String, nullable=False),
+    ForeignKeyConstraint(
+        ["registry_version", "nutrient_code"],
+        ["nutrient_definitions.registry_version", "nutrient_definitions.code"],
+        ondelete="RESTRICT",
+    ),
 )
 vector_seals = Table(
     "nutrition_vector_seals",
