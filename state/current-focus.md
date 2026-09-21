@@ -4,7 +4,7 @@ Updated: `2026-09-21`.
 
 ## Accepted state
 
-PR78 is merged into `main` at `e5466121e4958cf4fb95ba9041d1c7926daab17e`.
+PR79 is merged into `main` at `0ee9e5a3335e876d5a1de6a2c32ea245efe8e5e6`.
 
 The accepted Russian-data integration sequence remains:
 
@@ -13,57 +13,62 @@ Russian food batch → Russian reference table → persisted methodology selecti
 transformation applicability → recipe-dependency food batch → executable Russian
 recipes → Planner integration`.
 
-Steps 1 and 2 plus the Step 3 Implementation Contract Gate are accepted.
+Steps 1–3 are accepted. Current bounded work is **Step 4A — Implementation
+Contract Gate for the first Russian source-native food batch**.
 
-Current authorized bounded work is **Step 3B — transactional reviewed nutrition
-publication runtime implementation** under
-`docs/family-food/transactional-nutrition-publication-contract.md`.
+## Current authorization
 
-## Runtime scope
+This branch is docs/state only.
 
-Implement exactly one reusable deterministic publication path:
+It may:
 
-`FoodIngredient → non-current FoodNutritionProfile + immutable source observations
-→ RU_NUTRIENT_REGISTRY_V2 NutrientVector → ATOMIC FoodCompositionVersion`.
+- freeze the exact five-record batch scope;
+- freeze FoodIngredient identity decisions;
+- freeze explicit ATOMIC versions;
+- freeze V2 nutrient mappings and expected row counts;
+- define batch-level atomic/replay/conflict/rollback semantics;
+- record the source-authority gate and public-repository coupling;
+- define adversarial acceptance for the later data/runtime PR.
 
-Required seams:
+It must not publish source numeric values or change runtime/schema/data seeds.
 
-- specialized profile writer that never invokes historical V1 auto-bootstrap;
-- registry-version-aware source-neutral V2 provenance decoder using
-  `FFO_NUTRIENT_VALUE_EVIDENCE_V2`;
-- V1 persisted provenance/decoder behavior remains unchanged;
-- one existing project UoW owns the whole fresh transaction;
-- nutrient values first, seal last, then ATOMIC composition;
-- explicit V2 registry and explicit composition version;
-- exact replay performs zero writes and preserves stable IDs;
-- conflicting or partially present bundle fails closed;
-- rollback/failure-injection coverage at every write boundary;
-- Step 3 profiles remain `is_current=false`;
-- legacy `CompositionCalculator` remains V1-pinned.
+Canonical contract:
+`docs/family-food/first-russian-food-batch-contract.md`.
 
-## Architecture constraints
+## Preflight result
 
-- no schema change and no new migration; if implementation requires one, STOP for
-  a separate architecture decision;
-- no generic `bootstrap_v1=false` switch on catalogue profile operations;
-- no hidden source-method inference;
-- no invented source/FDC identifiers;
-- no repair/adoption of partial historical bundles;
-- deterministic core must pass with `AI_ENABLED=false`.
+Technical publication plumbing is available from merged Step 3.
 
-## Acceptance
+Candidate batch:
 
-The implementation PR must satisfy every adversarial test and verification tier
-in the merged Step 3 contract, including fresh complete/partial publication,
-source-neutral V2 round-trip, methodology read, V1 preservation, exact replay,
-conflict cases, rollback injection, foreign-key integrity, full backend and full
-launcher regression.
+- `10.1.1 → SUGAR`;
+- `8.1.5.1 → CARROT`;
+- `8.1.2.1 → CABBAGE_GREEN`;
+- `8.1.5.12 → BEET`;
+- `6.5.3 → new RICE_POLISHED_DRY`.
+
+Expected V2 positive rows: `4 + 8 + 8 + 8 + 9 = 37`, with all 60 reviewed
+source cells retained and 15 below-detection cells remaining nonnumeric.
+
+No migration is expected.
+
+## Blocking gate
+
+Step 4 runtime/data publication is **BLOCKED BY SOURCE AUTHORITY**.
+
+Accepted repository evidence remains `BLOCKED_PENDING_RIGHTS_REVIEW`.
+Open/view/request access is not treated as an accepted commercial/public
+redistribution grant.
+
+Before implementation, a reviewed authority receipt must cover the intended
+machine extraction, retention, commercial calculation and public derived-data
+distribution scope, or a separate data-distribution architecture decision is
+required.
 
 ## Stop boundary
 
-After Step 3 runtime implementation is review-ready, stop for final review and
-explicit merge authorization.
+After this Contract Gate is review-ready/merged, stop.
 
-Do not start Step 4 production Russian food publication, source-rights approval,
-target tables, persisted methodology selection, transformation applicability,
-recipes, Planner, Gate1, Shopping, API/UI or AI work automatically.
+Do not start the Step 4 numeric publication PR until source authority is explicitly
+cleared. Do not start Step 5 target tables, methodology persistence,
+transformations, recipes, Planner, Gate1, Shopping, API/UI or AI automatically.

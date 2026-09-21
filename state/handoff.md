@@ -1,5 +1,40 @@
 # Handoff
 
+## Step 4 first Russian food batch contract gate — 2026-09-21
+
+Accepted main: `0ee9e5a3335e876d5a1de6a2c32ea245efe8e5e6` (merged PR79).
+Current branch: `docs/step4-first-russian-food-batch-contract`.
+
+Step 3 transactional publication is accepted. Current work is docs-only Step 4A.
+
+Candidate batch is exactly five Book2002 records:
+`SUGAR`, `CARROT`, `CABBAGE_GREEN`, `BEET`, and new
+`RICE_POLISHED_DRY`.
+
+The contract freezes:
+
+- identity reuse/new-rice decisions;
+- explicit ATOMIC versions 2/2/2/1/1;
+- all profiles non-current;
+- 60 retained source cells / 37 positive V2 values;
+- source-native carbohydrate → V2 `CARBOHYDRATE_AVAILABLE`;
+- below-detection → no numeric row;
+- ash/organic acids → source-only evidence;
+- one atomic five-food batch transaction;
+- no migration/schema change.
+
+Critical blocker: accepted source evidence still says
+`BLOCKED_PENDING_RIGHTS_REVIEW`. The contract can be merged as a blocked gate,
+but runtime/data publication cannot start until an authority receipt covering
+the intended use/distribution scope is reviewed and approved.
+
+Read:
+`docs/family-food/first-russian-food-batch-contract.md`.
+
+Do not publish numeric Book2002 values, change current profiles, or start Step 5
+automatically.
+
+
 ## Step 3 transactional V2 publication runtime — 2026-09-21
 
 Accepted main: `e5466121e4958cf4fb95ba9041d1c7926daab17e` (merged PR78).

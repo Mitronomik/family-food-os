@@ -1,5 +1,33 @@
 # Progress
 
+## Step 4 first Russian food batch contract gate — 2026-09-21
+
+PR79 is merged at `0ee9e5a3335e876d5a1de6a2c32ea245efe8e5e6`; Step 3 transactional publication is accepted.
+
+The user authorized Step 4 through the mandatory pre-implementation Contract Gate.
+
+Preflight result:
+
+- no new migration is expected;
+- exact batch scope is five reviewed Book2002 records;
+- four existing FoodIngredient identities are reused without replacing current
+  USDA profiles;
+- generic polished rice must become new `RICE_POLISHED_DRY`, not `RICE_WHITE`;
+- explicit ATOMIC versions are SUGAR2 / CARROT2 / CABBAGE_GREEN2 / BEET1 /
+  RICE_POLISHED_DRY1;
+- existing V2 policy can map source-native carbohydrate explicitly to
+  `CARBOHYDRATE_AVAILABLE`;
+- 60 reviewed source cells imply 37 positive canonical V2 values, with
+  below-detection values remaining nonnumeric and ash/organic acids retained only
+  as source observations;
+- Step 4 must be one five-food transaction, not five independent commits.
+
+The source-authority gate remains unresolved. Current repository evidence is
+`BLOCKED_PENDING_RIGHTS_REVIEW`; public viewing/access and the official Excel
+request channel do not constitute an accepted commercial/public redistribution
+grant. No source numeric values are published by this gate.
+
+
 ## Step 3 transactional V2 publication runtime — 2026-09-21
 
 Accepted base is merged PR78 at `e5466121e4958cf4fb95ba9041d1c7926daab17e`.
