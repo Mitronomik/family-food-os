@@ -190,7 +190,6 @@ def test_v2_methodology_rejects_present_value_without_method_evidence(database):
     v = replace(v, values=(broken,))
     service, c, _ = service_fixture(database, v)
 
-    with pytest.raises(
-        CompositionUnavailableError, match="METHOD_REGISTRY_ADAPTER_UNAVAILABLE"
-    ):
+    with pytest.raises(CompositionUnavailableError) as exc_info:
         request(service, c, nutrients=(N.AVAILABLE_CARBOHYDRATE,))
+    assert exc_info.value.issue_code == "METHOD_REGISTRY_ADAPTER_UNAVAILABLE"
