@@ -19,6 +19,11 @@ on:
       - 'backend/app/services/nutrition_methodology.py'
       - 'data/curation/nutrient-registry-v2/**'
       - 'data/curation/russian-methodology/reference-compatibility.json'
+      - 'backend/app/persistence/sqlalchemy_core/ru_food_data.py'
+      - 'backend/app/persistence/sqlalchemy_core/food_composition_tables.py'
+      - 'backend/app/tests/test_artifact_audit_operations_migration.py'
+      - 'backend/app/tests/test_database_foundation.py'
+      - 'backend/app/tests/test_meal_pattern_migration.py'
       - '.github/workflows/nutrient-registry-v2.yml'
   pull_request:
     paths:
