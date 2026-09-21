@@ -19,6 +19,7 @@ from app.persistence.sqlalchemy_core.nutrition_evidence_repositories import (
 )
 from app.persistence.sqlalchemy_core.uow import SqlAlchemyReadOnlyScope
 from app.persistence.sqlalchemy_core.nutrient_vector_repository import (
+    SqlAlchemyNutrientRegistryRepository,
     SqlAlchemyNutrientVectorRepository,
 )
 
@@ -30,6 +31,10 @@ class SqlAlchemyNutritionReadScope:
     @property
     def nutrient_vectors(self) -> SqlAlchemyNutrientVectorRepository:
         return SqlAlchemyNutrientVectorRepository(self._scope.adapter_connection)
+
+    @property
+    def nutrient_registry(self) -> SqlAlchemyNutrientRegistryRepository:
+        return SqlAlchemyNutrientRegistryRepository(self._scope.adapter_connection)
 
     @property
     def evidence(self) -> SqlAlchemyNutritionEvidenceRepository:
