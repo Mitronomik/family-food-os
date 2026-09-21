@@ -197,7 +197,7 @@ def test_frozen_214_card_bundle_repeat_and_late_conflict_leave_database_unchange
     assert len(cards) == 214
     config = DatabaseConfig(path=tmp_path / "frozen.sqlite")
     apply_migrations(config)
-    assert max(current_migrations(config)) == "0034_partial_nutrition_profiles"
+    assert max(current_migrations(config)) == "0035_versioned_nutrient_registry"
     engine = create_sqlite_engine(config)
     try:
         with engine.begin() as connection:
