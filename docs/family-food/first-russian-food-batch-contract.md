@@ -231,6 +231,35 @@ numeric V2 row.
 The accepted optional published-zero-estimate methodology does not authorize
 Step 4 to persist an estimated zero as authoritative canonical food composition.
 
+## 8.3 Historical evidence reconciliation
+
+The PR74/DC2 review correctly recorded:
+
+```text
+canonical_nutrient_mapping = null
+publication_ready = false
+nutrient_equivalence_accepted = false
+```
+
+at the time that evidence was produced.
+
+Later accepted decisions changed only the relevant technical prerequisites:
+
+- PR75 accepted the explicit Russian source-native interpretation policy;
+- PR77 introduced `RU_NUTRIENT_REGISTRY_V2` and explicit method adapters;
+- PR79 introduced the transactional V2 publication primitive.
+
+**DECISION:** this Step 4 contract supersedes the historical
+`canonical_nutrient_mapping=null` only for the exact field→V2 mappings listed
+in §8. It does not reinterpret equal units as equivalence and does not grant any
+unlisted nutrient mapping.
+
+The historical `publication_ready=false` remains effective because source
+authority is still unresolved. Likewise, historical
+`nutrient_equivalence_accepted=false` is not treated as a blanket FoodIngredient
+identity decision; food identity is decided separately in §4 from reviewed
+food/form evidence.
+
 ## 9. DECISION — exact expected vector shape
 
 Without copying source numeric values into this gate, the reviewed field-state and
