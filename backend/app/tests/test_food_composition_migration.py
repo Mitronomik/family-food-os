@@ -6,7 +6,11 @@ import sqlite3
 import pytest
 from app.db import migrations
 from app.db.config import DatabaseConfig
-from scripts.audit_pr6_composition_core import measure, seed_previous
+from scripts.audit_pr6_composition_core import (
+    assert_existing_history_preserved,
+    measure,
+    seed_previous,
+)
 from scripts.audit_pr6_nutrient_vector_b import snapshot
 from app.tests.table_guards import assert_only_current_tables
 
@@ -141,8 +145,8 @@ def test_mid_migration_schema_data_marker_rollback_and_deterministic_resume(
         PARTIAL_PROFILE_MIGRATION_ID,
         REGISTRY_V2_MIGRATION_ID,
     ]
-    after, schema_after = snapshot(config), schema(config)
-    assert all(after[name] == rows for name, rows in before.items())
+    after = assert_existing_history_preserved(before, config)
+    schema_after = schema(config)
     assert migrations.apply_migrations(config) == []
     assert snapshot(config) == after
     assert schema(config) == schema_after
