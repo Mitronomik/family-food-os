@@ -804,3 +804,110 @@ def test_generic_v1_seed_and_decoder_remain_unchanged(tmp_path):
         )
     finally:
         engine.dispose()
+
+def test_existing_same_profile_with_v1_seal_conflicts_without_rebinding(tmp_path):
+    config = DatabaseConfig(path=tmp_path / "v1-conflict.sqlite")
+    seed_food_ingredients(config)
+    engine = create_sqlite_engine(config)
+    try:
+        with SqlAlchemyNutritionReadScope(engine) as read:
+            ingredient = read.ingredients.get_by_code("AGAVE_SYRUP")
+            profile = read.nutrition_profiles.get_current(ingredient.id)
+            legacy_vector = read.nutrient_vectors.get(profile.id)
+        assert legacy_vector.registry_version == REGISTRY_V1
+
+        from app.persistence.sqlalchemy_core.food_ingredient_uow import (
+            SqlAlchemyFoodCatalogueUnitOfWork,
+        )
+
+        with SqlAlchemyFoodCatalogueUnitOfWork(engine) as write:
+            write.nutrition_profiles.clear_current(ingredient.id)
+            write.commit()
+        with SqlAlchemyNutritionReadScope(engine) as read:
+            profile = read.nutrition_profiles.get_by_provenance(
+                ingredient.id,
+                profile.source_name,
+                profile.source_id,
+                profile.source_version,
+            )
+        assert profile is not None and profile.is_current is False
+
+        reviewed_profile = ReviewedNutritionProfileSpec(
+            basis_grams=profile.basis_grams,
+            kcal=profile.kcal,
+            protein_g=profile.protein_g,
+            fat_g=profile.fat_g,
+            carbohydrates_g=profile.carbohydrates_g,
+            fiber_g=profile.fiber_g,
+            source_name=profile.source_name,
+            source_id=profile.source_id,
+            source_version=profile.source_version,
+            source_data_type=profile.source_data_type,
+            verified_at=profile.verified_at,
+            estimated=profile.estimated,
+            observations=(),
+        )
+        request = ReviewedNutritionPublicationBundle(
+            ingredient=ReviewedIngredientSpec(
+                action=PublicationIngredientAction.REUSE_EXISTING,
+                canonical_code=ingredient.canonical_code,
+                canonical_name=ingredient.canonical_name,
+                category_code=ingredient.category_code,
+                default_unit=ingredient.default_unit,
+                density_g_per_ml=ingredient.density_g_per_ml,
+                edible_fraction=ingredient.edible_fraction,
+                allergens_reviewed=ingredient.allergens_reviewed,
+                allergen_codes=ingredient.allergen_codes,
+                storage_profile_code=ingredient.storage_profile_code,
+            ),
+            profile=reviewed_profile,
+            vector=vector_spec(reviewed_profile),
+            atomic_composition=ReviewedAtomicCompositionSpec(
+                version=1,
+                input_state=MassState.RAW,
+                provenance=CompositionProvenance(
+                    "STEP3-SYNTHETIC",
+                    "1",
+                    "synthetic:v1-conflict",
+                    "STEP3-CONTRACT-TEST",
+                ),
+            ),
+        )
+        before = db_dump(config)
+        with pytest.raises(NutritionPublicationConflictError):
+            publication_service(engine).publish(request)
+        assert db_dump(config) == before
+        assert_fk_clean(config)
+    finally:
+        engine.dispose()
+
+
+def test_publication_domain_and_service_layers_remain_driver_independent():
+    import ast
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[2]
+    for relative in (
+        "app/domain/nutrient_vector.py",
+        "app/domain/nutrient_method_adapters.py",
+        "app/services/nutrition_publication.py",
+        "app/services/nutrition_publication_contracts.py",
+    ):
+        tree = ast.parse((root / relative).read_text())
+        imports = [
+            node.module
+            for node in ast.walk(tree)
+            if isinstance(node, ast.ImportFrom)
+        ]
+        imports += [
+            alias.name
+            for node in ast.walk(tree)
+            if isinstance(node, ast.Import)
+            for alias in node.names
+        ]
+        assert not any(
+            token in (name or "").lower()
+            for name in imports
+            for token in ("sqlalchemy", "sqlite3")
+        )
+
