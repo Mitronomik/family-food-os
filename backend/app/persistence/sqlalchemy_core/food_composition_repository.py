@@ -5,7 +5,7 @@ import json
 from typing import Any
 from uuid import UUID
 
-from sqlalchemy import Table, insert, select
+from sqlalchemy import Table, column, insert, select, table
 from sqlalchemy.engine import Connection
 
 from app.domain.food_composition import (
@@ -32,6 +32,18 @@ from app.persistence.sqlalchemy_core.nutrient_vector_repository import (
 )
 from app.persistence.sqlalchemy_core.nutrient_vector_tables import nutrient_definitions
 from app.services.food_composition import load_dag, transformation_chain
+
+
+def _versioned_registry_schema_available(connection: Connection) -> bool:
+    migrations = table("schema_migrations", column("migration_id"))
+    return (
+        connection.execute(
+            select(migrations.c.migration_id).where(
+                migrations.c.migration_id == "0035_versioned_nutrient_registry"
+            )
+        ).first()
+        is not None
+    )
 
 
 class SqlAlchemyFoodCompositionRepository:
@@ -107,15 +119,18 @@ class SqlAlchemyFoodCompositionRepository:
 
     def retention_profile(self, version_id: UUID) -> NutrientRetentionProfile:
         row = self._row(t.retention_profiles, version_id)
-        values = (
-            self._connection.execute(
-                select(t.retention_values).where(
-                    t.retention_values.c.profile_id == version_id
-                )
+        if _versioned_registry_schema_available(self._connection):
+            statement = select(t.retention_values).where(
+                t.retention_values.c.profile_id == version_id
             )
-            .mappings()
-            .all()
-        )
+        else:
+            statement = select(
+                t.retention_values.c.profile_id,
+                t.retention_values.c.nutrient_code,
+                t.retention_values.c.factor,
+                t.retention_values.c.provenance_json,
+            ).where(t.retention_values.c.profile_id == version_id)
+        values = self._connection.execute(statement).mappings().all()
         if len(values) != row["value_count"]:
             raise CompositionUnavailableError("RETENTION_SNAPSHOT_INCOMPLETE")
         value = NutrientRetentionProfile(
@@ -182,15 +197,15 @@ class SqlAlchemyFoodCompositionRepository:
         row = self._record(value)
         del row["values"]
         for factor in value.values:
-            self._connection.execute(
-                insert(t.retention_values).values(
-                    profile_id=value.id,
-                    registry_version=REGISTRY_V1,
-                    nutrient_code=factor.nutrient_code,
-                    factor=factor.factor,
-                    provenance_json=snapshot_json(factor.provenance),
-                )
-            )
+            row = {
+                "profile_id": value.id,
+                "nutrient_code": factor.nutrient_code,
+                "factor": factor.factor,
+                "provenance_json": snapshot_json(factor.provenance),
+            }
+            if _versioned_registry_schema_available(self._connection):
+                row["registry_version"] = REGISTRY_V1
+            self._connection.execute(insert(t.retention_values).values(**row))
         self._connection.execute(
             insert(t.retention_profiles).values(**row, value_count=len(value.values))
         )
