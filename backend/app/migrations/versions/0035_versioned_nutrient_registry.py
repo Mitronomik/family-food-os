@@ -21,7 +21,7 @@ V2_DIRECTORY = ROOT / "data/curation/nutrient-registry-v2"
 
 ARTIFACT_HASHES = {
     V1_REGISTRY: "de0012d02e31d4eb23b7e4d5c9c4144fa3a12895893470b2100e5dd595ad2492",
-    V2_DIRECTORY / "registry.json": "9098f1ba23f0277e612f8cca1970e4eb1595cd754af0c127f715545acfe218e0",
+    V2_DIRECTORY / "registry.json": "eb335c3d39e27a67681e64c9de4fcb55183e08bcb59f4d93ed1c8b9fa3eab85d",
     V2_DIRECTORY / "method-adapters.json": "17428d4e6ee3e2a26e9b9fd132cc0e1d18e69bdd6ab9025458609f5f30516ebd",
 }
 
