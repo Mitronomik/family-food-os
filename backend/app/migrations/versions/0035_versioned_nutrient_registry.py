@@ -21,7 +21,7 @@ V2_DIRECTORY = ROOT / "data/curation/nutrient-registry-v2"
 
 ARTIFACT_HASHES = {
     V1_REGISTRY: "de0012d02e31d4eb23b7e4d5c9c4144fa3a12895893470b2100e5dd595ad2492",
-    V2_DIRECTORY / "registry.json": "eb335c3d39e27a67681e64c9de4fcb55183e08bcb59f4d93ed1c8b9fa3eab85d",
+    V2_DIRECTORY / "registry.json": "2593c075ecbe892ad5557c818842cef6c931876d12be65d85de6e494db713fea",
     V2_DIRECTORY / "method-adapters.json": "17428d4e6ee3e2a26e9b9fd132cc0e1d18e69bdd6ab9025458609f5f30516ebd",
 }
 
@@ -81,6 +81,23 @@ def load_contract():
         for code in NEW_CODES
     ):
         raise ValueError("Vitamin equivalents must remain conversion-blocked.")
+
+    receipt = v2.get("source_receipts", {}).get("RU-MR-APPENDIX-2")
+    if (
+        not isinstance(receipt, dict)
+        or receipt.get("document") != "МР 2.3.1.0253-21"
+        or receipt.get("locator")
+        != "Приложение 2 — коэффициенты пересчета для эквивалентов витаминов"
+        or receipt.get("source_sha256")
+        != "cf96c7ea7fab087d16b478b2c8c097406d7572e495b2beb43405e4fd05917d79"
+        or set(receipt.get("scope", ())) != NEW_CODES
+        or receipt.get("review_status")
+        != "definition_evidence_only_no_automatic_derivation_authority"
+    ):
+        raise ValueError("V2 Appendix 2 source receipt is missing or changed.")
+    for code in NEW_CODES:
+        if v2_entries[code].get("source_evidence_refs") != ["RU-MR-APPENDIX-2"]:
+            raise ValueError("Vitamin equivalent is not pinned to Appendix 2 receipt.")
 
     adapter_codes = {row["canonical_code"] for row in adapters["bindings"]}
     if adapter_codes != {
