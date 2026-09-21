@@ -115,7 +115,10 @@ def test_populated_0032_database_upgrades_without_rewriting_profiles_or_vectors(
     assert column_notnull(database, "fat_g") == 1
     assert column_notnull(database, "carbohydrates_g") == 1
 
-    assert apply_migrations(config) == [MIGRATION_ID]
+    assert apply_migrations(config) == [
+        MIGRATION_ID,
+        "0035_versioned_nutrient_registry",
+    ]
 
     assert profile_rows(database) == before_profiles
     assert vector_rows(database) == (before_seals, before_values)
@@ -143,7 +146,7 @@ def test_populated_0032_database_upgrades_without_rewriting_profiles_or_vectors(
               AND name = 'food_composition_versions_complete'
             """
         ).fetchone()[0]
-    assert history[-1] == MIGRATION_ID
+    assert history[-2:] == [MIGRATION_ID, "0035_versioned_nutrient_registry"]
     assert "food_nutrition_profiles" in trigger_sql
     assert "food_composition_versions" in trigger_sql
 
@@ -156,7 +159,10 @@ def test_populated_0032_database_upgrades_without_rewriting_profiles_or_vectors(
     assert vector_rows(database) == (before_seals, before_values)
 
     # The restored copy remains upgradeable through the same migration.
-    assert apply_migrations(config) == [MIGRATION_ID]
+    assert apply_migrations(config) == [
+        MIGRATION_ID,
+        "0035_versioned_nutrient_registry",
+    ]
     assert profile_rows(database) == before_profiles
     assert vector_rows(database) == (before_seals, before_values)
 
