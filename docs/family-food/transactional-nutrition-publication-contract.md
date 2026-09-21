@@ -62,6 +62,43 @@ Partial profiles cannot be legacy-current. Complete profiles can be current unde
 
 **DECISION:** every Step 3 publication profile is persisted with `is_current=false`, including complete profiles. Existing current profile IDs and values are preserved exactly. Step 3 does not call `clear_current()`.
 
+
+### 2.6 V2 value provenance must be source-neutral
+
+The persisted vector schema is registry-version-aware, but the current V1 read adapter still decodes the historical USDA/FDC evidence envelope. It expects source-specific keys such as `source_nutrient_nbr` and the old nested `observation` / `mapping` shape.
+
+That shape is valid historical V1 evidence, but it is not a FamilyFoodOS-wide source contract. Requiring a Russian or future source to fabricate FDC-style identifiers would turn an external dataset quirk into a domain invariant.
+
+**DECISION:** Step 3 introduces a registry-version-aware provenance decoding seam.
+
+- V1 persisted JSON and V1 decoding behavior remain unchanged.
+- V2 uses a normalized source-neutral evidence envelope.
+- V2 evidence must retain exact profile source identity/version/type, source component/observation identity when the source supplies one, source value/unit, source locator/definition references, mapping status, uncertainty/estimated state and the explicit supported `method_code`.
+- `method_code` must be available to the V2 methodology adapter without guessing.
+- V2 must not require or invent FDC-only fields such as `source_nutrient_nbr`.
+- the V2 decoder must produce the existing domain `NutrientProvenance` without changing its source semantics or inventing facts.
+
+The normalized envelope is a persistence/application contract, not permission to discard original raw/source evidence. Original evidence remains referenced by immutable provenance/receipts.
+
+### 2.7 Legacy CompositionCalculator remains V1-pinned
+
+After PR77, `SqlAlchemyFoodCompositionRepository.nutrient_definition(code)` deliberately resolves V1 definitions for the legacy Composition engine. `CompositionCalculator` compares ATOMIC vector definitions with those V1 definitions.
+
+A V2 ATOMIC snapshot can therefore be persisted and read, but Step 3 must not claim that the legacy Composition calculation path has become V2-aware merely because storage accepts the vector.
+
+**DECISION:** Step 3 does not change the legacy `CompositionReader.nutrient_definition(code)` behavior or broaden transformation/retention calculation semantics.
+
+For Step 3, a V2 ATOMIC bundle is validated through:
+
+```text
+FoodCompositionVersion identity
++ version-aware NutrientVectorReader
++ V2 provenance decoder
++ NutritionMethodologyService.atomic_input for supported V2 methodology reads
+```
+
+The legacy `CompositionCalculator` remains V1-compatible. V2 transformation/retention applicability and any version-aware Composition calculation contract belong to the separately approved transformation-applicability step (Step 7).
+
 ## 3. Application contract
 
 Introduce a bounded application operation, named by implementation as a reviewed/versioned nutrition publication service, consuming a validated bundle equivalent to:
@@ -106,6 +143,7 @@ Before the first database mutation, validate every condition that does not requi
 - no equal-unit substitution is used for incompatible definitions;
 - vector `value_count` and `value_sha256` match the canonical ordered values;
 - vector/profile source provenance agrees;
+- V2 value provenance uses the source-neutral V2 envelope, round-trips through the V2 decoder and exposes explicit supported `method_code` without fabricated source-specific fields;
 - ATOMIC composition references the same FoodIngredient/profile identity and has an explicit mass state/version;
 - publication provenance is non-empty and reviewable.
 
@@ -203,6 +241,8 @@ The implementation must not catch a conflict and then commit earlier writes.
 | Existing ATOMIC/Composition snapshots | immutable and unchanged |
 | V1 Composition retention semantics | remain V1-pinned |
 | Existing RU V1 publication seed/path | behavior unchanged |
+| V1 persisted provenance JSON / decoder | unchanged |
+| Legacy CompositionCalculator definition semantics | remain V1-pinned |
 | Planner/API/UI defaults | unchanged |
 | `AI_ENABLED=false` | complete path remains supported |
 
@@ -212,6 +252,7 @@ Expected runtime surface is limited to:
 
 - a specialized application contract/service for reviewed versioned publication;
 - a specialized SQLAlchemy Core publication adapter/UoW composition using the existing project UoW;
+- a registry-version-aware nutrient-provenance decoding seam that preserves V1 decoding unchanged and adds source-neutral V2 decoding;
 - reuse of existing FoodIngredient/profile/vector/Composition domain objects and validation;
 - focused tests plus required regression workflow updates only if needed.
 
@@ -239,18 +280,21 @@ The implementation PR is not review-ready until it proves at least:
 2. **fresh partial V2 bundle** publishes with explicit unknown observations and no invented zero;
 3. V2 vector is readable by the version-aware vector reader;
 4. V2 ATOMIC composition is readable and binds to the same ingredient/profile/vector;
-5. `NutritionMethodologyService.atomic_input` can consume a supported V2 value only with valid explicit method evidence;
-6. exact replay produces zero writes and stable IDs;
-7. same provenance + changed profile value fails closed;
-8. same provenance + changed source observation fails closed;
-9. same profile + wrong registry/versioned vector fails closed;
-10. changed nutrient hash/provenance fails closed;
-11. occupied composition version with different truth fails closed;
-12. pre-existing current profile is unchanged after fresh publication and replay;
-13. generic complete-profile insertion still produces its historical V1 behavior;
-14. all rollback injection points leave no partial task state;
-15. `PRAGMA foreign_key_check` is empty after fresh/replay/failure tests;
-16. existing Nutrition/NutrientVector/Composition regressions remain green.
+5. source-neutral V2 provenance round-trips through `NutrientVectorReader` without invented FDC/source-specific identifiers;
+6. `NutritionMethodologyService.atomic_input` can consume a supported V2 value only with valid explicit method evidence;
+7. legacy V1 provenance reads and legacy V1 `CompositionCalculator` behavior remain unchanged;
+8. exact replay produces zero writes and stable IDs;
+9. same provenance + changed profile value fails closed;
+10. same provenance + changed source observation fails closed;
+11. same profile + wrong registry/versioned vector fails closed;
+12. changed nutrient hash/provenance fails closed;
+13. occupied composition version with different truth fails closed;
+14. pre-existing current profile is unchanged after fresh publication and replay;
+15. generic complete-profile insertion still produces its historical V1 behavior;
+16. all rollback injection points leave no partial task state;
+17. `PRAGMA foreign_key_check` is empty after fresh/replay/failure tests;
+18. a V2 ATOMIC bundle is not falsely accepted through the legacy V1-pinned `CompositionCalculator`;
+19. existing Nutrition/NutrientVector/Composition regressions remain green.
 
 Use synthetic/repository-owned test fixtures for Step 3. Do not require blocked external numeric corpus to prove publication mechanics.
 
