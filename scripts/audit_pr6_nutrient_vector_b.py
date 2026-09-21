@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from audit_pr6_data_b2a import audit_catalogue  # noqa: E402
 from app.db import migrations  # noqa: E402
 from app.db.config import DatabaseConfig  # noqa: E402
+from app.domain.nutrient_vector_backfill_v1 import REGISTRY_VERSION  # noqa: E402
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine  # noqa: E402
 from app.seed.food_recipes import seed_food_recipes  # noqa: E402
 from app.seed.nutrition_measure_evidence import seed_nutrition_measure_evidence  # noqa: E402
@@ -87,6 +88,10 @@ def measure(config):
             SELECT profile_id, nutrient_code FROM nutrient_values GROUP BY profile_id, nutrient_code HAVING count(*) > 1)""").fetchone()[
             0
         ]
+        v1_definition_count = connection.execute(
+            "SELECT count(*) FROM nutrient_definitions WHERE registry_version = ?",
+            (REGISTRY_VERSION,),
+        ).fetchone()[0]
 
     def compact(r):
         return {
@@ -99,7 +104,7 @@ def measure(config):
         "base_main_sha": "e35d87a24d5d8afb59509e566aa1ff4b7a58a11a",
         "migration_head_before": "0027_recipe_same_source_revisions",
         "migration_head_after": applied[-1],
-        "canonical_nutrient_definitions": len(after["nutrient_definitions"]),
+        "canonical_nutrient_definitions": v1_definition_count,
         "profiles_examined": len(before["food_nutrition_profiles"]),
         "profiles_backfilled": len(after["nutrition_vector_seals"]),
         "normalized_nutrient_value_rows": len(after["nutrient_values"]),
