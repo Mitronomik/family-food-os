@@ -1,12 +1,15 @@
-# Proposed DC2 profile compatibility change — decision required
+# DC2 profile compatibility change — staged implementation contract
 
-Status: proposed; not an implemented migration or accepted runtime contract.
+Status: the storage/migration slice was explicitly authorized by the user's
+post-PR75 implementation plan and is implemented in the bounded partial-profile
+PR. Registry/adapters, transactional publication and production food publication
+remain later separate steps of that approved sequence.
 
 ## Concrete conflict
 
-The data contract permits Decimal or explicit unknown. Current
-`backend/app/domain/food_ingredients.py:FoodNutritionProfile` and persisted
-profile columns require numeric kcal/protein/fat/carbohydrates. The accepted
+The data contract permits Decimal or explicit unknown. Before this bounded
+storage slice, accepted `main` required numeric kcal/protein/fat/carbohydrates
+in `FoodNutritionProfile` and persisted profile columns. The accepted
 Nutrition contract assigns legacy carbohydrate a definition incompatible with
 the book's source-native available carbohydrate. All5 candidate profiles fail;
 sugar additionally has below-detection protein/fat. The build probes actual
@@ -18,7 +21,7 @@ DATA-CORPUS roadmap §10 requires a separate architecture/migration decision whe
 a publication batch reveals a genuine schema limitation. Reserved migration0033
 must not be consumed opportunistically.
 
-## Recommended design for a separate bounded implementation
+## Staged design
 
 1. Permit explicit unknown macro amounts on a new immutable profile version.
    Preserve all existing profiles and their values without rewriting history.
@@ -38,10 +41,10 @@ must not be consumed opportunistically.
    existing identities; create only the reviewed new rice form. Attach profiles
    as non-current and preserve existing current profiles. Existing
    attach_nutrition_profile clears current and is unsuitable without adjustment.
-5. Design an explicit additive migration with repository's custom runner after
-   migration ordering review. No new migration number is selected here. If
-   SQLite needs a table rebuild, retain foreign keys/history and prove backup,
-   transaction and rollback safety before implementation acceptance.
+5. Storage step: migration `0034_partial_nutrition_profiles` uses the existing
+   custom runner's foreign-key rebuild mode, preserves dependent identities and
+   the accepted Composition trigger, and proves backup/restore plus rollback.
+   Reserved `0033_recipe_template_catalogue` remains unused.
 
 ## Acceptance and tests for that implementation
 
@@ -62,9 +65,14 @@ source reuse. Alternative: keep current model and leave this five-profile batch
 blocked until exact compatible Russian source profiles are obtained. Never fill
 its mandatory fields with unrelated USDA values under a Russian source label.
 
-## Proposed decision for the user
+## Current decision boundary
 
-Approve this separate profile-unknown/compatibility implementation, preserving
-current profiles and holding production publication until source reuse and exact
-component mappings are resolved. Approval would authorize code and schema
-preparation in an isolated checkout, not deployment or unreviewed merge.
+The user approved the implementation sequence beginning with partial-profile
+storage. This bounded slice permits explicit unknown legacy macro storage,
+immutable source-observation state and migration `0034`, while preserving all
+existing current profiles and holding production publication.
+
+The remaining items in this document are not collapsed into this PR:
+new registry/adapters are the next bounded step; transactional profile/vector/
+ATOMIC publication follows separately; Book2002 source-use approval and actual
+production publication remain independent gates.

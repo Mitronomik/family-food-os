@@ -190,6 +190,23 @@ authority для PostgreSQL. SQLite-specific historical migrations не обяз
 воспроизводиться против PostgreSQL. Ни одна физическая база не управляется двумя
 независимыми migration histories.
 
+
+
+## 5.1. Reserved migration ordering after partial-profile storage
+
+The accepted migration sequence may intentionally contain a numeric-name gap.
+`0033_recipe_template_catalogue` remains reserved for the RecipeTemplate task.
+The partial nutrition-profile schema uses `0034_partial_nutrition_profiles`.
+
+Migration identity is the explicit ordered `MIGRATION_MODULES` sequence, not
+numeric filename sorting. Once `0034` is accepted, the future implementation of
+the reserved `0033` must be **appended after `0034`** in that sequence. Inserting
+it before `0034` would make databases that already applied `0034` fail the
+restore/lineage exact-prefix contract.
+
+This ordering rule preserves both the original reservation and forward-only
+database history; it is not permission to reuse `0033` for another concern.
+
 ---
 
 # 6. Git strategy

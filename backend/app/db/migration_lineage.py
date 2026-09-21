@@ -165,6 +165,9 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
             "servings",
         }
     ),
+    "0034_partial_nutrition_profiles": frozenset(
+        {"food_nutrition_profile_observations"}
+    ),
 }
 
 # The foundational tables promised by migration `0001`. Stable FamilyFoodOS

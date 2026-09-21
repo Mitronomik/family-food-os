@@ -9,7 +9,13 @@ from sqlalchemy import Column, ForeignKey, Integer, MetaData, Table, event
 
 from app.db.config import DatabaseConfig
 from app.db.migrations import apply_migrations
-from app.domain.food_ingredients import IngredientAlias
+from app.domain.food_ingredients import (
+    FoodNutritionProfile,
+    IngredientAlias,
+    NutritionObservationState,
+    NutritionSourceObservation,
+)
+from app.domain.nutrient_vector import NutrientVectorUnavailableError
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_ingredient_composition import (
     create_food_catalogue_service,
@@ -17,6 +23,9 @@ from app.persistence.sqlalchemy_core.food_ingredient_composition import (
 from app.persistence.sqlalchemy_core.food_ingredient_uow import (
     SqlAlchemyFoodCatalogueReadScope,
     SqlAlchemyFoodCatalogueUnitOfWork,
+)
+from app.persistence.sqlalchemy_core.nutrition_read_scope import (
+    SqlAlchemyNutritionReadScope,
 )
 from app.services.food_ingredient_contracts import (
     FoodCataloguePersistenceConflictError,
@@ -347,3 +356,157 @@ def test_read_scope_has_no_commit_and_committed_write_is_later_visible(
     with SqlAlchemyFoodCatalogueReadScope(engine) as scope:
         assert not hasattr(scope, "commit")
         assert scope.ingredients.get(expected.id) == expected
+
+
+def partial_profile(ingredient_id):
+    profile_id = uuid4()
+    observations = (
+        NutritionSourceObservation(
+            id=uuid4(),
+            profile_id=profile_id,
+            source_field="protein_g",
+            state=NutritionObservationState.BELOW_DETECTION,
+            source_literal="0",
+            method_reference="BOOK2002_SOURCE_DEFINITION",
+            source_locator="book2002:p163:row1:protein_g",
+            created_at=NOW,
+        ),
+        NutritionSourceObservation(
+            id=uuid4(),
+            profile_id=profile_id,
+            source_field="fat_g",
+            state=NutritionObservationState.BELOW_DETECTION,
+            source_literal="0",
+            method_reference="BOOK2002_SOURCE_DEFINITION",
+            source_locator="book2002:p163:row1:fat_g",
+            created_at=NOW,
+        ),
+        NutritionSourceObservation(
+            id=uuid4(),
+            profile_id=profile_id,
+            source_field="carbohydrates_g",
+            state=NutritionObservationState.METHOD_INCOMPATIBLE,
+            source_literal="99.8",
+            method_reference="BOOK2002_AVAILABLE_CARBOHYDRATE",
+            source_locator="book2002:p163:row1:carbohydrates_g",
+            created_at=NOW,
+        ),
+    )
+    profile = FoodNutritionProfile(
+        id=profile_id,
+        food_ingredient_id=ingredient_id,
+        basis_grams=Decimal("100"),
+        kcal=Decimal("399"),
+        protein_g=None,
+        fat_g=None,
+        carbohydrates_g=None,
+        fiber_g=Decimal("0"),
+        source_name="SC_BOOK_2002",
+        source_id="10.1.1",
+        source_version="2002",
+        source_data_type="published_compositional_profile",
+        verified_at=NOW,
+        estimated=None,
+        is_current=False,
+        created_at=NOW,
+    )
+    return profile, observations
+
+
+def test_partial_nutrition_profile_roundtrips_without_zero_substitution(
+    catalogue_engine,
+):
+    config, engine = catalogue_engine
+    service = create_food_catalogue_service(engine)
+    ingredient = service.add_trusted_ingredient(seed())
+    with SqlAlchemyFoodCatalogueReadScope(engine) as read:
+        original_current = read.nutrition_profiles.get_current(ingredient.id)
+
+    partial, source_observations = partial_profile(ingredient.id)
+    with SqlAlchemyFoodCatalogueUnitOfWork(engine) as write:
+        write.nutrition_profiles.add(partial, source_observations)
+        write.commit()
+
+    with SqlAlchemyFoodCatalogueReadScope(engine) as read:
+        actual = read.nutrition_profiles.get_nutrition_profile_by_id(partial.id)
+        persisted_observations = read.nutrition_profiles.list_observations(partial.id)
+        current = read.nutrition_profiles.get_current(ingredient.id)
+
+    assert actual == partial
+    assert current == original_current
+    assert actual is not None and actual.legacy_core_complete is False
+    assert persisted_observations == tuple(
+        sorted(source_observations, key=lambda item: item.source_field)
+    )
+    assert actual.protein_g is None
+    assert actual.fat_g is None
+    assert actual.carbohydrates_g is None
+
+    with sqlite3.connect(config.path) as connection:
+        stored = connection.execute(
+            """
+            SELECT protein_g, fat_g, carbohydrates_g
+            FROM food_nutrition_profiles
+            WHERE id = ?
+            """,
+            (partial.id.hex,),
+        ).fetchone()
+        observations = connection.execute(
+            """
+            SELECT source_field, state, source_literal, method_reference
+            FROM food_nutrition_profile_observations
+            WHERE profile_id = ?
+            ORDER BY source_field
+            """,
+            (partial.id.hex,),
+        ).fetchall()
+
+    assert stored == (None, None, None)
+    assert observations == [
+        (
+            "carbohydrates_g",
+            "method_incompatible",
+            "99.8",
+            "BOOK2002_AVAILABLE_CARBOHYDRATE",
+        ),
+        ("fat_g", "below_detection", "0", "BOOK2002_SOURCE_DEFINITION"),
+        ("protein_g", "below_detection", "0", "BOOK2002_SOURCE_DEFINITION"),
+    ]
+
+    with SqlAlchemyNutritionReadScope(engine) as read:
+        with pytest.raises(NutrientVectorUnavailableError):
+            read.nutrient_vectors.get(partial.id)
+
+
+def test_partial_profile_source_observations_are_immutable(catalogue_engine):
+    config, engine = catalogue_engine
+    service = create_food_catalogue_service(engine)
+    ingredient = service.add_trusted_ingredient(
+        seed(
+            code="PARTIAL_TEST_FOOD",
+            name="Тестовый продукт partial",
+            aliases=(),
+            source_id="partial-test-current",
+        )
+    )
+    partial, source_observations = partial_profile(ingredient.id)
+    with SqlAlchemyFoodCatalogueUnitOfWork(engine) as write:
+        write.nutrition_profiles.add(partial, source_observations)
+        write.commit()
+
+    observation_id = source_observations[0].id.hex
+    with sqlite3.connect(config.path) as connection:
+        with pytest.raises(sqlite3.IntegrityError, match="неизменяемо"):
+            connection.execute(
+                """
+                UPDATE food_nutrition_profile_observations
+                SET source_literal = '1'
+                WHERE id = ?
+                """,
+                (observation_id,),
+            )
+        with pytest.raises(sqlite3.IntegrityError, match="неизменяемо"):
+            connection.execute(
+                "DELETE FROM food_nutrition_profile_observations WHERE id = ?",
+                (observation_id,),
+            )

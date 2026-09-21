@@ -9,6 +9,7 @@ from app.domain.food_ingredients import (
     FoodIngredient,
     FoodNutritionProfile,
     IngredientAlias,
+    NutritionSourceObservation,
 )
 
 
@@ -39,7 +40,11 @@ class IngredientAliasRepository(Protocol):
 
 
 class FoodNutritionProfileRepository(Protocol):
-    def add(self, profile: FoodNutritionProfile) -> None: ...
+    def add(
+        self,
+        profile: FoodNutritionProfile,
+        observations: tuple[NutritionSourceObservation, ...] = (),
+    ) -> None: ...
 
     def get_by_provenance(
         self,
@@ -52,6 +57,10 @@ class FoodNutritionProfileRepository(Protocol):
     def get_current(self, food_ingredient_id: UUID) -> FoodNutritionProfile | None: ...
 
     def clear_current(self, food_ingredient_id: UUID) -> None: ...
+
+    def list_observations(
+        self, profile_id: UUID
+    ) -> tuple[NutritionSourceObservation, ...]: ...
 
 
 class FoodCatalogueUnitOfWork(Protocol):

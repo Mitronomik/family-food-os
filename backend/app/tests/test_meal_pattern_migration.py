@@ -35,10 +35,11 @@ def _run_with_chain_through(config, suffix, operation):
 
 
 def test_migration_chain_keeps_0031_between_0030_and_0032():
-    assert expected_migration_ids()[-3:] == [
+    assert expected_migration_ids()[-4:] == [
         "0030_recipe_source_corpus",
         "0031_meal_pattern_catalogue",
         "0032_meal_plan_serving",
+        "0034_partial_nutrition_profiles",
     ]
 
 
@@ -55,6 +56,7 @@ def test_populated_0030_database_upgrades_without_rewriting_existing_food_data(t
     assert apply_migrations(config) == [
         "0031_meal_pattern_catalogue",
         "0032_meal_plan_serving",
+        "0034_partial_nutrition_profiles",
     ]
     assert apply_migrations(config) == []
     with sqlite3.connect(config.path) as connection:
