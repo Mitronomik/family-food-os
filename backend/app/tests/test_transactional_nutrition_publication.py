@@ -663,6 +663,46 @@ def test_wrong_registry_and_noncanonical_evidence_fail_before_write(database):
     assert db_dump(config) == before
 
 
+def test_non_authoritative_v2_mapping_status_fails_before_write(database):
+    config, engine = database
+    request = bundle(
+        code="STEP3_BAD_MAPPING",
+        name="Тестовое неподходящее сопоставление",
+        source_id="STEP3-BAD-MAPPING",
+    )
+    first = request.vector.values[0]
+    payload = json.loads(first.provenance_json)
+    payload["mapping"]["mapping_status"] = "DISTINCT_COMPONENT"
+    broken = replace(
+        first,
+        provenance_json=json.dumps(
+            payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+        ),
+    )
+    values = (broken, *request.vector.values[1:])
+    rows = [
+        {
+            "nutrient_code": value.nutrient_code,
+            "amount": value.amount,
+            "provenance_json": value.provenance_json,
+        }
+        for value in values
+    ]
+    changed = replace(
+        request,
+        vector=replace(
+            request.vector,
+            values=values,
+            value_sha256=value_set_digest(rows),
+        ),
+    )
+    before = db_dump(config)
+    with pytest.raises(NutritionPublicationContractError, match="mapping status"):
+        publication_service(engine).publish(changed)
+    assert db_dump(config) == before
+    assert_fk_clean(config)
+
+
 def test_duplicate_v2_evidence_keys_fail_closed():
     profile = profile_spec()
     raw = evidence(
