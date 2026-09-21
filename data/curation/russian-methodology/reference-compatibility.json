@@ -8,37 +8,49 @@
       "reference_definition": "available_carbohydrate",
       "food_definition": "CARBOHYDRATE_BY_DIFFERENCE",
       "compatible": false,
-      "reason": "Total by difference includes fibre; no implicit fibre subtraction."
+      "reason": "Total by difference includes fibre; no implicit fibre subtraction.",
+      "registry_v2_reference_code": "CARBOHYDRATE_AVAILABLE",
+      "registry_v2_food_code": "CARBOHYDRATE_AVAILABLE"
     },
     {
       "reference_definition": "available_carbohydrate",
       "food_definition": "CARBOHYDRATE_AVAILABLE",
       "compatible": true,
-      "condition": "Reviewed available-carbohydrate target; source method policy remains explicit."
+      "condition": "Reviewed available-carbohydrate target; source method policy remains explicit.",
+      "registry_v2_reference_code": "CARBOHYDRATE_AVAILABLE",
+      "registry_v2_food_code": "CARBOHYDRATE_AVAILABLE"
     },
     {
       "reference_definition": "vitamin_a_retinol_equivalent",
       "food_definition": "VITAMIN_A_RAE",
       "compatible": false,
-      "reason": "RE and RAE use different provitamin conversion conventions."
+      "reason": "RE and RAE use different provitamin conversion conventions.",
+      "registry_v2_reference_code": "VITAMIN_A_RE",
+      "registry_v2_food_code": "VITAMIN_A_RAE"
     },
     {
       "reference_definition": "niacin_equivalent",
       "food_definition": "NIACIN",
       "compatible": false,
-      "reason": "Preformed niacin excludes the tryptophan contribution to niacin equivalents."
+      "reason": "Preformed niacin excludes the tryptophan contribution to niacin equivalents.",
+      "registry_v2_reference_code": "NIACIN_EQUIVALENT",
+      "registry_v2_food_code": "NIACIN"
     },
     {
       "reference_definition": "tocopherol_equivalent",
       "food_definition": "VITAMIN_E_ALPHA_TOCOPHEROL",
       "compatible": false,
-      "reason": "Equivalence requires source-specific definition review; identical mg units do not establish equivalence."
+      "reason": "Equivalence requires source-specific definition review; identical mg units do not establish equivalence.",
+      "registry_v2_reference_code": "VITAMIN_E_TOCOPHEROL_EQUIVALENT",
+      "registry_v2_food_code": "VITAMIN_E_ALPHA_TOCOPHEROL"
     },
     {
       "reference_definition": "folates_source_unspecified",
       "food_definition": "FOLATE_DFE",
       "compatible": false,
-      "reason": "Do not infer dietary folate equivalents from an unspecified folate label."
+      "reason": "Do not infer dietary folate equivalents from an unspecified folate label.",
+      "registry_v2_reference_code": null,
+      "registry_v2_food_code": "FOLATE_DFE"
     }
   ],
   "excluded_defaults": [
@@ -68,5 +80,7 @@
     "Scalar reviewed references only; inequalities and ranges require an explicit separate contract.",
     "Age in completed years only; infant month-specific references unsupported.",
     "The caller supplies approved exact age boundaries; source ambiguity is not resolved by this selector."
-  ]
+  ],
+  "registry_v2": "RU_NUTRIENT_REGISTRY_V2",
+  "registry_v2_note": "Exact reference codes are now explicit. A distinct food definition remains incompatible even when units match; no conversion formula is implied."
 }
