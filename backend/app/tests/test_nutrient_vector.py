@@ -17,6 +17,7 @@ from app.db import migrations
 from app.db.config import DatabaseConfig
 from app.domain.nutrient_vector import NutrientVectorUnavailableError
 from app.domain.nutrient_vector_backfill_v1 import (
+    REGISTRY_VERSION,
     disposition,
     prepare_profile,
     value_set_digest,
@@ -70,7 +71,12 @@ def test_registry_matches_all_approved_definitions(database, bundle):
     config, _ = database
     with sqlite3.connect(config.path) as db:
         rows = db.execute(
-            "SELECT code, display_name_ru, unit, definition_json FROM nutrient_definitions"
+            """
+            SELECT code, display_name_ru, unit, definition_json
+            FROM nutrient_definitions
+            WHERE registry_version = ?
+            """,
+            (REGISTRY_VERSION,),
         ).fetchall()
         assert len(rows) == len({r[0] for r in rows}) == 51
         assert {r[0] for r in rows} == {
@@ -82,16 +88,18 @@ def test_registry_matches_all_approved_definitions(database, bundle):
             assert not code.isdigit()
             assert json.loads(payload) in bundle["nutrient-registry.json"]["entries"]
         stored = db.execute(
-            "SELECT bundle_json FROM nutrient_registry_snapshots"
+            "SELECT bundle_json FROM nutrient_registry_snapshots WHERE version = ?",
+            (REGISTRY_VERSION,),
         ).fetchone()[0]
         assert json.loads(stored) == bundle
-    assert migrations.expected_migration_ids()[-6:] == [
+    assert migrations.expected_migration_ids()[-7:] == [
         MIGRATION.MIGRATION_ID,
         "0029_food_composition_core",
         "0030_recipe_source_corpus",
         "0031_meal_pattern_catalogue",
         "0032_meal_plan_serving",
         "0034_partial_nutrition_profiles",
+        "0035_versioned_nutrient_registry",
     ]
 
 
@@ -275,8 +283,8 @@ def test_sealed_vector_cannot_append_even_unknown_nutrient(database):
     with sqlite3.connect(config.path) as db:
         with pytest.raises(sqlite3.IntegrityError, match="зафиксирован"):
             db.execute(
-                "INSERT INTO nutrient_values VALUES (?, ?, ?, ?)",
-                (result.profile_id.hex, "CALCIUM", "1", "{}"),
+                "INSERT INTO nutrient_values VALUES (?, ?, ?, ?, ?)",
+                (result.profile_id.hex, REGISTRY_VERSION, "CALCIUM", "1", "{}"),
             )
 
 
@@ -303,6 +311,7 @@ def test_unsealed_partial_rows_cannot_commit_or_be_read_and_decimal_roundtrip(da
         # Synthetic persistence fixture preserves Decimal without granting import authority.
         row = dict(
             profile_id=profile.id,
+            registry_version=REGISTRY_VERSION,
             nutrient_code=original.definition.code,
             amount=amount,
             provenance_json=original.provenance.evidence_json,
@@ -400,6 +409,7 @@ def test_unknown_deployment_profile_aborts_upgrade_without_half_schema(
         "0031_meal_pattern_catalogue",
         "0032_meal_plan_serving",
         "0034_partial_nutrition_profiles",
+        "0035_versioned_nutrient_registry",
     ]
 
 
@@ -431,6 +441,7 @@ def test_mid_backfill_failure_rolls_back_and_resume_is_deterministic(
         "0031_meal_pattern_catalogue",
         "0032_meal_plan_serving",
         "0034_partial_nutrition_profiles",
+        "0035_versioned_nutrient_registry",
     ]
     after = snapshot(config)
     assert all(after[name] == rows for name, rows in before.items())
@@ -468,8 +479,8 @@ def test_sql_numeric_rows_refuse_unknown_or_invalid_decimal(database, amount):
     with sqlite3.connect(config.path) as db:
         with pytest.raises(sqlite3.IntegrityError):
             db.execute(
-                "INSERT INTO nutrient_values VALUES (?, ?, ?, ?)",
-                (uuid4().hex, "CALCIUM", amount, "{}"),
+                "INSERT INTO nutrient_values VALUES (?, ?, ?, ?, ?)",
+                (uuid4().hex, REGISTRY_VERSION, "CALCIUM", amount, "{}"),
             )
 
 
@@ -496,6 +507,7 @@ def test_audited_profile_initialization_rollback(database, monkeypatch):
         connection.execute(
             insert(nutrient_values).values(
                 profile_id=profile.id,
+                registry_version=REGISTRY_VERSION,
                 nutrient_code="PROTEIN",
                 amount=Decimal("1"),
                 provenance_json="{}",

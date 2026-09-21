@@ -565,3 +565,47 @@ exercise populated upgrade, transactional failure and restore/re-upgrade.
 not used by this change. Because accepted migration history is an ordered prefix,
 the future `0033` module must be appended after already accepted `0034` in
 `MIGRATION_MODULES` rather than inserted before it.
+
+
+## Nutrient Registry V2 and Russian adapters — 2026-09-21
+
+**DECISION — step 2 of the user-approved Russian-data integration plan.**
+
+The immutable `PR6_NUTRIENT_VECTOR_A_V1` snapshot remains accepted historical
+truth. Step 2 adds `RU_NUTRIENT_REGISTRY_V2` without editing any V1 snapshot,
+definition, value, seal or ATOMIC binding.
+
+Registry identity is now `(registry_version, nutrient_code)`. Migration
+`0035_versioned_nutrient_registry` rebuilds only the registry/value identity
+tables required to make that versioning real. Existing V1 value rows receive the
+same registry version already pinned by their immutable vector seal; their
+amounts, provenance, seal digests and profile ownership do not change.
+
+V2 is a complete reviewed definition snapshot. It contains all 51 V1 codes and
+adds three distinct Russian-reference concepts:
+
+- `VITAMIN_A_RE`;
+- `NIACIN_EQUIVALENT`;
+- `VITAMIN_E_TOCOPHEROL_EQUIVALENT`.
+
+These are not aliases for `VITAMIN_A_RAE`, `NIACIN` or
+`VITAMIN_E_ALPHA_TOCOPHEROL`. Equal units never establish semantic
+equivalence. No conversion from retinol/carotenoids to RE, tryptophan to niacin
+equivalent, or vitamin-E vitamers to tocopherol equivalent is authorized by this
+registry step.
+
+V2 keeps `CARBOHYDRATE_AVAILABLE` as the canonical available-carbohydrate
+concept but separates **what the nutrient means** from **how a source obtained
+the number**. The source/derivation method is explicit versioned provenance.
+The Russian methodology adapter accepts only reviewed method codes and fails
+closed when a present V2 value lacks them. Total carbohydrate by difference
+remains a different nutrient and never substitutes for available carbohydrate.
+
+The direct registry read port requires both version and code. Historical
+Composition retention lookups stay explicitly pinned to V1 so introducing V2
+cannot silently reinterpret accepted transformations. No V2 production vector,
+food profile, ATOMIC composition, target table or Planner/API/UI default is
+published in this step.
+
+After review/merge, the next bounded plan step is transactional publication of a
+reviewed `FoodIngredient → profile → V2 NutrientVector → ATOMIC` bundle.

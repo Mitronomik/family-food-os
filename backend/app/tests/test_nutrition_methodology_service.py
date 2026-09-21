@@ -2,10 +2,18 @@ from contextlib import contextmanager
 from dataclasses import replace
 from decimal import Decimal
 from types import SimpleNamespace
+import json
 import pytest
 from app.domain.food_composition import CompositionUnavailableError, MassState
+from app.domain.nutrient_method_adapters import REGISTRY_V2
+from app.domain.nutrient_vector import (
+    NutrientDefinition,
+    NutrientProvenance,
+    NutrientValue,
+)
 from app.domain.nutrition_methodology import (
     NutrientKind as N,
+    ObservationMethod,
     RussianNutritionPolicy as P,
 )
 from app.services.nutrition_methodology import NutritionMethodologyService
@@ -117,3 +125,71 @@ def test_existing_sqlite_ports_with_pinned_profile(database, monkeypatch):
     assert total.amount == v.amount("CARBOHYDRATE_BY_DIFFERENCE") * 2
     assert result.nutrition_profile_id == v.profile_id
     assert result.receipt_sha256 == request(service, c).receipt_sha256
+
+
+def v2_available_vector(database, *, method=ObservationMethod.AVAILABLE_BY_DIFFERENCE):
+    base = vector(database[1])
+    definition = NutrientDefinition(
+        "CARBOHYDRATE_AVAILABLE",
+        "Усвояемые углеводы",
+        "g",
+        REGISTRY_V2,
+        "Усвояемые углеводы без пищевых волокон; метод хранится отдельно.",
+        "METHOD_INDEPENDENT_COMPONENT",
+    )
+    provenance = NutrientProvenance(
+        registry_version=REGISTRY_V2,
+        audit_identity="synthetic-registry-v2",
+        source_name=base.profile.source_name,
+        source_food_id=base.profile.source_id,
+        source_release=base.profile.source_version,
+        source_data_type=base.profile.source_data_type,
+        source_nutrient_id="synthetic-v2-carb",
+        source_nutrient_name="Усвояемые углеводы",
+        source_nutrient_nbr="",
+        source_unit="g",
+        source_amount=Decimal("10"),
+        source_observation_id="synthetic-v2-carb-observation",
+        source_derivation_id=None,
+        mapping_status="METHOD_SPECIFIC",
+        estimated=None,
+        evidence_json=json.dumps({"method_code": method.value}),
+    )
+    value = NutrientValue(definition, Decimal("10"), provenance)
+    return replace(
+        base,
+        registry_version=REGISTRY_V2,
+        values=(value,),
+        observations_json="[]",
+    )
+
+
+def test_v2_methodology_uses_explicit_available_carbohydrate_method(database):
+    v = v2_available_vector(database)
+    service, c, _ = service_fixture(database, v)
+    result = request(service, c, nutrients=(N.AVAILABLE_CARBOHYDRATE,))
+    total = result.values[0]
+
+    assert total.amount == Decimal("20.000000")
+    assert total.nutrient is N.AVAILABLE_CARBOHYDRATE
+    assert "AVAILABLE_BY_DIFFERENCE" in total.warnings
+    assert total.contributions[0].observation.method is ObservationMethod.AVAILABLE_BY_DIFFERENCE
+    assert (
+        "RU_NUTRIENT_REGISTRY_V2:CARBOHYDRATE_AVAILABLE:"
+        "available_by_difference_excluding_fibre"
+        in total.contributions[0].observation.source.method_reference
+    )
+
+
+def test_v2_methodology_rejects_present_value_without_method_evidence(database):
+    v = v2_available_vector(database)
+    broken = replace(
+        v.values[0],
+        provenance=replace(v.values[0].provenance, evidence_json="{}"),
+    )
+    v = replace(v, values=(broken,))
+    service, c, _ = service_fixture(database, v)
+
+    with pytest.raises(CompositionUnavailableError) as exc_info:
+        request(service, c, nutrients=(N.AVAILABLE_CARBOHYDRATE,))
+    assert exc_info.value.issue_code == "METHOD_REGISTRY_ADAPTER_UNAVAILABLE"

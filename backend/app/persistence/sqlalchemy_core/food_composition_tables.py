@@ -1,6 +1,14 @@
 """Core metadata; migration 0029 owns constraints/triggers and SQLite schema."""
 
-from sqlalchemy import Column, ForeignKey, Integer, String, Table, UniqueConstraint
+from sqlalchemy import (
+    Column,
+    ForeignKey,
+    ForeignKeyConstraint,
+    Integer,
+    String,
+    Table,
+    UniqueConstraint,
+)
 from app.persistence.sqlalchemy_core.food_ingredient_tables import (
     food_catalogue_metadata,
 )
@@ -52,14 +60,15 @@ retention_values = Table(
     _reference(
         "profile_id", "food_retention_profiles.id", deferred=True, primary_key=True
     ),
-    Column(
-        "nutrient_code",
-        String,
-        ForeignKey("nutrient_definitions.code", ondelete="RESTRICT"),
-        primary_key=True,
-    ),
+    Column("registry_version", String, nullable=False),
+    Column("nutrient_code", String, primary_key=True),
     Column("factor", DecimalText(), nullable=False),
     Column("provenance_json", String, nullable=False),
+    ForeignKeyConstraint(
+        ["registry_version", "nutrient_code"],
+        ["nutrient_definitions.registry_version", "nutrient_definitions.code"],
+        ondelete="RESTRICT",
+    ),
 )
 transformations = Table(
     "food_transformations",

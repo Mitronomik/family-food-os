@@ -1,0 +1,79 @@
+{
+  "version": "RU_NUTRIENT_METHOD_ADAPTER_V2",
+  "registry_version": "RU_NUTRIENT_REGISTRY_V2",
+  "evidence_contract": {
+    "value_method_field": "method_code",
+    "absent_observation_method_field": "method_code",
+    "rule": "V2 methodology reads require an explicit supported method for a present source-native value; missing values remain unavailable and never borrow a method from another nutrient."
+  },
+  "bindings": [
+    {
+      "canonical_code": "PROTEIN",
+      "nutrient_kind": "protein",
+      "allowed_methods": [
+        "analytical",
+        "published_method_unspecified"
+      ]
+    },
+    {
+      "canonical_code": "FAT_TOTAL",
+      "nutrient_kind": "fat",
+      "allowed_methods": [
+        "analytical",
+        "published_method_unspecified"
+      ]
+    },
+    {
+      "canonical_code": "FIBER_TOTAL_DIETARY",
+      "nutrient_kind": "fibre",
+      "allowed_methods": [
+        "analytical",
+        "published_method_unspecified"
+      ]
+    },
+    {
+      "canonical_code": "CARBOHYDRATE_AVAILABLE",
+      "nutrient_kind": "available_carbohydrate",
+      "allowed_methods": [
+        "available_summation",
+        "available_by_difference_excluding_fibre",
+        "available_published_row_method_unspecified"
+      ]
+    },
+    {
+      "canonical_code": "CARBOHYDRATE_BY_DIFFERENCE",
+      "nutrient_kind": "total_carbohydrate_including_fibre",
+      "allowed_methods": [
+        "total_by_difference_including_fibre"
+      ]
+    },
+    {
+      "canonical_code": "ENERGY_KCAL",
+      "nutrient_kind": "published_energy",
+      "allowed_methods": [
+        "published_method_unspecified"
+      ]
+    }
+  ],
+  "explicitly_incompatible": [
+    [
+      "VITAMIN_A_RE",
+      "VITAMIN_A_RAE"
+    ],
+    [
+      "NIACIN_EQUIVALENT",
+      "NIACIN"
+    ],
+    [
+      "VITAMIN_E_TOCOPHEROL_EQUIVALENT",
+      "VITAMIN_E_ALPHA_TOCOPHEROL"
+    ],
+    [
+      "CARBOHYDRATE_AVAILABLE",
+      "CARBOHYDRATE_BY_DIFFERENCE"
+    ]
+  ],
+  "unsupported_automatic_reference_mapping": [
+    "folates_source_unspecified"
+  ]
+}

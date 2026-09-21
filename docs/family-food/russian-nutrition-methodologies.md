@@ -106,6 +106,28 @@ The [compatibility matrix](../../data/curation/russian-methodology/reference-com
 records additional definition gaps. Numeric Russian target tables are not newly
 published here: extracted corpus rows still require the documented source review.
 
+
+
+### Registry V2 integration
+
+Step 2 introduces
+[`RU_NUTRIENT_REGISTRY_V2`](../../data/curation/nutrient-registry-v2/README.md)
+and the versioned method adapter consumed by `NutritionMethodologyService`.
+
+V1 keeps its accepted fixed mappings. For V2, a present source-native value must
+carry an explicit supported `method_code` in provenance. In particular,
+`CARBOHYDRATE_AVAILABLE` can be produced by reviewed summation,
+available-by-difference excluding fibre, or a source-published available row
+whose exact row method is unspecified; the method remains visible and warnings
+are preserved. A missing method is not guessed from the nutrient code.
+
+Russian group-reference definitions now have exact V2 codes for available
+carbohydrate, vitamin-A retinol equivalent, niacin equivalent and vitamin-E
+tocopherol equivalent. This makes the **definition** representable; it does not
+create a food value or authorize a conversion from RAE, preformed niacin or
+alpha-tocopherol. Unspecified folate remains unsupported for automatic mapping.
+
+
 ## Service integration and stability
 
 `NutritionMethodologyService.atomic_input` reads pinned existing ATOMIC
@@ -127,8 +149,8 @@ no silent default migration is authorized by adding these operations.
 
 | Area | Current conclusion | Next bounded implementation/acceptance |
 |---|---|---|
-| Profile persistence | Legacy macro columns still require values | Support partial immutable profiles/vector ownership; preserve old IDs and current selector; migrate through custom runner, test old snapshots and rollback |
-| Registry | V1 definitions remain immutable | Add a new reviewed version for required Russian concepts, with source-method adapters and target compatibility; never edit old snapshot bytes |
+| Profile persistence | Implemented by merged PR76 / migration 0034 | Partial profiles preserve explicit unknown state and remain outside the legacy current selector until publication |
+| Registry | V1 remains immutable; step 2 implements `RU_NUTRIENT_REGISTRY_V2` | Version identity is `(registry_version, code)`; V2 separates nutrient definition from source method and adds exact RE/NE/tocopherol-equivalent concepts without implicit conversions |
 | Protein | Published protein can be interpreted with method provenance | Review nitrogen factors/true-protein distinctions before conversions; no universal6.25 repair |
 | Energy needs | Existing personal model is NASEM | Publish reviewed Russian group tables; separately decide an individualized Russian algorithm rather than calling tables a personal formula |
 | Units | Decimal, explicit basis and unit-safe comparison implemented | Add specific evidence-based conversions only; no generic IU or volume-to-mass assumption |

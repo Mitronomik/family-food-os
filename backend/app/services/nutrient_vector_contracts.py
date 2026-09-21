@@ -4,7 +4,11 @@ from typing import Protocol, Self
 from types import TracebackType
 from uuid import UUID
 
-from app.domain.nutrient_vector import NutrientVector
+from app.domain.nutrient_vector import NutrientDefinition, NutrientVector
+
+
+class NutrientRegistryReader(Protocol):
+    def get(self, registry_version: str, code: str) -> NutrientDefinition: ...
 
 
 class NutrientVectorReader(Protocol):
@@ -20,6 +24,9 @@ class NutrientVectorReader(Protocol):
 class NutrientVectorReadScope(Protocol):
     @property
     def nutrient_vectors(self) -> NutrientVectorReader: ...
+
+    @property
+    def nutrient_registry(self) -> NutrientRegistryReader: ...
 
     def __enter__(self) -> Self: ...
 

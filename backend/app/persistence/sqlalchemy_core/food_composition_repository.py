@@ -5,7 +5,7 @@ import json
 from typing import Any
 from uuid import UUID
 
-from sqlalchemy import Table, insert, select
+from sqlalchemy import Table, column, insert, select, table
 from sqlalchemy.engine import Connection
 
 from app.domain.food_composition import (
@@ -22,6 +22,7 @@ from app.domain.food_composition import (
     snapshot_json,
 )
 from app.domain.nutrient_vector import NutrientDefinition
+from app.domain.nutrient_vector_backfill_v1 import REGISTRY_VERSION as REGISTRY_V1
 from app.persistence.sqlalchemy_core import food_composition_tables as t
 from app.persistence.sqlalchemy_core.food_ingredient_tables import (
     food_ingredients_table,
@@ -31,6 +32,18 @@ from app.persistence.sqlalchemy_core.nutrient_vector_repository import (
 )
 from app.persistence.sqlalchemy_core.nutrient_vector_tables import nutrient_definitions
 from app.services.food_composition import load_dag, transformation_chain
+
+
+def _versioned_registry_schema_available(connection: Connection) -> bool:
+    migrations = table("schema_migrations", column("migration_id"))
+    return (
+        connection.execute(
+            select(migrations.c.migration_id).where(
+                migrations.c.migration_id == "0035_versioned_nutrient_registry"
+            )
+        ).first()
+        is not None
+    )
 
 
 class SqlAlchemyFoodCompositionRepository:
@@ -106,15 +119,18 @@ class SqlAlchemyFoodCompositionRepository:
 
     def retention_profile(self, version_id: UUID) -> NutrientRetentionProfile:
         row = self._row(t.retention_profiles, version_id)
-        values = (
-            self._connection.execute(
-                select(t.retention_values).where(
-                    t.retention_values.c.profile_id == version_id
-                )
+        if _versioned_registry_schema_available(self._connection):
+            statement = select(t.retention_values).where(
+                t.retention_values.c.profile_id == version_id
             )
-            .mappings()
-            .all()
-        )
+        else:
+            statement = select(
+                t.retention_values.c.profile_id,
+                t.retention_values.c.nutrient_code,
+                t.retention_values.c.factor,
+                t.retention_values.c.provenance_json,
+            ).where(t.retention_values.c.profile_id == version_id)
+        values = self._connection.execute(statement).mappings().all()
         if len(values) != row["value_count"]:
             raise CompositionUnavailableError("RETENTION_SNAPSHOT_INCOMPLETE")
         value = NutrientRetentionProfile(
@@ -145,15 +161,24 @@ class SqlAlchemyFoodCompositionRepository:
     def nutrient_definition(self, code: str) -> NutrientDefinition:
         row = (
             self._connection.execute(
-                select(nutrient_definitions).where(nutrient_definitions.c.code == code)
+                select(nutrient_definitions).where(
+                    nutrient_definitions.c.registry_version == REGISTRY_V1,
+                    nutrient_definitions.c.code == code,
+                )
             )
             .mappings()
             .one_or_none()
         )
         if row is None:
             raise CompositionUnavailableError("NUTRIENT_DEFINITION_MISSING")
+        payload = json.loads(row["definition_json"])
         return NutrientDefinition(
-            row["code"], row["display_name_ru"], row["unit"], row["registry_version"]
+            row["code"],
+            row["display_name_ru"],
+            row["unit"],
+            row["registry_version"],
+            payload.get("definition"),
+            payload.get("definition_kind"),
         )
 
     def _record(self, value: Any) -> dict[str, Any]:
@@ -169,19 +194,24 @@ class SqlAlchemyFoodCompositionRepository:
     def add_retention_profile(self, value: NutrientRetentionProfile) -> None:
         for factor in value.values:
             self.nutrient_definition(factor.nutrient_code)
-        row = self._record(value)
-        del row["values"]
+        profile_row = self._record(value)
+        del profile_row["values"]
         for factor in value.values:
+            value_row = {
+                "profile_id": value.id,
+                "nutrient_code": factor.nutrient_code,
+                "factor": factor.factor,
+                "provenance_json": snapshot_json(factor.provenance),
+            }
+            if _versioned_registry_schema_available(self._connection):
+                value_row["registry_version"] = REGISTRY_V1
             self._connection.execute(
-                insert(t.retention_values).values(
-                    profile_id=value.id,
-                    nutrient_code=factor.nutrient_code,
-                    factor=factor.factor,
-                    provenance_json=snapshot_json(factor.provenance),
-                )
+                insert(t.retention_values).values(**value_row)
             )
         self._connection.execute(
-            insert(t.retention_profiles).values(**row, value_count=len(value.values))
+            insert(t.retention_profiles).values(
+                **profile_row, value_count=len(value.values)
+            )
         )
 
     def add_transformation(self, value: FoodTransformation) -> None:

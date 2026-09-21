@@ -18,6 +18,8 @@ class NutrientDefinition:
     display_name_ru: str
     unit: str
     registry_version: str
+    definition_text_ru: str | None = None
+    definition_kind: str | None = None
 
     def __post_init__(self) -> None:
         if not re.fullmatch(r"[A-Z][A-Z0-9_]*", self.code):
@@ -26,6 +28,20 @@ class NutrientDefinition:
             raise ValueError("Нужно русское название нутриента.")
         if self.unit not in {"kcal", "g", "mg", "µg"} or not self.registry_version:
             raise ValueError("Нужны каноническая единица и версия реестра.")
+        if self.definition_text_ru is not None and (
+            not isinstance(self.definition_text_ru, str)
+            or not self.definition_text_ru.strip()
+        ):
+            raise ValueError("Определение нутриента должно быть непустым текстом.")
+        if self.definition_kind is not None and (
+            not isinstance(self.definition_kind, str)
+            or not self.definition_kind.strip()
+        ):
+            raise ValueError("Тип определения нутриента должен быть непустым.")
+
+    @property
+    def semantic_identity(self) -> tuple[str, str]:
+        return (self.registry_version, self.code)
 
 
 @dataclass(frozen=True)

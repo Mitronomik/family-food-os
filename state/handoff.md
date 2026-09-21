@@ -1,5 +1,21 @@
 # Handoff
 
+## Nutrient Registry V2 handoff — 2026-09-21
+
+Accepted base: PR76 merge `011f4b74abd29f7b5ec77ab0f15998f781f43c43`.
+Current branch: `feat/nutrient-registry-v2-adapters`.
+
+Step 2 owns versioned nutrient identity and adapters only. V1 remains immutable;
+V2 uses `(registry_version, code)`, adds RE/NE/tocopherol-equivalent concepts
+and requires explicit method provenance for V2 source-native calculations.
+Existing Composition retention lookups stay V1-pinned.
+
+Migration: `0035_versioned_nutrient_registry`; reserved 0033 remains unused.
+No product publication, source-rights decision, target-table publication or
+Planner/API/UI switch is in scope.
+
+After final review/merge, stop before step 3 transactional publication.
+
 ## PR76 final verification trigger — 2026-09-20
 
 Final task-local corrections are complete: historical regression jobs restore

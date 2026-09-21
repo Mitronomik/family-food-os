@@ -7,7 +7,7 @@ import hashlib
 import json
 from uuid import UUID
 
-from sqlalchemy import column, insert, select, table
+from sqlalchemy import and_, column, insert, select, table
 from sqlalchemy.engine import Connection
 
 from app.domain.food_ingredients import FoodNutritionProfile
@@ -39,6 +39,18 @@ def _verified_bundle(encoded: str, expected_hash: str) -> dict:
     if hashlib.sha256(encoded.encode()).hexdigest() != expected_hash:
         raise ValueError("Нарушена целостность снимка реестра нутриентов.")
     return json.loads(encoded)
+
+
+def _versioned_registry_schema_available(connection: Connection) -> bool:
+    migrations = table("schema_migrations", column("migration_id"))
+    return (
+        connection.execute(
+            select(migrations.c.migration_id).where(
+                migrations.c.migration_id == "0035_versioned_nutrient_registry"
+            )
+        ).first()
+        is not None
+    )
 
 
 def initialize_audited_profile(
@@ -79,9 +91,14 @@ def initialize_audited_profile(
         return
     values, observations = prepared
     if values:
-        connection.execute(
-            insert(nutrient_values), [dict(v, profile_id=profile.id) for v in values]
-        )
+        versioned = _versioned_registry_schema_available(connection)
+        rows = []
+        for value in values:
+            row = dict(value, profile_id=profile.id)
+            if versioned:
+                row["registry_version"] = REGISTRY_VERSION
+            rows.append(row)
+        connection.execute(insert(nutrient_values), rows)
     connection.execute(
         insert(vector_seals).values(
             profile_id=profile.id,
@@ -91,6 +108,40 @@ def initialize_audited_profile(
             observations_json=observations,
         )
     )
+
+
+def _definition_from_row(row) -> NutrientDefinition:
+    payload = json.loads(row["definition_json"])
+    return NutrientDefinition(
+        row["code"],
+        row["display_name_ru"],
+        row["unit"],
+        row["registry_version"],
+        payload.get("definition"),
+        payload.get("definition_kind"),
+    )
+
+
+class SqlAlchemyNutrientRegistryRepository:
+    def __init__(self, connection: Connection) -> None:
+        self._connection = connection
+
+    def get(self, registry_version: str, code: str) -> NutrientDefinition:
+        row = (
+            self._connection.execute(
+                select(nutrient_definitions).where(
+                    nutrient_definitions.c.registry_version == registry_version,
+                    nutrient_definitions.c.code == code,
+                )
+            )
+            .mappings()
+            .one_or_none()
+        )
+        if row is None:
+            raise NutrientVectorUnavailableError(
+                "Определение нутриента для версии реестра недоступно."
+            )
+        return _definition_from_row(row)
 
 
 class SqlAlchemyNutrientVectorRepository:
@@ -117,9 +168,35 @@ class SqlAlchemyNutrientVectorRepository:
             raise NutrientVectorUnavailableError(
                 "Полный проверенный набор нутриентов недоступен."
             )
-        rows = list(
-            self._connection.execute(
+        if _versioned_registry_schema_available(self._connection):
+            statement = (
                 select(nutrient_values, nutrient_definitions)
+                .select_from(
+                    nutrient_values.join(
+                        nutrient_definitions,
+                        and_(
+                            nutrient_values.c.registry_version
+                            == nutrient_definitions.c.registry_version,
+                            nutrient_values.c.nutrient_code
+                            == nutrient_definitions.c.code,
+                        ),
+                    )
+                )
+                .where(
+                    nutrient_values.c.profile_id == profile_id,
+                    nutrient_values.c.registry_version == seal["registry_version"],
+                )
+                .order_by(nutrient_values.c.nutrient_code)
+            )
+        else:
+            statement = (
+                select(
+                    nutrient_values.c.profile_id,
+                    nutrient_values.c.nutrient_code,
+                    nutrient_values.c.amount,
+                    nutrient_values.c.provenance_json,
+                    nutrient_definitions,
+                )
                 .select_from(
                     nutrient_values.join(
                         nutrient_definitions,
@@ -128,8 +205,8 @@ class SqlAlchemyNutrientVectorRepository:
                 )
                 .where(nutrient_values.c.profile_id == profile_id)
                 .order_by(nutrient_values.c.nutrient_code)
-            ).mappings()
-        )
+            )
+        rows = list(self._connection.execute(statement).mappings())
         if (
             len(rows) != seal["value_count"]
             or value_set_digest([dict(row) for row in rows]) != seal["value_sha256"]
@@ -141,14 +218,13 @@ class SqlAlchemyNutrientVectorRepository:
         for row in rows:
             evidence = json.loads(row["provenance_json"])
             observation, mapping = evidence["observation"], evidence["mapping"]
+            if row["registry_version"] != seal["registry_version"]:
+                raise NutrientVectorUnavailableError(
+                    "Определение нутриента не соответствует версии снимка."
+                )
             values.append(
                 NutrientValue(
-                    definition=NutrientDefinition(
-                        row["nutrient_code"],
-                        row["display_name_ru"],
-                        row["unit"],
-                        row["registry_version"],
-                    ),
+                    definition=_definition_from_row(row),
                     amount=row["amount"],
                     provenance=NutrientProvenance(
                         registry_version=seal["registry_version"],

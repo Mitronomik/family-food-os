@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / "backend"))
 sys.path.insert(0, str(ROOT / "scripts"))
 from app.db import migrations  # noqa: E402
 from app.db.config import DatabaseConfig  # noqa: E402
+from app.domain.nutrient_vector_backfill_v1 import REGISTRY_VERSION  # noqa: E402
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine  # noqa: E402
 from app.persistence.sqlalchemy_core.nutrition_read_scope import (  # noqa: E402
     SqlAlchemyNutritionReadScope,
@@ -43,6 +44,52 @@ def seed_previous(config):
         migrations.MIGRATION_MODULES = original
 
 
+def assert_existing_history_preserved(before, config):
+    """Prove pre-0035 facts survive while allowing additive/versioned storage."""
+
+    after = snapshot(config)
+    with sqlite3.connect(config.path) as db:
+        after_v1_snapshot = db.execute(
+            """
+            SELECT version, bundle_json, bundle_sha256
+            FROM nutrient_registry_snapshots
+            WHERE version = ?
+            ORDER BY rowid
+            """,
+            (REGISTRY_VERSION,),
+        ).fetchall()
+        after_v1_definitions = db.execute(
+            """
+            SELECT code, display_name_ru, unit, registry_version, definition_json
+            FROM nutrient_definitions
+            WHERE registry_version = ?
+            ORDER BY rowid
+            """,
+            (REGISTRY_VERSION,),
+        ).fetchall()
+        after_v1_values = db.execute(
+            """
+            SELECT profile_id, nutrient_code, amount, provenance_json
+            FROM nutrient_values
+            WHERE registry_version = ?
+            ORDER BY rowid
+            """,
+            (REGISTRY_VERSION,),
+        ).fetchall()
+
+    assert after_v1_snapshot == before["nutrient_registry_snapshots"]
+    assert after_v1_definitions == before["nutrient_definitions"]
+    assert after_v1_values == before["nutrient_values"]
+    for name, rows in before.items():
+        if name not in {
+            "nutrient_registry_snapshots",
+            "nutrient_definitions",
+            "nutrient_values",
+        }:
+            assert after[name] == rows
+    return after
+
+
 def measure(config):
     seed_previous(config)
     before, ready_before = snapshot(config), readiness(config)
@@ -51,8 +98,8 @@ def measure(config):
             "SELECT migration_id FROM schema_migrations ORDER BY rowid DESC LIMIT 1"
         ).fetchone()[0]
     applied = migrations.apply_migrations(config)
-    after, ready_after = snapshot(config), readiness(config)
-    assert all(after[name] == rows for name, rows in before.items())
+    ready_after = readiness(config)
+    after = assert_existing_history_preserved(before, config)
     assert ready_after == ready_before
     with sqlite3.connect(config.path) as db:
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []

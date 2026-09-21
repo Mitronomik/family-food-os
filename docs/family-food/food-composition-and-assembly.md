@@ -684,3 +684,17 @@ Historical V1 values/registry/calculations remain unchanged. Runtime persistence
 profile/schema migration, catalogue publication, source reuse and Planner/API/UI
 default changes are separate gated operations; no clinical scope, exact-zero
 claim, allergen absence or source permission is inferred.
+
+
+## Registry-version boundary for existing Composition snapshots — 2026-09-21
+
+Nutrient Registry V2 does not retroactively change the meaning of accepted
+Composition Core snapshots. Existing retention-profile validation and legacy
+`nutrient_definition(code)` reads remain pinned to
+`PR6_NUTRIENT_VECTOR_A_V1`.
+
+A separate version-aware registry reader exposes `(registry_version, code)` for
+new bounded consumers. New V2 food publication may pin V2 vectors, but existing
+V1 ATOMIC compositions and transformation/retention evidence retain their
+original registry semantics. Plan step 7 owns explicit applicability/versioning
+for technological retention coefficients; step 2 does not reinterpret them.

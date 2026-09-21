@@ -1,9 +1,9 @@
 # DC2 profile compatibility change — staged implementation contract
 
-Status: the storage/migration slice was explicitly authorized by the user's
-post-PR75 implementation plan and is implemented in the bounded partial-profile
-PR. Registry/adapters, transactional publication and production food publication
-remain later separate steps of that approved sequence.
+Status: storage is accepted in merged PR76 at
+`011f4b74abd29f7b5ec77ab0f15998f781f43c43`. Step 2 implements the
+versioned nutrient registry/adapters. Transactional publication and production
+food publication remain later separate steps of the approved sequence.
 
 ## Concrete conflict
 
@@ -72,7 +72,8 @@ storage. This bounded slice permits explicit unknown legacy macro storage,
 immutable source-observation state and migration `0034`, while preserving all
 existing current profiles and holding production publication.
 
-The remaining items in this document are not collapsed into this PR:
-new registry/adapters are the next bounded step; transactional profile/vector/
-ATOMIC publication follows separately; Book2002 source-use approval and actual
-production publication remain independent gates.
+The remaining items are intentionally staged. Step 2 provides a versioned
+registry and method adapters without publishing product values. Step 3 is the
+next bounded operation: transactional profile/vector/ATOMIC publication.
+Book2002 source-use approval and actual production food publication remain
+independent gates.
