@@ -250,6 +250,10 @@ def decode_v2_value_evidence(
     source_locator = _text(observation["source_locator"], label="source_locator")
     _optional_text(observation["uncertainty"], label="uncertainty")
     mapping_status = _text(mapping["mapping_status"], label="mapping_status")
+    if mapping_status not in {"EXACT", "METHOD_SPECIFIC"}:
+        raise NutrientValueEvidenceError(
+            "Числовое значение V2 требует разрешённый reviewed mapping status."
+        )
     definition_reference = _text(
         mapping["definition_reference"], label="definition_reference"
     )
