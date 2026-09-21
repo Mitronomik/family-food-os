@@ -32,6 +32,10 @@ class SqlAlchemyCompositionReadScope(SqlAlchemyReadOnlyScope):
     def nutrient_registry(self) -> SqlAlchemyNutrientRegistryRepository:
         return SqlAlchemyNutrientRegistryRepository(self.adapter_connection)
 
+    @property
+    def nutrient_registry(self) -> SqlAlchemyNutrientRegistryRepository:
+        return SqlAlchemyNutrientRegistryRepository(self.adapter_connection)
+
 
 class SqlAlchemyCompositionUnitOfWork(SqlAlchemyUnitOfWork):
     def __enter__(self) -> Self:
