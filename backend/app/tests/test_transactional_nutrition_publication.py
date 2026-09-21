@@ -910,4 +910,3 @@ def test_publication_domain_and_service_layers_remain_driver_independent():
             for name in imports
             for token in ("sqlalchemy", "sqlite3")
         )
-
