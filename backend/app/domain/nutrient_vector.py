@@ -39,6 +39,10 @@ class NutrientDefinition:
         ):
             raise ValueError("Тип определения нутриента должен быть непустым.")
 
+    @property
+    def semantic_identity(self) -> tuple[str, str]:
+        return (self.registry_version, self.code)
+
 
 @dataclass(frozen=True)
 class NutrientProvenance:
@@ -59,17 +63,6 @@ class NutrientProvenance:
     estimated: bool | None
     evidence_json: str
     origin: str = "SOURCE_COMPONENT_CONFIRMED"
-
-
-@dataclass(frozen=True)
-class NutrientValue:
-    definition: NutrientDefinition
-    amount: Decimal
-    provenance: NutrientProvenance
-
-    @property
-    def semantic_identity(self) -> tuple[str, str]:
-        return (self.registry_version, self.code)
 
 
 @dataclass(frozen=True)
