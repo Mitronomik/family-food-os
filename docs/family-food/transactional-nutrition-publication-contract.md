@@ -82,6 +82,52 @@ That shape is valid historical V1 evidence, but it is not a FamilyFoodOS-wide so
 
 The normalized envelope is a persistence/application contract, not permission to discard original raw/source evidence. Original evidence remains referenced by immutable provenance/receipts.
 
+
+#### V2 normalized value-evidence envelope
+
+Step 3 freezes the persisted V2 value-evidence shape before runtime implementation. Canonical JSON uses the following semantic structure:
+
+```json
+{
+  "schema_version": "FFO_NUTRIENT_VALUE_EVIDENCE_V2",
+  "registry_version": "RU_NUTRIENT_REGISTRY_V2",
+  "method_code": "<supported ObservationMethod>",
+  "origin": "SOURCE_COMPONENT_CONFIRMED",
+  "observation": {
+    "audit_identity": "<stable review/evidence identity>",
+    "profile_source_name": "<source>",
+    "profile_source_id": "<source food/profile identity>",
+    "profile_source_version": "<source release/version>",
+    "profile_source_data_type": "<source data type or null>",
+    "source_component_id": "<source/evidence component identity>",
+    "source_component_name": "<source component name>",
+    "source_unit": "<source unit>",
+    "source_value": "<canonical Decimal string>",
+    "source_observation_id": "<stable source/evidence observation identity>",
+    "source_derivation_id": "<source derivation identity or null>",
+    "source_locator": "<reviewable locator>",
+    "uncertainty": "<explicit uncertainty text or null>"
+  },
+  "mapping": {
+    "canonical_code": "<V2 nutrient code>",
+    "mapping_status": "<reviewed mapping status>",
+    "definition_reference": "<reviewed definition/mapping reference>"
+  }
+}
+```
+
+Rules:
+
+- `method_code` is a **top-level** field because the merged V2 method adapter consumes that field directly. The decoder must not search nested structures or infer a method.
+- `registry_version` must equal the seal/requested registry and is checked rather than inferred.
+- `canonical_code` must equal the persisted nutrient row code and must exist under the V2 registry.
+- `source_value` is a Decimal string, never float/JSON number, and must agree with the reviewed source evidence used for the persisted amount.
+- `source_component_id` and `source_observation_id` are stable evidence identities. They need not be retailer/USDA-style numeric IDs; repository-owned review IDs are valid when the source has no native identifier.
+- no V2 field named `source_nutrient_nbr` is required. The V2 decoder maps generic component fields into domain `NutrientProvenance` and sets optional legacy `source_nutrient_nbr=None` when unavailable.
+- `origin` for a persisted numeric Step 3 value is explicit and must represent a reviewed usable source component; held/missing observations stay in vector `observations_json` rather than becoming numeric nutrient rows.
+- `source_locator` and `definition_reference` are required review receipts, not display text.
+- extra unreviewed keys do not grant authority. The decoder validates the closed required contract and ignores no conflicting duplicate semantic field.
+
 ### 2.7 Legacy CompositionCalculator remains V1-pinned
 
 After PR77, `SqlAlchemyFoodCompositionRepository.nutrient_definition(code)` deliberately resolves V1 definitions for the legacy Composition engine. `CompositionCalculator` compares ATOMIC vector definitions with those V1 definitions.
@@ -145,7 +191,7 @@ Before the first database mutation, validate every condition that does not requi
 - no equal-unit substitution is used for incompatible definitions;
 - vector `value_count` and `value_sha256` match the canonical ordered values;
 - vector/profile source provenance agrees;
-- V2 value provenance uses the source-neutral V2 envelope, round-trips through the V2 decoder and exposes explicit supported `method_code` without fabricated source-specific fields;
+- V2 value provenance exactly matches `FFO_NUTRIENT_VALUE_EVIDENCE_V2`, round-trips through the V2 decoder and exposes a top-level explicit supported `method_code` without fabricated source-specific fields;
 - ATOMIC composition references the same FoodIngredient/profile identity and has an explicit mass state/version;
 - publication provenance is non-empty and reviewable.
 
@@ -282,7 +328,7 @@ The implementation PR is not review-ready until it proves at least:
 2. **fresh partial V2 bundle** publishes with explicit unknown observations and no invented zero;
 3. V2 vector is readable by the version-aware vector reader;
 4. V2 ATOMIC composition is readable and binds to the same ingredient/profile/vector;
-5. source-neutral V2 provenance round-trips through `NutrientVectorReader` without invented FDC/source-specific identifiers; `source_nutrient_nbr=None` is accepted for a V2 source while V1 remains populated;
+5. `FFO_NUTRIENT_VALUE_EVIDENCE_V2` round-trips through `NutrientVectorReader`; top-level `method_code` is required, nested-only/missing methods fail closed, and `source_nutrient_nbr=None` is accepted for V2 while V1 remains populated;
 6. `NutritionMethodologyService.atomic_input` can consume a supported V2 value only with valid explicit method evidence;
 7. legacy V1 provenance reads and legacy V1 `CompositionCalculator` behavior remain unchanged;
 8. exact replay produces zero writes and stable IDs;
