@@ -36,7 +36,8 @@ RECIPE_REVISION_MIGRATION_ID = "0027_recipe_same_source_revisions"
 VECTOR_MIGRATION_ID = "0028_normalized_nutrient_vector"
 COMPOSITION_MIGRATION_ID = "0029_food_composition_core"
 MEAL_PLAN_MIGRATION_ID = "0032_meal_plan_serving"
-HEAD_MIGRATION_ID = "0034_partial_nutrition_profiles"
+PARTIAL_PROFILE_MIGRATION_ID = "0034_partial_nutrition_profiles"
+HEAD_MIGRATION_ID = "0035_versioned_nutrient_registry"
 TABLE = "artifact_audit_operations"
 
 
@@ -178,6 +179,7 @@ def test_a_database_at_0019_reports_0020_then_0021_pending(tmp_path):
         "0030_recipe_source_corpus",
         "0031_meal_pattern_catalogue",
         MEAL_PLAN_MIGRATION_ID,
+        PARTIAL_PROFILE_MIGRATION_ID,
         HEAD_MIGRATION_ID,
     ]
 
@@ -203,6 +205,7 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         "0030_recipe_source_corpus",
         "0031_meal_pattern_catalogue",
         MEAL_PLAN_MIGRATION_ID,
+        PARTIAL_PROFILE_MIGRATION_ID,
         HEAD_MIGRATION_ID,
     ]
     assert snapshot(database_path) == before
@@ -621,6 +624,7 @@ def test_user_mode_startup_backs_up_before_applying_0020(monkeypatch, tmp_path):
         "0030_recipe_source_corpus",
         "0031_meal_pattern_catalogue",
         MEAL_PLAN_MIGRATION_ID,
+        PARTIAL_PROFILE_MIGRATION_ID,
         HEAD_MIGRATION_ID,
     ]
     assert result.backup is not None
