@@ -450,7 +450,7 @@ def test_0035_version_pins_existing_retention_rows_without_changing_values(tmp_p
     finally:
         engine.dispose()
 
-    before = retention_rows(config.path)
+    before = retention_rows(config.path, versioned=False)
     assert len(before) == 1
 
     assert apply_migrations(config) == [MIGRATION.MIGRATION_ID]
