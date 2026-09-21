@@ -478,3 +478,28 @@ def test_0035_version_pins_existing_retention_rows_without_changing_values(tmp_p
                 "UPDATE food_retention_values SET factor = factor WHERE profile_id = ?",
                 (before[0][0],),
             )
+
+
+def test_registry_v2_embeds_fail_closed_appendix2_source_receipt():
+    root = Path(__file__).resolve().parents[3]
+    registry = json.loads(
+        (root / "data/curation/nutrient-registry-v2/registry.json").read_text()
+    )
+    receipt = registry["source_receipts"]["RU-MR-APPENDIX-2"]
+    assert receipt["document"] == "МР 2.3.1.0253-21"
+    assert (
+        receipt["locator"]
+        == "Приложение 2 — коэффициенты пересчета для эквивалентов витаминов"
+    )
+    assert (
+        receipt["source_sha256"]
+        == "cf96c7ea7fab087d16b478b2c8c097406d7572e495b2beb43405e4fd05917d79"
+    )
+    assert set(receipt["scope"]) == {
+        "VITAMIN_A_RE",
+        "NIACIN_EQUIVALENT",
+        "VITAMIN_E_TOCOPHEROL_EQUIVALENT",
+    }
+    by_code = {row["canonical_code"]: row for row in registry["entries"]}
+    for code in receipt["scope"]:
+        assert by_code[code]["source_evidence_refs"] == ["RU-MR-APPENDIX-2"]
