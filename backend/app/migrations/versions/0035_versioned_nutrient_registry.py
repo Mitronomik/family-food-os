@@ -105,6 +105,10 @@ def _drop_rebuild_triggers(connection):
         "nutrient_values_no_delete",
         "nutrient_values_no_late_insert",
         "nutrition_vector_seals_complete",
+        "food_retention_values_no_update",
+        "food_retention_values_no_delete",
+        "food_retention_values_no_replace",
+        "food_retention_values_no_late_insert",
     ):
         connection.execute(f"DROP TRIGGER IF EXISTS {name}")
 
@@ -171,6 +175,39 @@ def _recreate_triggers(connection):
     )
 
 
+
+def _recreate_retention_triggers(connection):
+    connection.execute(
+        """CREATE TRIGGER food_retention_values_no_update
+        BEFORE UPDATE ON food_retention_values
+        BEGIN SELECT RAISE(ABORT, 'Исторический состав неизменяем.'); END"""
+    )
+    connection.execute(
+        """CREATE TRIGGER food_retention_values_no_delete
+        BEFORE DELETE ON food_retention_values
+        BEGIN SELECT RAISE(ABORT, 'Исторический состав неизменяем.'); END"""
+    )
+    connection.execute(
+        """CREATE TRIGGER food_retention_values_no_replace
+        BEFORE INSERT ON food_retention_values
+        WHEN EXISTS(
+            SELECT 1 FROM food_retention_values
+            WHERE profile_id = NEW.profile_id
+              AND nutrient_code = NEW.nutrient_code
+        )
+        BEGIN SELECT RAISE(ABORT, 'Исторический состав неизменяем.'); END"""
+    )
+    connection.execute(
+        """CREATE TRIGGER food_retention_values_no_late_insert
+        BEFORE INSERT ON food_retention_values
+        WHEN EXISTS(
+            SELECT 1 FROM food_retention_profiles
+            WHERE id = NEW.profile_id
+        )
+        BEGIN SELECT RAISE(ABORT, 'Снимок уже зафиксирован.'); END"""
+    )
+
+
 def upgrade(connection):
     v2, adapters = load_contract()
     _drop_rebuild_triggers(connection)
@@ -197,6 +234,42 @@ def upgrade(connection):
     connection.execute("DROP TABLE nutrient_definitions")
     connection.execute(
         "ALTER TABLE nutrient_definitions_new RENAME TO nutrient_definitions"
+    )
+
+    # PR6 Composition retention snapshots are historical V1 evidence. Their
+    # nutrient-code FK must become version-aware at the same migration boundary
+    # without changing domain snapshot digests or reinterpreting any factor.
+    connection.execute(
+        """CREATE TABLE food_retention_values_new (
+            profile_id CHAR(32) NOT NULL
+                REFERENCES food_retention_profiles(id)
+                ON DELETE RESTRICT DEFERRABLE INITIALLY DEFERRED,
+            registry_version TEXT NOT NULL,
+            nutrient_code TEXT NOT NULL,
+            factor TEXT NOT NULL
+                CHECK(typeof(factor) = 'text'
+                    AND factor NOT GLOB '*[^0-9.]*'
+                    AND factor GLOB '*[0-9]*'
+                    AND length(factor) - length(replace(factor, '.', '')) <= 1),
+            provenance_json TEXT NOT NULL CHECK(json_valid(provenance_json)),
+            PRIMARY KEY(profile_id, nutrient_code),
+            FOREIGN KEY(registry_version, nutrient_code)
+                REFERENCES nutrient_definitions(registry_version, code)
+                ON DELETE RESTRICT
+        )"""
+    )
+    connection.execute(
+        """INSERT INTO food_retention_values_new (
+            profile_id, registry_version, nutrient_code, factor, provenance_json
+        )
+        SELECT
+            profile_id, ?, nutrient_code, factor, provenance_json
+        FROM food_retention_values""",
+        (REGISTRY_V1,),
+    )
+    connection.execute("DROP TABLE food_retention_values")
+    connection.execute(
+        "ALTER TABLE food_retention_values_new RENAME TO food_retention_values"
     )
 
     connection.execute(
@@ -258,3 +331,4 @@ def upgrade(connection):
         )
 
     _recreate_triggers(connection)
+    _recreate_retention_triggers(connection)
