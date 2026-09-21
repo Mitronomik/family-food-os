@@ -164,6 +164,32 @@ to full regression. Run required checks, report exact failures/unavailable check
 and never claim an unexecuted check passed. Repeat or broaden after changes,
 failure/fix or a concrete unresolved concern, not merely because checks exist.
 
+## Pre-implementation contract gate
+
+Before runtime implementation that changes a persisted identity/version, migration
+boundary, cross-context transaction, authoritative data publication path or another
+high-coupling immutable contract, create a **docs-only Implementation Contract Gate**
+first. The gate must be reviewed and merged before runtime code starts.
+
+The contract must record the accepted base and bounded goal, dependency inventory,
+preservation matrix, fresh/replay/conflict semantics where persistence is involved,
+rollback/failure-injection points, provenance/source authority, exact non-goals,
+adversarial acceptance tests and the required verification tier. QA/reviewer work
+must challenge the contract before implementation so hidden coupling is found
+before the first runtime commit.
+
+Do not silently expand implementation when preflight discovers a new schema,
+migration, bounded-context dependency or authority decision. Stop, update the
+contract and obtain the required decision. For schema-sensitive work, a
+"no new migration" assumption is itself part of the gate and must be re-opened
+if implementation disproves it.
+
+After runtime behavior is frozen, run broad exact-head verification once as
+required by the verification policy. Any later runtime change invalidates that
+exact-head receipt and requires the affected/broad checks again. Documentation-
+only corrections after runtime freeze use proportional verification and do not
+automatically invalidate byte-identical runtime evidence.
+
 ## Public repository and durable memory
 
 Never commit secrets, credentials, `.env`, real personal/health records, local

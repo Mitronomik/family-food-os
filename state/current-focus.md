@@ -4,61 +4,68 @@ Updated: `2026-09-21`.
 
 ## Accepted state
 
-PR76 is merged at `011f4b74abd29f7b5ec77ab0f15998f781f43c43`.
+PR77 is merged into `main` at `5343734e620c9f36d24aad54320c2196588b004d`.
 
-The user-approved Russian-data integration sequence remains:
+Accepted Russian-data integration sequence:
 
 `partial profile storage → registry/adapters → transactional publication → first
 Russian food batch → Russian reference table → persisted methodology selection →
 transformation applicability → recipe-dependency food batch → executable Russian
 recipes → Planner integration`.
 
-Step 1 is accepted. Current bounded work is **step 2: nutrient registry V2 and
-Russian method/reference adapters**.
+Steps 1 and 2 are accepted. The user approved the new pre-implementation process.
+Current bounded work is **Step 3A — Implementation Contract Gate for transactional
+profile/vector/ATOMIC publication**.
 
-## Current authorized boundary
+## Current authorization
 
-Step 2:
+This branch is docs/state/instructions only.
 
-- preserves immutable `PR6_NUTRIENT_VECTOR_A_V1` definitions, values, seals and
-  existing ATOMIC/Composition semantics;
-- introduces `RU_NUTRIENT_REGISTRY_V2` as a complete reviewed definition
-  snapshot;
-- changes persisted nutrient-definition identity to
-  `(registry_version, nutrient_code)` through
-  `0035_versioned_nutrient_registry`;
-- migrates existing V1 value rows by copying the registry version already pinned
-  by their seal; V1 amounts/provenance/seals are unchanged;
-- makes V2 `CARBOHYDRATE_AVAILABLE` definition independent from the observation
-  method and requires an explicit supported method in V2 value provenance;
-- adds distinct V2 concepts `VITAMIN_A_RE`, `NIACIN_EQUIVALENT` and
-  `VITAMIN_E_TOCOPHEROL_EQUIVALENT`;
-- authorizes no implicit RE↔RAE, NE↔niacin, tocopherol-equivalent↔alpha-tocopherol
-  or unspecified-folate conversion;
-- keeps legacy Composition nutrient-definition reads explicitly pinned to V1;
-- exposes a new version-aware registry read port for later publication/target
-  consumers.
+It may:
 
-Reserved `0033_recipe_template_catalogue` remains unused. Forward migration
-history is `... → 0032 → 0034 → 0035`; a future reserved 0033 implementation
-must append after already accepted later migrations.
+- inventory Step 3 dependencies and hidden coupling;
+- freeze fresh/replay/conflict/rollback semantics;
+- freeze the preservation matrix and adversarial test plan;
+- record the no-new-migration decision;
+- update AGENTS so future high-coupling work uses the same contract-gate process.
+
+It must not implement the runtime publisher or publish production nutrition data.
+
+Canonical Step 3 contract:
+`docs/family-food/transactional-nutrition-publication-contract.md`.
+
+## Preflight decisions
+
+- no new migration is required by the accepted schema; if implementation disproves
+  this, stop for a separate architecture decision;
+- generic complete-profile insertion keeps its historical V1 auto-bootstrap;
+- Step 3 must use a specialized profile publication writer that does not create a
+  V1 seal;
+- Step 3 profiles are non-current, including complete profiles;
+- V2 registry identity is explicit and fixed to `RU_NUTRIENT_REGISTRY_V2`;
+- ATOMIC composition version is explicit input, never silently auto-incremented;
+- one existing project UoW owns the whole fresh write;
+- exact replay is zero-write; conflicting or partial pre-existing state fails closed;
+- V2 provenance uses a source-neutral envelope/decoder; V1 persisted provenance and decoder remain unchanged; `source_nutrient_nbr` is optional legacy/source metadata for V2;
+- legacy CompositionCalculator remains V1-pinned; V2 transformation/composition calculation is not Step 3.
 
 ## Acceptance
 
-Review-ready requires:
+The contract gate is review-ready when docs/state/AGENTS agree on:
 
-- exact V1 snapshot/definition/value/seal preservation through 0035;
-- simultaneous storage/read of the same stable code under V1 and V2;
-- V2 available-carbohydrate methods accepted only from explicit provenance;
-- incompatible vitamin/carbohydrate definitions never substitute by equal unit;
-- migration failure rolls back schema/data/marker;
-- existing V1 vector/Composition/Nutrition behavior remains green;
-- full backend and launcher regression with `AI_ENABLED=false`.
+- dependency inventory;
+- preservation matrix;
+- fresh/replay/conflict/rollback behavior;
+- source/provenance boundaries;
+- no-schema-change assumption;
+- adversarial implementation tests;
+- exact final verification tier.
 
 ## Stop boundary
 
-After review/merge, stop before step 3: transactional publication of a reviewed
-`FoodIngredient → profile → V2 NutrientVector → ATOMIC` bundle.
+After this docs-only gate is reviewed/merged, stop for runtime Step 3
+implementation authorization under the frozen contract.
 
-Do not publish Russian food profiles/values, target tables, methodology selection,
-Planner/API/UI defaults, recipes, DC4/Gate1 or Shopping automatically.
+Do not start Step 4 food publication, source-rights approval, target tables,
+methodology selection, transformation applicability, recipes, Planner, Gate1,
+Shopping, API/UI or AI work automatically.

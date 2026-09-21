@@ -1,5 +1,30 @@
 # Progress
 
+## Step 3 Implementation Contract Gate — 2026-09-21
+
+PR77 is merged at `5343734e620c9f36d24aad54320c2196588b004d`. The user accepted a new process: high-coupling
+runtime work now receives a docs-only contract/adversarial preflight before code.
+
+Step 3 preflight found the main hidden coupling before implementation: complete
+`FoodNutritionProfile` insertion auto-bootstraps historical V1, which conflicts
+with publishing one V2 seal for the same profile. The contract therefore requires
+a specialized no-V1-bootstrap publication writer while preserving generic legacy
+behavior.
+
+The existing 0034/0035/Composition schema is sufficient; Step 3 assumes no new
+migration. The contract defines one-UoW write order, non-current publication,
+explicit V2 registry/version, explicit ATOMIC version, exact replay with zero
+writes, fail-closed conflicts, rollback injection points and the final regression
+tier. No runtime code or production Russian values are included in this gate.
+
+Additional preflight found two more hidden cross-context assumptions before code:
+the nutrient-vector reader still decodes V1/FDC-shaped provenance, and the legacy
+CompositionCalculator deliberately resolves V1 nutrient definitions. The Step 3
+contract now requires source-neutral V2 provenance decoding while freezing V1
+evidence/decoder behavior, and explicitly leaves V2 transformation/Composition
+calculation for Step 7.
+
+
 ## PR77 registry V2 delivery trigger — 2026-09-21
 
 PR #77 is open from merged PR76 main. The bounded implementation now includes

@@ -1,5 +1,41 @@
 # Handoff
 
+## Step 3 transactional publication contract gate — 2026-09-21
+
+Accepted main: `5343734e620c9f36d24aad54320c2196588b004d` (merged PR #77).
+Current branch: `docs/step3-transactional-publication-contract`.
+
+The user accepted the new pre-implementation process. This branch contains no
+runtime/schema/data publication. It freezes the Step 3 contract before code.
+
+Critical preflight finding: generic complete-profile repository insertion
+automatically creates a V1 vector seal. Since one profile can have only one
+immutable seal, Step 3 requires a specialized reviewed profile writer that
+persists the profile/observations without legacy V1 bootstrap. Existing generic
+behavior must remain unchanged.
+
+No new migration is expected: 0034 supports partial profiles, 0035 supports
+versioned nutrient values/seals, and ATOMIC Composition already references the
+sealed profile. If implementation later needs a schema change, stop.
+
+Two further preflight boundaries are frozen:
+
+- the current vector reader decodes historical V1/FDC-shaped provenance; Step 3
+  must add source-neutral V2 provenance decoding without fabricating FDC fields
+  or rewriting V1 evidence; `source_nutrient_nbr` becomes optional legacy/source
+  metadata for V2 while historical V1 reads retain their exact value;
+- legacy CompositionCalculator intentionally reads V1 definitions. Step 3 must
+  not make it V2-aware. V2 ATOMIC validation uses the version-aware vector reader
+  and NutritionMethodologyService; transformation applicability remains Step 7.
+
+Read:
+`docs/family-food/transactional-nutrition-publication-contract.md`.
+
+After this contract PR is reviewed/merged, do not start runtime implementation
+without the next explicit authorization. Step 4 production food publication and
+source-use decisions remain separate.
+
+
 ## Nutrient Registry V2 handoff — 2026-09-21
 
 Accepted base: PR76 merge `011f4b74abd29f7b5ec77ab0f15998f781f43c43`.
