@@ -21,6 +21,9 @@ The contract freezes:
 - below-detection → no numeric row;
 - ash/organic acids → source-only evidence;
 - one atomic five-food batch transaction;
+- a new batch-orchestration seam because Step 3 `publish()` currently owns and
+  commits its own UoW; Step 4 must reuse a transaction-neutral bundle operation
+  and commit all five once;
 - no migration/schema change.
 
 Critical blocker: accepted source evidence still says

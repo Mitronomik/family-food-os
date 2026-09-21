@@ -20,7 +20,10 @@ Preflight result:
 - 60 reviewed source cells imply 37 positive canonical V2 values, with
   below-detection values remaining nonnumeric and ash/organic acids retained only
   as source observations;
-- Step 4 must be one five-food transaction, not five independent commits.
+- Step 4 must be one five-food transaction, not five independent commits;
+- adversarial preflight confirmed a hidden transaction-ownership coupling:
+  Step 3 `publish()` commits its own UoW, so Step 4 requires a bounded
+  transaction-neutral bundle seam plus a batch service owning the single commit.
 
 The source-authority gate remains unresolved. Current repository evidence is
 `BLOCKED_PENDING_RIGHTS_REVIEW`; public viewing/access and the official Excel

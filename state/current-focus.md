@@ -27,6 +27,7 @@ It may:
 - freeze explicit ATOMIC versions;
 - freeze V2 nutrient mappings and expected row counts;
 - define batch-level atomic/replay/conflict/rollback semantics;
+- freeze the transaction-neutral bundle-operation + one-UoW batch orchestration seam;
 - record the source-authority gate and public-repository coupling;
 - define adversarial acceptance for the later data/runtime PR.
 
@@ -50,7 +51,10 @@ Candidate batch:
 Expected V2 positive rows: `4 + 8 + 8 + 8 + 9 = 37`, with all 60 reviewed
 source cells retained and 15 below-detection cells remaining nonnumeric.
 
-No migration is expected.
+No migration is expected. Step 4 does require a bounded application refactor:
+the existing committing single-bundle publisher remains public/unchanged, while a
+transaction-neutral bundle operation is reused by a new five-bundle batch service
+that owns one UoW and one commit.
 
 ## Blocking gate
 

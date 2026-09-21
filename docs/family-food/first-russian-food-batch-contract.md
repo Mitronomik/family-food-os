@@ -1,9 +1,9 @@
 # First Russian Food Batch — Implementation Contract Gate
 
-**Status:** pre-implementation contract for Russian-data integration Step 4  
-**Accepted base:** `0ee9e5a3335e876d5a1de6a2c32ea245efe8e5e6` (merged PR #79 / Step 3 transactional publication)  
-**Runtime/schema/data publication in this gate:** none  
-**Gate result:** **TECHNICALLY READY / BLOCKED BY SOURCE AUTHORITY**  
+**Status:** pre-implementation contract for Russian-data integration Step 4
+**Accepted base:** `0ee9e5a3335e876d5a1de6a2c32ea245efe8e5e6` (merged PR #79 / Step 3 transactional publication)
+**Runtime/schema/data publication in this gate:** none
+**Gate result:** **TECHNICALLY READY / BLOCKED BY SOURCE AUTHORITY**
 **Candidate batch:** exactly five reviewed Book2002 source records
 
 ## 1. Goal
@@ -416,22 +416,47 @@ Fail the entire batch with no writes for any mismatch including:
 
 No automatic repair, version bump or source substitution exists.
 
-## 14. Transaction boundary
+## 14. DECISION — batch transaction orchestration
 
 All five foods are one reviewed publication batch.
 
-**DECISION:** the implementation uses one project UoW and one commit for the
-entire five-food batch, calling the accepted Step 3 publication mechanics without
-nested commits.
+Step 3's existing public `ReviewedNutritionPublicationService.publish()` owns its
+own UoW and commits one bundle. Calling that public method five times would create
+five independent transactions and would violate Step 4 atomicity.
 
-A failure on food 5 must roll back foods 1–4 from that attempt.
+**DECISION:** Step 4 introduces a bounded batch-orchestration seam without changing
+the accepted single-bundle behavior.
 
-If the existing Step 3 service cannot compose five bundles inside one outer UoW
-without nested commit, do not weaken atomicity. Reopen the contract for a
-batch-orchestration seam rather than committing five independent publications.
+Required design:
 
-This is a required implementation preflight because Step 3 currently proves
-single-bundle atomicity, while Step 4 requires a batch-level atomic decision.
+```text
+ReviewedNutritionBatchPublicationService.publish_batch(five bundles)
+    ↓ opens one NutritionPublicationUnitOfWork
+transaction-neutral reviewed bundle operation
+    ↓ food 1
+    ↓ food 2
+    ↓ food 3
+    ↓ food 4
+    ↓ food 5
+verify complete five-food batch
+    ↓
+single commit
+```
+
+Implementation may refactor the Step 3 service so its existing public
+`publish(bundle)` becomes a one-bundle wrapper around a transaction-neutral
+internal/application operation. The existing `publish(bundle)` API and all
+accepted fresh/replay/conflict/rollback semantics must remain unchanged.
+
+The batch service must not call the committing public `publish()` method from
+inside another UoW.
+
+A failure or conflict on food 5 must roll back fresh writes for foods 1–4 from that
+attempt. Exact replay of all five performs zero writes and one read transaction
+with no commit-side mutations.
+
+No generic ingestion platform, distributed transaction mechanism or new database
+abstraction is introduced by this seam.
 
 ## 15. Preservation matrix
 
@@ -481,14 +506,16 @@ Runtime/data implementation is not review-ready until it proves at least:
     accepted explicit method;
 11. ash/organic acids remain source-only evidence;
 12. canonical V2 evidence/authority receipt round-trips;
-13. fresh five-food batch commits once;
-14. exact full-batch replay writes zero rows;
-15. conflict on any one food leaves all five unchanged;
-16. injected failure after each food/boundary rolls back the whole batch;
-17. unexpected ATOMIC-version occupation fails instead of auto-incrementing;
-18. V1 and Step 3 regressions remain green;
-19. foreign-key integrity remains clean;
-20. no blocked source values are committed before the authority gate clears.
+13. existing single-bundle Step 3 `publish()` behavior remains unchanged after the transaction-neutral refactor;
+14. fresh five-food batch commits once;
+15. exact full-batch replay writes zero rows;
+16. conflict on any one food leaves all five unchanged;
+17. injected failure after each food/boundary rolls back the whole batch;
+18. nested use of the committing single-bundle `publish()` is rejected/not used by the batch path;
+19. unexpected ATOMIC-version occupation fails instead of auto-incrementing;
+20. V1 and Step 3 regressions remain green;
+21. foreign-key integrity remains clean;
+22. no blocked source values are committed before the authority gate clears.
 
 ## 18. Verification tier
 
