@@ -10,12 +10,15 @@ from app.db import migrations
 from app.db.config import DatabaseConfig
 from app.db.migrations import apply_migrations, current_migrations, expected_migration_ids
 from app.domain.nutrient_method_adapters import (
+    ADAPTER_VERSION_V2,
     REGISTRY_V2,
     NutrientMethodAdapterError,
+    binding_for_kind,
     resolve_method,
 )
 from app.domain.nutrient_vector_backfill_v1 import REGISTRY_VERSION as REGISTRY_V1
 from app.domain.nutrition_methodology import NutrientKind, ObservationMethod
+from pathlib import Path
 from app.domain.reference_comparison import DailyNutrientAmount, compare_daily_reference
 from app.domain.russian_reference_targets import RussianReferenceRow
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
@@ -324,3 +327,56 @@ def test_migration_chain_advances_without_consuming_reserved_0033():
         "0035_versioned_nutrient_registry",
     ]
     assert not any(value.startswith("0033_") for value in expected)
+
+
+def test_committed_adapter_contract_matches_runtime_bindings():
+    root = Path(__file__).resolve().parents[3]
+    contract = json.loads(
+        (
+            root
+            / "data/curation/nutrient-registry-v2/method-adapters.json"
+        ).read_text()
+    )
+    assert contract["version"] == ADAPTER_VERSION_V2
+    assert contract["registry_version"] == REGISTRY_V2
+    for row in contract["bindings"]:
+        kind = NutrientKind(row["nutrient_kind"])
+        binding = binding_for_kind(REGISTRY_V2, kind)
+        assert binding.nutrient_code == row["canonical_code"]
+        assert {method.value for method in binding.allowed_methods} == set(
+            row["allowed_methods"]
+        )
+
+
+def test_reference_compatibility_matrix_names_exact_v2_concepts():
+    root = Path(__file__).resolve().parents[3]
+    matrix = json.loads(
+        (
+            root
+            / "data/curation/russian-methodology/reference-compatibility.json"
+        ).read_text()
+    )
+    assert matrix["registry_v2"] == REGISTRY_V2
+    by_reference = {
+        row["reference_definition"]: row for row in matrix["comparisons"]
+    }
+    assert (
+        by_reference["available_carbohydrate"]["registry_v2_reference_code"]
+        == "CARBOHYDRATE_AVAILABLE"
+    )
+    assert (
+        by_reference["vitamin_a_retinol_equivalent"]["registry_v2_reference_code"]
+        == "VITAMIN_A_RE"
+    )
+    assert (
+        by_reference["niacin_equivalent"]["registry_v2_reference_code"]
+        == "NIACIN_EQUIVALENT"
+    )
+    assert (
+        by_reference["tocopherol_equivalent"]["registry_v2_reference_code"]
+        == "VITAMIN_E_TOCOPHEROL_EQUIVALENT"
+    )
+    assert (
+        by_reference["folates_source_unspecified"]["registry_v2_reference_code"]
+        is None
+    )
