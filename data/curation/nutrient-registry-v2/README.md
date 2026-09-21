@@ -13,3 +13,18 @@ This package is a reviewed definition/method contract, not a food-data publicati
 - `folates_source_unspecified` remains unsupported for automatic mapping.
 
 This package publishes no Russian food values, no target table and no Planner/API/UI default.
+
+
+## Source receipt
+
+The three newly added Russian vitamin-equivalent definitions are pinned in
+`registry.json` to `RU-MR-APPENDIX-2`:
+
+- document: `МР 2.3.1.0253-21`;
+- locator: `Приложение 2 — коэффициенты пересчета для эквивалентов витаминов`;
+- source URL and SHA-256 are retained in the immutable registry snapshot;
+- scope: `VITAMIN_A_RE`, `NIACIN_EQUIVALENT`,
+  `VITAMIN_E_TOCOPHEROL_EQUIVALENT`.
+
+That receipt establishes definition evidence only. It does **not** authorize
+automatic derivation of RE, NE or tocopherol-equivalent food values.
