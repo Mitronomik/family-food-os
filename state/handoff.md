@@ -18,6 +18,15 @@ No new migration is expected: 0034 supports partial profiles, 0035 supports
 versioned nutrient values/seals, and ATOMIC Composition already references the
 sealed profile. If implementation later needs a schema change, stop.
 
+Two further preflight boundaries are frozen:
+
+- the current vector reader decodes historical V1/FDC-shaped provenance; Step 3
+  must add source-neutral V2 provenance decoding without fabricating FDC fields
+  or rewriting V1 evidence;
+- legacy CompositionCalculator intentionally reads V1 definitions. Step 3 must
+  not make it V2-aware. V2 ATOMIC validation uses the version-aware vector reader
+  and NutritionMethodologyService; transformation applicability remains Step 7.
+
 Read:
 `docs/family-food/transactional-nutrition-publication-contract.md`.
 
