@@ -110,6 +110,40 @@ def initialize_audited_profile(
     )
 
 
+def _definition_from_row(row) -> NutrientDefinition:
+    payload = json.loads(row["definition_json"])
+    return NutrientDefinition(
+        row["code"],
+        row["display_name_ru"],
+        row["unit"],
+        row["registry_version"],
+        payload.get("definition"),
+        payload.get("definition_kind"),
+    )
+
+
+class SqlAlchemyNutrientRegistryRepository:
+    def __init__(self, connection: Connection) -> None:
+        self._connection = connection
+
+    def get(self, registry_version: str, code: str) -> NutrientDefinition:
+        row = (
+            self._connection.execute(
+                select(nutrient_definitions).where(
+                    nutrient_definitions.c.registry_version == registry_version,
+                    nutrient_definitions.c.code == code,
+                )
+            )
+            .mappings()
+            .one_or_none()
+        )
+        if row is None:
+            raise NutrientVectorUnavailableError(
+                "Определение нутриента для версии реестра недоступно."
+            )
+        return _definition_from_row(row)
+
+
 class SqlAlchemyNutrientVectorRepository:
     def __init__(self, connection: Connection) -> None:
         self._connection = connection
@@ -184,21 +218,13 @@ class SqlAlchemyNutrientVectorRepository:
         for row in rows:
             evidence = json.loads(row["provenance_json"])
             observation, mapping = evidence["observation"], evidence["mapping"]
-            definition_payload = json.loads(row["definition_json"])
             if row["registry_version"] != seal["registry_version"]:
                 raise NutrientVectorUnavailableError(
                     "Определение нутриента не соответствует версии снимка."
                 )
             values.append(
                 NutrientValue(
-                    definition=NutrientDefinition(
-                        row["nutrient_code"],
-                        row["display_name_ru"],
-                        row["unit"],
-                        row["registry_version"],
-                        definition_payload.get("definition"),
-                        definition_payload.get("definition_kind"),
-                    ),
+                    definition=_definition_from_row(row),
                     amount=row["amount"],
                     provenance=NutrientProvenance(
                         registry_version=seal["registry_version"],
