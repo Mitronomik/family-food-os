@@ -105,6 +105,11 @@ def _drop_rebuild_triggers(connection):
         "nutrient_values_no_delete",
         "nutrient_values_no_late_insert",
         "nutrition_vector_seals_complete",
+        "food_retention_profiles_complete",
+        "food_retention_values_no_update",
+        "food_retention_values_no_delete",
+        "food_retention_values_no_replace",
+        "food_retention_values_no_late_insert",
         "food_retention_values_no_update",
         "food_retention_values_no_delete",
         "food_retention_values_no_replace",
@@ -315,6 +320,43 @@ def upgrade(connection):
     )
     connection.execute("DROP TABLE nutrient_values")
     connection.execute("ALTER TABLE nutrient_values_new RENAME TO nutrient_values")
+
+    connection.execute(
+        """CREATE TABLE food_retention_values_new (
+            profile_id CHAR(32) NOT NULL
+                REFERENCES food_retention_profiles(id)
+                ON DELETE RESTRICT DEFERRABLE INITIALLY DEFERRED,
+            registry_version TEXT NOT NULL,
+            nutrient_code TEXT NOT NULL,
+            factor TEXT NOT NULL
+                CHECK(typeof(factor) = 'text'
+                    AND factor NOT GLOB '*[^0-9.]*'
+                    AND factor GLOB '*[0-9]*'
+                    AND length(factor) - length(replace(factor, '.', '')) <= 1),
+            provenance_json TEXT NOT NULL CHECK(json_valid(provenance_json)),
+            PRIMARY KEY(profile_id, nutrient_code),
+            FOREIGN KEY(registry_version, nutrient_code)
+                REFERENCES nutrient_definitions(registry_version, code)
+                ON DELETE RESTRICT
+        )"""
+    )
+    connection.execute(
+        """INSERT INTO food_retention_values_new (
+            profile_id, registry_version, nutrient_code, factor, provenance_json
+        )
+        SELECT
+            profile_id,
+            ?,
+            nutrient_code,
+            factor,
+            provenance_json
+        FROM food_retention_values""",
+        (REGISTRY_V1,),
+    )
+    connection.execute("DROP TABLE food_retention_values")
+    connection.execute(
+        "ALTER TABLE food_retention_values_new RENAME TO food_retention_values"
+    )
 
     bundle = {"registry": v2, "method_adapters": adapters}
     encoded = canonical_json(bundle)
