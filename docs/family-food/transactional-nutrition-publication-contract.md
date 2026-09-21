@@ -1,8 +1,8 @@
 # Transactional Nutrition Publication — Implementation Contract Gate
 
-**Status:** pre-implementation contract for Russian-data integration step 3  
-**Accepted base:** `5343734e620c9f36d24aad54320c2196588b004d` (merged PR #77)  
-**Runtime/schema changes in this gate:** none  
+**Status:** pre-implementation contract for Russian-data integration step 3
+**Accepted base:** `5343734e620c9f36d24aad54320c2196588b004d` (merged PR #77)
+**Runtime/schema changes in this gate:** none
 **Next runtime step after acceptance:** implement one transactional reviewed publication path
 
 ## 1. Goal
