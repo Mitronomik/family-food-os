@@ -22,6 +22,7 @@ from app.domain.food_composition import (
     snapshot_json,
 )
 from app.domain.nutrient_vector import NutrientDefinition
+from app.domain.nutrient_vector_backfill_v1 import REGISTRY_VERSION as REGISTRY_V1
 from app.persistence.sqlalchemy_core import food_composition_tables as t
 from app.persistence.sqlalchemy_core.food_ingredient_tables import (
     food_ingredients_table,
@@ -145,15 +146,24 @@ class SqlAlchemyFoodCompositionRepository:
     def nutrient_definition(self, code: str) -> NutrientDefinition:
         row = (
             self._connection.execute(
-                select(nutrient_definitions).where(nutrient_definitions.c.code == code)
+                select(nutrient_definitions).where(
+                    nutrient_definitions.c.registry_version == REGISTRY_V1,
+                    nutrient_definitions.c.code == code,
+                )
             )
             .mappings()
             .one_or_none()
         )
         if row is None:
             raise CompositionUnavailableError("NUTRIENT_DEFINITION_MISSING")
+        payload = json.loads(row["definition_json"])
         return NutrientDefinition(
-            row["code"], row["display_name_ru"], row["unit"], row["registry_version"]
+            row["code"],
+            row["display_name_ru"],
+            row["unit"],
+            row["registry_version"],
+            payload.get("definition"),
+            payload.get("definition_kind"),
         )
 
     def _record(self, value: Any) -> dict[str, Any]:
