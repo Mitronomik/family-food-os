@@ -87,7 +87,8 @@ def test_registry_matches_all_approved_definitions(database, bundle):
             assert not code.isdigit()
             assert json.loads(payload) in bundle["nutrient-registry.json"]["entries"]
         stored = db.execute(
-            "SELECT bundle_json FROM nutrient_registry_snapshots"
+            "SELECT bundle_json FROM nutrient_registry_snapshots WHERE version = ?",
+            (REGISTRY_VERSION,),
         ).fetchone()[0]
         assert json.loads(stored) == bundle
     assert migrations.expected_migration_ids()[-7:] == [
