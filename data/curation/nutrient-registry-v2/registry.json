@@ -610,14 +610,14 @@
       "canonical_code": "NIACIN_EQUIVALENT",
       "canonical_unit": "mg",
       "category": "vitamin",
-      "definition": "Ниацин в ниациновом эквиваленте по явно указанной конвенции источника; не только предобразованный ниацин. Учет вклада триптофана требует отдельного версионированного derivation method и подтверждённых исходных компонентов.",
+      "definition": "Эквивалент никотиновой кислоты (NE) по МР 2.3.1.0253-21, приложение 2: 1 мг NE соответствует 1 мг никотиновой кислоты или 60 мг триптофана. Это не только предобразованный ниацин.",
       "definition_kind": "EQUIVALENT_COMPONENT",
       "display_name_ru": "Ниацин, ниациновый эквивалент",
       "infoods_mapping_status": "NO_IMPLICIT_CONVERSION",
       "infoods_tagname": null,
       "notes": [
-        "Preformed NIACIN does not satisfy NIACIN_EQUIVALENT.",
-        "No tryptophan-to-niacin-equivalent conversion is authorized by registry membership alone."
+        "Preformed NIACIN does not by itself satisfy NIACIN_EQUIVALENT.",
+        "The 60 mg tryptophan contribution is part of the Russian reference definition, but automatic derivation is not enabled by this registry step."
       ],
       "product_tracking_tier": "RUSSIAN_REFERENCE_COMPATIBILITY",
       "source_evidence_refs": [
@@ -859,14 +859,14 @@
       "canonical_code": "VITAMIN_A_RE",
       "canonical_unit": "µg",
       "category": "vitamin",
-      "definition": "Витамин А в ретиноловом эквиваленте (RE) по явно указанной конвенции источника; не масса ретинола и не эквивалент активности ретинола RAE. Любой пересчёт из ретинола или провитаминных каротиноидов требует отдельного версионированного derivation method.",
+      "definition": "Витамин А в ретиноловом эквиваленте (RE) по МР 2.3.1.0253-21, приложение 2: 1 мкг RE соответствует 1 мкг ретинола, 6 мкг β-каротина или 12 мкг других каротиноидов-провитаминов А. Это не RAE.",
       "definition_kind": "EQUIVALENT_COMPONENT",
       "display_name_ru": "Витамин А, ретиноловый эквивалент",
       "infoods_mapping_status": "NO_IMPLICIT_CONVERSION",
       "infoods_tagname": null,
       "notes": [
-        "RE and RAE are distinct definitions even when both are expressed in µg.",
-        "No component-to-RE conversion is authorized by registry membership alone."
+        "MR 2.3.1.0253-21 Appendix 2 defines RE separately from RAE.",
+        "Registry membership defines the target concept; deriving RE from components still requires an explicit reviewed derivation method and exact component evidence."
       ],
       "product_tracking_tier": "RUSSIAN_REFERENCE_COMPATIBILITY",
       "source_evidence_refs": [
@@ -973,13 +973,14 @@
       "canonical_code": "VITAMIN_E_TOCOPHEROL_EQUIVALENT",
       "canonical_unit": "mg",
       "category": "vitamin",
-      "definition": "Витамин Е в токофероловом эквиваленте по явно указанной конвенции источника; не масса только альфа-токоферола. Пересчёт отдельных токоферолов или токотриенолов требует отдельного версионированного derivation method.",
+      "definition": "Токофероловый эквивалент витамина Е в конвенции МР 2.3.1.0253-21. Приложение 2 фиксирует пищевой эквивалент для α-токоферола; одинаковая единица мг не делает произвольную строку общего или α-токоферола автоматически сопоставимой с нормой.",
       "definition_kind": "EQUIVALENT_COMPONENT",
       "display_name_ru": "Витамин Е, токофероловый эквивалент",
       "infoods_mapping_status": "NO_IMPLICIT_CONVERSION",
       "infoods_tagname": null,
       "notes": [
-        "Alpha-tocopherol mass does not satisfy tocopherol-equivalent reference by unit equality.",
+        "Russian reference tables report vitamin E in mg tocopherol equivalents.",
+        "Appendix 2 ties the equivalence to alpha-tocopherol/RRR-alpha-tocopherol context; source stereochemistry/method evidence remains required before any food-value conversion.",
         "No vitamer activity conversion is authorized by registry membership alone."
       ],
       "product_tracking_tier": "RUSSIAN_REFERENCE_COMPATIBILITY",
