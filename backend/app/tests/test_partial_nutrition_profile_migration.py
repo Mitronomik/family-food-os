@@ -90,7 +90,11 @@ def column_notnull(path, column):
 def test_0033_remains_reserved_while_partial_profiles_use_0034():
     expected = expected_migration_ids()
 
-    assert expected[-2:] == [PREVIOUS_HEAD, MIGRATION_ID]
+    assert expected[-3:] == [
+        PREVIOUS_HEAD,
+        MIGRATION_ID,
+        "0035_versioned_nutrient_registry",
+    ]
     assert not any(value.startswith("0033_") for value in expected)
 
 
