@@ -586,8 +586,14 @@ def test_late_inserts_and_replace_unique_identity_cannot_rewrite_history(databas
     with sqlite3.connect(config.path) as db:
         for sql, args in (
             (
-                "INSERT INTO food_retention_values VALUES (?, ?, ?, ?)",
-                (r.id.hex, "CALCIUM", "1", "{}"),
+                "INSERT INTO food_retention_values VALUES (?, ?, ?, ?, ?)",
+                (
+                    r.id.hex,
+                    "PR6_NUTRIENT_VECTOR_A_V1",
+                    "CALCIUM",
+                    "1",
+                    "{}",
+                ),
             ),
             (
                 "INSERT INTO food_composition_nodes VALUES (?, ?, ?, ?, ?, ?)",
