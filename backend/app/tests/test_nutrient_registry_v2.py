@@ -80,6 +80,25 @@ def legacy_rows(path):
     return definitions, values, seals, snapshot
 
 
+def retention_rows(path, *, versioned):
+    with sqlite3.connect(path) as db:
+        if versioned:
+            return db.execute(
+                """
+                SELECT profile_id, registry_version, nutrient_code, factor, provenance_json
+                FROM food_retention_values
+                ORDER BY profile_id, nutrient_code
+                """
+            ).fetchall()
+        return db.execute(
+            """
+            SELECT profile_id, nutrient_code, factor, provenance_json
+            FROM food_retention_values
+            ORDER BY profile_id, nutrient_code
+            """
+        ).fetchall()
+
+
 @pytest.fixture
 def registry_database(tmp_path):
     config = DatabaseConfig(path=tmp_path / "registry-v2.sqlite")
@@ -240,6 +259,7 @@ def test_populated_0034_upgrade_preserves_all_v1_rows_and_seals(tmp_path):
     before_definitions, before_values, before_seals, before_snapshot = legacy_rows(
         config.path
     )
+    before_retention = retention_rows(config.path, versioned=False)
 
     assert apply_migrations(config) == [MIGRATION.MIGRATION_ID]
 
@@ -286,6 +306,19 @@ def test_populated_0034_upgrade_preserves_all_v1_rows_and_seals(tmp_path):
     assert after_values == before_values
     assert after_seals == before_seals
     assert after_snapshot == before_snapshot
+    after_retention = retention_rows(config.path, versioned=True)
+    assert [
+        (profile_id, nutrient_code, factor, provenance_json)
+        for (
+            profile_id,
+            registry_version,
+            nutrient_code,
+            factor,
+            provenance_json,
+        ) in after_retention
+        if registry_version == REGISTRY_V1
+    ] == before_retention
+    assert all(row[1] == REGISTRY_V1 for row in after_retention)
 
 
 def test_0035_failure_rolls_back_schema_and_marker(tmp_path):
