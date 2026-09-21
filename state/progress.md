@@ -1,5 +1,16 @@
 # Progress
 
+## PR77 registry V2 delivery trigger — 2026-09-21
+
+PR #77 is open from merged PR76 main. The bounded implementation now includes
+registry V2 definitions, explicit Russian method adapters, migration 0035,
+version-aware registry reads and V1-pinned legacy Composition semantics.
+
+No V2 production nutrient values or Russian food profiles are published. Final
+review readiness requires focused registry/migration/methodology verification,
+full backend shards, full launcher regression, Russian-methodology regression,
+Docs and DC1 on one exact head.
+
 ## Nutrient Registry V2 / adapters — 2026-09-21
 
 PR76 is accepted at `011f4b74abd29f7b5ec77ab0f15998f781f43c43`.
