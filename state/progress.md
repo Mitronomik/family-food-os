@@ -1,5 +1,38 @@
 # Progress
 
+## Step 3 transactional V2 publication runtime — 2026-09-21
+
+Accepted base is merged PR78 at `e5466121e4958cf4fb95ba9041d1c7926daab17e`.
+The user explicitly authorized Step 3 runtime implementation under the merged
+transactional-publication contract.
+
+Implementation on `feat/transactional-nutrition-publication-v2` provides:
+
+- one reviewed publication service for
+  `FoodIngredient → non-current FoodNutritionProfile + immutable observations
+  → RU_NUTRIENT_REGISTRY_V2 NutrientVector → ATOMIC FoodCompositionVersion`;
+- a specialized unsealed profile writer that never invokes historical V1
+  auto-bootstrap;
+- exact `FFO_NUTRIENT_VALUE_EVIDENCE_V2` decoding with duplicate-key rejection,
+  explicit top-level method, source-neutral component identity and no fabricated
+  FDC-only metadata;
+- V1 provenance decoding unchanged and `source_nutrient_nbr` preserved for V1;
+- explicit V2 method validation and fail-closed reviewed mapping status;
+- one existing project UoW / one transaction / seal-last persistence;
+- exact replay with zero database changes and stable persisted IDs;
+- fail-closed profile/vector/composition conflicts, V1-seal conflict and refusal
+  to adopt partial pre-existing bundles;
+- rollback/failure injection after each fresh-write boundary plus commit failure;
+- preservation of existing current profiles and V1-pinned CompositionCalculator
+  semantics;
+- no schema migration, production numeric source publication or Step 4 work.
+
+An earlier focused exact-head generation passed 253 tests before final acceptance
+hardening/state sync. Final review readiness remains tied to the merged contract's
+exact-head focused, full backend, full launcher, methodology, Docs and DC1
+verification on the final branch head.
+
+
 ## Step 3 Implementation Contract Gate — 2026-09-21
 
 PR77 is merged at `5343734e620c9f36d24aad54320c2196588b004d`. The user accepted a new process: high-coupling

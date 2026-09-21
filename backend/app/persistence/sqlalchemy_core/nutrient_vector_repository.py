@@ -12,11 +12,14 @@ from sqlalchemy.engine import Connection
 
 from app.domain.food_ingredients import FoodNutritionProfile
 from app.domain.nutrient_vector import (
+    V2_REGISTRY_VERSION,
     NutrientDefinition,
     NutrientProvenance,
     NutrientValue,
+    NutrientValueEvidenceError,
     NutrientVector,
     NutrientVectorUnavailableError,
+    decode_v2_value_evidence,
 )
 from app.domain.nutrient_vector_backfill_v1 import (
     REGISTRY_VERSION,
@@ -122,6 +125,50 @@ def _definition_from_row(row) -> NutrientDefinition:
     )
 
 
+def _v1_provenance(row, profile: FoodNutritionProfile, registry_version: str):
+    evidence = json.loads(row["provenance_json"])
+    observation, mapping = evidence["observation"], evidence["mapping"]
+    return NutrientProvenance(
+        registry_version=registry_version,
+        audit_identity=observation["audit_identity"],
+        source_name=observation["profile_source_name"],
+        source_food_id=observation["profile_source_id"],
+        source_release=observation["profile_source_version"],
+        source_data_type=observation["profile_source_data_type"],
+        source_nutrient_id=observation["source_nutrient_id"],
+        source_nutrient_name=observation["source_nutrient_name"],
+        source_nutrient_nbr=mapping["source_nutrient_nbr"],
+        source_unit=observation["source_unit"],
+        source_amount=Decimal(observation["source_value"]),
+        source_observation_id=observation["source_food_nutrient_id"],
+        source_derivation_id=observation["source_derivation_id"],
+        mapping_status=mapping["mapping_status"],
+        estimated=profile.estimated,
+        evidence_json=row["provenance_json"],
+    )
+
+
+def _provenance_from_row(row, profile: FoodNutritionProfile, registry_version: str):
+    if registry_version == REGISTRY_VERSION:
+        return _v1_provenance(row, profile, registry_version)
+    if registry_version == V2_REGISTRY_VERSION:
+        try:
+            return decode_v2_value_evidence(
+                row["provenance_json"],
+                profile=profile,
+                expected_registry_version=registry_version,
+                expected_nutrient_code=row["nutrient_code"],
+                expected_amount=row["amount"],
+            ).provenance
+        except NutrientValueEvidenceError as exc:
+            raise NutrientVectorUnavailableError(
+                "Происхождение значения V2 повреждено или противоречиво."
+            ) from exc
+    raise NutrientVectorUnavailableError(
+        "Для версии реестра нет декодера происхождения нутриентов."
+    )
+
+
 class SqlAlchemyNutrientRegistryRepository:
     def __init__(self, connection: Connection) -> None:
         self._connection = connection
@@ -216,8 +263,6 @@ class SqlAlchemyNutrientVectorRepository:
             )
         values = []
         for row in rows:
-            evidence = json.loads(row["provenance_json"])
-            observation, mapping = evidence["observation"], evidence["mapping"]
             if row["registry_version"] != seal["registry_version"]:
                 raise NutrientVectorUnavailableError(
                     "Определение нутриента не соответствует версии снимка."
@@ -226,23 +271,8 @@ class SqlAlchemyNutrientVectorRepository:
                 NutrientValue(
                     definition=_definition_from_row(row),
                     amount=row["amount"],
-                    provenance=NutrientProvenance(
-                        registry_version=seal["registry_version"],
-                        audit_identity=observation["audit_identity"],
-                        source_name=observation["profile_source_name"],
-                        source_food_id=observation["profile_source_id"],
-                        source_release=observation["profile_source_version"],
-                        source_data_type=observation["profile_source_data_type"],
-                        source_nutrient_id=observation["source_nutrient_id"],
-                        source_nutrient_name=observation["source_nutrient_name"],
-                        source_nutrient_nbr=mapping["source_nutrient_nbr"],
-                        source_unit=observation["source_unit"],
-                        source_amount=Decimal(observation["source_value"]),
-                        source_observation_id=observation["source_food_nutrient_id"],
-                        source_derivation_id=observation["source_derivation_id"],
-                        mapping_status=mapping["mapping_status"],
-                        estimated=profile.estimated,
-                        evidence_json=row["provenance_json"],
+                    provenance=_provenance_from_row(
+                        row, profile, seal["registry_version"]
                     ),
                 )
             )

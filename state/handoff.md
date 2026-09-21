@@ -1,5 +1,36 @@
 # Handoff
 
+## Step 3 transactional V2 publication runtime — 2026-09-21
+
+Accepted main: `e5466121e4958cf4fb95ba9041d1c7926daab17e` (merged PR78).
+Current branch: `feat/transactional-nutrition-publication-v2`.
+Delivery PR: #79.
+
+Read the merged contract first:
+`docs/family-food/transactional-nutrition-publication-contract.md`.
+
+Runtime implementation is bounded to publication mechanics only. Key seams:
+
+- generic complete-profile `add()` remains historical V1 behavior;
+- Step 3 uses a dedicated `add_unsealed()` writer inside its publication UoW;
+- V2 persisted evidence uses `FFO_NUTRIENT_VALUE_EVIDENCE_V2`; V1 JSON/decoder
+  remains unchanged;
+- existing or replayed V1 seals cannot be rebound to V2;
+- Step 3 profiles are always non-current;
+- vector values are inserted before the immutable V2 seal; ATOMIC follows the
+  readable seal; commit occurs once;
+- exact replay is zero-write; authoritative conflicts/partial state fail closed;
+- legacy CompositionCalculator remains V1-pinned; V2 transformation applicability
+  remains Step 7.
+
+No migration/schema change, Book2002 numeric publication, rights decision,
+Russian food batch, target table, methodology persistence, recipes, Planner,
+Gate1, Shopping, API/UI or AI work is included.
+
+After PR79 final review/merge, stop before Step 4. Do not publish a Russian food
+batch automatically.
+
+
 ## Step 3 transactional publication contract gate — 2026-09-21
 
 Accepted main: `5343734e620c9f36d24aad54320c2196588b004d` (merged PR #77).

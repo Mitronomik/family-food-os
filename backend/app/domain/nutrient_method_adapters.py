@@ -166,3 +166,22 @@ def canonical_code_for_kind(
     registry_version: str, nutrient_kind: NutrientKind
 ) -> str:
     return binding_for_kind(registry_version, nutrient_kind).nutrient_code
+
+
+def binding_for_code(
+    registry_version: str, nutrient_code: str
+) -> NutrientMethodBinding | None:
+    """Return the reviewed method binding for a canonical code when one exists."""
+
+    if not isinstance(nutrient_code, str) or not nutrient_code:
+        raise TypeError("Нужен стабильный код нутриента.")
+    try:
+        bindings = _BINDINGS[registry_version].values()
+    except KeyError as exc:
+        raise NutrientMethodAdapterError(
+            "Неизвестная версия реестра нутриентов."
+        ) from exc
+    return next(
+        (binding for binding in bindings if binding.nutrient_code == nutrient_code),
+        None,
+    )

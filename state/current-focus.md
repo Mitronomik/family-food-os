@@ -4,68 +4,66 @@ Updated: `2026-09-21`.
 
 ## Accepted state
 
-PR77 is merged into `main` at `5343734e620c9f36d24aad54320c2196588b004d`.
+PR78 is merged into `main` at `e5466121e4958cf4fb95ba9041d1c7926daab17e`.
 
-Accepted Russian-data integration sequence:
+The accepted Russian-data integration sequence remains:
 
 `partial profile storage → registry/adapters → transactional publication → first
 Russian food batch → Russian reference table → persisted methodology selection →
 transformation applicability → recipe-dependency food batch → executable Russian
 recipes → Planner integration`.
 
-Steps 1 and 2 are accepted. The user approved the new pre-implementation process.
-Current bounded work is **Step 3A — Implementation Contract Gate for transactional
-profile/vector/ATOMIC publication**.
+Steps 1 and 2 plus the Step 3 Implementation Contract Gate are accepted.
 
-## Current authorization
-
-This branch is docs/state/instructions only.
-
-It may:
-
-- inventory Step 3 dependencies and hidden coupling;
-- freeze fresh/replay/conflict/rollback semantics;
-- freeze the preservation matrix and adversarial test plan;
-- record the no-new-migration decision;
-- update AGENTS so future high-coupling work uses the same contract-gate process.
-
-It must not implement the runtime publisher or publish production nutrition data.
-
-Canonical Step 3 contract:
+Current authorized bounded work is **Step 3B — transactional reviewed nutrition
+publication runtime implementation** under
 `docs/family-food/transactional-nutrition-publication-contract.md`.
 
-## Preflight decisions
+## Runtime scope
 
-- no new migration is required by the accepted schema; if implementation disproves
-  this, stop for a separate architecture decision;
-- generic complete-profile insertion keeps its historical V1 auto-bootstrap;
-- Step 3 must use a specialized profile publication writer that does not create a
-  V1 seal;
-- Step 3 profiles are non-current, including complete profiles;
-- V2 registry identity is explicit and fixed to `RU_NUTRIENT_REGISTRY_V2`;
-- ATOMIC composition version is explicit input, never silently auto-incremented;
-- one existing project UoW owns the whole fresh write;
-- exact replay is zero-write; conflicting or partial pre-existing state fails closed;
-- V2 provenance uses a source-neutral envelope/decoder; V1 persisted provenance and decoder remain unchanged; `source_nutrient_nbr` is optional legacy/source metadata for V2;
-- legacy CompositionCalculator remains V1-pinned; V2 transformation/composition calculation is not Step 3.
+Implement exactly one reusable deterministic publication path:
+
+`FoodIngredient → non-current FoodNutritionProfile + immutable source observations
+→ RU_NUTRIENT_REGISTRY_V2 NutrientVector → ATOMIC FoodCompositionVersion`.
+
+Required seams:
+
+- specialized profile writer that never invokes historical V1 auto-bootstrap;
+- registry-version-aware source-neutral V2 provenance decoder using
+  `FFO_NUTRIENT_VALUE_EVIDENCE_V2`;
+- V1 persisted provenance/decoder behavior remains unchanged;
+- one existing project UoW owns the whole fresh transaction;
+- nutrient values first, seal last, then ATOMIC composition;
+- explicit V2 registry and explicit composition version;
+- exact replay performs zero writes and preserves stable IDs;
+- conflicting or partially present bundle fails closed;
+- rollback/failure-injection coverage at every write boundary;
+- Step 3 profiles remain `is_current=false`;
+- legacy `CompositionCalculator` remains V1-pinned.
+
+## Architecture constraints
+
+- no schema change and no new migration; if implementation requires one, STOP for
+  a separate architecture decision;
+- no generic `bootstrap_v1=false` switch on catalogue profile operations;
+- no hidden source-method inference;
+- no invented source/FDC identifiers;
+- no repair/adoption of partial historical bundles;
+- deterministic core must pass with `AI_ENABLED=false`.
 
 ## Acceptance
 
-The contract gate is review-ready when docs/state/AGENTS agree on:
-
-- dependency inventory;
-- preservation matrix;
-- fresh/replay/conflict/rollback behavior;
-- source/provenance boundaries;
-- no-schema-change assumption;
-- adversarial implementation tests;
-- exact final verification tier.
+The implementation PR must satisfy every adversarial test and verification tier
+in the merged Step 3 contract, including fresh complete/partial publication,
+source-neutral V2 round-trip, methodology read, V1 preservation, exact replay,
+conflict cases, rollback injection, foreign-key integrity, full backend and full
+launcher regression.
 
 ## Stop boundary
 
-After this docs-only gate is reviewed/merged, stop for runtime Step 3
-implementation authorization under the frozen contract.
+After Step 3 runtime implementation is review-ready, stop for final review and
+explicit merge authorization.
 
-Do not start Step 4 food publication, source-rights approval, target tables,
-methodology selection, transformation applicability, recipes, Planner, Gate1,
-Shopping, API/UI or AI work automatically.
+Do not start Step 4 production Russian food publication, source-rights approval,
+target tables, persisted methodology selection, transformation applicability,
+recipes, Planner, Gate1, Shopping, API/UI or AI work automatically.
