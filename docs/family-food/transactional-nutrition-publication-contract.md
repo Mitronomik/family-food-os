@@ -76,7 +76,9 @@ That shape is valid historical V1 evidence, but it is not a FamilyFoodOS-wide so
 - V2 evidence must retain exact profile source identity/version/type, source component/observation identity when the source supplies one, source value/unit, source locator/definition references, mapping status, uncertainty/estimated state and the explicit supported `method_code`.
 - `method_code` must be available to the V2 methodology adapter without guessing.
 - V2 must not require or invent FDC-only fields such as `source_nutrient_nbr`.
-- the V2 decoder must produce the existing domain `NutrientProvenance` without changing its source semantics or inventing facts.
+- `NutrientProvenance.source_nutrient_nbr` becomes optional legacy/source metadata at the domain boundary: V1 decoding continues to populate the exact historical value; V2 may use `None` when the source has no such field.
+- this optionality is an in-memory/domain compatibility change only; it does not rewrite persisted V1 JSON, V1 vector hashes, seals or Composition snapshots.
+- the V2 decoder must produce domain `NutrientProvenance` without changing source semantics or inventing facts.
 
 The normalized envelope is a persistence/application contract, not permission to discard original raw/source evidence. Original evidence remains referenced by immutable provenance/receipts.
 
@@ -252,7 +254,7 @@ Expected runtime surface is limited to:
 
 - a specialized application contract/service for reviewed versioned publication;
 - a specialized SQLAlchemy Core publication adapter/UoW composition using the existing project UoW;
-- a registry-version-aware nutrient-provenance decoding seam that preserves V1 decoding unchanged and adds source-neutral V2 decoding;
+- a registry-version-aware nutrient-provenance decoding seam that preserves V1 decoding unchanged, adds source-neutral V2 decoding and treats `source_nutrient_nbr` as optional legacy/source metadata;
 - reuse of existing FoodIngredient/profile/vector/Composition domain objects and validation;
 - focused tests plus required regression workflow updates only if needed.
 
@@ -280,7 +282,7 @@ The implementation PR is not review-ready until it proves at least:
 2. **fresh partial V2 bundle** publishes with explicit unknown observations and no invented zero;
 3. V2 vector is readable by the version-aware vector reader;
 4. V2 ATOMIC composition is readable and binds to the same ingredient/profile/vector;
-5. source-neutral V2 provenance round-trips through `NutrientVectorReader` without invented FDC/source-specific identifiers;
+5. source-neutral V2 provenance round-trips through `NutrientVectorReader` without invented FDC/source-specific identifiers; `source_nutrient_nbr=None` is accepted for a V2 source while V1 remains populated;
 6. `NutritionMethodologyService.atomic_input` can consume a supported V2 value only with valid explicit method evidence;
 7. legacy V1 provenance reads and legacy V1 `CompositionCalculator` behavior remain unchanged;
 8. exact replay produces zero writes and stable IDs;
