@@ -17,6 +17,13 @@ explicit V2 registry/version, explicit ATOMIC version, exact replay with zero
 writes, fail-closed conflicts, rollback injection points and the final regression
 tier. No runtime code or production Russian values are included in this gate.
 
+Additional preflight found two more hidden cross-context assumptions before code:
+the nutrient-vector reader still decodes V1/FDC-shaped provenance, and the legacy
+CompositionCalculator deliberately resolves V1 nutrient definitions. The Step 3
+contract now requires source-neutral V2 provenance decoding while freezing V1
+evidence/decoder behavior, and explicitly leaves V2 transformation/Composition
+calculation for Step 7.
+
 
 ## PR77 registry V2 delivery trigger — 2026-09-21
 
