@@ -441,6 +441,7 @@ def test_mid_backfill_failure_rolls_back_and_resume_is_deterministic(
         "0031_meal_pattern_catalogue",
         "0032_meal_plan_serving",
         "0034_partial_nutrition_profiles",
+        "0035_versioned_nutrient_registry",
     ]
     after = snapshot(config)
     assert all(after[name] == rows for name, rows in before.items())
