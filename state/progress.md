@@ -25,10 +25,11 @@ Preflight result:
   Step 3 `publish()` commits its own UoW, so Step 4 requires a bounded
   transaction-neutral bundle seam plus a batch service owning the single commit.
 
-The source-authority gate remains unresolved. Current repository evidence is
-`BLOCKED_PENDING_RIGHTS_REVIEW`; public viewing/access and the official Excel
-request channel do not constitute an accepted commercial/public redistribution
-grant. No source numeric values are published by this gate.
+The user stated on 2026-09-21 that they possess permission for Book2002 use.
+Current repository evidence predates that statement and still reads
+`BLOCKED_PENDING_RIGHTS_REVIEW`. The remaining task is to inspect the permission
+and record its exact scope in an authority receipt before runtime/data publication.
+No source numeric values are published by this gate.
 
 
 ## Step 3 transactional V2 publication runtime — 2026-09-21

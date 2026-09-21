@@ -58,16 +58,16 @@ that owns one UoW and one commit.
 
 ## Blocking gate
 
-Step 4 runtime/data publication is **BLOCKED BY SOURCE AUTHORITY**.
+Step 4 runtime/data publication is **PENDING REVIEW OF THE USER'S REPORTED PERMISSION**.
 
-Accepted repository evidence remains `BLOCKED_PENDING_RIGHTS_REVIEW`.
-Open/view/request access is not treated as an accepted commercial/public
-redistribution grant.
+Accepted repository evidence remains `BLOCKED_PENDING_RIGHTS_REVIEW` because it
+predates the user's 2026-09-21 statement that they possess permission.
 
-Before implementation, a reviewed authority receipt must cover the intended
-machine extraction, retention, commercial calculation and public derived-data
-distribution scope, or a separate data-distribution architecture decision is
-required.
+Before implementation, that permission must be reviewed. A repository authority
+receipt must confirm its exact scope for machine extraction, retention, commercial
+calculation and public derived-data distribution, or record any narrower limits.
+If the permission does not cover the current public-repository publication model,
+a separate data-distribution architecture decision is required.
 
 ## Stop boundary
 

@@ -3,7 +3,7 @@
 **Status:** pre-implementation contract for Russian-data integration Step 4
 **Accepted base:** `0ee9e5a3335e876d5a1de6a2c32ea245efe8e5e6` (merged PR #79 / Step 3 transactional publication)
 **Runtime/schema/data publication in this gate:** none
-**Gate result:** **TECHNICALLY READY / BLOCKED BY SOURCE AUTHORITY**
+**Gate result:** **TECHNICALLY READY / PERMISSION REPORTED — EVIDENCE REVIEW PENDING**
 **Candidate batch:** exactly five reviewed Book2002 source records
 
 ## 1. Goal
@@ -300,7 +300,7 @@ authority receipt described below.
 
 Raw page images/full book text are not production payload.
 
-## 11. SOURCE AUTHORITY GATE — currently blocking
+## 11. SOURCE AUTHORITY GATE — permission reported, evidence review pending
 
 ### 11.1 Current repository status
 
@@ -313,7 +313,12 @@ production_use_disposition = pending_scope_review
 public_redistribution_disposition = pending_scope_review
 ```
 
-This gate does not silently change that decision.
+This repository evidence was correct when recorded. On 2026-09-21 the user
+explicitly stated that they possess permission for Book2002 use.
+
+**DECISION:** from this point the blocker is no longer "permission is assumed
+absent". It is **evidence/scope review pending**. The project must inspect the
+actual permission before declaring Step 4 runtime publication authorized.
 
 ### 11.2 Current external verification — 2026-09-21
 
@@ -339,8 +344,9 @@ Reviewed URLs:
 
 ### 11.3 Required source-authority receipt
 
-Before runtime/data implementation starts, repository evidence must contain a
-reviewed immutable receipt that answers the intended Step 4 scope:
+Before runtime/data implementation starts, the user's permission must be reviewed
+and repository evidence must contain an immutable receipt answering the intended
+Step 4 scope:
 
 - exact source edition/export/document identity and hash;
 - authority/evidence document identity;
@@ -355,7 +361,8 @@ reviewed immutable receipt that answers the intended Step 4 scope:
 
 Acceptable unblock paths are:
 
-1. an existing permission/license covering the intended scope;
+1. the user's existing permission/license, if review confirms that it covers the
+   intended scope;
 2. an official export with explicit applicable terms;
 3. a separately approved bounded factual-use disposition with documented review.
 
@@ -585,8 +592,8 @@ This Contract Gate is complete when:
 - docs/state are synchronized;
 - this docs-only gate PR is reviewed and merged.
 
-However **runtime Step 4 remains BLOCKED** until the source-authority receipt in
-§11 is separately satisfied and approved.
+However **runtime Step 4 remains not yet authorized** until the user's reported
+permission is reviewed against §11 and the source-authority receipt is approved.
 
 Merging this contract does not itself authorize copying/publishing Book2002
-numeric values.
+numeric values; review of the reported permission may remove that remaining gate.

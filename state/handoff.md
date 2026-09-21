@@ -26,10 +26,12 @@ The contract freezes:
   and commit all five once;
 - no migration/schema change.
 
-Critical blocker: accepted source evidence still says
-`BLOCKED_PENDING_RIGHTS_REVIEW`. The contract can be merged as a blocked gate,
-but runtime/data publication cannot start until an authority receipt covering
-the intended use/distribution scope is reviewed and approved.
+Source-authority update: accepted repository evidence still says
+`BLOCKED_PENDING_RIGHTS_REVIEW`, but on 2026-09-21 the user explicitly stated
+that they possess permission. Treat the remaining gate as permission
+evidence/scope review, not an assumption that permission is absent. Runtime/data
+publication starts only after the permission is inspected and an authority receipt
+records the applicable use/distribution scope.
 
 Read:
 `docs/family-food/first-russian-food-batch-contract.md`.
