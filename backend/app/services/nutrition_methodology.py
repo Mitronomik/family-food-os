@@ -16,7 +16,12 @@ from app.domain.food_composition import (
     MassState,
     snapshot_digest,
 )
-from app.domain.nutrient_vector_backfill_v1 import REGISTRY_VERSION
+from app.domain.nutrient_method_adapters import (
+    NutrientMethodAdapterError,
+    canonical_code_for_kind,
+    resolve_method,
+    supported_registry,
+)
 from app.domain.nutrition_methodology import (
     NutrientKind,
     ObservationMethod,
@@ -29,24 +34,6 @@ from app.domain.nutrition_methodology import (
     aggregate_observations,
 )
 from app.services.food_composition_contracts import CompositionReadScope
-
-# Exact semantics of the immutable V1 registry only. An extended registry needs
-# a separate adapter; accepting an arbitrary same-named code would erase method.
-_VECTOR_CODES = {
-    NutrientKind.PROTEIN: ("PROTEIN", ObservationMethod.PUBLISHED),
-    NutrientKind.FAT: ("FAT_TOTAL", ObservationMethod.PUBLISHED),
-    NutrientKind.FIBRE: ("FIBER_TOTAL_DIETARY", ObservationMethod.PUBLISHED),
-    NutrientKind.AVAILABLE_CARBOHYDRATE: (
-        "CARBOHYDRATE_AVAILABLE",
-        ObservationMethod.AVAILABLE_SUMMATION,
-    ),
-    NutrientKind.TOTAL_CARBOHYDRATE: (
-        "CARBOHYDRATE_BY_DIFFERENCE",
-        ObservationMethod.TOTAL_BY_DIFFERENCE,
-    ),
-    NutrientKind.PUBLISHED_ENERGY: ("ENERGY_KCAL", ObservationMethod.PUBLISHED),
-}
-
 
 @dataclass(frozen=True)
 class AtomicMethodologyResult:
@@ -78,9 +65,7 @@ class NutritionMethodologyService:
             raise TypeError("Нужна явно выбранная версия методики.")
         if not isinstance(mass_state, MassState):
             raise TypeError("Нужно явное состояние массы.")
-        if not nutrients or any(
-            not isinstance(n, NutrientKind) or n not in _VECTOR_CODES for n in nutrients
-        ):
+        if not nutrients or any(not isinstance(n, NutrientKind) for n in nutrients):
             raise ValueError("Нужен поддерживаемый перечень показателей.")
         if len(set(nutrients)) != len(nutrients):
             raise ValueError("Показатель повторяется.")
@@ -106,7 +91,7 @@ class NutritionMethodologyService:
                 or profile.food_ingredient_id != composition.food_ingredient_id
             ):
                 raise CompositionUnavailableError("METHOD_PROFILE_IDENTITY_MISMATCH")
-            if vector.registry_version != REGISTRY_VERSION:
+            if not supported_registry(vector.registry_version):
                 raise CompositionUnavailableError("METHOD_REGISTRY_ADAPTER_UNAVAILABLE")
             form = f"{composition.food_ingredient_id}:{composition.input_state.value}"
             by_code = {v.definition.code: v for v in vector.values}
@@ -115,15 +100,48 @@ class NutritionMethodologyService:
                 raise CompositionUnavailableError("METHOD_SOURCE_OBSERVATIONS_INVALID")
             totals = []
             for kind in sorted(nutrients, key=lambda k: k.value):
-                code, method = _VECTOR_CODES[kind]
+                try:
+                    code = canonical_code_for_kind(vector.registry_version, kind)
+                except NutrientMethodAdapterError as exc:
+                    raise CompositionUnavailableError(
+                        "METHOD_REGISTRY_ADAPTER_UNAVAILABLE"
+                    ) from exc
                 value = by_code.get(code)
                 held = [
                     r
                     for r in source_observations
                     if isinstance(r, dict)
                     and isinstance(r.get("observation"), dict)
-                    and r["observation"].get("target_nutrient_code") == code
+                    and (
+                        r["observation"].get("target_nutrient_code") == code
+                        or r["observation"].get("nutrient_code") == code
+                    )
                 ]
+                method_evidence = (
+                    value.provenance.evidence_json
+                    if value is not None
+                    else next(
+                        (
+                            json.dumps(
+                                {"method_code": r["observation"]["method_code"]},
+                                sort_keys=True,
+                            )
+                            for r in held
+                            if isinstance(r.get("observation", {}).get("method_code"), str)
+                        ),
+                        None,
+                    )
+                )
+                try:
+                    method = resolve_method(
+                        vector.registry_version,
+                        kind,
+                        evidence_json=method_evidence,
+                    )
+                except NutrientMethodAdapterError as exc:
+                    raise CompositionUnavailableError(
+                        "METHOD_REGISTRY_ADAPTER_UNAVAILABLE"
+                    ) from exc
                 held_state = bool(
                     held and any(r.get("origin") != "VALUE_ABSENT" for r in held)
                 )
@@ -139,7 +157,9 @@ class NutritionMethodologyService:
                     if value
                     else f"{profile.id}:absent:{code}",
                     food_form_id=form,
-                    method_reference=f"{vector.registry_version}:{code}",
+                    method_reference=(
+                        f"{vector.registry_version}:{code}:{method.value}"
+                    ),
                 )
                 observation = SourceObservation(
                     nutrient=kind,
