@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / "backend"))
 sys.path.insert(0, str(ROOT / "scripts"))
 from app.db import migrations  # noqa: E402
 from app.db.config import DatabaseConfig  # noqa: E402
+from app.domain.nutrient_vector_backfill_v1 import REGISTRY_VERSION  # noqa: E402
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine  # noqa: E402
 from app.persistence.sqlalchemy_core.nutrition_read_scope import (  # noqa: E402
     SqlAlchemyNutritionReadScope,
@@ -52,7 +53,33 @@ def measure(config):
         ).fetchone()[0]
     applied = migrations.apply_migrations(config)
     after, ready_after = snapshot(config), readiness(config)
-    assert all(after[name] == rows for name, rows in before.items())
+    # 0035 legitimately adds registry-version identity and a second definition
+    # snapshot. Prove every pre-0035 V1 fact is unchanged in its historical
+    # column projection instead of comparing the new physical row width.
+    with sqlite3.connect(config.path) as db:
+        after_v1_definitions = db.execute(
+            """
+            SELECT code, display_name_ru, unit, registry_version, definition_json
+            FROM nutrient_definitions
+            WHERE registry_version = ?
+            ORDER BY rowid
+            """,
+            (REGISTRY_VERSION,),
+        ).fetchall()
+        after_v1_values = db.execute(
+            """
+            SELECT profile_id, nutrient_code, amount, provenance_json
+            FROM nutrient_values
+            WHERE registry_version = ?
+            ORDER BY rowid
+            """,
+            (REGISTRY_VERSION,),
+        ).fetchall()
+    assert after_v1_definitions == before["nutrient_definitions"]
+    assert after_v1_values == before["nutrient_values"]
+    for name, rows in before.items():
+        if name not in {"nutrient_definitions", "nutrient_values"}:
+            assert after[name] == rows
     assert ready_after == ready_before
     with sqlite3.connect(config.path) as db:
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
