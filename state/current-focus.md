@@ -46,7 +46,7 @@ Canonical Step 3 contract:
 - ATOMIC composition version is explicit input, never silently auto-incremented;
 - one existing project UoW owns the whole fresh write;
 - exact replay is zero-write; conflicting or partial pre-existing state fails closed;
-- V2 provenance uses a source-neutral envelope/decoder; V1 persisted provenance and decoder remain unchanged;
+- V2 provenance uses a source-neutral envelope/decoder; V1 persisted provenance and decoder remain unchanged; `source_nutrient_nbr` is optional legacy/source metadata for V2;
 - legacy CompositionCalculator remains V1-pinned; V2 transformation/composition calculation is not Step 3.
 
 ## Acceptance
