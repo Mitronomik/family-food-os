@@ -413,3 +413,68 @@ def test_reference_compatibility_matrix_names_exact_v2_concepts():
         by_reference["folates_source_unspecified"]["registry_v2_reference_code"]
         is None
     )
+
+
+def test_0035_version_pins_existing_retention_rows_without_changing_values(tmp_path):
+    config = build_pre_v2(tmp_path / "retention-upgrade.sqlite")
+    engine = create_sqlite_engine(config)
+    try:
+        from app.persistence.sqlalchemy_core.food_composition_scope import (
+            SqlAlchemyCompositionUnitOfWork,
+        )
+        from app.domain.food_composition import (
+            CompositionProvenance,
+            MassState,
+            NutrientRetentionProfile,
+            RetentionValue,
+        )
+        from uuid import uuid4
+
+        provenance = CompositionProvenance(
+            "synthetic",
+            "1",
+            "retention-evidence",
+            "registry-v2-migration-test",
+        )
+        profile = NutrientRetentionProfile(
+            uuid4(),
+            1,
+            MassState.RAW,
+            MassState.COOKED,
+            provenance,
+            (RetentionValue("PROTEIN", Decimal("0.8"), provenance),),
+        )
+        with SqlAlchemyCompositionUnitOfWork(engine) as uow:
+            uow.compositions.add_retention_profile(profile)
+            uow.commit()
+    finally:
+        engine.dispose()
+
+    before = retention_rows(config.path)
+    assert len(before) == 1
+
+    assert apply_migrations(config) == [MIGRATION.MIGRATION_ID]
+
+    with sqlite3.connect(config.path) as db:
+        after = db.execute(
+            """
+            SELECT profile_id, registry_version, nutrient_code, factor, provenance_json
+            FROM food_retention_values
+            ORDER BY profile_id, nutrient_code
+            """
+        ).fetchall()
+        assert after == [
+            (
+                before[0][0],
+                REGISTRY_V1,
+                before[0][1],
+                before[0][2],
+                before[0][3],
+            )
+        ]
+        assert db.execute("PRAGMA foreign_key_check").fetchall() == []
+        with pytest.raises(sqlite3.IntegrityError, match="неизменяем"):
+            db.execute(
+                "UPDATE food_retention_values SET factor = factor WHERE profile_id = ?",
+                (before[0][0],),
+            )
