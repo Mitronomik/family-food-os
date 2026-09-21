@@ -194,20 +194,24 @@ class SqlAlchemyFoodCompositionRepository:
     def add_retention_profile(self, value: NutrientRetentionProfile) -> None:
         for factor in value.values:
             self.nutrient_definition(factor.nutrient_code)
-        row = self._record(value)
-        del row["values"]
+        profile_row = self._record(value)
+        del profile_row["values"]
         for factor in value.values:
-            row = {
+            value_row = {
                 "profile_id": value.id,
                 "nutrient_code": factor.nutrient_code,
                 "factor": factor.factor,
                 "provenance_json": snapshot_json(factor.provenance),
             }
             if _versioned_registry_schema_available(self._connection):
-                row["registry_version"] = REGISTRY_V1
-            self._connection.execute(insert(t.retention_values).values(**row))
+                value_row["registry_version"] = REGISTRY_V1
+            self._connection.execute(
+                insert(t.retention_values).values(**value_row)
+            )
         self._connection.execute(
-            insert(t.retention_profiles).values(**row, value_count=len(value.values))
+            insert(t.retention_profiles).values(
+                **profile_row, value_count=len(value.values)
+            )
         )
 
     def add_transformation(self, value: FoodTransformation) -> None:
