@@ -1,5 +1,20 @@
 # Progress
 
+## Nutrient Registry V2 / adapters — 2026-09-21
+
+PR76 is accepted at `011f4b74abd29f7b5ec77ab0f15998f781f43c43`.
+The user authorized continuation to plan step 2.
+
+Implementation introduces `RU_NUTRIENT_REGISTRY_V2` with 54 definitions
+(51 V1 codes + three distinct Russian-reference equivalents), explicit V2
+method adapters and migration `0035_versioned_nutrient_registry`.
+V1 snapshot/value/seal history is preserved. Available carbohydrate is
+method-independent in V2 while method remains required provenance. No implicit
+vitamin-equivalent conversions are introduced.
+
+No production V2 food vector/profile/ATOMIC value is published. Step 3 remains
+transactional publication after review/merge.
+
 ## Partial nutrition profiles — migration-tail correction
 
 The next CI generation confirmed repository compatibility and domain-state fixes.
