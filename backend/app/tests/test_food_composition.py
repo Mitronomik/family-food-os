@@ -896,8 +896,22 @@ def test_public_ports_are_driver_independent_context_managers(database):
     reader: CompositionReadScope = SqlAlchemyCompositionReadScope(engine)
     writer: CompositionUnitOfWork = SqlAlchemyCompositionUnitOfWork(engine)
     with reader as read:
-        assert read.compositions.nutrient_definition("PROTEIN").unit == "g"
+        legacy = read.compositions.nutrient_definition("PROTEIN")
+        assert legacy.unit == "g"
+        assert legacy.registry_version == "PR6_NUTRIENT_VECTOR_A_V1"
+        assert (
+            read.nutrient_registry.get(
+                "RU_NUTRIENT_REGISTRY_V2", "VITAMIN_A_RE"
+            ).unit
+            == "µg"
+        )
     with writer as write:
+        assert (
+            write.nutrient_registry.get(
+                "PR6_NUTRIENT_VECTOR_A_V1", "PROTEIN"
+            ).registry_version
+            == "PR6_NUTRIENT_VECTOR_A_V1"
+        )
         write.rollback()
 
 
