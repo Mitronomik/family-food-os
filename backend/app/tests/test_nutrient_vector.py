@@ -70,7 +70,12 @@ def test_registry_matches_all_approved_definitions(database, bundle):
     config, _ = database
     with sqlite3.connect(config.path) as db:
         rows = db.execute(
-            "SELECT code, display_name_ru, unit, definition_json FROM nutrient_definitions"
+            """
+            SELECT code, display_name_ru, unit, definition_json
+            FROM nutrient_definitions
+            WHERE registry_version = ?
+            """,
+            (REGISTRY_VERSION,),
         ).fetchall()
         assert len(rows) == len({r[0] for r in rows}) == 51
         assert {r[0] for r in rows} == {
@@ -85,13 +90,14 @@ def test_registry_matches_all_approved_definitions(database, bundle):
             "SELECT bundle_json FROM nutrient_registry_snapshots"
         ).fetchone()[0]
         assert json.loads(stored) == bundle
-    assert migrations.expected_migration_ids()[-6:] == [
+    assert migrations.expected_migration_ids()[-7:] == [
         MIGRATION.MIGRATION_ID,
         "0029_food_composition_core",
         "0030_recipe_source_corpus",
         "0031_meal_pattern_catalogue",
         "0032_meal_plan_serving",
         "0034_partial_nutrition_profiles",
+        "0035_versioned_nutrient_registry",
     ]
 
 
