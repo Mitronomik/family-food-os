@@ -109,6 +109,7 @@ def _drop_rebuild_triggers(connection):
         "food_retention_values_no_delete",
         "food_retention_values_no_replace",
         "food_retention_values_no_late_insert",
+        "food_retention_profiles_complete",
     ):
         connection.execute(f"DROP TRIGGER IF EXISTS {name}")
 
@@ -177,6 +178,15 @@ def _recreate_triggers(connection):
 
 
 def _recreate_retention_triggers(connection):
+    connection.execute(
+        """CREATE TRIGGER food_retention_profiles_complete
+        BEFORE INSERT ON food_retention_profiles
+        WHEN NEW.value_count != (
+            SELECT count(*) FROM food_retention_values
+            WHERE profile_id = NEW.id
+        )
+        BEGIN SELECT RAISE(ABORT, 'Набор факторов неполон.'); END"""
+    )
     connection.execute(
         """CREATE TRIGGER food_retention_values_no_update
         BEFORE UPDATE ON food_retention_values
