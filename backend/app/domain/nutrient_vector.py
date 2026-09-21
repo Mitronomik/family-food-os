@@ -152,6 +152,13 @@ def decode_v2_value_evidence(
         raise NutrientValueEvidenceError(
             "Доказательство нутриента V2 не является валидным JSON."
         ) from exc
+    canonical_evidence = json.dumps(
+        payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    )
+    if evidence_json != canonical_evidence:
+        raise NutrientValueEvidenceError(
+            "Доказательство нутриента V2 должно использовать канонический JSON."
+        )
     top = _exact_keys(
         payload,
         {

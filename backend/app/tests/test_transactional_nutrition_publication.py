@@ -703,6 +703,41 @@ def test_non_authoritative_v2_mapping_status_fails_before_write(database):
     assert_fk_clean(config)
 
 
+def test_noncanonical_v2_evidence_fails_before_write(database):
+    config, engine = database
+    request = bundle(
+        code="STEP3_NONCANONICAL_EVIDENCE",
+        name="Тестовое неканоническое доказательство",
+        source_id="STEP3-NONCANONICAL",
+    )
+    first = request.vector.values[0]
+    payload = json.loads(first.provenance_json)
+    noncanonical = json.dumps(payload, ensure_ascii=False, indent=2)
+    broken = replace(first, provenance_json=noncanonical)
+    values = (broken, *request.vector.values[1:])
+    rows = [
+        {
+            "nutrient_code": value.nutrient_code,
+            "amount": value.amount,
+            "provenance_json": value.provenance_json,
+        }
+        for value in values
+    ]
+    changed = replace(
+        request,
+        vector=replace(
+            request.vector,
+            values=values,
+            value_sha256=value_set_digest(rows),
+        ),
+    )
+    before = db_dump(config)
+    with pytest.raises(NutritionPublicationContractError, match="канонический JSON"):
+        publication_service(engine).publish(changed)
+    assert db_dump(config) == before
+    assert_fk_clean(config)
+
+
 def test_duplicate_v2_evidence_keys_fail_closed():
     profile = profile_spec()
     raw = evidence(
