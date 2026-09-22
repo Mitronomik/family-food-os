@@ -223,3 +223,13 @@ def create_nutrition_publication_service(engine: Engine):
     return ReviewedNutritionPublicationService(
         lambda: SqlAlchemyNutritionPublicationUnitOfWork(engine)
     )
+
+
+def create_nutrition_batch_publication_service(engine: Engine):
+    from app.services.nutrition_publication import (
+        ReviewedNutritionBatchPublicationService,
+    )
+
+    return ReviewedNutritionBatchPublicationService(
+        lambda: SqlAlchemyNutritionPublicationUnitOfWork(engine)
+    )

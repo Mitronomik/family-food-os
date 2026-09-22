@@ -142,6 +142,23 @@ class NutritionPublicationResult:
     nutrient_value_count: int
 
 
+@dataclass(frozen=True)
+class NutritionBatchPublicationResult:
+    results: tuple[NutritionPublicationResult, ...]
+
+    @property
+    def ingredient_created_count(self) -> int:
+        return sum(result.ingredient_created for result in self.results)
+
+    @property
+    def bundle_created_count(self) -> int:
+        return sum(result.bundle_created for result in self.results)
+
+    @property
+    def nutrient_value_count(self) -> int:
+        return sum(result.nutrient_value_count for result in self.results)
+
+
 class ReviewedNutritionPublicationService:
     def __init__(
         self,
@@ -157,102 +174,13 @@ class ReviewedNutritionPublicationService:
     def publish(
         self, bundle: ReviewedNutritionPublicationBundle
     ) -> NutritionPublicationResult:
-        if not isinstance(bundle, ReviewedNutritionPublicationBundle):
-            raise TypeError("Нужен проверенный пакет публикации питания.")
-        now = self._clock()
-        if now.tzinfo is None or now.utcoffset() is None:
-            raise NutritionPublicationContractError(
-                "Часы публикации должны возвращать timezone-aware instant."
-            )
-        now = now.astimezone(timezone.utc)
-
+        self._require_bundle(bundle)
+        now = self._publication_time()
         with self._write_scope_factory() as uow:
-            ingredient, ingredient_created = self._resolve_ingredient(
-                uow, bundle.ingredient, now=now
-            )
-            existing_profile = uow.nutrition_profiles.get_by_provenance(
-                ingredient.id,
-                bundle.profile.source_name,
-                bundle.profile.source_id,
-                bundle.profile.source_version,
-            )
-            if existing_profile is not None:
-                existing_observations = uow.nutrition_profiles.list_observations(
-                    existing_profile.id
-                )
-                expected_profile, expected_observations = self._build_profile(
-                    bundle.profile,
-                    ingredient.id,
-                    profile_id=existing_profile.id,
-                    created_at=existing_profile.created_at,
-                    existing_observations=existing_observations,
-                    now=now,
-                )
-                if existing_profile != expected_profile:
-                    raise NutritionPublicationConflictError(
-                        "Закреплённый профиль отличается от проверенного пакета."
-                    )
-                if existing_observations != expected_observations:
-                    raise NutritionPublicationConflictError(
-                        "Наблюдения профиля отличаются от проверенного пакета."
-                    )
-                rows = self._validate_vector(
-                    uow, expected_profile, bundle.vector
-                )
-                return self._assert_existing_bundle(
-                    uow,
-                    bundle,
-                    ingredient,
-                    expected_profile,
-                    expected_observations,
-                    rows,
-                )
-
-            profile, observations = self._build_profile(
-                bundle.profile,
-                ingredient.id,
-                profile_id=self._id_factory(),
-                created_at=now,
-                existing_observations=(),
-                now=now,
-            )
-            rows = self._validate_vector(uow, profile, bundle.vector)
-            existing_composition = uow.compositions.find_version(
-                ingredient.id, bundle.atomic_composition.version
-            )
-            if existing_composition is not None:
-                raise NutritionPublicationConflictError(
-                    "Запрошенная версия ATOMIC уже занята другим снимком."
-                )
-            composition = self._build_composition(
-                bundle.atomic_composition,
-                ingredient.id,
-                profile.id,
-                composition_id=self._id_factory(),
-            )
-
             try:
-                if ingredient_created:
-                    uow.ingredients.add(ingredient)
-                uow.nutrition_profiles.add_unsealed(profile, observations)
-                uow.publish_vector(
-                    profile.id,
-                    registry_version=bundle.vector.registry_version,
-                    values=rows,
-                    value_sha256=bundle.vector.value_sha256,
-                    observations_json=bundle.vector.observations_json,
-                )
-                uow.compositions.add_versions((composition,))
-                verified = self._assert_existing_bundle(
-                    uow,
-                    bundle,
-                    ingredient,
-                    profile,
-                    observations,
-                    rows,
-                    expected_composition=composition,
-                )
-                uow.commit()
+                result = self._apply_bundle(uow, bundle, now=now)
+                if result.bundle_created:
+                    uow.commit()
             except (
                 FoodCataloguePersistenceConflictError,
                 NutritionPublicationPersistenceConflictError,
@@ -260,12 +188,118 @@ class ReviewedNutritionPublicationService:
                 raise NutritionPublicationConflictError(
                     "Публикация конфликтует с уже сохранённой истиной."
                 ) from exc
+        return result
 
-            return replace(
-                verified,
-                ingredient_created=ingredient_created,
-                bundle_created=True,
+    @staticmethod
+    def _require_bundle(bundle: object) -> None:
+        if not isinstance(bundle, ReviewedNutritionPublicationBundle):
+            raise TypeError("Нужен проверенный пакет публикации питания.")
+
+    def _publication_time(self) -> datetime:
+        now = self._clock()
+        if now.tzinfo is None or now.utcoffset() is None:
+            raise NutritionPublicationContractError(
+                "Часы публикации должны возвращать timezone-aware instant."
             )
+        return now.astimezone(timezone.utc)
+
+    def _apply_bundle(
+        self,
+        uow: NutritionPublicationUnitOfWork,
+        bundle: ReviewedNutritionPublicationBundle,
+        *,
+        now: datetime,
+    ) -> NutritionPublicationResult:
+        """Apply one reviewed bundle inside a caller-owned transaction."""
+
+        self._require_bundle(bundle)
+        ingredient, ingredient_created = self._resolve_ingredient(
+            uow, bundle.ingredient, now=now
+        )
+        existing_profile = uow.nutrition_profiles.get_by_provenance(
+            ingredient.id,
+            bundle.profile.source_name,
+            bundle.profile.source_id,
+            bundle.profile.source_version,
+        )
+        if existing_profile is not None:
+            existing_observations = uow.nutrition_profiles.list_observations(
+                existing_profile.id
+            )
+            expected_profile, expected_observations = self._build_profile(
+                bundle.profile,
+                ingredient.id,
+                profile_id=existing_profile.id,
+                created_at=existing_profile.created_at,
+                existing_observations=existing_observations,
+                now=now,
+            )
+            if existing_profile != expected_profile:
+                raise NutritionPublicationConflictError(
+                    "Закреплённый профиль отличается от проверенного пакета."
+                )
+            if existing_observations != expected_observations:
+                raise NutritionPublicationConflictError(
+                    "Наблюдения профиля отличаются от проверенного пакета."
+                )
+            rows = self._validate_vector(uow, expected_profile, bundle.vector)
+            return self._assert_existing_bundle(
+                uow,
+                bundle,
+                ingredient,
+                expected_profile,
+                expected_observations,
+                rows,
+            )
+
+        profile, observations = self._build_profile(
+            bundle.profile,
+            ingredient.id,
+            profile_id=self._id_factory(),
+            created_at=now,
+            existing_observations=(),
+            now=now,
+        )
+        rows = self._validate_vector(uow, profile, bundle.vector)
+        existing_composition = uow.compositions.find_version(
+            ingredient.id, bundle.atomic_composition.version
+        )
+        if existing_composition is not None:
+            raise NutritionPublicationConflictError(
+                "Запрошенная версия ATOMIC уже занята другим снимком."
+            )
+        composition = self._build_composition(
+            bundle.atomic_composition,
+            ingredient.id,
+            profile.id,
+            composition_id=self._id_factory(),
+        )
+
+        if ingredient_created:
+            uow.ingredients.add(ingredient)
+        uow.nutrition_profiles.add_unsealed(profile, observations)
+        uow.publish_vector(
+            profile.id,
+            registry_version=bundle.vector.registry_version,
+            values=rows,
+            value_sha256=bundle.vector.value_sha256,
+            observations_json=bundle.vector.observations_json,
+        )
+        uow.compositions.add_versions((composition,))
+        verified = self._assert_existing_bundle(
+            uow,
+            bundle,
+            ingredient,
+            profile,
+            observations,
+            rows,
+            expected_composition=composition,
+        )
+        return replace(
+            verified,
+            ingredient_created=ingredient_created,
+            bundle_created=True,
+        )
 
     def _resolve_ingredient(
         self,
@@ -554,3 +588,69 @@ class ReviewedNutritionPublicationService:
             bundle_created=False,
             nutrient_value_count=len(actual_rows),
         )
+
+class ReviewedNutritionBatchPublicationService:
+    """Publish a reviewed batch under one project Unit of Work and one commit."""
+
+    def __init__(
+        self,
+        write_scope_factory: WriteScopeFactory,
+        *,
+        id_factory: IdFactory = uuid4,
+        clock: Clock | None = None,
+    ) -> None:
+        self._write_scope_factory = write_scope_factory
+        self._single = ReviewedNutritionPublicationService(
+            write_scope_factory,
+            id_factory=id_factory,
+            clock=clock,
+        )
+
+    def publish_batch(
+        self, bundles: tuple[ReviewedNutritionPublicationBundle, ...]
+    ) -> NutritionBatchPublicationResult:
+        if not isinstance(bundles, tuple) or not bundles:
+            raise NutritionPublicationContractError(
+                "Нужен непустой tuple проверенных пакетов публикации."
+            )
+        if any(
+            not isinstance(bundle, ReviewedNutritionPublicationBundle)
+            for bundle in bundles
+        ):
+            raise TypeError("Batch содержит непроверенный пакет публикации.")
+
+        codes = [bundle.ingredient.canonical_code for bundle in bundles]
+        if len(codes) != len(set(codes)):
+            raise NutritionPublicationContractError(
+                "FoodIngredient повторяется в одном batch публикации."
+            )
+        provenances = [
+            (
+                bundle.profile.source_name,
+                bundle.profile.source_id,
+                bundle.profile.source_version,
+            )
+            for bundle in bundles
+        ]
+        if len(provenances) != len(set(provenances)):
+            raise NutritionPublicationContractError(
+                "Профиль источника повторяется в одном batch публикации."
+            )
+
+        now = self._single._publication_time()
+        with self._write_scope_factory() as uow:
+            try:
+                results = tuple(
+                    self._single._apply_bundle(uow, bundle, now=now)
+                    for bundle in bundles
+                )
+                if any(result.bundle_created for result in results):
+                    uow.commit()
+            except (
+                FoodCataloguePersistenceConflictError,
+                NutritionPublicationPersistenceConflictError,
+            ) as exc:
+                raise NutritionPublicationConflictError(
+                    "Batch публикации конфликтует с уже сохранённой истиной."
+                ) from exc
+        return NutritionBatchPublicationResult(results=results)

@@ -4,53 +4,56 @@ Updated: `2026-09-22`.
 
 ## Accepted state
 
-PR80 is merged into `main` at `f7ac885dde055900b3a6397aa64a15fe698abe5b`.
+PR81 is merged into `main` at
+`be6eed3591752d38ece3de5892e4306134e8d762`.
 
-Steps 1–3 and the Step 4 Implementation Contract Gate are accepted.
+Steps 1–3, the Step 4 contract gate and Step 4B semantic mapping closure are
+accepted.
 
-Current bounded work is **Step 4B — licensed RU-NUT-DB source-semantic mapping
-closure**.
+Current bounded work is **Step 4C — runtime publication of the first licensed
+RU-NUT-DB five-food batch**.
 
-Evidence:
-`data/curation/ru-nut-db-step4-semantic-closure/`.
+## Exact batch
 
-## Mapping result
+- `SUGAR` ← RU-NUT-DB code 1150, reuse existing identity, ATOMIC v2;
+- `CARROT_RED_RAW` ← code 1187, create reviewed identity, ATOMIC v1;
+- `CABBAGE_GREEN` ← code 1184, reuse existing identity, ATOMIC v2;
+- `BEET` ← code 1204, reuse existing identity, ATOMIC v1;
+- `RICE_GROATS` ← code 66, create reviewed identity, ATOMIC v1.
 
-For the exact five records
-`SUGAR / CARROT_RED_RAW / CABBAGE_GREEN / BEET / RICE_GROATS`:
+All new compositions use `MassState.INPUT`.
 
-- 26 RU-NUT-DB fields reviewed;
-- 18 numeric field mappings approved;
-- 8 fields deliberately deferred/source-only;
-- 130 source observations retained;
-- 87 published numeric + 43 published zero;
-- **90 V2 numeric candidate values — 18 per food**;
-- source-published zero is preserved as numeric `Decimal("0")` for approved
-  fields with `VALUE` source observations and explicit provenance;
-- no Book2002 numeric substitution;
-- no migration/schema change is required by source-zero semantics.
+## Runtime contract
 
-Deferred/source-only fields:
-`carbh, a_vit, pp, carot, cholest, ethanol, sugar_ad, salt_ad`.
+Implementation must:
 
-## Runtime readiness
+- consume only the hash-pinned licensed FIC payload and the merged Step 4B
+  18-field mapping;
+- publish exactly 90 V2 values, 18 per food, including source-published numeric
+  zeros;
+- retain all 26 source fields per food in source observations;
+- keep `carbh` and the other seven deferred fields non-canonical;
+- create only non-current FIC profiles;
+- preserve all existing current USDA profiles, including generic `CARROT`;
+- keep public single-bundle Step 3 behavior unchanged;
+- use one transaction-neutral bundle operation plus one five-food batch UoW;
+- commit a fresh five-food batch exactly once;
+- make exact replay zero-write with stable persisted IDs;
+- roll back the whole batch on any food conflict/failure;
+- introduce no schema/migration.
 
-After this Step 4B evidence PR is merged/reviewed, runtime may implement the
-accepted five-food batch using the exact mapping manifest.
+Canonical contract:
+`docs/family-food/first-russian-food-batch-contract.md`.
 
-Architecture remains:
+Runtime payload:
+`data/curation/ru-nut-db-step4-runtime/`.
 
-- no schema/migration;
-- all FIC profiles non-current;
-- current USDA profiles preserved, including generic `CARROT`;
-- `CARROT_RED_RAW` and `RICE_GROATS` created as distinct identities;
-- transaction-neutral one-bundle operation;
-- one five-food UoW / one commit;
-- exact replay zero-write;
-- whole-batch rollback on one-food failure.
+## Scope boundary
+
+No Step 5 Russian reference table, methodology persistence, transformation
+applicability, recipe publication, Planner, Shopping, API/UI or AI authority.
 
 ## Stop boundary
 
-After Step 4B is review-ready/merged, stop for final review/merge authorization.
-
-Do not start runtime publication or Step 5 automatically.
+Deliver the bounded runtime PR through exact-head verification and final review.
+Do not merge autonomously and do not start Step 5 automatically.
