@@ -1,5 +1,35 @@
 # Handoff
 
+## Step 4C runtime publication — 2026-09-22
+
+Accepted main: `be6eed3591752d38ece3de5892e4306134e8d762` (merged PR81).
+Branch: `feat/step4-ru-nut-db-runtime-publication`.
+
+Authorized scope: publish the exact five licensed RU-NUT-DB records through the
+merged Step 3 V2 publication path.
+
+Runtime design:
+- refactor Step 3 to expose one transaction-neutral bundle application operation;
+- preserve public `ReviewedNutritionPublicationService.publish(bundle)` behavior;
+- add `ReviewedNutritionBatchPublicationService.publish_batch(...)` owning one
+  UoW and one commit;
+- fresh batch = five bundles / two new identities / 90 V2 values / five seals /
+  five ATOMIC versions;
+- replay = zero writes and stable IDs;
+- conflict/failure on any food = rollback entire attempted batch;
+- no migration/schema;
+- all FIC profiles non-current; current USDA profiles preserved.
+
+Data package:
+`data/curation/ru-nut-db-step4-runtime/`.
+It contains only the five reviewed source records, exact license attribution and
+source link. The full FIC database is not republished.
+
+Verification is pending on the runtime implementation head. Stop after PR review;
+no self-merge or Step 5.
+
+# Handoff
+
 ## Step 4B RU-NUT-DB semantic closure — 2026-09-22
 
 Accepted main: `f7ac885dde055900b3a6397aa64a15fe698abe5b` (merged PR80).

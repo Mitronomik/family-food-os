@@ -1,5 +1,26 @@
 # Progress
 
+## Step 4C runtime publication authorized — 2026-09-22
+
+PR81 is merged at `be6eed3591752d38ece3de5892e4306134e8d762`.
+The user explicitly authorized the next bounded Step 4 runtime publication.
+
+Implementation target:
+- exact five licensed RU-NUT-DB records;
+- hash-pinned runtime payload and merged 18-field mapping;
+- 90 V2 numeric values total;
+- transaction-neutral one-bundle seam;
+- one five-food UoW / one commit;
+- exact replay zero-write;
+- whole-batch rollback on conflict/failure;
+- no migration/schema;
+- current USDA truth preserved and new FIC profiles non-current.
+
+Runtime verification is not yet recorded here; final readiness depends on the
+delivery PR's exact-head focused and regression evidence.
+
+# Progress
+
 ## Step 4B RU-NUT-DB semantic mapping closure — 2026-09-22
 
 PR80 is merged at `f7ac885dde055900b3a6397aa64a15fe698abe5b`.

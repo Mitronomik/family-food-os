@@ -1,0 +1,134 @@
+{
+  "authority": {
+    "attribution": "Данные о химическом составе продуктов предоставлены ФГБУН «ФИЦ питания и биотехнологии» (база «Химический состав пищевых продуктов, используемых в Российской Федерации»).",
+    "receipt_path": "docs/family-food/fic-nutrition-license-receipt.md"
+  },
+  "mapping_contract": {
+    "approved_field_count": 18,
+    "path": "data/curation/ru-nut-db-step4-semantic-closure/field-mapping.json",
+    "sha256": "bf77239d5976e5ec03d01f524726f9c2e8afb5fc4d92a884b62aa63dfe3a9477",
+    "v2_rows_per_record": 18
+  },
+  "records": [
+    {
+      "nutrients": {
+        "a_vit": "0.0", "b1": "0.0", "b2": "0.0", "c": "0.0",
+        "ca": "3.0", "carbh": "99.8", "carot": "0.0", "cholest": "0.0",
+        "diet_fibre": "0.0", "ethanol": "0.0", "fat": "0.0", "fe": "0.3",
+        "k": "3.0", "kcal": "399.2", "mdsug": "99.8", "mg": "0.0",
+        "na": "1.0", "p": "0.0", "pp": "0.0", "prot": "0.0",
+        "ret_equiv": "0.0", "salt_ad": "0.0", "satur": "0.0",
+        "starch": "0.0", "sugar_ad": "99.8", "water": "0.14"
+      },
+      "platform": {
+        "action": "REUSE_EXISTING", "atomic_version": 2,
+        "canonical_code": "SUGAR", "canonical_name": "Сахар-песок",
+        "category_code": "staples", "default_unit": "g", "mass_state": "INPUT"
+      },
+      "source": {
+        "db_index": 252, "json_pointer": "/DB/252",
+        "raw_record_sha256": "b869ae0c72ffb850d52d303ab1288e3ec539938f4cd73ba8709b049393a3994f",
+        "source_code": "1150", "source_name": "Сахар-песок"
+      }
+    },
+    {
+      "nutrients": {
+        "a_vit": "0.0", "b1": "0.06", "b2": "0.07", "c": "5.0",
+        "ca": "27.0", "carbh": "6.9", "carot": "12000.0", "cholest": "0.0",
+        "diet_fibre": "2.4", "ethanol": "0.0", "fat": "0.1", "fe": "0.3",
+        "k": "200.0", "kcal": "33.7", "mdsug": "6.7", "mg": "38.0",
+        "na": "21.0", "p": "55.0", "pp": "1.0", "prot": "1.3",
+        "ret_equiv": "2000.0", "salt_ad": "0.0", "satur": "0.0",
+        "starch": "0.2", "sugar_ad": "0.0", "water": "88.0"
+      },
+      "platform": {
+        "action": "CREATE_REVIEWED", "atomic_version": 1,
+        "canonical_code": "CARROT_RED_RAW",
+        "canonical_name": "Морковь свежая красная",
+        "category_code": "vegetables", "default_unit": "g", "mass_state": "INPUT"
+      },
+      "source": {
+        "db_index": 126, "json_pointer": "/DB/126",
+        "raw_record_sha256": "a0587cd2f7cf9b49e586f7b188f9164020af1cbbabd2cb36bcf2bccba7622b8d",
+        "source_code": "1187", "source_name": "Морковь свежая красная"
+      }
+    },
+    {
+      "nutrients": {
+        "a_vit": "0.0", "b1": "0.03", "b2": "0.04", "c": "45.0",
+        "ca": "48.0", "carbh": "4.7", "carot": "20.0", "cholest": "0.0",
+        "diet_fibre": "2.0", "ethanol": "0.0", "fat": "0.1", "fe": "0.6",
+        "k": "300.0", "kcal": "26.9", "mdsug": "4.6", "mg": "16.0",
+        "na": "13.0", "p": "31.0", "pp": "0.7", "prot": "1.8",
+        "ret_equiv": "3.33", "salt_ad": "0.0", "satur": "0.0",
+        "starch": "0.1", "sugar_ad": "0.0", "water": "90.4"
+      },
+      "platform": {
+        "action": "REUSE_EXISTING", "atomic_version": 2,
+        "canonical_code": "CABBAGE_GREEN",
+        "canonical_name": "Капуста белокочанная",
+        "category_code": "vegetables", "default_unit": "g", "mass_state": "INPUT"
+      },
+      "source": {
+        "db_index": 69, "json_pointer": "/DB/69",
+        "raw_record_sha256": "db34f8dfb25ec1d0289c78b7863cae3e21dac19365f9d6913b5842c00db3a109",
+        "source_code": "1184", "source_name": "Капуста белокочанная свежая"
+      }
+    },
+    {
+      "nutrients": {
+        "a_vit": "0.0", "b1": "0.02", "b2": "0.04", "c": "10.0",
+        "ca": "37.0", "carbh": "8.8", "carot": "10.0", "cholest": "0.0",
+        "diet_fibre": "2.5", "ethanol": "0.0", "fat": "0.1", "fe": "1.4",
+        "k": "288.0", "kcal": "42.1", "mdsug": "8.7", "mg": "22.0",
+        "na": "46.0", "p": "43.0", "pp": "0.2", "prot": "1.5",
+        "ret_equiv": "1.67", "salt_ad": "0.0", "satur": "0.0",
+        "starch": "0.1", "sugar_ad": "0.0", "water": "86.0"
+      },
+      "platform": {
+        "action": "REUSE_EXISTING", "atomic_version": 1,
+        "canonical_code": "BEET", "canonical_name": "Свёкла",
+        "category_code": "vegetables", "default_unit": "g", "mass_state": "INPUT"
+      },
+      "source": {
+        "db_index": 254, "json_pointer": "/DB/254",
+        "raw_record_sha256": "c241cffe9f38f562812fba3a42d7cb113c7e7e6da7036f976b8aaca5c3078702",
+        "source_code": "1204", "source_name": "Свекла свежая"
+      }
+    },
+    {
+      "nutrients": {
+        "a_vit": "0.0", "b1": "0.08", "b2": "0.04", "c": "0.0",
+        "ca": "8.0", "carbh": "71.4", "carot": "0.0", "cholest": "0.0",
+        "diet_fibre": "3.0", "ethanol": "0.0", "fat": "1.0", "fe": "1.0",
+        "k": "100.0", "kcal": "322.6", "mdsug": "0.7", "mg": "50.0",
+        "na": "12.0", "p": "150.0", "pp": "1.6", "prot": "7.0",
+        "ret_equiv": "0.0", "salt_ad": "0.0", "satur": "0.3",
+        "starch": "70.7", "sugar_ad": "0.0", "water": "14.0"
+      },
+      "platform": {
+        "action": "CREATE_REVIEWED", "atomic_version": 1,
+        "canonical_code": "RICE_GROATS", "canonical_name": "Крупа рисовая",
+        "category_code": "grains", "default_unit": "g", "mass_state": "INPUT"
+      },
+      "source": {
+        "db_index": 103, "json_pointer": "/DB/103",
+        "raw_record_sha256": "08d4a8a374095622d5f5a52f4c8b88ce956a0546ab5ebcaf115c4e4437a71c85",
+        "source_code": "66", "source_name": "Крупа рисовая"
+      }
+    }
+  ],
+  "schema_version": 1,
+  "source": {
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "basis_grams": "100",
+    "captured_date": "2026-09-20",
+    "raw_html_sha256": "155107ddb381c14721c77fe995d604a5197982441446b54034e4d84645efbd6d",
+    "source_data_type": "official_electronic_database_snapshot",
+    "source_id": "RU-NUT-DB",
+    "source_name": "FIC_RU_NUT_DB",
+    "source_url": "https://ion.ru/nauka/baza-dannykh-khimicheskogo-sostava/1-1-baza-dannykh/1.1_baza%20dannih.html",
+    "source_version": "snapshot-2026-09-20-155107ddb381c147",
+    "verified_at": "2026-09-22T00:00:00Z"
+  }
+}
