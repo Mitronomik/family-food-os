@@ -1,5 +1,35 @@
 # Progress
 
+## Step 4 licensed RU-NUT-DB authority reconciliation — 2026-09-22
+
+The project owner supplied the signed FIC database license and
+`FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`.
+
+Verified from the archive:
+
+- archive SHA-256:
+  `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
+- official RU-NUT-DB raw HTML SHA-256:
+  `155107ddb381c14721c77fe995d604a5197982441446b54034e4d84645efbd6d`;
+- 3216 electronic database rows;
+- exact Step 4 candidates at source codes 1150/1187/1184/1204/66;
+- all five are identically corroborated across the second official FIC interface;
+- RU-NUT-DB differs numerically from Book2002, so Book2002 is not Step 4
+  production numeric truth.
+
+License review clears the historical `rights_use_unresolved` blocker for this
+electronic source under the supplied conditions/attribution.
+
+Remaining blocker is canonical source-field semantics. Across the five rows the
+source contains 130 nutrient observations: 87 published numeric and 43 published
+zero. Current corpus evidence safely maps only positive kcal/protein/fat values,
+13 canonical V2 values total. Carbohydrate definition, hidden-field bindings and
+zero semantics remain unresolved.
+
+Because sealed vectors are immutable, no sparse production publication occurs
+until the intended mapping set is explicitly frozen.
+
+
 ## Step 4 first Russian food batch contract gate — 2026-09-21
 
 PR79 is merged at `0ee9e5a3335e876d5a1de6a2c32ea245efe8e5e6`; Step 3 transactional publication is accepted.

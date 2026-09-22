@@ -1,78 +1,84 @@
 # Current focus
 
-Updated: `2026-09-21`.
+Updated: `2026-09-22`.
 
 ## Accepted state
 
-PR79 is merged into `main` at `0ee9e5a3335e876d5a1de6a2c32ea245efe8e5e6`.
+PR79 is merged into `main` at
+`0ee9e5a3335e876d5a1de6a2c32ea245efe8e5e6`.
 
-The accepted Russian-data integration sequence remains:
+Steps 1–3 of the Russian-data integration sequence are accepted.
 
-`partial profile storage → registry/adapters → transactional publication → first
-Russian food batch → Russian reference table → persisted methodology selection →
-transformation applicability → recipe-dependency food batch → executable Russian
-recipes → Planner integration`.
-
-Steps 1–3 are accepted. Current bounded work is **Step 4A — Implementation
-Contract Gate for the first Russian source-native food batch**.
-
-## Current authorization
-
-This branch is docs/state only.
-
-It may:
-
-- freeze the exact five-record batch scope;
-- freeze FoodIngredient identity decisions;
-- freeze explicit ATOMIC versions;
-- freeze V2 nutrient mappings and expected row counts;
-- define batch-level atomic/replay/conflict/rollback semantics;
-- freeze the transaction-neutral bundle-operation + one-UoW batch orchestration seam;
-- record the source-authority gate and public-repository coupling;
-- define adversarial acceptance for the later data/runtime PR.
-
-It must not publish source numeric values or change runtime/schema/data seeds.
+Current bounded work is **Step 4A — corrected Implementation Contract Gate for
+the first licensed Russian electronic-database batch**.
 
 Canonical contract:
 `docs/family-food/first-russian-food-batch-contract.md`.
 
-## Preflight result
+Authority receipt:
+`docs/family-food/fic-nutrition-license-receipt.md`.
 
-Technical publication plumbing is available from merged Step 3.
+## Source decision
 
-Candidate batch:
+The project owner supplied both:
 
-- `10.1.1 → SUGAR`;
-- `8.1.5.1 → CARROT`;
-- `8.1.2.1 → CABBAGE_GREEN`;
-- `8.1.5.12 → BEET`;
-- `6.5.3 → new RICE_POLISHED_DRY`.
+- a signed 2026-09-10 FIC license covering the electronic database
+  «Химический состав пищевых продуктов, используемых в Российской Федерации»;
+- `FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`.
 
-Expected V2 positive rows: `4 + 8 + 8 + 8 + 9 = 37`, with all 60 reviewed
-source cells retained and 15 below-detection cells remaining nonnumeric.
+The corpus proves the five Step 4 candidates exist in the official
+`RU-NUT-DB` snapshot from `ion.ru`.
 
-No migration is expected. Step 4 does require a bounded application refactor:
-the existing committing single-bundle publisher remains public/unchanged, while a
-transaction-neutral bundle operation is reused by a new five-bundle batch service
-that owns one UoW and one commit.
+**RU-NUT-DB is now the production numeric authority for Step 4.**
 
-## Blocking gate
+Book2002 remains historical/corroborating evidence only.
 
-Step 4 runtime/data publication is **PENDING REVIEW OF THE USER'S REPORTED PERMISSION**.
+## Exact first-batch source rows
 
-Accepted repository evidence remains `BLOCKED_PENDING_RIGHTS_REVIEW` because it
-predates the user's 2026-09-21 statement that they possess permission.
+- `1150 /DB/252` — Сахар-песок → `SUGAR`;
+- `1187 /DB/126` — Морковь свежая красная → `CARROT`;
+- `1184 /DB/69` — Капуста белокочанная свежая → `CABBAGE_GREEN`;
+- `1204 /DB/254` — Свекла свежая → `BEET`;
+- `66 /DB/103` — Крупа рисовая → new `RICE_GROATS`.
 
-Before implementation, that permission must be reviewed. A repository authority
-receipt must confirm its exact scope for machine extraction, retention, commercial
-calculation and public derived-data distribution, or record any narrower limits.
-If the permission does not cover the current public-repository publication model,
-a separate data-distribution architecture decision is required.
+Do not reuse `RICE_WHITE` or the earlier Book2002-derived
+`RICE_POLISHED_DRY`.
+
+## Current blocker
+
+Source rights are no longer the blocker.
+
+The remaining Step 4 gate is **source-semantic mapping**.
+
+The corpus confirms per-100-g edible basis and units for `kcal/prot/fat/carbh`,
+but explicitly leaves:
+
+- the `carbh` nutrient definition unresolved;
+- hidden DB field unit/definition binding unresolved;
+- numeric-zero scientific semantics unresolved.
+
+Only positive `kcal/prot/fat` values are currently safe canonical mappings
+(13 values across the five records).
+
+Because a Step 3 vector seal is immutable, do not prematurely publish that sparse
+13-row projection. First freeze the final intended mapping set for this snapshot.
+
+## Architecture
+
+Step 4 still requires:
+
+- no schema/migration;
+- all new Russian profiles non-current;
+- existing USDA current profiles preserved;
+- transaction-neutral one-bundle operation;
+- one five-food batch UoW / one commit;
+- exact replay zero-write;
+- whole-batch rollback on one-food failure.
 
 ## Stop boundary
 
-After this Contract Gate is review-ready/merged, stop.
+PR80 may merge as the corrected gate.
 
-Do not start the Step 4 numeric publication PR until source authority is explicitly
-cleared. Do not start Step 5 target tables, methodology persistence,
-transformations, recipes, Planner, Gate1, Shopping, API/UI or AI automatically.
+After merge, do not start numeric publication automatically. The next bounded
+task is Step 4 source-semantic mapping closure for these five licensed RU-NUT-DB
+records. Runtime publication begins only after that mapping set is reviewed.

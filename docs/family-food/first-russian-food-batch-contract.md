@@ -1,599 +1,499 @@
 # First Russian Food Batch — Implementation Contract Gate
 
 **Status:** pre-implementation contract for Russian-data integration Step 4
-**Accepted base:** `0ee9e5a3335e876d5a1de6a2c32ea245efe8e5e6` (merged PR #79 / Step 3 transactional publication)
+**Accepted base:** `0ee9e5a3335e876d5a1de6a2c32ea245efe8e5e6` (merged PR #79)
 **Runtime/schema/data publication in this gate:** none
-**Gate result:** **TECHNICALLY READY / PERMISSION REPORTED — EVIDENCE REVIEW PENDING**
-**Candidate batch:** exactly five reviewed Book2002 source records
+**Current gate result:** **SOURCE AUTHORITY CLEARED FOR RU-NUT-DB / SOURCE SEMANTICS MAPPING STILL GATED**
 
 ## 1. Goal
 
-Step 4 is the first bounded publication of Russian source-native food composition
-through the already accepted deterministic path:
+Step 4 publishes the first bounded Russian source-native food batch through the
+accepted deterministic path:
 
 ```text
-reviewed source record
-→ canonical FoodIngredient identity
-→ non-current FoodNutritionProfile + immutable legacy-field observations
+licensed official FIC electronic database record
+→ reviewed FoodIngredient identity
+→ non-current FoodNutritionProfile + immutable source observations
 → RU_NUTRIENT_REGISTRY_V2 NutrientVector
 → ATOMIC FoodCompositionVersion
 ```
 
-Step 3 already proves the transactional mechanics. Step 4 must prove that one
-real reviewed source batch has sufficient **identity, source authority, nutrient
-mapping and provenance** to use those mechanics without changing historical
+Step 3 already proves single-bundle transactional mechanics. Step 4 must prove
+that one real licensed batch has sufficient identity, source semantics, canonical
+nutrient mapping and provenance to use those mechanics without changing historical
 USDA truth or inventing values.
 
-This gate contains no source numeric values and does not publish a production
-batch.
+This Contract Gate contains no production numeric seed.
 
 ## 2. FACT — accepted upstream state
-
-### 2.1 Step 3 publication primitive exists
 
 Merged PR79 provides:
 
 - reviewed non-current profile publication without historical V1 auto-bootstrap;
-- source-neutral `FFO_NUTRIENT_VALUE_EVIDENCE_V2`;
+- canonical `FFO_NUTRIENT_VALUE_EVIDENCE_V2`;
 - explicit V2 method validation;
 - one project UoW / one transaction / seal-last publication;
-- fresh / exact replay / conflict / rollback guarantees;
-- version-aware vector reads and pinned ATOMIC publication;
+- fresh / exact replay / conflict / rollback semantics;
 - preserved V1 provenance and V1-pinned legacy Composition behavior.
 
-**DECISION:** Step 4 reuses this primitive. No duplicate importer/UoW/persistence
-path is introduced.
+No schema change is expected for Step 4. If implementation proves otherwise,
+stop for a separate architecture decision.
 
-### 2.2 No schema change is expected
+Every Step 4 profile remains `is_current=false`; existing current USDA profiles
+remain unchanged.
 
-Migrations 0034 and 0035 plus Step 3 already represent:
+## 3. DECISION — production numeric authority is RU-NUT-DB
 
-- partial/non-current nutrition profiles;
-- immutable legacy source observations;
-- V2 nutrient values and seals;
-- explicit ATOMIC versions.
+The project owner supplied the corpus release
+`FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`.
 
-**DECISION:** Step 4 consumes no migration. If implementation proves a schema
-change is necessary, stop for a separate architecture decision.
-
-### 2.3 Existing current profiles are historical truth
-
-The reused catalogue identities already have USDA-backed current profiles.
-A Russian source-native profile is an additional immutable source snapshot, not
-a replacement.
-
-**DECISION:** every Step 4 profile remains `is_current=false`. Step 4 never calls
-`clear_current()`, never mutates an existing current profile and never changes
-Planner/API/UI defaults.
-
-## 3. FACT — exact candidate batch
-
-The batch is limited to the five source records already prepared and visually
-reviewed in the DC2 evidence chain:
-
-| Source code | Reviewed source label | Step 4 canonical action | Source input form |
-| --- | --- | --- | --- |
-| `10.1.1` | Сахар-песок | reuse `SUGAR` | `dry_granulated` |
-| `8.1.5.1` | Морковь | reuse `CARROT` | `raw_root` |
-| `8.1.2.1` | Капуста белокочанная | reuse `CABBAGE_GREEN` | `fresh_head` |
-| `8.1.5.12` | Свёкла | reuse `BEET` | `raw_root` |
-| `6.5.3` | Крупа рисовая шлифованная | create `RICE_POLISHED_DRY` | `dry_polished` |
-
-No sixth food may enter the implementation PR without reopening this gate.
-
-## 4. DECISION — canonical food identity
-
-### 4.1 Reused identities
-
-The following platform identities are reused without changing their stored
-canonical fields:
-
-- `SUGAR` — canonical name `Сахар-песок`;
-- `CARROT` — canonical name `Морковь`;
-- `CABBAGE_GREEN` — canonical name `Капуста белокочанная`;
-- `BEET` — canonical name `Свёкла`.
-
-The existing USDA profile attached to each identity is only one nutrition source;
-it does not define the FoodIngredient identity itself.
-
-Implementation must fail closed if the current catalogue identity differs from the
-accepted canonical code/name/category/unit facts at the accepted base.
-
-### 4.2 New rice identity
-
-The source record `6.5.3` is generic polished rice groats. Existing
-`RICE_WHITE` means `Рис белый длиннозёрный` and cannot be reused.
-
-**DECISION:** Step 4 creates:
+Archive SHA-256:
 
 ```text
-canonical_code = RICE_POLISHED_DRY
-canonical_name = Крупа рисовая шлифованная
+c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea
+```
+
+The corpus pins the official FIC electronic database page:
+
+```text
+source_id: RU-NUT-DB
+captured: 2026-09-20
+URL:
+https://ion.ru/nauka/baza-dannykh-khimicheskogo-sostava/1-1-baza-dannykh/1.1_baza%20dannih.html
+raw HTML SHA-256:
+155107ddb381c14721c77fe995d604a5197982441446b54034e4d84645efbd6d
+rows: 3216
+transform: fic-inline-v1.0.0
+```
+
+A second official FIC interface independently reproduces all 29 shared fields for
+each of the five candidate records with
+`status=corroborated_same_publisher`.
+
+**DECISION:** RU-NUT-DB is the Step 4 production numeric authority.
+
+Book2002 remains historical/corroborating evidence only. It is not the Step 4
+numeric source because the electronic DB is not byte/semantic identical to the
+Book2002 snapshot. Examples include:
+
+- rice: FIC `322.6 kcal / 71.4 g carbh` vs Book2002 `333 / 74.0`;
+- carrot: FIC `33.7 kcal` vs Book2002 `35`;
+- white cabbage: FIC `26.9 kcal` vs Book2002 `28`;
+- beet: FIC `42.1 kcal` vs Book2002 `42`;
+- sugar water: FIC `0.14` vs Book2002 `0.1`.
+
+No cross-source averaging, substitution or silent reconciliation is allowed.
+
+## 4. SOURCE AUTHORITY — cleared for RU-NUT-DB
+
+The project owner supplied a signed license permission dated 2026-09-10 from
+ФГБУН «ФИЦ питания и биотехнологии» to FamilyFoodOS.
+
+The licensed object in Appendix №1 includes the electronic database
+«Химический состав пищевых продуктов, используемых в Российской Федерации».
+
+The permission, as supplied to the project, grants FamilyFoodOS rights including:
+
+- reproduction/copying and storage of the database on project infrastructure;
+- use in paid/commercial services and mobile applications;
+- use in calculations and algorithms;
+- inclusion of data in program code and a public repository subject to source
+  attribution;
+- creation of derivative databases, subject to the stated restriction against
+  redistributing the source database as a standalone commercial product without
+  an additional agreement;
+- worldwide territory;
+- three-year term from the dated permission, subject to the original instrument.
+
+Required attribution from the permission is preserved in repository/runtime
+documentation.
+
+The public repository stores only a metadata receipt and evidence hashes, not the
+signed scans themselves.
+
+License evidence hashes supplied by the owner:
+
+```text
+main permission image:
+98c6e1715141c60adbee4957442d41d664bc0fa54f3987164283e242f81ef4b5
+
+Appendix №1 image:
+37c8b8f54edb8a292fa4d571989c05afdad777641bce0a4ea1ed80e060be0eb4
+```
+
+Canonical receipt:
+`docs/family-food/fic-nutrition-license-receipt.md`.
+
+**DECISION:** the historical corpus field `reuse_rights=unresolved` is superseded
+for this licensed RU-NUT-DB source by the later reviewed permission.
+
+This is a repository governance decision based on the supplied permission, not an
+independent legal opinion about unrelated sources.
+
+## 5. FACT — exact candidate source records
+
+The Step 4 batch is limited to exactly these five RU-NUT-DB records:
+
+| Platform action | RU-NUT-DB code | DB locator | Exact source name |
+| --- | ---: | --- | --- |
+| reuse `SUGAR` | 1150 | `/DB/252` | Сахар-песок |
+| reuse `CARROT` | 1187 | `/DB/126` | Морковь свежая красная |
+| reuse `CABBAGE_GREEN` | 1184 | `/DB/69` | Капуста белокочанная свежая |
+| reuse `BEET` | 1204 | `/DB/254` | Свекла свежая |
+| create generic rice-groats identity | 66 | `/DB/103` | Крупа рисовая |
+
+No sixth record may enter the implementation PR without reopening this gate.
+
+## 6. DECISION — canonical food identity
+
+The existing platform identities reused without mutating their canonical fields are:
+
+- `SUGAR` — `Сахар-песок`;
+- `CARROT` — `Морковь`;
+- `CABBAGE_GREEN` — `Капуста белокочанная`;
+- `BEET` — `Свёкла`.
+
+The exact source form/name remains in immutable profile/vector provenance. A
+narrower source row does not replace or redefine the canonical food identity and
+does not replace the current USDA profile.
+
+The FIC source says only `Крупа рисовая`; it does not establish long-grain or
+polished subtype.
+
+**DECISION:** the new identity is generic:
+
+```text
+canonical_code = RICE_GROATS
+canonical_name = Крупа рисовая
 category_code = grains
 default_unit = g
 is_active = true
 ```
 
-No alias to `RICE_WHITE` is created. No food-form equivalence with cooked rice
-is implied.
+Do not reuse `RICE_WHITE`. Do not use the earlier proposed
+`RICE_POLISHED_DRY` because that subtype came from Book2002 rather than the
+licensed RU-NUT-DB record.
 
-## 5. DECISION — explicit ATOMIC versions
+## 7. DECISION — source version and provenance identity
 
-Step 4 never calculates `max(version)+1`.
+The captured FIC interface does not publish a release/edition identifier.
 
-Accepted baseline evidence already pins ATOMIC version 1 for:
+Do not invent one.
+
+Step 4 pins the source snapshot by capture date + source hash:
+
+```text
+source_name = FIC_RU_NUT_DB
+source_version = snapshot-2026-09-20-155107ddb381c147
+source_data_type = official_electronic_database_snapshot
+source_id = exact RU-NUT-DB record code
+```
+
+Every positive V2 value uses canonical
+`FFO_NUTRIENT_VALUE_EVIDENCE_V2` and retains:
+
+- exact record code;
+- exact JSON pointer;
+- raw HTML SHA-256;
+- source literal Decimal string;
+- source field;
+- explicit method code;
+- mapping review reference;
+- license/authority receipt reference.
+
+## 8. FACT — source field inventory
+
+RU-NUT-DB exposes 26 nutrient fields per candidate record.
+
+Across the five rows:
+
+```text
+source nutrient observations = 130
+published_numeric = 87
+published_zero = 43
+not_reported = 0
+```
+
+The package distinguishes numeric zero from null, but explicitly states that the
+scientific meaning of zero is unresolved.
+
+**DECISION:** every one of the 130 source observations is retained. A
+`published_zero` is never promoted to an authoritative numeric zero merely
+because the JSON literal is zero.
+
+## 9. FACT / DECISION — currently proven canonical mappings
+
+The corpus itself closes the 100 g edible basis and units for four top-level FIC
+fields: `kcal`, `prot`, `fat`, `carbh`.
+
+However it also explicitly records:
+
+```text
+carbh nutrient_definition = carbohydrates_source_definition_unresolved
+FIC numeric-zero scientific semantics = unresolved
+FIC DB hidden-field unit binding = unresolved
+```
+
+The branded-product interface contains labels/units for 26 fields, but the corpus
+correctly records that those form fields are not a proven DB serialization
+contract. Conflicts such as cholesterol and beta-carotene units prove that a
+mechanical transfer is unsafe.
+
+Therefore the only currently approved Step 4 positive canonical mappings are:
+
+| RU-NUT-DB field | V2 code | Rule |
+| --- | --- | --- |
+| `kcal` | `ENERGY_KCAL` | positive published value only |
+| `prot` | `PROTEIN` | positive published value only |
+| `fat` | `FAT_TOTAL` | positive published value only |
+
+Method code for these published rows is
+`published_method_unspecified`.
+
+For the exact five records this proves **13 positive canonical V2 values**:
+
+- energy: 5;
+- protein: 4 (sugar source zero remains held);
+- fat: 4 (sugar source zero remains held).
+
+### 9.1 Carbohydrate
+
+`carbh` is grams per 100 g edible, but its exact nutrient definition is not
+closed for this database snapshot.
+
+**DECISION:** do not map it yet to either
+`CARBOHYDRATE_AVAILABLE` or `CARBOHYDRATE_BY_DIFFERENCE`.
+
+Book2002 methodology cannot be silently transferred to RU-NUT-DB because the
+numeric snapshots differ and record derivation is not established.
+
+### 9.2 Hidden fields
+
+Fields including `diet_fibre`, `water`, `starch`, `mdsug`, minerals,
+vitamins and fatty-acid fields remain source-only observations until their exact
+DB-field unit/definition mapping is reviewed.
+
+No same-name or equal-unit inference grants canonical authority.
+
+## 10. DECISION — do not prematurely seal a 13-row vector
+
+Step 3 vector seals are immutable. A sealed profile cannot later be enriched in
+place.
+
+Therefore Step 4 must not publish the currently proven 13-row sparse projection
+until the first-batch canonical mapping set is explicitly frozen as the intended
+terminal mapping for this source snapshot.
+
+**DECISION:** before runtime publication, perform one bounded source-semantic
+closure for these five RU-NUT-DB records.
+
+That closure must decide, field by field:
+
+- which additional DB fields have source-owned definition/unit evidence sufficient
+  for a V2 mapping;
+- whether `carbh` can be mapped to an existing V2 carbohydrate concept;
+- which published-zero fields remain held;
+- final positive V2 row count per food;
+- final source-observation inventory and mapping receipt.
+
+If no additional mappings can be established, an explicit reviewed decision may
+accept the 13-row sparse projection as terminal for this snapshot. It must not
+happen implicitly.
+
+No schema change is authorized by this semantic closure.
+
+## 11. DECISION — explicit ATOMIC versions
+
+Accepted baseline already has ATOMIC version 1 for:
 
 - `SUGAR`;
 - `CARROT`;
 - `CABBAGE_GREEN`.
 
-Therefore the Step 4 publication uses explicit ATOMIC version **2** for those
-three identities.
+Step 4 therefore uses explicit version 2 for those three.
 
-The accepted PR6 Russian-food package contains no Step-4-target ATOMIC reference
-for `BEET`, and `RICE_POLISHED_DRY` is a new identity.
+The proposed version slots for the other two are:
 
-The proposed explicit versions are therefore:
+- `BEET` → version 1;
+- new `RICE_GROATS` → version 1.
 
-| Food code | Step 4 ATOMIC version |
-| --- | ---: |
-| `SUGAR` | 2 |
-| `CARROT` | 2 |
-| `CABBAGE_GREEN` | 2 |
-| `BEET` | 1 |
-| `RICE_POLISHED_DRY` | 1 |
+Implementation must assert these slots against the exact accepted base. Any
+unexpected occupied slot is a conflict; never auto-increment.
 
-Implementation must assert these exact version slots before the first write.
-Any occupied slot with other truth is a conflict and stops publication; it is
-never repaired by silently choosing another version.
+All Step 4 ATOMIC snapshots use `MassState.INPUT`.
 
-All five Step 4 ATOMIC snapshots use `MassState.INPUT`: they represent the
-reviewed edible input form, not a cooked/transformed state. Transformation,
-yield and retention applicability remain Step 7.
+## 12. DECISION — batch transaction orchestration
 
-## 6. FACT / DECISION — source-state scope
+All five foods form one reviewed publication batch.
 
-The prepared evidence contains exactly:
+Step 3's public `ReviewedNutritionPublicationService.publish()` owns and commits
+its own UoW. Five calls would create five independent transactions.
 
-- 5 source profiles;
-- 12 reviewed source fields per profile;
-- 60 source cells total;
-- 45 `published_positive`;
-- 15 `below_detection`;
-- zero missing cells in this twelve-field subset.
-
-Printed source zero means below detection with unknown detection limit. It is not
-an exact numeric zero.
-
-**DECISION:** all 60 source-cell states remain reproducible evidence. Step 4 does
-not densify, infer or erase source-only observations.
-
-## 7. DECISION — profile projection
-
-The owning `FoodNutritionProfile` is a legacy-compatible projection, not the
-authoritative V2 nutrient set.
-
-For every published Step 4 profile:
-
-- `basis_grams = 100`;
-- `is_current = false`;
-- positive source `energy_kcal`, `protein_g`, `fat_g` and `fiber_g` may
-  project to the matching legacy field;
-- `below_detection` legacy values persist as SQL NULL with immutable source
-  observation state/literal;
-- source-native `carbohydrates_g` **never** populates legacy
-  `FoodNutritionProfile.carbohydrates_g`; that field remains NULL with
-  `METHOD_INCOMPATIBLE` evidence because the source concept is available
-  carbohydrate, not historical V1 total/by-difference carbohydrate.
-
-All five legacy fields retain immutable source observations where applicable.
-No unknown is replaced by zero.
-
-## 8. DECISION — V2 nutrient mapping
-
-The existing V2 registry/method policy is sufficient; Step 4 adds no nutrient
-definition.
-
-| Source field | V2 code | Method for positive source row |
-| --- | --- | --- |
-| `energy_kcal` | `ENERGY_KCAL` | `published_method_unspecified` |
-| `protein_g` | `PROTEIN` | `published_method_unspecified` |
-| `fat_g` | `FAT_TOTAL` | `published_method_unspecified` |
-| `carbohydrates_g` | `CARBOHYDRATE_AVAILABLE` | `available_published_row_method_unspecified` |
-| `fiber_g` | `FIBER_TOTAL_DIETARY` | `published_method_unspecified` |
-| `water_g` | `WATER` | `published_method_unspecified` |
-| `starch_g` | `STARCH` | `published_method_unspecified` |
-| `sugars_g` | `SUGARS_TOTAL` | `published_method_unspecified` |
-| `cholesterol_mg` | `CHOLESTEROL` | `published_method_unspecified` when positive |
-| `saturated_fat_g` | `FATTY_ACIDS_SATURATED_TOTAL` | `published_method_unspecified` when positive |
-
-The carbohydrate mapping relies on the already accepted Russian methodology:
-the book describes source-native available carbohydrate while the exact row method
-may be unspecified. This does not convert the value to
-`CARBOHYDRATE_BY_DIFFERENCE`.
-
-### 8.1 Source-only fields
-
-The current V2 registry has no canonical definition for:
-
-- `ash_g`;
-- `organic_acids_g`.
-
-**DECISION:** these remain source-only observations in the complete vector
-observation inventory. They do not become numeric nutrient rows and do not justify
-a new registry code in Step 4.
-
-### 8.2 Below-detection fields
-
-Any `below_detection` cell remains held/unavailable evidence and creates no
-numeric V2 row.
-
-The accepted optional published-zero-estimate methodology does not authorize
-Step 4 to persist an estimated zero as authoritative canonical food composition.
-
-## 8.3 Historical evidence reconciliation
-
-The PR74/DC2 review correctly recorded:
-
-```text
-canonical_nutrient_mapping = null
-publication_ready = false
-nutrient_equivalence_accepted = false
-```
-
-at the time that evidence was produced.
-
-Later accepted decisions changed only the relevant technical prerequisites:
-
-- PR75 accepted the explicit Russian source-native interpretation policy;
-- PR77 introduced `RU_NUTRIENT_REGISTRY_V2` and explicit method adapters;
-- PR79 introduced the transactional V2 publication primitive.
-
-**DECISION:** this Step 4 contract supersedes the historical
-`canonical_nutrient_mapping=null` only for the exact field→V2 mappings listed
-in §8. It does not reinterpret equal units as equivalence and does not grant any
-unlisted nutrient mapping.
-
-The historical `publication_ready=false` remains effective because source
-authority is still unresolved. Likewise, historical
-`nutrient_equivalence_accepted=false` is not treated as a blanket FoodIngredient
-identity decision; food identity is decided separately in §4 from reviewed
-food/form evidence.
-
-## 9. DECISION — exact expected vector shape
-
-Without copying source numeric values into this gate, the reviewed field-state and
-mapping contract implies the following V2 numeric row counts:
-
-| Source code | Expected positive V2 rows |
-| --- | ---: |
-| `10.1.1` sugar | 4 |
-| `8.1.5.1` carrot | 8 |
-| `8.1.2.1` white cabbage | 8 |
-| `8.1.5.12` beet | 8 |
-| `6.5.3` polished rice | 9 |
-| **Total** | **37** |
-
-Every profile retains a 12-cell source observation inventory. Therefore the batch
-preserves 60 reviewed source cells while publishing only 37 positive canonical V2
-values.
-
-A different count is a contract drift and requires review; implementation must
-not “fix” the count by adding zeros or dropping evidence.
-
-## 10. DECISION — provenance package
-
-Every positive V2 value uses canonical
-`FFO_NUTRIENT_VALUE_EVIDENCE_V2` and binds:
-
-- exact Step 4 source edition/export identity;
-- exact source food code;
-- stable source observation/component identity;
-- exact source unit and Decimal literal;
-- top-level explicit `method_code`;
-- reviewed mapping status;
-- source locator;
-- definition/mapping review reference.
-
-The batch also retains the complete source-cell observation inventory and the
-authority receipt described below.
-
-Raw page images/full book text are not production payload.
-
-## 11. SOURCE AUTHORITY GATE — permission reported, evidence review pending
-
-### 11.1 Current repository status
-
-Accepted repository evidence records:
-
-```text
-rights_status = BLOCKED_PENDING_RIGHTS_REVIEW
-explicit_reuse_permission = not_found
-production_use_disposition = pending_scope_review
-public_redistribution_disposition = pending_scope_review
-```
-
-This repository evidence was correct when recorded. On 2026-09-21 the user
-explicitly stated that they possess permission for Book2002 use.
-
-**DECISION:** from this point the blocker is no longer "permission is assumed
-absent". It is **evidence/scope review pending**. The project must inspect the
-actual permission before declaring Step 4 runtime publication authorized.
-
-### 11.2 Current external verification — 2026-09-21
-
-The reviewed 2002 edition is identifiable as ISBN `5-94343-028-8`.
-
-The Russian State Library catalogue currently states that the document is
-available for full online viewing and free work in its viewer. That establishes
-access; this contract does **not** treat the catalogue wording as an explicit grant
-for commercial machine extraction or public redistribution of derived structured
-data.
-
-The current official FRC Nutrition database page exposes an online chemical
-composition database and a request form for an Excel database requiring email and
-purpose of request. No explicit commercial/public-redistribution license was
-visible on the reviewed page.
-
-This is a factual access/terms observation, not a legal conclusion.
-
-Reviewed URLs:
-
-- `https://search.rsl.ru/ru/record/01001844793`
-- `https://ion.ru/nauka/baza-dannykh-khimicheskogo-sostava/1-1-baza-dannykh/1.1_baza%20dannih.html`
-
-### 11.3 Required source-authority receipt
-
-Before runtime/data implementation starts, the user's permission must be reviewed
-and repository evidence must contain an immutable receipt answering the intended
-Step 4 scope:
-
-- exact source edition/export/document identity and hash;
-- authority/evidence document identity;
-- machine extraction permitted or not established;
-- internal retention permitted or not established;
-- commercial calculation use permitted or not established;
-- public repository/public derived structured-data redistribution permitted or
-  not established;
-- required attribution;
-- scope: these five food records or an explicitly broader scope;
-- reviewer/date and evidence locator.
-
-Acceptable unblock paths are:
-
-1. the user's existing permission/license, if review confirms that it covers the
-   intended scope;
-2. an official export with explicit applicable terms;
-3. a separately approved bounded factual-use disposition with documented review.
-
-The assistant/implementation agent does not make the legal determination on its
-own.
-
-### 11.4 Public-repository coupling
-
-FamilyFoodOS currently stores reviewed production seed/data packages in a public
-repository.
-
-If authority permits internal/commercial use but **not** public redistribution of
-the derived numeric package, Step 4 must stop. Moving the numeric data to a private
-artifact/runtime source would be a separate data-distribution architecture
-decision and is not silently introduced by this batch.
-
-### 11.5 Source substitution is not automatic
-
-If an official Excel export or another authorized source is obtained and its
-version/fields/methods differ from Book2002, do not reuse the Book2002 payload
-blindly.
-
-A new source review must verify:
-
-- food identity/form;
-- basis;
-- field definitions and methods;
-- source states;
-- V2 mappings;
-- value/provenance receipts.
-
-## 12. ASSUMPTION — implementation package after authority clears
-
-If the source-authority gate is satisfied without changing source semantics,
-Step 4 implementation is expected to contain:
-
-- a bounded five-row/record publication manifest;
-- exact authority receipt;
-- reproducible numeric payload or approved source-backed build mechanism;
-- deterministic transformation into Step 3 publication bundles;
-- no generic ingestion platform;
-- no network dependency at production publication time;
-- no LLM-derived values.
-
-If authority or source format requires a different delivery architecture, reopen
-the gate instead.
-
-## 13. Fresh / replay / conflict semantics
-
-Step 4 inherits Step 3 transaction semantics and adds batch-level identity.
-
-### Fresh
-
-For the accepted five records:
-
-- reuse exactly four reviewed existing FoodIngredients;
-- create exactly one new `RICE_POLISHED_DRY`;
-- create exactly five non-current source profiles;
-- create exactly 37 positive V2 nutrient rows;
-- create five V2 seals;
-- create five explicit ATOMIC versions;
-- preserve all existing current profiles, V1/V2 history and existing ATOMIC rows.
-
-### Exact replay
-
-A second run of the exact same authority-approved batch:
-
-- creates zero rows;
-- updates zero rows;
-- changes zero current-profile flags;
-- returns the same persisted FoodIngredient/profile/composition identities;
-- leaves the database byte/semantic state unchanged.
-
-### Conflict
-
-Fail the entire batch with no writes for any mismatch including:
-
-- canonical identity drift;
-- unexpected occupied ATOMIC version;
-- same profile provenance with changed source values/states;
-- changed authority/source receipt;
-- changed V2 evidence/mapping/method;
-- changed vector hash/count;
-- missing or partial prior bundle;
-- attempted reuse of `RICE_WHITE`;
-- source record outside the accepted five.
-
-No automatic repair, version bump or source substitution exists.
-
-## 14. DECISION — batch transaction orchestration
-
-All five foods are one reviewed publication batch.
-
-Step 3's existing public `ReviewedNutritionPublicationService.publish()` owns its
-own UoW and commits one bundle. Calling that public method five times would create
-five independent transactions and would violate Step 4 atomicity.
-
-**DECISION:** Step 4 introduces a bounded batch-orchestration seam without changing
-the accepted single-bundle behavior.
-
-Required design:
+Step 4 therefore introduces a bounded batch-orchestration seam:
 
 ```text
 ReviewedNutritionBatchPublicationService.publish_batch(five bundles)
     ↓ opens one NutritionPublicationUnitOfWork
 transaction-neutral reviewed bundle operation
-    ↓ food 1
-    ↓ food 2
-    ↓ food 3
-    ↓ food 4
-    ↓ food 5
+    ↓ applies food 1..5
 verify complete five-food batch
     ↓
 single commit
 ```
 
-Implementation may refactor the Step 3 service so its existing public
-`publish(bundle)` becomes a one-bundle wrapper around a transaction-neutral
-internal/application operation. The existing `publish(bundle)` API and all
-accepted fresh/replay/conflict/rollback semantics must remain unchanged.
+The existing public single-bundle `publish(bundle)` remains behaviorally
+unchanged and becomes a one-bundle wrapper around the same transaction-neutral
+application operation.
 
-The batch service must not call the committing public `publish()` method from
-inside another UoW.
+The batch path must not nest calls to the committing public method.
 
-A failure or conflict on food 5 must roll back fresh writes for foods 1–4 from that
-attempt. Exact replay of all five performs zero writes and one read transaction
-with no commit-side mutations.
+A failure on food 5 rolls back foods 1–4 from that attempt.
 
-No generic ingestion platform, distributed transaction mechanism or new database
-abstraction is introduced by this seam.
+## 13. Fresh / replay / conflict semantics
 
-## 15. Preservation matrix
+### Fresh
+
+After the semantic-mapping gate is closed, fresh publication must:
+
+- reuse exactly four accepted FoodIngredients;
+- create exactly one new `RICE_GROATS`;
+- create five non-current FIC profiles;
+- publish exactly the finally reviewed V2 rows;
+- create five V2 seals;
+- create five explicit ATOMIC versions;
+- preserve every existing current profile and historical row.
+
+### Exact replay
+
+The exact same snapshot/mapping/license batch:
+
+- inserts zero rows;
+- updates zero rows;
+- changes zero current flags;
+- returns the same persisted IDs;
+- leaves the database unchanged.
+
+### Conflict
+
+Fail the entire batch with no writes for:
+
+- source record outside the exact five;
+- changed raw source hash/record identity;
+- canonical food identity drift;
+- changed source value/state;
+- changed mapping/method/evidence;
+- changed authority receipt;
+- partial prior bundle;
+- unexpected ATOMIC version occupation;
+- attempted `RICE_WHITE` substitution;
+- any unreviewed field promoted to canonical truth.
+
+No automatic repair, version bump or cross-source substitution exists.
+
+## 14. Preservation matrix
 
 | Existing truth | Step 4 requirement |
 | --- | --- |
-| Existing FoodIngredient IDs/fields | unchanged for the four reused identities |
-| Existing USDA current profiles | same IDs, values and `is_current=true` state |
+| Existing FoodIngredient rows | unchanged for four reused identities |
+| Existing USDA current profiles | unchanged and remain current |
 | Existing V1/V2 vectors/seals | unchanged |
 | Existing ATOMIC versions | unchanged |
-| SUGAR/CARROT/CABBAGE_GREEN v1 ATOMIC | preserved; Step 4 uses v2 |
-| Legacy CompositionCalculator | remains V1-pinned |
 | V2 registry definitions | unchanged |
+| Book2002 evidence | preserved as corroborating/historical; not rewritten |
+| RU-NUT-DB raw snapshot | hash-pinned, immutable input |
+| License conditions | attribution and scope preserved |
 | Planner/API/UI defaults | unchanged |
 | Recipe catalogue | unchanged |
-| Source rights status | cannot be promoted without reviewed authority receipt |
-| `AI_ENABLED=false` | full publication path remains deterministic |
+| `AI_ENABLED=false` | complete deterministic path |
 
-## 16. Non-goals
+## 15. Non-goals
 
-- no source-rights conclusion by the coding agent;
-- no new migration/schema;
+- no Book2002 numeric publication as production truth;
+- no schema/migration;
 - no generalized ingestion platform;
+- no source-field guessing;
 - no retailer/price/availability work;
 - no Step 5 Russian target table;
 - no persisted methodology selection;
 - no transformation/yield/retention applicability;
 - no recipe publication/remapping;
-- no Planner/Gate1/Shopping change;
+- no Planner/Gate1/Shopping;
 - no API/UI;
 - no AI authority;
 - no automatic current-profile switch.
 
-## 17. Adversarial implementation acceptance
+## 16. Adversarial implementation acceptance
 
-Runtime/data implementation is not review-ready until it proves at least:
+The later runtime/data PR is not review-ready until it proves at least:
 
-1. exact five-record input scope;
-2. four exact identity reuses and one new rice identity;
-3. `RICE_WHITE` cannot satisfy `RICE_POLISHED_DRY`;
-4. expected explicit ATOMIC versions are unoccupied/occupied exactly as required;
-5. all five profiles remain non-current;
-6. existing current USDA profiles remain byte/semantic equivalent;
-7. exactly 60 source cells retained;
-8. exactly 37 positive V2 numeric rows;
-9. every below-detection cell remains nonnumeric;
-10. source-native carbohydrate maps only to `CARBOHYDRATE_AVAILABLE` with the
-    accepted explicit method;
-11. ash/organic acids remain source-only evidence;
-12. canonical V2 evidence/authority receipt round-trips;
-13. existing single-bundle Step 3 `publish()` behavior remains unchanged after the transaction-neutral refactor;
-14. fresh five-food batch commits once;
-15. exact full-batch replay writes zero rows;
-16. conflict on any one food leaves all five unchanged;
-17. injected failure after each food/boundary rolls back the whole batch;
-18. nested use of the committing single-bundle `publish()` is rejected/not used by the batch path;
-19. unexpected ATOMIC-version occupation fails instead of auto-incrementing;
-20. V1 and Step 3 regressions remain green;
-21. foreign-key integrity remains clean;
-22. no blocked source values are committed before the authority gate clears.
+1. exact five RU-NUT-DB record identities and raw snapshot hash;
+2. license authority receipt matches the batch source;
+3. four exact identity reuses plus new `RICE_GROATS`;
+4. `RICE_WHITE` and `RICE_POLISHED_DRY` are rejected for source code 66;
+5. final reviewed field→V2 mapping manifest is exact;
+6. all 130 source nutrient observations are retained;
+7. every published zero remains nonnumeric unless a separately accepted zero
+   policy explicitly authorizes otherwise;
+8. no unresolved DB field becomes a canonical value;
+9. all five profiles remain non-current;
+10. current USDA profiles remain unchanged;
+11. explicit ATOMIC versions are used without auto-increment;
+12. single-bundle Step 3 behavior remains unchanged after refactor;
+13. fresh five-food batch commits once;
+14. exact replay writes zero rows;
+15. one-food conflict rolls back the whole attempted batch;
+16. failure injection after each food/boundary rolls back the batch;
+17. V1 / Step 3 / V2 methodology regressions remain green;
+18. foreign-key integrity remains clean;
+19. attribution metadata is present where required by the license;
+20. no Book2002 value silently substitutes for a licensed RU-NUT-DB value.
 
-## 18. Verification tier
+## 17. Verification tier
 
 ### Contract-gate PR
 
-Docs/state only:
+Docs/state/authority-receipt only:
 
 - `git diff --check`;
-- docs links;
+- repository-relative links;
+- source/archive/license hashes;
+- exact five-record source identity cross-check;
+- source-accounting state/count cross-check;
 - state consistency;
-- candidate/evidence hashes and counts checked against accepted repository metadata;
-- no runtime/data payload.
+- no runtime/schema/production data payload.
 
-### Later implementation PR, only after source authority clears
+### Later source-semantic closure
 
-Required exact-head evidence:
+Evidence/curation only unless runtime changes:
+
+- exact field dictionary review;
+- no numeric-source mutation;
+- mapping manifest/count reproducibility;
+- source-owned definition/unit evidence.
+
+### Later runtime/data PR
+
+Only after semantic mapping is frozen:
 
 - focused Step 4 batch tests;
 - Step 3 transactional publication regression;
 - FoodIngredient/profile/V2 vector/ATOMIC regression;
 - Russian methodology regression;
-- DC2 package/authority validator;
+- source/authority/mapping validators;
 - migration coexistence/lineage regression;
 - full backend regression;
 - full launcher regression;
-- Docs and DC1 where triggered;
+- Docs/DC1 where triggered;
 - `AI_ENABLED=false`.
 
-## 19. Gate exit and current stop
+## 18. Gate exit and current stop
 
-This Contract Gate is complete when:
+PR80 may merge when this corrected source/authority/transaction contract is
+reviewed and docs/static verification is green.
 
-- exact five-food scope is accepted;
-- identity and composition-version decisions are accepted;
-- V2 mapping/count contract is accepted;
-- batch-level atomicity requirement is accepted;
-- preservation/adversarial matrices are accepted;
-- docs/state are synchronized;
-- this docs-only gate PR is reviewed and merged.
+Merging PR80 does **not** start numeric publication automatically.
 
-However **runtime Step 4 remains not yet authorized** until the user's reported
-permission is reviewed against §11 and the source-authority receipt is approved.
+The next bounded Step 4 task is the source-semantic mapping closure for the five
+licensed RU-NUT-DB records.
 
-Merging this contract does not itself authorize copying/publishing Book2002
-numeric values; review of the reported permission may remove that remaining gate.
+Runtime publication starts only after that mapping set is explicitly frozen.

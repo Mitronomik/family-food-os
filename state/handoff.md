@@ -1,5 +1,31 @@
 # Handoff
 
+## Step 4 licensed RU-NUT-DB source correction — 2026-09-22
+
+PR80 remains the docs-only Step 4 Contract Gate.
+
+The user supplied a signed FIC license plus the original corpus archive. The
+source-authority blocker is cleared for the pinned electronic `RU-NUT-DB`
+snapshot; do not treat Book2002 as production numeric authority.
+
+Exact FIC records are codes 1150,1187,1184,1204,66 with DB indices
+252,126,69,254,103.
+
+The archive shows RU-NUT-DB and Book2002 values differ, especially rice, so they
+must not be merged.
+
+The next blocker is scientific field semantics, not rights:
+`carbh` definition unresolved; hidden field bindings unresolved; source zero
+semantics unresolved.
+
+Do not seal a 13-row sparse vector yet because the seal is immutable. First
+complete the bounded mapping closure, then implement the one-UoW five-food batch.
+
+Read:
+- `docs/family-food/first-russian-food-batch-contract.md`;
+- `docs/family-food/fic-nutrition-license-receipt.md`.
+
+
 ## Step 4 first Russian food batch contract gate — 2026-09-21
 
 Accepted main: `0ee9e5a3335e876d5a1de6a2c32ea245efe8e5e6` (merged PR79).
