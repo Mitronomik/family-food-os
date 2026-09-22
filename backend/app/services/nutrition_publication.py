@@ -607,6 +607,54 @@ class ReviewedNutritionBatchPublicationService:
             clock=clock,
         )
 
+    def _preflight_batch_state(
+        self,
+        uow: NutritionPublicationUnitOfWork,
+        bundles: tuple[ReviewedNutritionPublicationBundle, ...],
+        *,
+        now: datetime,
+    ) -> bool:
+        """Return True for replay, False for fresh; reject partial prior state."""
+
+        profile_presence: list[bool] = []
+        for bundle in bundles:
+            ingredient, ingredient_created = self._single._resolve_ingredient(
+                uow, bundle.ingredient, now=now
+            )
+            existing_profile = uow.nutrition_profiles.get_by_provenance(
+                ingredient.id,
+                bundle.profile.source_name,
+                bundle.profile.source_id,
+                bundle.profile.source_version,
+            )
+            profile_presence.append(existing_profile is not None)
+
+            action = PublicationIngredientAction(bundle.ingredient.action)
+            if (
+                existing_profile is None
+                and action is PublicationIngredientAction.CREATE_REVIEWED
+                and not ingredient_created
+            ):
+                raise NutritionPublicationConflictError(
+                    "Новый FoodIngredient уже существует без полного проверенного bundle."
+                )
+            if (
+                existing_profile is None
+                and uow.compositions.find_version(
+                    ingredient.id, bundle.atomic_composition.version
+                )
+                is not None
+            ):
+                raise NutritionPublicationConflictError(
+                    "ATOMIC версия существует без полного проверенного bundle."
+                )
+
+        if any(profile_presence) and not all(profile_presence):
+            raise NutritionPublicationConflictError(
+                "Частично опубликованный batch нельзя дозаполнять."
+            )
+        return all(profile_presence)
+
     def publish_batch(
         self, bundles: tuple[ReviewedNutritionPublicationBundle, ...]
     ) -> NutritionBatchPublicationResult:
@@ -641,16 +689,21 @@ class ReviewedNutritionBatchPublicationService:
         now = self._single._publication_time()
         with self._write_scope_factory() as uow:
             try:
+                replay = self._preflight_batch_state(uow, bundles, now=now)
                 results = tuple(
                     self._single._apply_bundle(uow, bundle, now=now)
                     for bundle in bundles
                 )
-                creation_states = {result.bundle_created for result in results}
-                if len(creation_states) > 1:
-                    raise NutritionPublicationConflictError(
-                        "Частично опубликованный batch нельзя дозаполнять."
-                    )
-                if creation_states == {True}:
+                if replay:
+                    if any(result.bundle_created for result in results):
+                        raise NutritionPublicationConflictError(
+                            "Exact replay неожиданно потребовал запись."
+                        )
+                else:
+                    if not all(result.bundle_created for result in results):
+                        raise NutritionPublicationConflictError(
+                            "Fresh batch смешался с ранее опубликованным состоянием."
+                        )
                     uow.commit()
             except (
                 FoodCataloguePersistenceConflictError,

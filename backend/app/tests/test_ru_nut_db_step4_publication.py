@@ -325,6 +325,32 @@ def test_failure_after_each_food_rolls_back_whole_batch(database, food_number):
     assert_fk_clean(database)
 
 
+def test_reviewed_create_identity_without_bundle_is_partial_prior_state(database):
+    bundles = load_ru_nut_db_step4_bundles()
+    engine = create_sqlite_engine(database)
+    try:
+        service = single_service(engine)
+        with SqlAlchemyNutritionPublicationUnitOfWork(engine) as uow:
+            ingredient, created = service._resolve_ingredient(
+                uow, bundles[1].ingredient, now=NOW
+            )
+            assert created is True
+            uow.ingredients.add(ingredient)
+            uow.commit()
+        before = db_dump(database)
+
+        with pytest.raises(
+            NutritionPublicationConflictError,
+            match="уже существует без полного проверенного bundle",
+        ):
+            batch_service(engine).publish_batch(bundles)
+
+        assert db_dump(database) == before
+        assert_fk_clean(database)
+    finally:
+        engine.dispose()
+
+
 @pytest.mark.parametrize("published_prefix", [1, 2, 3, 4])
 def test_partial_prior_batch_conflicts_without_filling_missing_bundles(
     database, published_prefix
