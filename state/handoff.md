@@ -1,5 +1,33 @@
 # Handoff
 
+## Step 4B RU-NUT-DB semantic closure — 2026-09-22
+
+Accepted main: `f7ac885dde055900b3a6397aa64a15fe698abe5b` (merged PR80).
+Current branch: `data/step4-ru-nut-db-semantic-closure`.
+
+The licensed five-record source mapping is frozen in:
+`data/curation/ru-nut-db-step4-semantic-closure/`.
+
+Result: 18 approved positive-only source fields, 74 positive V2 candidate values,
+43 source zeros all held, and eight fields deferred/source-only.
+
+Critical new finding: exact SUGAR source truth cannot be persisted in the current
+legacy-profile observation enum because source `prot=0` and `fat=0` have
+unresolved zero semantics. They are neither missing, below-detection,
+method-incompatible nor authoritative numeric zero.
+
+Runtime is blocked pending explicit architecture choice:
+- add a new persisted `published_zero_unresolved`-type state via a separately
+  approved migration/domain contract; or
+- defer SUGAR and change the accepted first-batch scope.
+
+Do not implement a migration, choose a migration number, or drop SUGAR without
+explicit authorization.
+
+Read:
+- `docs/family-food/first-russian-food-batch-contract.md`;
+- `data/curation/ru-nut-db-step4-semantic-closure/README.md`.
+
 ## Step 4 licensed RU-NUT-DB source correction — 2026-09-22
 
 PR80 remains the docs-only Step 4 Contract Gate.
