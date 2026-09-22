@@ -8,32 +8,20 @@
   "published_zero": 43,
   "not_reported": 0,
   "approved_mapping_fields": 18,
-  "approved_positive_v2_rows": 74,
-  "approved_zero_held_rows": 16,
+  "approved_v2_rows": 90,
+  "approved_published_zero_rows": 16,
   "deferred_fields": 8,
-  "deferred_positive_source_rows": 13,
-  "deferred_zero_source_rows": 27,
-  "per_food_approved_positive_v2_rows": {
-    "BEET": 17,
-    "CABBAGE_GREEN": 17,
-    "CARROT_RED_RAW": 17,
-    "RICE_GROATS": 16,
-    "SUGAR": 7
+  "deferred_source_rows": 40,
+  "per_food_v2_rows": {
+    "SUGAR": 18,
+    "CARROT_RED_RAW": 18,
+    "CABBAGE_GREEN": 18,
+    "BEET": 18,
+    "RICE_GROATS": 18
   },
   "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
   "source_snapshot_sha256": "155107ddb381c14721c77fe995d604a5197982441446b54034e4d84645efbd6d",
   "archived_brand_form_sha256": "2c434ee0fc5003610bd87b52c5d21f3584161684c1f2e592be89746b1e5b2d05",
   "archived_recipe_interface_sha256": "bff6ad1c2a5a9aeb5bd5499d969f5d0c06651f99413be708ac08aa6f4a2a11ba",
-  "status": "MAPPING_FROZEN_RUNTIME_BLOCKED_PENDING_SCHEMA_DECISION",
-  "runtime_blocker": {
-    "code": "LEGACY_PROFILE_PUBLISHED_ZERO_UNREPRESENTABLE",
-    "affected_food": "SUGAR",
-    "affected_legacy_fields": [
-      "protein_g",
-      "fat_g"
-    ],
-    "evidence": "RU-NUT-DB publishes literal 0 for prot/fat; zero semantics are unresolved, so neither numeric VALUE, missing, below_detection nor method_incompatible is truthful.",
-    "schema_fact": "food_nutrition_profile_observations.state CHECK currently allows only value/missing/below_detection/method_incompatible.",
-    "required_decision": "Either add a new persisted observation state such as published_zero_unresolved via an explicit migration/domain contract amendment, or defer SUGAR from the Step 4 batch."
-  }
+  "status": "MAPPING_FROZEN_RUNTIME_READY"
 }

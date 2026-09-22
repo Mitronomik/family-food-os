@@ -30,26 +30,24 @@ For the exact five records
 Per-food positive V2 counts:
 `7 / 17 / 17 / 17 / 16`.
 
-## Current blocker
+## Mapping result
 
-**Runtime Step 4 is BLOCKED_PENDING_SCHEMA_DECISION.**
+The exact five-food closure approves 18 source fields for every published numeric
+literal, including source-published zero.
 
-SUGAR publishes literal zero for source protein and fat. The zero semantics are
-unresolved, but the current persisted observation state supports only
-`value/missing/below_detection/method_incompatible`.
+Result:
 
-None truthfully represents this source state while keeping legacy
-`protein_g/fat_g` nullable.
+- 130 source observations retained;
+- 90 V2 numeric candidate values — 18 per food;
+- 8 fields remain deferred/source-only;
+- SUGAR `prot=0` / `fat=0` use existing numeric VALUE semantics with literal
+  zero and explicit provenance;
+- no migration/schema change is required.
 
-## Architecture decision required
+## Runtime readiness
 
-Choose before runtime:
-
-1. preserve the five-food batch by adding a persisted state such as
-   `published_zero_unresolved` through a separate migration/domain contract; or
-2. keep the schema unchanged and defer SUGAR, reducing the first batch to four.
-
-This evidence PR does not choose or implement either option.
+After this evidence PR is merged/reviewed, Step 4 runtime may implement the
+accepted five-food batch using the exact mapping manifest.
 
 ## Stop boundary
 

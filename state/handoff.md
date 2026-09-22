@@ -8,21 +8,17 @@ Current branch: `data/step4-ru-nut-db-semantic-closure`.
 The licensed five-record source mapping is frozen in:
 `data/curation/ru-nut-db-step4-semantic-closure/`.
 
-Result: 18 approved positive-only source fields, 74 positive V2 candidate values,
-43 source zeros all held, and eight fields deferred/source-only.
+Result: 18 approved numeric fields and **90 V2 values — 18 per food**.
+Source-published zero is retained as numeric zero with `VALUE` source state and
+explicit provenance; it is not reclassified as missing/below-detection.
 
-Critical new finding: exact SUGAR source truth cannot be persisted in the current
-legacy-profile observation enum because source `prot=0` and `fat=0` have
-unresolved zero semantics. They are neither missing, below-detection,
-method-incompatible nor authoritative numeric zero.
+Eight fields remain deferred/source-only:
+`carbh, a_vit, pp, carot, cholest, ethanol, sugar_ad, salt_ad`.
 
-Runtime is blocked pending explicit architecture choice:
-- add a new persisted `published_zero_unresolved`-type state via a separately
-  approved migration/domain contract; or
-- defer SUGAR and change the accepted first-batch scope.
+No migration/schema change is required by the semantic closure.
 
-Do not implement a migration, choose a migration number, or drop SUGAR without
-explicit authorization.
+After Step 4B merge/review, runtime can implement the accepted five-food batch
+using the exact mapping manifest.
 
 Read:
 - `docs/family-food/first-russian-food-batch-contract.md`;

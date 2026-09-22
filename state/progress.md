@@ -7,23 +7,22 @@ PR80 is merged at `f7ac885dde055900b3a6397aa64a15fe698abe5b`.
 The licensed five-record source-semantic review is complete:
 
 - 26 RU-NUT-DB fields reviewed;
-- 18 positive-value mappings approved;
+- 18 numeric field mappings approved;
 - 8 fields deliberately deferred/source-only;
 - 130 source observations retained;
 - 87 published numeric / 43 published zero;
-- 74 positive V2 candidate values;
-- all 43 zeros remain nonnumeric evidence;
-- per-food positive V2 counts: SUGAR 7, CARROT_RED_RAW 17,
-  CABBAGE_GREEN 17, BEET 17, RICE_GROATS 16.
+- **90 V2 numeric candidate values — 18 per food**;
+- published zero is preserved as numeric zero for approved fields with explicit
+  source provenance.
 
-The closure also disproved PR80's no-migration assumption for the exact five-food
-batch. SUGAR source protein/fat zeros cannot be truthfully represented by the
-current four persisted observation states.
+The closure confirms PR80's no-migration expectation. Existing `VALUE`
+observations represent source-supplied numeric literals including zero; they do
+not claim independent analytical exactness.
 
 Status:
-`MAPPING_FROZEN_RUNTIME_BLOCKED_PENDING_SCHEMA_DECISION`.
+`MAPPING_FROZEN_RUNTIME_READY`.
 
-No runtime/schema/numeric production data is changed by this evidence operation.
+No runtime/schema/production numeric data is changed by this evidence operation.
 
 ## Step 4 licensed RU-NUT-DB authority reconciliation — 2026-09-22
 

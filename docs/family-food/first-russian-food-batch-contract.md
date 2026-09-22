@@ -3,7 +3,7 @@
 **Status:** pre-implementation contract for Russian-data integration Step 4
 **Accepted base:** `0ee9e5a3335e876d5a1de6a2c32ea245efe8e5e6` (merged PR #79)
 **Runtime/schema/data publication in this gate:** none
-**Current gate result:** **SOURCE SEMANTICS MAPPING FROZEN / RUNTIME BLOCKED PENDING SCHEMA DECISION**
+**Current gate result:** **SOURCE SEMANTICS MAPPING FROZEN / RUNTIME READY AFTER STEP 4B MERGE**
 
 ## 1. Goal
 
@@ -36,11 +36,10 @@ Merged PR79 provides:
 - fresh / exact replay / conflict / rollback semantics;
 - preserved V1 provenance and V1-pinned legacy Composition behavior.
 
-PR80 expected no schema change. Step 4B semantic closure disproves that assumption
-for the exact five-food batch: SUGAR's unresolved published-zero legacy projection
-cannot be represented by the current persisted observation-state enum. This
-evidence PR introduces no migration. Runtime remains stopped pending a separate
-architecture decision; see §19.
+PR80 expected no schema change. Step 4B confirms the existing profile/vector
+schema is sufficient: a source-published zero is a numeric source value and is
+represented by Decimal zero plus a VALUE observation with explicit provenance.
+No migration is required by the semantic closure.
 
 Every Step 4 profile remains `is_current=false`; existing current USDA profiles
 remain unchanged.
@@ -522,8 +521,8 @@ reviewed and docs/static verification is green.
 PR80 is merged. Step 4B freezes the source-semantic mapping but does **not**
 authorize numeric publication.
 
-Runtime publication remains blocked pending the explicit schema/batch-scope
-decision recorded in §19.
+Runtime publication may proceed only after the Step 4B mapping closure is merged
+and reviewed; no additional schema gate is required by source-zero semantics.
 
 
 ## 19. Step 4B source-semantic closure — 2026-09-22
@@ -536,70 +535,33 @@ Evidence package:
 The five records retain exactly 130 source nutrient observations:
 87 `published_numeric`, 43 `published_zero`, zero missing.
 
-Eighteen source fields are approved for positive-value V2 publication:
+Eighteen source fields are approved for numeric V2 publication:
 `kcal, prot, fat, satur, starch, mdsug, diet_fibre, water, b1, b2, c,
 ret_equiv, na, k, ca, p, fe, mg`.
 
-This yields 74 positive candidate V2 values:
+Every published numeric literal in those fields, including `0`, is a numeric
+source value. This yields exactly **90 V2 values — 18 per food**.
 
-| Food | Positive V2 values |
-| --- | ---: |
-| SUGAR | 7 |
-| CARROT_RED_RAW | 17 |
-| CABBAGE_GREEN | 17 |
-| BEET | 17 |
-| RICE_GROATS | 16 |
+Eight fields remain deliberately source-only/deferred:
+`carbh, a_vit, pp, carot, cholest, ethanol, sugar_ad, salt_ad`.
 
-Sixteen zeros occur in otherwise approved fields; all remain held and nonnumeric.
+**DECISION:** this is the terminal mapping set for the pinned RU-NUT-DB snapshot
+unless a later separately reviewed source-semantic contract adds a mapping.
 
-Eight fields are deliberately not numeric V2 truth for this snapshot:
+### FACT — published zero uses existing VALUE semantics
 
-- `carbh`: definition ambiguous;
-- `a_vit`: vitamin-A convention ambiguous;
-- `pp`: niacin vs niacin-equivalent ambiguous;
-- `carot`: pinned/current official forms conflict on mg vs µg;
-- `cholest`: source g vs canonical mg; Step 3 forbids implicit conversion;
-- `ethanol`, `sugar_ad`, `salt_ad`: no approved V2 target.
+`NutritionObservationState.VALUE` means the source supplied a numeric value. It
+does not assert independently verified analytical exactness.
 
-The other 27 zeros in these deferred fields remain source-only/held evidence.
+Therefore SUGAR `prot=0` and `fat=0` are represented source-faithfully as
+Decimal zero, VALUE observations preserving literal `"0"`, V2 numeric zero rows
+for approved fields, and explicit FIC source/method provenance.
 
-**DECISION:** this is the terminal field-mapping set for the pinned
-RU-NUT-DB snapshot unless a later separately reviewed source-semantic contract
-adds a mapping. Runtime must use the exact manifest rather than infer by label or
-equal unit.
+No new observation state and no schema migration are required.
 
-### FACT — schema assumption disproved
+### DECISION — runtime handoff
 
-The current domain/database can persist legacy profile observation states only as:
-
-`value | missing | below_detection | method_incompatible`.
-
-RU-NUT-DB SUGAR publishes literal `0` for `prot` and `fat`. Because scientific
-zero semantics are unresolved, those observations are not truthfully:
-
-- numeric VALUE zero;
-- missing;
-- established below detection;
-- method incompatible.
-
-At the same time the nullable legacy `protein_g` and `fat_g` projection must
-retain an explicit source state.
-
-Therefore the exact five-food Step 4 batch cannot be represented by the current
-persisted profile observation contract.
-
-### OPEN QUESTION — architecture decision required
-
-Choose one before runtime implementation:
-
-1. **Preserve the accepted five-food batch** by adding a source-faithful persisted
-   state such as `published_zero_unresolved`, requiring a separately approved
-   domain/schema migration contract; or
-2. **Preserve the current schema** by deferring SUGAR, which changes the accepted
-   first-batch scope to four foods.
-
-Forbidden shortcuts: do not relabel the literal zero as missing,
-below-detection or method-incompatible, and do not persist numeric zero merely to
-avoid a migration.
-
-No migration number or schema implementation is authorized by this evidence PR.
+After Step 4B merge/review, runtime implementation must consume the exact
+18-field manifest and publish 90 V2 rows across the five foods. It must not infer
+mappings by label/equal unit, reinterpret deferred fields, or substitute Book2002
+values.
