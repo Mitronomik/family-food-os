@@ -1,5 +1,75 @@
 # Handoff
 
+## Step 4 licensed RU-NUT-DB source correction — 2026-09-22
+
+PR80 remains the docs-only Step 4 Contract Gate.
+
+The user supplied a signed FIC license plus the original corpus archive. The
+source-authority blocker is cleared for the pinned electronic `RU-NUT-DB`
+snapshot; do not treat Book2002 as production numeric authority.
+
+Exact FIC records are codes 1150,1187,1184,1204,66 with DB indices
+252,126,69,254,103.
+
+User decision: DB126 `Морковь свежая красная` creates new
+`CARROT_RED_RAW`; it must not reuse generic `CARROT`. The five-food batch is
+3 reuse + 2 create (`CARROT_RED_RAW`, `RICE_GROATS`).
+
+The archive shows RU-NUT-DB and Book2002 values differ, especially rice, so they
+must not be merged.
+
+The next blocker is scientific field semantics, not rights:
+`carbh` definition unresolved; hidden field bindings unresolved; source zero
+semantics unresolved.
+
+Do not seal a 13-row sparse vector yet because the seal is immutable. First
+complete the bounded mapping closure, then implement the one-UoW five-food batch.
+
+Read:
+- `docs/family-food/first-russian-food-batch-contract.md`;
+- `docs/family-food/fic-nutrition-license-receipt.md`.
+
+
+## Step 4 first Russian food batch contract gate — 2026-09-21
+
+Accepted main: `0ee9e5a3335e876d5a1de6a2c32ea245efe8e5e6` (merged PR79).
+Current branch: `docs/step4-first-russian-food-batch-contract`.
+
+Step 3 transactional publication is accepted. Current work is docs-only Step 4A.
+
+Candidate batch is exactly five Book2002 records:
+`SUGAR`, `CARROT`, `CABBAGE_GREEN`, `BEET`, and new
+`RICE_POLISHED_DRY`.
+
+The contract freezes:
+
+- identity reuse/new-rice decisions;
+- explicit ATOMIC versions 2/2/2/1/1;
+- all profiles non-current;
+- 60 retained source cells / 37 positive V2 values;
+- source-native carbohydrate → V2 `CARBOHYDRATE_AVAILABLE`;
+- below-detection → no numeric row;
+- ash/organic acids → source-only evidence;
+- one atomic five-food batch transaction;
+- a new batch-orchestration seam because Step 3 `publish()` currently owns and
+  commits its own UoW; Step 4 must reuse a transaction-neutral bundle operation
+  and commit all five once;
+- no migration/schema change.
+
+Source-authority update: accepted repository evidence still says
+`BLOCKED_PENDING_RIGHTS_REVIEW`, but on 2026-09-21 the user explicitly stated
+that they possess permission. Treat the remaining gate as permission
+evidence/scope review, not an assumption that permission is absent. Runtime/data
+publication starts only after the permission is inspected and an authority receipt
+records the applicable use/distribution scope.
+
+Read:
+`docs/family-food/first-russian-food-batch-contract.md`.
+
+Do not publish numeric Book2002 values, change current profiles, or start Step 5
+automatically.
+
+
 ## Step 3 transactional V2 publication runtime — 2026-09-21
 
 Accepted main: `e5466121e4958cf4fb95ba9041d1c7926daab17e` (merged PR78).

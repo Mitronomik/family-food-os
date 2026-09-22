@@ -1,69 +1,85 @@
 # Current focus
 
-Updated: `2026-09-21`.
+Updated: `2026-09-22`.
 
 ## Accepted state
 
-PR78 is merged into `main` at `e5466121e4958cf4fb95ba9041d1c7926daab17e`.
+PR79 is merged into `main` at
+`0ee9e5a3335e876d5a1de6a2c32ea245efe8e5e6`.
 
-The accepted Russian-data integration sequence remains:
+Steps 1–3 of the Russian-data integration sequence are accepted.
 
-`partial profile storage → registry/adapters → transactional publication → first
-Russian food batch → Russian reference table → persisted methodology selection →
-transformation applicability → recipe-dependency food batch → executable Russian
-recipes → Planner integration`.
+Current bounded work is **Step 4A — corrected Implementation Contract Gate for
+the first licensed Russian electronic-database batch**.
 
-Steps 1 and 2 plus the Step 3 Implementation Contract Gate are accepted.
+Canonical contract:
+`docs/family-food/first-russian-food-batch-contract.md`.
 
-Current authorized bounded work is **Step 3B — transactional reviewed nutrition
-publication runtime implementation** under
-`docs/family-food/transactional-nutrition-publication-contract.md`.
+Authority receipt:
+`docs/family-food/fic-nutrition-license-receipt.md`.
 
-## Runtime scope
+## Source decision
 
-Implement exactly one reusable deterministic publication path:
+The project owner supplied both:
 
-`FoodIngredient → non-current FoodNutritionProfile + immutable source observations
-→ RU_NUTRIENT_REGISTRY_V2 NutrientVector → ATOMIC FoodCompositionVersion`.
+- a signed 2026-09-10 FIC license covering the electronic database
+  «Химический состав пищевых продуктов, используемых в Российской Федерации»;
+- `FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`.
 
-Required seams:
+The corpus proves the five Step 4 candidates exist in the official
+`RU-NUT-DB` snapshot from `ion.ru`.
 
-- specialized profile writer that never invokes historical V1 auto-bootstrap;
-- registry-version-aware source-neutral V2 provenance decoder using
-  `FFO_NUTRIENT_VALUE_EVIDENCE_V2`;
-- V1 persisted provenance/decoder behavior remains unchanged;
-- one existing project UoW owns the whole fresh transaction;
-- nutrient values first, seal last, then ATOMIC composition;
-- explicit V2 registry and explicit composition version;
-- exact replay performs zero writes and preserves stable IDs;
-- conflicting or partially present bundle fails closed;
-- rollback/failure-injection coverage at every write boundary;
-- Step 3 profiles remain `is_current=false`;
-- legacy `CompositionCalculator` remains V1-pinned.
+**RU-NUT-DB is now the production numeric authority for Step 4.**
 
-## Architecture constraints
+Book2002 remains historical/corroborating evidence only.
 
-- no schema change and no new migration; if implementation requires one, STOP for
-  a separate architecture decision;
-- no generic `bootstrap_v1=false` switch on catalogue profile operations;
-- no hidden source-method inference;
-- no invented source/FDC identifiers;
-- no repair/adoption of partial historical bundles;
-- deterministic core must pass with `AI_ENABLED=false`.
+## Exact first-batch source rows
 
-## Acceptance
+- `1150 /DB/252` — Сахар-песок → `SUGAR`;
+- `1187 /DB/126` — Морковь свежая красная → new `CARROT_RED_RAW`;
+- `1184 /DB/69` — Капуста белокочанная свежая → `CABBAGE_GREEN`;
+- `1204 /DB/254` — Свекла свежая → `BEET`;
+- `66 /DB/103` — Крупа рисовая → new `RICE_GROATS`.
 
-The implementation PR must satisfy every adversarial test and verification tier
-in the merged Step 3 contract, including fresh complete/partial publication,
-source-neutral V2 round-trip, methodology read, V1 preservation, exact replay,
-conflict cases, rollback injection, foreign-key integrity, full backend and full
-launcher regression.
+Do not attach the red-only carrot source row to generic `CARROT`.
+Do not reuse `RICE_WHITE` or the earlier Book2002-derived
+`RICE_POLISHED_DRY`.
+
+## Current blocker
+
+Source rights are no longer the blocker.
+
+The remaining Step 4 gate is **source-semantic mapping**.
+
+The corpus confirms per-100-g edible basis and units for `kcal/prot/fat/carbh`,
+but explicitly leaves:
+
+- the `carbh` nutrient definition unresolved;
+- hidden DB field unit/definition binding unresolved;
+- numeric-zero scientific semantics unresolved.
+
+Only positive `kcal/prot/fat` values are currently safe canonical mappings
+(13 values across the five records).
+
+Because a Step 3 vector seal is immutable, do not prematurely publish that sparse
+13-row projection. First freeze the final intended mapping set for this snapshot.
+
+## Architecture
+
+Step 4 still requires:
+
+- no schema/migration;
+- all new Russian profiles non-current;
+- existing USDA current profiles preserved, including generic `CARROT`;
+- transaction-neutral one-bundle operation;
+- one five-food batch UoW / one commit;
+- exact replay zero-write;
+- whole-batch rollback on one-food failure.
 
 ## Stop boundary
 
-After Step 3 runtime implementation is review-ready, stop for final review and
-explicit merge authorization.
+PR80 may merge as the corrected gate.
 
-Do not start Step 4 production Russian food publication, source-rights approval,
-target tables, persisted methodology selection, transformation applicability,
-recipes, Planner, Gate1, Shopping, API/UI or AI work automatically.
+After merge, do not start numeric publication automatically. The next bounded
+task is Step 4 source-semantic mapping closure for these five licensed RU-NUT-DB
+records. Runtime publication begins only after that mapping set is reviewed.

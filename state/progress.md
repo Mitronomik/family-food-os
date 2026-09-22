@@ -1,5 +1,72 @@
 # Progress
 
+## Step 4 licensed RU-NUT-DB authority reconciliation — 2026-09-22
+
+The project owner supplied the signed FIC database license and
+`FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`.
+
+Verified from the archive:
+
+- archive SHA-256:
+  `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
+- official RU-NUT-DB raw HTML SHA-256:
+  `155107ddb381c14721c77fe995d604a5197982441446b54034e4d84645efbd6d`;
+- 3216 electronic database rows;
+- exact Step 4 candidates at source codes 1150/1187/1184/1204/66;
+- corpus identity evidence rejects DB126 as generic `CARROT`; user approved
+  new source-faithful `CARROT_RED_RAW / Морковь свежая красная`;
+- first batch identity shape is now 3 reuse + 2 create
+  (`CARROT_RED_RAW`, `RICE_GROATS`);
+- all five are identically corroborated across the second official FIC interface;
+- RU-NUT-DB differs numerically from Book2002, so Book2002 is not Step 4
+  production numeric truth.
+
+License review clears the historical `rights_use_unresolved` blocker for this
+electronic source under the supplied conditions. The exact §7.1 attribution text
+and §7.2 repository-link requirement are frozen in the authority receipt.
+
+Remaining blocker is canonical source-field semantics. Across the five rows the
+source contains 130 nutrient observations: 87 published numeric and 43 published
+zero. Current corpus evidence safely maps only positive kcal/protein/fat values,
+13 canonical V2 values total. Carbohydrate definition, hidden-field bindings and
+zero semantics remain unresolved.
+
+Because sealed vectors are immutable, no sparse production publication occurs
+until the intended mapping set is explicitly frozen.
+
+
+## Step 4 first Russian food batch contract gate — 2026-09-21
+
+PR79 is merged at `0ee9e5a3335e876d5a1de6a2c32ea245efe8e5e6`; Step 3 transactional publication is accepted.
+
+The user authorized Step 4 through the mandatory pre-implementation Contract Gate.
+
+Preflight result:
+
+- no new migration is expected;
+- exact batch scope is five reviewed Book2002 records;
+- four existing FoodIngredient identities are reused without replacing current
+  USDA profiles;
+- generic polished rice must become new `RICE_POLISHED_DRY`, not `RICE_WHITE`;
+- explicit ATOMIC versions are SUGAR2 / CARROT2 / CABBAGE_GREEN2 / BEET1 /
+  RICE_POLISHED_DRY1;
+- existing V2 policy can map source-native carbohydrate explicitly to
+  `CARBOHYDRATE_AVAILABLE`;
+- 60 reviewed source cells imply 37 positive canonical V2 values, with
+  below-detection values remaining nonnumeric and ash/organic acids retained only
+  as source observations;
+- Step 4 must be one five-food transaction, not five independent commits;
+- adversarial preflight confirmed a hidden transaction-ownership coupling:
+  Step 3 `publish()` commits its own UoW, so Step 4 requires a bounded
+  transaction-neutral bundle seam plus a batch service owning the single commit.
+
+The user stated on 2026-09-21 that they possess permission for Book2002 use.
+Current repository evidence predates that statement and still reads
+`BLOCKED_PENDING_RIGHTS_REVIEW`. The remaining task is to inspect the permission
+and record its exact scope in an authority receipt before runtime/data publication.
+No source numeric values are published by this gate.
+
+
 ## Step 3 transactional V2 publication runtime — 2026-09-21
 
 Accepted base is merged PR78 at `e5466121e4958cf4fb95ba9041d1c7926daab17e`.
