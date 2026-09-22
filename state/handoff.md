@@ -1,5 +1,29 @@
 # Handoff
 
+## Step 4B RU-NUT-DB semantic closure — 2026-09-22
+
+Accepted main: `f7ac885dde055900b3a6397aa64a15fe698abe5b` (merged PR80).
+Current branch: `data/step4-ru-nut-db-semantic-closure`.
+
+The licensed five-record source mapping is frozen in:
+`data/curation/ru-nut-db-step4-semantic-closure/`.
+
+Result: 18 approved numeric fields and **90 V2 values — 18 per food**.
+Source-published zero is retained as numeric zero with `VALUE` source state and
+explicit provenance; it is not reclassified as missing/below-detection.
+
+Eight fields remain deferred/source-only:
+`carbh, a_vit, pp, carot, cholest, ethanol, sugar_ad, salt_ad`.
+
+No migration/schema change is required by the semantic closure.
+
+After Step 4B merge/review, runtime can implement the accepted five-food batch
+using the exact mapping manifest.
+
+Read:
+- `docs/family-food/first-russian-food-batch-contract.md`;
+- `data/curation/ru-nut-db-step4-semantic-closure/README.md`.
+
 ## Step 4 licensed RU-NUT-DB source correction — 2026-09-22
 
 PR80 remains the docs-only Step 4 Contract Gate.

@@ -1,5 +1,29 @@
 # Progress
 
+## Step 4B RU-NUT-DB semantic mapping closure — 2026-09-22
+
+PR80 is merged at `f7ac885dde055900b3a6397aa64a15fe698abe5b`.
+
+The licensed five-record source-semantic review is complete:
+
+- 26 RU-NUT-DB fields reviewed;
+- 18 numeric field mappings approved;
+- 8 fields deliberately deferred/source-only;
+- 130 source observations retained;
+- 87 published numeric / 43 published zero;
+- **90 V2 numeric candidate values — 18 per food**;
+- published zero is preserved as numeric zero for approved fields with explicit
+  source provenance.
+
+The closure confirms PR80's no-migration expectation. Existing `VALUE`
+observations represent source-supplied numeric literals including zero; they do
+not claim independent analytical exactness.
+
+Status:
+`MAPPING_FROZEN_RUNTIME_READY`.
+
+No runtime/schema/production numeric data is changed by this evidence operation.
+
 ## Step 4 licensed RU-NUT-DB authority reconciliation — 2026-09-22
 
 The project owner supplied the signed FIC database license and

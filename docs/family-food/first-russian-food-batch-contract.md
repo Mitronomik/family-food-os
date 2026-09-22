@@ -3,7 +3,7 @@
 **Status:** pre-implementation contract for Russian-data integration Step 4
 **Accepted base:** `0ee9e5a3335e876d5a1de6a2c32ea245efe8e5e6` (merged PR #79)
 **Runtime/schema/data publication in this gate:** none
-**Current gate result:** **SOURCE AUTHORITY CLEARED FOR RU-NUT-DB / SOURCE SEMANTICS MAPPING STILL GATED**
+**Current gate result:** **SOURCE SEMANTICS MAPPING FROZEN / RUNTIME READY AFTER STEP 4B MERGE**
 
 ## 1. Goal
 
@@ -36,8 +36,10 @@ Merged PR79 provides:
 - fresh / exact replay / conflict / rollback semantics;
 - preserved V1 provenance and V1-pinned legacy Composition behavior.
 
-No schema change is expected for Step 4. If implementation proves otherwise,
-stop for a separate architecture decision.
+PR80 expected no schema change. Step 4B confirms the existing profile/vector
+schema is sufficient: a source-published zero is a numeric source value and is
+represented by Decimal zero plus a VALUE observation with explicit provenance.
+No migration is required by the semantic closure.
 
 Every Step 4 profile remains `is_current=false`; existing current USDA profiles
 remain unchanged.
@@ -232,93 +234,86 @@ published_zero = 43
 not_reported = 0
 ```
 
-The package distinguishes numeric zero from null, but explicitly states that the
-scientific meaning of zero is unresolved.
+The package distinguishes numeric zero from null.
 
-**DECISION:** every one of the 130 source observations is retained. A
-`published_zero` is never promoted to an authoritative numeric zero merely
-because the JSON literal is zero.
+**DECISION:** all 130 source observations are retained exactly. A
+`published_zero` is a numeric value supplied by FIC and remains numeric when its
+source field has an approved canonical mapping. It is stored as
+`Decimal("0")` with a `VALUE` observation preserving source literal `"0"`
+and provenance.
 
-## 9. FACT / DECISION — currently proven canonical mappings
+This does not assert independently verified analytical absence; it records the
+number published by the licensed source.
 
-The corpus itself closes the 100 g edible basis and units for four top-level FIC
-fields: `kcal`, `prot`, `fat`, `carbh`.
+Zeros in fields that are deferred/source-only remain source evidence and do not
+become canonical V2 values.
 
-However it also explicitly records:
+## 9. FACT / DECISION — frozen canonical mapping
 
-```text
-carbh nutrient_definition = carbohydrates_source_definition_unresolved
-FIC numeric-zero scientific semantics = unresolved
-FIC DB hidden-field unit binding = unresolved
-```
+Step 4B reviewed the RU-NUT-DB field dictionary once at source-schema level.
+Runtime must consume this mapping deterministically; it must not re-adjudicate
+individual product cells.
 
-The branded-product interface contains labels/units for 26 fields, but the corpus
-correctly records that those form fields are not a proven DB serialization
-contract. Conflicts such as cholesterol and beta-carotene units prove that a
-mechanical transfer is unsafe.
+The terminal mapping approves 18 source fields for published numeric V2 values,
+including source-published zero:
 
-Therefore the only currently approved Step 4 positive canonical mappings are:
+| RU-NUT-DB field | V2 code |
+| --- | --- |
+| `kcal` | `ENERGY_KCAL` |
+| `prot` | `PROTEIN` |
+| `fat` | `FAT_TOTAL` |
+| `satur` | `FATTY_ACIDS_SATURATED_TOTAL` |
+| `starch` | `STARCH` |
+| `mdsug` | `SUGARS_TOTAL` |
+| `diet_fibre` | `FIBER_TOTAL_DIETARY` |
+| `water` | `WATER` |
+| `b1` | `THIAMIN` |
+| `b2` | `RIBOFLAVIN` |
+| `c` | `VITAMIN_C` |
+| `ret_equiv` | `VITAMIN_A_RE` |
+| `na` | `SODIUM` |
+| `k` | `POTASSIUM` |
+| `ca` | `CALCIUM` |
+| `p` | `PHOSPHORUS` |
+| `fe` | `IRON` |
+| `mg` | `MAGNESIUM` |
 
-| RU-NUT-DB field | V2 code | Rule |
-| --- | --- | --- |
-| `kcal` | `ENERGY_KCAL` | positive published value only |
-| `prot` | `PROTEIN` | positive published value only |
-| `fat` | `FAT_TOTAL` | positive published value only |
+The exact machine-readable contract remains
+`data/curation/ru-nut-db-step4-semantic-closure/field-mapping.json`.
 
-Method code for these published rows is
-`published_method_unspecified`.
+All mapped values use the explicit source method/provenance required by the
+mapping manifest.
 
-For the exact five records this proves **13 positive canonical V2 values**:
+For the exact five records this yields **90 V2 values — 18 per food**.
 
-- energy: 5;
-- protein: 4 (sugar source zero remains held);
-- fat: 4 (sugar source zero remains held).
+Eight fields remain deliberately deferred/source-only:
 
-### 9.1 Carbohydrate
+- `carbh`: source definition does not establish available vs total/by-difference
+  carbohydrate;
+- `a_vit`: Vitamin-A convention is ambiguous;
+- `pp`: preformed niacin vs niacin-equivalent is ambiguous;
+- `carot`: pinned/current official FIC forms conflict on source unit;
+- `cholest`: source/canonical units differ and Step 3 forbids implicit
+  conversion;
+- `ethanol`, `sugar_ad`, `salt_ad`: no approved V2 target.
 
-`carbh` is grams per 100 g edible, but its exact nutrient definition is not
-closed for this database snapshot.
+Book2002 methodology and values are never substituted for these unresolved FIC
+fields.
 
-**DECISION:** do not map it yet to either
-`CARBOHYDRATE_AVAILABLE` or `CARBOHYDRATE_BY_DIFFERENCE`.
+## 10. DECISION — semantic closure is complete
 
-Book2002 methodology cannot be silently transferred to RU-NUT-DB because the
-numeric snapshots differ and record derivation is not established.
+The Step 4B source-semantic closure is complete and frozen for the pinned
+RU-NUT-DB snapshot.
 
-### 9.2 Hidden fields
+Step 3 vector seals remain immutable, so runtime must publish exactly the reviewed
+90-row mapping set for this source snapshot and must not infer or append additional
+field mappings later.
 
-Fields including `diet_fibre`, `water`, `starch`, `mdsug`, minerals,
-vitamins and fatty-acid fields remain source-only observations until their exact
-DB-field unit/definition mapping is reviewed.
+Any future proposal to map one of the eight deferred fields requires a separate
+reviewed semantic decision and a new source snapshot/profile/version as required
+by immutable-history rules.
 
-No same-name or equal-unit inference grants canonical authority.
-
-## 10. DECISION — do not prematurely seal a 13-row vector
-
-Step 3 vector seals are immutable. A sealed profile cannot later be enriched in
-place.
-
-Therefore Step 4 must not publish the currently proven 13-row sparse projection
-until the first-batch canonical mapping set is explicitly frozen as the intended
-terminal mapping for this source snapshot.
-
-**DECISION:** before runtime publication, perform one bounded source-semantic
-closure for these five RU-NUT-DB records.
-
-That closure must decide, field by field:
-
-- which additional DB fields have source-owned definition/unit evidence sufficient
-  for a V2 mapping;
-- whether `carbh` can be mapped to an existing V2 carbohydrate concept;
-- which published-zero fields remain held;
-- final positive V2 row count per food;
-- final source-observation inventory and mapping receipt.
-
-If no additional mappings can be established, an explicit reviewed decision may
-accept the 13-row sparse projection as terminal for this snapshot. It must not
-happen implicitly.
-
-No schema change is authorized by this semantic closure.
+No schema change is required by this closure.
 
 ## 11. DECISION — explicit ATOMIC versions
 
@@ -456,8 +451,9 @@ The later runtime/data PR is not review-ready until it proves at least:
 5. `RICE_WHITE` and `RICE_POLISHED_DRY` are rejected for source code 66;
 6. final reviewed field→V2 mapping manifest is exact;
 7. all 130 source nutrient observations are retained;
-8. every published zero remains nonnumeric unless a separately accepted zero
-   policy explicitly authorizes otherwise;
+8. every source-published zero in an approved mapped field round-trips as
+   numeric `Decimal("0")` with `VALUE`, exact source literal and provenance;
+   zeros in deferred/source-only fields remain non-canonical evidence;
 9. no unresolved DB field becomes a canonical value;
 10. all five profiles remain non-current;
 11. current USDA profiles remain unchanged, including generic `CARROT`;
@@ -486,14 +482,15 @@ Docs/state/authority-receipt only:
 - state consistency;
 - no runtime/schema/production data payload.
 
-### Later source-semantic closure
+### Step 4B source-semantic closure
 
-Evidence/curation only unless runtime changes:
+Completed as evidence/curation on the merged-PR80 base:
 
-- exact field dictionary review;
+- exact 26-field dictionary review;
 - no numeric-source mutation;
 - mapping manifest/count reproducibility;
-- source-owned definition/unit evidence.
+- source-owned definition/unit evidence;
+- explicit runtime/schema blocker receipt.
 
 ### Later runtime/data PR
 
@@ -515,9 +512,50 @@ Only after semantic mapping is frozen:
 PR80 may merge when this corrected source/authority/transaction contract is
 reviewed and docs/static verification is green.
 
-Merging PR80 does **not** start numeric publication automatically.
+PR80 is merged. Step 4B freezes the source-semantic mapping but does **not**
+authorize numeric publication.
 
-The next bounded Step 4 task is the source-semantic mapping closure for the five
-licensed RU-NUT-DB records.
+Runtime publication may proceed only after the Step 4B mapping closure is merged
+and reviewed; no additional schema gate is required by source-zero semantics.
 
-Runtime publication starts only after that mapping set is explicitly frozen.
+
+## 19. Step 4B source-semantic closure — 2026-09-22
+
+Evidence package:
+`data/curation/ru-nut-db-step4-semantic-closure/`.
+
+### FACT — terminal mapping set
+
+The five records retain exactly 130 source nutrient observations:
+87 `published_numeric`, 43 `published_zero`, zero missing.
+
+Eighteen source fields are approved for numeric V2 publication:
+`kcal, prot, fat, satur, starch, mdsug, diet_fibre, water, b1, b2, c,
+ret_equiv, na, k, ca, p, fe, mg`.
+
+Every published numeric literal in those fields, including `0`, is a numeric
+source value. This yields exactly **90 V2 values — 18 per food**.
+
+Eight fields remain deliberately source-only/deferred:
+`carbh, a_vit, pp, carot, cholest, ethanol, sugar_ad, salt_ad`.
+
+**DECISION:** this is the terminal mapping set for the pinned RU-NUT-DB snapshot
+unless a later separately reviewed source-semantic contract adds a mapping.
+
+### FACT — published zero uses existing VALUE semantics
+
+`NutritionObservationState.VALUE` means the source supplied a numeric value. It
+does not assert independently verified analytical exactness.
+
+Therefore SUGAR `prot=0` and `fat=0` are represented source-faithfully as
+Decimal zero, VALUE observations preserving literal `"0"`, V2 numeric zero rows
+for approved fields, and explicit FIC source/method provenance.
+
+No new observation state and no schema migration are required.
+
+### DECISION — runtime handoff
+
+After Step 4B merge/review, runtime implementation must consume the exact
+18-field manifest and publish 90 V2 rows across the five foods. It must not infer
+mappings by label/equal unit, reinterpret deferred fields, or substitute Book2002
+values.

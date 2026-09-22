@@ -1,0 +1,496 @@
+[
+  {
+    "basis_g": "100",
+    "source_field": "kcal",
+    "source_label_ru": "Энергетическая ценность",
+    "source_unit": "kcal",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "ENERGY_KCAL",
+    "canonical_unit": "kcal",
+    "mapping_status": "METHOD_SPECIFIC",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 5,
+    "published_zero_rows_in_batch": 0,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "prot",
+    "source_label_ru": "Белки",
+    "source_unit": "g",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "PROTEIN",
+    "canonical_unit": "g",
+    "mapping_status": "METHOD_SPECIFIC",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 4,
+    "published_zero_rows_in_batch": 1,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "fat",
+    "source_label_ru": "Жиры",
+    "source_unit": "g",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "FAT_TOTAL",
+    "canonical_unit": "g",
+    "mapping_status": "METHOD_SPECIFIC",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 4,
+    "published_zero_rows_in_batch": 1,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "satur",
+    "source_label_ru": "НЖК",
+    "source_unit": "g",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "FATTY_ACIDS_SATURATED_TOTAL",
+    "canonical_unit": "g",
+    "mapping_status": "EXACT",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 1,
+    "published_zero_rows_in_batch": 4,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "cholest",
+    "source_label_ru": "Холестерин",
+    "source_unit": "g",
+    "decision": "DEFER_UNIT_CONVERSION_REQUIRED",
+    "canonical_code": "CHOLESTEROL",
+    "canonical_unit": "mg",
+    "mapping_status": "EXACT",
+    "method_code": null,
+    "positive_rows_in_batch": 0,
+    "published_zero_rows_in_batch": 5,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Source concept is explicit but source/canonical units differ; Step 3 forbids implicit conversion."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "carbh",
+    "source_label_ru": "Углеводы",
+    "source_unit": "g",
+    "decision": "DEFER_DEFINITION_AMBIGUOUS",
+    "canonical_code": null,
+    "canonical_unit": null,
+    "mapping_status": null,
+    "method_code": null,
+    "positive_rows_in_batch": 5,
+    "published_zero_rows_in_batch": 0,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Углеводы does not establish available vs total/by-difference."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "starch",
+    "source_label_ru": "Усвояемые полисахариды (крахмал)",
+    "source_unit": "g",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "STARCH",
+    "canonical_unit": "g",
+    "mapping_status": "METHOD_SPECIFIC",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 4,
+    "published_zero_rows_in_batch": 1,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "mdsug",
+    "source_label_ru": "Моно- и дисахариды",
+    "source_unit": "g",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "SUGARS_TOTAL",
+    "canonical_unit": "g",
+    "mapping_status": "METHOD_SPECIFIC",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 5,
+    "published_zero_rows_in_batch": 0,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "sugar_ad",
+    "source_label_ru": "Добавленные сахара",
+    "source_unit": "g",
+    "decision": "SOURCE_ONLY_NO_V2_TARGET",
+    "canonical_code": null,
+    "canonical_unit": null,
+    "mapping_status": null,
+    "method_code": null,
+    "positive_rows_in_batch": 1,
+    "published_zero_rows_in_batch": 4,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "No approved RU_NUTRIENT_REGISTRY_V2 target exists for this source concept."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "diet_fibre",
+    "source_label_ru": "Пищевые волокна",
+    "source_unit": "g",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "FIBER_TOTAL_DIETARY",
+    "canonical_unit": "g",
+    "mapping_status": "METHOD_SPECIFIC",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 4,
+    "published_zero_rows_in_batch": 1,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "ethanol",
+    "source_label_ru": "Алкоголь",
+    "source_unit": "g",
+    "decision": "SOURCE_ONLY_NO_V2_TARGET",
+    "canonical_code": null,
+    "canonical_unit": null,
+    "mapping_status": null,
+    "method_code": null,
+    "positive_rows_in_batch": 0,
+    "published_zero_rows_in_batch": 5,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "No approved RU_NUTRIENT_REGISTRY_V2 target exists for this source concept."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "a_vit",
+    "source_label_ru": "Витамин A",
+    "source_unit": "µg",
+    "decision": "DEFER_DEFINITION_AMBIGUOUS",
+    "canonical_code": null,
+    "canonical_unit": null,
+    "mapping_status": null,
+    "method_code": null,
+    "positive_rows_in_batch": 0,
+    "published_zero_rows_in_batch": 5,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Витамин A does not establish RE vs RAE/other convention."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "carot",
+    "source_label_ru": "Бета-каротин",
+    "source_unit": "conflict: archived form mg / current official form µg",
+    "decision": "DEFER_SOURCE_UNIT_CONFLICT",
+    "canonical_code": "BETA_CAROTENE",
+    "canonical_unit": "µg",
+    "mapping_status": "EXACT",
+    "method_code": null,
+    "positive_rows_in_batch": 3,
+    "published_zero_rows_in_batch": 2,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Pinned official form and current official form disagree on the source unit; do not choose one silently."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "ret_equiv",
+    "source_label_ru": "Ретинол-эквивалент",
+    "source_unit": "µg",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "VITAMIN_A_RE",
+    "canonical_unit": "µg",
+    "mapping_status": "EXACT",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 3,
+    "published_zero_rows_in_batch": 2,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "b1",
+    "source_label_ru": "Витамин B1",
+    "source_unit": "mg",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "THIAMIN",
+    "canonical_unit": "mg",
+    "mapping_status": "EXACT",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 4,
+    "published_zero_rows_in_batch": 1,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "b2",
+    "source_label_ru": "Витамин B2",
+    "source_unit": "mg",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "RIBOFLAVIN",
+    "canonical_unit": "mg",
+    "mapping_status": "EXACT",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 4,
+    "published_zero_rows_in_batch": 1,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "pp",
+    "source_label_ru": "Витамин PP",
+    "source_unit": "mg",
+    "decision": "DEFER_DEFINITION_AMBIGUOUS",
+    "canonical_code": null,
+    "canonical_unit": null,
+    "mapping_status": null,
+    "method_code": null,
+    "positive_rows_in_batch": 4,
+    "published_zero_rows_in_batch": 1,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Витамин PP does not establish preformed niacin vs niacin equivalent."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "c",
+    "source_label_ru": "Витамин C",
+    "source_unit": "mg",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "VITAMIN_C",
+    "canonical_unit": "mg",
+    "mapping_status": "EXACT",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 3,
+    "published_zero_rows_in_batch": 2,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "salt_ad",
+    "source_label_ru": "Добавленная соль",
+    "source_unit": "g",
+    "decision": "SOURCE_ONLY_NO_V2_TARGET",
+    "canonical_code": null,
+    "canonical_unit": null,
+    "mapping_status": null,
+    "method_code": null,
+    "positive_rows_in_batch": 0,
+    "published_zero_rows_in_batch": 5,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "No approved RU_NUTRIENT_REGISTRY_V2 target exists for this source concept."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "na",
+    "source_label_ru": "Na",
+    "source_unit": "mg",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "SODIUM",
+    "canonical_unit": "mg",
+    "mapping_status": "EXACT",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 5,
+    "published_zero_rows_in_batch": 0,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "k",
+    "source_label_ru": "K",
+    "source_unit": "mg",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "POTASSIUM",
+    "canonical_unit": "mg",
+    "mapping_status": "EXACT",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 5,
+    "published_zero_rows_in_batch": 0,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "ca",
+    "source_label_ru": "Ca",
+    "source_unit": "mg",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "CALCIUM",
+    "canonical_unit": "mg",
+    "mapping_status": "EXACT",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 5,
+    "published_zero_rows_in_batch": 0,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "p",
+    "source_label_ru": "P",
+    "source_unit": "mg",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "PHOSPHORUS",
+    "canonical_unit": "mg",
+    "mapping_status": "EXACT",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 4,
+    "published_zero_rows_in_batch": 1,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "fe",
+    "source_label_ru": "Fe",
+    "source_unit": "mg",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "IRON",
+    "canonical_unit": "mg",
+    "mapping_status": "EXACT",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 5,
+    "published_zero_rows_in_batch": 0,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "mg",
+    "source_label_ru": "Mg",
+    "source_unit": "mg",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "MAGNESIUM",
+    "canonical_unit": "mg",
+    "mapping_status": "EXACT",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 4,
+    "published_zero_rows_in_batch": 1,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  },
+  {
+    "basis_g": "100",
+    "source_field": "water",
+    "source_label_ru": "Вода",
+    "source_unit": "g",
+    "decision": "APPROVED_PUBLISHED_VALUE",
+    "canonical_code": "WATER",
+    "canonical_unit": "g",
+    "mapping_status": "EXACT",
+    "method_code": "published_method_unspecified",
+    "positive_rows_in_batch": 5,
+    "published_zero_rows_in_batch": 0,
+    "not_reported_rows_in_batch": 0,
+    "evidence_refs": [
+      "RU-NUT-DB-RAW-2026-09-20",
+      "FIC-BRAND-FORM-2026-09-20"
+    ],
+    "reason": "Official FIC field label/unit and reviewed source-key correspondence match the V2 concept; preserve every published numeric literal, including 0, with explicit source provenance."
+  }
+]

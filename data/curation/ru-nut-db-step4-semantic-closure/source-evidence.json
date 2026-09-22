@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "source_id": "RU-NUT-DB",
+  "archive": {
+    "filename": "FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea"
+  },
+  "pinned_interfaces": [
+    {
+      "id": "RU-NUT-DB-RAW-2026-09-20",
+      "path": "packages/nutrition/raw/ion-db.html",
+      "sha256": "155107ddb381c14721c77fe995d604a5197982441446b54034e4d84645efbd6d",
+      "url": "https://ion.ru/nauka/baza-dannykh-khimicheskogo-sostava/1-1-baza-dannykh/1.1_baza%20dannih.html"
+    },
+    {
+      "id": "FIC-BRAND-FORM-2026-09-20",
+      "path": "packages/nutrition/raw/ion-brand.html",
+      "sha256": "2c434ee0fc5003610bd87b52c5d21f3584161684c1f2e592be89746b1e5b2d05",
+      "url": "https://ion.ru/nauka/vvod-dannykh-khimsostava-brendirovannoy-produktsii/"
+    },
+    {
+      "id": "FIC-RECIPE-INTERFACE-2026-09-20",
+      "path": "packages/nutrition/raw/ion-recipe.html",
+      "sha256": "bff6ad1c2a5a9aeb5bd5499d969f5d0c06651f99413be708ac08aa6f4a2a11ba"
+    }
+  ],
+  "live_source_check": {
+    "observed_date": "2026-09-22",
+    "url": "https://ion.ru/nauka/vvod-dannykh-khimsostava-brendirovannoy-produktsii/",
+    "facts": [
+      "Official FIC form states nutrient inputs on a 100 g product/edible-part basis.",
+      "Current form labels beta-carotene in µg while the pinned 2026-09-20 form labels beta-carotene in mg."
+    ],
+    "decision": "Do not map source field carot for the pinned snapshot until the source-owned unit conflict is explicitly resolved."
+  }
+}
