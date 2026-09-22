@@ -27,7 +27,7 @@
       },
       "source": {
         "db_index": 252, "json_pointer": "/DB/252",
-        "raw_record_sha256": "ea9a36d430501f290d1754cc40408e52081e1ab67ee62cf8e56f72e91743d791",
+        "raw_record_sha256": "b869ae0c72ffb850d52d303ab1288e3ec539938f4cd73ba8709b049393a3994f",
         "source_code": "1150", "source_name": "Сахар-песок"
       }
     },
@@ -49,7 +49,7 @@
       },
       "source": {
         "db_index": 126, "json_pointer": "/DB/126",
-        "raw_record_sha256": "d6e02ec3fdc64f67169173e4e372ca9e2adf73b8bc5a29a684f564c772146874",
+        "raw_record_sha256": "a0587cd2f7cf9b49e586f7b188f9164020af1cbbabd2cb36bcf2bccba7622b8d",
         "source_code": "1187", "source_name": "Морковь свежая красная"
       }
     },
@@ -71,7 +71,7 @@
       },
       "source": {
         "db_index": 69, "json_pointer": "/DB/69",
-        "raw_record_sha256": "49e2af9f99caba2ee5a0a6eb5827ebba114005e12bdda261b3d03067d6a69f1a",
+        "raw_record_sha256": "db34f8dfb25ec1d0289c78b7863cae3e21dac19365f9d6913b5842c00db3a109",
         "source_code": "1184", "source_name": "Капуста белокочанная свежая"
       }
     },
@@ -92,7 +92,7 @@
       },
       "source": {
         "db_index": 254, "json_pointer": "/DB/254",
-        "raw_record_sha256": "79270f06f14120e91dbf2e5ec1a60f991f51ee88a7b13d67484b5e874cd7cd31",
+        "raw_record_sha256": "c241cffe9f38f562812fba3a42d7cb113c7e7e6da7036f976b8aaca5c3078702",
         "source_code": "1204", "source_name": "Свекла свежая"
       }
     },
@@ -113,7 +113,7 @@
       },
       "source": {
         "db_index": 103, "json_pointer": "/DB/103",
-        "raw_record_sha256": "5494391f386d6e686f03a9e34fcc14fa96beddaf6efef8297b961ebd8851d549",
+        "raw_record_sha256": "08d4a8a374095622d5f5a52f4c8b88ce956a0546ab5ebcaf115c4e4437a71c85",
         "source_code": "66", "source_name": "Крупа рисовая"
       }
     }

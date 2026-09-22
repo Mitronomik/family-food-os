@@ -34,7 +34,7 @@ MAPPING_PATH = (
     REPOSITORY_ROOT
     / "data/curation/ru-nut-db-step4-semantic-closure/field-mapping.json"
 )
-PUBLICATION_SHA256 = "ca27a1bcd69ac0020cd34616d91426f8f9f115ce853210b0e52a639cee96111f"
+PUBLICATION_SHA256 = "b9a45f9fe22eef6afb91f2e230bd76d8074d4db58ab6c4628240f9f7f0fe2074"
 MAPPING_SHA256 = "bf77239d5976e5ec03d01f524726f9c2e8afb5fc4d92a884b62aa63dfe3a9477"
 ARCHIVE_SHA256 = "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea"
 RAW_HTML_SHA256 = "155107ddb381c14721c77fe995d604a5197982441446b54034e4d84645efbd6d"
@@ -55,27 +55,27 @@ EXPECTED = (
     (
         "SUGAR", "Сахар-песок", "staples", "REUSE_EXISTING", 2,
         "1150", 252, "Сахар-песок",
-        "ea9a36d430501f290d1754cc40408e52081e1ab67ee62cf8e56f72e91743d791",
+        "b869ae0c72ffb850d52d303ab1288e3ec539938f4cd73ba8709b049393a3994f",
     ),
     (
         "CARROT_RED_RAW", "Морковь свежая красная", "vegetables",
         "CREATE_REVIEWED", 1, "1187", 126, "Морковь свежая красная",
-        "d6e02ec3fdc64f67169173e4e372ca9e2adf73b8bc5a29a684f564c772146874",
+        "a0587cd2f7cf9b49e586f7b188f9164020af1cbbabd2cb36bcf2bccba7622b8d",
     ),
     (
         "CABBAGE_GREEN", "Капуста белокочанная", "vegetables",
         "REUSE_EXISTING", 2, "1184", 69, "Капуста белокочанная свежая",
-        "49e2af9f99caba2ee5a0a6eb5827ebba114005e12bdda261b3d03067d6a69f1a",
+        "db34f8dfb25ec1d0289c78b7863cae3e21dac19365f9d6913b5842c00db3a109",
     ),
     (
         "BEET", "Свёкла", "vegetables", "REUSE_EXISTING", 1,
         "1204", 254, "Свекла свежая",
-        "79270f06f14120e91dbf2e5ec1a60f991f51ee88a7b13d67484b5e874cd7cd31",
+        "c241cffe9f38f562812fba3a42d7cb113c7e7e6da7036f976b8aaca5c3078702",
     ),
     (
         "RICE_GROATS", "Крупа рисовая", "grains", "CREATE_REVIEWED", 1,
         "66", 103, "Крупа рисовая",
-        "5494391f386d6e686f03a9e34fcc14fa96beddaf6efef8297b961ebd8851d549",
+        "08d4a8a374095622d5f5a52f4c8b88ce956a0546ab5ebcaf115c4e4437a71c85",
     ),
 )
 LEGACY_FIELDS = {

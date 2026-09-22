@@ -589,6 +589,7 @@ class ReviewedNutritionPublicationService:
             nutrient_value_count=len(actual_rows),
         )
 
+
 class ReviewedNutritionBatchPublicationService:
     """Publish a reviewed batch under one project Unit of Work and one commit."""
 
@@ -644,7 +645,12 @@ class ReviewedNutritionBatchPublicationService:
                     self._single._apply_bundle(uow, bundle, now=now)
                     for bundle in bundles
                 )
-                if any(result.bundle_created for result in results):
+                creation_states = {result.bundle_created for result in results}
+                if len(creation_states) > 1:
+                    raise NutritionPublicationConflictError(
+                        "Частично опубликованный batch нельзя дозаполнять."
+                    )
+                if creation_states == {True}:
                     uow.commit()
             except (
                 FoodCataloguePersistenceConflictError,

@@ -125,6 +125,20 @@ def test_runtime_package_is_exact_five_records_and_90_values():
     ) == 87
 
 
+def test_runtime_package_pins_exact_raw_source_record_hashes():
+    publication = json.loads((PACKAGE / "publication.json").read_text())
+    assert {
+        row["source"]["source_code"]: row["source"]["raw_record_sha256"]
+        for row in publication["records"]
+    } == {
+        "1150": "b869ae0c72ffb850d52d303ab1288e3ec539938f4cd73ba8709b049393a3994f",
+        "1187": "a0587cd2f7cf9b49e586f7b188f9164020af1cbbabd2cb36bcf2bccba7622b8d",
+        "1184": "db34f8dfb25ec1d0289c78b7863cae3e21dac19365f9d6913b5842c00db3a109",
+        "1204": "c241cffe9f38f562812fba3a42d7cb113c7e7e6da7036f976b8aaca5c3078702",
+        "66": "08d4a8a374095622d5f5a52f4c8b88ce956a0546ab5ebcaf115c4e4437a71c85",
+    }
+
+
 def test_runtime_package_retains_license_attribution_and_source_link():
     readme = (PACKAGE / "README.md").read_text()
     assert ATTRIBUTION in readme
@@ -309,6 +323,29 @@ def test_failure_after_each_food_rolls_back_whole_batch(database, food_number):
     assert state["composition_count"] == food_number
     assert db_dump(database) == before
     assert_fk_clean(database)
+
+
+@pytest.mark.parametrize("published_prefix", [1, 2, 3, 4])
+def test_partial_prior_batch_conflicts_without_filling_missing_bundles(
+    database, published_prefix
+):
+    bundles = load_ru_nut_db_step4_bundles()
+    engine = create_sqlite_engine(database)
+    try:
+        for bundle in bundles[:published_prefix]:
+            single_service(engine).publish(bundle)
+        before = db_dump(database)
+
+        with pytest.raises(
+            NutritionPublicationConflictError,
+            match="Частично опубликованный batch",
+        ):
+            batch_service(engine).publish_batch(bundles)
+
+        assert db_dump(database) == before
+        assert_fk_clean(database)
+    finally:
+        engine.dispose()
 
 
 def test_duplicate_batch_contract_fails_before_write(database):
