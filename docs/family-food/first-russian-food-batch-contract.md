@@ -105,8 +105,12 @@ The permission, as supplied to the project, grants FamilyFoodOS rights including
 - worldwide territory;
 - three-year term from the dated permission, subject to the original instrument.
 
-Required attribution from the permission is preserved in repository/runtime
-documentation.
+Required attribution from §7.1 of the permission is frozen verbatim:
+
+> Данные о химическом составе продуктов предоставлены ФГБУН «ФИЦ питания и биотехнологии» (база «Химический состав пищевых продуктов, используемых в Российской Федерации»).
+
+§7.2 additionally requires the public-repository source link to be present in the
+relevant README and/or header comments of data files.
 
 The public repository stores only a metadata receipt and evidence hashes, not the
 signed scans themselves.
@@ -137,7 +141,7 @@ The Step 4 batch is limited to exactly these five RU-NUT-DB records:
 | Platform action | RU-NUT-DB code | DB locator | Exact source name |
 | --- | ---: | --- | --- |
 | reuse `SUGAR` | 1150 | `/DB/252` | Сахар-песок |
-| reuse `CARROT` | 1187 | `/DB/126` | Морковь свежая красная |
+| create source-faithful `CARROT_RED_RAW` | 1187 | `/DB/126` | Морковь свежая красная |
 | reuse `CABBAGE_GREEN` | 1184 | `/DB/69` | Капуста белокочанная свежая |
 | reuse `BEET` | 1204 | `/DB/254` | Свекла свежая |
 | create generic rice-groats identity | 66 | `/DB/103` | Крупа рисовая |
@@ -149,18 +153,32 @@ No sixth record may enter the implementation PR without reopening this gate.
 The existing platform identities reused without mutating their canonical fields are:
 
 - `SUGAR` — `Сахар-песок`;
-- `CARROT` — `Морковь`;
 - `CABBAGE_GREEN` — `Капуста белокочанная`;
 - `BEET` — `Свёкла`.
 
-The exact source form/name remains in immutable profile/vector provenance. A
-narrower source row does not replace or redefine the canonical food identity and
-does not replace the current USDA profile.
+RU-NUT-DB row `/DB/126` is explicitly `Морковь свежая красная`. The supplied
+corpus rejects that row as a generic-carrot profile with
+`blocked_exact_form_unresolved` /
+`source_carrot_color_unspecified_fic_profile_red_only`.
+
+**DECISION:** create a distinct source-faithful carrot identity:
+
+```text
+canonical_code = CARROT_RED_RAW
+canonical_name = Морковь свежая красная
+category_code = vegetables
+default_unit = g
+is_active = true
+```
+
+Existing generic `CARROT / Морковь` remains untouched, including its USDA
+current profile/history. No alias equating `CARROT_RED_RAW` with `CARROT` is
+created by Step 4.
 
 The FIC source says only `Крупа рисовая`; it does not establish long-grain or
 polished subtype.
 
-**DECISION:** the new identity is generic:
+**DECISION:** the new rice identity is generic:
 
 ```text
 canonical_code = RICE_GROATS
@@ -307,15 +325,17 @@ No schema change is authorized by this semantic closure.
 Accepted baseline already has ATOMIC version 1 for:
 
 - `SUGAR`;
-- `CARROT`;
 - `CABBAGE_GREEN`.
 
-Step 4 therefore uses explicit version 2 for those three.
+Step 4 therefore uses explicit version 2 for those two reused identities.
 
-The proposed version slots for the other two are:
+The explicit proposed slots for the remaining source-faithful identities are:
 
+- new `CARROT_RED_RAW` → version 1;
 - `BEET` → version 1;
 - new `RICE_GROATS` → version 1.
+
+Existing generic `CARROT` receives no Step 4 composition/profile/vector row.
 
 Implementation must assert these slots against the exact accepted base. Any
 unexpected occupied slot is a conflict; never auto-increment.
@@ -355,8 +375,9 @@ A failure on food 5 rolls back foods 1–4 from that attempt.
 
 After the semantic-mapping gate is closed, fresh publication must:
 
-- reuse exactly four accepted FoodIngredients;
-- create exactly one new `RICE_GROATS`;
+- reuse exactly three accepted FoodIngredients: `SUGAR`, `CABBAGE_GREEN`, `BEET`;
+- create exactly two source-faithful FoodIngredients:
+  `CARROT_RED_RAW` and `RICE_GROATS`;
 - create five non-current FIC profiles;
 - publish exactly the finally reviewed V2 rows;
 - create five V2 seals;
@@ -386,6 +407,7 @@ Fail the entire batch with no writes for:
 - partial prior bundle;
 - unexpected ATOMIC version occupation;
 - attempted `RICE_WHITE` substitution;
+- attempted attachment of source row `/DB/126` to generic `CARROT`;
 - any unreviewed field promoted to canonical truth.
 
 No automatic repair, version bump or cross-source substitution exists.
@@ -394,8 +416,8 @@ No automatic repair, version bump or cross-source substitution exists.
 
 | Existing truth | Step 4 requirement |
 | --- | --- |
-| Existing FoodIngredient rows | unchanged for four reused identities |
-| Existing USDA current profiles | unchanged and remain current |
+| Existing FoodIngredient rows | unchanged; Step 4 reuses only SUGAR/CABBAGE_GREEN/BEET |
+| Existing USDA current profiles | unchanged and remain current, including generic CARROT |
 | Existing V1/V2 vectors/seals | unchanged |
 | Existing ATOMIC versions | unchanged |
 | V2 registry definitions | unchanged |
@@ -428,25 +450,27 @@ The later runtime/data PR is not review-ready until it proves at least:
 
 1. exact five RU-NUT-DB record identities and raw snapshot hash;
 2. license authority receipt matches the batch source;
-3. four exact identity reuses plus new `RICE_GROATS`;
-4. `RICE_WHITE` and `RICE_POLISHED_DRY` are rejected for source code 66;
-5. final reviewed field→V2 mapping manifest is exact;
-6. all 130 source nutrient observations are retained;
-7. every published zero remains nonnumeric unless a separately accepted zero
+3. exactly three existing identity reuses plus new `CARROT_RED_RAW` and
+   `RICE_GROATS`;
+4. source row `/DB/126` is rejected for generic `CARROT`;
+5. `RICE_WHITE` and `RICE_POLISHED_DRY` are rejected for source code 66;
+6. final reviewed field→V2 mapping manifest is exact;
+7. all 130 source nutrient observations are retained;
+8. every published zero remains nonnumeric unless a separately accepted zero
    policy explicitly authorizes otherwise;
-8. no unresolved DB field becomes a canonical value;
-9. all five profiles remain non-current;
-10. current USDA profiles remain unchanged;
-11. explicit ATOMIC versions are used without auto-increment;
-12. single-bundle Step 3 behavior remains unchanged after refactor;
-13. fresh five-food batch commits once;
-14. exact replay writes zero rows;
-15. one-food conflict rolls back the whole attempted batch;
-16. failure injection after each food/boundary rolls back the batch;
-17. V1 / Step 3 / V2 methodology regressions remain green;
-18. foreign-key integrity remains clean;
-19. attribution metadata is present where required by the license;
-20. no Book2002 value silently substitutes for a licensed RU-NUT-DB value.
+9. no unresolved DB field becomes a canonical value;
+10. all five profiles remain non-current;
+11. current USDA profiles remain unchanged, including generic `CARROT`;
+12. explicit ATOMIC versions are used without auto-increment;
+13. single-bundle Step 3 behavior remains unchanged after refactor;
+14. fresh five-food batch commits once;
+15. exact replay writes zero rows;
+16. one-food conflict rolls back the whole attempted batch;
+17. failure injection after each food/boundary rolls back the batch;
+18. V1 / Step 3 / V2 methodology regressions remain green;
+19. foreign-key integrity remains clean;
+20. exact license attribution/source-link requirements are present;
+21. no Book2002 value silently substitutes for a licensed RU-NUT-DB value.
 
 ## 17. Verification tier
 

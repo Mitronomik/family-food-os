@@ -13,12 +13,17 @@ Verified from the archive:
   `155107ddb381c14721c77fe995d604a5197982441446b54034e4d84645efbd6d`;
 - 3216 electronic database rows;
 - exact Step 4 candidates at source codes 1150/1187/1184/1204/66;
+- corpus identity evidence rejects DB126 as generic `CARROT`; user approved
+  new source-faithful `CARROT_RED_RAW / Морковь свежая красная`;
+- first batch identity shape is now 3 reuse + 2 create
+  (`CARROT_RED_RAW`, `RICE_GROATS`);
 - all five are identically corroborated across the second official FIC interface;
 - RU-NUT-DB differs numerically from Book2002, so Book2002 is not Step 4
   production numeric truth.
 
 License review clears the historical `rights_use_unresolved` blocker for this
-electronic source under the supplied conditions/attribution.
+electronic source under the supplied conditions. The exact §7.1 attribution text
+and §7.2 repository-link requirement are frozen in the authority receipt.
 
 Remaining blocker is canonical source-field semantics. Across the five rows the
 source contains 130 nutrient observations: 87 published numeric and 43 published

@@ -36,11 +36,12 @@ Book2002 remains historical/corroborating evidence only.
 ## Exact first-batch source rows
 
 - `1150 /DB/252` — Сахар-песок → `SUGAR`;
-- `1187 /DB/126` — Морковь свежая красная → `CARROT`;
+- `1187 /DB/126` — Морковь свежая красная → new `CARROT_RED_RAW`;
 - `1184 /DB/69` — Капуста белокочанная свежая → `CABBAGE_GREEN`;
 - `1204 /DB/254` — Свекла свежая → `BEET`;
 - `66 /DB/103` — Крупа рисовая → new `RICE_GROATS`.
 
+Do not attach the red-only carrot source row to generic `CARROT`.
 Do not reuse `RICE_WHITE` or the earlier Book2002-derived
 `RICE_POLISHED_DRY`.
 
@@ -69,7 +70,7 @@ Step 4 still requires:
 
 - no schema/migration;
 - all new Russian profiles non-current;
-- existing USDA current profiles preserved;
+- existing USDA current profiles preserved, including generic `CARROT`;
 - transaction-neutral one-bundle operation;
 - one five-food batch UoW / one commit;
 - exact replay zero-write;

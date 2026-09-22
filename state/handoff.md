@@ -11,6 +11,10 @@ snapshot; do not treat Book2002 as production numeric authority.
 Exact FIC records are codes 1150,1187,1184,1204,66 with DB indices
 252,126,69,254,103.
 
+User decision: DB126 `Морковь свежая красная` creates new
+`CARROT_RED_RAW`; it must not reuse generic `CARROT`. The five-food batch is
+3 reuse + 2 create (`CARROT_RED_RAW`, `RICE_GROATS`).
+
 The archive shows RU-NUT-DB and Book2002 values differ, especially rice, so they
 must not be merged.
 

@@ -44,11 +44,15 @@ independent legal opinion.
 
 ## Required attribution
 
-FamilyFoodOS must identify the source in service/repository/scientific use
-consistent with the permission.
+FamilyFoodOS must use the §7.1 wording from the supplied permission verbatim:
 
-The public repository must retain a source link in the relevant README and/or
-source comments for published data.
+> Данные о химическом составе продуктов предоставлены ФГБУН «ФИЦ питания и биотехнологии» (база «Химический состав пищевых продуктов, используемых в Российской Федерации»).
+
+Under §7.2 the public repository must also retain the source link in the relevant
+README and/or header comments of published data files.
+
+Runtime/data implementation must treat both the exact attribution string and the
+source link as acceptance criteria, not optional documentation.
 
 ## Evidence hashes
 
