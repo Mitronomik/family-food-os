@@ -4,6 +4,13 @@ MIGRATION_ID = "0036_member_reference_methodology_selection"
 
 
 def upgrade(connection):
+    # Python sqlite3 legacy transaction control does not start a transaction for
+    # DDL. Start one only when the runner/session has none so table/index/trigger
+    # creation and the runner-owned migration marker share one rollback boundary.
+    # The migration still never commits, rolls back, or writes its own marker.
+    if not connection.in_transaction:
+        connection.execute("BEGIN")
+
     connection.execute(
         """CREATE TABLE member_reference_methodology_selections (
             id CHAR(32) PRIMARY KEY NOT NULL,
