@@ -1,5 +1,30 @@
 # Handoff
 
+## Step 6A runtime authorized — 2026-09-23
+
+Accepted main:
+`e38692f7839ecab2da9499dc968dd01638227046` (merged PR85).
+
+Branch:
+`feat/step6a-member-reference-methodology-selection`.
+
+Read first:
+`docs/family-food/persisted-nutrition-methodology-selection-contract.md`.
+
+Bounded runtime target:
+
+- MemberReferenceMethodologySelection only;
+- migration `0036_member_reference_methodology_selection`;
+- FAMILY_FOOD_NUTRITION_V1 baseline + optional Step 5 Russian group-reference;
+- acceptance_request_id exact retry identity;
+- expected_current_selection_id ordinary concurrency;
+- Household/member token binding and stale-read protection;
+- no MealPlan/0037/Planner/API/UI changes.
+
+After review-ready delivery, stop. No merge and no Step 6B without separate
+authorization.
+
+
 ## Step 6 corrected Contract Gate — PR85 re-review blockers resolved
 
 Accepted base:

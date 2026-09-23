@@ -4,70 +4,47 @@ Updated: `2026-09-23`.
 
 ## Accepted state
 
-PR84 is merged into `main` at
-`3de3c58ee898284f8d2168af1aae04af754a6bfc`.
+PR85 is merged into `main` at
+`e38692f7839ecab2da9499dc968dd01638227046`.
 
-Russian-data integration Steps 1–5 are accepted.
+Russian-data integration Steps 1–5 and the corrected Step 6 Contract Gate are
+accepted.
 
-Current bounded work is **Step 6 — persisted member reference-methodology
-selection, corrected Implementation Contract Gate only**.
+Current bounded work is **Step 6A runtime — MemberReferenceMethodologySelection
+persistence only**.
 
-Canonical gate:
+Canonical contract:
 `docs/family-food/persisted-nutrition-methodology-selection-contract.md`.
 
-## Corrected Step 6 split
+## Authorized Step 6A scope
 
-The PR85 adversarial re-review blockers are resolved by a mandatory runtime split:
+Implement:
 
-```text
-Step 6A
-MemberReferenceMethodologySelection persistence
-→ expected migration 0036
+- immutable/versioned Household-owned `MemberReferenceMethodologySelection`;
+- exact baseline + optional Step 5 Russian group-reference version resolver;
+- persisted `acceptance_request_id` replay identity;
+- `expected_current_selection_id` optimistic concurrency;
+- Household/member state-token binding/revalidation;
+- household-scoped repository/read history;
+- additive migration
+  `0036_member_reference_methodology_selection`;
+- focused migration/service/repository/domain tests;
+- required full regression from the merged contract.
 
-Step 6B
-MealPlan member reference-methodology pins + immutable member target-input snapshot
-→ expected migration 0037
-```
+## Hard boundaries
 
-Step 6A and Step 6B are separate runtime PRs with a merge/review stop between
-them.
+Step 6A does **not** change:
 
-## Ownership boundary
+- MealPlan domain/table/repository/UoW;
+- migration 0037 / Step 6B;
+- Planner behavior/defaults;
+- API/UI;
+- source-native `RU_SOURCE_NATIVE_*` policy ownership;
+- Step 7+.
 
-Member reference selection owns:
-
-- required `FAMILY_FOOD_NUTRITION_V1` personal baseline;
-- optional
-  `RU_MR_2_3_1_0253_21_ADULT_MICRONUTRIENT_V1` group-reference add-on.
-
-It does **not** own `RU_SOURCE_NATIVE_*` food interpretation policy.
-
-Source-native policy remains food/calculation truth and must be pinned later at
-the owning calculation/plan receipt boundary when V2 food/recipe calculation is
-integrated.
-
-## Replay/concurrency boundary
-
-Step 6A uses:
-
-- persisted `acceptance_request_id` for exact command replay;
-- `expected_current_selection_id` for ordinary optimistic concurrency;
-- Household/member updated-at token revalidation.
-
-Bundle equality alone cannot turn a stale command into replay.
-
-Step 6B later freezes `MealPlan.week_start` as the target reference date and
-pins authoritative member target inputs without backfilling historical plans.
-
-## Current authorization
-
-Docs/state Contract Gate only.
-
-No 0036/0037 migration, runtime selection/pin tables, repository/service code,
-Planner/API/UI default change, Step 7+ implementation before this gate is
-reviewed and merged.
+Reserved `0033_recipe_template_catalogue` remains untouched.
 
 ## Stop boundary
 
-Deliver/review corrected PR85. After merge, stop. Step 6A runtime requires
-separate explicit authorization.
+Deliver Step 6A through exact-head verification and final review. Do not merge
+autonomously and do not start Step 6B.

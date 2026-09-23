@@ -1,5 +1,22 @@
 # Progress
 
+## Step 6A runtime authorized — 2026-09-23
+
+PR85 merged into main at
+`e38692f7839ecab2da9499dc968dd01638227046`.
+
+The user explicitly authorized Step 6A runtime implementation.
+
+Current target:
+`MemberReferenceMethodologySelection` persistence with additive migration
+`0036_member_reference_methodology_selection`.
+
+Step 6B / migration 0037 remains not started.
+
+Current status:
+`STEP6A_RUNTIME_AUTHORIZED`.
+
+
 ## Step 6 PR85 blocker correction — 2026-09-23
 
 Independent re-review found three Contract Gate blockers despite green CI.
