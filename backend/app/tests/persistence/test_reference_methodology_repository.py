@@ -1,5 +1,6 @@
 import sqlite3
-from datetime import date, datetime, timezone
+from dataclasses import replace
+from datetime import date, datetime, timedelta, timezone
 from uuid import uuid4
 
 import pytest
@@ -219,3 +220,43 @@ def test_database_triggers_make_selection_history_immutable(database):
                 "DELETE FROM member_reference_methodology_selections WHERE id = ?",
                 (value.id.hex,),
             )
+
+
+def test_real_sqlite_concurrent_member_writer_is_conflict_for_state_guard(database):
+    _, engine = database
+    home = household()
+    person = member(home.id)
+    seed_member(engine, home, person)
+
+    with SqlAlchemyReferenceMethodologyUnitOfWork(engine) as acceptance_scope:
+        accepted_home = acceptance_scope.households.get_household(home.id)
+        accepted_member = acceptance_scope.members.get_member(home.id, person.id)
+        assert accepted_home is not None
+        assert accepted_member is not None
+
+        with SqlAlchemyHouseholdUnitOfWork(engine) as concurrent_scope:
+            concurrent_connection = concurrent_scope._scope.adapter_connection
+            concurrent_connection.exec_driver_sql("PRAGMA busy_timeout = 50")
+            changed_member = replace(
+                person,
+                goal="lose_weight",
+                updated_at=NOW + timedelta(minutes=1),
+            )
+            concurrent_scope.members.update_member(changed_member)
+
+            acceptance_scope._scope.adapter_connection.exec_driver_sql(
+                "PRAGMA busy_timeout = 50"
+            )
+            with pytest.raises(
+                ReferenceMethodologyPersistenceConflictError,
+                match="concurrently being changed",
+            ):
+                acceptance_scope.revalidate_authoritative_state(
+                    household_id=home.id,
+                    household_updated_at=accepted_home.updated_at,
+                    member_id=person.id,
+                    member_updated_at=accepted_member.updated_at,
+                )
+
+    with SqlAlchemyReferenceMethodologyReadScope(engine) as read_scope:
+        assert read_scope.selections.list_history(home.id, person.id) == []

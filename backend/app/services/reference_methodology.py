@@ -14,6 +14,7 @@ from app.domain.russian_reference_targets import (
     select_russian_reference_targets,
 )
 from app.services.reference_methodology_contracts import (
+    ReferenceMethodologyPersistenceConflictError,
     ReferenceMethodologyReadScope,
     ReferenceMethodologyUnitOfWork,
 )
@@ -102,9 +103,12 @@ class ReferenceMethodologyService:
         )
 
         with self._write() as scope:
-            replay = scope.selections.get_by_request_id(
-                household_id, member_id, acceptance_request_id
-            )
+            try:
+                replay = scope.selections.get_by_request_id(
+                    household_id, member_id, acceptance_request_id
+                )
+            except ReferenceMethodologyPersistenceConflictError as exc:
+                raise ReferenceMethodologyConflictError(str(exc)) from exc
             if replay is not None:
                 if replay.reference_bundle != requested_bundle:
                     raise ReferenceMethodologyConflictError(
@@ -157,17 +161,15 @@ class ReferenceMethodologyService:
                     "Current reference-methodology selection changed."
                 )
 
-            refreshed_household = scope.households.get_household(household_id)
-            refreshed_member = scope.members.get_member(household_id, member_id)
-            if (
-                refreshed_household is None
-                or refreshed_member is None
-                or refreshed_household.updated_at != household_token
-                or refreshed_member.updated_at != member_token
-            ):
-                raise ReferenceMethodologyConflictError(
-                    "Household or member state changed during methodology acceptance."
+            try:
+                scope.revalidate_authoritative_state(
+                    household_id=household_id,
+                    household_updated_at=household_token,
+                    member_id=member_id,
+                    member_updated_at=member_token,
                 )
+            except ReferenceMethodologyPersistenceConflictError as exc:
+                raise ReferenceMethodologyConflictError(str(exc)) from exc
 
             if current is not None and current.reference_bundle == requested_bundle:
                 return current
@@ -188,8 +190,11 @@ class ReferenceMethodologyService:
                 supersedes_selection_id=None if current is None else current.id,
                 created_at=accepted_at,
             )
-            scope.selections.add(selection)
-            scope.commit()
+            try:
+                scope.selections.add(selection)
+                scope.commit()
+            except ReferenceMethodologyPersistenceConflictError as exc:
+                raise ReferenceMethodologyConflictError(str(exc)) from exc
             return selection
 
     def get_selection(

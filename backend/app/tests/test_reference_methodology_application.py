@@ -14,6 +14,9 @@ from app.services.reference_methodology import (
     ReferenceMethodologyService,
     ReferenceMethodologyUnsupportedError,
 )
+from app.services.reference_methodology_contracts import (
+    ReferenceMethodologyPersistenceConflictError,
+)
 
 
 NOW = datetime(2026, 9, 23, 9, 0, tzinfo=timezone.utc)
@@ -168,6 +171,26 @@ class MemoryWriteScope:
     def __enter__(self):
         return self
 
+    def revalidate_authoritative_state(
+        self,
+        *,
+        household_id,
+        household_updated_at,
+        member_id,
+        member_updated_at,
+    ):
+        household_value = self.households.get_household(household_id)
+        member_value = self.members.get_member(household_id, member_id)
+        if (
+            household_value is None
+            or member_value is None
+            or household_value.updated_at != household_updated_at
+            or member_value.updated_at != member_updated_at
+        ):
+            raise ReferenceMethodologyPersistenceConflictError(
+                "Household/member state changed during methodology acceptance."
+            )
+
     def commit(self):
         self.store.households = self.working_households
         self.store.members = self.working_members
@@ -273,6 +296,44 @@ def test_fresh_replay_noop_change_and_history_are_versioned():
         first,
         second,
     )
+
+
+def test_semantic_noop_request_id_is_not_consumed():
+    household_id, member_id = uuid4(), uuid4()
+    store = MemoryStore(
+        {household_id: household(household_id)},
+        {(household_id, member_id): member(household_id, member_id)},
+    )
+    service = make_service(store, ids=(uuid4(), uuid4()))
+    first = service.accept_member_selection(
+        **baseline_kwargs(household_id, member_id, uuid4())
+    )
+    noop_request_id = uuid4()
+
+    noop = service.accept_member_selection(
+        **baseline_kwargs(
+            household_id,
+            member_id,
+            noop_request_id,
+            expected=first.id,
+        )
+    )
+    assert noop == first
+    assert all(
+        value.acceptance_request_id != noop_request_id
+        for value in store.selections.values()
+    )
+
+    changed = service.accept_member_selection(
+        household_id=household_id,
+        member_id=member_id,
+        acceptance_request_id=noop_request_id,
+        expected_current_selection_id=first.id,
+        nutrition_config_version=BASELINE_NUTRITION_CONFIG_VERSION,
+        group_reference_methodology_version=RUSSIAN_GROUP_REFERENCE_VERSION,
+    )
+    assert changed.version_number == 2
+    assert changed.acceptance_request_id == noop_request_id
 
 
 def test_request_id_reuse_with_changed_bundle_fails_closed():

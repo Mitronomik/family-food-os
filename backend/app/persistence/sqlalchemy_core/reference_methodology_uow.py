@@ -1,13 +1,21 @@
 """Step 6A SQLAlchemy transaction/read scopes."""
 
+from datetime import datetime
+import sqlite3
 from types import TracebackType
+from uuid import UUID
 
+from sqlalchemy import update
 from sqlalchemy.engine import Engine
-from sqlalchemy.exc import DBAPIError, IntegrityError
+from sqlalchemy.exc import DBAPIError, IntegrityError, OperationalError
 
 from app.persistence.sqlalchemy_core.household_repositories import (
     SqlAlchemyHouseholdMemberRepository,
     SqlAlchemyHouseholdRepository,
+)
+from app.persistence.sqlalchemy_core.household_tables import (
+    household_members_table,
+    households_table,
 )
 from app.persistence.sqlalchemy_core.reference_methodology_repositories import (
     SqlAlchemyMemberReferenceMethodologySelectionRepository,
@@ -58,6 +66,63 @@ class SqlAlchemyReferenceMethodologyUnitOfWork:
             connection
         )
         return self
+
+    def revalidate_authoritative_state(
+        self,
+        *,
+        household_id: UUID,
+        household_updated_at: datetime,
+        member_id: UUID,
+        member_updated_at: datetime,
+    ) -> None:
+        """CAS-guard authoritative Household/member state before publication.
+
+        SQLite deferred reads alone cannot prove cross-connection freshness.
+        The guarded no-op UPDATEs both compare exact optimistic tokens and
+        acquire write intent. On a semantic no-op the UoW exits by rollback, so
+        this guard leaves no persisted write.
+        """
+
+        connection = self._scope.adapter_connection
+        try:
+            household_result = connection.execute(
+                update(households_table)
+                .where(
+                    households_table.c.id == household_id,
+                    households_table.c.updated_at == household_updated_at,
+                )
+                .values(updated_at=household_updated_at)
+            )
+            if household_result.rowcount != 1:
+                raise ReferenceMethodologyPersistenceConflictError(
+                    "Household state changed during methodology acceptance."
+                )
+
+            member_result = connection.execute(
+                update(household_members_table)
+                .where(
+                    household_members_table.c.household_id == household_id,
+                    household_members_table.c.id == member_id,
+                    household_members_table.c.updated_at == member_updated_at,
+                )
+                .values(updated_at=member_updated_at)
+            )
+            if member_result.rowcount != 1:
+                raise ReferenceMethodologyPersistenceConflictError(
+                    "Household member state changed during methodology acceptance."
+                )
+        except OperationalError as exc:
+            if _is_sqlite_concurrency_conflict(exc):
+                raise ReferenceMethodologyPersistenceConflictError(
+                    "Household/member state is concurrently being changed."
+                ) from exc
+            raise ReferenceMethodologyPersistenceError(
+                "Reference-methodology state revalidation failed."
+            ) from exc
+        except DBAPIError as exc:
+            raise ReferenceMethodologyPersistenceError(
+                "Reference-methodology state revalidation failed."
+            ) from exc
 
     def commit(self) -> None:
         try:
@@ -130,3 +195,12 @@ class SqlAlchemyReferenceMethodologyReadScope:
             return self._scope.__exit__(exc_type, exc_value, traceback)
         finally:
             self._selections = None
+
+
+def _is_sqlite_concurrency_conflict(exc: OperationalError) -> bool:
+    original = exc.orig
+    code = getattr(original, "sqlite_errorcode", None)
+    if not isinstance(code, int):
+        return False
+    primary_code = code & 0xFF
+    return primary_code in {sqlite3.SQLITE_BUSY, sqlite3.SQLITE_LOCKED}

@@ -13,9 +13,7 @@ from app.persistence.sqlalchemy_core.reference_methodology_composition import (
 from app.services.reference_methodology import (
     BASELINE_NUTRITION_CONFIG_VERSION,
     RUSSIAN_GROUP_REFERENCE_VERSION,
-)
-from app.services.reference_methodology_contracts import (
-    ReferenceMethodologyPersistenceConflictError,
+    ReferenceMethodologyConflictError,
 )
 
 
@@ -112,7 +110,7 @@ def test_request_id_reuse_across_member_scope_fails_even_on_same_bundle_noop(
         )
 
         with pytest.raises(
-            ReferenceMethodologyPersistenceConflictError,
+            ReferenceMethodologyConflictError,
             match="another Household/member scope",
         ):
             references.accept_member_selection(

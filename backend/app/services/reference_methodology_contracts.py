@@ -1,5 +1,6 @@
 """Driver-independent Step 6A selection persistence contracts."""
 
+from datetime import datetime
 from types import TracebackType
 from typing import Protocol, Self
 from uuid import UUID
@@ -40,6 +41,16 @@ class ReferenceMethodologyUnitOfWork(Protocol):
     selections: MemberReferenceMethodologySelectionRepository
 
     def __enter__(self) -> Self: ...
+
+    def revalidate_authoritative_state(
+        self,
+        *,
+        household_id: UUID,
+        household_updated_at: datetime,
+        member_id: UUID,
+        member_updated_at: datetime,
+    ) -> None: ...
+
     def commit(self) -> None: ...
     def rollback(self) -> None: ...
     def __exit__(
