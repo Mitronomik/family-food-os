@@ -42,6 +42,7 @@ def test_migration_chain_keeps_0031_between_0030_and_0032():
         "0034_partial_nutrition_profiles",
         "0035_versioned_nutrient_registry",
         "0036_member_reference_methodology_selection",
+        "0037_meal_plan_reference_methodology_pins",
     ]
 
 
@@ -61,6 +62,7 @@ def test_populated_0030_database_upgrades_without_rewriting_existing_food_data(t
         "0034_partial_nutrition_profiles",
         "0035_versioned_nutrient_registry",
         "0036_member_reference_methodology_selection",
+        "0037_meal_plan_reference_methodology_pins",
     ]
     assert apply_migrations(config) == []
     with sqlite3.connect(config.path) as connection:
