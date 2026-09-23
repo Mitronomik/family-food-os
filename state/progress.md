@@ -1,5 +1,31 @@
 # Progress
 
+## Step 6A runtime review-ready — 2026-09-23
+
+PR86 runtime head:
+`e03be7b0c4a9b7766a961026cdf8de7d1f56d8d8`.
+
+Status:
+`STEP6A_RUNTIME_REVIEW_READY`.
+
+All independent re-review blockers are closed:
+
+- SQLite cross-connection state revalidation now uses a real CAS/write-intent
+  guard and has a real two-connection regression;
+- no-op request-id semantics are explicitly consistent with zero-write behavior;
+- durable state records final verification.
+
+Runtime verification is fully green:
+- Docs #314;
+- DC1 #176;
+- Russian #81: 358 passed;
+- Registry #110: 257 focused, 4 backend shards, launcher 643/2 skipped;
+- Partial #92: 228 focused, 4 backend shards, launcher 643/2 skipped.
+
+Step 6B remains not started and not authorized.
+
+# Progress
+
 ## Step 6A runtime authorized — 2026-09-23
 
 PR85 merged into main at

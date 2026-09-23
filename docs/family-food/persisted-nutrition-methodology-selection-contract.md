@@ -316,7 +316,7 @@ Fail with zero writes when:
 
 - expected current ID does not match the actual current selection and this is not
   an exact request replay under section 10.1;
-- request ID is reused with different command semantics;
+- a **persisted** request ID is reused with different command semantics;
 - scope points to another Household/member;
 - version chain is not contiguous;
 - reference version is unsupported;
