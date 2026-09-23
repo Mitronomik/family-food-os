@@ -13,7 +13,7 @@ Contract/adversarial preflight established a bounded first publication shape:
 - source `МР 2.3.1.0253-21`;
 - population source transport already QA-checked in the supplied corpus;
 - first production table will be adult scalar micronutrients only;
-- tables 11–13 + 16–18;
+- tables 11/12 + 16–18;
 - 25 canonical definitions × male/female = 50 rows;
 - age 19+ from source `Старше 18 лет`;
 - KFA-independent;

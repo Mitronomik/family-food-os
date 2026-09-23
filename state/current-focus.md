@@ -29,14 +29,15 @@ Bounded V1 scope:
 - exact source header `Старше 18 лет` → completed age 19+;
 - male/female only;
 - KFA-independent rows only;
-- source tables 11–13 and 16–18;
-- exactly 25 reviewed canonical definitions × 2 sexes = 50 rows;
+- source tables 11/12 and 16/17;
+- exactly 24 reviewed canonical definitions × 2 sexes = 48 rows;
 - scalar `ready_source_group_lookup` claims only.
 
 Deferred:
 energy/macros, percent-energy references, child rows, pregnancy/lactation,
-footnote-dependent Vitamin D/Calcium, folate/Vitamin K definition mismatches and
-source nutrients without a V2 target.
+footnote-dependent Vitamin D/Calcium, adequate-level tables 13/18 (including
+fluoride), folate/Vitamin K definition mismatches and source nutrients without a
+V2 target.
 
 Canonical gate:
 `docs/family-food/reviewed-russian-reference-table-contract.md`.

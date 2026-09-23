@@ -117,10 +117,8 @@ from source tables:
 
 - table 11 — vitamins, men;
 - table 12 — minerals, men;
-- table 13 — adequate mineral intake, men;
 - table 16 — vitamins, women;
-- table 17 — minerals, women;
-- table 18 — adequate mineral intake, women.
+- table 17 — minerals, women.
 
 Only source claims with corpus status
 `ready_source_group_lookup` may enter the Step 5 table.
@@ -128,7 +126,7 @@ Only source claims with corpus status
 The initial table contains exactly:
 
 ```text
-25 canonical definitions × 2 sexes = 50 rows
+24 canonical definitions × 2 sexes = 48 rows
 ```
 
 No numeric value is published by this docs-only gate.
@@ -188,7 +186,7 @@ source-independent of KFA. It does not mean a missing KFA was inferred.
 
 No source `sex=null` group is converted to `sex=all`.
 
-## 7. DECISION — exact 25 definition mappings
+## 7. DECISION — exact 24 definition mappings
 
 The following source labels are approved for the first table:
 
@@ -218,7 +216,6 @@ The following source labels are approved for the first table:
 | Молибден | `MOLYBDENUM` | µg/day |
 | Селен | `SELENIUM` | µg/day |
 | Хром | `CHROMIUM` | µg/day |
-| Фтор | `FLUORIDE` | mg/day |
 
 The mapping is definition-sensitive. Equal units never establish nutrient
 equivalence.
@@ -253,7 +250,23 @@ Reasons:
   simultaneously as two incompatible target dimensions without an explicit
   design.
 
-### 8.3 Source claims withheld by the corpus
+### 8.3 Tables 13 and 18 — adequate levels
+
+Do not publish them in Step 5 V1.
+
+The corpus preserves these rows with `adequate_level=true`. The current
+`RussianReferenceRow` does not carry a reference-kind dimension that can
+distinguish an adequate intake level from the ordinary scalar group-reference
+rows in tables 11/12/16/17.
+
+Publishing `Фтор → FLUORIDE` from these tables would therefore erase a
+source-owned semantic distinction.
+
+**DECISION:** tables 13/18 are deferred in their entirety. Do not add a new
+domain field in this gate; a later bounded contract may introduce explicit
+reference-kind semantics and then review adequate-level rows.
+
+### 8.4 Source claims withheld by the corpus
 
 Do not override `withheld` claims in Step 5 V1.
 
@@ -265,7 +278,7 @@ In particular:
 
 A future contract may model their applicability explicitly.
 
-### 8.4 Definition mismatch / unavailable V2 target
+### 8.5 Definition mismatch / unavailable V2 target
 
 Do not publish:
 
@@ -275,7 +288,10 @@ Do not publish:
   `VITAMIN_D_D2_D3`;
 - `Витамин К`: the source explicitly covers phylloquinone + menaquinones,
   while V2 `VITAMIN_K_PHYLLOQUINONE` is K1 only;
-- cobalt, silicon and vanadium: no approved V2 canonical target exists.
+- cobalt, silicon and vanadium: no approved V2 canonical target exists;
+- fluoride: V2 has `FLUORIDE`, but the available adult source row is in
+  adequate-level tables 13/18, which are deferred until reference-kind semantics
+  are explicit.
 
 ## 9. Existing domain/service contract to reuse
 
@@ -328,7 +344,7 @@ A valid package produces exactly one table:
 
 `RU_MR_2_3_1_0253_21_ADULT_MICRONUTRIENT_V1`
 
-with exactly 50 rows.
+with exactly 48 rows.
 
 ### Exact replay
 
@@ -376,8 +392,8 @@ The runtime PR must prove at least:
 
 1. exact source-package hashes accepted;
 2. tampered source/table package rejected before table creation;
-3. exactly 50 rows / 25 definitions × 2 sexes;
-4. only tables 11–13 and 16–18 contribute rows;
+3. exactly 48 rows / 24 definitions × 2 sexes;
+4. only tables 11/12 and 16/17 contribute rows;
 5. every source claim is `ready_source_group_lookup`;
 6. every row has exact source claim locator/provenance;
 7. all numeric values are exact `Decimal`;
@@ -385,8 +401,8 @@ The runtime PR must prove at least:
 9. source `Старше 18 лет` maps to completed age 19+; age 18 is unsupported;
 10. KFA-independent rows work with explicit caller KFA without changing the row;
 11. Vitamin D and Calcium footnote rows are absent;
-12. folate / Vitamin K / cobalt / silicon / vanadium rows are absent;
-13. no table 9/10/14/15 value is present;
+12. folate / Vitamin K / fluoride / cobalt / silicon / vanadium rows are absent;
+13. no table 9/10/13/14/15/18 value is present;
 14. duplicate/overlapping rows fail table construction;
 15. wrong methodology version does not fall back;
 16. existing NASEM service remains unchanged;

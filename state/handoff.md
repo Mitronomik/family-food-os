@@ -20,12 +20,12 @@ Preflight source facts from the supplied corpus:
   872 claims / 735 scalar lookups / 137 withheld;
 - source package itself is transport evidence, not runtime authorization.
 
-Proposed first production table is intentionally only 50 adult micronutrient
+Proposed first production table is intentionally only 48 adult micronutrient
 rows:
 
-- tables 11–13 men;
-- tables 16–18 women;
-- 25 exact V2 definition mappings per sex;
+- tables 11/12 men;
+- tables 16/17 women;
+- 24 exact V2 definition mappings per sex;
 - source `Старше 18 лет` maps to completed age 19+;
 - KFA-independent;
 - no source null-sex coercion.
@@ -37,6 +37,9 @@ Important deferrals:
 - tables 10/15 percent-energy/ranges: not current daily-amount comparison truth;
 - Vitamin D and Calcium: source footnotes change >65 values and the corpus
   withholds those cells;
+- tables 13/18 are adequate-level references and are deferred because the
+  current row model does not preserve reference kind; fluoride is therefore
+  deferred with them;
 - folate/Vitamin K: no accepted exact target-definition mapping for this table;
 - cobalt/silicon/vanadium: no V2 target;
 - children and pregnancy/lactation: outside current selector/publication contract.
