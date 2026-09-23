@@ -34,13 +34,13 @@ def _apply_through_0031(config):
     assert applied[-1] == "0031_meal_pattern_catalogue"
 
 
-def test_0032_is_current_head_and_fresh_migration_is_repeat_safe(tmp_path):
+def test_0032_remains_in_current_chain_and_fresh_migration_is_repeat_safe(tmp_path):
     config = DatabaseConfig(path=tmp_path / "fresh.sqlite")
 
     applied = apply_migrations(config)
 
-    assert applied[-1] == REFERENCE_METHODOLOGY_MIGRATION_ID
-    assert expected_migration_ids()[-5:] == [
+    assert applied[-1] == REFERENCE_PINS_MIGRATION_ID
+    assert expected_migration_ids()[-6:] == [
         "0031_meal_pattern_catalogue",
         MIGRATION_ID,
         PARTIAL_PROFILE_MIGRATION_ID,
