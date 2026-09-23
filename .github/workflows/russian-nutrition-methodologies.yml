@@ -31,6 +31,10 @@ jobs:
           backend/app/tests/test_russian_energy.py
           backend/app/tests/test_russian_reference_targets.py
           backend/app/tests/test_russian_reference_table_step5.py
+          backend/app/tests/test_reference_methodology_application.py
+          backend/app/tests/test_reference_methodology_integration.py
+          backend/app/tests/persistence/test_reference_methodology_repository.py
+          backend/app/tests/test_reference_methodology_migration.py
           backend/app/tests/test_reference_comparison.py
           backend/app/tests/test_nutrition_methodology_service.py
           backend/app/tests/test_russian_reference_service.py
