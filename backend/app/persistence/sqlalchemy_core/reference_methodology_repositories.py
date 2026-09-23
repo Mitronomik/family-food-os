@@ -60,7 +60,8 @@ class SqlAlchemyMemberReferenceMethodologySelectionRepository:
                 or previous["version_number"] != selection.version_number - 1
             ):
                 raise ReferenceMethodologyPersistenceConflictError(
-                    "supersedes_selection_id must reference the immediately previous selection."
+                    "supersedes_selection_id must reference the immediately "
+                    "previous selection."
                 )
         try:
             self._connection.execute(
@@ -107,7 +108,8 @@ class SqlAlchemyMemberReferenceMethodologySelectionRepository:
                     == household_id,
                     member_reference_methodology_selections_table.c.member_id
                     == member_id,
-                    member_reference_methodology_selections_table.c.acceptance_request_id
+                    member_reference_methodology_selections_table.c.
+                    acceptance_request_id
                     == acceptance_request_id,
                 )
             )
@@ -129,7 +131,8 @@ class SqlAlchemyMemberReferenceMethodologySelectionRepository:
                     == member_id,
                 )
                 .order_by(
-                    member_reference_methodology_selections_table.c.version_number.desc()
+                    member_reference_methodology_selections_table.c.
+                    version_number.desc()
                 )
                 .limit(1)
             )
@@ -163,7 +166,9 @@ def _values(value: MemberReferenceMethodologySelection) -> dict[str, object]:
         "member_id": value.member_id,
         "version_number": value.version_number,
         "nutrition_config_version": value.nutrition_config_version,
-        "group_reference_methodology_version": value.group_reference_methodology_version,
+        "group_reference_methodology_version": (
+            value.group_reference_methodology_version
+        ),
         "accepted_local_date": value.accepted_local_date,
         "household_timezone_at_acceptance": value.household_timezone_at_acceptance,
         "member_updated_at_at_acceptance": value.member_updated_at_at_acceptance,

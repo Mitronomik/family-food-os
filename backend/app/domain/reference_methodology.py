@@ -105,7 +105,9 @@ class MemberReferenceMethodologySelection:
         accepted_at = normalize_utc_instant(self.accepted_at, field="accepted_at")
         created_at = normalize_utc_instant(self.created_at, field="created_at")
         if member_updated > accepted_at or household_updated > accepted_at:
-            raise ValueError("Acceptance cannot precede the authoritative state tokens.")
+            raise ValueError(
+                "Acceptance cannot precede the authoritative state tokens."
+            )
         if created_at < accepted_at:
             raise ValueError("created_at must not precede accepted_at.")
         object.__setattr__(

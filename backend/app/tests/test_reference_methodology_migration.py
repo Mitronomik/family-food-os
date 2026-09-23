@@ -8,7 +8,11 @@ import pytest
 
 from app.db import migrations
 from app.db.config import DatabaseConfig
-from app.db.migrations import apply_migrations, current_migrations, expected_migration_ids
+from app.db.migrations import (
+    apply_migrations,
+    current_migrations,
+    expected_migration_ids,
+)
 
 
 MIGRATION_ID = "0036_member_reference_methodology_selection"
@@ -164,7 +168,8 @@ def test_fresh_database_has_0036_schema_and_immutability_triggers(tmp_path):
             row[0]
             for row in connection.execute(
                 "SELECT name FROM sqlite_master "
-                "WHERE type='trigger' AND name LIKE 'trg_member_reference_methodology_%'"
+                "WHERE type='trigger' "
+                "AND name LIKE 'trg_member_reference_methodology_%'"
             )
         }
         assert connection.execute("PRAGMA foreign_key_check").fetchall() == []

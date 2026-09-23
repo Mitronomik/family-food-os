@@ -5,7 +5,10 @@ from typing import Protocol, Self
 from uuid import UUID
 
 from app.domain.reference_methodology import MemberReferenceMethodologySelection
-from app.services.household_contracts import HouseholdMemberRepository, HouseholdRepository
+from app.services.household_contracts import (
+    HouseholdMemberRepository,
+    HouseholdRepository,
+)
 
 
 class MemberReferenceMethodologySelectionRepository(Protocol):

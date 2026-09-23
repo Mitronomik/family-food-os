@@ -12,7 +12,10 @@ from app.persistence.sqlalchemy_core.household_repositories import (
 from app.persistence.sqlalchemy_core.reference_methodology_repositories import (
     SqlAlchemyMemberReferenceMethodologySelectionRepository,
 )
-from app.persistence.sqlalchemy_core.uow import SqlAlchemyReadOnlyScope, SqlAlchemyUnitOfWork
+from app.persistence.sqlalchemy_core.uow import (
+    SqlAlchemyReadOnlyScope,
+    SqlAlchemyUnitOfWork,
+)
 from app.services.reference_methodology_contracts import (
     ReferenceMethodologyPersistenceConflictError,
     ReferenceMethodologyPersistenceError,

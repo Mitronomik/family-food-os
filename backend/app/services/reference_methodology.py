@@ -108,7 +108,8 @@ class ReferenceMethodologyService:
             if replay is not None:
                 if replay.reference_bundle != requested_bundle:
                     raise ReferenceMethodologyConflictError(
-                        "acceptance_request_id was already used for another reference bundle."
+                        "acceptance_request_id was already used for another "
+                        "reference bundle."
                     )
                 return replay
 
@@ -131,7 +132,8 @@ class ReferenceMethodologyService:
             accepted_at = accepted_at.astimezone(timezone.utc)
             if household_token > accepted_at or member_token > accepted_at:
                 raise ReferenceMethodologyConflictError(
-                    "Authoritative Household state is newer than the acceptance instant."
+                    "Authoritative Household state is newer than the "
+                    "acceptance instant."
                 )
             accepted_local_date = accepted_at.astimezone(
                 ZoneInfo(household.timezone)
@@ -264,7 +266,8 @@ class ReferenceMethodologyService:
         )
         if len(definition_codes) != 24:
             raise ReferenceMethodologyUnsupportedError(
-                "Step 5 Russian reference definition set is not the accepted 24-code table."
+                "Step 5 Russian reference definition set is not the accepted "
+                "24-code table."
             )
         age = _age_years(member, local_date=accepted_local_date)
         result = select_russian_reference_targets(
@@ -275,7 +278,10 @@ class ReferenceMethodologyService:
             life_stage="adult" if age is not None and age >= 18 else "child",
             definition_codes=definition_codes,
         )
-        if result.status is not ReferenceSelectionStatus.COMPLETE or len(result.rows) != 24:
+        if (
+            result.status is not ReferenceSelectionStatus.COMPLETE
+            or len(result.rows) != 24
+        ):
             raise ReferenceMethodologyUnsupportedError(
                 "Step 5 Russian group reference is not applicable to this member."
             )
