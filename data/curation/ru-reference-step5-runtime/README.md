@@ -8,10 +8,26 @@ It was curated from the pinned source transport in
 `FamilyFoodOS-corpus-0.3.0-2026-09-20.zip` (SHA-256
 `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`).
 
-The raw ~197 MiB corpus archive is **not** republished in Git. A durable private
-operator copy is retained at:
+The raw ~197 MiB corpus archive is **not** republished in Git.
 
-`private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`
+## External source-artifact retrieval receipt
+
+- project artifact id: `FFO-CORPUS-0.3.0-2026-09-20`;
+- exact filename: `FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`;
+- byte size: `206692075`;
+- SHA-256:
+  `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
+- handling / rights boundary:
+  `PRIVATE_OPERATOR_EVIDENCE / RAW_ARCHIVE_NOT_PUBLICLY_REDISTRIBUTED`;
+- durable private locator:
+  `private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`;
+- authorized retrieval boundary: private user Library access; never a public Git
+  or unauthenticated runtime dependency;
+- latest independent retrieval + hash verification: `2026-09-23` — PASS,
+  `206692075` bytes and exact SHA-256 above;
+- dependent repository contract/package:
+  `docs/family-food/reviewed-russian-reference-table-contract.md` and this
+  Step 5 runtime package.
 
 The runtime package retains only the 48 reviewed factual scalar claims required
 by the merged Step 5 contract.
