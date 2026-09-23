@@ -9,47 +9,65 @@ PR84 is merged into `main` at
 
 Russian-data integration Steps 1–5 are accepted.
 
-Current bounded work is **Step 6 — persisted nutrition methodology selection,
-Implementation Contract Gate / adversarial preflight only**.
+Current bounded work is **Step 6 — persisted member reference-methodology
+selection, corrected Implementation Contract Gate only**.
 
 Canonical gate:
 `docs/family-food/persisted-nutrition-methodology-selection-contract.md`.
 
-## Frozen Step 6 direction
+## Corrected Step 6 split
 
-Step 6 will persist a distinct Household-owned immutable/versioned
-`MemberNutritionMethodologySelection`.
+The PR85 adversarial re-review blockers are resolved by a mandatory runtime split:
 
-The selection is a version bundle:
+```text
+Step 6A
+MemberReferenceMethodologySelection persistence
+→ expected migration 0036
+
+Step 6B
+MealPlan member reference-methodology pins + immutable member target-input snapshot
+→ expected migration 0037
+```
+
+Step 6A and Step 6B are separate runtime PRs with a merge/review stop between
+them.
+
+## Ownership boundary
+
+Member reference selection owns:
 
 - required `FAMILY_FOOD_NUTRITION_V1` personal baseline;
-- optional reviewed Russian group-reference version;
-- optional paired explicit Russian source-native policy.
+- optional
+  `RU_MR_2_3_1_0253_21_ADULT_MICRONUTRIENT_V1` group-reference add-on.
 
-Russian group reference is additive; it does not replace NASEM personal targets.
+It does **not** own `RU_SOURCE_NATIVE_*` food interpretation policy.
 
-Historical MealPlan replay requires more than a methodology ID because
-`HouseholdMember` is mutable. The runtime contract therefore also requires an
-immutable MealPlan/member methodology pin containing the authoritative member
-reference-target input snapshot.
+Source-native policy remains food/calculation truth and must be pinned later at
+the owning calculation/plan receipt boundary when V2 food/recipe calculation is
+integrated.
 
-Existing historical plans remain valid with zero pins; no methodology is
-backfilled or invented.
+## Replay/concurrency boundary
 
-Expected runtime migration after gate merge:
-`0036_persisted_nutrition_methodology_selection`.
+Step 6A uses:
 
-Reserved `0033_recipe_template_catalogue` remains untouched.
+- persisted `acceptance_request_id` for exact command replay;
+- `expected_current_selection_id` for ordinary optimistic concurrency;
+- Household/member updated-at token revalidation.
+
+Bundle equality alone cannot turn a stale command into replay.
+
+Step 6B later freezes `MealPlan.week_start` as the target reference date and
+pins authoritative member target inputs without backfilling historical plans.
 
 ## Current authorization
 
 Docs/state Contract Gate only.
 
-No 0036 migration, runtime selection tables, repository/service implementation,
-Planner/API/UI default change, Step 7 transformation applicability, recipes or
-later work before this gate is reviewed and merged.
+No 0036/0037 migration, runtime selection/pin tables, repository/service code,
+Planner/API/UI default change, Step 7+ implementation before this gate is
+reviewed and merged.
 
 ## Stop boundary
 
-Deliver/review the Step 6 Contract Gate. Runtime Step 6 requires separate explicit
-authorization.
+Deliver/review corrected PR85. After merge, stop. Step 6A runtime requires
+separate explicit authorization.

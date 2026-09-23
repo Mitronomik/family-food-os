@@ -1,5 +1,28 @@
 # Progress
 
+## Step 6 PR85 blocker correction — 2026-09-23
+
+Independent re-review found three Contract Gate blockers despite green CI.
+All three are now corrected in the canonical Step 6 contract:
+
+- runtime split into Step 6A / 0036 and Step 6B / 0037;
+- source-native Russian food policy removed from member reference selection;
+- exact retry uses persisted request identity rather than bundle equality.
+
+The contract also preserves:
+
+- NASEM personal baseline;
+- optional additive Step 5 Russian group reference;
+- no invented historical backfill;
+- Household/member stale-read guards;
+- `MealPlan.week_start` replay date in Step 6B;
+- reserved 0033;
+- no Planner/API/UI default switch.
+
+Current status:
+`STEP6_CONTRACT_GATE_REVERIFYING`.
+
+
 ## Step 6 Contract Gate drafted — 2026-09-23
 
 Accepted base:

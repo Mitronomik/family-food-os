@@ -1,5 +1,36 @@
 # Handoff
 
+## Step 6 corrected Contract Gate — PR85 re-review blockers resolved
+
+Accepted base:
+`3de3c58ee898284f8d2168af1aae04af754a6bfc` (merged PR84).
+
+Branch:
+`docs/step6-persisted-methodology-selection-contract`.
+
+Canonical contract:
+`docs/family-food/persisted-nutrition-methodology-selection-contract.md`.
+
+PR85 re-review blockers are now resolved in the contract:
+
+1. **Split signal:** runtime Step 6 is mandatory Step 6A/6B, not one migration.
+   - 6A: member reference-methodology selection, expected 0036.
+   - 6B: MealPlan reference pins/snapshots, expected 0037.
+2. **Policy ownership:** `RU_SOURCE_NATIVE_*` is removed from member selection;
+   it remains food/calculation policy for a later calculation/plan receipt.
+3. **Replay identity:** persisted `acceptance_request_id` identifies exact retry;
+   stale `expected_current_selection_id` remains a conflict unless the exact
+   request ID is replayed.
+
+Member selection now owns only personal reference configuration:
+`FAMILY_FOOD_NUTRITION_V1` plus optional Step 5 Russian group-reference table.
+
+Existing plans are never backfilled. Step 6B later supports zero-pin legacy plans
+or complete pins only.
+
+Current task remains docs-only PR85. No runtime migration/code is authorized.
+
+
 ## Step 6 persisted methodology selection Contract Gate — frozen 2026-09-23
 
 Accepted base:
