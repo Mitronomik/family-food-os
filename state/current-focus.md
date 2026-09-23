@@ -4,65 +4,70 @@ Updated: `2026-09-23`.
 
 ## Accepted state
 
-PR83 is merged into `main` at
-`f12a3f58279eb07c710d1ff889cc70d933da3310`.
+PR84 is merged into `main` at
+`3de3c58ee898284f8d2168af1aae04af754a6bfc`.
 
-Russian-data integration Steps 1–4 are accepted, and the Step 5
-Implementation Contract Gate is accepted.
+Russian-data integration Steps 1–5 are accepted.
 
-Current bounded work is **Step 5 runtime publication — reviewed Russian adult
-micronutrient population reference table**.
+Current bounded work is **Step 6 — persisted member reference-methodology
+selection, corrected Implementation Contract Gate only**.
 
-## Frozen runtime contract
+Canonical gate:
+`docs/family-food/persisted-nutrition-methodology-selection-contract.md`.
 
-Canonical contract:
-`docs/family-food/reviewed-russian-reference-table-contract.md`.
+## Corrected Step 6 split
 
-Methodology version:
+The PR85 adversarial re-review blockers are resolved by a mandatory runtime split:
 
-`RU_MR_2_3_1_0253_21_ADULT_MICRONUTRIENT_V1`.
+```text
+Step 6A
+MemberReferenceMethodologySelection persistence
+→ expected migration 0036
 
-Runtime V1 must publish exactly:
+Step 6B
+MealPlan member reference-methodology pins + immutable member target-input snapshot
+→ expected migration 0037
+```
 
-- source tables 11/12 for men and 16/17 for women;
-- source header `Старше 18 лет` → completed age 19+;
-- male/female only;
-- KFA-independent rows only;
-- 24 reviewed canonical definitions × 2 sexes = 48 rows;
-- scalar `ready_source_group_lookup` claims only;
-- exact Decimal source values and source/reference units;
-- exact source claim/page/table/row/column provenance;
-- explicit compatibility against the pinned `RU_NUTRIENT_REGISTRY_V2`;
-- existing `ReviewedRussianReferenceTable` / provider / selector boundary;
-- deterministic fail-closed load/replay behavior.
+Step 6A and Step 6B are separate runtime PRs with a merge/review stop between
+them.
 
-Explicitly deferred remain tables 9/10/13/14/15/18, Vitamin D, Calcium, folate,
-Vitamin K, fluoride, cobalt/silicon/vanadium, children and pregnancy/lactation.
+## Ownership boundary
+
+Member reference selection owns:
+
+- required `FAMILY_FOOD_NUTRITION_V1` personal baseline;
+- optional
+  `RU_MR_2_3_1_0253_21_ADULT_MICRONUTRIENT_V1` group-reference add-on.
+
+It does **not** own `RU_SOURCE_NATIVE_*` food interpretation policy.
+
+Source-native policy remains food/calculation truth and must be pinned later at
+the owning calculation/plan receipt boundary when V2 food/recipe calculation is
+integrated.
+
+## Replay/concurrency boundary
+
+Step 6A uses:
+
+- persisted `acceptance_request_id` for exact command replay;
+- `expected_current_selection_id` for ordinary optimistic concurrency;
+- Household/member updated-at token revalidation.
+
+Bundle equality alone cannot turn a stale command into replay.
+
+Step 6B later freezes `MealPlan.week_start` as the target reference date and
+pins authoritative member target inputs without backfilling historical plans.
 
 ## Current authorization
 
-The user explicitly authorized Step 5 runtime continuation on 2026-09-23 after
-merging PR83.
+Docs/state Contract Gate only.
 
-Authorized:
-- hash-pinned 48-row curation package;
-- loader/provider runtime wiring through the existing explicit Russian path;
-- focused/adversarial tests required by the merged contract;
-- state/docs updates required for delivery.
-
-Not authorized:
-- schema or migration;
-- persisted methodology selection (Step 6);
-- Planner/API/UI default switch;
-- NASEM behavior change;
-- reference-kind extension;
-- Step 6+.
-
-If implementation discovers that any authorized row cannot preserve the merged
-source/mapping/applicability contract without a new schema/domain decision, stop
-rather than widening scope.
+No 0036/0037 migration, runtime selection/pin tables, repository/service code,
+Planner/API/UI default change, Step 7+ implementation before this gate is
+reviewed and merged.
 
 ## Stop boundary
 
-Deliver Step 5 runtime through exact-head verification and final review. Do not
-merge autonomously and do not start persisted methodology selection automatically.
+Deliver/review corrected PR85. After merge, stop. Step 6A runtime requires
+separate explicit authorization.

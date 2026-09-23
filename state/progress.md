@@ -1,5 +1,75 @@
 # Progress
 
+## Step 6 PR85 blocker correction — 2026-09-23
+
+Independent re-review found three Contract Gate blockers despite green CI.
+All three are now corrected in the canonical Step 6 contract:
+
+- runtime split into Step 6A / 0036 and Step 6B / 0037;
+- source-native Russian food policy removed from member reference selection;
+- exact retry uses persisted request identity rather than bundle equality.
+
+The contract also preserves:
+
+- NASEM personal baseline;
+- optional additive Step 5 Russian group reference;
+- no invented historical backfill;
+- Household/member stale-read guards;
+- `MealPlan.week_start` replay date in Step 6B;
+- reserved 0033;
+- no Planner/API/UI default switch.
+
+Current status:
+`STEP6_CONTRACT_GATE_REVERIFYING`.
+
+
+## Step 6 Contract Gate drafted — 2026-09-23
+
+Accepted base:
+`3de3c58ee898284f8d2168af1aae04af754a6bfc`.
+
+Canonical contract:
+`docs/family-food/persisted-nutrition-methodology-selection-contract.md`.
+
+Preflight closed the main hidden couplings before runtime:
+
+1. mutable HouseholdMember cannot own replayable methodology history;
+2. methodology version alone cannot reproduce a historical NASEM target;
+3. MealPlan must pin the exact methodology selection plus member calculation
+   input snapshot;
+4. Russian group reference remains additive to NASEM, not a replacement;
+5. existing plans must not be backfilled with invented selection state;
+6. additive 0036 is expected; reserved 0033 remains reserved.
+
+Current status:
+`STEP6_CONTRACT_GATE_REVIEW_PENDING`.
+
+No runtime/schema implementation is included in this gate.
+
+
+## Step 6 Contract Gate authorized — 2026-09-23
+
+PR84 merged into `main` at
+`3de3c58ee898284f8d2168af1aae04af754a6bfc`.
+
+Russian-data integration Steps 1–5 are accepted.
+
+The user explicitly authorized Step 6:
+**persisted nutrition methodology selection**.
+
+Current operation is the required pre-implementation Contract Gate only.
+No migration/runtime implementation has started.
+
+Preflight already proves that methodology version alone is insufficient for
+historical planning replay because HouseholdMember nutrition inputs are mutable.
+The gate will freeze an immutable/versioned member selection and MealPlan/member
+pin + calculation-input snapshot boundary while preserving existing plans and
+current Planner/NASEM behavior.
+
+Current status:
+`STEP6_CONTRACT_GATE_ACTIVE`.
+
+
 ## Step 5 Contract Gate merged; runtime authorized — 2026-09-23
 
 PR83 merged into `main` at

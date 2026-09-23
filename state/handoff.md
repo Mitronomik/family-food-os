@@ -1,5 +1,99 @@
 # Handoff
 
+## Step 6 corrected Contract Gate — PR85 re-review blockers resolved
+
+Accepted base:
+`3de3c58ee898284f8d2168af1aae04af754a6bfc` (merged PR84).
+
+Branch:
+`docs/step6-persisted-methodology-selection-contract`.
+
+Canonical contract:
+`docs/family-food/persisted-nutrition-methodology-selection-contract.md`.
+
+PR85 re-review blockers are now resolved in the contract:
+
+1. **Split signal:** runtime Step 6 is mandatory Step 6A/6B, not one migration.
+   - 6A: member reference-methodology selection, expected 0036.
+   - 6B: MealPlan reference pins/snapshots, expected 0037.
+2. **Policy ownership:** `RU_SOURCE_NATIVE_*` is removed from member selection;
+   it remains food/calculation policy for a later calculation/plan receipt.
+3. **Replay identity:** persisted `acceptance_request_id` identifies exact retry;
+   stale `expected_current_selection_id` remains a conflict unless the exact
+   request ID is replayed.
+
+Member selection now owns only personal reference configuration:
+`FAMILY_FOOD_NUTRITION_V1` plus optional Step 5 Russian group-reference table.
+
+Existing plans are never backfilled. Step 6B later supports zero-pin legacy plans
+or complete pins only.
+
+Current task remains docs-only PR85. No runtime migration/code is authorized.
+
+
+## Step 6 persisted methodology selection Contract Gate — frozen 2026-09-23
+
+Accepted base:
+`3de3c58ee898284f8d2168af1aae04af754a6bfc` (merged PR84).
+
+Branch:
+`docs/step6-persisted-methodology-selection-contract`.
+
+Canonical gate:
+`docs/family-food/persisted-nutrition-methodology-selection-contract.md`.
+
+Key decisions:
+
+- methodology choice is a Household-owned immutable/versioned member selection,
+  not a mutable HouseholdMember field;
+- it is separate from MemberMealPatternSelection;
+- `FAMILY_FOOD_NUTRITION_V1` remains the required personal baseline;
+- Russian group reference is optional/additive and must pair with an explicit
+  Russian source-native policy;
+- published-zero estimate remains opt-in;
+- MealPlan historical replay requires an immutable member methodology pin plus a
+  snapshot of birth_date/sex/height/weight/activity/goal/member_updated_at;
+- existing historical plans remain zero-pin legacy state; no invented backfill;
+- methodology-pinned plans must use complete-or-zero member pin sets;
+- expected next migration is 0036; reserved 0033 remains untouched;
+- Step 6 does not change current Planner/NASEM behavior.
+
+Current work is docs-only Contract Gate. Do not implement 0036/runtime until the
+gate is merged and separately authorized.
+
+
+## Step 6 persisted methodology selection Contract Gate — 2026-09-23
+
+Accepted main:
+`3de3c58ee898284f8d2168af1aae04af754a6bfc` (merged PR84).
+
+Current branch:
+`docs/step6-persisted-methodology-selection-contract`.
+
+The user explicitly authorized Step 6. Under the repository-wide
+Implementation Contract Gate rule, current work is docs/preflight only.
+
+Preflight facts:
+
+- Step 5 reviewed Russian reference table is merged and available explicitly;
+- current personalized target path is `FAMILY_FOOD_NUTRITION_V1` /
+  NASEM/DRI-based and remains the existing default;
+- Russian source-native policy is explicit/versioned
+  (`RU_SOURCE_NATIVE_STRICT_V1` or
+  `RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1`);
+- `HouseholdMember` is mutable and has no historical profile revisions;
+- `MealPlan` is immutable/revisioned and already pins
+  `MemberMealPatternSelection`, but not nutrition methodology;
+- historical target replay therefore cannot rely on current member state;
+- no current migration uses `0036`; reserved `0033_recipe_template_catalogue`
+  must remain reserved.
+
+The Step 6 gate must decide the immutable selection + plan-pin/snapshot contract
+before implementation. No runtime/schema change is authorized on this branch.
+
+After contract review/merge, stop. Do not begin Step 6 runtime automatically.
+
+
 ## Step 5 runtime publication — authorized 2026-09-23
 
 Accepted main:
