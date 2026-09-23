@@ -457,7 +457,10 @@ def test_0035_version_pins_existing_retention_rows_without_changing_values(tmp_p
     before = retention_rows(config.path, versioned=False)
     assert len(before) == 1
 
-    assert apply_migrations(config) == [MIGRATION.MIGRATION_ID]
+    assert apply_migrations(config) == [
+        MIGRATION.MIGRATION_ID,
+        "0036_member_reference_methodology_selection",
+    ]
 
     with sqlite3.connect(config.path) as db:
         after = db.execute(
