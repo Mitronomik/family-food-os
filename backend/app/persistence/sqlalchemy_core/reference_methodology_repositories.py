@@ -104,19 +104,22 @@ class SqlAlchemyMemberReferenceMethodologySelectionRepository:
         row = (
             self._connection.execute(
                 select(member_reference_methodology_selections_table).where(
-                    member_reference_methodology_selections_table.c.household_id
-                    == household_id,
-                    member_reference_methodology_selections_table.c.member_id
-                    == member_id,
                     member_reference_methodology_selections_table.c.
                     acceptance_request_id
-                    == acceptance_request_id,
+                    == acceptance_request_id
                 )
             )
             .mappings()
             .one_or_none()
         )
-        return None if row is None else _from_row(row)
+        if row is None:
+            return None
+        if row["household_id"] != household_id or row["member_id"] != member_id:
+            raise ReferenceMethodologyPersistenceConflictError(
+                "acceptance_request_id is already owned by another "
+                "Household/member scope."
+            )
+        return _from_row(row)
 
     def get_current(
         self, household_id: UUID, member_id: UUID
