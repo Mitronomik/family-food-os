@@ -158,6 +158,7 @@ MemberNutritionMethodologySelection
 - group_reference_methodology_version: nullable version code
 - source_native_policy_version: nullable version code
 - accepted_local_date: date
+- household_timezone_at_acceptance: IANA timezone
 - member_updated_at_at_acceptance: UTC instant
 - accepted_at: UTC instant
 - supersedes_selection_id: nullable UUIDv4
@@ -193,8 +194,20 @@ For V1 this requires at least:
 current IANA timezone and stored explicitly so a later timezone change cannot
 alter the historical applicability date.
 
+The exact `household_timezone_at_acceptance` is stored with it so the local-date
+derivation remains auditable after a later Household timezone change.
+
 The selection also records
 `member_updated_at_at_acceptance` as an audit binding.
+
+Acceptance must not commit from an already stale cross-context read. The
+application may read Household/member state before opening the selection write
+UoW, but the write path must revalidate the relevant optimistic state tokens
+(`Household.updated_at` for the timezone-derived acceptance context and
+`HouseholdMember.updated_at` for member applicability) before insert/commit.
+A concurrent change produces conflict/zero write rather than a selection based on
+a stale applicability snapshot. The exact adapter/service split is an
+implementation detail; the guarantee is not.
 
 ## 8. DECISION — optimistic concurrency and semantic replay
 
@@ -340,6 +353,9 @@ When a complete pin mapping is supplied:
 - selection `accepted_at` must not be later than the plan revision creation
   instant;
 - the member snapshot is read from authoritative Household state;
+- the plan write revalidates `HouseholdMember.updated_at` against the snapshot
+  token before commit; a concurrent member edit produces conflict/rollback rather
+  than a silently stale plan snapshot;
 - the plan-level reference-target date is exactly `MealPlan.week_start`, matching
   the current Planner's existing `member_reference_target(..., as_of_date=week_start)`
   behavior;
@@ -393,7 +409,8 @@ Required constraints include:
 - self-FK `supersedes_selection_id`;
 - unique `(household_id, member_id, version_number)`;
 - positive version;
-- non-empty version strings when their nullable fields are populated.
+- non-empty version strings when their nullable fields are populated;
+- non-empty `household_timezone_at_acceptance`.
 
 Do **not** hardcode methodology versions or the current Step 6 V1 bundle
 compatibility matrix into SQL CHECK constraints. Version/bundle support is a
@@ -611,20 +628,22 @@ Runtime tests must inject/cover failure at least:
 
 1. before selection insert;
 2. after selection insert but before commit;
-3. stale expected-current selection;
-4. invalid supersedes chain;
-5. cross-Household selection;
-6. Russian add-on for unsupported age/sex;
-7. one missing Russian component version;
-8. unsupported methodology version;
-9. plan with partial methodology-pin mapping;
-10. plan pin to another member's selection;
-11. plan pin to another Household;
-12. failure after plan row insert but before methodology pins;
-13. failure after methodology pins but before events/Servings completion;
-14. mutable HouseholdMember changed after persisted plan — old plan snapshot
+3. Household/member state changed after acceptance pre-read but before commit;
+4. stale expected-current selection;
+5. invalid supersedes chain;
+6. cross-Household selection;
+7. Russian add-on for unsupported age/sex;
+8. one missing Russian component version;
+9. unsupported methodology version;
+10. plan with partial methodology-pin mapping;
+11. plan pin to another member's selection;
+12. plan pin to another Household;
+13. member changed after plan snapshot pre-read but before plan commit;
+14. failure after plan row insert but before methodology pins;
+15. failure after methodology pins but before events/Servings completion;
+16. mutable HouseholdMember changed after persisted plan — old plan snapshot
     remains unchanged;
-15. current methodology selection changed after persisted plan — old plan pin
+17. current methodology selection changed after persisted plan — old plan pin
     remains unchanged.
 
 All transaction failures must leave no partial authoritative write.
@@ -648,11 +667,15 @@ Runtime Step 6 acceptance must prove at least:
 - genuine selection change creates next immutable version;
 - stale conflicting update writes nothing;
 - selection history is Household/member scoped;
+- accepted local date retains the exact Household timezone used to derive it;
+- concurrent Household/member change between pre-read and selection commit fails
+  rather than publishing stale applicability;
 - existing `MemberMealPatternSelection` semantics are unchanged;
 - existing historical MealPlans load with zero methodology pins;
 - no synthetic backfill is created on migration;
 - pinned MealPlan requires complete member coverage;
 - plan snapshot equals authoritative member inputs at creation;
+- concurrent member change between snapshot read and plan commit fails/rolls back;
 - later member changes do not alter old plan snapshot;
 - later methodology selection changes do not alter old plan pin;
 - NASEM default operation output remains unchanged;
