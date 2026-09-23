@@ -42,6 +42,7 @@ MIGRATION_MODULES = [
     # databases with 0034/0035 remain an exact historical prefix.
     "app.migrations.versions.0034_partial_nutrition_profiles",
     "app.migrations.versions.0035_versioned_nutrient_registry",
+    "app.migrations.versions.0036_member_reference_methodology_selection",
 ]
 MIGRATION_TABLE = "schema_migrations"
 

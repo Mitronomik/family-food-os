@@ -4,70 +4,74 @@ Updated: `2026-09-23`.
 
 ## Accepted state
 
-PR84 is merged into `main` at
-`3de3c58ee898284f8d2168af1aae04af754a6bfc`.
+PR85 is merged into `main` at
+`e38692f7839ecab2da9499dc968dd01638227046`.
 
-Russian-data integration Steps 1–5 are accepted.
+Russian-data integration Steps 1–5 and the corrected Step 6 Contract Gate are
+accepted.
 
-Current bounded work is **Step 6 — persisted member reference-methodology
-selection, corrected Implementation Contract Gate only**.
+## Current bounded state
 
-Canonical gate:
+**Step 6A runtime is review-ready in PR86.**
+
+Runtime verification head:
+`e03be7b0c4a9b7766a961026cdf8de7d1f56d8d8`.
+
+Canonical contract:
 `docs/family-food/persisted-nutrition-methodology-selection-contract.md`.
 
-## Corrected Step 6 split
+Implemented Step 6A:
 
-The PR85 adversarial re-review blockers are resolved by a mandatory runtime split:
+- immutable/versioned Household-owned `MemberReferenceMethodologySelection`;
+- `FAMILY_FOOD_NUTRITION_V1` baseline;
+- optional Step 5 Russian group-reference methodology;
+- persisted request identity for commands that publish a new selection version;
+- zero-write semantic no-op with intentionally unconsumed new request ID;
+- expected-current optimistic concurrency;
+- SQLite-safe Household/member CAS/write-intent token guard;
+- household-scoped repository/read history;
+- migration `0036_member_reference_methodology_selection`.
 
-```text
-Step 6A
-MemberReferenceMethodologySelection persistence
-→ expected migration 0036
+## PR86 blocker closure
 
-Step 6B
-MealPlan member reference-methodology pins + immutable member target-input snapshot
-→ expected migration 0037
-```
+Independent re-review blockers are resolved:
 
-Step 6A and Step 6B are separate runtime PRs with a merge/review stop between
-them.
+1. real SQLite concurrency is guarded by exact-token conditional UPDATE/CAS
+   write intent; busy/locked competing writer becomes an application conflict and
+   publishes no selection;
+2. no-op request-id ambiguity is resolved explicitly in the canonical contract:
+   no-op is zero-write and does not consume a new request ID;
+3. durable state now records review-ready runtime and verification evidence.
 
-## Ownership boundary
+## Exact runtime verification
 
-Member reference selection owns:
+On `e03be7b0c4a9b7766a961026cdf8de7d1f56d8d8`:
 
-- required `FAMILY_FOOD_NUTRITION_V1` personal baseline;
-- optional
-  `RU_MR_2_3_1_0253_21_ADULT_MICRONUTRIENT_V1` group-reference add-on.
+- Docs #314 — SUCCESS;
+- DC1 #176 — SUCCESS;
+- Russian methodologies #81 — 358 passed;
+- Registry V2 #110 — focused 257 passed, 4/4 backend shards SUCCESS,
+  launcher 643 passed / 2 skipped;
+- Partial profiles #92 — focused 228 passed, 4/4 backend shards SUCCESS,
+  launcher 643 passed / 2 skipped.
 
-It does **not** own `RU_SOURCE_NATIVE_*` food interpretation policy.
+Any later branch-head change after that runtime head is docs/state only unless
+explicitly recorded otherwise.
 
-Source-native policy remains food/calculation truth and must be pinned later at
-the owning calculation/plan receipt boundary when V2 food/recipe calculation is
-integrated.
+## Hard boundaries
 
-## Replay/concurrency boundary
+Step 6A still does **not** change:
 
-Step 6A uses:
+- MealPlan domain/table/repository/UoW;
+- migration 0037 / Step 6B;
+- Planner behavior/defaults;
+- API/UI;
+- source-native `RU_SOURCE_NATIVE_*` policy ownership;
+- Step 7+.
 
-- persisted `acceptance_request_id` for exact command replay;
-- `expected_current_selection_id` for ordinary optimistic concurrency;
-- Household/member updated-at token revalidation.
-
-Bundle equality alone cannot turn a stale command into replay.
-
-Step 6B later freezes `MealPlan.week_start` as the target reference date and
-pins authoritative member target inputs without backfilling historical plans.
-
-## Current authorization
-
-Docs/state Contract Gate only.
-
-No 0036/0037 migration, runtime selection/pin tables, repository/service code,
-Planner/API/UI default change, Step 7+ implementation before this gate is
-reviewed and merged.
+Reserved `0033_recipe_template_catalogue` remains untouched.
 
 ## Stop boundary
 
-Deliver/review corrected PR85. After merge, stop. Step 6A runtime requires
-separate explicit authorization.
+PR86 is ready for final merge review. Do not merge autonomously and do not start
+Step 6B before PR86 is merged and Step 6B is separately authorized.

@@ -196,8 +196,14 @@ The entity is immutable after insertion.
 Version 1 has no superseded selection. Version N>1 supersedes exactly version
 N-1 for the same Household/member.
 
-`acceptance_request_id` is a persisted idempotency identity for one acceptance
-command. It is not a methodology version.
+`acceptance_request_id` is the persisted idempotency identity of a command
+that **publishes a new immutable selection version**. It is stored on that
+selection row and is not a methodology version.
+
+A semantic no-op publishes no new selection and performs zero writes. Therefore a
+new request ID used only for a semantic no-op is intentionally **not consumed or
+persisted**. Reusing that unconsumed ID later is a new command and must satisfy
+the then-current optimistic-concurrency and applicability rules.
 
 ## 8. DECISION — applicability at Step 6A acceptance
 
@@ -254,11 +260,14 @@ The acceptance command requires:
   selection;
 - requested reference bundle.
 
-The persisted request ID closes the ambiguity found during PR85 re-review.
+A persisted request ID closes the ambiguity found during PR85 re-review for
+commands that publish immutable selection history. Step 6A does not introduce a
+second command-receipt table merely to record zero-write semantic no-ops.
 
 ### 10.1 Exact request replay
 
-If `acceptance_request_id` already exists for the same Household/member:
+If `acceptance_request_id` already exists on a published selection for the
+same Household/member:
 
 - requested reference bundle must exactly equal the persisted command result;
 - return the same selection ID/version;
@@ -281,12 +290,16 @@ applicability passes:
 
 ### 10.3 Semantic no-op with current expectation
 
-Caller expects the actual current selection, request ID is new, applicability
-passes, and requested bundle equals current bundle:
+Caller expects the actual current selection, request ID is not already persisted
+on a published selection, applicability passes, and requested bundle equals
+current bundle:
 
 - return the current selection;
 - zero writes;
-- do not create a fake history version merely because the command was repeated.
+- do not create a fake history version merely because the command was repeated;
+- do not persist/consume the new request ID;
+- if that unconsumed request ID is later reused, treat it as a new command against
+  the then-current selection rather than as historical replay.
 
 ### 10.4 Genuine change
 
@@ -303,7 +316,7 @@ Fail with zero writes when:
 
 - expected current ID does not match the actual current selection and this is not
   an exact request replay under section 10.1;
-- request ID is reused with different command semantics;
+- a **persisted** request ID is reused with different command semantics;
 - scope points to another Household/member;
 - version chain is not contiguous;
 - reference version is unsupported;
@@ -415,8 +428,10 @@ Runtime 6A must prove:
 - unsupported/unknown sex fails Russian group-reference acceptance;
 - unknown config/table version fails closed;
 - request-id exact replay is zero-write and returns the original selection;
-- request-id reuse with changed payload fails;
+- persisted request-id reuse with changed payload fails;
 - same current bundle with correct current expectation is a zero-write no-op;
+- a request ID used only by a no-op is not persisted/consumed, and later reuse
+  follows ordinary new-command concurrency/applicability semantics;
 - stale expected-current ID fails even when current bundle happens to equal the
   requested bundle;
 - A → B → A cannot be collapsed into a stale replay;
@@ -715,6 +730,26 @@ Resolved by persisted `acceptance_request_id` plus ordinary
 `expected_current_selection_id` optimistic concurrency.
 
 Bundle equality alone never turns a stale new command into replay.
+
+
+### PR86 re-review blocker 1 — real SQLite stale-token concurrency
+
+Resolved by a Step-6A-specific authoritative-state CAS/write-intent guard.
+The guard performs exact-token conditional no-op UPDATEs inside the same UoW
+before either semantic no-op return or selection publication. A competing SQLite
+writer/lock is mapped to conflict; successful guard ownership prevents a
+concurrent Household/member edit from committing until the Step 6A transaction
+finishes. Real two-connection SQLite verification is required.
+
+### PR86 re-review blocker 2 — no-op request-id persistence ambiguity
+
+Resolved by making request identity precise: `acceptance_request_id` is
+persisted only when a command publishes a new immutable selection version.
+Semantic no-op remains zero-write and deliberately does not consume its new
+request ID. A later reuse of that unconsumed ID is a new command.
+
+This preserves one-table Step 6A schema and avoids introducing a second persisted
+command-receipt identity solely for zero-write no-ops.
 
 ## 30. Stop boundary
 

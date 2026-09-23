@@ -261,7 +261,10 @@ def test_populated_0034_upgrade_preserves_all_v1_rows_and_seals(tmp_path):
     )
     before_retention = retention_rows(config.path, versioned=False)
 
-    assert apply_migrations(config) == [MIGRATION.MIGRATION_ID]
+    assert apply_migrations(config) == [
+        MIGRATION.MIGRATION_ID,
+        "0036_member_reference_methodology_selection",
+    ]
 
     with sqlite3.connect(config.path) as db:
         after_definitions = db.execute(
@@ -354,10 +357,11 @@ def test_0035_failure_rolls_back_schema_and_marker(tmp_path):
 
 def test_migration_chain_advances_without_consuming_reserved_0033():
     expected = expected_migration_ids()
-    assert expected[-3:] == [
+    assert expected[-4:] == [
         "0032_meal_plan_serving",
         "0034_partial_nutrition_profiles",
         "0035_versioned_nutrient_registry",
+        "0036_member_reference_methodology_selection",
     ]
     assert not any(value.startswith("0033_") for value in expected)
 
@@ -453,7 +457,10 @@ def test_0035_version_pins_existing_retention_rows_without_changing_values(tmp_p
     before = retention_rows(config.path, versioned=False)
     assert len(before) == 1
 
-    assert apply_migrations(config) == [MIGRATION.MIGRATION_ID]
+    assert apply_migrations(config) == [
+        MIGRATION.MIGRATION_ID,
+        "0036_member_reference_methodology_selection",
+    ]
 
     with sqlite3.connect(config.path) as db:
         after = db.execute(

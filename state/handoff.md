@@ -1,5 +1,64 @@
 # Handoff
 
+## Step 6A runtime review-ready — PR86
+
+Accepted main:
+`e38692f7839ecab2da9499dc968dd01638227046` (merged PR85).
+
+PR86:
+`feat/step6a-member-reference-methodology-selection`.
+
+Verified runtime head:
+`e03be7b0c4a9b7766a961026cdf8de7d1f56d8d8`.
+
+Step 6A implementation is review-ready.
+
+Important final corrections:
+
+- migration 0036 DDL is rollback-atomic under the custom runner;
+- global `acceptance_request_id` cross-scope reuse fails closed;
+- real SQLite concurrent Household/member writer is converted to a deterministic
+  Step 6A conflict through an exact-token CAS/write-intent guard;
+- semantic no-op is zero-write and intentionally does not persist/consume its new
+  request ID; later reuse is an ordinary new command.
+
+Exact runtime verification:
+Docs #314 SUCCESS; DC1 #176 SUCCESS; Russian #81 358 passed; Registry #110
+focused 257 + 4 backend shards + launcher 643/2 skipped; Partial #92 focused 228
++ 4 backend shards + launcher 643/2 skipped.
+
+No MealPlan/0037/Planner/API/UI/source-native-policy change is in Step 6A.
+
+After PR86 merge, stop. Step 6B / migration 0037 requires separate explicit
+authorization.
+
+# Handoff
+
+## Step 6A runtime authorized — 2026-09-23
+
+Accepted main:
+`e38692f7839ecab2da9499dc968dd01638227046` (merged PR85).
+
+Branch:
+`feat/step6a-member-reference-methodology-selection`.
+
+Read first:
+`docs/family-food/persisted-nutrition-methodology-selection-contract.md`.
+
+Bounded runtime target:
+
+- MemberReferenceMethodologySelection only;
+- migration `0036_member_reference_methodology_selection`;
+- FAMILY_FOOD_NUTRITION_V1 baseline + optional Step 5 Russian group-reference;
+- acceptance_request_id exact retry identity;
+- expected_current_selection_id ordinary concurrency;
+- Household/member token binding and stale-read protection;
+- no MealPlan/0037/Planner/API/UI changes.
+
+After review-ready delivery, stop. No merge and no Step 6B without separate
+authorization.
+
+
 ## Step 6 corrected Contract Gate — PR85 re-review blockers resolved
 
 Accepted base:
