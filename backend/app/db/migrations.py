@@ -43,6 +43,7 @@ MIGRATION_MODULES = [
     "app.migrations.versions.0034_partial_nutrition_profiles",
     "app.migrations.versions.0035_versioned_nutrient_registry",
     "app.migrations.versions.0036_member_reference_methodology_selection",
+    "app.migrations.versions.0037_meal_plan_reference_methodology_pins",
 ]
 MIGRATION_TABLE = "schema_migrations"
 

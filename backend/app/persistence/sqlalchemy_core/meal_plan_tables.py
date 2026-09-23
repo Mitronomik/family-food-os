@@ -212,6 +212,61 @@ servings_table = Table(
     ),
 )
 
+meal_plan_member_reference_methodology_pins_table = Table(
+    "meal_plan_member_reference_methodology_pins",
+    meal_plan_metadata,
+    Column(
+        "plan_id",
+        entity_uuid_type(),
+        ForeignKey("meal_plans.id", ondelete="RESTRICT"),
+        primary_key=True,
+        nullable=False,
+    ),
+    Column(
+        "member_id",
+        entity_uuid_type(),
+        ForeignKey("household_members.id", ondelete="RESTRICT"),
+        primary_key=True,
+        nullable=False,
+    ),
+    Column(
+        "reference_methodology_selection_id",
+        entity_uuid_type(),
+        ForeignKey(
+            "member_reference_methodology_selections.id",
+            ondelete="RESTRICT",
+        ),
+        nullable=False,
+    ),
+    Column("birth_date", Date, nullable=True),
+    Column("sex", String, nullable=True),
+    Column("height_cm", DecimalText(), nullable=True),
+    Column("weight_kg", DecimalText(), nullable=True),
+    Column("activity_level", String, nullable=False),
+    Column("goal", String, nullable=False),
+    Column("member_updated_at", UTCDateTime(), nullable=False),
+    CheckConstraint(
+        "sex IS NULL OR length(trim(sex)) > 0",
+        name="ck_meal_plan_reference_pin_sex_nonempty",
+    ),
+    CheckConstraint(
+        "height_cm IS NULL OR CAST(height_cm AS NUMERIC) > 0",
+        name="ck_meal_plan_reference_pin_height_positive",
+    ),
+    CheckConstraint(
+        "weight_kg IS NULL OR CAST(weight_kg AS NUMERIC) > 0",
+        name="ck_meal_plan_reference_pin_weight_positive",
+    ),
+    CheckConstraint(
+        "length(trim(activity_level)) > 0",
+        name="ck_meal_plan_reference_pin_activity_nonempty",
+    ),
+    CheckConstraint(
+        "length(trim(goal)) > 0",
+        name="ck_meal_plan_reference_pin_goal_nonempty",
+    ),
+)
+
 Index(
     "idx_member_meal_pattern_current",
     member_meal_pattern_selections_table.c.household_id,

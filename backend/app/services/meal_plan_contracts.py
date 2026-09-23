@@ -1,6 +1,6 @@
 """Driver-independent contracts for Household MealPlan / Serving state."""
 
-from datetime import date
+from datetime import date, datetime
 from types import TracebackType
 from typing import Protocol, Self
 from uuid import UUID
@@ -10,6 +10,10 @@ from app.domain.meal_plans import (
     MealPlanDetail,
     MemberMealPatternSelection,
     MemberMealPatternSelectionDetail,
+)
+from app.services.household_contracts import HouseholdMemberRepository
+from app.services.reference_methodology_contracts import (
+    MemberReferenceMethodologySelectionRepository,
 )
 
 
@@ -38,8 +42,19 @@ class MealPlanRepository(Protocol):
 class MealPlanUnitOfWork(Protocol):
     selections: MemberMealPatternSelectionRepository
     plans: MealPlanRepository
+    members: HouseholdMemberRepository
+    reference_methodologies: MemberReferenceMethodologySelectionRepository
 
     def __enter__(self) -> Self: ...
+
+    def guard_member_state(
+        self,
+        *,
+        household_id: UUID,
+        member_id: UUID,
+        member_updated_at: datetime,
+    ) -> None: ...
+
     def commit(self) -> None: ...
     def rollback(self) -> None: ...
     def __exit__(
@@ -53,6 +68,7 @@ class MealPlanUnitOfWork(Protocol):
 class MealPlanReadScope(Protocol):
     selections: MemberMealPatternSelectionRepository
     plans: MealPlanRepository
+    reference_methodologies: MemberReferenceMethodologySelectionRepository
 
     def __enter__(self) -> Self: ...
     def __exit__(

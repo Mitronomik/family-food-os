@@ -9,7 +9,12 @@ from uuid import UUID
 
 from app.domain.decimal_utils import parse_decimal, quantize_decimal
 from app.domain.errors import DomainIssue, DomainIssueCode, DomainValidationError
-from app.domain.households import normalize_utc_instant
+from app.domain.households import (
+    normalize_birth_date,
+    normalize_height_cm,
+    normalize_utc_instant,
+    normalize_weight_kg,
+)
 from app.domain.meal_patterns import MealRole
 from app.domain.nutrition import (
     NutritionStatus,
@@ -415,6 +420,54 @@ class MealPlanMemberSelection:
 
 
 @dataclass(frozen=True)
+class MealPlanMemberReferenceMethodologyPin:
+    plan_id: UUID
+    member_id: UUID
+    reference_methodology_selection_id: UUID
+    birth_date: date | None
+    sex: str | None
+    height_cm: Decimal | None
+    weight_kg: Decimal | None
+    activity_level: str
+    goal: str
+    member_updated_at: datetime
+
+    def __post_init__(self) -> None:
+        for field in (
+            "plan_id",
+            "member_id",
+            "reference_methodology_selection_id",
+        ):
+            object.__setattr__(
+                self,
+                field,
+                _uuid4(getattr(self, field), field=field),
+            )
+        object.__setattr__(self, "birth_date", normalize_birth_date(self.birth_date))
+        object.__setattr__(
+            self,
+            "sex",
+            _optional_text(self.sex, field="sex", maximum=120),
+        )
+        object.__setattr__(self, "height_cm", normalize_height_cm(self.height_cm))
+        object.__setattr__(self, "weight_kg", normalize_weight_kg(self.weight_kg))
+        object.__setattr__(
+            self,
+            "activity_level",
+            _required_code(self.activity_level, field="activity_level"),
+        )
+        object.__setattr__(self, "goal", _required_code(self.goal, field="goal"))
+        object.__setattr__(
+            self,
+            "member_updated_at",
+            normalize_utc_instant(
+                self.member_updated_at,
+                field="member_updated_at",
+            ),
+        )
+
+
+@dataclass(frozen=True)
 class HouseholdMealEvent:
     id: UUID
     plan_id: UUID
@@ -518,6 +571,9 @@ class MealPlanDetail:
     member_selections: tuple[MealPlanMemberSelection, ...]
     events: tuple[HouseholdMealEvent, ...]
     servings: tuple[Serving, ...]
+    reference_methodology_pins: tuple[
+        MealPlanMemberReferenceMethodologyPin, ...
+    ] = ()
 
     def __post_init__(self) -> None:
         plan_id = self.plan.id
@@ -542,6 +598,33 @@ class MealPlanDetail:
                 "A member may have only one pinned selection per plan revision.",
                 field="member_selections",
                 value=member_ids,
+            )
+        if any(
+            item.plan_id != plan_id
+            for item in self.reference_methodology_pins
+        ):
+            raise _issue(
+                DomainIssueCode.INVALID_IDENTIFIER,
+                "Reference-methodology pins must belong to the MealPlan.",
+                field="reference_methodology_pins",
+                value=plan_id,
+            )
+        reference_member_ids = [
+            item.member_id for item in self.reference_methodology_pins
+        ]
+        if len(reference_member_ids) != len(set(reference_member_ids)):
+            raise _issue(
+                DomainIssueCode.INVALID_IDENTIFIER,
+                "A member may have only one reference-methodology pin per plan.",
+                field="reference_methodology_pins",
+                value=reference_member_ids,
+            )
+        if reference_member_ids and set(reference_member_ids) != set(member_ids):
+            raise _issue(
+                DomainIssueCode.REQUIRED_FIELD,
+                "Reference-methodology pins must cover all plan members or none.",
+                field="reference_methodology_pins",
+                value=reference_member_ids,
             )
         event_by_id = {event.id: event for event in self.events}
         if len(event_by_id) != len(self.events):
