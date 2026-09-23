@@ -116,11 +116,21 @@ and one explicit source-native policy:
 - `RU_SOURCE_NATIVE_STRICT_V1`; or
 - `RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1`.
 
-The two Russian fields are a pair:
+The target-table version and source-native food-interpretation policy are
+distinct methodology axes. Step 6 V1 nevertheless supports only three reviewed
+bundles:
 
-- both null = baseline-only selection;
-- both non-null = reviewed Russian add-on;
-- exactly one non-null = invalid.
+1. baseline only: both Russian fields null;
+2. Russian strict add-on: Step 5 table + `RU_SOURCE_NATIVE_STRICT_V1`;
+3. Russian estimated-zero add-on: Step 5 table +
+   `RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1`.
+
+Any other combination is unsupported in V1 and fails closed.
+
+This compatibility rule belongs to the code-owned methodology-bundle resolver,
+not to database shape. A later reviewed methodology version may authorize another
+combination without requiring a table rebuild merely to relax a SQL pairing
+constraint.
 
 The published-zero-estimate policy remains opt-in. It is never inferred merely
 because the Russian table is selected.
@@ -383,12 +393,12 @@ Required constraints include:
 - self-FK `supersedes_selection_id`;
 - unique `(household_id, member_id, version_number)`;
 - positive version;
-- non-empty version strings;
-- Russian group-reference/source-policy null-pair consistency.
+- non-empty version strings when their nullable fields are populated.
 
-Do **not** hardcode every methodology version string into a SQL CHECK. Version
-support is a domain/application contract so future accepted versions do not
-require a schema rebuild merely to extend the allowlist.
+Do **not** hardcode methodology versions or the current Step 6 V1 bundle
+compatibility matrix into SQL CHECK constraints. Version/bundle support is a
+domain/application contract so future accepted combinations do not require a
+schema rebuild merely to extend the allowlist.
 
 ### 14.2 New table — MealPlan pins
 
@@ -514,23 +524,29 @@ Persisted version strings must not become arbitrary behavior selectors.
 
 Runtime resolves only currently supported exact versions.
 
-Initial support:
+Initial supported bundles are exactly:
 
 ```text
-nutrition_config_version:
-  FAMILY_FOOD_NUTRITION_V1
+BASELINE_V1
+  nutrition_config_version = FAMILY_FOOD_NUTRITION_V1
+  group_reference_methodology_version = null
+  source_native_policy_version = null
 
-group_reference_methodology_version:
-  null
-  RU_MR_2_3_1_0253_21_ADULT_MICRONUTRIENT_V1
+RU_STRICT_V1
+  nutrition_config_version = FAMILY_FOOD_NUTRITION_V1
+  group_reference_methodology_version =
+    RU_MR_2_3_1_0253_21_ADULT_MICRONUTRIENT_V1
+  source_native_policy_version = RU_SOURCE_NATIVE_STRICT_V1
 
-source_native_policy_version:
-  null
-  RU_SOURCE_NATIVE_STRICT_V1
-  RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1
+RU_PUBLISHED_ZERO_ESTIMATE_V1
+  nutrition_config_version = FAMILY_FOOD_NUTRITION_V1
+  group_reference_methodology_version =
+    RU_MR_2_3_1_0253_21_ADULT_MICRONUTRIENT_V1
+  source_native_policy_version =
+    RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1
 ```
 
-Unknown versions fail closed.
+Unknown versions or unsupported cross-axis combinations fail closed.
 
 The resolver uses existing code-owned config/table/policy boundaries. It does not
 load formulas or methodology code from the database.
