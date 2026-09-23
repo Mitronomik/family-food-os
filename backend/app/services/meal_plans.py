@@ -281,8 +281,8 @@ class MealPlanService:
                             members[member_id],
                             reference_date=week_start,
                             methodology_version=(
-                                reference_selection.
-                                group_reference_methodology_version
+                                reference_selection
+                                .group_reference_methodology_version
                             ),
                             russian_reference_tables=(
                                 self._russian_reference_tables
