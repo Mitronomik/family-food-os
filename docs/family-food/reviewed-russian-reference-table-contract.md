@@ -152,7 +152,9 @@ Every runtime row must retain:
 - PDF page/table/row/column locator;
 - review reference;
 - canonical definition code;
-- canonical daily unit;
+- exact source/reference daily unit stored in `RussianReferenceRow.unit`;
+- compatibility of that definition/unit with the pinned `RU_NUTRIENT_REGISTRY_V2`
+  canonical definition and unit;
 - exact Decimal source value;
 - sex;
 - age interval;
@@ -190,35 +192,48 @@ No source `sex=null` group is converted to `sex=all`.
 
 The following source labels are approved for the first table:
 
-| Source definition | Canonical definition code | Canonical unit |
-| --- | --- | --- |
-| Витамин С | `VITAMIN_C` | mg/day |
-| Витамин B1 | `THIAMIN` | mg/day |
-| Витамин B2 | `RIBOFLAVIN` | mg/day |
-| Витамин B6 | `VITAMIN_B6` | mg/day |
-| Ниацин, ниациновый эквивалент | `NIACIN_EQUIVALENT` | mg/day |
-| Витамин B12 | `VITAMIN_B12` | µg/day |
-| Пантотеновая кислота | `PANTOTHENIC_ACID` | mg/day |
-| Биотин | `BIOTIN` | µg/day |
-| Витамин А, ретиноловый эквивалент | `VITAMIN_A_RE` | µg/day |
-| Бета-каротин | `BETA_CAROTENE` | mg/day |
-| Витамин Е, токофероловый эквивалент | `VITAMIN_E_TOCOPHEROL_EQUIVALENT` | mg/day |
-| Фосфор | `PHOSPHORUS` | mg/day |
-| Магний | `MAGNESIUM` | mg/day |
-| Калий | `POTASSIUM` | mg/day |
-| Натрий | `SODIUM` | mg/day |
-| Хлориды | `CHLORIDE` | mg/day |
-| Железо | `IRON` | mg/day |
-| Цинк | `ZINC` | mg/day |
-| Йод | `IODINE` | µg/day |
-| Медь | `COPPER` | mg/day |
-| Марганец | `MANGANESE` | mg/day |
-| Молибден | `MOLYBDENUM` | µg/day |
-| Селен | `SELENIUM` | µg/day |
-| Хром | `CHROMIUM` | µg/day |
+| Source definition | Canonical definition code | Source/reference daily unit | Registry V2 canonical unit |
+| --- | --- | --- | --- |
+| Витамин С | `VITAMIN_C` | mg/day | mg |
+| Витамин B1 | `THIAMIN` | mg/day | mg |
+| Витамин B2 | `RIBOFLAVIN` | mg/day | mg |
+| Витамин B6 | `VITAMIN_B6` | mg/day | mg |
+| Ниацин, ниациновый эквивалент | `NIACIN_EQUIVALENT` | mg/day | mg |
+| Витамин B12 | `VITAMIN_B12` | µg/day | µg |
+| Пантотеновая кислота | `PANTOTHENIC_ACID` | mg/day | mg |
+| Биотин | `BIOTIN` | µg/day | µg |
+| Витамин А, ретиноловый эквивалент | `VITAMIN_A_RE` | µg/day | µg |
+| Бета-каротин | `BETA_CAROTENE` | mg/day | µg |
+| Витамин Е, токофероловый эквивалент | `VITAMIN_E_TOCOPHEROL_EQUIVALENT` | mg/day | mg |
+| Фосфор | `PHOSPHORUS` | mg/day | mg |
+| Магний | `MAGNESIUM` | mg/day | mg |
+| Калий | `POTASSIUM` | mg/day | mg |
+| Натрий | `SODIUM` | mg/day | mg |
+| Хлориды | `CHLORIDE` | mg/day | mg |
+| Железо | `IRON` | mg/day | mg |
+| Цинк | `ZINC` | mg/day | mg |
+| Йод | `IODINE` | µg/day | µg |
+| Медь | `COPPER` | mg/day | mg |
+| Марганец | `MANGANESE` | mg/day | mg |
+| Молибден | `MOLYBDENUM` | µg/day | µg |
+| Селен | `SELENIUM` | µg/day | µg |
+| Хром | `CHROMIUM` | µg/day | µg |
 
 The mapping is definition-sensitive. Equal units never establish nutrient
 equivalence.
+
+The source/reference unit and the nutrient-registry canonical unit are separate
+contracts. `RussianReferenceRow.unit` preserves the reviewed source/reference
+daily unit. The runtime loader must independently verify that the selected
+definition exists in `RU_NUTRIENT_REGISTRY_V2` and that its mass unit is
+compatible with the row unit.
+
+This distinction is material for `BETA_CAROTENE`: tables 11/16 publish
+beta-carotene in `mg/day` (5.0 mg/day), while
+`RU_NUTRIENT_REGISTRY_V2.BETA_CAROTENE` uses canonical unit `µg`.
+This is an intentional unit-conversion case for the **same definition**, not a
+definition substitution. The source Decimal value/unit must not be silently
+rewritten merely to match the registry display unit.
 
 ## 8. DECISION — explicit deferrals
 
@@ -320,7 +335,7 @@ Do not create a second reference-table domain model.
 
 The subsequent runtime PR must:
 
-1. add a hash-pinned repository curation package for exactly the 50 reviewed rows;
+1. add a hash-pinned repository curation package for exactly the 48 reviewed rows;
 2. validate the source package hashes and exact source-claim identities;
 3. parse all numeric values as `Decimal`, never float;
 4. construct one immutable
@@ -361,7 +376,8 @@ Reject before provider availability if any of the following changes:
 - source claim id/locator;
 - source status is not `ready_source_group_lookup`;
 - source definition mapping;
-- unit;
+- source/reference row unit or its validated compatibility with the pinned
+  registry canonical unit;
 - value;
 - sex;
 - age applicability;
@@ -409,7 +425,12 @@ The runtime PR must prove at least:
 17. explicit Russian service selection returns `individualized=false`;
 18. exact replay returns byte/digest-equivalent table truth;
 19. no DB write/migration occurs;
-20. AI is not used.
+20. AI is not used;
+21. all 24 selected definition codes exist in the pinned
+    `RU_NUTRIENT_REGISTRY_V2`;
+22. source/reference row units are validated separately from registry canonical
+    units, including the intentional `BETA_CAROTENE` `mg/day` → `µg`
+    compatibility case without changing nutrient definition or source value.
 
 ## 14. Verification tier
 
@@ -420,6 +441,8 @@ Docs/state only:
 - diff/whitespace;
 - links;
 - source/hash consistency;
+- contract cardinality consistency (48 rows / 24 definitions / 2 sexes);
+- canonical definition/unit cross-check against `RU_NUTRIENT_REGISTRY_V2`;
 - stale-state audit;
 - no runtime/data numeric publication.
 
