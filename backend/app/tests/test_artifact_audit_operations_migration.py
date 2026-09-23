@@ -38,7 +38,8 @@ COMPOSITION_MIGRATION_ID = "0029_food_composition_core"
 MEAL_PLAN_MIGRATION_ID = "0032_meal_plan_serving"
 PARTIAL_PROFILE_MIGRATION_ID = "0034_partial_nutrition_profiles"
 REGISTRY_V2_MIGRATION_ID = "0035_versioned_nutrient_registry"
-HEAD_MIGRATION_ID = "0036_member_reference_methodology_selection"
+REFERENCE_METHODOLOGY_MIGRATION_ID = "0036_member_reference_methodology_selection"
+HEAD_MIGRATION_ID = "0037_meal_plan_reference_methodology_pins"
 TABLE = "artifact_audit_operations"
 
 
@@ -182,6 +183,7 @@ def test_a_database_at_0019_reports_0020_then_0021_pending(tmp_path):
         MEAL_PLAN_MIGRATION_ID,
         PARTIAL_PROFILE_MIGRATION_ID,
         REGISTRY_V2_MIGRATION_ID,
+        REFERENCE_METHODOLOGY_MIGRATION_ID,
         HEAD_MIGRATION_ID,
     ]
 
@@ -209,6 +211,7 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         MEAL_PLAN_MIGRATION_ID,
         PARTIAL_PROFILE_MIGRATION_ID,
         REGISTRY_V2_MIGRATION_ID,
+        REFERENCE_METHODOLOGY_MIGRATION_ID,
         HEAD_MIGRATION_ID,
     ]
     assert snapshot(database_path) == before
@@ -260,6 +263,7 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         "meal_plan_events",
         "servings",
         "member_reference_methodology_selections",
+        "meal_plan_member_reference_methodology_pins",
     }
 
 
@@ -630,6 +634,7 @@ def test_user_mode_startup_backs_up_before_applying_0020(monkeypatch, tmp_path):
         MEAL_PLAN_MIGRATION_ID,
         PARTIAL_PROFILE_MIGRATION_ID,
         REGISTRY_V2_MIGRATION_ID,
+        REFERENCE_METHODOLOGY_MIGRATION_ID,
         HEAD_MIGRATION_ID,
     ]
     assert result.backup is not None
