@@ -89,7 +89,11 @@ def existing_rows(path):
 def test_0036_is_appended_after_0035_and_0033_remains_reserved():
     expected = expected_migration_ids()
 
-    assert expected[-3:] == [\n        PREVIOUS_HEAD,\n        MIGRATION_ID,\n        "0037_meal_plan_reference_methodology_pins",\n    ]
+    assert expected[-3:] == [
+        PREVIOUS_HEAD,
+        MIGRATION_ID,
+        "0037_meal_plan_reference_methodology_pins",
+    ]
     assert not any(value.startswith("0033_") for value in expected)
 
 
@@ -105,7 +109,10 @@ def test_populated_0035_upgrade_preserves_existing_state_and_restore_reupgrades(
     backup_digest = digest(backup)
 
     assert MIGRATION_ID not in current_migrations(config)
-    assert apply_migrations(config) == [\n        MIGRATION_ID,\n        "0037_meal_plan_reference_methodology_pins",\n    ]
+    assert apply_migrations(config) == [
+        MIGRATION_ID,
+        "0037_meal_plan_reference_methodology_pins",
+    ]
     assert existing_rows(database) == before
     assert apply_migrations(config) == []
 
@@ -120,14 +127,21 @@ def test_populated_0035_upgrade_preserves_existing_state_and_restore_reupgrades(
                 "SELECT migration_id FROM schema_migrations ORDER BY rowid"
             )
         ]
-    assert history[-3:] == [\n        PREVIOUS_HEAD,\n        MIGRATION_ID,\n        "0037_meal_plan_reference_methodology_pins",\n    ]
+    assert history[-3:] == [
+        PREVIOUS_HEAD,
+        MIGRATION_ID,
+        "0037_meal_plan_reference_methodology_pins",
+    ]
 
     shutil.copy2(backup, database)
     assert digest(database) == backup_digest
     assert MIGRATION_ID not in current_migrations(config)
     assert existing_rows(database) == before
 
-    assert apply_migrations(config) == [\n        MIGRATION_ID,\n        "0037_meal_plan_reference_methodology_pins",\n    ]
+    assert apply_migrations(config) == [
+        MIGRATION_ID,
+        "0037_meal_plan_reference_methodology_pins",
+    ]
     assert existing_rows(database) == before
 
 

@@ -20,7 +20,8 @@ MEAL_PATTERN_MIGRATION_ID = "0031_meal_pattern_catalogue"
 MEAL_PLAN_MIGRATION_ID = "0032_meal_plan_serving"
 PARTIAL_PROFILE_MIGRATION_ID = "0034_partial_nutrition_profiles"
 REGISTRY_V2_MIGRATION_ID = "0035_versioned_nutrient_registry"
-REFERENCE_METHODOLOGY_MIGRATION_ID = "0036_member_reference_methodology_selection"\nMEAL_PLAN_REFERENCE_PINS_MIGRATION_ID = "0037_meal_plan_reference_methodology_pins"
+REFERENCE_METHODOLOGY_MIGRATION_ID = "0036_member_reference_methodology_selection"
+MEAL_PLAN_REFERENCE_PINS_MIGRATION_ID = "0037_meal_plan_reference_methodology_pins"
 
 
 def test_real_0028_upgrade_preserves_every_row_readiness_and_vector_digest(tmp_path):
