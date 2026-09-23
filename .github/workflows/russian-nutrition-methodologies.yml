@@ -38,6 +38,7 @@ jobs:
           backend/app/tests/test_meal_plan_reference_methodology.py
           backend/app/tests/persistence/test_meal_plan_reference_methodology_repository.py
           backend/app/tests/test_meal_plan_reference_methodology_migration.py
+          backend/app/tests/test_planner_application_boundary.py
           backend/app/tests/test_reference_comparison.py
           backend/app/tests/test_nutrition_methodology_service.py
           backend/app/tests/test_russian_reference_service.py
