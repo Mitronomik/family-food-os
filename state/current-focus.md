@@ -1,56 +1,68 @@
 # Current focus
 
-Updated: `2026-09-22`.
+Updated: `2026-09-23`.
 
 ## Accepted state
 
-PR82 is merged into `main` at
-`aa5ebcb4c70c9adee0fd1242f520ef1298f6b167`.
+PR83 is merged into `main` at
+`f12a3f58279eb07c710d1ff889cc70d933da3310`.
 
-Russian-data integration Steps 1–4 are accepted through the first licensed
-RU-NUT-DB runtime publication.
+Russian-data integration Steps 1–4 are accepted, and the Step 5
+Implementation Contract Gate is accepted.
 
-Current bounded work is **Step 5 — reviewed Russian reference table,
-Implementation Contract Gate / adversarial preflight only**.
+Current bounded work is **Step 5 runtime publication — reviewed Russian adult
+micronutrient population reference table**.
 
-## Step 5 proposed first table
+## Frozen runtime contract
 
-Source:
-`МР 2.3.1.0253-21`, pinned PDF SHA-256
-`cf96c7ea7fab087d16b478b2c8c097406d7572e495b2beb43405e4fd05917d79`.
+Canonical contract:
+`docs/family-food/reviewed-russian-reference-table-contract.md`.
 
-Frozen proposed table identity:
+Methodology version:
 
 `RU_MR_2_3_1_0253_21_ADULT_MICRONUTRIENT_V1`.
 
-Bounded V1 scope:
+Runtime V1 must publish exactly:
 
-- adult only;
-- exact source header `Старше 18 лет` → completed age 19+;
+- source tables 11/12 for men and 16/17 for women;
+- source header `Старше 18 лет` → completed age 19+;
 - male/female only;
 - KFA-independent rows only;
-- source tables 11/12 and 16/17;
-- exactly 24 reviewed canonical definitions × 2 sexes = 48 rows;
-- scalar `ready_source_group_lookup` claims only.
+- 24 reviewed canonical definitions × 2 sexes = 48 rows;
+- scalar `ready_source_group_lookup` claims only;
+- exact Decimal source values and source/reference units;
+- exact source claim/page/table/row/column provenance;
+- explicit compatibility against the pinned `RU_NUTRIENT_REGISTRY_V2`;
+- existing `ReviewedRussianReferenceTable` / provider / selector boundary;
+- deterministic fail-closed load/replay behavior.
 
-Deferred:
-energy/macros, percent-energy references, child rows, pregnancy/lactation,
-footnote-dependent Vitamin D/Calcium, adequate-level tables 13/18 (including
-fluoride), folate/Vitamin K definition mismatches and source nutrients without a
-V2 target.
-
-Canonical gate:
-`docs/family-food/reviewed-russian-reference-table-contract.md`.
+Explicitly deferred remain tables 9/10/13/14/15/18, Vitamin D, Calcium, folate,
+Vitamin K, fluoride, cobalt/silicon/vanadium, children and pregnancy/lactation.
 
 ## Current authorization
 
-Docs/state Contract Gate only.
+The user explicitly authorized Step 5 runtime continuation on 2026-09-23 after
+merging PR83.
 
-Do not publish numeric reference rows, wire a runtime provider, persist
-methodology selection, change Planner/API/UI defaults or consume a migration
-before this gate is reviewed and merged.
+Authorized:
+- hash-pinned 48-row curation package;
+- loader/provider runtime wiring through the existing explicit Russian path;
+- focused/adversarial tests required by the merged contract;
+- state/docs updates required for delivery.
+
+Not authorized:
+- schema or migration;
+- persisted methodology selection (Step 6);
+- Planner/API/UI default switch;
+- NASEM behavior change;
+- reference-kind extension;
+- Step 6+.
+
+If implementation discovers that any authorized row cannot preserve the merged
+source/mapping/applicability contract without a new schema/domain decision, stop
+rather than widening scope.
 
 ## Stop boundary
 
-Deliver and review the Step 5 Contract Gate. Do not start runtime Step 5
-automatically.
+Deliver Step 5 runtime through exact-head verification and final review. Do not
+merge autonomously and do not start persisted methodology selection automatically.
