@@ -1,5 +1,22 @@
 # Progress
 
+## Step 6B runtime authorized — 2026-09-23
+
+PR86 merged into main at
+`ef021c44e3166fbd2aa930c35b57dcb258e11bcc`.
+
+The user explicitly authorized the next bounded Step 6B runtime operation.
+
+Current target:
+`MealPlanMemberReferenceMethodologyPin` persistence with additive migration
+`0037_meal_plan_reference_methodology_pins`.
+
+Step 7+ remains not started.
+
+Current status:
+`STEP6B_RUNTIME_AUTHORIZED`.
+
+
 ## Step 6A runtime review-ready — 2026-09-23
 
 PR86 runtime head:

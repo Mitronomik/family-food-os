@@ -1,5 +1,33 @@
 # Handoff
 
+## Step 6B runtime authorized — 2026-09-23
+
+Accepted main:
+`ef021c44e3166fbd2aa930c35b57dcb258e11bcc` (merged PR86).
+
+Branch:
+`feat/step6b-meal-plan-reference-methodology-pins`.
+
+Read first:
+`docs/family-food/persisted-nutrition-methodology-selection-contract.md`.
+
+Bounded runtime target:
+
+- MealPlan-owned reference-methodology pins only;
+- migration `0037_meal_plan_reference_methodology_pins`;
+- exact Step 6A selection ID per pinned member;
+- immutable authoritative member target-input snapshot;
+- complete-or-zero pin coverage;
+- MealPlan.week_start reference date;
+- Russian applicability revalidation at week_start;
+- member updated_at CAS guard before plan commit;
+- zero backfill for historical plans;
+- no Planner/default/API/UI/source-native-policy change.
+
+After review-ready delivery, stop. No merge or Step 7/Step 10 without separate
+authorization.
+
+
 ## Step 6A runtime review-ready — PR86
 
 Accepted main:

@@ -4,74 +4,48 @@ Updated: `2026-09-23`.
 
 ## Accepted state
 
-PR85 is merged into `main` at
-`e38692f7839ecab2da9499dc968dd01638227046`.
+PR86 is merged into `main` at
+`ef021c44e3166fbd2aa930c35b57dcb258e11bcc`.
 
-Russian-data integration Steps 1–5 and the corrected Step 6 Contract Gate are
-accepted.
+Steps 1–5, the Step 6 Contract Gate and Step 6A runtime are accepted.
 
-## Current bounded state
-
-**Step 6A runtime is review-ready in PR86.**
-
-Runtime verification head:
-`e03be7b0c4a9b7766a961026cdf8de7d1f56d8d8`.
+Current bounded work is **Step 6B runtime — MealPlan member reference-methodology
+pins + immutable member target-input snapshots only**.
 
 Canonical contract:
 `docs/family-food/persisted-nutrition-methodology-selection-contract.md`.
 
-Implemented Step 6A:
+## Authorized Step 6B scope
 
-- immutable/versioned Household-owned `MemberReferenceMethodologySelection`;
-- `FAMILY_FOOD_NUTRITION_V1` baseline;
-- optional Step 5 Russian group-reference methodology;
-- persisted request identity for commands that publish a new selection version;
-- zero-write semantic no-op with intentionally unconsumed new request ID;
-- expected-current optimistic concurrency;
-- SQLite-safe Household/member CAS/write-intent token guard;
-- household-scoped repository/read history;
-- migration `0036_member_reference_methodology_selection`.
+Implement:
 
-## PR86 blocker closure
-
-Independent re-review blockers are resolved:
-
-1. real SQLite concurrency is guarded by exact-token conditional UPDATE/CAS
-   write intent; busy/locked competing writer becomes an application conflict and
-   publishes no selection;
-2. no-op request-id ambiguity is resolved explicitly in the canonical contract:
-   no-op is zero-write and does not consume a new request ID;
-3. durable state now records review-ready runtime and verification evidence.
-
-## Exact runtime verification
-
-On `e03be7b0c4a9b7766a961026cdf8de7d1f56d8d8`:
-
-- Docs #314 — SUCCESS;
-- DC1 #176 — SUCCESS;
-- Russian methodologies #81 — 358 passed;
-- Registry V2 #110 — focused 257 passed, 4/4 backend shards SUCCESS,
-  launcher 643 passed / 2 skipped;
-- Partial profiles #92 — focused 228 passed, 4/4 backend shards SUCCESS,
-  launcher 643 passed / 2 skipped.
-
-Any later branch-head change after that runtime head is docs/state only unless
-explicitly recorded otherwise.
+- `MealPlanMemberReferenceMethodologyPin` as a MealPlan-owned dependent record;
+- complete-or-zero reference-methodology pin sets;
+- authoritative member snapshot:
+  birth_date / sex / height_cm / weight_kg / activity_level / goal /
+  member_updated_at;
+- exact Step 6A selection ownership validation;
+- `MealPlan.week_start` as the frozen target reference date;
+- Russian Step 5 applicability revalidation at plan pinning;
+- member state-token CAS/write-intent revalidation before commit;
+- atomic persistence with MealPlan + meal-pattern pins + events + Servings;
+- migration `0037_meal_plan_reference_methodology_pins`;
+- legacy zero-pin plan compatibility;
+- focused + full verification required by the merged contract.
 
 ## Hard boundaries
 
-Step 6A still does **not** change:
+Step 6B does **not**:
 
-- MealPlan domain/table/repository/UoW;
-- migration 0037 / Step 6B;
-- Planner behavior/defaults;
-- API/UI;
-- source-native `RU_SOURCE_NATIVE_*` policy ownership;
-- Step 7+.
-
-Reserved `0033_recipe_template_catalogue` remains untouched.
+- change current Planner behavior/defaults;
+- make Russian group-reference automatic;
+- change API/UI;
+- persist `RU_SOURCE_NATIVE_*` in member pins;
+- implement Step 7 transformation applicability;
+- implement Steps 8–10;
+- rewrite/backfill historical MealPlans.
 
 ## Stop boundary
 
-PR86 is ready for final merge review. Do not merge autonomously and do not start
-Step 6B before PR86 is merged and Step 6B is separately authorized.
+Deliver Step 6B through exact-head verification and final review. Do not merge
+autonomously and do not start Step 7 or Step 10 Planner integration.
