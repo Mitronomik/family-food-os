@@ -35,7 +35,7 @@ def _run_with_chain_through(config, suffix, operation):
 
 
 def test_migration_chain_keeps_0031_between_0030_and_0032():
-    assert expected_migration_ids()[-6:] == [
+    assert expected_migration_ids()[-7:] == [
         "0030_recipe_source_corpus",
         "0031_meal_pattern_catalogue",
         "0032_meal_plan_serving",

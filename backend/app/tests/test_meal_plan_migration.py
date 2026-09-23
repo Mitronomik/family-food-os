@@ -7,7 +7,7 @@ from app.db.migrations import MIGRATION_MODULES, apply_migrations, expected_migr
 MIGRATION_ID = "0032_meal_plan_serving"
 PARTIAL_PROFILE_MIGRATION_ID = "0034_partial_nutrition_profiles"
 REGISTRY_V2_MIGRATION_ID = "0035_versioned_nutrient_registry"
-REFERENCE_METHODOLOGY_MIGRATION_ID = "0036_member_reference_methodology_selection"
+REFERENCE_METHODOLOGY_MIGRATION_ID = "0036_member_reference_methodology_selection"\nREFERENCE_PINS_MIGRATION_ID = "0037_meal_plan_reference_methodology_pins"
 NEW_TABLES = {
     "member_meal_pattern_selections",
     "member_meal_pattern_opportunities",

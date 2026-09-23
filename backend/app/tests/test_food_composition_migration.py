@@ -20,13 +20,13 @@ MEAL_PATTERN_MIGRATION_ID = "0031_meal_pattern_catalogue"
 MEAL_PLAN_MIGRATION_ID = "0032_meal_plan_serving"
 PARTIAL_PROFILE_MIGRATION_ID = "0034_partial_nutrition_profiles"
 REGISTRY_V2_MIGRATION_ID = "0035_versioned_nutrient_registry"
-REFERENCE_METHODOLOGY_MIGRATION_ID = "0036_member_reference_methodology_selection"
+REFERENCE_METHODOLOGY_MIGRATION_ID = "0036_member_reference_methodology_selection"\nMEAL_PLAN_REFERENCE_PINS_MIGRATION_ID = "0037_meal_plan_reference_methodology_pins"
 
 
 def test_real_0028_upgrade_preserves_every_row_readiness_and_vector_digest(tmp_path):
     report = measure(DatabaseConfig(path=tmp_path / "upgrade.sqlite"))
     assert report["migration_head_before"] == "0028_normalized_nutrient_vector"
-    assert report["migration_head_after"] == REFERENCE_METHODOLOGY_MIGRATION_ID
+    assert report["migration_head_after"] == MEAL_PLAN_REFERENCE_PINS_MIGRATION_ID
     assert report["readiness_before"] == report["readiness_after"]
     assert report["all_existing_table_rows_unchanged"]
     assert report["existing_profile_seals_verified"] == 183
@@ -40,7 +40,7 @@ def test_fresh_schema_foreign_keys_lineage_and_backup_inventory(tmp_path):
 
     config = DatabaseConfig(path=tmp_path / "fresh.sqlite")
     assert migrations.apply_migrations(config) == migrations.expected_migration_ids()
-    assert migrations.expected_migration_ids()[-7:] == [
+    assert migrations.expected_migration_ids()[-8:] == [
         MIGRATION.MIGRATION_ID,
         SOURCE_CORPUS_MIGRATION_ID,
         MEAL_PATTERN_MIGRATION_ID,
