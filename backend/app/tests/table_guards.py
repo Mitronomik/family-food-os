@@ -76,6 +76,7 @@ CURRENT_ALLOWED_TABLES = {
     "meal_plan_member_selections",
     "meal_plan_events",
     "servings",
+    "member_reference_methodology_selections",
     "sqlite_sequence",
 }
 

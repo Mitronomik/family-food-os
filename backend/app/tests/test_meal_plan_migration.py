@@ -7,6 +7,7 @@ from app.db.migrations import MIGRATION_MODULES, apply_migrations, expected_migr
 MIGRATION_ID = "0032_meal_plan_serving"
 PARTIAL_PROFILE_MIGRATION_ID = "0034_partial_nutrition_profiles"
 REGISTRY_V2_MIGRATION_ID = "0035_versioned_nutrient_registry"
+REFERENCE_METHODOLOGY_MIGRATION_ID = "0036_member_reference_methodology_selection"
 NEW_TABLES = {
     "member_meal_pattern_selections",
     "member_meal_pattern_opportunities",
@@ -37,12 +38,13 @@ def test_0032_is_current_head_and_fresh_migration_is_repeat_safe(tmp_path):
 
     applied = apply_migrations(config)
 
-    assert applied[-1] == REGISTRY_V2_MIGRATION_ID
-    assert expected_migration_ids()[-4:] == [
+    assert applied[-1] == REFERENCE_METHODOLOGY_MIGRATION_ID
+    assert expected_migration_ids()[-5:] == [
         "0031_meal_pattern_catalogue",
         MIGRATION_ID,
         PARTIAL_PROFILE_MIGRATION_ID,
         REGISTRY_V2_MIGRATION_ID,
+        REFERENCE_METHODOLOGY_MIGRATION_ID,
     ]
     assert apply_migrations(config) == []
     with sqlite3.connect(config.path) as connection:
@@ -93,6 +95,7 @@ def test_populated_0031_upgrade_preserves_existing_rows(tmp_path):
         MIGRATION_ID,
         PARTIAL_PROFILE_MIGRATION_ID,
         REGISTRY_V2_MIGRATION_ID,
+        REFERENCE_METHODOLOGY_MIGRATION_ID,
     ]
 
     with sqlite3.connect(config.path) as connection:
