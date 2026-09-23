@@ -4,56 +4,53 @@ Updated: `2026-09-22`.
 
 ## Accepted state
 
-PR81 is merged into `main` at
-`be6eed3591752d38ece3de5892e4306134e8d762`.
+PR82 is merged into `main` at
+`aa5ebcb4c70c9adee0fd1242f520ef1298f6b167`.
 
-Steps 1–3, the Step 4 contract gate and Step 4B semantic mapping closure are
-accepted.
+Russian-data integration Steps 1–4 are accepted through the first licensed
+RU-NUT-DB runtime publication.
 
-Current bounded work is **Step 4C — runtime publication of the first licensed
-RU-NUT-DB five-food batch**.
+Current bounded work is **Step 5 — reviewed Russian reference table,
+Implementation Contract Gate / adversarial preflight only**.
 
-## Exact batch
+## Step 5 proposed first table
 
-- `SUGAR` ← RU-NUT-DB code 1150, reuse existing identity, ATOMIC v2;
-- `CARROT_RED_RAW` ← code 1187, create reviewed identity, ATOMIC v1;
-- `CABBAGE_GREEN` ← code 1184, reuse existing identity, ATOMIC v2;
-- `BEET` ← code 1204, reuse existing identity, ATOMIC v1;
-- `RICE_GROATS` ← code 66, create reviewed identity, ATOMIC v1.
+Source:
+`МР 2.3.1.0253-21`, pinned PDF SHA-256
+`cf96c7ea7fab087d16b478b2c8c097406d7572e495b2beb43405e4fd05917d79`.
 
-All new compositions use `MassState.INPUT`.
+Frozen proposed table identity:
 
-## Runtime contract
+`RU_MR_2_3_1_0253_21_ADULT_MICRONUTRIENT_V1`.
 
-Implementation must:
+Bounded V1 scope:
 
-- consume only the hash-pinned licensed FIC payload and the merged Step 4B
-  18-field mapping;
-- publish exactly 90 V2 values, 18 per food, including source-published numeric
-  zeros;
-- retain all 26 source fields per food in source observations;
-- keep `carbh` and the other seven deferred fields non-canonical;
-- create only non-current FIC profiles;
-- preserve all existing current USDA profiles, including generic `CARROT`;
-- keep public single-bundle Step 3 behavior unchanged;
-- use one transaction-neutral bundle operation plus one five-food batch UoW;
-- commit a fresh five-food batch exactly once;
-- make exact replay zero-write with stable persisted IDs;
-- roll back the whole batch on any food conflict/failure;
-- introduce no schema/migration.
+- adult only;
+- exact source header `Старше 18 лет` → completed age 19+;
+- male/female only;
+- KFA-independent rows only;
+- source tables 11/12 and 16/17;
+- exactly 24 reviewed canonical definitions × 2 sexes = 48 rows;
+- scalar `ready_source_group_lookup` claims only.
 
-Canonical contract:
-`docs/family-food/first-russian-food-batch-contract.md`.
+Deferred:
+energy/macros, percent-energy references, child rows, pregnancy/lactation,
+footnote-dependent Vitamin D/Calcium, adequate-level tables 13/18 (including
+fluoride), folate/Vitamin K definition mismatches and source nutrients without a
+V2 target.
 
-Runtime payload:
-`data/curation/ru-nut-db-step4-runtime/`.
+Canonical gate:
+`docs/family-food/reviewed-russian-reference-table-contract.md`.
 
-## Scope boundary
+## Current authorization
 
-No Step 5 Russian reference table, methodology persistence, transformation
-applicability, recipe publication, Planner, Shopping, API/UI or AI authority.
+Docs/state Contract Gate only.
+
+Do not publish numeric reference rows, wire a runtime provider, persist
+methodology selection, change Planner/API/UI defaults or consume a migration
+before this gate is reviewed and merged.
 
 ## Stop boundary
 
-Deliver the bounded runtime PR through exact-head verification and final review.
-Do not merge autonomously and do not start Step 5 automatically.
+Deliver and review the Step 5 Contract Gate. Do not start runtime Step 5
+automatically.
