@@ -1,5 +1,45 @@
 # Handoff
 
+## Step 6B runtime review-ready — PR87
+
+Accepted main:
+`ef021c44e3166fbd2aa930c35b57dcb258e11bcc` (merged PR86).
+
+Branch:
+`feat/step6b-meal-plan-reference-methodology-pins`.
+
+Verified runtime/test head:
+`8853d2a09240d26997c83915bc4167ab39979323`.
+
+Step 6B implementation is review-ready.
+
+Key delivered semantics:
+
+- one optional complete-or-zero methodology pin set per MealPlan revision;
+- pin references exact immutable Step 6A selection;
+- member birth_date / sex / height / weight / activity / goal / updated_at are
+  frozen from authoritative HouseholdMember state;
+- member updated_at is guarded by SQLite-safe CAS/write intent before plan write;
+- Russian group-reference selections are revalidated at `MealPlan.week_start`;
+- methodology pins persist atomically with MealPlan, meal-pattern pins, events
+  and Servings;
+- old MealPlans remain zero-pin and receive no backfill;
+- revision history preserves old snapshot/selection while a later revision may
+  pin newer member state or methodology selection;
+- Planner does not provide methodology IDs and remains zero-pin until Step 10.
+
+Migration:
+`0037_meal_plan_reference_methodology_pins`.
+
+Exact runtime verification:
+Docs #331 SUCCESS; DC1 #193 SUCCESS; Russian #98 380 passed; Registry #139
+focused 257 + 4/4 backend shards + launcher 643/2 skipped; Partial #109 focused
+228 + 4/4 backend shards + launcher 643/2 skipped.
+
+After final docs/state verification, PR87 may be reviewed for merge. No autonomous
+merge. Stop before Step 7 / Steps 8–10.
+
+
 ## Step 6B runtime authorized — 2026-09-23
 
 Accepted main:

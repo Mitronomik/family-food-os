@@ -1,5 +1,35 @@
 # Progress
 
+## Step 6B runtime review-ready — 2026-09-23
+
+PR87 verified runtime/test head:
+`8853d2a09240d26997c83915bc4167ab39979323`.
+
+Status:
+`STEP6B_RUNTIME_REVIEW_READY`.
+
+Delivered:
+
+- MealPlan reference-methodology dependent pins;
+- immutable member target-input snapshots;
+- complete-or-zero coverage;
+- Step 6A selection ownership validation;
+- Russian applicability at week_start;
+- SQLite member-state CAS guard;
+- migration 0037;
+- zero-backfill legacy compatibility;
+- Planner default preservation.
+
+Verification:
+- Docs #331 SUCCESS;
+- DC1 #193 SUCCESS;
+- Russian #98: 380 passed;
+- Registry #139: 257 focused, 4/4 backend shards, launcher 643/2 skipped;
+- Partial #109: 228 focused, 4/4 backend shards, launcher 643/2 skipped.
+
+Step 7+ remains not started and not authorized.
+
+
 ## Step 6B runtime authorized — 2026-09-23
 
 PR86 merged into main at
