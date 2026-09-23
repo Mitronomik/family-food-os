@@ -4,6 +4,7 @@ on:
     paths:
       - 'backend/**'
       - 'data/curation/russian-methodology/**'
+      - 'data/curation/ru-reference-step5-runtime/**'
       - 'data/curation/dc2-first-batch-review/generated/profile-reviews.json'
       - 'data/curation/dc2-first-profile-payload/verification-summary.json'
       - 'data/curation/dc2-first-profile-payload/verification-receipt.json'
@@ -29,6 +30,7 @@ jobs:
           backend/app/tests/test_nutrition_methodology.py
           backend/app/tests/test_russian_energy.py
           backend/app/tests/test_russian_reference_targets.py
+          backend/app/tests/test_russian_reference_table_step5.py
           backend/app/tests/test_reference_comparison.py
           backend/app/tests/test_nutrition_methodology_service.py
           backend/app/tests/test_russian_reference_service.py

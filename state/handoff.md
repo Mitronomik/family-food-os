@@ -1,5 +1,48 @@
 # Handoff
 
+## Step 5 runtime publication — authorized 2026-09-23
+
+Accepted main:
+`f12a3f58279eb07c710d1ff889cc70d933da3310` (merged PR83).
+
+Current branch:
+`feat/step5-russian-reference-table-runtime`.
+
+The user explicitly authorized runtime Step 5 after merging the Contract Gate.
+
+Read first:
+`docs/family-food/reviewed-russian-reference-table-contract.md`.
+
+Frozen runtime target:
+
+- methodology `RU_MR_2_3_1_0253_21_ADULT_MICRONUTRIENT_V1`;
+- exact 48 rows / 24 definitions × male/female;
+- tables 11/12 + 16/17 only;
+- completed age 19+;
+- KFA-independent;
+- exact Decimal source values/source units;
+- exact source claim/page/table/row/column provenance;
+- all canonical codes/units validated against `RU_NUTRIENT_REGISTRY_V2`;
+- existing `ReviewedRussianReferenceTable`, provider and selector reused;
+- unknown/tampered/drifted package fails closed;
+- no DB write, schema or migration;
+- NASEM/default Planner/API/UI paths unchanged.
+
+Important source-semantic boundary:
+`BETA_CAROTENE` preserves source/reference `mg/day` while registry canonical
+unit is `µg`; this is same-definition mass-unit compatibility, not source
+rewriting or nutrient substitution.
+
+Tables 13/18 remain deferred because adequate-level semantics are not represented
+by the current row model. Do not add `reference_kind` in this runtime PR.
+
+Before publishing rows, bind the runtime package to the pinned source transport
+hashes and exact source claim identities. If the exact transport evidence cannot
+be reproduced, stop rather than fabricate claim IDs.
+
+After review-ready delivery, stop. No merge and no Step 6 without a separate
+explicit instruction.
+
 ## Step 5 reviewed Russian reference table contract gate — 2026-09-22
 
 Accepted main:

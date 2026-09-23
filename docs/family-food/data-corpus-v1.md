@@ -211,6 +211,34 @@ authority by default:
 
 They may become retained evidence only under a separately reviewed source policy.
 
+### 5.1 Durable retrieval of external source artifacts
+
+A hash without a retrievable artifact is insufficient durable evidence.
+
+When a raw source artifact is required to reproduce, audit or extend an accepted
+curation/publication result but is intentionally not committed to the public
+repository, the owning evidence package must record at least:
+
+- stable project artifact identifier and exact filename;
+- byte size and cryptographic SHA-256;
+- source/rights classification;
+- a **durable private storage locator** that is not a chat attachment or temporary
+  authenticated URL;
+- the authorized retrieval method/access boundary;
+- the date of the latest successful independent retrieval + hash verification;
+- the repository package/contract that depends on the artifact.
+
+A temporary authenticated URL may be used to supply CI or a manual rebuild, but it
+must not be the only durable locator.
+
+A Contract Gate or data-publication PR is not review-ready when a source artifact
+needed for independent reproduction cannot be retrieved from its recorded durable
+location and verified against its pinned hash.
+
+The public repository should retain manifests, hashes, provenance and bounded
+reviewed derivatives when rights permit; this rule does **not** require publishing
+large or restricted raw source bytes.
+
 ## 6. Recipe-source authority
 
 The existing Russian normative recipe-corpus decision remains active.

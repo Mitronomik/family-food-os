@@ -1,0 +1,1163 @@
+{
+  "schema_version": 1,
+  "methodology_version": "RU_MR_2_3_1_0253_21_ADULT_MICRONUTRIENT_V1",
+  "review_reference": "STEP5_RU_REFERENCE_TABLE_V1",
+  "source": {
+    "source_id": "RU-NEEDS-MR-2.3.1.0253-21",
+    "document_number": "МР 2.3.1.0253-21",
+    "edition_date": "2021-07-22",
+    "archive_file": "FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "source_pdf_sha256": "cf96c7ea7fab087d16b478b2c8c097406d7572e495b2beb43405e4fd05917d79",
+    "transport": {
+      "package_version": "0.3.0",
+      "input_sha256": "8e68a6f3450f40c52c44bc422c6ecfad9e8bfa6561041948529c391211df7bdf",
+      "qa_sha256": "2404b044cc48ef56abc03653c10d3fc192cb9e6a6ae76a7f869c6c5c51a42445",
+      "groups_sha256": "8101fabce928d2033cc831ff4984502b6068b305e0c330b8ff53b3d5d146341e",
+      "nutrients_sha256": "bf29e392b548600499de90effa9a46660fa928c6eb867bc8a7bfe35c9f61d031",
+      "values_sha256": "ff9b21599797355ca47af6af5db9e920705cfa233cdaecd173d0c0a07cbf4b3f",
+      "quality_sha256": "51736ca640e3295fca00fc4011f1cb70fe1c4ef768b320e9c050bf484108d566",
+      "validation_sha256": "931e1e4a2e92190b1d4c651d65eaf93dd9b7274fe66ed84658b0bcdbd2677894",
+      "manifest_sha256": "cff02f7e5b17ff00bed32ae79d6bc033f9ba83a10cf33170a761a0b623ae4154",
+      "source_groups": 147,
+      "source_nutrient_definitions": 218,
+      "source_claims": 872,
+      "scalar_source_group_lookup_ready": 735,
+      "withheld": 137
+    }
+  },
+  "registry": {
+    "version": "RU_NUTRIENT_REGISTRY_V2",
+    "path": "data/curation/nutrient-registry-v2/registry.json",
+    "git_blob_sha1": "db9d4d3b7e913447ff0c0a87b0e28f3085094409"
+  },
+  "selection": {
+    "source_population_header": "Старше 18 лет",
+    "table_numbers": [
+      "11",
+      "12",
+      "16",
+      "17"
+    ],
+    "age_min_years": 19,
+    "age_max_years_exclusive": null,
+    "sexes": [
+      "male",
+      "female"
+    ],
+    "physical_activity_coefficient": null,
+    "life_stage": "adult",
+    "basis": "group_reference_daily",
+    "applicability": "wellness",
+    "definition_count": 24,
+    "row_count": 48
+  },
+  "definitions": [
+    {
+      "source_definition": "Бета-каротин, мг",
+      "canonical_code": "BETA_CAROTENE",
+      "source_unit": "мг",
+      "reference_unit": "mg/day",
+      "registry_unit": "µg",
+      "kind": "vitamin"
+    },
+    {
+      "source_definition": "Биотин, мкг",
+      "canonical_code": "BIOTIN",
+      "source_unit": "мкг",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg",
+      "kind": "vitamin"
+    },
+    {
+      "source_definition": "Хлориды, мг",
+      "canonical_code": "CHLORIDE",
+      "source_unit": "мг",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg",
+      "kind": "mineral"
+    },
+    {
+      "source_definition": "Хром, мкг",
+      "canonical_code": "CHROMIUM",
+      "source_unit": "мкг",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg",
+      "kind": "mineral"
+    },
+    {
+      "source_definition": "Медь, мг",
+      "canonical_code": "COPPER",
+      "source_unit": "мг",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg",
+      "kind": "mineral"
+    },
+    {
+      "source_definition": "Йод, мкг",
+      "canonical_code": "IODINE",
+      "source_unit": "мкг",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg",
+      "kind": "mineral"
+    },
+    {
+      "source_definition": "Железо, мг",
+      "canonical_code": "IRON",
+      "source_unit": "мг",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg",
+      "kind": "mineral"
+    },
+    {
+      "source_definition": "Магний, мг",
+      "canonical_code": "MAGNESIUM",
+      "source_unit": "мг",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg",
+      "kind": "mineral"
+    },
+    {
+      "source_definition": "Марганец, мг",
+      "canonical_code": "MANGANESE",
+      "source_unit": "мг",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg",
+      "kind": "mineral"
+    },
+    {
+      "source_definition": "Молибден, мкг",
+      "canonical_code": "MOLYBDENUM",
+      "source_unit": "мкг",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg",
+      "kind": "mineral"
+    },
+    {
+      "source_definition": "Ниацин, мг ниац. экв.",
+      "canonical_code": "NIACIN_EQUIVALENT",
+      "source_unit": "мг ниац. экв.",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg",
+      "kind": "vitamin"
+    },
+    {
+      "source_definition": "Пантотеновая кислота, мг",
+      "canonical_code": "PANTOTHENIC_ACID",
+      "source_unit": "мг",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg",
+      "kind": "vitamin"
+    },
+    {
+      "source_definition": "Фосфор, мг",
+      "canonical_code": "PHOSPHORUS",
+      "source_unit": "мг",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg",
+      "kind": "mineral"
+    },
+    {
+      "source_definition": "Калий, мг",
+      "canonical_code": "POTASSIUM",
+      "source_unit": "мг",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg",
+      "kind": "mineral"
+    },
+    {
+      "source_definition": "Витамин B2, мг",
+      "canonical_code": "RIBOFLAVIN",
+      "source_unit": "мг",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg",
+      "kind": "vitamin"
+    },
+    {
+      "source_definition": "Селен, мкг",
+      "canonical_code": "SELENIUM",
+      "source_unit": "мкг",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg",
+      "kind": "mineral"
+    },
+    {
+      "source_definition": "Натрий, мг",
+      "canonical_code": "SODIUM",
+      "source_unit": "мг",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg",
+      "kind": "mineral"
+    },
+    {
+      "source_definition": "Витамин B1, мг",
+      "canonical_code": "THIAMIN",
+      "source_unit": "мг",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg",
+      "kind": "vitamin"
+    },
+    {
+      "source_definition": "Витамин А, мкг рет. экв.",
+      "canonical_code": "VITAMIN_A_RE",
+      "source_unit": "мкг рет. экв.",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg",
+      "kind": "vitamin"
+    },
+    {
+      "source_definition": "Витамин B12, мкг",
+      "canonical_code": "VITAMIN_B12",
+      "source_unit": "мкг",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg",
+      "kind": "vitamin"
+    },
+    {
+      "source_definition": "Витамин B6, мг",
+      "canonical_code": "VITAMIN_B6",
+      "source_unit": "мг",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg",
+      "kind": "vitamin"
+    },
+    {
+      "source_definition": "Витамин С, мг",
+      "canonical_code": "VITAMIN_C",
+      "source_unit": "мг",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg",
+      "kind": "vitamin"
+    },
+    {
+      "source_definition": "Витамин Е (α-токоферол), мг ток. экв.",
+      "canonical_code": "VITAMIN_E_TOCOPHEROL_EQUIVALENT",
+      "source_unit": "мг ток. экв.",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg",
+      "kind": "vitamin"
+    },
+    {
+      "source_definition": "Цинк, мг",
+      "canonical_code": "ZINC",
+      "source_unit": "мг",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg",
+      "kind": "mineral"
+    }
+  ],
+  "rows": [
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:BETA_CAROTENE",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t1:r9:c2:population",
+      "source_definition": "Бета-каротин, мг",
+      "source_unit": "мг",
+      "source_value": "5.0",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 1,
+        "table_number": "16",
+        "row": 9,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "BETA_CAROTENE",
+      "reference_unit": "mg/day",
+      "registry_unit": "µg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:BIOTIN",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t1:r7:c2:population",
+      "source_definition": "Биотин, мкг",
+      "source_unit": "мкг",
+      "source_value": "50",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 1,
+        "table_number": "16",
+        "row": 7,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "BIOTIN",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:CHLORIDE",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t2:r7:c2:population",
+      "source_definition": "Хлориды, мг",
+      "source_unit": "мг",
+      "source_value": "2300",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 2,
+        "table_number": "17",
+        "row": 7,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "CHLORIDE",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:CHROMIUM",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t2:r15:c2:population",
+      "source_definition": "Хром, мкг",
+      "source_unit": "мкг",
+      "source_value": "40",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 2,
+        "table_number": "17",
+        "row": 15,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "CHROMIUM",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:COPPER",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t2:r11:c2:population",
+      "source_definition": "Медь, мг",
+      "source_unit": "мг",
+      "source_value": "1.0",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 2,
+        "table_number": "17",
+        "row": 11,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "COPPER",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:IODINE",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t2:r10:c2:population",
+      "source_definition": "Йод, мкг",
+      "source_unit": "мкг",
+      "source_value": "150",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 2,
+        "table_number": "17",
+        "row": 10,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "IODINE",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:IRON",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t2:r8:c2:population",
+      "source_definition": "Железо, мг",
+      "source_unit": "мг",
+      "source_value": "18",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 2,
+        "table_number": "17",
+        "row": 8,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "IRON",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:MAGNESIUM",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t2:r4:c2:population",
+      "source_definition": "Магний, мг",
+      "source_unit": "мг",
+      "source_value": "420",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 2,
+        "table_number": "17",
+        "row": 4,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "MAGNESIUM",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:MANGANESE",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t2:r12:c2:population",
+      "source_definition": "Марганец, мг",
+      "source_unit": "мг",
+      "source_value": "2.0",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 2,
+        "table_number": "17",
+        "row": 12,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "MANGANESE",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:MOLYBDENUM",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t2:r13:c2:population",
+      "source_definition": "Молибден, мкг",
+      "source_unit": "мкг",
+      "source_value": "70",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 2,
+        "table_number": "17",
+        "row": 13,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "MOLYBDENUM",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:NIACIN_EQUIVALENT",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t1:r2:c2:population",
+      "source_definition": "Ниацин, мг ниац. экв.",
+      "source_unit": "мг ниац. экв.",
+      "source_value": "20",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 1,
+        "table_number": "16",
+        "row": 2,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "NIACIN_EQUIVALENT",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:PANTOTHENIC_ACID",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t1:r6:c2:population",
+      "source_definition": "Пантотеновая кислота, мг",
+      "source_unit": "мг",
+      "source_value": "5.0",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 1,
+        "table_number": "16",
+        "row": 6,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "PANTOTHENIC_ACID",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:PHOSPHORUS",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t2:r3:c2:population",
+      "source_definition": "Фосфор, мг",
+      "source_unit": "мг",
+      "source_value": "700",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 2,
+        "table_number": "17",
+        "row": 3,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "PHOSPHORUS",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:POTASSIUM",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t2:r5:c2:population",
+      "source_definition": "Калий, мг",
+      "source_unit": "мг",
+      "source_value": "3500",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 2,
+        "table_number": "17",
+        "row": 5,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "POTASSIUM",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:RIBOFLAVIN",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p44:t2:r5:c2:population",
+      "source_definition": "Витамин B2, мг",
+      "source_unit": "мг",
+      "source_value": "1.8",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 44,
+        "page_table_index": 2,
+        "table_number": "16",
+        "row": 5,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "RIBOFLAVIN",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:SELENIUM",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t2:r14:c2:population",
+      "source_definition": "Селен, мкг",
+      "source_unit": "мкг",
+      "source_value": "55",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 2,
+        "table_number": "17",
+        "row": 14,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "SELENIUM",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:SODIUM",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t2:r6:c2:population",
+      "source_definition": "Натрий, мг",
+      "source_unit": "мг",
+      "source_value": "1300",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 2,
+        "table_number": "17",
+        "row": 6,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "SODIUM",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:THIAMIN",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p44:t2:r3:c2:population",
+      "source_definition": "Витамин B1, мг",
+      "source_unit": "мг",
+      "source_value": "1.5",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 44,
+        "page_table_index": 2,
+        "table_number": "16",
+        "row": 3,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "THIAMIN",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:VITAMIN_A_RE",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t1:r8:c2:population",
+      "source_definition": "Витамин А, мкг рет. экв.",
+      "source_unit": "мкг рет. экв.",
+      "source_value": "800",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 1,
+        "table_number": "16",
+        "row": 8,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "VITAMIN_A_RE",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:VITAMIN_B12",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t1:r4:c2:population",
+      "source_definition": "Витамин B12, мкг",
+      "source_unit": "мкг",
+      "source_value": "3.0",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 1,
+        "table_number": "16",
+        "row": 4,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "VITAMIN_B12",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:VITAMIN_B6",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p44:t2:r7:c2:population",
+      "source_definition": "Витамин B6, мг",
+      "source_unit": "мг",
+      "source_value": "2.0",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 44,
+        "page_table_index": 2,
+        "table_number": "16",
+        "row": 7,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "VITAMIN_B6",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:VITAMIN_C",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p44:t2:r2:c2:population",
+      "source_definition": "Витамин С, мг",
+      "source_unit": "мг",
+      "source_value": "100",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 44,
+        "page_table_index": 2,
+        "table_number": "16",
+        "row": 2,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "VITAMIN_C",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:VITAMIN_E_TOCOPHEROL_EQUIVALENT",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t1:r10:c2:population",
+      "source_definition": "Витамин Е (α-токоферол), мг ток. экв.",
+      "source_unit": "мг ток. экв.",
+      "source_value": "15",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 1,
+        "table_number": "16",
+        "row": 10,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "VITAMIN_E_TOCOPHEROL_EQUIVALENT",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:female:ZINC",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p45:t2:r9:c2:population",
+      "source_definition": "Цинк, мг",
+      "source_unit": "мг",
+      "source_value": "12",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 45,
+        "page_table_index": 2,
+        "table_number": "17",
+        "row": 9,
+        "column": 2
+      },
+      "sex": "female",
+      "canonical_code": "ZINC",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:BETA_CAROTENE",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t1:r9:c2:population",
+      "source_definition": "Бета-каротин, мг",
+      "source_unit": "мг",
+      "source_value": "5.0",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 1,
+        "table_number": "11",
+        "row": 9,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "BETA_CAROTENE",
+      "reference_unit": "mg/day",
+      "registry_unit": "µg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:BIOTIN",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t1:r7:c2:population",
+      "source_definition": "Биотин, мкг",
+      "source_unit": "мкг",
+      "source_value": "50",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 1,
+        "table_number": "11",
+        "row": 7,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "BIOTIN",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:CHLORIDE",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t2:r7:c2:population",
+      "source_definition": "Хлориды, мг",
+      "source_unit": "мг",
+      "source_value": "2300",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 2,
+        "table_number": "12",
+        "row": 7,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "CHLORIDE",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:CHROMIUM",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t2:r15:c2:population",
+      "source_definition": "Хром, мкг",
+      "source_unit": "мкг",
+      "source_value": "40",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 2,
+        "table_number": "12",
+        "row": 15,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "CHROMIUM",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:COPPER",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t2:r11:c2:population",
+      "source_definition": "Медь, мг",
+      "source_unit": "мг",
+      "source_value": "1.0",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 2,
+        "table_number": "12",
+        "row": 11,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "COPPER",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:IODINE",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t2:r10:c2:population",
+      "source_definition": "Йод, мкг",
+      "source_unit": "мкг",
+      "source_value": "150",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 2,
+        "table_number": "12",
+        "row": 10,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "IODINE",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:IRON",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t2:r8:c2:population",
+      "source_definition": "Железо, мг",
+      "source_unit": "мг",
+      "source_value": "10",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 2,
+        "table_number": "12",
+        "row": 8,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "IRON",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:MAGNESIUM",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t2:r4:c2:population",
+      "source_definition": "Магний, мг",
+      "source_unit": "мг",
+      "source_value": "420",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 2,
+        "table_number": "12",
+        "row": 4,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "MAGNESIUM",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:MANGANESE",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t2:r12:c2:population",
+      "source_definition": "Марганец, мг",
+      "source_unit": "мг",
+      "source_value": "2.0",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 2,
+        "table_number": "12",
+        "row": 12,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "MANGANESE",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:MOLYBDENUM",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t2:r13:c2:population",
+      "source_definition": "Молибден, мкг",
+      "source_unit": "мкг",
+      "source_value": "70",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 2,
+        "table_number": "12",
+        "row": 13,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "MOLYBDENUM",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:NIACIN_EQUIVALENT",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t1:r2:c2:population",
+      "source_definition": "Ниацин, мг ниац. экв.",
+      "source_unit": "мг ниац. экв.",
+      "source_value": "20",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 1,
+        "table_number": "11",
+        "row": 2,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "NIACIN_EQUIVALENT",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:PANTOTHENIC_ACID",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t1:r6:c2:population",
+      "source_definition": "Пантотеновая кислота, мг",
+      "source_unit": "мг",
+      "source_value": "5.0",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 1,
+        "table_number": "11",
+        "row": 6,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "PANTOTHENIC_ACID",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:PHOSPHORUS",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t2:r3:c2:population",
+      "source_definition": "Фосфор, мг",
+      "source_unit": "мг",
+      "source_value": "700",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 2,
+        "table_number": "12",
+        "row": 3,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "PHOSPHORUS",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:POTASSIUM",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t2:r5:c2:population",
+      "source_definition": "Калий, мг",
+      "source_unit": "мг",
+      "source_value": "3500",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 2,
+        "table_number": "12",
+        "row": 5,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "POTASSIUM",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:RIBOFLAVIN",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p41:t2:r5:c2:population",
+      "source_definition": "Витамин B2, мг",
+      "source_unit": "мг",
+      "source_value": "1.8",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 41,
+        "page_table_index": 2,
+        "table_number": "11",
+        "row": 5,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "RIBOFLAVIN",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:SELENIUM",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t2:r14:c2:population",
+      "source_definition": "Селен, мкг",
+      "source_unit": "мкг",
+      "source_value": "70",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 2,
+        "table_number": "12",
+        "row": 14,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "SELENIUM",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:SODIUM",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t2:r6:c2:population",
+      "source_definition": "Натрий, мг",
+      "source_unit": "мг",
+      "source_value": "1300",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 2,
+        "table_number": "12",
+        "row": 6,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "SODIUM",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:THIAMIN",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p41:t2:r3:c2:population",
+      "source_definition": "Витамин B1, мг",
+      "source_unit": "мг",
+      "source_value": "1.5",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 41,
+        "page_table_index": 2,
+        "table_number": "11",
+        "row": 3,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "THIAMIN",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:VITAMIN_A_RE",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t1:r8:c2:population",
+      "source_definition": "Витамин А, мкг рет. экв.",
+      "source_unit": "мкг рет. экв.",
+      "source_value": "900",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 1,
+        "table_number": "11",
+        "row": 8,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "VITAMIN_A_RE",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:VITAMIN_B12",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t1:r4:c2:population",
+      "source_definition": "Витамин B12, мкг",
+      "source_unit": "мкг",
+      "source_value": "3.0",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 1,
+        "table_number": "11",
+        "row": 4,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "VITAMIN_B12",
+      "reference_unit": "µg/day",
+      "registry_unit": "µg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:VITAMIN_B6",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p41:t2:r7:c2:population",
+      "source_definition": "Витамин B6, мг",
+      "source_unit": "мг",
+      "source_value": "2.0",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 41,
+        "page_table_index": 2,
+        "table_number": "11",
+        "row": 7,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "VITAMIN_B6",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:VITAMIN_C",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p41:t2:r2:c2:population",
+      "source_definition": "Витамин С, мг",
+      "source_unit": "мг",
+      "source_value": "100",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 41,
+        "page_table_index": 2,
+        "table_number": "11",
+        "row": 2,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "VITAMIN_C",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:VITAMIN_E_TOCOPHEROL_EQUIVALENT",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t1:r10:c2:population",
+      "source_definition": "Витамин Е (α-токоферол), мг ток. экв.",
+      "source_unit": "мг ток. экв.",
+      "source_value": "15",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 1,
+        "table_number": "11",
+        "row": 10,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "VITAMIN_E_TOCOPHEROL_EQUIVALENT",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    },
+    {
+      "row_id": "STEP5_RU_REFERENCE_TABLE_V1:male:ZINC",
+      "source_claim_id": "RU-NEEDS-MR-2.3.1.0253-21:p42:t2:r9:c2:population",
+      "source_definition": "Цинк, мг",
+      "source_unit": "мг",
+      "source_value": "12",
+      "source_status": "ready_source_group_lookup",
+      "locator": {
+        "pdf_page": 42,
+        "page_table_index": 2,
+        "table_number": "12",
+        "row": 9,
+        "column": 2
+      },
+      "sex": "male",
+      "canonical_code": "ZINC",
+      "reference_unit": "mg/day",
+      "registry_unit": "mg"
+    }
+  ]
+}

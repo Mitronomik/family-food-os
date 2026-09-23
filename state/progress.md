@@ -1,5 +1,32 @@
 # Progress
 
+## Step 5 Contract Gate merged; runtime authorized — 2026-09-23
+
+PR83 merged into `main` at
+`f12a3f58279eb07c710d1ff889cc70d933da3310`.
+
+Accepted Contract Gate:
+`docs/family-food/reviewed-russian-reference-table-contract.md`.
+
+The user explicitly authorized the next bounded operation: Step 5 runtime
+publication of the reviewed Russian adult micronutrient group-reference table.
+
+Frozen publication target remains:
+
+- 48 rows;
+- 24 canonical definitions × 2 sexes;
+- tables 11/12 + 16/17;
+- age 19+;
+- KFA-independent;
+- exact source Decimal values and provenance;
+- pinned V2 definition/unit compatibility;
+- no schema/migration;
+- no Planner/API/UI default switch;
+- no Step 6.
+
+Current status:
+`STEP5_RUNTIME_AUTHORIZED`.
+
 ## Step 5 contract gate authorized — 2026-09-22
 
 PR82 Step 4C is merged at
