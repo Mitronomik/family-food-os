@@ -7,52 +7,49 @@ Updated: `2026-09-23`.
 PR84 is merged into `main` at
 `3de3c58ee898284f8d2168af1aae04af754a6bfc`.
 
-Russian-data integration Steps 1–5 are accepted. Step 5 publishes the reviewed
-48-row Russian adult micronutrient group-reference table without changing
-Planner/API/UI defaults.
+Russian-data integration Steps 1–5 are accepted.
 
 Current bounded work is **Step 6 — persisted nutrition methodology selection,
 Implementation Contract Gate / adversarial preflight only**.
 
-## Step 6 goal
+Canonical gate:
+`docs/family-food/persisted-nutrition-methodology-selection-contract.md`.
 
-Freeze the household-owned persistence/replay contract for explicitly selected
-nutrition methodology versions before any Step 6 runtime migration or service
-implementation.
+## Frozen Step 6 direction
 
-The gate must define at least:
+Step 6 will persist a distinct Household-owned immutable/versioned
+`MemberNutritionMethodologySelection`.
 
-- methodology-selection ownership and exact version components;
-- separation from `MemberMealPatternSelection`;
-- historical MealPlan pinning semantics;
-- member input snapshot needed to reproduce reference-target calculations;
-- migration/schema impact and preservation of existing plans;
-- fresh/replay/conflict/rollback behavior;
-- Planner/default preservation;
-- adversarial acceptance tests and proportional verification.
+The selection is a version bundle:
 
-## Critical preflight findings
+- required `FAMILY_FOOD_NUTRITION_V1` personal baseline;
+- optional reviewed Russian group-reference version;
+- optional paired explicit Russian source-native policy.
 
-1. Storing only a methodology string on mutable `HouseholdMember` is
-   insufficient for historical replay.
-2. Existing NASEM target calculation depends on birth date, sex, height, weight,
-   activity, goal and explicit calculation date/config version.
-3. Existing MealPlan revisions pin meal-pattern selections but do not pin a
-   nutrition methodology selection or the member calculation-input snapshot.
-4. Step 6 therefore requires an explicit immutable/versioned household-owned
-   methodology-selection contract plus an immutable MealPlan/member pin boundary.
-5. The accepted SQLite migration chain ends at `0035`; reserved
-   `0033_recipe_template_catalogue` remains reserved and must not be reused.
+Russian group reference is additive; it does not replace NASEM personal targets.
+
+Historical MealPlan replay requires more than a methodology ID because
+`HouseholdMember` is mutable. The runtime contract therefore also requires an
+immutable MealPlan/member methodology pin containing the authoritative member
+reference-target input snapshot.
+
+Existing historical plans remain valid with zero pins; no methodology is
+backfilled or invented.
+
+Expected runtime migration after gate merge:
+`0036_persisted_nutrition_methodology_selection`.
+
+Reserved `0033_recipe_template_catalogue` remains untouched.
 
 ## Current authorization
 
 Docs/state Contract Gate only.
 
-Do not create migration `0036`, runtime tables, repositories/services, Planner
-integration, API/UI defaults, transformation applicability, recipe publication or
-Step 7+ before this gate is reviewed and merged.
+No 0036 migration, runtime selection tables, repository/service implementation,
+Planner/API/UI default change, Step 7 transformation applicability, recipes or
+later work before this gate is reviewed and merged.
 
 ## Stop boundary
 
-Deliver and review the Step 6 Contract Gate. Runtime Step 6 requires separate
-explicit authorization after the gate merges.
+Deliver/review the Step 6 Contract Gate. Runtime Step 6 requires separate explicit
+authorization.

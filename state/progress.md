@@ -1,5 +1,29 @@
 # Progress
 
+## Step 6 Contract Gate drafted — 2026-09-23
+
+Accepted base:
+`3de3c58ee898284f8d2168af1aae04af754a6bfc`.
+
+Canonical contract:
+`docs/family-food/persisted-nutrition-methodology-selection-contract.md`.
+
+Preflight closed the main hidden couplings before runtime:
+
+1. mutable HouseholdMember cannot own replayable methodology history;
+2. methodology version alone cannot reproduce a historical NASEM target;
+3. MealPlan must pin the exact methodology selection plus member calculation
+   input snapshot;
+4. Russian group reference remains additive to NASEM, not a replacement;
+5. existing plans must not be backfilled with invented selection state;
+6. additive 0036 is expected; reserved 0033 remains reserved.
+
+Current status:
+`STEP6_CONTRACT_GATE_REVIEW_PENDING`.
+
+No runtime/schema implementation is included in this gate.
+
+
 ## Step 6 Contract Gate authorized — 2026-09-23
 
 PR84 merged into `main` at
