@@ -4,65 +4,55 @@ Updated: `2026-09-23`.
 
 ## Accepted state
 
-PR83 is merged into `main` at
-`f12a3f58279eb07c710d1ff889cc70d933da3310`.
+PR84 is merged into `main` at
+`3de3c58ee898284f8d2168af1aae04af754a6bfc`.
 
-Russian-data integration Steps 1–4 are accepted, and the Step 5
-Implementation Contract Gate is accepted.
+Russian-data integration Steps 1–5 are accepted. Step 5 publishes the reviewed
+48-row Russian adult micronutrient group-reference table without changing
+Planner/API/UI defaults.
 
-Current bounded work is **Step 5 runtime publication — reviewed Russian adult
-micronutrient population reference table**.
+Current bounded work is **Step 6 — persisted nutrition methodology selection,
+Implementation Contract Gate / adversarial preflight only**.
 
-## Frozen runtime contract
+## Step 6 goal
 
-Canonical contract:
-`docs/family-food/reviewed-russian-reference-table-contract.md`.
+Freeze the household-owned persistence/replay contract for explicitly selected
+nutrition methodology versions before any Step 6 runtime migration or service
+implementation.
 
-Methodology version:
+The gate must define at least:
 
-`RU_MR_2_3_1_0253_21_ADULT_MICRONUTRIENT_V1`.
+- methodology-selection ownership and exact version components;
+- separation from `MemberMealPatternSelection`;
+- historical MealPlan pinning semantics;
+- member input snapshot needed to reproduce reference-target calculations;
+- migration/schema impact and preservation of existing plans;
+- fresh/replay/conflict/rollback behavior;
+- Planner/default preservation;
+- adversarial acceptance tests and proportional verification.
 
-Runtime V1 must publish exactly:
+## Critical preflight findings
 
-- source tables 11/12 for men and 16/17 for women;
-- source header `Старше 18 лет` → completed age 19+;
-- male/female only;
-- KFA-independent rows only;
-- 24 reviewed canonical definitions × 2 sexes = 48 rows;
-- scalar `ready_source_group_lookup` claims only;
-- exact Decimal source values and source/reference units;
-- exact source claim/page/table/row/column provenance;
-- explicit compatibility against the pinned `RU_NUTRIENT_REGISTRY_V2`;
-- existing `ReviewedRussianReferenceTable` / provider / selector boundary;
-- deterministic fail-closed load/replay behavior.
-
-Explicitly deferred remain tables 9/10/13/14/15/18, Vitamin D, Calcium, folate,
-Vitamin K, fluoride, cobalt/silicon/vanadium, children and pregnancy/lactation.
+1. Storing only a methodology string on mutable `HouseholdMember` is
+   insufficient for historical replay.
+2. Existing NASEM target calculation depends on birth date, sex, height, weight,
+   activity, goal and explicit calculation date/config version.
+3. Existing MealPlan revisions pin meal-pattern selections but do not pin a
+   nutrition methodology selection or the member calculation-input snapshot.
+4. Step 6 therefore requires an explicit immutable/versioned household-owned
+   methodology-selection contract plus an immutable MealPlan/member pin boundary.
+5. The accepted SQLite migration chain ends at `0035`; reserved
+   `0033_recipe_template_catalogue` remains reserved and must not be reused.
 
 ## Current authorization
 
-The user explicitly authorized Step 5 runtime continuation on 2026-09-23 after
-merging PR83.
+Docs/state Contract Gate only.
 
-Authorized:
-- hash-pinned 48-row curation package;
-- loader/provider runtime wiring through the existing explicit Russian path;
-- focused/adversarial tests required by the merged contract;
-- state/docs updates required for delivery.
-
-Not authorized:
-- schema or migration;
-- persisted methodology selection (Step 6);
-- Planner/API/UI default switch;
-- NASEM behavior change;
-- reference-kind extension;
-- Step 6+.
-
-If implementation discovers that any authorized row cannot preserve the merged
-source/mapping/applicability contract without a new schema/domain decision, stop
-rather than widening scope.
+Do not create migration `0036`, runtime tables, repositories/services, Planner
+integration, API/UI defaults, transformation applicability, recipe publication or
+Step 7+ before this gate is reviewed and merged.
 
 ## Stop boundary
 
-Deliver Step 5 runtime through exact-head verification and final review. Do not
-merge autonomously and do not start persisted methodology selection automatically.
+Deliver and review the Step 6 Contract Gate. Runtime Step 6 requires separate
+explicit authorization after the gate merges.

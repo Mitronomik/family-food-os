@@ -1,5 +1,28 @@
 # Progress
 
+## Step 6 Contract Gate authorized — 2026-09-23
+
+PR84 merged into `main` at
+`3de3c58ee898284f8d2168af1aae04af754a6bfc`.
+
+Russian-data integration Steps 1–5 are accepted.
+
+The user explicitly authorized Step 6:
+**persisted nutrition methodology selection**.
+
+Current operation is the required pre-implementation Contract Gate only.
+No migration/runtime implementation has started.
+
+Preflight already proves that methodology version alone is insufficient for
+historical planning replay because HouseholdMember nutrition inputs are mutable.
+The gate will freeze an immutable/versioned member selection and MealPlan/member
+pin + calculation-input snapshot boundary while preserving existing plans and
+current Planner/NASEM behavior.
+
+Current status:
+`STEP6_CONTRACT_GATE_ACTIVE`.
+
+
 ## Step 5 Contract Gate merged; runtime authorized — 2026-09-23
 
 PR83 merged into `main` at

@@ -1,5 +1,37 @@
 # Handoff
 
+## Step 6 persisted methodology selection Contract Gate — 2026-09-23
+
+Accepted main:
+`3de3c58ee898284f8d2168af1aae04af754a6bfc` (merged PR84).
+
+Current branch:
+`docs/step6-persisted-methodology-selection-contract`.
+
+The user explicitly authorized Step 6. Under the repository-wide
+Implementation Contract Gate rule, current work is docs/preflight only.
+
+Preflight facts:
+
+- Step 5 reviewed Russian reference table is merged and available explicitly;
+- current personalized target path is `FAMILY_FOOD_NUTRITION_V1` /
+  NASEM/DRI-based and remains the existing default;
+- Russian source-native policy is explicit/versioned
+  (`RU_SOURCE_NATIVE_STRICT_V1` or
+  `RU_SOURCE_NATIVE_PUBLISHED_ZERO_ESTIMATE_V1`);
+- `HouseholdMember` is mutable and has no historical profile revisions;
+- `MealPlan` is immutable/revisioned and already pins
+  `MemberMealPatternSelection`, but not nutrition methodology;
+- historical target replay therefore cannot rely on current member state;
+- no current migration uses `0036`; reserved `0033_recipe_template_catalogue`
+  must remain reserved.
+
+The Step 6 gate must decide the immutable selection + plan-pin/snapshot contract
+before implementation. No runtime/schema change is authorized on this branch.
+
+After contract review/merge, stop. Do not begin Step 6 runtime automatically.
+
+
 ## Step 5 runtime publication — authorized 2026-09-23
 
 Accepted main:
