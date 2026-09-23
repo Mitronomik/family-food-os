@@ -300,3 +300,81 @@ def test_old_plan_snapshot_survives_member_change_and_new_revision(runtime):
     assert loaded_first.reference_methodology_pins[0].weight_kg == Decimal("62")
     assert second.reference_methodology_pins[0].weight_kg == Decimal("64")
     assert second.plan.supersedes_plan_id == first.plan.id
+
+
+def test_new_reference_selection_can_be_pinned_by_revision_two_without_rewriting_one(
+    runtime,
+):
+    _, engine = runtime
+    household = _household()
+    member = _member(household.id)
+    _seed(engine, household, member)
+    references = _reference_service(engine)
+    first_reference = _baseline_reference(references, household.id, member.id)
+    meals = _meal_service(engine)
+    pattern = _pattern(meals, household.id, member.id)
+
+    first_plan = meals.create_plan_revision(
+        household_id=household.id,
+        week_start=WEEK_START,
+        member_selection_ids={member.id: pattern.selection.id},
+        reference_methodology_selection_ids={member.id: first_reference.id},
+        events=_events(member),
+    )
+    second_reference = references.accept_member_selection(
+        household_id=household.id,
+        member_id=member.id,
+        acceptance_request_id=uuid4(),
+        expected_current_selection_id=first_reference.id,
+        nutrition_config_version=BASELINE_NUTRITION_CONFIG_VERSION,
+        group_reference_methodology_version=RUSSIAN_GROUP_REFERENCE_VERSION,
+    )
+    second_plan = meals.create_plan_revision(
+        household_id=household.id,
+        week_start=WEEK_START,
+        member_selection_ids={member.id: pattern.selection.id},
+        reference_methodology_selection_ids={member.id: second_reference.id},
+        events=_events(member),
+    )
+
+    reloaded_first = meals.get_plan(household.id, first_plan.plan.id)
+    assert (
+        reloaded_first.reference_methodology_pins[0]
+        .reference_methodology_selection_id
+        == first_reference.id
+    )
+    assert (
+        second_plan.reference_methodology_pins[0]
+        .reference_methodology_selection_id
+        == second_reference.id
+    )
+    assert second_plan.plan.supersedes_plan_id == first_plan.plan.id
+
+
+def test_reference_selection_from_another_household_is_rejected(runtime):
+    _, engine = runtime
+    home = _household()
+    member = _member(home.id)
+    foreign_home = _household()
+    foreign_member = _member(foreign_home.id)
+    _seed(engine, home, member)
+    _seed(engine, foreign_home, foreign_member)
+
+    meals = _meal_service(engine)
+    pattern = _pattern(meals, home.id, member.id)
+    foreign_reference = _baseline_reference(
+        _reference_service(engine),
+        foreign_home.id,
+        foreign_member.id,
+    )
+
+    with pytest.raises(MealPlanValidationError, match="accepted supported"):
+        meals.create_plan_revision(
+            household_id=home.id,
+            week_start=WEEK_START,
+            member_selection_ids={member.id: pattern.selection.id},
+            reference_methodology_selection_ids={
+                member.id: foreign_reference.id
+            },
+            events=_events(member),
+        )
