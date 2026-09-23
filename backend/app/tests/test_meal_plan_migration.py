@@ -46,6 +46,7 @@ def test_0032_is_current_head_and_fresh_migration_is_repeat_safe(tmp_path):
         PARTIAL_PROFILE_MIGRATION_ID,
         REGISTRY_V2_MIGRATION_ID,
         REFERENCE_METHODOLOGY_MIGRATION_ID,
+        REFERENCE_PINS_MIGRATION_ID,
     ]
     assert apply_migrations(config) == []
     with sqlite3.connect(config.path) as connection:
@@ -97,6 +98,7 @@ def test_populated_0031_upgrade_preserves_existing_rows(tmp_path):
         PARTIAL_PROFILE_MIGRATION_ID,
         REGISTRY_V2_MIGRATION_ID,
         REFERENCE_METHODOLOGY_MIGRATION_ID,
+        REFERENCE_PINS_MIGRATION_ID,
     ]
 
     with sqlite3.connect(config.path) as connection:
