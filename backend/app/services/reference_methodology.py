@@ -249,44 +249,57 @@ class ReferenceMethodologyService:
         accepted_local_date: date,
         methodology_version: str,
     ) -> None:
-        if self._russian_tables is None:
-            raise ReferenceMethodologyUnsupportedError(
-                "Reviewed Russian reference table provider is unavailable."
-            )
-        try:
-            table = self._russian_tables(methodology_version)
-        except (LookupError, ValueError) as exc:
-            raise ReferenceMethodologyUnsupportedError(
-                "Reviewed Russian reference methodology is unavailable."
-            ) from exc
-        if (
-            not isinstance(table, ReviewedRussianReferenceTable)
-            or table.methodology_version != methodology_version
-        ):
-            raise ReferenceMethodologyUnsupportedError(
-                "Reviewed Russian reference methodology version mismatch."
-            )
-        definition_codes = tuple(
-            sorted({row.definition_code for row in table.rows})
+        validate_russian_group_reference_applicability(
+            member,
+            reference_date=accepted_local_date,
+            methodology_version=methodology_version,
+            russian_reference_tables=self._russian_tables,
         )
-        if len(definition_codes) != 24:
-            raise ReferenceMethodologyUnsupportedError(
-                "Step 5 Russian reference definition set is not the accepted "
-                "24-code table."
-            )
-        age = _age_years(member, local_date=accepted_local_date)
-        result = select_russian_reference_targets(
-            table,
-            age_years=age,
-            sex=member.sex,
-            physical_activity_coefficient=None,
-            life_stage="adult" if age is not None and age >= 18 else "child",
-            definition_codes=definition_codes,
+
+
+def validate_russian_group_reference_applicability(
+    member: HouseholdMember,
+    *,
+    reference_date: date,
+    methodology_version: str,
+    russian_reference_tables: TableProvider | None,
+) -> None:
+    if russian_reference_tables is None:
+        raise ReferenceMethodologyUnsupportedError(
+            "Reviewed Russian reference table provider is unavailable."
         )
-        if (
-            result.status is not ReferenceSelectionStatus.COMPLETE
-            or len(result.rows) != 24
-        ):
-            raise ReferenceMethodologyUnsupportedError(
-                "Step 5 Russian group reference is not applicable to this member."
-            )
+    try:
+        table = russian_reference_tables(methodology_version)
+    except (LookupError, ValueError) as exc:
+        raise ReferenceMethodologyUnsupportedError(
+            "Reviewed Russian reference methodology is unavailable."
+        ) from exc
+    if (
+        not isinstance(table, ReviewedRussianReferenceTable)
+        or table.methodology_version != methodology_version
+    ):
+        raise ReferenceMethodologyUnsupportedError(
+            "Reviewed Russian reference methodology version mismatch."
+        )
+    definition_codes = tuple(sorted({row.definition_code for row in table.rows}))
+    if len(definition_codes) != 24:
+        raise ReferenceMethodologyUnsupportedError(
+            "Step 5 Russian reference definition set is not the accepted "
+            "24-code table."
+        )
+    age = _age_years(member, local_date=reference_date)
+    result = select_russian_reference_targets(
+        table,
+        age_years=age,
+        sex=member.sex,
+        physical_activity_coefficient=None,
+        life_stage="adult" if age is not None and age >= 18 else "child",
+        definition_codes=definition_codes,
+    )
+    if (
+        result.status is not ReferenceSelectionStatus.COMPLETE
+        or len(result.rows) != 24
+    ):
+        raise ReferenceMethodologyUnsupportedError(
+            "Step 5 Russian group reference is not applicable to this member."
+        )

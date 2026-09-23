@@ -13,6 +13,7 @@ from app.domain.meal_plans import (
     HouseholdMealEvent,
     MealPlan,
     MealPlanDetail,
+    MealPlanMemberReferenceMethodologyPin,
     MealPlanMemberSelection,
     MemberMealPatternOpportunitySnapshot,
     MemberMealPatternSelection,
@@ -22,11 +23,15 @@ from app.domain.meal_plans import (
 from app.persistence.sqlalchemy_core.household_tables import household_members_table
 from app.persistence.sqlalchemy_core.meal_plan_tables import (
     meal_plan_events_table,
+    meal_plan_member_reference_methodology_pins_table,
     meal_plan_member_selections_table,
     meal_plans_table,
     member_meal_pattern_opportunities_table,
     member_meal_pattern_selections_table,
     servings_table,
+)
+from app.persistence.sqlalchemy_core.reference_methodology_tables import (
+    member_reference_methodology_selections_table,
 )
 from app.services.meal_plan_contracts import (
     MealPlanPersistenceConflictError,
@@ -192,6 +197,61 @@ class SqlAlchemyMealPlanRepository:
                 raise MealPlanPersistenceConflictError(
                     "MealPlan member selection pins must remain inside one Household."
                 )
+        for pin in detail.reference_methodology_pins:
+            member_row = (
+                self._connection.execute(
+                    select(household_members_table).where(
+                        household_members_table.c.id == pin.member_id
+                    )
+                )
+                .mappings()
+                .one_or_none()
+            )
+            reference_selection = (
+                self._connection.execute(
+                    select(member_reference_methodology_selections_table).where(
+                        member_reference_methodology_selections_table.c.id
+                        == pin.reference_methodology_selection_id
+                    )
+                )
+                .mappings()
+                .one_or_none()
+            )
+            if (
+                member_row is None
+                or member_row["household_id"] != plan.household_id
+                or reference_selection is None
+                or reference_selection["household_id"] != plan.household_id
+                or reference_selection["member_id"] != pin.member_id
+                or reference_selection["accepted_at"] > plan.created_at
+            ):
+                raise MealPlanPersistenceConflictError(
+                    "MealPlan reference-methodology pins must reference an "
+                    "accepted selection for the same Household/member."
+                )
+            snapshot = (
+                member_row["birth_date"],
+                member_row["sex"],
+                member_row["height_cm"],
+                member_row["weight_kg"],
+                member_row["activity_level"],
+                member_row["goal"],
+                member_row["updated_at"],
+            )
+            pin_snapshot = (
+                pin.birth_date,
+                pin.sex,
+                pin.height_cm,
+                pin.weight_kg,
+                pin.activity_level,
+                pin.goal,
+                pin.member_updated_at,
+            )
+            if snapshot != pin_snapshot:
+                raise MealPlanPersistenceConflictError(
+                    "MealPlan reference-methodology snapshot must match the "
+                    "authoritative HouseholdMember state."
+                )
         if plan.revision_number == 1:
             if plan.supersedes_plan_id is not None:
                 raise MealPlanPersistenceConflictError(
@@ -230,6 +290,14 @@ class SqlAlchemyMealPlanRepository:
                 self._connection.execute(
                     insert(meal_plan_member_selections_table),
                     [_pin_values(item) for item in detail.member_selections],
+                )
+            if detail.reference_methodology_pins:
+                self._connection.execute(
+                    insert(meal_plan_member_reference_methodology_pins_table),
+                    [
+                        _reference_pin_values(item)
+                        for item in detail.reference_methodology_pins
+                    ],
                 )
             if detail.events:
                 self._connection.execute(
@@ -297,6 +365,16 @@ class SqlAlchemyMealPlanRepository:
             .where(meal_plan_member_selections_table.c.plan_id == plan_id)
             .order_by(meal_plan_member_selections_table.c.member_id)
         ).mappings()
+        reference_pins = self._connection.execute(
+            select(meal_plan_member_reference_methodology_pins_table)
+            .where(
+                meal_plan_member_reference_methodology_pins_table.c.plan_id
+                == plan_id
+            )
+            .order_by(
+                meal_plan_member_reference_methodology_pins_table.c.member_id
+            )
+        ).mappings()
         events = list(
             self._connection.execute(
                 select(meal_plan_events_table)
@@ -327,6 +405,9 @@ class SqlAlchemyMealPlanRepository:
             member_selections=tuple(_pin_from_row(item) for item in pins),
             events=tuple(_event_from_row(item) for item in events),
             servings=tuple(_serving_from_row(item) for item in servings),
+            reference_methodology_pins=tuple(
+                _reference_pin_from_row(item) for item in reference_pins
+            ),
         )
 
 
@@ -423,6 +504,44 @@ def _pin_from_row(row: Mapping[str, Any]) -> MealPlanMemberSelection:
         plan_id=row["plan_id"],
         member_id=row["member_id"],
         selection_id=row["selection_id"],
+    )
+
+
+def _reference_pin_values(
+    value: MealPlanMemberReferenceMethodologyPin,
+) -> dict[str, object]:
+    return {
+        "plan_id": value.plan_id,
+        "member_id": value.member_id,
+        "reference_methodology_selection_id": (
+            value.reference_methodology_selection_id
+        ),
+        "birth_date": value.birth_date,
+        "sex": value.sex,
+        "height_cm": value.height_cm,
+        "weight_kg": value.weight_kg,
+        "activity_level": value.activity_level,
+        "goal": value.goal,
+        "member_updated_at": value.member_updated_at,
+    }
+
+
+def _reference_pin_from_row(
+    row: Mapping[str, Any],
+) -> MealPlanMemberReferenceMethodologyPin:
+    return MealPlanMemberReferenceMethodologyPin(
+        plan_id=row["plan_id"],
+        member_id=row["member_id"],
+        reference_methodology_selection_id=row[
+            "reference_methodology_selection_id"
+        ],
+        birth_date=row["birth_date"],
+        sex=row["sex"],
+        height_cm=row["height_cm"],
+        weight_kg=row["weight_kg"],
+        activity_level=row["activity_level"],
+        goal=row["goal"],
+        member_updated_at=row["member_updated_at"],
     )
 
 
