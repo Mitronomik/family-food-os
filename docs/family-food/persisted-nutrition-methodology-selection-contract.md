@@ -87,7 +87,12 @@ legitimately have different applicability or accepted reference options.
 
 ## 5. DECISION — methodology is a version bundle, not one magic enum
 
-The persisted selection records explicit component versions.
+The persisted selection records explicit top-level policy/config versions.
+`FAMILY_FOOD_NUTRITION_V1` is the composite configuration identity whose
+checked-in `NutritionConfig` already pins EER, AMDR, fibre, Atwater, age and
+rounding component versions. Step 6 must resolve that exact code-owned config;
+it must not copy a second independent set of component-version strings into the
+selection.
 
 ### 5.1 Required personal baseline
 
@@ -186,6 +191,11 @@ The selection also records
 The acceptance command is household-scoped and accepts an
 `expected_current_selection_id` (nullable for an expected first selection).
 
+Version support, Household/member scope and current Russian applicability are
+validated **before** classifying the request as fresh/replay/change/conflict.
+An identical requested bundle never bypasses applicability validation merely
+because its strings match the current selection.
+
 Semantics:
 
 ### Fresh first selection
@@ -269,7 +279,7 @@ The plan pin freezes **which member inputs** were used for that plan revision.
 
 Together with:
 
-- `MealPlan.week_start`;
+- `MealPlan.week_start` as the frozen plan-level target reference date;
 - immutable selection versions;
 - immutable reference-table version;
 - existing nutrition config versions;
@@ -320,6 +330,12 @@ When a complete pin mapping is supplied:
 - selection `accepted_at` must not be later than the plan revision creation
   instant;
 - the member snapshot is read from authoritative Household state;
+- the plan-level reference-target date is exactly `MealPlan.week_start`, matching
+  the current Planner's existing `member_reference_target(..., as_of_date=week_start)`
+  behavior;
+- a Russian add-on is revalidated against the authoritative member snapshot at
+  that `week_start` reference date; a selection that became inapplicable after
+  acceptance cannot be pinned as if still applicable;
 - plan + meal-pattern pins + methodology pins + events + Servings persist in one
   existing project UoW/transaction.
 
@@ -607,6 +623,10 @@ Runtime Step 6 acceptance must prove at least:
   requested;
 - child/age-18 Russian add-on fails closed under current Step 5 table;
 - unsupported/unknown sex Russian add-on fails closed;
+- an identical Russian bundle is not treated as replay when current member
+  applicability has become invalid;
+- a previously valid Russian selection cannot be pinned to a plan whose
+  `week_start` snapshot is outside current Step 5 applicability;
 - unknown config/table/policy version fails closed;
 - exact semantic retry is zero-write;
 - genuine selection change creates next immutable version;
