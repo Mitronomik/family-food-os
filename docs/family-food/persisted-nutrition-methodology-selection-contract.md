@@ -1,8 +1,8 @@
 # Step 6 — Persisted Nutrition Methodology Selection Contract
 
-**Status:** Implementation Contract Gate / adversarial preflight  
-**Accepted base:** `3de3c58ee898284f8d2168af1aae04af754a6bfc` (merged PR #84)  
-**Bounded step:** Russian-data integration Step 6  
+**Status:** Implementation Contract Gate / adversarial preflight
+**Accepted base:** `3de3c58ee898284f8d2168af1aae04af754a6bfc` (merged PR #84)
+**Bounded step:** Russian-data integration Step 6
 **Runtime implementation authorized by this document:** no — merge/review this gate first
 
 ## 1. Goal
