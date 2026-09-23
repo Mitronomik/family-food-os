@@ -92,7 +92,7 @@ def test_registry_matches_all_approved_definitions(database, bundle):
             (REGISTRY_VERSION,),
         ).fetchone()[0]
         assert json.loads(stored) == bundle
-    assert migrations.expected_migration_ids()[-8:] == [
+    assert migrations.expected_migration_ids()[-9:] == [
         MIGRATION.MIGRATION_ID,
         "0029_food_composition_core",
         "0030_recipe_source_corpus",
