@@ -378,3 +378,46 @@ def test_reference_selection_from_another_household_is_rejected(runtime):
             },
             events=_events(member),
         )
+
+
+def test_reference_pin_snapshot_accepts_full_household_text_contract(runtime):
+    _, engine = runtime
+    household = _household()
+    long_sex = "s" * 150
+    long_activity = "a" * 150
+    long_goal = "g" * 150
+    member = HouseholdMember(
+        id=uuid4(),
+        household_id=household.id,
+        name="Long contract member",
+        active=True,
+        birth_date=date(1990, 5, 20),
+        sex=long_sex,
+        height_cm=Decimal("168"),
+        weight_kg=Decimal("62"),
+        activity_level=long_activity,
+        goal=long_goal,
+        created_at=BASE,
+        updated_at=BASE,
+    )
+    _seed(engine, household, member)
+    meals = _meal_service(engine)
+    pattern = _pattern(meals, household.id, member.id)
+    reference = _baseline_reference(
+        _reference_service(engine),
+        household.id,
+        member.id,
+    )
+
+    detail = meals.create_plan_revision(
+        household_id=household.id,
+        week_start=WEEK_START,
+        member_selection_ids={member.id: pattern.selection.id},
+        reference_methodology_selection_ids={member.id: reference.id},
+        events=_events(member),
+    )
+
+    pin = detail.reference_methodology_pins[0]
+    assert pin.sex == long_sex
+    assert pin.activity_level == long_activity
+    assert pin.goal == long_goal

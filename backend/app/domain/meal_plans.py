@@ -447,16 +447,24 @@ class MealPlanMemberReferenceMethodologyPin:
         object.__setattr__(
             self,
             "sex",
-            _optional_text(self.sex, field="sex", maximum=120),
+            _optional_text(self.sex, field="sex", maximum=200),
         )
         object.__setattr__(self, "height_cm", normalize_height_cm(self.height_cm))
         object.__setattr__(self, "weight_kg", normalize_weight_kg(self.weight_kg))
         object.__setattr__(
             self,
             "activity_level",
-            _required_code(self.activity_level, field="activity_level"),
+            _required_code(
+                self.activity_level,
+                field="activity_level",
+                maximum=200,
+            ),
         )
-        object.__setattr__(self, "goal", _required_code(self.goal, field="goal"))
+        object.__setattr__(
+            self,
+            "goal",
+            _required_code(self.goal, field="goal", maximum=200),
+        )
         object.__setattr__(
             self,
             "member_updated_at",
