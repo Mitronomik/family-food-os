@@ -11,60 +11,55 @@ Russian-data integration Steps 1–7 are accepted.
 
 ## Current bounded state
 
-**Step 8 recipe-dependency food batch Contract Gate is active.**
+**Step 8 recipe-dependency food batch Contract Gate is review-ready in PR90.**
 
-Branch:
-`docs/step8-recipe-dependency-food-batch-contract`.
+Verified semantic head:
+`49c291ab5e46a88e34a6f3ae897c32f4cccc6378`.
 
 Canonical gate:
 `docs/family-food/recipe-dependency-food-batch-contract.md`.
 
-## Frozen preflight direction
+## Frozen Step 8 decisions
 
-- future Step 9 target: School2022 recipe `53-19з`,
-  `Масло сливочное (порциями)`;
-- exactly one Step 8 food dependency;
-- create source-faithful
-  `BUTTER_PEASANT_72_5_UNSALTED`, not reuse generic `BUTTER_UNSALTED`;
-- School2022 owns recipe/form/process evidence only;
-- licensed FIC RU-NUT-DB code 1417 / DB/533 owns production numeric nutrition;
-- exact FIC raw record SHA-256
+- future Step 9 target: School2022 `53-19з — Масло сливочное (порциями)`;
+- exactly one recipe-driven Step 8 food dependency;
+- create `BUTTER_PEASANT_72_5_UNSALTED`, do not reuse generic
+  `BUTTER_UNSALTED`;
+- School2022 owns form/process evidence; FIC owns production numeric nutrition;
+- FIC source = code 1417 / DB/533;
+- exact raw record SHA-256:
   `b21345dd5ffa8b1348931808067b116940a252abec6c26b01870c192829a711d`;
-- reuse accepted Step 4 source-field semantics;
-- FIC `water = null` remains unknown, so expected V2 vector has exactly 17 values;
-- source profile is non-current;
-- expected ATOMIC composition is v1 / INPUT;
-- no yield/retention/transformation/applicability publication;
-- no new migration/schema expected.
+- FIC `water=null` remains unknown;
+- expected sealed V2 vector = 17 values;
+- source profile non-current, deterministic verified_at;
+- ATOMIC v1 / INPUT;
+- zero yield/retention/transformation/applicability rows;
+- no schema/migration; migration head remains 0038 and reserved 0033 stays
+  unconsumed.
 
-## Source-artifact verification
+## Contract verification
 
-Durable private corpus artifact was independently retrieved:
+On `49c291ab5e46a88e34a6f3ae897c32f4cccc6378`:
 
-`private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`.
-
-Verified:
-
-- bytes: `206692075`;
-- SHA-256:
-  `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
-- School2022 PDF SHA-256:
-  `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`;
-- FIC RU-NUT-DB raw HTML SHA-256:
-  `155107ddb381c14721c77fe995d604a5197982441446b54034e4d84645efbd6d`.
+- Docs #343 — SUCCESS;
+- DC1 #205 — SUCCESS;
+- semantic review #5303638521 — READY TO MERGE CONTRACT GATE;
+- scope: one canonical Step 8 contract + three state files;
+- patch whitespace/conflict audit clean;
+- mergeable=true;
+- 0 behind main;
+- unresolved review threads=0.
 
 ## Hard boundaries
 
-No Step 8 runtime/data publication before this gate is reviewed/merged.
+No Step 8 runtime/data publication before PR90 review/merge.
 
 No Step 9 RecipeVersion, Step 10 Planner integration, extra FIC foods,
 production retention/yield factors, API/UI/Retail/AI/Auth/PostgreSQL.
 
-Reserved `0033_recipe_template_catalogue` remains unconsumed.
-
 ## Stop boundary
 
-Deliver this docs-only Contract Gate for review.
+PR90 is ready for final review/merge authorization.
 
-After gate merge: stop. Step 8 runtime/data publication requires separate
-explicit authorization.
+After merge: stop. Step 8 runtime/data publication requires separate explicit
+authorization.

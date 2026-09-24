@@ -1,5 +1,41 @@
 # Progress
 
+## Step 8 Contract Gate review-ready — 2026-09-24
+
+Accepted base:
+`8ae941a1f5c4f07177b2e80272e582f8690dd747`.
+
+PR90:
+`docs/step8-recipe-dependency-food-batch-contract`.
+
+Verified semantic head:
+`49c291ab5e46a88e34a6f3ae897c32f4cccc6378`.
+
+Status:
+`STEP8_CONTRACT_GATE_REVIEW_READY`.
+
+Frozen:
+
+- exact Step 9 target School2022 53-19з;
+- exact new butter identity;
+- exact licensed FIC DB/533 authority;
+- 17-value sparse V2 vector with WATER unknown;
+- non-current profile + ATOMIC v1 / INPUT;
+- zero transformation/applicability publication;
+- no migration/schema;
+- one-food bounded vertical-slice scope.
+
+Verification:
+
+- Docs #343 SUCCESS;
+- DC1 #205 SUCCESS;
+- semantic review #5303638521 READY TO MERGE;
+- scope/whitespace clean;
+- 0 behind main;
+- unresolved threads 0.
+
+No production Step 8 data, Step 9 RecipeVersion or Step 10 Planner work occurred.
+
 ## Step 8 Contract Gate started — 2026-09-24
 
 PR89 is merged into main at

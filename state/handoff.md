@@ -1,5 +1,54 @@
 # Handoff
 
+## Step 8 Contract Gate review-ready — PR90
+
+Accepted main:
+`8ae941a1f5c4f07177b2e80272e582f8690dd747` (merged PR89 / accepted Step 7 runtime).
+
+Branch:
+`docs/step8-recipe-dependency-food-batch-contract`.
+
+Canonical contract:
+`docs/family-food/recipe-dependency-food-batch-contract.md`.
+
+Verified semantic head:
+`49c291ab5e46a88e34a6f3ae897c32f4cccc6378`.
+
+Review:
+`#5303638521 — READY TO MERGE CONTRACT GATE`.
+
+Frozen vertical slice:
+
+```text
+School2022 53-19з — Масло сливочное (порциями)
+→ BUTTER_PEASANT_72_5_UNSALTED
+→ licensed FIC RU-NUT-DB code 1417 / DB/533
+→ non-current V2 profile
+→ 17-value sparse sealed vector (WATER unknown)
+→ ATOMIC v1 / INPUT
+```
+
+Critical preserved boundaries:
+
+- existing generic `BUTTER_UNSALTED` / USDA FDC 173430 unchanged;
+- School2022 source calculations are not production food-nutrition authority;
+- FIC raw record hash pinned to
+  `b21345dd5ffa8b1348931808067b116940a252abec6c26b01870c192829a711d`;
+- `water=null` is not coerced/inferred;
+- no current selector switch;
+- no YieldModel/retention/Transformation/Applicability rows;
+- no migration; 0033 remains reserved and head stays 0038;
+- no Step 9/10.
+
+Semantic verification:
+Docs #343 SUCCESS; DC1 #205 SUCCESS; mergeable=true; 0 behind main;
+unresolved review threads 0; patch whitespace/conflict audit clean.
+
+This is a docs-only gate. No runtime/schema/production data was published.
+
+Stop for final review/merge. After merge, Step 8 runtime/data publication needs
+separate explicit authorization.
+
 ## Step 8 recipe-dependency food batch Contract Gate — 2026-09-24
 
 Accepted main:
