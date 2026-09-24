@@ -1,5 +1,44 @@
 # Handoff
 
+## Step 7 transformation applicability Contract Gate — 2026-09-24
+
+Accepted main:
+`6ec1069d867388e5d1f4782ce6cdeed08c017694` (merged PR87 / accepted Step 6B).
+
+Current branch:
+`docs/step7-transformation-applicability-contract`.
+
+Canonical gate:
+`docs/family-food/transformation-applicability-contract.md`.
+
+Current authorization is docs/preflight only.
+
+Critical facts:
+
+- current Composition calculation and retention writer are V1-pinned;
+- 0035 made retention rows registry-version-aware but historical retention domain
+  snapshots/digests intentionally omit registry identity;
+- therefore Step 7 must not mutate old retention snapshot shape;
+- V1/V2 same-code identity is not sufficient retention authority;
+- exact food/season/operation/source applicability must be explicit;
+- supplied loss/retention corpus evidence is not production-ready numeric
+  authority.
+
+Gate direction:
+
+- one-to-one dependent `TransformationApplicability` per immutable
+  `FoodTransformation`;
+- no late applicability after a transformation is used by composition history;
+- explicit registry-aware V2 retention publication seam;
+- legacy `CompositionCalculator` remains V1;
+- separate applicability-aware V2 calculator;
+- expected additive migration `0038_transformation_applicability`;
+- zero production numeric loss-factor publication in initial Step 7 runtime.
+
+Stop after Contract Gate review/merge. No runtime 0038, Step 8, Step 9 or Step 10
+without separate authorization.
+
+
 ## Step 6B runtime review-ready — PR87
 
 Accepted main:
