@@ -9,80 +9,57 @@ PR87 is merged into `main` at
 
 Russian-data integration Steps 1–6 are accepted.
 
-Current bounded work is **Step 7 — transformation applicability Implementation
-Contract Gate only**.
+## Current bounded state
 
-Branch:
-`docs/step7-transformation-applicability-contract`.
+**Step 7 transformation applicability Contract Gate is review-ready in PR88.**
+
+Verified contract head:
+`7068b4d7af9d0b8817e933daeaa89a08f68feb26`.
 
 Canonical gate:
 `docs/family-food/transformation-applicability-contract.md`.
 
-## Step 7 preflight facts
+## Frozen Step 7 decisions
 
-- legacy `CompositionCalculator` and
-  `SqlAlchemyFoodCompositionRepository.nutrient_definition(code)` remain
-  intentionally V1-pinned;
-- migration 0035 already stores `registry_version` on
-  `food_retention_values` and pins all historical factors to V1;
-- historical `NutrientRetentionProfile` / `RetentionValue` snapshot digests
-  do not include registry identity and must not be rewritten;
-- V2 is not universally definition-equivalent to V1:
-  `CARBOHYDRATE_AVAILABLE` was deliberately redefined and three new equivalent
-  definitions prohibit implicit conversion;
-- canonical Russian methodology requires transformation applicability to bind
-  exact food, season, operation and source and forbids double cold/heat loss;
-- reviewed corpus transformation/loss packages are evidence only: Book2002 still
-  requires separate production-rights review, School2022 assumptions are
-  quarantined/unvalidated, and legacy recipe retention rows are explicitly not
-  integration-ready.
+- preserve historical V1 `CompositionCalculator` and V1 retention writer/reader;
+- preserve historical retention snapshot shape and hashes;
+- no automatic V1→V2 retention carry-forward;
+- introduce one dependent `TransformationApplicability` per immutable
+  `FoodTransformation`;
+- bind exact FoodIngredient, explicit season/source evidence scope and exact
+  retention registry;
+- reject late applicability after transformation use in composition history;
+- add explicit registry-aware V2 retention read/write seams;
+- add explicit applicability-aware V2 transformed publication/calculation paths;
+- expected additive migration `0038_transformation_applicability`;
+- initial runtime publishes zero production numeric loss/yield/retention factors
+  from the supplied corpus.
 
-## Frozen Contract Gate direction
+## Contract Gate verification
 
-The gate proposes one immutable dependent record per transformation:
+On `7068b4d7af9d0b8817e933daeaa89a08f68feb26`:
 
-`TransformationApplicability`.
+- Docs #335 — SUCCESS;
+- DC1 #197 — SUCCESS;
+- scope is one canonical contract + three state files;
+- 0 runtime/schema/data/API/UI changes;
+- 0 behind main;
+- unresolved review threads 0.
 
-It binds:
-
-- exact `FoodTransformation`;
-- exact `FoodIngredient`;
-- exact retention registry when retention exists;
-- explicit season scope/reference;
-- exact reviewed evidence-scope identity;
-- provenance + snapshot digest.
-
-Applicability changes require a new transformation identity/version.
-
-Late applicability after a transformation is already referenced by an immutable
-composition step is forbidden.
-
-Existing `CompositionCalculator` stays V1-pinned. Step 7 runtime, if separately
-authorized after this gate merges, adds an explicit applicability-aware V2 path.
-
-Expected next migration:
-`0038_transformation_applicability`.
-
-The initial runtime publishes zero production numeric transformation/yield/
-retention factors from the supplied corpus.
+Final review:
+`#5299903757` — READY TO MERGE CONTRACT GATE.
 
 ## Hard boundaries
 
-No Step 7 runtime/migration yet.
+No Step 7 runtime / migration 0038 yet.
 
-No:
-
-- Step 8 recipe-dependency food publication;
-- Step 9 RecipeVersion publication;
-- Step 10 Planner integration;
-- Book2002/School2022/legacy retention-factor promotion;
-- automatic V1→V2 factor carry-forward;
-- API/UI;
-- Retail/AI/Auth/PostgreSQL.
+No Step 8 food batch, Step 9 RecipeVersion publication, Step 10 Planner
+integration, numeric source-loss publication, API/UI/Retail/AI/Auth/PostgreSQL.
 
 Reserved `0033_recipe_template_catalogue` remains unconsumed.
 
 ## Stop boundary
 
-Deliver/review the Step 7 Contract Gate. After gate merge, stop.
-Step 7 runtime requires separate explicit authorization.
+PR88 may be merged after final proportional state-head verification.
+
+After merge: stop. Step 7 runtime requires separate explicit authorization.
