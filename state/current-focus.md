@@ -1,71 +1,88 @@
 # Current focus
 
-Updated: `2026-09-23`.
+Updated: `2026-09-24`.
 
 ## Accepted state
 
-PR86 is merged into `main` at
-`ef021c44e3166fbd2aa930c35b57dcb258e11bcc`.
+PR87 is merged into `main` at
+`6ec1069d867388e5d1f4782ce6cdeed08c017694`.
 
-Steps 1–5, the Step 6 Contract Gate and Step 6A runtime are accepted.
+Russian-data integration Steps 1–6 are accepted.
 
-## Current bounded state
+Current bounded work is **Step 7 — transformation applicability Implementation
+Contract Gate only**.
 
-**Step 6B runtime is review-ready in PR87.**
+Branch:
+`docs/step7-transformation-applicability-contract`.
 
-Verified runtime/test head:
-`8853d2a09240d26997c83915bc4167ab39979323`.
+Canonical gate:
+`docs/family-food/transformation-applicability-contract.md`.
 
-Canonical contract:
-`docs/family-food/persisted-nutrition-methodology-selection-contract.md`.
+## Step 7 preflight facts
 
-Implemented Step 6B:
+- legacy `CompositionCalculator` and
+  `SqlAlchemyFoodCompositionRepository.nutrient_definition(code)` remain
+  intentionally V1-pinned;
+- migration 0035 already stores `registry_version` on
+  `food_retention_values` and pins all historical factors to V1;
+- historical `NutrientRetentionProfile` / `RetentionValue` snapshot digests
+  do not include registry identity and must not be rewritten;
+- V2 is not universally definition-equivalent to V1:
+  `CARBOHYDRATE_AVAILABLE` was deliberately redefined and three new equivalent
+  definitions prohibit implicit conversion;
+- canonical Russian methodology requires transformation applicability to bind
+  exact food, season, operation and source and forbids double cold/heat loss;
+- reviewed corpus transformation/loss packages are evidence only: Book2002 still
+  requires separate production-rights review, School2022 assumptions are
+  quarantined/unvalidated, and legacy recipe retention rows are explicitly not
+  integration-ready.
 
-- MealPlan-owned `MealPlanMemberReferenceMethodologyPin`;
-- complete-or-zero methodology pin sets;
-- exact immutable Step 6A reference-methodology selection ID;
-- immutable authoritative member target-input snapshot;
-- `MealPlan.week_start` reference date;
-- Russian Step 5 applicability revalidation at pinning;
-- SQLite-safe member updated-at CAS/write-intent guard;
-- atomic MealPlan + meal-pattern pins + reference pins + events + Servings;
-- migration `0037_meal_plan_reference_methodology_pins`;
-- historical legacy zero-pin plans remain valid with no backfill.
+## Frozen Contract Gate direction
 
-## Final Step 6B verification
+The gate proposes one immutable dependent record per transformation:
 
-On `8853d2a09240d26997c83915bc4167ab39979323`:
+`TransformationApplicability`.
 
-- Docs #331 — SUCCESS;
-- DC1 #193 — SUCCESS;
-- Russian methodologies #98 — 380 passed;
-- Registry V2 #139 — focused 257 passed, 4/4 backend shards SUCCESS,
-  launcher 643 passed / 2 skipped;
-- Partial profiles #109 — focused 228 passed, 4/4 backend shards SUCCESS,
-  launcher 643 passed / 2 skipped.
+It binds:
 
-Additional adversarial closure:
+- exact `FoodTransformation`;
+- exact `FoodIngredient`;
+- exact retention registry when retention exists;
+- explicit season scope/reference;
+- exact reviewed evidence-scope identity;
+- provenance + snapshot digest.
 
-- methodology-aware revision 2 may pin a newer Step 6A selection without
-  rewriting revision 1;
-- foreign-Household reference selections fail closed;
-- snapshot text lengths preserve the accepted 200-character Household contract;
-- explicit Planner boundary test proves no automatic
-  `reference_methodology_selection_ids` default switch.
+Applicability changes require a new transformation identity/version.
+
+Late applicability after a transformation is already referenced by an immutable
+composition step is forbidden.
+
+Existing `CompositionCalculator` stays V1-pinned. Step 7 runtime, if separately
+authorized after this gate merges, adds an explicit applicability-aware V2 path.
+
+Expected next migration:
+`0038_transformation_applicability`.
+
+The initial runtime publishes zero production numeric transformation/yield/
+retention factors from the supplied corpus.
 
 ## Hard boundaries
 
-Step 6B does **not**:
+No Step 7 runtime/migration yet.
 
-- change Planner runtime behavior/defaults;
-- make Russian group-reference automatic;
-- change API/UI;
-- persist `RU_SOURCE_NATIVE_*` in member pins;
-- implement Step 7 transformation applicability;
-- implement Steps 8–10;
-- rewrite/backfill historical MealPlans.
+No:
+
+- Step 8 recipe-dependency food publication;
+- Step 9 RecipeVersion publication;
+- Step 10 Planner integration;
+- Book2002/School2022/legacy retention-factor promotion;
+- automatic V1→V2 factor carry-forward;
+- API/UI;
+- Retail/AI/Auth/PostgreSQL.
+
+Reserved `0033_recipe_template_catalogue` remains unconsumed.
 
 ## Stop boundary
 
-PR87 is ready for final review after this docs/state receipt passes proportional
-docs verification. Do not merge autonomously and do not start Step 7 or Step 10.
+Deliver/review the Step 7 Contract Gate. After gate merge, stop.
+Step 7 runtime requires separate explicit authorization.
