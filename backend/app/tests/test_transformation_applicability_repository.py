@@ -87,10 +87,10 @@ def publish_empty_v2_profile(engine, food_id: UUID) -> FoodNutritionProfile:
         id=uuid4(),
         food_ingredient_id=food_id,
         basis_grams=D("100"),
-        kcal=None,
-        protein_g=None,
-        fat_g=None,
-        carbohydrates_g=None,
+        kcal=D("0"),
+        protein_g=D("0"),
+        fat_g=D("0"),
+        carbohydrates_g=D("0"),
         fiber_g=None,
         source_name="synthetic-step7-empty-vector",
         source_id=str(uuid4()),
@@ -192,7 +192,6 @@ def test_registry_aware_retention_writer_reader_and_snapshot_shape(database):
         food_id,
         registry_version=V2_REGISTRY_VERSION,
     )
-    transformed = replace_version_with_step(config, base, transformation)
 
     with SqlAlchemyCompositionUnitOfWork(engine) as uow:
         uow.compositions.add_retention_profile_for_registry(
@@ -418,6 +417,7 @@ def test_uncommitted_step7_state_rolls_back_as_one_unit(database):
         food_id,
         registry_version=V2_REGISTRY_VERSION,
     )
+    transformed = replace_version_with_step(config, base, transformation)
 
     with SqlAlchemyCompositionUnitOfWork(engine) as uow:
         uow.compositions.add_retention_profile_for_registry(
