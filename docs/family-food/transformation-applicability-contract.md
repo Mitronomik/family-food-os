@@ -1,9 +1,9 @@
 # Step 7 — Transformation Applicability Contract
 
-**Status:** Implementation Contract Gate / docs-only  
-**Decision date:** 2026-09-24  
-**Accepted base:** `6ec1069d867388e5d1f4782ce6cdeed08c017694` (merged PR #87)  
-**Bounded step:** Russian-data integration Step 7 — transformation applicability  
+**Status:** Implementation Contract Gate / docs-only
+**Decision date:** 2026-09-24
+**Accepted base:** `6ec1069d867388e5d1f4782ce6cdeed08c017694` (merged PR #87)
+**Bounded step:** Russian-data integration Step 7 — transformation applicability
 **Runtime implementation authorized by this document:** no — merge/review this gate first
 
 ## 1. Goal
