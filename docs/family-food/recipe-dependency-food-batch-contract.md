@@ -1,9 +1,9 @@
 # Step 8 — Recipe-Dependency Food Batch Contract
 
-**Status:** Implementation Contract Gate / docs-only  
-**Decision date:** 2026-09-24  
-**Accepted base:** `8ae941a1f5c4f07177b2e80272e582f8690dd747` (merged PR #89)  
-**Bounded step:** Russian-data integration Step 8 — recipe-dependency food batch  
+**Status:** Implementation Contract Gate / docs-only
+**Decision date:** 2026-09-24
+**Accepted base:** `8ae941a1f5c4f07177b2e80272e582f8690dd747` (merged PR #89)
+**Bounded step:** Russian-data integration Step 8 — recipe-dependency food batch
 **Runtime/data publication authorized by this document:** no — review/merge this gate first
 
 ## 1. Goal
