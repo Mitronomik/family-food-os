@@ -168,11 +168,32 @@ fats_oils
 
 default_unit:
 g
+
+density_g_per_ml:
+null
+
+edible_fraction:
+null
+
+allergens_reviewed:
+false
+
+allergen_codes:
+[]
+
+storage_profile_code:
+null
+
+is_active:
+true
 ```
 
 Publication action:
 
 `CREATE_REVIEWED`.
+
+No allergen, density, edible-fraction or storage fact is inferred from the food
+name. Those remain explicitly unreviewed/unknown in this bounded operation.
 
 The identity combines:
 
@@ -339,8 +360,13 @@ FoodIngredient
 BUTTER_PEASANT_72_5_UNSALTED
     ↓
 FoodNutritionProfile
-source = FIC_RU_NUT_DB / code 1417
+source_name = FIC_RU_NUT_DB
+source_id = 1417
+source_version = snapshot-2026-09-20-155107ddb381c147
+source_data_type = official_electronic_database_snapshot
 basis = 100 g
+verified_at = 2026-09-24T00:00:00Z
+estimated = null
 is_current = false
     ↓
 RU_NUTRIENT_REGISTRY_V2 NutrientVector
