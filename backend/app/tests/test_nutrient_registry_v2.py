@@ -465,6 +465,7 @@ def test_0035_version_pins_existing_retention_rows_without_changing_values(tmp_p
         MIGRATION.MIGRATION_ID,
         "0036_member_reference_methodology_selection",
         "0037_meal_plan_reference_methodology_pins",
+        "0038_transformation_applicability",
     ]
 
     with sqlite3.connect(config.path) as db:
