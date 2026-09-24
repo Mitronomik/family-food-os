@@ -419,18 +419,19 @@ def test_uncommitted_step7_state_rolls_back_as_one_unit(database):
     )
     transformed = replace_version_with_step(config, base, transformation)
 
-    with SqlAlchemyCompositionUnitOfWork(engine) as uow:
-        uow.compositions.add_retention_profile_for_registry(
-            profile,
-            V2_REGISTRY_VERSION,
-        )
-        uow.compositions.add_transformation(transformation)
-        uow.compositions.add_applicability(app)
-        uow.compositions.add_versions_for_registry(
-            (transformed,),
-            V2_REGISTRY_VERSION,
-        )
-        # No commit: the UoW must revoke all attempted Step 7 state.
+    with pytest.raises(RuntimeError, match="synthetic Step 7 failure"):
+        with SqlAlchemyCompositionUnitOfWork(engine) as uow:
+            uow.compositions.add_retention_profile_for_registry(
+                profile,
+                V2_REGISTRY_VERSION,
+            )
+            uow.compositions.add_transformation(transformation)
+            uow.compositions.add_applicability(app)
+            uow.compositions.add_versions_for_registry(
+                (transformed,),
+                V2_REGISTRY_VERSION,
+            )
+            raise RuntimeError("synthetic Step 7 failure")
 
     with sqlite3.connect(config.path) as db:
         assert db.execute(
