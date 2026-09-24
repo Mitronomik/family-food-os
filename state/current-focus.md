@@ -1,71 +1,65 @@
 # Current focus
 
-Updated: `2026-09-23`.
+Updated: `2026-09-24`.
 
 ## Accepted state
 
-PR86 is merged into `main` at
-`ef021c44e3166fbd2aa930c35b57dcb258e11bcc`.
+PR87 is merged into `main` at
+`6ec1069d867388e5d1f4782ce6cdeed08c017694`.
 
-Steps 1–5, the Step 6 Contract Gate and Step 6A runtime are accepted.
+Russian-data integration Steps 1–6 are accepted.
 
 ## Current bounded state
 
-**Step 6B runtime is review-ready in PR87.**
+**Step 7 transformation applicability Contract Gate is review-ready in PR88.**
 
-Verified runtime/test head:
-`8853d2a09240d26997c83915bc4167ab39979323`.
+Verified contract head:
+`7068b4d7af9d0b8817e933daeaa89a08f68feb26`.
 
-Canonical contract:
-`docs/family-food/persisted-nutrition-methodology-selection-contract.md`.
+Canonical gate:
+`docs/family-food/transformation-applicability-contract.md`.
 
-Implemented Step 6B:
+## Frozen Step 7 decisions
 
-- MealPlan-owned `MealPlanMemberReferenceMethodologyPin`;
-- complete-or-zero methodology pin sets;
-- exact immutable Step 6A reference-methodology selection ID;
-- immutable authoritative member target-input snapshot;
-- `MealPlan.week_start` reference date;
-- Russian Step 5 applicability revalidation at pinning;
-- SQLite-safe member updated-at CAS/write-intent guard;
-- atomic MealPlan + meal-pattern pins + reference pins + events + Servings;
-- migration `0037_meal_plan_reference_methodology_pins`;
-- historical legacy zero-pin plans remain valid with no backfill.
+- preserve historical V1 `CompositionCalculator` and V1 retention writer/reader;
+- preserve historical retention snapshot shape and hashes;
+- no automatic V1→V2 retention carry-forward;
+- introduce one dependent `TransformationApplicability` per immutable
+  `FoodTransformation`;
+- bind exact FoodIngredient, explicit season/source evidence scope and exact
+  retention registry;
+- reject late applicability after transformation use in composition history;
+- add explicit registry-aware V2 retention read/write seams;
+- add explicit applicability-aware V2 transformed publication/calculation paths;
+- expected additive migration `0038_transformation_applicability`;
+- initial runtime publishes zero production numeric loss/yield/retention factors
+  from the supplied corpus.
 
-## Final Step 6B verification
+## Contract Gate verification
 
-On `8853d2a09240d26997c83915bc4167ab39979323`:
+On `7068b4d7af9d0b8817e933daeaa89a08f68feb26`:
 
-- Docs #331 — SUCCESS;
-- DC1 #193 — SUCCESS;
-- Russian methodologies #98 — 380 passed;
-- Registry V2 #139 — focused 257 passed, 4/4 backend shards SUCCESS,
-  launcher 643 passed / 2 skipped;
-- Partial profiles #109 — focused 228 passed, 4/4 backend shards SUCCESS,
-  launcher 643 passed / 2 skipped.
+- Docs #335 — SUCCESS;
+- DC1 #197 — SUCCESS;
+- scope is one canonical contract + three state files;
+- 0 runtime/schema/data/API/UI changes;
+- 0 behind main;
+- unresolved review threads 0.
 
-Additional adversarial closure:
-
-- methodology-aware revision 2 may pin a newer Step 6A selection without
-  rewriting revision 1;
-- foreign-Household reference selections fail closed;
-- snapshot text lengths preserve the accepted 200-character Household contract;
-- explicit Planner boundary test proves no automatic
-  `reference_methodology_selection_ids` default switch.
+Final review:
+`#5299903757` — READY TO MERGE CONTRACT GATE.
 
 ## Hard boundaries
 
-Step 6B does **not**:
+No Step 7 runtime / migration 0038 yet.
 
-- change Planner runtime behavior/defaults;
-- make Russian group-reference automatic;
-- change API/UI;
-- persist `RU_SOURCE_NATIVE_*` in member pins;
-- implement Step 7 transformation applicability;
-- implement Steps 8–10;
-- rewrite/backfill historical MealPlans.
+No Step 8 food batch, Step 9 RecipeVersion publication, Step 10 Planner
+integration, numeric source-loss publication, API/UI/Retail/AI/Auth/PostgreSQL.
+
+Reserved `0033_recipe_template_catalogue` remains unconsumed.
 
 ## Stop boundary
 
-PR87 is ready for final review after this docs/state receipt passes proportional
-docs verification. Do not merge autonomously and do not start Step 7 or Step 10.
+PR88 may be merged after final proportional state-head verification.
+
+After merge: stop. Step 7 runtime requires separate explicit authorization.
