@@ -4,62 +4,63 @@ Updated: `2026-09-24`.
 
 ## Accepted state
 
-PR87 is merged into `main` at
-`6ec1069d867388e5d1f4782ce6cdeed08c017694`.
+PR88 / Step 7 Transformation Applicability Contract Gate is merged into `main`
+at `71e4cfc63908440a54631e68b7507e94311980d2`.
 
-Russian-data integration Steps 1–6 are accepted.
+Russian-data integration Steps 1–6 and the Step 7 Contract Gate are accepted.
 
 ## Current bounded state
 
-**Step 7 transformation applicability Contract Gate is review-ready in PR88.**
+**Step 7 transformation applicability runtime is review-ready in PR89.**
 
-Verified contract head:
-`7068b4d7af9d0b8817e933daeaa89a08f68feb26`.
+Branch:
+`feat/step7-transformation-applicability-runtime`.
 
-Canonical gate:
+Verified runtime/test/workflow head:
+`e481b6cda42afa2f33e5239262dae3f3c6780797`.
+
+Canonical contract:
 `docs/family-food/transformation-applicability-contract.md`.
 
-## Frozen Step 7 decisions
+## Delivered Step 7 runtime
 
-- preserve historical V1 `CompositionCalculator` and V1 retention writer/reader;
-- preserve historical retention snapshot shape and hashes;
-- no automatic V1→V2 retention carry-forward;
-- introduce one dependent `TransformationApplicability` per immutable
+- dependent immutable `TransformationApplicability` for exact
   `FoodTransformation`;
-- bind exact FoodIngredient, explicit season/source evidence scope and exact
-  retention registry;
-- reject late applicability after transformation use in composition history;
-- add explicit registry-aware V2 retention read/write seams;
-- add explicit applicability-aware V2 transformed publication/calculation paths;
-- expected additive migration `0038_transformation_applicability`;
-- initial runtime publishes zero production numeric loss/yield/retention factors
-  from the supplied corpus.
+- additive migration `0038_transformation_applicability`;
+- exact FoodIngredient / season / evidence-scope applicability;
+- explicit registry-aware V2 retention read/write seams;
+- explicit applicability-aware V2 Composition publication path;
+- separate `ApplicabilityAwareCompositionCalculator`;
+- legacy V1 `CompositionCalculator`, retention snapshots/digests and
+  legacy read/write/publication paths preserved;
+- no automatic V1→V2 retention carry-forward;
+- no production numeric Book2002 / School2022 / legacy loss-factor publication.
 
-## Contract Gate verification
+## Verification on runtime head
 
-On `7068b4d7af9d0b8817e933daeaa89a08f68feb26`:
+- Russian nutrition methodologies #113 — SUCCESS;
+- Nutrient Registry V2 #169 focused — **280 passed**;
+- Partial nutrition profiles #130 — **SUCCESS**:
+  - focused **228 passed**;
+  - backend shards **1252 / 768 / 582 / 962 passed**;
+  - launcher **643 passed, 2 skipped**;
+- Nutrient Registry V2 launcher — **643 passed, 2 skipped**;
+- `AI_ENABLED=false`;
+- GitHub patch scope/whitespace/conflict audit — clean.
 
-- Docs #335 — SUCCESS;
-- DC1 #197 — SUCCESS;
-- scope is one canonical contract + three state files;
-- 0 runtime/schema/data/API/UI changes;
-- 0 behind main;
-- unresolved review threads 0.
-
-Final review:
-`#5299903757` — READY TO MERGE CONTRACT GATE.
+The container could not run a literal local `git diff --check` because direct
+GitHub DNS resolution was unavailable; no such shell check is claimed.
 
 ## Hard boundaries
 
-No Step 7 runtime / migration 0038 yet.
-
 No Step 8 food batch, Step 9 RecipeVersion publication, Step 10 Planner
-integration, numeric source-loss publication, API/UI/Retail/AI/Auth/PostgreSQL.
+integration, production numeric transformation/loss-factor publication,
+API/UI/Retail/AI/Auth/PostgreSQL.
 
 Reserved `0033_recipe_template_catalogue` remains unconsumed.
 
 ## Stop boundary
 
-PR88 may be merged after final proportional state-head verification.
+PR89 is ready for final review. Do not merge autonomously.
 
-After merge: stop. Step 7 runtime requires separate explicit authorization.
+After PR89 merge: stop. Step 8 requires separate explicit authorization.
