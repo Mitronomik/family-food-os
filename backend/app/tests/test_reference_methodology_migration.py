@@ -89,11 +89,14 @@ def existing_rows(path):
 def test_0036_is_appended_after_0035_and_0033_remains_reserved():
     expected = expected_migration_ids()
 
-    assert expected[-3:] == [
+    position = expected.index(PREVIOUS_HEAD)
+    assert expected[position : position + 3] == [
         PREVIOUS_HEAD,
         MIGRATION_ID,
         "0037_meal_plan_reference_methodology_pins",
+        "0038_transformation_applicability",
     ]
+    assert expected[-1] == "0038_transformation_applicability"
     assert not any(value.startswith("0033_") for value in expected)
 
 
