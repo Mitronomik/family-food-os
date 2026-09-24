@@ -1,5 +1,36 @@
 # Progress
 
+## Step 8 Contract Gate started — 2026-09-24
+
+PR89 is merged into main at
+`8ae941a1f5c4f07177b2e80272e582f8690dd747`.
+
+The user explicitly authorized continuing to the next bounded Russian-data
+integration operation.
+
+Under the repository Implementation Contract Gate rule, current work is
+documentation/preflight only.
+
+Preflight selected the minimum-risk vertical slice:
+
+- Step 9 target source card: School2022 `53-19з`;
+- dependency: exact unsalted 72.5% butter;
+- new source-faithful FoodIngredient:
+  `BUTTER_PEASANT_72_5_UNSALTED`;
+- licensed FIC authority: code 1417 / DB/533;
+- exact raw record SHA-256:
+  `b21345dd5ffa8b1348931808067b116940a252abec6c26b01870c192829a711d`;
+- expected 17-value sparse V2 vector because source `water=null`;
+- expected ATOMIC v1 / INPUT;
+- no transformation/applicability and no schema migration.
+
+The durable private corpus archive was independently retrieved and hash-verified.
+
+Status:
+`STEP8_CONTRACT_GATE_ACTIVE`.
+
+No production Step 8 data or Step 9 RecipeVersion has been published.
+
 ## Step 7 runtime review-ready — 2026-09-24
 
 Accepted base:

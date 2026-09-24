@@ -4,63 +4,67 @@ Updated: `2026-09-24`.
 
 ## Accepted state
 
-PR88 / Step 7 Transformation Applicability Contract Gate is merged into `main`
-at `71e4cfc63908440a54631e68b7507e94311980d2`.
+PR89 / Step 7 transformation applicability runtime is merged into `main` at
+`8ae941a1f5c4f07177b2e80272e582f8690dd747`.
 
-Russian-data integration Steps 1–6 and the Step 7 Contract Gate are accepted.
+Russian-data integration Steps 1–7 are accepted.
 
 ## Current bounded state
 
-**Step 7 transformation applicability runtime is review-ready in PR89.**
+**Step 8 recipe-dependency food batch Contract Gate is active.**
 
 Branch:
-`feat/step7-transformation-applicability-runtime`.
+`docs/step8-recipe-dependency-food-batch-contract`.
 
-Verified runtime/test/workflow head:
-`e481b6cda42afa2f33e5239262dae3f3c6780797`.
+Canonical gate:
+`docs/family-food/recipe-dependency-food-batch-contract.md`.
 
-Canonical contract:
-`docs/family-food/transformation-applicability-contract.md`.
+## Frozen preflight direction
 
-## Delivered Step 7 runtime
+- future Step 9 target: School2022 recipe `53-19з`,
+  `Масло сливочное (порциями)`;
+- exactly one Step 8 food dependency;
+- create source-faithful
+  `BUTTER_PEASANT_72_5_UNSALTED`, not reuse generic `BUTTER_UNSALTED`;
+- School2022 owns recipe/form/process evidence only;
+- licensed FIC RU-NUT-DB code 1417 / DB/533 owns production numeric nutrition;
+- exact FIC raw record SHA-256
+  `b21345dd5ffa8b1348931808067b116940a252abec6c26b01870c192829a711d`;
+- reuse accepted Step 4 source-field semantics;
+- FIC `water = null` remains unknown, so expected V2 vector has exactly 17 values;
+- source profile is non-current;
+- expected ATOMIC composition is v1 / INPUT;
+- no yield/retention/transformation/applicability publication;
+- no new migration/schema expected.
 
-- dependent immutable `TransformationApplicability` for exact
-  `FoodTransformation`;
-- additive migration `0038_transformation_applicability`;
-- exact FoodIngredient / season / evidence-scope applicability;
-- explicit registry-aware V2 retention read/write seams;
-- explicit applicability-aware V2 Composition publication path;
-- separate `ApplicabilityAwareCompositionCalculator`;
-- legacy V1 `CompositionCalculator`, retention snapshots/digests and
-  legacy read/write/publication paths preserved;
-- no automatic V1→V2 retention carry-forward;
-- no production numeric Book2002 / School2022 / legacy loss-factor publication.
+## Source-artifact verification
 
-## Verification on runtime head
+Durable private corpus artifact was independently retrieved:
 
-- Russian nutrition methodologies #113 — SUCCESS;
-- Nutrient Registry V2 #169 focused — **280 passed**;
-- Partial nutrition profiles #130 — **SUCCESS**:
-  - focused **228 passed**;
-  - backend shards **1252 / 768 / 582 / 962 passed**;
-  - launcher **643 passed, 2 skipped**;
-- Nutrient Registry V2 launcher — **643 passed, 2 skipped**;
-- `AI_ENABLED=false`;
-- GitHub patch scope/whitespace/conflict audit — clean.
+`private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`.
 
-The container could not run a literal local `git diff --check` because direct
-GitHub DNS resolution was unavailable; no such shell check is claimed.
+Verified:
+
+- bytes: `206692075`;
+- SHA-256:
+  `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
+- School2022 PDF SHA-256:
+  `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`;
+- FIC RU-NUT-DB raw HTML SHA-256:
+  `155107ddb381c14721c77fe995d604a5197982441446b54034e4d84645efbd6d`.
 
 ## Hard boundaries
 
-No Step 8 food batch, Step 9 RecipeVersion publication, Step 10 Planner
-integration, production numeric transformation/loss-factor publication,
-API/UI/Retail/AI/Auth/PostgreSQL.
+No Step 8 runtime/data publication before this gate is reviewed/merged.
+
+No Step 9 RecipeVersion, Step 10 Planner integration, extra FIC foods,
+production retention/yield factors, API/UI/Retail/AI/Auth/PostgreSQL.
 
 Reserved `0033_recipe_template_catalogue` remains unconsumed.
 
 ## Stop boundary
 
-PR89 is ready for final review. Do not merge autonomously.
+Deliver this docs-only Contract Gate for review.
 
-After PR89 merge: stop. Step 8 requires separate explicit authorization.
+After gate merge: stop. Step 8 runtime/data publication requires separate
+explicit authorization.

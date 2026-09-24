@@ -1,5 +1,61 @@
 # Handoff
 
+## Step 8 recipe-dependency food batch Contract Gate — 2026-09-24
+
+Accepted main:
+`8ae941a1f5c4f07177b2e80272e582f8690dd747` (merged PR89 / accepted Step 7 runtime).
+
+Current branch:
+`docs/step8-recipe-dependency-food-batch-contract`.
+
+Canonical gate:
+`docs/family-food/recipe-dependency-food-batch-contract.md`.
+
+Bounded target:
+
+```text
+School2022 53-19з — Масло сливочное (порциями)
+→ BUTTER_PEASANT_72_5_UNSALTED
+→ licensed FIC RU-NUT-DB code 1417 / DB/533
+→ non-current V2 profile
+→ sparse 17-value sealed vector
+→ ATOMIC v1 / INPUT
+```
+
+Critical evidence:
+
+- School2022 PDF SHA-256
+  `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`;
+- §1.4 freezes butter at 72.5% fat for recipe norms;
+- procurement-quality page 261 requires unsalted butter and identifies the
+  peasant class at at least 72.5%;
+- recipe 53-19з has gross=net=10 g and no thermal treatment;
+- FIC DB/533 source code 1417:
+  `Масло сливочное крестьянское, 72,5%`;
+- exact FIC raw record hash:
+  `b21345dd5ffa8b1348931808067b116940a252abec6c26b01870c192829a711d`;
+- retained FIC archive independently reverified at the accepted
+  206692075-byte / `c0d90020...` identity;
+- DB/533 `water=null`: do not coerce or infer; expected vector has 17 values.
+
+Preservation:
+
+- generic `BUTTER_UNSALTED` and USDA FDC 173430 history unchanged;
+- no current-profile selector switch;
+- no transformation/yield/retention/applicability rows;
+- no migration; 0033 stays reserved, head stays 0038;
+- no Step 9/10.
+
+The one-food size is intentional: it closes one exact Step 9 vertical dependency
+without widening catalogue scope.
+
+Boiled egg 54-6о was rejected as the immediate vertical slice because boiling
+would require unsupported production transformation nutrition and the retained
+FIC cooked-egg candidate is structurally quarantined.
+
+Current authorization is docs/preflight only. Stop after Contract Gate delivery;
+no runtime/data publication before review/merge.
+
 ## Step 7 runtime review-ready — PR89
 
 Accepted main:
