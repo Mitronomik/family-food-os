@@ -175,6 +175,9 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
     "0037_meal_plan_reference_methodology_pins": frozenset(
         {"meal_plan_member_reference_methodology_pins"}
     ),
+    "0038_transformation_applicability": frozenset(
+        {"food_transformation_applicability"}
+    ),
 }
 
 # The foundational tables promised by migration `0001`. Stable FamilyFoodOS
