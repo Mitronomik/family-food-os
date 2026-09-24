@@ -1,5 +1,40 @@
 # Progress
 
+## Step 7 Contract Gate review-ready — 2026-09-24
+
+Accepted base:
+`6ec1069d867388e5d1f4782ce6cdeed08c017694`.
+
+PR88:
+`docs/step7-transformation-applicability-contract`.
+
+Verified contract head:
+`7068b4d7af9d0b8817e933daeaa89a08f68feb26`.
+
+Status:
+`STEP7_CONTRACT_GATE_REVIEW_READY`.
+
+Delivered docs-only contract freezes:
+
+- exact transformation applicability ownership;
+- V1 historical replay preservation;
+- explicit V2 retention registry seams;
+- no V1→V2 factor relabelling;
+- exact food/season/source scope;
+- no late applicability;
+- expected additive 0038 migration;
+- synthetic-only initial runtime publication boundary;
+- 33 adversarial runtime acceptance cases.
+
+Verification:
+- Docs #335 SUCCESS;
+- DC1 #197 SUCCESS;
+- semantic review #5299903757 READY TO MERGE.
+
+No runtime/schema/data publication occurred.
+Step 8+ remains not started.
+
+
 ## Step 7 Contract Gate started — 2026-09-24
 
 PR87 / Step 6B is merged into main at
