@@ -1,5 +1,37 @@
 # Progress
 
+## Step 7 Contract Gate started — 2026-09-24
+
+PR87 / Step 6B is merged into main at
+`6ec1069d867388e5d1f4782ce6cdeed08c017694`.
+
+The user explicitly authorized Step 7 transformation applicability.
+
+Under the repository Implementation Contract Gate rule, current work is
+documentation/preflight only.
+
+Preflight established:
+
+- legacy Composition retention semantics are V1-pinned;
+- 0035 already carries registry identity in retention rows;
+- old retention snapshot hashes cannot safely absorb a new registry field;
+- no implicit V1→V2 retention reuse is acceptable;
+- exact applicability must include food, source/process scope and explicit season
+  semantics;
+- source corpus loss/retention rows remain non-production evidence.
+
+Canonical gate created:
+`docs/family-food/transformation-applicability-contract.md`.
+
+Expected runtime migration after a separately accepted gate:
+`0038_transformation_applicability`.
+
+Current status:
+`STEP7_CONTRACT_GATE_ACTIVE`.
+
+No runtime/schema/numeric transformation publication is authorized yet.
+
+
 ## Step 6B runtime review-ready — 2026-09-23
 
 PR87 verified runtime/test head:
