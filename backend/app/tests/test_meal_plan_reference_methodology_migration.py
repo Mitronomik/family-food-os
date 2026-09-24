@@ -124,7 +124,10 @@ def test_populated_0036_upgrade_preserves_legacy_plan_without_backfill(tmp_path)
     shutil.copy2(backup, database)
     assert _digest(database) == before_digest
     assert MIGRATION_ID not in current_migrations(config)
-    assert apply_migrations(config) == [MIGRATION_ID]
+    assert apply_migrations(config) == [
+        MIGRATION_ID,
+        "0038_transformation_applicability",
+    ]
 
 
 def test_actual_0037_failure_rolls_back_table_and_marker(tmp_path):
