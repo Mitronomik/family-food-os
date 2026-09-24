@@ -1,5 +1,62 @@
 # Handoff
 
+## Step 7 runtime review-ready — PR89
+
+Accepted main:
+`71e4cfc63908440a54631e68b7507e94311980d2` (merged PR88 / accepted Step 7 Contract Gate).
+
+Branch:
+`feat/step7-transformation-applicability-runtime`.
+
+PR:
+`#89 — Step 7: transformation applicability runtime`.
+
+Verified runtime/test/workflow head:
+`e481b6cda42afa2f33e5239262dae3f3c6780797`.
+
+Delivered contract-preserving runtime:
+
+- one dependent immutable `TransformationApplicability` per exact
+  `FoodTransformation`;
+- additive `0038_transformation_applicability`, no accepted-table rebuild/backfill;
+- registry-aware V2 retention read/write that proves persisted row registry identity;
+- explicit V2 transformed-composition publication;
+- separate applicability-aware V2 calculator;
+- exact food, explicit season and sequential evidence-scope enforcement;
+- DB- and repository-level late-applicability rejection;
+- same-UoW failure rollback;
+- legacy V1 calculator, retention snapshot/digest and legacy publication paths unchanged;
+- zero production numeric Book2002 / School2022 / legacy loss-factor publication.
+
+Verification on `e481b6cda42afa2f33e5239262dae3f3c6780797`:
+
+- Russian nutrition methodologies #113 — SUCCESS;
+- Nutrient Registry V2 #169 focused — 280 passed, including all three Step 7 suites;
+- Partial nutrition profiles #130 — SUCCESS:
+  - focused 228 passed;
+  - full backend shards 1252 / 768 / 582 / 962 passed;
+  - launcher 643 passed, 2 skipped;
+- Nutrient Registry V2 launcher — 643 passed, 2 skipped;
+- AI_ENABLED=false;
+- GitHub PR patch audit: no trailing whitespace/conflict markers, bounded Step 7 scope;
+- direct local git shell check unavailable because the container could not resolve github.com.
+
+Review concerns closed during implementation:
+
+- historical tests expecting 0037 as schema head were advanced without removing 0037 from the prefix;
+- synthetic V2 persistence fixture now satisfies existing partial-profile invariants;
+- rollback is proven by an injected exception after attempted Step 7 publication;
+- registry-aware reader is tested against a physically mixed persisted V1/V2 retention profile;
+- late applicability is rejected both by repository and direct SQLite trigger;
+- focused CI explicitly includes the new Step 7 test suites.
+
+Stop boundary:
+
+- PR89 may be reviewed; no autonomous merge;
+- no Step 8 / Step 9 / Step 10;
+- no production numeric source-loss publication;
+- after PR89 merge, stop and wait for separate Step 8 authorization.
+
 ## Step 7 Contract Gate review-ready — PR88
 
 Accepted main:
