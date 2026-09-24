@@ -22,6 +22,7 @@ from app.domain.food_composition import (
     SeasonScope,
     TransformationApplicability,
     snapshot_digest,
+    snapshot_json,
 )
 from app.domain.food_ingredients import FoodNutritionProfile
 from app.domain.nutrient_vector import V2_REGISTRY_VERSION
@@ -489,16 +490,41 @@ def test_legacy_add_versions_needs_no_applicability_and_blocks_late_binding(data
         uow.compositions.add_versions((historical,))
         uow.commit()
 
+    late = applicability(
+        transformation,
+        legacy_vector.profile.food_ingredient_id,
+    )
     with SqlAlchemyCompositionUnitOfWork(engine) as uow:
         with pytest.raises(CompositionUnavailableError) as error:
-            uow.compositions.add_applicability(
-                applicability(
-                    transformation,
-                    legacy_vector.profile.food_ingredient_id,
-                )
-            )
+            uow.compositions.add_applicability(late)
         assert error.value.issue_code == "TRANSFORMATION_APPLICABILITY_LATE"
         uow.rollback()
+
+    with sqlite3.connect(config.path) as db:
+        db.execute("PRAGMA foreign_keys=ON")
+        with pytest.raises(sqlite3.IntegrityError, match="уже используется историей состава"):
+            db.execute(
+                """
+                INSERT INTO food_transformation_applicability (
+                    transformation_id,
+                    food_ingredient_id,
+                    retention_registry_version,
+                    season_scope,
+                    season_reference,
+                    evidence_scope_id,
+                    provenance_json,
+                    snapshot_sha256
+                ) VALUES (?, ?, NULL, 'ALL_SEASONS', NULL, ?, ?, ?)
+                """,
+                (
+                    late.transformation_id.hex,
+                    late.food_ingredient_id.hex,
+                    late.evidence_scope_id,
+                    snapshot_json(late.provenance),
+                    snapshot_digest(late),
+                ),
+            )
+        db.rollback()
 
 
 def test_applicability_rows_are_immutable(database):
