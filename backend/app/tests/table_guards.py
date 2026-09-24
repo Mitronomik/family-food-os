@@ -78,6 +78,7 @@ CURRENT_ALLOWED_TABLES = {
     "servings",
     "member_reference_methodology_selections",
     "meal_plan_member_reference_methodology_pins",
+    "food_transformation_applicability",
     "sqlite_sequence",
 }
 

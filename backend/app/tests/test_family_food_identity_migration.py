@@ -90,6 +90,7 @@ def test_database_at_0020_is_upgraded_to_family_food_identity(tmp_path):
         "0035_versioned_nutrient_registry",
         "0036_member_reference_methodology_selection",
         "0037_meal_plan_reference_methodology_pins",
+        "0038_transformation_applicability",
     ]
     assert read_identity_settings(database_path)["product.name"][0] == "FamilyFoodOS"
     assert (

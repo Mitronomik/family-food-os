@@ -95,7 +95,9 @@ def _seed_legacy_plan(path):
 
 def test_0037_appends_after_0036_without_consuming_0033():
     expected = expected_migration_ids()
-    assert expected[-2:] == [PREVIOUS_HEAD, MIGRATION_ID]
+    position = expected.index(PREVIOUS_HEAD)
+    assert expected[position : position + 2] == [PREVIOUS_HEAD, MIGRATION_ID]
+    assert expected[-1] == "0038_transformation_applicability"
     assert not any(value.startswith("0033_") for value in expected)
 
 
@@ -107,7 +109,10 @@ def test_populated_0036_upgrade_preserves_legacy_plan_without_backfill(tmp_path)
     shutil.copy2(database, backup)
     before_digest = _digest(backup)
 
-    assert apply_migrations(config) == [MIGRATION_ID]
+    assert apply_migrations(config) == [
+        MIGRATION_ID,
+        "0038_transformation_applicability",
+    ]
     with sqlite3.connect(database) as db:
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
         assert db.execute(f"SELECT count(*) FROM {TABLE}").fetchone() == (0,)
@@ -119,7 +124,10 @@ def test_populated_0036_upgrade_preserves_legacy_plan_without_backfill(tmp_path)
     shutil.copy2(backup, database)
     assert _digest(database) == before_digest
     assert MIGRATION_ID not in current_migrations(config)
-    assert apply_migrations(config) == [MIGRATION_ID]
+    assert apply_migrations(config) == [
+        MIGRATION_ID,
+        "0038_transformation_applicability",
+    ]
 
 
 def test_actual_0037_failure_rolls_back_table_and_marker(tmp_path):

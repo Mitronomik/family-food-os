@@ -1,5 +1,46 @@
 # Progress
 
+## Step 7 runtime review-ready — 2026-09-24
+
+Accepted base:
+`71e4cfc63908440a54631e68b7507e94311980d2` (merged PR88).
+
+PR89:
+`feat/step7-transformation-applicability-runtime`.
+
+Verified runtime/test/workflow head:
+`e481b6cda42afa2f33e5239262dae3f3c6780797`.
+
+Status:
+`STEP7_RUNTIME_REVIEW_READY`.
+
+Delivered:
+
+- immutable TransformationApplicability dependent state;
+- migration `0038_transformation_applicability`;
+- explicit V2 registry-aware retention seams;
+- applicability-aware V2 publication/calculation;
+- exact food/season/evidence-scope enforcement;
+- late-applicability and mixed-registry fail-closed behavior;
+- same-UoW rollback proof;
+- legacy V1 replay/snapshot semantics preserved;
+- no production numeric source-loss publication.
+
+Verification:
+
+- Russian methodologies #113 SUCCESS;
+- Registry V2 #169 focused: 280 passed;
+- Partial #130 SUCCESS:
+  - focused 228 passed;
+  - backend shards 1252 / 768 / 582 / 962 passed;
+  - launcher 643 passed, 2 skipped;
+- Registry V2 launcher: 643 passed, 2 skipped;
+- AI_ENABLED=false;
+- bounded GitHub patch whitespace/conflict/scope audit clean.
+
+Step 8+ remains not started.
+PR89 is not merged; stop for review.
+
 ## Step 7 Contract Gate review-ready — 2026-09-24
 
 Accepted base:

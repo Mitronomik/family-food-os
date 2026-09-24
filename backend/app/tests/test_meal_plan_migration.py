@@ -9,6 +9,7 @@ PARTIAL_PROFILE_MIGRATION_ID = "0034_partial_nutrition_profiles"
 REGISTRY_V2_MIGRATION_ID = "0035_versioned_nutrient_registry"
 REFERENCE_METHODOLOGY_MIGRATION_ID = "0036_member_reference_methodology_selection"
 REFERENCE_PINS_MIGRATION_ID = "0037_meal_plan_reference_methodology_pins"
+STEP7_MIGRATION_ID = "0038_transformation_applicability"
 NEW_TABLES = {
     "member_meal_pattern_selections",
     "member_meal_pattern_opportunities",
@@ -39,14 +40,15 @@ def test_0032_remains_in_current_chain_and_fresh_migration_is_repeat_safe(tmp_pa
 
     applied = apply_migrations(config)
 
-    assert applied[-1] == REFERENCE_PINS_MIGRATION_ID
-    assert expected_migration_ids()[-6:] == [
+    assert applied[-1] == STEP7_MIGRATION_ID
+    assert expected_migration_ids()[-7:] == [
         "0031_meal_pattern_catalogue",
         MIGRATION_ID,
         PARTIAL_PROFILE_MIGRATION_ID,
         REGISTRY_V2_MIGRATION_ID,
         REFERENCE_METHODOLOGY_MIGRATION_ID,
         REFERENCE_PINS_MIGRATION_ID,
+        STEP7_MIGRATION_ID,
     ]
     assert apply_migrations(config) == []
     with sqlite3.connect(config.path) as connection:
@@ -99,6 +101,7 @@ def test_populated_0031_upgrade_preserves_existing_rows(tmp_path):
         REGISTRY_V2_MIGRATION_ID,
         REFERENCE_METHODOLOGY_MIGRATION_ID,
         REFERENCE_PINS_MIGRATION_ID,
+        STEP7_MIGRATION_ID,
     ]
 
     with sqlite3.connect(config.path) as connection:

@@ -79,6 +79,27 @@ transformations = Table(
     _reference("yield_model_id", "food_yield_models.id", nullable=True),
     _reference("retention_profile_id", "food_retention_profiles.id", nullable=True),
 )
+applicability = Table(
+    "food_transformation_applicability",
+    food_catalogue_metadata,
+    _reference(
+        "transformation_id",
+        "food_transformations.id",
+        primary_key=True,
+    ),
+    _reference("food_ingredient_id", "food_ingredients.id"),
+    Column(
+        "retention_registry_version",
+        String,
+        ForeignKey("nutrient_registry_snapshots.version", ondelete="RESTRICT"),
+        nullable=True,
+    ),
+    Column("season_scope", String, nullable=False),
+    Column("season_reference", String, nullable=True),
+    Column("evidence_scope_id", String, nullable=False),
+    Column("provenance_json", String, nullable=False),
+    Column("snapshot_sha256", String, nullable=False),
+)
 versions = Table(
     "food_composition_versions",
     food_catalogue_metadata,

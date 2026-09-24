@@ -17,17 +17,22 @@ from app.domain.food_composition import (
     FoodTransformation,
     NutrientRetentionProfile,
     RetentionValue,
+    TransformationApplicability,
     YieldModel,
     snapshot_digest,
     snapshot_json,
 )
-from app.domain.nutrient_vector import NutrientDefinition
+from app.domain.nutrient_vector import (
+    V2_REGISTRY_VERSION,
+    NutrientDefinition,
+)
 from app.domain.nutrient_vector_backfill_v1 import REGISTRY_VERSION as REGISTRY_V1
 from app.persistence.sqlalchemy_core import food_composition_tables as t
 from app.persistence.sqlalchemy_core.food_ingredient_tables import (
     food_ingredients_table,
 )
 from app.persistence.sqlalchemy_core.nutrient_vector_repository import (
+    SqlAlchemyNutrientRegistryRepository,
     SqlAlchemyNutrientVectorRepository,
 )
 from app.persistence.sqlalchemy_core.nutrient_vector_tables import nutrient_definitions
@@ -158,6 +163,50 @@ class SqlAlchemyFoodCompositionRepository:
         )
         return self._verify(value, row)
 
+    def applicability(self, transformation_id: UUID) -> TransformationApplicability:
+        row = (
+            self._connection.execute(
+                select(t.applicability).where(
+                    t.applicability.c.transformation_id == transformation_id
+                )
+            )
+            .mappings()
+            .one_or_none()
+        )
+        if row is None:
+            raise CompositionUnavailableError("TRANSFORMATION_APPLICABILITY_MISSING")
+        value = TransformationApplicability(
+            transformation_id=row["transformation_id"],
+            food_ingredient_id=row["food_ingredient_id"],
+            retention_registry_version=row["retention_registry_version"],
+            season_scope=row["season_scope"],
+            season_reference=row["season_reference"],
+            evidence_scope_id=row["evidence_scope_id"],
+            provenance=CompositionProvenance(**json.loads(row["provenance_json"])),
+        )
+        return self._verify(value, row)
+
+    def retention_profile_for_registry(
+        self, version_id: UUID, registry_version: str
+    ) -> NutrientRetentionProfile:
+        if registry_version != V2_REGISTRY_VERSION:
+            raise CompositionUnavailableError("RETENTION_REGISTRY_UNSUPPORTED")
+        value = self.retention_profile(version_id)
+        rows = (
+            self._connection.execute(
+                select(t.retention_values.c.registry_version).where(
+                    t.retention_values.c.profile_id == version_id
+                )
+            )
+            .scalars()
+            .all()
+        )
+        if len(rows) != len(value.values) or any(
+            row != registry_version for row in rows
+        ):
+            raise CompositionUnavailableError("RETENTION_REGISTRY_MISMATCH")
+        return value
+
     def nutrient_definition(self, code: str) -> NutrientDefinition:
         row = (
             self._connection.execute(
@@ -214,6 +263,32 @@ class SqlAlchemyFoodCompositionRepository:
             )
         )
 
+    def add_retention_profile_for_registry(
+        self, value: NutrientRetentionProfile, registry_version: str
+    ) -> None:
+        if registry_version != V2_REGISTRY_VERSION:
+            raise CompositionUnavailableError("RETENTION_REGISTRY_UNSUPPORTED")
+        registry = SqlAlchemyNutrientRegistryRepository(self._connection)
+        for factor in value.values:
+            registry.get(registry_version, factor.nutrient_code)
+        profile_row = self._record(value)
+        del profile_row["values"]
+        for factor in value.values:
+            self._connection.execute(
+                insert(t.retention_values).values(
+                    profile_id=value.id,
+                    registry_version=registry_version,
+                    nutrient_code=factor.nutrient_code,
+                    factor=factor.factor,
+                    provenance_json=snapshot_json(factor.provenance),
+                )
+            )
+        self._connection.execute(
+            insert(t.retention_profiles).values(
+                **profile_row, value_count=len(value.values)
+            )
+        )
+
     def add_transformation(self, value: FoodTransformation) -> None:
         for key, resolve in (
             (value.yield_model_id, self.yield_model),
@@ -231,6 +306,131 @@ class SqlAlchemyFoodCompositionRepository:
         self._connection.execute(
             insert(t.transformations).values(**self._record(value))
         )
+
+    def add_applicability(self, value: TransformationApplicability) -> None:
+        transformation = self.transformation(value.transformation_id)
+        if (
+            self._connection.execute(
+                select(food_ingredients_table.c.id).where(
+                    food_ingredients_table.c.id == value.food_ingredient_id
+                )
+            ).first()
+            is None
+        ):
+            raise CompositionUnavailableError("FOOD_INGREDIENT_MISSING")
+        if (
+            self._connection.execute(
+                select(t.steps.c.id).where(
+                    t.steps.c.transformation_id == value.transformation_id
+                )
+            ).first()
+            is not None
+        ):
+            raise CompositionUnavailableError("TRANSFORMATION_APPLICABILITY_LATE")
+        if transformation.retention_profile_id is None:
+            if value.retention_registry_version is not None:
+                raise CompositionUnavailableError("RETENTION_REGISTRY_MISMATCH")
+        else:
+            if value.retention_registry_version != V2_REGISTRY_VERSION:
+                raise CompositionUnavailableError("RETENTION_REGISTRY_MISMATCH")
+            self.retention_profile_for_registry(
+                transformation.retention_profile_id,
+                value.retention_registry_version,
+            )
+        row = asdict(value)
+        row["provenance_json"] = snapshot_json(value.provenance)
+        del row["provenance"]
+        row["snapshot_sha256"] = snapshot_digest(value)
+        self._connection.execute(insert(t.applicability).values(**row))
+
+    def _validate_versions_for_registry(
+        self,
+        versions: tuple[FoodCompositionVersion, ...],
+        registry_version: str,
+    ) -> None:
+        if registry_version != V2_REGISTRY_VERSION:
+            raise CompositionUnavailableError("NUTRIENT_REGISTRY_UNSUPPORTED")
+        pending = {value.id: value for value in versions}
+        if len(pending) != len(versions):
+            raise ValueError("Версия состава повторяется.")
+        overlay = SqlAlchemyFoodCompositionRepository(self._connection)
+        overlay._pending = pending
+        vector_reader = SqlAlchemyNutrientVectorRepository(self._connection)
+        for requested_root in versions:
+            graph = load_dag(requested_root.id, overlay)
+            for composition in graph:
+                if composition.profile_id is not None:
+                    vector = vector_reader.get(composition.profile_id)
+                    if vector.registry_version != registry_version:
+                        raise CompositionUnavailableError(
+                            "NUTRIENT_REGISTRY_MISMATCH"
+                        )
+                state = composition.input_state
+                evidence_scopes: set[str] = set()
+                for step in composition.steps:
+                    transformation = overlay.transformation(step.transformation_id)
+                    if (
+                        transformation.id != step.transformation_id
+                        or transformation.input_state != state
+                    ):
+                        raise CompositionUnavailableError(
+                            "MASS_STATE_DISCONTINUITY"
+                        )
+                    applicability = overlay.applicability(transformation.id)
+                    if (
+                        applicability.food_ingredient_id
+                        != composition.food_ingredient_id
+                    ):
+                        raise CompositionUnavailableError(
+                            "TRANSFORMATION_APPLICABILITY_FOOD_MISMATCH"
+                        )
+                    if applicability.evidence_scope_id in evidence_scopes:
+                        raise CompositionUnavailableError(
+                            "TRANSFORMATION_EVIDENCE_SCOPE_OVERLAP"
+                        )
+                    evidence_scopes.add(applicability.evidence_scope_id)
+                    if transformation.yield_model_id is not None:
+                        model = overlay.yield_model(transformation.yield_model_id)
+                        if (model.input_state, model.output_state) != (
+                            transformation.input_state,
+                            transformation.output_state,
+                        ):
+                            raise CompositionUnavailableError(
+                                "TRANSFORMATION_EVIDENCE_MISMATCH"
+                            )
+                    if transformation.retention_profile_id is None:
+                        if applicability.retention_registry_version is not None:
+                            raise CompositionUnavailableError(
+                                "RETENTION_REGISTRY_MISMATCH"
+                            )
+                    else:
+                        if (
+                            applicability.retention_registry_version
+                            != registry_version
+                        ):
+                            raise CompositionUnavailableError(
+                                "RETENTION_REGISTRY_MISMATCH"
+                            )
+                        profile = overlay.retention_profile_for_registry(
+                            transformation.retention_profile_id,
+                            registry_version,
+                        )
+                        if (profile.input_state, profile.output_state) != (
+                            transformation.input_state,
+                            transformation.output_state,
+                        ):
+                            raise CompositionUnavailableError(
+                                "TRANSFORMATION_EVIDENCE_MISMATCH"
+                            )
+                    state = transformation.output_state
+
+    def add_versions_for_registry(
+        self,
+        versions: tuple[FoodCompositionVersion, ...],
+        registry_version: str,
+    ) -> None:
+        self._validate_versions_for_registry(versions, registry_version)
+        self.add_versions(versions)
 
     def add_versions(self, versions: tuple[FoodCompositionVersion, ...]) -> None:
         """Validate the entire pending graph before publishing any snapshot.

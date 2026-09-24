@@ -12,6 +12,7 @@ from uuid import UUID
 from app.domain.nutrient_vector import NutrientDefinition, NutrientValue
 
 CALCULATION_VERSION = "FOOD_COMPOSITION_V1"
+APPLICABILITY_CALCULATION_VERSION = "FOOD_COMPOSITION_APPLICABILITY_V2"
 
 
 def calculation_context() -> Context:
@@ -84,6 +85,11 @@ class CompositionStatus(StrEnum):
     COMPLETE = "COMPLETE"
     PARTIAL = "PARTIAL"
     INCOMPLETE = "INCOMPLETE"
+
+
+class SeasonScope(StrEnum):
+    ALL_SEASONS = "ALL_SEASONS"
+    EXACT_SOURCE_PERIOD = "EXACT_SOURCE_PERIOD"
 
 
 @dataclass(frozen=True)
@@ -166,6 +172,42 @@ class FoodTransformation:
         for value in (self.yield_model_id, self.retention_profile_id):
             if value is not None:
                 identifier(value)
+
+
+@dataclass(frozen=True)
+class TransformationApplicability:
+    transformation_id: UUID
+    food_ingredient_id: UUID
+    retention_registry_version: str | None
+    season_scope: SeasonScope
+    season_reference: str | None
+    evidence_scope_id: str
+    provenance: CompositionProvenance
+
+    def __post_init__(self) -> None:
+        identifier(self.transformation_id)
+        identifier(self.food_ingredient_id)
+        if self.retention_registry_version is not None and (
+            not isinstance(self.retention_registry_version, str)
+            or not self.retention_registry_version.strip()
+        ):
+            raise ValueError("Версия реестра удержания должна быть непустой.")
+        object.__setattr__(self, "season_scope", SeasonScope(self.season_scope))
+        if self.season_scope == SeasonScope.ALL_SEASONS:
+            if self.season_reference is not None:
+                raise ValueError("ALL_SEASONS не допускает ссылку на период.")
+        elif (
+            not isinstance(self.season_reference, str)
+            or not self.season_reference.strip()
+        ):
+            raise ValueError("Для точного периода нужна проверенная ссылка.")
+        if (
+            not isinstance(self.evidence_scope_id, str)
+            or not self.evidence_scope_id.strip()
+        ):
+            raise ValueError("Нужна стабильная область доказательства процесса.")
+        if not isinstance(self.provenance, CompositionProvenance):
+            raise TypeError("Требуется проверяемое происхождение применимости.")
 
 
 def versioned(value: Any) -> None:
