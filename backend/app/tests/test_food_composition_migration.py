@@ -144,6 +144,7 @@ def test_mid_migration_schema_data_marker_rollback_and_deterministic_resume(
         REGISTRY_V2_MIGRATION_ID,
         REFERENCE_METHODOLOGY_MIGRATION_ID,
         MEAL_PLAN_REFERENCE_PINS_MIGRATION_ID,
+        TRANSFORMATION_APPLICABILITY_MIGRATION_ID,
     ]
     assert migrations.apply_migrations(config) == [
         MIGRATION.MIGRATION_ID,
@@ -154,6 +155,7 @@ def test_mid_migration_schema_data_marker_rollback_and_deterministic_resume(
         REGISTRY_V2_MIGRATION_ID,
         REFERENCE_METHODOLOGY_MIGRATION_ID,
         MEAL_PLAN_REFERENCE_PINS_MIGRATION_ID,
+        TRANSFORMATION_APPLICABILITY_MIGRATION_ID,
     ]
     after = assert_existing_history_preserved(before, config)
     schema_after = schema(config)
