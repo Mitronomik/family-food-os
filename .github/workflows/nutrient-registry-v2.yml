@@ -12,8 +12,11 @@ on:
       - 'backend/app/persistence/sqlalchemy_core/nutrient_vector_tables.py'
       - 'backend/app/persistence/sqlalchemy_core/nutrient_vector_repository.py'
       - 'backend/app/persistence/sqlalchemy_core/nutrition_read_scope.py'
+      - 'backend/app/domain/food_composition.py'
+      - 'backend/app/migrations/versions/0038_transformation_applicability.py'
       - 'backend/app/persistence/sqlalchemy_core/food_composition_repository.py'
       - 'backend/app/persistence/sqlalchemy_core/food_composition_scope.py'
+      - 'backend/app/services/food_composition.py'
       - 'backend/app/services/nutrient_vector_contracts.py'
       - 'backend/app/services/food_composition_contracts.py'
       - 'backend/app/services/nutrition_methodology.py'
@@ -21,6 +24,9 @@ on:
       - 'backend/app/services/nutrition_publication_contracts.py'
       - 'backend/app/persistence/sqlalchemy_core/nutrition_publication.py'
       - 'backend/app/tests/test_transactional_nutrition_publication.py'
+      - 'backend/app/tests/test_transformation_applicability.py'
+      - 'backend/app/tests/test_transformation_applicability_repository.py'
+      - 'backend/app/tests/test_transformation_applicability_migration.py'
       - 'data/curation/nutrient-registry-v2/**'
       - 'data/curation/russian-methodology/reference-compatibility.json'
       - 'backend/app/persistence/sqlalchemy_core/ru_food_data.py'
@@ -46,8 +52,11 @@ on:
       - 'backend/app/persistence/sqlalchemy_core/nutrient_vector_tables.py'
       - 'backend/app/persistence/sqlalchemy_core/nutrient_vector_repository.py'
       - 'backend/app/persistence/sqlalchemy_core/nutrition_read_scope.py'
+      - 'backend/app/domain/food_composition.py'
+      - 'backend/app/migrations/versions/0038_transformation_applicability.py'
       - 'backend/app/persistence/sqlalchemy_core/food_composition_repository.py'
       - 'backend/app/persistence/sqlalchemy_core/food_composition_scope.py'
+      - 'backend/app/services/food_composition.py'
       - 'backend/app/services/nutrient_vector_contracts.py'
       - 'backend/app/services/food_composition_contracts.py'
       - 'backend/app/services/nutrition_methodology.py'
@@ -62,6 +71,9 @@ on:
       - 'backend/app/tests/test_migration_lineage.py'
       - 'backend/app/tests/test_migration_runner_rebuild.py'
       - 'backend/app/tests/test_partial_nutrition_profile_migration.py'
+      - 'backend/app/tests/test_transformation_applicability.py'
+      - 'backend/app/tests/test_transformation_applicability_repository.py'
+      - 'backend/app/tests/test_transformation_applicability_migration.py'
       - 'data/curation/nutrient-registry-v2/**'
       - 'data/curation/russian-methodology/reference-compatibility.json'
       - 'docs/family-food/**'
@@ -100,6 +112,9 @@ jobs:
           backend/app/tests/test_reference_comparison.py
           backend/app/tests/test_food_composition.py
           backend/app/tests/test_partial_nutrition_profile_migration.py
+          backend/app/tests/test_transformation_applicability.py
+          backend/app/tests/test_transformation_applicability_repository.py
+          backend/app/tests/test_transformation_applicability_migration.py
           backend/app/tests/test_migration_lineage.py
           backend/app/tests/test_migration_runner_rebuild.py
           backend/app/tests/persistence/test_migration_coexistence.py
