@@ -145,6 +145,7 @@ def test_populated_0035_upgrade_preserves_existing_state_and_restore_reupgrades(
     assert apply_migrations(config) == [
         MIGRATION_ID,
         "0037_meal_plan_reference_methodology_pins",
+        "0038_transformation_applicability",
     ]
     assert existing_rows(database) == before
 
