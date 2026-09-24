@@ -92,7 +92,7 @@ def test_registry_matches_all_approved_definitions(database, bundle):
             (REGISTRY_VERSION,),
         ).fetchone()[0]
         assert json.loads(stored) == bundle
-    assert migrations.expected_migration_ids()[-9:] == [
+    assert migrations.expected_migration_ids()[-10:] == [
         MIGRATION.MIGRATION_ID,
         "0029_food_composition_core",
         "0030_recipe_source_corpus",
@@ -102,6 +102,7 @@ def test_registry_matches_all_approved_definitions(database, bundle):
         "0035_versioned_nutrient_registry",
         "0036_member_reference_methodology_selection",
         "0037_meal_plan_reference_methodology_pins",
+        "0038_transformation_applicability",
     ]
 
 
