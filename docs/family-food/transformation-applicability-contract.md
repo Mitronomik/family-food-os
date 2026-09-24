@@ -293,20 +293,35 @@ Step 7 does not change the historical
 The new applicability snapshot/digest is the replay receipt that binds an exact
 transformation version to an exact retention registry.
 
-## 14. DECISION — V2 retention publication is explicit
+## 14. DECISION — V2 retention publication and reading are explicit
 
-Preserve existing writer behavior:
+Preserve existing behavior:
 
-`add_retention_profile(profile)` remains historical V1 behavior.
+- `add_retention_profile(profile)` remains historical V1 write behavior;
+- `retention_profile(profile_id)` remains the historical snapshot reader and
+  does not change its domain/digest shape.
 
-Step 7 adds an explicit registry-aware publication seam, conceptually:
+Step 7 adds explicit registry-aware seams, conceptually:
 
 ```text
 add_retention_profile_for_registry(
   profile,
   registry_version
 )
+
+retention_profile_for_registry(
+  profile_id,
+  registry_version
+)
 ```
+
+The registry-aware reader returns the existing historical domain snapshot only
+after proving that **every persisted retention row** for that profile has the
+requested exact registry version. A missing, mixed or mismatched registry fails
+closed.
+
+This preserves old snapshot hashes while allowing the V2 calculator to validate
+the SQL-level registry binding rather than trusting the applicability row alone.
 
 Initial non-legacy use accepts only:
 
@@ -357,9 +372,24 @@ It must continue to:
 
 Step 7 does not silently upgrade existing callers.
 
-## 17. DECISION — add an explicit applicability-aware V2 calculation path
+## 17. DECISION — add explicit applicability-aware V2 publication and calculation paths
 
-Step 7 runtime introduces a separate explicit calculation path, conceptually:
+Existing `add_versions(...)` remains compatible with historical V1 Composition
+publication and does **not** gain a universal applicability requirement.
+
+Step 7 adds an explicit V2 transformed-composition publication seam. Before a
+transformed V2 `FoodCompositionVersion` can be inserted, that path verifies for
+every composition step that:
+
+- an applicability row already exists for the exact transformation;
+- `applicability.food_ingredient_id == composition.food_ingredient_id`;
+- retention registry binding is valid when retention exists;
+- season/source applicability data are internally valid.
+
+ATOMIC compositions and legacy V1 composition publication do not require a Step 7
+applicability row.
+
+Step 7 runtime also introduces a separate explicit calculation path, conceptually:
 
 `ApplicabilityAwareCompositionCalculator`.
 
@@ -387,12 +417,15 @@ For one V2 calculation:
 3. each requested definition is resolved from the requested registry;
 4. exact `NutrientDefinition.semantic_identity` must match;
 5. each transformation step requires accepted exact applicability;
-6. if retention is present, applicability retention registry must equal the
-   requested vector registry;
-7. missing requested retention factor makes that nutrient unknown;
-8. no implicit retention of 100% exists;
-9. missing yield keeps output mass unknown;
-10. unknown remains unknown and never becomes numeric zero.
+6. applicability food identity must equal the exact
+   `FoodCompositionVersion.food_ingredient_id` whose step is being evaluated;
+7. if retention is present, applicability retention registry must equal the
+   requested vector registry and the registry-aware retention reader must prove
+   every factor row uses that same registry;
+8. missing requested retention factor makes that nutrient unknown;
+9. no implicit retention of 100% exists;
+10. missing yield keeps output mass unknown;
+11. unknown remains unknown and never becomes numeric zero.
 
 ## 19. DECISION — source-published dish analysis remains separate
 
@@ -456,6 +489,9 @@ No existing Composition/NutrientVector/MealPlan table rebuild is expected.
 - retention registry null iff the transformation has no retention profile;
 - when retention exists, all retention rows use the exact bound registry;
 - future/new retention profiles cannot mix registry versions;
+- explicit V2 transformed-composition publication rejects missing applicability
+  or a food-identity mismatch before composition publication;
+- legacy `add_versions(...)` remains valid for historical V1 behavior;
 - exact FKs remain clean.
 
 If implementation proves one of these cannot be enforced safely without
@@ -492,7 +528,8 @@ The initial Step 7 runtime PR may implement:
 
 - applicability domain/read/write contract;
 - migration 0038;
-- explicit V2 retention publication seam;
+- explicit registry-aware V2 retention read/write seams;
+- explicit applicability-aware V2 composition publication seam;
 - explicit applicability-aware V2 calculator;
 - synthetic/repository-owned fixtures;
 - migration and replay verification.
@@ -524,20 +561,24 @@ Runtime Step 7 must prove at least:
 16. distinct sibling chains do not become false overlap merely because the same
     reviewed source is used;
 17. mixed-registry values in one new retention profile are rejected;
-18. late applicability after composition-step publication is rejected;
-19. applicability + transformation + composition can publish atomically in one
+18. registry-aware retention read fails on mixed/mismatched persisted rows;
+19. legacy V1 `add_versions(...)` remains usable without applicability;
+20. explicit V2 transformed publication rejects missing applicability;
+21. explicit V2 transformed publication rejects applicability for another food;
+22. late applicability after composition-step publication is rejected;
+23. applicability + transformation + composition can publish atomically in one
     UoW;
-20. failure after applicability insert before composition commit rolls back all
+24. failure after applicability insert before composition commit rolls back all
     attempted Step 7 state;
-21. applicability is immutable;
-22. fresh / populated 0037→0038 migration works;
-23. injected 0038 failure leaves no marker / no partial table or trigger state;
-24. backup restore / re-upgrade works;
-25. FK check is clean;
-26. Step 3/4 V2 ATOMIC publication regression stays green;
-27. Step 6 persistence/MealPlan regressions stay green;
-28. Planner output/default behavior remains unchanged;
-29. AI is not involved.
+25. applicability is immutable;
+26. fresh / populated 0037→0038 migration works;
+27. injected 0038 failure leaves no marker / no partial table or trigger state;
+28. backup restore / re-upgrade works;
+29. FK check is clean;
+30. Step 3/4 V2 ATOMIC publication regression stays green;
+31. Step 6 persistence/MealPlan regressions stay green;
+32. Planner output/default behavior remains unchanged;
+33. AI is not involved.
 
 ## 25. Verification tier
 
