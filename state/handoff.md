@@ -1,5 +1,41 @@
 # Handoff
 
+## Step 7 Contract Gate review-ready — PR88
+
+Accepted main:
+`6ec1069d867388e5d1f4782ce6cdeed08c017694` (merged PR87).
+
+Branch:
+`docs/step7-transformation-applicability-contract`.
+
+Verified semantic contract head:
+`7068b4d7af9d0b8817e933daeaa89a08f68feb26`.
+
+Canonical contract:
+`docs/family-food/transformation-applicability-contract.md`.
+
+Key frozen boundaries:
+
+- existing CompositionCalculator / retention writer/reader remain V1-compatible;
+- old retention snapshot digests are not rewritten;
+- V2 retention requires explicit registry-aware publication/read validation;
+- no same-code automatic V1→V2 carry-forward;
+- TransformationApplicability is a one-to-one dependent record of an immutable
+  FoodTransformation;
+- exact food / season / source evidence scope are explicit;
+- late applicability after composition publication is forbidden;
+- explicit V2 transformed publication validates applicability before insertion;
+- expected migration is 0038_transformation_applicability;
+- initial runtime publishes zero production numeric source-loss factors.
+
+Contract verification:
+Docs #335 SUCCESS; DC1 #197 SUCCESS.
+Final semantic review #5299903757: READY TO MERGE CONTRACT GATE.
+
+After PR88 merge, stop. Step 7 runtime/0038 requires separate authorization.
+Do not start Step 8/9/10 automatically.
+
+
 ## Step 7 transformation applicability Contract Gate — 2026-09-24
 
 Accepted main:
