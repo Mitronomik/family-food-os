@@ -233,7 +233,10 @@ def test_registry_aware_reader_detects_persisted_registry_mismatch(database):
         MassState.INPUT,
         MassState.COOKED,
         P,
-        (RetentionValue("PROTEIN", D("0.8"), P),),
+        (
+            RetentionValue("PROTEIN", D("0.8"), P),
+            RetentionValue("FAT_TOTAL", D("0.9"), P),
+        ),
     )
     transformation = FoodTransformation(
         uuid4(),
@@ -265,7 +268,7 @@ def test_registry_aware_reader_detects_persisted_registry_mismatch(database):
             """
             UPDATE food_retention_values
             SET registry_version = ?
-            WHERE profile_id = ?
+            WHERE profile_id = ? AND nutrient_code = 'PROTEIN'
             """,
             (REGISTRY_V1, profile.id.hex),
         )
