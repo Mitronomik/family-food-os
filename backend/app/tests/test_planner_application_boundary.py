@@ -174,6 +174,17 @@ def test_infeasible_authoritative_generation_never_writes() -> None:
     assert meals.writes == []
 
 
+def test_authoritative_generation_does_not_enable_reference_pins_by_default() -> None:
+    planner, command, meals, *_ = service()
+
+    result, detail = planner.generate_authoritative(command)
+
+    assert result.trace.failure_code is None
+    assert detail is not None
+    assert len(meals.writes) == 1
+    assert "reference_methodology_selection_ids" not in meals.writes[0]
+
+
 class Catalogue:
     def __init__(self, programs):
         self.programs = programs

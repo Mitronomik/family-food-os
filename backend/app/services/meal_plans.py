@@ -13,6 +13,7 @@ from app.domain.meal_plans import (
     HouseholdMealEvent,
     MealPlan,
     MealPlanDetail,
+    MealPlanMemberReferenceMethodologyPin,
     MealPlanMemberSelection,
     MealPlanNutrition,
     MealPlanStatus,
@@ -28,7 +29,18 @@ from app.domain.meal_plans import (
 from app.domain.nutrition import RecipeVersionNutrition
 from app.services.household_contracts import HouseholdReadScope
 from app.services.meal_pattern_contracts import MealPatternCatalogueReadScope
-from app.services.meal_plan_contracts import MealPlanReadScope, MealPlanUnitOfWork
+from app.services.meal_plan_contracts import (
+    MealPlanPersistenceConflictError,
+    MealPlanReadScope,
+    MealPlanUnitOfWork,
+)
+from app.services.reference_methodology import (
+    BASELINE_NUTRITION_CONFIG_VERSION,
+    RUSSIAN_GROUP_REFERENCE_VERSION,
+    ReferenceMethodologyUnsupportedError,
+    TableProvider,
+    validate_russian_group_reference_applicability,
+)
 
 WriteScopeFactory = Callable[[], MealPlanUnitOfWork]
 ReadScopeFactory = Callable[[], MealPlanReadScope]
@@ -71,6 +83,7 @@ class MealPlanService:
         household_read_scope_factory: HouseholdReadScopeFactory,
         pattern_read_scope_factory: PatternReadScopeFactory,
         *,
+        russian_reference_tables: TableProvider | None = None,
         id_factory: IdFactory = uuid4,
         clock: Clock | None = None,
     ) -> None:
@@ -78,6 +91,7 @@ class MealPlanService:
         self._read_scope_factory = read_scope_factory
         self._household_read_scope_factory = household_read_scope_factory
         self._pattern_read_scope_factory = pattern_read_scope_factory
+        self._russian_reference_tables = russian_reference_tables
         self._id_factory = id_factory
         self._clock = clock or (lambda: datetime.now(timezone.utc))
 
@@ -202,6 +216,7 @@ class MealPlanService:
         week_start: date,
         member_selection_ids: Mapping[UUID, UUID],
         events: Sequence[MealEventDraft],
+        reference_methodology_selection_ids: Mapping[UUID, UUID] | None = None,
         status: MealPlanStatus = MealPlanStatus.CONFIRMED,
         config_version: str = "manual-v1",
     ) -> MealPlanDetail:
@@ -214,7 +229,21 @@ class MealPlanService:
         if not set(member_selection_ids).issubset(members):
             raise MealPlanValidationError("MealPlan members must belong to the Household.")
 
+        reference_methodology_selection_ids = dict(
+            reference_methodology_selection_ids or {}
+        )
+        if (
+            reference_methodology_selection_ids
+            and set(reference_methodology_selection_ids)
+            != set(member_selection_ids)
+        ):
+            raise MealPlanValidationError(
+                "Reference-methodology pins must cover all plan members or none."
+            )
+
+        now = self._clock()
         selection_details: dict[UUID, MemberMealPatternSelectionDetail] = {}
+        reference_selections = {}
         with self._read_scope_factory() as scope:
             current = scope.plans.get_current(household_id, week_start)
             for member_id, selection_id in member_selection_ids.items():
@@ -224,9 +253,49 @@ class MealPlanService:
                         "MealPlan must pin a valid selection for each Household member."
                     )
                 selection_details[selection_id] = detail
+            for member_id, selection_id in (
+                reference_methodology_selection_ids.items()
+            ):
+                reference_selection = scope.reference_methodologies.get(
+                    household_id, selection_id
+                )
+                if (
+                    reference_selection is None
+                    or reference_selection.member_id != member_id
+                    or reference_selection.accepted_at > now
+                    or reference_selection.nutrition_config_version
+                    != BASELINE_NUTRITION_CONFIG_VERSION
+                    or reference_selection.group_reference_methodology_version
+                    not in (None, RUSSIAN_GROUP_REFERENCE_VERSION)
+                ):
+                    raise MealPlanValidationError(
+                        "MealPlan must pin an accepted supported reference "
+                        "methodology for each member."
+                    )
+                if (
+                    reference_selection.group_reference_methodology_version
+                    is not None
+                ):
+                    try:
+                        validate_russian_group_reference_applicability(
+                            members[member_id],
+                            reference_date=week_start,
+                            methodology_version=(
+                                reference_selection
+                                .group_reference_methodology_version
+                            ),
+                            russian_reference_tables=(
+                                self._russian_reference_tables
+                            ),
+                        )
+                    except ReferenceMethodologyUnsupportedError as exc:
+                        raise MealPlanValidationError(
+                            "Pinned Russian reference methodology is not "
+                            "applicable at MealPlan.week_start."
+                        ) from exc
+                reference_selections[member_id] = reference_selection
 
         plan_id = self._id_factory()
-        now = self._clock()
         plan = MealPlan(
             id=plan_id,
             household_id=household_id,
@@ -269,11 +338,44 @@ class MealPlanService:
                         created_at=now,
                     )
                 )
-        detail = MealPlanDetail(plan, pins, tuple(domain_events), tuple(servings))
+        reference_pins = tuple(
+            MealPlanMemberReferenceMethodologyPin(
+                plan_id=plan_id,
+                member_id=member_id,
+                reference_methodology_selection_id=selection.id,
+                birth_date=members[member_id].birth_date,
+                sex=members[member_id].sex,
+                height_cm=members[member_id].height_cm,
+                weight_kg=members[member_id].weight_kg,
+                activity_level=members[member_id].activity_level,
+                goal=members[member_id].goal,
+                member_updated_at=members[member_id].updated_at,
+            )
+            for member_id, selection in sorted(
+                reference_selections.items(),
+                key=lambda item: item[0].hex,
+            )
+        )
+        detail = MealPlanDetail(
+            plan,
+            pins,
+            tuple(domain_events),
+            tuple(servings),
+            reference_pins,
+        )
         validate_complete_plan(detail, selection_details)
-        with self._write_scope_factory() as scope:
-            scope.plans.add_detail(detail)
-            scope.commit()
+        try:
+            with self._write_scope_factory() as scope:
+                for pin in reference_pins:
+                    scope.guard_member_state(
+                        household_id=household_id,
+                        member_id=pin.member_id,
+                        member_updated_at=pin.member_updated_at,
+                    )
+                scope.plans.add_detail(detail)
+                scope.commit()
+        except MealPlanPersistenceConflictError as exc:
+            raise MealPlanValidationError(str(exc)) from exc
         return detail
 
     def get_plan(self, household_id: UUID, plan_id: UUID) -> MealPlanDetail:

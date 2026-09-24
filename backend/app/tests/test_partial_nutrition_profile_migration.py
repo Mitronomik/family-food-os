@@ -90,11 +90,12 @@ def column_notnull(path, column):
 def test_0033_remains_reserved_while_partial_profiles_use_0034():
     expected = expected_migration_ids()
 
-    assert expected[-4:] == [
+    assert expected[-5:] == [
         PREVIOUS_HEAD,
         MIGRATION_ID,
         "0035_versioned_nutrient_registry",
         "0036_member_reference_methodology_selection",
+        "0037_meal_plan_reference_methodology_pins",
     ]
     assert not any(value.startswith("0033_") for value in expected)
 
@@ -120,6 +121,7 @@ def test_populated_0032_database_upgrades_without_rewriting_profiles_or_vectors(
         MIGRATION_ID,
         "0035_versioned_nutrient_registry",
         "0036_member_reference_methodology_selection",
+        "0037_meal_plan_reference_methodology_pins",
     ]
 
     assert profile_rows(database) == before_profiles
@@ -148,10 +150,11 @@ def test_populated_0032_database_upgrades_without_rewriting_profiles_or_vectors(
               AND name = 'food_composition_versions_complete'
             """
         ).fetchone()[0]
-    assert history[-3:] == [
+    assert history[-4:] == [
         MIGRATION_ID,
         "0035_versioned_nutrient_registry",
         "0036_member_reference_methodology_selection",
+        "0037_meal_plan_reference_methodology_pins",
     ]
     assert "food_nutrition_profiles" in trigger_sql
     assert "food_composition_versions" in trigger_sql
@@ -169,6 +172,7 @@ def test_populated_0032_database_upgrades_without_rewriting_profiles_or_vectors(
         MIGRATION_ID,
         "0035_versioned_nutrient_registry",
         "0036_member_reference_methodology_selection",
+        "0037_meal_plan_reference_methodology_pins",
     ]
     assert profile_rows(database) == before_profiles
     assert vector_rows(database) == (before_seals, before_values)
