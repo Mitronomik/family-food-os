@@ -192,6 +192,7 @@ def test_registry_aware_retention_writer_reader_and_snapshot_shape(database):
         food_id,
         registry_version=V2_REGISTRY_VERSION,
     )
+    transformed = replace_version_with_step(config, base, transformation)
 
     with SqlAlchemyCompositionUnitOfWork(engine) as uow:
         uow.compositions.add_retention_profile_for_registry(
@@ -394,6 +395,7 @@ def test_applicability_transformation_and_v2_composition_publish_atomically(data
 def test_uncommitted_step7_state_rolls_back_as_one_unit(database):
     config, engine = database
     food_id, _ = food_ids(config)
+    base = publish_v2_atomic(config, engine, food_id)
     profile = NutrientRetentionProfile(
         uuid4(),
         1,
@@ -424,6 +426,10 @@ def test_uncommitted_step7_state_rolls_back_as_one_unit(database):
         )
         uow.compositions.add_transformation(transformation)
         uow.compositions.add_applicability(app)
+        uow.compositions.add_versions_for_registry(
+            (transformed,),
+            V2_REGISTRY_VERSION,
+        )
         # No commit: the UoW must revoke all attempted Step 7 state.
 
     with sqlite3.connect(config.path) as db:
@@ -441,6 +447,10 @@ def test_uncommitted_step7_state_rolls_back_as_one_unit(database):
             WHERE transformation_id = ?
             """,
             (transformation.id.hex,),
+        ).fetchone() == (0,)
+        assert db.execute(
+            "SELECT count(*) FROM food_composition_versions WHERE id = ?",
+            (transformed.id.hex,),
         ).fetchone() == (0,)
 
 
