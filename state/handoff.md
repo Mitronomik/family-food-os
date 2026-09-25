@@ -1,5 +1,31 @@
 # Handoff
 
+## PR90 Step 8 Contract Gate blocker correction — 2026-09-25
+
+Accepted main:
+`8ae941a1f5c4f07177b2e80272e582f8690dd747`.
+
+Independent re-review #5312850815 found one blocker:
+the contract had not explicitly bound School2022's unsalted requirement to the
+salinity-unspecified FIC DB/533 display identity.
+
+Correction:
+
+- exact FIC DB/533 field `salt_ad = 0.0`;
+- frozen source label `Добавленная соль`;
+- existing Step 4 disposition `SOURCE_ONLY_NO_V2_TARGET` preserved;
+- accepted only as Step 8 form-compatibility evidence for **no added salt**;
+- not a V2 nutrient and not a zero-sodium claim;
+- no inference from sodium;
+- changed/non-zero/null/missing `salt_ad` fails closed.
+
+All other Step 8 decisions remain unchanged: one butter food, 17-value V2 vector,
+WATER unknown, non-current profile, ATOMIC v1 / INPUT, no transformation and no
+migration.
+
+Current task: exact-head Docs/DC1 re-verification and corrected final review.
+No runtime/data publication or merge.
+
 ## Step 8 Contract Gate review-ready — PR90
 
 Accepted main:

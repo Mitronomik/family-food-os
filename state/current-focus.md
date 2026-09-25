@@ -1,6 +1,6 @@
 # Current focus
 
-Updated: `2026-09-24`.
+Updated: `2026-09-25`.
 
 ## Accepted state
 
@@ -11,55 +11,56 @@ Russian-data integration Steps 1–7 are accepted.
 
 ## Current bounded state
 
-**Step 8 recipe-dependency food batch Contract Gate is review-ready in PR90.**
+**PR90 / Step 8 Contract Gate blocker correction is under exact-head review.**
 
-Verified semantic head:
-`49c291ab5e46a88e34a6f3ae897c32f4cccc6378`.
+Branch:
+`docs/step8-recipe-dependency-food-batch-contract`.
 
 Canonical gate:
 `docs/family-food/recipe-dependency-food-batch-contract.md`.
 
-## Frozen Step 8 decisions
+## Corrected form-authority decision
 
-- future Step 9 target: School2022 `53-19з — Масло сливочное (порциями)`;
-- exactly one recipe-driven Step 8 food dependency;
-- create `BUTTER_PEASANT_72_5_UNSALTED`, do not reuse generic
-  `BUTTER_UNSALTED`;
-- School2022 owns form/process evidence; FIC owns production numeric nutrition;
-- FIC source = code 1417 / DB/533;
-- exact raw record SHA-256:
+The previous review correctly found one gap: School2022 requires unsalted butter,
+while FIC DB/533's display name does not itself say `несолёное`.
+
+The gate now freezes the exact source-owned binding:
+
+- FIC DB/533 / code 1417 is the selected 72.5% peasant-butter numeric authority;
+- DB/533 exact source field `salt_ad = 0.0`;
+- frozen source label: `Добавленная соль`;
+- Step 4 disposition remains `SOURCE_ONLY_NO_V2_TARGET`;
+- Step 8 uses that exact literal only as form-compatibility evidence for
+  **no added salt**;
+- `salt_ad` does not enter the V2 vector;
+- sodium is never used to infer salinity;
+- non-zero/null/missing salt evidence fails closed.
+
+The frozen FoodIngredient remains
+`BUTTER_PEASANT_72_5_UNSALTED`, where UNSALTED is explicitly defined for this
+binding as no added salt.
+
+## Preserved Step 8 contract
+
+- future Step 9 target remains School2022 `53-19з`;
+- exactly one Step 8 food dependency;
+- FIC raw record hash remains
   `b21345dd5ffa8b1348931808067b116940a252abec6c26b01870c192829a711d`;
-- FIC `water=null` remains unknown;
-- expected sealed V2 vector = 17 values;
-- source profile non-current, deterministic verified_at;
+- `water=null` remains unknown;
+- expected V2 vector remains exactly 17 values;
+- source profile remains non-current;
 - ATOMIC v1 / INPUT;
-- zero yield/retention/transformation/applicability rows;
-- no schema/migration; migration head remains 0038 and reserved 0033 stays
-  unconsumed.
-
-## Contract verification
-
-On `49c291ab5e46a88e34a6f3ae897c32f4cccc6378`:
-
-- Docs #343 — SUCCESS;
-- DC1 #205 — SUCCESS;
-- semantic review #5303638521 — READY TO MERGE CONTRACT GATE;
-- scope: one canonical Step 8 contract + three state files;
-- patch whitespace/conflict audit clean;
-- mergeable=true;
-- 0 behind main;
-- unresolved review threads=0.
+- no yield/retention/transformation/applicability publication;
+- no migration/schema; head remains 0038 and 0033 remains reserved.
 
 ## Hard boundaries
 
-No Step 8 runtime/data publication before PR90 review/merge.
+No Step 8 runtime/data publication before corrected PR90 is reviewed/merged.
 
 No Step 9 RecipeVersion, Step 10 Planner integration, extra FIC foods,
 production retention/yield factors, API/UI/Retail/AI/Auth/PostgreSQL.
 
 ## Stop boundary
 
-PR90 is ready for final review/merge authorization.
-
-After merge: stop. Step 8 runtime/data publication requires separate explicit
-authorization.
+Reverify corrected semantic head with Docs/DC1, then finalize PR90 for review.
+No merge is performed autonomously.

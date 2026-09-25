@@ -1,5 +1,24 @@
 # Progress
 
+## PR90 blocker correction — 2026-09-25
+
+Re-review #5312850815 identified an unsalted-form authority gap in the Step 8
+Contract Gate.
+
+The canonical contract now closes it with exact FIC DB/533 source evidence:
+
+`salt_ad = 0.0` / source label `Добавленная соль`.
+
+The evidence is source-only form compatibility for no added salt. It does not
+become canonical V2 nutrition, does not imply zero sodium, and cannot be inferred
+from sodium. Non-zero/null/missing salt evidence is an explicit publication
+conflict.
+
+No runtime/schema/production data changed.
+
+Status:
+`STEP8_CONTRACT_GATE_CORRECTED_REVERIFYING`.
+
 ## Step 8 Contract Gate review-ready — 2026-09-24
 
 Accepted base:

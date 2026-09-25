@@ -200,7 +200,14 @@ The identity combines:
 - School2022 exact recipe standard: butter 72.5% fat;
 - School2022 procurement requirement: unsalted;
 - School2022 quality class: peasant-class threshold at 72.5%;
-- FIC exact food-composition record: peasant butter, 72.5%.
+- FIC exact food-composition record: peasant butter, 72.5%;
+- the same FIC DB/533 record's source field `salt_ad = 0.0`, whose frozen
+  source label is `Добавленная соль`.
+
+For this bounded identity, `UNSALTED` means **no added salt in the selected
+source form**, not zero sodium and not analytical absence of sodium or chloride.
+The binding is accepted only because the recipe source requires unsalted butter
+and the exact FIC numeric-authority row independently publishes zero added salt.
 
 Existing `BUTTER_UNSALTED` and its USDA profile/history remain unchanged.
 
@@ -251,6 +258,39 @@ Independent corpus integrity review records this row as structurally clean with
 no structural flags and corroborates all 29 shared fields against a second
 official same-publisher interface.
 
+### 8.1. FACT / DECISION — exact unsalted form binding
+
+The selected FIC DB/533 record contains:
+
+```text
+source field: salt_ad
+frozen source label: Добавленная соль
+source literal: 0.0
+Step 4 semantic disposition: SOURCE_ONLY_NO_V2_TARGET
+```
+
+The frozen Step 4 source-field contract does **not** publish `salt_ad` as a
+canonical V2 nutrient. Step 8 keeps that rule unchanged.
+
+**DECISION:** for this exact food/form mapping only, `salt_ad = 0.0` is accepted
+as source-owned **form-compatibility evidence** that DB/533 represents butter
+with no added salt. Together with School2022's explicit unsalted procurement
+requirement and the exact 72.5% peasant-class match, this closes the
+`UNSALTED ↔ FIC DB/533` binding.
+
+This decision does not mean:
+
+- sodium must be zero;
+- low sodium proves unsalted form;
+- `salt_ad` becomes a canonical nutrient;
+- a zero in another FIC record automatically grants an unsalted identity;
+- missing/null `salt_ad` may be treated as zero;
+- the same form decision may be inherited by another source record without
+  separate review.
+
+Step 8 runtime must pin the exact source literal `0.0` in the reviewed package.
+Changed, non-zero, null or missing `salt_ad` fails closed before publication.
+
 ## 9. DECISION — source authority remains separated by responsibility
 
 Step 8 does not merge School2022 and FIC numeric tables.
@@ -269,6 +309,7 @@ FIC RU-NUT-DB / DB/533
 → production numeric food-composition authority
 → V2 nutrient values
 → source provenance
+→ source-only salt_ad=0.0 form-compatibility evidence
 ```
 
 School2022 published nutrient totals are reference/cross-check evidence only and
@@ -348,6 +389,10 @@ The source observation envelope must retain all 26 reviewed source fields:
 
 The eight source fields already deferred by the Step 4 semantic contract remain
 source-only/deferred and do not become canonical V2 values.
+
+One of those deferred/source-only fields, `salt_ad`, additionally carries the
+reviewed Step 8 form-compatibility role from §8.1. Its numeric source literal is
+retained as evidence but still does not enter the V2 nutrient vector.
 
 Unknown stays unknown.
 
@@ -479,6 +524,8 @@ Conflict:
 - an occupied ATOMIC v1 slot with different snapshot fails closed;
 - changed FIC row/hash/package fails before publication;
 - changed field mapping or attribution fails closed;
+- `salt_ad` changed from exact source literal `0.0`, or made null/missing,
+  fails before publication;
 - partial prior bundle is not silently completed as though it were exact replay.
 
 Failure after any attempted Step 8 write must roll back the whole attempted
@@ -552,25 +599,30 @@ Step 8 runtime/data publication must prove at least:
 16. FIC license receipt, attribution and source link are pinned;
 17. the accepted FIC semantic mapping hash is pinned;
 18. all 26 reviewed FIC source fields are accounted for;
-19. `water = null` remains explicit not-reported evidence;
-20. no WATER nutrient value is invented;
-21. exactly 17 V2 nutrient values are sealed;
-22. the eight already-deferred source concepts remain non-canonical;
-23. published numeric zero remains numeric zero where the source reports zero;
-24. legacy carbohydrates remain null/method-incompatible;
-25. source profile is non-current;
-26. ATOMIC version is exactly v1 / INPUT;
-27. no YieldModel/RetentionProfile/Transformation/Applicability row is created;
-28. fresh publication succeeds atomically;
-29. exact replay performs zero writes and preserves IDs;
-30. identity/profile/vector/composition conflict fails closed;
-31. source/package/mapping tamper fails before writes;
-32. injected publication failure rolls back all attempted Step 8 state;
-33. no production RecipeVersion is created;
-34. no Planner/API/UI default changes occur;
-35. Step 4 FIC publication regression remains green;
-36. V2 vector/partial-profile regression remains green;
-37. AI is not involved.
+19. exact DB/533 `salt_ad` source literal is `0.0`;
+20. `salt_ad` remains source-only / no V2 target;
+21. non-zero `salt_ad` is rejected for the frozen unsalted identity;
+22. null/missing `salt_ad` is rejected rather than treated as zero;
+23. sodium amount is never used to infer unsalted form;
+24. `water = null` remains explicit not-reported evidence;
+25. no WATER nutrient value is invented;
+26. exactly 17 V2 nutrient values are sealed;
+27. the eight already-deferred source concepts remain non-canonical;
+28. published numeric zero remains numeric zero where the source reports zero;
+29. legacy carbohydrates remain null/method-incompatible;
+30. source profile is non-current;
+31. ATOMIC version is exactly v1 / INPUT;
+32. no YieldModel/RetentionProfile/Transformation/Applicability row is created;
+33. fresh publication succeeds atomically;
+34. exact replay performs zero writes and preserves IDs;
+35. identity/profile/vector/composition conflict fails closed;
+36. source/package/mapping/form-evidence tamper fails before writes;
+37. injected publication failure rolls back all attempted Step 8 state;
+38. no production RecipeVersion is created;
+39. no Planner/API/UI default changes occur;
+40. Step 4 FIC publication regression remains green;
+41. V2 vector/partial-profile regression remains green;
+42. AI is not involved.
 
 ## 22. Verification tier
 
@@ -581,6 +633,8 @@ Required review-ready evidence:
 - exact source archive/hash retrieval receipt;
 - exact School2022 target/form/process evidence check;
 - exact FIC DB/533 record/hash check;
+- exact `salt_ad=0.0` form-compatibility evidence check;
+- adversarial non-zero/null/missing salt evidence rejection;
 - FIC rights/attribution check;
 - field-accounting / 17-value vector audit;
 - fresh publication;
