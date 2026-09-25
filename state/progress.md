@@ -1,5 +1,44 @@
 # Progress
 
+## Step 8 runtime/data review-ready — 2026-09-25
+
+Accepted base:
+`76ca8f8ffba589576af4e0fad4d7a4817a84089f`.
+
+PR91:
+`feat/step8-recipe-dependency-butter-runtime`.
+
+Verified runtime/test/workflow head:
+`068847f4a3b886e6b8133558f2d4820a6a01474e`.
+
+Status:
+`STEP8_RUNTIME_REVIEW_READY`.
+
+Delivered:
+- one exact FIC-backed butter FoodIngredient;
+- source-only no-added-salt form binding;
+- explicit WATER unknown;
+- 17-value V2 vector;
+- non-current profile;
+- ATOMIC v1 / INPUT;
+- idempotent fresh/replay semantics;
+- conflict and rollback protection;
+- generic butter/history preserved;
+- no transformation or RecipeVersion;
+- no migration/schema change;
+- CI focused paths explicitly include Step 4 + Step 8 suites.
+
+Verification:
+- Registry #180 SUCCESS: focused 310; shards 1205/798/614/959; launcher 643/2 skipped;
+- Partial #139 SUCCESS: focused 258; shards 1205/798/614/959; launcher 643/2 skipped;
+- Russian #116 SUCCESS;
+- Docs #347 SUCCESS;
+- DC1 #209 SUCCESS;
+- AI_ENABLED=false;
+- bounded patch audit clean.
+
+Step 9 remains not started.
+
 ## Step 8 runtime authorized — 2026-09-25
 
 PR90 is merged into main at

@@ -9,63 +9,70 @@ PR90 / corrected Step 8 Contract Gate is merged into `main` at
 
 Russian-data integration Steps 1–7 and the Step 8 Contract Gate are accepted.
 
-## Current bounded task
+## Current bounded state
 
-**Step 8 runtime/data publication — one recipe-dependency butter bundle.**
+**Step 8 runtime/data publication is review-ready in PR91.**
 
 Branch:
 `feat/step8-recipe-dependency-butter-runtime`.
 
+Verified runtime/test/workflow head:
+`068847f4a3b886e6b8133558f2d4820a6a01474e`.
+
 Canonical contract:
 `docs/family-food/recipe-dependency-food-batch-contract.md`.
 
-## Authorized scope
+## Delivered Step 8 runtime/data
 
-Publish exactly one reviewed production bundle:
-
-```text
-BUTTER_PEASANT_72_5_UNSALTED
-→ FIC RU-NUT-DB code 1417 / DB/533
-→ non-current FoodNutritionProfile
-→ 17-value RU_NUTRIENT_REGISTRY_V2 vector
-→ ATOMIC v1 / INPUT
-```
-
-Required source/form guards:
-
-- exact FIC raw record SHA-256
+- new exact `BUTTER_PEASANT_72_5_UNSALTED`;
+- licensed FIC RU-NUT-DB code 1417 / DB/533;
+- exact raw record SHA-256
   `b21345dd5ffa8b1348931808067b116940a252abec6c26b01870c192829a711d`;
-- exact `salt_ad=0.0` remains source-only form evidence for no added salt;
-- `salt_ad` is not a V2 nutrient and sodium never infers salinity;
+- `salt_ad=0.0` retained source-only as no-added-salt form evidence;
+- sodium does not infer salinity;
 - non-zero/null/missing salt evidence fails closed;
-- `water=null` remains unknown and WATER is absent from the vector;
-- existing generic `BUTTER_UNSALTED` / USDA FDC 173430 remains unchanged.
+- all 26 FIC source fields retained;
+- `water=null` remains source-not-reported;
+- sealed V2 vector contains exactly 17 values and no WATER value;
+- source profile is non-current;
+- ATOMIC v1 / INPUT;
+- generic `BUTTER_UNSALTED` / USDA FDC 173430 remains unchanged/current;
+- zero YieldModel/retention/FoodTransformation/TransformationApplicability rows;
+- zero RecipeVersion rows added;
+- no migration/schema change; head remains 0038 and 0033 remains reserved.
 
-## Architecture boundary
+The implementation reuses the accepted Step 3/4 publication service and project
+UoW; no shared publication-service semantics changed.
 
-Reuse existing Step 3/4 reviewed nutrition publication service and project UoW.
+## Exact runtime verification
 
-Expected:
-- no shared publication-service semantic change;
-- no schema/migration;
-- migration head remains 0038;
-- reserved 0033 remains unconsumed.
+On `068847f4a3b886e6b8133558f2d4820a6a01474e`:
 
-## Hard stops
+- Nutrient Registry V2 #180 — SUCCESS:
+  - focused: **310 passed**;
+  - backend shards: **1205 / 798 / 614 / 959 passed**;
+  - launcher: **643 passed, 2 skipped**;
+- Partial nutrition profiles #139 — SUCCESS:
+  - focused: **258 passed**;
+  - backend shards: **1205 / 798 / 614 / 959 passed**;
+  - launcher: **643 passed, 2 skipped**;
+- Russian nutrition methodologies #116 — SUCCESS;
+- Docs #347 — SUCCESS;
+- DC1 #209 — SUCCESS;
+- `AI_ENABLED=false`;
+- PR patch whitespace/conflict audit — clean.
 
-No:
-- additional food;
-- Step 9 RecipeVersion;
-- Step 10 Planner integration;
-- production transformation/yield/retention factors;
-- API/UI/Retail/AI/Auth/PostgreSQL;
-- generalized ingestion.
+Focused workflows explicitly execute both Step 4 and Step 8 production
+publication suites.
 
-If implementation disproves the no-schema/shared-semantics assumption, stop and
-reopen the Contract Gate.
+## Hard boundaries
+
+No Step 9 RecipeVersion, Step 10 Planner integration, additional FIC foods,
+production transformation factors, API/UI/Retail/AI/Auth/PostgreSQL.
 
 ## Stop boundary
 
-Deliver Step 8 runtime/data PR to review-ready state, then stop.
+PR91 is ready for final review after state-only receipt verification.
 
-Do not merge autonomously and do not start Step 9.
+Do not merge autonomously. After merge, stop; Step 9 requires separate explicit
+authorization.

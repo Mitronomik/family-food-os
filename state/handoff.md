@@ -1,5 +1,56 @@
 # Handoff
 
+## Step 8 runtime/data review-ready — PR91
+
+Accepted main:
+`76ca8f8ffba589576af4e0fad4d7a4817a84089f` (merged PR90).
+
+Branch:
+`feat/step8-recipe-dependency-butter-runtime`.
+
+Verified runtime/test/workflow head:
+`068847f4a3b886e6b8133558f2d4820a6a01474e`.
+
+Delivered exact production bundle:
+
+```text
+BUTTER_PEASANT_72_5_UNSALTED
+→ FIC RU-NUT-DB code 1417 / DB/533
+→ non-current profile
+→ 26 source observations
+→ 17-value RU_NUTRIENT_REGISTRY_V2 vector
+→ ATOMIC v1 / INPUT
+```
+
+Critical guards:
+- exact source hash pinned;
+- `salt_ad=0.0` is source-only no-added-salt form evidence;
+- no sodium inference;
+- non-zero/null/missing salt evidence rejects publication;
+- `water=null` remains unknown and WATER is absent from vector;
+- generic butter/USDA profile unchanged;
+- no yield/retention/transformation/applicability;
+- no RecipeVersion;
+- no migration; 0033 reserved, head 0038.
+
+Fresh publication creates one ingredient/profile/seal/composition with 17 values,
+commits once and preserves foreign keys. Exact replay writes zero rows and retains
+IDs. Identity conflict and injected late publication failure leave the database
+unchanged.
+
+Verified on `068847f4a3b886e6b8133558f2d4820a6a01474e`:
+Registry #180 SUCCESS (focused 310; backend 1205/798/614/959; launcher 643/2
+skipped), Partial #139 SUCCESS (focused 258; same broad counts), Russian #116,
+Docs #347 and DC1 #209 SUCCESS.
+
+An early pre-review GitHub blob transport attempt corrupted UTF-8 Python bytes.
+It was detected before review readiness and replaced byte-for-byte from the
+syntax-checked local source. Final committed files contain no mojibake/control
+characters; CI above ran only after the corrected bytes and explicit Step 8
+workflow coverage were in place.
+
+Stop for final review. No self-merge and no Step 9.
+
 ## Step 8 runtime/data publication authorized — 2026-09-25
 
 Accepted main:
