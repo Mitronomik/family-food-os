@@ -1,5 +1,19 @@
 # Progress
 
+## Step 8 runtime authorized — 2026-09-25
+
+PR90 is merged into main at
+`76ca8f8ffba589576af4e0fad4d7a4817a84089f`.
+
+The user explicitly authorized Step 8 runtime/data publication under the merged
+Contract Gate.
+
+Status:
+`STEP8_RUNTIME_ACTIVE`.
+
+Scope is exactly one FIC-backed butter bundle; no schema/migration/Step 9 work is
+authorized.
+
 ## PR90 corrected Contract Gate review-ready — 2026-09-25
 
 The unsalted-form blocker from review #5312850815 is closed in the canonical

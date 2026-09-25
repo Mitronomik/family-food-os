@@ -1,5 +1,32 @@
 # Handoff
 
+## Step 8 runtime/data publication authorized — 2026-09-25
+
+Accepted main:
+`76ca8f8ffba589576af4e0fad4d7a4817a84089f` (merged PR90 / corrected Step 8 Contract Gate).
+
+Branch:
+`feat/step8-recipe-dependency-butter-runtime`.
+
+Canonical contract:
+`docs/family-food/recipe-dependency-food-batch-contract.md`.
+
+The user explicitly authorized continuing after PR90 merge.
+
+Bounded runtime target:
+- one new exact FoodIngredient: `BUTTER_PEASANT_72_5_UNSALTED`;
+- exact FIC DB/533 / code 1417 profile;
+- source-only `salt_ad=0.0` guard for no added salt;
+- `water=null` preserved as unknown;
+- 17 V2 values;
+- non-current profile;
+- ATOMIC v1 / INPUT;
+- existing generic butter/USDA history unchanged;
+- no transformation/applicability;
+- no migration.
+
+Stop after review-ready PR. No Step 9.
+
 ## PR90 corrected Step 8 Contract Gate review-ready — 2026-09-25
 
 Accepted main:
