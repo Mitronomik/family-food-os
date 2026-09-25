@@ -186,7 +186,7 @@ def _source_observations(
             origin = "SOURCE_PUBLISHED_VALUE" if approved else "SOURCE_ONLY_DEFERRED"
         observation = {
             "mapping_decision": mapping["decision"],
-            "method_code": mapping["method_code"] if approved else None,
+            "method_code": mapping["method_code"] if approved and literal is not None else None,
             "source_field": field,
             "source_label_ru": mapping["source_label_ru"],
             "source_locator": _locator(record, field),

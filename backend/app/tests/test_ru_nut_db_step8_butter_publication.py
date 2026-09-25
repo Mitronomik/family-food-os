@@ -1,6 +1,5 @@
 """Step 8 publication of the exact School2022 butter dependency from FIC DB/533."""
 
-from copy import deepcopy
 from dataclasses import replace
 from decimal import Decimal
 import hashlib

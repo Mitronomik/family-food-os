@@ -23,6 +23,9 @@ on:
       - 'backend/app/services/nutrition_publication.py'
       - 'backend/app/services/nutrition_publication_contracts.py'
       - 'backend/app/persistence/sqlalchemy_core/nutrition_publication.py'
+      - 'backend/app/seed/ru_nut_db_step8_butter.py'
+      - 'backend/app/tests/test_ru_nut_db_step8_butter_publication.py'
+      - 'data/curation/ru-nut-db-step8-butter-runtime/**'
       - 'backend/app/tests/test_transactional_nutrition_publication.py'
       - 'backend/app/tests/test_transformation_applicability.py'
       - 'backend/app/tests/test_transformation_applicability_repository.py'
@@ -63,6 +66,9 @@ on:
       - 'backend/app/services/nutrition_publication.py'
       - 'backend/app/services/nutrition_publication_contracts.py'
       - 'backend/app/persistence/sqlalchemy_core/nutrition_publication.py'
+      - 'backend/app/seed/ru_nut_db_step8_butter.py'
+      - 'backend/app/tests/test_ru_nut_db_step8_butter_publication.py'
+      - 'data/curation/ru-nut-db-step8-butter-runtime/**'
       - 'backend/app/tests/test_nutrient_registry_v2.py'
       - 'backend/app/tests/test_nutrient_vector.py'
       - 'backend/app/tests/test_nutrition_methodology_service.py'
@@ -105,6 +111,8 @@ jobs:
         run: >-
           python -m pytest -q
           backend/app/tests/test_transactional_nutrition_publication.py
+          backend/app/tests/test_ru_nut_db_step4_publication.py
+          backend/app/tests/test_ru_nut_db_step8_butter_publication.py
           backend/app/tests/test_nutrient_registry_v2.py
           backend/app/tests/test_nutrient_vector.py
           backend/app/tests/test_nutrition_methodology.py
