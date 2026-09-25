@@ -1,5 +1,172 @@
 # Handoff
 
+## PR90 corrected Step 8 Contract Gate review-ready — 2026-09-25
+
+Accepted main:
+`8ae941a1f5c4f07177b2e80272e582f8690dd747`.
+
+Branch:
+`docs/step8-recipe-dependency-food-batch-contract`.
+
+Verified corrected semantic head:
+`f0b2fa24403589de8b6c16a20b3cc326772c0fbe`.
+
+Corrected semantic review:
+`#5314905510 — CORRECTED STEP 8 CONTRACT GATE READY TO MERGE`.
+
+Re-review blocker #5312850815 is closed by exact source evidence:
+
+- FIC DB/533 `salt_ad = 0.0`;
+- source label `Добавленная соль`;
+- disposition remains `SOURCE_ONLY_NO_V2_TARGET`;
+- accepted only for the exact no-added-salt form binding;
+- not V2 nutrition, not zero sodium, no sodium inference;
+- non-zero/null/missing salt evidence fails closed.
+
+All other Step 8 boundaries remain unchanged:
+one exact butter food, 17-value sparse V2 vector, WATER unknown, non-current
+profile, ATOMIC v1 / INPUT, no transformation, no migration, no Step 9/10.
+
+Verification on corrected semantic head:
+Docs #345 SUCCESS; DC1 #207 SUCCESS; mergeable=true; 0 behind main; threads=0;
+scope/whitespace clean.
+
+No runtime/schema/production data was changed.
+
+Stop for final review/merge. After merge, Step 8 runtime publication requires
+separate explicit authorization.
+
+## PR90 Step 8 Contract Gate blocker correction — 2026-09-25
+
+Accepted main:
+`8ae941a1f5c4f07177b2e80272e582f8690dd747`.
+
+Independent re-review #5312850815 found one blocker:
+the contract had not explicitly bound School2022's unsalted requirement to the
+salinity-unspecified FIC DB/533 display identity.
+
+Correction:
+
+- exact FIC DB/533 field `salt_ad = 0.0`;
+- frozen source label `Добавленная соль`;
+- existing Step 4 disposition `SOURCE_ONLY_NO_V2_TARGET` preserved;
+- accepted only as Step 8 form-compatibility evidence for **no added salt**;
+- not a V2 nutrient and not a zero-sodium claim;
+- no inference from sodium;
+- changed/non-zero/null/missing `salt_ad` fails closed.
+
+All other Step 8 decisions remain unchanged: one butter food, 17-value V2 vector,
+WATER unknown, non-current profile, ATOMIC v1 / INPUT, no transformation and no
+migration.
+
+Current task: exact-head Docs/DC1 re-verification and corrected final review.
+No runtime/data publication or merge.
+
+## Step 8 Contract Gate review-ready — PR90
+
+Accepted main:
+`8ae941a1f5c4f07177b2e80272e582f8690dd747` (merged PR89 / accepted Step 7 runtime).
+
+Branch:
+`docs/step8-recipe-dependency-food-batch-contract`.
+
+Canonical contract:
+`docs/family-food/recipe-dependency-food-batch-contract.md`.
+
+Verified semantic head:
+`49c291ab5e46a88e34a6f3ae897c32f4cccc6378`.
+
+Review:
+`#5303638521 — READY TO MERGE CONTRACT GATE`.
+
+Frozen vertical slice:
+
+```text
+School2022 53-19з — Масло сливочное (порциями)
+→ BUTTER_PEASANT_72_5_UNSALTED
+→ licensed FIC RU-NUT-DB code 1417 / DB/533
+→ non-current V2 profile
+→ 17-value sparse sealed vector (WATER unknown)
+→ ATOMIC v1 / INPUT
+```
+
+Critical preserved boundaries:
+
+- existing generic `BUTTER_UNSALTED` / USDA FDC 173430 unchanged;
+- School2022 source calculations are not production food-nutrition authority;
+- FIC raw record hash pinned to
+  `b21345dd5ffa8b1348931808067b116940a252abec6c26b01870c192829a711d`;
+- `water=null` is not coerced/inferred;
+- no current selector switch;
+- no YieldModel/retention/Transformation/Applicability rows;
+- no migration; 0033 remains reserved and head stays 0038;
+- no Step 9/10.
+
+Semantic verification:
+Docs #343 SUCCESS; DC1 #205 SUCCESS; mergeable=true; 0 behind main;
+unresolved review threads 0; patch whitespace/conflict audit clean.
+
+This is a docs-only gate. No runtime/schema/production data was published.
+
+Stop for final review/merge. After merge, Step 8 runtime/data publication needs
+separate explicit authorization.
+
+## Step 8 recipe-dependency food batch Contract Gate — 2026-09-24
+
+Accepted main:
+`8ae941a1f5c4f07177b2e80272e582f8690dd747` (merged PR89 / accepted Step 7 runtime).
+
+Current branch:
+`docs/step8-recipe-dependency-food-batch-contract`.
+
+Canonical gate:
+`docs/family-food/recipe-dependency-food-batch-contract.md`.
+
+Bounded target:
+
+```text
+School2022 53-19з — Масло сливочное (порциями)
+→ BUTTER_PEASANT_72_5_UNSALTED
+→ licensed FIC RU-NUT-DB code 1417 / DB/533
+→ non-current V2 profile
+→ sparse 17-value sealed vector
+→ ATOMIC v1 / INPUT
+```
+
+Critical evidence:
+
+- School2022 PDF SHA-256
+  `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`;
+- §1.4 freezes butter at 72.5% fat for recipe norms;
+- procurement-quality page 261 requires unsalted butter and identifies the
+  peasant class at at least 72.5%;
+- recipe 53-19з has gross=net=10 g and no thermal treatment;
+- FIC DB/533 source code 1417:
+  `Масло сливочное крестьянское, 72,5%`;
+- exact FIC raw record hash:
+  `b21345dd5ffa8b1348931808067b116940a252abec6c26b01870c192829a711d`;
+- retained FIC archive independently reverified at the accepted
+  206692075-byte / `c0d90020...` identity;
+- DB/533 `water=null`: do not coerce or infer; expected vector has 17 values.
+
+Preservation:
+
+- generic `BUTTER_UNSALTED` and USDA FDC 173430 history unchanged;
+- no current-profile selector switch;
+- no transformation/yield/retention/applicability rows;
+- no migration; 0033 stays reserved, head stays 0038;
+- no Step 9/10.
+
+The one-food size is intentional: it closes one exact Step 9 vertical dependency
+without widening catalogue scope.
+
+Boiled egg 54-6о was rejected as the immediate vertical slice because boiling
+would require unsupported production transformation nutrition and the retained
+FIC cooked-egg candidate is structurally quarantined.
+
+Current authorization is docs/preflight only. Stop after Contract Gate delivery;
+no runtime/data publication before review/merge.
+
 ## Step 7 runtime review-ready — PR89
 
 Accepted main:

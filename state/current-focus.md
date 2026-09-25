@@ -1,66 +1,78 @@
 # Current focus
 
-Updated: `2026-09-24`.
+Updated: `2026-09-25`.
 
 ## Accepted state
 
-PR88 / Step 7 Transformation Applicability Contract Gate is merged into `main`
-at `71e4cfc63908440a54631e68b7507e94311980d2`.
+PR89 / Step 7 transformation applicability runtime is merged into `main` at
+`8ae941a1f5c4f07177b2e80272e582f8690dd747`.
 
-Russian-data integration Steps 1–6 and the Step 7 Contract Gate are accepted.
+Russian-data integration Steps 1–7 are accepted.
 
 ## Current bounded state
 
-**Step 7 transformation applicability runtime is review-ready in PR89.**
+**PR90 / corrected Step 8 recipe-dependency food batch Contract Gate is review-ready.**
 
-Branch:
-`feat/step7-transformation-applicability-runtime`.
+Verified corrected semantic head:
+`f0b2fa24403589de8b6c16a20b3cc326772c0fbe`.
 
-Verified runtime/test/workflow head:
-`e481b6cda42afa2f33e5239262dae3f3c6780797`.
+Canonical gate:
+`docs/family-food/recipe-dependency-food-batch-contract.md`.
 
-Canonical contract:
-`docs/family-food/transformation-applicability-contract.md`.
+## Corrected form-authority closure
 
-## Delivered Step 7 runtime
+Re-review blocker #5312850815 is closed:
 
-- dependent immutable `TransformationApplicability` for exact
-  `FoodTransformation`;
-- additive migration `0038_transformation_applicability`;
-- exact FoodIngredient / season / evidence-scope applicability;
-- explicit registry-aware V2 retention read/write seams;
-- explicit applicability-aware V2 Composition publication path;
-- separate `ApplicabilityAwareCompositionCalculator`;
-- legacy V1 `CompositionCalculator`, retention snapshots/digests and
-  legacy read/write/publication paths preserved;
-- no automatic V1→V2 retention carry-forward;
-- no production numeric Book2002 / School2022 / legacy loss-factor publication.
+- School2022 requires 72.5% unsalted butter;
+- exact FIC DB/533 / code 1417 supplies the selected 72.5% peasant-butter
+  numeric profile;
+- exact DB/533 source field `salt_ad = 0.0`;
+- frozen source label `Добавленная соль`;
+- Step 4 disposition remains `SOURCE_ONLY_NO_V2_TARGET`;
+- the literal is used only as source-owned form-compatibility evidence for
+  **no added salt**;
+- it does not become V2 nutrition or a zero-sodium claim;
+- sodium never infers salinity;
+- non-zero/null/missing `salt_ad` fails closed.
 
-## Verification on runtime head
+The frozen identity remains:
+`BUTTER_PEASANT_72_5_UNSALTED`.
 
-- Russian nutrition methodologies #113 — SUCCESS;
-- Nutrient Registry V2 #169 focused — **280 passed**;
-- Partial nutrition profiles #130 — **SUCCESS**:
-  - focused **228 passed**;
-  - backend shards **1252 / 768 / 582 / 962 passed**;
-  - launcher **643 passed, 2 skipped**;
-- Nutrient Registry V2 launcher — **643 passed, 2 skipped**;
-- `AI_ENABLED=false`;
-- GitHub patch scope/whitespace/conflict audit — clean.
+## Preserved Step 8 decisions
 
-The container could not run a literal local `git diff --check` because direct
-GitHub DNS resolution was unavailable; no such shell check is claimed.
+- future Step 9 target: School2022 `53-19з`;
+- exactly one Step 8 food dependency;
+- FIC raw record SHA-256:
+  `b21345dd5ffa8b1348931808067b116940a252abec6c26b01870c192829a711d`;
+- `water=null` remains unknown;
+- V2 vector remains exactly 17 values;
+- profile non-current;
+- ATOMIC v1 / INPUT;
+- no yield/retention/transformation/applicability publication;
+- no migration/schema; head remains 0038 and 0033 remains reserved.
+
+## Corrected semantic verification
+
+On `f0b2fa24403589de8b6c16a20b3cc326772c0fbe`:
+
+- Docs #345 — SUCCESS;
+- DC1 #207 — SUCCESS;
+- corrected semantic review #5314905510 — READY TO MERGE;
+- mergeable=true;
+- 0 behind main;
+- unresolved review threads=0;
+- patch whitespace/conflict audit clean.
 
 ## Hard boundaries
 
-No Step 8 food batch, Step 9 RecipeVersion publication, Step 10 Planner
-integration, production numeric transformation/loss-factor publication,
-API/UI/Retail/AI/Auth/PostgreSQL.
+No Step 8 runtime/data publication before PR90 merge.
 
-Reserved `0033_recipe_template_catalogue` remains unconsumed.
+No Step 9 RecipeVersion, Step 10 Planner integration, extra FIC foods,
+production retention/yield factors, API/UI/Retail/AI/Auth/PostgreSQL.
 
 ## Stop boundary
 
-PR89 is ready for final review. Do not merge autonomously.
+PR90 is ready for final review/merge authorization.
 
-After PR89 merge: stop. Step 8 requires separate explicit authorization.
+After merge: stop. Step 8 runtime/data publication requires separate explicit
+authorization.

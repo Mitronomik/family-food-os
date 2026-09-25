@@ -1,5 +1,113 @@
 # Progress
 
+## PR90 corrected Contract Gate review-ready — 2026-09-25
+
+The unsalted-form blocker from review #5312850815 is closed in the canonical
+Step 8 Contract Gate.
+
+Corrected semantic head:
+`f0b2fa24403589de8b6c16a20b3cc326772c0fbe`.
+
+Frozen closure:
+`FIC DB/533 salt_ad=0.0` is source-only form compatibility for no added salt;
+it remains outside the V2 nutrient vector and cannot be inferred from sodium.
+
+Adversarial acceptance now rejects non-zero/null/missing salt evidence.
+
+Verification:
+Docs #345 SUCCESS; DC1 #207 SUCCESS; corrected review #5314905510 READY TO MERGE.
+
+Status:
+`STEP8_CONTRACT_GATE_CORRECTED_REVIEW_READY`.
+
+No runtime/schema/production data/Step 9 work occurred.
+
+## PR90 blocker correction — 2026-09-25
+
+Re-review #5312850815 identified an unsalted-form authority gap in the Step 8
+Contract Gate.
+
+The canonical contract now closes it with exact FIC DB/533 source evidence:
+
+`salt_ad = 0.0` / source label `Добавленная соль`.
+
+The evidence is source-only form compatibility for no added salt. It does not
+become canonical V2 nutrition, does not imply zero sodium, and cannot be inferred
+from sodium. Non-zero/null/missing salt evidence is an explicit publication
+conflict.
+
+No runtime/schema/production data changed.
+
+Status:
+`STEP8_CONTRACT_GATE_CORRECTED_REVERIFYING`.
+
+## Step 8 Contract Gate review-ready — 2026-09-24
+
+Accepted base:
+`8ae941a1f5c4f07177b2e80272e582f8690dd747`.
+
+PR90:
+`docs/step8-recipe-dependency-food-batch-contract`.
+
+Verified semantic head:
+`49c291ab5e46a88e34a6f3ae897c32f4cccc6378`.
+
+Status:
+`STEP8_CONTRACT_GATE_REVIEW_READY`.
+
+Frozen:
+
+- exact Step 9 target School2022 53-19з;
+- exact new butter identity;
+- exact licensed FIC DB/533 authority;
+- 17-value sparse V2 vector with WATER unknown;
+- non-current profile + ATOMIC v1 / INPUT;
+- zero transformation/applicability publication;
+- no migration/schema;
+- one-food bounded vertical-slice scope.
+
+Verification:
+
+- Docs #343 SUCCESS;
+- DC1 #205 SUCCESS;
+- semantic review #5303638521 READY TO MERGE;
+- scope/whitespace clean;
+- 0 behind main;
+- unresolved threads 0.
+
+No production Step 8 data, Step 9 RecipeVersion or Step 10 Planner work occurred.
+
+## Step 8 Contract Gate started — 2026-09-24
+
+PR89 is merged into main at
+`8ae941a1f5c4f07177b2e80272e582f8690dd747`.
+
+The user explicitly authorized continuing to the next bounded Russian-data
+integration operation.
+
+Under the repository Implementation Contract Gate rule, current work is
+documentation/preflight only.
+
+Preflight selected the minimum-risk vertical slice:
+
+- Step 9 target source card: School2022 `53-19з`;
+- dependency: exact unsalted 72.5% butter;
+- new source-faithful FoodIngredient:
+  `BUTTER_PEASANT_72_5_UNSALTED`;
+- licensed FIC authority: code 1417 / DB/533;
+- exact raw record SHA-256:
+  `b21345dd5ffa8b1348931808067b116940a252abec6c26b01870c192829a711d`;
+- expected 17-value sparse V2 vector because source `water=null`;
+- expected ATOMIC v1 / INPUT;
+- no transformation/applicability and no schema migration.
+
+The durable private corpus archive was independently retrieved and hash-verified.
+
+Status:
+`STEP8_CONTRACT_GATE_ACTIVE`.
+
+No production Step 8 data or Step 9 RecipeVersion has been published.
+
 ## Step 7 runtime review-ready — 2026-09-24
 
 Accepted base:
