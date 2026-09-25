@@ -207,16 +207,46 @@ def load_ru_nut_db_step8_butter_bundle(
     mapping_path: Path = MAPPING_PATH,
 ) -> ReviewedNutritionPublicationBundle:
     publication = _checked_json(package / "publication.json", PUBLICATION_SHA256)
-    mappings_raw = _checked_json(X\[™×Ü]PTS‘×ÔÒLMŠBˆYˆ›İ\Ú[œİ[˜ÙJX\[™Ü×Ü˜]Ë\İ
-HÜˆ[ŠX\[™Ü×Ü˜]ÊHOH‚ˆ˜Z\ÙH˜[YQ\œ›ÜŠ”İ\X\[™È4-4/´.ô-´-t/H4`t/´-4-t`4-´,4`´c4`4/´,´/t/ˆˆÛİ\˜ÙHšY[ËˆŠBˆX\[™ÜÈH\JX\[™Ü×Ü˜]ÊBˆYˆ[ŠÜ›İÖÈœÛİ\˜ÙWÙšY[—H›Üˆ›İÈ[ˆX\[™ÜßJHOH‚ˆ˜Z\ÙH˜[YQ\œ›ÜŠ”İ\X\[™È4`t/´-4-t`4-´.4`ˆ4/ô/´,´`´/´`4/tbô.HÛİ\˜ÙHšY[ˆŠBˆ\›İ™YH\Jˆ›İÈ›Üˆ›İÈ[ˆX\[™ÜÈYˆ›İÖÈ™XÚ\Ú[Ûˆ—HOHT“Õ‘QÔP“TÒQÕSQH‚ˆ
-BˆYˆ[Š\›İ™Y
-HOHNÜˆ[ŠÜ›İÖÈ˜Ø[›ÛšXØ[ØÛÙH—H›Üˆ›İÈ[ˆ\›İ™YJHOHN‚ˆ˜Z\ÙH˜[YQ\œ›ÜŠ”İ\X\[™È4-4/´.ô-´-t/H4`t/´-4-t`4-´,4`´c4`4/´,´/t/ˆN\›İ™Y\™Ù]ËˆŠBˆ›Üˆ›İÈ[ˆ\›İ™Y‚ˆYˆ
-ˆ›İÖÈ›X\[™×Üİ]\È—H›İ[ˆÈ‘VPÕ‹“QUÑÔÔPÒQ’PÈŸBˆÜˆ›İÖÈ›Y]ÙØÛÙH—HOHœX›\ÚYÛY]Ùİ[œÜXÚYšYY‚ˆÜˆ›İÖÈœÛİ\˜ÙWİ[š]—HOH›İÖÈ˜Ø[›ÛšXØ[İ[š]—Bˆ
-N‚ˆ˜Z\ÙH˜[YQ\œ›ÜŠ\›İ™YX\[™È4`4,4`tat/´-4.4`´`tcÈ4`tœ›Ş™[ˆİ\‹ˆŠB‚ˆYˆ›İ\Ú[œİ[˜ÙJX›XØ][Û‹Xİ
-HÜˆX›XØ][Û‹™Ù]
-œØÚ[XWİ™\œÚ[ÛˆŠHOHN‚ˆ˜Z\ÙH˜[YQ\œ›ÜŠ´'t-t.4-ô,´-t`t`´/tbô.Hİ\X›XØ][Ûˆ^[ØYˆŠBˆYˆX›XØ][Û‹™Ù]
-œÛİ\˜ÙHŠHOHÂˆ˜\˜Ú]™WÜÚLMˆˆTÒU‘WÔÒLM‹ˆ˜\˜Ú]™WÜÚ^™WØ]\ÈˆTÒU‘WÔÒV‘WĞ–UTËˆ˜˜\Ú\×ÙÜ˜[\ÈˆŒL‹ˆ˜Ø\\™YÙ]HˆŒŒ‹LKLŒ‹ˆœ˜]×Ú[ÜÚLMˆˆU×ÒSÔÒLM‹ˆœÛİ\˜ÙWÙ]Wİ\HˆÓÕTÑWÑUWÕTKˆœÛİ\˜ÙWÚYˆÓÕTÑWÒQˆœÛİ\˜ÙWÛ˜[YHˆÓÕTÑWÓSQKˆœÛİ\˜ÙWİ\›ˆÓÕTÑWÕT“ˆœÛİ\˜ÙWİ™\œÚ[ÛˆˆÓÕTÑWÕ‘T”ÒSÓ‹ˆ™\šYšYYØ]ˆŒŒ‹LKLŒŒˆ‹ˆN‚ˆ˜Z\ÙH˜[YQ\œ›ÜŠ”İ\Ûİ\˜ÙHY[]H4`4,4`tat/´-4.4`´`tcÈ4`HY\™ÙYÛÛ˜XİˆŠBˆYˆX›XØ][Û‹™Ù]
-˜]]Üš]HŠHOHÂˆ˜]šX][ÛˆˆU’P•USÓ‹ˆœ™XÙZ\Ü]ˆ™ØÜËÙ˜[Z[KY›ÛÙÙšXË[]š][Û‹[XÙ[œÙK\™XÙZ\›Y‹ˆN‚ˆ˜Z\ÙH˜[YQ\œ›ÜŠ”İ\]]Üš]H™XÙZ\4.4.ô. attribution Ğ¸Ğ·Ğ¼ĞµĞ½ĞµĞ½Ñ‹.")
+    mappings_raw = _checked_json(mapping_path, MAPPING_SHA256)
+    if not isinstance(mappings_raw, list) or len(mappings_raw) != 26:
+        raise ValueError("Step 8 mapping Ğ´Ğ¾Ğ»Ğ¶ĞµĞ½ ÑĞ¾Ğ´ĞµÑ€Ğ¶Ğ°Ñ‚ÑŒ Ñ€Ğ¾Ğ²Ğ½Ğ¾ 26 source fields.")
+    mappings = tuple(mappings_raw)
+    if len({row["source_field"] for row in mappings}) != 26:
+        raise ValueError("Step 8 mapping ÑĞ¾Ğ´ĞµÑ€Ğ¶Ğ¸Ñ‚ Ğ¿Ğ¾Ğ²Ñ‚Ğ¾Ñ€Ğ½Ñ‹Ğ¹ source field.")
+    approved = tuple(
+        row for row in mappings if row["decision"] == "APPROVED_PUBLISHED_VALUE"
+    )
+    if len(approved) != 18 or len({row["canonical_code"] for row in approved}) != 18:
+        raise ValueError("Step 8 mapping Ğ´Ğ¾Ğ»Ğ¶ĞµĞ½ ÑĞ¾Ğ´ĞµÑ€Ğ¶Ğ°Ñ‚ÑŒ Ñ€Ğ¾Ğ²Ğ½Ğ¾ 18 approved targets.")
+    for row in approved:
+        if (
+            row["mapping_status"] not in {"EXACT", "METHOD_SPECIFIC"}
+            or row["method_code"] != "published_method_unspecified"
+            or row["source_unit"] != row["canonical_unit"]
+        ):
+            raise ValueError("Approved mapping Ñ€Ğ°ÑÑ…Ğ¾Ğ´Ğ¸Ñ‚ÑÑ Ñ frozen Step 4B.")
+
+    if not isinstance(publication, dict) or publication.get("schema_version") != 1:
+        raise ValueError("ĞĞµĞ¸Ğ·Ğ²ĞµÑÑ‚Ğ½Ñ‹Ğ¹ Step 8 publication payload.")
+    if publication.get("source") != {
+        "archive_sha256": ARCHIVE_SHA256,
+        "archive_size_bytes": ARCHIVE_SIZE_BYTES,
+        "basis_grams": "100",
+        "captured_date": "2026-09-20",
+        "raw_html_sha256": RAW_HTML_SHA256,
+        "source_data_type": SOURCE_DATA_TYPE,
+        "source_id": SOURCE_ID,
+        "source_name": SOURCE_NAME,
+        "source_url": SOURCE_URL,
+        "source_version": SOURCE_VERSION,
+        "verified_at": "2026-09-24T00:00:00Z",
+    }:
+        raise ValueError("Step 8 source identity Ñ€Ğ°ÑÑ…Ğ¾Ğ´Ğ¸Ñ‚ÑÑ Ñ merged contract.")
+    if publication.get("authority") != {
+        "attribution": ATTRIBUTION,
+        "receipt_path": "docs/family-food/fic-nutrition-license-receipt.md",
+    }:
+        raise ValueError("Step 8 authority receipt Ğ¸Ğ»Ğ¸ attribution Ğ¸Ğ·Ğ¼ĞµĞ½ĞµĞ½Ñ‹.")
     if publication.get("mapping_contract") != {
         "approved_field_count": 18,
         "expected_v2_value_count": EXPECTED_V2_VALUE_COUNT,
@@ -226,7 +256,7 @@ HÜˆX›XØ][Û‹™Ù]
         ),
         "sha256": MAPPING_SHA256,
     }:
-        raise ValueError("Step 8 payload ÑÑÑ‹Ğ»Ğ°ĞµÑ‚ÑÑ ÑĞµ Ğ½Ğ° frozen mapping.")
+        raise ValueError("Step 8 payload ÑÑÑ‹Ğ»Ğ°ĞµÑ‚ÑÑ Ğ½Ğµ Ğ½Ğ° frozen mapping.")
     if publication.get("recipe_dependency") != {
         "gross_mass_g": "10",
         "net_mass_g": "10",
@@ -250,7 +280,7 @@ HÜˆX›XØ][Û‹™Ù]
         "semantic_disposition": "SOURCE_ONLY_NO_V2_TARGET",
         "sodium_inference_forbidden": True,
     }:
-        raise ValueError("Step 8 unsalted form binding Ğ¸Ğ·Ğ¼ĞµĞ½ĞµĞ½.")
+        raise ValueError("Step 8 unsalted form binding Ğ¸Ğ·Ğ¼ĞµĞ½Ñ‘Ğ½.")
 
     record = publication.get("record")
     if not isinstance(record, dict):
