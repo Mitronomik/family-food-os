@@ -1,5 +1,41 @@
 # Handoff
 
+## PR90 corrected Step 8 Contract Gate review-ready — 2026-09-25
+
+Accepted main:
+`8ae941a1f5c4f07177b2e80272e582f8690dd747`.
+
+Branch:
+`docs/step8-recipe-dependency-food-batch-contract`.
+
+Verified corrected semantic head:
+`f0b2fa24403589de8b6c16a20b3cc326772c0fbe`.
+
+Corrected semantic review:
+`#5314905510 — CORRECTED STEP 8 CONTRACT GATE READY TO MERGE`.
+
+Re-review blocker #5312850815 is closed by exact source evidence:
+
+- FIC DB/533 `salt_ad = 0.0`;
+- source label `Добавленная соль`;
+- disposition remains `SOURCE_ONLY_NO_V2_TARGET`;
+- accepted only for the exact no-added-salt form binding;
+- not V2 nutrition, not zero sodium, no sodium inference;
+- non-zero/null/missing salt evidence fails closed.
+
+All other Step 8 boundaries remain unchanged:
+one exact butter food, 17-value sparse V2 vector, WATER unknown, non-current
+profile, ATOMIC v1 / INPUT, no transformation, no migration, no Step 9/10.
+
+Verification on corrected semantic head:
+Docs #345 SUCCESS; DC1 #207 SUCCESS; mergeable=true; 0 behind main; threads=0;
+scope/whitespace clean.
+
+No runtime/schema/production data was changed.
+
+Stop for final review/merge. After merge, Step 8 runtime publication requires
+separate explicit authorization.
+
 ## PR90 Step 8 Contract Gate blocker correction — 2026-09-25
 
 Accepted main:

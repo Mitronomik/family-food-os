@@ -1,5 +1,27 @@
 # Progress
 
+## PR90 corrected Contract Gate review-ready — 2026-09-25
+
+The unsalted-form blocker from review #5312850815 is closed in the canonical
+Step 8 Contract Gate.
+
+Corrected semantic head:
+`f0b2fa24403589de8b6c16a20b3cc326772c0fbe`.
+
+Frozen closure:
+`FIC DB/533 salt_ad=0.0` is source-only form compatibility for no added salt;
+it remains outside the V2 nutrient vector and cannot be inferred from sodium.
+
+Adversarial acceptance now rejects non-zero/null/missing salt evidence.
+
+Verification:
+Docs #345 SUCCESS; DC1 #207 SUCCESS; corrected review #5314905510 READY TO MERGE.
+
+Status:
+`STEP8_CONTRACT_GATE_CORRECTED_REVIEW_READY`.
+
+No runtime/schema/production data/Step 9 work occurred.
+
 ## PR90 blocker correction — 2026-09-25
 
 Re-review #5312850815 identified an unsalted-form authority gap in the Step 8
