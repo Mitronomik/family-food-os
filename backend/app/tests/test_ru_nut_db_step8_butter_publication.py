@@ -166,7 +166,7 @@ def test_runtime_package_exact_identity_sparse_vector_and_source_observations():
     )
 
 
-def test_runtime_packae_pins_exact_sources_rights_and_form_binding():
+def test_runtime_package_pins_exact_sources_rights_and_form_binding():
     publication = json.loads((step8.PACKAGE / "publication.json").read_text())
     assert publication["source"]["archive_size_bytes"] == 206692075
     assert publication["source"]["archive_sha256"] == step8.ARCHIVE_SHA256
