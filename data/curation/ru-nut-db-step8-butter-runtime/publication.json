@@ -1,0 +1,100 @@
+{
+  "authority": {
+    "attribution": "Данные о химическом составе продуктов предоставлены ФГБУН «ФИЦ питания и биотехнологии» (база «Химический состав пищевых продуктов, используемых в Российской Федерации»).",
+    "receipt_path": "docs/family-food/fic-nutrition-license-receipt.md"
+  },
+  "form_binding": {
+    "accepted_role": "NO_ADDED_SALT_FORM_COMPATIBILITY_ONLY",
+    "fat_percent": "72.5",
+    "fic_source_field": "salt_ad",
+    "fic_source_label": "Добавленная соль",
+    "fic_source_literal": "0.0",
+    "school_requires_unsalted": true,
+    "semantic_disposition": "SOURCE_ONLY_NO_V2_TARGET",
+    "sodium_inference_forbidden": true
+  },
+  "mapping_contract": {
+    "approved_field_count": 18,
+    "expected_v2_value_count": 17,
+    "missing_approved_source_field": "water",
+    "path": "data/curation/ru-nut-db-step4-semantic-closure/field-mapping.json",
+    "sha256": "bf77239d5976e5ec03d01f524726f9c2e8afb5fc4d92a884b62aa63dfe3a9477"
+  },
+  "recipe_dependency": {
+    "gross_mass_g": "10",
+    "net_mass_g": "10",
+    "pdf_page": 18,
+    "recipe_id": "ru-school2022:recipe:53-19з",
+    "school_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+    "scope": "7–11 years institutional school catering",
+    "source_id": "ru-school2022",
+    "source_recipe_code": "53-19з",
+    "thermal_treatment": "none",
+    "title": "Масло сливочное (порциями)"
+  },
+  "record": {
+    "nutrients": {
+      "a_vit": "400.0",
+      "b1": "0.01",
+      "b2": "0.12",
+      "c": "0.0",
+      "ca": "24.0",
+      "carbh": "1.3",
+      "carot": "300.0",
+      "cholest": "170.0",
+      "diet_fibre": "0.0",
+      "ethanol": "0.0",
+      "fat": "72.5",
+      "fe": "0.2",
+      "k": "30.0",
+      "kcal": "660.9",
+      "mdsug": "1.3",
+      "mg": "0.5",
+      "na": "15.0",
+      "p": "30.0",
+      "pp": "0.05",
+      "prot": "0.8",
+      "ret_equiv": "450.0",
+      "salt_ad": "0.0",
+      "satur": "47.1",
+      "starch": "0.0",
+      "sugar_ad": "0.0",
+      "water": null
+    },
+    "platform": {
+      "action": "CREATE_REVIEWED",
+      "allergen_codes": [],
+      "allergens_reviewed": false,
+      "atomic_version": 1,
+      "canonical_code": "BUTTER_PEASANT_72_5_UNSALTED",
+      "canonical_name": "Масло сливочное крестьянское 72,5% несолёное",
+      "category_code": "fats_oils",
+      "default_unit": "g",
+      "density_g_per_ml": null,
+      "edible_fraction": null,
+      "mass_state": "INPUT",
+      "storage_profile_code": null
+    },
+    "source": {
+      "db_index": 533,
+      "json_pointer": "/DB/533",
+      "raw_record_sha256": "b21345dd5ffa8b1348931808067b116940a252abec6c26b01870c192829a711d",
+      "source_code": "1417",
+      "source_name": "Масло сливочное крестьянское, 72,5%"
+    }
+  },
+  "schema_version": 1,
+  "source": {
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "archive_size_bytes": 206692075,
+    "basis_grams": "100",
+    "captured_date": "2026-09-20",
+    "raw_html_sha256": "155107ddb381c14721c77fe995d604a5197982441446b54034e4d84645efbd6d",
+    "source_data_type": "official_electronic_database_snapshot",
+    "source_id": "RU-NUT-DB",
+    "source_name": "FIC_RU_NUT_DB",
+    "source_url": "https://ion.ru/nauka/baza-dannykh-khimicheskogo-sostava/1-1-baza-dannykh/1.1_baza%20dannih.html",
+    "source_version": "snapshot-2026-09-20-155107ddb381c147",
+    "verified_at": "2026-09-24T00:00:00Z"
+  }
+}
