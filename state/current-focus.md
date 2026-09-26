@@ -4,75 +4,75 @@ Updated: `2026-09-25`.
 
 ## Accepted state
 
-PR89 / Step 7 transformation applicability runtime is merged into `main` at
-`8ae941a1f5c4f07177b2e80272e582f8690dd747`.
+PR90 / corrected Step 8 Contract Gate is merged into `main` at
+`76ca8f8ffba589576af4e0fad4d7a4817a84089f`.
 
-Russian-data integration Steps 1–7 are accepted.
+Russian-data integration Steps 1–7 and the Step 8 Contract Gate are accepted.
 
 ## Current bounded state
 
-**PR90 / corrected Step 8 recipe-dependency food batch Contract Gate is review-ready.**
+**Step 8 runtime/data publication is review-ready in PR91.**
 
-Verified corrected semantic head:
-`f0b2fa24403589de8b6c16a20b3cc326772c0fbe`.
+Branch:
+`feat/step8-recipe-dependency-butter-runtime`.
 
-Canonical gate:
+Verified runtime/test/workflow head:
+`068847f4a3b886e6b8133558f2d4820a6a01474e`.
+
+Canonical contract:
 `docs/family-food/recipe-dependency-food-batch-contract.md`.
 
-## Corrected form-authority closure
+## Delivered Step 8 runtime/data
 
-Re-review blocker #5312850815 is closed:
-
-- School2022 requires 72.5% unsalted butter;
-- exact FIC DB/533 / code 1417 supplies the selected 72.5% peasant-butter
-  numeric profile;
-- exact DB/533 source field `salt_ad = 0.0`;
-- frozen source label `Добавленная соль`;
-- Step 4 disposition remains `SOURCE_ONLY_NO_V2_TARGET`;
-- the literal is used only as source-owned form-compatibility evidence for
-  **no added salt**;
-- it does not become V2 nutrition or a zero-sodium claim;
-- sodium never infers salinity;
-- non-zero/null/missing `salt_ad` fails closed.
-
-The frozen identity remains:
-`BUTTER_PEASANT_72_5_UNSALTED`.
-
-## Preserved Step 8 decisions
-
-- future Step 9 target: School2022 `53-19з`;
-- exactly one Step 8 food dependency;
-- FIC raw record SHA-256:
+- new exact `BUTTER_PEASANT_72_5_UNSALTED`;
+- licensed FIC RU-NUT-DB code 1417 / DB/533;
+- exact raw record SHA-256
   `b21345dd5ffa8b1348931808067b116940a252abec6c26b01870c192829a711d`;
-- `water=null` remains unknown;
-- V2 vector remains exactly 17 values;
-- profile non-current;
+- `salt_ad=0.0` retained source-only as no-added-salt form evidence;
+- sodium does not infer salinity;
+- non-zero/null/missing salt evidence fails closed;
+- all 26 FIC source fields retained;
+- `water=null` remains source-not-reported;
+- sealed V2 vector contains exactly 17 values and no WATER value;
+- source profile is non-current;
 - ATOMIC v1 / INPUT;
-- no yield/retention/transformation/applicability publication;
-- no migration/schema; head remains 0038 and 0033 remains reserved.
+- generic `BUTTER_UNSALTED` / USDA FDC 173430 remains unchanged/current;
+- zero YieldModel/retention/FoodTransformation/TransformationApplicability rows;
+- zero RecipeVersion rows added;
+- no migration/schema change; head remains 0038 and 0033 remains reserved.
 
-## Corrected semantic verification
+The implementation reuses the accepted Step 3/4 publication service and project
+UoW; no shared publication-service semantics changed.
 
-On `f0b2fa24403589de8b6c16a20b3cc326772c0fbe`:
+## Exact runtime verification
 
-- Docs #345 — SUCCESS;
-- DC1 #207 — SUCCESS;
-- corrected semantic review #5314905510 — READY TO MERGE;
-- mergeable=true;
-- 0 behind main;
-- unresolved review threads=0;
-- patch whitespace/conflict audit clean.
+On `068847f4a3b886e6b8133558f2d4820a6a01474e`:
+
+- Nutrient Registry V2 #180 — SUCCESS:
+  - focused: **310 passed**;
+  - backend shards: **1205 / 798 / 614 / 959 passed**;
+  - launcher: **643 passed, 2 skipped**;
+- Partial nutrition profiles #139 — SUCCESS:
+  - focused: **258 passed**;
+  - backend shards: **1205 / 798 / 614 / 959 passed**;
+  - launcher: **643 passed, 2 skipped**;
+- Russian nutrition methodologies #116 — SUCCESS;
+- Docs #347 — SUCCESS;
+- DC1 #209 — SUCCESS;
+- `AI_ENABLED=false`;
+- PR patch whitespace/conflict audit — clean.
+
+Focused workflows explicitly execute both Step 4 and Step 8 production
+publication suites.
 
 ## Hard boundaries
 
-No Step 8 runtime/data publication before PR90 merge.
-
-No Step 9 RecipeVersion, Step 10 Planner integration, extra FIC foods,
-production retention/yield factors, API/UI/Retail/AI/Auth/PostgreSQL.
+No Step 9 RecipeVersion, Step 10 Planner integration, additional FIC foods,
+production transformation factors, API/UI/Retail/AI/Auth/PostgreSQL.
 
 ## Stop boundary
 
-PR90 is ready for final review/merge authorization.
+PR91 is ready for final review after state-only receipt verification.
 
-After merge: stop. Step 8 runtime/data publication requires separate explicit
+Do not merge autonomously. After merge, stop; Step 9 requires separate explicit
 authorization.

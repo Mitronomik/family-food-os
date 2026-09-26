@@ -15,6 +15,9 @@ on:
       - 'backend/app/tests/test_migration_lineage.py'
       - 'backend/app/tests/test_migration_runner_rebuild.py'
       - 'backend/app/tests/test_nutrient_vector.py'
+      - 'backend/app/seed/ru_nut_db_step8_butter.py'
+      - 'backend/app/tests/test_ru_nut_db_step8_butter_publication.py'
+      - 'data/curation/ru-nut-db-step8-butter-runtime/**'
       - 'backend/app/tests/table_guards.py'
       - 'docs/family-food/**'
       - 'state/**'
@@ -50,6 +53,8 @@ jobs:
           backend/app/tests/test_food_ingredient_migration.py
           backend/app/tests/test_partial_nutrition_profile_migration.py
           backend/app/tests/test_nutrient_vector.py
+          backend/app/tests/test_ru_nut_db_step4_publication.py
+          backend/app/tests/test_ru_nut_db_step8_butter_publication.py
           backend/app/tests/test_food_composition.py
           backend/app/tests/test_migration_lineage.py
           backend/app/tests/test_migration_runner_rebuild.py
