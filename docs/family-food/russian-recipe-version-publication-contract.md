@@ -495,6 +495,30 @@ Expected runtime shape is a narrow hash-pinned Step 9 package/loader, for exampl
 - `backend/app/seed/ru_school2022_step9_recipe.py`;
 - focused production-publication tests.
 
+### 18.1. DECISION — exact Composition lookup is read-only infrastructure
+
+Step 9 validation must resolve the accepted Step 8 composition by:
+
+`food_ingredient_id + composition version = 1`.
+
+The database already owns `UNIQUE(food_ingredient_id, version)`, and the reviewed
+nutrition-publication adapter already exposes equivalent `find_version(...)`
+semantics.
+
+If the runtime implementation needs this lookup outside the publication adapter,
+the gate authorizes only a **read-only exposure** of the same lookup through the
+existing Composition repository/reader boundary.
+
+It must not:
+
+- add SQL to an application/domain service;
+- create a second Composition repository;
+- change Composition identity/version semantics;
+- change calculation behavior;
+- write or republish the Step 8 composition.
+
+If a broader Composition contract change is required, stop and amend the gate.
+
 ## 19. DECISION — narrow preflight wraps reconcile_seed
 
 Existing `reconcile_seed()` correctly handles exact historical replay, but when
