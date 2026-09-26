@@ -1,5 +1,35 @@
 # Handoff
 
+## PR94 deep-corrected Contract Gate review-ready — 2026-09-26
+
+Corrected semantic head:
+560cce41e1c1ce54212052bd95dfc8fe4b0cdb13.
+
+Corrected review:
+#5326161326 — READY TO MERGE DEEP-CORRECTED STEP 10 CONTRACT GATE.
+
+Deep review #5326074689 blockers are closed:
+
+- RECIPE_V2_NUTRIENT_SET_V1 is the exact 54-code RU_NUTRIENT_REGISTRY_V2 snapshot;
+- canonical Recipe Nutrition preserves every requested concept as AVAILABLE or UNKNOWN;
+- RECIPE_COMPOSITION_NUTRITION_V1 separately versions row scaling, unknown
+  propagation, aggregation, base-serving division and result rounding;
+- V1 is intentionally gram-only, required-row-only and untransformed INPUT-basis;
+- FOOD_COMPOSITION_APPLICABILITY_V2 remains the lower-level Composition version;
+- Step 10-B Planner version is exactly planner-v0.3;
+- meal-role compatibility remains exactly meal-role-recipe-v2;
+- historical reads are independent of later mutable FoodIngredient active state;
+- exact replay preserves original created_at and binding REPLACE is forbidden.
+
+Verification:
+Docs #373 SUCCESS; DC1 #235 SUCCESS; Registry focused 328; Partial focused 276;
+54/54 request-set comparison PASS; sections 1–29 and acceptance 1–68 sequential;
+mergeable=true; 0 behind; whitespace/conflict audit clean.
+
+Stop for merge review. No self-merge.
+Step 10-A requires separate authorization after PR94 merge.
+Step 10-B remains unauthorized until Step 10-A merges.
+
 ## PR94 deep-review blocker correction — 2026-09-26
 
 Deep review #5326074689 superseded the prior READY receipt and found three

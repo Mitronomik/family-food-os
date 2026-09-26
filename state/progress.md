@@ -1,5 +1,36 @@
 # Progress
 
+## PR94 deep-corrected Contract Gate review-ready — 2026-09-26
+
+Corrected semantic head:
+560cce41e1c1ce54212052bd95dfc8fe4b0cdb13.
+
+Closed deep-review blockers from #5326074689:
+1. exact canonical V2 request-set identity;
+2. separate recipe-level calculation/version policy;
+3. exact durable Planner version identity.
+
+Additional bounded closures:
+- gram-only Recipe V1 mass authority;
+- optional/transformed roots fail closed in V1;
+- historical read vs mutable active-state boundary;
+- replay created_at preservation;
+- SQL REPLACE immutability.
+
+Corrected semantic review:
+#5326161326 READY TO MERGE.
+
+Verification:
+Docs #373 / DC1 #235 SUCCESS.
+Registry focused 328 passed.
+Partial focused 276 passed.
+54/54 request-set comparison PASS.
+
+Status:
+STEP10_CONTRACT_GATE_DEEP_CORRECTED_REVIEW_READY.
+
+No runtime/schema/production data mutation occurred.
+
 ## PR94 deep semantic blockers corrected — 2026-09-26
 
 Review #5326074689 blocked the gate on:
