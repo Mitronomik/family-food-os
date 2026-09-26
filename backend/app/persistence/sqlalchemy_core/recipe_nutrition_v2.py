@@ -153,10 +153,11 @@ class SqlAlchemyRecipeNutritionV2UnitOfWork(_Repositories, SqlAlchemyUnitOfWork)
             ) from exc
 
 
-def create_recipe_nutrition_v2_service(engine: Engine):
+def create_recipe_nutrition_v2_service(engine: Engine, *, clock=None):
     from app.services.recipe_nutrition_v2 import RecipeNutritionV2Service
 
     return RecipeNutritionV2Service(
         lambda: SqlAlchemyRecipeNutritionV2ReadScope(engine),
         lambda: SqlAlchemyRecipeNutritionV2UnitOfWork(engine),
+        clock=clock,
     )
