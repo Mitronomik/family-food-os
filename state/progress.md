@@ -1,5 +1,28 @@
 # Progress
 
+## PR92 corrected gate review-ready — 2026-09-26
+
+Both blockers from review #5324872702 are closed.
+
+Corrected semantic head:
+`3f7a4276ca623c23b61cb344c75e3751f2f83f54`.
+
+Frozen corrections:
+- institutional-only holding/14 °C are source context, not domestic executable steps;
+- exact process quarantine hash pinned;
+- fresh Step 9 Recipe is inactive;
+- default-preserving initial activation seam frozen;
+- replay never mutates activation;
+- current Planner candidate pool remains unchanged before Step 10.
+
+Verification:
+Docs #353 SUCCESS; DC1 #215 SUCCESS; corrected review #5324890694 READY TO MERGE.
+
+Status:
+`STEP9_CONTRACT_GATE_CORRECTED_REVIEW_READY`.
+
+No runtime/schema/production RecipeVersion write occurred.
+
 ## PR92 blockers corrected — 2026-09-26
 
 Review #5324872702 found:

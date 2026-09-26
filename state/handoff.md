@@ -1,5 +1,49 @@
 # Handoff
 
+## PR92 corrected Step 9 Contract Gate review-ready — 2026-09-26
+
+Accepted main:
+`88a22a3cdfdd13d5481875dcd499abf06939582c`.
+
+Branch:
+`docs/step9-russian-recipe-version-contract`.
+
+Verified corrected semantic head:
+`3f7a4276ca623c23b61cb344c75e3751f2f83f54`.
+
+Corrected semantic review:
+`#5324890694 — CORRECTED STEP 9 CONTRACT GATE READY TO MERGE`.
+
+Blocker #5324872702 is closed.
+
+Applicability:
+- exact process-evidence:40 hash pinned;
+- institutional-only refrigerated holding is not a domestic RecipeStep;
+- 14 °C remains institutional context;
+- home storage remains not granted;
+- production RecipeSteps are only material facts: no thermal treatment + cut into
+  portions.
+
+Planner/activation:
+- fresh Recipe is inactive;
+- additive `TrustedRecipeSeed.initial_is_active` defaults true for historical
+  callers;
+- Step 9 sets false;
+- replay preserves current activation state;
+- inactive Recipe is absent from Planner candidate enumeration;
+- Step 10 owns activation and V2 Planner integration.
+
+Everything else remains as frozen by the Step 9 gate: exact 10 g Step 8 butter,
+SOURCE_VERIFIED immutable version, deterministic 17-value V2 validation,
+unknown WATER/carbohydrate, no migration/source-corpus/legacy Nutrition change.
+
+Verification on corrected semantic head:
+Docs #353 SUCCESS; DC1 #215 SUCCESS; mergeable=true; 0 behind main; threads=0;
+scope/whitespace clean.
+
+Stop for final review/merge. No Step 9 runtime until gate merge + separate
+authorization.
+
 ## PR92 blocker correction — applicability + Planner activation — 2026-09-26
 
 Accepted main:
