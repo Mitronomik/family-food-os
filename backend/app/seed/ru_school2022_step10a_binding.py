@@ -16,6 +16,7 @@ from app.seed.ru_school2022_step9_recipe import (
     RECIPE_CODE,
     SCHOOL_PDF_SHA256,
     SOURCE_RECIPE_ID,
+    load_ru_school2022_step9_recipe_seed,
 )
 from app.services.recipe_nutrition_v2 import (
     BindingPublicationResult,
@@ -24,27 +25,31 @@ from app.services.recipe_nutrition_v2 import (
 
 SOURCE_VERSION = f"sha256:{SCHOOL_PDF_SHA256}"
 
-STEP10A_BINDING_SPEC = ReviewedRecipeIngredientBindingSpec(
-    recipe_code=RECIPE_CODE,
-    source_name="ru-school2022",
-    source_recipe_id=SOURCE_RECIPE_ID,
-    source_version=SOURCE_VERSION,
-    recipe_version_number=1,
-    ingredient_position=1,
-    food_ingredient_code=FOOD_CODE,
-    quantity=Decimal("10"),
-    unit="g",
-    composition_version=1,
-)
+def step10a_binding_spec() -> ReviewedRecipeIngredientBindingSpec:
+    trusted_seed, _ = load_ru_school2022_step9_recipe_seed()
+    return ReviewedRecipeIngredientBindingSpec(
+        trusted_recipe_seed=trusted_seed,
+        recipe_code=RECIPE_CODE,
+        source_name="ru-school2022",
+        source_recipe_id=SOURCE_RECIPE_ID,
+        source_version=SOURCE_VERSION,
+        recipe_version_number=1,
+        ingredient_position=1,
+        food_ingredient_code=FOOD_CODE,
+        quantity=Decimal("10"),
+        unit="g",
+        composition_version=1,
+    )
 
 
 def seed_ru_school2022_step10a_binding(
     config: DatabaseConfig | None = None,
 ) -> BindingPublicationResult:
+    spec = step10a_binding_spec()
     engine = create_sqlite_engine(config)
     try:
         service = create_recipe_nutrition_v2_service(engine)
-        result = service.publish_binding(STEP10A_BINDING_SPEC)
+        result = service.publish_binding(spec)
         canonical = service.calculate(result.recipe_version_id)
         if canonical.status is not RecipeNutritionV2Status.PARTIAL:
             raise RuntimeError("Step 10-A canonical Step 9 status изменён.")
