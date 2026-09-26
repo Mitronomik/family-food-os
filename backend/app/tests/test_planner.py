@@ -141,6 +141,45 @@ def test_hard_exclusion_precedes_sharedness_and_is_explained() -> None:
     )
 
 
+def test_exact_energy_readiness_is_narrow_and_legacy_incomplete_stays_rejected() -> None:
+    member_id = uid(2)
+    incomplete = PlannerCandidate(
+        uid(30),
+        MealTypeCode.MAIN,
+        frozenset(),
+        Decimal("400"),
+        NutritionStatus.INCOMPLETE,
+    )
+    ready = replace(incomplete, recipe_version_id=uid(31), exact_energy_ready=True)
+    base = PlannerRequest(
+        uid(1),
+        date(2026, 9, 14),
+        (
+            MemberPlannerConstraints(
+                member_id,
+                selection(member_id, (MealRole.DINNER,)),
+                Decimal("2000"),
+            ),
+        ),
+        (incomplete,),
+    )
+    rejected = generate_week(base, PlannerConfig(max_recipe_repetitions=10))
+    assert isinstance(rejected, PlannerFailure)
+    assert any(
+        PlannerRejectionCode.NUTRITION_UNAVAILABLE in item.rejection_codes
+        for item in rejected.trace.candidates
+    )
+
+    accepted = generate_week(
+        replace(base, candidates=(ready,)),
+        PlannerConfig(max_recipe_repetitions=10),
+    )
+    assert isinstance(accepted, PlannerSuccess)
+    assert accepted.trace.config_version == "planner-v0.3"
+    assert accepted.trace.compatibility_version == "meal-role-recipe-v2"
+    assert all(event.recipe_version_id == uid(31) for event in accepted.events)
+
+
 def test_infeasible_week_returns_bounded_failure_without_partial_success() -> None:
     value = request()
     result = generate_week(
@@ -330,7 +369,7 @@ def test_incompatible_members_split_and_subset_fixed_event_is_preserved() -> Non
             date(2026, 9, 14),
             1,
             MealPlanStatus.CONFIRMED,
-            "planner-v0.2",
+            "planner-v0.3",
             None,
             now,
         ),

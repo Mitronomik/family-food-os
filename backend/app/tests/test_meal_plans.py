@@ -354,7 +354,7 @@ def test_serving_nutrition_scales_recipe_truth_and_non_recipe_stays_unknown():
         servings,
     )
     recipe_nutrition = SimpleNamespace(
-        version=SimpleNamespace(id=recipe_version_id),
+        recipe_version_id=recipe_version_id,
         per_base_serving=NutritionValues(
             kcal=Decimal("400"),
             protein_g=Decimal("30"),
@@ -362,7 +362,7 @@ def test_serving_nutrition_scales_recipe_truth_and_non_recipe_stays_unknown():
             carbohydrates_g=Decimal("50"),
             fiber_g=Decimal("5"),
         ),
-        status=NutritionStatus.COMPLETE,
+        legacy_status=NutritionStatus.COMPLETE,
     )
     result = calculate_meal_plan_nutrition(
         detail, {recipe_version_id: recipe_nutrition}
@@ -416,7 +416,7 @@ def test_serving_nutrition_rejects_mismatched_recipe_version_truth():
         (Serving(uuid4(), event.id, member_id, Decimal("1"), NOW),),
     )
     mismatched = SimpleNamespace(
-        version=SimpleNamespace(id=uuid4()),
+        recipe_version_id=uuid4(),
         per_base_serving=NutritionValues(
             kcal=Decimal("400"),
             protein_g=Decimal("30"),
@@ -424,7 +424,7 @@ def test_serving_nutrition_rejects_mismatched_recipe_version_truth():
             carbohydrates_g=Decimal("50"),
             fiber_g=Decimal("5"),
         ),
-        status=NutritionStatus.COMPLETE,
+        legacy_status=NutritionStatus.COMPLETE,
     )
 
     with pytest.raises(DomainValidationError, match="Recipe nutrition must match"):
