@@ -4,8 +4,7 @@ import json
 from decimal import Decimal
 
 from app.db.config import DatabaseConfig
-from app.domain.nutrition import NutritionStatus
-from app.domain.recipe_nutrition_v2 import NUTRIENT_CODES, RecipeNutritionV2Status
+from app.domain.recipe_nutrition_v2 import NUTRIENT_CODES
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
     create_recipe_nutrition_v2_service,
@@ -39,6 +38,14 @@ def step10a_binding_spec() -> ReviewedRecipeIngredientBindingSpec:
         quantity=Decimal("10"),
         unit="g",
         composition_version=1,
+        expected_available_amounts=tuple(
+            (code, EXPECTED_RECIPE_AMOUNTS[code])
+            for code in NUTRIENT_CODES
+            if code in EXPECTED_RECIPE_AMOUNTS
+        ),
+        expected_unknown_codes=tuple(
+            code for code in NUTRIENT_CODES if code not in EXPECTED_RECIPE_AMOUNTS
+        ),
     )
 
 
@@ -49,30 +56,7 @@ def seed_ru_school2022_step10a_binding(
     engine = create_sqlite_engine(config)
     try:
         service = create_recipe_nutrition_v2_service(engine)
-        result = service.publish_binding(spec)
-        canonical = service.calculate(result.recipe_version_id)
-        if canonical.status is not RecipeNutritionV2Status.PARTIAL:
-            raise RuntimeError("Step 10-A canonical Step 9 status изменён.")
-        known = {
-            item.code: item.amount
-            for item in canonical.required_total
-            if item.amount is not None
-        }
-        if known != EXPECTED_RECIPE_AMOUNTS:
-            raise RuntimeError("Step 10-A canonical Step 9 nutrient values изменены.")
-        if len(canonical.required_total) != len(NUTRIENT_CODES):
-            raise RuntimeError("Step 10-A canonical request set изменён.")
-        projection = service.consumption_projection(result.recipe_version_id)
-        if (
-            projection.legacy_status is not NutritionStatus.INCOMPLETE
-            or projection.required_total.kcal != Decimal("66.090000")
-            or projection.required_total.protein_g != Decimal("0.080000")
-            or projection.required_total.fat_g != Decimal("7.250000")
-            or projection.required_total.fiber_g != Decimal("0.000000")
-            or projection.required_total.carbohydrates_g is not None
-        ):
-            raise RuntimeError("Step 10-A legacy compatibility projection изменена.")
-        return result
+        return service.publish_binding(spec)
     finally:
         engine.dispose()
 
