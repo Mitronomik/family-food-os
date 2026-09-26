@@ -36,6 +36,7 @@ from app.domain.recipe_nutrition_v2 import (
     REGISTRY_VERSION,
     CanonicalNutrientAmount,
     CanonicalRecipeVersionNutrition,
+    RecipeIngredientCompositionBinding,
     RecipeNutritionV2Status,
 )
 from app.services.recipe_nutrition_v2 import project_recipe_nutrition_consumption
@@ -88,7 +89,17 @@ def canonical(recipe_version_id: UUID) -> CanonicalRecipeVersionNutrition:
         nutrient_set_version=NUTRIENT_SET_VERSION,
         composition_calculation_version=COMPOSITION_CALCULATION_VERSION,
         recipe_calculation_version=RECIPE_CALCULATION_VERSION,
-        bindings=(),
+        bindings=(
+            RecipeIngredientCompositionBinding(
+                recipe_ingredient_id=uid(40),
+                composition_version_id=uid(41),
+                registry_version=REGISTRY_VERSION,
+                nutrient_set_version=NUTRIENT_SET_VERSION,
+                composition_calculation_version=COMPOSITION_CALCULATION_VERSION,
+                recipe_calculation_version=RECIPE_CALCULATION_VERSION,
+                created_at=NOW,
+            ),
+        ),
         required_total=values,
         per_base_serving=values,
         status=RecipeNutritionV2Status.PARTIAL,
@@ -101,7 +112,9 @@ def test_v2_exact_energy_flows_through_planner_mealplan_and_serving() -> None:
     member_id = uid(2)
     recipe_version_id = uid(3)
     accepted = selection(member_id)
-    projection = project_recipe_nutrition_consumption(canonical(recipe_version_id))
+    canonical_result = canonical(recipe_version_id)
+    assert len(canonical_result.bindings) == 1
+    projection = project_recipe_nutrition_consumption(canonical_result)
 
     assert projection.legacy_status is NutritionStatus.INCOMPLETE
     assert projection.exact_energy_ready is True
