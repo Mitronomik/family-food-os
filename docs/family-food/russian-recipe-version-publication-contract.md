@@ -8,10 +8,15 @@
 
 ## 1. Goal
 
-Step 9 publishes one immutable, source-backed Russian `RecipeVersion` that is
-materially executable from accepted FamilyFoodOS food/composition truth without
-inventing ingredient identity, mass, culinary transformation, storage duration,
-meal-slot eligibility or nutrition.
+Step 9 publishes one immutable, source-backed Russian `RecipeVersion` whose
+**material preparation facts** are executable from accepted FamilyFoodOS
+food/composition truth without inventing ingredient identity, mass, culinary
+transformation, storage duration, domestic handling guidance, meal-slot
+eligibility or nutrition.
+
+The published Recipe is intentionally **inactive**. Step 9 proves a technical,
+source-backed RecipeVersion vertical slice; it does not make that version
+consumer/Planner eligible.
 
 The selected vertical slice remains:
 
@@ -24,7 +29,8 @@ School2022 53-19з — «Масло сливочное (порциями)»
 → deterministic RU_NUTRIENT_REGISTRY_V2 composition calculation
 ```
 
-Step 9 publishes the recipe catalogue object only. Planner consumption is Step 10.
+Step 9 publishes the recipe catalogue object only, with its Recipe inactive.
+Explicit activation plus Planner/general-Nutrition integration belongs to Step 10.
 
 ## 2. FACT — sequencing and accepted prerequisites
 
@@ -112,11 +118,12 @@ The exact retained source lineage is:
 | source variant | `ru-school2022:recipe:53-19з:source-variant:1` | `9a7e02487b9bd3d2b7fdac68c90f717701708ed68d0e7c421ad1631cbcae8f42` |
 | ingredient demand | `ru-school2022:recipe:53-19з:row:1:demand:1` | `f27dd3a8e156eb7c07cac9dd5460a29f0eda2b4a2efecc8b1c900ecacc71e164` |
 | source process | `ru-school2022:recipe:53-19з:source-process` | `b9f4975ed8ed330464ed03fa8fffc713109dc5f10f6112695ee5e9cbc31c4f4e` |
+| institutional process-evidence quarantine | `ru-school2022:recipe:53-19з:process-evidence:40` | `5428e818127eceea1c69617e435666c6ce817666ba88bf7486b8c6ce4b60a6e4` |
 | executable selection | `ru-school2022:recipe:53-19з:source-variant:1:selection:86446b0c327de7f405fe` | `f0a235291eba3b04e370b39bb758b9f8e34d60dc9870c90e4b6798e47829bdbc` |
 | resolved execution route | `ru-school2022:recipe:53-19з:source-variant:1:selection:86446b0c327de7f405fe:closure:route:4f53cda18c2baa0c0354bb5f` | `a92d315561553a44b7f5ec6dd57d621aff73a8c471873eac5b1d7dbb89723a46` |
 
-The runtime package must pin these identities/hashes or an equivalent stronger
-exact-source receipt.
+The runtime package must pin these **seven** identities/hashes or an equivalent
+stronger exact-source receipt.
 
 ## 5. FACT — exact material recipe facts
 
@@ -169,12 +176,40 @@ The resolved route establishes:
 - zero process choices;
 - zero unquantified process inputs.
 
-The process evidence establishes:
+The source process contains four relevant factual statements:
 
 - no thermal treatment;
 - butter is cut into pieces;
 - portioned butter is held refrigerated before service;
 - serving temperature is 14 °C.
+
+These facts do **not** have identical publication applicability.
+
+The retained normalized process-evidence record
+
+`ru-school2022:recipe:53-19з:process-evidence:40`
+
+for the refrigerated-holding sentence explicitly freezes:
+
+```text
+applicability = institutional_school_catering_only
+domestic_applicability = unestablished
+not_executable_rule = true
+raw = Перед раздачей порционированное масло хранят в холодильнике.
+```
+
+Its canonical JSON SHA-256 is:
+
+`5428e818127eceea1c69617e435666c6ce817666ba88bf7486b8c6ce4b60a6e4`.
+
+The resolved execution route separately freezes
+`home_storage_status=not_granted`.
+
+**DECISION:** Step 9 may promote only the material preparation facts
+“no thermal treatment” and “cut into portions” into executable RecipeStep
+instructions. Refrigerated pre-service holding and the 14 °C serving condition
+remain pinned **institutional source-context evidence** in the reviewed package.
+They are not published as household storage/safety or consumer execution rules.
 
 ## 6. FACT / DECISION — historical v0.3 blockers are adjudicated, not ignored
 
@@ -221,7 +256,7 @@ page/layout.
 
 ## 7. DECISION — exact Recipe identity
 
-Step 9 freezes one new active Recipe:
+Step 9 freezes one new **inactive technical Recipe**:
 
 ```text
 canonical_code:
@@ -230,11 +265,18 @@ SCHOOL2022_53_19Z_BUTTER_PORTION
 canonical_name:
 Масло сливочное (порциями)
 
-is_active:
-true
+initial_is_active:
+false
 ```
 
-This technical vertical slice does not establish Planner default eligibility.
+Inactive is a machine-enforced Step 9 boundary, not merely a product label.
+Current `PlannerService` enumerates `FoodRecipeCatalogueService.list_active()`,
+so an inactive Recipe is absent from the Planner candidate pool before Step 10.
+
+Step 10 separately owns:
+- the decision/mechanism to activate this Recipe;
+- V2 Recipe nutrition consumption in the general Nutrition/Planner path;
+- any meal-role/default eligibility decision.
 
 If the canonical code or normalized name is already owned by a different Recipe,
 publication fails closed.
@@ -348,15 +390,25 @@ No density, edible fraction, piece conversion or estimate is used.
 
 Step 9 must not copy publisher layout or unnecessary expressive prose.
 
-The reviewed Russian execution steps are factual derivatives of the pinned source
-process:
+The reviewed Russian **material execution** steps are factual derivatives of the
+pinned source process:
 
 1. `Термическая обработка не требуется.`
 2. `Нарезать сливочное масло на порционные кусочки.`
-3. `До раздачи хранить порционированное масло в холодильнике.`
-4. `Подавать при температуре 14 °C.`
 
-The source organoleptic description is not required for this execution slice and
+The following source facts remain review-package context only and are **not**
+RecipeStep instructions:
+
+- `Перед раздачей порционированное масло хранят в холодильнике.`
+  — explicitly `institutional_school_catering_only`,
+  `domestic_applicability=unestablished`, `not_executable_rule=true`;
+- `Температура подачи: 14 °C.`
+  — retained as an institutional source serving condition, not promoted to a
+  household handling requirement.
+
+The route's `home_storage_status=not_granted` is preserved.
+
+The source organoleptic description is not required for this technical slice and
 is not copied into production RecipeVersion steps.
 
 All `stage_code` values remain null unless the current domain requires a
@@ -369,7 +421,8 @@ Current Recipe equipment taxonomy has no exact refrigerator/cold-holding code.
 Step 9 publishes zero `RecipeEquipment` rows rather than inventing a new code or
 misusing `resealable_container`.
 
-The refrigerated-holding source fact remains in the execution step.
+The refrigerated-holding source fact remains pinned in the reviewed package as
+institutional context and is not converted into a RecipeStep or equipment claim.
 
 ## 13. DECISION — source-declared nutrition is reference-only
 
@@ -453,13 +506,15 @@ Step 10 or a separately reviewed integration contract.
 
 ## 17. DECISION — “executable RecipeVersion” meaning
 
-For Step 9, executable means all of the following:
+For Step 9, technically executable means all of the following:
 
-- immutable active Recipe/RecipeVersion exists;
+- immutable RecipeVersion exists under an **inactive** Recipe;
 - exact source identity/version/hash is retained;
 - one required ingredient is resolved to the exact canonical FoodIngredient;
 - recipe input quantity is exact 10 g;
-- ordered execution steps are source-backed factual derivatives;
+- ordered material execution steps are source-backed factual derivatives;
+- institutional-only holding/serving conditions remain source context rather
+  than domestic execution rules;
 - no unresolved material/process choice remains;
 - deterministic V2 composition calculation succeeds for every available canonical
   nutrient;
@@ -467,7 +522,9 @@ For Step 9, executable means all of the following:
 
 It does **not** mean:
 
-- Planner eligible;
+- active in the Recipe catalogue;
+- consumer/domestic handling guidance is complete;
+- Planner visible or eligible;
 - default meal candidate;
 - family-serving optimized;
 - legacy `NutritionService` complete;
@@ -487,6 +544,35 @@ Step 9 reuses:
 
 No new Recipe table or alternate recipe model is authorized.
 
+### 18.1. DECISION — narrow initial activation seam
+
+The current `TrustedRecipeSeed` creation path hardcodes `Recipe.is_active=true`.
+That would violate the Step 9 / Step 10 boundary because current Planner
+composition enumerates all active Recipes automatically.
+
+Step 9 therefore authorizes one additive application-contract change:
+
+```text
+TrustedRecipeSeed.initial_is_active: bool = true
+```
+
+or an exactly equivalent reviewed field.
+
+Rules:
+
+- existing trusted recipe seeds that omit the field retain current behavior and
+  create active Recipes;
+- Step 9 sets `initial_is_active=false`;
+- only **fresh creation** uses the field;
+- exact replay never changes the persisted mutable activation state;
+- replay after a later Step 10 activation stays zero-write and must not
+  deactivate the Recipe;
+- replay of an inactive Step 9 Recipe must not reactivate it;
+- Step 9 adds no activation command/API and performs no activation write.
+
+This is an additive application seam only. It does not change Recipe schema,
+RecipeVersion immutability or historical seed bytes.
+
 Expected runtime shape is a narrow hash-pinned Step 9 package/loader, for example:
 
 - `data/curation/ru-school2022-step9-recipe-runtime/README.md`;
@@ -495,7 +581,7 @@ Expected runtime shape is a narrow hash-pinned Step 9 package/loader, for exampl
 - `backend/app/seed/ru_school2022_step9_recipe.py`;
 - focused production-publication tests.
 
-### 18.1. DECISION — exact Composition lookup is read-only infrastructure
+### 18.2. DECISION — exact Composition lookup is read-only infrastructure
 
 Step 9 validation must resolve the accepted Step 8 composition by:
 
@@ -537,10 +623,11 @@ enforce:
 - normalized Recipe name absent;
 - exact Step 8 FoodIngredient active;
 - exact Step 8 ATOMIC v1 / V2 composition readable;
-- deterministic 10 g V2 calculation passes.
+- deterministic 10 g V2 calculation passes;
+- Step 9 trusted seed requests `initial_is_active=false`.
 
-Then existing Recipe Catalogue transaction creates Recipe + Version + children
-and commits once.
+Then the existing Recipe Catalogue transaction, with the narrow activation seam
+from §18.1, creates an **inactive Recipe** + Version + children and commits once.
 
 ### Exact replay
 
@@ -552,6 +639,13 @@ Allowed only when:
   bundle.
 
 Replay performs zero writes and preserves IDs.
+
+`Recipe.is_active` is mutable catalogue state and is **not** rewritten to the
+Step 9 initial value during replay. Therefore:
+
+- replay while the Recipe is still inactive keeps it inactive;
+- replay after an explicitly authorized later activation keeps it active;
+- replay never activates/deactivates the Recipe.
 
 Later unrelated RecipeVersion history may coexist only if the exact Step 9
 historical version remains unchanged; replay never rewrites history.
@@ -627,7 +721,7 @@ If runtime implementation proves schema/shared immutable semantics must change,
 | --- | --- |
 | migrations 0001–0038 | unchanged |
 | reserved 0033 | unchanged / unconsumed |
-| existing Recipe catalogue/history | unchanged |
+| existing Recipe catalogue/history | unchanged; one new Step 9 Recipe starts inactive |
 | existing 30 technical seed RecipeVersions | unchanged |
 | source-corpus tables/data | unchanged |
 | Step 8 FoodIngredient/profile/vector | unchanged |
@@ -638,7 +732,7 @@ If runtime implementation proves schema/shared immutable semantics must change,
 | B1 nutrition assessment semantics | unchanged |
 | transformations/applicability | unchanged |
 | source-declared School2022 nutrition | reference-only |
-| Planner/API/UI defaults | unchanged |
+| Planner candidate pool / API / UI defaults | unchanged; inactive Step 9 Recipe is not enumerated |
 | AI_ENABLED=false | supported |
 
 ## 24. Adversarial acceptance tests frozen by this gate
@@ -655,47 +749,64 @@ Step 9 runtime publication must prove at least:
 8. source-variant canonical record hash matches;
 9. ingredient-demand canonical record hash matches;
 10. source-process canonical record hash matches;
-11. executable-selection canonical record hash matches;
-12. resolved-route canonical record hash matches;
-13. historical `publication_ready=false` is explicitly adjudicated, not ignored;
-14. project rights basis is the canonical normative-recipe factual-publication decision;
-15. no PDF/layout/photo/logo asset is copied into production package;
-16. Recipe code/name are exactly the frozen identity;
-17. Recipe is active;
-18. version number is 1 for fresh publication;
-19. base/source servings are exactly 1;
-20. meal type is `other` and grants no Planner eligibility;
-21. time/difficulty/batch/freezer/storage unknowns stay null;
-22. source provenance/version/URL/PDF hash are exact;
-23. source retrieval instant remains null rather than invented;
-24. rights status is REVIEWED with the narrow reviewed basis;
-25. exactly one RecipeIngredient is created;
-26. ingredient is exactly `BUTTER_PEASANT_72_5_UNSALTED`;
-27. quantity is exactly 10 g and optional=false;
-28. gross/net/source amount evidence is retained;
-29. no density/piece/edible-fraction conversion is used;
-30. exact four reviewed factual process steps are published in order;
-31. zero equipment rows are created;
-32. source organoleptic prose is not required/copied;
-33. School2022 nutrient totals do not populate production nutrition;
-34. no canonical carbohydrate value is invented;
-35. exact Step 8 ATOMIC v1 / INPUT is required;
-36. deterministic V2 calculation succeeds for all 17 available canonical nutrients;
-37. 10 g scaled values match the frozen table in §14;
-38. WATER remains unknown;
-39. legacy NutritionService behavior is unchanged;
-40. Step 8 profile remains non-current;
-41. no fake B1 assessment is created;
-42. fresh publication commits once;
-43. exact replay is zero-write and preserves IDs;
-44. unexpected existing Recipe history without exact Step 9 provenance fails closed;
-45. same-provenance structural drift fails closed;
-46. source/package/hash tamper fails before publication;
-47. injected late write failure rolls back Recipe + Version + children;
-48. existing Recipe catalogue rows are unchanged except the one new Step 9 bundle;
-49. source-corpus persisted rows are unchanged;
-50. no Step 10 Planner integration occurs;
-51. AI is not involved.
+11. institutional process-evidence record/hash matches;
+12. process evidence preserves `institutional_school_catering_only`,
+    `domestic_applicability=unestablished` and `not_executable_rule=true`;
+13. resolved route preserves `home_storage_status=not_granted`;
+14. executable-selection canonical record hash matches;
+15. resolved-route canonical record hash matches;
+16. historical `publication_ready=false` is explicitly adjudicated, not ignored;
+17. project rights basis is the canonical normative-recipe factual-publication decision;
+18. no PDF/layout/photo/logo asset is copied into production package;
+19. Recipe code/name are exactly the frozen identity;
+20. fresh Recipe is inactive;
+21. existing 30 trusted seed Recipes preserve their historical active behavior;
+22. version number is 1 for fresh publication;
+23. base/source servings are exactly 1;
+24. meal type is `other` and grants no Planner eligibility;
+25. time/difficulty/batch/freezer/storage unknowns stay null;
+26. source provenance/version/URL/PDF hash are exact;
+27. source retrieval instant remains null rather than invented;
+28. rights status is REVIEWED with the narrow reviewed basis;
+29. exactly one RecipeIngredient is created;
+30. ingredient is exactly `BUTTER_PEASANT_72_5_UNSALTED`;
+31. quantity is exactly 10 g and optional=false;
+32. gross/net/source amount evidence is retained;
+33. no density/piece/edible-fraction conversion is used;
+34. exactly two material RecipeSteps are published in order:
+    no thermal treatment, then cut into portion pieces;
+35. refrigerated pre-service holding is retained as institutional source context,
+    not a RecipeStep;
+36. 14 °C serving condition is retained as institutional source context, not a
+    household RecipeStep;
+37. zero equipment rows are created;
+38. source organoleptic prose is not required/copied;
+39. School2022 nutrient totals do not populate production nutrition;
+40. no canonical carbohydrate value is invented;
+41. exact Step 8 ATOMIC v1 / INPUT is required;
+42. deterministic V2 calculation succeeds for all 17 available canonical nutrients;
+43. 10 g scaled values match the frozen table in §14;
+44. WATER remains unknown;
+45. legacy NutritionService behavior is unchanged;
+46. Step 8 profile remains non-current;
+47. no fake B1 assessment is created;
+48. fresh publication commits once;
+49. exact replay is zero-write and preserves IDs;
+50. replay preserves the current mutable activation state and never
+    activates/deactivates the Recipe;
+51. before Step 10 the inactive Step 9 Recipe is absent from
+    `PlannerService` candidate enumeration/traces;
+52. no MealPlan can reference the inactive Step 9 Recipe through ordinary
+    authoritative Planner generation;
+53. unexpected existing Recipe history without exact Step 9 provenance fails closed;
+54. same-provenance structural drift fails closed;
+55. source/package/hash tamper fails before publication;
+56. injected late write failure rolls back Recipe + Version + children;
+57. existing Recipe catalogue rows are unchanged except the one new inactive
+    Step 9 bundle;
+58. source-corpus persisted rows are unchanged;
+59. no Step 10 activation/Planner integration occurs;
+60. AI is not involved.
 
 ## 25. Verification tier
 
@@ -705,7 +816,8 @@ and composition truth.
 Required review-ready evidence:
 
 - exact private corpus retrieval/hash receipt;
-- exact six-record source-lineage hash audit;
+- exact seven-record source-lineage hash audit, including the institutional
+  process-evidence quarantine;
 - rights/provenance audit;
 - source factual-derivative/process wording audit;
 - exact Step 8 dependency/composition check;
@@ -730,12 +842,14 @@ byte-identical runtime evidence.
 
 After Step 9 runtime/data publication is reviewed and merged, stop.
 
-Step 10 may separately integrate the new RecipeVersion/V2 Composition path into
-Planner and the general Nutrition consumption flow.
+Step 10 may separately activate the technical Recipe and integrate the new
+RecipeVersion/V2 Composition path into Planner and the general Nutrition
+consumption flow.
 
 Step 10 must not infer from Step 9 that:
 
 - `meal_type=other` is a preferred meal slot;
+- inactive Step 9 publication itself authorizes activation;
 - the recipe is automatically Planner-default;
 - missing carbohydrate/WATER may be filled;
 - old current-profile semantics may be silently replaced.
@@ -755,7 +869,8 @@ Step 9 does not authorize:
 - carbohydrate inference;
 - source-declared nutrition as production truth;
 - new equipment taxonomy;
-- storage/freezer claims;
+- household storage/serving-temperature claims from institutional evidence;
+- Recipe activation;
 - Planner integration;
 - Shopping/Prep/Retail;
 - API/UI;
