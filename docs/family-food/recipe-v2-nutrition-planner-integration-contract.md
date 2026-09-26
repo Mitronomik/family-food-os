@@ -339,7 +339,58 @@ Step 10 must not globally reinterpret legacy NutritionStatus.INCOMPLETE recipes 
 
 Existing legacy candidate behavior remains unchanged.
 
-## 18. DECISION — no meal-role compatibility expansion
+## 18. DECISION — MealPlan / Serving compatibility must not split from Planner
+
+Planner eligibility and downstream Serving nutrition must consume the same
+canonical authority without pretending sparse V2 data is legacy-complete.
+
+Step 10 therefore requires a truthful compatibility projection from the canonical
+composition-backed RecipeVersion result into the existing RecipeVersionNutrition
+shape used by MealPlan/Serving calculations.
+
+For a fully bound V2 RecipeVersion:
+
+- version identity must remain the exact RecipeVersion id;
+- known kcal/protein/fat/fiber values project exactly;
+- carbohydrate stays None when the canonical concept is unavailable;
+- status remains INCOMPLETE under the existing five-field completeness contract
+  when any required legacy field is unknown;
+- warnings/issues retain the reason for incomplete legacy projection.
+
+This projection is not the Planner eligibility decision.
+
+Planner uses the explicit V2-safe exact-energy readiness defined above.
+MealPlan/Serving may use the truthful RecipeVersionNutrition compatibility
+projection to scale known values while preserving unknown propagation.
+
+This prevents a split-brain state where Planner can select a composition-backed
+Recipe but Serving/day/week Nutrition cannot represent its accepted truth.
+
+No MealPlan schema change is required in Step 10 because the immutable
+RecipeIngredient Composition binding and calculation-policy pin make the
+RecipeVersion Nutrition input reproducible for this bounded authority model.
+
+If implementation proves historical MealPlan replay additionally requires a
+separate persisted nutrition-authority snapshot, STOP and amend this Contract Gate
+before runtime work continues.
+
+### Required integration proof
+
+A bounded synthetic compatible active Recipe fixture must demonstrate the full
+technical chain:
+
+~~~text
+Planner candidate composition
+→ exact V2 energy readiness
+→ MealPlan COOK_RECIPE event
+→ Serving scaling
+→ member day/week Nutrition
+~~~
+
+Known nutrients scale exactly; unknown carbohydrate remains unknown; aggregate
+status remains truthful rather than being upgraded to COMPLETE.
+
+## 19. DECISION — no meal-role compatibility expansion
 
 Step 10 does not modify:
 
@@ -353,7 +404,7 @@ MealTypeCode.OTHER does not become breakfast, lunch, dinner or snack.
 
 No butter-specific meal-role exception is permitted.
 
-## 19. DECISION — production candidate pool remains unchanged by Step 9 Recipe
+## 20. DECISION — production candidate pool remains unchanged by Step 9 Recipe
 
 Step 10 does not activate SCHOOL2022_53_19Z_BUTTER_PORTION.
 
@@ -367,7 +418,7 @@ Planner integration is proven with bounded test fixtures using a compatible acti
 
 Test fixtures are not production catalogue publication.
 
-## 20. DECISION — future activation gate
+## 21. DECISION — future activation gate
 
 A later production Recipe activation requires:
 
@@ -379,7 +430,7 @@ A later production Recipe activation requires:
 
 Nutrition calculation success alone never implies activation.
 
-## 21. Transaction boundary
+## 22. Transaction boundary
 
 Step 10 requires no binding-plus-activation cross-context transaction because production activation is out of scope.
 
@@ -389,7 +440,7 @@ Injected failure after an attempted binding write must roll back the binding pub
 
 Existing RecipeVersion and Composition history is read-only.
 
-## 22. Preservation matrix
+## 23. Preservation matrix
 
 | Accepted truth | Step 10 requirement |
 | --- | --- |
@@ -411,7 +462,7 @@ Existing RecipeVersion and Composition history is read-only.
 | School2022 declared nutrition | reference-only |
 | AI_ENABLED=false | supported |
 
-## 23. Adversarial acceptance tests
+## 24. Adversarial acceptance tests
 
 Runtime Step 10 must prove at least:
 
@@ -447,11 +498,16 @@ Runtime Step 10 must prove at least:
 30. ROLE_COMPATIBILITY_V1 is unchanged;
 31. Planner compatibility version is unchanged;
 32. accepted production Planner fixture outputs remain unchanged;
-33. no Recipe/RecipeVersion/source-corpus publication occurs;
-34. no API/UI/Retail/Auth/PostgreSQL/AI scope occurs;
-35. AI_ENABLED=false.
+33. a synthetic V2-bound compatible Recipe selected by Planner can be represented
+    by MealPlan/Serving Nutrition through the truthful compatibility projection;
+34. Serving scaling preserves exact known kcal/protein/fat/fiber values;
+35. missing canonical carbohydrate remains unknown through Serving/day/week aggregation;
+36. sparse V2 MealPlan Nutrition is not upgraded to legacy COMPLETE;
+37. no Recipe/RecipeVersion/source-corpus publication occurs;
+38. no API/UI/Retail/Auth/PostgreSQL/AI scope occurs;
+39. AI_ENABLED=false.
 
-## 24. Verification tier
+## 25. Verification tier
 
 Step 10 is a cross-context Nutrition / persistence / Planner integration.
 
@@ -475,7 +531,7 @@ Runtime review-ready evidence must include:
 
 A later state/docs-only receipt does not invalidate byte-identical verified runtime evidence.
 
-## 25. Explicit non-goals
+## 26. Explicit non-goals
 
 Step 10 does not authorize:
 
@@ -500,7 +556,7 @@ Step 10 does not authorize:
 - Auth / PostgreSQL;
 - AI authority.
 
-## 26. Runtime handoff after gate merge
+## 27. Runtime handoff after gate merge
 
 After this gate is reviewed and merged, a separate explicit authorization may implement:
 
@@ -516,7 +572,7 @@ The production Step 9 Recipe stays inactive.
 
 After runtime review/merge, stop before any real Recipe activation or next production data publication.
 
-## 27. Stop boundary
+## 28. Stop boundary
 
 This PR is docs/state only.
 
