@@ -24,7 +24,6 @@ Status:
 
 No production data/runtime changes occurred in this correction.
 
-After merge, select one concrete bounded operation under Issue #67 before implementation begins.
 
 Next step after merge:
 select and explicitly authorize one concrete bounded DC2 or DC3 operation under
