@@ -22,7 +22,6 @@ from app.seed.ru_school2022_step9_recipe import (
     seed_ru_school2022_step9_recipe,
 )
 from app.seed.ru_school2022_step10a_binding import (
-    STEP10A_BINDING_SPEC,
     seed_ru_school2022_step10a_binding,
 )
 from app.services.recipe_nutrition_v2 import BindingDisposition
@@ -153,26 +152,29 @@ def test_binding_sql_history_is_immutable_including_replace(database):
 
 def test_binding_rejects_wrong_food_composition_relation(database):
     with sqlite3.connect(database.path) as db:
-        recipe_row = db.execute(
+        wrong_recipe_row = db.execute(
             """
-            SELECT ri.id, ri.food_ingredient_id
+            SELECT ri.id
             FROM food_recipe_ingredients ri
             JOIN food_recipe_versions rv ON rv.id = ri.recipe_version_id
             JOIN food_recipes r ON r.id = rv.recipe_id
-            WHERE r.canonical_code=?
+            WHERE r.canonical_code != ?
+            ORDER BY r.canonical_code, rv.version_number, ri.position
+            LIMIT 1
             """,
             (RECIPE_CODE,),
         ).fetchone()
-        assert recipe_row is not None
-        wrong = db.execute(
+        butter_composition = db.execute(
             """
-            SELECT id FROM food_composition_versions
-            WHERE food_ingredient_id != ?
-            LIMIT 1
+            SELECT c.id
+            FROM food_composition_versions c
+            JOIN food_ingredients i ON i.id = c.food_ingredient_id
+            WHERE i.canonical_code = ? AND c.version = 1
             """,
-            (recipe_row[1],),
+            (FOOD_CODE,),
         ).fetchone()
-        assert wrong is not None
+        assert wrong_recipe_row is not None
+        assert butter_composition is not None
 
         with pytest.raises(sqlite3.IntegrityError, match="разным FoodIngredient"):
             db.execute(
@@ -187,7 +189,7 @@ def test_binding_rejects_wrong_food_composition_relation(database):
                           'RECIPE_COMPOSITION_NUTRITION_V1',
                           '2026-09-26 00:00:00.000000')
                 """,
-                (recipe_row[0], wrong[0]),
+                (wrong_recipe_row[0], butter_composition[0]),
             )
         db.rollback()
 
