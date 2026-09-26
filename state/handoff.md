@@ -1,5 +1,166 @@
 # Handoff
 
+## PR92 corrected Step 9 Contract Gate review-ready — 2026-09-26
+
+Accepted main:
+`88a22a3cdfdd13d5481875dcd499abf06939582c`.
+
+Branch:
+`docs/step9-russian-recipe-version-contract`.
+
+Verified corrected semantic head:
+`3f7a4276ca623c23b61cb344c75e3751f2f83f54`.
+
+Corrected semantic review:
+`#5324890694 — CORRECTED STEP 9 CONTRACT GATE READY TO MERGE`.
+
+Blocker #5324872702 is closed.
+
+Applicability:
+- exact process-evidence:40 hash pinned;
+- institutional-only refrigerated holding is not a domestic RecipeStep;
+- 14 °C remains institutional context;
+- home storage remains not granted;
+- production RecipeSteps are only material facts: no thermal treatment + cut into
+  portions.
+
+Planner/activation:
+- fresh Recipe is inactive;
+- additive `TrustedRecipeSeed.initial_is_active` defaults true for historical
+  callers;
+- Step 9 sets false;
+- replay preserves current activation state;
+- inactive Recipe is absent from Planner candidate enumeration;
+- Step 10 owns activation and V2 Planner integration.
+
+Everything else remains as frozen by the Step 9 gate: exact 10 g Step 8 butter,
+SOURCE_VERIFIED immutable version, deterministic 17-value V2 validation,
+unknown WATER/carbohydrate, no migration/source-corpus/legacy Nutrition change.
+
+Verification on corrected semantic head:
+Docs #353 SUCCESS; DC1 #215 SUCCESS; mergeable=true; 0 behind main; threads=0;
+scope/whitespace clean.
+
+Stop for final review/merge. No Step 9 runtime until gate merge + separate
+authorization.
+
+## PR92 blocker correction — applicability + Planner activation — 2026-09-26
+
+Accepted main:
+`88a22a3cdfdd13d5481875dcd499abf06939582c`.
+
+Branch:
+`docs/step9-russian-recipe-version-contract`.
+
+Independent re-review #5324872702 found two blockers.
+
+### Applicability correction
+
+Pinned exact process-evidence:
+`ru-school2022:recipe:53-19з:process-evidence:40`
+SHA-256
+`5428e818127eceea1c69617e435666c6ce817666ba88bf7486b8c6ce4b60a6e4`.
+
+It is explicitly institutional-only, domestic applicability unestablished and
+not an executable domestic rule.
+
+Corrected Gate publishes only:
+1. no thermal treatment;
+2. cut butter into portion pieces.
+
+Refrigerated holding + 14 °C remain institutional source-context evidence.
+`home_storage_status=not_granted` is preserved.
+
+### Planner/activation correction
+
+Current Planner enumerates all active Recipes.
+
+Corrected Gate therefore:
+- creates Step 9 Recipe inactive;
+- authorizes additive `TrustedRecipeSeed.initial_is_active` with default true;
+- Step 9 sets false;
+- existing seed behavior remains active;
+- replay preserves persisted activation state and never reactivates/deactivates;
+- Step 9 Recipe is absent from Planner candidate pool before Step 10;
+- Step 10 owns activation + V2 Planner integration.
+
+No schema/migration/source-corpus expansion is introduced.
+
+Current task: corrected Docs/DC1 + semantic re-review. No runtime work.
+
+## PR92 Step 9 Contract Gate review-ready — 2026-09-26
+
+Accepted main:
+`88a22a3cdfdd13d5481875dcd499abf06939582c` (merged PR91).
+
+Branch:
+`docs/step9-russian-recipe-version-contract`.
+
+Verified semantic head:
+`b0b5f890ce850075ea91d43e54bc8f93a6497c0d`.
+
+Canonical gate:
+`docs/family-food/russian-recipe-version-publication-contract.md`.
+
+Semantic review:
+`#5324830015 — READY TO MERGE STEP 9 CONTRACT GATE`.
+
+Frozen target:
+School2022 `53-19з — Масло сливочное (порциями)`
+→ exact Step 8 butter 10 g
+→ one immutable SOURCE_VERIFIED RecipeVersion
+→ deterministic available V2 nutrition.
+
+Key boundaries:
+- exact six-record source lineage hashes pinned;
+- factual normative-card rights policy, no PDF/layout/media redistribution;
+- historical v0.3 blockers explicitly adjudicated;
+- no canonical carbohydrate/WATER invention;
+- no legacy NutritionService/current-profile switch;
+- read-only exact Composition lookup only if runtime needs it;
+- strict fresh/replay/conflict wrapper around Recipe reconcile;
+- no source-corpus persistence expansion;
+- no migration; 0033 reserved / head 0038;
+- no Step 10.
+
+Verification on semantic head:
+Docs #350 SUCCESS; DC1 #212 SUCCESS; mergeable=true; 0 behind main; threads=0;
+scope/whitespace clean.
+
+Stop for final review. No runtime Step 9 until gate merge + separate authorization.
+
+## Step 9 Russian RecipeVersion Contract Gate — 2026-09-26
+
+Accepted main:
+`88a22a3cdfdd13d5481875dcd499abf06939582c` (merged PR91 / accepted Step 8 runtime).
+
+Branch:
+`docs/step9-russian-recipe-version-contract`.
+
+Canonical gate:
+`docs/family-food/russian-recipe-version-publication-contract.md`.
+
+Target:
+School2022 `53-19з — Масло сливочное (порциями)`.
+
+Key preflight:
+- one exact 10 g butter dependency is now closed by Step 8;
+- exact source-card/variant/demand/process/selection/route hashes are pinned;
+- historical v0.3 `publication_ready=false` is explicitly adjudicated rather
+  than ignored;
+- canonical project policy permits factual normative recipe publication while
+  excluding publisher layout/photos/logos/third-party commentary;
+- Recipe Catalogue schema/UoW is sufficient, no migration expected;
+- narrow preflight must reject unexpected existing Recipe history rather than
+  silently append;
+- old NutritionService current-profile path is intentionally not used because
+  Step 8 FIC profile is non-current;
+- deterministic acceptance is exact ATOMIC v1 + V2 composition scaled to 10 g;
+- carbohydrate and WATER remain unknown;
+- Step 10 Planner integration remains separate.
+
+Current authorization is docs-only. Stop after gate review-ready delivery.
+
 ## Step 8 runtime/data review-ready — PR91
 
 Accepted main:

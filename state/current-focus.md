@@ -1,78 +1,102 @@
 # Current focus
 
-Updated: `2026-09-25`.
+Updated: `2026-09-26`.
 
 ## Accepted state
 
-PR90 / corrected Step 8 Contract Gate is merged into `main` at
-`76ca8f8ffba589576af4e0fad4d7a4817a84089f`.
+PR91 / Step 8 runtime-data publication is merged into `main` at
+`88a22a3cdfdd13d5481875dcd499abf06939582c`.
 
-Russian-data integration Steps 1–7 and the Step 8 Contract Gate are accepted.
+Russian-data integration Steps 1–8 are accepted.
 
 ## Current bounded state
 
-**Step 8 runtime/data publication is review-ready in PR91.**
+**PR92 / corrected Step 9 executable Russian RecipeVersion Contract Gate is review-ready.**
 
 Branch:
-`feat/step8-recipe-dependency-butter-runtime`.
+`docs/step9-russian-recipe-version-contract`.
 
-Verified runtime/test/workflow head:
-`068847f4a3b886e6b8133558f2d4820a6a01474e`.
+Verified corrected semantic head:
+`3f7a4276ca623c23b61cb344c75e3751f2f83f54`.
 
-Canonical contract:
-`docs/family-food/recipe-dependency-food-batch-contract.md`.
+Canonical gate:
+`docs/family-food/russian-recipe-version-publication-contract.md`.
 
-## Delivered Step 8 runtime/data
+## Corrected applicability boundary
 
-- new exact `BUTTER_PEASANT_72_5_UNSALTED`;
-- licensed FIC RU-NUT-DB code 1417 / DB/533;
-- exact raw record SHA-256
-  `b21345dd5ffa8b1348931808067b116940a252abec6c26b01870c192829a711d`;
-- `salt_ad=0.0` retained source-only as no-added-salt form evidence;
-- sodium does not infer salinity;
-- non-zero/null/missing salt evidence fails closed;
-- all 26 FIC source fields retained;
-- `water=null` remains source-not-reported;
-- sealed V2 vector contains exactly 17 values and no WATER value;
-- source profile is non-current;
-- ATOMIC v1 / INPUT;
-- generic `BUTTER_UNSALTED` / USDA FDC 173430 remains unchanged/current;
-- zero YieldModel/retention/FoodTransformation/TransformationApplicability rows;
-- zero RecipeVersion rows added;
-- no migration/schema change; head remains 0038 and 0033 remains reserved.
+Review #5324872702 is closed.
 
-The implementation reuses the accepted Step 3/4 publication service and project
-UoW; no shared publication-service semantics changed.
+Pinned institutional process evidence:
 
-## Exact runtime verification
+```text
+ru-school2022:recipe:53-19з:process-evidence:40
+SHA-256 = 5428e818127eceea1c69617e435666c6ce817666ba88bf7486b8c6ce4b60a6e4
+applicability = institutional_school_catering_only
+domestic_applicability = unestablished
+not_executable_rule = true
+```
 
-On `068847f4a3b886e6b8133558f2d4820a6a01474e`:
+Step 9 RecipeSteps are now exactly:
+1. no thermal treatment;
+2. cut butter into portion pieces.
 
-- Nutrient Registry V2 #180 — SUCCESS:
-  - focused: **310 passed**;
-  - backend shards: **1205 / 798 / 614 / 959 passed**;
-  - launcher: **643 passed, 2 skipped**;
-- Partial nutrition profiles #139 — SUCCESS:
-  - focused: **258 passed**;
-  - backend shards: **1205 / 798 / 614 / 959 passed**;
-  - launcher: **643 passed, 2 skipped**;
-- Russian nutrition methodologies #116 — SUCCESS;
-- Docs #347 — SUCCESS;
-- DC1 #209 — SUCCESS;
-- `AI_ENABLED=false`;
-- PR patch whitespace/conflict audit — clean.
+Refrigerated pre-service holding and 14 °C serving remain institutional
+source-context evidence only.
 
-Focused workflows explicitly execute both Step 4 and Step 8 production
-publication suites.
+`home_storage_status=not_granted` remains preserved.
 
-## Hard boundaries
+## Corrected Planner / activation boundary
 
-No Step 9 RecipeVersion, Step 10 Planner integration, additional FIC foods,
-production transformation factors, API/UI/Retail/AI/Auth/PostgreSQL.
+Fresh Step 9 Recipe is inactive.
+
+The gate authorizes one additive application seam:
+`TrustedRecipeSeed.initial_is_active: bool = true`.
+
+- existing trusted seeds keep active behavior;
+- Step 9 sets false for fresh creation;
+- exact replay never mutates activation;
+- inactive Step 9 Recipe is absent from current Planner `list_active()` candidate
+  enumeration/traces;
+- Step 10 separately owns activation + V2 Planner/general-Nutrition integration.
+
+## Preserved Step 9 contract
+
+- exact School2022 53-19з vertical slice;
+- seven exact source-lineage/process hashes;
+- exact 10 g `BUTTER_PEASANT_72_5_UNSALTED` dependency;
+- immutable SOURCE_VERIFIED RecipeVersion;
+- source-declared nutrition reference-only;
+- deterministic 17-value V2 validation from Step 8 ATOMIC v1;
+- WATER/carbohydrate remain unknown;
+- Step 8 profile non-current;
+- legacy NutritionService unchanged;
+- strict fresh/replay/conflict semantics;
+- read-only Composition lookup seam only;
+- no source-corpus persistence expansion;
+- no schema/migration; 0033 reserved, head 0038.
+
+## Corrected semantic verification
+
+On `3f7a4276ca623c23b61cb344c75e3751f2f83f54`:
+
+- Docs #353 — SUCCESS;
+- DC1 #215 — SUCCESS;
+- corrected semantic review #5324890694 — READY TO MERGE;
+- mergeable=true;
+- 0 behind main;
+- unresolved review threads=0;
+- changed scope = one canonical contract + three state files;
+- whitespace/conflict audit clean.
+
+## Hard boundary
+
+PR92 is docs/state only.
+
+No Step 9 runtime before PR92 merge + separate runtime authorization.
+No Step 10 work starts automatically.
 
 ## Stop boundary
 
-PR91 is ready for final review after state-only receipt verification.
+PR92 is ready for final review/merge authorization.
 
-Do not merge autonomously. After merge, stop; Step 9 requires separate explicit
-authorization.
+Do not merge autonomously.

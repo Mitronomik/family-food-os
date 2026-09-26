@@ -1,5 +1,103 @@
 # Progress
 
+## PR92 corrected gate review-ready — 2026-09-26
+
+Both blockers from review #5324872702 are closed.
+
+Corrected semantic head:
+`3f7a4276ca623c23b61cb344c75e3751f2f83f54`.
+
+Frozen corrections:
+- institutional-only holding/14 °C are source context, not domestic executable steps;
+- exact process quarantine hash pinned;
+- fresh Step 9 Recipe is inactive;
+- default-preserving initial activation seam frozen;
+- replay never mutates activation;
+- current Planner candidate pool remains unchanged before Step 10.
+
+Verification:
+Docs #353 SUCCESS; DC1 #215 SUCCESS; corrected review #5324890694 READY TO MERGE.
+
+Status:
+`STEP9_CONTRACT_GATE_CORRECTED_REVIEW_READY`.
+
+No runtime/schema/production RecipeVersion write occurred.
+
+## PR92 blockers corrected — 2026-09-26
+
+Review #5324872702 found:
+1. institutional-only refrigerated-holding evidence was being promoted to a
+   domestic RecipeStep;
+2. active SOURCE_VERIFIED Recipe would enter current Planner enumeration before
+   Step 10.
+
+Corrected contract head:
+`1c8dc51c889c50713f0027efe0d31a31a9f66f7b`.
+
+Corrections:
+- exact institutional process-evidence hash pinned;
+- only material preparation facts become RecipeSteps;
+- institutional holding/14 °C stay source context;
+- home storage remains not granted;
+- fresh Step 9 Recipe is inactive;
+- additive initial-activation seam is frozen with default-preserving behavior;
+- replay never mutates activation;
+- Planner candidate pool stays unchanged before Step 10.
+
+Status:
+`STEP9_CONTRACT_GATE_CORRECTED_REVERIFYING`.
+
+No runtime/schema/production RecipeVersion write occurred.
+
+## PR92 Step 9 Contract Gate review-ready — 2026-09-26
+
+Step 9 preflight is frozen in:
+`docs/family-food/russian-recipe-version-publication-contract.md`.
+
+Verified semantic head:
+`b0b5f890ce850075ea91d43e54bc8f93a6497c0d`.
+
+Outcome:
+- exact School2022 source lineage and one-food execution route pinned;
+- Recipe/RecipeVersion/ingredient/process fields frozen;
+- canonical factual-publication rights boundary frozen;
+- deterministic 10 g V2 Composition acceptance frozen;
+- legacy current-profile Nutrition path explicitly excluded;
+- strict replay/conflict semantics frozen;
+- no migration/source-corpus/Planner expansion.
+
+Verification:
+Docs #350 SUCCESS; DC1 #212 SUCCESS; semantic review #5324830015 READY TO MERGE.
+
+Status:
+`STEP9_CONTRACT_GATE_REVIEW_READY`.
+
+No runtime/schema/production RecipeVersion write occurred.
+
+## Step 9 Contract Gate started — 2026-09-26
+
+PR91 is merged at:
+`88a22a3cdfdd13d5481875dcd499abf06939582c`.
+
+Step 8 is accepted.
+
+Step 9 preflight selected the same exact School2022 `53-19з` vertical slice and
+confirmed:
+- source material execution is one exact 10 g ingredient;
+- Step 8 closes the required food/composition dependency;
+- existing Recipe Catalogue persistence is sufficient without migration;
+- canonical normative-recipe rights policy allows narrow factual publication;
+- old v0.3 rights/carbohydrate blockers must be adjudicated explicitly;
+- legacy current-profile NutritionService cannot be used for the non-current
+  Step 8 profile;
+- V2 Composition is the Step 9 deterministic calculation authority;
+- Planner integration remains Step 10.
+
+Status:
+`STEP9_CONTRACT_GATE_ACTIVE`.
+
+No runtime/schema/production RecipeVersion write has occurred.
+
 ## Step 8 runtime/data review-ready — 2026-09-25
 
 Accepted base:
