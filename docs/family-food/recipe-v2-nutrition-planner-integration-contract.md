@@ -634,13 +634,41 @@ Canonical total carbohydrate remains unknown.
 
 STARCH plus SUGARS_TOTAL is not silently promoted to canonical total or available carbohydrate.
 
-If a compatibility projection into legacy NutritionValues exists:
+The compatibility projection into legacy `NutritionValues` is part of
+`RECIPE_COMPOSITION_NUTRITION_V1` and is frozen exactly as:
 
-- kcal may map from ENERGY_KCAL;
-- protein may map from PROTEIN;
-- fat may map from FAT_TOTAL;
-- fiber may map from FIBER_TOTAL_DIETARY;
-- carbohydrate stays None unless the exact required canonical concept exists.
+~~~text
+NutritionValues.kcal              ← ENERGY_KCAL
+NutritionValues.protein_g         ← PROTEIN
+NutritionValues.fat_g             ← FAT_TOTAL
+NutritionValues.carbohydrates_g   ← CARBOHYDRATE_BY_DIFFERENCE
+NutritionValues.fiber_g           ← FIBER_TOTAL_DIETARY
+~~~
+
+Legacy `NutritionValues.carbohydrates_g` preserves the accepted historical
+FoodNutritionProfile semantic: total carbohydrate **by difference**.
+
+Rules:
+
+- only `CARBOHYDRATE_BY_DIFFERENCE` may populate legacy
+  `carbohydrates_g`;
+- `CARBOHYDRATE_AVAILABLE` never substitutes for it;
+- `STARCH + SUGARS_TOTAL` never synthesizes it;
+- there is no AVAILABLE → BY_DIFFERENCE fallback;
+- when `CARBOHYDRATE_BY_DIFFERENCE` is UNKNOWN, legacy
+  `carbohydrates_g = None`;
+- when AVAILABLE and BY_DIFFERENCE are both AVAILABLE and numerically differ,
+  canonical V2 retains both values while the legacy field uses
+  BY_DIFFERENCE exactly.
+
+Changing this crosswalk is a Recipe Nutrition formula change and requires a new
+recipe calculation version; it cannot silently alter
+`RECIPE_COMPOSITION_NUTRITION_V1`.
+
+For the Step 9 butter Recipe, `CARBOHYDRATE_BY_DIFFERENCE` is UNKNOWN.
+Therefore its compatibility `NutritionValues.carbohydrates_g` is `None` and
+its legacy five-field status is `INCOMPLETE`, even though exact energy is
+available for the separately versioned Planner readiness path.
 
 A sparse V2 result must not be mislabeled as legacy five-field COMPLETE.
 
@@ -971,7 +999,19 @@ Runtime Step 10 must prove at least:
     version;
 67. INSERT OR REPLACE cannot replace an existing binding row;
 68. exact replay at a later clock instant preserves the original created_at and
-    performs zero writes.
+    performs zero writes;
+69. legacy `NutritionValues.carbohydrates_g` maps only from
+    CARBOHYDRATE_BY_DIFFERENCE;
+70. CARBOHYDRATE_AVAILABLE AVAILABLE while CARBOHYDRATE_BY_DIFFERENCE UNKNOWN
+    leaves legacy `carbohydrates_g = None`;
+71. when CARBOHYDRATE_BY_DIFFERENCE is AVAILABLE, legacy carbohydrates maps its
+    exact value;
+72. when CARBOHYDRATE_AVAILABLE and CARBOHYDRATE_BY_DIFFERENCE are both
+    AVAILABLE and differ, canonical V2 preserves both and the legacy field uses
+    CARBOHYDRATE_BY_DIFFERENCE only;
+73. STARCH plus SUGARS_TOTAL cannot synthesize legacy carbohydrates;
+74. the exact Step 9 butter compatibility projection remains legacy INCOMPLETE
+    because CARBOHYDRATE_BY_DIFFERENCE is UNKNOWN.
 
 ## 26. Verification tier
 
@@ -982,7 +1022,8 @@ Step 10-A review-ready evidence must include migration/binding/canonical-Nutriti
 checks and broad regression required by its authoritative data publication,
 including the post-preflight deactivation race, exact-replay in-UoW dependency
 recheck, exact Composition/Recipe calculation-policy identities, frozen 54-code
-request-set semantics, recipe scaling/rounding behavior, historical-read
+request-set semantics, recipe scaling/rounding behavior, exact
+CARBOHYDRATE_BY_DIFFERENCE-only legacy carbohydrate projection, historical-read
 independence from mutable active state, and injected late binding rollback.
 
 Step 10-B review-ready evidence must include Planner/MealPlan integration checks,

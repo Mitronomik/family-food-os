@@ -1,5 +1,21 @@
 # Progress
 
+## PR94 final compatibility blocker corrected — 2026-09-26
+
+Review #5326205581 blocked the gate on an unfrozen legacy carbohydrate crosswalk.
+
+Correction:
+`NutritionValues.carbohydrates_g` now maps exactly and only from
+`CARBOHYDRATE_BY_DIFFERENCE` under
+`RECIPE_COMPOSITION_NUTRITION_V1`.
+
+AVAILABLE carbohydrate and STARCH+SUGARS are explicitly forbidden fallbacks.
+
+Status:
+STEP10_CONTRACT_GATE_FINAL_COMPATIBILITY_CORRECTION_VERIFICATION_PENDING.
+
+No runtime/schema/production data changed.
+
 ## PR94 deep-corrected Contract Gate review-ready — 2026-09-26
 
 Corrected semantic head:

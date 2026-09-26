@@ -1,5 +1,28 @@
 # Handoff
 
+## PR94 final compatibility blocker correction — 2026-09-26
+
+Exhaustive review #5326205581 superseded the prior READY receipt and found one
+remaining V2 → legacy projection ambiguity.
+
+Correction implemented:
+
+- legacy kcal ← ENERGY_KCAL;
+- legacy protein_g ← PROTEIN;
+- legacy fat_g ← FAT_TOTAL;
+- legacy carbohydrates_g ← CARBOHYDRATE_BY_DIFFERENCE only;
+- legacy fiber_g ← FIBER_TOTAL_DIETARY;
+- CARBOHYDRATE_AVAILABLE never substitutes for legacy carbohydrates;
+- STARCH + SUGARS_TOTAL never synthesizes legacy carbohydrates;
+- the crosswalk is part of RECIPE_COMPOSITION_NUTRITION_V1;
+- Step 9 legacy carbohydrates remain None and five-field status remains INCOMPLETE.
+
+Adversarial acceptance now covers AVAILABLE/BY_DIFFERENCE disagreement, missing
+BY_DIFFERENCE, forbidden starch+sugars synthesis and the exact Step 9 projection.
+
+Current status: corrected semantic verification pending.
+No runtime/schema/production mutation occurred.
+
 ## PR94 deep-corrected Contract Gate review-ready — 2026-09-26
 
 Corrected semantic head:
