@@ -10,7 +10,9 @@ import pytest
 from sqlalchemy import event
 
 from app.db.config import DatabaseConfig
+from app.domain.food_composition import MassState
 from app.domain.nutrition import NutritionStatus
+from app.domain.units import UnitCode
 from app.domain.recipe_nutrition_v2 import (
     NUTRIENT_CODES,
     CanonicalNutrientAmount,
@@ -38,6 +40,7 @@ from app.seed.ru_school2022_step9_recipe import (
 from app.services.recipe_nutrition_v2 import (
     BindingDisposition,
     RecipeNutritionV2ConflictError,
+    RecipeNutritionV2UnavailableError,
     ReviewedRecipeIngredientBindingSpec,
     project_recipe_nutrition_consumption,
 )
@@ -163,6 +166,53 @@ def test_binding_publication_rejects_drifted_step9_structure(database):
             ).fetchone()[0] == 0
     finally:
         engine.dispose()
+
+
+def test_exact_replay_preserves_created_at_across_later_clock(database):
+    engine = create_sqlite_engine(database)
+    try:
+        first_clock = datetime(2026, 9, 26, 10, 0, tzinfo=timezone.utc)
+        later_clock = datetime(2026, 9, 27, 10, 0, tzinfo=timezone.utc)
+        first = create_recipe_nutrition_v2_service(
+            engine, clock=lambda: first_clock
+        ).publish_binding(spec())
+        second = create_recipe_nutrition_v2_service(
+            engine, clock=lambda: later_clock
+        ).publish_binding(spec())
+        assert first.disposition is BindingDisposition.FRESH
+        assert second.disposition is BindingDisposition.EXACT_REPLAY
+        assert first.binding.created_at == first_clock
+        assert second.binding.created_at == first_clock
+        assert second.binding == first.binding
+    finally:
+        engine.dispose()
+
+
+def test_recipe_v1_rejects_non_gram_optional_and_transformed_rows():
+    from types import SimpleNamespace
+    from app.services.recipe_nutrition_v2 import RecipeNutritionV2Service
+
+    input_composition = SimpleNamespace(input_state=MassState.INPUT, steps=())
+    transformed = SimpleNamespace(input_state=MassState.INPUT, steps=(object(),))
+
+    with pytest.raises(RecipeNutritionV2UnavailableError, match="required gram"):
+        RecipeNutritionV2Service._calculate_row(
+            None,
+            SimpleNamespace(unit=UnitCode.MILLILITER, optional=False),
+            input_composition,
+        )
+    with pytest.raises(RecipeNutritionV2UnavailableError, match="required gram"):
+        RecipeNutritionV2Service._calculate_row(
+            None,
+            SimpleNamespace(unit=UnitCode.GRAM, optional=True),
+            input_composition,
+        )
+    with pytest.raises(RecipeNutritionV2UnavailableError, match="untransformed"):
+        RecipeNutritionV2Service._calculate_row(
+            None,
+            SimpleNamespace(unit=UnitCode.GRAM, optional=False),
+            transformed,
+        )
 
 
 def test_deactivation_blocks_replay_but_historical_read_still_replays(database):
