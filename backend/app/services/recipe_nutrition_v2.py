@@ -496,7 +496,7 @@ class RecipeNutritionV2Service:
             raise RuntimeError("Composition calculation version constant drifted.")
         if (
             result.calculation_version != COMPOSITION_CALCULATION_VERSION
-            or result.requested_nutrient_codes != NUTRIENT_CODES
+            or result.requested_nutrient_codes != tuple(sorted(NUTRIENT_CODES))
             or result.input_mass_g <= 0
             or result.output_mass_state is not MassState.INPUT
             or result.output_mass_g != result.input_mass_g
@@ -504,7 +504,9 @@ class RecipeNutritionV2Service:
             raise RecipeNutritionV2UnavailableError(
                 "Composition calculation не соответствует RECIPE_COMPOSITION_NUTRITION_V1."
             )
-        if tuple(item.definition.code for item in result.nutrients) != NUTRIENT_CODES:
+        if tuple(item.definition.code for item in result.nutrients) != tuple(
+            sorted(NUTRIENT_CODES)
+        ):
             raise RecipeNutritionV2UnavailableError(
                 "Composition result не содержит frozen 54-code request set."
             )
