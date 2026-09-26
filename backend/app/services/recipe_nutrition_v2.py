@@ -13,7 +13,11 @@ from app.domain.food_composition import (
     MassState,
     calculation_context,
 )
-from app.domain.nutrition import NutritionStatus, NutritionValues
+from app.domain.nutrition import (
+    NutritionStatus,
+    NutritionValues,
+    RecipeVersionNutrition,
+)
 from app.domain.recipe_nutrition_v2 import (
     COMPOSITION_CALCULATION_VERSION,
     NUTRIENT_CODES,
@@ -24,6 +28,7 @@ from app.domain.recipe_nutrition_v2 import (
     CanonicalNutrientAmount,
     CanonicalRecipeVersionNutrition,
     RecipeIngredientCompositionBinding,
+    RecipeNutritionAuthorityKind,
     RecipeNutritionConsumptionProjection,
     RecipeNutritionV2Issue,
     RecipeNutritionV2Status,
@@ -42,6 +47,7 @@ from app.services.recipe_nutrition_v2_contracts import (
 
 ReadScopeFactory = Callable[[], RecipeNutritionV2ReadScope]
 WriteScopeFactory = Callable[[], RecipeNutritionV2UnitOfWork]
+LegacyRecipeNutrition = Callable[[UUID], RecipeVersionNutrition]
 Clock = Callable[[], datetime]
 
 
@@ -135,6 +141,7 @@ def project_recipe_nutrition_consumption(
         required_total=required,
         per_base_serving=serving,
         legacy_status=legacy_status,
+        authority_kind=RecipeNutritionAuthorityKind.COMPOSITION_V2,
         canonical_status=canonical.status,
         exact_energy_ready=energy_ready,
         registry_version=canonical.registry_version,
@@ -144,16 +151,43 @@ def project_recipe_nutrition_consumption(
     )
 
 
+def project_legacy_recipe_nutrition_consumption(
+    legacy: RecipeVersionNutrition,
+) -> RecipeNutritionConsumptionProjection:
+    energy = legacy.per_base_serving.kcal
+    energy_ready = (
+        legacy.status is not NutritionStatus.INCOMPLETE
+        and isinstance(energy, Decimal)
+        and energy.is_finite()
+        and energy > 0
+    )
+    return RecipeNutritionConsumptionProjection(
+        recipe_version_id=legacy.version.id,
+        required_total=legacy.required_total,
+        per_base_serving=legacy.per_base_serving,
+        legacy_status=legacy.status,
+        authority_kind=RecipeNutritionAuthorityKind.LEGACY_V1,
+        canonical_status=None,
+        exact_energy_ready=energy_ready,
+        registry_version=None,
+        nutrient_set_version=None,
+        composition_calculation_version=None,
+        recipe_calculation_version=None,
+    )
+
+
 class RecipeNutritionV2Service:
     def __init__(
         self,
         read_scope_factory: ReadScopeFactory,
         write_scope_factory: WriteScopeFactory,
         *,
+        legacy_recipe_nutrition: LegacyRecipeNutrition | None = None,
         clock: Clock | None = None,
     ) -> None:
         self._read_scope_factory = read_scope_factory
         self._write_scope_factory = write_scope_factory
+        self._legacy_recipe_nutrition = legacy_recipe_nutrition
         self._clock = clock or (lambda: datetime.now(timezone.utc))
 
     def publish_binding(
@@ -223,130 +257,165 @@ class RecipeNutritionV2Service:
             detail = scope.versions.get_detail(recipe_version_id)
             if detail is None:
                 raise RecipeNutritionV2UnavailableError("RecipeVersion не найден.")
-            if not detail.ingredients:
+            return self._calculate_detail(scope, detail)
+
+    def neutral_consumption_projection(
+        self, recipe_version_id: UUID
+    ) -> RecipeNutritionConsumptionProjection:
+        legacy_path = False
+        with self._read_scope_factory() as scope:
+            detail = scope.versions.get_detail(recipe_version_id)
+            if detail is None:
+                raise RecipeNutritionV2UnavailableError("RecipeVersion не найден.")
+            required_rows = tuple(row for row in detail.ingredients if not row.optional)
+            bindings = tuple(scope.bindings.get(row.id) for row in required_rows)
+            bound_count = sum(binding is not None for binding in bindings)
+            if bound_count == 0:
+                legacy_path = True
+            elif bound_count != len(required_rows):
                 raise RecipeNutritionV2UnavailableError(
-                    "RecipeVersion не содержит обязательные ингредиенты."
+                    "Partial required-row V2 binding запрещён."
                 )
-            if any(row.optional for row in detail.ingredients):
-                raise RecipeNutritionV2UnavailableError(
-                    "RECIPE_COMPOSITION_NUTRITION_V1 не поддерживает optional rows."
-                )
-            if detail.version.base_servings <= 0:
-                raise RecipeNutritionV2UnavailableError(
-                    "RecipeVersion base_servings должен быть положительным."
+            else:
+                return project_recipe_nutrition_consumption(
+                    self._calculate_detail(scope, detail)
                 )
 
-            row_amounts: list[dict[str, Decimal | None]] = []
-            bindings = []
-            issues = []
-            for row in sorted(detail.ingredients, key=lambda item: item.position):
-                if row.unit is not UnitCode.GRAM:
-                    raise RecipeNutritionV2UnavailableError(
-                        "RECIPE_COMPOSITION_NUTRITION_V1 поддерживает только точные граммы."
+        if legacy_path:
+            if self._legacy_recipe_nutrition is None:
+                raise RecipeNutritionV2UnavailableError(
+                    "Legacy Nutrition authority не подключена."
+                )
+            return project_legacy_recipe_nutrition_consumption(
+                self._legacy_recipe_nutrition(recipe_version_id)
+            )
+        raise AssertionError("Nutrition authority classification is incomplete.")
+
+    def _calculate_detail(self, scope, detail) -> CanonicalRecipeVersionNutrition:
+        if not detail.ingredients:
+            raise RecipeNutritionV2UnavailableError(
+                "RecipeVersion не содержит обязательные ингредиенты."
+            )
+        if any(row.optional for row in detail.ingredients):
+            raise RecipeNutritionV2UnavailableError(
+                "RECIPE_COMPOSITION_NUTRITION_V1 не поддерживает optional rows."
+            )
+        if detail.version.base_servings <= 0:
+            raise RecipeNutritionV2UnavailableError(
+                "RecipeVersion base_servings должен быть положительным."
+            )
+
+        row_amounts: list[dict[str, Decimal | None]] = []
+        bindings = []
+        issues = []
+        for row in sorted(detail.ingredients, key=lambda item: item.position):
+            if row.unit is not UnitCode.GRAM:
+                raise RecipeNutritionV2UnavailableError(
+                    "RECIPE_COMPOSITION_NUTRITION_V1 поддерживает только точные граммы."
+                )
+            binding = scope.bindings.get(row.id)
+            if binding is None:
+                raise RecipeNutritionV2UnavailableError(
+                    "Для обязательного RecipeIngredient отсутствует Composition binding."
+                )
+            self._require_binding_versions(binding)
+            food = scope.food_ingredients.get(row.food_ingredient_id)
+            if food is None:
+                raise RecipeNutritionV2UnavailableError(
+                    "Закреплённый FoodIngredient отсутствует."
+                )
+            try:
+                composition = scope.compositions.get(binding.composition_version_id)
+            except CompositionUnavailableError as exc:
+                raise RecipeNutritionV2UnavailableError(
+                    "Закреплённый FoodCompositionVersion недоступен."
+                ) from exc
+            if composition.food_ingredient_id != row.food_ingredient_id:
+                raise RecipeNutritionV2UnavailableError(
+                    "RecipeIngredient и Composition принадлежат разным FoodIngredient."
+                )
+            result = self._calculate_row(scope, row, composition)
+            amounts = {item.definition.code: item.amount for item in result.nutrients}
+            with localcontext(calculation_context()):
+                row_amounts.append(
+                    {
+                        code: (
+                            None
+                            if amounts[code] is None
+                            else amounts[code]
+                            * row.quantity
+                            / result.input_mass_g
+                        )
+                        for code in NUTRIENT_CODES
+                    }
+                )
+            bindings.append(binding)
+            for issue in result.issues:
+                issues.append(
+                    RecipeNutritionV2Issue(
+                        issue.code,
+                        issue.nutrient_code,
+                        row.id,
                     )
-                binding = scope.bindings.get(row.id)
-                if binding is None:
-                    raise RecipeNutritionV2UnavailableError(
-                        "Для обязательного RecipeIngredient отсутствует Composition binding."
-                    )
-                self._require_binding_versions(binding)
-                food = scope.food_ingredients.get(row.food_ingredient_id)
-                if food is None:
-                    raise RecipeNutritionV2UnavailableError(
-                        "Закреплённый FoodIngredient отсутствует."
-                    )
-                try:
-                    composition = scope.compositions.get(binding.composition_version_id)
-                except CompositionUnavailableError as exc:
-                    raise RecipeNutritionV2UnavailableError(
-                        "Закреплённый FoodCompositionVersion недоступен."
-                    ) from exc
-                if composition.food_ingredient_id != row.food_ingredient_id:
-                    raise RecipeNutritionV2UnavailableError(
-                        "RecipeIngredient и Composition принадлежат разным FoodIngredient."
-                    )
-                result = self._calculate_row(scope, row, composition)
-                amounts = {item.definition.code: item.amount for item in result.nutrients}
-                with localcontext(calculation_context()):
-                    row_amounts.append(
-                        {
-                            code: (
-                                None
-                                if amounts[code] is None
-                                else amounts[code]
-                                * row.quantity
-                                / result.input_mass_g
-                            )
-                            for code in NUTRIENT_CODES
-                        }
-                    )
-                bindings.append(binding)
-                for issue in result.issues:
+                )
+            for code in NUTRIENT_CODES:
+                if amounts[code] is None:
                     issues.append(
                         RecipeNutritionV2Issue(
-                            issue.code,
-                            issue.nutrient_code,
-                            row.id,
+                            "REQUIRED_NUTRIENT_UNKNOWN", code, row.id
                         )
                     )
-                for code in NUTRIENT_CODES:
-                    if amounts[code] is None:
-                        issues.append(
-                            RecipeNutritionV2Issue(
-                                "REQUIRED_NUTRIENT_UNKNOWN", code, row.id
-                            )
-                        )
 
-            with localcontext(calculation_context()):
-                totals = {}
-                per_serving = {}
-                for code in NUTRIENT_CODES:
-                    values = tuple(row[code] for row in row_amounts)
-                    total = (
-                        None
-                        if any(value is None for value in values)
-                        else sum((value for value in values if value is not None), Decimal(0))
-                    )
-                    totals[code] = _round(total)
-                    per_serving[code] = _round(
-                        None if total is None else total / detail.version.base_servings
-                    )
+        with localcontext(calculation_context()):
+            totals = {}
+            per_serving = {}
+            for code in NUTRIENT_CODES:
+                values = tuple(row[code] for row in row_amounts)
+                total = (
+                    None
+                    if any(value is None for value in values)
+                    else sum((value for value in values if value is not None), Decimal(0))
+                )
+                totals[code] = _round(total)
+                per_serving[code] = _round(
+                    None if total is None else total / detail.version.base_servings
+                )
 
-            available = sum(value is not None for value in totals.values())
-            status = (
-                RecipeNutritionV2Status.COMPLETE
-                if available == len(NUTRIENT_CODES)
-                else RecipeNutritionV2Status.INCOMPLETE
-                if available == 0
-                else RecipeNutritionV2Status.PARTIAL
-            )
-            return CanonicalRecipeVersionNutrition(
-                recipe_version_id=detail.version.id,
-                registry_version=REGISTRY_VERSION,
-                nutrient_set_version=NUTRIENT_SET_VERSION,
-                composition_calculation_version=COMPOSITION_CALCULATION_VERSION,
-                recipe_calculation_version=RECIPE_CALCULATION_VERSION,
-                bindings=tuple(bindings),
-                required_total=tuple(
-                    CanonicalNutrientAmount(code, totals[code])
-                    for code in NUTRIENT_CODES
-                ),
-                per_base_serving=tuple(
-                    CanonicalNutrientAmount(code, per_serving[code])
-                    for code in NUTRIENT_CODES
-                ),
-                status=status,
-                issues=tuple(
-                    sorted(
-                        set(issues),
-                        key=lambda item: (
-                            item.nutrient_code or "",
-                            str(item.recipe_ingredient_id or ""),
-                            item.code,
-                        ),
-                    )
-                ),
-            )
+        available = sum(value is not None for value in totals.values())
+        status = (
+            RecipeNutritionV2Status.COMPLETE
+            if available == len(NUTRIENT_CODES)
+            else RecipeNutritionV2Status.INCOMPLETE
+            if available == 0
+            else RecipeNutritionV2Status.PARTIAL
+        )
+        return CanonicalRecipeVersionNutrition(
+            recipe_version_id=detail.version.id,
+            registry_version=REGISTRY_VERSION,
+            nutrient_set_version=NUTRIENT_SET_VERSION,
+            composition_calculation_version=COMPOSITION_CALCULATION_VERSION,
+            recipe_calculation_version=RECIPE_CALCULATION_VERSION,
+            bindings=tuple(bindings),
+            required_total=tuple(
+                CanonicalNutrientAmount(code, totals[code])
+                for code in NUTRIENT_CODES
+            ),
+            per_base_serving=tuple(
+                CanonicalNutrientAmount(code, per_serving[code])
+                for code in NUTRIENT_CODES
+            ),
+            status=status,
+            issues=tuple(
+                sorted(
+                    set(issues),
+                    key=lambda item: (
+                        item.nutrient_code or "",
+                        str(item.recipe_ingredient_id or ""),
+                        item.code,
+                    ),
+                )
+            ),
+        )
 
     def consumption_projection(
         self, recipe_version_id: UUID
