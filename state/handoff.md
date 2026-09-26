@@ -1,5 +1,230 @@
 # Handoff
 
+## PR94 final compatibility correction review-ready — 2026-09-26
+
+Semantic head:
+5e2d9a9336a94798327e3a9445e0dffd41e05ff9.
+
+Review:
+#5326221930 — READY TO MERGE FINAL-CORRECTED STEP 10 CONTRACT GATE.
+
+Review #5326205581 blocker is closed.
+
+Exact V2 → legacy crosswalk under RECIPE_COMPOSITION_NUTRITION_V1:
+- kcal ← ENERGY_KCAL;
+- protein_g ← PROTEIN;
+- fat_g ← FAT_TOTAL;
+- carbohydrates_g ← CARBOHYDRATE_BY_DIFFERENCE only;
+- fiber_g ← FIBER_TOTAL_DIETARY.
+
+No AVAILABLE carbohydrate fallback and no STARCH+SUGARS synthesis.
+Step 9 legacy carbohydrates remain None; legacy status remains INCOMPLETE.
+
+Verification:
+Docs #375 / DC1 #237 SUCCESS.
+Registry focused 328 passed.
+Partial focused 276 passed.
+Sections 1–29 and acceptance 1–74 sequential.
+mergeable=true; 0 behind; diff audit clean.
+
+Stop for merge review. No self-merge.
+Step 10-A requires separate authorization after PR94 merge.
+Step 10-B remains unauthorized until Step 10-A merges.
+
+## PR94 final compatibility blocker correction — 2026-09-26
+
+Exhaustive review #5326205581 superseded the prior READY receipt and found one
+remaining V2 → legacy projection ambiguity.
+
+Correction implemented:
+
+- legacy kcal ← ENERGY_KCAL;
+- legacy protein_g ← PROTEIN;
+- legacy fat_g ← FAT_TOTAL;
+- legacy carbohydrates_g ← CARBOHYDRATE_BY_DIFFERENCE only;
+- legacy fiber_g ← FIBER_TOTAL_DIETARY;
+- CARBOHYDRATE_AVAILABLE never substitutes for legacy carbohydrates;
+- STARCH + SUGARS_TOTAL never synthesizes legacy carbohydrates;
+- the crosswalk is part of RECIPE_COMPOSITION_NUTRITION_V1;
+- Step 9 legacy carbohydrates remain None and five-field status remains INCOMPLETE.
+
+Adversarial acceptance now covers AVAILABLE/BY_DIFFERENCE disagreement, missing
+BY_DIFFERENCE, forbidden starch+sugars synthesis and the exact Step 9 projection.
+
+Current status: corrected semantic verification pending.
+No runtime/schema/production mutation occurred.
+
+## PR94 deep-corrected Contract Gate review-ready — 2026-09-26
+
+Corrected semantic head:
+560cce41e1c1ce54212052bd95dfc8fe4b0cdb13.
+
+Corrected review:
+#5326161326 — READY TO MERGE DEEP-CORRECTED STEP 10 CONTRACT GATE.
+
+Deep review #5326074689 blockers are closed:
+
+- RECIPE_V2_NUTRIENT_SET_V1 is the exact 54-code RU_NUTRIENT_REGISTRY_V2 snapshot;
+- canonical Recipe Nutrition preserves every requested concept as AVAILABLE or UNKNOWN;
+- RECIPE_COMPOSITION_NUTRITION_V1 separately versions row scaling, unknown
+  propagation, aggregation, base-serving division and result rounding;
+- V1 is intentionally gram-only, required-row-only and untransformed INPUT-basis;
+- FOOD_COMPOSITION_APPLICABILITY_V2 remains the lower-level Composition version;
+- Step 10-B Planner version is exactly planner-v0.3;
+- meal-role compatibility remains exactly meal-role-recipe-v2;
+- historical reads are independent of later mutable FoodIngredient active state;
+- exact replay preserves original created_at and binding REPLACE is forbidden.
+
+Verification:
+Docs #373 SUCCESS; DC1 #235 SUCCESS; Registry focused 328; Partial focused 276;
+54/54 request-set comparison PASS; sections 1–29 and acceptance 1–68 sequential;
+mergeable=true; 0 behind; whitespace/conflict audit clean.
+
+Stop for merge review. No self-merge.
+Step 10-A requires separate authorization after PR94 merge.
+Step 10-B remains unauthorized until Step 10-A merges.
+
+## PR94 deep-review blocker correction — 2026-09-26
+
+Deep review #5326074689 superseded the prior READY receipt and found three
+additional Contract Gate gaps:
+
+1. canonical V2 nutrient request set was not frozen;
+2. lower-level FOOD_COMPOSITION_APPLICABILITY_V2 did not version the new
+   recipe-level scaling/aggregation formula;
+3. Planner version remained "planner-v0.3 or equivalent" rather than exact
+   persisted replay identity.
+
+Correction implemented:
+
+- RECIPE_V2_NUTRIENT_SET_V1 = exact 54-code RU_NUTRIENT_REGISTRY_V2 snapshot;
+- every requested code is AVAILABLE or UNKNOWN; omission is not unknown;
+- RECIPE_COMPOSITION_NUTRITION_V1 separately versions Recipe Nutrition scaling,
+  aggregation, optional handling, per-serving division and rounding;
+- V1 is bounded to required rows and untransformed INPUT-basis Composition;
+- historical reads do not depend on later FoodIngredient.is_active;
+- Step 10-B Planner version is exactly planner-v0.3;
+- meal-role compatibility remains exactly meal-role-recipe-v2.
+
+Current status: corrected semantic verification pending.
+No runtime/schema/production mutation occurred.
+
+## PR94 corrected Contract Gate review-ready — 2026-09-26
+
+Corrected semantic head:
+c23bca0e6df4787f8f083a976fd6257e454d1777.
+
+Corrected review:
+#5325809090 — READY TO MERGE CORRECTED STEP 10 CONTRACT GATE.
+
+Review #5325781916 blockers are closed:
+
+- binding ownership is frozen as Nutrition-owned derived calculation authority;
+- one focused Nutrition UoW owns all dependency reads/classification/binding write;
+- FRESH and EXACT_REPLAY recheck active Step 8 dependency in that UoW;
+- external preflight is fail-fast only;
+- calculation policy is exactly FOOD_COMPOSITION_APPLICABILITY_V2 and matches
+  CompositionResult.calculation_version;
+- race/policy/rollback adversarial acceptance is frozen.
+
+Verification on corrected semantic head:
+Docs #368 SUCCESS; DC1 #230 SUCCESS; Registry focused 328; Partial focused 276;
+mergeable=true; 0 behind; numbering/whitespace/conflict audit clean.
+
+Stop for merge review. No self-merge.
+Step 10-A requires separate authorization after PR94 merge.
+Step 10-B remains unauthorized until Step 10-A merges.
+
+## PR94 blocker correction — 2026-09-26
+
+Independent exact-head review #5325781916 superseded the prior READY receipts and
+found three Contract Gate blockers:
+
+1. binding owner/UoW was not frozen;
+2. active Step 8 dependency was not explicitly rechecked inside the binding UoW;
+3. calculation_policy_version was arbitrary nonblank text.
+
+Correction implemented on the same PR branch:
+
+- binding is Nutrition-owned derived calculation authority;
+- Step 10-A gets one focused Nutrition-owned authority UoW / one connection and
+  transaction;
+- Recipe/RecipeVersion/RecipeIngredient, FoodIngredient, Composition, vector and
+  registry dependencies are read-only inside that UoW;
+- FRESH and EXACT_REPLAY both re-resolve dependencies and require active
+  FoodIngredient inside the UoW;
+- external preflight is fail-fast only;
+- persisted policy is exactly FOOD_COMPOSITION_APPLICABILITY_V2 and must match
+  CompositionResult.calculation_version;
+- adversarial acceptance covers deactivation-after-preflight, replay recheck,
+  policy mismatch and late-write rollback.
+
+Current status: corrected semantic verification pending.
+No runtime/schema/production mutation occurred.
+No Step 10-A or Step 10-B runtime work is authorized.
+
+## PR94 Step 10 Contract Gate review-ready — 2026-09-26
+
+Accepted base:
+d0a1a217d3e23b0b930f14de37405a7ca7ba3d16 (merged PR93).
+
+Semantic head:
+761871e36a5a019621eb0c8e7900b2dfcf5e2773.
+
+Review:
+#5325759751 — READY TO MERGE CONTRACT GATE.
+
+Canonical contract:
+docs/family-food/recipe-v2-nutrition-planner-integration-contract.md.
+
+Key decisions:
+- runtime is split into Step 10-A and Step 10-B;
+- Step 10-A owns migration 0039, immutable RecipeIngredient→Composition binding,
+  canonical V2 Recipe Nutrition and neutral consumption projection;
+- Step 10-B starts only after A merge and owns Planner V2 readiness,
+  planner-version advance and MealPlan/Serving integration;
+- production Step 9 butter Recipe stays inactive through both;
+- meal-role compatibility remains unchanged;
+- legacy NutritionService remains behavior-compatible;
+- no latest/current Composition inference or partial required-row V1/V2 mixing.
+
+Verification on semantic head:
+Docs #366 SUCCESS; DC1 #228 SUCCESS; mergeable=true; 0 behind; docs/state-only
+scope; numbering/whitespace/conflict audit clean.
+
+Stop for merge review. No self-merge. Step 10-A requires separate authorization
+after gate merge. Step 10-B remains unauthorized until Step 10-A merges.
+
+## Step 10 Contract Gate started — 2026-09-26
+
+PR93 is merged into main at:
+
+d0a1a217d3e23b0b930f14de37405a7ca7ba3d16
+
+The user explicitly authorized continuing to the next bounded operation.
+
+Preflight found that general V2 RecipeVersion Nutrition cannot safely select a
+mutable/latest FoodCompositionVersion because RecipeIngredient currently has no
+persisted Composition pin.
+
+Current docs-only decision:
+
+- expected migration 0039 adds immutable RecipeIngredient → CompositionVersion binding plus registry/calculation-policy pin;
+- legacy NutritionService remains unchanged;
+- new canonical V2 RecipeVersion Nutrition path is explicit;
+- Planner receives only a bounded V2-safe energy projection;
+- legacy INCOMPLETE candidates are not globally enabled;
+- ROLE_COMPATIBILITY_V1 stays unchanged;
+- production School2022 butter Recipe remains inactive;
+- real production activation is a later bounded data-publication decision.
+
+Canonical draft:
+
+docs/family-food/recipe-v2-nutrition-planner-integration-contract.md
+
+No runtime/schema/production mutation belongs in this gate.
+Stop after review-ready PR; no autonomous merge or runtime implementation.
+
 ## PR93 corrected runtime verified — 2026-09-26
 
 Verified runtime head:

@@ -1,5 +1,187 @@
 # Progress
 
+## PR94 final compatibility correction review-ready — 2026-09-26
+
+Semantic head:
+5e2d9a9336a94798327e3a9445e0dffd41e05ff9.
+
+Closed review #5326205581:
+legacy NutritionValues.carbohydrates_g now maps exactly and only from
+CARBOHYDRATE_BY_DIFFERENCE under RECIPE_COMPOSITION_NUTRITION_V1.
+
+Forbidden:
+- CARBOHYDRATE_AVAILABLE fallback;
+- STARCH+SUGARS synthesis.
+
+Step 9 legacy projection remains INCOMPLETE.
+
+Review #5326221930: READY TO MERGE.
+
+Verification:
+Docs #375 / DC1 #237 SUCCESS.
+Registry focused 328.
+Partial focused 276.
+
+Status:
+STEP10_CONTRACT_GATE_FINAL_CORRECTED_REVIEW_READY.
+
+No runtime/schema/production data mutation occurred.
+
+## PR94 final compatibility blocker corrected — 2026-09-26
+
+Review #5326205581 blocked the gate on an unfrozen legacy carbohydrate crosswalk.
+
+Correction:
+`NutritionValues.carbohydrates_g` now maps exactly and only from
+`CARBOHYDRATE_BY_DIFFERENCE` under
+`RECIPE_COMPOSITION_NUTRITION_V1`.
+
+AVAILABLE carbohydrate and STARCH+SUGARS are explicitly forbidden fallbacks.
+
+Status:
+STEP10_CONTRACT_GATE_FINAL_COMPATIBILITY_CORRECTION_VERIFICATION_PENDING.
+
+No runtime/schema/production data changed.
+
+## PR94 deep-corrected Contract Gate review-ready — 2026-09-26
+
+Corrected semantic head:
+560cce41e1c1ce54212052bd95dfc8fe4b0cdb13.
+
+Closed deep-review blockers from #5326074689:
+1. exact canonical V2 request-set identity;
+2. separate recipe-level calculation/version policy;
+3. exact durable Planner version identity.
+
+Additional bounded closures:
+- gram-only Recipe V1 mass authority;
+- optional/transformed roots fail closed in V1;
+- historical read vs mutable active-state boundary;
+- replay created_at preservation;
+- SQL REPLACE immutability.
+
+Corrected semantic review:
+#5326161326 READY TO MERGE.
+
+Verification:
+Docs #373 / DC1 #235 SUCCESS.
+Registry focused 328 passed.
+Partial focused 276 passed.
+54/54 request-set comparison PASS.
+
+Status:
+STEP10_CONTRACT_GATE_DEEP_CORRECTED_REVIEW_READY.
+
+No runtime/schema/production data mutation occurred.
+
+## PR94 deep semantic blockers corrected — 2026-09-26
+
+Review #5326074689 blocked the gate on:
+- missing canonical V2 request-set identity;
+- missing separate recipe-level calculation version;
+- non-exact Planner version identity.
+
+Corrections:
+- exact RECIPE_V2_NUTRIENT_SET_V1 / 54-code request set;
+- exact RECIPE_COMPOSITION_NUTRITION_V1 recipe formula;
+- exact FOOD_COMPOSITION_APPLICABILITY_V2 lower-level formula;
+- exact planner-v0.3 for Step 10-B;
+- historical read / mutable active-state boundary frozen.
+
+Status:
+STEP10_CONTRACT_GATE_DEEP_CORRECTION_VERIFICATION_PENDING.
+
+No runtime/schema/production data changed.
+
+## PR94 corrected Contract Gate review-ready — 2026-09-26
+
+Corrected semantic head:
+c23bca0e6df4787f8f083a976fd6257e454d1777.
+
+Closed blockers from review #5325781916:
+1. binding owner / UoW;
+2. in-UoW active dependency validation for fresh and replay;
+3. exact immutable calculation-policy identity.
+
+Corrected semantic review:
+#5325809090 READY TO MERGE.
+
+Verification:
+Docs #368 / DC1 #230 SUCCESS.
+Registry focused 328 passed.
+Partial focused 276 passed.
+
+Status:
+STEP10_CONTRACT_GATE_CORRECTED_REVIEW_READY.
+
+No runtime/schema/production data mutation occurred.
+
+## PR94 Contract Gate blockers corrected — 2026-09-26
+
+Review #5325781916 blocked the gate on ownership/UoW, transaction-time active
+dependency validation and unfrozen calculation-policy identity.
+
+All three are corrected in the canonical Step 10 contract:
+
+- Nutrition owns the binding authority;
+- one Nutrition-owned UoW owns dependency reads/classification/write;
+- fresh and replay recheck active dependency inside that UoW;
+- external preflight is non-authoritative;
+- policy is exactly FOOD_COMPOSITION_APPLICABILITY_V2;
+- returned CompositionResult.calculation_version must match the persisted policy.
+
+Status:
+STEP10_CONTRACT_GATE_CORRECTED_VERIFICATION_PENDING.
+
+No runtime/schema/production data changed.
+
+## PR94 Step 10 Contract Gate review-ready — 2026-09-26
+
+Semantic head:
+761871e36a5a019621eb0c8e7900b2dfcf5e2773.
+
+The docs-only Step 10 gate is complete and reviewed.
+
+It freezes:
+- Step 10-A: migration 0039 + immutable Composition authority binding +
+  canonical V2 Recipe Nutrition + neutral consumption projection;
+- Step 10-B: Planner V2 readiness + planner version advance + MealPlan/Serving
+  consumption, only after Step 10-A merge;
+- no production Step 9 Recipe activation;
+- no MealRole compatibility expansion;
+- legacy Nutrition preservation;
+- unknown WATER/carbohydrate preservation.
+
+Verification:
+Docs #366 / DC1 #228 SUCCESS.
+Semantic review #5325759751 READY TO MERGE.
+
+Status:
+STEP10_CONTRACT_GATE_REVIEW_READY.
+
+No runtime/schema/production data mutation occurred.
+
+## PR93 merged / Step 10 gate opened — 2026-09-26
+
+PR93 merged as:
+
+d0a1a217d3e23b0b930f14de37405a7ca7ba3d16
+
+Step 9 is accepted.
+
+The next bounded operation is the docs-only Step 10 Recipe V2 Nutrition / Planner
+Integration Contract Gate.
+
+Preflight discovered a required immutable Composition authority seam: persisted
+RecipeIngredient currently does not pin FoodCompositionVersion, so general
+Nutrition must not infer latest/current Composition.
+
+Status:
+
+STEP10_CONTRACT_GATE_ACTIVE
+
+No runtime/schema/activation work has occurred.
+
 ## PR93 corrected runtime verified — 2026-09-26
 
 Runtime correction head:

@@ -1,90 +1,88 @@
 # Current focus
 
-Updated: `2026-09-26`.
+Updated: 2026-09-26.
 
 ## Accepted state
 
-PR92 / corrected Step 9 Contract Gate is merged into `main` at
-`2c50782b17584a5708a946e497d6a628977420e9`.
+PR93 / Step 9 runtime is merged into main at:
 
-Russian-data integration Steps 1–8 and the Step 9 Contract Gate are accepted.
+d0a1a217d3e23b0b930f14de37405a7ca7ba3d16
+
+Russian-data integration Steps 1–9 are accepted.
 
 ## Current bounded state
 
-**PR93 / Step 9 transaction/replay blocker correction is verified and ready for final re-review/merge authorization.**
+**PR94 / final-corrected Step 10 Contract Gate is review-ready.**
 
 Branch:
-`feat/step9-school2022-recipe-runtime`.
 
-Verified corrected runtime head:
-`99f3d2b9ae592e9370a0f432316828da7a3b6cfb`.
+docs/step10-v2-recipe-nutrition-contract
 
-The earlier runtime receipt
-`31751069adec7ada062c8b4b7fcb291f4cd89bed` is superseded by this corrected runtime.
+Corrected semantic head:
 
-Correction closes:
-- required Step 8 FoodIngredient activity is rechecked inside strict Recipe Catalogue write UoW;
-- exact replay fails closed if that dependency becomes inactive after external preflight;
-- loader postconditions use the actual transactional reconcile result rather than stale external disposition;
-- concurrent exact publication after a FRESH preflight resolves successfully as zero-write replay.
+5e2d9a9336a94798327e3a9445e0dffd41e05ff9
 
-Canonical contract:
-`docs/family-food/russian-recipe-version-publication-contract.md`.
+Corrected semantic review:
 
-## Delivered Step 9 runtime
+#5326221930 — READY TO MERGE FINAL-CORRECTED STEP 10 CONTRACT GATE
 
-```text
-School2022 53-19з
-→ inactive SCHOOL2022_53_19Z_BUTTER_PORTION Recipe
-→ immutable SOURCE_VERIFIED RecipeVersion v1
-→ exact 10 g BUTTER_PEASANT_72_5_UNSALTED
-→ two material RecipeSteps
-→ deterministic 17-value V2 validation
-```
+Canonical gate:
 
-## Frozen runtime boundaries
+docs/family-food/recipe-v2-nutrition-planner-integration-contract.md
 
-- package/source lineage is hash-pinned before DB creation;
-- institutional refrigerated holding + 14 °C remain source context only;
-- home storage remains not granted;
-- fresh Recipe is inactive;
-- historical trusted seeds retain active default behavior;
-- exact replay never mutates activation;
-- strict Recipe history is rechecked inside the write UoW;
-- same-provenance revision drift fails closed;
-- inactive Step 9 Recipe is absent from Planner candidate enumeration;
-- Step 8 ATOMIC v1 / V2 composition is required;
-- WATER/carbohydrate remain unknown;
-- legacy NutritionService/current-profile behavior is unchanged;
-- source-declared School2022 nutrition remains reference-only;
-- no schema/migration/source-corpus expansion;
-- no Step 10 activation/Planner integration.
+## Frozen Step 10-A authority
+
+- binding ownership: Nutrition;
+- one Nutrition-owned UoW / one connection / one transaction;
+- registry: RU_NUTRIENT_REGISTRY_V2;
+- nutrient set: RECIPE_V2_NUTRIENT_SET_V1 = exact 54-code V2 registry snapshot;
+- Composition calculation: FOOD_COMPOSITION_APPLICABILITY_V2;
+- Recipe calculation: RECIPE_COMPOSITION_NUTRITION_V1;
+- Recipe V1 supports required exact gram rows only;
+- optional rows fail closed;
+- transformed/non-INPUT root outputs fail closed;
+- unknown nutrients remain explicit UNKNOWN;
+- canonical Step 9 result is PARTIAL;
+- legacy compatibility crosswalk is exact:
+  - kcal ← ENERGY_KCAL;
+  - protein_g ← PROTEIN;
+  - fat_g ← FAT_TOTAL;
+  - carbohydrates_g ← CARBOHYDRATE_BY_DIFFERENCE only;
+  - fiber_g ← FIBER_TOTAL_DIETARY;
+- CARBOHYDRATE_AVAILABLE and STARCH+SUGARS never substitute for legacy carbohydrates;
+- exact Step 9 legacy carbohydrates_g is None and legacy status is INCOMPLETE;
+- historical reads use pinned authority and do not depend on later FoodIngredient.is_active;
+- publication/replay still requires active dependency.
+
+## Frozen Step 10-B authority
+
+- Planner algorithm version: exactly planner-v0.3;
+- MealRole compatibility version: exactly meal-role-recipe-v2;
+- neutral Nutrition projection is shared by Planner and MealPlan/Serving;
+- no production Step 9 Recipe activation.
 
 ## Verification
 
-On corrected runtime head `99f3d2b9ae592e9370a0f432316828da7a3b6cfb`:
+On semantic head 5e2d9a9336a94798327e3a9445e0dffd41e05ff9:
 
-- Docs #360 — SUCCESS;
-- DC1 #222 — SUCCESS;
-- Russian nutrition methodologies #123 — SUCCESS;
-- Nutrient Registry V2 #201 — SUCCESS;
-- Partial nutrition profiles #152 — SUCCESS;
+- Docs #375 — SUCCESS;
+- DC1 #237 — SUCCESS;
 - Registry focused — 328 passed;
 - Partial focused — 276 passed;
-- backend shards — 1202 / 751 / 650 / 991 passed;
-- launcher — 643 passed, 2 skipped;
-- `AI_ENABLED=false`;
-- two new adversarial transaction/replay tests are included in focused verification.
+- contract sections 1–29 sequential;
+- adversarial acceptance 1–74 sequential;
+- mergeable=true;
+- 0 behind main;
+- trailing whitespace=0;
+- conflict markers=0;
+- unresolved review threads=0.
 
-The corrected runtime bytes are frozen at this head. Later state-only receipt commits
-do not invalidate this runtime verification.
-
-## Hard boundary
-
-No Step 10 work is authorized by PR93.
+Automatic broad Registry/Partial regression is supplemental for this docs-only gate.
 
 ## Stop boundary
 
-PR93 is ready for final re-review and explicit merge authorization.
+PR94 is ready for final merge review.
 
 Do not merge autonomously.
+Do not start Step 10-A before PR94 is merged and separately authorized.
+Step 10-B remains blocked until Step 10-A is reviewed and merged.
