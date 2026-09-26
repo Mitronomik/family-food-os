@@ -12,46 +12,68 @@ Step 10-A Composition-backed Recipe Nutrition authority is accepted.
 
 ## Current bounded state
 
-**Step 10-B — Planner / MealPlan Consumption Integration runtime implementation.**
+**PR96 / Step 10-B — Planner / MealPlan Consumption Integration is review-ready.**
 
 Branch:
 
 `feat/step10b-planner-mealplan-v2-nutrition`
 
-## Authorized scope
+Verified runtime/test head:
 
-- Planner consumes Step10-A neutral Nutrition projection;
-- exact V2 energy readiness is distinct from legacy five-field completeness;
-- Planner algorithm version advances exactly to `planner-v0.3`;
-- compatibility version remains exactly `meal-role-recipe-v2`;
-- MealPlan/Serving consumes the same neutral Nutrition read contract;
-- synthetic compatible fixture proves canonical V2 → Planner → MealPlan/Serving;
-- broad cross-context regression.
+`8b38053697845c7c63936a6b462e98331f5bb7e1`
 
-## Current implementation
+Semantic/runtime review:
 
-Initial runtime integration is implemented on the feature branch:
+`#5327127307 — READY TO MERGE STEP 10-B`
 
-- additive PlannerCandidate `exact_energy_ready=false`;
-- PlannerService candidate Nutrition comes from neutral projection;
+## Implemented behavior
+
+- Planner consumes Step10-A neutral Recipe Nutrition projection;
+- PlannerCandidate has additive `exact_energy_ready=false`;
 - legacy INCOMPLETE remains rejected by default;
-- V2 exact-energy readiness may admit sparse canonical authority;
-- MealPlan Nutrition accepts the neutral consumption contract;
-- legacy RecipeVersionNutrition exposes compatible read properties;
-- Planner config is exactly `planner-v0.3`;
-- meal-role compatibility remains `meal-role-recipe-v2`.
+- exact V2 positive-energy readiness may admit sparse composition-backed authority;
+- Planner algorithm version is exactly `planner-v0.3`;
+- compatibility version remains exactly `meal-role-recipe-v2`;
+- MealPlan/Serving consumes the same neutral Recipe Nutrition read contract;
+- legacy `RecipeVersionNutrition` remains a compatible caller;
+- known values scale through Serving/day/week;
+- unknown carbohydrate remains unknown and keeps legacy status INCOMPLETE;
+- synthetic fully V2-bound compatible fixture proves canonical V2 → PlannerService → MealPlan → Serving/day/week.
 
-Verification is pending.
+## Verification
+
+On runtime/test head `8b38053697845c7c63936a6b462e98331f5bb7e1`:
+
+- Docs #414 — SUCCESS;
+- DC1 #276 — SUCCESS;
+- Russian nutrition methodologies #163 — SUCCESS;
+- Nutrient Registry V2 #274 — SUCCESS:
+  - focused **391 passed**;
+  - backend shards **1074 / 804 / 776 / 968 passed**;
+  - launcher **643 passed, 2 skipped**;
+- Partial nutrition profiles #207 — SUCCESS:
+  - focused **339 passed**;
+  - backend shards **1074 / 804 / 776 / 968 passed**;
+  - launcher **643 passed, 2 skipped**;
+- `AI_ENABLED=false`;
+- mergeable=true;
+- 0 behind main;
+- unresolved review threads=0;
+- diff audit clean.
 
 ## Hard boundaries
 
 - no migration;
 - no production Recipe activation;
-- no MealRole compatibility change;
 - no Step 9 meal_type change;
+- no MealRole compatibility change;
 - no source-corpus publication;
 - no API/UI/Retail/Auth/PostgreSQL/AI scope.
 
 ## Stop boundary
 
-Deliver Step 10-B to review-ready PR and stop before any real Recipe activation or next production data publication.
+PR96 is ready for final review / explicit merge authorization.
+
+Do not merge autonomously.
+
+After PR96 merge, stop before any production Recipe activation or next production data publication.

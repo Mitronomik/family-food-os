@@ -1,5 +1,33 @@
 # Progress
 
+## PR96 Step 10-B review-ready — 2026-09-26
+
+Verified runtime/test head:
+`8b38053697845c7c63936a6b462e98331f5bb7e1`.
+
+Step 10-B is implemented and fully verified:
+- planner-v0.3;
+- neutral V2/legacy candidate Nutrition;
+- exact-energy readiness semantics;
+- neutral MealPlan/Serving consumption;
+- unknown-carbohydrate propagation;
+- fully V2-bound cross-context application proof.
+
+Review:
+`#5327127307 READY TO MERGE`.
+
+Verification:
+- Docs #414 / DC1 #276 / Russian #163 / Registry #274 / Partial #207 — SUCCESS;
+- focused 391 / 339 passed;
+- backend 1074 / 804 / 776 / 968 passed;
+- launcher 643 passed, 2 skipped;
+- AI_ENABLED=false.
+
+Status:
+`STEP10B_RUNTIME_REVIEW_READY`.
+
+No migration or production activation occurred.
+
 ## Step 10-B runtime active — 2026-09-26
 
 Accepted base:
