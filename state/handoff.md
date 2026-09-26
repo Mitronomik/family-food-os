@@ -1,5 +1,49 @@
 # Handoff
 
+## PR92 blocker correction — applicability + Planner activation — 2026-09-26
+
+Accepted main:
+`88a22a3cdfdd13d5481875dcd499abf06939582c`.
+
+Branch:
+`docs/step9-russian-recipe-version-contract`.
+
+Independent re-review #5324872702 found two blockers.
+
+### Applicability correction
+
+Pinned exact process-evidence:
+`ru-school2022:recipe:53-19з:process-evidence:40`
+SHA-256
+`5428e818127eceea1c69617e435666c6ce817666ba88bf7486b8c6ce4b60a6e4`.
+
+It is explicitly institutional-only, domestic applicability unestablished and
+not an executable domestic rule.
+
+Corrected Gate publishes only:
+1. no thermal treatment;
+2. cut butter into portion pieces.
+
+Refrigerated holding + 14 °C remain institutional source-context evidence.
+`home_storage_status=not_granted` is preserved.
+
+### Planner/activation correction
+
+Current Planner enumerates all active Recipes.
+
+Corrected Gate therefore:
+- creates Step 9 Recipe inactive;
+- authorizes additive `TrustedRecipeSeed.initial_is_active` with default true;
+- Step 9 sets false;
+- existing seed behavior remains active;
+- replay preserves persisted activation state and never reactivates/deactivates;
+- Step 9 Recipe is absent from Planner candidate pool before Step 10;
+- Step 10 owns activation + V2 Planner integration.
+
+No schema/migration/source-corpus expansion is introduced.
+
+Current task: corrected Docs/DC1 + semantic re-review. No runtime work.
+
 ## PR92 Step 9 Contract Gate review-ready — 2026-09-26
 
 Accepted main:

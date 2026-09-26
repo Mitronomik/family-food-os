@@ -1,5 +1,31 @@
 # Progress
 
+## PR92 blockers corrected — 2026-09-26
+
+Review #5324872702 found:
+1. institutional-only refrigerated-holding evidence was being promoted to a
+   domestic RecipeStep;
+2. active SOURCE_VERIFIED Recipe would enter current Planner enumeration before
+   Step 10.
+
+Corrected contract head:
+`1c8dc51c889c50713f0027efe0d31a31a9f66f7b`.
+
+Corrections:
+- exact institutional process-evidence hash pinned;
+- only material preparation facts become RecipeSteps;
+- institutional holding/14 °C stay source context;
+- home storage remains not granted;
+- fresh Step 9 Recipe is inactive;
+- additive initial-activation seam is frozen with default-preserving behavior;
+- replay never mutates activation;
+- Planner candidate pool stays unchanged before Step 10.
+
+Status:
+`STEP9_CONTRACT_GATE_CORRECTED_REVERIFYING`.
+
+No runtime/schema/production RecipeVersion write occurred.
+
 ## PR92 Step 9 Contract Gate review-ready — 2026-09-26
 
 Step 9 preflight is frozen in:

@@ -11,75 +11,73 @@ Russian-data integration Steps 1–8 are accepted.
 
 ## Current bounded state
 
-**PR92 / Step 9 executable Russian RecipeVersion Contract Gate is review-ready.**
+**PR92 / Step 9 Contract Gate blocker correction is under exact-head re-verification.**
 
 Branch:
 `docs/step9-russian-recipe-version-contract`.
 
-Verified semantic contract head:
-`b0b5f890ce850075ea91d43e54bc8f93a6497c0d`.
+Corrected contract head:
+`1c8dc51c889c50713f0027efe0d31a31a9f66f7b`.
 
 Canonical gate:
 `docs/family-food/russian-recipe-version-publication-contract.md`.
 
-## Frozen Step 9 vertical slice
+## Corrected applicability boundary
+
+Independent re-review #5324872702 found that one retained process evidence row
+was explicitly institutional-only:
 
 ```text
-School2022 53-19з — Масло сливочное (порциями)
-→ BUTTER_PEASANT_72_5_UNSALTED
-→ exact 10 g INPUT
-→ SOURCE_VERIFIED RecipeVersion
-→ deterministic 17-value V2 composition calculation
+ru-school2022:recipe:53-19з:process-evidence:40
+applicability = institutional_school_catering_only
+domestic_applicability = unestablished
+not_executable_rule = true
+SHA-256 = 5428e818127eceea1c69617e435666c6ce817666ba88bf7486b8c6ce4b60a6e4
 ```
 
-## Critical frozen decisions
+The Gate now freezes:
+- only “no thermal treatment” + “cut into portions” as RecipeStep material facts;
+- refrigerated pre-service holding remains institutional source context only;
+- 14 °C serving condition remains institutional source context only;
+- `home_storage_status=not_granted` is preserved;
+- no household storage/safety/serving rule is inferred.
 
-- exact source card/variant/demand/process/selection/route hashes pinned;
-- historical v0.3 publication blockers explicitly adjudicated;
-- normative-card publication uses canonical factual-publication rights policy;
-- Recipe identity frozen as `SCHOOL2022_53_19Z_BUTTER_PORTION`;
-- fresh version = v1, one source portion, `meal_type=other`;
-- unknown timing/difficulty/storage/freezer/batch facts remain null;
-- one required 10 g Step 8 butter ingredient;
-- four reviewed factual execution steps;
-- zero equipment rows;
-- source-declared School2022 nutrition remains reference-only;
-- Step 8 profile remains non-current;
-- legacy NutritionService is unchanged;
-- Step 9 deterministic nutrition uses exact ATOMIC v1 / V2 Composition,
-  scaled 10/100;
-- carbohydrate and WATER remain unknown;
-- narrow preflight forbids silent append to unexpected Recipe history;
-- exact Composition lookup may be exposed read-only through the existing
-  repository/reader boundary only;
+## Corrected Planner / activation boundary
+
+Current Planner automatically enumerates active + SOURCE_VERIFIED Recipes.
+
+Therefore Step 9 now freezes:
+- fresh Recipe starts **inactive**;
+- Step 9 authorizes one additive
+  `TrustedRecipeSeed.initial_is_active: bool = true` seam;
+- existing trusted seeds keep current active behavior;
+- Step 9 sets `initial_is_active=false`;
+- exact replay never changes mutable activation state;
+- inactive Step 9 Recipe is absent from Planner candidate enumeration/traces;
+- Step 10 separately owns activation and V2 Planner/general-Nutrition integration.
+
+## Preserved Step 9 decisions
+
+- exact one-food School2022 53-19з vertical slice;
+- exact seven source-lineage/process hashes;
+- exact 10 g Step 8 butter dependency;
+- SOURCE_VERIFIED immutable RecipeVersion;
+- source-declared nutrition remains reference-only;
+- deterministic 17-value V2 validation through Step 8 ATOMIC v1;
+- WATER/carbohydrate remain unknown;
+- legacy NutritionService stays unchanged;
 - no source-corpus persistence expansion;
-- no schema/migration; head remains 0038 and 0033 remains reserved;
-- no Step 10 Planner integration.
-
-## Verification
-
-On semantic head `b0b5f890ce850075ea91d43e54bc8f93a6497c0d`:
-
-- Docs #350 — SUCCESS;
-- DC1 #212 — SUCCESS;
-- semantic review #5324830015 — READY TO MERGE;
-- mergeable=true;
-- 0 behind main;
-- unresolved review threads=0;
-- changed scope = one canonical contract + three state files;
-- whitespace/conflict audit clean.
+- no migration/schema; head remains 0038 and 0033 remains reserved.
 
 ## Hard boundary
 
-PR92 is docs/state only.
+PR92 remains docs/state only.
 
-No Step 9 runtime/data publication before PR92 is merged and separately
-authorized.
+No Step 9 runtime/data publication before corrected Gate review/merge and separate
+runtime authorization.
 
 No Step 10 work starts automatically.
 
 ## Stop boundary
 
-PR92 is ready for final review/merge authorization.
-
-Do not merge autonomously.
+Reverify corrected semantic head, update review receipt, then stop before merge.
