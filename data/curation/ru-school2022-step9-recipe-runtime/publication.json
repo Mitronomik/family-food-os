@@ -1,0 +1,150 @@
+{
+  "institutional_context": {
+    "applicability": "institutional_school_catering_only",
+    "consumer_recipe_step_promotion": false,
+    "domestic_applicability": "unestablished",
+    "home_storage_status": "not_granted",
+    "not_executable_rule": true,
+    "process_evidence_id": "ru-school2022:recipe:53-19з:process-evidence:40",
+    "process_evidence_sha256": "5428e818127eceea1c69617e435666c6ce817666ba88bf7486b8c6ce4b60a6e4",
+    "refrigerated_holding_fact": "Перед раздачей порционированное масло хранят в холодильнике.",
+    "serving_temperature_c": "14"
+  },
+  "lineage": [
+    {
+      "canonical_json_sha256": "9090bb6d28ad83808acdaef124ae79208fd280316452409f12249bad83c73f9c",
+      "corpus_path": "corpus-work/packages/school2022/normalized/recipes.jsonl",
+      "id": "ru-school2022:recipe:53-19з",
+      "kind": "normalized_card"
+    },
+    {
+      "canonical_json_sha256": "9a7e02487b9bd3d2b7fdac68c90f717701708ed68d0e7c421ad1631cbcae8f42",
+      "corpus_path": "corpus-work/packages/recipe-resolution/normalized/source-variants.jsonl",
+      "id": "ru-school2022:recipe:53-19з:source-variant:1",
+      "kind": "source_variant"
+    },
+    {
+      "canonical_json_sha256": "f27dd3a8e156eb7c07cac9dd5460a29f0eda2b4a2efecc8b1c900ecacc71e164",
+      "corpus_path": "corpus-work/packages/recipe-resolution/normalized/ingredient-demands.jsonl",
+      "id": "ru-school2022:recipe:53-19з:row:1:demand:1",
+      "kind": "ingredient_demand"
+    },
+    {
+      "canonical_json_sha256": "b9f4975ed8ed330464ed03fa8fffc713109dc5f10f6112695ee5e9cbc31c4f4e",
+      "corpus_path": "corpus-work/packages/recipe-closure/normalized/process-instructions.jsonl",
+      "id": "ru-school2022:recipe:53-19з:source-process",
+      "kind": "source_process"
+    },
+    {
+      "canonical_json_sha256": "5428e818127eceea1c69617e435666c6ce817666ba88bf7486b8c6ce4b60a6e4",
+      "corpus_path": "corpus-work/packages/school2022/normalized/process_evidence.jsonl",
+      "id": "ru-school2022:recipe:53-19з:process-evidence:40",
+      "kind": "process_evidence"
+    },
+    {
+      "canonical_json_sha256": "f0a235291eba3b04e370b39bb758b9f8e34d60dc9870c90e4b6798e47829bdbc",
+      "corpus_path": "corpus-work/packages/recipe-resolution/normalized/executable-selections.jsonl",
+      "id": "ru-school2022:recipe:53-19з:source-variant:1:selection:86446b0c327de7f405fe",
+      "kind": "selection"
+    },
+    {
+      "canonical_json_sha256": "a92d315561553a44b7f5ec6dd57d621aff73a8c471873eac5b1d7dbb89723a46",
+      "corpus_path": "corpus-work/packages/recipe-closure/normalized/resolved-executions.jsonl",
+      "id": "ru-school2022:recipe:53-19з:source-variant:1:selection:86446b0c327de7f405fe:closure:route:4f53cda18c2baa0c0354bb5f",
+      "kind": "resolved_route"
+    }
+  ],
+  "nutrition_validation": {
+    "canonical_total_carbohydrate_state": "unknown",
+    "composition_basis_g": "100",
+    "composition_input_state": "INPUT",
+    "composition_version": 1,
+    "expected_recipe_amounts": {
+      "CALCIUM": "2.40",
+      "ENERGY_KCAL": "66.09",
+      "FATTY_ACIDS_SATURATED_TOTAL": "4.71",
+      "FAT_TOTAL": "7.25",
+      "FIBER_TOTAL_DIETARY": "0.00",
+      "IRON": "0.02",
+      "MAGNESIUM": "0.05",
+      "PHOSPHORUS": "3.00",
+      "POTASSIUM": "3.00",
+      "PROTEIN": "0.08",
+      "RIBOFLAVIN": "0.012",
+      "SODIUM": "1.50",
+      "STARCH": "0.00",
+      "SUGARS_TOTAL": "0.13",
+      "THIAMIN": "0.001",
+      "VITAMIN_A_RE": "45.00",
+      "VITAMIN_C": "0.00"
+    },
+    "food_ingredient_code": "BUTTER_PEASANT_72_5_UNSALTED",
+    "recipe_input_mass_g": "10",
+    "registry_version": "RU_NUTRIENT_REGISTRY_V2",
+    "scale_factor": "0.1",
+    "source_declared_recipe_nutrition_authority": "reference_only",
+    "water_state": "unknown"
+  },
+  "recipe": {
+    "canonical_code": "SCHOOL2022_53_19Z_BUTTER_PORTION",
+    "canonical_name": "Масло сливочное (порциями)",
+    "initial_is_active": false,
+    "version": {
+      "base_servings": "1",
+      "batch_friendly": null,
+      "change_note": "Step 9 reviewed publication of School2022 53-19з; material preparation only; institutional holding/serving facts retained as source context.",
+      "cook_time_minutes": null,
+      "difficulty_code": null,
+      "equipment_codes": [],
+      "freezable": null,
+      "ingredients": [
+        {
+          "food_ingredient_code": "BUTTER_PEASANT_72_5_UNSALTED",
+          "normalization_note": "Recipe input uses source net 10 g; gross = net = 10 g; exact 72.5% unsalted form resolved by Step 8.",
+          "optional": false,
+          "prep_note": null,
+          "quantity": "10",
+          "source_amount_text": "масло сливочное: брутто 10 г; нетто 10 г",
+          "unit": "g"
+        }
+      ],
+      "meal_type_code": "other",
+      "prep_time_minutes": null,
+      "rights_basis": "Нормативная рецептурная карта публикуется как фактические рецептурные данные по пользовательскому решению, зафиксированному в docs/family-food/ru-normative-recipe-corpus.md; сохраняются источник, версия, URL и SHA-256; фотографии, издательская вёрстка, логотипы и сторонние авторские комментарии не публикуются.",
+      "rights_review_status": "REVIEWED",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_original_servings": "1",
+      "source_recipe_id": "ru-school2022:recipe:53-19з",
+      "source_retrieved_at": null,
+      "source_url": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "steps": [
+        "Термическая обработка не требуется.",
+        "Нарезать сливочное масло на порционные кусочки."
+      ],
+      "storage_days_freezer": null,
+      "storage_days_fridge": null,
+      "total_time_minutes": null,
+      "verification_status": "SOURCE_VERIFIED",
+      "verified_at": "2026-09-26T00:00:00Z",
+      "version_number": 1
+    }
+  },
+  "schema_version": 1,
+  "source": {
+    "archive_filename": "FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "archive_size_bytes": 206692075,
+    "captured_date": "2026-09-20",
+    "durable_private_locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "latest_independent_verification_date": "2026-09-26",
+    "official_url": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+    "pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+    "publisher": "Федеральный центр гигиены и эпидемиологии Роспотребнадзора",
+    "source_id": "ru-school2022",
+    "source_json_sha256": "7de777b9ea0104e00bbb2e8cc98f2868bc6e5eead8a15b139d83706db765409b",
+    "source_title": "Сборник рецептур блюд и типовых меню для организации питания обучающихся 1—4-х классов в общеобразовательных организациях: Пособие",
+    "year": 2022
+  }
+}
