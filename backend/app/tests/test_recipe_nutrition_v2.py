@@ -3,6 +3,8 @@
 from dataclasses import replace
 from datetime import datetime, timezone
 from decimal import Decimal
+import json
+from pathlib import Path
 import shutil
 import sqlite3
 
@@ -92,6 +94,19 @@ def spec():
             code for code in NUTRIENT_CODES if code not in EXPECTED_RECIPE_AMOUNTS
         ),
     )
+
+
+def test_recipe_v2_nutrient_set_matches_committed_registry_snapshot():
+    root = Path(__file__).resolve().parents[3]
+    registry = json.loads(
+        (root / "data/curation/nutrient-registry-v2/registry.json").read_text()
+    )
+    assert registry["version"] == "RU_NUTRIENT_REGISTRY_V2"
+    assert len(registry["entries"]) == 54
+    assert {
+        row["canonical_code"] for row in registry["entries"]
+    } == set(NUTRIENT_CODES)
+    assert len(NUTRIENT_CODES) == len(set(NUTRIENT_CODES)) == 54
 
 
 def db_dump(config):
