@@ -1,9 +1,9 @@
 # Step 9 — Russian RecipeVersion Publication Contract
 
-**Status:** Implementation Contract Gate / docs-only  
-**Decision date:** 2026-09-26  
-**Accepted base:** `88a22a3cdfdd13d5481875dcd499abf06939582c` (merged PR #91 / accepted Step 8 runtime)  
-**Bounded step:** Russian-data integration Step 9 — executable Russian RecipeVersion publication  
+**Status:** Implementation Contract Gate / docs-only
+**Decision date:** 2026-09-26
+**Accepted base:** `88a22a3cdfdd13d5481875dcd499abf06939582c` (merged PR #91 / accepted Step 8 runtime)
+**Bounded step:** Russian-data integration Step 9 — executable Russian RecipeVersion publication
 **Runtime/data publication authorized by this document:** no — review/merge this gate first
 
 ## 1. Goal
