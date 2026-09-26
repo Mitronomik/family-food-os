@@ -27,6 +27,9 @@ from app.persistence.sqlalchemy_core.food_recipe_composition import (
 from app.persistence.sqlalchemy_core.food_recipe_uow import (
     SqlAlchemyRecipeCatalogueUnitOfWork,
 )
+from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
+    create_recipe_nutrition_v2_service,
+)
 from app.seed.food_recipes import seed_food_recipes
 from app.seed.ru_nut_db_step8_butter import seed_ru_nut_db_step8_butter
 from app.seed import ru_school2022_step9_recipe as step9
@@ -730,6 +733,7 @@ def test_inactive_step9_recipe_is_absent_from_authoritative_planner(database):
             _Nutrition(),
             _Pantry(),
             PlannerConfig(max_recipe_repetitions=10),
+            recipe_nutrition=create_recipe_nutrition_v2_service(engine),
         )
         command = AuthoritativeGenerationRequest(
             household_id,
