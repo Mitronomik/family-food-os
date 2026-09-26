@@ -81,6 +81,8 @@ def spec():
         quantity=Decimal("10"),
         unit="g",
         composition_version=1,
+        composition_kind="ATOMIC",
+        composition_input_state="INPUT",
         expected_available_amounts=tuple(
             (code, EXPECTED_RECIPE_AMOUNTS[code])
             for code in NUTRIENT_CODES
@@ -200,6 +202,99 @@ def test_fresh_binding_replay_and_step9_canonical_projection(database):
         assert db_dump(database) == before
     finally:
         engine.dispose()
+
+
+def test_missing_and_wrong_composition_authority_fail_before_write(database):
+    engine = create_sqlite_engine(database)
+    try:
+        with pytest.raises(RecipeNutritionV2ConflictError, match="отсутствует"):
+            create_recipe_nutrition_v2_service(engine).publish_binding(
+                replace(spec(), composition_version=999)
+            )
+        with pytest.raises(RecipeNutritionV2ConflictError, match="kind/state"):
+            create_recipe_nutrition_v2_service(engine).publish_binding(
+                replace(spec(), composition_kind="COMPOSITE")
+            )
+        with sqlite3.connect(database.path) as db:
+            assert db.execute(
+                "SELECT COUNT(*) FROM recipe_ingredient_composition_bindings"
+            ).fetchone()[0] == 0
+    finally:
+        engine.dispose()
+
+
+def test_corrupt_composition_snapshot_fails_before_binding_write(database):
+    with sqlite3.connect(database.path) as db:
+        db.execute("DROP TRIGGER food_composition_versions_no_update")
+        db.execute(
+            """
+            UPDATE food_composition_versions
+            SET snapshot_sha256 = ?
+            WHERE id = (
+                SELECT c.id
+                FROM food_composition_versions c
+                JOIN food_ingredients i ON i.id = c.food_ingredient_id
+                WHERE i.canonical_code = ? AND c.version = 1
+            )
+            """,
+            ("0" * 64, FOOD_CODE),
+        )
+        db.commit()
+
+    engine = create_sqlite_engine(database)
+    try:
+        with pytest.raises(RecipeNutritionV2ConflictError, match="повреждён"):
+            create_recipe_nutrition_v2_service(engine).publish_binding(spec())
+        with sqlite3.connect(database.path) as db:
+            assert db.execute(
+                "SELECT COUNT(*) FROM recipe_ingredient_composition_bindings"
+            ).fetchone()[0] == 0
+    finally:
+        engine.dispose()
+
+
+def test_neutral_projection_fails_closed_on_partial_required_binding():
+    from contextlib import contextmanager
+    from types import SimpleNamespace
+    from uuid import uuid4
+    from app.services.recipe_nutrition_v2 import RecipeNutritionV2Service
+
+    first_id, second_id = uuid4(), uuid4()
+    detail = SimpleNamespace(
+        ingredients=(
+            SimpleNamespace(id=first_id, optional=False),
+            SimpleNamespace(id=second_id, optional=False),
+        ),
+        version=SimpleNamespace(id=uuid4(), base_servings=Decimal("1")),
+    )
+    present = SimpleNamespace(recipe_ingredient_id=first_id)
+
+    @contextmanager
+    def read_scope():
+        yield SimpleNamespace(
+            versions=SimpleNamespace(get_detail=lambda _: detail),
+            bindings=SimpleNamespace(
+                get=lambda row_id: present if row_id == first_id else None
+            ),
+        )
+
+    service = RecipeNutritionV2Service(read_scope, lambda: None)
+    with pytest.raises(RecipeNutritionV2UnavailableError, match="Partial"):
+        service.neutral_consumption_projection(detail.version.id)
+
+
+def test_wrong_bound_authority_version_fails_closed():
+    from types import SimpleNamespace
+    from app.services.recipe_nutrition_v2 import RecipeNutritionV2Service
+
+    wrong = SimpleNamespace(
+        registry_version="WRONG_REGISTRY",
+        nutrient_set_version="RECIPE_V2_NUTRIENT_SET_V1",
+        composition_calculation_version="FOOD_COMPOSITION_APPLICABILITY_V2",
+        recipe_calculation_version="RECIPE_COMPOSITION_NUTRITION_V1",
+    )
+    with pytest.raises(RecipeNutritionV2UnavailableError, match="authority versions"):
+        RecipeNutritionV2Service._require_binding_versions(wrong)
 
 
 def test_reviewed_nutrient_mismatch_fails_before_binding_write(database):
