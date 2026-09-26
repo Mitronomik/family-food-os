@@ -1,5 +1,28 @@
 # Handoff
 
+## Post-PR96 sequencing correction — 2026-09-26
+
+PR96 is merged into main at:
+`7443f56b856184db6ddb040b9d68425db9f8d41a`.
+
+PR97 is closed as **SUPERSEDED / DO NOT MERGE** and none of its commits are in main.
+
+Correction:
+- old DC1 statuses are historical inventory/planning evidence, not the current project state by themselves;
+- later accepted Steps 4–10 already established source authority/publication mechanics, Russian methodology, transformation applicability, RecipeVersion publication precedent, V2 Recipe Nutrition authority, and Planner/MealPlan consumption integration;
+- the durable corpus archive was later recorded at
+  `private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`
+  with SHA-256
+  `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
+- do not create a new per-recipe preflight milestone by default.
+
+Correct continuation:
+`accepted DATA-CORPUS-V1 → bounded DC2/DC3 production batches → DC4 → Gate1-CLOSE → PR9`.
+
+Recipe-specific form/Nutrition/classification/provenance checks remain normal bounded publication work unless a new architecture/data-authority blocker is discovered.
+
+No next production batch has been started by this state correction.
+
 ## PR96 Step 10-B review-ready — 2026-09-26
 
 Accepted base:
