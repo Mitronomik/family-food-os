@@ -1,9 +1,9 @@
 # Step 10 — Recipe V2 Nutrition / Planner Integration Contract
 
-**Status:** Implementation Contract Gate / docs-only  
-**Decision date:** 2026-09-26  
-**Accepted base:** d0a1a217d3e23b0b930f14de37405a7ca7ba3d16 — merged PR #93 / accepted Step 9 runtime  
-**Bounded step:** Russian-data integration Step 10 — reusable composition-backed RecipeVersion nutrition consumption and Planner integration  
+**Status:** Implementation Contract Gate / docs-only
+**Decision date:** 2026-09-26
+**Accepted base:** d0a1a217d3e23b0b930f14de37405a7ca7ba3d16 — merged PR #93 / accepted Step 9 runtime
+**Bounded step:** Russian-data integration Step 10 — reusable composition-backed RecipeVersion nutrition consumption and Planner integration
 **Runtime/schema implementation authorized by this document:** no — review and merge this gate first
 
 ## 1. Goal
