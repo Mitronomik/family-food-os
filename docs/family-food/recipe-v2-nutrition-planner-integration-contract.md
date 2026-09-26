@@ -25,7 +25,7 @@ The target is not to turn the Step 9 butter portion into a standalone meal.
 
 The production Step 9 Recipe remains inactive in Step 10.
 
-## 3. DECISION — runtime delivery is split into Step 10-A and Step 10-B
+## 2. DECISION — runtime delivery is split into Step 10-A and Step 10-B
 
 The accepted Step 10 capability is one architectural sequence but not one runtime PR.
 
@@ -59,7 +59,7 @@ Adds no migration and no new production Recipe activation.
 This split keeps schema/publication risk separate from Planner algorithm behavior and
 preserves the project rule that one implementation PR has one bounded goal.
 
-## 2. FACT — accepted base
+## 3. FACT — accepted base
 
 PR #93 is merged into main at d0a1a217d3e23b0b930f14de37405a7ca7ba3d16.
 
