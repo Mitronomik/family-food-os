@@ -12,39 +12,23 @@ Russian-data integration Steps 1–9 are accepted.
 
 ## Current bounded state
 
-**PR94 / final compatibility-semantic blocker correction is implemented; exact-head verification is pending.**
+**PR94 / final-corrected Step 10 Contract Gate is review-ready.**
 
 Branch:
 
 docs/step10-v2-recipe-nutrition-contract
 
+Corrected semantic head:
+
+5e2d9a9336a94798327e3a9445e0dffd41e05ff9
+
+Corrected semantic review:
+
+#5326221930 — READY TO MERGE FINAL-CORRECTED STEP 10 CONTRACT GATE
+
 Canonical gate:
 
 docs/family-food/recipe-v2-nutrition-planner-integration-contract.md
-
-Exhaustive exact-head review #5326205581 superseded the prior READY receipt and
-found one remaining compatibility blocker.
-
-## Correction implemented
-
-The V2 → legacy Nutrition crosswalk is now exact and part of
-`RECIPE_COMPOSITION_NUTRITION_V1`:
-
-- kcal ← ENERGY_KCAL;
-- protein_g ← PROTEIN;
-- fat_g ← FAT_TOTAL;
-- carbohydrates_g ← CARBOHYDRATE_BY_DIFFERENCE **only**;
-- fiber_g ← FIBER_TOTAL_DIETARY.
-
-No CARBOHYDRATE_AVAILABLE fallback exists.
-STARCH + SUGARS_TOTAL cannot synthesize legacy carbohydrates.
-
-For the exact Step 9 butter result:
-- CARBOHYDRATE_BY_DIFFERENCE remains UNKNOWN;
-- legacy carbohydrates_g remains None;
-- legacy five-field status remains INCOMPLETE;
-- exact ENERGY_KCAL may still satisfy the separately versioned Planner readiness
-  path in Step 10-B.
 
 ## Frozen Step 10-A authority
 
@@ -58,7 +42,15 @@ For the exact Step 9 butter result:
 - optional rows fail closed;
 - transformed/non-INPUT root outputs fail closed;
 - unknown nutrients remain explicit UNKNOWN;
-- exact Step 9 canonical result is PARTIAL;
+- canonical Step 9 result is PARTIAL;
+- legacy compatibility crosswalk is exact:
+  - kcal ← ENERGY_KCAL;
+  - protein_g ← PROTEIN;
+  - fat_g ← FAT_TOTAL;
+  - carbohydrates_g ← CARBOHYDRATE_BY_DIFFERENCE only;
+  - fiber_g ← FIBER_TOTAL_DIETARY;
+- CARBOHYDRATE_AVAILABLE and STARCH+SUGARS never substitute for legacy carbohydrates;
+- exact Step 9 legacy carbohydrates_g is None and legacy status is INCOMPLETE;
 - historical reads use pinned authority and do not depend on later FoodIngredient.is_active;
 - publication/replay still requires active dependency.
 
@@ -69,8 +61,28 @@ For the exact Step 9 butter result:
 - neutral Nutrition projection is shared by Planner and MealPlan/Serving;
 - no production Step 9 Recipe activation.
 
+## Verification
+
+On semantic head 5e2d9a9336a94798327e3a9445e0dffd41e05ff9:
+
+- Docs #375 — SUCCESS;
+- DC1 #237 — SUCCESS;
+- Registry focused — 328 passed;
+- Partial focused — 276 passed;
+- contract sections 1–29 sequential;
+- adversarial acceptance 1–74 sequential;
+- mergeable=true;
+- 0 behind main;
+- trailing whitespace=0;
+- conflict markers=0;
+- unresolved review threads=0.
+
+Automatic broad Registry/Partial regression is supplemental for this docs-only gate.
+
 ## Stop boundary
 
-Do not merge until corrected exact-head verification and re-review complete.
+PR94 is ready for final merge review.
+
+Do not merge autonomously.
 Do not start Step 10-A before PR94 is merged and separately authorized.
 Step 10-B remains blocked until Step 10-A is reviewed and merged.

@@ -1,5 +1,32 @@
 # Progress
 
+## PR94 final compatibility correction review-ready — 2026-09-26
+
+Semantic head:
+5e2d9a9336a94798327e3a9445e0dffd41e05ff9.
+
+Closed review #5326205581:
+legacy NutritionValues.carbohydrates_g now maps exactly and only from
+CARBOHYDRATE_BY_DIFFERENCE under RECIPE_COMPOSITION_NUTRITION_V1.
+
+Forbidden:
+- CARBOHYDRATE_AVAILABLE fallback;
+- STARCH+SUGARS synthesis.
+
+Step 9 legacy projection remains INCOMPLETE.
+
+Review #5326221930: READY TO MERGE.
+
+Verification:
+Docs #375 / DC1 #237 SUCCESS.
+Registry focused 328.
+Partial focused 276.
+
+Status:
+STEP10_CONTRACT_GATE_FINAL_CORRECTED_REVIEW_READY.
+
+No runtime/schema/production data mutation occurred.
+
 ## PR94 final compatibility blocker corrected — 2026-09-26
 
 Review #5326205581 blocked the gate on an unfrozen legacy carbohydrate crosswalk.

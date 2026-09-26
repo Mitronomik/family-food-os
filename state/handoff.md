@@ -1,5 +1,36 @@
 # Handoff
 
+## PR94 final compatibility correction review-ready — 2026-09-26
+
+Semantic head:
+5e2d9a9336a94798327e3a9445e0dffd41e05ff9.
+
+Review:
+#5326221930 — READY TO MERGE FINAL-CORRECTED STEP 10 CONTRACT GATE.
+
+Review #5326205581 blocker is closed.
+
+Exact V2 → legacy crosswalk under RECIPE_COMPOSITION_NUTRITION_V1:
+- kcal ← ENERGY_KCAL;
+- protein_g ← PROTEIN;
+- fat_g ← FAT_TOTAL;
+- carbohydrates_g ← CARBOHYDRATE_BY_DIFFERENCE only;
+- fiber_g ← FIBER_TOTAL_DIETARY.
+
+No AVAILABLE carbohydrate fallback and no STARCH+SUGARS synthesis.
+Step 9 legacy carbohydrates remain None; legacy status remains INCOMPLETE.
+
+Verification:
+Docs #375 / DC1 #237 SUCCESS.
+Registry focused 328 passed.
+Partial focused 276 passed.
+Sections 1–29 and acceptance 1–74 sequential.
+mergeable=true; 0 behind; diff audit clean.
+
+Stop for merge review. No self-merge.
+Step 10-A requires separate authorization after PR94 merge.
+Step 10-B remains unauthorized until Step 10-A merges.
+
 ## PR94 final compatibility blocker correction — 2026-09-26
 
 Exhaustive review #5326205581 superseded the prior READY receipt and found one
