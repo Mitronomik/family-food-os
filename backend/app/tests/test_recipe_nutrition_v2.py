@@ -17,6 +17,7 @@ from app.domain.recipe_nutrition_v2 import (
     NUTRIENT_CODES,
     CanonicalNutrientAmount,
     CanonicalRecipeVersionNutrition,
+    RecipeNutritionAuthorityKind,
     RecipeNutritionV2Status,
 )
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
@@ -27,6 +28,7 @@ from app.persistence.sqlalchemy_core.food_ingredient_composition import (
     create_food_catalogue_service,
 )
 from app.seed.food_recipes import seed_food_recipes
+from app.persistence.sqlalchemy_core.nutrition_composition import create_nutrition_service
 from app.seed.ru_nut_db_step8_butter import seed_ru_nut_db_step8_butter
 from app.seed.ru_school2022_step9_recipe import (
     FOOD_CODE,
@@ -42,6 +44,7 @@ from app.services.recipe_nutrition_v2 import (
     RecipeNutritionV2ConflictError,
     RecipeNutritionV2UnavailableError,
     ReviewedRecipeIngredientBindingSpec,
+    project_legacy_recipe_nutrition_consumption,
     project_recipe_nutrition_consumption,
 )
 
@@ -92,6 +95,73 @@ def spec():
 def db_dump(config):
     with sqlite3.connect(config.path) as db:
         return "\n".join(db.iterdump())
+
+
+def test_neutral_projection_preserves_legacy_authority_when_unbound(database):
+    with sqlite3.connect(database.path) as db:
+        legacy_version_id = db.execute(
+            """
+            SELECT rv.id
+            FROM food_recipe_versions rv
+            JOIN food_recipes r ON r.id = rv.recipe_id
+            WHERE r.canonical_code != ?
+            ORDER BY r.canonical_code, rv.version_number
+            LIMIT 1
+            """,
+            (RECIPE_CODE,),
+        ).fetchone()[0]
+
+    engine = create_sqlite_engine(database)
+    try:
+        legacy = create_nutrition_service(engine).recipe_version(
+            __import__("uuid").UUID(hex=legacy_version_id)
+        )
+        projection = create_recipe_nutrition_v2_service(
+            engine
+        ).neutral_consumption_projection(legacy.version.id)
+        assert projection.authority_kind is RecipeNutritionAuthorityKind.LEGACY_V1
+        assert projection.required_total == legacy.required_total
+        assert projection.per_base_serving == legacy.per_base_serving
+        assert projection.legacy_status is legacy.status
+        assert projection.canonical_status is None
+        assert projection.registry_version is None
+        assert projection.nutrient_set_version is None
+        assert projection.composition_calculation_version is None
+        assert projection.recipe_calculation_version is None
+        expected_ready = (
+            legacy.status is not NutritionStatus.INCOMPLETE
+            and legacy.per_base_serving.kcal is not None
+            and legacy.per_base_serving.kcal > 0
+        )
+        assert projection.exact_energy_ready is expected_ready
+    finally:
+        engine.dispose()
+
+
+def test_neutral_projection_uses_composition_v2_when_fully_bound(database):
+    engine = create_sqlite_engine(database)
+    try:
+        service = create_recipe_nutrition_v2_service(engine)
+        published = service.publish_binding(spec())
+        projection = service.neutral_consumption_projection(
+            published.recipe_version_id
+        )
+        assert projection.authority_kind is RecipeNutritionAuthorityKind.COMPOSITION_V2
+        assert projection.canonical_status is RecipeNutritionV2Status.PARTIAL
+        assert projection.legacy_status is NutritionStatus.INCOMPLETE
+        assert projection.registry_version == "RU_NUTRIENT_REGISTRY_V2"
+        assert projection.nutrient_set_version == "RECIPE_V2_NUTRIENT_SET_V1"
+        assert (
+            projection.composition_calculation_version
+            == "FOOD_COMPOSITION_APPLICABILITY_V2"
+        )
+        assert (
+            projection.recipe_calculation_version
+            == "RECIPE_COMPOSITION_NUTRITION_V1"
+        )
+        assert projection.exact_energy_ready is True
+    finally:
+        engine.dispose()
 
 
 def test_fresh_binding_replay_and_step9_canonical_projection(database):
