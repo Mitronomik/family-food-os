@@ -1,5 +1,26 @@
 # Progress
 
+## Post-PR96 sequencing corrected — 2026-09-26
+
+Accepted main:
+`7443f56b856184db6ddb040b9d68425db9f8d41a`.
+
+PR97:
+`SUPERSEDED_CLOSED_UNMERGED`.
+
+Correction result:
+- no regression to DC1-era preflight state;
+- accepted corpus/source foundation remains accepted;
+- Steps 4–10 remain the later controlling implementation history;
+- normal DATA-CORPUS-V1 DC2/DC3 publication sequence resumes;
+- no per-recipe governance milestone is introduced;
+- PR9 remains blocked until DC4 + Gate1-CLOSE.
+
+Status:
+`POST_PR96_DC23_SEQUENCE_RESTORED`.
+
+No production data/runtime changes occurred in this correction.
+
 ## PR96 Step 10-B review-ready — 2026-09-26
 
 Verified runtime/test head:
