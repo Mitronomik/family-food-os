@@ -26,7 +26,6 @@ from app.services.food_recipes import (
     RecipeSeedSummary,
     TrustedRecipeIngredientSeed,
     TrustedRecipeSeed,
-    TrustedRecipeSeedDisposition,
     TrustedRecipeVersionSeed,
 )
 
@@ -423,26 +422,23 @@ def seed_ru_school2022_step9_recipe(
     try:
         _validate_step8_dependency(engine, publication)
         service = create_food_recipe_catalogue_service(engine)
-        disposition = service.preflight_trusted_seed(seed)
+        service.preflight_trusted_seed(seed)
         result = service.reconcile_seed((seed,), strict_history=True)
-        if disposition is TrustedRecipeSeedDisposition.FRESH:
-            if (
-                result.recipes_inserted,
-                result.versions_inserted,
-                result.ingredients_inserted,
-                result.steps_inserted,
-                result.equipment_inserted,
-            ) != (1, 1, 1, 2, 0):
-                raise RuntimeError("Step 9 fresh publication result изменён.")
-        else:
-            if (
-                result.recipes_inserted,
-                result.versions_inserted,
-                result.ingredients_inserted,
-                result.steps_inserted,
-                result.equipment_inserted,
-            ) != (0, 0, 0, 0, 0):
-                raise RuntimeError("Step 9 exact replay выполнил запись.")
+
+        fresh_result = RecipeSeedSummary(
+            recipes_inserted=1,
+            versions_inserted=1,
+            ingredients_inserted=1,
+            steps_inserted=2,
+        )
+        replay_result = RecipeSeedSummary(
+            recipes_existing=1,
+            versions_existing=1,
+            ingredients_existing=1,
+            steps_existing=2,
+        )
+        if result not in (fresh_result, replay_result):
+            raise RuntimeError("Step 9 transactional publication result изменён.")
         return result
     finally:
         engine.dispose()

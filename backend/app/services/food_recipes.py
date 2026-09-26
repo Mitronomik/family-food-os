@@ -245,11 +245,32 @@ class FoodRecipeCatalogueService:
         with self._read() as scope:
             return self._classify_trusted_seed(scope, seed)
 
+    def _require_active_seed_dependencies(
+        self,
+        scope: RecipeCatalogueReadScope | RecipeCatalogueUnitOfWork,
+        seed: TrustedRecipeVersionSeed,
+    ) -> None:
+        for ingredient in seed.ingredients:
+            if ingredient.optional:
+                continue
+            resolved = scope.food_ingredients.get_by_code(
+                ingredient.food_ingredient_code
+            )
+            if (
+                resolved is None
+                or resolved.canonical_code != ingredient.food_ingredient_code
+                or not resolved.is_active
+            ):
+                raise FoodIngredientResolutionError(
+                    f"FoodIngredient {ingredient.food_ingredient_code!r} is missing or inactive."
+                )
+
     def _classify_trusted_seed(
         self,
         scope: RecipeCatalogueReadScope | RecipeCatalogueUnitOfWork,
         seed: TrustedRecipeSeed,
     ) -> TrustedRecipeSeedDisposition:
+        self._require_active_seed_dependencies(scope, seed.version)
         name_key = normalize_unicode_search_key(
             seed.canonical_name, field="canonical_name"
         )

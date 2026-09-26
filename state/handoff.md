@@ -1,5 +1,25 @@
 # Handoff
 
+## PR93 transaction/replay blocker correction — 2026-09-26
+
+Independent exact-head review superseded the earlier READY TO MERGE receipt and
+identified two blockers in the preflight/write-UoW boundary.
+
+Correction implemented on the same PR branch:
+- strict trusted-seed classification re-resolves required FoodIngredients and
+  requires active state inside the Recipe Catalogue UoW;
+- loader external preflight is fail-fast only;
+- actual transactional result may be either exact fresh publication or exact
+  zero-write replay;
+- adversarial tests cover dependency deactivation after preflight and a
+  concurrent exact publisher winning after a FRESH preflight.
+
+The previous runtime verification at
+`31751069adec7ada062c8b4b7fcb291f4cd89bed` is superseded for runtime bytes.
+
+Current status: correction implemented; exact-head verification and final
+re-review required. Do not merge yet. No Step 10 work is authorized.
+
 ## PR93 Step 9 runtime-data review-ready — 2026-09-26
 
 Accepted main:

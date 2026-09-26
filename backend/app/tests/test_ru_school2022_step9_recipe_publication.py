@@ -31,6 +31,7 @@ from app.seed.food_recipes import seed_food_recipes
 from app.seed.ru_nut_db_step8_butter import seed_ru_nut_db_step8_butter
 from app.seed import ru_school2022_step9_recipe as step9
 from app.services.food_recipes import (
+    FoodIngredientResolutionError,
     RecipeCatalogueConflictError,
     TrustedRecipeSeedDisposition,
 )
@@ -446,6 +447,175 @@ def test_strict_reconcile_rechecks_history_inside_write_uow(database):
         assert db_dump(database) == before
     finally:
         engine.dispose()
+
+
+
+def test_exact_replay_rechecks_active_dependency_inside_write_uow(
+    database, monkeypatch
+):
+    step9.seed_ru_school2022_step9_recipe(database)
+    before_recipe_rows = (
+        scalar(
+            database,
+            "SELECT COUNT(*) FROM food_recipes WHERE canonical_code = ?",
+            (RECIPE_CODE,),
+        ),
+        scalar(
+            database,
+            """
+            SELECT COUNT(*)
+            FROM food_recipe_versions v
+            JOIN food_recipes r ON r.id = v.recipe_id
+            WHERE r.canonical_code = ?
+            """,
+            (RECIPE_CODE,),
+        ),
+        scalar(
+            database,
+            """
+            SELECT COUNT(*)
+            FROM food_recipe_ingredients i
+            JOIN food_recipe_versions v ON v.id = i.recipe_version_id
+            JOIN food_recipes r ON r.id = v.recipe_id
+            WHERE r.canonical_code = ?
+            """,
+            (RECIPE_CODE,),
+        ),
+        scalar(
+            database,
+            """
+            SELECT COUNT(*)
+            FROM food_recipe_steps s
+            JOIN food_recipe_versions v ON v.id = s.recipe_version_id
+            JOIN food_recipes r ON r.id = v.recipe_id
+            WHERE r.canonical_code = ?
+            """,
+            (RECIPE_CODE,),
+        ),
+    )
+
+    race_engine = create_sqlite_engine(database)
+    real_service = create_food_recipe_catalogue_service(race_engine)
+    food_service = create_food_catalogue_service(race_engine)
+
+    class _DeactivateAfterPreflight:
+        def preflight_trusted_seed(self, seed):
+            disposition = real_service.preflight_trusted_seed(seed)
+            assert disposition is TrustedRecipeSeedDisposition.EXACT_REPLAY
+            food = food_service.get_by_code(step9.FOOD_CODE)
+            food_service.deactivate(food.id)
+            return disposition
+
+        def reconcile_seed(self, seeds, *, strict_history=False):
+            return real_service.reconcile_seed(
+                seeds, strict_history=strict_history
+            )
+
+    monkeypatch.setattr(
+        step9,
+        "create_food_recipe_catalogue_service",
+        lambda _engine: _DeactivateAfterPreflight(),
+    )
+    try:
+        with pytest.raises(FoodIngredientResolutionError, match="missing or inactive"):
+            step9.seed_ru_school2022_step9_recipe(database)
+    finally:
+        race_engine.dispose()
+
+    after_recipe_rows = (
+        scalar(
+            database,
+            "SELECT COUNT(*) FROM food_recipes WHERE canonical_code = ?",
+            (RECIPE_CODE,),
+        ),
+        scalar(
+            database,
+            """
+            SELECT COUNT(*)
+            FROM food_recipe_versions v
+            JOIN food_recipes r ON r.id = v.recipe_id
+            WHERE r.canonical_code = ?
+            """,
+            (RECIPE_CODE,),
+        ),
+        scalar(
+            database,
+            """
+            SELECT COUNT(*)
+            FROM food_recipe_ingredients i
+            JOIN food_recipe_versions v ON v.id = i.recipe_version_id
+            JOIN food_recipes r ON r.id = v.recipe_id
+            WHERE r.canonical_code = ?
+            """,
+            (RECIPE_CODE,),
+        ),
+        scalar(
+            database,
+            """
+            SELECT COUNT(*)
+            FROM food_recipe_steps s
+            JOIN food_recipe_versions v ON v.id = s.recipe_version_id
+            JOIN food_recipes r ON r.id = v.recipe_id
+            WHERE r.canonical_code = ?
+            """,
+            (RECIPE_CODE,),
+        ),
+    )
+    assert after_recipe_rows == before_recipe_rows
+
+
+def test_loader_accepts_exact_replay_that_wins_after_fresh_preflight(
+    database, monkeypatch
+):
+    race_engine = create_sqlite_engine(database)
+    racer = create_food_recipe_catalogue_service(race_engine)
+    real_factory = create_food_recipe_catalogue_service
+
+    class _PublishExactAfterFreshPreflight:
+        def __init__(self, service):
+            self._service = service
+
+        def preflight_trusted_seed(self, seed):
+            disposition = self._service.preflight_trusted_seed(seed)
+            assert disposition is TrustedRecipeSeedDisposition.FRESH
+            concurrent = racer.reconcile_seed((seed,), strict_history=True)
+            assert concurrent.recipes_inserted == 1
+            assert concurrent.versions_inserted == 1
+            return disposition
+
+        def reconcile_seed(self, seeds, *, strict_history=False):
+            return self._service.reconcile_seed(
+                seeds, strict_history=strict_history
+            )
+
+    monkeypatch.setattr(
+        step9,
+        "create_food_recipe_catalogue_service",
+        lambda engine: _PublishExactAfterFreshPreflight(real_factory(engine)),
+    )
+    try:
+        result = step9.seed_ru_school2022_step9_recipe(database)
+    finally:
+        race_engine.dispose()
+
+    assert result.recipes_inserted == 0
+    assert result.versions_inserted == 0
+    assert result.ingredients_inserted == 0
+    assert result.steps_inserted == 0
+    assert result.equipment_inserted == 0
+    assert result.recipes_existing == 1
+    assert result.versions_existing == 1
+    assert result.ingredients_existing == 1
+    assert result.steps_existing == 2
+    assert result.equipment_existing == 0
+    assert (
+        scalar(
+            database,
+            "SELECT COUNT(*) FROM food_recipes WHERE canonical_code = ?",
+            (RECIPE_CODE,),
+        )
+        == 1
+    )
 
 
 def test_later_same_provenance_revision_blocks_exact_replay(database):

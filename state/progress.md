@@ -1,5 +1,25 @@
 # Progress
 
+## PR93 transaction/replay correction — 2026-09-26
+
+The later independent exact-head review superseded the earlier READY TO MERGE
+status with two blockers:
+- inactive Step 8 dependency could pass an exact replay race;
+- loader trusted stale external FRESH disposition after the write-UoW recheck.
+
+Both are corrected in PR93 with two adversarial race tests. Default historical
+`reconcile_seed()` behavior remains unchanged; the stricter dependency guard is
+limited to trusted preflight / `strict_history=True`.
+
+The prior runtime head
+`31751069adec7ada062c8b4b7fcb291f4cd89bed` is no longer the current runtime
+verification receipt after this code change.
+
+Status:
+`STEP9_RUNTIME_CORRECTED_VERIFICATION_PENDING`.
+
+No Step 10 work occurred.
+
 ## PR93 Step 9 runtime-data review-ready — 2026-09-26
 
 Verified runtime head:

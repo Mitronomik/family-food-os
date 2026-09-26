@@ -11,13 +11,19 @@ Russian-data integration Steps 1–8 and the Step 9 Contract Gate are accepted.
 
 ## Current bounded state
 
-**PR93 / Step 9 runtime-data publication is review-ready.**
+**PR93 / Step 9 transaction/replay blocker correction is implemented; exact-head verification is pending.**
 
 Branch:
 `feat/step9-school2022-recipe-runtime`.
 
-Verified runtime head:
-`31751069adec7ada062c8b4b7fcb291f4cd89bed`.
+Previous runtime receipt:
+`31751069adec7ada062c8b4b7fcb291f4cd89bed` — superseded by the transaction/replay correction.
+
+Correction closes:
+- required Step 8 FoodIngredient activity is rechecked inside strict Recipe Catalogue write UoW;
+- exact replay fails closed if that dependency becomes inactive after external preflight;
+- loader postconditions use the actual transactional reconcile result rather than stale external disposition;
+- concurrent exact publication after a FRESH preflight resolves successfully as zero-write replay.
 
 Canonical contract:
 `docs/family-food/russian-recipe-version-publication-contract.md`.
@@ -53,6 +59,8 @@ School2022 53-19з
 
 ## Verification
 
+The prior exact-head verification below remains historical evidence for the pre-correction runtime and is not a current runtime receipt.
+
 On runtime head `31751069adec7ada062c8b4b7fcb291f4cd89bed`:
 
 - Docs #358 — SUCCESS;
@@ -77,6 +85,6 @@ No Step 10 work is authorized by PR93.
 
 ## Stop boundary
 
-PR93 is ready for final review/merge authorization.
+Do not merge until the corrected runtime receives exact-head verification and final re-review.
 
 Do not merge autonomously.
