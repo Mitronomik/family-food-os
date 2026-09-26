@@ -12,41 +12,80 @@ Russian-data integration Steps 1–9 are accepted.
 
 ## Current bounded state
 
-**Step 10 Recipe V2 Nutrition / Planner Integration Contract Gate — docs-only.**
+**PR94 / Step 10 Recipe V2 Nutrition / Planner Integration Contract Gate is review-ready.**
 
 Branch:
 
 docs/step10-v2-recipe-nutrition-contract
 
+Semantic head:
+
+761871e36a5a019621eb0c8e7900b2dfcf5e2773
+
+Semantic review:
+
+#5325759751 — READY TO MERGE CONTRACT GATE
+
 Canonical gate:
 
 docs/family-food/recipe-v2-nutrition-planner-integration-contract.md
 
-## Preflight findings
+## Frozen implementation sequence
 
-- general Nutrition still uses legacy current-profile / B1 authority;
-- RecipeIngredient does not persist an exact FoodCompositionVersion binding;
-- selecting latest/current Composition would break historical reproducibility;
-- Step 9 meal_type=other is intentionally incompatible with current automatic MealRoles;
-- Step 9 sparse V2 truth has exact energy but canonical carbohydrate remains unknown.
+### Step 10-A — not yet authorized
 
-## Current gate decision
+After gate merge and separate authorization:
 
-- future runtime adds immutable RecipeIngredient → CompositionVersion authority binding, expected migration 0039;
-- legacy NutritionService.recipe_version() remains unchanged;
-- new canonical V2 RecipeVersion Nutrition consumption is explicit;
-- Planner receives a V2-safe exact-energy projection without globally relaxing legacy INCOMPLETE semantics;
-- production Step 9 butter Recipe remains inactive;
-- MealRole compatibility remains unchanged.
+- migration 0039;
+- immutable RecipeIngredient → exact FoodCompositionVersion binding;
+- exact Step 9 production binding;
+- canonical V2 RecipeVersion Nutrition;
+- neutral Nutrition consumption projection;
+- legacy NutritionService preservation.
 
-## Authorization boundary
+### Step 10-B — not yet authorized
 
-This branch is documentation/preflight only.
+Only after Step 10-A review/merge and separate authorization:
 
-No migration, runtime code, persisted binding, Recipe activation or Planner behavior change is authorized until this gate is reviewed and merged.
+- Planner V2 exact-energy readiness;
+- Planner algorithm version advance;
+- MealPlan/Serving neutral Nutrition consumption;
+- cross-context regression;
+- no migration.
+
+## Critical boundaries
+
+- production School2022 butter Recipe remains inactive;
+- ROLE_COMPATIBILITY_V1 and meal-role-recipe-v2 remain unchanged;
+- no automatic latest/current Composition selection;
+- no partial required-row V1/V2 mixing;
+- no WATER/carbohydrate inference;
+- no current-profile switch or fake B1 assessment;
+- no production activation in Step 10-A or Step 10-B;
+- AI_ENABLED=false remains supported.
+
+## Verification
+
+On semantic head 761871e36a5a019621eb0c8e7900b2dfcf5e2773:
+
+- Docs #366 — SUCCESS;
+- DC1 #228 — SUCCESS;
+- PR mergeable=true;
+- 0 behind main;
+- changed scope = docs/state only;
+- section numbering 1–29 sequential;
+- trailing whitespace = 0;
+- conflict markers = 0;
+- unresolved review threads = 0.
+
+Registry/Partial are automatic broad workflows and are not required for this
+docs-only gate under proportional verification. Runtime Step 10-A/B verification
+requirements are frozen in the contract.
 
 ## Stop boundary
 
-Deliver this Step 10 Contract Gate to review-ready state, then stop.
+PR94 is ready for final review / explicit merge authorization.
 
-Do not merge autonomously and do not start Step 10 runtime.
+Do not merge autonomously.
+Do not start Step 10-A before PR94 is merged and separately authorized.
+Step 10-B remains blocked until Step 10-A is reviewed and merged.

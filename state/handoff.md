@@ -1,5 +1,37 @@
 # Handoff
 
+## PR94 Step 10 Contract Gate review-ready — 2026-09-26
+
+Accepted base:
+d0a1a217d3e23b0b930f14de37405a7ca7ba3d16 (merged PR93).
+
+Semantic head:
+761871e36a5a019621eb0c8e7900b2dfcf5e2773.
+
+Review:
+#5325759751 — READY TO MERGE CONTRACT GATE.
+
+Canonical contract:
+docs/family-food/recipe-v2-nutrition-planner-integration-contract.md.
+
+Key decisions:
+- runtime is split into Step 10-A and Step 10-B;
+- Step 10-A owns migration 0039, immutable RecipeIngredient→Composition binding,
+  canonical V2 Recipe Nutrition and neutral consumption projection;
+- Step 10-B starts only after A merge and owns Planner V2 readiness,
+  planner-version advance and MealPlan/Serving integration;
+- production Step 9 butter Recipe stays inactive through both;
+- meal-role compatibility remains unchanged;
+- legacy NutritionService remains behavior-compatible;
+- no latest/current Composition inference or partial required-row V1/V2 mixing.
+
+Verification on semantic head:
+Docs #366 SUCCESS; DC1 #228 SUCCESS; mergeable=true; 0 behind; docs/state-only
+scope; numbering/whitespace/conflict audit clean.
+
+Stop for merge review. No self-merge. Step 10-A requires separate authorization
+after gate merge. Step 10-B remains unauthorized until Step 10-A merges.
+
 ## Step 10 Contract Gate started — 2026-09-26
 
 PR93 is merged into main at:

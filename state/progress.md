@@ -1,5 +1,31 @@
 # Progress
 
+## PR94 Step 10 Contract Gate review-ready — 2026-09-26
+
+Semantic head:
+761871e36a5a019621eb0c8e7900b2dfcf5e2773.
+
+The docs-only Step 10 gate is complete and reviewed.
+
+It freezes:
+- Step 10-A: migration 0039 + immutable Composition authority binding +
+  canonical V2 Recipe Nutrition + neutral consumption projection;
+- Step 10-B: Planner V2 readiness + planner version advance + MealPlan/Serving
+  consumption, only after Step 10-A merge;
+- no production Step 9 Recipe activation;
+- no MealRole compatibility expansion;
+- legacy Nutrition preservation;
+- unknown WATER/carbohydrate preservation.
+
+Verification:
+Docs #366 / DC1 #228 SUCCESS.
+Semantic review #5325759751 READY TO MERGE.
+
+Status:
+STEP10_CONTRACT_GATE_REVIEW_READY.
+
+No runtime/schema/production data mutation occurred.
+
 ## PR93 merged / Step 10 gate opened — 2026-09-26
 
 PR93 merged as:
