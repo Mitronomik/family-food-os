@@ -240,6 +240,30 @@ def _synthetic_canonical(*, available=None, by_difference=None, starch=None, sug
     )
 
 
+def test_recipe_v1_decimal_scaling_and_unknown_propagation_helpers_are_exact():
+    from app.domain.food_composition import calculation_context
+    from decimal import localcontext
+
+    repeating = Decimal("1") / Decimal("3")
+    with localcontext(calculation_context()):
+        scaled = Decimal("1") * Decimal("10") / Decimal("3")
+        assert scaled == Decimal("3.3333333333333333333333333333333333333333333333333333333333333333333333333333333")
+        assert scaled.quantize(Decimal("0.000001")) == Decimal("3.333333")
+
+    # Canonical unknown stays unknown in compatibility projection; it is never
+    # synthesized from other carbohydrate concepts.
+    projected = project_recipe_nutrition_consumption(
+        _synthetic_canonical(
+            available=Decimal("12"),
+            by_difference=None,
+            starch=Decimal("7"),
+            sugars=Decimal("3"),
+        )
+    )
+    assert projected.required_total.carbohydrates_g is None
+    assert projected.legacy_status is NutritionStatus.INCOMPLETE
+
+
 def test_legacy_carbohydrate_projection_is_by_difference_only():
     available_only = project_recipe_nutrition_consumption(
         _synthetic_canonical(available=Decimal("12"))
