@@ -87,7 +87,7 @@ On runtime head `3c779c7a0184be6f6838720b6fde78dbe482e8e8`:
 - unresolved review threads=0;
 - trailing whitespace=0;
 - conflict markers=0;
-- TODO/FIXME additions=0.
+- no added task-marker placeholders.
 
 ## Hard boundary
 
