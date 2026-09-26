@@ -1,5 +1,37 @@
 # Handoff
 
+## Step 9 Russian RecipeVersion Contract Gate — 2026-09-26
+
+Accepted main:
+`88a22a3cdfdd13d5481875dcd499abf06939582c` (merged PR91 / accepted Step 8 runtime).
+
+Branch:
+`docs/step9-russian-recipe-version-contract`.
+
+Canonical gate:
+`docs/family-food/russian-recipe-version-publication-contract.md`.
+
+Target:
+School2022 `53-19з — Масло сливочное (порциями)`.
+
+Key preflight:
+- one exact 10 g butter dependency is now closed by Step 8;
+- exact source-card/variant/demand/process/selection/route hashes are pinned;
+- historical v0.3 `publication_ready=false` is explicitly adjudicated rather
+  than ignored;
+- canonical project policy permits factual normative recipe publication while
+  excluding publisher layout/photos/logos/third-party commentary;
+- Recipe Catalogue schema/UoW is sufficient, no migration expected;
+- narrow preflight must reject unexpected existing Recipe history rather than
+  silently append;
+- old NutritionService current-profile path is intentionally not used because
+  Step 8 FIC profile is non-current;
+- deterministic acceptance is exact ATOMIC v1 + V2 composition scaled to 10 g;
+- carbohydrate and WATER remain unknown;
+- Step 10 Planner integration remains separate.
+
+Current authorization is docs-only. Stop after gate review-ready delivery.
+
 ## Step 8 runtime/data review-ready — PR91
 
 Accepted main:

@@ -1,78 +1,61 @@
 # Current focus
 
-Updated: `2026-09-25`.
+Updated: `2026-09-26`.
 
 ## Accepted state
 
-PR90 / corrected Step 8 Contract Gate is merged into `main` at
-`76ca8f8ffba589576af4e0fad4d7a4817a84089f`.
+PR91 / Step 8 runtime-data publication is merged into `main` at
+`88a22a3cdfdd13d5481875dcd499abf06939582c`.
 
-Russian-data integration Steps 1–7 and the Step 8 Contract Gate are accepted.
+Russian-data integration Steps 1–8 are accepted.
 
-## Current bounded state
+## Current bounded task
 
-**Step 8 runtime/data publication is review-ready in PR91.**
+**Step 9 — executable Russian RecipeVersion Implementation Contract Gate.**
 
 Branch:
-`feat/step8-recipe-dependency-butter-runtime`.
+`docs/step9-russian-recipe-version-contract`.
 
-Verified runtime/test/workflow head:
-`068847f4a3b886e6b8133558f2d4820a6a01474e`.
+Canonical gate:
+`docs/family-food/russian-recipe-version-publication-contract.md`.
 
-Canonical contract:
-`docs/family-food/recipe-dependency-food-batch-contract.md`.
+## Selected vertical slice
 
-## Delivered Step 8 runtime/data
+```text
+School2022 53-19з — Масло сливочное (порциями)
+→ BUTTER_PEASANT_72_5_UNSALTED
+→ exact 10 g INPUT
+→ SOURCE_VERIFIED RecipeVersion
+→ deterministic 17-value V2 composition calculation
+```
 
-- new exact `BUTTER_PEASANT_72_5_UNSALTED`;
-- licensed FIC RU-NUT-DB code 1417 / DB/533;
-- exact raw record SHA-256
-  `b21345dd5ffa8b1348931808067b116940a252abec6c26b01870c192829a711d`;
-- `salt_ad=0.0` retained source-only as no-added-salt form evidence;
-- sodium does not infer salinity;
-- non-zero/null/missing salt evidence fails closed;
-- all 26 FIC source fields retained;
-- `water=null` remains source-not-reported;
-- sealed V2 vector contains exactly 17 values and no WATER value;
-- source profile is non-current;
-- ATOMIC v1 / INPUT;
-- generic `BUTTER_UNSALTED` / USDA FDC 173430 remains unchanged/current;
-- zero YieldModel/retention/FoodTransformation/TransformationApplicability rows;
-- zero RecipeVersion rows added;
-- no migration/schema change; head remains 0038 and 0033 remains reserved.
+## Critical preflight decisions
 
-The implementation reuses the accepted Step 3/4 publication service and project
-UoW; no shared publication-service semantics changed.
-
-## Exact runtime verification
-
-On `068847f4a3b886e6b8133558f2d4820a6a01474e`:
-
-- Nutrient Registry V2 #180 — SUCCESS:
-  - focused: **310 passed**;
-  - backend shards: **1205 / 798 / 614 / 959 passed**;
-  - launcher: **643 passed, 2 skipped**;
-- Partial nutrition profiles #139 — SUCCESS:
-  - focused: **258 passed**;
-  - backend shards: **1205 / 798 / 614 / 959 passed**;
-  - launcher: **643 passed, 2 skipped**;
-- Russian nutrition methodologies #116 — SUCCESS;
-- Docs #347 — SUCCESS;
-- DC1 #209 — SUCCESS;
-- `AI_ENABLED=false`;
-- PR patch whitespace/conflict audit — clean.
-
-Focused workflows explicitly execute both Step 4 and Step 8 production
-publication suites.
+- no new schema/migration; head remains 0038 and 0033 remains reserved;
+- existing Recipe Catalogue transaction/replay seams are reused;
+- Step 9 wrapper must fail closed instead of appending to unexpected Recipe history;
+- normative-card rights use the later canonical factual-publication decision in
+  `ru-normative-recipe-corpus.md`;
+- source PDF/layout/photos are not published;
+- source-declared nutrition remains reference-only;
+- exact Step 8 FIC profile stays non-current;
+- legacy `NutritionService.recipe_version()` is not changed;
+- deterministic Step 9 nutrition is validated through exact ATOMIC v1 /
+  `RU_NUTRIENT_REGISTRY_V2`, scaled from 100 g to exact 10 g;
+- missing carbohydrate/WATER remain unknown;
+- `meal_type=other` is technical classification only, not Planner eligibility;
+- no equipment code is invented for refrigerated holding.
 
 ## Hard boundaries
 
-No Step 9 RecipeVersion, Step 10 Planner integration, additional FIC foods,
-production transformation factors, API/UI/Retail/AI/Auth/PostgreSQL.
+No Step 9 runtime before this gate is reviewed/merged.
+
+No Step 10 Planner integration, additional Recipe/Food publication, source-corpus
+bulk ingestion, current-profile switch, API/UI/Retail/AI/Auth/PostgreSQL.
 
 ## Stop boundary
 
-PR91 is ready for final review after state-only receipt verification.
+Deliver the Step 9 docs-only Contract Gate to review-ready state, then stop.
 
-Do not merge autonomously. After merge, stop; Step 9 requires separate explicit
-authorization.
+Do not merge autonomously and do not begin Step 9 runtime until separately
+authorized after gate merge.

@@ -1,5 +1,29 @@
 # Progress
 
+## Step 9 Contract Gate started — 2026-09-26
+
+PR91 is merged at:
+`88a22a3cdfdd13d5481875dcd499abf06939582c`.
+
+Step 8 is accepted.
+
+Step 9 preflight selected the same exact School2022 `53-19з` vertical slice and
+confirmed:
+- source material execution is one exact 10 g ingredient;
+- Step 8 closes the required food/composition dependency;
+- existing Recipe Catalogue persistence is sufficient without migration;
+- canonical normative-recipe rights policy allows narrow factual publication;
+- old v0.3 rights/carbohydrate blockers must be adjudicated explicitly;
+- legacy current-profile NutritionService cannot be used for the non-current
+  Step 8 profile;
+- V2 Composition is the Step 9 deterministic calculation authority;
+- Planner integration remains Step 10.
+
+Status:
+`STEP9_CONTRACT_GATE_ACTIVE`.
+
+No runtime/schema/production RecipeVersion write has occurred.
+
 ## Step 8 runtime/data review-ready — 2026-09-25
 
 Accepted base:
