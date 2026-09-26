@@ -15,7 +15,7 @@ MIGRATION_ID = "0039_recipe_ingredient_composition_binding"
 TABLE = "recipe_ingredient_composition_bindings"
 
 
-def through_0038(path):
+def through_0038(path, *, seed=False):
     original = list(migrations.MIGRATION_MODULES)
     config = DatabaseConfig(path=path)
     try:
@@ -25,6 +25,10 @@ def through_0038(path):
             if not name.endswith("0039_recipe_ingredient_composition_binding")
         ]
         apply_migrations(config)
+        if seed:
+            seed_food_recipes(config)
+            seed_ru_nut_db_step8_butter(config)
+            seed_ru_school2022_step9_recipe(config)
     finally:
         migrations.MIGRATION_MODULES[:] = original
     return config
@@ -66,6 +70,40 @@ def test_0039_is_current_head_and_creates_only_bounded_table(tmp_path):
         f"{TABLE}_no_delete",
         f"{TABLE}_no_replace",
     }
+
+
+def test_populated_0038_upgrade_preserves_recipe_and_nutrition_history(tmp_path):
+    config = through_0038(tmp_path / "populated.sqlite", seed=True)
+    tables = (
+        "food_recipes",
+        "food_recipe_versions",
+        "food_recipe_ingredients",
+        "food_recipe_steps",
+        "food_ingredients",
+        "food_nutrition_profiles",
+        "nutrient_values",
+        "nutrition_vector_seals",
+        "food_composition_versions",
+    )
+    with sqlite3.connect(config.path) as db:
+        before = {
+            table: db.execute(f'SELECT * FROM "{table}" ORDER BY rowid').fetchall()
+            for table in tables
+        }
+        assert db.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (TABLE,)
+        ).fetchone() is None
+
+    assert apply_migrations(config) == [MIGRATION_ID]
+
+    with sqlite3.connect(config.path) as db:
+        after = {
+            table: db.execute(f'SELECT * FROM "{table}" ORDER BY rowid').fetchall()
+            for table in tables
+        }
+        assert after == before
+        assert db.execute(f"SELECT COUNT(*) FROM {TABLE}").fetchone() == (0,)
+        assert db.execute("PRAGMA foreign_key_check").fetchall() == []
 
 
 def test_0039_failure_is_atomic(tmp_path):
