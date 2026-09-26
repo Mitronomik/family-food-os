@@ -270,8 +270,8 @@ class FoodRecipeCatalogueService:
                 raise RecipeCatalogueConflictError(
                     "Existing Recipe lacks the trusted seed provenance."
                 )
-            if not any(
-                _seed_matches(scope, detail, seed.version) for detail in candidates
+            if len(candidates) != 1 or not _seed_matches(
+                scope, candidates[0], seed.version
             ):
                 raise RecipeCatalogueConflictError(
                     "Same-provenance RecipeVersions differ from the trusted seed."

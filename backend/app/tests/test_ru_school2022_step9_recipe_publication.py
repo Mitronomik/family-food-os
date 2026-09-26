@@ -421,6 +421,31 @@ def test_same_provenance_structural_drift_fails_closed(database):
     assert db_dump(database) == before
 
 
+def test_later_same_provenance_revision_blocks_exact_replay(database):
+    seed, _ = step9.load_ru_school2022_step9_recipe_seed()
+    engine = create_sqlite_engine(database)
+    try:
+        service = create_food_recipe_catalogue_service(engine)
+        first = service.reconcile_seed((seed,))
+        assert first.versions_inserted == 1
+        recipe = service.get_by_code(RECIPE_CODE)
+        service.append_trusted_version(
+            recipe.id,
+            replace(
+                seed.version,
+                change_note="Conflicting same-provenance internal revision.",
+            ),
+        )
+    finally:
+        engine.dispose()
+    before = db_dump(database)
+
+    with pytest.raises(RecipeCatalogueConflictError, match="Same-provenance"):
+        step9.seed_ru_school2022_step9_recipe(database)
+
+    assert db_dump(database) == before
+
+
 def test_injected_late_write_failure_rolls_back_complete_recipe_bundle(
     database, monkeypatch
 ):
