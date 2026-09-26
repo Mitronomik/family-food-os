@@ -81,6 +81,11 @@ class RecipeNutritionV2Status(StrEnum):
     INCOMPLETE = "INCOMPLETE"
 
 
+class RecipeNutritionAuthorityKind(StrEnum):
+    LEGACY_V1 = "LEGACY_V1"
+    COMPOSITION_V2 = "COMPOSITION_V2"
+
+
 @dataclass(frozen=True)
 class RecipeIngredientCompositionBinding:
     recipe_ingredient_id: UUID
@@ -186,9 +191,10 @@ class RecipeNutritionConsumptionProjection:
     required_total: NutritionValues
     per_base_serving: NutritionValues
     legacy_status: NutritionStatus
-    canonical_status: RecipeNutritionV2Status
+    authority_kind: RecipeNutritionAuthorityKind
+    canonical_status: RecipeNutritionV2Status | None
     exact_energy_ready: bool
-    registry_version: str
-    nutrient_set_version: str
-    composition_calculation_version: str
-    recipe_calculation_version: str
+    registry_version: str | None
+    nutrient_set_version: str | None
+    composition_calculation_version: str | None
+    recipe_calculation_version: str | None
