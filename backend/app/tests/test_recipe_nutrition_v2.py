@@ -142,28 +142,21 @@ def test_fresh_publication_rechecks_active_dependency_after_external_read(databa
 
 
 def test_binding_publication_rejects_drifted_step9_structure(database):
-    with sqlite3.connect(database.path) as db:
-        db.execute(
-            """
-            UPDATE food_recipe_steps
-            SET instruction = 'изменённая инструкция'
-            WHERE recipe_version_id = (
-                SELECT rv.id
-                FROM food_recipe_versions rv
-                JOIN food_recipes r ON r.id = rv.recipe_id
-                WHERE r.canonical_code = ?
-                  AND rv.version_number = 1
-            )
-              AND position = 1
-            """,
-            (RECIPE_CODE,),
-        )
-        db.commit()
+    reviewed = spec()
+    drifted_seed = replace(
+        reviewed.trusted_recipe_seed,
+        version=replace(
+            reviewed.trusted_recipe_seed.version,
+            steps=("изменённая инструкция",)
+            + reviewed.trusted_recipe_seed.version.steps[1:],
+        ),
+    )
+    drifted = replace(reviewed, trusted_recipe_seed=drifted_seed)
 
     engine = create_sqlite_engine(database)
     try:
         with pytest.raises(RecipeNutritionV2ConflictError, match="structure/provenance"):
-            create_recipe_nutrition_v2_service(engine).publish_binding(spec())
+            create_recipe_nutrition_v2_service(engine).publish_binding(drifted)
         with sqlite3.connect(database.path) as db:
             assert db.execute(
                 "SELECT COUNT(*) FROM recipe_ingredient_composition_bindings"
