@@ -55,10 +55,16 @@ Recipe-specific validation remains required where relevant:
 - provenance/rights;
 - activation suitability.
 
-These checks belong inside the bounded publication batch unless they reveal a
-genuinely new architecture/data-authority decision that requires a separate stop.
+Recipe-specific validation belongs in the bounded publication batch when that
+batch uses existing accepted publication paths and authority contracts.
 
-Do **not** introduce a new per-recipe preflight/contract milestone by default.
+If a batch requires a new or changed authoritative publication path, immutable
+authority contract, schema/migration boundary or cross-context rule, stop before
+runtime implementation and create the repository-required docs-only
+Implementation Contract Gate.
+
+Do **not** introduce a new per-recipe preflight/contract milestone by default when
+existing accepted paths/contracts are sufficient.
 
 ## Active programme sequence
 
