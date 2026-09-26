@@ -40,7 +40,7 @@ PARTIAL_PROFILE_MIGRATION_ID = "0034_partial_nutrition_profiles"
 REGISTRY_V2_MIGRATION_ID = "0035_versioned_nutrient_registry"
 REFERENCE_METHODOLOGY_MIGRATION_ID = "0036_member_reference_methodology_selection"
 REFERENCE_PINS_MIGRATION_ID = "0037_meal_plan_reference_methodology_pins"
-HEAD_MIGRATION_ID = "0038_transformation_applicability"
+HEAD_MIGRATION_ID = "0039_recipe_ingredient_composition_binding"
 TABLE = "artifact_audit_operations"
 
 
@@ -268,6 +268,7 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         "member_reference_methodology_selections",
         "meal_plan_member_reference_methodology_pins",
         "food_transformation_applicability",
+        "recipe_ingredient_composition_bindings",
     }
 
 
