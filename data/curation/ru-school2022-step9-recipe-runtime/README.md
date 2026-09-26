@@ -1,7 +1,7 @@
 # School2022 Step 9 RecipeVersion runtime publication
 
-**Status:** reviewed production payload for Russian-data integration Step 9  
-**Target:** `ru-school2022:recipe:53-19з — Масло сливочное (порциями)`  
+**Status:** reviewed production payload for Russian-data integration Step 9
+**Target:** `ru-school2022:recipe:53-19з — Масло сливочное (порциями)`
 **Publication JSON SHA-256:** `241bbd0dd2910317be0b65f46586b8e1f40cb06e3fbac1122b4ea1056c26e28f`
 
 This package publishes one inactive technical Recipe and one immutable
