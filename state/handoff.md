@@ -1,5 +1,42 @@
 # Handoff
 
+## PR93 Step 9 runtime-data review-ready — 2026-09-26
+
+Accepted main:
+`2c50782b17584a5708a946e497d6a628977420e9`.
+
+Branch:
+`feat/step9-school2022-recipe-runtime`.
+
+Verified runtime head:
+`31751069adec7ada062c8b4b7fcb291f4cd89bed`.
+
+Semantic review:
+`#5325378822 — STEP 9 RUNTIME/DATA READY TO MERGE`.
+
+Delivered:
+- one inactive School2022 53-19з Recipe;
+- one immutable SOURCE_VERIFIED RecipeVersion v1;
+- one exact 10 g Step 8 butter ingredient;
+- two material RecipeSteps;
+- institutional holding/14 °C source context only;
+- deterministic 17-value V2 validation;
+- strict fresh/replay/conflict/rollback;
+- no migration/source-corpus/Step 10.
+
+Important shared seams:
+- `TrustedRecipeSeed.initial_is_active: bool = true`;
+- strict_history opt-in on trusted reconcile;
+- read-only Composition `find_version(food_id, version)`.
+
+Existing callers preserve prior behavior.
+
+Verification on runtime head:
+Docs #358; DC1 #220; Russian #121; Registry #198; Partial #150 all SUCCESS.
+Focused 326/274; backend 1202/751/648/991; launcher 643 passed, 2 skipped.
+
+Stop for merge review. After merge, Step 10 requires separate authorization.
+
 ## Step 9 runtime/data publication authorized — 2026-09-26
 
 Accepted main:

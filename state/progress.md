@@ -1,5 +1,31 @@
 # Progress
 
+## PR93 Step 9 runtime-data review-ready — 2026-09-26
+
+Verified runtime head:
+`31751069adec7ada062c8b4b7fcb291f4cd89bed`.
+
+Step 9 publication is implemented and verified:
+- inactive Recipe;
+- SOURCE_VERIFIED immutable v1;
+- exact Step 8 10 g dependency;
+- two material source-backed steps;
+- institutional applicability preserved;
+- 17-value deterministic V2 validation;
+- exact replay zero-write;
+- activation-preserving replay;
+- strict in-UoW history recheck;
+- rollback and Planner exclusion verified.
+
+Verification:
+Docs #358 / DC1 #220 / Russian #121 / Registry #198 / Partial #150 SUCCESS.
+Semantic review #5325378822 READY TO MERGE.
+
+Status:
+`STEP9_RUNTIME_REVIEW_READY`.
+
+No Step 10 work occurred.
+
 ## Step 9 runtime authorized — 2026-09-26
 
 PR92 is merged into main at
