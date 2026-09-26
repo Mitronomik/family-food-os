@@ -21,6 +21,9 @@ from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
     create_recipe_nutrition_v2_service,
 )
+from app.persistence.sqlalchemy_core.food_ingredient_composition import (
+    create_food_catalogue_service,
+)
 from app.seed.food_recipes import seed_food_recipes
 from app.seed.ru_nut_db_step8_butter import seed_ru_nut_db_step8_butter
 from app.seed.ru_school2022_step9_recipe import (
@@ -29,6 +32,7 @@ from app.seed.ru_school2022_step9_recipe import (
     SCHOOL_PDF_SHA256,
     SOURCE_RECIPE_ID,
     EXPECTED_RECIPE_AMOUNTS,
+    load_ru_school2022_step9_recipe_seed,
     seed_ru_school2022_step9_recipe,
 )
 from app.services.recipe_nutrition_v2 import (
@@ -58,7 +62,9 @@ def database(baseline, tmp_path):
 
 
 def spec():
+    trusted_seed, _ = load_ru_school2022_step9_recipe_seed()
     return ReviewedRecipeIngredientBindingSpec(
+        trusted_recipe_seed=trusted_seed,
         recipe_code=RECIPE_CODE,
         source_name="ru-school2022",
         source_recipe_id=SOURCE_RECIPE_ID,
@@ -111,6 +117,57 @@ def test_fresh_binding_replay_and_step9_canonical_projection(database):
         assert second.disposition is BindingDisposition.EXACT_REPLAY
         assert second.binding == first.binding
         assert db_dump(database) == before
+    finally:
+        engine.dispose()
+
+
+def test_fresh_publication_rechecks_active_dependency_after_external_read(database):
+    engine = create_sqlite_engine(database)
+    try:
+        food = create_food_catalogue_service(engine).get_by_code(FOOD_CODE)
+        assert food.is_active is True
+        with engine.begin() as connection:
+            connection.exec_driver_sql(
+                "UPDATE food_ingredients SET is_active = 0 WHERE canonical_code = ?",
+                (FOOD_CODE,),
+            )
+        with pytest.raises(RecipeNutritionV2ConflictError, match="inactive"):
+            create_recipe_nutrition_v2_service(engine).publish_binding(spec())
+        with sqlite3.connect(database.path) as db:
+            assert db.execute(
+                "SELECT COUNT(*) FROM recipe_ingredient_composition_bindings"
+            ).fetchone()[0] == 0
+    finally:
+        engine.dispose()
+
+
+def test_binding_publication_rejects_drifted_step9_structure(database):
+    with sqlite3.connect(database.path) as db:
+        db.execute(
+            """
+            UPDATE food_recipe_steps
+            SET instruction = 'изменённая инструкция'
+            WHERE recipe_version_id = (
+                SELECT rv.id
+                FROM food_recipe_versions rv
+                JOIN food_recipes r ON r.id = rv.recipe_id
+                WHERE r.canonical_code = ?
+                  AND rv.version_number = 1
+            )
+              AND position = 1
+            """,
+            (RECIPE_CODE,),
+        )
+        db.commit()
+
+    engine = create_sqlite_engine(database)
+    try:
+        with pytest.raises(RecipeNutritionV2ConflictError, match="structure/provenance"):
+            create_recipe_nutrition_v2_service(engine).publish_binding(spec())
+        with sqlite3.connect(database.path) as db:
+            assert db.execute(
+                "SELECT COUNT(*) FROM recipe_ingredient_composition_bindings"
+            ).fetchone()[0] == 0
     finally:
         engine.dispose()
 
