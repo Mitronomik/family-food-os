@@ -178,6 +178,9 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
     "0038_transformation_applicability": frozenset(
         {"food_transformation_applicability"}
     ),
+    "0039_recipe_ingredient_composition_binding": frozenset(
+        {"recipe_ingredient_composition_bindings"}
+    ),
 }
 
 # The foundational tables promised by migration `0001`. Stable FamilyFoodOS
