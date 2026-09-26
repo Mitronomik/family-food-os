@@ -23,6 +23,15 @@ on:
       - 'backend/app/tests/test_ru_school2022_step9_recipe_publication.py'
       - 'data/curation/ru-school2022-step9-recipe-runtime/**'
       - 'backend/app/domain/recipe_nutrition_v2.py'
+      - 'backend/app/domain/nutrition.py'
+      - 'backend/app/domain/planner.py'
+      - 'backend/app/domain/meal_plans.py'
+      - 'backend/app/services/planner.py'
+      - 'backend/app/services/meal_plans.py'
+      - 'backend/app/tests/test_planner.py'
+      - 'backend/app/tests/test_planner_application_boundary.py'
+      - 'backend/app/tests/test_meal_plans.py'
+      - 'backend/app/tests/test_step10b_planner_mealplan_v2.py'
       - 'backend/app/migrations/versions/0039_recipe_ingredient_composition_binding.py'
       - 'backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2.py'
       - 'backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2_tables.py'
@@ -73,6 +82,10 @@ jobs:
           backend/app/tests/test_recipe_nutrition_v2.py
           backend/app/tests/test_recipe_nutrition_v2_migration.py
           backend/app/tests/test_ru_school2022_step10a_binding.py
+          backend/app/tests/test_step10b_planner_mealplan_v2.py
+          backend/app/tests/test_planner.py
+          backend/app/tests/test_planner_application_boundary.py
+          backend/app/tests/test_meal_plans.py
           backend/app/tests/test_food_composition.py
           backend/app/tests/test_migration_lineage.py
           backend/app/tests/test_migration_runner_rebuild.py

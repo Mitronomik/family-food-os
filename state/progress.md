@@ -1,5 +1,24 @@
 # Progress
 
+## Step 10-B runtime active — 2026-09-26
+
+Accepted base:
+`1ef7d1ffd0896873034034b3eb629e62aa474803` (merged PR95).
+
+Initial runtime implementation:
+- planner-v0.3;
+- exact-energy readiness seam;
+- neutral Planner candidate Nutrition;
+- neutral MealPlan/Serving consumption;
+- legacy compatibility defaults;
+- cross-context synthetic proof;
+- verification workflow routing.
+
+Status:
+`STEP10B_RUNTIME_VERIFICATION_PENDING`.
+
+No migration, activation or Step 11 work occurred.
+
 ## PR95 Step 10-A review-ready — 2026-09-26
 
 Verified runtime head:

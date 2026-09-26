@@ -1,5 +1,29 @@
 # Handoff
 
+## Step 10-B runtime started — 2026-09-26
+
+PR95 / Step 10-A merged into main at:
+`1ef7d1ffd0896873034034b3eb629e62aa474803`.
+
+The user explicitly authorized the next bounded step.
+
+Branch:
+`feat/step10b-planner-mealplan-v2-nutrition`.
+
+Implemented initial Step 10-B seam:
+- PlannerConfig exact version = planner-v0.3;
+- compatibility remains meal-role-recipe-v2;
+- PlannerCandidate has additive exact_energy_ready=false by default;
+- PlannerService reads Step10-A neutral Recipe Nutrition projection;
+- legacy INCOMPLETE remains rejected unless exact V2 readiness is proven;
+- MealPlan/Serving accepts the same neutral Nutrition consumption contract;
+- legacy RecipeVersionNutrition remains structurally compatible;
+- synthetic cross-context test proves V2 projection → Planner → MealPlan/Serving.
+
+No migration or production Recipe activation is authorized or present.
+
+Verification pending. Stop after review-ready Step 10-B PR.
+
 ## PR95 Step 10-A review-ready — 2026-09-26
 
 Accepted base:

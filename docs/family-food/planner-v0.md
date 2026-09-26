@@ -13,8 +13,12 @@ fixed events. The application service resolves current Household-scoped truth
 from the existing Household, Meal Pattern/MealPlan, Recipe, Nutrition and Pantry
 services before invoking the pure core. It never accepts caller assertions about
 selection snapshots, RecipeVersion currency/verification, kcal/status or Pantry.
+Recipe candidate Nutrition is resolved through the neutral Nutrition consumption
+projection. Legacy INCOMPLETE authority remains unavailable; composition-backed
+authority may separately prove exact positive energy readiness while retaining a
+truthful legacy INCOMPLETE status.
 
-- planner/config: `planner-v0.2`;
+- planner/config: `planner-v0.3`;
 - compatibility: `meal-role-recipe-v2`;
 - recommender: `meal-pattern-recommender-v2`.
 
