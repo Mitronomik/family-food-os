@@ -4,6 +4,7 @@ from collections.abc import Iterable, Mapping
 from dataclasses import dataclass, replace
 from decimal import Decimal, localcontext
 from enum import StrEnum
+from typing import Protocol
 from uuid import UUID
 
 from app.domain.food_ingredients import FoodIngredient, FoodNutritionProfile
@@ -108,6 +109,27 @@ class RecipeVersionNutrition:
     status: NutritionStatus
     warnings: tuple[NutritionWarning, ...]
     config: NutritionConfig = CONFIG
+
+    @property
+    def recipe_version_id(self) -> UUID:
+        return self.version.id
+
+    @property
+    def legacy_status(self) -> NutritionStatus:
+        return self.status
+
+
+class RecipeNutritionConsumption(Protocol):
+    """Narrow immutable Nutrition read contract for downstream consumers."""
+
+    @property
+    def recipe_version_id(self) -> UUID: ...
+
+    @property
+    def per_base_serving(self) -> NutritionValues: ...
+
+    @property
+    def legacy_status(self) -> NutritionStatus: ...
 
 
 def require_positive_decimal(value: Decimal) -> None:
