@@ -38,6 +38,8 @@ def step10a_binding_spec() -> ReviewedRecipeIngredientBindingSpec:
         quantity=Decimal("10"),
         unit="g",
         composition_version=1,
+        composition_kind="ATOMIC",
+        composition_input_state="INPUT",
         expected_available_amounts=tuple(
             (code, EXPECTED_RECIPE_AMOUNTS[code])
             for code in NUTRIENT_CODES
