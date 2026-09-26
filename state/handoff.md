@@ -1,4 +1,42 @@
-# Handoff\n\n## Step 10-A runtime started — 2026-09-26
+# Handoff
+
+## PR95 Step 10-A review-ready — 2026-09-26
+
+Accepted base:
+`4f9331a8fa73f8488a07295076b0425c00e6654e` (merged PR94).
+
+Verified runtime head:
+`3c779c7a0184be6f6838720b6fde78dbe482e8e8`.
+
+Review:
+`#5326633449 — READY TO MERGE STEP 10-A`.
+
+Implemented:
+- migration 0039 immutable Nutrition binding;
+- exact Step 9 10 g butter binding publisher;
+- canonical 54-code V2 Recipe Nutrition;
+- RECIPE_COMPOSITION_NUTRITION_V1;
+- neutral legacy/V2 consumption projection;
+- BY_DIFFERENCE-only legacy carbohydrate mapping;
+- fresh/replay/rollback/deactivation/immutability acceptance.
+
+Verification:
+- Docs #404 SUCCESS;
+- DC1 #266 SUCCESS;
+- Russian #153: 380 passed;
+- Registry #257: focused 352; backend 1073/836/753/956; launcher 643 passed, 2 skipped;
+- Partial #197: focused 300; full backend/launcher green;
+- AI_ENABLED=false;
+- mergeable=true; 0 behind; diff audit clean.
+
+Production Step 9 Recipe remains inactive.
+
+No Planner/MealPlan/planner-v0.3 work occurred.
+
+Stop for merge review. No self-merge.
+Step 10-B remains unauthorized until PR95 is merged and separately authorized.
+
+## Step 10-A runtime started — 2026-09-26
 
 PR94 merged at:
 4f9331a8fa73f8488a07295076b0425c00e6654e.
