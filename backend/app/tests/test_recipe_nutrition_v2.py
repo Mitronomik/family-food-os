@@ -78,6 +78,14 @@ def spec():
         quantity=Decimal("10"),
         unit="g",
         composition_version=1,
+        expected_available_amounts=tuple(
+            (code, EXPECTED_RECIPE_AMOUNTS[code])
+            for code in NUTRIENT_CODES
+            if code in EXPECTED_RECIPE_AMOUNTS
+        ),
+        expected_unknown_codes=tuple(
+            code for code in NUTRIENT_CODES if code not in EXPECTED_RECIPE_AMOUNTS
+        ),
     )
 
 
@@ -120,6 +128,30 @@ def test_fresh_binding_replay_and_step9_canonical_projection(database):
         assert second.disposition is BindingDisposition.EXACT_REPLAY
         assert second.binding == first.binding
         assert db_dump(database) == before
+    finally:
+        engine.dispose()
+
+
+def test_reviewed_nutrient_mismatch_fails_before_binding_write(database):
+    reviewed = spec()
+    changed = dict(reviewed.expected_available_amounts)
+    changed["ENERGY_KCAL"] = Decimal("999")
+    mismatch = replace(
+        reviewed,
+        expected_available_amounts=tuple(
+            (code, changed[code])
+            for code in NUTRIENT_CODES
+            if code in changed
+        ),
+    )
+    engine = create_sqlite_engine(database)
+    try:
+        with pytest.raises(RecipeNutritionV2ConflictError, match="reviewed"):
+            create_recipe_nutrition_v2_service(engine).publish_binding(mismatch)
+        with sqlite3.connect(database.path) as db:
+            assert db.execute(
+                "SELECT COUNT(*) FROM recipe_ingredient_composition_bindings"
+            ).fetchone()[0] == 0
     finally:
         engine.dispose()
 
