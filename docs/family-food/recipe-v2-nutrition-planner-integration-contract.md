@@ -425,6 +425,15 @@ per-base-serving division are not quantized at intermediate steps; canonical
 Recipe totals and per-base-serving values quantize once at the Recipe result
 boundary to six decimal places (`0.000001`).
 
+Canonical Recipe status is computed over all 54 required-row totals:
+
+- `COMPLETE` when all 54 are AVAILABLE;
+- `PARTIAL` when at least one is AVAILABLE and at least one is UNKNOWN;
+- `INCOMPLETE` when none are AVAILABLE.
+
+The exact Step 9 butter Recipe is therefore `PARTIAL`, not `COMPLETE`, under
+`RECIPE_V2_NUTRIENT_SET_V1`.
+
 The canonical Recipe result must retain:
 
 - `nutrient_set_version = RECIPE_V2_NUTRIENT_SET_V1`;
@@ -475,6 +484,11 @@ Allowed only when all of the following hold:
 - exact FoodCompositionVersion v1 exists and matches the row FoodIngredient;
 - kind/input state are ATOMIC / INPUT;
 - sealed V2 calculation succeeds inside the binding UoW;
+- sparse UNKNOWN nutrient availability is preserved rather than treated as a
+  structural failure;
+- for the exact Step 9 butter binding the 54-code request produces PARTIAL with
+  exactly the accepted 17 AVAILABLE values and the remaining requested concepts
+  UNKNOWN;
 - the calculation result reports exactly
   `FOOD_COMPOSITION_APPLICABILITY_V2`;
 - the request set is exactly `RECIPE_V2_NUTRIENT_SET_V1`;
@@ -531,10 +545,21 @@ Use existing legacy Nutrition behavior unchanged.
 Use the composition-backed canonical path only when:
 
 - every required RecipeIngredient is bound;
-- all required bindings use one compatible registry version;
+- every required binding uses exactly `RU_NUTRIENT_REGISTRY_V2`;
+- every required binding uses exactly
+  `RECIPE_V2_NUTRIENT_SET_V1`;
+- every required binding uses exactly
+  `FOOD_COMPOSITION_APPLICABILITY_V2`;
+- every required binding uses exactly
+  `RECIPE_COMPOSITION_NUTRITION_V1`;
 - exact row mass is available;
 - every binding matches the row FoodIngredient;
-- every Composition calculation succeeds.
+- every Composition satisfies the V1 INPUT-basis/no-transformation boundary;
+- every Composition calculation succeeds with structural integrity; nutrient
+  UNKNOWN values remain valid sparse truth rather than failure.
+
+Any cross-row registry, nutrient-set, Composition-policy or Recipe-policy mismatch
+fails closed.
 
 ### Partial required-row binding
 
@@ -900,25 +925,30 @@ Runtime Step 10 must prove at least:
 51. WATER, CARBOHYDRATE_AVAILABLE and CARBOHYDRATE_BY_DIFFERENCE are present in
     the canonical request/result and remain UNKNOWN when unavailable;
 52. request-set omission cannot turn a sparse Step 9 result into COMPLETE;
-53. canonical result carries RECIPE_V2_NUTRIENT_SET_V1,
+53. the exact Step 9 canonical V2 result status is PARTIAL with exactly 17
+    AVAILABLE requested codes and the remaining requested codes UNKNOWN;
+55. canonical result carries RECIPE_V2_NUTRIENT_SET_V1,
     FOOD_COMPOSITION_APPLICABILITY_V2 and RECIPE_COMPOSITION_NUTRITION_V1;
 54. recipe scaling uses exact recipe_input_mass_g / CompositionResult.input_mass_g;
-55. UNKNOWN in any required row propagates to UNKNOWN for that nutrient total;
-56. required-row sums and per-serving division use Decimal-only V1 policy and
+56. UNKNOWN in any required row propagates to UNKNOWN for that nutrient total;
+57. required-row sums and per-serving division use Decimal-only V1 policy and
     quantize once at the recipe result boundary to six decimals;
-57. a RecipeVersion with any optional row fails closed under
+58. a RecipeVersion with any optional row fails closed under
     RECIPE_COMPOSITION_NUTRITION_V1;
-58. a transformed/yielded root or non-INPUT output state fails closed under
+59. a transformed/yielded root or non-INPUT output state fails closed under
     RECIPE_COMPOSITION_NUTRITION_V1;
-59. changing request set, scaling/aggregation/rounding policy or recipe calculation
+60. changing request set, scaling/aggregation/rounding policy or recipe calculation
     version cannot replay as the same authority;
-60. historical canonical read after FoodIngredient deactivation still reproduces
+61. historical canonical read after FoodIngredient deactivation still reproduces
     the already-pinned Recipe Nutrition result;
-61. binding publication/replay after FoodIngredient deactivation still fails
+62. binding publication/replay after FoodIngredient deactivation still fails
     closed as defined by the publication guard;
-62. Step 10-B uses exactly planner-v0.3 in Planner traces;
-63. Step 10-B-created MealPlan.config_version is exactly planner-v0.3;
-64. Step 10-B compatibility_version remains exactly meal-role-recipe-v2.
+63. Step 10-B uses exactly planner-v0.3 in Planner traces;
+64. Step 10-B-created MealPlan.config_version is exactly planner-v0.3;
+65. Step 10-B compatibility_version remains exactly meal-role-recipe-v2;
+66. multi-row canonical V2 calculation fails closed if required bindings disagree
+    on registry, nutrient-set, Composition calculation or Recipe calculation
+    version.
 
 ## 26. Verification tier
 
