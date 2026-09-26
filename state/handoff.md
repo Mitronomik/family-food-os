@@ -1,5 +1,108 @@
 # Handoff
 
+## PR93 corrected runtime verified — 2026-09-26
+
+Verified runtime head:
+`99f3d2b9ae592e9370a0f432316828da7a3b6cfb`.
+
+Both transaction/replay blockers from the independent exact-head review are closed:
+- strict trusted-seed classification rechecks required active FoodIngredients
+  inside the Recipe Catalogue write UoW for both FRESH and EXACT_REPLAY;
+- loader external preflight is fail-fast only, while postconditions accept the
+  actual transactional fresh or exact zero-write replay result.
+
+Adversarial tests cover both races and pass in focused suites.
+
+Verification:
+Docs #360; DC1 #222; Russian #123; Registry #201; Partial #152 — SUCCESS.
+Focused 328/276; backend 1202/751/650/991; launcher 643 passed, 2 skipped.
+`AI_ENABLED=false`.
+
+Current status: READY FOR FINAL RE-REVIEW / explicit merge authorization.
+No merge performed. No Step 10 work is authorized.
+
+## PR93 transaction/replay blocker correction — 2026-09-26
+
+Independent exact-head review superseded the earlier READY TO MERGE receipt and
+identified two blockers in the preflight/write-UoW boundary.
+
+Correction implemented on the same PR branch:
+- strict trusted-seed classification re-resolves required FoodIngredients and
+  requires active state inside the Recipe Catalogue UoW;
+- loader external preflight is fail-fast only;
+- actual transactional result may be either exact fresh publication or exact
+  zero-write replay;
+- adversarial tests cover dependency deactivation after preflight and a
+  concurrent exact publisher winning after a FRESH preflight.
+
+The previous runtime verification at
+`31751069adec7ada062c8b4b7fcb291f4cd89bed` is superseded for runtime bytes.
+
+Current status: correction implemented; exact-head verification and final
+re-review required. Do not merge yet. No Step 10 work is authorized.
+
+## PR93 Step 9 runtime-data review-ready — 2026-09-26
+
+Accepted main:
+`2c50782b17584a5708a946e497d6a628977420e9`.
+
+Branch:
+`feat/step9-school2022-recipe-runtime`.
+
+Verified runtime head:
+`31751069adec7ada062c8b4b7fcb291f4cd89bed`.
+
+Semantic review:
+`#5325378822 — STEP 9 RUNTIME/DATA READY TO MERGE`.
+
+Delivered:
+- one inactive School2022 53-19з Recipe;
+- one immutable SOURCE_VERIFIED RecipeVersion v1;
+- one exact 10 g Step 8 butter ingredient;
+- two material RecipeSteps;
+- institutional holding/14 °C source context only;
+- deterministic 17-value V2 validation;
+- strict fresh/replay/conflict/rollback;
+- no migration/source-corpus/Step 10.
+
+Important shared seams:
+- `TrustedRecipeSeed.initial_is_active: bool = true`;
+- strict_history opt-in on trusted reconcile;
+- read-only Composition `find_version(food_id, version)`.
+
+Existing callers preserve prior behavior.
+
+Verification on runtime head:
+Docs #358; DC1 #220; Russian #121; Registry #198; Partial #150 all SUCCESS.
+Focused 326/274; backend 1202/751/648/991; launcher 643 passed, 2 skipped.
+
+Stop for merge review. After merge, Step 10 requires separate authorization.
+
+## Step 9 runtime/data publication authorized — 2026-09-26
+
+Accepted main:
+`2c50782b17584a5708a946e497d6a628977420e9` (merged corrected PR92 Contract Gate).
+
+Branch:
+`feat/step9-school2022-recipe-runtime`.
+
+Canonical contract:
+`docs/family-food/russian-recipe-version-publication-contract.md`.
+
+The user explicitly authorized continuing after PR92 merge.
+
+Bounded runtime:
+- one inactive `SCHOOL2022_53_19Z_BUTTER_PORTION` Recipe;
+- one immutable SOURCE_VERIFIED v1 RecipeVersion;
+- one exact 10 g Step 8 butter ingredient;
+- two material source-backed RecipeSteps;
+- institutional holding/14 °C stay context only;
+- deterministic 17-value V2 composition validation;
+- strict fresh/replay/conflict/rollback;
+- no migration/source-corpus/Step 10.
+
+Stop after review-ready PR. No self-merge.
+
 ## PR92 corrected Step 9 Contract Gate review-ready — 2026-09-26
 
 Accepted main:

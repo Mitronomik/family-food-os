@@ -1,5 +1,87 @@
 # Progress
 
+## PR93 corrected runtime verified — 2026-09-26
+
+Runtime correction head:
+`99f3d2b9ae592e9370a0f432316828da7a3b6cfb`.
+
+Closed:
+1. exact replay now fails closed when the required Step 8 FoodIngredient becomes
+   inactive between external preflight and strict write-UoW reconcile;
+2. a concurrent exact publication after external FRESH preflight now resolves as
+   successful zero-write EXACT_REPLAY rather than a stale-disposition RuntimeError.
+
+Verification on the corrected runtime:
+- Docs #360 / DC1 #222 / Russian #123 / Registry #201 / Partial #152 — SUCCESS;
+- focused 328 / 276 passed;
+- backend 1202 / 751 / 650 / 991 passed;
+- launcher 643 passed, 2 skipped;
+- `AI_ENABLED=false`.
+
+Status:
+`STEP9_RUNTIME_CORRECTED_REVIEW_READY`.
+
+No Step 10 work occurred.
+
+## PR93 transaction/replay correction — 2026-09-26
+
+The later independent exact-head review superseded the earlier READY TO MERGE
+status with two blockers:
+- inactive Step 8 dependency could pass an exact replay race;
+- loader trusted stale external FRESH disposition after the write-UoW recheck.
+
+Both are corrected in PR93 with two adversarial race tests. Default historical
+`reconcile_seed()` behavior remains unchanged; the stricter dependency guard is
+limited to trusted preflight / `strict_history=True`.
+
+The prior runtime head
+`31751069adec7ada062c8b4b7fcb291f4cd89bed` is no longer the current runtime
+verification receipt after this code change.
+
+Status:
+`STEP9_RUNTIME_CORRECTED_VERIFICATION_PENDING`.
+
+No Step 10 work occurred.
+
+## PR93 Step 9 runtime-data review-ready — 2026-09-26
+
+Verified runtime head:
+`31751069adec7ada062c8b4b7fcb291f4cd89bed`.
+
+Step 9 publication is implemented and verified:
+- inactive Recipe;
+- SOURCE_VERIFIED immutable v1;
+- exact Step 8 10 g dependency;
+- two material source-backed steps;
+- institutional applicability preserved;
+- 17-value deterministic V2 validation;
+- exact replay zero-write;
+- activation-preserving replay;
+- strict in-UoW history recheck;
+- rollback and Planner exclusion verified.
+
+Verification:
+Docs #358 / DC1 #220 / Russian #121 / Registry #198 / Partial #150 SUCCESS.
+Semantic review #5325378822 READY TO MERGE.
+
+Status:
+`STEP9_RUNTIME_REVIEW_READY`.
+
+No Step 10 work occurred.
+
+## Step 9 runtime authorized — 2026-09-26
+
+PR92 is merged into main at
+`2c50782b17584a5708a946e497d6a628977420e9`.
+
+The user explicitly authorized Step 9 runtime/data publication under the merged
+corrected Contract Gate.
+
+Status:
+`STEP9_RUNTIME_ACTIVE`.
+
+No Step 10 activation or Planner integration is authorized.
+
 ## PR92 corrected gate review-ready — 2026-09-26
 
 Both blockers from review #5324872702 are closed.

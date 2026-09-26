@@ -4,6 +4,7 @@ from collections.abc import Callable, Iterable
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from decimal import Decimal
+from enum import StrEnum
 from uuid import UUID, uuid4
 
 from app.domain.food_ingredients import normalize_unicode_search_key
@@ -87,6 +88,12 @@ class TrustedRecipeSeed:
     canonical_code: str
     canonical_name: str
     version: TrustedRecipeVersionSeed
+    initial_is_active: bool = True
+
+
+class TrustedRecipeSeedDisposition(StrEnum):
+    FRESH = "FRESH"
+    EXACT_REPLAY = "EXACT_REPLAY"
 
 
 @dataclass(frozen=True)
@@ -230,7 +237,81 @@ class FoodRecipeCatalogueService:
             scope.commit()
             return detail
 
-    def reconcile_seed(self, seeds: Iterable[TrustedRecipeSeed]) -> RecipeSeedSummary:
+    def preflight_trusted_seed(
+        self, seed: TrustedRecipeSeed
+    ) -> TrustedRecipeSeedDisposition:
+        """Classify a trusted seed without writes or silent history extension."""
+
+        with self._read() as scope:
+            return self._classify_trusted_seed(scope, seed)
+
+    def _require_active_seed_dependencies(
+        self,
+        scope: RecipeCatalogueReadScope | RecipeCatalogueUnitOfWork,
+        seed: TrustedRecipeVersionSeed,
+    ) -> None:
+        for ingredient in seed.ingredients:
+            if ingredient.optional:
+                continue
+            resolved = scope.food_ingredients.get_by_code(
+                ingredient.food_ingredient_code
+            )
+            if (
+                resolved is None
+                or resolved.canonical_code != ingredient.food_ingredient_code
+                or not resolved.is_active
+            ):
+                raise FoodIngredientResolutionError(
+                    f"FoodIngredient {ingredient.food_ingredient_code!r} is missing or inactive."
+                )
+
+    def _classify_trusted_seed(
+        self,
+        scope: RecipeCatalogueReadScope | RecipeCatalogueUnitOfWork,
+        seed: TrustedRecipeSeed,
+    ) -> TrustedRecipeSeedDisposition:
+        self._require_active_seed_dependencies(scope, seed.version)
+        name_key = normalize_unicode_search_key(
+            seed.canonical_name, field="canonical_name"
+        )
+        by_code = scope.recipes.get_by_code(seed.canonical_code)
+        by_name = scope.recipes.get_by_name_key(name_key)
+        if by_code is None and by_name is None:
+            return TrustedRecipeSeedDisposition.FRESH
+        if (
+            by_code is None
+            or by_name is None
+            or by_code.id != by_name.id
+            or by_code.canonical_name != seed.canonical_name
+            or by_code.canonical_name_key != name_key
+        ):
+            raise RecipeCatalogueConflictError(
+                "Existing Recipe identity conflicts with trusted seed."
+            )
+        candidates = scope.versions.list_by_provenance(
+            by_code.id,
+            seed.version.source_name,
+            seed.version.source_recipe_id,
+            seed.version.source_version,
+        )
+        if not candidates:
+            raise RecipeCatalogueConflictError(
+                "Existing Recipe lacks the trusted seed provenance."
+            )
+        if len(candidates) != 1 or not _seed_matches(
+            scope, candidates[0], seed.version
+        ):
+            raise RecipeCatalogueConflictError(
+                "Same-provenance RecipeVersions differ from the trusted seed."
+            )
+        return TrustedRecipeSeedDisposition.EXACT_REPLAY
+
+    def reconcile_seed(
+        self,
+        seeds: Iterable[TrustedRecipeSeed],
+        *,
+        strict_history: bool = False,
+    ) -> RecipeSeedSummary:
         entries = tuple(seeds)
         identities = [
             (
@@ -250,6 +331,8 @@ class FoodRecipeCatalogueService:
         now = self._clock()
         with self._write() as scope:
             for entry in entries:
+                if strict_history:
+                    self._classify_trusted_seed(scope, entry)
                 recipe = scope.recipes.get_by_code(entry.canonical_code)
                 if recipe is None:
                     name_key = normalize_unicode_search_key(
@@ -325,7 +408,7 @@ class FoodRecipeCatalogueService:
             canonical_name_key=normalize_unicode_search_key(
                 seed.canonical_name, field="canonical_name"
             ),
-            is_active=True,
+            is_active=seed.initial_is_active,
             created_at=now,
             updated_at=now,
         )
@@ -432,7 +515,7 @@ def _increment_detail(
 
 
 def _seed_matches(
-    scope: RecipeCatalogueUnitOfWork,
+    scope: RecipeCatalogueReadScope | RecipeCatalogueUnitOfWork,
     detail: RecipeVersionDetail,
     seed: TrustedRecipeVersionSeed,
 ) -> bool:
