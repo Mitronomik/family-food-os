@@ -281,6 +281,14 @@ class RecipeNutritionV2Service:
                         }
                     )
                 bindings.append(binding)
+                for issue in result.issues:
+                    issues.append(
+                        RecipeNutritionV2Issue(
+                            issue.code,
+                            issue.nutrient_code,
+                            row.id,
+                        )
+                    )
                 for code in NUTRIENT_CODES:
                     if amounts[code] is None:
                         issues.append(
@@ -330,7 +338,7 @@ class RecipeNutritionV2Service:
                 status=status,
                 issues=tuple(
                     sorted(
-                        issues,
+                        set(issues),
                         key=lambda item: (
                             item.nutrient_code or "",
                             str(item.recipe_ingredient_id or ""),
