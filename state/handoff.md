@@ -1,5 +1,30 @@
 # Handoff
 
+## Step 9 runtime/data publication authorized — 2026-09-26
+
+Accepted main:
+`2c50782b17584a5708a946e497d6a628977420e9` (merged corrected PR92 Contract Gate).
+
+Branch:
+`feat/step9-school2022-recipe-runtime`.
+
+Canonical contract:
+`docs/family-food/russian-recipe-version-publication-contract.md`.
+
+The user explicitly authorized continuing after PR92 merge.
+
+Bounded runtime:
+- one inactive `SCHOOL2022_53_19Z_BUTTER_PORTION` Recipe;
+- one immutable SOURCE_VERIFIED v1 RecipeVersion;
+- one exact 10 g Step 8 butter ingredient;
+- two material source-backed RecipeSteps;
+- institutional holding/14 °C stay context only;
+- deterministic 17-value V2 composition validation;
+- strict fresh/replay/conflict/rollback;
+- no migration/source-corpus/Step 10.
+
+Stop after review-ready PR. No self-merge.
+
 ## PR92 corrected Step 9 Contract Gate review-ready — 2026-09-26
 
 Accepted main:

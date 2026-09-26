@@ -4,99 +4,72 @@ Updated: `2026-09-26`.
 
 ## Accepted state
 
-PR91 / Step 8 runtime-data publication is merged into `main` at
-`88a22a3cdfdd13d5481875dcd499abf06939582c`.
+PR92 / corrected Step 9 Contract Gate is merged into `main` at
+`2c50782b17584a5708a946e497d6a628977420e9`.
 
-Russian-data integration Steps 1–8 are accepted.
+Russian-data integration Steps 1–8 and the Step 9 Contract Gate are accepted.
 
-## Current bounded state
+## Current bounded task
 
-**PR92 / corrected Step 9 executable Russian RecipeVersion Contract Gate is review-ready.**
+**Step 9 runtime/data publication — one inactive School2022 RecipeVersion.**
 
 Branch:
-`docs/step9-russian-recipe-version-contract`.
+`feat/step9-school2022-recipe-runtime`.
 
-Verified corrected semantic head:
-`3f7a4276ca623c23b61cb344c75e3751f2f83f54`.
-
-Canonical gate:
+Canonical contract:
 `docs/family-food/russian-recipe-version-publication-contract.md`.
 
-## Corrected applicability boundary
-
-Review #5324872702 is closed.
-
-Pinned institutional process evidence:
+## Authorized runtime target
 
 ```text
-ru-school2022:recipe:53-19з:process-evidence:40
-SHA-256 = 5428e818127eceea1c69617e435666c6ce817666ba88bf7486b8c6ce4b60a6e4
-applicability = institutional_school_catering_only
-domestic_applicability = unestablished
-not_executable_rule = true
+School2022 53-19з — Масло сливочное (порциями)
+→ inactive Recipe SCHOOL2022_53_19Z_BUTTER_PORTION
+→ immutable SOURCE_VERIFIED RecipeVersion v1
+→ one required 10 g BUTTER_PEASANT_72_5_UNSALTED row
+→ two material RecipeSteps
+→ deterministic 17-value V2 validation from Step 8 ATOMIC v1
 ```
 
-Step 9 RecipeSteps are now exactly:
-1. no thermal treatment;
-2. cut butter into portion pieces.
+Required source/context guards:
 
-Refrigerated pre-service holding and 14 °C serving remain institutional
-source-context evidence only.
+- seven exact source/process lineage hashes;
+- institutional-only refrigerated holding remains source context;
+- 14 °C remains institutional source context;
+- `home_storage_status=not_granted`;
+- no household storage/serving claim;
+- source-declared nutrition remains reference-only;
+- WATER and canonical carbohydrate remain unknown.
 
-`home_storage_status=not_granted` remains preserved.
+## Authorized shared seams
 
-## Corrected Planner / activation boundary
+Only:
+- additive default-preserving `TrustedRecipeSeed.initial_is_active: bool = true`;
+- read-only exact Composition lookup by `food_ingredient_id + version`.
+
+No schema/migration or calculation-semantic change.
+
+## Planner boundary
 
 Fresh Step 9 Recipe is inactive.
 
-The gate authorizes one additive application seam:
-`TrustedRecipeSeed.initial_is_active: bool = true`.
+It must remain absent from current Planner `list_active()` candidate
+enumeration/traces.
 
-- existing trusted seeds keep active behavior;
-- Step 9 sets false for fresh creation;
-- exact replay never mutates activation;
-- inactive Step 9 Recipe is absent from current Planner `list_active()` candidate
-  enumeration/traces;
-- Step 10 separately owns activation + V2 Planner/general-Nutrition integration.
+No activation belongs in Step 9.
 
-## Preserved Step 9 contract
+## Hard stops
 
-- exact School2022 53-19з vertical slice;
-- seven exact source-lineage/process hashes;
-- exact 10 g `BUTTER_PEASANT_72_5_UNSALTED` dependency;
-- immutable SOURCE_VERIFIED RecipeVersion;
-- source-declared nutrition reference-only;
-- deterministic 17-value V2 validation from Step 8 ATOMIC v1;
-- WATER/carbohydrate remain unknown;
-- Step 8 profile non-current;
-- legacy NutritionService unchanged;
-- strict fresh/replay/conflict semantics;
-- read-only Composition lookup seam only;
-- no source-corpus persistence expansion;
-- no schema/migration; 0033 reserved, head 0038.
-
-## Corrected semantic verification
-
-On `3f7a4276ca623c23b61cb344c75e3751f2f83f54`:
-
-- Docs #353 — SUCCESS;
-- DC1 #215 — SUCCESS;
-- corrected semantic review #5324890694 — READY TO MERGE;
-- mergeable=true;
-- 0 behind main;
-- unresolved review threads=0;
-- changed scope = one canonical contract + three state files;
-- whitespace/conflict audit clean.
-
-## Hard boundary
-
-PR92 is docs/state only.
-
-No Step 9 runtime before PR92 merge + separate runtime authorization.
-No Step 10 work starts automatically.
+No:
+- second Recipe/Food publication;
+- source-corpus persistence expansion;
+- current-profile switch;
+- legacy NutritionService rewrite;
+- Step 10 activation/Planner integration;
+- API/UI/Retail/AI/Auth/PostgreSQL;
+- migration 0033 or any new migration.
 
 ## Stop boundary
 
-PR92 is ready for final review/merge authorization.
+Deliver Step 9 runtime/data PR to review-ready state, then stop.
 
-Do not merge autonomously.
+Do not merge autonomously and do not start Step 10.

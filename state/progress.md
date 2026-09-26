@@ -1,5 +1,18 @@
 # Progress
 
+## Step 9 runtime authorized — 2026-09-26
+
+PR92 is merged into main at
+`2c50782b17584a5708a946e497d6a628977420e9`.
+
+The user explicitly authorized Step 9 runtime/data publication under the merged
+corrected Contract Gate.
+
+Status:
+`STEP9_RUNTIME_ACTIVE`.
+
+No Step 10 activation or Planner integration is authorized.
+
 ## PR92 corrected gate review-ready — 2026-09-26
 
 Both blockers from review #5324872702 are closed.
