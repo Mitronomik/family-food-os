@@ -423,6 +423,31 @@ def test_same_provenance_structural_drift_fails_closed(database):
     assert db_dump(database) == before
 
 
+def test_strict_reconcile_rechecks_history_inside_write_uow(database):
+    seed, _ = step9.load_ru_school2022_step9_recipe_seed()
+    engine = create_sqlite_engine(database)
+    try:
+        service = create_food_recipe_catalogue_service(engine)
+        assert (
+            service.preflight_trusted_seed(seed)
+            is TrustedRecipeSeedDisposition.FRESH
+        )
+        wrong = replace(
+            seed,
+            version=replace(
+                seed.version,
+                source_recipe_id="ru-school2022:recipe:concurrent",
+            ),
+        )
+        service.reconcile_seed((wrong,))
+        before = db_dump(database)
+        with pytest.raises(RecipeCatalogueConflictError, match="lacks the trusted"):
+            service.reconcile_seed((seed,), strict_history=True)
+        assert db_dump(database) == before
+    finally:
+        engine.dispose()
+
+
 def test_later_same_provenance_revision_blocks_exact_replay(database):
     seed, _ = step9.load_ru_school2022_step9_recipe_seed()
     engine = create_sqlite_engine(database)

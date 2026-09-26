@@ -424,7 +424,7 @@ def seed_ru_school2022_step9_recipe(
         _validate_step8_dependency(engine, publication)
         service = create_food_recipe_catalogue_service(engine)
         disposition = service.preflight_trusted_seed(seed)
-        result = service.reconcile_seed((seed,))
+        result = service.reconcile_seed((seed,), strict_history=True)
         if disposition is TrustedRecipeSeedDisposition.FRESH:
             if (
                 result.recipes_inserted,
