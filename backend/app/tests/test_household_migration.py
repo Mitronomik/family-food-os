@@ -76,6 +76,7 @@ def test_database_at_0021_upgrades_only_to_household_foundation(tmp_path):
         "0036_member_reference_methodology_selection",
         "0037_meal_plan_reference_methodology_pins",
         "0038_transformation_applicability",
+        "0039_recipe_ingredient_composition_binding",
     ]
     assert before <= table_names(database_path)
     with sqlite3.connect(database_path) as connection:

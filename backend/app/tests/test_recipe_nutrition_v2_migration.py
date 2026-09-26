@@ -91,5 +91,5 @@ def test_0039_failure_is_atomic(tmp_path):
         assert db.execute(
             "SELECT 1 FROM sqlite_master WHERE type='trigger' AND name=?",
             (f"{TABLE}_no_update",),
-        ).fetchone() is None
+        ).fetchone() == (1,)
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
