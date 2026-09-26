@@ -75,6 +75,8 @@ class ReviewedRecipeIngredientBindingSpec:
     quantity: Decimal
     unit: UnitCode | str
     composition_version: int
+    expected_available_amounts: tuple[tuple[str, Decimal], ...]
+    expected_unknown_codes: tuple[str, ...]
     require_recipe_inactive: bool = True
 
 
@@ -163,7 +165,8 @@ class RecipeNutritionV2Service:
                 detail, row, food, composition = self._resolve_publication_target(
                     uow, spec
                 )
-                self._calculate_row(uow, row, composition)
+                calculation = self._calculate_row(uow, row, composition)
+                self._require_reviewed_calculation(spec, row, calculation)
                 existing = uow.bindings.get(row.id)
                 if existing is not None:
                     expected = RecipeIngredientCompositionBinding(
@@ -371,6 +374,36 @@ class RecipeNutritionV2Service:
             raise RecipeNutritionV2ContractError(
                 "RECIPE_COMPOSITION_NUTRITION_V1 binding допускает только граммы."
             )
+        available_codes = tuple(code for code, _ in spec.expected_available_amounts)
+        if len(available_codes) != len(set(available_codes)):
+            raise RecipeNutritionV2ContractError(
+                "Reviewed available nutrient code повторяется."
+            )
+        if len(spec.expected_unknown_codes) != len(set(spec.expected_unknown_codes)):
+            raise RecipeNutritionV2ContractError(
+                "Reviewed unknown nutrient code повторяется."
+            )
+        if set(available_codes) & set(spec.expected_unknown_codes):
+            raise RecipeNutritionV2ContractError(
+                "Нутриент не может быть одновременно AVAILABLE и UNKNOWN."
+            )
+        if set(available_codes) | set(spec.expected_unknown_codes) != set(NUTRIENT_CODES):
+            raise RecipeNutritionV2ContractError(
+                "Reviewed publication должна покрывать frozen 54-code request set."
+            )
+        for code, amount in spec.expected_available_amounts:
+            if code not in NUTRIENT_CODES:
+                raise RecipeNutritionV2ContractError(
+                    "Reviewed nutrient отсутствует в frozen request set."
+                )
+            if (
+                not isinstance(amount, Decimal)
+                or not amount.is_finite()
+                or amount < 0
+            ):
+                raise RecipeNutritionV2ContractError(
+                    "Reviewed nutrient amount должен быть конечным Decimal."
+                )
         if not 1 <= spec.ingredient_position <= len(seed.version.ingredients):
             raise RecipeNutritionV2ContractError(
                 "Binding position отсутствует в trusted Recipe seed."
@@ -454,6 +487,30 @@ class RecipeNutritionV2Service:
                 "Exact FoodCompositionVersion отсутствует."
             )
         return detail, row, food, composition
+
+    @staticmethod
+    def _require_reviewed_calculation(spec, row, result) -> None:
+        amounts = {item.definition.code: item.amount for item in result.nutrients}
+        with localcontext(calculation_context()):
+            scaled = {
+                code: (
+                    None
+                    if amounts[code] is None
+                    else _round(amounts[code] * row.quantity / result.input_mass_g)
+                )
+                for code in NUTRIENT_CODES
+            }
+        expected = dict(spec.expected_available_amounts)
+        actual_available = {
+            code: amount for code, amount in scaled.items() if amount is not None
+        }
+        actual_unknown = {code for code, amount in scaled.items() if amount is None}
+        if actual_available != expected or actual_unknown != set(
+            spec.expected_unknown_codes
+        ):
+            raise RecipeNutritionV2ConflictError(
+                "Composition calculation отличается от reviewed Step 10-A nutrient truth."
+            )
 
     @staticmethod
     def _require_binding_versions(
