@@ -9,17 +9,20 @@ PR91 / Step 8 runtime-data publication is merged into `main` at
 
 Russian-data integration Steps 1–8 are accepted.
 
-## Current bounded task
+## Current bounded state
 
-**Step 9 — executable Russian RecipeVersion Implementation Contract Gate.**
+**PR92 / Step 9 executable Russian RecipeVersion Contract Gate is review-ready.**
 
 Branch:
 `docs/step9-russian-recipe-version-contract`.
 
+Verified semantic contract head:
+`b0b5f890ce850075ea91d43e54bc8f93a6497c0d`.
+
 Canonical gate:
 `docs/family-food/russian-recipe-version-publication-contract.md`.
 
-## Selected vertical slice
+## Frozen Step 9 vertical slice
 
 ```text
 School2022 53-19з — Масло сливочное (порциями)
@@ -29,33 +32,54 @@ School2022 53-19з — Масло сливочное (порциями)
 → deterministic 17-value V2 composition calculation
 ```
 
-## Critical preflight decisions
+## Critical frozen decisions
 
-- no new schema/migration; head remains 0038 and 0033 remains reserved;
-- existing Recipe Catalogue transaction/replay seams are reused;
-- Step 9 wrapper must fail closed instead of appending to unexpected Recipe history;
-- normative-card rights use the later canonical factual-publication decision in
-  `ru-normative-recipe-corpus.md`;
-- source PDF/layout/photos are not published;
-- source-declared nutrition remains reference-only;
-- exact Step 8 FIC profile stays non-current;
-- legacy `NutritionService.recipe_version()` is not changed;
-- deterministic Step 9 nutrition is validated through exact ATOMIC v1 /
-  `RU_NUTRIENT_REGISTRY_V2`, scaled from 100 g to exact 10 g;
-- missing carbohydrate/WATER remain unknown;
-- `meal_type=other` is technical classification only, not Planner eligibility;
-- no equipment code is invented for refrigerated holding.
+- exact source card/variant/demand/process/selection/route hashes pinned;
+- historical v0.3 publication blockers explicitly adjudicated;
+- normative-card publication uses canonical factual-publication rights policy;
+- Recipe identity frozen as `SCHOOL2022_53_19Z_BUTTER_PORTION`;
+- fresh version = v1, one source portion, `meal_type=other`;
+- unknown timing/difficulty/storage/freezer/batch facts remain null;
+- one required 10 g Step 8 butter ingredient;
+- four reviewed factual execution steps;
+- zero equipment rows;
+- source-declared School2022 nutrition remains reference-only;
+- Step 8 profile remains non-current;
+- legacy NutritionService is unchanged;
+- Step 9 deterministic nutrition uses exact ATOMIC v1 / V2 Composition,
+  scaled 10/100;
+- carbohydrate and WATER remain unknown;
+- narrow preflight forbids silent append to unexpected Recipe history;
+- exact Composition lookup may be exposed read-only through the existing
+  repository/reader boundary only;
+- no source-corpus persistence expansion;
+- no schema/migration; head remains 0038 and 0033 remains reserved;
+- no Step 10 Planner integration.
 
-## Hard boundaries
+## Verification
 
-No Step 9 runtime before this gate is reviewed/merged.
+On semantic head `b0b5f890ce850075ea91d43e54bc8f93a6497c0d`:
 
-No Step 10 Planner integration, additional Recipe/Food publication, source-corpus
-bulk ingestion, current-profile switch, API/UI/Retail/AI/Auth/PostgreSQL.
+- Docs #350 — SUCCESS;
+- DC1 #212 — SUCCESS;
+- semantic review #5324830015 — READY TO MERGE;
+- mergeable=true;
+- 0 behind main;
+- unresolved review threads=0;
+- changed scope = one canonical contract + three state files;
+- whitespace/conflict audit clean.
+
+## Hard boundary
+
+PR92 is docs/state only.
+
+No Step 9 runtime/data publication before PR92 is merged and separately
+authorized.
+
+No Step 10 work starts automatically.
 
 ## Stop boundary
 
-Deliver the Step 9 docs-only Contract Gate to review-ready state, then stop.
+PR92 is ready for final review/merge authorization.
 
-Do not merge autonomously and do not begin Step 9 runtime until separately
-authorized after gate merge.
+Do not merge autonomously.

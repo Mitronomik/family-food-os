@@ -1,5 +1,30 @@
 # Progress
 
+## PR92 Step 9 Contract Gate review-ready — 2026-09-26
+
+Step 9 preflight is frozen in:
+`docs/family-food/russian-recipe-version-publication-contract.md`.
+
+Verified semantic head:
+`b0b5f890ce850075ea91d43e54bc8f93a6497c0d`.
+
+Outcome:
+- exact School2022 source lineage and one-food execution route pinned;
+- Recipe/RecipeVersion/ingredient/process fields frozen;
+- canonical factual-publication rights boundary frozen;
+- deterministic 10 g V2 Composition acceptance frozen;
+- legacy current-profile Nutrition path explicitly excluded;
+- strict replay/conflict semantics frozen;
+- no migration/source-corpus/Planner expansion.
+
+Verification:
+Docs #350 SUCCESS; DC1 #212 SUCCESS; semantic review #5324830015 READY TO MERGE.
+
+Status:
+`STEP9_CONTRACT_GATE_REVIEW_READY`.
+
+No runtime/schema/production RecipeVersion write occurred.
+
 ## Step 9 Contract Gate started — 2026-09-26
 
 PR91 is merged at:

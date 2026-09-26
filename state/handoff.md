@@ -1,5 +1,46 @@
 # Handoff
 
+## PR92 Step 9 Contract Gate review-ready — 2026-09-26
+
+Accepted main:
+`88a22a3cdfdd13d5481875dcd499abf06939582c` (merged PR91).
+
+Branch:
+`docs/step9-russian-recipe-version-contract`.
+
+Verified semantic head:
+`b0b5f890ce850075ea91d43e54bc8f93a6497c0d`.
+
+Canonical gate:
+`docs/family-food/russian-recipe-version-publication-contract.md`.
+
+Semantic review:
+`#5324830015 — READY TO MERGE STEP 9 CONTRACT GATE`.
+
+Frozen target:
+School2022 `53-19з — Масло сливочное (порциями)`
+→ exact Step 8 butter 10 g
+→ one immutable SOURCE_VERIFIED RecipeVersion
+→ deterministic available V2 nutrition.
+
+Key boundaries:
+- exact six-record source lineage hashes pinned;
+- factual normative-card rights policy, no PDF/layout/media redistribution;
+- historical v0.3 blockers explicitly adjudicated;
+- no canonical carbohydrate/WATER invention;
+- no legacy NutritionService/current-profile switch;
+- read-only exact Composition lookup only if runtime needs it;
+- strict fresh/replay/conflict wrapper around Recipe reconcile;
+- no source-corpus persistence expansion;
+- no migration; 0033 reserved / head 0038;
+- no Step 10.
+
+Verification on semantic head:
+Docs #350 SUCCESS; DC1 #212 SUCCESS; mergeable=true; 0 behind main; threads=0;
+scope/whitespace clean.
+
+Stop for final review. No runtime Step 9 until gate merge + separate authorization.
+
 ## Step 9 Russian RecipeVersion Contract Gate — 2026-09-26
 
 Accepted main:
