@@ -4,6 +4,7 @@ from collections.abc import Callable, Iterable
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from decimal import Decimal
+from enum import StrEnum
 from uuid import UUID, uuid4
 
 from app.domain.food_ingredients import normalize_unicode_search_key
@@ -87,6 +88,12 @@ class TrustedRecipeSeed:
     canonical_code: str
     canonical_name: str
     version: TrustedRecipeVersionSeed
+    initial_is_active: bool = True
+
+
+class TrustedRecipeSeedDisposition(StrEnum):
+    FRESH = "FRESH"
+    EXACT_REPLAY = "EXACT_REPLAY"
 
 
 @dataclass(frozen=True)
@@ -230,6 +237,47 @@ class FoodRecipeCatalogueService:
             scope.commit()
             return detail
 
+    def preflight_trusted_seed(
+        self, seed: TrustedRecipeSeed
+    ) -> TrustedRecipeSeedDisposition:
+        """Classify a trusted seed without writes or silent history extension."""
+
+        name_key = normalize_unicode_search_key(
+            seed.canonical_name, field="canonical_name"
+        )
+        with self._read() as scope:
+            by_code = scope.recipes.get_by_code(seed.canonical_code)
+            by_name = scope.recipes.get_by_name_key(name_key)
+            if by_code is None and by_name is None:
+                return TrustedRecipeSeedDisposition.FRESH
+            if (
+                by_code is None
+                or by_name is None
+                or by_code.id != by_name.id
+                or by_code.canonical_name != seed.canonical_name
+                or by_code.canonical_name_key != name_key
+            ):
+                raise RecipeCatalogueConflictError(
+                    "Existing Recipe identity conflicts with trusted seed."
+                )
+            candidates = scope.versions.list_by_provenance(
+                by_code.id,
+                seed.version.source_name,
+                seed.version.source_recipe_id,
+                seed.version.source_version,
+            )
+            if not candidates:
+                raise RecipeCatalogueConflictError(
+                    "Existing Recipe lacks the trusted seed provenance."
+                )
+            if not any(
+                _seed_matches(scope, detail, seed.version) for detail in candidates
+            ):
+                raise RecipeCatalogueConflictError(
+                    "Same-provenance RecipeVersions differ from the trusted seed."
+                )
+            return TrustedRecipeSeedDisposition.EXACT_REPLAY
+
     def reconcile_seed(self, seeds: Iterable[TrustedRecipeSeed]) -> RecipeSeedSummary:
         entries = tuple(seeds)
         identities = [
@@ -325,7 +373,7 @@ class FoodRecipeCatalogueService:
             canonical_name_key=normalize_unicode_search_key(
                 seed.canonical_name, field="canonical_name"
             ),
-            is_active=True,
+            is_active=seed.initial_is_active,
             created_at=now,
             updated_at=now,
         )
@@ -432,7 +480,7 @@ def _increment_detail(
 
 
 def _seed_matches(
-    scope: RecipeCatalogueUnitOfWork,
+    scope: RecipeCatalogueReadScope | RecipeCatalogueUnitOfWork,
     detail: RecipeVersionDetail,
     seed: TrustedRecipeVersionSeed,
 ) -> bool:

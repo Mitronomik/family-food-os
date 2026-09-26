@@ -79,6 +79,17 @@ class SqlAlchemyFoodCompositionRepository:
             raise CompositionUnavailableError("COMPOSITION_SNAPSHOT_CORRUPT")
         return value
 
+    def find_version(
+        self, food_ingredient_id: UUID, version: int
+    ) -> FoodCompositionVersion | None:
+        key = self._connection.execute(
+            select(t.versions.c.id).where(
+                t.versions.c.food_ingredient_id == food_ingredient_id,
+                t.versions.c.version == version,
+            )
+        ).scalar_one_or_none()
+        return None if key is None else self.get(key)
+
     def get(self, version_id: UUID) -> FoodCompositionVersion:
         if version_id in self._pending:
             return self._pending[version_id]
