@@ -35,6 +35,7 @@ Owns:
 
 - migration 0039 binding persistence;
 - immutable RecipeIngredient → exact FoodCompositionVersion binding;
+- Nutrition-owned Recipe Nutrition authority publication UoW;
 - one exact production binding for the Step 9 butter row;
 - canonical V2 RecipeVersion Nutrition calculation;
 - neutral Nutrition consumption projection;
@@ -164,7 +165,7 @@ Minimum fields:
 recipe_ingredient_id          PK / FK → food_recipe_ingredients.id
 composition_version_id        FK → food_composition_versions.id
 registry_version              FK → nutrient_registry_snapshots.version
-calculation_policy_version    nonblank string
+calculation_policy_version    exact FOOD_COMPOSITION_APPLICABILITY_V2
 created_at                    UTC instant
 ~~~
 
@@ -181,6 +182,42 @@ Binding invariants:
 - RecipeIngredient.food_ingredient_id must equal FoodCompositionVersion.food_ingredient_id.
 
 A future correction may not repoint old history silently. It requires a separately reviewed immutable-history strategy.
+
+### Ownership and repository boundary
+
+RecipeIngredientCompositionBinding is **Nutrition-owned platform calculation
+authority**.
+
+It is not:
+
+- Recipe Catalogue source/culinary truth;
+- Food Catalogue / Composition truth;
+- Household-owned state.
+
+Recipe Catalogue continues to own Recipe / RecipeVersion / RecipeIngredient.
+Food Catalogue / Composition continues to own FoodIngredient /
+FoodCompositionVersion / NutrientVector truth. Nutrition owns the reviewed
+binding that selects which immutable Composition authority is consumed for one
+immutable RecipeIngredient calculation.
+
+Step 10-A must introduce one focused driver-independent binding repository
+contract and one Nutrition-owned authority UoW. The UoW uses one active
+connection/transaction and exposes only the dependencies needed by the command:
+
+- read-only Recipe / RecipeVersion / RecipeIngredient resolution;
+- read-only FoodIngredient resolution;
+- read-only Composition resolution;
+- read-only NutrientVector / nutrient-registry resolution;
+- RecipeIngredientCompositionBinding read/write;
+- commit / rollback.
+
+No Recipe, RecipeVersion, RecipeIngredient, FoodIngredient,
+FoodCompositionVersion, profile, NutrientVector or registry write is authorized
+through this UoW.
+
+The SQLAlchemy adapter may compose existing repository implementations over the
+same active project UoW connection; application/domain code must not import
+SQLAlchemy or open a second persistence scope.
 
 ## 10. DECISION — migration 0039
 
@@ -222,11 +259,43 @@ input_state = INPUT
 
 registry:
 RU_NUTRIENT_REGISTRY_V2
+
+calculation_policy_version:
+FOOD_COMPOSITION_APPLICABILITY_V2
 ~~~
 
 The publisher resolves UUIDs from accepted semantic identities and never hardcodes database-specific UUIDs.
 
+The policy value is the existing
+`APPLICABILITY_CALCULATION_VERSION = "FOOD_COMPOSITION_APPLICABILITY_V2"`.
+Step 10-A does not invent a second recipe-specific alias for the same calculator.
+Every accepted calculation must return
+`CompositionResult.calculation_version == "FOOD_COMPOSITION_APPLICABILITY_V2"`.
+
 ## 12. DECISION — fresh, replay and conflict semantics
+
+External preflight is optional fail-fast validation only. It is never
+authoritative for publication outcome.
+
+Fresh / exact-replay / conflict classification is authoritative only inside the
+same Nutrition-owned binding UoW that may write the binding.
+
+Immediately before accepting either FRESH or EXACT_REPLAY, that UoW must
+re-resolve and validate from its own active transaction:
+
+- exact Recipe identity;
+- exact RecipeVersion provenance/version;
+- exact required RecipeIngredient identity, quantity and unit;
+- exact FoodIngredient identity and `is_active=true`;
+- exact FoodCompositionVersion identity/version and matching FoodIngredient;
+- exact registry `RU_NUTRIENT_REGISTRY_V2`;
+- sealed NutrientVector dependencies;
+- deterministic applicability-aware Composition calculation;
+- `CompositionResult.calculation_version ==
+  "FOOD_COMPOSITION_APPLICABILITY_V2"`.
+
+No classification may rely on a stale result produced by an earlier independent
+read scope.
 
 ### Fresh
 
@@ -238,14 +307,23 @@ Allowed only when all of the following hold:
 - exact Step 8 FoodIngredient is active;
 - exact FoodCompositionVersion v1 exists and matches the row FoodIngredient;
 - kind/input state are ATOMIC / INPUT;
-- sealed V2 calculation succeeds;
+- sealed V2 calculation succeeds inside the binding UoW;
+- the calculation result reports exactly
+  `FOOD_COMPOSITION_APPLICABILITY_V2`;
 - binding is absent.
 
-Then exactly one binding is inserted.
+Then exactly one binding is inserted by that same UoW and committed once.
 
 ### Exact replay
 
-Allowed only when the existing binding resolves to the same RecipeIngredient, FoodIngredient, CompositionVersion, registry version and calculation policy.
+Allowed only after the same in-UoW dependency re-resolution above succeeds and
+the existing binding resolves to the same RecipeIngredient, FoodIngredient,
+CompositionVersion, registry version and exact calculation policy
+`FOOD_COMPOSITION_APPLICABILITY_V2`.
+
+The deterministic calculation is re-evaluated against the pinned immutable
+Composition/vector authority and its returned calculation version must match the
+persisted policy.
 
 Replay performs zero writes.
 
@@ -253,9 +331,14 @@ Recipe activation state is never rewritten by binding replay.
 
 ### Conflict
 
-Fail closed if identity, source quantity/unit, food/composition relation, registry, calculation policy or accepted dependency differs; if Composition is missing/corrupt; if the FoodIngredient is missing/inactive; or if V2 calculation fails.
+Fail closed if identity, source quantity/unit, food/composition relation,
+registry, calculation policy or accepted dependency differs; if Composition is
+missing/corrupt; if the FoodIngredient is missing/inactive; if the vector/registry
+dependency is unavailable/corrupt; if V2 calculation fails; or if the returned
+calculation version is not exactly
+`FOOD_COMPOSITION_APPLICABILITY_V2`.
 
-There is no latest-Composition fallback.
+There is no latest-Composition fallback and no arbitrary nonblank policy value.
 
 ## 13. DECISION — general Nutrition authority resolution
 
@@ -502,13 +585,35 @@ Nutrition calculation success alone never implies activation.
 
 ## 23. Transaction boundary
 
-Step 10 requires no binding-plus-activation cross-context transaction because production activation is out of scope.
+Step 10 requires no binding-plus-activation cross-context transaction because
+production activation is out of scope.
 
-Binding publication uses one project-owned transaction.
+Step 10-A binding publication is one **Nutrition-owned application command** with
+one focused Recipe Nutrition authority UoW, one active connection and one
+transaction.
 
-Injected failure after an attempted binding write must roll back the binding publication.
+Within that same transaction the command:
 
-Existing RecipeVersion and Composition history is read-only.
+1. resolves Recipe / RecipeVersion / RecipeIngredient read-only dependencies;
+2. resolves the exact active FoodIngredient;
+3. resolves exact Composition / vector / registry dependencies;
+4. executes the deterministic applicability-aware calculation and verifies
+   `FOOD_COMPOSITION_APPLICABILITY_V2`;
+5. classifies FRESH / EXACT_REPLAY / CONFLICT;
+6. writes at most the one binding row;
+7. commits once for FRESH or performs zero writes for EXACT_REPLAY.
+
+Repositories participating in the command must use that UoW connection. They do
+not open independent read/write connections while it is active.
+
+An external preflight may fail early, but its observations never substitute for
+the authoritative in-UoW recheck.
+
+Injected failure after any attempted binding write must roll back the entire
+binding command. The failed operation leaves no binding row or partial state.
+
+Existing RecipeVersion, RecipeIngredient, FoodIngredient, Composition, profile,
+vector and registry history is read-only in this command.
 
 ## 24. Preservation matrix
 
@@ -525,6 +630,7 @@ Existing RecipeVersion and Composition history is read-only.
 | current-profile selector | unchanged |
 | V1 registry/history | unchanged |
 | V2 registry | unchanged |
+| Recipe/Composition ownership | unchanged; new binding is Nutrition-owned derived authority |
 | Planner compatibility map | unchanged |
 | Planner algorithm version | advances explicitly for new V2 readiness semantics |
 | MealPattern selections | unchanged |
@@ -580,7 +686,21 @@ Runtime Step 10 must prove at least:
 39. canonical V2 nutrient truth is not replaced by the five-field compatibility projection;
 40. no Recipe/RecipeVersion/source-corpus publication occurs;
 41. no API/UI/Retail/Auth/PostgreSQL/AI scope occurs;
-42. AI_ENABLED=false.
+42. AI_ENABLED=false;
+43. binding repository is Nutrition-owned and Recipe/Composition dependencies are
+    read-only through the same binding UoW connection;
+44. external preflight can observe the Step 8 FoodIngredient active, then the
+    dependency can be deactivated before the binding UoW, and publication must
+    fail closed with zero binding writes;
+45. the same in-UoW active/dependency validation applies to exact replay, not only
+    fresh publication;
+46. accepted fresh/replay policy is exactly
+    FOOD_COMPOSITION_APPLICABILITY_V2;
+47. another/nonblank calculation policy value fails closed;
+48. calculated CompositionResult.calculation_version must equal the persisted
+    policy value;
+49. injected late binding write failure rolls back the binding and leaves all
+    Recipe/Composition/Nutrition dependencies unchanged.
 
 ## 26. Verification tier
 
@@ -588,7 +708,9 @@ Step 10 is a cross-context Nutrition / persistence / Planner integration,
 delivered as two bounded runtime PRs.
 
 Step 10-A review-ready evidence must include migration/binding/canonical-Nutrition
-checks and broad regression required by its authoritative data publication.
+checks and broad regression required by its authoritative data publication,
+including the post-preflight deactivation race, exact-replay in-UoW dependency
+recheck, exact calculation-policy identity, and injected late binding rollback.
 
 Step 10-B review-ready evidence must include Planner/MealPlan integration checks,
 planner versioning evidence and broad regression for changed algorithm behavior.

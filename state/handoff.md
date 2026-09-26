@@ -1,5 +1,33 @@
 # Handoff
 
+## PR94 blocker correction — 2026-09-26
+
+Independent exact-head review #5325781916 superseded the prior READY receipts and
+found three Contract Gate blockers:
+
+1. binding owner/UoW was not frozen;
+2. active Step 8 dependency was not explicitly rechecked inside the binding UoW;
+3. calculation_policy_version was arbitrary nonblank text.
+
+Correction implemented on the same PR branch:
+
+- binding is Nutrition-owned derived calculation authority;
+- Step 10-A gets one focused Nutrition-owned authority UoW / one connection and
+  transaction;
+- Recipe/RecipeVersion/RecipeIngredient, FoodIngredient, Composition, vector and
+  registry dependencies are read-only inside that UoW;
+- FRESH and EXACT_REPLAY both re-resolve dependencies and require active
+  FoodIngredient inside the UoW;
+- external preflight is fail-fast only;
+- persisted policy is exactly FOOD_COMPOSITION_APPLICABILITY_V2 and must match
+  CompositionResult.calculation_version;
+- adversarial acceptance covers deactivation-after-preflight, replay recheck,
+  policy mismatch and late-write rollback.
+
+Current status: corrected semantic verification pending.
+No runtime/schema/production mutation occurred.
+No Step 10-A or Step 10-B runtime work is authorized.
+
 ## PR94 Step 10 Contract Gate review-ready — 2026-09-26
 
 Accepted base:

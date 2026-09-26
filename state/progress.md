@@ -1,5 +1,24 @@
 # Progress
 
+## PR94 Contract Gate blockers corrected — 2026-09-26
+
+Review #5325781916 blocked the gate on ownership/UoW, transaction-time active
+dependency validation and unfrozen calculation-policy identity.
+
+All three are corrected in the canonical Step 10 contract:
+
+- Nutrition owns the binding authority;
+- one Nutrition-owned UoW owns dependency reads/classification/write;
+- fresh and replay recheck active dependency inside that UoW;
+- external preflight is non-authoritative;
+- policy is exactly FOOD_COMPOSITION_APPLICABILITY_V2;
+- returned CompositionResult.calculation_version must match the persisted policy.
+
+Status:
+STEP10_CONTRACT_GATE_CORRECTED_VERIFICATION_PENDING.
+
+No runtime/schema/production data changed.
+
 ## PR94 Step 10 Contract Gate review-ready — 2026-09-26
 
 Semantic head:

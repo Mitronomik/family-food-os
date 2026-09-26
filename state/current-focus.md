@@ -12,23 +12,34 @@ Russian-data integration Steps 1–9 are accepted.
 
 ## Current bounded state
 
-**PR94 / Step 10 Recipe V2 Nutrition / Planner Integration Contract Gate is review-ready.**
+**PR94 / Step 10 Contract Gate blocker correction is implemented; exact-head verification is pending.**
 
 Branch:
 
 docs/step10-v2-recipe-nutrition-contract
 
-Semantic head:
-
-761871e36a5a019621eb0c8e7900b2dfcf5e2773
-
-Semantic review:
-
-#5325759751 — READY TO MERGE CONTRACT GATE
-
 Canonical gate:
 
 docs/family-food/recipe-v2-nutrition-planner-integration-contract.md
+
+Independent re-review #5325781916 superseded the earlier READY receipts and found
+three contract gaps.
+
+## Corrections implemented
+
+1. RecipeIngredientCompositionBinding is explicitly Nutrition-owned derived
+   calculation authority.
+2. Step 10-A uses one focused Nutrition-owned authority UoW / one active
+   connection and transaction for all dependency reads, classification and the
+   binding write.
+3. FRESH and EXACT_REPLAY both re-resolve exact Recipe/row, active FoodIngredient,
+   Composition, V2 vector/registry and calculation inside that UoW.
+4. External preflight is fail-fast only and cannot authorize publication.
+5. The immutable calculation policy is exactly
+   FOOD_COMPOSITION_APPLICABILITY_V2 and must equal the returned
+   CompositionResult.calculation_version.
+6. Adversarial acceptance now covers post-preflight deactivation, replay recheck,
+   policy mismatch and late-write rollback.
 
 ## Frozen implementation sequence
 
@@ -37,7 +48,7 @@ docs/family-food/recipe-v2-nutrition-planner-integration-contract.md
 After gate merge and separate authorization:
 
 - migration 0039;
-- immutable RecipeIngredient → exact FoodCompositionVersion binding;
+- Nutrition-owned immutable RecipeIngredient → exact FoodCompositionVersion binding;
 - exact Step 9 production binding;
 - canonical V2 RecipeVersion Nutrition;
 - neutral Nutrition consumption projection;
@@ -53,7 +64,7 @@ Only after Step 10-A review/merge and separate authorization:
 - cross-context regression;
 - no migration.
 
-## Critical boundaries
+## Hard boundaries
 
 - production School2022 butter Recipe remains inactive;
 - ROLE_COMPATIBILITY_V1 and meal-role-recipe-v2 remain unchanged;
@@ -64,28 +75,8 @@ Only after Step 10-A review/merge and separate authorization:
 - no production activation in Step 10-A or Step 10-B;
 - AI_ENABLED=false remains supported.
 
-## Verification
-
-On semantic head 761871e36a5a019621eb0c8e7900b2dfcf5e2773:
-
-- Docs #366 — SUCCESS;
-- DC1 #228 — SUCCESS;
-- PR mergeable=true;
-- 0 behind main;
-- changed scope = docs/state only;
-- section numbering 1–29 sequential;
-- trailing whitespace = 0;
-- conflict markers = 0;
-- unresolved review threads = 0.
-
-Registry/Partial are automatic broad workflows and are not required for this
-docs-only gate under proportional verification. Runtime Step 10-A/B verification
-requirements are frozen in the contract.
-
 ## Stop boundary
 
-PR94 is ready for final review / explicit merge authorization.
-
-Do not merge autonomously.
+Do not merge until corrected exact-head verification and re-review complete.
 Do not start Step 10-A before PR94 is merged and separately authorized.
 Step 10-B remains blocked until Step 10-A is reviewed and merged.
