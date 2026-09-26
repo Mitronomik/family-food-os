@@ -1,6 +1,30 @@
-# Handoff
+# Handoff\n\n## Step 10-A runtime started — 2026-09-26
 
-## PR94 final compatibility correction review-ready — 2026-09-26
+PR94 merged at:
+4f9331a8fa73f8488a07295076b0425c00e6654e.
+
+The user explicitly authorized moving to the next bounded step.
+
+Step 10-A branch:
+feat/step10a-recipe-v2-nutrition
+
+Draft PR:
+#95
+
+Implemented scope:
+- migration 0039 binding table;
+- Nutrition-owned binding repository/UoW;
+- canonical 54-code Recipe V2 calculation;
+- RECIPE_COMPOSITION_NUTRITION_V1;
+- exact BY_DIFFERENCE-only legacy carbohydrate projection;
+- exact Step 9 production binding entrypoint;
+- focused migration/service/publication tests.
+
+No Planner/MealPlan/activation work is authorized or present.
+
+Verification pending. Stop after PR95 is review-ready; Step 10-B stays blocked.
+
+ PR94 final compatibility correction review-ready — 2026-09-26
 
 Semantic head:
 5e2d9a9336a94798327e3a9445e0dffd41e05ff9.
