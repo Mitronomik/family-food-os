@@ -4,118 +4,103 @@ Updated: 2026-09-26.
 
 ## Accepted state
 
-PR96 / Step 10-B is merged into main at:
+PR96 / Step 10-B is merged into `main` at:
 
 `7443f56b856184db6ddb040b9d68425db9f8d41a`.
 
-Step 10 reusable V2 Recipe Nutrition → Planner → MealPlan/Serving integration is accepted.
+Accepted reusable path:
+
+```text
+composition-backed V2 Recipe Nutrition
+→ neutral consumption projection
+→ Planner exact-energy readiness
+→ planner-v0.3
+→ MealPlan / Serving nutrition consumption
+```
+
+DATA-CORPUS-V1 remains the active programme before Gate1-CLOSE.
+PR9 Shopping remains blocked until Gate1-CLOSE.
 
 ## Current bounded state
 
-**DC3 first Planner-eligible Recipe Contract Gate is ACTIVE.**
+**PR97 — USSR82-453 Planner-Eligibility Candidate Preflight Contract is ACTIVE.**
 
 Branch:
 
 `docs/dc3-first-planner-eligible-recipe-contract`
 
-Selected candidate from the accepted DC1 batch plan:
+Selected candidate:
 
 `USSR82-453 — Яйца вареные`
 
-Why this candidate:
-- only recipe in `DC3-A_CLEAN_BRANCH_EXISTING_PROFILE_REVIEW`;
-- single source branch;
-- one required demand `ING-0071 → EGG`;
-- accepted identity mapping and current open-reuse USDA profile already exist;
-- exact form/profile suitability remains the bounded unresolved authority question.
+Accepted DC1 facts:
 
-Current work is docs/state only. No production RecipeVersion, activation, profile mutation, migration, Planner compatibility change, Gate1-CLOSE or PR9 work is authorized in this Contract Gate.
+- sole `DC3-A_CLEAN_BRANCH_EXISTING_PROFILE_REVIEW` candidate;
+- one selected source branch;
+- one retained relationship row;
+- `ING-0071 → EGG` accepted identity mapping;
+- current USDA FDC Foundation 748967 profile exists;
+- `production_ready = NO`;
+- recipe-form/profile suitability is unresolved.
 
-Read:
-`docs/family-food/dc3-first-planner-eligible-recipe-contract.md`.
+## Review correction
 
-## Stop boundary
+Detailed PR97 review `#5327395931` found blocking contract/state issues.
 
-Review and merge this Contract Gate first.
+PR97 is being corrected to a **preflight/evidence contract**, not a direct
+runtime-publication authorization.
 
-After merge, USSR82-453 runtime/data publication requires separate explicit authorization.
+The preflight contract now freezes that production publication remains blocked
+until evidence closes:
 
-# Current focus
+- durable exact source/card/variant provenance;
+- exact 40 g quantity/basis semantics;
+- EGG form/profile suitability;
+- transformation/yield/retention disposition;
+- deterministic Recipe Nutrition authority;
+- exact `meal_type_code` proposal;
+- unchanged `meal-role-recipe-v2` compatibility result;
+- rights/provenance disposition;
+- final `ACTIVATE_CANDIDATE | PUBLISH_INACTIVE | BLOCKED` decision.
 
-Updated: 2026-09-26.
+## Source reproducibility blocker
 
-## Accepted state
+The retained DC1 relationship row derives from:
 
-PR95 / Step 10-A is merged into main at:
+`russian_normative_recipes_v22_5_row_nutrients_part1.xlsx`
 
-`1ef7d1ffd0896873034034b3eb629e62aa474803`
+SHA-256:
 
-Step 10-A Composition-backed Recipe Nutrition authority is accepted.
+`72a70f31b6b59454a94d78b73bdf2d43119f04799b266773bb34917e9cb3961e`
 
-## Current bounded state
+DC1 records the source bundle as operator-managed with temporary authenticated CI
+delivery, but does not record the durable private storage locator required by the
+current DATA-CORPUS-V1 durability contract.
 
-**PR96 / Step 10-B — Planner / MealPlan Consumption Integration is review-ready.**
-
-Branch:
-
-`feat/step10b-planner-mealplan-v2-nutrition`
-
-Verified runtime/test head:
-
-`8b38053697845c7c63936a6b462e98331f5bb7e1`
-
-Semantic/runtime review:
-
-`#5327127307 — READY TO MERGE STEP 10-B`
-
-## Implemented behavior
-
-- Planner consumes Step10-A neutral Recipe Nutrition projection;
-- PlannerCandidate has additive `exact_energy_ready=false`;
-- legacy INCOMPLETE remains rejected by default;
-- exact V2 positive-energy readiness may admit sparse composition-backed authority;
-- Planner algorithm version is exactly `planner-v0.3`;
-- compatibility version remains exactly `meal-role-recipe-v2`;
-- MealPlan/Serving consumes the same neutral Recipe Nutrition read contract;
-- legacy `RecipeVersionNutrition` remains a compatible caller;
-- known values scale through Serving/day/week;
-- unknown carbohydrate remains unknown and keeps legacy status INCOMPLETE;
-- synthetic fully V2-bound compatible fixture proves canonical V2 → PlannerService → MealPlan → Serving/day/week.
-
-## Verification
-
-On runtime/test head `8b38053697845c7c63936a6b462e98331f5bb7e1`:
-
-- Docs #414 — SUCCESS;
-- DC1 #276 — SUCCESS;
-- Russian nutrition methodologies #163 — SUCCESS;
-- Nutrient Registry V2 #274 — SUCCESS:
-  - focused **391 passed**;
-  - backend shards **1074 / 804 / 776 / 968 passed**;
-  - launcher **643 passed, 2 skipped**;
-- Partial nutrition profiles #207 — SUCCESS:
-  - focused **339 passed**;
-  - backend shards **1074 / 804 / 776 / 968 passed**;
-  - launcher **643 passed, 2 skipped**;
-- `AI_ENABLED=false`;
-- mergeable=true;
-- 0 behind main;
-- unresolved review threads=0;
-- diff audit clean.
+That gap must be closed in the evidence-only preflight before production
+publication can be authorized.
 
 ## Hard boundaries
 
-- no migration;
-- no production Recipe activation;
-- no Step 9 meal_type change;
-- no MealRole compatibility change;
-- no source-corpus publication;
-- no API/UI/Retail/Auth/PostgreSQL/AI scope.
+PR97 changes docs/state only.
+
+Not authorized:
+
+- production RecipeVersion write;
+- Recipe activation;
+- FoodIngredient/profile mutation;
+- transformation/yield/retention publication;
+- migration;
+- Planner/MealRole compatibility change;
+- Gate1-CLOSE;
+- PR9 Shopping;
+- Prep/Retail/API/UI/Auth/PostgreSQL/AI.
 
 ## Stop boundary
 
-PR96 is ready for final review / explicit merge authorization.
+Review and merge the corrected PR97 preflight contract first.
 
-Do not merge autonomously.
+After merge, the next separately authorized operation is **USSR82-453
+evidence-only preflight**.
 
-After PR96 merge, stop before any production Recipe activation or next production data publication.
+Do not begin production publication or activation automatically.
