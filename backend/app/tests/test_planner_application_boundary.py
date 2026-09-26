@@ -54,14 +54,18 @@ class Recipes:
 class Nutrition:
     def __init__(self):
         self.kcal = Decimal("500")
+        self.status = NutritionStatus.COMPLETE
+        self.exact_energy_ready = False
 
     def member_reference_target(self, household_id, member_id, *, as_of_date):
         return SimpleNamespace(reference_energy_kcal=Decimal("2000"))
 
-    def recipe_version(self, version_id):
+    def neutral_consumption_projection(self, version_id):
         return SimpleNamespace(
+            recipe_version_id=version_id,
             per_base_serving=NutritionValues(kcal=self.kcal),
-            status=NutritionStatus.COMPLETE,
+            legacy_status=self.status,
+            exact_energy_ready=self.exact_energy_ready,
         )
 
 
@@ -107,6 +111,7 @@ def service():
         nutrition,
         pantry,
         PlannerConfig(max_recipe_repetitions=10),
+        recipe_nutrition=nutrition,
     )
     command = AuthoritativeGenerationRequest(
         household_id, date(2026, 9, 14), (GenerationMemberConstraints(member_id),)
@@ -124,6 +129,7 @@ def test_authoritative_composition_owns_selection_recipe_nutrition_and_pantry() 
     assert request.candidates[0].recipe_version_id == recipes.current_id
     assert request.candidates[0].kcal_per_serving == nutrition.kcal
     assert request.candidates[0].is_verified is True
+    assert request.candidates[0].exact_energy_ready is False
     assert request.pantry_food_ingredient_ids == frozenset({uid(50)})
     assert pantry.calls == [uid(1)]
 
@@ -164,6 +170,23 @@ def test_previous_week_history_is_scoped_and_exact_revision_is_traced() -> None:
     meals.prior.plan.household_id = uid(99)
     with pytest.raises(PlannerAuthoritativeInputError, match="MealPlan"):
         planner.compose_authoritative_request(command)
+
+
+def test_authoritative_generation_accepts_v2_exact_energy_without_legacy_complete() -> None:
+    planner, command, meals, _, _, nutrition = service()
+    nutrition.status = NutritionStatus.INCOMPLETE
+    nutrition.exact_energy_ready = True
+
+    request = planner.compose_authoritative_request(command)
+    assert request.candidates[0].nutrition_status is NutritionStatus.INCOMPLETE
+    assert request.candidates[0].exact_energy_ready is True
+
+    result, detail = planner.generate_authoritative(command)
+    assert result.trace.failure_code is None
+    assert result.trace.config_version == "planner-v0.3"
+    assert result.trace.compatibility_version == "meal-role-recipe-v2"
+    assert detail is not None
+    assert meals.writes[-1]["config_version"] == "planner-v0.3"
 
 
 def test_infeasible_authoritative_generation_never_writes() -> None:

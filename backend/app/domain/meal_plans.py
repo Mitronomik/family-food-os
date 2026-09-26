@@ -19,7 +19,7 @@ from app.domain.meal_patterns import MealRole
 from app.domain.nutrition import (
     NutritionStatus,
     NutritionValues,
-    RecipeVersionNutrition,
+    RecipeNutritionConsumption,
     aggregate_nutrition_status,
     aggregate_nutrition_values,
     scale_nutrition_values,
@@ -802,7 +802,7 @@ def validate_complete_plan(
 
 def calculate_meal_plan_nutrition(
     detail: MealPlanDetail,
-    recipe_nutrition_by_version_id: dict[UUID, RecipeVersionNutrition],
+    recipe_nutrition_by_version_id: dict[UUID, RecipeNutritionConsumption],
 ) -> MealPlanNutrition:
     """Compose existing Nutrition truth; unsupported source nutrition stays unknown."""
     event_by_id = {event.id: event for event in detail.events}
@@ -817,7 +817,7 @@ def calculate_meal_plan_nutrition(
             if nutrition is None:
                 values = NutritionValues()
                 status = NutritionStatus.INCOMPLETE
-            elif nutrition.version.id != event.recipe_version_id:
+            elif nutrition.recipe_version_id != event.recipe_version_id:
                 raise _issue(
                     DomainIssueCode.INVALID_IDENTIFIER,
                     "Recipe nutrition must match the event RecipeVersion.",
@@ -829,7 +829,9 @@ def calculate_meal_plan_nutrition(
                     nutrition.per_base_serving,
                     serving.portion_servings,
                 )
-                status = aggregate_nutrition_status((nutrition.status,), values)
+                status = aggregate_nutrition_status(
+                    (nutrition.legacy_status,), values
+                )
         else:
             values = NutritionValues()
             status = NutritionStatus.INCOMPLETE

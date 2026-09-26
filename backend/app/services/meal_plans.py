@@ -26,7 +26,7 @@ from app.domain.meal_plans import (
     calculate_meal_plan_nutrition,
     validate_complete_plan,
 )
-from app.domain.nutrition import RecipeVersionNutrition
+from app.domain.nutrition import RecipeNutritionConsumption
 from app.services.household_contracts import HouseholdReadScope
 from app.services.meal_pattern_contracts import MealPatternCatalogueReadScope
 from app.services.meal_plan_contracts import (
@@ -396,7 +396,7 @@ class MealPlanService:
         self,
         household_id: UUID,
         plan_id: UUID,
-        recipe_nutrition_by_version_id: Mapping[UUID, RecipeVersionNutrition],
+        recipe_nutrition_by_version_id: Mapping[UUID, RecipeNutritionConsumption],
     ) -> MealPlanNutrition:
         detail = self.get_plan(household_id, plan_id)
         return calculate_meal_plan_nutrition(

@@ -699,10 +699,12 @@ class _Nutrition:
     def member_reference_target(self, household_id, member_id, *, as_of_date):
         return SimpleNamespace(reference_energy_kcal=Decimal("2000"))
 
-    def recipe_version(self, version_id):
+    def neutral_consumption_projection(self, version_id):
         return SimpleNamespace(
+            recipe_version_id=version_id,
             per_base_serving=NutritionValues(kcal=Decimal("500")),
-            status=NutritionStatus.COMPLETE,
+            legacy_status=NutritionStatus.COMPLETE,
+            exact_energy_ready=False,
         )
 
 
@@ -723,13 +725,15 @@ def test_inactive_step9_recipe_is_absent_from_authoritative_planner(database):
         step9_version = step9_versions[0].id
         household_id, member_id = uid(1), uid(2)
         meal_plans = _MealPlans(household_id, member_id)
+        nutrition = _Nutrition()
         planner = PlannerService(
             meal_plans,
             _Households(household_id, member_id),
             recipes,
-            _Nutrition(),
+            nutrition,
             _Pantry(),
             PlannerConfig(max_recipe_repetitions=10),
+            recipe_nutrition=nutrition,
         )
         command = AuthoritativeGenerationRequest(
             household_id,

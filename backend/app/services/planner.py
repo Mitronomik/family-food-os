@@ -4,10 +4,12 @@ from dataclasses import dataclass
 from datetime import date, timedelta
 from decimal import Decimal
 from time import perf_counter_ns
+from typing import Protocol
 from uuid import UUID
 
 from app.domain.meal_patterns import MealPatternTagKind
 from app.domain.meal_plans import MealPlanDetail
+from app.domain.recipe_nutrition_v2 import RecipeNutritionConsumptionProjection
 from app.domain.planner import (
     FixedPlannerEvent,
     MemberPlannerConstraints,
@@ -33,6 +35,12 @@ from app.services.pantry import PantryService
 
 RECOMMENDER_VERSION = "meal-pattern-recommender-v2"
 HISTORY_HORIZON_WEEKS = 1
+
+
+class RecipeNutritionProjectionService(Protocol):
+    def neutral_consumption_projection(
+        self, recipe_version_id: UUID
+    ) -> RecipeNutritionConsumptionProjection: ...
 
 
 class PlannerAuthoritativeInputError(ValueError):
@@ -161,11 +169,14 @@ class PlannerService:
         nutrition: NutritionService,
         pantry: PantryService,
         config: PlannerConfig = PlannerConfig(),
+        *,
+        recipe_nutrition: RecipeNutritionProjectionService,
     ) -> None:
         self._meal_plans = meal_plans
         self._households = households
         self._recipes = recipes
         self._nutrition = nutrition
+        self._recipe_nutrition = recipe_nutrition
         self._pantry = pantry
         self._config = config
 
@@ -214,17 +225,20 @@ class PlannerService:
         candidates = []
         for recipe in self._recipes.list_active(limit=200):
             detail = self._recipes.get_current_verified(recipe.id)
-            calculated = self._nutrition.recipe_version(detail.version.id)
+            calculated = self._recipe_nutrition.neutral_consumption_projection(
+                detail.version.id
+            )
             candidates.append(
                 PlannerCandidate(
                     detail.version.id,
                     detail.version.meal_type_code,
                     frozenset(row.food_ingredient_id for row in detail.ingredients),
                     calculated.per_base_serving.kcal,
-                    calculated.status,
+                    calculated.legacy_status,
                     True,
                     detail.version.total_time_minutes,
                     detail.version.batch_friendly,
+                    calculated.exact_energy_ready,
                 )
             )
         pantry_ids = frozenset(

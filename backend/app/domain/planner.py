@@ -39,7 +39,7 @@ class PlannerFailureCode(StrEnum):
 
 @dataclass(frozen=True)
 class PlannerConfig:
-    version: str = "planner-v0.2"
+    version: str = "planner-v0.3"
     compatibility_version: str = "meal-role-recipe-v2"
     preference_weight: Decimal = Decimal("20")
     pantry_weight: Decimal = Decimal("4")
@@ -96,6 +96,7 @@ class PlannerCandidate:
     is_verified: bool = True
     total_time_minutes: int | None = None
     batch_friendly: bool | None = None
+    exact_energy_ready: bool = False
 
 
 @dataclass(frozen=True)
@@ -458,7 +459,10 @@ def generate_week(
                 if candidate.meal_type_code not in ROLE_COMPATIBILITY_V1[role]:
                     base_rejections.append(PlannerRejectionCode.ROLE_INCOMPATIBLE)
                 if (
-                    candidate.nutrition_status is NutritionStatus.INCOMPLETE
+                    (
+                        candidate.nutrition_status is NutritionStatus.INCOMPLETE
+                        and not candidate.exact_energy_ready
+                    )
                     or candidate.kcal_per_serving is None
                     or candidate.kcal_per_serving <= 0
                 ):
