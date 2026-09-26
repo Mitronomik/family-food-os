@@ -1,5 +1,26 @@
 # Handoff
 
+## PR93 corrected runtime verified — 2026-09-26
+
+Verified runtime head:
+`99f3d2b9ae592e9370a0f432316828da7a3b6cfb`.
+
+Both transaction/replay blockers from the independent exact-head review are closed:
+- strict trusted-seed classification rechecks required active FoodIngredients
+  inside the Recipe Catalogue write UoW for both FRESH and EXACT_REPLAY;
+- loader external preflight is fail-fast only, while postconditions accept the
+  actual transactional fresh or exact zero-write replay result.
+
+Adversarial tests cover both races and pass in focused suites.
+
+Verification:
+Docs #360; DC1 #222; Russian #123; Registry #201; Partial #152 — SUCCESS.
+Focused 328/276; backend 1202/751/650/991; launcher 643 passed, 2 skipped.
+`AI_ENABLED=false`.
+
+Current status: READY FOR FINAL RE-REVIEW / explicit merge authorization.
+No merge performed. No Step 10 work is authorized.
+
 ## PR93 transaction/replay blocker correction — 2026-09-26
 
 Independent exact-head review superseded the earlier READY TO MERGE receipt and

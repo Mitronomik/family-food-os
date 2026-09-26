@@ -11,13 +11,16 @@ Russian-data integration Steps 1–8 and the Step 9 Contract Gate are accepted.
 
 ## Current bounded state
 
-**PR93 / Step 9 transaction/replay blocker correction is implemented; exact-head verification is pending.**
+**PR93 / Step 9 transaction/replay blocker correction is verified and ready for final re-review/merge authorization.**
 
 Branch:
 `feat/step9-school2022-recipe-runtime`.
 
-Previous runtime receipt:
-`31751069adec7ada062c8b4b7fcb291f4cd89bed` — superseded by the transaction/replay correction.
+Verified corrected runtime head:
+`99f3d2b9ae592e9370a0f432316828da7a3b6cfb`.
+
+The earlier runtime receipt
+`31751069adec7ada062c8b4b7fcb291f4cd89bed` is superseded by this corrected runtime.
 
 Correction closes:
 - required Step 8 FoodIngredient activity is rechecked inside strict Recipe Catalogue write UoW;
@@ -59,25 +62,22 @@ School2022 53-19з
 
 ## Verification
 
-The prior exact-head verification below remains historical evidence for the pre-correction runtime and is not a current runtime receipt.
+On corrected runtime head `99f3d2b9ae592e9370a0f432316828da7a3b6cfb`:
 
-On runtime head `31751069adec7ada062c8b4b7fcb291f4cd89bed`:
-
-- Docs #358 — SUCCESS;
-- DC1 #220 — SUCCESS;
-- Russian nutrition methodologies #121 — SUCCESS;
-- Nutrient Registry V2 #198 — SUCCESS;
-- Partial nutrition profiles #150 — SUCCESS;
-- Registry focused — 326 passed;
-- Partial focused — 274 passed;
-- backend shards — 1202 / 751 / 648 / 991 passed;
+- Docs #360 — SUCCESS;
+- DC1 #222 — SUCCESS;
+- Russian nutrition methodologies #123 — SUCCESS;
+- Nutrient Registry V2 #201 — SUCCESS;
+- Partial nutrition profiles #152 — SUCCESS;
+- Registry focused — 328 passed;
+- Partial focused — 276 passed;
+- backend shards — 1202 / 751 / 650 / 991 passed;
 - launcher — 643 passed, 2 skipped;
-- semantic review #5325378822 — READY TO MERGE;
-- mergeable=true;
-- 0 behind main;
-- unresolved review threads=0;
-- package checksum receipt independently re-hashed and matched;
-- patch whitespace/conflict audit clean.
+- `AI_ENABLED=false`;
+- two new adversarial transaction/replay tests are included in focused verification.
+
+The corrected runtime bytes are frozen at this head. Later state-only receipt commits
+do not invalidate this runtime verification.
 
 ## Hard boundary
 
@@ -85,6 +85,6 @@ No Step 10 work is authorized by PR93.
 
 ## Stop boundary
 
-Do not merge until the corrected runtime receives exact-head verification and final re-review.
+PR93 is ready for final re-review and explicit merge authorization.
 
 Do not merge autonomously.

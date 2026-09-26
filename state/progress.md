@@ -1,5 +1,28 @@
 # Progress
 
+## PR93 corrected runtime verified — 2026-09-26
+
+Runtime correction head:
+`99f3d2b9ae592e9370a0f432316828da7a3b6cfb`.
+
+Closed:
+1. exact replay now fails closed when the required Step 8 FoodIngredient becomes
+   inactive between external preflight and strict write-UoW reconcile;
+2. a concurrent exact publication after external FRESH preflight now resolves as
+   successful zero-write EXACT_REPLAY rather than a stale-disposition RuntimeError.
+
+Verification on the corrected runtime:
+- Docs #360 / DC1 #222 / Russian #123 / Registry #201 / Partial #152 — SUCCESS;
+- focused 328 / 276 passed;
+- backend 1202 / 751 / 650 / 991 passed;
+- launcher 643 passed, 2 skipped;
+- `AI_ENABLED=false`.
+
+Status:
+`STEP9_RUNTIME_CORRECTED_REVIEW_READY`.
+
+No Step 10 work occurred.
+
 ## PR93 transaction/replay correction — 2026-09-26
 
 The later independent exact-head review superseded the earlier READY TO MERGE
