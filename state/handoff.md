@@ -1,5 +1,31 @@
 # Handoff
 
+## PR94 corrected Contract Gate review-ready — 2026-09-26
+
+Corrected semantic head:
+c23bca0e6df4787f8f083a976fd6257e454d1777.
+
+Corrected review:
+#5325809090 — READY TO MERGE CORRECTED STEP 10 CONTRACT GATE.
+
+Review #5325781916 blockers are closed:
+
+- binding ownership is frozen as Nutrition-owned derived calculation authority;
+- one focused Nutrition UoW owns all dependency reads/classification/binding write;
+- FRESH and EXACT_REPLAY recheck active Step 8 dependency in that UoW;
+- external preflight is fail-fast only;
+- calculation policy is exactly FOOD_COMPOSITION_APPLICABILITY_V2 and matches
+  CompositionResult.calculation_version;
+- race/policy/rollback adversarial acceptance is frozen.
+
+Verification on corrected semantic head:
+Docs #368 SUCCESS; DC1 #230 SUCCESS; Registry focused 328; Partial focused 276;
+mergeable=true; 0 behind; numbering/whitespace/conflict audit clean.
+
+Stop for merge review. No self-merge.
+Step 10-A requires separate authorization after PR94 merge.
+Step 10-B remains unauthorized until Step 10-A merges.
+
 ## PR94 blocker correction — 2026-09-26
 
 Independent exact-head review #5325781916 superseded the prior READY receipts and

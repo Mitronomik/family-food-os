@@ -1,5 +1,28 @@
 # Progress
 
+## PR94 corrected Contract Gate review-ready — 2026-09-26
+
+Corrected semantic head:
+c23bca0e6df4787f8f083a976fd6257e454d1777.
+
+Closed blockers from review #5325781916:
+1. binding owner / UoW;
+2. in-UoW active dependency validation for fresh and replay;
+3. exact immutable calculation-policy identity.
+
+Corrected semantic review:
+#5325809090 READY TO MERGE.
+
+Verification:
+Docs #368 / DC1 #230 SUCCESS.
+Registry focused 328 passed.
+Partial focused 276 passed.
+
+Status:
+STEP10_CONTRACT_GATE_CORRECTED_REVIEW_READY.
+
+No runtime/schema/production data mutation occurred.
+
 ## PR94 Contract Gate blockers corrected — 2026-09-26
 
 Review #5325781916 blocked the gate on ownership/UoW, transaction-time active
