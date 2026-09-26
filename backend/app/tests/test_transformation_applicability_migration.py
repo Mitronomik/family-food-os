@@ -37,7 +37,11 @@ def through_0037(path, *, seed=False):
 
 def test_0038_appends_after_0037_without_consuming_reserved_0033():
     expected = expected_migration_ids()
-    assert expected[-2:] == [PREVIOUS_HEAD, MIGRATION_ID]
+    assert expected[-3:] == [
+        PREVIOUS_HEAD,
+        MIGRATION_ID,
+        "0039_recipe_ingredient_composition_binding",
+    ]
     assert not any(value.startswith("0033_") for value in expected)
 
 
@@ -45,7 +49,10 @@ def test_populated_0037_upgrade_preserves_every_existing_row(tmp_path):
     config = through_0037(tmp_path / "populated.sqlite", seed=True)
     before = snapshot(config)
 
-    assert apply_migrations(config) == [MIGRATION_ID]
+    assert apply_migrations(config) == [
+        MIGRATION_ID,
+        "0039_recipe_ingredient_composition_binding",
+    ]
 
     after = snapshot(config)
     assert all(after[name] == rows for name, rows in before.items())
@@ -135,13 +142,19 @@ def test_backup_restore_and_reupgrade_are_deterministic(tmp_path):
     shutil.copy2(database, backup)
     before = snapshot(config)
 
-    assert apply_migrations(config) == [MIGRATION_ID]
+    assert apply_migrations(config) == [
+        MIGRATION_ID,
+        "0039_recipe_ingredient_composition_binding",
+    ]
     after = snapshot(config)
     assert all(after[name] == rows for name, rows in before.items())
 
     shutil.copy2(backup, database)
     assert MIGRATION_ID not in current_migrations(config)
-    assert apply_migrations(config) == [MIGRATION_ID]
+    assert apply_migrations(config) == [
+        MIGRATION_ID,
+        "0039_recipe_ingredient_composition_binding",
+    ]
     restored = snapshot(config)
     assert all(restored[name] == rows for name, rows in before.items())
     with sqlite3.connect(database) as db:
