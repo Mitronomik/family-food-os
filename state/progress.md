@@ -1,5 +1,26 @@
 # Progress
 
+## PR93 merged / Step 10 gate opened — 2026-09-26
+
+PR93 merged as:
+
+d0a1a217d3e23b0b930f14de37405a7ca7ba3d16
+
+Step 9 is accepted.
+
+The next bounded operation is the docs-only Step 10 Recipe V2 Nutrition / Planner
+Integration Contract Gate.
+
+Preflight discovered a required immutable Composition authority seam: persisted
+RecipeIngredient currently does not pin FoodCompositionVersion, so general
+Nutrition must not infer latest/current Composition.
+
+Status:
+
+STEP10_CONTRACT_GATE_ACTIVE
+
+No runtime/schema/activation work has occurred.
+
 ## PR93 corrected runtime verified — 2026-09-26
 
 Runtime correction head:

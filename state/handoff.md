@@ -1,5 +1,35 @@
 # Handoff
 
+## Step 10 Contract Gate started — 2026-09-26
+
+PR93 is merged into main at:
+
+d0a1a217d3e23b0b930f14de37405a7ca7ba3d16
+
+The user explicitly authorized continuing to the next bounded operation.
+
+Preflight found that general V2 RecipeVersion Nutrition cannot safely select a
+mutable/latest FoodCompositionVersion because RecipeIngredient currently has no
+persisted Composition pin.
+
+Current docs-only decision:
+
+- expected migration 0039 adds immutable RecipeIngredient → CompositionVersion binding plus registry/calculation-policy pin;
+- legacy NutritionService remains unchanged;
+- new canonical V2 RecipeVersion Nutrition path is explicit;
+- Planner receives only a bounded V2-safe energy projection;
+- legacy INCOMPLETE candidates are not globally enabled;
+- ROLE_COMPATIBILITY_V1 stays unchanged;
+- production School2022 butter Recipe remains inactive;
+- real production activation is a later bounded data-publication decision.
+
+Canonical draft:
+
+docs/family-food/recipe-v2-nutrition-planner-integration-contract.md
+
+No runtime/schema/production mutation belongs in this gate.
+Stop after review-ready PR; no autonomous merge or runtime implementation.
+
 ## PR93 corrected runtime verified — 2026-09-26
 
 Verified runtime head:
