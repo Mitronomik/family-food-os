@@ -30,6 +30,10 @@ from app.domain.recipe_nutrition_v2 import (
 )
 from app.domain.units import UnitCode
 from app.services.food_composition import ApplicabilityAwareCompositionCalculator
+from app.services.food_recipes import (
+    TrustedRecipeSeed,
+    trusted_recipe_seed_matches,
+)
 from app.services.recipe_nutrition_v2_contracts import (
     RecipeNutritionV2PersistenceConflictError,
     RecipeNutritionV2ReadScope,
@@ -60,6 +64,7 @@ class BindingDisposition(StrEnum):
 
 @dataclass(frozen=True)
 class ReviewedRecipeIngredientBindingSpec:
+    trusted_recipe_seed: TrustedRecipeSeed
     recipe_code: str
     source_name: str
     source_recipe_id: str
@@ -336,6 +341,17 @@ class RecipeNutritionV2Service:
 
     @staticmethod
     def _validate_spec(spec: ReviewedRecipeIngredientBindingSpec) -> None:
+        seed = spec.trusted_recipe_seed
+        if (
+            seed.canonical_code != spec.recipe_code
+            or seed.version.source_name != spec.source_name
+            or seed.version.source_recipe_id != spec.source_recipe_id
+            or seed.version.source_version != spec.source_version
+            or seed.initial_is_active is not False
+        ):
+            raise RecipeNutritionV2ContractError(
+                "Binding spec не совпадает с trusted Recipe seed."
+            )
         if not isinstance(spec.quantity, Decimal) or not spec.quantity.is_finite() or spec.quantity <= 0:
             raise RecipeNutritionV2ContractError("Binding quantity должна быть положительным Decimal.")
         if type(spec.recipe_version_number) is not int or spec.recipe_version_number <= 0:
@@ -352,15 +368,34 @@ class RecipeNutritionV2Service:
             raise RecipeNutritionV2ContractError(
                 "RECIPE_COMPOSITION_NUTRITION_V1 binding допускает только граммы."
             )
+        if not 1 <= spec.ingredient_position <= len(seed.version.ingredients):
+            raise RecipeNutritionV2ContractError(
+                "Binding position отсутствует в trusted Recipe seed."
+            )
+        expected_row = seed.version.ingredients[spec.ingredient_position - 1]
+        if (
+            expected_row.food_ingredient_code != spec.food_ingredient_code
+            or expected_row.quantity != spec.quantity
+            or UnitCode(expected_row.unit) is not unit
+            or expected_row.optional
+        ):
+            raise RecipeNutritionV2ContractError(
+                "Binding row не совпадает с trusted Recipe seed."
+            )
 
     def _resolve_publication_target(
         self,
         scope: RecipeNutritionV2ReadScope,
         spec: ReviewedRecipeIngredientBindingSpec,
     ):
+        seed = spec.trusted_recipe_seed
         recipe = scope.recipes.get_by_code(spec.recipe_code)
         if recipe is None:
             raise RecipeNutritionV2ConflictError("Проверенный Recipe отсутствует.")
+        if recipe.canonical_name != seed.canonical_name:
+            raise RecipeNutritionV2ConflictError(
+                "Recipe identity отличается от trusted Step 9 seed."
+            )
         if spec.require_recipe_inactive and recipe.is_active:
             raise RecipeNutritionV2ConflictError(
                 "Step 10-A production Recipe должен оставаться inactive."
@@ -381,6 +416,10 @@ class RecipeNutritionV2Service:
                 "Exact RecipeVersion provenance/version отсутствует или неоднозначен."
             )
         detail = matches[0]
+        if not trusted_recipe_seed_matches(scope, detail, seed):
+            raise RecipeNutritionV2ConflictError(
+                "RecipeVersion structure/provenance отличается от trusted Step 9 seed."
+            )
         rows = [
             row
             for row in detail.ingredients
