@@ -26,6 +26,9 @@ from app.persistence.sqlalchemy_core.nutrition_composition import (
     create_nutrition_service,
 )
 from app.persistence.sqlalchemy_core.pantry_composition import create_pantry_service
+from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
+    create_recipe_nutrition_v2_service,
+)
 from app.seed.food_ingredients import load_seed_entries as load_ingredient_seeds
 from app.seed.food_recipes import seed_food_recipes
 from app.seed.nutrition_measure_evidence import seed_nutrition_measure_evidence
@@ -60,7 +63,14 @@ def test_three_gate1_households_use_authoritative_application_boundary(
         nutrition = create_nutrition_service(engine)
         pantry = create_pantry_service(engine)
         meal_plans = meal_plan_service(engine)
-        planner = PlannerService(meal_plans, households, recipes, nutrition, pantry)
+        planner = PlannerService(
+            meal_plans,
+            households,
+            recipes,
+            nutrition,
+            pantry,
+            recipe_nutrition=create_recipe_nutrition_v2_service(engine),
+        )
         verified = [
             recipes.get_current_verified(recipe.id)
             for recipe in recipes.list_active(limit=100)
