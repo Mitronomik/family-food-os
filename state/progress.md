@@ -1,25 +1,27 @@
-## DC3 first Planner-eligible Recipe Contract Gate — 2026-09-26
+# Progress
+
+## PR97 corrected USSR82-453 preflight contract — 2026-09-26
 
 Accepted base:
-`7443f56b856184db6ddb040b9d68425db9f8d41a` (merged PR96).
+`7443f56b856184db6ddb040b9d68425db9f8d41a`.
 
 Selected candidate:
 `USSR82-453 — Яйца вареные`.
 
-Evidence basis:
-- DC1 batch plan: only `DC3-A_CLEAN_BRANCH_EXISTING_PROFILE_REVIEW` recipe;
-- single selected source branch;
-- one relationship row;
-- `ING-0071 → EGG` accepted mapping;
-- current USDA FDC 748967 profile exists;
-- production readiness blocked on exact recipe-form/profile suitability review.
+Correction status:
+- candidate remains the sole accepted DC1 `DC3-A_CLEAN_BRANCH_EXISTING_PROFILE_REVIEW` entry;
+- no claim that it is already Planner-eligible or production-ready;
+- exact EGG form/profile suitability remains unresolved;
+- source/process/classification/provenance/Nutrition checks remain required;
+- v22.5 source relationship shard is hash-pinned;
+- durable private raw-artifact locator is still an explicit preflight blocker;
+- next authorized step after this contract is evidence-only preflight;
+- production RecipeVersion publication/activation remains unauthorized.
 
 Status:
-`DC3_FIRST_PLANNER_ELIGIBLE_CONTRACT_ACTIVE`.
+`DC3_USSR82_453_PREFLIGHT_CONTRACT_CORRECTED`.
 
-No runtime/data publication or activation started.
-
-# Progress
+No runtime/data publication occurred.
 
 ## PR96 Step 10-B review-ready — 2026-09-26
 
