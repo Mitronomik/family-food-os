@@ -702,7 +702,7 @@ is an implementation detail) with at least:
 - compatibility NutritionValues for known legacy concepts;
 - truthful legacy completeness status;
 - canonical authority/readiness metadata;
-- registry/calculation-policy identity.
+- registry, nutrient-set, Composition-calculation and Recipe-calculation identities.
 
 Both legacy RecipeVersionNutrition and the new canonical V2 result can be adapted
 to this small consumption contract without changing their underlying authority.
@@ -728,7 +728,8 @@ This prevents a split-brain state where Planner can select a composition-backed
 Recipe but Serving/day/week Nutrition cannot represent its accepted truth.
 
 No MealPlan persistence schema change is required in Step 10 because the immutable
-RecipeIngredient Composition binding and calculation-policy pin make the bounded
+RecipeIngredient Composition binding plus exact registry, nutrient-set,
+Composition-calculation and Recipe-calculation pins make the bounded
 RecipeVersion Nutrition authority reproducible.
 
 If implementation proves historical MealPlan replay additionally requires a
@@ -913,11 +914,13 @@ Runtime Step 10 must prove at least:
     fail closed with zero binding writes;
 45. the same in-UoW active/dependency validation applies to exact replay, not only
     fresh publication;
-46. accepted fresh/replay policy is exactly
+46. accepted binding authority is exactly
+    RU_NUTRIENT_REGISTRY_V2 + RECIPE_V2_NUTRIENT_SET_V1 +
+    FOOD_COMPOSITION_APPLICABILITY_V2 + RECIPE_COMPOSITION_NUTRITION_V1;
+47. another registry, nutrient-set, Composition-calculation or Recipe-calculation
+    version fails closed;
+48. calculated CompositionResult.calculation_version must equal
     FOOD_COMPOSITION_APPLICABILITY_V2;
-47. another/nonblank calculation policy value fails closed;
-48. calculated CompositionResult.calculation_version must equal the persisted
-    policy value;
 49. injected late binding write failure rolls back the binding and leaves all
     Recipe/Composition/Nutrition dependencies unchanged;
 50. canonical V2 Recipe Nutrition requests exactly the 54 codes in
@@ -927,9 +930,9 @@ Runtime Step 10 must prove at least:
 52. request-set omission cannot turn a sparse Step 9 result into COMPLETE;
 53. the exact Step 9 canonical V2 result status is PARTIAL with exactly 17
     AVAILABLE requested codes and the remaining requested codes UNKNOWN;
-55. canonical result carries RECIPE_V2_NUTRIENT_SET_V1,
+54. canonical result carries RECIPE_V2_NUTRIENT_SET_V1,
     FOOD_COMPOSITION_APPLICABILITY_V2 and RECIPE_COMPOSITION_NUTRITION_V1;
-54. recipe scaling uses exact recipe_input_mass_g / CompositionResult.input_mass_g;
+55. recipe scaling uses exact recipe_input_mass_g / CompositionResult.input_mass_g;
 56. UNKNOWN in any required row propagates to UNKNOWN for that nutrient total;
 57. required-row sums and per-serving division use Decimal-only V1 policy and
     quantize once at the recipe result boundary to six decimals;
