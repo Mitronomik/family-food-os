@@ -516,6 +516,11 @@ persisted binding authority.
 
 Replay performs zero writes.
 
+Persisted `created_at` is storage metadata from the original fresh publication.
+Exact replay preserves it and does not compare it to a newly generated clock
+instant; rerunning the same semantic publication at a later time remains
+zero-write.
+
 Recipe activation state is never rewritten by binding replay.
 
 ### Conflict
@@ -573,12 +578,23 @@ are intentionally deferred to a future recipe calculation policy.
 
 ## 14. DECISION — exact row mass authority
 
-Step 10 adds no new quantity-conversion policy.
+Step 10-A adds no quantity-conversion dependency.
 
-- g is exact recipe input mass;
-- ml and pcs require the already accepted exact assessment/evidence path;
-- estimate-only or blocked conversion remains non-authoritative;
+`RECIPE_COMPOSITION_NUTRITION_V1` accepts only required RecipeIngredients whose
+persisted unit is exactly `g`.
+
+For V1:
+
+- `recipe_input_mass_g = RecipeIngredient.quantity` for an exact gram row;
+- `ml` and `pcs` fail closed even when legacy B1 evidence exists;
+- estimate-only or blocked conversion is never authoritative;
 - raw, gross, purchase or cooked mass is not substituted for recipe input mass.
+
+This deliberate gram-only boundary keeps the Step 10-A Nutrition authority UoW
+independent of B1 assessment/evidence repositories.
+
+A future recipe calculation policy may explicitly authorize exact `ml/pcs → g`
+assessment/evidence consumption and must amend the UoW/read contract accordingly.
 
 The Step 9 row is exact 10 g and needs no conversion evidence.
 
@@ -881,7 +897,8 @@ Runtime Step 10 must prove at least:
 16. partial required-row binding fails closed;
 17. mixed required-row registry versions fail closed;
 18. gram quantity uses exact RecipeIngredient input mass;
-19. unaccepted ml/pcs estimate cannot become V2 authority;
+19. any required ml/pcs RecipeIngredient fails closed under
+    RECIPE_COMPOSITION_NUTRITION_V1; V1 is gram-only;
 20. Step 9 canonical result reproduces all accepted 17 values;
 21. WATER remains unknown;
 22. canonical total carbohydrate remains unknown;
@@ -951,7 +968,10 @@ Runtime Step 10 must prove at least:
 65. Step 10-B compatibility_version remains exactly meal-role-recipe-v2;
 66. multi-row canonical V2 calculation fails closed if required bindings disagree
     on registry, nutrient-set, Composition calculation or Recipe calculation
-    version.
+    version;
+67. INSERT OR REPLACE cannot replace an existing binding row;
+68. exact replay at a later clock instant preserves the original created_at and
+    performs zero writes.
 
 ## 26. Verification tier
 
