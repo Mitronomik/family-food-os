@@ -39,6 +39,12 @@ from app.domain.recipe_nutrition_v2 import (
     RecipeIngredientCompositionBinding,
     RecipeNutritionV2Status,
 )
+from app.services.meal_plans import MealPlanNotFoundError
+from app.services.planner import (
+    AuthoritativeGenerationRequest,
+    GenerationMemberConstraints,
+    PlannerService,
+)
 from app.services.recipe_nutrition_v2 import project_recipe_nutrition_consumption
 
 NOW = datetime(2026, 9, 26, tzinfo=timezone.utc)
@@ -224,6 +230,208 @@ def test_v2_exact_energy_flows_through_planner_mealplan_and_serving() -> None:
         item.status is NutritionStatus.INCOMPLETE
         and item.values.carbohydrates_g is None
         for item in nutrition.member_days
+    )
+    assert nutrition.member_weeks[0].status is NutritionStatus.INCOMPLETE
+    assert nutrition.member_weeks[0].values.carbohydrates_g is None
+
+
+class _Households:
+    def __init__(self, household_id: UUID, member_id: UUID) -> None:
+        self.household_id = household_id
+        self.member_id = member_id
+
+    def get_household(self, household_id: UUID):
+        assert household_id == self.household_id
+        return type(
+            "State",
+            (),
+            {
+                "household": type("Household", (), {"id": household_id})(),
+                "members": (
+                    type(
+                        "Member",
+                        (),
+                        {"id": self.member_id, "active": True},
+                    )(),
+                ),
+            },
+        )()
+
+
+class _Recipes:
+    def __init__(self, recipe_version_id: UUID) -> None:
+        self.recipe_version_id = recipe_version_id
+        self.recipe_id = uid(4)
+        self.food_id = uid(5)
+
+    def list_active(self, *, limit: int):
+        assert limit == 200
+        return (type("Recipe", (), {"id": self.recipe_id})(),)
+
+    def get_current_verified(self, recipe_id: UUID):
+        assert recipe_id == self.recipe_id
+        version = type(
+            "Version",
+            (),
+            {
+                "id": self.recipe_version_id,
+                "meal_type_code": MealTypeCode.MAIN,
+                "total_time_minutes": 15,
+                "batch_friendly": False,
+            },
+        )()
+        row = type("Row", (), {"food_ingredient_id": self.food_id})()
+        return type("Detail", (), {"version": version, "ingredients": (row,)})()
+
+
+class _ReferenceNutrition:
+    def member_reference_target(self, household_id, member_id, *, as_of_date):
+        del household_id, member_id, as_of_date
+        return type("Target", (), {"reference_energy_kcal": Decimal("2000")})()
+
+
+class _ProjectionNutrition:
+    def __init__(self, projection) -> None:
+        self.projection = projection
+
+    def neutral_consumption_projection(self, recipe_version_id: UUID):
+        assert recipe_version_id == self.projection.recipe_version_id
+        return self.projection
+
+
+class _Pantry:
+    def list_items(self, household_id: UUID):
+        del household_id
+        return ()
+
+
+class _MealPlans:
+    def __init__(self, household_id: UUID, member_id: UUID) -> None:
+        self.household_id = household_id
+        self.member_id = member_id
+        self.selection = selection(member_id)
+        self.created: MealPlanDetail | None = None
+
+    def get_current_member_pattern(self, household_id: UUID, member_id: UUID):
+        assert household_id == self.household_id
+        assert member_id == self.member_id
+        return self.selection
+
+    def get_current_plan(self, household_id: UUID, week_start: date):
+        del household_id, week_start
+        raise MealPlanNotFoundError()
+
+    def create_plan_revision(
+        self,
+        *,
+        household_id: UUID,
+        week_start: date,
+        member_selection_ids,
+        events,
+        config_version: str,
+        **kwargs,
+    ) -> MealPlanDetail:
+        del kwargs
+        assert household_id == self.household_id
+        assert member_selection_ids == {
+            self.member_id: self.selection.selection.id
+        }
+        plan_id = uid(200)
+        plan = MealPlan(
+            plan_id,
+            household_id,
+            week_start,
+            1,
+            MealPlanStatus.CONFIRMED,
+            config_version,
+            None,
+            NOW,
+        )
+        domain_events = []
+        servings = []
+        for index, event in enumerate(events, start=1):
+            event_id = uid(200 + index)
+            domain_events.append(
+                HouseholdMealEvent(
+                    event_id,
+                    plan_id,
+                    event.local_date,
+                    event.position,
+                    event.role,
+                    event.source_kind,
+                    event.recipe_version_id,
+                    event.source_reference,
+                    NOW,
+                )
+            )
+            for participant_id, portion in event.servings.items():
+                servings.append(
+                    Serving(
+                        uid(2000 + len(servings)),
+                        event_id,
+                        participant_id,
+                        portion,
+                        NOW,
+                    )
+                )
+        self.created = MealPlanDetail(
+            plan,
+            (
+                MealPlanMemberSelection(
+                    plan_id,
+                    self.member_id,
+                    self.selection.selection.id,
+                ),
+            ),
+            tuple(domain_events),
+            tuple(servings),
+        )
+        return self.created
+
+
+def test_application_service_full_v2_chain_uses_neutral_projection() -> None:
+    household_id = uid(1)
+    member_id = uid(2)
+    recipe_version_id = uid(3)
+    canonical_result = canonical(recipe_version_id)
+    projection = project_recipe_nutrition_consumption(canonical_result)
+    meal_plans = _MealPlans(household_id, member_id)
+    planner = PlannerService(
+        meal_plans,
+        _Households(household_id, member_id),
+        _Recipes(recipe_version_id),
+        _ReferenceNutrition(),
+        _Pantry(),
+        PlannerConfig(max_recipe_repetitions=10),
+        recipe_nutrition=_ProjectionNutrition(projection),
+    )
+    result, detail = planner.generate_authoritative(
+        AuthoritativeGenerationRequest(
+            household_id,
+            WEEK_START,
+            (GenerationMemberConstraints(member_id),),
+        )
+    )
+
+    assert isinstance(result, PlannerSuccess)
+    assert detail is meal_plans.created
+    assert detail is not None
+    assert detail.plan.config_version == "planner-v0.3"
+    assert result.trace.compatibility_version == "meal-role-recipe-v2"
+    assert all(
+        event.recipe_version_id == recipe_version_id for event in detail.events
+    )
+
+    nutrition = calculate_meal_plan_nutrition(
+        detail,
+        {recipe_version_id: projection},
+    )
+    assert len(nutrition.servings) == 7
+    assert all(
+        item.status is NutritionStatus.INCOMPLETE
+        and item.values.kcal is not None
+        and item.values.carbohydrates_g is None
+        for item in nutrition.servings
     )
     assert nutrition.member_weeks[0].status is NutritionStatus.INCOMPLETE
     assert nutrition.member_weeks[0].values.carbohydrates_g is None
