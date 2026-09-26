@@ -1,31 +1,33 @@
-## Post-PR96 next bounded operation — 2026-09-26
+# Handoff
 
-PR96 merged into main at:
-`7443f56b856184db6ddb040b9d68425db9f8d41a`.
+## PR97 corrected preflight contract — 2026-09-26
 
-The user authorized moving to the next bounded step.
+Accepted base:
+`7443f56b856184db6ddb040b9d68425db9f8d41a` (merged PR96).
 
-The project returns to DATA-CORPUS-V1 / DC3 catalogue work rather than starting PR9 or activating the Step 9 butter technical slice.
+PR97 review `#5327395931` found four blocking issues:
+- material authority decisions were deferred to the future runtime PR;
+- source-artifact durability was not frozen;
+- DC1 readiness was overstated as if form/profile suitability were the only publication blocker;
+- `state/current-focus.md` contained two root current-state documents.
 
-New Contract Gate branch:
-`docs/dc3-first-planner-eligible-recipe-contract`.
+Corrections:
+- PR97 is now explicitly an **evidence/preflight contract**;
+- the next step after merge is evidence-only, not production publication;
+- exact v22.5 relationship input is pinned:
+  `russian_normative_recipes_v22_5_row_nutrients_part1.xlsx`,
+  SHA-256 `72a70f31b6b59454a94d78b73bdf2d43119f04799b266773bb34917e9cb3961e`;
+- the missing durable private source locator is recorded as an explicit blocker;
+- full RecipeVersion production readiness is separated from DC1 catalogue-dependency readiness;
+- future preflight must close source/process/form/transformation/Nutrition/classification/rights/activation disposition before any runtime PR;
+- current-focus is normalized to one root document.
 
-Selected first ordinary candidate:
+Selected candidate remains:
 `USSR82-453 — Яйца вареные`.
 
-Accepted DC1 evidence makes it the sole `DC3-A_CLEAN_BRANCH_EXISTING_PROFILE_REVIEW` candidate:
-single source branch, one required `ING-0071`, accepted `ING-0071 → EGG` mapping, existing USDA FDC 748967 current profile, and an explicit remaining form/profile suitability review.
+No runtime/schema/production data changed.
 
-The gate freezes:
-- no name-only reuse of EGG authority;
-- exact source quantity/form review;
-- transformed/raw/cooked/yield/retention decision;
-- explicit Recipe classification without MealRole compatibility expansion;
-- activation only in a later separately authorized runtime/data PR after all authority checks pass.
-
-No runtime/schema/production data changed in this Contract Gate.
-
-# Handoff
+Stop after corrected PR97 review/merge. Then obtain separate authorization for the USSR82-453 evidence-only preflight.
 
 ## PR96 Step 10-B review-ready — 2026-09-26
 
