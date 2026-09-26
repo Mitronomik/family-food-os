@@ -95,7 +95,10 @@ def test_0036_is_appended_after_0035_and_0033_remains_reserved():
         MIGRATION_ID,
         "0037_meal_plan_reference_methodology_pins",
     ]
-    assert expected[-1] == "0038_transformation_applicability"
+    assert expected[-2:] == [
+        "0038_transformation_applicability",
+        "0039_recipe_ingredient_composition_binding",
+    ]
     assert not any(value.startswith("0033_") for value in expected)
 
 
@@ -115,6 +118,7 @@ def test_populated_0035_upgrade_preserves_existing_state_and_restore_reupgrades(
         MIGRATION_ID,
         "0037_meal_plan_reference_methodology_pins",
         "0038_transformation_applicability",
+        "0039_recipe_ingredient_composition_binding",
     ]
     assert existing_rows(database) == before
     assert apply_migrations(config) == []
@@ -130,11 +134,12 @@ def test_populated_0035_upgrade_preserves_existing_state_and_restore_reupgrades(
                 "SELECT migration_id FROM schema_migrations ORDER BY rowid"
             )
         ]
-    assert history[-4:] == [
+    assert history[-5:] == [
         PREVIOUS_HEAD,
         MIGRATION_ID,
         "0037_meal_plan_reference_methodology_pins",
         "0038_transformation_applicability",
+        "0039_recipe_ingredient_composition_binding",
     ]
 
     shutil.copy2(backup, database)
@@ -146,6 +151,7 @@ def test_populated_0035_upgrade_preserves_existing_state_and_restore_reupgrades(
         MIGRATION_ID,
         "0037_meal_plan_reference_methodology_pins",
         "0038_transformation_applicability",
+        "0039_recipe_ingredient_composition_binding",
     ]
     assert existing_rows(database) == before
 

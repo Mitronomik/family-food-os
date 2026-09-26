@@ -1,6 +1,55 @@
 # Progress
 
-## PR94 final compatibility correction review-ready — 2026-09-26
+## PR95 Step 10-A review-ready — 2026-09-26
+
+Verified runtime head:
+`3c779c7a0184be6f6838720b6fde78dbe482e8e8`.
+
+Step 10-A is implemented and fully verified:
+- 0039 immutable RecipeIngredient composition authority binding;
+- exact Step 9 production binding;
+- canonical 54-code Recipe V2 Nutrition;
+- neutral legacy/V2 projection;
+- exact legacy carbohydrate crosswalk;
+- replay/rollback/immutability/race protections.
+
+Runtime review:
+`#5326633449 READY TO MERGE`.
+
+Verification:
+- Docs #404 / DC1 #266 / Russian #153 / Registry #257 / Partial #197 — SUCCESS;
+- focused 352 / 300 passed;
+- backend 1073 / 836 / 753 / 956 passed;
+- launcher 643 passed, 2 skipped;
+- AI_ENABLED=false.
+
+Status:
+`STEP10A_RUNTIME_REVIEW_READY`.
+
+No Step 10-B work occurred.
+
+## Step 10-A runtime active — 2026-09-26
+
+Accepted base:
+4f9331a8fa73f8488a07295076b0425c00e6654e (merged PR94).
+
+Runtime branch and draft PR95 created.
+
+Implemented:
+- 0039 RecipeIngredient composition binding persistence;
+- immutable binding guards;
+- Nutrition-owned read/write scope;
+- canonical V2 RecipeVersion Nutrition;
+- neutral consumption projection;
+- exact Step 9 binding publisher;
+- focused acceptance tests.
+
+Status:
+STEP10A_RUNTIME_VERIFICATION_PENDING.
+
+No Step 10-B work occurred.
+
+ PR94 final compatibility correction review-ready — 2026-09-26
 
 Semantic head:
 5e2d9a9336a94798327e3a9445e0dffd41e05ff9.

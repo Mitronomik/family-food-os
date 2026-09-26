@@ -4,85 +4,102 @@ Updated: 2026-09-26.
 
 ## Accepted state
 
-PR93 / Step 9 runtime is merged into main at:
+PR94 / Step 10 Contract Gate is merged into main at:
 
-d0a1a217d3e23b0b930f14de37405a7ca7ba3d16
+`4f9331a8fa73f8488a07295076b0425c00e6654e`
 
-Russian-data integration Steps 1–9 are accepted.
+Russian-data integration Steps 1–9 and the Step 10 implementation contract are accepted.
 
 ## Current bounded state
 
-**PR94 / final-corrected Step 10 Contract Gate is review-ready.**
+**PR95 / Step 10-A — Composition-backed Recipe Nutrition Authority is review-ready.**
 
 Branch:
 
-docs/step10-v2-recipe-nutrition-contract
+`feat/step10a-recipe-v2-nutrition`
 
-Corrected semantic head:
+Verified runtime head:
 
-5e2d9a9336a94798327e3a9445e0dffd41e05ff9
+`3c779c7a0184be6f6838720b6fde78dbe482e8e8`
 
-Corrected semantic review:
+Semantic/runtime review:
 
-#5326221930 — READY TO MERGE FINAL-CORRECTED STEP 10 CONTRACT GATE
+`#5326633449 — READY TO MERGE STEP 10-A`
 
-Canonical gate:
+## Implemented authority
 
-docs/family-food/recipe-v2-nutrition-planner-integration-contract.md
+- migration `0039_recipe_ingredient_composition_binding`;
+- Nutrition-owned immutable RecipeIngredient → exact FoodCompositionVersion binding;
+- exact authority pins:
+  - `RU_NUTRIENT_REGISTRY_V2`;
+  - `RECIPE_V2_NUTRIENT_SET_V1`;
+  - `FOOD_COMPOSITION_APPLICABILITY_V2`;
+  - `RECIPE_COMPOSITION_NUTRITION_V1`;
+- one exact Step 9 production binding publisher;
+- canonical 54-code RecipeVersion V2 Nutrition;
+- neutral legacy/V2 consumption projection;
+- exact BY_DIFFERENCE-only legacy carbohydrate crosswalk;
+- legacy `NutritionService.recipe_version()` preserved.
 
-## Frozen Step 10-A authority
+## Exact Step 9 truth
 
-- binding ownership: Nutrition;
-- one Nutrition-owned UoW / one connection / one transaction;
-- registry: RU_NUTRIENT_REGISTRY_V2;
-- nutrient set: RECIPE_V2_NUTRIENT_SET_V1 = exact 54-code V2 registry snapshot;
-- Composition calculation: FOOD_COMPOSITION_APPLICABILITY_V2;
-- Recipe calculation: RECIPE_COMPOSITION_NUTRITION_V1;
-- Recipe V1 supports required exact gram rows only;
-- optional rows fail closed;
-- transformed/non-INPUT root outputs fail closed;
-- unknown nutrients remain explicit UNKNOWN;
-- canonical Step 9 result is PARTIAL;
-- legacy compatibility crosswalk is exact:
-  - kcal ← ENERGY_KCAL;
-  - protein_g ← PROTEIN;
-  - fat_g ← FAT_TOTAL;
-  - carbohydrates_g ← CARBOHYDRATE_BY_DIFFERENCE only;
-  - fiber_g ← FIBER_TOTAL_DIETARY;
-- CARBOHYDRATE_AVAILABLE and STARCH+SUGARS never substitute for legacy carbohydrates;
-- exact Step 9 legacy carbohydrates_g is None and legacy status is INCOMPLETE;
-- historical reads use pinned authority and do not depend on later FoodIngredient.is_active;
-- publication/replay still requires active dependency.
+- Recipe remains inactive;
+- binding targets required 10 g `BUTTER_PEASANT_72_5_UNSALTED`;
+- exact Composition v1 / ATOMIC / INPUT;
+- canonical result = PARTIAL;
+- 17 accepted nutrients AVAILABLE;
+- remaining requested concepts UNKNOWN;
+- WATER UNKNOWN;
+- CARBOHYDRATE_AVAILABLE UNKNOWN;
+- CARBOHYDRATE_BY_DIFFERENCE UNKNOWN;
+- legacy carbohydrates_g = None;
+- legacy five-field status = INCOMPLETE.
 
-## Frozen Step 10-B authority
+## Step 10-A policy boundary
 
-- Planner algorithm version: exactly planner-v0.3;
-- MealRole compatibility version: exactly meal-role-recipe-v2;
-- neutral Nutrition projection is shared by Planner and MealPlan/Serving;
-- no production Step 9 Recipe activation.
+`RECIPE_COMPOSITION_NUTRITION_V1` supports only:
+- required gram rows;
+- untransformed INPUT-basis Composition;
+- Decimal-only scaling/aggregation;
+- exact base-serving division;
+- one six-decimal result-boundary quantization.
+
+Optional rows, ml/pcs rows and transformed/yielded roots fail closed.
 
 ## Verification
 
-On semantic head 5e2d9a9336a94798327e3a9445e0dffd41e05ff9:
+On runtime head `3c779c7a0184be6f6838720b6fde78dbe482e8e8`:
 
-- Docs #375 — SUCCESS;
-- DC1 #237 — SUCCESS;
-- Registry focused — 328 passed;
-- Partial focused — 276 passed;
-- contract sections 1–29 sequential;
-- adversarial acceptance 1–74 sequential;
+- Docs #404 — SUCCESS;
+- DC1 #266 — SUCCESS;
+- Russian nutrition methodologies #153 — SUCCESS (**380 passed**);
+- Nutrient Registry V2 #257 — SUCCESS:
+  - focused **352 passed**;
+  - backend shards **1073 / 836 / 753 / 956 passed**;
+  - launcher **643 passed, 2 skipped**;
+- Partial nutrition profiles #197 — SUCCESS:
+  - focused **300 passed**;
+  - backend shards green;
+  - launcher **643 passed, 2 skipped**;
+- `AI_ENABLED=false`;
 - mergeable=true;
 - 0 behind main;
+- unresolved review threads=0;
 - trailing whitespace=0;
 - conflict markers=0;
-- unresolved review threads=0.
+- no added task-marker placeholders.
 
-Automatic broad Registry/Partial regression is supplemental for this docs-only gate.
+## Hard boundary
+
+No Planner/MealPlan behavior change occurred.
+No `planner-v0.3` runtime work occurred.
+No Recipe activation occurred.
+No Step 10-B work is authorized yet.
 
 ## Stop boundary
 
-PR94 is ready for final merge review.
+PR95 is ready for final review / explicit merge authorization.
 
 Do not merge autonomously.
-Do not start Step 10-A before PR94 is merged and separately authorized.
-Step 10-B remains blocked until Step 10-A is reviewed and merged.
+
+After PR95 merge, stop. Step 10-B requires a separate explicit authorization.

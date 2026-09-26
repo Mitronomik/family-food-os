@@ -97,7 +97,10 @@ def test_0037_appends_after_0036_without_consuming_0033():
     expected = expected_migration_ids()
     position = expected.index(PREVIOUS_HEAD)
     assert expected[position : position + 2] == [PREVIOUS_HEAD, MIGRATION_ID]
-    assert expected[-1] == "0038_transformation_applicability"
+    assert expected[-2:] == [
+        "0038_transformation_applicability",
+        "0039_recipe_ingredient_composition_binding",
+    ]
     assert not any(value.startswith("0033_") for value in expected)
 
 
@@ -112,6 +115,7 @@ def test_populated_0036_upgrade_preserves_legacy_plan_without_backfill(tmp_path)
     assert apply_migrations(config) == [
         MIGRATION_ID,
         "0038_transformation_applicability",
+        "0039_recipe_ingredient_composition_binding",
     ]
     with sqlite3.connect(database) as db:
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
@@ -127,6 +131,7 @@ def test_populated_0036_upgrade_preserves_legacy_plan_without_backfill(tmp_path)
     assert apply_migrations(config) == [
         MIGRATION_ID,
         "0038_transformation_applicability",
+        "0039_recipe_ingredient_composition_binding",
     ]
 
 
