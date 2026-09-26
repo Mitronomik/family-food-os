@@ -154,10 +154,15 @@ class SqlAlchemyRecipeNutritionV2UnitOfWork(_Repositories, SqlAlchemyUnitOfWork)
 
 
 def create_recipe_nutrition_v2_service(engine: Engine, *, clock=None):
+    from app.persistence.sqlalchemy_core.nutrition_composition import (
+        create_nutrition_service,
+    )
     from app.services.recipe_nutrition_v2 import RecipeNutritionV2Service
 
+    legacy = create_nutrition_service(engine)
     return RecipeNutritionV2Service(
         lambda: SqlAlchemyRecipeNutritionV2ReadScope(engine),
         lambda: SqlAlchemyRecipeNutritionV2UnitOfWork(engine),
+        legacy_recipe_nutrition=legacy.recipe_version,
         clock=clock,
     )
