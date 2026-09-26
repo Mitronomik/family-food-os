@@ -10,16 +10,23 @@ PR97:
 
 Correction result:
 - no regression to DC1-era preflight state;
-- accepted corpus/source foundation remains accepted;
+- accepted DATA-CORPUS-V1 contract/source foundation remains accepted;
+- the DATA-CORPUS-V1 baseline remains incomplete and Issue #67 stays active;
 - Steps 4–10 remain the later controlling implementation history;
-- normal DATA-CORPUS-V1 DC2/DC3 publication sequence resumes;
-- no per-recipe governance milestone is introduced;
+- dependency-driven DC2/DC3 publication sequencing is restored;
+- DC3 may not bypass unresolved required DC2 food/form/Nutrition dependencies;
+- no specific next production batch is authorized by PR98;
+- no per-recipe governance milestone is introduced by default;
 - PR9 remains blocked until DC4 + Gate1-CLOSE.
 
 Status:
 `POST_PR96_DC23_SEQUENCE_RESTORED`.
 
 No production data/runtime changes occurred in this correction.
+
+Next step after merge:
+select and explicitly authorize one concrete bounded DC2 or DC3 operation under
+Issue #67; implementation does not start automatically.
 
 ## PR96 Step 10-B review-ready — 2026-09-26
 
