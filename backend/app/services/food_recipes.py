@@ -608,3 +608,19 @@ def _seed_matches(
         and tuple(item.equipment_code for item in detail.equipment)
         == seed.equipment_codes
     )
+
+
+def trusted_recipe_seed_matches(
+    scope: RecipeCatalogueReadScope | RecipeCatalogueUnitOfWork,
+    detail: RecipeVersionDetail,
+    seed: TrustedRecipeSeed,
+) -> bool:
+    """Whether persisted Recipe identity/history exactly matches one trusted seed."""
+
+    return (
+        detail.recipe.canonical_code == seed.canonical_code
+        and detail.recipe.canonical_name == seed.canonical_name
+        and detail.recipe.canonical_name_key
+        == normalize_unicode_search_key(seed.canonical_name, field="canonical_name")
+        and _seed_matches(scope, detail, seed.version)
+    )
