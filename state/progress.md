@@ -1,3 +1,24 @@
+## DC3 first Planner-eligible Recipe Contract Gate — 2026-09-26
+
+Accepted base:
+`7443f56b856184db6ddb040b9d68425db9f8d41a` (merged PR96).
+
+Selected candidate:
+`USSR82-453 — Яйца вареные`.
+
+Evidence basis:
+- DC1 batch plan: only `DC3-A_CLEAN_BRANCH_EXISTING_PROFILE_REVIEW` recipe;
+- single selected source branch;
+- one relationship row;
+- `ING-0071 → EGG` accepted mapping;
+- current USDA FDC 748967 profile exists;
+- production readiness blocked on exact recipe-form/profile suitability review.
+
+Status:
+`DC3_FIRST_PLANNER_ELIGIBLE_CONTRACT_ACTIVE`.
+
+No runtime/data publication or activation started.
+
 # Progress
 
 ## PR96 Step 10-B review-ready — 2026-09-26
