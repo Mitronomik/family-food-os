@@ -17,11 +17,13 @@ Correction:
 - do not create a new per-recipe preflight milestone by default.
 
 Correct continuation:
-`accepted DATA-CORPUS-V1 → bounded DC2/DC3 production batches → DC4 → Gate1-CLOSE → PR9`.
+`accepted DATA-CORPUS-V1 contract/source foundation → dependency-ready DC2 where required → DC3 only after required dependencies are accepted → DC4 → Gate1-CLOSE → PR9`.
 
 Recipe-specific form/Nutrition/classification/provenance checks remain normal bounded publication work when existing accepted publication paths and authority contracts are sufficient. If a batch requires a new or changed authoritative publication path, immutable authority contract, schema/migration boundary or cross-context rule, stop for the repository-required docs-only Implementation Contract Gate before runtime implementation.
 
-No next production batch has been started by this state correction.
+PR98 restores sequencing only; it does not select or start the next production batch.
+
+A dependent DC3 batch must not bypass unresolved required DC2 food/form/Nutrition dependencies. After PR98 merge, select one concrete bounded operation under Issue #67 before implementation begins.
 
 ## PR96 Step 10-B review-ready — 2026-09-26
 
