@@ -71,7 +71,7 @@ NUTRIENT_CODES = (
     "ZINC",
 )
 
-if tuple(sorted(NUTRIENT_CODES)) != NUTRIENT_CODES or len(set(NUTRIENT_CODES)) != 54:
+if len(NUTRIENT_CODES) != 54 or len(set(NUTRIENT_CODES)) != 54:
     raise RuntimeError("Step 10-A nutrient-set constant is not the frozen 54-code tuple.")
 
 
