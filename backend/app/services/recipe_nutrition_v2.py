@@ -9,6 +9,7 @@ from uuid import UUID
 
 from app.domain.food_composition import (
     APPLICABILITY_CALCULATION_VERSION,
+    CompositionKind,
     CompositionUnavailableError,
     MassState,
     calculation_context,
@@ -81,6 +82,8 @@ class ReviewedRecipeIngredientBindingSpec:
     quantity: Decimal
     unit: UnitCode | str
     composition_version: int
+    composition_kind: CompositionKind | str
+    composition_input_state: MassState | str
     expected_available_amounts: tuple[tuple[str, Decimal], ...]
     expected_unknown_codes: tuple[str, ...]
     require_recipe_inactive: bool = True
@@ -444,6 +447,17 @@ class RecipeNutritionV2Service:
         if type(spec.composition_version) is not int or spec.composition_version <= 0:
             raise RecipeNutritionV2ContractError("Composition version должен быть положительным.")
         try:
+            expected_kind = CompositionKind(spec.composition_kind)
+            expected_state = MassState(spec.composition_input_state)
+        except (TypeError, ValueError) as exc:
+            raise RecipeNutritionV2ContractError(
+                "Неподдерживаемая Composition kind/input state."
+            ) from exc
+        if expected_state is not MassState.INPUT:
+            raise RecipeNutritionV2ContractError(
+                "RECIPE_COMPOSITION_NUTRITION_V1 требует INPUT composition state."
+            )
+        try:
             unit = UnitCode(spec.unit)
         except (TypeError, ValueError) as exc:
             raise RecipeNutritionV2ContractError("Неподдерживаемая единица RecipeIngredient.") from exc
@@ -556,12 +570,25 @@ class RecipeNutritionV2Service:
             raise RecipeNutritionV2ConflictError(
                 "Exact FoodIngredient отсутствует, не совпадает или inactive."
             )
-        composition = scope.compositions.find_version(
-            food.id, spec.composition_version
-        )
+        try:
+            composition = scope.compositions.find_version(
+                food.id, spec.composition_version
+            )
+        except CompositionUnavailableError as exc:
+            raise RecipeNutritionV2ConflictError(
+                "Exact FoodCompositionVersion повреждён или недоступен."
+            ) from exc
         if composition is None:
             raise RecipeNutritionV2ConflictError(
                 "Exact FoodCompositionVersion отсутствует."
+            )
+        if (
+            composition.kind is not CompositionKind(spec.composition_kind)
+            or composition.input_state is not MassState(spec.composition_input_state)
+            or composition.food_ingredient_id != food.id
+        ):
+            raise RecipeNutritionV2ConflictError(
+                "FoodCompositionVersion identity/kind/state отличаются от reviewed authority."
             )
         return detail, row, food, composition
 
@@ -632,7 +659,8 @@ class RecipeNutritionV2Service:
         if APPLICABILITY_CALCULATION_VERSION != COMPOSITION_CALCULATION_VERSION:
             raise RuntimeError("Composition calculation version constant drifted.")
         if (
-            result.calculation_version != COMPOSITION_CALCULATION_VERSION
+            result.root_version_id != composition.id
+            or result.calculation_version != COMPOSITION_CALCULATION_VERSION
             or result.requested_nutrient_codes != tuple(sorted(NUTRIENT_CODES))
             or result.input_mass_g <= 0
             or result.output_mass_state is not MassState.INPUT
