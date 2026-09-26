@@ -109,5 +109,7 @@ No automatic:
 
 One bounded publication PR = one reviewable production-data goal.
 
+The next batch is a separate bounded scope decision; PR98 does not choose it.
+
 Selecting the next batch and authorizing its implementation are explicit scope
 decisions; agents must not choose an unspecified production batch autonomously.
