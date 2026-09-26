@@ -12,38 +12,35 @@ Russian-data integration Steps 1–9 are accepted.
 
 ## Current bounded state
 
-**PR94 / corrected Step 10 Recipe V2 Nutrition / Planner Integration Contract Gate is review-ready.**
+**PR94 / Step 10 Contract Gate deep-review blocker correction is implemented; exact-head verification is pending.**
 
 Branch:
 
 docs/step10-v2-recipe-nutrition-contract
 
-Corrected semantic head:
-
-c23bca0e6df4787f8f083a976fd6257e454d1777
-
-Corrected semantic review:
-
-#5325809090 — READY TO MERGE CORRECTED STEP 10 CONTRACT GATE
-
 Canonical gate:
 
 docs/family-food/recipe-v2-nutrition-planner-integration-contract.md
 
-## Corrected authority contract
+Deep independent review #5326074689 superseded the prior READY receipt and found
+three additional semantic blockers.
 
-- RecipeIngredientCompositionBinding is Nutrition-owned derived calculation authority.
-- Step 10-A uses one focused Nutrition-owned authority UoW, one connection and
-  one transaction.
-- Recipe/RecipeVersion/RecipeIngredient, FoodIngredient, Composition, vector and
-  registry dependencies are read-only inside that UoW.
-- FRESH and EXACT_REPLAY both re-resolve dependencies and require active
-  FoodIngredient inside the authoritative UoW.
-- external preflight is fail-fast only.
-- calculation policy is exactly FOOD_COMPOSITION_APPLICABILITY_V2 and must match
-  CompositionResult.calculation_version.
-- adversarial acceptance covers deactivation-after-preflight, replay recheck,
-  wrong policy and late binding rollback.
+## Corrections implemented
+
+1. Canonical Recipe V2 request set is exact
+   `RECIPE_V2_NUTRIENT_SET_V1`: all 54 codes of
+   `RU_NUTRIENT_REGISTRY_V2`. Unknown concepts remain explicit UNKNOWN rather
+   than disappearing by request omission.
+2. Recipe-level calculation is separately versioned as
+   `RECIPE_COMPOSITION_NUTRITION_V1`, above
+   `FOOD_COMPOSITION_APPLICABILITY_V2`.
+3. V1 recipe policy freezes exact input-mass scaling, unknown propagation,
+   required-row aggregation, no optional rows, untransformed INPUT-basis scope,
+   per-serving division and one six-decimal result-boundary rounding.
+4. Step 10-B Planner version is exactly `planner-v0.3`;
+   `meal-role-recipe-v2` remains the compatibility version.
+5. Historical canonical reads after a binding exists do not depend on later
+   mutable FoodIngredient active state; active remains a publication/replay guard.
 
 ## Frozen implementation sequence
 
@@ -52,7 +49,10 @@ docs/family-food/recipe-v2-nutrition-planner-integration-contract.md
 After PR94 merge and separate authorization:
 
 - migration 0039;
-- immutable Nutrition-owned RecipeIngredient → exact FoodCompositionVersion binding;
+- Nutrition-owned immutable RecipeIngredient → exact FoodCompositionVersion binding;
+- exact RECIPE_V2_NUTRIENT_SET_V1;
+- FOOD_COMPOSITION_APPLICABILITY_V2;
+- RECIPE_COMPOSITION_NUTRITION_V1;
 - exact Step 9 production binding;
 - canonical V2 RecipeVersion Nutrition;
 - neutral Nutrition consumption projection;
@@ -63,40 +63,14 @@ After PR94 merge and separate authorization:
 Only after Step 10-A review/merge and separate authorization:
 
 - Planner V2 exact-energy readiness;
-- Planner algorithm version advance;
+- exact planner-v0.3 algorithm version;
 - MealPlan/Serving neutral Nutrition consumption;
+- meal-role-recipe-v2 compatibility unchanged;
 - cross-context regression;
 - no migration.
 
-## Critical boundaries
-
-- production School2022 butter Recipe remains inactive;
-- ROLE_COMPATIBILITY_V1 and meal-role-recipe-v2 remain unchanged;
-- no automatic latest/current Composition selection;
-- no partial required-row V1/V2 mixing;
-- no WATER/carbohydrate inference;
-- no current-profile switch or fake B1 assessment;
-- no production activation in Step 10-A or Step 10-B;
-- AI_ENABLED=false remains supported.
-
-## Verification
-
-On corrected semantic head c23bca0e6df4787f8f083a976fd6257e454d1777:
-
-- Docs #368 — SUCCESS;
-- DC1 #230 — SUCCESS;
-- Registry focused — 328 passed;
-- Partial focused — 276 passed;
-- mergeable=true;
-- 0 behind main;
-- section numbering 1–29 sequential;
-- trailing whitespace = 0;
-- conflict markers = 0.
-
 ## Stop boundary
 
-PR94 is ready for final merge review.
-
-Do not merge autonomously.
+Do not merge until corrected exact-head verification and re-review complete.
 Do not start Step 10-A before PR94 is merged and separately authorized.
 Step 10-B remains blocked until Step 10-A is reviewed and merged.

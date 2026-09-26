@@ -1,5 +1,24 @@
 # Progress
 
+## PR94 deep semantic blockers corrected — 2026-09-26
+
+Review #5326074689 blocked the gate on:
+- missing canonical V2 request-set identity;
+- missing separate recipe-level calculation version;
+- non-exact Planner version identity.
+
+Corrections:
+- exact RECIPE_V2_NUTRIENT_SET_V1 / 54-code request set;
+- exact RECIPE_COMPOSITION_NUTRITION_V1 recipe formula;
+- exact FOOD_COMPOSITION_APPLICABILITY_V2 lower-level formula;
+- exact planner-v0.3 for Step 10-B;
+- historical read / mutable active-state boundary frozen.
+
+Status:
+STEP10_CONTRACT_GATE_DEEP_CORRECTION_VERIFICATION_PENDING.
+
+No runtime/schema/production data changed.
+
 ## PR94 corrected Contract Gate review-ready — 2026-09-26
 
 Corrected semantic head:

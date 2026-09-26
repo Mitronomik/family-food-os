@@ -1,5 +1,30 @@
 # Handoff
 
+## PR94 deep-review blocker correction — 2026-09-26
+
+Deep review #5326074689 superseded the prior READY receipt and found three
+additional Contract Gate gaps:
+
+1. canonical V2 nutrient request set was not frozen;
+2. lower-level FOOD_COMPOSITION_APPLICABILITY_V2 did not version the new
+   recipe-level scaling/aggregation formula;
+3. Planner version remained "planner-v0.3 or equivalent" rather than exact
+   persisted replay identity.
+
+Correction implemented:
+
+- RECIPE_V2_NUTRIENT_SET_V1 = exact 54-code RU_NUTRIENT_REGISTRY_V2 snapshot;
+- every requested code is AVAILABLE or UNKNOWN; omission is not unknown;
+- RECIPE_COMPOSITION_NUTRITION_V1 separately versions Recipe Nutrition scaling,
+  aggregation, optional handling, per-serving division and rounding;
+- V1 is bounded to required rows and untransformed INPUT-basis Composition;
+- historical reads do not depend on later FoodIngredient.is_active;
+- Step 10-B Planner version is exactly planner-v0.3;
+- meal-role compatibility remains exactly meal-role-recipe-v2.
+
+Current status: corrected semantic verification pending.
+No runtime/schema/production mutation occurred.
+
 ## PR94 corrected Contract Gate review-ready — 2026-09-26
 
 Corrected semantic head:

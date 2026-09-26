@@ -51,7 +51,7 @@ Owns:
 
 - Planner use of the neutral Nutrition consumption/readiness projection;
 - explicit V2 exact-energy readiness semantics;
-- Planner algorithm version advance;
+- exact Planner algorithm version `planner-v0.3`;
 - MealPlan/Serving consumption of the same neutral projection;
 - cross-context integration tests.
 
@@ -162,11 +162,13 @@ food_recipe_ingredient_composition_bindings
 Minimum fields:
 
 ~~~text
-recipe_ingredient_id          PK / FK → food_recipe_ingredients.id
-composition_version_id        FK → food_composition_versions.id
-registry_version              FK → nutrient_registry_snapshots.version
-calculation_policy_version    exact FOOD_COMPOSITION_APPLICABILITY_V2
-created_at                    UTC instant
+recipe_ingredient_id                PK / FK → food_recipe_ingredients.id
+composition_version_id              FK → food_composition_versions.id
+registry_version                    FK → nutrient_registry_snapshots.version
+nutrient_set_version                exact RECIPE_V2_NUTRIENT_SET_V1
+composition_calculation_version     exact FOOD_COMPOSITION_APPLICABILITY_V2
+recipe_calculation_version          exact RECIPE_COMPOSITION_NUTRITION_V1
+created_at                          UTC instant
 ~~~
 
 Exact runtime names may vary only if semantics remain identical.
@@ -260,17 +262,179 @@ input_state = INPUT
 registry:
 RU_NUTRIENT_REGISTRY_V2
 
-calculation_policy_version:
+nutrient_set_version:
+RECIPE_V2_NUTRIENT_SET_V1
+
+composition_calculation_version:
 FOOD_COMPOSITION_APPLICABILITY_V2
+
+recipe_calculation_version:
+RECIPE_COMPOSITION_NUTRITION_V1
 ~~~
 
 The publisher resolves UUIDs from accepted semantic identities and never hardcodes database-specific UUIDs.
 
-The policy value is the existing
+The lower-level Composition policy is the existing
 `APPLICABILITY_CALCULATION_VERSION = "FOOD_COMPOSITION_APPLICABILITY_V2"`.
-Step 10-A does not invent a second recipe-specific alias for the same calculator.
-Every accepted calculation must return
+Every accepted Composition calculation must return
 `CompositionResult.calculation_version == "FOOD_COMPOSITION_APPLICABILITY_V2"`.
+
+The recipe-level scaling/aggregation policy is separately versioned as
+`RECIPE_COMPOSITION_NUTRITION_V1`; it is not an alias for the lower-level
+Composition calculator.
+
+The canonical request-set identity is
+`RECIPE_V2_NUTRIENT_SET_V1`.
+
+### Canonical Recipe nutrient request set
+
+Step 10-A freezes one exact request set:
+
+`RECIPE_V2_NUTRIENT_SET_V1`
+
+It is the complete 54-code `RU_NUTRIENT_REGISTRY_V2` snapshot:
+
+~~~text
+ALPHA_LINOLENIC_ACID
+BETA_CAROTENE
+BIOTIN
+CALCIUM
+CARBOHYDRATE_AVAILABLE
+CARBOHYDRATE_BY_DIFFERENCE
+CHLORIDE
+CHOLESTEROL
+CHOLINE_TOTAL
+CHROMIUM
+COPPER
+DHA
+ENERGY_KCAL
+EPA
+FAT_TOTAL
+FATTY_ACIDS_MONOUNSATURATED_TOTAL
+FATTY_ACIDS_POLYUNSATURATED_TOTAL
+FATTY_ACIDS_SATURATED_TOTAL
+FATTY_ACIDS_TRANS_TOTAL
+FIBER_TOTAL_DIETARY
+FLUORIDE
+FOLATE_DFE
+FOLATE_TOTAL
+FOLIC_ACID
+IODINE
+IRON
+LINOLEIC_ACID
+MAGNESIUM
+MANGANESE
+MOLYBDENUM
+NIACIN
+NIACIN_EQUIVALENT
+PANTOTHENIC_ACID
+PHOSPHORUS
+POTASSIUM
+PROTEIN
+RETINOL
+RIBOFLAVIN
+SELENIUM
+SODIUM
+STARCH
+SUGARS_TOTAL
+THIAMIN
+VITAMIN_A_RAE
+VITAMIN_A_RE
+VITAMIN_B12
+VITAMIN_B6
+VITAMIN_C
+VITAMIN_D_D2_D3
+VITAMIN_E_ALPHA_TOCOPHEROL
+VITAMIN_E_TOCOPHEROL_EQUIVALENT
+VITAMIN_K_PHYLLOQUINONE
+WATER
+ZINC
+~~~
+
+The tuple is versioned project truth. Runtime may encode it as an immutable
+domain constant and resolve each definition through the existing version-aware
+registry reader. A new registry-list write or selector is not required.
+
+Canonical Recipe Nutrition always requests this complete set from every bound
+Composition. A nutrient is represented as AVAILABLE or UNKNOWN; omission from
+the request is not a way to represent unknown.
+
+Result completeness/status is defined against
+`RECIPE_V2_NUTRIENT_SET_V1`, not against the subset that happens to have numeric
+source values.
+
+In particular WATER, CARBOHYDRATE_AVAILABLE and
+CARBOHYDRATE_BY_DIFFERENCE are requested even when their values are unknown.
+The 17 known Step 9 butter values therefore remain available while the other
+requested concepts remain explicit UNKNOWN values/issues.
+
+A future registry expansion or different product request set requires a new
+nutrient-set version; it does not silently change
+`RECIPE_V2_NUTRIENT_SET_V1`.
+
+### Recipe-level calculation policy
+
+Step 10-A freezes the derived Recipe Nutrition formula as:
+
+`RECIPE_COMPOSITION_NUTRITION_V1`.
+
+This version owns the layer above FoodComposition calculation.
+
+For every required RecipeIngredient:
+
+1. resolve exact `recipe_input_mass_g`;
+2. calculate its pinned Composition using
+   `RECIPE_V2_NUTRIENT_SET_V1` and
+   `FOOD_COMPOSITION_APPLICABILITY_V2`;
+3. require positive `CompositionResult.input_mass_g`;
+4. scale each returned nutrient amount by the exact Decimal factor
+   `recipe_input_mass_g / CompositionResult.input_mass_g`;
+5. preserve UNKNOWN as unknown — no zero/substitution/fallback;
+6. retain the exact binding and lower-level calculation evidence.
+
+For `RECIPE_COMPOSITION_NUTRITION_V1` the bound Composition must be an
+untransformed INPUT-basis authority:
+
+- root `input_state = INPUT`;
+- calculated `output_mass_state = INPUT`;
+- `output_mass_g = input_mass_g`;
+- no root transformation steps.
+
+ATOMIC and exact COMPOSITE authorities may be consumed only when those conditions
+hold. A transformed/yielded root requires a future separately versioned recipe
+policy; Step 10-A does not infer how RecipeIngredient input mass maps to a
+different output mass state.
+
+Across required rows, each nutrient total is:
+
+- UNKNOWN if any required row is UNKNOWN for that nutrient;
+- otherwise the exact Decimal sum of scaled required-row amounts.
+
+Optional RecipeIngredients are **not supported by
+`RECIPE_COMPOSITION_NUTRITION_V1`**. A RecipeVersion containing an optional row
+fails closed for the Step 10-A canonical V2 path. Optional-row V2 semantics
+require a later policy version; they are not silently ignored or included.
+
+Per-base-serving values divide the required-row total by the exact positive
+`RecipeVersion.base_servings`.
+
+All recipe-level arithmetic uses Decimal only, private precision 80 and
+`ROUND_HALF_UP`. The lower-level Composition result keeps its own accepted
+rounding contract. Recipe row scaling, required-row aggregation and
+per-base-serving division are not quantized at intermediate steps; canonical
+Recipe totals and per-base-serving values quantize once at the Recipe result
+boundary to six decimal places (`0.000001`).
+
+The canonical Recipe result must retain:
+
+- `nutrient_set_version = RECIPE_V2_NUTRIENT_SET_V1`;
+- `composition_calculation_version = FOOD_COMPOSITION_APPLICABILITY_V2`;
+- `recipe_calculation_version = RECIPE_COMPOSITION_NUTRITION_V1`;
+- exact binding identities.
+
+Changing request set, row scaling, unknown propagation, optional handling,
+aggregation, division or rounding requires a new recipe-level policy/version and
+cannot replay as V1.
 
 ## 12. DECISION — fresh, replay and conflict semantics
 
@@ -289,10 +453,13 @@ re-resolve and validate from its own active transaction:
 - exact FoodIngredient identity and `is_active=true`;
 - exact FoodCompositionVersion identity/version and matching FoodIngredient;
 - exact registry `RU_NUTRIENT_REGISTRY_V2`;
+- exact nutrient set `RECIPE_V2_NUTRIENT_SET_V1`;
 - sealed NutrientVector dependencies;
-- deterministic applicability-aware Composition calculation;
+- deterministic applicability-aware Composition calculation over the complete
+  frozen 54-code request set;
 - `CompositionResult.calculation_version ==
-  "FOOD_COMPOSITION_APPLICABILITY_V2"`.
+  "FOOD_COMPOSITION_APPLICABILITY_V2"`;
+- exact recipe policy `RECIPE_COMPOSITION_NUTRITION_V1`.
 
 No classification may rely on a stale result produced by an earlier independent
 read scope.
@@ -310,6 +477,9 @@ Allowed only when all of the following hold:
 - sealed V2 calculation succeeds inside the binding UoW;
 - the calculation result reports exactly
   `FOOD_COMPOSITION_APPLICABILITY_V2`;
+- the request set is exactly `RECIPE_V2_NUTRIENT_SET_V1`;
+- the recipe calculation policy is exactly
+  `RECIPE_COMPOSITION_NUTRITION_V1`;
 - binding is absent.
 
 Then exactly one binding is inserted by that same UoW and committed once.
@@ -318,12 +488,17 @@ Then exactly one binding is inserted by that same UoW and committed once.
 
 Allowed only after the same in-UoW dependency re-resolution above succeeds and
 the existing binding resolves to the same RecipeIngredient, FoodIngredient,
-CompositionVersion, registry version and exact calculation policy
-`FOOD_COMPOSITION_APPLICABILITY_V2`.
+CompositionVersion, registry version, exact nutrient-set version,
+Composition calculation version and recipe calculation version:
+
+- `RECIPE_V2_NUTRIENT_SET_V1`;
+- `FOOD_COMPOSITION_APPLICABILITY_V2`;
+- `RECIPE_COMPOSITION_NUTRITION_V1`.
 
 The deterministic calculation is re-evaluated against the pinned immutable
-Composition/vector authority and its returned calculation version must match the
-persisted policy.
+Composition/vector authority using the complete frozen request set. Its returned
+Composition calculation version and the recipe-level policy must match the
+persisted binding authority.
 
 Replay performs zero writes.
 
@@ -338,7 +513,8 @@ dependency is unavailable/corrupt; if V2 calculation fails; or if the returned
 calculation version is not exactly
 `FOOD_COMPOSITION_APPLICABILITY_V2`.
 
-There is no latest-Composition fallback and no arbitrary nonblank policy value.
+There is no latest-Composition fallback, arbitrary request set or arbitrary
+nonblank policy value.
 
 ## 13. DECISION — general Nutrition authority resolution
 
@@ -366,7 +542,9 @@ Fail closed.
 
 Step 10 does not silently mix some V2 Composition rows with some legacy current-profile rows in one required recipe total.
 
-Optional RecipeIngredients remain separate optional contributions.
+Under `RECIPE_COMPOSITION_NUTRITION_V1`, any optional RecipeIngredient makes
+the canonical V2 path unsupported/fail-closed. Optional-row composition semantics
+are intentionally deferred to a future recipe calculation policy.
 
 ## 14. DECISION — exact row mass authority
 
@@ -387,13 +565,15 @@ The result must preserve at least:
 
 - RecipeVersion identity;
 - registry version;
-- calculation policy version;
+- nutrient-set version `RECIPE_V2_NUTRIENT_SET_V1`;
+- Composition calculation version `FOOD_COMPOSITION_APPLICABILITY_V2`;
+- Recipe calculation version `RECIPE_COMPOSITION_NUTRITION_V1`;
 - exact binding identities;
-- required total nutrient values by canonical nutrient code;
-- per-base-serving nutrient values;
-- explicit unknown nutrients;
+- all 54 requested canonical nutrient codes;
+- required total nutrient values or explicit UNKNOWN per code;
+- per-base-serving nutrient values or explicit UNKNOWN per code;
 - calculation issues/warnings;
-- deterministic status.
+- deterministic status against the frozen nutrient set.
 
 Exact class/function names are implementation details.
 
@@ -469,11 +649,15 @@ algorithm.
 
 This changes candidate Nutrition eligibility semantics for the new authority path.
 
-Therefore PlannerConfig.version must advance from planner-v0.2 to a new explicit
-version, expected planner-v0.3 or an equivalent reviewed identifier.
+Therefore Step 10-B freezes the exact Planner algorithm version as:
 
-PlannerConfig.compatibility_version remains meal-role-recipe-v2 because meal-role
-compatibility does not change.
+`planner-v0.3`
+
+`PlannerConfig.version`, Planner traces and every MealPlan created by Step 10-B
+must use exactly `planner-v0.3`.
+
+`PlannerConfig.compatibility_version` remains exactly
+`meal-role-recipe-v2` because MealRole compatibility does not change.
 
 Existing production selected outputs must remain unchanged for the accepted
 fixture even though new traces correctly record the new planner version.
@@ -609,6 +793,13 @@ not open independent read/write connections while it is active.
 An external preflight may fail early, but its observations never substitute for
 the authoritative in-UoW recheck.
 
+The `is_active=true` requirement is a **binding publication / replay guard**.
+After a binding has been successfully published, ordinary historical canonical
+Recipe Nutrition reads use the pinned immutable Recipe/Composition/vector/version
+authority and do not become unavailable merely because
+`FoodIngredient.is_active` later changes. Deactivation affects future
+publication/selection policy, not replay of already pinned historical nutrition.
+
 Injected failure after any attempted binding write must roll back the entire
 binding command. The failed operation leaves no binding row or partial state.
 
@@ -631,8 +822,11 @@ vector and registry history is read-only in this command.
 | V1 registry/history | unchanged |
 | V2 registry | unchanged |
 | Recipe/Composition ownership | unchanged; new binding is Nutrition-owned derived authority |
+| Recipe V2 nutrient set | exact RECIPE_V2_NUTRIENT_SET_V1 / 54 codes |
+| Composition calculation version | exact FOOD_COMPOSITION_APPLICABILITY_V2 |
+| Recipe calculation version | exact RECIPE_COMPOSITION_NUTRITION_V1 |
 | Planner compatibility map | unchanged |
-| Planner algorithm version | advances explicitly for new V2 readiness semantics |
+| Planner algorithm version | exact planner-v0.3 in Step 10-B |
 | MealPattern selections | unchanged |
 | production candidate pool | unchanged by Step 9 Recipe |
 | WATER / canonical carbohydrate | remain unknown |
@@ -700,7 +894,31 @@ Runtime Step 10 must prove at least:
 48. calculated CompositionResult.calculation_version must equal the persisted
     policy value;
 49. injected late binding write failure rolls back the binding and leaves all
-    Recipe/Composition/Nutrition dependencies unchanged.
+    Recipe/Composition/Nutrition dependencies unchanged;
+50. canonical V2 Recipe Nutrition requests exactly the 54 codes in
+    RECIPE_V2_NUTRIENT_SET_V1, never merely the numeric codes already present;
+51. WATER, CARBOHYDRATE_AVAILABLE and CARBOHYDRATE_BY_DIFFERENCE are present in
+    the canonical request/result and remain UNKNOWN when unavailable;
+52. request-set omission cannot turn a sparse Step 9 result into COMPLETE;
+53. canonical result carries RECIPE_V2_NUTRIENT_SET_V1,
+    FOOD_COMPOSITION_APPLICABILITY_V2 and RECIPE_COMPOSITION_NUTRITION_V1;
+54. recipe scaling uses exact recipe_input_mass_g / CompositionResult.input_mass_g;
+55. UNKNOWN in any required row propagates to UNKNOWN for that nutrient total;
+56. required-row sums and per-serving division use Decimal-only V1 policy and
+    quantize once at the recipe result boundary to six decimals;
+57. a RecipeVersion with any optional row fails closed under
+    RECIPE_COMPOSITION_NUTRITION_V1;
+58. a transformed/yielded root or non-INPUT output state fails closed under
+    RECIPE_COMPOSITION_NUTRITION_V1;
+59. changing request set, scaling/aggregation/rounding policy or recipe calculation
+    version cannot replay as the same authority;
+60. historical canonical read after FoodIngredient deactivation still reproduces
+    the already-pinned Recipe Nutrition result;
+61. binding publication/replay after FoodIngredient deactivation still fails
+    closed as defined by the publication guard;
+62. Step 10-B uses exactly planner-v0.3 in Planner traces;
+63. Step 10-B-created MealPlan.config_version is exactly planner-v0.3;
+64. Step 10-B compatibility_version remains exactly meal-role-recipe-v2.
 
 ## 26. Verification tier
 
@@ -710,7 +928,9 @@ delivered as two bounded runtime PRs.
 Step 10-A review-ready evidence must include migration/binding/canonical-Nutrition
 checks and broad regression required by its authoritative data publication,
 including the post-preflight deactivation race, exact-replay in-UoW dependency
-recheck, exact calculation-policy identity, and injected late binding rollback.
+recheck, exact Composition/Recipe calculation-policy identities, frozen 54-code
+request-set semantics, recipe scaling/rounding behavior, historical-read
+independence from mutable active state, and injected late binding rollback.
 
 Step 10-B review-ready evidence must include Planner/MealPlan integration checks,
 planner versioning evidence and broad regression for changed algorithm behavior.
