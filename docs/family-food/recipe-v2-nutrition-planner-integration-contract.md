@@ -25,6 +25,40 @@ The target is not to turn the Step 9 butter portion into a standalone meal.
 
 The production Step 9 Recipe remains inactive in Step 10.
 
+## 3. DECISION — runtime delivery is split into Step 10-A and Step 10-B
+
+The accepted Step 10 capability is one architectural sequence but not one runtime PR.
+
+### Step 10-A — Composition-backed Recipe Nutrition Authority
+
+Owns:
+
+- migration 0039 binding persistence;
+- immutable RecipeIngredient → exact FoodCompositionVersion binding;
+- one exact production binding for the Step 9 butter row;
+- canonical V2 RecipeVersion Nutrition calculation;
+- neutral Nutrition consumption projection;
+- legacy NutritionService preservation.
+
+Does not change Planner or MealPlan behavior.
+
+### Step 10-B — Planner / MealPlan Consumption Integration
+
+Starts only after Step 10-A is reviewed and merged.
+
+Owns:
+
+- Planner use of the neutral Nutrition consumption/readiness projection;
+- explicit V2 exact-energy readiness semantics;
+- Planner algorithm version advance;
+- MealPlan/Serving consumption of the same neutral projection;
+- cross-context integration tests.
+
+Adds no migration and no new production Recipe activation.
+
+This split keeps schema/publication risk separate from Planner algorithm behavior and
+preserves the project rule that one implementation PR has one bounded goal.
+
 ## 2. FACT — accepted base
 
 PR #93 is merged into main at d0a1a217d3e23b0b930f14de37405a7ca7ba3d16.
@@ -47,7 +81,7 @@ Migration head is 0038_transformation_applicability.
 
 0033_recipe_template_catalogue remains reserved and unconsumed.
 
-## 3. FACT — current general Nutrition cannot consume Step 9 authority safely
+## 4. FACT — current general Nutrition cannot consume Step 9 authority safely
 
 Current NutritionService.recipe_version() resolves RecipeIngredient nutrition through the legacy current-profile / B1 assessment path.
 
@@ -61,7 +95,7 @@ Therefore Step 10 must not:
 - reinterpret legacy current-profile semantics;
 - fill missing nutrients from School2022 declared recipe totals.
 
-## 4. FACT — current Planner composition
+## 5. FACT — current Planner composition
 
 Current authoritative Planner composition performs:
 
@@ -76,7 +110,7 @@ Recipe activation is therefore a material Planner input change.
 
 The pure Planner also rejects candidates when recipe classification is incompatible with MealRole or when its current bounded Nutrition contract is unavailable.
 
-## 5. FACT — Recipe classification is not MealRole
+## 6. FACT — Recipe classification is not MealRole
 
 Canonical architecture freezes:
 
@@ -90,7 +124,7 @@ The Step 9 Recipe has meal_type_code = other.
 
 No accepted evidence establishes that a 10 g butter portion is a standalone breakfast, lunch, dinner or snack.
 
-## 6. FACT — RecipeIngredient does not pin Composition
+## 7. FACT — RecipeIngredient does not pin Composition
 
 The persisted RecipeIngredient stores FoodIngredient identity, exact source quantity/unit and source/normalization metadata.
 
@@ -102,7 +136,7 @@ Selecting latest, current, or version 1 by convention in general Nutrition would
 
 That is not acceptable for deterministic replay.
 
-## 7. DECISION — Step 10 does not activate the Step 9 Recipe
+## 8. DECISION — Step 10 does not activate the Step 9 Recipe
 
 The Step 9 handoff allowed Step 10 to consider activation and V2 Planner integration.
 
@@ -114,7 +148,7 @@ Therefore Step 10 integrates reusable V2 Recipe Nutrition and the Planner consum
 
 A later bounded production-data operation may activate a Recipe only when its suitability and Nutrition authority are independently ready.
 
-## 8. DECISION — immutable RecipeIngredient composition binding
+## 9. DECISION — immutable RecipeIngredient composition binding
 
 Step 10 runtime requires a new dependent persisted authority concept:
 
@@ -148,7 +182,7 @@ Binding invariants:
 
 A future correction may not repoint old history silently. It requires a separately reviewed immutable-history strategy.
 
-## 9. DECISION — migration 0039
+## 10. DECISION — migration 0039
 
 Step 10 runtime is expected to add migration id 0039, named approximately:
 
@@ -165,7 +199,7 @@ Rules:
 
 If the bounded dependent-table model proves insufficient, STOP and amend this Contract Gate before runtime work continues.
 
-## 10. DECISION — first production binding
+## 11. DECISION — first production binding
 
 Step 10 runtime publishes exactly one production binding:
 
@@ -192,7 +226,7 @@ RU_NUTRIENT_REGISTRY_V2
 
 The publisher resolves UUIDs from accepted semantic identities and never hardcodes database-specific UUIDs.
 
-## 11. DECISION — fresh, replay and conflict semantics
+## 12. DECISION — fresh, replay and conflict semantics
 
 ### Fresh
 
@@ -223,7 +257,7 @@ Fail closed if identity, source quantity/unit, food/composition relation, regist
 
 There is no latest-Composition fallback.
 
-## 12. DECISION — general Nutrition authority resolution
+## 13. DECISION — general Nutrition authority resolution
 
 Legacy V1 behavior remains accepted historical behavior.
 
@@ -251,7 +285,7 @@ Step 10 does not silently mix some V2 Composition rows with some legacy current-
 
 Optional RecipeIngredients remain separate optional contributions.
 
-## 13. DECISION — exact row mass authority
+## 14. DECISION — exact row mass authority
 
 Step 10 adds no new quantity-conversion policy.
 
@@ -262,7 +296,7 @@ Step 10 adds no new quantity-conversion policy.
 
 The Step 9 row is exact 10 g and needs no conversion evidence.
 
-## 14. DECISION — canonical V2 RecipeVersion result
+## 15. DECISION — canonical V2 RecipeVersion result
 
 Composition-backed Recipe Nutrition must expose canonical nutrient truth rather than only the legacy five-field projection.
 
@@ -280,7 +314,7 @@ The result must preserve at least:
 
 Exact class/function names are implementation details.
 
-## 15. DECISION — truthful compatibility projection
+## 16. DECISION — truthful compatibility projection
 
 For the Step 9 10 g Recipe, accepted known values include:
 
@@ -306,7 +340,7 @@ If a compatibility projection into legacy NutritionValues exists:
 
 A sparse V2 result must not be mislabeled as legacy five-field COMPLETE.
 
-## 16. DECISION — preserve NutritionService.recipe_version()
+## 17. DECISION — preserve NutritionService.recipe_version()
 
 Existing callers of NutritionService.recipe_version() retain accepted historical behavior in Step 10.
 
@@ -314,7 +348,7 @@ Step 10 adds a new explicit canonical/composition operation or equivalent author
 
 This protects historical PR6 calculations, B1 assessment semantics, current-profile behavior and accepted audit/test receipts.
 
-## 17. DECISION — Planner gets an explicit V2-safe readiness projection
+## 18. DECISION — Planner gets an explicit V2-safe readiness projection
 
 Planner currently needs exact energy per serving for its bounded algorithm.
 
@@ -361,7 +395,7 @@ compatibility does not change.
 Existing production selected outputs must remain unchanged for the accepted
 fixture even though new traces correctly record the new planner version.
 
-## 18. DECISION — MealPlan / Serving compatibility must not split from Planner
+## 19. DECISION — MealPlan / Serving compatibility must not split from Planner
 
 Planner eligibility and downstream Serving nutrition must consume the same
 canonical authority without pretending sparse V2 data is legacy-complete.
@@ -390,7 +424,7 @@ For a fully bound V2 RecipeVersion:
 - canonical V2 values remain available separately and are not collapsed into the
   five-field compatibility projection.
 
-Planner uses the explicit V2-safe exact-energy readiness from section 17.
+Planner uses the explicit V2-safe exact-energy readiness from section 18.
 MealPlan/Serving uses the compatibility values/status to scale known values while
 preserving unknown propagation.
 
@@ -426,7 +460,7 @@ canonical V2 Recipe Nutrition
 Known nutrients scale exactly; unknown carbohydrate remains unknown; aggregate
 legacy status remains truthful rather than being upgraded to COMPLETE.
 
-## 19. DECISION — no meal-role compatibility expansion
+## 20. DECISION — no meal-role compatibility expansion
 
 Step 10 does not modify:
 
@@ -440,7 +474,7 @@ MealTypeCode.OTHER does not become breakfast, lunch, dinner or snack.
 
 No butter-specific meal-role exception is permitted.
 
-## 20. DECISION — production candidate pool remains unchanged by Step 9 Recipe
+## 21. DECISION — production candidate pool remains unchanged by Step 9 Recipe
 
 Step 10 does not activate SCHOOL2022_53_19Z_BUTTER_PORTION.
 
@@ -454,7 +488,7 @@ Planner integration is proven with bounded test fixtures using a compatible acti
 
 Test fixtures are not production catalogue publication.
 
-## 21. DECISION — future activation gate
+## 22. DECISION — future activation gate
 
 A later production Recipe activation requires:
 
@@ -466,7 +500,7 @@ A later production Recipe activation requires:
 
 Nutrition calculation success alone never implies activation.
 
-## 22. Transaction boundary
+## 23. Transaction boundary
 
 Step 10 requires no binding-plus-activation cross-context transaction because production activation is out of scope.
 
@@ -476,7 +510,7 @@ Injected failure after an attempted binding write must roll back the binding pub
 
 Existing RecipeVersion and Composition history is read-only.
 
-## 23. Preservation matrix
+## 24. Preservation matrix
 
 | Accepted truth | Step 10 requirement |
 | --- | --- |
@@ -499,7 +533,7 @@ Existing RecipeVersion and Composition history is read-only.
 | School2022 declared nutrition | reference-only |
 | AI_ENABLED=false | supported |
 
-## 24. Adversarial acceptance tests
+## 25. Adversarial acceptance tests
 
 Runtime Step 10 must prove at least:
 
@@ -548,11 +582,18 @@ Runtime Step 10 must prove at least:
 41. no API/UI/Retail/Auth/PostgreSQL/AI scope occurs;
 42. AI_ENABLED=false.
 
-## 25. Verification tier
+## 26. Verification tier
 
-Step 10 is a cross-context Nutrition / persistence / Planner integration.
+Step 10 is a cross-context Nutrition / persistence / Planner integration,
+delivered as two bounded runtime PRs.
 
-Runtime review-ready evidence must include:
+Step 10-A review-ready evidence must include migration/binding/canonical-Nutrition
+checks and broad regression required by its authoritative data publication.
+
+Step 10-B review-ready evidence must include Planner/MealPlan integration checks,
+planner versioning evidence and broad regression for changed algorithm behavior.
+
+Across the two runtime PRs, required evidence includes:
 
 - migration fresh/upgrade/failure/replay tests;
 - binding domain/repository tests;
@@ -572,7 +613,7 @@ Runtime review-ready evidence must include:
 
 A later state/docs-only receipt does not invalidate byte-identical verified runtime evidence.
 
-## 26. Explicit non-goals
+## 27. Explicit non-goals
 
 Step 10 does not authorize:
 
@@ -597,23 +638,40 @@ Step 10 does not authorize:
 - Auth / PostgreSQL;
 - AI authority.
 
-## 27. Runtime handoff after gate merge
+## 28. Runtime handoff after gate merge
 
-After this gate is reviewed and merged, a separate explicit authorization may implement:
+After this gate is reviewed and merged, runtime proceeds only by separate explicit
+authorization in this order:
+
+### Step 10-A
 
 ~~~text
 0039 binding persistence
 → exact Step 9 binding publication
 → canonical V2 RecipeVersion Nutrition operation
-→ Planner composition seam
+→ neutral consumption projection
 → preservation verification
 ~~~
 
-The production Step 9 Recipe stays inactive.
+Stop after Step 10-A review/merge.
 
-After runtime review/merge, stop before any real Recipe activation or next production data publication.
+### Step 10-B
 
-## 28. Stop boundary
+~~~text
+Planner readiness projection
+→ planner version advance
+→ MealPlan/Serving neutral-consumption integration
+→ cross-context regression
+~~~
+
+Step 10-B has no migration and no production Recipe activation.
+
+The production Step 9 Recipe stays inactive through both substeps.
+
+After Step 10-B review/merge, stop before any real Recipe activation or next
+production data publication.
+
+## 29. Stop boundary
 
 This PR is docs/state only.
 
@@ -623,4 +681,5 @@ After review-ready delivery:
 
 1. stop;
 2. obtain review and merge of this gate;
-3. runtime Step 10 requires separate explicit authorization.
+3. Step 10-A runtime requires separate explicit authorization;
+4. Step 10-B remains unauthorized until Step 10-A is reviewed and merged.
