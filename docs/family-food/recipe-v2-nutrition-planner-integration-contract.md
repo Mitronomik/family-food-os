@@ -314,11 +314,12 @@ Step 10 adds a new explicit canonical/composition operation or equivalent author
 
 This protects historical PR6 calculations, B1 assessment semantics, current-profile behavior and accepted audit/test receipts.
 
-## 17. DECISION — Planner gets an explicit V2-safe projection
+## 17. DECISION — Planner gets an explicit V2-safe readiness projection
 
-Planner v0.2 currently needs exact energy per serving for its bounded algorithm.
+Planner currently needs exact energy per serving for its bounded algorithm.
 
-Step 10 may add an application-level Nutrition projection that distinguishes:
+Step 10 adds an explicit Nutrition consumption/readiness projection that
+distinguishes:
 
 ~~~text
 full nutrient completeness
@@ -335,40 +336,74 @@ For composition-backed authority, Planner energy is usable only when:
 
 Unknown carbohydrate and WATER remain unknown.
 
-Step 10 must not globally reinterpret legacy NutritionStatus.INCOMPLETE recipes as Planner-eligible just because a kcal value exists.
+The PlannerCandidate boundary may add an explicit readiness/authority field or
+equivalent reviewed value. The additive default for existing callers must preserve
+the current legacy rule exactly.
 
-Existing legacy candidate behavior remains unchanged.
+Existing legacy candidates continue to treat NutritionStatus.INCOMPLETE as
+NUTRITION_UNAVAILABLE. Step 10 must not globally reinterpret them as eligible
+merely because a kcal number exists.
+
+A composition-backed candidate may carry truthful canonical/legacy status
+INCOMPLETE while separately proving exact-energy readiness for the bounded Planner
+algorithm.
+
+### Planner versioning
+
+This changes candidate Nutrition eligibility semantics for the new authority path.
+
+Therefore PlannerConfig.version must advance from planner-v0.2 to a new explicit
+version, expected planner-v0.3 or an equivalent reviewed identifier.
+
+PlannerConfig.compatibility_version remains meal-role-recipe-v2 because meal-role
+compatibility does not change.
+
+Existing production selected outputs must remain unchanged for the accepted
+fixture even though new traces correctly record the new planner version.
 
 ## 18. DECISION — MealPlan / Serving compatibility must not split from Planner
 
 Planner eligibility and downstream Serving nutrition must consume the same
 canonical authority without pretending sparse V2 data is legacy-complete.
 
-Step 10 therefore requires a truthful compatibility projection from the canonical
-composition-backed RecipeVersion result into the existing RecipeVersionNutrition
-shape used by MealPlan/Serving calculations.
+Step 10 must not fabricate legacy current-profile contributions merely to fit the
+existing RecipeVersionNutrition class.
+
+Instead, Nutrition exposes a neutral immutable consumption projection (exact name
+is an implementation detail) with at least:
+
+- exact RecipeVersion id;
+- compatibility NutritionValues for known legacy concepts;
+- truthful legacy completeness status;
+- canonical authority/readiness metadata;
+- registry/calculation-policy identity.
+
+Both legacy RecipeVersionNutrition and the new canonical V2 result can be adapted
+to this small consumption contract without changing their underlying authority.
 
 For a fully bound V2 RecipeVersion:
 
-- version identity must remain the exact RecipeVersion id;
+- version identity remains exact;
 - known kcal/protein/fat/fiber values project exactly;
 - carbohydrate stays None when the canonical concept is unavailable;
-- status remains INCOMPLETE under the existing five-field completeness contract
-  when any required legacy field is unknown;
-- warnings/issues retain the reason for incomplete legacy projection.
+- legacy completeness remains INCOMPLETE when a required legacy field is unknown;
+- canonical V2 values remain available separately and are not collapsed into the
+  five-field compatibility projection.
 
-This projection is not the Planner eligibility decision.
+Planner uses the explicit V2-safe exact-energy readiness from section 17.
+MealPlan/Serving uses the compatibility values/status to scale known values while
+preserving unknown propagation.
 
-Planner uses the explicit V2-safe exact-energy readiness defined above.
-MealPlan/Serving may use the truthful RecipeVersionNutrition compatibility
-projection to scale known values while preserving unknown propagation.
+The MealPlan calculation boundary may be generalized from the concrete
+RecipeVersionNutrition type to this narrow read-only consumption contract.
+Existing callers and results must remain behavior-compatible.
 
 This prevents a split-brain state where Planner can select a composition-backed
 Recipe but Serving/day/week Nutrition cannot represent its accepted truth.
 
-No MealPlan schema change is required in Step 10 because the immutable
-RecipeIngredient Composition binding and calculation-policy pin make the
-RecipeVersion Nutrition input reproducible for this bounded authority model.
+No MealPlan persistence schema change is required in Step 10 because the immutable
+RecipeIngredient Composition binding and calculation-policy pin make the bounded
+RecipeVersion Nutrition authority reproducible.
 
 If implementation proves historical MealPlan replay additionally requires a
 separate persisted nutrition-authority snapshot, STOP and amend this Contract Gate
@@ -380,15 +415,16 @@ A bounded synthetic compatible active Recipe fixture must demonstrate the full
 technical chain:
 
 ~~~text
-Planner candidate composition
-→ exact V2 energy readiness
+canonical V2 Recipe Nutrition
+→ neutral consumption projection
+→ Planner exact-energy readiness
 → MealPlan COOK_RECIPE event
 → Serving scaling
 → member day/week Nutrition
 ~~~
 
 Known nutrients scale exactly; unknown carbohydrate remains unknown; aggregate
-status remains truthful rather than being upgraded to COMPLETE.
+legacy status remains truthful rather than being upgraded to COMPLETE.
 
 ## 19. DECISION — no meal-role compatibility expansion
 
@@ -456,6 +492,7 @@ Existing RecipeVersion and Composition history is read-only.
 | V1 registry/history | unchanged |
 | V2 registry | unchanged |
 | Planner compatibility map | unchanged |
+| Planner algorithm version | advances explicitly for new V2 readiness semantics |
 | MealPattern selections | unchanged |
 | production candidate pool | unchanged by Step 9 Recipe |
 | WATER / canonical carbohydrate | remain unknown |
@@ -496,16 +533,20 @@ Runtime Step 10 must prove at least:
 28. production Step 9 Recipe remains inactive;
 29. production Step 9 Recipe stays outside authoritative Planner candidates;
 30. ROLE_COMPATIBILITY_V1 is unchanged;
-31. Planner compatibility version is unchanged;
-32. accepted production Planner fixture outputs remain unchanged;
-33. a synthetic V2-bound compatible Recipe selected by Planner can be represented
-    by MealPlan/Serving Nutrition through the truthful compatibility projection;
-34. Serving scaling preserves exact known kcal/protein/fat/fiber values;
-35. missing canonical carbohydrate remains unknown through Serving/day/week aggregation;
-36. sparse V2 MealPlan Nutrition is not upgraded to legacy COMPLETE;
-37. no Recipe/RecipeVersion/source-corpus publication occurs;
-38. no API/UI/Retail/Auth/PostgreSQL/AI scope occurs;
-39. AI_ENABLED=false.
+31. Planner compatibility version remains meal-role-recipe-v2;
+32. Planner config/version advances explicitly for the new Nutrition eligibility semantics;
+33. accepted production Planner selected outputs remain unchanged;
+34. legacy PlannerCandidate callers with no new readiness authority retain the old
+    NutritionStatus.INCOMPLETE rejection behavior;
+35. a synthetic V2-bound compatible Recipe selected by Planner can be represented
+    by MealPlan/Serving through the neutral Nutrition consumption projection;
+36. Serving scaling preserves exact known kcal/protein/fat/fiber values;
+37. missing canonical carbohydrate remains unknown through Serving/day/week aggregation;
+38. sparse V2 MealPlan Nutrition is not upgraded to legacy COMPLETE;
+39. canonical V2 nutrient truth is not replaced by the five-field compatibility projection;
+40. no Recipe/RecipeVersion/source-corpus publication occurs;
+41. no API/UI/Retail/Auth/PostgreSQL/AI scope occurs;
+42. AI_ENABLED=false.
 
 ## 25. Verification tier
 
