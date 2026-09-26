@@ -1,3 +1,30 @@
+## Post-PR96 next bounded operation — 2026-09-26
+
+PR96 merged into main at:
+`7443f56b856184db6ddb040b9d68425db9f8d41a`.
+
+The user authorized moving to the next bounded step.
+
+The project returns to DATA-CORPUS-V1 / DC3 catalogue work rather than starting PR9 or activating the Step 9 butter technical slice.
+
+New Contract Gate branch:
+`docs/dc3-first-planner-eligible-recipe-contract`.
+
+Selected first ordinary candidate:
+`USSR82-453 — Яйца вареные`.
+
+Accepted DC1 evidence makes it the sole `DC3-A_CLEAN_BRANCH_EXISTING_PROFILE_REVIEW` candidate:
+single source branch, one required `ING-0071`, accepted `ING-0071 → EGG` mapping, existing USDA FDC 748967 current profile, and an explicit remaining form/profile suitability review.
+
+The gate freezes:
+- no name-only reuse of EGG authority;
+- exact source quantity/form review;
+- transformed/raw/cooked/yield/retention decision;
+- explicit Recipe classification without MealRole compatibility expansion;
+- activation only in a later separately authorized runtime/data PR after all authority checks pass.
+
+No runtime/schema/production data changed in this Contract Gate.
+
 # Handoff
 
 ## PR96 Step 10-B review-ready — 2026-09-26
