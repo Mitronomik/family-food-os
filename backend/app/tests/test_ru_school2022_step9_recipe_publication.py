@@ -306,8 +306,10 @@ def test_fresh_publication_exact_replay_and_activation_preservation(database):
     try:
         service = create_food_recipe_catalogue_service(engine)
         recipe = service.get_by_code(RECIPE_CODE)
-        detail = service.get_current_verified(recipe.id)
+        versions = service.list_versions(recipe.id)
         assert recipe.is_active is False
+        assert len(versions) == 1
+        detail = service.get_version_detail(versions[0].id)
         assert detail.version.version_number == 1
         assert detail.version.source_recipe_id == step9.SOURCE_RECIPE_ID
         assert detail.version.base_servings == Decimal("1.000000")
@@ -520,7 +522,10 @@ def test_inactive_step9_recipe_is_absent_from_authoritative_planner(database):
     try:
         recipes = create_food_recipe_catalogue_service(engine)
         step9_recipe = recipes.get_by_code(RECIPE_CODE)
-        step9_version = recipes.get_current_verified(step9_recipe.id).version.id
+        step9_versions = recipes.list_versions(step9_recipe.id)
+        assert step9_recipe.is_active is False
+        assert len(step9_versions) == 1
+        step9_version = step9_versions[0].id
         household_id, member_id = uid(1), uid(2)
         meal_plans = _MealPlans(household_id, member_id)
         planner = PlannerService(
