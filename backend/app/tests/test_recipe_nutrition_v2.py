@@ -101,7 +101,7 @@ def test_recipe_v2_nutrient_set_matches_committed_registry_snapshot():
     registry = json.loads(
         (root / "data/curation/nutrient-registry-v2/registry.json").read_text()
     )
-    assert registry["version"] == "RU_NUTRIENT_REGISTRY_V2"
+    assert registry["registry_version"] == "RU_NUTRIENT_REGISTRY_V2"
     assert len(registry["entries"]) == 54
     assert {
         row["canonical_code"] for row in registry["entries"]
