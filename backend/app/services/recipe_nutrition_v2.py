@@ -264,16 +264,19 @@ class RecipeNutritionV2Service:
                     )
                 result = self._calculate_row(scope, row, composition)
                 amounts = {item.definition.code: item.amount for item in result.nutrients}
-                row_amounts.append(
-                    {
-                        code: (
-                            None
-                            if amounts[code] is None
-                            else amounts[code] * row.quantity / result.input_mass_g
-                        )
-                        for code in NUTRIENT_CODES
-                    }
-                )
+                with localcontext(calculation_context()):
+                    row_amounts.append(
+                        {
+                            code: (
+                                None
+                                if amounts[code] is None
+                                else amounts[code]
+                                * row.quantity
+                                / result.input_mass_g
+                            )
+                            for code in NUTRIENT_CODES
+                        }
+                    )
                 bindings.append(binding)
                 for code in NUTRIENT_CODES:
                     if amounts[code] is None:
