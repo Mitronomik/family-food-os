@@ -9,7 +9,7 @@ PR97 is closed as **SUPERSEDED / DO NOT MERGE** and none of its commits are in m
 
 Correction:
 - old DC1 statuses are historical inventory/planning evidence, not the current project state by themselves;
-- later accepted Steps 4–10 already established source authority/publication mechanics, Russian methodology, transformation applicability, RecipeVersion publication precedent, V2 Recipe Nutrition authority, and Planner/MealPlan consumption integration;
+- later accepted Steps 4–10 established accepted source-authority decisions and precedents within their bounded scopes, reusable publication mechanics, Russian methodology, transformation applicability infrastructure, RecipeVersion publication precedent, V2 Recipe Nutrition authority, and Planner/MealPlan consumption integration;
 - the durable corpus archive was later recorded at
   `private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`
   with SHA-256
@@ -19,7 +19,7 @@ Correction:
 Correct continuation:
 `accepted DATA-CORPUS-V1 → bounded DC2/DC3 production batches → DC4 → Gate1-CLOSE → PR9`.
 
-Recipe-specific form/Nutrition/classification/provenance checks remain normal bounded publication work unless a new architecture/data-authority blocker is discovered.
+Recipe-specific form/Nutrition/classification/provenance checks remain normal bounded publication work when existing accepted publication paths and authority contracts are sufficient. If a batch requires a new or changed authoritative publication path, immutable authority contract, schema/migration boundary or cross-context rule, stop for the repository-required docs-only Implementation Contract Gate before runtime implementation.
 
 No next production batch has been started by this state correction.
 
