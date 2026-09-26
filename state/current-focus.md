@@ -4,6 +4,48 @@ Updated: 2026-09-26.
 
 ## Accepted state
 
+PR96 / Step 10-B is merged into main at:
+
+`7443f56b856184db6ddb040b9d68425db9f8d41a`.
+
+Step 10 reusable V2 Recipe Nutrition → Planner → MealPlan/Serving integration is accepted.
+
+## Current bounded state
+
+**DC3 first Planner-eligible Recipe Contract Gate is ACTIVE.**
+
+Branch:
+
+`docs/dc3-first-planner-eligible-recipe-contract`
+
+Selected candidate from the accepted DC1 batch plan:
+
+`USSR82-453 — Яйца вареные`
+
+Why this candidate:
+- only recipe in `DC3-A_CLEAN_BRANCH_EXISTING_PROFILE_REVIEW`;
+- single source branch;
+- one required demand `ING-0071 → EGG`;
+- accepted identity mapping and current open-reuse USDA profile already exist;
+- exact form/profile suitability remains the bounded unresolved authority question.
+
+Current work is docs/state only. No production RecipeVersion, activation, profile mutation, migration, Planner compatibility change, Gate1-CLOSE or PR9 work is authorized in this Contract Gate.
+
+Read:
+`docs/family-food/dc3-first-planner-eligible-recipe-contract.md`.
+
+## Stop boundary
+
+Review and merge this Contract Gate first.
+
+After merge, USSR82-453 runtime/data publication requires separate explicit authorization.
+
+# Current focus
+
+Updated: 2026-09-26.
+
+## Accepted state
+
 PR95 / Step 10-A is merged into main at:
 
 `1ef7d1ffd0896873034034b3eb629e62aa474803`
