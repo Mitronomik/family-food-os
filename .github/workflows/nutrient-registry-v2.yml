@@ -35,6 +35,16 @@ on:
       - 'data/curation/ru-school2022-step9-recipe-runtime/**'
       - 'backend/app/domain/recipe_nutrition_v2.py'
       - 'backend/app/domain/nutrition.py'
+      - 'backend/app/domain/meal_patterns.py'
+      - 'backend/app/services/meal_patterns.py'
+      - 'backend/app/persistence/sqlalchemy_core/meal_pattern_tables.py'
+      - 'backend/app/persistence/sqlalchemy_core/meal_pattern_repositories.py'
+      - 'backend/app/persistence/sqlalchemy_core/meal_plan_tables.py'
+      - 'backend/app/persistence/sqlalchemy_core/meal_plan_repositories.py'
+      - 'backend/app/migrations/versions/0041_meal_pattern_energy_allocation.py'
+      - 'backend/app/seed/planner_energy_allocation_v04.py'
+      - 'backend/app/tests/test_planner_energy_allocation_v04.py'
+      - 'data/curation/planner-energy-allocation-v04/**'
       - 'backend/app/domain/planner.py'
       - 'backend/app/domain/meal_plans.py'
       - 'backend/app/services/planner.py'
@@ -191,6 +201,7 @@ jobs:
           backend/app/tests/test_food_recipe_migration.py
           backend/app/tests/persistence/test_food_recipe_repository.py
           backend/app/tests/test_step10b_planner_mealplan_v2.py
+          backend/app/tests/test_planner_energy_allocation_v04.py
           backend/app/tests/test_planner.py
           backend/app/tests/test_planner_application_boundary.py
           backend/app/tests/test_meal_plans.py
