@@ -33,15 +33,15 @@ from app.services.recipe_nutrition_v2 import (
 )
 
 PACKAGE = REPOSITORY_ROOT / "data/curation/r1b-reviewed-recipes"
-PUBLICATION_SHA256 = "b81e4417e425187f87976c7fc6c4aebdbfda2f628a39ea7435b4c1209a01eb4b"
+PUBLICATION_SHA256 = "a57f2c47a40f96716ad4967107c679057be0cbaa75db72b34822f75c402f6dcb"
 SOURCE_DOCUMENT_SHA256 = "6ac7dfb300844fd996aee6d20b4e7e6aa421dd517367ab1f59120812fee104d5"
 SUPPORTING_MASS_SHA256 = "5ea78ead82568f8aff019a4076215c6598675783cb81e0d1d5b4f913016de4cc"
 ARCHIVE_SHA256 = "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea"
 SOURCE_NAME = "USSR82"
 SOURCE_VERSION = f"sha256:{SOURCE_DOCUMENT_SHA256}"
-PUBLISH_IDS = ("USSR82-453", "USSR82-1081", "USSR82-697")
-BLOCKED_IDS = ("USSR82-467", "USSR82-492")
-BLOCKED_REASON = "UNQUANTIFIED_PROCESS_INGREDIENT_SALT"
+PUBLISH_IDS = ("USSR82-697",)
+BLOCKED_IDS = ("USSR82-453", "USSR82-1081", "USSR82-467", "USSR82-492")
+BLOCKED_REASONS = {\n    "USSR82-453": "V2_COMPOSITION_AUTHORITY_MISSING_EGG",\n    "USSR82-1081": "V2_COMPOSITION_AUTHORITY_MISSING_BUTTER",\n    "USSR82-467": "UNQUANTIFIED_PROCESS_INGREDIENT_SALT",\n    "USSR82-492": "UNQUANTIFIED_PROCESS_INGREDIENT_SALT",\n}
 
 
 @dataclass(frozen=True)
@@ -196,9 +196,9 @@ def _require_package_identity(package: dict[str, Any]) -> None:
     for key in BLOCKED_IDS:
         if (
             by_id[key].get("disposition") != "BLOCKED"
-            or by_id[key].get("reason") != BLOCKED_REASON
+            or by_id[key].get("reason") != BLOCKED_REASONS[key]
         ):
-            raise ValueError("R1-B process blocker изменён.")
+            raise ValueError("R1-B blocker disposition изменён.")
     _validate_authorities(package)
 
 
