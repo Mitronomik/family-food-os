@@ -74,9 +74,20 @@ def test_r1b_package_freezes_three_publish_and_two_process_blockers():
     assert [len(seed.version.ingredients) for seed in seeds] == [1, 7, 2]
     assert [len(seed.version.steps) for seed in seeds] == [2, 4, 2]
     assert all(seed.initial_is_active is False for seed in seeds)
+    published = [
+        row for row in package["candidates"] if row["disposition"] == "PUBLISH"
+    ]
+    assert all(
+        row["activation"] == "INACTIVE_PENDING_TRANSFORMATION_AUTHORITY"
+        for row in published
+    )
+    assert all(
+        isinstance(row["activation_reason"], str) and row["activation_reason"].strip()
+        for row in published
+    )
 
 
-def test_r1b_fresh_publication_bindings_energy_activation_and_replay(database):
+def test_r1b_fresh_publication_bindings_input_energy_and_inactive_replay(database):
     first = seed_r1b_recipes(database)
 
     assert first.dependency_bundle_created_count == 0
@@ -86,8 +97,8 @@ def test_r1b_fresh_publication_bindings_energy_activation_and_replay(database):
     assert first.recipe_summary.steps_inserted == 8
     assert first.binding_fresh_count == 10
     assert first.binding_replay_count == 0
-    assert first.activated_count == 3
-    assert first.exact_energy_kcal == (
+    assert first.activated_count == 0
+    assert first.input_energy_kcal == (
         ("USSR82-453", Decimal("58.800000")),
         ("USSR82-1081", Decimal("368.114000")),
         ("USSR82-697", Decimal("255.892000")),
@@ -111,21 +122,21 @@ def test_r1b_fresh_publication_bindings_energy_activation_and_replay(database):
         assert rows == [
             (
                 "USSR82_1081_BLINI",
-                1,
+                0,
                 "USSR82-1081",
                 "160.000000",
                 "III — с маслом; выход 160 г",
             ),
             (
                 "USSR82_453_BOILED_EGGS",
-                1,
+                0,
                 "USSR82-453",
                 "40.000000",
                 "выход 40 г",
             ),
             (
                 "USSR82_697_BOILED_CHICKEN",
-                1,
+                0,
                 "USSR82-697",
                 "75.000000",
                 "выход основного отварного продукта 75 г; без гарнира/соуса",
@@ -172,6 +183,7 @@ def test_r1b_fresh_publication_bindings_energy_activation_and_replay(database):
     assert replay.binding_fresh_count == 0
     assert replay.binding_replay_count == 10
     assert replay.activated_count == 0
+    assert replay.input_energy_kcal == first.input_energy_kcal
     assert db_dump(database) == before
 
 
