@@ -71,23 +71,91 @@ R1-C / DATA-CORPUS-V1 / Gate1-CLOSE.
 
 ## 4. FACT — external evidence boundary
 
-Official Rospotrebnadzor materials support the general idea that daily energy is
-distributed across eating occasions and provide role-specific ranges/examples.
+The bounded evidence review confirms that official Rospotrebnadzor material uses
+role-based distribution of daily energy as a nutrition-planning concept.
 
-Relevant retained references for review include:
+Reviewed policy references:
 
-- Rospotrebnadzor / FBUZ CGON, healthy-ration material:
-  breakfast 20–30%, lunch 30–35%, dinner 20–25%, snacks 5–15%;
-- Rospotrebnadzor materials for organized three-meal patterns:
-  breakfast 25–30%, lunch 35–45%, dinner 25–30%;
-- other official organized-meal guidance uses similar role-based distributions.
+1. FBUZ Center for Hygiene Education of the Population, Rospotrebnadzor,
+   `Тема_3 Как составить здоровый рацион`:
+   `https://cgon.rospotrebnadzor.ru/upload/docs/Тема_3_Как_составить_здоровый_рацион.pdf`
+   - breakfast 20–30%;
+   - lunch 30–35%;
+   - dinner 20–25%;
+   - snacks 5–15%.
+2. FBUZ Center for Hygiene Education of the Population, Rospotrebnadzor,
+   `Курс на здоровое питание` bulletin:
+   `https://cgon.rospotrebnadzor.ru/upload/pdf/pechatnaya_produktsiya/byulleten_a2.pdf`
+   - breakfast 25–30%;
+   - lunch 30–35%;
+   - dinner 20–25%;
+   - snacks 5–15%.
 
-These sources do **not** establish one universal physiologically optimal exact
-percentage for every adult/child/goal/schedule.
+Reviewed for this contract on 2026-09-27.
+
+These materials support the general planning concept and bounded role ranges.
+They do **not** establish one universal physiologically optimal exact percentage
+for every adult, child, goal, schedule or custom pattern.
+
+They also do not authorize FamilyFoodOS to silently choose the midpoint or another
+exact number from a published range.
 
 **DECISION:** exact persisted shares are versioned **planning-policy parameters**,
-not medical facts. They must be reviewable against the program evidence and must
-not be presented as measured physiological truth.
+not medical facts. Every automatically published PROGRAM share must be explicitly
+selected/reviewed in a versioned FamilyFoodOS curation payload with its evidence
+reference and review rationale. The external range is evidence for that decision,
+not an executable formula.
+
+User-confirmed PROGRAM overrides and CUSTOM shares are Household planning choices;
+they are not promoted to platform scientific evidence and must not be presented as
+measured physiological truth.
+
+## 4.1. Dependency inventory
+
+The runtime implementation may change only the following bounded seams.
+
+### Nutrition-owned input
+
+- `NutritionService.member_reference_target(...).reference_energy_kcal`;
+- existing reference-methodology selection/pins remain authoritative;
+- no new reference-energy formula is introduced.
+
+### Meal Pattern Catalogue
+
+- `MealPatternProgramVersion`;
+- `MealPatternOpportunity`;
+- reviewed program evidence/provenance;
+- catalogue repository/service publication of new immutable program versions.
+
+### Household-owned accepted pattern
+
+- `MemberMealPatternSelection`;
+- `MemberMealPatternOpportunitySnapshot`;
+- immutable selection revision history;
+- `MealPlanMemberSelection` pins.
+
+### Planner
+
+- `MemberPlannerConstraints`;
+- `FixedPlannerEvent`;
+- `PlannerConfig`;
+- pure `generate_week()`;
+- Planner trace/fingerprint;
+- `PlannerService.generate_authoritative()` persistence only after pure success.
+
+### Recipe Nutrition
+
+- existing exact `kcal_per_base_serving` / `exact_energy_ready` candidate input;
+- no Recipe Nutrition formula/version change.
+
+### Persistence / migration
+
+- migration `0041_meal_pattern_energy_allocation`;
+- `meal_pattern_opportunities`;
+- `member_meal_pattern_opportunities`;
+- existing Meal Pattern and MealPlan UnitOfWork boundaries.
+
+No new bounded context or network service is introduced.
 
 ## 5. DECISION — allocation belongs to resolved Meal Pattern opportunities
 
@@ -202,6 +270,14 @@ member_meal_pattern_opportunities.energy_share TEXT NULL
 ```
 
 using `DecimalText()` in SQLAlchemy metadata.
+
+Row-level SQL/domain rules:
+
+- null is allowed for historical/unallocated rows;
+- when present, the value must be numeric and satisfy `0 < energy_share <= 1`;
+- no float persistence path;
+- the per-day aggregate `sum(energy_share) <= 1` is a domain/service invariant
+  because it spans multiple rows and must not be faked as a per-row SQL CHECK.
 
 Historical rows remain null.
 
@@ -350,6 +426,124 @@ Requirements:
 Do not expand the Meal Pattern catalogue beyond what #100 acceptance actually
 needs.
 
+## 13.1. Preservation matrix
+
+| Surface | Before 0041 | After 0041 | Preservation rule |
+| --- | --- | --- | --- |
+| Historical MealPatternProgram v1 | roles/order only | shares null | never rewrite accepted v1 |
+| New reviewed PROGRAM version | n/a | exact reviewed shares | append immutable version only |
+| Historical MemberMealPatternSelection | roles/order only | shares null | no guessed backfill |
+| New PROGRAM selection | resolved roles/order | frozen exact shares | snapshot from exact program version unless overridden |
+| New PROGRAM override | resolved override schedule | explicit user-confirmed shares | no role remap/inference |
+| New CUSTOM selection | custom schedule | explicit user-confirmed shares | no product-default/equal split |
+| Historical MealPlan planner-v0.3 | persisted revision/config | unchanged | never recalculate/rewrite |
+| RecipeVersion / Recipe Nutrition | current immutable truth | unchanged | no formula/schema change |
+| Fixed non-recipe event Nutrition | unknown when unsupported | remains unknown | allocation share is not Nutrition truth |
+| Planner role compatibility | meal-role-recipe-v2 | unchanged | separate gate required to change |
+| Hard exclusions | current deterministic filter | unchanged | always dominate sharedness/allocation |
+
+## 13.2. Fresh / replay / conflict semantics
+
+### Program publication
+
+- existing published program versions are immutable;
+- allocation-ready program truth is appended as a new reviewed version;
+- exact same trusted publication input may replay as existing/zero-write according
+  to the existing catalogue reconciliation semantics;
+- same program/version identity with different shares/evidence must fail closed;
+- no update-in-place of a published program opportunity is allowed.
+
+### Household selection
+
+Accepting allocation-complete state creates a new immutable
+`MemberMealPatternSelection` revision.
+
+- PROGRAM/no override copies exact shares from the pinned program version;
+- PROGRAM override and CUSTOM require complete explicit shares in the acceptance
+  command;
+- concurrent or invalid revision lineage remains a persistence conflict;
+- re-accepting the same user choice is a new explicit selection revision, not a
+  hidden zero-write replay.
+
+### Planner replay
+
+Deterministic replay means:
+
+```text
+same authoritative Household state
++ same pinned MemberMealPatternSelection revisions
++ same reference-energy inputs/methodology
++ same candidate/fixed-event inputs
++ same PlannerConfig
+→ same semantic events
+→ same portion multipliers
+→ same allocation trace/fingerprint
+```
+
+Wall-clock duration and newly generated persistence IDs are not part of the
+semantic replay claim.
+
+Reading a historical `planner-v0.3` MealPlan never invokes v0.4 allocation and
+never creates a replacement plan automatically.
+
+## 13.3. Transaction ownership and failure injection
+
+No new cross-context shared write transaction is introduced by #100.
+
+### Meal Pattern program publication
+
+Uses the existing Meal Pattern Catalogue UnitOfWork. A fresh program version and
+its opportunity rows must commit atomically.
+
+Required failure injection:
+
+- after version insert / before all opportunity rows;
+- during an opportunity insert;
+- at commit.
+
+Failure leaves no partial new program version/opportunity set.
+
+### Member selection acceptance
+
+Uses the existing MealPlan UnitOfWork that owns Household selection persistence.
+
+A selection row plus all seven-day opportunity snapshots/shares commit atomically.
+
+Required failure injection:
+
+- after selection row / before opportunity rows;
+- during opportunity persistence;
+- concurrent revision conflict;
+- commit failure.
+
+Failure leaves the previous current selection and its history unchanged.
+
+### Planner / MealPlan
+
+`generate_week()` remains pure and writes nothing.
+
+`PlannerService.generate_authoritative()` persists a MealPlan revision only after
+pure Planner success. Missing/invalid allocation must return failure before
+MealPlan persistence.
+
+Existing MealPlan UnitOfWork atomicity remains authoritative for plan/events/
+servings/pins. Failure during persistence must roll back the complete new plan
+revision.
+
+### Migration 0041
+
+Migration runner owns schema/marker atomicity.
+
+Required checks:
+
+- fresh database;
+- populated 0040 → 0041 upgrade;
+- injected failure after the first schema mutation;
+- migration marker rollback;
+- backup/restore/re-upgrade;
+- historical row equality plus new null fields;
+- clean foreign keys and preserved indexes/constraints.
+
 ## 14. Adversarial acceptance tests
 
 Runtime implementation must cover at least:
@@ -369,7 +563,12 @@ Runtime implementation must cover at least:
 13. persisted historical `planner-v0.3` plan remains unchanged/readable;
 14. v0.4 trace exposes shares, allocated kcal, residual and allocation source;
 15. hard exclusions still dominate candidate selection;
-16. no LLM dependency.
+16. no LLM dependency;
+17. exact PROGRAM publication replay is zero-write and changed share/evidence conflicts;
+18. selection failure after parent-row insertion rolls back every opportunity/share;
+19. concurrent selection revision conflict leaves prior history unchanged;
+20. Planner allocation failure persists no MealPlan revision;
+21. migration 0041 mid-flight failure restores schema/data/marker and deterministic re-upgrade.
 
 Serving multipliers must remain positive and bounded by existing Decimal precision.
 
@@ -380,14 +579,15 @@ Serving semantics, required implementation verification is broad:
 
 - domain validation;
 - migration fresh/upgrade/restore/rollback;
-- Meal Pattern catalogue persistence;
-- MemberMealPatternSelection persistence;
+- Meal Pattern catalogue persistence + allocation publication replay/conflict;
+- MemberMealPatternSelection persistence + rollback/concurrency;
 - Planner focused/adversarial tests;
 - MealPlan/Serving integration;
 - historical planner-v0.3 replay/readability;
 - R1-C prerequisites;
 - full backend regression;
 - launcher regression;
+- reviewed allocation curation payload/evidence audit;
 - Docs + relevant nutrition/Meal Pattern workflows;
 - `AI_ENABLED=false`.
 
