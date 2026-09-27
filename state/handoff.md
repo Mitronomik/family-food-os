@@ -1,5 +1,90 @@
 # Handoff
 
+## R1-A WATER/SALT Planner-energy closure — 2026-09-27
+
+Verified runtime/data head:
+`c92a19bdc4f3760bb50f2957068682d62ac126cf`.
+
+Correction after deep review:
+- WATER and SALT were previously catalogue-ready but had V2 ENERGY_KCAL unknown;
+- exact durable FIC records publish source-backed kcal=0.0;
+- both existing identities receive non-current FIC profiles and ATOMIC v2;
+- historical current profiles and ATOMIC v1 remain unchanged;
+- R1-A result is now 11 publications + 7 late-state reuses + 2 blockers;
+- all 5 declared R1-B-ready recipes have exact energy authority at dependency level.
+
+Verification:
+Docs #458 / DC1 #320 / Russian #193 / Registry #339 / Partial #251 — SUCCESS.
+Registry and Partial focused, all backend shards and launchers are green.
+
+No RecipeVersion or Planner change occurred.
+
+## R1-A review-ready — 2026-09-27
+
+Accepted base:
+`9f72f6883e092cbf79930c7ac4a5a1314c7488d8`.
+
+PR:
+`#101`.
+
+Verified runtime/data head:
+`1f5cc62876a6985eb0d07f119de9b3ccaf9e35d9`.
+
+Result:
+- 20 dependencies;
+- 9 accepted reuses;
+- 9 exact FIC publications;
+- 2 blockers;
+- 5 of 7 selected recipes dependency-ready for R1-B.
+
+Ready:
+USSR82-453, USSR82-467, USSR82-492, USSR82-1081, USSR82-697 exact chicken/main branch.
+
+Blocked:
+- USSR82-364 on ING-0014 / Жир кулинарный;
+- USSR82-208 on ING-0038 / anomalous FIC salted-cucumber source row.
+
+The durable corpus archive was independently retrieved and all 11 published
+source raw-record hashes rechecked.
+
+Exact runtime verification:
+Docs #446 / DC1 #308 / Russian #181 / Registry #317 / Partial #239 — SUCCESS.
+Registry focused = 400 passed; all backend shards + launchers are green.
+
+No RecipeVersion publication/activation and no Planner change occurred.
+
+Stop after PR101 review/merge. R1-B requires separate explicit authorization.
+
+## R1-A authorized — 2026-09-27
+
+Accepted base:
+`9f72f6883e092cbf79930c7ac4a5a1314c7488d8` (merged PR98).
+
+The user explicitly authorized completing the original product meaning of Russian-data Steps 7–10.
+
+Current bounded operation:
+`R1-A — Planner-capacity dependency closure`.
+
+Parent issue:
+`#99`.
+
+Separate Planner allocation issue:
+`#100`.
+
+R1 selected recipe set:
+- USSR82-453 Яйца вареные;
+- USSR82-467 Омлет (натуральный);
+- USSR82-492 Сырники из творога;
+- USSR82-1081 Блины;
+- USSR82-697 chicken/main source-supported branch only;
+- USSR82-364 Шницель из капусты;
+- USSR82-208 Рассольник ленинградский.
+
+R1-A owns only direct FoodIngredient/form/Nutrition dependency closure/publication.
+No RecipeVersion publication/activation and no Planner change in R1-A.
+
+
+
 ## Post-PR96 sequencing correction — 2026-09-26
 
 PR96 is merged into main at:

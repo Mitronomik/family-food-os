@@ -1,115 +1,148 @@
 # Current focus
 
-Updated: 2026-09-26.
+Updated: 2026-09-27.
 
-## Accepted state
+## Accepted base
 
-PR96 / Step 10-B is merged into `main` at:
+PR98 is merged into `main` at:
 
-`7443f56b856184db6ddb040b9d68425db9f8d41a`.
+`9f72f6883e092cbf79930c7ac4a5a1314c7488d8`.
 
-Accepted Step 10 result:
+PR98 restored dependency-driven DATA-CORPUS-V1 sequencing and required one
+explicit bounded operation before production work.
 
-```text
-composition-backed V2 Recipe Nutrition
-→ neutral consumption projection
-→ Planner exact-energy readiness
-→ planner-v0.3
-→ MealPlan / Serving nutrition consumption
-```
+## Current bounded operation
 
-The Step 9 School2022 butter Recipe remains inactive.
+**R1-A — Planner-capacity dependency closure is REVIEW-READY / NOT MERGED.**
 
-## Sequencing correction after PR96
+Parent issue:
 
-PR97 is closed as **SUPERSEDED / DO NOT MERGE**.
+`#99 — R1: restore Steps 7–10 product meaning with Planner-capacity recipe batch`.
 
-Reason:
-PR97 incorrectly treated historical DC1 statuses as if they were still the current
-unresolved project state, without applying later accepted Steps 4–10 decisions.
+PR:
 
-Do not re-open accepted corpus/source-foundation work merely because old DC1
-artifacts contain historical blocker/status fields.
+`#101 — R1-A: close Planner-capacity recipe dependencies`.
 
-Accepted durable corpus/source foundation includes the later recorded archive:
+Verified runtime/data head:
+
+`c92a19bdc4f3760bb50f2957068682d62ac126cf`.
+
+## R1-A result
+
+R1-A reconciles the selected seven recipes against current late-state authority,
+not against historical DC1 flags alone.
+
+Exact dependency result:
+
+- 7 selected recipes;
+- 32 source relationship rows;
+- 20 unique dependencies;
+- 7 accepted late-state reuses;
+- 11 exact R1-A FIC publications;
+- 2 explicit blockers;
+- 5 recipes dependency-ready for R1-B;
+- 2 recipes remain blocked.
+
+### Dependency-ready for R1-B
+
+- `USSR82-453 — Яйца вареные`
+- `USSR82-467 — Омлет (натуральный)`
+- `USSR82-492 — Сырники из творога`
+- `USSR82-1081 — Блины`
+- `USSR82-697` — exact chicken/main branch only
+
+### Still blocked
+
+- `USSR82-364 — Шницель из капусты`
+  - blocker: `ING-0014 / Жир кулинарный`;
+  - no exact accepted authority; pork fat/shortening substitution is forbidden.
+- `USSR82-208 — Рассольник ленинградский`
+  - blocker: `ING-0038 / Огурцы соленые`;
+  - exact FIC record exists but has retained source-layout anomaly;
+  - no silent repair/reinterpretation.
+
+## R1-A publications
+
+Nine exact FIC authorities are published through the existing Step 3/Step 4
+transactional path:
+
+- `MARGARINE_MILK_TABLE`
+- `MILK_PASTEURIZED_3_2`
+- `SOUR_CREAM_30`
+- `TVOROG_9`
+- `YEAST_BAKERS_COMPRESSED`
+- `CHICKEN_CATEGORY_1_RAW`
+- `POTATO` — reuse existing identity with exact FIC profile/ATOMIC authority
+- `ONION_BULB_FRESH`
+- `FLOUR_WHEAT_HIGH_GRADE`
+- `WATER` — existing identity, exact FIC profile + ATOMIC v2
+- `SALT` — existing identity, exact FIC profile + ATOMIC v2
+
+Each uses the frozen Step 4B mapping:
+
+- 18 canonical V2 values;
+- 26 retained source observations;
+- 198 V2 values total;
+- 286 source observations total.
+
+Existing current profiles are preserved. New exact-form FIC profiles remain
+non-current.
+
+The FIC nutrient snapshot is not treated as allergen-label authority. R1-A makes
+no automatic allergen claims; explicit ingredient exclusions remain authoritative.
+
+## Source authority
+
+Durable source:
 
 `private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`
 
-SHA-256:
+Verified on 2026-09-27:
 
-`c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`.
+- size `206692075`;
+- archive SHA-256
+  `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
+- embedded RU-NUT-DB HTML SHA-256
+  `155107ddb381c14721c77fe995d604a5197982441446b54034e4d84645efbd6d`;
+- all 11 published source code/name/raw-substring hashes independently rechecked.
 
-## Current bounded state
+No production numeric value was reconstructed from LLM output, OCR or web snippets.
 
-**PR98 restores programme sequencing only. It does not authorize a specific
-production batch.**
+## Verification
 
-The next action after PR98 is merged is to select and explicitly authorize one
-concrete bounded DATA-CORPUS-V1 operation under Issue #67.
+On exact runtime/data head `c92a19bdc4f3760bb50f2957068682d62ac126cf`:
 
-No DC2 or DC3 production batch starts merely because PR98 merges.
+- Docs #458 — SUCCESS;
+- DC1 #320 — SUCCESS;
+- Russian #193 — SUCCESS;
+- Nutrient Registry V2 #339 — SUCCESS;
+  - focused SUCCESS;
+  - all 4 backend regression shards SUCCESS;
+  - launcher SUCCESS;
+- Partial Nutrition Profiles #251 — SUCCESS;
+  - focused SUCCESS;
+  - all 4 backend regression shards SUCCESS;
+  - launcher SUCCESS.
 
-The broader programme direction remains bounded DC2/DC3 production publication
-using the already accepted corpus/source foundation and the infrastructure
-delivered through Steps 4–10.
+A date-sensitive historical Step 9 test defect was fixed by deriving the activation
+timestamp from the persisted recipe timestamp; production Step 9 behavior was not
+changed.
 
-Recipe-specific validation remains required where relevant:
+Planner-capacity energy authority is now closed for all five ready recipes. WATER
+and SALT use source-published FIC `ENERGY_KCAL=0.0`; historical V2 unknowns were
+not coerced to zero.
 
-- exact FoodIngredient/form compatibility;
-- deterministic Nutrition authority;
-- transformation/yield/retention only when actually required;
-- Recipe classification;
-- current Planner compatibility;
-- provenance/rights;
-- activation suitability.
+## Stop boundary
 
-Recipe-specific validation belongs in the bounded publication batch when that
-batch uses existing accepted publication paths and authority contracts.
+R1-A is review-ready, not complete until merged.
 
-If a batch requires a new or changed authoritative publication path, immutable
-authority contract, schema/migration boundary or cross-context rule, stop before
-runtime implementation and create the repository-required docs-only
-Implementation Contract Gate.
+Do not start automatically:
 
-Do **not** introduce a new per-recipe preflight/contract milestone by default when
-existing accepted paths/contracts are sufficient.
-
-## Dependency-driven programme sequence
-
-```text
-accepted DATA-CORPUS-V1 contract/source foundation
-→ dependency-ready DC2 food/form/Nutrition publication where required
-→ DC3 RecipeVersion publication only after its required dependencies are accepted
-→ DC4 corpus readiness audit + Gate1 consumption
-→ GATE1-CLOSE
-→ PR9 Shopping Engine
-```
-
-A DC3 batch must not bypass unresolved required DC2 food/form/Nutrition
-dependencies.
-
-Do not combine unrelated DC2 food expansion and DC3 recipe publication in one PR
-merely for convenience.
-
-The DATA-CORPUS-V1 baseline is still incomplete; Issue #67 remains active until
-its corpus exit criteria are satisfied.
-
-PR9 remains NOT STARTED until Gate1-CLOSE.
-
-## Hard boundaries
-
-No automatic:
-
+- R1-B RecipeVersion/process publication;
+- #100 Planner energy-allocation implementation;
+- R1-C Planner product proof;
 - Gate1-CLOSE;
 - PR9 Shopping;
-- Retail;
-- AI authority;
-- Auth/PostgreSQL;
-- generalized Data Ingestion Platform.
+- Prep/Retail/API/UI/Auth/PostgreSQL/AI.
 
-One bounded publication PR = one reviewable production-data goal.
-
-The next batch is a separate bounded scope decision; PR98 does not choose it.
-
-Selecting the next batch and authorizing its implementation are explicit scope
-decisions; agents must not choose an unspecified production batch autonomously.
+After R1-A merge, stop and obtain explicit authorization for R1-B.
