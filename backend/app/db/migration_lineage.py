@@ -181,6 +181,8 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
     "0039_recipe_ingredient_composition_binding": frozenset(
         {"recipe_ingredient_composition_bindings"}
     ),
+    # 0040 adds nullable columns to the existing RecipeVersion table.
+    "0040_recipe_version_source_output": frozenset(),
 }
 
 # The foundational tables promised by migration `0001`. Stable FamilyFoodOS
