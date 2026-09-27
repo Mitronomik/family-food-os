@@ -365,6 +365,13 @@ def seed_r1b_recipes(
     engine = create_sqlite_engine(config)
     try:
         catalogue = create_food_recipe_catalogue_service(engine)
+        dispositions = tuple(
+            catalogue.preflight_trusted_seed(seed) for seed in seeds
+        )
+        if len(set(dispositions)) != 1:
+            raise ValueError(
+                "Частично опубликованный R1-B Recipe batch нельзя дозаполнять."
+            )
         recipe_summary = catalogue.reconcile_seed(seeds, strict_history=True)
 
         nutrition = create_recipe_nutrition_v2_service(engine)
