@@ -178,6 +178,29 @@ class MealPlanService:
                 raise MealPlanValidationError("CUSTOM selection requires a resolved schedule.")
 
         assert resolved_schedule is not None
+        if (
+            source_kind is MemberMealPatternSourceKind.CUSTOM
+            or has_user_overrides
+        ) and energy_shares is None:
+            raise MealPlanValidationError(
+                "CUSTOM and PROGRAM override selections require explicit energy shares."
+            )
+        if (
+            source_kind is MemberMealPatternSourceKind.PROGRAM
+            and not has_user_overrides
+            and (
+                energy_shares is None
+                or any(
+                    value is None
+                    for values in energy_shares.values()
+                    for value in values
+                )
+            )
+        ):
+            raise MealPlanValidationError(
+                "PROGRAM selection requires an allocation-ready published program."
+            )
+
         supplied_allocation = None
         if energy_shares is not None:
             supplied_allocation = {
