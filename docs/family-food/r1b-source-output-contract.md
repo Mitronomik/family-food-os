@@ -1,9 +1,9 @@
 # R1-B — Source Recipe Output / Yield Implementation Contract Gate
 
-**Status:** docs-only Implementation Contract Gate  
-**Decision date:** 2026-09-27  
-**Accepted base:** `eb803cda82ce8073443981867291716a0eb0f0ad` (merged PR #101)  
-**Parent:** #102, #99, #67  
+**Status:** docs-only Implementation Contract Gate
+**Decision date:** 2026-09-27
+**Accepted base:** `eb803cda82ce8073443981867291716a0eb0f0ad` (merged PR #101)
+**Parent:** #102, #99, #67
 **Runtime authorized by this document:** no — merge/review this gate first.
 
 ## 1. Goal
@@ -86,6 +86,43 @@ The retained v20 extraction rows are explicitly marked
 **DECISION:** R1-B runtime must create a new reviewed, hash-pinned curation package
 from the retained source bytes and accepted later mapping decisions. It must not
 promote legacy extraction status directly.
+
+
+### 3.1. DECISION — RecipeVersion source snapshot identity
+
+For this R1-B batch, the retained reviewed source snapshot used by
+`RecipeVersion.source_document_sha256` is:
+
+`russian_normative_recipes_v20_complete_master.xlsx`
+
+SHA-256:
+
+`6ac7dfb300844fd996aee6d20b4e7e6aa421dd517367ab1f59120812fee104d5`
+
+R1-B must use:
+
+```text
+source_name = reviewed USSR82 corpus identity
+source_version = sha256:6ac7dfb300844fd996aee6d20b4e7e6aa421dd517367ab1f59120812fee104d5
+source_document_sha256 = 6ac7dfb300844fd996aee6d20b4e7e6aa421dd517367ab1f59120812fee104d5
+source_url = exact card URL retained in the reviewed row
+source_recipe_id = exact USSR82-* identity
+```
+
+The URL identifies the original referenced card. The SHA pins the retained reviewed
+snapshot actually used for publication review. Do not hash the URL string and do
+not claim the hash belongs to a freshly fetched web response.
+
+The v22.13 workbook SHA
+`5ea78ead82568f8aff019a4076215c6598675783cb81e0d1d5b4f913016de4cc`
+is supporting curation/mass evidence and must be pinned in the R1-B package
+lineage, but it is not substituted for the RecipeVersion source-document hash.
+
+Rights basis follows the accepted
+`docs/family-food/ru-normative-recipe-corpus.md` decision: factual normative/base
+recipe data explicitly authorized by the user may be published with provenance;
+photographs, publisher layout, logos and third-party commentary are outside the
+publication.
 
 ## 4. FACT — source process/output evidence
 
