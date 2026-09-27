@@ -1,7 +1,7 @@
 # R1-A — Planner-capacity recipe dependency closure
 
-**Status:** production data publication package for Issue #99 / PR #101  
-**Accepted base:** `9f72f6883e092cbf79930c7ac4a5a1314c7488d8` (merged PR #98)  
+**Status:** production data publication package for Issue #99 / PR #101
+**Accepted base:** `9f72f6883e092cbf79930c7ac4a5a1314c7488d8` (merged PR #98)
 **Operation:** `R1-A_PLANNER_CAPACITY_DEPENDENCIES`
 
 ## Goal
