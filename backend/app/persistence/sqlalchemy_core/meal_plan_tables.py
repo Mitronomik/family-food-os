@@ -85,7 +85,13 @@ member_meal_pattern_opportunities_table = Table(
     Column("weekday", Integer, primary_key=True, nullable=False),
     Column("position", Integer, primary_key=True, nullable=False),
     Column("role_code", String, nullable=False),
+    Column("energy_share", DecimalText()),
     CheckConstraint("weekday BETWEEN 1 AND 7", name="ck_member_meal_pattern_weekday"),
+    CheckConstraint(
+        "energy_share IS NULL OR "
+        "(CAST(energy_share AS NUMERIC) > 0 AND CAST(energy_share AS NUMERIC) <= 1)",
+        name="ck_member_meal_pattern_opportunity_energy_share",
+    ),
     CheckConstraint("position > 0", name="ck_member_meal_pattern_position"),
     CheckConstraint(
         "role_code IN ('BREAKFAST','LUNCH','DINNER','SNACK','PRE_WORKOUT','POST_WORKOUT','OTHER')",
