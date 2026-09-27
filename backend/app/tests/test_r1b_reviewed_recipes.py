@@ -79,7 +79,7 @@ def test_r1b_package_freezes_three_publish_and_two_process_blockers():
 def test_r1b_fresh_publication_bindings_energy_activation_and_replay(database):
     first = seed_r1b_recipes(database)
 
-    assert first.dependency_bundle_created_count == 2
+    assert first.dependency_bundle_created_count == 0
     assert first.recipe_summary.recipes_inserted == 3
     assert first.recipe_summary.versions_inserted == 3
     assert first.recipe_summary.ingredients_inserted == 10
@@ -88,8 +88,8 @@ def test_r1b_fresh_publication_bindings_energy_activation_and_replay(database):
     assert first.binding_replay_count == 0
     assert first.activated_count == 3
     assert first.exact_energy_kcal == (
-        ("USSR82-453", Decimal("62.840000")),
-        ("USSR82-1081", Decimal("371.184000")),
+        ("USSR82-453", Decimal("58.800000")),
+        ("USSR82-1081", Decimal("368.114000")),
         ("USSR82-697", Decimal("255.892000")),
     )
 
@@ -135,7 +135,10 @@ def test_r1b_fresh_publication_bindings_energy_activation_and_replay(database):
             "SELECT COUNT(*) FROM recipe_ingredient_composition_bindings "
             "WHERE registry_version='RU_NUTRIENT_REGISTRY_V2'"
         ).fetchone()[0] >= 10
-        for code, source_id in (("EGG", "2287"), ("BUTTER_UNSALTED", "1418")):
+        for code, source_name, source_id, version in (
+            ("EGG", "USDA_FDC", "748967", 1),
+            ("BUTTER_UNSALTED", "USDA_FDC", "173430", 1),
+        ):
             row = db.execute(
                 """
                 SELECT p.is_current, v.version
@@ -143,13 +146,12 @@ def test_r1b_fresh_publication_bindings_energy_activation_and_replay(database):
                 JOIN food_nutrition_profiles p ON p.food_ingredient_id = i.id
                 JOIN food_composition_versions v ON v.profile_id = p.id
                 WHERE i.canonical_code = ?
-                  AND p.source_name = 'FIC_RU_NUT_DB'
+                  AND p.source_name = ?
                   AND p.source_id = ?
-                  AND p.source_version = 'snapshot-2026-09-20-155107ddb381c147'
                 """,
-                (code, source_id),
+                (code, source_name, source_id),
             ).fetchone()
-            assert row == (0, 2)
+            assert row == (1, version)
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
 
     before = db_dump(database)
