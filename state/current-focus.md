@@ -25,7 +25,7 @@ PR:
 
 Verified runtime/data head:
 
-`1f5cc62876a6985eb0d07f119de9b3ccaf9e35d9`.
+`c92a19bdc4f3760bb50f2957068682d62ac126cf`.
 
 ## R1-A result
 
@@ -37,8 +37,8 @@ Exact dependency result:
 - 7 selected recipes;
 - 32 source relationship rows;
 - 20 unique dependencies;
-- 9 accepted late-state reuses;
-- 9 exact R1-A FIC publications;
+- 7 accepted late-state reuses;
+- 11 exact R1-A FIC publications;
 - 2 explicit blockers;
 - 5 recipes dependency-ready for R1-B;
 - 2 recipes remain blocked.
@@ -75,13 +75,15 @@ transactional path:
 - `POTATO` — reuse existing identity with exact FIC profile/ATOMIC authority
 - `ONION_BULB_FRESH`
 - `FLOUR_WHEAT_HIGH_GRADE`
+- `WATER` — existing identity, exact FIC profile + ATOMIC v2
+- `SALT` — existing identity, exact FIC profile + ATOMIC v2
 
 Each uses the frozen Step 4B mapping:
 
 - 18 canonical V2 values;
 - 26 retained source observations;
-- 162 V2 values total;
-- 234 source observations total.
+- 198 V2 values total;
+- 286 source observations total.
 
 Existing current profiles are preserved. New exact-form FIC profiles remain
 non-current.
@@ -108,16 +110,16 @@ No production numeric value was reconstructed from LLM output, OCR or web snippe
 
 ## Verification
 
-On exact runtime/data head `1f5cc62876a6985eb0d07f119de9b3ccaf9e35d9`:
+On exact runtime/data head `c92a19bdc4f3760bb50f2957068682d62ac126cf`:
 
-- Docs #446 — SUCCESS;
-- DC1 #308 — SUCCESS;
-- Russian #181 — SUCCESS;
-- Nutrient Registry V2 #317 — SUCCESS;
-  - focused: 400 passed;
+- Docs #458 — SUCCESS;
+- DC1 #320 — SUCCESS;
+- Russian #193 — SUCCESS;
+- Nutrient Registry V2 #339 — SUCCESS;
+  - focused SUCCESS;
   - all 4 backend regression shards SUCCESS;
   - launcher SUCCESS;
-- Partial Nutrition Profiles #239 — SUCCESS;
+- Partial Nutrition Profiles #251 — SUCCESS;
   - focused SUCCESS;
   - all 4 backend regression shards SUCCESS;
   - launcher SUCCESS.
@@ -125,6 +127,10 @@ On exact runtime/data head `1f5cc62876a6985eb0d07f119de9b3ccaf9e35d9`:
 A date-sensitive historical Step 9 test defect was fixed by deriving the activation
 timestamp from the persisted recipe timestamp; production Step 9 behavior was not
 changed.
+
+Planner-capacity energy authority is now closed for all five ready recipes. WATER
+and SALT use source-published FIC `ENERGY_KCAL=0.0`; historical V2 unknowns were
+not coerced to zero.
 
 ## Stop boundary
 
