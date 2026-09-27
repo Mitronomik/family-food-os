@@ -3,6 +3,7 @@
 import re
 from dataclasses import dataclass
 from datetime import date, datetime
+from decimal import Decimal, ROUND_HALF_UP
 from enum import StrEnum
 from uuid import UUID
 
@@ -11,6 +12,7 @@ from app.domain.food_ingredients import normalize_utc_instant
 
 _UPPER_CODE = re.compile(r"^[A-Z][A-Z0-9_]*$")
 _CYRILLIC = re.compile(r"[А-Яа-яЁё]")
+_ENERGY_SHARE_QUANT = Decimal("0.000001")
 
 
 class MealPatternLifecycle(StrEnum):
@@ -109,6 +111,34 @@ def _positive_int(value: object, *, field: str) -> int:
             value=value,
         )
     return value
+
+
+def _energy_share(value: object, *, field: str) -> Decimal | None:
+    if value is None:
+        return None
+    if not isinstance(value, Decimal):
+        raise _issue(
+            DomainIssueCode.INVALID_DECIMAL,
+            f"{field} must be Decimal or null.",
+            field=field,
+            value=value,
+        )
+    if not value.is_finite() or value <= 0 or value > 1:
+        raise _issue(
+            DomainIssueCode.VALUE_OUT_OF_RANGE,
+            f"{field} must satisfy 0 < value <= 1.",
+            field=field,
+            value=value,
+        )
+    normalized = value.quantize(_ENERGY_SHARE_QUANT, rounding=ROUND_HALF_UP)
+    if normalized <= 0 or normalized > 1:
+        raise _issue(
+            DomainIssueCode.VALUE_OUT_OF_RANGE,
+            f"{field} is outside supported precision.",
+            field=field,
+            value=value,
+        )
+    return normalized
 
 
 def _nonnegative_int(value: object, *, field: str) -> int:
@@ -239,6 +269,7 @@ class MealPatternOpportunity:
     version_id: UUID
     position: int
     role: MealRole
+    energy_share: Decimal | None = None
 
     def __post_init__(self) -> None:
         object.__setattr__(
@@ -256,6 +287,11 @@ class MealPatternOpportunity:
                 field="role",
                 value=self.role,
             ) from exc
+        object.__setattr__(
+            self,
+            "energy_share",
+            _energy_share(self.energy_share, field="energy_share"),
+        )
 
 
 @dataclass(frozen=True)
@@ -449,6 +485,23 @@ def validate_publishable(detail: MealPatternProgramDetail) -> None:
             field="opportunities",
             value=positions,
         )
+    shares = tuple(item.energy_share for item in detail.opportunities)
+    if any(value is not None for value in shares):
+        if any(value is None for value in shares):
+            raise _issue(
+                DomainIssueCode.REQUIRED_FIELD,
+                "Allocation-ready published programs require a share for every opportunity.",
+                field="energy_share",
+                value=shares,
+            )
+        total = sum((value for value in shares if value is not None), Decimal(0))
+        if total > 1:
+            raise _issue(
+                DomainIssueCode.VALUE_OUT_OF_RANGE,
+                "Published program energy shares must sum to no more than one.",
+                field="energy_share",
+                value=total,
+            )
     if not detail.evidence:
         raise _issue(
             DomainIssueCode.REQUIRED_FIELD,
