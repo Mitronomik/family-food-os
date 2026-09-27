@@ -46,6 +46,16 @@ def snapshot(config):
         }
 
 
+def assert_snapshot_preserved(before, after):
+    """All pre-migration table values survive later additive schema changes."""
+    for name, rows in before.items():
+        assert name in after
+        current = after[name]
+        assert len(current) == len(rows)
+        for old_row, new_row in zip(rows, current, strict=True):
+            assert tuple(new_row[: len(old_row)]) == tuple(old_row)
+
+
 def readiness(config):
     engine = create_sqlite_engine(config)
     try:
@@ -59,7 +69,7 @@ def measure(config):
     before, ready_before = snapshot(config), readiness(config)
     applied = migrations.apply_migrations(config)
     after, ready_after = snapshot(config), readiness(config)
-    assert all(after[name] == rows for name, rows in before.items())
+    assert_snapshot_preserved(before, after)
     assert ready_after == ready_before
     assert ready_before == json.loads(
         (
