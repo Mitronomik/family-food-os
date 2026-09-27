@@ -1,0 +1,367 @@
+{
+  "schema_version": 1,
+  "operation": "R1B_REVIEWED_USSR82_RECIPE_PUBLICATION",
+  "accepted_base": "fb89cfeb84f4052233f82daa7dcc2d1c07aa971a",
+  "source": {
+    "archive_locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "source_name": "USSR82",
+    "source_snapshot": "russian_normative_recipes_v20_complete_master.xlsx",
+    "source_document_sha256": "6ac7dfb300844fd996aee6d20b4e7e6aa421dd517367ab1f59120812fee104d5",
+    "source_version": "sha256:6ac7dfb300844fd996aee6d20b4e7e6aa421dd517367ab1f59120812fee104d5",
+    "supporting_mass_snapshot": "russian_normative_recipes_v22_13_mass_nutrients.xlsx",
+    "supporting_mass_sha256": "5ea78ead82568f8aff019a4076215c6598675783cb81e0d1d5b4f913016de4cc"
+  },
+  "rights_basis": "Нормативные и базовые рецептурные карты публикуются как фактические рецептурные данные по пользовательскому решению, зафиксированному в docs/family-food/ru-normative-recipe-corpus.md; источник, версия, URL и SHA-256 сохраняются; фотографии, издательская вёрстка, логотипы и сторонние авторские комментарии не публикуются.",
+  "composition_authorities": {
+    "EGG": {
+      "version": 1,
+      "values": {
+        "ENERGY_KCAL": "147.000000",
+        "PROTEIN": "12.400000",
+        "FAT_TOTAL": "9.960000",
+        "CARBOHYDRATE_BY_DIFFERENCE": "0.960000"
+      },
+      "evidence_ref": "data/curation/pr6-ru-food-data/food-readiness.json#EGG"
+    },
+    "FLOUR_WHEAT_HIGH_GRADE": {
+      "version": 1,
+      "values": {
+        "ENERGY_KCAL": "326.7",
+        "PROTEIN": "10.3",
+        "FAT_TOTAL": "1.1",
+        "FATTY_ACIDS_SATURATED_TOTAL": "0.15",
+        "STARCH": "68.7",
+        "SUGARS_TOTAL": "0.2",
+        "FIBER_TOTAL_DIETARY": "2.2",
+        "VITAMIN_A_RE": "0.0",
+        "THIAMIN": "0.17",
+        "RIBOFLAVIN": "0.04",
+        "VITAMIN_C": "0.0",
+        "SODIUM": "3.0",
+        "POTASSIUM": "122.0",
+        "CALCIUM": "18.0",
+        "PHOSPHORUS": "86.0",
+        "IRON": "1.2",
+        "MAGNESIUM": "16.0",
+        "WATER": "14.0"
+      },
+      "evidence_ref": "data/curation/r1a-planner-capacity-dependencies/publication.json#FLOUR_WHEAT_HIGH_GRADE"
+    },
+    "SUGAR": {
+      "version": 1,
+      "values": {
+        "ENERGY_KCAL": "385.000000",
+        "FAT_TOTAL": "0.320000",
+        "CARBOHYDRATE_BY_DIFFERENCE": "99.600000"
+      },
+      "evidence_ref": "data/curation/pr6-ru-food-data/food-readiness.json#SUGAR"
+    },
+    "WATER": {
+      "version": 2,
+      "values": {
+        "ENERGY_KCAL": "0.0",
+        "PROTEIN": "0.0",
+        "FAT_TOTAL": "0.0",
+        "FATTY_ACIDS_SATURATED_TOTAL": "0.0",
+        "STARCH": "0.0",
+        "SUGARS_TOTAL": "0.0",
+        "FIBER_TOTAL_DIETARY": "0.0",
+        "VITAMIN_A_RE": "0.0",
+        "THIAMIN": "0.0",
+        "RIBOFLAVIN": "0.0",
+        "VITAMIN_C": "0.0",
+        "SODIUM": "0.9",
+        "POTASSIUM": "0.3",
+        "CALCIUM": "4.5",
+        "PHOSPHORUS": "0.0",
+        "IRON": "0.0",
+        "MAGNESIUM": "1.0",
+        "WATER": "100.0"
+      },
+      "evidence_ref": "data/curation/r1a-planner-capacity-dependencies/publication.json#WATER"
+    },
+    "YEAST_BAKERS_COMPRESSED": {
+      "version": 1,
+      "values": {
+        "ENERGY_KCAL": "75.1",
+        "PROTEIN": "12.7",
+        "FAT_TOTAL": "2.7",
+        "FATTY_ACIDS_SATURATED_TOTAL": "0.5",
+        "STARCH": "0.0",
+        "SUGARS_TOTAL": "0.0",
+        "FIBER_TOTAL_DIETARY": "0.0",
+        "VITAMIN_A_RE": "0.0",
+        "THIAMIN": "0.6",
+        "RIBOFLAVIN": "0.68",
+        "VITAMIN_C": "0.0",
+        "SODIUM": "21.0",
+        "POTASSIUM": "590.0",
+        "CALCIUM": "27.0",
+        "PHOSPHORUS": "400.0",
+        "IRON": "3.2",
+        "MAGNESIUM": "51.0",
+        "WATER": "74.0"
+      },
+      "evidence_ref": "data/curation/r1a-planner-capacity-dependencies/publication.json#YEAST_BAKERS_COMPRESSED"
+    },
+    "SALT": {
+      "version": 2,
+      "values": {
+        "ENERGY_KCAL": "0.0",
+        "PROTEIN": "0.0",
+        "FAT_TOTAL": "0.0",
+        "FATTY_ACIDS_SATURATED_TOTAL": "0.0",
+        "STARCH": "0.0",
+        "SUGARS_TOTAL": "0.0",
+        "FIBER_TOTAL_DIETARY": "0.0",
+        "VITAMIN_A_RE": "0.0",
+        "THIAMIN": "0.0",
+        "RIBOFLAVIN": "0.0",
+        "VITAMIN_C": "0.0",
+        "SODIUM": "38710.0",
+        "POTASSIUM": "9.0",
+        "CALCIUM": "368.0",
+        "PHOSPHORUS": "75.0",
+        "IRON": "2.93",
+        "MAGNESIUM": "22.0",
+        "WATER": "0.2"
+      },
+      "evidence_ref": "data/curation/r1a-planner-capacity-dependencies/publication.json#SALT"
+    },
+    "MARGARINE_MILK_TABLE": {
+      "version": 1,
+      "values": {
+        "ENERGY_KCAL": "743.2",
+        "PROTEIN": "0.3",
+        "FAT_TOTAL": "82.0",
+        "FATTY_ACIDS_SATURATED_TOTAL": "17.4",
+        "STARCH": "0.0",
+        "SUGARS_TOTAL": "1.0",
+        "FIBER_TOTAL_DIETARY": "0.0",
+        "VITAMIN_A_RE": "0.0",
+        "THIAMIN": "0.0",
+        "RIBOFLAVIN": "0.02",
+        "VITAMIN_C": "0.0",
+        "SODIUM": "171.0",
+        "POTASSIUM": "10.0",
+        "CALCIUM": "11.0",
+        "PHOSPHORUS": "7.0",
+        "IRON": "0.0",
+        "MAGNESIUM": "1.0",
+        "WATER": "16.2"
+      },
+      "evidence_ref": "data/curation/r1a-planner-capacity-dependencies/publication.json#MARGARINE_MILK_TABLE"
+    },
+    "BUTTER_UNSALTED": {
+      "version": 1,
+      "values": {
+        "ENERGY_KCAL": "717.000000",
+        "PROTEIN": "0.850000",
+        "FAT_TOTAL": "81.110000",
+        "CARBOHYDRATE_BY_DIFFERENCE": "0.060000"
+      },
+      "evidence_ref": "data/curation/pr6-ru-food-data/food-readiness.json#BUTTER_UNSALTED"
+    },
+    "CHICKEN_CATEGORY_1_RAW": {
+      "version": 1,
+      "values": {
+        "ENERGY_KCAL": "238.4",
+        "PROTEIN": "18.2",
+        "FAT_TOTAL": "18.4",
+        "FATTY_ACIDS_SATURATED_TOTAL": "4.4",
+        "STARCH": "0.0",
+        "SUGARS_TOTAL": "0.0",
+        "FIBER_TOTAL_DIETARY": "0.0",
+        "VITAMIN_A_RE": "72.0",
+        "THIAMIN": "0.07",
+        "RIBOFLAVIN": "0.15",
+        "VITAMIN_C": "1.8",
+        "SODIUM": "70.0",
+        "POTASSIUM": "194.0",
+        "CALCIUM": "16.0",
+        "PHOSPHORUS": "165.0",
+        "IRON": "1.6",
+        "MAGNESIUM": "18.0",
+        "WATER": "62.6"
+      },
+      "evidence_ref": "data/curation/r1a-planner-capacity-dependencies/publication.json#CHICKEN_CATEGORY_1_RAW"
+    },
+    "ONION_BULB_FRESH": {
+      "version": 1,
+      "values": {
+        "ENERGY_KCAL": "40.2",
+        "PROTEIN": "1.4",
+        "FAT_TOTAL": "0.2",
+        "FATTY_ACIDS_SATURATED_TOTAL": "0.0",
+        "STARCH": "0.1",
+        "SUGARS_TOTAL": "8.1",
+        "FIBER_TOTAL_DIETARY": "3.0",
+        "VITAMIN_A_RE": "0.0",
+        "THIAMIN": "0.05",
+        "RIBOFLAVIN": "0.02",
+        "VITAMIN_C": "10.0",
+        "SODIUM": "4.0",
+        "POTASSIUM": "175.0",
+        "CALCIUM": "31.0",
+        "PHOSPHORUS": "58.0",
+        "IRON": "0.8",
+        "MAGNESIUM": "14.0",
+        "WATER": "86.0"
+      },
+      "evidence_ref": "data/curation/r1a-planner-capacity-dependencies/publication.json#ONION_BULB_FRESH"
+    }
+  },
+  "candidates": [
+    {
+      "source_recipe_id": "USSR82-453",
+      "disposition": "PUBLISH",
+      "canonical_code": "USSR82_453_BOILED_EGGS",
+      "canonical_name": "Яйца вареные",
+      "meal_type_code": "breakfast",
+      "source_url": "https://www.interdoka.ru/kulinaria/1982/7_bluda_yaca/1_varenie/1.html",
+      "source_variant": "selected_1982_variant",
+      "source_output_g": "40",
+      "source_output_text": "выход 40 г",
+      "expected_energy_kcal": "58.800000",
+      "activation": "ACTIVE_AFTER_BINDING_VALIDATION",
+      "ingredients": [
+        {
+          "food_code": "EGG",
+          "quantity_g": "40",
+          "source_amount_text": "Яйцо куриное — 1 шт.; в расчёте 40 г съедобной части",
+          "normalization_note": "source_net_for_calc; Nutrition binding uses exact 40 g edible mass"
+        }
+      ],
+      "source_steps": [
+        "Яйцо сварить всмятку, «в мешочек» или вкрутую в зависимости от требуемого варианта.",
+        "Подать в скорлупе."
+      ],
+      "published_steps": [
+        "Яйцо сварить всмятку, «в мешочек» или вкрутую в зависимости от требуемого варианта.",
+        "Подать в скорлупе."
+      ],
+      "process_review": "No unquantified material ingredient introduced by the reviewed instructions."
+    },
+    {
+      "source_recipe_id": "USSR82-1081",
+      "disposition": "PUBLISH",
+      "canonical_code": "USSR82_1081_BLINI",
+      "canonical_name": "Блины",
+      "meal_type_code": "breakfast",
+      "source_url": "https://www.interdoka.ru/kulinaria/1982/16_muchnie/1_bluda/15.html",
+      "source_variant": "III — с маслом",
+      "source_output_g": "160",
+      "source_output_text": "III — с маслом; выход 160 г",
+      "expected_energy_kcal": "367.688000",
+      "activation": "ACTIVE_AFTER_BINDING_VALIDATION",
+      "ingredients": [
+        {
+          "food_code": "FLOUR_WHEAT_HIGH_GRADE",
+          "quantity_g": "75",
+          "source_amount_text": "Мука пшеничная 75 г",
+          "normalization_note": "verified_primary_net"
+        },
+        {
+          "food_code": "SUGAR",
+          "quantity_g": "3",
+          "source_amount_text": "Сахар 3 г",
+          "normalization_note": "verified_primary_net"
+        },
+        {
+          "food_code": "WATER",
+          "quantity_g": "118",
+          "source_amount_text": "Вода 118 г",
+          "normalization_note": "verified_primary_net"
+        },
+        {
+          "food_code": "YEAST_BAKERS_COMPRESSED",
+          "quantity_g": "3",
+          "source_amount_text": "Дрожжи прессованные 3 г",
+          "normalization_note": "verified_primary_net"
+        },
+        {
+          "food_code": "SALT",
+          "quantity_g": "1.5",
+          "source_amount_text": "Соль 1,5 г",
+          "normalization_note": "verified_primary_net"
+        },
+        {
+          "food_code": "MARGARINE_MILK_TABLE",
+          "quantity_g": "5",
+          "source_amount_text": "Маргарин столовый для выпечки 5 г",
+          "normalization_note": "verified_primary_net; exact R1-A milk-table form"
+        },
+        {
+          "food_code": "BUTTER_UNSALTED",
+          "quantity_g": "10",
+          "source_amount_text": "Масло сливочное при отпуске 10 г",
+          "normalization_note": "verified_primary_net"
+        }
+      ],
+      "source_steps": [
+        "В тёплой воде растворить дрожжи, соль и сахар, затем всыпать просеянную муку и замесить жидкое тесто.",
+        "Оставить тесто для брожения в тёплом месте до увеличения объёма, затем осторожно перемешать.",
+        "Выпекать блины с двух сторон на хорошо разогретой поверхности, смазанной маргарином.",
+        "Подать горячими со сливочным маслом; выход выбранного варианта — 160 г."
+      ],
+      "published_steps": [
+        "В тёплой воде растворить дрожжи, соль и сахар, затем всыпать просеянную муку и замесить жидкое тесто.",
+        "Оставить тесто для брожения в тёплом месте до увеличения объёма, затем осторожно перемешать.",
+        "Выпекать блины с двух сторон на хорошо разогретой поверхности, смазанной маргарином.",
+        "Подать горячими со сливочным маслом; выход выбранного варианта — 160 г."
+      ],
+      "process_review": "Exact variant III retained; alternatives are not mixed."
+    },
+    {
+      "source_recipe_id": "USSR82-697",
+      "disposition": "PUBLISH",
+      "canonical_code": "USSR82_697_BOILED_CHICKEN",
+      "canonical_name": "Курица отварная",
+      "meal_type_code": "main",
+      "source_url": "https://www.interdoka.ru/kulinaria/1982/11_bluda_ptica/1.html",
+      "source_variant": "III, курица, основной продукт без гарнира/соуса",
+      "source_output_g": "75",
+      "source_output_text": "выход основного отварного продукта 75 г; без гарнира/соуса",
+      "expected_energy_kcal": "255.892000",
+      "activation": "ACTIVE_AFTER_BINDING_VALIDATION",
+      "ingredients": [
+        {
+          "food_code": "CHICKEN_CATEGORY_1_RAW",
+          "quantity_g": "107",
+          "source_amount_text": "Курица 107 г",
+          "normalization_note": "verified_net; exact R1-A category-I raw form"
+        },
+        {
+          "food_code": "ONION_BULB_FRESH",
+          "quantity_g": "2",
+          "source_amount_text": "Лук репчатый 2 г",
+          "normalization_note": "verified_net; exact R1-A fresh bulb form"
+        }
+      ],
+      "source_steps": [
+        "Подготовленную тушку или порционные части залить горячей водой и варить при слабом кипении до готовности, добавляя лук и предусмотренные коренья.",
+        "Готовую птицу нарезать порционно; выбранный вариант фиксирует только выход основного отварного продукта 75 г, без гарнира и соуса."
+      ],
+      "published_steps": [
+        "Подготовленную курицу залить горячей водой и варить при слабом кипении до готовности, добавляя лук.",
+        "Готовую курицу нарезать порционно; выход основного отварного продукта — 75 г, без гарнира и соуса."
+      ],
+      "process_review": "Generic source phrase «предусмотренные коренья» is conditional; the selected quantified branch contains only chicken and onion. No root ingredient is invented."
+    },
+    {
+      "source_recipe_id": "USSR82-467",
+      "disposition": "BLOCKED",
+      "reason": "UNQUANTIFIED_PROCESS_INGREDIENT_SALT",
+      "source_url": "https://www.interdoka.ru/kulinaria/1982/7_bluda_yaca/4_omlet/15.html",
+      "evidence": "Verified instruction requires salt; selected quantified ingredient rows contain egg, milk, margarine and butter only. No source salt mass is retained."
+    },
+    {
+      "source_recipe_id": "USSR82-492",
+      "disposition": "BLOCKED",
+      "reason": "UNQUANTIFIED_PROCESS_INGREDIENT_SALT",
+      "source_url": "https://www.interdoka.ru/kulinaria/1982/8_bluda_tvorog/12.html",
+      "evidence": "Verified instruction requires salt; selected quantified ingredient rows contain tvorog, flour, egg, sugar, margarine and sour cream only. No source salt mass is retained."
+    }
+  ]
+}
