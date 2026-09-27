@@ -55,13 +55,12 @@ Old DC1 statuses are not copied forward mechanically.
 Later accepted decisions close several dependencies without a new R1-A write:
 
 - `RICE_GROATS` and `CARROT_RED_RAW` — accepted Step 4 FIC publications;
-- `EGG`, `BUTTER_UNSALTED`, `CABBAGE_GREEN`, `FLOUR_WHEAT`,
-  `ONION_YELLOW`, `SALT`, `SUGAR`, `WATER` — accepted current
-  RU-ready/ATOMIC authorities;
+- `EGG`, `BUTTER_UNSALTED`, `CABBAGE_GREEN`, `SALT`, `SUGAR`, `WATER` —
+  accepted current RU-ready/ATOMIC authorities;
 - `BREADCRUMBS` — accepted RU-ready/ATOMIC authority plus the later v0.3
   `сухари панировочные → BREADCRUMBS` review hint.
 
-R1-A publishes seven exact FIC authorities:
+R1-A publishes nine exact FIC authorities:
 
 | Dependency | FamilyFoodOS | FIC code / DB index |
 |---|---|---|
@@ -72,6 +71,8 @@ R1-A publishes seven exact FIC authorities:
 | ING-0097 | YEAST_BAKERS_COMPRESSED | 31 / 915 |
 | ING-0025 | CHICKEN_CATEGORY_1_RAW | 158 / 110 |
 | ING-0019 | POTATO (reuse existing identity) | 46 / 77 |
+| ING-0028 | ONION_BULB_FRESH | 1186 / 118 |
+| ING-0036 | FLOUR_WHEAT_HIGH_GRADE | 82 / 132 |
 
 Each record publishes the same frozen Step 4B set of 18 V2 concepts and retains
 all 26 reviewed source observations. Carbohydrate remains unavailable in the
@@ -149,11 +150,11 @@ It reuses the accepted Step 3 transactional batch publisher and the frozen Step
 
 Focused runtime tests must prove:
 
-- exact 7-record / 126-value / 182-observation package;
+- exact 9-record / 162-value / 234-observation package;
 - source hash pins;
 - fresh + replay;
 - existing-current preservation;
-- created identity count;
+- created identity count (8 new + 1 existing POTATO reuse);
 - exact ATOMIC versions;
 - conflict / partial-state / rollback behavior;
 - dependency-manifest partition and 5/2 recipe readiness result;
