@@ -1,5 +1,41 @@
 # Handoff
 
+## R1-A review-ready — 2026-09-27
+
+Accepted base:
+`9f72f6883e092cbf79930c7ac4a5a1314c7488d8`.
+
+PR:
+`#101`.
+
+Verified runtime/data head:
+`1f5cc62876a6985eb0d07f119de9b3ccaf9e35d9`.
+
+Result:
+- 20 dependencies;
+- 9 accepted reuses;
+- 9 exact FIC publications;
+- 2 blockers;
+- 5 of 7 selected recipes dependency-ready for R1-B.
+
+Ready:
+USSR82-453, USSR82-467, USSR82-492, USSR82-1081, USSR82-697 exact chicken/main branch.
+
+Blocked:
+- USSR82-364 on ING-0014 / Жир кулинарный;
+- USSR82-208 on ING-0038 / anomalous FIC salted-cucumber source row.
+
+The durable corpus archive was independently retrieved and all 9 published
+source raw-record hashes rechecked.
+
+Exact runtime verification:
+Docs #446 / DC1 #308 / Russian #181 / Registry #317 / Partial #239 — SUCCESS.
+Registry focused = 400 passed; all backend shards + launchers are green.
+
+No RecipeVersion publication/activation and no Planner change occurred.
+
+Stop after PR101 review/merge. R1-B requires separate explicit authorization.
+
 ## R1-A authorized — 2026-09-27
 
 Accepted base:
