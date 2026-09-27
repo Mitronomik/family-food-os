@@ -1,11 +1,9 @@
 import json
-import shutil
 import sqlite3
 from dataclasses import replace
 from datetime import date, datetime, timezone
 from decimal import Decimal
 from importlib import import_module
-from pathlib import Path
 from uuid import UUID
 
 import pytest
@@ -390,6 +388,26 @@ def test_v04_dinner_only_uses_opportunity_share_and_v03_replay_is_unchanged():
     assert v03.trace.allocations == ()
     assert v03.trace.member_daily_residual_shares == ()
 
+    legacy_selection = selection(member_id, ((MealRole.DINNER, None),))
+    legacy_request = replace(
+        request,
+        members=(
+            MemberPlannerConstraints(
+                member_id,
+                legacy_selection,
+                Decimal("2000"),
+            ),
+        ),
+    )
+    legacy_v03 = generate_week(
+        legacy_request,
+        PlannerConfig(version="planner-v0.3", max_recipe_repetitions=10),
+    )
+    assert isinstance(legacy_v03, PlannerSuccess)
+    assert legacy_v03.events == v03.events
+    assert legacy_v03.trace.request_fingerprint == v03.trace.request_fingerprint
+    assert legacy_v03.trace.fingerprint == v03.trace.fingerprint
+
 
 def test_v04_mixed_fixed_source_reserves_share_without_crediting_nutrition():
     member_id = uid(2)
@@ -488,3 +506,8 @@ def test_v04_missing_allocation_fails_before_any_partial_plan():
     assert isinstance(result, PlannerFailure)
     assert result.code is PlannerFailureCode.MISSING_ENERGY_ALLOCATION
     assert result.trace.final_events == ()
+
+
+def test_planner_config_rejects_unknown_algorithm_version():
+    with pytest.raises(ValueError, match="Unsupported Planner algorithm version"):
+        PlannerConfig(version="planner-v0.5")
