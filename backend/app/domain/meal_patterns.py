@@ -3,10 +3,11 @@
 import re
 from dataclasses import dataclass
 from datetime import date, datetime
-from decimal import Decimal, ROUND_HALF_UP
+from decimal import Decimal
 from enum import StrEnum
 from uuid import UUID
 
+from app.domain.decimal_utils import quantize_decimal
 from app.domain.errors import DomainIssue, DomainIssueCode, DomainValidationError
 from app.domain.food_ingredients import normalize_utc_instant
 
@@ -130,7 +131,7 @@ def _energy_share(value: object, *, field: str) -> Decimal | None:
             field=field,
             value=value,
         )
-    normalized = value.quantize(_ENERGY_SHARE_QUANT, rounding=ROUND_HALF_UP)
+    normalized = quantize_decimal(value, _ENERGY_SHARE_QUANT, field=field)
     if normalized <= 0 or normalized > 1:
         raise _issue(
             DomainIssueCode.VALUE_OUT_OF_RANGE,
