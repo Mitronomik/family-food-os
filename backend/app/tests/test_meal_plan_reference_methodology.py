@@ -122,6 +122,9 @@ def _pattern(service, household_id, member_id):
         member_id=member_id,
         source_kind=MemberMealPatternSourceKind.CUSTOM,
         schedule={weekday: (MealRole.DINNER,) for weekday in range(1, 8)},
+        energy_shares={
+            weekday: (Decimal("0.25"),) for weekday in range(1, 8)
+        },
     )
 
 
