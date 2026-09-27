@@ -87,7 +87,16 @@ def test_recipe_version_source_output_is_exact_decimal_truth():
 
 @pytest.mark.parametrize(
     "value",
-    [0, 1.5, "110", Decimal("0"), Decimal("-1"), Decimal("NaN"), Decimal("Infinity")],
+    [
+        0,
+        1.5,
+        "110",
+        Decimal("0"),
+        Decimal("-1"),
+        Decimal("0.0000004"),
+        Decimal("NaN"),
+        Decimal("Infinity"),
+    ],
 )
 def test_recipe_version_rejects_invalid_source_output_mass(value):
     with pytest.raises(DomainValidationError):
