@@ -254,6 +254,8 @@ class RecipeVersion:
     created_from_version_id: UUID | None
     change_note: str
     created_at: datetime
+    source_output_g: Decimal | None = None
+    source_output_text: str | None = None
 
     def __post_init__(self) -> None:
         for field in ("id", "recipe_id"):
@@ -353,6 +355,37 @@ class RecipeVersion:
             self,
             "created_at",
             normalize_utc_instant(self.created_at, field="created_at"),
+        )
+        if self.source_output_g is not None:
+            if not isinstance(self.source_output_g, Decimal):
+                raise _issue(
+                    DomainIssueCode.INVALID_TYPE,
+                    "source_output_g must be Decimal or null.",
+                    field="source_output_g",
+                    value=self.source_output_g,
+                )
+            if not self.source_output_g.is_finite() or self.source_output_g <= 0:
+                raise _issue(
+                    DomainIssueCode.VALUE_OUT_OF_RANGE,
+                    "source_output_g must be positive when present.",
+                    field="source_output_g",
+                    value=self.source_output_g,
+                )
+            object.__setattr__(
+                self,
+                "source_output_g",
+                quantize_decimal(
+                    self.source_output_g, _QUANT, field="source_output_g"
+                ),
+            )
+        object.__setattr__(
+            self,
+            "source_output_text",
+            _optional_text(
+                self.source_output_text,
+                field="source_output_text",
+                maximum=1000,
+            ),
         )
         if self.verified_at is not None:
             object.__setattr__(
