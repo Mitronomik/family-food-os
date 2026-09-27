@@ -98,7 +98,13 @@ They do **not** establish one universal physiologically optimal exact percentage
 for every adult, child, goal, schedule or custom pattern.
 
 They also do not authorize FamilyFoodOS to silently choose the midpoint or another
-exact number from a published range.
+exact number from a published range. Range endpoints from different roles must not
+be combined mechanically; simultaneous upper bounds can exceed 100%.
+
+The source label `snacks 5–15%` is category-level guidance and does not authorize
+assigning 5–15% independently to every duplicate `SNACK` occurrence. A program
+with multiple snack opportunities requires an explicit reviewed split whose total
+and rationale are retained in the FamilyFoodOS curation payload.
 
 **DECISION:** exact persisted shares are versioned **planning-policy parameters**,
 not medical facts. Every automatically published PROGRAM share must be explicitly
@@ -419,7 +425,12 @@ Requirements:
 
 - retain exact evidence/provenance;
 - document that shares are planning policy;
-- keep values within/reconcilable with reviewed official guidance;
+- keep values within/reconcilable with reviewed official guidance without treating
+  independent range endpoints as an executable formula;
+- for duplicate roles, retain the reviewed per-occurrence split and category-total
+  rationale;
+- if a published PROGRAM day's shares sum to less than 1, retain an explicit
+  reviewed reason for the residual outside-Planner share; no unexplained residual;
 - no universal-health superiority claim;
 - no silent backfill of existing program versions.
 
