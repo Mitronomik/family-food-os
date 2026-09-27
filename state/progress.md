@@ -1,5 +1,21 @@
 # Progress
 
+## R1-B runtime started — 2026-09-27
+
+Accepted main:
+`fb89cfeb84f4052233f82daa7dcc2d1c07aa971a`.
+
+Status:
+`R1B_RUNTIME_ACTIVE`.
+
+Authorized:
+- migration 0040;
+- RecipeVersion source output fields;
+- exactly five reviewed R1-B RecipeVersions;
+- exact Composition bindings and V2 Nutrition validation.
+
+No #100 / R1-C / Shopping / API/UI work started.
+
 ## R1-B source-output contract gate started — 2026-09-27
 
 Accepted main:
