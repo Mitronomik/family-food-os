@@ -292,6 +292,8 @@ def _version_values(value: RecipeVersion) -> dict[str, object]:
         "source_retrieved_at": value.source_retrieved_at,
         "source_document_sha256": value.source_document_sha256,
         "source_original_servings": value.source_original_servings,
+        "source_output_g": value.source_output_g,
+        "source_output_text": value.source_output_text,
         "rights_review_status": value.rights_review_status.value,
         "rights_basis": value.rights_basis,
         "created_from_version_id": value.created_from_version_id,
@@ -376,6 +378,8 @@ def _version_from_row(row: Mapping[str, Any]) -> RecipeVersion:
         created_from_version_id=row["created_from_version_id"],
         change_note=row["change_note"],
         created_at=row["created_at"],
+        source_output_g=row["source_output_g"],
+        source_output_text=row["source_output_text"],
     )
 
 
