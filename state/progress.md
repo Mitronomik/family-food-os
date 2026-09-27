@@ -1,5 +1,27 @@
 # Progress
 
+## R1-A Planner-energy closure verified — 2026-09-27
+
+Verified runtime/data head:
+`c92a19bdc4f3760bb50f2957068682d62ac126cf`.
+
+Final dependency result:
+- 20 unique dependencies;
+- 11 exact FIC publications;
+- 7 accepted late-state reuses;
+- 2 blockers;
+- 5 recipes dependency-ready for R1-B;
+- WATER/SALT exact source-published zero-energy authority added via ATOMIC v2;
+- 198 canonical V2 values;
+- 286 retained source observations.
+
+Verification:
+Docs #458, DC1 #320, Russian #193, Registry #339, Partial #251 — SUCCESS.
+All focused suites, backend shards and launchers are green.
+
+Status:
+`R1A_REVIEW_READY`.
+
 ## R1-A review-ready — 2026-09-27
 
 Accepted base:
