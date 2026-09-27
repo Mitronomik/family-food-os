@@ -528,6 +528,7 @@ def test_complete_manual_week_supports_three_member_household():
             member_id=member.id,
             source_kind=MemberMealPatternSourceKind.CUSTOM,
             schedule={weekday: (MealRole.DINNER,) for weekday in range(1, 8)},
+            energy_shares=_dinner_shares(),
         )
         for member in members
     ]
