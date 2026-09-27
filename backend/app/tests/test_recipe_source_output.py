@@ -1,3 +1,4 @@
+import shutil
 import sqlite3
 from dataclasses import replace
 from datetime import datetime, timezone
