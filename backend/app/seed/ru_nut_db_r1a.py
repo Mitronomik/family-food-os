@@ -135,7 +135,7 @@ def load_ru_nut_db_r1a_bundles(
 
     records = publication.get("records")
     if not isinstance(records, list) or len(records) != len(EXPECTED):
-        raise ValueError("R1-A должен содержать ровно семь source records.")
+        raise ValueError(f"R1-A должен содержать ровно {len(EXPECTED)} source records.")
 
     mapping_fields = {row["source_field"] for row in mappings}
     verified_at = datetime.fromisoformat("2026-09-27T00:00:00+00:00")
