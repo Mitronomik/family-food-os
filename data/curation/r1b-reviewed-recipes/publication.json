@@ -220,105 +220,17 @@
   "candidates": [
     {
       "source_recipe_id": "USSR82-453",
-      "disposition": "PUBLISH",
-      "canonical_code": "USSR82_453_BOILED_EGGS",
-      "canonical_name": "Яйца вареные",
-      "meal_type_code": "breakfast",
+      "disposition": "BLOCKED",
       "source_url": "https://www.interdoka.ru/kulinaria/1982/7_bluda_yaca/1_varenie/1.html",
-      "source_variant": "selected_1982_variant",
-      "source_output_g": "40",
-      "source_output_text": "выход 40 г",
-      "activation": "INACTIVE_PENDING_TRANSFORMATION_AUTHORITY",
-      "ingredients": [
-        {
-          "food_code": "EGG",
-          "quantity_g": "40",
-          "source_amount_text": "Яйцо куриное — 1 шт.; в расчёте 40 г съедобной части",
-          "normalization_note": "source_net_for_calc; Nutrition binding uses exact 40 g edible mass"
-        }
-      ],
-      "source_steps": [
-        "Яйцо сварить всмятку, «в мешочек» или вкрутую в зависимости от требуемого варианта.",
-        "Подать в скорлупе."
-      ],
-      "published_steps": [
-        "Яйцо сварить всмятку, «в мешочек» или вкрутую в зависимости от требуемого варианта.",
-        "Подать в скорлупе."
-      ],
-      "process_review": "No unquantified material ingredient introduced by the reviewed instructions.",
-      "expected_input_energy_kcal": "58.800000",
-      "activation_reason": "Cooked recipe requires separately reviewed Step 7 transformation/retention authority before consumer/Planner activation."
+      "reason": "V2_COMPOSITION_AUTHORITY_MISSING_EGG",
+      "evidence": "Accepted EGG Composition v1 is pinned to the historical nutrient registry; Step10 V2 binding rejects mixed/V1 atomic authority. R1-B does not publish a new food/nutrition authority."
     },
     {
       "source_recipe_id": "USSR82-1081",
-      "disposition": "PUBLISH",
-      "canonical_code": "USSR82_1081_BLINI",
-      "canonical_name": "Блины",
-      "meal_type_code": "breakfast",
+      "disposition": "BLOCKED",
       "source_url": "https://www.interdoka.ru/kulinaria/1982/16_muchnie/1_bluda/15.html",
-      "source_variant": "III — с маслом",
-      "source_output_g": "160",
-      "source_output_text": "III — с маслом; выход 160 г",
-      "activation": "INACTIVE_PENDING_TRANSFORMATION_AUTHORITY",
-      "ingredients": [
-        {
-          "food_code": "FLOUR_WHEAT_HIGH_GRADE",
-          "quantity_g": "75",
-          "source_amount_text": "Мука пшеничная 75 г",
-          "normalization_note": "verified_primary_net"
-        },
-        {
-          "food_code": "SUGAR",
-          "quantity_g": "3",
-          "source_amount_text": "Сахар 3 г",
-          "normalization_note": "verified_primary_net"
-        },
-        {
-          "food_code": "WATER",
-          "quantity_g": "118",
-          "source_amount_text": "Вода 118 г",
-          "normalization_note": "verified_primary_net"
-        },
-        {
-          "food_code": "YEAST_BAKERS_COMPRESSED",
-          "quantity_g": "3",
-          "source_amount_text": "Дрожжи прессованные 3 г",
-          "normalization_note": "verified_primary_net"
-        },
-        {
-          "food_code": "SALT",
-          "quantity_g": "1.5",
-          "source_amount_text": "Соль 1,5 г",
-          "normalization_note": "verified_primary_net"
-        },
-        {
-          "food_code": "MARGARINE_MILK_TABLE",
-          "quantity_g": "5",
-          "source_amount_text": "Маргарин столовый для выпечки 5 г",
-          "normalization_note": "verified_primary_net; exact R1-A milk-table form"
-        },
-        {
-          "food_code": "BUTTER_UNSALTED",
-          "quantity_g": "10",
-          "source_amount_text": "Масло сливочное при отпуске 10 г",
-          "normalization_note": "verified_primary_net"
-        }
-      ],
-      "source_steps": [
-        "В тёплой воде растворить дрожжи, соль и сахар, затем всыпать просеянную муку и замесить жидкое тесто.",
-        "Оставить тесто для брожения в тёплом месте до увеличения объёма, затем осторожно перемешать.",
-        "Выпекать блины с двух сторон на хорошо разогретой поверхности, смазанной маргарином.",
-        "Подать горячими со сливочным маслом; выход выбранного варианта — 160 г."
-      ],
-      "published_steps": [
-        "В тёплой воде растворить дрожжи, соль и сахар, затем всыпать просеянную муку и замесить жидкое тесто.",
-        "Оставить тесто для брожения в тёплом месте до увеличения объёма, затем осторожно перемешать.",
-        "Выпекать блины с двух сторон на хорошо разогретой поверхности, смазанной маргарином.",
-        "Подать горячими со сливочным маслом; выход выбранного варианта — 160 г."
-      ],
-      "process_review": "Exact variant III retained; alternatives are not mixed.",
-      "expected_input_energy_kcal": "368.114000",
-      "activation_reason": "Cooked recipe requires separately reviewed Step 7 transformation/retention authority before consumer/Planner activation."
+      "reason": "V2_COMPOSITION_AUTHORITY_MISSING_BUTTER",
+      "evidence": "Accepted BUTTER_UNSALTED Composition v1 is pinned to the historical nutrient registry; Step10 V2 binding rejects mixed/V1 atomic authority. R1-B does not publish a new food/nutrition authority."
     },
     {
       "source_recipe_id": "USSR82-697",
