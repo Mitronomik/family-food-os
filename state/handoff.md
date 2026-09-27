@@ -1,5 +1,24 @@
 # Handoff
 
+## R1-A WATER/SALT Planner-energy closure — 2026-09-27
+
+Verified runtime/data head:
+`c92a19bdc4f3760bb50f2957068682d62ac126cf`.
+
+Correction after deep review:
+- WATER and SALT were previously catalogue-ready but had V2 ENERGY_KCAL unknown;
+- exact durable FIC records publish source-backed kcal=0.0;
+- both existing identities receive non-current FIC profiles and ATOMIC v2;
+- historical current profiles and ATOMIC v1 remain unchanged;
+- R1-A result is now 11 publications + 7 late-state reuses + 2 blockers;
+- all 5 declared R1-B-ready recipes have exact energy authority at dependency level.
+
+Verification:
+Docs #458 / DC1 #320 / Russian #193 / Registry #339 / Partial #251 — SUCCESS.
+Registry and Partial focused, all backend shards and launchers are green.
+
+No RecipeVersion or Planner change occurred.
+
 ## R1-A review-ready — 2026-09-27
 
 Accepted base:
