@@ -1,5 +1,28 @@
 # Handoff
 
+## #100 Planner energy-allocation runtime authorized — 2026-09-27
+
+PR105 merged into main:
+`690a17a8c220e7e8f8e93bd63ba46356c73f0503`.
+
+The user explicitly authorized continuation after the merged Contract Gate.
+
+Current branch:
+`feat/planner-energy-allocation-v04`.
+
+Runtime contract:
+`docs/family-food/planner-energy-allocation-contract.md`.
+
+Bounded work:
+- migration 0041;
+- reviewed allocation-ready Meal Pattern program versions;
+- immutable selection energy shares;
+- planner-v0.4 allocation and trace;
+- exact replay/conflict/rollback verification;
+- preserve planner-v0.3 semantics.
+
+No R1-C / Shopping / Recipe activation work is authorized.
+
 ## PR104 post-merge integrity correction — 2026-09-27
 
 PR104 merged into main at:
