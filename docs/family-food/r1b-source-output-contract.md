@@ -102,7 +102,7 @@ SHA-256:
 R1-B must use:
 
 ```text
-source_name = reviewed USSR82 corpus identity
+source_name = USSR82
 source_version = sha256:6ac7dfb300844fd996aee6d20b4e7e6aa421dd517367ab1f59120812fee104d5
 source_document_sha256 = 6ac7dfb300844fd996aee6d20b4e7e6aa421dd517367ab1f59120812fee104d5
 source_url = exact card URL retained in the reviewed row
