@@ -1,5 +1,11 @@
 {
   "accepted_base": "9f72f6883e092cbf79930c7ac4a5a1314c7488d8",
+  "allergen_boundary": {
+    "automatic_allergen_filtering_claimed": false,
+    "ingredient_exclusions_remain_authoritative": true,
+    "rationale": "The accepted FIC nutrient snapshot is not an allergen-label authority; no allergen code is inferred from food identity.",
+    "status": "NOT_REVIEWED_NO_AUTOMATIC_ALLERGEN_CLAIMS"
+  },
   "counts": {
     "accepted_reuse_dependency_count": 9,
     "blocked_dependency_count": 2,
