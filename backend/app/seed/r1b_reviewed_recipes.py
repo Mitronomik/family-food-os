@@ -22,10 +22,7 @@ from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
     create_recipe_nutrition_v2_service,
 )
 from app.seed.ru_nut_db_r1a import load_ru_nut_db_r1a_bundles
-from app.seed.ru_nut_db_r1b_dependencies import (
-    load_ru_nut_db_r1b_dependency_bundles,
-    seed_ru_nut_db_r1b_dependencies,
-)
+from app.seed.ru_food_data import load_ru_food_entries
 from app.seed.ru_nut_db_step4 import load_ru_nut_db_step4_bundles
 from app.services.food_recipes import (
     RecipeSeedSummary,
@@ -87,34 +84,47 @@ def _decimal(value: object, *, field: str) -> Decimal:
     return result
 
 
-def _accepted_authorities() -> dict[str, tuple[int, dict[str, Decimal]]]:
-    accepted: dict[str, tuple[int, dict[str, Decimal]]] = {}
+def _accepted_authorities() -> dict[str, dict[str, object]]:
+    accepted: dict[str, dict[str, object]] = {}
 
+    # Existing PR6 authorities remain valid sparse V2 truth. Missing nutrients
+    # stay unknown; R1-B must not publish new Food/Nutrition authority merely to
+    # make Recipe Nutrition look complete.
+    for entry in load_ru_food_entries():
+        row = entry["row"]
+        composition = row.get("composition_reference")
+        if not composition:
+            continue
+        accepted[row["food_code"]] = {
+            "version": int(composition["version"]),
+            "values": {
+                value["nutrient_code"]: value["amount"]
+                for value in entry["values"]
+            },
+            "value_sha256": row["vector_reference"]["value_sha256"],
+        }
+
+    # Later accepted exact FIC authorities supersede the older authority for
+    # their exact canonical form/version only.
     for bundle in load_ru_nut_db_step4_bundles():
-        accepted[bundle.ingredient.canonical_code] = (
-            bundle.atomic_composition.version,
-            {
+        accepted[bundle.ingredient.canonical_code] = {
+            "version": bundle.atomic_composition.version,
+            "values": {
                 value.nutrient_code: value.amount
                 for value in bundle.vector.values
             },
-        )
+            "value_sha256": bundle.vector.value_sha256,
+        }
 
     for bundle in load_ru_nut_db_r1a_bundles():
-        accepted[bundle.ingredient.canonical_code] = (
-            bundle.atomic_composition.version,
-            {
+        accepted[bundle.ingredient.canonical_code] = {
+            "version": bundle.atomic_composition.version,
+            "values": {
                 value.nutrient_code: value.amount
                 for value in bundle.vector.values
             },
-        )
-    for bundle in load_ru_nut_db_r1b_dependency_bundles():
-        accepted[bundle.ingredient.canonical_code] = (
-            bundle.atomic_composition.version,
-            {
-                value.nutrient_code: value.amount
-                for value in bundle.vector.values
-            },
-        )
+            "value_sha256": bundle.vector.value_sha256,
+        }
     return accepted
 
 
@@ -129,18 +139,26 @@ def _validate_authorities(package: dict[str, Any]) -> None:
     for code, value in raw.items():
         if not isinstance(value, dict):
             raise ValueError(f"R1-B authority {code} повреждена.")
-        version, actual_values = accepted[code]
-        if value.get("version") != version:
+        actual = accepted[code]
+        if value.get("version") != actual["version"]:
             raise ValueError(f"R1-B Composition version изменена для {code}.")
+
         expected_values = value.get("values")
-        if not isinstance(expected_values, dict):
-            raise ValueError(f"R1-B authority values отсутствуют для {code}.")
-        parsed = {
-            nutrient_code: _decimal(amount, field=f"{code}.{nutrient_code}")
-            for nutrient_code, amount in expected_values.items()
-        }
-        if parsed != actual_values:
-            raise ValueError(f"R1-B reviewed vector отличается от accepted authority: {code}.")
+        if expected_values is not None:
+            if not isinstance(expected_values, dict):
+                raise ValueError(f"R1-B authority values повреждены для {code}.")
+            parsed = {
+                nutrient_code: _decimal(amount, field=f"{code}.{nutrient_code}")
+                for nutrient_code, amount in expected_values.items()
+            }
+            if parsed != actual["values"]:
+                raise ValueError(
+                    f"R1-B reviewed vector отличается от accepted authority: {code}."
+                )
+            continue
+
+        if value.get("value_sha256") != actual["value_sha256"]:
+            raise ValueError(f"R1-B vector hash изменён для {code}.")
 
 
 def _require_package_identity(package: dict[str, Any]) -> None:
@@ -291,19 +309,15 @@ def _binding_specs(
         if row["disposition"] == "PUBLISH"
     }
     authorities = package["composition_authorities"]
+    accepted = _accepted_authorities()
     specs: list[ReviewedRecipeIngredientBindingSpec] = []
 
     for seed in seeds:
         source_row = by_source[seed.version.source_recipe_id]
         for position, ingredient in enumerate(seed.version.ingredients, start=1):
             authority = authorities[ingredient.food_ingredient_code]
-            per_100 = {
-                code: _decimal(
-                    amount,
-                    field=f"{ingredient.food_ingredient_code}.{code}",
-                )
-                for code, amount in authority["values"].items()
-            }
+            accepted_authority = accepted[ingredient.food_ingredient_code]
+            per_100 = accepted_authority["values"]
             with localcontext(calculation_context()):
                 available = tuple(
                     (
@@ -330,7 +344,7 @@ def _binding_specs(
                     food_ingredient_code=ingredient.food_ingredient_code,
                     quantity=ingredient.quantity,
                     unit="g",
-                    composition_version=int(authority["version"]),
+                    composition_version=int(accepted_authority["version"]),
                     composition_kind="ATOMIC",
                     composition_input_state="INPUT",
                     expected_available_amounts=available,
@@ -387,7 +401,6 @@ def seed_r1b_recipes(
     finally:
         preflight_engine.dispose()
 
-    dependency_result = seed_ru_nut_db_r1b_dependencies(config)
     engine = create_sqlite_engine(config)
     try:
         catalogue = create_food_recipe_catalogue_service(engine)
@@ -429,7 +442,7 @@ def seed_r1b_recipes(
         activated = _activate_recipes(engine, seeds)
         return R1BPublicationResult(
             recipe_summary=recipe_summary,
-            dependency_bundle_created_count=dependency_result.bundle_created_count,
+            dependency_bundle_created_count=0,
             binding_fresh_count=fresh,
             binding_replay_count=replay,
             activated_count=activated,
