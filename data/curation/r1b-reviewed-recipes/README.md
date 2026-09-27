@@ -67,7 +67,7 @@ publication payload.
 - meal type: breakfast
 - quantified input: EGG 40 g edible source calculation mass
 - source output: 40 g
-- exact energy after Composition binding: 62.840000 kcal
+- exact energy after Composition binding: 58.800000 kcal
 - process contains no extra unquantified material ingredient
 
 ### USSR82-1081 — Блины
@@ -84,7 +84,7 @@ publication payload.
   - MARGARINE_MILK_TABLE 5 g
   - BUTTER_UNSALTED 10 g
 - source output: 160 g
-- exact energy after Composition binding: 371.184000 kcal
+- exact energy after Composition binding: 368.114000 kcal
 - alternatives are not mixed
 
 ### USSR82-697 — Курица отварная
@@ -129,16 +129,15 @@ exact input grams
 The package cross-checks reviewed Composition versions and nutrient values
 against accepted hash-pinned loaders:
 
-- Step4 FIC/V2 authority for SUGAR (ATOMIC v2);
-- merged R1-A authorities for exact new forms and WATER/SALT;
-- R1-B bounded FIC/V2 dependency closure for existing EGG and BUTTER_UNSALTED
-  identities (ATOMIC v2).
+- accepted PR6 sparse authorities for EGG and BUTTER_UNSALTED (ATOMIC v1);
+- Step4 FIC/V2 authority for SUGAR;
+- merged R1-A authorities for exact new forms and WATER/SALT.
 
-The R1-B EGG/BUTTER profiles are non-current and preserve historical current
-profiles/ATOMIC v1. They exist only to provide exact V2-compatible Composition
-authority for the reviewed RecipeIngredient bindings.
+R1-B does not create new Food/Nutrition authority for EGG or BUTTER_UNSALTED.
+Their accepted sparse vectors provide exact energy while nutrients absent from
+those vectors remain explicitly unknown in Recipe Nutrition.
 
-The package cannot silently redefine those vectors.
+The package cannot silently redefine accepted vectors or fill unknown nutrients.
 
 ## Publication behavior
 
@@ -147,8 +146,8 @@ R1-B publication order:
 1. preflight all three trusted Recipe seeds;
 2. accept only all-FRESH or all-EXACT_REPLAY state;
 3. publish three RecipeVersions as initially inactive;
-4. publish ten exact RecipeIngredient Composition bindings;
-5. calculate deterministic canonical Recipe Nutrition;
+4. publish ten exact RecipeIngredient Composition bindings using already accepted Composition versions;
+5. calculate deterministic canonical Recipe Nutrition with unknown propagation;
 6. require reviewed exact energy and `exact_energy_ready=true`;
 7. activate the three recipes only after every validation succeeds.
 
