@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "operation": "R1B_V2_DEPENDENCY_CLOSURE",
+  "source": {
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "raw_html_sha256": "155107ddb381c14721c77fe995d604a5197982441446b54034e4d84645efbd6d",
+    "source_id": "RU-NUT-DB",
+    "source_name": "FIC_RU_NUT_DB",
+    "source_version": "snapshot-2026-09-20-155107ddb381c147",
+    "source_data_type": "official_electronic_database_snapshot",
+    "basis_grams": "100",
+    "captured_date": "2026-09-20",
+    "verified_at": "2026-09-27T00:00:00Z"
+  },
+  "mapping_contract": {
+    "path": "data/curation/ru-nut-db-step4-semantic-closure/field-mapping.json",
+    "sha256": "bf77239d5976e5ec03d01f524726f9c2e8afb5fc4d92a884b62aa63dfe3a9477",
+    "approved_field_count": 18,
+    "v2_rows_per_record": 18
+  },
+  "authority": {
+    "attribution": "Данные о химическом составе продуктов предоставлены ФГБУН «ФИЦ питания и биотехнологии» (база «Химический состав пищевых продуктов, используемых в Российской Федерации»).",
+    "receipt_path": "docs/family-food/fic-nutrition-license-receipt.md"
+  },
+  "records": [
+    {
+      "r1b_dependency": "EGG",
+      "platform": {
+        "action": "REUSE_EXISTING",
+        "atomic_version": 2,
+        "canonical_code": "EGG",
+        "canonical_name": "Яйцо куриное целое",
+        "category_code": "eggs",
+        "default_unit": "g",
+        "mass_state": "INPUT"
+      },
+      "source": {
+        "source_code": "2287",
+        "db_index": 316,
+        "json_pointer": "/DB/316",
+        "source_name": "Яйцо куриное сырое",
+        "raw_record_sha256": "9c85665d295de25e51d8722ffa6196be6288ee65c2bdc355f108745abfc4e2d1"
+      },
+      "nutrients": {
+        "kcal": "157.1",
+        "prot": "12.7",
+        "fat": "11.5",
+        "satur": "3.0",
+        "cholest": "570.0",
+        "carbh": "0.7",
+        "starch": "0.0",
+        "mdsug": "0.7",
+        "sugar_ad": "0.0",
+        "diet_fibre": "0.0",
+        "ethanol": "0.0",
+        "a_vit": "250.0",
+        "carot": "60.0",
+        "ret_equiv": "260.0",
+        "b1": "0.07",
+        "b2": "0.44",
+        "pp": "0.19",
+        "c": "0.0",
+        "salt_ad": "0.0",
+        "na": "134.0",
+        "k": "140.0",
+        "ca": "55.0",
+        "p": "192.0",
+        "fe": "2.5",
+        "mg": "12.0",
+        "water": "74.1"
+      }
+    },
+    {
+      "r1b_dependency": "BUTTER_UNSALTED",
+      "platform": {
+        "action": "REUSE_EXISTING",
+        "atomic_version": 2,
+        "canonical_code": "BUTTER_UNSALTED",
+        "canonical_name": "Масло сливочное несолёное",
+        "category_code": "fats_oils",
+        "default_unit": "g",
+        "mass_state": "INPUT"
+      },
+      "source": {
+        "source_code": "1418",
+        "db_index": 534,
+        "json_pointer": "/DB/534",
+        "source_name": "Масло сливочное несоленое, 82,5%",
+        "raw_record_sha256": "b36f472a7bac1f31bf8bf6ba8900d1ed6d15c9f4d8f91a8b05138595c457117f"
+      },
+      "nutrients": {
+        "kcal": "747.7",
+        "prot": "0.5",
+        "fat": "82.5",
+        "satur": "53.6",
+        "cholest": "190.0",
+        "carbh": "0.8",
+        "starch": "0.0",
+        "mdsug": "0.8",
+        "sugar_ad": "0.0",
+        "diet_fibre": "0.0",
+        "ethanol": "0.0",
+        "a_vit": "590.0",
+        "carot": "380.0",
+        "ret_equiv": "653.33",
+        "b1": "0.0",
+        "b2": "0.1",
+        "pp": "0.05",
+        "c": "0.0",
+        "salt_ad": "0.0",
+        "na": "7.0",
+        "k": "15.0",
+        "ca": "12.0",
+        "p": "19.0",
+        "fe": "0.2",
+        "mg": "0.4",
+        "water": "16.0"
+      }
+    }
+  ]
+}
