@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "operation": "PLANNER_ENERGY_ALLOCATION_V04_PROGRAMS",
+  "accepted_base": "690a17a8c220e7e8f8e93bd63ba46356c73f0503",
+  "reviewed_on": "2026-09-27",
+  "sources": [
+    {
+      "code": "ROSPOTREBNADZOR_HEALTHY_RATION",
+      "source_name": "ФБУЗ «Центр гигиенического образования населения» Роспотребнадзора",
+      "source_title": "Как составить здоровый рацион",
+      "source_url": "https://cgon.rospotrebnadzor.ru/upload/docs/Тема_3_Как_составить_здоровый_рацион.pdf",
+      "source_version": "reviewed 2026-09-27",
+      "retrieved_on": "2026-09-27",
+      "evidence_scope": "ENERGY_DISTRIBUTION_POLICY",
+      "review_note_ru": "Источник задаёт диапазоны распределения энергии между ролями приёмов пищи; FamilyFoodOS использует их как границы review, а не как автоматическую формулу."
+    },
+    {
+      "code": "ROSPOTREBNADZOR_HEALTHY_EATING_BULLETIN",
+      "source_name": "ФБУЗ «Центр гигиенического образования населения» Роспотребнадзора",
+      "source_title": "Курс на здоровое питание",
+      "source_url": "https://cgon.rospotrebnadzor.ru/upload/pdf/pechatnaya_produktsiya/byulleten_a2.pdf",
+      "source_version": "reviewed 2026-09-27",
+      "retrieved_on": "2026-09-27",
+      "evidence_scope": "ENERGY_DISTRIBUTION_POLICY",
+      "review_note_ru": "Источник подтверждает диапазоны для завтрака, обеда, ужина и перекусов; точные доли ниже являются версионированной planning policy FamilyFoodOS."
+    }
+  ],
+  "programs": [
+    {
+      "code": "ADULT_REGULAR_3",
+      "target_version_number": 2,
+      "expected_previous_version_number": 1,
+      "shares": [
+        "0.30",
+        "0.35",
+        "0.25"
+      ],
+      "residual_share": "0.10",
+      "residual_rationale_ru": "Оставшиеся 10% явно находятся вне Planner scope и допускают непланируемый перекус без переноса энергии в три основных приёма пищи.",
+      "change_note": "Add reviewed Planner v0.4 energy allocation policy.",
+      "evidence_codes": [
+        "ROSPOTREBNADZOR_HEALTHY_RATION",
+        "ROSPOTREBNADZOR_HEALTHY_EATING_BULLETIN"
+      ]
+    },
+    {
+      "code": "ADULT_REGULAR_3_PLUS_SNACK",
+      "target_version_number": 2,
+      "expected_previous_version_number": 1,
+      "shares": [
+        "0.30",
+        "0.35",
+        "0.10",
+        "0.25"
+      ],
+      "residual_share": "0.00",
+      "residual_rationale_ru": "Четыре запланированных приёма пищи покрывают полную planning allocation; это policy, а не медицинское утверждение.",
+      "change_note": "Add reviewed Planner v0.4 energy allocation policy.",
+      "evidence_codes": [
+        "ROSPOTREBNADZOR_HEALTHY_RATION",
+        "ROSPOTREBNADZOR_HEALTHY_EATING_BULLETIN"
+      ]
+    }
+  ]
+}
