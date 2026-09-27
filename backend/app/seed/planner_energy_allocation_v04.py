@@ -1,7 +1,7 @@
 """Reviewed allocation-ready Meal Pattern publication for Planner v0.4."""
 
 import json
-from datetime import date, datetime, timezone
+from datetime import date, datetime
 from decimal import Decimal
 from pathlib import Path
 
@@ -99,24 +99,22 @@ def load_planner_energy_allocation_seeds(
                     review_note_ru=source["review_note_ru"],
                 )
             )
-        if code == "ADULT_REGULAR_3":
-            roles = ("BREAKFAST", "LUNCH", "DINNER")
-            display = "Три основных приёма пищи"
-            explanation = (
-                "Нейтральный режим для планирования завтрака, обеда и ужина. "
-                "FamilyFoodOS не утверждает, что три приёма пищи полезнее другой "
-                "подходящей частоты."
-            )
-        elif code == "ADULT_REGULAR_3_PLUS_SNACK":
-            roles = ("BREAKFAST", "LUNCH", "SNACK", "DINNER")
-            display = "Три приёма пищи и перекус"
-            explanation = (
-                "Нейтральный режим для планирования трёх основных приёмов пищи и "
-                "одного перекуса. FamilyFoodOS не приписывает дополнительному "
-                "перекусу универсальное преимущество для здоровья или контроля энергии."
-            )
-        else:
+        if code not in EXPECTED_CODES:
             raise PlannerEnergyAllocationSeedError(f"Unexpected program code: {code}.")
+        roles_raw = row.get("roles")
+        tags_raw = row.get("tags")
+        if not isinstance(roles_raw, list) or not isinstance(tags_raw, list):
+            raise PlannerEnergyAllocationSeedError(
+                f"{code} must pin roles and tags."
+            )
+        roles = tuple(str(value) for value in roles_raw)
+        tags = tuple(
+            (str(value[0]), str(value[1]))
+            for value in tags_raw
+            if isinstance(value, list) and len(value) == 2
+        )
+        if len(tags) != len(tags_raw):
+            raise PlannerEnergyAllocationSeedError(f"{code} tags are invalid.")
         if len(shares) != len(roles):
             raise PlannerEnergyAllocationSeedError(
                 f"{code} must have one share per opportunity."
@@ -129,18 +127,22 @@ def load_planner_energy_allocation_seeds(
                     row["expected_previous_version_number"]
                 ),
                 version=TrustedMealPatternVersionSeed(
-                    lifecycle="PUBLISHED",
-                    scope="WELLNESS_SCHEDULE",
-                    display_name_ru=display,
-                    explanation_ru=explanation,
-                    min_age_years=19,
-                    max_age_years=None,
-                    review_status="REVIEWED",
-                    reviewed_at=datetime(2026, 9, 27, tzinfo=timezone.utc),
-                    published_at=datetime(2026, 9, 27, tzinfo=timezone.utc),
-                    change_note=row["change_note"],
+                    lifecycle=row["lifecycle"],
+                    scope=row["scope"],
+                    display_name_ru=row["display_name_ru"],
+                    explanation_ru=row["explanation_ru"],
+                    min_age_years=int(row["min_age_years"]),
+                    max_age_years=row["max_age_years"],
+                    review_status=row["review_status"],
+                    reviewed_at=datetime.fromisoformat(row["reviewed_at"]),
+                    published_at=datetime.fromisoformat(row["published_at"]),
+                    change_note=(
+                        f"{row['change_note']} "
+                        f"Residual allocation: {row['residual_share']}; "
+                        f"review rationale: {rationale}"
+                    ),
                     opportunity_roles=roles,
-                    tags=(("CONTEXT", "GENERAL_WELLNESS_SCHEDULE"),),
+                    tags=tags,
                     evidence=tuple(evidence),
                     opportunity_energy_shares=shares,
                 ),
