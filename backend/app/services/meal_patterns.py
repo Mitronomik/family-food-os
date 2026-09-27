@@ -256,18 +256,21 @@ class MealPatternCatalogueService:
                 target = scope.versions.get_by_number(
                     program.id, entry.target_version_number
                 )
+                versions = scope.versions.list_for_program(program.id)
+                latest = versions[-1] if versions else None
                 if target is not None:
                     if (
                         target.version.created_from_version_id != previous.version.id
                         or not _seed_matches(target, entry.version)
+                        or latest is None
+                        or latest.id != target.version.id
+                        or latest.version_number != entry.target_version_number
                     ):
                         raise MealPatternCatalogueConflictError(
-                            "Existing target MealPatternProgramVersion differs from trusted allocation seed."
+                            "Existing target MealPatternProgramVersion or history differs from trusted allocation seed."
                         )
                     existing_versions += 1
                     continue
-                versions = scope.versions.list_for_program(program.id)
-                latest = versions[-1] if versions else None
                 if (
                     latest is None
                     or latest.version_number != entry.expected_previous_version_number
