@@ -228,8 +228,7 @@
       "source_variant": "selected_1982_variant",
       "source_output_g": "40",
       "source_output_text": "выход 40 г",
-      "expected_energy_kcal": "58.800000",
-      "activation": "ACTIVE_AFTER_BINDING_VALIDATION",
+      "activation": "INACTIVE_PENDING_TRANSFORMATION_AUTHORITY",
       "ingredients": [
         {
           "food_code": "EGG",
@@ -246,7 +245,9 @@
         "Яйцо сварить всмятку, «в мешочек» или вкрутую в зависимости от требуемого варианта.",
         "Подать в скорлупе."
       ],
-      "process_review": "No unquantified material ingredient introduced by the reviewed instructions."
+      "process_review": "No unquantified material ingredient introduced by the reviewed instructions.",
+      "expected_input_energy_kcal": "58.800000",
+      "activation_reason": "Cooked recipe requires separately reviewed Step 7 transformation/retention authority before consumer/Planner activation."
     },
     {
       "source_recipe_id": "USSR82-1081",
@@ -258,8 +259,7 @@
       "source_variant": "III — с маслом",
       "source_output_g": "160",
       "source_output_text": "III — с маслом; выход 160 г",
-      "expected_energy_kcal": "368.114000",
-      "activation": "ACTIVE_AFTER_BINDING_VALIDATION",
+      "activation": "INACTIVE_PENDING_TRANSFORMATION_AUTHORITY",
       "ingredients": [
         {
           "food_code": "FLOUR_WHEAT_HIGH_GRADE",
@@ -316,7 +316,9 @@
         "Выпекать блины с двух сторон на хорошо разогретой поверхности, смазанной маргарином.",
         "Подать горячими со сливочным маслом; выход выбранного варианта — 160 г."
       ],
-      "process_review": "Exact variant III retained; alternatives are not mixed."
+      "process_review": "Exact variant III retained; alternatives are not mixed.",
+      "expected_input_energy_kcal": "368.114000",
+      "activation_reason": "Cooked recipe requires separately reviewed Step 7 transformation/retention authority before consumer/Planner activation."
     },
     {
       "source_recipe_id": "USSR82-697",
@@ -328,8 +330,7 @@
       "source_variant": "III, курица, основной продукт без гарнира/соуса",
       "source_output_g": "75",
       "source_output_text": "выход основного отварного продукта 75 г; без гарнира/соуса",
-      "expected_energy_kcal": "255.892000",
-      "activation": "ACTIVE_AFTER_BINDING_VALIDATION",
+      "activation": "INACTIVE_PENDING_TRANSFORMATION_AUTHORITY",
       "ingredients": [
         {
           "food_code": "CHICKEN_CATEGORY_1_RAW",
@@ -352,7 +353,9 @@
         "Подготовленную курицу залить горячей водой и варить при слабом кипении до готовности, добавляя лук.",
         "Готовую курицу нарезать порционно; выход основного отварного продукта — 75 г, без гарнира и соуса."
       ],
-      "process_review": "Generic source phrase «предусмотренные коренья» is conditional; the selected quantified branch contains only chicken and onion. No root ingredient is invented."
+      "process_review": "Generic source phrase «предусмотренные коренья» is conditional; the selected quantified branch contains only chicken and onion. No root ingredient is invented.",
+      "expected_input_energy_kcal": "255.892000",
+      "activation_reason": "Cooked recipe requires separately reviewed Step 7 transformation/retention authority before consumer/Planner activation."
     },
     {
       "source_recipe_id": "USSR82-467",
