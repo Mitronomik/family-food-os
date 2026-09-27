@@ -46,6 +46,8 @@ GENERIC_CODES = (
     "ONION_YELLOW",
     "FLOUR_WHEAT",
     "POTATO",
+    "WATER",
+    "SALT",
 )
 
 
@@ -109,30 +111,30 @@ def current_profile_ids(config: DatabaseConfig, codes: tuple[str, ...]) -> dict[
 def test_package_and_dependency_manifest_are_exact():
     bundles = load_ru_nut_db_r1a_bundles()
     assert tuple(bundle.ingredient.canonical_code for bundle in bundles) == R1A_CODES
-    assert [bundle.vector.value_count for bundle in bundles] == [18] * 9
-    assert sum(bundle.vector.value_count for bundle in bundles) == 162
+    assert [bundle.vector.value_count for bundle in bundles] == [18] * 11
+    assert sum(bundle.vector.value_count for bundle in bundles) == 198
 
     source_rows = [json.loads(bundle.vector.observations_json) for bundle in bundles]
-    assert [len(rows) for rows in source_rows] == [26] * 9
-    assert sum(len(rows) for rows in source_rows) == 234
+    assert [len(rows) for rows in source_rows] == [26] * 11
+    assert sum(len(rows) for rows in source_rows) == 286
     assert sum(
         row["observation"]["source_state"] == "published_zero"
         for record in source_rows
         for row in record
-    ) == 66
+    ) == 105
     assert sum(
         row["observation"]["source_state"] == "published_numeric"
         for record in source_rows
         for row in record
-    ) == 168
+    ) == 181
 
     manifest = json.loads((PACKAGE / "dependency-manifest.json").read_text())
     assert manifest["counts"] == {
         "recipe_count": 7,
         "source_relationship_row_count": 32,
         "unique_dependency_count": 20,
-        "accepted_reuse_dependency_count": 9,
-        "r1a_publication_dependency_count": 9,
+        "accepted_reuse_dependency_count": 7,
+        "r1a_publication_dependency_count": 11,
         "blocked_dependency_count": 2,
         "dependency_ready_recipe_count_after_r1a": 5,
         "blocked_recipe_count_after_r1a": 2,
@@ -164,6 +166,8 @@ def test_package_pins_exact_source_records():
         "46": "41f284f935466cf22c03fe32dd64f6ac1083f13e5c331520ca26df63f3179de9",
         "1186": "bfd5673766e9061af643423f8f32206de1d7bd331bed50135e449984efb9b55e",
         "82": "f8712b80e2bd18972bf78374fdb6885c9a64c6a6c32ba08d6fa39ffe61b7b332",
+        "3000": "efb9ba629e4310c4d75309f01ffe8f6e9566a1f43f3b4f4e5b0f46470c665945",
+        "125": "b7a6d581126d3e02bdc46f7bdb02c73083c4cf9e52e41b67a1e6f10adcee6bb5",
     }
 
 
@@ -184,10 +188,10 @@ def test_fresh_batch_replay_and_current_profile_preservation(database):
     try:
         first = batch_service(engine).publish_batch(bundles)
         assert commits == 1
-        assert len(first.results) == 9
-        assert first.bundle_created_count == 9
+        assert len(first.results) == 11
+        assert first.bundle_created_count == 11
         assert first.ingredient_created_count == 8
-        assert first.nutrient_value_count == 162
+        assert first.nutrient_value_count == 198
 
         with SqlAlchemyNutritionReadScope(engine) as read:
             for bundle, result in zip(bundles, first.results, strict=True):
@@ -214,6 +218,22 @@ def test_fresh_batch_replay_and_current_profile_preservation(database):
 
         assert current_profile_ids(database, GENERIC_CODES) == before_current
 
+        with SqlAlchemyNutritionReadScope(engine) as read:
+            for code in ("WATER", "SALT"):
+                food = read.ingredients.get_by_code(code)
+                profile = read.nutrition_profiles.get_by_provenance(
+                    food.id,
+                    "FIC_RU_NUT_DB",
+                    "3000" if code == "WATER" else "125",
+                    "snapshot-2026-09-20-155107ddb381c147",
+                )
+                assert profile is not None
+                assert profile.is_current is False
+                assert profile.kcal == Decimal("0.000000")
+                assert read.nutrient_vectors.get(profile.id).amount(
+                    "ENERGY_KCAL"
+                ) == Decimal("0.0")
+
         with sqlite3.connect(database.path) as db:
             rows = db.execute(
                 """
@@ -222,13 +242,15 @@ def test_fresh_batch_replay_and_current_profile_preservation(database):
                 JOIN food_ingredients i ON i.id = v.food_ingredient_id
                 JOIN food_nutrition_profiles p ON p.id = v.profile_id
                 WHERE p.source_name = 'FIC_RU_NUT_DB'
-                  AND i.canonical_code IN (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                  AND i.canonical_code IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ORDER BY i.canonical_code
                 """,
                 tuple(sorted(R1A_CODES)),
             ).fetchall()
+        expected_versions = {item[1]: item[5] for item in EXPECTED}
         assert rows == [
-            (code, 1, MassState.INPUT.value) for code in sorted(R1A_CODES)
+            (code, expected_versions[code], MassState.INPUT.value)
+            for code in sorted(R1A_CODES)
         ]
 
         before_replay = db_dump(database)
@@ -284,7 +306,7 @@ def test_existing_generic_identities_are_not_reused_for_exact_new_forms(database
         engine.dispose()
 
 
-@pytest.mark.parametrize("published_prefix", [1, 4, 8])
+@pytest.mark.parametrize("published_prefix", [1, 5, 10])
 def test_exact_partial_prior_batch_fails_without_filling_remainder(
     database, published_prefix
 ):
@@ -330,7 +352,7 @@ def test_identity_conflict_rolls_back_entire_batch(database):
         engine.dispose()
 
 
-@pytest.mark.parametrize("food_number", [1, 5, 9])
+@pytest.mark.parametrize("food_number", [1, 6, 11])
 def test_failure_rolls_back_whole_batch(database, food_number):
     bundles = load_ru_nut_db_r1a_bundles()
     engine = create_sqlite_engine(database)
