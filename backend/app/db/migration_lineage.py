@@ -183,6 +183,8 @@ REQUIRED_TABLES_BY_MIGRATION: dict[str, frozenset[str]] = {
     ),
     # 0040 adds nullable columns to the existing RecipeVersion table.
     "0040_recipe_version_source_output": frozenset(),
+    # 0041 adds nullable allocation columns to existing Meal Pattern tables.
+    "0041_meal_pattern_energy_allocation": frozenset(),
 }
 
 # The foundational tables promised by migration `0001`. Stable FamilyFoodOS
