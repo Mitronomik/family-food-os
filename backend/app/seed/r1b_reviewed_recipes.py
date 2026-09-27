@@ -373,17 +373,24 @@ def seed_r1b_recipes(
     package_path: Path = PACKAGE,
 ) -> R1BPublicationResult:
     seeds, package = load_r1b_recipe_seeds(package_path)
-    dependency_result = seed_ru_nut_db_r1b_dependencies(config)
-    engine = create_sqlite_engine(config)
+
+    preflight_engine = create_sqlite_engine(config)
     try:
-        catalogue = create_food_recipe_catalogue_service(engine)
+        preflight_catalogue = create_food_recipe_catalogue_service(preflight_engine)
         dispositions = tuple(
-            catalogue.preflight_trusted_seed(seed) for seed in seeds
+            preflight_catalogue.preflight_trusted_seed(seed) for seed in seeds
         )
         if len(set(dispositions)) != 1:
             raise ValueError(
                 "Частично опубликованный R1-B Recipe batch нельзя дозаполнять."
             )
+    finally:
+        preflight_engine.dispose()
+
+    dependency_result = seed_ru_nut_db_r1b_dependencies(config)
+    engine = create_sqlite_engine(config)
+    try:
+        catalogue = create_food_recipe_catalogue_service(engine)
         recipe_summary = catalogue.reconcile_seed(seeds, strict_history=True)
 
         nutrition = create_recipe_nutrition_v2_service(engine)
