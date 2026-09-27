@@ -10,7 +10,9 @@
     "source_document_sha256": "6ac7dfb300844fd996aee6d20b4e7e6aa421dd517367ab1f59120812fee104d5",
     "source_version": "sha256:6ac7dfb300844fd996aee6d20b4e7e6aa421dd517367ab1f59120812fee104d5",
     "supporting_mass_snapshot": "russian_normative_recipes_v22_13_mass_nutrients.xlsx",
-    "supporting_mass_sha256": "5ea78ead82568f8aff019a4076215c6598675783cb81e0d1d5b4f913016de4cc"
+    "supporting_mass_sha256": "5ea78ead82568f8aff019a4076215c6598675783cb81e0d1d5b4f913016de4cc",
+    "dc1_relationship_inventory": "data/curation/data-corpus-v1-dc1/source-relationships-part1.csv",
+    "dc1_relationship_sha256": "1765b88b0667f66fb106e5b8ec498cd48bf7fb7af77dfc289efe0dac0f296aba"
   },
   "rights_basis": "Нормативные и базовые рецептурные карты публикуются как фактические рецептурные данные по пользовательскому решению, зафиксированному в docs/family-food/ru-normative-recipe-corpus.md; источник, версия, URL и SHA-256 сохраняются; фотографии, издательская вёрстка, логотипы и сторонние авторские комментарии не публикуются.",
   "composition_authorities": {
@@ -213,14 +215,45 @@
       "disposition": "BLOCKED",
       "source_url": "https://www.interdoka.ru/kulinaria/1982/7_bluda_yaca/1_varenie/1.html",
       "reason": "V2_COMPOSITION_AUTHORITY_MISSING_EGG",
-      "evidence": "Accepted EGG Composition v1 is pinned to the historical nutrient registry; Step10 V2 binding rejects mixed/V1 atomic authority. R1-B does not publish a new food/nutrition authority."
+      "evidence": "Accepted EGG Composition v1 is pinned to the historical nutrient registry; Step10 V2 binding rejects mixed/V1 atomic authority. R1-B does not publish a new food/nutrition authority.",
+      "v20_recipe_row": 411,
+      "v20_instruction_rows": [
+        1615,
+        1616
+      ],
+      "quantified_relationship_csv_rows": [
+        124
+      ],
+      "source_output_g": "40",
+      "source_output_text": "выход 40 г",
+      "source_variant": "selected_1982_variant",
+      "source_output_review": "The live card expresses output as one piece; 40 g is the retained v20 normalized edible mass for the selected serving."
     },
     {
       "source_recipe_id": "USSR82-1081",
       "disposition": "BLOCKED",
       "source_url": "https://www.interdoka.ru/kulinaria/1982/16_muchnie/1_bluda/15.html",
       "reason": "V2_COMPOSITION_AUTHORITY_MISSING_BUTTER",
-      "evidence": "Accepted BUTTER_UNSALTED Composition v1 is pinned to the historical nutrient registry; Step10 V2 binding rejects mixed/V1 atomic authority. R1-B does not publish a new food/nutrition authority."
+      "evidence": "Accepted BUTTER_UNSALTED Composition v1 is pinned to the historical nutrient registry; Step10 V2 binding rejects mixed/V1 atomic authority. R1-B does not publish a new food/nutrition authority.",
+      "v20_recipe_row": 477,
+      "v20_instruction_rows": [
+        1842,
+        1843,
+        1844,
+        1845
+      ],
+      "quantified_relationship_csv_rows": [
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173
+      ],
+      "source_output_g": "160",
+      "source_output_text": "III — с маслом; выход 160 г",
+      "source_variant": "III — с маслом"
     },
     {
       "source_recipe_id": "USSR82-697",
@@ -238,13 +271,17 @@
           "food_code": "CHICKEN_CATEGORY_1_RAW",
           "quantity_g": "107",
           "source_amount_text": "Курица 107 г",
-          "normalization_note": "verified_net; exact R1-A category-I raw form"
+          "normalization_note": "verified_net; exact R1-A category-I raw form",
+          "original_ingredient_id": "ING-0025",
+          "dc1_relationship_csv_row": 154
         },
         {
           "food_code": "ONION_BULB_FRESH",
           "quantity_g": "2",
           "source_amount_text": "Лук репчатый 2 г",
-          "normalization_note": "verified_net; exact R1-A fresh bulb form"
+          "normalization_note": "verified_net; exact R1-A fresh bulb form",
+          "original_ingredient_id": "ING-0028",
+          "dc1_relationship_csv_row": 155
         }
       ],
       "source_steps": [
@@ -255,23 +292,61 @@
         "Подготовленную курицу залить горячей водой и варить при слабом кипении до готовности, добавляя лук.",
         "Готовую курицу нарезать порционно; выход основного отварного продукта — 75 г, без гарнира и соуса."
       ],
-      "process_review": "Generic source phrase «предусмотренные коренья» is conditional; the selected quantified branch contains only chicken and onion. No root ingredient is invented.",
+      "process_review": "Generic source phrase «предусмотренные коренья» is conditional; the selected quantified branch contains only chicken and onion. No root ingredient is invented. Hot water is an unquantified cooking medium for boiling, not a quantified edible ingredient in this selected main-product branch.",
       "expected_input_energy_kcal": "255.892000",
-      "activation_reason": "Cooked recipe requires separately reviewed Step 7 transformation/retention authority before consumer/Planner activation."
+      "activation_reason": "Cooked recipe requires separately reviewed Step 7 transformation/retention authority before consumer/Planner activation.",
+      "v20_recipe_row": 470,
+      "v20_instruction_rows": [
+        1818,
+        1819
+      ]
     },
     {
       "source_recipe_id": "USSR82-467",
       "disposition": "BLOCKED",
       "reason": "UNQUANTIFIED_PROCESS_INGREDIENT_SALT",
       "source_url": "https://www.interdoka.ru/kulinaria/1982/7_bluda_yaca/4_omlet/15.html",
-      "evidence": "Verified instruction requires salt; selected quantified ingredient rows contain egg, milk, margarine and butter only. No source salt mass is retained."
+      "evidence": "Verified instruction requires salt; selected quantified ingredient rows contain egg, milk, margarine and butter only. No source salt mass is retained.",
+      "v20_recipe_row": 425,
+      "v20_instruction_rows": [
+        1669,
+        1670,
+        1671
+      ],
+      "quantified_relationship_csv_rows": [
+        125,
+        126,
+        127,
+        128
+      ],
+      "source_output_g": "110",
+      "source_output_text": "выход 110 г",
+      "source_variant": "selected_1982_variant"
     },
     {
       "source_recipe_id": "USSR82-492",
       "disposition": "BLOCKED",
       "reason": "UNQUANTIFIED_PROCESS_INGREDIENT_SALT",
       "source_url": "https://www.interdoka.ru/kulinaria/1982/8_bluda_tvorog/12.html",
-      "evidence": "Verified instruction requires salt; selected quantified ingredient rows contain tvorog, flour, egg, sugar, margarine and sour cream only. No source salt mass is retained."
+      "evidence": "Verified instruction requires salt; selected quantified ingredient rows contain tvorog, flour, egg, sugar, margarine and sour cream only. No source salt mass is retained.",
+      "v20_recipe_row": 445,
+      "v20_instruction_rows": [
+        1734,
+        1735,
+        1736,
+        1737
+      ],
+      "quantified_relationship_csv_rows": [
+        129,
+        130,
+        131,
+        132,
+        133,
+        134
+      ],
+      "source_output_g": "170",
+      "source_output_text": "выход 170 г",
+      "source_variant": "1-й вариант, со сметаной"
     }
   ]
 }

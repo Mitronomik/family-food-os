@@ -51,12 +51,36 @@ def db_dump(config: DatabaseConfig) -> str:
 def test_r1b_package_freezes_one_publish_and_four_blockers():
     seeds, package = load_r1b_recipe_seeds()
 
-    assert tuple(seed.version.source_recipe_id for seed in seeds) == PUBLISH_IDS
-    assert tuple(
-        row["source_recipe_id"]
+    assert package["source"]["dc1_relationship_sha256"] == (
+        "1765b88b0667f66fb106e5b8ec498cd48bf7fb7af77dfc289efe0dac0f296aba"
+    )
+    assert {
+        row["source_recipe_id"]: (row["v20_recipe_row"], row["source_output_g"])
         for row in package["candidates"]
-        if row["disposition"] == "BLOCKED"
-    ) == BLOCKED_IDS
+    } == {
+        "USSR82-453": (411, "40"),
+        "USSR82-467": (425, "110"),
+        "USSR82-492": (445, "170"),
+        "USSR82-697": (470, "75"),
+        "USSR82-1081": (477, "160"),
+    }
+    chicken = next(
+        row for row in package["candidates"] if row["source_recipe_id"] == "USSR82-697"
+    )
+    assert [
+        (item["original_ingredient_id"], item["dc1_relationship_csv_row"])
+        for item in chicken["ingredients"]
+    ] == [("ING-0025", 154), ("ING-0028", 155)]
+
+    assert tuple(seed.version.source_recipe_id for seed in seeds) == PUBLISH_IDS
+    assert (
+        tuple(
+            row["source_recipe_id"]
+            for row in package["candidates"]
+            if row["disposition"] == "BLOCKED"
+        )
+        == BLOCKED_IDS
+    )
     assert {
         row["source_recipe_id"]: row["reason"]
         for row in package["candidates"]
@@ -98,9 +122,7 @@ def test_r1b_fresh_publication_bindings_input_energy_and_inactive_replay(databas
     assert first.binding_fresh_count == 2
     assert first.binding_replay_count == 0
     assert first.activated_count == 0
-    assert first.input_energy_kcal == (
-        ("USSR82-697", Decimal("255.892000")),
-    )
+    assert first.input_energy_kcal == (("USSR82-697", Decimal("255.892000")),)
 
     with sqlite3.connect(database.path) as db:
         rows = db.execute(
@@ -126,19 +148,26 @@ def test_r1b_fresh_publication_bindings_input_energy_and_inactive_replay(databas
                 "выход основного отварного продукта 75 г; без гарнира/соуса",
             ),
         ]
-        assert db.execute(
-            "SELECT COUNT(*) FROM recipe_ingredient_composition_bindings "
-            "WHERE registry_version='RU_NUTRIENT_REGISTRY_V2'"
-        ).fetchone()[0] >= 2
-        assert db.execute(
-            """
+        assert (
+            db.execute(
+                "SELECT COUNT(*) FROM recipe_ingredient_composition_bindings "
+                "WHERE registry_version='RU_NUTRIENT_REGISTRY_V2'"
+            ).fetchone()[0]
+            >= 2
+        )
+        assert (
+            db.execute(
+                """
             SELECT COUNT(*)
             FROM food_recipes
             WHERE canonical_code IN ('USSR82_453_BOILED_EGGS', 'USSR82_1081_BLINI')
             """
-        ).fetchone()[0] == 0
-        assert db.execute(
-            """
+            ).fetchone()[0]
+            == 0
+        )
+        assert (
+            db.execute(
+                """
             SELECT COUNT(*)
             FROM food_ingredients i
             JOIN food_nutrition_profiles p ON p.food_ingredient_id = i.id
@@ -146,7 +175,9 @@ def test_r1b_fresh_publication_bindings_input_energy_and_inactive_replay(databas
               AND p.source_name = 'FIC_RU_NUT_DB'
               AND p.source_id IN ('2287', '1418')
             """
-        ).fetchone()[0] == 0
+            ).fetchone()[0]
+            == 0
+        )
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
 
     before = db_dump(database)
@@ -177,12 +208,12 @@ def test_r1b_output_change_conflicts_with_same_provenance(database):
         engine.dispose()
 
 
-
 def test_r1b_single_publish_seed_has_no_partial_recipe_prefix_state():
     seeds, package = load_r1b_recipe_seeds()
     assert len(seeds) == 1
     assert seeds[0].version.source_recipe_id == "USSR82-697"
     assert sum(row["disposition"] == "PUBLISH" for row in package["candidates"]) == 1
+
 
 def test_r1b_recipe_failure_rolls_back_single_publish_recipe(database):
     seeds, _ = load_r1b_recipe_seeds()

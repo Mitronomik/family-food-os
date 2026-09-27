@@ -1,5 +1,6 @@
 """R1-B reviewed USSR82 RecipeVersion publication and Step 10 bindings."""
 
+import csv
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from decimal import Decimal, InvalidOperation, localcontext
@@ -33,9 +34,13 @@ from app.services.recipe_nutrition_v2 import (
 )
 
 PACKAGE = REPOSITORY_ROOT / "data/curation/r1b-reviewed-recipes"
-PUBLICATION_SHA256 = "d5e857ed62b716d6caa9874f31c72eb19a5840ca635298c437f00cfa8ab71c10"
-SOURCE_DOCUMENT_SHA256 = "6ac7dfb300844fd996aee6d20b4e7e6aa421dd517367ab1f59120812fee104d5"
-SUPPORTING_MASS_SHA256 = "5ea78ead82568f8aff019a4076215c6598675783cb81e0d1d5b4f913016de4cc"
+PUBLICATION_SHA256 = "3fe4e1bfcdf7f5321a16543d477aa6296c5be64836ac55484b938927640ff536"
+SOURCE_DOCUMENT_SHA256 = (
+    "6ac7dfb300844fd996aee6d20b4e7e6aa421dd517367ab1f59120812fee104d5"
+)
+SUPPORTING_MASS_SHA256 = (
+    "5ea78ead82568f8aff019a4076215c6598675783cb81e0d1d5b4f913016de4cc"
+)
 ARCHIVE_SHA256 = "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea"
 SOURCE_NAME = "USSR82"
 SOURCE_VERSION = f"sha256:{SOURCE_DOCUMENT_SHA256}"
@@ -46,6 +51,19 @@ BLOCKED_REASONS = {
     "USSR82-1081": "V2_COMPOSITION_AUTHORITY_MISSING_BUTTER",
     "USSR82-467": "UNQUANTIFIED_PROCESS_INGREDIENT_SALT",
     "USSR82-492": "UNQUANTIFIED_PROCESS_INGREDIENT_SALT",
+}
+DC1_RELATIONSHIP_PATH = (
+    REPOSITORY_ROOT / "data/curation/data-corpus-v1-dc1/source-relationships-part1.csv"
+)
+DC1_RELATIONSHIP_SHA256 = (
+    "1765b88b0667f66fb106e5b8ec498cd48bf7fb7af77dfc289efe0dac0f296aba"
+)
+V20_RECEIPT_ROWS = {
+    "USSR82-453": (411, (1615, 1616)),
+    "USSR82-467": (425, (1669, 1670, 1671)),
+    "USSR82-492": (445, (1734, 1735, 1736, 1737)),
+    "USSR82-697": (470, (1818, 1819)),
+    "USSR82-1081": (477, (1842, 1843, 1844, 1845)),
 }
 
 
@@ -76,11 +94,7 @@ def _decimal(value: object, *, field: str) -> Decimal:
         result = Decimal(value)
     except InvalidOperation as exc:
         raise ValueError(f"R1-B {field} не является Decimal.") from exc
-    if (
-        not result.is_finite()
-        or result < 0
-        or format(result, "f") != value
-    ):
+    if not result.is_finite() or result < 0 or format(result, "f") != value:
         raise ValueError(f"R1-B {field} не является canonical Decimal string.")
     return result
 
@@ -99,8 +113,7 @@ def _accepted_authorities() -> dict[str, dict[str, object]]:
         accepted[row["food_code"]] = {
             "version": int(composition["version"]),
             "values": {
-                value["nutrient_code"]: value["amount"]
-                for value in entry["values"]
+                value["nutrient_code"]: value["amount"] for value in entry["values"]
             },
             "value_sha256": row["vector_reference"]["value_sha256"],
         }
@@ -111,8 +124,7 @@ def _accepted_authorities() -> dict[str, dict[str, object]]:
         accepted[bundle.ingredient.canonical_code] = {
             "version": bundle.atomic_composition.version,
             "values": {
-                value.nutrient_code: value.amount
-                for value in bundle.vector.values
+                value.nutrient_code: value.amount for value in bundle.vector.values
             },
             "value_sha256": bundle.vector.value_sha256,
         }
@@ -121,8 +133,7 @@ def _accepted_authorities() -> dict[str, dict[str, object]]:
         accepted[bundle.ingredient.canonical_code] = {
             "version": bundle.atomic_composition.version,
             "values": {
-                value.nutrient_code: value.amount
-                for value in bundle.vector.values
+                value.nutrient_code: value.amount for value in bundle.vector.values
             },
             "value_sha256": bundle.vector.value_sha256,
         }
@@ -190,9 +201,7 @@ def _require_package_identity(package: dict[str, Any]) -> None:
     if not isinstance(candidates, list) or len(candidates) != 5:
         raise ValueError("R1-B должен содержать ровно пять reviewed dispositions.")
     by_id = {
-        row.get("source_recipe_id"): row
-        for row in candidates
-        if isinstance(row, dict)
+        row.get("source_recipe_id"): row for row in candidates if isinstance(row, dict)
     }
     if set(by_id) != set(PUBLISH_IDS) | set(BLOCKED_IDS):
         raise ValueError("R1-B candidate identities изменены.")
@@ -204,7 +213,68 @@ def _require_package_identity(package: dict[str, Any]) -> None:
             or by_id[key].get("reason") != BLOCKED_REASONS[key]
         ):
             raise ValueError("R1-B blocker disposition изменён.")
+    _validate_source_receipts(package)
     _validate_authorities(package)
+
+
+def _validate_source_receipts(package: dict[str, Any]) -> None:
+    source = package["source"]
+    if (
+        source.get("dc1_relationship_inventory")
+        != "data/curation/data-corpus-v1-dc1/source-relationships-part1.csv"
+        or source.get("dc1_relationship_sha256") != DC1_RELATIONSHIP_SHA256
+        or hashlib.sha256(DC1_RELATIONSHIP_PATH.read_bytes()).hexdigest()
+        != DC1_RELATIONSHIP_SHA256
+    ):
+        raise ValueError("R1-B DC1 relationship receipt изменён.")
+
+    with DC1_RELATIONSHIP_PATH.open(newline="") as handle:
+        relationships = {
+            number: row for number, row in enumerate(csv.DictReader(handle), start=2)
+        }
+
+    for candidate in package["candidates"]:
+        source_id = candidate["source_recipe_id"]
+        recipe_row, instruction_rows = V20_RECEIPT_ROWS[source_id]
+        if (
+            candidate.get("v20_recipe_row") != recipe_row
+            or tuple(candidate.get("v20_instruction_rows", ())) != instruction_rows
+        ):
+            raise ValueError(f"R1-B v20 source row receipt изменён: {source_id}.")
+
+        selected = {
+            number: row
+            for number, row in relationships.items()
+            if row["source_recipe_id"] == source_id
+        }
+        if candidate["disposition"] == "BLOCKED":
+            if candidate.get("quantified_relationship_csv_rows") != list(selected):
+                raise ValueError(f"R1-B blocked source receipt изменён: {source_id}.")
+            if candidate["reason"] == "UNQUANTIFIED_PROCESS_INGREDIENT_SALT" and any(
+                row["original_ingredient_id"] == "ING-0050" for row in selected.values()
+            ):
+                raise ValueError(f"R1-B salt receipt изменён: {source_id}.")
+            continue
+
+        seen: set[int] = set()
+        for ingredient in candidate["ingredients"]:
+            number = ingredient.get("dc1_relationship_csv_row")
+            if not isinstance(number, int) or number in seen:
+                raise ValueError(f"R1-B ingredient row invalid: {source_id}.")
+            seen.add(number)
+            row = selected.get(number)
+            if row is None or (
+                row["original_ingredient_id"]
+                != ingredient.get("original_ingredient_id")
+                or _decimal(row["amount_g"], field="DC1 amount")
+                != _decimal(ingredient["quantity_g"], field="R1-B amount")
+                or row["variant"] != candidate["source_variant"]
+            ):
+                raise ValueError(
+                    f"R1-B ingredient source receipt изменён: {source_id}."
+                )
+        if seen != set(selected):
+            raise ValueError(f"R1-B source relationship coverage неполна: {source_id}.")
 
 
 def load_r1b_recipe_seeds(
@@ -255,7 +325,10 @@ def load_r1b_recipe_seeds(
             raise ValueError("R1-B source output должен быть положительным.")
         if row.get("activation") != "INACTIVE_PENDING_TRANSFORMATION_AUTHORITY":
             raise ValueError("R1-B activation disposition изменена.")
-        if not isinstance(row.get("activation_reason"), str) or not row["activation_reason"].strip():
+        if (
+            not isinstance(row.get("activation_reason"), str)
+            or not row["activation_reason"].strip()
+        ):
             raise ValueError("R1-B activation reason отсутствует.")
 
         seeds.append(
@@ -328,11 +401,9 @@ def _binding_specs(
                 available = tuple(
                     (
                         code,
-                        (
-                            per_100[code]
-                            * ingredient.quantity
-                            / Decimal("100")
-                        ).quantize(RESULT_QUANTUM),
+                        (per_100[code] * ingredient.quantity / Decimal("100")).quantize(
+                            RESULT_QUANTUM
+                        ),
                     )
                     for code in NUTRIENT_CODES
                     if code in per_100
@@ -415,7 +486,9 @@ def seed_r1b_recipes(
                 raise ValueError("R1-B ожидает ровно одну fresh RecipeVersion.")
             canonical = nutrition.calculate(versions[0].id)
             expected = _decimal(
-                package_by_source[seed.version.source_recipe_id]["expected_input_energy_kcal"],
+                package_by_source[seed.version.source_recipe_id][
+                    "expected_input_energy_kcal"
+                ],
                 field=f"{seed.version.source_recipe_id}.expected_input_energy_kcal",
             )
             actual = canonical.total_amount("ENERGY_KCAL")

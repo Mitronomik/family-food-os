@@ -59,6 +59,15 @@ source_document_sha256 = 6ac7dfb300844fd996aee6d20b4e7e6aa421dd517367ab1f5912081
 Per-card SourceURL and exact `USSR82-*` source identity remain in the reviewed
 publication payload.
 
+The package also pins the accepted DC1 relationship inventory
+`source-relationships-part1.csv` at SHA-256
+`1765b88b0667f66fb106e5b8ec498cd48bf7fb7af77dfc289efe0dac0f296aba`.
+Each candidate names its v20 recipe and instruction rows. The published chicken
+ingredients point to DC1 CSV rows 154 and 155 (`ING-0025` 107 g and `ING-0028`
+2 g); the loader checks those rows and the CSV hash before publication. The
+blocked candidates retain their source output masses and quantified row receipts
+for review, without creating RecipeVersions.
+
 ## Published variant
 
 ### USSR82-697 — Курица отварная
@@ -77,6 +86,8 @@ publication payload.
 The generic source phrase about "предусмотренные коренья" is conditional source
 context. The selected quantified branch contains chicken + onion only; no root
 ingredient is invented.
+Hot water in the instruction is the unquantified cooking medium for boiling;
+the selected output is the chicken main product without broth.
 
 ## Output / Nutrition boundary
 
