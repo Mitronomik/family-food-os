@@ -2,7 +2,7 @@
 
 **Status:** docs-only Implementation Contract Gate
 **Decision date:** 2026-09-27
-**Accepted base:** `75e2854eff82955b5c01ccacaca35fe0fdc534bc` (merged PR #104)
+**Accepted base:** `cf96e9bb43bb991625a56d7d4c0fa0bad2842b1a` (merged PR #106; includes accepted PR #104 runtime plus post-merge integrity correction)
 **Parent:** #100, #99, #67
 **Runtime authorized by this document:** no — review/merge this gate first.
 
@@ -135,24 +135,56 @@ do not mutate their accepted v1 history.
 The accepted/resolved selection must freeze the effective `energy_share` for
 each weekday opportunity.
 
-For a PROGRAM selection:
+For a PROGRAM selection **without user overrides**:
 
 ```text
 published program version
-→ resolved schedule
-→ copy exact opportunity share
+→ canonical resolved schedule
+→ copy each exact program opportunity share by template position
 → immutable Household selection
 ```
 
-For CUSTOM selection:
+No role-name matching is used to infer shares.
 
-- the effective opportunity shares must be explicitly supplied by a reviewed
-  product/default policy or by an explicit user-confirmed override;
+For a PROGRAM selection **with user overrides**:
+
+- the published program shares are not automatically remapped onto the modified
+  schedule;
+- the caller must supply an explicit user-confirmed `energy_share` for every
+  resolved weekday opportunity;
+- removing, adding, reordering or duplicating roles does not trigger proportional
+  redistribution or role-based inference;
+- the resulting exact shares are frozen in the new immutable selection version.
+
+For a CUSTOM selection:
+
+- the caller must supply an explicit user-confirmed `energy_share` for every
+  resolved weekday opportunity;
+- #100 v0.4 does **not** introduce a hidden product/default allocation policy for
+  CUSTOM schedules;
 - runtime must not invent an equal split merely because N opportunities exist;
-- unresolved custom allocation produces an unsupported Planner state.
+- missing custom allocation produces an unsupported Planner state.
+
+Allocation provenance is derivable from already-persisted selection identity:
+
+```text
+PROGRAM + has_user_overrides=false
+→ PROGRAM_VERSION:<program_version_id>
+
+PROGRAM + has_user_overrides=true
+→ USER_CONFIRMED_PROGRAM_OVERRIDE:<selection_id/version>
+
+CUSTOM
+→ USER_CONFIRMED_CUSTOM:<selection_id/version>
+```
+
+Therefore migration 0041 does not need an additional allocation-policy identity
+column for this bounded v0.4 contract. If a future automatic/default CUSTOM
+allocation policy is introduced, it requires a separately versioned persisted
+policy identity and a new Contract Gate.
 
 This allows future program evolution without changing an already accepted
-Household selection.
+Household selection and keeps replay/provenance unambiguous.
 
 ## 7. DECISION — expected schema change
 
@@ -190,13 +222,15 @@ planner-v0.3
 `meal-role-recipe-v2` role compatibility remains unchanged unless a separate
 review proves otherwise.
 
-For each member / local day / planned opportunity:
+For each member / local day / planned opportunity, Planner reads only the
+`energy_share` frozen in the accepted `MemberMealPatternSelection` snapshot.
+It never re-reads current program shares for an already accepted selection.
 
 ```text
 allocated_kcal
 =
 reference_energy_kcal
-× opportunity.energy_share
+× accepted_selection_opportunity.energy_share
 ```
 
 For a recipe-backed event:
@@ -282,7 +316,7 @@ At minimum per member/day/opportunity:
 Trace also records:
 
 - Planner config version;
-- allocation-policy version/source;
+- allocation-policy source derived from the pinned selection semantics above;
 - explicit outside-Planner residual share;
 - fixed-source unknown-nutrition warning where applicable.
 
@@ -329,11 +363,13 @@ Runtime implementation must cover at least:
 7. missing opportunity allocation → explicit failure;
 8. daily share total > 1 → validation failure;
 9. duplicate role occurrences with independent shares;
-10. exact deterministic replay;
-11. persisted historical `planner-v0.3` plan remains unchanged/readable;
-12. v0.4 trace exposes shares, allocated kcal and residual;
-13. hard exclusions still dominate candidate selection;
-14. no LLM dependency.
+10. PROGRAM override that removes/adds/reorders roles requires explicit shares and performs no role-based remapping;
+11. CUSTOM selection requires explicit user-confirmed shares for every opportunity;
+12. exact deterministic replay;
+13. persisted historical `planner-v0.3` plan remains unchanged/readable;
+14. v0.4 trace exposes shares, allocated kcal, residual and allocation source;
+15. hard exclusions still dominate candidate selection;
+16. no LLM dependency.
 
 Serving multipliers must remain positive and bounded by existing Decimal precision.
 
@@ -377,6 +413,7 @@ This gate does not authorize:
 
 ```text
 PR104 R1-B merged
+→ PR106 post-merge integrity correction merged
 → #100 energy-allocation Contract Gate
 → explicit #100 runtime authorization
 → migration 0041 + Planner v0.4 allocation
