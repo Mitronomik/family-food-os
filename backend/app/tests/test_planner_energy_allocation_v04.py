@@ -201,10 +201,23 @@ def test_0041_upgrade_preserves_history_triggers_and_rolls_back_mid_migration(
     original_upgrade = module.upgrade
 
     def fail_after_first(connection):
-        connection.execute(
-            "ALTER TABLE meal_pattern_opportunities ADD COLUMN energy_share TEXT"
-        )
-        raise RuntimeError("injected 0041 failure")
+        original_execute = connection.execute
+        calls = {"alter": 0}
+
+        class _FailingConnection:
+            @property
+            def in_transaction(self):
+                return connection.in_transaction
+
+            def execute(self, statement, parameters=()):
+                result = original_execute(statement, parameters)
+                if str(statement).lstrip().upper().startswith("ALTER TABLE"):
+                    calls["alter"] += 1
+                    if calls["alter"] == 1:
+                        raise RuntimeError("injected 0041 failure")
+                return result
+
+        return original_upgrade(_FailingConnection())
 
     monkeypatch.setattr(module, "upgrade", fail_after_first)
     with pytest.raises(RuntimeError, match="injected 0041 failure"):
@@ -431,7 +444,10 @@ def test_v04_mixed_fixed_source_reserves_share_without_crediting_nutrition():
         uid(1),
         WEEK_START,
         (MemberPlannerConstraints(member_id, accepted, Decimal("2000")),),
-        (candidate(10, MealTypeCode.MAIN),),
+        (
+            candidate(9, MealTypeCode.SANDWICH),
+            candidate(10, MealTypeCode.MAIN),
+        ),
         fixed_events=(fixed,),
     )
     result = generate_week(
