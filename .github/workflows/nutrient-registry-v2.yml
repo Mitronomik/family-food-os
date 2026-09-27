@@ -24,6 +24,9 @@ on:
       - 'backend/app/services/nutrition_publication_contracts.py'
       - 'backend/app/persistence/sqlalchemy_core/nutrition_publication.py'
       - 'backend/app/seed/ru_nut_db_step8_butter.py'
+      - 'backend/app/seed/ru_nut_db_r1a.py'
+      - 'backend/app/tests/test_ru_nut_db_r1a_publication.py'
+      - 'data/curation/r1a-planner-capacity-dependencies/**'
       - 'backend/app/tests/test_ru_nut_db_step8_butter_publication.py'
       - 'data/curation/ru-nut-db-step8-butter-runtime/**'
       - 'backend/app/services/food_recipes.py'
@@ -90,6 +93,9 @@ on:
       - 'backend/app/services/nutrition_publication_contracts.py'
       - 'backend/app/persistence/sqlalchemy_core/nutrition_publication.py'
       - 'backend/app/seed/ru_nut_db_step8_butter.py'
+      - 'backend/app/seed/ru_nut_db_r1a.py'
+      - 'backend/app/tests/test_ru_nut_db_r1a_publication.py'
+      - 'data/curation/r1a-planner-capacity-dependencies/**'
       - 'backend/app/tests/test_ru_nut_db_step8_butter_publication.py'
       - 'data/curation/ru-nut-db-step8-butter-runtime/**'
       - 'backend/app/services/food_recipes.py'
@@ -158,6 +164,7 @@ jobs:
           python -m pytest -q
           backend/app/tests/test_transactional_nutrition_publication.py
           backend/app/tests/test_ru_nut_db_step4_publication.py
+          backend/app/tests/test_ru_nut_db_r1a_publication.py
           backend/app/tests/test_ru_nut_db_step8_butter_publication.py
           backend/app/tests/test_ru_school2022_step9_recipe_publication.py
           backend/app/tests/test_recipe_nutrition_v2.py
