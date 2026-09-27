@@ -273,6 +273,13 @@ def test_program_selection_expands_catalogue_template_to_seven_days():
         MealRole.DINNER,
     )
     assert detail.roles_for_weekday(7) == detail.roles_for_weekday(1)
+    assert tuple(
+        item.energy_share for item in detail.opportunities_for_weekday(1)
+    ) == (
+        Decimal("0.300000"),
+        Decimal("0.350000"),
+        Decimal("0.250000"),
+    )
 
 
 def test_child_cannot_accept_adult_program_but_can_use_custom():
@@ -297,6 +304,32 @@ def test_child_cannot_accept_adult_program_but_can_use_custom():
         energy_shares=_dinner_shares(),
     )
     assert custom.selection.source_kind is MemberMealPatternSourceKind.CUSTOM
+
+
+def test_custom_selection_requires_explicit_user_confirmed_allocation():
+    household = _household()
+    member = _member(household.id)
+    service, _, _ = _service(household, [member])
+    schedule = {weekday: (MealRole.DINNER,) for weekday in range(1, 8)}
+
+    with pytest.raises(MealPlanValidationError, match="explicit energy shares"):
+        service.accept_member_pattern(
+            household_id=household.id,
+            member_id=member.id,
+            source_kind=MemberMealPatternSourceKind.CUSTOM,
+            schedule=schedule,
+        )
+
+    detail = service.accept_member_pattern(
+        household_id=household.id,
+        member_id=member.id,
+        source_kind=MemberMealPatternSourceKind.CUSTOM,
+        schedule=schedule,
+        energy_shares=_dinner_shares(),
+    )
+    assert {
+        item.energy_share for item in detail.opportunities
+    } == {Decimal("0.250000")}
 
 
 def test_selection_versions_advance_and_preserve_superseded_history():
@@ -442,6 +475,16 @@ def test_program_override_requires_truthful_flag_and_preserves_day_specific_snap
         MealRole.BREAKFAST,
         MealRole.LUNCH,
         MealRole.DINNER,
+    )
+    assert tuple(
+        item.energy_share for item in detail.opportunities_for_weekday(1)
+    ) == (Decimal("0.300000"), Decimal("0.250000"))
+    assert tuple(
+        item.energy_share for item in detail.opportunities_for_weekday(2)
+    ) == (
+        Decimal("0.300000"),
+        Decimal("0.350000"),
+        Decimal("0.250000"),
     )
 
 
