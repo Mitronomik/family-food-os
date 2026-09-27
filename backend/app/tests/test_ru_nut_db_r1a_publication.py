@@ -2,6 +2,7 @@
 
 from dataclasses import replace
 from datetime import datetime, timezone
+from decimal import Decimal
 import json
 import shutil
 import sqlite3
