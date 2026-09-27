@@ -451,6 +451,7 @@ def _opportunity_values(
         "weekday": value.weekday,
         "position": value.position,
         "role_code": value.role.value,
+        "energy_share": value.energy_share,
     }
 
 
@@ -462,6 +463,7 @@ def _opportunity_from_row(
         weekday=row["weekday"],
         position=row["position"],
         role=row["role_code"],
+        energy_share=row.get("energy_share"),
     )
 
 
