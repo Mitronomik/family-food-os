@@ -296,6 +296,7 @@ def _opportunity_values(value: MealPatternOpportunity) -> dict[str, object]:
         "version_id": value.version_id,
         "position": value.position,
         "role_code": value.role.value,
+        "energy_share": value.energy_share,
     }
 
 
@@ -304,6 +305,7 @@ def _opportunity_from_row(row: Mapping[str, Any]) -> MealPatternOpportunity:
         version_id=row["version_id"],
         position=row["position"],
         role=row["role_code"],
+        energy_share=row.get("energy_share"),
     )
 
 
