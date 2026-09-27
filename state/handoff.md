@@ -44,7 +44,7 @@ Blocked:
 - USSR82-364 on ING-0014 / Жир кулинарный;
 - USSR82-208 on ING-0038 / anomalous FIC salted-cucumber source row.
 
-The durable corpus archive was independently retrieved and all 9 published
+The durable corpus archive was independently retrieved and all 11 published
 source raw-record hashes rechecked.
 
 Exact runtime verification:
