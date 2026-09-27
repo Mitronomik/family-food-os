@@ -433,6 +433,100 @@
         "source_code": "82",
         "source_name": "Мука пшеничная в/с"
       }
+    },
+    {
+      "nutrients": {
+        "a_vit": "0.0",
+        "b1": "0.0",
+        "b2": "0.0",
+        "c": "0.0",
+        "ca": "4.5",
+        "carbh": "0.0",
+        "carot": "0.0",
+        "cholest": "0.0",
+        "diet_fibre": "0.0",
+        "ethanol": "0.0",
+        "fat": "0.0",
+        "fe": "0.0",
+        "k": "0.3",
+        "kcal": "0.0",
+        "mdsug": "0.0",
+        "mg": "1.0",
+        "na": "0.9",
+        "p": "0.0",
+        "pp": "0.0",
+        "prot": "0.0",
+        "ret_equiv": "0.0",
+        "salt_ad": "0.0",
+        "satur": "0.0",
+        "starch": "0.0",
+        "sugar_ad": "0.0",
+        "water": "100.0"
+      },
+      "platform": {
+        "action": "REUSE_EXISTING",
+        "atomic_version": 2,
+        "canonical_code": "WATER",
+        "canonical_name": "Вода питьевая",
+        "category_code": "staples",
+        "default_unit": "g",
+        "mass_state": "INPUT"
+      },
+      "r1_dependency_id": "ING-0006",
+      "source": {
+        "db_index": 360,
+        "json_pointer": "/DB/360",
+        "raw_record_sha256": "efb9ba629e4310c4d75309f01ffe8f6e9566a1f43f3b4f4e5b0f46470c665945",
+        "source_code": "3000",
+        "source_name": "Вода питьевая"
+      }
+    },
+    {
+      "nutrients": {
+        "a_vit": "0.0",
+        "b1": "0.0",
+        "b2": "0.0",
+        "c": "0.0",
+        "ca": "368.0",
+        "carbh": "0.0",
+        "carot": "0.0",
+        "cholest": "0.0",
+        "diet_fibre": "0.0",
+        "ethanol": "0.0",
+        "fat": "0.0",
+        "fe": "2.93",
+        "k": "9.0",
+        "kcal": "0.0",
+        "mdsug": "0.0",
+        "mg": "22.0",
+        "na": "38710.0",
+        "p": "75.0",
+        "pp": "0.0",
+        "prot": "0.0",
+        "ret_equiv": "0.0",
+        "salt_ad": "100.0",
+        "satur": "0.0",
+        "starch": "0.0",
+        "sugar_ad": "0.0",
+        "water": "0.2"
+      },
+      "platform": {
+        "action": "REUSE_EXISTING",
+        "atomic_version": 2,
+        "canonical_code": "SALT",
+        "canonical_name": "Соль поваренная",
+        "category_code": "herbs_spices",
+        "default_unit": "g",
+        "mass_state": "INPUT"
+      },
+      "r1_dependency_id": "ING-0050",
+      "source": {
+        "db_index": 932,
+        "json_pointer": "/DB/932",
+        "raw_record_sha256": "b7a6d581126d3e02bdc46f7bdb02c73083c4cf9e52e41b67a1e6f10adcee6bb5",
+        "source_code": "125",
+        "source_name": "Соль поваренная пищевая"
+      }
     }
   ],
   "schema_version": 1,
