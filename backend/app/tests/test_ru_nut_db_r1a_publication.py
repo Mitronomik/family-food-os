@@ -222,7 +222,7 @@ def test_fresh_batch_replay_and_current_profile_preservation(database):
                 JOIN food_ingredients i ON i.id = v.food_ingredient_id
                 JOIN food_nutrition_profiles p ON p.id = v.profile_id
                 WHERE p.source_name = 'FIC_RU_NUT_DB'
-                  AND i.canonical_code IN (?, ?, ?, ?, ?, ?, ?)
+                  AND i.canonical_code IN (?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ORDER BY i.canonical_code
                 """,
                 tuple(sorted(R1A_CODES)),
