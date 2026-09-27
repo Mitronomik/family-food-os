@@ -123,10 +123,18 @@ class SqlAlchemyRecipeVersionRepository:
                     "created_from_version_id must reference the same Recipe."
                 )
         try:
-            self._connection.execute(
-                insert(food_recipe_versions_table).values(
-                    **_version_values(detail.version)
+            version_values = _version_values(detail.version)
+            persisted_columns = {
+                row[1]
+                for row in self._connection.exec_driver_sql(
+                    "PRAGMA table_info('food_recipe_versions')"
                 )
+            }
+            if "source_output_g" not in persisted_columns:
+                version_values.pop("source_output_g", None)
+                version_values.pop("source_output_text", None)
+            self._connection.execute(
+                insert(food_recipe_versions_table).values(**version_values)
             )
             self._connection.execute(
                 insert(food_recipe_ingredients_table),
@@ -378,8 +386,8 @@ def _version_from_row(row: Mapping[str, Any]) -> RecipeVersion:
         created_from_version_id=row["created_from_version_id"],
         change_note=row["change_note"],
         created_at=row["created_at"],
-        source_output_g=row["source_output_g"],
-        source_output_text=row["source_output_text"],
+        source_output_g=row.get("source_output_g"),
+        source_output_text=row.get("source_output_text"),
     )
 
 
