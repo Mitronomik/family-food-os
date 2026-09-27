@@ -28,7 +28,7 @@ from app.services.nutrition_publication import (
 )
 
 PACKAGE = REPOSITORY_ROOT / "data/curation/r1a-planner-capacity-dependencies"
-PUBLICATION_SHA256 = "a898100ca557a8937a3df77dda51563b6e5e626e476ca4bd4ca5eecabd47a55a"
+PUBLICATION_SHA256 = "33eff66a7bbb27f6d5d28f2d7832492fbeb5a8c297a2edfb6485ded87a8059f3"
 EXPECTED = (
     ("ING-0030", "MARGARINE_MILK_TABLE", "Маргарин молочный столовый", "fats_oils", "CREATE_REVIEWED", 1, "1432", 509, "Маргарин молочный столовый", "0018264d8d0e9a181555e62b34684503b7689b4d1d7fddeb848722a287c97a2a"),
     ("ING-0034", "MILK_PASTEURIZED_3_2", "Молоко пастеризованное 3,2%", "dairy", "CREATE_REVIEWED", 1, "929", 549, "Молоко 3,2% жира", "7d99a5fd87f50f471d61df99788d7aa7fe93db22ec1b5d42533733575069333a"),
@@ -39,6 +39,8 @@ EXPECTED = (
     ("ING-0019", "POTATO", "Картофель", "vegetables", "REUSE_EXISTING", 1, "46", 77, "Картофель сырой (свежий)", "41f284f935466cf22c03fe32dd64f6ac1083f13e5c331520ca26df63f3179de9"),
     ("ING-0028", "ONION_BULB_FRESH", "Лук репчатый свежий", "vegetables", "CREATE_REVIEWED", 1, "1186", 118, "Лук репчатый свежий", "bfd5673766e9061af643423f8f32206de1d7bd331bed50135e449984efb9b55e"),
     ("ING-0036", "FLOUR_WHEAT_HIGH_GRADE", "Мука пшеничная высшего сорта", "grains", "CREATE_REVIEWED", 1, "82", 132, "Мука пшеничная в/с", "f8712b80e2bd18972bf78374fdb6885c9a64c6a6c32ba08d6fa39ffe61b7b332"),
+    ("ING-0006", "WATER", "Вода питьевая", "staples", "REUSE_EXISTING", 2, "3000", 360, "Вода питьевая", "efb9ba629e4310c4d75309f01ffe8f6e9566a1f43f3b4f4e5b0f46470c665945"),
+    ("ING-0050", "SALT", "Соль поваренная", "herbs_spices", "REUSE_EXISTING", 2, "125", 932, "Соль поваренная пищевая", "b7a6d581126d3e02bdc46f7bdb02c73083c4cf9e52e41b67a1e6f10adcee6bb5"),
 )
 
 
@@ -269,10 +271,10 @@ def load_ru_nut_db_r1a_bundles(
             )
         )
 
-    if (source_numeric_count, source_zero_count) != (168, 66):
+    if (source_numeric_count, source_zero_count) != (181, 105):
         raise ValueError("R1-A source-state accounting изменилось.")
-    if sum(bundle.vector.value_count for bundle in bundles) != 162:
-        raise ValueError("R1-A должен публиковать ровно 162 V2 values.")
+    if sum(bundle.vector.value_count for bundle in bundles) != 198:
+        raise ValueError("R1-A должен публиковать ровно 198 V2 values.")
     return tuple(bundles)
 
 
