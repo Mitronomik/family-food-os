@@ -15,9 +15,6 @@ from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_recipe_composition import (
     create_food_recipe_catalogue_service,
 )
-from app.persistence.sqlalchemy_core.food_recipe_uow import (
-    SqlAlchemyRecipeCatalogueUnitOfWork,
-)
 from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
     create_recipe_nutrition_v2_service,
 )
@@ -33,11 +30,10 @@ from app.services.food_recipes import (
 from app.services.recipe_nutrition_v2 import (
     BindingDisposition,
     ReviewedRecipeIngredientBindingSpec,
-    project_recipe_nutrition_consumption,
 )
 
 PACKAGE = REPOSITORY_ROOT / "data/curation/r1b-reviewed-recipes"
-PUBLICATION_SHA256 = "6fa9d57f4472e9bed6df4362a4cd6f00dc5585721e81faa927c0f3629be7054e"
+PUBLICATION_SHA256 = "b81e4417e425187f87976c7fc6c4aebdbfda2f628a39ea7435b4c1209a01eb4b"
 SOURCE_DOCUMENT_SHA256 = "6ac7dfb300844fd996aee6d20b4e7e6aa421dd517367ab1f59120812fee104d5"
 SUPPORTING_MASS_SHA256 = "5ea78ead82568f8aff019a4076215c6598675783cb81e0d1d5b4f913016de4cc"
 ARCHIVE_SHA256 = "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea"
@@ -55,7 +51,7 @@ class R1BPublicationResult:
     binding_fresh_count: int
     binding_replay_count: int
     activated_count: int
-    exact_energy_kcal: tuple[tuple[str, Decimal], ...]
+    input_energy_kcal: tuple[tuple[str, Decimal], ...]
 
 
 def _checked_json(path: Path, digest: str) -> dict[str, Any]:
@@ -252,8 +248,10 @@ def load_r1b_recipe_seeds(
         )
         if output <= 0:
             raise ValueError("R1-B source output должен быть положительным.")
-        if row.get("activation") != "ACTIVE_AFTER_BINDING_VALIDATION":
+        if row.get("activation") != "INACTIVE_PENDING_TRANSFORMATION_AUTHORITY":
             raise ValueError("R1-B activation disposition изменена.")
+        if not isinstance(row.get("activation_reason"), str) or not row["activation_reason"].strip():
+            raise ValueError("R1-B activation reason отсутствует.")
 
         seeds.append(
             TrustedRecipeSeed(
@@ -352,36 +350,17 @@ def _binding_specs(
                     composition_input_state="INPUT",
                     expected_available_amounts=available,
                     expected_unknown_codes=unknown,
-                    require_recipe_inactive=False,
+                    require_recipe_inactive=True,
                 )
             )
 
         energy = _decimal(
-            source_row["expected_energy_kcal"],
-            field=f"{seed.version.source_recipe_id}.expected_energy_kcal",
+            source_row["expected_input_energy_kcal"],
+            field=f"{seed.version.source_recipe_id}.expected_input_energy_kcal",
         )
         if energy <= 0:
             raise ValueError("R1-B expected energy должна быть положительной.")
     return tuple(specs)
-
-
-def _activate_recipes(engine, seeds: tuple[TrustedRecipeSeed, ...]) -> int:
-    activated = 0
-    now = datetime.now(timezone.utc)
-    with SqlAlchemyRecipeCatalogueUnitOfWork(engine) as uow:
-        for seed in seeds:
-            recipe = uow.recipes.get_by_code(seed.canonical_code)
-            if recipe is None:
-                raise ValueError(f"R1-B Recipe отсутствует: {seed.canonical_code}.")
-            if recipe.is_active:
-                continue
-            uow.recipes.set_active(recipe.id, active=True, updated_at=now)
-            activated += 1
-        if activated:
-            uow.commit()
-        else:
-            uow.rollback()
-    return activated
 
 
 def seed_r1b_recipes(
@@ -430,26 +409,24 @@ def seed_r1b_recipes(
             if len(versions) != 1:
                 raise ValueError("R1-B ожидает ровно одну fresh RecipeVersion.")
             canonical = nutrition.calculate(versions[0].id)
-            projection = project_recipe_nutrition_consumption(canonical)
             expected = _decimal(
-                package_by_source[seed.version.source_recipe_id]["expected_energy_kcal"],
-                field=f"{seed.version.source_recipe_id}.expected_energy_kcal",
+                package_by_source[seed.version.source_recipe_id]["expected_input_energy_kcal"],
+                field=f"{seed.version.source_recipe_id}.expected_input_energy_kcal",
             )
             actual = canonical.total_amount("ENERGY_KCAL")
-            if actual != expected or not projection.exact_energy_ready:
+            if actual != expected:
                 raise ValueError(
                     f"R1-B exact energy validation failed: {seed.version.source_recipe_id}."
                 )
             energies.append((seed.version.source_recipe_id, actual))
 
-        activated = _activate_recipes(engine, seeds)
         return R1BPublicationResult(
             recipe_summary=recipe_summary,
             dependency_bundle_created_count=0,
             binding_fresh_count=fresh,
             binding_replay_count=replay,
-            activated_count=activated,
-            exact_energy_kcal=tuple(energies),
+            activated_count=0,
+            input_energy_kcal=tuple(energies),
         )
     finally:
         engine.dispose()
@@ -466,9 +443,9 @@ if __name__ == "__main__":
                 "binding_fresh_count": result.binding_fresh_count,
                 "binding_replay_count": result.binding_replay_count,
                 "activated_count": result.activated_count,
-                "exact_energy_kcal": [
+                "input_energy_kcal": [
                     [source_id, format(amount, "f")]
-                    for source_id, amount in result.exact_energy_kcal
+                    for source_id, amount in result.input_energy_kcal
                 ],
             },
             ensure_ascii=False,
