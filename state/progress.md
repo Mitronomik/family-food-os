@@ -1,5 +1,23 @@
 # Progress
 
+## R1-A started — 2026-09-27
+
+Accepted base:
+`9f72f6883e092cbf79930c7ac4a5a1314c7488d8`.
+
+Status:
+`R1A_DEPENDENCY_CLOSURE_ACTIVE`.
+
+Selected batch:
+7 recipes / 4 breakfast-target candidates / 3 main-target candidates.
+
+Expected new/form dependency review set:
+10 external identities.
+
+No RecipeVersion, Planner, Shopping or UI changes have started.
+
+
+
 ## Post-PR96 sequencing corrected — 2026-09-26
 
 Accepted main:
