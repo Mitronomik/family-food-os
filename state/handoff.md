@@ -1,5 +1,44 @@
 # Handoff
 
+## R1-B source-output contract gate active — 2026-09-27
+
+PR101 / R1-A merged into main:
+
+`eb803cda82ce8073443981867291716a0eb0f0ad`.
+
+User authorized continuation in the accepted sequence.
+
+Current bounded operation is **docs-only**:
+`#102 — R1-B source output/yield Implementation Contract Gate`.
+
+Branch:
+`docs/r1b-source-output-contract`.
+
+Gate document:
+`docs/family-food/r1b-source-output-contract.md`.
+
+Reason:
+the five R1-B source variants have exact source outputs 40/110/170/160/75 g, but
+current RecipeVersion has no structured output/yield field. Persisting immutable
+output truth requires a schema contract before runtime.
+
+Proposed minimum:
+- RecipeVersion.source_output_g nullable Decimal;
+- RecipeVersion.source_output_text nullable text;
+- expected migration 0040 after gate approval;
+- no output→yield inference;
+- no new retention factors;
+- Recipe Nutrition remains input-Composition based;
+- no Planner/Serving consumption yet.
+
+Five candidate recipes remain:
+USSR82-453, USSR82-467, USSR82-492, USSR82-1081, USSR82-697 exact chicken/main branch.
+
+R1-A blockers USSR82-364 and USSR82-208 remain outside R1-B.
+
+Do not start migration/runtime/RecipeVersion publication until this gate is merged
+and R1-B runtime is separately authorized.
+
 ## R1-A WATER/SALT Planner-energy closure — 2026-09-27
 
 Verified runtime/data head:
