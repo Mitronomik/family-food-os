@@ -7,22 +7,24 @@
     "status": "NOT_REVIEWED_NO_AUTOMATIC_ALLERGEN_CLAIMS"
   },
   "counts": {
-    "accepted_reuse_dependency_count": 9,
+    "accepted_reuse_dependency_count": 7,
     "blocked_dependency_count": 2,
     "blocked_recipe_count_after_r1a": 2,
     "dependency_ready_recipe_count_after_r1a": 5,
-    "r1a_publication_dependency_count": 9,
+    "r1a_publication_dependency_count": 11,
     "recipe_count": 7,
     "source_relationship_row_count": 32,
     "unique_dependency_count": 20
   },
   "dependencies": [
     {
-      "authority_ref": "data/curation/pr6-ru-food-data/food-readiness.json#WATER",
       "canonical_code": "WATER",
-      "disposition": "ACCEPTED_REUSE",
+      "disposition": "PUBLISH_R1A_FIC",
       "id": "ING-0006",
-      "source_identity": "Вода"
+      "source_identity": "Вода",
+      "source_code": "3000",
+      "db_index": 360,
+      "raw_record_sha256": "efb9ba629e4310c4d75309f01ffe8f6e9566a1f43f3b4f4e5b0f46470c665945"
     },
     {
       "disposition": "BLOCKED",
@@ -145,11 +147,13 @@
       "source_identity": "Сметана 30%"
     },
     {
-      "authority_ref": "data/curation/pr6-ru-food-data/food-readiness.json#SALT",
       "canonical_code": "SALT",
-      "disposition": "ACCEPTED_REUSE",
+      "disposition": "PUBLISH_R1A_FIC",
       "id": "ING-0050",
-      "source_identity": "Соль поваренная"
+      "source_identity": "Соль поваренная",
+      "source_code": "125",
+      "db_index": 932,
+      "raw_record_sha256": "b7a6d581126d3e02bdc46f7bdb02c73083c4cf9e52e41b67a1e6f10adcee6bb5"
     },
     {
       "authority_ref": "data/curation/pr6-ru-food-data/food-readiness.json#BREADCRUMBS",
@@ -302,5 +306,11 @@
     "sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
     "size_bytes": 206692075,
     "verified_retrieval_date": "2026-09-27"
+  },
+  "planner_capacity_boundary": {
+    "status": "EXACT_ENERGY_DEPENDENCIES_CLOSED_FOR_READY_RECIPES",
+    "rationale": "R1-A publishes source-backed ENERGY_KCAL=0.0 authority for required WATER and SALT rather than treating historical V2 unknown energy as zero.",
+    "ready_recipe_count": 5,
+    "blocked_recipe_count": 2
   }
 }
