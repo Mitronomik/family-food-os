@@ -35,7 +35,7 @@ from app.services.nutrition_publication import (
 
 NOW = datetime(2026, 9, 27, 12, tzinfo=timezone.utc)
 R1A_CODES = tuple(item[1] for item in EXPECTED)
-NEW_CODES = R1A_CODES[:-1]
+NEW_CODES = tuple(item[1] for item in EXPECTED if item[4] == "CREATE_REVIEWED")
 GENERIC_CODES = (
     "MARGARINE",
     "MILK_WHOLE",
@@ -43,6 +43,8 @@ GENERIC_CODES = (
     "COTTAGE_CHEESE_FULL_FAT",
     "CHICKEN_BREAST",
     "CHICKEN_THIGH",
+    "ONION_YELLOW",
+    "FLOUR_WHEAT",
     "POTATO",
 )
 
@@ -107,30 +109,30 @@ def current_profile_ids(config: DatabaseConfig, codes: tuple[str, ...]) -> dict[
 def test_package_and_dependency_manifest_are_exact():
     bundles = load_ru_nut_db_r1a_bundles()
     assert tuple(bundle.ingredient.canonical_code for bundle in bundles) == R1A_CODES
-    assert [bundle.vector.value_count for bundle in bundles] == [18] * 7
-    assert sum(bundle.vector.value_count for bundle in bundles) == 126
+    assert [bundle.vector.value_count for bundle in bundles] == [18] * 9
+    assert sum(bundle.vector.value_count for bundle in bundles) == 162
 
     source_rows = [json.loads(bundle.vector.observations_json) for bundle in bundles]
-    assert [len(rows) for rows in source_rows] == [26] * 7
-    assert sum(len(rows) for rows in source_rows) == 182
+    assert [len(rows) for rows in source_rows] == [26] * 9
+    assert sum(len(rows) for rows in source_rows) == 234
     assert sum(
         row["observation"]["source_state"] == "published_zero"
         for record in source_rows
         for row in record
-    ) == 50
+    ) == 66
     assert sum(
         row["observation"]["source_state"] == "published_numeric"
         for record in source_rows
         for row in record
-    ) == 132
+    ) == 168
 
     manifest = json.loads((PACKAGE / "dependency-manifest.json").read_text())
     assert manifest["counts"] == {
         "recipe_count": 7,
         "source_relationship_row_count": 32,
         "unique_dependency_count": 20,
-        "accepted_reuse_dependency_count": 11,
-        "r1a_publication_dependency_count": 7,
+        "accepted_reuse_dependency_count": 9,
+        "r1a_publication_dependency_count": 9,
         "blocked_dependency_count": 2,
         "dependency_ready_recipe_count_after_r1a": 5,
         "blocked_recipe_count_after_r1a": 2,
@@ -160,6 +162,8 @@ def test_package_pins_exact_source_records():
         "31": "6846bc12256db2d75b5329a14279d8d486c9253d3f3db75bf21a3b95e096a386",
         "158": "cd75d00e6781ad32706ee2d6120aad311ed05258cb4a8223a4d6c8bec379f1b9",
         "46": "41f284f935466cf22c03fe32dd64f6ac1083f13e5c331520ca26df63f3179de9",
+        "1186": "bfd5673766e9061af643423f8f32206de1d7bd331bed50135e449984efb9b55e",
+        "82": "f8712b80e2bd18972bf78374fdb6885c9a64c6a6c32ba08d6fa39ffe61b7b332",
     }
 
 
@@ -180,10 +184,10 @@ def test_fresh_batch_replay_and_current_profile_preservation(database):
     try:
         first = batch_service(engine).publish_batch(bundles)
         assert commits == 1
-        assert len(first.results) == 7
-        assert first.bundle_created_count == 7
-        assert first.ingredient_created_count == 6
-        assert first.nutrient_value_count == 126
+        assert len(first.results) == 9
+        assert first.bundle_created_count == 9
+        assert first.ingredient_created_count == 8
+        assert first.nutrient_value_count == 162
 
         with SqlAlchemyNutritionReadScope(engine) as read:
             for bundle, result in zip(bundles, first.results, strict=True):
@@ -255,7 +259,9 @@ def test_existing_generic_identities_are_not_reused_for_exact_new_forms(database
                         'MILK_WHOLE', 'MILK_PASTEURIZED_3_2',
                         'SOUR_CREAM_FULL_FAT', 'SOUR_CREAM_30',
                         'COTTAGE_CHEESE_FULL_FAT', 'TVOROG_9',
-                        'CHICKEN_THIGH', 'CHICKEN_CATEGORY_1_RAW'
+                        'CHICKEN_THIGH', 'CHICKEN_CATEGORY_1_RAW',
+                        'ONION_YELLOW', 'ONION_BULB_FRESH',
+                        'FLOUR_WHEAT', 'FLOUR_WHEAT_HIGH_GRADE'
                     )
                     """
                 ).fetchall()
@@ -265,11 +271,15 @@ def test_existing_generic_identities_are_not_reused_for_exact_new_forms(database
         assert rows["SOUR_CREAM_30"] == "Сметана 30%"
         assert rows["TVOROG_9"] == "Творог 9%"
         assert rows["CHICKEN_CATEGORY_1_RAW"] == "Курица 1 категории, сырая"
+        assert rows["ONION_BULB_FRESH"] == "Лук репчатый свежий"
+        assert rows["FLOUR_WHEAT_HIGH_GRADE"] == "Мука пшеничная высшего сорта"
         assert "MARGARINE" in rows
         assert "MILK_WHOLE" in rows
         assert "SOUR_CREAM_FULL_FAT" in rows
         assert "COTTAGE_CHEESE_FULL_FAT" in rows
         assert "CHICKEN_THIGH" in rows
+        assert "ONION_YELLOW" in rows
+        assert "FLOUR_WHEAT" in rows
     finally:
         engine.dispose()
 
@@ -297,7 +307,7 @@ def test_identity_conflict_rolls_back_entire_batch(database):
         engine.dispose()
 
 
-@pytest.mark.parametrize("food_number", [1, 4, 7])
+@pytest.mark.parametrize("food_number", [1, 5, 9])
 def test_failure_rolls_back_whole_batch(database, food_number):
     bundles = load_ru_nut_db_r1a_bundles()
     engine = create_sqlite_engine(database)
