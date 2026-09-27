@@ -359,7 +359,7 @@ class RecipeVersion:
         if self.source_output_g is not None:
             if not isinstance(self.source_output_g, Decimal):
                 raise _issue(
-                    DomainIssueCode.INVALID_TYPE,
+                    DomainIssueCode.INVALID_DECIMAL,
                     "source_output_g must be Decimal or null.",
                     field="source_output_g",
                     value=self.source_output_g,
