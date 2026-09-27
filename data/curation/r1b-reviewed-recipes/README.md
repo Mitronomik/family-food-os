@@ -67,7 +67,7 @@ publication payload.
 - meal type: breakfast
 - quantified input: EGG 40 g edible source calculation mass
 - source output: 40 g
-- exact energy after Composition binding: 58.800000 kcal
+- exact energy after Composition binding: 62.840000 kcal
 - process contains no extra unquantified material ingredient
 
 ### USSR82-1081 — Блины
@@ -84,7 +84,7 @@ publication payload.
   - MARGARINE_MILK_TABLE 5 g
   - BUTTER_UNSALTED 10 g
 - source output: 160 g
-- exact energy after Composition binding: 367.688000 kcal
+- exact energy after Composition binding: 371.184000 kcal
 - alternatives are not mixed
 
 ### USSR82-697 — Курица отварная
@@ -129,8 +129,14 @@ exact input grams
 The package cross-checks reviewed Composition versions and nutrient values
 against accepted hash-pinned loaders:
 
-- PR6 RU food authorities for existing EGG / SUGAR / BUTTER_UNSALTED;
-- merged R1-A authorities for exact new forms and WATER/SALT.
+- Step4 FIC/V2 authority for SUGAR (ATOMIC v2);
+- merged R1-A authorities for exact new forms and WATER/SALT;
+- R1-B bounded FIC/V2 dependency closure for existing EGG and BUTTER_UNSALTED
+  identities (ATOMIC v2).
+
+The R1-B EGG/BUTTER profiles are non-current and preserve historical current
+profiles/ATOMIC v1. They exist only to provide exact V2-compatible Composition
+authority for the reviewed RecipeIngredient bindings.
 
 The package cannot silently redefine those vectors.
 
