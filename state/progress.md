@@ -1,5 +1,36 @@
 # Progress
 
+## R1-A review-ready — 2026-09-27
+
+Accepted base:
+`9f72f6883e092cbf79930c7ac4a5a1314c7488d8`.
+
+Verified runtime/data head:
+`1f5cc62876a6985eb0d07f119de9b3ccaf9e35d9`.
+
+Delivered:
+- exact 20-dependency manifest for the selected 7-recipe R1 batch;
+- 9 exact FIC authority publications;
+- 9 accepted late-state reuses;
+- 2 explicit blockers;
+- 162 canonical V2 values;
+- 234 retained source observations;
+- one-UoW fresh publication, zero-write replay, conflict/rollback/tamper tests;
+- no silent generic-form substitution;
+- existing current profiles preserved;
+- explicit allergen authority limitation;
+- 5 recipes dependency-ready for R1-B.
+
+Verification:
+Docs #446, DC1 #308, Russian #181, Registry #317, Partial #239 — SUCCESS.
+Registry focused: 400 passed.
+All broad backend shards and launcher regressions are green.
+
+Status:
+`R1A_REVIEW_READY`.
+
+No RecipeVersion, Planner, Shopping, Prep, Retail, API/UI or AI work started.
+
 ## R1-A started — 2026-09-27
 
 Accepted base:
