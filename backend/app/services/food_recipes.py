@@ -314,6 +314,22 @@ class FoodRecipeCatalogueService:
         *,
         strict_history: bool = False,
     ) -> RecipeSeedSummary:
+        with self._write() as scope:
+            summary = self.reconcile_seed_in_scope(
+                scope, seeds, strict_history=strict_history
+            )
+            scope.commit()
+            return summary
+
+    def reconcile_seed_in_scope(
+        self,
+        scope: RecipeCatalogueUnitOfWork,
+        seeds: Iterable[TrustedRecipeSeed],
+        *,
+        strict_history: bool = False,
+    ) -> RecipeSeedSummary:
+        """Reconcile trusted seeds inside a caller-owned transaction."""
+
         entries = tuple(seeds)
         identities = [
             (
@@ -331,75 +347,73 @@ class FoodRecipeCatalogueService:
 
         counts = {field: 0 for field in RecipeSeedSummary.__dataclass_fields__}
         now = self._clock()
-        with self._write() as scope:
-            for entry in entries:
-                if strict_history:
-                    self._classify_trusted_seed(scope, entry)
-                recipe = scope.recipes.get_by_code(entry.canonical_code)
-                if recipe is None:
-                    name_key = normalize_unicode_search_key(
-                        entry.canonical_name, field="canonical_name"
-                    )
-                    if scope.recipes.get_by_name_key(name_key) is not None:
-                        raise RecipeCatalogueConflictError(
-                            "Existing Recipe normalized name conflicts with trusted seed."
-                        )
-                    recipe = self._new_recipe(entry, now)
-                    scope.recipes.add(recipe)
-                    detail = self._new_detail(
-                        scope, recipe, entry.version, 1, None, now
-                    )
-                    scope.versions.add_detail(detail)
-                    _increment_detail(counts, detail, inserted=True)
-                    counts["recipes_inserted"] += 1
-                    continue
-
-                if (
-                    recipe.canonical_name != entry.canonical_name
-                    or recipe.canonical_name_key
-                    != normalize_unicode_search_key(
-                        entry.canonical_name, field="canonical_name"
-                    )
-                ):
-                    raise RecipeCatalogueConflictError(
-                        "Existing Recipe differs from trusted seed."
-                    )
-                counts["recipes_existing"] += 1
-                candidates = scope.versions.list_by_provenance(
-                    recipe.id,
-                    entry.version.source_name,
-                    entry.version.source_recipe_id,
-                    entry.version.source_version,
+        for entry in entries:
+            if strict_history:
+                self._classify_trusted_seed(scope, entry)
+            recipe = scope.recipes.get_by_code(entry.canonical_code)
+            if recipe is None:
+                name_key = normalize_unicode_search_key(
+                    entry.canonical_name, field="canonical_name"
                 )
-                if candidates:
-                    existing = next(
-                        (
-                            detail
-                            for detail in candidates
-                            if _seed_matches(scope, detail, entry.version)
-                        ),
-                        None,
+                if scope.recipes.get_by_name_key(name_key) is not None:
+                    raise RecipeCatalogueConflictError(
+                        "Existing Recipe normalized name conflicts with trusted seed."
                     )
-                    if existing is None:
-                        raise RecipeCatalogueConflictError(
-                            "Same-provenance RecipeVersions differ from the trusted historical seed."
-                        )
-                    _increment_detail(counts, existing, inserted=False)
-                    continue
-
-                versions = scope.versions.list_for_recipe(recipe.id)
-                previous = versions[-1] if versions else None
+                recipe = self._new_recipe(entry, now)
+                scope.recipes.add(recipe)
                 detail = self._new_detail(
-                    scope,
-                    recipe,
-                    entry.version,
-                    1 if previous is None else previous.version_number + 1,
-                    None if previous is None else previous.id,
-                    now,
+                    scope, recipe, entry.version, 1, None, now
                 )
                 scope.versions.add_detail(detail)
                 _increment_detail(counts, detail, inserted=True)
-            scope.commit()
+                counts["recipes_inserted"] += 1
+                continue
+
+            if (
+                recipe.canonical_name != entry.canonical_name
+                or recipe.canonical_name_key
+                != normalize_unicode_search_key(
+                    entry.canonical_name, field="canonical_name"
+                )
+            ):
+                raise RecipeCatalogueConflictError(
+                    "Existing Recipe differs from trusted seed."
+                )
+            counts["recipes_existing"] += 1
+            candidates = scope.versions.list_by_provenance(
+                recipe.id,
+                entry.version.source_name,
+                entry.version.source_recipe_id,
+                entry.version.source_version,
+            )
+            if candidates:
+                existing = next(
+                    (
+                        detail
+                        for detail in candidates
+                        if _seed_matches(scope, detail, entry.version)
+                    ),
+                    None,
+                )
+                if existing is None:
+                    raise RecipeCatalogueConflictError(
+                        "Same-provenance RecipeVersions differ from the trusted historical seed."
+                    )
+                _increment_detail(counts, existing, inserted=False)
+                continue
+
+            versions = scope.versions.list_for_recipe(recipe.id)
+            previous = versions[-1] if versions else None
+            detail = self._new_detail(
+                scope,
+                recipe,
+                entry.version,
+                1 if previous is None else previous.version_number + 1,
+                None if previous is None else previous.id,
+                now,
+            )
+            scope.versions.add_detail(detail)
+            _increment_detail(counts, detail, inserted=True)
         return RecipeSeedSummary(**counts)
 
     def _new_recipe(self, seed: TrustedRecipeSeed, now: datetime) -> Recipe:

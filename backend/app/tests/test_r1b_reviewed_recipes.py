@@ -12,6 +12,9 @@ from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_recipe_composition import (
     create_food_recipe_catalogue_service,
 )
+from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
+    SqlAlchemyRecipeIngredientCompositionBindingRepository,
+)
 from app.seed.food_ingredients import seed_food_ingredients
 from app.seed.r1b_reviewed_recipes import (
     BLOCKED_IDS,
@@ -240,6 +243,41 @@ def test_r1b_recipe_failure_rolls_back_single_publish_recipe(database):
 
     assert state["versions"] == 1
     assert db_dump(database) == before
+
+
+def test_r1b_second_binding_failure_rolls_back_full_publication(
+    database, monkeypatch
+):
+    before = db_dump(database)
+    original_add = SqlAlchemyRecipeIngredientCompositionBindingRepository.add
+    state = {"calls": 0}
+
+    def fail_on_second_binding(self, binding):
+        state["calls"] += 1
+        if state["calls"] == 2:
+            raise RuntimeError("injected R1-B second binding failure")
+        return original_add(self, binding)
+
+    monkeypatch.setattr(
+        SqlAlchemyRecipeIngredientCompositionBindingRepository,
+        "add",
+        fail_on_second_binding,
+    )
+
+    with pytest.raises(RuntimeError, match="injected R1-B second binding failure"):
+        seed_r1b_recipes(database)
+
+    assert state["calls"] == 2
+    assert db_dump(database) == before
+
+    with sqlite3.connect(database.path) as db:
+        assert (
+            db.execute(
+                "SELECT COUNT(*) FROM food_recipes "
+                "WHERE canonical_code='USSR82_697_BOILED_CHICKEN'"
+            ).fetchone()[0]
+            == 0
+        )
 
 
 def test_r1b_does_not_publish_yield_or_retention_authority(database):

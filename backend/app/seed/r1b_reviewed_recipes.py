@@ -17,6 +17,7 @@ from app.persistence.sqlalchemy_core.food_recipe_composition import (
     create_food_recipe_catalogue_service,
 )
 from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
+    SqlAlchemyRecipeNutritionV2UnitOfWork,
     create_recipe_nutrition_v2_service,
 )
 from app.seed.ru_nut_db_r1a import load_ru_nut_db_r1a_bundles
@@ -462,41 +463,49 @@ def seed_r1b_recipes(
     engine = create_sqlite_engine(config)
     try:
         catalogue = create_food_recipe_catalogue_service(engine)
-        recipe_summary = catalogue.reconcile_seed(seeds, strict_history=True)
-
         nutrition = create_recipe_nutrition_v2_service(engine)
         fresh = replay = 0
-        for spec in _binding_specs(seeds, package):
-            result = nutrition.publish_binding(spec)
-            if result.disposition is BindingDisposition.FRESH:
-                fresh += 1
-            else:
-                replay += 1
-
         energies: list[tuple[str, Decimal]] = []
         package_by_source = {
             row["source_recipe_id"]: row
             for row in package["candidates"]
             if row["disposition"] == "PUBLISH"
         }
-        for seed in seeds:
-            recipe = catalogue.get_by_code(seed.canonical_code)
-            versions = catalogue.list_versions(recipe.id)
-            if len(versions) != 1:
-                raise ValueError("R1-B ожидает ровно одну fresh RecipeVersion.")
-            canonical = nutrition.calculate(versions[0].id)
-            expected = _decimal(
-                package_by_source[seed.version.source_recipe_id][
-                    "expected_input_energy_kcal"
-                ],
-                field=f"{seed.version.source_recipe_id}.expected_input_energy_kcal",
+
+        with SqlAlchemyRecipeNutritionV2UnitOfWork(engine) as uow:
+            recipe_summary = catalogue.reconcile_seed_in_scope(
+                uow, seeds, strict_history=True
             )
-            actual = canonical.total_amount("ENERGY_KCAL")
-            if actual != expected:
-                raise ValueError(
-                    f"R1-B exact energy validation failed: {seed.version.source_recipe_id}."
+
+            for spec in _binding_specs(seeds, package):
+                result = nutrition.publish_binding_in_scope(uow, spec)
+                if result.disposition is BindingDisposition.FRESH:
+                    fresh += 1
+                else:
+                    replay += 1
+
+            for seed in seeds:
+                recipe = uow.recipes.get_by_code(seed.canonical_code)
+                if recipe is None:
+                    raise ValueError("R1-B Recipe исчез внутри publication transaction.")
+                versions = uow.versions.list_for_recipe(recipe.id)
+                if len(versions) != 1:
+                    raise ValueError("R1-B ожидает ровно одну fresh RecipeVersion.")
+                canonical = nutrition.calculate_in_scope(uow, versions[0].id)
+                expected = _decimal(
+                    package_by_source[seed.version.source_recipe_id][
+                        "expected_input_energy_kcal"
+                    ],
+                    field=f"{seed.version.source_recipe_id}.expected_input_energy_kcal",
                 )
-            energies.append((seed.version.source_recipe_id, actual))
+                actual = canonical.total_amount("ENERGY_KCAL")
+                if actual != expected:
+                    raise ValueError(
+                        f"R1-B exact energy validation failed: {seed.version.source_recipe_id}."
+                    )
+                energies.append((seed.version.source_recipe_id, actual))
+
+            uow.commit()
 
         return R1BPublicationResult(
             recipe_summary=recipe_summary,
@@ -508,7 +517,6 @@ def seed_r1b_recipes(
         )
     finally:
         engine.dispose()
-
 
 if __name__ == "__main__":
     result = seed_r1b_recipes()
