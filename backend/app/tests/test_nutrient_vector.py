@@ -31,7 +31,12 @@ from app.persistence.sqlalchemy_core.nutrition_read_scope import (
 )
 from app.persistence.sqlalchemy_core.nutrient_vector_tables import nutrient_values
 from app.seed.food_ingredients import seed_food_ingredients
-from scripts.audit_pr6_nutrient_vector_b import measure, seed_previous, snapshot
+from scripts.audit_pr6_nutrient_vector_b import (
+    assert_snapshot_preserved,
+    measure,
+    seed_previous,
+    snapshot,
+)
 
 MIGRATION = import_module("app.migrations.versions.0028_normalized_nutrient_vector")
 
@@ -458,7 +463,7 @@ def test_mid_backfill_failure_rolls_back_and_resume_is_deterministic(
         "0040_recipe_version_source_output",
     ]
     after = snapshot(config)
-    assert all(after[name] == rows for name, rows in before.items())
+    assert_snapshot_preserved(before, after)
     assert len(after["nutrient_values"]) == 806
     assert migrations.apply_migrations(config) == []
     assert snapshot(config) == after
@@ -598,7 +603,7 @@ def test_migration_includes_noncurrent_audited_history(tmp_path):
         before = snapshot(config)
         migrations.apply_migrations(config)
         after = snapshot(config)
-        assert all(after[name] == rows for name, rows in before.items())
+        assert_snapshot_preserved(before, after)
         with SqlAlchemyNutritionReadScope(engine) as read:
             assert read.nutrition_profiles.get_current(food.id) is None
             historical = read.nutrient_vectors.get(profile.id)
