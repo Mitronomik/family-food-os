@@ -8,6 +8,9 @@ MIGRATION_ID = "0041_meal_pattern_energy_allocation"
 
 
 def upgrade(connection):
+    if not connection.in_transaction:
+        connection.execute("BEGIN")
+
     connection.execute(
         """
         ALTER TABLE meal_pattern_opportunities
