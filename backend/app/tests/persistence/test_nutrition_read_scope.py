@@ -93,7 +93,14 @@ def test_recipe_calculation_has_one_connection_no_writes_and_no_schema_change(
     assert result.version == detail.version
     assert len(connections) == 1
     assert statements and all(
-        statement.lstrip().upper().startswith(("SELECT", "PRAGMA TABLE_INFO"))
+        statement.lstrip().upper().startswith(
+            (
+                "SELECT",
+                "PRAGMA TABLE_INFO",
+                "PRAGMA MAIN.TABLE_XINFO",
+                "PRAGMA TABLE_XINFO",
+            )
+        )
         for statement in statements
     )
     with sqlite3.connect(config.path) as database:
