@@ -31,6 +31,24 @@ from app.services.food_recipe_contracts import (
 )
 
 
+def _persisted_version_columns(connection: Connection):
+    """RecipeVersion columns that exist in the current migration prefix.
+
+    Migration/readiness tests intentionally open historical databases before 0040
+    with current application code. Select only columns present in that prefix;
+    post-0040 databases automatically expose source-output fields.
+    """
+    names = {
+        row[1]
+        for row in connection.exec_driver_sql(
+            "PRAGMA table_info('food_recipe_versions')"
+        )
+    }
+    return tuple(
+        column for column in food_recipe_versions_table.c if column.name in names
+    )
+
+
 class SqlAlchemyRecipeRepository:
     def __init__(self, connection: Connection) -> None:
         self._connection = connection
@@ -161,7 +179,7 @@ class SqlAlchemyRecipeVersionRepository:
     def get(self, version_id: UUID) -> RecipeVersion | None:
         row = (
             self._connection.execute(
-                select(food_recipe_versions_table).where(
+                select(*_persisted_version_columns(self._connection)).where(
                     food_recipe_versions_table.c.id == version_id
                 )
             )
@@ -208,7 +226,7 @@ class SqlAlchemyRecipeVersionRepository:
 
     def list_for_recipe(self, recipe_id: UUID) -> list[RecipeVersion]:
         rows = self._connection.execute(
-            select(food_recipe_versions_table)
+            select(*_persisted_version_columns(self._connection))
             .where(food_recipe_versions_table.c.recipe_id == recipe_id)
             .order_by(food_recipe_versions_table.c.version_number)
         ).mappings()
