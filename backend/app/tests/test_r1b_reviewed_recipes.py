@@ -152,6 +152,16 @@ def test_r1b_fresh_publication_bindings_energy_activation_and_replay(database):
                 (code, source_name, source_id),
             ).fetchone()
             assert row == (1, version)
+        assert db.execute(
+            """
+            SELECT COUNT(*)
+            FROM food_ingredients i
+            JOIN food_nutrition_profiles p ON p.food_ingredient_id = i.id
+            WHERE i.canonical_code IN ('EGG', 'BUTTER_UNSALTED')
+              AND p.source_name = 'FIC_RU_NUT_DB'
+              AND p.source_id IN ('2287', '1418')
+            """
+        ).fetchone()[0] == 0
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
 
     before = db_dump(database)
