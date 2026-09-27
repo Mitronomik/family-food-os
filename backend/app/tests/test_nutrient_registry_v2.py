@@ -362,7 +362,7 @@ def test_0035_failure_rolls_back_schema_and_marker(tmp_path):
 
 def test_migration_chain_advances_without_consuming_reserved_0033():
     expected = expected_migration_ids()
-    assert expected[-8:] == [
+    assert expected[-9:] == [
         "0032_meal_plan_serving",
         "0034_partial_nutrition_profiles",
         "0035_versioned_nutrient_registry",
