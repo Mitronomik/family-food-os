@@ -1,3 +1,4 @@
+from dataclasses import replace
 from datetime import date
 from decimal import Decimal
 from types import SimpleNamespace
@@ -195,6 +196,75 @@ def test_infeasible_authoritative_generation_never_writes() -> None:
     result, detail = planner.generate_authoritative(command)
     assert detail is None and result.trace.failure_code is not None
     assert meals.writes == []
+
+
+def test_v04_missing_allocation_fails_before_meal_plan_write() -> None:
+    household_id, member_id = uid(1), uid(2)
+    meals = MealPlans(household_id, member_id)
+    pantry = Pantry()
+    recipes = Recipes()
+    nutrition = Nutrition()
+    planner = PlannerService(
+        meals,
+        Households(household_id, member_id),
+        recipes,
+        nutrition,
+        pantry,
+        PlannerConfig(version="planner-v0.4", max_recipe_repetitions=10),
+        recipe_nutrition=nutrition,
+    )
+    command = AuthoritativeGenerationRequest(
+        household_id,
+        date(2026, 9, 14),
+        (GenerationMemberConstraints(member_id),),
+    )
+
+    result, detail = planner.generate_authoritative(command)
+
+    assert result.trace.failure_code.value == "MISSING_ENERGY_ALLOCATION"
+    assert detail is None
+    assert meals.writes == []
+
+
+def test_v04_authoritative_generation_persists_v04_config_after_success() -> None:
+    household_id, member_id = uid(1), uid(2)
+    meals = MealPlans(household_id, member_id)
+    meals.selection = replace(
+        meals.selection,
+        opportunities=tuple(
+            replace(item, energy_share=Decimal("0.25"))
+            for item in meals.selection.opportunities
+        ),
+    )
+    pantry = Pantry()
+    recipes = Recipes()
+    nutrition = Nutrition()
+    planner = PlannerService(
+        meals,
+        Households(household_id, member_id),
+        recipes,
+        nutrition,
+        pantry,
+        PlannerConfig(version="planner-v0.4", max_recipe_repetitions=10),
+        recipe_nutrition=nutrition,
+    )
+    command = AuthoritativeGenerationRequest(
+        household_id,
+        date(2026, 9, 14),
+        (GenerationMemberConstraints(member_id),),
+    )
+
+    result, detail = planner.generate_authoritative(command)
+
+    assert result.trace.failure_code is None
+    assert result.trace.config_version == "planner-v0.4"
+    assert detail is not None
+    assert meals.writes[-1]["config_version"] == "planner-v0.4"
+    assert {
+        portion
+        for event in result.events
+        for _, portion in event.portions
+    } == {Decimal("1.000000")}
 
 
 def test_authoritative_generation_does_not_enable_reference_pins_by_default() -> None:
