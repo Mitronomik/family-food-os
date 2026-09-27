@@ -1,7 +1,7 @@
 """Step 9 publication of one inactive School2022 RecipeVersion."""
 
 from dataclasses import replace
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from decimal import Decimal
 import hashlib
 import json
@@ -357,7 +357,7 @@ def test_fresh_publication_exact_replay_and_activation_preservation(database):
             uow.recipes.set_active(
                 recipe.id,
                 active=True,
-                updated_at=datetime(2026, 9, 27, tzinfo=timezone.utc),
+                updated_at=recipe.updated_at + timedelta(seconds=1),
             )
             uow.commit()
     finally:
