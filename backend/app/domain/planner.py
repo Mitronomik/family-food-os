@@ -840,14 +840,21 @@ def generate_week(
                         )
                     )
     event_tuple = tuple(events)
-    warnings = ("cost_not_scored_unknown",)
-    if any(event.source_kind is not MealSourceKind.COOK_RECIPE for event in event_tuple):
+    if config.version == "planner-v0.3":
         warnings = (
-            *warnings,
-            "fixed_non_recipe_nutrition_unknown_allocation_reserved",
+            "cost_not_scored_unknown",
+            "fixed_non_recipe_nutrition_not_credited",
         )
-    elif config.version == "planner-v0.3":
-        warnings = (*warnings, "fixed_non_recipe_nutrition_not_credited")
+    else:
+        warnings = ("cost_not_scored_unknown",)
+        if any(
+            event.source_kind is not MealSourceKind.COOK_RECIPE
+            for event in event_tuple
+        ):
+            warnings = (
+                *warnings,
+                "fixed_non_recipe_nutrition_unknown_allocation_reserved",
+            )
     trace = _trace(
         request,
         config,
