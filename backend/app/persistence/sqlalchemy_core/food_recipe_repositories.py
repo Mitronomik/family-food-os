@@ -31,19 +31,23 @@ from app.services.food_recipe_contracts import (
 )
 
 
-def _persisted_version_columns(connection: Connection):
-    """RecipeVersion columns that exist in the current migration prefix.
+def _persisted_version_column_names(connection: Connection) -> frozenset[str]:
+    """RecipeVersion columns available in the current migration prefix.
 
-    Migration/readiness tests intentionally open historical databases before 0040
-    with current application code. Select only columns present in that prefix;
-    post-0040 databases automatically expose source-output fields.
+    Historical migration/readiness tests intentionally open pre-0040 databases
+    with current application code. Use SQLAlchemy reflection rather than a
+    SQLite-specific PRAGMA so this compatibility seam remains adapter-neutral.
     """
-    names = {
-        row[1]
-        for row in connection.exec_driver_sql(
-            "PRAGMA table_info('food_recipe_versions')"
+    return frozenset(
+        column["name"]
+        for column in inspect(connection).get_columns(
+            food_recipe_versions_table.name
         )
-    }
+    )
+
+
+def _persisted_version_columns(connection: Connection):
+    names = _persisted_version_column_names(connection)
     return tuple(
         column for column in food_recipe_versions_table.c if column.name in names
     )
@@ -142,12 +146,7 @@ class SqlAlchemyRecipeVersionRepository:
                 )
         try:
             version_values = _version_values(detail.version)
-            persisted_columns = {
-                row[1]
-                for row in self._connection.exec_driver_sql(
-                    "PRAGMA table_info('food_recipe_versions')"
-                )
-            }
+            persisted_columns = _persisted_version_column_names(self._connection)
             if "source_output_g" not in persisted_columns:
                 if (
                     detail.version.source_output_g is not None
