@@ -15,28 +15,9 @@
   "rights_basis": "Нормативные и базовые рецептурные карты публикуются как фактические рецептурные данные по пользовательскому решению, зафиксированному в docs/family-food/ru-normative-recipe-corpus.md; источник, версия, URL и SHA-256 сохраняются; фотографии, издательская вёрстка, логотипы и сторонние авторские комментарии не публикуются.",
   "composition_authorities": {
     "EGG": {
-      "version": 2,
-      "values": {
-        "ENERGY_KCAL": "157.1",
-        "PROTEIN": "12.7",
-        "FAT_TOTAL": "11.5",
-        "FATTY_ACIDS_SATURATED_TOTAL": "3.0",
-        "STARCH": "0.0",
-        "SUGARS_TOTAL": "0.7",
-        "FIBER_TOTAL_DIETARY": "0.0",
-        "VITAMIN_A_RE": "260.0",
-        "THIAMIN": "0.07",
-        "RIBOFLAVIN": "0.44",
-        "VITAMIN_C": "0.0",
-        "SODIUM": "134.0",
-        "POTASSIUM": "140.0",
-        "CALCIUM": "55.0",
-        "PHOSPHORUS": "192.0",
-        "IRON": "2.5",
-        "MAGNESIUM": "12.0",
-        "WATER": "74.1"
-      },
-      "evidence_ref": "data/curation/r1b-reviewed-recipes/nutrition-dependencies.json#EGG"
+      "version": 1,
+      "value_sha256": "8da8a04f96bbb52f44b19ed80ac721190f8042f88ca5a168dab2679ba2494ecf",
+      "evidence_ref": "data/curation/pr6-ru-food-data/food-readiness.json#EGG"
     },
     "FLOUR_WHEAT_HIGH_GRADE": {
       "version": 1,
@@ -183,28 +164,9 @@
       "evidence_ref": "data/curation/r1a-planner-capacity-dependencies/publication.json#MARGARINE_MILK_TABLE"
     },
     "BUTTER_UNSALTED": {
-      "version": 2,
-      "values": {
-        "ENERGY_KCAL": "747.7",
-        "PROTEIN": "0.5",
-        "FAT_TOTAL": "82.5",
-        "FATTY_ACIDS_SATURATED_TOTAL": "53.6",
-        "STARCH": "0.0",
-        "SUGARS_TOTAL": "0.8",
-        "FIBER_TOTAL_DIETARY": "0.0",
-        "VITAMIN_A_RE": "653.33",
-        "THIAMIN": "0.0",
-        "RIBOFLAVIN": "0.1",
-        "VITAMIN_C": "0.0",
-        "SODIUM": "7.0",
-        "POTASSIUM": "15.0",
-        "CALCIUM": "12.0",
-        "PHOSPHORUS": "19.0",
-        "IRON": "0.2",
-        "MAGNESIUM": "0.4",
-        "WATER": "16.0"
-      },
-      "evidence_ref": "data/curation/r1b-reviewed-recipes/nutrition-dependencies.json#BUTTER_UNSALTED"
+      "version": 1,
+      "value_sha256": "5615f79d6ca29f3a095a6cae0ffa5fd51cde638fd887663e0c636dda6430165a",
+      "evidence_ref": "data/curation/pr6-ru-food-data/food-readiness.json#BUTTER_UNSALTED"
     },
     "CHICKEN_CATEGORY_1_RAW": {
       "version": 1,
@@ -266,7 +228,7 @@
       "source_variant": "selected_1982_variant",
       "source_output_g": "40",
       "source_output_text": "выход 40 г",
-      "expected_energy_kcal": "62.840000",
+      "expected_energy_kcal": "58.800000",
       "activation": "ACTIVE_AFTER_BINDING_VALIDATION",
       "ingredients": [
         {
@@ -296,7 +258,7 @@
       "source_variant": "III — с маслом",
       "source_output_g": "160",
       "source_output_text": "III — с маслом; выход 160 г",
-      "expected_energy_kcal": "371.184000",
+      "expected_energy_kcal": "368.114000",
       "activation": "ACTIVE_AFTER_BINDING_VALIDATION",
       "ingredients": [
         {
