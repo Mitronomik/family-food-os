@@ -21,8 +21,12 @@ from app.persistence.sqlalchemy_core.food_recipe_uow import (
 from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
     create_recipe_nutrition_v2_service,
 )
-from app.seed.ru_food_data import load_ru_food_entries
 from app.seed.ru_nut_db_r1a import load_ru_nut_db_r1a_bundles
+from app.seed.ru_nut_db_r1b_dependencies import (
+    load_ru_nut_db_r1b_dependency_bundles,
+    seed_ru_nut_db_r1b_dependencies,
+)
+from app.seed.ru_nut_db_step4 import load_ru_nut_db_step4_bundles
 from app.services.food_recipes import (
     RecipeSeedSummary,
     TrustedRecipeIngredientSeed,
@@ -36,7 +40,7 @@ from app.services.recipe_nutrition_v2 import (
 )
 
 PACKAGE = REPOSITORY_ROOT / "data/curation/r1b-reviewed-recipes"
-PUBLICATION_SHA256 = "3dd37b0c941c31eba55b467e6ba6ce9df8dded2b123aed1c442bd330a5b02a2c"
+PUBLICATION_SHA256 = "de469f3f1ef28b3844a92f76d7ed6d2f0c25e0d77d4479f7f4f6b013a0c80c04"
 SOURCE_DOCUMENT_SHA256 = "6ac7dfb300844fd996aee6d20b4e7e6aa421dd517367ab1f59120812fee104d5"
 SUPPORTING_MASS_SHA256 = "5ea78ead82568f8aff019a4076215c6598675783cb81e0d1d5b4f913016de4cc"
 ARCHIVE_SHA256 = "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea"
@@ -50,6 +54,7 @@ BLOCKED_REASON = "UNQUANTIFIED_PROCESS_INGREDIENT_SALT"
 @dataclass(frozen=True)
 class R1BPublicationResult:
     recipe_summary: RecipeSeedSummary
+    dependency_bundle_created_count: int
     binding_fresh_count: int
     binding_replay_count: int
     activated_count: int
@@ -85,18 +90,24 @@ def _decimal(value: object, *, field: str) -> Decimal:
 def _accepted_authorities() -> dict[str, tuple[int, dict[str, Decimal]]]:
     accepted: dict[str, tuple[int, dict[str, Decimal]]] = {}
 
-    for entry in load_ru_food_entries():
-        code = entry["row"]["food_code"]
-        reference = entry["row"]["composition_reference"]
-        accepted[code] = (
-            int(reference["version"]),
+    for bundle in load_ru_nut_db_step4_bundles():
+        accepted[bundle.ingredient.canonical_code] = (
+            bundle.atomic_composition.version,
             {
-                row["nutrient_code"]: row["amount"]
-                for row in entry["values"]
+                value.nutrient_code: value.amount
+                for value in bundle.vector.values
             },
         )
 
     for bundle in load_ru_nut_db_r1a_bundles():
+        accepted[bundle.ingredient.canonical_code] = (
+            bundle.atomic_composition.version,
+            {
+                value.nutrient_code: value.amount
+                for value in bundle.vector.values
+            },
+        )
+    for bundle in load_ru_nut_db_r1b_dependency_bundles():
         accepted[bundle.ingredient.canonical_code] = (
             bundle.atomic_composition.version,
             {
@@ -362,6 +373,7 @@ def seed_r1b_recipes(
     package_path: Path = PACKAGE,
 ) -> R1BPublicationResult:
     seeds, package = load_r1b_recipe_seeds(package_path)
+    dependency_result = seed_ru_nut_db_r1b_dependencies(config)
     engine = create_sqlite_engine(config)
     try:
         catalogue = create_food_recipe_catalogue_service(engine)
@@ -410,6 +422,7 @@ def seed_r1b_recipes(
         activated = _activate_recipes(engine, seeds)
         return R1BPublicationResult(
             recipe_summary=recipe_summary,
+            dependency_bundle_created_count=dependency_result.bundle_created_count,
             binding_fresh_count=fresh,
             binding_replay_count=replay,
             activated_count=activated,
@@ -426,6 +439,7 @@ if __name__ == "__main__":
             {
                 "recipes_inserted": result.recipe_summary.recipes_inserted,
                 "versions_inserted": result.recipe_summary.versions_inserted,
+                "dependency_bundle_created_count": result.dependency_bundle_created_count,
                 "binding_fresh_count": result.binding_fresh_count,
                 "binding_replay_count": result.binding_replay_count,
                 "activated_count": result.activated_count,
