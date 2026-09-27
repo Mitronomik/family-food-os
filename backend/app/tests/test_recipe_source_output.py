@@ -21,6 +21,7 @@ from app.persistence.sqlalchemy_core.food_recipe_composition import (
     create_food_recipe_catalogue_service,
 )
 from app.seed.food_recipes import load_seed_entries, seed_food_recipes
+from app.services.food_recipes import RecipeCatalogueConflictError
 
 NOW = datetime(2026, 9, 27, tzinfo=timezone.utc)
 
@@ -112,6 +113,8 @@ def test_0040_adds_nullable_output_columns_and_preserves_historical_row(tmp_path
 
     recipe_id = uuid4().hex
     version_id = uuid4().hex
+    backup = tmp_path / "pre-0040.sqlite"
+
     with sqlite3.connect(database) as connection:
         connection.execute(
             """
@@ -145,6 +148,9 @@ def test_0040_adds_nullable_output_columns_and_preserves_historical_row(tmp_path
         )
         connection.commit()
 
+    shutil.copy2(database, backup)
+    before_bytes = backup.read_bytes()
+
     assert apply_migrations(DatabaseConfig(path=database)) == [
         "0040_recipe_version_source_output"
     ]
@@ -175,6 +181,20 @@ def test_0040_adds_nullable_output_columns_and_preserves_historical_row(tmp_path
         }
         assert "trg_food_recipe_versions_no_update" in trigger_names
         assert "trg_food_recipe_versions_no_delete" in trigger_names
+        assert connection.execute("PRAGMA foreign_key_check").fetchall() == []
+
+    shutil.copy2(backup, database)
+    assert database.read_bytes() == before_bytes
+    assert apply_migrations(DatabaseConfig(path=database)) == [
+        "0040_recipe_version_source_output"
+    ]
+    with sqlite3.connect(database) as connection:
+        restored = connection.execute(
+            "SELECT source_output_g, source_output_text "
+            "FROM food_recipe_versions WHERE id=?",
+            (version_id,),
+        ).fetchone()
+        assert restored == (None, None)
         assert connection.execute("PRAGMA foreign_key_check").fetchall() == []
 
 
@@ -260,7 +280,7 @@ def test_trusted_recipe_replay_includes_source_output(tmp_path):
             seed,
             version=replace(seed.version, source_output_g=Decimal("111")),
         )
-        with pytest.raises(Exception, match="trusted seed"):
+        with pytest.raises(RecipeCatalogueConflictError, match="trusted seed"):
             service.reconcile_seed((changed,), strict_history=True)
     finally:
         engine.dispose()
