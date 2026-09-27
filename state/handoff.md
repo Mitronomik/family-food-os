@@ -1,5 +1,18 @@
 # Handoff
 
+## PR104 R1-B reviewed runtime disposition — 2026-09-27
+
+Five candidates were reviewed against the retained hash-pinned corpus. Only
+`USSR82-697` is published, with exact chicken/onion Composition bindings and
+inactive status pending Step 7 numeric process authority. `USSR82-453` and
+`USSR82-1081` are blocked by missing V2-compatible EGG/BUTTER_UNSALTED
+Composition authority; `USSR82-467` and `USSR82-492` are blocked by an
+unquantified salt ingredient in verified process text.
+
+The package pins v20 and DC1 row receipts. PR104 must pass exact-head backend,
+launcher, Docs, DC1 and nutrition CI before review-ready. Do not merge or begin
+#100, R1-C, Shopping or API/UI as part of this operation.
+
 ## R1-B runtime authorized — 2026-09-27
 
 PR103 merged into main:

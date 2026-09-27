@@ -46,6 +46,21 @@ Authorized scope:
 5. deterministic V2 Recipe Nutrition validation;
 6. explicit activation disposition for each published RecipeVersion.
 
+## Reviewed R1-B disposition in PR104
+
+- `USSR82-697` is the sole `SOURCE_VERIFIED` publication, with two exact R1-A
+  V2 Composition bindings. It remains inactive pending separately reviewed Step 7
+  transformation authority. Its 255.892000 kcal is input-composition validation,
+  not final cooked-dish Nutrition authority.
+- `USSR82-453` and `USSR82-1081` are blocked because the accepted EGG and
+  BUTTER_UNSALTED authorities use the historical nutrient registry and cannot be
+  used for the required Step10 V2 binding.
+- `USSR82-467` and `USSR82-492` are blocked because verified source process
+  requires salt without a quantified source amount.
+
+All five candidates retain exact source output and row receipts in the reviewed
+package. No blocked candidate is published or activated.
+
 ## Hard contract boundaries
 
 - exact source output is stored as RecipeVersion truth;
@@ -63,6 +78,6 @@ Authorized scope:
 ## Stop boundary
 
 R1-B ends at a review-ready PR containing migration 0040 plus the bounded
-five-recipe publication/binding result.
+five-candidate review and one-recipe publication/binding result.
 
 Do not start #100 or R1-C merely because R1-B becomes review-ready.
