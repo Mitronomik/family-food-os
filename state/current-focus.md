@@ -104,7 +104,7 @@ Verified on 2026-09-27:
   `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
 - embedded RU-NUT-DB HTML SHA-256
   `155107ddb381c14721c77fe995d604a5197982441446b54034e4d84645efbd6d`;
-- all 9 published source code/name/raw-substring hashes independently rechecked.
+- all 11 published source code/name/raw-substring hashes independently rechecked.
 
 No production numeric value was reconstructed from LLM output, OCR or web snippets.
 
