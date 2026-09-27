@@ -14,11 +14,6 @@
   },
   "rights_basis": "Нормативные и базовые рецептурные карты публикуются как фактические рецептурные данные по пользовательскому решению, зафиксированному в docs/family-food/ru-normative-recipe-corpus.md; источник, версия, URL и SHA-256 сохраняются; фотографии, издательская вёрстка, логотипы и сторонние авторские комментарии не публикуются.",
   "composition_authorities": {
-    "EGG": {
-      "version": 1,
-      "value_sha256": "8da8a04f96bbb52f44b19ed80ac721190f8042f88ca5a168dab2679ba2494ecf",
-      "evidence_ref": "data/curation/pr6-ru-food-data/food-readiness.json#EGG"
-    },
     "FLOUR_WHEAT_HIGH_GRADE": {
       "version": 1,
       "values": {
@@ -162,11 +157,6 @@
         "WATER": "16.2"
       },
       "evidence_ref": "data/curation/r1a-planner-capacity-dependencies/publication.json#MARGARINE_MILK_TABLE"
-    },
-    "BUTTER_UNSALTED": {
-      "version": 1,
-      "value_sha256": "5615f79d6ca29f3a095a6cae0ffa5fd51cde638fd887663e0c636dda6430165a",
-      "evidence_ref": "data/curation/pr6-ru-food-data/food-readiness.json#BUTTER_UNSALTED"
     },
     "CHICKEN_CATEGORY_1_RAW": {
       "version": 1,
