@@ -1,5 +1,30 @@
 # Progress
 
+## R1-B source-output contract gate started — 2026-09-27
+
+Accepted main:
+`eb803cda82ce8073443981867291716a0eb0f0ad` (merged PR101).
+
+Status:
+`R1B_SOURCE_OUTPUT_CONTRACT_GATE_ACTIVE`.
+
+Source audit for five R1-B recipes confirms:
+- exact ingredient mass coverage;
+- source-backed Russian instructions;
+- exact outputs: 40 / 110 / 170 / 160 / 75 g;
+- one selected source scenario per recipe;
+- no proxy rows.
+
+Architecture gap:
+current RecipeVersion cannot persist structured source output/yield.
+
+Current work:
+docs-only contract for minimal immutable source-output fields and migration
+preservation rules.
+
+No migration, runtime, RecipeVersion publication, Planner change or next milestone
+has started.
+
 ## R1-A Planner-energy closure verified — 2026-09-27
 
 Verified runtime/data head:
