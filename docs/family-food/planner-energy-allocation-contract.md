@@ -125,7 +125,7 @@ The runtime implementation may change only the following bounded seams.
 - `MealPatternProgramVersion`;
 - `MealPatternOpportunity`;
 - reviewed program evidence/provenance;
-- catalogue repository/service publication of new immutable program versions.
+- a bounded trusted target-version reconcile operation for new immutable allocation-ready program versions.
 
 ### Household-owned accepted pattern
 
@@ -446,12 +446,42 @@ needs.
 
 ### Program publication
 
-- existing published program versions are immutable;
-- allocation-ready program truth is appended as a new reviewed version;
-- exact same trusted publication input may replay as existing/zero-write according
-  to the existing catalogue reconciliation semantics;
-- same program/version identity with different shares/evidence must fail closed;
-- no update-in-place of a published program opportunity is allowed.
+Current `MealPatternCatalogueService.append_trusted_version()` always appends a
+new version and therefore is **not** an idempotent trusted publication path for
+allocation-ready program truth. Current `reconcile_seed()` only reconciles the
+initial v1 seed.
+
+**DECISION:** #100 runtime must add a bounded trusted **target-version reconcile**
+operation for the allocation-ready program versions. It must not call
+`append_trusted_version()` repeatedly and treat the resulting new versions as
+replay.
+
+For each bounded allocation program publication payload, the payload pins:
+
+- program code;
+- exact target version number;
+- lifecycle/review timestamps;
+- roles/order;
+- exact `energy_share` values;
+- evidence references and review rationale;
+- expected previous version identity.
+
+Semantics:
+
+- if the target version does not exist and the expected previous version matches,
+  publish the complete new version atomically;
+- if the target version already exists and every immutable field/opportunity/share/
+  evidence fact matches, return exact replay with zero writes;
+- if the target version exists but any fact differs, fail closed;
+- if the expected previous version/history differs, fail closed;
+- no update-in-place of a published program opportunity is allowed;
+- ordinary `append_trusted_version()` behavior remains unchanged for callers
+  outside this bounded trusted-reconcile path.
+
+The initial #100 runtime payload may target the next versions of the two currently
+published adult programs only if those exact versions/shares/evidence are included
+in the reviewed curation payload. It must not assume “next version” dynamically
+at execution time.
 
 ### Household selection
 
