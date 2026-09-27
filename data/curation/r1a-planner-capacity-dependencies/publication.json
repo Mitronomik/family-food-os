@@ -339,6 +339,100 @@
         "source_code": "46",
         "source_name": "Картофель сырой (свежий)"
       }
+    },
+    {
+      "nutrients": {
+        "a_vit": "0.0",
+        "b1": "0.05",
+        "b2": "0.02",
+        "c": "10.0",
+        "ca": "31.0",
+        "carbh": "8.2",
+        "carot": "0.0",
+        "cholest": "0.0",
+        "diet_fibre": "3.0",
+        "ethanol": "0.0",
+        "fat": "0.2",
+        "fe": "0.8",
+        "k": "175.0",
+        "kcal": "40.2",
+        "mdsug": "8.1",
+        "mg": "14.0",
+        "na": "4.0",
+        "p": "58.0",
+        "pp": "0.2",
+        "prot": "1.4",
+        "ret_equiv": "0.0",
+        "salt_ad": "0.0",
+        "satur": "0.0",
+        "starch": "0.1",
+        "sugar_ad": "0.0",
+        "water": "86.0"
+      },
+      "platform": {
+        "action": "CREATE_REVIEWED",
+        "atomic_version": 1,
+        "canonical_code": "ONION_BULB_FRESH",
+        "canonical_name": "Лук репчатый свежий",
+        "category_code": "vegetables",
+        "default_unit": "g",
+        "mass_state": "INPUT"
+      },
+      "r1_dependency_id": "ING-0028",
+      "source": {
+        "db_index": 118,
+        "json_pointer": "/DB/118",
+        "raw_record_sha256": "bfd5673766e9061af643423f8f32206de1d7bd331bed50135e449984efb9b55e",
+        "source_code": "1186",
+        "source_name": "Лук репчатый свежий"
+      }
+    },
+    {
+      "nutrients": {
+        "a_vit": "0.0",
+        "b1": "0.17",
+        "b2": "0.04",
+        "c": "0.0",
+        "ca": "18.0",
+        "carbh": "68.9",
+        "carot": "0.0",
+        "cholest": "0.0",
+        "diet_fibre": "2.2",
+        "ethanol": "0.0",
+        "fat": "1.1",
+        "fe": "1.2",
+        "k": "122.0",
+        "kcal": "326.7",
+        "mdsug": "0.2",
+        "mg": "16.0",
+        "na": "3.0",
+        "p": "86.0",
+        "pp": "1.2",
+        "prot": "10.3",
+        "ret_equiv": "0.0",
+        "salt_ad": "0.0",
+        "satur": "0.15",
+        "starch": "68.7",
+        "sugar_ad": "0.0",
+        "water": "14.0"
+      },
+      "platform": {
+        "action": "CREATE_REVIEWED",
+        "atomic_version": 1,
+        "canonical_code": "FLOUR_WHEAT_HIGH_GRADE",
+        "canonical_name": "Мука пшеничная высшего сорта",
+        "category_code": "grains",
+        "default_unit": "g",
+        "mass_state": "INPUT"
+      },
+      "r1_dependency_id": "ING-0036",
+      "source": {
+        "db_index": 132,
+        "json_pointer": "/DB/132",
+        "raw_record_sha256": "f8712b80e2bd18972bf78374fdb6885c9a64c6a6c32ba08d6fa39ffe61b7b332",
+        "source_code": "82",
+        "source_name": "Мука пшеничная в/с"
+      }
     }
   ],
   "schema_version": 1,
