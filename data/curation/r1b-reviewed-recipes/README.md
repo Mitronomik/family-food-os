@@ -14,8 +14,8 @@ Final R1-B disposition:
 
 | Source recipe | Disposition | Reason |
 | --- | --- | --- |
-| USSR82-453 — Яйца вареные | PUBLISH | exact quantified ingredient/process/output evidence |
-| USSR82-1081 — Блины, III — с маслом | PUBLISH | exact selected variant, quantified process ingredients and output |
+| USSR82-453 — Яйца вареные | BLOCKED | accepted EGG authority is historical-registry only; no R1-B V2 Food/Nutrition expansion |
+| USSR82-1081 — Блины, III — с маслом | BLOCKED | accepted BUTTER_UNSALTED authority is historical-registry only; no R1-B V2 Food/Nutrition expansion |
 | USSR82-697 — selected chicken/main branch | PUBLISH | exact chicken/onion branch and output; garnish/sauce excluded |
 | USSR82-467 — Омлет (натуральный) | BLOCKED | verified instruction requires salt but retained quantified rows contain no salt quantity |
 | USSR82-492 — Сырники из творога | BLOCKED | verified instruction requires salt but retained quantified rows contain no salt quantity |
@@ -59,33 +59,7 @@ source_document_sha256 = 6ac7dfb300844fd996aee6d20b4e7e6aa421dd517367ab1f5912081
 Per-card SourceURL and exact `USSR82-*` source identity remain in the reviewed
 publication payload.
 
-## Published variants
-
-### USSR82-453 — Яйца вареные
-
-- canonical code: `USSR82_453_BOILED_EGGS`
-- meal type: breakfast
-- quantified input: EGG 40 g edible source calculation mass
-- source output: 40 g
-- deterministic input-composition energy: 58.800000 kcal
-- process contains no extra unquantified material ingredient
-
-### USSR82-1081 — Блины
-
-- canonical code: `USSR82_1081_BLINI`
-- selected branch: `III — с маслом`
-- meal type: breakfast
-- quantified inputs:
-  - FLOUR_WHEAT_HIGH_GRADE 75 g
-  - SUGAR 3 g
-  - WATER 118 g
-  - YEAST_BAKERS_COMPRESSED 3 g
-  - SALT 1.5 g
-  - MARGARINE_MILK_TABLE 5 g
-  - BUTTER_UNSALTED 10 g
-- source output: 160 g
-- deterministic input-composition energy: 368.114000 kcal
-- alternatives are not mixed
+## Published variant
 
 ### USSR82-697 — Курица отварная
 
@@ -126,37 +100,32 @@ exact input grams
 
 ## Composition authority
 
-The package cross-checks reviewed Composition versions and nutrient values
-against accepted hash-pinned loaders:
+The published chicken branch binds only already accepted R1-A V2-compatible
+Composition authorities for CHICKEN_CATEGORY_1_RAW and ONION_BULB_FRESH.
 
-- accepted PR6 sparse authorities for EGG and BUTTER_UNSALTED (ATOMIC v1);
-- Step4 FIC/V2 authority for SUGAR;
-- merged R1-A authorities for exact new forms and WATER/SALT.
+R1-B creates no new Food/Nutrition authority. EGG and BUTTER_UNSALTED remain on
+accepted historical-registry authorities; because Step10 V2 binding rejects that
+registry mismatch, USSR82-453 and USSR82-1081 stay blocked rather than receiving
+new FIC profiles inside this RecipeVersion PR.
 
-R1-B does not create new Food/Nutrition authority for EGG or BUTTER_UNSALTED.
-Their accepted sparse vectors provide exact input energy while nutrients absent from
-those vectors remain explicitly unknown in Recipe Nutrition.
-
-The package cannot silently redefine accepted vectors or fill unknown nutrients.
-
-These three RecipeVersions represent cooked dishes. Main currently has Step 7
+The published chicken RecipeVersion is a cooked dish. Main currently has Step 7
 applicability infrastructure but no reviewed production transformation/yield/retention
-authority for their boiling/frying processes. Therefore R1-B does not claim final
-cooked nutrient truth or Planner readiness from input Composition totals. All three
-recipes remain inactive until a separately reviewed Step 7 process-authority batch
-closes that gap.
+authority for its boiling process. Therefore R1-B validates only deterministic
+input-composition energy and does not claim final cooked nutrient truth or Planner
+readiness. The recipe remains inactive until a separately reviewed Step 7
+process-authority batch closes that gap.
 
 ## Publication behavior
 
 R1-B publication order:
 
-1. preflight all three trusted Recipe seeds;
+1. preflight the single publishable trusted Recipe seed;
 2. accept only all-FRESH or all-EXACT_REPLAY state;
-3. publish three RecipeVersions as initially inactive;
-4. publish ten exact RecipeIngredient Composition bindings using already accepted Composition versions;
+3. publish one RecipeVersion as inactive;
+4. publish two exact RecipeIngredient Composition bindings using already accepted R1-A Composition versions;
 5. calculate deterministic canonical Recipe Nutrition with unknown propagation;
 6. validate reviewed deterministic input-composition energy while preserving unknown nutrients;
-7. keep all three recipes inactive with `INACTIVE_PENDING_TRANSFORMATION_AUTHORITY` until separately reviewed Step 7 transformation/retention authority exists.
+7. keep the published recipe inactive with `INACTIVE_PENDING_TRANSFORMATION_AUTHORITY` until separately reviewed Step 7 transformation/retention authority exists.
 
 A partial prior Recipe batch fails closed rather than being filled in.
 
@@ -164,6 +133,7 @@ A partial prior Recipe batch fails closed rather than being filled in.
 
 R1-B does not:
 
+- publish 453/1081 without V2-compatible Food/Nutrition authority;
 - publish blocked 467/492;
 - infer missing salt;
 - publish 364/208 from R1-A blockers;
@@ -178,8 +148,8 @@ R1-B does not:
 - migration 0040 fresh/upgrade/restore;
 - historical RecipeVersion preservation;
 - domain/repository/replay tests;
-- exact 3 PUBLISH / 2 BLOCKED package validation;
-- ten Composition bindings;
+- exact 1 PUBLISH / 4 BLOCKED package validation;
+- two Composition bindings;
 - deterministic input-composition energy validation;
 - explicit inactive disposition pending Step 7 transformation/retention authority;
 - exact replay;
