@@ -19,12 +19,18 @@ from app.persistence.sqlalchemy_core.nutrition_read_scope import (  # noqa: E402
     SqlAlchemyNutritionReadScope,
 )
 from app.seed.food_recipes import seed_food_recipes  # noqa: E402
-from app.seed.nutrition_measure_evidence import seed_nutrition_measure_evidence  # noqa: E402
+from app.seed.nutrition_measure_evidence import (  # noqa: E402
+    seed_nutrition_measure_evidence,
+)
 from app.seed.recipe_corrections import (  # noqa: E402
     seed_recipe_corrections,
     seed_correction_assessments,
 )
-from audit_pr6_nutrient_vector_b import snapshot, readiness  # noqa: E402
+from audit_pr6_nutrient_vector_b import (  # noqa: E402
+    assert_snapshot_preserved,
+    snapshot,
+    readiness,
+)
 
 MIGRATION = import_module("app.migrations.versions.0029_food_composition_core")
 
@@ -86,7 +92,7 @@ def assert_existing_history_preserved(before, config):
             "nutrient_definitions",
             "nutrient_values",
         }:
-            assert after[name] == rows
+            assert_snapshot_preserved({name: rows}, after)
     return after
 
 
@@ -99,7 +105,7 @@ def measure(config):
         ).fetchone()[0]
     applied = migrations.apply_migrations(config)
     ready_after = readiness(config)
-    after = assert_existing_history_preserved(before, config)
+    assert_existing_history_preserved(before, config)
     assert ready_after == ready_before
     with sqlite3.connect(config.path) as db:
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []

@@ -22,6 +22,7 @@ from app.domain.food_composition import (
     MassState,
 )
 from app.domain.food_ingredients import FoodNutritionProfile
+from app.domain.food_recipes import RecipeVersion
 from app.domain.nutrition_evidence import MeasureMassEvidence
 from app.domain.units import UnitCode
 from app.domain.nutrient_vector_backfill_v1 import canonical_json, value_set_digest
@@ -55,7 +56,14 @@ def plain(value: Any) -> Any:
 
 
 def facts(value: Any, *excluded: str) -> dict[str, Any]:
-    return plain({k: v for k, v in asdict(value).items() if k not in excluded})
+    payload = {k: v for k, v in asdict(value).items() if k not in excluded}
+    if isinstance(value, RecipeVersion):
+        # Historical B2B2 review predates 0040. New NULL output fields do not
+        # rewrite that receipt; a populated field still forces a fresh review.
+        for field in ("source_output_g", "source_output_text"):
+            if payload.get(field) is None:
+                payload.pop(field, None)
+    return plain(payload)
 
 
 def profile_facts(profile: FoodNutritionProfile) -> dict[str, Any]:
@@ -463,11 +471,15 @@ def reconcile(uow: Any, docs: dict[str, Any]) -> dict[str, int]:
             nutrition_profile_id=profile.id,
             measure_evidence_id=None if evidence is None else evidence.id,
             **{
-                k: tuple(v)
-                if k == "issues"
-                else datetime.fromisoformat(v)
-                if k in ("reviewed_at", "created_at")
-                else v
+                k: (
+                    tuple(v)
+                    if k == "issues"
+                    else (
+                        datetime.fromisoformat(v)
+                        if k in ("reviewed_at", "created_at")
+                        else v
+                    )
+                )
                 for k, v in expected.items()
                 if k != "evidence_key"
             },

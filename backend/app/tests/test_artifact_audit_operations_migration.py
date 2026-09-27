@@ -41,7 +41,8 @@ REGISTRY_V2_MIGRATION_ID = "0035_versioned_nutrient_registry"
 REFERENCE_METHODOLOGY_MIGRATION_ID = "0036_member_reference_methodology_selection"
 REFERENCE_PINS_MIGRATION_ID = "0037_meal_plan_reference_methodology_pins"
 TRANSFORMATION_APPLICABILITY_MIGRATION_ID = "0038_transformation_applicability"
-HEAD_MIGRATION_ID = "0039_recipe_ingredient_composition_binding"
+COMPOSITION_BINDING_MIGRATION_ID = "0039_recipe_ingredient_composition_binding"
+HEAD_MIGRATION_ID = "0040_recipe_version_source_output"
 TABLE = "artifact_audit_operations"
 
 
@@ -188,6 +189,7 @@ def test_a_database_at_0019_reports_0020_then_0021_pending(tmp_path):
         REFERENCE_METHODOLOGY_MIGRATION_ID,
         REFERENCE_PINS_MIGRATION_ID,
         TRANSFORMATION_APPLICABILITY_MIGRATION_ID,
+        COMPOSITION_BINDING_MIGRATION_ID,
         HEAD_MIGRATION_ID,
     ]
 
@@ -218,6 +220,7 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         REFERENCE_METHODOLOGY_MIGRATION_ID,
         REFERENCE_PINS_MIGRATION_ID,
         TRANSFORMATION_APPLICABILITY_MIGRATION_ID,
+        COMPOSITION_BINDING_MIGRATION_ID,
         HEAD_MIGRATION_ID,
     ]
     assert snapshot(database_path) == before
@@ -645,6 +648,7 @@ def test_user_mode_startup_backs_up_before_applying_0020(monkeypatch, tmp_path):
         REFERENCE_METHODOLOGY_MIGRATION_ID,
         REFERENCE_PINS_MIGRATION_ID,
         TRANSFORMATION_APPLICABILITY_MIGRATION_ID,
+        COMPOSITION_BINDING_MIGRATION_ID,
         HEAD_MIGRATION_ID,
     ]
     assert result.backup is not None

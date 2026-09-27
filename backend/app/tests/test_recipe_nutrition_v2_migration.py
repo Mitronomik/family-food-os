@@ -22,7 +22,12 @@ def through_0038(path, *, seed=False):
         migrations.MIGRATION_MODULES[:] = [
             name
             for name in original
-            if not name.endswith("0039_recipe_ingredient_composition_binding")
+            if not name.endswith(
+                (
+                    "0039_recipe_ingredient_composition_binding",
+                    "0040_recipe_version_source_output",
+                )
+            )
         ]
         apply_migrations(config)
         if seed:
@@ -34,18 +39,19 @@ def through_0038(path, *, seed=False):
     return config
 
 
-def test_0039_is_current_head_and_creates_only_bounded_table(tmp_path):
+def test_0039_and_0040_create_only_their_bounded_schema(tmp_path):
     config = through_0038(tmp_path / "upgrade.sqlite")
     before = set(current_migrations(config))
     assert MIGRATION_ID not in before
 
-    assert apply_migrations(config) == [MIGRATION_ID]
+    assert apply_migrations(config) == [
+        MIGRATION_ID,
+        "0040_recipe_version_source_output",
+    ]
     assert current_migrations(config) == set(migrations.expected_migration_ids())
 
     with sqlite3.connect(config.path) as db:
-        columns = {
-            row[1]: row[2] for row in db.execute(f"PRAGMA table_info({TABLE})")
-        }
+        columns = {row[1]: row[2] for row in db.execute(f"PRAGMA table_info({TABLE})")}
         triggers = {
             row[0]
             for row in db.execute(
@@ -90,18 +96,29 @@ def test_populated_0038_upgrade_preserves_recipe_and_nutrition_history(tmp_path)
             table: db.execute(f'SELECT * FROM "{table}" ORDER BY rowid').fetchall()
             for table in tables
         }
-        assert db.execute(
-            "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (TABLE,)
-        ).fetchone() is None
+        assert (
+            db.execute(
+                "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (TABLE,)
+            ).fetchone()
+            is None
+        )
 
-    assert apply_migrations(config) == [MIGRATION_ID]
+    assert apply_migrations(config) == [
+        MIGRATION_ID,
+        "0040_recipe_version_source_output",
+    ]
 
     with sqlite3.connect(config.path) as db:
         after = {
             table: db.execute(f'SELECT * FROM "{table}" ORDER BY rowid').fetchall()
             for table in tables
         }
-        assert after == before
+        for table in tables:
+            if table == "food_recipe_versions":
+                assert [row[:-2] for row in after[table]] == before[table]
+                assert all(row[-2:] == (None, None) for row in after[table])
+            else:
+                assert after[table] == before[table]
         assert db.execute(f"SELECT COUNT(*) FROM {TABLE}").fetchone() == (0,)
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
 
@@ -123,9 +140,12 @@ def test_0039_failure_is_atomic(tmp_path):
 
     assert MIGRATION_ID not in current_migrations(config)
     with sqlite3.connect(config.path) as db:
-        assert db.execute(
-            "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (TABLE,)
-        ).fetchone() is None
+        assert (
+            db.execute(
+                "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (TABLE,)
+            ).fetchone()
+            is None
+        )
         assert db.execute(
             "SELECT 1 FROM sqlite_master WHERE type='trigger' AND name=?",
             (f"{TABLE}_no_update",),
