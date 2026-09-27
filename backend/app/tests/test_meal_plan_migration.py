@@ -45,7 +45,7 @@ def test_0032_remains_in_current_chain_and_fresh_migration_is_repeat_safe(tmp_pa
     applied = apply_migrations(config)
 
     assert applied[-1] == "0041_meal_pattern_energy_allocation"
-    assert expected_migration_ids()[-12:] == [
+    assert expected_migration_ids()[-10:] == [
         "0031_meal_pattern_catalogue",
         MIGRATION_ID,
         PARTIAL_PROFILE_MIGRATION_ID,
