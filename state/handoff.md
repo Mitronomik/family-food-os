@@ -1,5 +1,35 @@
 # Handoff
 
+## R1-A authorized — 2026-09-27
+
+Accepted base:
+`9f72f6883e092cbf79930c7ac4a5a1314c7488d8` (merged PR98).
+
+The user explicitly authorized completing the original product meaning of Russian-data Steps 7–10.
+
+Current bounded operation:
+`R1-A — Planner-capacity dependency closure`.
+
+Parent issue:
+`#99`.
+
+Separate Planner allocation issue:
+`#100`.
+
+R1 selected recipe set:
+- USSR82-453 Яйца вареные;
+- USSR82-467 Омлет (натуральный);
+- USSR82-492 Сырники из творога;
+- USSR82-1081 Блины;
+- USSR82-697 chicken/main source-supported branch only;
+- USSR82-364 Шницель из капусты;
+- USSR82-208 Рассольник ленинградский.
+
+R1-A owns only direct FoodIngredient/form/Nutrition dependency closure/publication.
+No RecipeVersion publication/activation and no Planner change in R1-A.
+
+
+
 ## Post-PR96 sequencing correction — 2026-09-26
 
 PR96 is merged into main at:
