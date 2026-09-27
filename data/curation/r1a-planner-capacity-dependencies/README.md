@@ -100,6 +100,22 @@ R1-A pins the raw record hash in the dependency manifest but does not repair,
 reinterpret or publish it. A later bounded review may resolve it from an
 independent same-publisher/source representation.
 
+## Allergen / exclusion boundary
+
+R1-A does not infer allergen truth from a product name or a nutrition record.
+The accepted FIC composition snapshot is not an allergen-label source.
+
+New R1-A FoodIngredients therefore remain `allergens_reviewed=false` with no
+invented allergen codes. This is an explicit limitation, not a silent pass.
+
+For R1 product proof:
+
+- hard ingredient exclusions remain authoritative and must be exercised in R1-C;
+- a member exclusion must remove every R1 recipe containing that FoodIngredient;
+- household sharedness must never override that exclusion;
+- automatic allergen-code filtering is not claimed until separately reviewed
+  FoodIngredient allergen truth exists.
+
 ## Expected result
 
 After successful R1-A publication:
