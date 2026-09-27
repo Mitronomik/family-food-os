@@ -3,6 +3,7 @@ import sqlite3
 from dataclasses import replace
 from datetime import datetime, timezone
 from decimal import Decimal
+from types import SimpleNamespace
 from uuid import uuid4
 
 import pytest
@@ -12,7 +13,6 @@ from app.db.migrations import MIGRATION_MODULES, apply_migrations
 from app.domain.errors import DomainValidationError
 from app.domain.food_recipes import (
     MealTypeCode,
-    Recipe,
     RecipeVersion,
     RightsReviewStatus,
     VerificationStatus,
@@ -21,8 +21,12 @@ from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_recipe_composition import (
     create_food_recipe_catalogue_service,
 )
+from app.persistence.sqlalchemy_core.food_recipe_repositories import (
+    SqlAlchemyRecipeVersionRepository,
+)
 from app.seed.food_recipes import load_seed_entries, seed_food_recipes
 from app.services.food_recipes import RecipeCatalogueConflictError
+from app.services.food_recipe_contracts import RecipeCataloguePersistenceConflictError
 
 NOW = datetime(2026, 9, 27, tzinfo=timezone.utc)
 
@@ -158,6 +162,18 @@ def test_0040_adds_nullable_output_columns_and_preserves_historical_row(tmp_path
         )
         connection.commit()
 
+    engine = create_sqlite_engine(DatabaseConfig(path=database))
+    try:
+        with engine.begin() as connection:
+            repository = SqlAlchemyRecipeVersionRepository(connection)
+            with pytest.raises(
+                RecipeCataloguePersistenceConflictError,
+                match="Migration 0040 is required",
+            ):
+                repository.add_detail(SimpleNamespace(version=_version()))
+    finally:
+        engine.dispose()
+
     shutil.copy2(database, backup)
     before_bytes = backup.read_bytes()
 
@@ -167,9 +183,8 @@ def test_0040_adds_nullable_output_columns_and_preserves_historical_row(tmp_path
 
     with sqlite3.connect(database) as connection:
         columns = {
-            row[1]: row for row in connection.execute(
-                "PRAGMA table_info('food_recipe_versions')"
-            )
+            row[1]: row
+            for row in connection.execute("PRAGMA table_info('food_recipe_versions')")
         }
         assert columns["source_output_g"][3] == 0
         assert columns["source_output_text"][3] == 0
@@ -184,7 +199,8 @@ def test_0040_adds_nullable_output_columns_and_preserves_historical_row(tmp_path
         assert row == (version_id, recipe_id, "fixture-1", None, None)
 
         trigger_names = {
-            r[0] for r in connection.execute(
+            r[0]
+            for r in connection.execute(
                 "SELECT name FROM sqlite_master WHERE type='trigger' "
                 "AND tbl_name='food_recipe_versions'"
             )
@@ -244,7 +260,9 @@ def test_0040_sql_checks_reject_nonpositive_or_blank_output(tmp_path):
         with pytest.raises(sqlite3.IntegrityError):
             connection.execute(sql, (uuid4().hex, recipe_id, base["digest"], "0", "x"))
         with pytest.raises(sqlite3.IntegrityError):
-            connection.execute(sql, (uuid4().hex, recipe_id, base["digest"], "10", "   "))
+            connection.execute(
+                sql, (uuid4().hex, recipe_id, base["digest"], "10", "   ")
+            )
 
 
 def test_trusted_recipe_replay_includes_source_output(tmp_path):
@@ -280,9 +298,7 @@ def test_trusted_recipe_replay_includes_source_output(tmp_path):
         assert replay.versions_existing == 1
 
         recipe = service.get_by_code(seed.canonical_code)
-        detail = service.get_version_detail(
-            service.list_versions(recipe.id)[0].id
-        )
+        detail = service.get_version_detail(service.list_versions(recipe.id)[0].id)
         assert detail.version.source_output_g == Decimal("110.000000")
         assert detail.version.source_output_text == "выход 110 г"
 

@@ -149,6 +149,13 @@ class SqlAlchemyRecipeVersionRepository:
                 )
             }
             if "source_output_g" not in persisted_columns:
+                if (
+                    detail.version.source_output_g is not None
+                    or detail.version.source_output_text is not None
+                ):
+                    raise RecipeCataloguePersistenceConflictError(
+                        "Migration 0040 is required before persisting RecipeVersion source output."
+                    )
                 version_values.pop("source_output_g", None)
                 version_values.pop("source_output_text", None)
             self._connection.execute(
