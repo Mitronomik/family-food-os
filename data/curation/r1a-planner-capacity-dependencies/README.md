@@ -55,12 +55,12 @@ Old DC1 statuses are not copied forward mechanically.
 Later accepted decisions close several dependencies without a new R1-A write:
 
 - `RICE_GROATS` and `CARROT_RED_RAW` — accepted Step 4 FIC publications;
-- `EGG`, `BUTTER_UNSALTED`, `CABBAGE_GREEN`, `SALT`, `SUGAR`, `WATER` —
-  accepted current RU-ready/ATOMIC authorities;
+- `EGG`, `BUTTER_UNSALTED`, `CABBAGE_GREEN`, `SUGAR` — accepted current
+  RU-ready/ATOMIC authorities;
 - `BREADCRUMBS` — accepted RU-ready/ATOMIC authority plus the later v0.3
   `сухари панировочные → BREADCRUMBS` review hint.
 
-R1-A publishes nine exact FIC authorities:
+R1-A publishes eleven exact FIC authorities:
 
 | Dependency | FamilyFoodOS | FIC code / DB index |
 |---|---|---|
@@ -73,9 +73,13 @@ R1-A publishes nine exact FIC authorities:
 | ING-0019 | POTATO (reuse existing identity) | 46 / 77 |
 | ING-0028 | ONION_BULB_FRESH | 1186 / 118 |
 | ING-0036 | FLOUR_WHEAT_HIGH_GRADE | 82 / 132 |
+| ING-0006 | WATER (reuse existing identity, ATOMIC v2) | 3000 / 360 |
+| ING-0050 | SALT (reuse existing identity, ATOMIC v2) | 125 / 932 |
 
 Each record publishes the same frozen Step 4B set of 18 V2 concepts and retains
-all 26 reviewed source observations. Carbohydrate remains unavailable in the
+all 26 reviewed source observations. This includes source-published
+`ENERGY_KCAL=0.0` for WATER and SALT; those zeros are published source values,
+not inferred replacements for unknowns. Carbohydrate remains unavailable in the
 legacy five-field profile because the frozen FIC `carbh` definition remains
 ambiguous.
 
@@ -122,6 +126,7 @@ After successful R1-A publication:
 
 - 20 unique R1 dependencies have exact dispositions;
 - 18 are accepted/reusable;
+- WATER and SALT now have exact FIC zero-energy authority for the Step10 Planner path;
 - 2 remain blocked;
 - 5 of 7 selected recipes have all food dependencies closed for R1-B:
   - USSR82-453;
@@ -166,11 +171,11 @@ It reuses the accepted Step 3 transactional batch publisher and the frozen Step
 
 Focused runtime tests must prove:
 
-- exact 9-record / 162-value / 234-observation package;
+- exact 11-record / 198-value / 286-observation package;
 - source hash pins;
 - fresh + replay;
 - existing-current preservation;
-- created identity count (8 new + 1 existing POTATO reuse);
+- created identity count (8 new + 3 existing-identity reuses: POTATO/WATER/SALT);
 - exact ATOMIC versions;
 - conflict / partial-state / rollback behavior;
 - dependency-manifest partition and 5/2 recipe readiness result;
