@@ -1,5 +1,30 @@
 # Handoff
 
+## PR104 post-merge integrity correction — 2026-09-27
+
+PR104 merged into main at:
+`75e2854eff82955b5c01ccacaca35fe0fdc534bc`.
+
+A full post-merge audit accepted the R1-B runtime/data result but found that
+`state/progress.md` had been accidentally replaced in part by a truncated tool
+rendering, deleting 1361 lines of durable historical receipts.
+
+Current correction branch:
+`fix/pr104-post-merge-integrity`.
+
+Correction scope:
+- restore exact accepted pre-PR104 progress history plus legitimate R1-B entries;
+- replace RecipeVersion pre-0040 SQLite PRAGMA introspection with SQLAlchemy
+  reflection;
+- document the bounded shared transaction ownership used by R1-B atomic
+  publication.
+
+No migration, production data, RecipeVersion truth, Planner or R1-C behavior
+changes are part of this correction.
+
+PR105 (#100 Contract Gate) exists but must be synchronized after this correction
+before merge.
+
 ## PR104 R1-B reviewed runtime disposition — 2026-09-27
 
 Five candidates were reviewed against the retained hash-pinned corpus. Only
