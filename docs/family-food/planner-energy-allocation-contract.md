@@ -1,9 +1,9 @@
 # Planner Energy Allocation — Implementation Contract Gate
 
-**Status:** docs-only Implementation Contract Gate  
-**Decision date:** 2026-09-27  
-**Accepted base:** `75e2854eff82955b5c01ccacaca35fe0fdc534bc` (merged PR #104)  
-**Parent:** #100, #99, #67  
+**Status:** docs-only Implementation Contract Gate
+**Decision date:** 2026-09-27
+**Accepted base:** `75e2854eff82955b5c01ccacaca35fe0fdc534bc` (merged PR #104)
+**Parent:** #100, #99, #67
 **Runtime authorized by this document:** no — review/merge this gate first.
 
 ## 1. Goal
