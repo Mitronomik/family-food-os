@@ -315,7 +315,10 @@ def _binding_specs(
     for seed in seeds:
         source_row = by_source[seed.version.source_recipe_id]
         for position, ingredient in enumerate(seed.version.ingredients, start=1):
-            authority = authorities[ingredient.food_ingredient_code]
+            if ingredient.food_ingredient_code not in authorities:
+                raise ValueError(
+                    f"R1-B authority отсутствует для {ingredient.food_ingredient_code}."
+                )
             accepted_authority = accepted[ingredient.food_ingredient_code]
             per_100 = accepted_authority["values"]
             with localcontext(calculation_context()):
