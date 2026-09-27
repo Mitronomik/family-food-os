@@ -81,6 +81,8 @@ class TrustedRecipeVersionSeed:
     ingredients: tuple[TrustedRecipeIngredientSeed, ...]
     steps: tuple[str, ...]
     equipment_codes: tuple[str, ...] = ()
+    source_output_g: Decimal | None = None
+    source_output_text: str | None = None
 
 
 @dataclass(frozen=True)
@@ -451,6 +453,8 @@ class FoodRecipeCatalogueService:
             created_from_version_id=previous_id,
             change_note=seed.change_note,
             created_at=now,
+            source_output_g=seed.source_output_g,
+            source_output_text=seed.source_output_text,
         )
         ingredients: list[RecipeIngredient] = []
         for position, ingredient_seed in enumerate(seed.ingredients, start=1):
@@ -543,6 +547,8 @@ def _seed_matches(
         version.rights_review_status,
         version.rights_basis,
         version.change_note,
+        version.source_output_g,
+        version.source_output_text,
     )
     seed_values = (
         seed.base_servings,
@@ -567,6 +573,8 @@ def _seed_matches(
         RightsReviewStatus(seed.rights_review_status),
         seed.rights_basis,
         seed.change_note,
+        seed.source_output_g,
+        seed.source_output_text,
     )
     ingredients = tuple(
         (
