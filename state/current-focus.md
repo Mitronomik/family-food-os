@@ -4,30 +4,33 @@ Updated: 2026-09-27.
 
 ## Accepted state
 
-PR104 / R1-B runtime is merged into `main` at:
+PR106 / PR104 post-merge integrity correction is merged into `main` at:
 
-`75e2854eff82955b5c01ccacaca35fe0fdc534bc`.
+`cf96e9bb43bb991625a56d7d4c0fa0bad2842b1a`.
 
-Accepted R1-B outcome:
+This accepted state includes:
+
+- the full restored durable `state/progress.md` history;
+- adapter-neutral RecipeVersion historical-schema introspection via SQLAlchemy;
+- explicit R1-B cross-context transaction ownership;
+- unchanged accepted R1-B runtime/data truth from PR104.
+
+R1-B remains:
 
 - migration `0040_recipe_version_source_output`;
-- immutable RecipeVersion source-output truth;
-- one published `SOURCE_VERIFIED` RecipeVersion:
-  `USSR82-697 — Курица отварная`;
+- one published inactive `SOURCE_VERIFIED` USSR82-697 RecipeVersion;
 - exact CHICKEN_CATEGORY_1_RAW + ONION_BULB_FRESH V2 Composition bindings;
 - deterministic input-composition energy 255.892000 kcal;
-- recipe remains inactive pending separately reviewed Step 7 transformation authority;
-- USSR82-453 / 1081 / 467 / 492 remain explicitly blocked;
-- no Planner/Serving/Shopping behavior changed in R1-B.
-
-R1 parent programme remains:
-
-- #99 — restore Steps 7–10 product meaning;
-- #67 — DATA-CORPUS-V1.
+- four reviewed blocked candidates;
+- no implicit yield/retention/transformation authority.
 
 ## Current bounded operation
 
 **#100 PLANNER ENERGY ALLOCATION IMPLEMENTATION CONTRACT GATE — ACTIVE.**
+
+PR:
+
+`#105`.
 
 Branch:
 
@@ -37,7 +40,7 @@ Canonical gate document:
 
 `docs/family-food/planner-energy-allocation-contract.md`.
 
-## Why the gate is required
+## Why this gate is required
 
 Current `planner-v0.3` scales recipe Servings using the member's full weekly
 reference energy divided by recipe-backed energy selected for the week.
@@ -73,7 +76,7 @@ Planner from role names.
 
 ## Stop boundary
 
-This branch is docs/state only.
+This PR is docs/state only.
 
 Do not start:
 

@@ -518,3 +518,37 @@ PR101 R1-A merged
 ```
 
 Do not begin the next arrow merely because the previous PR is review-ready.
+
+## 18. Post-merge clarification — R1-B transaction ownership
+
+PR104 review found that committing RecipeVersion first and Composition bindings in
+separate transactions could leave partial authoritative state. The accepted
+correction is part of the R1-B runtime outcome.
+
+For this bounded publication only, one caller-owned persistence transaction spans:
+
+```text
+Recipe / RecipeVersion reconciliation
+→ required RecipeIngredient → Composition bindings
+→ deterministic V2 input-Nutrition validation
+→ single commit
+```
+
+The concrete current adapter is `SqlAlchemyRecipeNutritionV2UnitOfWork` because
+that scope already exposes the exact Recipe, RecipeVersion, FoodIngredient,
+Composition, registry/vector and binding repositories required by the operation.
+
+This does **not** redefine Nutrition as the domain owner of Recipe Catalogue truth.
+It is a bounded shared persistence transaction used by the R1-B publication
+orchestrator. Domain ownership remains unchanged:
+
+- Recipe Catalogue owns Recipe / RecipeVersion;
+- Nutrition owns RecipeIngredient → Composition binding and Recipe Nutrition;
+- the R1-B orchestrator owns the all-or-nothing publication operation.
+
+Application services expose transaction-neutral `*_in_scope` operations for this
+caller-owned transaction and retain their ordinary self-committing public methods.
+
+Future cross-context write operations must freeze their transaction owner in their
+own Implementation Contract Gate rather than treating this R1-B seam as a generic
+default.
