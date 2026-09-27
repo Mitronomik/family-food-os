@@ -67,7 +67,7 @@ publication payload.
 - meal type: breakfast
 - quantified input: EGG 40 g edible source calculation mass
 - source output: 40 g
-- exact energy after Composition binding: 58.800000 kcal
+- deterministic input-composition energy: 58.800000 kcal
 - process contains no extra unquantified material ingredient
 
 ### USSR82-1081 — Блины
@@ -84,7 +84,7 @@ publication payload.
   - MARGARINE_MILK_TABLE 5 g
   - BUTTER_UNSALTED 10 g
 - source output: 160 g
-- exact energy after Composition binding: 368.114000 kcal
+- deterministic input-composition energy: 368.114000 kcal
 - alternatives are not mixed
 
 ### USSR82-697 — Курица отварная
@@ -97,7 +97,7 @@ publication payload.
   - CHICKEN_CATEGORY_1_RAW 107 g
   - ONION_BULB_FRESH 2 g
 - source output: 75 g
-- exact energy after Composition binding: 255.892000 kcal
+- deterministic input-composition energy: 255.892000 kcal
 - garnish/sauce are outside this RecipeVersion
 
 The generic source phrase about "предусмотренные коренья" is conditional source
@@ -134,10 +134,17 @@ against accepted hash-pinned loaders:
 - merged R1-A authorities for exact new forms and WATER/SALT.
 
 R1-B does not create new Food/Nutrition authority for EGG or BUTTER_UNSALTED.
-Their accepted sparse vectors provide exact energy while nutrients absent from
+Their accepted sparse vectors provide exact input energy while nutrients absent from
 those vectors remain explicitly unknown in Recipe Nutrition.
 
 The package cannot silently redefine accepted vectors or fill unknown nutrients.
+
+These three RecipeVersions represent cooked dishes. Main currently has Step 7
+applicability infrastructure but no reviewed production transformation/yield/retention
+authority for their boiling/frying processes. Therefore R1-B does not claim final
+cooked nutrient truth or Planner readiness from input Composition totals. All three
+recipes remain inactive until a separately reviewed Step 7 process-authority batch
+closes that gap.
 
 ## Publication behavior
 
@@ -148,8 +155,8 @@ R1-B publication order:
 3. publish three RecipeVersions as initially inactive;
 4. publish ten exact RecipeIngredient Composition bindings using already accepted Composition versions;
 5. calculate deterministic canonical Recipe Nutrition with unknown propagation;
-6. require reviewed exact energy and `exact_energy_ready=true`;
-7. activate the three recipes only after every validation succeeds.
+6. validate reviewed deterministic input-composition energy while preserving unknown nutrients;
+7. keep all three recipes inactive with `INACTIVE_PENDING_TRANSFORMATION_AUTHORITY` until separately reviewed Step 7 transformation/retention authority exists.
 
 A partial prior Recipe batch fails closed rather than being filled in.
 
@@ -173,8 +180,8 @@ R1-B does not:
 - domain/repository/replay tests;
 - exact 3 PUBLISH / 2 BLOCKED package validation;
 - ten Composition bindings;
-- exact energy validation;
-- activation after validation only;
+- deterministic input-composition energy validation;
+- explicit inactive disposition pending Step 7 transformation/retention authority;
 - exact replay;
 - partial-batch failure;
 - injected rollback;
