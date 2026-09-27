@@ -515,7 +515,7 @@
         "atomic_version": 2,
         "canonical_code": "SALT",
         "canonical_name": "Соль поваренная",
-        "category_code": "herbs_spices",
+        "category_code": "staples",
         "default_unit": "g",
         "mass_state": "INPUT"
       },
