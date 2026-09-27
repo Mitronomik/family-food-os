@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "operation": "R1-A_PLANNER_CAPACITY_DEPENDENCY_CLOSURE",
+  "accepted_base": "9f72f6883e092cbf79930c7ac4a5a1314c7488d8",
+  "parent_issue": 99,
+  "source_archive": {
+    "locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "size_bytes": 206692075,
+    "sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "verified_retrieval_date": "2026-09-27",
+    "ru_nut_db_html_sha256": "155107ddb381c14721c77fe995d604a5197982441446b54034e4d84645efbd6d"
+  },
+  "input_pins": {
+    "data/curation/data-corpus-v1-dc1/candidate-recipes.csv": "27ed5f929aeb516b0949329db7fe73ef37453695",
+    "data/curation/data-corpus-v1-dc1/food-demand.csv": "8895193156feb4b34cef885da6060f8b19a235a7",
+    "data/curation/data-corpus-v1-dc1/source-relationships-part1.csv": "f4542cd7fd68aa5b2bb37cf9ed58dd13e1a7e9fc",
+    "data/curation/data-corpus-v1-dc1/source-relationships-part2.csv": "ec097695297f66fc225d4a96714662aff00f6f1b",
+    "data/curation/data-corpus-v1-dc1/source-relationships-part3.csv": "8b6eef791ea8569045466902bbef6edd85b68872",
+    "data/curation/data-corpus-v1-dc1/source-relationships-part4.csv": "f148887e1b84b06d5d5b58b82082d980c991b39c",
+    "data/curation/pr6-ru-food-data/food-readiness.json": "9fc761700a9521098c4235bba1be9ceffa17c8d3",
+    "data/curation/corpus-v03-reconciliation/generated/food-review-groups.jsonl": "a18d0464d7636bc87bb7abfd6b5eeaec686e5a18",
+    "data/curation/ru-nut-db-step4-runtime/publication.json": "dd94080f06af02e6b1647bf3b10dde4867cd7c86"
+  },
+  "counts": {
+    "recipe_count": 7,
+    "source_relationship_row_count": 32,
+    "unique_dependency_count": 20,
+    "accepted_reuse_dependency_count": 11,
+    "r1a_publication_dependency_count": 7,
+    "blocked_dependency_count": 2,
+    "dependency_ready_recipe_count_after_r1a": 5,
+    "blocked_recipe_count_after_r1a": 2
+  },
+  "recipes": [
+    {
+      "source_recipe_id": "USSR82-453",
+      "name": "Яйца вареные",
+      "target_role_family": "breakfast",
+      "dependency_ids": ["ING-0071"],
+      "post_r1a_dependency_status": "READY_FOR_R1B"
+    },
+    {
+      "source_recipe_id": "USSR82-467",
+      "name": "Омлет (натуральный)",
+      "target_role_family": "breakfast",
+      "dependency_ids": ["ING-0030", "ING-0032", "ING-0034", "ING-0071"],
+      "post_r1a_dependency_status": "READY_FOR_R1B"
+    },
+    {
+      "source_recipe_id": "USSR82-492",
+      "name": "Сырники из творога",
+      "target_role_family": "breakfast",
+      "dependency_ids": ["ING-0030", "ING-0036", "ING-0042", "ING-0047", "ING-0056", "ING-0071"],
+      "post_r1a_dependency_status": "READY_FOR_R1B"
+    },
+    {
+      "source_recipe_id": "USSR82-1081",
+      "name": "Блины",
+      "target_role_family": "breakfast",
+      "dependency_ids": ["ING-0006", "ING-0030", "ING-0032", "ING-0036", "ING-0042", "ING-0050", "ING-0097"],
+      "post_r1a_dependency_status": "READY_FOR_R1B"
+    },
+    {
+      "source_recipe_id": "USSR82-697",
+      "name": "Птица, дичь или кролик отварные с гарниром",
+      "selected_branch": "III, курица, основной продукт без гарнира/соуса",
+      "target_role_family": "main",
+      "dependency_ids": ["ING-0025", "ING-0028"],
+      "post_r1a_dependency_status": "READY_FOR_R1B"
+    },
+    {
+      "source_recipe_id": "USSR82-364",
+      "name": "Шницель из капусты",
+      "target_role_family": "main",
+      "dependency_ids": ["ING-0014", "ING-0017", "ING-0032", "ING-0036", "ING-0053", "ING-0071"],
+      "post_r1a_dependency_status": "BLOCKED",
+      "blockers": ["ING-0014:NO_EXACT_FIC_OR_ACCEPTED_EQUIVALENT_FOR_COOKING_FAT"]
+    },
+    {
+      "source_recipe_id": "USSR82-208",
+      "name": "Рассольник ленинградский",
+      "target_role_family": "main",
+      "dependency_ids": ["ING-0019", "ING-0024", "ING-0028", "ING-0030", "ING-0035", "ING-0038"],
+      "post_r1a_dependency_status": "BLOCKED",
+      "blockers": ["ING-0038:FIC_SOURCE_RECORD_SCHEMA_ANOMALY_REQUIRES_REVIEW"]
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "ING-0006",
+      "source_identity": "Вода",
+      "disposition": "ACCEPTED_REUSE",
+      "canonical_code": "WATER",
+      "authority_ref": "data/curation/pr6-ru-food-data/food-readiness.json#WATER"
+    },
+    {
+      "id": "ING-0014",
+      "source_identity": "Жир кулинарный",
+      "disposition": "BLOCKED",
+      "reason": "NO_EXACT_FIC_OR_ACCEPTED_EQUIVALENT_FOR_COOKING_FAT",
+      "forbidden_substitutions": ["Жир свиной", "Жир свиной топленый", "generic shortening"]
+    },
+    {
+      "id": "ING-0017",
+      "source_identity": "Капуста белокочанная",
+      "disposition": "ACCEPTED_REUSE",
+      "canonical_code": "CABBAGE_GREEN",
+      "authority_ref": "data/curation/pr6-ru-food-data/food-readiness.json#CABBAGE_GREEN"
+    },
+    {
+      "id": "ING-0019",
+      "source_identity": "Картофель",
+      "disposition": "PUBLISH_R1A_FIC",
+      "canonical_code": "POTATO",
+      "source_code": "46",
+      "db_index": 77,
+      "raw_record_sha256": "41f284f935466cf22c03fe32dd64f6ac1083f13e5c331520ca26df63f3179de9"
+    },
+    {
+      "id": "ING-0024",
+      "source_identity": "Крупа рисовая",
+      "disposition": "ACCEPTED_REUSE_STEP4",
+      "canonical_code": "RICE_GROATS",
+      "authority_ref": "data/curation/ru-nut-db-step4-runtime/publication.json#RICE_GROATS"
+    },
+    {
+      "id": "ING-0025",
+      "source_identity": "Куры I категории",
+      "disposition": "PUBLISH_R1A_FIC",
+      "canonical_code": "CHICKEN_CATEGORY_1_RAW",
+      "source_code": "158",
+      "db_index": 110,
+      "raw_record_sha256": "cd75d00e6781ad32706ee2d6120aad311ed05258cb4a8223a4d6c8bec379f1b9"
+    },
+    {
+      "id": "ING-0028",
+      "source_identity": "Лук репчатый",
+      "disposition": "ACCEPTED_REUSE",
+      "canonical_code": "ONION_YELLOW",
+      "authority_ref": "data/curation/pr6-ru-food-data/food-readiness.json#ONION_YELLOW"
+    },
+    {
+      "id": "ING-0030",
+      "source_identity": "Маргарин молочный / столовый",
+      "disposition": "PUBLISH_R1A_FIC",
+      "canonical_code": "MARGARINE_MILK_TABLE",
+      "source_code": "1432",
+      "db_index": 509,
+      "raw_record_sha256": "0018264d8d0e9a181555e62b34684503b7689b4d1d7fddeb848722a287c97a2a"
+    },
+    {
+      "id": "ING-0032",
+      "source_identity": "Масло сливочное несоленое",
+      "disposition": "ACCEPTED_REUSE",
+      "canonical_code": "BUTTER_UNSALTED",
+      "authority_ref": "data/curation/pr6-ru-food-data/food-readiness.json#BUTTER_UNSALTED"
+    },
+    {
+      "id": "ING-0034",
+      "source_identity": "Молоко пастеризованное 3,2%",
+      "disposition": "PUBLISH_R1A_FIC",
+      "canonical_code": "MILK_PASTEURIZED_3_2",
+      "source_code": "929",
+      "db_index": 549,
+      "raw_record_sha256": "7d99a5fd87f50f471d61df99788d7aa7fe93db22ec1b5d42533733575069333a"
+    },
+    {
+      "id": "ING-0035",
+      "source_identity": "Морковь красная",
+      "disposition": "ACCEPTED_REUSE_STEP4",
+      "canonical_code": "CARROT_RED_RAW",
+      "authority_ref": "data/curation/ru-nut-db-step4-runtime/publication.json#CARROT_RED_RAW",
+      "note": "Later accepted Step 4 identity decision supersedes the old DC1 CARROT alias."
+    },
+    {
+      "id": "ING-0036",
+      "source_identity": "Мука пшеничная в/с",
+      "disposition": "ACCEPTED_REUSE",
+      "canonical_code": "FLOUR_WHEAT",
+      "authority_ref": "data/curation/pr6-ru-food-data/food-readiness.json#FLOUR_WHEAT"
+    },
+    {
+      "id": "ING-0038",
+      "source_identity": "Огурцы соленые",
+      "disposition": "BLOCKED",
+      "reason": "FIC_SOURCE_RECORD_SCHEMA_ANOMALY_REQUIRES_REVIEW",
+      "source_code": "1240",
+      "db_index": 3121,
+      "raw_record_sha256": "b3b9f6da06f2e3a45cf501b51005e1d92e5dab6d7749cfab22800a98f91413c9",
+      "anomaly": "The exact record has shifted/inconsistent Eurocode field types and implausible field layout; do not repair or reinterpret source values silently."
+    },
+    {
+      "id": "ING-0042",
+      "source_identity": "Сахар-песок",
+      "disposition": "ACCEPTED_REUSE",
+      "canonical_code": "SUGAR",
+      "authority_ref": "data/curation/pr6-ru-food-data/food-readiness.json#SUGAR"
+    },
+    {
+      "id": "ING-0047",
+      "source_identity": "Сметана 30%",
+      "disposition": "PUBLISH_R1A_FIC",
+      "canonical_code": "SOUR_CREAM_30",
+      "source_code": "942",
+      "db_index": 681,
+      "raw_record_sha256": "d5c99fa5365221ef876168887d98d351278b1948bbb820187297ea1a23c12a79"
+    },
+    {
+      "id": "ING-0050",
+      "source_identity": "Соль поваренная",
+      "disposition": "ACCEPTED_REUSE",
+      "canonical_code": "SALT",
+      "authority_ref": "data/curation/pr6-ru-food-data/food-readiness.json#SALT"
+    },
+    {
+      "id": "ING-0053",
+      "source_identity": "Сухари панировочные / source row Сухари",
+      "disposition": "ACCEPTED_REUSE",
+      "canonical_code": "BREADCRUMBS",
+      "authority_ref": "data/curation/pr6-ru-food-data/food-readiness.json#BREADCRUMBS",
+      "evidence_ref": "data/curation/corpus-v03-reconciliation/generated/food-review-groups.jsonl#сухари-панировочные"
+    },
+    {
+      "id": "ING-0056",
+      "source_identity": "Творог полужирный 9%",
+      "disposition": "PUBLISH_R1A_FIC",
+      "canonical_code": "TVOROG_9",
+      "source_code": "968",
+      "db_index": 813,
+      "raw_record_sha256": "79b770be30bf853021e929f949333838121d65bf5c45a0f3807b90d4cf6a57cb"
+    },
+    {
+      "id": "ING-0071",
+      "source_identity": "Яйцо куриное",
+      "disposition": "ACCEPTED_REUSE",
+      "canonical_code": "EGG",
+      "authority_ref": "data/curation/pr6-ru-food-data/food-readiness.json#EGG"
+    },
+    {
+      "id": "ING-0097",
+      "source_identity": "Дрожжи прессованные",
+      "disposition": "PUBLISH_R1A_FIC",
+      "canonical_code": "YEAST_BAKERS_COMPRESSED",
+      "source_code": "31",
+      "db_index": 915,
+      "raw_record_sha256": "6846bc12256db2d75b5329a14279d8d486c9253d3f3db75bf21a3b95e096a386"
+    }
+  ]
+}
