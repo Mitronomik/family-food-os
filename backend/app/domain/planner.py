@@ -59,6 +59,8 @@ class PlannerConfig:
             match = _VERSION.match(value) if isinstance(value, str) else None
             if match is None or match.end() != len(value):
                 raise ValueError(f"{name} must be a non-empty version-safe identifier")
+        if self.version not in {"planner-v0.3", "planner-v0.4"}:
+            raise ValueError("Unsupported Planner algorithm version")
         for name in (
             "preference_weight",
             "pantry_weight",
