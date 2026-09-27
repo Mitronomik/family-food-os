@@ -304,6 +304,28 @@ def test_reviewed_program_publication_is_bounded_exact_and_zero_write_replay(tmp
     assert db_dump(config) == before
 
 
+def test_target_version_replay_rejects_later_history_drift(tmp_path):
+    config = DatabaseConfig(path=tmp_path / "history-drift.sqlite")
+    seed_planner_energy_allocation_v04(config)
+    seeds = load_planner_energy_allocation_seeds()
+    engine = create_sqlite_engine(config)
+    try:
+        service = create_meal_pattern_catalogue_service(engine)
+        service.append_trusted_version(
+            "ADULT_REGULAR_3",
+            replace(
+                seeds[0].version,
+                change_note="Synthetic later reviewed history.",
+            ),
+        )
+        with pytest.raises(
+            MealPatternCatalogueConflictError, match="history differs"
+        ):
+            service.reconcile_target_versions(seeds)
+    finally:
+        engine.dispose()
+
+
 def test_program_publication_conflict_and_second_program_failure_roll_back(
     tmp_path, monkeypatch
 ):
