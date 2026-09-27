@@ -371,13 +371,17 @@ class RecipeVersion:
                     field="source_output_g",
                     value=self.source_output_g,
                 )
-            object.__setattr__(
-                self,
-                "source_output_g",
-                quantize_decimal(
-                    self.source_output_g, _QUANT, field="source_output_g"
-                ),
+            normalized_output = quantize_decimal(
+                self.source_output_g, _QUANT, field="source_output_g"
             )
+            if normalized_output <= 0:
+                raise _issue(
+                    DomainIssueCode.VALUE_OUT_OF_RANGE,
+                    "source_output_g is below supported precision.",
+                    field="source_output_g",
+                    value=self.source_output_g,
+                )
+            object.__setattr__(self, "source_output_g", normalized_output)
         object.__setattr__(
             self,
             "source_output_text",
