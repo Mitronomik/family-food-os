@@ -31,6 +31,24 @@ from app.services.food_recipe_contracts import (
 )
 
 
+def _persisted_version_columns(connection: Connection):
+    """RecipeVersion columns that exist in the current migration prefix.
+
+    Migration/readiness tests intentionally open historical databases before 0040
+    with current application code. Select only columns present in that prefix;
+    post-0040 databases automatically expose source-output fields.
+    """
+    names = {
+        row[1]
+        for row in connection.exec_driver_sql(
+            "PRAGMA table_info('food_recipe_versions')"
+        )
+    }
+    return tuple(
+        column for column in food_recipe_versions_table.c if column.name in names
+    )
+
+
 class SqlAlchemyRecipeRepository:
     def __init__(self, connection: Connection) -> None:
         self._connection = connection
@@ -123,10 +141,25 @@ class SqlAlchemyRecipeVersionRepository:
                     "created_from_version_id must reference the same Recipe."
                 )
         try:
-            self._connection.execute(
-                insert(food_recipe_versions_table).values(
-                    **_version_values(detail.version)
+            version_values = _version_values(detail.version)
+            persisted_columns = {
+                row[1]
+                for row in self._connection.exec_driver_sql(
+                    "PRAGMA table_info('food_recipe_versions')"
                 )
+            }
+            if "source_output_g" not in persisted_columns:
+                if (
+                    detail.version.source_output_g is not None
+                    or detail.version.source_output_text is not None
+                ):
+                    raise RecipeCataloguePersistenceConflictError(
+                        "Migration 0040 is required before persisting RecipeVersion source output."
+                    )
+                version_values.pop("source_output_g", None)
+                version_values.pop("source_output_text", None)
+            self._connection.execute(
+                insert(food_recipe_versions_table).values(**version_values)
             )
             self._connection.execute(
                 insert(food_recipe_ingredients_table),
@@ -153,7 +186,7 @@ class SqlAlchemyRecipeVersionRepository:
     def get(self, version_id: UUID) -> RecipeVersion | None:
         row = (
             self._connection.execute(
-                select(food_recipe_versions_table).where(
+                select(*_persisted_version_columns(self._connection)).where(
                     food_recipe_versions_table.c.id == version_id
                 )
             )
@@ -200,7 +233,7 @@ class SqlAlchemyRecipeVersionRepository:
 
     def list_for_recipe(self, recipe_id: UUID) -> list[RecipeVersion]:
         rows = self._connection.execute(
-            select(food_recipe_versions_table)
+            select(*_persisted_version_columns(self._connection))
             .where(food_recipe_versions_table.c.recipe_id == recipe_id)
             .order_by(food_recipe_versions_table.c.version_number)
         ).mappings()
@@ -292,6 +325,8 @@ def _version_values(value: RecipeVersion) -> dict[str, object]:
         "source_retrieved_at": value.source_retrieved_at,
         "source_document_sha256": value.source_document_sha256,
         "source_original_servings": value.source_original_servings,
+        "source_output_g": value.source_output_g,
+        "source_output_text": value.source_output_text,
         "rights_review_status": value.rights_review_status.value,
         "rights_basis": value.rights_basis,
         "created_from_version_id": value.created_from_version_id,
@@ -376,6 +411,8 @@ def _version_from_row(row: Mapping[str, Any]) -> RecipeVersion:
         created_from_version_id=row["created_from_version_id"],
         change_note=row["change_note"],
         created_at=row["created_at"],
+        source_output_g=row.get("source_output_g"),
+        source_output_text=row.get("source_output_text"),
     )
 
 

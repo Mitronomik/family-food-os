@@ -9,7 +9,7 @@ from app.db import migrations
 from app.db.config import DatabaseConfig
 from app.db.migrations import apply_migrations, current_migrations, expected_migration_ids
 from app.seed.food_ingredients import seed_food_ingredients
-from scripts.audit_pr6_nutrient_vector_b import snapshot
+from scripts.audit_pr6_nutrient_vector_b import assert_snapshot_preserved, snapshot
 
 MIGRATION_ID = "0038_transformation_applicability"
 PREVIOUS_HEAD = "0037_meal_plan_reference_methodology_pins"
@@ -37,10 +37,11 @@ def through_0037(path, *, seed=False):
 
 def test_0038_appends_after_0037_without_consuming_reserved_0033():
     expected = expected_migration_ids()
-    assert expected[-3:] == [
+    assert expected[-4:] == [
         PREVIOUS_HEAD,
         MIGRATION_ID,
         "0039_recipe_ingredient_composition_binding",
+        "0040_recipe_version_source_output",
     ]
     assert not any(value.startswith("0033_") for value in expected)
 
@@ -52,10 +53,11 @@ def test_populated_0037_upgrade_preserves_every_existing_row(tmp_path):
     assert apply_migrations(config) == [
         MIGRATION_ID,
         "0039_recipe_ingredient_composition_binding",
+        "0040_recipe_version_source_output",
     ]
 
     after = snapshot(config)
-    assert all(after[name] == rows for name, rows in before.items())
+    assert_snapshot_preserved(before, after)
     with sqlite3.connect(config.path) as db:
         assert db.execute(f"SELECT count(*) FROM {TABLE}").fetchone() == (0,)
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
@@ -145,17 +147,19 @@ def test_backup_restore_and_reupgrade_are_deterministic(tmp_path):
     assert apply_migrations(config) == [
         MIGRATION_ID,
         "0039_recipe_ingredient_composition_binding",
+        "0040_recipe_version_source_output",
     ]
     after = snapshot(config)
-    assert all(after[name] == rows for name, rows in before.items())
+    assert_snapshot_preserved(before, after)
 
     shutil.copy2(backup, database)
     assert MIGRATION_ID not in current_migrations(config)
     assert apply_migrations(config) == [
         MIGRATION_ID,
         "0039_recipe_ingredient_composition_binding",
+        "0040_recipe_version_source_output",
     ]
     restored = snapshot(config)
-    assert all(restored[name] == rows for name, rows in before.items())
+    assert_snapshot_preserved(before, restored)
     with sqlite3.connect(database) as db:
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []

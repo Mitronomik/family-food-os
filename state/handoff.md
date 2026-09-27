@@ -1,5 +1,42 @@
 # Handoff
 
+## PR104 R1-B reviewed runtime disposition — 2026-09-27
+
+Five candidates were reviewed against the retained hash-pinned corpus. Only
+`USSR82-697` is published, with exact chicken/onion Composition bindings and
+inactive status pending Step 7 numeric process authority. `USSR82-453` and
+`USSR82-1081` are blocked by missing V2-compatible EGG/BUTTER_UNSALTED
+Composition authority; `USSR82-467` and `USSR82-492` are blocked by an
+unquantified salt ingredient in verified process text.
+
+The package pins v20 and DC1 row receipts. PR104 must pass exact-head backend,
+launcher, Docs, DC1 and nutrition CI before review-ready. Do not merge or begin
+#100, R1-C, Shopping or API/UI as part of this operation.
+
+## R1-B runtime authorized — 2026-09-27
+
+PR103 merged into main:
+`fb89cfeb84f4052233f82daa7dcc2d1c07aa971a`.
+
+User explicitly authorized:
+migration 0040 + publication of the five R1-B RecipeVersions.
+
+Branch:
+`feat/r1b-recipe-versions`.
+
+Contract:
+`docs/family-food/r1b-source-output-contract.md`.
+
+Runtime scope:
+- add immutable RecipeVersion source output fields;
+- preserve historical rows as null;
+- publish reviewed USSR82-453/467/492/1081/697 selected branches;
+- pin exact Composition versions;
+- validate deterministic V2 Recipe Nutrition;
+- record activation disposition.
+
+No Planner/#100/R1-C/Shopping work is authorized.
+
 ## R1-B source-output contract gate active — 2026-09-27
 
 PR101 / R1-A merged into main:

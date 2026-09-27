@@ -65,6 +65,8 @@ food_recipe_versions_table = Table(
     Column("source_retrieved_at", UTCDateTime()),
     Column("source_document_sha256", String, nullable=False),
     Column("source_original_servings", DecimalText(), nullable=False),
+    Column("source_output_g", DecimalText()),
+    Column("source_output_text", String),
     Column("rights_review_status", String, nullable=False),
     Column("rights_basis", String),
     Column(
@@ -83,6 +85,14 @@ food_recipe_versions_table = Table(
     CheckConstraint(
         "CAST(base_servings AS NUMERIC) > 0",
         name="ck_food_recipe_versions_servings_positive",
+    ),
+    CheckConstraint(
+        "source_output_g IS NULL OR CAST(source_output_g AS NUMERIC) > 0",
+        name="ck_food_recipe_versions_source_output_positive",
+    ),
+    CheckConstraint(
+        "source_output_text IS NULL OR length(trim(source_output_text)) > 0",
+        name="ck_food_recipe_versions_source_output_text_nonempty",
     ),
 )
 

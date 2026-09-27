@@ -196,71 +196,89 @@ class RecipeNutritionV2Service:
     def publish_binding(
         self, spec: ReviewedRecipeIngredientBindingSpec
     ) -> BindingPublicationResult:
-        self._validate_spec(spec)
-        with self._write_scope_factory() as uow:
-            try:
-                detail, row, food, composition = self._resolve_publication_target(
-                    uow, spec
-                )
-                calculation = self._calculate_row(uow, row, composition)
-                self._require_reviewed_calculation(spec, row, calculation)
-                existing = uow.bindings.get(row.id)
-                if existing is not None:
-                    expected = RecipeIngredientCompositionBinding(
-                        recipe_ingredient_id=row.id,
-                        composition_version_id=composition.id,
-                        registry_version=REGISTRY_VERSION,
-                        nutrient_set_version=NUTRIENT_SET_VERSION,
-                        composition_calculation_version=COMPOSITION_CALCULATION_VERSION,
-                        recipe_calculation_version=RECIPE_CALCULATION_VERSION,
-                        created_at=existing.created_at,
-                    )
-                    if existing != expected:
-                        raise RecipeNutritionV2ConflictError(
-                            "Существующий Recipe Nutrition binding отличается от проверенной authority."
-                        )
-                    return BindingPublicationResult(
-                        BindingDisposition.EXACT_REPLAY,
-                        existing,
-                        detail.version.id,
-                    )
+        try:
+            with self._write_scope_factory() as uow:
+                result = self.publish_binding_in_scope(uow, spec)
+                if result.disposition is BindingDisposition.FRESH:
+                    uow.commit()
+                return result
+        except RecipeNutritionV2PersistenceConflictError as exc:
+            raise RecipeNutritionV2ConflictError(
+                "Recipe Nutrition binding конфликтует с сохранённой authority."
+            ) from exc
 
-                now = self._clock()
-                if (
-                    not isinstance(now, datetime)
-                    or now.tzinfo is None
-                    or now.utcoffset() is None
-                ):
-                    raise RecipeNutritionV2ContractError(
-                        "Часы publication должны возвращать timezone-aware instant."
-                    )
-                binding = RecipeIngredientCompositionBinding(
-                    recipe_ingredient_id=row.id,
-                    composition_version_id=composition.id,
-                    registry_version=REGISTRY_VERSION,
-                    nutrient_set_version=NUTRIENT_SET_VERSION,
-                    composition_calculation_version=COMPOSITION_CALCULATION_VERSION,
-                    recipe_calculation_version=RECIPE_CALCULATION_VERSION,
-                    created_at=now.astimezone(timezone.utc),
-                )
-                uow.bindings.add(binding)
-                uow.commit()
-                return BindingPublicationResult(
-                    BindingDisposition.FRESH,
-                    binding,
-                    detail.version.id,
-                )
-            except RecipeNutritionV2PersistenceConflictError as exc:
+    def publish_binding_in_scope(
+        self,
+        uow: RecipeNutritionV2UnitOfWork,
+        spec: ReviewedRecipeIngredientBindingSpec,
+    ) -> BindingPublicationResult:
+        """Publish one reviewed binding inside a caller-owned transaction."""
+
+        self._validate_spec(spec)
+        detail, row, food, composition = self._resolve_publication_target(uow, spec)
+        calculation = self._calculate_row(uow, row, composition)
+        self._require_reviewed_calculation(spec, row, calculation)
+        existing = uow.bindings.get(row.id)
+        if existing is not None:
+            expected = RecipeIngredientCompositionBinding(
+                recipe_ingredient_id=row.id,
+                composition_version_id=composition.id,
+                registry_version=REGISTRY_VERSION,
+                nutrient_set_version=NUTRIENT_SET_VERSION,
+                composition_calculation_version=COMPOSITION_CALCULATION_VERSION,
+                recipe_calculation_version=RECIPE_CALCULATION_VERSION,
+                created_at=existing.created_at,
+            )
+            if existing != expected:
                 raise RecipeNutritionV2ConflictError(
-                    "Recipe Nutrition binding конфликтует с сохранённой authority."
-                ) from exc
+                    "Существующий Recipe Nutrition binding отличается от проверенной authority."
+                )
+            return BindingPublicationResult(
+                BindingDisposition.EXACT_REPLAY,
+                existing,
+                detail.version.id,
+            )
+
+        now = self._clock()
+        if (
+            not isinstance(now, datetime)
+            or now.tzinfo is None
+            or now.utcoffset() is None
+        ):
+            raise RecipeNutritionV2ContractError(
+                "Часы publication должны возвращать timezone-aware instant."
+            )
+        binding = RecipeIngredientCompositionBinding(
+            recipe_ingredient_id=row.id,
+            composition_version_id=composition.id,
+            registry_version=REGISTRY_VERSION,
+            nutrient_set_version=NUTRIENT_SET_VERSION,
+            composition_calculation_version=COMPOSITION_CALCULATION_VERSION,
+            recipe_calculation_version=RECIPE_CALCULATION_VERSION,
+            created_at=now.astimezone(timezone.utc),
+        )
+        uow.bindings.add(binding)
+        return BindingPublicationResult(
+            BindingDisposition.FRESH,
+            binding,
+            detail.version.id,
+        )
 
     def calculate(self, recipe_version_id: UUID) -> CanonicalRecipeVersionNutrition:
         with self._read_scope_factory() as scope:
-            detail = scope.versions.get_detail(recipe_version_id)
-            if detail is None:
-                raise RecipeNutritionV2UnavailableError("RecipeVersion не найден.")
-            return self._calculate_detail(scope, detail)
+            return self.calculate_in_scope(scope, recipe_version_id)
+
+    def calculate_in_scope(
+        self,
+        scope: RecipeNutritionV2ReadScope,
+        recipe_version_id: UUID,
+    ) -> CanonicalRecipeVersionNutrition:
+        """Calculate canonical nutrition inside an existing read/write scope."""
+
+        detail = scope.versions.get_detail(recipe_version_id)
+        if detail is None:
+            raise RecipeNutritionV2UnavailableError("RecipeVersion не найден.")
+        return self._calculate_detail(scope, detail)
 
     def neutral_consumption_projection(
         self, recipe_version_id: UUID

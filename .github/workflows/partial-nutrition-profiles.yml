@@ -36,6 +36,14 @@ on:
       - 'backend/app/tests/test_meal_plans.py'
       - 'backend/app/tests/test_step10b_planner_mealplan_v2.py'
       - 'backend/app/migrations/versions/0039_recipe_ingredient_composition_binding.py'
+      - 'backend/app/migrations/versions/0040_recipe_version_source_output.py'
+      - 'backend/app/domain/food_recipes.py'
+      - 'backend/app/persistence/sqlalchemy_core/food_recipe_tables.py'
+      - 'backend/app/persistence/sqlalchemy_core/food_recipe_repositories.py'
+      - 'backend/app/seed/r1b_reviewed_recipes.py'
+      - 'backend/app/tests/test_recipe_source_output.py'
+      - 'backend/app/tests/test_r1b_reviewed_recipes.py'
+      - 'data/curation/r1b-reviewed-recipes/**'
       - 'backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2.py'
       - 'backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2_tables.py'
       - 'backend/app/services/recipe_nutrition_v2.py'
@@ -86,6 +94,10 @@ jobs:
           backend/app/tests/test_recipe_nutrition_v2.py
           backend/app/tests/test_recipe_nutrition_v2_migration.py
           backend/app/tests/test_ru_school2022_step10a_binding.py
+          backend/app/tests/test_recipe_source_output.py
+          backend/app/tests/test_r1b_reviewed_recipes.py
+          backend/app/tests/test_food_recipe_migration.py
+          backend/app/tests/persistence/test_food_recipe_repository.py
           backend/app/tests/test_step10b_planner_mealplan_v2.py
           backend/app/tests/test_planner.py
           backend/app/tests/test_planner_application_boundary.py

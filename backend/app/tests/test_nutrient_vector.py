@@ -31,7 +31,12 @@ from app.persistence.sqlalchemy_core.nutrition_read_scope import (
 )
 from app.persistence.sqlalchemy_core.nutrient_vector_tables import nutrient_values
 from app.seed.food_ingredients import seed_food_ingredients
-from scripts.audit_pr6_nutrient_vector_b import measure, seed_previous, snapshot
+from scripts.audit_pr6_nutrient_vector_b import (
+    assert_snapshot_preserved,
+    measure,
+    seed_previous,
+    snapshot,
+)
 
 MIGRATION = import_module("app.migrations.versions.0028_normalized_nutrient_vector")
 
@@ -92,7 +97,7 @@ def test_registry_matches_all_approved_definitions(database, bundle):
             (REGISTRY_VERSION,),
         ).fetchone()[0]
         assert json.loads(stored) == bundle
-    assert migrations.expected_migration_ids()[-10:] == [
+    assert migrations.expected_migration_ids()[-11:] == [
         "0029_food_composition_core",
         "0030_recipe_source_corpus",
         "0031_meal_pattern_catalogue",
@@ -103,6 +108,7 @@ def test_registry_matches_all_approved_definitions(database, bundle):
         "0037_meal_plan_reference_methodology_pins",
         "0038_transformation_applicability",
         "0039_recipe_ingredient_composition_binding",
+        "0040_recipe_version_source_output",
     ]
 
 
@@ -417,6 +423,7 @@ def test_unknown_deployment_profile_aborts_upgrade_without_half_schema(
         "0037_meal_plan_reference_methodology_pins",
         "0038_transformation_applicability",
         "0039_recipe_ingredient_composition_binding",
+        "0040_recipe_version_source_output",
     ]
 
 
@@ -453,9 +460,10 @@ def test_mid_backfill_failure_rolls_back_and_resume_is_deterministic(
         "0037_meal_plan_reference_methodology_pins",
         "0038_transformation_applicability",
         "0039_recipe_ingredient_composition_binding",
+        "0040_recipe_version_source_output",
     ]
     after = snapshot(config)
-    assert all(after[name] == rows for name, rows in before.items())
+    assert_snapshot_preserved(before, after)
     assert len(after["nutrient_values"]) == 806
     assert migrations.apply_migrations(config) == []
     assert snapshot(config) == after
@@ -595,7 +603,7 @@ def test_migration_includes_noncurrent_audited_history(tmp_path):
         before = snapshot(config)
         migrations.apply_migrations(config)
         after = snapshot(config)
-        assert all(after[name] == rows for name, rows in before.items())
+        assert_snapshot_preserved(before, after)
         with SqlAlchemyNutritionReadScope(engine) as read:
             assert read.nutrition_profiles.get_current(food.id) is None
             historical = read.nutrient_vectors.get(profile.id)

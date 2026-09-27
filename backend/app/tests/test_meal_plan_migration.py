@@ -2,7 +2,11 @@ import sqlite3
 from uuid import uuid4
 
 from app.db.config import DatabaseConfig
-from app.db.migrations import MIGRATION_MODULES, apply_migrations, expected_migration_ids
+from app.db.migrations import (
+    MIGRATION_MODULES,
+    apply_migrations,
+    expected_migration_ids,
+)
 
 MIGRATION_ID = "0032_meal_plan_serving"
 PARTIAL_PROFILE_MIGRATION_ID = "0034_partial_nutrition_profiles"
@@ -40,8 +44,8 @@ def test_0032_remains_in_current_chain_and_fresh_migration_is_repeat_safe(tmp_pa
 
     applied = apply_migrations(config)
 
-    assert applied[-1] == "0039_recipe_ingredient_composition_binding"
-    assert expected_migration_ids()[-8:] == [
+    assert applied[-1] == "0040_recipe_version_source_output"
+    assert expected_migration_ids()[-9:] == [
         "0031_meal_pattern_catalogue",
         MIGRATION_ID,
         PARTIAL_PROFILE_MIGRATION_ID,
@@ -50,6 +54,7 @@ def test_0032_remains_in_current_chain_and_fresh_migration_is_repeat_safe(tmp_pa
         REFERENCE_PINS_MIGRATION_ID,
         STEP7_MIGRATION_ID,
         "0039_recipe_ingredient_composition_binding",
+        "0040_recipe_version_source_output",
     ]
     assert apply_migrations(config) == []
     with sqlite3.connect(config.path) as connection:
@@ -104,6 +109,7 @@ def test_populated_0031_upgrade_preserves_existing_rows(tmp_path):
         REFERENCE_PINS_MIGRATION_ID,
         STEP7_MIGRATION_ID,
         "0039_recipe_ingredient_composition_binding",
+        "0040_recipe_version_source_output",
     ]
 
     with sqlite3.connect(config.path) as connection:

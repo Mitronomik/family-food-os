@@ -46,6 +46,7 @@ MIGRATION_MODULES = [
     "app.migrations.versions.0037_meal_plan_reference_methodology_pins",
     "app.migrations.versions.0038_transformation_applicability",
     "app.migrations.versions.0039_recipe_ingredient_composition_binding",
+    "app.migrations.versions.0040_recipe_version_source_output",
 ]
 MIGRATION_TABLE = "schema_migrations"
 

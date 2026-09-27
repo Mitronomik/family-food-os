@@ -4,7 +4,11 @@ from uuid import uuid4
 import pytest
 
 from app.db.config import DatabaseConfig
-from app.db.migrations import MIGRATION_MODULES, apply_migrations, expected_migration_ids
+from app.db.migrations import (
+    MIGRATION_MODULES,
+    apply_migrations,
+    expected_migration_ids,
+)
 from app.seed.food_recipes import seed_food_recipes
 
 PATTERN_TABLES = {
@@ -26,7 +30,9 @@ PLAN_TABLES = {
 
 def _run_with_chain_through(config, suffix, operation):
     original = list(MIGRATION_MODULES)
-    cutoff = next(index for index, module in enumerate(original) if module.endswith(suffix))
+    cutoff = next(
+        index for index, module in enumerate(original) if module.endswith(suffix)
+    )
     try:
         MIGRATION_MODULES[:] = original[: cutoff + 1]
         return operation(config)
@@ -35,7 +41,7 @@ def _run_with_chain_through(config, suffix, operation):
 
 
 def test_migration_chain_keeps_0031_between_0030_and_0032():
-    assert expected_migration_ids()[-9:] == [
+    assert expected_migration_ids()[-10:] == [
         "0030_recipe_source_corpus",
         "0031_meal_pattern_catalogue",
         "0032_meal_plan_serving",
@@ -45,17 +51,26 @@ def test_migration_chain_keeps_0031_between_0030_and_0032():
         "0037_meal_plan_reference_methodology_pins",
         "0038_transformation_applicability",
         "0039_recipe_ingredient_composition_binding",
+        "0040_recipe_version_source_output",
     ]
 
 
-def test_populated_0030_database_upgrades_without_rewriting_existing_food_data(tmp_path):
+def test_populated_0030_database_upgrades_without_rewriting_existing_food_data(
+    tmp_path,
+):
     config = DatabaseConfig(path=tmp_path / "upgrade.sqlite")
     _run_with_chain_through(config, "0030_recipe_source_corpus", seed_food_recipes)
     with sqlite3.connect(config.path) as connection:
         before = {
-            "food_recipes": connection.execute("SELECT COUNT(*) FROM food_recipes").fetchone()[0],
-            "food_recipe_versions": connection.execute("SELECT COUNT(*) FROM food_recipe_versions").fetchone()[0],
-            "food_ingredients": connection.execute("SELECT COUNT(*) FROM food_ingredients").fetchone()[0],
+            "food_recipes": connection.execute(
+                "SELECT COUNT(*) FROM food_recipes"
+            ).fetchone()[0],
+            "food_recipe_versions": connection.execute(
+                "SELECT COUNT(*) FROM food_recipe_versions"
+            ).fetchone()[0],
+            "food_ingredients": connection.execute(
+                "SELECT COUNT(*) FROM food_ingredients"
+            ).fetchone()[0],
         }
 
     assert apply_migrations(config) == [
@@ -67,6 +82,7 @@ def test_populated_0030_database_upgrades_without_rewriting_existing_food_data(t
         "0037_meal_plan_reference_methodology_pins",
         "0038_transformation_applicability",
         "0039_recipe_ingredient_composition_binding",
+        "0040_recipe_version_source_output",
     ]
     assert apply_migrations(config) == []
     with sqlite3.connect(config.path) as connection:
@@ -143,7 +159,10 @@ def test_sqlite_schema_allows_repeated_role_codes_at_distinct_positions(tmp_path
             "INSERT INTO meal_pattern_opportunities (version_id, position, role_code) VALUES (?, ?, ?)",
             [(version_id, 1, "SNACK"), (version_id, 2, "SNACK")],
         )
-        assert connection.execute(
-            "SELECT COUNT(*) FROM meal_pattern_opportunities WHERE version_id=?",
-            (version_id,),
-        ).fetchone()[0] == 2
+        assert (
+            connection.execute(
+                "SELECT COUNT(*) FROM meal_pattern_opportunities WHERE version_id=?",
+                (version_id,),
+            ).fetchone()[0]
+            == 2
+        )
