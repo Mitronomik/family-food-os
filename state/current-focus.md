@@ -4,56 +4,86 @@ Updated: 2026-09-27.
 
 ## Accepted state
 
-PR104 / R1-B runtime is merged into `main` at:
+PR106 / PR104 post-merge integrity correction is merged into `main` at:
 
-`75e2854eff82955b5c01ccacaca35fe0fdc534bc`.
+`cf96e9bb43bb991625a56d7d4c0fa0bad2842b1a`.
 
-Accepted R1-B outcome:
+This accepted state includes:
+
+- the full restored durable `state/progress.md` history;
+- adapter-neutral RecipeVersion historical-schema introspection via SQLAlchemy;
+- explicit R1-B cross-context transaction ownership;
+- unchanged accepted R1-B runtime/data truth from PR104.
+
+R1-B remains:
 
 - migration `0040_recipe_version_source_output`;
-- immutable RecipeVersion source-output truth;
-- one published inactive `SOURCE_VERIFIED` RecipeVersion:
-  `USSR82-697 — Курица отварная`;
+- one published inactive `SOURCE_VERIFIED` USSR82-697 RecipeVersion;
 - exact CHICKEN_CATEGORY_1_RAW + ONION_BULB_FRESH V2 Composition bindings;
 - deterministic input-composition energy 255.892000 kcal;
-- four reviewed candidates remain blocked;
-- no implicit yield/retention/transformation authority;
-- one atomic publication transaction covers RecipeVersion + required bindings +
-  final input-Nutrition validation.
+- four reviewed blocked candidates;
+- no implicit yield/retention/transformation authority.
 
 ## Current bounded operation
 
-**PR104 POST-MERGE INTEGRITY CORRECTION — ACTIVE.**
+**#100 PLANNER ENERGY ALLOCATION IMPLEMENTATION CONTRACT GATE — ACTIVE.**
+
+PR:
+
+`#105`.
 
 Branch:
 
-`fix/pr104-post-merge-integrity`.
+`docs/planner-energy-allocation-contract`.
 
-Goal:
+Canonical gate document:
 
-1. restore the accepted historical `state/progress.md` bytes accidentally removed
-   by PR104 while preserving the legitimate R1-B entries;
-2. replace SQLite-specific RecipeVersion schema introspection with SQLAlchemy
-   reflection without changing persistence semantics;
-3. append an explicit R1-B transaction-ownership clarification to the merged
-   contract.
+`docs/family-food/planner-energy-allocation-contract.md`.
 
-No schema/data/domain calculation change is authorized by this correction.
+## Why this gate is required
 
-## Parallel next-step state
+Current `planner-v0.3` scales recipe Servings using the member's full weekly
+reference energy divided by recipe-backed energy selected for the week.
 
-Issue #100 remains the next product/runtime dependency for R1-C.
+That over-allocates valid partial-at-home patterns such as dinner-only and mixed
+fixed-source days.
 
-PR105 is the docs-only #100 Planner energy-allocation Contract Gate. It must not be
-merged until this post-merge integrity correction is accepted and PR105 is
-synchronized with the corrected `main`.
+Preflight confirmed the current persisted Meal Pattern/selection model stores
+opportunity roles/order but no per-opportunity energy allocation share.
+
+Issue #100 explicitly requires an Implementation Contract Gate if current
+persisted selection/config cannot represent allocation truth. That condition is met.
+
+## Frozen direction under review
+
+The gate proposes:
+
+- `energy_share: Decimal | None` on platform MealPattern opportunities;
+- the resolved/frozen share copied into Household member selections;
+- daily planned share may be below 1, with the residual explicitly outside Planner;
+- missing allocation fails closed;
+- fixed non-recipe events reserve their opportunity share without claiming exact
+  Nutrition;
+- `planner-v0.4` calculates each recipe Serving from
+  `reference_energy × opportunity_share / recipe_kcal`;
+- historical `planner-v0.3` plans remain unchanged;
+- expected migration:
+  `0041_meal_pattern_energy_allocation`.
+
+Exact persisted shares are planning-policy parameters, not medical or physiological
+truth. Platform PROGRAM shares require reviewed evidence/provenance. PROGRAM
+overrides and CUSTOM shares are explicit user-confirmed Household choices. Planner
+must not infer any share from role names or opportunity count.
 
 ## Stop boundary
 
-Do not start or merge:
+This PR is docs/state only.
+
+Do not start:
 
 - migration 0041;
 - Planner v0.4 runtime;
+- MealPattern/selection schema changes;
 - R1-C;
 - Recipe activation/transformation publication;
 - R2/R3 corpus expansion;
@@ -61,4 +91,5 @@ Do not start or merge:
 - Shopping/PR9;
 - Prep/Retail/API/UI/Auth/PostgreSQL/AI.
 
-After this correction is reviewed/merged, synchronize and review PR105.
+After this Contract Gate is reviewed and merged, #100 runtime requires the next
+explicit authorization.
