@@ -71,8 +71,9 @@ The gate proposes:
   `0041_meal_pattern_energy_allocation`.
 
 Exact persisted shares are planning-policy parameters, not medical or physiological
-truth. They require reviewed evidence/provenance and must not be inferred by the
-Planner from role names.
+truth. Platform PROGRAM shares require reviewed evidence/provenance. PROGRAM
+overrides and CUSTOM shares are explicit user-confirmed Household choices. Planner
+must not infer any share from role names or opportunity count.
 
 ## Stop boundary
 
