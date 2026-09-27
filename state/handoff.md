@@ -1,5 +1,30 @@
 # Handoff
 
+## Post-PR96 sequencing correction — 2026-09-26
+
+PR96 is merged into main at:
+`7443f56b856184db6ddb040b9d68425db9f8d41a`.
+
+PR97 is closed as **SUPERSEDED / DO NOT MERGE** and none of its commits are in main.
+
+Correction:
+- old DC1 statuses are historical inventory/planning evidence, not the current project state by themselves;
+- later accepted Steps 4–10 established accepted source-authority decisions and precedents within their bounded scopes, reusable publication mechanics, Russian methodology, transformation applicability infrastructure, RecipeVersion publication precedent, V2 Recipe Nutrition authority, and Planner/MealPlan consumption integration;
+- the durable corpus archive was later recorded at
+  `private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`
+  with SHA-256
+  `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
+- do not create a new per-recipe preflight milestone by default.
+
+Correct continuation:
+`accepted DATA-CORPUS-V1 contract/source foundation → dependency-ready DC2 where required → DC3 only after required dependencies are accepted → DC4 → Gate1-CLOSE → PR9`.
+
+Recipe-specific form/Nutrition/classification/provenance checks remain normal bounded publication work when existing accepted publication paths and authority contracts are sufficient. If a batch requires a new or changed authoritative publication path, immutable authority contract, schema/migration boundary or cross-context rule, stop for the repository-required docs-only Implementation Contract Gate before runtime implementation.
+
+PR98 restores sequencing only; it does not select or start the next production batch.
+
+A dependent DC3 batch must not bypass unresolved required DC2 food/form/Nutrition dependencies. After PR98 merge, select one concrete bounded operation under Issue #67 before implementation begins.
+
 ## PR96 Step 10-B review-ready — 2026-09-26
 
 Accepted base:

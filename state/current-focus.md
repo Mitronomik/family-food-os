@@ -4,76 +4,112 @@ Updated: 2026-09-26.
 
 ## Accepted state
 
-PR95 / Step 10-A is merged into main at:
+PR96 / Step 10-B is merged into `main` at:
 
-`1ef7d1ffd0896873034034b3eb629e62aa474803`
+`7443f56b856184db6ddb040b9d68425db9f8d41a`.
 
-Step 10-A Composition-backed Recipe Nutrition authority is accepted.
+Accepted Step 10 result:
+
+```text
+composition-backed V2 Recipe Nutrition
+→ neutral consumption projection
+→ Planner exact-energy readiness
+→ planner-v0.3
+→ MealPlan / Serving nutrition consumption
+```
+
+The Step 9 School2022 butter Recipe remains inactive.
+
+## Sequencing correction after PR96
+
+PR97 is closed as **SUPERSEDED / DO NOT MERGE**.
+
+Reason:
+PR97 incorrectly treated historical DC1 statuses as if they were still the current
+unresolved project state, without applying later accepted Steps 4–10 decisions.
+
+Do not re-open accepted corpus/source-foundation work merely because old DC1
+artifacts contain historical blocker/status fields.
+
+Accepted durable corpus/source foundation includes the later recorded archive:
+
+`private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`
+
+SHA-256:
+
+`c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`.
 
 ## Current bounded state
 
-**PR96 / Step 10-B — Planner / MealPlan Consumption Integration is review-ready.**
+**PR98 restores programme sequencing only. It does not authorize a specific
+production batch.**
 
-Branch:
+The next action after PR98 is merged is to select and explicitly authorize one
+concrete bounded DATA-CORPUS-V1 operation under Issue #67.
 
-`feat/step10b-planner-mealplan-v2-nutrition`
+No DC2 or DC3 production batch starts merely because PR98 merges.
 
-Verified runtime/test head:
+The broader programme direction remains bounded DC2/DC3 production publication
+using the already accepted corpus/source foundation and the infrastructure
+delivered through Steps 4–10.
 
-`8b38053697845c7c63936a6b462e98331f5bb7e1`
+Recipe-specific validation remains required where relevant:
 
-Semantic/runtime review:
+- exact FoodIngredient/form compatibility;
+- deterministic Nutrition authority;
+- transformation/yield/retention only when actually required;
+- Recipe classification;
+- current Planner compatibility;
+- provenance/rights;
+- activation suitability.
 
-`#5327127307 — READY TO MERGE STEP 10-B`
+Recipe-specific validation belongs in the bounded publication batch when that
+batch uses existing accepted publication paths and authority contracts.
 
-## Implemented behavior
+If a batch requires a new or changed authoritative publication path, immutable
+authority contract, schema/migration boundary or cross-context rule, stop before
+runtime implementation and create the repository-required docs-only
+Implementation Contract Gate.
 
-- Planner consumes Step10-A neutral Recipe Nutrition projection;
-- PlannerCandidate has additive `exact_energy_ready=false`;
-- legacy INCOMPLETE remains rejected by default;
-- exact V2 positive-energy readiness may admit sparse composition-backed authority;
-- Planner algorithm version is exactly `planner-v0.3`;
-- compatibility version remains exactly `meal-role-recipe-v2`;
-- MealPlan/Serving consumes the same neutral Recipe Nutrition read contract;
-- legacy `RecipeVersionNutrition` remains a compatible caller;
-- known values scale through Serving/day/week;
-- unknown carbohydrate remains unknown and keeps legacy status INCOMPLETE;
-- synthetic fully V2-bound compatible fixture proves canonical V2 → PlannerService → MealPlan → Serving/day/week.
+Do **not** introduce a new per-recipe preflight/contract milestone by default when
+existing accepted paths/contracts are sufficient.
 
-## Verification
+## Dependency-driven programme sequence
 
-On runtime/test head `8b38053697845c7c63936a6b462e98331f5bb7e1`:
+```text
+accepted DATA-CORPUS-V1 contract/source foundation
+→ dependency-ready DC2 food/form/Nutrition publication where required
+→ DC3 RecipeVersion publication only after its required dependencies are accepted
+→ DC4 corpus readiness audit + Gate1 consumption
+→ GATE1-CLOSE
+→ PR9 Shopping Engine
+```
 
-- Docs #414 — SUCCESS;
-- DC1 #276 — SUCCESS;
-- Russian nutrition methodologies #163 — SUCCESS;
-- Nutrient Registry V2 #274 — SUCCESS:
-  - focused **391 passed**;
-  - backend shards **1074 / 804 / 776 / 968 passed**;
-  - launcher **643 passed, 2 skipped**;
-- Partial nutrition profiles #207 — SUCCESS:
-  - focused **339 passed**;
-  - backend shards **1074 / 804 / 776 / 968 passed**;
-  - launcher **643 passed, 2 skipped**;
-- `AI_ENABLED=false`;
-- mergeable=true;
-- 0 behind main;
-- unresolved review threads=0;
-- diff audit clean.
+A DC3 batch must not bypass unresolved required DC2 food/form/Nutrition
+dependencies.
+
+Do not combine unrelated DC2 food expansion and DC3 recipe publication in one PR
+merely for convenience.
+
+The DATA-CORPUS-V1 baseline is still incomplete; Issue #67 remains active until
+its corpus exit criteria are satisfied.
+
+PR9 remains NOT STARTED until Gate1-CLOSE.
 
 ## Hard boundaries
 
-- no migration;
-- no production Recipe activation;
-- no Step 9 meal_type change;
-- no MealRole compatibility change;
-- no source-corpus publication;
-- no API/UI/Retail/Auth/PostgreSQL/AI scope.
+No automatic:
 
-## Stop boundary
+- Gate1-CLOSE;
+- PR9 Shopping;
+- Retail;
+- AI authority;
+- Auth/PostgreSQL;
+- generalized Data Ingestion Platform.
 
-PR96 is ready for final review / explicit merge authorization.
+One bounded publication PR = one reviewable production-data goal.
 
-Do not merge autonomously.
+The next batch is a separate bounded scope decision; PR98 does not choose it.
 
-After PR96 merge, stop before any production Recipe activation or next production data publication.
+Selecting the next batch and authorizing its implementation are explicit scope
+decisions; agents must not choose an unspecified production batch autonomously.
