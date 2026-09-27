@@ -284,6 +284,29 @@ def test_existing_generic_identities_are_not_reused_for_exact_new_forms(database
         engine.dispose()
 
 
+@pytest.mark.parametrize("published_prefix", [1, 4, 8])
+def test_exact_partial_prior_batch_fails_without_filling_remainder(
+    database, published_prefix
+):
+    bundles = load_ru_nut_db_r1a_bundles()
+    engine = create_sqlite_engine(database)
+    try:
+        for bundle in bundles[:published_prefix]:
+            single_service(engine).publish(bundle)
+        before = db_dump(database)
+
+        with pytest.raises(
+            NutritionPublicationConflictError,
+            match="Частично опубликованный batch",
+        ):
+            batch_service(engine).publish_batch(bundles)
+
+        assert db_dump(database) == before
+        assert_fk_clean(database)
+    finally:
+        engine.dispose()
+
+
 def test_identity_conflict_rolls_back_entire_batch(database):
     bundles = load_ru_nut_db_r1a_bundles()
     engine = create_sqlite_engine(database)
