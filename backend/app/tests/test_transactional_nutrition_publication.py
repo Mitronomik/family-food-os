@@ -875,7 +875,7 @@ def test_generic_v1_seed_and_decoder_remain_unchanged(tmp_path):
             for value in vector.values
         )
         assert migrations.expected_migration_ids()[-1] == (
-            "0039_recipe_ingredient_composition_binding"
+            "0040_recipe_version_source_output"
         )
     finally:
         engine.dispose()
