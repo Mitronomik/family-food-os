@@ -1,8 +1,8 @@
 # R1-B — reviewed USSR82 RecipeVersion publication
 
-**Status:** bounded runtime publication package  
-**Accepted base:** `fb89cfeb84f4052233f82daa7dcc2d1c07aa971a` (merged PR103)  
-**Contract:** `docs/family-food/r1b-source-output-contract.md`  
+**Status:** bounded runtime publication package
+**Accepted base:** `fb89cfeb84f4052233f82daa7dcc2d1c07aa971a` (merged PR103)
+**Contract:** `docs/family-food/r1b-source-output-contract.md`
 **Parent:** #102 / #99 / #67
 
 ## Outcome
