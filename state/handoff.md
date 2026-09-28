@@ -8,8 +8,11 @@ PR108 merged into main at:
 Reviewed authority result for USSR82-697:
 
 - R1-B source truth remains valid;
-- USSR82 Table 23 corroborates the exact category-I chicken boiling mass path
+- USSR82 Table 23 corroborates the exact source-branch boiling mass path
   107 g net → 28% thermal loss → 3% portioning loss → 75 g finished chicken;
+- Table 23 specifies semi-eviscerated whole category-I chicken, while the current
+  canonical identity does not persist that full form qualifier, so exact Step 7
+  FoodIngredient applicability is not closed;
 - this is mass/process evidence, not V2 nutrient-retention evidence;
 - current repository has no accepted exact ENERGY_KCAL retention authority for
   this exact chicken/process;
