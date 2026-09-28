@@ -46,11 +46,21 @@ Public corroboration references:
 These public pages corroborate the retained source facts. Production publication
 still requires the repository's normal hash-pinned retained-source receipt; a web
 page alone is not the durable authority boundary.
-The Table 23 row is specifically for **category-I semi-eviscerated whole chicken**.
-The current canonical identity is `CHICKEN_CATEGORY_1_RAW / Курица 1 категории,
-сырая`; it does not itself persist the semi-eviscerated/whole form qualifier.
-Therefore the row-to-recipe mass match does not, by itself, prove exact Step 7
-FoodIngredient applicability.
+The source identity review exposes a stronger issue than missing form detail.
+The 1982 collection introduction states that agricultural poultry recipe norms use
+**semi-eviscerated category-II poultry** as the baseline unless otherwise
+specified. Recipe 697 variant III records chicken gross/net as 155/107 g.
+Table 23's 75 g finished-chicken row records:
+- category-I gross mass: 153 g;
+- category-II gross mass: 155 g;
+- net mass: 107 g.
+The recipe therefore aligns with the category-II source row.
+Current R1-A/R1-B binds that 107 g row to
+`CHICKEN_CATEGORY_1_RAW / Курица 1 категории, сырая`, whose FIC source record is
+`Куры 1 кат`.
+**DECISION:** that current binding is not exact enough for activation. Historical
+R1-B publication remains immutable and inactive, but a future active version must
+not reuse the category-I binding as if it were exact source identity.
 ## 5. DECISION — Table 23 can support mass/process review, not Nutrition retention
 The Table 23 row is sufficient evidence to review the exact **source-branch**
 process/mass relation.
@@ -81,6 +91,16 @@ In particular:
   guidance has an effective date after this gate date and is not accepted project
   authority for this publication.
 No generic loss table is promoted by this gate.
+## 6.1. FACT — existing R1-B food mapping is historical, not activation authority
+The retained DC1 relationship row for USSR82-697 identifies the source ingredient
+only as `Курица`, 107 g net. It does not itself claim category I.
+R1-A later selected FIC `Куры 1 кат` and published
+`CHICKEN_CATEGORY_1_RAW`. That accepted dependency publication remains valid as
+a canonical food authority for its own identity, but this review finds that the
+specific USSR82-697 source branch does not support using that category-I identity
+as its exact activation binding.
+This is a source-to-canonical mapping correction, not permission to mutate the
+already published RecipeVersion or FoodIngredient.
 ## 7. FACT — current Recipe Nutrition calculation cannot consume transformed bindings
 Current `RECIPE_COMPOSITION_NUTRITION_V1` calculates RecipeVersion Nutrition from
 required gram RecipeIngredient rows bound to FoodComposition authority.
@@ -139,16 +159,19 @@ Activation remains blocked.
 The next operation must remain inside R1 and close one of these evidence paths:
 ### Option 1 — exact transformed-consumption authority for USSR82-697
 Requires, before runtime:
-1. retained/hash-pinned Table 23 process receipt for the exact selected chicken
-   branch;
-2. reviewed exact FoodIngredient applicability for the Table 23 source form;
-3. reviewed exact nutrient-retention authority sufficient to produce positive
-   exact ENERGY_KCAL under RU_NUTRIENT_REGISTRY_V2;
-4. a docs-only Implementation Contract Gate for the next Recipe Nutrition
+1. retain/hash-pin the collection introduction + Table 23 receipt that establishes
+   the exact category-II source form and mass path;
+2. close the exact category-II FoodIngredient/form identity and its accepted V2
+   Nutrition/ATOMIC authority;
+3. append a corrected immutable RecipeVersion/binding path rather than rewriting
+   the inactive R1-B v1 mapping;
+4. review exact nutrient-retention authority sufficient to produce positive exact
+   ENERGY_KCAL under RU_NUTRIENT_REGISTRY_V2;
+5. create a docs-only Implementation Contract Gate for the next Recipe Nutrition
    calculation version that can consume applicability-aware transformed
    Composition;
-5. fresh/replay/conflict/rollback and historical-preservation rules.
-Only after all five are accepted may activation runtime be proposed.
+6. freeze fresh/replay/conflict/rollback and historical-preservation rules.
+Only after all six are accepted may activation runtime be proposed.
 ### Option 2 — another R1 candidate
 Review another already selected R1 candidate under the same truth standard.
 It may proceed only if its Food/Nutrition/process authority can be closed without
@@ -159,6 +182,8 @@ sequencing.
 Any later calculation-contract gate must preserve:
 - historical `RECIPE_COMPOSITION_NUTRITION_V1` results and bindings;
 - existing Step 10-A immutable binding history;
+- historical inactive R1-B USSR82-697 v1 and its category-I binding as historical
+  evidence only, never rewritten;
 - planner-v0.3 historical replay;
 - planner-v0.4 allocation semantics;
 - RecipeVersion immutable source truth;
