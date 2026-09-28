@@ -1,5 +1,36 @@
 # Handoff
 
+## R1 activation-authority prerequisite — 2026-09-28
+
+PR108 merged into main at:
+`b6973baa2f93ecfaded9c93cb7e5711300f247ee`.
+
+Reviewed authority result for USSR82-697:
+
+- R1-B source truth remains valid;
+- USSR82 Table 23 corroborates the exact category-I chicken boiling mass path
+  107 g net → 28% thermal loss → 3% portioning loss → 75 g finished chicken;
+- this is mass/process evidence, not V2 nutrient-retention evidence;
+- current repository has no accepted exact ENERGY_KCAL retention authority for
+  this exact chicken/process;
+- current RECIPE_COMPOSITION_NUTRITION_V1 rejects transformed Composition
+  bindings;
+- recipe source has no cooked-output nutrient analysis supporting Route B.
+
+Disposition:
+`ROUTE_C / REMAIN_INACTIVE`.
+
+Current branch:
+`docs/r1-activation-authority-prerequisite`.
+
+Contract:
+`docs/family-food/r1-activation-authority-prerequisite.md`.
+
+No activation/runtime/schema/data publication is authorized by this gate.
+Next work remains inside R1: either exact transformed-consumption authority +
+a versioned Recipe Nutrition Contract Gate, or another selected R1 candidate.
+R2 remains blocked until successful R1-C unless sequencing is explicitly changed.
+
 ## R1-C production-proof preflight — 2026-09-28
 
 PR107 / #100 merged into main:
