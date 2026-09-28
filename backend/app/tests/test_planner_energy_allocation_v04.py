@@ -7,6 +7,8 @@ from importlib import import_module
 from uuid import UUID
 
 import pytest
+from sqlalchemy.engine import Connection
+
 
 from app.db import migrations
 from app.db.config import DatabaseConfig
@@ -32,11 +34,20 @@ from app.domain.planner import (
     generate_week,
 )
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
+from app.persistence.sqlalchemy_core.household_uow import SqlAlchemyHouseholdReadScope
 from app.persistence.sqlalchemy_core.meal_pattern_composition import (
     create_meal_pattern_catalogue_service,
 )
 from app.persistence.sqlalchemy_core.meal_pattern_repositories import (
     SqlAlchemyMealPatternVersionRepository,
+)
+from app.persistence.sqlalchemy_core.meal_pattern_uow import (
+    SqlAlchemyMealPatternCatalogueReadScope,
+    SqlAlchemyMealPatternCatalogueUnitOfWork,
+)
+from app.persistence.sqlalchemy_core.meal_plan_uow import (
+    SqlAlchemyMealPlanReadScope,
+    SqlAlchemyMealPlanUnitOfWork,
 )
 from app.seed.meal_patterns import seed_meal_patterns
 from app.seed.planner_energy_allocation_v04 import (
@@ -45,7 +56,10 @@ from app.seed.planner_energy_allocation_v04 import (
     load_planner_energy_allocation_seeds,
     seed_planner_energy_allocation_v04,
 )
+from app.services.meal_pattern_contracts import MealPatternPersistenceConflictError
 from app.services.meal_patterns import MealPatternCatalogueConflictError
+from app.services.meal_plan_contracts import MealPlanPersistenceConflictError
+from app.services.meal_plans import MealPlanService
 
 NOW = datetime(2026, 9, 27, tzinfo=timezone.utc)
 WEEK_START = date(2026, 9, 28)
@@ -108,6 +122,50 @@ def selection(
         for position, (role, share) in enumerate(roles_and_shares, start=1)
     )
     return MemberMealPatternSelectionDetail(selected, opportunities)
+
+
+def seed_household_member(config: DatabaseConfig) -> tuple[UUID, UUID]:
+    household_id = uid(200)
+    member_id = uid(201)
+    with sqlite3.connect(config.path) as db:
+        db.execute("PRAGMA foreign_keys=ON")
+        db.execute(
+            """INSERT INTO households
+            (id, name, timezone, city, default_weekly_budget,
+             default_cooking_profile, created_at, updated_at)
+            VALUES (?, 'Allocation Home', 'Europe/Moscow', NULL, NULL, NULL, ?, ?)""",
+            (household_id.hex, NOW.isoformat(), NOW.isoformat()),
+        )
+        db.execute(
+            """INSERT INTO household_members
+            (id, household_id, name, active, birth_date, sex, height_cm, weight_kg,
+             activity_level, goal, created_at, updated_at)
+            VALUES (?, ?, 'Anna', 1, '1990-05-20', 'female', '168', '62',
+                    'moderate', 'maintain', ?, ?)""",
+            (member_id.hex, household_id.hex, NOW.isoformat(), NOW.isoformat()),
+        )
+        db.commit()
+    return household_id, member_id
+
+
+def meal_plan_service(engine) -> MealPlanService:
+    return MealPlanService(
+        write_scope_factory=lambda: SqlAlchemyMealPlanUnitOfWork(engine),
+        read_scope_factory=lambda: SqlAlchemyMealPlanReadScope(engine),
+        household_read_scope_factory=lambda: SqlAlchemyHouseholdReadScope(engine),
+        pattern_read_scope_factory=lambda: SqlAlchemyMealPatternCatalogueReadScope(
+            engine
+        ),
+        clock=lambda: NOW,
+    )
+
+
+def custom_dinner_schedule() -> dict[int, tuple[MealRole, ...]]:
+    return {weekday: (MealRole.DINNER,) for weekday in range(1, 8)}
+
+
+def custom_dinner_shares() -> dict[int, tuple[Decimal, ...]]:
+    return {weekday: (Decimal("0.25"),) for weekday in range(1, 8)}
 
 
 def candidate(
@@ -268,6 +326,87 @@ def test_0041_upgrade_preserves_history_triggers_and_rolls_back_mid_migration(
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
 
 
+@pytest.mark.parametrize(
+    "invalid",
+    (
+        "",
+        ".",
+        "0",
+        "-0.1",
+        "1.000001",
+        "0.5abc",
+        "1x",
+        "NaN",
+        "Infinity",
+    ),
+)
+def test_energy_share_sql_constraints_reject_malformed_decimal_text(
+    tmp_path, invalid
+):
+    config = DatabaseConfig(path=tmp_path / f"invalid-{abs(hash(invalid))}.sqlite")
+    migrations.apply_migrations(config)
+    program_id = uid(210).hex
+    version_id = uid(211).hex
+    household_id = uid(212).hex
+    member_id = uid(213).hex
+    selection_id = uid(214).hex
+    with sqlite3.connect(config.path) as db:
+        db.execute("PRAGMA foreign_keys=ON")
+        db.execute(
+            "INSERT INTO meal_pattern_programs (id, program_code, created_at) "
+            "VALUES (?, 'STRICT_SHARE_TEST', ?)",
+            (program_id, NOW.isoformat()),
+        )
+        db.execute(
+            """INSERT INTO meal_pattern_program_versions (
+                id, program_id, version_number, lifecycle, scope_code,
+                display_name_ru, explanation_ru, min_age_years, max_age_years,
+                review_status, reviewed_at, published_at, created_from_version_id,
+                change_note, created_at
+            ) VALUES (?, ?, 1, 'DRAFT', 'WELLNESS_SCHEDULE',
+                      'Строгая доля', 'Проверка формата доли.', 19, NULL,
+                      'UNREVIEWED', NULL, NULL, NULL, 'test', ?)""",
+            (version_id, program_id, NOW.isoformat()),
+        )
+        db.execute(
+            """INSERT INTO households
+            (id, name, timezone, city, default_weekly_budget,
+             default_cooking_profile, created_at, updated_at)
+            VALUES (?, 'Strict Home', 'Europe/Moscow', NULL, NULL, NULL, ?, ?)""",
+            (household_id, NOW.isoformat(), NOW.isoformat()),
+        )
+        db.execute(
+            """INSERT INTO household_members
+            (id, household_id, name, active, birth_date, sex, height_cm, weight_kg,
+             activity_level, goal, created_at, updated_at)
+            VALUES (?, ?, 'Anna', 1, '1990-05-20', 'female', '168', '62',
+                    'moderate', 'maintain', ?, ?)""",
+            (member_id, household_id, NOW.isoformat(), NOW.isoformat()),
+        )
+        db.execute(
+            """INSERT INTO member_meal_pattern_selections
+            (id, household_id, member_id, version_number, source_kind,
+             program_version_id, recommender_version, has_user_overrides,
+             accepted_at, supersedes_selection_id, created_at)
+            VALUES (?, ?, ?, 1, 'CUSTOM', NULL, NULL, 0, ?, NULL, ?)""",
+            (selection_id, household_id, member_id, NOW.isoformat(), NOW.isoformat()),
+        )
+        with pytest.raises(sqlite3.IntegrityError):
+            db.execute(
+                "INSERT INTO meal_pattern_opportunities "
+                "(version_id, position, role_code, energy_share) "
+                "VALUES (?, 1, 'DINNER', ?)",
+                (version_id, invalid),
+            )
+        with pytest.raises(sqlite3.IntegrityError):
+            db.execute(
+                "INSERT INTO member_meal_pattern_opportunities "
+                "(selection_id, weekday, position, role_code, energy_share) "
+                "VALUES (?, 1, 1, 'DINNER', ?)",
+                (selection_id, invalid),
+            )
+
+
 def test_reviewed_program_publication_is_bounded_exact_and_zero_write_replay(tmp_path):
     config = DatabaseConfig(path=tmp_path / "programs.sqlite")
     first = seed_planner_energy_allocation_v04(config)
@@ -385,6 +524,36 @@ def test_package_rejects_unexplained_or_inconsistent_residual(tmp_path):
         load_planner_energy_allocation_seeds(changed)
 
 
+def test_package_requires_exact_share_rationale(tmp_path):
+    payload = json.loads(DEFAULT_PACKAGE.read_text(encoding="utf-8"))
+    del payload["programs"][0]["share_rationale_ru"]
+    changed = tmp_path / "missing-share-rationale.json"
+    changed.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+    with pytest.raises(
+        PlannerEnergyAllocationSeedError, match="exact-share review rationale"
+    ):
+        load_planner_energy_allocation_seeds(changed)
+
+
+def test_changed_exact_share_rationale_conflicts_with_published_version(tmp_path):
+    config = DatabaseConfig(path=tmp_path / "rationale-conflict.sqlite")
+    seed_planner_energy_allocation_v04(config)
+    payload = json.loads(DEFAULT_PACKAGE.read_text(encoding="utf-8"))
+    payload["programs"][0]["share_rationale_ru"] += " Изменённое решение."
+    changed = tmp_path / "changed-rationale.json"
+    changed.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+    changed_seeds = load_planner_energy_allocation_seeds(changed)
+
+    engine = create_sqlite_engine(config)
+    try:
+        with pytest.raises(MealPatternCatalogueConflictError):
+            create_meal_pattern_catalogue_service(engine).reconcile_target_versions(
+                changed_seeds
+            )
+    finally:
+        engine.dispose()
+
+
 def test_v04_dinner_only_uses_opportunity_share_and_v03_replay_is_unchanged():
     member_id = uid(2)
     accepted = selection(
@@ -442,6 +611,205 @@ def test_v04_dinner_only_uses_opportunity_share_and_v03_replay_is_unchanged():
     assert legacy_v03.events == v03.events
     assert legacy_v03.trace.request_fingerprint == v03.trace.request_fingerprint
     assert legacy_v03.trace.fingerprint == v03.trace.fingerprint
+
+
+def test_v04_breakfast_and_dinner_allocate_independently():
+    member_id = uid(2)
+    accepted = selection(
+        member_id,
+        (
+            (MealRole.BREAKFAST, Decimal("0.30")),
+            (MealRole.DINNER, Decimal("0.25")),
+        ),
+    )
+    result = generate_week(
+        PlannerRequest(
+            uid(1),
+            WEEK_START,
+            (MemberPlannerConstraints(member_id, accepted, Decimal("2000")),),
+            (
+                candidate(8, MealTypeCode.BREAKFAST, kcal="600"),
+                candidate(10, MealTypeCode.MAIN, kcal="500"),
+            ),
+        ),
+        PlannerConfig(version="planner-v0.4", max_recipe_repetitions=10),
+    )
+    assert isinstance(result, PlannerSuccess)
+    assert len(result.events) == 14
+    assert {
+        (event.role, dict(event.portions)[member_id])
+        for event in result.events
+    } == {
+        (MealRole.BREAKFAST, Decimal("1.000000")),
+        (MealRole.DINNER, Decimal("1.000000")),
+    }
+
+
+def test_v04_three_meals_allocate_from_frozen_shares():
+    member_id = uid(2)
+    accepted = selection(
+        member_id,
+        (
+            (MealRole.BREAKFAST, Decimal("0.30")),
+            (MealRole.LUNCH, Decimal("0.35")),
+            (MealRole.DINNER, Decimal("0.25")),
+        ),
+    )
+    result = generate_week(
+        PlannerRequest(
+            uid(1),
+            WEEK_START,
+            (MemberPlannerConstraints(member_id, accepted, Decimal("2000")),),
+            (
+                candidate(8, MealTypeCode.BREAKFAST, kcal="600"),
+                candidate(9, MealTypeCode.SANDWICH, kcal="700"),
+                candidate(10, MealTypeCode.MAIN, kcal="500"),
+            ),
+        ),
+        PlannerConfig(version="planner-v0.4", max_recipe_repetitions=10),
+    )
+    assert isinstance(result, PlannerSuccess)
+    assert len(result.events) == 21
+    assert {
+        (event.role, dict(event.portions)[member_id])
+        for event in result.events
+    } == {
+        (MealRole.BREAKFAST, Decimal("1.000000")),
+        (MealRole.LUNCH, Decimal("1.000000")),
+        (MealRole.DINNER, Decimal("1.000000")),
+    }
+
+
+def test_v04_duplicate_roles_keep_independent_occurrence_shares():
+    member_id = uid(2)
+    accepted = selection(
+        member_id,
+        (
+            (MealRole.SNACK, Decimal("0.05")),
+            (MealRole.SNACK, Decimal("0.10")),
+        ),
+    )
+    result = generate_week(
+        PlannerRequest(
+            uid(1),
+            WEEK_START,
+            (MemberPlannerConstraints(member_id, accepted, Decimal("2000")),),
+            (candidate(9, MealTypeCode.SANDWICH, kcal="500"),),
+        ),
+        PlannerConfig(version="planner-v0.4", max_recipe_repetitions=20),
+    )
+    assert isinstance(result, PlannerSuccess)
+    monday = [
+        item
+        for item in result.trace.allocations
+        if item.local_date == WEEK_START and item.member_id == member_id
+    ]
+    assert [(item.occurrence, item.energy_share, item.portion_servings) for item in monday] == [
+        (1, Decimal("0.050000"), Decimal("0.200000")),
+        (2, Decimal("0.100000"), Decimal("0.400000")),
+    ]
+
+
+def test_v04_hard_exclusions_dominate_sharedness_and_allocation():
+    first, second = uid(2), uid(3)
+    blocked_for_first = uid(501)
+    blocked_for_second = uid(502)
+    members = (
+        MemberPlannerConstraints(
+            first,
+            selection(first, ((MealRole.DINNER, Decimal("0.25")),)),
+            Decimal("2000"),
+            frozenset({blocked_for_first}),
+        ),
+        MemberPlannerConstraints(
+            second,
+            selection(second, ((MealRole.DINNER, Decimal("0.25")),)),
+            Decimal("2000"),
+            frozenset({blocked_for_second}),
+        ),
+    )
+    result = generate_week(
+        PlannerRequest(
+            uid(1),
+            WEEK_START,
+            members,
+            (
+                candidate(
+                    10,
+                    MealTypeCode.MAIN,
+                    ingredients=frozenset({blocked_for_second}),
+                ),
+                candidate(
+                    11,
+                    MealTypeCode.MAIN,
+                    ingredients=frozenset({blocked_for_first}),
+                ),
+            ),
+        ),
+        PlannerConfig(version="planner-v0.4", max_recipe_repetitions=10),
+    )
+    assert isinstance(result, PlannerSuccess)
+    for event in result.events:
+        for member_id in event.participant_member_ids:
+            if member_id == first:
+                assert event.recipe_version_id != uid(11)
+            if member_id == second:
+                assert event.recipe_version_id != uid(10)
+
+
+def test_v04_heterogeneous_members_support_materially_different_patterns():
+    first, second = uid(2), uid(3)
+    members = (
+        MemberPlannerConstraints(
+            first,
+            selection(
+                first,
+                (
+                    (MealRole.BREAKFAST, Decimal("0.30")),
+                    (MealRole.DINNER, Decimal("0.25")),
+                ),
+            ),
+            Decimal("2000"),
+        ),
+        MemberPlannerConstraints(
+            second,
+            selection(second, ((MealRole.DINNER, Decimal("0.30")),)),
+            Decimal("2500"),
+        ),
+    )
+    result = generate_week(
+        PlannerRequest(
+            uid(1),
+            WEEK_START,
+            members,
+            (
+                candidate(8, MealTypeCode.BREAKFAST, kcal="600"),
+                candidate(10, MealTypeCode.MAIN, kcal="500"),
+            ),
+        ),
+        PlannerConfig(version="planner-v0.4", max_recipe_repetitions=10),
+    )
+    assert isinstance(result, PlannerSuccess)
+    monday = [event for event in result.events if event.local_date == WEEK_START]
+    breakfast = next(event for event in monday if event.role is MealRole.BREAKFAST)
+    dinner = next(event for event in monday if event.role is MealRole.DINNER)
+    assert breakfast.participant_member_ids == (first,)
+    assert dict(breakfast.portions) == {first: Decimal("1.000000")}
+    assert dict(dinner.portions) == {
+        first: Decimal("1.000000"),
+        second: Decimal("1.500000"),
+    }
+
+
+def test_selection_rejects_daily_share_total_above_one():
+    with pytest.raises(Exception, match="sum to no more than one"):
+        selection(
+            uid(2),
+            (
+                (MealRole.BREAKFAST, Decimal("0.60")),
+                (MealRole.DINNER, Decimal("0.50")),
+            ),
+        )
 
 
 def test_v04_mixed_fixed_source_reserves_share_without_crediting_nutrition():
