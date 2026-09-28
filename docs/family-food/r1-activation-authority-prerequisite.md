@@ -90,9 +90,8 @@ In particular:
 - category-level guidance is not automatically exact FoodIngredient applicability;
 - the current repository has no reviewed V2 ENERGY_KCAL retention package for this
   exact chicken/process;
-- the 2026 Rospotrebnadzor methodology that includes generalized energy-loss
-  guidance has an effective date after this gate date and is not accepted project
-  authority for this publication.
+- no external generalized loss table has been accepted into the repository as the
+  immutable authority for this exact publication.
 No generic loss table is promoted by this gate.
 ## 6.1. FACT — existing R1-B food mapping is historical, not activation authority
 The retained DC1 relationship row for USSR82-697 identifies the source ingredient
@@ -117,7 +116,7 @@ Changing that rule would create a new versioned Recipe Nutrition calculation
 contract and requires a separate Implementation Contract Gate.
 ## 8. Route review
 ### Route A — reusable exact FoodTransformation authority
-**Disposition: SOURCE MASS PATH SUPPORTED, CANONICAL AUTHORITY INCOMPLETE.**
+**Disposition: SOURCE MASS PATH SUPPORTED; CURRENT FOOD IDENTITY CONFLICTS.**
 Supported evidence:
 - exact USSR82 source process branch;
 - exact 107 g source chicken input basis;
