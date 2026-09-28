@@ -28,8 +28,9 @@ Contract:
 USSR82-697:
 
 - exact recipe/process branch — supported;
-- exact 107 g chicken input → 75 g cooked output mass relation — corroborated by
-  USSR82 Table 23;
+- source-branch 107 g chicken input → 75 g cooked output mass relation —
+  corroborated by USSR82 Table 23;
+- exact Table 23 source-form → CHICKEN_CATEGORY_1_RAW applicability — not closed;
 - exact V2 nutrient retention / ENERGY_KCAL authority — not accepted;
 - current Recipe Nutrition calculation cannot consume transformed Composition.
 
