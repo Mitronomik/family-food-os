@@ -113,9 +113,13 @@ This is not currently an accepted architecture path and would require its own
 Implementation Contract Gate before runtime/schema changes.
 ### Route C — remain blocked
 If neither route has adequate evidence, USSR82-697 remains inactive and R1-C
-cannot produce a successful R1 week yet. The project then returns to the accepted
-corpus programme to close additional R1/R2 candidates rather than weakening
-truth.
+cannot produce a successful R1 week yet. The project then remains inside the
+currently authorized R1 programme and closes additional **R1 candidates** rather
+than weakening truth.
+
+Moving to R2 before successful R1-C would change the accepted sequencing from
+issue #99 and requires a separate explicit user-approved sequencing decision. This
+prerequisite does not authorize that reorder.
 ## 9. R1-C acceptance after prerequisite closure
 Once ordinary active R1 candidate truth exists, R1-C must prove at least:
 1. PlannerService reads active R1 RecipeVersions from the normal repository path;
