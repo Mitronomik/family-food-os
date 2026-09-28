@@ -31,8 +31,9 @@ automatic yield/retention authority.
 The same 1982 collection contains Table 23,
 “Расчет расхода сырья, выхода полуфабрикатов и готовых изделий из птицы
 сельскохозяйственной”.
-For category-I semi-eviscerated chicken, whole, boiling, the reviewed row matching
-the selected recipe branch records:
+For semi-eviscerated whole chicken, boiling, the reviewed 75 g row records:
+- category-I gross mass: 153 g;
+- category-II gross mass: 155 g;
 - net/semifinished chicken mass: 107 g;
 - thermal loss: 28% of net/semifinished mass;
 - portioning loss after cooking: 3%;
