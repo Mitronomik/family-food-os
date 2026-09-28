@@ -10,9 +10,11 @@ Reviewed authority result for USSR82-697:
 - R1-B source truth remains valid;
 - USSR82 Table 23 corroborates the exact source-branch boiling mass path
   107 g net → 28% thermal loss → 3% portioning loss → 75 g finished chicken;
-- Table 23 specifies semi-eviscerated whole category-I chicken, while the current
-  canonical identity does not persist that full form qualifier, so exact Step 7
-  FoodIngredient applicability is not closed;
+- the collection baseline and Table 23 75 g row align the selected recipe branch
+  with semi-eviscerated category-II chicken (155 g gross / 107 g net);
+- current R1-B binds CHICKEN_CATEGORY_1_RAW / category-I authority, so that
+  source-to-canonical mapping is not exact enough for activation and must remain
+  historical-only for this recipe;
 - this is mass/process evidence, not V2 nutrient-retention evidence;
 - current repository has no accepted exact ENERGY_KCAL retention authority for
   this exact chicken/process;
@@ -30,8 +32,9 @@ Contract:
 `docs/family-food/r1-activation-authority-prerequisite.md`.
 
 No activation/runtime/schema/data publication is authorized by this gate.
-Next work remains inside R1: either exact transformed-consumption authority +
-a versioned Recipe Nutrition Contract Gate, or another selected R1 candidate.
+Next work remains inside R1: either correct the exact category-II FoodIngredient
+authority first and then close transformed-consumption authority + a versioned
+Recipe Nutrition Contract Gate, or review another selected R1 candidate.
 R2 remains blocked until successful R1-C unless sequencing is explicitly changed.
 
 ## R1-C production-proof preflight — 2026-09-28
