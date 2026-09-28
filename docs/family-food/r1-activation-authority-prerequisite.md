@@ -40,6 +40,8 @@ For semi-eviscerated whole chicken, boiling, the reviewed 75 g row records:
 - finished product mass: 75 g.
 The recipe 697 technology explicitly points to Table 23 for portioning loss.
 Public corroboration references:
+- collection introduction:
+  `https://interdoka.ru/kulinaria/1982/vvedenie.html`;
 - recipe 697:
   `https://www.interdoka.ru/kulinaria/1982/11_bluda_ptica/1.html`;
 - Table 23:
