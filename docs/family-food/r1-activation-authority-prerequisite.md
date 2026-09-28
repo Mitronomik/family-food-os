@@ -64,9 +64,11 @@ not reuse the category-I binding as if it were exact source identity.
 ## 5. DECISION — Table 23 can support mass/process review, not Nutrition retention
 The Table 23 row is sufficient evidence to review the exact **source-branch**
 process/mass relation.
-It is not yet sufficient to publish `TransformationApplicability` for
-`CHICKEN_CATEGORY_1_RAW`: exact canonical form applicability still requires a
-reviewed mapping receipt under Step 7.
+It cannot support `TransformationApplicability` for the existing
+`CHICKEN_CATEGORY_1_RAW` binding: the reviewed source branch aligns with
+category-II poultry, while that canonical authority is category I.
+A future activation path must first close the correct category-II canonical
+FoodIngredient/form authority and append corrected immutable recipe/binding truth.
 It also does **not** provide nutrient-specific V2 retention factors.
 It therefore does not by itself authorize exact final:
 - ENERGY_KCAL;
@@ -122,8 +124,8 @@ Supported evidence:
 - exact source mass-loss/output relation to 75 g;
 - explicit portioning loss.
 Missing authority:
-- reviewed exact applicability from the source's semi-eviscerated/whole chicken
-  form to `CHICKEN_CATEGORY_1_RAW`;
+- corrected exact category-II FoodIngredient/form authority for the source branch;
+- corrected immutable RecipeVersion/binding truth using that authority;
 - exact V2 nutrient retention, including ENERGY_KCAL;
 - accepted retained-source publication receipt for the Table 23 numeric process
   package;
