@@ -12,6 +12,7 @@ from sqlalchemy.engine import Connection
 
 from app.db import migrations
 from app.db.config import DatabaseConfig
+from app.domain.errors import DomainValidationError
 from app.domain.food_recipes import MealTypeCode
 from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import (
@@ -433,6 +434,8 @@ def test_reviewed_program_publication_is_bounded_exact_and_zero_write_replay(tmp
         assert three.version.created_from_version_id == service.get_exact(
             "ADULT_REGULAR_3", 1
         ).version.id
+        assert "Exact-share rationale:" in three.version.change_note
+        assert "residual rationale:" in three.version.change_note
     finally:
         engine.dispose()
 
@@ -513,6 +516,183 @@ def test_program_publication_conflict_and_second_program_failure_roll_back(
         seed_planner_energy_allocation_v04(config2)
     assert state["calls"] == 2
     assert db_dump(config2) == before2
+
+
+@pytest.mark.parametrize(
+    "target_table",
+    (
+        "member_meal_pattern_selections",
+        "member_meal_pattern_opportunities",
+    ),
+)
+def test_member_selection_failure_after_persisted_stage_rolls_back_everything(
+    tmp_path, monkeypatch, target_table
+):
+    config = DatabaseConfig(path=tmp_path / f"selection-{target_table}.sqlite")
+    migrations.apply_migrations(config)
+    household_id, member_id = seed_household_member(config)
+    engine = create_sqlite_engine(config)
+    before = db_dump(config)
+    original_execute = Connection.execute
+
+    def injected_execute(self, statement, *args, **kwargs):
+        result = original_execute(self, statement, *args, **kwargs)
+        table = getattr(getattr(statement, "table", None), "name", None)
+        if getattr(statement, "is_insert", False) and table == target_table:
+            raise RuntimeError(f"injected after {target_table} insert")
+        return result
+
+    monkeypatch.setattr(Connection, "execute", injected_execute)
+    try:
+        with pytest.raises(RuntimeError, match="injected after"):
+            meal_plan_service(engine).accept_member_pattern(
+                household_id=household_id,
+                member_id=member_id,
+                source_kind=MemberMealPatternSourceKind.CUSTOM,
+                schedule=custom_dinner_schedule(),
+                energy_shares=custom_dinner_shares(),
+            )
+    finally:
+        engine.dispose()
+
+    assert db_dump(config) == before
+
+
+def test_member_selection_commit_failure_rolls_back_everything(tmp_path, monkeypatch):
+    config = DatabaseConfig(path=tmp_path / "selection-commit.sqlite")
+    migrations.apply_migrations(config)
+    household_id, member_id = seed_household_member(config)
+    engine = create_sqlite_engine(config)
+    before = db_dump(config)
+
+    def fail_commit(self):
+        raise RuntimeError("injected selection commit failure")
+
+    monkeypatch.setattr(SqlAlchemyMealPlanUnitOfWork, "commit", fail_commit)
+    try:
+        with pytest.raises(RuntimeError, match="selection commit failure"):
+            meal_plan_service(engine).accept_member_pattern(
+                household_id=household_id,
+                member_id=member_id,
+                source_kind=MemberMealPatternSourceKind.CUSTOM,
+                schedule=custom_dinner_schedule(),
+                energy_shares=custom_dinner_shares(),
+            )
+    finally:
+        engine.dispose()
+
+    assert db_dump(config) == before
+
+
+def test_stale_selection_revision_conflict_preserves_current_history(tmp_path):
+    config = DatabaseConfig(path=tmp_path / "selection-conflict.sqlite")
+    migrations.apply_migrations(config)
+    household_id, member_id = seed_household_member(config)
+    engine = create_sqlite_engine(config)
+    try:
+        service = meal_plan_service(engine)
+        first = service.accept_member_pattern(
+            household_id=household_id,
+            member_id=member_id,
+            source_kind=MemberMealPatternSourceKind.CUSTOM,
+            schedule=custom_dinner_schedule(),
+            energy_shares=custom_dinner_shares(),
+        )
+
+        def revision(selection_id: UUID) -> MemberMealPatternSelectionDetail:
+            selected = MemberMealPatternSelection(
+                id=selection_id,
+                household_id=household_id,
+                member_id=member_id,
+                version_number=2,
+                source_kind=MemberMealPatternSourceKind.CUSTOM,
+                program_version_id=None,
+                recommender_version=None,
+                has_user_overrides=False,
+                accepted_at=NOW,
+                supersedes_selection_id=first.selection.id,
+                created_at=NOW,
+            )
+            opportunities = tuple(
+                MemberMealPatternOpportunitySnapshot(
+                    selection_id,
+                    weekday,
+                    1,
+                    MealRole.DINNER,
+                    Decimal("0.25"),
+                )
+                for weekday in range(1, 8)
+            )
+            return MemberMealPatternSelectionDetail(selected, opportunities)
+
+        accepted = revision(uid(220))
+        stale = revision(uid(221))
+        with SqlAlchemyMealPlanUnitOfWork(engine) as scope:
+            scope.selections.add_detail(accepted)
+            scope.commit()
+
+        with pytest.raises(MealPlanPersistenceConflictError):
+            with SqlAlchemyMealPlanUnitOfWork(engine) as scope:
+                scope.selections.add_detail(stale)
+                scope.commit()
+
+        history = service.get_member_pattern_history(household_id, member_id)
+        assert tuple(item.id for item in history) == (
+            first.selection.id,
+            accepted.selection.id,
+        )
+    finally:
+        engine.dispose()
+
+
+@pytest.mark.parametrize(
+    "target_table",
+    (
+        "meal_pattern_program_versions",
+        "meal_pattern_opportunities",
+    ),
+)
+def test_program_publication_failure_after_persisted_stage_rolls_back_everything(
+    tmp_path, monkeypatch, target_table
+):
+    config = DatabaseConfig(path=tmp_path / f"program-{target_table}.sqlite")
+    migrations.apply_migrations(config)
+    seed_meal_patterns(config)
+    before = db_dump(config)
+    original_execute = Connection.execute
+
+    def injected_execute(self, statement, *args, **kwargs):
+        result = original_execute(self, statement, *args, **kwargs)
+        table = getattr(getattr(statement, "table", None), "name", None)
+        if getattr(statement, "is_insert", False) and table == target_table:
+            raise RuntimeError(f"injected after {target_table} insert")
+        return result
+
+    monkeypatch.setattr(Connection, "execute", injected_execute)
+    with pytest.raises(RuntimeError, match="injected after"):
+        seed_planner_energy_allocation_v04(config)
+
+    assert db_dump(config) == before
+
+
+def test_program_publication_commit_failure_rolls_back_everything(
+    tmp_path, monkeypatch
+):
+    config = DatabaseConfig(path=tmp_path / "program-commit.sqlite")
+    migrations.apply_migrations(config)
+    seed_meal_patterns(config)
+    before = db_dump(config)
+
+    def fail_commit(self):
+        raise RuntimeError("injected program commit failure")
+
+    monkeypatch.setattr(
+        SqlAlchemyMealPatternCatalogueUnitOfWork, "commit", fail_commit
+    )
+    with pytest.raises(RuntimeError, match="program commit failure"):
+        seed_planner_energy_allocation_v04(config)
+
+    assert db_dump(config) == before
 
 
 def test_package_rejects_unexplained_or_inconsistent_residual(tmp_path):
@@ -802,7 +982,7 @@ def test_v04_heterogeneous_members_support_materially_different_patterns():
 
 
 def test_selection_rejects_daily_share_total_above_one():
-    with pytest.raises(Exception, match="sum to no more than one"):
+    with pytest.raises(DomainValidationError, match="sum to no more than one"):
         selection(
             uid(2),
             (
