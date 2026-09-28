@@ -203,4 +203,3 @@ class SqlAlchemyMealPlanReadScope:
             self._selections = None
             self._plans = None
             self._reference_methodologies = None
-
