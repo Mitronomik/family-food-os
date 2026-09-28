@@ -30,7 +30,10 @@ USSR82-697:
 - exact recipe/process branch — supported;
 - source-branch 107 g chicken input → 75 g cooked output mass relation —
   corroborated by USSR82 Table 23;
-- exact Table 23 source-form → CHICKEN_CATEGORY_1_RAW applicability — not closed;
+- source baseline/Table 23 align the selected branch with semi-eviscerated
+  category-II chicken;
+- current CHICKEN_CATEGORY_1_RAW category-I binding conflicts with that source
+  identity and is historical-only for this recipe;
 - exact V2 nutrient retention / ENERGY_KCAL authority — not accepted;
 - current Recipe Nutrition calculation cannot consume transformed Composition.
 
@@ -46,8 +49,9 @@ Remain inside R1.
 
 Either:
 
-1. close exact transformed-consumption authority for USSR82-697 and create the
-   required versioned Recipe Nutrition Implementation Contract Gate; or
+1. first correct the exact category-II source-to-FoodIngredient authority for
+   USSR82-697, then close transformed-consumption authority and the required
+   versioned Recipe Nutrition Implementation Contract Gate; or
 2. review another already selected R1 candidate under the same authority rules.
 
 R2 is not authorized before successful R1-C without a separate sequencing
