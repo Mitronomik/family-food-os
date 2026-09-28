@@ -81,6 +81,11 @@ def load_planner_energy_allocation_seeds(
             raise PlannerEnergyAllocationSeedError(
                 f"{code} residual rationale is required."
             )
+        share_rationale = row.get("share_rationale_ru")
+        if not isinstance(share_rationale, str) or not share_rationale.strip():
+            raise PlannerEnergyAllocationSeedError(
+                f"{code} exact-share review rationale is required."
+            )
         evidence = []
         for evidence_code in row["evidence_codes"]:
             source = evidence_by_code.get(evidence_code)
@@ -138,8 +143,9 @@ def load_planner_energy_allocation_seeds(
                     published_at=datetime.fromisoformat(row["published_at"]),
                     change_note=(
                         f"{row['change_note']} "
+                        f"Exact-share rationale: {share_rationale.strip()} "
                         f"Residual allocation: {row['residual_share']}; "
-                        f"review rationale: {rationale}"
+                        f"residual rationale: {rationale.strip()}"
                     ),
                     opportunity_roles=roles,
                     tags=tags,
