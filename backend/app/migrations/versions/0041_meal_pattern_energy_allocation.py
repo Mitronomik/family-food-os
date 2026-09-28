@@ -18,8 +18,13 @@ def upgrade(connection):
             CHECK (
                 energy_share IS NULL
                 OR (
-                    CAST(energy_share AS NUMERIC) > 0
-                    AND CAST(energy_share AS NUMERIC) <= 1
+                    typeof(energy_share) = 'text'
+                AND length(energy_share) BETWEEN 1 AND 64
+                AND energy_share NOT GLOB '*[^0-9.]*'
+                AND energy_share GLOB '*[0-9]*'
+                AND length(energy_share) - length(replace(energy_share, '.', '')) <= 1
+                AND CAST(energy_share AS NUMERIC) > 0
+                AND CAST(energy_share AS NUMERIC) <= 1
                 )
             )
         """
@@ -31,8 +36,13 @@ def upgrade(connection):
             CHECK (
                 energy_share IS NULL
                 OR (
-                    CAST(energy_share AS NUMERIC) > 0
-                    AND CAST(energy_share AS NUMERIC) <= 1
+                    typeof(energy_share) = 'text'
+                AND length(energy_share) BETWEEN 1 AND 64
+                AND energy_share NOT GLOB '*[^0-9.]*'
+                AND energy_share GLOB '*[0-9]*'
+                AND length(energy_share) - length(replace(energy_share, '.', '')) <= 1
+                AND CAST(energy_share AS NUMERIC) > 0
+                AND CAST(energy_share AS NUMERIC) <= 1
                 )
             )
         """
