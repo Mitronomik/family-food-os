@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "operation": "PLANNER_ENERGY_ALLOCATION_V04_PROGRAMS",
+  "accepted_base": "690a17a8c220e7e8f8e93bd63ba46356c73f0503",
+  "reviewed_on": "2026-09-27",
+  "sources": [
+    {
+      "code": "ROSPOTREBNADZOR_HEALTHY_RATION",
+      "source_name": "ФБУЗ «Центр гигиенического образования населения» Роспотребнадзора",
+      "source_title": "Как составить здоровый рацион",
+      "source_url": "https://cgon.rospotrebnadzor.ru/upload/docs/Тема_3_Как_составить_здоровый_рацион.pdf",
+      "source_version": "reviewed 2026-09-27",
+      "retrieved_on": "2026-09-27",
+      "evidence_scope": "ENERGY_DISTRIBUTION_POLICY",
+      "review_note_ru": "Источник задаёт диапазоны распределения энергии между ролями приёмов пищи; FamilyFoodOS использует их как границы review, а не как автоматическую формулу."
+    },
+    {
+      "code": "ROSPOTREBNADZOR_HEALTHY_EATING_BULLETIN",
+      "source_name": "ФБУЗ «Центр гигиенического образования населения» Роспотребнадзора",
+      "source_title": "Курс на здоровое питание",
+      "source_url": "https://cgon.rospotrebnadzor.ru/upload/pdf/pechatnaya_produktsiya/byulleten_a2.pdf",
+      "source_version": "reviewed 2026-09-27",
+      "retrieved_on": "2026-09-27",
+      "evidence_scope": "ENERGY_DISTRIBUTION_POLICY",
+      "review_note_ru": "Источник подтверждает диапазоны для завтрака, обеда, ужина и перекусов; точные доли ниже являются версионированной planning policy FamilyFoodOS."
+    },
+    {
+      "code": "USDA_NESR_DGAC2025_SR09",
+      "source_name": "USDA Nutrition Evidence Systematic Review",
+      "source_title": "Frequency of Meals and/or Snacking and Consuming a Dietary Pattern Aligned with the Dietary Guidelines for Americans: A Systematic Review",
+      "source_url": "https://nesr.usda.gov/2025-dietary-guidelines-advisory-committee-systematic-reviews/frequency-meals-snacks_diet-quality",
+      "source_version": "November 2024; DOI 10.52570/NESR.DGAC2025.SR09",
+      "retrieved_on": "2026-09-17",
+      "evidence_scope": "FREQUENCY_OUTCOME_UNCERTAINTY",
+      "review_note_ru": "Систематический обзор не позволяет сделать общий вывод, что определённая частота приёмов пищи лучше соответствует рекомендациям по качеству рациона; это ограничивает продуктовые заявления о превосходстве режима."
+    },
+    {
+      "code": "USDA_NESR_DGAC2025_SR10",
+      "source_name": "USDA Nutrition Evidence Systematic Review",
+      "source_title": "Frequency of Meals and/or Snacking and Energy Intake: A Systematic Review",
+      "source_url": "https://nesr.usda.gov/2025-dietary-guidelines-advisory-committee-systematic-reviews/frequency-meals-snacks_energy-intake",
+      "source_version": "November 2024; DOI 10.52570/NESR.DGAC2025.SR10",
+      "retrieved_on": "2026-09-17",
+      "evidence_scope": "FREQUENCY_OUTCOME_UNCERTAINTY",
+      "review_note_ru": "Систематический обзор не позволяет сделать общий вывод о влиянии числа приёмов пищи или перекусов на энергетическое потребление; каталог использует частоту как планировочный режим, а не как обещание эффекта."
+    }
+  ],
+  "programs": [
+    {
+      "code": "ADULT_REGULAR_3",
+      "target_version_number": 2,
+      "expected_previous_version_number": 1,
+      "shares": [
+        "0.30",
+        "0.35",
+        "0.25"
+      ],
+      "residual_share": "0.10",
+      "residual_rationale_ru": "Оставшиеся 10% явно находятся вне Planner scope и допускают непланируемый перекус без переноса энергии в три основных приёма пищи.",
+      "change_note": "Add reviewed Planner v0.4 energy allocation policy.",
+      "evidence_codes": [
+        "ROSPOTREBNADZOR_HEALTHY_RATION",
+        "ROSPOTREBNADZOR_HEALTHY_EATING_BULLETIN",
+        "USDA_NESR_DGAC2025_SR09",
+        "USDA_NESR_DGAC2025_SR10"
+      ],
+      "lifecycle": "PUBLISHED",
+      "scope": "WELLNESS_SCHEDULE",
+      "display_name_ru": "Три основных приёма пищи",
+      "explanation_ru": "Нейтральный режим для планирования завтрака, обеда и ужина. FamilyFoodOS не утверждает, что три приёма пищи полезнее другой подходящей частоты.",
+      "min_age_years": 19,
+      "max_age_years": null,
+      "review_status": "REVIEWED",
+      "reviewed_at": "2026-09-27T00:00:00+00:00",
+      "published_at": "2026-09-27T00:00:00+00:00",
+      "roles": [
+        "BREAKFAST",
+        "LUNCH",
+        "DINNER"
+      ],
+      "tags": [
+        [
+          "CONTEXT",
+          "GENERAL_WELLNESS_SCHEDULE"
+        ]
+      ],
+      "share_rationale_ru": "Для обеих программ используется единая детерминированная planning policy: завтрак 30%, обед 35%, ужин 25%; эти значения находятся внутри совместимых диапазонов двух reviewed источников. Оставшиеся 10% либо закрепляются за одним перекусом, либо остаются явным residual вне Planner. Выбор сделан для согласованности версий программ и воспроизводимого планирования, а не как утверждение физиологического оптимума."
+    },
+    {
+      "code": "ADULT_REGULAR_3_PLUS_SNACK",
+      "target_version_number": 2,
+      "expected_previous_version_number": 1,
+      "shares": [
+        "0.30",
+        "0.35",
+        "0.10",
+        "0.25"
+      ],
+      "residual_share": "0.00",
+      "residual_rationale_ru": "Четыре запланированных приёма пищи покрывают полную planning allocation; это policy, а не медицинское утверждение.",
+      "change_note": "Add reviewed Planner v0.4 energy allocation policy.",
+      "evidence_codes": [
+        "ROSPOTREBNADZOR_HEALTHY_RATION",
+        "ROSPOTREBNADZOR_HEALTHY_EATING_BULLETIN",
+        "USDA_NESR_DGAC2025_SR09",
+        "USDA_NESR_DGAC2025_SR10"
+      ],
+      "lifecycle": "PUBLISHED",
+      "scope": "WELLNESS_SCHEDULE",
+      "display_name_ru": "Три приёма пищи и перекус",
+      "explanation_ru": "Нейтральный режим для планирования трёх основных приёмов пищи и одного перекуса. FamilyFoodOS не приписывает дополнительному перекусу универсальное преимущество для здоровья или контроля энергии.",
+      "min_age_years": 19,
+      "max_age_years": null,
+      "review_status": "REVIEWED",
+      "reviewed_at": "2026-09-27T00:00:00+00:00",
+      "published_at": "2026-09-27T00:00:00+00:00",
+      "roles": [
+        "BREAKFAST",
+        "LUNCH",
+        "SNACK",
+        "DINNER"
+      ],
+      "tags": [
+        [
+          "CONTEXT",
+          "GENERAL_WELLNESS_SCHEDULE"
+        ]
+      ],
+      "share_rationale_ru": "Для обеих программ используется единая детерминированная planning policy: завтрак 30%, обед 35%, ужин 25%; эти значения находятся внутри совместимых диапазонов двух reviewed источников. Оставшиеся 10% либо закрепляются за одним перекусом, либо остаются явным residual вне Planner. Выбор сделан для согласованности версий программ и воспроизводимого планирования, а не как утверждение физиологического оптимума."
+    }
+  ]
+}

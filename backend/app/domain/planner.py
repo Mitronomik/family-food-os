@@ -14,7 +14,11 @@ from uuid import UUID
 
 from app.domain.food_recipes import MealTypeCode
 from app.domain.meal_patterns import MealRole
-from app.domain.meal_plans import MealSourceKind, MemberMealPatternSelectionDetail
+from app.domain.meal_plans import (
+    MealSourceKind,
+    MemberMealPatternSelectionDetail,
+    MemberMealPatternSourceKind,
+)
 from app.domain.nutrition import NutritionStatus
 
 _VERSION = re.compile(r"^[a-z0-9][a-z0-9._-]{0,119}$")
@@ -35,6 +39,7 @@ class PlannerFailureCode(StrEnum):
     MISSING_REFERENCE_ENERGY = "MISSING_REFERENCE_ENERGY"
     NO_ELIGIBLE_CANDIDATE = "NO_ELIGIBLE_CANDIDATE"
     INVALID_FIXED_EVENT = "INVALID_FIXED_EVENT"
+    MISSING_ENERGY_ALLOCATION = "MISSING_ENERGY_ALLOCATION"
 
 
 @dataclass(frozen=True)
@@ -54,6 +59,8 @@ class PlannerConfig:
             match = _VERSION.match(value) if isinstance(value, str) else None
             if match is None or match.end() != len(value):
                 raise ValueError(f"{name} must be a non-empty version-safe identifier")
+        if self.version not in {"planner-v0.3", "planner-v0.4"}:
+            raise ValueError("Unsupported Planner algorithm version")
         for name in (
             "preference_weight",
             "pantry_weight",
@@ -158,6 +165,21 @@ class CandidateTrace:
 
 
 @dataclass(frozen=True)
+class AllocationTrace:
+    local_date: date
+    role: MealRole
+    occurrence: int
+    member_id: UUID
+    selection_id: UUID
+    energy_share: Decimal
+    allocated_kcal: Decimal
+    source_kind: MealSourceKind
+    recipe_version_id: UUID | None
+    recipe_kcal_per_base_serving: Decimal | None
+    portion_servings: Decimal | None
+
+
+@dataclass(frozen=True)
 class TraceEvent:
     local_date: date
     position: int
@@ -189,6 +211,9 @@ class PlannerTrace:
     failure_reason: str | None
     fingerprint: str
     duration_ms: Decimal = Decimal("0")
+    allocations: tuple[AllocationTrace, ...] = ()
+    member_daily_residual_shares: tuple[tuple[UUID, date, Decimal], ...] = ()
+    allocation_sources: tuple[tuple[UUID, str], ...] = ()
 
 
 @dataclass(frozen=True)
@@ -228,6 +253,80 @@ def _fingerprint(value: object) -> str:
     return hashlib.sha256(_canonical(value).encode()).hexdigest()
 
 
+def _strip_v04_fields(value: object) -> object:
+    if isinstance(value, dict):
+        return {
+            key: _strip_v04_fields(item)
+            for key, item in value.items()
+            if key != "energy_share"
+        }
+    if isinstance(value, list):
+        return [_strip_v04_fields(item) for item in value]
+    if isinstance(value, tuple):
+        return tuple(_strip_v04_fields(item) for item in value)
+    return value
+
+
+def _allocation_source(member: MemberPlannerConstraints) -> str:
+    selection = member.selection.selection
+    if selection.source_kind is MemberMealPatternSourceKind.PROGRAM:
+        if selection.has_user_overrides:
+            return (
+                "USER_CONFIRMED_PROGRAM_OVERRIDE:"
+                f"{selection.id}:{selection.version_number}"
+            )
+        return f"PROGRAM_VERSION:{selection.program_version_id}"
+    return f"USER_CONFIRMED_CUSTOM:{selection.id}:{selection.version_number}"
+
+
+def _v04_allocation(
+    request: PlannerRequest,
+) -> tuple[
+    dict[tuple[UUID, date, MealRole, int], Decimal],
+    tuple[tuple[UUID, date, Decimal], ...],
+    tuple[tuple[UUID, str], ...],
+] | None:
+    shares: dict[tuple[UUID, date, MealRole, int], Decimal] = {}
+    residuals: list[tuple[UUID, date, Decimal]] = []
+    sources: list[tuple[UUID, str]] = []
+    for member in sorted(request.members, key=lambda item: item.member_id.hex):
+        sources.append((member.member_id, _allocation_source(member)))
+        for offset in range(7):
+            local_date = request.week_start + timedelta(days=offset)
+            opportunities = member.selection.opportunities_for_weekday(offset + 1)
+            if not opportunities or any(
+                item.energy_share is None for item in opportunities
+            ):
+                return None
+            total = sum(
+                (
+                    item.energy_share
+                    for item in opportunities
+                    if item.energy_share is not None
+                ),
+                Decimal(0),
+            )
+            if total <= 0 or total > 1:
+                return None
+            residuals.append(
+                (
+                    member.member_id,
+                    local_date,
+                    (Decimal(1) - total).quantize(
+                        Decimal("0.000001"), rounding=ROUND_HALF_UP
+                    ),
+                )
+            )
+            seen: Counter[MealRole] = Counter()
+            for item in opportunities:
+                seen[item.role] += 1
+                assert item.energy_share is not None
+                shares[
+                    (member.member_id, local_date, item.role, seen[item.role])
+                ] = item.energy_share
+    return shares, tuple(residuals), tuple(sources)
+
+
 def _trace(
     request: PlannerRequest,
     config: PlannerConfig,
@@ -235,6 +334,9 @@ def _trace(
     warnings: tuple[str, ...],
     events: tuple[PlannedEvent, ...] = (),
     failure: tuple[PlannerFailureCode, str] | None = None,
+    allocations: tuple[AllocationTrace, ...] = (),
+    residuals: tuple[tuple[UUID, date, Decimal], ...] = (),
+    allocation_sources: tuple[tuple[UUID, str], ...] = (),
 ) -> PlannerTrace:
     selections = tuple(
         sorted(
@@ -273,7 +375,10 @@ def _trace(
     selected = tuple(
         e.recipe_version_id for e in final if e.recipe_version_id is not None
     )
-    request_hash = _fingerprint(asdict(request))
+    request_payload = asdict(request)
+    if config.version == "planner-v0.3":
+        request_payload = _strip_v04_fields(request_payload)
+    request_hash = _fingerprint(request_payload)
     code, reason = failure if failure else (None, None)
     deterministic = (
         request.household_id,
@@ -299,30 +404,40 @@ def _trace(
         code,
         reason,
     )
+    if config.version != "planner-v0.3":
+        deterministic = (
+            *deterministic,
+            tuple(asdict(item) for item in allocations),
+            residuals,
+            allocation_sources,
+        )
     return PlannerTrace(
-        request.household_id,
-        request.week_start,
-        selections,
-        config.version,
-        config.compatibility_version,
-        request.recent_plan_ids,
-        tuple(
+        household_id=request.household_id,
+        week_start=request.week_start,
+        member_selection_ids=selections,
+        config_version=config.version,
+        compatibility_version=config.compatibility_version,
+        recent_plan_ids=request.recent_plan_ids,
+        recent_recipe_usage=tuple(
             sorted(
                 Counter(request.recent_recipe_version_ids).items(),
                 key=lambda x: x[0].hex,
             )
         ),
-        exclusions,
-        pool,
-        request_hash,
-        tuple(candidates),
-        warnings,
-        selected,
-        final,
-        fixed,
-        code,
-        reason,
-        _fingerprint(deterministic),
+        applied_exclusions=exclusions,
+        candidate_pool_ids=pool,
+        request_fingerprint=request_hash,
+        candidates=tuple(candidates),
+        warnings=warnings,
+        selected_recipe_version_ids=selected,
+        final_events=final,
+        fixed_events=fixed,
+        failure_code=code,
+        failure_reason=reason,
+        fingerprint=_fingerprint(deterministic),
+        allocations=allocations,
+        member_daily_residual_shares=residuals,
+        allocation_sources=allocation_sources,
     )
 
 
@@ -380,6 +495,20 @@ def generate_week(
             "Weekly normalization requires reference energy for every member",
         )
 
+    allocation_shares: dict[tuple[UUID, date, MealRole, int], Decimal] = {}
+    allocation_residuals: tuple[tuple[UUID, date, Decimal], ...] = ()
+    allocation_sources: tuple[tuple[UUID, str], ...] = ()
+    if config.version == "planner-v0.4":
+        allocation = _v04_allocation(request)
+        if allocation is None:
+            return _failure(
+                request,
+                config,
+                PlannerFailureCode.MISSING_ENERGY_ALLOCATION,
+                "Accepted meal-pattern allocation is missing or invalid",
+            )
+        allocation_shares, allocation_residuals, allocation_sources = allocation
+
     members = {m.member_id: m for m in request.members}
     slots: dict[tuple[date, MealRole, int], set[UUID]] = defaultdict(set)
     slot_order: dict[tuple[date, MealRole, int], int] = {}
@@ -422,6 +551,7 @@ def generate_week(
         tuple[
             date,
             MealRole,
+            int,
             tuple[UUID, ...],
             PlannerCandidate | None,
             FixedPlannerEvent | None,
@@ -436,7 +566,9 @@ def generate_week(
             participants = tuple(
                 sorted(fixed_event.participant_member_ids, key=lambda x: x.hex)
             )
-            provisional.append((local_date, role, participants, None, fixed_event))
+            provisional.append(
+                (local_date, role, occurrence, participants, None, fixed_event)
+            )
             remaining -= fixed_event.participant_member_ids
         while remaining:
             choices: list[
@@ -573,33 +705,90 @@ def generate_week(
                         item, participant_member_ids=group, selected=True
                     )
                     break
-            provisional.append((local_date, role, group, selected, None))
+            provisional.append(
+                (local_date, role, occurrence, group, selected, None)
+            )
             remaining -= set(group)
 
-    base_kcal: dict[UUID, Decimal] = defaultdict(lambda: Decimal(0))
-    for _, _, participants, candidate, _ in provisional:
-        if candidate:
-            for member_id in participants:
-                base_kcal[member_id] += candidate.kcal_per_serving or Decimal(0)
-    if any(base_kcal[mid] <= 0 for mid in members):
-        return _failure(
-            request,
-            config,
-            PlannerFailureCode.MISSING_REFERENCE_ENERGY,
-            "Recipe-backed energy is required for weekly normalization",
-            traces,
-        )
-    factors = {
-        mid: (
-            (members[mid].reference_energy_kcal or Decimal(0)) * 7 / base_kcal[mid]
-        ).quantize(Decimal("0.000001"), rounding=ROUND_HALF_UP)
-        for mid in members
-    }
+    factors: dict[UUID, Decimal] = {}
+    if config.version == "planner-v0.3":
+        base_kcal: dict[UUID, Decimal] = defaultdict(lambda: Decimal(0))
+        for _, _, _, participants, candidate, _ in provisional:
+            if candidate:
+                for member_id in participants:
+                    base_kcal[member_id] += candidate.kcal_per_serving or Decimal(0)
+        if any(base_kcal[mid] <= 0 for mid in members):
+            return _failure(
+                request,
+                config,
+                PlannerFailureCode.MISSING_REFERENCE_ENERGY,
+                "Recipe-backed energy is required for weekly normalization",
+                traces,
+            )
+        factors = {
+            mid: (
+                (members[mid].reference_energy_kcal or Decimal(0))
+                * 7
+                / base_kcal[mid]
+            ).quantize(Decimal("0.000001"), rounding=ROUND_HALF_UP)
+            for mid in members
+        }
+
     positions: Counter[date] = Counter()
     events: list[PlannedEvent] = []
-    for local_date, role, participants, candidate, fixed_event in provisional:
+    allocation_traces: list[AllocationTrace] = []
+    for (
+        local_date,
+        role,
+        occurrence,
+        participants,
+        candidate,
+        fixed_event,
+    ) in provisional:
         positions[local_date] += 1
         if candidate:
+            if config.version == "planner-v0.4":
+                portions = []
+                for member_id in participants:
+                    share = allocation_shares[
+                        (member_id, local_date, role, occurrence)
+                    ]
+                    reference = members[member_id].reference_energy_kcal
+                    assert reference is not None
+                    allocated = (reference * share).quantize(
+                        Decimal("0.000001"), rounding=ROUND_HALF_UP
+                    )
+                    assert candidate.kcal_per_serving is not None
+                    portion = (allocated / candidate.kcal_per_serving).quantize(
+                        Decimal("0.000001"), rounding=ROUND_HALF_UP
+                    )
+                    if portion <= 0:
+                        return _failure(
+                            request,
+                            config,
+                            PlannerFailureCode.MISSING_ENERGY_ALLOCATION,
+                            "Calculated portion is below supported precision",
+                            traces,
+                        )
+                    portions.append((member_id, portion))
+                    allocation_traces.append(
+                        AllocationTrace(
+                            local_date,
+                            role,
+                            occurrence,
+                            member_id,
+                            members[member_id].selection.selection.id,
+                            share,
+                            allocated,
+                            MealSourceKind.COOK_RECIPE,
+                            candidate.recipe_version_id,
+                            candidate.kcal_per_serving,
+                            portion,
+                        )
+                    )
+                event_portions = tuple(portions)
+            else:
+                event_portions = tuple((mid, factors[mid]) for mid in participants)
             events.append(
                 PlannedEvent(
                     local_date,
@@ -609,7 +798,7 @@ def generate_week(
                     MealSourceKind.COOK_RECIPE,
                     candidate.recipe_version_id,
                     None,
-                    tuple((mid, factors[mid]) for mid in participants),
+                    event_portions,
                 )
             )
         else:
@@ -626,12 +815,56 @@ def generate_week(
                     fixed_event.portions,
                 )
             )
+            if config.version == "planner-v0.4":
+                fixed_portions = dict(fixed_event.portions)
+                for member_id in participants:
+                    share = allocation_shares[
+                        (member_id, local_date, role, occurrence)
+                    ]
+                    reference = members[member_id].reference_energy_kcal
+                    assert reference is not None
+                    allocated = (reference * share).quantize(
+                        Decimal("0.000001"), rounding=ROUND_HALF_UP
+                    )
+                    allocation_traces.append(
+                        AllocationTrace(
+                            local_date,
+                            role,
+                            occurrence,
+                            member_id,
+                            members[member_id].selection.selection.id,
+                            share,
+                            allocated,
+                            fixed_event.source_kind,
+                            None,
+                            None,
+                            fixed_portions[member_id],
+                        )
+                    )
     event_tuple = tuple(events)
+    if config.version == "planner-v0.3":
+        warnings = (
+            "cost_not_scored_unknown",
+            "fixed_non_recipe_nutrition_not_credited",
+        )
+    else:
+        warnings = ("cost_not_scored_unknown",)
+        if any(
+            event.source_kind is not MealSourceKind.COOK_RECIPE
+            for event in event_tuple
+        ):
+            warnings = (
+                *warnings,
+                "fixed_non_recipe_nutrition_unknown_allocation_reserved",
+            )
     trace = _trace(
         request,
         config,
         traces,
-        ("cost_not_scored_unknown", "fixed_non_recipe_nutrition_not_credited"),
+        warnings,
         event_tuple,
+        allocations=tuple(allocation_traces),
+        residuals=allocation_residuals,
+        allocation_sources=allocation_sources,
     )
     return PlannerSuccess(event_tuple, trace)

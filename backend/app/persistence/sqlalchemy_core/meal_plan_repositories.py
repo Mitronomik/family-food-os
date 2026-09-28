@@ -7,7 +7,7 @@ from uuid import UUID
 
 from sqlalchemy import insert, select
 from sqlalchemy.engine import Connection
-from sqlalchemy.exc import DBAPIError, IntegrityError
+from sqlalchemy.exc import DBAPIError, IntegrityError, OperationalError
 
 from app.domain.meal_plans import (
     HouseholdMealEvent,
@@ -32,6 +32,9 @@ from app.persistence.sqlalchemy_core.meal_plan_tables import (
 )
 from app.persistence.sqlalchemy_core.reference_methodology_tables import (
     member_reference_methodology_selections_table,
+)
+from app.persistence.sqlalchemy_core.sqlite_errors import (
+    is_sqlite_concurrency_conflict,
 )
 from app.services.meal_plan_contracts import (
     MealPlanPersistenceConflictError,
@@ -96,6 +99,14 @@ class SqlAlchemyMemberMealPatternSelectionRepository:
         except IntegrityError as exc:
             raise MealPlanPersistenceConflictError(
                 "Meal-pattern selection identity, version, schedule, or reference conflicts."
+            ) from exc
+        except OperationalError as exc:
+            if is_sqlite_concurrency_conflict(exc):
+                raise MealPlanPersistenceConflictError(
+                    "Meal-pattern selection is concurrently being changed."
+                ) from exc
+            raise MealPlanPersistenceError(
+                "Meal-pattern selection persistence failed."
             ) from exc
         except DBAPIError as exc:
             raise MealPlanPersistenceError(
@@ -451,6 +462,7 @@ def _opportunity_values(
         "weekday": value.weekday,
         "position": value.position,
         "role_code": value.role.value,
+        "energy_share": value.energy_share,
     }
 
 
@@ -462,6 +474,7 @@ def _opportunity_from_row(
         weekday=row["weekday"],
         position=row["position"],
         role=row["role_code"],
+        energy_share=row.get("energy_share"),
     )
 
 

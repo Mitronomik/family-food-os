@@ -213,13 +213,26 @@ def _program(*, min_age=19, max_age=None):
         program=program,
         version=version,
         opportunities=(
-            MealPatternOpportunity(version.id, 1, MealRole.BREAKFAST),
-            MealPatternOpportunity(version.id, 2, MealRole.LUNCH),
-            MealPatternOpportunity(version.id, 3, MealRole.DINNER),
+            MealPatternOpportunity(
+                version.id, 1, MealRole.BREAKFAST, Decimal("0.30")
+            ),
+            MealPatternOpportunity(version.id, 2, MealRole.LUNCH, Decimal("0.35")),
+            MealPatternOpportunity(version.id, 3, MealRole.DINNER, Decimal("0.25")),
         ),
         tags=(),
         evidence=(),
     )
+
+
+def _dinner_shares():
+    return {weekday: (Decimal("0.25"),) for weekday in range(1, 8)}
+
+
+def _breakfast_dinner_shares():
+    return {
+        weekday: (Decimal("0.25"), Decimal("0.25"))
+        for weekday in range(1, 8)
+    }
 
 
 def _service(household, members, pattern=None):
@@ -260,6 +273,13 @@ def test_program_selection_expands_catalogue_template_to_seven_days():
         MealRole.DINNER,
     )
     assert detail.roles_for_weekday(7) == detail.roles_for_weekday(1)
+    assert tuple(
+        item.energy_share for item in detail.opportunities_for_weekday(1)
+    ) == (
+        Decimal("0.300000"),
+        Decimal("0.350000"),
+        Decimal("0.250000"),
+    )
 
 
 def test_child_cannot_accept_adult_program_but_can_use_custom():
@@ -281,8 +301,35 @@ def test_child_cannot_accept_adult_program_but_can_use_custom():
         member_id=child.id,
         source_kind=MemberMealPatternSourceKind.CUSTOM,
         schedule={weekday: (MealRole.DINNER,) for weekday in range(1, 8)},
+        energy_shares=_dinner_shares(),
     )
     assert custom.selection.source_kind is MemberMealPatternSourceKind.CUSTOM
+
+
+def test_custom_selection_requires_explicit_user_confirmed_allocation():
+    household = _household()
+    member = _member(household.id)
+    service, _, _ = _service(household, [member])
+    schedule = {weekday: (MealRole.DINNER,) for weekday in range(1, 8)}
+
+    with pytest.raises(MealPlanValidationError, match="explicit energy shares"):
+        service.accept_member_pattern(
+            household_id=household.id,
+            member_id=member.id,
+            source_kind=MemberMealPatternSourceKind.CUSTOM,
+            schedule=schedule,
+        )
+
+    detail = service.accept_member_pattern(
+        household_id=household.id,
+        member_id=member.id,
+        source_kind=MemberMealPatternSourceKind.CUSTOM,
+        schedule=schedule,
+        energy_shares=_dinner_shares(),
+    )
+    assert {
+        item.energy_share for item in detail.opportunities
+    } == {Decimal("0.250000")}
 
 
 def test_selection_versions_advance_and_preserve_superseded_history():
@@ -295,6 +342,7 @@ def test_selection_versions_advance_and_preserve_superseded_history():
         member_id=member.id,
         source_kind=MemberMealPatternSourceKind.CUSTOM,
         schedule={weekday: (MealRole.DINNER,) for weekday in range(1, 8)},
+        energy_shares=_dinner_shares(),
     )
     second = service.accept_member_pattern(
         household_id=household.id,
@@ -304,6 +352,7 @@ def test_selection_versions_advance_and_preserve_superseded_history():
             weekday: (MealRole.BREAKFAST, MealRole.DINNER)
             for weekday in range(1, 8)
         },
+        energy_shares=_breakfast_dinner_shares(),
     )
 
     assert second.selection.version_number == 2
@@ -320,12 +369,14 @@ def test_manual_week_creates_revision_and_shared_event_servings():
         member_id=first_member.id,
         source_kind=MemberMealPatternSourceKind.CUSTOM,
         schedule={weekday: (MealRole.DINNER,) for weekday in range(1, 8)},
+        energy_shares=_dinner_shares(),
     )
     second_selection = service.accept_member_pattern(
         household_id=household.id,
         member_id=second_member.id,
         source_kind=MemberMealPatternSourceKind.CUSTOM,
         schedule={weekday: (MealRole.DINNER,) for weekday in range(1, 8)},
+        energy_shares=_dinner_shares(),
     )
     events = [
         MealEventDraft(
@@ -404,6 +455,14 @@ def test_program_override_requires_truthful_flag_and_preserves_day_specific_snap
         program_version_id=program.version.id,
         schedule=override,
         has_user_overrides=True,
+        energy_shares={
+            weekday: (
+                (Decimal("0.30"), Decimal("0.25"))
+                if weekday == 1
+                else (Decimal("0.30"), Decimal("0.35"), Decimal("0.25"))
+            )
+            for weekday in range(1, 8)
+        },
     )
 
     assert detail.selection.program_version_id == program.version.id
@@ -417,6 +476,16 @@ def test_program_override_requires_truthful_flag_and_preserves_day_specific_snap
         MealRole.LUNCH,
         MealRole.DINNER,
     )
+    assert tuple(
+        item.energy_share for item in detail.opportunities_for_weekday(1)
+    ) == (Decimal("0.300000"), Decimal("0.250000"))
+    assert tuple(
+        item.energy_share for item in detail.opportunities_for_weekday(2)
+    ) == (
+        Decimal("0.300000"),
+        Decimal("0.350000"),
+        Decimal("0.250000"),
+    )
 
 
 def test_member_pattern_history_read_is_household_scoped():
@@ -429,6 +498,7 @@ def test_member_pattern_history_read_is_household_scoped():
         member_id=member.id,
         source_kind=MemberMealPatternSourceKind.CUSTOM,
         schedule={weekday: (MealRole.DINNER,) for weekday in range(1, 8)},
+        energy_shares=_dinner_shares(),
     )
     second = service.accept_member_pattern(
         household_id=household.id,
@@ -438,6 +508,7 @@ def test_member_pattern_history_read_is_household_scoped():
             weekday: (MealRole.BREAKFAST, MealRole.DINNER)
             for weekday in range(1, 8)
         },
+        energy_shares=_breakfast_dinner_shares(),
     )
 
     assert service.get_member_pattern_history(household.id, member.id) == (
@@ -457,6 +528,7 @@ def test_complete_manual_week_supports_three_member_household():
             member_id=member.id,
             source_kind=MemberMealPatternSourceKind.CUSTOM,
             schedule={weekday: (MealRole.DINNER,) for weekday in range(1, 8)},
+            energy_shares=_dinner_shares(),
         )
         for member in members
     ]

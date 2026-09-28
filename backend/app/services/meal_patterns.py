@@ -3,6 +3,7 @@
 from collections.abc import Callable, Iterable
 from dataclasses import dataclass
 from datetime import date, datetime, timezone
+from decimal import Decimal
 from uuid import UUID, uuid4
 
 from app.domain.meal_patterns import (
@@ -64,6 +65,15 @@ class TrustedMealPatternVersionSeed:
     opportunity_roles: tuple[MealRole | str, ...]
     tags: tuple[tuple[MealPatternTagKind | str, str], ...]
     evidence: tuple[TrustedMealPatternEvidenceSeed, ...]
+    opportunity_energy_shares: tuple[Decimal | None, ...] = ()
+
+
+@dataclass(frozen=True)
+class TrustedMealPatternTargetVersionSeed:
+    code: str
+    target_version_number: int
+    expected_previous_version_number: int
+    version: TrustedMealPatternVersionSeed
 
 
 @dataclass(frozen=True)
@@ -205,8 +215,86 @@ class MealPatternCatalogueService:
                 )
                 for item in current.evidence
             ),
+            opportunity_energy_shares=tuple(
+                item.energy_share for item in current.opportunities
+            ),
         )
         return self.append_trusted_version(code, seed)
+
+    def reconcile_target_versions(
+        self, seeds: Iterable[TrustedMealPatternTargetVersionSeed]
+    ) -> MealPatternSeedSummary:
+        entries = tuple(seeds)
+        identities = [(entry.code, entry.target_version_number) for entry in entries]
+        if len(identities) != len(set(identities)):
+            raise MealPatternCatalogueConflictError(
+                "Target-version seed contains duplicate program/version identity."
+            )
+        existing_programs = inserted_versions = existing_versions = 0
+        now = self._clock()
+        with self._write() as scope:
+            for entry in entries:
+                if (
+                    entry.target_version_number <= 1
+                    or entry.expected_previous_version_number
+                    != entry.target_version_number - 1
+                ):
+                    raise MealPatternCatalogueConflictError(
+                        "Target version must explicitly follow the expected previous version."
+                    )
+                program = scope.programs.get_by_code(entry.code)
+                if program is None:
+                    raise MealPatternNotFoundError(entry.code)
+                existing_programs += 1
+                previous = scope.versions.get_by_number(
+                    program.id, entry.expected_previous_version_number
+                )
+                if previous is None:
+                    raise MealPatternCatalogueConflictError(
+                        "Expected previous MealPatternProgramVersion was not found."
+                    )
+                target = scope.versions.get_by_number(
+                    program.id, entry.target_version_number
+                )
+                versions = scope.versions.list_for_program(program.id)
+                latest = versions[-1] if versions else None
+                if target is not None:
+                    if (
+                        target.version.created_from_version_id != previous.version.id
+                        or not _seed_matches(target, entry.version)
+                        or latest is None
+                        or latest.id != target.version.id
+                        or latest.version_number != entry.target_version_number
+                    ):
+                        raise MealPatternCatalogueConflictError(
+                            "Existing target MealPatternProgramVersion or history differs from trusted allocation seed."
+                        )
+                    existing_versions += 1
+                    continue
+                if (
+                    latest is None
+                    or latest.version_number != entry.expected_previous_version_number
+                    or latest.id != previous.version.id
+                ):
+                    raise MealPatternCatalogueConflictError(
+                        "MealPatternProgram history differs from trusted allocation seed."
+                    )
+                detail = self._new_detail(
+                    program=program,
+                    seed=entry.version,
+                    version_number=entry.target_version_number,
+                    previous_id=previous.version.id,
+                    now=now,
+                )
+                self._validate_for_lifecycle(detail)
+                scope.versions.add_detail(detail)
+                inserted_versions += 1
+            scope.commit()
+        return MealPatternSeedSummary(
+            programs_existing=existing_programs,
+            versions_inserted=inserted_versions,
+            versions_existing=existing_versions,
+        )
 
     def reconcile_seed(
         self, seeds: Iterable[TrustedMealPatternSeed]
@@ -294,13 +382,22 @@ class MealPatternCatalogueService:
             change_note=seed.change_note,
             created_at=now,
         )
+        shares = seed.opportunity_energy_shares
+        if shares and len(shares) != len(seed.opportunity_roles):
+            raise MealPatternCatalogueConflictError(
+                "Meal Pattern opportunity shares must align exactly with opportunity roles."
+            )
+        normalized_shares = shares or (None,) * len(seed.opportunity_roles)
         opportunities = tuple(
             MealPatternOpportunity(
                 version_id=version_id,
                 position=position,
                 role=role,  # type: ignore[arg-type]
+                energy_share=share,
             )
-            for position, role in enumerate(seed.opportunity_roles, start=1)
+            for position, (role, share) in enumerate(
+                zip(seed.opportunity_roles, normalized_shares, strict=True), start=1
+            )
         )
         tags = tuple(
             MealPatternTag(
@@ -357,6 +454,13 @@ def _seed_matches(
         return False
     if tuple(item.role for item in detail.opportunities) != tuple(
         MealRole(value) for value in seed.opportunity_roles
+    ):
+        return False
+    expected_shares = seed.opportunity_energy_shares or (
+        (None,) * len(seed.opportunity_roles)
+    )
+    if tuple(item.energy_share for item in detail.opportunities) != tuple(
+        expected_shares
     ):
         return False
     if tuple((item.kind, item.code) for item in detail.tags) != tuple(

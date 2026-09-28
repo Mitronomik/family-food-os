@@ -168,7 +168,7 @@ class PlannerService:
         recipes: FoodRecipeCatalogueService,
         nutrition: NutritionService,
         pantry: PantryService,
-        config: PlannerConfig = PlannerConfig(),
+        config: PlannerConfig = PlannerConfig(version="planner-v0.4"),
         *,
         recipe_nutrition: RecipeNutritionProjectionService,
     ) -> None:

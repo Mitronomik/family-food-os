@@ -13,7 +13,11 @@ from sqlalchemy import (
     UniqueConstraint,
 )
 
-from app.persistence.sqlalchemy_core.types import UTCDateTime, entity_uuid_type
+from app.persistence.sqlalchemy_core.types import (
+    DecimalText,
+    UTCDateTime,
+    entity_uuid_type,
+)
 
 meal_pattern_metadata = MetaData()
 
@@ -92,7 +96,21 @@ meal_pattern_opportunities_table = Table(
     ),
     Column("position", Integer, primary_key=True, nullable=False),
     Column("role_code", String, nullable=False),
+    Column("energy_share", DecimalText()),
     CheckConstraint("position > 0", name="ck_meal_pattern_opportunities_position"),
+    CheckConstraint(
+        "energy_share IS NULL OR "
+        "("
+        "typeof(energy_share) = 'text' "
+        "AND length(energy_share) BETWEEN 1 AND 64 "
+        "AND energy_share NOT GLOB '*[^0-9.]*' "
+        "AND energy_share GLOB '*[0-9]*' "
+        "AND length(energy_share) - length(replace(energy_share, '.', '')) <= 1 "
+        "AND CAST(energy_share AS NUMERIC) > 0 "
+        "AND CAST(energy_share AS NUMERIC) <= 1"
+        ")",
+        name="ck_meal_pattern_opportunities_energy_share",
+    ),
     CheckConstraint(
         "role_code IN ('BREAKFAST','LUNCH','DINNER','SNACK','PRE_WORKOUT','POST_WORKOUT','OTHER')",
         name="ck_meal_pattern_opportunities_role",

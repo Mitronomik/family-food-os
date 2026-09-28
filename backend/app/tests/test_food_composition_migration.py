@@ -28,7 +28,7 @@ TRANSFORMATION_APPLICABILITY_MIGRATION_ID = "0038_transformation_applicability"
 def test_real_0028_upgrade_preserves_every_row_readiness_and_vector_digest(tmp_path):
     report = measure(DatabaseConfig(path=tmp_path / "upgrade.sqlite"))
     assert report["migration_head_before"] == "0028_normalized_nutrient_vector"
-    assert report["migration_head_after"] == "0040_recipe_version_source_output"
+    assert report["migration_head_after"] == "0041_meal_pattern_energy_allocation"
     assert report["readiness_before"] == report["readiness_after"]
     assert report["all_existing_table_rows_unchanged"]
     assert report["existing_profile_seals_verified"] == 183
@@ -42,7 +42,7 @@ def test_fresh_schema_foreign_keys_lineage_and_backup_inventory(tmp_path):
 
     config = DatabaseConfig(path=tmp_path / "fresh.sqlite")
     assert migrations.apply_migrations(config) == migrations.expected_migration_ids()
-    assert migrations.expected_migration_ids()[-11:] == [
+    assert migrations.expected_migration_ids()[-12:] == [
         MIGRATION.MIGRATION_ID,
         SOURCE_CORPUS_MIGRATION_ID,
         MEAL_PATTERN_MIGRATION_ID,
@@ -54,6 +54,7 @@ def test_fresh_schema_foreign_keys_lineage_and_backup_inventory(tmp_path):
         TRANSFORMATION_APPLICABILITY_MIGRATION_ID,
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
+        "0041_meal_pattern_energy_allocation",
     ]
     with sqlite3.connect(config.path) as db:
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
@@ -150,6 +151,7 @@ def test_mid_migration_schema_data_marker_rollback_and_deterministic_resume(
         TRANSFORMATION_APPLICABILITY_MIGRATION_ID,
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
+        "0041_meal_pattern_energy_allocation",
     ]
     assert migrations.apply_migrations(config) == [
         MIGRATION.MIGRATION_ID,
@@ -163,6 +165,7 @@ def test_mid_migration_schema_data_marker_rollback_and_deterministic_resume(
         TRANSFORMATION_APPLICABILITY_MIGRATION_ID,
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
+        "0041_meal_pattern_energy_allocation",
     ]
     after = assert_existing_history_preserved(before, config)
     schema_after = schema(config)

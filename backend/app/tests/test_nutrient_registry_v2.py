@@ -268,6 +268,7 @@ def test_populated_0034_upgrade_preserves_all_v1_rows_and_seals(tmp_path):
         "0038_transformation_applicability",
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
+        "0041_meal_pattern_energy_allocation",
     ]
 
     with sqlite3.connect(config.path) as db:
@@ -361,7 +362,7 @@ def test_0035_failure_rolls_back_schema_and_marker(tmp_path):
 
 def test_migration_chain_advances_without_consuming_reserved_0033():
     expected = expected_migration_ids()
-    assert expected[-8:] == [
+    assert expected[-9:] == [
         "0032_meal_plan_serving",
         "0034_partial_nutrition_profiles",
         "0035_versioned_nutrient_registry",
@@ -370,6 +371,7 @@ def test_migration_chain_advances_without_consuming_reserved_0033():
         "0038_transformation_applicability",
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
+        "0041_meal_pattern_energy_allocation",
     ]
     assert not any(value.startswith("0033_") for value in expected)
 
@@ -472,6 +474,7 @@ def test_0035_version_pins_existing_retention_rows_without_changing_values(tmp_p
         "0038_transformation_applicability",
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
+        "0041_meal_pattern_energy_allocation",
     ]
 
     with sqlite3.connect(config.path) as db:

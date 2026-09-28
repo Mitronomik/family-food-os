@@ -100,11 +100,25 @@ def test_three_gate1_households_use_authoritative_application_boundary(
                     goal="maintain",
                 )
                 schedule = {weekday: roles for weekday in range(1, 8)}
+                share_by_role = {
+                    MealRole.BREAKFAST: Decimal("0.30"),
+                    MealRole.LUNCH: Decimal("0.35"),
+                    MealRole.DINNER: Decimal("0.25"),
+                    MealRole.SNACK: Decimal("0.10"),
+                    MealRole.PRE_WORKOUT: Decimal("0.10"),
+                    MealRole.POST_WORKOUT: Decimal("0.10"),
+                    MealRole.OTHER: Decimal("0.10"),
+                }
+                energy_shares = {
+                    weekday: tuple(share_by_role[role] for role in roles)
+                    for weekday in range(1, 8)
+                }
                 meal_plans.accept_member_pattern(
                     household_id=household.id,
                     member_id=member.id,
                     source_kind=MemberMealPatternSourceKind.CUSTOM,
                     schedule=schedule,
+                    energy_shares=energy_shares,
                 )
                 members.append(member)
 

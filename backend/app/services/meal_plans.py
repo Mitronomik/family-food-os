@@ -105,6 +105,7 @@ class MealPlanService:
         program_version_id: UUID | None = None,
         recommender_version: str | None = None,
         has_user_overrides: bool = False,
+        energy_shares: Mapping[int, Sequence[Decimal]] | None = None,
     ) -> MemberMealPatternSelectionDetail:
         try:
             source_kind = MemberMealPatternSourceKind(source_kind)
@@ -138,7 +139,11 @@ class MealPlanService:
                     "The selected program version is not published and age-eligible for this member."
                 )
             template = tuple(item.role for item in program.opportunities)
+            template_shares = tuple(item.energy_share for item in program.opportunities)
             canonical_schedule = {weekday: template for weekday in range(1, 8)}
+            canonical_shares = {
+                weekday: template_shares for weekday in range(1, 8)
+            }
             if resolved_schedule is None:
                 resolved_schedule = canonical_schedule
             elif not has_user_overrides:
@@ -151,6 +156,19 @@ class MealPlanService:
                         "PROGRAM schedule differs from the published program; "
                         "set has_user_overrides=True for an override snapshot."
                     )
+            if not has_user_overrides:
+                if energy_shares is None:
+                    energy_shares = canonical_shares  # type: ignore[assignment]
+                else:
+                    supplied_shares = {
+                        weekday: tuple(values)
+                        for weekday, values in energy_shares.items()
+                    }
+                    if supplied_shares != canonical_shares:
+                        raise MealPlanValidationError(
+                            "PROGRAM allocation differs from the published program; "
+                            "set has_user_overrides=True for an override snapshot."
+                        )
         else:
             if program_version_id is not None:
                 raise MealPlanValidationError(
@@ -160,6 +178,44 @@ class MealPlanService:
                 raise MealPlanValidationError("CUSTOM selection requires a resolved schedule.")
 
         assert resolved_schedule is not None
+        if (
+            source_kind is MemberMealPatternSourceKind.CUSTOM
+            or has_user_overrides
+        ) and energy_shares is None:
+            raise MealPlanValidationError(
+                "CUSTOM and PROGRAM override selections require explicit energy shares."
+            )
+        if (
+            source_kind is MemberMealPatternSourceKind.PROGRAM
+            and not has_user_overrides
+            and (
+                energy_shares is None
+                or any(
+                    value is None
+                    for values in energy_shares.values()
+                    for value in values
+                )
+            )
+        ):
+            raise MealPlanValidationError(
+                "PROGRAM selection requires an allocation-ready published program."
+            )
+
+        supplied_allocation = None
+        if energy_shares is not None:
+            supplied_allocation = {
+                weekday: tuple(values) for weekday, values in energy_shares.items()
+            }
+            if set(supplied_allocation) != set(resolved_schedule):
+                raise MealPlanValidationError(
+                    "Energy allocation must cover exactly the resolved schedule weekdays."
+                )
+            for weekday, roles in resolved_schedule.items():
+                shares = supplied_allocation[weekday]
+                if len(shares) != len(roles):
+                    raise MealPlanValidationError(
+                        "Energy allocation must provide one share per resolved opportunity."
+                    )
         with self._write_scope_factory() as scope:
             current = scope.selections.get_current(household_id, member_id)
             selection_id = self._id_factory()
@@ -184,6 +240,9 @@ class MealPlanService:
                     weekday=weekday,
                     position=position,
                     role=role,
+                    energy_share=None
+                    if supplied_allocation is None
+                    else supplied_allocation[weekday][position - 1],
                 )
                 for weekday in sorted(resolved_schedule)
                 for position, role in enumerate(resolved_schedule[weekday], start=1)

@@ -147,6 +147,26 @@ def _required_code(value: object, *, field: str, maximum: int = 120) -> str:
     return normalized
 
 
+def _energy_share(value: object) -> Decimal | None:
+    if value is None:
+        return None
+    if not isinstance(value, Decimal):
+        raise _issue(
+            DomainIssueCode.INVALID_DECIMAL,
+            "energy_share must be Decimal or null.",
+            field="energy_share",
+            value=value,
+        )
+    if not value.is_finite() or value <= 0 or value > 1:
+        raise _issue(
+            DomainIssueCode.VALUE_OUT_OF_RANGE,
+            "energy_share must satisfy 0 < value <= 1.",
+            field="energy_share",
+            value=value,
+        )
+    return quantize_decimal(value, _PORTION_QUANT, field="energy_share")
+
+
 def _portion(value: object) -> Decimal:
     parsed = parse_decimal(value, field="portion_servings")  # type: ignore[arg-type]
     if parsed <= 0:
@@ -281,6 +301,7 @@ class MemberMealPatternOpportunitySnapshot:
     weekday: int
     position: int
     role: MealRole
+    energy_share: Decimal | None = None
 
     def __post_init__(self) -> None:
         object.__setattr__(
@@ -299,6 +320,7 @@ class MemberMealPatternOpportunitySnapshot:
                 field="role",
                 value=self.role,
             ) from exc
+        object.__setattr__(self, "energy_share", _energy_share(self.energy_share))
 
 
 @dataclass(frozen=True)
@@ -333,6 +355,25 @@ class MemberMealPatternSelectionDetail:
                     field="opportunities",
                     value=(weekday, positions),
                 )
+            shares = tuple(item.energy_share for item in items)
+            if any(value is not None for value in shares):
+                if any(value is None for value in shares):
+                    raise _issue(
+                        DomainIssueCode.REQUIRED_FIELD,
+                        "A day must either have complete energy allocation or none.",
+                        field="energy_share",
+                        value=(weekday, shares),
+                    )
+                total = sum(
+                    (value for value in shares if value is not None), Decimal(0)
+                )
+                if total > 1:
+                    raise _issue(
+                        DomainIssueCode.VALUE_OUT_OF_RANGE,
+                        "Daily energy allocation must sum to no more than one.",
+                        field="energy_share",
+                        value=(weekday, total),
+                    )
             if len(items) > INITIAL_MAX_OPPORTUNITIES_PER_DAY:
                 raise _issue(
                     DomainIssueCode.VALUE_OUT_OF_RANGE,
@@ -341,13 +382,19 @@ class MemberMealPatternSelectionDetail:
                     value=(weekday, len(items)),
                 )
 
-    def roles_for_weekday(self, weekday: int) -> tuple[MealRole, ...]:
+    def opportunities_for_weekday(
+        self, weekday: int
+    ) -> tuple[MemberMealPatternOpportunitySnapshot, ...]:
         normalized = _weekday(weekday)
-        items = sorted(
-            (item for item in self.opportunities if item.weekday == normalized),
-            key=lambda item: item.position,
+        return tuple(
+            sorted(
+                (item for item in self.opportunities if item.weekday == normalized),
+                key=lambda item: item.position,
+            )
         )
-        return tuple(item.role for item in items)
+
+    def roles_for_weekday(self, weekday: int) -> tuple[MealRole, ...]:
+        return tuple(item.role for item in self.opportunities_for_weekday(weekday))
 
 
 @dataclass(frozen=True)
