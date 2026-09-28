@@ -682,6 +682,7 @@ def test_program_publication_commit_failure_rolls_back_everything(
     migrations.apply_migrations(config)
     seed_meal_patterns(config)
     before = db_dump(config)
+    engine = create_sqlite_engine(config)
 
     def fail_commit(self):
         raise RuntimeError("injected program commit failure")
@@ -689,8 +690,13 @@ def test_program_publication_commit_failure_rolls_back_everything(
     monkeypatch.setattr(
         SqlAlchemyMealPatternCatalogueUnitOfWork, "commit", fail_commit
     )
-    with pytest.raises(RuntimeError, match="program commit failure"):
-        seed_planner_energy_allocation_v04(config)
+    try:
+        with pytest.raises(RuntimeError, match="program commit failure"):
+            create_meal_pattern_catalogue_service(engine).reconcile_target_versions(
+                load_planner_energy_allocation_seeds()
+            )
+    finally:
+        engine.dispose()
 
     assert db_dump(config) == before
 
