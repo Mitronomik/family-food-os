@@ -72,15 +72,24 @@ It requires any later numeric authority to have its own reviewed:
 A source-published dish output is not automatically a reusable
 FoodTransformation/YieldModel/RetentionProfile.
 ## 6. DECISION — R1-C must fail closed at preflight while active R1 candidates = 0
-R1-C cannot claim product success until at least one R1 RecipeVersion is:
+R1-C cannot even attempt the production proof until at least one R1 RecipeVersion
+is:
 1. source-backed and immutable;
 2. active in the ordinary Recipe Catalogue;
 3. exact-energy-ready through the accepted V2 consumption projection;
 4. safe under current food/form/process authority;
 5. eligible through normal Planner catalogue reads.
-Until those conditions exist, R1-C may only report a bounded prerequisite blocker.
-No synthetic candidate or legacy non-R1 candidate may be used to satisfy the R1-C
-success path.
+
+This is a **minimum precondition, not sufficient Planner capacity**. Final R1-C
+still has to satisfy the complete acceptance in section 9. If the available active
+R1 set cannot support materially different patterns, a complete persisted week,
+plausible Servings, exclusion behavior, deterministic replay and bounded
+infeasibility, the correct result is another bounded R1 prerequisite rather than
+weaker acceptance.
+
+Until the minimum precondition exists, R1-C may only report a bounded prerequisite
+blocker. No synthetic candidate or legacy non-R1 candidate may be used to satisfy
+the R1-C success path.
 ## 7. DECISION — activation requires a separately reviewed authority operation
 The next permissible support operation is a bounded reviewed activation-authority
 step for an R1 recipe.
