@@ -1,58 +1,65 @@
 # Current focus
 
-Updated: 2026-09-27.
+Updated: 2026-09-28.
 
 ## Accepted state
 
-PR105 / #100 Planner energy-allocation Contract Gate is merged into `main` at:
+PR107 / #100 Planner v0.4 energy allocation is merged into `main` at:
 
-`690a17a8c220e7e8f8e93bd63ba46356c73f0503`.
+`b27ab1e6338fd0ae76f25ce0040416fc15780891`.
 
-Canonical contract:
-
-`docs/family-food/planner-energy-allocation-contract.md`.
-
-PR106 remains accepted and preserves the repaired durable project history plus
-the R1-B post-merge transaction/persistence corrections.
+Planner v0.4 is now the authoritative new-generation path. Historical v0.3 remains
+replayable.
 
 ## Current bounded operation
 
-**#100 PLANNER ENERGY ALLOCATION RUNTIME — AUTHORIZED / ACTIVE.**
+**R1-C PRODUCTION PLANNER PROOF — AUTHORIZED / PREFLIGHT BLOCKED.**
 
 Branch:
 
-`feat/planner-energy-allocation-v04`.
+`docs/r1c-production-proof-prerequisite`.
 
-Authorized scope:
+Parent:
 
-1. migration `0041_meal_pattern_energy_allocation`;
-2. optional immutable `energy_share` on Meal Pattern opportunities;
-3. frozen per-opportunity shares on Household member selections;
-4. reviewed allocation-ready versions of the bounded initial adult programs;
-5. idempotent exact target-version program publication;
-6. Planner `planner-v0.4` per-opportunity Serving allocation;
-7. fixed non-recipe allocation reservation without inventing Nutrition;
-8. deterministic allocation trace/replay and explicit unsupported states;
-9. preservation of historical `planner-v0.3` behavior and persisted plans.
+- #99 R1 Planner-capacity Russian recipe batch;
+- #67 DATA-CORPUS-V1.
+
+Canonical preflight contract:
+
+`docs/family-food/r1c-production-planner-proof-prerequisite.md`.
+
+## Preflight result
+
+Current active Planner-eligible R1 RecipeVersion count is **0**.
+
+R1-B published only USSR82-697 and intentionally kept it inactive:
+
+`INACTIVE_PENDING_TRANSFORMATION_AUTHORITY`.
+
+The other four reviewed R1-B candidates remain blocked.
+
+USSR82-697 input-composition energy `255.892000 kcal` and source output `75 g`
+do not authorize final cooked-dish Nutrition or output→yield inference.
+
+Therefore R1-C cannot honestly prove a repository-backed production week yet.
+
+## Next allowed step
+
+Review/merge this docs-only prerequisite contract.
+
+Then separately review the exact authority route needed to activate an R1
+RecipeVersion. Numeric transformation/yield/retention publication is not
+authorized by this preflight.
 
 ## Hard boundaries
 
-- reference energy remains Nutrition-owned;
-- Recipe Nutrition calculation/version remains unchanged;
-- no exact Nutrition is invented for EAT_OUT/READY_MEAL/fixed sources;
-- no role-name/equal-split allocation inference;
-- PROGRAM overrides/CUSTOM allocation is explicit user-confirmed Household state;
-- historical null-share selections remain readable but are unsupported for v0.4
-  automatic generation;
-- no R1-C production proof in this PR;
-- no Recipe activation/transformation authority;
-- no R2/R3 corpus expansion;
-- no Gate1-CLOSE;
-- no Shopping/Prep/Retail/API/UI/Auth/PostgreSQL/AI.
+Do not:
 
-## Stop boundary
-
-This operation ends at a review-ready runtime PR with migration, reviewed data
-publication, Planner v0.4 and required adversarial verification.
-
-Do not start R1-C merely because #100 runtime becomes review-ready.
+- activate USSR82-697 from input energy alone;
+- infer yield/retention from source output;
+- use synthetic Planner candidates to claim R1-C success;
+- use non-R1 legacy recipes to substitute for the R1 success path;
+- start R2/R3;
+- start Gate1-CLOSE;
+- start Shopping/PR9;
+- start Prep/Retail/API/UI/Auth/PostgreSQL/AI.

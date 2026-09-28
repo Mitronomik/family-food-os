@@ -1,5 +1,33 @@
 # Handoff
 
+## R1-C production-proof preflight — 2026-09-28
+
+PR107 / #100 merged into main:
+`b27ab1e6338fd0ae76f25ce0040416fc15780891`.
+
+User explicitly authorized R1-C.
+
+Preflight found a hard product-data prerequisite:
+
+- R1-B active Planner-eligible RecipeVersions: 0;
+- USSR82-697 is published but inactive;
+- activation reason is pending reviewed transformation authority;
+- four other R1-B candidates remain blocked;
+- R1-B input energy 255.892000 kcal is not final cooked-dish Nutrition;
+- Step 7 forbids unreviewed numeric transformation/yield/retention publication.
+
+Current branch:
+`docs/r1c-production-proof-prerequisite`.
+
+Contract:
+`docs/family-food/r1c-production-planner-proof-prerequisite.md`.
+
+R1-C runtime/product proof must not use synthetic candidates or weaken authority.
+The next support operation must review a truthful activation-authority route before
+a successful R1 Planner week can be claimed.
+
+No R2/R3, Gate1-CLOSE, Shopping or later scope is authorized.
+
 ## #100 Planner energy-allocation runtime authorized — 2026-09-27
 
 PR105 merged into main:
