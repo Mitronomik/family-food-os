@@ -584,6 +584,82 @@ def test_member_selection_commit_failure_rolls_back_everything(tmp_path, monkeyp
     assert db_dump(config) == before
 
 
+def test_real_concurrent_selection_revision_conflict_preserves_prior_history(tmp_path):
+    config = DatabaseConfig(path=tmp_path / "selection-real-concurrency.sqlite")
+    migrations.apply_migrations(config)
+    household_id, member_id = seed_household_member(config)
+    engine = create_sqlite_engine(config)
+    try:
+        service = meal_plan_service(engine)
+        first = service.accept_member_pattern(
+            household_id=household_id,
+            member_id=member_id,
+            source_kind=MemberMealPatternSourceKind.CUSTOM,
+            schedule=custom_dinner_schedule(),
+            energy_shares=custom_dinner_shares(),
+        )
+
+        def revision(selection_id: UUID) -> MemberMealPatternSelectionDetail:
+            selected = MemberMealPatternSelection(
+                id=selection_id,
+                household_id=household_id,
+                member_id=member_id,
+                version_number=2,
+                source_kind=MemberMealPatternSourceKind.CUSTOM,
+                program_version_id=None,
+                recommender_version=None,
+                has_user_overrides=False,
+                accepted_at=NOW,
+                supersedes_selection_id=first.selection.id,
+                created_at=NOW,
+            )
+            opportunities = tuple(
+                MemberMealPatternOpportunitySnapshot(
+                    selection_id,
+                    weekday,
+                    1,
+                    MealRole.DINNER,
+                    Decimal("0.25"),
+                )
+                for weekday in range(1, 8)
+            )
+            return MemberMealPatternSelectionDetail(selected, opportunities)
+
+        winner = revision(uid(222))
+        competing = revision(uid(223))
+        first_scope = SqlAlchemyMealPlanUnitOfWork(engine)
+        second_scope = SqlAlchemyMealPlanUnitOfWork(engine)
+        first_scope.__enter__()
+        second_scope.__enter__()
+        try:
+            first_scope._scope.adapter_connection.exec_driver_sql(
+                "PRAGMA busy_timeout = 1"
+            )
+            second_scope._scope.adapter_connection.exec_driver_sql(
+                "PRAGMA busy_timeout = 1"
+            )
+
+            first_scope.selections.add_detail(winner)
+
+            with pytest.raises(
+                MealPlanPersistenceConflictError, match="concurrently"
+            ):
+                second_scope.selections.add_detail(competing)
+
+            second_scope.rollback()
+            first_scope.rollback()
+        finally:
+            # rollback() revokes the public repositories; __exit__ safely handles
+            # scopes that have already completed.
+            second_scope.__exit__(None, None, None)
+            first_scope.__exit__(None, None, None)
+
+        history = service.get_member_pattern_history(household_id, member_id)
+        assert tuple(item.id for item in history) == (first.selection.id,)
+    finally:
+        engine.dispose()
+
+
 def test_stale_selection_revision_conflict_preserves_current_history(tmp_path):
     config = DatabaseConfig(path=tmp_path / "selection-conflict.sqlite")
     migrations.apply_migrations(config)
