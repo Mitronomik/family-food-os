@@ -1,7 +1,6 @@
 """Household MealPlan scopes over the shared SQLAlchemy transaction foundation."""
 
 from datetime import datetime
-import sqlite3
 from types import TracebackType
 from uuid import UUID
 
@@ -19,6 +18,9 @@ from app.persistence.sqlalchemy_core.meal_plan_repositories import (
 )
 from app.persistence.sqlalchemy_core.reference_methodology_repositories import (
     SqlAlchemyMemberReferenceMethodologySelectionRepository,
+)
+from app.persistence.sqlalchemy_core.sqlite_errors import (
+    is_sqlite_concurrency_conflict,
 )
 from app.persistence.sqlalchemy_core.uow import (
     SqlAlchemyReadOnlyScope,
@@ -100,7 +102,7 @@ class SqlAlchemyMealPlanUnitOfWork:
                     "Household member state changed before MealPlan persistence."
                 )
         except OperationalError as exc:
-            if _is_sqlite_concurrency_conflict(exc):
+            if is_sqlite_concurrency_conflict(exc):
                 raise MealPlanPersistenceConflictError(
                     "Household member state is concurrently being changed."
                 ) from exc
@@ -202,10 +204,3 @@ class SqlAlchemyMealPlanReadScope:
             self._plans = None
             self._reference_methodologies = None
 
-
-def _is_sqlite_concurrency_conflict(exc: OperationalError) -> bool:
-    original = exc.orig
-    code = getattr(original, "sqlite_errorcode", None)
-    if not isinstance(code, int):
-        return False
-    return (code & 0xFF) in {sqlite3.SQLITE_BUSY, sqlite3.SQLITE_LOCKED}
