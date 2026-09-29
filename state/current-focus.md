@@ -4,61 +4,73 @@ Updated: 2026-09-28.
 
 ## Accepted state
 
-PR107 / #100 Planner v0.4 energy allocation is merged into `main` at:
+PR108 / R1-C production-proof prerequisite is merged into `main` at:
 
-`b27ab1e6338fd0ae76f25ce0040416fc15780891`.
+`b6973baa2f93ecfaded9c93cb7e5711300f247ee`.
 
-Planner v0.4 is now the authoritative new-generation path. Historical v0.3 remains
-replayable.
+R1-C remains blocked because the active Planner-eligible R1 RecipeVersion count
+is zero.
 
 ## Current bounded operation
 
-**R1-C PRODUCTION PLANNER PROOF — AUTHORIZED / PREFLIGHT BLOCKED.**
+**R1 ACTIVATION-AUTHORITY PREREQUISITE — REVIEWED / DOCS-ONLY.**
 
 Branch:
 
-`docs/r1c-production-proof-prerequisite`.
+`docs/r1-activation-authority-prerequisite`.
 
-Parent:
+Contract:
 
-- #99 R1 Planner-capacity Russian recipe batch;
-- #67 DATA-CORPUS-V1.
+`docs/family-food/r1-activation-authority-prerequisite.md`.
 
-Canonical preflight contract:
+## Reviewed disposition
 
-`docs/family-food/r1c-production-planner-proof-prerequisite.md`.
+USSR82-697:
 
-## Preflight result
+- exact recipe/process branch — supported;
+- source-branch 107 g chicken input → 75 g cooked output mass relation —
+  corroborated by USSR82 Table 23;
+- source baseline/Table 23 align the selected branch with semi-eviscerated
+  category-II chicken;
+- current CHICKEN_CATEGORY_1_RAW category-I binding conflicts with that source
+  identity and is historical-only for this recipe;
+- exact V2 nutrient retention / ENERGY_KCAL authority — not accepted;
+- current Recipe Nutrition calculation cannot consume transformed Composition.
 
-Current active Planner-eligible R1 RecipeVersion count is **0**.
+Therefore:
 
-R1-B published only USSR82-697 and intentionally kept it inactive:
+`USSR82-697 = INACTIVE / ROUTE_C`.
 
-`INACTIVE_PENDING_TRANSFORMATION_AUTHORITY`.
-
-The other four reviewed R1-B candidates remain blocked.
-
-USSR82-697 input-composition energy `255.892000 kcal` and source output `75 g`
-do not authorize final cooked-dish Nutrition or output→yield inference.
-
-Therefore R1-C cannot honestly prove a repository-backed production week yet.
+No activation runtime is authorized.
 
 ## Next allowed step
 
-Review/merge this docs-only prerequisite contract.
+Remain inside R1.
 
-Then separately review the exact authority route needed to activate an R1
-RecipeVersion. Numeric transformation/yield/retention publication is not
-authorized by this preflight.
+Either:
+
+1. first correct the exact category-II source-to-FoodIngredient authority for
+   USSR82-697, then review exact consumed-Nutrition authority sufficient for
+   Planner-safe exact ENERGY_KCAL. Do not preselect the implementation path:
+   - applicability-aware transformed Composition with exact reviewed
+     yield/retention is one permitted route when evidence supports it;
+   - exact source-backed cooked/prepared-product Nutrition is a distinct permitted
+     route if evidence exists;
+   - any new calculation/publication seam requires its own versioned Recipe
+     Nutrition Implementation Contract Gate; or
+2. review another already selected R1 candidate under the same authority rules.
+
+R2 is not authorized before successful R1-C without a separate sequencing
+decision.
 
 ## Hard boundaries
 
 Do not:
 
-- activate USSR82-697 from input energy alone;
-- infer yield/retention from source output;
-- use synthetic Planner candidates to claim R1-C success;
-- use non-R1 legacy recipes to substitute for the R1 success path;
+- activate USSR82-697;
+- infer retention from 107→75 g mass change;
+- use generalized nutrient-loss guidance as exact authority;
+- change Recipe Nutrition runtime without a docs-only gate;
 - start R2/R3;
 - start Gate1-CLOSE;
 - start Shopping/PR9;

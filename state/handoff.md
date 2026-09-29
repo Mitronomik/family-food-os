@@ -1,5 +1,47 @@
 # Handoff
 
+## R1 activation-authority prerequisite — 2026-09-28
+
+PR108 merged into main at:
+`b6973baa2f93ecfaded9c93cb7e5711300f247ee`.
+
+Reviewed authority result for USSR82-697:
+
+- R1-B source truth remains valid;
+- USSR82 Table 23 corroborates the exact source-branch boiling mass path
+  107 g net → 28% thermal loss → 3% portioning loss → 75 g finished chicken;
+- the collection baseline and Table 23 75 g row align the selected recipe branch
+  with semi-eviscerated category-II chicken (155 g gross / 107 g net);
+- current R1-B binds CHICKEN_CATEGORY_1_RAW / category-I authority, so that
+  source-to-canonical mapping is not exact enough for activation and must remain
+  historical-only for this recipe;
+- this is mass/process evidence, not V2 nutrient-retention evidence;
+- current repository has no accepted exact ENERGY_KCAL retention authority for
+  this exact chicken/process;
+- current RECIPE_COMPOSITION_NUTRITION_V1 rejects transformed Composition
+  bindings;
+- recipe source has no cooked-output nutrient analysis supporting Route B.
+
+Disposition:
+`ROUTE_C / REMAIN_INACTIVE`.
+
+Current branch:
+`docs/r1-activation-authority-prerequisite`.
+
+Contract:
+`docs/family-food/r1-activation-authority-prerequisite.md`.
+
+No activation/runtime/schema/data publication is authorized by this gate.
+Next work remains inside R1: either correct the exact category-II FoodIngredient
+authority first and then review exact consumed-Nutrition authority, without
+preselecting retention/transformation as the only path, or review another selected
+R1 candidate. A transformed Composition route requires exact reviewed
+yield/retention evidence; a distinct exact cooked/prepared-product Nutrition route
+requires source evidence and its own reviewed publication/calculation contract.
+Any new Recipe Nutrition calculation/publication seam requires a versioned
+Implementation Contract Gate.
+R2 remains blocked until successful R1-C unless sequencing is explicitly changed.
+
 ## R1-C production-proof preflight — 2026-09-28
 
 PR107 / #100 merged into main:
