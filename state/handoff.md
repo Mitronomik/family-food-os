@@ -1,5 +1,36 @@
 # Handoff
 
+## R1 cross-corpus consumed-Nutrition feasibility review — 2026-09-29
+
+PR109 merged into main at:
+`03984aae526ddcd7765f6df6f43608bd4ef0e3fa`.
+
+Current bounded operation is docs-only:
+`docs/family-food/r1-cross-corpus-consumed-nutrition-review.md`.
+
+Retained evidence reviewed from the hash-pinned
+`FamilyFoodOS-corpus-0.3.0-2026-09-20.zip` plus current repository contracts.
+
+Key findings:
+- FIC `RU-NUT-DB` is a licensed production source family for bounded exact food
+  composition use; old archive rights-unresolved status is superseded by the
+  later repository license receipt;
+- School2022 has 471 resolved routes, 420 non-clinical, 377 non-clinical material
+  executable and 376 non-clinical procurement-mass ready, but zero retained
+  Nutrition-ready routes;
+- School2022 also retains 976 source-valid nutrient-reconciliation rows across
+  244 recipes, all marked do-not-reapply-retention and not-independent food
+  profile calculation;
+- RU-MR-2019 retained routes are not currently the short ordinary-household path;
+- the recurring product gap is consumed Recipe Nutrition authority across
+  preparation modes, not only USSR82-697.
+
+No candidate-set change is authorized by this review. Issue #99 still owns the
+selected R1 set. If School2022 is to enter R1 before successful R1-C, that requires
+an explicit sequencing/candidate-set decision.
+
+No runtime/schema/data publication is authorized.
+
 ## R1 activation-authority prerequisite — 2026-09-28
 
 PR108 merged into main at:
