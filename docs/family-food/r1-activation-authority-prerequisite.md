@@ -161,7 +161,7 @@ Merging this gate does **not** authorize:
 Activation remains blocked.
 ## 10. Next allowed bounded R1 operation
 The next operation must remain inside R1 and close one of these evidence paths:
-### Option 1 — exact transformed-consumption authority for USSR82-697
+### Option 1 — exact consumed-Nutrition authority for USSR82-697
 Requires, before runtime:
 1. retain/hash-pin the collection introduction + Table 23 receipt that establishes
    the exact category-II source form and mass path;
@@ -169,11 +169,21 @@ Requires, before runtime:
    Nutrition/ATOMIC authority;
 3. append a corrected immutable RecipeVersion/binding path rather than rewriting
    the inactive R1-B v1 mapping;
-4. review exact nutrient-retention authority sufficient to produce positive exact
-   ENERGY_KCAL under RU_NUTRIENT_REGISTRY_V2;
-5. create a docs-only Implementation Contract Gate for the next Recipe Nutrition
-   calculation version that can consume applicability-aware transformed
-   Composition;
+4. identify and review an exact **consumed-Nutrition authority** sufficient to
+   produce positive exact ENERGY_KCAL under RU_NUTRIENT_REGISTRY_V2 without
+   inventing raw→cooked equivalence. This gate does not preselect the authority
+   model:
+   - an applicability-aware transformed Composition with exact reviewed
+     yield/retention evidence is one permitted route when the evidence supports it;
+   - an exact source-backed cooked-output / prepared-product Nutrition authority is
+     a distinct permitted route if such evidence exists, but it requires its own
+     reviewed publication/calculation contract and must not be reverse-engineered
+     into reusable retention factors;
+5. create the docs-only Implementation Contract Gate required by whichever new
+   Recipe Nutrition calculation/publication seam the accepted consumed authority
+   actually needs. Current `RECIPE_COMPOSITION_NUTRITION_V1` remains unchanged
+   unless that separate gate explicitly versions/replaces the relevant calculation
+   path;
 6. freeze fresh/replay/conflict/rollback and historical-preservation rules.
 Only after all six are accepted may activation runtime be proposed.
 ### Option 2 — another R1 candidate
@@ -182,8 +192,8 @@ It may proceed only if its Food/Nutrition/process authority can be closed withou
 weakening unknown != zero, raw != cooked or provenance rules.
 R2 remains out of scope until successful R1-C unless the user explicitly changes
 sequencing.
-## 11. Preservation requirements for any future transformed Recipe Nutrition gate
-Any later calculation-contract gate must preserve:
+## 11. Preservation requirements for any future consumed Recipe Nutrition gate
+Any later consumed-Nutrition calculation/publication gate must preserve:
 - historical `RECIPE_COMPOSITION_NUTRITION_V1` results and bindings;
 - existing Step 10-A immutable binding history;
 - historical inactive R1-B USSR82-697 v1 and its category-I binding as historical
@@ -225,7 +235,7 @@ PR108 merged
 → R1 activation-authority review
 → USSR82-697 Route C: remains inactive
 → bounded R1 authority closure
-   ├─ exact transformed-consumption authority + new Recipe Nutrition contract
+   ├─ exact consumed-Nutrition authority + applicable Recipe Nutrition contract
    └─ or another selected R1 candidate
 → active exact-energy-ready R1 production candidate(s)
 → R1-C production Planner proof
