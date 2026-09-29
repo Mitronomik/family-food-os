@@ -1,5 +1,28 @@
 # Progress
 
+## R1 cross-corpus feasibility review started — 2026-09-29
+
+Accepted base:
+`03984aae526ddcd7765f6df6f43608bd4ef0e3fa` (merged PR109).
+
+Scope:
+docs-only cross-corpus review of consumed-Nutrition authority across current
+USSR82 R1, School2022, RU-MR-2019 and licensed FIC RU-NUT-DB evidence.
+
+Retained-corpus findings recorded:
+- School2022: 471 resolved routes / 420 non-clinical / 377 non-clinical material
+  executable / 376 non-clinical procurement-mass ready / 0 Nutrition-ready;
+- School2022 nutrient reconciliation: 976 source-valid rows across 244 recipes;
+- FIC RU-NUT-DB: 3216 source records under the accepted project license receipt;
+- RU-MR-2019 is not currently the shortest ordinary-household R1-C route;
+- current R1 active Planner-eligible count remains 0.
+
+No Recipe activation, candidate-set change, runtime, schema, migration or
+production data publication occurred.
+
+Status:
+`R1_CROSS_CORPUS_CONSUMED_NUTRITION_REVIEW_ACTIVE`.
+
 ## R1 activation-authority source-mapping correction — 2026-09-29
 
 PR109 review established a durable correction to the earlier R1-A recipe-specific
