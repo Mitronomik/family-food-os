@@ -20,6 +20,7 @@ from app.persistence.sqlalchemy_core.food_recipe_uow import (
 )
 from app.seed.food_recipes import load_seed_entries, seed_food_recipes
 from app.services.food_recipe_contracts import RecipeCataloguePersistenceConflictError
+from app.services.food_recipes import RecipeNotFoundError
 from sqlalchemy import Column, ForeignKey, Integer, MetaData, Table, event
 
 NOW = datetime(2026, 9, 4, tzinfo=timezone.utc)
@@ -80,6 +81,24 @@ def test_complete_version_roundtrips_uuid_utc_decimal_and_order(recipe_engine):
         range(1, len(detail.steps) + 1)
     )
     assert service.list_versions(recipe.id) == [detail.version]
+
+
+
+def test_list_all_and_latest_verified_keep_inactive_recipe_visible(recipe_engine):
+    _, engine = recipe_engine
+    service = create_food_recipe_catalogue_service(engine)
+    recipe = service.get_by_code(PRIMARY_RECIPE_CODE)
+    verified = service.get_current_verified(recipe.id)
+
+    service.deactivate(recipe.id)
+
+    all_recipes = service.list_all(limit=200)
+    persisted = next(item for item in all_recipes if item.id == recipe.id)
+    assert persisted.is_active is False
+    assert service.get_latest_verified(recipe.id).version.id == verified.version.id
+    with pytest.raises(RecipeNotFoundError):
+        service.get_current_verified(recipe.id)
+
 
 
 def test_append_v2_preserves_v1_and_current_verified_advances(recipe_engine):
