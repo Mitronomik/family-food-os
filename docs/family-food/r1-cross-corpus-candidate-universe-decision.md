@@ -85,8 +85,10 @@ distinguish:
 2. applicability-aware transformed Composition;
 3. exact source-backed prepared-output Nutrition.
 
-After the gate is accepted, choose a small cross-corpus production batch based on
-authority readiness and Planner-capacity value, then publish/activate only through
-separately authorized runtime/data PRs.
+After the gate is accepted, choose a small production batch from the widened
+cross-corpus candidate universe based on authority readiness and Planner-capacity
+value. A batch may contain candidates from one or multiple source families;
+source diversity is not itself an acceptance criterion. Publish/activate only
+through separately authorized runtime/data PRs.
 
 No runtime/data publication starts from this decision alone.
