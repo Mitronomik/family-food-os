@@ -8,15 +8,15 @@
       "published": 0,
       "unpublished": 214
     },
-    "ru-school2022": {
-      "retained": 265,
-      "published": 1,
-      "unpublished": 264
-    },
     "USSR82": {
       "retained": 68,
       "published": 1,
       "unpublished": 67
+    },
+    "ru-school2022": {
+      "retained": 265,
+      "published": 1,
+      "unpublished": 264
     }
   },
   "known_current_russian_production_publications": 2,
