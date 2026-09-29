@@ -1,5 +1,19 @@
 # Progress
 
+## R1-D corpus-wide Planner admission started — 2026-09-30
+
+Accepted base:
+`e350e747a9c6e06e74b2cd450637c25a442c8749` (merged PR111).
+
+Issue #112 was reframed from a one-recipe pilot to corpus-wide admission and
+closure. Phase A implementation now exposes all published recipes to Planner
+admission and preserves fail-closed selection through explicit blockers.
+
+Current branch:
+`data/r1d-planner-capacity-candidate-audit`.
+
+No schema/migration or production activation has occurred.
+
 ## R1 cross-corpus candidate universe approved — 2026-09-29
 
 Accepted base:
