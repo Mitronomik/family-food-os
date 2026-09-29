@@ -1,5 +1,26 @@
 # Progress
 
+## R1 cross-corpus candidate universe approved — 2026-09-29
+
+Accepted base:
+`076de7026a48809d68f314189455b29f35e32a04` (merged PR110).
+
+Explicit user decision:
+R1 is no longer restricted to the narrow USSR82 candidate set.
+
+R1 candidate selection may draw from all retained/reviewable DATA-CORPUS-V1
+recipe source families, including USSR82, School2022 and RU-MR-2019, while
+preserving exact authority requirements.
+
+This decision changes candidate selection scope only. It does not activate,
+publish or authorize runtime/schema/data changes.
+
+Immediate next bounded operation:
+docs-only Recipe Nutrition Consumed-Authority Implementation Contract Gate.
+
+Status:
+`R1_CROSS_CORPUS_CANDIDATE_UNIVERSE_APPROVED`.
+
 ## R1 cross-corpus feasibility review started — 2026-09-29
 
 Accepted base:
