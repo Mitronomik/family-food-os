@@ -33,8 +33,13 @@ Contract:
 
 No activation/runtime/schema/data publication is authorized by this gate.
 Next work remains inside R1: either correct the exact category-II FoodIngredient
-authority first and then close transformed-consumption authority + a versioned
-Recipe Nutrition Contract Gate, or review another selected R1 candidate.
+authority first and then review exact consumed-Nutrition authority, without
+preselecting retention/transformation as the only path, or review another selected
+R1 candidate. A transformed Composition route requires exact reviewed
+yield/retention evidence; a distinct exact cooked/prepared-product Nutrition route
+requires source evidence and its own reviewed publication/calculation contract.
+Any new Recipe Nutrition calculation/publication seam requires a versioned
+Implementation Contract Gate.
 R2 remains blocked until successful R1-C unless sequencing is explicitly changed.
 
 ## R1-C production-proof preflight — 2026-09-28
