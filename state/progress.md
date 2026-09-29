@@ -1,5 +1,32 @@
 # Progress
 
+## R1 activation-authority source-mapping correction — 2026-09-29
+
+PR109 review established a durable correction to the earlier R1-A recipe-specific
+dependency conclusion for USSR82-697:
+
+- `CHICKEN_CATEGORY_1_RAW` / FIC `Куры 1 кат` remains valid canonical
+  category-I FoodIngredient/Nutrition authority for its own identity;
+- PR101's historical statement that USSR82-697 was dependency-ready is superseded
+  **only for that recipe's exact source-to-canonical mapping**;
+- the reviewed USSR82 recipe 697 branch is 155 g gross / 107 g net and aligns with
+  the collection/Table 23 semi-eviscerated category-II source row;
+- the existing R1-B category-I binding remains immutable historical inactive truth
+  and must not be reused as exact activation authority for this recipe;
+- this correction does not mutate or invalidate the canonical category-I
+  FoodIngredient itself.
+
+The same review also clarifies that future activation is governed by exact
+**consumed-Nutrition authority**, not by a preselected retention implementation.
+Applicability-aware transformed Composition with exact reviewed yield/retention is
+one possible authority route; an exact source-backed cooked-output Nutrition
+authority would be a separate possible route if evidence exists and its
+publication/calculation contract is reviewed. No such activation authority is
+published by PR109.
+
+Status:
+`R1_ACTIVATION_AUTHORITY_REVIEW_CORRECTED / ROUTE_C_REMAINS_INACTIVE`.
+
 ## PR104 merged / post-merge integrity correction — 2026-09-27
 
 PR104 / R1-B runtime merged into `main` at:
