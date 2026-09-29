@@ -1,55 +1,83 @@
 # Current focus
 
-Updated: 2026-09-29.
+Updated: 2026-09-30.
 
 ## Accepted state
 
-PR110 / R1 cross-corpus consumed-Nutrition feasibility review is merged into
-`main` at:
+PR111 / R1 cross-corpus candidate-universe decision is merged into `main` at:
 
-`076de7026a48809d68f314189455b29f35e32a04`.
+`e350e747a9c6e06e74b2cd450637c25a442c8749`.
 
-The user has now explicitly approved widening the R1 candidate universe beyond the
-narrow USSR82 set.
-
-Canonical decision:
-
-`docs/family-food/r1-cross-corpus-candidate-universe-decision.md`.
+R1 candidate selection may draw from all retained/reviewable DATA-CORPUS-V1
+source families. Source diversity is not an acceptance criterion.
 
 ## Current bounded operation
 
-**R1 CROSS-CORPUS CANDIDATE-UNIVERSE DECISION — DOCS/STATE ONLY.**
+**R1-D — CORPUS-WIDE PLANNER ADMISSION AND RECIPE CLOSURE.**
 
-R1 candidate selection may now draw from all retained, reviewable recipe source
-families under DATA-CORPUS-V1, including USSR82, School2022 and RU-MR-2019.
+Issue:
 
-This does not grant blanket publication authority. Every selected recipe still
-requires exact source/variant, FoodIngredient/form, Nutrition/Composition,
-consumed-Nutrition, immutable RecipeVersion and activation authority.
+`#112`.
 
-## Immediate next bounded operation after this decision
+Branch:
 
-Create the docs-only Recipe Nutrition Consumed-Authority Implementation Contract
-Gate identified by PR110.
+`data/r1d-planner-capacity-candidate-audit`.
 
-The gate must distinguish:
+The current implementation removes the Planner active-only visibility blind spot:
 
-1. identity-preserving/no-thermal preparation;
-2. applicability-aware transformed Composition;
-3. exact source-backed prepared-output Nutrition.
+- Recipe Catalogue exposes all published recipes for admission review;
+- latest SOURCE_VERIFIED RecipeVersion can be inspected regardless of activation;
+- Planner classifies every published recipe as eligible or blocked;
+- current blocker taxonomy:
+  - INACTIVE;
+  - NO_VERIFIED_VERSION;
+  - ROLE_UNSUPPORTED;
+  - NUTRITION_UNAVAILABLE;
+  - EXACT_ENERGY_UNAVAILABLE;
+- blocked recipes remain non-selectable;
+- existing generation semantics are not weakened;
+- no migration/schema change is introduced.
 
-After that gate is reviewed/merged, select a small production batch from the
-widened cross-corpus candidate universe for Planner capacity and authority
-readiness. The batch may come from one or multiple source families; source
-diversity is not itself an acceptance criterion.
+The School2022 butter portion remains a technical no-thermal control only. It is
+not a product target because `meal_type=other` is not currently usable by Planner
+meal roles.
+
+## Product direction
+
+Stop advancing capacity one hand-picked recipe at a time.
+
+Target pipeline:
+
+```text
+retained recipe sources
+→ production Recipe Catalogue
+→ Planner admission for every published verified RecipeVersion
+→ explicit blocker per recipe
+→ blocker-based production batches
+→ active Planner-eligible catalogue
+→ R1-C proof
+→ R2/R3 catalogue depth
+→ Gate1-CLOSE
+```
+
+Next after Phase A verification:
+
+1. build a corpus-wide machine-readable closure inventory across USSR82,
+   School2022 and accepted RU-MR-2019 scope;
+2. group recipes by shared blocker rather than source loyalty;
+3. close the highest-leverage Planner-capacity batches;
+4. introduce new Nutrition architecture only when a real batch proves a concrete
+   missing seam.
 
 ## Hard boundaries
 
 Do not:
 
-- activate recipes from source-corpus presence alone;
-- promote source-declared Nutrition without an accepted authority contract;
-- infer raw→cooked Nutrition or implicit retention;
-- start runtime/schema/data publication from this decision alone;
-- start R2/R3 before successful R1-C;
-- start DC4/Gate1-CLOSE/Shopping/Prep/Retail/API/UI/Auth/PostgreSQL/AI.
+- bulk-activate recipes without exact production authority;
+- treat source-corpus presence as RecipeVersion authority;
+- infer raw→cooked Nutrition;
+- infer implicit retention;
+- promote source-declared recipe totals without an accepted authority path;
+- weaken unknown != zero;
+- start Shopping/Prep/Retail/API/UI/Auth/PostgreSQL/AI;
+- start R2/R3 before successful R1-C.
