@@ -1,5 +1,24 @@
 # Handoff
 
+## R1 candidate universe widened — 2026-09-29
+
+PR110 merged into main at:
+`076de7026a48809d68f314189455b29f35e32a04`.
+
+The user explicitly approved expanding R1 beyond the narrow USSR82 set.
+
+R1 may now select candidates from all retained/reviewable recipe source families
+under DATA-CORPUS-V1, including USSR82, School2022 and RU-MR-2019.
+
+This is not blanket publication authority. Every recipe still needs exact
+source/variant, FoodIngredient/form, Nutrition/Composition, consumed-Nutrition,
+immutable RecipeVersion and activation authority.
+
+Next bounded operation after this docs/state decision:
+Recipe Nutrition Consumed-Authority Implementation Contract Gate.
+
+No runtime/schema/data publication starts automatically.
+
 ## R1 cross-corpus consumed-Nutrition feasibility review — 2026-09-29
 
 PR109 merged into main at:
