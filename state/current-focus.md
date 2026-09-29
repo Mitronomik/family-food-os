@@ -38,8 +38,10 @@ The gate must distinguish:
 2. applicability-aware transformed Composition;
 3. exact source-backed prepared-output Nutrition.
 
-After that gate is reviewed/merged, select a small cross-corpus production batch
-for Planner capacity and authority readiness.
+After that gate is reviewed/merged, select a small production batch from the
+widened cross-corpus candidate universe for Planner capacity and authority
+readiness. The batch may come from one or multiple source families; source
+diversity is not itself an acceptance criterion.
 
 ## Hard boundaries
 
