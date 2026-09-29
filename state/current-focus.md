@@ -1,76 +1,85 @@
 # Current focus
 
-Updated: 2026-09-28.
+Updated: 2026-09-29.
 
 ## Accepted state
 
-PR108 / R1-C production-proof prerequisite is merged into `main` at:
+PR109 / R1 activation-authority prerequisite is merged into `main` at:
 
-`b6973baa2f93ecfaded9c93cb7e5711300f247ee`.
+`03984aae526ddcd7765f6df6f43608bd4ef0e3fa`.
+
+Accepted PR109 disposition:
+
+- `USSR82-697` remains inactive / Route C;
+- the current category-I binding is historical-only for that recipe;
+- activation requires exact consumed-Nutrition authority;
+- retention/transformed Composition is one possible path, not the only preselected path;
+- no activation/runtime/schema/data work was authorized.
 
 R1-C remains blocked because the active Planner-eligible R1 RecipeVersion count
 is zero.
 
 ## Current bounded operation
 
-**R1 ACTIVATION-AUTHORITY PREREQUISITE — REVIEWED / DOCS-ONLY.**
+**R1 CROSS-CORPUS CONSUMED-NUTRITION FEASIBILITY REVIEW — DOCS-ONLY.**
 
 Branch:
 
-`docs/r1-activation-authority-prerequisite`.
+`docs/r1-cross-corpus-consumed-nutrition-review`.
 
-Contract:
+Review document:
 
-`docs/family-food/r1-activation-authority-prerequisite.md`.
+`docs/family-food/r1-cross-corpus-consumed-nutrition-review.md`.
 
-## Reviewed disposition
+Parent:
 
-USSR82-697:
+- #99 R1 Planner-capacity Russian recipe batch;
+- #109 activation-authority prerequisite;
+- #67 DATA-CORPUS-V1.
 
-- exact recipe/process branch — supported;
-- source-branch 107 g chicken input → 75 g cooked output mass relation —
-  corroborated by USSR82 Table 23;
-- source baseline/Table 23 align the selected branch with semi-eviscerated
-  category-II chicken;
-- current CHICKEN_CATEGORY_1_RAW category-I binding conflicts with that source
-  identity and is historical-only for this recipe;
-- exact V2 nutrient retention / ENERGY_KCAL authority — not accepted;
-- current Recipe Nutrition calculation cannot consume transformed Composition.
+## Reviewed scope
 
-Therefore:
+Compare retained authority paths across:
 
-`USSR82-697 = INACTIVE / ROUTE_C`.
+- current selected USSR82 R1 candidates;
+- School2022 retained routes;
+- RU-MR-2019 retained routes;
+- licensed FIC RU-NUT-DB input Nutrition authority.
 
-No activation runtime is authorized.
+The review may identify a better reusable authority path, but it does not change
+the authorized R1 candidate set or publish runtime/data truth.
 
-## Next allowed step
+## Current finding
 
-Remain inside R1.
+Retained evidence shows the recurring blocker is reusable consumed Recipe
+Nutrition authority, not a chicken-specific loss-factor problem.
 
-Either:
+School2022 has hundreds of materially executable non-clinical routes and
+source-published nutrient reconciliation, but current contracts still treat
+source-declared recipe Nutrition as reference-only.
 
-1. first correct the exact category-II source-to-FoodIngredient authority for
-   USSR82-697, then review exact consumed-Nutrition authority sufficient for
-   Planner-safe exact ENERGY_KCAL. Do not preselect the implementation path:
-   - applicability-aware transformed Composition with exact reviewed
-     yield/retention is one permitted route when evidence supports it;
-   - exact source-backed cooked/prepared-product Nutrition is a distinct permitted
-     route if evidence exists;
-   - any new calculation/publication seam requires its own versioned Recipe
-     Nutrition Implementation Contract Gate; or
-2. review another already selected R1 candidate under the same authority rules.
+RU-MR-2019 is not currently the short household path under the retained
+applicability interpretation.
 
-R2 is not authorized before successful R1-C without a separate sequencing
-decision.
+## Next decision after review
+
+After this docs-only review is reviewed/merged:
+
+1. explicitly decide whether R1 remains the exact current USSR82 set or is widened
+   to a bounded cross-corpus pilot;
+2. create the Recipe Nutrition consumed-authority Implementation Contract Gate
+   required by the accepted path;
+3. do not begin runtime/data publication automatically.
 
 ## Hard boundaries
 
 Do not:
 
-- activate USSR82-697;
-- infer retention from 107→75 g mass change;
-- use generalized nutrient-loss guidance as exact authority;
-- change Recipe Nutrition runtime without a docs-only gate;
+- activate any RecipeVersion;
+- change the R1 candidate set implicitly;
+- infer raw→cooked Nutrition;
+- promote source-declared recipe totals to production authority without a gate;
+- publish yield/retention/transformation authority;
 - start R2/R3;
 - start Gate1-CLOSE;
 - start Shopping/PR9;
