@@ -50,8 +50,14 @@ Remain inside R1.
 Either:
 
 1. first correct the exact category-II source-to-FoodIngredient authority for
-   USSR82-697, then close transformed-consumption authority and the required
-   versioned Recipe Nutrition Implementation Contract Gate; or
+   USSR82-697, then review exact consumed-Nutrition authority sufficient for
+   Planner-safe exact ENERGY_KCAL. Do not preselect the implementation path:
+   - applicability-aware transformed Composition with exact reviewed
+     yield/retention is one permitted route when evidence supports it;
+   - exact source-backed cooked/prepared-product Nutrition is a distinct permitted
+     route if evidence exists;
+   - any new calculation/publication seam requires its own versioned Recipe
+     Nutrition Implementation Contract Gate; or
 2. review another already selected R1 candidate under the same authority rules.
 
 R2 is not authorized before successful R1-C without a separate sequencing
