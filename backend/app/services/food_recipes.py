@@ -141,13 +141,22 @@ class FoodRecipeCatalogueService:
                 raise RecipeNotFoundError(canonical_code)
             return recipe
 
-    def list_active(self, *, limit: int = 100) -> list[Recipe]:
+    @staticmethod
+    def _validate_list_limit(limit: int) -> None:
         if (
             isinstance(limit, bool)
             or not isinstance(limit, int)
             or not 1 <= limit <= 200
         ):
             raise ValueError("limit must be from 1 through 200")
+
+    def list_all(self, *, limit: int = 100) -> list[Recipe]:
+        self._validate_list_limit(limit)
+        with self._read() as scope:
+            return scope.recipes.list_all(limit=limit)
+
+    def list_active(self, *, limit: int = 100) -> list[Recipe]:
+        self._validate_list_limit(limit)
         with self._read() as scope:
             return scope.recipes.list_active(limit=limit)
 
@@ -175,6 +184,18 @@ class FoodRecipeCatalogueService:
         with self._read() as scope:
             recipe = scope.recipes.get(recipe_id)
             if recipe is None or not recipe.is_active:
+                raise RecipeNotFoundError(recipe_id)
+            detail = scope.versions.get_current_verified(recipe_id)
+            if detail is None:
+                raise RecipeNotFoundError(recipe_id)
+            return detail
+
+    def get_latest_verified(self, recipe_id: UUID) -> RecipeVersionDetail:
+        """Latest SOURCE_VERIFIED version regardless of activation state."""
+
+        with self._read() as scope:
+            recipe = scope.recipes.get(recipe_id)
+            if recipe is None:
                 raise RecipeNotFoundError(recipe_id)
             detail = scope.versions.get_current_verified(recipe_id)
             if detail is None:
