@@ -28,7 +28,7 @@ TRANSFORMATION_APPLICABILITY_MIGRATION_ID = "0038_transformation_applicability"
 def test_real_0028_upgrade_preserves_every_row_readiness_and_vector_digest(tmp_path):
     report = measure(DatabaseConfig(path=tmp_path / "upgrade.sqlite"))
     assert report["migration_head_before"] == "0028_normalized_nutrient_vector"
-    assert report["migration_head_after"] == "0041_meal_pattern_energy_allocation"
+    assert report["migration_head_after"] == "0042_recipe_prepared_output_nutrition"
     assert report["readiness_before"] == report["readiness_after"]
     assert report["all_existing_table_rows_unchanged"]
     assert report["existing_profile_seals_verified"] == 183
