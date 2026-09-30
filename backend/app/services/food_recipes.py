@@ -150,10 +150,11 @@ class FoodRecipeCatalogueService:
         ):
             raise ValueError("limit must be from 1 through 200")
 
-    def list_all(self, *, limit: int = 100) -> list[Recipe]:
-        self._validate_list_limit(limit)
+    def list_all(self) -> list[Recipe]:
+        """Exhaustive internal catalogue read for admission/audit operations."""
+
         with self._read() as scope:
-            return scope.recipes.list_all(limit=limit)
+            return scope.recipes.list_all()
 
     def list_active(self, *, limit: int = 100) -> list[Recipe]:
         self._validate_list_limit(limit)
