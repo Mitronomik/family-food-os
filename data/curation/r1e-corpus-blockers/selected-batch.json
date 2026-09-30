@@ -21,7 +21,8 @@
   },
   "mode_dependent_local_blockers": {
     "USSR82-453": [
-      "COMPOSITION_AUTHORITY"
+      "COMPOSITION_AUTHORITY",
+      "CONSUMED_NUTRITION_AUTHORITY"
     ],
     "USSR82-697": [
       "CONSUMED_NUTRITION_AUTHORITY"
@@ -51,10 +52,18 @@
       },
       "mode_dependent_local_closure": {
         "USSR82-453": [
-          "COMPOSITION_AUTHORITY"
+          "COMPOSITION_AUTHORITY",
+          "CONSUMED_NUTRITION_AUTHORITY"
+        ],
+        "USSR82-467": [
+          "CONSUMED_NUTRITION_AUTHORITY"
+        ],
+        "USSR82-492": [
+          "CONSUMED_NUTRITION_AUTHORITY"
         ],
         "USSR82-1081": [
-          "COMPOSITION_AUTHORITY"
+          "COMPOSITION_AUTHORITY",
+          "CONSUMED_NUTRITION_AUTHORITY"
         ]
       },
       "authority_value": "strong shared cooked-Nutrition learning across four breakfasts",
@@ -77,7 +86,8 @@
       },
       "mode_dependent_local_closure": {
         "USSR82-453": [
-          "COMPOSITION_AUTHORITY"
+          "COMPOSITION_AUTHORITY",
+          "CONSUMED_NUTRITION_AUTHORITY"
         ],
         "USSR82-697": [
           "CONSUMED_NUTRITION_AUTHORITY"
