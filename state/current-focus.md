@@ -94,8 +94,8 @@ R1-F preserves the historical source-coded Recipe
 `USSR82_697_BOILED_CHICKEN` unchanged/inactive and publishes a separate
 source-neutral production Recipe:
 
-- `BOILED_CHICKEN_PORTION_75G`;
-- Russian name `Курица отварная, порция 75 г`;
+- `BOILED_CHICKEN`;
+- Russian name `Курица отварная`;
 - source `DIETETIC_RECIPES_1988 / 303_VARIANT_III`.
 
 No source-specific USSR82 code becomes the identity of a foreign-source version.
@@ -107,7 +107,7 @@ Public source locators are research evidence only.
 Source receipts are now closed in the gate itself:
 
 - MR 2.4.0162-19 uses the existing accepted repository bundle + exact card hash;
-- 1988 recipe 303 uses a bounded factual repository receipt with pinned size/SHA;
+- 1988 recipe 303 uses an exact source-page OCR capture, mirrored byte-identically in durable private Library storage with pinned size/SHA;
 - both have explicit reviewed rights scope.
 
 Runtime must verify these exact receipts; it must not discover/choose new source
