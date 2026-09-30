@@ -7,7 +7,11 @@ from uuid import UUID
 from app.domain.food_composition import FoodCompositionVersion
 from app.domain.food_ingredients import FoodIngredient
 from app.domain.food_recipes import Recipe, RecipeVersionDetail
-from app.domain.recipe_nutrition_v2 import RecipeIngredientCompositionBinding
+from app.domain.recipe_nutrition_v2 import (
+    PreparedRecipeNutritionAuthority,
+    PreparedRecipeNutrientValue,
+    RecipeIngredientCompositionBinding,
+)
 from app.services.food_composition_contracts import CompositionReader
 from app.services.nutrient_vector_contracts import (
     NutrientRegistryReader,
@@ -52,6 +56,22 @@ class RecipeIngredientCompositionBindingRepository(Protocol):
     def add(self, binding: RecipeIngredientCompositionBinding) -> None: ...
 
 
+class PreparedRecipeNutritionRepository(Protocol):
+    def get_authority(
+        self, recipe_version_id: UUID
+    ) -> PreparedRecipeNutritionAuthority | None: ...
+
+    def list_values(
+        self, recipe_version_id: UUID
+    ) -> tuple[PreparedRecipeNutrientValue, ...]: ...
+
+    def add_values(
+        self, values: tuple[PreparedRecipeNutrientValue, ...]
+    ) -> None: ...
+
+    def add_authority(self, authority: PreparedRecipeNutritionAuthority) -> None: ...
+
+
 class RecipeNutritionV2ReadScope(Protocol):
     @property
     def recipes(self) -> RecipeNutritionV2RecipeReader: ...
@@ -73,6 +93,9 @@ class RecipeNutritionV2ReadScope(Protocol):
 
     @property
     def bindings(self) -> RecipeIngredientCompositionBindingRepository: ...
+
+    @property
+    def prepared(self) -> PreparedRecipeNutritionRepository: ...
 
     def __enter__(self) -> Self: ...
 
