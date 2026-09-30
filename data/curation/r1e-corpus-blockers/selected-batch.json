@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "accepted_base": "48707e1e84eff260726609c4508f05407e9f9448",
+  "selection": "FIRST_BREAKFAST_CAPACITY_CLOSURE_BATCH",
+  "recipe_ids": [
+    "USSR82-453",
+    "USSR82-467",
+    "USSR82-492",
+    "USSR82-1081"
+  ],
+  "role": "breakfast",
+  "candidate_count": 4,
+  "local_blockers": {
+    "USSR82-1081": [
+      "COMPOSITION_AUTHORITY",
+      "RECIPE_PUBLICATION_REQUIRED"
+    ],
+    "USSR82-453": [
+      "COMPOSITION_AUTHORITY",
+      "RECIPE_PUBLICATION_REQUIRED"
+    ],
+    "USSR82-467": [
+      "REQUIRED_QUANTITY_UNRESOLVED",
+      "RECIPE_PUBLICATION_REQUIRED"
+    ],
+    "USSR82-492": [
+      "REQUIRED_QUANTITY_UNRESOLVED",
+      "RECIPE_PUBLICATION_REQUIRED"
+    ]
+  },
+  "shared_post_local_seam": "CONSUMED_NUTRITION_AUTHORITY",
+  "decision": "Close the four accepted breakfast candidates as one Planner-capacity program: first resolve their exact local Composition/quantity blockers, then review one reusable consumed-Nutrition authority seam for cooked recipes. No current evidence supports treating them as V1 no-thermal recipes.",
+  "why_not_no_thermal_controls": "School2022 no-thermal controls prove the existing V1 calculation path but do not provide material BREAKFAST/MAIN Planner capacity.",
+  "why_not_usrr82_697_first": "USSR82-697 remains a useful MAIN candidate but has an additional exact source identity conflict before the shared consumed-Nutrition blocker.",
+  "evidence_refs": [
+    "data/curation/r1a-planner-capacity-dependencies/dependency-manifest.json",
+    "data/curation/r1b-reviewed-recipes/publication.json",
+    "docs/family-food/r1-cross-corpus-candidate-universe-decision.md",
+    "docs/family-food/r1-cross-corpus-consumed-nutrition-review.md"
+  ]
+}
