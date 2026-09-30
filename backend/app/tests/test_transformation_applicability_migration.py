@@ -37,12 +37,13 @@ def through_0037(path, *, seed=False):
 
 def test_0038_appends_after_0037_without_consuming_reserved_0033():
     expected = expected_migration_ids()
-    assert expected[-5:] == [
+    assert expected[-6:] == [
         PREVIOUS_HEAD,
         MIGRATION_ID,
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
+        "0042_recipe_prepared_output_nutrition",
     ]
     assert not any(value.startswith("0033_") for value in expected)
 
