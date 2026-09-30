@@ -101,15 +101,13 @@ class SqlAlchemyRecipeRepository:
         )
         return None if row is None else _recipe_from_row(row)
 
-    def list_all(self, *, limit: int) -> list[Recipe]:
+    def list_all(self) -> list[Recipe]:
         rows = self._connection.execute(
-            select(food_recipes_table)
-            .order_by(
+            select(food_recipes_table).order_by(
                 food_recipes_table.c.canonical_name_key,
                 food_recipes_table.c.canonical_code,
                 food_recipes_table.c.id,
             )
-            .limit(limit)
         ).mappings()
         return [_recipe_from_row(row) for row in rows]
 
