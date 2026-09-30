@@ -3,7 +3,6 @@ import sqlite3
 from decimal import Decimal
 
 import pytest
-
 from app.db import migrations
 from app.db.config import DatabaseConfig
 from app.domain.recipe_nutrition_v2 import RecipeNutritionAuthorityKind
