@@ -78,7 +78,7 @@ Historical USSR82-697 v1 remains immutable/inactive.
 The 1986 row `697/824, 50/50, 144 kcal` is explicitly rejected because 824 is
 red sauce and the row is not the historical 75 g chicken-only output.
 
-A separate 1988 source, recipe 303 Variant III `Курица отварная без гарнира`, publishes:
+A separate 1988 source, recipe 303 Variant III `Курица отварная`, publishes:
 
 - chicken 155 g gross / 107 g net;
 - finished output 75 g;
