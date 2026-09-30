@@ -14,7 +14,7 @@ R1 cooked pilot toward ordinary production Planner eligibility:
 - R1-E closure target USSR82-453 → source-neutral production Recipe
   `HARD_BOILED_EGG` — breakfast;
 - R1-E closure target USSR82-697 → source-neutral production Recipe
-  `BOILED_CHICKEN` — main.
+  `BOILED_CHICKEN_MAIN_PRODUCT` — main.
 
 The implementation target after this gate is merged is:
 
@@ -142,7 +142,7 @@ USSR82-697 RecipeVersion.
 
 The 1988 reference `Рецептура блюд диетического питания`
 (Жангабылов А. К. et al., Алма-Ата: Казахстан, 1988, ISBN 5-615-00164-X)
-publishes recipe 303 `Курица отварная`.
+publishes recipe 303 `Курица отварная без гарнира`.
 
 Variant III states:
 
@@ -170,17 +170,23 @@ version to the existing source-coded Recipe
 
 That historical Recipe and its v1 remain immutable and inactive.
 
-Publish a **separate source-neutral canonical Recipe**:
+Because the Recipe Catalogue enforces unique normalized canonical names, the new
+Recipe must also have a distinct semantic name key. It must not weaken catalogue
+uniqueness or rename historical truth.
 
-- canonical code: `BOILED_CHICKEN`;
-- canonical Russian name: `Курица отварная`;
+Publish a **separate source-neutral, portion-neutral and name-key-safe canonical Recipe**:
+
+- canonical code: `BOILED_CHICKEN_MAIN_PRODUCT`;
+- canonical Russian name: `Курица отварная без гарнира`;
 - RecipeVersion source: `DIETETIC_RECIPES_1988 / 303_VARIANT_III`;
 - required FoodIngredient: `CHICKEN_CATEGORY_2_RAW`;
 - required input: 107 g;
 - source output: 75 g;
-- prepared-output energy: 167.7 kcal.
+- prepared-output energy: 167.7 kcal;
+- semantic scope: boiled chicken main product without garnish/sauce.
 
-This avoids making the external USSR82 id a hidden domain invariant and avoids a
+This avoids making the external USSR82 id a hidden domain invariant, avoids a
+canonical-name collision with the historical Recipe and avoids a
 Recipe-code rename/alias migration.
 
 The new Recipe is a distinct canonical product identity because its exact source,
@@ -484,8 +490,8 @@ Preserve historical:
 
 Publish separately:
 
-- Recipe `BOILED_CHICKEN`;
-- Russian name `Курица отварная`;
+- Recipe `BOILED_CHICKEN_MAIN_PRODUCT`;
+- Russian name `Курица отварная без гарнира`;
 - source `DIETETIC_RECIPES_1988 / 303_VARIANT_III`;
 - required `CHICKEN_CATEGORY_2_RAW`: 107 g;
 - output: 75 g;
@@ -553,7 +559,10 @@ The runtime PR must prove at least:
 18. ingredient exclusion still rejects the corresponding RecipeVersion;
 19. another Serving/portion mass for the same RecipeVersion does not create or
     require a second canonical Recipe identity;
-20. `AI_ENABLED=false` throughout.
+20. historical `USSR82_697_BOILED_CHICKEN / Курица отварная` and new
+    `BOILED_CHICKEN_MAIN_PRODUCT / Курица отварная без гарнира` have distinct
+    normalized canonical name keys and can coexist without relaxing uniqueness;
+21. `AI_ENABLED=false` throughout.
 
 ## 16. Planner/product boundary
 
