@@ -209,9 +209,7 @@ class PlannerService:
         self._pantry = pantry
         self._config = config
 
-    def compose_candidate_admission(
-        self, *, limit: int = 200
-    ) -> tuple[PlannerCandidateAdmission, ...]:
+    def compose_candidate_admission(self) -> tuple[PlannerCandidateAdmission, ...]:
         """Classify the whole verified Recipe catalogue before Planner selection."""
 
         supported_meal_types = frozenset(
@@ -220,7 +218,7 @@ class PlannerService:
             for meal_type in compatible
         )
         admissions = []
-        for recipe in self._recipes.list_all(limit=limit):
+        for recipe in self._recipes.list_all():
             blockers = []
             detail = None
             projection = None
