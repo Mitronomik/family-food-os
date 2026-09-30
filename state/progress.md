@@ -1,5 +1,27 @@
 # Progress
 
+## R1-E blocker clustering started — 2026-09-30
+
+Result in current branch:
+- 547/547 retained identities classified;
+- deterministic next blocker assigned to every row;
+- School2022 aggregate Nutrition evidence is kept as an unproven later gate rather than per-recipe truth;
+- accepted R1-B blockers are derived/asserted from the publication package;
+- batch alternatives are explicitly compared;
+- selected first cooked-authority pilot: USSR82-453 (breakfast) + USSR82-697 (main);
+- mode-independent vs mode-dependent blockers are separated;
+- activation remains downstream of accepted consumption Nutrition;
+- no Recipe activation or new Nutrition runtime performed.
+
+Accepted base:
+`48707e1e84eff260726609c4508f05407e9f9448` (merged PR113).
+
+Issue #114 / branch `data/r1e-corpus-blocker-clustering` now classify the full
+547-row retained recipe inventory by evidence-backed next blocker and select a
+blocker-based Planner-capacity batch.
+
+No production activation or new Nutrition/meal-composition runtime has occurred.
+
 ## R1-D corpus-wide Planner admission started — 2026-09-30
 
 Accepted base:

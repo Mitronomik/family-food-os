@@ -1,0 +1,147 @@
+{
+  "schema_version": 2,
+  "accepted_base": "48707e1e84eff260726609c4508f05407e9f9448",
+  "selection": "FIRST_MIXED_COOKED_AUTHORITY_PILOT",
+  "recipe_ids": [
+    "USSR82-453",
+    "USSR82-697"
+  ],
+  "role_coverage": {
+    "breakfast": 1,
+    "main": 1
+  },
+  "candidate_count": 2,
+  "mode_independent_local_blockers": {
+    "USSR82-453": [
+      "RECIPE_PUBLICATION_REQUIRED"
+    ],
+    "USSR82-697": [
+      "FOOD_IDENTITY_OR_FORM"
+    ]
+  },
+  "mode_dependent_local_blockers": {
+    "USSR82-453": [
+      "COMPOSITION_AUTHORITY",
+      "CONSUMED_NUTRITION_AUTHORITY"
+    ],
+    "USSR82-697": [
+      "CONSUMED_NUTRITION_AUTHORITY"
+    ]
+  },
+  "decision": "Use one breakfast and one main as the first cooked-Nutrition authority pilot. Close only mode-independent prerequisites unconditionally. Resolve the consumed-Nutrition authority mode before spending work on mode-dependent Composition closure; activation remains downstream of accepted Nutrition authority.",
+  "comparison": [
+    {
+      "option": "BREAKFAST_CLUSTER_4",
+      "recipe_ids": [
+        "USSR82-453",
+        "USSR82-467",
+        "USSR82-492",
+        "USSR82-1081"
+      ],
+      "role_coverage": {
+        "breakfast": 4,
+        "main": 0
+      },
+      "mode_independent_local_closure": {
+        "USSR82-467": [
+          "REQUIRED_QUANTITY_UNRESOLVED"
+        ],
+        "USSR82-492": [
+          "REQUIRED_QUANTITY_UNRESOLVED"
+        ]
+      },
+      "mode_dependent_local_closure": {
+        "USSR82-453": [
+          "COMPOSITION_AUTHORITY",
+          "CONSUMED_NUTRITION_AUTHORITY"
+        ],
+        "USSR82-467": [
+          "CONSUMED_NUTRITION_AUTHORITY"
+        ],
+        "USSR82-492": [
+          "CONSUMED_NUTRITION_AUTHORITY"
+        ],
+        "USSR82-1081": [
+          "COMPOSITION_AUTHORITY",
+          "CONSUMED_NUTRITION_AUTHORITY"
+        ]
+      },
+      "authority_value": "strong shared cooked-Nutrition learning across four breakfasts",
+      "r1c_role_gap": "does not create MAIN capacity by itself"
+    },
+    {
+      "option": "MIXED_AUTHORITY_PILOT",
+      "recipe_ids": [
+        "USSR82-453",
+        "USSR82-697"
+      ],
+      "role_coverage": {
+        "breakfast": 1,
+        "main": 1
+      },
+      "mode_independent_local_closure": {
+        "USSR82-697": [
+          "FOOD_IDENTITY_OR_FORM"
+        ]
+      },
+      "mode_dependent_local_closure": {
+        "USSR82-453": [
+          "COMPOSITION_AUTHORITY",
+          "CONSUMED_NUTRITION_AUTHORITY"
+        ],
+        "USSR82-697": [
+          "CONSUMED_NUTRITION_AUTHORITY"
+        ]
+      },
+      "authority_value": "tests one breakfast and one main against the same cooked-consumption authority decision framework while advancing the two Planner role families needed for a complete week",
+      "r1c_role_gap": "still insufficient alone for a robust seven-day catalogue"
+    },
+    {
+      "option": "HISTORICAL_MAIN_BLOCKERS",
+      "recipe_ids": [
+        "USSR82-364",
+        "USSR82-208"
+      ],
+      "role_coverage": {
+        "breakfast": 0,
+        "main": 2
+      },
+      "mode_independent_local_closure": {
+        "USSR82-364": [
+          "ING-0014:NO_EXACT_FIC_OR_ACCEPTED_EQUIVALENT_FOR_COOKING_FAT"
+        ],
+        "USSR82-208": [
+          "ING-0038:FIC_SOURCE_RECORD_SCHEMA_ANOMALY_REQUIRES_REVIEW"
+        ]
+      },
+      "mode_dependent_local_closure": {},
+      "authority_value": "adds MAIN diversity but first requires unresolved food identity/form work",
+      "r1c_role_gap": "does not add breakfast capacity"
+    },
+    {
+      "option": "SCHOOL2022_PILOT_PATH",
+      "recipe_ids": [],
+      "role_coverage": {},
+      "mode_independent_local_closure": {
+        "family": [
+          "HOUSEHOLD_APPLICABILITY_REVIEW_REQUIRED"
+        ]
+      },
+      "mode_dependent_local_closure": {},
+      "authority_value": "large future corpus, but retained evidence does not yet support recipe-level household-role ranking for a production batch",
+      "r1c_role_gap": "candidate identities must be selected only after applicability review"
+    }
+  ],
+  "expansion_batch_after_pilot": [
+    "USSR82-467",
+    "USSR82-492",
+    "USSR82-1081"
+  ],
+  "why_selected": "This pair covers both Planner role families required by the R1-C week while exercising the same cooked-consumption authority decision. The four-breakfast cluster remains the immediate expansion path after the authority mode is proven.",
+  "evidence_refs": [
+    "data/curation/r1a-planner-capacity-dependencies/dependency-manifest.json",
+    "data/curation/r1b-reviewed-recipes/publication.json",
+    "docs/family-food/r1-cross-corpus-candidate-universe-decision.md",
+    "docs/family-food/r1-cross-corpus-consumed-nutrition-review.md"
+  ]
+}

@@ -4,80 +4,138 @@ Updated: 2026-09-30.
 
 ## Accepted state
 
-PR111 / R1 cross-corpus candidate-universe decision is merged into `main` at:
+PR113 / R1-D corpus-wide Planner admission and source closure inventory is merged
+into `main` at:
 
-`e350e747a9c6e06e74b2cd450637c25a442c8749`.
+`48707e1e84eff260726609c4508f05407e9f9448`.
 
-R1 candidate selection may draw from all retained/reviewable DATA-CORPUS-V1
-source families. Source diversity is not an acceptance criterion.
+R1-D established:
+
+- exhaustive Planner admission for the published Recipe Catalogue;
+- fail-closed Planner eligibility;
+- deterministic retained-source inventory of 547 identities:
+  - USSR82: 68;
+  - School2022: 265;
+  - RU-MR-2019: 214;
+- source visibility remains distinct from production authority.
 
 ## Current bounded operation
 
-**R1-D — CORPUS-WIDE PLANNER ADMISSION AND RECIPE CLOSURE.**
+**R1-E — CORPUS BLOCKER CLUSTERING AND PLANNER-CAPACITY BATCH SELECTION.**
 
 Issue:
 
-`#112`.
+`#114`.
 
 Branch:
 
-`data/r1d-planner-capacity-candidate-audit`.
+`data/r1e-corpus-blocker-clustering`.
 
-The current implementation removes the Planner active-only visibility blind spot:
+Goal:
 
-- Recipe Catalogue exposes all published recipes for admission review;
-- latest SOURCE_VERIFIED RecipeVersion can be inspected regardless of activation;
-- Planner classifies every published recipe as eligible or blocked;
-- current blocker taxonomy:
-  - INACTIVE;
-  - NO_VERIFIED_VERSION;
-  - ROLE_UNSUPPORTED;
-  - NUTRITION_UNAVAILABLE;
-  - EXACT_ENERGY_UNAVAILABLE;
-- blocked recipes remain non-selectable;
-- existing generation semantics are not weakened;
-- no migration/schema change is introduced.
+Turn the 547-row retained inventory into an evidence-backed blocker map with one
+deterministic next action per recipe, then select the highest-leverage production
+batch for current Planner capacity.
 
-The School2022 butter portion remains a technical no-thermal control only. It is
-not a product target because `meal_type=other` is not currently usable by Planner
-meal roles.
+## Important product boundary
 
-## Product direction
+"All recipes reach Planner" means every retained/published recipe has a visible,
+deterministic closure/admission disposition.
 
-Stop advancing capacity one hand-picked recipe at a time.
+It does not mean every RecipeVersion is a valid standalone meal.
 
-Target pipeline:
+Current Planner can truthfully use standalone BREAKFAST / MAIN and compatible
+SANDWICH candidates. SIDE / SALAD / OTHER must not be silently relabelled as MAIN;
+their future use as meal components requires a separate meal-composition/bundle
+seam.
 
-```text
-retained recipe sources
-→ production Recipe Catalogue
-→ Planner admission for every published verified RecipeVersion
-→ explicit blocker per recipe
-→ blocker-based production batches
-→ active Planner-eligible catalogue
-→ R1-C proof
-→ R2/R3 catalogue depth
-→ Gate1-CLOSE
-```
+## Current evidence direction
 
-Next after Phase A verification:
+Repository receipts already identify a high-value Planner-capacity set:
 
-1. build a corpus-wide machine-readable closure inventory across USSR82,
-   School2022 and accepted RU-MR-2019 scope;
-2. group recipes by shared blocker rather than source loyalty;
-3. close the highest-leverage Planner-capacity batches;
-4. introduce new Nutrition architecture only when a real batch proves a concrete
-   missing seam.
+- USSR82-453 — breakfast;
+- USSR82-467 — breakfast;
+- USSR82-492 — breakfast;
+- USSR82-1081 — breakfast;
+- USSR82-697 — main.
+
+These five were previously selected for Planner capacity. Current retained reviews
+show that their remaining blockers are not one common food-catalogue problem:
+
+- 453 / 1081 retained reviews include missing exact V2 Composition/form authority;
+- 467 / 492 retain required-quantity/process blockers;
+- 697 retains exact source identity + consumed-Nutrition authority blockers;
+- cooked/transformed consumed Nutrition remains the recurring reusable seam.
+
+R1-E must verify current main before selecting any production batch; historical
+R1-A "ready" status is not sufficient by itself.
+
+## R1-E classification result
+
+All 547 retained identities are preserved in the deterministic blocker map.
+
+Current next-blocker counts:
+
+- HOUSEHOLD_APPLICABILITY: 478;
+- SOURCE_STRUCTURE_OR_VARIANT: 59;
+- FOOD_IDENTITY_OR_FORM: 5;
+- COMPOSITION_AUTHORITY: 2;
+- REQUIRED_QUANTITY_UNRESOLVED: 2;
+- ROLE_OR_MEAL_COMPOSITION: 1.
+
+These are next-action counts, not claims that later blockers are absent.
+
+Evidence model:
+
+- `known_blockers` contains only evidence-backed per-row blockers;
+- `unproven_later_gates` preserves possible later review without converting
+  aggregate evidence into per-recipe truth;
+- selected R1 candidates separate mode-independent and mode-dependent blockers.
+
+Selected first cooked-authority pilot:
+
+- USSR82-453 — breakfast;
+- USSR82-697 — main.
+
+Why this pair:
+
+- it covers both Planner role families required by R1-C;
+- it forces a concrete consumed-Nutrition authority decision on real cooked
+  recipes;
+- it avoids spending Composition work before the accepted authority mode proves
+  that Composition-based calculation is required;
+- the four-breakfast cluster remains immediate expansion after the authority mode
+  is proven.
+
+Mode-independent prerequisites:
+
+- 453: immutable source-backed RecipeVersion publication lifecycle;
+- 697: exact source FoodIngredient identity/form correction.
+
+Mode-dependent:
+
+- all five selected cooked USSR82 recipes (453 / 467 / 492 / 1081 / 697):
+  downstream consumed-Nutrition authority remains required after local blockers;
+- 453 / 1081 additionally require Composition authority if a Composition-based
+  route is selected.
+
+Activation remains downstream of accepted exact positive consumption Nutrition.
+
+## Next operation after R1-E merge
+
+Run one bounded **cooked-Nutrition authority pilot + mode-independent local
+closure** for 453 + 697. Implement only the minimum versioned authority seam proven
+necessary by those two cases, then expand to 467 / 492 / 1081.
 
 ## Hard boundaries
 
 Do not:
 
-- bulk-activate recipes without exact production authority;
-- treat source-corpus presence as RecipeVersion authority;
-- infer raw→cooked Nutrition;
-- infer implicit retention;
-- promote source-declared recipe totals without an accepted authority path;
-- weaken unknown != zero;
+- bulk-activate source recipes;
+- treat route count or source presence as production readiness;
+- infer raw→cooked Nutrition or implicit retention;
+- promote source-declared Nutrition without accepted authority;
+- relabel SIDE/SALAD/OTHER as MAIN;
+- start meal-bundle runtime in this classification operation;
 - start Shopping/Prep/Retail/API/UI/Auth/PostgreSQL/AI;
 - start R2/R3 before successful R1-C.

@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "accepted_base": "48707e1e84eff260726609c4508f05407e9f9448",
+  "total_retained_recipes": 547,
+  "source_family_counts": {
+    "RU-MR-2019": 214,
+    "USSR82": 68,
+    "ru-school2022": 265
+  },
+  "known_blocker_counts": {
+    "ACTIVATION_REQUIRED": 2,
+    "COMPOSITION_AUTHORITY": 2,
+    "FOOD_IDENTITY_OR_FORM": 64,
+    "HOUSEHOLD_APPLICABILITY": 478,
+    "RECIPE_PUBLICATION_REQUIRED": 545,
+    "REQUIRED_QUANTITY_UNRESOLVED": 2,
+    "ROLE_OR_MEAL_COMPOSITION": 1,
+    "SOURCE_STRUCTURE_OR_VARIANT": 59,
+    "CONSUMED_NUTRITION_AUTHORITY": 5
+  },
+  "unproven_later_gate_counts": {
+    "CONSUMED_NUTRITION_AUTHORITY": 264
+  },
+  "next_blocker_counts": {
+    "COMPOSITION_AUTHORITY": 2,
+    "FOOD_IDENTITY_OR_FORM": 5,
+    "HOUSEHOLD_APPLICABILITY": 478,
+    "REQUIRED_QUANTITY_UNRESOLVED": 2,
+    "ROLE_OR_MEAL_COMPOSITION": 1,
+    "SOURCE_STRUCTURE_OR_VARIANT": 59
+  },
+  "known_blocker_counts_by_family": {
+    "RU-MR-2019": {
+      "HOUSEHOLD_APPLICABILITY": 214,
+      "RECIPE_PUBLICATION_REQUIRED": 214
+    },
+    "USSR82": {
+      "ACTIVATION_REQUIRED": 1,
+      "COMPOSITION_AUTHORITY": 2,
+      "FOOD_IDENTITY_OR_FORM": 64,
+      "RECIPE_PUBLICATION_REQUIRED": 67,
+      "REQUIRED_QUANTITY_UNRESOLVED": 2,
+      "SOURCE_STRUCTURE_OR_VARIANT": 59,
+      "CONSUMED_NUTRITION_AUTHORITY": 5
+    },
+    "ru-school2022": {
+      "ACTIVATION_REQUIRED": 1,
+      "HOUSEHOLD_APPLICABILITY": 264,
+      "RECIPE_PUBLICATION_REQUIRED": 264,
+      "ROLE_OR_MEAL_COMPOSITION": 1
+    }
+  },
+  "planner_capacity_roles": {
+    "breakfast": 4,
+    "main": 3
+  }
+}
