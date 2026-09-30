@@ -344,9 +344,10 @@ def build() -> tuple[list[dict[str, Any]], dict[str, Any], dict[str, Any]]:
         },
         "decision": (
             "Use one breakfast and one main as the first cooked-Nutrition authority "
-            "pilot. Close only mode-independent local blockers unconditionally. "
+            "pilot. Close only mode-independent prerequisites unconditionally. "
             "Resolve the consumed-Nutrition authority mode before spending work on "
-            "mode-dependent Composition closure."
+            "mode-dependent Composition closure; activation remains downstream of "
+            "accepted Nutrition authority."
         ),
         "comparison": comparison,
         "expansion_batch_after_pilot": [
