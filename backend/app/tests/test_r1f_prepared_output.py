@@ -52,6 +52,50 @@ from app.services.recipe_nutrition_v2 import (
 )
 
 
+def uid(number: int) -> UUID:
+    return UUID(f"00000000-0000-4000-8000-{number:012d}")
+
+
+def selection(member_id: UUID, role: MealRole) -> MemberMealPatternSelectionDetail:
+    now = datetime(2026, 9, 30, tzinfo=timezone.utc)
+    selection_id = uid(9000 + int(member_id.hex[-2:], 16))
+    selected = MemberMealPatternSelection(
+        selection_id,
+        uid(1),
+        member_id,
+        1,
+        MemberMealPatternSourceKind.CUSTOM,
+        None,
+        None,
+        False,
+        now,
+        None,
+        now,
+    )
+    opportunities = tuple(
+        MemberMealPatternOpportunitySnapshot(selection_id, weekday, 1, role)
+        for weekday in range(1, 8)
+    )
+    return MemberMealPatternSelectionDetail(selected, opportunities)
+
+
+def real_candidate(catalogue, nutrition, code: str) -> PlannerCandidate:
+    recipe = catalogue.get_by_code(code)
+    detail = catalogue.get_current_verified(recipe.id)
+    projection = nutrition.neutral_consumption_projection(detail.version.id)
+    return PlannerCandidate(
+        detail.version.id,
+        detail.version.meal_type_code,
+        frozenset(row.food_ingredient_id for row in detail.ingredients),
+        projection.per_base_serving.kcal,
+        projection.legacy_status,
+        True,
+        detail.version.total_time_minutes,
+        detail.version.batch_friendly,
+        projection.exact_energy_ready,
+    )
+
+
 @pytest.fixture(scope="module")
 def baseline(tmp_path_factory):
     config = DatabaseConfig(path=tmp_path_factory.mktemp("r1f-base") / "base.sqlite")
