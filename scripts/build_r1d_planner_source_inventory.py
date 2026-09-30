@@ -9,8 +9,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 CROSSWALK = (
-    ROOT
-    / "data/curation/corpus-v03-reconciliation/generated/recipe-crosswalk.jsonl"
+    ROOT / "data/curation/corpus-v03-reconciliation/generated/recipe-crosswalk.jsonl"
 )
 DC1 = ROOT / "data/curation/data-corpus-v1-dc1/candidate-recipes.csv"
 OUT = ROOT / "data/curation/r1d-planner-admission"
@@ -92,9 +91,7 @@ def build() -> tuple[list[dict[str, Any]], dict[str, Any]]:
                 "source_name": dc["recipe_name"] if dc else None,
                 "retained_route_count": len(row.get("route_ids") or ()),
                 "reconciliation_disposition": row["disposition"],
-                "reconciliation_publication_ready": bool(
-                    row.get("publication_ready")
-                ),
+                "reconciliation_publication_ready": bool(row.get("publication_ready")),
                 "dc1_production_ready": (
                     dc["production_ready"] == "YES" if dc else None
                 ),
@@ -117,9 +114,7 @@ def build() -> tuple[list[dict[str, Any]], dict[str, Any]]:
             }
         )
 
-    inventory.sort(
-        key=lambda item: (item["source_family"], item["source_recipe_id"])
-    )
+    inventory.sort(key=lambda item: (item["source_family"], item["source_recipe_id"]))
 
     counts: dict[str, dict[str, int]] = {}
     for item in inventory:
@@ -135,8 +130,7 @@ def build() -> tuple[list[dict[str, Any]], dict[str, Any]]:
             bucket["unpublished"] += 1
 
     published = sum(
-        item["production_catalogue_state"].startswith("PUBLISHED")
-        for item in inventory
+        item["production_catalogue_state"].startswith("PUBLISHED") for item in inventory
     )
     summary = {
         "schema_version": 1,
