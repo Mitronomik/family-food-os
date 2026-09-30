@@ -348,6 +348,7 @@ def test_migration_0042_is_registered_and_required_tables_exist(database):
         "recipe_prepared_nutrient_values",
     } <= tables
 
+
 def test_r1f_real_planner_candidates_honor_ingredient_exclusions(database):
     seed_r1f_prepared_output(database)
     engine = create_sqlite_engine(database)
@@ -388,8 +389,7 @@ def test_r1f_real_planner_candidates_honor_ingredient_exclusions(database):
             ]
             assert matching
             assert any(
-                PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT
-                in trace.rejection_codes
+                PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT in trace.rejection_codes
                 for trace in matching
             )
     finally:
@@ -404,20 +404,18 @@ def test_r1f_serving_scaling_reuses_recipe_and_recipeversion_identity(database):
         for code in (EGG_RECIPE_CODE, CHICKEN_RECIPE_CODE):
             recipe = catalogue.get_by_code(code)
             original = catalogue.get_current_verified(recipe.id)
-            scaled = catalogue.scale_version(
-                original.version.id, Decimal(2)
-            )
+            scaled = catalogue.scale_version(original.version.id, Decimal(2))
             assert scaled.recipe.id == original.recipe.id == recipe.id
             assert scaled.version.id == original.version.id
             assert scaled.version.base_servings == original.version.base_servings
             assert tuple(row.quantity for row in scaled.ingredients) == tuple(
-                row.quantity * Decimal(2)
-                for row in original.ingredients
+                row.quantity * Decimal(2) for row in original.ingredients
             )
             assert catalogue.get_by_code(code).id == recipe.id
             assert len(catalogue.list_versions(recipe.id)) == 1
     finally:
         engine.dispose()
+
 
 def _patched_r1f_engine(monkeypatch, fail_predicate):
     import app.seed.r1f_prepared_output as module
