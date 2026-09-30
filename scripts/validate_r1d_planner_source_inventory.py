@@ -18,14 +18,10 @@ def main() -> None:
         .splitlines()
         if line.strip()
     ]
-    actual_summary = json.loads(
-        (PACKAGE / "summary.json").read_text(encoding="utf-8")
-    )
+    actual_summary = json.loads((PACKAGE / "summary.json").read_text(encoding="utf-8"))
 
     if actual_inventory != expected_inventory:
-        raise SystemExit(
-            "R1-D source inventory differs from deterministic rebuild."
-        )
+        raise SystemExit("R1-D source inventory differs from deterministic rebuild.")
     if actual_summary != expected_summary:
         raise SystemExit("R1-D summary differs from deterministic rebuild.")
 
@@ -43,9 +39,7 @@ def main() -> None:
         for family, values in actual_summary["source_family_counts"].items()
     }
     if actual_families != expected_families:
-        raise SystemExit(
-            f"R1-D source-family counts drifted: {actual_families!r}"
-        )
+        raise SystemExit(f"R1-D source-family counts drifted: {actual_families!r}")
 
     print("R1-D Planner source admission inventory: OK")
 
