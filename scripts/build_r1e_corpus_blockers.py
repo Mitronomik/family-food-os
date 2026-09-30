@@ -131,19 +131,17 @@ def build() -> tuple[list[dict[str, Any]], dict[str, Any], dict[str, Any]]:
                     refs.add(EVIDENCE["cross_corpus_review"])
                     classification_basis = "ACCEPTED_R1_REVIEW"
                 else:
-                    if (
-                        source["source_structure_status"]
-                        != "SINGLE_VARIANT_NO_EXPLICIT_ALTERNATIVE"
-                        or source["variant_selection_status"]
-                        not in {
-                            "SIMPLE_SOURCE_BRANCH_CANDIDATE",
-                            "REVIEWED_SOURCE_BRANCH",
-                        }
-                    ):
+                    if source[
+                        "source_structure_status"
+                    ] != "SINGLE_VARIANT_NO_EXPLICIT_ALTERNATIVE" or source[
+                        "variant_selection_status"
+                    ] not in {
+                        "SIMPLE_SOURCE_BRANCH_CANDIDATE",
+                        "REVIEWED_SOURCE_BRANCH",
+                    }:
                         blockers.add("SOURCE_STRUCTURE_OR_VARIANT")
-                    if (
-                        _split_ids(source.get("dc2_required_ids"))
-                        or _split_ids(source.get("semantic_label_review_ids"))
+                    if _split_ids(source.get("dc2_required_ids")) or _split_ids(
+                        source.get("semantic_label_review_ids")
                     ):
                         blockers.add("FOOD_IDENTITY_OR_FORM")
 
