@@ -1,5 +1,16 @@
 # Progress
 
+## R1-E blocker clustering started — 2026-09-30
+
+Accepted base:
+`48707e1e84eff260726609c4508f05407e9f9448` (merged PR113).
+
+Issue #114 / branch `data/r1e-corpus-blocker-clustering` now classify the full
+547-row retained recipe inventory by evidence-backed next blocker and select a
+blocker-based Planner-capacity batch.
+
+No production activation or new Nutrition/meal-composition runtime has occurred.
+
 ## R1-D corpus-wide Planner admission started — 2026-09-30
 
 Accepted base:
