@@ -1,5 +1,35 @@
 # Handoff
 
+## R1-F runtime implementation — 2026-09-30
+
+Accepted main:
+`e138d615802f7928946e419156f8c6905f04075b` (merged PR117).
+
+Issue #118 / PR #119 / branch `feat/r1f-prepared-output-runtime`.
+
+Implemented:
+
+- migration 0042 prepared-output Recipe Nutrition persistence;
+- immutable prepared header + sparse values;
+- `PREPARED_OUTPUT_V1` neutral projection;
+- fail-closed conflict with Composition authority;
+- identity-only `CHICKEN_CATEGORY_2_RAW`;
+- `HARD_BOILED_EGG` @ exact 63 kcal;
+- `BOILED_CHICKEN_MAIN_PRODUCT` @ exact 167.7 kcal;
+- explicit activation after exact-energy + admission proof;
+- exact replay does not reactivate deliberate deactivation;
+- historical USSR82-697 remains unchanged/inactive.
+
+R1-F publishes ENERGY_KCAL only; unreviewed macro/carbohydrate mappings remain
+UNKNOWN.
+
+Focused runtime workflow is green on exact head
+`9283a647e24c0c8c03b72005eb8255a07590a1b1`.
+
+Broad exact-head workflows remain required before final review readiness.
+
+Do not expand to 467/492/1081 or start R1-C until PR119 final review/merge.
+
 ## R1-F cooked-Nutrition authority gate — 2026-09-30
 
 PR115 merged into main at:
