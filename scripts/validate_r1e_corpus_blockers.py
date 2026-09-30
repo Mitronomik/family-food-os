@@ -44,8 +44,7 @@ def main() -> None:
             "School2022 aggregate Nutrition evidence must not become per-recipe truth."
         )
     if any(
-        row["next_blocker"] != "HOUSEHOLD_APPLICABILITY"
-        for row in school_unpublished
+        row["next_blocker"] != "HOUSEHOLD_APPLICABILITY" for row in school_unpublished
     ):
         raise SystemExit(
             "Unpublished School2022 rows must stop first at household applicability."
