@@ -5,7 +5,12 @@
 Result in current branch:
 - 547/547 retained identities classified;
 - deterministic next blocker assigned to every row;
-- selected first capacity batch: USSR82-453 / 467 / 492 / 1081;
+- School2022 aggregate Nutrition evidence is kept as an unproven later gate rather than per-recipe truth;
+- accepted R1-B blockers are derived/asserted from the publication package;
+- batch alternatives are explicitly compared;
+- selected first cooked-authority pilot: USSR82-453 (breakfast) + USSR82-697 (main);
+- mode-independent vs mode-dependent blockers are separated;
+- activation remains downstream of accepted consumption Nutrition;
 - no Recipe activation or new Nutrition runtime performed.
 
 Accepted base:
