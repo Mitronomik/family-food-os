@@ -80,13 +80,14 @@
         "disposition": "IMMUTABLE_INACTIVE_HISTORY"
       },
       "production_recipe": {
-        "canonical_code": "BOILED_CHICKEN",
-        "canonical_name": "Курица отварная",
+        "canonical_code": "BOILED_CHICKEN_MAIN_PRODUCT",
+        "canonical_name": "Курица отварная без гарнира",
         "source_name": "DIETETIC_RECIPES_1988",
         "source_recipe_id": "303_VARIANT_III",
         "meal_type_code": "main",
         "output_g": "75",
-        "required_food_ingredient_code": "CHICKEN_CATEGORY_2_RAW"
+        "required_food_ingredient_code": "CHICKEN_CATEGORY_2_RAW",
+        "semantic_scope": "boiled chicken main product without garnish/sauce; portion mass remains RecipeVersion/Serving fact"
       },
       "rejected_candidate": {
         "source_name": "USSR_VOCATIONAL_ORDER_1986",
