@@ -2,6 +2,12 @@
 
 ## R1-E blocker clustering started — 2026-09-30
 
+Result in current branch:
+- 547/547 retained identities classified;
+- deterministic next blocker assigned to every row;
+- selected first capacity batch: USSR82-453 / 467 / 492 / 1081;
+- no Recipe activation or new Nutrition runtime performed.
+
 Accepted base:
 `48707e1e84eff260726609c4508f05407e9f9448` (merged PR113).
 
