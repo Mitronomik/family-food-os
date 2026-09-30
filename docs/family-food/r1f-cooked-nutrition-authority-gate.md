@@ -577,6 +577,181 @@ historical source truth.
 Activation is the final reversible flag. Deactivation is the operational rollback
 when a later issue is found.
 
+## 17.1 Dependency inventory
+
+R1-F runtime is allowed to depend on existing canonical components only:
+
+- FoodIngredient catalogue + project-owned UoW;
+- Recipe Catalogue + immutable RecipeVersion history;
+- Recipe Nutrition V2 service/projection;
+- frozen `RU_NUTRIENT_REGISTRY_V2`;
+- Planner admission + ordinary authoritative candidate loading;
+- custom SQLite migration runner / lineage / backup-restore contracts;
+- existing source-corpus and curated evidence packages.
+
+New bounded components introduced by R1-F:
+
+- `PREPARED_OUTPUT_V1` authority kind;
+- `RECIPE_PREPARED_OUTPUT_NUTRITION_V1` calculation version;
+- prepared-authority domain snapshot;
+- prepared-authority persistence/repository;
+- reviewed prepared-output publisher;
+- migration `0042_recipe_prepared_output_nutrition`;
+- source-neutral pilot Recipe seeds;
+- exact `CHICKEN_CATEGORY_2_RAW` FoodIngredient identity publication.
+
+No API/UI/general ingestion dependency is introduced.
+
+## 17.2 Preservation matrix
+
+Runtime implementation must preserve the following unchanged unless this contract
+explicitly says otherwise:
+
+| Existing truth/behavior | Required preservation |
+| --- | --- |
+| `LEGACY_V1` Recipe Nutrition | Byte/semantic behavior unchanged for RecipeVersions with no prepared authority and no V2 bindings. |
+| `COMPOSITION_V2` / `RECIPE_COMPOSITION_NUTRITION_V1` | Existing bindings, calculation, replay and exact-energy behavior unchanged. |
+| Frozen 54-code nutrient set and registry | No code/unit/definition reinterpretation. |
+| Historical `USSR82_697_BOILED_CHICKEN` Recipe | Canonical code/name/UUID and inactive operational state preserved. |
+| Historical USSR82-697 v1 | Ingredients, steps, provenance, source output, bindings and history unchanged. |
+| R1-B publication package | Bytes/accepted historical receipts unchanged. |
+| All existing Recipe/RecipeVersion IDs | No rename/rekey/history rewrite. |
+| Existing Planner algorithm/roles/repetition limits | No scoring/filter/version change; only candidate Nutrition authority becomes available for the two new Recipes. |
+| Existing Serving/Nutrition consumers | Existing projections continue to read through the same neutral consumption boundary. |
+| Migrations 0001–0041 | Immutable historical migration files/IDs/order unchanged. |
+| Backup/restore and migration-lineage semantics | Fresh/upgrade/restore behavior preserved; 0042 extends known head only. |
+| MR 2.4.0162-19 retained bundle | Existing accepted bytes/card hashes unchanged. |
+
+Migration 0042 must create only the new prepared-authority persistence objects and
+their integrity/immutability enforcement. It must not rewrite existing Recipe,
+RecipeVersion, Composition, FoodNutritionProfile or NutrientVector rows.
+
+## 17.3 Fresh / replay / conflict semantics
+
+### FoodIngredient prerequisite
+
+`CHICKEN_CATEGORY_2_RAW`:
+
+- **FRESH** — exact identity absent; publish once through normal FoodIngredient
+  catalogue;
+- **EXACT_REPLAY** — same canonical code/name/category/unit facts already exist;
+- **CONFLICT** — code/name collision or any persisted identity fact differs.
+
+No Nutrition profile is implicitly created by this identity publication.
+
+### Prepared Recipe publication operation
+
+For each of the two source-neutral Recipes:
+
+- **FRESH** — Recipe identity absent; the single UoW transaction creates inactive
+  Recipe + exact RecipeVersion + prepared authority and commits only after exact
+  projection checks;
+- **EXACT_REPLAY** — Recipe, source provenance, RecipeVersion structure/output and
+  prepared authority all exactly match; no writes;
+- **CONFLICT** — same canonical identity/provenance exists with different
+  ingredient/process/output/nutrient/source/right facts;
+- **PARTIAL_PERSISTED_STATE** — Recipe/RecipeVersion exists without the exact
+  authority, authority exists without the exact RecipeVersion, or other
+  half-published shape. This is a conflict, not an automatic repair path.
+
+Because fresh publication is one transaction, a normal failure must never create
+PARTIAL_PERSISTED_STATE.
+
+### Activation
+
+Activation is intentionally outside immutable publication:
+
+- inactive + exact ready authority + clean Planner admission → explicit FRESH
+  activation;
+- active + same exact latest version/authority → EXACT_REPLAY/no-op;
+- inactive after deliberate deactivation → publication replay does not reactivate;
+- authority/projection/admission mismatch → activation rejected.
+
+This separation makes deactivation an operational rollback without mutating
+source truth.
+
+## 17.4 Failure injection and rollback points
+
+Runtime tests must inject failure at minimum:
+
+1. after Recipe insert but before RecipeVersion insert;
+2. after RecipeVersion insert but before prepared header;
+3. after prepared header but before sparse values complete;
+4. after sparse values but before projection verification;
+5. immediately before publication commit;
+6. after committed publication but before activation;
+7. during activation update.
+
+Expected outcomes:
+
+- points 1–5: full transaction rollback; no Recipe/RecipeVersion/prepared authority
+  from that attempt remains;
+- point 6: exact source truth remains committed but Recipe is inactive;
+- point 7: Recipe remains inactive; immutable publication remains valid;
+- no existing historical row is updated/deleted to recover.
+
+## 17.5 Required verification tier for the runtime PR
+
+The runtime PR uses the union of these canonical
+`docs/family-food/verification-policy.md` tiers:
+
+- **Persistence/migration/UoW/startup** — mandatory because migration 0042,
+  immutable persistence and shared UoW behavior change;
+- **Local domain/service** — prepared authority/projection/publication behavior;
+- **API/shared composition/cross-context contract equivalent integration scope** —
+  Recipe Nutrition → Planner admission boundary;
+- **Data curation/import** — source receipts, rights, identity/mass/value exactness.
+
+Before runtime review-ready, exact-head verification must include:
+
+### Focused domain/application/persistence
+
+- prepared authority domain validation;
+- prepared publisher fresh/replay/conflict;
+- sparse UNKNOWN semantics;
+- double-authority conflict;
+- Recipe Nutrition neutral projection;
+- Recipe Catalogue source-neutral seed/replay;
+- `CHICKEN_CATEGORY_2_RAW` identity publication/replay/conflict;
+- explicit activation/deactivation semantics;
+- member ingredient exclusion preservation;
+- Planner admission/application-boundary tests for breakfast + main.
+
+### Migration/persistence
+
+- fresh database through 0042;
+- upgrade from accepted 0041 head to 0042;
+- migration runner rebuild;
+- migration lineage/known-prefix behavior;
+- backup/restore compatibility;
+- migration coexistence;
+- append-only/UPDATE/DELETE rejection for prepared authority;
+- transaction failure-injection paths listed above.
+
+### Data authority
+
+- MR bundle/card receipt paths, hashes, rights and exact 40 g / 63 kcal facts;
+- 1988 bounded factual receipt path, size, SHA, rights and exact 303/III facts;
+- rejection of 697/824 50/50 / 144 kcal;
+- category-I chicken rejection;
+- no source scaling;
+- unknown != zero.
+
+### Broad exact-head regression after runtime freeze
+
+Because shared persistence/startup and `neutral_consumption_projection` change,
+the runtime PR must run before review-ready:
+
+- full backend regression;
+- full launcher regression;
+- existing Nutrient registry V2 workflow/checks;
+- Partial nutrition profiles checks;
+- Recipe Nutrition V2 affected tests;
+- Planner affected tests.
+
+Any later runtime change invalidates that broad exact-head receipt and requires
+the affected/broad verification again.
+
 ## 18. Non-goals
 
 This gate does not authorize before merge:
