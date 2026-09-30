@@ -92,10 +92,20 @@ Planner role families needed by R1-C.
 
 ### Mode-dependent questions
 
-- USSR82-453: exact input Composition is required if the accepted path is
-  Composition-based; it may not be the Planner energy authority under an exact
-  prepared-output Nutrition path.
-- USSR82-697: consumed-Nutrition authority remains unresolved.
+Accepted cross-corpus review proves that all five selected cooked USSR82 recipes
+(453 / 467 / 492 / 1081 / 697) retain a downstream
+`CONSUMED_NUTRITION_AUTHORITY` gap after their local blockers close.
+
+For the mixed pilot specifically:
+
+- USSR82-453: exact input Composition is additionally required if the accepted
+  path is Composition-based; it may not be the Planner energy authority under an
+  exact prepared-output Nutrition path;
+- USSR82-697: consumed-Nutrition authority remains unresolved after exact source
+  food identity/form closure.
+
+The local `next_blocker` remains first; the cooked-Nutrition blocker is recorded
+as the known downstream mode-dependent gate.
 
 Activation is downstream of accepted consumed-Nutrition authority; it is not a
 pre-authority local closure step.
