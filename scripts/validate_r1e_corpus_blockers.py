@@ -61,6 +61,40 @@ def main() -> None:
     ):
         raise SystemExit("Activation is downstream, not a pre-authority local blocker.")
 
+    cooked_r1 = {
+        "USSR82-453": "COMPOSITION_AUTHORITY",
+        "USSR82-467": "REQUIRED_QUANTITY_UNRESOLVED",
+        "USSR82-492": "REQUIRED_QUANTITY_UNRESOLVED",
+        "USSR82-1081": "COMPOSITION_AUTHORITY",
+        "USSR82-697": "FOOD_IDENTITY_OR_FORM",
+    }
+    by_source = {row["source_recipe_id"]: row for row in actual_rows}
+    for source_id, expected_next in cooked_r1.items():
+        row = by_source[source_id]
+        if "CONSUMED_NUTRITION_AUTHORITY" not in row["known_blockers"]:
+            raise SystemExit(
+                f"{source_id} must retain the accepted cooked Nutrition blocker."
+            )
+        if "CONSUMED_NUTRITION_AUTHORITY" not in row["mode_dependent_blockers"]:
+            raise SystemExit(
+                f"{source_id} must classify cooked Nutrition as mode-dependent."
+            )
+        if row["next_blocker"] != expected_next:
+            raise SystemExit(
+                f"{source_id} local next blocker drifted: {row['next_blocker']!r}"
+            )
+
+    if actual_summary["known_blocker_counts"].get(
+        "CONSUMED_NUTRITION_AUTHORITY"
+    ) != 5:
+        raise SystemExit("Exactly five selected cooked USSR82 rows must carry the known gap.")
+    if actual_summary["unproven_later_gate_counts"].get(
+        "CONSUMED_NUTRITION_AUTHORITY"
+    ) != 264:
+        raise SystemExit(
+            "Only the 264 unpublished School2022 rows should retain the unproven gate."
+        )
+
     options = {row["option"] for row in actual_batch["comparison"]}
     required_options = {
         "BREAKFAST_CLUSTER_4",
