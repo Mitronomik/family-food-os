@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "accepted_base": "becc00f0e94c927598f930140c385f84f80aa21d",
+  "operation": "R1F_COOKED_NUTRITION_AUTHORITY_GATE",
+  "artifact_policy": "PUBLIC_LOCATOR_REVIEWED_HASH_PIN_REQUIRED_BEFORE_RUNTIME_PUBLICATION",
+  "targets": [
+    {
+      "target": "USSR82-453",
+      "role": "breakfast",
+      "recipe_source": {
+        "source_name": "USSR82",
+        "source_recipe_id": "453",
+        "selected_branch": "hard-boiled",
+        "output_g": "40",
+        "source_locator": "https://www.interdoka.ru/kulinaria/1982/7_bluda_yaca/1_varenie/1.html",
+        "retained_fact": "Source permits soft-boiled, medium/in-bag or hard-boiled; R1-F selects hard-boiled only."
+      },
+      "prepared_authority_candidate": {
+        "source_name": "MR_2_4_0162_19",
+        "source_id": "APPENDIX_5_CARD_4_1",
+        "source_locator": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/bliuda-iz-iaits/tekhnologicheskaia-karta-n-4.1/",
+        "process": "hard-boiled 8-10 minutes",
+        "output_g": "40",
+        "energy_kcal": "63",
+        "disposition": "SELECT_MODE_C_PENDING_RUNTIME_SOURCE_HASH_PIN"
+      }
+    },
+    {
+      "target": "USSR82_697_BOILED_CHICKEN",
+      "role": "main",
+      "historical_version": {
+        "source_name": "USSR82",
+        "source_recipe_id": "697",
+        "selected_branch": "III chicken main-product only",
+        "input_chicken_net_g": "107",
+        "output_g": "75",
+        "extra_cooking_input": "onion 2 g",
+        "disposition": "IMMUTABLE_INACTIVE_HISTORY"
+      },
+      "rejected_candidate": {
+        "source_name": "USSR_VOCATIONAL_ORDER_1986",
+        "source_id": "697/824",
+        "output_text": "50/50",
+        "energy_kcal": "144",
+        "reason": "50 g chicken + 50 g sauce 824 is not the 75 g chicken-only historical output",
+        "disposition": "REJECT_FOR_R1F_697"
+      },
+      "prepared_authority_candidate": {
+        "source_name": "DIETETIC_RECIPES_1988",
+        "source_id": "303_VARIANT_III",
+        "bibliographic_identity": "Жангабылов А.К. и др. Рецептура блюд диетического питания. Алма-Ата: Казахстан, 1988. ISBN 5-615-00164-X",
+        "source_locator": "https://ru.djvu.online/file/tnrwaYeNtWZjj",
+        "chicken_gross_g": "155",
+        "chicken_net_g": "107",
+        "output_g": "75",
+        "energy_kcal": "167.7",
+        "protein_g": "12.6",
+        "fat_g": "12.8",
+        "carbohydrate_g": "0.5",
+        "disposition": "SELECT_AS_NEW_RECIPE_VERSION_SOURCE_PENDING_RUNTIME_SOURCE_HASH_PIN"
+      }
+    }
+  ],
+  "runtime_contract": {
+    "authority_kind": "PREPARED_OUTPUT_V1",
+    "recipe_calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+    "mandatory_available_nutrients": [
+      "ENERGY_KCAL"
+    ],
+    "all_unreviewed_nutrients": "UNKNOWN",
+    "raw_to_cooked_fallback": false,
+    "implicit_retention": false,
+    "source_scaling": false,
+    "activation_requires_exact_positive_energy": true
+  }
+}
