@@ -77,5 +77,5 @@ jobs:
           echo "tested revision: $(git rev-parse HEAD)"
           echo '547 retained recipe identities: PASS'
           echo 'deterministic next blocker for every row: PASS'
-          echo 'selected breakfast capacity batch: PASS'
+          echo 'reviewed mixed cooked-authority pilot: PASS'
           echo 'generated == committed blocker package: PASS'
