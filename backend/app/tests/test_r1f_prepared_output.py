@@ -5,8 +5,6 @@ from decimal import Decimal
 from uuid import UUID
 
 import pytest
-from sqlalchemy import event
-
 from app.db import migrations
 from app.db.config import DatabaseConfig
 from app.domain.meal_patterns import MealRole
@@ -50,6 +48,7 @@ from app.services.recipe_nutrition_v2 import (
     RecipeNutritionV2Service,
     RecipeNutritionV2UnavailableError,
 )
+from sqlalchemy import event
 
 
 def uid(number: int) -> UUID:
@@ -412,7 +411,7 @@ def test_r1f_serving_scaling_reuses_recipe_and_recipeversion_identity(database):
             assert scaled.version.id == original.version.id
             assert scaled.version.base_servings == original.version.base_servings
             assert tuple(row.quantity for row in scaled.ingredients) == tuple(
-                row.quantity * Decimal("2")
+                row.quantity * Decimal(2)
                 for row in original.ingredients
             )
             assert catalogue.get_by_code(code).id == recipe.id
