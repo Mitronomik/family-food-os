@@ -142,7 +142,7 @@ USSR82-697 RecipeVersion.
 
 The 1988 reference `Рецептура блюд диетического питания`
 (Жангабылов А. К. et al., Алма-Ата: Казахстан, 1988, ISBN 5-615-00164-X)
-publishes recipe 303 `Курица отварная без гарнира`.
+publishes recipe 303 `Курица отварная`.
 
 Variant III states:
 
