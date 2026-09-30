@@ -1,0 +1,87 @@
+name: R1-F contract evidence
+
+on:
+  pull_request:
+    paths:
+      - 'docs/family-food/r1f-cooked-nutrition-authority-gate.md'
+      - 'data/curation/r1f-cooked-nutrition-authority-gate/**'
+      - 'data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json'
+      - '.github/workflows/r1f-contract-evidence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-r1f-contract-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify durable evidence receipts
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          import json
+
+          root = Path(".")
+          evidence_path = root / "data/curation/r1f-cooked-nutrition-authority-gate/evidence.json"
+          evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
+          assert evidence["schema_version"] == 2
+
+          receipts = evidence["source_receipts"]
+
+          mr = receipts["hard_boiled_egg"]
+          bundle_path = root / mr["durable_artifact_path"]
+          assert bundle_path.stat().st_size == mr["durable_artifact_size_bytes"]
+          bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+          document = bundle["document"]
+          assert document["raw_bytes_sha256"] == mr["source_document_raw_bytes_sha256"]
+          assert document["raw_text_sha256"] == mr["source_document_raw_text_sha256"]
+          assert document["publication_policy"] == "NORMATIVE_BASE_RECIPE_APPROVED"
+
+          cards = [
+              card for card in bundle["cards"]
+              if card["source_section_code"] == mr["source_section_code"]
+              and card["source_card_code"] == mr["source_card_code"]
+          ]
+          assert len(cards) == 1
+          card = cards[0]
+          raw = card["raw_card_text"].encode("utf-8")
+          assert hashlib.sha256(raw).hexdigest() == mr["raw_card_sha256"]
+          assert card["raw_card_sha256"] == mr["raw_card_sha256"]
+          assert "63" in card["raw_card_text"]
+          assert "40" in card["raw_card_text"]
+          assert mr["rights_review_status"] == "REVIEWED"
+
+          chicken = receipts["boiled_chicken_75g"]
+          chicken_path = root / chicken["durable_artifact_path"]
+          raw = chicken_path.read_bytes()
+          assert len(raw) == chicken["durable_artifact_size_bytes"]
+          assert hashlib.sha256(raw).hexdigest() == chicken["durable_artifact_sha256"]
+          text = raw.decode("utf-8")
+          for expected in (
+              "Recipe: 303",
+              "Variant: III",
+              "Chicken gross mass: 155 g",
+              "Chicken net mass: 107 g",
+              "Finished output: 75 g",
+              "Energy: 167.7 kcal",
+          ):
+              assert expected in text
+          assert chicken["rights_review_status"] == "BOUNDED_FACTUAL_USE_REVIEWED"
+
+          targets = {item["closure_target"]: item for item in evidence["targets"]}
+          assert targets["USSR82-453"]["production_recipe"]["canonical_code"] == "HARD_BOILED_EGG_40G"
+          assert targets["USSR82-697"]["production_recipe"]["canonical_code"] == "BOILED_CHICKEN_PORTION_75G"
+          assert targets["USSR82-697"]["historical_recipe"]["canonical_code"] == "USSR82_697_BOILED_CHICKEN"
+          assert targets["USSR82-697"]["historical_recipe"]["disposition"] == "IMMUTABLE_INACTIVE_HISTORY"
+
+          print("R1-F contract evidence: OK")
+          PY
+      - name: Whitespace gate
+        run: git diff --check
