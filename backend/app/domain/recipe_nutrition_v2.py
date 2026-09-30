@@ -73,7 +73,9 @@ NUTRIENT_CODES = (
 )
 
 if len(NUTRIENT_CODES) != 54 or len(set(NUTRIENT_CODES)) != 54:
-    raise RuntimeError("Step 10-A nutrient-set constant is not the frozen 54-code tuple.")
+    raise RuntimeError(
+        "Step 10-A nutrient-set constant is not the frozen 54-code tuple."
+    )
 
 
 class RecipeNutritionV2Status(StrEnum):
@@ -141,8 +143,13 @@ class PreparedRecipeNutrientValue:
             or not self.amount.is_finite()
             or self.amount < 0
         ):
-            raise ValueError("Prepared nutrient amount должен быть конечным и неотрицательным.")
-        if not isinstance(self.provenance_json, str) or not self.provenance_json.strip():
+            raise ValueError(
+                "Prepared nutrient amount должен быть конечным и неотрицательным."
+            )
+        if (
+            not isinstance(self.provenance_json, str)
+            or not self.provenance_json.strip()
+        ):
             raise ValueError("Prepared nutrient provenance_json обязателен.")
 
 
@@ -175,13 +182,17 @@ class PreparedRecipeNutritionAuthority:
             (self.recipe_calculation_version, PREPARED_RECIPE_CALCULATION_VERSION),
         )
         if any(actual != frozen for actual, frozen in expected):
-            raise ValueError("Prepared Recipe authority использует неверную version identity.")
+            raise ValueError(
+                "Prepared Recipe authority использует неверную version identity."
+            )
         if (
             not isinstance(self.output_mass_g, Decimal)
             or not self.output_mass_g.is_finite()
             or self.output_mass_g <= 0
         ):
-            raise ValueError("Prepared output_mass_g должен быть положительным Decimal.")
+            raise ValueError(
+                "Prepared output_mass_g должен быть положительным Decimal."
+            )
         for value, label in (
             (self.source_name, "source_name"),
             (self.source_id, "source_id"),
@@ -199,21 +210,33 @@ class PreparedRecipeNutritionAuthority:
             or len(self.source_document_sha256) != 64
             or any(ch not in "0123456789abcdef" for ch in self.source_document_sha256)
         ):
-            raise ValueError("Prepared authority source_document_sha256 должен быть lowercase SHA-256.")
-        if not isinstance(self.value_count, int) or isinstance(self.value_count, bool) or self.value_count <= 0:
-            raise ValueError("Prepared authority value_count должен быть положительным integer.")
+            raise ValueError(
+                "Prepared authority source_document_sha256 должен быть lowercase SHA-256."
+            )
+        if (
+            not isinstance(self.value_count, int)
+            or isinstance(self.value_count, bool)
+            or self.value_count <= 0
+        ):
+            raise ValueError(
+                "Prepared authority value_count должен быть положительным integer."
+            )
         if (
             not isinstance(self.value_sha256, str)
             or len(self.value_sha256) != 64
             or any(ch not in "0123456789abcdef" for ch in self.value_sha256)
         ):
-            raise ValueError("Prepared authority value_sha256 должен быть lowercase SHA-256.")
+            raise ValueError(
+                "Prepared authority value_sha256 должен быть lowercase SHA-256."
+            )
         if (
             not isinstance(self.created_at, datetime)
             or self.created_at.tzinfo is None
             or self.created_at.utcoffset() is None
         ):
-            raise ValueError("Prepared authority created_at должен быть timezone-aware instant.")
+            raise ValueError(
+                "Prepared authority created_at должен быть timezone-aware instant."
+            )
 
 
 @dataclass(frozen=True)
@@ -229,7 +252,9 @@ class CanonicalNutrientAmount:
             or not self.amount.is_finite()
             or self.amount < 0
         ):
-            raise ValueError("Количество нутриента должно быть конечным и неотрицательным.")
+            raise ValueError(
+                "Количество нутриента должно быть конечным и неотрицательным."
+            )
 
     @property
     def availability(self) -> str:
@@ -269,10 +294,14 @@ class CanonicalRecipeVersionNutrition:
             (self.recipe_calculation_version, RECIPE_CALCULATION_VERSION),
         )
         if any(actual != frozen for actual, frozen in expected_versions):
-            raise ValueError("Canonical Recipe Nutrition использует неверную authority version.")
+            raise ValueError(
+                "Canonical Recipe Nutrition использует неверную authority version."
+            )
         for values in (self.required_total, self.per_base_serving):
             if tuple(item.code for item in values) != NUTRIENT_CODES:
-                raise ValueError("Canonical Recipe Nutrition должен содержать ровно 54 кода.")
+                raise ValueError(
+                    "Canonical Recipe Nutrition должен содержать ровно 54 кода."
+                )
         object.__setattr__(self, "status", RecipeNutritionV2Status(self.status))
 
     def total_amount(self, code: str) -> Decimal | None:
