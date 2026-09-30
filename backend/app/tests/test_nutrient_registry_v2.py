@@ -373,6 +373,7 @@ def test_migration_chain_advances_without_consuming_reserved_0033():
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
+        "0042_recipe_prepared_output_nutrition",
     ]
     assert not any(value.startswith("0033_") for value in expected)
 
@@ -476,6 +477,7 @@ def test_0035_version_pins_existing_retention_rows_without_changing_values(tmp_p
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
+        "0042_recipe_prepared_output_nutrition",
     ]
 
     with sqlite3.connect(config.path) as db:
