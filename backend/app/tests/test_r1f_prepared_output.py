@@ -6,10 +6,9 @@ from uuid import UUID
 
 import pytest
 from sqlalchemy import event
+
 from app.db import migrations
 from app.db.config import DatabaseConfig
-from app.domain.recipe_nutrition_v2 import RecipeNutritionAuthorityKind
-from app.domain.food_recipes import MealTypeCode
 from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import (
     MemberMealPatternOpportunitySnapshot,
@@ -22,10 +21,11 @@ from app.domain.planner import (
     PlannerCandidate,
     PlannerConfig,
     PlannerFailure,
-    PlannerRequest,
     PlannerRejectionCode,
+    PlannerRequest,
     generate_week,
 )
+from app.domain.recipe_nutrition_v2 import RecipeNutritionAuthorityKind
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_recipe_composition import (
     create_food_recipe_catalogue_service,
@@ -50,50 +50,6 @@ from app.services.recipe_nutrition_v2 import (
     RecipeNutritionV2Service,
     RecipeNutritionV2UnavailableError,
 )
-
-
-def uid(number: int) -> UUID:
-    return UUID(f"00000000-0000-4000-8000-{number:012d}")
-
-
-def selection(member_id: UUID, role: MealRole) -> MemberMealPatternSelectionDetail:
-    now = datetime(2026, 9, 30, tzinfo=timezone.utc)
-    selection_id = uid(9000 + int(member_id.hex[-2:], 16))
-    selected = MemberMealPatternSelection(
-        selection_id,
-        uid(1),
-        member_id,
-        1,
-        MemberMealPatternSourceKind.CUSTOM,
-        None,
-        None,
-        False,
-        now,
-        None,
-        now,
-    )
-    opportunities = tuple(
-        MemberMealPatternOpportunitySnapshot(selection_id, weekday, 1, role)
-        for weekday in range(1, 8)
-    )
-    return MemberMealPatternSelectionDetail(selected, opportunities)
-
-
-def real_candidate(catalogue, nutrition, code: str) -> PlannerCandidate:
-    recipe = catalogue.get_by_code(code)
-    detail = catalogue.get_current_verified(recipe.id)
-    projection = nutrition.neutral_consumption_projection(detail.version.id)
-    return PlannerCandidate(
-        detail.version.id,
-        detail.version.meal_type_code,
-        frozenset(row.food_ingredient_id for row in detail.ingredients),
-        projection.per_base_serving.kcal,
-        projection.legacy_status,
-        True,
-        detail.version.total_time_minutes,
-        detail.version.batch_friendly,
-        projection.exact_energy_ready,
-    )
 
 
 @pytest.fixture(scope="module")
@@ -371,7 +327,7 @@ def test_r1f_real_planner_candidates_honor_ingredient_exclusions(database):
                     MemberPlannerConstraints(
                         member_id,
                         selection(member_id, role),
-                        Decimal("2000"),
+                        Decimal(2000),
                         candidate.food_ingredient_ids,
                     ),
                 ),
@@ -406,7 +362,7 @@ def test_r1f_serving_scaling_reuses_recipe_and_recipeversion_identity(database):
             recipe = catalogue.get_by_code(code)
             original = catalogue.get_current_verified(recipe.id)
             scaled = catalogue.scale_version(
-                original.version.id, Decimal("2")
+                original.version.id, Decimal(2)
             )
             assert scaled.recipe.id == original.recipe.id == recipe.id
             assert scaled.version.id == original.version.id
