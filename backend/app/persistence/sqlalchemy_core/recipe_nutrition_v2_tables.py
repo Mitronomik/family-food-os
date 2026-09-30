@@ -1,8 +1,20 @@
 """SQLAlchemy Core mapping for Step 10-A Recipe Nutrition authority."""
 
-from sqlalchemy import Column, ForeignKey, ForeignKeyConstraint, Integer, MetaData, String, Table
+from sqlalchemy import (
+    Column,
+    ForeignKey,
+    ForeignKeyConstraint,
+    Integer,
+    MetaData,
+    String,
+    Table,
+)
 
-from app.persistence.sqlalchemy_core.types import DecimalText, UTCDateTime, entity_uuid_type
+from app.persistence.sqlalchemy_core.types import (
+    DecimalText,
+    UTCDateTime,
+    entity_uuid_type,
+)
 
 metadata = MetaData()
 
