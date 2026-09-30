@@ -1,5 +1,23 @@
 # Handoff
 
+## R1-E corpus blocker clustering — 2026-09-30
+
+PR113 merged at `48707e1e84eff260726609c4508f05407e9f9448`.
+
+Issue #114 now owns the next bounded operation:
+evidence-backed blocker classification of all 547 retained recipe identities and
+selection of the first high-leverage Planner-capacity production batch.
+
+Branch:
+`data/r1e-corpus-blocker-clustering`.
+
+Critical boundary: all recipes may be visible to admission/closure, but SIDE /
+SALAD / OTHER are not silently promoted to standalone MAIN candidates. Current R1
+batch selection prioritizes truthful BREAKFAST / MAIN capacity.
+
+No Recipe activation, new Nutrition runtime, schema/migration or meal-bundle
+implementation is authorized by this classification operation.
+
 ## R1-D corpus-wide Planner admission — 2026-09-30
 
 Accepted main: `e350e747a9c6e06e74b2cd450637c25a442c8749` (merged PR111).
