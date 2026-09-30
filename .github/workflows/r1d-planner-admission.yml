@@ -1,0 +1,95 @@
+name: R1-D Planner admission
+
+on:
+  pull_request:
+    paths:
+      - 'backend/app/services/food_recipe_contracts.py'
+      - 'backend/app/persistence/sqlalchemy_core/food_recipe_repositories.py'
+      - 'backend/app/services/food_recipes.py'
+      - 'backend/app/services/planner.py'
+      - 'backend/app/tests/persistence/test_food_recipe_repository.py'
+      - 'backend/app/tests/test_planner_application_boundary.py'
+      - 'backend/app/seed/r1b_reviewed_recipes.py'
+      - 'backend/app/seed/ru_school2022_step9_recipe.py'
+      - 'data/curation/r1b-reviewed-recipes/**'
+      - 'data/curation/ru-school2022-step9-recipe-runtime/**'
+      - 'data/curation/corpus-v03-reconciliation/generated/recipe-crosswalk.jsonl'
+      - 'data/curation/data-corpus-v1-dc1/candidate-recipes.csv'
+      - 'data/curation/r1d-planner-admission/**'
+      - 'scripts/build_r1d_planner_source_inventory.py'
+      - 'scripts/validate_r1d_planner_source_inventory.py'
+      - '.github/workflows/r1d-planner-admission.yml'
+  workflow_dispatch:
+    inputs:
+      target_ref:
+        description: 'Branch, tag or exact commit SHA to verify'
+        required: true
+        default: 'main'
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  admission-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      AI_ENABLED: 'false'
+    steps:
+      - name: Checkout exact requested revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ inputs.target_ref || github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install verification dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check -e './backend[test]'
+          python -m pip install --disable-pip-version-check 'ruff==0.16.8'
+
+      - name: Compile and lint R1-D scripts
+        run: |
+          set -euo pipefail
+          python -m py_compile             scripts/build_r1d_planner_source_inventory.py             scripts/validate_r1d_planner_source_inventory.py
+          ruff check             scripts/build_r1d_planner_source_inventory.py             scripts/validate_r1d_planner_source_inventory.py
+          ruff format --check             scripts/build_r1d_planner_source_inventory.py             scripts/validate_r1d_planner_source_inventory.py
+
+      - name: Validate committed source inventory
+        run: |
+          set -euo pipefail
+          python scripts/validate_r1d_planner_source_inventory.py
+
+      - name: Verify Planner admission boundaries
+        run: |
+          set -euo pipefail
+          python -m pytest -q             backend/app/tests/test_planner_application_boundary.py             backend/app/tests/persistence/test_food_recipe_repository.py
+
+      - name: Diff whitespace gate
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          base="${PR_BASE_SHA:-origin/main}"
+          git fetch origin main --no-tags
+          git diff --check "$base"...HEAD
+
+      - name: Verification summary
+        run: |
+          set -euo pipefail
+          echo "tested revision: $(git rev-parse HEAD)"
+          echo 'R1-D script compile/lint: PASS'
+          echo 'generated inventory == committed inventory: PASS'
+          echo 'retained recipe count 547: PASS'
+          echo 'family counts USSR82=68 School2022=265 RU-MR-2019=214: PASS'
+          echo 'Planner exhaustive admission tests: PASS'
