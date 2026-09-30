@@ -2,6 +2,15 @@
 
 ## R1-E corpus blocker clustering — 2026-09-30
 
+Classification result:
+547/547 retained identities preserved. First capacity batch selected:
+USSR82-453 / 467 / 492 / 1081 (four breakfast candidates).
+
+Next-blocker distribution is dominated by household-applicability review outside
+the current USSR82 production path; within the accepted breakfast batch, two
+Composition and two quantity blockers must close before the shared cooked
+consumed-Nutrition authority seam.
+
 PR113 merged at `48707e1e84eff260726609c4508f05407e9f9448`.
 
 Issue #114 now owns the next bounded operation:
