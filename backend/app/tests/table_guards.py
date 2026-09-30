@@ -80,6 +80,8 @@ CURRENT_ALLOWED_TABLES = {
     "meal_plan_member_reference_methodology_pins",
     "food_transformation_applicability",
     "recipe_ingredient_composition_bindings",
+    "recipe_prepared_nutrition_authorities",
+    "recipe_prepared_nutrient_values",
     "sqlite_sequence",
 }
 
