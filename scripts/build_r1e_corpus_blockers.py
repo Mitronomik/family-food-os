@@ -337,7 +337,8 @@ def build() -> tuple[list[dict[str, Any]], dict[str, Any], dict[str, Any]]:
         "role_coverage": {"breakfast": 1, "main": 1},
         "candidate_count": len(selected),
         "mode_independent_local_blockers": {
-            row["source_recipe_id"]: row["mode_independent_blockers"] for row in selected
+            row["source_recipe_id"]: row["mode_independent_blockers"]
+            for row in selected
         },
         "mode_dependent_local_blockers": {
             row["source_recipe_id"]: row["mode_dependent_blockers"] for row in selected
