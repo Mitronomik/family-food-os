@@ -1,5 +1,33 @@
 # Handoff
 
+## R1-F cooked-Nutrition authority gate — 2026-09-30
+
+PR115 merged into main at:
+`becc00f0e94c927598f930140c385f84f80aa21d`.
+
+Issue #116 / branch `docs/r1f-cooked-nutrition-authority-gate` own the required
+docs-only Implementation Contract Gate before any authoritative runtime change.
+
+Selected contract direction:
+
+- new RecipeVersion-level authority kind `PREPARED_OUTPUT_V1`;
+- calculation version `RECIPE_PREPARED_OUTPUT_NUTRITION_V1`;
+- migration 0042 with immutable prepared-authority header + sparse nutrient values;
+- ENERGY_KCAL mandatory, unreviewed nutrients UNKNOWN;
+- no double authority with Composition bindings;
+- exact source artifact/hash required before publication.
+
+Pilot evidence:
+
+- 453: hard-boiled only; MR 2.4.0162-19 card 4.1 gives 40 g / 63 kcal;
+- historical 697 v1 remains immutable/inactive;
+- 1986 697/824 50/50 / 144 kcal is rejected as chicken + sauce;
+- 1988 recipe 303 Variant III gives exact 155/107 → 75 g boiled chicken and
+  167.7 kcal; proposed as a new source-backed RecipeVersion under the same
+  canonical boiled-chicken Recipe.
+
+Runtime must not begin until this gate PR is reviewed and merged.
+
 ## R1-E corpus blocker clustering — 2026-09-30
 
 Classification result:
