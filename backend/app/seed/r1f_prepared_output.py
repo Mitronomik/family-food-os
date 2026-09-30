@@ -1,10 +1,10 @@
 """R1-F prepared-output Nutrition publication and activation pilot."""
 
+import hashlib
+import json
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from decimal import Decimal
-import hashlib
-import json
 from pathlib import Path
 from uuid import UUID
 
@@ -22,8 +22,8 @@ from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
     SqlAlchemyRecipeNutritionV2UnitOfWork,
     create_recipe_nutrition_v2_service,
 )
-from app.services.food_ingredients import TrustedFoodIngredientIdentitySeed
 from app.seed.food_ingredients import seed_food_ingredients
+from app.services.food_ingredients import TrustedFoodIngredientIdentitySeed
 from app.services.food_recipes import (
     TrustedRecipeIngredientSeed,
     TrustedRecipeSeed,
@@ -126,7 +126,7 @@ def _recipe_seeds(evidence: dict) -> tuple[TrustedRecipeSeed, TrustedRecipeSeed]
         canonical_name="Яйцо куриное вкрутую",
         initial_is_active=False,
         version=TrustedRecipeVersionSeed(
-            base_servings=Decimal("1"),
+            base_servings=Decimal(1),
             meal_type_code="breakfast",
             prep_time_minutes=None,
             cook_time_minutes=10,
@@ -144,14 +144,14 @@ def _recipe_seeds(evidence: dict) -> tuple[TrustedRecipeSeed, TrustedRecipeSeed]
             source_version=f"sha256:{egg_receipt['source_document_raw_bytes_sha256']}",
             source_retrieved_at=datetime.fromisoformat(egg_receipt["retrieved_at"]),
             source_document_sha256=egg_receipt["source_document_raw_bytes_sha256"],
-            source_original_servings=Decimal("1"),
+            source_original_servings=Decimal(1),
             rights_review_status="REVIEWED",
             rights_basis=egg_receipt["rights_basis"],
             change_note="R1-F exact hard-boiled branch from MR 2.4.0162-19 card 4.1.",
             ingredients=(
                 TrustedRecipeIngredientSeed(
                     food_ingredient_code="EGG",
-                    quantity=Decimal("40"),
+                    quantity=Decimal(40),
                     unit="g",
                     source_amount_text="Яйцо куриное 40 г",
                     normalization_note="exact source net amount",
@@ -163,7 +163,7 @@ def _recipe_seeds(evidence: dict) -> tuple[TrustedRecipeSeed, TrustedRecipeSeed]
                 "Погрузить яйцо в кипящую воду и варить вкрутую 8–10 минут.",
                 "Охладить в холодной воде и очистить от скорлупы.",
             ),
-            source_output_g=Decimal("40"),
+            source_output_g=Decimal(40),
             source_output_text="выход 1 шт.; нормативная масса порции 40 г",
         ),
     )
@@ -173,7 +173,7 @@ def _recipe_seeds(evidence: dict) -> tuple[TrustedRecipeSeed, TrustedRecipeSeed]
         canonical_name="Курица отварная без гарнира",
         initial_is_active=False,
         version=TrustedRecipeVersionSeed(
-            base_servings=Decimal("1"),
+            base_servings=Decimal(1),
             meal_type_code="main",
             prep_time_minutes=None,
             cook_time_minutes=None,
@@ -191,14 +191,14 @@ def _recipe_seeds(evidence: dict) -> tuple[TrustedRecipeSeed, TrustedRecipeSeed]
             source_version=f"sha256:{chicken_receipt['durable_artifact_sha256']}",
             source_retrieved_at=None,
             source_document_sha256=chicken_receipt["durable_artifact_sha256"],
-            source_original_servings=Decimal("1"),
+            source_original_servings=Decimal(1),
             rights_review_status="REVIEWED",
             rights_basis=chicken_receipt["rights_basis"],
             change_note="R1-F exact recipe 303 Variant III main-product publication.",
             ingredients=(
                 TrustedRecipeIngredientSeed(
                     food_ingredient_code=CHICKEN_FOOD_CODE,
-                    quantity=Decimal("107"),
+                    quantity=Decimal(107),
                     unit="g",
                     source_amount_text="Курица 155 г брутто / 107 г нетто",
                     normalization_note="exact source Variant III net amount; category II",
@@ -207,7 +207,7 @@ def _recipe_seeds(evidence: dict) -> tuple[TrustedRecipeSeed, TrustedRecipeSeed]
                 ),
             ),
             steps=("Курицу отварить целиком.",),
-            source_output_g=Decimal("75"),
+            source_output_g=Decimal(75),
             source_output_text="выход 75 г; основной продукт без гарнира/соуса",
         ),
     )
