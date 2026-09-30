@@ -226,6 +226,8 @@ Required fields:
 - source_locator;
 - source_document_sha256;
 - source_data_type;
+- rights_review_status;
+- rights_basis;
 - review_reference;
 - value_count;
 - value_sha256;
@@ -275,6 +277,16 @@ Minimum runtime-publication pins:
 
 If a source artifact cannot be durably retained and hash-verified, production
 publication for that recipe remains blocked.
+
+Prepared-output publication also requires an explicit accepted rights/use
+disposition for the exact source artifact. Public availability is not a rights
+receipt. For each authority source the runtime package must pin:
+
+- rights_review_status;
+- rights_basis / receipt reference;
+- allowed project use scope.
+
+An unresolved rights disposition keeps that recipe blocked.
 
 Public web text/search snippets are research evidence, not the immutable runtime
 source receipt.
