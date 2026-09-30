@@ -90,17 +90,28 @@ A separate 1988 source, recipe 303 Variant III `Курица отварная`, 
 The already accepted source mapping identifies the 155/107 path with category-II
 chicken.
 
-R1-F proposes a **new immutable RecipeVersion** under the same canonical boiled
-chicken Recipe, sourced from exact 1988 recipe 303 Variant III. The historical
-USSR82-697 version is not mutated or reinterpreted.
+R1-F preserves the historical source-coded Recipe
+`USSR82_697_BOILED_CHICKEN` unchanged/inactive and publishes a separate
+source-neutral production Recipe:
+
+- `BOILED_CHICKEN_PORTION_75G`;
+- Russian name `Курица отварная, порция 75 г`;
+- source `DIETETIC_RECIPES_1988 / 303_VARIANT_III`.
+
+No source-specific USSR82 code becomes the identity of a foreign-source version.
 
 ## Source artifact boundary
 
 Public source locators are research evidence only.
 
-Before runtime publication, exact source artifacts for both prepared authorities
-must be retained/retrievable and SHA-256 pinned. Missing source artifact/hash keeps
-that recipe blocked.
+Source receipts are now closed in the gate itself:
+
+- MR 2.4.0162-19 uses the existing accepted repository bundle + exact card hash;
+- 1988 recipe 303 uses a bounded factual repository receipt with pinned size/SHA;
+- both have explicit reviewed rights scope.
+
+Runtime must verify these exact receipts; it must not discover/choose new source
+authority.
 
 ## Next step
 
@@ -110,11 +121,10 @@ Only after merge may the runtime PR implement:
 
 1. migration 0042;
 2. PREPARED_OUTPUT_V1 domain/persistence/publication;
-3. source artifact/hash pins;
-4. exact 453 + chicken RecipeVersion publications;
-5. exact-energy projection verification;
-6. activation;
-7. ordinary Planner admission proof.
+3. exact source-neutral Recipe publications using the already pinned receipts;
+4. exact-energy projection verification;
+5. explicit activation;
+6. ordinary Planner admission proof.
 
 Then expand the accepted seam to 467 / 492 / 1081 and additional MAIN capacity.
 
