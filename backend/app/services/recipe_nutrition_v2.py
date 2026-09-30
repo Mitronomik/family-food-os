@@ -339,8 +339,6 @@ class RecipeNutritionV2Service:
         recipe = uow.recipes.get_by_code(spec.recipe_code)
         if recipe is None:
             raise RecipeNutritionV2ConflictError("Prepared Recipe identity missing.")
-        if spec.require_recipe_inactive and recipe.is_active:
-            raise RecipeNutritionV2ConflictError("Prepared Recipe must be inactive during publication.")
         candidates = uow.versions.list_by_provenance(
             recipe.id, spec.source_name, spec.source_recipe_id, spec.source_version
         )
@@ -425,6 +423,10 @@ class RecipeNutritionV2Service:
             )
         if existing_values:
             raise RecipeNutritionV2ConflictError("Partial prepared authority state detected.")
+        if spec.require_recipe_inactive and recipe.is_active:
+            raise RecipeNutritionV2ConflictError(
+                "Prepared Recipe must be inactive for fresh authority publication."
+            )
 
         now = self._clock()
         if not isinstance(now, datetime) or now.tzinfo is None or now.utcoffset() is None:
