@@ -399,9 +399,7 @@ class FoodRecipeCatalogueService:
                     )
                 recipe = self._new_recipe(entry, now)
                 scope.recipes.add(recipe)
-                detail = self._new_detail(
-                    scope, recipe, entry.version, 1, None, now
-                )
+                detail = self._new_detail(scope, recipe, entry.version, 1, None, now)
                 scope.versions.add_detail(detail)
                 _increment_detail(counts, detail, inserted=True)
                 counts["recipes_inserted"] += 1
