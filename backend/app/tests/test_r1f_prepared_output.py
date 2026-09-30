@@ -591,4 +591,3 @@ def test_r1f_activation_failure_leaves_committed_publication_inactive(
         (CHICKEN_RECIPE_CODE, 0),
         (EGG_RECIPE_CODE, 0),
     ]
-
