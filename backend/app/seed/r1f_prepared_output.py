@@ -321,10 +321,19 @@ def seed_r1f_prepared_output(
                 with SqlAlchemyRecipeNutritionV2UnitOfWork(engine) as uow:
                     catalogue.reconcile_seed_in_scope(uow, (seed,))
                     published = nutrition.publish_prepared_in_scope(uow, spec)
-                    projection = nutrition.neutral_consumption_projection
                     if published.disposition is not PreparedPublicationDisposition.FRESH:
                         raise RecipeNutritionV2ConflictError(
                             f"Fresh R1-F publication did not produce FRESH: {seed.canonical_code}."
+                        )
+                    projected_in_scope = nutrition.prepared_consumption_projection_in_scope(
+                        uow, published.authority.recipe_version_id
+                    )
+                    if (
+                        not projected_in_scope.exact_energy_ready
+                        or projected_in_scope.per_base_serving.kcal is None
+                    ):
+                        raise RecipeNutritionV2ConflictError(
+                            f"R1-F in-scope exact energy unavailable: {seed.canonical_code}."
                         )
                     uow.commit()
             else:
