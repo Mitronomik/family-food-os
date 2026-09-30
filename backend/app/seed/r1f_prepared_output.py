@@ -316,6 +316,7 @@ def seed_r1f_prepared_output(
         dispositions = []
         version_ids = []
         energies = []
+        fresh_codes: set[str] = set()
         for seed, spec in zip(seeds, specs, strict=True):
             if catalogue.preflight_trusted_seed(seed) is TrustedRecipeSeedDisposition.FRESH:
                 with SqlAlchemyRecipeNutritionV2UnitOfWork(engine) as uow:
@@ -336,6 +337,7 @@ def seed_r1f_prepared_output(
                             f"R1-F in-scope exact energy unavailable: {seed.canonical_code}."
                         )
                     uow.commit()
+                    fresh_codes.add(seed.canonical_code)
             else:
                 published = nutrition.publish_prepared(spec)
 
@@ -359,27 +361,39 @@ def seed_r1f_prepared_output(
                 for row in planner.compose_candidate_admission()
                 if row.canonical_code == seed.canonical_code
             )
-            if admission.blockers != (PlannerAdmissionBlocker.INACTIVE,):
-                raise RecipeNutritionV2ConflictError(
-                    f"R1-F pre-activation admission blocked: {seed.canonical_code} {admission.blockers}."
+            if seed.canonical_code in fresh_codes:
+                if admission.blockers != (PlannerAdmissionBlocker.INACTIVE,):
+                    raise RecipeNutritionV2ConflictError(
+                        f"R1-F pre-activation admission blocked: {seed.canonical_code} {admission.blockers}."
+                    )
+                catalogue.activate(admission.recipe_id)
+                admission = next(
+                    row
+                    for row in planner.compose_candidate_admission()
+                    if row.canonical_code == seed.canonical_code
                 )
-            catalogue.activate(admission.recipe_id)
-            active = next(
-                row
-                for row in planner.compose_candidate_admission()
-                if row.canonical_code == seed.canonical_code
-            )
-            if not active.eligible or not active.exact_energy_ready:
+            if admission.is_active:
+                if not admission.eligible or not admission.exact_energy_ready:
+                    raise RecipeNutritionV2ConflictError(
+                        f"R1-F active admission failed: {seed.canonical_code}."
+                    )
+            elif admission.blockers != (PlannerAdmissionBlocker.INACTIVE,):
                 raise RecipeNutritionV2ConflictError(
-                    f"R1-F post-activation admission failed: {seed.canonical_code}."
+                    f"R1-F replay admission has unexpected blockers: {seed.canonical_code}."
                 )
 
+        active_codes = tuple(
+            row.canonical_code
+            for row in planner.compose_candidate_admission()
+            if row.canonical_code in {seed.canonical_code for seed in seeds}
+            and row.is_active
+        )
         return R1FPreparedPilotResult(
             chicken_food_inserted=food_summary.ingredients_inserted,
             chicken_food_existing=food_summary.ingredients_existing,
             recipe_version_ids=tuple(version_ids),
             authority_dispositions=tuple(dispositions),
-            active_recipe_codes=tuple(seed.canonical_code for seed in seeds),
+            active_recipe_codes=active_codes,
             exact_energy_kcal=tuple(energies),
         )
     finally:
