@@ -92,7 +92,7 @@ def test_list_all_and_latest_verified_keep_inactive_recipe_visible(recipe_engine
 
     service.deactivate(recipe.id)
 
-    all_recipes = service.list_all(limit=200)
+    all_recipes = service.list_all()
     persisted = next(item for item in all_recipes if item.id == recipe.id)
     assert persisted.is_active is False
     assert service.get_latest_verified(recipe.id).version.id == verified.version.id
