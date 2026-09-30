@@ -1,6 +1,6 @@
-from decimal import Decimal
 import shutil
 import sqlite3
+from decimal import Decimal
 
 import pytest
 
