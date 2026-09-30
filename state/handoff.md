@@ -3,13 +3,17 @@
 ## R1-E corpus blocker clustering — 2026-09-30
 
 Classification result:
-547/547 retained identities preserved. First capacity batch selected:
-USSR82-453 / 467 / 492 / 1081 (four breakfast candidates).
+547/547 retained identities preserved with evidence scope separated into known
+blockers vs unproven later gates.
 
-Next-blocker distribution is dominated by household-applicability review outside
-the current USSR82 production path; within the accepted breakfast batch, two
-Composition and two quantity blockers must close before the shared cooked
-consumed-Nutrition authority seam.
+Reviewed first cooked-authority pilot:
+USSR82-453 (breakfast) + USSR82-697 (main).
+
+This replaces the earlier four-breakfast-first sequencing. The mixed pair is used
+to decide the truthful cooked consumed-Nutrition authority mode before
+mode-dependent Composition work. Mode-independent source/identity/publication
+prerequisites close in the same bounded program. USSR82-467 / 492 / 1081 remain
+the immediate expansion batch after the authority mode is proven.
 
 PR113 merged at `48707e1e84eff260726609c4508f05407e9f9448`.
 
