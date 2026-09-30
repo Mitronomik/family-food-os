@@ -78,7 +78,7 @@ Historical USSR82-697 v1 remains immutable/inactive.
 The 1986 row `697/824, 50/50, 144 kcal` is explicitly rejected because 824 is
 red sauce and the row is not the historical 75 g chicken-only output.
 
-A separate 1988 source, recipe 303 Variant III `Курица отварная`, publishes:
+A separate 1988 source, recipe 303 Variant III `Курица отварная без гарнира`, publishes:
 
 - chicken 155 g gross / 107 g net;
 - finished output 75 g;
@@ -94,8 +94,8 @@ R1-F preserves the historical source-coded Recipe
 `USSR82_697_BOILED_CHICKEN` unchanged/inactive and publishes a separate
 source-neutral production Recipe:
 
-- `BOILED_CHICKEN`;
-- Russian name `Курица отварная`;
+- `BOILED_CHICKEN_MAIN_PRODUCT`;
+- Russian name `Курица отварная без гарнира`;
 - source `DIETETIC_RECIPES_1988 / 303_VARIANT_III`.
 
 No source-specific USSR82 code becomes the identity of a foreign-source version.
