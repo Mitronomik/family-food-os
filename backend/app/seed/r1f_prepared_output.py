@@ -23,6 +23,7 @@ from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
     create_recipe_nutrition_v2_service,
 )
 from app.services.food_ingredients import TrustedFoodIngredientIdentitySeed
+from app.seed.food_ingredients import seed_food_ingredients
 from app.services.food_recipes import (
     TrustedRecipeIngredientSeed,
     TrustedRecipeSeed,
@@ -289,6 +290,7 @@ def seed_r1f_prepared_output(
     config: DatabaseConfig | None = None,
 ) -> R1FPreparedPilotResult:
     apply_migrations(config)
+    seed_food_ingredients(config)
     evidence = _load_evidence()
     engine = create_sqlite_engine(config)
     try:
