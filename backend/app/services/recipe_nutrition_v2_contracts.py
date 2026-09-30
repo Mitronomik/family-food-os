@@ -8,8 +8,8 @@ from app.domain.food_composition import FoodCompositionVersion
 from app.domain.food_ingredients import FoodIngredient
 from app.domain.food_recipes import Recipe, RecipeVersionDetail
 from app.domain.recipe_nutrition_v2 import (
-    PreparedRecipeNutritionAuthority,
     PreparedRecipeNutrientValue,
+    PreparedRecipeNutritionAuthority,
     RecipeIngredientCompositionBinding,
 )
 from app.services.food_composition_contracts import CompositionReader
