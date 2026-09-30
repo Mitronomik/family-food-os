@@ -84,13 +84,14 @@ def main() -> None:
                 f"{source_id} local next blocker drifted: {row['next_blocker']!r}"
             )
 
-    if actual_summary["known_blocker_counts"].get(
-        "CONSUMED_NUTRITION_AUTHORITY"
-    ) != 5:
-        raise SystemExit("Exactly five selected cooked USSR82 rows must carry the known gap.")
-    if actual_summary["unproven_later_gate_counts"].get(
-        "CONSUMED_NUTRITION_AUTHORITY"
-    ) != 264:
+    if actual_summary["known_blocker_counts"].get("CONSUMED_NUTRITION_AUTHORITY") != 5:
+        raise SystemExit(
+            "Exactly five selected cooked USSR82 rows must carry the known gap."
+        )
+    if (
+        actual_summary["unproven_later_gate_counts"].get("CONSUMED_NUTRITION_AUTHORITY")
+        != 264
+    ):
         raise SystemExit(
             "Only the 264 unpublished School2022 rows should retain the unproven gate."
         )
