@@ -2,7 +2,7 @@
   "schema_version": 1,
   "accepted_base": "becc00f0e94c927598f930140c385f84f80aa21d",
   "operation": "R1F_COOKED_NUTRITION_AUTHORITY_GATE",
-  "artifact_policy": "PUBLIC_LOCATOR_REVIEWED_HASH_PIN_REQUIRED_BEFORE_RUNTIME_PUBLICATION",
+  "artifact_policy": "PUBLIC_LOCATOR_REVIEWED_HASH_AND_RIGHTS_PIN_REQUIRED_BEFORE_RUNTIME_PUBLICATION",
   "targets": [
     {
       "target": "USSR82-453",
@@ -22,7 +22,13 @@
         "process": "hard-boiled 8-10 minutes",
         "output_g": "40",
         "energy_kcal": "63",
-        "disposition": "SELECT_MODE_C_PENDING_RUNTIME_SOURCE_HASH_PIN"
+        "disposition": "SELECT_MODE_C_PENDING_RUNTIME_SOURCE_HASH_PIN",
+        "runtime_prerequisites": [
+          "DURABLE_SOURCE_ARTIFACT",
+          "SOURCE_SHA256_PIN",
+          "RIGHTS_REVIEW_STATUS",
+          "RIGHTS_BASIS_RECEIPT"
+        ]
       }
     },
     {
@@ -57,7 +63,13 @@
         "protein_g": "12.6",
         "fat_g": "12.8",
         "carbohydrate_g": "0.5",
-        "disposition": "SELECT_AS_NEW_RECIPE_VERSION_SOURCE_PENDING_RUNTIME_SOURCE_HASH_PIN"
+        "disposition": "SELECT_AS_NEW_RECIPE_VERSION_SOURCE_PENDING_RUNTIME_SOURCE_HASH_PIN",
+        "runtime_prerequisites": [
+          "DURABLE_SOURCE_ARTIFACT",
+          "SOURCE_SHA256_PIN",
+          "RIGHTS_REVIEW_STATUS",
+          "RIGHTS_BASIS_RECEIPT"
+        ]
       }
     }
   ],
