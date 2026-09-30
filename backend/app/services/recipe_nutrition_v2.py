@@ -481,7 +481,12 @@ class RecipeNutritionV2Service:
             required_rows = tuple(row for row in detail.ingredients if not row.optional)
             bindings = tuple(scope.bindings.get(row.id) for row in required_rows)
             bound_count = sum(binding is not None for binding in bindings)
-            prepared = scope.prepared.get_authority(recipe_version_id)
+            prepared_repository = getattr(scope, "prepared", None)
+            prepared = (
+                None
+                if prepared_repository is None
+                else prepared_repository.get_authority(recipe_version_id)
+            )
             if prepared is not None:
                 if bound_count:
                     raise RecipeNutritionV2UnavailableError(
