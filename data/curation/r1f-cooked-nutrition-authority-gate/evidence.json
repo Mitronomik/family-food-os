@@ -1,61 +1,49 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "accepted_base": "becc00f0e94c927598f930140c385f84f80aa21d",
   "operation": "R1F_COOKED_NUTRITION_AUTHORITY_GATE",
-  "artifact_policy": "PUBLIC_LOCATOR_REVIEWED_HASH_AND_RIGHTS_PIN_REQUIRED_BEFORE_RUNTIME_PUBLICATION",
-  "targets": [
-    {
-      "target": "USSR82-453",
-      "role": "breakfast",
-      "recipe_source": {
-        "source_name": "USSR82",
-        "source_recipe_id": "453",
-        "selected_branch": "hard-boiled",
+  "artifact_policy": "DURABLE_RECEIPTS_PINNED_IN_GATE",
+  "rights_policy_reference": "docs/family-food/ru-normative-recipe-corpus.md",
+  "source_receipts": {
+    "hard_boiled_egg": {
+      "durable_artifact_path": "data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json",
+      "durable_artifact_size_bytes": 768050,
+      "durable_artifact_git_blob_sha": "9210458b9ad81aa3650eccad7935519f8d375432",
+      "source_document_raw_bytes_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+      "source_document_raw_text_sha256": "b5a05ffb36d34cd7bd82de71b55319d72ac850064302bf228e1e1ad19fd02062",
+      "source_section_code": "APPENDIX_5",
+      "source_card_code": "4.1",
+      "raw_card_sha256": "804fb64a7bec1bbe17f1f79a510d672f89f8da3f808a5f0a68e796287c49ccd7",
+      "source_locator": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/bliuda-iz-iaits/tekhnologicheskaia-karta-n-4.1/",
+      "retrieved_at": "2026-09-13T07:36:15.102591+00:00",
+      "last_verified_at": "2026-09-30",
+      "rights_review_status": "REVIEWED",
+      "rights_basis": "NORMATIVE_BASE_RECIPE_APPROVED under docs/family-food/ru-normative-recipe-corpus.md",
+      "allowed_scope": "bounded factual recipe/process/nutrient fields; no mirror chrome/layout",
+      "authority_values": {
         "output_g": "40",
-        "source_locator": "https://www.interdoka.ru/kulinaria/1982/7_bluda_yaca/1_varenie/1.html",
-        "retained_fact": "Source permits soft-boiled, medium/in-bag or hard-boiled; R1-F selects hard-boiled only."
-      },
-      "prepared_authority_candidate": {
-        "source_name": "MR_2_4_0162_19",
-        "source_id": "APPENDIX_5_CARD_4_1",
-        "source_locator": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/bliuda-iz-iaits/tekhnologicheskaia-karta-n-4.1/",
         "process": "hard-boiled 8-10 minutes",
-        "output_g": "40",
         "energy_kcal": "63",
-        "disposition": "SELECT_MODE_C_PENDING_RUNTIME_SOURCE_HASH_PIN",
-        "runtime_prerequisites": [
-          "DURABLE_SOURCE_ARTIFACT",
-          "SOURCE_SHA256_PIN",
-          "RIGHTS_REVIEW_STATUS",
-          "RIGHTS_BASIS_RECEIPT"
-        ]
+        "protein_g": "5.1",
+        "fat_g": "4.6",
+        "carbohydrate_g": "0.3"
       }
     },
-    {
-      "target": "USSR82_697_BOILED_CHICKEN",
-      "role": "main",
-      "historical_version": {
-        "source_name": "USSR82",
-        "source_recipe_id": "697",
-        "selected_branch": "III chicken main-product only",
-        "input_chicken_net_g": "107",
-        "output_g": "75",
-        "extra_cooking_input": "onion 2 g",
-        "disposition": "IMMUTABLE_INACTIVE_HISTORY"
-      },
-      "rejected_candidate": {
-        "source_name": "USSR_VOCATIONAL_ORDER_1986",
-        "source_id": "697/824",
-        "output_text": "50/50",
-        "energy_kcal": "144",
-        "reason": "50 g chicken + 50 g sauce 824 is not the 75 g chicken-only historical output",
-        "disposition": "REJECT_FOR_R1F_697"
-      },
-      "prepared_authority_candidate": {
-        "source_name": "DIETETIC_RECIPES_1988",
-        "source_id": "303_VARIANT_III",
-        "bibliographic_identity": "Жангабылов А.К. и др. Рецептура блюд диетического питания. Алма-Ата: Казахстан, 1988. ISBN 5-615-00164-X",
-        "source_locator": "https://ru.djvu.online/file/tnrwaYeNtWZjj",
+    "boiled_chicken_75g": {
+      "durable_artifact_path": "data/curation/r1f-cooked-nutrition-authority-gate/dietetic-recipes-1988-recipe-303-factual-excerpt.txt",
+      "durable_artifact_size_bytes": 574,
+      "durable_artifact_sha256": "3eb882acd1d6f9f8d73f221b725640b0de37d37526ec64006886c287bf1215cc",
+      "durable_artifact_git_blob_sha": "66d78158f2bcdbe2f32b04c71ab1dd8033cf4df3",
+      "bibliographic_identity": "Жангабылов А.К., Изатуллаев Е.А., Луковина Р.И., Столбовская А.Г., Финько Э.А. Рецептура блюд диетического питания. Алма-Ата: Казахстан, 1988. ISBN 5-615-00164-X",
+      "source_locator": "https://ru.djvu.online/file/tnrwaYeNtWZjj",
+      "corroboration_locator": "https://sheba.spb.ru/za/recept-diet-1988.htm",
+      "source_recipe_id": "303",
+      "source_variant": "III",
+      "last_verified_at": "2026-09-30",
+      "rights_review_status": "BOUNDED_FACTUAL_USE_REVIEWED",
+      "rights_basis": "Project-owner authorized correction of PR #117 on 2026-09-30 under docs/family-food/ru-normative-recipe-corpus.md; retained artifact contains only bounded factual recipe data and bibliography, not scans/layout/commentary",
+      "allowed_scope": "recipe 303 Variant III factual masses/output/macros/energy/process fact only",
+      "authority_values": {
         "chicken_gross_g": "155",
         "chicken_net_g": "107",
         "output_g": "75",
@@ -63,13 +51,45 @@
         "protein_g": "12.6",
         "fat_g": "12.8",
         "carbohydrate_g": "0.5",
-        "disposition": "SELECT_AS_NEW_RECIPE_VERSION_SOURCE_PENDING_RUNTIME_SOURCE_HASH_PIN",
-        "runtime_prerequisites": [
-          "DURABLE_SOURCE_ARTIFACT",
-          "SOURCE_SHA256_PIN",
-          "RIGHTS_REVIEW_STATUS",
-          "RIGHTS_BASIS_RECEIPT"
-        ]
+        "process": "chicken boiled whole"
+      }
+    }
+  },
+  "targets": [
+    {
+      "closure_target": "USSR82-453",
+      "production_recipe": {
+        "canonical_code": "HARD_BOILED_EGG_40G",
+        "canonical_name": "Яйцо куриное вкрутую, 40 г",
+        "source_name": "RU_MR_2_4_0162_19",
+        "source_recipe_id": "APPENDIX_5_CARD_4_1",
+        "meal_type_code": "breakfast",
+        "output_g": "40"
+      },
+      "historical_source_disposition": "USSR82-453 remains source evidence; it was never published as production Recipe in R1-B"
+    },
+    {
+      "closure_target": "USSR82-697",
+      "historical_recipe": {
+        "canonical_code": "USSR82_697_BOILED_CHICKEN",
+        "canonical_name": "Курица отварная",
+        "disposition": "IMMUTABLE_INACTIVE_HISTORY"
+      },
+      "production_recipe": {
+        "canonical_code": "BOILED_CHICKEN_PORTION_75G",
+        "canonical_name": "Курица отварная, порция 75 г",
+        "source_name": "DIETETIC_RECIPES_1988",
+        "source_recipe_id": "303_VARIANT_III",
+        "meal_type_code": "main",
+        "output_g": "75",
+        "required_food_ingredient_code": "CHICKEN_CATEGORY_2_RAW"
+      },
+      "rejected_candidate": {
+        "source_name": "USSR_VOCATIONAL_ORDER_1986",
+        "source_id": "697/824",
+        "output_text": "50/50",
+        "energy_kcal": "144",
+        "reason": "50 g chicken + 50 g red sauce 824 is not a 75 g chicken-only output"
       }
     }
   ],
@@ -83,6 +103,7 @@
     "raw_to_cooked_fallback": false,
     "implicit_retention": false,
     "source_scaling": false,
+    "double_authority": false,
     "activation_requires_exact_positive_energy": true
   }
 }
