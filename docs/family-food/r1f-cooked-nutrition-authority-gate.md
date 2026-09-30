@@ -415,27 +415,93 @@ supports it. R1-F V1 uses exact source-portion values; no scaling is authorized.
 
 ## 13. Recipe publication / activation order
 
-### 453 breakfast
+R1-F separates immutable data publication from reversible operational activation.
 
-1. publish the exact hard-boiled RecipeVersion inactive;
-2. keep canonical EGG ingredient identity for exclusions/Shopping;
-3. publish prepared-output authority from MR card 4.1;
-4. require exact 63 kcal projection;
-5. require Planner admission to have no Nutrition blocker;
-6. activate the Recipe.
+### 13.1 Mode-independent FoodIngredient prerequisite
 
-### boiled-chicken main
+Before the chicken Recipe can be published, the normal FoodIngredient catalogue
+must contain an active exact identity:
 
-1. preserve historical USSR82-697 v1 unchanged/inactive;
-2. publish/resolve exact category-II chicken FoodIngredient identity;
-3. append the exact 1988 recipe-303 Variant III RecipeVersion inactive under the
-   same canonical boiled-chicken Recipe;
-4. publish prepared-output authority for 75 g / 167.7 kcal;
-5. require Planner admission to have no Nutrition blocker;
-6. activate the canonical Recipe so the new current verified version is selected.
+- canonical code: `CHICKEN_CATEGORY_2_RAW`;
+- canonical Russian name: `Курица II категории, сырая`;
+- category: poultry;
+- default unit: g.
 
-If any step before activation fails, the safe state is inactive. No destructive
-rollback of immutable history is required; corrected work appends/replays.
+Current FoodIngredient architecture permits canonical identity without a Nutrition
+profile. R1-F must not create an unnecessary raw Composition solely to support a
+prepared-output Recipe authority.
+
+The identity publication is independently useful platform truth. If it succeeds
+and later Recipe publication fails, it is not rolled back merely to make the R1-F
+batch appear atomic.
+
+### 13.2 Prepared Recipe publication transaction
+
+For each source-neutral pilot Recipe, one caller-owned UoW transaction must:
+
+1. reconcile/create the exact Recipe identity with `initial_is_active=false`;
+2. create/reconcile exactly one SOURCE_VERIFIED RecipeVersion from the pinned
+   source receipt;
+3. persist exact RecipeIngredient rows;
+4. persist source output mass;
+5. publish the exact prepared-output authority header + sparse values;
+6. calculate the prepared projection inside the same transaction;
+7. require exact positive source-portion `ENERGY_KCAL`;
+8. commit.
+
+The transaction **does not activate** the Recipe.
+
+Any exception before commit rolls back Recipe/RecipeVersion/prepared-authority
+writes together. No partial persisted authority is an accepted fresh outcome.
+
+### 13.3 Breakfast target
+
+Publish:
+
+- Recipe `HARD_BOILED_EGG_40G`;
+- Russian name `Яйцо куриное вкрутую, 40 г`;
+- source `RU_MR_2_4_0162_19 / APPENDIX_5_CARD_4_1`;
+- required canonical EGG ingredient: 40 g;
+- output: 40 g;
+- prepared energy: 63 kcal.
+
+### 13.4 Main target
+
+Preserve historical:
+
+- `USSR82_697_BOILED_CHICKEN`;
+- all its RecipeVersion/history rows;
+- inactive state.
+
+Publish separately:
+
+- Recipe `BOILED_CHICKEN_PORTION_75G`;
+- Russian name `Курица отварная, порция 75 г`;
+- source `DIETETIC_RECIPES_1988 / 303_VARIANT_III`;
+- required `CHICKEN_CATEGORY_2_RAW`: 107 g;
+- output: 75 g;
+- prepared energy: 167.7 kcal.
+
+No onion row is synthesized because recipe 303 Variant III does not contain it.
+
+### 13.5 Explicit activation command
+
+After committed publication, activation is a separate application command.
+
+It may set a pilot Recipe active only when all are true:
+
+- latest verified RecipeVersion is the exact expected version;
+- prepared authority exact-replays the pinned receipt;
+- no required Composition binding exists on that RecipeVersion;
+- prepared projection reports finite positive exact energy;
+- Planner candidate admission has no Nutrition/role blocker;
+- ingredient exclusion identity is present.
+
+Activation exact-replay is a no-op when already active.
+
+A deliberately deactivated Recipe must **not** be silently reactivated by rerunning
+the data publication operation. Reactivation always requires the explicit
+activation command.
 
 ## 14. Ingredient truth is preserved independently from Nutrition authority
 
