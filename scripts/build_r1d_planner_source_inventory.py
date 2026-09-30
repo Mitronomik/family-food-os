@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Build the R1-D corpus-wide Planner source admission inventory deterministically."""
 
 from __future__ import annotations
