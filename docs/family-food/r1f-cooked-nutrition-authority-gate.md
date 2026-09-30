@@ -274,44 +274,79 @@ Rows not present in this table project as UNKNOWN, never zero.
 Both tables are append-only / immutable under the repository's established
 history rules.
 
-## 9. Source artifact rule
+## 9. Durable source receipts and rights — closed in this gate
 
-The implementation PR must retain or otherwise pin independently retrievable
-source artifacts before publishing authority.
+The source-artifact prerequisite is **not deferred to runtime**.
 
-Minimum runtime-publication pins:
+### 9.1 Hard-boiled egg / MR 2.4.0162-19
 
-### 453
+The exact source already has a durable repository artifact:
 
-- exact MR 2.4.0162-19 source artifact or independently reproducible official
-  document snapshot;
-- SHA-256;
-- exact card locator 4.1;
-- source retrieval timestamp.
+`data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json`
 
-### chicken main
+Pinned receipt:
 
-- exact 1988 source artifact for recipe 303;
-- SHA-256;
-- bibliographic identity including ISBN;
-- exact recipe/variant locator;
-- source retrieval timestamp.
+- repository artifact size: 768050 bytes;
+- repository Git blob: `9210458b9ad81aa3650eccad7935519f8d375432`;
+- captured source raw-bytes SHA-256:
+  `973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e`;
+- captured source raw-text SHA-256:
+  `b5a05ffb36d34cd7bd82de71b55319d72ac850064302bf228e1e1ad19fd02062`;
+- exact card: `APPENDIX_5 / 4.1`;
+- exact card raw-text SHA-256:
+  `804fb64a7bec1bbe17f1f79a510d672f89f8da3f808a5f0a68e796287c49ccd7`;
+- captured at: `2026-09-13T07:36:15.102591+00:00`;
+- latest gate verification: 2026-09-30;
+- rights status: `REVIEWED`;
+- rights basis: `NORMATIVE_BASE_RECIPE_APPROVED` under
+  `docs/family-food/ru-normative-recipe-corpus.md`.
 
-If a source artifact cannot be durably retained and hash-verified, production
-publication for that recipe remains blocked.
+The retained scope is bounded factual recipe/process/nutrient data. Mirror
+navigation/chrome/layout are not production truth.
 
-Prepared-output publication also requires an explicit accepted rights/use
-disposition for the exact source artifact. Public availability is not a rights
-receipt. For each authority source the runtime package must pin:
+### 9.2 Boiled chicken / 1988 recipe 303 Variant III
 
-- rights_review_status;
-- rights_basis / receipt reference;
-- allowed project use scope.
+The full copyrighted scan is **not** retained in the public repository.
 
-An unresolved rights disposition keeps that recipe blocked.
+R1-F retains only the bounded factual publication receipt required for this exact
+RecipeVersion:
 
-Public web text/search snippets are research evidence, not the immutable runtime
-source receipt.
+`data/curation/r1f-cooked-nutrition-authority-gate/dietetic-recipes-1988-recipe-303-factual-excerpt.txt`
+
+Pinned receipt:
+
+- size: 574 bytes;
+- SHA-256:
+  `3eb882acd1d6f9f8d73f221b725640b0de37d37526ec64006886c287bf1215cc`;
+- repository Git blob:
+  `66d78158f2bcdbe2f32b04c71ab1dd8033cf4df3`;
+- bibliographic identity: Жангабылов А. К. et al.,
+  `Рецептура блюд диетического питания`, Алма-Ата: Казахстан, 1988,
+  ISBN 5-615-00164-X;
+- exact recipe/variant: 303 / III;
+- source locator:
+  `https://ru.djvu.online/file/tnrwaYeNtWZjj`;
+- independent bibliographic/copy corroboration:
+  `https://sheba.spb.ru/za/recept-diet-1988.htm`;
+- latest independent review: 2026-09-30;
+- rights status: `BOUNDED_FACTUAL_USE_REVIEWED`;
+- rights basis: the project owner explicitly authorized applying the #117 review
+  corrections on 2026-09-30 under the existing bounded factual recipe-data policy
+  in `docs/family-food/ru-normative-recipe-corpus.md`;
+- allowed retained scope: recipe 303 Variant III masses/output/macros/energy and
+  the minimal process fact only; no scans, layout, photographs or commentary.
+
+The bounded factual receipt is the runtime publication artifact for this R1-F
+authority. The public scan is a retrieval/corroboration locator, not a committed
+runtime dependency.
+
+### 9.3 Evidence package
+
+`data/curation/r1f-cooked-nutrition-authority-gate/evidence.json` pins both
+receipts and must remain byte/semantic consistent with the files above.
+
+Any mismatch in path, size, SHA, source/card identity, rights status or reviewed
+values is a publication conflict.
 
 ## 10. Publication specs
 
