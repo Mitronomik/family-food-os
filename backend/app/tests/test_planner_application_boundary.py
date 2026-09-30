@@ -11,10 +11,12 @@ from app.domain.meal_patterns import MealRole
 from app.domain.nutrition import NutritionStatus, NutritionValues
 from app.domain.planner import PlannerConfig
 from app.services.meal_plans import MealPlanNotFoundError
+from app.services.recipe_nutrition_v2 import RecipeNutritionV2UnavailableError
 from app.services.planner import (
     AuthoritativeGenerationRequest,
     GenerationMemberConstraints,
     MealPatternRecommenderService,
+    PlannerAdmissionBlocker,
     PlannerAuthoritativeInputError,
     PlannerService,
     RecommenderRequest,
@@ -37,8 +39,21 @@ class Recipes:
     def __init__(self):
         self.current_id = uid(20)
 
+    def list_all(self):
+        return [
+            SimpleNamespace(
+                id=uid(10),
+                canonical_code="READY_MAIN",
+                canonical_name="Ready Main",
+                is_active=True,
+            )
+        ]
+
     def list_active(self, *, limit):
         return [SimpleNamespace(id=uid(10))]
+
+    def get_latest_verified(self, recipe_id):
+        return self.get_current_verified(recipe_id)
 
     def get_current_verified(self, recipe_id):
         version = SimpleNamespace(
@@ -118,6 +133,146 @@ def service():
         household_id, date(2026, 9, 14), (GenerationMemberConstraints(member_id),)
     )
     return planner, command, meals, pantry, recipes, nutrition
+
+
+
+class AdmissionRecipes:
+    def __init__(self):
+        self.rows = (
+            SimpleNamespace(
+                id=uid(101),
+                canonical_code="READY_MAIN",
+                canonical_name="Ready Main",
+                is_active=True,
+            ),
+            SimpleNamespace(
+                id=uid(102),
+                canonical_code="INACTIVE_BREAKFAST",
+                canonical_name="Inactive Breakfast",
+                is_active=False,
+            ),
+            SimpleNamespace(
+                id=uid(103),
+                canonical_code="ACTIVE_OTHER",
+                canonical_name="Active Other",
+                is_active=True,
+            ),
+            SimpleNamespace(
+                id=uid(104),
+                canonical_code="NO_NUTRITION_MAIN",
+                canonical_name="No Nutrition Main",
+                is_active=True,
+            ),
+        )
+
+    def list_all(self):
+        return list(self.rows)
+
+    def get_latest_verified(self, recipe_id):
+        meal_type = {
+            uid(101): MealTypeCode.MAIN,
+            uid(102): MealTypeCode.BREAKFAST,
+            uid(103): MealTypeCode.OTHER,
+            uid(104): MealTypeCode.MAIN,
+        }[recipe_id]
+        return SimpleNamespace(
+            version=SimpleNamespace(
+                id=uid(200 + int(str(recipe_id)[-3:])),
+                meal_type_code=meal_type,
+                source_name="test-source",
+                source_recipe_id=f"source:{recipe_id}",
+            )
+        )
+
+
+class AdmissionNutrition:
+    def neutral_consumption_projection(self, version_id):
+        if version_id == uid(304):
+            raise RecipeNutritionV2UnavailableError("missing authority")
+        return SimpleNamespace(exact_energy_ready=True)
+
+
+
+class LargeAdmissionRecipes:
+    def __init__(self, count: int = 250):
+        self.rows = tuple(
+            SimpleNamespace(
+                id=uid(1000 + index),
+                canonical_code=f"READY_MAIN_{index:03d}",
+                canonical_name=f"Ready Main {index:03d}",
+                is_active=True,
+            )
+            for index in range(count)
+        )
+
+    def list_all(self):
+        return list(self.rows)
+
+    def get_latest_verified(self, recipe_id):
+        return SimpleNamespace(
+            version=SimpleNamespace(
+                id=recipe_id,
+                meal_type_code=MealTypeCode.MAIN,
+                source_name="test-source",
+                source_recipe_id=f"source:{recipe_id}",
+            )
+        )
+
+
+class AlwaysReadyAdmissionNutrition:
+    def neutral_consumption_projection(self, version_id):
+        return SimpleNamespace(exact_energy_ready=True)
+
+
+def test_candidate_admission_is_exhaustive_beyond_200_rows() -> None:
+    household_id, member_id = uid(1), uid(2)
+    planner = PlannerService(
+        MealPlans(household_id, member_id),
+        Households(household_id, member_id),
+        LargeAdmissionRecipes(),
+        Nutrition(),
+        Pantry(),
+        PlannerConfig(max_recipe_repetitions=10),
+        recipe_nutrition=AlwaysReadyAdmissionNutrition(),
+    )
+
+    admissions = planner.compose_candidate_admission()
+
+    assert len(admissions) == 250
+    assert all(item.eligible for item in admissions)
+    assert admissions[0].canonical_code == "READY_MAIN_000"
+    assert admissions[-1].canonical_code == "READY_MAIN_249"
+
+
+
+def test_candidate_admission_sees_blocked_catalogue_without_selecting_it() -> None:
+    household_id, member_id = uid(1), uid(2)
+    planner = PlannerService(
+        MealPlans(household_id, member_id),
+        Households(household_id, member_id),
+        AdmissionRecipes(),
+        Nutrition(),
+        Pantry(),
+        PlannerConfig(max_recipe_repetitions=10),
+        recipe_nutrition=AdmissionNutrition(),
+    )
+
+    admissions = planner.compose_candidate_admission()
+
+    by_code = {item.canonical_code: item for item in admissions}
+    assert by_code["READY_MAIN"].eligible is True
+    assert by_code["READY_MAIN"].blockers == ()
+    assert by_code["INACTIVE_BREAKFAST"].blockers == (
+        PlannerAdmissionBlocker.INACTIVE,
+    )
+    assert by_code["ACTIVE_OTHER"].blockers == (
+        PlannerAdmissionBlocker.ROLE_UNSUPPORTED,
+    )
+    assert by_code["NO_NUTRITION_MAIN"].blockers == (
+        PlannerAdmissionBlocker.NUTRITION_UNAVAILABLE,
+    )
+    assert all(item.recipe_version_id is not None for item in admissions)
+
 
 
 def test_authoritative_composition_owns_selection_recipe_nutrition_and_pantry() -> None:

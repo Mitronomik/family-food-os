@@ -3,6 +3,7 @@
 from dataclasses import dataclass
 from datetime import date, timedelta
 from decimal import Decimal
+from enum import StrEnum
 from time import perf_counter_ns
 from typing import Protocol
 from uuid import UUID
@@ -11,6 +12,7 @@ from app.domain.meal_patterns import MealPatternTagKind
 from app.domain.meal_plans import MealPlanDetail
 from app.domain.recipe_nutrition_v2 import RecipeNutritionConsumptionProjection
 from app.domain.planner import (
+    ROLE_COMPATIBILITY_V1,
     FixedPlannerEvent,
     MemberPlannerConstraints,
     PlannerCandidate,
@@ -22,7 +24,7 @@ from app.domain.planner import (
     generate_week,
     with_duration,
 )
-from app.services.food_recipes import FoodRecipeCatalogueService
+from app.services.food_recipes import FoodRecipeCatalogueService, RecipeNotFoundError
 from app.services.households import HouseholdService
 from app.services.meal_patterns import MealPatternCatalogueService
 from app.services.meal_plans import (
@@ -32,6 +34,7 @@ from app.services.meal_plans import (
 )
 from app.services.nutrition import NutritionService
 from app.services.pantry import PantryService
+from app.services.recipe_nutrition_v2 import RecipeNutritionV2UnavailableError
 
 RECOMMENDER_VERSION = "meal-pattern-recommender-v2"
 HISTORY_HORIZON_WEEKS = 1
@@ -45,6 +48,32 @@ class RecipeNutritionProjectionService(Protocol):
 
 class PlannerAuthoritativeInputError(ValueError):
     pass
+
+
+class PlannerAdmissionBlocker(StrEnum):
+    INACTIVE = "INACTIVE"
+    NO_VERIFIED_VERSION = "NO_VERIFIED_VERSION"
+    ROLE_UNSUPPORTED = "ROLE_UNSUPPORTED"
+    NUTRITION_UNAVAILABLE = "NUTRITION_UNAVAILABLE"
+    EXACT_ENERGY_UNAVAILABLE = "EXACT_ENERGY_UNAVAILABLE"
+
+
+@dataclass(frozen=True)
+class PlannerCandidateAdmission:
+    recipe_id: UUID
+    canonical_code: str
+    canonical_name: str
+    is_active: bool
+    recipe_version_id: UUID | None
+    meal_type_code: str | None
+    source_name: str | None
+    source_recipe_id: str | None
+    exact_energy_ready: bool
+    blockers: tuple[PlannerAdmissionBlocker, ...]
+
+    @property
+    def eligible(self) -> bool:
+        return not self.blockers
 
 
 @dataclass(frozen=True)
@@ -179,6 +208,64 @@ class PlannerService:
         self._recipe_nutrition = recipe_nutrition
         self._pantry = pantry
         self._config = config
+
+    def compose_candidate_admission(self) -> tuple[PlannerCandidateAdmission, ...]:
+        """Classify the whole verified Recipe catalogue before Planner selection."""
+
+        supported_meal_types = frozenset(
+            meal_type
+            for compatible in ROLE_COMPATIBILITY_V1.values()
+            for meal_type in compatible
+        )
+        admissions = []
+        for recipe in self._recipes.list_all():
+            blockers = []
+            detail = None
+            projection = None
+            try:
+                detail = self._recipes.get_latest_verified(recipe.id)
+            except RecipeNotFoundError:
+                blockers.append(PlannerAdmissionBlocker.NO_VERIFIED_VERSION)
+
+            if not recipe.is_active:
+                blockers.append(PlannerAdmissionBlocker.INACTIVE)
+
+            if detail is not None:
+                if detail.version.meal_type_code not in supported_meal_types:
+                    blockers.append(PlannerAdmissionBlocker.ROLE_UNSUPPORTED)
+                try:
+                    projection = self._recipe_nutrition.neutral_consumption_projection(
+                        detail.version.id
+                    )
+                except RecipeNutritionV2UnavailableError:
+                    blockers.append(PlannerAdmissionBlocker.NUTRITION_UNAVAILABLE)
+                else:
+                    if not projection.exact_energy_ready:
+                        blockers.append(
+                            PlannerAdmissionBlocker.EXACT_ENERGY_UNAVAILABLE
+                        )
+
+            admissions.append(
+                PlannerCandidateAdmission(
+                    recipe_id=recipe.id,
+                    canonical_code=recipe.canonical_code,
+                    canonical_name=recipe.canonical_name,
+                    is_active=recipe.is_active,
+                    recipe_version_id=None if detail is None else detail.version.id,
+                    meal_type_code=(
+                        None if detail is None else detail.version.meal_type_code.value
+                    ),
+                    source_name=None if detail is None else detail.version.source_name,
+                    source_recipe_id=(
+                        None if detail is None else detail.version.source_recipe_id
+                    ),
+                    exact_energy_ready=(
+                        False if projection is None else projection.exact_energy_ready
+                    ),
+                    blockers=tuple(blockers),
+                )
+            )
+        return tuple(admissions)
 
     def compose_authoritative_request(
         self, command: AuthoritativeGenerationRequest

@@ -1,5 +1,21 @@
 # Handoff
 
+## R1-D corpus-wide Planner admission — 2026-09-30
+
+Accepted main: `e350e747a9c6e06e74b2cd450637c25a442c8749` (merged PR111).
+
+Issue #112 now owns corpus-wide Planner admission rather than a one-recipe pilot.
+Branch: `data/r1d-planner-capacity-candidate-audit`.
+
+Phase A adds full published-catalogue admission visibility while keeping selection
+fail-closed. Inactive, unsupported-role, Nutrition-unavailable and exact-energy
+blocked recipes remain visible with explicit blockers instead of disappearing
+before Planner diagnostics.
+
+No schema/migration or authority weakening is part of Phase A. The next data step
+is a machine-readable closure inventory across retained Russian source families,
+then blocker-based production batches.
+
 ## R1 candidate universe widened — 2026-09-29
 
 PR110 merged into main at:
