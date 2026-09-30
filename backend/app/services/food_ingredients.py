@@ -188,10 +188,13 @@ class FoodCatalogueService:
                         "allergen_codes",
                         "storage_profile_code",
                     )
-                    if any(
-                        getattr(existing, field) != getattr(candidate, field)
-                        for field in fields
-                    ) or not existing.is_active:
+                    if (
+                        any(
+                            getattr(existing, field) != getattr(candidate, field)
+                            for field in fields
+                        )
+                        or not existing.is_active
+                    ):
                         raise FoodCatalogueConflictError(
                             f"Identity-only seed conflicts with {seed.canonical_code}."
                         )
