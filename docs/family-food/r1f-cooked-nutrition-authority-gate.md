@@ -12,9 +12,9 @@ Define the minimum truthful runtime/data contract needed to move the first mixed
 R1 cooked pilot toward ordinary production Planner eligibility:
 
 - R1-E closure target USSR82-453 → source-neutral production Recipe
-  `HARD_BOILED_EGG_40G` — breakfast;
+  `HARD_BOILED_EGG` — breakfast;
 - R1-E closure target USSR82-697 → source-neutral production Recipe
-  `BOILED_CHICKEN_PORTION_75G` — main.
+  `BOILED_CHICKEN` — main.
 
 The implementation target after this gate is merged is:
 
@@ -92,8 +92,8 @@ create a source-coded USSR82 Recipe identity.
 
 Publish a new source-neutral Recipe:
 
-- canonical code: `HARD_BOILED_EGG_40G`;
-- canonical Russian name: `Яйцо куриное вкрутую, 40 г`;
+- canonical code: `HARD_BOILED_EGG`;
+- canonical Russian name: `Яйцо куриное вкрутую`;
 - RecipeVersion source: `RU_MR_2_4_0162_19 / APPENDIX_5_CARD_4_1`;
 - meal type: `breakfast`;
 - required ingredient: canonical EGG FoodIngredient, 40 g;
@@ -172,8 +172,8 @@ That historical Recipe and its v1 remain immutable and inactive.
 
 Publish a **separate source-neutral canonical Recipe**:
 
-- canonical code: `BOILED_CHICKEN_PORTION_75G`;
-- canonical Russian name: `Курица отварная, порция 75 г`;
+- canonical code: `BOILED_CHICKEN`;
+- canonical Russian name: `Курица отварная`;
 - RecipeVersion source: `DIETETIC_RECIPES_1988 / 303_VARIANT_III`;
 - required FoodIngredient: `CHICKEN_CATEGORY_2_RAW`;
 - required input: 107 g;
@@ -308,18 +308,26 @@ navigation/chrome/layout are not production truth.
 
 The full copyrighted scan is **not** retained in the public repository.
 
-R1-F retains only the bounded factual publication receipt required for this exact
-RecipeVersion:
+R1-F retains an exact source-page OCR capture for recipe 303 and keeps the same
+bytes in durable private project storage.
+
+Repository-bounded evidence path:
 
 `data/curation/r1f-cooked-nutrition-authority-gate/dietetic-recipes-1988-recipe-303-factual-excerpt.txt`
 
+Durable private locator:
+
+`private-library:/FamilyFoodOS/source-artifacts/r1f/recipe-303-source-page-ocr.txt`
+
 Pinned receipt:
 
-- size: 574 bytes;
+- artifact kind: `EXACT_SOURCE_PAGE_OCR_CAPTURE`;
+- size: 725 bytes;
 - SHA-256:
-  `3eb882acd1d6f9f8d73f221b725640b0de37d37526ec64006886c287bf1215cc`;
-- repository Git blob:
-  `66d78158f2bcdbe2f32b04c71ab1dd8033cf4df3`;
+  `1c7ee5c0d09e8dd5872bcee7bd6a7fa2c7d414fa96738a22971cb71c28efd72d`;
+- private Library id:
+  `libfile_1568484d7d348191bc5a02900ab771ff`;
+- latest successful independent retrieval/hash verification: 2026-09-30;
 - bibliographic identity: Жангабылов А. К. et al.,
   `Рецептура блюд диетического питания`, Алма-Ата: Казахстан, 1988,
   ISBN 5-615-00164-X;
@@ -330,15 +338,16 @@ Pinned receipt:
   `https://sheba.spb.ru/za/recept-diet-1988.htm`;
 - latest independent review: 2026-09-30;
 - rights status: `BOUNDED_FACTUAL_USE_REVIEWED`;
-- rights basis: the project owner explicitly authorized applying the #117 review
-  corrections on 2026-09-30 under the existing bounded factual recipe-data policy
-  in `docs/family-food/ru-normative-recipe-corpus.md`;
-- allowed retained scope: recipe 303 Variant III masses/output/macros/energy and
-  the minimal process fact only; no scans, layout, photographs or commentary.
+- rights basis: `BOUNDED_FACTUAL_USE_REVIEWED` under
+  `docs/family-food/ru-normative-recipe-corpus.md`; only the exact factual OCR
+  recipe/card text required for the authority is retained;
+- allowed retained scope: exact OCR factual card text for recipe 303 Variant III;
+  no page image, layout, photographs or unrelated commentary.
 
-The bounded factual receipt is the runtime publication artifact for this R1-F
-authority. The public scan is a retrieval/corroboration locator, not a committed
-runtime dependency.
+The exact OCR capture is the bounded source-page artifact for this R1-F authority.
+The private Library copy is the durable retrieval point; the repository copy is a
+reviewable bounded derivative with identical bytes. The public OCR page remains the
+independent retrieval/corroboration locator.
 
 ### 9.3 Evidence package
 
@@ -458,8 +467,8 @@ writes together. No partial persisted authority is an accepted fresh outcome.
 
 Publish:
 
-- Recipe `HARD_BOILED_EGG_40G`;
-- Russian name `Яйцо куриное вкрутую, 40 г`;
+- Recipe `HARD_BOILED_EGG`;
+- Russian name `Яйцо куриное вкрутую`;
 - source `RU_MR_2_4_0162_19 / APPENDIX_5_CARD_4_1`;
 - required canonical EGG ingredient: 40 g;
 - output: 40 g;
@@ -475,8 +484,8 @@ Preserve historical:
 
 Publish separately:
 
-- Recipe `BOILED_CHICKEN_PORTION_75G`;
-- Russian name `Курица отварная, порция 75 г`;
+- Recipe `BOILED_CHICKEN`;
+- Russian name `Курица отварная`;
 - source `DIETETIC_RECIPES_1988 / 303_VARIANT_III`;
 - required `CHICKEN_CATEGORY_2_RAW`: 107 g;
 - output: 75 g;
@@ -542,7 +551,9 @@ The runtime PR must prove at least:
     versions;
 17. normal authoritative Planner candidate loading sees both after activation;
 18. ingredient exclusion still rejects the corresponding RecipeVersion;
-19. `AI_ENABLED=false` throughout.
+19. another Serving/portion mass for the same RecipeVersion does not create or
+    require a second canonical Recipe identity;
+20. `AI_ENABLED=false` throughout.
 
 ## 16. Planner/product boundary
 
@@ -550,6 +561,7 @@ R1-F completion target after runtime implementation:
 
 - at least one active exact-energy-ready breakfast;
 - at least one active exact-energy-ready main;
+- canonical Recipe identity remains independent of Serving/output portion mass;
 - both sourced through ordinary Recipe Catalogue + RecipeNutrition service;
 - no synthetic candidates;
 - no test-only nutrition.
