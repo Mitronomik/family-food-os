@@ -9,7 +9,10 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-CROSSWALK = ROOT / "data/curation/corpus-v03-reconciliation/generated/recipe-crosswalk.jsonl"
+CROSSWALK = (
+    ROOT
+    / "data/curation/corpus-v03-reconciliation/generated/recipe-crosswalk.jsonl"
+)
 DC1 = ROOT / "data/curation/data-corpus-v1-dc1/candidate-recipes.csv"
 OUT = ROOT / "data/curation/r1d-planner-admission"
 
@@ -31,7 +34,9 @@ def _known_publications() -> dict[str, dict[str, str]]:
     # Import accepted repository-owned publication packages instead of duplicating
     # source identities/canonical codes here.
     from app.seed.r1b_reviewed_recipes import load_r1b_recipe_seeds
-    from app.seed.ru_school2022_step9_recipe import load_ru_school2022_step9_recipe_seed
+    from app.seed.ru_school2022_step9_recipe import (
+        load_ru_school2022_step9_recipe_seed,
+    )
 
     result: dict[str, dict[str, str]] = {}
 
@@ -46,14 +51,22 @@ def _known_publications() -> dict[str, dict[str, str]]:
         row = by_source[source_id]
         result[source_id] = {
             "catalogue_code": seed.canonical_code,
-            "state": "PUBLISHED_INACTIVE" if not seed.initial_is_active else "PUBLISHED_ACTIVE",
+            "state": (
+                "PUBLISHED_INACTIVE"
+                if not seed.initial_is_active
+                else "PUBLISHED_ACTIVE"
+            ),
             "blocker": row.get("activation_reason") or "REVIEW_REQUIRED",
         }
 
     school_seed, _ = load_ru_school2022_step9_recipe_seed()
     result[school_seed.version.source_recipe_id] = {
         "catalogue_code": school_seed.canonical_code,
-        "state": "PUBLISHED_INACTIVE" if not school_seed.initial_is_active else "PUBLISHED_ACTIVE",
+        "state": (
+            "PUBLISHED_INACTIVE"
+            if not school_seed.initial_is_active
+            else "PUBLISHED_ACTIVE"
+        ),
         "blocker": (
             "ROLE_UNSUPPORTED_OTHER"
             if str(school_seed.version.meal_type_code) == "other"
@@ -80,7 +93,9 @@ def build() -> tuple[list[dict[str, Any]], dict[str, Any]]:
                 "source_name": dc["recipe_name"] if dc else None,
                 "retained_route_count": len(row.get("route_ids") or ()),
                 "reconciliation_disposition": row["disposition"],
-                "reconciliation_publication_ready": bool(row.get("publication_ready")),
+                "reconciliation_publication_ready": bool(
+                    row.get("publication_ready")
+                ),
                 "dc1_production_ready": (
                     dc["production_ready"] == "YES" if dc else None
                 ),
@@ -103,12 +118,17 @@ def build() -> tuple[list[dict[str, Any]], dict[str, Any]]:
             }
         )
 
-    inventory.sort(key=lambda item: (item["source_family"], item["source_recipe_id"]))
+    inventory.sort(
+        key=lambda item: (item["source_family"], item["source_recipe_id"])
+    )
 
     counts: dict[str, dict[str, int]] = {}
     for item in inventory:
         family = item["source_family"]
-        bucket = counts.setdefault(family, {"retained": 0, "published": 0, "unpublished": 0})
+        bucket = counts.setdefault(
+            family,
+            {"retained": 0, "published": 0, "unpublished": 0},
+        )
         bucket["retained"] += 1
         if item["production_catalogue_state"].startswith("PUBLISHED"):
             bucket["published"] += 1
@@ -127,8 +147,8 @@ def build() -> tuple[list[dict[str, Any]], dict[str, Any]]:
         "known_current_russian_production_publications": published,
         "source_only_pending_production_reconciliation": len(inventory) - published,
         "purpose": (
-            "Corpus-wide source → production catalogue → Planner admission closure queue; "
-            "source presence is not production authority."
+            "Corpus-wide source → production catalogue → Planner admission closure "
+            "queue; source presence is not production authority."
         ),
     }
     return inventory, summary
