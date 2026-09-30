@@ -4,141 +4,148 @@ Updated: 2026-09-30.
 
 ## Accepted state
 
-PR115 / R1-E evidence-scoped corpus blocker map is merged into `main` at:
+PR117 / R1-F cooked prepared-output Nutrition contract gate is merged into `main` at:
 
-`becc00f0e94c927598f930140c385f84f80aa21d`.
+`e138d615802f7928946e419156f8c6905f04075b`.
 
-R1-E established:
+The merged gate authorizes one bounded runtime/data implementation using:
 
-- 547/547 retained recipe identities remain visible in closure;
-- known blockers are separated from unproven later gates;
-- all five selected cooked USSR82 candidates retain the known downstream
-  `CONSUMED_NUTRITION_AUTHORITY` gap;
-- local next blockers remain explicit;
-- first mixed cooked-authority pilot is:
-  - USSR82-453 — breakfast;
-  - boiled-chicken target originally seeded by USSR82-697 — main;
-- the pilot is not by itself sufficient for a complete seven-day Planner week.
+- `PREPARED_OUTPUT_V1`;
+- `RECIPE_PREPARED_OUTPUT_NUTRITION_V1`;
+- migration `0042_recipe_prepared_output_nutrition`;
+- source-neutral, portion-neutral production Recipe identities;
+- exact source receipts already pinned by PR117;
+- explicit activation only after exact-energy + Planner admission proof.
 
 ## Current bounded operation
 
-**R1-F — COOKED-NUTRITION AUTHORITY IMPLEMENTATION CONTRACT GATE.**
+**R1-F runtime — prepared-output Nutrition pilot and Planner activation.**
 
 Issue:
 
-`#116`.
+`#118`.
+
+PR:
+
+`#119`.
 
 Branch:
 
-`docs/r1f-cooked-nutrition-authority-gate`.
+`feat/r1f-prepared-output-runtime`.
 
-Repository `AGENTS.md` requires this docs-only gate to be reviewed and merged
-before runtime/schema/data publication because R1-F changes an authoritative
-immutable Nutrition publication path.
+Accepted base:
 
-## Contract decision
+`e138d615802f7928946e419156f8c6905f04075b`.
 
-Current runtime cannot truthfully represent source-backed prepared-dish Nutrition:
+## Implemented on current branch
 
-- NutrientVector belongs to FoodNutritionProfile;
-- Recipe Nutrition authority is currently only LEGACY_V1 or COMPOSITION_V2;
-- RECIPE_COMPOSITION_NUTRITION_V1 is INPUT-state only.
+Runtime now includes:
 
-R1-F therefore selects a narrow new mode:
+- migration `0042_recipe_prepared_output_nutrition`;
+- immutable `recipe_prepared_nutrition_authorities`;
+- immutable sparse `recipe_prepared_nutrient_values`;
+- Recipe Nutrition authority kind `PREPARED_OUTPUT_V1`;
+- exact-replay/fail-closed prepared publication;
+- prepared-vs-Composition double-authority rejection;
+- identity-only FoodIngredient publication for
+  `CHICKEN_CATEGORY_2_RAW / Курица II категории, сырая`;
+- explicit Recipe activation command;
+- R1-F publication/orchestration seed;
+- focused end-to-end runtime/migration/Planner tests.
 
-`PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`.
+Pilot production Recipes:
 
-It requires RecipeVersion-level immutable persistence and migration
-`0042_recipe_prepared_output_nutrition`.
+### Breakfast
 
-The pilot publishes only explicitly reviewed source nutrients. ENERGY_KCAL is
-mandatory; unreviewed frozen nutrients remain UNKNOWN.
+`HARD_BOILED_EGG / Яйцо куриное вкрутую`
 
-## Breakfast evidence
+- source: MR 2.4.0162-19 Appendix 5 card 4.1;
+- RecipeVersion source output: 40 g;
+- prepared ENERGY_KCAL: 63;
+- canonical EGG ingredient retained;
+- output mass is not Recipe identity.
 
-USSR82-453 source allows several boiling states, so generic "boiled egg" is not
-sufficiently exact.
+### Main
 
-R1-F selects the hard-boiled branch only.
+`BOILED_CHICKEN_MAIN_PRODUCT / Курица отварная без гарнира`
 
-MR 2.4.0162-19 Appendix 5 card 4.1 supplies exact matching prepared-output truth:
+- source: 1988 recipe 303 Variant III;
+- input: `CHICKEN_CATEGORY_2_RAW` 107 g;
+- RecipeVersion source output: 75 g;
+- prepared ENERGY_KCAL: 167.7;
+- no inferred onion row;
+- no 1986 697/824 144 kcal reuse.
 
-- chicken egg 40 g;
-- hard-boiled 8–10 minutes;
-- output 40 g / one egg;
-- source-published energy 63 kcal.
+Historical:
 
-The 453 RecipeVersion retains its ingredient identity for exclusions/Shopping and
-uses prepared-output Nutrition only after exact hard-boiled applicability review.
+`USSR82_697_BOILED_CHICKEN / Курица отварная`
 
-## Main evidence
+remains immutable/inactive.
 
-Historical USSR82-697 v1 remains immutable/inactive.
+## Nutrition authority boundary
 
-The 1986 row `697/824, 50/50, 144 kcal` is explicitly rejected because 824 is
-red sauce and the row is not the historical 75 g chicken-only output.
+R1-F runtime deliberately publishes only exact source ENERGY_KCAL for both pilot
+RecipeVersions.
 
-A separate 1988 source, recipe 303 Variant III `Курица отварная`, publishes:
+Protein/fat/carbohydrate source values are not promoted automatically. They remain
+UNKNOWN until exact frozen-registry semantic mapping is separately proven.
 
-- chicken 155 g gross / 107 g net;
-- finished output 75 g;
-- energy 167.7 kcal;
-- protein 12.6 g;
-- fat 12.8 g;
-- carbohydrate 0.5 g.
+Unknown is never converted to zero.
 
-The already accepted source mapping identifies the 155/107 path with category-II
-chicken.
+## Replay / activation behavior
 
-R1-F preserves the historical source-coded Recipe
-`USSR82_697_BOILED_CHICKEN` unchanged/inactive and publishes a separate
-source-neutral production Recipe:
+Fresh publication:
 
-- `BOILED_CHICKEN_MAIN_PRODUCT`;
-- Russian name `Курица отварная без гарнира`;
-- source `DIETETIC_RECIPES_1988 / 303_VARIANT_III`.
+`inactive Recipe + SOURCE_VERIFIED RecipeVersion + prepared authority`
 
-No source-specific USSR82 code becomes the identity of a foreign-source version.
+is one caller-owned transaction and verifies exact prepared energy before commit.
 
-## Source artifact boundary
+Activation is a separate application command.
 
-Public source locators are research evidence only.
+Publication replay:
 
-Source receipts are now closed in the gate itself:
+- exact authority replay = zero-write;
+- active Recipe may replay immutable authority;
+- a deliberately deactivated Recipe is not silently reactivated by rerunning the
+  publication seed;
+- partial persisted state fails closed.
 
-- MR 2.4.0162-19 uses the existing accepted repository bundle + exact card hash;
-- 1988 recipe 303 uses an exact source-page OCR capture, mirrored byte-identically in durable private Library storage with pinned size/SHA;
-- both have explicit reviewed rights scope.
+## Verification status
 
-Runtime must verify these exact receipts; it must not discover/choose new source
-authority.
+Current exact head:
 
-## Next step
+`9283a647e24c0c8c03b72005eb8255a07590a1b1`.
 
-Review and merge the R1-F contract gate.
+Focused `R1-F runtime` workflow:
 
-Only after merge may the runtime PR implement:
+- focused R1-F tests — SUCCESS;
+- Recipe Nutrition V2 affected tests — SUCCESS;
+- migration/lineage/rebuild/coexistence affected tests — SUCCESS;
+- Planner application boundary affected tests — SUCCESS;
+- Ruff — SUCCESS.
 
-1. migration 0042;
-2. PREPARED_OUTPUT_V1 domain/persistence/publication;
-3. exact source-neutral Recipe publications using the already pinned receipts;
-4. exact-energy projection verification;
-5. explicit activation;
-6. ordinary Planner admission proof.
-
-Then expand the accepted seam to 467 / 492 / 1081 and additional MAIN capacity.
+Broad exact-head workflows are still running and must be green before final
+review readiness.
 
 ## Hard boundaries
 
 Do not:
 
-- start runtime before this gate is merged;
-- use raw input kcal as cooked output;
-- infer 100% retention;
-- use the incompatible 697/824 50/50 value for 75 g chicken;
-- mutate historical USSR82-697 v1;
-- silently prefer prepared authority over Composition authority;
-- convert missing nutrients to zero;
+- merge PR119 without final review/authorization;
+- infer raw→cooked Nutrition;
+- add retention/transformation runtime;
+- publish source carbohydrate as a canonical code without reviewed method mapping;
+- mutate historical USSR82-697;
 - bulk-activate recipes;
+- add 467/492/1081 in PR119;
+- change Planner algorithm/scoring/roles/repetition limits;
 - start Shopping/Prep/Retail/API/UI/Auth/PostgreSQL/AI;
 - start R2/R3 before successful R1-C.
+
+## Next step
+
+Finish broad exact-head verification, resolve any concrete failures, update the PR
+receipt, then stop for final review of PR119.
+
+After PR119 merges, the next bounded operation is expansion of the proven authority
+path toward enough breakfast/main capacity for R1-C; do not start automatically.
