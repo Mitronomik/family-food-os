@@ -578,6 +578,10 @@ class RecipeVersionDetail:
             )
 
 
+def activate_recipe(recipe: Recipe, *, updated_at: datetime) -> Recipe:
+    return replace(recipe, is_active=True, updated_at=updated_at)
+
+
 def deactivate_recipe(recipe: Recipe, *, updated_at: datetime) -> Recipe:
     return replace(recipe, is_active=False, updated_at=updated_at)
 
