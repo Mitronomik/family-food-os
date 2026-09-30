@@ -70,14 +70,45 @@ show that their remaining blockers are not one common food-catalogue problem:
 R1-E must verify current main before selecting any production batch; historical
 R1-A "ready" status is not sufficient by itself.
 
-## Next operation inside R1-E
+## R1-E classification result
 
-1. classify all 547 rows using repository-backed evidence only;
-2. keep unsupported recipe-level facts unknown rather than infer them;
-3. summarize blocker counts by source family and blocker class;
-4. identify the first batch that maximizes BREAKFAST/MAIN Planner capacity;
-5. if no material batch fits current Recipe Nutrition V1, identify the single
-   demonstrated reusable architecture seam with the highest capacity payoff.
+All 547 retained identities are preserved in the deterministic blocker map.
+
+Current next-blocker counts:
+
+- HOUSEHOLD_APPLICABILITY: 478;
+- SOURCE_STRUCTURE_OR_VARIANT: 59;
+- FOOD_IDENTITY_OR_FORM: 5;
+- COMPOSITION_AUTHORITY: 2;
+- REQUIRED_QUANTITY_UNRESOLVED: 2;
+- ROLE_OR_MEAL_COMPOSITION: 1.
+
+These are next-action counts, not claims that later blockers are absent.
+
+Selected first Planner-capacity closure batch:
+
+- USSR82-453 — breakfast;
+- USSR82-467 — breakfast;
+- USSR82-492 — breakfast;
+- USSR82-1081 — breakfast.
+
+Local closure:
+
+- 453 / 1081: exact V2 Composition authority;
+- 467 / 492: required quantity/process closure.
+
+After local closure, the shared demonstrated seam is
+`CONSUMED_NUTRITION_AUTHORITY` for cooked/prepared recipes. Current evidence does
+not authorize treating these four as no-thermal Recipe Nutrition V1 candidates.
+
+USSR82-697 remains a later MAIN candidate because it has an additional exact
+source-identity conflict before the same consumed-Nutrition seam.
+
+## Next operation after R1-E merge
+
+Close the four local breakfast blockers as one bounded capacity program. Only then
+open/implement the narrow cooked consumed-Nutrition authority seam proven necessary
+by the batch.
 
 ## Hard boundaries
 
