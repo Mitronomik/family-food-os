@@ -1,0 +1,105 @@
+name: R1-F contract evidence
+
+on:
+  pull_request:
+    paths:
+      - 'docs/family-food/r1f-cooked-nutrition-authority-gate.md'
+      - 'data/curation/r1f-cooked-nutrition-authority-gate/**'
+      - 'data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json'
+      - '.github/workflows/r1f-contract-evidence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-r1f-contract-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify durable evidence receipts
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          import json
+
+          root = Path(".")
+          evidence_path = root / "data/curation/r1f-cooked-nutrition-authority-gate/evidence.json"
+          evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
+          assert evidence["schema_version"] == 2
+
+          receipts = evidence["source_receipts"]
+
+          mr = receipts["hard_boiled_egg"]
+          bundle_path = root / mr["durable_artifact_path"]
+          assert bundle_path.stat().st_size == mr["durable_artifact_size_bytes"]
+          bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+          document = bundle["document"]
+          assert document["raw_bytes_sha256"] == mr["source_document_raw_bytes_sha256"]
+          assert document["raw_text_sha256"] == mr["source_document_raw_text_sha256"]
+          assert document["publication_policy"] == "NORMATIVE_BASE_RECIPE_APPROVED"
+
+          cards = [
+              card for card in bundle["cards"]
+              if card["source_section_code"] == mr["source_section_code"]
+              and card["source_card_code"] == mr["source_card_code"]
+          ]
+          assert len(cards) == 1
+          card = cards[0]
+          raw = card["raw_card_text"].encode("utf-8")
+          assert hashlib.sha256(raw).hexdigest() == mr["raw_card_sha256"]
+          assert card["raw_card_sha256"] == mr["raw_card_sha256"]
+          assert "63" in card["raw_card_text"]
+          assert "40" in card["raw_card_text"]
+          assert mr["rights_review_status"] == "REVIEWED"
+
+          chicken = receipts["boiled_chicken_75g"]
+          chicken_path = root / chicken["durable_artifact_path"]
+          raw = chicken_path.read_bytes()
+          assert len(raw) == chicken["durable_artifact_size_bytes"]
+          assert hashlib.sha256(raw).hexdigest() == chicken["durable_artifact_sha256"]
+          text = raw.decode("utf-8")
+          for expected in (
+              "303. Курица отварная",
+              "Вариант I Вариант II Вариант III",
+              "Курица 260 179 208 143 155 107",
+              "Выход: 125 100 75",
+              "Вариант III: Б—12,6, Ж—12,8, У—0,5; калорийность—167,7 ккал.",
+              "Кур отваривают целиком.",
+          ):
+              assert expected in text
+          assert chicken["artifact_kind"] == "EXACT_SOURCE_PAGE_OCR_CAPTURE"
+          assert chicken["durable_private_locator"] == (
+              "private-library:/FamilyFoodOS/source-artifacts/r1f/"
+              "recipe-303-source-page-ocr.txt"
+          )
+          assert chicken["latest_successful_retrieval_hash_verification"] == "2026-09-30"
+          assert chicken["rights_review_status"] == "BOUNDED_FACTUAL_USE_REVIEWED"
+
+          targets = {item["closure_target"]: item for item in evidence["targets"]}
+          assert targets["USSR82-453"]["production_recipe"]["canonical_code"] == "HARD_BOILED_EGG"
+          assert targets["USSR82-453"]["production_recipe"]["canonical_name"] == "Яйцо куриное вкрутую"
+          assert targets["USSR82-697"]["production_recipe"]["canonical_code"] == "BOILED_CHICKEN_MAIN_PRODUCT"
+          assert targets["USSR82-697"]["production_recipe"]["canonical_name"] == "Курица отварная без гарнира"
+          assert targets["USSR82-697"]["historical_recipe"]["canonical_code"] == "USSR82_697_BOILED_CHICKEN"
+          assert targets["USSR82-697"]["historical_recipe"]["canonical_name"] == "Курица отварная"
+
+          def name_key(value):
+              return " ".join(value.casefold().replace("ё", "е").split())
+
+          assert name_key(
+              targets["USSR82-697"]["production_recipe"]["canonical_name"]
+          ) != name_key(
+              targets["USSR82-697"]["historical_recipe"]["canonical_name"]
+          )
+          assert targets["USSR82-697"]["historical_recipe"]["disposition"] == "IMMUTABLE_INACTIVE_HISTORY"
+
+          print("R1-F contract evidence: OK")
+          PY
+      - name: Whitespace gate
+        run: git diff --check

@@ -1,5 +1,19 @@
 # Progress
 
+## R1-F cooked-Nutrition authority gate started — 2026-09-30
+
+Accepted base:
+`becc00f0e94c927598f930140c385f84f80aa21d` (merged PR115).
+
+Issue #116 and branch `docs/r1f-cooked-nutrition-authority-gate` now define the
+required Implementation Contract Gate.
+
+Evidence review selected prepared-output RecipeVersion Nutrition as the narrow
+runtime seam. The gate rejects raw→cooked fallback and the incompatible 697/824
+50/50 nutrient row.
+
+No runtime, migration, data publication or Recipe activation has occurred.
+
 ## R1-E blocker clustering started — 2026-09-30
 
 Result in current branch:
