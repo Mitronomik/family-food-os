@@ -260,6 +260,11 @@ def build() -> tuple[list[dict[str, Any]], dict[str, Any], dict[str, Any]]:
             else:
                 known.add("HOUSEHOLD_APPLICABILITY")
 
+        if source_id in SELECTED_COOKED_R1:
+            known.add("CONSUMED_NUTRITION_AUTHORITY")
+            later_gates.discard("CONSUMED_NUTRITION_AUTHORITY")
+            refs.add(EVIDENCE["cross_corpus_review"])
+
         ordered_known = _ordered(known)
         next_blocker = ordered_known[0] if ordered_known else "PLANNER_READY"
 
