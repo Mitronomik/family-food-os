@@ -1,7 +1,5 @@
 """SQLAlchemy Core Step 10-A Recipe Nutrition V2 adapters."""
 
-from collections.abc import Callable
-from types import TracebackType
 from typing import Self
 from uuid import UUID
 
