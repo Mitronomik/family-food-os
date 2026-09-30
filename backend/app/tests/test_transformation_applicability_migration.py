@@ -57,6 +57,7 @@ def test_populated_0037_upgrade_preserves_every_existing_row(tmp_path):
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
+        "0042_recipe_prepared_output_nutrition",
     ]
 
     after = snapshot(config)
@@ -152,6 +153,7 @@ def test_backup_restore_and_reupgrade_are_deterministic(tmp_path):
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
+        "0042_recipe_prepared_output_nutrition",
     ]
     after = snapshot(config)
     assert_snapshot_preserved(before, after)
@@ -163,6 +165,7 @@ def test_backup_restore_and_reupgrade_are_deterministic(tmp_path):
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
+        "0042_recipe_prepared_output_nutrition",
     ]
     restored = snapshot(config)
     assert_snapshot_preserved(before, restored)
