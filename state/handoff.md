@@ -24,8 +24,8 @@ Pilot evidence:
 - 1986 697/824 50/50 / 144 kcal is rejected as chicken + sauce;
 - 1988 recipe 303 Variant III gives exact 155/107 → 75 g boiled chicken and
   167.7 kcal; it maps to a separate source-neutral Recipe
-  `BOILED_CHICKEN`;
-- historical `USSR82_697_BOILED_CHICKEN` remains immutable/inactive;
+  `BOILED_CHICKEN_MAIN_PRODUCT` / `Курица отварная без гарнира`;
+- historical `USSR82_697_BOILED_CHICKEN / Курица отварная` remains immutable/inactive;
 - source receipts and rights are pinned in the gate, not deferred to runtime.
 
 Runtime must not begin until this gate PR is reviewed and merged.
