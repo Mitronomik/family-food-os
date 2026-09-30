@@ -90,7 +90,12 @@ def test_r1f_fresh_publication_activates_exact_energy_breakfast_and_main(databas
         catalogue = create_food_recipe_catalogue_service(engine)
         nutrition = create_recipe_nutrition_v2_service(engine)
         planner = PlannerService(
-            None, None, catalogue, None, None, recipe_nutrition=nutrition  # type: ignore[arg-type]
+            None,
+            None,
+            catalogue,
+            None,
+            None,
+            recipe_nutrition=nutrition,  # type: ignore[arg-type]
         )
         admissions = {
             row.canonical_code: row for row in planner.compose_candidate_admission()
@@ -115,26 +120,38 @@ def test_r1f_fresh_publication_activates_exact_energy_breakfast_and_main(databas
         )
         assert egg_detail.version.source_output_g == Decimal("40.000000")
         assert chicken_detail.version.source_output_g == Decimal("75.000000")
-        assert egg_detail.ingredients[0].food_ingredient_id != chicken_detail.ingredients[0].food_ingredient_id
+        assert (
+            egg_detail.ingredients[0].food_ingredient_id
+            != chicken_detail.ingredients[0].food_ingredient_id
+        )
     finally:
         engine.dispose()
 
     with sqlite3.connect(database.path) as db:
-        assert db.execute(
-            "SELECT COUNT(*) FROM recipe_prepared_nutrition_authorities"
-        ).fetchone()[0] == 2
-        assert db.execute(
-            "SELECT COUNT(*) FROM recipe_prepared_nutrient_values"
-        ).fetchone()[0] == 2
-        assert db.execute(
-            """
-            SELECT COUNT(*)
-            FROM food_nutrition_profiles p
-            JOIN food_ingredients i ON i.id = p.food_ingredient_id
-            WHERE i.canonical_code = ?
-            """,
-            (CHICKEN_FOOD_CODE,),
-        ).fetchone()[0] == 0
+        assert (
+            db.execute(
+                "SELECT COUNT(*) FROM recipe_prepared_nutrition_authorities"
+            ).fetchone()[0]
+            == 2
+        )
+        assert (
+            db.execute(
+                "SELECT COUNT(*) FROM recipe_prepared_nutrient_values"
+            ).fetchone()[0]
+            == 2
+        )
+        assert (
+            db.execute(
+                """
+                SELECT COUNT(*)
+                FROM food_nutrition_profiles p
+                JOIN food_ingredients i ON i.id = p.food_ingredient_id
+                WHERE i.canonical_code = ?
+                """,
+                (CHICKEN_FOOD_CODE,),
+            ).fetchone()[0]
+            == 0
+        )
         names = db.execute(
             """
             SELECT canonical_code, canonical_name_key
