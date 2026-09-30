@@ -18,6 +18,7 @@ from app.domain.food_recipes import (
     RecipeVersionDetail,
     RightsReviewStatus,
     VerificationStatus,
+    activate_recipe,
     deactivate_recipe,
     scale_recipe,
 )
@@ -207,6 +208,21 @@ class FoodRecipeCatalogueService:
         self, version_id: UUID, target_servings: Decimal
     ) -> RecipeVersionDetail:
         return scale_recipe(self.get_version_detail(version_id), target_servings)
+
+    def activate(self, recipe_id: UUID) -> Recipe:
+        now = self._clock()
+        with self._write() as scope:
+            recipe = scope.recipes.get(recipe_id)
+            if recipe is None:
+                raise RecipeNotFoundError(recipe_id)
+            if recipe.is_active:
+                return recipe
+            changed = activate_recipe(recipe, updated_at=now)
+            scope.recipes.set_active(
+                recipe_id, active=True, updated_at=changed.updated_at
+            )
+            scope.commit()
+            return changed
 
     def deactivate(self, recipe_id: UUID) -> Recipe:
         now = self._clock()
