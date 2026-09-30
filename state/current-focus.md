@@ -85,30 +85,45 @@ Current next-blocker counts:
 
 These are next-action counts, not claims that later blockers are absent.
 
-Selected first Planner-capacity closure batch:
+Evidence model:
+
+- `known_blockers` contains only evidence-backed per-row blockers;
+- `unproven_later_gates` preserves possible later review without converting
+  aggregate evidence into per-recipe truth;
+- selected R1 candidates separate mode-independent and mode-dependent blockers.
+
+Selected first cooked-authority pilot:
 
 - USSR82-453 — breakfast;
-- USSR82-467 — breakfast;
-- USSR82-492 — breakfast;
-- USSR82-1081 — breakfast.
+- USSR82-697 — main.
 
-Local closure:
+Why this pair:
 
-- 453 / 1081: exact V2 Composition authority;
-- 467 / 492: required quantity/process closure.
+- it covers both Planner role families required by R1-C;
+- it forces a concrete consumed-Nutrition authority decision on real cooked
+  recipes;
+- it avoids spending Composition work before the accepted authority mode proves
+  that Composition-based calculation is required;
+- the four-breakfast cluster remains immediate expansion after the authority mode
+  is proven.
 
-After local closure, the shared demonstrated seam is
-`CONSUMED_NUTRITION_AUTHORITY` for cooked/prepared recipes. Current evidence does
-not authorize treating these four as no-thermal Recipe Nutrition V1 candidates.
+Mode-independent prerequisites:
 
-USSR82-697 remains a later MAIN candidate because it has an additional exact
-source-identity conflict before the same consumed-Nutrition seam.
+- 453: immutable source-backed RecipeVersion publication lifecycle;
+- 697: exact source FoodIngredient identity/form correction.
+
+Mode-dependent:
+
+- 453: Composition authority if a Composition-based route is selected;
+- 697: cooked consumed-Nutrition authority.
+
+Activation remains downstream of accepted exact positive consumption Nutrition.
 
 ## Next operation after R1-E merge
 
-Close the four local breakfast blockers as one bounded capacity program. Only then
-open/implement the narrow cooked consumed-Nutrition authority seam proven necessary
-by the batch.
+Run one bounded **cooked-Nutrition authority pilot + mode-independent local
+closure** for 453 + 697. Implement only the minimum versioned authority seam proven
+necessary by those two cases, then expand to 467 / 492 / 1081.
 
 ## Hard boundaries
 
