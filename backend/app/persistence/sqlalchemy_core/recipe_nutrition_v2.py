@@ -154,9 +154,7 @@ class SqlAlchemyPreparedRecipeNutritionRepository:
             for row in rows
         )
 
-    def add_values(
-        self, values: tuple[PreparedRecipeNutrientValue, ...]
-    ) -> None:
+    def add_values(self, values: tuple[PreparedRecipeNutrientValue, ...]) -> None:
         try:
             for value in values:
                 self._connection.execute(
