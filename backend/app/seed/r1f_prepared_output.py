@@ -41,8 +41,7 @@ PACKAGE = REPOSITORY_ROOT / "data/curation/r1f-cooked-nutrition-authority-gate"
 EVIDENCE_PATH = PACKAGE / "evidence.json"
 CHICKEN_OCR_PATH = PACKAGE / "dietetic-recipes-1988-recipe-303-factual-excerpt.txt"
 MR_BUNDLE_PATH = (
-    REPOSITORY_ROOT
-    / "data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json"
+    REPOSITORY_ROOT / "data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json"
 )
 
 EGG_RECIPE_CODE = "HARD_BOILED_EGG"
@@ -238,7 +237,10 @@ def _prepared_specs(
                 "evidence.json#source_receipts.hard_boiled_egg"
             ),
             expected_available_amounts=(
-                ("ENERGY_KCAL", Decimal(egg_receipt["authority_values"]["energy_kcal"])),
+                (
+                    "ENERGY_KCAL",
+                    Decimal(egg_receipt["authority_values"]["energy_kcal"]),
+                ),
             ),
         ),
         ReviewedPreparedRecipeNutritionSpec(
@@ -318,16 +320,24 @@ def seed_r1f_prepared_output(
         energies = []
         fresh_codes: set[str] = set()
         for seed, spec in zip(seeds, specs, strict=True):
-            if catalogue.preflight_trusted_seed(seed) is TrustedRecipeSeedDisposition.FRESH:
+            if (
+                catalogue.preflight_trusted_seed(seed)
+                is TrustedRecipeSeedDisposition.FRESH
+            ):
                 with SqlAlchemyRecipeNutritionV2UnitOfWork(engine) as uow:
                     catalogue.reconcile_seed_in_scope(uow, (seed,))
                     published = nutrition.publish_prepared_in_scope(uow, spec)
-                    if published.disposition is not PreparedPublicationDisposition.FRESH:
+                    if (
+                        published.disposition
+                        is not PreparedPublicationDisposition.FRESH
+                    ):
                         raise RecipeNutritionV2ConflictError(
                             f"Fresh R1-F publication did not produce FRESH: {seed.canonical_code}."
                         )
-                    projected_in_scope = nutrition.prepared_consumption_projection_in_scope(
-                        uow, published.authority.recipe_version_id
+                    projected_in_scope = (
+                        nutrition.prepared_consumption_projection_in_scope(
+                            uow, published.authority.recipe_version_id
+                        )
                     )
                     if (
                         not projected_in_scope.exact_energy_ready
@@ -344,7 +354,10 @@ def seed_r1f_prepared_output(
             recipe = catalogue.get_by_code(seed.canonical_code)
             detail = catalogue.get_latest_verified(recipe.id)
             projected = nutrition.neutral_consumption_projection(detail.version.id)
-            if not projected.exact_energy_ready or projected.per_base_serving.kcal is None:
+            if (
+                not projected.exact_energy_ready
+                or projected.per_base_serving.kcal is None
+            ):
                 raise RecipeNutritionV2ConflictError(
                     f"R1-F exact energy unavailable: {seed.canonical_code}."
                 )
@@ -353,7 +366,12 @@ def seed_r1f_prepared_output(
             energies.append((seed.canonical_code, projected.per_base_serving.kcal))
 
         planner = PlannerService(
-            None, None, catalogue, None, None, recipe_nutrition=nutrition  # type: ignore[arg-type]
+            None,
+            None,
+            catalogue,
+            None,
+            None,
+            recipe_nutrition=nutrition,  # type: ignore[arg-type]
         )
         for seed in seeds:
             admission = next(
