@@ -170,9 +170,7 @@ def project_recipe_nutrition_consumption(
         else NutritionStatus.COMPLETE
     )
     energy = serving.kcal
-    energy_ready = (
-        isinstance(energy, Decimal) and energy.is_finite() and energy > 0
-    )
+    energy_ready = isinstance(energy, Decimal) and energy.is_finite() and energy > 0
     return RecipeNutritionConsumptionProjection(
         recipe_version_id=canonical.recipe_version_id,
         required_total=required,
@@ -327,9 +325,13 @@ class RecipeNutritionV2Service:
         if len(amounts) != len(spec.expected_available_amounts) or not amounts:
             raise RecipeNutritionV2ContractError("Prepared nutrient set invalid.")
         if "ENERGY_KCAL" not in amounts or amounts["ENERGY_KCAL"] <= 0:
-            raise RecipeNutritionV2ContractError("Prepared ENERGY_KCAL must be positive.")
+            raise RecipeNutritionV2ContractError(
+                "Prepared ENERGY_KCAL must be positive."
+            )
         if any(code not in NUTRIENT_CODES for code in amounts):
-            raise RecipeNutritionV2ContractError("Prepared nutrient code is not frozen.")
+            raise RecipeNutritionV2ContractError(
+                "Prepared nutrient code is not frozen."
+            )
         if any(
             not isinstance(value, Decimal) or not value.is_finite() or value < 0
             for value in amounts.values()
@@ -343,7 +345,9 @@ class RecipeNutritionV2Service:
             recipe.id, spec.source_name, spec.source_recipe_id, spec.source_version
         )
         if len(candidates) != 1:
-            raise RecipeNutritionV2ConflictError("Prepared RecipeVersion provenance is not exact.")
+            raise RecipeNutritionV2ConflictError(
+                "Prepared RecipeVersion provenance is not exact."
+            )
         detail = candidates[0]
         version = detail.version
         if (
@@ -353,11 +357,17 @@ class RecipeNutritionV2Service:
             or version.rights_review_status.value != "REVIEWED"
             or version.rights_basis != spec.rights_basis
         ):
-            raise RecipeNutritionV2ConflictError("Prepared RecipeVersion source authority mismatch.")
+            raise RecipeNutritionV2ConflictError(
+                "Prepared RecipeVersion source authority mismatch."
+            )
         if not detail.ingredients or any(row.optional for row in detail.ingredients):
-            raise RecipeNutritionV2ConflictError("Prepared Recipe ingredients are not exact required rows.")
+            raise RecipeNutritionV2ConflictError(
+                "Prepared Recipe ingredients are not exact required rows."
+            )
         if any(uow.bindings.get(row.id) is not None for row in detail.ingredients):
-            raise RecipeNutritionV2ConflictError("Prepared and Composition authority cannot coexist.")
+            raise RecipeNutritionV2ConflictError(
+                "Prepared and Composition authority cannot coexist."
+            )
 
         provenance = json.dumps(
             {
@@ -417,20 +427,30 @@ class RecipeNutritionV2Service:
                 created_at=existing.created_at,
             )
             if existing != expected or existing_values != values:
-                raise RecipeNutritionV2ConflictError("Prepared authority replay conflict.")
+                raise RecipeNutritionV2ConflictError(
+                    "Prepared authority replay conflict."
+                )
             return PreparedPublicationResult(
                 PreparedPublicationDisposition.EXACT_REPLAY, existing, existing_values
             )
         if existing_values:
-            raise RecipeNutritionV2ConflictError("Partial prepared authority state detected.")
+            raise RecipeNutritionV2ConflictError(
+                "Partial prepared authority state detected."
+            )
         if spec.require_recipe_inactive and recipe.is_active:
             raise RecipeNutritionV2ConflictError(
                 "Prepared Recipe must be inactive for fresh authority publication."
             )
 
         now = self._clock()
-        if not isinstance(now, datetime) or now.tzinfo is None or now.utcoffset() is None:
-            raise RecipeNutritionV2ContractError("Publication clock must be timezone-aware.")
+        if (
+            not isinstance(now, datetime)
+            or now.tzinfo is None
+            or now.utcoffset() is None
+        ):
+            raise RecipeNutritionV2ContractError(
+                "Publication clock must be timezone-aware."
+            )
         authority = PreparedRecipeNutritionAuthority(
             recipe_version_id=version.id,
             registry_version=REGISTRY_VERSION,
@@ -452,7 +472,9 @@ class RecipeNutritionV2Service:
         )
         uow.prepared.add_values(values)
         uow.prepared.add_authority(authority)
-        return PreparedPublicationResult(PreparedPublicationDisposition.FRESH, authority, values)
+        return PreparedPublicationResult(
+            PreparedPublicationDisposition.FRESH, authority, values
+        )
 
     def calculate(self, recipe_version_id: UUID) -> CanonicalRecipeVersionNutrition:
         with self._read_scope_factory() as scope:
@@ -560,9 +582,7 @@ class RecipeNutritionV2Service:
         by_code = {value.nutrient_code: value.amount for value in values}
         energy = by_code.get("ENERGY_KCAL")
         if energy is None or not energy.is_finite() or energy <= 0:
-            raise RecipeNutritionV2UnavailableError(
-                "Prepared ENERGY_KCAL unavailable."
-            )
+            raise RecipeNutritionV2UnavailableError("Prepared ENERGY_KCAL unavailable.")
         total = NutritionValues(
             kcal=energy,
             protein_g=by_code.get("PROTEIN"),
@@ -578,7 +598,9 @@ class RecipeNutritionV2Service:
                 else total.protein_g / detail.version.base_servings
             ),
             fat_g=_round(
-                None if total.fat_g is None else total.fat_g / detail.version.base_servings
+                None
+                if total.fat_g is None
+                else total.fat_g / detail.version.base_servings
             ),
             carbohydrates_g=_round(
                 None
@@ -674,9 +696,7 @@ class RecipeNutritionV2Service:
                         code: (
                             None
                             if amounts[code] is None
-                            else amounts[code]
-                            * row.quantity
-                            / result.input_mass_g
+                            else amounts[code] * row.quantity / result.input_mass_g
                         )
                         for code in NUTRIENT_CODES
                     }
@@ -706,7 +726,9 @@ class RecipeNutritionV2Service:
                 total = (
                     None
                     if any(value is None for value in values)
-                    else sum((value for value in values if value is not None), Decimal(0))
+                    else sum(
+                        (value for value in values if value is not None), Decimal(0)
+                    )
                 )
                 totals[code] = _round(total)
                 per_serving[code] = _round(
@@ -729,8 +751,7 @@ class RecipeNutritionV2Service:
             recipe_calculation_version=RECIPE_CALCULATION_VERSION,
             bindings=tuple(bindings),
             required_total=tuple(
-                CanonicalNutrientAmount(code, totals[code])
-                for code in NUTRIENT_CODES
+                CanonicalNutrientAmount(code, totals[code]) for code in NUTRIENT_CODES
             ),
             per_base_serving=tuple(
                 CanonicalNutrientAmount(code, per_serving[code])
@@ -767,14 +788,29 @@ class RecipeNutritionV2Service:
             raise RecipeNutritionV2ContractError(
                 "Binding spec не совпадает с trusted Recipe seed."
             )
-        if not isinstance(spec.quantity, Decimal) or not spec.quantity.is_finite() or spec.quantity <= 0:
-            raise RecipeNutritionV2ContractError("Binding quantity должна быть положительным Decimal.")
-        if type(spec.recipe_version_number) is not int or spec.recipe_version_number <= 0:
-            raise RecipeNutritionV2ContractError("RecipeVersion number должен быть положительным.")
+        if (
+            not isinstance(spec.quantity, Decimal)
+            or not spec.quantity.is_finite()
+            or spec.quantity <= 0
+        ):
+            raise RecipeNutritionV2ContractError(
+                "Binding quantity должна быть положительным Decimal."
+            )
+        if (
+            type(spec.recipe_version_number) is not int
+            or spec.recipe_version_number <= 0
+        ):
+            raise RecipeNutritionV2ContractError(
+                "RecipeVersion number должен быть положительным."
+            )
         if type(spec.ingredient_position) is not int or spec.ingredient_position <= 0:
-            raise RecipeNutritionV2ContractError("RecipeIngredient position должен быть положительным.")
+            raise RecipeNutritionV2ContractError(
+                "RecipeIngredient position должен быть положительным."
+            )
         if type(spec.composition_version) is not int or spec.composition_version <= 0:
-            raise RecipeNutritionV2ContractError("Composition version должен быть положительным.")
+            raise RecipeNutritionV2ContractError(
+                "Composition version должен быть положительным."
+            )
         try:
             CompositionKind(spec.composition_kind)
             expected_state = MassState(spec.composition_input_state)
@@ -789,7 +825,9 @@ class RecipeNutritionV2Service:
         try:
             unit = UnitCode(spec.unit)
         except (TypeError, ValueError) as exc:
-            raise RecipeNutritionV2ContractError("Неподдерживаемая единица RecipeIngredient.") from exc
+            raise RecipeNutritionV2ContractError(
+                "Неподдерживаемая единица RecipeIngredient."
+            ) from exc
         if unit is not UnitCode.GRAM:
             raise RecipeNutritionV2ContractError(
                 "RECIPE_COMPOSITION_NUTRITION_V1 binding допускает только граммы."
@@ -807,7 +845,9 @@ class RecipeNutritionV2Service:
             raise RecipeNutritionV2ContractError(
                 "Нутриент не может быть одновременно AVAILABLE и UNKNOWN."
             )
-        if set(available_codes) | set(spec.expected_unknown_codes) != set(NUTRIENT_CODES):
+        if set(available_codes) | set(spec.expected_unknown_codes) != set(
+            NUTRIENT_CODES
+        ):
             raise RecipeNutritionV2ContractError(
                 "Reviewed publication должна покрывать frozen 54-code request set."
             )
@@ -816,11 +856,7 @@ class RecipeNutritionV2Service:
                 raise RecipeNutritionV2ContractError(
                     "Reviewed nutrient отсутствует в frozen request set."
                 )
-            if (
-                not isinstance(amount, Decimal)
-                or not amount.is_finite()
-                or amount < 0
-            ):
+            if not isinstance(amount, Decimal) or not amount.is_finite() or amount < 0:
                 raise RecipeNutritionV2ContractError(
                     "Reviewed nutrient amount должен быть конечным Decimal."
                 )
@@ -886,16 +922,16 @@ class RecipeNutritionV2Service:
                 "Exact RecipeIngredient position отсутствует или неоднозначен."
             )
         row = rows[0]
-        if row.optional or row.quantity != spec.quantity or row.unit != UnitCode(spec.unit):
+        if (
+            row.optional
+            or row.quantity != spec.quantity
+            or row.unit != UnitCode(spec.unit)
+        ):
             raise RecipeNutritionV2ConflictError(
                 "RecipeIngredient quantity/unit/optional отличаются от проверенной authority."
             )
         food = scope.food_ingredients.get_by_code(spec.food_ingredient_code)
-        if (
-            food is None
-            or food.id != row.food_ingredient_id
-            or not food.is_active
-        ):
+        if food is None or food.id != row.food_ingredient_id or not food.is_active:
             raise RecipeNutritionV2ConflictError(
                 "Exact FoodIngredient отсутствует, не совпадает или inactive."
             )
