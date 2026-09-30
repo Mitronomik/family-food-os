@@ -8,7 +8,7 @@ from decimal import Decimal
 from pathlib import Path
 from uuid import UUID
 
-from app.db.config import DatabaseConfig, REPOSITORY_ROOT
+from app.db.config import REPOSITORY_ROOT, DatabaseConfig
 from app.db.migrations import apply_migrations
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_ingredient_composition import (
