@@ -12,6 +12,7 @@ REGISTRY_VERSION = "RU_NUTRIENT_REGISTRY_V2"
 NUTRIENT_SET_VERSION = "RECIPE_V2_NUTRIENT_SET_V1"
 COMPOSITION_CALCULATION_VERSION = "FOOD_COMPOSITION_APPLICABILITY_V2"
 RECIPE_CALCULATION_VERSION = "RECIPE_COMPOSITION_NUTRITION_V1"
+PREPARED_RECIPE_CALCULATION_VERSION = "RECIPE_PREPARED_OUTPUT_NUTRITION_V1"
 RESULT_QUANTUM = Decimal("0.000001")
 
 NUTRIENT_CODES = (
@@ -84,6 +85,7 @@ class RecipeNutritionV2Status(StrEnum):
 class RecipeNutritionAuthorityKind(StrEnum):
     LEGACY_V1 = "LEGACY_V1"
     COMPOSITION_V2 = "COMPOSITION_V2"
+    PREPARED_OUTPUT_V1 = "PREPARED_OUTPUT_V1"
 
 
 @dataclass(frozen=True)
@@ -117,6 +119,101 @@ class RecipeIngredientCompositionBinding:
             or self.created_at.utcoffset() is None
         ):
             raise ValueError("Binding created_at должен быть timezone-aware instant.")
+
+
+@dataclass(frozen=True)
+class PreparedRecipeNutrientValue:
+    recipe_version_id: UUID
+    registry_version: str
+    nutrient_code: str
+    amount: Decimal
+    provenance_json: str
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.recipe_version_id, UUID):
+            raise TypeError("RecipeVersion id должен быть UUID.")
+        if self.registry_version != REGISTRY_VERSION:
+            raise ValueError("Prepared nutrient использует неверный registry_version.")
+        if self.nutrient_code not in NUTRIENT_CODES:
+            raise ValueError("Prepared nutrient не входит в frozen nutrient set.")
+        if (
+            not isinstance(self.amount, Decimal)
+            or not self.amount.is_finite()
+            or self.amount < 0
+        ):
+            raise ValueError("Prepared nutrient amount должен быть конечным и неотрицательным.")
+        if not isinstance(self.provenance_json, str) or not self.provenance_json.strip():
+            raise ValueError("Prepared nutrient provenance_json обязателен.")
+
+
+@dataclass(frozen=True)
+class PreparedRecipeNutritionAuthority:
+    recipe_version_id: UUID
+    registry_version: str
+    nutrient_set_version: str
+    recipe_calculation_version: str
+    output_mass_g: Decimal
+    source_name: str
+    source_id: str
+    source_version: str
+    source_locator: str
+    source_document_sha256: str
+    source_data_type: str
+    rights_review_status: str
+    rights_basis: str
+    review_reference: str
+    value_count: int
+    value_sha256: str
+    created_at: datetime
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.recipe_version_id, UUID):
+            raise TypeError("RecipeVersion id должен быть UUID.")
+        expected = (
+            (self.registry_version, REGISTRY_VERSION),
+            (self.nutrient_set_version, NUTRIENT_SET_VERSION),
+            (self.recipe_calculation_version, PREPARED_RECIPE_CALCULATION_VERSION),
+        )
+        if any(actual != frozen for actual, frozen in expected):
+            raise ValueError("Prepared Recipe authority использует неверную version identity.")
+        if (
+            not isinstance(self.output_mass_g, Decimal)
+            or not self.output_mass_g.is_finite()
+            or self.output_mass_g <= 0
+        ):
+            raise ValueError("Prepared output_mass_g должен быть положительным Decimal.")
+        for value, label in (
+            (self.source_name, "source_name"),
+            (self.source_id, "source_id"),
+            (self.source_version, "source_version"),
+            (self.source_locator, "source_locator"),
+            (self.source_data_type, "source_data_type"),
+            (self.rights_review_status, "rights_review_status"),
+            (self.rights_basis, "rights_basis"),
+            (self.review_reference, "review_reference"),
+        ):
+            if not isinstance(value, str) or not value.strip():
+                raise ValueError(f"Prepared authority {label} обязателен.")
+        if (
+            not isinstance(self.source_document_sha256, str)
+            or len(self.source_document_sha256) != 64
+            or any(ch not in "0123456789abcdef" for ch in self.source_document_sha256)
+        ):
+            raise ValueError("Prepared authority source_document_sha256 должен быть lowercase SHA-256.")
+        if not isinstance(self.value_count, int) or isinstance(self.value_count, bool) or self.value_count <= 0:
+            raise ValueError("Prepared authority value_count должен быть положительным integer.")
+        if (
+            not isinstance(self.value_sha256, str)
+            or len(self.value_sha256) != 64
+            or any(ch not in "0123456789abcdef" for ch in self.value_sha256)
+        ):
+            raise ValueError("Prepared authority value_sha256 должен быть lowercase SHA-256.")
+        if (
+            not isinstance(self.created_at, datetime)
+            or self.created_at.tzinfo is None
+            or self.created_at.utcoffset() is None
+        ):
+            raise ValueError("Prepared authority created_at должен быть timezone-aware instant.")
 
 
 @dataclass(frozen=True)
