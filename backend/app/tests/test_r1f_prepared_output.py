@@ -5,6 +5,7 @@ from decimal import Decimal
 from uuid import UUID
 
 import pytest
+from sqlalchemy import event
 from app.db import migrations
 from app.db.config import DatabaseConfig
 from app.domain.recipe_nutrition_v2 import RecipeNutritionAuthorityKind
@@ -30,6 +31,7 @@ from app.persistence.sqlalchemy_core.food_recipe_composition import (
     create_food_recipe_catalogue_service,
 )
 from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
+    SqlAlchemyRecipeNutritionV2UnitOfWork,
     create_recipe_nutrition_v2_service,
 )
 from app.seed.food_ingredients import seed_food_ingredients
@@ -44,6 +46,10 @@ from app.seed.ru_food_data import seed_ru_food_data
 from app.seed.ru_nut_db_r1a import seed_ru_nut_db_r1a
 from app.seed.ru_nut_db_step4 import seed_ru_nut_db_step4
 from app.services.planner import PlannerService
+from app.services.recipe_nutrition_v2 import (
+    RecipeNutritionV2Service,
+    RecipeNutritionV2UnavailableError,
+)
 
 
 def uid(number: int) -> UUID:
@@ -413,4 +419,176 @@ def test_r1f_serving_scaling_reuses_recipe_and_recipeversion_identity(database):
             assert len(catalogue.list_versions(recipe.id)) == 1
     finally:
         engine.dispose()
+
+def _patched_r1f_engine(monkeypatch, fail_predicate):
+    import app.seed.r1f_prepared_output as module
+
+    original = module.create_sqlite_engine
+
+    def create(config=None):
+        engine = original(config)
+
+        def fail(connection, cursor, statement, parameters, context, executemany):
+            del connection, cursor, parameters, context, executemany
+            if fail_predicate(statement):
+                raise RuntimeError("injected-r1f-failure")
+
+        event.listen(engine, "before_cursor_execute", fail)
+        return engine
+
+    monkeypatch.setattr(module, "create_sqlite_engine", create)
+
+
+def _pilot_counts(config):
+    with sqlite3.connect(config.path) as db:
+        recipes = db.execute(
+            """
+            SELECT COUNT(*)
+            FROM food_recipes
+            WHERE canonical_code IN (?, ?)
+            """,
+            (EGG_RECIPE_CODE, CHICKEN_RECIPE_CODE),
+        ).fetchone()[0]
+        authorities = db.execute(
+            "SELECT COUNT(*) FROM recipe_prepared_nutrition_authorities"
+        ).fetchone()[0]
+        values = db.execute(
+            "SELECT COUNT(*) FROM recipe_prepared_nutrient_values"
+        ).fetchone()[0]
+        return recipes, authorities, values
+
+
+def test_r1f_failure_after_recipe_before_version_rolls_back_publication(
+    database, monkeypatch
+):
+    _patched_r1f_engine(
+        monkeypatch,
+        lambda statement: "INSERT INTO food_recipe_versions" in statement,
+    )
+
+    with pytest.raises(RuntimeError, match="injected-r1f-failure"):
+        seed_r1f_prepared_output(database)
+
+    assert _pilot_counts(database) == (0, 0, 0)
+
+
+def test_r1f_failure_after_version_before_prepared_values_rolls_back(
+    database, monkeypatch
+):
+    _patched_r1f_engine(
+        monkeypatch,
+        lambda statement: "INSERT INTO recipe_prepared_nutrient_values" in statement,
+    )
+
+    with pytest.raises(RuntimeError, match="injected-r1f-failure"):
+        seed_r1f_prepared_output(database)
+
+    assert _pilot_counts(database) == (0, 0, 0)
+
+
+def test_r1f_prepared_header_cannot_exist_before_complete_values(database):
+    with sqlite3.connect(database.path) as db:
+        version_id = db.execute(
+            """
+            SELECT v.id
+            FROM food_recipe_versions v
+            JOIN food_recipes r ON r.id = v.recipe_id
+            WHERE r.canonical_code = 'USSR82_697_BOILED_CHICKEN'
+            """
+        ).fetchone()[0]
+        with pytest.raises(sqlite3.IntegrityError, match="values неполны"):
+            db.execute(
+                """
+                INSERT INTO recipe_prepared_nutrition_authorities (
+                    recipe_version_id, registry_version, nutrient_set_version,
+                    recipe_calculation_version, output_mass_g,
+                    source_name, source_id, source_version, source_locator,
+                    source_document_sha256, source_data_type,
+                    rights_review_status, rights_basis, review_reference,
+                    value_count, value_sha256, created_at
+                ) VALUES (
+                    ?, 'RU_NUTRIENT_REGISTRY_V2', 'RECIPE_V2_NUTRIENT_SET_V1',
+                    'RECIPE_PREPARED_OUTPUT_NUTRITION_V1', '75',
+                    'fixture', 'fixture', 'fixture', 'fixture',
+                    ?, 'fixture', 'REVIEWED', 'fixture', 'fixture',
+                    1, ?, '2026-09-30 00:00:00.000000'
+                )
+                """,
+                (version_id, "a" * 64, "b" * 64),
+            )
+        db.rollback()
+
+
+def test_r1f_failure_after_authority_before_projection_rolls_back(
+    database, monkeypatch
+):
+    def fail_projection(self, scope, recipe_version_id):
+        del self, scope, recipe_version_id
+        raise RecipeNutritionV2UnavailableError("injected-projection-failure")
+
+    monkeypatch.setattr(
+        RecipeNutritionV2Service,
+        "prepared_consumption_projection_in_scope",
+        fail_projection,
+    )
+
+    with pytest.raises(
+        RecipeNutritionV2UnavailableError, match="injected-projection-failure"
+    ):
+        seed_r1f_prepared_output(database)
+
+    assert _pilot_counts(database) == (0, 0, 0)
+
+
+def test_r1f_failure_immediately_before_publication_commit_rolls_back(
+    database, monkeypatch
+):
+    def fail_commit(self):
+        del self
+        raise RuntimeError("injected-commit-failure")
+
+    monkeypatch.setattr(
+        SqlAlchemyRecipeNutritionV2UnitOfWork,
+        "commit",
+        fail_commit,
+    )
+
+    with pytest.raises(RuntimeError, match="injected-commit-failure"):
+        seed_r1f_prepared_output(database)
+
+    assert _pilot_counts(database) == (0, 0, 0)
+
+
+def test_r1f_activation_failure_leaves_committed_publication_inactive(
+    database, monkeypatch
+):
+    _patched_r1f_engine(
+        monkeypatch,
+        lambda statement: (
+            statement.lstrip().startswith("UPDATE food_recipes")
+            and "is_active" in statement
+        ),
+    )
+
+    with pytest.raises(RuntimeError, match="injected-r1f-failure"):
+        seed_r1f_prepared_output(database)
+
+    recipes, authorities, values = _pilot_counts(database)
+    assert recipes == 2
+    assert authorities == 2
+    assert values == 2
+    with sqlite3.connect(database.path) as db:
+        states = db.execute(
+            """
+            SELECT canonical_code, is_active
+            FROM food_recipes
+            WHERE canonical_code IN (?, ?)
+            ORDER BY canonical_code
+            """,
+            (EGG_RECIPE_CODE, CHICKEN_RECIPE_CODE),
+        ).fetchall()
+    assert states == [
+        (CHICKEN_RECIPE_CODE, 0),
+        (EGG_RECIPE_CODE, 0),
+    ]
 
