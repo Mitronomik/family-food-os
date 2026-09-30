@@ -8,8 +8,8 @@ from sqlalchemy.engine import Engine
 from sqlalchemy.exc import DBAPIError, IntegrityError
 
 from app.domain.recipe_nutrition_v2 import (
-    PreparedRecipeNutritionAuthority,
     PreparedRecipeNutrientValue,
+    PreparedRecipeNutritionAuthority,
     RecipeIngredientCompositionBinding,
 )
 from app.persistence.sqlalchemy_core.food_composition_repository import (
