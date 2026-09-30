@@ -31,9 +31,8 @@
     },
     "boiled_chicken_75g": {
       "durable_artifact_path": "data/curation/r1f-cooked-nutrition-authority-gate/dietetic-recipes-1988-recipe-303-factual-excerpt.txt",
-      "durable_artifact_size_bytes": 574,
-      "durable_artifact_sha256": "3eb882acd1d6f9f8d73f221b725640b0de37d37526ec64006886c287bf1215cc",
-      "durable_artifact_git_blob_sha": "66d78158f2bcdbe2f32b04c71ab1dd8033cf4df3",
+      "durable_artifact_size_bytes": 725,
+      "durable_artifact_sha256": "1c7ee5c0d09e8dd5872bcee7bd6a7fa2c7d414fa96738a22971cb71c28efd72d",
       "bibliographic_identity": "Жангабылов А.К., Изатуллаев Е.А., Луковина Р.И., Столбовская А.Г., Финько Э.А. Рецептура блюд диетического питания. Алма-Ата: Казахстан, 1988. ISBN 5-615-00164-X",
       "source_locator": "https://ru.djvu.online/file/tnrwaYeNtWZjj",
       "corroboration_locator": "https://sheba.spb.ru/za/recept-diet-1988.htm",
@@ -41,8 +40,8 @@
       "source_variant": "III",
       "last_verified_at": "2026-09-30",
       "rights_review_status": "BOUNDED_FACTUAL_USE_REVIEWED",
-      "rights_basis": "Project-owner authorized correction of PR #117 on 2026-09-30 under docs/family-food/ru-normative-recipe-corpus.md; retained artifact contains only bounded factual recipe data and bibliography, not scans/layout/commentary",
-      "allowed_scope": "recipe 303 Variant III factual masses/output/macros/energy/process fact only",
+      "rights_basis": "BOUNDED_FACTUAL_USE_REVIEWED under docs/family-food/ru-normative-recipe-corpus.md; exact OCR factual recipe/card text only, no scan/layout/images",
+      "allowed_scope": "exact source-page OCR capture for recipe 303 Variant III factual text",
       "authority_values": {
         "chicken_gross_g": "155",
         "chicken_net_g": "107",
@@ -52,15 +51,20 @@
         "fat_g": "12.8",
         "carbohydrate_g": "0.5",
         "process": "chicken boiled whole"
-      }
+      },
+      "durable_private_locator": "private-library:/FamilyFoodOS/source-artifacts/r1f/recipe-303-source-page-ocr.txt",
+      "durable_private_library_file_id": "libfile_1568484d7d348191bc5a02900ab771ff",
+      "retrieval_method": "independent public OCR source-page capture from https://ru.djvu.online/file/tnrwaYeNtWZjj; exact captured text retained in private Library and repository bounded evidence",
+      "latest_successful_retrieval_hash_verification": "2026-09-30",
+      "artifact_kind": "EXACT_SOURCE_PAGE_OCR_CAPTURE"
     }
   },
   "targets": [
     {
       "closure_target": "USSR82-453",
       "production_recipe": {
-        "canonical_code": "HARD_BOILED_EGG_40G",
-        "canonical_name": "Яйцо куриное вкрутую, 40 г",
+        "canonical_code": "HARD_BOILED_EGG",
+        "canonical_name": "Яйцо куриное вкрутую",
         "source_name": "RU_MR_2_4_0162_19",
         "source_recipe_id": "APPENDIX_5_CARD_4_1",
         "meal_type_code": "breakfast",
@@ -76,8 +80,8 @@
         "disposition": "IMMUTABLE_INACTIVE_HISTORY"
       },
       "production_recipe": {
-        "canonical_code": "BOILED_CHICKEN_PORTION_75G",
-        "canonical_name": "Курица отварная, порция 75 г",
+        "canonical_code": "BOILED_CHICKEN",
+        "canonical_name": "Курица отварная",
         "source_name": "DIETETIC_RECIPES_1988",
         "source_recipe_id": "303_VARIANT_III",
         "meal_type_code": "main",
