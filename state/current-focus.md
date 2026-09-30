@@ -114,8 +114,10 @@ Mode-independent prerequisites:
 
 Mode-dependent:
 
-- 453: Composition authority if a Composition-based route is selected;
-- 697: cooked consumed-Nutrition authority.
+- all five selected cooked USSR82 recipes (453 / 467 / 492 / 1081 / 697):
+  downstream consumed-Nutrition authority remains required after local blockers;
+- 453 / 1081 additionally require Composition authority if a Composition-based
+  route is selected.
 
 Activation remains downstream of accepted exact positive consumption Nutrition.
 
