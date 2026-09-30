@@ -12,77 +12,109 @@ pretending that source presence equals production readiness.
 Files:
 
 - `blocker-map.jsonl` — one row per retained recipe identity;
-- `summary.json` — counts by source family and blocker;
-- `selected-batch.json` — first high-value Planner-capacity closure batch.
+- `summary.json` — counts by source family and evidence scope;
+- `selected-batch.json` — reviewed comparison and first cooked-authority pilot.
 
-## Counts
+## Evidence scopes
 
-Retained recipe identities:
+Every row separates:
 
-- USSR82: 68
-- School2022: 265
-- RU-MR-2019: 214
-- total: 547
+- `known_blockers` — recipe-level or accepted-family evidence proves the blocker;
+- `unproven_later_gates` — a later review may be required, but current evidence
+  does not justify recording it as per-recipe truth;
+- `next_blocker` — the first currently proven action gate.
 
-The largest current `next_blocker` classes are:
+For selected R1 candidates the map also separates:
 
-- `HOUSEHOLD_APPLICABILITY`: 478
-- `SOURCE_STRUCTURE_OR_VARIANT`: 59
-- `FOOD_IDENTITY_OR_FORM`: 5
-- `COMPOSITION_AUTHORITY`: 2
-- `REQUIRED_QUANTITY_UNRESOLVED`: 2
-- `ROLE_OR_MEAL_COMPOSITION`: 1
+- `mode_independent_blockers` — prerequisites required regardless of the future
+  consumed-Nutrition calculation mode;
+- `mode_dependent_blockers` — requirements that depend on whether the accepted
+  path is Composition-based transformation or source-backed prepared-output
+  Nutrition.
 
-These are next-action counts, not claims that later blockers are absent.
+## School2022 and RU-MR-2019
 
-## Evidence discipline
+School2022 retained evidence proves strong aggregate material readiness, but it
+does not establish household applicability or consumed-Nutrition authority for
+every recipe identity individually.
 
-School2022 and RU-MR-2019 are deliberately classified conservatively.
+Therefore each unpublished School2022 row stops at the proven
+`HOUSEHOLD_APPLICABILITY` blocker. `CONSUMED_NUTRITION_AUTHORITY` is retained
+only as an `unproven_later_gate`, not as known per-recipe truth.
 
-For School2022, retained evidence proves strong aggregate material readiness but
-does not support assigning household applicability or Nutrition readiness to every
-card individually. Therefore the map records a household-applicability review as
-the next step instead of inventing recipe-level facts.
+RU-MR-2019 likewise stops first at household applicability under the current
+retained interpretation.
 
-For RU-MR-2019, the retained interpretation does not establish the ordinary
-household path, so household applicability owns the next step.
+## R1-B evidence is mechanically consumed
 
-USSR82 has recipe-level DC1 evidence and later R1 receipts, so more granular
-blockers can be assigned there.
+The four accepted R1-B blocked dispositions are read directly from:
 
-## Selected first capacity batch
+`data/curation/r1b-reviewed-recipes/publication.json`
 
-The first closure batch is:
+and mapped from their accepted reason codes. The builder fails closed if an
+unknown R1-B blocker reason or candidate-set drift appears.
 
-- USSR82-453 — Яйца вареные
-- USSR82-467 — Омлет (натуральный)
-- USSR82-492 — Сырники из творога
-- USSR82-1081 — Блины
+USSR82-697's accepted inactive activation disposition is also asserted directly
+from the same publication package. Its later exact source-identity correction and
+cooked-Nutrition gap remain tied to the accepted cross-corpus review.
 
-All four are accepted historical Planner-capacity breakfast candidates.
+## Batch comparison
 
-Local blockers:
+R1-E compares four materially different continuations:
 
-- USSR82-453 / USSR82-1081 — exact V2 Composition authority;
-- USSR82-467 / USSR82-492 — required quantity/process closure.
+1. **BREAKFAST_CLUSTER_4** — 453 / 467 / 492 / 1081;
+   strong shared cooked-Nutrition learning, but no MAIN capacity.
+2. **MIXED_AUTHORITY_PILOT** — 453 + 697;
+   one breakfast + one main and a concrete cooked-consumption authority decision
+   framework.
+3. **HISTORICAL_MAIN_BLOCKERS** — 364 + 208;
+   MAIN diversity, but both first require unresolved food identity/form work.
+4. **SCHOOL2022_PILOT_PATH**;
+   promising future corpus, but recipe-level household/role ranking is not yet
+   supported by retained evidence.
 
-After those local blockers, all four still require a truthful consumed-Nutrition
-authority for cooked/prepared output. No current evidence authorizes treating these
-as no-thermal `RECIPE_COMPOSITION_NUTRITION_V1` recipes.
+## Selected first pilot
 
-This is therefore a **capacity program**, not a bulk activation manifest.
+Selected:
 
-## Why not the simple School2022 controls?
+- USSR82-453 — Яйца вареные — breakfast;
+- USSR82-697 — Курица отварная — main.
 
-The retained butter/cheese/vegetable no-thermal cards are useful proof that the
-existing V1 path can work when exact form authority exists. They do not by
-themselves add meaningful BREAKFAST/MAIN Planner capacity.
+This is not claimed to be an algorithmic optimum. It is the reviewed bounded pilot
+that best answers the next architecture/product question while improving both
+Planner role families needed by R1-C.
 
-## Why not USSR82-697 first?
+### Mode-independent prerequisites
 
-USSR82-697 remains a valuable MAIN candidate, but it carries an additional exact
-source-identity conflict before the same consumed-Nutrition problem. The four
-breakfast candidates provide a cleaner first capacity cluster.
+- USSR82-453: publish an immutable source-backed RecipeVersion when the publication
+  operation is ready;
+- USSR82-697: correct/close the exact source FoodIngredient identity/form mapping.
+
+### Mode-dependent questions
+
+- USSR82-453: exact input Composition is required if the accepted path is
+  Composition-based; it may not be the Planner energy authority under an exact
+  prepared-output Nutrition path.
+- USSR82-697: consumed-Nutrition authority remains unresolved.
+
+Activation is downstream of accepted consumed-Nutrition authority; it is not a
+pre-authority local closure step.
+
+## Follow-up
+
+The next bounded operation should be a **cooked-Nutrition authority pilot plus
+mode-independent local closure** for the mixed pair.
+
+It should:
+
+1. close the mode-independent source/identity/publication prerequisites;
+2. evaluate the truthful consumed-Nutrition mode on the two concrete recipes;
+3. implement only the minimum versioned authority seam actually required;
+4. make activation conditional on exact positive consumption Nutrition;
+5. report resulting breakfast/main Planner capacity.
+
+After the authority mode is proven, expand immediately to
+USSR82-467 / USSR82-492 / USSR82-1081 using the same accepted seam where applicable.
 
 ## Boundaries
 
@@ -90,12 +122,9 @@ This package does not:
 
 - relabel SIDE/SALAD/OTHER as MAIN;
 - infer household applicability;
+- turn aggregate evidence into per-recipe truth;
 - infer raw→cooked Nutrition;
 - infer yield or nutrient retention;
 - grant source-declared recipe Nutrition production authority;
 - publish or activate any RecipeVersion;
 - introduce a new Recipe Nutrition calculation version.
-
-The next implementation PR should close the four local breakfast blockers first.
-A new cooked/prepared consumed-Nutrition runtime/authority seam is opened only
-against the exact evidence demonstrated by that batch.
