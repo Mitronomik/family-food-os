@@ -43,9 +43,11 @@ EVIDENCE = {
 }
 
 R1_MODE_INDEPENDENT = {
+    "USSR82-453": ("RECIPE_PUBLICATION_REQUIRED",),
     "USSR82-467": ("REQUIRED_QUANTITY_UNRESOLVED", "RECIPE_PUBLICATION_REQUIRED"),
     "USSR82-492": ("REQUIRED_QUANTITY_UNRESOLVED", "RECIPE_PUBLICATION_REQUIRED"),
-    "USSR82-697": ("FOOD_IDENTITY_OR_FORM", "ACTIVATION_REQUIRED"),
+    "USSR82-1081": ("RECIPE_PUBLICATION_REQUIRED",),
+    "USSR82-697": ("FOOD_IDENTITY_OR_FORM",),
 }
 
 R1_MODE_DEPENDENT = {
@@ -150,8 +152,8 @@ def _batch_comparison(r1_manifest: dict[str, dict[str, Any]]) -> list[dict[str, 
             },
             "authority_value": (
                 "tests one breakfast and one main against the same cooked-consumption "
-                "authority decision while advancing the two Planner role families "
-                "needed for a complete week"
+                "authority decision framework while advancing the two Planner role "
+                "families needed for a complete week"
             ),
             "r1c_role_gap": "still insufficient alone for a robust seven-day catalogue",
         },
