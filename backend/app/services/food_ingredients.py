@@ -73,6 +73,19 @@ class TrustedFoodIngredientSeed:
 
 
 @dataclass(frozen=True)
+class TrustedFoodIngredientIdentitySeed:
+    canonical_code: str
+    canonical_name: str
+    category_code: str
+    default_unit: UnitCode | str
+    density_g_per_ml: Decimal | None = None
+    edible_fraction: Decimal | None = None
+    allergens_reviewed: bool = False
+    allergen_codes: tuple[str, ...] = ()
+    storage_profile_code: str | None = None
+
+
+@dataclass(frozen=True)
 class FoodCatalogueSeedSummary:
     ingredients_inserted: int = 0
     ingredients_existing: int = 0
@@ -123,6 +136,68 @@ class FoodCatalogueService:
         bounded_limit = _bounded_limit(limit)
         with self._read_scope_factory() as scope:
             return scope.ingredients.search_active(search_key, limit=bounded_limit)
+
+    def reconcile_identity_seed(
+        self, entries: Iterable[TrustedFoodIngredientIdentitySeed]
+    ) -> FoodCatalogueSeedSummary:
+        entries = tuple(entries)
+        now = self._clock()
+        counters = {
+            "ingredients_inserted": 0,
+            "ingredients_existing": 0,
+            "aliases_inserted": 0,
+            "aliases_existing": 0,
+            "nutrition_profiles_inserted": 0,
+            "nutrition_profiles_existing": 0,
+        }
+        with self._write_scope_factory() as scope:
+            for seed in entries:
+                candidate = FoodIngredient(
+                    id=self._id_factory(),
+                    canonical_code=seed.canonical_code,
+                    canonical_name=seed.canonical_name,
+                    canonical_name_key=normalize_unicode_search_key(
+                        seed.canonical_name, field="canonical_name"
+                    ),
+                    category_code=seed.category_code,
+                    default_unit=seed.default_unit,  # type: ignore[arg-type]
+                    density_g_per_ml=seed.density_g_per_ml,
+                    edible_fraction=seed.edible_fraction,
+                    allergens_reviewed=seed.allergens_reviewed,
+                    allergen_codes=seed.allergen_codes,
+                    storage_profile_code=seed.storage_profile_code,
+                    is_active=True,
+                    created_at=now,
+                    updated_at=now,
+                )
+                existing = scope.ingredients.get_by_code(seed.canonical_code)
+                if existing is None:
+                    self._ensure_name_available(scope, candidate)
+                    scope.ingredients.add(candidate)
+                    counters["ingredients_inserted"] += 1
+                else:
+                    fields = (
+                        "canonical_code",
+                        "canonical_name",
+                        "canonical_name_key",
+                        "category_code",
+                        "default_unit",
+                        "density_g_per_ml",
+                        "edible_fraction",
+                        "allergens_reviewed",
+                        "allergen_codes",
+                        "storage_profile_code",
+                    )
+                    if any(
+                        getattr(existing, field) != getattr(candidate, field)
+                        for field in fields
+                    ) or not existing.is_active:
+                        raise FoodCatalogueConflictError(
+                            f"Identity-only seed conflicts with {seed.canonical_code}."
+                        )
+                    counters["ingredients_existing"] += 1
+            scope.commit()
+        return FoodCatalogueSeedSummary(**counters)
 
     def add_trusted_ingredient(self, seed: TrustedFoodIngredientSeed) -> FoodIngredient:
         now = self._clock()
