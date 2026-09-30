@@ -1,10 +1,10 @@
 """Step 10-A composition-backed canonical RecipeVersion Nutrition."""
 
+import json
 from collections.abc import Callable
-from dataclasses import dataclass, replace
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from decimal import Decimal, localcontext
-import json
 from enum import StrEnum
 from uuid import UUID
 
@@ -24,8 +24,8 @@ from app.domain.recipe_nutrition_v2 import (
     COMPOSITION_CALCULATION_VERSION,
     NUTRIENT_CODES,
     NUTRIENT_SET_VERSION,
-    RECIPE_CALCULATION_VERSION,
     PREPARED_RECIPE_CALCULATION_VERSION,
+    RECIPE_CALCULATION_VERSION,
     REGISTRY_VERSION,
     RESULT_QUANTUM,
     CanonicalNutrientAmount,
@@ -38,8 +38,8 @@ from app.domain.recipe_nutrition_v2 import (
     RecipeNutritionV2Issue,
     RecipeNutritionV2Status,
 )
-from app.domain.units import UnitCode
 from app.domain.nutrient_vector_backfill_v1 import value_set_digest
+from app.domain.units import UnitCode
 from app.services.food_composition import ApplicabilityAwareCompositionCalculator
 from app.services.food_recipes import (
     TrustedRecipeSeed,
@@ -249,7 +249,7 @@ class RecipeNutritionV2Service:
         """Publish one reviewed binding inside a caller-owned transaction."""
 
         self._validate_spec(spec)
-        detail, row, food, composition = self._resolve_publication_target(uow, spec)
+        detail, row, _food, composition = self._resolve_publication_target(uow, spec)
         calculation = self._calculate_row(uow, row, composition)
         self._require_reviewed_calculation(spec, row, calculation)
         existing = uow.bindings.get(row.id)
@@ -776,7 +776,7 @@ class RecipeNutritionV2Service:
         if type(spec.composition_version) is not int or spec.composition_version <= 0:
             raise RecipeNutritionV2ContractError("Composition version должен быть положительным.")
         try:
-            expected_kind = CompositionKind(spec.composition_kind)
+            CompositionKind(spec.composition_kind)
             expected_state = MassState(spec.composition_input_state)
         except (TypeError, ValueError) as exc:
             raise RecipeNutritionV2ContractError(
