@@ -485,68 +485,7 @@ class RecipeNutritionV2Service:
                     raise RecipeNutritionV2UnavailableError(
                         "Prepared output и Composition authority конфликтуют."
                     )
-                values = scope.prepared.list_values(recipe_version_id)
-                if len(values) != prepared.value_count:
-                    raise RecipeNutritionV2UnavailableError("Prepared authority value_count mismatch.")
-                rows = tuple(
-                    {
-                        "nutrient_code": value.nutrient_code,
-                        "amount": value.amount,
-                        "provenance_json": value.provenance_json,
-                    }
-                    for value in values
-                )
-                if value_set_digest(rows) != prepared.value_sha256:
-                    raise RecipeNutritionV2UnavailableError("Prepared authority digest mismatch.")
-                by_code = {value.nutrient_code: value.amount for value in values}
-                energy = by_code.get("ENERGY_KCAL")
-                if energy is None or not energy.is_finite() or energy <= 0:
-                    raise RecipeNutritionV2UnavailableError("Prepared ENERGY_KCAL unavailable.")
-                total = NutritionValues(
-                    kcal=energy,
-                    protein_g=by_code.get("PROTEIN"),
-                    fat_g=by_code.get("FAT_TOTAL"),
-                    carbohydrates_g=by_code.get("CARBOHYDRATE_BY_DIFFERENCE"),
-                    fiber_g=by_code.get("FIBER_TOTAL_DIETARY"),
-                )
-                serving = NutritionValues(
-                    kcal=_round(energy / detail.version.base_servings),
-                    protein_g=_round(None if total.protein_g is None else total.protein_g / detail.version.base_servings),
-                    fat_g=_round(None if total.fat_g is None else total.fat_g / detail.version.base_servings),
-                    carbohydrates_g=_round(None if total.carbohydrates_g is None else total.carbohydrates_g / detail.version.base_servings),
-                    fiber_g=_round(None if total.fiber_g is None else total.fiber_g / detail.version.base_servings),
-                )
-                canonical_status = (
-                    RecipeNutritionV2Status.COMPLETE
-                    if len(values) == len(NUTRIENT_CODES)
-                    else RecipeNutritionV2Status.PARTIAL
-                )
-                return RecipeNutritionConsumptionProjection(
-                    recipe_version_id=recipe_version_id,
-                    required_total=total,
-                    per_base_serving=serving,
-                    legacy_status=(
-                        NutritionStatus.COMPLETE
-                        if all(
-                            value is not None
-                            for value in (
-                                total.kcal,
-                                total.protein_g,
-                                total.fat_g,
-                                total.carbohydrates_g,
-                                total.fiber_g,
-                            )
-                        )
-                        else NutritionStatus.INCOMPLETE
-                    ),
-                    authority_kind=RecipeNutritionAuthorityKind.PREPARED_OUTPUT_V1,
-                    canonical_status=canonical_status,
-                    exact_energy_ready=True,
-                    registry_version=prepared.registry_version,
-                    nutrient_set_version=prepared.nutrient_set_version,
-                    composition_calculation_version=None,
-                    recipe_calculation_version=prepared.recipe_calculation_version,
-                )
+                return self._project_prepared(scope, detail, prepared)
             if bound_count == 0:
                 legacy_path = True
             elif bound_count != len(required_rows):
@@ -567,6 +506,115 @@ class RecipeNutritionV2Service:
                 self._legacy_recipe_nutrition(recipe_version_id)
             )
         raise AssertionError("Nutrition authority classification is incomplete.")
+
+    def prepared_consumption_projection_in_scope(
+        self,
+        scope: RecipeNutritionV2ReadScope,
+        recipe_version_id: UUID,
+    ) -> RecipeNutritionConsumptionProjection:
+        detail = scope.versions.get_detail(recipe_version_id)
+        if detail is None:
+            raise RecipeNutritionV2UnavailableError("RecipeVersion не найден.")
+        required_rows = tuple(row for row in detail.ingredients if not row.optional)
+        if any(scope.bindings.get(row.id) is not None for row in required_rows):
+            raise RecipeNutritionV2UnavailableError(
+                "Prepared output и Composition authority конфликтуют."
+            )
+        prepared = scope.prepared.get_authority(recipe_version_id)
+        if prepared is None:
+            raise RecipeNutritionV2UnavailableError(
+                "Prepared Recipe Nutrition authority отсутствует."
+            )
+        return self._project_prepared(scope, detail, prepared)
+
+    @staticmethod
+    def _project_prepared(
+        scope,
+        detail,
+        prepared: PreparedRecipeNutritionAuthority,
+    ) -> RecipeNutritionConsumptionProjection:
+        values = scope.prepared.list_values(detail.version.id)
+        if len(values) != prepared.value_count:
+            raise RecipeNutritionV2UnavailableError(
+                "Prepared authority value_count mismatch."
+            )
+        rows = tuple(
+            {
+                "nutrient_code": value.nutrient_code,
+                "amount": value.amount,
+                "provenance_json": value.provenance_json,
+            }
+            for value in values
+        )
+        if value_set_digest(rows) != prepared.value_sha256:
+            raise RecipeNutritionV2UnavailableError(
+                "Prepared authority digest mismatch."
+            )
+        by_code = {value.nutrient_code: value.amount for value in values}
+        energy = by_code.get("ENERGY_KCAL")
+        if energy is None or not energy.is_finite() or energy <= 0:
+            raise RecipeNutritionV2UnavailableError(
+                "Prepared ENERGY_KCAL unavailable."
+            )
+        total = NutritionValues(
+            kcal=energy,
+            protein_g=by_code.get("PROTEIN"),
+            fat_g=by_code.get("FAT_TOTAL"),
+            carbohydrates_g=by_code.get("CARBOHYDRATE_BY_DIFFERENCE"),
+            fiber_g=by_code.get("FIBER_TOTAL_DIETARY"),
+        )
+        serving = NutritionValues(
+            kcal=_round(energy / detail.version.base_servings),
+            protein_g=_round(
+                None
+                if total.protein_g is None
+                else total.protein_g / detail.version.base_servings
+            ),
+            fat_g=_round(
+                None if total.fat_g is None else total.fat_g / detail.version.base_servings
+            ),
+            carbohydrates_g=_round(
+                None
+                if total.carbohydrates_g is None
+                else total.carbohydrates_g / detail.version.base_servings
+            ),
+            fiber_g=_round(
+                None
+                if total.fiber_g is None
+                else total.fiber_g / detail.version.base_servings
+            ),
+        )
+        canonical_status = (
+            RecipeNutritionV2Status.COMPLETE
+            if len(values) == len(NUTRIENT_CODES)
+            else RecipeNutritionV2Status.PARTIAL
+        )
+        return RecipeNutritionConsumptionProjection(
+            recipe_version_id=detail.version.id,
+            required_total=total,
+            per_base_serving=serving,
+            legacy_status=(
+                NutritionStatus.COMPLETE
+                if all(
+                    value is not None
+                    for value in (
+                        total.kcal,
+                        total.protein_g,
+                        total.fat_g,
+                        total.carbohydrates_g,
+                        total.fiber_g,
+                    )
+                )
+                else NutritionStatus.INCOMPLETE
+            ),
+            authority_kind=RecipeNutritionAuthorityKind.PREPARED_OUTPUT_V1,
+            canonical_status=canonical_status,
+            exact_energy_ready=True,
+            registry_version=prepared.registry_version,
+            nutrient_set_version=prepared.nutrient_set_version,
+            composition_calculation_version=None,
+            recipe_calculation_version=prepared.recipe_calculation_version,
+        )
 
     def _calculate_detail(self, scope, detail) -> CanonicalRecipeVersionNutrition:
         if not detail.ingredients:
