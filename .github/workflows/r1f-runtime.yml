@@ -32,17 +32,49 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: |
+      - name: Install backend and lint tools
+        run: |
           python -m pip install -e './backend[test]'
           python -m pip install ruff
       - name: Focused R1-F verification
         env:
           AI_ENABLED: 'false'
         run: |
-          python -m pytest -q             backend/app/tests/test_r1f_prepared_output.py             backend/app/tests/test_recipe_nutrition_v2.py             backend/app/tests/test_recipe_nutrition_v2_migration.py             backend/app/tests/test_planner_application_boundary.py             backend/app/tests/test_migration_lineage.py             backend/app/tests/test_migration_runner_rebuild.py             backend/app/tests/persistence/test_migration_coexistence.py             --tb=short
+          python -m pytest -q \
+            backend/app/tests/test_r1f_prepared_output.py \
+            backend/app/tests/test_r1f_prepared_output_adversarial.py \
+            backend/app/tests/test_recipe_nutrition_v2.py \
+            backend/app/tests/test_recipe_nutrition_v2_migration.py \
+            backend/app/tests/test_planner_application_boundary.py \
+            backend/app/tests/test_migration_lineage.py \
+            backend/app/tests/test_migration_runner_rebuild.py \
+            backend/app/tests/persistence/test_migration_coexistence.py \
+            --tb=short
       - name: Ruff
         run: |
-          python -m ruff check             backend/app/domain/recipe_nutrition_v2.py             backend/app/services/recipe_nutrition_v2.py             backend/app/services/recipe_nutrition_v2_contracts.py             backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2.py             backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2_tables.py             backend/app/migrations/versions/0042_recipe_prepared_output_nutrition.py             backend/app/services/food_ingredients.py             backend/app/domain/food_recipes.py             backend/app/services/food_recipes.py             backend/app/seed/r1f_prepared_output.py             backend/app/tests/test_r1f_prepared_output.py \
+          python -m ruff check \
+            backend/app/domain/recipe_nutrition_v2.py \
+            backend/app/services/recipe_nutrition_v2.py \
+            backend/app/services/recipe_nutrition_v2_contracts.py \
+            backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2.py \
+            backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2_tables.py \
+            backend/app/migrations/versions/0042_recipe_prepared_output_nutrition.py \
+            backend/app/services/food_ingredients.py \
+            backend/app/domain/food_recipes.py \
+            backend/app/services/food_recipes.py \
+            backend/app/seed/r1f_prepared_output.py \
+            backend/app/tests/test_r1f_prepared_output.py \
             backend/app/tests/test_r1f_prepared_output_adversarial.py
-          python -m ruff format --check             backend/app/domain/recipe_nutrition_v2.py             backend/app/services/recipe_nutrition_v2.py             backend/app/services/recipe_nutrition_v2_contracts.py             backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2.py             backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2_tables.py             backend/app/migrations/versions/0042_recipe_prepared_output_nutrition.py             backend/app/services/food_ingredients.py             backend/app/domain/food_recipes.py             backend/app/services/food_recipes.py             backend/app/seed/r1f_prepared_output.py             backend/app/tests/test_r1f_prepared_output.py \
+          python -m ruff format --check \
+            backend/app/domain/recipe_nutrition_v2.py \
+            backend/app/services/recipe_nutrition_v2.py \
+            backend/app/services/recipe_nutrition_v2_contracts.py \
+            backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2.py \
+            backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2_tables.py \
+            backend/app/migrations/versions/0042_recipe_prepared_output_nutrition.py \
+            backend/app/services/food_ingredients.py \
+            backend/app/domain/food_recipes.py \
+            backend/app/services/food_recipes.py \
+            backend/app/seed/r1f_prepared_output.py \
+            backend/app/tests/test_r1f_prepared_output.py \
             backend/app/tests/test_r1f_prepared_output_adversarial.py
