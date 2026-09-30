@@ -15,6 +15,7 @@ from app.domain.food_composition import (
     MassState,
     calculation_context,
 )
+from app.domain.nutrient_vector_backfill_v1 import value_set_digest
 from app.domain.nutrition import (
     NutritionStatus,
     NutritionValues,
@@ -30,15 +31,14 @@ from app.domain.recipe_nutrition_v2 import (
     RESULT_QUANTUM,
     CanonicalNutrientAmount,
     CanonicalRecipeVersionNutrition,
-    PreparedRecipeNutritionAuthority,
     PreparedRecipeNutrientValue,
+    PreparedRecipeNutritionAuthority,
     RecipeIngredientCompositionBinding,
     RecipeNutritionAuthorityKind,
     RecipeNutritionConsumptionProjection,
     RecipeNutritionV2Issue,
     RecipeNutritionV2Status,
 )
-from app.domain.nutrient_vector_backfill_v1 import value_set_digest
 from app.domain.units import UnitCode
 from app.services.food_composition import ApplicabilityAwareCompositionCalculator
 from app.services.food_recipes import (
