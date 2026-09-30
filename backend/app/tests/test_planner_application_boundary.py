@@ -39,7 +39,7 @@ class Recipes:
     def __init__(self):
         self.current_id = uid(20)
 
-    def list_all(self, *, limit):
+    def list_all(self):
         return [
             SimpleNamespace(
                 id=uid(10),
@@ -165,8 +165,7 @@ class AdmissionRecipes:
             ),
         )
 
-    def list_all(self, *, limit):
-        assert limit == 200
+    def list_all(self):
         return list(self.rows)
 
     def get_latest_verified(self, recipe_id):
@@ -191,6 +190,59 @@ class AdmissionNutrition:
         if version_id == uid(304):
             raise RecipeNutritionV2UnavailableError("missing authority")
         return SimpleNamespace(exact_energy_ready=True)
+
+
+
+class LargeAdmissionRecipes:
+    def __init__(self, count: int = 250):
+        self.rows = tuple(
+            SimpleNamespace(
+                id=uid(1000 + index),
+                canonical_code=f"READY_MAIN_{index:03d}",
+                canonical_name=f"Ready Main {index:03d}",
+                is_active=True,
+            )
+            for index in range(count)
+        )
+
+    def list_all(self):
+        return list(self.rows)
+
+    def get_latest_verified(self, recipe_id):
+        return SimpleNamespace(
+            version=SimpleNamespace(
+                id=recipe_id,
+                meal_type_code=MealTypeCode.MAIN,
+                source_name="test-source",
+                source_recipe_id=f"source:{recipe_id}",
+            )
+        )
+
+
+class AlwaysReadyAdmissionNutrition:
+    def neutral_consumption_projection(self, version_id):
+        return SimpleNamespace(exact_energy_ready=True)
+
+
+def test_candidate_admission_is_exhaustive_beyond_200_rows() -> None:
+    household_id, member_id = uid(1), uid(2)
+    planner = PlannerService(
+        MealPlans(household_id, member_id),
+        Households(household_id, member_id),
+        LargeAdmissionRecipes(),
+        Nutrition(),
+        Pantry(),
+        PlannerConfig(max_recipe_repetitions=10),
+        recipe_nutrition=AlwaysReadyAdmissionNutrition(),
+    )
+
+    admissions = planner.compose_candidate_admission()
+
+    assert len(admissions) == 250
+    assert all(item.eligible for item in admissions)
+    assert admissions[0].canonical_code == "READY_MAIN_000"
+    assert admissions[-1].canonical_code == "READY_MAIN_249"
+
 
 
 def test_candidate_admission_sees_blocked_catalogue_without_selecting_it() -> None:
