@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Validate committed R1-D source admission inventory against repository inputs."""
 
 from __future__ import annotations
