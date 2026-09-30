@@ -1,9 +1,9 @@
 # R1-F — Cooked-Nutrition Authority Implementation Contract Gate
 
-**Status:** docs-only implementation contract gate  
-**Decision date:** 2026-09-30  
-**Accepted base:** `becc00f0e94c927598f930140c385f84f80aa21d` (merged PR #115)  
-**Parent:** #116, #114, #100, #99  
+**Status:** docs-only implementation contract gate
+**Decision date:** 2026-09-30
+**Accepted base:** `becc00f0e94c927598f930140c385f84f80aa21d` (merged PR #115)
+**Parent:** #116, #114, #100, #99
 **Runtime/data publication authorized by this document before merge:** no
 
 ## 1. Goal
