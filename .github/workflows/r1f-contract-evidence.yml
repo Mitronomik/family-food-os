@@ -84,9 +84,13 @@ jobs:
           targets = {item["closure_target"]: item for item in evidence["targets"]}
           assert targets["USSR82-453"]["production_recipe"]["canonical_code"] == "HARD_BOILED_EGG"
           assert targets["USSR82-453"]["production_recipe"]["canonical_name"] == "Яйцо куриное вкрутую"
-          assert targets["USSR82-697"]["production_recipe"]["canonical_code"] == "BOILED_CHICKEN"
-          assert targets["USSR82-697"]["production_recipe"]["canonical_name"] == "Курица отварная"
+          assert targets["USSR82-697"]["production_recipe"]["canonical_code"] == "BOILED_CHICKEN_MAIN_PRODUCT"
+          assert targets["USSR82-697"]["production_recipe"]["canonical_name"] == "Курица отварная без гарнира"
           assert targets["USSR82-697"]["historical_recipe"]["canonical_code"] == "USSR82_697_BOILED_CHICKEN"
+          assert targets["USSR82-697"]["historical_recipe"]["canonical_name"] == "Курица отварная"
+          assert targets["USSR82-697"]["production_recipe"]["canonical_name"] != (
+              targets["USSR82-697"]["historical_recipe"]["canonical_name"]
+          )
           assert targets["USSR82-697"]["historical_recipe"]["disposition"] == "IMMUTABLE_INACTIVE_HISTORY"
 
           print("R1-F contract evidence: OK")
