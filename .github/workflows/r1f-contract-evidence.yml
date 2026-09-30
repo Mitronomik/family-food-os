@@ -65,19 +65,27 @@ jobs:
           assert hashlib.sha256(raw).hexdigest() == chicken["durable_artifact_sha256"]
           text = raw.decode("utf-8")
           for expected in (
-              "Recipe: 303",
-              "Variant: III",
-              "Chicken gross mass: 155 g",
-              "Chicken net mass: 107 g",
-              "Finished output: 75 g",
-              "Energy: 167.7 kcal",
+              "303. Курица отварная",
+              "Вариант I Вариант II Вариант III",
+              "Курица 260 179 208 143 155 107",
+              "Выход: 125 100 75",
+              "Вариант III: Б—12,6, Ж—12,8, У—0,5; калорийность—167,7 ккал.",
+              "Кур отваривают целиком.",
           ):
               assert expected in text
+          assert chicken["artifact_kind"] == "EXACT_SOURCE_PAGE_OCR_CAPTURE"
+          assert chicken["durable_private_locator"] == (
+              "private-library:/FamilyFoodOS/source-artifacts/r1f/"
+              "recipe-303-source-page-ocr.txt"
+          )
+          assert chicken["latest_successful_retrieval_hash_verification"] == "2026-09-30"
           assert chicken["rights_review_status"] == "BOUNDED_FACTUAL_USE_REVIEWED"
 
           targets = {item["closure_target"]: item for item in evidence["targets"]}
-          assert targets["USSR82-453"]["production_recipe"]["canonical_code"] == "HARD_BOILED_EGG_40G"
-          assert targets["USSR82-697"]["production_recipe"]["canonical_code"] == "BOILED_CHICKEN_PORTION_75G"
+          assert targets["USSR82-453"]["production_recipe"]["canonical_code"] == "HARD_BOILED_EGG"
+          assert targets["USSR82-453"]["production_recipe"]["canonical_name"] == "Яйцо куриное вкрутую"
+          assert targets["USSR82-697"]["production_recipe"]["canonical_code"] == "BOILED_CHICKEN"
+          assert targets["USSR82-697"]["production_recipe"]["canonical_name"] == "Курица отварная"
           assert targets["USSR82-697"]["historical_recipe"]["canonical_code"] == "USSR82_697_BOILED_CHICKEN"
           assert targets["USSR82-697"]["historical_recipe"]["disposition"] == "IMMUTABLE_INACTIVE_HISTORY"
 
