@@ -11,8 +11,10 @@
 Define the minimum truthful runtime/data contract needed to move the first mixed
 R1 cooked pilot toward ordinary production Planner eligibility:
 
-- USSR82-453 — hard-boiled egg — breakfast;
-- canonical boiled-chicken target originally seeded by USSR82-697 — main.
+- R1-E closure target USSR82-453 → source-neutral production Recipe
+  `HARD_BOILED_EGG_40G` — breakfast;
+- R1-E closure target USSR82-697 → source-neutral production Recipe
+  `BOILED_CHICKEN_PORTION_75G` — main.
 
 The implementation target after this gate is merged is:
 
@@ -85,16 +87,27 @@ Public locators reviewed for this gate:
 - https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/bliuda-iz-iaits/tekhnologicheskaia-karta-n-4.1/
 - https://base.garant.ru/73535214/
 
-**DECISION:** publish the 453 production RecipeVersion as the explicitly selected
-**hard-boiled** branch, not generic "boiled egg".
+**DECISION:** USSR82-453 remains closure/source evidence, but production does not
+create a source-coded USSR82 Recipe identity.
 
-The RecipeVersion keeps its USSR82 source provenance/lineage for the selected
-branch. The prepared-output Nutrition authority may use the separate MR 2.4.0162-19
-card only because the gate establishes exact applicability for:
+Publish a new source-neutral Recipe:
+
+- canonical code: `HARD_BOILED_EGG_40G`;
+- canonical Russian name: `Яйцо куриное вкрутую, 40 г`;
+- RecipeVersion source: `RU_MR_2_4_0162_19 / APPENDIX_5_CARD_4_1`;
+- meal type: `breakfast`;
+- required ingredient: canonical EGG FoodIngredient, 40 g;
+- source output: 40 g.
+
+The prepared-output Nutrition authority comes from the **same exact source card**
+as the RecipeVersion, so R1-F does not create a cross-source RecipeVersion/Nutrition
+equivalence.
+
+Applicability is exact for:
 
 - ingredient identity: chicken egg;
 - edible amount/output: 40 g;
-- process: hard-boiled;
+- process: hard-boiled 8–10 minutes;
 - output state: peeled cooked egg;
 - serving basis: one 40 g portion.
 
@@ -151,21 +164,30 @@ the 155 g gross / 107 g net source path aligns with category-II chicken.
 The historical USSR82-697 RecipeVersion contains an additional 2 g onion cooking
 input and must remain immutable.
 
-**DECISION:** do not mutate or reinterpret the existing USSR82-697 version.
+**DECISION:** do not mutate, rename, reinterpret or append a foreign-source
+version to the existing source-coded Recipe
+`USSR82_697_BOILED_CHICKEN / Курица отварная`.
 
-Instead, append a new immutable RecipeVersion under the same canonical
-`Курица отварная` Recipe using the exact 1988 recipe-303 Variant III source:
+That historical Recipe and its v1 remain immutable and inactive.
 
-- category-II chicken identity;
-- 107 g required chicken input;
-- 75 g cooked output;
-- no invented onion row;
-- prepared-output energy 167.7 kcal from the same source/version.
+Publish a **separate source-neutral canonical Recipe**:
 
-The old USSR82-697 version remains inactive historical truth.
+- canonical code: `BOILED_CHICKEN_PORTION_75G`;
+- canonical Russian name: `Курица отварная, порция 75 г`;
+- RecipeVersion source: `DIETETIC_RECIPES_1988 / 303_VARIANT_III`;
+- required FoodIngredient: `CHICKEN_CATEGORY_2_RAW`;
+- required input: 107 g;
+- source output: 75 g;
+- prepared-output energy: 167.7 kcal.
 
-This new version closes the product target that 697 originally represented
-without claiming that two non-identical source recipes are identical revisions.
+This avoids making the external USSR82 id a hidden domain invariant and avoids a
+Recipe-code rename/alias migration.
+
+The new Recipe is a distinct canonical product identity because its exact source,
+ingredient set and process/output truth differ from the historical USSR82-697
+version. R1-F closes the **Planner-capacity target** originally represented by
+USSR82-697; it does not claim the two source cards are one immutable RecipeVersion
+lineage.
 
 ## 7. DECISION — authority mode
 
