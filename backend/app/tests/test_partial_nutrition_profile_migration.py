@@ -131,6 +131,7 @@ def test_populated_0032_database_upgrades_without_rewriting_profiles_or_vectors(
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
+        "0042_recipe_prepared_output_nutrition",
     ]
 
     assert profile_rows(database) == before_profiles
@@ -168,6 +169,7 @@ def test_populated_0032_database_upgrades_without_rewriting_profiles_or_vectors(
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
+        "0042_recipe_prepared_output_nutrition",
     ]
     assert "food_nutrition_profiles" in trigger_sql
     assert "food_composition_versions" in trigger_sql
@@ -190,6 +192,7 @@ def test_populated_0032_database_upgrades_without_rewriting_profiles_or_vectors(
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
+        "0042_recipe_prepared_output_nutrition",
     ]
     assert profile_rows(database) == before_profiles
     assert vector_rows(database) == (before_seals, before_values)
