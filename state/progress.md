@@ -1,5 +1,26 @@
 # Progress
 
+## R1-F runtime implementation active — 2026-09-30
+
+Accepted base:
+`e138d615802f7928946e419156f8c6905f04075b` (merged PR117).
+
+PR119 implements the merged R1-F contract:
+
+- migration 0042;
+- prepared-output RecipeVersion Nutrition authority;
+- source-backed breakfast/main pilot;
+- exact positive energy;
+- explicit activation;
+- ordinary Planner admission;
+- replay/immutability preservation.
+
+Focused R1-F verification is green after correcting two task-local regressions:
+legacy minimal Recipe Nutrition test scope compatibility and migration-head
+expectation 0041→0042.
+
+Broad exact-head regression remains in progress. No follow-up expansion has started.
+
 ## R1-F cooked-Nutrition authority gate started — 2026-09-30
 
 Accepted base:
