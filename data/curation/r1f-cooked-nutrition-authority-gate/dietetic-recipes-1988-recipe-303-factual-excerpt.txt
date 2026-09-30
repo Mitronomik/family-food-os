@@ -1,0 +1,12 @@
+Source: Жангабылов А. К., Изатуллаев Е. А., Луковина Р. И., Столбовская А. Г., Финько Э. А. Рецептура блюд диетического питания. Алма-Ата: Казахстан, 1988. ISBN 5-615-00164-X.
+Source locator: https://ru.djvu.online/file/tnrwaYeNtWZjj
+Recipe: 303 — Курица отварная
+Variant: III
+Chicken gross mass: 155 g
+Chicken net mass: 107 g
+Finished output: 75 g
+Protein: 12.6 g
+Fat: 12.8 g
+Carbohydrate: 0.5 g
+Energy: 167.7 kcal
+Process fact: chicken is boiled whole.
