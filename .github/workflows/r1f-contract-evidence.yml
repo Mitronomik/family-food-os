@@ -88,6 +88,8 @@ jobs:
           assert targets["USSR82-697"]["production_recipe"]["canonical_name"] == "Курица отварная без гарнира"
           assert targets["USSR82-697"]["historical_recipe"]["canonical_code"] == "USSR82_697_BOILED_CHICKEN"
           assert targets["USSR82-697"]["historical_recipe"]["canonical_name"] == "Курица отварная"
+          assert targets["USSR82-697"]["production_recipe"]["canonical_name"] != targets["USSR82-697"]["historical_recipe"]["canonical_name"]
+          assert targets["USSR82-697"]["historical_recipe"]["canonical_name"] == "Курица отварная"
           assert targets["USSR82-697"]["production_recipe"]["canonical_name"] != (
               targets["USSR82-697"]["historical_recipe"]["canonical_name"]
           )
