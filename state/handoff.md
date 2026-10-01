@@ -1,5 +1,41 @@
 # Handoff
 
+## R1-G research checkpoint — 2026-10-01
+
+Issue #120 / draft PR #121 are active on
+`docs/r1g-catalogue-capacity-expansion-gate`.
+
+Important correction to the post-R1-F expectation: no candidate is yet fully
+runtime-ready.
+
+Verified durable private corpus archive:
+- size 206692075 bytes;
+- SHA-256 `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`.
+
+Current dispositions:
+- USSR82-467 — blocked: unquantified required salt;
+- USSR82-492 — blocked: unquantified required salt;
+- USSR82-1081 — blocked: discovered 150/10 / 370 kcal row is not exact-linked to
+  the selected III branch;
+- USSR82-208 — not R1-F V1 ready because 250 g prepared nutrition vs 1000 g source
+  Recipe basis would require forbidden scaling;
+- USSR82-364 — strongest retained USSR82 MAIN candidate, but needs exact
+  III+margarine receipt and `Жир кулинарный` identity/form closure.
+
+School2022:
+- exact source PDF in the pinned archive independently verifies at
+  `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`;
+- exact same-card output/kcal exists for many material-ready mains;
+- leading shortlist is 54-29м / 54-2м / 54-1р;
+- accepted R1-E truth still applies `HOUSEHOLD_APPLICABILITY` to 264 unpublished
+  School2022 cards, and retained process evidence says
+  domestic_applicability=unestablished for institutional rules.
+
+Do not silently treat exact kcal as household publication readiness. A reviewed
+per-recipe applicability decision/evidence path is required.
+
+No runtime, migration, activation or Planner change has started.
+
 ## R1-G catalogue-capacity expansion gate started — 2026-10-01
 
 PR #119 is merged into main at
