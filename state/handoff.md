@@ -1,5 +1,38 @@
 # Handoff
 
+## R1-F blocker closure final receipt — 2026-10-01
+
+Runtime freeze:
+`ac647a9fd0546876db743faf545d64ef2622c595`.
+
+The final two review blockers are closed:
+
+- `ReviewedPreparedRecipeNutritionSpec` now carries explicit
+  `expected_unknown_codes`; validation requires AVAILABLE and UNKNOWN to be
+  disjoint and together cover the frozen 54-code nutrient set;
+- the pilot specs keep only ENERGY_KCAL AVAILABLE and explicitly keep the other
+  53 codes UNKNOWN;
+- an adversarial test proves an unreviewed PROTEIN value cannot be added while
+  still declared UNKNOWN;
+- `FoodRecipeCatalogueService` no longer exposes public unchecked
+  `activate()`; the raw reversible mutation is internal and the public R1-F path
+  remains `activate_prepared_recipe(...)`.
+
+Exact runtime-head verification:
+
+- R1-F runtime — SUCCESS; 122 tests passed;
+- Ruff check / format — SUCCESS;
+- Docs / DC1 / R1-D / Russian methodologies — SUCCESS;
+- Partial nutrition profiles — focused + 4 backend shards + launcher SUCCESS;
+- Nutrient registry V2 — focused + 4 backend shards + launcher SUCCESS.
+
+No migration, Planner algorithm/scoring/role/repetition, historical Recipe truth,
+Shopping/UI/Retail/Auth/PostgreSQL/AI scope, or 54/54 completeness requirement
+was added.
+
+PR119 is READY FOR FINAL REVIEW. Do not merge autonomously and do not start the
+catalogue-expansion follow-up automatically.
+
 ## R1-F final-review corrections — 2026-10-01
 
 User-authorized corrections to PR119 are implemented on runtime head
