@@ -10,6 +10,7 @@ from uuid import UUID
 
 from app.db.config import REPOSITORY_ROOT, DatabaseConfig
 from app.db.migrations import apply_migrations
+from app.domain.recipe_nutrition_v2 import NUTRIENT_CODES
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_ingredient_composition import (
     create_food_catalogue_service,
@@ -221,6 +222,9 @@ def _prepared_specs(
     egg, chicken = seeds
     egg_receipt = evidence["source_receipts"]["hard_boiled_egg"]
     chicken_receipt = evidence["source_receipts"]["boiled_chicken_75g"]
+    expected_unknown_codes = tuple(
+        code for code in NUTRIENT_CODES if code != "ENERGY_KCAL"
+    )
     return (
         ReviewedPreparedRecipeNutritionSpec(
             trusted_recipe_seed=egg,
@@ -244,6 +248,7 @@ def _prepared_specs(
                     Decimal(egg_receipt["authority_values"]["energy_kcal"]),
                 ),
             ),
+            expected_unknown_codes=expected_unknown_codes,
         ),
         ReviewedPreparedRecipeNutritionSpec(
             trusted_recipe_seed=chicken,
@@ -267,6 +272,7 @@ def _prepared_specs(
                     Decimal(chicken_receipt["authority_values"]["energy_kcal"]),
                 ),
             ),
+            expected_unknown_codes=expected_unknown_codes,
         ),
     )
 
