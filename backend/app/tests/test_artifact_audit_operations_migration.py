@@ -280,6 +280,8 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         "meal_plan_member_reference_methodology_pins",
         "food_transformation_applicability",
         "recipe_ingredient_composition_bindings",
+        "recipe_prepared_nutrition_authorities",
+        "recipe_prepared_nutrient_values",
     }
 
 
