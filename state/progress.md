@@ -1,5 +1,27 @@
 # Progress
 
+## R1-F final blocker closure — 2026-10-01
+
+Runtime freeze:
+`ac647a9fd0546876db743faf545d64ef2622c595`.
+
+Closed:
+
+- reviewed AVAILABLE/UNKNOWN partition is explicit for all 54 frozen nutrient
+  codes; only ENERGY_KCAL is AVAILABLE for the two pilot Recipes;
+- arbitrary UNKNOWN→AVAILABLE promotion is rejected by contract validation and
+  adversarial test;
+- public unchecked Recipe activation was removed from Catalogue API;
+- guarded prepared activation remains the application boundary.
+
+Verification on the runtime freeze: R1-F runtime SUCCESS with 122 tests and Ruff/
+format; Docs, DC1, R1-D and Russian methodologies SUCCESS; both broad Nutrition
+workflows SUCCESS with focused checks, all four backend shards and full launcher
+regression.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
 ## R1-F final-review corrections — 2026-10-01
 
 PR119 review blockers are implemented on runtime head
