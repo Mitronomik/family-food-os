@@ -2,6 +2,7 @@ import shutil
 import sqlite3
 from datetime import date, datetime, timezone
 from decimal import Decimal
+from types import SimpleNamespace
 from uuid import UUID
 
 import pytest
@@ -16,7 +17,6 @@ from app.domain.meal_plans import (
 )
 from app.domain.planner import (
     MemberPlannerConstraints,
-    PlannerCandidate,
     PlannerConfig,
     PlannerFailure,
     PlannerRejectionCode,
@@ -48,7 +48,12 @@ from app.seed.r1f_prepared_output import (
 from app.seed.ru_food_data import seed_ru_food_data
 from app.seed.ru_nut_db_r1a import seed_ru_nut_db_r1a
 from app.seed.ru_nut_db_step4 import seed_ru_nut_db_step4
-from app.services.planner import PlannerService
+from app.services.meal_plans import MealPlanNotFoundError
+from app.services.planner import (
+    AuthoritativeGenerationRequest,
+    GenerationMemberConstraints,
+    PlannerService,
+)
 from app.services.recipe_nutrition_v2 import (
     RecipeNutritionV2Service,
     RecipeNutritionV2UnavailableError,
@@ -81,23 +86,6 @@ def selection(member_id: UUID, role: MealRole) -> MemberMealPatternSelectionDeta
         for weekday in range(1, 8)
     )
     return MemberMealPatternSelectionDetail(selected, opportunities)
-
-
-def real_candidate(catalogue, nutrition, code: str) -> PlannerCandidate:
-    recipe = catalogue.get_by_code(code)
-    detail = catalogue.get_current_verified(recipe.id)
-    projection = nutrition.neutral_consumption_projection(detail.version.id)
-    return PlannerCandidate(
-        detail.version.id,
-        detail.version.meal_type_code,
-        frozenset(row.food_ingredient_id for row in detail.ingredients),
-        projection.per_base_serving.kcal,
-        projection.legacy_status,
-        True,
-        detail.version.total_time_minutes,
-        detail.version.batch_friendly,
-        projection.exact_energy_ready,
-    )
 
 
 @pytest.fixture(scope="module")
@@ -377,48 +365,138 @@ def test_migration_0042_is_registered_and_required_tables_exist(database):
     } <= tables
 
 
-def test_r1f_real_planner_candidates_honor_ingredient_exclusions(database):
+def test_r1f_authoritative_planner_boundary_loads_pilot_candidates_and_exclusions(
+    database,
+):
     seed_r1f_prepared_output(database)
     engine = create_sqlite_engine(database)
     try:
         catalogue = create_food_recipe_catalogue_service(engine)
-        nutrition = create_recipe_nutrition_v2_service(engine)
+        recipe_nutrition = create_recipe_nutrition_v2_service(engine)
+        household_id = uid(1)
+
+        class Households:
+            def __init__(self, member_id):
+                self.member_id = member_id
+
+            def get_household(self, requested_household_id):
+                assert requested_household_id == household_id
+                return SimpleNamespace(
+                    household=SimpleNamespace(id=household_id),
+                    members=(SimpleNamespace(id=self.member_id, active=True),),
+                )
+
+        class MealPlans:
+            def __init__(self, member_id, role):
+                self.member_id = member_id
+                self.pattern = selection(member_id, role)
+
+            def get_current_member_pattern(
+                self, requested_household_id, requested_member_id
+            ):
+                assert requested_household_id == household_id
+                assert requested_member_id == self.member_id
+                return self.pattern
+
+            def get_current_plan(self, requested_household_id, week_start):
+                del requested_household_id, week_start
+                raise MealPlanNotFoundError()
+
+        class Targets:
+            def member_reference_target(
+                self, requested_household_id, requested_member_id, *, as_of_date
+            ):
+                del as_of_date
+                assert requested_household_id == household_id
+                assert requested_member_id in {uid(101), uid(102)}
+                return SimpleNamespace(reference_energy_kcal=Decimal(2000))
+
+        class Pantry:
+            def list_items(self, requested_household_id):
+                assert requested_household_id == household_id
+                return []
 
         cases = (
-            (EGG_RECIPE_CODE, MealRole.BREAKFAST),
-            (CHICKEN_RECIPE_CODE, MealRole.DINNER),
+            (EGG_RECIPE_CODE, MealRole.BREAKFAST, uid(101), Decimal("63.000000")),
+            (
+                CHICKEN_RECIPE_CODE,
+                MealRole.DINNER,
+                uid(102),
+                Decimal("167.700000"),
+            ),
         )
-        for offset, (code, role) in enumerate(cases, start=1):
-            candidate = real_candidate(catalogue, nutrition, code)
-            assert candidate.food_ingredient_ids
-            member_id = uid(100 + offset)
-            request = PlannerRequest(
-                uid(1),
-                date(2026, 9, 28),
-                (
-                    MemberPlannerConstraints(
-                        member_id,
-                        selection(member_id, role),
-                        Decimal(2000),
-                        candidate.food_ingredient_ids,
-                    ),
-                ),
-                (candidate,),
+        for code, role, member_id, expected_kcal in cases:
+            meal_plans = MealPlans(member_id, role)
+            planner = PlannerService(
+                meal_plans,
+                Households(member_id),
+                catalogue,
+                Targets(),
+                Pantry(),
+                PlannerConfig(max_recipe_repetitions=10),
+                recipe_nutrition=recipe_nutrition,
             )
-            result = generate_week(
+            command = AuthoritativeGenerationRequest(
+                household_id,
+                date(2026, 9, 28),
+                (GenerationMemberConstraints(member_id),),
+            )
+            request = planner.compose_authoritative_request(command)
+
+            recipe = catalogue.get_by_code(code)
+            detail = catalogue.get_current_verified(recipe.id)
+            candidate = next(
+                item
+                for item in request.candidates
+                if item.recipe_version_id == detail.version.id
+            )
+            assert candidate.kcal_per_serving == expected_kcal
+            assert candidate.exact_energy_ready is True
+            assert candidate.meal_type_code == detail.version.meal_type_code
+            assert candidate.food_ingredient_ids == frozenset(
+                row.food_ingredient_id for row in detail.ingredients
+            )
+
+            compatible_result = generate_week(
                 request,
                 PlannerConfig(max_recipe_repetitions=10),
             )
-            assert isinstance(result, PlannerFailure)
-            matching = [
+            compatible_traces = [
                 trace
-                for trace in result.trace.candidates
-                if trace.recipe_version_id == candidate.recipe_version_id
+                for trace in compatible_result.trace.candidates
+                if trace.recipe_version_id == detail.version.id
             ]
-            assert matching
+            assert compatible_traces
+            assert all(
+                PlannerRejectionCode.ROLE_INCOMPATIBLE not in trace.rejection_codes
+                for trace in compatible_traces
+            )
+
+            excluded_command = AuthoritativeGenerationRequest(
+                household_id,
+                command.week_start,
+                (
+                    GenerationMemberConstraints(
+                        member_id,
+                        excluded_food_ingredient_ids=candidate.food_ingredient_ids,
+                    ),
+                ),
+            )
+            excluded_request = planner.compose_authoritative_request(excluded_command)
+            excluded_result = generate_week(
+                excluded_request,
+                PlannerConfig(max_recipe_repetitions=10),
+            )
+            excluded_traces = [
+                trace
+                for trace in excluded_result.trace.candidates
+                if trace.recipe_version_id == detail.version.id
+            ]
+            assert excluded_traces
             assert any(
-                PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT in trace.rejection_codes
-                for trace in matching
+                PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT
+                in trace.rejection_codes
+                for trace in excluded_traces
             )
     finally:
         engine.dispose()
