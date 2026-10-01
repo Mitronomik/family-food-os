@@ -148,7 +148,9 @@ def test_activation_failure_keeps_exact_publication_inactive(database, monkeypat
         del self, recipe_id
         raise RuntimeError("injected activation failure")
 
-    monkeypatch.setattr(FoodRecipeCatalogueService, "activate", fail_activate)
+    monkeypatch.setattr(
+        FoodRecipeCatalogueService, "_activate_after_policy_check", fail_activate
+    )
 
     with pytest.raises(RuntimeError, match="injected activation"):
         seed_r1f_prepared_output(database)
@@ -219,6 +221,26 @@ def test_prepared_publication_rejects_wrong_source_output_hash_or_rights(
         (("ENERGY_KCAL", Decimal(-1)),),
     ),
 )
+def test_prepared_publication_rejects_unreviewed_available_nutrient(database):
+    seed_r1f_prepared_output(database)
+    _, specs = _reviewed_specs()
+    egg = specs[0]
+    unreviewed = replace(
+        egg,
+        expected_available_amounts=egg.expected_available_amounts
+        + (("PROTEIN", Decimal("5.1")),),
+    )
+    engine = create_sqlite_engine(database)
+    try:
+        nutrition = create_recipe_nutrition_v2_service(engine)
+        with pytest.raises(
+            RecipeNutritionV2ContractError, match="AVAILABLE and UNKNOWN"
+        ):
+            nutrition.publish_prepared(unreviewed)
+    finally:
+        engine.dispose()
+
+
 def test_prepared_publication_rejects_missing_zero_or_negative_energy(
     database, amounts
 ):
@@ -302,6 +324,10 @@ def test_697_824_144_kcal_cannot_satisfy_chicken_main_authority(database):
             nutrition.publish_prepared(rejected)
     finally:
         engine.dispose()
+
+
+def test_catalogue_has_no_public_unchecked_activation_command():
+    assert not hasattr(FoodRecipeCatalogueService, "activate")
 
 
 def test_activation_boundary_rejects_recipe_without_prepared_authority(database):
