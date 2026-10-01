@@ -1,5 +1,36 @@
 # Handoff
 
+## R1-F runtime final handoff — 2026-10-01
+
+PR119 runtime is frozen at:
+`a20d13aacbd5222c696658fdde2cc4a0efbba075`.
+
+All exact runtime-freeze CI is green:
+R1-F runtime, Docs, DC1, R1-D admission, Russian methodologies,
+Nutrient registry V2 and Partial nutrition profiles.
+
+Production pilot truth on the branch:
+
+- `HARD_BOILED_EGG` — breakfast — 40 g source output — exact 63 kcal —
+  active — Planner eligible;
+- `BOILED_CHICKEN_MAIN_PRODUCT` — main — 107 g category-II chicken input /
+  75 g source output — exact 167.7 kcal — active — Planner eligible;
+- `CHICKEN_CATEGORY_2_RAW` exists as identity-only FoodIngredient, with no
+  invented raw Nutrition;
+- `USSR82_697_BOILED_CHICKEN` remains historical/inactive;
+- only ENERGY_KCAL is promoted for the prepared pilot; other unreviewed nutrient
+  mappings stay UNKNOWN;
+- prepared + Composition double authority fails closed;
+- replay does not silently reactivate a deliberately deactivated Recipe.
+
+Broad regression debt found/fixed during delivery was limited to strict tests
+whose exact migration head/current-table inventory still stopped at 0041.
+
+PR119 is READY FOR FINAL REVIEW. Do not merge autonomously.
+
+After merge, do not jump to R2/R3. Continue R1 catalogue-capacity expansion and
+R1-C only under the next explicit authorization.
+
 ## R1-F runtime implementation — 2026-09-30
 
 Accepted main:
