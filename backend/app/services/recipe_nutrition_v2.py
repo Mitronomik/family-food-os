@@ -574,9 +574,7 @@ class RecipeNutritionV2Service:
         self, recipe_version_id: UUID
     ) -> CanonicalPreparedRecipeVersionNutrition:
         with self._read_scope_factory() as scope:
-            return self.prepared_canonical_nutrition_in_scope(
-                scope, recipe_version_id
-            )
+            return self.prepared_canonical_nutrition_in_scope(scope, recipe_version_id)
 
     def prepared_canonical_nutrition_in_scope(
         self,
@@ -603,9 +601,7 @@ class RecipeNutritionV2Service:
         scope: RecipeNutritionV2ReadScope,
         recipe_version_id: UUID,
     ) -> RecipeNutritionConsumptionProjection:
-        canonical = self.prepared_canonical_nutrition_in_scope(
-            scope, recipe_version_id
-        )
+        canonical = self.prepared_canonical_nutrition_in_scope(scope, recipe_version_id)
         return project_prepared_recipe_nutrition_consumption(canonical)
 
     @staticmethod
@@ -641,8 +637,7 @@ class RecipeNutritionV2Service:
             )
 
         required_total = tuple(
-            CanonicalNutrientAmount(code, by_code.get(code))
-            for code in NUTRIENT_CODES
+            CanonicalNutrientAmount(code, by_code.get(code)) for code in NUTRIENT_CODES
         )
         per_base_serving = tuple(
             CanonicalNutrientAmount(
@@ -838,11 +833,7 @@ class RecipeNutritionV2Service:
         if len(amounts) != len(spec.expected_available_amounts) or not amounts:
             raise RecipeNutritionV2ContractError("Prepared nutrient set invalid.")
         energy = amounts.get("ENERGY_KCAL")
-        if (
-            not isinstance(energy, Decimal)
-            or not energy.is_finite()
-            or energy <= 0
-        ):
+        if not isinstance(energy, Decimal) or not energy.is_finite() or energy <= 0:
             raise RecipeNutritionV2ContractError(
                 "Prepared ENERGY_KCAL must be positive."
             )

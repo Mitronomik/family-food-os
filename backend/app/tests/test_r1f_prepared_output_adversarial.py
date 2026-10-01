@@ -227,7 +227,9 @@ def test_prepared_publication_rejects_missing_zero_or_negative_energy(
     engine = create_sqlite_engine(database)
     try:
         nutrition = create_recipe_nutrition_v2_service(engine)
-        with pytest.raises(RecipeNutritionV2ContractError, match="ENERGY_KCAL|nutrient"):
+        with pytest.raises(
+            RecipeNutritionV2ContractError, match="ENERGY_KCAL|nutrient"
+        ):
             nutrition.publish_prepared(
                 replace(specs[0], expected_available_amounts=amounts)
             )
