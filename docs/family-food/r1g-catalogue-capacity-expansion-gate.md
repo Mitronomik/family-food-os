@@ -1,8 +1,8 @@
 # R1-G — Catalogue-capacity expansion evidence and contract gate
 
-**Status:** ACTIVE — docs/data evidence only  
-**Issue:** #120  
-**Accepted base:** `879d68087845dea09454089e822f5d8d8238d12d` (merged PR #119)  
+**Status:** ACTIVE — docs/data evidence only
+**Issue:** #120
+**Accepted base:** `879d68087845dea09454089e822f5d8d8238d12d` (merged PR #119)
 **Runtime authority seam:** `PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`
 
 ## 1. Purpose
