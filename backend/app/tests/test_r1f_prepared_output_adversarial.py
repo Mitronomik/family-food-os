@@ -221,6 +221,24 @@ def test_prepared_publication_rejects_wrong_source_output_hash_or_rights(
         (("ENERGY_KCAL", Decimal(-1)),),
     ),
 )
+def test_prepared_publication_rejects_missing_zero_or_negative_energy(
+    database, amounts
+):
+    seed_r1f_prepared_output(database)
+    _, specs = _reviewed_specs()
+    engine = create_sqlite_engine(database)
+    try:
+        nutrition = create_recipe_nutrition_v2_service(engine)
+        with pytest.raises(
+            RecipeNutritionV2ContractError, match="ENERGY_KCAL|nutrient"
+        ):
+            nutrition.publish_prepared(
+                replace(specs[0], expected_available_amounts=amounts)
+            )
+    finally:
+        engine.dispose()
+
+
 def test_prepared_publication_rejects_unreviewed_available_nutrient(database):
     seed_r1f_prepared_output(database)
     _, specs = _reviewed_specs()
@@ -237,24 +255,6 @@ def test_prepared_publication_rejects_unreviewed_available_nutrient(database):
             RecipeNutritionV2ContractError, match="AVAILABLE and UNKNOWN"
         ):
             nutrition.publish_prepared(unreviewed)
-    finally:
-        engine.dispose()
-
-
-def test_prepared_publication_rejects_missing_zero_or_negative_energy(
-    database, amounts
-):
-    seed_r1f_prepared_output(database)
-    _, specs = _reviewed_specs()
-    engine = create_sqlite_engine(database)
-    try:
-        nutrition = create_recipe_nutrition_v2_service(engine)
-        with pytest.raises(
-            RecipeNutritionV2ContractError, match="ENERGY_KCAL|nutrient"
-        ):
-            nutrition.publish_prepared(
-                replace(specs[0], expected_available_amounts=amounts)
-            )
     finally:
         engine.dispose()
 
