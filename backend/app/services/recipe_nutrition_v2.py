@@ -820,7 +820,9 @@ class RecipeNutritionV2Service:
             or seed.version.source_url != spec.source_locator
             or seed.version.source_document_sha256 != spec.source_document_sha256
             or seed.version.source_output_g != spec.output_mass_g
-            or seed_rights_status != spec.rights_review_status
+            or seed_rights_status != "REVIEWED"
+            or spec.rights_review_status
+            not in {"REVIEWED", "BOUNDED_FACTUAL_USE_REVIEWED"}
             or (seed.version.rights_basis or "") != spec.rights_basis
         ):
             raise RecipeNutritionV2ContractError(

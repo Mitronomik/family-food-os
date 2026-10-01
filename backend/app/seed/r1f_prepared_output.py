@@ -30,7 +30,7 @@ from app.services.food_recipes import (
     TrustedRecipeSeedDisposition,
     TrustedRecipeVersionSeed,
 )
-from app.services.planner import PlannerService
+from app.services.planner import PlannerAdmissionBlocker, PlannerService
 from app.services.prepared_recipe_activation import activate_prepared_recipe
 from app.services.recipe_nutrition_v2 import (
     PreparedPublicationDisposition,
