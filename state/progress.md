@@ -1,5 +1,29 @@
 # Progress
 
+## R1-F ordinary Planner boundary acceptance — 2026-10-01
+
+Closed the last independent-review blocker with a test-only change.
+
+The previous synthetic R1-F exclusion proof was replaced by a real authoritative
+Planner composition proof through `PlannerService.compose_authoritative_request()`.
+Both pilot RecipeVersions are now verified on the ordinary candidate-loading path
+with exact energy, RecipeIngredient identity and member exclusion behavior.
+
+Runtime freeze remains:
+`ac647a9fd0546876db743faf545d64ef2622c595`.
+
+Test-only acceptance head:
+`2c35a0df7a6acafec09cbc107e12ac5e3e5a19a6`.
+
+Verification:
+- R1-F focused/affected — 122 passed;
+- Ruff check / format — SUCCESS;
+- Docs / DC1 / R1-D / Russian methodologies — SUCCESS;
+- no runtime code changed, so prior broad backend + launcher receipt remains valid.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
 ## R1-F final blocker closure — 2026-10-01
 
 Runtime freeze:

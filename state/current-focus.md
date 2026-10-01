@@ -134,8 +134,10 @@ Proven on this runtime head:
   and launcher regression;
 - Nutrient registry V2 — SUCCESS, including focused, all backend regression shards
   and full launcher regression;
-- Partial nutrition profiles — SUCCESS, including focused, all backend regression
-  shards and full launcher regression.
+- test-only final acceptance proof head `2c35a0df7a6acafec09cbc107e12ac5e3e5a19a6` —
+  R1-F focused/affected suite 122 passed, Ruff check SUCCESS and format SUCCESS;
+  the proof uses `PlannerService.compose_authoritative_request()` with the real
+  R1-F Recipe Catalogue + Recipe Nutrition path, not a synthetic PlannerCandidate.
 
 Review corrections now prove:
 
@@ -149,7 +151,10 @@ Review corrections now prove:
 - the Recipe catalogue exposes no public unchecked activation command; prepared
   activation passes only through the guarded authority/admission boundary;
 - wrong output/source/hash/rights, soft/medium egg, category-I chicken,
-  697/824 + 144 kcal and missing/zero/negative ENERGY_KCAL are explicitly rejected.
+  697/824 + 144 kcal and missing/zero/negative ENERGY_KCAL are explicitly rejected;
+- ordinary authoritative Planner candidate loading now explicitly proves both pilot
+  RecipeVersions are loaded with exact energy and real ingredient IDs, and member
+  exclusions reject each through that same application boundary.
 
 Runtime changes after the old `a20d13...` receipt make that older receipt
 historical only. The runtime acceptance receipt is now complete at `ac647a9f...`.

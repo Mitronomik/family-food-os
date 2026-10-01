@@ -1,5 +1,42 @@
 # Handoff
 
+## R1-F authoritative Planner acceptance closure — 2026-10-01
+
+Runtime freeze remains:
+`ac647a9fd0546876db743faf545d64ef2622c595`.
+
+A final independent review found one acceptance-evidence gap: the R1-F ingredient
+exclusion test manually constructed a PlannerCandidate instead of proving the
+ordinary authoritative application boundary required by #118.
+
+Closed on test-only head:
+`2c35a0df7a6acafec09cbc107e12ac5e3e5a19a6`.
+
+The R1-F test now:
+
+- seeds the real pilot Recipes and prepared Nutrition authority;
+- calls `PlannerService.compose_authoritative_request(...)`;
+- lets the application service load active RecipeVersions, neutral Nutrition and
+  RecipeIngredient identities itself;
+- proves HARD_BOILED_EGG is loaded at exact 63 kcal and role-compatible;
+- proves BOILED_CHICKEN_MAIN_PRODUCT is loaded at exact 167.7 kcal and role-compatible;
+- applies EGG / CHICKEN_CATEGORY_2_RAW exclusions through
+  `GenerationMemberConstraints`;
+- proves the corresponding real candidate receives
+  `MEMBER_EXCLUDED_INGREDIENT`;
+- contains no manual PlannerCandidate construction.
+
+Verification on that test-only head:
+
+- R1-F focused/affected suite — 122 passed;
+- Ruff check — SUCCESS;
+- Ruff format --check — SUCCESS;
+- Docs / DC1 / R1-D / Russian methodologies — SUCCESS.
+
+No production/runtime bytes changed after the accepted runtime freeze, so the
+already-green broad runtime receipt remains valid under verification-policy.md.
+PR119 is READY FOR FINAL REVIEW. Do not merge autonomously.
+
 ## R1-F blocker closure final receipt — 2026-10-01
 
 Runtime freeze:
