@@ -192,6 +192,7 @@ def test_a_database_at_0019_reports_0020_then_0021_pending(tmp_path):
         TRANSFORMATION_APPLICABILITY_MIGRATION_ID,
         COMPOSITION_BINDING_MIGRATION_ID,
         RECIPE_OUTPUT_MIGRATION_ID,
+        "0041_meal_pattern_energy_allocation",
         HEAD_MIGRATION_ID,
     ]
 
@@ -224,6 +225,7 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         TRANSFORMATION_APPLICABILITY_MIGRATION_ID,
         COMPOSITION_BINDING_MIGRATION_ID,
         RECIPE_OUTPUT_MIGRATION_ID,
+        "0041_meal_pattern_energy_allocation",
         HEAD_MIGRATION_ID,
     ]
     assert snapshot(database_path) == before
@@ -653,6 +655,7 @@ def test_user_mode_startup_backs_up_before_applying_0020(monkeypatch, tmp_path):
         TRANSFORMATION_APPLICABILITY_MIGRATION_ID,
         COMPOSITION_BINDING_MIGRATION_ID,
         RECIPE_OUTPUT_MIGRATION_ID,
+        "0041_meal_pattern_energy_allocation",
         HEAD_MIGRATION_ID,
     ]
     assert result.backup is not None
