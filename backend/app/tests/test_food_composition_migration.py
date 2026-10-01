@@ -153,6 +153,7 @@ def test_mid_migration_schema_data_marker_rollback_and_deterministic_resume(
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
+        "0042_recipe_prepared_output_nutrition",
     ]
     assert migrations.apply_migrations(config) == [
         MIGRATION.MIGRATION_ID,
@@ -167,6 +168,7 @@ def test_mid_migration_schema_data_marker_rollback_and_deterministic_resume(
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
+        "0042_recipe_prepared_output_nutrition",
     ]
     after = assert_existing_history_preserved(before, config)
     schema_after = schema(config)
