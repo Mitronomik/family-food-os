@@ -208,6 +208,111 @@ Rank candidates by:
 
 Source family preference is not a ranking criterion.
 
+## 9.4 Current research findings
+
+### 9.4.1 Durable source archive
+
+The project-owned private corpus archive was independently retrieved during R1-G:
+
+- locator: `private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`;
+- size: `206692075` bytes;
+- SHA-256: `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`.
+
+The retained School2022 source PDF inside that archive was also independently
+verified:
+
+- path: `corpus-work/packages/school2022/raw/source.pdf`;
+- size: `4102547` bytes;
+- SHA-256: `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`.
+
+### 9.4.2 467 / 492
+
+No exact source salt quantity has been proven.
+
+Their current dispositions are therefore:
+
+- USSR82-467 → `BLOCKED_REQUIRED_QUANTITY_UNRESOLVED`;
+- USSR82-492 → `BLOCKED_REQUIRED_QUANTITY_UNRESOLVED`.
+
+The R1-G gate does not authorize a default/pinch/zero/omitted salt value.
+
+### 9.4.3 1081
+
+The retained III-with-butter source branch remains exact at 160 g output.
+
+A separate normative menu table was discovered with recipe 1081, butter,
+`150/10` output and 370 kcal. That row is useful corroboration but is **not yet
+prepared-output authority for the selected III branch** because recipe 1081 has
+materially different I/II/III ingredient columns and the discovered nutrient row
+does not itself pin the source column/variant.
+
+Current disposition:
+
+`BLOCKED_PREPARED_ENERGY_VARIANT_LINKAGE_UNPROVEN`.
+
+No value from that external table may be attached to the selected III RecipeVersion
+until the exact column/variant linkage and durable source receipt are pinned.
+
+### 9.4.4 Historical MAIN candidates
+
+USSR82-208 is not a clean `PREPARED_OUTPUT_V1` candidate under the current V1
+contract: the retained source Recipe basis is 1000 g while the discovered prepared
+nutrient row is 250 g. Using it would require source scaling, which R1-F V1
+explicitly forbids.
+
+USSR82-364 is more promising:
+
+- accepted R1-E role: MAIN;
+- 1982 column III output with a 5 g serving-fat branch is 150/5;
+- a normative nutrient table contains recipe 364 at 150/5 and 252 kcal;
+- the nutrient row labels the serving-fat branch as margarine;
+- the existing retained R1-B selection used the III butter branch.
+
+Therefore 364 is **not yet runtime-ready**, but it is a strong exact-output
+candidate if R1-G pins the III+margarine source branch and a durable nutrient
+receipt. The remaining accepted mode-independent ingredient blocker is exact
+`Жир кулинарный` identity/form truth.
+
+### 9.4.5 School2022 MAIN shortlist
+
+The verified private archive contains exact same-card output and source-published
+energy for many material/procurement-ready non-clinical cards.
+
+Current leading MAIN candidates are recorded in:
+
+`data/curation/r1g-catalogue-capacity-expansion/school2022-main-shortlist.json`.
+
+Top candidates:
+
+1. `ru-school2022:recipe:54-29м` — Фрикадельки из говядины — 80 g — 153 kcal;
+2. `ru-school2022:recipe:54-2м` — Гуляш из говядины — 80 g — 185.6 kcal;
+3. `ru-school2022:recipe:54-1р` — Котлета рыбная (треска) — 100 g — 112.6 kcal.
+
+However accepted R1-E truth explicitly stops 264 unpublished School2022 identities
+at `HOUSEHOLD_APPLICABILITY`. Retained process evidence also contains
+`institutional_school_catering_only / domestic_applicability=unestablished`
+markers.
+
+Therefore exact output+kcal **does not** make these Recipes runtime-ready.
+
+A bounded per-recipe household-applicability decision/review is required before a
+School2022 candidate can enter the next runtime batch. R1-G must not silently
+generalize one School2022 review to all 264 blocked identities.
+
+### 9.4.6 Current runtime-batch conclusion
+
+At this research checkpoint, **no additional Recipe is yet authorized for runtime
+publication/activation**.
+
+This is intentional fail-closed behavior. The next runtime batch remains empty
+until at least one candidate simultaneously closes:
+
+- exact source Recipe/variant/process/output identity;
+- required FoodIngredient/form identities;
+- household applicability;
+- exact prepared-output Nutrition authority;
+- role suitability and ordinary Planner prerequisites.
+
 ## 10. Required evidence package
 
 Path:
