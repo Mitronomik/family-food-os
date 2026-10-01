@@ -179,7 +179,8 @@ def test_0040_adds_nullable_output_columns_and_preserves_historical_row(tmp_path
 
     assert apply_migrations(DatabaseConfig(path=database)) == [
         "0040_recipe_version_source_output",
-        "0041_meal_pattern_energy_allocation"
+        "0041_meal_pattern_energy_allocation",
+        "0042_recipe_prepared_output_nutrition",
     ]
 
     with sqlite3.connect(database) as connection:
@@ -214,7 +215,8 @@ def test_0040_adds_nullable_output_columns_and_preserves_historical_row(tmp_path
     assert database.read_bytes() == before_bytes
     assert apply_migrations(DatabaseConfig(path=database)) == [
         "0040_recipe_version_source_output",
-        "0041_meal_pattern_energy_allocation"
+        "0041_meal_pattern_energy_allocation",
+        "0042_recipe_prepared_output_nutrition",
     ]
     with sqlite3.connect(database) as connection:
         restored = connection.execute(

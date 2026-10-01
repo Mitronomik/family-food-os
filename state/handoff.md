@@ -1,5 +1,163 @@
 # Handoff
 
+## R1-F authoritative Planner acceptance closure — 2026-10-01
+
+Runtime freeze remains:
+`ac647a9fd0546876db743faf545d64ef2622c595`.
+
+A final independent review found one acceptance-evidence gap: the R1-F ingredient
+exclusion test manually constructed a PlannerCandidate instead of proving the
+ordinary authoritative application boundary required by #118.
+
+Closed on test-only head:
+`2c35a0df7a6acafec09cbc107e12ac5e3e5a19a6`.
+
+The R1-F test now:
+
+- seeds the real pilot Recipes and prepared Nutrition authority;
+- calls `PlannerService.compose_authoritative_request(...)`;
+- lets the application service load active RecipeVersions, neutral Nutrition and
+  RecipeIngredient identities itself;
+- proves HARD_BOILED_EGG is loaded at exact 63 kcal and role-compatible;
+- proves BOILED_CHICKEN_MAIN_PRODUCT is loaded at exact 167.7 kcal and role-compatible;
+- applies EGG / CHICKEN_CATEGORY_2_RAW exclusions through
+  `GenerationMemberConstraints`;
+- proves the corresponding real candidate receives
+  `MEMBER_EXCLUDED_INGREDIENT`;
+- contains no manual PlannerCandidate construction.
+
+Verification on that test-only head:
+
+- R1-F focused/affected suite — 122 passed;
+- Ruff check — SUCCESS;
+- Ruff format --check — SUCCESS;
+- Docs / DC1 / R1-D / Russian methodologies — SUCCESS.
+
+No production/runtime bytes changed after the accepted runtime freeze, so the
+already-green broad runtime receipt remains valid under verification-policy.md.
+PR119 is READY FOR FINAL REVIEW. Do not merge autonomously.
+
+## R1-F blocker closure final receipt — 2026-10-01
+
+Runtime freeze:
+`ac647a9fd0546876db743faf545d64ef2622c595`.
+
+The final two review blockers are closed:
+
+- `ReviewedPreparedRecipeNutritionSpec` now carries explicit
+  `expected_unknown_codes`; validation requires AVAILABLE and UNKNOWN to be
+  disjoint and together cover the frozen 54-code nutrient set;
+- the pilot specs keep only ENERGY_KCAL AVAILABLE and explicitly keep the other
+  53 codes UNKNOWN;
+- an adversarial test proves an unreviewed PROTEIN value cannot be added while
+  still declared UNKNOWN;
+- `FoodRecipeCatalogueService` no longer exposes public unchecked
+  `activate()`; the raw reversible mutation is internal and the public R1-F path
+  remains `activate_prepared_recipe(...)`.
+
+Exact runtime-head verification:
+
+- R1-F runtime — SUCCESS; 122 tests passed;
+- Ruff check / format — SUCCESS;
+- Docs / DC1 / R1-D / Russian methodologies — SUCCESS;
+- Partial nutrition profiles — focused + 4 backend shards + launcher SUCCESS;
+- Nutrient registry V2 — focused + 4 backend shards + launcher SUCCESS.
+
+No migration, Planner algorithm/scoring/role/repetition, historical Recipe truth,
+Shopping/UI/Retail/Auth/PostgreSQL/AI scope, or 54/54 completeness requirement
+was added.
+
+PR119 is READY FOR FINAL REVIEW. Do not merge autonomously and do not start the
+catalogue-expansion follow-up automatically.
+
+## R1-F final-review corrections — 2026-10-01
+
+User-authorized corrections to PR119 are implemented on runtime head
+`6f7ea30c23cb8a16fd9863425026399439c371e8`.
+
+Closed review blockers:
+
+- canonical prepared Nutrition now materializes all 54 frozen nutrient codes;
+- absent values remain explicit UNKNOWN; numeric zero remains AVAILABLE(0);
+- PARTIAL nutrition is not an admission blocker when exact positive energy exists;
+- R1-F activation uses a guarded application boundary that verifies exact prepared
+  authority and Planner admission before flipping the reversible active flag;
+- targeted adversarial coverage now proves rejection of wrong output/source/hash/
+  rights, soft/medium egg, category-I chicken, 697/824 + 144 kcal, and
+  missing/zero/negative ENERGY_KCAL.
+
+Runtime verification at `6f7ea30...` proves R1-F runtime (120 focused tests +
+Ruff check/format), Docs, DC1, R1-D admission, Russian methodologies, Partial
+nutrition profiles with all backend shards + full launcher, and Nutrient registry
+V2 focused + all backend shards. The Nutrient registry duplicate launcher was
+cancelled only by a later state-only synchronize; its command is identical to the
+full launcher regression that already passed on the same runtime bytes, so it is
+not reported as a PASS and is not a separate runtime gate.
+
+PR119 is READY FOR FINAL REVIEW. Do not merge autonomously and do not start
+catalogue expansion automatically.
+
+## R1-F runtime final handoff — 2026-10-01
+
+PR119 runtime is frozen at:
+`a20d13aacbd5222c696658fdde2cc4a0efbba075`.
+
+All exact runtime-freeze CI is green:
+R1-F runtime, Docs, DC1, R1-D admission, Russian methodologies,
+Nutrient registry V2 and Partial nutrition profiles.
+
+Production pilot truth on the branch:
+
+- `HARD_BOILED_EGG` — breakfast — 40 g source output — exact 63 kcal —
+  active — Planner eligible;
+- `BOILED_CHICKEN_MAIN_PRODUCT` — main — 107 g category-II chicken input /
+  75 g source output — exact 167.7 kcal — active — Planner eligible;
+- `CHICKEN_CATEGORY_2_RAW` exists as identity-only FoodIngredient, with no
+  invented raw Nutrition;
+- `USSR82_697_BOILED_CHICKEN` remains historical/inactive;
+- only ENERGY_KCAL is promoted for the prepared pilot; other unreviewed nutrient
+  mappings stay UNKNOWN;
+- prepared + Composition double authority fails closed;
+- replay does not silently reactivate a deliberately deactivated Recipe.
+
+Broad regression debt found/fixed during delivery was limited to strict tests
+whose exact migration head/current-table inventory still stopped at 0041.
+
+PR119 is READY FOR FINAL REVIEW. Do not merge autonomously.
+
+After merge, do not jump to R2/R3. Continue R1 catalogue-capacity expansion and
+R1-C only under the next explicit authorization.
+
+## R1-F runtime implementation — 2026-09-30
+
+Accepted main:
+`e138d615802f7928946e419156f8c6905f04075b` (merged PR117).
+
+Issue #118 / PR #119 / branch `feat/r1f-prepared-output-runtime`.
+
+Implemented:
+
+- migration 0042 prepared-output Recipe Nutrition persistence;
+- immutable prepared header + sparse values;
+- `PREPARED_OUTPUT_V1` neutral projection;
+- fail-closed conflict with Composition authority;
+- identity-only `CHICKEN_CATEGORY_2_RAW`;
+- `HARD_BOILED_EGG` @ exact 63 kcal;
+- `BOILED_CHICKEN_MAIN_PRODUCT` @ exact 167.7 kcal;
+- explicit activation after exact-energy + admission proof;
+- exact replay does not reactivate deliberate deactivation;
+- historical USSR82-697 remains unchanged/inactive.
+
+R1-F publishes ENERGY_KCAL only; unreviewed macro/carbohydrate mappings remain
+UNKNOWN.
+
+Focused runtime workflow is green on exact head
+`9283a647e24c0c8c03b72005eb8255a07590a1b1`.
+
+Broad exact-head workflows remain required before final review readiness.
+
+Do not expand to 467/492/1081 or start R1-C until PR119 final review/merge.
+
 ## R1-F cooked-Nutrition authority gate — 2026-09-30
 
 PR115 merged into main at:

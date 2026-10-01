@@ -299,7 +299,8 @@ def test_0041_upgrade_preserves_history_triggers_and_rolls_back_mid_migration(
 
     monkeypatch.setattr(module, "upgrade", original_upgrade)
     assert migrations.apply_migrations(config) == [
-        "0041_meal_pattern_energy_allocation"
+        "0041_meal_pattern_energy_allocation",
+        "0042_recipe_prepared_output_nutrition",
     ]
     with sqlite3.connect(config.path) as db:
         assert db.execute(

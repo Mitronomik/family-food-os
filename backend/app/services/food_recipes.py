@@ -18,6 +18,7 @@ from app.domain.food_recipes import (
     RecipeVersionDetail,
     RightsReviewStatus,
     VerificationStatus,
+    activate_recipe,
     deactivate_recipe,
     scale_recipe,
 )
@@ -208,6 +209,23 @@ class FoodRecipeCatalogueService:
     ) -> RecipeVersionDetail:
         return scale_recipe(self.get_version_detail(version_id), target_servings)
 
+    def _activate_after_policy_check(self, recipe_id: UUID) -> Recipe:
+        """Internal reversible mutation after an owning activation policy passes."""
+
+        now = self._clock()
+        with self._write() as scope:
+            recipe = scope.recipes.get(recipe_id)
+            if recipe is None:
+                raise RecipeNotFoundError(recipe_id)
+            if recipe.is_active:
+                return recipe
+            changed = activate_recipe(recipe, updated_at=now)
+            scope.recipes.set_active(
+                recipe_id, active=True, updated_at=changed.updated_at
+            )
+            scope.commit()
+            return changed
+
     def deactivate(self, recipe_id: UUID) -> Recipe:
         now = self._clock()
         with self._write() as scope:
@@ -383,9 +401,7 @@ class FoodRecipeCatalogueService:
                     )
                 recipe = self._new_recipe(entry, now)
                 scope.recipes.add(recipe)
-                detail = self._new_detail(
-                    scope, recipe, entry.version, 1, None, now
-                )
+                detail = self._new_detail(scope, recipe, entry.version, 1, None, now)
                 scope.versions.add_detail(detail)
                 _increment_detail(counts, detail, inserted=True)
                 counts["recipes_inserted"] += 1

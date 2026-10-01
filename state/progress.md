@@ -1,5 +1,131 @@
 # Progress
 
+## R1-F ordinary Planner boundary acceptance — 2026-10-01
+
+Closed the last independent-review blocker with a test-only change.
+
+The previous synthetic R1-F exclusion proof was replaced by a real authoritative
+Planner composition proof through `PlannerService.compose_authoritative_request()`.
+Both pilot RecipeVersions are now verified on the ordinary candidate-loading path
+with exact energy, RecipeIngredient identity and member exclusion behavior.
+
+Runtime freeze remains:
+`ac647a9fd0546876db743faf545d64ef2622c595`.
+
+Test-only acceptance head:
+`2c35a0df7a6acafec09cbc107e12ac5e3e5a19a6`.
+
+Verification:
+- R1-F focused/affected — 122 passed;
+- Ruff check / format — SUCCESS;
+- Docs / DC1 / R1-D / Russian methodologies — SUCCESS;
+- no runtime code changed, so prior broad backend + launcher receipt remains valid.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
+## R1-F final blocker closure — 2026-10-01
+
+Runtime freeze:
+`ac647a9fd0546876db743faf545d64ef2622c595`.
+
+Closed:
+
+- reviewed AVAILABLE/UNKNOWN partition is explicit for all 54 frozen nutrient
+  codes; only ENERGY_KCAL is AVAILABLE for the two pilot Recipes;
+- arbitrary UNKNOWN→AVAILABLE promotion is rejected by contract validation and
+  adversarial test;
+- public unchecked Recipe activation was removed from Catalogue API;
+- guarded prepared activation remains the application boundary.
+
+Verification on the runtime freeze: R1-F runtime SUCCESS with 122 tests and Ruff/
+format; Docs, DC1, R1-D and Russian methodologies SUCCESS; both broad Nutrition
+workflows SUCCESS with focused checks, all four backend shards and full launcher
+regression.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
+## R1-F final-review corrections — 2026-10-01
+
+PR119 review blockers are implemented on runtime head
+`6f7ea30c23cb8a16fd9863425026399439c371e8`.
+
+Delivered in this correction:
+
+- canonical 54-code prepared Nutrition projection with explicit UNKNOWN;
+- zero-vs-UNKNOWN semantics locked by tests;
+- PARTIAL + exact-energy Planner eligibility preserved;
+- guarded prepared Recipe activation boundary;
+- exact Recipe/source/process binding through the reviewed trusted seed;
+- explicit adversarial tests for wrong output/source/hash/rights, wrong cooking
+  process/category, rejected 697/824 144 kcal, and missing/zero/negative energy.
+
+No migration, Planner scoring/role/repetition change, Shopping/UI/Retail/Auth/AI
+scope or historical Recipe rewrite was introduced.
+
+Runtime verification at `6f7ea30...`: R1-F runtime SUCCESS (120 tests +
+Ruff/format), Docs SUCCESS, DC1 SUCCESS, R1-D SUCCESS, Russian methodologies
+SUCCESS, Partial nutrition profiles SUCCESS with all backend shards + full
+launcher, Nutrient registry V2 focused + all backend shards SUCCESS. The duplicate
+Nutrient registry launcher was cancelled by the subsequent state-only sync; the
+same `python -m pytest -q launcher/tests` command already passed on the identical
+runtime head via Partial nutrition profiles and is the accepted full-launcher
+receipt.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
+## R1-F runtime review-ready — 2026-10-01
+
+Runtime freeze:
+`a20d13aacbd5222c696658fdde2cc4a0efbba075`.
+
+PR119 now delivers:
+
+- migration 0042 prepared-output Nutrition persistence;
+- `PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`;
+- identity-only `CHICKEN_CATEGORY_2_RAW`;
+- active exact-energy-ready `HARD_BOILED_EGG` at 63 kcal;
+- active exact-energy-ready `BOILED_CHICKEN_MAIN_PRODUCT` at 167.7 kcal;
+- historical USSR82-697 preservation;
+- ordinary Planner admission;
+- ingredient exclusion behavior;
+- Recipe-vs-Serving identity preservation;
+- exact replay/deactivation semantics;
+- publication and activation failure-injection coverage.
+
+All exact runtime-freeze workflows passed, including full backend shards and full
+launcher regression in both broad Nutrition workflows.
+
+Implementation encountered only task-local migration regression debt: older tests
+hard-coded migration head/table inventory through 0041. Those strict expectations
+were advanced to 0042 without weakening coverage.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
+## R1-F runtime implementation active — 2026-09-30
+
+Accepted base:
+`e138d615802f7928946e419156f8c6905f04075b` (merged PR117).
+
+PR119 implements the merged R1-F contract:
+
+- migration 0042;
+- prepared-output RecipeVersion Nutrition authority;
+- source-backed breakfast/main pilot;
+- exact positive energy;
+- explicit activation;
+- ordinary Planner admission;
+- replay/immutability preservation.
+
+Focused R1-F verification is green after correcting two task-local regressions:
+legacy minimal Recipe Nutrition test scope compatibility and migration-head
+expectation 0041→0042.
+
+Broad exact-head regression remains in progress. No follow-up expansion has started.
+
 ## R1-F cooked-Nutrition authority gate started — 2026-09-30
 
 Accepted base:
