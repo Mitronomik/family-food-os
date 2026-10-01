@@ -1,5 +1,34 @@
 # Progress
 
+## R1-F runtime review-ready — 2026-10-01
+
+Runtime freeze:
+`a20d13aacbd5222c696658fdde2cc4a0efbba075`.
+
+PR119 now delivers:
+
+- migration 0042 prepared-output Nutrition persistence;
+- `PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`;
+- identity-only `CHICKEN_CATEGORY_2_RAW`;
+- active exact-energy-ready `HARD_BOILED_EGG` at 63 kcal;
+- active exact-energy-ready `BOILED_CHICKEN_MAIN_PRODUCT` at 167.7 kcal;
+- historical USSR82-697 preservation;
+- ordinary Planner admission;
+- ingredient exclusion behavior;
+- Recipe-vs-Serving identity preservation;
+- exact replay/deactivation semantics;
+- publication and activation failure-injection coverage.
+
+All exact runtime-freeze workflows passed, including full backend shards and full
+launcher regression in both broad Nutrition workflows.
+
+Implementation encountered only task-local migration regression debt: older tests
+hard-coded migration head/table inventory through 0041. Those strict expectations
+were advanced to 0042 without weakening coverage.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
 ## R1-F runtime implementation active — 2026-09-30
 
 Accepted base:
