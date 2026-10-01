@@ -3,7 +3,7 @@
   "operation": "R1G_CATALOGUE_CAPACITY_EXPANSION_GATE",
   "accepted_base": "879d68087845dea09454089e822f5d8d8238d12d",
   "issue": 120,
-  "status": "ACTIVE_RESEARCH",
+  "status": "READY_FOR_FINAL_REVIEW",
   "authority_seam": {
     "authority_kind": "PREPARED_OUTPUT_V1",
     "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
@@ -184,8 +184,11 @@
         ]
       }
     ],
-    "current_gate_disposition": "NO_RUNTIME_READY_MAIN_YET",
-    "selection": [],
+    "current_gate_disposition": "NEXT_RUNTIME_BATCH_FROZEN",
+    "selection": [
+      "ru-school2022:recipe:54-29м",
+      "ru-school2022:recipe:54-2м"
+    ],
     "shortlist_refs": [
       "data/curation/r1g-catalogue-capacity-expansion/research-status.json",
       "data/curation/r1g-catalogue-capacity-expansion/school2022-main-shortlist.json"
@@ -196,6 +199,38 @@
     "fixed_additional_recipe_count_assumed": false,
     "rule": "derive required role capacity from concrete repository-backed R1-C scenarios and current meal-pattern opportunity schedules"
   },
-  "current_runtime_batch": [],
-  "research_checkpoint": "NO_ADDITIONAL_RUNTIME_TARGET_AUTHORIZED_YET"
+  "current_runtime_batch": [
+    "SCHOOL2022_54_29M_BEEF_MEATBALLS",
+    "SCHOOL2022_54_2M_BEEF_GOULASH"
+  ],
+  "research_checkpoint": "NEXT_RUNTIME_BATCH_FROZEN",
+  "school2022_selected": {
+    "household_review_ref": "data/curation/r1g-catalogue-capacity-expansion/school2022-household-applicability-review.json",
+    "authority_review_ref": "data/curation/r1g-catalogue-capacity-expansion/school2022-main-authority-review.json",
+    "next_runtime_batch_ref": "data/curation/r1g-catalogue-capacity-expansion/next-runtime-batch.json",
+    "projected_capacity_ref": "data/curation/r1g-catalogue-capacity-expansion/projected-planner-capacity.json",
+    "selected": [
+      {
+        "source_recipe_id": "ru-school2022:recipe:54-29м",
+        "disposition": "RUNTIME_BATCH_SELECTED",
+        "canonical_code": "SCHOOL2022_54_29M_BEEF_MEATBALLS",
+        "source_output_g": "80",
+        "energy_kcal": "153"
+      },
+      {
+        "source_recipe_id": "ru-school2022:recipe:54-2м",
+        "disposition": "RUNTIME_BATCH_SELECTED",
+        "canonical_code": "SCHOOL2022_54_2M_BEEF_GOULASH",
+        "source_output_g": "80",
+        "energy_kcal": "185.6"
+      },
+      {
+        "source_recipe_id": "ru-school2022:recipe:54-1р",
+        "disposition": "FOLLOW_UP_AFTER_FIRST_BATCH",
+        "canonical_code": "SCHOOL2022_54_1R_COD_CUTLET",
+        "source_output_g": "100",
+        "energy_kcal": "112.6"
+      }
+    ]
+  }
 }
