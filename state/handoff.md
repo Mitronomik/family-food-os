@@ -1,5 +1,32 @@
 # Handoff
 
+## R1-G catalogue-capacity expansion gate started — 2026-10-01
+
+PR #119 is merged into main at
+`879d68087845dea09454089e822f5d8d8238d12d`.
+
+Issue #120 now owns the next bounded operation:
+`R1-G: catalogue-capacity expansion evidence and contract gate`.
+
+Branch:
+`docs/r1g-catalogue-capacity-expansion-gate`.
+
+Initial evidence state:
+
+- USSR82-1081: exact variant/output/ingredient quantities retained, but exact
+  cooked prepared-output ENERGY_KCAL receipt is not yet proven; READY_RAW is not
+  authority;
+- USSR82-467: blocked on exact salt quantity;
+- USSR82-492: blocked on exact salt quantity;
+- current explicit historical MAIN alternatives 364/208 retain source/form
+  blockers; broader cross-corpus MAIN ranking is required;
+- no fixed number of additional Recipes is assumed for R1-C; capacity must be
+  calculated from concrete repository-backed scenarios under the unchanged
+  repetition limit.
+
+R1-G is docs/data evidence only. No runtime, migration, publication, activation,
+Planner change or R1-C execution is authorized.
+
 ## R1-F authoritative Planner acceptance closure — 2026-10-01
 
 Runtime freeze remains:
