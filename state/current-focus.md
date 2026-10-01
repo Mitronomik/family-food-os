@@ -1,6 +1,6 @@
 # Current focus
 
-Updated: 2026-09-30.
+Updated: 2026-10-01.
 
 ## Accepted state
 
@@ -49,9 +49,11 @@ Runtime now includes:
 - prepared-vs-Composition double-authority rejection;
 - identity-only FoodIngredient publication for
   `CHICKEN_CATEGORY_2_RAW / Курица II категории, сырая`;
-- explicit Recipe activation command;
+- guarded prepared-Recipe activation boundary that exact-replays reviewed authority,
+  requires exact-energy readiness and only the reversible INACTIVE Planner blocker;
+- canonical prepared 54-code projection where absent nutrients are explicit UNKNOWN;
 - R1-F publication/orchestration seed;
-- focused end-to-end runtime/migration/Planner tests.
+- focused end-to-end runtime/migration/Planner/adversarial tests.
 
 Pilot production Recipes:
 
@@ -112,42 +114,41 @@ Publication replay:
 
 ## Verification status
 
-Runtime behavior is frozen at:
+Review blockers found after the original runtime freeze were fixed without a new
+migration or Planner algorithm change.
 
-`a20d13aacbd5222c696658fdde2cc4a0efbba075`.
+Current runtime head:
 
-Exact runtime-freeze CI:
+`6f7ea30c23cb8a16fd9863425026399439c371e8`.
 
-- R1-F runtime — SUCCESS;
+Proven on this runtime head:
+
+- R1-F runtime — SUCCESS; 120 focused tests passed;
+- Ruff check — SUCCESS;
+- Ruff format check — SUCCESS;
 - Docs verification — SUCCESS;
 - DC1 corpus verification — SUCCESS;
 - R1-D Planner admission — SUCCESS;
 - Russian nutrition methodologies — SUCCESS;
-- Nutrient registry V2 — SUCCESS;
-- Partial nutrition profiles — SUCCESS.
+- Partial nutrition profiles — SUCCESS, including all backend regression shards
+  and launcher regression;
+- Nutrient registry V2 — all focused/backend regression shards SUCCESS; final
+  launcher regression is still executing.
 
-Both broad workflows completed all backend shards and full launcher regression
-successfully.
+Review corrections now prove:
 
-The broad failures encountered during implementation were stale migration-chain /
-current-schema expectations that still ended at 0041. They were corrected to keep
-strict exact-order/table-set assertions through 0042. No tests or acceptance
-criteria were weakened.
+- prepared canonical Nutrition always exposes the frozen 54-code vector;
+- only reviewed values are AVAILABLE; absent codes are UNKNOWN, never synthetic zero;
+- an explicit numeric zero remains AVAILABLE(0), distinct from UNKNOWN;
+- PARTIAL canonical Nutrition with exact positive ENERGY_KCAL remains ordinary
+  Planner-eligible;
+- prepared activation passes only through the guarded authority/admission boundary;
+- wrong output/source/hash/rights, soft/medium egg, category-I chicken,
+  697/824 + 144 kcal and missing/zero/negative ENERGY_KCAL are explicitly rejected.
 
-Runtime acceptance proven on disposable SQLite with historical R1-B baseline:
-
-- `HARD_BOILED_EGG` active + SOURCE_VERIFIED + PREPARED_OUTPUT_V1 +
-  exact-energy-ready at 63 kcal;
-- `BOILED_CHICKEN_MAIN_PRODUCT` active + SOURCE_VERIFIED +
-  PREPARED_OUTPUT_V1 + exact-energy-ready at 167.7 kcal;
-- historical `USSR82_697_BOILED_CHICKEN` remains unchanged/inactive;
-- exact replay is zero-write;
-- deliberate deactivation is not undone by publication replay;
-- FoodIngredient exclusions reject the real breakfast/main candidates;
-- Serving scaling reuses the same Recipe/RecipeVersion identity;
-- publication/activation failure-injection preserves the frozen rollback contract.
-
-PR119 is **READY FOR FINAL REVIEW**. Do not merge without explicit authorization.
+PR119 remains open and must not be merged until the final required broad launcher
+check is complete. Runtime changes after the old `a20d13...` receipt make that
+older receipt historical only.
 
 ## Hard boundaries
 

@@ -1,5 +1,31 @@
 # Progress
 
+## R1-F final-review corrections — 2026-10-01
+
+PR119 review blockers are implemented on runtime head
+`6f7ea30c23cb8a16fd9863425026399439c371e8`.
+
+Delivered in this correction:
+
+- canonical 54-code prepared Nutrition projection with explicit UNKNOWN;
+- zero-vs-UNKNOWN semantics locked by tests;
+- PARTIAL + exact-energy Planner eligibility preserved;
+- guarded prepared Recipe activation boundary;
+- exact Recipe/source/process binding through the reviewed trusted seed;
+- explicit adversarial tests for wrong output/source/hash/rights, wrong cooking
+  process/category, rejected 697/824 144 kcal, and missing/zero/negative energy.
+
+No migration, Planner scoring/role/repetition change, Shopping/UI/Retail/Auth/AI
+scope or historical Recipe rewrite was introduced.
+
+Exact-head verification so far: R1-F runtime SUCCESS (120 tests + Ruff/format),
+Docs SUCCESS, DC1 SUCCESS, R1-D SUCCESS, Russian methodologies SUCCESS, Partial
+nutrition profiles SUCCESS with broad backend + launcher. Nutrient registry V2
+has all focused/backend shards green; final launcher remains in progress.
+
+Status:
+`FINAL_BROAD_VERIFICATION_IN_PROGRESS`.
+
 ## R1-F runtime review-ready — 2026-10-01
 
 Runtime freeze:

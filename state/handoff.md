@@ -1,5 +1,29 @@
 # Handoff
 
+## R1-F final-review corrections — 2026-10-01
+
+User-authorized corrections to PR119 are implemented on runtime head
+`6f7ea30c23cb8a16fd9863425026399439c371e8`.
+
+Closed review blockers:
+
+- canonical prepared Nutrition now materializes all 54 frozen nutrient codes;
+- absent values remain explicit UNKNOWN; numeric zero remains AVAILABLE(0);
+- PARTIAL nutrition is not an admission blocker when exact positive energy exists;
+- R1-F activation uses a guarded application boundary that verifies exact prepared
+  authority and Planner admission before flipping the reversible active flag;
+- targeted adversarial coverage now proves rejection of wrong output/source/hash/
+  rights, soft/medium egg, category-I chicken, 697/824 + 144 kcal, and
+  missing/zero/negative ENERGY_KCAL.
+
+Exact-head verification currently proves R1-F runtime (120 focused tests + Ruff
+check/format), Docs, DC1, R1-D admission, Russian methodologies and Partial
+nutrition profiles including all backend shards + launcher. Nutrient registry V2
+focused/all backend shards are green; its final launcher job is still executing.
+
+Do not merge until that final required job completes and the verification receipt
+is finalized. Do not start catalogue expansion automatically.
+
 ## R1-F runtime final handoff — 2026-10-01
 
 PR119 runtime is frozen at:
