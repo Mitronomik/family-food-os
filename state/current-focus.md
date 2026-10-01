@@ -115,8 +115,35 @@ stop and request a separate Implementation Contract Gate decision.
 - projected R1-C capacity;
 - exact next runtime batch.
 
+## Current research checkpoint
+
+No additional Recipe is runtime-authorized yet.
+
+- 467 / 492 remain blocked on exact salt quantity;
+- 1081 has a strong 150/10 / 370 kcal external candidate but exact linkage to
+  the selected III branch is unproven;
+- 208 would require forbidden prepared-value/source-row scaling under R1-F V1;
+- 364 is the strongest retained USSR82 MAIN candidate: III output 150/5 aligns
+  with a 252 kcal normative row, but exact III+margarine branch receipt and
+  `Жир кулинарный` identity/form truth remain to close;
+- School2022 has exact same-card output+kcal candidates, but accepted R1-E truth
+  stops unpublished cards at `HOUSEHOLD_APPLICABILITY`.
+
+Leading School2022 MAIN shortlist:
+
+- 54-29м — Фрикадельки из говядины — 80 g / 153 kcal;
+- 54-2м — Гуляш из говядины — 80 g / 185.6 kcal;
+- 54-1р — Котлета рыбная (треска) — 100 g / 112.6 kcal.
+
+These are shortlist evidence, not publication authority.
+
 ## Next step
 
-Complete the R1-G evidence research and candidate ranking.
+Resolve the R1-G remaining decision/evidence boundary:
+
+1. pin the exact 364 III+margarine prepared receipt + culinary-fat identity route;
+2. determine whether a bounded per-recipe School2022 household-applicability review
+   is authorized/adequately evidenced for the shortlisted candidates;
+3. freeze only then the exact next runtime batch and projected R1-C capacity.
 
 Do not start the runtime follow-up until this gate is reviewed and merged.
