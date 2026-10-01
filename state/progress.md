@@ -1,5 +1,33 @@
 # Progress
 
+## R1-G research checkpoint — 2026-10-01
+
+Draft PR #121 now contains a substantive evidence gate rather than only a shell.
+
+Verified:
+- exact post-PR119 accepted base;
+- exact durable private corpus archive bytes/hash;
+- exact School2022 source PDF bytes/hash;
+- 467 / 492 salt blockers remain real;
+- 1081 READY_RAW is not prepared-output authority and the discovered 370 kcal row
+  lacks exact selected-variant linkage;
+- 208 prepared row/source basis mismatch would require forbidden scaling;
+- 364 has a strong III output / nutrient-row match but is not yet fully pinned;
+- School2022 exact-kcal MAIN candidates exist, but household applicability remains
+  the accepted first blocker.
+
+Added:
+- `research-status.json`;
+- `school2022-main-shortlist.json`;
+- refined `candidate-dispositions.json`;
+- research findings in the R1-G gate document.
+
+Current runtime batch:
+`EMPTY / NOT YET AUTHORIZED`.
+
+Status:
+`R1_G_EVIDENCE_RESEARCH_ACTIVE`.
+
 ## R1-G evidence gate initialized — 2026-10-01
 
 Accepted base:
