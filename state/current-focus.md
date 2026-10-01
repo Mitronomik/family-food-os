@@ -112,20 +112,42 @@ Publication replay:
 
 ## Verification status
 
-Current exact head:
+Runtime behavior is frozen at:
 
-`9283a647e24c0c8c03b72005eb8255a07590a1b1`.
+`a20d13aacbd5222c696658fdde2cc4a0efbba075`.
 
-Focused `R1-F runtime` workflow:
+Exact runtime-freeze CI:
 
-- focused R1-F tests — SUCCESS;
-- Recipe Nutrition V2 affected tests — SUCCESS;
-- migration/lineage/rebuild/coexistence affected tests — SUCCESS;
-- Planner application boundary affected tests — SUCCESS;
-- Ruff — SUCCESS.
+- R1-F runtime — SUCCESS;
+- Docs verification — SUCCESS;
+- DC1 corpus verification — SUCCESS;
+- R1-D Planner admission — SUCCESS;
+- Russian nutrition methodologies — SUCCESS;
+- Nutrient registry V2 — SUCCESS;
+- Partial nutrition profiles — SUCCESS.
 
-Broad exact-head workflows are still running and must be green before final
-review readiness.
+Both broad workflows completed all backend shards and full launcher regression
+successfully.
+
+The broad failures encountered during implementation were stale migration-chain /
+current-schema expectations that still ended at 0041. They were corrected to keep
+strict exact-order/table-set assertions through 0042. No tests or acceptance
+criteria were weakened.
+
+Runtime acceptance proven on disposable SQLite with historical R1-B baseline:
+
+- `HARD_BOILED_EGG` active + SOURCE_VERIFIED + PREPARED_OUTPUT_V1 +
+  exact-energy-ready at 63 kcal;
+- `BOILED_CHICKEN_MAIN_PRODUCT` active + SOURCE_VERIFIED +
+  PREPARED_OUTPUT_V1 + exact-energy-ready at 167.7 kcal;
+- historical `USSR82_697_BOILED_CHICKEN` remains unchanged/inactive;
+- exact replay is zero-write;
+- deliberate deactivation is not undone by publication replay;
+- FoodIngredient exclusions reject the real breakfast/main candidates;
+- Serving scaling reuses the same Recipe/RecipeVersion identity;
+- publication/activation failure-injection preserves the frozen rollback contract.
+
+PR119 is **READY FOR FINAL REVIEW**. Do not merge without explicit authorization.
 
 ## Hard boundaries
 
@@ -144,8 +166,11 @@ Do not:
 
 ## Next step
 
-Finish broad exact-head verification, resolve any concrete failures, update the PR
-receipt, then stop for final review of PR119.
+Final review PR119.
 
-After PR119 merges, the next bounded operation is expansion of the proven authority
-path toward enough breakfast/main capacity for R1-C; do not start automatically.
+After PR119 is explicitly reviewed and merged, the next bounded operation is
+catalogue-capacity expansion using the proven authority seam, including
+USSR82-467 / 492 / 1081 where exact source authority permits plus enough MAIN
+capacity for R1-C.
+
+Do not start that follow-up automatically.
