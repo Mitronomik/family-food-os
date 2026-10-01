@@ -18,13 +18,17 @@ Delivered in this correction:
 No migration, Planner scoring/role/repetition change, Shopping/UI/Retail/Auth/AI
 scope or historical Recipe rewrite was introduced.
 
-Exact-head verification so far: R1-F runtime SUCCESS (120 tests + Ruff/format),
-Docs SUCCESS, DC1 SUCCESS, R1-D SUCCESS, Russian methodologies SUCCESS, Partial
-nutrition profiles SUCCESS with broad backend + launcher. Nutrient registry V2
-has all focused/backend shards green; final launcher remains in progress.
+Runtime verification at `6f7ea30...`: R1-F runtime SUCCESS (120 tests +
+Ruff/format), Docs SUCCESS, DC1 SUCCESS, R1-D SUCCESS, Russian methodologies
+SUCCESS, Partial nutrition profiles SUCCESS with all backend shards + full
+launcher, Nutrient registry V2 focused + all backend shards SUCCESS. The duplicate
+Nutrient registry launcher was cancelled by the subsequent state-only sync; the
+same `python -m pytest -q launcher/tests` command already passed on the identical
+runtime head via Partial nutrition profiles and is the accepted full-launcher
+receipt.
 
 Status:
-`FINAL_BROAD_VERIFICATION_IN_PROGRESS`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## R1-F runtime review-ready — 2026-10-01
 

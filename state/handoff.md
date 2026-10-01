@@ -16,13 +16,16 @@ Closed review blockers:
   rights, soft/medium egg, category-I chicken, 697/824 + 144 kcal, and
   missing/zero/negative ENERGY_KCAL.
 
-Exact-head verification currently proves R1-F runtime (120 focused tests + Ruff
-check/format), Docs, DC1, R1-D admission, Russian methodologies and Partial
-nutrition profiles including all backend shards + launcher. Nutrient registry V2
-focused/all backend shards are green; its final launcher job is still executing.
+Runtime verification at `6f7ea30...` proves R1-F runtime (120 focused tests +
+Ruff check/format), Docs, DC1, R1-D admission, Russian methodologies, Partial
+nutrition profiles with all backend shards + full launcher, and Nutrient registry
+V2 focused + all backend shards. The Nutrient registry duplicate launcher was
+cancelled only by a later state-only synchronize; its command is identical to the
+full launcher regression that already passed on the same runtime bytes, so it is
+not reported as a PASS and is not a separate runtime gate.
 
-Do not merge until that final required job completes and the verification receipt
-is finalized. Do not start catalogue expansion automatically.
+PR119 is READY FOR FINAL REVIEW. Do not merge autonomously and do not start
+catalogue expansion automatically.
 
 ## R1-F runtime final handoff — 2026-10-01
 

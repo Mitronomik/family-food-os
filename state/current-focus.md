@@ -132,8 +132,12 @@ Proven on this runtime head:
 - Russian nutrition methodologies — SUCCESS;
 - Partial nutrition profiles — SUCCESS, including all backend regression shards
   and launcher regression;
-- Nutrient registry V2 — all focused/backend regression shards SUCCESS; final
-  launcher regression is still executing.
+- Nutrient registry V2 — focused + all backend regression shards SUCCESS;
+- full launcher regression — SUCCESS on the same exact runtime head via the
+  Partial nutrition profiles workflow. Nutrient registry V2 launched the identical
+  `python -m pytest -q launcher/tests` job, but that duplicate was cancelled only
+  by the later state-only synchronize commit; it is not counted as a PASS and is
+  not a distinct runtime gate.
 
 Review corrections now prove:
 
@@ -146,9 +150,12 @@ Review corrections now prove:
 - wrong output/source/hash/rights, soft/medium egg, category-I chicken,
   697/824 + 144 kcal and missing/zero/negative ENERGY_KCAL are explicitly rejected.
 
-PR119 remains open and must not be merged until the final required broad launcher
-check is complete. Runtime changes after the old `a20d13...` receipt make that
-older receipt historical only.
+Runtime changes after the old `a20d13...` receipt make that older receipt
+historical only. The runtime acceptance receipt is now complete at `6f7ea30...`.
+
+PR119 is **READY FOR FINAL REVIEW**. Do not merge without explicit authorization.
+Later state-only commits do not invalidate the byte-identical runtime receipt and
+do not require another full broad regression.
 
 ## Hard boundaries
 
