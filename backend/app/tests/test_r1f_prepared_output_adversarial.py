@@ -190,7 +190,7 @@ def _reviewed_specs():
 @pytest.mark.parametrize(
     ("field", "value"),
     (
-        ("output_mass_g", Decimal("39")),
+        ("output_mass_g", Decimal(39)),
         ("source_document_sha256", "0" * 64),
         ("rights_review_status", "UNREVIEWED"),
         ("rights_basis", "wrong-rights-basis"),
@@ -215,8 +215,8 @@ def test_prepared_publication_rejects_wrong_source_output_hash_or_rights(
     "amounts",
     (
         (),
-        (("ENERGY_KCAL", Decimal("0")),),
-        (("ENERGY_KCAL", Decimal("-1")),),
+        (("ENERGY_KCAL", Decimal(0)),),
+        (("ENERGY_KCAL", Decimal(-1)),),
     ),
 )
 def test_prepared_publication_rejects_missing_zero_or_negative_energy(
@@ -291,7 +291,7 @@ def test_697_824_144_kcal_cannot_satisfy_chicken_main_authority(database):
         source_name="USSR_VOCATIONAL_ORDER_1986",
         source_recipe_id="697/824",
         source_version="1986",
-        expected_available_amounts=(("ENERGY_KCAL", Decimal("144")),),
+        expected_available_amounts=(("ENERGY_KCAL", Decimal(144)),),
     )
     engine = create_sqlite_engine(database)
     try:

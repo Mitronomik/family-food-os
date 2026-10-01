@@ -205,7 +205,7 @@ def test_r1f_fresh_publication_activates_exact_energy_breakfast_and_main(databas
             assert all(item.availability == "UNKNOWN" for item in unknown)
 
         assert (
-            CanonicalNutrientAmount("SODIUM", Decimal("0")).availability
+            CanonicalNutrientAmount("SODIUM", Decimal(0)).availability
             == "AVAILABLE"
         )
         assert CanonicalNutrientAmount("SODIUM", None).availability == "UNKNOWN"
