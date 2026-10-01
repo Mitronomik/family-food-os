@@ -4,6 +4,8 @@ Accepted base: `879d68087845dea09454089e822f5d8d8238d12d` (merged PR #119).
 
 Status: **ACTIVE / NOT REVIEW-READY**.
 
+Current checkpoint: no additional runtime target is authorized yet; all promising candidates still have at least one explicit evidence/application blocker.
+
 This package records only evidence-backed candidate dispositions for issue #120.
 It does not publish or activate Recipes and does not grant prepared-output
 authority by itself.
@@ -19,7 +21,9 @@ before any new exact receipt is promoted into the final gate.
 
 Files:
 
-- `candidate-dispositions.json` — current candidate state and research ownership.
+- `candidate-dispositions.json` — current candidate state and research ownership;
+- `research-status.json` — verified archive/source and blocker findings;
+- `school2022-main-shortlist.json` — exact-card MAIN shortlist, not publication authority.
 
 Planned additions before review-ready:
 
