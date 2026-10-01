@@ -96,7 +96,7 @@ def activate_prepared_recipe(
             "Planner admission has blockers beyond the reversible INACTIVE flag."
         )
 
-    activated = catalogue.activate(recipe.id)
+    activated = catalogue._activate_after_policy_check(recipe.id)
     post = next(
         (
             row
