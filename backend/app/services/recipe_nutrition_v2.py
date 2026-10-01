@@ -122,6 +122,7 @@ class ReviewedPreparedRecipeNutritionSpec:
     rights_basis: str
     review_reference: str
     expected_available_amounts: tuple[tuple[str, Decimal], ...]
+    expected_unknown_codes: tuple[str, ...]
     require_recipe_inactive: bool = True
 
 
@@ -829,17 +830,33 @@ class RecipeNutritionV2Service:
             or spec.output_mass_g <= 0
         ):
             raise RecipeNutritionV2ContractError("Prepared output mass invalid.")
+        available_codes = tuple(
+            code for code, _amount in spec.expected_available_amounts
+        )
+        if len(available_codes) != len(set(available_codes)) or not available_codes:
+            raise RecipeNutritionV2ContractError(
+                "Prepared AVAILABLE nutrient set invalid."
+            )
+        if len(spec.expected_unknown_codes) != len(set(spec.expected_unknown_codes)):
+            raise RecipeNutritionV2ContractError(
+                "Prepared UNKNOWN nutrient code repeats."
+            )
+        available_set = set(available_codes)
+        unknown_set = set(spec.expected_unknown_codes)
+        if available_set & unknown_set:
+            raise RecipeNutritionV2ContractError(
+                "Prepared nutrient cannot be both AVAILABLE and UNKNOWN."
+            )
+        if available_set | unknown_set != set(NUTRIENT_CODES):
+            raise RecipeNutritionV2ContractError(
+                "Prepared reviewed truth must cover the frozen 54-code nutrient set."
+            )
+
         amounts = dict(spec.expected_available_amounts)
-        if len(amounts) != len(spec.expected_available_amounts) or not amounts:
-            raise RecipeNutritionV2ContractError("Prepared nutrient set invalid.")
         energy = amounts.get("ENERGY_KCAL")
         if not isinstance(energy, Decimal) or not energy.is_finite() or energy <= 0:
             raise RecipeNutritionV2ContractError(
                 "Prepared ENERGY_KCAL must be positive."
-            )
-        if any(code not in NUTRIENT_CODES for code in amounts):
-            raise RecipeNutritionV2ContractError(
-                "Prepared nutrient code is not frozen."
             )
         if any(
             not isinstance(value, Decimal) or not value.is_finite() or value < 0
