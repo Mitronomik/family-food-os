@@ -32,7 +32,9 @@
         "EXACT_FOOD_IDENTITY_FORM_REVIEW",
         "RECIPE_PUBLICATION_REQUIRED"
       ],
-      "reason_for_rank": "Fewest source ingredients among strong standalone-main candidates; exact output and source-published kcal are on the same card."
+      "reason_for_rank": "Fewest source ingredients among strong standalone-main candidates; exact output and source-published kcal are on the same card.",
+      "household_applicability": "REVIEWED_PASS",
+      "final_disposition": "RUNTIME_BATCH_SELECTED"
     },
     {
       "rank": 2,
@@ -63,7 +65,9 @@
         "EXACT_FOOD_IDENTITY_FORM_REVIEW",
         "RECIPE_PUBLICATION_REQUIRED"
       ],
-      "reason_for_rank": "Exact source card contains output and prepared kcal; ordinary household dish is strongly externally corroborated, but accepted project truth still requires an explicit per-recipe household applicability review."
+      "reason_for_rank": "Exact source card contains output and prepared kcal; ordinary household dish is strongly externally corroborated, but accepted project truth still requires an explicit per-recipe household applicability review.",
+      "household_applicability": "REVIEWED_PASS",
+      "final_disposition": "RUNTIME_BATCH_SELECTED"
     },
     {
       "rank": 3,
@@ -93,12 +97,16 @@
         "EXACT_FOOD_IDENTITY_FORM_REVIEW",
         "RECIPE_PUBLICATION_REQUIRED"
       ],
-      "reason_for_rank": "Adds fish diversity and has exact source output/kcal, but has more process-route alternatives and exact fish-form review than the two beef candidates."
+      "reason_for_rank": "Adds fish diversity and has exact source output/kcal, but has more process-route alternatives and exact fish-form review than the two beef candidates.",
+      "household_applicability": "REVIEWED_PASS",
+      "final_disposition": "FOLLOW_UP_AFTER_FIRST_BATCH"
     }
   ],
   "common_process_boundary": {
     "retained_r1e_status": "HOUSEHOLD_APPLICABILITY",
     "process_evidence_examples": "institutional_school_catering_only / domestic_applicability=unestablished / not_executable_rule=true",
-    "rule": "Exact ingredient/output/nutrition evidence is not enough for household Planner activation. Institutional thawing/holding/serving rules must not be promoted to consumer steps without a reviewed applicability decision."
+    "rule": "Exact ingredient/output/nutrition evidence is not enough for household Planner activation. Institutional thawing/holding/serving rules must not be promoted to consumer steps without a reviewed applicability decision.",
+    "review_result": "CLOSED_FOR_THREE_NAMED_CARDS_ONLY",
+    "blanket_school2022_authority": false
   }
 }
