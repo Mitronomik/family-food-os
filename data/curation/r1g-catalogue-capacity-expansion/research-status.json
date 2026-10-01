@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "operation": "R1G_CATALOGUE_CAPACITY_EXPANSION_RESEARCH_STATUS",
+  "accepted_base": "879d68087845dea09454089e822f5d8d8238d12d",
+  "source_archive": {
+    "locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "size_bytes": 206692075,
+    "sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "independently_verified_in_r1g": true
+  },
+  "dispositions": {
+    "USSR82-467": {
+      "status": "BLOCKED_REQUIRED_QUANTITY_UNRESOLVED",
+      "blocker": "UNQUANTIFIED_PROCESS_INGREDIENT_SALT",
+      "exact_salt_quantity_proven": false,
+      "inference_forbidden": true
+    },
+    "USSR82-492": {
+      "status": "BLOCKED_REQUIRED_QUANTITY_UNRESOLVED",
+      "blocker": "UNQUANTIFIED_PROCESS_INGREDIENT_SALT",
+      "exact_salt_quantity_proven": false,
+      "inference_forbidden": true
+    },
+    "USSR82-1081": {
+      "status": "BLOCKED_PREPARED_ENERGY_VARIANT_LINKAGE_UNPROVEN",
+      "selected_variant": "III — с маслом",
+      "selected_output_g": "160",
+      "retained_ready_raw_is_authority": false,
+      "external_prepared_energy_candidate": {
+        "recipe_number": 1081,
+        "output_text": "150/10",
+        "energy_kcal": "370",
+        "source_kind": "1986 normative menu table",
+        "authority_status": "NOT_PINNED_NOT_VARIANT_LINKED",
+        "note": "Recipe/output match is insufficient because 1081 has materially different I/II/III ingredient columns. The selected R1-B III branch cannot consume this value until exact column/variant linkage is proven."
+      }
+    },
+    "USSR82-364": {
+      "status": "PROMISING_MAIN_NOT_RUNTIME_READY",
+      "planner_role": "main",
+      "retained_selected_variant": "III — с маслом",
+      "mode_independent_blocker": "FOOD_IDENTITY_OR_FORM: Жир кулинарный",
+      "prepared_energy_candidate": {
+        "source_variant_candidate": "III — serving-fat margarine branch",
+        "output_text": "150/5",
+        "energy_kcal": "252",
+        "linkage_status": "STRONG_OUTPUT_MATCH_REQUIRES_DURABLE_BRANCH_RECEIPT",
+        "note": "1982 III output is 150 g fried schnitzel + 5 g margarine/butter. 1986 nutrient row is 150/5 and labels margarine. Do not apply 252 kcal to the previously selected butter branch without pinning the exact margarine alternative."
+      }
+    },
+    "USSR82-208": {
+      "status": "BLOCKED_FOR_PREPARED_OUTPUT_V1",
+      "planner_role": "main",
+      "selected_grain": "rice",
+      "source_recipe_output_g": "1000",
+      "prepared_energy_candidate": {
+        "output_g": "250",
+        "energy_kcal": "139"
+      },
+      "blocker": "SOURCE_BASIS_MISMATCH_REQUIRES_SCALING",
+      "note": "R1-F V1 does not authorize scaling a 250 g prepared nutrient row to a 1000 g source RecipeVersion or scaling exact source ingredient rows down to 250 g."
+    }
+  },
+  "school2022": {
+    "retained_source_card_count": 265,
+    "r1e_household_applicability_blocked_count": 264,
+    "source_pdf": {
+      "archive_path": "corpus-work/packages/school2022/raw/source.pdf",
+      "size_bytes": 4102547,
+      "sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d"
+    },
+    "conclusion": "Exact card-level prepared kcal exists for many material-ready candidates, but current accepted R1-E truth stops unpublished School2022 recipes at HOUSEHOLD_APPLICABILITY. No School2022 runtime target is authorized until recipe-level applicability is reviewed."
+  },
+  "current_runtime_batch": [],
+  "next_decision": "Choose whether R1-G may establish a bounded per-recipe HOUSEHOLD_APPLICABILITY review for selected School2022 candidates; otherwise continue only with candidates already household-applicable under accepted USSR82 evidence."
+}
