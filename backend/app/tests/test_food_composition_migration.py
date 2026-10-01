@@ -42,7 +42,7 @@ def test_fresh_schema_foreign_keys_lineage_and_backup_inventory(tmp_path):
 
     config = DatabaseConfig(path=tmp_path / "fresh.sqlite")
     assert migrations.apply_migrations(config) == migrations.expected_migration_ids()
-    assert migrations.expected_migration_ids()[-12:] == [
+    assert migrations.expected_migration_ids()[-13:] == [
         MIGRATION.MIGRATION_ID,
         SOURCE_CORPUS_MIGRATION_ID,
         MEAL_PATTERN_MIGRATION_ID,
@@ -55,6 +55,7 @@ def test_fresh_schema_foreign_keys_lineage_and_backup_inventory(tmp_path):
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
+        "0042_recipe_prepared_output_nutrition",
     ]
     with sqlite3.connect(config.path) as db:
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
