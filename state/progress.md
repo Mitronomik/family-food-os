@@ -1,5 +1,33 @@
 # Progress
 
+## R1-G gate frozen — 2026-10-01
+
+The docs/data evidence gate now has an exact next runtime batch.
+
+Frozen batch:
+- School2022 54-29м / beef meatballs / 80 g / 153 kcal;
+- School2022 54-2м / beef goulash / 80 g / 185.6 kcal.
+
+Completed:
+- durable corpus/archive/PDF hash verification;
+- USSR82 467/492/1081/208 fail-closed dispositions;
+- MAIN cross-corpus ranking;
+- user-approved bounded household-applicability review for 54-29м / 54-2м / 54-1р;
+- exact identity-only FoodIngredient decisions;
+- exact source-card/variant/energy record hash verification;
+- frozen PREPARED_OUTPUT_V1 receipt for the two selected mains;
+- projected Planner capacity.
+
+Projected after runtime:
+- breakfast exact-energy active = 1;
+- main exact-energy active = 3;
+- MAIN opportunity capacity under repetition=3 = 9/week.
+
+No runtime, migration, schema or Planner algorithm changes are present in #121.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
 ## R1-G research checkpoint — 2026-10-01
 
 Draft PR #121 now contains a substantive evidence gate rather than only a shell.
