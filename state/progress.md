@@ -1,5 +1,31 @@
 # Progress
 
+## R1-G evidence gate initialized — 2026-10-01
+
+Accepted base:
+`879d68087845dea09454089e822f5d8d8238d12d` (merged PR #119).
+
+Created:
+
+- issue #120;
+- branch `docs/r1g-catalogue-capacity-expansion-gate`;
+- canonical gate draft
+  `docs/family-food/r1g-catalogue-capacity-expansion-gate.md`;
+- initial evidence package
+  `data/curation/r1g-catalogue-capacity-expansion/`.
+
+Initial deterministic dispositions:
+
+- 1081 → `PREPARED_OUTPUT_RECEIPT_RESEARCH_REQUIRED`;
+- 467 → `SALT_QUANTITY_RESEARCH_REQUIRED`;
+- 492 → `SALT_QUANTITY_RESEARCH_REQUIRED`;
+- MAIN batch → `CROSS_CORPUS_MAIN_SHORTLIST_RESEARCH_REQUIRED`.
+
+No runtime/schema changes have started.
+
+Status:
+`R1_G_EVIDENCE_RESEARCH_ACTIVE`.
+
 ## R1-F ordinary Planner boundary acceptance — 2026-10-01
 
 Closed the last independent-review blocker with a test-only change.
