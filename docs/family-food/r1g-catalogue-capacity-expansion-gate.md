@@ -1,6 +1,6 @@
 # R1-G — Catalogue-capacity expansion evidence and contract gate
 
-**Status:** ACTIVE — docs/data evidence only
+**Status:** READY FOR FINAL REVIEW — docs/data evidence only
 **Issue:** #120
 **Accepted base:** `879d68087845dea09454089e822f5d8d8238d12d` (merged PR #119)
 **Runtime authority seam:** `PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`
@@ -312,6 +312,174 @@ until at least one candidate simultaneously closes:
 - household applicability;
 - exact prepared-output Nutrition authority;
 - role suitability and ordinary Planner prerequisites.
+
+## 9.5 DECISION — bounded School2022 household applicability review
+
+The user explicitly approved a bounded per-recipe household-applicability review
+for the selected School2022 shortlist. This decision does **not** grant blanket
+School2022 authority.
+
+The review is frozen in:
+
+`data/curation/r1g-catalogue-capacity-expansion/school2022-household-applicability-review.json`.
+
+Reviewed candidates:
+
+- `54-29м — Фрикадельки из говядины` → `HOUSEHOLD_APPLICABLE`;
+- `54-2м — Гуляш из говядины` → `HOUSEHOLD_APPLICABLE`;
+- `54-1р — Котлета рыбная (треска)` → `HOUSEHOLD_APPLICABLE`.
+
+The review separates recipe-defining material/cooking facts from institutional
+logistics.
+
+Institutional-only facts remain source context and are not promoted to consumer
+RecipeSteps, including:
+
+- defroster / meat-shop production-table thawing instructions;
+- institutional holding/serving-temperature rules;
+- paraconvection-equipment references where a household oven path exists.
+
+Independent household corroboration is used only to prove that the core cooking
+method is ordinary household cooking. It is **not** Nutrition, quantity, yield or
+Recipe source authority.
+
+### 9.5.1 Household review rule
+
+A School2022 card passes only when all are true:
+
+1. the dish is non-clinical ordinary food;
+2. core preparation can be executed with ordinary household equipment;
+3. institutional logistics can be quarantined without changing exact ingredient,
+   output or prepared-Nutrition source truth;
+4. independent household evidence corroborates the same core cooking method;
+5. no nutrient/yield/retention/quantity inference is introduced.
+
+This review applies only to the three named cards.
+
+## 9.6 DECISION — exact FoodIngredient identity path
+
+The exact identity/form decisions for the selected School2022 mains are frozen in:
+
+`data/curation/r1g-catalogue-capacity-expansion/school2022-main-authority-review.json`.
+
+The future runtime PR may create these **identity-only** FoodIngredients:
+
+- `BEEF_CATEGORY_1_RAW / Говядина I категории, сырая`;
+- `WHEAT_BREAD_HIGH_GRADE_STALE / Хлеб пшеничный из муки высшего сорта, черствый`;
+- `SALT_IODIZED / Соль поваренная йодированная`;
+- `TOMATO_PUREE_PASTE / Томатное пюре (паста)`.
+
+No raw Nutrition/Composition authority is implied by creating those identities.
+
+The future runtime PR reuses already accepted identities:
+
+- `BUTTER_PEASANT_72_5_UNSALTED`;
+- `WATER`;
+- `ONION_BULB_FRESH`;
+- `FLOUR_WHEAT_HIGH_GRADE`.
+
+This is the same narrow identity-only pattern proven by R1-F for
+`CHICKEN_CATEGORY_2_RAW`.
+
+## 9.7 DECISION — exact prepared-output Nutrition
+
+The pinned School2022 PDF places output mass and prepared energy on the exact
+recipe card.
+
+For the selected runtime batch:
+
+### 54-29м — Фрикадельки из говядины
+
+- exact output: 80 g;
+- exact source ENERGY_KCAL: 153;
+- source card canonical hash:
+  `e03cb002c2f527dc3b20f8527799382c211952ffe2d3b140e206193eab549388`;
+- source variant canonical hash:
+  `8e3ba5f450fd119283818e62ed8ad415dc729fb39ea168d5e81ebfb4496bfd0e`;
+- energy reconciliation canonical hash:
+  `ee57c7ad4b80cadf3a14d883cf66219a79251d7b98b0e547e4990e271ec511f8`.
+
+### 54-2м — Гуляш из говядины
+
+- exact output: 80 g;
+- exact source ENERGY_KCAL: 185.6;
+- source card canonical hash:
+  `d48a9461e98d4d2df0056c379722dc9e6ed248dc74ce65a4a118a1165565209d`;
+- source variant canonical hash:
+  `7ffd4745e935e92e142d7dd4cdb11d9878cd0901bc599bed1d439eb452bb9610`;
+- energy reconciliation canonical hash:
+  `5777b15819089a06b00f3a067dee08352fa75ec03a7b25835b06ffb926e16a28`.
+
+The canonical record hash rule was independently reproduced from the accepted
+Step9 lineage contract:
+
+`sha256(UTF-8 json.dumps(record, ensure_ascii=False, sort_keys=True, separators=(',', ':')))`.
+
+Both cards may reuse:
+
+`PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`.
+
+For this batch:
+
+- `ENERGY_KCAL` = AVAILABLE;
+- every other frozen nutrient code = UNKNOWN unless separately reviewed later;
+- the retained reconciliation rows are evidence that the value is source-published
+  prepared output and that retention must not be reapplied;
+- protein/fat/carbohydrate fields are **not** promoted by R1-G.
+
+School2022 rights handling reuses the reviewed Step9 factual normative-recipe
+rights basis with the same pinned source PDF.
+
+## 9.8 DECISION — frozen next runtime batch
+
+Frozen evidence:
+
+`data/curation/r1g-catalogue-capacity-expansion/next-runtime-batch.json`.
+
+The next runtime/data PR is authorized to implement exactly:
+
+1. `SCHOOL2022_54_29M_BEEF_MEATBALLS / Фрикадельки из говядины`;
+2. `SCHOOL2022_54_2M_BEEF_GOULASH / Гуляш из говядины`.
+
+Both must publish inactive first and activate only through the existing guarded
+R1-F prepared activation boundary after ordinary Planner admission.
+
+The runtime PR may publish only the four identity-only FoodIngredients listed in
+§9.6 plus the two Recipe/RecipeVersion/prepared-authority rows required by this
+batch.
+
+The runtime PR must **not** add migration 0043 or another Nutrition authority kind.
+
+`54-1р — Котлета рыбная (треска)` remains the immediate follow-up, not part of
+the first bounded runtime batch.
+
+## 9.9 R1-C capacity impact
+
+Frozen evidence:
+
+`data/curation/r1g-catalogue-capacity-expansion/projected-planner-capacity.json`.
+
+Current active exact-energy MAIN capacity:
+
+- `BOILED_CHICKEN_MAIN_PRODUCT` — 1 RecipeVersion.
+
+Projected after the selected runtime batch:
+
+- chicken main;
+- beef meatballs;
+- beef goulash;
+
+= 3 active exact-energy MAIN RecipeVersions.
+
+With unchanged `max_recipe_repetitions = 3`, those three candidates provide up
+to 9 MAIN opportunities/week. Therefore a seven-opportunity MAIN/dinner-only
+repository-backed R1-C scenario becomes feasible in principle without changing
+Planner repetition rules.
+
+Breakfast capacity remains one active RecipeVersion and remains a separate bounded
+limitation. R1-C may prove one successful persisted week through the MAIN-heavy
+fixture while materially different breakfast/mixed patterns remain explicit
+bounded infeasibility.
 
 ## 10. Required evidence package
 
