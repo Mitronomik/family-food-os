@@ -30,6 +30,7 @@ from app.domain.recipe_nutrition_v2 import (
     REGISTRY_VERSION,
     RESULT_QUANTUM,
     CanonicalNutrientAmount,
+    CanonicalPreparedRecipeVersionNutrition,
     CanonicalRecipeVersionNutrition,
     PreparedRecipeNutrientValue,
     PreparedRecipeNutritionAuthority,
@@ -108,6 +109,7 @@ class PreparedPublicationDisposition(StrEnum):
 
 @dataclass(frozen=True)
 class ReviewedPreparedRecipeNutritionSpec:
+    trusted_recipe_seed: TrustedRecipeSeed
     recipe_code: str
     source_name: str
     source_recipe_id: str
@@ -182,6 +184,52 @@ def project_recipe_nutrition_consumption(
         registry_version=canonical.registry_version,
         nutrient_set_version=canonical.nutrient_set_version,
         composition_calculation_version=canonical.composition_calculation_version,
+        recipe_calculation_version=canonical.recipe_calculation_version,
+    )
+
+
+def project_prepared_recipe_nutrition_consumption(
+    canonical: CanonicalPreparedRecipeVersionNutrition,
+) -> RecipeNutritionConsumptionProjection:
+    total = _values(canonical.required_total)
+    per_serving = _values(canonical.per_base_serving)
+
+    def legacy(source: dict[str, Decimal | None]) -> NutritionValues:
+        return NutritionValues(
+            kcal=source["ENERGY_KCAL"],
+            protein_g=source["PROTEIN"],
+            fat_g=source["FAT_TOTAL"],
+            carbohydrates_g=source["CARBOHYDRATE_BY_DIFFERENCE"],
+            fiber_g=source["FIBER_TOTAL_DIETARY"],
+        )
+
+    required = legacy(total)
+    serving = legacy(per_serving)
+    legacy_fields = (
+        required.kcal,
+        required.protein_g,
+        required.fat_g,
+        required.carbohydrates_g,
+        required.fiber_g,
+    )
+    legacy_status = (
+        NutritionStatus.INCOMPLETE
+        if any(value is None for value in legacy_fields)
+        else NutritionStatus.COMPLETE
+    )
+    energy = serving.kcal
+    energy_ready = isinstance(energy, Decimal) and energy.is_finite() and energy > 0
+    return RecipeNutritionConsumptionProjection(
+        recipe_version_id=canonical.recipe_version_id,
+        required_total=required,
+        per_base_serving=serving,
+        legacy_status=legacy_status,
+        authority_kind=RecipeNutritionAuthorityKind.PREPARED_OUTPUT_V1,
+        canonical_status=canonical.status,
+        exact_energy_ready=energy_ready,
+        registry_version=canonical.registry_version,
+        nutrient_set_version=canonical.nutrient_set_version,
+        composition_calculation_version=None,
         recipe_calculation_version=canonical.recipe_calculation_version,
     )
 
@@ -315,28 +363,8 @@ class RecipeNutritionV2Service:
         uow: RecipeNutritionV2UnitOfWork,
         spec: ReviewedPreparedRecipeNutritionSpec,
     ) -> PreparedPublicationResult:
-        if (
-            not isinstance(spec.output_mass_g, Decimal)
-            or not spec.output_mass_g.is_finite()
-            or spec.output_mass_g <= 0
-        ):
-            raise RecipeNutritionV2ContractError("Prepared output mass invalid.")
+        self._validate_prepared_spec(spec)
         amounts = dict(spec.expected_available_amounts)
-        if len(amounts) != len(spec.expected_available_amounts) or not amounts:
-            raise RecipeNutritionV2ContractError("Prepared nutrient set invalid.")
-        if "ENERGY_KCAL" not in amounts or amounts["ENERGY_KCAL"] <= 0:
-            raise RecipeNutritionV2ContractError(
-                "Prepared ENERGY_KCAL must be positive."
-            )
-        if any(code not in NUTRIENT_CODES for code in amounts):
-            raise RecipeNutritionV2ContractError(
-                "Prepared nutrient code is not frozen."
-            )
-        if any(
-            not isinstance(value, Decimal) or not value.is_finite() or value < 0
-            for value in amounts.values()
-        ):
-            raise RecipeNutritionV2ContractError("Prepared nutrient amount invalid.")
 
         recipe = uow.recipes.get_by_code(spec.recipe_code)
         if recipe is None:
@@ -350,6 +378,10 @@ class RecipeNutritionV2Service:
             )
         detail = candidates[0]
         version = detail.version
+        if not trusted_recipe_seed_matches(uow, detail, spec.trusted_recipe_seed):
+            raise RecipeNutritionV2ConflictError(
+                "Prepared RecipeVersion structure/process differs from reviewed seed."
+            )
         if (
             version.verification_status.value != "SOURCE_VERIFIED"
             or version.source_document_sha256 != spec.source_document_sha256
@@ -514,7 +546,9 @@ class RecipeNutritionV2Service:
                     raise RecipeNutritionV2UnavailableError(
                         "Prepared output и Composition authority конфликтуют."
                     )
-                return self._project_prepared(scope, detail, prepared)
+                return project_prepared_recipe_nutrition_consumption(
+                    self._calculate_prepared(scope, detail, prepared)
+                )
             if bound_count == 0:
                 legacy_path = True
             elif bound_count != len(required_rows):
@@ -536,11 +570,19 @@ class RecipeNutritionV2Service:
             )
         raise AssertionError("Nutrition authority classification is incomplete.")
 
-    def prepared_consumption_projection_in_scope(
+    def prepared_canonical_nutrition(
+        self, recipe_version_id: UUID
+    ) -> CanonicalPreparedRecipeVersionNutrition:
+        with self._read_scope_factory() as scope:
+            return self.prepared_canonical_nutrition_in_scope(
+                scope, recipe_version_id
+            )
+
+    def prepared_canonical_nutrition_in_scope(
         self,
         scope: RecipeNutritionV2ReadScope,
         recipe_version_id: UUID,
-    ) -> RecipeNutritionConsumptionProjection:
+    ) -> CanonicalPreparedRecipeVersionNutrition:
         detail = scope.versions.get_detail(recipe_version_id)
         if detail is None:
             raise RecipeNutritionV2UnavailableError("RecipeVersion не найден.")
@@ -554,14 +596,24 @@ class RecipeNutritionV2Service:
             raise RecipeNutritionV2UnavailableError(
                 "Prepared Recipe Nutrition authority отсутствует."
             )
-        return self._project_prepared(scope, detail, prepared)
+        return self._calculate_prepared(scope, detail, prepared)
+
+    def prepared_consumption_projection_in_scope(
+        self,
+        scope: RecipeNutritionV2ReadScope,
+        recipe_version_id: UUID,
+    ) -> RecipeNutritionConsumptionProjection:
+        canonical = self.prepared_canonical_nutrition_in_scope(
+            scope, recipe_version_id
+        )
+        return project_prepared_recipe_nutrition_consumption(canonical)
 
     @staticmethod
-    def _project_prepared(
+    def _calculate_prepared(
         scope,
         detail,
         prepared: PreparedRecipeNutritionAuthority,
-    ) -> RecipeNutritionConsumptionProjection:
+    ) -> CanonicalPreparedRecipeVersionNutrition:
         values = scope.prepared.list_values(detail.version.id)
         if len(values) != prepared.value_count:
             raise RecipeNutritionV2UnavailableError(
@@ -583,66 +635,42 @@ class RecipeNutritionV2Service:
         energy = by_code.get("ENERGY_KCAL")
         if energy is None or not energy.is_finite() or energy <= 0:
             raise RecipeNutritionV2UnavailableError("Prepared ENERGY_KCAL unavailable.")
-        total = NutritionValues(
-            kcal=energy,
-            protein_g=by_code.get("PROTEIN"),
-            fat_g=by_code.get("FAT_TOTAL"),
-            carbohydrates_g=by_code.get("CARBOHYDRATE_BY_DIFFERENCE"),
-            fiber_g=by_code.get("FIBER_TOTAL_DIETARY"),
+        if detail.version.base_servings <= 0:
+            raise RecipeNutritionV2UnavailableError(
+                "Prepared RecipeVersion base_servings должен быть положительным."
+            )
+
+        required_total = tuple(
+            CanonicalNutrientAmount(code, by_code.get(code))
+            for code in NUTRIENT_CODES
         )
-        serving = NutritionValues(
-            kcal=_round(energy / detail.version.base_servings),
-            protein_g=_round(
-                None
-                if total.protein_g is None
-                else total.protein_g / detail.version.base_servings
-            ),
-            fat_g=_round(
-                None
-                if total.fat_g is None
-                else total.fat_g / detail.version.base_servings
-            ),
-            carbohydrates_g=_round(
-                None
-                if total.carbohydrates_g is None
-                else total.carbohydrates_g / detail.version.base_servings
-            ),
-            fiber_g=_round(
-                None
-                if total.fiber_g is None
-                else total.fiber_g / detail.version.base_servings
-            ),
+        per_base_serving = tuple(
+            CanonicalNutrientAmount(
+                code,
+                _round(
+                    None
+                    if by_code.get(code) is None
+                    else by_code[code] / detail.version.base_servings
+                ),
+            )
+            for code in NUTRIENT_CODES
         )
-        canonical_status = (
+        available = sum(item.amount is not None for item in required_total)
+        status = (
             RecipeNutritionV2Status.COMPLETE
-            if len(values) == len(NUTRIENT_CODES)
+            if available == len(NUTRIENT_CODES)
+            else RecipeNutritionV2Status.INCOMPLETE
+            if available == 0
             else RecipeNutritionV2Status.PARTIAL
         )
-        return RecipeNutritionConsumptionProjection(
+        return CanonicalPreparedRecipeVersionNutrition(
             recipe_version_id=detail.version.id,
-            required_total=total,
-            per_base_serving=serving,
-            legacy_status=(
-                NutritionStatus.COMPLETE
-                if all(
-                    value is not None
-                    for value in (
-                        total.kcal,
-                        total.protein_g,
-                        total.fat_g,
-                        total.carbohydrates_g,
-                        total.fiber_g,
-                    )
-                )
-                else NutritionStatus.INCOMPLETE
-            ),
-            authority_kind=RecipeNutritionAuthorityKind.PREPARED_OUTPUT_V1,
-            canonical_status=canonical_status,
-            exact_energy_ready=True,
             registry_version=prepared.registry_version,
             nutrient_set_version=prepared.nutrient_set_version,
-            composition_calculation_version=None,
             recipe_calculation_version=prepared.recipe_calculation_version,
+            required_total=required_total,
+            per_base_serving=per_base_serving,
+            status=status,
         )
 
     def _calculate_detail(self, scope, detail) -> CanonicalRecipeVersionNutrition:
@@ -774,6 +802,57 @@ class RecipeNutritionV2Service:
         self, recipe_version_id: UUID
     ) -> RecipeNutritionConsumptionProjection:
         return project_recipe_nutrition_consumption(self.calculate(recipe_version_id))
+
+    @staticmethod
+    def _validate_prepared_spec(spec: ReviewedPreparedRecipeNutritionSpec) -> None:
+        seed = spec.trusted_recipe_seed
+        seed_rights_status = getattr(
+            seed.version.rights_review_status,
+            "value",
+            seed.version.rights_review_status,
+        )
+        if (
+            seed.canonical_code != spec.recipe_code
+            or seed.initial_is_active is not False
+            or seed.version.source_name != spec.source_name
+            or seed.version.source_recipe_id != spec.source_recipe_id
+            or seed.version.source_version != spec.source_version
+            or seed.version.source_url != spec.source_locator
+            or seed.version.source_document_sha256 != spec.source_document_sha256
+            or seed.version.source_output_g != spec.output_mass_g
+            or seed_rights_status != spec.rights_review_status
+            or (seed.version.rights_basis or "") != spec.rights_basis
+        ):
+            raise RecipeNutritionV2ContractError(
+                "Prepared spec не совпадает с reviewed Recipe/source authority."
+            )
+        if (
+            not isinstance(spec.output_mass_g, Decimal)
+            or not spec.output_mass_g.is_finite()
+            or spec.output_mass_g <= 0
+        ):
+            raise RecipeNutritionV2ContractError("Prepared output mass invalid.")
+        amounts = dict(spec.expected_available_amounts)
+        if len(amounts) != len(spec.expected_available_amounts) or not amounts:
+            raise RecipeNutritionV2ContractError("Prepared nutrient set invalid.")
+        energy = amounts.get("ENERGY_KCAL")
+        if (
+            not isinstance(energy, Decimal)
+            or not energy.is_finite()
+            or energy <= 0
+        ):
+            raise RecipeNutritionV2ContractError(
+                "Prepared ENERGY_KCAL must be positive."
+            )
+        if any(code not in NUTRIENT_CODES for code in amounts):
+            raise RecipeNutritionV2ContractError(
+                "Prepared nutrient code is not frozen."
+            )
+        if any(
+            not isinstance(value, Decimal) or not value.is_finite() or value < 0
+            for value in amounts.values()
+        ):
+            raise RecipeNutritionV2ContractError("Prepared nutrient amount invalid.")
 
     @staticmethod
     def _validate_spec(spec: ReviewedRecipeIngredientBindingSpec) -> None:

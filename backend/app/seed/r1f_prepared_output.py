@@ -30,7 +30,8 @@ from app.services.food_recipes import (
     TrustedRecipeSeedDisposition,
     TrustedRecipeVersionSeed,
 )
-from app.services.planner import PlannerAdmissionBlocker, PlannerService
+from app.services.planner import PlannerService
+from app.services.prepared_recipe_activation import activate_prepared_recipe
 from app.services.recipe_nutrition_v2 import (
     PreparedPublicationDisposition,
     RecipeNutritionV2ConflictError,
@@ -222,6 +223,7 @@ def _prepared_specs(
     chicken_receipt = evidence["source_receipts"]["boiled_chicken_75g"]
     return (
         ReviewedPreparedRecipeNutritionSpec(
+            trusted_recipe_seed=egg,
             recipe_code=egg.canonical_code,
             source_name=egg.version.source_name,
             source_recipe_id=egg.version.source_recipe_id,
@@ -244,6 +246,7 @@ def _prepared_specs(
             ),
         ),
         ReviewedPreparedRecipeNutritionSpec(
+            trusted_recipe_seed=chicken,
             recipe_code=chicken.canonical_code,
             source_name=chicken.version.source_name,
             source_recipe_id=chicken.version.source_recipe_id,
@@ -373,18 +376,19 @@ def seed_r1f_prepared_output(
             None,
             recipe_nutrition=nutrition,  # type: ignore[arg-type]
         )
-        for seed in seeds:
+        for seed, spec in zip(seeds, specs, strict=True):
             admission = next(
                 row
                 for row in planner.compose_candidate_admission()
                 if row.canonical_code == seed.canonical_code
             )
             if seed.canonical_code in fresh_codes:
-                if admission.blockers != (PlannerAdmissionBlocker.INACTIVE,):
-                    raise RecipeNutritionV2ConflictError(
-                        f"R1-F pre-activation admission blocked: {seed.canonical_code} {admission.blockers}."
-                    )
-                catalogue.activate(admission.recipe_id)
+                activate_prepared_recipe(
+                    catalogue=catalogue,
+                    nutrition=nutrition,
+                    planner=planner,
+                    spec=spec,
+                )
                 admission = next(
                     row
                     for row in planner.compose_candidate_admission()

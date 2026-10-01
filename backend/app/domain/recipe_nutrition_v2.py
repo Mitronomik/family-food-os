@@ -312,6 +312,45 @@ class CanonicalRecipeVersionNutrition:
 
 
 @dataclass(frozen=True)
+class CanonicalPreparedRecipeVersionNutrition:
+    recipe_version_id: UUID
+    registry_version: str
+    nutrient_set_version: str
+    recipe_calculation_version: str
+    required_total: tuple[CanonicalNutrientAmount, ...]
+    per_base_serving: tuple[CanonicalNutrientAmount, ...]
+    status: RecipeNutritionV2Status
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.recipe_version_id, UUID):
+            raise TypeError("RecipeVersion id должен быть UUID.")
+        expected_versions = (
+            (self.registry_version, REGISTRY_VERSION),
+            (self.nutrient_set_version, NUTRIENT_SET_VERSION),
+            (
+                self.recipe_calculation_version,
+                PREPARED_RECIPE_CALCULATION_VERSION,
+            ),
+        )
+        if any(actual != frozen for actual, frozen in expected_versions):
+            raise ValueError(
+                "Canonical prepared Recipe Nutrition использует неверную authority version."
+            )
+        for values in (self.required_total, self.per_base_serving):
+            if tuple(item.code for item in values) != NUTRIENT_CODES:
+                raise ValueError(
+                    "Canonical prepared Recipe Nutrition должен содержать ровно 54 кода."
+                )
+        object.__setattr__(self, "status", RecipeNutritionV2Status(self.status))
+
+    def total_amount(self, code: str) -> Decimal | None:
+        return next(item.amount for item in self.required_total if item.code == code)
+
+    def per_serving_amount(self, code: str) -> Decimal | None:
+        return next(item.amount for item in self.per_base_serving if item.code == code)
+
+
+@dataclass(frozen=True)
 class RecipeNutritionConsumptionProjection:
     recipe_version_id: UUID
     required_total: NutritionValues

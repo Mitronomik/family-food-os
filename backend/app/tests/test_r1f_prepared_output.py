@@ -23,7 +23,12 @@ from app.domain.planner import (
     PlannerRequest,
     generate_week,
 )
-from app.domain.recipe_nutrition_v2 import RecipeNutritionAuthorityKind
+from app.domain.recipe_nutrition_v2 import (
+    NUTRIENT_CODES,
+    CanonicalNutrientAmount,
+    RecipeNutritionAuthorityKind,
+    RecipeNutritionV2Status,
+)
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_recipe_composition import (
     create_food_recipe_catalogue_service,
@@ -179,6 +184,31 @@ def test_r1f_fresh_publication_activates_exact_energy_breakfast_and_main(databas
             )
             assert projection.exact_energy_ready is True
             assert projection.legacy_status.value == "INCOMPLETE"
+            canonical = nutrition.prepared_canonical_nutrition(detail.version.id)
+            assert canonical.status is RecipeNutritionV2Status.PARTIAL
+            assert tuple(item.code for item in canonical.required_total) == NUTRIENT_CODES
+            assert (
+                tuple(item.code for item in canonical.per_base_serving)
+                == NUTRIENT_CODES
+            )
+            assert len(canonical.required_total) == 54
+            assert canonical.total_amount("ENERGY_KCAL") == dict(
+                result.exact_energy_kcal
+            )[code]
+            unknown = tuple(
+                item
+                for item in canonical.required_total
+                if item.code != "ENERGY_KCAL"
+            )
+            assert len(unknown) == 53
+            assert all(item.amount is None for item in unknown)
+            assert all(item.availability == "UNKNOWN" for item in unknown)
+
+        assert (
+            CanonicalNutrientAmount("SODIUM", Decimal("0")).availability
+            == "AVAILABLE"
+        )
+        assert CanonicalNutrientAmount("SODIUM", None).availability == "UNKNOWN"
 
         egg_detail = catalogue.get_current_verified(
             catalogue.get_by_code(EGG_RECIPE_CODE).id

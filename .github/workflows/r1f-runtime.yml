@@ -5,6 +5,7 @@ on:
     paths:
       - 'backend/app/domain/recipe_nutrition_v2.py'
       - 'backend/app/services/recipe_nutrition_v2.py'
+      - 'backend/app/services/prepared_recipe_activation.py'
       - 'backend/app/services/recipe_nutrition_v2_contracts.py'
       - 'backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2.py'
       - 'backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2_tables.py'
@@ -55,6 +56,7 @@ jobs:
           python -m ruff check \
             backend/app/domain/recipe_nutrition_v2.py \
             backend/app/services/recipe_nutrition_v2.py \
+            backend/app/services/prepared_recipe_activation.py \
             backend/app/services/recipe_nutrition_v2_contracts.py \
             backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2.py \
             backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2_tables.py \
@@ -68,6 +70,7 @@ jobs:
           python -m ruff format --check \
             backend/app/domain/recipe_nutrition_v2.py \
             backend/app/services/recipe_nutrition_v2.py \
+            backend/app/services/prepared_recipe_activation.py \
             backend/app/services/recipe_nutrition_v2_contracts.py \
             backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2.py \
             backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2_tables.py \
