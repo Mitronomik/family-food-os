@@ -1,5 +1,44 @@
 # Handoff
 
+## R1-G gate review-ready — 2026-10-01
+
+Issue #120 / PR #121 now freeze the next runtime batch after merged PR #119.
+
+Selected runtime Recipes:
+
+- `SCHOOL2022_54_29M_BEEF_MEATBALLS` — School2022 54-29м — 80 g — exact 153 kcal;
+- `SCHOOL2022_54_2M_BEEF_GOULASH` — School2022 54-2м — 80 g — exact 185.6 kcal.
+
+Both passed the user-approved bounded per-recipe household-applicability review.
+Institutional thaw/holding/serving rules remain source context and are not promoted
+to consumer RecipeSteps.
+
+Prepared Nutrition reuses the proven R1-F seam:
+`PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`.
+Only ENERGY_KCAL is promoted; all other unreviewed codes remain UNKNOWN.
+
+Future runtime identity-only publications:
+- BEEF_CATEGORY_1_RAW;
+- WHEAT_BREAD_HIGH_GRADE_STALE;
+- SALT_IODIZED;
+- TOMATO_PUREE_PASTE.
+
+Existing identities reused:
+- BUTTER_PEASANT_72_5_UNSALTED;
+- WATER;
+- ONION_BULB_FRESH;
+- FLOUR_WHEAT_HIGH_GRADE.
+
+Projected MAIN capacity becomes 3 active exact-energy RecipeVersions, supporting
+up to 9 MAIN opportunities/week under the unchanged max repetition 3. This is
+enough for a seven-opportunity MAIN-only R1-C success fixture in principle.
+
+467/492/1081/208 remain blocked exactly as recorded; 364 remains promising but is
+not in the first runtime batch. 54-1р is the immediate School2022 follow-up.
+
+No runtime/schema/Planner change is in PR #121. Do not start the runtime PR until
+#121 is reviewed and merged.
+
 ## R1-G research checkpoint — 2026-10-01
 
 Issue #120 / draft PR #121 are active on
