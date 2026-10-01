@@ -119,11 +119,11 @@ migration or Planner algorithm change.
 
 Current runtime head:
 
-`6f7ea30c23cb8a16fd9863425026399439c371e8`.
+`ac647a9fd0546876db743faf545d64ef2622c595`.
 
 Proven on this runtime head:
 
-- R1-F runtime — SUCCESS; 120 focused tests passed;
+- R1-F runtime — SUCCESS; 122 focused/affected tests passed;
 - Ruff check — SUCCESS;
 - Ruff format check — SUCCESS;
 - Docs verification — SUCCESS;
@@ -132,12 +132,10 @@ Proven on this runtime head:
 - Russian nutrition methodologies — SUCCESS;
 - Partial nutrition profiles — SUCCESS, including all backend regression shards
   and launcher regression;
-- Nutrient registry V2 — focused + all backend regression shards SUCCESS;
-- full launcher regression — SUCCESS on the same exact runtime head via the
-  Partial nutrition profiles workflow. Nutrient registry V2 launched the identical
-  `python -m pytest -q launcher/tests` job, but that duplicate was cancelled only
-  by the later state-only synchronize commit; it is not counted as a PASS and is
-  not a distinct runtime gate.
+- Nutrient registry V2 — SUCCESS, including focused, all backend regression shards
+  and full launcher regression;
+- Partial nutrition profiles — SUCCESS, including focused, all backend regression
+  shards and full launcher regression.
 
 Review corrections now prove:
 
@@ -146,12 +144,15 @@ Review corrections now prove:
 - an explicit numeric zero remains AVAILABLE(0), distinct from UNKNOWN;
 - PARTIAL canonical Nutrition with exact positive ENERGY_KCAL remains ordinary
   Planner-eligible;
-- prepared activation passes only through the guarded authority/admission boundary;
+- reviewed prepared specs explicitly partition all 54 codes into AVAILABLE vs
+  UNKNOWN; an unreviewed nutrient cannot silently move into AVAILABLE;
+- the Recipe catalogue exposes no public unchecked activation command; prepared
+  activation passes only through the guarded authority/admission boundary;
 - wrong output/source/hash/rights, soft/medium egg, category-I chicken,
   697/824 + 144 kcal and missing/zero/negative ENERGY_KCAL are explicitly rejected.
 
 Runtime changes after the old `a20d13...` receipt make that older receipt
-historical only. The runtime acceptance receipt is now complete at `6f7ea30...`.
+historical only. The runtime acceptance receipt is now complete at `ac647a9f...`.
 
 PR119 is **READY FOR FINAL REVIEW**. Do not merge without explicit authorization.
 Later state-only commits do not invalidate the byte-identical runtime receipt and
