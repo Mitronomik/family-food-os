@@ -115,35 +115,54 @@ stop and request a separate Implementation Contract Gate decision.
 - projected R1-C capacity;
 - exact next runtime batch.
 
-## Current research checkpoint
+## Final R1-G decision
 
-No additional Recipe is runtime-authorized yet.
+The next runtime batch is frozen to:
 
-- 467 / 492 remain blocked on exact salt quantity;
-- 1081 has a strong 150/10 / 370 kcal external candidate but exact linkage to
-  the selected III branch is unproven;
-- 208 would require forbidden prepared-value/source-row scaling under R1-F V1;
-- 364 is the strongest retained USSR82 MAIN candidate: III output 150/5 aligns
-  with a 252 kcal normative row, but exact III+margarine branch receipt and
-  `Жир кулинарный` identity/form truth remain to close;
-- School2022 has exact same-card output+kcal candidates, but accepted R1-E truth
-  stops unpublished cards at `HOUSEHOLD_APPLICABILITY`.
+1. `SCHOOL2022_54_29M_BEEF_MEATBALLS / Фрикадельки из говядины`;
+2. `SCHOOL2022_54_2M_BEEF_GOULASH / Гуляш из говядины`.
 
-Leading School2022 MAIN shortlist:
+Both are reviewed as household-applicable on a bounded per-recipe basis.
 
-- 54-29м — Фрикадельки из говядины — 80 g / 153 kcal;
-- 54-2м — Гуляш из говядины — 80 g / 185.6 kcal;
-- 54-1р — Котлета рыбная (треска) — 100 g / 112.6 kcal.
+Prepared authority:
 
-These are shortlist evidence, not publication authority.
+- 54-29м — 80 g / exact 153 kcal;
+- 54-2м — 80 g / exact 185.6 kcal;
+- `PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`;
+- ENERGY_KCAL AVAILABLE;
+- all other unreviewed frozen codes UNKNOWN.
+
+Future runtime may create identity-only:
+
+- `BEEF_CATEGORY_1_RAW`;
+- `WHEAT_BREAD_HIGH_GRADE_STALE`;
+- `SALT_IODIZED`;
+- `TOMATO_PUREE_PASTE`.
+
+It reuses existing butter/water/onion/flour identities.
+
+USSR82 dispositions remain fail-closed:
+
+- 467 / 492 blocked on exact salt quantity;
+- 1081 blocked on exact prepared-energy variant linkage;
+- 208 blocked for R1-F V1 due source/prepared basis mismatch requiring scaling;
+- 364 remains promising but not selected.
+
+Projected MAIN capacity after the runtime batch:
+
+3 active exact-energy MAIN RecipeVersions × max 3 repetitions = capacity for up
+to 9 MAIN opportunities/week, sufficient for a seven-opportunity MAIN-only R1-C
+fixture without changing Planner rules.
+
+`54-1р — Котлета рыбная (треска)` is the immediate follow-up after the first
+batch, not part of it.
 
 ## Next step
 
-Resolve the R1-G remaining decision/evidence boundary:
+Final review PR #121.
 
-1. pin the exact 364 III+margarine prepared receipt + culinary-fat identity route;
-2. determine whether a bounded per-recipe School2022 household-applicability review
-   is authorized/adequately evidenced for the shortlisted candidates;
-3. freeze only then the exact next runtime batch and projected R1-C capacity.
+After #121 is explicitly reviewed and merged, create one bounded runtime/data PR
+for exactly the two frozen School2022 MAIN Recipes and four identity-only
+FoodIngredients.
 
-Do not start the runtime follow-up until this gate is reviewed and merged.
+Do not start that runtime PR automatically.
