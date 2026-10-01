@@ -86,6 +86,7 @@ def test_populated_0030_database_upgrades_without_rewriting_existing_food_data(
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
+        "0042_recipe_prepared_output_nutrition",
     ]
     assert apply_migrations(config) == []
     with sqlite3.connect(config.path) as connection:
