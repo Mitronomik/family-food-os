@@ -491,8 +491,7 @@ def test_r1f_authoritative_planner_boundary_loads_pilot_candidates_and_exclusion
             ]
             assert excluded_traces
             assert any(
-                PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT
-                in trace.rejection_codes
+                PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT in trace.rejection_codes
                 for trace in excluded_traces
             )
     finally:
