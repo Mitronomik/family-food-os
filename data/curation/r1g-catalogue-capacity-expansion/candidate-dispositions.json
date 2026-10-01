@@ -53,14 +53,17 @@
         "CONSUMED_NUTRITION_AUTHORITY",
         "RECIPE_PUBLICATION_REQUIRED"
       ],
-      "current_gate_disposition": "PREPARED_OUTPUT_RECEIPT_RESEARCH_REQUIRED",
+      "current_gate_disposition": "BLOCKED_PREPARED_ENERGY_VARIANT_LINKAGE_UNPROVEN",
       "exact_prepared_energy_kcal": null,
       "note": "READY_RAW/input-reference nutrition is not prepared-output authority. Existing R1-F seam may bypass the former mode-dependent Composition blocker only if exact prepared source energy is independently proven.",
       "evidence_refs": [
         "data/curation/r1b-reviewed-recipes/publication.json#USSR82-1081",
         "data/curation/r1e-corpus-blockers/blocker-map.jsonl#USSR82-1081",
         "data/curation/data-corpus-v1-dc1/source-relationships-part1.csv#USSR82-1081"
-      ]
+      ],
+      "external_prepared_energy_candidate_kcal": "370",
+      "external_output_text": "150/10",
+      "authority": false
     },
     "USSR82-467": {
       "name": "Омлет (натуральный)",
@@ -91,7 +94,7 @@
         "CONSUMED_NUTRITION_AUTHORITY",
         "RECIPE_PUBLICATION_REQUIRED"
       ],
-      "current_gate_disposition": "SALT_QUANTITY_RESEARCH_REQUIRED",
+      "current_gate_disposition": "BLOCKED_REQUIRED_QUANTITY_UNRESOLVED",
       "forbidden_inference": [
         "pinch/default salt",
         "zero-mass salt",
@@ -101,7 +104,9 @@
         "data/curation/r1b-reviewed-recipes/publication.json#USSR82-467",
         "data/curation/r1e-corpus-blockers/blocker-map.jsonl#USSR82-467",
         "data/curation/data-corpus-v1-dc1/source-relationships-part1.csv#USSR82-467"
-      ]
+      ],
+      "blocker": "UNQUANTIFIED_PROCESS_INGREDIENT_SALT",
+      "exact_salt_quantity_proven": false
     },
     "USSR82-492": {
       "name": "Сырники из творога",
@@ -140,7 +145,7 @@
         "CONSUMED_NUTRITION_AUTHORITY",
         "RECIPE_PUBLICATION_REQUIRED"
       ],
-      "current_gate_disposition": "SALT_QUANTITY_RESEARCH_REQUIRED",
+      "current_gate_disposition": "BLOCKED_REQUIRED_QUANTITY_UNRESOLVED",
       "forbidden_inference": [
         "pinch/default salt",
         "zero-mass salt",
@@ -150,7 +155,9 @@
         "data/curation/r1b-reviewed-recipes/publication.json#USSR82-492",
         "data/curation/r1e-corpus-blockers/blocker-map.jsonl#USSR82-492",
         "data/curation/data-corpus-v1-dc1/source-relationships-part1.csv#USSR82-492"
-      ]
+      ],
+      "blocker": "UNQUANTIFIED_PROCESS_INGREDIENT_SALT",
+      "exact_salt_quantity_proven": false
     }
   },
   "main_capacity": {
@@ -177,12 +184,18 @@
         ]
       }
     ],
-    "current_gate_disposition": "CROSS_CORPUS_MAIN_SHORTLIST_RESEARCH_REQUIRED",
-    "selection": []
+    "current_gate_disposition": "NO_RUNTIME_READY_MAIN_YET",
+    "selection": [],
+    "shortlist_refs": [
+      "data/curation/r1g-catalogue-capacity-expansion/research-status.json",
+      "data/curation/r1g-catalogue-capacity-expansion/school2022-main-shortlist.json"
+    ]
   },
   "r1c_capacity": {
     "planner_default_max_recipe_repetitions": 3,
     "fixed_additional_recipe_count_assumed": false,
     "rule": "derive required role capacity from concrete repository-backed R1-C scenarios and current meal-pattern opportunity schedules"
-  }
+  },
+  "current_runtime_batch": [],
+  "research_checkpoint": "NO_ADDITIONAL_RUNTIME_TARGET_AUTHORIZED_YET"
 }
