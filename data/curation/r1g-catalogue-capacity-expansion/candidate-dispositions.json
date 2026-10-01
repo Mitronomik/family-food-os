@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "operation": "R1G_CATALOGUE_CAPACITY_EXPANSION_GATE",
+  "accepted_base": "879d68087845dea09454089e822f5d8d8238d12d",
+  "issue": 120,
+  "status": "ACTIVE_RESEARCH",
+  "authority_seam": {
+    "authority_kind": "PREPARED_OUTPUT_V1",
+    "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+    "reuse_only_if_exact_prepared_source_authority": true,
+    "raw_to_cooked_fallback": false,
+    "implicit_retention": false,
+    "source_scaling": false
+  },
+  "candidates": {
+    "USSR82-1081": {
+      "name": "Блины",
+      "planner_role": "breakfast",
+      "selected_variant": "III — с маслом",
+      "source_output_g": "160",
+      "quantified_required_ingredients": [
+        {
+          "food_code": "WATER",
+          "quantity_g": "118"
+        },
+        {
+          "food_code": "MARGARINE_MILK_TABLE",
+          "quantity_g": "5"
+        },
+        {
+          "food_code": "BUTTER_UNSALTED",
+          "quantity_g": "10"
+        },
+        {
+          "food_code": "FLOUR_WHEAT_HIGH_GRADE",
+          "quantity_g": "75"
+        },
+        {
+          "food_code": "SUGAR",
+          "quantity_g": "3"
+        },
+        {
+          "food_code": "SALT",
+          "quantity_g": "1.5"
+        },
+        {
+          "food_code": "YEAST_BAKERS_COMPRESSED",
+          "quantity_g": "3"
+        }
+      ],
+      "accepted_prior_blockers": [
+        "COMPOSITION_AUTHORITY",
+        "CONSUMED_NUTRITION_AUTHORITY",
+        "RECIPE_PUBLICATION_REQUIRED"
+      ],
+      "current_gate_disposition": "PREPARED_OUTPUT_RECEIPT_RESEARCH_REQUIRED",
+      "exact_prepared_energy_kcal": null,
+      "note": "READY_RAW/input-reference nutrition is not prepared-output authority. Existing R1-F seam may bypass the former mode-dependent Composition blocker only if exact prepared source energy is independently proven.",
+      "evidence_refs": [
+        "data/curation/r1b-reviewed-recipes/publication.json#USSR82-1081",
+        "data/curation/r1e-corpus-blockers/blocker-map.jsonl#USSR82-1081",
+        "data/curation/data-corpus-v1-dc1/source-relationships-part1.csv#USSR82-1081"
+      ]
+    },
+    "USSR82-467": {
+      "name": "Омлет (натуральный)",
+      "planner_role": "breakfast",
+      "selected_variant": "selected_1982_variant",
+      "source_output_g": "110",
+      "quantified_required_ingredients": [
+        {
+          "food_code": "MARGARINE_MILK_TABLE",
+          "quantity_g": "5"
+        },
+        {
+          "food_code": "BUTTER_UNSALTED",
+          "quantity_g": "5"
+        },
+        {
+          "food_code": "MILK_PASTEURIZED_3_2",
+          "quantity_g": "30"
+        },
+        {
+          "food_code": "EGG",
+          "quantity_g": "80"
+        }
+      ],
+      "missing_required_source_fact": "exact salt quantity",
+      "accepted_prior_blockers": [
+        "REQUIRED_QUANTITY_UNRESOLVED",
+        "CONSUMED_NUTRITION_AUTHORITY",
+        "RECIPE_PUBLICATION_REQUIRED"
+      ],
+      "current_gate_disposition": "SALT_QUANTITY_RESEARCH_REQUIRED",
+      "forbidden_inference": [
+        "pinch/default salt",
+        "zero-mass salt",
+        "omit required salt"
+      ],
+      "evidence_refs": [
+        "data/curation/r1b-reviewed-recipes/publication.json#USSR82-467",
+        "data/curation/r1e-corpus-blockers/blocker-map.jsonl#USSR82-467",
+        "data/curation/data-corpus-v1-dc1/source-relationships-part1.csv#USSR82-467"
+      ]
+    },
+    "USSR82-492": {
+      "name": "Сырники из творога",
+      "planner_role": "breakfast",
+      "selected_variant": "1-й вариант, со сметаной",
+      "source_output_g": "170",
+      "quantified_required_ingredients": [
+        {
+          "food_code": "MARGARINE_MILK_TABLE",
+          "quantity_g": "5"
+        },
+        {
+          "food_code": "FLOUR_WHEAT_HIGH_GRADE",
+          "quantity_g": "20"
+        },
+        {
+          "food_code": "SUGAR",
+          "quantity_g": "15"
+        },
+        {
+          "food_code": "SOUR_CREAM_30",
+          "quantity_g": "20"
+        },
+        {
+          "food_code": "TVOROG_9",
+          "quantity_g": "135"
+        },
+        {
+          "food_code": "EGG",
+          "quantity_g": "5"
+        }
+      ],
+      "missing_required_source_fact": "exact salt quantity",
+      "accepted_prior_blockers": [
+        "REQUIRED_QUANTITY_UNRESOLVED",
+        "CONSUMED_NUTRITION_AUTHORITY",
+        "RECIPE_PUBLICATION_REQUIRED"
+      ],
+      "current_gate_disposition": "SALT_QUANTITY_RESEARCH_REQUIRED",
+      "forbidden_inference": [
+        "pinch/default salt",
+        "zero-mass salt",
+        "omit required salt"
+      ],
+      "evidence_refs": [
+        "data/curation/r1b-reviewed-recipes/publication.json#USSR82-492",
+        "data/curation/r1e-corpus-blockers/blocker-map.jsonl#USSR82-492",
+        "data/curation/data-corpus-v1-dc1/source-relationships-part1.csv#USSR82-492"
+      ]
+    }
+  },
+  "main_capacity": {
+    "current_proven_active_main_recipe": "BOILED_CHICKEN_MAIN_PRODUCT",
+    "accepted_r1e_explicit_main_candidates": [
+      {
+        "source_recipe_id": "USSR82-697",
+        "note": "historical path preserved; capacity supplied by separate source-neutral R1-F main Recipe"
+      },
+      {
+        "source_recipe_id": "USSR82-364",
+        "current_blockers": [
+          "SOURCE_STRUCTURE_OR_VARIANT",
+          "FOOD_IDENTITY_OR_FORM",
+          "RECIPE_PUBLICATION_REQUIRED"
+        ]
+      },
+      {
+        "source_recipe_id": "USSR82-208",
+        "current_blockers": [
+          "SOURCE_STRUCTURE_OR_VARIANT",
+          "FOOD_IDENTITY_OR_FORM",
+          "RECIPE_PUBLICATION_REQUIRED"
+        ]
+      }
+    ],
+    "current_gate_disposition": "CROSS_CORPUS_MAIN_SHORTLIST_RESEARCH_REQUIRED",
+    "selection": []
+  },
+  "r1c_capacity": {
+    "planner_default_max_recipe_repetitions": 3,
+    "fixed_additional_recipe_count_assumed": false,
+    "rule": "derive required role capacity from concrete repository-backed R1-C scenarios and current meal-pattern opportunity schedules"
+  }
+}
