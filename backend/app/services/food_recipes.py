@@ -209,7 +209,9 @@ class FoodRecipeCatalogueService:
     ) -> RecipeVersionDetail:
         return scale_recipe(self.get_version_detail(version_id), target_servings)
 
-    def activate(self, recipe_id: UUID) -> Recipe:
+    def _activate_after_policy_check(self, recipe_id: UUID) -> Recipe:
+        """Internal reversible mutation after an owning activation policy passes."""
+
         now = self._clock()
         with self._write() as scope:
             recipe = scope.recipes.get(recipe_id)
