@@ -96,15 +96,30 @@ Do not:
 
 ## Verification state
 
-Runtime behavior is frozen at `c300118f...`.
+Runtime behavior is frozen at `c300118fd554829ddd9d6429c2abccba8dbb250b`.
 
-The remaining delivery gate is broad backend + launcher verification on the
-byte-identical runtime after this state-only finalization.
+Final exact-head verification on the state-only PR head is complete:
+
+- R1-H runtime — SUCCESS;
+- focused/affected R1-H suite — 135 passed;
+- Ruff check — SUCCESS;
+- Ruff format --check — SUCCESS;
+- Russian nutrition methodologies — SUCCESS;
+- Docs verification — SUCCESS;
+- DC1 corpus verification — SUCCESS;
+- Nutrient registry V2 — focused + backend shards 0/1/2/3 + launcher SUCCESS;
+- Partial nutrition profiles — focused + backend shards 0/1/2/3 + launcher SUCCESS.
+
+The commits after the runtime freeze change only `state/*`; runtime bytes are
+unchanged.
+
+Status:
+
+`READY_FOR_FINAL_REVIEW`.
 
 ## Next step
 
-Complete broad exact-head verification, update PR #123 receipt and stop for
-independent final review.
+Independent final review of PR #123.
 
 After R1-H is explicitly reviewed and merged, reassess R1-C readiness against the
 expanded production catalogue. Do not start R1-C automatically.
