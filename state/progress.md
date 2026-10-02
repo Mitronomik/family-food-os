@@ -1,5 +1,45 @@
 # Progress
 
+## R1-C production Planner proof review-ready — 2026-10-02
+
+Implementation base:
+`5bf5127a238b8bb139903f008ad7c14b9b1309c7` (merged PR #125).
+
+Proof freeze:
+`a36d8c2876daea4b4f3edd7f47af8b49d09b04cd`.
+
+PR #126 proves the production Planner through persisted ordinary boundaries
+without changing application runtime behavior.
+
+Delivered proof:
+
+- active exact-energy pool = 1 BREAKFAST + 3 MAIN;
+- one complete seven-DINNER week generated and persisted;
+- all three MAIN RecipeVersions used under unchanged repetition=3;
+- positive individualized persisted Servings under frozen v0.4 opportunity shares;
+- same semantic week + same trace fingerprint on repeated generation;
+- append-only MealPlan revision history;
+- materially different BREAKFAST+DINNER pattern fails boundedly with no partial
+  MealPlan;
+- hard FoodIngredient exclusion rejects the affected production candidate and
+  persists no partial plan;
+- Planner version `planner-v0.4`;
+- compatibility `meal-role-recipe-v2`;
+- migration head 0042, no 0043;
+- AI disabled;
+- no runtime/schema/authority publication change.
+
+Exact proof-head verification:
+
+- focused/affected suite — 101 passed;
+- Ruff check / format — SUCCESS;
+- scope/whitespace — SUCCESS;
+- Docs verification — SUCCESS;
+- Russian nutrition methodologies — SUCCESS.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
 ## PR #123 merged / R1-C authorized — 2026-10-02
 
 PR #123 / R1-H merged into `main` at:
