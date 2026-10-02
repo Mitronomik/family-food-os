@@ -110,8 +110,8 @@ Final exact-head verification on the state-only PR head is complete:
 - Nutrient registry V2 — focused + backend shards 0/1/2/3 + launcher SUCCESS;
 - Partial nutrition profiles — focused + backend shards 0/1/2/3 + launcher SUCCESS.
 
-The commits after the runtime freeze change only `state/*`; runtime bytes are
-unchanged.
+After the runtime freeze, only `state/*` and test-only acceptance assertions
+changed; production runtime bytes are unchanged.
 
 Status:
 
