@@ -1,29 +1,40 @@
 # Progress
 
-## R2 breakfast capacity implementation started — 2026-10-02
+## R2 breakfast capacity review-ready — 2026-10-02
 
-Accepted main:
+Accepted base:
 `8995e85e4cda2ae30fc62fdc63daaf441f4226bd` (merged PR #126).
 
-Issue #127 selects the first R2 batch by the accepted maximum-marginal-capacity
-rule.
+Issue #127 / PR #128.
 
-Selected:
-- School2022 54-1о / natural omelet / BREAKFAST / 150 g / 225.5 kcal;
-- School2022 54-9к / viscous milk oat porridge / BREAKFAST / 200 g / 272.9 kcal.
+Proof/runtime freeze:
+`1d93631b07a25a260b7d45cc0b91f3437865fd8a`.
 
-New exact identity-only foods:
-- `MILK_2_5`;
-- `OAT_GROATS`.
+Delivered:
 
-The branch reuses PREPARED_OUTPUT_V1 and guarded activation. No migration,
-schema, Planner algorithm or new Nutrition authority is introduced.
+- `SCHOOL2022_54_1O_NATURAL_OMELET` — 150 g / 225.5 kcal;
+- `SCHOOL2022_54_9K_MILK_OAT_PORRIDGE` — 200 g / 272.9 kcal;
+- identity-only `MILK_2_5` and `OAT_GROATS`;
+- PREPARED_OUTPUT_V1 reused without a new authority kind;
+- guarded activation;
+- zero-write exact replay and deliberate-deactivation preservation;
+- source-tamper / partial-state / identity-conflict fail-closed coverage;
+- ordinary active exact-energy BREAKFAST pool 1 → 3;
+- opportunity capacity 3 → 9/week;
+- persisted seven-BREAKFAST production proof under unchanged repetition=3;
+- milk hard exclusion restores bounded infeasibility with no partial MealPlan;
+- no migration/schema/Planner algorithm change.
 
-Projected result:
-BREAKFAST exact-energy active count 1 → 3; opportunity capacity 3 → 9/week.
+Verification on the exact proof/runtime freeze:
+
+- focused/affected R2 suite — 120 passed;
+- Ruff check / format — SUCCESS;
+- scope/whitespace — SUCCESS;
+- AI disabled;
+- migration head remains 0042.
 
 Status:
-`R2_IMPLEMENTATION_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## R1-C production Planner proof review-ready — 2026-10-02
 
