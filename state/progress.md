@@ -1,5 +1,31 @@
 # Progress
 
+## R2-B fish MAIN diversity implementation started — 2026-10-02
+
+Accepted main:
+`1e4a0e137dee87f2aaef7d885481fef17f6e324c` (merged PR #128).
+
+Issue #129 selects two low-authority-surface School2022 fish MAIN cards:
+
+- 54-6р / pink salmon in milk / 80 g / 144.8 kcal;
+- 54-7р / pollock in milk / 80 g / 105.3 kcal.
+
+New identity-only foods:
+`PINK_SALMON_FILLET_RAW`, `POLLOCK_FILLET_RAW`.
+
+The batch reuses the existing prepared-output authority and guarded activation.
+No migration, schema, shared service, Planner algorithm or new Nutrition authority
+is introduced.
+
+Projected MAIN exact-energy active count:
+3 → 5; opportunity capacity 9 → 15/week.
+
+The earlier cod-cutlet follow-up is deferred because its exact retained source
+does not justify the narrower wheat-bread form proposed by an older R1-G note.
+
+Status:
+`R2B_IMPLEMENTATION_ACTIVE`.
+
 ## R2 breakfast capacity review-ready — 2026-10-02
 
 Accepted base:
