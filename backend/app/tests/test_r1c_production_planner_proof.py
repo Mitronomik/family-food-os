@@ -3,7 +3,6 @@ import shutil
 from collections import Counter
 from datetime import date, timedelta
 from decimal import Decimal
-from pathlib import Path
 
 import pytest
 
@@ -155,8 +154,8 @@ def _create_member_with_pattern(
         goal="maintain",
         birth_date=date(1990, 5, 20),
         sex="female",
-        height_cm=Decimal("168"),
-        weight_kg=Decimal("62"),
+        height_cm=Decimal(168),
+        weight_kg=Decimal(62),
     )
     roles = tuple(role for role, _ in roles_and_shares)
     shares = tuple(share for _, share in roles_and_shares)
@@ -252,7 +251,7 @@ def test_r1c_catalogue_metrics_match_durable_receipt(database):
 def test_r1c_persists_complete_week_and_replays_semantically(database):
     engine = create_sqlite_engine(database)
     try:
-        planner, meal_plans, households, recipes, nutrition = _planner(engine)
+        planner, meal_plans, households, _, nutrition = _planner(engine)
         household, member, selection = _create_member_with_pattern(
             households=households,
             meal_plans=meal_plans,
