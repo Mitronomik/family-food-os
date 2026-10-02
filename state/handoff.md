@@ -12,7 +12,7 @@ PR:
 
 Proof freeze:
 
-`a36d8c2876daea4b4f3edd7f47af8b49d09b04cd`.
+`2f643303308f3bb6b95d7161435474109ad91a34`.
 
 R1-C uses the ordinary persisted application boundary end to end:
 
@@ -32,6 +32,9 @@ Proof result:
 - BREAKFAST+DINNER is an explicit bounded infeasible pattern with no partial plan;
 - hard FoodIngredient exclusion rejects the affected candidate and leaves
   unaffected candidates free of that exclusion code;
+- persisted two-member exclusion/sharedness proof keeps six compatible dinner
+  events shared, keeps meatballs available to the unaffected member, and never
+  assigns meatballs to the excluded member;
 - active exact-energy pool remains 1 BREAKFAST + 3 MAIN;
 - migration head remains 0042;
 - no Planner/runtime/schema/new-authority change;
@@ -39,16 +42,20 @@ Proof result:
 
 Verification at the proof freeze:
 
-- R1-C focused/affected — 101 passed;
+- R1-C focused/affected — 102 passed;
 - Ruff check / format — SUCCESS;
-- scope/whitespace — SUCCESS;
-- Docs — SUCCESS;
-- Russian nutrition methodologies — SUCCESS.
+- scope/whitespace — SUCCESS.
 
-The first red attempt exposed an unsupported member activity fixture
-(`moderate`), correctly failing closed at `MISSING_REFERENCE_ENERGY`. The
-fixture was corrected to the already-supported `active` PAL. Subsequent lint
-and formatting findings were task-local only.
+Independent review blocker closure:
+the earlier one-member exclusion proof could not demonstrate preservation of
+other members/sharedness. The corrected two-member persisted scenario proves
+member-local exclusion plus preserved shared execution. No runtime/schema/Planner
+or authority change was needed.
+
+Earlier red attempts were task-local proof-fixture/hygiene issues only:
+the unsupported `moderate` activity correctly failed closed at
+`MISSING_REFERENCE_ENERGY`; the fixture now uses supported `active`, and
+trace assertions use stable `applied_exclusions`/event participation semantics.
 
 PR #126 is READY FOR FINAL REVIEW.
 
