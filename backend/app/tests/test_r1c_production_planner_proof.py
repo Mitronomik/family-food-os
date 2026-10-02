@@ -237,7 +237,9 @@ def test_r1c_catalogue_metrics_match_durable_receipt(database):
     )
     main_rows = {
         row["source_recipe_id"]: row
-        for row in dispositions["main_capacity"]["accepted_r1e_explicit_main_candidates"]
+        for row in dispositions["main_capacity"][
+            "accepted_r1e_explicit_main_candidates"
+        ]
     }
     assert main_rows["USSR82-364"]["current_blockers"]
     assert main_rows["USSR82-208"]["current_blockers"]
@@ -299,9 +301,7 @@ def test_r1c_persists_complete_week_and_replays_semantically(database):
         target = nutrition.member_reference_target(
             household.id, member.id, as_of_date=WEEK_START
         ).reference_energy_kcal
-        expected_dinner_kcal = (target * Decimal("0.25")).quantize(
-            Decimal("0.000001")
-        )
+        expected_dinner_kcal = (target * Decimal("0.25")).quantize(Decimal("0.000001"))
         assert len(first.trace.allocations) == 7
         for allocation in first.trace.allocations:
             assert allocation.energy_share == Decimal("0.250000")
@@ -403,9 +403,7 @@ def test_r1c_hard_food_exclusion_removes_candidate_and_persists_nothing(database
         assert detail is None
 
         versions = {
-            code: recipes.get_current_verified(
-                recipes.get_by_code(code).id
-            ).version.id
+            code: recipes.get_current_verified(recipes.get_by_code(code).id).version.id
             for code in MAIN_CODES
         }
         meatball_traces = [
