@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "operation": "R2B_FISH_MAIN_DIVERSITY_SUMMARY",
+  "accepted_base": "1e4a0e137dee87f2aaef7d885481fef17f6e324c",
+  "issue": 129,
+  "before": {
+    "active_exact_energy_main": 3,
+    "main_capacity_per_week": 9
+  },
+  "proposed_after": {
+    "active_exact_energy_main": 5,
+    "main_capacity_per_week": 15
+  },
+  "selected_recipe_codes": [
+    "SCHOOL2022_54_6R_PINK_SALMON_IN_MILK",
+    "SCHOOL2022_54_7R_POLLOCK_IN_MILK"
+  ],
+  "identity_only_foods": [
+    "PINK_SALMON_FILLET_RAW",
+    "POLLOCK_FILLET_RAW"
+  ],
+  "authority_kind": "PREPARED_OUTPUT_V1",
+  "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+  "migration_required": false,
+  "planner_change_required": false,
+  "new_nutrition_authority_kind_required": false,
+  "deferred_cod_cutlet_reason": "Exact cod-card wheat-bread demand does not support narrowing to WHEAT_BREAD_HIGH_GRADE_STALE.",
+  "follow_up": "After review and merge, reassess next R2/R3 batch. Do not start DC4/Gate1-CLOSE or PR9 automatically."
+}
