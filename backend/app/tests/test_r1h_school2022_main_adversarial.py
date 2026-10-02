@@ -298,6 +298,6 @@ def test_r1h_activation_failure_keeps_exact_publication_inactive(
             (MEATBALLS_RECIPE_CODE, GOULASH_RECIPE_CODE),
         ).fetchall()
     assert rows == [
-        (GOULASH_RECIPE_CODE, 0),
         (MEATBALLS_RECIPE_CODE, 0),
+        (GOULASH_RECIPE_CODE, 0),
     ]
