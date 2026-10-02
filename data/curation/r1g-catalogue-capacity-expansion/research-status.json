@@ -69,13 +69,15 @@
       "size_bytes": 4102547,
       "sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d"
     },
-    "conclusion": "Exact card-level prepared kcal exists for many material-ready candidates, but current accepted R1-E truth stops unpublished School2022 recipes at HOUSEHOLD_APPLICABILITY. No School2022 runtime target is authorized until recipe-level applicability is reviewed.",
     "household_review": "BOUNDED_PER_RECIPE_REVIEW_COMPLETE",
     "selected_runtime_cards": [
       "ru-school2022:recipe:54-29м",
       "ru-school2022:recipe:54-2м"
     ],
-    "follow_up_card": "ru-school2022:recipe:54-1р"
+    "follow_up_card": "ru-school2022:recipe:54-1р",
+    "pre_household_review_conclusion": "Exact card-level prepared kcal exists for many material-ready candidates, but current accepted R1-E truth stops unpublished School2022 recipes at HOUSEHOLD_APPLICABILITY. No School2022 runtime target is authorized until recipe-level applicability is reviewed.",
+    "current_conclusion": "Bounded household applicability is closed for 54-29м / 54-2м / 54-1р. The frozen first runtime batch is 54-29м + 54-2м, with exact identity and prepared publication specs pinned by R1-G.",
+    "prepared_publication_specs_ref": "data/curation/r1g-catalogue-capacity-expansion/prepared-publication-specs.json"
   },
   "current_runtime_batch": [
     "SCHOOL2022_54_29M_BEEF_MEATBALLS",
