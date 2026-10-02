@@ -36,7 +36,7 @@ Production runtime/data base remains:
 
 Proof freeze:
 
-`a36d8c2876daea4b4f3edd7f47af8b49d09b04cd`.
+`2f643303308f3bb6b95d7161435474109ad91a34`.
 
 ## R1-C result
 
@@ -69,6 +69,9 @@ Verified product behavior:
 - hard exclusion of `WHEAT_BREAD_HIGH_GRADE_STALE` rejects the meatball
   candidate through the ordinary authoritative boundary, leaves unrelated MAIN
   candidates unmarked by that exclusion, and persists no partial plan;
+- a persisted two-member scenario proves the same exclusion remains member-local:
+  six unaffected dinner events stay shared, the unaffected member can still
+  receive the meatball candidate, and the excluded member never receives it;
 - `AI_ENABLED=false`;
 - migration head remains 0042; no migration 0043.
 
@@ -78,21 +81,27 @@ Durable receipt:
 
 ## Verification
 
-Exact proof-head verification at `a36d8c2...`:
+Exact corrected proof-head verification at `2f643303...`:
 
-- R1-C focused/affected suite — **101 passed**;
+- R1-C focused/affected suite — **102 passed**;
 - Ruff check — SUCCESS;
 - Ruff format --check — SUCCESS;
-- scope/whitespace gate — SUCCESS;
-- Docs verification — SUCCESS;
-- Russian nutrition methodologies — SUCCESS.
+- scope/whitespace gate — SUCCESS.
 
-The two earlier red R1-C attempts were task-local test-fixture/hygiene defects:
+The independent final review found one acceptance-evidence gap: the original
+hard-exclusion proof used only one HouseholdMember and therefore did not prove
+preservation of other members/sharedness. The corrected proof adds the persisted
+two-member scenario above and closes that gap without changing runtime behavior,
+Planner rules, schema or authority.
 
-- unsupported `moderate` activity caused the deterministic Nutrition target to
-  fail closed with `MISSING_REFERENCE_ENERGY`; the persisted member fixture now
-  uses the already-supported `active` PAL category;
-- Ruff/import/format findings were corrected without changing acceptance.
+Earlier task-local fixture/hygiene failures remain historical evidence only:
+
+- unsupported `moderate` activity correctly failed closed at
+  `MISSING_REFERENCE_ENERGY`; the persisted fixture uses supported `active`;
+- Ruff/import/format findings were corrected without changing acceptance;
+- the first multi-member trace assertion was corrected to use stable
+  `applied_exclusions` plus persisted event participation rather than treating
+  partial compatibility as a whole-candidate rejection.
 
 Status:
 
