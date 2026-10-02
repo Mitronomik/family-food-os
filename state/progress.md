@@ -1,5 +1,52 @@
 # Progress
 
+## R2-B fish MAIN diversity review-ready — 2026-10-02
+
+Accepted base:
+`1e4a0e137dee87f2aaef7d885481fef17f6e324c` (merged PR #128).
+
+Issue #129 / PR #130.
+
+Proof/runtime freeze:
+`b7691b45f05f3f5e873df53cb02d0cc769f8db79`.
+
+Delivered:
+
+- School2022 54-6р / pink salmon in milk / 80 g / 144.8 kcal;
+- School2022 54-7р / pollock in milk / 80 g / 105.3 kcal;
+- identity-only `PINK_SALMON_FILLET_RAW` and `POLLOCK_FILLET_RAW`;
+- PREPARED_OUTPUT_V1 reused without a new authority kind;
+- guarded activation;
+- zero-write replay and deliberate-deactivation preservation;
+- tamper / partial-state / identity-conflict fail-closed coverage;
+- ordinary active exact-energy MAIN pool 3 → 5;
+- MAIN opportunity capacity 9 → 15/week;
+- persisted seven-DINNER proof selects both preferred fish recipes;
+- fish hard exclusion removes only the affected candidate while preserving a
+  feasible week;
+- no migration/schema/Planner algorithm change.
+
+Source/UX:
+source thawing route is pinned for deterministic provenance only; consumer steps
+start with already-thawed fillet. Institutional paraconvection/serving-temperature
+context is not promoted.
+
+Cod cutlet 54-1р remains deferred because its exact retained bread form does not
+justify the narrower grade/stale identity in older R1-G evidence.
+
+Verification at proof/runtime freeze:
+
+- focused/affected R2-B — 128 passed;
+- Ruff check / format — SUCCESS;
+- scope/whitespace — SUCCESS;
+- AI disabled;
+- migration head remains 0042.
+
+The preceding red run was format-only: functional suite already passed 128 tests.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
 ## R2-B fish MAIN diversity implementation started — 2026-10-02
 
 Accepted main:
