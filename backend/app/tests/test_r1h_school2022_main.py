@@ -192,9 +192,7 @@ def test_r1h_fresh_publication_activates_exact_school2022_mains(database):
             assert tuple(
                 food.get(row.food_ingredient_id).canonical_code
                 for row in detail.ingredients
-            ) == tuple(
-                row["food_ingredient_code"] for row in expected["ingredients"]
-            )
+            ) == tuple(row["food_ingredient_code"] for row in expected["ingredients"])
             assert tuple(row.quantity for row in detail.ingredients) == tuple(
                 Decimal(row["quantity"]) for row in expected["ingredients"]
             )
@@ -207,16 +205,22 @@ def test_r1h_fresh_publication_activates_exact_school2022_mains(database):
             assert projection.exact_energy_ready is True
             canonical = nutrition.prepared_canonical_nutrition(detail.version.id)
             assert canonical.status is RecipeNutritionV2Status.PARTIAL
-            assert tuple(item.code for item in canonical.required_total) == NUTRIENT_CODES
+            assert (
+                tuple(item.code for item in canonical.required_total) == NUTRIENT_CODES
+            )
             assert len(canonical.required_total) == 54
-            assert canonical.total_amount("ENERGY_KCAL") == dict(
-                result.exact_energy_kcal
-            )[code]
+            assert (
+                canonical.total_amount("ENERGY_KCAL")
+                == dict(result.exact_energy_kcal)[code]
+            )
             unknown = tuple(
                 item for item in canonical.required_total if item.code != "ENERGY_KCAL"
             )
             assert len(unknown) == 53
-            assert all(item.amount is None and item.availability == "UNKNOWN" for item in unknown)
+            assert all(
+                item.amount is None and item.availability == "UNKNOWN"
+                for item in unknown
+            )
 
         for code in IDENTITY_ONLY_FOOD_CODES:
             ingredient = food.get_by_code(code)
@@ -239,7 +243,10 @@ def test_r1h_fresh_publication_activates_exact_school2022_mains(database):
             IDENTITY_ONLY_FOOD_CODES,
         ).fetchall()
         assert len(rows) == 4
-        assert all(profile_count == 0 and composition_count == 0 for _, profile_count, composition_count in rows)
+        assert all(
+            profile_count == 0 and composition_count == 0
+            for _, profile_count, composition_count in rows
+        )
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
 
     assert migrations.expected_migration_ids()[-1] == (
@@ -409,8 +416,7 @@ def test_r1h_authoritative_planner_loads_new_mains_exclusions_and_week_capacity(
             ]
             assert matching
             assert any(
-                PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT
-                in trace.rejection_codes
+                PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT in trace.rejection_codes
                 for trace in matching
             )
     finally:
