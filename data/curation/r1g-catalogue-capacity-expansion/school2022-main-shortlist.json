@@ -27,14 +27,24 @@
         "соль поваренная йодированная",
         "вода"
       ],
-      "current_blockers": [
+      "reason_for_rank": "Fewest source ingredients among strong standalone-main candidates; exact output and source-published kcal are on the same card.",
+      "household_applicability": "REVIEWED_PASS",
+      "final_disposition": "RUNTIME_BATCH_SELECTED",
+      "pre_review_blockers": [
         "HOUSEHOLD_APPLICABILITY",
         "EXACT_FOOD_IDENTITY_FORM_REVIEW",
         "RECIPE_PUBLICATION_REQUIRED"
       ],
-      "reason_for_rank": "Fewest source ingredients among strong standalone-main candidates; exact output and source-published kcal are on the same card.",
-      "household_applicability": "REVIEWED_PASS",
-      "final_disposition": "RUNTIME_BATCH_SELECTED"
+      "closed_in_r1g": [
+        "HOUSEHOLD_APPLICABILITY",
+        "EXACT_FOOD_IDENTITY_FORM_REVIEW"
+      ],
+      "next_runtime_actions": [
+        "RECIPE_PUBLICATION_REQUIRED",
+        "PREPARED_AUTHORITY_PUBLICATION",
+        "GUARDED_ACTIVATION",
+        "ORDINARY_PLANNER_PROOF"
+      ]
     },
     {
       "rank": 2,
@@ -60,14 +70,24 @@
         "соль поваренная йодированная",
         "вода"
       ],
-      "current_blockers": [
+      "reason_for_rank": "Exact source card contains output and prepared kcal; ordinary household dish is strongly externally corroborated, but accepted project truth still requires an explicit per-recipe household applicability review.",
+      "household_applicability": "REVIEWED_PASS",
+      "final_disposition": "RUNTIME_BATCH_SELECTED",
+      "pre_review_blockers": [
         "HOUSEHOLD_APPLICABILITY",
         "EXACT_FOOD_IDENTITY_FORM_REVIEW",
         "RECIPE_PUBLICATION_REQUIRED"
       ],
-      "reason_for_rank": "Exact source card contains output and prepared kcal; ordinary household dish is strongly externally corroborated, but accepted project truth still requires an explicit per-recipe household applicability review.",
-      "household_applicability": "REVIEWED_PASS",
-      "final_disposition": "RUNTIME_BATCH_SELECTED"
+      "closed_in_r1g": [
+        "HOUSEHOLD_APPLICABILITY",
+        "EXACT_FOOD_IDENTITY_FORM_REVIEW"
+      ],
+      "next_runtime_actions": [
+        "RECIPE_PUBLICATION_REQUIRED",
+        "PREPARED_AUTHORITY_PUBLICATION",
+        "GUARDED_ACTIVATION",
+        "ORDINARY_PLANNER_PROOF"
+      ]
     },
     {
       "rank": 3,
@@ -92,14 +112,24 @@
         "соль поваренная йодированная",
         "вода"
       ],
-      "current_blockers": [
+      "reason_for_rank": "Adds fish diversity and has exact source output/kcal, but has more process-route alternatives and exact fish-form review than the two beef candidates.",
+      "household_applicability": "REVIEWED_PASS",
+      "final_disposition": "FOLLOW_UP_AFTER_FIRST_BATCH",
+      "pre_review_blockers": [
         "HOUSEHOLD_APPLICABILITY",
         "EXACT_FOOD_IDENTITY_FORM_REVIEW",
         "RECIPE_PUBLICATION_REQUIRED"
       ],
-      "reason_for_rank": "Adds fish diversity and has exact source output/kcal, but has more process-route alternatives and exact fish-form review than the two beef candidates.",
-      "household_applicability": "REVIEWED_PASS",
-      "final_disposition": "FOLLOW_UP_AFTER_FIRST_BATCH"
+      "closed_in_r1g": [
+        "HOUSEHOLD_APPLICABILITY"
+      ],
+      "next_runtime_actions": [
+        "EXACT_FOOD_IDENTITY_FORM_REVIEW",
+        "RECIPE_PUBLICATION_REQUIRED",
+        "PREPARED_AUTHORITY_PUBLICATION",
+        "GUARDED_ACTIVATION",
+        "ORDINARY_PLANNER_PROOF"
+      ]
     }
   ],
   "common_process_boundary": {
