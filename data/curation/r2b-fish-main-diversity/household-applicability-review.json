@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "operation": "R2B_FISH_MAIN_HOUSEHOLD_APPLICABILITY",
+  "accepted_base": "1e4a0e137dee87f2aaef7d885481fef17f6e324c",
+  "source": {
+    "archive_locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "source_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d"
+  },
+  "policy": {
+    "scope": "TWO_NAMED_CARDS_ONLY",
+    "no_blanket_school2022_authority": true,
+    "consumer_step_policy": "Thawing method, paraconvection references and institutional serving temperature remain provenance only. Consumer RecipeSteps begin with already-thawed fillet.",
+    "corroboration_scope": "HOUSEHOLD_APPLICABILITY_ONLY_NOT_NUTRITION_OR_SOURCE_AUTHORITY"
+  },
+  "candidates": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-6р",
+      "title": "Рыба, припущенная в молоке (горбуша)",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "planner_role_review": "main",
+      "source_output_g": "80",
+      "source_energy_kcal": "144.8",
+      "consumer_core_steps": [
+        "prepare and blanch onion",
+        "use already-thawed pink-salmon fillet and cut into source-sized portions",
+        "place fish on onion in an oiled oven dish",
+        "add hot 2.5% milk to about one-third height and add iodized salt",
+        "cook in a household oven for 20–25 minutes"
+      ],
+      "quarantined_source_context": [
+        "source thawing logistics",
+        "paraconvection equipment reference",
+        "institutional serving-temperature requirement"
+      ],
+      "independent_corroboration": [
+        {
+          "url": "https://www.gastronom.ru/recipe/48738/zapechennaya-gorbusha-pod-lukovoj-shapochkoj",
+          "retrieved_date": "2026-10-02",
+          "corroborates": [
+            "pink salmon with onion and vegetable oil is an ordinary household baked main",
+            "household oven execution"
+          ],
+          "authority_scope": "household_applicability_only"
+        },
+        {
+          "url": "https://www.gastronom.ru/recipe/66820/gorbusha-v-omlete",
+          "retrieved_date": "2026-10-02",
+          "corroborates": [
+            "pink-salmon fillet with milk is ordinary household food",
+            "oven preparation of pink salmon with dairy is household-executable"
+          ],
+          "authority_scope": "household_applicability_only"
+        }
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-7р",
+      "title": "Рыба, припущенная в молоке (минтай)",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "planner_role_review": "main",
+      "source_output_g": "80",
+      "source_energy_kcal": "105.3",
+      "consumer_core_steps": [
+        "prepare and blanch onion",
+        "use already-thawed pollock fillet and cut into source-sized portions",
+        "place fish on onion in an oiled oven dish",
+        "add hot 2.5% milk to about one-third height and add iodized salt",
+        "cook in a household oven for 20–25 minutes"
+      ],
+      "quarantined_source_context": [
+        "source thawing logistics",
+        "paraconvection equipment reference",
+        "institutional serving-temperature requirement"
+      ],
+      "independent_corroboration": [
+        {
+          "url": "https://www.russianfood.com/recipes/recipe.php?rid=122961",
+          "retrieved_date": "2026-10-02",
+          "corroborates": [
+            "pollock fillet with onion, milk and vegetable oil is ordinary household cooking",
+            "domestic stovetop/oven-safe ingredient/process family"
+          ],
+          "authority_scope": "household_applicability_only"
+        },
+        {
+          "url": "https://www.russianfood.com/recipes/recipe.php?rid=155578",
+          "retrieved_date": "2026-10-02",
+          "corroborates": [
+            "pollock fillet plus milk is ordinary household oven cooking"
+          ],
+          "authority_scope": "household_applicability_only"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "household_applicable_count": 2,
+    "blanket_school2022_authority_granted": false
+  }
+}
