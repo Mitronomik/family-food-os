@@ -1,0 +1,46 @@
+name: R1-H runtime
+
+on:
+  pull_request:
+    paths:
+      - 'backend/app/seed/r1h_school2022_main.py'
+      - 'backend/app/tests/test_r1h_school2022_main.py'
+      - 'backend/app/tests/test_r1h_school2022_main_adversarial.py'
+      - 'backend/app/seed/r1f_prepared_output.py'
+      - 'backend/app/services/prepared_recipe_activation.py'
+      - 'backend/app/services/recipe_nutrition_v2.py'
+      - 'backend/app/services/food_ingredients.py'
+      - 'backend/app/services/food_recipes.py'
+      - 'backend/app/services/planner.py'
+      - 'backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2.py'
+      - 'data/curation/r1g-catalogue-capacity-expansion/**'
+      - '.github/workflows/r1h-runtime.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      AI_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install backend and lint tools
+        run: |
+          python -m pip install -e './backend[test]'
+          python -m pip install ruff
+      - name: Focused R1-H verification
+        run: |
+          python -m pytest -q             backend/app/tests/test_r1h_school2022_main.py             backend/app/tests/test_r1h_school2022_main_adversarial.py             backend/app/tests/test_r1f_prepared_output.py             backend/app/tests/test_r1f_prepared_output_adversarial.py             backend/app/tests/test_recipe_nutrition_v2.py             backend/app/tests/test_recipe_nutrition_v2_migration.py             backend/app/tests/test_planner_application_boundary.py             backend/app/tests/test_migration_lineage.py             backend/app/tests/test_migration_runner_rebuild.py             backend/app/tests/persistence/test_migration_coexistence.py             --tb=short
+      - name: Ruff
+        run: |
+          python -m ruff check             backend/app/seed/r1h_school2022_main.py             backend/app/tests/test_r1h_school2022_main.py             backend/app/tests/test_r1h_school2022_main_adversarial.py
+          python -m ruff format --check             backend/app/seed/r1h_school2022_main.py             backend/app/tests/test_r1h_school2022_main.py             backend/app/tests/test_r1h_school2022_main_adversarial.py
