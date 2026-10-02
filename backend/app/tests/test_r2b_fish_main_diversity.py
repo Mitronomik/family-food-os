@@ -195,16 +195,13 @@ def test_r2b_fresh_publication_adds_fish_mains_without_rewriting_accepted_corpus
             assert detail.version.source_name == "ru-school2022"
             assert detail.version.source_output_g == output_g
             assert all(
-                "Температура подачи" not in step.instruction
-                for step in detail.steps
+                "Температура подачи" not in step.instruction for step in detail.steps
             )
             assert all(
-                "пароконвектомат" not in step.instruction
-                for step in detail.steps
+                "пароконвектомат" not in step.instruction for step in detail.steps
             )
             assert all(
-                "размораж" not in step.instruction.lower()
-                for step in detail.steps
+                "размораж" not in step.instruction.lower() for step in detail.steps
             )
 
             projection = nutrition.neutral_consumption_projection(detail.version.id)
@@ -336,7 +333,9 @@ def test_r2b_authoritative_planner_persists_varied_main_week(database):
         assert set(main_rows.values()) == EXISTING_MAIN_CODES | set(RECIPE_CODES)
         assert len(main_rows) == 5
 
-        selected = Counter(main_rows[event.recipe_version_id] for event in result.events)
+        selected = Counter(
+            main_rows[event.recipe_version_id] for event in result.events
+        )
         assert PINK_SALMON_RECIPE_CODE in selected
         assert POLLOCK_RECIPE_CODE in selected
         assert sum(selected.values()) == 7
@@ -364,7 +363,9 @@ def test_r2b_fish_exclusion_removes_only_affected_candidate_and_week_stays_feasi
         )
         pink_id = food.get_by_code(PINK_SALMON_FOOD_CODE).id
         fish_versions = {
-            code: catalogue.get_current_verified(catalogue.get_by_code(code).id).version.id
+            code: catalogue.get_current_verified(
+                catalogue.get_by_code(code).id
+            ).version.id
             for code in RECIPE_CODES
         }
         command = AuthoritativeGenerationRequest(
@@ -404,14 +405,12 @@ def test_r2b_fish_exclusion_removes_only_affected_candidate_and_week_stays_feasi
         ]
         assert pink_traces
         assert any(
-            PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT
-            in row.rejection_codes
+            PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT in row.rejection_codes
             for row in pink_traces
         )
         assert pollock_traces
         assert all(
-            PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT
-            not in row.rejection_codes
+            PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT not in row.rejection_codes
             for row in pollock_traces
         )
 
