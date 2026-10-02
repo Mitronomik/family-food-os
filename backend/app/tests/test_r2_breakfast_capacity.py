@@ -137,9 +137,7 @@ def create_breakfast_household(households, meal_plans, *, name: str):
         member_id=member.id,
         source_kind=MemberMealPatternSourceKind.CUSTOM,
         schedule={weekday: (MealRole.BREAKFAST,) for weekday in range(1, 8)},
-        energy_shares={
-            weekday: (Decimal("0.30"),) for weekday in range(1, 8)
-        },
+        energy_shares={weekday: (Decimal("0.30"),) for weekday in range(1, 8)},
     )
     return household, member, selection
 
@@ -198,8 +196,12 @@ def test_r2_fresh_publication_adds_exact_breakfasts_without_rewriting_r1(databas
                 "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d"
             )
             assert detail.version.source_output_g == output_g
-            assert all("Температура подачи" not in step.instruction for step in detail.steps)
-            assert all("пароконвектомат" not in step.instruction for step in detail.steps)
+            assert all(
+                "Температура подачи" not in step.instruction for step in detail.steps
+            )
+            assert all(
+                "пароконвектомат" not in step.instruction for step in detail.steps
+            )
 
             projection = nutrition.neutral_consumption_projection(detail.version.id)
             assert (\n                projection.authority_kind\n                is RecipeNutritionAuthorityKind.PREPARED_OUTPUT_V1\n            )
@@ -379,8 +381,7 @@ def test_r2_milk_exclusion_restores_explicit_breakfast_infeasibility(database):
             ]
             assert traces
             assert any(
-                PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT
-                in row.rejection_codes
+                PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT in row.rejection_codes
                 for row in traces
             )
 
