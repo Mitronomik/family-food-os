@@ -1,5 +1,44 @@
 # Handoff
 
+## R1-C authorized after merged R1-H — 2026-10-02
+
+Accepted main:
+
+`e50da0d21a6c740e5d60c257ac64de12e0c5d2b3` (merged PR #123).
+
+R1-H production truth now provides:
+
+- one active exact-energy breakfast RecipeVersion;
+- three active exact-energy MAIN RecipeVersions;
+- real seven-DINNER capacity under unchanged repetition=3;
+- ordinary authoritative Planner loading;
+- hard FoodIngredient exclusion behavior;
+- no Planner algorithm/schema expansion.
+
+This closes the minimum prerequisite in
+`docs/family-food/r1c-production-planner-proof-prerequisite.md`.
+
+Issue #124 is the next bounded operation:
+
+`R1-C: production persisted Planner proof`.
+
+R1-C must use real repository-backed Household/MealPattern/RecipeVersion/Nutrition
+state, generate and persist at least one complete seven-day week, persist
+individualized Servings, prove deterministic replay, prove one atomic bounded
+infeasible case, and prove hard FoodIngredient exclusion through the ordinary
+authoritative Planner boundary.
+
+Do not add migration 0043, publish additional food/recipe/nutrition authority,
+change Planner scoring/repetition, weaken exclusions, or start DC4/Gate1-CLOSE,
+PR9 Shopping, Prep/PDF/Retail/API/UI/Auth/PostgreSQL/AI or R2/R3.
+
+If implementation discovers a new persisted contract or authority need, stop and
+reopen the applicable Implementation Contract Gate.
+
+Status:
+
+`R1_C_AUTHORIZED_NOT_STARTED`.
+
 ## R1-H final verification receipt — 2026-10-02
 
 Accepted base:
