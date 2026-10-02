@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "operation": "R1C_PRODUCTION_PLANNER_PROOF",
+  "runtime_accepted_base": "e50da0d21a6c740e5d60c257ac64de12e0c5d2b3",
+  "implementation_base": "5bf5127a238b8bb139903f008ad7c14b9b1309c7",
+  "issue": 124,
+  "planner_version": "planner-v0.4",
+  "compatibility_version": "meal-role-recipe-v2",
+  "candidate_metrics": {
+    "selected_r1_recipes_accepted": 4,
+    "selected_r1_recipes_blocked": 5,
+    "active_planner_eligible_recipe_versions": 4,
+    "exact_energy_ready_active_recipe_versions": 4,
+    "breakfast_candidate_count": 1,
+    "main_candidate_count": 3
+  },
+  "materially_different_repository_backed_patterns": [
+    {
+      "code": "DINNER_ONLY_SUCCESS",
+      "roles": ["DINNER"],
+      "daily_energy_shares": ["0.25"],
+      "expected_outcome": "SUCCESS_PERSISTED"
+    },
+    {
+      "code": "BREAKFAST_DINNER_BOUNDED_INFEASIBLE",
+      "roles": ["BREAKFAST", "DINNER"],
+      "daily_energy_shares": ["0.30", "0.25"],
+      "expected_outcome": "NO_ELIGIBLE_CANDIDATE"
+    },
+    {
+      "code": "DINNER_ONLY_HARD_EXCLUSION",
+      "roles": ["DINNER"],
+      "daily_energy_shares": ["0.25"],
+      "excluded_food_code": "WHEAT_BREAD_HIGH_GRADE_STALE",
+      "expected_outcome": "NO_ELIGIBLE_CANDIDATE"
+    }
+  ],
+  "successful_persisted_complete_weeks": 1,
+  "explicit_infeasible_outcomes": 2,
+  "remaining_authority_blockers": [
+    "USSR82-1081",
+    "USSR82-467",
+    "USSR82-492",
+    "USSR82-364",
+    "USSR82-208"
+  ],
+  "schema_change": false,
+  "migration_0043": false,
+  "planner_algorithm_change": false,
+  "new_nutrition_authority": false,
+  "ai_required": false,
+  "follow_up": "After R1-C review and merge, explicitly authorize the next R2/R3 corpus-expansion operation before DC4 / Gate1-CLOSE. Do not start R2/R3, DC4, Gate1-CLOSE or PR9 automatically."
+}
