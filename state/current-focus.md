@@ -98,7 +98,7 @@ Do not:
 
 Runtime behavior is frozen at `c300118fd554829ddd9d6429c2abccba8dbb250b`.
 
-Final exact-head verification on the state-only PR head is complete:
+Final exact-head verification on the current PR head is complete:
 
 - R1-H runtime — SUCCESS;
 - focused/affected R1-H suite — 135 passed;
