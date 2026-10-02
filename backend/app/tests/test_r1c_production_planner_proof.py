@@ -151,7 +151,7 @@ def _create_member_with_pattern(
     member = households.add_household_member(
         household.id,
         name="Анна",
-        activity_level="moderate",
+        activity_level="active",
         goal="maintain",
         birth_date=date(1990, 5, 20),
         sex="female",
