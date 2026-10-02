@@ -231,6 +231,7 @@
         "source_output_g": "100",
         "energy_kcal": "112.6"
       }
-    ]
+    ],
+    "prepared_publication_specs_ref": "data/curation/r1g-catalogue-capacity-expansion/prepared-publication-specs.json"
   }
 }
