@@ -202,7 +202,7 @@ def test_r2_fresh_publication_adds_exact_breakfasts_without_rewriting_r1(databas
             assert all("пароконвектомат" not in step.instruction for step in detail.steps)
 
             projection = nutrition.neutral_consumption_projection(detail.version.id)
-            assert projection.authority_kind is RecipeNutritionAuthorityKind.PREPARED_OUTPUT_V1
+            assert (\n                projection.authority_kind\n                is RecipeNutritionAuthorityKind.PREPARED_OUTPUT_V1\n            )
             assert projection.exact_energy_ready is True
             assert projection.per_base_serving.kcal == energy
 
