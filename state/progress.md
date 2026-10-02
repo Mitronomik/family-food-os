@@ -1,5 +1,30 @@
 # Progress
 
+## R2 breakfast capacity implementation started — 2026-10-02
+
+Accepted main:
+`8995e85e4cda2ae30fc62fdc63daaf441f4226bd` (merged PR #126).
+
+Issue #127 selects the first R2 batch by the accepted maximum-marginal-capacity
+rule.
+
+Selected:
+- School2022 54-1о / natural omelet / BREAKFAST / 150 g / 225.5 kcal;
+- School2022 54-9к / viscous milk oat porridge / BREAKFAST / 200 g / 272.9 kcal.
+
+New exact identity-only foods:
+- `MILK_2_5`;
+- `OAT_GROATS`.
+
+The branch reuses PREPARED_OUTPUT_V1 and guarded activation. No migration,
+schema, Planner algorithm or new Nutrition authority is introduced.
+
+Projected result:
+BREAKFAST exact-energy active count 1 → 3; opportunity capacity 3 → 9/week.
+
+Status:
+`R2_IMPLEMENTATION_ACTIVE`.
+
 ## R1-C production Planner proof review-ready — 2026-10-02
 
 Implementation base:
