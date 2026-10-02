@@ -13,6 +13,10 @@ Both passed the user-approved bounded per-recipe household-applicability review.
 Institutional thaw/holding/serving rules remain source context and are not promoted
 to consumer RecipeSteps.
 
+Exact runtime provenance + Russian RecipeVersion seeds are frozen in
+`data/curation/r1g-catalogue-capacity-expansion/prepared-publication-specs.json`.
+Runtime must not choose alternative source/version/rights/step strings.
+
 Prepared Nutrition reuses the proven R1-F seam:
 `PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`.
 Only ENERGY_KCAL is promoted; all other unreviewed codes remain UNKNOWN.
