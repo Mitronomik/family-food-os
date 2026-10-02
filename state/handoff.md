@@ -8,8 +8,8 @@ Accepted base:
 Runtime freeze:
 `c300118fd554829ddd9d6429c2abccba8dbb250b`.
 
-Current PR #123 head after state-only finalization remains byte-identical for all
-runtime files.
+Current PR #123 head after state/test-only finalization remains byte-identical for
+all production runtime files.
 
 Final verification is complete:
 
