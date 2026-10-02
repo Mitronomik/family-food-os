@@ -1,5 +1,38 @@
 # Handoff
 
+## R2 breakfast capacity active — 2026-10-02
+
+Accepted main:
+`8995e85e4cda2ae30fc62fdc63daaf441f4226bd`.
+
+Issue #127 / branch `feat/r2-breakfast-capacity`.
+
+R1-C is merged and complete for sequencing purposes. Current bottleneck is
+BREAKFAST capacity, not MAIN capacity.
+
+R2 selected two exact School2022 breakfast cards:
+
+- 54-1о / Омлет натуральный / 150 g / 225.5 kcal;
+- 54-9к / Каша вязкая молочная овсяная / 200 g / 272.9 kcal.
+
+The accepted source archive and PDF hashes are reused. Household applicability is
+reviewed only for these two cards. External household recipes are corroboration
+only and never Nutrition/source authority.
+
+Important identity correction from preflight:
+use `MILK_2_5 / Молоко 2,5%`, not a pasteurized-specific identity, because the
+source pins fat percentage but allows multiple heat-treatment modes.
+`OAT_GROATS / Крупа овсяная` is separate from existing `OATS_ROLLED`.
+
+Runtime uses the existing prepared-output UoW and guarded activation. No migration
+or shared service change is planned.
+
+Next:
+run focused R2 CI, correct task-local failures, then freeze exact head and update
+state with the verification receipt.
+
+Do not start 54-1р, DC4/Gate1-CLOSE or PR9 automatically.
+
 ## R1-C final proof receipt — 2026-10-02
 
 Accepted implementation base:
