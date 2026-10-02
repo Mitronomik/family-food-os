@@ -1,0 +1,97 @@
+name: R1-C production Planner proof
+
+on:
+  pull_request:
+    paths:
+      - 'backend/app/tests/test_r1c_production_planner_proof.py'
+      - 'backend/app/services/planner.py'
+      - 'backend/app/services/meal_plans.py'
+      - 'backend/app/domain/planner.py'
+      - 'backend/app/domain/meal_plans.py'
+      - 'backend/app/persistence/sqlalchemy_core/meal_plan_*.py'
+      - 'backend/app/persistence/sqlalchemy_core/household_*.py'
+      - 'backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2.py'
+      - 'backend/app/seed/r1f_prepared_output.py'
+      - 'backend/app/seed/r1h_school2022_main.py'
+      - 'data/curation/r1c-production-planner-proof/**'
+      - 'state/**'
+      - '.github/workflows/r1c-production-planner.yml'
+  workflow_dispatch:
+    inputs:
+      target_ref:
+        description: 'Branch, tag or exact commit SHA to verify'
+        required: true
+        default: 'main'
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      AI_ENABLED: 'false'
+    steps:
+      - name: Checkout exact requested revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ inputs.target_ref || github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install backend and lint tools
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check -e './backend[test]'
+          python -m pip install --disable-pip-version-check 'ruff==0.16.8'
+
+      - name: Focused R1-C verification
+        run: |
+          set -euo pipefail
+          python -m pytest -q \
+            backend/app/tests/test_r1c_production_planner_proof.py \
+            backend/app/tests/test_r1h_school2022_main.py \
+            backend/app/tests/test_planner_application_boundary.py \
+            backend/app/tests/test_planner_energy_allocation_v04.py \
+            backend/app/tests/test_meal_plan_application.py \
+            backend/app/tests/test_meal_plan_revision_history.py \
+            backend/app/tests/persistence/test_meal_plan_repository.py \
+            backend/app/tests/test_migration_lineage.py \
+            --tb=short
+
+      - name: Ruff
+        run: |
+          set -euo pipefail
+          python -m ruff check backend/app/tests/test_r1c_production_planner_proof.py
+          python -m ruff format --check backend/app/tests/test_r1c_production_planner_proof.py
+
+      - name: Scope and whitespace
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          base="${PR_BASE_SHA:-origin/main}"
+          git fetch origin main --no-tags
+          git diff --check "$base"...HEAD
+
+      - name: Verification summary
+        run: |
+          set -euo pipefail
+          echo "tested revision: $(git rev-parse HEAD)"
+          echo 'R1-C production persistence proof: PASS'
+          echo 'planner-v0.4 / meal-role-recipe-v2: PASS'
+          echo 'materially different persisted patterns: PASS'
+          echo 'deterministic replay: PASS'
+          echo 'bounded infeasibility / no partial plan: PASS'
+          echo 'hard FoodIngredient exclusion: PASS'
+          echo 'migration head 0042 / no 0043: PASS'
+          echo 'AI_ENABLED=false: PASS'
