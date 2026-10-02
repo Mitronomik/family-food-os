@@ -1,5 +1,26 @@
 # Progress
 
+## R1-H runtime review-ready — 2026-10-02
+
+Accepted base:
+`07af24cf1821bbb1ee9f70bdcc3311361d7b443b`.
+
+Runtime freeze:
+`c300118fd554829ddd9d6429c2abccba8dbb250b`.
+
+Final verification:
+- R1-H focused/affected — 135 passed;
+- Ruff check / format — SUCCESS;
+- Russian nutrition methodologies — SUCCESS;
+- Docs / DC1 — SUCCESS;
+- Nutrient registry V2 — focused + 4 backend shards + launcher SUCCESS;
+- Partial nutrition profiles — focused + 4 backend shards + launcher SUCCESS.
+
+Only `state/*` changed after the runtime freeze.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
 ## R1-H runtime implementation — 2026-10-02
 
 Accepted base:
