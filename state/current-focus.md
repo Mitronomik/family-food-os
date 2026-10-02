@@ -31,7 +31,7 @@ Accepted base:
 
 Proof/runtime freeze:
 
-`b7691b45f05f3f5e873df53cb02d0cc769f8db79`.
+`4fd0c946b43785c0eb242d26184c7a20441a6012`.
 
 Status:
 
@@ -117,7 +117,7 @@ Verified:
 
 ## Verification
 
-Exact proof/runtime-freeze verification at `b7691b45...`:
+Exact corrected proof/runtime-freeze verification at `4fd0c946...`:
 
 - focused/affected R2-B suite — **128 passed**;
 - Ruff check — SUCCESS;
@@ -127,8 +127,13 @@ Exact proof/runtime-freeze verification at `b7691b45...`:
 - migration head remains `0042_recipe_prepared_output_nutrition`;
 - migration 0043 is absent.
 
-The first R2-B run already had **128 passed** and failed only Ruff format. The
-format-only correction did not change product/runtime semantics.
+The first independent audit found two task-local publication blockers after the
+previous freeze: `cook_time_minutes=25` overstated a source range of 20–25 minutes,
+and the consumer steps contained grammatically invalid `филе горбуша / филе минтай`.
+The corrected publication now keeps `cook_time_minutes=null`, preserves the exact
+20–25 minute range in the Russian RecipeStep, and uses `филе горбуши / филе минтая`.
+Regression assertions lock both corrections. The corrected focused suite remains
+128 passed with Ruff and scope gates green.
 
 ## Scope boundaries
 
