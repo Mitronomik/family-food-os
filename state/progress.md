@@ -1,5 +1,39 @@
 # Progress
 
+## PR #123 merged / R1-C authorized — 2026-10-02
+
+PR #123 / R1-H merged into `main` at:
+
+`e50da0d21a6c740e5d60c257ac64de12e0c5d2b3`.
+
+R1-C readiness reassessment against the merged production catalogue is complete.
+
+Current ordinary exact-energy capacity:
+
+- breakfast: `HARD_BOILED_EGG` = 1 active RecipeVersion;
+- MAIN: `BOILED_CHICKEN_MAIN_PRODUCT`,
+  `SCHOOL2022_54_29M_BEEF_MEATBALLS`,
+  `SCHOOL2022_54_2M_BEEF_GOULASH` = 3 active RecipeVersions;
+- unchanged `max_recipe_repetitions=3`;
+- seven-DINNER MAIN-only week capacity is proven through the real authoritative
+  Planner request path;
+- hard FoodIngredient exclusion behavior is proven.
+
+Therefore the historical R1-C minimum prerequisite
+“active exact-energy R1 candidate count > 0” is closed.
+
+Issue #124 now owns the bounded R1-C implementation:
+
+`R1-C: production persisted Planner proof`.
+
+No Planner algorithm/scoring/repetition, schema/migration, additional
+Recipe/Nutrition publication, Gate1-CLOSE, Shopping or later-product scope is
+authorized by this transition.
+
+Status:
+
+`R1_C_AUTHORIZED_NOT_STARTED`.
+
 ## R1-H runtime review-ready — 2026-10-02
 
 Accepted base:
@@ -16,7 +50,8 @@ Final verification:
 - Nutrient registry V2 — focused + 4 backend shards + launcher SUCCESS;
 - Partial nutrition profiles — focused + 4 backend shards + launcher SUCCESS.
 
-Only `state/*` changed after the runtime freeze.
+After the runtime freeze, only `state/*` and test-only acceptance assertions
+changed; production runtime bytes remained unchanged.
 
 Status:
 `READY_FOR_FINAL_REVIEW`.
