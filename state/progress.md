@@ -15,6 +15,7 @@ Completed:
 - user-approved bounded household-applicability review for 54-29м / 54-2м / 54-1р;
 - exact identity-only FoodIngredient decisions;
 - exact source-card/variant/energy record hash verification;
+- full immutable runtime publication specs and Russian RecipeVersion seeds;
 - frozen PREPARED_OUTPUT_V1 receipt for the two selected mains;
 - projected Planner capacity.
 
