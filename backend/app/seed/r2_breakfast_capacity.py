@@ -53,7 +53,9 @@ PUBLICATION_SPECS_GIT_BLOB_SHA = "9951b8105d6cabdf22e173ab1315f8f2418d5bf9"
 
 R2_ACCEPTED_BASE = "8995e85e4cda2ae30fc62fdc63daaf441f4226bd"
 SOURCE_PDF_SHA256 = "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d"
-SOURCE_ARCHIVE_SHA256 = (\n    "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea"\n)
+SOURCE_ARCHIVE_SHA256 = (
+    "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea"
+)
 
 OMELET_RECIPE_CODE = "SCHOOL2022_54_1O_NATURAL_OMELET"
 OAT_PORRIDGE_RECIPE_CODE = "SCHOOL2022_54_9K_MILK_OAT_PORRIDGE"
@@ -196,7 +198,9 @@ def _load_contract(
     return selection, applicability, specs
 
 
-def _identity_seeds(\n    specs: dict[str, Any],\n) -> tuple[TrustedFoodIngredientIdentitySeed, ...]:
+def _identity_seeds(
+    specs: dict[str, Any],
+) -> tuple[TrustedFoodIngredientIdentitySeed, ...]:
     return tuple(
         TrustedFoodIngredientIdentitySeed(
             canonical_code=row["canonical_code"],
