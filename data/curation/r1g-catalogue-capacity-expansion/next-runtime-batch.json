@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "operation": "R1G_NEXT_RUNTIME_BATCH",
+  "accepted_base": "879d68087845dea09454089e822f5d8d8238d12d",
+  "status": "FROZEN_FOR_REVIEW",
+  "source_archive": {
+    "locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "size_bytes": 206692075,
+    "sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea"
+  },
+  "school2022_pdf": {
+    "path_in_archive": "corpus-work/packages/school2022/raw/source.pdf",
+    "size_bytes": 4102547,
+    "sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d"
+  },
+  "canonical_record_hash_rule": "sha256(UTF-8 compact JSON with ensure_ascii=false, sort_keys=true, separators=(',', ':'))",
+  "new_identity_only_foods": [
+    {
+      "canonical_code": "BEEF_CATEGORY_1_RAW",
+      "canonical_name": "Говядина I категории, сырая",
+      "category_code": "meat",
+      "default_unit": "g",
+      "source_labels": [
+        "говядина 1 категории"
+      ],
+      "nutrition_profile": null,
+      "reason": "Exact source identity is required for RecipeIngredient/exclusion truth; prepared-output Nutrition makes raw Composition unnecessary for this batch."
+    },
+    {
+      "canonical_code": "WHEAT_BREAD_HIGH_GRADE_STALE",
+      "canonical_name": "Хлеб пшеничный из муки высшего сорта, черствый",
+      "category_code": "grains",
+      "default_unit": "g",
+      "source_labels": [
+        "хлеб пшеничный"
+      ],
+      "source_process_qualifier": "черствый пшеничный хлеб (высшего сорта)",
+      "nutrition_profile": null
+    },
+    {
+      "canonical_code": "SALT_IODIZED",
+      "canonical_name": "Соль поваренная йодированная",
+      "category_code": "staples",
+      "default_unit": "g",
+      "source_labels": [
+        "соль поваренная йодированная"
+      ],
+      "nutrition_profile": null,
+      "reason": "Do not collapse iodized source identity into generic SALT."
+    },
+    {
+      "canonical_code": "TOMATO_PUREE_PASTE",
+      "canonical_name": "Томатное пюре (паста)",
+      "category_code": "staples",
+      "default_unit": "g",
+      "source_labels": [
+        "томатное пюре"
+      ],
+      "nutrition_profile": null,
+      "source_quality_basis": "School2022 procurement-quality row identifies concentrated tomato puree/paste; no FIC Composition profile is promoted."
+    }
+  ],
+  "reused_foods": [
+    "BUTTER_PEASANT_72_5_UNSALTED",
+    "WATER",
+    "ONION_BULB_FRESH",
+    "FLOUR_WHEAT_HIGH_GRADE"
+  ],
+  "recipes": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-29м",
+      "canonical_code": "SCHOOL2022_54_29M_BEEF_MEATBALLS",
+      "canonical_name": "Фрикадельки из говядины",
+      "meal_type_code": "main",
+      "source_output_g": "80",
+      "source_energy_kcal": "153",
+      "household_applicability": "REVIEWED_PASS",
+      "initial_is_active": false,
+      "ingredient_rows": [
+        {
+          "food_code": "BEEF_CATEGORY_1_RAW",
+          "quantity_g": "57.6",
+          "source_gross_g": "65.1"
+        },
+        {
+          "food_code": "WHEAT_BREAD_HIGH_GRADE_STALE",
+          "quantity_g": "12",
+          "source_gross_g": "12"
+        },
+        {
+          "food_code": "BUTTER_PEASANT_72_5_UNSALTED",
+          "quantity_g": "2.4",
+          "source_gross_g": "2.4"
+        },
+        {
+          "food_code": "SALT_IODIZED",
+          "quantity_g": "0.4",
+          "source_gross_g": "0.4"
+        },
+        {
+          "food_code": "WATER",
+          "quantity_g": "20.8",
+          "source_gross_g": "20.8"
+        }
+      ],
+      "consumer_recipe_step_policy": {
+        "executable_source_backed_steps": [
+          "Use thawed beef and grind it.",
+          "Combine with stale high-grade wheat bread soaked in water and pressed, add iodized salt, grind again, add water and mix thoroughly.",
+          "Form 15–20 g meatballs.",
+          "Place on a butter-greased tray, add water and bake for 20 minutes."
+        ],
+        "quarantined_source_context": [
+          "defroster/meat-shop thawing instruction",
+          "institutional serving-temperature requirement"
+        ]
+      },
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "153"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "card_sha256": "e03cb002c2f527dc3b20f8527799382c211952ffe2d3b140e206193eab549388",
+        "source_variant_sha256": "8e3ba5f450fd119283818e62ed8ad415dc729fb39ea168d5e81ebfb4496bfd0e",
+        "energy_reconciliation_sha256": "ee57c7ad4b80cadf3a14d883cf66219a79251d7b98b0e547e4990e271ec511f8",
+        "rights_route": "reuse reviewed School2022 factual normative recipe rights basis from Step9"
+      }
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2м",
+      "canonical_code": "SCHOOL2022_54_2M_BEEF_GOULASH",
+      "canonical_name": "Гуляш из говядины",
+      "meal_type_code": "main",
+      "source_output_g": "80",
+      "source_energy_kcal": "185.6",
+      "household_applicability": "REVIEWED_PASS",
+      "initial_is_active": false,
+      "ingredient_rows": [
+        {
+          "food_code": "BEEF_CATEGORY_1_RAW",
+          "quantity_g": "74",
+          "source_gross_g": "83.6"
+        },
+        {
+          "food_code": "ONION_BULB_FRESH",
+          "quantity_g": "9.3",
+          "source_gross_g": "11.6"
+        },
+        {
+          "food_code": "TOMATO_PUREE_PASTE",
+          "quantity_g": "7.3",
+          "source_gross_g": "7.3"
+        },
+        {
+          "food_code": "BUTTER_PEASANT_72_5_UNSALTED",
+          "quantity_g": "4.3",
+          "source_gross_g": "4.3"
+        },
+        {
+          "food_code": "FLOUR_WHEAT_HIGH_GRADE",
+          "quantity_g": "2.5",
+          "source_gross_g": "2.5"
+        },
+        {
+          "food_code": "SALT_IODIZED",
+          "quantity_g": "0.2",
+          "source_gross_g": "0.2"
+        },
+        {
+          "food_code": "WATER",
+          "quantity_g": "107",
+          "source_gross_g": "107"
+        }
+      ],
+      "consumer_recipe_step_policy": {
+        "executable_source_backed_steps": [
+          "Prepare fresh onion, blanch and sauté it with tomato puree.",
+          "Use thawed beef, cut into pieces, cook until half-done, remove films/connective tissue, then cut into 20–30 g cubes.",
+          "Add hot water, onion with tomato puree and iodized salt; stew covered for about one hour, then drain the broth.",
+          "Toast flour without browning, dilute with broth cooled to about 55 °C, cook 7–10 minutes and strain.",
+          "Pour the sauce over the meat and stew about 15 minutes until done."
+        ],
+        "quarantined_source_context": [
+          "defroster/meat-shop thawing instruction",
+          "institutional serving-temperature requirement"
+        ]
+      },
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "185.6"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "card_sha256": "d48a9461e98d4d2df0056c379722dc9e6ed248dc74ce65a4a118a1165565209d",
+        "source_variant_sha256": "7ffd4745e935e92e142d7dd4cdb11d9878cd0901bc599bed1d439eb452bb9610",
+        "energy_reconciliation_sha256": "5777b15819089a06b00f3a067dee08352fa75ec03a7b25835b06ffb926e16a28",
+        "rights_route": "reuse reviewed School2022 factual normative recipe rights basis from Step9"
+      }
+    }
+  ],
+  "activation_contract": {
+    "boundary": "existing guarded prepared activation from R1-F",
+    "requires": [
+      "exact RecipeVersion identity",
+      "exact prepared authority replay",
+      "no required Composition binding",
+      "finite positive exact ENERGY_KCAL",
+      "ordinary Planner admission with only INACTIVE before activation",
+      "ingredient identities available for exclusions"
+    ]
+  },
+  "non_goals": [
+    "no migration 0043",
+    "no new Nutrition authority kind/calculation version",
+    "no raw-to-cooked inference",
+    "no retention",
+    "no Planner algorithm/role/repetition change",
+    "no bulk School2022 publication"
+  ]
+}

@@ -4,187 +4,167 @@ Updated: 2026-10-01.
 
 ## Accepted state
 
-PR117 / R1-F cooked prepared-output Nutrition contract gate is merged into `main` at:
+PR #119 / R1-F prepared-output Nutrition runtime is merged into `main` at:
 
-`e138d615802f7928946e419156f8c6905f04075b`.
+`879d68087845dea09454089e822f5d8d8238d12d`.
 
-The merged gate authorizes one bounded runtime/data implementation using:
+R1-F proved the reusable authority seam:
 
 - `PREPARED_OUTPUT_V1`;
 - `RECIPE_PREPARED_OUTPUT_NUTRITION_V1`;
-- migration `0042_recipe_prepared_output_nutrition`;
-- source-neutral, portion-neutral production Recipe identities;
-- exact source receipts already pinned by PR117;
-- explicit activation only after exact-energy + Planner admission proof.
+- exact reviewed AVAILABLE/UNKNOWN partition;
+- guarded prepared Recipe activation;
+- ordinary authoritative Planner loading.
 
 ## Current bounded operation
 
-**R1-F runtime — prepared-output Nutrition pilot and Planner activation.**
+**R1-G — catalogue-capacity expansion evidence and contract gate.**
 
 Issue:
 
-`#118`.
-
-PR:
-
-`#119`.
+`#120`.
 
 Branch:
 
-`feat/r1f-prepared-output-runtime`.
+`docs/r1g-catalogue-capacity-expansion-gate`.
 
 Accepted base:
 
-`e138d615802f7928946e419156f8c6905f04075b`.
+`879d68087845dea09454089e822f5d8d8238d12d`.
 
-## Implemented on current branch
+This operation is docs/data evidence only.
 
-Runtime now includes:
+## Goal
 
-- migration `0042_recipe_prepared_output_nutrition`;
-- immutable `recipe_prepared_nutrition_authorities`;
-- immutable sparse `recipe_prepared_nutrient_values`;
-- Recipe Nutrition authority kind `PREPARED_OUTPUT_V1`;
-- exact-replay/fail-closed prepared publication;
-- prepared-vs-Composition double-authority rejection;
-- identity-only FoodIngredient publication for
-  `CHICKEN_CATEGORY_2_RAW / Курица II категории, сырая`;
-- guarded prepared-Recipe activation boundary that exact-replays reviewed authority,
-  requires exact-energy readiness and only the reversible INACTIVE Planner blocker;
-- canonical prepared 54-code projection where absent nutrients are explicit UNKNOWN;
-- R1-F publication/orchestration seed;
-- focused end-to-end runtime/migration/Planner/adversarial tests.
+Freeze the exact next runtime batch after R1-F by answering:
 
-Pilot production Recipes:
+1. whether USSR82-1081 has exact prepared-output source authority for its selected
+   160 g output;
+2. whether exact source evidence closes the missing salt quantities for USSR82-467
+   and USSR82-492;
+3. which additional MAIN candidates are the shortest truthful route toward R1-C;
+4. what projected Planner role capacity the next runtime batch would create.
 
-### Breakfast
+## Current evidence state
 
-`HARD_BOILED_EGG / Яйцо куриное вкрутую`
+### USSR82-1081 — Блины
 
-- source: MR 2.4.0162-19 Appendix 5 card 4.1;
-- RecipeVersion source output: 40 g;
-- prepared ENERGY_KCAL: 63;
-- canonical EGG ingredient retained;
-- output mass is not Recipe identity.
+Known:
 
-### Main
+- variant `III — с маслом`;
+- output 160 g;
+- seven quantified required ingredient rows;
+- prior consumed-Nutrition blocker.
 
-`BOILED_CHICKEN_MAIN_PRODUCT / Курица отварная без гарнира`
+Current disposition:
 
-- source: 1988 recipe 303 Variant III;
-- input: `CHICKEN_CATEGORY_2_RAW` 107 g;
-- RecipeVersion source output: 75 g;
-- prepared ENERGY_KCAL: 167.7;
-- no inferred onion row;
-- no 1986 697/824 144 kcal reuse.
+`PREPARED_OUTPUT_RECEIPT_RESEARCH_REQUIRED`.
 
-Historical:
+READY_RAW/input-reference calculations are not accepted as cooked prepared-output
+authority.
 
-`USSR82_697_BOILED_CHICKEN / Курица отварная`
+### USSR82-467 — Омлет (натуральный)
 
-remains immutable/inactive.
+Known blocker:
 
-## Nutrition authority boundary
+`REQUIRED_QUANTITY_UNRESOLVED / UNQUANTIFIED_PROCESS_INGREDIENT_SALT`.
 
-R1-F runtime deliberately publishes only exact source ENERGY_KCAL for both pilot
-RecipeVersions.
+No salt quantity may be inferred, defaulted or omitted.
 
-Protein/fat/carbohydrate source values are not promoted automatically. They remain
-UNKNOWN until exact frozen-registry semantic mapping is separately proven.
+### USSR82-492 — Сырники из творога
 
-Unknown is never converted to zero.
+Same exact salt-quantity blocker as 467.
 
-## Replay / activation behavior
+### MAIN capacity
 
-Fresh publication:
+R1-E's explicit MAIN set was USSR82-697 / 364 / 208.
 
-`inactive Recipe + SOURCE_VERIFIED RecipeVersion + prepared authority`
+- capacity for the former 697 path is now supplied by the separate active
+  `BOILED_CHICKEN_MAIN_PRODUCT` from R1-F;
+- 364 and 208 still have source-structure / food-identity blockers;
+- R1-G must rank the current cross-corpus universe rather than automatically reuse
+  those historical candidates.
 
-is one caller-owned transaction and verifies exact prepared energy before commit.
-
-Activation is a separate application command.
-
-Publication replay:
-
-- exact authority replay = zero-write;
-- active Recipe may replay immutable authority;
-- a deliberately deactivated Recipe is not silently reactivated by rerunning the
-  publication seed;
-- partial persisted state fails closed.
-
-## Verification status
-
-Review blockers found after the original runtime freeze were fixed without a new
-migration or Planner algorithm change.
-
-Current runtime head:
-
-`ac647a9fd0546876db743faf545d64ef2622c595`.
-
-Proven on this runtime head:
-
-- R1-F runtime — SUCCESS; 122 focused/affected tests passed;
-- Ruff check — SUCCESS;
-- Ruff format check — SUCCESS;
-- Docs verification — SUCCESS;
-- DC1 corpus verification — SUCCESS;
-- R1-D Planner admission — SUCCESS;
-- Russian nutrition methodologies — SUCCESS;
-- Partial nutrition profiles — SUCCESS, including all backend regression shards
-  and launcher regression;
-- Nutrient registry V2 — SUCCESS, including focused, all backend regression shards
-  and full launcher regression;
-- test-only final acceptance proof head `2c35a0df7a6acafec09cbc107e12ac5e3e5a19a6` —
-  R1-F focused/affected suite 122 passed, Ruff check SUCCESS and format SUCCESS;
-  the proof uses `PlannerService.compose_authoritative_request()` with the real
-  R1-F Recipe Catalogue + Recipe Nutrition path, not a synthetic PlannerCandidate.
-
-Review corrections now prove:
-
-- prepared canonical Nutrition always exposes the frozen 54-code vector;
-- only reviewed values are AVAILABLE; absent codes are UNKNOWN, never synthetic zero;
-- an explicit numeric zero remains AVAILABLE(0), distinct from UNKNOWN;
-- PARTIAL canonical Nutrition with exact positive ENERGY_KCAL remains ordinary
-  Planner-eligible;
-- reviewed prepared specs explicitly partition all 54 codes into AVAILABLE vs
-  UNKNOWN; an unreviewed nutrient cannot silently move into AVAILABLE;
-- the Recipe catalogue exposes no public unchecked activation command; prepared
-  activation passes only through the guarded authority/admission boundary;
-- wrong output/source/hash/rights, soft/medium egg, category-I chicken,
-  697/824 + 144 kcal and missing/zero/negative ENERGY_KCAL are explicitly rejected;
-- ordinary authoritative Planner candidate loading now explicitly proves both pilot
-  RecipeVersions are loaded with exact energy and real ingredient IDs, and member
-  exclusions reject each through that same application boundary.
-
-Runtime changes after the old `a20d13...` receipt make that older receipt
-historical only. The runtime acceptance receipt is now complete at `ac647a9f...`.
-
-PR119 is **READY FOR FINAL REVIEW**. Do not merge without explicit authorization.
-Later state-only commits do not invalidate the byte-identical runtime receipt and
-do not require another full broad regression.
-
-## Hard boundaries
+## Architecture / scope boundaries
 
 Do not:
 
-- merge PR119 without final review/authorization;
+- publish or activate Recipes;
+- add migration 0043;
+- change schema;
+- add a new Nutrition authority kind/calculation version;
 - infer raw→cooked Nutrition;
-- add retention/transformation runtime;
-- publish source carbohydrate as a canonical code without reviewed method mapping;
-- mutate historical USSR82-697;
-- bulk-activate recipes;
-- add 467/492/1081 in PR119;
-- change Planner algorithm/scoring/roles/repetition limits;
+- infer retention;
+- infer missing salt;
+- treat READY_RAW as prepared-output authority;
+- change Planner scoring/roles/repetition limits;
+- execute R1-C;
 - start Shopping/Prep/Retail/API/UI/Auth/PostgreSQL/AI;
-- start R2/R3 before successful R1-C.
+- start R2/R3.
+
+If evidence requires a new persisted identity/quantity/process/authority contract,
+stop and request a separate Implementation Contract Gate decision.
+
+## Durable outputs
+
+- `docs/family-food/r1g-catalogue-capacity-expansion-gate.md`;
+- `data/curation/r1g-catalogue-capacity-expansion/*`;
+- exact source/hash/rights receipts;
+- final dispositions for 1081 / 467 / 492;
+- reviewed MAIN shortlist and selection;
+- projected R1-C capacity;
+- exact next runtime batch.
+
+## Final R1-G decision
+
+The next runtime batch is frozen to:
+
+1. `SCHOOL2022_54_29M_BEEF_MEATBALLS / Фрикадельки из говядины`;
+2. `SCHOOL2022_54_2M_BEEF_GOULASH / Гуляш из говядины`.
+
+Both are reviewed as household-applicable on a bounded per-recipe basis.
+
+Prepared authority is fully frozen in `data/curation/r1g-catalogue-capacity-expansion/prepared-publication-specs.json`.
+
+Prepared authority:
+
+- 54-29м — 80 g / exact 153 kcal;
+- 54-2м — 80 g / exact 185.6 kcal;
+- `PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`;
+- ENERGY_KCAL AVAILABLE;
+- all other unreviewed frozen codes UNKNOWN.
+
+Future runtime may create identity-only:
+
+- `BEEF_CATEGORY_1_RAW`;
+- `WHEAT_BREAD_HIGH_GRADE_STALE`;
+- `SALT_IODIZED`;
+- `TOMATO_PUREE_PASTE`.
+
+It reuses existing butter/water/onion/flour identities.
+
+USSR82 dispositions remain fail-closed:
+
+- 467 / 492 blocked on exact salt quantity;
+- 1081 blocked on exact prepared-energy variant linkage;
+- 208 blocked for R1-F V1 due source/prepared basis mismatch requiring scaling;
+- 364 remains promising but not selected.
+
+Projected MAIN capacity after the runtime batch:
+
+3 active exact-energy MAIN RecipeVersions × max 3 repetitions = capacity for up
+to 9 MAIN opportunities/week, sufficient for a seven-opportunity MAIN-only R1-C
+fixture without changing Planner rules.
+
+`54-1р — Котлета рыбная (треска)` is the immediate follow-up after the first
+batch, not part of it.
 
 ## Next step
 
-Final review PR119.
+Final review PR #121.
 
-After PR119 is explicitly reviewed and merged, the next bounded operation is
-catalogue-capacity expansion using the proven authority seam, including
-USSR82-467 / 492 / 1081 where exact source authority permits plus enough MAIN
-capacity for R1-C.
+After #121 is explicitly reviewed and merged, create one bounded runtime/data PR
+for exactly the two frozen School2022 MAIN Recipes and four identity-only
+FoodIngredients.
 
-Do not start that follow-up automatically.
+Do not start that runtime PR automatically.

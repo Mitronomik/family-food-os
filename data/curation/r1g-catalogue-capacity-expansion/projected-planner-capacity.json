@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "operation": "R1G_PROJECTED_PLANNER_CAPACITY",
+  "accepted_base": "879d68087845dea09454089e822f5d8d8238d12d",
+  "current_active_exact_energy": {
+    "breakfast": [
+      "HARD_BOILED_EGG"
+    ],
+    "main": [
+      "BOILED_CHICKEN_MAIN_PRODUCT"
+    ]
+  },
+  "proposed_additions": {
+    "breakfast": [],
+    "main": [
+      "SCHOOL2022_54_29M_BEEF_MEATBALLS",
+      "SCHOOL2022_54_2M_BEEF_GOULASH"
+    ]
+  },
+  "projected_active_exact_energy_counts": {
+    "breakfast": 1,
+    "main": 3
+  },
+  "planner_contract": {
+    "default_max_recipe_repetitions": 3,
+    "algorithm_change": false
+  },
+  "capacity": {
+    "maximum_main_opportunities_per_week_from_three_mains": 9,
+    "seven_main_opportunity_week_feasible_in_principle": true,
+    "breakfast_heavy_week_feasible": false,
+    "rationale": "Three MAIN RecipeVersions can cover seven main opportunities under max 3 uses per RecipeVersion (e.g. 3+3+1). Breakfast remains a separate capacity blocker because only HARD_BOILED_EGG is currently active."
+  },
+  "r1c_impact": {
+    "unblocks_at_least_one_candidate_success_fixture": true,
+    "proposed_fixture": "seven-day MAIN/dinner-only planned-at-home scenario using existing corrected energy-allocation policy",
+    "other_materially_different_patterns": "may remain infeasible and must retain explicit bounded failure diagnostics",
+    "exclusion_note": "Hard ingredient exclusions may reduce the feasible pool; R1-C must prove affected candidates are removed and preserve explicit infeasibility rather than weakening exclusions."
+  }
+}

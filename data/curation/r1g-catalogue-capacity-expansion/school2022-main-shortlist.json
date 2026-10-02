@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "operation": "R1G_SCHOOL2022_MAIN_SHORTLIST",
+  "source_archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+  "source_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+  "authority_scope": "SHORTLIST_ONLY_NOT_PUBLICATION_AUTHORITY",
+  "candidates": [
+    {
+      "rank": 1,
+      "source_recipe_id": "ru-school2022:recipe:54-29м",
+      "title": "Фрикадельки из говядины",
+      "age_scope": "7–11 years institutional school catering",
+      "output_g": "80",
+      "energy_kcal": "153",
+      "required_source_ingredients": 5,
+      "unquantified_process_inputs": [],
+      "material_execution_ready": true,
+      "procurement_mass_ready": true,
+      "route_count": 2,
+      "card_canonical_json_sha256": "e03cb002c2f527dc3b20f8527799382c211952ffe2d3b140e206193eab549388",
+      "source_variant_canonical_json_sha256": "8e3ba5f450fd119283818e62ed8ad415dc729fb39ea168d5e81ebfb4496bfd0e",
+      "energy_reconciliation_canonical_json_sha256": "ee57c7ad4b80cadf3a14d883cf66219a79251d7b98b0e547e4990e271ec511f8",
+      "source_labels": [
+        "говядина 1 категории",
+        "хлеб пшеничный",
+        "масло сливочное",
+        "соль поваренная йодированная",
+        "вода"
+      ],
+      "reason_for_rank": "Fewest source ingredients among strong standalone-main candidates; exact output and source-published kcal are on the same card.",
+      "household_applicability": "REVIEWED_PASS",
+      "final_disposition": "RUNTIME_BATCH_SELECTED",
+      "pre_review_blockers": [
+        "HOUSEHOLD_APPLICABILITY",
+        "EXACT_FOOD_IDENTITY_FORM_REVIEW",
+        "RECIPE_PUBLICATION_REQUIRED"
+      ],
+      "closed_in_r1g": [
+        "HOUSEHOLD_APPLICABILITY",
+        "EXACT_FOOD_IDENTITY_FORM_REVIEW"
+      ],
+      "next_runtime_actions": [
+        "RECIPE_PUBLICATION_REQUIRED",
+        "PREPARED_AUTHORITY_PUBLICATION",
+        "GUARDED_ACTIVATION",
+        "ORDINARY_PLANNER_PROOF"
+      ]
+    },
+    {
+      "rank": 2,
+      "source_recipe_id": "ru-school2022:recipe:54-2м",
+      "title": "Гуляш из говядины",
+      "age_scope": "7–11 years institutional school catering",
+      "output_g": "80",
+      "energy_kcal": "185.6",
+      "required_source_ingredients": 7,
+      "unquantified_process_inputs": [],
+      "material_execution_ready": true,
+      "procurement_mass_ready": true,
+      "route_count": 2,
+      "card_canonical_json_sha256": "d48a9461e98d4d2df0056c379722dc9e6ed248dc74ce65a4a118a1165565209d",
+      "source_variant_canonical_json_sha256": "7ffd4745e935e92e142d7dd4cdb11d9878cd0901bc599bed1d439eb452bb9610",
+      "energy_reconciliation_canonical_json_sha256": "5777b15819089a06b00f3a067dee08352fa75ec03a7b25835b06ffb926e16a28",
+      "source_labels": [
+        "говядина 1 категории",
+        "лук репчатый",
+        "томатное пюре",
+        "масло сливочное",
+        "мука пшеничная высший сорт",
+        "соль поваренная йодированная",
+        "вода"
+      ],
+      "reason_for_rank": "Exact source card contains output and prepared kcal; ordinary household dish is strongly externally corroborated, but accepted project truth still requires an explicit per-recipe household applicability review.",
+      "household_applicability": "REVIEWED_PASS",
+      "final_disposition": "RUNTIME_BATCH_SELECTED",
+      "pre_review_blockers": [
+        "HOUSEHOLD_APPLICABILITY",
+        "EXACT_FOOD_IDENTITY_FORM_REVIEW",
+        "RECIPE_PUBLICATION_REQUIRED"
+      ],
+      "closed_in_r1g": [
+        "HOUSEHOLD_APPLICABILITY",
+        "EXACT_FOOD_IDENTITY_FORM_REVIEW"
+      ],
+      "next_runtime_actions": [
+        "RECIPE_PUBLICATION_REQUIRED",
+        "PREPARED_AUTHORITY_PUBLICATION",
+        "GUARDED_ACTIVATION",
+        "ORDINARY_PLANNER_PROOF"
+      ]
+    },
+    {
+      "rank": 3,
+      "source_recipe_id": "ru-school2022:recipe:54-1р",
+      "title": "Котлета рыбная (треска)",
+      "age_scope": "7–11 years institutional school catering",
+      "output_g": "100",
+      "energy_kcal": "112.6",
+      "required_source_ingredients": 6,
+      "unquantified_process_inputs": [],
+      "material_execution_ready": true,
+      "procurement_mass_ready": true,
+      "route_count": 4,
+      "card_canonical_json_sha256": "9edb70a192f3a284656a72e6e09d89ee26038fd39e7e52edd2689360fcd6d57d",
+      "source_variant_canonical_json_sha256": "6d7b9a051517eacdb643ddc542ed492a24a2708189954d4cb26ff7bfed2c3d73",
+      "energy_reconciliation_canonical_json_sha256": "eac58412d1e9c33ffbfb060f95266ee4e18cfd57d0818773a3fc64e525532f75",
+      "source_labels": [
+        "треска (филе)",
+        "хлеб пшеничный",
+        "яйцо куриное",
+        "масло сливочное",
+        "соль поваренная йодированная",
+        "вода"
+      ],
+      "reason_for_rank": "Adds fish diversity and has exact source output/kcal, but has more process-route alternatives and exact fish-form review than the two beef candidates.",
+      "household_applicability": "REVIEWED_PASS",
+      "final_disposition": "FOLLOW_UP_AFTER_FIRST_BATCH",
+      "pre_review_blockers": [
+        "HOUSEHOLD_APPLICABILITY",
+        "EXACT_FOOD_IDENTITY_FORM_REVIEW",
+        "RECIPE_PUBLICATION_REQUIRED"
+      ],
+      "closed_in_r1g": [
+        "HOUSEHOLD_APPLICABILITY"
+      ],
+      "next_runtime_actions": [
+        "EXACT_FOOD_IDENTITY_FORM_REVIEW",
+        "RECIPE_PUBLICATION_REQUIRED",
+        "PREPARED_AUTHORITY_PUBLICATION",
+        "GUARDED_ACTIVATION",
+        "ORDINARY_PLANNER_PROOF"
+      ]
+    }
+  ],
+  "common_process_boundary": {
+    "retained_r1e_status": "HOUSEHOLD_APPLICABILITY",
+    "process_evidence_examples": "institutional_school_catering_only / domestic_applicability=unestablished / not_executable_rule=true",
+    "rule": "Exact ingredient/output/nutrition evidence is not enough for household Planner activation. Institutional thawing/holding/serving rules must not be promoted to consumer steps without a reviewed applicability decision.",
+    "review_result": "CLOSED_FOR_THREE_NAMED_CARDS_ONLY",
+    "blanket_school2022_authority": false
+  }
+}

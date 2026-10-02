@@ -1,5 +1,111 @@
 # Handoff
 
+## R1-G gate review-ready — 2026-10-01
+
+Issue #120 / PR #121 now freeze the next runtime batch after merged PR #119.
+
+Selected runtime Recipes:
+
+- `SCHOOL2022_54_29M_BEEF_MEATBALLS` — School2022 54-29м — 80 g — exact 153 kcal;
+- `SCHOOL2022_54_2M_BEEF_GOULASH` — School2022 54-2м — 80 g — exact 185.6 kcal.
+
+Both passed the user-approved bounded per-recipe household-applicability review.
+Institutional thaw/holding/serving rules remain source context and are not promoted
+to consumer RecipeSteps.
+
+Exact runtime provenance + Russian RecipeVersion seeds are frozen in
+`data/curation/r1g-catalogue-capacity-expansion/prepared-publication-specs.json`.
+Runtime must not choose alternative source/version/rights/step strings.
+
+Prepared Nutrition reuses the proven R1-F seam:
+`PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`.
+Only ENERGY_KCAL is promoted; all other unreviewed codes remain UNKNOWN.
+
+Future runtime identity-only publications:
+- BEEF_CATEGORY_1_RAW;
+- WHEAT_BREAD_HIGH_GRADE_STALE;
+- SALT_IODIZED;
+- TOMATO_PUREE_PASTE.
+
+Existing identities reused:
+- BUTTER_PEASANT_72_5_UNSALTED;
+- WATER;
+- ONION_BULB_FRESH;
+- FLOUR_WHEAT_HIGH_GRADE.
+
+Projected MAIN capacity becomes 3 active exact-energy RecipeVersions, supporting
+up to 9 MAIN opportunities/week under the unchanged max repetition 3. This is
+enough for a seven-opportunity MAIN-only R1-C success fixture in principle.
+
+467/492/1081/208 remain blocked exactly as recorded; 364 remains promising but is
+not in the first runtime batch. 54-1р is the immediate School2022 follow-up.
+
+No runtime/schema/Planner change is in PR #121. Do not start the runtime PR until
+#121 is reviewed and merged.
+
+## R1-G research checkpoint — 2026-10-01
+
+Issue #120 / draft PR #121 are active on
+`docs/r1g-catalogue-capacity-expansion-gate`.
+
+Important correction to the post-R1-F expectation: no candidate is yet fully
+runtime-ready.
+
+Verified durable private corpus archive:
+- size 206692075 bytes;
+- SHA-256 `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`.
+
+Current dispositions:
+- USSR82-467 — blocked: unquantified required salt;
+- USSR82-492 — blocked: unquantified required salt;
+- USSR82-1081 — blocked: discovered 150/10 / 370 kcal row is not exact-linked to
+  the selected III branch;
+- USSR82-208 — not R1-F V1 ready because 250 g prepared nutrition vs 1000 g source
+  Recipe basis would require forbidden scaling;
+- USSR82-364 — strongest retained USSR82 MAIN candidate, but needs exact
+  III+margarine receipt and `Жир кулинарный` identity/form closure.
+
+School2022:
+- exact source PDF in the pinned archive independently verifies at
+  `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`;
+- exact same-card output/kcal exists for many material-ready mains;
+- leading shortlist is 54-29м / 54-2м / 54-1р;
+- accepted R1-E truth still applies `HOUSEHOLD_APPLICABILITY` to 264 unpublished
+  School2022 cards, and retained process evidence says
+  domestic_applicability=unestablished for institutional rules.
+
+Do not silently treat exact kcal as household publication readiness. A reviewed
+per-recipe applicability decision/evidence path is required.
+
+No runtime, migration, activation or Planner change has started.
+
+## R1-G catalogue-capacity expansion gate started — 2026-10-01
+
+PR #119 is merged into main at
+`879d68087845dea09454089e822f5d8d8238d12d`.
+
+Issue #120 now owns the next bounded operation:
+`R1-G: catalogue-capacity expansion evidence and contract gate`.
+
+Branch:
+`docs/r1g-catalogue-capacity-expansion-gate`.
+
+Initial evidence state:
+
+- USSR82-1081: exact variant/output/ingredient quantities retained, but exact
+  cooked prepared-output ENERGY_KCAL receipt is not yet proven; READY_RAW is not
+  authority;
+- USSR82-467: blocked on exact salt quantity;
+- USSR82-492: blocked on exact salt quantity;
+- current explicit historical MAIN alternatives 364/208 retain source/form
+  blockers; broader cross-corpus MAIN ranking is required;
+- no fixed number of additional Recipes is assumed for R1-C; capacity must be
+  calculated from concrete repository-backed scenarios under the unchanged
+  repetition limit.
+
+R1-G is docs/data evidence only. No runtime, migration, publication, activation,
+Planner change or R1-C execution is authorized.
+
 ## R1-F authoritative Planner acceptance closure — 2026-10-01
 
 Runtime freeze remains:

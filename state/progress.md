@@ -1,5 +1,88 @@
 # Progress
 
+## R1-G gate frozen — 2026-10-01
+
+The docs/data evidence gate now has an exact next runtime batch.
+
+Frozen batch:
+- School2022 54-29м / beef meatballs / 80 g / 153 kcal;
+- School2022 54-2м / beef goulash / 80 g / 185.6 kcal.
+
+Completed:
+- durable corpus/archive/PDF hash verification;
+- USSR82 467/492/1081/208 fail-closed dispositions;
+- MAIN cross-corpus ranking;
+- user-approved bounded household-applicability review for 54-29м / 54-2м / 54-1р;
+- exact identity-only FoodIngredient decisions;
+- exact source-card/variant/energy record hash verification;
+- full immutable runtime publication specs and Russian RecipeVersion seeds;
+- frozen PREPARED_OUTPUT_V1 receipt for the two selected mains;
+- projected Planner capacity.
+
+Projected after runtime:
+- breakfast exact-energy active = 1;
+- main exact-energy active = 3;
+- MAIN opportunity capacity under repetition=3 = 9/week.
+
+No runtime, migration, schema or Planner algorithm changes are present in #121.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
+## R1-G research checkpoint — 2026-10-01
+
+Draft PR #121 now contains a substantive evidence gate rather than only a shell.
+
+Verified:
+- exact post-PR119 accepted base;
+- exact durable private corpus archive bytes/hash;
+- exact School2022 source PDF bytes/hash;
+- 467 / 492 salt blockers remain real;
+- 1081 READY_RAW is not prepared-output authority and the discovered 370 kcal row
+  lacks exact selected-variant linkage;
+- 208 prepared row/source basis mismatch would require forbidden scaling;
+- 364 has a strong III output / nutrient-row match but is not yet fully pinned;
+- School2022 exact-kcal MAIN candidates exist, but household applicability remains
+  the accepted first blocker.
+
+Added:
+- `research-status.json`;
+- `school2022-main-shortlist.json`;
+- refined `candidate-dispositions.json`;
+- research findings in the R1-G gate document.
+
+Current runtime batch:
+`EMPTY / NOT YET AUTHORIZED`.
+
+Status:
+`R1_G_EVIDENCE_RESEARCH_ACTIVE`.
+
+## R1-G evidence gate initialized — 2026-10-01
+
+Accepted base:
+`879d68087845dea09454089e822f5d8d8238d12d` (merged PR #119).
+
+Created:
+
+- issue #120;
+- branch `docs/r1g-catalogue-capacity-expansion-gate`;
+- canonical gate draft
+  `docs/family-food/r1g-catalogue-capacity-expansion-gate.md`;
+- initial evidence package
+  `data/curation/r1g-catalogue-capacity-expansion/`.
+
+Initial deterministic dispositions:
+
+- 1081 → `PREPARED_OUTPUT_RECEIPT_RESEARCH_REQUIRED`;
+- 467 → `SALT_QUANTITY_RESEARCH_REQUIRED`;
+- 492 → `SALT_QUANTITY_RESEARCH_REQUIRED`;
+- MAIN batch → `CROSS_CORPUS_MAIN_SHORTLIST_RESEARCH_REQUIRED`.
+
+No runtime/schema changes have started.
+
+Status:
+`R1_G_EVIDENCE_RESEARCH_ACTIVE`.
+
 ## R1-F ordinary Planner boundary acceptance — 2026-10-01
 
 Closed the last independent-review blocker with a test-only change.

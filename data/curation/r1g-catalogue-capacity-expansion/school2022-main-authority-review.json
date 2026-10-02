@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "operation": "R1G_SCHOOL2022_MAIN_IDENTITY_AND_PREPARED_AUTHORITY_REVIEW",
+  "accepted_base": "879d68087845dea09454089e822f5d8d8238d12d",
+  "authority_seam": {
+    "authority_kind": "PREPARED_OUTPUT_V1",
+    "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+    "nutrient_policy": "ENERGY_KCAL only AVAILABLE for the proposed batch; all other frozen codes UNKNOWN unless separately reviewed"
+  },
+  "reusable_identity_decisions": [
+    {
+      "source_label": "говядина 1 категории",
+      "canonical_code": "BEEF_CATEGORY_1_RAW",
+      "canonical_name": "Говядина I категории, сырая",
+      "disposition": "CREATE_IDENTITY_ONLY",
+      "basis": "Exact source label plus source process beginning with thawing/raw-meat preparation; no Nutrition/Composition authority inferred."
+    },
+    {
+      "source_label": "хлеб пшеничный",
+      "canonical_code": "WHEAT_BREAD_HIGH_GRADE_STALE",
+      "canonical_name": "Хлеб пшеничный из муки высшего сорта, черствый",
+      "disposition": "CREATE_IDENTITY_ONLY",
+      "basis": "Source ingredient row plus exact process wording 'черствый пшеничный хлеб (высшего сорта)'."
+    },
+    {
+      "source_label": "соль поваренная йодированная",
+      "canonical_code": "SALT_IODIZED",
+      "canonical_name": "Соль поваренная йодированная",
+      "disposition": "CREATE_IDENTITY_ONLY",
+      "basis": "Exact source food identity; generic SALT substitution is forbidden."
+    },
+    {
+      "source_label": "вода",
+      "canonical_code": "WATER",
+      "disposition": "REUSE_IDENTITY",
+      "basis": "Exact source label. No new Composition authority required by prepared-output Recipe Nutrition."
+    },
+    {
+      "source_label": "масло сливочное",
+      "canonical_code": "BUTTER_PEASANT_72_5_UNSALTED",
+      "disposition": "REUSE_ACCEPTED_STEP8_IDENTITY",
+      "basis": "School2022 form evidence pins 72.5% butter; accepted Step8 receipt established the school-required no-added-salt 72.5% form."
+    },
+    {
+      "source_label": "лук репчатый",
+      "canonical_code": "ONION_BULB_FRESH",
+      "disposition": "REUSE_ACCEPTED_R1A_IDENTITY",
+      "basis": "Source process explicitly prepares fresh bulb onion; accepted R1-A canonical identity exists."
+    },
+    {
+      "source_label": "мука пшеничная высший сорт",
+      "canonical_code": "FLOUR_WHEAT_HIGH_GRADE",
+      "disposition": "REUSE_ACCEPTED_R1A_IDENTITY",
+      "basis": "Exact source grade matches accepted R1-A identity."
+    },
+    {
+      "source_label": "томатное пюре",
+      "canonical_code": "TOMATO_PUREE_PASTE",
+      "canonical_name": "Томатное пюре (паста)",
+      "disposition": "CREATE_IDENTITY_ONLY",
+      "basis": "Exact source label plus School2022 procurement-quality row for concentrated tomato puree/paste. No FIC Composition profile is inferred."
+    },
+    {
+      "source_label": "треска (филе)",
+      "canonical_code": "COD_FILLET_RAW",
+      "canonical_name": "Треска, филе сырое",
+      "disposition": "CREATE_IDENTITY_ONLY",
+      "basis": "Exact source food/form; no species-specific FIC Composition equivalence asserted."
+    },
+    {
+      "source_label": "яйцо куриное",
+      "canonical_code": "EGG",
+      "disposition": "REUSE_IDENTITY",
+      "basis": "Exact existing canonical egg identity; no shell-basis Composition inference required for prepared-output authority."
+    }
+  ],
+  "candidates": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-29м",
+      "canonical_recipe_code": "SCHOOL2022_54_29M_BEEF_MEATBALLS",
+      "canonical_name": "Фрикадельки из говядины",
+      "meal_type_code": "main",
+      "source_output_g": "80",
+      "prepared_energy_kcal": "153",
+      "prepared_authority_disposition": "PREPARED_OUTPUT_READY",
+      "required_food_codes": [
+        "BEEF_CATEGORY_1_RAW",
+        "WHEAT_BREAD_HIGH_GRADE_STALE",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED",
+        "WATER"
+      ],
+      "exact_source_card_sha256": "e03cb002c2f527dc3b20f8527799382c211952ffe2d3b140e206193eab549388",
+      "exact_source_variant_sha256": "8e3ba5f450fd119283818e62ed8ad415dc729fb39ea168d5e81ebfb4496bfd0e",
+      "exact_energy_reconciliation_sha256": "ee57c7ad4b80cadf3a14d883cf66219a79251d7b98b0e547e4990e271ec511f8",
+      "household_applicability": "REVIEWED_PASS",
+      "rights_route": "Reuse reviewed School2022 normative factual-recipe rights basis from Step9; source PDF SHA remains pinned.",
+      "runtime_batch_priority": 1
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2м",
+      "canonical_recipe_code": "SCHOOL2022_54_2M_BEEF_GOULASH",
+      "canonical_name": "Гуляш из говядины",
+      "meal_type_code": "main",
+      "source_output_g": "80",
+      "prepared_energy_kcal": "185.6",
+      "prepared_authority_disposition": "PREPARED_OUTPUT_READY",
+      "required_food_codes": [
+        "BEEF_CATEGORY_1_RAW",
+        "ONION_BULB_FRESH",
+        "TOMATO_PUREE_PASTE",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "FLOUR_WHEAT_HIGH_GRADE",
+        "SALT_IODIZED",
+        "WATER"
+      ],
+      "exact_source_card_sha256": "d48a9461e98d4d2df0056c379722dc9e6ed248dc74ce65a4a118a1165565209d",
+      "exact_source_variant_sha256": "7ffd4745e935e92e142d7dd4cdb11d9878cd0901bc599bed1d439eb452bb9610",
+      "exact_energy_reconciliation_sha256": "5777b15819089a06b00f3a067dee08352fa75ec03a7b25835b06ffb926e16a28",
+      "household_applicability": "REVIEWED_PASS",
+      "rights_route": "Reuse reviewed School2022 normative factual-recipe rights basis from Step9; source PDF SHA remains pinned.",
+      "runtime_batch_priority": 2
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-1р",
+      "canonical_recipe_code": "SCHOOL2022_54_1R_COD_CUTLET",
+      "canonical_name": "Котлета рыбная из трески",
+      "meal_type_code": "main",
+      "source_output_g": "100",
+      "prepared_energy_kcal": "112.6",
+      "prepared_authority_disposition": "PREPARED_OUTPUT_READY_AFTER_IDENTITY_BATCH",
+      "required_food_codes": [
+        "COD_FILLET_RAW",
+        "WHEAT_BREAD_HIGH_GRADE_STALE",
+        "EGG",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED",
+        "WATER"
+      ],
+      "exact_source_card_sha256": "9edb70a192f3a284656a72e6e09d89ee26038fd39e7e52edd2689360fcd6d57d",
+      "exact_source_variant_sha256": "6d7b9a051517eacdb643ddc542ed492a24a2708189954d4cb26ff7bfed2c3d73",
+      "exact_energy_reconciliation_sha256": "eac58412d1e9c33ffbfb060f95266ee4e18cfd57d0818773a3fc64e525532f75",
+      "household_applicability": "REVIEWED_PASS",
+      "rights_route": "Reuse reviewed School2022 normative factual-recipe rights basis from Step9; source PDF SHA remains pinned.",
+      "runtime_batch_priority": 3,
+      "note": "Kept out of the first bounded runtime batch to minimize new identity/form surface; retained as immediate follow-up for fish diversity."
+    }
+  ],
+  "next_runtime_batch": {
+    "recipe_ids": [
+      "ru-school2022:recipe:54-29м",
+      "ru-school2022:recipe:54-2м"
+    ],
+    "reason": "Two mains close with the smallest shared identity-only batch and exact same-card prepared energy. Together with BOILED_CHICKEN_MAIN_PRODUCT they provide three ordinary MAIN RecipeVersions under unchanged Planner rules.",
+    "new_identity_only_foods": [
+      "BEEF_CATEGORY_1_RAW",
+      "WHEAT_BREAD_HIGH_GRADE_STALE",
+      "SALT_IODIZED",
+      "TOMATO_PUREE_PASTE"
+    ],
+    "reused_foods": [
+      "BUTTER_PEASANT_72_5_UNSALTED",
+      "WATER",
+      "ONION_BULB_FRESH",
+      "FLOUR_WHEAT_HIGH_GRADE"
+    ],
+    "migration_required": false,
+    "new_nutrition_authority_kind_required": false,
+    "planner_change_required": false
+  },
+  "projected_capacity": {
+    "active_main_before": 1,
+    "additional_main_after_batch": 2,
+    "projected_active_main_after": 3,
+    "max_recipe_repetitions": 3,
+    "projected_main_opportunity_capacity_per_week": 9,
+    "supports_seven_main_opportunities_without_repetition_change": true,
+    "breakfast_capacity_unchanged": true,
+    "note": "This is sufficient to make a dinner/main-only seven-opportunity R1-C scenario feasible in principle; breakfast-heavy scenarios remain separately capacity-bound."
+  }
+}

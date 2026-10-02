@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "operation": "R1G_SCHOOL2022_HOUSEHOLD_APPLICABILITY_REVIEW",
+  "decision_basis": "User approved bounded per-recipe household-applicability review on 2026-10-01. No blanket School2022 authority.",
+  "accepted_base": "879d68087845dea09454089e822f5d8d8238d12d",
+  "source": {
+    "archive_locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "source_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d"
+  },
+  "review_rule": {
+    "pass_requires": [
+      "non-clinical ordinary food semantics",
+      "core preparation executable with ordinary household equipment",
+      "institutional logistics can be quarantined without changing ingredient/output/nutrition source truth",
+      "independent household corroboration for the same core cooking method",
+      "no new nutrient, yield, retention or quantity inference"
+    ],
+    "institutional_context_policy": "Retain as provenance/source context only. Do not promote defroster/meat-shop, institutional holding/serving-temperature or procurement instructions to consumer RecipeSteps.",
+    "nutrition_policy": "Household corroboration is applicability evidence only. School2022 card/output/nutrition remains the sole prepared-output source authority."
+  },
+  "candidates": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-29м",
+      "title": "Фрикадельки из говядины",
+      "planner_role_review": "main",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "source_output_g": "80",
+      "source_energy_kcal": "153",
+      "source_core_steps": [
+        "grind thawed beef",
+        "combine with soaked and pressed stale high-grade wheat bread and salt",
+        "add water and mix",
+        "form 15–20 g balls",
+        "place on greased tray, add water, bake 20 minutes"
+      ],
+      "quarantined_source_context": [
+        "thaw meat in defroster or meat-shop production tables",
+        "institutional serving temperature requirement"
+      ],
+      "independent_corroboration": [
+        {
+          "url": "https://www.gastronom.ru/recipe/52006/frikadelki-s-kartofelem-v-duhovke-so-slivkami",
+          "retrieved_date": "2026-10-01",
+          "corroborates": [
+            "beef meatballs are ordinary home main-course food",
+            "wheat bread can be soaked in water and added to beef mince",
+            "household meatball shaping and oven baking use ordinary kitchen equipment"
+          ],
+          "authority_scope": "household_applicability_only"
+        },
+        {
+          "url": "https://www.russianfood.com/recipes/recipe.php?rid=148575",
+          "retrieved_date": "2026-10-01",
+          "corroborates": [
+            "beef meatballs are formed and baked in a domestic oven",
+            "water can be added to dense beef meatball mixture"
+          ],
+          "authority_scope": "household_applicability_only"
+        }
+      ],
+      "rationale": "The recipe-defining preparation is ordinary household cooking. Institutional thawing/serving logistics are separable source context and are not needed as executable consumer steps."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2м",
+      "title": "Гуляш из говядины",
+      "planner_role_review": "main",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "source_output_g": "80",
+      "source_energy_kcal": "185.6",
+      "source_core_steps": [
+        "prepare onion and tomato puree",
+        "cook beef pieces with water, onion, tomato puree and salt",
+        "simmer covered about one hour",
+        "prepare a flour-thickened sauce from broth",
+        "combine sauce and meat and finish cooking"
+      ],
+      "quarantined_source_context": [
+        "thaw meat in defroster or meat-shop production tables",
+        "institutional serving temperature requirement"
+      ],
+      "independent_corroboration": [
+        {
+          "url": "https://www.gastronom.ru/recipe/55920/guljash-iz-govjadiny-s-tomatnoj-pastoj",
+          "retrieved_date": "2026-10-01",
+          "corroborates": [
+            "beef goulash with onion/tomato/flour is ordinary home lunch/dinner",
+            "flour is used to thicken sauce",
+            "covered low-heat simmering for about one hour is a household method"
+          ],
+          "authority_scope": "household_applicability_only"
+        }
+      ],
+      "rationale": "All recipe-defining cooking operations are executable with a pan/pot and standard home equipment. Institutional thawing/serving instructions are source context, not consumer execution requirements."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-1р",
+      "title": "Котлета рыбная (треска)",
+      "planner_role_review": "main",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "source_output_g": "100",
+      "source_energy_kcal": "112.6",
+      "source_core_steps": [
+        "prepare cod fillet",
+        "combine minced fish with soaked wheat bread, egg, butter, salt and water",
+        "form fish cutlets",
+        "bake with water or strained fish broth until done"
+      ],
+      "quarantined_source_context": [
+        "institutional thawing-water temperature/salt-loss-control rule",
+        "institutional serving temperature requirement",
+        "paraconvection equipment reference"
+      ],
+      "independent_corroboration": [
+        {
+          "url": "https://www.gastronom.ru/recipe/43258/kotlety-iz-treski-v-duhovke",
+          "retrieved_date": "2026-10-01",
+          "corroborates": [
+            "cod cutlets are described as a home second course",
+            "cod fillet, wheat bread, egg and butter are ordinary household cutlet ingredients",
+            "oven finishing is ordinary household equipment",
+            "frozen cod fillet can be thawed in a household refrigerator"
+          ],
+          "authority_scope": "household_applicability_only"
+        },
+        {
+          "url": "https://www.russianfood.com/recipes/recipe.php?rid=36875",
+          "retrieved_date": "2026-10-01",
+          "corroborates": [
+            "fish fillet with wheat bread and egg can be formed and oven-baked at home"
+          ],
+          "authority_scope": "household_applicability_only"
+        }
+      ],
+      "rationale": "The dish itself and its core mixing/forming/baking process are household-executable. Institutional thawing controls are not promoted; household applicability does not grant permission to rewrite source Nutrition or ingredient identity."
+    }
+  ],
+  "review_result": {
+    "household_applicable_count": 3,
+    "blanket_school2022_authority_granted": false,
+    "remaining_gates": [
+      "exact FoodIngredient/form identity review",
+      "prepared-output publication contract binding for selected runtime batch",
+      "ordinary Planner role/admission proof in runtime PR"
+    ]
+  }
+}
