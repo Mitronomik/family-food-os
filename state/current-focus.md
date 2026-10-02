@@ -98,7 +98,8 @@ Do not:
 
 Runtime behavior is frozen at `c300118fd554829ddd9d6429c2abccba8dbb250b`.
 
-Final exact-head verification on the current PR head is complete:
+Final exact-head verification was completed on review head
+`d1bf279ffe76084d525dd99edbb9ff6346823f2d`:
 
 - R1-H runtime — SUCCESS;
 - focused/affected R1-H suite — 135 passed;
@@ -111,7 +112,9 @@ Final exact-head verification on the current PR head is complete:
 - Partial nutrition profiles — focused + backend shards 0/1/2/3 + launcher SUCCESS.
 
 After the runtime freeze, only `state/*` and test-only acceptance assertions
-changed; production runtime bytes are unchanged.
+changed; production runtime bytes are unchanged. Relative to the verified
+`d1bf279...` review head, the subsequent truth correction changes only
+`state/*`.
 
 Status:
 
