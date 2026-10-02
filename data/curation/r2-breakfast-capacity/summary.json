@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "operation": "R2_BREAKFAST_CAPACITY_SUMMARY",
+  "accepted_base": "8995e85e4cda2ae30fc62fdc63daaf441f4226bd",
+  "issue": 127,
+  "before": {
+    "breakfast_active_exact_energy_count": 1,
+    "breakfast_capacity_per_week": 3,
+    "main_active_exact_energy_count": 3
+  },
+  "proposed_after": {
+    "breakfast_active_exact_energy_count": 3,
+    "breakfast_capacity_per_week": 9,
+    "seven_breakfast_week_feasible": true
+  },
+  "selected_recipe_codes": [
+    "SCHOOL2022_54_1O_NATURAL_OMELET",
+    "SCHOOL2022_54_9K_MILK_OAT_PORRIDGE"
+  ],
+  "identity_only_foods": [
+    "MILK_2_5",
+    "OAT_GROATS"
+  ],
+  "authority_kind": "PREPARED_OUTPUT_V1",
+  "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+  "migration_required": false,
+  "planner_change_required": false,
+  "new_nutrition_authority_kind_required": false,
+  "allergen_automation": false,
+  "follow_up": "After R2 review and merge, reassess the next R2/R3 batch by marginal weekly variety and corpus closure. Do not start DC4/Gate1-CLOSE or PR9 automatically."
+}

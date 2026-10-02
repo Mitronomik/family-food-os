@@ -1,5 +1,51 @@
 # Handoff
 
+## R2 breakfast capacity final handoff — 2026-10-02
+
+Accepted base:
+`8995e85e4cda2ae30fc62fdc63daaf441f4226bd`.
+
+Issue #127 / PR #128 / branch `feat/r2-breakfast-capacity`.
+
+Proof/runtime freeze:
+`1d93631b07a25a260b7d45cc0b91f3437865fd8a`.
+
+R2 selection follows Issue #99's maximum-marginal-capacity rule. BREAKFAST was
+the bottleneck at one active exact-energy RecipeVersion; MAIN already had three.
+
+Published and activated:
+
+- School2022 54-1о / natural omelet / 150 g / 225.5 kcal;
+- School2022 54-9к / viscous milk oat porridge / 200 g / 272.9 kcal.
+
+New identity-only foods:
+
+- `MILK_2_5` — exact 2.5% fat identity without invented heat-treatment subtype;
+- `OAT_GROATS` — exact oat-groats identity, not `OATS_ROLLED`.
+
+No Nutrition/Composition is published for those identities.
+
+The new RecipeVersions reuse the R1-F/R1-H
+`PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1` seam. ENERGY_KCAL is
+the sole AVAILABLE nutrient; the remaining frozen codes stay UNKNOWN.
+
+The ordinary production Planner now has three active exact-energy BREAKFAST
+candidates and proves a persisted seven-BREAKFAST week at repetition=3.
+
+Failure semantics verified:
+exact replay is zero-write, deliberate deactivation remains deactivated, frozen
+artifact tamper fails, partial Recipe/prepared authority state fails, conflicting
+FoodIngredient identity fails, and milk exclusion leaves no partial MealPlan.
+
+Exact proof/runtime-freeze verification:
+120 passed; Ruff check/format SUCCESS; scope/whitespace SUCCESS; AI disabled;
+migration head remains 0042.
+
+PR #128 is READY FOR FINAL REVIEW.
+
+After merge, reassess the next R2/R3 batch. Do not start DC4/Gate1-CLOSE or PR9
+automatically.
+
 ## R1-C final proof receipt — 2026-10-02
 
 Accepted implementation base:

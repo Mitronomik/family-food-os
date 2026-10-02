@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "operation": "R2_BREAKFAST_CAPACITY_SELECTION",
+  "accepted_base": "8995e85e4cda2ae30fc62fdc63daaf441f4226bd",
+  "issue": 127,
+  "decision_rule": "MAXIMUM_MARGINAL_INCREASE_IN_REALISTIC_WEEKLY_VARIETY_AND_PLANNER_CAPACITY",
+  "current_capacity": {
+    "planner_version": "planner-v0.4",
+    "compatibility_version": "meal-role-recipe-v2",
+    "max_recipe_repetitions": 3,
+    "breakfast_active_exact_energy": [
+      "HARD_BOILED_EGG"
+    ],
+    "main_active_exact_energy": [
+      "BOILED_CHICKEN_MAIN_PRODUCT",
+      "SCHOOL2022_54_29M_BEEF_MEATBALLS",
+      "SCHOOL2022_54_2M_BEEF_GOULASH"
+    ],
+    "breakfast_opportunity_capacity_per_week": 3,
+    "main_opportunity_capacity_per_week": 9
+  },
+  "selected": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-1о",
+      "canonical_code": "SCHOOL2022_54_1O_NATURAL_OMELET",
+      "title": "Омлет натуральный",
+      "planner_role": "breakfast",
+      "source_output_g": "150",
+      "prepared_energy_kcal": "225.5",
+      "card_canonical_json_sha256": "b3039a16af34cfe609599b5981d94da6092fe2ebeb257e936b395748adcc25f2",
+      "source_variant_canonical_json_sha256": "9437d12e23ad89ebae2c0291f194c014feb0050348d8bfc23b66c5ecab4b4c60",
+      "source_process_canonical_json_sha256": "7ced2cd0c521014f086a606900fb8187adb2cd4e31ce2805b46fdec85b4fb140",
+      "selected_resolved_route_canonical_json_sha256": "9d64162ec09c1dd814f1f53a15a9a3388a3a0c10c5460f6c8d89ce396dda1238",
+      "energy_reconciliation_canonical_json_sha256": "7cc4771e338c45b1c6ce21bea9aae9ed1312fc19663afd977646e20a728fed7c",
+      "selected_process": "BAKED_MAIN_SOURCE_PROCESS",
+      "source_process_alternative_not_selected": "STEAM_25_30_MIN",
+      "new_identity_only_foods": [
+        "MILK_2_5"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-9к",
+      "canonical_code": "SCHOOL2022_54_9K_MILK_OAT_PORRIDGE",
+      "title": "Каша вязкая молочная овсяная",
+      "planner_role": "breakfast",
+      "source_output_g": "200",
+      "prepared_energy_kcal": "272.9",
+      "card_canonical_json_sha256": "56091d746d23edd7e95ecb0992fb3f1e4da9b5de1fab5737eaac6a8c324a5397",
+      "source_variant_canonical_json_sha256": "d66c0a74114cb8fdd004c138990d2ef20c197b81137e274e50c72e5dca51f55b",
+      "source_process_canonical_json_sha256": "70847b6290555121e72bcba7771f52c1ba549fb227df44dfd3d7d062a164898f",
+      "selected_resolved_route_canonical_json_sha256": "14839658a4d2e5a810d45559d07afd35812ac0ff4b8dee9ca7cf5b833d2052bd",
+      "energy_reconciliation_canonical_json_sha256": "45cec818eb4fc758864fdba5d3b4b9e7a2e528c9f5a17f6e894f3f01756d2fe4",
+      "selected_process": "BOILED_SOURCE_PROCESS",
+      "new_identity_only_foods": [
+        "MILK_2_5",
+        "OAT_GROATS"
+      ]
+    }
+  ],
+  "identity_decisions": [
+    {
+      "source_label": "молоко",
+      "source_form_evidence": "fat_percent=2.5",
+      "canonical_code": "MILK_2_5",
+      "canonical_name": "Молоко 2,5%",
+      "category_code": "dairy",
+      "disposition": "CREATE_IDENTITY_ONLY",
+      "basis": "Exact recipe-level source form pins 2.5% fat. School2022 procurement evidence allows pasteurization, sterilization or UHT, so no narrower heat-treatment identity is invented.",
+      "procurement_product_sha256": "fbb118caa92a4549f400808eeda6b429f43b1b83e595a90bd8ce074d5c864b31",
+      "procurement_standard_sha256": "0a9ffdd9d6fbd30d7d0bba9a0fc676733d27a81230c6a2de3f5a775da0ab078b",
+      "procurement_characteristics_sha256": "2059d261541447b28da30d4b543d22c7d22f44380d365bbbef7d44895299c059"
+    },
+    {
+      "source_label": "крупа овсяная",
+      "canonical_code": "OAT_GROATS",
+      "canonical_name": "Крупа овсяная",
+      "category_code": "grains",
+      "disposition": "CREATE_IDENTITY_ONLY",
+      "basis": "Exact School2022 source label is oat groats. Existing OATS_ROLLED is not silently reused because rolled-flake equivalence is not established by the selected recipe.",
+      "procurement_product_sha256": "b9034ebad72e8b35939e9a329d762d7ee1d6fb064c4ec8cd653628751b2fc336",
+      "procurement_standard_sha256": "579935f2f5b2fcc85ee3e8274333fecb27d2cd5739fccf61e8e604dfb00611d7",
+      "procurement_characteristics_sha256": "8ef4d9a8186135a7c306c38e13eb322b5e4820af37f84d07cd33bce5cccb5675"
+    }
+  ],
+  "rejected_nearby_identity_substitutions": [
+    "MILK_2",
+    "MILK_WHOLE",
+    "MILK_PASTEURIZED_3_2",
+    "OATS_ROLLED"
+  ],
+  "deferred_alternatives": {
+    "USSR82-467": "BLOCKED_REQUIRED_QUANTITY_UNRESOLVED",
+    "USSR82-492": "BLOCKED_REQUIRED_QUANTITY_UNRESOLVED",
+    "USSR82-1081": "BLOCKED_PREPARED_ENERGY_VARIANT_LINKAGE_UNPROVEN",
+    "ru-school2022:recipe:54-1р": "VALID_MAIN_DIVERSITY_FOLLOW_UP_NOT_CURRENT_CAPACITY_BOTTLENECK"
+  },
+  "projected_after_batch": {
+    "breakfast_active_exact_energy_count": 3,
+    "breakfast_opportunity_capacity_per_week": 9,
+    "seven_breakfast_opportunity_week_feasible": true,
+    "planner_algorithm_change": false
+  }
+}
