@@ -77,7 +77,7 @@ At minimum:
 - ordinary `PlannerService.compose_authoritative_request(...)`;
 - `planner-v0.4`;
 - `meal-role-recipe-v2`;
-- real repository-backed household/member meal-pattern state;
+- materially different repository-backed accepted household/member meal patterns;
 - one complete seven-day generated **and persisted** week;
 - individualized persisted Servings;
 - deterministic semantic replay / trace fingerprint;
@@ -126,5 +126,8 @@ substitute for new R1-C tests.
 
 Implement Issue #124 as one bounded R1-C PR.
 
-After independent review and merge, reassess DC4 / Gate1-CLOSE readiness.
-Do not start Gate1-CLOSE or PR9 automatically.
+After independent review and merge, reassess and explicitly authorize the next
+R2/R3 corpus-expansion operation toward the DATA-CORPUS-V1 baseline and
+DC4 / Gate1-CLOSE.
+
+Do not start R2/R3, DC4, Gate1-CLOSE or PR9 automatically.
