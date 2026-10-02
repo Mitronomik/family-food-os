@@ -266,9 +266,7 @@ def test_r1h_fresh_recipe_and_authority_failure_rolls_back(
         )
 
 
-def test_r1h_activation_failure_keeps_exact_publication_inactive(
-    database, monkeypatch
-):
+def test_r1h_activation_failure_keeps_exact_publication_inactive(database, monkeypatch):
     def fail_activate(self, recipe_id):
         del self, recipe_id
         raise RuntimeError("injected activation failure")
