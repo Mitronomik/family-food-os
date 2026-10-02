@@ -5,7 +5,6 @@ from datetime import date, timedelta
 from decimal import Decimal
 
 import pytest
-
 from app.db import migrations
 from app.db.config import REPOSITORY_ROOT, DatabaseConfig
 from app.domain.meal_patterns import MealRole
