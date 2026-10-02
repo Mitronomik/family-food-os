@@ -438,12 +438,7 @@ def test_r1c_hard_food_exclusion_removes_candidate_and_persists_nothing(database
         ]
         assert meatball_traces
         assert any(
-            excluded_member.id in row.excluded_member_ids
-            and unaffected_member.id in row.participant_member_ids
-            for row in meatball_traces
-        )
-        assert all(
-            unaffected_member.id not in row.excluded_member_ids
+            PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT in row.rejection_codes
             for row in meatball_traces
         )
         for code in (CHICKEN_RECIPE_CODE, GOULASH_RECIPE_CODE):
@@ -565,16 +560,9 @@ def test_r1c_multi_member_exclusion_preserves_other_member_and_sharedness(databa
         assert len(fixed_events) == 1
         assert fixed_events[0].participant_member_ids == (excluded_member.id,)
 
-        meatball_traces = tuple(
-            row
-            for row in result.trace.candidates
-            if row.recipe_version_id == meatball_version
-        )
-        assert meatball_traces
-        assert any(
-            PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT in row.rejection_codes
-            for row in meatball_traces
-        )
+        applied_exclusions = dict(result.trace.applied_exclusions)
+        assert applied_exclusions[excluded_member.id] == (bread_id,)
+        assert applied_exclusions[unaffected_member.id] == ()
 
         persisted = meal_plans.get_current_plan(household.id, week_start)
         assert persisted.plan.id == detail.plan.id
