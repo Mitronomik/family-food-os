@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "operation": "R2_BREAKFAST_HOUSEHOLD_APPLICABILITY_REVIEW",
+  "accepted_base": "8995e85e4cda2ae30fc62fdc63daaf441f4226bd",
+  "decision_basis": "User authorized R2/R3 continuation on 2026-10-02. Review remains bounded to the two named School2022 cards; no blanket School2022 authority.",
+  "source": {
+    "archive_locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "source_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d"
+  },
+  "review_rule": {
+    "pass_requires": [
+      "non-clinical ordinary food semantics",
+      "core preparation executable with ordinary household equipment",
+      "institutional logistics can be quarantined without changing ingredient/output/nutrition source truth",
+      "independent household corroboration for the same core cooking method",
+      "no new nutrient, yield, retention or quantity inference"
+    ],
+    "institutional_context_policy": "Retain institutional serving-temperature/equipment context as provenance only; do not promote it to consumer RecipeSteps.",
+    "nutrition_policy": "Household corroboration is applicability evidence only. School2022 card/output/ENERGY_KCAL remains the prepared-output source authority."
+  },
+  "candidates": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-1о",
+      "title": "Омлет натуральный",
+      "planner_role_review": "breakfast",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "selected_process": "BAKING",
+      "source_output_g": "150",
+      "source_energy_kcal": "225.5",
+      "source_core_steps": [
+        "combine eggs with 2.5% milk and iodized salt",
+        "mix/whip",
+        "pour into a buttered tray at 2.5–3.0 cm depth",
+        "bake at 180–200 °C for 8–10 minutes",
+        "portion and finish with the remaining melted butter"
+      ],
+      "quarantined_source_context": [
+        "paraconvection equipment reference",
+        "institutional serving temperature requirement",
+        "steam method retained as source alternative but not selected for this RecipeVersion"
+      ],
+      "independent_corroboration": [
+        {
+          "url": "https://www.gastronom.ru/recipe/50505/omlet-v-duhovke",
+          "retrieved_date": "2026-10-02",
+          "corroborates": [
+            "egg + milk + salt + butter is an ordinary household omelet combination",
+            "oven baking at household temperature is an ordinary home method",
+            "the dish is explicitly categorized as breakfast"
+          ],
+          "authority_scope": "household_applicability_only"
+        }
+      ],
+      "rationale": "The selected baked source branch is executable in a normal household oven. Institutional equipment/serving context and the unselected steam alternative are not promoted to consumer execution."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-9к",
+      "title": "Каша вязкая молочная овсяная",
+      "planner_role_review": "breakfast",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "selected_process": "BOILING",
+      "source_output_g": "200",
+      "source_energy_kcal": "272.9",
+      "source_core_steps": [
+        "sort and rinse oat groats",
+        "add prepared groats to boiling water",
+        "add hot 2.5% milk, iodized salt and sugar",
+        "cook while stirring until thick",
+        "add melted butter and finish covered"
+      ],
+      "quarantined_source_context": [
+        "institutional serving temperature requirement"
+      ],
+      "independent_corroboration": [
+        {
+          "url": "https://www.gastronom.ru/recipe/amp/12944",
+          "retrieved_date": "2026-10-02",
+          "corroborates": [
+            "whole oat groats can be cooked in a household pot",
+            "hot milk is added after water cooking in an ordinary home process"
+          ],
+          "authority_scope": "household_applicability_only"
+        }
+      ],
+      "rationale": "The source boiling process is ordinary stovetop household cooking. The corroboration does not grant ingredient or Nutrition authority."
+    }
+  ],
+  "review_result": {
+    "household_applicable_count": 2,
+    "blanket_school2022_authority_granted": false,
+    "selected_recipe_codes": [
+      "SCHOOL2022_54_1O_NATURAL_OMELET",
+      "SCHOOL2022_54_9K_MILK_OAT_PORRIDGE"
+    ]
+  }
+}
