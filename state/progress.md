@@ -8,7 +8,7 @@ Accepted base:
 Issue #129 / PR #130.
 
 Proof/runtime freeze:
-`b7691b45f05f3f5e873df53cb02d0cc769f8db79`.
+`4fd0c946b43785c0eb242d26184c7a20441a6012`.
 
 Delivered:
 
@@ -42,7 +42,13 @@ Verification at proof/runtime freeze:
 - AI disabled;
 - migration head remains 0042.
 
-The preceding red run was format-only: functional suite already passed 128 tests.
+Independent audit correction after the earlier freeze:
+- removed invented single-value `cook_time_minutes=25` for source range 20–25 min;
+- corrected Russian consumer step grammar from `филе горбуша / филе минтай` to
+  `филе горбуши / филе минтая`;
+- added regression assertions for both facts.
+
+Corrected exact head remains 128 passed; Ruff check/format and scope are SUCCESS.
 
 Status:
 `READY_FOR_FINAL_REVIEW`.
