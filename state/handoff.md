@@ -8,7 +8,7 @@ Accepted base:
 Issue #129 / PR #130 / branch `feat/r2b-fish-main-diversity`.
 
 Proof/runtime freeze:
-`b7691b45f05f3f5e873df53cb02d0cc769f8db79`.
+`4fd0c946b43785c0eb242d26184c7a20441a6012`.
 
 Published and activated:
 
@@ -41,7 +41,13 @@ with already-thawed fillet.
 Cod cutlet 54-1р remains deferred because its exact source does not establish the
 narrower high-grade/stale wheat-bread form proposed in older R1-G evidence.
 
-Exact proof/runtime-freeze verification:
+Independent audit correction:
+- source range 20–25 min is no longer collapsed into `cook_time_minutes=25`;
+  the scalar field stays null and the Russian step preserves the range;
+- consumer Russian text now uses the grammatical `филе горбуши / филе минтая`;
+- regression assertions lock both facts.
+
+Exact corrected proof/runtime-freeze verification:
 128 passed; Ruff check/format SUCCESS; scope/whitespace SUCCESS; AI disabled;
 migration head remains 0042.
 
