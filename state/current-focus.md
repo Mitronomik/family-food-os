@@ -8,20 +8,7 @@ PR #126 / R1-C is merged into `main` at:
 
 `8995e85e4cda2ae30fc62fdc63daaf441f4226bd`.
 
-R1-C proved the ordinary production path end to end with
-`planner-v0.4 / meal-role-recipe-v2`, persisted MealPlan/Serving history,
-deterministic replay, bounded infeasibility and member-local hard exclusions.
-
-Current active exact-energy Planner capacity before R2:
-
-- BREAKFAST: 1 RecipeVersion — `HARD_BOILED_EGG`;
-- MAIN: 3 RecipeVersions;
-- `max_recipe_repetitions=3`;
-- MAIN capacity: 9 opportunities/week;
-- BREAKFAST capacity: 3 opportunities/week.
-
-Issue #99 requires the next R2 batch to maximize marginal realistic weekly variety
-and Planner capacity.
+R1-C proved the ordinary production Planner path end to end.
 
 ## Current bounded operation
 
@@ -29,88 +16,125 @@ and Planner capacity.
 
 Issue: `#127`.
 
+PR: `#128`.
+
 Branch: `feat/r2-breakfast-capacity`.
 
 Accepted base:
 
 `8995e85e4cda2ae30fc62fdc63daaf441f4226bd`.
 
+Proof/runtime freeze:
+
+`1d93631b07a25a260b7d45cc0b91f3437865fd8a`.
+
 Status:
 
-`IMPLEMENTATION_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
-## Decision
+## R2 result
 
-Selected School2022 cards:
+R2 closes the current BREAKFAST capacity bottleneck without changing Planner
+rules, schema or Nutrition authority mechanics.
 
-- `ru-school2022:recipe:54-1о` — Омлет натуральный —
-  150 g / exact 225.5 kcal;
-- `ru-school2022:recipe:54-9к` — Каша вязкая молочная овсяная —
-  200 g / exact 272.9 kcal.
+Published/activated through the existing prepared-output path:
 
-Both are bounded household-applicability reviews, not blanket School2022
-authority.
+- `SCHOOL2022_54_1O_NATURAL_OMELET` —
+  Омлет натуральный — 150 g / exact 225.5 kcal;
+- `SCHOOL2022_54_9K_MILK_OAT_PORRIDGE` —
+  Каша вязкая молочная овсяная — 200 g / exact 272.9 kcal.
 
-If both activate, the ordinary breakfast pool becomes:
+New identity-only FoodIngredients:
+
+- `MILK_2_5` — Молоко 2,5%;
+- `OAT_GROATS` — Крупа овсяная.
+
+Neither receives Nutrition or Composition authority.
+
+The exact milk identity deliberately does not claim a pasteurization subtype:
+School2022 pins 2.5% fat but allows multiple heat-treatment modes. Oat groats are
+kept distinct from existing `OATS_ROLLED`.
+
+Prepared Nutrition remains:
+
+`PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`.
+
+Only ENERGY_KCAL is AVAILABLE for each new RecipeVersion; all other frozen
+nutrient codes remain UNKNOWN.
+
+## Planner capacity after R2
+
+Ordinary active exact-energy BREAKFAST pool:
 
 - `HARD_BOILED_EGG`;
 - `SCHOOL2022_54_1O_NATURAL_OMELET`;
 - `SCHOOL2022_54_9K_MILK_OAT_PORRIDGE`.
 
-Projected BREAKFAST capacity becomes 9 opportunities/week under unchanged
-repetition=3.
+With unchanged `max_recipe_repetitions=3`:
 
-## Authority and identities
+- active exact-energy breakfast count: 1 → 3;
+- breakfast opportunity capacity: 3 → 9/week;
+- a persisted seven-BREAKFAST production week is feasible and proven;
+- all three candidates are used and none exceeds repetition 3.
 
-Reuse only the accepted prepared-output seam:
+Hard exclusion of `MILK_2_5` removes both new breakfast candidates, restores
+explicit bounded infeasibility, and persists no partial MealPlan.
 
-`PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`.
+## Evidence / failure semantics
 
-Only ENERGY_KCAL is AVAILABLE; all other frozen nutrient codes remain UNKNOWN.
+The R2 package pins:
 
-Create identity-only, without Nutrition/Composition authority:
+- accepted private corpus archive SHA-256;
+- School2022 PDF SHA-256;
+- exact source card / source variant / source process / selected route hashes;
+- exact energy-reconciliation hashes;
+- bounded household-applicability decisions for only these two cards;
+- exact FoodIngredient identity decisions.
 
-- `MILK_2_5` — Молоко 2,5%;
-- `OAT_GROATS` — Крупа овсяная.
+Runtime proves:
 
-Do not substitute nearby milk-fat forms or `OATS_ROLLED`.
+- fresh publication;
+- exact zero-write replay;
+- deliberate deactivation preservation;
+- tampered frozen contract fails closed;
+- partial Recipe without prepared authority fails closed;
+- conflicting FoodIngredient identity fails closed.
+
+## Verification
+
+Exact proof/runtime-freeze verification at `1d93631...`:
+
+- focused/affected R2 suite — **120 passed**;
+- Ruff check — SUCCESS;
+- Ruff format --check — SUCCESS;
+- scope/whitespace — SUCCESS;
+- `AI_ENABLED=false`;
+- migration head remains `0042_recipe_prepared_output_nutrition`;
+- migration 0043 is absent.
+
+Earlier red runs were task-local lint/connector-format defects only. They did not
+require runtime, schema, Planner or authority changes.
 
 ## Scope boundaries
 
 Do not:
 
 - add migration 0043 or schema changes;
-- add another Nutrition authority kind;
-- infer raw→cooked Nutrition, yield or retention;
-- add Nutrition/Composition to the new identities;
+- add a new Nutrition authority kind;
+- add Nutrition/Composition to `MILK_2_5` or `OAT_GROATS`;
+- infer milk heat-treatment subtype or rolled-oats equivalence;
 - change Planner algorithm/scoring/roles/repetition;
-- add allergen automation;
 - publish School2022 54-1р in this PR;
-- infer missing USSR82 salt/energy linkage;
+- infer closure of USSR82 467/492/1081;
 - start DC4 / Gate1-CLOSE;
 - start PR9 Shopping;
 - start Prep/PDF/Retail/API/UI/Auth/PostgreSQL/AI.
 
-## Verification target
-
-R2 must prove:
-
-- exact hash-pinned source/publication contract;
-- fresh/replay/deactivation semantics;
-- identity-only enforcement;
-- tamper/partial/conflict fail-closed behavior;
-- two active exact-energy breakfast RecipeVersions;
-- ordinary pool = three exact-energy breakfasts;
-- persisted seven-BREAKFAST week under repetition=3;
-- hard FoodIngredient exclusion;
-- migration head remains 0042;
-- `AI_ENABLED=false`.
-
 ## Next step
 
-Run exact-head focused R2 verification, fix only task-local defects, freeze the
-reviewed proof/runtime head, then hand PR #128 (or the created R2 PR number) to
-independent final review.
+Independent final review of PR #128.
 
-After R2 merge, reassess the next R2/R3 corpus batch. Do not start DC4,
-Gate1-CLOSE or PR9 automatically.
+After explicit review and merge, reassess the next R2/R3 corpus batch by maximum
+marginal realistic weekly variety and corpus closure.
+
+Do not start DC4, Gate1-CLOSE or PR9 automatically.
