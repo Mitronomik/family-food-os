@@ -124,6 +124,8 @@ The next runtime batch is frozen to:
 
 Both are reviewed as household-applicable on a bounded per-recipe basis.
 
+Prepared authority is fully frozen in `data/curation/r1g-catalogue-capacity-expansion/prepared-publication-specs.json`.
+
 Prepared authority:
 
 - 54-29м — 80 g / exact 153 kcal;
