@@ -133,8 +133,7 @@ def _load_contract(
         or applicability.get("accepted_base") != R2_ACCEPTED_BASE
         or applicability.get("source", {}).get("archive_sha256")
         != SOURCE_ARCHIVE_SHA256
-        or applicability.get("source", {}).get("source_pdf_sha256")
-        != SOURCE_PDF_SHA256
+        or applicability.get("source", {}).get("source_pdf_sha256") != SOURCE_PDF_SHA256
     ):
         raise ValueError("R2 household-applicability contract identity changed.")
 
@@ -143,10 +142,7 @@ def _load_contract(
         not isinstance(applicability_rows, list)
         or tuple(row.get("decision") for row in applicability_rows)
         != ("HOUSEHOLD_APPLICABLE", "HOUSEHOLD_APPLICABLE")
-        or tuple(
-            row.get("source_recipe_id")
-            for row in applicability_rows
-        )
+        or tuple(row.get("source_recipe_id") for row in applicability_rows)
         != ("ru-school2022:recipe:54-1о", "ru-school2022:recipe:54-9к")
     ):
         raise ValueError("R2 household-applicability decisions changed.")
