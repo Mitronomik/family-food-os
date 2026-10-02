@@ -50,7 +50,8 @@ Final verification:
 - Nutrient registry V2 — focused + 4 backend shards + launcher SUCCESS;
 - Partial nutrition profiles — focused + 4 backend shards + launcher SUCCESS.
 
-Only `state/*` changed after the runtime freeze.
+After the runtime freeze, only `state/*` and test-only acceptance assertions
+changed; production runtime bytes remained unchanged.
 
 Status:
 `READY_FOR_FINAL_REVIEW`.
