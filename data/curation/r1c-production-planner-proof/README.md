@@ -35,8 +35,11 @@ The proof covers:
    breakfast capacity is insufficient, with no partial MealPlan;
 6. a hard FoodIngredient exclusion that removes the affected meatball candidate,
    preserves unaffected candidate truth and persists no partial MealPlan;
-7. migration head remains 0042; no migration 0043;
-8. no Planner algorithm, schema or Nutrition-authority change.
+7. a persisted two-member exclusion/sharedness scenario where one member excludes
+   bread, six unaffected dinner events remain shared, the other member can still
+   receive the meatball candidate, and the excluded member never receives it;
+8. migration head remains 0042; no migration 0043;
+9. no Planner algorithm, schema or Nutrition-authority change.
 
 `summary.json` is the durable metrics receipt asserted by the executable proof.
 
