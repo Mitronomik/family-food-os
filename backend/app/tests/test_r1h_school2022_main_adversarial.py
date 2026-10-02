@@ -211,7 +211,7 @@ def test_r1h_conflicting_prepared_authority_fails_closed(database):
         nutrition = create_recipe_nutrition_v2_service(engine)
         wrong = replace(
             reviewed[0],
-            expected_available_amounts=(("ENERGY_KCAL", Decimal("999")),),
+            expected_available_amounts=(("ENERGY_KCAL", Decimal(999)),),
         )
         nutrition.publish_prepared(wrong)
     finally:
