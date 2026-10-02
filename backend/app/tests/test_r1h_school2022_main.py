@@ -322,7 +322,7 @@ def test_r1h_authoritative_planner_loads_new_mains_exclusions_and_week_capacity(
                 del as_of_date
                 assert requested_household_id == household_id
                 assert requested_member_id == member_id
-                return SimpleNamespace(reference_energy_kcal=Decimal("2000"))
+                return SimpleNamespace(reference_energy_kcal=Decimal(2000))
 
         class Pantry:
             def list_items(self, requested_household_id):
