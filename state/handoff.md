@@ -1,5 +1,42 @@
 # Handoff
 
+## R1-H final verification receipt — 2026-10-02
+
+Accepted base:
+`07af24cf1821bbb1ee9f70bdcc3311361d7b443b`.
+
+Runtime freeze:
+`c300118fd554829ddd9d6429c2abccba8dbb250b`.
+
+Current PR #123 head after state-only finalization remains byte-identical for all
+runtime files.
+
+Final verification is complete:
+
+- R1-H runtime focused/affected: 135 passed;
+- Ruff check / format: SUCCESS;
+- Russian nutrition methodologies: SUCCESS;
+- Docs verification: SUCCESS;
+- DC1 corpus verification: SUCCESS;
+- Nutrient registry V2: focused + backend shards 0/1/2/3 + launcher SUCCESS;
+- Partial nutrition profiles: focused + backend shards 0/1/2/3 + launcher SUCCESS.
+
+Delivered runtime truth:
+
+- four identity-only FoodIngredients, without Nutrition/Composition authority;
+- two exact School2022 MAIN RecipeVersions;
+- 80 g / 153 kcal meatballs and 80 g / 185.6 kcal goulash;
+- sparse prepared Nutrition with 1 AVAILABLE energy + 53 UNKNOWN codes;
+- guarded activation;
+- exact replay / conflict / partial / failure-injection coverage;
+- real authoritative Planner loading and FoodIngredient exclusions;
+- real seven-DINNER capacity under unchanged max repetition 3.
+
+No migration/schema/Planner algorithm change exists.
+
+PR #123 is READY FOR FINAL REVIEW.
+Do not merge autonomously and do not start R1-C automatically.
+
 ## R1-H runtime freeze — 2026-10-02
 
 Accepted base:
