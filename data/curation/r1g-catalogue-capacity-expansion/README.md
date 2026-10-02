@@ -23,7 +23,7 @@ Files:
 
 - `candidate-dispositions.json` — current candidate state and research ownership;
 - `research-status.json` — verified archive/source and blocker findings;
-- `school2022-main-shortlist.json` — exact-card MAIN shortlist, not publication authority.
+- `school2022-main-shortlist.json` — exact-card MAIN shortlist with historical pre-review blockers separated from current disposition;\n- `school2022-household-applicability-review.json` — bounded three-card household review;\n- `school2022-main-authority-review.json` — exact identity/prepared authority decisions;\n- `prepared-publication-specs.json` — frozen runtime handoff: full trusted RecipeVersion seeds + exact prepared specs;\n- `next-runtime-batch.json` — exact first runtime batch;\n- `projected-planner-capacity.json` — projected post-batch Planner capacity.
 
 Final evidence includes:
 
