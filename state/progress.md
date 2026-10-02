@@ -6,7 +6,7 @@ Implementation base:
 `5bf5127a238b8bb139903f008ad7c14b9b1309c7` (merged PR #125).
 
 Proof freeze:
-`a36d8c2876daea4b4f3edd7f47af8b49d09b04cd`.
+`2f643303308f3bb6b95d7161435474109ad91a34`.
 
 PR #126 proves the production Planner through persisted ordinary boundaries
 without changing application runtime behavior.
@@ -23,6 +23,9 @@ Delivered proof:
   MealPlan;
 - hard FoodIngredient exclusion rejects the affected production candidate and
   persists no partial plan;
+- persisted two-member exclusion/sharedness proof keeps six unaffected dinner
+  events shared, preserves the unaffected member's meatball eligibility and never
+  assigns meatballs to the excluded member;
 - Planner version `planner-v0.4`;
 - compatibility `meal-role-recipe-v2`;
 - migration head 0042, no 0043;
@@ -31,11 +34,14 @@ Delivered proof:
 
 Exact proof-head verification:
 
-- focused/affected suite — 101 passed;
+- focused/affected suite — 102 passed;
 - Ruff check / format — SUCCESS;
-- scope/whitespace — SUCCESS;
-- Docs verification — SUCCESS;
-- Russian nutrition methodologies — SUCCESS.
+- scope/whitespace — SUCCESS.
+
+Independent final-review blocker closure:
+the original one-member exclusion proof did not demonstrate preservation of
+other members/sharedness. The corrected persisted two-member scenario closes that
+gap without runtime/schema/authority changes.
 
 Status:
 `READY_FOR_FINAL_REVIEW`.
