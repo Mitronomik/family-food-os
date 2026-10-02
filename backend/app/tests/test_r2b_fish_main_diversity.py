@@ -202,8 +202,7 @@ def test_r2b_fresh_publication_adds_fish_mains_without_rewriting_accepted_corpus
                 "пароконвектомат" not in step.instruction for step in detail.steps
             )
             assert all(
-                "размораживать" not in step.instruction.lower()
-                for step in detail.steps
+                "размораживать" not in step.instruction.lower() for step in detail.steps
             )
             assert all(
                 "филе горбуша" not in step.instruction.lower()
