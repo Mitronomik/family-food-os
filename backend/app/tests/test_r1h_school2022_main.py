@@ -184,12 +184,14 @@ def test_r1h_fresh_publication_activates_exact_school2022_mains(database):
             assert detail.version.source_recipe_id == expected["source_recipe_id"]
             assert detail.version.source_url == expected["source_url"]
             assert detail.version.source_version == expected["source_version"]
-            assert detail.version.rights_review_status.value == expected[
-                "rights_review_status"
-            ]
-            assert detail.version.verification_status.value == expected[
-                "verification_status"
-            ]
+            assert (
+                detail.version.rights_review_status.value
+                == expected["rights_review_status"]
+            )
+            assert (
+                detail.version.verification_status.value
+                == expected["verification_status"]
+            )
             assert (
                 detail.version.source_document_sha256
                 == expected["source_document_sha256"]
