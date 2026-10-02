@@ -299,12 +299,12 @@ A bounded per-recipe household-applicability decision/review is required before 
 School2022 candidate can enter the next runtime batch. R1-G must not silently
 generalize one School2022 review to all 264 blocked identities.
 
-### 9.4.6 Current runtime-batch conclusion
+### 9.4.6 Historical pre-review checkpoint — superseded by §9.5–§9.10
 
-At this research checkpoint, **no additional Recipe is yet authorized for runtime
+At this earlier research checkpoint, **no additional Recipe was yet authorized for runtime
 publication/activation**.
 
-This is intentional fail-closed behavior. The next runtime batch remains empty
+This was intentional fail-closed behavior. At that checkpoint the next runtime batch remained empty
 until at least one candidate simultaneously closes:
 
 - exact source Recipe/variant/process/output identity;
@@ -480,6 +480,48 @@ Breakfast capacity remains one active RecipeVersion and remains a separate bound
 limitation. R1-C may prove one successful persisted week through the MAIN-heavy
 fixture while materially different breakfast/mixed patterns remain explicit
 bounded infeasibility.
+
+## 9.10 DECISION — immutable runtime publication specs
+
+The implementation handoff is frozen in:
+
+`data/curation/r1g-catalogue-capacity-expansion/prepared-publication-specs.json`.
+
+Runtime must not invent or reinterpret immutable provenance/RecipeVersion values.
+For both selected Recipes the file pins the complete fields required by the current
+`ReviewedPreparedRecipeNutritionSpec` and `TrustedRecipeSeed` contracts:
+
+- canonical Recipe code/name;
+- inactive-first state;
+- base/source-original servings;
+- exact meal type;
+- Russian source-backed consumer RecipeSteps;
+- exact ingredient identities, quantities, source amount text and normalization notes;
+- exact source output mass/text;
+- verification timestamp/status;
+- source name / recipe id / version / URL / document SHA;
+- prepared source locator and source-data type;
+- rights review status / exact reviewed rights basis;
+- per-Recipe review reference;
+- exact AVAILABLE value;
+- explicit 53-code UNKNOWN set.
+
+Frozen prepared-source fields for both selected cards:
+
+- `source_name = ru-school2022`;
+- `source_version = sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`;
+- `source_locator = https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf`;
+- `source_document_sha256 = c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`;
+- `source_data_type = NORMATIVE_RECIPE_CARD_PDF`;
+- `rights_review_status = REVIEWED`;
+- rights basis is byte-for-byte the accepted School2022 Step9 factual normative-recipe basis.
+
+The runtime publication order remains:
+
+`identity-only FoodIngredients → inactive RecipeVersion → immutable prepared authority → guarded activation`.
+
+Any runtime need to change these frozen fields reopens R1-G rather than becoming an
+implementation choice.
 
 ## 10. Required evidence package
 
