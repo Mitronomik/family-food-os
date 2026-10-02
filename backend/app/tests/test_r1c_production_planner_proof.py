@@ -10,6 +10,7 @@ from app.db.config import REPOSITORY_ROOT, DatabaseConfig
 from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import MealSourceKind, MemberMealPatternSourceKind
 from app.domain.planner import (
+    FixedPlannerEvent,
     PlannerConfig,
     PlannerFailure,
     PlannerFailureCode,
@@ -134,6 +135,36 @@ def _planner(engine):
     return planner, meal_plans, households, recipes, nutrition
 
 
+def _add_member_with_pattern(
+    *,
+    households,
+    meal_plans,
+    household_id,
+    member_name: str,
+    roles_and_shares: tuple[tuple[MealRole, Decimal], ...],
+):
+    member = households.add_household_member(
+        household_id,
+        name=member_name,
+        activity_level="active",
+        goal="maintain",
+        birth_date=date(1990, 5, 20),
+        sex="female",
+        height_cm=Decimal(168),
+        weight_kg=Decimal(62),
+    )
+    roles = tuple(role for role, _ in roles_and_shares)
+    shares = tuple(share for _, share in roles_and_shares)
+    selection = meal_plans.accept_member_pattern(
+        household_id=household_id,
+        member_id=member.id,
+        source_kind=MemberMealPatternSourceKind.CUSTOM,
+        schedule={weekday: roles for weekday in range(1, 8)},
+        energy_shares={weekday: shares for weekday in range(1, 8)},
+    )
+    return member, selection
+
+
 def _create_member_with_pattern(
     *,
     households,
@@ -146,24 +177,12 @@ def _create_member_with_pattern(
         timezone_name="Europe/Moscow",
         city="Санкт-Петербург",
     )
-    member = households.add_household_member(
-        household.id,
-        name="Анна",
-        activity_level="active",
-        goal="maintain",
-        birth_date=date(1990, 5, 20),
-        sex="female",
-        height_cm=Decimal(168),
-        weight_kg=Decimal(62),
-    )
-    roles = tuple(role for role, _ in roles_and_shares)
-    shares = tuple(share for _, share in roles_and_shares)
-    selection = meal_plans.accept_member_pattern(
+    member, selection = _add_member_with_pattern(
+        households=households,
+        meal_plans=meal_plans,
         household_id=household.id,
-        member_id=member.id,
-        source_kind=MemberMealPatternSourceKind.CUSTOM,
-        schedule={weekday: roles for weekday in range(1, 8)},
-        energy_shares={weekday: shares for weekday in range(1, 8)},
+        member_name="Анна",
+        roles_and_shares=roles_and_shares,
     )
     return household, member, selection
 
@@ -227,6 +246,12 @@ def test_r1c_catalogue_metrics_match_durable_receipt(database):
         "main_candidate_count": 3,
     }
     assert frozenset(summary["remaining_authority_blockers"]) == BLOCKED_SOURCE_CODES
+    assert summary["successful_persisted_complete_weeks"] == 2
+    assert any(
+        row["code"] == "DINNER_ONLY_MULTI_MEMBER_EXCLUSION_SHAREDNESS"
+        and row["expected_outcome"] == "SUCCESS_PERSISTED"
+        for row in summary["materially_different_repository_backed_patterns"]
+    )
 
     dispositions = json.loads(R1G_DISPOSITIONS_PATH.read_text())
     assert all(
@@ -431,5 +456,136 @@ def test_r1c_hard_food_exclusion_removes_candidate_and_persists_nothing(database
 
         with pytest.raises(MealPlanNotFoundError):
             meal_plans.get_current_plan(household.id, command.week_start)
+    finally:
+        engine.dispose()
+
+
+def test_r1c_multi_member_exclusion_preserves_other_member_and_sharedness(database):
+    engine = create_sqlite_engine(database)
+    try:
+        planner, meal_plans, households, recipes, _ = _planner(engine)
+        food = create_food_catalogue_service(engine)
+        household = households.create_household(
+            name="R1-C shared exclusion",
+            timezone_name="Europe/Moscow",
+            city="Санкт-Петербург",
+        )
+        roles_and_shares = ((MealRole.DINNER, Decimal("0.25")),)
+        excluded_member, _ = _add_member_with_pattern(
+            households=households,
+            meal_plans=meal_plans,
+            household_id=household.id,
+            member_name="Анна",
+            roles_and_shares=roles_and_shares,
+        )
+        unaffected_member, _ = _add_member_with_pattern(
+            households=households,
+            meal_plans=meal_plans,
+            household_id=household.id,
+            member_name="Мария",
+            roles_and_shares=roles_and_shares,
+        )
+
+        bread_id = food.get_by_code(BREAD_FOOD_CODE).id
+        week_start = WEEK_START + timedelta(weeks=3)
+        fixed_out = FixedPlannerEvent(
+            week_start + timedelta(days=6),
+            MealRole.DINNER,
+            1,
+            MealSourceKind.EAT_OUT,
+            "решение пользователя",
+            frozenset({excluded_member.id}),
+            ((excluded_member.id, Decimal(1)),),
+        )
+        command = AuthoritativeGenerationRequest(
+            household.id,
+            week_start,
+            (
+                GenerationMemberConstraints(
+                    excluded_member.id,
+                    excluded_food_ingredient_ids=frozenset({bread_id}),
+                ),
+                GenerationMemberConstraints(unaffected_member.id),
+            ),
+            fixed_events=(fixed_out,),
+        )
+
+        result, detail = planner.generate_authoritative(command)
+        assert isinstance(result, PlannerSuccess)
+        assert detail is not None
+
+        versions = {
+            code: recipes.get_current_verified(recipes.get_by_code(code).id).version.id
+            for code in MAIN_CODES
+        }
+        meatball_version = versions[MEATBALLS_RECIPE_CODE]
+
+        cooked = tuple(
+            event
+            for event in result.events
+            if event.source_kind is MealSourceKind.COOK_RECIPE
+        )
+        shared = tuple(
+            event
+            for event in cooked
+            if set(event.participant_member_ids)
+            == {excluded_member.id, unaffected_member.id}
+        )
+        meatball_events = tuple(
+            event for event in cooked if event.recipe_version_id == meatball_version
+        )
+
+        assert len(cooked) == 7
+        assert len(shared) == 6
+        assert all(event.recipe_version_id != meatball_version for event in shared)
+        assert meatball_events
+        assert all(
+            excluded_member.id not in event.participant_member_ids
+            for event in meatball_events
+        )
+        assert all(
+            unaffected_member.id in event.participant_member_ids
+            for event in meatball_events
+        )
+        assert any(
+            event.participant_member_ids == (unaffected_member.id,)
+            for event in meatball_events
+        )
+
+        fixed_events = tuple(
+            event
+            for event in result.events
+            if event.source_kind is MealSourceKind.EAT_OUT
+        )
+        assert len(fixed_events) == 1
+        assert fixed_events[0].participant_member_ids == (excluded_member.id,)
+
+        meatball_traces = tuple(
+            row
+            for row in result.trace.candidates
+            if row.recipe_version_id == meatball_version
+        )
+        assert meatball_traces
+        assert any(
+            PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT in row.rejection_codes
+            for row in meatball_traces
+        )
+
+        persisted = meal_plans.get_current_plan(household.id, week_start)
+        assert persisted.plan.id == detail.plan.id
+        assert len(persisted.member_selections) == 2
+        assert _semantic_plan(persisted) == _semantic_plan(detail)
+        assert any(
+            len(
+                {
+                    serving.member_id
+                    for serving in persisted.servings
+                    if serving.event_id == event.id
+                }
+            )
+            == 2
+            for event in persisted.events
+            if event.source_kind is MealSourceKind.COOK_RECIPE
+        )
     finally:
         engine.dispose()
