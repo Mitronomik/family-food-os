@@ -4,137 +4,127 @@ Updated: 2026-10-02.
 
 ## Accepted state
 
-PR #126 / R1-C is merged into `main` at:
+PR #128 / R2-A is merged into `main` at:
 
-`8995e85e4cda2ae30fc62fdc63daaf441f4226bd`.
+`1e4a0e137dee87f2aaef7d885481fef17f6e324c`.
 
-R1-C proved the ordinary production Planner path end to end.
+Accepted ordinary active exact-energy Planner pool before this batch:
+
+- BREAKFAST: 3 RecipeVersions / capacity 9 opportunities per week;
+- MAIN: 3 RecipeVersions / capacity 9 opportunities per week;
+- `max_recipe_repetitions=3`;
+- persisted seven-BREAKFAST and seven-DINNER paths are proven.
 
 ## Current bounded operation
 
-**R2 — Breakfast Planner-capacity runtime batch.**
+**R2-B — Fish MAIN diversity batch.**
 
-Issue: `#127`.
+Issue: `#129`.
 
-PR: `#128`.
-
-Branch: `feat/r2-breakfast-capacity`.
+Branch: `feat/r2b-fish-main-diversity`.
 
 Accepted base:
 
-`8995e85e4cda2ae30fc62fdc63daaf441f4226bd`.
-
-Proof/runtime freeze:
-
-`1d93631b07a25a260b7d45cc0b91f3437865fd8a`.
+`1e4a0e137dee87f2aaef7d885481fef17f6e324c`.
 
 Status:
 
-`READY_FOR_FINAL_REVIEW`.
+`IMPLEMENTATION_ACTIVE`.
 
-## R2 result
+## Batch decision
 
-R2 closes the current BREAKFAST capacity bottleneck without changing Planner
-rules, schema or Nutrition authority mechanics.
+Selected School2022 cards:
 
-Published/activated through the existing prepared-output path:
-
-- `SCHOOL2022_54_1O_NATURAL_OMELET` —
-  Омлет натуральный — 150 g / exact 225.5 kcal;
-- `SCHOOL2022_54_9K_MILK_OAT_PORRIDGE` —
-  Каша вязкая молочная овсяная — 200 g / exact 272.9 kcal.
+- `54-6р` — Рыба, припущенная в молоке (горбуша) —
+  80 g / exact 144.8 kcal;
+- `54-7р` — Рыба, припущенная в молоке (минтай) —
+  80 g / exact 105.3 kcal.
 
 New identity-only FoodIngredients:
 
-- `MILK_2_5` — Молоко 2,5%;
-- `OAT_GROATS` — Крупа овсяная.
+- `PINK_SALMON_FILLET_RAW`;
+- `POLLOCK_FILLET_RAW`.
 
-Neither receives Nutrition or Composition authority.
+Reuse:
 
-The exact milk identity deliberately does not claim a pasteurization subtype:
-School2022 pins 2.5% fat but allows multiple heat-treatment modes. Oat groats are
-kept distinct from existing `OATS_ROLLED`.
+- `MILK_2_5`;
+- `ONION_BULB_FRESH`;
+- `SUNFLOWER_OIL`;
+- `SALT_IODIZED`.
+
+No Nutrition/Composition is published for the new fish identities.
 
 Prepared Nutrition remains:
 
 `PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`.
 
-Only ENERGY_KCAL is AVAILABLE for each new RecipeVersion; all other frozen
-nutrient codes remain UNKNOWN.
+Only ENERGY_KCAL is AVAILABLE; all remaining frozen nutrients are UNKNOWN.
 
-## Planner capacity after R2
+## Product effect target
 
-Ordinary active exact-energy BREAKFAST pool:
+Ordinary active exact-energy MAIN pool:
 
-- `HARD_BOILED_EGG`;
-- `SCHOOL2022_54_1O_NATURAL_OMELET`;
-- `SCHOOL2022_54_9K_MILK_OAT_PORRIDGE`.
+3 → 5 RecipeVersions.
 
-With unchanged `max_recipe_repetitions=3`:
+Projected opportunity capacity under unchanged repetition=3:
 
-- active exact-energy breakfast count: 1 → 3;
-- breakfast opportunity capacity: 3 → 9/week;
-- a persisted seven-BREAKFAST production week is feasible and proven;
-- all three candidates are used and none exceeds repetition 3.
+9 → 15 MAIN opportunities/week.
 
-Hard exclusion of `MILK_2_5` removes both new breakfast candidates, restores
-explicit bounded infeasibility, and persists no partial MealPlan.
+The persisted proof must show a seven-DINNER week that selects both fish recipes
+when both are preferred, with no RecipeVersion used more than 3 times.
 
-## Evidence / failure semantics
+A hard exclusion of one fish identity must remove only that candidate while the
+week remains feasible through the remaining MAIN pool.
 
-The R2 package pins:
+## Source / UX boundary
 
-- accepted private corpus archive SHA-256;
-- School2022 PDF SHA-256;
-- exact source card / source variant / source process / selected route hashes;
-- exact energy-reconciliation hashes;
-- bounded household-applicability decisions for only these two cards;
-- exact FoodIngredient identity decisions.
+The retained source contains thawing alternatives, paraconvection references and
+institutional serving-temperature requirements.
 
-Runtime proves:
+One source route is pinned for deterministic corpus closure, but consumer
+RecipeSteps begin with already-thawed fillet. Thawing logistics, paraconvection
+and institutional serving temperature remain provenance only.
 
-- fresh publication;
-- exact zero-write replay;
-- deliberate deactivation preservation;
-- tampered frozen contract fails closed;
-- partial Recipe without prepared authority fails closed;
-- conflicting FoodIngredient identity fails closed.
-
-## Verification
-
-Exact proof/runtime-freeze verification at `1d93631...`:
-
-- focused/affected R2 suite — **120 passed**;
-- Ruff check — SUCCESS;
-- Ruff format --check — SUCCESS;
-- scope/whitespace — SUCCESS;
-- `AI_ENABLED=false`;
-- migration head remains `0042_recipe_prepared_output_nutrition`;
-- migration 0043 is absent.
-
-Earlier red runs were task-local lint/connector-format defects only. They did not
-require runtime, schema, Planner or authority changes.
+The older R1-G cod-cutlet follow-up is not used in this batch because the exact cod
+card supports only generic wheat bread while the old note proposed the narrower
+`WHEAT_BREAD_HIGH_GRADE_STALE`. That unresolved form narrowing is not carried
+into production.
 
 ## Scope boundaries
 
 Do not:
 
 - add migration 0043 or schema changes;
-- add a new Nutrition authority kind;
-- add Nutrition/Composition to `MILK_2_5` or `OAT_GROATS`;
-- infer milk heat-treatment subtype or rolled-oats equivalence;
+- add another Nutrition authority kind;
+- publish Nutrition/Composition for fish identities;
+- reuse whole-fish identities as exact fillet authority;
+- publish cod cutlet 54-1р;
+- infer a narrower bread form;
 - change Planner algorithm/scoring/roles/repetition;
-- publish School2022 54-1р in this PR;
-- infer closure of USSR82 467/492/1081;
+- add allergen automation;
 - start DC4 / Gate1-CLOSE;
 - start PR9 Shopping;
 - start Prep/PDF/Retail/API/UI/Auth/PostgreSQL/AI.
 
+## Verification target
+
+R2-B must prove:
+
+- exact hash-pinned source/publication contract;
+- bounded household applicability for only the two named cards;
+- fresh/replay/deactivation semantics;
+- identity-only enforcement;
+- tamper/partial/conflict fail-closed behavior;
+- active exact-energy MAIN count = 5;
+- persisted fish-diverse seven-DINNER week;
+- hard fish exclusion with successful fallback;
+- migration head remains 0042;
+- `AI_ENABLED=false`.
+
 ## Next step
 
-Independent final review of PR #128.
+Run exact-head focused R2-B verification, fix task-local defects only, freeze the
+verified runtime/evidence head, then hand the PR to independent final review.
 
-After explicit review and merge, reassess the next R2/R3 corpus batch by maximum
-marginal realistic weekly variety and corpus closure.
-
-Do not start DC4, Gate1-CLOSE or PR9 automatically.
+After merge, reassess the next R2/R3 batch. Do not start DC4, Gate1-CLOSE or PR9
+automatically.
