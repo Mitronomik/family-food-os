@@ -438,7 +438,12 @@ def test_r1c_hard_food_exclusion_removes_candidate_and_persists_nothing(database
         ]
         assert meatball_traces
         assert any(
-            PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT in row.rejection_codes
+            excluded_member.id in row.excluded_member_ids
+            and unaffected_member.id in row.participant_member_ids
+            for row in meatball_traces
+        )
+        assert all(
+            unaffected_member.id not in row.excluded_member_ids
             for row in meatball_traces
         )
         for code in (CHICKEN_RECIPE_CODE, GOULASH_RECIPE_CODE):
