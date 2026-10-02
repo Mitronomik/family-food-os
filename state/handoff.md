@@ -1,37 +1,50 @@
 # Handoff
 
-## R2 breakfast capacity active — 2026-10-02
+## R2 breakfast capacity final handoff — 2026-10-02
 
-Accepted main:
+Accepted base:
 `8995e85e4cda2ae30fc62fdc63daaf441f4226bd`.
 
-Issue #127 / branch `feat/r2-breakfast-capacity`.
+Issue #127 / PR #128 / branch `feat/r2-breakfast-capacity`.
 
-R1-C is merged and complete for sequencing purposes. Current bottleneck is
-BREAKFAST capacity, not MAIN capacity.
+Proof/runtime freeze:
+`1d93631b07a25a260b7d45cc0b91f3437865fd8a`.
 
-R2 selected two exact School2022 breakfast cards:
+R2 selection follows Issue #99's maximum-marginal-capacity rule. BREAKFAST was
+the bottleneck at one active exact-energy RecipeVersion; MAIN already had three.
 
-- 54-1о / Омлет натуральный / 150 g / 225.5 kcal;
-- 54-9к / Каша вязкая молочная овсяная / 200 g / 272.9 kcal.
+Published and activated:
 
-The accepted source archive and PDF hashes are reused. Household applicability is
-reviewed only for these two cards. External household recipes are corroboration
-only and never Nutrition/source authority.
+- School2022 54-1о / natural omelet / 150 g / 225.5 kcal;
+- School2022 54-9к / viscous milk oat porridge / 200 g / 272.9 kcal.
 
-Important identity correction from preflight:
-use `MILK_2_5 / Молоко 2,5%`, not a pasteurized-specific identity, because the
-source pins fat percentage but allows multiple heat-treatment modes.
-`OAT_GROATS / Крупа овсяная` is separate from existing `OATS_ROLLED`.
+New identity-only foods:
 
-Runtime uses the existing prepared-output UoW and guarded activation. No migration
-or shared service change is planned.
+- `MILK_2_5` — exact 2.5% fat identity without invented heat-treatment subtype;
+- `OAT_GROATS` — exact oat-groats identity, not `OATS_ROLLED`.
 
-Next:
-run focused R2 CI, correct task-local failures, then freeze exact head and update
-state with the verification receipt.
+No Nutrition/Composition is published for those identities.
 
-Do not start 54-1р, DC4/Gate1-CLOSE or PR9 automatically.
+The new RecipeVersions reuse the R1-F/R1-H
+`PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1` seam. ENERGY_KCAL is
+the sole AVAILABLE nutrient; the remaining frozen codes stay UNKNOWN.
+
+The ordinary production Planner now has three active exact-energy BREAKFAST
+candidates and proves a persisted seven-BREAKFAST week at repetition=3.
+
+Failure semantics verified:
+exact replay is zero-write, deliberate deactivation remains deactivated, frozen
+artifact tamper fails, partial Recipe/prepared authority state fails, conflicting
+FoodIngredient identity fails, and milk exclusion leaves no partial MealPlan.
+
+Exact proof/runtime-freeze verification:
+120 passed; Ruff check/format SUCCESS; scope/whitespace SUCCESS; AI disabled;
+migration head remains 0042.
+
+PR #128 is READY FOR FINAL REVIEW.
+
+After merge, reassess the next R2/R3 batch. Do not start DC4/Gate1-CLOSE or PR9
+automatically.
 
 ## R1-C final proof receipt — 2026-10-02
 
