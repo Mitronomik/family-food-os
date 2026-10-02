@@ -1,5 +1,42 @@
 # Handoff
 
+## R1-H runtime freeze — 2026-10-02
+
+Accepted base:
+`07af24cf1821bbb1ee9f70bdcc3311361d7b443b` (merged PR #121).
+
+Issue #122 / PR #123 / branch `feat/r1h-school2022-main-runtime`.
+
+Runtime freeze:
+`c300118fd554829ddd9d6429c2abccba8dbb250b`.
+
+Delivered exactly the R1-G frozen batch:
+
+- four identity-only FoodIngredients:
+  `BEEF_CATEGORY_1_RAW`, `WHEAT_BREAD_HIGH_GRADE_STALE`,
+  `SALT_IODIZED`, `TOMATO_PUREE_PASTE`;
+- `SCHOOL2022_54_29M_BEEF_MEATBALLS` — 80 g / 153 kcal;
+- `SCHOOL2022_54_2M_BEEF_GOULASH` — 80 g / 185.6 kcal.
+
+No raw Nutrition/Composition was invented for the new identities.
+Recipe + prepared authority fresh publication reuses the R1-F caller-owned UoW.
+Activation reuses the R1-F guarded boundary. Replay is zero-write and deliberate
+deactivation is preserved.
+
+Focused receipt on the runtime freeze:
+- 135 tests passed;
+- Ruff check SUCCESS;
+- Ruff format SUCCESS;
+- Russian nutrition methodologies SUCCESS.
+
+Ordinary authoritative Planner loading/exclusion is proven, and the existing
+chicken + two new mains cover seven DINNER opportunities under max repetition 3.
+
+This state commit is documentation-only. Runtime bytes after `c300118f...` must
+remain unchanged while broad backend + launcher verification completes.
+
+Do not merge autonomously. Do not start R1-C automatically.
+
 ## R1-G gate review-ready — 2026-10-01
 
 Issue #120 / PR #121 now freeze the next runtime batch after merged PR #119.
