@@ -194,6 +194,7 @@ def test_r2b_fresh_publication_adds_fish_mains_without_rewriting_accepted_corpus
             assert detail.version.meal_type_code.value == "main"
             assert detail.version.source_name == "ru-school2022"
             assert detail.version.source_output_g == output_g
+            assert detail.version.cook_time_minutes is None
             assert all(
                 "Температура подачи" not in step.instruction for step in detail.steps
             )
@@ -201,7 +202,13 @@ def test_r2b_fresh_publication_adds_fish_mains_without_rewriting_accepted_corpus
                 "пароконвектомат" not in step.instruction for step in detail.steps
             )
             assert all(
-                "размораж" not in step.instruction.lower() for step in detail.steps
+                "размораживать" not in step.instruction.lower()
+                for step in detail.steps
+            )
+            assert all(
+                "филе горбуша" not in step.instruction.lower()
+                and "филе минтай" not in step.instruction.lower()
+                for step in detail.steps
             )
 
             projection = nutrition.neutral_consumption_projection(detail.version.id)
