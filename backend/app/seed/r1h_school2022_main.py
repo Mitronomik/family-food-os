@@ -139,15 +139,14 @@ def _load_contract(
     if not isinstance(recipes, dict) or set(recipes) != set(RECIPE_CODES):
         raise ValueError("R1-G prepared Recipe set changed.")
     batch_recipes = batch.get("recipes")
-    if not isinstance(batch_recipes, list) or tuple(
-        row.get("canonical_code") for row in batch_recipes
-    ) != RECIPE_CODES:
+    if (
+        not isinstance(batch_recipes, list)
+        or tuple(row.get("canonical_code") for row in batch_recipes) != RECIPE_CODES
+    ):
         raise ValueError("R1-G runtime Recipe ordering changed.")
 
     nutrient_partition = specs.get("nutrient_partition")
-    expected_unknown = tuple(
-        code for code in NUTRIENT_CODES if code != "ENERGY_KCAL"
-    )
+    expected_unknown = tuple(code for code in NUTRIENT_CODES if code != "ENERGY_KCAL")
     if (
         not isinstance(nutrient_partition, dict)
         or nutrient_partition.get("frozen_code_count") != len(NUTRIENT_CODES)
@@ -157,17 +156,23 @@ def _load_contract(
         raise ValueError("R1-G frozen nutrient partition changed.")
 
     identities = batch.get("new_identity_only_foods")
-    if not isinstance(identities, list) or tuple(
-        row.get("canonical_code") for row in identities
-    ) != IDENTITY_ONLY_FOOD_CODES:
+    if (
+        not isinstance(identities, list)
+        or tuple(row.get("canonical_code") for row in identities)
+        != IDENTITY_ONLY_FOOD_CODES
+    ):
         raise ValueError("R1-G identity-only FoodIngredient set changed.")
     if any(row.get("nutrition_profile") is not None for row in identities):
-        raise ValueError("R1-G identity-only FoodIngredient gained Nutrition authority.")
+        raise ValueError(
+            "R1-G identity-only FoodIngredient gained Nutrition authority."
+        )
 
     return specs, batch
 
 
-def _identity_seeds(batch: dict[str, Any]) -> tuple[TrustedFoodIngredientIdentitySeed, ...]:
+def _identity_seeds(
+    batch: dict[str, Any],
+) -> tuple[TrustedFoodIngredientIdentitySeed, ...]:
     return tuple(
         TrustedFoodIngredientIdentitySeed(
             canonical_code=row["canonical_code"],
@@ -319,9 +324,7 @@ def seed_r1h_school2022_main(
     engine = create_sqlite_engine(config)
     try:
         food = create_food_catalogue_service(engine)
-        identity_summary = food.reconcile_identity_seed(
-            _identity_seeds(batch_payload)
-        )
+        identity_summary = food.reconcile_identity_seed(_identity_seeds(batch_payload))
         catalogue = create_food_recipe_catalogue_service(engine)
         nutrition = create_recipe_nutrition_v2_service(engine)
         seeds, specs = _recipe_seeds_and_specs(specs_payload)
