@@ -54,7 +54,6 @@ from app.seed.r2_breakfast_capacity import (
     MILK_FOOD_CODE,
     OAT_PORRIDGE_RECIPE_CODE,
     OMELET_RECIPE_CODE,
-    PACKAGE,
     RECIPE_CODES,
     seed_r2_breakfast_capacity,
 )
