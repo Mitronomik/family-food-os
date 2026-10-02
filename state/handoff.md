@@ -1,5 +1,35 @@
 # Handoff
 
+## R2-B fish MAIN diversity active — 2026-10-02
+
+Accepted main:
+`1e4a0e137dee87f2aaef7d885481fef17f6e324c`.
+
+Issue #129 / branch `feat/r2b-fish-main-diversity`.
+
+Current batch:
+- School2022 54-6р / pink salmon in milk / 80 g / 144.8 kcal;
+- School2022 54-7р / pollock in milk / 80 g / 105.3 kcal.
+
+Only two new identity-only FoodIngredients are introduced:
+`PINK_SALMON_FILLET_RAW` and `POLLOCK_FILLET_RAW`.
+
+Existing exact identities cover milk 2.5%, onion, sunflower oil and iodized salt.
+Prepared Nutrition remains ENERGY_KCAL-only PREPARED_OUTPUT_V1.
+
+Consumer RecipeSteps intentionally omit source thawing logistics, paraconvection
+and institutional serving-temperature requirements. The selected source route is
+retained only for deterministic provenance.
+
+Cod cutlet 54-1р is deferred because its exact retained bread form does not support
+the narrower high-grade/stale identity proposed in older R1-G evidence.
+
+Next:
+run focused R2-B CI, fix only task-local failures, freeze exact runtime/evidence
+head and update state with the verification receipt.
+
+Do not start another corpus batch, DC4/Gate1-CLOSE or PR9 before review/merge.
+
 ## R2 breakfast capacity final handoff — 2026-10-02
 
 Accepted base:
