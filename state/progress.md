@@ -1,5 +1,56 @@
 # Progress
 
+## R1-H runtime review-ready — 2026-10-02
+
+Accepted base:
+`07af24cf1821bbb1ee9f70bdcc3311361d7b443b`.
+
+Runtime freeze:
+`c300118fd554829ddd9d6429c2abccba8dbb250b`.
+
+Final verification:
+- R1-H focused/affected — 135 passed;
+- Ruff check / format — SUCCESS;
+- Russian nutrition methodologies — SUCCESS;
+- Docs / DC1 — SUCCESS;
+- Nutrient registry V2 — focused + 4 backend shards + launcher SUCCESS;
+- Partial nutrition profiles — focused + 4 backend shards + launcher SUCCESS.
+
+Only `state/*` changed after the runtime freeze.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
+## R1-H runtime implementation — 2026-10-02
+
+Accepted base:
+`07af24cf1821bbb1ee9f70bdcc3311361d7b443b`.
+
+Runtime freeze:
+`c300118fd554829ddd9d6429c2abccba8dbb250b`.
+
+Implemented:
+
+- exact consumption of merged R1-G hash-pinned publication specs;
+- four identity-only FoodIngredients with no Nutrition/Composition authority;
+- two exact School2022 MAIN RecipeVersions;
+- exact sparse PREPARED_OUTPUT_V1 authorities;
+- guarded activation;
+- zero-write exact replay;
+- deliberate-deactivation preservation;
+- conflict/partial/failure-injection coverage;
+- ordinary authoritative Planner loading and exclusions;
+- real seven-opportunity MAIN-capacity proof under max repetition 3;
+- no migration/schema/Planner algorithm changes.
+
+Focused verification at runtime freeze:
+`135 passed`; Ruff check/format SUCCESS; Russian nutrition methodologies SUCCESS.
+
+Broad backend + launcher verification is now the remaining review-readiness gate.
+
+Status:
+`R1_H_BROAD_VERIFICATION_PENDING`.
+
 ## R1-G gate frozen — 2026-10-01
 
 The docs/data evidence gate now has an exact next runtime batch.
