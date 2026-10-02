@@ -130,13 +130,11 @@ def _load_contract(
 
     if (
         applicability.get("schema_version") != 1
-        or applicability.get("operation")
-        != "R2B_FISH_MAIN_HOUSEHOLD_APPLICABILITY"
+        or applicability.get("operation") != "R2B_FISH_MAIN_HOUSEHOLD_APPLICABILITY"
         or applicability.get("accepted_base") != R2B_ACCEPTED_BASE
         or applicability.get("source", {}).get("archive_sha256")
         != SOURCE_ARCHIVE_SHA256
-        or applicability.get("source", {}).get("source_pdf_sha256")
-        != SOURCE_PDF_SHA256
+        or applicability.get("source", {}).get("source_pdf_sha256") != SOURCE_PDF_SHA256
     ):
         raise ValueError("R2-B household-applicability contract identity changed.")
 
