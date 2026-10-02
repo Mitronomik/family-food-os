@@ -8,7 +8,7 @@ PR #128 / R2-A is merged into `main` at:
 
 `1e4a0e137dee87f2aaef7d885481fef17f6e324c`.
 
-Accepted ordinary active exact-energy Planner pool before this batch:
+Before R2-B the ordinary active exact-energy Planner pool is:
 
 - BREAKFAST: 3 RecipeVersions / capacity 9 opportunities per week;
 - MAIN: 3 RecipeVersions / capacity 9 opportunities per week;
@@ -21,23 +21,31 @@ Accepted ordinary active exact-energy Planner pool before this batch:
 
 Issue: `#129`.
 
+PR: `#130`.
+
 Branch: `feat/r2b-fish-main-diversity`.
 
 Accepted base:
 
 `1e4a0e137dee87f2aaef7d885481fef17f6e324c`.
 
+Proof/runtime freeze:
+
+`b7691b45f05f3f5e873df53cb02d0cc769f8db79`.
+
 Status:
 
-`IMPLEMENTATION_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
-## Batch decision
+## R2-B result
 
-Selected School2022 cards:
+Published/activated through the existing prepared-output path:
 
-- `54-6р` — Рыба, припущенная в молоке (горбуша) —
+- `SCHOOL2022_54_6R_PINK_SALMON_IN_MILK` —
+  Рыба, припущенная в молоке (горбуша) —
   80 g / exact 144.8 kcal;
-- `54-7р` — Рыба, припущенная в молоке (минтай) —
+- `SCHOOL2022_54_7R_POLLOCK_IN_MILK` —
+  Рыба, припущенная в молоке (минтай) —
   80 g / exact 105.3 kcal.
 
 New identity-only FoodIngredients:
@@ -45,50 +53,82 @@ New identity-only FoodIngredients:
 - `PINK_SALMON_FILLET_RAW`;
 - `POLLOCK_FILLET_RAW`.
 
-Reuse:
+Neither receives Nutrition or Composition authority.
+
+Existing exact identities are reused for:
 
 - `MILK_2_5`;
 - `ONION_BULB_FRESH`;
 - `SUNFLOWER_OIL`;
 - `SALT_IODIZED`.
 
-No Nutrition/Composition is published for the new fish identities.
-
 Prepared Nutrition remains:
 
 `PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`.
 
-Only ENERGY_KCAL is AVAILABLE; all remaining frozen nutrients are UNKNOWN.
+Only ENERGY_KCAL is AVAILABLE; all remaining frozen nutrient codes are UNKNOWN.
 
-## Product effect target
+## Planner capacity after R2-B
 
 Ordinary active exact-energy MAIN pool:
 
-3 → 5 RecipeVersions.
+- `BOILED_CHICKEN_MAIN_PRODUCT`;
+- `SCHOOL2022_54_29M_BEEF_MEATBALLS`;
+- `SCHOOL2022_54_2M_BEEF_GOULASH`;
+- `SCHOOL2022_54_6R_PINK_SALMON_IN_MILK`;
+- `SCHOOL2022_54_7R_POLLOCK_IN_MILK`.
 
-Projected opportunity capacity under unchanged repetition=3:
+Result:
 
-9 → 15 MAIN opportunities/week.
+- active exact-energy MAIN count: 3 → 5;
+- opportunity capacity: 9 → 15/week under unchanged repetition=3;
+- persisted seven-DINNER production proof selects both preferred fish recipes;
+- no RecipeVersion exceeds repetition 3;
+- hard exclusion of `PINK_SALMON_FILLET_RAW` removes only the pink-salmon
+  candidate while the week remains feasible and pollock remains available.
 
-The persisted proof must show a seven-DINNER week that selects both fish recipes
-when both are preferred, with no RecipeVersion used more than 3 times.
+## Source / consumer boundary
 
-A hard exclusion of one fish identity must remove only that candidate while the
-week remains feasible through the remaining MAIN pool.
+Exact source-card / source-variant / source-process / selected-route /
+energy-reconciliation hashes are pinned.
 
-## Source / UX boundary
+The source route includes a thawing alternative. One route is frozen for
+deterministic provenance only.
 
-The retained source contains thawing alternatives, paraconvection references and
-institutional serving-temperature requirements.
+Consumer RecipeSteps begin with already-thawed fillet. Thawing logistics,
+paraconvection references and institutional serving-temperature requirements are
+not promoted to consumer execution.
 
-One source route is pinned for deterministic corpus closure, but consumer
-RecipeSteps begin with already-thawed fillet. Thawing logistics, paraconvection
-and institutional serving temperature remain provenance only.
+The older School2022 54-1р cod-cutlet follow-up remains deferred because its exact
+retained source supports only generic wheat bread, while older R1-G evidence
+proposed the narrower `WHEAT_BREAD_HIGH_GRADE_STALE` without exact cod-card
+grade/stale evidence.
 
-The older R1-G cod-cutlet follow-up is not used in this batch because the exact cod
-card supports only generic wheat bread while the old note proposed the narrower
-`WHEAT_BREAD_HIGH_GRADE_STALE`. That unresolved form narrowing is not carried
-into production.
+## Failure / replay semantics
+
+Verified:
+
+- fresh publication;
+- exact zero-write replay;
+- deliberate deactivation remains deactivated;
+- tampered frozen contract fails closed;
+- partial Recipe without prepared authority fails closed;
+- conflicting fish FoodIngredient identity fails closed.
+
+## Verification
+
+Exact proof/runtime-freeze verification at `b7691b45...`:
+
+- focused/affected R2-B suite — **128 passed**;
+- Ruff check — SUCCESS;
+- Ruff format --check — SUCCESS;
+- scope/whitespace — SUCCESS;
+- `AI_ENABLED=false`;
+- migration head remains `0042_recipe_prepared_output_nutrition`;
+- migration 0043 is absent.
+
+The first R2-B run already had **128 passed** and failed only Ruff format. The
+format-only correction did not change product/runtime semantics.
 
 ## Scope boundaries
 
@@ -96,35 +136,22 @@ Do not:
 
 - add migration 0043 or schema changes;
 - add another Nutrition authority kind;
-- publish Nutrition/Composition for fish identities;
-- reuse whole-fish identities as exact fillet authority;
+- add Nutrition/Composition to fish identities;
+- infer whole-fish→fillet equivalence;
 - publish cod cutlet 54-1р;
 - infer a narrower bread form;
 - change Planner algorithm/scoring/roles/repetition;
 - add allergen automation;
+- start another corpus batch;
 - start DC4 / Gate1-CLOSE;
 - start PR9 Shopping;
 - start Prep/PDF/Retail/API/UI/Auth/PostgreSQL/AI.
 
-## Verification target
-
-R2-B must prove:
-
-- exact hash-pinned source/publication contract;
-- bounded household applicability for only the two named cards;
-- fresh/replay/deactivation semantics;
-- identity-only enforcement;
-- tamper/partial/conflict fail-closed behavior;
-- active exact-energy MAIN count = 5;
-- persisted fish-diverse seven-DINNER week;
-- hard fish exclusion with successful fallback;
-- migration head remains 0042;
-- `AI_ENABLED=false`.
-
 ## Next step
 
-Run exact-head focused R2-B verification, fix task-local defects only, freeze the
-verified runtime/evidence head, then hand the PR to independent final review.
+Independent final review of PR #130.
 
-After merge, reassess the next R2/R3 batch. Do not start DC4, Gate1-CLOSE or PR9
-automatically.
+After explicit review and merge, reassess the next R2/R3 corpus batch by maximum
+marginal realistic weekly variety and corpus closure.
+
+Do not start DC4, Gate1-CLOSE or PR9 automatically.
