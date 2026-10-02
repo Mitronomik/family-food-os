@@ -4,130 +4,119 @@ Updated: 2026-10-02.
 
 ## Accepted state
 
-PR #123 / R1-H School2022 MAIN prepared-output runtime batch is merged into
-`main` at:
+PR #125 is merged into `main` at:
 
-`e50da0d21a6c740e5d60c257ac64de12e0c5d2b3`.
+`5bf5127a238b8bb139903f008ad7c14b9b1309c7`.
 
-R1-H delivered the frozen R1-G batch without changing Planner rules or schema:
+It authorizes Issue #124 / R1-C after merged R1-H production truth established:
 
-- `HARD_BOILED_EGG` remains the active exact-energy breakfast candidate;
-- `BOILED_CHICKEN_MAIN_PRODUCT` remains an active exact-energy MAIN candidate;
-- `SCHOOL2022_54_29M_BEEF_MEATBALLS` is active at exact 153 kcal / 80 g;
-- `SCHOOL2022_54_2M_BEEF_GOULASH` is active at exact 185.6 kcal / 80 g;
-- the four new supporting FoodIngredients are identity-only and carry no invented
-  Nutrition/Composition authority;
-- prepared Nutrition continues to use only
-  `PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`;
-- migration head remains `0042_recipe_prepared_output_nutrition`.
-
-The ordinary authoritative Planner boundary proves that the three active MAIN
-RecipeVersions can cover seven DINNER opportunities with the unchanged
-`max_recipe_repetitions=3`.
-
-## R1-C readiness decision
-
-The prerequisite in
-`docs/family-food/r1c-production-planner-proof-prerequisite.md` is now satisfied.
-
-That contract previously blocked R1-C because the active exact-energy R1
-candidate count was zero. Merged R1-F and R1-H runtime truth supersedes that
-historical blocker:
-
-- active exact-energy breakfast candidates: 1;
-- active exact-energy MAIN candidates: 3;
-- seven-opportunity MAIN/DINNER capacity: proven through the real Planner path;
-- hard FoodIngredient exclusion behavior: proven;
-- Planner algorithm/scoring/repetition: unchanged.
-
-This closes the **minimum production-capacity prerequisite**. It does not itself
-complete R1-C, DC4 or Gate1-CLOSE.
+- 1 active exact-energy BREAKFAST RecipeVersion;
+- 3 active exact-energy MAIN RecipeVersions;
+- real seven-DINNER capacity under unchanged `max_recipe_repetitions=3`;
+- ordinary authoritative Planner loading and FoodIngredient exclusions;
+- migration head `0042_recipe_prepared_output_nutrition`.
 
 ## Current bounded operation
 
 **R1-C — Production persisted Planner proof.**
 
-Issue:
+Issue: `#124`.
 
-`#124`.
+PR: `#126`.
 
-Accepted base:
+Branch: `feat/r1c-production-planner-proof`.
 
-`e50da0d21a6c740e5d60c257ac64de12e0c5d2b3`.
+Implementation base:
+
+`5bf5127a238b8bb139903f008ad7c14b9b1309c7`.
+
+Production runtime/data base remains:
+
+`e50da0d21a6c740e5d60c257ac64de12e0c5d2b3` (merged PR #123).
+
+Proof freeze:
+
+`a36d8c2876daea4b4f3edd7f47af8b49d09b04cd`.
+
+## R1-C result
+
+R1-C is implemented as a production integration proof. No application runtime,
+schema, migration or authoritative production-data behavior is changed.
+
+The proof uses real persisted boundaries:
+
+`Household / HouseholdMember`
+→ accepted CUSTOM MealPattern selection with explicit v0.4 energy shares
+→ `PlannerService.generate_authoritative(...)`
+→ ordinary active RecipeVersion catalogue
+→ current neutral Recipe Nutrition
+→ existing MealPlan / Serving UoW.
+
+Verified product behavior:
+
+- `planner-v0.4`;
+- `meal-role-recipe-v2`;
+- active exact-energy pool is exactly 1 BREAKFAST + 3 MAIN;
+- a seven-DINNER repository-backed week is generated and persisted;
+- all three MAIN RecipeVersions are used, none more than 3 times;
+- persisted Serving portions are positive and are driven by the accepted
+  opportunity energy share;
+- repeated generation produces the same semantic week and identical Planner trace
+  fingerprint while appending MealPlan revision history;
+- a materially different BREAKFAST+DINNER pattern fails explicitly because one
+  BREAKFAST RecipeVersion cannot cover seven breakfasts under repetition=3;
+- that infeasible result persists no partial MealPlan;
+- hard exclusion of `WHEAT_BREAD_HIGH_GRADE_STALE` rejects the meatball
+  candidate through the ordinary authoritative boundary, leaves unrelated MAIN
+  candidates unmarked by that exclusion, and persists no partial plan;
+- `AI_ENABLED=false`;
+- migration head remains 0042; no migration 0043.
+
+Durable receipt:
+
+`data/curation/r1c-production-planner-proof/summary.json`.
+
+## Verification
+
+Exact proof-head verification at `a36d8c2...`:
+
+- R1-C focused/affected suite — **101 passed**;
+- Ruff check — SUCCESS;
+- Ruff format --check — SUCCESS;
+- scope/whitespace gate — SUCCESS;
+- Docs verification — SUCCESS;
+- Russian nutrition methodologies — SUCCESS.
+
+The two earlier red R1-C attempts were task-local test-fixture/hygiene defects:
+
+- unsupported `moderate` activity caused the deterministic Nutrition target to
+  fail closed with `MISSING_REFERENCE_ENERGY`; the persisted member fixture now
+  uses the already-supported `active` PAL category;
+- Ruff/import/format findings were corrected without changing acceptance.
 
 Status:
 
-`AUTHORIZED_NOT_STARTED`.
-
-Goal:
-
-Prove that the production Planner can generate and persist a real
-repository-backed seven-day household week through the ordinary
-Household / MealPattern / RecipeVersion / Nutrition / MealPlan / Serving
-boundaries.
-
-The success path must use real active production RecipeVersions and current
-deterministic Nutrition authority. Synthetic Planner candidates are not an
-accepted substitute.
-
-## Required R1-C proof
-
-At minimum:
-
-- ordinary `PlannerService.compose_authoritative_request(...)`;
-- `planner-v0.4`;
-- `meal-role-recipe-v2`;
-- materially different repository-backed accepted household/member meal patterns;
-- one complete seven-day generated **and persisted** week;
-- individualized persisted Servings;
-- deterministic semantic replay / trace fingerprint;
-- one explicit bounded infeasible case with no partial persisted plan;
-- hard FoodIngredient exclusion through the ordinary authoritative path;
-- `AI_ENABLED=false`.
-
-The newly feasible seven-DINNER MAIN-heavy pattern is the default success fixture
-unless implementation discovers a contract-backed reason to use another already
-authorized repository-backed pattern.
+`READY_FOR_FINAL_REVIEW`.
 
 ## Scope boundaries
 
 Do not:
 
 - change Planner algorithm/scoring/roles/repetition;
-- add migration 0043 or any schema change;
-- add another Nutrition authority kind/calculation version;
-- publish additional FoodIngredient/RecipeVersion/Nutrition truth;
+- add migration 0043 or schema changes;
+- publish additional FoodIngredient/RecipeVersion/Nutrition authority;
+- weaken exclusions;
 - infer raw→cooked Nutrition, yield or retention;
-- weaken exclusions to obtain a successful week;
+- start R2/R3;
 - start DC4 / Gate1-CLOSE;
 - start PR9 Shopping;
-- start Prep/PDF/Retail/API/UI/Auth/PostgreSQL/AI;
-- start R2/R3.
-
-If the R1-C implementation discovers a need for a new persisted contract,
-migration or authority decision, stop and reopen the applicable Implementation
-Contract Gate instead of expanding scope.
-
-## Verification baseline
-
-R1-H final review evidence on merged runtime/test bytes:
-
-- focused/affected R1-H suite — 135 passed;
-- Ruff check / format — SUCCESS;
-- Russian nutrition methodologies — SUCCESS;
-- Docs / DC1 — SUCCESS;
-- Nutrient registry V2 — focused + four backend shards + launcher SUCCESS;
-- Partial nutrition profiles — focused + four backend shards + launcher SUCCESS.
-
-R1-C receives its own affected verification; this historical receipt is not a
-substitute for new R1-C tests.
+- start Prep/PDF/Retail/API/UI/Auth/PostgreSQL/AI.
 
 ## Next step
 
-Implement Issue #124 as one bounded R1-C PR.
+Independent final review of PR #126.
 
-After independent review and merge, reassess and explicitly authorize the next
-R2/R3 corpus-expansion operation toward the DATA-CORPUS-V1 baseline and
-DC4 / Gate1-CLOSE.
+After explicit review and merge, reassess and separately authorize the next R2/R3
+corpus-expansion operation toward the DATA-CORPUS-V1 baseline.
 
 Do not start R2/R3, DC4, Gate1-CLOSE or PR9 automatically.
