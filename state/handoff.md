@@ -1,5 +1,68 @@
 # Handoff
 
+## R1-C final proof receipt — 2026-10-02
+
+Accepted implementation base:
+
+`5bf5127a238b8bb139903f008ad7c14b9b1309c7` (merged PR #125).
+
+PR:
+
+`#126 — R1-C: production persisted Planner proof`.
+
+Proof freeze:
+
+`2f643303308f3bb6b95d7161435474109ad91a34`.
+
+R1-C uses the ordinary persisted application boundary end to end:
+
+- persisted Household / HouseholdMember;
+- persisted accepted CUSTOM MealPattern selection with exact v0.4 shares;
+- active production RecipeVersions from R1-F/R1-H;
+- current neutral Recipe Nutrition;
+- `PlannerService.generate_authoritative(...)`;
+- existing MealPlan / Serving persistence and revision history.
+
+Proof result:
+
+- complete seven-DINNER week persists successfully;
+- all 3 MAIN candidates are used under repetition=3;
+- Serving portions are positive and allocation-backed;
+- replay has the same semantic week and trace fingerprint;
+- BREAKFAST+DINNER is an explicit bounded infeasible pattern with no partial plan;
+- hard FoodIngredient exclusion rejects the affected candidate and leaves
+  unaffected candidates free of that exclusion code;
+- persisted two-member exclusion/sharedness proof keeps six compatible dinner
+  events shared, keeps meatballs available to the unaffected member, and never
+  assigns meatballs to the excluded member;
+- active exact-energy pool remains 1 BREAKFAST + 3 MAIN;
+- migration head remains 0042;
+- no Planner/runtime/schema/new-authority change;
+- `AI_ENABLED=false`.
+
+Verification at the proof freeze:
+
+- R1-C focused/affected — 102 passed;
+- Ruff check / format — SUCCESS;
+- scope/whitespace — SUCCESS.
+
+Independent review blocker closure:
+the earlier one-member exclusion proof could not demonstrate preservation of
+other members/sharedness. The corrected two-member persisted scenario proves
+member-local exclusion plus preserved shared execution. No runtime/schema/Planner
+or authority change was needed.
+
+Earlier red attempts were task-local proof-fixture/hygiene issues only:
+the unsupported `moderate` activity correctly failed closed at
+`MISSING_REFERENCE_ENERGY`; the fixture now uses supported `active`, and
+trace assertions use stable `applied_exclusions`/event participation semantics.
+
+PR #126 is READY FOR FINAL REVIEW.
+
+Do not merge autonomously. After explicit review and merge, do not start R2/R3
+automatically; first reassess and authorize the next corpus-expansion operation.
+DC4 / Gate1-CLOSE and PR9 remain later.
+
 ## R1-C authorized after merged R1-H — 2026-10-02
 
 Accepted main:
