@@ -22,11 +22,12 @@ Issue #124 is the next bounded operation:
 
 `R1-C: production persisted Planner proof`.
 
-R1-C must use real repository-backed Household/MealPattern/RecipeVersion/Nutrition
-state, generate and persist at least one complete seven-day week, persist
-individualized Servings, prove deterministic replay, prove one atomic bounded
-infeasible case, and prove hard FoodIngredient exclusion through the ordinary
-authoritative Planner boundary.
+R1-C must use materially different repository-backed accepted
+Household/MealPattern scenarios and real RecipeVersion/Nutrition state, generate
+and persist at least one complete seven-day week, persist individualized
+Servings, prove deterministic replay, prove one atomic bounded infeasible case,
+and prove hard FoodIngredient exclusion through the ordinary authoritative
+Planner boundary.
 
 Do not add migration 0043, publish additional food/recipe/nutrition authority,
 change Planner scoring/repetition, weaken exclusions, or start DC4/Gate1-CLOSE,
@@ -38,6 +39,11 @@ reopen the applicable Implementation Contract Gate.
 Status:
 
 `R1_C_AUTHORIZED_NOT_STARTED`.
+
+After successful independent review and merge of R1-C, preserve the accepted
+sequence: explicitly authorize the next R2/R3 corpus-expansion operation toward
+the DATA-CORPUS-V1 baseline before DC4 / Gate1-CLOSE. Do not start R2/R3, DC4,
+Gate1-CLOSE or PR9 automatically.
 
 ## R1-H final verification receipt — 2026-10-02
 
