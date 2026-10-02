@@ -4,128 +4,113 @@ Updated: 2026-10-02.
 
 ## Accepted state
 
-PR #125 is merged into `main` at:
+PR #126 / R1-C is merged into `main` at:
 
-`5bf5127a238b8bb139903f008ad7c14b9b1309c7`.
+`8995e85e4cda2ae30fc62fdc63daaf441f4226bd`.
 
-It authorizes Issue #124 / R1-C after merged R1-H production truth established:
+R1-C proved the ordinary production path end to end with
+`planner-v0.4 / meal-role-recipe-v2`, persisted MealPlan/Serving history,
+deterministic replay, bounded infeasibility and member-local hard exclusions.
 
-- 1 active exact-energy BREAKFAST RecipeVersion;
-- 3 active exact-energy MAIN RecipeVersions;
-- real seven-DINNER capacity under unchanged `max_recipe_repetitions=3`;
-- ordinary authoritative Planner loading and FoodIngredient exclusions;
-- migration head `0042_recipe_prepared_output_nutrition`.
+Current active exact-energy Planner capacity before R2:
+
+- BREAKFAST: 1 RecipeVersion — `HARD_BOILED_EGG`;
+- MAIN: 3 RecipeVersions;
+- `max_recipe_repetitions=3`;
+- MAIN capacity: 9 opportunities/week;
+- BREAKFAST capacity: 3 opportunities/week.
+
+Issue #99 requires the next R2 batch to maximize marginal realistic weekly variety
+and Planner capacity.
 
 ## Current bounded operation
 
-**R1-C — Production persisted Planner proof.**
+**R2 — Breakfast Planner-capacity runtime batch.**
 
-Issue: `#124`.
+Issue: `#127`.
 
-PR: `#126`.
+Branch: `feat/r2-breakfast-capacity`.
 
-Branch: `feat/r1c-production-planner-proof`.
+Accepted base:
 
-Implementation base:
-
-`5bf5127a238b8bb139903f008ad7c14b9b1309c7`.
-
-Production runtime/data base remains:
-
-`e50da0d21a6c740e5d60c257ac64de12e0c5d2b3` (merged PR #123).
-
-Proof freeze:
-
-`2f643303308f3bb6b95d7161435474109ad91a34`.
-
-## R1-C result
-
-R1-C is implemented as a production integration proof. No application runtime,
-schema, migration or authoritative production-data behavior is changed.
-
-The proof uses real persisted boundaries:
-
-`Household / HouseholdMember`
-→ accepted CUSTOM MealPattern selection with explicit v0.4 energy shares
-→ `PlannerService.generate_authoritative(...)`
-→ ordinary active RecipeVersion catalogue
-→ current neutral Recipe Nutrition
-→ existing MealPlan / Serving UoW.
-
-Verified product behavior:
-
-- `planner-v0.4`;
-- `meal-role-recipe-v2`;
-- active exact-energy pool is exactly 1 BREAKFAST + 3 MAIN;
-- a seven-DINNER repository-backed week is generated and persisted;
-- all three MAIN RecipeVersions are used, none more than 3 times;
-- persisted Serving portions are positive and are driven by the accepted
-  opportunity energy share;
-- repeated generation produces the same semantic week and identical Planner trace
-  fingerprint while appending MealPlan revision history;
-- a materially different BREAKFAST+DINNER pattern fails explicitly because one
-  BREAKFAST RecipeVersion cannot cover seven breakfasts under repetition=3;
-- that infeasible result persists no partial MealPlan;
-- hard exclusion of `WHEAT_BREAD_HIGH_GRADE_STALE` rejects the meatball
-  candidate through the ordinary authoritative boundary, leaves unrelated MAIN
-  candidates unmarked by that exclusion, and persists no partial plan;
-- a persisted two-member scenario proves the same exclusion remains member-local:
-  six unaffected dinner events stay shared, the unaffected member can still
-  receive the meatball candidate, and the excluded member never receives it;
-- `AI_ENABLED=false`;
-- migration head remains 0042; no migration 0043.
-
-Durable receipt:
-
-`data/curation/r1c-production-planner-proof/summary.json`.
-
-## Verification
-
-Exact corrected proof-head verification at `2f643303...`:
-
-- R1-C focused/affected suite — **102 passed**;
-- Ruff check — SUCCESS;
-- Ruff format --check — SUCCESS;
-- scope/whitespace gate — SUCCESS.
-
-The independent final review found one acceptance-evidence gap: the original
-hard-exclusion proof used only one HouseholdMember and therefore did not prove
-preservation of other members/sharedness. The corrected proof adds the persisted
-two-member scenario above and closes that gap without changing runtime behavior,
-Planner rules, schema or authority.
-
-Earlier task-local fixture/hygiene failures remain historical evidence only:
-
-- unsupported `moderate` activity correctly failed closed at
-  `MISSING_REFERENCE_ENERGY`; the persisted fixture uses supported `active`;
-- Ruff/import/format findings were corrected without changing acceptance;
-- the first multi-member trace assertion was corrected to use stable
-  `applied_exclusions` plus persisted event participation rather than treating
-  partial compatibility as a whole-candidate rejection.
+`8995e85e4cda2ae30fc62fdc63daaf441f4226bd`.
 
 Status:
 
-`READY_FOR_FINAL_REVIEW`.
+`IMPLEMENTATION_ACTIVE`.
+
+## Decision
+
+Selected School2022 cards:
+
+- `ru-school2022:recipe:54-1о` — Омлет натуральный —
+  150 g / exact 225.5 kcal;
+- `ru-school2022:recipe:54-9к` — Каша вязкая молочная овсяная —
+  200 g / exact 272.9 kcal.
+
+Both are bounded household-applicability reviews, not blanket School2022
+authority.
+
+If both activate, the ordinary breakfast pool becomes:
+
+- `HARD_BOILED_EGG`;
+- `SCHOOL2022_54_1O_NATURAL_OMELET`;
+- `SCHOOL2022_54_9K_MILK_OAT_PORRIDGE`.
+
+Projected BREAKFAST capacity becomes 9 opportunities/week under unchanged
+repetition=3.
+
+## Authority and identities
+
+Reuse only the accepted prepared-output seam:
+
+`PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`.
+
+Only ENERGY_KCAL is AVAILABLE; all other frozen nutrient codes remain UNKNOWN.
+
+Create identity-only, without Nutrition/Composition authority:
+
+- `MILK_2_5` — Молоко 2,5%;
+- `OAT_GROATS` — Крупа овсяная.
+
+Do not substitute nearby milk-fat forms or `OATS_ROLLED`.
 
 ## Scope boundaries
 
 Do not:
 
-- change Planner algorithm/scoring/roles/repetition;
 - add migration 0043 or schema changes;
-- publish additional FoodIngredient/RecipeVersion/Nutrition authority;
-- weaken exclusions;
+- add another Nutrition authority kind;
 - infer raw→cooked Nutrition, yield or retention;
-- start R2/R3;
+- add Nutrition/Composition to the new identities;
+- change Planner algorithm/scoring/roles/repetition;
+- add allergen automation;
+- publish School2022 54-1р in this PR;
+- infer missing USSR82 salt/energy linkage;
 - start DC4 / Gate1-CLOSE;
 - start PR9 Shopping;
 - start Prep/PDF/Retail/API/UI/Auth/PostgreSQL/AI.
 
+## Verification target
+
+R2 must prove:
+
+- exact hash-pinned source/publication contract;
+- fresh/replay/deactivation semantics;
+- identity-only enforcement;
+- tamper/partial/conflict fail-closed behavior;
+- two active exact-energy breakfast RecipeVersions;
+- ordinary pool = three exact-energy breakfasts;
+- persisted seven-BREAKFAST week under repetition=3;
+- hard FoodIngredient exclusion;
+- migration head remains 0042;
+- `AI_ENABLED=false`.
+
 ## Next step
 
-Independent final review of PR #126.
+Run exact-head focused R2 verification, fix only task-local defects, freeze the
+reviewed proof/runtime head, then hand PR #128 (or the created R2 PR number) to
+independent final review.
 
-After explicit review and merge, reassess and separately authorize the next R2/R3
-corpus-expansion operation toward the DATA-CORPUS-V1 baseline.
-
-Do not start R2/R3, DC4, Gate1-CLOSE or PR9 automatically.
+After R2 merge, reassess the next R2/R3 corpus batch. Do not start DC4,
+Gate1-CLOSE or PR9 automatically.
