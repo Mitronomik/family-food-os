@@ -2,16 +2,16 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal, InvalidOperation
-import hashlib
-import json
 from pathlib import Path
 from typing import Any
 from uuid import UUID
 
-from app.db.config import DatabaseConfig, REPOSITORY_ROOT
+from app.db.config import REPOSITORY_ROOT, DatabaseConfig
 from app.db.migrations import apply_migrations
 from app.domain.recipe_nutrition_v2 import NUTRIENT_CODES
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
@@ -91,7 +91,7 @@ def _checked_json(path: Path, expected_git_blob_sha: str) -> dict[str, Any]:
         raise ValueError(f"R1-G frozen artifact changed: {path.name}.")
     payload = json.loads(raw)
     if not isinstance(payload, dict):
-        raise ValueError(f"R1-G artifact must be a JSON object: {path.name}.")
+        raise TypeError(f"R1-G artifact must be a JSON object: {path.name}.")
     return payload
 
 
