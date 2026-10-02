@@ -35,6 +35,7 @@ from app.persistence.sqlalchemy_core.food_recipe_composition import (
     create_food_recipe_catalogue_service,
 )
 from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
+    SqlAlchemyRecipeNutritionV2ReadScope,
     create_recipe_nutrition_v2_service,
 )
 from app.seed.food_ingredients import seed_food_ingredients
@@ -175,9 +176,20 @@ def test_r1h_fresh_publication_activates_exact_school2022_mains(database):
             detail = catalogue.get_current_verified(admission.recipe_id)
             expected = specs["recipes"][code]["trusted_recipe_seed"]["version"]
 
+            assert detail.version.base_servings == Decimal(expected["base_servings"])
+            assert detail.version.source_original_servings == Decimal(
+                expected["source_original_servings"]
+            )
             assert detail.version.source_name == expected["source_name"]
             assert detail.version.source_recipe_id == expected["source_recipe_id"]
+            assert detail.version.source_url == expected["source_url"]
             assert detail.version.source_version == expected["source_version"]
+            assert detail.version.rights_review_status.value == expected[
+                "rights_review_status"
+            ]
+            assert detail.version.verification_status.value == expected[
+                "verification_status"
+            ]
             assert (
                 detail.version.source_document_sha256
                 == expected["source_document_sha256"]
@@ -196,6 +208,30 @@ def test_r1h_fresh_publication_activates_exact_school2022_mains(database):
             assert tuple(row.quantity for row in detail.ingredients) == tuple(
                 Decimal(row["quantity"]) for row in expected["ingredients"]
             )
+
+            prepared_expected = specs["recipes"][code]["prepared_spec"]
+            with SqlAlchemyRecipeNutritionV2ReadScope(engine) as scope:
+                authority = scope.prepared.get_authority(detail.version.id)
+            assert authority is not None
+            assert authority.output_mass_g == Decimal(
+                prepared_expected["output_mass_g"]
+            )
+            assert authority.source_name == prepared_expected["source_name"]
+            assert authority.source_id == prepared_expected["source_recipe_id"]
+            assert authority.source_version == prepared_expected["source_version"]
+            assert authority.source_locator == prepared_expected["source_locator"]
+            assert (
+                authority.source_document_sha256
+                == prepared_expected["source_document_sha256"]
+            )
+            assert authority.source_data_type == prepared_expected["source_data_type"]
+            assert (
+                authority.rights_review_status
+                == prepared_expected["rights_review_status"]
+            )
+            assert authority.rights_basis == prepared_expected["rights_basis"]
+            assert authority.review_reference == prepared_expected["review_reference"]
+            assert authority.value_count == 1
 
             projection = nutrition.neutral_consumption_projection(detail.version.id)
             assert (
