@@ -17,25 +17,51 @@
   "materially_different_repository_backed_patterns": [
     {
       "code": "DINNER_ONLY_SUCCESS",
-      "roles": ["DINNER"],
-      "daily_energy_shares": ["0.25"],
+      "roles": [
+        "DINNER"
+      ],
+      "daily_energy_shares": [
+        "0.25"
+      ],
       "expected_outcome": "SUCCESS_PERSISTED"
     },
     {
       "code": "BREAKFAST_DINNER_BOUNDED_INFEASIBLE",
-      "roles": ["BREAKFAST", "DINNER"],
-      "daily_energy_shares": ["0.30", "0.25"],
+      "roles": [
+        "BREAKFAST",
+        "DINNER"
+      ],
+      "daily_energy_shares": [
+        "0.30",
+        "0.25"
+      ],
       "expected_outcome": "NO_ELIGIBLE_CANDIDATE"
     },
     {
       "code": "DINNER_ONLY_HARD_EXCLUSION",
-      "roles": ["DINNER"],
-      "daily_energy_shares": ["0.25"],
+      "roles": [
+        "DINNER"
+      ],
+      "daily_energy_shares": [
+        "0.25"
+      ],
       "excluded_food_code": "WHEAT_BREAD_HIGH_GRADE_STALE",
       "expected_outcome": "NO_ELIGIBLE_CANDIDATE"
+    },
+    {
+      "code": "DINNER_ONLY_MULTI_MEMBER_EXCLUSION_SHAREDNESS",
+      "roles": [
+        "DINNER"
+      ],
+      "daily_energy_shares": [
+        "0.25"
+      ],
+      "excluded_food_code": "WHEAT_BREAD_HIGH_GRADE_STALE",
+      "fixed_source": "EAT_OUT",
+      "expected_outcome": "SUCCESS_PERSISTED"
     }
   ],
-  "successful_persisted_complete_weeks": 1,
+  "successful_persisted_complete_weeks": 2,
   "explicit_infeasible_outcomes": 2,
   "remaining_authority_blockers": [
     "USSR82-1081",
@@ -49,5 +75,11 @@
   "planner_algorithm_change": false,
   "new_nutrition_authority": false,
   "ai_required": false,
-  "follow_up": "After R1-C review and merge, explicitly authorize the next R2/R3 corpus-expansion operation before DC4 / Gate1-CLOSE. Do not start R2/R3, DC4, Gate1-CLOSE or PR9 automatically."
+  "follow_up": "After R1-C review and merge, explicitly authorize the next R2/R3 corpus-expansion operation before DC4 / Gate1-CLOSE. Do not start R2/R3, DC4, Gate1-CLOSE or PR9 automatically.",
+  "sharedness_proof": {
+    "persisted_household_members": 2,
+    "shared_cook_events": 6,
+    "exclusion_scope": "ONE_MEMBER_ONLY",
+    "unaffected_member_can_receive_excluded_candidate": true
+  }
 }
