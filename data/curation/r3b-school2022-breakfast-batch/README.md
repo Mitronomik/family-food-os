@@ -13,23 +13,20 @@ runtime PR. It does not publish runtime data.
 2. `ru-school2022:recipe:54-3о` — Омлет с морковью — 150 g / 201 kcal
 3. `ru-school2022:recipe:54-4о` — Омлет с сыром — 150 g / 316.0 kcal
 4. `ru-school2022:recipe:54-2т` — Запеканка из творога с морковью — 150 g / 249.5 kcal
-5. `ru-school2022:recipe:54-3т` — Суфле из моркови с творогом — 150 g / 200.9 kcal
-6. `ru-school2022:recipe:54-1к` — Каша жидкая молочная кукурузная — 200 g / 207.9 kcal
+5. `ru-school2022:recipe:54-1к` — Каша жидкая молочная кукурузная — 200 g / 207.9 kcal
+6. `ru-school2022:recipe:54-2к` — Каша вязкая молочная кукурузная — 200 g / 287.8 kcal
 7. `ru-school2022:recipe:54-6к` — Каша вязкая молочная пшенная — 200 g / 274.9 kcal
 8. `ru-school2022:recipe:54-16к` — Каша «Дружба» — 200 g / 168.9 kcal
-9. `ru-school2022:recipe:54-21к` — Каша вязкая молочная ячневая — 200 g / 249.1 kcal
-10. `ru-school2022:recipe:54-23к` — Каша жидкая молочная пшеничная — 200 g / 208.3 kcal
+9. `ru-school2022:recipe:54-23к` — Каша жидкая молочная пшеничная — 200 g / 208.3 kcal
+10. `ru-school2022:recipe:54-24к` — Каша жидкая молочная пшенная — 200 g / 274.9 kcal
 
-The first five were present in superseded PR #145 but are independently
-revalidated here against the current merged source boundary. No #145 contract or
-state is reused as authority.
+Adversarial process audit removed `54-3т` and `54-21к` because quantified sugar has no technology placement. They are replaced in the same ten-card gate by source-clean `54-2к` and `54-24к`. `54-22к` remains deferred because quantified butter has no technology placement.
 
 ## New identity-only demand
 
 - `CHEESE_SEMI_HARD_UNSPECIFIED` — Сыр полутвердый;
 - `CORN_GROATS` — Крупа кукурузная;
-- `MILLET_GROATS` — Крупа пшенная;
-- `BARLEY_GROATS` — Крупа ячневая;
+- `MILLET_GROATS` — Крупа пшенная.
 
 No NutritionProfile or Composition authority is granted.
 
@@ -48,8 +45,9 @@ No NutritionProfile or Composition authority is granted.
 - explicit source ratios may be retained without inventing per-step grams;
 - `54-16к` exact 70 g water total has UNKNOWN per-groat split;
 - `54-23к` exact 68 g water is source input, while retained water/yield is UNKNOWN;
-- unquantified wash/rinse/scald water is process-resource context, not a new RecipeIngredient;
-- `54-22к` is deferred because the card quantifies butter without placing it in technology.
+- `54-2к` exact 65 g water is quantified cooking input; wash water remains process-resource context;
+- `54-24к` exact 52 g water is the source `по расчету рецептуры` cooking input after unquantified wash/scald/drain operations;
+- `54-3т`, `54-21к` and `54-22к` are deferred because a quantified table ingredient lacks technology placement.
 
 ## Future runtime
 
