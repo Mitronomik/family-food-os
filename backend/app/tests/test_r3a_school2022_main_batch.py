@@ -205,8 +205,8 @@ def create_dinner_household(households, meal_plans):
         household_id=household.id,
         member_id=member.id,
         source_kind=MemberMealPatternSourceKind.CUSTOM,
-        schedule={weekday: (MealRole.DINNER,) for weekday in range(1, 8)},
-        energy_shares={weekday: (Decimal("0.35"),) for weekday in range(1, 8)},
+        schedule={1: (MealRole.DINNER,)},
+        energy_shares={1: (Decimal("0.35"),)},
     )
     return household, member, selection
 
