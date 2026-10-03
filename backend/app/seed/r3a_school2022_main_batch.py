@@ -229,9 +229,7 @@ def _load_contract(
         recipes[code].get("source_receipt", {}).get("source_recipe_id")
         for code in RECIPE_CODES
     )
-    process_source_ids = tuple(
-        row.get("source_recipe_id") for row in process_rows
-    )
+    process_source_ids = tuple(row.get("source_recipe_id") for row in process_rows)
     if (
         selected_codes != RECIPE_CODES
         or selected_source_ids != SOURCE_RECIPE_IDS
@@ -248,7 +246,9 @@ def _load_contract(
     ):
         raise ValueError("R3-A selected Recipe set/order drifted.")
 
-    if any(source_id in selected_source_ids for source_id in EXCLUDED_SOURCE_RECIPE_IDS):
+    if any(
+        source_id in selected_source_ids for source_id in EXCLUDED_SOURCE_RECIPE_IDS
+    ):
         raise ValueError("R3-A excluded source card entered selected batch.")
 
     identity_rows = identities.get("new_identity_only_foods")
@@ -260,8 +260,7 @@ def _load_contract(
         != IDENTITY_ONLY_FOOD_CODES
         or tuple(row.get("canonical_code") for row in spec_identity_rows)
         != IDENTITY_ONLY_FOOD_CODES
-        or tuple(summary.get("new_identity_only_foods", ()))
-        != IDENTITY_ONLY_FOOD_CODES
+        or tuple(summary.get("new_identity_only_foods", ())) != IDENTITY_ONLY_FOOD_CODES
         or any(
             row.get("nutrition_profile") is not None
             or row.get("composition") is not None
@@ -358,7 +357,9 @@ def _load_contract(
         or runtime_rules.get("new_nutrition_authority_allowed") is not False
         or runtime_rules.get("partial_inactive_batch_publication_allowed") is not True
         or runtime_rules.get("batch_activation_atomic") is not True
-        or runtime_rules.get("batch_activation_requires_transaction_neutral_in_scope_seam")
+        or runtime_rules.get(
+            "batch_activation_requires_transaction_neutral_in_scope_seam"
+        )
         is not True
         or not isinstance(publication, dict)
         or publication.get("mode") != "PER_RECIPE_ATOMIC_UOW"
