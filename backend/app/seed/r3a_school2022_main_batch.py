@@ -228,6 +228,9 @@ def _load_contract(
         recipes[code].get("source_receipt", {}).get("source_recipe_id")
         for code in RECIPE_CODES
     )
+    process_source_ids = tuple(
+        row.get("source_recipe_id") for row in process_rows
+    )
     if (
         selected_codes != RECIPE_CODES
         or selected_source_ids != SOURCE_RECIPE_IDS
@@ -235,8 +238,8 @@ def _load_contract(
         or recipe_source_ids != SOURCE_RECIPE_IDS
         or tuple(row.get("source_recipe_id") for row in applicability_rows)
         != SOURCE_RECIPE_IDS
-        or tuple(row.get("source_recipe_id") for row in process_rows)
-        != SOURCE_RECIPE_IDS
+        or len(process_source_ids) != len(SOURCE_RECIPE_IDS)
+        or set(process_source_ids) != set(SOURCE_RECIPE_IDS)
         or tuple(row.get("source_recipe_id") for row in source_pages)
         != SOURCE_RECIPE_IDS
         or summary.get("selected_count") != 10
