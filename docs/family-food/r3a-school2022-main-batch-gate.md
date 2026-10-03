@@ -39,7 +39,7 @@ Reuse accepted School2022 evidence:
 - source PDF SHA-256: `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`;
 - durable archive: `private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`;
 - archive SHA-256: `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
-- latest accepted independent archive verification: 2026-10-01.
+- latest independent archive + embedded-PDF verification: 2026-10-03.
 
 The official public PDF was rechecked on 2026-10-03 for selected card text.
 Public web is corroboration only; runtime must consume the hash-pinned repository
@@ -67,8 +67,6 @@ Important form rules:
   `WHEAT_BREAD_STALE_UNSPECIFIED_GRADE`;
 - do not narrow stale bread to high-grade flour when the selected card does not
   establish grade;
-- semi-hard cheese remains generic semi-hard cheese, not a named variety;
-- beef liver is not generic beef.
 
 ## 5. Process binding
 
@@ -185,7 +183,7 @@ batch rather than creating extra micro-PRs.
 
 A later runtime PR must prove at least:
 
-1. exactly five new identity-only foods and no Nutrition/Composition for them;
+1. exactly three new identity-only foods and no Nutrition/Composition for them;
 2. exactly ten immutable SOURCE_VERIFIED MAIN RecipeVersions;
 3. exact source quantities/output per frozen specs;
 4. exact same-card ENERGY_KCAL per RecipeVersion;
@@ -210,6 +208,8 @@ Docs/data/source-evidence only:
 - source IDs unique and not already production-published;
 - exact quantities/output/kcal cross-check;
 - identity mapping/reuse audit;
+- process-binding audit for all ten selected cards;
+- option-B publication/recovery + batch-activation semantics audit;
 - household-applicability audit;
 - source archive/PDF receipt consistency;
 - Docs verification;
