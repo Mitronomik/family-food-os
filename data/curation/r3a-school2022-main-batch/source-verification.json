@@ -10,8 +10,17 @@
     "source_pdf_path_in_archive": "corpus-work/packages/school2022/raw/source.pdf",
     "source_pdf_size_bytes": 4102547,
     "source_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
-    "accepted_latest_independent_archive_verification_date": "2026-10-01",
-    "gate_claims_new_archive_readback": false
+    "accepted_latest_independent_archive_verification_date": "2026-10-03",
+    "gate_claims_new_archive_readback": true,
+    "library_file_id": "libfile_26d95a7a50108191944b97db85a5c008",
+    "latest_readback_receipt": {
+      "verified_at": "2026-10-03",
+      "archive_size_bytes": 206692075,
+      "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+      "source_pdf_size_bytes": 4102547,
+      "source_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "result": "PASS"
+    }
   },
   "public_corroboration": {
     "official_pdf_url": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
@@ -32,10 +41,6 @@
       "pdf_page": 98
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-9р",
-      "pdf_page": 104
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-10р",
       "pdf_page": 105
     },
@@ -48,16 +53,20 @@
       "pdf_page": 123
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-18м",
-      "pdf_page": 129
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-4м",
       "pdf_page": 117
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-11р",
       "pdf_page": 106
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-6м",
+      "pdf_page": 119
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-7м",
+      "pdf_page": 120
     }
   ],
   "rights": {
@@ -72,6 +81,16 @@
     {
       "source_recipe_id": "ru-school2022:recipe:54-12м",
       "conflict": "ingredient table sunflower oil vs process butter"
+    }
+  ],
+  "rejected_process_placement": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-9р",
+      "reason": "Two cooking fats in table; sunflower-oil placement unresolved in technology."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-18м",
+      "reason": "Two cooking fats in table; sunflower-oil placement unresolved in technology."
     }
   ]
 }
