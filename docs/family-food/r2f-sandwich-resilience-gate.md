@@ -87,7 +87,7 @@ The Library copy was materialized and independently re-hashed on 2026-10-03:
 
 The future RecipeVersion tuple is therefore coherent:
 
-`source_url` → exact retained raw-card snapshot  
+`source_url` → exact retained raw-card snapshot
 `source_document_sha256` → SHA-256 of that same snapshot.
 
 ### Provenance roles
