@@ -4,127 +4,128 @@ Updated: 2026-10-03.
 
 ## Accepted state
 
-PR #138 / R2-E runtime is merged into `main` at:
+PR #140 / R2-F cheese-sandwich Contract Gate is merged into `main` at:
 
-`561c13aad6ce978de399dfd807071232af06b71c`.
+`2e4278cb06c2f683d1113434d04396c723409003`.
 
-Current exact-energy production state:
+The merged gate authorizes exactly one runtime candidate:
+
+`SAD28_SANDWICH_CHEESE_20_10` — Бутерброд с сыром —
+30 g / exact prepared `ENERGY_KCAL=83`.
+
+Current production state before this runtime:
 
 - active `breakfast` classification: 7 RecipeVersions;
 - active MAIN classification: 5 RecipeVersions;
-- `max_recipe_repetitions=3`;
-- hard exact `MILK_2_5` exclusion leaves `HARD_BOILED_EGG` and
-  `SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE`;
+- hard exact `MILK_2_5` exclusion leaves
+  `HARD_BOILED_EGG` + `SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE`;
 - unaffected BREAKFAST-compatible capacity = 6/week;
 - seven-BREAKFAST remains bounded-infeasible under that exact exclusion.
 
 ## Current bounded operation
 
-**R2-F — cheese-sandwich resilience-closure Contract Gate.**
+**R2-F runtime — publish cheese sandwich and close exact-MILK resilience.**
 
-Issue: `#139`.
+Issue: `#141`.
 
-Branch: `docs/r2f-sandwich-resilience-gate`.
+Branch:
+
+`feat/r2f-cheese-sandwich-runtime`.
 
 Accepted base:
 
-`561c13aad6ce978de399dfd807071232af06b71c`.
+`2e4278cb06c2f683d1113434d04396c723409003`.
 
 Status:
 
 `READY_FOR_FINAL_REVIEW`.
 
-## Corrected frozen candidate
+Canonical contract:
 
-Future runtime publishes exactly:
+`docs/family-food/r2f-sandwich-resilience-gate.md`.
 
-- `SAD28_SANDWICH_CHEESE_20_10` — 30 g / exact same-card 83 kcal.
+## Runtime scope
 
-The butter sandwich is rejected from prepared-output publication because the
-source lists 5 g cream butter but only 0.98 g total sandwich fat; under
-TR TS 033/2013 cream butter is at least 50% fat, so that component alone implies
-at least 2.5 g fat.
-
-Create identity-only:
+Create/reconcile exactly two identity-only FoodIngredients:
 
 - `WHEAT_BREAD_PLAIN`;
 - `CHEESE_UNSPECIFIED`.
 
-No Nutrition/Composition is granted to those identities.
+No NutritionProfile or Composition authority is granted.
 
-## Durable source boundary
+Publish exactly one immutable SOURCE_VERIFIED RecipeVersion:
 
-Future RecipeVersion source document:
+- code: `SAD28_SANDWICH_CHEESE_20_10`;
+- meal type: `sandwich`;
+- bread: 20 g net;
+- cheese: 11 g gross / 10 g net;
+- output: 30 g;
+- prepared `ENERGY_KCAL=83`;
+- other 53 frozen nutrients UNKNOWN.
+
+Retained source document:
 
 `data/curation/r2f-sandwich-resilience/raw-cheese-card.txt`
 
 SHA-256:
 
-`77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c`
+`77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c`.
 
-Byte size: 1783.
+## Required product proof
 
-Durable Library:
-`library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt` / `libfile_baff1ee2870081918170b98d1cec3c5d`.
-
-Library materialize/readback re-hash: PASS, same 1783 bytes / SHA-256.
-
-SAD28 is recorded only as official host. Document/card issuer is not established
-from the retained card. Upstream recipe collection is Kutkina 2008.
-
-The upstream PDF remains discovery/corroboration only; no PDF SHA is invented.
-
-## Product boundary
-
-Projected after later runtime:
+After guarded activation:
 
 - active `breakfast` classification remains 7;
-- active `sandwich` classification +1;
+- one active `sandwich` classification exists;
 - BREAKFAST-compatible pool becomes 8;
-- hard exact `MILK_2_5` unaffected pool becomes 3 / capacity 9;
-- LUNCH and SNACK each gain 1 compatible candidate.
+- hard exact `MILK_2_5` unaffected pool becomes exactly three:
+  egg + cottage casserole + cheese sandwich;
+- unchanged repetition=3 gives capacity 9/week;
+- a persisted seven-BREAKFAST hard-`MILK_2_5` week succeeds.
 
-This is exact `MILK_2_5` resilience only, not a dairy-allergy claim.
+This is exact canonical `MILK_2_5` resilience only, not a dairy-allergy claim.
 
 ## Scope boundaries
 
 Do not:
 
-- publish/activate runtime data in this gate;
+- publish the rejected butter sandwich;
+- create `BUTTER_CREAM_UNSPECIFIED`;
 - add migration 0043 or schema changes;
-- change Planner algorithm/mapping/repetition;
+- change Planner mapping/scoring/repetition;
 - add a new Nutrition authority;
-- grant Nutrition/Composition to new identities;
-- publish the rejected butter or deferred povidlo cards;
-- bulk-import the website/PDF;
+- add Nutrition/Composition for the two new foods;
+- start another R2/R3 batch;
 - start DC4/Gate1-CLOSE/PR9;
-- start API/UI/Prep/Retail/Auth/PostgreSQL/AI.
+- start Prep/PDF/Retail/API/UI/Auth/PostgreSQL/AI.
 
-## Verification
+After this runtime PR is independently reviewed and merged, reassess DATA-CORPUS
+readiness and move to larger R3 recipe batches (target ~10–12 recipes first)
+rather than returning to one-recipe publication by default.
 
-Corrected content freeze:
+## Runtime verification
 
-`2f2deaff731a07c1937e44059106f8bfcc2f4778`.
+Runtime freeze:
 
-Exact-head source/provenance verification:
+`a84395cfff2923881f78048b976f358333726419`.
 
-- all 10 evidence JSON files parse and cross-reference consistently — PASS;
-- raw-card source = 1783 UTF-8 bytes — PASS;
-- raw-card SHA-256 = `77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c` — PASS;
-- durable Library materialize/readback = same 1783 bytes / SHA-256 — PASS;
-- RecipeVersion source_url and source_document_sha256 bind to the same raw-card artifact — PASS;
-- host / issuer / upstream collection roles are separated — PASS;
-- issuer remains `NOT_ESTABLISHED_FROM_RETAINED_CARD` — PASS;
-- reviewed discovery derivative SHA-256 recomputed =
-  `e2e717c8e44107e5b4ac4f4087af49fd0d279c6972ec2603ce2fd8244e61b63f` — PASS;
-- both exact discovery card hashes recompute — PASS;
-- butter publication absent and butter identity absent — PASS;
-- selected publication scope = exactly one cheese card — PASS;
-- identity-only foods = exactly 2 — PASS;
-- hard-`MILK_2_5` projected capacity = 3 × 3 = 9 — PASS;
-- Docs verification #824 — SUCCESS;
-- DC1 corpus verification #681 — SUCCESS;
-- runtime/schema/migration changes — none.
+Exact runtime-head verification:
 
-Do not start runtime publication before corrected PR #140 is independently
-reviewed and merged.
+- R2-F cheese sandwich runtime #4 — SUCCESS;
+- focused/affected suite — 169 passed;
+- Ruff check — SUCCESS;
+- Ruff format --check — SUCCESS;
+- scope/whitespace — SUCCESS;
+- exact two identity-only FoodIngredients / no butter identity — PASS;
+- retained raw-card hash/size and tamper enforcement — PASS;
+- 30 g / exact 83 kcal + 53 UNKNOWN nutrients — PASS;
+- fresh RecipeVersion + prepared authority atomicity — PASS;
+- exact replay / deliberate-deactivation preservation — PASS;
+- partial / identity / wrong-energy / injected-failure paths fail closed — PASS;
+- existing sandwich compatibility reused without Planner mapping change — PASS;
+- hard exact `MILK_2_5` persisted seven-BREAKFAST week succeeds with capacity 9 — PASS;
+- migration head 0042 / no 0043 — PASS;
+- `AI_ENABLED=false` — PASS;
+- Docs #830 / DC1 #687 / R1-C #87 / R2 #71 / R2-B #61 / R2-C #49 / R2-E #32 — SUCCESS.
+
+Only state files change after this freeze. Do not start R3 before independent review and merge of PR #142.

@@ -1,0 +1,120 @@
+name: R2-F cheese sandwich runtime
+
+on:
+  pull_request:
+    paths:
+      - 'backend/app/seed/r2f_cheese_sandwich.py'
+      - 'backend/app/tests/test_r2f_cheese_sandwich.py'
+      - 'backend/app/tests/test_r2f_cheese_sandwich_adversarial.py'
+      - 'backend/app/seed/r2e_cottage_casserole.py'
+      - 'backend/app/seed/r2c_breakfast_grain_diversity.py'
+      - 'backend/app/seed/r2b_fish_main_diversity.py'
+      - 'backend/app/seed/r2_breakfast_capacity.py'
+      - 'backend/app/seed/r1h_school2022_main.py'
+      - 'backend/app/seed/r1f_prepared_output.py'
+      - 'backend/app/services/prepared_recipe_activation.py'
+      - 'backend/app/services/recipe_nutrition_v2.py'
+      - 'backend/app/services/food_ingredients.py'
+      - 'backend/app/services/food_recipes.py'
+      - 'backend/app/services/planner.py'
+      - 'backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2.py'
+      - 'data/curation/r2f-sandwich-resilience/**'
+      - 'state/**'
+      - '.github/workflows/r2f-cheese-sandwich-runtime.yml'
+  workflow_dispatch:
+    inputs:
+      target_ref:
+        description: 'Branch, tag or exact commit SHA to verify'
+        required: true
+        default: 'main'
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      AI_ENABLED: 'false'
+    steps:
+      - name: Checkout exact requested revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ inputs.target_ref || github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install backend and lint tools
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check -e './backend[test]'
+          python -m pip install --disable-pip-version-check 'ruff==0.16.8'
+
+      - name: Focused R2-F verification
+        run: |
+          set -euo pipefail
+          python -m pytest -q \
+            backend/app/tests/test_r2f_cheese_sandwich.py \
+            backend/app/tests/test_r2f_cheese_sandwich_adversarial.py \
+            backend/app/tests/test_r2e_cottage_casserole.py \
+            backend/app/tests/test_r2e_cottage_casserole_adversarial.py \
+            backend/app/tests/test_r2c_breakfast_grain_diversity.py \
+            backend/app/tests/test_r2c_breakfast_grain_diversity_adversarial.py \
+            backend/app/tests/test_r2b_fish_main_diversity.py \
+            backend/app/tests/test_r2b_fish_main_diversity_adversarial.py \
+            backend/app/tests/test_r2_breakfast_capacity.py \
+            backend/app/tests/test_r2_breakfast_capacity_adversarial.py \
+            backend/app/tests/test_r1h_school2022_main.py \
+            backend/app/tests/test_r1h_school2022_main_adversarial.py \
+            backend/app/tests/test_r1f_prepared_output.py \
+            backend/app/tests/test_r1f_prepared_output_adversarial.py \
+            backend/app/tests/test_recipe_nutrition_v2.py \
+            backend/app/tests/test_planner_application_boundary.py \
+            backend/app/tests/test_r1c_production_planner_proof.py \
+            backend/app/tests/test_migration_lineage.py \
+            --tb=short
+
+      - name: Ruff
+        run: |
+          set -euo pipefail
+          python -m ruff check \
+            backend/app/seed/r2f_cheese_sandwich.py \
+            backend/app/tests/test_r2f_cheese_sandwich.py \
+            backend/app/tests/test_r2f_cheese_sandwich_adversarial.py
+          python -m ruff format --check \
+            backend/app/seed/r2f_cheese_sandwich.py \
+            backend/app/tests/test_r2f_cheese_sandwich.py \
+            backend/app/tests/test_r2f_cheese_sandwich_adversarial.py
+
+      - name: Scope and whitespace
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          base="${PR_BASE_SHA:-origin/main}"
+          git fetch origin main --no-tags
+          git diff --check "$base"...HEAD
+
+      - name: Verification summary
+        run: |
+          set -euo pipefail
+          echo "tested revision: $(git rev-parse HEAD)"
+          echo 'R2-F exactly two identity-only foods / no butter identity: PASS'
+          echo 'R2-F fresh RecipeVersion + prepared authority atomicity: PASS'
+          echo 'R2-F exact 83 kcal / 53 UNKNOWN nutrients: PASS'
+          echo 'R2-F retained raw-card hash/size and tamper checks: PASS'
+          echo 'R2-F exact replay / deliberate deactivation: PASS'
+          echo 'R2-F guarded activation: PASS'
+          echo 'R2-F existing sandwich role compatibility unchanged: PASS'
+          echo 'R2-F MILK_2_5 exclusion week succeeds with three candidates / capacity nine: PASS'
+          echo 'migration head 0042 / no 0043: PASS'
+          echo 'AI_ENABLED=false: PASS'

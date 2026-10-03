@@ -1,5 +1,47 @@
 # Progress
 
+## R2-F cheese-sandwich runtime — implementation active — 2026-10-03
+
+Accepted base:
+`2e4278cb06c2f683d1113434d04396c723409003` (merged PR #140).
+
+Issue #141 / branch `feat/r2f-cheese-sandwich-runtime`.
+
+Implementation scope is exactly the merged R2-F gate:
+
+- +2 identity-only FoodIngredients:
+  `WHEAT_BREAD_PLAIN`, `CHEESE_UNSPECIFIED`;
+- +1 immutable SOURCE_VERIFIED `sandwich` RecipeVersion;
+- retained raw-card source hash/size enforcement;
+- prepared `ENERGY_KCAL=83` + 53 UNKNOWN;
+- caller-owned atomic RecipeVersion + prepared authority publication;
+- guarded activation;
+- exact replay/deactivation preservation;
+- tamper/partial/identity/wrong-energy/transaction failure fail-closed tests;
+- hard exact-`MILK_2_5` seven-BREAKFAST success at three unaffected
+  candidates × repetition 3 = capacity 9.
+
+No migration/schema/Planner/new-Nutrition-authority change.
+
+After independent review and merge, the next corpus publication unit should be a
+larger R3 batch (~10–12 recipes initially), not another one-recipe PR by default.
+Do not start that future batch before this runtime PR is merged.
+
+Runtime freeze:
+`a84395cfff2923881f78048b976f358333726419`.
+
+Verification on exact runtime freeze:
+- R2-F #4 — SUCCESS;
+- focused/affected suite — 169 passed;
+- Ruff check/format — SUCCESS;
+- scope/whitespace — SUCCESS;
+- hard exact-MILK persisted 7-breakfast closure — PASS;
+- Docs #830 / DC1 #687 / R1-C #87 / R2 #71 / R2-B #61 / R2-C #49 / R2-E #32 — SUCCESS;
+- migration head 0042; AI disabled.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
 ## R2-F cheese-sandwich resilience Contract Gate — provenance correction — 2026-10-03
 
 Accepted main:

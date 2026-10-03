@@ -1,5 +1,54 @@
 # Handoff
 
+## R2-F cheese-sandwich runtime — active — 2026-10-03
+
+Accepted base:
+`2e4278cb06c2f683d1113434d04396c723409003`.
+
+Issue #141 / branch `feat/r2f-cheese-sandwich-runtime`.
+
+Read first:
+
+`docs/family-food/r2f-sandwich-resilience-gate.md`.
+
+Implement exactly:
+
+`SAD28_SANDWICH_CHEESE_20_10`.
+
+Retained source:
+`data/curation/r2f-sandwich-resilience/raw-cheese-card.txt`,
+1783 bytes,
+SHA-256
+`77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c`.
+
+Create only:
+`WHEAT_BREAD_PLAIN`, `CHEESE_UNSPECIFIED`,
+identity-only with no Nutrition/Composition.
+
+Prepared authority:
+`ENERGY_KCAL=83`; other 53 frozen nutrient codes UNKNOWN.
+
+Required Planner proof:
+hard exact `MILK_2_5` leaves egg + cottage casserole + cheese sandwich and a
+persisted seven-BREAKFAST week succeeds under repetition=3.
+
+No migration 0043, schema change, Planner mapping/scoring/repetition change,
+butter publication or new Nutrition authority.
+
+After this PR is reviewed/merged, reassess corpus readiness and switch future DC3
+work to larger R3 batches (~10–12 recipes initially). Do not start that batch
+while #141 is still under review.
+
+Runtime freeze:
+`a84395cfff2923881f78048b976f358333726419`.
+
+Exact runtime verification: R2-F #4 SUCCESS, 169 focused/affected tests passed,
+Ruff check/format and scope/whitespace SUCCESS. Docs #830, DC1 #687, R1-C #87,
+R2 #71, R2-B #61, R2-C #49 and R2-E #32 are SUCCESS on the same head.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
 ## R2-F cheese-sandwich Contract Gate — provenance correction — 2026-10-03
 
 Accepted main:
