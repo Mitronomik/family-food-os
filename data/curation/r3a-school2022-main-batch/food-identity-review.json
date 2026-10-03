@@ -43,12 +43,6 @@
       "basis": "Exact fresh parsley-root procurement identity."
     },
     {
-      "source_label": "сметана",
-      "canonical_code": "SOUR_CREAM_15",
-      "decision": "REUSE_ACCEPTED_IDENTITY",
-      "basis": "School2022 §1.4 source-form evidence already pins 15% sour cream in accepted R2-E evidence."
-    },
-    {
       "source_label": "молоко",
       "canonical_code": "MILK_2_5",
       "decision": "REUSE_ACCEPTED_IDENTITY",
