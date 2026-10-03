@@ -1,5 +1,45 @@
 # Progress
 
+## R3-A review corrections — option B + process placement — 2026-10-03
+
+PR #146 remains the same Contract Gate; no additional gate PR was created.
+
+User decision:
+
+- choose transaction option B;
+- do not split R3-A into per-recipe PRs;
+- keep one future runtime PR for the whole accepted batch.
+
+Corrected selected batch remains exactly 10 cards. New identity-only demand is
+reduced from five to exactly three:
+`COD_FILLET_RAW`, `PARSLEY_ROOT_RAW`,
+`WHEAT_BREAD_STALE_UNSPECIFIED_GRADE`.
+
+Independent raw-PDF process audit:
+
+- `54-9р` — removed: multiple fats, sunflower-oil placement unresolved;
+- `54-18м` — removed: multiple fats, sunflower-oil placement unresolved;
+- replaced by clean `54-6м` and `54-7м`;
+- all ten selected cards have explicit process-binding dispositions;
+- per-step gram splits remain UNKNOWN where source provides only exact recipe total.
+
+Option-B transaction semantics:
+
+- per-recipe atomic inactive publication;
+- exact inactive subset may remain after publication failure;
+- rerun converges missing rows;
+- separate full-batch preflight;
+- all-inactive activation = one batch-level UoW / one commit;
+- all-active = zero-write replay;
+- mixed active/inactive = fail closed;
+- activation failure = whole activation rollback.
+
+Durable archive + embedded PDF were independently re-read/re-hashed on
+2026-10-03 and match pinned size/SHA receipts.
+
+Status:
+`REVIEW_CORRECTIONS_VERIFICATION_PENDING`.
+
 ## R3-A School2022 ten-recipe MAIN batch gate — active — 2026-10-03
 
 Accepted base:
