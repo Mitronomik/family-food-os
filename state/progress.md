@@ -1,5 +1,74 @@
 # Progress
 
+## R2-C breakfast grain diversity review-ready — 2026-10-03
+
+Accepted base:
+`13a81d2497737f3b275b10055cd084548be02bf3` (merged PR #130).
+
+Issue #131 / PR #132.
+
+Proof/runtime freeze:
+`5dc3bda151d412662f75e7cd64ae7f1811bb25c7`.
+
+Delivered:
+
+- School2022 54-13к / wheat milk porridge / 200 g / 270.3 kcal;
+- School2022 54-20к / buckwheat milk porridge / 200 g / 187.3 kcal;
+- School2022 54-25.1к / rice milk porridge / 200 g / 184.5 kcal;
+- identity-only `WHEAT_GROATS`;
+- exact reuse of `BUCKWHEAT` and reviewed `RICE_GROATS`;
+- PREPARED_OUTPUT_V1 reused without a new authority kind;
+- guarded activation;
+- zero-write replay and deliberate-deactivation preservation;
+- tamper / partial-state / identity-conflict fail-closed coverage;
+- ordinary active exact-energy BREAKFAST pool 3 → 6;
+- opportunity capacity 9 → 18/week;
+- persisted seven-BREAKFAST proof selects all three new preferred recipes;
+- wheat hard exclusion removes only the affected candidate while preserving a
+  feasible week;
+- no migration/schema/Planner algorithm change.
+
+Source fidelity:
+institutional serving temperature is provenance-only; source time ranges remain
+inside RecipeSteps with scalar cook-time fields unknown. Rice source amount text
+retains the exact decimal comma `30,8` while runtime quantity is Decimal 30.8.
+
+Verification at proof/runtime freeze:
+
+- focused/affected R2-C — 136 passed;
+- Ruff check / format — SUCCESS;
+- scope/whitespace — SUCCESS;
+- AI disabled;
+- migration head remains 0042.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
+## R2-C breakfast grain diversity implementation started — 2026-10-03
+
+Accepted main:
+`13a81d2497737f3b275b10055cd084548be02bf3` (merged PR #130).
+
+Issue #131 selects three School2022 breakfast porridges from distinct grain
+families:
+
+- 54-13к / wheat milk porridge / 200 g / 270.3 kcal;
+- 54-20к / buckwheat milk porridge / 200 g / 187.3 kcal;
+- 54-25.1к / rice milk porridge / 200 g / 184.5 kcal.
+
+Only new identity-only FoodIngredient:
+`WHEAT_GROATS`.
+
+The batch reuses the existing prepared-output authority and guarded activation.
+No migration, schema, shared service, Planner algorithm or new Nutrition authority
+is introduced.
+
+Projected BREAKFAST exact-energy active count:
+3 → 6; opportunity capacity 9 → 18/week.
+
+Status:
+`R2C_IMPLEMENTATION_ACTIVE`.
+
 ## R2-B fish MAIN diversity review-ready — 2026-10-02
 
 Accepted base:

@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "operation": "R2C_BREAKFAST_GRAIN_DIVERSITY_SELECTION",
+  "accepted_base": "13a81d2497737f3b275b10055cd084548be02bf3",
+  "issue": 131,
+  "selection_rule": "MULTI_FAMILY_BREAKFAST_VARIETY_WITH_MINIMAL_NEW_AUTHORITY_SURFACE",
+  "before": {
+    "active_exact_energy_breakfast": 3,
+    "breakfast_capacity_per_week": 9,
+    "active_exact_energy_main": 5,
+    "max_recipe_repetitions": 3
+  },
+  "selected": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-13к",
+      "canonical_code": "SCHOOL2022_54_13K_WHEAT_MILK_PORRIDGE",
+      "title": "Каша вязкая молочная пшеничная",
+      "planner_role": "breakfast",
+      "source_output_g": "200",
+      "prepared_energy_kcal": "270.3",
+      "source_card_sha256": "797bae0ea2b3eec97e9ed8e26a3369ad9aeb0f43cace0ca15074960f658eb10b",
+      "process_text_sha256": "18f82fa7e4c7725a8261fcbddd2ef4f20c483ac2aedd7db233516357e1439101",
+      "energy_reconciliation_sha256": "b0dd6d49ca8aa4847facea7c3c0a59c9939b8ba4186dbb609d93c9463a592759",
+      "ingredient_row_sha256": {
+        "крупа пшеничная": "7d50c92ee8a10a83d731cd6f870e53cfad218f8cdaad3ee2be78bb88e304c52e",
+        "молоко": "44db3e4bd64916dc6f7db6375f7f5ef080fe6661b8425f2312cda1017ae0b8d1",
+        "масло сливочное": "e07a02c70141d0a3fa859cbe0c67e6be554a427ed42dce5d7422a1896fb62f9b",
+        "сахар-песок": "0e881aa7e48bf054c4e30f7dc9ec318dfc06b24b41ee61ab8325a2034407729d",
+        "соль поваренная йодированная": "1cc84175905c59e03298d1dcd0fb7bba49ef936b437bfc15387fe9f491af933d",
+        "вода": "37b15a5735ac5f3b41c24bdd325cbde9e75da2e0e825b85bc46a2a173c620efc"
+      }
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-20к",
+      "canonical_code": "SCHOOL2022_54_20K_BUCKWHEAT_MILK_PORRIDGE",
+      "title": "Каша жидкая молочная гречневая",
+      "planner_role": "breakfast",
+      "source_output_g": "200",
+      "prepared_energy_kcal": "187.3",
+      "source_card_sha256": "4e7e2a8086ec8b94cbeb8e21861b4623d0e76daba0da67af080b8c2ad4787b83",
+      "process_text_sha256": "95b75e2fea80f048d67bc5efbfff2a0d06ded43623b2b5b252159b9a671d611b",
+      "energy_reconciliation_sha256": "db422323ac37193e8cfdcd11bf0c76096d0ec942b2425b6df22dc5cab939482c",
+      "ingredient_row_sha256": {
+        "крупа гречневая": "4d3831cddf86a1ad23984724d49fd9fb250d7ab9585713d83fcce9c589e2a8e5",
+        "молоко": "7b39d9d351a0c3617f64823df56740772c64ecf6d17bc77b1ca7007bfe6c33ff",
+        "масло сливочное": "b42437a83029c3264cd90f6294d57529da1db60c5c5af7d5bdb7c130259619eb",
+        "сахар-песок": "84f2a42093d57a64f032e6dd939e5de6d7d0176017fe8698b29213493e5609e2",
+        "соль поваренная йодированная": "4f58f27bae498d0e72b3302ab928be3240a6618bcc65f9820be9e661d27824b6",
+        "вода": "5f57adf9a8ea78286b66e07b93d269a4700ada96b067a94d4938f1a79aa80f08"
+      }
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-25.1к",
+      "canonical_code": "SCHOOL2022_54_25_1K_RICE_MILK_PORRIDGE",
+      "title": "Каша жидкая молочная рисовая",
+      "planner_role": "breakfast",
+      "source_output_g": "200",
+      "prepared_energy_kcal": "184.5",
+      "source_card_sha256": "5c29457bf0541d6a2d7b5950bca42b47a1c504115cbfa4537305d75a428fa2ae",
+      "process_text_sha256": "c162b8100386ea29995f3053653fa9a8bdcdb94cbab31c88b4a4b38fc8b9d0b5",
+      "energy_reconciliation_sha256": "83d81b207653564de988bd68c170d2ff769d09ab689aafeab48262eecf4f9bc2",
+      "ingredient_row_sha256": {
+        "крупа рисовая": "7e310ab1b5145d57e053c48b2a05025b605c735b05bcdf7932979d54c89c1975",
+        "молоко": "e5f70156aca11abf1beb93e5fc46af96c6e86dd1a77d27bf1b10f73aead81aa3",
+        "сахар-песок": "440b93cd464d3e1773fef9ce70fa1796aabeefe648a0daa9e654794694bdbe67",
+        "масло сливочное": "bdb4db6820e4329e9ff42297993709b6d11de940d860f4934152ec733f453308",
+        "соль поваренная йодированная": "debee0c4ce5a56515e34a46dd1ba3b4f7d27afd6e70d9de504f501f74d51b1fb",
+        "вода": "3cad0c27db4fe2b306229736ad6310e7477531c1971b40fa33f0195ce3ec9b35"
+      }
+    }
+  ],
+  "identity_decisions": [
+    {
+      "source_label": "крупа пшеничная",
+      "canonical_code": "WHEAT_GROATS",
+      "canonical_name": "Крупа пшеничная",
+      "category_code": "grains",
+      "disposition": "CREATE_IDENTITY_ONLY",
+      "basis": "Exact School2022 source label. No flour/bulgur/whole-wheat substitution is inferred."
+    },
+    {
+      "source_label": "крупа гречневая",
+      "canonical_code": "BUCKWHEAT",
+      "canonical_name": "Гречневая крупа",
+      "disposition": "REUSE_EXISTING_EXACT_NAME"
+    },
+    {
+      "source_label": "крупа рисовая",
+      "canonical_code": "RICE_GROATS",
+      "canonical_name": "Крупа рисовая",
+      "disposition": "REUSE_EXISTING_REVIEWED_RU_IDENTITY",
+      "evidence": "backend/app/seed/ru_nut_db_step4.py"
+    }
+  ],
+  "reused_foods": [
+    "MILK_2_5",
+    "BUTTER_PEASANT_72_5_UNSALTED",
+    "SUGAR",
+    "SALT_IODIZED",
+    "WATER"
+  ],
+  "projected_after": {
+    "active_exact_energy_breakfast": 6,
+    "breakfast_capacity_per_week": 18,
+    "adds_grain_families": [
+      "wheat",
+      "buckwheat",
+      "rice"
+    ],
+    "planner_algorithm_change": false
+  }
+}

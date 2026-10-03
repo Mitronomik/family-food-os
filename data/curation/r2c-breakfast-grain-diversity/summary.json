@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "operation": "R2C_BREAKFAST_GRAIN_DIVERSITY_SUMMARY",
+  "accepted_base": "13a81d2497737f3b275b10055cd084548be02bf3",
+  "issue": 131,
+  "before": {
+    "active_exact_energy_breakfast": 3,
+    "breakfast_capacity_per_week": 9
+  },
+  "proposed_after": {
+    "active_exact_energy_breakfast": 6,
+    "breakfast_capacity_per_week": 18
+  },
+  "selected_recipe_codes": [
+    "SCHOOL2022_54_13K_WHEAT_MILK_PORRIDGE",
+    "SCHOOL2022_54_20K_BUCKWHEAT_MILK_PORRIDGE",
+    "SCHOOL2022_54_25_1K_RICE_MILK_PORRIDGE"
+  ],
+  "identity_only_foods": [
+    "WHEAT_GROATS"
+  ],
+  "reused_exact_foods": [
+    "BUCKWHEAT",
+    "RICE_GROATS",
+    "MILK_2_5",
+    "BUTTER_PEASANT_72_5_UNSALTED",
+    "SUGAR",
+    "SALT_IODIZED",
+    "WATER"
+  ],
+  "authority_kind": "PREPARED_OUTPUT_V1",
+  "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+  "migration_required": false,
+  "planner_change_required": false,
+  "new_nutrition_authority_kind_required": false,
+  "follow_up": "After review and merge, reassess next R2/R3 batch. Do not start DC4/Gate1-CLOSE or PR9 automatically."
+}

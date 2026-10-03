@@ -1,66 +1,71 @@
 # Current focus
 
-Updated: 2026-10-02.
+Updated: 2026-10-03.
 
 ## Accepted state
 
-PR #128 / R2-A is merged into `main` at:
+PR #130 / R2-B is merged into `main` at:
 
-`1e4a0e137dee87f2aaef7d885481fef17f6e324c`.
+`13a81d2497737f3b275b10055cd084548be02bf3`.
 
-Before R2-B the ordinary active exact-energy Planner pool is:
+Before R2-C the ordinary active exact-energy Planner pool is:
 
 - BREAKFAST: 3 RecipeVersions / capacity 9 opportunities per week;
-- MAIN: 3 RecipeVersions / capacity 9 opportunities per week;
+- MAIN: 5 RecipeVersions / capacity 15 opportunities per week;
 - `max_recipe_repetitions=3`;
 - persisted seven-BREAKFAST and seven-DINNER paths are proven.
 
 ## Current bounded operation
 
-**R2-B — Fish MAIN diversity batch.**
+**R2-C — Breakfast grain diversity batch.**
 
-Issue: `#129`.
+Issue: `#131`.
 
-PR: `#130`.
+PR: `#132`.
 
-Branch: `feat/r2b-fish-main-diversity`.
+Branch: `feat/r2c-breakfast-grain-diversity`.
 
 Accepted base:
 
-`1e4a0e137dee87f2aaef7d885481fef17f6e324c`.
+`13a81d2497737f3b275b10055cd084548be02bf3`.
 
 Proof/runtime freeze:
 
-`4fd0c946b43785c0eb242d26184c7a20441a6012`.
+`5dc3bda151d412662f75e7cd64ae7f1811bb25c7`.
 
 Status:
 
 `READY_FOR_FINAL_REVIEW`.
 
-## R2-B result
+## R2-C result
 
 Published/activated through the existing prepared-output path:
 
-- `SCHOOL2022_54_6R_PINK_SALMON_IN_MILK` —
-  Рыба, припущенная в молоке (горбуша) —
-  80 g / exact 144.8 kcal;
-- `SCHOOL2022_54_7R_POLLOCK_IN_MILK` —
-  Рыба, припущенная в молоке (минтай) —
-  80 g / exact 105.3 kcal.
+- `SCHOOL2022_54_13K_WHEAT_MILK_PORRIDGE` —
+  Каша вязкая молочная пшеничная —
+  200 g / exact 270.3 kcal;
+- `SCHOOL2022_54_20K_BUCKWHEAT_MILK_PORRIDGE` —
+  Каша жидкая молочная гречневая —
+  200 g / exact 187.3 kcal;
+- `SCHOOL2022_54_25_1K_RICE_MILK_PORRIDGE` —
+  Каша жидкая молочная рисовая —
+  200 g / exact 184.5 kcal.
 
-New identity-only FoodIngredients:
+New identity-only FoodIngredient:
 
-- `PINK_SALMON_FILLET_RAW`;
-- `POLLOCK_FILLET_RAW`.
+- `WHEAT_GROATS` — Крупа пшеничная.
 
-Neither receives Nutrition or Composition authority.
+Neither Nutrition nor Composition authority is published for that identity.
 
 Existing exact identities are reused for:
 
+- `BUCKWHEAT`;
+- `RICE_GROATS`;
 - `MILK_2_5`;
-- `ONION_BULB_FRESH`;
-- `SUNFLOWER_OIL`;
-- `SALT_IODIZED`.
+- `BUTTER_PEASANT_72_5_UNSALTED`;
+- `SUGAR`;
+- `SALT_IODIZED`;
+- `WATER`.
 
 Prepared Nutrition remains:
 
@@ -68,41 +73,47 @@ Prepared Nutrition remains:
 
 Only ENERGY_KCAL is AVAILABLE; all remaining frozen nutrient codes are UNKNOWN.
 
-## Planner capacity after R2-B
+## Planner capacity after R2-C
 
-Ordinary active exact-energy MAIN pool:
+Ordinary active exact-energy BREAKFAST count:
 
-- `BOILED_CHICKEN_MAIN_PRODUCT`;
-- `SCHOOL2022_54_29M_BEEF_MEATBALLS`;
-- `SCHOOL2022_54_2M_BEEF_GOULASH`;
-- `SCHOOL2022_54_6R_PINK_SALMON_IN_MILK`;
-- `SCHOOL2022_54_7R_POLLOCK_IN_MILK`.
+3 → 6 RecipeVersions.
 
-Result:
+Opportunity capacity under unchanged `max_recipe_repetitions=3`:
 
-- active exact-energy MAIN count: 3 → 5;
-- opportunity capacity: 9 → 15/week under unchanged repetition=3;
-- persisted seven-DINNER production proof selects both preferred fish recipes;
-- no RecipeVersion exceeds repetition 3;
-- hard exclusion of `PINK_SALMON_FILLET_RAW` removes only the pink-salmon
-  candidate while the week remains feasible and pollock remains available.
+9 → 18/week.
+
+A persisted seven-BREAKFAST production week with all three new grain recipes
+preferred:
+
+- succeeds;
+- selects all three new RecipeVersions;
+- uses no RecipeVersion more than 3 times;
+- persists MealPlan and individualized Servings.
+
+Hard exclusion of `WHEAT_GROATS` removes only the wheat porridge candidate while
+the week remains feasible through the remaining breakfast pool.
 
 ## Source / consumer boundary
 
-Exact source-card / source-variant / source-process / selected-route /
-energy-reconciliation hashes are pinned.
+The R2-C package pins exact:
 
-The source route includes a thawing alternative. One route is frozen for
-deterministic provenance only.
+- corpus archive and School2022 PDF identity;
+- source-card hashes;
+- required ingredient-row hashes;
+- process-text hashes;
+- energy-reconciliation hashes.
 
-Consumer RecipeSteps begin with already-thawed fillet. Thawing logistics,
-paraconvection references and institutional serving-temperature requirements are
-not promoted to consumer execution.
+Institutional serving-temperature requirements remain provenance-only.
 
-The older School2022 54-1р cod-cutlet follow-up remains deferred because its exact
-retained source supports only generic wheat bread, while older R1-G evidence
-proposed the narrower `WHEAT_BREAD_HIGH_GRADE_STALE` without exact cod-card
-grade/stale evidence.
+Source time ranges are preserved inside Russian RecipeSteps. No exact scalar
+cook-time is invented where the source provides only ranges.
+
+The rice RecipeIngredient preserves the exact Russian source text:
+
+`крупа рисовая: брутто 30,8 г; нетто 30,8 г`
+
+while the canonical numeric quantity remains Decimal 30.8.
 
 ## Failure / replay semantics
 
@@ -111,29 +122,29 @@ Verified:
 - fresh publication;
 - exact zero-write replay;
 - deliberate deactivation remains deactivated;
-- tampered frozen contract fails closed;
+- tampered frozen publication contract fails closed;
 - partial Recipe without prepared authority fails closed;
-- conflicting fish FoodIngredient identity fails closed.
+- conflicting `WHEAT_GROATS` identity fails closed.
 
 ## Verification
 
-Exact corrected proof/runtime-freeze verification at `4fd0c946...`:
+Exact proof/runtime-freeze verification at `5dc3bda1...`:
 
-- focused/affected R2-B suite — **128 passed**;
+- focused/affected R2-C suite — **136 passed**;
 - Ruff check — SUCCESS;
 - Ruff format --check — SUCCESS;
 - scope/whitespace — SUCCESS;
+- six exact-energy BREAKFAST candidates / capacity eighteen — PASS;
+- persisted grain-diverse seven-BREAKFAST proof — PASS;
+- hard wheat FoodIngredient exclusion — PASS;
 - `AI_ENABLED=false`;
 - migration head remains `0042_recipe_prepared_output_nutrition`;
 - migration 0043 is absent.
 
-The first independent audit found two task-local publication blockers after the
-previous freeze: `cook_time_minutes=25` overstated a source range of 20–25 minutes,
-and the consumer steps contained grammatically invalid `филе горбуша / филе минтай`.
-The corrected publication now keeps `cook_time_minutes=null`, preserves the exact
-20–25 minute range in the Russian RecipeStep, and uses `филе горбуши / филе минтая`.
-Regression assertions lock both corrections. The corrected focused suite remains
-128 passed with Ruff and scope gates green.
+The first R2-C run already passed all 136 functional tests and failed only Ruff
+format. The subsequent provenance correction preserved exact Russian
+`source_amount_text` for rice and is covered by a regression assertion. The
+corrected exact head above is fully green.
 
 ## Scope boundaries
 
@@ -141,11 +152,11 @@ Do not:
 
 - add migration 0043 or schema changes;
 - add another Nutrition authority kind;
-- add Nutrition/Composition to fish identities;
-- infer whole-fish→fillet equivalence;
-- publish cod cutlet 54-1р;
-- infer a narrower bread form;
+- add Nutrition/Composition to `WHEAT_GROATS`;
+- infer wheat-groats equivalence to flour/bulgur/whole-wheat;
+- replace `RICE_GROATS` with generic rice;
 - change Planner algorithm/scoring/roles/repetition;
+- publish side/salad/soup roles in this PR;
 - add allergen automation;
 - start another corpus batch;
 - start DC4 / Gate1-CLOSE;
@@ -154,7 +165,7 @@ Do not:
 
 ## Next step
 
-Independent final review of PR #130.
+Independent final review of PR #132.
 
 After explicit review and merge, reassess the next R2/R3 corpus batch by maximum
 marginal realistic weekly variety and corpus closure.
