@@ -28,7 +28,23 @@ New identity-only foods are reduced to:
 - `WHEAT_BREAD_PLAIN`;
 - `CHEESE_UNSPECIFIED`.
 
-### Durable provenance correction
+### Durable provenance correction — superseded by raw-card retention
+
+The earlier retained `runtime-source.json` derivative is no longer the future
+RecipeVersion source document. The complete selected card raw text is now retained
+in Git and durable Library, and publication source_url/hash bind directly to it.
+
+Raw-card source:
+`data/curation/r2f-sandwich-resilience/raw-cheese-card.txt`
+SHA-256 `77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c`, 1783 bytes.
+
+Durable Library:
+`library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt` / `libfile_baff1ee2870081918170b98d1cec3c5d`.
+
+SAD28 is official host only; issuer is not established from the retained card;
+upstream recipe collection is Kutkina 2008.
+
+### Previous durable provenance correction
 
 A retained runtime source artifact was added at:
 
@@ -69,7 +85,7 @@ Classification remains truthful:
 Corrected evidence/content freeze:
 `c84fcffad9aa2d3f093db216f7cc8d1bf9ab48bf`.
 
-Verification on corrected content head:
+Previous corrected-head verification (superseded by this provenance correction):
 - R2-F JSON parse/consistency audit — PASS;
 - source tuple coherence — PASS;
 - butter rejection + no butter identity/publication — PASS;
@@ -79,7 +95,7 @@ Verification on corrected content head:
 - no runtime/schema/migration changes.
 
 Status:
-`READY_FOR_FINAL_REVIEW`.
+`SOURCE_PROVENANCE_CORRECTION_VERIFICATION_PENDING`.
 
 ## R2-E cottage casserole runtime review-ready — 2026-10-03
 
