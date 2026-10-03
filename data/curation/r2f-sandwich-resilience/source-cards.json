@@ -4,13 +4,17 @@
   "accepted_base": "561c13aad6ce978de399dfd807071232af06b71c",
   "issue": 139,
   "source": {
-    "source_code": "sad28-luppolovo-techcards-2022-23",
-    "publisher_name": "МАДОУ «Детский сад комбинированного вида № 28» д. Лупполово",
-    "publisher_official_site": "https://sad28.vsevobr.ru/",
+    "source_code": "sad28-hosted-techcards-2022-23",
+    "host_institution_name": "МАДОУ «Детский сад комбинированного вида № 28» д. Лупполово",
+    "host_official_site": "https://sad28.vsevobr.ru/",
+    "document_card_issuer": {
+      "name": null,
+      "status": "NOT_ESTABLISHED_FROM_RETAINED_CARD"
+    },
     "source_url": "https://sad28.vsevobr.ru/images/22-23/%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%B5/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BA%D0%B0%D1%80%D1%82%D1%8B-22-23%20%281%29.pdf",
     "retrieved_at": "2026-10-03",
-    "source_kind": "INSTITUTION_PUBLISHED_TECH_CARD_PDF",
-    "upstream_collection": "Сборник методических рекомендаций по организации питания детей и подростков в учреждениях образования Санкт-Петербурга. СПб.: Речь, 2008, Куткина М.Н.",
+    "source_kind": "HOSTED_INSTITUTION_TECH_CARD_PDF_DISCOVERY",
+    "upstream_recipe_collection": "Сборник методических рекомендаций по организации питания детей и подростков в учреждениях образования Санкт-Петербурга. СПб.: Речь, 2008, Куткина М.Н.",
     "rights_review_status": "BOUNDED_FACTUAL_USE_REVIEWED",
     "rights_basis": "Пользовательское решение по российскому нормативному корпусу допускает bounded structured factual recipe data with provenance; исходная издательская вёрстка, фотографии, логотипы и сторонние комментарии не сохраняются."
   },
@@ -107,5 +111,5 @@
       "source_occurrences"
     ]
   },
-  "reviewed_derivative_sha256": "dd1da359c60c8d647eda5e9a968164a02b8f6dca07333b888699f9722cba3543"
+  "reviewed_derivative_sha256": "e494462d276e36b1f926bc36c3cbe5b4b84dff00e8ab2d6d797561e45412023d"
 }
