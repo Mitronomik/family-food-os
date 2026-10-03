@@ -27,7 +27,7 @@ Accepted base:
 
 Status:
 
-`REVIEW_CORRECTIONS_VERIFICATION_PENDING`.
+`READY_FOR_FINAL_REVIEW`.
 
 Canonical contract:
 
@@ -108,3 +108,30 @@ Do not:
 - start Shopping/Prep/Retail/API/UI/Auth/PostgreSQL/AI.
 
 After review corrections verify green, stop for independent review.
+
+
+## Corrected gate verification
+
+Corrected content freeze:
+
+`39c1f3e8809e9fd42e6ea061554f81cf3b1c35e6`.
+
+Exact-head evidence:
+
+- 10 unique selected School2022 MAIN cards — PASS;
+- candidate/spec/household/process-binding/source-page sets align — PASS;
+- exactly 3 identity-only FoodIngredients — PASS;
+- `54-5м/54-9р/54-12м/54-15м/54-18м` absent from selected set — PASS;
+- `54-6м/54-7м` clean replacements present — PASS;
+- process-binding disposition exists for all 10 selected cards — PASS;
+- no per-step gram split invented — PASS;
+- option-B publication semantics frozen — PASS;
+- batch activation semantics frozen: all-inactive one-UoW, all-active replay,
+  mixed fail-closed — PASS;
+- fresh 2026-10-03 durable archive + embedded PDF readback/hash — PASS;
+- ENERGY_KCAL-only + 53 UNKNOWN nutrient partition — PASS;
+- Docs #851 — SUCCESS;
+- DC1 #708 — SUCCESS.
+
+Only state files change after this corrected content freeze. Runtime remains
+blocked until independent review and merge of PR #146.
