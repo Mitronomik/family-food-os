@@ -115,18 +115,6 @@
       ],
       "nutrition_profile": null,
       "composition": null
-    },
-    {
-      "canonical_code": "BARLEY_GROATS",
-      "canonical_name": "Крупа ячневая",
-      "category_code": "grains",
-      "default_unit": "g",
-      "source_label": "крупа ячневая",
-      "non_equivalent_to": [
-        "BARLEY_PEARLED"
-      ],
-      "nutrition_profile": null,
-      "composition": null
     }
   ],
   "recipes": {
@@ -896,232 +884,6 @@
         "rule": "Exact 7.5 g butter total is authoritative. Source explicitly places one third in carrot cooking and also names butter for tray greasing; do not invent unsupported internal gram allocations beyond source-stated ratios."
       }
     },
-    "SCHOOL2022_54_3T_CARROT_COTTAGE_CHEESE_SOUFFLE": {
-      "canonical_code": "SCHOOL2022_54_3T_CARROT_COTTAGE_CHEESE_SOUFFLE",
-      "canonical_name": "Суфле из моркови с творогом",
-      "initial_is_active": false,
-      "source_receipt": {
-        "source_name": "ru-school2022",
-        "source_recipe_id": "ru-school2022:recipe:54-3т",
-        "source_url": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
-        "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
-        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
-        "source_pdf_page": 91,
-        "rights_review_status": "REVIEWED",
-        "review_reference": "data/curation/r3b-school2022-breakfast-batch/publication-specs.json#recipes.SCHOOL2022_54_3T_CARROT_COTTAGE_CHEESE_SOUFFLE"
-      },
-      "trusted_recipe_seed": {
-        "canonical_code": "SCHOOL2022_54_3T_CARROT_COTTAGE_CHEESE_SOUFFLE",
-        "canonical_name": "Суфле из моркови с творогом",
-        "initial_is_active": false,
-        "version": {
-          "base_servings": "1",
-          "meal_type_code": "breakfast",
-          "prep_time_minutes": null,
-          "cook_time_minutes": null,
-          "total_time_minutes": null,
-          "difficulty_code": null,
-          "batch_friendly": null,
-          "freezable": null,
-          "storage_days_fridge": null,
-          "storage_days_freezer": null,
-          "verification_status": "SOURCE_VERIFIED",
-          "verified_at": "2026-10-04T00:00:00Z",
-          "source_name": "ru-school2022",
-          "source_recipe_id": "ru-school2022:recipe:54-3т",
-          "source_url": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
-          "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
-          "source_retrieved_at": null,
-          "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
-          "source_original_servings": "1",
-          "rights_review_status": "REVIEWED",
-          "rights_basis": "Reviewed Russian normative factual recipe data; pinned School2022 source PDF and durable Library archive.",
-          "change_note": "R3-B reviewed School2022 card ru-school2022:recipe:54-3т; institutional serving context quarantined.",
-          "ingredients": [
-            {
-              "food_ingredient_code": "CARROT",
-              "quantity": "95.5",
-              "unit": "g",
-              "source_amount_text": "морковь: брутто 119.3 г; нетто 95.5 г",
-              "normalization_note": "Exact source net amount; no broader/narrower substitution.",
-              "prep_note": null,
-              "optional": false
-            },
-            {
-              "food_ingredient_code": "TVOROG_5",
-              "quantity": "34.1",
-              "unit": "g",
-              "source_amount_text": "творог: брутто 34.1 г; нетто 34.1 г",
-              "normalization_note": "Exact source net amount; no broader/narrower substitution.",
-              "prep_note": null,
-              "optional": false
-            },
-            {
-              "food_ingredient_code": "MILK_2_5",
-              "quantity": "20.5",
-              "unit": "g",
-              "source_amount_text": "молоко: брутто 20.5 г; нетто 20.5 г",
-              "normalization_note": "Exact source net amount; no broader/narrower substitution.",
-              "prep_note": null,
-              "optional": false
-            },
-            {
-              "food_ingredient_code": "EGG",
-              "quantity": "13.7",
-              "unit": "g",
-              "source_amount_text": "яйцо куриное: брутто 15 г; нетто 13.7 г",
-              "normalization_note": "Exact source net amount; no broader/narrower substitution.",
-              "prep_note": null,
-              "optional": false
-            },
-            {
-              "food_ingredient_code": "SEMOLINA_GROATS",
-              "quantity": "6.8",
-              "unit": "g",
-              "source_amount_text": "крупа манная: брутто 6.8 г; нетто 6.8 г",
-              "normalization_note": "Exact source net amount; no broader/narrower substitution.",
-              "prep_note": null,
-              "optional": false
-            },
-            {
-              "food_ingredient_code": "BREADCRUMBS",
-              "quantity": "5.5",
-              "unit": "g",
-              "source_amount_text": "сухари панировочные: брутто 5.5 г; нетто 5.5 г",
-              "normalization_note": "Exact source net amount; no broader/narrower substitution.",
-              "prep_note": null,
-              "optional": false
-            },
-            {
-              "food_ingredient_code": "SUGAR",
-              "quantity": "8.2",
-              "unit": "g",
-              "source_amount_text": "сахар-песок: брутто 8.2 г; нетто 8.2 г",
-              "normalization_note": "Exact source net amount; no broader/narrower substitution.",
-              "prep_note": null,
-              "optional": false
-            },
-            {
-              "food_ingredient_code": "SOUR_CREAM_15",
-              "quantity": "5.5",
-              "unit": "g",
-              "source_amount_text": "сметана: брутто 5.5 г; нетто 5.5 г",
-              "normalization_note": "Exact source net amount; no broader/narrower substitution.",
-              "prep_note": null,
-              "optional": false
-            },
-            {
-              "food_ingredient_code": "BUTTER_PEASANT_72_5_UNSALTED",
-              "quantity": "4.1",
-              "unit": "g",
-              "source_amount_text": "масло сливочное: брутто 4.1 г; нетто 4.1 г",
-              "normalization_note": "Exact source net amount; no broader/narrower substitution.",
-              "prep_note": null,
-              "optional": false
-            },
-            {
-              "food_ingredient_code": "SALT_IODIZED",
-              "quantity": "0.45",
-              "unit": "g",
-              "source_amount_text": "соль поваренная йодированная: брутто 0.45 г; нетто 0.45 г",
-              "normalization_note": "Exact source net amount; no broader/narrower substitution.",
-              "prep_note": null,
-              "optional": false
-            }
-          ],
-          "steps": [
-            "Протереть творог.",
-            "Морковь протереть и припустить в молоке со сливочным маслом; постепенно всыпать манную крупу и варить 10–15 минут, затем охладить до 40–50 °C.",
-            "Соединить с творогом, яичными желтками, сметаной и йодированной солью; осторожно ввести взбитые белки.",
-            "Выложить в смазанную сливочным маслом (источник отдельно указывает 1/3 нормы для смазывания) и посыпанную сухарями форму и готовить на пару 30–50 минут.",
-            "Перед подачей полить растопленным сливочным маслом. Exact total butter is authoritative; unsupported internal gram split remains UNKNOWN."
-          ],
-          "equipment_codes": [],
-          "source_output_g": "150",
-          "source_output_text": "выход 150 г; exact same-card output"
-        }
-      },
-      "prepared_spec": {
-        "recipe_code": "SCHOOL2022_54_3T_CARROT_COTTAGE_CHEESE_SOUFFLE",
-        "source_name": "ru-school2022",
-        "source_recipe_id": "ru-school2022:recipe:54-3т",
-        "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
-        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
-        "output_mass_g": "150",
-        "source_locator": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
-        "source_data_type": "NORMATIVE_RECIPE_CARD_PDF",
-        "rights_review_status": "REVIEWED",
-        "rights_basis": "Reviewed Russian normative factual recipe data; pinned School2022 source PDF and durable Library archive.",
-        "review_reference": "data/curation/r3b-school2022-breakfast-batch/publication-specs.json#recipes.SCHOOL2022_54_3T_CARROT_COTTAGE_CHEESE_SOUFFLE",
-        "expected_available_amounts": [
-          [
-            "ENERGY_KCAL",
-            "200.9"
-          ]
-        ],
-        "expected_unknown_codes": [
-          "ALPHA_LINOLENIC_ACID",
-          "BETA_CAROTENE",
-          "BIOTIN",
-          "CALCIUM",
-          "CARBOHYDRATE_AVAILABLE",
-          "CARBOHYDRATE_BY_DIFFERENCE",
-          "CHLORIDE",
-          "CHOLESTEROL",
-          "CHOLINE_TOTAL",
-          "CHROMIUM",
-          "COPPER",
-          "DHA",
-          "EPA",
-          "FAT_TOTAL",
-          "FATTY_ACIDS_MONOUNSATURATED_TOTAL",
-          "FATTY_ACIDS_POLYUNSATURATED_TOTAL",
-          "FATTY_ACIDS_SATURATED_TOTAL",
-          "FATTY_ACIDS_TRANS_TOTAL",
-          "FIBER_TOTAL_DIETARY",
-          "FLUORIDE",
-          "FOLATE_DFE",
-          "FOLATE_TOTAL",
-          "FOLIC_ACID",
-          "IODINE",
-          "IRON",
-          "LINOLEIC_ACID",
-          "MAGNESIUM",
-          "MANGANESE",
-          "MOLYBDENUM",
-          "NIACIN",
-          "NIACIN_EQUIVALENT",
-          "PANTOTHENIC_ACID",
-          "PHOSPHORUS",
-          "POTASSIUM",
-          "PROTEIN",
-          "RETINOL",
-          "RIBOFLAVIN",
-          "SELENIUM",
-          "SODIUM",
-          "STARCH",
-          "SUGARS_TOTAL",
-          "THIAMIN",
-          "VITAMIN_A_RAE",
-          "VITAMIN_A_RE",
-          "VITAMIN_B12",
-          "VITAMIN_B6",
-          "VITAMIN_C",
-          "VITAMIN_D_D2_D3",
-          "VITAMIN_E_ALPHA_TOCOPHEROL",
-          "VITAMIN_E_TOCOPHEROL_EQUIVALENT",
-          "VITAMIN_K_PHYLLOQUINONE",
-          "WATER",
-          "ZINC"
-        ],
-        "require_recipe_inactive": true
-      },
-      "process_binding_receipt": {
-        "status": "PASS_PARTIAL_RATIO_INTERNAL_SPLIT_UNKNOWN",
-        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
-        "rule": "Exact 4.1 g butter total is authoritative across carrot cooking, one-third tray greasing and melted finishing butter. Unsupported internal gram splits remain UNKNOWN."
-      }
-    },
     "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE": {
       "canonical_code": "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
       "canonical_name": "Каша жидкая молочная кукурузная",
@@ -1309,6 +1071,195 @@
         "fat": "BUTTER_PEASANT_72_5_UNSALTED",
         "water": "WATER",
         "rule": "Exact water and butter totals are source-authoritative; butter is explicitly added 2–3 minutes before readiness. No hidden retained-water inference."
+      }
+    },
+    "SCHOOL2022_54_2K_VISCOUS_CORN_MILK_PORRIDGE": {
+      "canonical_code": "SCHOOL2022_54_2K_VISCOUS_CORN_MILK_PORRIDGE",
+      "canonical_name": "Каша вязкая молочная кукурузная",
+      "initial_is_active": false,
+      "source_receipt": {
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-2к",
+        "source_url": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+        "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_pdf_page": 50,
+        "rights_review_status": "REVIEWED",
+        "review_reference": "data/curation/r3b-school2022-breakfast-batch/publication-specs.json#recipes.SCHOOL2022_54_2K_VISCOUS_CORN_MILK_PORRIDGE"
+      },
+      "trusted_recipe_seed": {
+        "canonical_code": "SCHOOL2022_54_2K_VISCOUS_CORN_MILK_PORRIDGE",
+        "canonical_name": "Каша вязкая молочная кукурузная",
+        "initial_is_active": false,
+        "version": {
+          "base_servings": "1",
+          "meal_type_code": "breakfast",
+          "prep_time_minutes": null,
+          "cook_time_minutes": null,
+          "total_time_minutes": null,
+          "difficulty_code": null,
+          "batch_friendly": null,
+          "freezable": null,
+          "storage_days_fridge": null,
+          "storage_days_freezer": null,
+          "verification_status": "SOURCE_VERIFIED",
+          "verified_at": "2026-10-04T00:00:00Z",
+          "source_name": "ru-school2022",
+          "source_recipe_id": "ru-school2022:recipe:54-2к",
+          "source_url": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+          "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+          "source_retrieved_at": null,
+          "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+          "source_original_servings": "1",
+          "rights_review_status": "REVIEWED",
+          "rights_basis": "Reviewed Russian normative factual recipe data; pinned School2022 source PDF and durable Library archive.",
+          "change_note": "R3-B reviewed School2022 card ru-school2022:recipe:54-2к; institutional serving context quarantined.",
+          "ingredients": [
+            {
+              "food_ingredient_code": "CORN_GROATS",
+              "quantity": "57",
+              "unit": "g",
+              "source_amount_text": "крупа кукурузная: брутто 57 г; нетто 57 г",
+              "normalization_note": "Exact School2022 amount; R3-B reviewed canonical identity CORN_GROATS.",
+              "prep_note": null,
+              "optional": false
+            },
+            {
+              "food_ingredient_code": "MILK_2_5",
+              "quantity": "100",
+              "unit": "g",
+              "source_amount_text": "молоко: брутто 100 г; нетто 100 г",
+              "normalization_note": "Exact School2022 amount; R3-B reviewed canonical identity MILK_2_5.",
+              "prep_note": null,
+              "optional": false
+            },
+            {
+              "food_ingredient_code": "BUTTER_PEASANT_72_5_UNSALTED",
+              "quantity": "10",
+              "unit": "g",
+              "source_amount_text": "масло сливочное: брутто 10 г; нетто 10 г",
+              "normalization_note": "Exact School2022 amount; R3-B reviewed canonical identity BUTTER_PEASANT_72_5_UNSALTED.",
+              "prep_note": null,
+              "optional": false
+            },
+            {
+              "food_ingredient_code": "SUGAR",
+              "quantity": "3",
+              "unit": "g",
+              "source_amount_text": "сахар-песок: брутто 3 г; нетто 3 г",
+              "normalization_note": "Exact School2022 amount; R3-B reviewed canonical identity SUGAR.",
+              "prep_note": null,
+              "optional": false
+            },
+            {
+              "food_ingredient_code": "SALT_IODIZED",
+              "quantity": "1",
+              "unit": "g",
+              "source_amount_text": "соль поваренная йодированная: брутто 1 г; нетто 1 г",
+              "normalization_note": "Exact School2022 amount; R3-B reviewed canonical identity SALT_IODIZED.",
+              "prep_note": null,
+              "optional": false
+            },
+            {
+              "food_ingredient_code": "WATER",
+              "quantity": "65",
+              "unit": "g",
+              "source_amount_text": "вода: брутто 65 г; нетто 65 г",
+              "normalization_note": "Exact School2022 amount; R3-B reviewed canonical identity WATER.",
+              "prep_note": null,
+              "optional": false
+            }
+          ],
+          "steps": [
+            "Перебрать и промыть кукурузную крупу, несколько раз меняя воду.",
+            "Засыпать крупу в кипящую воду и варить при слабом кипении, помешивая; через 15–20 минут добавить горячее молоко, йодированную соль и сахар.",
+            "За 2–3 минуты до готовности добавить растопленное сливочное масло, перемешать и упарить под закрытой крышкой."
+          ],
+          "equipment_codes": [],
+          "source_output_g": "200",
+          "source_output_text": "выход 200 г; exact same-card output"
+        }
+      },
+      "prepared_spec": {
+        "recipe_code": "SCHOOL2022_54_2K_VISCOUS_CORN_MILK_PORRIDGE",
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-2к",
+        "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "output_mass_g": "200",
+        "source_locator": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+        "source_data_type": "NORMATIVE_RECIPE_CARD_PDF",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed Russian normative factual recipe data; pinned School2022 source PDF and durable Library archive.",
+        "review_reference": "data/curation/r3b-school2022-breakfast-batch/publication-specs.json#recipes.SCHOOL2022_54_2K_VISCOUS_CORN_MILK_PORRIDGE",
+        "expected_available_amounts": [
+          [
+            "ENERGY_KCAL",
+            "287.8"
+          ]
+        ],
+        "expected_unknown_codes": [
+          "ALPHA_LINOLENIC_ACID",
+          "BETA_CAROTENE",
+          "BIOTIN",
+          "CALCIUM",
+          "CARBOHYDRATE_AVAILABLE",
+          "CARBOHYDRATE_BY_DIFFERENCE",
+          "CHLORIDE",
+          "CHOLESTEROL",
+          "CHOLINE_TOTAL",
+          "CHROMIUM",
+          "COPPER",
+          "DHA",
+          "EPA",
+          "FAT_TOTAL",
+          "FATTY_ACIDS_MONOUNSATURATED_TOTAL",
+          "FATTY_ACIDS_POLYUNSATURATED_TOTAL",
+          "FATTY_ACIDS_SATURATED_TOTAL",
+          "FATTY_ACIDS_TRANS_TOTAL",
+          "FIBER_TOTAL_DIETARY",
+          "FLUORIDE",
+          "FOLATE_DFE",
+          "FOLATE_TOTAL",
+          "FOLIC_ACID",
+          "IODINE",
+          "IRON",
+          "LINOLEIC_ACID",
+          "MAGNESIUM",
+          "MANGANESE",
+          "MOLYBDENUM",
+          "NIACIN",
+          "NIACIN_EQUIVALENT",
+          "PANTOTHENIC_ACID",
+          "PHOSPHORUS",
+          "POTASSIUM",
+          "PROTEIN",
+          "RETINOL",
+          "RIBOFLAVIN",
+          "SELENIUM",
+          "SODIUM",
+          "STARCH",
+          "SUGARS_TOTAL",
+          "THIAMIN",
+          "VITAMIN_A_RAE",
+          "VITAMIN_A_RE",
+          "VITAMIN_B12",
+          "VITAMIN_B6",
+          "VITAMIN_C",
+          "VITAMIN_D_D2_D3",
+          "VITAMIN_E_ALPHA_TOCOPHEROL",
+          "VITAMIN_E_TOCOPHEROL_EQUIVALENT",
+          "VITAMIN_K_PHYLLOQUINONE",
+          "WATER",
+          "ZINC"
+        ],
+        "require_recipe_inactive": true
+      },
+      "process_binding_receipt": {
+        "status": "PASS_EXPLICIT_PROCESS_BINDING",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "water": "WATER",
+        "rule": "Exact WATER=65 g is quantified cooking-water input. Unquantified wash water is process-resource context, not RecipeIngredient authority. Butter is explicitly added 2–3 minutes before readiness."
       }
     },
     "SCHOOL2022_54_6K_MILLET_MILK_PORRIDGE": {
@@ -1699,195 +1650,6 @@
         "rule": "Exact 70 g water total is authoritative across separate rice/millet precooking, but the per-groat split is not source-specified. Butter is explicitly added before final steaming."
       }
     },
-    "SCHOOL2022_54_21K_BARLEY_MILK_PORRIDGE": {
-      "canonical_code": "SCHOOL2022_54_21K_BARLEY_MILK_PORRIDGE",
-      "canonical_name": "Каша вязкая молочная ячневая",
-      "initial_is_active": false,
-      "source_receipt": {
-        "source_name": "ru-school2022",
-        "source_recipe_id": "ru-school2022:recipe:54-21к",
-        "source_url": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
-        "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
-        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
-        "source_pdf_page": 64,
-        "rights_review_status": "REVIEWED",
-        "review_reference": "data/curation/r3b-school2022-breakfast-batch/publication-specs.json#recipes.SCHOOL2022_54_21K_BARLEY_MILK_PORRIDGE"
-      },
-      "trusted_recipe_seed": {
-        "canonical_code": "SCHOOL2022_54_21K_BARLEY_MILK_PORRIDGE",
-        "canonical_name": "Каша вязкая молочная ячневая",
-        "initial_is_active": false,
-        "version": {
-          "base_servings": "1",
-          "meal_type_code": "breakfast",
-          "prep_time_minutes": null,
-          "cook_time_minutes": null,
-          "total_time_minutes": null,
-          "difficulty_code": null,
-          "batch_friendly": null,
-          "freezable": null,
-          "storage_days_fridge": null,
-          "storage_days_freezer": null,
-          "verification_status": "SOURCE_VERIFIED",
-          "verified_at": "2026-10-04T00:00:00Z",
-          "source_name": "ru-school2022",
-          "source_recipe_id": "ru-school2022:recipe:54-21к",
-          "source_url": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
-          "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
-          "source_retrieved_at": null,
-          "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
-          "source_original_servings": "1",
-          "rights_review_status": "REVIEWED",
-          "rights_basis": "Reviewed Russian normative factual recipe data; pinned School2022 source PDF and durable Library archive.",
-          "change_note": "R3-B reviewed School2022 card ru-school2022:recipe:54-21к; institutional serving context quarantined.",
-          "ingredients": [
-            {
-              "food_ingredient_code": "BARLEY_GROATS",
-              "quantity": "44.4",
-              "unit": "g",
-              "source_amount_text": "крупа ячневая: брутто 44.4 г; нетто 44.4 г",
-              "normalization_note": "Exact School2022 amount; R3-B reviewed identity BARLEY_GROATS.",
-              "prep_note": null,
-              "optional": false
-            },
-            {
-              "food_ingredient_code": "MILK_2_5",
-              "quantity": "110",
-              "unit": "g",
-              "source_amount_text": "молоко: брутто 110 г; нетто 110 г",
-              "normalization_note": "Exact School2022 amount; R3-B reviewed identity MILK_2_5.",
-              "prep_note": null,
-              "optional": false
-            },
-            {
-              "food_ingredient_code": "BUTTER_PEASANT_72_5_UNSALTED",
-              "quantity": "10",
-              "unit": "g",
-              "source_amount_text": "масло сливочное: брутто 10 г; нетто 10 г",
-              "normalization_note": "Exact School2022 amount; R3-B reviewed identity BUTTER_PEASANT_72_5_UNSALTED.",
-              "prep_note": null,
-              "optional": false
-            },
-            {
-              "food_ingredient_code": "SUGAR",
-              "quantity": "3",
-              "unit": "g",
-              "source_amount_text": "сахар-песок: брутто 3 г; нетто 3 г",
-              "normalization_note": "Exact School2022 amount; R3-B reviewed identity SUGAR.",
-              "prep_note": null,
-              "optional": false
-            },
-            {
-              "food_ingredient_code": "SALT_IODIZED",
-              "quantity": "1",
-              "unit": "g",
-              "source_amount_text": "соль поваренная йодированная: брутто 1 г; нетто 1 г",
-              "normalization_note": "Exact School2022 amount; R3-B reviewed identity SALT_IODIZED.",
-              "prep_note": null,
-              "optional": false
-            },
-            {
-              "food_ingredient_code": "WATER",
-              "quantity": "54",
-              "unit": "g",
-              "source_amount_text": "вода: брутто 54 г; нетто 54 г",
-              "normalization_note": "Exact School2022 amount; R3-B reviewed identity WATER.",
-              "prep_note": null,
-              "optional": false
-            }
-          ],
-          "steps": [
-            "Перебрать ячневую крупу, промыть сначала тёплой, затем горячей водой.",
-            "Всыпать крупу в кипящую воду, добавить йодированную соль и варить, периодически помешивая, до загустения; затем влить кипящее молоко и продолжить варку.",
-            "За 2–3 минуты до готовности добавить растопленное сливочное масло, перемешать и упарить под закрытой крышкой."
-          ],
-          "equipment_codes": [],
-          "source_output_g": "200",
-          "source_output_text": "выход 200 г; exact same-card output"
-        }
-      },
-      "prepared_spec": {
-        "recipe_code": "SCHOOL2022_54_21K_BARLEY_MILK_PORRIDGE",
-        "source_name": "ru-school2022",
-        "source_recipe_id": "ru-school2022:recipe:54-21к",
-        "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
-        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
-        "output_mass_g": "200",
-        "source_locator": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
-        "source_data_type": "NORMATIVE_RECIPE_CARD_PDF",
-        "rights_review_status": "REVIEWED",
-        "rights_basis": "Reviewed Russian normative factual recipe data; pinned School2022 source PDF and durable Library archive.",
-        "review_reference": "data/curation/r3b-school2022-breakfast-batch/publication-specs.json#recipes.SCHOOL2022_54_21K_BARLEY_MILK_PORRIDGE",
-        "expected_available_amounts": [
-          [
-            "ENERGY_KCAL",
-            "249.1"
-          ]
-        ],
-        "expected_unknown_codes": [
-          "ALPHA_LINOLENIC_ACID",
-          "BETA_CAROTENE",
-          "BIOTIN",
-          "CALCIUM",
-          "CARBOHYDRATE_AVAILABLE",
-          "CARBOHYDRATE_BY_DIFFERENCE",
-          "CHLORIDE",
-          "CHOLESTEROL",
-          "CHOLINE_TOTAL",
-          "CHROMIUM",
-          "COPPER",
-          "DHA",
-          "EPA",
-          "FAT_TOTAL",
-          "FATTY_ACIDS_MONOUNSATURATED_TOTAL",
-          "FATTY_ACIDS_POLYUNSATURATED_TOTAL",
-          "FATTY_ACIDS_SATURATED_TOTAL",
-          "FATTY_ACIDS_TRANS_TOTAL",
-          "FIBER_TOTAL_DIETARY",
-          "FLUORIDE",
-          "FOLATE_DFE",
-          "FOLATE_TOTAL",
-          "FOLIC_ACID",
-          "IODINE",
-          "IRON",
-          "LINOLEIC_ACID",
-          "MAGNESIUM",
-          "MANGANESE",
-          "MOLYBDENUM",
-          "NIACIN",
-          "NIACIN_EQUIVALENT",
-          "PANTOTHENIC_ACID",
-          "PHOSPHORUS",
-          "POTASSIUM",
-          "PROTEIN",
-          "RETINOL",
-          "RIBOFLAVIN",
-          "SELENIUM",
-          "SODIUM",
-          "STARCH",
-          "SUGARS_TOTAL",
-          "THIAMIN",
-          "VITAMIN_A_RAE",
-          "VITAMIN_A_RE",
-          "VITAMIN_B12",
-          "VITAMIN_B6",
-          "VITAMIN_C",
-          "VITAMIN_D_D2_D3",
-          "VITAMIN_E_ALPHA_TOCOPHEROL",
-          "VITAMIN_E_TOCOPHEROL_EQUIVALENT",
-          "VITAMIN_K_PHYLLOQUINONE",
-          "WATER",
-          "ZINC"
-        ],
-        "require_recipe_inactive": true
-      },
-      "process_binding_receipt": {
-        "status": "PASS_EXPLICIT_PROCESS_BINDING",
-        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
-        "water": "WATER",
-        "rule": "Exact water and butter totals are source-authoritative; source explicitly places both in the cooking process."
-      }
-    },
     "SCHOOL2022_54_23K_LIQUID_WHEAT_MILK_PORRIDGE": {
       "canonical_code": "SCHOOL2022_54_23K_LIQUID_WHEAT_MILK_PORRIDGE",
       "canonical_name": "Каша жидкая молочная пшеничная",
@@ -2075,6 +1837,196 @@
         "fat": "BUTTER_PEASANT_72_5_UNSALTED",
         "water": "WATER",
         "rule": "Exact 68 g water is authoritative source input. Technology explicitly drains excess water, so retained water/yield is UNKNOWN and must not be inferred. Butter is explicitly added before readiness."
+      }
+    },
+    "SCHOOL2022_54_24K_LIQUID_MILLET_MILK_PORRIDGE": {
+      "canonical_code": "SCHOOL2022_54_24K_LIQUID_MILLET_MILK_PORRIDGE",
+      "canonical_name": "Каша жидкая молочная пшенная",
+      "initial_is_active": false,
+      "source_receipt": {
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-24к",
+        "source_url": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+        "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_pdf_page": 66,
+        "rights_review_status": "REVIEWED",
+        "review_reference": "data/curation/r3b-school2022-breakfast-batch/publication-specs.json#recipes.SCHOOL2022_54_24K_LIQUID_MILLET_MILK_PORRIDGE"
+      },
+      "trusted_recipe_seed": {
+        "canonical_code": "SCHOOL2022_54_24K_LIQUID_MILLET_MILK_PORRIDGE",
+        "canonical_name": "Каша жидкая молочная пшенная",
+        "initial_is_active": false,
+        "version": {
+          "base_servings": "1",
+          "meal_type_code": "breakfast",
+          "prep_time_minutes": null,
+          "cook_time_minutes": null,
+          "total_time_minutes": null,
+          "difficulty_code": null,
+          "batch_friendly": null,
+          "freezable": null,
+          "storage_days_fridge": null,
+          "storage_days_freezer": null,
+          "verification_status": "SOURCE_VERIFIED",
+          "verified_at": "2026-10-04T00:00:00Z",
+          "source_name": "ru-school2022",
+          "source_recipe_id": "ru-school2022:recipe:54-24к",
+          "source_url": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+          "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+          "source_retrieved_at": null,
+          "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+          "source_original_servings": "1",
+          "rights_review_status": "REVIEWED",
+          "rights_basis": "Reviewed Russian normative factual recipe data; pinned School2022 source PDF and durable Library archive.",
+          "change_note": "R3-B reviewed School2022 card ru-school2022:recipe:54-24к; institutional serving context quarantined.",
+          "ingredients": [
+            {
+              "food_ingredient_code": "MILLET_GROATS",
+              "quantity": "50",
+              "unit": "g",
+              "source_amount_text": "крупа пшенная: брутто 50 г; нетто 50 г",
+              "normalization_note": "Exact School2022 amount; R3-B reviewed canonical identity MILLET_GROATS.",
+              "prep_note": null,
+              "optional": false
+            },
+            {
+              "food_ingredient_code": "MILK_2_5",
+              "quantity": "104",
+              "unit": "g",
+              "source_amount_text": "молоко: брутто 104 г; нетто 104 г",
+              "normalization_note": "Exact School2022 amount; R3-B reviewed canonical identity MILK_2_5.",
+              "prep_note": null,
+              "optional": false
+            },
+            {
+              "food_ingredient_code": "SUGAR",
+              "quantity": "3",
+              "unit": "g",
+              "source_amount_text": "сахар-песок: брутто 3 г; нетто 3 г",
+              "normalization_note": "Exact School2022 amount; R3-B reviewed canonical identity SUGAR.",
+              "prep_note": null,
+              "optional": false
+            },
+            {
+              "food_ingredient_code": "BUTTER_PEASANT_72_5_UNSALTED",
+              "quantity": "10",
+              "unit": "g",
+              "source_amount_text": "масло сливочное: брутто 10 г; нетто 10 г",
+              "normalization_note": "Exact School2022 amount; R3-B reviewed canonical identity BUTTER_PEASANT_72_5_UNSALTED.",
+              "prep_note": null,
+              "optional": false
+            },
+            {
+              "food_ingredient_code": "SALT_IODIZED",
+              "quantity": "1",
+              "unit": "g",
+              "source_amount_text": "соль поваренная йодированная: брутто 1 г; нетто 1 г",
+              "normalization_note": "Exact School2022 amount; R3-B reviewed canonical identity SALT_IODIZED.",
+              "prep_note": null,
+              "optional": false
+            },
+            {
+              "food_ingredient_code": "WATER",
+              "quantity": "52",
+              "unit": "g",
+              "source_amount_text": "вода: брутто 52 г; нетто 52 г",
+              "normalization_note": "Exact School2022 amount; R3-B reviewed canonical identity WATER.",
+              "prep_note": null,
+              "optional": false
+            }
+          ],
+          "steps": [
+            "Перебрать пшенную крупу; многократно промыть в холодной, затем тёплой воде до прозрачности воды. Промывочная и ошпаривающая вода не является quantified RecipeIngredient authority.",
+            "Крупу залить кипящей водой, через 1 минуту воду слить; снова залить кипящей водой, довести до кипения, варить 2–5 минут и воду слить.",
+            "Залить кипящей водой по расчёту рецептуры (exact WATER=52 g) и варить до загустения; влить кипящее молоко, добавить йодированную соль и сахар и продолжить варку.",
+            "За 2–3 минуты до готовности добавить растопленное сливочное масло, тщательно перемешать и упарить на водяной бане под закрытой крышкой."
+          ],
+          "equipment_codes": [],
+          "source_output_g": "200",
+          "source_output_text": "выход 200 г; exact same-card output"
+        }
+      },
+      "prepared_spec": {
+        "recipe_code": "SCHOOL2022_54_24K_LIQUID_MILLET_MILK_PORRIDGE",
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-24к",
+        "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "output_mass_g": "200",
+        "source_locator": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+        "source_data_type": "NORMATIVE_RECIPE_CARD_PDF",
+        "rights_review_status": "REVIEWED",
+        "rights_basis": "Reviewed Russian normative factual recipe data; pinned School2022 source PDF and durable Library archive.",
+        "review_reference": "data/curation/r3b-school2022-breakfast-batch/publication-specs.json#recipes.SCHOOL2022_54_24K_LIQUID_MILLET_MILK_PORRIDGE",
+        "expected_available_amounts": [
+          [
+            "ENERGY_KCAL",
+            "274.9"
+          ]
+        ],
+        "expected_unknown_codes": [
+          "ALPHA_LINOLENIC_ACID",
+          "BETA_CAROTENE",
+          "BIOTIN",
+          "CALCIUM",
+          "CARBOHYDRATE_AVAILABLE",
+          "CARBOHYDRATE_BY_DIFFERENCE",
+          "CHLORIDE",
+          "CHOLESTEROL",
+          "CHOLINE_TOTAL",
+          "CHROMIUM",
+          "COPPER",
+          "DHA",
+          "EPA",
+          "FAT_TOTAL",
+          "FATTY_ACIDS_MONOUNSATURATED_TOTAL",
+          "FATTY_ACIDS_POLYUNSATURATED_TOTAL",
+          "FATTY_ACIDS_SATURATED_TOTAL",
+          "FATTY_ACIDS_TRANS_TOTAL",
+          "FIBER_TOTAL_DIETARY",
+          "FLUORIDE",
+          "FOLATE_DFE",
+          "FOLATE_TOTAL",
+          "FOLIC_ACID",
+          "IODINE",
+          "IRON",
+          "LINOLEIC_ACID",
+          "MAGNESIUM",
+          "MANGANESE",
+          "MOLYBDENUM",
+          "NIACIN",
+          "NIACIN_EQUIVALENT",
+          "PANTOTHENIC_ACID",
+          "PHOSPHORUS",
+          "POTASSIUM",
+          "PROTEIN",
+          "RETINOL",
+          "RIBOFLAVIN",
+          "SELENIUM",
+          "SODIUM",
+          "STARCH",
+          "SUGARS_TOTAL",
+          "THIAMIN",
+          "VITAMIN_A_RAE",
+          "VITAMIN_A_RE",
+          "VITAMIN_B12",
+          "VITAMIN_B6",
+          "VITAMIN_C",
+          "VITAMIN_D_D2_D3",
+          "VITAMIN_E_ALPHA_TOCOPHEROL",
+          "VITAMIN_E_TOCOPHEROL_EQUIVALENT",
+          "VITAMIN_K_PHYLLOQUINONE",
+          "WATER",
+          "ZINC"
+        ],
+        "require_recipe_inactive": true
+      },
+      "process_binding_receipt": {
+        "status": "PASS_EXPLICIT_QUANTIFIED_COOKING_WATER",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "water": "WATER",
+        "rule": "The quantified WATER=52 g is the source 'по расчету рецептуры' cooking-water input after separate wash/scald/drain operations. Earlier unquantified waters remain process resources. Butter is explicitly placed before readiness."
       }
     }
   },
