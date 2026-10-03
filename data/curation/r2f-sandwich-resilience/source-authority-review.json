@@ -7,26 +7,34 @@
     "policy_id": "BOUNDED_INSTITUTION_PUBLISHED_TECH_CARD_REVIEW_V1",
     "status": "ACCEPTED_FOR_EXACT_ONE_CARD_BATCH",
     "scope": [
-      "sad28-luppolovo:techcard:cheese-sandwich:20-10"
+      "sad28-hosted:techcard:3:cheese-sandwich:20-10"
     ],
-    "source_kind": "INSTITUTION_PUBLISHED_TECH_CARD_PDF",
+    "source_kind": "RETAINED_RAW_CARD_TEXT_SNAPSHOT",
     "reviewed_derivative_sha256": "dd1da359c60c8d647eda5e9a968164a02b8f6dca07333b888699f9722cba3543",
-    "runtime_source_document": "data/curation/r2f-sandwich-resilience/runtime-source.json",
-    "runtime_source_data_type": "RETAINED_REVIEWED_INSTITUTION_TECH_CARD_DERIVATIVE_JSON",
+    "runtime_source_document": "data/curation/r2f-sandwich-resilience/raw-cheese-card.txt",
+    "runtime_source_data_type": "RETAINED_RAW_CARD_TEXT_SNAPSHOT",
     "whole_source_family_auto_authorized": false,
     "live_web_runtime_dependency_allowed": false,
-    "rationale": "Only the cheese sandwich is admitted. Its exact reviewed facts are retained in an immutable repository source artifact. The butter card is rejected because its declared total fat is incompatible with the minimum fat implied by its own 5 g cream-butter component.",
-    "runtime_source_sha256": "26f239916b56429e78314369df961c8dd13cecd7d559d942655387e9851a5a97",
-    "runtime_source_size_bytes": 1855,
-    "runtime_source_git_commit": "a35ef046538687bcaf2600d5027f87688e9224ca",
-    "runtime_source_https_locator": "https://raw.githubusercontent.com/Mitronomik/family-food-os/a35ef046538687bcaf2600d5027f87688e9224ca/data/curation/r2f-sandwich-resilience/runtime-source.json"
+    "rationale": "Only the cheese sandwich is admitted. Publication is pinned to a complete retained raw-card text snapshot stored in Git and durable Library. SAD28 is official host only; card issuer is not inferred. Upstream PDF is corroboration/discovery.",
+    "runtime_source_sha256": "77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c",
+    "runtime_source_size_bytes": 1783,
+    "runtime_source_git_commit": "97ed76c7009229b5c947c63f1ace09b63a32147b",
+    "runtime_source_https_locator": "https://raw.githubusercontent.com/Mitronomik/family-food-os/97ed76c7009229b5c947c63f1ace09b63a32147b/data/curation/r2f-sandwich-resilience/raw-cheese-card.txt",
+    "discovery_scope": [
+      "sad28-luppolovo:techcard:cheese-sandwich:20-10"
+    ],
+    "durable_library_locator": "library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt",
+    "library_file_id": "libfile_baff1ee2870081918170b98d1cec3c5d"
   },
   "rights": {
     "status": "BOUNDED_FACTUAL_USE_REVIEWED",
     "basis": "Пользовательское решение по российскому нормативному корпусу допускает bounded structured factual recipe data with provenance; исходная издательская вёрстка, фотографии, логотипы и сторонние комментарии не сохраняются.",
     "public_source_url": "https://sad28.vsevobr.ru/images/22-23/%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%B5/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BA%D0%B0%D1%80%D1%82%D1%8B-22-23%20%281%29.pdf",
-    "publisher_site": "https://sad28.vsevobr.ru/",
-    "retrieved_date": "2026-10-03"
+    "retrieved_date": "2026-10-03",
+    "hosting_institution": "МАДОУ «Детский сад комбинированного вида № 28» д. Лупполово",
+    "document_card_issuer": null,
+    "document_card_issuer_status": "NOT_ESTABLISHED_FROM_RETAINED_CARD",
+    "upstream_recipe_collection": "Сборник методических рекомендаций по организации питания детей и подростков в учреждениях образования Санкт-Петербурга. СПб.: Речь, 2008, Куткина М.Н."
   },
   "qa": {
     "butter": {
@@ -76,11 +84,13 @@
     "public_pdf_url": "https://sad28.vsevobr.ru/images/22-23/%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%B5/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BA%D0%B0%D1%80%D1%82%D1%8B-22-23%20%281%29.pdf",
     "exact_selected_cards_reverified": true,
     "raw_pdf_bytes_retained_by_r2f": false,
-    "runtime_source_document": "data/curation/r2f-sandwich-resilience/runtime-source.json",
+    "runtime_source_document": "data/curation/r2f-sandwich-resilience/raw-cheese-card.txt",
     "live_web_runtime_dependency_allowed": false,
-    "runtime_source_sha256": "26f239916b56429e78314369df961c8dd13cecd7d559d942655387e9851a5a97",
-    "runtime_source_size_bytes": 1855,
-    "runtime_source_https_locator": "https://raw.githubusercontent.com/Mitronomik/family-food-os/a35ef046538687bcaf2600d5027f87688e9224ca/data/curation/r2f-sandwich-resilience/runtime-source.json",
-    "raw_pdf_required_for_runtime_reproduction": false
+    "runtime_source_sha256": "77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c",
+    "runtime_source_size_bytes": 1783,
+    "runtime_source_https_locator": "https://raw.githubusercontent.com/Mitronomik/family-food-os/97ed76c7009229b5c947c63f1ace09b63a32147b/data/curation/r2f-sandwich-resilience/raw-cheese-card.txt",
+    "raw_pdf_required_for_runtime_reproduction": false,
+    "durable_library_locator": "library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt",
+    "library_file_id": "libfile_baff1ee2870081918170b98d1cec3c5d"
   }
 }
