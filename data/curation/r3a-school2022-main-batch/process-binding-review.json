@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "operation": "R3A_SCHOOL2022_PROCESS_BINDING_REVIEW",
+  "accepted_base": "da6d1e05fd44ecc2733e1a6f472eae3e54b60604",
+  "issue": 144,
+  "policy": {
+    "exact_recipe_ingredient_total_is_authoritative": true,
+    "per_step_quantity_split_may_remain_unknown": true,
+    "forbidden": [
+      "invent per-step gram splits",
+      "assign an unplaced ingredient when multiple plausible cooking fats exist",
+      "add a process ingredient absent from the quantified table"
+    ],
+    "single_fat_same_card_binding": {
+      "allowed": true,
+      "requires": [
+        "exactly one cooking-fat ingredient row on the selected card",
+        "technology has an otherwise unqualified fat-consuming operation such as sautéing or tray oiling",
+        "no competing fat/oil candidate on the card"
+      ],
+      "semantics": "Bind the exact total ingredient identity to the named operations without inventing an internal gram split."
+    },
+    "multiple_fat_unresolved": "REJECT_FROM_BATCH"
+  },
+  "selected": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-1р",
+      "status": "PASS_EXACT_TOTAL_INTERNAL_SPLIT_UNKNOWN",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "water": "WATER",
+      "rule": "Source explicitly uses butter in mass and generic oiling of tray; water is used for bread/remaining mass and the selected water branch for tray liquid. Exact totals are authoritative; per-operation split is not."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2р",
+      "status": "PASS_EXACT_TOTAL_INTERNAL_SPLIT_UNKNOWN",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "water": "WATER",
+      "rule": "Same-card exact total binding; per-operation split is not source-specified."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-3р",
+      "status": "PASS_EXACT_TOTAL_INTERNAL_SPLIT_UNKNOWN",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "water": "WATER",
+      "rule": "Same-card exact total binding; per-operation split is not source-specified."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-10р",
+      "status": "PASS_SINGLE_FAT_SAME_CARD_BINDING",
+      "fat": "SUNFLOWER_OIL",
+      "rule": "Sunflower oil is the only cooking-fat row. It is bound to the unqualified sautéing/oiled-tray operations. Exact 5.3 g total is authoritative; internal split remains UNKNOWN."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-11р",
+      "status": "PASS_SINGLE_FAT_SAME_CARD_BINDING",
+      "fat": "SUNFLOWER_OIL",
+      "rule": "Sunflower oil is the only cooking-fat row. It is bound to the unqualified sautéing/oiled-tray operations. Exact 5.3 g total is authoritative; internal split remains UNKNOWN."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-4м",
+      "status": "PASS_EXPLICIT_PROCESS_BINDING",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "rule": "Source explicitly identifies stale bread soaked in milk, breadcrumbs, iodized salt and tray greasing with butter."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-6м",
+      "status": "PASS_EXPLICIT_PROCESS_BINDING",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "rule": "Source explicitly identifies stale bread soaked in milk, breadcrumbs, iodized salt and tray greasing with butter."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-7м",
+      "status": "PASS_EXPLICIT_PROCESS_BINDING",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "rule": "Source explicitly identifies stale bread soaked in milk, breadcrumbs, iodized salt and tray greasing with butter."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-8м",
+      "status": "PASS_SINGLE_FAT_SAME_CARD_BINDING",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "water": "WATER",
+      "rule": "Butter is the only cooking-fat row and is bound to the unqualified onion sauté operation. Exact 12 g water total covers source bread-soaking / rack-wetting use; per-operation split remains UNKNOWN."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-11м",
+      "status": "PASS_EXPLICIT_PROCESS_BINDING",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "water": "WATER",
+      "rule": "Source explicitly says onion/carrot are sautéed in butter with added water; remaining recipe cooking follows the source card."
+    }
+  ],
+  "rejected": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-9р",
+      "status": "REJECT_PROCESS_PLACEMENT_UNRESOLVED_MULTIPLE_FATS",
+      "reason": "Sunflower oil and butter are both quantified; technology places butter but does not source-resolve sunflower-oil use."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-18м",
+      "status": "REJECT_PROCESS_PLACEMENT_UNRESOLVED_MULTIPLE_FATS",
+      "reason": "Sunflower oil and butter are both quantified; technology places butter in sauce but does not source-resolve sunflower-oil use."
+    }
+  ]
+}
