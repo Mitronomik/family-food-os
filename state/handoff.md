@@ -1,5 +1,34 @@
 # Handoff
 
+## R2-E 54-1т Contract Gate active — 2026-10-03
+
+Accepted main:
+`99a579e35b0a0fa6d09947b80ffecb222a45bf96` (merged PR #134).
+
+Issue #135 / branch `docs/r2e-cottage-casserole-gate`.
+
+Frozen future runtime candidate:
+`SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE` — School2022 54-1т — Запеканка из творога —
+150 g / exact same-card 301.2 kcal.
+
+Four new identity-only foods are required:
+`TVOROG_5`, `SEMOLINA_GROATS`, `SOUR_CREAM_15`, `VANILLIN`.
+Six existing exact identities are reused. No Nutrition/Composition is published
+for the new identities.
+
+Household applicability is reviewed PASS; source quantities/Nutrition remain
+School2022 authority, while independent household recipes only corroborate that
+the core oven-baking method is ordinary domestic cooking.
+
+Do not use 54-7т as an ordinary shortcut: its source explicitly marks it for
+children with celiac disease and current MVP wellness scope excludes therapeutic
+diet admission.
+
+This is docs/data only. After verification, stop for independent review; runtime
+implementation requires the merged gate.
+
+# Handoff
+
 ## R2-D milk-exclusion breakfast resilience Contract Gate — 2026-10-03
 
 Accepted main:

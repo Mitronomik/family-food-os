@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "operation": "R2E_COTTAGE_CASSEROLE_HOUSEHOLD_APPLICABILITY",
+  "accepted_base": "99a579e35b0a0fa6d09947b80ffecb222a45bf96",
+  "issue": 135,
+  "source": {
+    "archive_locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "source_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d"
+  },
+  "review_rule": {
+    "pass_requires": [
+      "non-clinical ordinary food semantics",
+      "core preparation executable with ordinary household equipment",
+      "institutional logistics can be quarantined without changing ingredient/output/nutrition source truth",
+      "independent household corroboration for the same core cooking method",
+      "no new nutrient, yield, retention or quantity inference"
+    ],
+    "household_corroboration_scope": "applicability_only",
+    "source_authority": "School2022 exact card remains sole authority for quantities, 150 g output and 301.2 kcal prepared energy."
+  },
+  "candidate": {
+    "source_recipe_id": "ru-school2022:recipe:54-1т",
+    "title": "Запеканка из творога",
+    "planner_role_review": "breakfast",
+    "decision": "HOUSEHOLD_APPLICABLE",
+    "specialized_medical_scope": false,
+    "source_output_g": "150",
+    "source_energy_kcal": "301.2",
+    "source_core_steps": [
+      "rub/prepare cottage cheese",
+      "dissolve vanillin in the card's quantified hot water, add semolina, cook 10 minutes and cool",
+      "combine cottage cheese with cooled semolina mixture, egg, sugar and salt",
+      "place in a butter-greased, breadcrumb-coated baking dish in a 3–4 cm layer",
+      "spread sour cream on top and bake in an oven; retain source temperature/time wording",
+      "cut into portions"
+    ],
+    "quarantined_source_context": [
+      "paraconvection equipment reference as an institutional alternative to the explicitly stated oven",
+      "institutional serving-temperature requirement of at least 65 °C"
+    ],
+    "independent_corroboration": [
+      {
+        "url": "https://www.russianfood.com/recipes/recipe.php?rid=149734",
+        "retrieved_date": "2026-10-03",
+        "corroborates": [
+          "cottage-cheese casserole with egg, sour cream and semolina is ordinary home cooking",
+          "the mixture is baked in a domestic oven",
+          "sour cream can be used on top before baking"
+        ],
+        "authority_scope": "household_applicability_only"
+      },
+      {
+        "url": "https://www.gastronom.ru/text/detskiye-tvorozhny-zapekanki-kak-v-detskom-sadu-19-retseptov-1013981",
+        "retrieved_date": "2026-10-03",
+        "corroborates": [
+          "home cottage-cheese casserole commonly uses 5–9% cottage cheese, 15% sour cream, semolina, egg, sugar and butter",
+          "greased baking form and domestic oven are ordinary execution",
+          "casserole is cut into portions after baking"
+        ],
+        "authority_scope": "household_applicability_only"
+      }
+    ],
+    "rationale": "The recipe-defining process is ordinary household baking. School-catering serving-temperature/equipment context is separable and not needed for consumer execution."
+  },
+  "breakfast_role_evidence": [
+    {
+      "portion_g": "75",
+      "energy_kcal": "150.6",
+      "record_sha256": "5d4262c542ab056af3186e646d7353da93f3d5a4f675e40a923ca9065993021b",
+      "authority_scope": "ROLE_QA_ONLY"
+    },
+    {
+      "portion_g": "150",
+      "energy_kcal": "301.3",
+      "record_sha256": "2349a1b21b20b004eeb9c2c161a5c3a9c6755084588adaa0d29a93ee94e25512",
+      "authority_scope": "ROLE_AND_CROSS_RECORD_QA_ONLY"
+    }
+  ],
+  "note": "Menu records support BREAKFAST classification but do not override exact same-card 301.2 kcal prepared-output authority."
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "operation": "R2E_COTTAGE_CASSEROLE_GATE_SUMMARY",
+  "accepted_base": "99a579e35b0a0fa6d09947b80ffecb222a45bf96",
+  "issue": 135,
+  "selected_recipe_code": "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+  "selected_source_recipe_id": "ru-school2022:recipe:54-1т",
+  "prepared_energy": {
+    "output_g": "150",
+    "energy_kcal": "301.2",
+    "authority": "READY_SAME_CARD_EXACT"
+  },
+  "household_applicability": "HOUSEHOLD_APPLICABLE",
+  "new_identity_only_foods": [
+    "TVOROG_5",
+    "SEMOLINA_GROATS",
+    "SOUR_CREAM_15",
+    "VANILLIN"
+  ],
+  "reused_foods": [
+    "SUGAR",
+    "BREADCRUMBS",
+    "EGG",
+    "BUTTER_PEASANT_72_5_UNSALTED",
+    "SALT_IODIZED",
+    "WATER"
+  ],
+  "migration_required": false,
+  "planner_change_required": false,
+  "nutrition_authority_change_required": false,
+  "projected_milk_exclusion_capacity_after_runtime": 6,
+  "seven_breakfast_milk_exclusion_gap_closed": false,
+  "status": "FROZEN_FOR_RUNTIME_AFTER_REVIEW_AND_MERGE",
+  "stop_rule": "Do not start runtime publication before independent review and merge of this contract gate."
+}
