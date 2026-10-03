@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "operation": "R3B_SCHOOL2022_BREAKFAST_BATCH_SOURCE_VERIFICATION",
+  "accepted_base": "69c68f4153b25ac4e51cbe9ff54fb080201f08bd",
+  "issue": 149,
+  "durable_source": {
+    "archive_locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "library_file_id": "libfile_26d95a7a50108191944b97db85a5c008",
+    "archive_size_bytes": 206692075,
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "source_pdf_path_in_archive": "corpus-work/packages/school2022/raw/source.pdf",
+    "source_pdf_size_bytes": 4102547,
+    "source_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+    "latest_independent_archive_verification_date": "2026-10-04",
+    "latest_readback_receipt": {
+      "verified_at": "2026-10-04",
+      "archive_size_bytes": 206692075,
+      "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+      "source_pdf_size_bytes": 4102547,
+      "source_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "result": "PASS"
+    }
+  },
+  "public_corroboration": {
+    "official_pdf_url": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+    "scope": "Discovery/corroboration only; pinned durable source bytes control."
+  },
+  "selected_pages": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2о",
+      "pdf_page": 85,
+      "output_g": "150",
+      "energy_kcal": "153.5"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-3о",
+      "pdf_page": 86,
+      "output_g": "150",
+      "energy_kcal": "201"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-4о",
+      "pdf_page": 87,
+      "output_g": "150",
+      "energy_kcal": "316.0"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2т",
+      "pdf_page": 90,
+      "output_g": "150",
+      "energy_kcal": "249.5"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-3т",
+      "pdf_page": 91,
+      "output_g": "150",
+      "energy_kcal": "200.9"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-1к",
+      "pdf_page": 50,
+      "output_g": "200",
+      "energy_kcal": "207.9"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-6к",
+      "pdf_page": 53,
+      "output_g": "200",
+      "energy_kcal": "274.9"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-16к",
+      "pdf_page": 61,
+      "output_g": "200",
+      "energy_kcal": "168.9"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-21к",
+      "pdf_page": 64,
+      "output_g": "200",
+      "energy_kcal": "249.1"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-23к",
+      "pdf_page": 66,
+      "output_g": "200",
+      "energy_kcal": "208.3"
+    }
+  ],
+  "rights": {
+    "status": "REVIEWED",
+    "basis": "Reuse accepted Russian normative factual recipe rights basis; source layout/photos/logos are not republished."
+  },
+  "independently_revalidated_from_superseded_pr145": [
+    "ru-school2022:recipe:54-2о",
+    "ru-school2022:recipe:54-3о",
+    "ru-school2022:recipe:54-4о",
+    "ru-school2022:recipe:54-2т",
+    "ru-school2022:recipe:54-3т"
+  ],
+  "newly_reviewed_for_r3b": [
+    "ru-school2022:recipe:54-1к",
+    "ru-school2022:recipe:54-6к",
+    "ru-school2022:recipe:54-16к",
+    "ru-school2022:recipe:54-21к",
+    "ru-school2022:recipe:54-23к"
+  ]
+}

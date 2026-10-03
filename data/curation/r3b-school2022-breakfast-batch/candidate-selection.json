@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "operation": "R3B_SCHOOL2022_BREAKFAST_BATCH_CANDIDATE_SELECTION",
+  "accepted_base": "69c68f4153b25ac4e51cbe9ff54fb080201f08bd",
+  "issue": 149,
+  "status": "FROZEN_FOR_GATE_REVIEW",
+  "objective": "Add one ten-recipe BREAKFAST DC3 batch to correct the post-R3-A MAIN-heavy catalogue while reusing the merged prepared-output batch seam.",
+  "selected": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2о",
+      "canonical_code": "SCHOOL2022_54_2O_GREEN_PEA_OMELET",
+      "canonical_name": "Омлет с зеленым горошком",
+      "meal_type_code": "breakfast",
+      "source_pdf_page": 85,
+      "source_output_g": "150",
+      "prepared_energy_kcal": "153.5",
+      "required_food_codes": [
+        "EGG",
+        "MILK_2_5",
+        "GREEN_PEAS_CANNED",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-3о",
+      "canonical_code": "SCHOOL2022_54_3O_CARROT_OMELET",
+      "canonical_name": "Омлет с морковью",
+      "meal_type_code": "breakfast",
+      "source_pdf_page": 86,
+      "source_output_g": "150",
+      "prepared_energy_kcal": "201",
+      "required_food_codes": [
+        "EGG",
+        "MILK_2_5",
+        "CARROT",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-4о",
+      "canonical_code": "SCHOOL2022_54_4O_SEMI_HARD_CHEESE_OMELET",
+      "canonical_name": "Омлет с сыром",
+      "meal_type_code": "breakfast",
+      "source_pdf_page": 87,
+      "source_output_g": "150",
+      "prepared_energy_kcal": "316.0",
+      "required_food_codes": [
+        "EGG",
+        "MILK_2_5",
+        "CHEESE_SEMI_HARD_UNSPECIFIED",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2т",
+      "canonical_code": "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE",
+      "canonical_name": "Запеканка из творога с морковью",
+      "meal_type_code": "breakfast",
+      "source_pdf_page": 90,
+      "source_output_g": "150",
+      "prepared_energy_kcal": "249.5",
+      "required_food_codes": [
+        "TVOROG_5",
+        "CARROT",
+        "MILK_2_5",
+        "SEMOLINA_GROATS",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "EGG",
+        "BREADCRUMBS",
+        "SOUR_CREAM_15",
+        "SUGAR",
+        "SALT_IODIZED"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-3т",
+      "canonical_code": "SCHOOL2022_54_3T_CARROT_COTTAGE_CHEESE_SOUFFLE",
+      "canonical_name": "Суфле из моркови с творогом",
+      "meal_type_code": "breakfast",
+      "source_pdf_page": 91,
+      "source_output_g": "150",
+      "prepared_energy_kcal": "200.9",
+      "required_food_codes": [
+        "CARROT",
+        "TVOROG_5",
+        "MILK_2_5",
+        "EGG",
+        "SEMOLINA_GROATS",
+        "BREADCRUMBS",
+        "SUGAR",
+        "SOUR_CREAM_15",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-1к",
+      "canonical_code": "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
+      "canonical_name": "Каша жидкая молочная кукурузная",
+      "meal_type_code": "breakfast",
+      "source_pdf_page": 50,
+      "source_output_g": "200",
+      "prepared_energy_kcal": "207.9",
+      "required_food_codes": [
+        "CORN_GROATS",
+        "MILK_2_5",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SUGAR",
+        "SALT_IODIZED",
+        "WATER"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-6к",
+      "canonical_code": "SCHOOL2022_54_6K_MILLET_MILK_PORRIDGE",
+      "canonical_name": "Каша вязкая молочная пшенная",
+      "meal_type_code": "breakfast",
+      "source_pdf_page": 53,
+      "source_output_g": "200",
+      "prepared_energy_kcal": "274.9",
+      "required_food_codes": [
+        "MILLET_GROATS",
+        "MILK_2_5",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SUGAR",
+        "SALT_IODIZED",
+        "WATER"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-16к",
+      "canonical_code": "SCHOOL2022_54_16K_DRUZHBA_PORRIDGE",
+      "canonical_name": "Каша «Дружба»",
+      "meal_type_code": "breakfast",
+      "source_pdf_page": 61,
+      "source_output_g": "200",
+      "prepared_energy_kcal": "168.9",
+      "required_food_codes": [
+        "RICE_GROATS",
+        "MILLET_GROATS",
+        "MILK_2_5",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SUGAR",
+        "SALT_IODIZED",
+        "WATER"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-21к",
+      "canonical_code": "SCHOOL2022_54_21K_BARLEY_MILK_PORRIDGE",
+      "canonical_name": "Каша вязкая молочная ячневая",
+      "meal_type_code": "breakfast",
+      "source_pdf_page": 64,
+      "source_output_g": "200",
+      "prepared_energy_kcal": "249.1",
+      "required_food_codes": [
+        "BARLEY_GROATS",
+        "MILK_2_5",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SUGAR",
+        "SALT_IODIZED",
+        "WATER"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-23к",
+      "canonical_code": "SCHOOL2022_54_23K_LIQUID_WHEAT_MILK_PORRIDGE",
+      "canonical_name": "Каша жидкая молочная пшеничная",
+      "meal_type_code": "breakfast",
+      "source_pdf_page": 66,
+      "source_output_g": "200",
+      "prepared_energy_kcal": "208.3",
+      "required_food_codes": [
+        "WHEAT_GROATS",
+        "MILK_2_5",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SUGAR",
+        "SALT_IODIZED",
+        "WATER"
+      ]
+    }
+  ],
+  "exclusions": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-7т",
+      "reason": "specialized celiac/medical scope remains outside ordinary wellness catalogue"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-22к",
+      "reason": "ingredient table contains butter but the selected card technology does not place it; defer rather than invent process placement"
+    },
+    {
+      "family": "dried-fruit/cranberry porridge variants",
+      "reason": "deferred from this batch to avoid unnecessary new identity/process-resource debt; not rejected globally"
+    }
+  ],
+  "projected_effect": {
+    "active_exact_energy_before": 23,
+    "additions": 10,
+    "active_exact_energy_after": 33,
+    "breakfast_compatible_before": 8,
+    "breakfast_additions": 10,
+    "breakfast_compatible_after": 18,
+    "active_main_unchanged": 15,
+    "active_sandwich_unchanged": 1,
+    "max_recipe_repetitions": 3,
+    "breakfast_capacity_after": 54,
+    "planner_change": false,
+    "dc4_ready_after": false
+  }
+}

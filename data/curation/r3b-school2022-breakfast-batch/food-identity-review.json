@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "operation": "R3B_SCHOOL2022_BREAKFAST_BATCH_FOOD_IDENTITY_REVIEW",
+  "accepted_base": "69c68f4153b25ac4e51cbe9ff54fb080201f08bd",
+  "issue": 149,
+  "new_identity_only_foods": [
+    {
+      "canonical_code": "CHEESE_SEMI_HARD_UNSPECIFIED",
+      "canonical_name": "Сыр полутвердый",
+      "category_code": "dairy",
+      "default_unit": "g",
+      "source_label": "сыр полутвердый",
+      "non_equivalent_to": [
+        "CHEESE_UNSPECIFIED",
+        "CHEESE_CHEDDAR",
+        "CHEESE_MOZZARELLA_PART_SKIM"
+      ],
+      "nutrition_profile": null,
+      "composition": null
+    },
+    {
+      "canonical_code": "CORN_GROATS",
+      "canonical_name": "Крупа кукурузная",
+      "category_code": "grains",
+      "default_unit": "g",
+      "source_label": "крупа кукурузная",
+      "non_equivalent_to": [
+        "CORN_FLOUR",
+        "CORNMEAL_WHOLE_GRAIN"
+      ],
+      "nutrition_profile": null,
+      "composition": null
+    },
+    {
+      "canonical_code": "MILLET_GROATS",
+      "canonical_name": "Крупа пшенная",
+      "category_code": "grains",
+      "default_unit": "g",
+      "source_label": "крупа пшенная",
+      "non_equivalent_to": [
+        "MILLET"
+      ],
+      "nutrition_profile": null,
+      "composition": null
+    },
+    {
+      "canonical_code": "BARLEY_GROATS",
+      "canonical_name": "Крупа ячневая",
+      "category_code": "grains",
+      "default_unit": "g",
+      "source_label": "крупа ячневая",
+      "non_equivalent_to": [
+        "BARLEY_PEARLED"
+      ],
+      "nutrition_profile": null,
+      "composition": null
+    }
+  ],
+  "reused_foods": [
+    "EGG",
+    "MILK_2_5",
+    "GREEN_PEAS_CANNED",
+    "CARROT",
+    "BUTTER_PEASANT_72_5_UNSALTED",
+    "SALT_IODIZED",
+    "TVOROG_5",
+    "SEMOLINA_GROATS",
+    "BREADCRUMBS",
+    "SOUR_CREAM_15",
+    "SUGAR",
+    "RICE_GROATS",
+    "WHEAT_GROATS",
+    "WATER"
+  ],
+  "decisions": [
+    {
+      "source_label": "сыр полутвердый",
+      "canonical_code": "CHEESE_SEMI_HARD_UNSPECIFIED",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "basis": "Source explicitly requires semi-hard cheese; generic cheese is broader and named varieties are narrower."
+    },
+    {
+      "source_label": "крупа кукурузная",
+      "canonical_code": "CORN_GROATS",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "basis": "Groats are not corn flour/cornmeal identities."
+    },
+    {
+      "source_label": "крупа пшенная",
+      "canonical_code": "MILLET_GROATS",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "basis": "Millet groats are a processed cereal identity distinct from whole millet grain."
+    },
+    {
+      "source_label": "крупа ячневая",
+      "canonical_code": "BARLEY_GROATS",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "basis": "Barley groats are not equivalent to pearl barley."
+    },
+    {
+      "source_label": "горошек зеленый консервированный",
+      "canonical_code": "GREEN_PEAS_CANNED",
+      "decision": "REUSE_EXISTING",
+      "basis": "Exact accepted catalogue identity."
+    },
+    {
+      "source_label": "морковь",
+      "canonical_code": "CARROT",
+      "decision": "REUSE_EXISTING",
+      "basis": "Source is generic carrot; reuse generic CARROT and do not narrow to a color-specific form."
+    },
+    {
+      "source_label": "творог",
+      "canonical_code": "TVOROG_5",
+      "decision": "REUSE_ACCEPTED_SCHOOL2022_IDENTITY",
+      "basis": "Reuse accepted School2022 §1.4 standard-form decision from R2-E."
+    },
+    {
+      "source_label": "сметана",
+      "canonical_code": "SOUR_CREAM_15",
+      "decision": "REUSE_ACCEPTED_SCHOOL2022_IDENTITY",
+      "basis": "Reuse accepted School2022 §1.4 standard-form decision from R2-E."
+    },
+    {
+      "source_label": "молоко",
+      "canonical_code": "MILK_2_5",
+      "decision": "REUSE_ACCEPTED_SCHOOL2022_IDENTITY",
+      "basis": "Reuse accepted School2022 milk identity from R2."
+    }
+  ],
+  "invariant": "Identity-only publication grants no NutritionProfile or Composition authority; existing reuse must not narrow source semantics."
+}
