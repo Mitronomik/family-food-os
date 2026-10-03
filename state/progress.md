@@ -1,5 +1,34 @@
 # Progress
 
+## R2-E cottage casserole runtime started — 2026-10-03
+
+Accepted main:
+`ea30ae82a253ee712d211b3b19caf53e9d2ccc45` (merged PR #136).
+
+Issue #137 / branch `feat/r2e-cottage-casserole-runtime`.
+
+Authorized runtime batch is exactly one RecipeVersion:
+
+`SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE` —
+150 g / exact same-card 301.2 kcal.
+
+The implementation reuses the existing R1-F/R2-B/R2-C prepared-output seam:
+
+`identity-only FoodIngredients → inactive RecipeVersion → prepared authority in
+one caller-owned UoW → exact projection → commit → guarded activation`.
+
+Four new identity-only foods:
+`TVOROG_5`, `SEMOLINA_GROATS`, `SOUR_CREAM_15`, `VANILLIN`.
+
+No migration/schema/Planner/new-Nutrition-authority change is authorized.
+
+Required milk-exclusion proof is intentionally bounded-infeasible:
+after activation the unaffected pool is two recipes × repetition 3 = 6/week,
+so a seven-BREAKFAST week must fail with no persisted partial plan.
+
+Status:
+`R2E_RUNTIME_ACTIVE`.
+
 ## R2-E 54-1т identity + household-applicability Contract Gate — 2026-10-03
 
 Accepted main:

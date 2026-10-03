@@ -1,5 +1,35 @@
 # Handoff
 
+## R2-E cottage casserole runtime active — 2026-10-03
+
+Accepted main:
+`ea30ae82a253ee712d211b3b19caf53e9d2ccc45` (merged PR #136).
+
+Issue #137 / branch `feat/r2e-cottage-casserole-runtime`.
+
+Read first:
+`docs/family-food/r2e-cottage-casserole-gate.md`.
+
+Implement exactly one runtime candidate:
+`SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE`.
+
+Four identity-only FoodIngredients are allowed and must remain without
+Nutrition/Composition:
+`TVOROG_5`, `SEMOLINA_GROATS`, `SOUR_CREAM_15`, `VANILLIN`.
+
+Prepared Nutrition is ENERGY_KCAL-only at exact 301.2; all other frozen nutrient
+codes remain UNKNOWN. Menu 301.3 is not authority.
+
+Fresh publication must be atomic at RecipeVersion + prepared authority; activation
+uses the existing guarded boundary. Replay is zero-write and deliberate
+deactivation must remain deactivated.
+
+The hard `MILK_2_5` proof must demonstrate two unaffected candidates and
+capacity 6/week, therefore bounded seven-breakfast failure with no partial plan.
+Do not claim 7/7 closure.
+
+Stop after a review-ready runtime PR. Do not start the next resilience candidate.
+
 ## R2-E 54-1т Contract Gate review-ready — 2026-10-03
 
 Accepted main:
