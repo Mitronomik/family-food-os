@@ -330,7 +330,9 @@ def test_r2c_authoritative_planner_persists_grain_diverse_breakfast_week(databas
             and row.eligible
             and row.exact_energy_ready
         }
-        assert set(breakfast_rows.values()) == EXISTING_BREAKFAST_CODES | set(RECIPE_CODES)
+        assert set(breakfast_rows.values()) == EXISTING_BREAKFAST_CODES | set(
+            RECIPE_CODES
+        )
         assert len(breakfast_rows) == 6
 
         selected = Counter(
@@ -362,7 +364,9 @@ def test_r2c_wheat_exclusion_removes_only_wheat_candidate_and_week_stays_feasibl
         )
         wheat_id = food.get_by_code(WHEAT_GROATS_FOOD_CODE).id
         versions = {
-            code: catalogue.get_current_verified(catalogue.get_by_code(code).id).version.id
+            code: catalogue.get_current_verified(
+                catalogue.get_by_code(code).id
+            ).version.id
             for code in RECIPE_CODES
         }
         command = AuthoritativeGenerationRequest(
