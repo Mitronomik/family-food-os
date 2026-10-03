@@ -14,7 +14,7 @@
   },
   "candidates": [
     {
-      "source_recipe_id": "sad28-luppolovo:techcard:cheese-sandwich:20-10",
+      "source_recipe_id": "sad28-hosted:techcard:3:cheese-sandwich:20-10",
       "decision": "HOUSEHOLD_APPLICABLE",
       "specialized_medical_scope": false,
       "planner_classification": "sandwich",
@@ -25,7 +25,8 @@
         "institutional serving-temperature rule",
         "institutional realization/shelf-life rule"
       ],
-      "rationale": "No cooking transformation or institutional equipment is required; the defining operation is ordinary sandwich assembly."
+      "rationale": "No cooking transformation or institutional equipment is required; the defining operation is ordinary sandwich assembly.",
+      "source_discovery_recipe_id": "sad28-luppolovo:techcard:cheese-sandwich:20-10"
     }
   ],
   "rejected_from_publication": [
