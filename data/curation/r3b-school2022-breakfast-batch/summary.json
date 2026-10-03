@@ -9,18 +9,17 @@
     "SCHOOL2022_54_3O_CARROT_OMELET",
     "SCHOOL2022_54_4O_SEMI_HARD_CHEESE_OMELET",
     "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE",
-    "SCHOOL2022_54_3T_CARROT_COTTAGE_CHEESE_SOUFFLE",
     "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
+    "SCHOOL2022_54_2K_VISCOUS_CORN_MILK_PORRIDGE",
     "SCHOOL2022_54_6K_MILLET_MILK_PORRIDGE",
     "SCHOOL2022_54_16K_DRUZHBA_PORRIDGE",
-    "SCHOOL2022_54_21K_BARLEY_MILK_PORRIDGE",
-    "SCHOOL2022_54_23K_LIQUID_WHEAT_MILK_PORRIDGE"
+    "SCHOOL2022_54_23K_LIQUID_WHEAT_MILK_PORRIDGE",
+    "SCHOOL2022_54_24K_LIQUID_MILLET_MILK_PORRIDGE"
   ],
   "new_identity_only_foods": [
     "CHEESE_SEMI_HARD_UNSPECIFIED",
     "CORN_GROATS",
-    "MILLET_GROATS",
-    "BARLEY_GROATS"
+    "MILLET_GROATS"
   ],
   "source_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
   "source_archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
@@ -45,6 +44,8 @@
   ],
   "exclusions": [
     "ru-school2022:recipe:54-7т",
+    "ru-school2022:recipe:54-3т",
+    "ru-school2022:recipe:54-21к",
     "ru-school2022:recipe:54-22к"
   ],
   "transaction_semantics": "Reuse merged R3-A option B: per-recipe atomic inactive publication with resumable convergence; full-batch preflight and one-UoW atomic activation."
