@@ -1,5 +1,35 @@
 # Progress
 
+## R2-F two-SANDWICH resilience Contract Gate — 2026-10-03
+
+Accepted main:
+`561c13aad6ce978de399dfd807071232af06b71c` (merged PR #138).
+
+Issue #139 / branch `docs/r2f-sandwich-resilience-gate`.
+
+R2-F is intentionally a two-recipe source/authority batch rather than another
+single-recipe micro-step.
+
+Selected future runtime candidates:
+
+- `SAD28_SANDWICH_BUTTER_25_5` — 30 g / 66.3 kcal;
+- `SAD28_SANDWICH_CHEESE_20_10` — 30 g / 83 kcal.
+
+Both are `sandwich`, so existing Planner mapping can use them for
+BREAKFAST/LUNCH/SNACK without an algorithm change.
+
+Three new identity-only foods:
+`WHEAT_BREAD_PLAIN`, `BUTTER_CREAM_UNSPECIFIED`, `CHEESE_UNSPECIFIED`.
+
+Source policy is bounded to exactly two reviewed institution-published cards;
+runtime will pin a structured derivative and has no live-web dependency.
+
+Projected hard exact-`MILK_2_5` resilience:
+2 candidates/capacity 6 → 4 candidates/capacity 12.
+
+Status:
+`R2F_CONTRACT_GATE_ACTIVE`.
+
 ## R2-E cottage casserole runtime review-ready — 2026-10-03
 
 Accepted main:

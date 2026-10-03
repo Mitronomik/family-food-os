@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "operation": "R2F_SANDWICH_FOOD_IDENTITY_REVIEW",
+  "accepted_base": "561c13aad6ce978de399dfd807071232af06b71c",
+  "issue": 139,
+  "decisions": [
+    {
+      "source_label": "Хлеб пшеничный",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "canonical_code": "WHEAT_BREAD_PLAIN",
+      "canonical_name": "Хлеб пшеничный",
+      "category_code": "grains",
+      "default_unit": "g",
+      "non_equivalent_to": [
+        "BREAD_WHOLE_WHEAT",
+        "WHEAT_BREAD_HIGH_GRADE_STALE"
+      ],
+      "basis": "Source label establishes wheat bread but not whole-grain, flour grade, staleness, or branded loaf subtype."
+    },
+    {
+      "source_label": "Масло сливочное (Б)",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "canonical_code": "BUTTER_CREAM_UNSPECIFIED",
+      "canonical_name": "Масло сливочное",
+      "category_code": "fats_oils",
+      "default_unit": "g",
+      "non_equivalent_to": [
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "BUTTER_UNSALTED"
+      ],
+      "basis": "Source establishes cream butter but does not establish the narrower accepted 72.5%/unsalted or legacy unsalted form."
+    },
+    {
+      "source_label": "Сыр",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "canonical_code": "CHEESE_UNSPECIFIED",
+      "canonical_name": "Сыр",
+      "category_code": "dairy",
+      "default_unit": "g",
+      "non_equivalent_to": [
+        "CHEESE_CHEDDAR",
+        "CHEESE_CHEDDAR_REDUCED_FAT",
+        "CHEESE_MOZZARELLA_PART_SKIM"
+      ],
+      "basis": "Source card does not identify cheese variety or fat subtype."
+    }
+  ],
+  "new_identity_only_foods": [
+    {
+      "canonical_code": "WHEAT_BREAD_PLAIN",
+      "canonical_name": "Хлеб пшеничный",
+      "category_code": "grains",
+      "default_unit": "g",
+      "nutrition_profile": null,
+      "composition": null
+    },
+    {
+      "canonical_code": "BUTTER_CREAM_UNSPECIFIED",
+      "canonical_name": "Масло сливочное",
+      "category_code": "fats_oils",
+      "default_unit": "g",
+      "nutrition_profile": null,
+      "composition": null
+    },
+    {
+      "canonical_code": "CHEESE_UNSPECIFIED",
+      "canonical_name": "Сыр",
+      "category_code": "dairy",
+      "default_unit": "g",
+      "nutrition_profile": null,
+      "composition": null
+    }
+  ],
+  "invariant": "Identity-only publication grants no Nutrition/Composition authority. Prepared sandwich Nutrition remains same-card prepared-output authority."
+}

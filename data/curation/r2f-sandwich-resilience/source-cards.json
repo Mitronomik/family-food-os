@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "operation": "R2F_SANDWICH_REVIEWED_SOURCE_DERIVATIVE",
+  "accepted_base": "561c13aad6ce978de399dfd807071232af06b71c",
+  "issue": 139,
+  "source": {
+    "source_code": "sad28-luppolovo-techcards-2022-23",
+    "publisher_name": "МАДОУ «Детский сад комбинированного вида № 28» д. Лупполово",
+    "publisher_official_site": "https://sad28.vsevobr.ru/",
+    "source_url": "https://sad28.vsevobr.ru/images/22-23/%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%B5/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BA%D0%B0%D1%80%D1%82%D1%8B-22-23%20%281%29.pdf",
+    "retrieved_at": "2026-10-03",
+    "source_kind": "INSTITUTION_PUBLISHED_TECH_CARD_PDF",
+    "upstream_collection": "Сборник методических рекомендаций по организации питания детей и подростков в учреждениях образования Санкт-Петербурга. СПб.: Речь, 2008, Куткина М.Н.",
+    "rights_review_status": "BOUNDED_FACTUAL_USE_REVIEWED",
+    "rights_basis": "Пользовательское решение по российскому нормативному корпусу допускает bounded structured factual recipe data with provenance; исходная издательская вёрстка, фотографии, логотипы и сторонние комментарии не сохраняются."
+  },
+  "cards": [
+    {
+      "source_recipe_id": "sad28-luppolovo:techcard:butter-sandwich:25-5",
+      "title": "Бутерброд с маслом",
+      "source_output_text": "25/5",
+      "source_output_g": "30",
+      "ingredients": [
+        {
+          "source_label": "Хлеб пшеничный",
+          "gross_g": "25",
+          "net_g": "25"
+        },
+        {
+          "source_label": "Масло сливочное (Б)",
+          "gross_g": "5",
+          "net_g": "5"
+        }
+      ],
+      "declared_nutrition": {
+        "protein_g": "2.11",
+        "fat_g": "0.98",
+        "carbohydrate_g": "12.26",
+        "energy_kcal": "66.3"
+      },
+      "process_summary": "Ломтик пшеничного хлеба покрывают сливочным маслом.",
+      "institutional_context_only": [
+        "требования к сроку реализации/подаче из карты не становятся consumer runtime rule"
+      ],
+      "canonical_record_sha256": "facf8c892a76e4ea9283ecc4e9136ed6ea1769674bc643e11aa9c1c26d428ddc",
+      "source_occurrences": {
+        "pdf_zero_based_pages": [
+          0,
+          43,
+          55
+        ]
+      }
+    },
+    {
+      "source_recipe_id": "sad28-luppolovo:techcard:cheese-sandwich:20-10",
+      "title": "Бутерброд с сыром",
+      "source_output_text": "20/10",
+      "source_output_g": "30",
+      "ingredients": [
+        {
+          "source_label": "Хлеб пшеничный",
+          "gross_g": "20",
+          "net_g": "20"
+        },
+        {
+          "source_label": "Сыр",
+          "gross_g": "11",
+          "net_g": "10"
+        }
+      ],
+      "declared_nutrition": {
+        "protein_g": "3.9",
+        "fat_g": "3.15",
+        "carbohydrate_g": "9.7",
+        "energy_kcal": "83"
+      },
+      "process_summary": "На ломтик пшеничного хлеба кладут кусочек сыра толщиной 3–4 мм.",
+      "institutional_context_only": [
+        "требования к сроку реализации/подаче из карты не становятся consumer runtime rule"
+      ],
+      "canonical_record_sha256": "2eb846cdb80737c0b4f65202beda1e352f3610c6bb6634b832901615ca3a8f97",
+      "source_occurrences": {
+        "pdf_zero_based_pages": [
+          8,
+          22,
+          36,
+          49
+        ]
+      }
+    }
+  ],
+  "qa": {
+    "method": "Published ENERGY_KCAL remains source truth; 4/9/4 from source-declared macros is cross-check only, not authority.",
+    "butter_macro_crosscheck_kcal": "66.30",
+    "butter_difference_kcal": "0.00",
+    "cheese_macro_crosscheck_kcal": "82.75",
+    "cheese_difference_kcal": "0.25"
+  },
+  "hash_scope": {
+    "algorithm": "SHA-256",
+    "canonicalization": "UTF-8 JSON, sort_keys=true, separators=(',',':'), ensure_ascii=false",
+    "excludes": [
+      "reviewed_derivative_sha256"
+    ]
+  },
+  "reviewed_derivative_sha256": "575efc619c9aaf7b2933218985ee5b73a91a4dda3e8c79ffdd55745e6033b189"
+}

@@ -1,5 +1,28 @@
 # Handoff
 
+## R2-F sandwich resilience Contract Gate active — 2026-10-03
+
+Accepted main:
+`561c13aad6ce978de399dfd807071232af06b71c` (merged PR #138).
+
+Issue #139 / branch `docs/r2f-sandwich-resilience-gate`.
+
+Goal: freeze one two-recipe SANDWICH runtime batch that closes exact
+`MILK_2_5` seven-BREAKFAST resilience with margin and adds LUNCH/SNACK role
+coverage through existing Planner compatibility.
+
+Selected:
+`SAD28_SANDWICH_BUTTER_25_5` and `SAD28_SANDWICH_CHEESE_20_10`.
+
+New identity-only:
+`WHEAT_BREAD_PLAIN`, `BUTTER_CREAM_UNSPECIFIED`, `CHEESE_UNSPECIFIED`.
+
+Do not use the rejected GBDOU №118 sandwich energy values or the deferred SAD28
+povidlo card to inflate catalogue counts.
+
+This is docs/data/source evidence only. Stop after review-ready contract PR;
+runtime requires review and merge.
+
 ## R2-E cottage casserole runtime review-ready — 2026-10-03
 
 Accepted main:

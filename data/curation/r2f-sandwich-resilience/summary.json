@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "operation": "R2F_SANDWICH_RESILIENCE_GATE_SUMMARY",
+  "accepted_base": "561c13aad6ce978de399dfd807071232af06b71c",
+  "issue": 139,
+  "selected_recipe_codes": [
+    "SAD28_SANDWICH_BUTTER_25_5",
+    "SAD28_SANDWICH_CHEESE_20_10"
+  ],
+  "source_authority_policy": "BOUNDED_INSTITUTION_PUBLISHED_TECH_CARD_REVIEW_V1",
+  "reviewed_derivative_sha256": "575efc619c9aaf7b2933218985ee5b73a91a4dda3e8c79ffdd55745e6033b189",
+  "new_identity_only_foods": [
+    "WHEAT_BREAD_PLAIN",
+    "BUTTER_CREAM_UNSPECIFIED",
+    "CHEESE_UNSPECIFIED"
+  ],
+  "prepared_energy": [
+    {
+      "recipe_code": "SAD28_SANDWICH_BUTTER_25_5",
+      "output_g": "30",
+      "energy_kcal": "66.3"
+    },
+    {
+      "recipe_code": "SAD28_SANDWICH_CHEESE_20_10",
+      "output_g": "30",
+      "energy_kcal": "83"
+    }
+  ],
+  "classification_effect": {
+    "breakfast_classification_count_after_runtime": 7,
+    "sandwich_classification_added": 2,
+    "breakfast_compatible_candidate_count_after_runtime": 9,
+    "lunch_compatible_added": 2,
+    "snack_compatible_added": 2
+  },
+  "milk_2_5_resilience": {
+    "unaffected_candidates_before": 2,
+    "capacity_before": 6,
+    "unaffected_candidates_after": 4,
+    "capacity_after": 12,
+    "required_opportunities": 7,
+    "projected_closed": true,
+    "scope": "exact canonical MILK_2_5 exclusion only; not dairy allergy"
+  },
+  "migration_required": false,
+  "planner_change_required": false,
+  "nutrition_authority_change_required": false,
+  "status": "FROZEN_FOR_RUNTIME_AFTER_REVIEW_AND_MERGE",
+  "stop_rule": "Do not start runtime publication before independent review and merge of this gate."
+}

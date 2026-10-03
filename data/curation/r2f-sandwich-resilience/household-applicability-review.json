@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "operation": "R2F_SANDWICH_HOUSEHOLD_APPLICABILITY",
+  "accepted_base": "561c13aad6ce978de399dfd807071232af06b71c",
+  "issue": 139,
+  "review_rule": {
+    "pass_requires": [
+      "ordinary non-clinical food semantics",
+      "core assembly executable with ordinary household equipment",
+      "institutional logistics separable from recipe-defining steps",
+      "no quantity/nutrition inference from household corroboration"
+    ],
+    "source_authority": "Reviewed SAD28 derivative owns quantities/output/ENERGY_KCAL; household applicability does not alter them."
+  },
+  "candidates": [
+    {
+      "source_recipe_id": "sad28-luppolovo:techcard:butter-sandwich:25-5",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "specialized_medical_scope": false,
+      "planner_classification": "sandwich",
+      "consumer_steps": [
+        "Ломтик пшеничного хлеба покрыть сливочным маслом."
+      ],
+      "quarantined_context": [
+        "institutional serving-temperature rule",
+        "institutional realization/shelf-life rule"
+      ],
+      "rationale": "No cooking transformation or institutional equipment is required; the defining operation is ordinary sandwich assembly."
+    },
+    {
+      "source_recipe_id": "sad28-luppolovo:techcard:cheese-sandwich:20-10",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "specialized_medical_scope": false,
+      "planner_classification": "sandwich",
+      "consumer_steps": [
+        "На ломтик пшеничного хлеба положить кусочек сыра толщиной 3–4 мм."
+      ],
+      "quarantined_context": [
+        "institutional serving-temperature rule",
+        "institutional realization/shelf-life rule"
+      ],
+      "rationale": "No cooking transformation or institutional equipment is required; the defining operation is ordinary sandwich assembly."
+    }
+  ]
+}
