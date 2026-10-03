@@ -33,7 +33,7 @@ Accepted base:
 
 Status:
 
-`CORRECTION_VERIFYING`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## Evidence result
 
@@ -76,8 +76,18 @@ treated as blocked by 301.2/301.3 cross-record energy variance. The correction
 restores the accepted same-card prepared-output authority rule: 301.2 kcal is the
 exact source-card candidate value; 301.3 kcal is QA-only.
 
-Correction verification is now required on the new exact head before returning
-PR #134 to final review.
+Correction evidence head:
+`21d768b243de4064292065ba10f36b9b5c900e54`.
+
+Verification:
+
+- Docs verification #793 — SUCCESS;
+- DC1 corpus verification #650 — SUCCESS;
+- corrected evidence JSON parse — PASS;
+- correction diff remains docs/data/state only;
+- runtime/schema/migration diff — none.
+
+Independent final re-review of PR #134 is next.
 
 After review and merge, make one separate bounded evidence decision:
 

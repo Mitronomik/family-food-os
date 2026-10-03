@@ -30,7 +30,15 @@ R2-D is a docs/data Contract Gate only. No runtime/data publication is authorize
 
 Independent final review found one contract blocker in the 54-1т authority
 interpretation. It has been corrected to the accepted same-card
-`PREPARED_OUTPUT_V1` rule. Reverify the correction head before final review.
+`PREPARED_OUTPUT_V1` rule.
+
+Correction evidence head:
+`21d768b243de4064292065ba10f36b9b5c900e54`.
+
+Docs #793 SUCCESS; DC1 #650 SUCCESS; corrected evidence JSON parses; no
+runtime/schema/migration diff.
+
+PR #134 is READY FOR FINAL REVIEW.
 
 After independent review/merge, separately decide whether to close the School2022
 evidence gaps or investigate a clean BREAKFAST/SANDWICH source family. Do not

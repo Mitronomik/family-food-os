@@ -33,8 +33,17 @@ Independent final review found and corrected one contract blocker: the earlier
 cross-record 301.2/301.3 treatment incorrectly overrode the accepted same-card
 `PREPARED_OUTPUT_V1` rule.
 
+Correction evidence head:
+`21d768b243de4064292065ba10f36b9b5c900e54`.
+
+Verification:
+- Docs #793 — SUCCESS;
+- DC1 #650 — SUCCESS;
+- corrected evidence JSON parse — PASS;
+- no runtime/schema/migration changes.
+
 Status:
-`CORRECTION_VERIFYING`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## R2-C breakfast grain diversity review-ready — 2026-10-03
 
