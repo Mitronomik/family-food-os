@@ -364,7 +364,8 @@ def test_r2f_milk_exclusion_seven_breakfast_week_succeeds_with_capacity_nine(dat
             if row.canonical_code in expected_codes
         }
         selected = Counter(
-            admissions[event.recipe_version_id].canonical_code for event in result.events
+            admissions[event.recipe_version_id].canonical_code
+            for event in result.events
         )
 
         assert set(selected) == MILK_UNAFFECTED_CODES
