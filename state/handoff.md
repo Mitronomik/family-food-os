@@ -1,5 +1,34 @@
 # Handoff
 
+## R2-C breakfast grain diversity active — 2026-10-03
+
+Accepted main:
+`13a81d2497737f3b275b10055cd084548be02bf3`.
+
+Issue #131 / branch `feat/r2c-breakfast-grain-diversity`.
+
+Current batch:
+- School2022 54-13к / wheat milk porridge / 200 g / 270.3 kcal;
+- School2022 54-20к / buckwheat milk porridge / 200 g / 187.3 kcal;
+- School2022 54-25.1к / rice milk porridge / 200 g / 184.5 kcal.
+
+Only one new identity-only food is introduced:
+`WHEAT_GROATS`.
+
+Existing exact identities cover buckwheat groats, reviewed rice groats, milk 2.5%,
+butter, sugar, iodized salt and water.
+
+Prepared Nutrition remains ENERGY_KCAL-only PREPARED_OUTPUT_V1.
+
+Institutional serving-temperature context is quarantined. No scalar cook-time is
+invented from source ranges.
+
+Next:
+run focused R2-C CI, correct only task-local failures, freeze exact
+runtime/evidence head and update state with the verification receipt.
+
+Do not start another corpus batch, DC4/Gate1-CLOSE or PR9 before review/merge.
+
 ## R2-B fish MAIN diversity final handoff — 2026-10-02
 
 Accepted base:
