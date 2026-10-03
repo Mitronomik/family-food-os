@@ -1,5 +1,37 @@
 # Handoff
 
+## R3-A review corrections — active verification — 2026-10-03
+
+PR #146 / Issue #144. Same gate PR; no new PR.
+
+User selected **option B**.
+
+Read:
+
+- `docs/family-food/r3a-school2022-main-batch-gate.md`;
+- `data/curation/r3a-school2022-main-batch/process-binding-review.json`.
+
+Corrected selected set = 10 cards:
+`54-1р/2р/3р/10р/11р/4м/6м/7м/8м/11м`.
+
+New identity-only foods = exactly 3:
+`COD_FILLET_RAW`, `PARSLEY_ROOT_RAW`,
+`WHEAT_BREAD_STALE_UNSPECIFIED_GRADE`.
+
+Do not restore `54-9р` or `54-18м`: both have unresolved sunflower-oil
+placement with multiple quantified fats.
+
+Runtime after gate merge remains **one PR for all ten recipes**.
+
+Publication may converge per recipe while inactive. Activation only after all ten
+are exact; all-inactive activation uses one batch-level UoW. Mixed activation
+state fails closed.
+
+Archive/PDF readback 2026-10-03: PASS for pinned sizes and SHA-256.
+
+Status:
+`REVIEW_CORRECTIONS_VERIFICATION_PENDING`.
+
 ## R3-A School2022 ten-recipe MAIN batch gate — active — 2026-10-03
 
 Accepted base:
