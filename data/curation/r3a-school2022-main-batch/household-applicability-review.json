@@ -58,21 +58,6 @@
       "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional thawing/serving wording is quarantined and does not alter quantities, output or Nutrition authority."
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-9р",
-      "canonical_code": "SCHOOL2022_54_9R_POLLOCK_SOUR_CREAM_BAKE",
-      "decision": "REVIEWED_PASS",
-      "consumer_steps": [
-        "Нарезать подготовленное филе минтая порционными кусками и слегка запечь с мукой.",
-        "Приготовить белый соус из муки, сливочного масла, воды и йодированной соли; соединить со сметаной.",
-        "Залить рыбу сметанным соусом, добавить протёртый полутвёрдый сыр, сбрызнуть маслом и запекать около 25–30 минут."
-      ],
-      "quarantined_context": [
-        "institutional thawing instruction",
-        "institutional serving-temperature rule"
-      ],
-      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional thawing/serving wording is quarantined and does not alter quantities, output or Nutrition authority."
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-10р",
       "canonical_code": "SCHOOL2022_54_10R_PINK_SALMON_TOMATO_VEGETABLES",
       "decision": "REVIEWED_PASS",
@@ -119,20 +104,6 @@
       "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional thawing/serving wording is quarantined and does not alter quantities, output or Nutrition authority."
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-18м",
-      "canonical_code": "SCHOOL2022_54_18M_BEEF_LIVER_STROGANOFF",
-      "decision": "REVIEWED_PASS",
-      "consumer_steps": [
-        "Нарезать подготовленную говяжью печень тонкими брусочками и посолить.",
-        "Кратко запечь печень, затем залить сметанным соусом и кипятить 5–7 минут.",
-        "Для соуса подсушить муку, смешать со сливочным маслом и частью сметаны, добавить соль и воду, проварить и соединить с оставшейся сметаной."
-      ],
-      "quarantined_context": [
-        "institutional serving-temperature rule"
-      ],
-      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional thawing/serving wording is quarantined and does not alter quantities, output or Nutrition authority."
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-4м",
       "canonical_code": "SCHOOL2022_54_4M_BEEF_CUTLET",
       "decision": "REVIEWED_PASS",
@@ -158,6 +129,36 @@
       ],
       "quarantined_context": [
         "institutional thawing-water instruction",
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional context is quarantined and does not alter quantities, output or Nutrition authority."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-6м",
+      "canonical_code": "SCHOOL2022_54_6M_BEEF_BITOCHEK",
+      "decision": "REVIEWED_PASS",
+      "consumer_steps": [
+        "Измельчить подготовленную говядину и соединить с черствым пшеничным хлебом без корок, замоченным в молоке.",
+        "Добавить йодированную соль, повторно измельчить, перемешать и сформовать биточки.",
+        "Запанировать в сухарях, выложить на противень, смазанный сливочным маслом, и запекать 25–30 минут при 250–280 °C до готовности."
+      ],
+      "quarantined_context": [
+        "institutional thawing instruction",
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional context is quarantined and does not alter quantities, output or Nutrition authority."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-7м",
+      "canonical_code": "SCHOOL2022_54_7M_BEEF_SCHNITZEL",
+      "decision": "REVIEWED_PASS",
+      "consumer_steps": [
+        "Измельчить подготовленную говядину и соединить с черствым пшеничным хлебом без корок, замоченным в молоке.",
+        "Добавить йодированную соль, повторно измельчить, перемешать и сформовать шницели.",
+        "Запанировать в сухарях, выложить на противень, смазанный сливочным маслом, и запекать 25–30 минут при 250–280 °C до готовности."
+      ],
+      "quarantined_context": [
+        "institutional thawing instruction",
         "institutional serving-temperature rule"
       ],
       "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional context is quarantined and does not alter quantities, output or Nutrition authority."
