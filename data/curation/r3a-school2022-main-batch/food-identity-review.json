@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "operation": "R3A_SCHOOL2022_MAIN_BATCH_FOOD_IDENTITY_REVIEW",
+  "accepted_base": "da6d1e05fd44ecc2733e1a6f472eae3e54b60604",
+  "issue": 144,
+  "new_identity_only_foods": [
+    {
+      "canonical_code": "COD_FILLET_RAW",
+      "canonical_name": "Треска, филе сырое",
+      "category_code": "fish",
+      "default_unit": "g",
+      "nutrition_profile": null,
+      "composition": null
+    },
+    {
+      "canonical_code": "CHICKEN_BREAST_FILLET_RAW",
+      "canonical_name": "Куриная грудка, филе сырое",
+      "category_code": "poultry",
+      "default_unit": "g",
+      "nutrition_profile": null,
+      "composition": null
+    },
+    {
+      "canonical_code": "CHEESE_SEMI_HARD_UNSPECIFIED",
+      "canonical_name": "Сыр полутвердый, вид не уточнён",
+      "category_code": "dairy",
+      "default_unit": "g",
+      "nutrition_profile": null,
+      "composition": null
+    },
+    {
+      "canonical_code": "PARSLEY_ROOT_RAW",
+      "canonical_name": "Петрушка, корень свежий",
+      "category_code": "vegetables",
+      "default_unit": "g",
+      "nutrition_profile": null,
+      "composition": null
+    },
+    {
+      "canonical_code": "BEEF_LIVER_RAW",
+      "canonical_name": "Печень говяжья, сырая",
+      "category_code": "meat",
+      "default_unit": "g",
+      "nutrition_profile": null,
+      "composition": null
+    }
+  ],
+  "decisions": [
+    {
+      "source_label": "треска (филе)",
+      "canonical_code": "COD_FILLET_RAW",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "basis": "Exact School2022 species/form label; no generic fish or whole-fish equivalence."
+    },
+    {
+      "source_label": "куриная грудка (филе)",
+      "canonical_code": "CHICKEN_BREAST_FILLET_RAW",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "basis": "Exact breast-fillet form; do not narrow to whole chicken category identity."
+    },
+    {
+      "source_label": "сыр полутвердый",
+      "canonical_code": "CHEESE_SEMI_HARD_UNSPECIFIED",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "basis": "Source establishes semi-hard cheese class but not variety/fat subtype."
+    },
+    {
+      "source_label": "петрушка (корень)",
+      "canonical_code": "PARSLEY_ROOT_RAW",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "basis": "Exact fresh parsley-root procurement identity."
+    },
+    {
+      "source_label": "печень говяжья",
+      "canonical_code": "BEEF_LIVER_RAW",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "basis": "Exact beef-liver identity; no generic beef equivalence."
+    },
+    {
+      "source_label": "сметана",
+      "canonical_code": "SOUR_CREAM_15",
+      "decision": "REUSE_ACCEPTED_IDENTITY",
+      "basis": "School2022 §1.4 source-form evidence already pins 15% sour cream in accepted R2-E evidence."
+    },
+    {
+      "source_label": "молоко",
+      "canonical_code": "MILK_2_5",
+      "decision": "REUSE_ACCEPTED_IDENTITY",
+      "basis": "Accepted School2022 recipe-level/procurement evidence pins 2.5% without narrower heat-treatment subtype."
+    },
+    {
+      "source_label": "хлеб пшеничный",
+      "canonical_code": "WHEAT_BREAD_PLAIN",
+      "decision": "REUSE_FOR_FISH_CUTLETS",
+      "basis": "Fish cutlet cards/process do not establish stale/high-grade subtype."
+    },
+    {
+      "source_label": "пшеничный черствый хлеб",
+      "canonical_code": "WHEAT_BREAD_HIGH_GRADE_STALE",
+      "decision": "REUSE_FOR_CHICKEN_AND_BEEF_MEATBALLS",
+      "basis": "Source process explicitly pins stale wheat bread; accepted R1-G identity carries high-grade process qualifier."
+    },
+    {
+      "source_label": "горбуша (филе)",
+      "canonical_code": "PINK_SALMON_FILLET_RAW",
+      "decision": "REUSE_ACCEPTED_IDENTITY"
+    },
+    {
+      "source_label": "минтай (филе)",
+      "canonical_code": "POLLOCK_FILLET_RAW",
+      "decision": "REUSE_ACCEPTED_IDENTITY"
+    },
+    {
+      "source_label": "говядина 1 категории",
+      "canonical_code": "BEEF_CATEGORY_1_RAW",
+      "decision": "REUSE_ACCEPTED_IDENTITY"
+    }
+  ],
+  "invariant": "Identity-only publication grants no NutritionProfile or Composition authority. Prepared-output recipe authority remains the only Nutrition path for this batch."
+}

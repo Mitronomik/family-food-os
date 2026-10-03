@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "operation": "R3A_SCHOOL2022_MAIN_BATCH_CANDIDATE_SELECTION",
+  "accepted_base": "da6d1e05fd44ecc2733e1a6f472eae3e54b60604",
+  "issue": 144,
+  "status": "FROZEN_FOR_GATE_REVIEW",
+  "objective": "Publish a first enlarged DC3 batch with materially broader household MAIN variety using one School2022 source family and the existing PREPARED_OUTPUT_V1 seam.",
+  "selected": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-1р",
+      "canonical_code": "SCHOOL2022_54_1R_COD_CUTLET",
+      "canonical_name": "Котлета рыбная из трески",
+      "meal_type_code": "main",
+      "source_pdf_page": 96,
+      "source_output_g": "100",
+      "prepared_energy_kcal": "112.6",
+      "required_food_codes": [
+        "COD_FILLET_RAW",
+        "WHEAT_BREAD_PLAIN",
+        "EGG",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED",
+        "WATER"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2р",
+      "canonical_code": "SCHOOL2022_54_2R_PINK_SALMON_CUTLET",
+      "canonical_name": "Котлета рыбная из горбуши",
+      "meal_type_code": "main",
+      "source_pdf_page": 97,
+      "source_output_g": "100",
+      "prepared_energy_kcal": "163.6",
+      "required_food_codes": [
+        "PINK_SALMON_FILLET_RAW",
+        "WHEAT_BREAD_PLAIN",
+        "EGG",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED",
+        "WATER"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-3р",
+      "canonical_code": "SCHOOL2022_54_3R_POLLOCK_CUTLET",
+      "canonical_name": "Котлета рыбная из минтая",
+      "meal_type_code": "main",
+      "source_pdf_page": 98,
+      "source_output_g": "100",
+      "prepared_energy_kcal": "114.2",
+      "required_food_codes": [
+        "POLLOCK_FILLET_RAW",
+        "WHEAT_BREAD_PLAIN",
+        "EGG",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED",
+        "WATER"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-9р",
+      "canonical_code": "SCHOOL2022_54_9R_POLLOCK_SOUR_CREAM_BAKE",
+      "canonical_name": "Минтай, запечённый в сметанном соусе",
+      "meal_type_code": "main",
+      "source_pdf_page": 104,
+      "source_output_g": "80",
+      "prepared_energy_kcal": "236.6",
+      "required_food_codes": [
+        "POLLOCK_FILLET_RAW",
+        "SOUR_CREAM_15",
+        "CHEESE_SEMI_HARD_UNSPECIFIED",
+        "SUNFLOWER_OIL",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "FLOUR_WHEAT_HIGH_GRADE",
+        "SALT_IODIZED",
+        "WATER"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-10р",
+      "canonical_code": "SCHOOL2022_54_10R_PINK_SALMON_TOMATO_VEGETABLES",
+      "canonical_name": "Горбуша, тушенная в томате с овощами",
+      "meal_type_code": "main",
+      "source_pdf_page": 105,
+      "source_output_g": "70",
+      "prepared_energy_kcal": "134.3",
+      "required_food_codes": [
+        "PINK_SALMON_FILLET_RAW",
+        "CARROT_RED_RAW",
+        "ONION_BULB_FRESH",
+        "TOMATO_PUREE_PASTE",
+        "PARSLEY_ROOT_RAW",
+        "SUGAR",
+        "SUNFLOWER_OIL",
+        "SALT_IODIZED",
+        "WATER"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-5м",
+      "canonical_code": "SCHOOL2022_54_5M_CHICKEN_CUTLET",
+      "canonical_name": "Котлета из курицы",
+      "meal_type_code": "main",
+      "source_pdf_page": 118,
+      "source_output_g": "75",
+      "prepared_energy_kcal": "126.4",
+      "required_food_codes": [
+        "CHICKEN_BREAST_FILLET_RAW",
+        "MILK_2_5",
+        "WHEAT_BREAD_HIGH_GRADE_STALE",
+        "BREADCRUMBS",
+        "SUNFLOWER_OIL",
+        "SALT_IODIZED",
+        "WATER"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-8м",
+      "canonical_code": "SCHOOL2022_54_8M_STEAMED_BEEF_MEATBALLS",
+      "canonical_name": "Тефтели из говядины паровые",
+      "meal_type_code": "main",
+      "source_pdf_page": 120,
+      "source_output_g": "60",
+      "prepared_energy_kcal": "117.1",
+      "required_food_codes": [
+        "BEEF_CATEGORY_1_RAW",
+        "ONION_BULB_FRESH",
+        "WHEAT_BREAD_HIGH_GRADE_STALE",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED",
+        "WATER"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-11м",
+      "canonical_code": "SCHOOL2022_54_11M_BEEF_PILAF",
+      "canonical_name": "Плов из отварной говядины",
+      "meal_type_code": "main",
+      "source_pdf_page": 123,
+      "source_output_g": "200",
+      "prepared_energy_kcal": "348.3",
+      "required_food_codes": [
+        "RICE_GROATS",
+        "BEEF_CATEGORY_1_RAW",
+        "CARROT_RED_RAW",
+        "ONION_BULB_FRESH",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED",
+        "WATER"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-12м",
+      "canonical_code": "SCHOOL2022_54_12M_CHICKEN_PILAF",
+      "canonical_name": "Плов с курицей",
+      "meal_type_code": "main",
+      "source_pdf_page": 124,
+      "source_output_g": "200",
+      "prepared_energy_kcal": "314.6",
+      "required_food_codes": [
+        "RICE_GROATS",
+        "CHICKEN_BREAST_FILLET_RAW",
+        "CARROT_RED_RAW",
+        "ONION_BULB_FRESH",
+        "TOMATO_PUREE_PASTE",
+        "SUNFLOWER_OIL",
+        "SALT_IODIZED",
+        "WATER"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-18м",
+      "canonical_code": "SCHOOL2022_54_18M_BEEF_LIVER_STROGANOFF",
+      "canonical_name": "Печень говяжья по-строгановски",
+      "meal_type_code": "main",
+      "source_pdf_page": 129,
+      "source_output_g": "80",
+      "prepared_energy_kcal": "189.2",
+      "required_food_codes": [
+        "BEEF_LIVER_RAW",
+        "SOUR_CREAM_15",
+        "FLOUR_WHEAT_HIGH_GRADE",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SUNFLOWER_OIL",
+        "SALT_IODIZED",
+        "WATER"
+      ]
+    }
+  ],
+  "exclusions": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-15м",
+      "disposition": "DEFER_UNQUANTIFIED_PROCESS_INPUTS",
+      "reason": "Process uses water and bay leaf while the ingredient table does not quantify either; no inference allowed."
+    },
+    {
+      "source_recipe_ids": [
+        "ru-school2022:recipe:54-4м",
+        "ru-school2022:recipe:54-6м",
+        "ru-school2022:recipe:54-7м"
+      ],
+      "disposition": "DEFER_LOW_MARGINAL_VARIETY",
+      "reason": "Near-identical beef cutlet-family formulae; R3-A prioritizes broader preparation/species variety."
+    }
+  ],
+  "projected_effect": {
+    "active_main_before_r3a": 5,
+    "selected_main_additions": 10,
+    "projected_active_main_after": 15,
+    "max_recipe_repetitions": 3,
+    "main_capacity_after": 45,
+    "planner_change_required": false
+  }
+}
