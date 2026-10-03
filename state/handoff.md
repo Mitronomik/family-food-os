@@ -19,8 +19,14 @@ fresh/replay/conflict/rollback contract.
 Do not publish runtime data, add migration 0043, alter Planner, broaden Nutrition
 authority or start DC4/Gate1-CLOSE/PR9.
 
+Evidence/content freeze:
+`aa8d46aed4d7283d1fe95090996eff76cf396624`.
+
+Docs #835 and DC1 #692 are SUCCESS. Structural/source/identity/household/Nutrition
+audits for the exact 10-card batch pass.
+
 Status:
-`CONTRACT_GATE_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## R2-F cheese-sandwich runtime — active — 2026-10-03
 
