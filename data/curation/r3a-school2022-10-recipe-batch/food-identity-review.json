@@ -82,5 +82,27 @@
       "basis": "Source explicitly says parsley root; parsley leaf/dried herb identities are not equivalent."
     }
   ],
-  "invariant": "Identity-only publication grants no NutritionProfile or Composition authority. Existing FoodIngredient reuse must not narrow source semantics."
+  "invariant": "Identity-only publication grants no NutritionProfile or Composition authority. Existing FoodIngredient reuse must not narrow source semantics.",
+  "reused_food_evidence": {
+    "BEEF_CATEGORY_1_RAW": "backend/app/seed/r1h_school2022_main.py",
+    "BREADCRUMBS": "data/seed/food_ingredients/ingredients.csv",
+    "BUTTER_PEASANT_72_5_UNSALTED": "backend/app/seed/ru_school2022_step9_recipe.py",
+    "CARROT": "data/seed/food_ingredients/ingredients.csv",
+    "EGG": "data/seed/food_ingredients/ingredients.csv",
+    "FLOUR_WHEAT_HIGH_GRADE": "backend/app/seed/ru_nut_db_r1a.py",
+    "GREEN_PEAS_CANNED": "data/seed/food_ingredients/ingredients.csv",
+    "MILK_2_5": "backend/app/seed/r2_breakfast_capacity.py",
+    "ONION_BULB_FRESH": "backend/app/seed/ru_nut_db_r1a.py",
+    "PINK_SALMON_FILLET_RAW": "backend/app/seed/r2b_fish_main_diversity.py",
+    "POLLOCK_FILLET_RAW": "backend/app/seed/r2b_fish_main_diversity.py",
+    "RICE_GROATS": "backend/app/seed/ru_nut_db_step4.py",
+    "SALT_IODIZED": "backend/app/seed/r1h_school2022_main.py",
+    "SEMOLINA_GROATS": "backend/app/seed/r2e_cottage_casserole.py",
+    "SOUR_CREAM_15": "backend/app/seed/r2e_cottage_casserole.py",
+    "SUGAR": "data/seed/food_ingredients/ingredients.csv",
+    "TVOROG_5": "backend/app/seed/r2e_cottage_casserole.py",
+    "WATER": "data/seed/food_ingredients/ingredients.csv",
+    "WHEAT_BREAD_PLAIN": "backend/app/seed/r2f_cheese_sandwich.py"
+  },
+  "reuse_review_note": "All 19 reused canonical codes are already present in accepted repository seed/runtime paths. This gate reuses identity only; it does not grant or widen Nutrition/Composition authority."
 }
