@@ -20,7 +20,11 @@
       ],
       "semantics": "Bind the exact total ingredient identity to the named operations without inventing an internal gram split."
     },
-    "multiple_fat_unresolved": "REJECT_FROM_BATCH"
+    "multiple_fat_unresolved": "REJECT_FROM_BATCH",
+    "non_fat_process_input_binding": {
+      "rule": "An exact ingredient total remains authoritative independently from process placement. A named process use may be retained, but unmentioned uses and per-step gram splits remain UNKNOWN; presence in the ingredient table alone never authorizes an inferred placement.",
+      "unresolved_step_quantity": "UNKNOWN"
+    }
   },
   "selected": [
     {
@@ -79,14 +83,16 @@
       "status": "PASS_SINGLE_FAT_SAME_CARD_BINDING",
       "fat": "BUTTER_PEASANT_72_5_UNSALTED",
       "water": "WATER",
-      "rule": "Butter is the only cooking-fat row and is bound to the unqualified onion sauté operation. Exact 12 g water total covers source bread-soaking / rack-wetting use; per-operation split remains UNKNOWN."
+      "rule": "Butter is the only cooking-fat row and may bind to the unqualified onion sauté operation. The exact 12 g WATER ingredient total remains authoritative; the source explicitly places water only at rack wetting, while the liquid used to pre-soak bread is UNKNOWN. Do not allocate grams between operations without source evidence.",
+      "water_binding": "PARTIAL_SOURCE_PLACEMENT"
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-11м",
       "status": "PASS_EXPLICIT_PROCESS_BINDING",
       "fat": "BUTTER_PEASANT_72_5_UNSALTED",
       "water": "WATER",
-      "rule": "Source explicitly says onion/carrot are sautéed in butter with added water; remaining recipe cooking follows the source card."
+      "rule": "The source explicitly places butter and water in the onion/carrot sauté. The exact 313 g WATER ingredient total remains authoritative, but no per-operation gram split is stated. The subsequent weak-boil and covered oven-finish process must be preserved in consumer steps.",
+      "water_binding": "SOURCE_PLACED_TOTAL_UNSPLIT"
     }
   ],
   "rejected": [
