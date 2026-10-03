@@ -220,7 +220,7 @@ def _load_contract(
         or not isinstance(process_rows, list)
         or not isinstance(source_pages, list)
     ):
-        raise ValueError("R3-A contract collections changed.")
+        raise TypeError("R3-A contract collections changed.")
 
     selected_codes = tuple(row.get("canonical_code") for row in selected)
     selected_source_ids = tuple(row.get("source_recipe_id") for row in selected)
