@@ -51,16 +51,16 @@
       "energy_kcal": "249.5"
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-3т",
-      "pdf_page": 91,
-      "output_g": "150",
-      "energy_kcal": "200.9"
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-1к",
       "pdf_page": 50,
       "output_g": "200",
       "energy_kcal": "207.9"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2к",
+      "pdf_page": 50,
+      "output_g": "200",
+      "energy_kcal": "287.8"
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-6к",
@@ -75,16 +75,16 @@
       "energy_kcal": "168.9"
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-21к",
-      "pdf_page": 64,
-      "output_g": "200",
-      "energy_kcal": "249.1"
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-23к",
       "pdf_page": 66,
       "output_g": "200",
       "energy_kcal": "208.3"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-24к",
+      "pdf_page": 66,
+      "output_g": "200",
+      "energy_kcal": "274.9"
     }
   ],
   "rights": {
@@ -95,14 +95,28 @@
     "ru-school2022:recipe:54-2о",
     "ru-school2022:recipe:54-3о",
     "ru-school2022:recipe:54-4о",
-    "ru-school2022:recipe:54-2т",
-    "ru-school2022:recipe:54-3т"
+    "ru-school2022:recipe:54-2т"
   ],
   "newly_reviewed_for_r3b": [
     "ru-school2022:recipe:54-1к",
+    "ru-school2022:recipe:54-2к",
     "ru-school2022:recipe:54-6к",
     "ru-school2022:recipe:54-16к",
-    "ru-school2022:recipe:54-21к",
-    "ru-school2022:recipe:54-23к"
+    "ru-school2022:recipe:54-23к",
+    "ru-school2022:recipe:54-24к"
+  ],
+  "rejected_process_placement": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-3т",
+      "reason": "quantified sugar not placed by technology"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-21к",
+      "reason": "quantified sugar not placed by technology"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-22к",
+      "reason": "quantified butter not placed by technology"
+    }
   ]
 }
