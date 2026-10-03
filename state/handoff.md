@@ -24,7 +24,13 @@ School2022 receipt.
 Future runtime must reuse merged R3-A option B in one PR. No migration/schema/
 Planner/new-authority change.
 
-Status: `GATE_CONTENT_FROZEN_PENDING_VERIFICATION`.
+Content freeze: `f72c7c51d6758dcb11573ab88e49d51272d80e73`.
+
+Verification: cross-file/source/process audit PASS; Docs #876 SUCCESS; DC1 #733 SUCCESS.
+
+Status: `READY_FOR_FINAL_REVIEW`.
+
+Do not start runtime before independent review and merge of PR #150.
 
 ## R3-A runtime — review-ready — 2026-10-04
 

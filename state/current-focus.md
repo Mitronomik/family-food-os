@@ -25,7 +25,7 @@ Branch: `docs/r3b-school2022-breakfast-batch-gate`.
 
 Accepted base: `69c68f4153b25ac4e51cbe9ff54fb080201f08bd`.
 
-Status: `GATE_CONTENT_FROZEN_PENDING_VERIFICATION`.
+Status: `READY_FOR_FINAL_REVIEW`.
 
 Canonical gate:
 
@@ -69,4 +69,19 @@ Independent Library materialize/hash readback on 2026-10-04:
 - ZIP 206692075 bytes / `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
 - PDF 4102547 bytes / `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`.
 
-Gate cross-file and Docs/DC1 verification pending.
+Content freeze:
+
+`f72c7c51d6758dcb11573ab88e49d51272d80e73`.
+
+Verification on content freeze:
+
+- selection/spec/household/process/source alignment 10/10 — PASS;
+- exact source gross/net ingredient rows 10/10 — PASS;
+- exact source output + same-card ENERGY_KCAL 10/10 — PASS;
+- exactly 3 identity-only foods, no Nutrition/Composition — PASS;
+- process-placement adversarial audit — PASS;
+- durable ZIP/PDF materialize + SHA-256 — PASS;
+- Docs #876 — SUCCESS;
+- DC1 #733 — SUCCESS.
+
+Runtime remains blocked until independent review and merge of PR #150.
