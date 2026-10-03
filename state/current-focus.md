@@ -8,13 +8,8 @@ PR #142 / R2-F runtime is merged into `main` at:
 
 `da6d1e05fd44ecc2733e1a6f472eae3e54b60604`.
 
-Accepted production Planner catalogue now includes the R2-F cheese sandwich;
-hard exact `MILK_2_5` seven-BREAKFAST resilience is proven at three unaffected
-candidates × repetition 3 = capacity 9.
-
-DATA-CORPUS-V1 / DC3 remains active. The canonical DC3 batch guidance is
-~10–20 recipes; after the merged micro-publication sequence, the next operation
-is intentionally enlarged.
+DATA-CORPUS-V1 / DC3 remains active. The project has intentionally moved from
+single-recipe micro-publication to enlarged reviewable recipe batches.
 
 ## Current bounded operation
 
@@ -32,87 +27,84 @@ Accepted base:
 
 Status:
 
-`READY_FOR_FINAL_REVIEW`.
+`REVIEW_CORRECTIONS_VERIFICATION_PENDING`.
 
-Canonical contract under review:
+Canonical contract:
 
 `docs/family-food/r3a-school2022-main-batch-gate.md`.
 
-## Goal
+## Frozen batch after independent review corrections
 
-Freeze one reviewable DC3 batch of exactly 10 School2022 MAIN RecipeVersions,
-using one source family and the existing
-`PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1` seam.
+Exactly 10 School2022 MAIN cards remain selected:
 
-No runtime publication is authorized until this gate is independently reviewed
-and merged.
+- `54-1р`, `54-2р`, `54-3р`;
+- `54-10р`, `54-11р`;
+- `54-4м`, `54-6м`, `54-7м`, `54-8м`, `54-11м`.
 
-## Batch boundary
+New identity-only FoodIngredients are exactly:
 
-Selected cards are frozen in:
+- `COD_FILLET_RAW`;
+- `PARSLEY_ROOT_RAW`;
+- `WHEAT_BREAD_STALE_UNSPECIFIED_GRADE`.
 
-`data/curation/r3a-school2022-main-batch/candidate-selection.json`.
+No NutritionProfile or Composition authority is granted.
 
-The batch:
+## Review corrections
 
-- contains exactly 10 unique MAIN cards;
-- creates exactly 5 identity-only FoodIngredients;
-- reuses existing accepted identities for all remaining rows;
-- publishes only ENERGY_KCAL in future runtime; other 53 nutrient codes remain UNKNOWN;
-- requires no migration/schema/Planner/new-authority change.
+The user explicitly selected transaction **option B**.
 
-Fail-closed source review removed School2022 `54-5м` and `54-12м` because
-their ingredient tables name sunflower oil while process text names butter for
-the corresponding operation. `54-15м` remains deferred because process water
-and bay leaf are not quantified in the ingredient table.
+Future runtime remains one PR for the whole batch:
+
+1. publish each inactive RecipeVersion + prepared authority atomically per recipe;
+2. partial exact **inactive** publication is allowed after a failure;
+3. rerun is zero-write for exact rows and converges missing rows;
+4. publication never activates recipes;
+5. activation starts only after all 10 exact publications pass full-batch preflight;
+6. all-inactive activation uses one batch-level caller-owned UoW and one commit;
+7. all-active activation is zero-write replay;
+8. mixed active/inactive activation fails closed;
+9. any activation failure rolls back the whole activation UoW.
+
+No extra recipe PRs or activation PR are required.
+
+Process-placement audit is frozen in:
+
+`data/curation/r3a-school2022-main-batch/process-binding-review.json`.
+
+`54-9р` and `54-18м` were removed because both have multiple quantified fats
+while sunflower-oil placement is unresolved in technology. They were replaced
+inside the same batch by source-clean `54-6м` and `54-7м`.
+
+Single-fat same-card binding is allowed only when exactly one cooking fat exists
+and technology has an otherwise unqualified fat-consuming operation. Exact total
+grams remain authoritative; any internal per-step split remains UNKNOWN.
 
 ## Source boundary
 
-Reuse accepted School2022 evidence only:
+Durable archive was independently re-materialized and re-hashed on 2026-10-03:
 
-- PDF SHA-256:
-  `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`;
-- durable archive:
-  `private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`;
-- archive SHA-256:
+- Library file id: `libfile_26d95a7a50108191944b97db85a5c008`;
+- ZIP size: 206692075 bytes;
+- ZIP SHA-256:
   `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
-- latest accepted independent archive verification remains 2026-10-01.
+- embedded School2022 PDF size: 4102547 bytes;
+- PDF SHA-256:
+  `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`.
 
-This gate does not claim a new archive readback. Public PDF recheck is
-corroboration only.
+Both match pinned authority receipts.
 
 ## Scope boundaries
 
 Do not:
 
-- publish/activate R3-A runtime data;
+- publish/activate R3-A runtime data before this gate merges;
 - add migration 0043 or schema changes;
 - change Planner mapping/scoring/repetition;
 - add a new Nutrition authority;
-- add Nutrition/Composition to the five new identities;
-- resolve source contradictions by inference;
+- add Nutrition/Composition to new identities;
+- resolve process/source ambiguity by inference outside the frozen binding rule;
+- split the ten recipes into separate PRs;
 - start DC4/Gate1-CLOSE/PR9;
 - start Shopping/Prep/Retail/API/UI/Auth/PostgreSQL/AI.
 
-After the gate is review-ready, stop for independent review.
-
-## Gate verification
-
-Content freeze:
-
-`36d12b03d4aa11b52616bf59d176a7a817e0d74d`.
-
-Verified:
-
-- 10 unique selected School2022 MAIN cards — PASS;
-- selected/spec/household/source-page cross-reference — PASS;
-- exact output/kcal agreement inside frozen contract — PASS;
-- exactly 5 identity-only FoodIngredients — PASS;
-- rejected/deferred cards absent from selected set — PASS;
-- no chicken identity drift / no unsafe high-grade stale-bread narrowing — PASS;
-- ENERGY_KCAL-only + 53 UNKNOWN nutrient partition — PASS;
-- accepted School2022 PDF/archive receipt reused without false new-readback claim — PASS;
-- Docs verification #839 — SUCCESS;
-- DC1 corpus verification #696 — SUCCESS.
-
-Only state files change after this content freeze. Runtime remains unauthorized until independent review and merge of PR #146.
+After review corrections verify green, stop for independent review.
