@@ -4,7 +4,6 @@ from datetime import date
 from decimal import Decimal
 
 import pytest
-
 from app.db import migrations
 from app.db.config import DatabaseConfig
 from app.domain.meal_patterns import MealRole
