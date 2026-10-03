@@ -33,7 +33,7 @@ Canonical contract:
 
 `docs/family-food/r3a-school2022-main-batch-gate.md`.
 
-## Frozen batch after independent review corrections
+## Frozen batch after final review corrections
 
 Exactly 10 School2022 MAIN cards remain selected:
 
@@ -49,47 +49,48 @@ New identity-only FoodIngredients are exactly:
 
 No NutritionProfile or Composition authority is granted.
 
-## Review corrections
+## Transaction decision — option B
 
-The user explicitly selected transaction **option B**.
-
-Future runtime remains one PR for the whole batch:
+The future runtime remains one PR for the whole batch:
 
 1. publish each inactive RecipeVersion + prepared authority atomically per recipe;
-2. partial exact **inactive** publication is allowed after a failure;
+2. a publication failure may leave only an exact inactive subset;
 3. rerun is zero-write for exact rows and converges missing rows;
-4. publication never activates recipes;
-5. activation starts only after all 10 exact publications pass full-batch preflight;
-6. all-inactive activation uses one batch-level caller-owned UoW and one commit;
-7. all-active activation is zero-write replay;
-8. mixed active/inactive activation fails closed;
-9. any activation failure rolls back the whole activation UoW.
+4. activation starts only after all ten exact publications pass full-batch preflight;
+5. all inactive -> activate all ten in one caller-owned UoW / one commit;
+6. all active -> zero-write replay;
+7. mixed active/inactive -> fail closed;
+8. any pre-commit activation failure rolls back the whole activation UoW.
 
-No extra recipe PRs or activation PR are required.
+The existing single-recipe prepared-activation path owns an inner commit, so it
+must not be looped ten times. The same runtime PR is authorized to extract/add a
+transaction-neutral activation-policy + in-scope mutation seam, with all fallible
+batch admission validation completed before the single commit. Existing
+single-recipe behavior must remain regression-safe. No extra activation PR is
+required.
 
-Process-placement audit is frozen in:
+## Final independent-review source corrections
 
-`data/curation/r3a-school2022-main-batch/process-binding-review.json`.
-
-`54-9р` and `54-18м` were removed because both have multiple quantified fats
-while sunflower-oil placement is unresolved in technology. They were replaced
-inside the same batch by source-clean `54-6м` and `54-7м`.
-
-Single-fat same-card binding is allowed only when exactly one cooking fat exists
-and technology has an otherwise unqualified fat-consuming operation. Exact total
-grams remain authoritative; any internal per-step split remains UNKNOWN.
+- `54-8м`: the source does not identify the liquid used to pre-soak stale bread.
+  `WATER=12 g` remains exact at recipe level; explicit water placement is rack
+  wetting; any other placement and per-step gram split stay UNKNOWN.
+- `54-11м`: consumer steps retain the source-backed 5–10 minute weak boil and
+  covered 160 °C / 30–40 minute oven finish. `WATER=313 g` remains exact without
+  an invented per-step split.
+- stale `SOUR_CREAM_15` / flour dependency wording is removed from the final
+  selected-batch inventory.
+- `54-9р` and `54-18м` remain rejected for unresolved multiple-fat placement;
+  source-clean `54-6м` and `54-7м` remain their replacements.
 
 ## Source boundary
 
-Durable archive was independently re-materialized and re-hashed on 2026-10-03:
+Durable archive independently re-materialized/re-hashed on 2026-10-03:
 
 - Library file id: `libfile_26d95a7a50108191944b97db85a5c008`;
 - ZIP size: 206692075 bytes;
-- ZIP SHA-256:
-  `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
+- ZIP SHA-256: `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
 - embedded School2022 PDF size: 4102547 bytes;
-- PDF SHA-256:
-  `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`.
+- PDF SHA-256: `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`.
 
 Both match pinned authority receipts.
 
@@ -102,36 +103,32 @@ Do not:
 - change Planner mapping/scoring/repetition;
 - add a new Nutrition authority;
 - add Nutrition/Composition to new identities;
-- resolve process/source ambiguity by inference outside the frozen binding rule;
 - split the ten recipes into separate PRs;
+- create a separate activation PR;
 - start DC4/Gate1-CLOSE/PR9;
 - start Shopping/Prep/Retail/API/UI/Auth/PostgreSQL/AI.
 
-After review corrections verify green, stop for independent review.
-
-
-## Corrected gate verification
+## Review-correction verification
 
 Corrected content freeze:
 
-`39c1f3e8809e9fd42e6ea061554f81cf3b1c35e6`.
+`6ee960e979666e939ec7bed87bca1f70f3ed1ae4`.
 
-Exact-head evidence:
+Local/read-only audit on that content:
 
-- 10 unique selected School2022 MAIN cards — PASS;
-- candidate/spec/household/process-binding/source-page sets align — PASS;
+- selected/spec/household/process/source sets align 10/10 — PASS;
 - exactly 3 identity-only FoodIngredients — PASS;
-- `54-5м/54-9р/54-12м/54-15м/54-18м` absent from selected set — PASS;
-- `54-6м/54-7м` clean replacements present — PASS;
-- process-binding disposition exists for all 10 selected cards — PASS;
-- no per-step gram split invented — PASS;
-- option-B publication semantics frozen — PASS;
-- batch activation semantics frozen: all-inactive one-UoW, all-active replay,
-  mixed fail-closed — PASS;
-- fresh 2026-10-03 durable archive + embedded PDF readback/hash — PASS;
-- ENERGY_KCAL-only + 53 UNKNOWN nutrient partition — PASS;
-- Docs #851 — SUCCESS;
-- DC1 #708 — SUCCESS.
+- old `54-8м` water-soak inference removed — PASS;
+- old `54-11м` `частью воды` inference removed — PASS;
+- source-backed 54-11м timing/temperature restored — PASS;
+- transaction-neutral batch activation seam frozen — PASS;
+- ENERGY_KCAL-only + 53 UNKNOWN partition preserved — PASS;
+- durable ZIP/PDF size + SHA-256 readback — PASS.
 
-Only state files change after this corrected content freeze. Runtime remains
-blocked until independent review and merge of PR #146.
+Exact-head Docs/DC1 verification is pending after the state update.
+
+Status:
+
+`REVIEW_CORRECTIONS_APPLIED_PENDING_VERIFICATION`.
+
+Runtime remains blocked until PR #146 is independently re-reviewed and merged.
