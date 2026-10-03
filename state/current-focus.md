@@ -38,7 +38,7 @@ Accepted base:
 
 Status:
 
-`IMPLEMENTATION_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 Canonical contract:
 
@@ -102,3 +102,30 @@ Do not:
 After this runtime PR is independently reviewed and merged, reassess DATA-CORPUS
 readiness and move to larger R3 recipe batches (target ~10–12 recipes first)
 rather than returning to one-recipe publication by default.
+
+## Runtime verification
+
+Runtime freeze:
+
+`a84395cfff2923881f78048b976f358333726419`.
+
+Exact runtime-head verification:
+
+- R2-F cheese sandwich runtime #4 — SUCCESS;
+- focused/affected suite — 169 passed;
+- Ruff check — SUCCESS;
+- Ruff format --check — SUCCESS;
+- scope/whitespace — SUCCESS;
+- exact two identity-only FoodIngredients / no butter identity — PASS;
+- retained raw-card hash/size and tamper enforcement — PASS;
+- 30 g / exact 83 kcal + 53 UNKNOWN nutrients — PASS;
+- fresh RecipeVersion + prepared authority atomicity — PASS;
+- exact replay / deliberate-deactivation preservation — PASS;
+- partial / identity / wrong-energy / injected-failure paths fail closed — PASS;
+- existing sandwich compatibility reused without Planner mapping change — PASS;
+- hard exact `MILK_2_5` persisted seven-BREAKFAST week succeeds with capacity 9 — PASS;
+- migration head 0042 / no 0043 — PASS;
+- `AI_ENABLED=false` — PASS;
+- Docs #830 / DC1 #687 / R1-C #87 / R2 #71 / R2-B #61 / R2-C #49 / R2-E #32 — SUCCESS.
+
+Only state files change after this freeze. Do not start R3 before independent review and merge of PR #142.
