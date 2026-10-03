@@ -201,6 +201,10 @@ def test_r2c_fresh_publication_adds_three_grain_breakfasts_without_rewriting_cor
             assert detail.version.source_name == "ru-school2022"
             assert detail.version.source_output_g == Decimal(200)
             assert detail.version.cook_time_minutes is None
+            if code == RICE_RECIPE_CODE:
+                assert detail.ingredients[0].source_amount_text == (
+                    "крупа рисовая: брутто 30,8 г; нетто 30,8 г"
+                )
             assert all(
                 "Температура подачи" not in step.instruction for step in detail.steps
             )
