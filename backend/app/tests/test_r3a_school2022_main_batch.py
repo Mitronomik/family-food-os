@@ -205,8 +205,24 @@ def create_dinner_household(households, meal_plans):
         household_id=household.id,
         member_id=member.id,
         source_kind=MemberMealPatternSourceKind.CUSTOM,
-        schedule={1: (MealRole.DINNER,)},
-        energy_shares={1: (Decimal("0.35"),)},
+        schedule={
+            1: (MealRole.DINNER,),
+            2: (),
+            3: (),
+            4: (),
+            5: (),
+            6: (),
+            7: (),
+        },
+        energy_shares={
+            1: (Decimal("0.35"),),
+            2: (),
+            3: (),
+            4: (),
+            5: (),
+            6: (),
+            7: (),
+        },
     )
     return household, member, selection
 
