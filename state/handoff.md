@@ -1,42 +1,48 @@
 # Handoff
 
-## R3-A runtime — active — 2026-10-03
+## R3-A runtime — review-ready — 2026-10-04
 
 Accepted main:
 `e152b357528bb000cf5cf16e792a0d31b983f117` (merged PR #146).
 
-Issue #147 / branch `feat/r3a-school2022-main-batch-runtime`.
+Issue #147 / branch `feat/r3a-school2022-main-batch-runtime` / PR #148.
 
-Read first:
+Runtime freeze:
+`6887b58e2331c1324a8269c4f8778a4ef3a0b143`.
 
-- `docs/family-food/r3a-school2022-main-batch-gate.md`;
-- `data/curation/r3a-school2022-main-batch/publication-specs.json`;
-- `data/curation/r3a-school2022-main-batch/process-binding-review.json`.
+Delivered one runtime PR for exactly ten MAIN RecipeVersions and exactly three
+identity-only FoodIngredients.
 
-Implement one runtime PR for exactly ten MAIN recipes and exactly three
-identity-only foods.
-
-Option B is mandatory:
+Option B is implemented:
 
 - per-recipe atomic inactive publication;
-- partial inactive subset may remain after failure;
-- rerun converges missing rows;
+- partial exact inactive subset allowed after failure;
+- rerun converges missing rows with exact rows zero-write;
 - activation waits for all ten exact publications;
-- one batch-level activation UoW / one commit;
-- all-active replay zero-write;
-- mixed state fail closed;
-- activation failure rolls back the whole UoW;
-- do not loop the commit-owning single-recipe guard.
+- all-inactive activation uses one batch UoW / one commit;
+- all-active replay is zero-write;
+- mixed active/inactive fails closed;
+- activation failure rolls back all staged writes;
+- existing single-recipe activation remains regression-safe.
 
-Source corrections to preserve:
+Source corrections preserved: 54-8м pre-soak liquid UNKNOWN; 54-11м exact
+5–10 minute weak boil + 160 °C / 30–40 minute covered oven finish.
 
-- 54-8м pre-soak liquid UNKNOWN;
-- 54-11м 5–10 minute weak boil + 160 °C / 30–40 minute covered oven finish.
+Verification on runtime freeze:
 
-No migration 0043, schema/Planner/new-Nutrition-authority change, recipe PR split
-or separate activation PR.
+- R3-A #13 SUCCESS — 95 passed, Ruff/format/scope PASS;
+- Docs #873 / DC1 #730 SUCCESS;
+- R1-D #90 / R1-F #85 / R1-H #30 / R1-C #130 SUCCESS;
+- R2 #114 / R2-B #104 / R2-C #92 / R2-E #75 / R2-F #47 SUCCESS;
+- Russian methodologies #473 SUCCESS;
+- Nutrient registry #929 SUCCESS including full backend/launcher regression;
+- Partial nutrition #685 SUCCESS including full backend/launcher regression;
+- migration remains 0042; AI disabled.
 
-Status: `IN_PROGRESS`.
+Status: `READY_FOR_FINAL_REVIEW`.
+
+Only state/PR metadata may change after this freeze unless runtime verification is
+explicitly reopened. Do not merge autonomously or start the next batch/DC4.
 
 ## R2-F cheese-sandwich runtime — active — 2026-10-03
 

@@ -1,33 +1,41 @@
 # Progress
 
-## R3-A runtime — implementation active — 2026-10-03
+## R3-A runtime — review-ready — 2026-10-04
 
 Accepted base:
 `e152b357528bb000cf5cf16e792a0d31b983f117` (merged PR #146).
 
-Issue #147 / branch `feat/r3a-school2022-main-batch-runtime`.
+Issue #147 / PR #148 / branch `feat/r3a-school2022-main-batch-runtime`.
 
-Authorized implementation:
+Runtime freeze:
+`6887b58e2331c1324a8269c4f8778a4ef3a0b143`.
 
-- +3 identity-only FoodIngredients, no Nutrition/Composition;
-- +10 immutable SOURCE_VERIFIED MAIN RecipeVersions;
+Outcome:
+
+- 3 identity-only FoodIngredients, no Nutrition/Composition;
+- 10 immutable SOURCE_VERIFIED MAIN RecipeVersions;
 - exact same-card prepared ENERGY_KCAL + 53 UNKNOWN;
 - per-recipe atomic/resumable inactive publication;
-- transaction-neutral guarded batch activation with one UoW / one commit;
-- exact replay/deactivation/mixed-state semantics;
-- source/package tamper and transaction failure tests;
-- no migration/schema/Planner/new-authority change.
+- transaction-neutral one-UoW full-batch activation;
+- exact replay / deliberate-deactivation / mixed-state fail-closed semantics;
+- frozen package tamper checks;
+- reviewed 54-8м / 54-11м process semantics preserved;
+- no schema/migration/Planner/new-authority change.
 
-Current implementation files:
+Exact runtime-freeze verification:
 
-- `backend/app/seed/r3a_school2022_main_batch.py`;
-- transaction-neutral activation seam in Recipe Catalogue / prepared activation;
-- `backend/app/tests/test_r3a_school2022_main_batch.py`;
-- dedicated R3-A runtime workflow.
+- dedicated R3-A workflow #13 SUCCESS — 95 passed;
+- Ruff check/format and scope/whitespace PASS;
+- Docs #873 / DC1 #730 SUCCESS;
+- R1/R2 regression workflows all SUCCESS;
+- Nutrient registry #929 and Partial nutrition #685 SUCCESS including broad
+  backend and launcher regression;
+- migration head 0042;
+- `AI_ENABLED=false`.
 
-Verification pending on PR exact head.
+Status: `READY_FOR_FINAL_REVIEW`.
 
-Status: `IN_PROGRESS`.
+Stop for independent review. No merge or next milestone/batch authorization.
 
 ## R2-F cheese-sandwich runtime — implementation active — 2026-10-03
 
