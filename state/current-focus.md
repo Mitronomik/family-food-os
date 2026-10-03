@@ -4,128 +4,94 @@ Updated: 2026-10-03.
 
 ## Accepted state
 
-PR #140 / R2-F cheese-sandwich Contract Gate is merged into `main` at:
+PR #142 / R2-F runtime is merged into `main` at:
 
-`2e4278cb06c2f683d1113434d04396c723409003`.
+`da6d1e05fd44ecc2733e1a6f472eae3e54b60604`.
 
-The merged gate authorizes exactly one runtime candidate:
+Accepted production Planner catalogue now includes the R2-F cheese sandwich;
+hard exact `MILK_2_5` seven-BREAKFAST resilience is proven at three unaffected
+candidates × repetition 3 = capacity 9.
 
-`SAD28_SANDWICH_CHEESE_20_10` — Бутерброд с сыром —
-30 g / exact prepared `ENERGY_KCAL=83`.
-
-Current production state before this runtime:
-
-- active `breakfast` classification: 7 RecipeVersions;
-- active MAIN classification: 5 RecipeVersions;
-- hard exact `MILK_2_5` exclusion leaves
-  `HARD_BOILED_EGG` + `SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE`;
-- unaffected BREAKFAST-compatible capacity = 6/week;
-- seven-BREAKFAST remains bounded-infeasible under that exact exclusion.
+DATA-CORPUS-V1 / DC3 remains active. The canonical DC3 batch guidance is
+~10–20 recipes; after the merged micro-publication sequence, the next operation
+is intentionally enlarged.
 
 ## Current bounded operation
 
-**R2-F runtime — publish cheese sandwich and close exact-MILK resilience.**
+**R3-A — School2022 ten-recipe MAIN batch Contract Gate.**
 
-Issue: `#141`.
+Issue: `#144`.
 
 Branch:
 
-`feat/r2f-cheese-sandwich-runtime`.
+`docs/r3a-school2022-main-batch-gate`.
 
 Accepted base:
 
-`2e4278cb06c2f683d1113434d04396c723409003`.
+`da6d1e05fd44ecc2733e1a6f472eae3e54b60604`.
 
 Status:
 
-`READY_FOR_FINAL_REVIEW`.
+`GATE_EVIDENCE_REVIEW_ACTIVE`.
 
-Canonical contract:
+Canonical contract under review:
 
-`docs/family-food/r2f-sandwich-resilience-gate.md`.
+`docs/family-food/r3a-school2022-main-batch-gate.md`.
 
-## Runtime scope
+## Goal
 
-Create/reconcile exactly two identity-only FoodIngredients:
+Freeze one reviewable DC3 batch of exactly 10 School2022 MAIN RecipeVersions,
+using one source family and the existing
+`PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1` seam.
 
-- `WHEAT_BREAD_PLAIN`;
-- `CHEESE_UNSPECIFIED`.
+No runtime publication is authorized until this gate is independently reviewed
+and merged.
 
-No NutritionProfile or Composition authority is granted.
+## Batch boundary
 
-Publish exactly one immutable SOURCE_VERIFIED RecipeVersion:
+Selected cards are frozen in:
 
-- code: `SAD28_SANDWICH_CHEESE_20_10`;
-- meal type: `sandwich`;
-- bread: 20 g net;
-- cheese: 11 g gross / 10 g net;
-- output: 30 g;
-- prepared `ENERGY_KCAL=83`;
-- other 53 frozen nutrients UNKNOWN.
+`data/curation/r3a-school2022-main-batch/candidate-selection.json`.
 
-Retained source document:
+The batch:
 
-`data/curation/r2f-sandwich-resilience/raw-cheese-card.txt`
+- contains exactly 10 unique MAIN cards;
+- creates exactly 5 identity-only FoodIngredients;
+- reuses existing accepted identities for all remaining rows;
+- publishes only ENERGY_KCAL in future runtime; other 53 nutrient codes remain UNKNOWN;
+- requires no migration/schema/Planner/new-authority change.
 
-SHA-256:
+Fail-closed source review removed School2022 `54-5м` and `54-12м` because
+their ingredient tables name sunflower oil while process text names butter for
+the corresponding operation. `54-15м` remains deferred because process water
+and bay leaf are not quantified in the ingredient table.
 
-`77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c`.
+## Source boundary
 
-## Required product proof
+Reuse accepted School2022 evidence only:
 
-After guarded activation:
+- PDF SHA-256:
+  `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`;
+- durable archive:
+  `private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`;
+- archive SHA-256:
+  `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
+- latest accepted independent archive verification remains 2026-10-01.
 
-- active `breakfast` classification remains 7;
-- one active `sandwich` classification exists;
-- BREAKFAST-compatible pool becomes 8;
-- hard exact `MILK_2_5` unaffected pool becomes exactly three:
-  egg + cottage casserole + cheese sandwich;
-- unchanged repetition=3 gives capacity 9/week;
-- a persisted seven-BREAKFAST hard-`MILK_2_5` week succeeds.
-
-This is exact canonical `MILK_2_5` resilience only, not a dairy-allergy claim.
+This gate does not claim a new archive readback. Public PDF recheck is
+corroboration only.
 
 ## Scope boundaries
 
 Do not:
 
-- publish the rejected butter sandwich;
-- create `BUTTER_CREAM_UNSPECIFIED`;
+- publish/activate R3-A runtime data;
 - add migration 0043 or schema changes;
 - change Planner mapping/scoring/repetition;
 - add a new Nutrition authority;
-- add Nutrition/Composition for the two new foods;
-- start another R2/R3 batch;
+- add Nutrition/Composition to the five new identities;
+- resolve source contradictions by inference;
 - start DC4/Gate1-CLOSE/PR9;
-- start Prep/PDF/Retail/API/UI/Auth/PostgreSQL/AI.
+- start Shopping/Prep/Retail/API/UI/Auth/PostgreSQL/AI.
 
-After this runtime PR is independently reviewed and merged, reassess DATA-CORPUS
-readiness and move to larger R3 recipe batches (target ~10–12 recipes first)
-rather than returning to one-recipe publication by default.
-
-## Runtime verification
-
-Runtime freeze:
-
-`a84395cfff2923881f78048b976f358333726419`.
-
-Exact runtime-head verification:
-
-- R2-F cheese sandwich runtime #4 — SUCCESS;
-- focused/affected suite — 169 passed;
-- Ruff check — SUCCESS;
-- Ruff format --check — SUCCESS;
-- scope/whitespace — SUCCESS;
-- exact two identity-only FoodIngredients / no butter identity — PASS;
-- retained raw-card hash/size and tamper enforcement — PASS;
-- 30 g / exact 83 kcal + 53 UNKNOWN nutrients — PASS;
-- fresh RecipeVersion + prepared authority atomicity — PASS;
-- exact replay / deliberate-deactivation preservation — PASS;
-- partial / identity / wrong-energy / injected-failure paths fail closed — PASS;
-- existing sandwich compatibility reused without Planner mapping change — PASS;
-- hard exact `MILK_2_5` persisted seven-BREAKFAST week succeeds with capacity 9 — PASS;
-- migration head 0042 / no 0043 — PASS;
-- `AI_ENABLED=false` — PASS;
-- Docs #830 / DC1 #687 / R1-C #87 / R2 #71 / R2-B #61 / R2-C #49 / R2-E #32 — SUCCESS.
-
-Only state files change after this freeze. Do not start R3 before independent review and merge of PR #142.
+After the gate is review-ready, stop for independent review.
