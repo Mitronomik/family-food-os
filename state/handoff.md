@@ -1,6 +1,6 @@
 # Handoff
 
-## R2-F sandwich resilience Contract Gate active — 2026-10-03
+## R2-F sandwich resilience Contract Gate review-ready — 2026-10-03
 
 Accepted main:
 `561c13aad6ce978de399dfd807071232af06b71c` (merged PR #138).
@@ -20,8 +20,17 @@ New identity-only:
 Do not use the rejected GBDOU №118 sandwich energy values or the deferred SAD28
 povidlo card to inflate catalogue counts.
 
-This is docs/data/source evidence only. Stop after review-ready contract PR;
-runtime requires review and merge.
+Evidence/content freeze:
+`1aaada5c66c6781e7b8c5ef19a5ccf3a3d508822`.
+
+Verification: all evidence JSON PASS; derivative + both card hashes PASS;
+public-source verification PASS; exact macro/identity/nutrient/capacity checks
+PASS; Docs #806 SUCCESS; DC1 #663 SUCCESS.
+
+PR #140 is READY FOR FINAL REVIEW.
+
+This remains docs/data/source evidence only. Runtime requires independent review
+and merge.
 
 ## R2-E cottage casserole runtime review-ready — 2026-10-03
 

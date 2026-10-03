@@ -27,8 +27,22 @@ runtime will pin a structured derivative and has no live-web dependency.
 Projected hard exact-`MILK_2_5` resilience:
 2 candidates/capacity 6 → 4 candidates/capacity 12.
 
+Evidence/content freeze:
+`1aaada5c66c6781e7b8c5ef19a5ccf3a3d508822`.
+
+Verification:
+- evidence JSON parse — PASS;
+- derivative/card hash recomputation — PASS;
+- official public-source/page + exact indexed-card recheck — PASS;
+- source-policy scope exactly 2 cards — PASS;
+- macro QA 66.30 / 82.75 — PASS;
+- identity/nutrient/capacity arithmetic — PASS;
+- Docs #806 — SUCCESS;
+- DC1 #663 — SUCCESS;
+- no runtime/schema/migration changes.
+
 Status:
-`R2F_CONTRACT_GATE_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## R2-E cottage casserole runtime review-ready — 2026-10-03
 

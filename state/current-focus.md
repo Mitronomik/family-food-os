@@ -32,7 +32,7 @@ Accepted base:
 
 Status:
 
-`R2F_CONTRACT_GATE_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## Frozen candidate batch
 
@@ -82,5 +82,25 @@ Do not:
 
 ## Next step
 
-Freeze the docs/data/source-evidence package, verify JSON/hash/QA/capacity and
-Docs/DC1 checks, open the review-ready PR, and stop for independent review.
+Evidence/content freeze:
+
+`1aaada5c66c6781e7b8c5ef19a5ccf3a3d508822`.
+
+Verification:
+
+- all 8 evidence JSON files parse — PASS;
+- reviewed derivative SHA-256 recomputation — PASS;
+- both exact card SHA-256 recomputations — PASS;
+- source-policy scope = exactly 2 cards — PASS;
+- public-source verification receipt = PASS;
+- exact macro QA = 66.30 / 82.75 kcal — PASS;
+- exactly 3 identity-only foods; no Nutrition/Composition — PASS;
+- nutrient partition = ENERGY_KCAL AVAILABLE + 53 UNKNOWN — PASS;
+- projected hard-`MILK_2_5` capacity = 4 × 3 = 12 — PASS;
+- Docs verification #806 — SUCCESS;
+- DC1 corpus verification #663 — SUCCESS;
+- changed scope remains docs/data/state only;
+- runtime/schema/migration diff — none.
+
+PR #140 is ready for independent final review. Do not start runtime publication
+before review and merge.
