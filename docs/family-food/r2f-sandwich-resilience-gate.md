@@ -1,9 +1,9 @@
 # R2-F — Cheese-sandwich resilience-closure Contract Gate
 
-**Status:** docs/data/source-authority implementation contract gate  
-**Decision date:** 2026-10-03  
-**Issue:** #139  
-**Accepted base:** `561c13aad6ce978de399dfd807071232af06b71c` (merged PR #138)  
+**Status:** docs/data/source-authority implementation contract gate
+**Decision date:** 2026-10-03
+**Issue:** #139
+**Accepted base:** `561c13aad6ce978de399dfd807071232af06b71c` (merged PR #138)
 **Runtime publication authorized before this gate merges:** no
 
 ## 1. Goal
