@@ -1,5 +1,65 @@
 # Progress
 
+## R2-E cottage casserole runtime review-ready — 2026-10-03
+
+Accepted main:
+`ea30ae82a253ee712d211b3b19caf53e9d2ccc45` (merged PR #136).
+
+Issue #137 / branch `feat/r2e-cottage-casserole-runtime`.
+
+Authorized runtime batch is exactly one RecipeVersion:
+
+`SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE` —
+150 g / exact same-card 301.2 kcal.
+
+The implementation reuses the existing R1-F/R2-B/R2-C prepared-output seam:
+
+`identity-only FoodIngredients → inactive RecipeVersion → prepared authority in
+one caller-owned UoW → exact projection → commit → guarded activation`.
+
+Four new identity-only foods:
+`TVOROG_5`, `SEMOLINA_GROATS`, `SOUR_CREAM_15`, `VANILLIN`.
+
+No migration/schema/Planner/new-Nutrition-authority change is authorized.
+
+Required milk-exclusion proof is intentionally bounded-infeasible:
+after activation the unaffected pool is two recipes × repetition 3 = 6/week,
+so a seven-BREAKFAST week must fail with no persisted partial plan.
+
+Delivered:
+
+- four identity-only FoodIngredients without Nutrition/Composition;
+- one active SOURCE_VERIFIED cottage-casserole RecipeVersion;
+- exact prepared output 150 g / 301.2 kcal with 53 UNKNOWN nutrient codes;
+- guarded activation;
+- exact replay zero-write and deliberate-deactivation preservation;
+- contract tamper / identity conflict / partial state / wrong 301.3 authority
+  fail-closed coverage;
+- injected RecipeVersion/value/authority failure rollback;
+- ordinary seven-BREAKFAST production success with 7 active exact-energy
+  breakfast candidates;
+- hard `MILK_2_5` exclusion leaves exactly two unaffected candidates and
+  capacity 6/week, so seven-BREAKFAST generation fails boundedly with no partial
+  MealPlan.
+
+Runtime freeze:
+`fc75f5dcbc4e5e640b64cb37028f3f599b0df8f6`.
+
+Verification:
+- R2-E workflow #4 — SUCCESS;
+- focused/affected — 152 passed;
+- Ruff check/format — SUCCESS;
+- scope/whitespace — SUCCESS;
+- Docs #802 — SUCCESS;
+- DC1 #659 — SUCCESS;
+- R1-C #59 / R2 #43 / R2-B #33 / R2-C #21 / Russian methodologies #452 —
+  SUCCESS;
+- migration head 0042;
+- AI disabled.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
 ## R2-E 54-1т identity + household-applicability Contract Gate — 2026-10-03
 
 Accepted main:
