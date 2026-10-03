@@ -23,13 +23,13 @@ from app.seed.r2c_breakfast_grain_diversity import (
     seed_r2c_breakfast_grain_diversity,
 )
 from app.seed.r2e_cottage_casserole import (
+    APPLICABILITY_PATH,
     CASSEROLE_RECIPE_CODE,
     IDENTITY_ONLY_FOOD_CODES,
     IDENTITY_REVIEW_PATH,
     PACKAGE,
     PUBLICATION_SPECS_PATH,
     SELECTION_PATH,
-    APPLICABILITY_PATH,
     TVOROG_5_FOOD_CODE,
     _identity_seeds,
     _load_contract,
@@ -66,7 +66,7 @@ def selected_counts(config: DatabaseConfig) -> dict[str, int]:
         authorities = db.execute(
             f"""
             SELECT COUNT(*)
-            FROM recipe_prepared_output_nutrition_authorities
+            FROM recipe_prepared_nutrition_authorities
             WHERE recipe_version_id IN ({placeholders})
             """,
             version_ids,
@@ -74,7 +74,7 @@ def selected_counts(config: DatabaseConfig) -> dict[str, int]:
         values = db.execute(
             f"""
             SELECT COUNT(*)
-            FROM recipe_prepared_output_nutrient_values
+            FROM recipe_prepared_nutrient_values
             WHERE recipe_version_id IN ({placeholders})
             """,
             version_ids,
