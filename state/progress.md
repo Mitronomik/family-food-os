@@ -22,8 +22,20 @@ Frozen target:
 Nearby cards with unresolved process quantities/source inconsistencies are
 explicitly deferred fail-closed.
 
+Evidence/content freeze:
+`aa8d46aed4d7283d1fe95090996eff76cf396624`.
+
+Verification:
+- exact 10 recipes / 5 BREAKFAST + 5 MAIN — PASS;
+- two identity-only foods / 19 exact reuse-evidence entries — PASS;
+- all selected quantities/output/energy/nutrient partitions — PASS;
+- per-card household corroboration — PASS;
+- macro QA / deferred overlap / mapping audit — PASS;
+- Docs #835 — SUCCESS;
+- DC1 #692 — SUCCESS.
+
 Status:
-`CONTRACT_GATE_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## R2-F cheese-sandwich runtime — implementation active — 2026-10-03
 
