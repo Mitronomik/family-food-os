@@ -141,7 +141,9 @@ def activate_prepared_recipe_batch(
         raise PreparedRecipeActivationError("Prepared batch is empty.")
     recipe_codes = tuple(spec.recipe_code for spec in reviewed)
     if len(set(recipe_codes)) != len(recipe_codes):
-        raise PreparedRecipeActivationError("Prepared batch contains duplicate Recipe codes.")
+        raise PreparedRecipeActivationError(
+            "Prepared batch contains duplicate Recipe codes."
+        )
 
     recipes: list[Recipe] = []
     version_ids: list[UUID] = []
@@ -221,9 +223,7 @@ def activate_prepared_recipe_batch(
                 f"Prepared Recipe has blockers beyond INACTIVE: {spec.recipe_code}."
             )
 
-    catalogue._activate_batch_after_policy_check(
-        tuple(recipe.id for recipe in recipes)
-    )
+    catalogue._activate_batch_after_policy_check(tuple(recipe.id for recipe in recipes))
 
     post_rows = tuple(planner.compose_candidate_admission())
     post_by_recipe = {row.recipe_id: row for row in post_rows}
