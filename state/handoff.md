@@ -1,81 +1,40 @@
 # Handoff
 
-## R3-A review corrections — active verification — 2026-10-03
+## R3-A final review corrections — verification pending — 2026-10-03
 
-PR #146 / Issue #144. Same gate PR; no new PR.
+PR #146 / Issue #144. Same Contract Gate; no new PR.
 
-User selected **option B**.
+User-selected option B remains unchanged: one future runtime PR owns all ten
+recipes. Publication is per-recipe atomic while inactive; activation waits for
+all ten exact publications and uses one caller-owned batch UoW / one commit.
 
-Read:
+Independent review blockers corrected in the same PR:
 
-- `docs/family-food/r3a-school2022-main-batch-gate.md`;
-- `data/curation/r3a-school2022-main-batch/process-binding-review.json`.
+- `54-8м`: removed unsupported claim that stale bread was soaked in water;
+  exact `WATER=12 g` remains recipe-level authority, explicit placement is rack
+  wetting, all other placement/split UNKNOWN;
+- `54-11м`: removed invented `частью воды` split and restored 5–10 minute weak
+  boil plus covered 160 °C / 30–40 minute oven finish;
+- existing commit-owning single-recipe activation may not be looped for R3-A;
+  runtime must add/extract a transaction-neutral policy + in-scope activation
+  seam and complete all fallible batch admission validation before one commit;
+- stale `SOUR_CREAM_15` / flour dependency wording removed.
 
-Corrected selected set = 10 cards:
+Selected set remains exactly:
 `54-1р/2р/3р/10р/11р/4м/6м/7м/8м/11м`.
 
-New identity-only foods = exactly 3:
+Identity-only foods remain exactly:
 `COD_FILLET_RAW`, `PARSLEY_ROOT_RAW`,
 `WHEAT_BREAD_STALE_UNSPECIFIED_GRADE`.
 
-Do not restore `54-9р` or `54-18м`: both have unresolved sunflower-oil
-placement with multiple quantified fats.
-
-Runtime after gate merge remains **one PR for all ten recipes**.
-
-Publication may converge per recipe while inactive. Activation only after all ten
-are exact; all-inactive activation uses one batch-level UoW. Mixed activation
-state fails closed.
-
-Archive/PDF readback 2026-10-03: PASS for pinned sizes and SHA-256.
-
 Corrected content freeze:
-`39c1f3e8809e9fd42e6ea061554f81cf3b1c35e6`.
+`6ee960e979666e939ec7bed87bca1f70f3ed1ae4`.
 
-Verification: selected/spec/household/process-binding/source-page sets align
-10/10; identity-only count 3; option B and batch activation semantics PASS;
-fresh archive/PDF readback PASS; Docs #851 / DC1 #708 SUCCESS.
+Cross-file/source/transaction audit on content freeze: PASS.
+Durable ZIP/PDF re-hash: PASS.
+Exact-head Docs/DC1 checks pending after state update.
 
-Status:
-`READY_FOR_FINAL_REVIEW`.
-
-## R3-A School2022 ten-recipe MAIN batch gate — active — 2026-10-03
-
-Accepted base:
-`da6d1e05fd44ecc2733e1a6f472eae3e54b60604`.
-
-Issue #144 / branch `docs/r3a-school2022-main-batch-gate`.
-
-Read first:
-
-`docs/family-food/r3a-school2022-main-batch-gate.md`.
-
-This is a docs/data Contract Gate only. Do not start runtime publication before
-independent review and merge.
-
-Selected batch is exactly 10 School2022 MAIN cards. Evidence and future
-publication specs are under:
-
-`data/curation/r3a-school2022-main-batch/`.
-
-Important fail-closed decisions:
-
-- reject `54-5м` and `54-12м` from R3-A because ingredient-table fat conflicts
-  with process text;
-- defer `54-15м` because process water and bay leaf are unquantified;
-- use `WHEAT_BREAD_STALE_UNSPECIFIED_GRADE` when the card proves stale wheat
-  bread but not flour grade.
-
-No migration 0043, schema change, Planner change or new Nutrition authority.
-
-Content freeze:
-`36d12b03d4aa11b52616bf59d176a7a817e0d74d`.
-
-Docs #839 and DC1 #696 are SUCCESS. The selected set is exactly 10; five
-identity-only foods are frozen; 54-5м/54-12м/54-15м are not selected.
-
-Status:
-`READY_FOR_FINAL_REVIEW`.
+Status: `REVIEW_CORRECTIONS_APPLIED_PENDING_VERIFICATION`.
 
 ## R2-F cheese-sandwich runtime — active — 2026-10-03
 
