@@ -32,7 +32,7 @@ Accepted base:
 
 Status:
 
-`GATE_EVIDENCE_REVIEW_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 Canonical contract under review:
 
@@ -95,3 +95,24 @@ Do not:
 - start Shopping/Prep/Retail/API/UI/Auth/PostgreSQL/AI.
 
 After the gate is review-ready, stop for independent review.
+
+## Gate verification
+
+Content freeze:
+
+`36d12b03d4aa11b52616bf59d176a7a817e0d74d`.
+
+Verified:
+
+- 10 unique selected School2022 MAIN cards — PASS;
+- selected/spec/household/source-page cross-reference — PASS;
+- exact output/kcal agreement inside frozen contract — PASS;
+- exactly 5 identity-only FoodIngredients — PASS;
+- rejected/deferred cards absent from selected set — PASS;
+- no chicken identity drift / no unsafe high-grade stale-bread narrowing — PASS;
+- ENERGY_KCAL-only + 53 UNKNOWN nutrient partition — PASS;
+- accepted School2022 PDF/archive receipt reused without false new-readback claim — PASS;
+- Docs verification #839 — SUCCESS;
+- DC1 corpus verification #696 — SUCCESS.
+
+Only state files change after this content freeze. Runtime remains unauthorized until independent review and merge of PR #146.
