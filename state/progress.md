@@ -1,40 +1,33 @@
 # Progress
 
-## R3-A final independent-review corrections — 2026-10-03
+## R3-A runtime — implementation active — 2026-10-03
 
-PR #146 remains the same docs/data Contract Gate. No runtime work and no new PR.
+Accepted base:
+`e152b357528bb000cf5cf16e792a0d31b983f117` (merged PR #146).
 
-Corrections applied:
+Issue #147 / branch `feat/r3a-school2022-main-batch-runtime`.
 
-- source process for `54-8м` is fail-closed: pre-soak liquid UNKNOWN;
-- source process for `54-11м` preserves 5–10 minute weak boil and 160 °C /
-  30–40 minute covered oven finish without inventing a water split;
-- final identity review contains no stale `SOUR_CREAM_15` dependency;
-- option B now includes the required transaction-neutral batch-activation seam;
-  sequential calls to the commit-owning single-recipe guard are explicitly
-  forbidden;
-- runtime acceptance requires full preflight, one caller-owned activation UoW,
-  no inner commits, staged-state admission validation before commit, whole-batch
-  rollback on failure and regression safety for existing single-recipe behavior.
+Authorized implementation:
 
-Batch remains exactly ten MAIN cards and exactly three new identity-only foods.
-No migration/schema/Planner/new-Nutrition-authority change is authorized.
+- +3 identity-only FoodIngredients, no Nutrition/Composition;
+- +10 immutable SOURCE_VERIFIED MAIN RecipeVersions;
+- exact same-card prepared ENERGY_KCAL + 53 UNKNOWN;
+- per-recipe atomic/resumable inactive publication;
+- transaction-neutral guarded batch activation with one UoW / one commit;
+- exact replay/deactivation/mixed-state semantics;
+- source/package tamper and transaction failure tests;
+- no migration/schema/Planner/new-authority change.
 
-Corrected content freeze:
-`6ee960e979666e939ec7bed87bca1f70f3ed1ae4`.
+Current implementation files:
 
-Read-only verification:
+- `backend/app/seed/r3a_school2022_main_batch.py`;
+- transaction-neutral activation seam in Recipe Catalogue / prepared activation;
+- `backend/app/tests/test_r3a_school2022_main_batch.py`;
+- dedicated R3-A runtime workflow.
 
-- 10/10 selected/spec/household/process/source alignment — PASS;
-- old unsupported water-process phrases absent — PASS;
-- option-B transaction fields + in-scope seam — PASS;
-- ENERGY_KCAL + 53 UNKNOWN preserved — PASS;
-- durable archive/PDF bytes and SHA-256 — PASS.
+Verification pending on PR exact head.
 
-Verification head `ff245c517c00b3c83716916cc5350b6478cf01b4`: Docs #858 SUCCESS; DC1 #715 SUCCESS.
-Final status-only head must also be exact-head green before merge.
-
-Status: `READY_FOR_FINAL_REVIEW`.
+Status: `IN_PROGRESS`.
 
 ## R2-F cheese-sandwich runtime — implementation active — 2026-10-03
 
