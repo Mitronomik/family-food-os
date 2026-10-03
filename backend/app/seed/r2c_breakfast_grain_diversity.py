@@ -132,16 +132,14 @@ def _load_contract(
         or applicability.get("accepted_base") != R2C_ACCEPTED_BASE
         or applicability.get("source", {}).get("archive_sha256")
         != SOURCE_ARCHIVE_SHA256
-        or applicability.get("source", {}).get("source_pdf_sha256")
-        != SOURCE_PDF_SHA256
+        or applicability.get("source", {}).get("source_pdf_sha256") != SOURCE_PDF_SHA256
     ):
         raise ValueError("R2-C household-applicability contract identity changed.")
 
     rows = applicability.get("candidates")
     if (
         not isinstance(rows, list)
-        or tuple(row.get("decision") for row in rows)
-        != ("HOUSEHOLD_APPLICABLE",) * 3
+        or tuple(row.get("decision") for row in rows) != ("HOUSEHOLD_APPLICABLE",) * 3
         or tuple(row.get("source_recipe_id") for row in rows)
         != (
             "ru-school2022:recipe:54-13к",
