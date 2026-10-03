@@ -32,7 +32,7 @@ Accepted base:
 
 Status:
 
-`READY_FOR_FINAL_REVIEW`.
+`SOURCE_PROVENANCE_CORRECTION_VERIFICATION_PENDING`.
 
 ## Corrected frozen candidate
 
@@ -54,21 +54,25 @@ No Nutrition/Composition is granted to those identities.
 
 ## Durable source boundary
 
-Runtime source artifact:
+Future RecipeVersion source document:
 
-`data/curation/r2f-sandwich-resilience/runtime-source.json`
-
-Retained source commit:
-
-`a35ef046538687bcaf2600d5027f87688e9224ca`.
+`data/curation/r2f-sandwich-resilience/raw-cheese-card.txt`
 
 SHA-256:
 
-`26f239916b56429e78314369df961c8dd13cecd7d559d942655387e9851a5a97`.
+`77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c`
 
-The upstream institution PDF is provenance/corroboration only. Runtime has no
-live-web dependency, and future source-family expansion requires reacquisition
-and a new review.
+Byte size: 1783.
+
+Durable Library:
+`library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt` / `libfile_baff1ee2870081918170b98d1cec3c5d`.
+
+Library materialize/readback re-hash: PASS, same 1783 bytes / SHA-256.
+
+SAD28 is recorded only as official host. Document/card issuer is not established
+from the retained card. Upstream recipe collection is Kutkina 2008.
+
+The upstream PDF remains discovery/corroboration only; no PDF SHA is invented.
 
 ## Product boundary
 
@@ -98,21 +102,15 @@ Do not:
 
 ## Verification pending
 
-Corrected evidence/content freeze:
+Source-provenance correction requires fresh exact-head verification:
 
-`c84fcffad9aa2d3f093db216f7cc8d1bf9ab48bf`.
-
-Required before final review-ready status:
-
-- all R2-F JSON parse;
-- retained runtime-source byte SHA-256/size;
-- discovery derivative/card hash checks;
-- butter contradiction arithmetic;
-- source-policy scope exactly one card;
-- identity/nutrient/capacity consistency;
-- Docs verification;
-- DC1 corpus verification;
-- scope/whitespace audit.
+- JSON parse/consistency;
+- raw-card SHA/size;
+- Library materialize/readback receipt;
+- source tuple coherence;
+- provenance role separation;
+- Docs/DC1;
+- scope/whitespace.
 
 Do not start runtime publication before corrected PR #140 is independently
 reviewed and merged.
