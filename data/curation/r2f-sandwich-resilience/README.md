@@ -21,27 +21,42 @@ Future runtime creates only two identity-only FoodIngredients:
 
 No Nutrition or Composition authority is granted to those identities.
 
-## Durable runtime source
+## Durable publication source
 
-Runtime truth is not the live institutional PDF. The exact selected cheese card is
-retained as:
+The future SOURCE_VERIFIED RecipeVersion is pinned to the complete selected-card
+raw text snapshot:
 
-`data/curation/r2f-sandwich-resilience/runtime-source.json`
+`data/curation/r2f-sandwich-resilience/raw-cheese-card.txt`
 
-Exact UTF-8 file SHA-256:
+SHA-256:
 
-`26f239916b56429e78314369df961c8dd13cecd7d559d942655387e9851a5a97`
+`77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c`
 
-Exact byte size: 1855.
+Byte size: 1783.
 
-Immutable retained-source locator:
+Immutable Git locator:
 
-`https://raw.githubusercontent.com/Mitronomik/family-food-os/a35ef046538687bcaf2600d5027f87688e9224ca/data/curation/r2f-sandwich-resilience/runtime-source.json`
+`https://raw.githubusercontent.com/Mitronomik/family-food-os/97ed76c7009229b5c947c63f1ace09b63a32147b/data/curation/r2f-sandwich-resilience/raw-cheese-card.txt`
 
-The upstream PDF remains provenance/corroboration only. R2-F does not claim raw PDF
-bytes are retained, and future source-family expansion requires reacquisition and
-a new review. Live web cannot override the retained source and is not a runtime
-dependency.
+Durable Library locator:
+
+`library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt`
+
+Library file id: `libfile_baff1ee2870081918170b98d1cec3c5d`.
+
+The Library copy was materialized again and independently re-hashed to the same
+1783 bytes / SHA-256 on 2026-10-03.
+
+Provenance roles are deliberately separated:
+
+- SAD28 / МАДОУ №28 — official host of the public technological-card file;
+- document/card issuer — `NOT_ESTABLISHED_FROM_RETAINED_CARD`;
+- upstream recipe collection — Kutkina M.N., Saint Petersburg, 2008.
+
+The upstream PDF is discovery/corroboration only. Its exact bytes were not
+retrievable through the available execution environment, so no PDF byte hash is
+invented and the PDF is not used as RecipeVersion source truth. Future expansion
+of this source family requires reacquisition and a new review.
 
 ## Product effect
 
