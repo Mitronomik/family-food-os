@@ -7,7 +7,7 @@
     "SAD28_SANDWICH_CHEESE_20_10"
   ],
   "source_authority_policy": "BOUNDED_INSTITUTION_PUBLISHED_TECH_CARD_REVIEW_V1",
-  "reviewed_derivative_sha256": "dd1da359c60c8d647eda5e9a968164a02b8f6dca07333b888699f9722cba3543",
+  "reviewed_derivative_sha256": "e494462d276e36b1f926bc36c3cbe5b4b84dff00e8ab2d6d797561e45412023d",
   "new_identity_only_foods": [
     "WHEAT_BREAD_PLAIN",
     "CHEESE_UNSPECIFIED"
