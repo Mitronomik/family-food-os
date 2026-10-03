@@ -11,11 +11,12 @@ Read first:
 `docs/family-food/r3b-school2022-breakfast-batch-gate.md`.
 
 Exact batch: ten School2022 BREAKFAST cards
-`54-2о/3о/4о/2т/3т/1к/6к/16к/21к/23к`.
+`54-2о/3о/4о/2т/1к/2к/6к/16к/23к/24к`.
 
 New identity-only foods:
-`CHEESE_SEMI_HARD_UNSPECIFIED`, `CORN_GROATS`, `MILLET_GROATS`,
-`BARLEY_GROATS`.
+`CHEESE_SEMI_HARD_UNSPECIFIED`, `CORN_GROATS`, `MILLET_GROATS`.
+
+Adversarial process audit removed `54-3т` / `54-21к` for unplaced quantified sugar and keeps `54-22к` deferred for unplaced quantified butter. Replacements are `54-2к` / `54-24к`.
 
 Source archive/PDF independently re-hashed 2026-10-04 and match the accepted
 School2022 receipt.
