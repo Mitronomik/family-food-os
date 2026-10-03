@@ -21,13 +21,13 @@ The batch reuses one source family, one rights route and the already accepted
 | `ru-school2022:recipe:54-1р` | Котлета рыбная из трески | 100 g | 112.6 |
 | `ru-school2022:recipe:54-2р` | Котлета рыбная из горбуши | 100 g | 163.6 |
 | `ru-school2022:recipe:54-3р` | Котлета рыбная из минтая | 100 g | 114.2 |
-| `ru-school2022:recipe:54-9р` | Минтай, запечённый в сметанном соусе | 80 g | 236.6 |
 | `ru-school2022:recipe:54-10р` | Горбуша, тушенная в томате с овощами | 70 g | 134.3 |
 | `ru-school2022:recipe:54-11р` | Минтай, тушенный в томате с овощами | 70 g | 103 |
 | `ru-school2022:recipe:54-4м` | Котлета из говядины | 75 g | 221.3 |
+| `ru-school2022:recipe:54-6м` | Биточек из говядины | 75 g | 221.3 |
+| `ru-school2022:recipe:54-7м` | Шницель из говядины | 75 g | 221.3 |
 | `ru-school2022:recipe:54-8м` | Тефтели из говядины паровые | 60 g | 117.1 |
 | `ru-school2022:recipe:54-11м` | Плов из отварной говядины | 200 g | 348.3 |
-| `ru-school2022:recipe:54-18м` | Печень говяжья по-строгановски | 80 g | 189.2 |
 
 All ten are classified `meal_type_code=main`. No Planner role mapping change is
 authorized.
@@ -50,9 +50,7 @@ contract and accepted durable source evidence.
 Create identity-only exactly:
 
 - `COD_FILLET_RAW` — Треска, филе сырое;
-- `CHEESE_SEMI_HARD_UNSPECIFIED` — Сыр полутвердый, вид не уточнён;
 - `PARSLEY_ROOT_RAW` — Петрушка, корень свежий;
-- `BEEF_LIVER_RAW` — Печень говяжья, сырая;
 - `WHEAT_BREAD_STALE_UNSPECIFIED_GRADE` — Хлеб пшеничный черствый, сорт муки не уточнён.
 
 No NutritionProfile or Composition authority is granted.
@@ -72,7 +70,28 @@ Important form rules:
 - semi-hard cheese remains generic semi-hard cheese, not a named variety;
 - beef liver is not generic beef.
 
-## 5. Household applicability
+## 5. Process binding
+
+The batch has a separate reviewed receipt:
+
+`data/curation/r3a-school2022-main-batch/process-binding-review.json`.
+
+Rules:
+
+- exact RecipeIngredient **total** quantity from the selected card is authoritative;
+- no per-step gram split may be invented;
+- a per-step split may remain explicitly UNKNOWN;
+- when a card has exactly one quantified cooking fat and its technology has an
+  otherwise unnamed fat-consuming operation (for example sautéing or tray
+  oiling), that same-card fat may be bound to those operations without inventing
+  the internal gram split;
+- if multiple quantified cooking fats exist and the technology does not place
+  them unambiguously, the card is rejected from the batch.
+
+This rule admits `54-8м`, `54-10р` and `54-11р` with explicit reviewed
+same-card bindings. It rejects `54-9р` and `54-18м`.
+
+## 6. Household applicability
 
 Each of the ten cards is reviewed separately as `HOUSEHOLD_APPLICABLE`.
 
@@ -82,7 +101,7 @@ not define ingredient/output truth.
 
 The gate does not grant blanket School2022 household authority.
 
-## 6. Nutrition authority
+## 7. Nutrition authority
 
 For every selected RecipeVersion:
 
@@ -94,30 +113,46 @@ For every selected RecipeVersion:
 - no raw-to-cooked Composition inference;
 - no source scaling.
 
-## 7. Fresh / replay / conflict semantics
+## 8. Fresh / replay / conflict semantics — option B
 
-Future runtime must publish each fresh RecipeVersion and its prepared authority in
-one caller-owned UoW, verify exact positive ENERGY_KCAL in-scope, commit, then
-activate only through the existing guarded activation boundary.
+The user explicitly selected **option B** for the enlarged batch.
 
-Replay:
+### Publication phase
 
-- exact identities are zero-write;
-- exact RecipeVersion + prepared authority replay is zero-write;
-- deliberate deactivation remains deactivated.
+Publication is per recipe:
 
-Fail closed on:
+`inactive RecipeVersion + prepared authority -> one caller-owned UoW -> commit`.
 
-- contract/source hash mismatch;
-- source card/output/energy/ingredient mismatch;
-- FoodIngredient identity narrowing;
-- partial RecipeVersion/authority state;
-- wrong prepared kcal;
-- any non-reviewed nutrient publication;
-- activation before exact authority is readable;
-- any discovered schema/migration/new-authority requirement.
+Therefore a failure may leave an exact **inactive subset** of the 10 recipes.
+That is allowed and is not treated as successful batch completion.
 
-## 8. Preservation matrix
+Rerun behavior:
+
+- exact persisted recipe publication -> zero-write replay;
+- missing recipe publication -> publish that recipe atomically;
+- conflicting/partial per-recipe state -> fail closed;
+- publication phase never activates a recipe.
+
+### Batch activation phase
+
+Activation is a separate explicit command in the **same future runtime PR**.
+
+Before any activation write, all 10 RecipeVersions + prepared authorities must
+reconcile exactly.
+
+State semantics:
+
+- all 10 inactive -> activate all 10 in **one caller-owned batch UoW** and commit once;
+- all 10 active -> zero-write replay;
+- mixed active/inactive -> fail closed with zero writes;
+- any activation failure -> rollback the whole activation UoW, leaving the exact
+  inactive publication set intact.
+
+This avoids a giant 10-recipe publication transaction, remains resumable after
+publication failures, and preserves deliberate deactivation because a later mixed
+state is never silently reactivated.
+
+## 9. Preservation matrix
 
 | Existing truth | R3-A requirement |
 | --- | --- |
@@ -131,19 +166,22 @@ Fail closed on:
 | live web | never runtime authority |
 | `AI_ENABLED=false` | required |
 
-## 9. Explicit exclusions
+## 10. Explicit exclusions
 
-- `54-5м` is rejected from R3-A: table = sunflower oil; process = butter.
-- `54-12м` is rejected from R3-A: table = sunflower oil; process = butter.
-- `54-15м` is deferred because process uses water and bay leaf without
-  quantified ingredient-table rows.
-- `54-6м / 54-7м` are deferred for low marginal variety; `54-4м` is the
-  clean representative of the near-identical beef cutlet family.
+- `54-5м` — ingredient table sunflower oil vs process butter.
+- `54-12м` — ingredient table sunflower oil vs process butter.
+- `54-15м` — process water and bay leaf are not quantified.
+- `54-9р` — sunflower oil + butter are both quantified, but sunflower-oil
+  placement is unresolved.
+- `54-18м` — sunflower oil + butter are both quantified, but sunflower-oil
+  placement is unresolved.
 - special-diet cards are not part of R3-A.
 
-No conflict is resolved by silently choosing one source branch.
+`54-6м` and `54-7м` are now intentionally included as clean source-consistent
+replacements. The lower marginal variety is accepted to keep one safe 10-recipe
+batch rather than creating extra micro-PRs.
 
-## 10. Future runtime acceptance
+## 11. Future runtime acceptance
 
 A later runtime PR must prove at least:
 
@@ -153,16 +191,17 @@ A later runtime PR must prove at least:
 4. exact same-card ENERGY_KCAL per RecipeVersion;
 5. all other 53 frozen nutrient codes UNKNOWN;
 6. fresh RecipeVersion + authority atomicity for every item;
-7. batch failure cannot leave partial accepted publication;
-8. exact replay is zero-write;
-9. deliberate deactivation stays deactivated;
-10. guarded activation admits all accepted recipes;
-11. ordinary Planner generation remains deterministic;
-12. exclusions remove affected candidates without weakening hard constraints;
-13. migration head remains 0042;
-14. `AI_ENABLED=false`.
+7. publication failure may leave only an exact inactive subset; rerun converges missing publications without rewriting exact rows;
+8. full-batch activation is blocked until all 10 exact publications exist; activation uses one batch-level UoW and rolls back atomically on failure;
+9. exact replay is zero-write;
+10. deliberate deactivation stays deactivated; mixed active/inactive activation state fails closed;
+11. guarded batch activation admits all accepted recipes only after full preflight;
+12. ordinary Planner generation remains deterministic;
+13. exclusions remove affected candidates without weakening hard constraints;
+14. migration head remains 0042;
+15. `AI_ENABLED=false`.
 
-## 11. Verification tier
+## 12. Verification tier
 
 Docs/data/source-evidence only:
 
@@ -179,14 +218,30 @@ Docs/data/source-evidence only:
 
 No runtime/backend regression is required for this gate.
 
-## 12. Non-goals
+## 13. Non-goals
 
 No runtime publication, schema change, migration 0043, Planner redesign, new
 Nutrition authority, ingredient Nutrition/Composition, DC4, Gate1-CLOSE, PR9,
 Shopping, Prep, Retail, API/UI, Auth/PostgreSQL or AI.
 
-## 13. Stop rule
+## 14. Stop rule
 
 After this gate is review-ready, stop for independent review.
 
 Runtime implementation starts only after review and merge of this Contract Gate.
+
+
+## 15. 2026-10-03 independent source re-verification
+
+The durable Library archive was independently materialized again:
+
+- file id: `libfile_26d95a7a50108191944b97db85a5c008`;
+- size: 206692075 bytes;
+- SHA-256: `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`.
+
+The embedded School2022 PDF was independently extracted/re-read:
+
+- size: 4102547 bytes;
+- SHA-256: `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`.
+
+Both match the pinned authority receipts.
