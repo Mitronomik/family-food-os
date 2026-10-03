@@ -100,6 +100,12 @@ Institutional defrosters, meat-shop tables, paraconvection wording and
 serving-temperature rules are retained as provenance-only and do not become
 consumer execution requirements.
 
+Each of the ten named cards also has independent household corroboration for the
+same dish/process family recorded in
+`household-applicability-review.json`. Those external recipes establish only
+ordinary household executability; they do not override School2022 ingredient
+quantities, FoodIngredient identities, output or prepared ENERGY_KCAL.
+
 For 54-30м, the future consumer route is the source-backed **steam 15–20 min**
 route. The alternative poaching route mentions added water without an exact
 recipe quantity, so that alternative is not published as the executable route.
@@ -116,8 +122,9 @@ For every selected RecipeVersion:
 - no implicit retention/yield.
 
 4/9/4 macro arithmetic was rechecked for all ten cards and is stored as QA only.
-No candidate has a component-level contradiction like the rejected R2-F butter
-card.
+This arithmetic is not treated as proof of component consistency. The gate found
+no obvious blocker in the bounded source/identity review, but runtime authority
+remains limited to the exact reviewed prepared ENERGY_KCAL contract.
 
 Where menu tables round differently, the exact selected recipe card remains the
 authority:
