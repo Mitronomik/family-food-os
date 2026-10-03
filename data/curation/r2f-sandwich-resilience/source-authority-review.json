@@ -10,7 +10,7 @@
       "sad28-hosted:techcard:3:cheese-sandwich:20-10"
     ],
     "source_kind": "RETAINED_RAW_CARD_TEXT_SNAPSHOT",
-    "reviewed_derivative_sha256": "dd1da359c60c8d647eda5e9a968164a02b8f6dca07333b888699f9722cba3543",
+    "reviewed_derivative_sha256": "e494462d276e36b1f926bc36c3cbe5b4b84dff00e8ab2d6d797561e45412023d",
     "runtime_source_document": "data/curation/r2f-sandwich-resilience/raw-cheese-card.txt",
     "runtime_source_data_type": "RETAINED_RAW_CARD_TEXT_SNAPSHOT",
     "whole_source_family_auto_authorized": false,
