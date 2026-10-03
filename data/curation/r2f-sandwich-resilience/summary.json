@@ -46,5 +46,11 @@
   "planner_change_required": false,
   "nutrition_authority_change_required": false,
   "status": "FROZEN_FOR_RUNTIME_AFTER_REVIEW_AND_MERGE",
-  "stop_rule": "Do not start runtime publication before independent review and merge of this gate."
+  "stop_rule": "Do not start runtime publication before independent review and merge of this gate.",
+  "public_source_verification": {
+    "status": "PASS_PUBLIC_PROVENANCE_AND_EXACT_CARD_TEXT",
+    "receipt_path": "data/curation/r2f-sandwich-resilience/public-source-verification.json",
+    "raw_pdf_bytes_retained_by_r2f": false,
+    "runtime_source_document": "data/curation/r2f-sandwich-resilience/source-cards.json"
+  }
 }

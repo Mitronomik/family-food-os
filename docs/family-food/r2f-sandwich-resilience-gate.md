@@ -1,9 +1,9 @@
 # R2-F — Sandwich resilience-closure Contract Gate
 
-**Status:** docs/data/source-authority implementation contract gate  
-**Decision date:** 2026-10-03  
-**Issue:** #139  
-**Accepted base:** `561c13aad6ce978de399dfd807071232af06b71c` (merged PR #138)  
+**Status:** docs/data/source-authority implementation contract gate
+**Decision date:** 2026-10-03
+**Issue:** #139
+**Accepted base:** `561c13aad6ce978de399dfd807071232af06b71c` (merged PR #138)
 **Runtime publication authorized before this gate merges:** no
 
 ## 1. Goal
@@ -105,6 +105,19 @@ The hash is computed over UTF-8 canonical JSON with sorted keys and compact
 separators, excluding the self-referential `reviewed_derivative_sha256` field; each card hash excludes `canonical_record_sha256` and `source_occurrences`.
 
 Original public URL, publisher identity and retrieval date remain provenance.
+
+Public-source verification is frozen separately in:
+
+`data/curation/r2f-sandwich-resilience/public-source-verification.json`.
+
+The official institution nutrition page links the technological-card document,
+and an independent 2026-10-03 public-index recheck reproduced the exact selected
+card quantities, macro values, energy and core process text.
+
+R2-F deliberately does **not** claim that the raw PDF bytes are retained or
+hash-pinned. The accepted runtime source document is the committed reviewed
+derivative above; live web/PDF data cannot override it and are not a runtime
+dependency.
 
 ## 5. Selected cards
 

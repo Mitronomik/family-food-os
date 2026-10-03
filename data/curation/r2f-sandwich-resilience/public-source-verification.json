@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "operation": "R2F_PUBLIC_SOURCE_VERIFICATION_RECEIPT",
+  "accepted_base": "561c13aad6ce978de399dfd807071232af06b71c",
+  "issue": 139,
+  "verified_at": "2026-10-03",
+  "institution": {
+    "name": "МАДОУ «Детский сад комбинированного вида № 28» д. Лупполово",
+    "official_site": "https://sad28.vsevobr.ru/",
+    "official_nutrition_page": "https://sad28.vsevobr.ru/index.php/svedeniya-ob-organizatsii/organizatsiya-pitaniya-v-obrazovatelnoj-organizatsii",
+    "verification": "Official nutrition page identifies the institution and links a document titled «Технологические карты»."
+  },
+  "public_pdf": {
+    "url": "https://sad28.vsevobr.ru/images/22-23/%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%B5/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BA%D0%B0%D1%80%D1%82%D1%8B-22-23%20%281%29.pdf",
+    "public_index_verification": "Search-indexed PDF text was independently re-queried on 2026-10-03 and exposed both selected exact cards.",
+    "raw_pdf_bytes_retained_by_r2f": false,
+    "raw_pdf_sha256": null,
+    "note": "R2-F does not claim a retained raw-PDF artifact or raw-PDF byte hash. The accepted runtime source document is the committed reviewed derivative source-cards.json; the public PDF remains provenance and audit corroboration only."
+  },
+  "verified_cards": [
+    {
+      "source_recipe_id": "sad28-luppolovo:techcard:butter-sandwich:25-5",
+      "verified_facts": {
+        "ingredients": [
+          {
+            "source_label": "Хлеб пшеничный",
+            "gross_g": "25",
+            "net_g": "25"
+          },
+          {
+            "source_label": "Масло сливочное (Б)",
+            "gross_g": "5",
+            "net_g": "5"
+          }
+        ],
+        "source_output_text": "25/5",
+        "declared_nutrition": {
+          "energy_kcal": "66.3",
+          "protein_g": "2.11",
+          "fat_g": "0.98",
+          "carbohydrate_g": "12.26"
+        },
+        "process": "Масло/ломтик пшеничного хлеба: source text describes butter covering most of the wheat loaf slice."
+      }
+    },
+    {
+      "source_recipe_id": "sad28-luppolovo:techcard:cheese-sandwich:20-10",
+      "verified_facts": {
+        "ingredients": [
+          {
+            "source_label": "Сыр",
+            "gross_g": "11",
+            "net_g": "10"
+          },
+          {
+            "source_label": "Хлеб пшеничный",
+            "gross_g": "20",
+            "net_g": "20"
+          }
+        ],
+        "source_output_text": "20/10",
+        "declared_nutrition": {
+          "energy_kcal": "83",
+          "protein_g": "3.9",
+          "fat_g": "3.15",
+          "carbohydrate_g": "9.7"
+        },
+        "process": "На ломтик хлеба кладут кусочек сыра толщиной 3–4 мм."
+      }
+    }
+  ],
+  "runtime_boundary": {
+    "runtime_source_document": "data/curation/r2f-sandwich-resilience/source-cards.json",
+    "reviewed_derivative_sha256": "dd1da359c60c8d647eda5e9a968164a02b8f6dca07333b888699f9722cba3543",
+    "live_web_runtime_dependency_allowed": false,
+    "public_pdf_may_override_reviewed_derivative": false
+  }
+}

@@ -36,3 +36,13 @@ Projected exact-`MILK_2_5` resilience after future runtime publication:
 This is not a dairy-allergy claim: the selected recipes contain butter/cheese.
 
 See `docs/family-food/r2f-sandwich-resilience-gate.md`.
+
+## Public source verification
+
+`public-source-verification.json` records the 2026-10-03 independent public
+recheck of the official institution nutrition page and the indexed
+technological-card PDF text for both selected cards.
+
+R2-F does not claim retained raw PDF bytes. Runtime source truth is the committed
+reviewed derivative `source-cards.json`; live web access is provenance/audit
+corroboration only and cannot override the derivative.
