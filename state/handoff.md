@@ -1,41 +1,42 @@
 # Handoff
 
-## R3-A final review corrections — verification pending — 2026-10-03
+## R3-A runtime — active — 2026-10-03
 
-PR #146 / Issue #144. Same Contract Gate; no new PR.
+Accepted main:
+`e152b357528bb000cf5cf16e792a0d31b983f117` (merged PR #146).
 
-User-selected option B remains unchanged: one future runtime PR owns all ten
-recipes. Publication is per-recipe atomic while inactive; activation waits for
-all ten exact publications and uses one caller-owned batch UoW / one commit.
+Issue #147 / branch `feat/r3a-school2022-main-batch-runtime`.
 
-Independent review blockers corrected in the same PR:
+Read first:
 
-- `54-8м`: removed unsupported claim that stale bread was soaked in water;
-  exact `WATER=12 g` remains recipe-level authority, explicit placement is rack
-  wetting, all other placement/split UNKNOWN;
-- `54-11м`: removed invented `частью воды` split and restored 5–10 minute weak
-  boil plus covered 160 °C / 30–40 minute oven finish;
-- existing commit-owning single-recipe activation may not be looped for R3-A;
-  runtime must add/extract a transaction-neutral policy + in-scope activation
-  seam and complete all fallible batch admission validation before one commit;
-- stale `SOUR_CREAM_15` / flour dependency wording removed.
+- `docs/family-food/r3a-school2022-main-batch-gate.md`;
+- `data/curation/r3a-school2022-main-batch/publication-specs.json`;
+- `data/curation/r3a-school2022-main-batch/process-binding-review.json`.
 
-Selected set remains exactly:
-`54-1р/2р/3р/10р/11р/4м/6м/7м/8м/11м`.
+Implement one runtime PR for exactly ten MAIN recipes and exactly three
+identity-only foods.
 
-Identity-only foods remain exactly:
-`COD_FILLET_RAW`, `PARSLEY_ROOT_RAW`,
-`WHEAT_BREAD_STALE_UNSPECIFIED_GRADE`.
+Option B is mandatory:
 
-Corrected content freeze:
-`6ee960e979666e939ec7bed87bca1f70f3ed1ae4`.
+- per-recipe atomic inactive publication;
+- partial inactive subset may remain after failure;
+- rerun converges missing rows;
+- activation waits for all ten exact publications;
+- one batch-level activation UoW / one commit;
+- all-active replay zero-write;
+- mixed state fail closed;
+- activation failure rolls back the whole UoW;
+- do not loop the commit-owning single-recipe guard.
 
-Cross-file/source/transaction audit on content freeze: PASS.
-Durable ZIP/PDF re-hash: PASS.
-Verification head `ff245c517c00b3c83716916cc5350b6478cf01b4`: Docs #858 SUCCESS; DC1 #715 SUCCESS.
-Final status-only head must also be exact-head green before merge.
+Source corrections to preserve:
 
-Status: `READY_FOR_FINAL_REVIEW`.
+- 54-8м pre-soak liquid UNKNOWN;
+- 54-11м 5–10 minute weak boil + 160 °C / 30–40 minute covered oven finish.
+
+No migration 0043, schema/Planner/new-Nutrition-authority change, recipe PR split
+or separate activation PR.
+
+Status: `IN_PROGRESS`.
 
 ## R2-F cheese-sandwich runtime — active — 2026-10-03
 
