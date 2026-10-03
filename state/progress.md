@@ -1,98 +1,58 @@
 # Progress
 
-## R2-F cheese-sandwich resilience Contract Gate — blocker corrections — 2026-10-03
+## R2-F cheese-sandwich resilience Contract Gate — provenance correction — 2026-10-03
 
 Accepted main:
 `561c13aad6ce978de399dfd807071232af06b71c` (merged PR #138).
 
 Issue #139 / branch `docs/r2f-sandwich-resilience-gate`.
 
-Independent review found two blockers in the original two-sandwich gate. Both are
-corrected in the bounded evidence/docs scope.
-
-### Source-authority correction
-
-`SAD28_SANDWICH_BUTTER_25_5` is no longer a publication candidate.
-
-Reason: the card lists 5 g cream butter but declares only 0.98 g fat for the
-whole sandwich. TR TS 033/2013 defines cream butter at at least 50% fat, so the
-butter component alone implies at least 2.5 g fat. Macro arithmetic reproducing
-66.3 kcal is not sufficient to resolve that component contradiction.
-
-Selected future runtime candidate is now exactly:
+Selected future runtime candidate is exactly:
 
 - `SAD28_SANDWICH_CHEESE_20_10` — 30 g / 83 kcal.
 
-New identity-only foods are reduced to:
+Butter candidate remains rejected on component inconsistency. New identity-only
+foods remain exactly `WHEAT_BREAD_PLAIN` and `CHEESE_UNSPECIFIED`.
 
-- `WHEAT_BREAD_PLAIN`;
-- `CHEESE_UNSPECIFIED`.
+### Durable source correction
 
-### Durable provenance correction — superseded by raw-card retention
+The future SOURCE_VERIFIED RecipeVersion source document is now the complete
+selected-card raw text snapshot:
 
-The earlier retained `runtime-source.json` derivative is no longer the future
-RecipeVersion source document. The complete selected card raw text is now retained
-in Git and durable Library, and publication source_url/hash bind directly to it.
-
-Raw-card source:
 `data/curation/r2f-sandwich-resilience/raw-cheese-card.txt`
-SHA-256 `77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c`, 1783 bytes.
 
-Durable Library:
-`library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt` / `libfile_baff1ee2870081918170b98d1cec3c5d`.
+SHA-256:
+`77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c`
 
-SAD28 is official host only; issuer is not established from the retained card;
-upstream recipe collection is Kutkina 2008.
+Byte size: 1783.
 
-### Previous durable provenance correction
+It is retained both in Git and durable Library:
 
-A retained runtime source artifact was added at:
+`library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt`
+Library file id: `libfile_baff1ee2870081918170b98d1cec3c5d`.
 
-`data/curation/r2f-sandwich-resilience/runtime-source.json`
+The Library copy was materialized and re-hashed independently: same 1783
+bytes and SHA-256 — PASS.
 
-Source-artifact commit:
-`a35ef046538687bcaf2600d5027f87688e9224ca`.
+Provenance roles are now explicit:
 
-Exact SHA-256:
-`26f239916b56429e78314369df961c8dd13cecd7d559d942655387e9851a5a97`.
+- SAD28 / МАДОУ №28 = official host of the public file;
+- document/card issuer = `NOT_ESTABLISHED_FROM_RETAINED_CARD`;
+- upstream recipe collection = Kutkina M.N., Saint Petersburg, 2008.
 
-The future RecipeVersion source tuple will point to that immutable retained JSON,
-so `source_url` and `source_document_sha256` describe the same artifact. The
-upstream PDF remains provenance/corroboration only and cannot override runtime
-truth.
+Exact upstream PDF bytes were not retrievable through the available execution
+environment. No PDF hash is invented; the PDF is discovery/corroboration only
+and is not the future RecipeVersion source document.
 
-### Product effect
+Future source-family expansion requires upstream reacquisition and new review.
 
-Hard exact-`MILK_2_5` resilience changes from:
+Product effect remains:
 
-2 candidates / capacity 6
-
-to:
-
-3 candidates / capacity 9.
-
-That remains sufficient for seven BREAKFAST opportunities under unchanged
-`max_recipe_repetitions=3`.
-
-Classification remains truthful:
-
-- `breakfast` classification 7;
-- +1 `sandwich`;
+- hard exact-`MILK_2_5` unaffected pool 2 → 3;
+- capacity 6 → 9 under repetition=3;
 - BREAKFAST-compatible pool 8;
 - LUNCH +1;
 - SNACK +1.
-
-Corrected evidence/content freeze:
-`c84fcffad9aa2d3f093db216f7cc8d1bf9ab48bf`.
-
-Previous corrected-head verification (superseded by this provenance correction):
-- R2-F JSON parse/consistency audit — PASS;
-- source tuple coherence — PASS;
-- butter rejection + no butter identity/publication — PASS;
-- capacity 9 arithmetic — PASS;
-- Docs #811 — SUCCESS;
-- DC1 #668 — SUCCESS;
-- no runtime/schema/migration changes.
 
 Status:
 `SOURCE_PROVENANCE_CORRECTION_VERIFICATION_PENDING`.
