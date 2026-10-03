@@ -76,27 +76,6 @@
       ]
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-3т",
-      "canonical_code": "SCHOOL2022_54_3T_CARROT_COTTAGE_CHEESE_SOUFFLE",
-      "canonical_name": "Суфле из моркови с творогом",
-      "meal_type_code": "breakfast",
-      "source_pdf_page": 91,
-      "source_output_g": "150",
-      "prepared_energy_kcal": "200.9",
-      "required_food_codes": [
-        "CARROT",
-        "TVOROG_5",
-        "MILK_2_5",
-        "EGG",
-        "SEMOLINA_GROATS",
-        "BREADCRUMBS",
-        "SUGAR",
-        "SOUR_CREAM_15",
-        "BUTTER_PEASANT_72_5_UNSALTED",
-        "SALT_IODIZED"
-      ]
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-1к",
       "canonical_code": "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
       "canonical_name": "Каша жидкая молочная кукурузная",
@@ -104,6 +83,23 @@
       "source_pdf_page": 50,
       "source_output_g": "200",
       "prepared_energy_kcal": "207.9",
+      "required_food_codes": [
+        "CORN_GROATS",
+        "MILK_2_5",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SUGAR",
+        "SALT_IODIZED",
+        "WATER"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2к",
+      "canonical_code": "SCHOOL2022_54_2K_VISCOUS_CORN_MILK_PORRIDGE",
+      "canonical_name": "Каша вязкая молочная кукурузная",
+      "meal_type_code": "breakfast",
+      "source_pdf_page": 50,
+      "source_output_g": "200",
+      "prepared_energy_kcal": "287.8",
       "required_food_codes": [
         "CORN_GROATS",
         "MILK_2_5",
@@ -149,23 +145,6 @@
       ]
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-21к",
-      "canonical_code": "SCHOOL2022_54_21K_BARLEY_MILK_PORRIDGE",
-      "canonical_name": "Каша вязкая молочная ячневая",
-      "meal_type_code": "breakfast",
-      "source_pdf_page": 64,
-      "source_output_g": "200",
-      "prepared_energy_kcal": "249.1",
-      "required_food_codes": [
-        "BARLEY_GROATS",
-        "MILK_2_5",
-        "BUTTER_PEASANT_72_5_UNSALTED",
-        "SUGAR",
-        "SALT_IODIZED",
-        "WATER"
-      ]
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-23к",
       "canonical_code": "SCHOOL2022_54_23K_LIQUID_WHEAT_MILK_PORRIDGE",
       "canonical_name": "Каша жидкая молочная пшеничная",
@@ -181,20 +160,45 @@
         "SALT_IODIZED",
         "WATER"
       ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-24к",
+      "canonical_code": "SCHOOL2022_54_24K_LIQUID_MILLET_MILK_PORRIDGE",
+      "canonical_name": "Каша жидкая молочная пшенная",
+      "meal_type_code": "breakfast",
+      "source_pdf_page": 66,
+      "source_output_g": "200",
+      "prepared_energy_kcal": "274.9",
+      "required_food_codes": [
+        "MILLET_GROATS",
+        "MILK_2_5",
+        "SUGAR",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED",
+        "WATER"
+      ]
     }
   ],
   "exclusions": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-3т",
+      "reason": "quantified sugar is present in the ingredient table but is not placed by the technology text; defer rather than invent process placement"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-21к",
+      "reason": "quantified sugar is present in the ingredient table but is not placed by the technology text; defer rather than invent process placement"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-22к",
+      "reason": "quantified butter is present in the ingredient table but is not placed by the technology text; defer rather than invent process placement"
+    },
     {
       "source_recipe_id": "ru-school2022:recipe:54-7т",
       "reason": "specialized celiac/medical scope remains outside ordinary wellness catalogue"
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-22к",
-      "reason": "ingredient table contains butter but the selected card technology does not place it; defer rather than invent process placement"
-    },
-    {
       "family": "dried-fruit/cranberry porridge variants",
-      "reason": "deferred from this batch to avoid unnecessary new identity/process-resource debt; not rejected globally"
+      "reason": "deferred from this batch to avoid unnecessary identity/process-resource debt; not rejected globally"
     }
   ],
   "projected_effect": {
