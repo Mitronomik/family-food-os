@@ -57,8 +57,8 @@ No NutritionProfile or Composition authority is granted.
 
 Reuse accepted canonical identities for all remaining source rows, including
 species-specific pink-salmon/pollock fillets, beef category I, rice groats,
-carrot, onion, milk 2.5%, sour cream 15%, butter, sunflower oil, flour,
-breadcrumbs, egg, sugar, tomato puree, iodized salt and water.
+carrot, onion, milk 2.5%, plain wheat bread, breadcrumbs, egg, butter,
+sunflower oil, sugar, tomato puree, iodized salt and water.
 
 Important form rules:
 
@@ -84,10 +84,16 @@ Rules:
   oiling), that same-card fat may be bound to those operations without inventing
   the internal gram split;
 - if multiple quantified cooking fats exist and the technology does not place
-  them unambiguously, the card is rejected from the batch.
+  them unambiguously, the card is rejected from the batch;
+- for non-fat process inputs such as water, an exact ingredient total and a named
+  process use are separate facts: unmentioned uses and per-step gram splits stay
+  UNKNOWN and are never inferred from the ingredient table alone.
 
 This rule admits `54-8м`, `54-10р` and `54-11р` with explicit reviewed
-same-card bindings. It rejects `54-9р` and `54-18м`.
+same-card fat bindings. It rejects `54-9р` and `54-18м`. For `54-8м`, the source
+places water at rack wetting but does not identify the liquid used to pre-soak
+bread; `WATER=12 g` remains an exact recipe total and any additional placement is
+UNKNOWN.
 
 ## 6. Household applicability
 
@@ -150,6 +156,32 @@ This avoids a giant 10-recipe publication transaction, remains resumable after
 publication failures, and preserves deliberate deactivation because a later mixed
 state is never silently reactivated.
 
+### Required runtime activation seam
+
+The current single-recipe prepared-activation path is commit-owning: it activates
+one Recipe and commits that mutation. R3-A runtime must **not** implement option B
+by calling that existing commit-owning guard ten times.
+
+The same future runtime PR is explicitly authorized to extract/add a bounded
+transaction-neutral activation seam while preserving existing single-recipe
+behavior:
+
+1. before the first activation write, reconcile all ten exact RecipeVersions and
+   prepared authorities and require one homogeneous state;
+2. for the all-inactive path, validate that every candidate has exact positive
+   prepared energy and Planner admission blocked only by `INACTIVE`;
+3. open one caller-owned RecipeCatalogue UoW and stage all ten `is_active=true`
+   mutations through a non-committing in-scope operation;
+4. complete all fallible activation-policy / Planner-admission validation for the
+   would-be active batch **before** the single commit, using a transaction-aware
+   in-scope evaluation or an equivalent deterministic policy over staged state;
+5. commit once; any exception before commit rolls back the entire activation UoW;
+6. post-commit readback is assertive verification only and must not compensate by
+   deactivating individual recipes in separate commits.
+
+This is a service-seam refactor inside the same R3-A runtime PR, not a new bounded
+context, schema change, migration or separate activation PR.
+
 ## 9. Preservation matrix
 
 | Existing truth | R3-A requirement |
@@ -193,11 +225,12 @@ A later runtime PR must prove at least:
 8. full-batch activation is blocked until all 10 exact publications exist; activation uses one batch-level UoW and rolls back atomically on failure;
 9. exact replay is zero-write;
 10. deliberate deactivation stays deactivated; mixed active/inactive activation state fails closed;
-11. guarded batch activation admits all accepted recipes only after full preflight;
-12. ordinary Planner generation remains deterministic;
-13. exclusions remove affected candidates without weakening hard constraints;
-14. migration head remains 0042;
-15. `AI_ENABLED=false`.
+11. guarded batch activation admits all accepted recipes only after full preflight and uses a transaction-neutral in-scope mutation/policy seam rather than looping the commit-owning single-recipe guard;
+12. injected failure at any staged activation point rolls back all ten activation writes, while existing single-recipe activation behavior remains regression-safe;
+13. ordinary Planner generation remains deterministic;
+14. exclusions remove affected candidates without weakening hard constraints;
+15. migration head remains 0042;
+16. `AI_ENABLED=false`.
 
 ## 12. Verification tier
 
@@ -245,3 +278,13 @@ The embedded School2022 PDF was independently extracted/re-read:
 - SHA-256: `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`.
 
 Both match the pinned authority receipts.
+
+
+## 16. Independent review corrections
+
+Independent review re-opened two source-process bindings and the batch activation implementation seam without changing the selected ten-card batch or option B:
+
+- `54-8м`: the source does not state what liquid was used to pre-soak stale bread. Consumer text no longer says `в воде`; `WATER=12 g` stays exact at recipe level, explicit water placement is rack wetting, and any other placement/split is UNKNOWN.
+- `54-11м`: consumer steps now preserve the source-backed 5–10 minute weak boil and the covered 160 °C / 30–40 minute oven finish. `WATER=313 g` remains exact at recipe level without an invented `часть воды` split.
+- option B now explicitly requires a transaction-neutral in-scope activation seam because the existing single-recipe guard owns an inner commit; sequential reuse is forbidden.
+- stale `SOUR_CREAM_15` / flour dependency wording was removed from the final batch inventory.
