@@ -4,37 +4,26 @@ Updated: 2026-10-03.
 
 ## Accepted state
 
-PR #140 / R2-F cheese-sandwich Contract Gate is merged into `main` at:
+PR #142 / R2-F runtime is merged into `main` at:
 
-`2e4278cb06c2f683d1113434d04396c723409003`.
+`da6d1e05fd44ecc2733e1a6f472eae3e54b60604`.
 
-The merged gate authorizes exactly one runtime candidate:
-
-`SAD28_SANDWICH_CHEESE_20_10` — Бутерброд с сыром —
-30 g / exact prepared `ENERGY_KCAL=83`.
-
-Current production state before this runtime:
-
-- active `breakfast` classification: 7 RecipeVersions;
-- active MAIN classification: 5 RecipeVersions;
-- hard exact `MILK_2_5` exclusion leaves
-  `HARD_BOILED_EGG` + `SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE`;
-- unaffected BREAKFAST-compatible capacity = 6/week;
-- seven-BREAKFAST remains bounded-infeasible under that exact exclusion.
+DATA-CORPUS-V1 / DC3 remains active. The project has intentionally moved from
+single-recipe micro-publication to enlarged reviewable recipe batches.
 
 ## Current bounded operation
 
-**R2-F runtime — publish cheese sandwich and close exact-MILK resilience.**
+**R3-A — School2022 ten-recipe MAIN batch Contract Gate.**
 
-Issue: `#141`.
+Issue: `#144`.
 
 Branch:
 
-`feat/r2f-cheese-sandwich-runtime`.
+`docs/r3a-school2022-main-batch-gate`.
 
 Accepted base:
 
-`2e4278cb06c2f683d1113434d04396c723409003`.
+`da6d1e05fd44ecc2733e1a6f472eae3e54b60604`.
 
 Status:
 
@@ -42,90 +31,104 @@ Status:
 
 Canonical contract:
 
-`docs/family-food/r2f-sandwich-resilience-gate.md`.
+`docs/family-food/r3a-school2022-main-batch-gate.md`.
 
-## Runtime scope
+## Frozen batch after final review corrections
 
-Create/reconcile exactly two identity-only FoodIngredients:
+Exactly 10 School2022 MAIN cards remain selected:
 
-- `WHEAT_BREAD_PLAIN`;
-- `CHEESE_UNSPECIFIED`.
+- `54-1р`, `54-2р`, `54-3р`;
+- `54-10р`, `54-11р`;
+- `54-4м`, `54-6м`, `54-7м`, `54-8м`, `54-11м`.
+
+New identity-only FoodIngredients are exactly:
+
+- `COD_FILLET_RAW`;
+- `PARSLEY_ROOT_RAW`;
+- `WHEAT_BREAD_STALE_UNSPECIFIED_GRADE`.
 
 No NutritionProfile or Composition authority is granted.
 
-Publish exactly one immutable SOURCE_VERIFIED RecipeVersion:
+## Transaction decision — option B
 
-- code: `SAD28_SANDWICH_CHEESE_20_10`;
-- meal type: `sandwich`;
-- bread: 20 g net;
-- cheese: 11 g gross / 10 g net;
-- output: 30 g;
-- prepared `ENERGY_KCAL=83`;
-- other 53 frozen nutrients UNKNOWN.
+The future runtime remains one PR for the whole batch:
 
-Retained source document:
+1. publish each inactive RecipeVersion + prepared authority atomically per recipe;
+2. a publication failure may leave only an exact inactive subset;
+3. rerun is zero-write for exact rows and converges missing rows;
+4. activation starts only after all ten exact publications pass full-batch preflight;
+5. all inactive -> activate all ten in one caller-owned UoW / one commit;
+6. all active -> zero-write replay;
+7. mixed active/inactive -> fail closed;
+8. any pre-commit activation failure rolls back the whole activation UoW.
 
-`data/curation/r2f-sandwich-resilience/raw-cheese-card.txt`
+The existing single-recipe prepared-activation path owns an inner commit, so it
+must not be looped ten times. The same runtime PR is authorized to extract/add a
+transaction-neutral activation-policy + in-scope mutation seam, with all fallible
+batch admission validation completed before the single commit. Existing
+single-recipe behavior must remain regression-safe. No extra activation PR is
+required.
 
-SHA-256:
+## Final independent-review source corrections
 
-`77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c`.
+- `54-8м`: the source does not identify the liquid used to pre-soak stale bread.
+  `WATER=12 g` remains exact at recipe level; explicit water placement is rack
+  wetting; any other placement and per-step gram split stay UNKNOWN.
+- `54-11м`: consumer steps retain the source-backed 5–10 minute weak boil and
+  covered 160 °C / 30–40 minute oven finish. `WATER=313 g` remains exact without
+  an invented per-step split.
+- stale `SOUR_CREAM_15` / flour dependency wording is removed from the final
+  selected-batch inventory.
+- `54-9р` and `54-18м` remain rejected for unresolved multiple-fat placement;
+  source-clean `54-6м` and `54-7м` remain their replacements.
 
-## Required product proof
+## Source boundary
 
-After guarded activation:
+Durable archive independently re-materialized/re-hashed on 2026-10-03:
 
-- active `breakfast` classification remains 7;
-- one active `sandwich` classification exists;
-- BREAKFAST-compatible pool becomes 8;
-- hard exact `MILK_2_5` unaffected pool becomes exactly three:
-  egg + cottage casserole + cheese sandwich;
-- unchanged repetition=3 gives capacity 9/week;
-- a persisted seven-BREAKFAST hard-`MILK_2_5` week succeeds.
+- Library file id: `libfile_26d95a7a50108191944b97db85a5c008`;
+- ZIP size: 206692075 bytes;
+- ZIP SHA-256: `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
+- embedded School2022 PDF size: 4102547 bytes;
+- PDF SHA-256: `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`.
 
-This is exact canonical `MILK_2_5` resilience only, not a dairy-allergy claim.
+Both match pinned authority receipts.
 
 ## Scope boundaries
 
 Do not:
 
-- publish the rejected butter sandwich;
-- create `BUTTER_CREAM_UNSPECIFIED`;
+- publish/activate R3-A runtime data before this gate merges;
 - add migration 0043 or schema changes;
 - change Planner mapping/scoring/repetition;
 - add a new Nutrition authority;
-- add Nutrition/Composition for the two new foods;
-- start another R2/R3 batch;
+- add Nutrition/Composition to new identities;
+- split the ten recipes into separate PRs;
+- create a separate activation PR;
 - start DC4/Gate1-CLOSE/PR9;
-- start Prep/PDF/Retail/API/UI/Auth/PostgreSQL/AI.
+- start Shopping/Prep/Retail/API/UI/Auth/PostgreSQL/AI.
 
-After this runtime PR is independently reviewed and merged, reassess DATA-CORPUS
-readiness and move to larger R3 recipe batches (target ~10–12 recipes first)
-rather than returning to one-recipe publication by default.
+## Review-correction verification
 
-## Runtime verification
+Corrected content freeze:
 
-Runtime freeze:
+`6ee960e979666e939ec7bed87bca1f70f3ed1ae4`.
 
-`a84395cfff2923881f78048b976f358333726419`.
+Local/read-only audit on that content:
 
-Exact runtime-head verification:
+- selected/spec/household/process/source sets align 10/10 — PASS;
+- exactly 3 identity-only FoodIngredients — PASS;
+- old `54-8м` water-soak inference removed — PASS;
+- old `54-11м` `частью воды` inference removed — PASS;
+- source-backed 54-11м timing/temperature restored — PASS;
+- transaction-neutral batch activation seam frozen — PASS;
+- ENERGY_KCAL-only + 53 UNKNOWN partition preserved — PASS;
+- durable ZIP/PDF size + SHA-256 readback — PASS.
 
-- R2-F cheese sandwich runtime #4 — SUCCESS;
-- focused/affected suite — 169 passed;
-- Ruff check — SUCCESS;
-- Ruff format --check — SUCCESS;
-- scope/whitespace — SUCCESS;
-- exact two identity-only FoodIngredients / no butter identity — PASS;
-- retained raw-card hash/size and tamper enforcement — PASS;
-- 30 g / exact 83 kcal + 53 UNKNOWN nutrients — PASS;
-- fresh RecipeVersion + prepared authority atomicity — PASS;
-- exact replay / deliberate-deactivation preservation — PASS;
-- partial / identity / wrong-energy / injected-failure paths fail closed — PASS;
-- existing sandwich compatibility reused without Planner mapping change — PASS;
-- hard exact `MILK_2_5` persisted seven-BREAKFAST week succeeds with capacity 9 — PASS;
-- migration head 0042 / no 0043 — PASS;
-- `AI_ENABLED=false` — PASS;
-- Docs #830 / DC1 #687 / R1-C #87 / R2 #71 / R2-B #61 / R2-C #49 / R2-E #32 — SUCCESS.
+Verification head `ff245c517c00b3c83716916cc5350b6478cf01b4`: Docs #858 SUCCESS; DC1 #715 SUCCESS. Final status-only state commits must remain byte-identical for docs/data content and receive exact-head Docs/DC1 before merge.
 
-Only state files change after this freeze. Do not start R3 before independent review and merge of PR #142.
+Status:
+
+`READY_FOR_FINAL_REVIEW`.
+
+Runtime remains blocked until PR #146 is independently re-reviewed and merged.

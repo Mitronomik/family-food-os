@@ -1,0 +1,226 @@
+{
+  "schema_version": 1,
+  "operation": "R3A_SCHOOL2022_MAIN_BATCH_HOUSEHOLD_APPLICABILITY",
+  "accepted_base": "da6d1e05fd44ecc2733e1a6f472eae3e54b60604",
+  "issue": 144,
+  "review_rule": {
+    "pass_requires": [
+      "ordinary non-clinical food semantics",
+      "core process executable with ordinary household equipment or ordinary household equivalent",
+      "institutional thawing/holding/serving context separable from recipe-defining process",
+      "no source quantity/nutrition rewrite"
+    ]
+  },
+  "candidates": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-1р",
+      "canonical_code": "SCHOOL2022_54_1R_COD_CUTLET",
+      "decision": "REVIEWED_PASS",
+      "consumer_steps": [
+        "Измельчить подготовленное филе трески.",
+        "Замочить пшеничный хлеб в воде, отжать и повторно измельчить вместе с рыбой; добавить йодированную соль, сливочное масло, сырое яйцо и оставшуюся воду. Источник фиксирует общий расход воды и масла, но не делит его по операциям.",
+        "Сформовать котлеты, выложить на противень, смазанный маслом, выбрать предусмотренную картой ветвь с водой вместо рыбного бульона и запекать 20–25 минут до готовности. Не назначать отдельные граммы масла/воды шагам сверх общего source total."
+      ],
+      "quarantined_context": [
+        "institutional thawing-water recommendation",
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional thawing/serving wording is quarantined and does not alter quantities, output or Nutrition authority.",
+      "process_binding": {
+        "status": "PASS_EXACT_TOTAL_INTERNAL_SPLIT_UNKNOWN",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "water": "WATER",
+        "rule": "Source explicitly uses butter in mass and generic oiling of tray; water is used for bread/remaining mass and the selected water branch for tray liquid. Exact totals are authoritative; per-operation split is not."
+      }
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2р",
+      "canonical_code": "SCHOOL2022_54_2R_PINK_SALMON_CUTLET",
+      "decision": "REVIEWED_PASS",
+      "consumer_steps": [
+        "Измельчить подготовленное филе горбуши.",
+        "Замочить пшеничный хлеб в воде, отжать и повторно измельчить вместе с рыбой; добавить йодированную соль, сливочное масло, сырое яйцо и оставшуюся воду. Источник фиксирует общий расход воды и масла, но не делит его по операциям.",
+        "Сформовать котлеты, выложить на противень, смазанный маслом, выбрать предусмотренную картой ветвь с водой вместо рыбного бульона и запекать 20–25 минут до готовности. Не назначать отдельные граммы масла/воды шагам сверх общего source total."
+      ],
+      "quarantined_context": [
+        "institutional thawing-water recommendation",
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional thawing/serving wording is quarantined and does not alter quantities, output or Nutrition authority.",
+      "process_binding": {
+        "status": "PASS_EXACT_TOTAL_INTERNAL_SPLIT_UNKNOWN",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "water": "WATER",
+        "rule": "Same-card exact total binding; per-operation split is not source-specified."
+      }
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-3р",
+      "canonical_code": "SCHOOL2022_54_3R_POLLOCK_CUTLET",
+      "decision": "REVIEWED_PASS",
+      "consumer_steps": [
+        "Измельчить подготовленное филе минтая.",
+        "Замочить пшеничный хлеб в воде, отжать и повторно измельчить вместе с рыбой; добавить йодированную соль, сливочное масло, сырое яйцо и оставшуюся воду. Источник фиксирует общий расход воды и масла, но не делит его по операциям.",
+        "Сформовать котлеты, выложить на противень, смазанный маслом, выбрать предусмотренную картой ветвь с водой вместо рыбного бульона и запекать 20–25 минут до готовности. Не назначать отдельные граммы масла/воды шагам сверх общего source total."
+      ],
+      "quarantined_context": [
+        "institutional thawing-water recommendation",
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional thawing/serving wording is quarantined and does not alter quantities, output or Nutrition authority.",
+      "process_binding": {
+        "status": "PASS_EXACT_TOTAL_INTERNAL_SPLIT_UNKNOWN",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "water": "WATER",
+        "rule": "Same-card exact total binding; per-operation split is not source-specified."
+      }
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-10р",
+      "canonical_code": "SCHOOL2022_54_10R_PINK_SALMON_TOMATO_VEGETABLES",
+      "decision": "REVIEWED_PASS",
+      "consumer_steps": [
+        "Подготовить и нашинковать корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать овощи с томатным пюре, используя подсолнечное масло из этой карты.",
+        "Нарезать подготовленное филе горбуши порционными кусками.",
+        "Выложить рыбу и овощи в противень, смазанный тем же единственным указанным в карте подсолнечным маслом; добавить воду, сахар и йодированную соль и готовить 40–45 минут. Источник фиксирует 5,3 г масла total, но не делит его между пассерованием и смазыванием противня."
+      ],
+      "quarantined_context": [
+        "institutional thawing instruction",
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional thawing/serving wording is quarantined and does not alter quantities, output or Nutrition authority.",
+      "process_binding": {
+        "status": "PASS_SINGLE_FAT_SAME_CARD_BINDING",
+        "fat": "SUNFLOWER_OIL",
+        "rule": "Sunflower oil is the only cooking-fat row. It is bound to the unqualified sautéing/oiled-tray operations. Exact 5.3 g total is authoritative; internal split remains UNKNOWN."
+      }
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-8м",
+      "canonical_code": "SCHOOL2022_54_8M_STEAMED_BEEF_MEATBALLS",
+      "decision": "REVIEWED_PASS",
+      "consumer_steps": [
+        "Подготовить репчатый лук и пассеровать его на сливочном масле — это единственный cooking-fat, указанный в карте.",
+        "Измельчить говядину с предварительно замоченным черствым пшеничным хлебом без корок, добавить йодированную соль и лук, повторно измельчить и сформовать шарики примерно по 24 г. Источник не указывает жидкость, использованную для замачивания хлеба.",
+        "Выложить на решётку, смоченную кипячёной водой, и готовить на пару 20–25 минут. Карта фиксирует 12 г воды total; явное process placement воды — смачивание решётки. Не приписывать воду замачиванию хлеба и не придумывать per-step gram split."
+      ],
+      "quarantined_context": [
+        "institutional thawing instruction",
+        "institutional steam-box wording",
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional thawing/serving wording is quarantined and does not alter quantities, output or Nutrition authority.",
+      "process_binding": {
+        "status": "PASS_SINGLE_FAT_SAME_CARD_BINDING",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "water": "WATER",
+        "rule": "Butter is the only cooking-fat row and may bind to the unqualified onion sauté operation. The exact 12 g WATER ingredient total remains authoritative; the source explicitly places water only at rack wetting, while the liquid used to pre-soak bread is UNKNOWN. Do not allocate grams between operations without source evidence.",
+        "water_binding": "PARTIAL_SOURCE_PLACEMENT"
+      }
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-11м",
+      "canonical_code": "SCHOOL2022_54_11M_BEEF_PILAF",
+      "decision": "REVIEWED_PASS",
+      "consumer_steps": [
+        "Промыть рис; подготовить морковь и лук.",
+        "Лук бланшировать и пассеровать вместе с морковью на сливочном масле с добавлением воды. Карта фиксирует 313 г воды total, но не делит это количество между операциями.",
+        "Подготовленную говядину нарезать кусочками по 10–15 г, добавить пассерованные морковь и лук и йодированную соль.",
+        "Мясо и овощи варить при слабом кипении 5–10 минут, всыпать подготовленный рис, варить до загустения, затем накрыть крышкой и довести до готовности в духовке при 160 °C 30–40 минут."
+      ],
+      "quarantined_context": [
+        "institutional thawing instruction",
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional thawing/serving wording is quarantined and does not alter quantities, output or Nutrition authority.",
+      "process_binding": {
+        "status": "PASS_EXPLICIT_PROCESS_BINDING",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "water": "WATER",
+        "rule": "The source explicitly places butter and water in the onion/carrot sauté. The exact 313 g WATER ingredient total remains authoritative, but no per-operation gram split is stated. Consumer steps preserve the subsequent 5–10 minute weak boil and 160 °C / 30–40 minute covered oven finish.",
+        "water_binding": "SOURCE_PLACED_TOTAL_UNSPLIT"
+      }
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-4м",
+      "canonical_code": "SCHOOL2022_54_4M_BEEF_CUTLET",
+      "decision": "REVIEWED_PASS",
+      "consumer_steps": [
+        "Измельчить подготовленную говядину и соединить с черствым пшеничным хлебом без корок, замоченным в молоке.",
+        "Добавить йодированную соль, повторно измельчить, перемешать и сформовать котлеты.",
+        "Запанировать в сухарях, выложить на противень, смазанный сливочным маслом, и запекать 25–30 минут при 250–280 °C до готовности."
+      ],
+      "quarantined_context": [
+        "institutional thawing instruction",
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional context is quarantined and does not alter quantities, output or Nutrition authority.",
+      "process_binding": {
+        "status": "PASS_EXPLICIT_PROCESS_BINDING",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "rule": "Source explicitly identifies stale bread soaked in milk, breadcrumbs, iodized salt and tray greasing with butter."
+      }
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-11р",
+      "canonical_code": "SCHOOL2022_54_11R_POLLOCK_TOMATO_VEGETABLES",
+      "decision": "REVIEWED_PASS",
+      "consumer_steps": [
+        "Подготовить и нашинковать корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать овощи с томатным пюре, используя подсолнечное масло из этой карты.",
+        "Нарезать подготовленное филе минтая порционными кусками.",
+        "Выложить рыбу и овощи в противень, смазанный тем же единственным указанным в карте подсолнечным маслом; добавить воду, сахар и йодированную соль и готовить 40–45 минут. Источник фиксирует 5,3 г масла total, но не делит его между пассерованием и смазыванием противня."
+      ],
+      "quarantined_context": [
+        "institutional thawing-water instruction",
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional context is quarantined and does not alter quantities, output or Nutrition authority.",
+      "process_binding": {
+        "status": "PASS_SINGLE_FAT_SAME_CARD_BINDING",
+        "fat": "SUNFLOWER_OIL",
+        "rule": "Sunflower oil is the only cooking-fat row. It is bound to the unqualified sautéing/oiled-tray operations. Exact 5.3 g total is authoritative; internal split remains UNKNOWN."
+      }
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-6м",
+      "canonical_code": "SCHOOL2022_54_6M_BEEF_BITOCHEK",
+      "decision": "REVIEWED_PASS",
+      "consumer_steps": [
+        "Измельчить подготовленную говядину и соединить с черствым пшеничным хлебом без корок, замоченным в молоке.",
+        "Добавить йодированную соль, повторно измельчить, перемешать и сформовать биточки.",
+        "Запанировать в сухарях, выложить на противень, смазанный сливочным маслом, и запекать 25–30 минут при 250–280 °C до готовности."
+      ],
+      "quarantined_context": [
+        "institutional thawing instruction",
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional context is quarantined and does not alter quantities, output or Nutrition authority.",
+      "process_binding": {
+        "status": "PASS_EXPLICIT_PROCESS_BINDING",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "rule": "Source explicitly identifies stale bread soaked in milk, breadcrumbs, iodized salt and tray greasing with butter."
+      }
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-7м",
+      "canonical_code": "SCHOOL2022_54_7M_BEEF_SCHNITZEL",
+      "decision": "REVIEWED_PASS",
+      "consumer_steps": [
+        "Измельчить подготовленную говядину и соединить с черствым пшеничным хлебом без корок, замоченным в молоке.",
+        "Добавить йодированную соль, повторно измельчить, перемешать и сформовать шницели.",
+        "Запанировать в сухарях, выложить на противень, смазанный сливочным маслом, и запекать 25–30 минут при 250–280 °C до готовности."
+      ],
+      "quarantined_context": [
+        "institutional thawing instruction",
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional context is quarantined and does not alter quantities, output or Nutrition authority.",
+      "process_binding": {
+        "status": "PASS_EXPLICIT_PROCESS_BINDING",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "rule": "Source explicitly identifies stale bread soaked in milk, breadcrumbs, iodized salt and tray greasing with butter."
+      }
+    }
+  ],
+  "blanket_school2022_authority": false
+}

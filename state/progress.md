@@ -1,5 +1,41 @@
 # Progress
 
+## R3-A final independent-review corrections — 2026-10-03
+
+PR #146 remains the same docs/data Contract Gate. No runtime work and no new PR.
+
+Corrections applied:
+
+- source process for `54-8м` is fail-closed: pre-soak liquid UNKNOWN;
+- source process for `54-11м` preserves 5–10 minute weak boil and 160 °C /
+  30–40 minute covered oven finish without inventing a water split;
+- final identity review contains no stale `SOUR_CREAM_15` dependency;
+- option B now includes the required transaction-neutral batch-activation seam;
+  sequential calls to the commit-owning single-recipe guard are explicitly
+  forbidden;
+- runtime acceptance requires full preflight, one caller-owned activation UoW,
+  no inner commits, staged-state admission validation before commit, whole-batch
+  rollback on failure and regression safety for existing single-recipe behavior.
+
+Batch remains exactly ten MAIN cards and exactly three new identity-only foods.
+No migration/schema/Planner/new-Nutrition-authority change is authorized.
+
+Corrected content freeze:
+`6ee960e979666e939ec7bed87bca1f70f3ed1ae4`.
+
+Read-only verification:
+
+- 10/10 selected/spec/household/process/source alignment — PASS;
+- old unsupported water-process phrases absent — PASS;
+- option-B transaction fields + in-scope seam — PASS;
+- ENERGY_KCAL + 53 UNKNOWN preserved — PASS;
+- durable archive/PDF bytes and SHA-256 — PASS.
+
+Verification head `ff245c517c00b3c83716916cc5350b6478cf01b4`: Docs #858 SUCCESS; DC1 #715 SUCCESS.
+Final status-only head must also be exact-head green before merge.
+
+Status: `READY_FOR_FINAL_REVIEW`.
+
 ## R2-F cheese-sandwich runtime — implementation active — 2026-10-03
 
 Accepted base:

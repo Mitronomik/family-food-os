@@ -1,5 +1,42 @@
 # Handoff
 
+## R3-A final review corrections — verification pending — 2026-10-03
+
+PR #146 / Issue #144. Same Contract Gate; no new PR.
+
+User-selected option B remains unchanged: one future runtime PR owns all ten
+recipes. Publication is per-recipe atomic while inactive; activation waits for
+all ten exact publications and uses one caller-owned batch UoW / one commit.
+
+Independent review blockers corrected in the same PR:
+
+- `54-8м`: removed unsupported claim that stale bread was soaked in water;
+  exact `WATER=12 g` remains recipe-level authority, explicit placement is rack
+  wetting, all other placement/split UNKNOWN;
+- `54-11м`: removed invented `частью воды` split and restored 5–10 minute weak
+  boil plus covered 160 °C / 30–40 minute oven finish;
+- existing commit-owning single-recipe activation may not be looped for R3-A;
+  runtime must add/extract a transaction-neutral policy + in-scope activation
+  seam and complete all fallible batch admission validation before one commit;
+- stale `SOUR_CREAM_15` / flour dependency wording removed.
+
+Selected set remains exactly:
+`54-1р/2р/3р/10р/11р/4м/6м/7м/8м/11м`.
+
+Identity-only foods remain exactly:
+`COD_FILLET_RAW`, `PARSLEY_ROOT_RAW`,
+`WHEAT_BREAD_STALE_UNSPECIFIED_GRADE`.
+
+Corrected content freeze:
+`6ee960e979666e939ec7bed87bca1f70f3ed1ae4`.
+
+Cross-file/source/transaction audit on content freeze: PASS.
+Durable ZIP/PDF re-hash: PASS.
+Verification head `ff245c517c00b3c83716916cc5350b6478cf01b4`: Docs #858 SUCCESS; DC1 #715 SUCCESS.
+Final status-only head must also be exact-head green before merge.
+
+Status: `READY_FOR_FINAL_REVIEW`.
+
 ## R2-F cheese-sandwich runtime — active — 2026-10-03
 
 Accepted base:
