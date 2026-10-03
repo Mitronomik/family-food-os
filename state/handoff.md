@@ -21,14 +21,15 @@ while the source declares only 0.98 g fat for the whole sandwich.
 Create identity-only only:
 `WHEAT_BREAD_PLAIN`, `CHEESE_UNSPECIFIED`.
 
-Retained runtime source:
-`data/curation/r2f-sandwich-resilience/runtime-source.json`.
+Retained publication source:
+`data/curation/r2f-sandwich-resilience/raw-cheese-card.txt`
+SHA-256 `77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c`, 1783 bytes.
 
-Source artifact commit:
-`a35ef046538687bcaf2600d5027f87688e9224ca`.
+Durable Library:
+`library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt` / `libfile_baff1ee2870081918170b98d1cec3c5d`.
 
-Source SHA-256:
-`26f239916b56429e78314369df961c8dd13cecd7d559d942655387e9851a5a97`.
+SAD28 is host only; issuer is `NOT_ESTABLISHED_FROM_RETAINED_CARD`; upstream
+recipe collection is Kutkina 2008.
 
 Runtime must not use live web/PDF bytes as source truth. Future expansion of the
 source family requires reacquisition and separate review.
@@ -49,7 +50,7 @@ Verification:
 - DC1 #668 — SUCCESS.
 
 Status:
-`READY_FOR_FINAL_REVIEW`.
+`SOURCE_PROVENANCE_CORRECTION_VERIFICATION_PENDING`.
 
 Do not start runtime publication before independent final review and merge.
 
