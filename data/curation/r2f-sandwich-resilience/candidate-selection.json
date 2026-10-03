@@ -8,11 +8,12 @@
     {
       "canonical_code": "SAD28_SANDWICH_CHEESE_20_10",
       "canonical_name": "Бутерброд с сыром",
-      "source_recipe_id": "sad28-luppolovo:techcard:cheese-sandwich:20-10",
+      "source_recipe_id": "sad28-hosted:techcard:3:cheese-sandwich:20-10",
       "meal_type_code": "sandwich",
       "source_output_g": "30",
       "prepared_energy_kcal": "83",
-      "canonical_record_sha256": "2eb846cdb80737c0b4f65202beda1e352f3610c6bb6634b832901615ca3a8f97"
+      "canonical_record_sha256": "2eb846cdb80737c0b4f65202beda1e352f3610c6bb6634b832901615ca3a8f97",
+      "source_discovery_recipe_id": "sad28-luppolovo:techcard:cheese-sandwich:20-10"
     }
   ],
   "projected_after_future_runtime": {
