@@ -27,8 +27,20 @@ After independent review and merge, the next corpus publication unit should be a
 larger R3 batch (~10–12 recipes initially), not another one-recipe PR by default.
 Do not start that future batch before this runtime PR is merged.
 
+Runtime freeze:
+`a84395cfff2923881f78048b976f358333726419`.
+
+Verification on exact runtime freeze:
+- R2-F #4 — SUCCESS;
+- focused/affected suite — 169 passed;
+- Ruff check/format — SUCCESS;
+- scope/whitespace — SUCCESS;
+- hard exact-MILK persisted 7-breakfast closure — PASS;
+- Docs #830 / DC1 #687 / R1-C #87 / R2 #71 / R2-B #61 / R2-C #49 / R2-E #32 — SUCCESS;
+- migration head 0042; AI disabled.
+
 Status:
-`IMPLEMENTATION_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## R2-F cheese-sandwich resilience Contract Gate — provenance correction — 2026-10-03
 
