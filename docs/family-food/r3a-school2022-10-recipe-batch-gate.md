@@ -1,8 +1,8 @@
 # R3-A — School2022 10-recipe DC3 batch Contract Gate
 
-**Status:** pre-implementation docs/data/source-authority gate  
-**Decision date:** 2026-10-03  
-**Issue:** #143  
+**Status:** pre-implementation docs/data/source-authority gate
+**Decision date:** 2026-10-03
+**Issue:** #143
 **Accepted base:** `da6d1e05fd44ecc2733e1a6f472eae3e54b60604` (merged PR #142)
 
 ## Goal
