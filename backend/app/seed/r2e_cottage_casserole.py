@@ -203,8 +203,7 @@ def _load_contract(
         or applicability.get("accepted_base") != R2E_CONTRACT_ACCEPTED_BASE
         or applicability.get("source", {}).get("archive_sha256")
         != SOURCE_ARCHIVE_SHA256
-        or applicability.get("source", {}).get("source_pdf_sha256")
-        != SOURCE_PDF_SHA256
+        or applicability.get("source", {}).get("source_pdf_sha256") != SOURCE_PDF_SHA256
         or not isinstance(candidate, dict)
         or candidate.get("source_recipe_id") != SOURCE_RECIPE_ID
         or candidate.get("decision") != "HOUSEHOLD_APPLICABLE"
@@ -217,15 +216,13 @@ def _load_contract(
 
     if (
         specs.get("schema_version") != 1
-        or specs.get("operation")
-        != "R2E_COTTAGE_CASSEROLE_PREPARED_PUBLICATION_SPECS"
+        or specs.get("operation") != "R2E_COTTAGE_CASSEROLE_PREPARED_PUBLICATION_SPECS"
         or specs.get("accepted_base") != R2E_CONTRACT_ACCEPTED_BASE
         or specs.get("authority_kind") != "PREPARED_OUTPUT_V1"
         or specs.get("recipe_calculation_version")
         != "RECIPE_PREPARED_OUTPUT_NUTRITION_V1"
         or specs.get("source", {}).get("archive_sha256") != SOURCE_ARCHIVE_SHA256
-        or specs.get("source", {}).get("source_document_sha256")
-        != SOURCE_PDF_SHA256
+        or specs.get("source", {}).get("source_document_sha256") != SOURCE_PDF_SHA256
     ):
         raise ValueError("R2-E prepared publication contract identity changed.")
 
@@ -274,8 +271,7 @@ def _load_contract(
         or prepared.get("recipe_code") != CASSEROLE_RECIPE_CODE
         or prepared.get("source_recipe_id") != SOURCE_RECIPE_ID
         or prepared.get("output_mass_g") != "150"
-        or prepared.get("expected_available_amounts")
-        != [["ENERGY_KCAL", "301.2"]]
+        or prepared.get("expected_available_amounts") != [["ENERGY_KCAL", "301.2"]]
         or tuple(prepared.get("expected_unknown_codes", ())) != expected_unknown
         or prepared.get("require_recipe_inactive") is not True
     ):

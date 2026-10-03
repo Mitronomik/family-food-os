@@ -234,10 +234,13 @@ def test_r2e_fresh_publication_adds_casserole_without_rewriting_existing_corpus(
         assert detail.version.source_recipe_id == "ru-school2022:recipe:54-1т"
         assert detail.version.source_output_g == Decimal("150.000000")
         assert detail.version.cook_time_minutes is None
-        assert tuple(
-            food.get(row.food_ingredient_id).canonical_code
-            for row in detail.ingredients
-        ) == EXPECTED_INGREDIENT_CODES
+        assert (
+            tuple(
+                food.get(row.food_ingredient_id).canonical_code
+                for row in detail.ingredients
+            )
+            == EXPECTED_INGREDIENT_CODES
+        )
         assert tuple(row.quantity for row in detail.ingredients) == (
             Decimal("139.500000"),
             Decimal("9.700000"),
@@ -264,8 +267,7 @@ def test_r2e_fresh_publication_adds_casserole_without_rewriting_existing_corpus(
 
         projection = nutrition.neutral_consumption_projection(detail.version.id)
         assert (
-            projection.authority_kind
-            is RecipeNutritionAuthorityKind.PREPARED_OUTPUT_V1
+            projection.authority_kind is RecipeNutritionAuthorityKind.PREPARED_OUTPUT_V1
         )
         assert projection.exact_energy_ready is True
         assert projection.per_base_serving.kcal == Decimal("301.200000")

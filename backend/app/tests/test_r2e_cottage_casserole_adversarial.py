@@ -219,9 +219,7 @@ def test_r2e_fresh_recipe_and_authority_failure_rolls_back(
         )
 
 
-def test_r2e_activation_failure_keeps_exact_publication_inactive(
-    tmp_path, monkeypatch
-):
+def test_r2e_activation_failure_keeps_exact_publication_inactive(tmp_path, monkeypatch):
     config = DatabaseConfig(path=tmp_path / "activation.sqlite")
     seed_r2c_breakfast_grain_diversity(config)
 
