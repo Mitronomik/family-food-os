@@ -29,8 +29,14 @@ Important fail-closed decisions:
 
 No migration 0043, schema change, Planner change or new Nutrition authority.
 
+Content freeze:
+`36d12b03d4aa11b52616bf59d176a7a817e0d74d`.
+
+Docs #839 and DC1 #696 are SUCCESS. The selected set is exactly 10; five
+identity-only foods are frozen; 54-5м/54-12м/54-15м are not selected.
+
 Status:
-`GATE_EVIDENCE_REVIEW_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## R2-F cheese-sandwich runtime — active — 2026-10-03
 
