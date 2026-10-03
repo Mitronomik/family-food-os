@@ -54,8 +54,20 @@ Product effect remains:
 - LUNCH +1;
 - SNACK +1.
 
+Verification on corrected content head `2f2deaff731a07c1937e44059106f8bfcc2f4778`:
+
+- JSON/source-contract consistency — PASS;
+- raw-card 1783 bytes / SHA-256 `77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c` — PASS;
+- durable Library materialize/readback — PASS;
+- source tuple coherence — PASS;
+- host/issuer/upstream role separation — PASS;
+- derivative SHA-256 `e2e717c8e44107e5b4ac4f4087af49fd0d279c6972ec2603ce2fd8244e61b63f` — PASS;
+- Docs #824 — SUCCESS;
+- DC1 #681 — SUCCESS;
+- no runtime/schema/migration changes.
+
 Status:
-`SOURCE_PROVENANCE_CORRECTION_VERIFICATION_PENDING`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## R2-E cottage casserole runtime review-ready — 2026-10-03
 
