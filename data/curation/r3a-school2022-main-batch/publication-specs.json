@@ -984,8 +984,8 @@
           ],
           "steps": [
             "Подготовить репчатый лук и пассеровать его на сливочном масле — это единственный cooking-fat, указанный в карте.",
-            "Измельчить говядину с предварительно замоченным в воде черствым пшеничным хлебом, добавить йодированную соль и лук, повторно измельчить и сформовать шарики примерно по 24 г.",
-            "Выложить на решётку, смоченную кипячёной водой, и готовить на пару 20–25 минут. Карта фиксирует 12 г воды total, но не распределяет её между замачиванием хлеба и смачиванием решётки."
+            "Измельчить говядину с предварительно замоченным черствым пшеничным хлебом без корок, добавить йодированную соль и лук, повторно измельчить и сформовать шарики примерно по 24 г. Источник не указывает жидкость, использованную для замачивания хлеба.",
+            "Выложить на решётку, смоченную кипячёной водой, и готовить на пару 20–25 минут. Карта фиксирует 12 г воды total; явное process placement воды — смачивание решётки. Не приписывать воду замачиванию хлеба и не придумывать per-step gram split."
           ],
           "equipment_codes": [],
           "source_output_g": "60",
@@ -1071,7 +1071,8 @@
         "status": "PASS_SINGLE_FAT_SAME_CARD_BINDING",
         "fat": "BUTTER_PEASANT_72_5_UNSALTED",
         "water": "WATER",
-        "rule": "Butter is the only cooking-fat row and is bound to the unqualified onion sauté operation. Exact 12 g water total covers source bread-soaking / rack-wetting use; per-operation split remains UNKNOWN."
+        "rule": "Butter is the only cooking-fat row and may bind to the unqualified onion sauté operation. The exact 12 g WATER ingredient total remains authoritative; the source explicitly places water only at rack wetting, while the liquid used to pre-soak bread is UNKNOWN. Do not allocate grams between operations without source evidence.",
+        "water_binding": "PARTIAL_SOURCE_PLACEMENT"
       }
     },
     "SCHOOL2022_54_11M_BEEF_PILAF": {
@@ -1182,8 +1183,9 @@
           ],
           "steps": [
             "Промыть рис; подготовить морковь и лук.",
-            "Пассеровать лук и морковь со сливочным маслом и частью воды.",
-            "Соединить подготовленную говядину с овощами и солью, добавить рис и готовить до загустения, затем довести под крышкой в духовке."
+            "Лук бланшировать и пассеровать вместе с морковью на сливочном масле с добавлением воды. Карта фиксирует 313 г воды total, но не делит это количество между операциями.",
+            "Подготовленную говядину нарезать кусочками по 10–15 г, добавить пассерованные морковь и лук и йодированную соль.",
+            "Мясо и овощи варить при слабом кипении 5–10 минут, всыпать подготовленный рис, варить до загустения, затем накрыть крышкой и довести до готовности в духовке при 160 °C 30–40 минут."
           ],
           "equipment_codes": [],
           "source_output_g": "200",
@@ -1269,7 +1271,8 @@
         "status": "PASS_EXPLICIT_PROCESS_BINDING",
         "fat": "BUTTER_PEASANT_72_5_UNSALTED",
         "water": "WATER",
-        "rule": "Source explicitly says onion/carrot are sautéed in butter with added water; remaining recipe cooking follows the source card."
+        "rule": "The source explicitly places butter and water in the onion/carrot sauté. The exact 313 g WATER ingredient total remains authoritative, but no per-operation gram split is stated. Consumer steps preserve the subsequent 5–10 minute weak boil and 160 °C / 30–40 minute covered oven finish.",
+        "water_binding": "SOURCE_PLACED_TOTAL_UNSPLIT"
       }
     },
     "SCHOOL2022_54_4M_BEEF_CUTLET": {
@@ -2061,7 +2064,8 @@
     "live_web_runtime_dependency_allowed": false,
     "implicit_food_identity_narrowing_allowed": false,
     "partial_inactive_batch_publication_allowed": true,
-    "batch_activation_atomic": true
+    "batch_activation_atomic": true,
+    "batch_activation_requires_transaction_neutral_in_scope_seam": true
   },
   "batch_transaction_semantics": {
     "publication": {
@@ -2076,7 +2080,14 @@
       "all_inactive": "Activate all 10 in one caller-owned batch UoW and commit once.",
       "all_active": "Zero-write exact replay.",
       "mixed_active_inactive": "Fail closed with zero writes; do not silently reactivate a deliberately deactivated recipe.",
-      "failure_rollback": "Any activation failure rolls back the whole activation UoW; exact inactive publications remain."
+      "failure_rollback": "Any activation failure rolls back the whole activation UoW; exact inactive publications remain.",
+      "existing_single_recipe_commit_owning_guard_loop_allowed": false,
+      "required_runtime_seam": "The runtime PR must extract/add transaction-neutral prepared-activation policy plus an in-scope batch activation mutation. Existing commit-owning single-recipe activation may remain for its current callers but must not be looped for R3-A.",
+      "preflight_before_first_write": "Reconcile all 10 exact RecipeVersions + prepared authorities and verify one homogeneous activation state. For all-inactive activation, every candidate must have exact positive prepared energy and Planner admission blocked only by INACTIVE before the first activation write.",
+      "write_semantics": "Open one caller-owned RecipeCatalogue UoW, stage is_active=true for all 10 through a non-committing in-scope mutation, and perform no inner commits.",
+      "precommit_validation": "All fallible activation-policy/Planner-admission validation for the would-be active batch must complete before the single commit, using transaction-aware/in-scope evaluation or an equivalent deterministic policy over the staged active state.",
+      "inner_commit_allowed": false,
+      "post_commit_readback": "Read-only/assertive verification only; it is not a second business gate and must not trigger compensating per-recipe deactivation."
     }
   }
 }
