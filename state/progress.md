@@ -7,7 +7,7 @@ Accepted base:
 
 Issue #149 / branch `docs/r3b-school2022-breakfast-batch-gate`.
 
-Gate content freezes ten School2022 BREAKFAST RecipeVersions, four identity-only
+Gate content freezes ten School2022 BREAKFAST RecipeVersions, three identity-only
 foods, exact source output/ENERGY_KCAL, household/process review and reuse of the
 merged R3-A batch transaction seam.
 
@@ -17,6 +17,8 @@ Projected future runtime effect:
 - breakfast-compatible pool ~8 → ~18;
 - MAIN remains 15;
 - DC4 remains blocked by the `50–80+` baseline.
+
+Adversarial process-placement audit: PASS after replacing `54-3т` / `54-21к` with `54-2к` / `54-24к`.
 
 Independent archive/PDF hash readback: PASS.
 
