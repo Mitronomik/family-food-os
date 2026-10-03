@@ -1,10 +1,15 @@
 import shutil
 import sqlite3
+from datetime import date
+from decimal import Decimal
 
 import pytest
 
 from app.db import migrations
 from app.db.config import DatabaseConfig
+from app.domain.meal_patterns import MealRole
+from app.domain.meal_plans import MemberMealPatternSourceKind
+from app.domain.planner import PlannerConfig, PlannerRejectionCode, PlannerSuccess
 from app.domain.recipe_nutrition_v2 import NUTRIENT_CODES
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_ingredient_composition import (
@@ -17,6 +22,21 @@ from app.persistence.sqlalchemy_core.food_recipe_repositories import (
     SqlAlchemyRecipeRepository,
     SqlAlchemyRecipeVersionRepository,
 )
+from app.persistence.sqlalchemy_core.household_composition import (
+    create_household_service,
+)
+from app.persistence.sqlalchemy_core.household_uow import SqlAlchemyHouseholdReadScope
+from app.persistence.sqlalchemy_core.meal_pattern_uow import (
+    SqlAlchemyMealPatternCatalogueReadScope,
+)
+from app.persistence.sqlalchemy_core.meal_plan_uow import (
+    SqlAlchemyMealPlanReadScope,
+    SqlAlchemyMealPlanUnitOfWork,
+)
+from app.persistence.sqlalchemy_core.nutrition_composition import (
+    create_nutrition_service,
+)
+from app.persistence.sqlalchemy_core.pantry_composition import create_pantry_service
 from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
     SqlAlchemyPreparedRecipeNutritionRepository,
     create_recipe_nutrition_v2_service,
@@ -38,7 +58,21 @@ from app.seed.r3a_school2022_main_batch import (
     publish_r3a_school2022_main_batch,
     seed_r3a_school2022_main_batch,
 )
+from app.services.meal_plans import MealPlanService
+from app.services.planner import (
+    AuthoritativeGenerationRequest,
+    GenerationMemberConstraints,
+    PlannerService,
+)
 from app.services.prepared_recipe_activation import PreparedRecipeActivationError
+
+WEEK_START = date(2026, 10, 5)
+MILK_FOOD_CODE = "MILK_2_5"
+MILK_AFFECTED_R3A_CODES = {
+    "SCHOOL2022_54_4M_BEEF_CUTLET",
+    "SCHOOL2022_54_6M_BEEF_BITOCHEK",
+    "SCHOOL2022_54_7M_BEEF_SCHNITZEL",
+}
 
 
 @pytest.fixture(scope="session")
@@ -119,6 +153,63 @@ def r3a_counts(config: DatabaseConfig) -> dict[str, int]:
         "authorities": authorities,
         "values": values,
     }
+
+
+def meal_plan_service(engine) -> MealPlanService:
+    return MealPlanService(
+        write_scope_factory=lambda: SqlAlchemyMealPlanUnitOfWork(engine),
+        read_scope_factory=lambda: SqlAlchemyMealPlanReadScope(engine),
+        household_read_scope_factory=lambda: SqlAlchemyHouseholdReadScope(engine),
+        pattern_read_scope_factory=lambda: SqlAlchemyMealPatternCatalogueReadScope(
+            engine
+        ),
+    )
+
+
+def production_planner(engine):
+    meal_plans = meal_plan_service(engine)
+    households = create_household_service(engine)
+    catalogue = create_food_recipe_catalogue_service(engine)
+    nutrition = create_nutrition_service(engine)
+    pantry = create_pantry_service(engine)
+    recipe_nutrition = create_recipe_nutrition_v2_service(engine)
+    planner = PlannerService(
+        meal_plans,
+        households,
+        catalogue,
+        nutrition,
+        pantry,
+        PlannerConfig(version="planner-v0.4", max_recipe_repetitions=3),
+        recipe_nutrition=recipe_nutrition,
+    )
+    return planner, meal_plans, households, catalogue
+
+
+def create_dinner_household(households, meal_plans):
+    household = households.create_household(
+        name="R3-A exclusion proof",
+        timezone_name="Europe/Moscow",
+        city="Санкт-Петербург",
+    )
+    member = households.add_household_member(
+        household.id,
+        name="Анна",
+        activity_level="active",
+        goal="maintain",
+        birth_date=date(1990, 5, 20),
+        sex="female",
+        height_cm=Decimal(168),
+        weight_kg=Decimal(62),
+    )
+    selection = meal_plans.accept_member_pattern(
+        household_id=household.id,
+        member_id=member.id,
+        source_kind=MemberMealPatternSourceKind.CUSTOM,
+        schedule={weekday: (MealRole.DINNER,) for weekday in range(1, 8)},
+        energy_shares={weekday: (Decimal("0.35"),) for weekday in range(1, 8)},
+    )
+    return household, member, selection
+
 
 
 def test_r3a_fresh_publication_and_batch_activation(database):
@@ -382,5 +473,59 @@ def test_r3a_source_process_review_corrections_are_published_verbatim(database):
         assert not any("частью воды" in step for step in r11_steps)
         assert any("5–10 минут" in step for step in r11_steps)
         assert any("160 °C 30–40 минут" in step for step in r11_steps)
+    finally:
+        engine.dispose()
+
+
+def test_r3a_hard_milk_exclusion_rejects_only_affected_batch_candidates(database):
+    seed_r3a_school2022_main_batch(database)
+    engine = create_sqlite_engine(database)
+    try:
+        planner, meal_plans, households, catalogue = production_planner(engine)
+        food = create_food_catalogue_service(engine)
+        household, member, selection = create_dinner_household(households, meal_plans)
+        milk_id = food.get_by_code(MILK_FOOD_CODE).id
+        request = AuthoritativeGenerationRequest(
+            household.id,
+            WEEK_START,
+            (
+                GenerationMemberConstraints(
+                    member.id,
+                    excluded_food_ingredient_ids=frozenset({milk_id}),
+                ),
+            ),
+        )
+
+        result, detail = planner.generate_authoritative(request)
+
+        assert isinstance(result, PlannerSuccess)
+        assert detail is not None
+        assert detail.member_selections[0].selection_id == selection.selection.id
+
+        versions = {
+            code: catalogue.get_current_verified(
+                catalogue.get_by_code(code).id
+            ).version.id
+            for code in RECIPE_CODES
+        }
+        for code in RECIPE_CODES:
+            traces = [
+                row
+                for row in result.trace.candidates
+                if row.recipe_version_id == versions[code]
+            ]
+            assert traces
+            if code in MILK_AFFECTED_R3A_CODES:
+                assert any(
+                    PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT
+                    in row.rejection_codes
+                    for row in traces
+                )
+            else:
+                assert all(
+                    PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT
+                    not in row.rejection_codes
+                    for row in traces
+                )
     finally:
         engine.dispose()
