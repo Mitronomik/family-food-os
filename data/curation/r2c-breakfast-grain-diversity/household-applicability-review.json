@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "operation": "R2C_BREAKFAST_GRAIN_HOUSEHOLD_APPLICABILITY",
+  "accepted_base": "13a81d2497737f3b275b10055cd084548be02bf3",
+  "source": {
+    "archive_locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "source_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d"
+  },
+  "policy": {
+    "scope": "THREE_NAMED_CARDS_ONLY",
+    "no_blanket_school2022_authority": true,
+    "consumer_step_policy": "Institutional serving-temperature requirements remain provenance only. Core stovetop preparation is retained.",
+    "corroboration_scope": "HOUSEHOLD_APPLICABILITY_ONLY_NOT_NUTRITION_OR_SOURCE_AUTHORITY"
+  },
+  "candidates": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-13к",
+      "title": "Каша вязкая молочная пшеничная",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "planner_role_review": "breakfast",
+      "source_output_g": "200",
+      "source_energy_kcal": "270.3",
+      "independent_corroboration": [
+        {
+          "url": "https://www.gastronom.ru/recipe/36133/pshenichnaja-kasha-na-moloke",
+          "retrieved_date": "2026-10-03",
+          "corroborates": [
+            "wheat groats with milk/salt/sugar are ordinary household breakfast",
+            "stovetop saucepan preparation is household-executable"
+          ],
+          "authority_scope": "household_applicability_only"
+        }
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-20к",
+      "title": "Каша жидкая молочная гречневая",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "planner_role_review": "breakfast",
+      "source_output_g": "200",
+      "source_energy_kcal": "187.3",
+      "independent_corroboration": [
+        {
+          "url": "https://www.russianfood.com/recipes/recipe.php?rid=82983",
+          "retrieved_date": "2026-10-03",
+          "corroborates": [
+            "buckwheat groats with milk/water/butter are ordinary household porridge",
+            "weak-boil saucepan cooking is household-executable"
+          ],
+          "authority_scope": "household_applicability_only"
+        }
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-25.1к",
+      "title": "Каша жидкая молочная рисовая",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "planner_role_review": "breakfast",
+      "source_output_g": "200",
+      "source_energy_kcal": "184.5",
+      "independent_corroboration": [
+        {
+          "url": "https://www.gastronom.ru/recipe/19037/risovaja-kasha-v-kastrjule",
+          "retrieved_date": "2026-10-03",
+          "corroborates": [
+            "rice cooked first with water then milk is ordinary household porridge",
+            "stovetop weak-boil preparation is household-executable"
+          ],
+          "authority_scope": "household_applicability_only"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "household_applicable_count": 3,
+    "blanket_school2022_authority_granted": false
+  }
+}
