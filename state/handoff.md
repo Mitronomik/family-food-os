@@ -39,8 +39,15 @@ and a new review.
 
 Projected hard exact-`MILK_2_5` capacity remains 9/week.
 
+Verified content freeze:
+`2f2deaff731a07c1937e44059106f8bfcc2f4778`.
+
+Docs #824 / DC1 #681 are SUCCESS. Raw-card Git/Library hashes, provenance role
+separation, source tuple coherence, derivative/card hashes, butter rejection and
+capacity 9 all pass.
+
 Status:
-`SOURCE_PROVENANCE_CORRECTION_VERIFICATION_PENDING`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## R2-E cottage casserole runtime review-ready — 2026-10-03
 
