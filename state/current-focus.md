@@ -32,7 +32,7 @@ Accepted base:
 
 Status:
 
-`SOURCE_PROVENANCE_CORRECTION_VERIFICATION_PENDING`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## Corrected frozen candidate
 
@@ -100,17 +100,31 @@ Do not:
 - start DC4/Gate1-CLOSE/PR9;
 - start API/UI/Prep/Retail/Auth/PostgreSQL/AI.
 
-## Verification pending
+## Verification
 
-Source-provenance correction requires fresh exact-head verification:
+Corrected content freeze:
 
-- JSON parse/consistency;
-- raw-card SHA/size;
-- Library materialize/readback receipt;
-- source tuple coherence;
-- provenance role separation;
-- Docs/DC1;
-- scope/whitespace.
+`2f2deaff731a07c1937e44059106f8bfcc2f4778`.
+
+Exact-head source/provenance verification:
+
+- all 10 evidence JSON files parse and cross-reference consistently — PASS;
+- raw-card source = 1783 UTF-8 bytes — PASS;
+- raw-card SHA-256 = `77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c` — PASS;
+- durable Library materialize/readback = same 1783 bytes / SHA-256 — PASS;
+- RecipeVersion source_url and source_document_sha256 bind to the same raw-card artifact — PASS;
+- host / issuer / upstream collection roles are separated — PASS;
+- issuer remains `NOT_ESTABLISHED_FROM_RETAINED_CARD` — PASS;
+- reviewed discovery derivative SHA-256 recomputed =
+  `e2e717c8e44107e5b4ac4f4087af49fd0d279c6972ec2603ce2fd8244e61b63f` — PASS;
+- both exact discovery card hashes recompute — PASS;
+- butter publication absent and butter identity absent — PASS;
+- selected publication scope = exactly one cheese card — PASS;
+- identity-only foods = exactly 2 — PASS;
+- hard-`MILK_2_5` projected capacity = 3 × 3 = 9 — PASS;
+- Docs verification #824 — SUCCESS;
+- DC1 corpus verification #681 — SUCCESS;
+- runtime/schema/migration changes — none.
 
 Do not start runtime publication before corrected PR #140 is independently
 reviewed and merged.
