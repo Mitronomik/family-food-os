@@ -152,8 +152,7 @@ def _load_contract(
         or len(selected) != 1
         or selected[0].get("canonical_code") != CHEESE_SANDWICH_RECIPE_CODE
         or selected[0].get("source_recipe_id") != SOURCE_RECIPE_ID
-        or selected[0].get("source_discovery_recipe_id")
-        != DISCOVERY_SOURCE_RECIPE_ID
+        or selected[0].get("source_discovery_recipe_id") != DISCOVERY_SOURCE_RECIPE_ID
         or selected[0].get("meal_type_code") != "sandwich"
         or selected[0].get("source_output_g") != "30"
         or selected[0].get("prepared_energy_kcal") != "83"
@@ -266,20 +265,15 @@ def _load_contract(
         raise ValueError("R2-F identity-only publication contract changed.")
 
     recipes = specs.get("recipes")
-    if (
-        not isinstance(recipes, dict)
-        or tuple(recipes) != (CHEESE_SANDWICH_RECIPE_CODE,)
+    if not isinstance(recipes, dict) or tuple(recipes) != (
+        CHEESE_SANDWICH_RECIPE_CODE,
     ):
         raise ValueError("R2-F Recipe set changed.")
 
     recipe = recipes[CHEESE_SANDWICH_RECIPE_CODE]
     receipt = recipe.get("source_receipt")
     trusted_seed = recipe.get("trusted_recipe_seed")
-    version = (
-        trusted_seed.get("version")
-        if isinstance(trusted_seed, dict)
-        else None
-    )
+    version = trusted_seed.get("version") if isinstance(trusted_seed, dict) else None
     prepared = recipe.get("prepared_spec")
     if (
         not isinstance(receipt, dict)
