@@ -1,6 +1,6 @@
 # Handoff
 
-## R2-E 54-1т Contract Gate active — 2026-10-03
+## R2-E 54-1т Contract Gate review-ready — 2026-10-03
 
 Accepted main:
 `99a579e35b0a0fa6d09947b80ffecb222a45bf96` (merged PR #134).
