@@ -209,6 +209,24 @@ class FoodRecipeCatalogueService:
     ) -> RecipeVersionDetail:
         return scale_recipe(self.get_version_detail(version_id), target_servings)
 
+    def _activate_after_policy_check_in_scope(
+        self,
+        scope: RecipeCatalogueUnitOfWork,
+        recipe_id: UUID,
+        *,
+        now: datetime,
+    ) -> Recipe:
+        """Stage activation inside a caller-owned transaction without committing."""
+
+        recipe = scope.recipes.get(recipe_id)
+        if recipe is None:
+            raise RecipeNotFoundError(recipe_id)
+        if recipe.is_active:
+            return recipe
+        changed = activate_recipe(recipe, updated_at=now)
+        scope.recipes.set_active(recipe_id, active=True, updated_at=changed.updated_at)
+        return changed
+
     def _activate_after_policy_check(self, recipe_id: UUID) -> Recipe:
         """Internal reversible mutation after an owning activation policy passes."""
 
@@ -219,9 +237,47 @@ class FoodRecipeCatalogueService:
                 raise RecipeNotFoundError(recipe_id)
             if recipe.is_active:
                 return recipe
-            changed = activate_recipe(recipe, updated_at=now)
-            scope.recipes.set_active(
-                recipe_id, active=True, updated_at=changed.updated_at
+            changed = self._activate_after_policy_check_in_scope(
+                scope,
+                recipe_id,
+                now=now,
+            )
+            scope.commit()
+            return changed
+
+    def _activate_batch_after_policy_check(
+        self,
+        recipe_ids: Iterable[UUID],
+    ) -> tuple[Recipe, ...]:
+        """Activate an all-inactive batch in one caller-owned UoW and one commit."""
+
+        ids = tuple(recipe_ids)
+        if not ids or len(set(ids)) != len(ids):
+            raise RecipeCatalogueConflictError(
+                "Batch activation requires unique Recipe ids."
+            )
+
+        now = self._clock()
+        with self._write() as scope:
+            recipes = []
+            for recipe_id in ids:
+                recipe = scope.recipes.get(recipe_id)
+                if recipe is None:
+                    raise RecipeNotFoundError(recipe_id)
+                recipes.append(recipe)
+
+            if any(recipe.is_active for recipe in recipes):
+                raise RecipeCatalogueConflictError(
+                    "Batch activation requires every Recipe to be inactive."
+                )
+
+            changed = tuple(
+                self._activate_after_policy_check_in_scope(
+                    scope,
+                    recipe.id,
+                    now=now,
+                )
+                for recipe in recipes
             )
             scope.commit()
             return changed

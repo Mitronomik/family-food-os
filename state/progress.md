@@ -1,40 +1,41 @@
 # Progress
 
-## R3-A final independent-review corrections — 2026-10-03
+## R3-A runtime — review-ready — 2026-10-04
 
-PR #146 remains the same docs/data Contract Gate. No runtime work and no new PR.
+Accepted base:
+`e152b357528bb000cf5cf16e792a0d31b983f117` (merged PR #146).
 
-Corrections applied:
+Issue #147 / PR #148 / branch `feat/r3a-school2022-main-batch-runtime`.
 
-- source process for `54-8м` is fail-closed: pre-soak liquid UNKNOWN;
-- source process for `54-11м` preserves 5–10 minute weak boil and 160 °C /
-  30–40 minute covered oven finish without inventing a water split;
-- final identity review contains no stale `SOUR_CREAM_15` dependency;
-- option B now includes the required transaction-neutral batch-activation seam;
-  sequential calls to the commit-owning single-recipe guard are explicitly
-  forbidden;
-- runtime acceptance requires full preflight, one caller-owned activation UoW,
-  no inner commits, staged-state admission validation before commit, whole-batch
-  rollback on failure and regression safety for existing single-recipe behavior.
+Runtime freeze:
+`6887b58e2331c1324a8269c4f8778a4ef3a0b143`.
 
-Batch remains exactly ten MAIN cards and exactly three new identity-only foods.
-No migration/schema/Planner/new-Nutrition-authority change is authorized.
+Outcome:
 
-Corrected content freeze:
-`6ee960e979666e939ec7bed87bca1f70f3ed1ae4`.
+- 3 identity-only FoodIngredients, no Nutrition/Composition;
+- 10 immutable SOURCE_VERIFIED MAIN RecipeVersions;
+- exact same-card prepared ENERGY_KCAL + 53 UNKNOWN;
+- per-recipe atomic/resumable inactive publication;
+- transaction-neutral one-UoW full-batch activation;
+- exact replay / deliberate-deactivation / mixed-state fail-closed semantics;
+- frozen package tamper checks;
+- reviewed 54-8м / 54-11м process semantics preserved;
+- no schema/migration/Planner/new-authority change.
 
-Read-only verification:
+Exact runtime-freeze verification:
 
-- 10/10 selected/spec/household/process/source alignment — PASS;
-- old unsupported water-process phrases absent — PASS;
-- option-B transaction fields + in-scope seam — PASS;
-- ENERGY_KCAL + 53 UNKNOWN preserved — PASS;
-- durable archive/PDF bytes and SHA-256 — PASS.
-
-Verification head `ff245c517c00b3c83716916cc5350b6478cf01b4`: Docs #858 SUCCESS; DC1 #715 SUCCESS.
-Final status-only head must also be exact-head green before merge.
+- dedicated R3-A workflow #13 SUCCESS — 95 passed;
+- Ruff check/format and scope/whitespace PASS;
+- Docs #873 / DC1 #730 SUCCESS;
+- R1/R2 regression workflows all SUCCESS;
+- Nutrient registry #929 and Partial nutrition #685 SUCCESS including broad
+  backend and launcher regression;
+- migration head 0042;
+- `AI_ENABLED=false`.
 
 Status: `READY_FOR_FINAL_REVIEW`.
+
+Stop for independent review. No merge or next milestone/batch authorization.
 
 ## R2-F cheese-sandwich runtime — implementation active — 2026-10-03
 
