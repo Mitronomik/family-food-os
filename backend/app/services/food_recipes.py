@@ -234,13 +234,17 @@ class FoodRecipeCatalogueService:
 
         now = self._clock()
         with self._write() as scope:
+            recipe = scope.recipes.get(recipe_id)
+            if recipe is None:
+                raise RecipeNotFoundError(recipe_id)
+            if recipe.is_active:
+                return recipe
             changed = self._activate_after_policy_check_in_scope(
                 scope,
                 recipe_id,
                 now=now,
             )
-            if changed.is_active:
-                scope.commit()
+            scope.commit()
             return changed
 
     def _activate_batch_after_policy_check(
