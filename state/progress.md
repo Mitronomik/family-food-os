@@ -37,8 +37,18 @@ Option-B transaction semantics:
 Durable archive + embedded PDF were independently re-read/re-hashed on
 2026-10-03 and match pinned size/SHA receipts.
 
+Corrected content freeze:
+`39c1f3e8809e9fd42e6ea061554f81cf3b1c35e6`.
+
+Verification:
+- R3-A cross-file + process-binding audit — PASS;
+- option-B transaction/activation semantics — PASS;
+- durable archive/PDF readback — PASS;
+- Docs #851 — SUCCESS;
+- DC1 #708 — SUCCESS.
+
 Status:
-`REVIEW_CORRECTIONS_VERIFICATION_PENDING`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## R3-A School2022 ten-recipe MAIN batch gate — active — 2026-10-03
 
