@@ -41,14 +41,17 @@
   "status": "FROZEN_FOR_RUNTIME_AFTER_REVIEW_AND_MERGE",
   "stop_rule": "Do not start runtime publication before independent review and merge of this gate.",
   "public_source_verification": {
-    "status": "PASS_PUBLIC_PROVENANCE_SELECTED_CHEESE_ONLY",
+    "status": "PASS_DURABLE_RAW_CARD_AND_PROVENANCE_ROLE_SEPARATION",
     "receipt_path": "data/curation/r2f-sandwich-resilience/public-source-verification.json",
     "raw_pdf_bytes_retained_by_r2f": false,
-    "runtime_source_document": "data/curation/r2f-sandwich-resilience/runtime-source.json",
-    "runtime_source_sha256": "26f239916b56429e78314369df961c8dd13cecd7d559d942655387e9851a5a97",
-    "runtime_source_size_bytes": 1855,
-    "runtime_source_git_commit": "a35ef046538687bcaf2600d5027f87688e9224ca",
-    "runtime_source_https_locator": "https://raw.githubusercontent.com/Mitronomik/family-food-os/a35ef046538687bcaf2600d5027f87688e9224ca/data/curation/r2f-sandwich-resilience/runtime-source.json"
+    "raw_pdf_required_for_runtime_reproduction": false,
+    "runtime_source_document": "data/curation/r2f-sandwich-resilience/raw-cheese-card.txt",
+    "runtime_source_sha256": "77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c",
+    "runtime_source_size_bytes": 1783,
+    "runtime_source_git_commit": "97ed76c7009229b5c947c63f1ace09b63a32147b",
+    "runtime_source_https_locator": "https://raw.githubusercontent.com/Mitronomik/family-food-os/97ed76c7009229b5c947c63f1ace09b63a32147b/data/curation/r2f-sandwich-resilience/raw-cheese-card.txt",
+    "durable_library_locator": "library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt",
+    "library_file_id": "libfile_baff1ee2870081918170b98d1cec3c5d"
   },
   "rejected_recipe_codes": [
     "SAD28_SANDWICH_BUTTER_25_5"
