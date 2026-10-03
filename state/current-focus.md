@@ -32,7 +32,7 @@ Accepted base:
 
 Status:
 
-`BLOCKERS_FIXED_VERIFICATION_PENDING`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## Corrected frozen candidate
 
@@ -100,7 +100,7 @@ Do not:
 
 Corrected evidence/content freeze:
 
-`393d1f3635e5fe77392570c2d9f10b97ae241c87`.
+`c84fcffad9aa2d3f093db216f7cc8d1bf9ab48bf`.
 
 Required before final review-ready status:
 

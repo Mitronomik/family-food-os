@@ -67,10 +67,19 @@ Classification remains truthful:
 - SNACK +1.
 
 Corrected evidence/content freeze:
-`393d1f3635e5fe77392570c2d9f10b97ae241c87`.
+`c84fcffad9aa2d3f093db216f7cc8d1bf9ab48bf`.
+
+Verification on corrected content head:
+- R2-F JSON parse/consistency audit — PASS;
+- source tuple coherence — PASS;
+- butter rejection + no butter identity/publication — PASS;
+- capacity 9 arithmetic — PASS;
+- Docs #811 — SUCCESS;
+- DC1 #668 — SUCCESS;
+- no runtime/schema/migration changes.
 
 Status:
-`BLOCKERS_FIXED_VERIFICATION_PENDING`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## R2-E cottage casserole runtime review-ready — 2026-10-03
 
