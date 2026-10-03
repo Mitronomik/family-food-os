@@ -99,10 +99,10 @@ Runtime source truth is the reviewed structured derivative:
 
 Canonical reviewed-derivative SHA-256:
 
-`12ea2a8bde8e3542447fd7b8508b9f2a57097f3fc8b531630701aae8f07ef100`
+`dd1da359c60c8d647eda5e9a968164a02b8f6dca07333b888699f9722cba3543`
 
 The hash is computed over UTF-8 canonical JSON with sorted keys and compact
-separators, excluding the self-referential `reviewed_derivative_sha256` field.
+separators, excluding the self-referential `reviewed_derivative_sha256` field; each card hash excludes `canonical_record_sha256` and `source_occurrences`.
 
 Original public URL, publisher identity and retrieval date remain provenance.
 
