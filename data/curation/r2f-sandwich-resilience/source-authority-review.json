@@ -11,7 +11,7 @@
       "sad28-luppolovo:techcard:cheese-sandwich:20-10"
     ],
     "source_kind": "INSTITUTION_PUBLISHED_TECH_CARD_PDF",
-    "reviewed_derivative_sha256": "575efc619c9aaf7b2933218985ee5b73a91a4dda3e8c79ffdd55745e6033b189",
+    "reviewed_derivative_sha256": "12ea2a8bde8e3542447fd7b8508b9f2a57097f3fc8b531630701aae8f07ef100",
     "runtime_source_document": "data/curation/r2f-sandwich-resilience/source-cards.json",
     "runtime_source_data_type": "REVIEWED_INSTITUTION_TECH_CARD_DERIVATIVE_JSON",
     "whole_source_family_auto_authorized": false,

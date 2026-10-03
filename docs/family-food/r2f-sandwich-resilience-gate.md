@@ -99,7 +99,7 @@ Runtime source truth is the reviewed structured derivative:
 
 Canonical reviewed-derivative SHA-256:
 
-`575efc619c9aaf7b2933218985ee5b73a91a4dda3e8c79ffdd55745e6033b189`
+`12ea2a8bde8e3542447fd7b8508b9f2a57097f3fc8b531630701aae8f07ef100`
 
 The hash is computed over UTF-8 canonical JSON with sorted keys and compact
 separators, excluding the self-referential `reviewed_derivative_sha256` field.
