@@ -107,7 +107,7 @@
       "required_food_codes": [
         "BEEF_CATEGORY_1_RAW",
         "ONION_BULB_FRESH",
-        "WHEAT_BREAD_HIGH_GRADE_STALE",
+        "WHEAT_BREAD_STALE_UNSPECIFIED_GRADE",
         "BUTTER_PEASANT_72_5_UNSALTED",
         "SALT_IODIZED",
         "WATER"
