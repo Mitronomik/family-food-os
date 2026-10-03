@@ -28,8 +28,16 @@ Fail-closed corrections made during evidence review:
 
 Replacement clean cards are `54-4м` and `54-11р`.
 
+Content freeze:
+`36d12b03d4aa11b52616bf59d176a7a817e0d74d`.
+
+Verification:
+- R3-A cross-file contract audit — PASS;
+- Docs #839 — SUCCESS;
+- DC1 #696 — SUCCESS.
+
 Status:
-`GATE_EVIDENCE_REVIEW_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## R2-F cheese-sandwich runtime — implementation active — 2026-10-03
 
