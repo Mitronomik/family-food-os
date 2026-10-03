@@ -22,12 +22,14 @@ R3-B freezes exactly ten additional School2022 BREAKFAST RecipeVersions:
 2. `ru-school2022:recipe:54-3о` — **Омлет с морковью** — 150 g / 201 kcal.
 3. `ru-school2022:recipe:54-4о` — **Омлет с сыром** — 150 g / 316.0 kcal.
 4. `ru-school2022:recipe:54-2т` — **Запеканка из творога с морковью** — 150 g / 249.5 kcal.
-5. `ru-school2022:recipe:54-3т` — **Суфле из моркови с творогом** — 150 g / 200.9 kcal.
-6. `ru-school2022:recipe:54-1к` — **Каша жидкая молочная кукурузная** — 200 g / 207.9 kcal.
+5. `ru-school2022:recipe:54-1к` — **Каша жидкая молочная кукурузная** — 200 g / 207.9 kcal.
+6. `ru-school2022:recipe:54-2к` — **Каша вязкая молочная кукурузная** — 200 g / 287.8 kcal.
 7. `ru-school2022:recipe:54-6к` — **Каша вязкая молочная пшенная** — 200 g / 274.9 kcal.
 8. `ru-school2022:recipe:54-16к` — **Каша «Дружба»** — 200 g / 168.9 kcal.
-9. `ru-school2022:recipe:54-21к` — **Каша вязкая молочная ячневая** — 200 g / 249.1 kcal.
-10. `ru-school2022:recipe:54-23к` — **Каша жидкая молочная пшеничная** — 200 g / 208.3 kcal.
+9. `ru-school2022:recipe:54-23к` — **Каша жидкая молочная пшеничная** — 200 g / 208.3 kcal.
+10. `ru-school2022:recipe:54-24к` — **Каша жидкая молочная пшенная** — 200 g / 274.9 kcal.
+
+Adversarial process audit removed `54-3т` and `54-21к`: both quantify sugar in the ingredient table but never place sugar in the technology text. They are replaced by source-clean `54-2к` and `54-24к` inside this same ten-recipe gate. `54-22к` remains deferred because its quantified butter is not placed by technology.
 
 This intentionally corrects the MAIN-heavy post-R3-A catalogue without changing
 Planner role compatibility.
@@ -51,8 +53,7 @@ Create identity-only only:
 
 - `CHEESE_SEMI_HARD_UNSPECIFIED` — Сыр полутвердый;
 - `CORN_GROATS` — Крупа кукурузная;
-- `MILLET_GROATS` — Крупа пшенная;
-- `BARLEY_GROATS` — Крупа ячневая;
+- `MILLET_GROATS` — Крупа пшенная.
 
 Reuse accepted exact/broad-enough identities for all other rows. In particular,
 generic source `морковь` maps to generic `CARROT`, not a narrower color-specific
@@ -68,14 +69,12 @@ No identity creation grants NutritionProfile or Composition authority.
    derived grams per step.
 4. Cottage-cheese cards retain source butter placement/ratios without inventing
    remaining per-step allocations.
-5. `54-16к` keeps exact WATER=70 g at recipe level; its rice/millet split is
-   UNKNOWN.
-6. `54-23к` keeps WATER=68 g as exact source input. Because excess water is
-   explicitly drained, retained-water/yield remains UNKNOWN.
-7. Wash/rinse/scald water not quantified in the recipe table is process-resource
-   context and is not promoted to RecipeIngredient.
-8. `54-22к` is not selected because its table quantifies butter while the
-   technology does not place it.
+5. `54-16к` keeps exact WATER=70 g at recipe level; its rice/millet split is UNKNOWN.
+6. `54-23к` keeps WATER=68 g as exact source input. Because excess water is explicitly drained, retained-water/yield remains UNKNOWN.
+7. `54-2к` uses exact WATER=65 g as quantified cooking input; wash water remains process-resource context.
+8. `54-24к` uses exact WATER=52 g for the source `по расчету рецептуры` cooking stage after separate unquantified wash/scald/drain operations.
+9. Wash/rinse/scald water not quantified in the recipe table is process-resource context and is not promoted to RecipeIngredient.
+10. `54-3т`, `54-21к` and `54-22к` are deferred because a quantified ingredient lacks technology placement.
 
 ## DECISION — household applicability
 
@@ -138,7 +137,7 @@ necessary before DC4.
 
 The runtime PR must prove:
 
-1. exactly four new identity-only foods and no Nutrition/Composition rows for them;
+1. exactly three new identity-only foods and no Nutrition/Composition rows for them;
 2. exactly ten new immutable SOURCE_VERIFIED BREAKFAST RecipeVersions;
 3. exact source quantities, process, output and ENERGY_KCAL;
 4. ENERGY_KCAL + 53 UNKNOWN for each;
