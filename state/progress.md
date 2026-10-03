@@ -1,5 +1,45 @@
 # Progress
 
+## R2-E 54-1т identity + household-applicability Contract Gate — 2026-10-03
+
+Accepted main:
+`99a579e35b0a0fa6d09947b80ffecb222a45bf96` (merged PR #134).
+
+Issue #135 / branch `docs/r2e-cottage-casserole-gate`.
+
+R2-E selects exactly one future runtime candidate:
+`SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE` — 150 g / exact same-card 301.2 kcal.
+
+Identity review:
+- new identity-only: `TVOROG_5`, `SEMOLINA_GROATS`, `SOUR_CREAM_15`,
+  `VANILLIN`;
+- exact reuse: `SUGAR`, `BREADCRUMBS`, `EGG`,
+  `BUTTER_PEASANT_72_5_UNSALTED`, `SALT_IODIZED`, `WATER`;
+- no new Nutrition/Composition authority.
+
+Household applicability: PASS. Core cooking is ordinary household baking;
+institutional serving-temperature/paraconvection context is provenance-only.
+
+Deferred: 54-4т/54-6т quantity gaps, medical-scope 54-7т, and the larger new
+SANDWICH source-authority surface.
+
+Projected hard-milk-exclusion capacity after a later runtime activation is only
+6/week, so R2-E does not claim seven-BREAKFAST closure.
+
+Evidence head:
+`444651459e64b9699a034fb4c67d95a45b98b464`.
+
+Verification:
+- exact pinned archive lineage/hashes — PASS;
+- JSON evidence — PASS;
+- Docs #795 — SUCCESS;
+- DC1 #652 — SUCCESS;
+- no runtime/schema/migration changes.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
+
 ## R2-D milk-exclusion breakfast resilience Contract Gate — 2026-10-03
 
 Accepted main:
@@ -1670,7 +1710,6 @@ Runtime verification is fully green:
 
 Step 6B remains not started and not authorized.
 
-# Progress
 
 ## Step 6A runtime authorized — 2026-09-23
 
@@ -1831,7 +1870,6 @@ Implementation target:
 Runtime verification is not yet recorded here; final readiness depends on the
 delivery PR's exact-head focused and regression evidence.
 
-# Progress
 
 ## Step 4B RU-NUT-DB semantic mapping closure — 2026-09-22
 

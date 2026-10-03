@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "operation": "R2E_COTTAGE_CASSEROLE_CANDIDATE_SELECTION",
+  "accepted_base": "99a579e35b0a0fa6d09947b80ffecb222a45bf96",
+  "issue": 135,
+  "objective": "Add one truthful non-MILK_2_5 exact-energy BREAKFAST candidate with minimum new authority surface.",
+  "selected": {
+    "canonical_code": "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+    "source_recipe_id": "ru-school2022:recipe:54-1т",
+    "title": "Запеканка из творога",
+    "source_output_g": "150",
+    "prepared_energy_kcal": "301.2",
+    "selection_reason": "Existing accepted School2022 source family, exact quantified recipe inputs, exact same-card prepared energy, non-clinical source scope, and ordinary household cooking method."
+  },
+  "deferred": [
+    {
+      "candidate": "School2022 54-4т",
+      "disposition": "BLOCKED_REQUIRED_PROCESS_QUANTITY_UNRESOLVED",
+      "reason": "Vanillin is dissolved in hot water but the card does not quantify that process water."
+    },
+    {
+      "candidate": "School2022 54-6т",
+      "disposition": "BLOCKED_REQUIRED_PROCESS_QUANTITY_UNRESOLVED",
+      "reason": "Vanillin is dissolved in hot water but the card does not quantify that process water."
+    },
+    {
+      "candidate": "School2022 54-7т",
+      "source_record_sha256": "7e44f82401a4a9f0f9459868713371b6bf3b51b9ab5d694650f6fc0f6fd933dd",
+      "disposition": "DEFER_SPECIALIZED_MEDICAL_SCOPE",
+      "reason": "Source label explicitly says 'для детей с целиакией' and specialized_medical_scope=true; medical treatment diets are outside MVP wellness scope."
+    },
+    {
+      "candidate": "standalone SANDWICH family",
+      "disposition": "DEFER_NEW_SOURCE_AUTHORITY_SURFACE",
+      "reason": "Retained production corpus has no low-cost standalone sandwich family. Discovered 1987 school sandwich cards require a new source-authority review and do not provide exact same-card prepared ENERGY_KCAL; bread-form/composition identity is also unresolved.",
+      "discovery_only_urls": [
+        "https://djvu.online/file/2miinw1zU9AUD",
+        "https://sheba.spb.ru/shkola/pitanie-recepty-1987.htm"
+      ]
+    }
+  ],
+  "projected_after_future_runtime": {
+    "currently_active_milk_exclusion_candidates": [
+      "HARD_BOILED_EGG"
+    ],
+    "added_candidate": "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+    "unaffected_candidate_count": 2,
+    "max_recipe_repetitions": 3,
+    "capacity_per_week": 6,
+    "required_breakfast_opportunities": 7,
+    "closes_seven_breakfast_gap": false
+  }
+}

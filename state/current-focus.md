@@ -4,94 +4,98 @@ Updated: 2026-10-03.
 
 ## Accepted state
 
-PR #132 / R2-C is merged into `main` at:
+PR #134 / R2-D is merged into `main` at:
 
-`463fe46f7c40156c1b8ebab5402ca45698d8c2bc`.
+`99a579e35b0a0fa6d09947b80ffecb222a45bf96`.
 
-Current ordinary active exact-energy Planner pool:
+Current ordinary active exact-energy Planner pool remains:
 
 - BREAKFAST: 6 RecipeVersions / capacity 18 opportunities per week;
 - MAIN: 5 RecipeVersions / capacity 15 opportunities per week;
-- `max_recipe_repetitions=3`;
-- persisted seven-BREAKFAST and seven-DINNER paths are proven.
+- `max_recipe_repetitions=3`.
 
-Under hard `MILK_2_5` exclusion, five of six BREAKFAST recipes are removed.
-Only `HARD_BOILED_EGG` remains, so BREAKFAST capacity becomes 3/week and a
-seven-BREAKFAST week is bounded-infeasible.
+Under hard `MILK_2_5` exclusion only `HARD_BOILED_EGG` remains active, so
+BREAKFAST capacity is 3/week and a seven-BREAKFAST week is infeasible.
+
+R2-D also established that School2022 54-1т has exact same-card prepared energy
+301.2 kcal / 150 g; menu 301.3 kcal is QA-only.
 
 ## Current bounded operation
 
-**R2-D — Milk-exclusion breakfast resilience Contract Gate.**
+**R2-E — School2022 54-1т identity + household-applicability Contract Gate.**
 
-Issue: `#133`.
+Issue: `#135`.
 
-Branch: `docs/r2d-milk-exclusion-breakfast-gate`.
+Branch: `docs/r2e-cottage-casserole-gate`.
 
 Accepted base:
 
-`463fe46f7c40156c1b8ebab5402ca45698d8c2bc`.
+`99a579e35b0a0fa6d09947b80ffecb222a45bf96`.
 
 Status:
 
 `READY_FOR_FINAL_REVIEW`.
 
-## Evidence result
+## Frozen candidate
 
-The nearest retained candidates are not runtime-ready:
+`SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE` — Запеканка из творога — 150 g / 301.2 kcal.
 
-- School2022 54-1т / Запеканка из творога:
-  prepared energy is **READY_SAME_CARD_EXACT** at 301.2 kcal / 150 g under the
-  accepted `PREPARED_OUTPUT_V1` rule; retained 301.3 kcal menu rows are
-  non-blocking QA evidence only. Runtime publication remains
-  `REVIEW_REQUIRED_FOOD_IDENTITY_AND_HOUSEHOLD_APPLICABILITY`;
-- School2022 54-4т / Пудинг из творога с яблоками:
-  `BLOCKED_REQUIRED_PROCESS_QUANTITY_UNRESOLVED`
-  because process water for dissolving vanillin is not quantified;
-- School2022 54-6т / Сырники:
-  the same `BLOCKED_REQUIRED_PROCESS_QUANTITY_UNRESOLVED` blocker;
-- USSR82-459 fallback remains `PRODUCTION_RECONCILIATION_REQUIRED`; its retained
-  secondary nutrient row has `EnergyQA=CHECK` and is not prepared-output authority.
+New identity-only FoodIngredients:
 
-No runtime RecipeVersion/FoodIngredient publication is authorized by this gate.
+- `TVOROG_5`;
+- `SEMOLINA_GROATS`;
+- `SOUR_CREAM_15`;
+- `VANILLIN`.
+
+Exact existing identities reused:
+
+- `SUGAR`;
+- `BREADCRUMBS`;
+- `EGG`;
+- `BUTTER_PEASANT_72_5_UNSALTED`;
+- `SALT_IODIZED`;
+- `WATER`.
+
+No Nutrition/Composition is granted to the four new identities.
+
+54-1т is reviewed `HOUSEHOLD_APPLICABLE`; institutional serving temperature
+and paraconvection context remain provenance-only.
+
+## Product boundary
+
+A future runtime activation would increase hard-`MILK_2_5` unaffected
+BREAKFAST capacity only from 3 → 6/week.
+
+It does **not** close seven-BREAKFAST feasibility.
 
 ## Scope boundaries
 
 Do not:
 
-- publish/activate an R2-D RecipeVersion;
-- create new FoodIngredient identities;
-- choose 301.2 vs 301.3 implicitly;
-- invent/default/omit unquantified process water;
+- publish/activate runtime data in this gate;
 - add migration 0043 or schema changes;
-- change Planner scoring, role compatibility or repetition;
-- add another Nutrition authority kind;
-- start DC4 / Gate1-CLOSE;
-- start PR9 Shopping;
-- start Prep/PDF/Retail/API/UI/Auth/PostgreSQL/AI.
+- change Planner scoring/roles/repetition;
+- grant Nutrition/Composition to the four new foods;
+- repair 54-4т/54-6т quantities;
+- admit medical-scope 54-7т;
+- open a new SANDWICH source authority;
+- start DC4/Gate1-CLOSE/PR9.
 
 ## Next step
 
-Independent final review found one contract blocker: 54-1т was incorrectly
-treated as blocked by 301.2/301.3 cross-record energy variance. The correction
-restores the accepted same-card prepared-output authority rule: 301.2 kcal is the
-exact source-card candidate value; 301.3 kcal is QA-only.
+Contract/evidence package is frozen on evidence head:
 
-Correction evidence head:
-`21d768b243de4064292065ba10f36b9b5c900e54`.
+`444651459e64b9699a034fb4c67d95a45b98b464`.
 
 Verification:
 
-- Docs verification #793 — SUCCESS;
-- DC1 corpus verification #650 — SUCCESS;
-- corrected evidence JSON parse — PASS;
-- correction diff remains docs/data/state only;
+- pinned archive source-card/variant/process/10 ingredient-demand hashes — PASS;
+- medical-scope 54-7т record/hash — PASS;
+- evidence JSON parse — PASS;
+- Docs verification #795 — SUCCESS;
+- DC1 corpus verification #652 — SUCCESS;
+- changed scope — docs/data/state only;
 - runtime/schema/migration diff — none.
 
-Independent final re-review of PR #134 is next.
-
-After review and merge, make one separate bounded evidence decision:
-
-1. close School2022 quantity/energy authority gaps; or
-2. investigate a clean BREAKFAST/SANDWICH source family for higher role coverage.
-
-Do not start either follow-up automatically.
+Independent final review of PR #136 is next. Do not start runtime implementation
+before review and merge.

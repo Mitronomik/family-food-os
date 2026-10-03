@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "operation": "R2E_COTTAGE_CASSEROLE_FOOD_IDENTITY_REVIEW",
+  "accepted_base": "99a579e35b0a0fa6d09947b80ffecb222a45bf96",
+  "issue": 135,
+  "source": {
+    "archive_locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "archive_size_bytes": 206692075,
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "source_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d"
+  },
+  "source_recipe_id": "ru-school2022:recipe:54-1т",
+  "decisions": [
+    {
+      "source_label": "творог",
+      "source_net_g": "139.5",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "canonical_code": "TVOROG_5",
+      "canonical_name": "Творог 5%",
+      "category_code": "dairy",
+      "food_identity_record_sha256": "0c9997f1bbd12f95c972c28efe97c0fa526c27557ebdae679da516a00c1050cf",
+      "source_form_evidence": {
+        "fat_percent": "5",
+        "section": "1.4"
+      },
+      "non_equivalent_to": [
+        "TVOROG_9",
+        "COTTAGE_CHEESE_FULL_FAT"
+      ]
+    },
+    {
+      "source_label": "крупа манная",
+      "source_net_g": "9.7",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "canonical_code": "SEMOLINA_GROATS",
+      "canonical_name": "Крупа манная",
+      "category_code": "grains",
+      "food_identity_record_sha256": "e8261d84a287a9229135358607120d61a7d118f2907a455822a397403a5c9933",
+      "non_equivalent_to": [
+        "WHEAT_GROATS",
+        "FLOUR_WHEAT",
+        "FLOUR_WHEAT_HIGH_GRADE"
+      ]
+    },
+    {
+      "source_label": "сахар-песок",
+      "source_net_g": "9.0",
+      "decision": "REUSE_EXISTING",
+      "canonical_code": "SUGAR",
+      "food_identity_record_sha256": "4e00b863163a8c2c322300029ae3bc3700026f0b3ca64cac9bc58254f65a5c07"
+    },
+    {
+      "source_label": "сметана",
+      "source_net_g": "5.2",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "canonical_code": "SOUR_CREAM_15",
+      "canonical_name": "Сметана 15%",
+      "category_code": "dairy",
+      "food_identity_record_sha256": "bf3244e4c5fb2930c01027e67ed854135bedcc78a0ab48c1fdeca8eb496c2699",
+      "source_form_evidence": {
+        "fat_percent": "15",
+        "section": "1.4"
+      },
+      "non_equivalent_to": [
+        "SOUR_CREAM_30",
+        "SOUR_CREAM_FULL_FAT",
+        "SOUR_CREAM_LOW_FAT"
+      ]
+    },
+    {
+      "source_label": "сухари панировочные",
+      "source_net_g": "5.2",
+      "decision": "REUSE_EXISTING",
+      "canonical_code": "BREADCRUMBS",
+      "food_identity_record_sha256": "afe0fbe1d38604fc82b6920d4a5aef97108b1d4f7318ff2dd3cbc94fd4758d25"
+    },
+    {
+      "source_label": "яйцо куриное",
+      "source_gross_g": "4.4",
+      "source_net_g": "4.0",
+      "decision": "REUSE_EXISTING",
+      "canonical_code": "EGG",
+      "food_identity_record_sha256": "178e2f096afb3a7a73a3cfe99a679b762f0b7be51ed5ce4e13d87705ebab3fa4",
+      "source_form_evidence": {
+        "average_unit_gross_g": "44",
+        "average_unit_edible_g": "40",
+        "shell_loss_percent": "9.1"
+      }
+    },
+    {
+      "source_label": "масло сливочное",
+      "source_net_g": "5.2",
+      "decision": "REUSE_EXISTING",
+      "canonical_code": "BUTTER_PEASANT_72_5_UNSALTED",
+      "food_identity_record_sha256": "fc982632401437ad77831fc7960b20d10df01b79a9b4739a5c4b869731475d9d",
+      "source_form_evidence": {
+        "fat_percent": "72.5",
+        "section": "1.4"
+      }
+    },
+    {
+      "source_label": "соль поваренная йодированная",
+      "source_net_g": "0.4",
+      "decision": "REUSE_EXISTING",
+      "canonical_code": "SALT_IODIZED",
+      "food_identity_record_sha256": "39db8e55c2744cc8558362e05611b85dbdcf891c0e886d3e63b93668bf31b39e"
+    },
+    {
+      "source_label": "ванилин",
+      "source_net_g": "0.01",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "canonical_code": "VANILLIN",
+      "canonical_name": "Ванилин",
+      "category_code": "staples",
+      "food_identity_record_sha256": "f8c839918498b173e570eaf46634d447fc94877c2583eda94b81d6c2ffb29300",
+      "non_equivalent_to": [
+        "VANILLA_EXTRACT"
+      ]
+    },
+    {
+      "source_label": "вода",
+      "source_net_g": "36",
+      "decision": "REUSE_EXISTING",
+      "canonical_code": "WATER",
+      "food_identity_record_sha256": "c948ec73527b5139e6706f0bb1926266c2f452b9662affaca61031e5241b7a6d"
+    }
+  ],
+  "new_identity_only_foods": [
+    {
+      "canonical_code": "TVOROG_5",
+      "canonical_name": "Творог 5%",
+      "category_code": "dairy",
+      "default_unit": "g",
+      "nutrition_profile": null,
+      "composition": null
+    },
+    {
+      "canonical_code": "SEMOLINA_GROATS",
+      "canonical_name": "Крупа манная",
+      "category_code": "grains",
+      "default_unit": "g",
+      "nutrition_profile": null,
+      "composition": null
+    },
+    {
+      "canonical_code": "SOUR_CREAM_15",
+      "canonical_name": "Сметана 15%",
+      "category_code": "dairy",
+      "default_unit": "g",
+      "nutrition_profile": null,
+      "composition": null
+    },
+    {
+      "canonical_code": "VANILLIN",
+      "canonical_name": "Ванилин",
+      "category_code": "staples",
+      "default_unit": "g",
+      "nutrition_profile": null,
+      "composition": null
+    }
+  ],
+  "invariant": "Identity-only publication does not grant Nutrition or Composition authority. Prepared recipe Nutrition remains independent from ingredient Nutrition."
+}
