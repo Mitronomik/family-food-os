@@ -1,5 +1,37 @@
 # Handoff
 
+## R3-A School2022 ten-recipe MAIN batch gate — active — 2026-10-03
+
+Accepted base:
+`da6d1e05fd44ecc2733e1a6f472eae3e54b60604`.
+
+Issue #144 / branch `docs/r3a-school2022-main-batch-gate`.
+
+Read first:
+
+`docs/family-food/r3a-school2022-main-batch-gate.md`.
+
+This is a docs/data Contract Gate only. Do not start runtime publication before
+independent review and merge.
+
+Selected batch is exactly 10 School2022 MAIN cards. Evidence and future
+publication specs are under:
+
+`data/curation/r3a-school2022-main-batch/`.
+
+Important fail-closed decisions:
+
+- reject `54-5м` and `54-12м` from R3-A because ingredient-table fat conflicts
+  with process text;
+- defer `54-15м` because process water and bay leaf are unquantified;
+- use `WHEAT_BREAD_STALE_UNSPECIFIED_GRADE` when the card proves stale wheat
+  bread but not flour grade.
+
+No migration 0043, schema change, Planner change or new Nutrition authority.
+
+Status:
+`GATE_EVIDENCE_REVIEW_ACTIVE`.
+
 ## R2-F cheese-sandwich runtime — active — 2026-10-03
 
 Accepted base:
