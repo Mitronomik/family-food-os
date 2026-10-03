@@ -29,8 +29,15 @@ state fails closed.
 
 Archive/PDF readback 2026-10-03: PASS for pinned sizes and SHA-256.
 
+Corrected content freeze:
+`39c1f3e8809e9fd42e6ea061554f81cf3b1c35e6`.
+
+Verification: selected/spec/household/process-binding/source-page sets align
+10/10; identity-only count 3; option B and batch activation semantics PASS;
+fresh archive/PDF readback PASS; Docs #851 / DC1 #708 SUCCESS.
+
 Status:
-`REVIEW_CORRECTIONS_VERIFICATION_PENDING`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## R3-A School2022 ten-recipe MAIN batch gate — active — 2026-10-03
 
