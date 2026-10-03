@@ -223,6 +223,7 @@ def test_r2e_activation_failure_keeps_exact_publication_inactive(
     tmp_path, monkeypatch
 ):
     config = DatabaseConfig(path=tmp_path / "activation.sqlite")
+    seed_r2c_breakfast_grain_diversity(config)
 
     def fail_activate(self, recipe_id):
         del self, recipe_id
