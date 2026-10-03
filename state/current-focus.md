@@ -34,7 +34,7 @@ Accepted base:
 
 Status:
 
-`CONTRACT_GATE_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 Canonical detail:
 
@@ -53,3 +53,28 @@ Freeze one larger School2022 batch:
 
 Do not start runtime, DC4/Gate1-CLOSE/PR9 or another R3 batch before this gate is
 independently reviewed and merged.
+
+## Gate verification
+
+Evidence/content freeze:
+
+`aa8d46aed4d7283d1fe95090996eff76cf396624`.
+
+Verified:
+
+- 6 evidence JSON files parse — PASS;
+- exactly 10 unique RecipeVersions / 10 unique source IDs — PASS;
+- role split 5 BREAKFAST / 5 MAIN — PASS;
+- exact two new identity-only FoodIngredients — PASS;
+- all 19 reused FoodIngredient codes have repository-local evidence — PASS;
+- all 21 demanded ingredient identities are mapped — PASS;
+- per-card independent household corroboration for all 10 candidates — PASS;
+- exact ingredient quantities are positive, gross >= net and no duplicate food identity exists within a card — PASS;
+- exact same-card output/ENERGY_KCAL frozen for all 10 — PASS;
+- exact frozen nutrient partition = ENERGY_KCAL + 53 UNKNOWN — PASS;
+- macro 4/9/4 QA arithmetic recomputes — PASS;
+- known-deferred cards do not overlap selected scope — PASS;
+- Docs #835 — SUCCESS;
+- DC1 #692 — SUCCESS.
+
+Do not start R3-A runtime before independent review and merge of PR #145.
