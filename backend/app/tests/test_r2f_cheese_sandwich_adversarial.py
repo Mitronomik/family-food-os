@@ -167,7 +167,7 @@ def test_r2f_existing_wrong_prepared_energy_conflicts_with_frozen_83(tmp_path):
         nutrition.publish_prepared(
             replace(
                 spec,
-                expected_available_amounts=(("ENERGY_KCAL", Decimal("84")),),
+                expected_available_amounts=(("ENERGY_KCAL", Decimal(84)),),
             )
         )
     finally:
