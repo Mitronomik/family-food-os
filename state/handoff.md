@@ -1,5 +1,55 @@
 # Handoff
 
+## R2-C breakfast grain diversity final handoff — 2026-10-03
+
+Accepted base:
+`13a81d2497737f3b275b10055cd084548be02bf3`.
+
+Issue #131 / PR #132 / branch `feat/r2c-breakfast-grain-diversity`.
+
+Proof/runtime freeze:
+`5dc3bda151d412662f75e7cd64ae7f1811bb25c7`.
+
+Published and activated:
+
+- `SCHOOL2022_54_13K_WHEAT_MILK_PORRIDGE` — 200 g / 270.3 kcal;
+- `SCHOOL2022_54_20K_BUCKWHEAT_MILK_PORRIDGE` — 200 g / 187.3 kcal;
+- `SCHOOL2022_54_25_1K_RICE_MILK_PORRIDGE` — 200 g / 184.5 kcal.
+
+New identity-only food:
+`WHEAT_GROATS`.
+
+Existing exact identities cover buckwheat groats, reviewed rice groats, milk 2.5%,
+butter, sugar, iodized salt and water. No Nutrition/Composition is published for
+the new wheat-groats identity.
+
+The recipes reuse PREPARED_OUTPUT_V1. ENERGY_KCAL is the sole AVAILABLE nutrient;
+all other frozen codes stay UNKNOWN.
+
+Ordinary active exact-energy BREAKFAST count is now 6 and capacity is 18/week
+under unchanged repetition=3. A persisted seven-BREAKFAST week selects all three
+new preferred recipes. Excluding `WHEAT_GROATS` removes only wheat porridge and
+the week still succeeds.
+
+Replay/failure semantics:
+exact replay is zero-write; deliberate deactivation stays deactivated; frozen
+contract tamper, partial Recipe/prepared state and conflicting wheat identity all
+fail closed.
+
+Source/consumer boundary:
+institutional serving-temperature rules remain provenance-only. Source process
+ranges remain explicit RecipeStep text and do not become invented scalar
+cook-time values. Exact rice source amount text keeps the comma form `30,8`.
+
+Exact proof/runtime-freeze verification:
+136 passed; Ruff check/format SUCCESS; scope/whitespace SUCCESS; AI disabled;
+migration head remains 0042.
+
+PR #132 is READY FOR FINAL REVIEW.
+
+Do not merge autonomously. After merge, reassess the next R2/R3 batch. Do not
+start DC4/Gate1-CLOSE or PR9 automatically.
+
 ## R2-C breakfast grain diversity active — 2026-10-03
 
 Accepted main:
