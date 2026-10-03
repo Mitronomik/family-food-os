@@ -527,7 +527,7 @@
               "food_ingredient_code": "RICE_GROATS",
               "quantity": "30.8",
               "unit": "g",
-              "source_amount_text": "крупа рисовая: брутто 30.8 г; нетто 30.8 г",
+              "source_amount_text": "крупа рисовая: брутто 30,8 г; нетто 30,8 г",
               "normalization_note": "exact School2022 groats amount and form",
               "prep_note": null,
               "optional": false
