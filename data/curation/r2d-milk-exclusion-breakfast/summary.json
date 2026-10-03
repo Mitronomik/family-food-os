@@ -13,7 +13,6 @@
   "reviewed_candidates": 3,
   "authorized_runtime_candidates": 0,
   "blockers": {
-    "BLOCKED_PREPARED_ENERGY_CROSS_RECORD_DISCREPANCY": 1,
     "BLOCKED_REQUIRED_PROCESS_QUANTITY_UNRESOLVED": 2,
     "BLOCKED_PREPARED_OUTPUT_AUTHORITY_UNPROVEN": 1
   },
@@ -21,5 +20,9 @@
   "planner_change_required": false,
   "nutrition_authority_change_required": false,
   "status": "BLOCKED_EVIDENCE_FAIL_CLOSED",
-  "follow_up": "After independent review/merge, separately choose evidence closure for the School2022 cottage family or a new BREAKFAST/SANDWICH role-expansion source-authority gate. Do not start either automatically."
+  "follow_up": "After independent review/merge, separately choose either exact FoodIngredient + household-applicability closure for School2022 54-1т (with any 54-4т/54-6т process-water work still separate) or a new BREAKFAST/SANDWICH role-expansion source-authority gate. Do not start either automatically.",
+  "prepared_energy_ready_candidates": 1,
+  "review_required": {
+    "REVIEW_REQUIRED_FOOD_IDENTITY_AND_HOUSEHOLD_APPLICABILITY": 1
+  }
 }

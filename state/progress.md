@@ -16,8 +16,9 @@ Post-R2-C production evidence:
 R2-D preflight reviewed the nearest retained breakfast candidates and stopped
 fail-closed:
 
-- 54-1т: 301.2 kcal source card vs 301.3 kcal retained 150 g breakfast menu row,
-  with no retained prepared-energy reconciliation;
+- 54-1т: prepared energy is ready at exact same-card 301.2 kcal / 150 g;
+  retained 301.3 kcal menu evidence is QA-only. FoodIngredient/form and
+  household-applicability review remain open;
 - 54-4т: exact prepared energy exists, but process water for vanillin is
   unquantified;
 - 54-6т: exact prepared energy and breakfast menu use exist, but the same process
@@ -28,18 +29,12 @@ fail-closed:
 No runtime publication, activation, FoodIngredient identity, migration, Planner
 or Nutrition-authority change is authorized.
 
-Verification on evidence head `33cf2c43d661cb3cb681cf75dd6d4542584241ca`:
-
-- Docs verification #791 — SUCCESS;
-- DC1 corpus verification #648 — SUCCESS;
-- evidence JSON parse — PASS;
-- changed scope is docs/data/state only;
-- no runtime/schema/migration changes.
+Independent final review found and corrected one contract blocker: the earlier
+cross-record 301.2/301.3 treatment incorrectly overrode the accepted same-card
+`PREPARED_OUTPUT_V1` rule.
 
 Status:
-`READY_FOR_FINAL_REVIEW`.
-
-# Progress
+`CORRECTION_VERIFYING`.
 
 ## R2-C breakfast grain diversity review-ready — 2026-10-03
 

@@ -33,17 +33,17 @@ Accepted base:
 
 Status:
 
-`READY_FOR_FINAL_REVIEW`.
+`CORRECTION_VERIFYING`.
 
 ## Evidence result
 
 The nearest retained candidates are not runtime-ready:
 
 - School2022 54-1т / Запеканка из творога:
-  `BLOCKED_PREPARED_ENERGY_CROSS_RECORD_DISCREPANCY`
-  because the 150 g source card publishes 301.2 kcal while retained 150 g
-  breakfast menu rows publish 301.3 kcal and no prepared-energy reconciliation
-  freezes an authority choice;
+  prepared energy is **READY_SAME_CARD_EXACT** at 301.2 kcal / 150 g under the
+  accepted `PREPARED_OUTPUT_V1` rule; retained 301.3 kcal menu rows are
+  non-blocking QA evidence only. Runtime publication remains
+  `REVIEW_REQUIRED_FOOD_IDENTITY_AND_HOUSEHOLD_APPLICABILITY`;
 - School2022 54-4т / Пудинг из творога с яблоками:
   `BLOCKED_REQUIRED_PROCESS_QUANTITY_UNRESOLVED`
   because process water for dissolving vanillin is not quantified;
@@ -71,17 +71,13 @@ Do not:
 
 ## Next step
 
-Contract/evidence package is frozen on this branch.
+Independent final review found one contract blocker: 54-1т was incorrectly
+treated as blocked by 301.2/301.3 cross-record energy variance. The correction
+restores the accepted same-card prepared-output authority rule: 301.2 kcal is the
+exact source-card candidate value; 301.3 kcal is QA-only.
 
-Verification on evidence head `33cf2c43...`:
-
-- Docs verification #791 — SUCCESS;
-- DC1 corpus verification #648 — SUCCESS;
-- evidence JSON parse — PASS;
-- changed scope audit — docs/data/state only;
-- runtime/schema/migration diff — none.
-
-Independent final review of PR #134 is next.
+Correction verification is now required on the new exact head before returning
+PR #134 to final review.
 
 After review and merge, make one separate bounded evidence decision:
 

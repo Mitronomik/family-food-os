@@ -13,7 +13,9 @@ resilience: five of six active exact-energy BREAKFAST recipes require
 
 The nearest retained candidates were audited before runtime:
 
-- 54-1т is blocked by a 301.2/301.3 kcal cross-record discrepancy;
+- 54-1т exact same-card prepared energy is ready at 301.2 kcal / 150 g;
+  the 301.3 kcal menu row is QA-only. Runtime publication still requires exact
+  FoodIngredient/form and household-applicability review;
 - 54-4т and 54-6т are blocked because required process water for vanillin is not
   quantified;
 - USSR82-459 remains production-reconciliation-required and its secondary
@@ -26,16 +28,13 @@ SHA-256
 
 R2-D is a docs/data Contract Gate only. No runtime/data publication is authorized.
 
-Verification on evidence head `33cf2c43d661cb3cb681cf75dd6d4542584241ca`: Docs #791 SUCCESS; DC1 #648 SUCCESS;
-evidence JSON parses and the branch contains no runtime/schema/migration diff.
-
-PR #134 is READY FOR FINAL REVIEW.
+Independent final review found one contract blocker in the 54-1т authority
+interpretation. It has been corrected to the accepted same-card
+`PREPARED_OUTPUT_V1` rule. Reverify the correction head before final review.
 
 After independent review/merge, separately decide whether to close the School2022
 evidence gaps or investigate a clean BREAKFAST/SANDWICH source family. Do not
 start either automatically.
-
-# Handoff
 
 ## R2-C breakfast grain diversity final handoff — 2026-10-03
 

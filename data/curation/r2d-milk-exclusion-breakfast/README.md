@@ -11,8 +11,10 @@ week.
 
 The closest retained School2022 candidates were audited:
 
-- 54-1т — blocked by a source-card/menu prepared-energy discrepancy
-  (301.2 vs 301.3 kcal for 150 g);
+- 54-1т — exact source-card prepared energy is ready at 301.2 kcal / 150 g under
+  the accepted same-card `PREPARED_OUTPUT_V1` rule; the 301.3 kcal menu row is
+  retained only as non-blocking QA evidence. Runtime publication still requires
+  exact FoodIngredient/form and household-applicability review;
 - 54-4т — blocked because process water used for vanillin is unquantified;
 - 54-6т — blocked for the same unquantified process-water reason.
 

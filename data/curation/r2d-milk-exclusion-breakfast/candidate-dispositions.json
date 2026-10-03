@@ -36,16 +36,34 @@
         {
           "portion_g": "75",
           "energy_kcal": "150.6",
-          "record_sha256": "5d4262c542ab056af3186e646d7353da93f3d5a4f675e40a923ca9065993021b"
+          "record_sha256": "5d4262c542ab056af3186e646d7353da93f3d5a4f675e40a923ca9065993021b",
+          "authority_scope": "CROSS_RECORD_QA_ONLY",
+          "competes_with_source_card_authority": false
         },
         {
           "portion_g": "150",
           "energy_kcal": "301.3",
-          "record_sha256": "2349a1b21b20b004eeb9c2c161a5c3a9c6755084588adaa0d29a93ee94e25512"
+          "record_sha256": "2349a1b21b20b004eeb9c2c161a5c3a9c6755084588adaa0d29a93ee94e25512",
+          "authority_scope": "CROSS_RECORD_QA_ONLY",
+          "competes_with_source_card_authority": false
         }
       ],
-      "disposition": "BLOCKED_PREPARED_ENERGY_CROSS_RECORD_DISCREPANCY",
-      "blocker": "Source card publishes 301.2 kcal at 150 g; retained 150 g breakfast menu rows publish 301.3 kcal; no retained prepared-energy reconciliation freezes an authority choice."
+      "disposition": "REVIEW_REQUIRED_FOOD_IDENTITY_AND_HOUSEHOLD_APPLICABILITY",
+      "blocker": "Prepared energy is ready at 301.2 kcal from the exact source card. Runtime publication remains unauthorized until exact FoodIngredient/form decisions and bounded household applicability are reviewed.",
+      "prepared_energy_authority": {
+        "status": "READY_SAME_CARD_EXACT",
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "energy_kcal": "301.2",
+        "output_mass_g": "150",
+        "basis": "Exact prepared ENERGY_KCAL is published on the same source card that owns the RecipeVersion."
+      },
+      "prepared_energy_reconciliation_required_for_authority": false,
+      "cross_record_qa_signal": {
+        "menu_energy_kcal": "301.3",
+        "source_card_energy_kcal": "301.2",
+        "blocking": false,
+        "interpretation": "Retained menu value is a QA/corroboration signal only; exact same-card 301.2 kcal remains the prepared-output authority candidate."
+      }
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-4т",

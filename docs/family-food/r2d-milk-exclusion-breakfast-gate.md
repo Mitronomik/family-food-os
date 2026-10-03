@@ -1,6 +1,6 @@
 # R2-D — Milk-exclusion breakfast resilience Contract Gate
 
-**Status:** docs/data implementation contract gate — runtime publication blocked by evidence
+**Status:** docs/data implementation contract gate — runtime publication blocked pending identity/applicability and quantity evidence
 **Decision date:** 2026-10-03
 **Issue:** #133
 **Accepted base:** `463fe46f7c40156c1b8ebab5402ca45698d8c2bc` (merged PR #132)
@@ -90,15 +90,22 @@ Useful facts:
 - the source ingredient table includes the water used to prepare the semolina;
 - retained menu records repeatedly classify the dish under `Завтрак`.
 
-But retained 150 g menu rows publish 301.3 kcal while the recipe card publishes
-301.2 kcal. The normalized package has no prepared-energy reconciliation record
-for 54-1т.
+Under the accepted R1-F/R1-G `PREPARED_OUTPUT_V1` rule, the same exact source
+card that owns the RecipeVersion may also own its prepared-output Nutrition.
+Therefore the 54-1т source-card value **301.2 kcal / 150 g** is prepared-energy
+authority-ready for this exact card.
 
-**DECISION:** `BLOCKED_PREPARED_ENERGY_CROSS_RECORD_DISCREPANCY`.
+Retained 150 g breakfast-menu rows publish 301.3 kcal. That value is preserved as
+a **cross-record QA signal only**. It does not compete with or override the exact
+same-card 301.2 kcal authority. The normalized package's missing
+prepared-energy-reconciliation record is a parser/evidence-packaging gap, not a
+Nutrition-authority blocker.
 
-The implementation must not silently select 301.2 or 301.3. A later authority
-decision must explicitly identify the authoritative record/basis and explain the
-cross-record difference before publication.
+**DECISION:** `REVIEW_REQUIRED_FOOD_IDENTITY_AND_HOUSEHOLD_APPLICABILITY`.
+
+Prepared energy is ready at 301.2 kcal. Runtime publication is still not
+authorized because exact FoodIngredient/form decisions and bounded household
+applicability for this card have not yet been reviewed/frozen.
 
 ### 4.2 School2022 54-4т — Пудинг из творога с яблоками
 
@@ -235,7 +242,7 @@ Fail closed on:
 - conflicting FoodIngredient identity;
 - Recipe without its required prepared authority;
 - prepared authority without matching immutable RecipeVersion;
-- cross-record energy mismatch not explicitly resolved;
+- attempt to substitute a menu/reference energy row for exact same-card prepared-output authority;
 - any attempt to turn UNKNOWN into zero or an estimate into exact truth.
 
 ## 9. Required adversarial acceptance for the future runtime PR
@@ -250,7 +257,7 @@ The runtime PR that eventually closes this gate must prove at least:
 5. unaffected candidates do not inherit that rejection;
 6. every selected recipe has exact source-backed required quantities;
 7. unquantified process water cannot be synthesized/defaulted/ignored silently;
-8. a 301.2/301.3 authority conflict cannot exact-replay as one value;
+8. 54-1т exact same-card prepared energy remains 301.2 kcal and the 301.3 menu row remains non-authoritative QA evidence;
 9. unsupported nutrients remain UNKNOWN;
 10. fresh publication is atomic;
 11. exact replay is zero-write;
@@ -268,7 +275,7 @@ Required evidence:
 - durable archive locator, size and SHA-256;
 - School2022 PDF SHA-256;
 - exact selected record/process/reconciliation hashes;
-- explicit cross-record discrepancy capture;
+- explicit cross-record discrepancy capture as non-blocking QA evidence;
 - explicit process-quantity blocker capture;
 - retained USSR82 fallback status/QA capture;
 - documentation/state consistency;
@@ -295,15 +302,25 @@ This gate does not authorize:
 
 ## 12. DECISION — gate outcome
 
-**R2-D runtime publication is BLOCKED on evidence.**
+**R2-D runtime publication remains BLOCKED, but 54-1т prepared energy is not the
+blocker.**
+
+54-1т is prepared-energy-ready from its exact source card at 301.2 kcal / 150 g
+and remains review-required only for exact FoodIngredient/form decisions and
+bounded household applicability. 54-4т and 54-6т remain genuinely blocked by
+unquantified required process water. USSR82-459 remains blocked on prepared-output
+authority.
 
 This is a successful fail-closed contract result: the project does not trade
-source truth for catalogue count.
+source truth for catalogue count and does not invent a stricter cross-record
+Nutrition rule than the accepted `PREPARED_OUTPUT_V1` contract.
 
 After independent review and merge, one separate bounded decision may choose
 between:
 
-1. closing the exact School2022 quantity/energy authority gaps; or
+1. completing exact FoodIngredient + household-applicability review for 54-1т
+   (and separately deciding whether to close the 54-4т / 54-6т process-water
+   evidence gaps); or
 2. opening a role-expansion/source-authority gate for a clean alternative
    BREAKFAST/SANDWICH family.
 
@@ -314,7 +331,7 @@ Neither follow-up starts automatically.
 Which path gives the highest product value per new authority surface after this
 gate merges:
 
-- resolve School2022 cottage-family evidence; or
+- complete 54-1т FoodIngredient/applicability review and only then assess the remaining cottage-family quantity gaps; or
 - prioritize a new SANDWICH-capable source family that expands
   BREAKFAST/LUNCH/SNACK simultaneously?
 
