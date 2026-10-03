@@ -13,25 +13,9 @@
       "composition": null
     },
     {
-      "canonical_code": "CHEESE_SEMI_HARD_UNSPECIFIED",
-      "canonical_name": "Сыр полутвердый, вид не уточнён",
-      "category_code": "dairy",
-      "default_unit": "g",
-      "nutrition_profile": null,
-      "composition": null
-    },
-    {
       "canonical_code": "PARSLEY_ROOT_RAW",
       "canonical_name": "Петрушка, корень свежий",
       "category_code": "vegetables",
-      "default_unit": "g",
-      "nutrition_profile": null,
-      "composition": null
-    },
-    {
-      "canonical_code": "BEEF_LIVER_RAW",
-      "canonical_name": "Печень говяжья, сырая",
-      "category_code": "meat",
       "default_unit": "g",
       "nutrition_profile": null,
       "composition": null
@@ -53,22 +37,10 @@
       "basis": "Exact School2022 species/form label; no generic fish or whole-fish equivalence."
     },
     {
-      "source_label": "сыр полутвердый",
-      "canonical_code": "CHEESE_SEMI_HARD_UNSPECIFIED",
-      "decision": "CREATE_IDENTITY_ONLY",
-      "basis": "Source establishes semi-hard cheese class but not variety/fat subtype."
-    },
-    {
       "source_label": "петрушка (корень)",
       "canonical_code": "PARSLEY_ROOT_RAW",
       "decision": "CREATE_IDENTITY_ONLY",
       "basis": "Exact fresh parsley-root procurement identity."
-    },
-    {
-      "source_label": "печень говяжья",
-      "canonical_code": "BEEF_LIVER_RAW",
-      "decision": "CREATE_IDENTITY_ONLY",
-      "basis": "Exact beef-liver identity; no generic beef equivalence."
     },
     {
       "source_label": "сметана",
