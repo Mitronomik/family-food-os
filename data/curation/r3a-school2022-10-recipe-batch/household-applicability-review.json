@@ -8,9 +8,11 @@
       "ordinary non-clinical food semantics",
       "core preparation executable with household oven/stovetop/steamer/basic tools",
       "institutional logistics quarantinable without changing source ingredient/output/energy truth",
+      "independent household corroboration for the same dish/process family",
       "no new quantity, yield, retention or nutrition inference"
     ],
-    "institutional_context_policy": "Defroster/meat-shop, paraconvection and serving-temperature instructions remain provenance-only. Consumer steps begin from ordinary household-prepared/thawed ingredients where applicable."
+    "institutional_context_policy": "Defroster/meat-shop, paraconvection and serving-temperature instructions remain provenance-only. Consumer steps begin from ordinary household-prepared/thawed ingredients where applicable.",
+    "corroboration_scope": "HOUSEHOLD_APPLICABILITY_ONLY_NOT_SOURCE_OR_NUTRITION_AUTHORITY"
   },
   "candidates": [
     {
@@ -28,7 +30,19 @@
         "institutional serving-temperature requirement",
         "paraconvection equipment reference"
       ],
-      "specialized_medical_scope": false
+      "specialized_medical_scope": false,
+      "independent_corroboration": [
+        {
+          "url": "https://www.russianfood.com/recipes/recipe.php?rid=68837",
+          "retrieved_date": "2026-10-03",
+          "corroborates": [
+            "eggs + milk + salt + canned green peas are ordinary household omelet ingredients",
+            "oven-baked omelet with green peas is household-executable"
+          ],
+          "authority_scope": "HOUSEHOLD_APPLICABILITY_ONLY"
+        }
+      ],
+      "rationale": "Core recipe semantics and execution are ordinary household cooking; external corroboration is applicability-only and does not alter School2022 quantities, output, ingredient identity or prepared energy authority."
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-3о",
@@ -45,7 +59,19 @@
         "institutional serving-temperature requirement",
         "paraconvection equipment reference"
       ],
-      "specialized_medical_scope": false
+      "specialized_medical_scope": false,
+      "independent_corroboration": [
+        {
+          "url": "https://www.russianfood.com/recipes/recipe.php?rid=53659",
+          "retrieved_date": "2026-10-03",
+          "corroborates": [
+            "carrot omelet with egg and milk is ordinary household food",
+            "carrot preparation and omelet cooking use ordinary home equipment"
+          ],
+          "authority_scope": "HOUSEHOLD_APPLICABILITY_ONLY"
+        }
+      ],
+      "rationale": "Core recipe semantics and execution are ordinary household cooking; external corroboration is applicability-only and does not alter School2022 quantities, output, ingredient identity or prepared energy authority."
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-4о",
@@ -62,7 +88,19 @@
         "institutional serving-temperature requirement",
         "paraconvection equipment reference"
       ],
-      "specialized_medical_scope": false
+      "specialized_medical_scope": false,
+      "independent_corroboration": [
+        {
+          "url": "https://www.gastronom.ru/recipe/25726/omlet-s-syrom-na-skovorode",
+          "retrieved_date": "2026-10-03",
+          "corroborates": [
+            "cheese omelet is ordinary household breakfast",
+            "grating cheese and cooking an egg mixture are household-executable"
+          ],
+          "authority_scope": "HOUSEHOLD_APPLICABILITY_ONLY"
+        }
+      ],
+      "rationale": "Core recipe semantics and execution are ordinary household cooking; external corroboration is applicability-only and does not alter School2022 quantities, output, ingredient identity or prepared energy authority."
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-2т",
@@ -80,7 +118,19 @@
         "institutional serving-temperature requirement",
         "paraconvection equipment reference"
       ],
-      "specialized_medical_scope": false
+      "specialized_medical_scope": false,
+      "independent_corroboration": [
+        {
+          "url": "https://www.russianfood.com/recipes/recipe.php?rid=88637",
+          "retrieved_date": "2026-10-03",
+          "corroborates": [
+            "cottage cheese + carrot + semolina + milk + egg casserole is ordinary home cooking",
+            "buttered breadcrumb-coated form and domestic oven are household-executable"
+          ],
+          "authority_scope": "HOUSEHOLD_APPLICABILITY_ONLY"
+        }
+      ],
+      "rationale": "Core recipe semantics and execution are ordinary household cooking; external corroboration is applicability-only and does not alter School2022 quantities, output, ingredient identity or prepared energy authority."
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-3т",
@@ -98,7 +148,19 @@
         "institutional serving-temperature requirement",
         "industrial vegetable-pureeing equipment reference"
       ],
-      "specialized_medical_scope": false
+      "specialized_medical_scope": false,
+      "independent_corroboration": [
+        {
+          "url": "https://www.russianfood.com/recipes/recipe.php?rid=11472",
+          "retrieved_date": "2026-10-03",
+          "corroborates": [
+            "cottage-cheese/carrot/semolina soufflé is ordinary household food",
+            "whipped egg whites and steam/water-bath cooking are household-executable"
+          ],
+          "authority_scope": "HOUSEHOLD_APPLICABILITY_ONLY"
+        }
+      ],
+      "rationale": "Core recipe semantics and execution are ordinary household cooking; external corroboration is applicability-only and does not alter School2022 quantities, output, ingredient identity or prepared energy authority."
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-2р",
@@ -116,7 +178,19 @@
         "institutional serving-temperature requirement",
         "paraconvection equipment reference"
       ],
-      "specialized_medical_scope": false
+      "specialized_medical_scope": false,
+      "independent_corroboration": [
+        {
+          "url": "https://www.russianfood.com/recipes/recipe.php?rid=121206",
+          "retrieved_date": "2026-10-03",
+          "corroborates": [
+            "pink-salmon fish cutlets are ordinary household main-course food",
+            "mincing/forming fish cutlets and oven finishing are household-executable"
+          ],
+          "authority_scope": "HOUSEHOLD_APPLICABILITY_ONLY"
+        }
+      ],
+      "rationale": "Core recipe semantics and execution are ordinary household cooking; external corroboration is applicability-only and does not alter School2022 quantities, output, ingredient identity or prepared energy authority."
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-14р",
@@ -134,7 +208,19 @@
         "institutional serving-temperature requirement",
         "paraconvection equipment reference"
       ],
-      "specialized_medical_scope": false
+      "specialized_medical_scope": false,
+      "independent_corroboration": [
+        {
+          "url": "https://www.russianfood.com/recipes/recipe.php?rid=145316",
+          "retrieved_date": "2026-10-03",
+          "corroborates": [
+            "pollock fillet can be minced and formed into household fish cutlets",
+            "ordinary kitchen mincing/forming/cooking establishes household executability only, not ingredient authority"
+          ],
+          "authority_scope": "HOUSEHOLD_APPLICABILITY_ONLY"
+        }
+      ],
+      "rationale": "Core recipe semantics and execution are ordinary household cooking; external corroboration is applicability-only and does not alter School2022 quantities, output, ingredient identity or prepared energy authority."
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-1м",
@@ -151,7 +237,27 @@
         "institutional defroster/meat-shop instruction",
         "institutional serving-temperature requirement"
       ],
-      "specialized_medical_scope": false
+      "specialized_medical_scope": false,
+      "independent_corroboration": [
+        {
+          "url": "https://www.russianfood.com/recipes/bytype/?fid=74%2C533",
+          "retrieved_date": "2026-10-03",
+          "corroborates": [
+            "the household recipe corpus explicitly lists «Бефстроганов из отварной говядины» with beef, carrot, parsley root, onion, sauce and salt"
+          ],
+          "authority_scope": "HOUSEHOLD_APPLICABILITY_ONLY"
+        },
+        {
+          "url": "https://www.gastronom.ru/recipe/15077/befstroganov",
+          "retrieved_date": "2026-10-03",
+          "corroborates": [
+            "beef stroganoff with sour-cream/flour sauce is ordinary household cooking",
+            "stovetop slicing and sauce preparation are household-executable"
+          ],
+          "authority_scope": "HOUSEHOLD_APPLICABILITY_ONLY"
+        }
+      ],
+      "rationale": "Core recipe semantics and execution are ordinary household cooking; external corroboration is applicability-only and does not alter School2022 quantities, output, ingredient identity or prepared energy authority."
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-11м",
@@ -168,7 +274,19 @@
         "institutional defroster/meat-shop instruction",
         "institutional serving-temperature requirement"
       ],
-      "specialized_medical_scope": false
+      "specialized_medical_scope": false,
+      "independent_corroboration": [
+        {
+          "url": "https://www.gastronom.ru/recipe/24948/plov-s-govjadinoj-v-multivarke",
+          "retrieved_date": "2026-10-03",
+          "corroborates": [
+            "beef pilaf with rice, carrot and onion is ordinary family food",
+            "rice washing, vegetable preparation and covered cooking are household-executable"
+          ],
+          "authority_scope": "HOUSEHOLD_APPLICABILITY_ONLY"
+        }
+      ],
+      "rationale": "Core recipe semantics and execution are ordinary household cooking; external corroboration is applicability-only and does not alter School2022 quantities, output, ingredient identity or prepared energy authority."
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-30м",
@@ -186,7 +304,23 @@
         "alternative poaching route with unquantified added water is not selected",
         "institutional serving-temperature requirement"
       ],
-      "specialized_medical_scope": false
+      "specialized_medical_scope": false,
+      "independent_corroboration": [
+        {
+          "url": "https://www.russianfood.com/recipes/recipe.php?rid=85045",
+          "retrieved_date": "2026-10-03",
+          "corroborates": [
+            "meat quenelles with rice, milk and butter are an established household recipe",
+            "double-minced meat with rice can be formed and cooked on steam"
+          ],
+          "authority_scope": "HOUSEHOLD_APPLICABILITY_ONLY"
+        }
+      ],
+      "rationale": "Core recipe semantics and execution are ordinary household cooking; external corroboration is applicability-only and does not alter School2022 quantities, output, ingredient identity or prepared energy authority."
     }
-  ]
+  ],
+  "result": {
+    "household_applicable_count": 10,
+    "blanket_school2022_authority_granted": false
+  }
 }
