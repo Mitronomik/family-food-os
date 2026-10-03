@@ -42,18 +42,6 @@
       ],
       "nutrition_profile": null,
       "composition": null
-    },
-    {
-      "canonical_code": "BARLEY_GROATS",
-      "canonical_name": "Крупа ячневая",
-      "category_code": "grains",
-      "default_unit": "g",
-      "source_label": "крупа ячневая",
-      "non_equivalent_to": [
-        "BARLEY_PEARLED"
-      ],
-      "nutrition_profile": null,
-      "composition": null
     }
   ],
   "reused_foods": [
@@ -92,12 +80,6 @@
       "basis": "Millet groats are a processed cereal identity distinct from whole millet grain."
     },
     {
-      "source_label": "крупа ячневая",
-      "canonical_code": "BARLEY_GROATS",
-      "decision": "CREATE_IDENTITY_ONLY",
-      "basis": "Barley groats are not equivalent to pearl barley."
-    },
-    {
       "source_label": "горошек зеленый консервированный",
       "canonical_code": "GREEN_PEAS_CANNED",
       "decision": "REUSE_EXISTING",
@@ -128,5 +110,5 @@
       "basis": "Reuse accepted School2022 milk identity from R2."
     }
   ],
-  "invariant": "Identity-only publication grants no NutritionProfile or Composition authority; existing reuse must not narrow source semantics."
+  "invariant": "Exactly three identity-only foods are authorized. Identity-only publication grants no NutritionProfile or Composition authority; existing reuse must not narrow source semantics."
 }
