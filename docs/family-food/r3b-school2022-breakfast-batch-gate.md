@@ -1,8 +1,8 @@
 # R3-B — School2022 ten-recipe BREAKFAST batch Contract Gate
 
-**Status:** review gate  
-**Issue:** #149  
-**Accepted base:** `69c68f4153b25ac4e51cbe9ff54fb080201f08bd`  
+**Status:** review gate
+**Issue:** #149
+**Accepted base:** `69c68f4153b25ac4e51cbe9ff54fb080201f08bd`
 **Runtime:** not authorized until this gate is independently reviewed and merged.
 
 ## FACT — why DC3 continues
