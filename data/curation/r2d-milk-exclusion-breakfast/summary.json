@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "operation": "R2D_MILK_EXCLUSION_BREAKFAST_GATE_SUMMARY",
+  "accepted_base": "463fe46f7c40156c1b8ebab5402ca45698d8c2bc",
+  "issue": 133,
+  "before": {
+    "active_exact_energy_breakfast": 6,
+    "milk_2_5_dependent_breakfast": 5,
+    "milk_exclusion_breakfast_candidates": 1,
+    "milk_exclusion_capacity_per_week": 3,
+    "seven_breakfast_milk_exclusion_feasible": false
+  },
+  "reviewed_candidates": 3,
+  "authorized_runtime_candidates": 0,
+  "blockers": {
+    "BLOCKED_PREPARED_ENERGY_CROSS_RECORD_DISCREPANCY": 1,
+    "BLOCKED_REQUIRED_PROCESS_QUANTITY_UNRESOLVED": 2,
+    "BLOCKED_PREPARED_OUTPUT_AUTHORITY_UNPROVEN": 1
+  },
+  "migration_required": false,
+  "planner_change_required": false,
+  "nutrition_authority_change_required": false,
+  "status": "BLOCKED_EVIDENCE_FAIL_CLOSED",
+  "follow_up": "After independent review/merge, separately choose evidence closure for the School2022 cottage family or a new BREAKFAST/SANDWICH role-expansion source-authority gate. Do not start either automatically."
+}

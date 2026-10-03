@@ -1,5 +1,38 @@
 # Progress
 
+## R2-D milk-exclusion breakfast resilience Contract Gate — 2026-10-03
+
+Accepted main:
+`463fe46f7c40156c1b8ebab5402ca45698d8c2bc` (merged PR #132).
+
+Issue #133 / branch `docs/r2d-milk-exclusion-breakfast-gate`.
+
+Post-R2-C production evidence:
+- BREAKFAST active exact-energy count = 6 / capacity 18;
+- MAIN active exact-energy count = 5 / capacity 15;
+- five of six BREAKFAST recipes require `MILK_2_5`;
+- hard `MILK_2_5` exclusion leaves only `HARD_BOILED_EGG` and capacity 3/week.
+
+R2-D preflight reviewed the nearest retained breakfast candidates and stopped
+fail-closed:
+
+- 54-1т: 301.2 kcal source card vs 301.3 kcal retained 150 g breakfast menu row,
+  with no retained prepared-energy reconciliation;
+- 54-4т: exact prepared energy exists, but process water for vanillin is
+  unquantified;
+- 54-6т: exact prepared energy and breakfast menu use exist, but the same process
+  water is unquantified;
+- USSR82-459 fallback is not accepted prepared-output authority and its retained
+  secondary nutrient row has `EnergyQA=CHECK`.
+
+No runtime publication, activation, FoodIngredient identity, migration, Planner
+or Nutrition-authority change is authorized.
+
+Status:
+`R2D_CONTRACT_GATE_ACTIVE`.
+
+# Progress
+
 ## R2-C breakfast grain diversity review-ready — 2026-10-03
 
 Accepted base:
