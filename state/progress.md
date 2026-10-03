@@ -26,8 +26,18 @@ SANDWICH source-authority surface.
 Projected hard-milk-exclusion capacity after a later runtime activation is only
 6/week, so R2-E does not claim seven-BREAKFAST closure.
 
+Evidence head:
+`444651459e64b9699a034fb4c67d95a45b98b464`.
+
+Verification:
+- exact pinned archive lineage/hashes — PASS;
+- JSON evidence — PASS;
+- Docs #795 — SUCCESS;
+- DC1 #652 — SUCCESS;
+- no runtime/schema/migration changes.
+
 Status:
-`R2E_CONTRACT_GATE_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 # Progress
 

@@ -24,8 +24,16 @@ Do not use 54-7т as an ordinary shortcut: its source explicitly marks it for
 children with celiac disease and current MVP wellness scope excludes therapeutic
 diet admission.
 
-This is docs/data only. After verification, stop for independent review; runtime
-implementation requires the merged gate.
+This is docs/data only.
+
+Evidence head:
+`444651459e64b9699a034fb4c67d95a45b98b464`.
+
+Pinned source/variant/process/10 ingredient-demand hashes PASS; medical-scope
+54-7т hash PASS; evidence JSON PASS; Docs #795 SUCCESS; DC1 #652 SUCCESS.
+
+PR #136 is READY FOR FINAL REVIEW. Runtime implementation requires independent
+review and merge of this gate.
 
 # Handoff
 

@@ -34,7 +34,7 @@ Accepted base:
 
 Status:
 
-`R2E_CONTRACT_GATE_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## Frozen candidate
 
@@ -83,5 +83,19 @@ Do not:
 
 ## Next step
 
-Complete docs/data verification and independent final review of the R2-E Contract
-Gate. Do not start runtime implementation before merge.
+Contract/evidence package is frozen on evidence head:
+
+`444651459e64b9699a034fb4c67d95a45b98b464`.
+
+Verification:
+
+- pinned archive source-card/variant/process/10 ingredient-demand hashes — PASS;
+- medical-scope 54-7т record/hash — PASS;
+- evidence JSON parse — PASS;
+- Docs verification #795 — SUCCESS;
+- DC1 corpus verification #652 — SUCCESS;
+- changed scope — docs/data/state only;
+- runtime/schema/migration diff — none.
+
+Independent final review of PR #136 is next. Do not start runtime implementation
+before review and merge.
