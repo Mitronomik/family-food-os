@@ -125,10 +125,10 @@ Local/read-only audit on that content:
 - ENERGY_KCAL-only + 53 UNKNOWN partition preserved — PASS;
 - durable ZIP/PDF size + SHA-256 readback — PASS.
 
-Exact-head Docs/DC1 verification is pending after the state update.
+Verification head `ff245c517c00b3c83716916cc5350b6478cf01b4`: Docs #858 SUCCESS; DC1 #715 SUCCESS. Final status-only state commits must remain byte-identical for docs/data content and receive exact-head Docs/DC1 before merge.
 
 Status:
 
-`REVIEW_CORRECTIONS_APPLIED_PENDING_VERIFICATION`.
+`READY_FOR_FINAL_REVIEW`.
 
 Runtime remains blocked until PR #146 is independently re-reviewed and merged.
