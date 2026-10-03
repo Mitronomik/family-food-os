@@ -23,10 +23,10 @@ The batch reuses one source family, one rights route and the already accepted
 | `ru-school2022:recipe:54-3р` | Котлета рыбная из минтая | 100 g | 114.2 |
 | `ru-school2022:recipe:54-9р` | Минтай, запечённый в сметанном соусе | 80 g | 236.6 |
 | `ru-school2022:recipe:54-10р` | Горбуша, тушенная в томате с овощами | 70 g | 134.3 |
-| `ru-school2022:recipe:54-5м` | Котлета из курицы | 75 g | 126.4 |
+| `ru-school2022:recipe:54-11р` | Минтай, тушенный в томате с овощами | 70 g | 103 |
+| `ru-school2022:recipe:54-4м` | Котлета из говядины | 75 g | 221.3 |
 | `ru-school2022:recipe:54-8м` | Тефтели из говядины паровые | 60 g | 117.1 |
 | `ru-school2022:recipe:54-11м` | Плов из отварной говядины | 200 g | 348.3 |
-| `ru-school2022:recipe:54-12м` | Плов с курицей | 200 g | 314.6 |
 | `ru-school2022:recipe:54-18м` | Печень говяжья по-строгановски | 80 g | 189.2 |
 
 All ten are classified `meal_type_code=main`. No Planner role mapping change is
@@ -50,10 +50,10 @@ contract and accepted durable source evidence.
 Create identity-only exactly:
 
 - `COD_FILLET_RAW` — Треска, филе сырое;
-- `CHICKEN_BREAST_FILLET_RAW` — Куриная грудка, филе сырое;
 - `CHEESE_SEMI_HARD_UNSPECIFIED` — Сыр полутвердый, вид не уточнён;
 - `PARSLEY_ROOT_RAW` — Петрушка, корень свежий;
 - `BEEF_LIVER_RAW` — Печень говяжья, сырая;
+- `WHEAT_BREAD_STALE_UNSPECIFIED_GRADE` — Хлеб пшеничный черствый, сорт муки не уточнён.
 
 No NutritionProfile or Composition authority is granted.
 
@@ -65,9 +65,11 @@ breadcrumbs, egg, sugar, tomato puree, iodized salt and water.
 Important form rules:
 
 - generic fish-cutlet `хлеб пшеничный` → `WHEAT_BREAD_PLAIN`;
-- source-process `пшеничный черствый хлеб` → `WHEAT_BREAD_HIGH_GRADE_STALE`;
-- chicken breast fillet must not collapse into whole `CHICKEN_CATEGORY_1_RAW`;
-- semi-hard cheese remains generic semi-hard cheese, not Cheddar/Mozzarella;
+- process-qualified `черствый пшеничный хлеб` →
+  `WHEAT_BREAD_STALE_UNSPECIFIED_GRADE`;
+- do not narrow stale bread to high-grade flour when the selected card does not
+  establish grade;
+- semi-hard cheese remains generic semi-hard cheese, not a named variety;
 - beef liver is not generic beef.
 
 ## 5. Household applicability
@@ -131,12 +133,15 @@ Fail closed on:
 
 ## 9. Explicit exclusions
 
-- School2022 `54-15м` is deferred because its process uses water and bay leaf
-  without quantified ingredient-table rows.
-- `54-4м / 54-6м / 54-7м` are deferred from this first large batch because
-  they are near-identical beef cutlet-family formulae and add less marginal
-  household variety.
+- `54-5м` is rejected from R3-A: table = sunflower oil; process = butter.
+- `54-12м` is rejected from R3-A: table = sunflower oil; process = butter.
+- `54-15м` is deferred because process uses water and bay leaf without
+  quantified ingredient-table rows.
+- `54-6м / 54-7м` are deferred for low marginal variety; `54-4м` is the
+  clean representative of the near-identical beef cutlet family.
 - special-diet cards are not part of R3-A.
+
+No conflict is resolved by silently choosing one source branch.
 
 ## 10. Future runtime acceptance
 
