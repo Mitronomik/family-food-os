@@ -1,5 +1,36 @@
 # Progress
 
+## R3-A School2022 ten-recipe MAIN batch gate — active — 2026-10-03
+
+Accepted base:
+`da6d1e05fd44ecc2733e1a6f472eae3e54b60604` (merged PR #142).
+
+Issue #144 / branch `docs/r3a-school2022-main-batch-gate`.
+
+DC3 moves from one-recipe/micro batches to the canonical enlarged batch shape.
+
+Current frozen target:
+
+- exactly 10 unique School2022 MAIN RecipeVersions;
+- one accepted School2022 source family;
+- existing `PREPARED_OUTPUT_V1` authority seam;
+- 5 new identity-only FoodIngredients;
+- all other source rows reuse accepted identities;
+- no migration/schema/Planner/new-Nutrition-authority change.
+
+Fail-closed corrections made during evidence review:
+
+- `54-5м` rejected from R3-A: table sunflower oil vs process butter;
+- `54-12м` rejected from R3-A: table sunflower oil vs process butter;
+- `54-15м` deferred: unquantified process water + bay leaf;
+- stale wheat bread is represented as
+  `WHEAT_BREAD_STALE_UNSPECIFIED_GRADE`; flour grade is not inferred.
+
+Replacement clean cards are `54-4м` and `54-11р`.
+
+Status:
+`GATE_EVIDENCE_REVIEW_ACTIVE`.
+
 ## R2-F cheese-sandwich runtime — implementation active — 2026-10-03
 
 Accepted base:
