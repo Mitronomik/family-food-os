@@ -97,24 +97,6 @@
       ]
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-5м",
-      "canonical_code": "SCHOOL2022_54_5M_CHICKEN_CUTLET",
-      "canonical_name": "Котлета из курицы",
-      "meal_type_code": "main",
-      "source_pdf_page": 118,
-      "source_output_g": "75",
-      "prepared_energy_kcal": "126.4",
-      "required_food_codes": [
-        "CHICKEN_BREAST_FILLET_RAW",
-        "MILK_2_5",
-        "WHEAT_BREAD_HIGH_GRADE_STALE",
-        "BREADCRUMBS",
-        "SUNFLOWER_OIL",
-        "SALT_IODIZED",
-        "WATER"
-      ]
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-8м",
       "canonical_code": "SCHOOL2022_54_8M_STEAMED_BEEF_MEATBALLS",
       "canonical_name": "Тефтели из говядины паровые",
@@ -150,25 +132,6 @@
       ]
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-12м",
-      "canonical_code": "SCHOOL2022_54_12M_CHICKEN_PILAF",
-      "canonical_name": "Плов с курицей",
-      "meal_type_code": "main",
-      "source_pdf_page": 124,
-      "source_output_g": "200",
-      "prepared_energy_kcal": "314.6",
-      "required_food_codes": [
-        "RICE_GROATS",
-        "CHICKEN_BREAST_FILLET_RAW",
-        "CARROT_RED_RAW",
-        "ONION_BULB_FRESH",
-        "TOMATO_PUREE_PASTE",
-        "SUNFLOWER_OIL",
-        "SALT_IODIZED",
-        "WATER"
-      ]
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-18м",
       "canonical_code": "SCHOOL2022_54_18M_BEEF_LIVER_STROGANOFF",
       "canonical_name": "Печень говяжья по-строгановски",
@@ -185,6 +148,43 @@
         "SALT_IODIZED",
         "WATER"
       ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-4м",
+      "canonical_code": "SCHOOL2022_54_4M_BEEF_CUTLET",
+      "canonical_name": "Котлета из говядины",
+      "meal_type_code": "main",
+      "source_pdf_page": 117,
+      "source_output_g": "75",
+      "prepared_energy_kcal": "221.3",
+      "required_food_codes": [
+        "BEEF_CATEGORY_1_RAW",
+        "MILK_2_5",
+        "WHEAT_BREAD_STALE_UNSPECIFIED_GRADE",
+        "BREADCRUMBS",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-11р",
+      "canonical_code": "SCHOOL2022_54_11R_POLLOCK_TOMATO_VEGETABLES",
+      "canonical_name": "Минтай, тушенный в томате с овощами",
+      "meal_type_code": "main",
+      "source_pdf_page": 106,
+      "source_output_g": "70",
+      "prepared_energy_kcal": "103",
+      "required_food_codes": [
+        "POLLOCK_FILLET_RAW",
+        "CARROT_RED_RAW",
+        "ONION_BULB_FRESH",
+        "TOMATO_PUREE_PASTE",
+        "PARSLEY_ROOT_RAW",
+        "SUGAR",
+        "SUNFLOWER_OIL",
+        "SALT_IODIZED",
+        "WATER"
+      ]
     }
   ],
   "exclusions": [
@@ -194,13 +194,22 @@
       "reason": "Process uses water and bay leaf while the ingredient table does not quantify either; no inference allowed."
     },
     {
+      "source_recipe_id": "ru-school2022:recipe:54-5м",
+      "disposition": "REJECT_SOURCE_PROCESS_FAT_CONFLICT",
+      "reason": "Ingredient table declares sunflower oil 2.1 g while source process says the tray is greased with butter; do not choose an authority branch by inference."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-12м",
+      "disposition": "REJECT_SOURCE_PROCESS_FAT_CONFLICT",
+      "reason": "Ingredient table declares sunflower oil 6.7 g while source process says onion/carrot are sautéed in butter; do not choose an authority branch by inference."
+    },
+    {
       "source_recipe_ids": [
-        "ru-school2022:recipe:54-4м",
         "ru-school2022:recipe:54-6м",
         "ru-school2022:recipe:54-7м"
       ],
       "disposition": "DEFER_LOW_MARGINAL_VARIETY",
-      "reason": "Near-identical beef cutlet-family formulae; R3-A prioritizes broader preparation/species variety."
+      "reason": "Near-identical beef cutlet-family formulae; R3-A selects 54-4м as the representative branch."
     }
   ],
   "projected_effect": {
