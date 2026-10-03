@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "operation": "R2B_FISH_MAIN_DIVERSITY_SELECTION",
+  "accepted_base": "1e4a0e137dee87f2aaef7d885481fef17f6e324c",
+  "issue": 129,
+  "selection_rule": "MARGINAL_WEEKLY_VARIETY_PLUS_LOW_AUTHORITY_SURFACE",
+  "before": {
+    "active_exact_energy_breakfast": 3,
+    "active_exact_energy_main": 3,
+    "main_codes": [
+      "BOILED_CHICKEN_MAIN_PRODUCT",
+      "SCHOOL2022_54_29M_BEEF_MEATBALLS",
+      "SCHOOL2022_54_2M_BEEF_GOULASH"
+    ],
+    "main_capacity_per_week": 9,
+    "max_recipe_repetitions": 3
+  },
+  "selected": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-6р",
+      "canonical_code": "SCHOOL2022_54_6R_PINK_SALMON_IN_MILK",
+      "title": "Рыба, припущенная в молоке (горбуша)",
+      "planner_role": "main",
+      "source_output_g": "80",
+      "prepared_energy_kcal": "144.8",
+      "source_card_sha256": "507b25f2bb485cb9e151773b06feb82b948df46c1cb2be53298ad41c50ce95ab",
+      "source_variant_sha256": "7be0d91dcdcfd49197e58758249ce667fd6af7434f617a074c1ffab14534b8f5",
+      "source_process_sha256": "e34e093f616c37cf6f3eb8c9b04c891a1fa299d12a9bbaf851427f7bcec2a6f2",
+      "selected_route_sha256": "d6b20a62bfa9c228a8e64ad9d2f82a0417799ef4ab35e1546dc484f73fd4c067",
+      "energy_reconciliation_sha256": "46ab36450234f8729ab11cfc633da1868a4c1a2f13b26a0870062263f6b6cee0",
+      "fish_demand_sha256": "174fe732e7c1c9a2a8023efc120f0d381d90e7784a6c33140a2e25400aeb28f7",
+      "milk_demand_sha256": "08cd273100b0459db4fff3e51fb3fa92c7a4e11d9e3643ac795f79a69bbb5c97",
+      "selected_route_note": "Air-thaw source route is selected only for deterministic corpus closure; thawing logistics are not promoted to consumer RecipeSteps."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-7р",
+      "canonical_code": "SCHOOL2022_54_7R_POLLOCK_IN_MILK",
+      "title": "Рыба, припущенная в молоке (минтай)",
+      "planner_role": "main",
+      "source_output_g": "80",
+      "prepared_energy_kcal": "105.3",
+      "source_card_sha256": "79d9d346f7dc7cb798899c6ea00b8217cf143a8947c8b97152350d035d158d76",
+      "source_variant_sha256": "b86297ff6bc3f639c20dbf9646db51ede1438c97bfc80b6e6bb4f2aa1cf767f6",
+      "source_process_sha256": "4bf8f08e2ee5a6212e3b38b27981d373ae8bce66157e2f2ab7295d405a7e71a0",
+      "selected_route_sha256": "b362bf1356b4ae6316b78911e8bca03ab1744e188b0d79ddddfafd3d3132bff1",
+      "energy_reconciliation_sha256": "7ca186d66b7e0ceb3bbc1fb52fdf6d053acc11e6c6d8e9be33c3c6f605b2e5c2",
+      "fish_demand_sha256": "56e65642f9f104c0398e8dca991f00c3f88673e7275c90f17429f45fdacd0366",
+      "milk_demand_sha256": "b49c3c2fe95afffae3ba7e5485b6f4a78ea894936bf3229207a89745abd2afe4",
+      "selected_route_note": "Air-thaw source route is selected only for deterministic corpus closure; thawing logistics are not promoted to consumer RecipeSteps."
+    }
+  ],
+  "identity_decisions": [
+    {
+      "source_label": "горбуша (филе)",
+      "canonical_code": "PINK_SALMON_FILLET_RAW",
+      "canonical_name": "Горбуша, филе сырое",
+      "category_code": "fish_seafood",
+      "disposition": "CREATE_IDENTITY_ONLY",
+      "basis": "Exact species/form source label plus pre-cooking thawing process; no generic whole-fish identity or Nutrition equivalence is inferred."
+    },
+    {
+      "source_label": "минтай (филе)",
+      "canonical_code": "POLLOCK_FILLET_RAW",
+      "canonical_name": "Минтай, филе сырое",
+      "category_code": "fish_seafood",
+      "disposition": "CREATE_IDENTITY_ONLY",
+      "basis": "Exact species/form source label plus pre-cooking thawing process; existing POLLOCK_ALASKA is not reused as exact fillet authority."
+    }
+  ],
+  "reused_foods": [
+    "MILK_2_5",
+    "ONION_BULB_FRESH",
+    "SUNFLOWER_OIL",
+    "SALT_IODIZED"
+  ],
+  "deferred": {
+    "ru-school2022:recipe:54-1р": {
+      "title": "Котлета рыбная (треска)",
+      "disposition": "DEFERRED_IDENTITY_FORM_CONFLICT",
+      "blocker": "Source row/process supports only generic wheat bread; older R1-G note proposed narrower WHEAT_BREAD_HIGH_GRADE_STALE without exact cod-card grade/stale evidence."
+    }
+  },
+  "projected_after": {
+    "active_exact_energy_main": 5,
+    "main_capacity_per_week": 15,
+    "introduces_fish_main_family": true,
+    "planner_algorithm_change": false
+  }
+}

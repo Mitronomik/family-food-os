@@ -1,5 +1,84 @@
 # Progress
 
+## R2-B fish MAIN diversity review-ready — 2026-10-02
+
+Accepted base:
+`1e4a0e137dee87f2aaef7d885481fef17f6e324c` (merged PR #128).
+
+Issue #129 / PR #130.
+
+Proof/runtime freeze:
+`4fd0c946b43785c0eb242d26184c7a20441a6012`.
+
+Delivered:
+
+- School2022 54-6р / pink salmon in milk / 80 g / 144.8 kcal;
+- School2022 54-7р / pollock in milk / 80 g / 105.3 kcal;
+- identity-only `PINK_SALMON_FILLET_RAW` and `POLLOCK_FILLET_RAW`;
+- PREPARED_OUTPUT_V1 reused without a new authority kind;
+- guarded activation;
+- zero-write replay and deliberate-deactivation preservation;
+- tamper / partial-state / identity-conflict fail-closed coverage;
+- ordinary active exact-energy MAIN pool 3 → 5;
+- MAIN opportunity capacity 9 → 15/week;
+- persisted seven-DINNER proof selects both preferred fish recipes;
+- fish hard exclusion removes only the affected candidate while preserving a
+  feasible week;
+- no migration/schema/Planner algorithm change.
+
+Source/UX:
+source thawing route is pinned for deterministic provenance only; consumer steps
+start with already-thawed fillet. Institutional paraconvection/serving-temperature
+context is not promoted.
+
+Cod cutlet 54-1р remains deferred because its exact retained bread form does not
+justify the narrower grade/stale identity in older R1-G evidence.
+
+Verification at proof/runtime freeze:
+
+- focused/affected R2-B — 128 passed;
+- Ruff check / format — SUCCESS;
+- scope/whitespace — SUCCESS;
+- AI disabled;
+- migration head remains 0042.
+
+Independent audit correction after the earlier freeze:
+- removed invented single-value `cook_time_minutes=25` for source range 20–25 min;
+- corrected Russian consumer step grammar from `филе горбуша / филе минтай` to
+  `филе горбуши / филе минтая`;
+- added regression assertions for both facts.
+
+Corrected exact head remains 128 passed; Ruff check/format and scope are SUCCESS.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
+## R2-B fish MAIN diversity implementation started — 2026-10-02
+
+Accepted main:
+`1e4a0e137dee87f2aaef7d885481fef17f6e324c` (merged PR #128).
+
+Issue #129 selects two low-authority-surface School2022 fish MAIN cards:
+
+- 54-6р / pink salmon in milk / 80 g / 144.8 kcal;
+- 54-7р / pollock in milk / 80 g / 105.3 kcal.
+
+New identity-only foods:
+`PINK_SALMON_FILLET_RAW`, `POLLOCK_FILLET_RAW`.
+
+The batch reuses the existing prepared-output authority and guarded activation.
+No migration, schema, shared service, Planner algorithm or new Nutrition authority
+is introduced.
+
+Projected MAIN exact-energy active count:
+3 → 5; opportunity capacity 9 → 15/week.
+
+The earlier cod-cutlet follow-up is deferred because its exact retained source
+does not justify the narrower wheat-bread form proposed by an older R1-G note.
+
+Status:
+`R2B_IMPLEMENTATION_ACTIVE`.
+
 ## R2 breakfast capacity review-ready — 2026-10-02
 
 Accepted base:

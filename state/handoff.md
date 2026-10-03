@@ -1,5 +1,91 @@
 # Handoff
 
+## R2-B fish MAIN diversity final handoff — 2026-10-02
+
+Accepted base:
+`1e4a0e137dee87f2aaef7d885481fef17f6e324c`.
+
+Issue #129 / PR #130 / branch `feat/r2b-fish-main-diversity`.
+
+Proof/runtime freeze:
+`4fd0c946b43785c0eb242d26184c7a20441a6012`.
+
+Published and activated:
+
+- `SCHOOL2022_54_6R_PINK_SALMON_IN_MILK` — 80 g / 144.8 kcal;
+- `SCHOOL2022_54_7R_POLLOCK_IN_MILK` — 80 g / 105.3 kcal.
+
+New identity-only fish foods:
+`PINK_SALMON_FILLET_RAW`, `POLLOCK_FILLET_RAW`.
+
+No Nutrition/Composition is published for those identities.
+
+The recipes reuse PREPARED_OUTPUT_V1. ENERGY_KCAL is the sole AVAILABLE nutrient;
+all other frozen codes stay UNKNOWN.
+
+Ordinary active exact-energy MAIN count is now 5 and capacity is 15/week under
+unchanged repetition=3. A persisted seven-DINNER week selects both preferred fish
+recipes. Excluding pink-salmon fillet removes only that candidate and the week
+still succeeds through the remaining MAIN pool.
+
+Replay/failure semantics:
+exact replay is zero-write; deliberate deactivation stays deactivated; source
+tamper, partial Recipe/prepared state and conflicting fish identity all fail
+closed.
+
+Source/consumer boundary:
+the exact route hash is retained, but thawing logistics, paraconvection and
+institutional serving-temperature rules are provenance-only. Consumer steps start
+with already-thawed fillet.
+
+Cod cutlet 54-1р remains deferred because its exact source does not establish the
+narrower high-grade/stale wheat-bread form proposed in older R1-G evidence.
+
+Independent audit correction:
+- source range 20–25 min is no longer collapsed into `cook_time_minutes=25`;
+  the scalar field stays null and the Russian step preserves the range;
+- consumer Russian text now uses the grammatical `филе горбуши / филе минтая`;
+- regression assertions lock both facts.
+
+Exact corrected proof/runtime-freeze verification:
+128 passed; Ruff check/format SUCCESS; scope/whitespace SUCCESS; AI disabled;
+migration head remains 0042.
+
+PR #130 is READY FOR FINAL REVIEW.
+
+Do not merge autonomously. After merge, reassess the next R2/R3 batch. Do not
+start DC4/Gate1-CLOSE or PR9 automatically.
+
+## R2-B fish MAIN diversity active — 2026-10-02
+
+Accepted main:
+`1e4a0e137dee87f2aaef7d885481fef17f6e324c`.
+
+Issue #129 / branch `feat/r2b-fish-main-diversity`.
+
+Current batch:
+- School2022 54-6р / pink salmon in milk / 80 g / 144.8 kcal;
+- School2022 54-7р / pollock in milk / 80 g / 105.3 kcal.
+
+Only two new identity-only FoodIngredients are introduced:
+`PINK_SALMON_FILLET_RAW` and `POLLOCK_FILLET_RAW`.
+
+Existing exact identities cover milk 2.5%, onion, sunflower oil and iodized salt.
+Prepared Nutrition remains ENERGY_KCAL-only PREPARED_OUTPUT_V1.
+
+Consumer RecipeSteps intentionally omit source thawing logistics, paraconvection
+and institutional serving-temperature requirements. The selected source route is
+retained only for deterministic provenance.
+
+Cod cutlet 54-1р is deferred because its exact retained bread form does not support
+the narrower high-grade/stale identity proposed in older R1-G evidence.
+
+Next:
+run focused R2-B CI, fix only task-local failures, freeze exact runtime/evidence
+head and update state with the verification receipt.
+
+Do not start another corpus batch, DC4/Gate1-CLOSE or PR9 before review/merge.
+
 ## R2 breakfast capacity final handoff — 2026-10-02
 
 Accepted base:

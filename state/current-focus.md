@@ -4,107 +4,122 @@ Updated: 2026-10-02.
 
 ## Accepted state
 
-PR #126 / R1-C is merged into `main` at:
+PR #128 / R2-A is merged into `main` at:
 
-`8995e85e4cda2ae30fc62fdc63daaf441f4226bd`.
+`1e4a0e137dee87f2aaef7d885481fef17f6e324c`.
 
-R1-C proved the ordinary production Planner path end to end.
+Before R2-B the ordinary active exact-energy Planner pool is:
+
+- BREAKFAST: 3 RecipeVersions / capacity 9 opportunities per week;
+- MAIN: 3 RecipeVersions / capacity 9 opportunities per week;
+- `max_recipe_repetitions=3`;
+- persisted seven-BREAKFAST and seven-DINNER paths are proven.
 
 ## Current bounded operation
 
-**R2 — Breakfast Planner-capacity runtime batch.**
+**R2-B — Fish MAIN diversity batch.**
 
-Issue: `#127`.
+Issue: `#129`.
 
-PR: `#128`.
+PR: `#130`.
 
-Branch: `feat/r2-breakfast-capacity`.
+Branch: `feat/r2b-fish-main-diversity`.
 
 Accepted base:
 
-`8995e85e4cda2ae30fc62fdc63daaf441f4226bd`.
+`1e4a0e137dee87f2aaef7d885481fef17f6e324c`.
 
 Proof/runtime freeze:
 
-`1d93631b07a25a260b7d45cc0b91f3437865fd8a`.
+`4fd0c946b43785c0eb242d26184c7a20441a6012`.
 
 Status:
 
 `READY_FOR_FINAL_REVIEW`.
 
-## R2 result
-
-R2 closes the current BREAKFAST capacity bottleneck without changing Planner
-rules, schema or Nutrition authority mechanics.
+## R2-B result
 
 Published/activated through the existing prepared-output path:
 
-- `SCHOOL2022_54_1O_NATURAL_OMELET` —
-  Омлет натуральный — 150 g / exact 225.5 kcal;
-- `SCHOOL2022_54_9K_MILK_OAT_PORRIDGE` —
-  Каша вязкая молочная овсяная — 200 g / exact 272.9 kcal.
+- `SCHOOL2022_54_6R_PINK_SALMON_IN_MILK` —
+  Рыба, припущенная в молоке (горбуша) —
+  80 g / exact 144.8 kcal;
+- `SCHOOL2022_54_7R_POLLOCK_IN_MILK` —
+  Рыба, припущенная в молоке (минтай) —
+  80 g / exact 105.3 kcal.
 
 New identity-only FoodIngredients:
 
-- `MILK_2_5` — Молоко 2,5%;
-- `OAT_GROATS` — Крупа овсяная.
+- `PINK_SALMON_FILLET_RAW`;
+- `POLLOCK_FILLET_RAW`.
 
 Neither receives Nutrition or Composition authority.
 
-The exact milk identity deliberately does not claim a pasteurization subtype:
-School2022 pins 2.5% fat but allows multiple heat-treatment modes. Oat groats are
-kept distinct from existing `OATS_ROLLED`.
+Existing exact identities are reused for:
+
+- `MILK_2_5`;
+- `ONION_BULB_FRESH`;
+- `SUNFLOWER_OIL`;
+- `SALT_IODIZED`.
 
 Prepared Nutrition remains:
 
 `PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`.
 
-Only ENERGY_KCAL is AVAILABLE for each new RecipeVersion; all other frozen
-nutrient codes remain UNKNOWN.
+Only ENERGY_KCAL is AVAILABLE; all remaining frozen nutrient codes are UNKNOWN.
 
-## Planner capacity after R2
+## Planner capacity after R2-B
 
-Ordinary active exact-energy BREAKFAST pool:
+Ordinary active exact-energy MAIN pool:
 
-- `HARD_BOILED_EGG`;
-- `SCHOOL2022_54_1O_NATURAL_OMELET`;
-- `SCHOOL2022_54_9K_MILK_OAT_PORRIDGE`.
+- `BOILED_CHICKEN_MAIN_PRODUCT`;
+- `SCHOOL2022_54_29M_BEEF_MEATBALLS`;
+- `SCHOOL2022_54_2M_BEEF_GOULASH`;
+- `SCHOOL2022_54_6R_PINK_SALMON_IN_MILK`;
+- `SCHOOL2022_54_7R_POLLOCK_IN_MILK`.
 
-With unchanged `max_recipe_repetitions=3`:
+Result:
 
-- active exact-energy breakfast count: 1 → 3;
-- breakfast opportunity capacity: 3 → 9/week;
-- a persisted seven-BREAKFAST production week is feasible and proven;
-- all three candidates are used and none exceeds repetition 3.
+- active exact-energy MAIN count: 3 → 5;
+- opportunity capacity: 9 → 15/week under unchanged repetition=3;
+- persisted seven-DINNER production proof selects both preferred fish recipes;
+- no RecipeVersion exceeds repetition 3;
+- hard exclusion of `PINK_SALMON_FILLET_RAW` removes only the pink-salmon
+  candidate while the week remains feasible and pollock remains available.
 
-Hard exclusion of `MILK_2_5` removes both new breakfast candidates, restores
-explicit bounded infeasibility, and persists no partial MealPlan.
+## Source / consumer boundary
 
-## Evidence / failure semantics
+Exact source-card / source-variant / source-process / selected-route /
+energy-reconciliation hashes are pinned.
 
-The R2 package pins:
+The source route includes a thawing alternative. One route is frozen for
+deterministic provenance only.
 
-- accepted private corpus archive SHA-256;
-- School2022 PDF SHA-256;
-- exact source card / source variant / source process / selected route hashes;
-- exact energy-reconciliation hashes;
-- bounded household-applicability decisions for only these two cards;
-- exact FoodIngredient identity decisions.
+Consumer RecipeSteps begin with already-thawed fillet. Thawing logistics,
+paraconvection references and institutional serving-temperature requirements are
+not promoted to consumer execution.
 
-Runtime proves:
+The older School2022 54-1р cod-cutlet follow-up remains deferred because its exact
+retained source supports only generic wheat bread, while older R1-G evidence
+proposed the narrower `WHEAT_BREAD_HIGH_GRADE_STALE` without exact cod-card
+grade/stale evidence.
+
+## Failure / replay semantics
+
+Verified:
 
 - fresh publication;
 - exact zero-write replay;
-- deliberate deactivation preservation;
+- deliberate deactivation remains deactivated;
 - tampered frozen contract fails closed;
 - partial Recipe without prepared authority fails closed;
-- conflicting FoodIngredient identity fails closed.
+- conflicting fish FoodIngredient identity fails closed.
 
 ## Verification
 
-Exact proof/runtime-freeze verification at `1d93631...`:
+Exact corrected proof/runtime-freeze verification at `4fd0c946...`:
 
-- focused/affected R2 suite — **120 passed**;
+- focused/affected R2-B suite — **128 passed**;
 - Ruff check — SUCCESS;
 - Ruff format --check — SUCCESS;
 - scope/whitespace — SUCCESS;
@@ -112,27 +127,34 @@ Exact proof/runtime-freeze verification at `1d93631...`:
 - migration head remains `0042_recipe_prepared_output_nutrition`;
 - migration 0043 is absent.
 
-Earlier red runs were task-local lint/connector-format defects only. They did not
-require runtime, schema, Planner or authority changes.
+The first independent audit found two task-local publication blockers after the
+previous freeze: `cook_time_minutes=25` overstated a source range of 20–25 minutes,
+and the consumer steps contained grammatically invalid `филе горбуша / филе минтай`.
+The corrected publication now keeps `cook_time_minutes=null`, preserves the exact
+20–25 minute range in the Russian RecipeStep, and uses `филе горбуши / филе минтая`.
+Regression assertions lock both corrections. The corrected focused suite remains
+128 passed with Ruff and scope gates green.
 
 ## Scope boundaries
 
 Do not:
 
 - add migration 0043 or schema changes;
-- add a new Nutrition authority kind;
-- add Nutrition/Composition to `MILK_2_5` or `OAT_GROATS`;
-- infer milk heat-treatment subtype or rolled-oats equivalence;
+- add another Nutrition authority kind;
+- add Nutrition/Composition to fish identities;
+- infer whole-fish→fillet equivalence;
+- publish cod cutlet 54-1р;
+- infer a narrower bread form;
 - change Planner algorithm/scoring/roles/repetition;
-- publish School2022 54-1р in this PR;
-- infer closure of USSR82 467/492/1081;
+- add allergen automation;
+- start another corpus batch;
 - start DC4 / Gate1-CLOSE;
 - start PR9 Shopping;
 - start Prep/PDF/Retail/API/UI/Auth/PostgreSQL/AI.
 
 ## Next step
 
-Independent final review of PR #128.
+Independent final review of PR #130.
 
 After explicit review and merge, reassess the next R2/R3 corpus batch by maximum
 marginal realistic weekly variety and corpus closure.
