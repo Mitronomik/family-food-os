@@ -1,16 +1,10 @@
 import shutil
 import sqlite3
-from collections import Counter
-from dateutil import parser as date_parser
-from datetime import date
-from decimal import Decimal
 
 import pytest
 
 from app.db import migrations
 from app.db.config import DatabaseConfig
-from app.domain.households import ActivityLevel, Goal, Sex
-from app.domain.meal_plans import MealRole, MemberMealPatternSourceKind
 from app.domain.recipe_nutrition_v2 import NUTRIENT_CODES
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_ingredient_composition import (
@@ -23,18 +17,6 @@ from app.persistence.sqlalchemy_core.food_recipe_repositories import (
     SqlAlchemyRecipeRepository,
     SqlAlchemyRecipeVersionRepository,
 )
-from app.persistence.sqlalchemy_core.households import (
-    create_household_service,
-)
-from app.persistence.sqlalchemy_core.meal_patterns import (
-    SqlAlchemyMealPatternCatalogueReadScope,
-)
-from app.persistence.sqlalchemy_core.meal_plans import (
-    SqlAlchemyMealPlanReadScope,
-    SqlAlchemyMealPlanUnitOfWork,
-)
-from app.persistence.sqlalchemy_core.nutrition import create_nutrition_service
-from app.persistence.sqlalchemy_core.pantry import create_pantry_service
 from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
     SqlAlchemyPreparedRecipeNutritionRepository,
     create_recipe_nutrition_v2_service,
@@ -56,18 +38,7 @@ from app.seed.r3a_school2022_main_batch import (
     publish_r3a_school2022_main_batch,
     seed_r3a_school2022_main_batch,
 )
-from app.services.meal_plans import MealPlanService
-from app.services.planner import (
-    AuthoritativeGenerationRequest,
-    GenerationMemberConstraints,
-    PlannerConfig,
-    PlannerRejectionCode,
-    PlannerService,
-    PlannerSuccess,
-)
 from app.services.prepared_recipe_activation import PreparedRecipeActivationError
-
-WEEK_START = date(2026, 10, 5)
 
 
 @pytest.fixture(scope="session")
@@ -148,36 +119,6 @@ def r3a_counts(config: DatabaseConfig) -> dict[str, int]:
         "authorities": authorities,
         "values": values,
     }
-
-
-def meal_plan_service(engine) -> MealPlanService:
-    return MealPlanService(
-        write_scope_factory=lambda: SqlAlchemyMealPlanUnitOfWork(engine),
-        read_scope_factory=lambda: SqlAlchemyMealPlanReadScope(engine),
-        household_read_scope_factory=lambda: None,
-        pattern_read_scope_factory=lambda: SqlAlchemyMealPatternCatalogueReadScope(
-            engine
-        ),
-    )
-
-
-def production_planner(engine):
-    meal_plans = meal_plan_service(engine)
-    households = create_household_service(engine)
-    catalogue = create_food_recipe_catalogue_service(engine)
-    nutrition = create_nutrition_service(engine)
-    pantry = create_pantry_service(engine)
-    recipe_nutrition = create_recipe_nutrition_v2_service(engine)
-    planner = PlannerService(
-        meal_plans,
-        households,
-        catalogue,
-        nutrition,
-        pantry,
-        PlannerConfig(version="planner-v0.4", max_recipe_repetitions=3),
-        recipe_nutrition=recipe_nutrition,
-    )
-    return planner, meal_plans, households, catalogue
 
 
 def test_r3a_fresh_publication_and_batch_activation(database):
