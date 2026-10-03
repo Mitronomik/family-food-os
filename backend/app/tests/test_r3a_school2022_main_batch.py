@@ -210,7 +210,6 @@ def create_dinner_household(households, meal_plans):
     return household, member, selection
 
 
-
 def test_r3a_fresh_publication_and_batch_activation(database):
     result = seed_r3a_school2022_main_batch(database)
 
