@@ -10,7 +10,12 @@ from app.db.config import DatabaseConfig
 from app.domain.food_recipes import MealTypeCode
 from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import MemberMealPatternSourceKind
-from app.domain.planner import PlannerConfig, PlannerRejectionCode, PlannerSuccess
+from app.domain.planner import (
+    ROLE_COMPATIBILITY_V1,
+    PlannerConfig,
+    PlannerRejectionCode,
+    PlannerSuccess,
+)
 from app.domain.recipe_nutrition_v2 import (
     NUTRIENT_CODES,
     RecipeNutritionAuthorityKind,
@@ -68,7 +73,6 @@ from app.services.planner import (
     GenerationMemberConstraints,
     PlannerService,
 )
-from app.domain.planner import ROLE_COMPATIBILITY_V1
 
 WEEK_START = date(2026, 11, 16)
 
