@@ -24,9 +24,9 @@ See `docs/family-food/r3a-school2022-main-batch-gate.md`.
 
 ## Fail-closed source corrections
 
-During gate review, School2022 `54-5м` and `54-12м` were removed from the selected batch because their ingredient tables name sunflower oil while their technology text names butter for the same cooking operation. No authority branch is inferred.
+During gate review, School2022 `54-5м` and `54-12м` were removed from the selected batch because their ingredient tables name sunflower oil while their technology text names butter for the same cooking operation. `54-15м` remains deferred because process water and bay leaf are unquantified. No authority branch is inferred.
 
-They were replaced by clean cards `54-4м` and `54-11р`. The gate also uses `WHEAT_BREAD_STALE_UNSPECIFIED_GRADE` where process text proves stale wheat bread but not flour grade.
+A later process-placement audit also removed `54-9р` and `54-18м` because both contain multiple quantified fats with unresolved sunflower-oil placement. The final ten-card set uses source-clean `54-6м` and `54-7м` as replacements while retaining clean `54-4м` and `54-11р`. The gate also uses `WHEAT_BREAD_STALE_UNSPECIFIED_GRADE` where process text proves stale wheat bread but not flour grade.
 
 
 ## Batch transaction semantics — accepted option B
@@ -44,6 +44,8 @@ Future runtime must use:
    - all 10 active -> zero-write replay;
    - mixed active/inactive -> fail closed;
    - activation failure rolls back the entire activation transaction.
+
+The current single-recipe prepared-activation seam owns its own commit, so the runtime PR must not loop it ten times. The same runtime PR is authorized to extract/add a transaction-neutral activation-policy/in-scope mutation seam, validate the full would-be active batch before the one commit, and preserve existing single-recipe callers. No extra activation PR or migration is authorized.
 
 This keeps one runtime PR for the whole batch while preserving recovery and deliberate-deactivation semantics.
 
@@ -64,3 +66,8 @@ Multiple-fat ambiguity is not resolved by inference.
 
 Durable archive and embedded School2022 PDF were independently re-read and
 re-hashed on 2026-10-03; both pinned hashes and byte sizes match.
+
+## Independent review source-binding corrections
+
+- `54-8м`: the source does not identify the liquid used to pre-soak stale bread. The exact `WATER=12 g` total remains authoritative, explicit water placement is rack wetting, and any other placement/split remains UNKNOWN.
+- `54-11м`: consumer steps retain the source-backed 5–10 minute weak boil followed by a covered 160 °C / 30–40 minute oven finish. The exact `WATER=313 g` total remains authoritative without an invented per-step split.
