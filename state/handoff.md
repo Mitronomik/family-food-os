@@ -1,6 +1,6 @@
 # Handoff
 
-## R2-E cottage casserole runtime active — 2026-10-03
+## R2-E cottage casserole runtime review-ready — 2026-10-03
 
 Accepted main:
 `ea30ae82a253ee712d211b3b19caf53e9d2ccc45` (merged PR #136).
@@ -28,7 +28,27 @@ The hard `MILK_2_5` proof must demonstrate two unaffected candidates and
 capacity 6/week, therefore bounded seven-breakfast failure with no partial plan.
 Do not claim 7/7 closure.
 
-Stop after a review-ready runtime PR. Do not start the next resilience candidate.
+Delivered runtime:
+
+- `SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE` active at 150 g / 301.2 kcal;
+- four identity-only foods remain without Nutrition/Composition;
+- exact prepared replay is zero-write; deliberate deactivation stays deactivated;
+- failure/tamper/conflict/partial-state paths fail closed;
+- ordinary BREAKFAST pool becomes 7/capacity 21;
+- hard `MILK_2_5` unaffected pool becomes exactly two/capacity 6, and the
+  seven-BREAKFAST proof fails with no partial persisted plan.
+
+Runtime freeze:
+`fc75f5dcbc4e5e640b64cb37028f3f599b0df8f6`.
+
+R2-E workflow #4 SUCCESS: 152 focused/affected tests, Ruff check/format,
+scope/whitespace. Docs #802, DC1 #659, R1-C #59, R2 #43, R2-B #33, R2-C #21 and
+Russian methodologies #452 are SUCCESS. Migration remains 0042; AI disabled.
+
+PR #138 is READY FOR FINAL REVIEW.
+
+Do not merge autonomously. Do not start the next resilience candidate before
+review and merge.
 
 ## R2-E 54-1т Contract Gate review-ready — 2026-10-03
 

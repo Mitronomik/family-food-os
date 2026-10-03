@@ -12,14 +12,15 @@ Merged contract:
 
 `docs/family-food/r2e-cottage-casserole-gate.md`.
 
-Current ordinary active exact-energy Planner pool before R2-E runtime remains:
+Current ordinary active exact-energy Planner pool after R2-E runtime proof:
 
-- BREAKFAST: 6 RecipeVersions / capacity 18 opportunities per week;
+- BREAKFAST: 7 RecipeVersions / capacity 21 opportunities per week;
 - MAIN: 5 RecipeVersions / capacity 15 opportunities per week;
 - `max_recipe_repetitions=3`.
 
-Under hard `MILK_2_5` exclusion only `HARD_BOILED_EGG` is currently
-unaffected, so capacity is 3/week.
+Under hard `MILK_2_5` exclusion, `HARD_BOILED_EGG` and
+`SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE` remain unaffected, so capacity is
+6/week and a seven-BREAKFAST week remains bounded-infeasible.
 
 ## Current bounded operation
 
@@ -35,7 +36,7 @@ Accepted base:
 
 Status:
 
-`R2E_RUNTIME_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## Frozen runtime scope
 
@@ -94,6 +95,26 @@ Do not:
 
 ## Next step
 
-Implement the merged contract, run focused/affected verification on the exact
-runtime head, update progress/handoff with the verification receipt, create the
-review-ready PR, and stop for independent review.
+Runtime freeze:
+
+`fc75f5dcbc4e5e640b64cb37028f3f599b0df8f6`.
+
+Verification on the exact runtime freeze:
+
+- dedicated R2-E runtime workflow #4 — SUCCESS;
+- focused/affected suite — 152 passed;
+- Ruff check — SUCCESS;
+- Ruff format — SUCCESS;
+- scope/whitespace — SUCCESS;
+- Docs verification #802 — SUCCESS;
+- DC1 corpus verification #659 — SUCCESS;
+- R1-C production Planner proof #59 — SUCCESS;
+- R2 breakfast capacity #43 — SUCCESS;
+- R2-B fish MAIN diversity #33 — SUCCESS;
+- R2-C breakfast grain diversity #21 — SUCCESS;
+- Russian nutrition methodologies #452 — SUCCESS;
+- migration head remains 0042;
+- `AI_ENABLED=false`.
+
+PR #138 is ready for independent final review. Do not merge autonomously and do
+not start the next resilience candidate before this PR is reviewed and merged.
