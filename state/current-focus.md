@@ -33,7 +33,7 @@ Accepted base:
 
 Status:
 
-`R2D_CONTRACT_GATE_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## Evidence result
 
@@ -71,7 +71,17 @@ Do not:
 
 ## Next step
 
-Complete the docs/data Contract Gate and independent review.
+Contract/evidence package is frozen on this branch.
+
+Verification on evidence head `33cf2c43...`:
+
+- Docs verification #791 — SUCCESS;
+- DC1 corpus verification #648 — SUCCESS;
+- evidence JSON parse — PASS;
+- changed scope audit — docs/data/state only;
+- runtime/schema/migration diff — none.
+
+Independent final review of PR #134 is next.
 
 After review and merge, make one separate bounded evidence decision:
 

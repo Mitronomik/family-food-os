@@ -28,8 +28,16 @@ fail-closed:
 No runtime publication, activation, FoodIngredient identity, migration, Planner
 or Nutrition-authority change is authorized.
 
+Verification on evidence head `33cf2c43d661cb3cb681cf75dd6d4542584241ca`:
+
+- Docs verification #791 — SUCCESS;
+- DC1 corpus verification #648 — SUCCESS;
+- evidence JSON parse — PASS;
+- changed scope is docs/data/state only;
+- no runtime/schema/migration changes.
+
 Status:
-`R2D_CONTRACT_GATE_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 # Progress
 
