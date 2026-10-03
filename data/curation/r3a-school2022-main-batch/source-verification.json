@@ -40,10 +40,6 @@
       "pdf_page": 105
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-5м",
-      "pdf_page": 118
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-8м",
       "pdf_page": 120
     },
@@ -52,16 +48,30 @@
       "pdf_page": 123
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-12м",
-      "pdf_page": 124
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-18м",
       "pdf_page": 129
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-4м",
+      "pdf_page": 117
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-11р",
+      "pdf_page": 106
     }
   ],
   "rights": {
     "status": "REVIEWED",
     "basis": "Reuse accepted Russian normative factual recipe rights basis from docs/family-food/ru-normative-recipe-corpus.md; source layout/photos/logos are not republished."
-  }
+  },
+  "rejected_source_conflicts": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-5м",
+      "conflict": "ingredient table sunflower oil vs process butter"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-12м",
+      "conflict": "ingredient table sunflower oil vs process butter"
+    }
+  ]
 }
