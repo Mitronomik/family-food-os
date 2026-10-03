@@ -21,3 +21,9 @@ The accepted durable source remains the existing private corpus archive and pinn
 School2022 PDF. The public PDF was rechecked on 2026-10-03 only as corroboration.
 
 See `docs/family-food/r3a-school2022-main-batch-gate.md`.
+
+## Fail-closed source corrections
+
+During gate review, School2022 `54-5м` and `54-12м` were removed from the selected batch because their ingredient tables name sunflower oil while their technology text names butter for the same cooking operation. No authority branch is inferred.
+
+They were replaced by clean cards `54-4м` and `54-11р`. The gate also uses `WHEAT_BREAD_STALE_UNSPECIFIED_GRADE` where process text proves stale wheat bread but not flour grade.
