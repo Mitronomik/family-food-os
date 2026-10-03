@@ -37,19 +37,20 @@ Canonical gate:
 - `ru-school2022:recipe:54-3о` — Омлет с морковью;
 - `ru-school2022:recipe:54-4о` — Омлет с сыром;
 - `ru-school2022:recipe:54-2т` — Запеканка из творога с морковью;
-- `ru-school2022:recipe:54-3т` — Суфле из моркови с творогом;
 - `ru-school2022:recipe:54-1к` — Каша жидкая молочная кукурузная;
+- `ru-school2022:recipe:54-2к` — Каша вязкая молочная кукурузная;
 - `ru-school2022:recipe:54-6к` — Каша вязкая молочная пшенная;
 - `ru-school2022:recipe:54-16к` — Каша «Дружба»;
-- `ru-school2022:recipe:54-21к` — Каша вязкая молочная ячневая;
 - `ru-school2022:recipe:54-23к` — Каша жидкая молочная пшеничная;
+- `ru-school2022:recipe:54-24к` — Каша жидкая молочная пшенная;
+
+Adversarial process audit rejected `54-3т` and `54-21к` for quantified sugar without technology placement; they are replaced by source-clean `54-2к` and `54-24к`. `54-22к` remains deferred for quantified butter without technology placement.
 
 New identity-only demand is exactly:
 
 - `CHEESE_SEMI_HARD_UNSPECIFIED`;
 - `CORN_GROATS`;
-- `MILLET_GROATS`;
-- `BARLEY_GROATS`;
+- `MILLET_GROATS`.
 
 No NutritionProfile or Composition authority.
 
