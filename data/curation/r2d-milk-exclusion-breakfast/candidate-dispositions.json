@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "operation": "R2D_MILK_EXCLUSION_BREAKFAST_CANDIDATE_AUDIT",
+  "accepted_base": "463fe46f7c40156c1b8ebab5402ca45698d8c2bc",
+  "issue": 133,
+  "source_archive": {
+    "locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "size_bytes": 206692075,
+    "sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea"
+  },
+  "school2022_pdf": {
+    "archive_path": "corpus-work/packages/school2022/raw/source.pdf",
+    "size_bytes": 4102547,
+    "sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d"
+  },
+  "current_capacity": {
+    "active_exact_energy_breakfast": 6,
+    "milk_2_5_dependent_breakfast": 5,
+    "unaffected_breakfast": [
+      "HARD_BOILED_EGG"
+    ],
+    "max_recipe_repetitions": 3,
+    "milk_exclusion_capacity_per_week": 3,
+    "required_breakfast_opportunities": 7
+  },
+  "candidates": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-1т",
+      "title": "Запеканка из творога",
+      "source_output_g": "150",
+      "source_card_energy_kcal": "301.2",
+      "source_card_sha256": "6103c16a7de140a83257e37908f34142788400d99832f04b2384f5d084d4e562",
+      "process_text_sha256": "911df98552cbcdf7e195b70dc0e96549f43864dc280f7e5fdc5a3ec54b9f6869",
+      "prepared_energy_reconciliation_sha256": null,
+      "breakfast_menu_evidence": [
+        {
+          "portion_g": "75",
+          "energy_kcal": "150.6",
+          "record_sha256": "5d4262c542ab056af3186e646d7353da93f3d5a4f675e40a923ca9065993021b",
+          "authority_scope": "CROSS_RECORD_QA_ONLY",
+          "competes_with_source_card_authority": false
+        },
+        {
+          "portion_g": "150",
+          "energy_kcal": "301.3",
+          "record_sha256": "2349a1b21b20b004eeb9c2c161a5c3a9c6755084588adaa0d29a93ee94e25512",
+          "authority_scope": "CROSS_RECORD_QA_ONLY",
+          "competes_with_source_card_authority": false
+        }
+      ],
+      "disposition": "REVIEW_REQUIRED_FOOD_IDENTITY_AND_HOUSEHOLD_APPLICABILITY",
+      "blocker": "Prepared energy is ready at 301.2 kcal from the exact source card. Runtime publication remains unauthorized until exact FoodIngredient/form decisions and bounded household applicability are reviewed.",
+      "prepared_energy_authority": {
+        "status": "READY_SAME_CARD_EXACT",
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "energy_kcal": "301.2",
+        "output_mass_g": "150",
+        "basis": "Exact prepared ENERGY_KCAL is published on the same source card that owns the RecipeVersion."
+      },
+      "prepared_energy_reconciliation_required_for_authority": false,
+      "cross_record_qa_signal": {
+        "menu_energy_kcal": "301.3",
+        "source_card_energy_kcal": "301.2",
+        "blocking": false,
+        "interpretation": "Retained menu value is a QA/corroboration signal only; exact same-card 301.2 kcal remains the prepared-output authority candidate."
+      }
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-4т",
+      "title": "Пудинг из творога с яблоками",
+      "source_output_g": "150",
+      "prepared_energy_kcal": "250.3",
+      "source_card_sha256": "87f9795c847bfb42fafe548c15c94fea3c1961cbde4ed83d8ba0e63c7aa14a55",
+      "process_text_sha256": "84e93034211260267bb0301ab6a0dfef6388d46c15914f89449c1d10d49d5f5e",
+      "prepared_energy_reconciliation_sha256": "b9b3868c7f1b7b1d0307448d94816aad01b9c5c239e65a37fc6e1c223ef7794f",
+      "disposition": "BLOCKED_REQUIRED_PROCESS_QUANTITY_UNRESOLVED",
+      "blocker": "Process requires dissolving vanillin in hot water, but the ingredient table contains no quantified water row."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-6т",
+      "title": "Сырники",
+      "source_output_g": "150",
+      "prepared_energy_kcal": "319.1",
+      "source_card_sha256": "30b8c2ec933c055c40abf69692fd6a650487c19b54d919378dcd08df6c3d0306",
+      "process_text_sha256": "cb847403e9c074b78199e80992b33c14f64247719f7df7600742b9b843b606d0",
+      "prepared_energy_reconciliation_sha256": "f2940dc90894cea2304af78f788c88e8b41f04e26b9405e8538a84634d6d28d2",
+      "breakfast_menu_evidence": [
+        {
+          "portion_g": "75",
+          "energy_kcal": "146.8",
+          "record_sha256": "6896bdb1511763c084bc39691748eee993bd63220724fcc30d03918e70f6ccbd"
+        }
+      ],
+      "disposition": "BLOCKED_REQUIRED_PROCESS_QUANTITY_UNRESOLVED",
+      "blocker": "Process requires dissolving vanillin in hot water, but the ingredient table contains no quantified water row."
+    }
+  ],
+  "ussr82_fallback": {
+    "source_recipe_id": "USSR82-459",
+    "title": "Яичница глазунья (натуральная)",
+    "production_inventory_disposition": "PRODUCTION_RECONCILIATION_REQUIRED",
+    "coverage_record_sha256": "dbef8e5c51bc39cf680fb4556215b80266f9eaa6526134bf9c83a9c4912164cc",
+    "coverage_status": "READY_RAW",
+    "coverage_outer_status": "UNVERIFIED_LEGACY_EXTRACTION",
+    "ready_for_integration": false,
+    "secondary_nutrient_record_sha256": "30cd01c518067ffc41d9d4812936bcb990996c8ca03ab5a6f679506bb0e428a9",
+    "secondary_energy_kcal": "192",
+    "secondary_expected_energy_kcal": "228.1",
+    "energy_qa": "CHECK",
+    "disposition": "BLOCKED_PREPARED_OUTPUT_AUTHORITY_UNPROVEN"
+  },
+  "result": {
+    "runtime_candidate_count": 0,
+    "runtime_publication_authorized": false,
+    "milk_exclusion_week_feasible_after_gate": false,
+    "gate_disposition": "BLOCKED_EVIDENCE_FAIL_CLOSED"
+  }
+}

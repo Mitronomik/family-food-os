@@ -1,5 +1,50 @@
 # Progress
 
+## R2-D milk-exclusion breakfast resilience Contract Gate — 2026-10-03
+
+Accepted main:
+`463fe46f7c40156c1b8ebab5402ca45698d8c2bc` (merged PR #132).
+
+Issue #133 / branch `docs/r2d-milk-exclusion-breakfast-gate`.
+
+Post-R2-C production evidence:
+- BREAKFAST active exact-energy count = 6 / capacity 18;
+- MAIN active exact-energy count = 5 / capacity 15;
+- five of six BREAKFAST recipes require `MILK_2_5`;
+- hard `MILK_2_5` exclusion leaves only `HARD_BOILED_EGG` and capacity 3/week.
+
+R2-D preflight reviewed the nearest retained breakfast candidates and stopped
+fail-closed:
+
+- 54-1т: prepared energy is ready at exact same-card 301.2 kcal / 150 g;
+  retained 301.3 kcal menu evidence is QA-only. FoodIngredient/form and
+  household-applicability review remain open;
+- 54-4т: exact prepared energy exists, but process water for vanillin is
+  unquantified;
+- 54-6т: exact prepared energy and breakfast menu use exist, but the same process
+  water is unquantified;
+- USSR82-459 fallback is not accepted prepared-output authority and its retained
+  secondary nutrient row has `EnergyQA=CHECK`.
+
+No runtime publication, activation, FoodIngredient identity, migration, Planner
+or Nutrition-authority change is authorized.
+
+Independent final review found and corrected one contract blocker: the earlier
+cross-record 301.2/301.3 treatment incorrectly overrode the accepted same-card
+`PREPARED_OUTPUT_V1` rule.
+
+Correction evidence head:
+`21d768b243de4064292065ba10f36b9b5c900e54`.
+
+Verification:
+- Docs #793 — SUCCESS;
+- DC1 #650 — SUCCESS;
+- corrected evidence JSON parse — PASS;
+- no runtime/schema/migration changes.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
 ## R2-C breakfast grain diversity review-ready — 2026-10-03
 
 Accepted base:

@@ -4,170 +4,94 @@ Updated: 2026-10-03.
 
 ## Accepted state
 
-PR #130 / R2-B is merged into `main` at:
+PR #132 / R2-C is merged into `main` at:
 
-`13a81d2497737f3b275b10055cd084548be02bf3`.
+`463fe46f7c40156c1b8ebab5402ca45698d8c2bc`.
 
-Before R2-C the ordinary active exact-energy Planner pool is:
+Current ordinary active exact-energy Planner pool:
 
-- BREAKFAST: 3 RecipeVersions / capacity 9 opportunities per week;
+- BREAKFAST: 6 RecipeVersions / capacity 18 opportunities per week;
 - MAIN: 5 RecipeVersions / capacity 15 opportunities per week;
 - `max_recipe_repetitions=3`;
 - persisted seven-BREAKFAST and seven-DINNER paths are proven.
 
+Under hard `MILK_2_5` exclusion, five of six BREAKFAST recipes are removed.
+Only `HARD_BOILED_EGG` remains, so BREAKFAST capacity becomes 3/week and a
+seven-BREAKFAST week is bounded-infeasible.
+
 ## Current bounded operation
 
-**R2-C — Breakfast grain diversity batch.**
+**R2-D — Milk-exclusion breakfast resilience Contract Gate.**
 
-Issue: `#131`.
+Issue: `#133`.
 
-PR: `#132`.
-
-Branch: `feat/r2c-breakfast-grain-diversity`.
+Branch: `docs/r2d-milk-exclusion-breakfast-gate`.
 
 Accepted base:
 
-`13a81d2497737f3b275b10055cd084548be02bf3`.
-
-Proof/runtime freeze:
-
-`5dc3bda151d412662f75e7cd64ae7f1811bb25c7`.
+`463fe46f7c40156c1b8ebab5402ca45698d8c2bc`.
 
 Status:
 
 `READY_FOR_FINAL_REVIEW`.
 
-## R2-C result
+## Evidence result
 
-Published/activated through the existing prepared-output path:
+The nearest retained candidates are not runtime-ready:
 
-- `SCHOOL2022_54_13K_WHEAT_MILK_PORRIDGE` —
-  Каша вязкая молочная пшеничная —
-  200 g / exact 270.3 kcal;
-- `SCHOOL2022_54_20K_BUCKWHEAT_MILK_PORRIDGE` —
-  Каша жидкая молочная гречневая —
-  200 g / exact 187.3 kcal;
-- `SCHOOL2022_54_25_1K_RICE_MILK_PORRIDGE` —
-  Каша жидкая молочная рисовая —
-  200 g / exact 184.5 kcal.
+- School2022 54-1т / Запеканка из творога:
+  prepared energy is **READY_SAME_CARD_EXACT** at 301.2 kcal / 150 g under the
+  accepted `PREPARED_OUTPUT_V1` rule; retained 301.3 kcal menu rows are
+  non-blocking QA evidence only. Runtime publication remains
+  `REVIEW_REQUIRED_FOOD_IDENTITY_AND_HOUSEHOLD_APPLICABILITY`;
+- School2022 54-4т / Пудинг из творога с яблоками:
+  `BLOCKED_REQUIRED_PROCESS_QUANTITY_UNRESOLVED`
+  because process water for dissolving vanillin is not quantified;
+- School2022 54-6т / Сырники:
+  the same `BLOCKED_REQUIRED_PROCESS_QUANTITY_UNRESOLVED` blocker;
+- USSR82-459 fallback remains `PRODUCTION_RECONCILIATION_REQUIRED`; its retained
+  secondary nutrient row has `EnergyQA=CHECK` and is not prepared-output authority.
 
-New identity-only FoodIngredient:
-
-- `WHEAT_GROATS` — Крупа пшеничная.
-
-Neither Nutrition nor Composition authority is published for that identity.
-
-Existing exact identities are reused for:
-
-- `BUCKWHEAT`;
-- `RICE_GROATS`;
-- `MILK_2_5`;
-- `BUTTER_PEASANT_72_5_UNSALTED`;
-- `SUGAR`;
-- `SALT_IODIZED`;
-- `WATER`.
-
-Prepared Nutrition remains:
-
-`PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`.
-
-Only ENERGY_KCAL is AVAILABLE; all remaining frozen nutrient codes are UNKNOWN.
-
-## Planner capacity after R2-C
-
-Ordinary active exact-energy BREAKFAST count:
-
-3 → 6 RecipeVersions.
-
-Opportunity capacity under unchanged `max_recipe_repetitions=3`:
-
-9 → 18/week.
-
-A persisted seven-BREAKFAST production week with all three new grain recipes
-preferred:
-
-- succeeds;
-- selects all three new RecipeVersions;
-- uses no RecipeVersion more than 3 times;
-- persists MealPlan and individualized Servings.
-
-Hard exclusion of `WHEAT_GROATS` removes only the wheat porridge candidate while
-the week remains feasible through the remaining breakfast pool.
-
-## Source / consumer boundary
-
-The R2-C package pins exact:
-
-- corpus archive and School2022 PDF identity;
-- source-card hashes;
-- required ingredient-row hashes;
-- process-text hashes;
-- energy-reconciliation hashes.
-
-Institutional serving-temperature requirements remain provenance-only.
-
-Source time ranges are preserved inside Russian RecipeSteps. No exact scalar
-cook-time is invented where the source provides only ranges.
-
-The rice RecipeIngredient preserves the exact Russian source text:
-
-`крупа рисовая: брутто 30,8 г; нетто 30,8 г`
-
-while the canonical numeric quantity remains Decimal 30.8.
-
-## Failure / replay semantics
-
-Verified:
-
-- fresh publication;
-- exact zero-write replay;
-- deliberate deactivation remains deactivated;
-- tampered frozen publication contract fails closed;
-- partial Recipe without prepared authority fails closed;
-- conflicting `WHEAT_GROATS` identity fails closed.
-
-## Verification
-
-Exact proof/runtime-freeze verification at `5dc3bda1...`:
-
-- focused/affected R2-C suite — **136 passed**;
-- Ruff check — SUCCESS;
-- Ruff format --check — SUCCESS;
-- scope/whitespace — SUCCESS;
-- six exact-energy BREAKFAST candidates / capacity eighteen — PASS;
-- persisted grain-diverse seven-BREAKFAST proof — PASS;
-- hard wheat FoodIngredient exclusion — PASS;
-- `AI_ENABLED=false`;
-- migration head remains `0042_recipe_prepared_output_nutrition`;
-- migration 0043 is absent.
-
-The first R2-C run already passed all 136 functional tests and failed only Ruff
-format. The subsequent provenance correction preserved exact Russian
-`source_amount_text` for rice and is covered by a regression assertion. The
-corrected exact head above is fully green.
+No runtime RecipeVersion/FoodIngredient publication is authorized by this gate.
 
 ## Scope boundaries
 
 Do not:
 
+- publish/activate an R2-D RecipeVersion;
+- create new FoodIngredient identities;
+- choose 301.2 vs 301.3 implicitly;
+- invent/default/omit unquantified process water;
 - add migration 0043 or schema changes;
+- change Planner scoring, role compatibility or repetition;
 - add another Nutrition authority kind;
-- add Nutrition/Composition to `WHEAT_GROATS`;
-- infer wheat-groats equivalence to flour/bulgur/whole-wheat;
-- replace `RICE_GROATS` with generic rice;
-- change Planner algorithm/scoring/roles/repetition;
-- publish side/salad/soup roles in this PR;
-- add allergen automation;
-- start another corpus batch;
 - start DC4 / Gate1-CLOSE;
 - start PR9 Shopping;
 - start Prep/PDF/Retail/API/UI/Auth/PostgreSQL/AI.
 
 ## Next step
 
-Independent final review of PR #132.
+Independent final review found one contract blocker: 54-1т was incorrectly
+treated as blocked by 301.2/301.3 cross-record energy variance. The correction
+restores the accepted same-card prepared-output authority rule: 301.2 kcal is the
+exact source-card candidate value; 301.3 kcal is QA-only.
 
-After explicit review and merge, reassess the next R2/R3 corpus batch by maximum
-marginal realistic weekly variety and corpus closure.
+Correction evidence head:
+`21d768b243de4064292065ba10f36b9b5c900e54`.
 
-Do not start DC4, Gate1-CLOSE or PR9 automatically.
+Verification:
+
+- Docs verification #793 — SUCCESS;
+- DC1 corpus verification #650 — SUCCESS;
+- corrected evidence JSON parse — PASS;
+- correction diff remains docs/data/state only;
+- runtime/schema/migration diff — none.
+
+Independent final re-review of PR #134 is next.
+
+After review and merge, make one separate bounded evidence decision:
+
+1. close School2022 quantity/energy authority gaps; or
+2. investigate a clean BREAKFAST/SANDWICH source family for higher role coverage.
+
+Do not start either follow-up automatically.

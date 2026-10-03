@@ -1,5 +1,49 @@
 # Handoff
 
+## R2-D milk-exclusion breakfast resilience Contract Gate — 2026-10-03
+
+Accepted main:
+`463fe46f7c40156c1b8ebab5402ca45698d8c2bc` (merged PR #132).
+
+Issue #133 / branch `docs/r2d-milk-exclusion-breakfast-gate`.
+
+The current product hole is not generic BREAKFAST capacity. It is hard-exclusion
+resilience: five of six active exact-energy BREAKFAST recipes require
+`MILK_2_5`; excluding it leaves one candidate and capacity 3/week.
+
+The nearest retained candidates were audited before runtime:
+
+- 54-1т exact same-card prepared energy is ready at 301.2 kcal / 150 g;
+  the 301.3 kcal menu row is QA-only. Runtime publication still requires exact
+  FoodIngredient/form and household-applicability review;
+- 54-4т and 54-6т are blocked because required process water for vanillin is not
+  quantified;
+- USSR82-459 remains production-reconciliation-required and its secondary
+  prepared nutrient row fails energy QA.
+
+Durable source archive:
+`private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`
+SHA-256
+`c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`.
+
+R2-D is a docs/data Contract Gate only. No runtime/data publication is authorized.
+
+Independent final review found one contract blocker in the 54-1т authority
+interpretation. It has been corrected to the accepted same-card
+`PREPARED_OUTPUT_V1` rule.
+
+Correction evidence head:
+`21d768b243de4064292065ba10f36b9b5c900e54`.
+
+Docs #793 SUCCESS; DC1 #650 SUCCESS; corrected evidence JSON parses; no
+runtime/schema/migration diff.
+
+PR #134 is READY FOR FINAL REVIEW.
+
+After independent review/merge, separately decide whether to close the School2022
+evidence gaps or investigate a clean BREAKFAST/SANDWICH source family. Do not
+start either automatically.
+
 ## R2-C breakfast grain diversity final handoff — 2026-10-03
 
 Accepted base:
