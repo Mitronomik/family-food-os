@@ -21,32 +21,43 @@ Before R2-C the ordinary active exact-energy Planner pool is:
 
 Issue: `#131`.
 
+PR: `#132`.
+
 Branch: `feat/r2c-breakfast-grain-diversity`.
 
 Accepted base:
 
 `13a81d2497737f3b275b10055cd084548be02bf3`.
 
+Proof/runtime freeze:
+
+`5dc3bda151d412662f75e7cd64ae7f1811bb25c7`.
+
 Status:
 
-`IMPLEMENTATION_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
-## Batch decision
+## R2-C result
 
-Selected School2022 cards:
+Published/activated through the existing prepared-output path:
 
-- `54-13к` — Каша вязкая молочная пшеничная —
+- `SCHOOL2022_54_13K_WHEAT_MILK_PORRIDGE` —
+  Каша вязкая молочная пшеничная —
   200 g / exact 270.3 kcal;
-- `54-20к` — Каша жидкая молочная гречневая —
+- `SCHOOL2022_54_20K_BUCKWHEAT_MILK_PORRIDGE` —
+  Каша жидкая молочная гречневая —
   200 g / exact 187.3 kcal;
-- `54-25.1к` — Каша жидкая молочная рисовая —
+- `SCHOOL2022_54_25_1K_RICE_MILK_PORRIDGE` —
+  Каша жидкая молочная рисовая —
   200 g / exact 184.5 kcal.
 
 New identity-only FoodIngredient:
 
 - `WHEAT_GROATS` — Крупа пшеничная.
 
-Reuse exact accepted identities:
+Neither Nutrition nor Composition authority is published for that identity.
+
+Existing exact identities are reused for:
 
 - `BUCKWHEAT`;
 - `RICE_GROATS`;
@@ -60,34 +71,80 @@ Prepared Nutrition remains:
 
 `PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`.
 
-Only ENERGY_KCAL is AVAILABLE; all remaining frozen nutrients are UNKNOWN.
+Only ENERGY_KCAL is AVAILABLE; all remaining frozen nutrient codes are UNKNOWN.
 
-## Product effect target
+## Planner capacity after R2-C
 
-Ordinary active exact-energy BREAKFAST pool:
+Ordinary active exact-energy BREAKFAST count:
 
 3 → 6 RecipeVersions.
 
-Projected opportunity capacity under unchanged repetition=3:
+Opportunity capacity under unchanged `max_recipe_repetitions=3`:
 
-9 → 18 BREAKFAST opportunities/week.
+9 → 18/week.
 
-The persisted proof must show a seven-BREAKFAST week that selects all three new
-grain-family recipes when preferred, with no RecipeVersion used more than 3 times.
+A persisted seven-BREAKFAST production week with all three new grain recipes
+preferred:
 
-A hard exclusion of `WHEAT_GROATS` must remove only the wheat porridge candidate
-while the week remains feasible.
+- succeeds;
+- selects all three new RecipeVersions;
+- uses no RecipeVersion more than 3 times;
+- persists MealPlan and individualized Servings.
+
+Hard exclusion of `WHEAT_GROATS` removes only the wheat porridge candidate while
+the week remains feasible through the remaining breakfast pool.
 
 ## Source / consumer boundary
 
-Exact source-card / ingredient-row / process / energy-reconciliation hashes are
-pinned for all three cards.
+The R2-C package pins exact:
 
-Institutional serving-temperature requirements remain provenance-only and are not
-consumer RecipeSteps.
+- corpus archive and School2022 PDF identity;
+- source-card hashes;
+- required ingredient-row hashes;
+- process-text hashes;
+- energy-reconciliation hashes.
 
-Source time ranges such as 20–30 minutes and 2–3 minutes stay in RecipeSteps; no
-single cook-time scalar is invented when the source does not provide one.
+Institutional serving-temperature requirements remain provenance-only.
+
+Source time ranges are preserved inside Russian RecipeSteps. No exact scalar
+cook-time is invented where the source provides only ranges.
+
+The rice RecipeIngredient preserves the exact Russian source text:
+
+`крупа рисовая: брутто 30,8 г; нетто 30,8 г`
+
+while the canonical numeric quantity remains Decimal 30.8.
+
+## Failure / replay semantics
+
+Verified:
+
+- fresh publication;
+- exact zero-write replay;
+- deliberate deactivation remains deactivated;
+- tampered frozen publication contract fails closed;
+- partial Recipe without prepared authority fails closed;
+- conflicting `WHEAT_GROATS` identity fails closed.
+
+## Verification
+
+Exact proof/runtime-freeze verification at `5dc3bda1...`:
+
+- focused/affected R2-C suite — **136 passed**;
+- Ruff check — SUCCESS;
+- Ruff format --check — SUCCESS;
+- scope/whitespace — SUCCESS;
+- six exact-energy BREAKFAST candidates / capacity eighteen — PASS;
+- persisted grain-diverse seven-BREAKFAST proof — PASS;
+- hard wheat FoodIngredient exclusion — PASS;
+- `AI_ENABLED=false`;
+- migration head remains `0042_recipe_prepared_output_nutrition`;
+- migration 0043 is absent.
+
+The first R2-C run already passed all 136 functional tests and failed only Ruff
+format. The subsequent provenance correction preserved exact Russian
+`source_amount_text` for rice and is covered by a regression assertion. The
+corrected exact head above is fully green.
 
 ## Scope boundaries
 
@@ -96,8 +153,8 @@ Do not:
 - add migration 0043 or schema changes;
 - add another Nutrition authority kind;
 - add Nutrition/Composition to `WHEAT_GROATS`;
-- infer wheat-groats equivalence to flour/bulgur/whole-wheat forms;
-- replace exact `RICE_GROATS` with generic rice;
+- infer wheat-groats equivalence to flour/bulgur/whole-wheat;
+- replace `RICE_GROATS` with generic rice;
 - change Planner algorithm/scoring/roles/repetition;
 - publish side/salad/soup roles in this PR;
 - add allergen automation;
@@ -106,25 +163,11 @@ Do not:
 - start PR9 Shopping;
 - start Prep/PDF/Retail/API/UI/Auth/PostgreSQL/AI.
 
-## Verification target
-
-R2-C must prove:
-
-- exact hash-pinned source/publication contract;
-- bounded household applicability for only the three named cards;
-- fresh/replay/deactivation semantics;
-- identity-only enforcement;
-- tamper/partial/conflict fail-closed behavior;
-- active exact-energy BREAKFAST count = 6;
-- persisted grain-diverse seven-BREAKFAST week;
-- hard wheat exclusion with successful fallback;
-- migration head remains 0042;
-- `AI_ENABLED=false`.
-
 ## Next step
 
-Run exact-head focused R2-C verification, fix task-local defects only, freeze the
-verified runtime/evidence head, then hand the PR to independent final review.
+Independent final review of PR #132.
 
-After merge, reassess the next R2/R3 batch. Do not start DC4, Gate1-CLOSE or PR9
-automatically.
+After explicit review and merge, reassess the next R2/R3 corpus batch by maximum
+marginal realistic weekly variety and corpus closure.
+
+Do not start DC4, Gate1-CLOSE or PR9 automatically.
