@@ -59,38 +59,64 @@ No `BUTTER_CREAM_UNSPECIFIED` identity is created by R2-F.
 
 The bounded policy remains:
 
-`BOUNDED_INSTITUTION_PUBLISHED_TECH_CARD_REVIEW_V1`
+`BOUNDED_INSTITUTION_PUBLISHED_TECH_CARD_REVIEW_V1`.
 
-but its publication scope is now exactly one card:
+Publication scope is exactly one card:
 
-`sad28-luppolovo:techcard:cheese-sandwich:20-10`.
+`sad28-hosted:techcard:3:cheese-sandwich:20-10`.
 
-The broader reviewed discovery derivative remains
-`source-cards.json` (dd1da359c60c8d647eda5e9a968164a02b8f6dca07333b888699f9722cba3543), but it is not the runtime source document.
+The older discovery identifier
+`sad28-luppolovo:techcard:cheese-sandwich:20-10`
+is retained only as discovery lineage.
 
-The exact selected runtime source is retained in the repository:
+### Durable raw-card source
 
-- path: `data/curation/r2f-sandwich-resilience/runtime-source.json`;
-- SHA-256: `26f239916b56429e78314369df961c8dd13cecd7d559d942655387e9851a5a97`;
-- byte size: 1855;
-- immutable locator: `https://raw.githubusercontent.com/Mitronomik/family-food-os/a35ef046538687bcaf2600d5027f87688e9224ca/data/curation/r2f-sandwich-resilience/runtime-source.json`.
+The future SOURCE_VERIFIED RecipeVersion does **not** use the live PDF or a
+normalized derivative as `source_document`. It uses the complete retained
+selected-card text snapshot:
 
-The upstream institution PDF remains provenance/corroboration:
+- repository path: `data/curation/r2f-sandwich-resilience/raw-cheese-card.txt`;
+- SHA-256: `77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c`;
+- byte size: 1783;
+- immutable Git locator: `https://raw.githubusercontent.com/Mitronomik/family-food-os/97ed76c7009229b5c947c63f1ace09b63a32147b/data/curation/r2f-sandwich-resilience/raw-cheese-card.txt`;
+- durable Library locator: `library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt`;
+- Library file id: `libfile_baff1ee2870081918170b98d1cec3c5d`.
+
+The Library copy was materialized and independently re-hashed on 2026-10-03:
+1783 bytes and the same SHA-256 — PASS.
+
+The future RecipeVersion tuple is therefore coherent:
+
+`source_url` → exact retained raw-card snapshot  
+`source_document_sha256` → SHA-256 of that same snapshot.
+
+### Provenance roles
+
+Do not collapse hosting, issuer and recipe provenance into one publisher field.
+
+- **Official host:** МАДОУ «ДСКВ №28» д. Лупполово. Its official nutrition page
+  links the technological-card file.
+- **Document/card issuer:** `NOT_ESTABLISHED_FROM_RETAINED_CARD`. No issuer is
+  inferred from the hosting institution.
+- **Upstream recipe collection:** `Сборник методических рекомендаций по организации питания детей и подростков в учреждениях образования Санкт-Петербурга. СПб.: Речь, 2008, Куткина М.Н.`
+
+The public SAD28 PDF remains upstream discovery/corroboration only:
 
 `https://sad28.vsevobr.ru/images/22-23/%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%B5/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BA%D0%B0%D1%80%D1%82%D1%8B-22-23%20%281%29.pdf`
 
-R2-F does not claim raw PDF bytes are retained. They are not needed to reproduce
-the accepted runtime publication because the complete selected source facts are
-retained in the immutable derivative above. Any future source-family expansion or
-reinterpretation requires reacquisition of upstream evidence and a new review.
-
-This means the future RecipeVersion tuple is coherent:
-`source_url` resolves to the retained derivative and
-`source_document_sha256` is the SHA-256 of that exact retained source file.
+Exact upstream PDF bytes could not be retrieved through the available execution
+environment. No PDF SHA is invented. The PDF is not required to reproduce the
+accepted one-card publication because the complete selected card text used by
+publication is durably retained and independently verified. Any future source
+family expansion or reinterpretation requires upstream reacquisition and a new
+review.
 
 ## 5. Selected cheese card
 
-Source record:
+Publication source record:
+`sad28-hosted:techcard:3:cheese-sandwich:20-10`.
+
+Discovery lineage:
 `sad28-luppolovo:techcard:cheese-sandwich:20-10`.
 
 Reviewed discovery-card SHA-256:
@@ -263,7 +289,10 @@ This PR is docs/data/source-evidence only.
 Required:
 
 - all committed JSON parses;
-- retained runtime-source SHA-256 and byte-size verification;
+- retained raw-card SHA-256 and byte-size verification;
+- durable Library materialize/readback verification;
+- source_url / source_document_sha256 same-artifact verification;
+- provenance roles separated: host / issuer / upstream collection;
 - discovery derivative/card hash verification;
 - butter contradiction calculation;
 - source-policy scope exactly one card;
