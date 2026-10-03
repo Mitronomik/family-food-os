@@ -58,25 +58,6 @@
       ]
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-9р",
-      "canonical_code": "SCHOOL2022_54_9R_POLLOCK_SOUR_CREAM_BAKE",
-      "canonical_name": "Минтай, запечённый в сметанном соусе",
-      "meal_type_code": "main",
-      "source_pdf_page": 104,
-      "source_output_g": "80",
-      "prepared_energy_kcal": "236.6",
-      "required_food_codes": [
-        "POLLOCK_FILLET_RAW",
-        "SOUR_CREAM_15",
-        "CHEESE_SEMI_HARD_UNSPECIFIED",
-        "SUNFLOWER_OIL",
-        "BUTTER_PEASANT_72_5_UNSALTED",
-        "FLOUR_WHEAT_HIGH_GRADE",
-        "SALT_IODIZED",
-        "WATER"
-      ]
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-10р",
       "canonical_code": "SCHOOL2022_54_10R_PINK_SALMON_TOMATO_VEGETABLES",
       "canonical_name": "Горбуша, тушенная в томате с овощами",
@@ -132,24 +113,6 @@
       ]
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-18м",
-      "canonical_code": "SCHOOL2022_54_18M_BEEF_LIVER_STROGANOFF",
-      "canonical_name": "Печень говяжья по-строгановски",
-      "meal_type_code": "main",
-      "source_pdf_page": 129,
-      "source_output_g": "80",
-      "prepared_energy_kcal": "189.2",
-      "required_food_codes": [
-        "BEEF_LIVER_RAW",
-        "SOUR_CREAM_15",
-        "FLOUR_WHEAT_HIGH_GRADE",
-        "BUTTER_PEASANT_72_5_UNSALTED",
-        "SUNFLOWER_OIL",
-        "SALT_IODIZED",
-        "WATER"
-      ]
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-4м",
       "canonical_code": "SCHOOL2022_54_4M_BEEF_CUTLET",
       "canonical_name": "Котлета из говядины",
@@ -185,6 +148,40 @@
         "SALT_IODIZED",
         "WATER"
       ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-6м",
+      "canonical_code": "SCHOOL2022_54_6M_BEEF_BITOCHEK",
+      "canonical_name": "Биточек из говядины",
+      "meal_type_code": "main",
+      "source_pdf_page": 119,
+      "source_output_g": "75",
+      "prepared_energy_kcal": "221.3",
+      "required_food_codes": [
+        "BEEF_CATEGORY_1_RAW",
+        "MILK_2_5",
+        "WHEAT_BREAD_STALE_UNSPECIFIED_GRADE",
+        "BREADCRUMBS",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED"
+      ]
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-7м",
+      "canonical_code": "SCHOOL2022_54_7M_BEEF_SCHNITZEL",
+      "canonical_name": "Шницель из говядины",
+      "meal_type_code": "main",
+      "source_pdf_page": 120,
+      "source_output_g": "75",
+      "prepared_energy_kcal": "221.3",
+      "required_food_codes": [
+        "BEEF_CATEGORY_1_RAW",
+        "MILK_2_5",
+        "WHEAT_BREAD_STALE_UNSPECIFIED_GRADE",
+        "BREADCRUMBS",
+        "BUTTER_PEASANT_72_5_UNSALTED",
+        "SALT_IODIZED"
+      ]
     }
   ],
   "exclusions": [
@@ -204,12 +201,14 @@
       "reason": "Ingredient table declares sunflower oil 6.7 g while source process says onion/carrot are sautéed in butter; do not choose an authority branch by inference."
     },
     {
-      "source_recipe_ids": [
-        "ru-school2022:recipe:54-6м",
-        "ru-school2022:recipe:54-7м"
-      ],
-      "disposition": "DEFER_LOW_MARGINAL_VARIETY",
-      "reason": "Near-identical beef cutlet-family formulae; R3-A selects 54-4м as the representative branch."
+      "source_recipe_id": "ru-school2022:recipe:54-9р",
+      "disposition": "REJECT_PROCESS_PLACEMENT_UNRESOLVED_MULTIPLE_FATS",
+      "reason": "Card contains sunflower oil and butter, but technology explicitly places butter while sunflower-oil placement is not source-resolved. Single-fat binding rule is not applicable."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-18м",
+      "disposition": "REJECT_PROCESS_PLACEMENT_UNRESOLVED_MULTIPLE_FATS",
+      "reason": "Card contains sunflower oil and butter; technology explicitly uses butter in sauce but does not place sunflower oil. Single-fat binding rule is not applicable."
     }
   ],
   "projected_effect": {
