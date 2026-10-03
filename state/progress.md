@@ -39,7 +39,6 @@ Verification:
 Status:
 `READY_FOR_FINAL_REVIEW`.
 
-# Progress
 
 ## R2-D milk-exclusion breakfast resilience Contract Gate — 2026-10-03
 
@@ -1711,7 +1710,6 @@ Runtime verification is fully green:
 
 Step 6B remains not started and not authorized.
 
-# Progress
 
 ## Step 6A runtime authorized — 2026-09-23
 
@@ -1872,7 +1870,6 @@ Implementation target:
 Runtime verification is not yet recorded here; final readiness depends on the
 delivery PR's exact-head focused and regression evidence.
 
-# Progress
 
 ## Step 4B RU-NUT-DB semantic mapping closure — 2026-09-22
 

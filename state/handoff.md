@@ -35,7 +35,6 @@ Pinned source/variant/process/10 ingredient-demand hashes PASS; medical-scope
 PR #136 is READY FOR FINAL REVIEW. Runtime implementation requires independent
 review and merge of this gate.
 
-# Handoff
 
 ## R2-D milk-exclusion breakfast resilience Contract Gate — 2026-10-03
 
@@ -2254,7 +2253,6 @@ No MealPlan/0037/Planner/API/UI/source-native-policy change is in Step 6A.
 After PR86 merge, stop. Step 6B / migration 0037 requires separate explicit
 authorization.
 
-# Handoff
 
 ## Step 6A runtime authorized — 2026-09-23
 
@@ -2496,7 +2494,6 @@ source link. The full FIC database is not republished.
 Verification is pending on the runtime implementation head. Stop after PR review;
 no self-merge or Step 5.
 
-# Handoff
 
 ## Step 4B RU-NUT-DB semantic closure — 2026-09-22
 
