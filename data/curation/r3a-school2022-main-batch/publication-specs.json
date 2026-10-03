@@ -202,8 +202,8 @@
           ],
           "steps": [
             "Измельчить подготовленное филе трески.",
-            "Повторно измельчить с замоченным и отжатым пшеничным хлебом; добавить яйцо, сливочное масло, йодированную соль и оставшуюся воду.",
-            "Сформовать котлеты и запекать 20–25 минут до готовности."
+            "Замочить пшеничный хлеб в воде, отжать и повторно измельчить вместе с рыбой; добавить йодированную соль, сливочное масло, сырое яйцо и оставшуюся воду. Источник фиксирует общий расход воды и масла, но не делит его по операциям.",
+            "Сформовать котлеты, выложить на противень, смазанный маслом, выбрать предусмотренную картой ветвь с водой вместо рыбного бульона и запекать 20–25 минут до готовности. Не назначать отдельные граммы масла/воды шагам сверх общего source total."
           ],
           "equipment_codes": [],
           "source_output_g": "100",
@@ -284,6 +284,12 @@
           "ZINC"
         ],
         "require_recipe_inactive": true
+      },
+      "process_binding_receipt": {
+        "status": "PASS_EXACT_TOTAL_INTERNAL_SPLIT_UNKNOWN",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "water": "WATER",
+        "rule": "Source explicitly uses butter in mass and generic oiling of tray; water is used for bread/remaining mass and the selected water branch for tray liquid. Exact totals are authoritative; per-operation split is not."
       }
     },
     "SCHOOL2022_54_2R_PINK_SALMON_CUTLET": {
@@ -385,8 +391,8 @@
           ],
           "steps": [
             "Измельчить подготовленное филе горбуши.",
-            "Повторно измельчить с замоченным и отжатым пшеничным хлебом; добавить яйцо, сливочное масло, йодированную соль и оставшуюся воду.",
-            "Сформовать котлеты и запекать 20–25 минут до готовности."
+            "Замочить пшеничный хлеб в воде, отжать и повторно измельчить вместе с рыбой; добавить йодированную соль, сливочное масло, сырое яйцо и оставшуюся воду. Источник фиксирует общий расход воды и масла, но не делит его по операциям.",
+            "Сформовать котлеты, выложить на противень, смазанный маслом, выбрать предусмотренную картой ветвь с водой вместо рыбного бульона и запекать 20–25 минут до готовности. Не назначать отдельные граммы масла/воды шагам сверх общего source total."
           ],
           "equipment_codes": [],
           "source_output_g": "100",
@@ -467,6 +473,12 @@
           "ZINC"
         ],
         "require_recipe_inactive": true
+      },
+      "process_binding_receipt": {
+        "status": "PASS_EXACT_TOTAL_INTERNAL_SPLIT_UNKNOWN",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "water": "WATER",
+        "rule": "Same-card exact total binding; per-operation split is not source-specified."
       }
     },
     "SCHOOL2022_54_3R_POLLOCK_CUTLET": {
@@ -568,8 +580,8 @@
           ],
           "steps": [
             "Измельчить подготовленное филе минтая.",
-            "Повторно измельчить с замоченным и отжатым пшеничным хлебом; добавить яйцо, сливочное масло, йодированную соль и оставшуюся воду.",
-            "Сформовать котлеты и запекать 20–25 минут до готовности."
+            "Замочить пшеничный хлеб в воде, отжать и повторно измельчить вместе с рыбой; добавить йодированную соль, сливочное масло, сырое яйцо и оставшуюся воду. Источник фиксирует общий расход воды и масла, но не делит его по операциям.",
+            "Сформовать котлеты, выложить на противень, смазанный маслом, выбрать предусмотренную картой ветвь с водой вместо рыбного бульона и запекать 20–25 минут до готовности. Не назначать отдельные граммы масла/воды шагам сверх общего source total."
           ],
           "equipment_codes": [],
           "source_output_g": "100",
@@ -650,6 +662,12 @@
           "ZINC"
         ],
         "require_recipe_inactive": true
+      },
+      "process_binding_receipt": {
+        "status": "PASS_EXACT_TOTAL_INTERNAL_SPLIT_UNKNOWN",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "water": "WATER",
+        "rule": "Same-card exact total binding; per-operation split is not source-specified."
       }
     },
     "SCHOOL2022_54_10R_PINK_SALMON_TOMATO_VEGETABLES": {
@@ -777,9 +795,9 @@
             }
           ],
           "steps": [
-            "Нашинковать морковь, лук и корень петрушки; лук бланшировать и пассеровать вместе с овощами и томатным пюре.",
+            "Подготовить и нашинковать корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать овощи с томатным пюре, используя подсолнечное масло из этой карты.",
             "Нарезать подготовленное филе горбуши порционными кусками.",
-            "Выложить рыбу и овощи, добавить воду, сахар и йодированную соль и готовить в духовке 40–45 минут."
+            "Выложить рыбу и овощи в противень, смазанный тем же единственным указанным в карте подсолнечным маслом; добавить воду, сахар и йодированную соль и готовить 40–45 минут. Источник фиксирует 5,3 г масла total, но не делит его между пассерованием и смазыванием противня."
           ],
           "equipment_codes": [],
           "source_output_g": "70",
@@ -860,6 +878,11 @@
           "ZINC"
         ],
         "require_recipe_inactive": true
+      },
+      "process_binding_receipt": {
+        "status": "PASS_SINGLE_FAT_SAME_CARD_BINDING",
+        "fat": "SUNFLOWER_OIL",
+        "rule": "Sunflower oil is the only cooking-fat row. It is bound to the unqualified sautéing/oiled-tray operations. Exact 5.3 g total is authoritative; internal split remains UNKNOWN."
       }
     },
     "SCHOOL2022_54_8M_STEAMED_BEEF_MEATBALLS": {
@@ -960,9 +983,9 @@
             }
           ],
           "steps": [
-            "Подготовить и пассеровать репчатый лук.",
-            "Измельчить говядину с предварительно замоченным черствым пшеничным хлебом, добавить соль и лук, повторно измельчить и сформовать шарики примерно по 24 г.",
-            "Готовить на пару 20–25 минут."
+            "Подготовить репчатый лук и пассеровать его на сливочном масле — это единственный cooking-fat, указанный в карте.",
+            "Измельчить говядину с предварительно замоченным в воде черствым пшеничным хлебом, добавить йодированную соль и лук, повторно измельчить и сформовать шарики примерно по 24 г.",
+            "Выложить на решётку, смоченную кипячёной водой, и готовить на пару 20–25 минут. Карта фиксирует 12 г воды total, но не распределяет её между замачиванием хлеба и смачиванием решётки."
           ],
           "equipment_codes": [],
           "source_output_g": "60",
@@ -1043,6 +1066,12 @@
           "ZINC"
         ],
         "require_recipe_inactive": true
+      },
+      "process_binding_receipt": {
+        "status": "PASS_SINGLE_FAT_SAME_CARD_BINDING",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "water": "WATER",
+        "rule": "Butter is the only cooking-fat row and is bound to the unqualified onion sauté operation. Exact 12 g water total covers source bread-soaking / rack-wetting use; per-operation split remains UNKNOWN."
       }
     },
     "SCHOOL2022_54_11M_BEEF_PILAF": {
@@ -1235,6 +1264,12 @@
           "ZINC"
         ],
         "require_recipe_inactive": true
+      },
+      "process_binding_receipt": {
+        "status": "PASS_EXPLICIT_PROCESS_BINDING",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "water": "WATER",
+        "rule": "Source explicitly says onion/carrot are sautéed in butter with added water; remaining recipe cooking follows the source card."
       }
     },
     "SCHOOL2022_54_4M_BEEF_CUTLET": {
@@ -1418,6 +1453,11 @@
           "ZINC"
         ],
         "require_recipe_inactive": true
+      },
+      "process_binding_receipt": {
+        "status": "PASS_EXPLICIT_PROCESS_BINDING",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "rule": "Source explicitly identifies stale bread soaked in milk, breadcrumbs, iodized salt and tray greasing with butter."
       }
     },
     "SCHOOL2022_54_11R_POLLOCK_TOMATO_VEGETABLES": {
@@ -1545,9 +1585,9 @@
             }
           ],
           "steps": [
-            "Подготовить и нашинковать корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать овощи с томатным пюре.",
+            "Подготовить и нашинковать корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать овощи с томатным пюре, используя подсолнечное масло из этой карты.",
             "Нарезать подготовленное филе минтая порционными кусками.",
-            "Выложить рыбу и овощи, добавить воду, сахар и йодированную соль и готовить в духовке 40–45 минут до готовности."
+            "Выложить рыбу и овощи в противень, смазанный тем же единственным указанным в карте подсолнечным маслом; добавить воду, сахар и йодированную соль и готовить 40–45 минут. Источник фиксирует 5,3 г масла total, но не делит его между пассерованием и смазыванием противня."
           ],
           "equipment_codes": [],
           "source_output_g": "70",
@@ -1628,6 +1668,11 @@
           "ZINC"
         ],
         "require_recipe_inactive": true
+      },
+      "process_binding_receipt": {
+        "status": "PASS_SINGLE_FAT_SAME_CARD_BINDING",
+        "fat": "SUNFLOWER_OIL",
+        "rule": "Sunflower oil is the only cooking-fat row. It is bound to the unqualified sautéing/oiled-tray operations. Exact 5.3 g total is authoritative; internal split remains UNKNOWN."
       }
     },
     "SCHOOL2022_54_6M_BEEF_BITOCHEK": {
@@ -1811,6 +1856,11 @@
           "ZINC"
         ],
         "require_recipe_inactive": true
+      },
+      "process_binding_receipt": {
+        "status": "PASS_EXPLICIT_PROCESS_BINDING",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "rule": "Source explicitly identifies stale bread soaked in milk, breadcrumbs, iodized salt and tray greasing with butter."
       }
     },
     "SCHOOL2022_54_7M_BEEF_SCHNITZEL": {
@@ -1994,6 +2044,11 @@
           "ZINC"
         ],
         "require_recipe_inactive": true
+      },
+      "process_binding_receipt": {
+        "status": "PASS_EXPLICIT_PROCESS_BINDING",
+        "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+        "rule": "Source explicitly identifies stale bread soaked in milk, breadcrumbs, iodized salt and tray greasing with butter."
       }
     }
   },
