@@ -88,21 +88,6 @@
       "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional thawing/serving wording is quarantined and does not alter quantities, output or Nutrition authority."
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-5м",
-      "canonical_code": "SCHOOL2022_54_5M_CHICKEN_CUTLET",
-      "decision": "REVIEWED_PASS",
-      "consumer_steps": [
-        "Измельчить подготовленное куриное филе и соединить с черствым пшеничным хлебом, замоченным в воде с молоком.",
-        "Добавить йодированную соль, повторно измельчить, перемешать и сформовать котлеты.",
-        "Запанировать и запекать 25–30 минут до готовности."
-      ],
-      "quarantined_context": [
-        "institutional thawing instruction",
-        "institutional serving-temperature rule"
-      ],
-      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional thawing/serving wording is quarantined and does not alter quantities, output or Nutrition authority."
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-8м",
       "canonical_code": "SCHOOL2022_54_8M_STEAMED_BEEF_MEATBALLS",
       "decision": "REVIEWED_PASS",
@@ -134,22 +119,6 @@
       "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional thawing/serving wording is quarantined and does not alter quantities, output or Nutrition authority."
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-12м",
-      "canonical_code": "SCHOOL2022_54_12M_CHICKEN_PILAF",
-      "decision": "REVIEWED_PASS",
-      "consumer_steps": [
-        "Промыть рис; подготовить морковь и лук.",
-        "Пассеровать лук и морковь с водой и томатным пюре.",
-        "Тушить кусочки куриного филе с солью и овощами, добавить воду и рис, затем довести до готовности под крышкой."
-      ],
-      "quarantined_context": [
-        "institutional thawing instruction",
-        "institutional serving-temperature rule",
-        "source allows tomato-free alternative but R3-A pins the quantified tomato-puree branch"
-      ],
-      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional thawing/serving wording is quarantined and does not alter quantities, output or Nutrition authority."
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-18м",
       "canonical_code": "SCHOOL2022_54_18M_BEEF_LIVER_STROGANOFF",
       "decision": "REVIEWED_PASS",
@@ -162,6 +131,36 @@
         "institutional serving-temperature rule"
       ],
       "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional thawing/serving wording is quarantined and does not alter quantities, output or Nutrition authority."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-4м",
+      "canonical_code": "SCHOOL2022_54_4M_BEEF_CUTLET",
+      "decision": "REVIEWED_PASS",
+      "consumer_steps": [
+        "Измельчить подготовленную говядину и соединить с черствым пшеничным хлебом без корок, замоченным в молоке.",
+        "Добавить йодированную соль, повторно измельчить, перемешать и сформовать котлеты.",
+        "Запанировать в сухарях, выложить на противень, смазанный сливочным маслом, и запекать 25–30 минут при 250–280 °C до готовности."
+      ],
+      "quarantined_context": [
+        "institutional thawing instruction",
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional context is quarantined and does not alter quantities, output or Nutrition authority."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-11р",
+      "canonical_code": "SCHOOL2022_54_11R_POLLOCK_TOMATO_VEGETABLES",
+      "decision": "REVIEWED_PASS",
+      "consumer_steps": [
+        "Подготовить и нашинковать корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать овощи с томатным пюре.",
+        "Нарезать подготовленное филе минтая порционными кусками.",
+        "Выложить рыбу и овощи, добавить воду, сахар и йодированную соль и готовить в духовке 40–45 минут до готовности."
+      ],
+      "quarantined_context": [
+        "institutional thawing-water instruction",
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Source-defining cooking operations are ordinary household cooking operations. Institutional context is quarantined and does not alter quantities, output or Nutrition authority."
     }
   ],
   "blanket_school2022_authority": false
