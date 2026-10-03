@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "operation": "R3A_SCHOOL2022_HOUSEHOLD_APPLICABILITY",
+  "issue": 143,
+  "accepted_base": "da6d1e05fd44ecc2733e1a6f472eae3e54b60604",
+  "rule": {
+    "pass_requires": [
+      "ordinary non-clinical food semantics",
+      "core preparation executable with household oven/stovetop/steamer/basic tools",
+      "institutional logistics quarantinable without changing source ingredient/output/energy truth",
+      "no new quantity, yield, retention or nutrition inference"
+    ],
+    "institutional_context_policy": "Defroster/meat-shop, paraconvection and serving-temperature instructions remain provenance-only. Consumer steps begin from ordinary household-prepared/thawed ingredients where applicable."
+  },
+  "candidates": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2о",
+      "canonical_code": "SCHOOL2022_54_2O_GREEN_PEA_OMELET",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "planner_role_review": "breakfast",
+      "consumer_steps": [
+        "Смешать подготовленные яйца с молоком и солью и взбить.",
+        "Консервированный зеленый горошек довести до кипения в отваре, слить и охладить; добавить в яичную массу.",
+        "Вылить массу в смазанную частью масла форму слоем 2,5–3 см и запекать при 180–200 °C 8–10 минут.",
+        "Перед подачей полить оставшимся растопленным сливочным маслом."
+      ],
+      "quarantined_source_context": [
+        "institutional serving-temperature requirement",
+        "paraconvection equipment reference"
+      ],
+      "specialized_medical_scope": false
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-3о",
+      "canonical_code": "SCHOOL2022_54_3O_CARROT_OMELET",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "planner_role_review": "breakfast",
+      "consumer_steps": [
+        "Отварить подготовленную морковь и протереть.",
+        "Смешать яйца с молоком и солью, взбить, добавить морковь.",
+        "Запекать массу в смазанной частью масла форме при 180–200 °C 8–10 минут.",
+        "Перед подачей полить оставшимся растопленным сливочным маслом."
+      ],
+      "quarantined_source_context": [
+        "institutional serving-temperature requirement",
+        "paraconvection equipment reference"
+      ],
+      "specialized_medical_scope": false
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-4о",
+      "canonical_code": "SCHOOL2022_54_4O_SEMI_HARD_CHEESE_OMELET",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "planner_role_review": "breakfast",
+      "consumer_steps": [
+        "Натереть подготовленный полутвердый сыр.",
+        "Смешать яйца с молоком и солью, добавить сыр и взбить.",
+        "Запекать в смазанной частью масла форме при 180–200 °C 8–10 минут.",
+        "Перед подачей полить оставшимся растопленным сливочным маслом."
+      ],
+      "quarantined_source_context": [
+        "institutional serving-temperature requirement",
+        "paraconvection equipment reference"
+      ],
+      "specialized_medical_scope": false
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2т",
+      "canonical_code": "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "planner_role_review": "breakfast",
+      "consumer_steps": [
+        "Протереть творог.",
+        "Морковь нарезать соломкой и припустить с частью масла в молоке.",
+        "Постепенно добавить манную крупу и варить при помешивании 10–15 минут; охладить до 40–50 °C.",
+        "Соединить с творогом, яйцом, сахаром и солью; выложить в смазанную маслом и посыпанную сухарями форму.",
+        "Разровнять, смазать сметаной и запекать до готовности, суммарно не менее 15 минут."
+      ],
+      "quarantined_source_context": [
+        "institutional serving-temperature requirement",
+        "paraconvection equipment reference"
+      ],
+      "specialized_medical_scope": false
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-3т",
+      "canonical_code": "SCHOOL2022_54_3T_CARROT_COTTAGE_CHEESE_SOUFFLE",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "planner_role_review": "breakfast",
+      "consumer_steps": [
+        "Протереть творог.",
+        "Морковь протереть, припустить в молоке с маслом, добавить манную крупу и варить 10–15 минут; охладить до 40–50 °C.",
+        "Соединить с творогом, желтками, сметаной и солью; осторожно ввести взбитые белки.",
+        "Выложить в смазанную маслом и посыпанную сухарями форму и готовить на пару 30–50 минут.",
+        "Перед подачей полить растопленным сливочным маслом."
+      ],
+      "quarantined_source_context": [
+        "institutional serving-temperature requirement",
+        "industrial vegetable-pureeing equipment reference"
+      ],
+      "specialized_medical_scope": false
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2р",
+      "canonical_code": "SCHOOL2022_54_2R_PINK_SALMON_CUTLET",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "planner_role_review": "main",
+      "consumer_steps": [
+        "Использовать размороженное рыбное филе без кожи.",
+        "Измельчить рыбу, второй раз пропустить вместе с замоченным в воде и отжатым пшеничным хлебом.",
+        "Добавить соль, сливочное масло, яйцо и оставшуюся воду; тщательно перемешать.",
+        "Сформировать котлеты и запекать с добавлением воды 20–25 минут."
+      ],
+      "quarantined_source_context": [
+        "institutional thawing-water/salt-loss-control instruction",
+        "institutional serving-temperature requirement",
+        "paraconvection equipment reference"
+      ],
+      "specialized_medical_scope": false
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-14р",
+      "canonical_code": "SCHOOL2022_54_14R_POLLOCK_AMATEUR_CUTLET",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "planner_role_review": "main",
+      "consumer_steps": [
+        "Использовать размороженное филе минтая без кожи.",
+        "Морковь отварить и нарезать мелкой соломкой; лук бланшировать.",
+        "Измельчить рыбу, затем повторно пропустить с хлебом, замоченным в молоке, морковью и луком.",
+        "Добавить яйцо и соль, сформировать котлеты и запекать с небольшим количеством воды 20–25 минут."
+      ],
+      "quarantined_source_context": [
+        "institutional thawing-water/salt-loss-control instruction",
+        "institutional serving-temperature requirement",
+        "paraconvection equipment reference"
+      ],
+      "specialized_medical_scope": false
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-1м",
+      "canonical_code": "SCHOOL2022_54_1M_BOILED_BEEF_STROGANOFF",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "planner_role_review": "main",
+      "consumer_steps": [
+        "Отварить и протереть морковь и корень петрушки; лук бланшировать и пассеровать.",
+        "Использовать размороженную говядину, отварить до готовности, удалить пленки и соединительную ткань и нарезать соломкой.",
+        "Соединить мясо с овощами и луком, залить сметанным соусом, посолить и тушить 5–10 минут.",
+        "Для белой основы соуса подсушить муку без изменения цвета, растереть с маслом, постепенно влить воду и проварить; соединить со сметаной."
+      ],
+      "quarantined_source_context": [
+        "institutional defroster/meat-shop instruction",
+        "institutional serving-temperature requirement"
+      ],
+      "specialized_medical_scope": false
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-11м",
+      "canonical_code": "SCHOOL2022_54_11M_BOILED_BEEF_PILAF",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "planner_role_review": "main",
+      "consumer_steps": [
+        "Промыть рис; нарезать морковь соломкой и лук кубиками.",
+        "Бланшировать лук и пассеровать с морковью на сливочном масле с добавлением воды.",
+        "Использовать размороженную говядину, нарезать кусочками, соединить с овощами и солью и варить при слабом кипении 5–10 минут.",
+        "Добавить рис, варить до загустения и довести под крышкой до готовности 30–40 минут при 160 °C."
+      ],
+      "quarantined_source_context": [
+        "institutional defroster/meat-shop instruction",
+        "institutional serving-temperature requirement"
+      ],
+      "specialized_medical_scope": false
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-30м",
+      "canonical_code": "SCHOOL2022_54_30M_BEEF_RICE_QUENELLES",
+      "decision": "HOUSEHOLD_APPLICABLE",
+      "planner_role_review": "main",
+      "consumer_steps": [
+        "Использовать размороженную говядину и дважды измельчить вместе с отваренным и охлажденным рисом.",
+        "Взбивать массу, постепенно добавляя молоко и растопленное сливочное масло; в конце добавить соль.",
+        "Сформировать кнели по 20–25 г.",
+        "Готовить выбранным source-backed household route: на пару 15–20 минут."
+      ],
+      "quarantined_source_context": [
+        "institutional defroster/meat-shop instruction",
+        "alternative poaching route with unquantified added water is not selected",
+        "institutional serving-temperature requirement"
+      ],
+      "specialized_medical_scope": false
+    }
+  ]
+}

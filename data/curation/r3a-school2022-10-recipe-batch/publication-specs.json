@@ -1,0 +1,962 @@
+{
+  "schema_version": 1,
+  "operation": "R3A_SCHOOL2022_10_RECIPE_PREPARED_PUBLICATION_SPECS",
+  "issue": 143,
+  "accepted_base": "da6d1e05fd44ecc2733e1a6f472eae3e54b60604",
+  "status": "FROZEN_FOR_RUNTIME_AFTER_GATE_MERGE",
+  "source": {
+    "archive_locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "archive_size_bytes": 206692075,
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "pdf_path_in_archive": "corpus-work/packages/school2022/raw/source.pdf",
+    "pdf_size_bytes": 4102547,
+    "pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+    "public_pdf_url": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+    "source_title": "Сборник рецептур блюд и типовых меню для организации питания обучающихся 1–4-х классов в общеобразовательных организациях",
+    "publisher": "Федеральный центр гигиены и эпидемиологии Роспотребнадзора",
+    "edition": "Москва, 2022",
+    "retained_receipt_basis": "Reuse accepted R1-G/R2 School2022 durable archive/PDF receipt; public PDF text rechecked 2026-10-03."
+  },
+  "authority_kind": "PREPARED_OUTPUT_V1",
+  "recipe_calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+  "nutrient_partition": {
+    "available_codes": [
+      "ENERGY_KCAL"
+    ],
+    "unknown_policy": "ALL_OTHER_FROZEN_NUTRIENT_CODES_UNKNOWN"
+  },
+  "new_identity_only_foods": [
+    {
+      "canonical_code": "CHEESE_SEMI_HARD_UNSPECIFIED",
+      "canonical_name": "Сыр полутвердый",
+      "category_code": "dairy",
+      "default_unit": "g",
+      "source_label": "сыр полутвердый",
+      "non_equivalent_to": [
+        "CHEESE_UNSPECIFIED",
+        "CHEESE_CHEDDAR",
+        "CHEESE_MOZZARELLA_PART_SKIM"
+      ],
+      "nutrition_profile": null,
+      "composition": null
+    },
+    {
+      "canonical_code": "PARSLEY_ROOT_FRESH",
+      "canonical_name": "Петрушка, корень свежий",
+      "category_code": "vegetables",
+      "default_unit": "g",
+      "source_label": "петрушка (корень)",
+      "non_equivalent_to": [
+        "PARSLEY",
+        "PARSLEY_DRIED"
+      ],
+      "nutrition_profile": null,
+      "composition": null
+    }
+  ],
+  "recipes": {
+    "SCHOOL2022_54_2O_GREEN_PEA_OMELET": {
+      "canonical_code": "SCHOOL2022_54_2O_GREEN_PEA_OMELET",
+      "canonical_name": "Омлет с зеленым горошком",
+      "initial_is_active": false,
+      "source_recipe_id": "ru-school2022:recipe:54-2о",
+      "meal_type_code": "breakfast",
+      "source_pdf_page_index": 84,
+      "source_output_g": "150",
+      "ingredients": [
+        {
+          "food_ingredient_code": "EGG",
+          "quantity_g": "60",
+          "source_gross_g": "66",
+          "source_label": "яйцо куриное",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "MILK_2_5",
+          "quantity_g": "60",
+          "source_gross_g": "60",
+          "source_label": "молоко",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "GREEN_PEAS_CANNED",
+          "quantity_g": "29",
+          "source_gross_g": "44.9",
+          "source_label": "горошек зеленый консервированный",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "BUTTER_PEASANT_72_5_UNSALTED",
+          "quantity_g": "5",
+          "source_gross_g": "5",
+          "source_label": "масло сливочное",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "SALT_IODIZED",
+          "quantity_g": "0.4",
+          "source_gross_g": "0.4",
+          "source_label": "соль поваренная йодированная",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        }
+      ],
+      "steps": [
+        "Смешать подготовленные яйца с молоком и солью и взбить.",
+        "Консервированный зеленый горошек довести до кипения в отваре, слить и охладить; добавить в яичную массу.",
+        "Вылить массу в смазанную частью масла форму слоем 2,5–3 см и запекать при 180–200 °C 8–10 минут.",
+        "Перед подачей полить оставшимся растопленным сливочным маслом."
+      ],
+      "source_receipt": {
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-2о",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+        "source_data_type": "RETAINED_SCHOOL2022_PDF",
+        "rights_review_status": "REVIEWED"
+      },
+      "prepared_spec": {
+        "recipe_code": "SCHOOL2022_54_2O_GREEN_PEA_OMELET",
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-2о",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "output_mass_g": "150",
+        "expected_available_amounts": [
+          [
+            "ENERGY_KCAL",
+            "153.5"
+          ]
+        ],
+        "expected_unknown_policy": "ALL_OTHER_FROZEN_NUTRIENT_CODES_UNKNOWN",
+        "require_recipe_inactive": true
+      }
+    },
+    "SCHOOL2022_54_3O_CARROT_OMELET": {
+      "canonical_code": "SCHOOL2022_54_3O_CARROT_OMELET",
+      "canonical_name": "Омлет с морковью",
+      "initial_is_active": false,
+      "source_recipe_id": "ru-school2022:recipe:54-3о",
+      "meal_type_code": "breakfast",
+      "source_pdf_page_index": 85,
+      "source_output_g": "150",
+      "ingredients": [
+        {
+          "food_ingredient_code": "EGG",
+          "quantity_g": "77.4",
+          "source_gross_g": "85.2",
+          "source_label": "яйцо куриное",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "MILK_2_5",
+          "quantity_g": "48.4",
+          "source_gross_g": "48.4",
+          "source_label": "молоко",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "CARROT",
+          "quantity_g": "38.7",
+          "source_gross_g": "48.4",
+          "source_label": "морковь",
+          "normalization_note": "Source says generic carrot; reuse generic CARROT rather than narrowing to a color-specific form."
+        },
+        {
+          "food_ingredient_code": "BUTTER_PEASANT_72_5_UNSALTED",
+          "quantity_g": "9.7",
+          "source_gross_g": "9.7",
+          "source_label": "масло сливочное",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "SALT_IODIZED",
+          "quantity_g": "0.4",
+          "source_gross_g": "0.4",
+          "source_label": "соль поваренная йодированная",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        }
+      ],
+      "steps": [
+        "Отварить подготовленную морковь и протереть.",
+        "Смешать яйца с молоком и солью, взбить, добавить морковь.",
+        "Запекать массу в смазанной частью масла форме при 180–200 °C 8–10 минут.",
+        "Перед подачей полить оставшимся растопленным сливочным маслом."
+      ],
+      "source_receipt": {
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-3о",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+        "source_data_type": "RETAINED_SCHOOL2022_PDF",
+        "rights_review_status": "REVIEWED"
+      },
+      "prepared_spec": {
+        "recipe_code": "SCHOOL2022_54_3O_CARROT_OMELET",
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-3о",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "output_mass_g": "150",
+        "expected_available_amounts": [
+          [
+            "ENERGY_KCAL",
+            "201"
+          ]
+        ],
+        "expected_unknown_policy": "ALL_OTHER_FROZEN_NUTRIENT_CODES_UNKNOWN",
+        "require_recipe_inactive": true
+      }
+    },
+    "SCHOOL2022_54_4O_SEMI_HARD_CHEESE_OMELET": {
+      "canonical_code": "SCHOOL2022_54_4O_SEMI_HARD_CHEESE_OMELET",
+      "canonical_name": "Омлет с сыром",
+      "initial_is_active": false,
+      "source_recipe_id": "ru-school2022:recipe:54-4о",
+      "meal_type_code": "breakfast",
+      "source_pdf_page_index": 86,
+      "source_output_g": "150",
+      "ingredients": [
+        {
+          "food_ingredient_code": "EGG",
+          "quantity_g": "85.7",
+          "source_gross_g": "94.3",
+          "source_label": "яйцо куриное",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "MILK_2_5",
+          "quantity_g": "53.6",
+          "source_gross_g": "53.6",
+          "source_label": "молоко",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "CHEESE_SEMI_HARD_UNSPECIFIED",
+          "quantity_g": "33.2",
+          "source_gross_g": "34.6",
+          "source_label": "сыр полутвердый",
+          "normalization_note": "Create exact identity-only semi-hard cheese; do not collapse into generic CHEESE_UNSPECIFIED."
+        },
+        {
+          "food_ingredient_code": "BUTTER_PEASANT_72_5_UNSALTED",
+          "quantity_g": "10.7",
+          "source_gross_g": "10.7",
+          "source_label": "масло сливочное",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "SALT_IODIZED",
+          "quantity_g": "0.45",
+          "source_gross_g": "0.45",
+          "source_label": "соль поваренная йодированная",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        }
+      ],
+      "steps": [
+        "Натереть подготовленный полутвердый сыр.",
+        "Смешать яйца с молоком и солью, добавить сыр и взбить.",
+        "Запекать в смазанной частью масла форме при 180–200 °C 8–10 минут.",
+        "Перед подачей полить оставшимся растопленным сливочным маслом."
+      ],
+      "source_receipt": {
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-4о",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+        "source_data_type": "RETAINED_SCHOOL2022_PDF",
+        "rights_review_status": "REVIEWED"
+      },
+      "prepared_spec": {
+        "recipe_code": "SCHOOL2022_54_4O_SEMI_HARD_CHEESE_OMELET",
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-4о",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "output_mass_g": "150",
+        "expected_available_amounts": [
+          [
+            "ENERGY_KCAL",
+            "316"
+          ]
+        ],
+        "expected_unknown_policy": "ALL_OTHER_FROZEN_NUTRIENT_CODES_UNKNOWN",
+        "require_recipe_inactive": true
+      }
+    },
+    "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE": {
+      "canonical_code": "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE",
+      "canonical_name": "Запеканка из творога с морковью",
+      "initial_is_active": false,
+      "source_recipe_id": "ru-school2022:recipe:54-2т",
+      "meal_type_code": "breakfast",
+      "source_pdf_page_index": 89,
+      "source_output_g": "150",
+      "ingredients": [
+        {
+          "food_ingredient_code": "TVOROG_5",
+          "quantity_g": "56",
+          "source_gross_g": "56",
+          "source_label": "творог",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "CARROT",
+          "quantity_g": "94",
+          "source_gross_g": "117.5",
+          "source_label": "морковь",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "MILK_2_5",
+          "quantity_g": "23",
+          "source_gross_g": "23",
+          "source_label": "молоко",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "SEMOLINA_GROATS",
+          "quantity_g": "15",
+          "source_gross_g": "15",
+          "source_label": "крупа манная",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "BUTTER_PEASANT_72_5_UNSALTED",
+          "quantity_g": "7.5",
+          "source_gross_g": "7.5",
+          "source_label": "масло сливочное",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "EGG",
+          "quantity_g": "6",
+          "source_gross_g": "6.6",
+          "source_label": "яйцо куриное",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "BREADCRUMBS",
+          "quantity_g": "4",
+          "source_gross_g": "4",
+          "source_label": "сухари панировочные",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "SOUR_CREAM_15",
+          "quantity_g": "4",
+          "source_gross_g": "4",
+          "source_label": "сметана",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "SUGAR",
+          "quantity_g": "6",
+          "source_gross_g": "6",
+          "source_label": "сахар-песок",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "SALT_IODIZED",
+          "quantity_g": "0.4",
+          "source_gross_g": "0.4",
+          "source_label": "соль поваренная йодированная",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        }
+      ],
+      "steps": [
+        "Протереть творог.",
+        "Морковь нарезать соломкой и припустить с частью масла в молоке.",
+        "Постепенно добавить манную крупу и варить при помешивании 10–15 минут; охладить до 40–50 °C.",
+        "Соединить с творогом, яйцом, сахаром и солью; выложить в смазанную маслом и посыпанную сухарями форму.",
+        "Разровнять, смазать сметаной и запекать до готовности, суммарно не менее 15 минут."
+      ],
+      "source_receipt": {
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-2т",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+        "source_data_type": "RETAINED_SCHOOL2022_PDF",
+        "rights_review_status": "REVIEWED"
+      },
+      "prepared_spec": {
+        "recipe_code": "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE",
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-2т",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "output_mass_g": "150",
+        "expected_available_amounts": [
+          [
+            "ENERGY_KCAL",
+            "249.5"
+          ]
+        ],
+        "expected_unknown_policy": "ALL_OTHER_FROZEN_NUTRIENT_CODES_UNKNOWN",
+        "require_recipe_inactive": true
+      }
+    },
+    "SCHOOL2022_54_3T_CARROT_COTTAGE_CHEESE_SOUFFLE": {
+      "canonical_code": "SCHOOL2022_54_3T_CARROT_COTTAGE_CHEESE_SOUFFLE",
+      "canonical_name": "Суфле из моркови с творогом",
+      "initial_is_active": false,
+      "source_recipe_id": "ru-school2022:recipe:54-3т",
+      "meal_type_code": "breakfast",
+      "source_pdf_page_index": 90,
+      "source_output_g": "150",
+      "ingredients": [
+        {
+          "food_ingredient_code": "CARROT",
+          "quantity_g": "95.5",
+          "source_gross_g": "119.3",
+          "source_label": "морковь",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "TVOROG_5",
+          "quantity_g": "34.1",
+          "source_gross_g": "34.1",
+          "source_label": "творог",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "MILK_2_5",
+          "quantity_g": "20.5",
+          "source_gross_g": "20.5",
+          "source_label": "молоко",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "EGG",
+          "quantity_g": "13.7",
+          "source_gross_g": "15",
+          "source_label": "яйцо куриное",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "SEMOLINA_GROATS",
+          "quantity_g": "6.8",
+          "source_gross_g": "6.8",
+          "source_label": "крупа манная",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "BREADCRUMBS",
+          "quantity_g": "5.5",
+          "source_gross_g": "5.5",
+          "source_label": "сухари панировочные",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "SUGAR",
+          "quantity_g": "8.2",
+          "source_gross_g": "8.2",
+          "source_label": "сахар-песок",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "SOUR_CREAM_15",
+          "quantity_g": "5.5",
+          "source_gross_g": "5.5",
+          "source_label": "сметана",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "BUTTER_PEASANT_72_5_UNSALTED",
+          "quantity_g": "4.1",
+          "source_gross_g": "4.1",
+          "source_label": "масло сливочное",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "SALT_IODIZED",
+          "quantity_g": "0.45",
+          "source_gross_g": "0.45",
+          "source_label": "соль поваренная йодированная",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        }
+      ],
+      "steps": [
+        "Протереть творог.",
+        "Морковь протереть, припустить в молоке с маслом, добавить манную крупу и варить 10–15 минут; охладить до 40–50 °C.",
+        "Соединить с творогом, желтками, сметаной и солью; осторожно ввести взбитые белки.",
+        "Выложить в смазанную маслом и посыпанную сухарями форму и готовить на пару 30–50 минут.",
+        "Перед подачей полить растопленным сливочным маслом."
+      ],
+      "source_receipt": {
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-3т",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+        "source_data_type": "RETAINED_SCHOOL2022_PDF",
+        "rights_review_status": "REVIEWED"
+      },
+      "prepared_spec": {
+        "recipe_code": "SCHOOL2022_54_3T_CARROT_COTTAGE_CHEESE_SOUFFLE",
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-3т",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "output_mass_g": "150",
+        "expected_available_amounts": [
+          [
+            "ENERGY_KCAL",
+            "200.9"
+          ]
+        ],
+        "expected_unknown_policy": "ALL_OTHER_FROZEN_NUTRIENT_CODES_UNKNOWN",
+        "require_recipe_inactive": true
+      }
+    },
+    "SCHOOL2022_54_2R_PINK_SALMON_CUTLET": {
+      "canonical_code": "SCHOOL2022_54_2R_PINK_SALMON_CUTLET",
+      "canonical_name": "Котлета рыбная (горбуша)",
+      "initial_is_active": false,
+      "source_recipe_id": "ru-school2022:recipe:54-2р",
+      "meal_type_code": "main",
+      "source_pdf_page_index": 96,
+      "source_output_g": "100",
+      "ingredients": [
+        {
+          "food_ingredient_code": "PINK_SALMON_FILLET_RAW",
+          "quantity_g": "80",
+          "source_gross_g": "90.4",
+          "source_label": "горбуша (филе)",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "WHEAT_BREAD_PLAIN",
+          "quantity_g": "19",
+          "source_gross_g": "19",
+          "source_label": "хлеб пшеничный",
+          "normalization_note": "Source does not state whole-grain, flour grade or stale form."
+        },
+        {
+          "food_ingredient_code": "EGG",
+          "quantity_g": "6",
+          "source_gross_g": "6.6",
+          "source_label": "яйцо куриное",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "BUTTER_PEASANT_72_5_UNSALTED",
+          "quantity_g": "2",
+          "source_gross_g": "2",
+          "source_label": "масло сливочное",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "SALT_IODIZED",
+          "quantity_g": "0.4",
+          "source_gross_g": "0.4",
+          "source_label": "соль поваренная йодированная",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "WATER",
+          "quantity_g": "14",
+          "source_gross_g": "14",
+          "source_label": "вода",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        }
+      ],
+      "steps": [
+        "Использовать размороженное рыбное филе без кожи.",
+        "Измельчить рыбу, второй раз пропустить вместе с замоченным в воде и отжатым пшеничным хлебом.",
+        "Добавить соль, сливочное масло, яйцо и оставшуюся воду; тщательно перемешать.",
+        "Сформировать котлеты и запекать с добавлением воды 20–25 минут."
+      ],
+      "source_receipt": {
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-2р",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+        "source_data_type": "RETAINED_SCHOOL2022_PDF",
+        "rights_review_status": "REVIEWED"
+      },
+      "prepared_spec": {
+        "recipe_code": "SCHOOL2022_54_2R_PINK_SALMON_CUTLET",
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-2р",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "output_mass_g": "100",
+        "expected_available_amounts": [
+          [
+            "ENERGY_KCAL",
+            "163.6"
+          ]
+        ],
+        "expected_unknown_policy": "ALL_OTHER_FROZEN_NUTRIENT_CODES_UNKNOWN",
+        "require_recipe_inactive": true
+      }
+    },
+    "SCHOOL2022_54_14R_POLLOCK_AMATEUR_CUTLET": {
+      "canonical_code": "SCHOOL2022_54_14R_POLLOCK_AMATEUR_CUTLET",
+      "canonical_name": "Котлета рыбная любительская (минтай)",
+      "initial_is_active": false,
+      "source_recipe_id": "ru-school2022:recipe:54-14р",
+      "meal_type_code": "main",
+      "source_pdf_page_index": 108,
+      "source_output_g": "100",
+      "ingredients": [
+        {
+          "food_ingredient_code": "POLLOCK_FILLET_RAW",
+          "quantity_g": "67",
+          "source_gross_g": "75.7",
+          "source_label": "минтай (филе)",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "CARROT",
+          "quantity_g": "21.8",
+          "source_gross_g": "27.2",
+          "source_label": "морковь",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "ONION_BULB_FRESH",
+          "quantity_g": "8",
+          "source_gross_g": "10",
+          "source_label": "лук репчатый",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "EGG",
+          "quantity_g": "13",
+          "source_gross_g": "14.3",
+          "source_label": "яйцо куриное",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "MILK_2_5",
+          "quantity_g": "10",
+          "source_gross_g": "10",
+          "source_label": "молоко",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "WHEAT_BREAD_PLAIN",
+          "quantity_g": "8",
+          "source_gross_g": "8",
+          "source_label": "хлеб пшеничный",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "BUTTER_PEASANT_72_5_UNSALTED",
+          "quantity_g": "3",
+          "source_gross_g": "3",
+          "source_label": "масло сливочное",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "SALT_IODIZED",
+          "quantity_g": "0.4",
+          "source_gross_g": "0.4",
+          "source_label": "соль поваренная йодированная",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        }
+      ],
+      "steps": [
+        "Использовать размороженное филе минтая без кожи.",
+        "Морковь отварить и нарезать мелкой соломкой; лук бланшировать.",
+        "Измельчить рыбу, затем повторно пропустить с хлебом, замоченным в молоке, морковью и луком.",
+        "Добавить яйцо и соль, сформировать котлеты и запекать с небольшим количеством воды 20–25 минут."
+      ],
+      "source_receipt": {
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-14р",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+        "source_data_type": "RETAINED_SCHOOL2022_PDF",
+        "rights_review_status": "REVIEWED"
+      },
+      "prepared_spec": {
+        "recipe_code": "SCHOOL2022_54_14R_POLLOCK_AMATEUR_CUTLET",
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-14р",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "output_mass_g": "100",
+        "expected_available_amounts": [
+          [
+            "ENERGY_KCAL",
+            "112.2"
+          ]
+        ],
+        "expected_unknown_policy": "ALL_OTHER_FROZEN_NUTRIENT_CODES_UNKNOWN",
+        "require_recipe_inactive": true
+      }
+    },
+    "SCHOOL2022_54_1M_BOILED_BEEF_STROGANOFF": {
+      "canonical_code": "SCHOOL2022_54_1M_BOILED_BEEF_STROGANOFF",
+      "canonical_name": "Бефстроганов из отварной говядины",
+      "initial_is_active": false,
+      "source_recipe_id": "ru-school2022:recipe:54-1м",
+      "meal_type_code": "main",
+      "source_pdf_page_index": 113,
+      "source_output_g": "80",
+      "ingredients": [
+        {
+          "food_ingredient_code": "BEEF_CATEGORY_1_RAW",
+          "quantity_g": "64.6",
+          "source_gross_g": "73",
+          "source_label": "говядина 1 категории",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "CARROT",
+          "quantity_g": "5.8",
+          "source_gross_g": "7.3",
+          "source_label": "морковь",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "ONION_BULB_FRESH",
+          "quantity_g": "1.6",
+          "source_gross_g": "2",
+          "source_label": "лук репчатый",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "PARSLEY_ROOT_FRESH",
+          "quantity_g": "1",
+          "source_gross_g": "1.3",
+          "source_label": "петрушка (корень)",
+          "normalization_note": "Create exact parsley-root identity; do not collapse into parsley leaf herb identity."
+        },
+        {
+          "food_ingredient_code": "FLOUR_WHEAT_HIGH_GRADE",
+          "quantity_g": "1",
+          "source_gross_g": "1",
+          "source_label": "мука пшеничная высший сорт",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "SOUR_CREAM_15",
+          "quantity_g": "20",
+          "source_gross_g": "20",
+          "source_label": "сметана",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "BUTTER_PEASANT_72_5_UNSALTED",
+          "quantity_g": "1",
+          "source_gross_g": "1",
+          "source_label": "масло сливочное",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "SALT_IODIZED",
+          "quantity_g": "0.16",
+          "source_gross_g": "0.16",
+          "source_label": "соль поваренная йодированная",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "WATER",
+          "quantity_g": "87.4",
+          "source_gross_g": "87.4",
+          "source_label": "вода",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        }
+      ],
+      "steps": [
+        "Отварить и протереть морковь и корень петрушки; лук бланшировать и пассеровать.",
+        "Использовать размороженную говядину, отварить до готовности, удалить пленки и соединительную ткань и нарезать соломкой.",
+        "Соединить мясо с овощами и луком, залить сметанным соусом, посолить и тушить 5–10 минут.",
+        "Для белой основы соуса подсушить муку без изменения цвета, растереть с маслом, постепенно влить воду и проварить; соединить со сметаной."
+      ],
+      "source_receipt": {
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-1м",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+        "source_data_type": "RETAINED_SCHOOL2022_PDF",
+        "rights_review_status": "REVIEWED"
+      },
+      "prepared_spec": {
+        "recipe_code": "SCHOOL2022_54_1M_BOILED_BEEF_STROGANOFF",
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-1м",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "output_mass_g": "80",
+        "expected_available_amounts": [
+          [
+            "ENERGY_KCAL",
+            "167.5"
+          ]
+        ],
+        "expected_unknown_policy": "ALL_OTHER_FROZEN_NUTRIENT_CODES_UNKNOWN",
+        "require_recipe_inactive": true
+      }
+    },
+    "SCHOOL2022_54_11M_BOILED_BEEF_PILAF": {
+      "canonical_code": "SCHOOL2022_54_11M_BOILED_BEEF_PILAF",
+      "canonical_name": "Плов из отварной говядины",
+      "initial_is_active": false,
+      "source_recipe_id": "ru-school2022:recipe:54-11м",
+      "meal_type_code": "main",
+      "source_pdf_page_index": 122,
+      "source_output_g": "200",
+      "ingredients": [
+        {
+          "food_ingredient_code": "RICE_GROATS",
+          "quantity_g": "54.4",
+          "source_gross_g": "54.4",
+          "source_label": "крупа рисовая",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "BEEF_CATEGORY_1_RAW",
+          "quantity_g": "64.8",
+          "source_gross_g": "73.2",
+          "source_label": "говядина 1 категории",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "CARROT",
+          "quantity_g": "20",
+          "source_gross_g": "25",
+          "source_label": "морковь",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "ONION_BULB_FRESH",
+          "quantity_g": "8",
+          "source_gross_g": "10",
+          "source_label": "лук репчатый",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "BUTTER_PEASANT_72_5_UNSALTED",
+          "quantity_g": "8",
+          "source_gross_g": "8",
+          "source_label": "масло сливочное",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "SALT_IODIZED",
+          "quantity_g": "0.8",
+          "source_gross_g": "0.8",
+          "source_label": "соль поваренная йодированная",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "WATER",
+          "quantity_g": "313",
+          "source_gross_g": "313",
+          "source_label": "вода",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        }
+      ],
+      "steps": [
+        "Промыть рис; нарезать морковь соломкой и лук кубиками.",
+        "Бланшировать лук и пассеровать с морковью на сливочном масле с добавлением воды.",
+        "Использовать размороженную говядину, нарезать кусочками, соединить с овощами и солью и варить при слабом кипении 5–10 минут.",
+        "Добавить рис, варить до загустения и довести под крышкой до готовности 30–40 минут при 160 °C."
+      ],
+      "source_receipt": {
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-11м",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+        "source_data_type": "RETAINED_SCHOOL2022_PDF",
+        "rights_review_status": "REVIEWED"
+      },
+      "prepared_spec": {
+        "recipe_code": "SCHOOL2022_54_11M_BOILED_BEEF_PILAF",
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-11м",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "output_mass_g": "200",
+        "expected_available_amounts": [
+          [
+            "ENERGY_KCAL",
+            "348.3"
+          ]
+        ],
+        "expected_unknown_policy": "ALL_OTHER_FROZEN_NUTRIENT_CODES_UNKNOWN",
+        "require_recipe_inactive": true
+      }
+    },
+    "SCHOOL2022_54_30M_BEEF_RICE_QUENELLES": {
+      "canonical_code": "SCHOOL2022_54_30M_BEEF_RICE_QUENELLES",
+      "canonical_name": "Кнели из говядины с рисом",
+      "initial_is_active": false,
+      "source_recipe_id": "ru-school2022:recipe:54-30м",
+      "meal_type_code": "main",
+      "source_pdf_page_index": 138,
+      "source_output_g": "80",
+      "ingredients": [
+        {
+          "food_ingredient_code": "BEEF_CATEGORY_1_RAW",
+          "quantity_g": "64",
+          "source_gross_g": "72.3",
+          "source_label": "говядина 1 категории",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "RICE_GROATS",
+          "quantity_g": "7.2",
+          "source_gross_g": "7.2",
+          "source_label": "крупа рисовая",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "MILK_2_5",
+          "quantity_g": "8.8",
+          "source_gross_g": "8.8",
+          "source_label": "молоко",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "BUTTER_PEASANT_72_5_UNSALTED",
+          "quantity_g": "5.6",
+          "source_gross_g": "5.6",
+          "source_label": "масло сливочное",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        },
+        {
+          "food_ingredient_code": "SALT_IODIZED",
+          "quantity_g": "0.3",
+          "source_gross_g": "0.3",
+          "source_label": "соль поваренная йодированная",
+          "normalization_note": "Exact source net amount; no broader/narrower substitution."
+        }
+      ],
+      "steps": [
+        "Использовать размороженную говядину и дважды измельчить вместе с отваренным и охлажденным рисом.",
+        "Взбивать массу, постепенно добавляя молоко и растопленное сливочное масло; в конце добавить соль.",
+        "Сформировать кнели по 20–25 г.",
+        "Готовить выбранным source-backed household route: на пару 15–20 минут."
+      ],
+      "source_receipt": {
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-30м",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "source_archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+        "source_data_type": "RETAINED_SCHOOL2022_PDF",
+        "rights_review_status": "REVIEWED"
+      },
+      "prepared_spec": {
+        "recipe_code": "SCHOOL2022_54_30M_BEEF_RICE_QUENELLES",
+        "source_name": "ru-school2022",
+        "source_recipe_id": "ru-school2022:recipe:54-30м",
+        "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+        "output_mass_g": "80",
+        "expected_available_amounts": [
+          [
+            "ENERGY_KCAL",
+            "184.6"
+          ]
+        ],
+        "expected_unknown_policy": "ALL_OTHER_FROZEN_NUTRIENT_CODES_UNKNOWN",
+        "require_recipe_inactive": true
+      }
+    }
+  },
+  "runtime_rules": {
+    "publication_order": "identity-only FoodIngredients → all inactive RecipeVersions → prepared authority per RecipeVersion in caller-owned UoW → exact projection → guarded activation",
+    "migration_0043_allowed": false,
+    "planner_change_allowed": false,
+    "source_scaling_allowed": false,
+    "new_nutrition_authority_allowed": false,
+    "live_web_runtime_dependency_allowed": false,
+    "implicit_retention_allowed": false,
+    "unquantified_process_inputs_allowed": false,
+    "activation_requires_exact_energy": true
+  }
+}

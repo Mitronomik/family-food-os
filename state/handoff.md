@@ -1,5 +1,27 @@
 # Handoff
 
+## R3-A School2022 10-recipe DC3 Contract Gate — active — 2026-10-03
+
+Accepted base:
+`da6d1e05fd44ecc2733e1a6f472eae3e54b60604`.
+
+Issue #143 / branch `docs/r3a-school2022-10-recipe-batch-gate`.
+
+Read first:
+
+`docs/family-food/r3a-school2022-10-recipe-batch-gate.md`.
+
+Current task is docs/data/source-authority only. Freeze 10 School2022
+RecipeVersions (5 BREAKFAST / 5 MAIN), exact ingredient/output/energy mappings,
+household applicability, two identity-only foods and the later runtime
+fresh/replay/conflict/rollback contract.
+
+Do not publish runtime data, add migration 0043, alter Planner, broaden Nutrition
+authority or start DC4/Gate1-CLOSE/PR9.
+
+Status:
+`CONTRACT_GATE_ACTIVE`.
+
 ## R2-F cheese-sandwich runtime — active — 2026-10-03
 
 Accepted base:

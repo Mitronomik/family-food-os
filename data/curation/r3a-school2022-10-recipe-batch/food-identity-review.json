@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "operation": "R3A_SCHOOL2022_FOOD_IDENTITY_REVIEW",
+  "issue": 143,
+  "accepted_base": "da6d1e05fd44ecc2733e1a6f472eae3e54b60604",
+  "new_identity_only_foods": [
+    {
+      "canonical_code": "CHEESE_SEMI_HARD_UNSPECIFIED",
+      "canonical_name": "Сыр полутвердый",
+      "category_code": "dairy",
+      "default_unit": "g",
+      "source_label": "сыр полутвердый",
+      "non_equivalent_to": [
+        "CHEESE_UNSPECIFIED",
+        "CHEESE_CHEDDAR",
+        "CHEESE_MOZZARELLA_PART_SKIM"
+      ],
+      "nutrition_profile": null,
+      "composition": null
+    },
+    {
+      "canonical_code": "PARSLEY_ROOT_FRESH",
+      "canonical_name": "Петрушка, корень свежий",
+      "category_code": "vegetables",
+      "default_unit": "g",
+      "source_label": "петрушка (корень)",
+      "non_equivalent_to": [
+        "PARSLEY",
+        "PARSLEY_DRIED"
+      ],
+      "nutrition_profile": null,
+      "composition": null
+    }
+  ],
+  "reused_foods": [
+    "BEEF_CATEGORY_1_RAW",
+    "BREADCRUMBS",
+    "BUTTER_PEASANT_72_5_UNSALTED",
+    "CARROT",
+    "EGG",
+    "FLOUR_WHEAT_HIGH_GRADE",
+    "GREEN_PEAS_CANNED",
+    "MILK_2_5",
+    "ONION_BULB_FRESH",
+    "PINK_SALMON_FILLET_RAW",
+    "POLLOCK_FILLET_RAW",
+    "RICE_GROATS",
+    "SALT_IODIZED",
+    "SEMOLINA_GROATS",
+    "SOUR_CREAM_15",
+    "SUGAR",
+    "TVOROG_5",
+    "WATER",
+    "WHEAT_BREAD_PLAIN"
+  ],
+  "decisions": [
+    {
+      "source_label": "сыр полутвердый",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "canonical_code": "CHEESE_SEMI_HARD_UNSPECIFIED",
+      "canonical_name": "Сыр полутвердый",
+      "category_code": "dairy",
+      "default_unit": "g",
+      "non_equivalent_to": [
+        "CHEESE_UNSPECIFIED",
+        "CHEESE_CHEDDAR",
+        "CHEESE_MOZZARELLA_PART_SKIM"
+      ],
+      "basis": "Source explicitly says semi-hard cheese; generic CHEESE_UNSPECIFIED is broader and named varieties are narrower."
+    },
+    {
+      "source_label": "петрушка (корень)",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "canonical_code": "PARSLEY_ROOT_FRESH",
+      "canonical_name": "Петрушка, корень свежий",
+      "category_code": "vegetables",
+      "default_unit": "g",
+      "non_equivalent_to": [
+        "PARSLEY",
+        "PARSLEY_DRIED"
+      ],
+      "basis": "Source explicitly says parsley root; parsley leaf/dried herb identities are not equivalent."
+    }
+  ],
+  "invariant": "Identity-only publication grants no NutritionProfile or Composition authority. Existing FoodIngredient reuse must not narrow source semantics."
+}

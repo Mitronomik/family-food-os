@@ -1,5 +1,30 @@
 # Progress
 
+## R3-A School2022 10-recipe DC3 Contract Gate — 2026-10-03
+
+Accepted main:
+`da6d1e05fd44ecc2733e1a6f472eae3e54b60604` (merged PR #142).
+
+Issue #143 / branch `docs/r3a-school2022-10-recipe-batch-gate`.
+
+R3-A is the first deliberately larger DATA-CORPUS-V1 DC3 batch after the R1/R2
+micro-batches proved the publication/activation/Planner seams.
+
+Frozen target:
+
+- 10 School2022 cards;
+- 5 BREAKFAST / 5 MAIN;
+- one retained School2022 source family;
+- existing `PREPARED_OUTPUT_V1` only;
+- two new identity-only FoodIngredients;
+- no migration/schema/Planner redesign.
+
+Nearby cards with unresolved process quantities/source inconsistencies are
+explicitly deferred fail-closed.
+
+Status:
+`CONTRACT_GATE_ACTIVE`.
+
 ## R2-F cheese-sandwich runtime — implementation active — 2026-10-03
 
 Accepted base:

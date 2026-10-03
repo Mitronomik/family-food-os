@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "operation": "R3A_SCHOOL2022_10_RECIPE_GATE_SUMMARY",
+  "issue": 143,
+  "accepted_base": "da6d1e05fd44ecc2733e1a6f472eae3e54b60604",
+  "selected_recipe_codes": [
+    "SCHOOL2022_54_2O_GREEN_PEA_OMELET",
+    "SCHOOL2022_54_3O_CARROT_OMELET",
+    "SCHOOL2022_54_4O_SEMI_HARD_CHEESE_OMELET",
+    "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE",
+    "SCHOOL2022_54_3T_CARROT_COTTAGE_CHEESE_SOUFFLE",
+    "SCHOOL2022_54_2R_PINK_SALMON_CUTLET",
+    "SCHOOL2022_54_14R_POLLOCK_AMATEUR_CUTLET",
+    "SCHOOL2022_54_1M_BOILED_BEEF_STROGANOFF",
+    "SCHOOL2022_54_11M_BOILED_BEEF_PILAF",
+    "SCHOOL2022_54_30M_BEEF_RICE_QUENELLES"
+  ],
+  "role_counts": {
+    "breakfast": 5,
+    "main": 5,
+    "total": 10
+  },
+  "new_identity_only_foods": [
+    "CHEESE_SEMI_HARD_UNSPECIFIED",
+    "PARSLEY_ROOT_FRESH"
+  ],
+  "source_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+  "source_archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+  "expected_runtime_effect": {
+    "active_breakfast_classification_before": 7,
+    "active_main_classification_before": 5,
+    "active_sandwich_classification_before": 1,
+    "projected_active_breakfast_classification_after": 12,
+    "projected_active_main_classification_after": 10,
+    "projected_active_sandwich_classification_after": 1,
+    "total_new_recipe_versions": 10
+  },
+  "known_deferred": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-4т",
+      "reason": "Vanillin is dissolved in hot water but the required water quantity is not present in the source ingredient table; keep fail-closed."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-6т",
+      "reason": "Vanillin is dissolved in hot water but the required process-water quantity is not source-quantified; do not infer."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-5м",
+      "reason": "Table lists sunflower oil while the process text says the tray is greased with butter; requires reconciliation before publication."
+    }
+  ],
+  "no_schema_migration_planner_change": true
+}
