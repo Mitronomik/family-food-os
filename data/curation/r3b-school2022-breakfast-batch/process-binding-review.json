@@ -44,19 +44,20 @@
       "rule": "Exact 7.5 g butter total is authoritative. Source explicitly places one third in carrot cooking and also names butter for tray greasing; do not invent unsupported internal gram allocations beyond source-stated ratios."
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-3т",
-      "canonical_code": "SCHOOL2022_54_3T_CARROT_COTTAGE_CHEESE_SOUFFLE",
-      "status": "PASS_PARTIAL_RATIO_INTERNAL_SPLIT_UNKNOWN",
-      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
-      "rule": "Exact 4.1 g butter total is authoritative across carrot cooking, one-third tray greasing and melted finishing butter. Unsupported internal gram splits remain UNKNOWN."
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-1к",
       "canonical_code": "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
       "status": "PASS_EXPLICIT_PROCESS_BINDING",
       "fat": "BUTTER_PEASANT_72_5_UNSALTED",
       "water": "WATER",
       "rule": "Exact water and butter totals are source-authoritative; butter is explicitly added 2–3 minutes before readiness. No hidden retained-water inference."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2к",
+      "canonical_code": "SCHOOL2022_54_2K_VISCOUS_CORN_MILK_PORRIDGE",
+      "status": "PASS_EXPLICIT_PROCESS_BINDING",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "water": "WATER",
+      "rule": "Exact WATER=65 g is quantified cooking-water input. Unquantified wash water is process-resource context, not RecipeIngredient authority. Butter is explicitly added 2–3 minutes before readiness."
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-6к",
@@ -75,30 +76,38 @@
       "rule": "Exact 70 g water total is authoritative across separate rice/millet precooking, but the per-groat split is not source-specified. Butter is explicitly added before final steaming."
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-21к",
-      "canonical_code": "SCHOOL2022_54_21K_BARLEY_MILK_PORRIDGE",
-      "status": "PASS_EXPLICIT_PROCESS_BINDING",
-      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
-      "water": "WATER",
-      "rule": "Exact water and butter totals are source-authoritative; source explicitly places both in the cooking process."
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-23к",
       "canonical_code": "SCHOOL2022_54_23K_LIQUID_WHEAT_MILK_PORRIDGE",
       "status": "PASS_EXACT_INPUT_RETAINED_UNKNOWN",
       "fat": "BUTTER_PEASANT_72_5_UNSALTED",
       "water": "WATER",
       "rule": "Exact 68 g water is authoritative source input. Technology explicitly drains excess water, so retained water/yield is UNKNOWN and must not be inferred. Butter is explicitly added before readiness."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-24к",
+      "canonical_code": "SCHOOL2022_54_24K_LIQUID_MILLET_MILK_PORRIDGE",
+      "status": "PASS_EXPLICIT_QUANTIFIED_COOKING_WATER",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "water": "WATER",
+      "rule": "The quantified WATER=52 g is the source 'по расчету рецептуры' cooking-water input after separate wash/scald/drain operations. Earlier unquantified waters remain process resources. Butter is explicitly placed before readiness."
     }
   ],
   "rejected_or_deferred": [
     {
+      "source_recipe_id": "ru-school2022:recipe:54-3т",
+      "reason": "Sugar is quantified in the table but absent from technology placement."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-21к",
+      "reason": "Sugar is quantified in the table but absent from technology placement."
+    },
+    {
       "source_recipe_id": "ru-school2022:recipe:54-22к",
-      "reason": "butter quantified in table but not placed by card technology"
+      "reason": "Butter is quantified in the table but absent from technology placement."
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-7т",
-      "reason": "specialized celiac/medical scope"
+      "reason": "Specialized celiac/medical scope."
     }
   ]
 }
