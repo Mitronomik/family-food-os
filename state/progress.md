@@ -1,5 +1,30 @@
 # Progress
 
+## R2-C breakfast grain diversity implementation started — 2026-10-03
+
+Accepted main:
+`13a81d2497737f3b275b10055cd084548be02bf3` (merged PR #130).
+
+Issue #131 selects three School2022 breakfast porridges from distinct grain
+families:
+
+- 54-13к / wheat milk porridge / 200 g / 270.3 kcal;
+- 54-20к / buckwheat milk porridge / 200 g / 187.3 kcal;
+- 54-25.1к / rice milk porridge / 200 g / 184.5 kcal.
+
+Only new identity-only FoodIngredient:
+`WHEAT_GROATS`.
+
+The batch reuses the existing prepared-output authority and guarded activation.
+No migration, schema, shared service, Planner algorithm or new Nutrition authority
+is introduced.
+
+Projected BREAKFAST exact-energy active count:
+3 → 6; opportunity capacity 9 → 18/week.
+
+Status:
+`R2C_IMPLEMENTATION_ACTIVE`.
+
 ## R2-B fish MAIN diversity review-ready — 2026-10-02
 
 Accepted base:
