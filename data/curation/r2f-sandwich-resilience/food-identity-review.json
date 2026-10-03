@@ -18,19 +18,6 @@
       "basis": "Source label establishes wheat bread but not whole-grain, flour grade, staleness, or branded loaf subtype."
     },
     {
-      "source_label": "Масло сливочное (Б)",
-      "decision": "CREATE_IDENTITY_ONLY",
-      "canonical_code": "BUTTER_CREAM_UNSPECIFIED",
-      "canonical_name": "Масло сливочное",
-      "category_code": "fats_oils",
-      "default_unit": "g",
-      "non_equivalent_to": [
-        "BUTTER_PEASANT_72_5_UNSALTED",
-        "BUTTER_UNSALTED"
-      ],
-      "basis": "Source establishes cream butter but does not establish the narrower accepted 72.5%/unsalted or legacy unsalted form."
-    },
-    {
       "source_label": "Сыр",
       "decision": "CREATE_IDENTITY_ONLY",
       "canonical_code": "CHEESE_UNSPECIFIED",
@@ -55,14 +42,6 @@
       "composition": null
     },
     {
-      "canonical_code": "BUTTER_CREAM_UNSPECIFIED",
-      "canonical_name": "Масло сливочное",
-      "category_code": "fats_oils",
-      "default_unit": "g",
-      "nutrition_profile": null,
-      "composition": null
-    },
-    {
       "canonical_code": "CHEESE_UNSPECIFIED",
       "canonical_name": "Сыр",
       "category_code": "dairy",
@@ -71,5 +50,13 @@
       "composition": null
     }
   ],
-  "invariant": "Identity-only publication grants no Nutrition/Composition authority. Prepared sandwich Nutrition remains same-card prepared-output authority."
+  "invariant": "Identity-only publication grants no Nutrition/Composition authority. R2-F creates only WHEAT_BREAD_PLAIN and CHEESE_UNSPECIFIED for the accepted cheese sandwich.",
+  "rejected_identity_demand": [
+    {
+      "source_label": "Масло сливочное (Б)",
+      "canonical_code_that_would_have_been_created": "BUTTER_CREAM_UNSPECIFIED",
+      "disposition": "DO_NOT_CREATE_FOR_R2F",
+      "reason": "The only R2-F recipe requiring this identity is rejected from prepared-output publication because its source-declared fat conflicts with the component minimum implied by cream butter."
+    }
+  ]
 }

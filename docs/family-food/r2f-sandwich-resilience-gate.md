@@ -1,149 +1,100 @@
-# R2-F — Sandwich resilience-closure Contract Gate
+# R2-F — Cheese-sandwich resilience-closure Contract Gate
 
-**Status:** docs/data/source-authority implementation contract gate
-**Decision date:** 2026-10-03
-**Issue:** #139
-**Accepted base:** `561c13aad6ce978de399dfd807071232af06b71c` (merged PR #138)
+**Status:** docs/data/source-authority implementation contract gate  
+**Decision date:** 2026-10-03  
+**Issue:** #139  
+**Accepted base:** `561c13aad6ce978de399dfd807071232af06b71c` (merged PR #138)  
 **Runtime publication authorized before this gate merges:** no
 
 ## 1. Goal
 
-Close the remaining exact-`MILK_2_5` BREAKFAST resilience gap **as one meaningful
-batch**, not as another single-recipe research step.
+Close the remaining exact-`MILK_2_5` seven-BREAKFAST resilience gap without
+weakening source or provenance contracts.
 
-The future runtime batch contains exactly two `sandwich` RecipeVersions:
+The future runtime batch contains exactly one `sandwich` RecipeVersion:
 
-- `SAD28_SANDWICH_BUTTER_25_5` — Бутерброд со сливочным маслом;
-- `SAD28_SANDWICH_CHEESE_20_10` — Бутерброд с сыром.
-
-This batch is valuable beyond the immediate gap because the accepted Planner v0
-compatibility already permits `sandwich` for BREAKFAST, LUNCH and SNACK.
+- `SAD28_SANDWICH_CHEESE_20_10` — Бутерброд с сыром — 30 g / 83 kcal.
 
 No Planner algorithm, compatibility mapping, repetition limit, schema or Nutrition
-authority is changed here.
+authority changes here.
 
-## 2. FACT — accepted production state after PR #138
+## 2. FACT — accepted production state
 
-Current exact-energy production truth:
+After merged PR #138:
 
 - active `breakfast` classification: 7 RecipeVersions;
 - active MAIN classification: 5 RecipeVersions;
 - `max_recipe_repetitions=3`;
-- hard exact `MILK_2_5` exclusion leaves:
-  - `HARD_BOILED_EGG`;
-  - `SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE`;
-- unaffected capacity = 2 × 3 = 6/week;
-- a seven-BREAKFAST week therefore remains bounded-infeasible.
+- hard exact `MILK_2_5` leaves `HARD_BOILED_EGG` and
+  `SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE`;
+- unaffected BREAKFAST-compatible capacity = 6/week;
+- seven BREAKFAST opportunities are bounded-infeasible.
 
-This is a corpus/coverage gap, not a Planner algorithm defect.
+## 3. FACT — butter card fails component-consistency review
 
-## 3. FACT — source discovery and fail-closed filtering
+The reviewed SAD28 butter card declares:
 
-A broader sandwich search was performed because a `sandwich` candidate has higher
-role value than another breakfast-only candidate.
+- wheat bread 25 g;
+- cream butter 5 g;
+- total sandwich fat 0.98 g;
+- energy 66.3 kcal.
 
-### Rejected source family
+The declared macros reproduce 66.3 kcal arithmetically, but that is not sufficient
+source validation.
 
-An official GBDOU №118 technological-card source was investigated first.
+TR TS 033/2013 defines `сливочное масло` as butter with fat mass fraction at
+least 50%:
 
-Its sandwich cards were **not** accepted for prepared-output authority because the
-published kcal values disagree materially with the source's own declared
-macronutrients/component evidence.
+https://eec.eaeunion.org/upload/medialibrary/789/TR-TS-033_2013.pdf
 
-**DECISION:** `REJECT_PREPARED_OUTPUT_AUTHORITY_INTERNAL_ENERGY_CONFLICT`.
+Therefore 5 g of the listed butter contributes at least 2.5 g fat before any bread
+fat is counted. That contradicts 0.98 g declared fat for the whole sandwich.
 
-No runtime or retained production authority may be built from those rejected
-values by silently choosing one side of the conflict.
+**DECISION:** `SAD28_SANDWICH_BUTTER_25_5` is
+`REJECT_PREPARED_OUTPUT_AUTHORITY_COMPONENT_INCONSISTENCY`.
 
-### Selected source family
+No `BUTTER_CREAM_UNSPECIFIED` identity is created by R2-F.
 
-The selected public source is an institution-published technological-card PDF
-from МАДОУ «Детский сад комбинированного вида № 28» д. Лупполово,
-Всеволожский район, Ленинградская область.
+## 4. DECISION — selected source authority
 
-Publisher site:
-
-`https://sad28.vsevobr.ru/`
-
-Public source locator:
-
-`https://sad28.vsevobr.ru/images/22-23/%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%B5/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BA%D0%B0%D1%80%D1%82%D1%8B-22-23%20%281%29.pdf`
-
-The cards cite the upstream collection:
-
-`Сборник методических рекомендаций по организации питания детей и подростков
-в учреждениях образования Санкт-Петербурга. СПб.: Речь, 2008, Куткина М.Н.`
-
-Only a bounded reviewed structured derivative is committed. The project does not
-copy the source PDF layout/photos/logos and does not require live web access at
-runtime.
-
-## 4. DECISION — bounded source-authority policy
-
-Institution-published technological cards are not automatically Tier-A recipe
-authority under DATA-CORPUS-V1.
-
-R2-F creates the bounded reviewed policy:
+The bounded policy remains:
 
 `BOUNDED_INSTITUTION_PUBLISHED_TECH_CARD_REVIEW_V1`
 
-It authorizes **only these two exact reviewed cards** to feed the existing
-`PREPARED_OUTPUT_V1` publication seam.
+but its publication scope is now exactly one card:
 
-It does **not** authorize the whole SAD28 website/PDF, the upstream collection,
-future same-publisher cards without review, or bulk source import.
+`sad28-luppolovo:techcard:cheese-sandwich:20-10`.
 
-Runtime source truth is the reviewed structured derivative:
+The broader reviewed discovery derivative remains
+`source-cards.json` (dd1da359c60c8d647eda5e9a968164a02b8f6dca07333b888699f9722cba3543), but it is not the runtime source document.
 
-`data/curation/r2f-sandwich-resilience/source-cards.json`
+The exact selected runtime source is retained in the repository:
 
-Canonical reviewed-derivative SHA-256:
+- path: `data/curation/r2f-sandwich-resilience/runtime-source.json`;
+- SHA-256: `26f239916b56429e78314369df961c8dd13cecd7d559d942655387e9851a5a97`;
+- byte size: 1855;
+- immutable locator: `https://raw.githubusercontent.com/Mitronomik/family-food-os/a35ef046538687bcaf2600d5027f87688e9224ca/data/curation/r2f-sandwich-resilience/runtime-source.json`.
 
-`dd1da359c60c8d647eda5e9a968164a02b8f6dca07333b888699f9722cba3543`
+The upstream institution PDF remains provenance/corroboration:
 
-The hash is computed over UTF-8 canonical JSON with sorted keys and compact
-separators, excluding the self-referential `reviewed_derivative_sha256` field; each card hash excludes `canonical_record_sha256` and `source_occurrences`.
+`https://sad28.vsevobr.ru/images/22-23/%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%B5/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BA%D0%B0%D1%80%D1%82%D1%8B-22-23%20%281%29.pdf`
 
-Original public URL, publisher identity and retrieval date remain provenance.
+R2-F does not claim raw PDF bytes are retained. They are not needed to reproduce
+the accepted runtime publication because the complete selected source facts are
+retained in the immutable derivative above. Any future source-family expansion or
+reinterpretation requires reacquisition of upstream evidence and a new review.
 
-Public-source verification is frozen separately in:
+This means the future RecipeVersion tuple is coherent:
+`source_url` resolves to the retained derivative and
+`source_document_sha256` is the SHA-256 of that exact retained source file.
 
-`data/curation/r2f-sandwich-resilience/public-source-verification.json`.
+## 5. Selected cheese card
 
-The official institution nutrition page links the technological-card document,
-and an independent 2026-10-03 public-index recheck reproduced the exact selected
-card quantities, macro values, energy and core process text.
+Source record:
+`sad28-luppolovo:techcard:cheese-sandwich:20-10`.
 
-R2-F deliberately does **not** claim that the raw PDF bytes are retained or
-hash-pinned. The accepted runtime source document is the committed reviewed
-derivative above; live web/PDF data cannot override it and are not a runtime
-dependency.
-
-## 5. Selected cards
-
-### 5.1 Бутерброд со сливочным маслом
-
-Source record: `sad28-luppolovo:techcard:butter-sandwich:25-5`.
-
-Reviewed card SHA-256: `facf8c892a76e4ea9283ecc4e9136ed6ea1769674bc643e11aa9c1c26d428ddc`.
-
-Exact facts:
-
-- `Хлеб пшеничный` — 25 g net;
-- `Масло сливочное (Б)` — 5 g net;
-- source output `25/5`;
-- total serving mass = 30 g from the exact two component outputs;
-- source-published `ENERGY_KCAL = 66.3`;
-- source-declared P/F/C = 2.11 / 0.98 / 12.26 g.
-
-The ordinary 4/9/4 macro cross-check equals 66.30 kcal exactly. This is **QA
-corroboration only**; same-card 66.3 remains the prepared-output authority.
-
-### 5.2 Бутерброд с сыром
-
-Source record: `sad28-luppolovo:techcard:cheese-sandwich:20-10`.
-
-Reviewed card SHA-256: `2eb846cdb80737c0b4f65202beda1e352f3610c6bb6634b832901615ca3a8f97`.
+Reviewed discovery-card SHA-256:
+`2eb846cdb80737c0b4f65202beda1e352f3610c6bb6634b832901615ca3a8f97`.
 
 Exact facts:
 
@@ -154,59 +105,39 @@ Exact facts:
 - source-published `ENERGY_KCAL = 83`;
 - source-declared P/F/C = 3.9 / 3.15 / 9.7 g.
 
-The ordinary 4/9/4 cross-check equals 82.75 kcal; the 0.25 kcal difference is
-rounding-level corroboration and does not replace same-card 83 kcal authority.
+The 4/9/4 QA cross-check is 82.75 kcal. The 0.25 kcal difference is treated as
+rounding-level corroboration only; same-card 83 kcal remains the accepted
+prepared-output candidate authority.
 
-### 5.3 Deferred third card
+## 6. FoodIngredient identities
 
-The same source contains `Бутерброд с повидлом (20/20)`.
-
-Its published 97.2 kcal diverges more materially from the simple source-macro
-cross-check (~101.92 kcal).
-
-R2-F does not need that card to close the product gap and there is no canonical
-project tolerance allowing us to invent a reconciliation rule.
-
-**DECISION:** `DEFER_ENERGY_QA_RECONCILIATION_NOT_NEEDED_FOR_CLOSURE`.
-
-## 6. DECISION — FoodIngredient identities
-
-Create exactly three identity-only FoodIngredients:
+Create exactly two identity-only FoodIngredients:
 
 - `WHEAT_BREAD_PLAIN` — Хлеб пшеничный;
-- `BUTTER_CREAM_UNSPECIFIED` — Масло сливочное;
 - `CHEESE_UNSPECIFIED` — Сыр.
 
-Explicit non-equivalences:
+No NutritionProfile or Composition authority is published for either identity.
+
+Explicit non-equivalences remain:
 
 - `WHEAT_BREAD_PLAIN != BREAD_WHOLE_WHEAT`;
 - `WHEAT_BREAD_PLAIN != WHEAT_BREAD_HIGH_GRADE_STALE`;
-- `BUTTER_CREAM_UNSPECIFIED != BUTTER_PEASANT_72_5_UNSALTED`;
-- `BUTTER_CREAM_UNSPECIFIED != BUTTER_UNSALTED`;
-- `CHEESE_UNSPECIFIED != CHEESE_CHEDDAR` and no automatic substitution to any
+- `CHEESE_UNSPECIFIED != CHEESE_CHEDDAR` and no automatic substitution to a
   specific cheese identity.
 
-No NutritionProfile or Composition authority is published for the three new
-identities. Prepared sandwich Nutrition remains independent same-card
-prepared-output truth.
+## 7. Household applicability
 
-## 7. DECISION — household applicability
+The selected cheese sandwich is `HOUSEHOLD_APPLICABLE`.
 
-Both selected recipes are `HOUSEHOLD_APPLICABLE`.
+The defining operation is ordinary household sandwich assembly. Institutional
+serving-temperature and realization/shelf-life instructions stay provenance-only
+and do not become consumer runtime rules.
 
-Their defining processes are ordinary household sandwich assembly and require no
-institutional equipment or clinical context.
+## 8. Planner compatibility
 
-Institutional serving-temperature and realization/shelf-life instructions remain
-source provenance only; they are not promoted as household execution rules.
-
-## 8. Recipe classification and Planner compatibility
-
-Both future RecipeVersions use:
+Future RecipeVersion:
 
 `meal_type_code = sandwich`.
-
-No compatibility mapping changes are authorized.
 
 Existing Planner v0 mapping already permits:
 
@@ -214,24 +145,19 @@ Existing Planner v0 mapping already permits:
 - LUNCH → `main`, `sandwich`;
 - SNACK → `sandwich`.
 
-Therefore this batch expands role coverage without changing Planner code.
+No mapping change is authorized.
 
 ## 9. Nutrition authority
 
 Reuse `PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`.
 
-For each selected RecipeVersion:
+For the selected RecipeVersion:
 
 - `ENERGY_KCAL` is the only AVAILABLE frozen nutrient;
 - all other 53 frozen nutrient codes remain UNKNOWN;
 - no ingredient-composition calculation is required;
 - no source scaling is authorized;
-- macro values are QA/source evidence only.
-
-| Recipe | Output | ENERGY_KCAL |
-|---|---:|---:|
-| Butter sandwich | 30 g | 66.3 |
-| Cheese sandwich | 30 g | 83 |
+- source macros are QA/reference evidence only.
 
 ## 10. Preservation matrix
 
@@ -242,43 +168,41 @@ For each selected RecipeVersion:
 | Planner v0.4 mapping | Unchanged. |
 | `max_recipe_repetitions=3` | Unchanged. |
 | `PREPARED_OUTPUT_V1` | Reused; no new authority kind. |
-| Frozen 54-code nutrient set | ENERGY_KCAL only for these cards; other 53 UNKNOWN. |
-| Existing FoodIngredient identities | No narrowing/broadening to absorb the three new identities. |
+| Frozen 54-code nutrient set | ENERGY_KCAL only; other 53 UNKNOWN. |
+| Existing FoodIngredient identities | No narrowing/broadening to absorb the two new identities. |
 | Migration chain through 0042 | No 0043. |
 | Medical/wellness boundary | Unchanged. |
-| Runtime web independence | Runtime pins reviewed derivative; no live web dependency. |
+| Runtime web independence | Retained derivative is authoritative; no live-web dependency. |
 
-## 11. Future runtime fresh/replay/conflict semantics
-
-After this gate merges, one bounded runtime PR may publish exactly the two
-selected recipes.
+## 11. Future runtime semantics
 
 ### Fresh
 
-1. reconcile the three identity-only FoodIngredients;
-2. create both Recipes inactive;
-3. create immutable SOURCE_VERIFIED RecipeVersions;
-4. publish each prepared-output authority in the caller-owned UoW;
-5. verify exact positive ENERGY_KCAL projection before commit;
-6. activate each only through the existing guarded prepared activation boundary.
+1. reconcile the two identity-only FoodIngredients;
+2. create the cheese Recipe inactive;
+3. create immutable SOURCE_VERIFIED RecipeVersion from the retained source artifact;
+4. publish prepared-output authority in the caller-owned UoW;
+5. verify exact positive ENERGY_KCAL=83 projection before commit;
+6. activate only through the existing guarded prepared activation boundary.
 
 ### Replay
 
 - exact identity replay is zero-write;
 - exact RecipeVersion + prepared authority replay is zero-write;
-- deliberately deactivated Recipes remain deactivated;
-- replay cannot replace reviewed bytes with live-web data.
+- deliberate deactivation remains deactivated;
+- replay cannot replace retained bytes with live-web data.
 
 ### Conflict / failure
 
 Fail closed on:
 
-- changed reviewed-derivative/card hash;
+- retained-source SHA/size mismatch;
+- reviewed card hash mismatch;
 - source output/component quantity mismatch;
 - narrower FoodIngredient substitution;
 - same-code FoodIngredient identity conflict;
 - Recipe without matching prepared authority or inverse;
-- prepared value outside reviewed ENERGY_KCAL;
+- prepared value other than exact reviewed 83 kcal;
 - any non-reviewed nutrient publication;
 - activation before exact authority is readable;
 - unapproved schema/migration need.
@@ -290,46 +214,44 @@ Before R2-F runtime:
 - exact-`MILK_2_5` unaffected BREAKFAST-compatible pool = 2;
 - capacity = 6/week.
 
-After both selected sandwiches:
+After the selected cheese sandwich:
 
-- unaffected BREAKFAST-compatible pool = 4;
-- capacity = 12/week;
+- unaffected pool = 3;
+- capacity = 9/week;
 - required opportunities = 7.
 
 The future runtime PR must prove a persisted seven-BREAKFAST week under hard exact
 `MILK_2_5` exclusion with no RecipeVersion exceeding repetition=3.
 
-Classification counts must remain truthful:
+Classification counts stay truthful:
 
-- active `breakfast` **classification** remains 7;
-- two new active `sandwich` classifications are added;
-- BREAKFAST-compatible candidate pool becomes 9 through the existing mapping;
-- LUNCH gains 2 compatible sandwich candidates;
-- SNACK gains 2 compatible sandwich candidates.
+- active `breakfast` classification remains 7;
+- one active `sandwich` classification is added;
+- BREAKFAST-compatible candidate pool becomes 8;
+- LUNCH gains 1 compatible sandwich candidate;
+- SNACK gains 1 compatible sandwich candidate.
 
-This is **not a dairy-allergy claim**. Butter and cheese are dairy foods; closure
-concerns only exact canonical `MILK_2_5`.
+This is **not a dairy-allergy claim**. Cheese is dairy; closure concerns exact
+canonical `MILK_2_5` only.
 
 ## 13. Required runtime acceptance
 
 A later R2-F runtime PR must prove at least:
 
-1. exactly three new identity-only foods and no Nutrition/Composition;
-2. exactly two immutable SOURCE_VERIFIED `sandwich` RecipeVersions;
-3. exact ingredient net/gross quantities and 30 g output;
-4. prepared ENERGY_KCAL exactly 66.3 / 83;
+1. exactly two new identity-only foods and no Nutrition/Composition;
+2. exactly one immutable SOURCE_VERIFIED `sandwich` RecipeVersion;
+3. exact 20 g bread + 11/10 g gross/net cheese + 30 g output;
+4. prepared ENERGY_KCAL exactly 83;
 5. all other 53 frozen nutrient codes UNKNOWN;
-6. reviewed derivative/card-hash tampering fails closed;
+6. retained-source/hash tampering fails closed;
 7. fresh RecipeVersion + prepared authority publication is atomic;
 8. exact replay is zero-write;
 9. deliberate deactivation remains deactivated;
-10. guarded activation yields exact-energy eligible candidates;
-11. hard `MILK_2_5` rejects affected milk recipes but not egg, casserole or
-    either sandwich;
-12. persisted seven-BREAKFAST week succeeds under hard `MILK_2_5`;
+10. guarded activation yields an exact-energy eligible candidate;
+11. hard `MILK_2_5` rejects affected milk recipes but not egg, casserole or cheese sandwich;
+12. persisted seven-BREAKFAST week succeeds;
 13. no selected recipe exceeds repetition=3;
-14. both RecipeVersions are compatible with BREAKFAST, LUNCH and SNACK under the
-    existing mapping;
+14. compatibility with BREAKFAST, LUNCH and SNACK uses the existing mapping;
 15. no dairy-allergy/medical claim;
 16. migration head remains 0042;
 17. `AI_ENABLED=false`.
@@ -341,9 +263,10 @@ This PR is docs/data/source-evidence only.
 Required:
 
 - all committed JSON parses;
-- reviewed-derivative/card hash recomputation;
-- macro QA arithmetic;
-- source-policy scope exactly two cards;
+- retained runtime-source SHA-256 and byte-size verification;
+- discovery derivative/card hash verification;
+- butter contradiction calculation;
+- source-policy scope exactly one card;
 - identity review consistency;
 - capacity arithmetic;
 - Docs verification;
@@ -354,14 +277,13 @@ No runtime/backend regression is required for this gate.
 
 ## 15. Non-goals
 
-No runtime publication/activation, migration 0043, schema changes, Planner
-algorithm/mapping/repetition changes, new Nutrition authority, ingredient
-Nutrition/Composition, third sandwich, bulk web/PDF ingestion, DC4, Gate1-CLOSE,
+No butter runtime publication, migration 0043, schema change, Planner
+algorithm/mapping/repetition change, new Nutrition authority, ingredient
+Nutrition/Composition, povidlo card, bulk web/PDF ingestion, DC4, Gate1-CLOSE,
 PR9 Shopping, Prep/Retail/API/UI/Auth/PostgreSQL/AI.
 
 ## 16. Stop rule
 
-After the R2-F Contract Gate is review-ready, stop for independent review.
+After this corrected Contract Gate is review-ready, stop for independent review.
 
-Runtime implementation starts only after this gate is reviewed and merged. The
-runtime PR must implement the two selected sandwiches as one batch and stop again.
+Runtime implementation starts only after this gate is reviewed and merged.

@@ -14,20 +14,6 @@
   },
   "candidates": [
     {
-      "source_recipe_id": "sad28-luppolovo:techcard:butter-sandwich:25-5",
-      "decision": "HOUSEHOLD_APPLICABLE",
-      "specialized_medical_scope": false,
-      "planner_classification": "sandwich",
-      "consumer_steps": [
-        "Ломтик пшеничного хлеба покрыть сливочным маслом."
-      ],
-      "quarantined_context": [
-        "institutional serving-temperature rule",
-        "institutional realization/shelf-life rule"
-      ],
-      "rationale": "No cooking transformation or institutional equipment is required; the defining operation is ordinary sandwich assembly."
-    },
-    {
       "source_recipe_id": "sad28-luppolovo:techcard:cheese-sandwich:20-10",
       "decision": "HOUSEHOLD_APPLICABLE",
       "specialized_medical_scope": false,
@@ -40,6 +26,14 @@
         "institutional realization/shelf-life rule"
       ],
       "rationale": "No cooking transformation or institutional equipment is required; the defining operation is ordinary sandwich assembly."
+    }
+  ],
+  "rejected_from_publication": [
+    {
+      "source_recipe_id": "sad28-luppolovo:techcard:butter-sandwich:25-5",
+      "household_assembly_is_ordinary": true,
+      "publication_disposition": "REJECT_PREPARED_OUTPUT_AUTHORITY_COMPONENT_INCONSISTENCY",
+      "rationale": "Household applicability does not cure contradictory authoritative nutrition/component evidence."
     }
   ]
 }

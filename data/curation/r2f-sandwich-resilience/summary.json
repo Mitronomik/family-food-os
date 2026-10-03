@@ -1,25 +1,18 @@
 {
   "schema_version": 1,
-  "operation": "R2F_SANDWICH_RESILIENCE_GATE_SUMMARY",
+  "operation": "R2F_CHEESE_SANDWICH_RESILIENCE_GATE_SUMMARY",
   "accepted_base": "561c13aad6ce978de399dfd807071232af06b71c",
   "issue": 139,
   "selected_recipe_codes": [
-    "SAD28_SANDWICH_BUTTER_25_5",
     "SAD28_SANDWICH_CHEESE_20_10"
   ],
   "source_authority_policy": "BOUNDED_INSTITUTION_PUBLISHED_TECH_CARD_REVIEW_V1",
   "reviewed_derivative_sha256": "dd1da359c60c8d647eda5e9a968164a02b8f6dca07333b888699f9722cba3543",
   "new_identity_only_foods": [
     "WHEAT_BREAD_PLAIN",
-    "BUTTER_CREAM_UNSPECIFIED",
     "CHEESE_UNSPECIFIED"
   ],
   "prepared_energy": [
-    {
-      "recipe_code": "SAD28_SANDWICH_BUTTER_25_5",
-      "output_g": "30",
-      "energy_kcal": "66.3"
-    },
     {
       "recipe_code": "SAD28_SANDWICH_CHEESE_20_10",
       "output_g": "30",
@@ -28,16 +21,16 @@
   ],
   "classification_effect": {
     "breakfast_classification_count_after_runtime": 7,
-    "sandwich_classification_added": 2,
-    "breakfast_compatible_candidate_count_after_runtime": 9,
-    "lunch_compatible_added": 2,
-    "snack_compatible_added": 2
+    "sandwich_classification_added": 1,
+    "breakfast_compatible_candidate_count_after_runtime": 8,
+    "lunch_compatible_added": 1,
+    "snack_compatible_added": 1
   },
   "milk_2_5_resilience": {
     "unaffected_candidates_before": 2,
     "capacity_before": 6,
-    "unaffected_candidates_after": 4,
-    "capacity_after": 12,
+    "unaffected_candidates_after": 3,
+    "capacity_after": 9,
     "required_opportunities": 7,
     "projected_closed": true,
     "scope": "exact canonical MILK_2_5 exclusion only; not dairy allergy"
@@ -48,9 +41,17 @@
   "status": "FROZEN_FOR_RUNTIME_AFTER_REVIEW_AND_MERGE",
   "stop_rule": "Do not start runtime publication before independent review and merge of this gate.",
   "public_source_verification": {
-    "status": "PASS_PUBLIC_PROVENANCE_AND_EXACT_CARD_TEXT",
+    "status": "PASS_PUBLIC_PROVENANCE_SELECTED_CHEESE_ONLY",
     "receipt_path": "data/curation/r2f-sandwich-resilience/public-source-verification.json",
     "raw_pdf_bytes_retained_by_r2f": false,
-    "runtime_source_document": "data/curation/r2f-sandwich-resilience/source-cards.json"
-  }
+    "runtime_source_document": "data/curation/r2f-sandwich-resilience/runtime-source.json",
+    "runtime_source_sha256": "26f239916b56429e78314369df961c8dd13cecd7d559d942655387e9851a5a97",
+    "runtime_source_size_bytes": 1855,
+    "runtime_source_git_commit": "a35ef046538687bcaf2600d5027f87688e9224ca",
+    "runtime_source_https_locator": "https://raw.githubusercontent.com/Mitronomik/family-food-os/a35ef046538687bcaf2600d5027f87688e9224ca/data/curation/r2f-sandwich-resilience/runtime-source.json"
+  },
+  "rejected_recipe_codes": [
+    "SAD28_SANDWICH_BUTTER_25_5"
+  ],
+  "rejection_reason": "Butter card rejected: 5 g cream butter implies >=2.5 g fat under TR TS 033/2013, exceeding the source-declared 0.98 g total sandwich fat."
 }
