@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "operation": "R2F_SANDWICH_RESILIENCE_CANDIDATE_SELECTION",
+  "accepted_base": "561c13aad6ce978de399dfd807071232af06b71c",
+  "issue": 139,
+  "objective": "Close exact MILK_2_5 seven-BREAKFAST resilience with one accepted cheese sandwich while preserving fail-closed rejection of the butter card and expanding existing sandwich compatibility without Planner changes.",
+  "selected": [
+    {
+      "canonical_code": "SAD28_SANDWICH_CHEESE_20_10",
+      "canonical_name": "Бутерброд с сыром",
+      "source_recipe_id": "sad28-hosted:techcard:3:cheese-sandwich:20-10",
+      "meal_type_code": "sandwich",
+      "source_output_g": "30",
+      "prepared_energy_kcal": "83",
+      "canonical_record_sha256": "2eb846cdb80737c0b4f65202beda1e352f3610c6bb6634b832901615ca3a8f97",
+      "source_discovery_recipe_id": "sad28-luppolovo:techcard:cheese-sandwich:20-10"
+    }
+  ],
+  "projected_after_future_runtime": {
+    "active_exact_energy_breakfast_classification_count": 7,
+    "new_active_exact_energy_sandwich_classification_count": 1,
+    "planner_breakfast_compatible_candidate_count": 8,
+    "milk_2_5_unaffected_breakfast_compatible_codes": [
+      "HARD_BOILED_EGG",
+      "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+      "SAD28_SANDWICH_CHEESE_20_10"
+    ],
+    "milk_2_5_unaffected_candidate_count": 3,
+    "max_recipe_repetitions": 3,
+    "milk_2_5_unaffected_capacity_per_week": 9,
+    "required_breakfast_opportunities": 7,
+    "closes_seven_breakfast_gap": true,
+    "lunch_compatible_candidates_added": 1,
+    "snack_compatible_candidates_added": 1
+  },
+  "boundary_note": "This closes exclusion of exact canonical MILK_2_5 only. It is not a dairy-allergy claim because the selected cheese sandwich contains dairy.",
+  "rejected": [
+    {
+      "canonical_code": "SAD28_SANDWICH_BUTTER_25_5",
+      "source_recipe_id": "sad28-luppolovo:techcard:butter-sandwich:25-5",
+      "disposition": "REJECT_PREPARED_OUTPUT_AUTHORITY_COMPONENT_INCONSISTENCY",
+      "reason": "The source declares 5 g cream butter but only 0.98 g fat for the whole sandwich. TR TS 033/2013 defines cream butter at >=50% fat, so the butter alone contributes at least 2.5 g fat. Arithmetic self-consistency of the declared macros does not resolve this component contradiction."
+    }
+  ]
+}

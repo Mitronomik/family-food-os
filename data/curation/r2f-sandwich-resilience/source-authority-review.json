@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "operation": "R2F_SANDWICH_SOURCE_AUTHORITY_REVIEW",
+  "accepted_base": "561c13aad6ce978de399dfd807071232af06b71c",
+  "issue": 139,
+  "decision": {
+    "policy_id": "BOUNDED_INSTITUTION_PUBLISHED_TECH_CARD_REVIEW_V1",
+    "status": "ACCEPTED_FOR_EXACT_ONE_CARD_BATCH",
+    "scope": [
+      "sad28-hosted:techcard:3:cheese-sandwich:20-10"
+    ],
+    "source_kind": "RETAINED_RAW_CARD_TEXT_SNAPSHOT",
+    "reviewed_derivative_sha256": "e2e717c8e44107e5b4ac4f4087af49fd0d279c6972ec2603ce2fd8244e61b63f",
+    "runtime_source_document": "data/curation/r2f-sandwich-resilience/raw-cheese-card.txt",
+    "runtime_source_data_type": "RETAINED_RAW_CARD_TEXT_SNAPSHOT",
+    "whole_source_family_auto_authorized": false,
+    "live_web_runtime_dependency_allowed": false,
+    "rationale": "Only the cheese sandwich is admitted. Publication is pinned to a complete retained raw-card text snapshot stored in Git and durable Library. SAD28 is official host only; card issuer is not inferred. Upstream PDF is corroboration/discovery.",
+    "runtime_source_sha256": "77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c",
+    "runtime_source_size_bytes": 1783,
+    "runtime_source_git_commit": "97ed76c7009229b5c947c63f1ace09b63a32147b",
+    "runtime_source_https_locator": "https://raw.githubusercontent.com/Mitronomik/family-food-os/97ed76c7009229b5c947c63f1ace09b63a32147b/data/curation/r2f-sandwich-resilience/raw-cheese-card.txt",
+    "discovery_scope": [
+      "sad28-luppolovo:techcard:cheese-sandwich:20-10"
+    ],
+    "durable_library_locator": "library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt",
+    "library_file_id": "libfile_baff1ee2870081918170b98d1cec3c5d"
+  },
+  "rights": {
+    "status": "BOUNDED_FACTUAL_USE_REVIEWED",
+    "basis": "Пользовательское решение по российскому нормативному корпусу допускает bounded structured factual recipe data with provenance; исходная издательская вёрстка, фотографии, логотипы и сторонние комментарии не сохраняются.",
+    "public_source_url": "https://sad28.vsevobr.ru/images/22-23/%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%B5/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BA%D0%B0%D1%80%D1%82%D1%8B-22-23%20%281%29.pdf",
+    "retrieved_date": "2026-10-03",
+    "hosting_institution": "МАДОУ «Детский сад комбинированного вида № 28» д. Лупполово",
+    "document_card_issuer": null,
+    "document_card_issuer_status": "NOT_ESTABLISHED_FROM_RETAINED_CARD",
+    "upstream_recipe_collection": "Сборник методических рекомендаций по организации питания детей и подростков в учреждениях образования Санкт-Петербурга. СПб.: Речь, 2008, Куткина М.Н."
+  },
+  "qa": {
+    "butter": {
+      "published_energy_kcal": "66.3",
+      "declared_fat_g": "0.98",
+      "butter_mass_g": "5",
+      "regulatory_minimum_butter_fat_fraction": "0.50",
+      "minimum_fat_from_butter_g": "2.5",
+      "regulatory_source_url": "https://eec.eaeunion.org/upload/medialibrary/789/TR-TS-033_2013.pdf",
+      "disposition": "REJECT_PREPARED_OUTPUT_AUTHORITY_COMPONENT_INCONSISTENCY"
+    },
+    "cheese": {
+      "published_energy_kcal": "83",
+      "macro_crosscheck_kcal": "82.75",
+      "difference_kcal": "0.25",
+      "disposition": "PASS_ROUNDING_LEVEL"
+    },
+    "rule": "Macro arithmetic is QA only. A component contradiction fails closed even when declared macros reproduce the published kcal."
+  },
+  "rejected_or_deferred": [
+    {
+      "source_recipe": "Бутерброд с маслом (25/5) in selected SAD28 PDF",
+      "disposition": "REJECT_PREPARED_OUTPUT_AUTHORITY_COMPONENT_INCONSISTENCY",
+      "published_energy_kcal": "66.3",
+      "source_declared_total_fat_g": "0.98",
+      "minimum_fat_from_5g_cream_butter_g": "2.5",
+      "regulatory_source_url": "https://eec.eaeunion.org/upload/medialibrary/789/TR-TS-033_2013.pdf",
+      "reason": "The declared total sandwich fat is lower than the minimum fat contributed by the listed cream-butter component."
+    },
+    {
+      "source_family": "GBDOU №118 official technological-card source",
+      "disposition": "REJECT_PREPARED_OUTPUT_AUTHORITY_INTERNAL_ENERGY_CONFLICT",
+      "reason": "Investigated sandwich cards show material disagreement between published kcal and their own source-declared macros/component evidence."
+    },
+    {
+      "source_recipe": "Бутерброд с повидлом (20/20) in selected SAD28 PDF",
+      "disposition": "DEFER_ENERGY_QA_RECONCILIATION_NOT_NEEDED_FOR_CLOSURE",
+      "published_energy_kcal": "97.2",
+      "macro_crosscheck_kcal": "101.92",
+      "reason": "The discrepancy remains unresolved and the cheese sandwich alone closes the exact MILK_2_5 resilience gap."
+    }
+  ],
+  "public_source_verification": {
+    "receipt_path": "data/curation/r2f-sandwich-resilience/public-source-verification.json",
+    "verified_at": "2026-10-03",
+    "official_nutrition_page": "https://sad28.vsevobr.ru/index.php/svedeniya-ob-organizatsii/organizatsiya-pitaniya-v-obrazovatelnoj-organizatsii",
+    "public_pdf_url": "https://sad28.vsevobr.ru/images/22-23/%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%B5/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BA%D0%B0%D1%80%D1%82%D1%8B-22-23%20%281%29.pdf",
+    "exact_selected_cards_reverified": true,
+    "raw_pdf_bytes_retained_by_r2f": false,
+    "runtime_source_document": "data/curation/r2f-sandwich-resilience/raw-cheese-card.txt",
+    "live_web_runtime_dependency_allowed": false,
+    "runtime_source_sha256": "77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c",
+    "runtime_source_size_bytes": 1783,
+    "runtime_source_https_locator": "https://raw.githubusercontent.com/Mitronomik/family-food-os/97ed76c7009229b5c947c63f1ace09b63a32147b/data/curation/r2f-sandwich-resilience/raw-cheese-card.txt",
+    "raw_pdf_required_for_runtime_reproduction": false,
+    "durable_library_locator": "library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt",
+    "library_file_id": "libfile_baff1ee2870081918170b98d1cec3c5d"
+  }
+}

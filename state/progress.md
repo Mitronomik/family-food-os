@@ -1,5 +1,74 @@
 # Progress
 
+## R2-F cheese-sandwich resilience Contract Gate — provenance correction — 2026-10-03
+
+Accepted main:
+`561c13aad6ce978de399dfd807071232af06b71c` (merged PR #138).
+
+Issue #139 / branch `docs/r2f-sandwich-resilience-gate`.
+
+Selected future runtime candidate is exactly:
+
+- `SAD28_SANDWICH_CHEESE_20_10` — 30 g / 83 kcal.
+
+Butter candidate remains rejected on component inconsistency. New identity-only
+foods remain exactly `WHEAT_BREAD_PLAIN` and `CHEESE_UNSPECIFIED`.
+
+### Durable source correction
+
+The future SOURCE_VERIFIED RecipeVersion source document is now the complete
+selected-card raw text snapshot:
+
+`data/curation/r2f-sandwich-resilience/raw-cheese-card.txt`
+
+SHA-256:
+`77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c`
+
+Byte size: 1783.
+
+It is retained both in Git and durable Library:
+
+`library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt`
+Library file id: `libfile_baff1ee2870081918170b98d1cec3c5d`.
+
+The Library copy was materialized and re-hashed independently: same 1783
+bytes and SHA-256 — PASS.
+
+Provenance roles are now explicit:
+
+- SAD28 / МАДОУ №28 = official host of the public file;
+- document/card issuer = `NOT_ESTABLISHED_FROM_RETAINED_CARD`;
+- upstream recipe collection = Kutkina M.N., Saint Petersburg, 2008.
+
+Exact upstream PDF bytes were not retrievable through the available execution
+environment. No PDF hash is invented; the PDF is discovery/corroboration only
+and is not the future RecipeVersion source document.
+
+Future source-family expansion requires upstream reacquisition and new review.
+
+Product effect remains:
+
+- hard exact-`MILK_2_5` unaffected pool 2 → 3;
+- capacity 6 → 9 under repetition=3;
+- BREAKFAST-compatible pool 8;
+- LUNCH +1;
+- SNACK +1.
+
+Verification on corrected content head `2f2deaff731a07c1937e44059106f8bfcc2f4778`:
+
+- JSON/source-contract consistency — PASS;
+- raw-card 1783 bytes / SHA-256 `77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c` — PASS;
+- durable Library materialize/readback — PASS;
+- source tuple coherence — PASS;
+- host/issuer/upstream role separation — PASS;
+- derivative SHA-256 `e2e717c8e44107e5b4ac4f4087af49fd0d279c6972ec2603ce2fd8244e61b63f` — PASS;
+- Docs #824 — SUCCESS;
+- DC1 #681 — SUCCESS;
+- no runtime/schema/migration changes.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
 ## R2-E cottage casserole runtime review-ready — 2026-10-03
 
 Accepted main:

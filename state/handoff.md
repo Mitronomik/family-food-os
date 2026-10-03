@@ -1,5 +1,54 @@
 # Handoff
 
+## R2-F cheese-sandwich Contract Gate — provenance correction — 2026-10-03
+
+Accepted main:
+`561c13aad6ce978de399dfd807071232af06b71c`.
+
+Issue #139 / branch `docs/r2f-sandwich-resilience-gate`.
+
+Read first:
+`docs/family-food/r2f-sandwich-resilience-gate.md`.
+
+Selected runtime candidate:
+`SAD28_SANDWICH_CHEESE_20_10`.
+
+Do not publish the rejected butter candidate.
+
+Future RecipeVersion source document:
+
+`data/curation/r2f-sandwich-resilience/raw-cheese-card.txt`
+
+SHA-256 `77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c`, 1783 bytes.
+
+Durable Library:
+`library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt`
+Library file id: `libfile_baff1ee2870081918170b98d1cec3c5d`.
+
+Library materialize/readback verification is PASS.
+
+Provenance roles:
+
+- SAD28 = official host only;
+- card issuer = `NOT_ESTABLISHED_FROM_RETAINED_CARD`;
+- upstream collection = Kutkina 2008.
+
+Do not replace the raw-card source with live web/PDF data. The upstream PDF is
+corroboration/discovery only. Future source-family expansion requires reacquisition
+and a new review.
+
+Projected hard exact-`MILK_2_5` capacity remains 9/week.
+
+Verified content freeze:
+`2f2deaff731a07c1937e44059106f8bfcc2f4778`.
+
+Docs #824 / DC1 #681 are SUCCESS. Raw-card Git/Library hashes, provenance role
+separation, source tuple coherence, derivative/card hashes, butter rejection and
+capacity 9 all pass.
+
+Status:
+`READY_FOR_FINAL_REVIEW`.
+
 ## R2-E cottage casserole runtime review-ready — 2026-10-03
 
 Accepted main:

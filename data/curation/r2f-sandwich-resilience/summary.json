@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "operation": "R2F_CHEESE_SANDWICH_RESILIENCE_GATE_SUMMARY",
+  "accepted_base": "561c13aad6ce978de399dfd807071232af06b71c",
+  "issue": 139,
+  "selected_recipe_codes": [
+    "SAD28_SANDWICH_CHEESE_20_10"
+  ],
+  "source_authority_policy": "BOUNDED_INSTITUTION_PUBLISHED_TECH_CARD_REVIEW_V1",
+  "reviewed_derivative_sha256": "e2e717c8e44107e5b4ac4f4087af49fd0d279c6972ec2603ce2fd8244e61b63f",
+  "new_identity_only_foods": [
+    "WHEAT_BREAD_PLAIN",
+    "CHEESE_UNSPECIFIED"
+  ],
+  "prepared_energy": [
+    {
+      "recipe_code": "SAD28_SANDWICH_CHEESE_20_10",
+      "output_g": "30",
+      "energy_kcal": "83"
+    }
+  ],
+  "classification_effect": {
+    "breakfast_classification_count_after_runtime": 7,
+    "sandwich_classification_added": 1,
+    "breakfast_compatible_candidate_count_after_runtime": 8,
+    "lunch_compatible_added": 1,
+    "snack_compatible_added": 1
+  },
+  "milk_2_5_resilience": {
+    "unaffected_candidates_before": 2,
+    "capacity_before": 6,
+    "unaffected_candidates_after": 3,
+    "capacity_after": 9,
+    "required_opportunities": 7,
+    "projected_closed": true,
+    "scope": "exact canonical MILK_2_5 exclusion only; not dairy allergy"
+  },
+  "migration_required": false,
+  "planner_change_required": false,
+  "nutrition_authority_change_required": false,
+  "status": "FROZEN_FOR_RUNTIME_AFTER_REVIEW_AND_MERGE",
+  "stop_rule": "Do not start runtime publication before independent review and merge of this gate.",
+  "public_source_verification": {
+    "status": "PASS_DURABLE_RAW_CARD_AND_PROVENANCE_ROLE_SEPARATION",
+    "receipt_path": "data/curation/r2f-sandwich-resilience/public-source-verification.json",
+    "raw_pdf_bytes_retained_by_r2f": false,
+    "raw_pdf_required_for_runtime_reproduction": false,
+    "runtime_source_document": "data/curation/r2f-sandwich-resilience/raw-cheese-card.txt",
+    "runtime_source_sha256": "77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c",
+    "runtime_source_size_bytes": 1783,
+    "runtime_source_git_commit": "97ed76c7009229b5c947c63f1ace09b63a32147b",
+    "runtime_source_https_locator": "https://raw.githubusercontent.com/Mitronomik/family-food-os/97ed76c7009229b5c947c63f1ace09b63a32147b/data/curation/r2f-sandwich-resilience/raw-cheese-card.txt",
+    "durable_library_locator": "library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt",
+    "library_file_id": "libfile_baff1ee2870081918170b98d1cec3c5d"
+  },
+  "rejected_recipe_codes": [
+    "SAD28_SANDWICH_BUTTER_25_5"
+  ],
+  "rejection_reason": "Butter card rejected: 5 g cream butter implies >=2.5 g fat under TR TS 033/2013, exceeding the source-declared 0.98 g total sandwich fat."
+}

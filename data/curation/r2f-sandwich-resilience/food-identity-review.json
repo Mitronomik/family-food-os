@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "operation": "R2F_SANDWICH_FOOD_IDENTITY_REVIEW",
+  "accepted_base": "561c13aad6ce978de399dfd807071232af06b71c",
+  "issue": 139,
+  "decisions": [
+    {
+      "source_label": "Хлеб пшеничный",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "canonical_code": "WHEAT_BREAD_PLAIN",
+      "canonical_name": "Хлеб пшеничный",
+      "category_code": "grains",
+      "default_unit": "g",
+      "non_equivalent_to": [
+        "BREAD_WHOLE_WHEAT",
+        "WHEAT_BREAD_HIGH_GRADE_STALE"
+      ],
+      "basis": "Source label establishes wheat bread but not whole-grain, flour grade, staleness, or branded loaf subtype."
+    },
+    {
+      "source_label": "Сыр",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "canonical_code": "CHEESE_UNSPECIFIED",
+      "canonical_name": "Сыр",
+      "category_code": "dairy",
+      "default_unit": "g",
+      "non_equivalent_to": [
+        "CHEESE_CHEDDAR",
+        "CHEESE_CHEDDAR_REDUCED_FAT",
+        "CHEESE_MOZZARELLA_PART_SKIM"
+      ],
+      "basis": "Source card does not identify cheese variety or fat subtype."
+    }
+  ],
+  "new_identity_only_foods": [
+    {
+      "canonical_code": "WHEAT_BREAD_PLAIN",
+      "canonical_name": "Хлеб пшеничный",
+      "category_code": "grains",
+      "default_unit": "g",
+      "nutrition_profile": null,
+      "composition": null
+    },
+    {
+      "canonical_code": "CHEESE_UNSPECIFIED",
+      "canonical_name": "Сыр",
+      "category_code": "dairy",
+      "default_unit": "g",
+      "nutrition_profile": null,
+      "composition": null
+    }
+  ],
+  "invariant": "Identity-only publication grants no Nutrition/Composition authority. R2-F creates only WHEAT_BREAD_PLAIN and CHEESE_UNSPECIFIED for the accepted cheese sandwich.",
+  "rejected_identity_demand": [
+    {
+      "source_label": "Масло сливочное (Б)",
+      "canonical_code_that_would_have_been_created": "BUTTER_CREAM_UNSPECIFIED",
+      "disposition": "DO_NOT_CREATE_FOR_R2F",
+      "reason": "The only R2-F recipe requiring this identity is rejected from prepared-output publication because its source-declared fat conflicts with the component minimum implied by cream butter."
+    }
+  ]
+}

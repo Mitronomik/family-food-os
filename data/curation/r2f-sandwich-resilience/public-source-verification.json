@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "operation": "R2F_PUBLIC_SOURCE_VERIFICATION_RECEIPT",
+  "accepted_base": "561c13aad6ce978de399dfd807071232af06b71c",
+  "issue": 139,
+  "verified_at": "2026-10-03",
+  "institution": {
+    "name": "МАДОУ «Детский сад комбинированного вида № 28» д. Лупполово",
+    "role": "OFFICIAL_HOST_OF_PUBLIC_TECH_CARD_FILE",
+    "official_site": "https://sad28.vsevobr.ru/",
+    "official_nutrition_page": "https://sad28.vsevobr.ru/index.php/svedeniya-ob-organizatsii/organizatsiya-pitaniya-v-obrazovatelnoj-organizatsii",
+    "verification": "Official nutrition page belongs to SAD28 and links «Технологические карты». This proves hosting, not card issuer."
+  },
+  "public_pdf": {
+    "url": "https://sad28.vsevobr.ru/images/22-23/%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%B5/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BA%D0%B0%D1%80%D1%82%D1%8B-22-23%20%281%29.pdf",
+    "role": "UPSTREAM_DISCOVERY_AND_CORROBORATION_ONLY",
+    "public_index_verification": "Search-indexed official PDF text was re-queried on 2026-10-03 and exposes the selected cheese card.",
+    "raw_pdf_bytes_retained_by_r2f": false,
+    "raw_pdf_sha256": null,
+    "source_document_for_runtime": false,
+    "note": "Exact upstream PDF bytes were not retrievable by the available execution environment and therefore are not used as production source authority."
+  },
+  "verified_cards": [
+    {
+      "source_recipe_id": "sad28-luppolovo:techcard:butter-sandwich:25-5",
+      "verified_facts": {
+        "ingredients": [
+          {
+            "source_label": "Хлеб пшеничный",
+            "gross_g": "25",
+            "net_g": "25"
+          },
+          {
+            "source_label": "Масло сливочное (Б)",
+            "gross_g": "5",
+            "net_g": "5"
+          }
+        ],
+        "source_output_text": "25/5",
+        "declared_nutrition": {
+          "energy_kcal": "66.3",
+          "protein_g": "2.11",
+          "fat_g": "0.98",
+          "carbohydrate_g": "12.26"
+        },
+        "process": "Масло/ломтик пшеничного хлеба: source text describes butter covering most of the wheat loaf slice."
+      },
+      "publication_disposition": "REJECT_PREPARED_OUTPUT_AUTHORITY_COMPONENT_INCONSISTENCY"
+    },
+    {
+      "source_recipe_id": "sad28-hosted:techcard:3:cheese-sandwich:20-10",
+      "verified_facts": {
+        "ingredients": [
+          {
+            "source_label": "Сыр",
+            "gross_g": "11",
+            "net_g": "10"
+          },
+          {
+            "source_label": "Хлеб пшеничный",
+            "gross_g": "20",
+            "net_g": "20"
+          }
+        ],
+        "source_output_text": "20/10",
+        "declared_nutrition": {
+          "energy_kcal": "83",
+          "protein_g": "3.9",
+          "fat_g": "3.15",
+          "carbohydrate_g": "9.7"
+        },
+        "process": "На ломтик хлеба кладут кусочек сыра толщиной 3–4 мм."
+      },
+      "publication_disposition": "SELECTED_FOR_R2F_RUNTIME",
+      "source_discovery_recipe_id": "sad28-luppolovo:techcard:cheese-sandwich:20-10",
+      "card_number": "3"
+    }
+  ],
+  "runtime_boundary": {
+    "runtime_source_document": "data/curation/r2f-sandwich-resilience/raw-cheese-card.txt",
+    "runtime_source_sha256": "77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c",
+    "runtime_source_size_bytes": 1783,
+    "runtime_source_git_commit": "97ed76c7009229b5c947c63f1ace09b63a32147b",
+    "runtime_source_https_locator": "https://raw.githubusercontent.com/Mitronomik/family-food-os/97ed76c7009229b5c947c63f1ace09b63a32147b/data/curation/r2f-sandwich-resilience/raw-cheese-card.txt",
+    "runtime_source_data_type": "RETAINED_RAW_CARD_TEXT_SNAPSHOT",
+    "raw_pdf_bytes_retained_by_r2f": false,
+    "raw_pdf_required_for_runtime_reproduction": false,
+    "live_web_runtime_dependency_allowed": false,
+    "future_source_family_expansion_requires_upstream_reacquisition_and_new_review": true
+  },
+  "butter_consistency_check": {
+    "source_recipe_id": "sad28-luppolovo:techcard:butter-sandwich:25-5",
+    "regulatory_source": "TR TS 033/2013",
+    "regulatory_source_url": "https://eec.eaeunion.org/upload/medialibrary/789/TR-TS-033_2013.pdf",
+    "rule": "Cream butter has fat mass fraction >= 50%.",
+    "butter_mass_g": "5",
+    "minimum_fat_from_butter_g": "2.5",
+    "source_declared_total_sandwich_fat_g": "0.98",
+    "disposition": "REJECT_PREPARED_OUTPUT_AUTHORITY_COMPONENT_INCONSISTENCY"
+  },
+  "provenance_roles": {
+    "official_host": "МАДОУ «Детский сад комбинированного вида № 28» д. Лупполово",
+    "document_card_issuer": {
+      "name": null,
+      "status": "NOT_ESTABLISHED_FROM_RETAINED_CARD"
+    },
+    "upstream_recipe_collection": "Сборник методических рекомендаций по организации питания детей и подростков в учреждениях образования Санкт-Петербурга. СПб.: Речь, 2008, Куткина М.Н."
+  },
+  "raw_card_retention": {
+    "repository_path": "data/curation/r2f-sandwich-resilience/raw-cheese-card.txt",
+    "sha256": "77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c",
+    "size_bytes": 1783,
+    "git_commit": "97ed76c7009229b5c947c63f1ace09b63a32147b",
+    "https_locator": "https://raw.githubusercontent.com/Mitronomik/family-food-os/97ed76c7009229b5c947c63f1ace09b63a32147b/data/curation/r2f-sandwich-resilience/raw-cheese-card.txt",
+    "durable_library_locator": "library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt",
+    "library_file_id": "libfile_baff1ee2870081918170b98d1cec3c5d",
+    "library_readback_verified_at": "2026-10-03",
+    "library_readback_sha256": "77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c",
+    "library_readback_size_bytes": 1783,
+    "verification_sources": {
+      "official_host_pdf_index": "https://sad28.vsevobr.ru/images/22-23/%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%B5/%D0%A2%D0%B5%D1%85%D0%BD%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BA%D0%B0%D1%80%D1%82%D1%8B-22-23%20%281%29.pdf",
+      "independent_visual_mirror": "https://www.leocdn.ru/uploadsForSiteId/203600/content/c4c6a70c-077c-4d80-88c9-572c358f644d.pdf"
+    }
+  }
+}
