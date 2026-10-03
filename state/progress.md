@@ -31,9 +31,10 @@ Read-only verification:
 - ENERGY_KCAL + 53 UNKNOWN preserved — PASS;
 - durable archive/PDF bytes and SHA-256 — PASS.
 
-Exact-head Docs/DC1 checks pending after state update.
+Verification head `ff245c517c00b3c83716916cc5350b6478cf01b4`: Docs #858 SUCCESS; DC1 #715 SUCCESS.
+Final status-only head must also be exact-head green before merge.
 
-Status: `REVIEW_CORRECTIONS_APPLIED_PENDING_VERIFICATION`.
+Status: `READY_FOR_FINAL_REVIEW`.
 
 ## R2-F cheese-sandwich runtime — implementation active — 2026-10-03
 
