@@ -1,35 +1,49 @@
 # Handoff
 
-## R2-F sandwich resilience Contract Gate review-ready — 2026-10-03
+## R2-F cheese-sandwich resilience Contract Gate — blockers fixed — 2026-10-03
 
 Accepted main:
 `561c13aad6ce978de399dfd807071232af06b71c` (merged PR #138).
 
 Issue #139 / branch `docs/r2f-sandwich-resilience-gate`.
 
-Goal: freeze one two-recipe SANDWICH runtime batch that closes exact
-`MILK_2_5` seven-BREAKFAST resilience with margin and adds LUNCH/SNACK role
-coverage through existing Planner compatibility.
+Read first:
+`docs/family-food/r2f-sandwich-resilience-gate.md`.
 
-Selected:
-`SAD28_SANDWICH_BUTTER_25_5` and `SAD28_SANDWICH_CHEESE_20_10`.
+Selected future runtime candidate is now exactly:
 
-New identity-only:
-`WHEAT_BREAD_PLAIN`, `BUTTER_CREAM_UNSPECIFIED`, `CHEESE_UNSPECIFIED`.
+`SAD28_SANDWICH_CHEESE_20_10`.
 
-Do not use the rejected GBDOU №118 sandwich energy values or the deferred SAD28
-povidlo card to inflate catalogue counts.
+Do **not** publish `SAD28_SANDWICH_BUTTER_25_5`: it failed component-consistency
+review because 5 g cream butter implies at least 2.5 g fat under TR TS 033/2013,
+while the source declares only 0.98 g fat for the whole sandwich.
 
-Evidence/content freeze:
-`1aaada5c66c6781e7b8c5ef19a5ccf3a3d508822`.
+Create identity-only only:
+`WHEAT_BREAD_PLAIN`, `CHEESE_UNSPECIFIED`.
 
-Verification: all evidence JSON PASS; derivative + both card hashes PASS;
-public-source verification PASS; exact macro/identity/nutrient/capacity checks
-PASS; Docs #806 SUCCESS; DC1 #663 SUCCESS.
+Retained runtime source:
+`data/curation/r2f-sandwich-resilience/runtime-source.json`.
 
-PR #140 is READY FOR FINAL REVIEW.
+Source artifact commit:
+`a35ef046538687bcaf2600d5027f87688e9224ca`.
 
-This remains docs/data/source evidence only. Runtime requires independent review
+Source SHA-256:
+`26f239916b56429e78314369df961c8dd13cecd7d559d942655387e9851a5a97`.
+
+Runtime must not use live web/PDF bytes as source truth. Future expansion of the
+source family requires reacquisition and separate review.
+
+Projected hard exact-`MILK_2_5` pool after runtime:
+3 candidates × repetition 3 = capacity 9, enough for seven BREAKFAST
+opportunities. Planner mapping stays unchanged.
+
+Corrected evidence freeze:
+`393d1f3635e5fe77392570c2d9f10b97ae241c87`.
+
+Status:
+`BLOCKERS_FIXED_VERIFICATION_PENDING`.
+
+Do not start runtime publication before verification, independent final review
 and merge.
 
 ## R2-E cottage casserole runtime review-ready — 2026-10-03

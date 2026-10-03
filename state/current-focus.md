@@ -20,7 +20,7 @@ Current exact-energy production state:
 
 ## Current bounded operation
 
-**R2-F — two-SANDWICH resilience-closure Contract Gate.**
+**R2-F — cheese-sandwich resilience-closure Contract Gate.**
 
 Issue: `#139`.
 
@@ -32,37 +32,53 @@ Accepted base:
 
 Status:
 
-`READY_FOR_FINAL_REVIEW`.
+`BLOCKERS_FIXED_VERIFICATION_PENDING`.
 
-## Frozen candidate batch
+## Corrected frozen candidate
 
-Future runtime batch is exactly:
+Future runtime publishes exactly:
 
-- `SAD28_SANDWICH_BUTTER_25_5` — 30 g / 66.3 kcal;
-- `SAD28_SANDWICH_CHEESE_20_10` — 30 g / 83 kcal.
+- `SAD28_SANDWICH_CHEESE_20_10` — 30 g / exact same-card 83 kcal.
 
-Both use `meal_type_code=sandwich`.
+The butter sandwich is rejected from prepared-output publication because the
+source lists 5 g cream butter but only 0.98 g total sandwich fat; under
+TR TS 033/2013 cream butter is at least 50% fat, so that component alone implies
+at least 2.5 g fat.
 
 Create identity-only:
 
 - `WHEAT_BREAD_PLAIN`;
-- `BUTTER_CREAM_UNSPECIFIED`;
 - `CHEESE_UNSPECIFIED`.
 
 No Nutrition/Composition is granted to those identities.
 
-Bounded source authority:
-`BOUNDED_INSTITUTION_PUBLISHED_TECH_CARD_REVIEW_V1`.
+## Durable source boundary
+
+Runtime source artifact:
+
+`data/curation/r2f-sandwich-resilience/runtime-source.json`
+
+Retained source commit:
+
+`a35ef046538687bcaf2600d5027f87688e9224ca`.
+
+SHA-256:
+
+`26f239916b56429e78314369df961c8dd13cecd7d559d942655387e9851a5a97`.
+
+The upstream institution PDF is provenance/corroboration only. Runtime has no
+live-web dependency, and future source-family expansion requires reacquisition
+and a new review.
 
 ## Product boundary
 
 Projected after later runtime:
 
 - active `breakfast` classification remains 7;
-- active `sandwich` classification +2;
-- BREAKFAST-compatible pool becomes 9;
-- hard exact `MILK_2_5` unaffected pool becomes 4 / capacity 12;
-- LUNCH and SNACK each gain 2 compatible candidates.
+- active `sandwich` classification +1;
+- BREAKFAST-compatible pool becomes 8;
+- hard exact `MILK_2_5` unaffected pool becomes 3 / capacity 9;
+- LUNCH and SNACK each gain 1 compatible candidate.
 
 This is exact `MILK_2_5` resilience only, not a dairy-allergy claim.
 
@@ -75,32 +91,28 @@ Do not:
 - change Planner algorithm/mapping/repetition;
 - add a new Nutrition authority;
 - grant Nutrition/Composition to new identities;
-- add the deferred povidlo card;
+- publish the rejected butter or deferred povidlo cards;
 - bulk-import the website/PDF;
 - start DC4/Gate1-CLOSE/PR9;
 - start API/UI/Prep/Retail/Auth/PostgreSQL/AI.
 
-## Next step
+## Verification pending
 
-Evidence/content freeze:
+Corrected evidence/content freeze:
 
-`1aaada5c66c6781e7b8c5ef19a5ccf3a3d508822`.
+`393d1f3635e5fe77392570c2d9f10b97ae241c87`.
 
-Verification:
+Required before final review-ready status:
 
-- all 8 evidence JSON files parse — PASS;
-- reviewed derivative SHA-256 recomputation — PASS;
-- both exact card SHA-256 recomputations — PASS;
-- source-policy scope = exactly 2 cards — PASS;
-- public-source verification receipt = PASS;
-- exact macro QA = 66.30 / 82.75 kcal — PASS;
-- exactly 3 identity-only foods; no Nutrition/Composition — PASS;
-- nutrient partition = ENERGY_KCAL AVAILABLE + 53 UNKNOWN — PASS;
-- projected hard-`MILK_2_5` capacity = 4 × 3 = 12 — PASS;
-- Docs verification #806 — SUCCESS;
-- DC1 corpus verification #663 — SUCCESS;
-- changed scope remains docs/data/state only;
-- runtime/schema/migration diff — none.
+- all R2-F JSON parse;
+- retained runtime-source byte SHA-256/size;
+- discovery derivative/card hash checks;
+- butter contradiction arithmetic;
+- source-policy scope exactly one card;
+- identity/nutrient/capacity consistency;
+- Docs verification;
+- DC1 corpus verification;
+- scope/whitespace audit.
 
-PR #140 is ready for independent final review. Do not start runtime publication
-before review and merge.
+Do not start runtime publication before corrected PR #140 is independently
+reviewed and merged.

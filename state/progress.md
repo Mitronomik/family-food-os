@@ -1,48 +1,76 @@
 # Progress
 
-## R2-F two-SANDWICH resilience Contract Gate — 2026-10-03
+## R2-F cheese-sandwich resilience Contract Gate — blocker corrections — 2026-10-03
 
 Accepted main:
 `561c13aad6ce978de399dfd807071232af06b71c` (merged PR #138).
 
 Issue #139 / branch `docs/r2f-sandwich-resilience-gate`.
 
-R2-F is intentionally a two-recipe source/authority batch rather than another
-single-recipe micro-step.
+Independent review found two blockers in the original two-sandwich gate. Both are
+corrected in the bounded evidence/docs scope.
 
-Selected future runtime candidates:
+### Source-authority correction
 
-- `SAD28_SANDWICH_BUTTER_25_5` — 30 g / 66.3 kcal;
+`SAD28_SANDWICH_BUTTER_25_5` is no longer a publication candidate.
+
+Reason: the card lists 5 g cream butter but declares only 0.98 g fat for the
+whole sandwich. TR TS 033/2013 defines cream butter at at least 50% fat, so the
+butter component alone implies at least 2.5 g fat. Macro arithmetic reproducing
+66.3 kcal is not sufficient to resolve that component contradiction.
+
+Selected future runtime candidate is now exactly:
+
 - `SAD28_SANDWICH_CHEESE_20_10` — 30 g / 83 kcal.
 
-Both are `sandwich`, so existing Planner mapping can use them for
-BREAKFAST/LUNCH/SNACK without an algorithm change.
+New identity-only foods are reduced to:
 
-Three new identity-only foods:
-`WHEAT_BREAD_PLAIN`, `BUTTER_CREAM_UNSPECIFIED`, `CHEESE_UNSPECIFIED`.
+- `WHEAT_BREAD_PLAIN`;
+- `CHEESE_UNSPECIFIED`.
 
-Source policy is bounded to exactly two reviewed institution-published cards;
-runtime will pin a structured derivative and has no live-web dependency.
+### Durable provenance correction
 
-Projected hard exact-`MILK_2_5` resilience:
-2 candidates/capacity 6 → 4 candidates/capacity 12.
+A retained runtime source artifact was added at:
 
-Evidence/content freeze:
-`1aaada5c66c6781e7b8c5ef19a5ccf3a3d508822`.
+`data/curation/r2f-sandwich-resilience/runtime-source.json`
 
-Verification:
-- evidence JSON parse — PASS;
-- derivative/card hash recomputation — PASS;
-- official public-source/page + exact indexed-card recheck — PASS;
-- source-policy scope exactly 2 cards — PASS;
-- macro QA 66.30 / 82.75 — PASS;
-- identity/nutrient/capacity arithmetic — PASS;
-- Docs #806 — SUCCESS;
-- DC1 #663 — SUCCESS;
-- no runtime/schema/migration changes.
+Source-artifact commit:
+`a35ef046538687bcaf2600d5027f87688e9224ca`.
+
+Exact SHA-256:
+`26f239916b56429e78314369df961c8dd13cecd7d559d942655387e9851a5a97`.
+
+The future RecipeVersion source tuple will point to that immutable retained JSON,
+so `source_url` and `source_document_sha256` describe the same artifact. The
+upstream PDF remains provenance/corroboration only and cannot override runtime
+truth.
+
+### Product effect
+
+Hard exact-`MILK_2_5` resilience changes from:
+
+2 candidates / capacity 6
+
+to:
+
+3 candidates / capacity 9.
+
+That remains sufficient for seven BREAKFAST opportunities under unchanged
+`max_recipe_repetitions=3`.
+
+Classification remains truthful:
+
+- `breakfast` classification 7;
+- +1 `sandwich`;
+- BREAKFAST-compatible pool 8;
+- LUNCH +1;
+- SNACK +1.
+
+Corrected evidence/content freeze:
+`393d1f3635e5fe77392570c2d9f10b97ae241c87`.
 
 Status:
-`READY_FOR_FINAL_REVIEW`.
+`BLOCKERS_FIXED_VERIFICATION_PENDING`.
 
 ## R2-E cottage casserole runtime review-ready — 2026-10-03
 
