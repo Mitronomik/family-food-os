@@ -1,93 +1,39 @@
 # Progress
 
-## R3-A review corrections — option B + process placement — 2026-10-03
+## R3-A final independent-review corrections — 2026-10-03
 
-PR #146 remains the same Contract Gate; no additional gate PR was created.
+PR #146 remains the same docs/data Contract Gate. No runtime work and no new PR.
 
-User decision:
+Corrections applied:
 
-- choose transaction option B;
-- do not split R3-A into per-recipe PRs;
-- keep one future runtime PR for the whole accepted batch.
+- source process for `54-8м` is fail-closed: pre-soak liquid UNKNOWN;
+- source process for `54-11м` preserves 5–10 minute weak boil and 160 °C /
+  30–40 minute covered oven finish without inventing a water split;
+- final identity review contains no stale `SOUR_CREAM_15` dependency;
+- option B now includes the required transaction-neutral batch-activation seam;
+  sequential calls to the commit-owning single-recipe guard are explicitly
+  forbidden;
+- runtime acceptance requires full preflight, one caller-owned activation UoW,
+  no inner commits, staged-state admission validation before commit, whole-batch
+  rollback on failure and regression safety for existing single-recipe behavior.
 
-Corrected selected batch remains exactly 10 cards. New identity-only demand is
-reduced from five to exactly three:
-`COD_FILLET_RAW`, `PARSLEY_ROOT_RAW`,
-`WHEAT_BREAD_STALE_UNSPECIFIED_GRADE`.
-
-Independent raw-PDF process audit:
-
-- `54-9р` — removed: multiple fats, sunflower-oil placement unresolved;
-- `54-18м` — removed: multiple fats, sunflower-oil placement unresolved;
-- replaced by clean `54-6м` and `54-7м`;
-- all ten selected cards have explicit process-binding dispositions;
-- per-step gram splits remain UNKNOWN where source provides only exact recipe total.
-
-Option-B transaction semantics:
-
-- per-recipe atomic inactive publication;
-- exact inactive subset may remain after publication failure;
-- rerun converges missing rows;
-- separate full-batch preflight;
-- all-inactive activation = one batch-level UoW / one commit;
-- all-active = zero-write replay;
-- mixed active/inactive = fail closed;
-- activation failure = whole activation rollback.
-
-Durable archive + embedded PDF were independently re-read/re-hashed on
-2026-10-03 and match pinned size/SHA receipts.
+Batch remains exactly ten MAIN cards and exactly three new identity-only foods.
+No migration/schema/Planner/new-Nutrition-authority change is authorized.
 
 Corrected content freeze:
-`39c1f3e8809e9fd42e6ea061554f81cf3b1c35e6`.
+`6ee960e979666e939ec7bed87bca1f70f3ed1ae4`.
 
-Verification:
-- R3-A cross-file + process-binding audit — PASS;
-- option-B transaction/activation semantics — PASS;
-- durable archive/PDF readback — PASS;
-- Docs #851 — SUCCESS;
-- DC1 #708 — SUCCESS.
+Read-only verification:
 
-Status:
-`READY_FOR_FINAL_REVIEW`.
+- 10/10 selected/spec/household/process/source alignment — PASS;
+- old unsupported water-process phrases absent — PASS;
+- option-B transaction fields + in-scope seam — PASS;
+- ENERGY_KCAL + 53 UNKNOWN preserved — PASS;
+- durable archive/PDF bytes and SHA-256 — PASS.
 
-## R3-A School2022 ten-recipe MAIN batch gate — active — 2026-10-03
+Exact-head Docs/DC1 checks pending after state update.
 
-Accepted base:
-`da6d1e05fd44ecc2733e1a6f472eae3e54b60604` (merged PR #142).
-
-Issue #144 / branch `docs/r3a-school2022-main-batch-gate`.
-
-DC3 moves from one-recipe/micro batches to the canonical enlarged batch shape.
-
-Current frozen target:
-
-- exactly 10 unique School2022 MAIN RecipeVersions;
-- one accepted School2022 source family;
-- existing `PREPARED_OUTPUT_V1` authority seam;
-- 5 new identity-only FoodIngredients;
-- all other source rows reuse accepted identities;
-- no migration/schema/Planner/new-Nutrition-authority change.
-
-Fail-closed corrections made during evidence review:
-
-- `54-5м` rejected from R3-A: table sunflower oil vs process butter;
-- `54-12м` rejected from R3-A: table sunflower oil vs process butter;
-- `54-15м` deferred: unquantified process water + bay leaf;
-- stale wheat bread is represented as
-  `WHEAT_BREAD_STALE_UNSPECIFIED_GRADE`; flour grade is not inferred.
-
-Replacement clean cards are `54-4м` and `54-11р`.
-
-Content freeze:
-`36d12b03d4aa11b52616bf59d176a7a817e0d74d`.
-
-Verification:
-- R3-A cross-file contract audit — PASS;
-- Docs #839 — SUCCESS;
-- DC1 #696 — SUCCESS.
-
-Status:
-`READY_FOR_FINAL_REVIEW`.
+Status: `REVIEW_CORRECTIONS_APPLIED_PENDING_VERIFICATION`.
 
 ## R2-F cheese-sandwich runtime — implementation active — 2026-10-03
 
