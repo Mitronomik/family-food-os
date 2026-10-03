@@ -39,8 +39,15 @@ After this PR is reviewed/merged, reassess corpus readiness and switch future DC
 work to larger R3 batches (~10–12 recipes initially). Do not start that batch
 while #141 is still under review.
 
+Runtime freeze:
+`a84395cfff2923881f78048b976f358333726419`.
+
+Exact runtime verification: R2-F #4 SUCCESS, 169 focused/affected tests passed,
+Ruff check/format and scope/whitespace SUCCESS. Docs #830, DC1 #687, R1-C #87,
+R2 #71, R2-B #61, R2-C #49 and R2-E #32 are SUCCESS on the same head.
+
 Status:
-`IMPLEMENTATION_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 ## R2-F cheese-sandwich Contract Gate — provenance correction — 2026-10-03
 
