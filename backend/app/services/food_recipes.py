@@ -224,9 +224,7 @@ class FoodRecipeCatalogueService:
         if recipe.is_active:
             return recipe
         changed = activate_recipe(recipe, updated_at=now)
-        scope.recipes.set_active(
-            recipe_id, active=True, updated_at=changed.updated_at
-        )
+        scope.recipes.set_active(recipe_id, active=True, updated_at=changed.updated_at)
         return changed
 
     def _activate_after_policy_check(self, recipe_id: UUID) -> Recipe:
