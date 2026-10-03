@@ -1,9 +1,9 @@
 # R3-A — School2022 ten-recipe MAIN batch Contract Gate
 
-**Status:** docs/data implementation contract gate  
-**Decision date:** 2026-10-03  
-**Issue:** #144  
-**Accepted base:** `da6d1e05fd44ecc2733e1a6f472eae3e54b60604` (merged PR #142)  
+**Status:** docs/data implementation contract gate
+**Decision date:** 2026-10-03
+**Issue:** #144
+**Accepted base:** `da6d1e05fd44ecc2733e1a6f472eae3e54b60604` (merged PR #142)
 **Runtime publication authorized before this gate merges:** no
 
 ## 1. Goal
