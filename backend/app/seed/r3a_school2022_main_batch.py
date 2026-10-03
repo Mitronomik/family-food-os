@@ -224,6 +224,10 @@ def _load_contract(
 
     selected_codes = tuple(row.get("canonical_code") for row in selected)
     selected_source_ids = tuple(row.get("source_recipe_id") for row in selected)
+    selected_by_code = {
+        row.get("canonical_code"): row
+        for row in selected
+    }
     recipe_source_ids = tuple(
         recipes[code].get("source_receipt", {}).get("source_recipe_id")
         for code in RECIPE_CODES
@@ -316,7 +320,7 @@ def _load_contract(
             or prepared.get("source_recipe_id") != source_id
             or prepared.get("source_document_sha256") != SOURCE_PDF_SHA256
             or prepared.get("expected_available_amounts", ())[:1]
-            != [["ENERGY_KCAL", selection[RECIPE_CODES.index(code)]["prepared_energy_kcal"]]]
+            != [["ENERGY_KCAL", selected_by_code[code]["prepared_energy_kcal"]]]
             or tuple(prepared.get("expected_unknown_codes", ())) != expected_unknown
             or prepared.get("require_recipe_inactive") is not True
         ):
