@@ -13,14 +13,6 @@
       "composition": null
     },
     {
-      "canonical_code": "CHICKEN_BREAST_FILLET_RAW",
-      "canonical_name": "Куриная грудка, филе сырое",
-      "category_code": "poultry",
-      "default_unit": "g",
-      "nutrition_profile": null,
-      "composition": null
-    },
-    {
       "canonical_code": "CHEESE_SEMI_HARD_UNSPECIFIED",
       "canonical_name": "Сыр полутвердый, вид не уточнён",
       "category_code": "dairy",
@@ -43,6 +35,14 @@
       "default_unit": "g",
       "nutrition_profile": null,
       "composition": null
+    },
+    {
+      "canonical_code": "WHEAT_BREAD_STALE_UNSPECIFIED_GRADE",
+      "canonical_name": "Хлеб пшеничный черствый, сорт муки не уточнён",
+      "category_code": "grains",
+      "default_unit": "g",
+      "nutrition_profile": null,
+      "composition": null
     }
   ],
   "decisions": [
@@ -51,12 +51,6 @@
       "canonical_code": "COD_FILLET_RAW",
       "decision": "CREATE_IDENTITY_ONLY",
       "basis": "Exact School2022 species/form label; no generic fish or whole-fish equivalence."
-    },
-    {
-      "source_label": "куриная грудка (филе)",
-      "canonical_code": "CHICKEN_BREAST_FILLET_RAW",
-      "decision": "CREATE_IDENTITY_ONLY",
-      "basis": "Exact breast-fillet form; do not narrow to whole chicken category identity."
     },
     {
       "source_label": "сыр полутвердый",
@@ -95,12 +89,6 @@
       "basis": "Fish cutlet cards/process do not establish stale/high-grade subtype."
     },
     {
-      "source_label": "пшеничный черствый хлеб",
-      "canonical_code": "WHEAT_BREAD_HIGH_GRADE_STALE",
-      "decision": "REUSE_FOR_CHICKEN_AND_BEEF_MEATBALLS",
-      "basis": "Source process explicitly pins stale wheat bread; accepted R1-G identity carries high-grade process qualifier."
-    },
-    {
       "source_label": "горбуша (филе)",
       "canonical_code": "PINK_SALMON_FILLET_RAW",
       "decision": "REUSE_ACCEPTED_IDENTITY"
@@ -114,6 +102,12 @@
       "source_label": "говядина 1 категории",
       "canonical_code": "BEEF_CATEGORY_1_RAW",
       "decision": "REUSE_ACCEPTED_IDENTITY"
+    },
+    {
+      "source_label": "хлеб пшеничный + process qualifier 'черствый'",
+      "canonical_code": "WHEAT_BREAD_STALE_UNSPECIFIED_GRADE",
+      "decision": "CREATE_IDENTITY_ONLY",
+      "basis": "R3-A meat-card process establishes stale wheat bread but does not establish flour grade; high-grade narrowing is forbidden."
     }
   ],
   "invariant": "Identity-only publication grants no NutritionProfile or Composition authority. Prepared-output recipe authority remains the only Nutrition path for this batch."
