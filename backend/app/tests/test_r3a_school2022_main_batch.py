@@ -205,9 +205,7 @@ def create_dinner_household(households, meal_plans):
         member_id=member.id,
         source_kind=MemberMealPatternSourceKind.CUSTOM,
         schedule={weekday: (MealRole.DINNER,) for weekday in range(1, 8)},
-        energy_shares={
-            weekday: (Decimal("0.35"),) for weekday in range(1, 8)
-        },
+        energy_shares={weekday: (Decimal("0.35"),) for weekday in range(1, 8)},
     )
     return household, member, selection
 
@@ -220,7 +218,9 @@ def test_r3a_fresh_publication_and_batch_activation(database):
     assert result.publication.identity_food_existing == 0
     assert result.activation_changed is True
     assert result.active_recipe_codes == RECIPE_CODES
-    assert tuple(code for code, _ in result.publication.recipe_version_ids) == RECIPE_CODES
+    assert (
+        tuple(code for code, _ in result.publication.recipe_version_ids) == RECIPE_CODES
+    )
     assert all(
         disposition == "FRESH"
         for _code, disposition in result.publication.authority_dispositions
@@ -271,7 +271,10 @@ def test_r3a_fresh_publication_and_batch_activation(database):
             ).fetchone()
             assert row == (code, 0, 0)
 
-    assert migrations.expected_migration_ids()[-1] == "0042_recipe_prepared_output_nutrition"
+    assert (
+        migrations.expected_migration_ids()[-1]
+        == "0042_recipe_prepared_output_nutrition"
+    )
 
 
 def test_r3a_publication_phase_keeps_all_recipes_inactive(database):
