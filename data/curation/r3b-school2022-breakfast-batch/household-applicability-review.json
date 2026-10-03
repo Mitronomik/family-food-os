@@ -88,24 +88,6 @@
       "rationale": "Core source-defined preparation is ordinary household breakfast cooking; institutional logistics are provenance-only and do not alter quantities/output/Nutrition authority."
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-3т",
-      "canonical_code": "SCHOOL2022_54_3T_CARROT_COTTAGE_CHEESE_SOUFFLE",
-      "decision": "REVIEWED_PASS",
-      "planner_role_review": "breakfast",
-      "specialized_medical_scope": false,
-      "consumer_steps": [
-        "Протереть творог.",
-        "Морковь протереть и припустить в молоке со сливочным маслом; постепенно всыпать манную крупу и варить 10–15 минут, затем охладить до 40–50 °C.",
-        "Соединить с творогом, яичными желтками, сметаной и йодированной солью; осторожно ввести взбитые белки.",
-        "Выложить в смазанную сливочным маслом (источник отдельно указывает 1/3 нормы для смазывания) и посыпанную сухарями форму и готовить на пару 30–50 минут.",
-        "Перед подачей полить растопленным сливочным маслом. Exact total butter is authoritative; unsupported internal gram split remains UNKNOWN."
-      ],
-      "quarantined_context": [
-        "institutional serving-temperature rule"
-      ],
-      "rationale": "Core source-defined preparation is ordinary household breakfast cooking; institutional logistics are provenance-only and do not alter quantities/output/Nutrition authority."
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-1к",
       "canonical_code": "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
       "decision": "REVIEWED_PASS",
@@ -120,6 +102,22 @@
         "institutional serving-temperature rule"
       ],
       "rationale": "Core source-defined preparation is ordinary household breakfast cooking; institutional logistics are provenance-only and do not alter quantities/output/Nutrition authority."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2к",
+      "canonical_code": "SCHOOL2022_54_2K_VISCOUS_CORN_MILK_PORRIDGE",
+      "decision": "REVIEWED_PASS",
+      "planner_role_review": "breakfast",
+      "specialized_medical_scope": false,
+      "consumer_steps": [
+        "Перебрать и промыть кукурузную крупу, несколько раз меняя воду.",
+        "Засыпать крупу в кипящую воду и варить при слабом кипении, помешивая; через 15–20 минут добавить горячее молоко, йодированную соль и сахар.",
+        "За 2–3 минуты до готовности добавить растопленное сливочное масло, перемешать и упарить под закрытой крышкой."
+      ],
+      "quarantined_context": [
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Core source-defined preparation is ordinary household breakfast cooking; unquantified washing/scalding water is preparation context and does not alter quantified RecipeIngredient truth."
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-6к",
@@ -155,22 +153,6 @@
       "rationale": "Core source-defined preparation is ordinary household breakfast cooking; institutional logistics are provenance-only and do not alter quantities/output/Nutrition authority."
     },
     {
-      "source_recipe_id": "ru-school2022:recipe:54-21к",
-      "canonical_code": "SCHOOL2022_54_21K_BARLEY_MILK_PORRIDGE",
-      "decision": "REVIEWED_PASS",
-      "planner_role_review": "breakfast",
-      "specialized_medical_scope": false,
-      "consumer_steps": [
-        "Перебрать ячневую крупу, промыть сначала тёплой, затем горячей водой.",
-        "Всыпать крупу в кипящую воду, добавить йодированную соль и варить, периодически помешивая, до загустения; затем влить кипящее молоко и продолжить варку.",
-        "За 2–3 минуты до готовности добавить растопленное сливочное масло, перемешать и упарить под закрытой крышкой."
-      ],
-      "quarantined_context": [
-        "institutional serving-temperature rule"
-      ],
-      "rationale": "Core source-defined preparation is ordinary household breakfast cooking; institutional logistics are provenance-only and do not alter quantities/output/Nutrition authority."
-    },
-    {
       "source_recipe_id": "ru-school2022:recipe:54-23к",
       "canonical_code": "SCHOOL2022_54_23K_LIQUID_WHEAT_MILK_PORRIDGE",
       "decision": "REVIEWED_PASS",
@@ -185,6 +167,23 @@
         "institutional serving-temperature rule"
       ],
       "rationale": "Core source-defined preparation is ordinary household breakfast cooking; institutional logistics are provenance-only and do not alter quantities/output/Nutrition authority."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-24к",
+      "canonical_code": "SCHOOL2022_54_24K_LIQUID_MILLET_MILK_PORRIDGE",
+      "decision": "REVIEWED_PASS",
+      "planner_role_review": "breakfast",
+      "specialized_medical_scope": false,
+      "consumer_steps": [
+        "Перебрать пшенную крупу; многократно промыть в холодной, затем тёплой воде до прозрачности воды. Промывочная и ошпаривающая вода не является quantified RecipeIngredient authority.",
+        "Крупу залить кипящей водой, через 1 минуту воду слить; снова залить кипящей водой, довести до кипения, варить 2–5 минут и воду слить.",
+        "Залить кипящей водой по расчёту рецептуры (exact WATER=52 g) и варить до загустения; влить кипящее молоко, добавить йодированную соль и сахар и продолжить варку.",
+        "За 2–3 минуты до готовности добавить растопленное сливочное масло, тщательно перемешать и упарить на водяной бане под закрытой крышкой."
+      ],
+      "quarantined_context": [
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Core source-defined preparation is ordinary household breakfast cooking; unquantified washing/scalding water is preparation context and does not alter quantified RecipeIngredient truth."
     }
   ]
 }
