@@ -1,58 +1,46 @@
 # Handoff
 
-## R2-F cheese-sandwich resilience Contract Gate — blockers fixed — 2026-10-03
+## R2-F cheese-sandwich Contract Gate — provenance correction — 2026-10-03
 
 Accepted main:
-`561c13aad6ce978de399dfd807071232af06b71c` (merged PR #138).
+`561c13aad6ce978de399dfd807071232af06b71c`.
 
 Issue #139 / branch `docs/r2f-sandwich-resilience-gate`.
 
 Read first:
 `docs/family-food/r2f-sandwich-resilience-gate.md`.
 
-Selected future runtime candidate is now exactly:
-
+Selected runtime candidate:
 `SAD28_SANDWICH_CHEESE_20_10`.
 
-Do **not** publish `SAD28_SANDWICH_BUTTER_25_5`: it failed component-consistency
-review because 5 g cream butter implies at least 2.5 g fat under TR TS 033/2013,
-while the source declares only 0.98 g fat for the whole sandwich.
+Do not publish the rejected butter candidate.
 
-Create identity-only only:
-`WHEAT_BREAD_PLAIN`, `CHEESE_UNSPECIFIED`.
+Future RecipeVersion source document:
 
-Retained publication source:
 `data/curation/r2f-sandwich-resilience/raw-cheese-card.txt`
+
 SHA-256 `77bc74917305adb0d4fee7a54910c9675068b1ec093a051f7c58bd34cc7dd27c`, 1783 bytes.
 
 Durable Library:
-`library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt` / `libfile_baff1ee2870081918170b98d1cec3c5d`.
+`library:/FamilyFoodOS/source-artifacts/sad28-cheese-card-raw-text-2026-10-03.txt`
+Library file id: `libfile_baff1ee2870081918170b98d1cec3c5d`.
 
-SAD28 is host only; issuer is `NOT_ESTABLISHED_FROM_RETAINED_CARD`; upstream
-recipe collection is Kutkina 2008.
+Library materialize/readback verification is PASS.
 
-Runtime must not use live web/PDF bytes as source truth. Future expansion of the
-source family requires reacquisition and separate review.
+Provenance roles:
 
-Projected hard exact-`MILK_2_5` pool after runtime:
-3 candidates × repetition 3 = capacity 9, enough for seven BREAKFAST
-opportunities. Planner mapping stays unchanged.
+- SAD28 = official host only;
+- card issuer = `NOT_ESTABLISHED_FROM_RETAINED_CARD`;
+- upstream collection = Kutkina 2008.
 
-Corrected evidence freeze:
-`c84fcffad9aa2d3f093db216f7cc8d1bf9ab48bf`.
+Do not replace the raw-card source with live web/PDF data. The upstream PDF is
+corroboration/discovery only. Future source-family expansion requires reacquisition
+and a new review.
 
-Verification:
-- R2-F JSON/contract consistency — PASS;
-- butter rejection and two identity-only foods — PASS;
-- retained source tuple coherence — PASS;
-- capacity 9 — PASS;
-- Docs #811 — SUCCESS;
-- DC1 #668 — SUCCESS.
+Projected hard exact-`MILK_2_5` capacity remains 9/week.
 
 Status:
 `SOURCE_PROVENANCE_CORRECTION_VERIFICATION_PENDING`.
-
-Do not start runtime publication before independent final review and merge.
 
 ## R2-E cottage casserole runtime review-ready — 2026-10-03
 
