@@ -45,8 +45,9 @@
       "meat_free_main": 6,
       "exact_beef_unaffected": 19,
       "exact_beef_capacity": 57,
-      "gap_to_50": -1,
-      "next_planned_operation": "DC4_CORPUS_READINESS_AUDIT_AND_GATE1_CONSUMPTION"
+      "gap_to_50": 0,
+      "next_planned_operation": "DC4_CORPUS_READINESS_AUDIT_AND_GATE1_CONSUMPTION",
+      "surplus_over_50": 1
     },
     "py_compile": "PASS",
     "ruff_check": "PASS",

@@ -688,7 +688,8 @@ def validate_gate(repo_root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
         "projected_meat_free_main": projected_meat_free,
         "projected_beef_unaffected": projected_beef_unaffected,
         "projected_beef_capacity": projected_beef_unaffected * max_repetitions,
-        "gap_to_50": 50 - projected_total,
+        "gap_to_50": max(0, 50 - projected_total),
+        "surplus_over_50": max(0, projected_total - 50),
         "dc4_next": True,
         **source_stats,
     }
