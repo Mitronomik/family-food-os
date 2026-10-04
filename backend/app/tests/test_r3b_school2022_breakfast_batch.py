@@ -548,26 +548,16 @@ def test_r3b_hard_milk_exclusion_rejects_all_batch_and_preserves_capacity_nine(
         assert detail is not None
         assert detail.member_selections[0].selection_id == selection.selection.id
 
-        admissions = tuple(planner.compose_candidate_admission())
-        admission_by_code = {row.canonical_code: row for row in admissions}
-
-        for code in RECIPE_CODES:
-            assert code in admission_by_code
-            assert (
-                PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT
-                in admission_by_code[code].rejection_codes
-            )
-            assert admission_by_code[code].eligible is False
-
+        relevant_codes = set(RECIPE_CODES) | set(MILK_UNAFFECTED_BREAKFAST_CODES)
+        admissions = {
+            row.recipe_version_id: row
+            for row in planner.compose_candidate_admission()
+            if row.canonical_code in relevant_codes
+        }
         selected = Counter(
-            admission_by_code[event.recipe_version_id].canonical_code
-            if event.recipe_version_id in {
-                row.recipe_version_id for row in admissions
-            }
-            else None
+            admissions[event.recipe_version_id].canonical_code
             for event in result.events
         )
-        selected.pop(None, None)
 
         assert set(selected) == set(MILK_UNAFFECTED_BREAKFAST_CODES)
         assert sum(selected.values()) == 7
@@ -578,10 +568,41 @@ def test_r3b_hard_milk_exclusion_rejects_all_batch_and_preserves_capacity_nine(
         assert len(persisted.events) == 7
         assert len(persisted.servings) == 7
 
-        r3b_version_ids = {
-            catalogue.get_current_verified(catalogue.get_by_code(code).id).version.id
-            for code in RECIPE_CODES
+        versions = {
+            code: catalogue.get_current_verified(
+                catalogue.get_by_code(code).id
+            ).version.id
+            for code in relevant_codes
         }
-        assert all(event.recipe_version_id not in r3b_version_ids for event in result.events)
+        for code in RECIPE_CODES:
+            traces = [
+                row
+                for row in result.trace.candidates
+                if row.recipe_version_id == versions[code]
+            ]
+            assert traces
+            assert any(
+                PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT
+                in row.rejection_codes
+                for row in traces
+            )
+
+        for code in MILK_UNAFFECTED_BREAKFAST_CODES:
+            traces = [
+                row
+                for row in result.trace.candidates
+                if row.recipe_version_id == versions[code]
+            ]
+            assert traces
+            assert all(
+                PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT
+                not in row.rejection_codes
+                for row in traces
+            )
+
+        r3b_version_ids = {versions[code] for code in RECIPE_CODES}
+        assert all(
+            event.recipe_version_id not in r3b_version_ids for event in result.events
+        )
     finally:
         engine.dispose()
