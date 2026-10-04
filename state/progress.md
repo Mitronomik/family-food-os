@@ -1,27 +1,52 @@
 # Progress
 
-## R3-C runtime — implementation active — 2026-10-04
+## R3-C runtime — review-ready — 2026-10-04
 
 Accepted base:
 `3c5740b319e453715c5a58f5b65e6d216b7c4fdb` (merged PR #154).
 
-Issue #155 / branch `feat/r3c-school2022-main-batch-runtime`.
+Issue #155 / PR #156 / branch `feat/r3c-school2022-main-batch-runtime`.
 
-Authorized scope:
+Runtime freeze:
+`c9e985eaad876fbc66519488d995d6e65975308a`.
 
-- exactly 8 frozen MAIN RecipeVersions;
-- exactly 1 new identity-only FoodIngredient: `ATLANTIC_SALMON_FILLET_RAW`;
-- PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1;
-- R3-A/R3-B option-B publication/activation semantics;
-- no migration/schema/Planner/new-authority change.
+Outcome:
 
-Implementation currently adds the bounded R3-C seed/publication module, focused
-runtime/adversarial tests and dedicated runtime workflow. Final verification and
-review-ready freeze are still pending.
+- 1 identity-only FoodIngredient: `ATLANTIC_SALMON_FILLET_RAW`, no Nutrition/Vector/Composition authority;
+- 8 immutable SOURCE_VERIFIED MAIN RecipeVersions;
+- exact prepared ENERGY_KCAL + 53 UNKNOWN per recipe;
+- per-recipe atomic/resumable inactive publication;
+- one-UoW full-batch activation;
+- exact replay / deliberate-deactivation / mixed-state fail-closed semantics;
+- package tamper / partial state / identity conflict / wrong-energy rejection;
+- Russian-only persisted consumer steps;
+- `54-30м` steam-only 15–20 minute branch preserved;
+- hard MILK_2_5 breakfast resilience preserved at 3 candidates / capacity 9;
+- post-R3C exact-beef resilience = 12/23 dependent, 11 unaffected / capacity 33;
+- exact-energy catalogue 33 -> 41; MAIN 15 -> 23; gap-to-50 = 9;
+- DC4 remains BLOCKED;
+- no schema/migration/Planner/new-authority change.
 
-Status: `IMPLEMENTATION_ACTIVE`.
+Exact runtime-freeze verification:
+
+- R3-C #37202224299 SUCCESS — 22/22 focused/adversarial tests;
+- Gate #37202224233 / Docs #37202224257 / DC1 #37202224207 SUCCESS;
+- R1-C #37202224245, R2 #37202224250, R2-B #37202224294,
+  R2-C #37202224239, R2-E #37202224235, R2-F #37202224202 SUCCESS;
+- R3-A #37202224232 / R3-B #37202224209 SUCCESS;
+- Russian methodologies #37202224243 SUCCESS;
+- Nutrient registry V2 #37202224305 SUCCESS including full backend/launcher regression;
+- Partial nutrition profiles #37202224282 SUCCESS including full backend/launcher regression;
+- Ruff check/format and scope/whitespace PASS;
+- migration head 0042; AI disabled.
+
+Status: `READY_FOR_FINAL_REVIEW`.
+
+Stop for independent review. Do not merge autonomously. After merge, reassess
+DC3 catalogue readiness; do not start DC4/PR9 automatically.
 
 ---
+
 
 ## R3-C Contract Gate — implementation active — 2026-10-04
 
