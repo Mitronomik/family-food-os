@@ -300,7 +300,7 @@ def verify_mr_nutrition_row(card: dict[str, Any], frozen: dict[str, Any]) -> Non
     normalized = [normalize_number(line) for line in raw_lines[start:]]
     found = any(
         normalized[i : i + 5] == expected
-        for i in range(0, max(0, len(normalized) - 4))
+        for i in range(max(0, len(normalized) - 4))
     )
     require(found, f"MR 12+ output/macros/ENERGY row mismatch: {card['source_card_code']}")
 
@@ -436,10 +436,10 @@ def validate_gate(repo_root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
         1 for row in selected if BEEF_CODE in {i["food_code"] for i in row["ingredients"]}
     )
     selected_fish = sum(
-        1 for row in selected if set(i["food_code"] for i in row["ingredients"]) & FISH_CODES
+        1 for row in selected if {i["food_code"] for i in row["ingredients"]} & FISH_CODES
     )
     selected_chicken = sum(
-        1 for row in selected if set(i["food_code"] for i in row["ingredients"]) & CHICKEN_CODES
+        1 for row in selected if {i["food_code"] for i in row["ingredients"]} & CHICKEN_CODES
     )
     selected_meat_free = len(selected) - selected_beef - selected_fish - selected_chicken
     require(
