@@ -292,9 +292,7 @@ def _load_contract(
     current = summary.get("current_repository_truth")
     projected = summary.get("projected_after_future_runtime")
     milk = summary.get("hard_exclusion_resilience", {}).get("MILK_2_5")
-    beef = summary.get("hard_exclusion_resilience", {}).get(
-        "main_dependency_analysis"
-    )
+    beef = summary.get("hard_exclusion_resilience", {}).get("main_dependency_analysis")
     if (
         not isinstance(current, dict)
         or current.get("dc3_active_exact_energy_count") != 33
@@ -361,10 +359,7 @@ def _identity_seeds(
 
 
 def _source_amount_text(row: dict[str, Any]) -> str:
-    return (
-        f"{row['source_label']}: брутто {row['gross_g']} г; "
-        f"нетто {row['net_g']} г"
-    )
+    return f"{row['source_label']}: брутто {row['gross_g']} г; нетто {row['net_g']} г"
 
 
 def _recipe_seed(
@@ -483,8 +478,7 @@ def _recipe_seeds_and_specs(
     rows = frozen["selected"]
     seeds = tuple(_recipe_seed(row, source) for row in rows)
     specs = tuple(
-        _prepared_spec(row, source, seed)
-        for row, seed in zip(rows, seeds, strict=True)
+        _prepared_spec(row, source, seed) for row, seed in zip(rows, seeds, strict=True)
     )
     return seeds, specs
 
