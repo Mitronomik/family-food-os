@@ -295,7 +295,31 @@
       "process_binding_receipt": {
         "status": "PASS_EXPLICIT_RATIO_BINDING",
         "fat": "BUTTER_PEASANT_72_5_UNSALTED",
-        "rule": "Exact 5 g butter total is authoritative. Source explicitly places one half on the tray and the other half as melted finishing butter; runtime need not persist per-step grams."
+        "rule": "Exact 5 g butter total is authoritative. Source explicitly places one half on the tray and the other half as melted finishing butter; runtime need not persist per-step grams.",
+        "source_branch_selection": {
+          "selected_process_branch": "OVEN_BAKE_180_200C_8_10_MIN",
+          "selected_branch_description_ru": "Запекание в форме при 180–200 °C в течение 8–10 минут.",
+          "non_selected_source_branches": [
+            {
+              "code": "STEAM_25_30_MIN",
+              "description_ru": "Альтернативное приготовление омлета на пару в течение 25–30 минут.",
+              "disposition": "NOT_PUBLISHED_IN_THIS_RECIPE_VERSION"
+            }
+          ],
+          "rule": "R3-B publishes only the oven-baked source branch. The alternative steam branch remains source provenance and is not silently merged into this RecipeVersion."
+        }
+      },
+      "source_branch_selection": {
+        "selected_process_branch": "OVEN_BAKE_180_200C_8_10_MIN",
+        "selected_branch_description_ru": "Запекание в форме при 180–200 °C в течение 8–10 минут.",
+        "non_selected_source_branches": [
+          {
+            "code": "STEAM_25_30_MIN",
+            "description_ru": "Альтернативное приготовление омлета на пару в течение 25–30 минут.",
+            "disposition": "NOT_PUBLISHED_IN_THIS_RECIPE_VERSION"
+          }
+        ],
+        "rule": "R3-B publishes only the oven-baked source branch. The alternative steam branch remains source provenance and is not silently merged into this RecipeVersion."
       }
     },
     "SCHOOL2022_54_3O_CARROT_OMELET": {
@@ -475,7 +499,31 @@
       "process_binding_receipt": {
         "status": "PASS_EXPLICIT_RATIO_BINDING",
         "fat": "BUTTER_PEASANT_72_5_UNSALTED",
-        "rule": "Exact 9.7 g butter total is authoritative. Source explicitly places one half on the tray and the other half as melted finishing butter; runtime need not persist per-step grams."
+        "rule": "Exact 9.7 g butter total is authoritative. Source explicitly places one half on the tray and the other half as melted finishing butter; runtime need not persist per-step grams.",
+        "source_branch_selection": {
+          "selected_process_branch": "OVEN_BAKE_180_200C_8_10_MIN",
+          "selected_branch_description_ru": "Запекание в форме при 180–200 °C в течение 8–10 минут.",
+          "non_selected_source_branches": [
+            {
+              "code": "STEAM_25_30_MIN",
+              "description_ru": "Альтернативное приготовление омлета на пару в течение 25–30 минут.",
+              "disposition": "NOT_PUBLISHED_IN_THIS_RECIPE_VERSION"
+            }
+          ],
+          "rule": "R3-B publishes only the oven-baked source branch. The alternative steam branch remains source provenance and is not silently merged into this RecipeVersion."
+        }
+      },
+      "source_branch_selection": {
+        "selected_process_branch": "OVEN_BAKE_180_200C_8_10_MIN",
+        "selected_branch_description_ru": "Запекание в форме при 180–200 °C в течение 8–10 минут.",
+        "non_selected_source_branches": [
+          {
+            "code": "STEAM_25_30_MIN",
+            "description_ru": "Альтернативное приготовление омлета на пару в течение 25–30 минут.",
+            "disposition": "NOT_PUBLISHED_IN_THIS_RECIPE_VERSION"
+          }
+        ],
+        "rule": "R3-B publishes only the oven-baked source branch. The alternative steam branch remains source provenance and is not silently merged into this RecipeVersion."
       }
     },
     "SCHOOL2022_54_4O_SEMI_HARD_CHEESE_OMELET": {
@@ -655,7 +703,31 @@
       "process_binding_receipt": {
         "status": "PASS_EXPLICIT_RATIO_BINDING",
         "fat": "BUTTER_PEASANT_72_5_UNSALTED",
-        "rule": "Exact 10.7 g butter total is authoritative. Source explicitly places one half on the tray and the other half as melted finishing butter; runtime need not persist per-step grams."
+        "rule": "Exact 10.7 g butter total is authoritative. Source explicitly places one half on the tray and the other half as melted finishing butter; runtime need not persist per-step grams.",
+        "source_branch_selection": {
+          "selected_process_branch": "OVEN_BAKE_180_200C_8_10_MIN",
+          "selected_branch_description_ru": "Запекание в форме при 180–200 °C в течение 8–10 минут.",
+          "non_selected_source_branches": [
+            {
+              "code": "STEAM_25_30_MIN",
+              "description_ru": "Альтернативное приготовление омлета на пару в течение 25–30 минут.",
+              "disposition": "NOT_PUBLISHED_IN_THIS_RECIPE_VERSION"
+            }
+          ],
+          "rule": "R3-B publishes only the oven-baked source branch. The alternative steam branch remains source provenance and is not silently merged into this RecipeVersion."
+        }
+      },
+      "source_branch_selection": {
+        "selected_process_branch": "OVEN_BAKE_180_200C_8_10_MIN",
+        "selected_branch_description_ru": "Запекание в форме при 180–200 °C в течение 8–10 минут.",
+        "non_selected_source_branches": [
+          {
+            "code": "STEAM_25_30_MIN",
+            "description_ru": "Альтернативное приготовление омлета на пару в течение 25–30 минут.",
+            "disposition": "NOT_PUBLISHED_IN_THIS_RECIPE_VERSION"
+          }
+        ],
+        "rule": "R3-B publishes only the oven-baked source branch. The alternative steam branch remains source provenance and is not silently merged into this RecipeVersion."
       }
     },
     "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE": {
@@ -1748,7 +1820,7 @@
             }
           ],
           "steps": [
-            "Засыпать пшеничную крупу в кипящую воду и варить 20–30 минут; лишнюю воду слить. Источник фиксирует 68 г воды как точный вход, но не даёт authority для retained-water/yield inference.",
+            "Засыпать пшеничную крупу в кипящую воду и варить 20–30 минут; лишнюю воду слить. Источник фиксирует 68 г воды как точный вход рецептуры; количество воды, оставшееся после варки и слива, источник не устанавливает.",
             "Добавить предварительно доведённое до кипения молоко, йодированную соль и сахар и варить до загустения; затем упарить на водяной бане под плотно закрытой крышкой.",
             "За 2–3 минуты до готовности добавить растопленное сливочное масло и тщательно перемешать."
           ],
@@ -1937,9 +2009,9 @@
             }
           ],
           "steps": [
-            "Перебрать пшенную крупу; многократно промыть в холодной, затем тёплой воде до прозрачности воды. Промывочная и ошпаривающая вода не является quantified RecipeIngredient authority.",
+            "Перебрать пшенную крупу; многократно промыть в холодной, затем тёплой воде до прозрачности воды. Вода для промывания и ошпаривания является технологическим ресурсом и не входит в 52 г воды, заданные рецептурой.",
             "Крупу залить кипящей водой, через 1 минуту воду слить; снова залить кипящей водой, довести до кипения, варить 2–5 минут и воду слить.",
-            "Залить кипящей водой по расчёту рецептуры (exact WATER=52 g) и варить до загустения; влить кипящее молоко, добавить йодированную соль и сахар и продолжить варку.",
+            "Залить 52 г кипящей воды по расчёту рецептуры и варить до загустения; влить кипящее молоко, добавить йодированную соль и сахар и продолжить варку.",
             "За 2–3 минуты до готовности добавить растопленное сливочное масло, тщательно перемешать и упарить на водяной бане под закрытой крышкой."
           ],
           "equipment_codes": [],
@@ -2040,7 +2112,9 @@
     "implicit_food_identity_narrowing_allowed": false,
     "partial_inactive_batch_publication_allowed": true,
     "batch_activation_atomic": true,
-    "reuse_merged_r3a_batch_activation_seam": true
+    "reuse_merged_r3a_batch_activation_seam": true,
+    "hard_milk_exclusion_acceptance_required": true,
+    "hard_milk_exclusion_food_code": "MILK_2_5"
   },
   "batch_transaction_semantics": {
     "publication": {
