@@ -27,6 +27,23 @@ Projected exact-energy Planner-supported catalogue:
 The lower DATA-CORPUS-V1 baseline is crossed with a one-recipe buffer. R3-D is
 therefore the **last planned DC3 expansion batch** before DC4.
 
+## Full source-row partition
+
+For every selected MR card, validator coverage is bidirectional:
+
+```text
+complete 12+ source table
+==
+ingredients
++ source_intermediates
++ explicitly not-selected source_alternative_rows
+```
+
+The comparison is multiset-exact. Intermediate labels remain source-exact and
+carry separate semantic roles. Branch selections reference exact source
+row/quantity bindings, and every frozen `source_page_url` must equal the
+card-specific URL in the retained MR bundle.
+
 ## Household + Nutrition contract
 
 All ten selected recipes are frozen with `household_applicability=REVIEWED_PASS`
@@ -56,8 +73,7 @@ chicken = 23 MAIN. The projected R3-D mix becomes:
 
 Thus beef/fish concentration moves from `21/23` to `23/33`.
 
-The hard exact-`MILK_2_5` breakfast path is **not improved** by R3-D. The gate
-reviewed retained School2022/MR candidates and found no additional source-clean
+The hard exact-`MILK_2_5` breakfast path is **not improved** by R3-D. Within the explicitly reviewed source families School2022 and `RU_MR_2_4_0162_19`, the gate found no additional source-clean
 in-scope breakfast-compatible candidate that could be published without hiding
 process/quantity defects. The accepted unaffected set therefore remains 3,
 capacity 9. This is retained as an explicit limitation, not converted into a

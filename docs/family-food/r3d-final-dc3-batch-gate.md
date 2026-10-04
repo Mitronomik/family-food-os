@@ -112,7 +112,7 @@ than another cutlet/meatball duplicate.
 
 R3-D does **not** claim to improve the hard exact-`MILK_2_5` breakfast path.
 
-The retained source review found no additional source-clean in-scope candidate:
+Within the explicitly reviewed retained source families `RU_MR_2_4_0162_19` and School2022, no additional source-clean in-scope candidate was found:
 
 - School2022 `54-3т`: quantified sugar not placed in technology;
 - `54-4т` / `54-6т`: vanillin requires unquantified hot water;
@@ -195,6 +195,39 @@ and energy row against the frozen package.
 The private School2022 corpus archive is used only to reproduce the rejected
 milk-free-breakfast candidate audit. No selected R3-D runtime recipe depends on
 that private archive.
+
+## 6.1 Source→frozen completeness contract
+
+For every selected MR card, the complete retained `12 лет и старше` source
+table is partitioned exactly once into:
+
+1. production `ingredients`;
+2. `source_intermediates`;
+3. explicitly not-selected `source_alternative_rows`.
+
+The validator compares these as a multiset against the complete source table.
+A source row cannot disappear merely because it is not a production
+RecipeIngredient, and the frozen package cannot add a row that does not exist in
+the retained card.
+
+Source labels are preserved exactly. Semantic interpretation is stored separately
+in fields such as `semantic_role`.
+
+Example: MR 2.11 keeps the exact source row
+
+`варка крупным куском — 50`
+
+and records its reviewed semantic role as `COOKED_MEAT_INTERMEDIATE`. It is
+not renamed to “Масса отварного мяса”.
+
+Branch decisions are bound to exact source row labels and 12+ quantities. Where
+the source has a separate alternative row (MR 2.11), the rejected row is retained
+explicitly as `NOT_SELECTED_ALTERNATIVE`. Where alternatives share one source
+row (MR 1.16 and 2.9), the exact combined source row is retained and the selected
+semantic option is frozen separately.
+
+Every selected recipe also pins the exact card-level `source_page_url` from the
+retained MR bundle; a generic Appendix-5 URL is not accepted as card provenance.
 
 ## 7. Identity-only FoodIngredients
 

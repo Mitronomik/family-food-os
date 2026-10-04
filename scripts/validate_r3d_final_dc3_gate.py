@@ -259,7 +259,7 @@ def derive_current_truth(
     )
 
 
-def parse_mr_12_plus(card: dict[str, Any]) -> tuple[dict[str, list[str]], str]:
+def parse_mr_12_plus(card: dict[str, Any]) -> tuple[list[tuple[str, str]], str]:
     raw = card["raw_card_text"]
     lines = [line.strip() for line in raw.splitlines() if line.strip()]
     try:
@@ -270,7 +270,7 @@ def parse_mr_12_plus(card: dict[str, Any]) -> tuple[dict[str, list[str]], str]:
             f"MR card table markers missing: {card['source_card_code']}"
         ) from exc
 
-    rows: dict[str, list[str]] = {}
+    rows: list[tuple[str, str]] = []
     index = start
     while index < end:
         require(
@@ -280,7 +280,7 @@ def parse_mr_12_plus(card: dict[str, Any]) -> tuple[dict[str, list[str]], str]:
         label = lines[index]
         values = lines[index + 1 : index + 4]
         require(len(values) == 3, f"MR ingredient quantities missing: {label}")
-        rows.setdefault(label, []).append(normalize_number(values[2]))
+        rows.append((label, normalize_number(values[2])))
         index += 4
     require(
         index == end, f"MR ingredient table shape changed: {card['source_card_code']}"
@@ -372,18 +372,143 @@ def validate_selected_source(
             recomputed == row["source_card_raw_sha256"],
             f"frozen MR card hash mismatch: {key}",
         )
+        require(
+            row.get("source_page_url") == card.get("source_page_url"),
+            f"frozen MR source_page_url mismatch: {key}",
+        )
+
         rows, output = parse_mr_12_plus(card)
         require(output == row["source_output_g"], f"MR output mismatch: {key}")
-        for ingredient in row["ingredients"]:
-            values = rows.get(ingredient["source_label"])
+        source_rows = Counter(rows)
+
+        ingredient_rows = Counter(
+            (
+                ingredient["source_label"],
+                normalize_number(ingredient["quantity_g"]),
+            )
+            for ingredient in row["ingredients"]
+        )
+
+        intermediate_rows = Counter()
+        for intermediate in row.get("source_intermediates", []):
             require(
-                values is not None,
-                f"MR source label missing: {key}: {ingredient['source_label']}",
+                isinstance(intermediate.get("semantic_role"), str)
+                and intermediate["semantic_role"].strip(),
+                f"source intermediate semantic_role missing: {key}: "
+                f"{intermediate.get('source_label')}",
+            )
+            intermediate_rows[
+                (
+                    intermediate["source_label"],
+                    normalize_number(intermediate["quantity_g"]),
+                )
+            ] += 1
+
+        alternative_rows = Counter()
+        for alternative in row.get("source_alternative_rows", []):
+            require(
+                alternative.get("disposition") == "NOT_SELECTED_ALTERNATIVE",
+                f"source alternative disposition invalid: {key}: "
+                f"{alternative.get('source_label')}",
             )
             require(
-                ingredient["quantity_g"] in values,
-                f"MR source quantity mismatch: {key}: {ingredient['source_label']}",
+                isinstance(alternative.get("semantic_role"), str)
+                and alternative["semantic_role"].strip(),
+                f"source alternative semantic_role missing: {key}: "
+                f"{alternative.get('source_label')}",
             )
+            require(
+                isinstance(alternative.get("reason"), str)
+                and alternative["reason"].strip(),
+                f"source alternative reason missing: {key}: "
+                f"{alternative.get('source_label')}",
+            )
+            alternative_rows[
+                (
+                    alternative["source_label"],
+                    normalize_number(alternative["quantity_g"]),
+                )
+            ] += 1
+
+        frozen_partition = ingredient_rows + intermediate_rows + alternative_rows
+        missing_rows = source_rows - frozen_partition
+        extra_rows = frozen_partition - source_rows
+        require(
+            not missing_rows and not extra_rows,
+            "MR source→frozen partition mismatch: "
+            f"{key}: missing={dict(missing_rows)} extra={dict(extra_rows)}",
+        )
+
+        branch = row.get("source_branch_selection")
+        if branch is not None:
+            require(isinstance(branch, dict), f"source branch shape invalid: {key}")
+            require(
+                branch.get("selection_kind")
+                in {
+                    "SOURCE_ROW_ALTERNATIVE",
+                    "WITHIN_SOURCE_ROW_SEMANTIC_OPTION",
+                    "PROCESS_ALTERNATIVE_WITH_QUANTIFIED_SOURCE_ROW",
+                },
+                f"source branch selection_kind invalid: {key}",
+            )
+            selected_branch_rows = Counter(
+                (
+                    item["source_label"],
+                    normalize_number(item["quantity_g"]),
+                )
+                for item in branch.get("selected_source_rows", [])
+            )
+            not_selected_branch_rows = Counter(
+                (
+                    item["source_label"],
+                    normalize_number(item["quantity_g"]),
+                )
+                for item in branch.get("not_selected_source_rows", [])
+            )
+            require(
+                selected_branch_rows,
+                f"source branch selected row binding missing: {key}",
+            )
+            require(
+                not (selected_branch_rows - source_rows),
+                f"source branch selected row not in source table: {key}",
+            )
+            require(
+                not (not_selected_branch_rows - source_rows),
+                f"source branch not-selected row not in source table: {key}",
+            )
+            require(
+                not (selected_branch_rows - ingredient_rows),
+                f"source branch selected row not bound to RecipeIngredient: {key}",
+            )
+            require(
+                not (not_selected_branch_rows - alternative_rows),
+                f"source branch not-selected row not bound to source alternative: {key}",
+            )
+            require(
+                isinstance(branch.get("selected_semantic_option"), str)
+                and branch["selected_semantic_option"].strip(),
+                f"source branch selected semantic option missing: {key}",
+            )
+            require(
+                isinstance(branch.get("not_selected_semantic_options"), list)
+                and branch["not_selected_semantic_options"]
+                and all(
+                    isinstance(item, str) and item.strip()
+                    for item in branch["not_selected_semantic_options"]
+                ),
+                f"source branch not-selected semantic options missing: {key}",
+            )
+            require(
+                isinstance(branch.get("rationale"), str)
+                and branch["rationale"].strip(),
+                f"source branch rationale missing: {key}",
+            )
+        elif alternative_rows:
+            raise ValidationError(
+                f"source alternative rows exist without branch selection: {key}"
+            )
+
         verify_mr_nutrition_row(card, row)
         technology = card.get("technology_text_ru")
         require(
@@ -396,6 +521,8 @@ def validate_selected_source(
         "mr_selected_cards_verified": len(selected),
         "mr_raw_card_hashes": f"{len(selected)}/{len(selected)}",
         "mr_output_energy_rows": f"{len(selected)}/{len(selected)}",
+        "mr_source_page_urls": f"{len(selected)}/{len(selected)}",
+        "mr_source_row_partitions": f"{len(selected)}/{len(selected)}",
     }
 
 

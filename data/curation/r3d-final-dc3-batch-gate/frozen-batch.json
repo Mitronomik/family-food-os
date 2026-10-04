@@ -128,7 +128,7 @@
       "source_section_code": "APPENDIX_5",
       "source_card_code": "1.2а",
       "source_card_raw_sha256": "b209172357918043f9f92d485a8967a71d41dbcfaf69609ecb3781af983b45a9",
-      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.2a/",
       "source_variant": "12_PLUS",
       "meal_type_code": "main",
       "source_output_g": "350",
@@ -207,7 +207,9 @@
         },
         "unknown_policy": "all other frozen nutrient codes UNKNOWN",
         "require_recipe_inactive": true
-      }
+      },
+      "source_intermediates": [],
+      "source_alternative_rows": []
     },
     {
       "canonical_code": "MR2019_1_3_LENINGRAD_RASSOLNIK_SOUR_CREAM",
@@ -215,7 +217,7 @@
       "source_section_code": "APPENDIX_5",
       "source_card_code": "1.3",
       "source_card_raw_sha256": "7ec1683c88891f405ce57390c944ef3f8a79f90fc6c97787ddcf406f5a8b89b2",
-      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.3/",
       "source_variant": "12_PLUS",
       "meal_type_code": "main",
       "source_output_g": "350",
@@ -305,6 +307,23 @@
         },
         "unknown_policy": "all other frozen nutrient codes UNKNOWN",
         "require_recipe_inactive": true
+      },
+      "source_intermediates": [],
+      "source_alternative_rows": [],
+      "source_branch_selection": {
+        "selection_kind": "PROCESS_ALTERNATIVE_WITH_QUANTIFIED_SOURCE_ROW",
+        "selected_source_rows": [
+          {
+            "source_label": "Вода питьевая",
+            "quantity_g": "315"
+          }
+        ],
+        "not_selected_source_rows": [],
+        "selected_semantic_option": "Вода питьевая",
+        "not_selected_semantic_options": [
+          "мясной бульон"
+        ],
+        "rationale": "The technology allows meat broth or water, while the 12+ source table quantifies only water. Freeze the quantified water branch; no broth RecipeIngredient is inferred."
       }
     },
     {
@@ -313,7 +332,7 @@
       "source_section_code": "APPENDIX_5",
       "source_card_code": "1.4",
       "source_card_raw_sha256": "40606e0739c6be7473058c50adff2ab7ba3da95ddc62d0547473a61b22da0e30",
-      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.4/",
       "source_variant": "12_PLUS",
       "meal_type_code": "main",
       "source_output_g": "350",
@@ -403,6 +422,23 @@
         },
         "unknown_policy": "all other frozen nutrient codes UNKNOWN",
         "require_recipe_inactive": true
+      },
+      "source_intermediates": [],
+      "source_alternative_rows": [],
+      "source_branch_selection": {
+        "selection_kind": "PROCESS_ALTERNATIVE_WITH_QUANTIFIED_SOURCE_ROW",
+        "selected_source_rows": [
+          {
+            "source_label": "Вода питьевая",
+            "quantity_g": "309"
+          }
+        ],
+        "not_selected_source_rows": [],
+        "selected_semantic_option": "Вода питьевая",
+        "not_selected_semantic_options": [
+          "мясной бульон"
+        ],
+        "rationale": "The technology allows meat broth or water, while the 12+ source table quantifies only water. Freeze the quantified water branch; no broth RecipeIngredient is inferred."
       }
     },
     {
@@ -411,7 +447,7 @@
       "source_section_code": "APPENDIX_5",
       "source_card_code": "1.16",
       "source_card_raw_sha256": "f4d70b7eb24de3fc10fd239ad6dcb2d7047c8e458541a0a1f8d6e15256ee8731",
-      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.16/",
       "source_variant": "12_PLUS",
       "meal_type_code": "main",
       "source_output_g": "350",
@@ -454,8 +490,19 @@
         }
       ],
       "source_branch_selection": {
-        "selected": "WATER",
-        "not_selected": "VEGETABLE_BROTH"
+        "selection_kind": "WITHIN_SOURCE_ROW_SEMANTIC_OPTION",
+        "selected_source_rows": [
+          {
+            "source_label": "Вода питьевая или отвар овощной",
+            "quantity_g": "230"
+          }
+        ],
+        "not_selected_source_rows": [],
+        "selected_semantic_option": "Вода питьевая",
+        "not_selected_semantic_options": [
+          "отвар овощной"
+        ],
+        "rationale": "The quantified source row is an either/or row. Freeze the water semantic option and map the exact row to WATER; vegetable broth is not published."
       },
       "process_binding": {
         "status": "PASS_SELECTED_WATER_BRANCH_EXACT_TOTAL_INTERNAL_SPLIT_UNKNOWN",
@@ -494,7 +541,9 @@
         },
         "unknown_policy": "all other frozen nutrient codes UNKNOWN",
         "require_recipe_inactive": true
-      }
+      },
+      "source_intermediates": [],
+      "source_alternative_rows": []
     },
     {
       "canonical_code": "MR2019_6_9_VERMICELLI_HARD_CHEESE",
@@ -502,7 +551,7 @@
       "source_section_code": "APPENDIX_5",
       "source_card_code": "6.9",
       "source_card_raw_sha256": "5386cfcbef7c64dbd4c09d5e6737def2cebd0e051bd313052adb1b4f04063b5c",
-      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/bliuda-iz-krup-i-makaronnykh/tekhnologicheskaia-karta-n-6.9/",
       "source_variant": "12_PLUS",
       "meal_type_code": "main",
       "source_output_g": "120",
@@ -569,7 +618,9 @@
         },
         "unknown_policy": "all other frozen nutrient codes UNKNOWN",
         "require_recipe_inactive": true
-      }
+      },
+      "source_intermediates": [],
+      "source_alternative_rows": []
     },
     {
       "canonical_code": "MR2019_6_19_BAKED_MACARONI_HARD_CHEESE",
@@ -577,7 +628,7 @@
       "source_section_code": "APPENDIX_5",
       "source_card_code": "6.19",
       "source_card_raw_sha256": "d6b6acab547af575ac10e74812dd1eec119fc839fbfc5baef047a593a4126ec4",
-      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/bliuda-iz-krup-i-makaronnykh/tekhnologicheskaia-karta-n-6.19/",
       "source_variant": "12_PLUS",
       "meal_type_code": "main",
       "source_output_g": "180",
@@ -645,7 +696,9 @@
         },
         "unknown_policy": "all other frozen nutrient codes UNKNOWN",
         "require_recipe_inactive": true
-      }
+      },
+      "source_intermediates": [],
+      "source_alternative_rows": []
     },
     {
       "canonical_code": "MR2019_2_15_STEAMED_CHICKEN_SOUFFLE",
@@ -653,7 +706,7 @@
       "source_section_code": "APPENDIX_5",
       "source_card_code": "2.15",
       "source_card_raw_sha256": "2526913820833b13f7cdc5d9b480b1dd8cda27104aba98792dda040a2f3d543a",
-      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/miasnye-bliuda/tekhnologicheskaia-karta-n-2.15/",
       "source_variant": "12_PLUS",
       "meal_type_code": "main",
       "source_output_g": "115",
@@ -693,11 +746,13 @@
       "source_intermediates": [
         {
           "source_label": "Масса вареной курицы",
-          "quantity_g": "80"
+          "quantity_g": "80",
+          "semantic_role": "COOKED_CHICKEN_INTERMEDIATE"
         },
         {
           "source_label": "Масса полуфабриката",
-          "quantity_g": "128"
+          "quantity_g": "128",
+          "semantic_role": "SEMIFINISHED_MASS"
         }
       ],
       "process_binding": {
@@ -736,7 +791,8 @@
         },
         "unknown_policy": "all other frozen nutrient codes UNKNOWN",
         "require_recipe_inactive": true
-      }
+      },
+      "source_alternative_rows": []
     },
     {
       "canonical_code": "MR2019_2_14_BOILED_CHICKEN_CATEGORY_1",
@@ -744,7 +800,7 @@
       "source_section_code": "APPENDIX_5",
       "source_card_code": "2.14",
       "source_card_raw_sha256": "6b5a0849d1ff302115045dd557096e4f52d17b14ebe67c90dd51603ac58fdcf6",
-      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/miasnye-bliuda/tekhnologicheskaia-karta-n-2.14/",
       "source_variant": "12_PLUS",
       "meal_type_code": "main",
       "source_output_g": "110",
@@ -769,7 +825,8 @@
       "source_intermediates": [
         {
           "source_label": "Масса отварной курицы",
-          "quantity_g": "110"
+          "quantity_g": "110",
+          "semantic_role": "COOKED_CHICKEN_INTERMEDIATE"
         }
       ],
       "process_binding": {
@@ -805,7 +862,8 @@
         },
         "unknown_policy": "all other frozen nutrient codes UNKNOWN",
         "require_recipe_inactive": true
-      }
+      },
+      "source_alternative_rows": []
     },
     {
       "canonical_code": "MR2019_2_11_BEEF_VEGETABLE_RAGOUT",
@@ -813,7 +871,7 @@
       "source_section_code": "APPENDIX_5",
       "source_card_code": "2.11",
       "source_card_raw_sha256": "89ef921166ece243277dc3f1106e340769f3a99a89195ff10028bd78f529a295",
-      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/miasnye-bliuda/tekhnologicheskaia-karta-n-2.11/",
       "source_variant": "12_PLUS",
       "meal_type_code": "main",
       "source_output_g": "230",
@@ -871,17 +929,36 @@
         }
       ],
       "source_branch_selection": {
-        "selected": "BEEF_CATEGORY_1",
-        "not_selected": "BONELESS_MEAT_UNSPECIFIED"
+        "selection_kind": "SOURCE_ROW_ALTERNATIVE",
+        "selected_source_rows": [
+          {
+            "source_label": "Говядина 1 кат.",
+            "quantity_g": "81"
+          }
+        ],
+        "not_selected_source_rows": [
+          {
+            "source_label": "или мясо бескостное",
+            "quantity_g": "81"
+          }
+        ],
+        "selected_semantic_option": "Говядина 1 кат.",
+        "not_selected_semantic_options": [
+          "мясо бескостное"
+        ],
+        "rationale": "The source table contains separate alternative raw-meat rows. Freeze category-I beef; retain the boneless-meat row explicitly as not selected."
       },
       "source_intermediates": [
         {
-          "source_label": "Масса отварного мяса",
-          "quantity_g": "50"
+          "source_label": "варка крупным куском",
+          "quantity_g": "50",
+          "semantic_role": "COOKED_MEAT_INTERMEDIATE",
+          "interpretation_note": "Semantic role records the reviewed meaning; source_label remains exact retained source text."
         },
         {
           "source_label": "Масса полуфабриката",
-          "quantity_g": "280"
+          "quantity_g": "280",
+          "semantic_role": "SEMIFINISHED_MASS"
         }
       ],
       "process_binding": {
@@ -919,7 +996,16 @@
         },
         "unknown_policy": "all other frozen nutrient codes UNKNOWN",
         "require_recipe_inactive": true
-      }
+      },
+      "source_alternative_rows": [
+        {
+          "source_label": "или мясо бескостное",
+          "quantity_g": "81",
+          "disposition": "NOT_SELECTED_ALTERNATIVE",
+          "semantic_role": "ALTERNATIVE_RAW_MEAT_INPUT",
+          "reason": "The frozen branch selects the separate category-I beef source row."
+        }
+      ]
     },
     {
       "canonical_code": "MR2019_2_9_STEAMED_BEEF_ROLL_OMELET",
@@ -927,7 +1013,7 @@
       "source_section_code": "APPENDIX_5",
       "source_card_code": "2.9",
       "source_card_raw_sha256": "2a60d9ff7c31b0d2c052635c0d4d938a8f03d02ac5d0c9aba01ed1d63116ee8c",
-      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/miasnye-bliuda/tekhnologicheskaia-karta-n-2.9/",
       "source_variant": "12_PLUS",
       "meal_type_code": "main",
       "source_output_g": "105",
@@ -970,13 +1056,25 @@
         }
       ],
       "source_branch_selection": {
-        "selected": "BEEF_CATEGORY_1",
-        "not_selected": "BONELESS_MEAT_UNSPECIFIED"
+        "selection_kind": "WITHIN_SOURCE_ROW_SEMANTIC_OPTION",
+        "selected_source_rows": [
+          {
+            "source_label": "Говядина 1 кат. или мясо бескостное",
+            "quantity_g": "73"
+          }
+        ],
+        "not_selected_source_rows": [],
+        "selected_semantic_option": "Говядина 1 кат.",
+        "not_selected_semantic_options": [
+          "мясо бескостное"
+        ],
+        "rationale": "The retained source combines the alternatives in one quantified row. Freeze the category-I beef semantic option without inventing a second source row."
       },
       "source_intermediates": [
         {
           "source_label": "Масса полуфабриката",
-          "quantity_g": "120"
+          "quantity_g": "120",
+          "semantic_role": "SEMIFINISHED_MASS"
         }
       ],
       "process_binding": {
@@ -1015,7 +1113,8 @@
         },
         "unknown_policy": "all other frozen nutrient codes UNKNOWN",
         "require_recipe_inactive": true
-      }
+      },
+      "source_alternative_rows": []
     }
   ],
   "future_runtime_transaction_contract": {
@@ -1035,5 +1134,15 @@
       "mixed active/inactive fails closed",
       "injected activation failure rolls back all staged writes"
     ]
+  },
+  "source_row_partition_contract": {
+    "rule": "Every 12+ source table row must appear exactly once in one frozen partition bucket: RecipeIngredient, source_intermediate, or explicitly-not-selected source alternative.",
+    "buckets": [
+      "ingredients",
+      "source_intermediates",
+      "source_alternative_rows"
+    ],
+    "source_labels": "must remain source-exact; semantic interpretation belongs in separate semantic_role/rationale fields",
+    "branch_binding": "every source_branch_selection must reference exact source row label(s) and 12+ quantity/quantities"
   }
 }
