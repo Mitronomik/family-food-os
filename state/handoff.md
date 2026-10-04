@@ -1,11 +1,14 @@
 # Handoff
 
-## R3-C runtime — active — 2026-10-04
+## R3-C runtime — review-ready — 2026-10-04
 
 Accepted main:
 `3c5740b319e453715c5a58f5b65e6d216b7c4fdb` (merged PR #154).
 
-Issue #155 / branch `feat/r3c-school2022-main-batch-runtime`.
+Issue #155 / PR #156 / branch `feat/r3c-school2022-main-batch-runtime`.
+
+Runtime freeze:
+`c9e985eaad876fbc66519488d995d6e65975308a`.
 
 Read first:
 
@@ -14,16 +17,33 @@ Read first:
 - `backend/app/seed/r3c_school2022_main_batch.py`;
 - `backend/app/tests/test_r3c_school2022_main_batch.py`.
 
-Runtime goal: publish/activate exactly the frozen eight MAIN recipes, add only
-`ATLANTIC_SALMON_FILLET_RAW` as identity-only, preserve R3-A/R3-B option B,
-migration 0042 and all existing Planner/Nutrition contracts.
+Delivered exactly eight frozen MAIN RecipeVersions and exactly one identity-only
+`ATLANTIC_SALMON_FILLET_RAW`. Reused R3-A/R3-B option B without shared-service,
+schema, migration, Planner or Nutrition-authority changes.
 
-Expected successful projection: 41 exact-energy recipes / 23 MAIN / gap-to-50 9.
-DC4 remains blocked.
+Post-runtime projected truth verified in tests:
 
-Status: `IMPLEMENTATION_ACTIVE`.
+- 41 exact-energy recipes;
+- 23 MAIN;
+- 17 breakfast;
+- 1 sandwich;
+- hard MILK_2_5 breakfast proof unchanged at capacity 9;
+- exact beef: 12/23 MAIN dependent, 11 unaffected / capacity 33;
+- gap-to-50 = 9;
+- DC4 remains blocked.
+
+Exact runtime-freeze verification is all green, including dedicated R3-C
+#37202224299 (22/22), R3-A/R3-B/R2-F regressions, and full backend/launcher
+regression in Nutrient registry #37202224305 and Partial nutrition #37202224282.
+
+Status: `READY_FOR_FINAL_REVIEW`.
+
+Only state/PR metadata may change after the runtime freeze unless independent
+review explicitly reopens runtime behavior. Do not merge autonomously. After
+merge, reassess DC3 catalogue coverage before another batch or DC4.
 
 ---
+
 
 ## R3-C Contract Gate — active — 2026-10-04
 
