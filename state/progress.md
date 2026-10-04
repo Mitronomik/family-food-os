@@ -59,6 +59,21 @@ Independent-review correction — household + prepared authority:
 - correction revision `ae8418bac52a9d4459a26f16b6ada607f654241a`;
 - R3-D #37224055581 / Docs #37224055575 / DC1 #37224055565 SUCCESS.
 
+Independent-review correction — source→frozen completeness:
+
+- frozen ten-recipe selection unchanged;
+- validator now requires exact multiset equality between every selected card's
+  complete 12+ source table and the frozen partition:
+  ingredients + source_intermediates + source_alternative_rows;
+- 10/10 exact card URLs PASS;
+- 10/10 full source-row partitions PASS;
+- source_intermediates require source-exact labels + semantic_role;
+- branch selections require exact source row/quantity bindings;
+- MR 2.11 exact row restored as `варка крупным куском — 50`;
+- milk-free breakfast conclusion explicitly scoped to reviewed MR + School2022;
+- tested revision `48fdfb3743e4a9c23ec022c7073dc8eeb489ced7`;
+- R3-D #37229372543 / Docs #37229372530 / DC1 #37229372415 SUCCESS.
+
 Status: `READY_FOR_INDEPENDENT_REVIEW`.
 
 ---

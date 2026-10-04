@@ -121,4 +121,18 @@ changing the frozen ten-recipe set:
 - tested correction revision `ae8418bac52a9d4459a26f16b6ada607f654241a`;
 - R3-D #37224055581 / Docs #37224055575 / DC1 #37224055565 — SUCCESS.
 
+Source→frozen completeness review correction is also applied without changing
+the frozen ten-recipe set:
+
+- 10/10 exact card-level `source_page_url`;
+- 10/10 full 12+ source-table partitions across RecipeIngredient /
+  source_intermediate / explicitly-not-selected alternative rows;
+- source-intermediate labels remain source-exact, with semantic interpretation
+  separated into `semantic_role`;
+- MR 2.11 now preserves exact `варка крупным куском — 50` instead of the
+  interpreted label `Масса отварного мяса`;
+- branch selections are bound to exact source row labels + 12+ quantities;
+- tested completeness revision `48fdfb3743e4a9c23ec022c7073dc8eeb489ced7`;
+- R3-D #37229372543 / Docs #37229372530 / DC1 #37229372415 — SUCCESS.
+
 Status remains `READY_FOR_INDEPENDENT_REVIEW`.

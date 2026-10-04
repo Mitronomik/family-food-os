@@ -64,6 +64,20 @@ Independent-review corrections now frozen:
 - tested correction revision: `ae8418bac52a9d4459a26f16b6ada607f654241a`;
 - R3-D #37224055581 / Docs #37224055575 / DC1 #37224055565 — SUCCESS.
 
+Source completeness correction:
+
+- every selected MR 12+ source row must be covered exactly once by
+  RecipeIngredient / source_intermediate / explicit not-selected alternative;
+- exact card-specific source URLs are pinned and validated 10/10;
+- source intermediate labels are literal retained-source text; semantics are
+  stored separately;
+- MR 2.11 uses exact `варка крупным куском — 50`,
+  semantic_role=`COOKED_MEAT_INTERMEDIATE`;
+- branch selections bind to exact source row labels/quantities;
+- tested completeness revision:
+  `48fdfb3743e4a9c23ec022c7073dc8eeb489ced7`;
+- R3-D #37229372543 / Docs #37229372530 / DC1 #37229372415 — SUCCESS.
+
 Status: `READY_FOR_INDEPENDENT_REVIEW`.
 
 ---

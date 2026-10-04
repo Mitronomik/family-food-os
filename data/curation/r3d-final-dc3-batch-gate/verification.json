@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "operation": "R3D_FINAL_DC3_GATE_VERIFICATION_RECEIPT",
   "accepted_base": "1c82f34b960621aed3e1c43780270f8048edfe0f",
   "issue": 157,
@@ -81,7 +81,7 @@
     "ruff_format_command": "python -m ruff format --check scripts/validate_r3d_final_dc3_gate.py",
     "whitespace_command": "git diff --check 1c82f34b960621aed3e1c43780270f8048edfe0f...HEAD"
   },
-  "finalization_note": "Independent-review corrections were verified on ae8418bac52a9d4459a26f16b6ada607f654241a. A later metadata-only receipt/state commit does not alter frozen recipe/source/validator semantics; the R3-D workflow re-runs validator/static/scope checks on the final head.",
+  "finalization_note": "Source→frozen completeness was verified on 48fdfb3743e4a9c23ec022c7073dc8eeb489ced7. The subsequent receipt/state-only finalization does not alter frozen recipe/source/validator semantics; the R3-D workflow reruns validator/static/scope checks on the final head.",
   "review_correction": {
     "status": "PASS",
     "tested_revision": "ae8418bac52a9d4459a26f16b6ada607f654241a",
@@ -131,6 +131,67 @@
       "source card hashes and 12+ rows",
       "identity-only FoodIngredient set",
       "product mix and 41 -> 51 projection",
+      "future option-B publication/activation architecture",
+      "runtime/schema/migration/Planner bytes"
+    ]
+  },
+  "source_to_frozen_completeness_correction": {
+    "status": "PASS",
+    "tested_revision": "48fdfb3743e4a9c23ec022c7073dc8eeb489ced7",
+    "blocker": "Source→frozen completeness is now bidirectional and fail-closed.",
+    "checks": {
+      "selected_cards": 10,
+      "exact_source_page_urls": "10/10",
+      "full_12_plus_source_row_partitions": "10/10",
+      "partition_buckets": [
+        "ingredients",
+        "source_intermediates",
+        "source_alternative_rows"
+      ],
+      "source_intermediate_semantic_roles": "PASS",
+      "source_alternative_dispositions": "PASS",
+      "branch_source_row_quantity_bindings": "PASS",
+      "source_card_hashes": "10/10",
+      "output_energy_rows": "10/10"
+    },
+    "exactness_correction": {
+      "recipe": "MR2019_2_11_BEEF_VEGETABLE_RAGOUT",
+      "source_label": "варка крупным куском",
+      "quantity_g": "50",
+      "semantic_role": "COOKED_MEAT_INTERMEDIATE",
+      "note": "The previous interpreted label 'Масса отварного мяса' was removed. Source label is now preserved exactly; interpretation lives only in semantic_role."
+    },
+    "exact_checks": {
+      "r3d_gate": {
+        "run_id": 37229372543,
+        "conclusion": "SUCCESS"
+      },
+      "docs": {
+        "run_id": 37229372530,
+        "conclusion": "SUCCESS"
+      },
+      "dc1": {
+        "run_id": 37229372415,
+        "conclusion": "SUCCESS"
+      },
+      "validator_logic": "PASS",
+      "mr_source_page_urls": "10/10",
+      "mr_source_row_partitions": "10/10",
+      "py_compile": "PASS",
+      "ruff_check": "PASS",
+      "ruff_format_check": "PASS",
+      "git_diff_check": "PASS",
+      "json_parse": "PASS",
+      "markdown_links": "PASS"
+    },
+    "reviewed_source_scope_note": "The no-additional-clean milk-free-breakfast conclusion is scoped to the explicitly reviewed retained source families RU_MR_2_4_0162_19 and School2022; it is not an exhaustive claim over every possible retained/external family.",
+    "unchanged_scope": [
+      "selected ten-recipe set",
+      "recipe canonical codes and source cards",
+      "product mix and 41 -> 51 projection",
+      "ten identity-only FoodIngredients",
+      "household applicability decisions",
+      "prepared-output authority decisions",
       "future option-B publication/activation architecture",
       "runtime/schema/migration/Planner bytes"
     ]
