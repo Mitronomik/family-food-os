@@ -1,5 +1,46 @@
 # Progress
 
+## R3-B runtime — review-ready — 2026-10-04
+
+Accepted base:
+`dcc5f37f57a83283e4dee0d3c2957ed0704e9a46`.
+
+Issue #151 / PR #152 / branch `feat/r3b-school2022-breakfast-batch-runtime`.
+
+Runtime freeze:
+`bf4580684140b00404bc91d16b8c7fcda016acb4`.
+
+Outcome:
+
+- 3 identity-only FoodIngredients, no Nutrition/Composition;
+- 10 immutable SOURCE_VERIFIED BREAKFAST RecipeVersions;
+- exact same-card prepared ENERGY_KCAL + 53 UNKNOWN;
+- per-recipe atomic/resumable inactive publication;
+- reused one-UoW full-batch activation;
+- exact replay / deliberate-deactivation / mixed-state fail-closed semantics;
+- hash-pinned package tamper checks;
+- Russian-only consumer steps;
+- explicit omelet oven branch / steam provenance-only;
+- hard MILK_2_5 rejects all ten R3-B recipes while unchanged milk-free capacity 9
+  still produces a seven-breakfast authoritative week;
+- prior R3-A deliberate deactivation is not silently repaired;
+- no schema/migration/Planner/new-authority change.
+
+Exact runtime-freeze verification:
+
+- dedicated R3-B workflow #8 SUCCESS — 114 passed;
+- Ruff check/format and scope/whitespace PASS;
+- Docs #892 / DC1 #749 SUCCESS;
+- R1/R2/R3-A regression workflows SUCCESS;
+- Nutrient registry #949 and Partial nutrition #704 SUCCESS including broad
+  backend and launcher regression;
+- migration head 0042;
+- `AI_ENABLED=false`.
+
+Status: `READY_FOR_FINAL_REVIEW`.
+
+Stop for independent review. No merge or next batch/DC4 authorization.
+
 ## R3-B breakfast Contract Gate — 2026-10-04
 
 Accepted base:

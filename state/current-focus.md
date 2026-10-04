@@ -4,89 +4,152 @@ Updated: 2026-10-04.
 
 ## Accepted state
 
-PR #148 / R3-A ten-recipe MAIN runtime is merged into `main` at:
+PR #150 / R3-B School2022 ten-recipe BREAKFAST Contract Gate is merged into `main` at:
 
-`69c68f4153b25ac4e51cbe9ff54fb080201f08bd`.
+`dcc5f37f57a83283e4dee0d3c2957ed0704e9a46`.
 
 DATA-CORPUS-V1 / DC3 remains active.
 
-Current deterministic exact-energy catalogue is approximately 23 active usable
-recipes: 15 MAIN, 7 BREAKFAST and 1 SANDWICH. The breakfast-compatible pool is 8.
-
-The `50–80+` DATA-CORPUS-V1 baseline is not met, so DC4 remains blocked.
-
 ## Current bounded operation
 
-**R3-B — School2022 ten-recipe BREAKFAST Contract Gate.**
+**R3-B runtime — publish School2022 ten-recipe BREAKFAST batch.**
 
-Issue: `#149`.
+Issue: `#151`.
 
-Branch: `docs/r3b-school2022-breakfast-batch-gate`.
+Branch:
 
-Accepted base: `69c68f4153b25ac4e51cbe9ff54fb080201f08bd`.
+`feat/r3b-school2022-breakfast-batch-runtime`.
 
-Status: `READY_FOR_FINAL_REVIEW`.
+PR:
 
-Canonical gate:
+`#152`.
+
+Accepted base:
+
+`dcc5f37f57a83283e4dee0d3c2957ed0704e9a46`.
+
+Runtime freeze:
+
+`bf4580684140b00404bc91d16b8c7fcda016acb4`.
+
+Status:
+
+`READY_FOR_FINAL_REVIEW`.
+
+Canonical contract:
 
 `docs/family-food/r3b-school2022-breakfast-batch-gate.md`.
 
-## Exact selected set
+## Delivered runtime scope
 
-- `ru-school2022:recipe:54-2о` — Омлет с зеленым горошком;
-- `ru-school2022:recipe:54-3о` — Омлет с морковью;
-- `ru-school2022:recipe:54-4о` — Омлет с сыром;
-- `ru-school2022:recipe:54-2т` — Запеканка из творога с морковью;
-- `ru-school2022:recipe:54-1к` — Каша жидкая молочная кукурузная;
-- `ru-school2022:recipe:54-2к` — Каша вязкая молочная кукурузная;
-- `ru-school2022:recipe:54-6к` — Каша вязкая молочная пшенная;
-- `ru-school2022:recipe:54-16к` — Каша «Дружба»;
-- `ru-school2022:recipe:54-23к` — Каша жидкая молочная пшеничная;
-- `ru-school2022:recipe:54-24к` — Каша жидкая молочная пшенная;
+Exactly ten frozen School2022 BREAKFAST RecipeVersions are published/activated:
 
-Adversarial process audit rejected `54-3т` and `54-21к` for quantified sugar without technology placement; they are replaced by source-clean `54-2к` and `54-24к`. `54-22к` remains deferred for quantified butter without technology placement.
+- `54-2о`, `54-3о`, `54-4о`;
+- `54-2т`;
+- `54-1к`, `54-2к`, `54-6к`, `54-16к`, `54-23к`, `54-24к`.
 
-New identity-only demand is exactly:
+Exactly three identity-only FoodIngredients are reconciled:
 
 - `CHEESE_SEMI_HARD_UNSPECIFIED`;
 - `CORN_GROATS`;
 - `MILLET_GROATS`.
 
-No NutritionProfile or Composition authority.
+No NutritionProfile or Composition authority is granted to them.
+
+Every new RecipeVersion uses exact prepared `ENERGY_KCAL`; the other 53 frozen
+nutrient codes remain UNKNOWN.
+
+## Transaction result — reused option B
+
+Publication:
+
+1. each inactive RecipeVersion + prepared authority publishes atomically per recipe;
+2. a failure may leave only an exact inactive subset;
+3. rerun is zero-write for exact rows and converges missing rows;
+4. partial/conflicting state fails closed;
+5. publication never activates recipes.
+
+Activation:
+
+1. begins only after all ten exact publications reconcile;
+2. all inactive -> all ten activate in one caller-owned UoW / one commit;
+3. all active -> zero-write replay;
+4. mixed active/inactive -> fail closed with zero writes;
+5. injected activation failure rolls back all staged activation writes.
+
+R3-B reuses the merged R3-A transaction-neutral activation seam; no new
+activation architecture is introduced. R3-B seeding also preserves deliberate
+deactivation in the prior R3-A batch.
+
+## Source/product preservation
+
+- runtime consumes only the hash-pinned repository package;
+- no live web/Library dependency;
+- consumer Recipe Steps remain Russian-only;
+- omelets `54-2о/3о/4о` publish only oven branch `180–200 °C / 8–10 минут`;
+- steam branch `25–30 минут` remains provenance-only;
+- excluded `54-3т/54-21к/54-22к/54-7т` remain unpublished.
+
+## Hard milk proof
+
+All ten R3-B recipes depend on `MILK_2_5`.
+
+Verified hard exclusion:
+
+- all 10 R3-B RecipeVersions rejected with `MEMBER_EXCLUDED_INGREDIENT`;
+- no R3-B RecipeVersion enters the plan;
+- unaffected breakfast-compatible set remains exactly:
+  `HARD_BOILED_EGG`,
+  `SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE`,
+  `SAD28_SANDWICH_CHEESE_20_10`;
+- count 3 / repetition capacity 9;
+- authoritative seven-breakfast generation succeeds.
+
+## Runtime verification on exact freeze
+
+`R3-B School2022 BREAKFAST batch runtime #8` — SUCCESS:
+
+- focused/affected suite: **114 passed**;
+- Ruff check: PASS;
+- Ruff format: PASS — 4 files already formatted;
+- scope/whitespace: PASS;
+- exactly 3 identity-only foods / no Nutrition or Composition: PASS;
+- exactly 10 BREAKFAST RecipeVersions + prepared authority: PASS;
+- per-recipe atomic inactive publication + resumable convergence: PASS;
+- one-UoW batch activation + rollback: PASS;
+- mixed-state fail-closed / all-active replay: PASS;
+- Russian consumer steps + explicit omelet oven branch: PASS;
+- hard `MILK_2_5` exclusion / unaffected capacity 9: PASS;
+- migration head 0042 / no 0043: PASS;
+- `AI_ENABLED=false`: PASS.
+
+Same runtime freeze also has SUCCESS for:
+
+- Docs #892;
+- DC1 #749;
+- Russian nutrition methodologies #482;
+- R1-C #149;
+- R2 breakfast #133;
+- R2-B #123;
+- R2-C #111;
+- R2-E #94;
+- R2-F #66;
+- R3-A #32;
+- Nutrient registry V2 #949 including full backend/launcher regression;
+- Partial nutrition profiles #704 including full backend/launcher regression.
 
 ## Scope boundaries
 
-Do not start runtime before independent gate review/merge.
-Do not split recipes into separate PRs.
-Do not create a separate activation PR.
-Do not add migration 0043/schema/Planner/new Nutrition authority changes.
-Do not start R3-C, DC4, Gate1-CLOSE or PR9.
+Do not:
 
-## Source receipt
+- merge PR #152 autonomously;
+- split recipes into separate PRs;
+- create a separate activation PR;
+- add migration 0043 or schema changes;
+- change Planner mapping/scoring/repetition;
+- add a new Nutrition authority;
+- start R3-C or DC4;
+- start Gate1-CLOSE/PR9/Shopping/Prep/Retail/API/UI/Auth/PostgreSQL/AI.
 
-Independent Library materialize/hash readback on 2026-10-04:
-
-- ZIP 206692075 bytes / `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
-- PDF 4102547 bytes / `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`.
-
-Corrected content freeze:
-
-`6d043ba23e73a3373de95a22dd6fa226db35e8a3`.
-
-Review corrections:
-
-- all frozen consumer Recipe Steps are Russian-only; internal authority/inference terminology remains outside product-facing steps;
-- omelets `54-2о/3о/4о` explicitly select oven branch `180–200 °C / 8–10 минут`; steam `25–30 минут` is provenance-only;
-- future runtime must prove hard `MILK_2_5` rejects all 10 R3-B candidates while preserving the exact unaffected set `HARD_BOILED_EGG`, `SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE`, `SAD28_SANDWICH_CHEESE_20_10` with capacity 9 and successful seven-breakfast generation.
-
-Verification on corrected content freeze:
-
-- consumer-step language audit — PASS;
-- explicit omelet branch audit 3/3 — PASS;
-- hard `MILK_2_5` dependency 10/10 + unaffected-set receipt — PASS;
-- selected/spec/household/process/source alignment 10/10 — PASS;
-- frozen quantities/output/ENERGY and option-B semantics unchanged — PASS;
-- Docs #883 — SUCCESS;
-- DC1 #740 — SUCCESS.
-
-Runtime remains blocked until independent re-review and merge of PR #150.
+Only state/PR metadata may change after the runtime freeze unless an independent
+review finding explicitly reopens runtime verification.
