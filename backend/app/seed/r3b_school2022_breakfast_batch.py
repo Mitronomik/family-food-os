@@ -26,7 +26,7 @@ from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
     SqlAlchemyRecipeNutritionV2UnitOfWork,
     create_recipe_nutrition_v2_service,
 )
-from app.seed.r3a_school2022_main_batch import seed_r3a_school2022_main_batch
+from app.seed.r2f_cheese_sandwich import seed_r2f_cheese_sandwich
 from app.services.food_ingredients import TrustedFoodIngredientIdentitySeed
 from app.services.food_recipes import (
     TrustedRecipeIngredientSeed,
@@ -583,7 +583,7 @@ def publish_r3b_school2022_breakfast_batch(
     _, _, _, _, specs_payload, _, _ = _load_contract(package)
 
     apply_migrations(config)
-    seed_r3a_school2022_main_batch(config)
+    seed_r2f_cheese_sandwich(config)
 
     engine = create_sqlite_engine(config)
     try:
@@ -664,7 +664,7 @@ def activate_r3b_school2022_breakfast_batch(
     _, _, _, _, specs_payload, _, _ = _load_contract(package)
 
     apply_migrations(config)
-    seed_r3a_school2022_main_batch(config)
+    seed_r2f_cheese_sandwich(config)
 
     engine = create_sqlite_engine(config)
     try:
