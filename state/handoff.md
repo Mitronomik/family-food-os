@@ -1,5 +1,30 @@
 # Handoff
 
+## R3-C runtime — active — 2026-10-04
+
+Accepted main:
+`3c5740b319e453715c5a58f5b65e6d216b7c4fdb` (merged PR #154).
+
+Issue #155 / branch `feat/r3c-school2022-main-batch-runtime`.
+
+Read first:
+
+- `docs/family-food/r3c-post-r3b-catalogue-gate.md`;
+- `data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json`;
+- `backend/app/seed/r3c_school2022_main_batch.py`;
+- `backend/app/tests/test_r3c_school2022_main_batch.py`.
+
+Runtime goal: publish/activate exactly the frozen eight MAIN recipes, add only
+`ATLANTIC_SALMON_FILLET_RAW` as identity-only, preserve R3-A/R3-B option B,
+migration 0042 and all existing Planner/Nutrition contracts.
+
+Expected successful projection: 41 exact-energy recipes / 23 MAIN / gap-to-50 9.
+DC4 remains blocked.
+
+Status: `IMPLEMENTATION_ACTIVE`.
+
+---
+
 ## R3-C Contract Gate — active — 2026-10-04
 
 Accepted main:
