@@ -13,10 +13,10 @@ from app.domain.food_recipes import MealTypeCode
 from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import MemberMealPatternSourceKind
 from app.domain.planner import (
+    ROLE_COMPATIBILITY_V1,
     PlannerConfig,
     PlannerRejectionCode,
     PlannerSuccess,
-    ROLE_COMPATIBILITY_V1,
 )
 from app.domain.recipe_nutrition_v2 import NUTRIENT_CODES
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
@@ -52,9 +52,11 @@ from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
 from app.seed.r3a_school2022_main_batch import seed_r3a_school2022_main_batch
 from app.seed.r3b_school2022_breakfast_batch import (
     MILK_UNAFFECTED_BREAKFAST_CODES,
+    seed_r3b_school2022_breakfast_batch,
+)
+from app.seed.r3b_school2022_breakfast_batch import (
     RECIPE_CODES as R3B_RECIPE_CODES,
 )
-from app.seed.r3b_school2022_breakfast_batch import seed_r3b_school2022_breakfast_batch
 from app.seed.r3c_school2022_main_batch import (
     BEEF_FOOD_CODE,
     FROZEN_BATCH_PATH,
