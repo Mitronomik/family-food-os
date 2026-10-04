@@ -92,13 +92,6 @@
     },
     {
       "source": "RU_MR_2_4_0162_19",
-      "card": "APPENDIX_5_CARD_2_14",
-      "name": "Куры отварные",
-      "disposition": "CLEAN_NOT_SELECTED_LOW_INCREMENTAL_VALUE",
-      "reason": "Near-duplicate boiled-chicken MAIN with process-water semantics outside the ingredient table; R3-D already gains two more differentiated chicken preparations."
-    },
-    {
-      "source": "RU_MR_2_4_0162_19",
       "card": "APPENDIX_5_CARD_2_5",
       "name": "Фрикадельки мясные паровые",
       "disposition": "CLEAN_NOT_SELECTED_DUPLICATE",
@@ -131,6 +124,13 @@
       "name": "Плов из риса с отварным мясом",
       "disposition": "CLEAN_NOT_SELECTED_DUPLICATE",
       "reason": "Existing accepted beef pilaf already covers this household pattern; R3-D prioritizes new meat-free/chicken variety."
+    },
+    {
+      "source": "RU_MR_2_4_0162_19",
+      "card": "APPENDIX_5_CARD_2_24",
+      "name": "Пюре куриное в бульоне со сливочным маслом",
+      "disposition": "DEFER_RECIPE_INTERMEDIATE_SEMANTICS",
+      "reason": "Card depends on separate chicken broth recipe/intermediate N 1.0. Treating it as a new atomic FoodIngredient would hide sub-recipe/assembly truth and create unnecessary architecture debt in the final DC3 batch."
     }
   ],
   "source_families_reviewed": [
