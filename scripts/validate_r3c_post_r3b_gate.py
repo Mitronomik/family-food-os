@@ -39,8 +39,7 @@ EXPECTED_IDENTITY = "ATLANTIC_SALMON_FILLET_RAW"
 RECIPES_MEMBER = "corpus-work/packages/school2022/normalized/recipes.jsonl"
 ROWS_MEMBER = "corpus-work/packages/school2022/normalized/published_rows.jsonl"
 RECONCILIATION_MEMBER = (
-    "corpus-work/packages/school2022/normalized/"
-    "published_nutrient_reconciliation.jsonl"
+    "corpus-work/packages/school2022/normalized/published_nutrient_reconciliation.jsonl"
 )
 
 CURRENT_RUNTIME_BATCHES = (
@@ -175,9 +174,7 @@ def _simple_constants(path: Path) -> dict[str, object]:
         return None
 
     pending = [
-        node
-        for node in tree.body
-        if isinstance(node, (ast.Assign, ast.AnnAssign))
+        node for node in tree.body if isinstance(node, (ast.Assign, ast.AnnAssign))
     ]
     for _ in range(4):
         changed = False
@@ -313,9 +310,7 @@ def _load_current_exact_energy_catalogue(
 ) -> tuple[dict[str, dict[str, Any]], set[str]]:
     recipes = _extract_r1f(repo_root)
     accepted_food_codes = {
-        ingredient
-        for row in recipes.values()
-        for ingredient in row["ingredient_codes"]
+        ingredient for row in recipes.values() for ingredient in row["ingredient_codes"]
     }
 
     for batch in CURRENT_RUNTIME_BATCHES:
@@ -333,16 +328,22 @@ def _load_current_exact_energy_catalogue(
             f"{batch['name']}: runtime/package recipe set mismatch",
         )
         for code in runtime_codes:
-            require(code not in recipes, f"duplicate accepted exact-energy recipe: {code}")
+            require(
+                code not in recipes, f"duplicate accepted exact-energy recipe: {code}"
+            )
             recipe = package_recipes[code]
             version = recipe.get("version")
-            require(isinstance(version, dict), f"{batch['name']} {code}: version missing")
+            require(
+                isinstance(version, dict), f"{batch['name']} {code}: version missing"
+            )
             require(
                 version.get("verification_status") == "SOURCE_VERIFIED",
                 f"{batch['name']} {code}: not SOURCE_VERIFIED",
             )
             meal_type = version.get("meal_type_code")
-            require(isinstance(meal_type, str), f"{batch['name']} {code}: meal type missing")
+            require(
+                isinstance(meal_type, str), f"{batch['name']} {code}: meal type missing"
+            )
             ingredient_rows = version.get("ingredients")
             require(
                 isinstance(ingredient_rows, list) and ingredient_rows,
@@ -370,7 +371,10 @@ def _load_current_exact_energy_catalogue(
                 raw = package.get("recipes", {}).get(code)
                 if isinstance(raw, dict):
                     prepared = raw.get("prepared_spec")
-            require(isinstance(prepared, dict), f"{batch['name']} {code}: prepared spec missing")
+            require(
+                isinstance(prepared, dict),
+                f"{batch['name']} {code}: prepared spec missing",
+            )
             require(
                 prepared.get("recipe_code") == code,
                 f"{batch['name']} {code}: prepared recipe_code mismatch",
@@ -527,9 +531,7 @@ def _derive_current_repository_truth(
         if row["meal_type_code"] in breakfast_types
     }
     milk_dependent_breakfast = {
-        code
-        for code in breakfast_codes
-        if "MILK_2_5" in row_ingredients(recipes[code])
+        code for code in breakfast_codes if "MILK_2_5" in row_ingredients(recipes[code])
     }
     milk_unaffected = breakfast_codes - milk_dependent_breakfast
 
@@ -624,11 +626,15 @@ def validate_repo_package(
     require(len(set(source_ids)) == 8, "selected source IDs are not unique")
 
     identities = frozen.get("new_identity_only_foods")
-    require(isinstance(identities, list) and len(identities) == 1, "identity count != 1")
+    require(
+        isinstance(identities, list) and len(identities) == 1, "identity count != 1"
+    )
     identity = identities[0]
     require(identity.get("canonical_code") == EXPECTED_IDENTITY, "identity changed")
     require(identity.get("nutrition_profile") is None, "Nutrition authority leaked")
-    require(identity.get("composition_authority") is None, "Composition authority leaked")
+    require(
+        identity.get("composition_authority") is None, "Composition authority leaked"
+    )
     new_identity_codes = {EXPECTED_IDENTITY}
     require(
         EXPECTED_IDENTITY not in accepted_food_codes,
@@ -686,7 +692,9 @@ def validate_repo_package(
             require_sha(row.get(field), f"{code}.{field}")
 
         ingredients = row.get("ingredients")
-        require(isinstance(ingredients, list) and ingredients, f"{code}: no ingredients")
+        require(
+            isinstance(ingredients, list) and ingredients, f"{code}: no ingredients"
+        )
         ingredient_rows += len(ingredients)
         for ingredient in ingredients:
             require(
@@ -728,7 +736,9 @@ def validate_repo_package(
     require(isinstance(source, dict), "source receipt missing")
     require_sha(source.get("source_archive_sha256"), "archive hash")
     require_sha(source.get("source_pdf_sha256"), "PDF hash")
-    require(source.get("source_archive_size_bytes") == 206692075, "archive size changed")
+    require(
+        source.get("source_archive_size_bytes") == 206692075, "archive size changed"
+    )
     require(source.get("source_pdf_size_bytes") == 4102547, "PDF size changed")
 
     require(
@@ -736,8 +746,7 @@ def validate_repo_package(
         "derived current exact-energy recipe count != 33",
     )
     require(
-        derived["meal_type_counts"]
-        == {"breakfast": 17, "main": 15, "sandwich": 1},
+        derived["meal_type_counts"] == {"breakfast": 17, "main": 15, "sandwich": 1},
         "derived current meal-type counts changed",
     )
     require(
@@ -765,8 +774,7 @@ def validate_repo_package(
     current = summary.get("current_repository_truth")
     require(isinstance(current, dict), "current repository truth missing")
     require(
-        current.get("active_exact_energy_by_meal_type")
-        == derived["meal_type_counts"],
+        current.get("active_exact_energy_by_meal_type") == derived["meal_type_counts"],
         "summary current meal-type counts differ from repository-derived truth",
     )
     require(
@@ -847,8 +855,14 @@ def validate_repo_package(
     r3c = summary.get("r3c")
     require(isinstance(r3c, dict), "R3-C summary missing")
     require(r3c.get("selected_count") == 8, "summary selected count != 8")
-    require(tuple(r3c.get("selected_recipe_codes", ())) == EXPECTED_CODES, "summary set changed")
-    require(r3c.get("new_identity_only_foods") == [EXPECTED_IDENTITY], "summary identity changed")
+    require(
+        tuple(r3c.get("selected_recipe_codes", ())) == EXPECTED_CODES,
+        "summary set changed",
+    )
+    require(
+        r3c.get("new_identity_only_foods") == [EXPECTED_IDENTITY],
+        "summary identity changed",
+    )
 
     projected = summary.get("projected_after_future_runtime")
     require(isinstance(projected, dict), "projection missing")
@@ -886,9 +900,7 @@ def validate_repo_package(
         "beef_unaffected_main": derived["beef_unaffected_main_count"],
         "projected_exact_energy": projected_count,
         "planner_supported_meal_types": derived["planner_supported_meal_types"],
-        "breakfast_compatible_meal_types": derived[
-            "breakfast_compatible_meal_types"
-        ],
+        "breakfast_compatible_meal_types": derived["breakfast_compatible_meal_types"],
         "current_exact_energy_recipe_codes": sorted(current_recipes),
     }
 
@@ -899,8 +911,12 @@ def validate_source_archive(
     require(archive_path.is_file(), f"source archive missing: {archive_path}")
     source = frozen["source"]
     archive_raw = archive_path.read_bytes()
-    require(len(archive_raw) == source["source_archive_size_bytes"], "archive size mismatch")
-    require(sha256(archive_raw) == source["source_archive_sha256"], "archive hash mismatch")
+    require(
+        len(archive_raw) == source["source_archive_size_bytes"], "archive size mismatch"
+    )
+    require(
+        sha256(archive_raw) == source["source_archive_sha256"], "archive hash mismatch"
+    )
 
     with zipfile.ZipFile(archive_path) as archive:
         pdf_raw = archive.read(source["source_pdf_archive_path"])
@@ -983,7 +999,9 @@ def validate_source_archive(
                 .get("value")
                 is not None
             ]
-            require(len(output_rows) == 1, f"quantified output row count != 1: {source_id}")
+            require(
+                len(output_rows) == 1, f"quantified output row count != 1: {source_id}"
+            )
             output_row = output_rows[0]
             require(
                 canonical_sha256(output_row)
@@ -1003,7 +1021,10 @@ def validate_source_archive(
             )
 
             reconciliation = reconciliations.get(f"{source_id}:reconcile:energy_kcal")
-            require(reconciliation is not None, f"energy reconciliation missing: {source_id}")
+            require(
+                reconciliation is not None,
+                f"energy reconciliation missing: {source_id}",
+            )
             require(
                 canonical_sha256(reconciliation)
                 == selected["energy_reconciliation_canonical_json_sha256"],
@@ -1048,7 +1069,9 @@ def main() -> int:
         result: dict[str, Any] = {"status": "PASS", "repo_checks": "PASS", **stats}
         if args.source_archive is not None:
             result["source_archive_checks"] = "PASS"
-            result.update(validate_source_archive(args.source_archive.resolve(), frozen))
+            result.update(
+                validate_source_archive(args.source_archive.resolve(), frozen)
+            )
         else:
             result["source_archive_checks"] = "NOT_RUN"
             result["source_archive_note"] = (
