@@ -1,14 +1,17 @@
 # Handoff
 
-## R3-D final DC3 runtime — pre-PR ready — 2026-10-04
+## R3-D final DC3 runtime — review-ready — 2026-10-04
 
 Accepted main:
 `a6c1a0bd203e0ec21fd73eb4107282c2b144ff9a` (merged PR #158).
 
-Issue #159 / branch `feat/r3d-final-dc3-batch-runtime`.
+Issue #159 / PR #160 / branch `feat/r3d-final-dc3-batch-runtime`.
 
-Runtime/test preflight freeze:
+Runtime/test freeze:
 `37b7696e40cc9d4192d6855047efa0d8012feaee`.
+
+Broad verification head:
+`74c7188aca47d1b5f5335f8a9d3696a9bcbf1196`.
 
 Read first:
 
@@ -17,37 +20,51 @@ Read first:
 - `backend/app/seed/r3d_final_dc3_batch.py`;
 - `backend/app/tests/test_r3d_final_dc3_batch.py`.
 
-Implementation reuses the R3-C architecture unchanged:
+Delivered exactly the frozen ten-recipe batch and ten identity-only foods.
+No shared-service/schema/migration/Planner/Nutrition-authority change.
 
-- per-recipe caller-owned publication UoW;
+Runtime semantics:
+
+- per-recipe atomic inactive publication;
 - exact replay zero-write;
 - partial exact inactive prefix resumable;
-- all-inactive batch activation in one UoW/commit;
+- one-UoW all-inactive activation;
 - all-active replay zero-write;
 - mixed state fail-closed;
-- activation rollback.
+- activation failure rollback.
 
-No new schema, migration, Planner mapping or Nutrition authority.
+Source/provenance:
 
-Gate-only source intermediates/alternatives are not promoted to RecipeIngredients.
-Immutable RecipeVersion provenance stores the exact card SHA plus a SHA-256
-commitment over reviewed partition/household/prepared-authority evidence.
+- MR bundle and gate artifacts hash-pinned;
+- exact card URLs/card hashes/source rows;
+- intermediates and alternatives remain non-ingredient provenance;
+- immutable RecipeVersion change_note carries card SHA + reviewed partition commitment;
+- household/medical-context review committed without new schema.
 
-Pre-PR workflow #37233411877: SUCCESS — 24 focused/adversarial tests plus gate
-reconciliation, Ruff/format, migration/no-0043, AI-disabled and scope checks.
+Verified result in seeded runtime:
 
-Expected post-runtime truth: 51 exact-energy / 33 MAIN. Crossing 50 authorizes an
-honest DC4 audit after merge; it does not itself mean DC4 passed.
+- 51 exact-energy / 33 MAIN;
+- beef 14 / fish 9 / chicken 4 / meat-free 6;
+- exact-beef unaffected 19 / capacity 57;
+- hard MILK breakfast closure remains 3 / capacity 9.
 
-Next after runtime merge:
+Exact verification on `74c7188...` is fully green:
+R3-D, R3-D gate, Docs, DC1, all affected R1/R2/R3 regressions, Russian
+methodologies, plus full backend/launcher regression in Nutrient registry and
+Partial nutrition profiles.
 
+Status: `READY_FOR_FINAL_REVIEW`.
+
+Only state/PR metadata may change after the runtime freeze unless independent
+review explicitly reopens runtime behavior.
+
+After merge:
 `post-runtime reconciliation → DC4`.
 
-Do not start R3-E/R3-F.
-
-Status: `PRE_PR_READY`.
+Do not merge autonomously. Do not create R3-E/R3-F.
 
 ---
+
 
 
 ## R3-D final DC3 Contract Gate — review-ready — 2026-10-04

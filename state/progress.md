@@ -1,42 +1,52 @@
 # Progress
 
-## R3-D final DC3 runtime — pre-PR implementation complete — 2026-10-04
+## R3-D final DC3 runtime — review-ready — 2026-10-04
 
 Accepted base:
 `a6c1a0bd203e0ec21fd73eb4107282c2b144ff9a` (merged PR #158).
 
-Issue #159 / branch `feat/r3d-final-dc3-batch-runtime`.
+Issue #159 / PR #160 / branch `feat/r3d-final-dc3-batch-runtime`.
 
-Runtime/test preflight freeze:
+Runtime/test freeze:
 `37b7696e40cc9d4192d6855047efa0d8012feaee`.
 
-Delivered:
+Broad verification head:
+`74c7188aca47d1b5f5335f8a9d3696a9bcbf1196`.
 
-- exactly 10 frozen identity-only FoodIngredients;
-- exactly 10 frozen MAIN RecipeVersions;
-- exact MR card-specific provenance and raw-card commitment;
-- source intermediates/alternatives remain gate provenance, not RecipeIngredients;
-- household REVIEWED_PASS + medical=false review committed into immutable RecipeVersion provenance;
-- PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1;
-- ENERGY_KCAL only AVAILABLE / other 53 frozen nutrient codes UNKNOWN;
-- per-recipe atomic/resumable inactive publication;
-- one-UoW full-batch activation;
-- replay / mixed-state / partial-state / failure rollback proofs;
-- R3-C deliberate deactivation preservation;
-- 51 exact-energy / 33 MAIN seeded Planner truth;
+Outcome:
+
+- 10 identity-only FoodIngredients; zero Nutrition/Vector/Composition authority;
+- 10 SOURCE_VERIFIED MAIN RecipeVersions;
+- exact MR card URL/hash/source rows + partition commitment;
+- household REVIEWED_PASS / medical=false provenance commitment;
+- PREPARED_OUTPUT_V1 + exact ENERGY_KCAL / 53 UNKNOWN;
+- per-recipe atomic/resumable publication;
+- one-UoW batch activation / replay / mixed-state / rollback proof;
+- seeded exact-energy 51 / MAIN 33;
 - beef 14 / fish 9 / chicken 4 / meat-free 6;
 - exact-beef unaffected 19 / capacity 57;
-- hard MILK_2_5 breakfast closure preserved at 3 / capacity 9;
-- migration remains 0042; AI disabled.
+- hard MILK_2_5 breakfast path remains 3 / capacity 9;
+- migration 0042; AI disabled.
 
-Pre-PR workflow #37233411877: SUCCESS — 24 passed; gate validator, Ruff/format,
-migration/AI and scope/whitespace PASS.
+Verification:
 
-PR is intentionally opened only after this preflight.
+- pre-PR R3-D #37233411877 SUCCESS — 24 passed;
+- exact broad head R3-D #37233906070 SUCCESS;
+- gate #37233906129 / Docs #37233906088 / DC1 #37233906260 SUCCESS;
+- R1-C/R2/R2-B/R2-C/R2-E/R2-F/R3-A/R3-B/R3-C regressions SUCCESS;
+- Russian methodologies #37233906124 SUCCESS;
+- Nutrient registry #37233906064 SUCCESS with full backend/launcher regression;
+- Partial nutrition #37233906111 SUCCESS with full backend/launcher regression.
 
-Status: `PRE_PR_READY`.
+After runtime freeze, only verification workflow and state bytes changed.
+
+Status: `READY_FOR_FINAL_REVIEW`.
+
+Stop for independent review. Do not merge autonomously. After merge, perform
+post-runtime reconciliation and move to DC4; do not create R3-E/R3-F.
 
 ---
+
 
 
 ## R3-D final DC3 Contract Gate — review-ready — 2026-10-04
