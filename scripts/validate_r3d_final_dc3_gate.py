@@ -345,7 +345,7 @@ def validate_gate(repo_root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
     require(all(code not in current_recipes for code in codes), "selected recipe already exists in current exact-energy set")
 
     identities = frozen.get("new_identity_only_foods")
-    require(isinstance(identities, list) and len(identities) == 9, "expected 9 identity-only foods")
+    require(isinstance(identities, list) and len(identities) == 10, "expected 10 identity-only foods")
     identity_codes = {row["canonical_code"] for row in identities}
     require(not identity_codes & current_food_codes, "R3-D identity-only code already exists")
     for row in identities:
