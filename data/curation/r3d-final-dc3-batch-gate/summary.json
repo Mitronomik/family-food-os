@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "operation": "R3D_FINAL_DC3_GATE_SUMMARY",
+  "accepted_base": "1c82f34b960621aed3e1c43780270f8048edfe0f",
+  "issue": 157,
+  "current_repository_truth": {
+    "active_exact_energy_count": 41,
+    "by_meal_type": {
+      "breakfast": 17,
+      "main": 23,
+      "sandwich": 1
+    },
+    "breakfast_compatible_count": 18,
+    "max_recipe_repetitions": 3,
+    "hard_milk_2_5": {
+      "dependent_breakfast_count": 15,
+      "unaffected_breakfast_compatible_codes": [
+        "HARD_BOILED_EGG",
+        "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+        "SAD28_SANDWICH_CHEESE_20_10"
+      ],
+      "unaffected_count": 3,
+      "capacity": 9
+    },
+    "main_family_concentration": {
+      "beef_category_1_count": 12,
+      "fish_based_count": 9,
+      "chicken_based_count": 2,
+      "meat_free_count": 0,
+      "beef_or_fish_count": 21,
+      "beef_or_fish_share": "21/23"
+    },
+    "gap_to_50": 9,
+    "dc4_ready": false
+  },
+  "r3d": {
+    "selected_count": 10,
+    "selected_meal_types": {
+      "main": 10
+    },
+    "new_identity_only_count": 10,
+    "selected_source_family": "RU_MR_2_4_0162_19",
+    "product_mix": {
+      "meat_free_main": 6,
+      "chicken_main": 2,
+      "beef_main": 2,
+      "fish_main": 0
+    },
+    "milk_free_breakfast_added": 0,
+    "milk_free_breakfast_disposition": "NO_NEW_SOURCE_CLEAN_CANDIDATE_FOUND",
+    "final_planned_dc3_expansion": true
+  },
+  "projected_after_future_runtime": {
+    "active_exact_energy_count": 51,
+    "by_meal_type": {
+      "breakfast": 17,
+      "main": 33,
+      "sandwich": 1
+    },
+    "breakfast_compatible_count": 18,
+    "gap_to_50": 0,
+    "gap_to_80": 29,
+    "hard_milk_2_5": {
+      "unaffected_count": 3,
+      "capacity": 9,
+      "unchanged": true
+    },
+    "main_family_concentration": {
+      "beef_category_1_count": 14,
+      "fish_based_count": 9,
+      "chicken_based_count": 4,
+      "meat_free_count": 6,
+      "beef_or_fish_count": 23,
+      "beef_or_fish_share": "23/33",
+      "unaffected_after_exact_beef_exclusion": 19,
+      "capacity_after_exact_beef_exclusion": 57
+    },
+    "dc4_next_planned_operation": true,
+    "dc4_readiness_hypothesis": "ELIGIBLE_FOR_AUDIT_AFTER_SUCCESSFUL_RUNTIME_AND_POST_RUNTIME_RECONCILIATION",
+    "no_further_discretionary_dc3_expansion": true
+  },
+  "decision": "Freeze 10 source-clean product-useful MAIN recipes, cross 50 with a one-recipe buffer, improve MAIN diversity materially, preserve the unresolved milk-free breakfast gap rather than weaken source truth."
+}

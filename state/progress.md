@@ -1,5 +1,84 @@
 # Progress
 
+## R3-D final DC3 Contract Gate — review-ready — 2026-10-04
+
+Accepted base:
+`1c82f34b960621aed3e1c43780270f8048edfe0f` (merged PR #156).
+
+Issue #157 / PR #158 / branch `docs/r3d-final-dc3-batch-gate`.
+
+Preflight completed before PR creation; PR #158 is open for independent review.
+
+Preflight-frozen selection:
+
+- 10 MR 2.4.0162-19 Appendix-5 / 12+ source cards;
+- 6 meat-free MAIN;
+- 2 chicken MAIN;
+- 2 differentiated beef MAIN;
+- 0 fish additions;
+- 10 new identity-only FoodIngredients, no Nutrition/Vector/Composition authority.
+
+Projected future runtime:
+
+- exact-energy 41 -> 51;
+- MAIN 23 -> 33;
+- beef 12 -> 14;
+- fish remains 9;
+- chicken 2 -> 4;
+- meat-free 0 -> 6;
+- exact-beef unaffected 11 -> 19 / capacity 57;
+- gap-to-50 -> 0.
+
+Milk-free breakfast gap remains explicit: no additional source-clean in-scope
+candidate survived review; hard exact MILK_2_5 unaffected set stays 3 / capacity 9.
+
+Source/process preflight has already rejected/deferred internal conflicts rather
+than padding the batch, including MR 2.2 quantity conflict, MR 2.17 beef/chicken
+table-process conflict, MR 2.24 recipe-intermediate broth semantics and known
+School2022 breakfast/chicken process defects.
+
+Pre-PR exact-head verification `#37213223139` on
+`3a66e892a340274fc1bf86b601f98364f8e090b9`: SUCCESS.
+Repo-derived 41 → 51, 10/10 MR card hashes/rows, mappings, Ruff/format,
+scope/whitespace and Markdown links all PASS. Durable School2022 ZIP/PDF
+rehash and blocker replay also PASS outside CI.
+
+Sequence decision: successful R3-D runtime hands directly to DC4 audit, not
+another planned catalogue expansion.
+
+Independent-review correction — household + prepared authority:
+
+- frozen ten-recipe set unchanged;
+- 10/10 household applicability REVIEWED_PASS;
+- 10/10 specialized_medical_scope=false;
+- soup low-energy Serving feasibility explicitly quarantined to DC4;
+- MR 2.15/2.9 dietetic-source context retained as provenance only;
+- 10/10 prepared authority = PREPARED_OUTPUT_V1 /
+  RECIPE_PREPARED_OUTPUT_NUTRITION_V1;
+- ENERGY_KCAL only AVAILABLE; all other frozen nutrient codes UNKNOWN;
+- correction revision `ae8418bac52a9d4459a26f16b6ada607f654241a`;
+- R3-D #37224055581 / Docs #37224055575 / DC1 #37224055565 SUCCESS.
+
+Independent-review correction — source→frozen completeness:
+
+- frozen ten-recipe selection unchanged;
+- validator now requires exact multiset equality between every selected card's
+  complete 12+ source table and the frozen partition:
+  ingredients + source_intermediates + source_alternative_rows;
+- 10/10 exact card URLs PASS;
+- 10/10 full source-row partitions PASS;
+- source_intermediates require source-exact labels + semantic_role;
+- branch selections require exact source row/quantity bindings;
+- MR 2.11 exact row restored as `варка крупным куском — 50`;
+- milk-free breakfast conclusion explicitly scoped to reviewed MR + School2022;
+- tested revision `48fdfb3743e4a9c23ec022c7073dc8eeb489ced7`;
+- R3-D #37229372543 / Docs #37229372530 / DC1 #37229372415 SUCCESS.
+
+Status: `READY_FOR_INDEPENDENT_REVIEW`.
+
+---
+
+
 ## R3-C runtime — review-ready — 2026-10-04
 
 Accepted base:

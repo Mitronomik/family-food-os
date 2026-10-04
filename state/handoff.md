@@ -1,5 +1,88 @@
 # Handoff
 
+## R3-D final DC3 Contract Gate — review-ready — 2026-10-04
+
+Accepted main:
+`1c82f34b960621aed3e1c43780270f8048edfe0f` (merged PR #156).
+
+Issue #157 / PR #158 / branch `docs/r3d-final-dc3-batch-gate`.
+Preflight is complete; PR #158 is open for independent review.
+
+Read first:
+
+- `docs/family-food/r3d-final-dc3-batch-gate.md`;
+- `data/curation/r3d-final-dc3-batch-gate/frozen-batch.json`;
+- `data/curation/r3d-final-dc3-batch-gate/candidate-audit.json`;
+- `data/curation/r3d-final-dc3-batch-gate/source-verification.json`;
+- `scripts/validate_r3d_final_dc3_gate.py`.
+
+Preflight-frozen batch = 10 MAIN from retained MR 2.4.0162-19:
+
+- 6 meat-free;
+- 2 chicken;
+- 2 beef;
+- 0 fish.
+
+Projected post-runtime = 51 usable exact-energy recipes / 33 MAIN.
+
+Milk-free breakfast remains a known limitation (3 unaffected / capacity 9)
+because no new candidate survives current source/process review.
+
+Ten new FoodIngredient identities are identity-only; do not grant
+NutritionProfile/NutrientVector/Composition authority.
+
+Reviewer focus:
+
+- whether four hot soups are truthful `main` candidates under current coarse
+  MealType taxonomy and realistic Serving behavior;
+- exact source mapping for MR 12+ rows;
+- identity exactness (3.2% milk, first-grade flour, Dutch cheese, 72% butter);
+- no hidden sub-recipe/intermediate truth;
+- projected 51 means “eligible for DC4 audit”, not “DC4 passed”.
+
+Pre-PR verification:
+- exact review-ready branch run #37213223139 on `3a66e892a340274fc1bf86b601f98364f8e090b9` — SUCCESS;
+- 10/10 committed MR source cards / output / energy rows — PASS;
+- repo-derived 41 current / 51 projected — PASS;
+- Ruff/format/scope/Markdown — PASS;
+- independently materialized School2022 ZIP/PDF hashes and breakfast blocker
+  replay — PASS.
+
+After successful R3-D runtime + post-runtime reconciliation, next planned
+operation is DC4. Do not create R3-E/R3-F for catalogue aesthetics.
+
+Independent-review corrections now frozen:
+
+- every selected recipe has REVIEWED_PASS household applicability,
+  specialized_medical_scope=false, rationale and quarantined source context;
+- soups remain current-coarse-taxonomy MAIN, with Serving feasibility deferred
+  explicitly to DC4;
+- MR 2.15 / 2.9 dietetic collection provenance does not become a therapeutic claim;
+- every selected recipe freezes PREPARED_OUTPUT_V1 /
+  RECIPE_PREPARED_OUTPUT_NUTRITION_V1 with exact ENERGY_KCAL only;
+- all other frozen nutrient codes remain UNKNOWN; publication requires inactive Recipe;
+- tested correction revision: `ae8418bac52a9d4459a26f16b6ada607f654241a`;
+- R3-D #37224055581 / Docs #37224055575 / DC1 #37224055565 — SUCCESS.
+
+Source completeness correction:
+
+- every selected MR 12+ source row must be covered exactly once by
+  RecipeIngredient / source_intermediate / explicit not-selected alternative;
+- exact card-specific source URLs are pinned and validated 10/10;
+- source intermediate labels are literal retained-source text; semantics are
+  stored separately;
+- MR 2.11 uses exact `варка крупным куском — 50`,
+  semantic_role=`COOKED_MEAT_INTERMEDIATE`;
+- branch selections bind to exact source row labels/quantities;
+- tested completeness revision:
+  `48fdfb3743e4a9c23ec022c7073dc8eeb489ced7`;
+- R3-D #37229372543 / Docs #37229372530 / DC1 #37229372415 — SUCCESS.
+
+Status: `READY_FOR_INDEPENDENT_REVIEW`.
+
+---
+
+
 ## R3-C runtime — review-ready — 2026-10-04
 
 Accepted main:

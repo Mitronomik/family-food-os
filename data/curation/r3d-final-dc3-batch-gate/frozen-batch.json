@@ -1,0 +1,1148 @@
+{
+  "schema_version": 1,
+  "operation": "R3D_FINAL_DC3_FROZEN_BATCH_CONTRACT",
+  "accepted_base": "1c82f34b960621aed3e1c43780270f8048edfe0f",
+  "issue": 157,
+  "status": "FROZEN_FOR_GATE_REVIEW",
+  "current_usable_exact_energy": 41,
+  "minimum_selected_count": 9,
+  "target_selected_range": "10–12",
+  "source": {
+    "source_name": "RU_MR_2_4_0162_19",
+    "source_version": "2019-12-30",
+    "bundle_path": "data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json",
+    "bundle_git_blob_sha": "9210458b9ad81aa3650eccad7935519f8d375432",
+    "source_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/",
+    "source_document_raw_bytes_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+    "source_document_raw_text_sha256": "b5a05ffb36d34cd7bd82de71b55319d72ac850064302bf228e1e1ad19fd02062",
+    "publication_policy": "NORMATIVE_BASE_RECIPE_APPROVED",
+    "rights_review_status": "REVIEWED",
+    "rights_basis": "NORMATIVE_BASE_RECIPE_APPROVED under docs/family-food/ru-normative-recipe-corpus.md; bounded factual recipe/process/nutrient fields only"
+  },
+  "new_identity_only_foods": [
+    {
+      "canonical_code": "VEGETABLE_OIL_REFINED_UNSPECIFIED",
+      "canonical_name": "Масло растительное рафинированное",
+      "category_code": "fats_oils",
+      "default_unit": "g",
+      "identity_note": "Exact source is refined vegetable oil without species; do not narrow to sunflower/canola.",
+      "nutrition_profile": null,
+      "nutrient_vector_authority": null,
+      "composition_authority": null
+    },
+    {
+      "canonical_code": "CUCUMBER_PICKLED_CANNED",
+      "canonical_name": "Огурец консервированный маринованный",
+      "category_code": "vegetables",
+      "default_unit": "g",
+      "identity_note": "Preserve pickled/canned form; do not map to fresh CUCUMBER.",
+      "nutrition_profile": null,
+      "nutrient_vector_authority": null,
+      "composition_authority": null
+    },
+    {
+      "canonical_code": "SOUR_CREAM_20",
+      "canonical_name": "Сметана 20%",
+      "category_code": "dairy",
+      "default_unit": "g",
+      "identity_note": "Exact 20% source form; do not map to accepted 15% sour cream.",
+      "nutrition_profile": null,
+      "nutrient_vector_authority": null,
+      "composition_authority": null
+    },
+    {
+      "canonical_code": "SPLIT_PEAS_DRY",
+      "canonical_name": "Горох лущёный сухой",
+      "category_code": "legumes",
+      "default_unit": "g",
+      "identity_note": "Exact dry split-pea form.",
+      "nutrition_profile": null,
+      "nutrient_vector_authority": null,
+      "composition_authority": null
+    },
+    {
+      "canonical_code": "CHEESE_HARD_UNSPECIFIED",
+      "canonical_name": "Сыр твёрдый",
+      "category_code": "dairy",
+      "default_unit": "g",
+      "identity_note": "Canonical hard-cheese form; source variety remains provenance, no nutrition authority.",
+      "nutrition_profile": null,
+      "nutrient_vector_authority": null,
+      "composition_authority": null
+    },
+    {
+      "canonical_code": "CHICKEN_CATEGORY_1_WHOLE_RAW",
+      "canonical_name": "Курица 1 категории, тушка сырая",
+      "category_code": "poultry",
+      "default_unit": "g",
+      "identity_note": "Whole eviscerated category-I chicken; not breast or cooked chicken.",
+      "nutrition_profile": null,
+      "nutrient_vector_authority": null,
+      "composition_authority": null
+    },
+    {
+      "canonical_code": "MILK_3_2",
+      "canonical_name": "Молоко 3,2%",
+      "category_code": "dairy",
+      "default_unit": "g",
+      "identity_note": "Exact 3.2% source form; not MILK_2_5 or 3.25% seed profile.",
+      "nutrition_profile": null,
+      "nutrient_vector_authority": null,
+      "composition_authority": null
+    },
+    {
+      "canonical_code": "FLOUR_WHEAT_FIRST_GRADE",
+      "canonical_name": "Мука пшеничная 1 сорта",
+      "category_code": "grains",
+      "default_unit": "g",
+      "identity_note": "Exact first-grade wheat flour; not high-grade flour.",
+      "nutrition_profile": null,
+      "nutrient_vector_authority": null,
+      "composition_authority": null
+    },
+    {
+      "canonical_code": "CHEESE_DUTCH_HARD",
+      "canonical_name": "Сыр голландский твёрдый",
+      "category_code": "dairy",
+      "default_unit": "g",
+      "identity_note": "Exact Dutch hard-cheese source identity from MR 6.9; do not broaden to generic hard cheese.",
+      "nutrition_profile": null,
+      "nutrient_vector_authority": null,
+      "composition_authority": null
+    },
+    {
+      "canonical_code": "BUTTER_PEASANT_72",
+      "canonical_name": "Масло сливочное крестьянское 72%",
+      "category_code": "fats_oils",
+      "default_unit": "g",
+      "identity_note": "Exact 72% source fat form from MR 6.19; do not infer equivalence to accepted 72.5% butter.",
+      "nutrition_profile": null,
+      "nutrient_vector_authority": null,
+      "composition_authority": null
+    }
+  ],
+  "selected": [
+    {
+      "canonical_code": "MR2019_1_2A_VEGETARIAN_CABBAGE_SOUP",
+      "canonical_name": "Щи из свежей капусты вегетарианские",
+      "source_section_code": "APPENDIX_5",
+      "source_card_code": "1.2а",
+      "source_card_raw_sha256": "b209172357918043f9f92d485a8967a71d41dbcfaf69609ecb3781af983b45a9",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.2a/",
+      "source_variant": "12_PLUS",
+      "meal_type_code": "main",
+      "source_output_g": "350",
+      "energy_kcal": "112",
+      "ingredients": [
+        {
+          "source_label": "Капуста белокочанная",
+          "quantity_g": "69",
+          "food_code": "CABBAGE_GREEN"
+        },
+        {
+          "source_label": "Картофель",
+          "quantity_g": "35",
+          "food_code": "POTATO"
+        },
+        {
+          "source_label": "Морковь",
+          "quantity_g": "14",
+          "food_code": "CARROT"
+        },
+        {
+          "source_label": "Помидоры",
+          "quantity_g": "15.7",
+          "food_code": "TOMATO"
+        },
+        {
+          "source_label": "Лук репчатый",
+          "quantity_g": "7",
+          "food_code": "ONION_BULB_FRESH"
+        },
+        {
+          "source_label": "Масло растительное рафинированное",
+          "quantity_g": "6",
+          "food_code": "VEGETABLE_OIL_REFINED_UNSPECIFIED"
+        },
+        {
+          "source_label": "Вода питьевая",
+          "quantity_g": "309",
+          "food_code": "WATER"
+        }
+      ],
+      "process_binding": {
+        "status": "PASS_EXPLICIT_PROCESS_BINDING",
+        "rule": "All quantified rows are placed by the source technology; refined vegetable oil remains species-unspecified."
+      },
+      "consumer_steps_ru": [
+        "Подготовить капусту, картофель, морковь, помидоры и репчатый лук.",
+        "Морковь и лук мелко нарезать и припустить в небольшом количестве воды с рафинированным растительным маслом.",
+        "Капусту тонко нарезать, залить горячей водой и довести до кипения; добавить картофель, припущенные овощи и помидоры.",
+        "Варить при слабом кипении до готовности овощей."
+      ],
+      "dependency_flags": [
+        "MEAT_FREE",
+        "NO_MILK_2_5"
+      ],
+      "selection_reason": "Meat-free household MAIN; materially reduces beef/fish share with ordinary soup preparation.",
+      "source_nutrition_row": {
+        "protein_g": "2.5",
+        "fat_g": "6.3",
+        "carbohydrate_g": "11.2",
+        "energy_kcal": "112"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "Ordinary household vegetable soup. Under the current coarse MealTypeCode taxonomy it is reviewed as lunch/main; its low source energy per 350 g does not prove Serving adequacy and must be tested in DC4 persisted-week/Serving feasibility.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY",
+        "LOW_ENERGY_SERVING_FEASIBILITY_REQUIRES_DC4",
+        "SOUP_AS_MAIN_IS_CURRENT_COARSE_TAXONOMY_CLASSIFICATION"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "112"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
+      },
+      "source_intermediates": [],
+      "source_alternative_rows": []
+    },
+    {
+      "canonical_code": "MR2019_1_3_LENINGRAD_RASSOLNIK_SOUR_CREAM",
+      "canonical_name": "Рассольник ленинградский со сметаной",
+      "source_section_code": "APPENDIX_5",
+      "source_card_code": "1.3",
+      "source_card_raw_sha256": "7ec1683c88891f405ce57390c944ef3f8a79f90fc6c97787ddcf406f5a8b89b2",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.3/",
+      "source_variant": "12_PLUS",
+      "meal_type_code": "main",
+      "source_output_g": "350",
+      "energy_kcal": "119",
+      "ingredients": [
+        {
+          "source_label": "Вода питьевая",
+          "quantity_g": "315",
+          "food_code": "WATER"
+        },
+        {
+          "source_label": "Крупа перловая",
+          "quantity_g": "14",
+          "food_code": "BARLEY_PEARLED"
+        },
+        {
+          "source_label": "Картофель",
+          "quantity_g": "36",
+          "food_code": "POTATO"
+        },
+        {
+          "source_label": "Морковь",
+          "quantity_g": "18",
+          "food_code": "CARROT"
+        },
+        {
+          "source_label": "Лук репчатый",
+          "quantity_g": "3.5",
+          "food_code": "ONION_BULB_FRESH"
+        },
+        {
+          "source_label": "Огурцы консервированные",
+          "quantity_g": "21",
+          "food_code": "CUCUMBER_PICKLED_CANNED"
+        },
+        {
+          "source_label": "Соль поваренная йодированная",
+          "quantity_g": "0.3",
+          "food_code": "SALT_IODIZED"
+        },
+        {
+          "source_label": "Масло сливочное 72,5%",
+          "quantity_g": "3",
+          "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
+        },
+        {
+          "source_label": "Сметана 20%",
+          "quantity_g": "8",
+          "food_code": "SOUR_CREAM_20"
+        }
+      ],
+      "process_binding": {
+        "status": "PASS_SELECTED_WATER_BRANCH_SINGLE_FAT_BINDING",
+        "rule": "Select the source water branch, not meat broth. Barley pre-boil water is a drained process resource. Butter is the only quantified fat for the sauté step."
+      },
+      "consumer_steps_ru": [
+        "Перловую крупу промыть, залить кипящей водой и варить при слабом кипении 30–40 минут до полуготовности; воду слить.",
+        "Залить крупу водой из выбранной водной ветви и варить 10–15 минут; добавить нарезанный картофель, лук и морковь, приготовленные с использованием сливочного масла.",
+        "Через 5–10 минут добавить подготовленные консервированные огурцы и йодированную соль и варить до готовности.",
+        "При подаче добавить сметану."
+      ],
+      "dependency_flags": [
+        "MEAT_FREE",
+        "NO_MILK_2_5",
+        "DAIRY_SOUR_CREAM"
+      ],
+      "selection_reason": "Familiar meat-free soup adds barley/pickle variety and reduces beef/fish concentration.",
+      "source_nutrition_row": {
+        "protein_g": "2.8",
+        "fat_g": "4.1",
+        "carbohydrate_g": "17.5",
+        "energy_kcal": "119"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "Ordinary household rassolnik. Under the current coarse MealTypeCode taxonomy it is reviewed as lunch/main; its low source energy per 350 g does not prove Serving adequacy and must be tested in DC4 persisted-week/Serving feasibility.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY",
+        "LOW_ENERGY_SERVING_FEASIBILITY_REQUIRES_DC4",
+        "SOUP_AS_MAIN_IS_CURRENT_COARSE_TAXONOMY_CLASSIFICATION"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "119"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
+      },
+      "source_intermediates": [],
+      "source_alternative_rows": [],
+      "source_branch_selection": {
+        "selection_kind": "PROCESS_ALTERNATIVE_WITH_QUANTIFIED_SOURCE_ROW",
+        "selected_source_rows": [
+          {
+            "source_label": "Вода питьевая",
+            "quantity_g": "315"
+          }
+        ],
+        "not_selected_source_rows": [],
+        "selected_semantic_option": "Вода питьевая",
+        "not_selected_semantic_options": [
+          "мясной бульон"
+        ],
+        "rationale": "The technology allows meat broth or water, while the 12+ source table quantifies only water. Freeze the quantified water branch; no broth RecipeIngredient is inferred."
+      }
+    },
+    {
+      "canonical_code": "MR2019_1_4_OAT_VEGETABLE_SOUP_SOUR_CREAM",
+      "canonical_name": "Суп овсяный с овощами и сметаной",
+      "source_section_code": "APPENDIX_5",
+      "source_card_code": "1.4",
+      "source_card_raw_sha256": "40606e0739c6be7473058c50adff2ab7ba3da95ddc62d0547473a61b22da0e30",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.4/",
+      "source_variant": "12_PLUS",
+      "meal_type_code": "main",
+      "source_output_g": "350",
+      "energy_kcal": "112",
+      "ingredients": [
+        {
+          "source_label": "Овсяные хлопья \"Геркулес\"",
+          "quantity_g": "14",
+          "food_code": "OATS_ROLLED"
+        },
+        {
+          "source_label": "Картофель",
+          "quantity_g": "35",
+          "food_code": "POTATO"
+        },
+        {
+          "source_label": "Морковь",
+          "quantity_g": "21",
+          "food_code": "CARROT"
+        },
+        {
+          "source_label": "Лук репчатый",
+          "quantity_g": "7",
+          "food_code": "ONION_BULB_FRESH"
+        },
+        {
+          "source_label": "Помидоры",
+          "quantity_g": "15.7",
+          "food_code": "TOMATO"
+        },
+        {
+          "source_label": "Масло сливочное 72,5%",
+          "quantity_g": "2",
+          "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
+        },
+        {
+          "source_label": "Соль поваренная йодированная",
+          "quantity_g": "0.3",
+          "food_code": "SALT_IODIZED"
+        },
+        {
+          "source_label": "Вода питьевая",
+          "quantity_g": "309",
+          "food_code": "WATER"
+        },
+        {
+          "source_label": "Сметана 20%",
+          "quantity_g": "8",
+          "food_code": "SOUR_CREAM_20"
+        }
+      ],
+      "process_binding": {
+        "status": "PASS_SELECTED_WATER_BRANCH_EXPLICIT_BINDING",
+        "rule": "Select water, not meat broth. All quantified ingredients are explicitly placed; Hercules is mapped to rolled-oat form."
+      },
+      "consumer_steps_ru": [
+        "Подготовить картофель, морковь, помидоры и репчатый лук; морковь, помидоры и лук припустить со сливочным маслом.",
+        "Овсяные хлопья засыпать в кипящую воду и варить 20–30 минут.",
+        "Добавить припущенные овощи и нарезанный картофель и варить ещё 10–15 минут до готовности.",
+        "Добавить йодированную соль; при подаче заправить сметаной."
+      ],
+      "dependency_flags": [
+        "MEAT_FREE",
+        "NO_MILK_2_5",
+        "DAIRY_SOUR_CREAM"
+      ],
+      "selection_reason": "Meat-free oat/vegetable soup adds a distinct grain and process pattern.",
+      "source_nutrition_row": {
+        "protein_g": "3.1",
+        "fat_g": "4.1",
+        "carbohydrate_g": "15.8",
+        "energy_kcal": "112"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "Ordinary household oat-and-vegetable soup. Under the current coarse MealTypeCode taxonomy it is reviewed as lunch/main; its low source energy per 350 g does not prove Serving adequacy and must be tested in DC4 persisted-week/Serving feasibility.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY",
+        "LOW_ENERGY_SERVING_FEASIBILITY_REQUIRES_DC4",
+        "SOUP_AS_MAIN_IS_CURRENT_COARSE_TAXONOMY_CLASSIFICATION"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "112"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
+      },
+      "source_intermediates": [],
+      "source_alternative_rows": [],
+      "source_branch_selection": {
+        "selection_kind": "PROCESS_ALTERNATIVE_WITH_QUANTIFIED_SOURCE_ROW",
+        "selected_source_rows": [
+          {
+            "source_label": "Вода питьевая",
+            "quantity_g": "309"
+          }
+        ],
+        "not_selected_source_rows": [],
+        "selected_semantic_option": "Вода питьевая",
+        "not_selected_semantic_options": [
+          "мясной бульон"
+        ],
+        "rationale": "The technology allows meat broth or water, while the 12+ source table quantifies only water. Freeze the quantified water branch; no broth RecipeIngredient is inferred."
+      }
+    },
+    {
+      "canonical_code": "MR2019_1_16_POTATO_SPLIT_PEA_SOUP",
+      "canonical_name": "Суп картофельный с горохом",
+      "source_section_code": "APPENDIX_5",
+      "source_card_code": "1.16",
+      "source_card_raw_sha256": "f4d70b7eb24de3fc10fd239ad6dcb2d7047c8e458541a0a1f8d6e15256ee8731",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.16/",
+      "source_variant": "12_PLUS",
+      "meal_type_code": "main",
+      "source_output_g": "350",
+      "energy_kcal": "219",
+      "ingredients": [
+        {
+          "source_label": "Морковь свежая",
+          "quantity_g": "14",
+          "food_code": "CARROT"
+        },
+        {
+          "source_label": "Лук репчатый",
+          "quantity_g": "5",
+          "food_code": "ONION_BULB_FRESH"
+        },
+        {
+          "source_label": "Масло сливочное крестьянское 72,5% ж.",
+          "quantity_g": "6",
+          "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
+        },
+        {
+          "source_label": "Картофель свежий молодой",
+          "quantity_g": "88",
+          "food_code": "POTATO"
+        },
+        {
+          "source_label": "Горох лущеный",
+          "quantity_g": "28",
+          "food_code": "SPLIT_PEAS_DRY"
+        },
+        {
+          "source_label": "Вода питьевая или отвар овощной",
+          "quantity_g": "230",
+          "food_code": "WATER"
+        },
+        {
+          "source_label": "Соль поваренная йодированная",
+          "quantity_g": "0.5",
+          "food_code": "SALT_IODIZED"
+        }
+      ],
+      "source_branch_selection": {
+        "selection_kind": "WITHIN_SOURCE_ROW_SEMANTIC_OPTION",
+        "selected_source_rows": [
+          {
+            "source_label": "Вода питьевая или отвар овощной",
+            "quantity_g": "230"
+          }
+        ],
+        "not_selected_source_rows": [],
+        "selected_semantic_option": "Вода питьевая",
+        "not_selected_semantic_options": [
+          "отвар овощной"
+        ],
+        "rationale": "The quantified source row is an either/or row. Freeze the water semantic option and map the exact row to WATER; vegetable broth is not published."
+      },
+      "process_binding": {
+        "status": "PASS_SELECTED_WATER_BRANCH_EXACT_TOTAL_INTERNAL_SPLIT_UNKNOWN",
+        "rule": "The source ingredient row is water OR vegetable broth; freeze the water branch. Exact total water is authoritative while soak/cook/final internal split remains unspecified."
+      },
+      "consumer_steps_ru": [
+        "Горох перебрать, промыть и замочить в холодной воде на 3–4 часа; затем варить в этой же воде до размягчения.",
+        "Морковь и лук подготовить и припустить в небольшом количестве воды со сливочным маслом.",
+        "Добавить нарезанный картофель и припущенные овощи и варить до готовности.",
+        "Добавить кипячёную воду в пределах общего количества рецептуры, йодированную соль и довести до кипения."
+      ],
+      "dependency_flags": [
+        "MEAT_FREE",
+        "NO_MILK_2_5"
+      ],
+      "selection_reason": "Higher-energy meat-free legume MAIN; adds meaningful household and protein-source variety.",
+      "source_nutrition_row": {
+        "protein_g": "8.5",
+        "fat_g": "5.5",
+        "carbohydrate_g": "33.6",
+        "energy_kcal": "219"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "Ordinary household potato-and-split-pea soup. Under the current coarse MealTypeCode taxonomy it is reviewed as lunch/main; Serving adequacy remains a DC4 persisted-week/Serving feasibility question.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY",
+        "LOW_ENERGY_SERVING_FEASIBILITY_REQUIRES_DC4",
+        "SOUP_AS_MAIN_IS_CURRENT_COARSE_TAXONOMY_CLASSIFICATION"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "219"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
+      },
+      "source_intermediates": [],
+      "source_alternative_rows": []
+    },
+    {
+      "canonical_code": "MR2019_6_9_VERMICELLI_HARD_CHEESE",
+      "canonical_name": "Вермишель с тёртым сыром",
+      "source_section_code": "APPENDIX_5",
+      "source_card_code": "6.9",
+      "source_card_raw_sha256": "5386cfcbef7c64dbd4c09d5e6737def2cebd0e051bd313052adb1b4f04063b5c",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/bliuda-iz-krup-i-makaronnykh/tekhnologicheskaia-karta-n-6.9/",
+      "source_variant": "12_PLUS",
+      "meal_type_code": "main",
+      "source_output_g": "120",
+      "energy_kcal": "193",
+      "ingredients": [
+        {
+          "source_label": "Макаронные изделия в/с (вермишель)",
+          "quantity_g": "36",
+          "food_code": "PASTA_DRY"
+        },
+        {
+          "source_label": "Вода питьевая",
+          "quantity_g": "215",
+          "food_code": "WATER"
+        },
+        {
+          "source_label": "Соль поваренная йодированная",
+          "quantity_g": "0.4",
+          "food_code": "SALT_IODIZED"
+        },
+        {
+          "source_label": "Сыр голландский х/о-85",
+          "quantity_g": "15.6",
+          "food_code": "CHEESE_DUTCH_HARD"
+        },
+        {
+          "source_label": "Масло сливочное крестьянское 72,5% ж. <*>",
+          "quantity_g": "4",
+          "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
+        }
+      ],
+      "process_binding": {
+        "status": "PASS_EXPLICIT_PROCESS_BINDING",
+        "rule": "Vermicelli cutting style remains source detail under PASTA_DRY. Dutch cheese maps to hard-cheese form; no direct cheese nutrition authority is granted."
+      },
+      "consumer_steps_ru": [
+        "Вермишель засыпать в кипящую подсоленную воду и варить 10–12 минут до готовности.",
+        "Откинуть на сито, дать воде стечь, добавить сливочное масло и перемешать.",
+        "Выложить в форму, посыпать тёртым твёрдым сыром и прогреть 5–10 минут при 200–220 °C."
+      ],
+      "dependency_flags": [
+        "MEAT_FREE",
+        "NO_MILK_2_5",
+        "DAIRY_CHEESE"
+      ],
+      "selection_reason": "Simple household meat-free pasta MAIN; materially different from current protein-heavy catalogue.",
+      "source_nutrition_row": {
+        "protein_g": "7.8",
+        "fat_g": "6.7",
+        "carbohydrate_g": "24.7",
+        "energy_kcal": "193"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "Ordinary household cooked pasta with grated cheese; no diagnosis-specific ingredient, therapeutic claim or medical-only process is published.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "193"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
+      },
+      "source_intermediates": [],
+      "source_alternative_rows": []
+    },
+    {
+      "canonical_code": "MR2019_6_19_BAKED_MACARONI_HARD_CHEESE",
+      "canonical_name": "Макаронник с сыром запечённый",
+      "source_section_code": "APPENDIX_5",
+      "source_card_code": "6.19",
+      "source_card_raw_sha256": "d6b6acab547af575ac10e74812dd1eec119fc839fbfc5baef047a593a4126ec4",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/bliuda-iz-krup-i-makaronnykh/tekhnologicheskaia-karta-n-6.19/",
+      "source_variant": "12_PLUS",
+      "meal_type_code": "main",
+      "source_output_g": "180",
+      "energy_kcal": "313",
+      "ingredients": [
+        {
+          "source_label": "Макаронные изделия",
+          "quantity_g": "60",
+          "food_code": "PASTA_DRY"
+        },
+        {
+          "source_label": "Вода питьевая",
+          "quantity_g": "360",
+          "food_code": "WATER"
+        },
+        {
+          "source_label": "Соль поваренная йодированная",
+          "quantity_g": "1.3",
+          "food_code": "SALT_IODIZED"
+        },
+        {
+          "source_label": "Масло сливочное крестьянское 72% ж.",
+          "quantity_g": "6",
+          "food_code": "BUTTER_PEASANT_72"
+        },
+        {
+          "source_label": "Сыр (твердых сортов)",
+          "quantity_g": "21",
+          "food_code": "CHEESE_HARD_UNSPECIFIED"
+        }
+      ],
+      "process_binding": {
+        "status": "PASS_EXPLICIT_PROCESS_BINDING",
+        "rule": "All quantified rows are explicitly placed; hard-cheese subtype remains source provenance."
+      },
+      "consumer_steps_ru": [
+        "Макароны засыпать в кипящую подсоленную воду и варить при слабом кипении до готовности.",
+        "Откинуть на сито, дать воде стечь, добавить сливочное масло и перемешать.",
+        "Твёрдый сыр натереть, соединить с макаронами и тщательно перемешать.",
+        "Запекать при 200–250 °C до образования румяной корочки."
+      ],
+      "dependency_flags": [
+        "MEAT_FREE",
+        "NO_MILK_2_5",
+        "DAIRY_CHEESE"
+      ],
+      "selection_reason": "Baked meat-free MAIN adds a high-familiarity household dish and preparation pattern.",
+      "source_nutrition_row": {
+        "protein_g": "12.3",
+        "fat_g": "10.9",
+        "carbohydrate_g": "41.1",
+        "energy_kcal": "313"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "Ordinary household baked macaroni with cheese; no diagnosis-specific ingredient, therapeutic claim or medical-only process is published.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "313"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
+      },
+      "source_intermediates": [],
+      "source_alternative_rows": []
+    },
+    {
+      "canonical_code": "MR2019_2_15_STEAMED_CHICKEN_SOUFFLE",
+      "canonical_name": "Суфле из отварной курицы паровое",
+      "source_section_code": "APPENDIX_5",
+      "source_card_code": "2.15",
+      "source_card_raw_sha256": "2526913820833b13f7cdc5d9b480b1dd8cda27104aba98792dda040a2f3d543a",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/miasnye-bliuda/tekhnologicheskaia-karta-n-2.15/",
+      "source_variant": "12_PLUS",
+      "meal_type_code": "main",
+      "source_output_g": "115",
+      "energy_kcal": "291",
+      "ingredients": [
+        {
+          "source_label": "Куры 1 категории потрошеные",
+          "quantity_g": "155",
+          "food_code": "CHICKEN_CATEGORY_1_WHOLE_RAW"
+        },
+        {
+          "source_label": "Яйцо куриное 2 с.",
+          "quantity_g": "16",
+          "food_code": "EGG"
+        },
+        {
+          "source_label": "Молоко цельное пастеризованное 3,2% ж.",
+          "quantity_g": "38",
+          "food_code": "MILK_3_2"
+        },
+        {
+          "source_label": "Соль пищевая йодированная",
+          "quantity_g": "0.3",
+          "food_code": "SALT_IODIZED"
+        },
+        {
+          "source_label": "Мука пшеничная 1 с.",
+          "quantity_g": "4",
+          "food_code": "FLOUR_WHEAT_FIRST_GRADE"
+        },
+        {
+          "source_label": "Масло сливочное крестьянское 72,5% ж. (для смазывания)",
+          "quantity_g": "2",
+          "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
+        }
+      ],
+      "source_intermediates": [
+        {
+          "source_label": "Масса вареной курицы",
+          "quantity_g": "80",
+          "semantic_role": "COOKED_CHICKEN_INTERMEDIATE"
+        },
+        {
+          "source_label": "Масса полуфабриката",
+          "quantity_g": "128",
+          "semantic_role": "SEMIFINISHED_MASS"
+        }
+      ],
+      "process_binding": {
+        "status": "PASS_EXPLICIT_PROCESS_WITH_INTERMEDIATE_MASS",
+        "rule": "Raw whole-chicken input is the RecipeIngredient; cooked-chicken and semifinished masses remain source process/output evidence, not duplicate FoodIngredients."
+      },
+      "consumer_steps_ru": [
+        "Курицу отварить до готовности; отделить мякоть и дважды измельчить.",
+        "Из молока и пшеничной муки приготовить молочный соус и постепенно ввести его в куриную массу.",
+        "Добавить желтки и йодированную соль, перемешать; затем осторожно вмешать взбитые белки.",
+        "Выложить массу в форму, смазанную сливочным маслом, и готовить на пару до готовности."
+      ],
+      "dependency_flags": [
+        "CHICKEN",
+        "MILK_3_2"
+      ],
+      "selection_reason": "Adds non-beef/fish protein and a steamed household preparation with exact source output/energy.",
+      "source_nutrition_row": {
+        "protein_g": "19.1",
+        "fat_g": "21.7",
+        "carbohydrate_g": "5.0",
+        "energy_kcal": "291"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "The dish uses ordinary household boiling, sauce preparation and steaming. Its dietetic/therapeutic-preventive source-collection provenance is retained as provenance only; no therapeutic claim or diagnosis-specific process is published.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY",
+        "DIETETIC_SOURCE_COLLECTION_PROVENANCE_ONLY_NO_THERAPEUTIC_CLAIM"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "291"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
+      },
+      "source_alternative_rows": []
+    },
+    {
+      "canonical_code": "MR2019_2_14_BOILED_CHICKEN_CATEGORY_1",
+      "canonical_name": "Курица 1 категории отварная",
+      "source_section_code": "APPENDIX_5",
+      "source_card_code": "2.14",
+      "source_card_raw_sha256": "6b5a0849d1ff302115045dd557096e4f52d17b14ebe67c90dd51603ac58fdcf6",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/miasnye-bliuda/tekhnologicheskaia-karta-n-2.14/",
+      "source_variant": "12_PLUS",
+      "meal_type_code": "main",
+      "source_output_g": "110",
+      "energy_kcal": "267",
+      "ingredients": [
+        {
+          "source_label": "Куры 1 категории потрошеные",
+          "quantity_g": "155",
+          "food_code": "CHICKEN_CATEGORY_1_WHOLE_RAW"
+        },
+        {
+          "source_label": "Морковь свежая",
+          "quantity_g": "8",
+          "food_code": "CARROT"
+        },
+        {
+          "source_label": "Соль поваренная йодированная",
+          "quantity_g": "1",
+          "food_code": "SALT_IODIZED"
+        }
+      ],
+      "source_intermediates": [
+        {
+          "source_label": "Масса отварной курицы",
+          "quantity_g": "110",
+          "semantic_role": "COOKED_CHICKEN_INTERMEDIATE"
+        }
+      ],
+      "process_binding": {
+        "status": "PASS_PROCESS_WATER_NON_CONSUMED_RESOURCE",
+        "rule": "Source hot water (2–2.5 L/kg) is an unquantified cooking medium, not a RecipeIngredient; source output and chemistry explicitly refer to boiled chicken meat with skin. Carrot and salt are quantified and placed."
+      },
+      "consumer_steps_ru": [
+        "Курицу уложить в горячую воду, довести до кипения и снять пену.",
+        "Добавить очищенную морковь и йодированную соль и варить при слабом кипении до готовности.",
+        "Готовую курицу разделить на порционные кусочки; бульон используется только как технологическая среда и не входит в выход блюда."
+      ],
+      "dependency_flags": [
+        "CHICKEN"
+      ],
+      "selection_reason": "Source-clean whole-chicken MAIN reuses the same exact category-I identity as the soufflé and avoids a new broth/sub-recipe architecture.",
+      "source_nutrition_row": {
+        "protein_g": "20.4",
+        "fat_g": "20.6",
+        "carbohydrate_g": "0",
+        "energy_kcal": "267"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "Ordinary household boiled-chicken preparation; institutional source provenance does not create a therapeutic claim or medical-only process.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "267"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
+      },
+      "source_alternative_rows": []
+    },
+    {
+      "canonical_code": "MR2019_2_11_BEEF_VEGETABLE_RAGOUT",
+      "canonical_name": "Рагу из овощей с отварной говядиной",
+      "source_section_code": "APPENDIX_5",
+      "source_card_code": "2.11",
+      "source_card_raw_sha256": "89ef921166ece243277dc3f1106e340769f3a99a89195ff10028bd78f529a295",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/miasnye-bliuda/tekhnologicheskaia-karta-n-2.11/",
+      "source_variant": "12_PLUS",
+      "meal_type_code": "main",
+      "source_output_g": "230",
+      "energy_kcal": "336",
+      "ingredients": [
+        {
+          "source_label": "Говядина 1 кат.",
+          "quantity_g": "81",
+          "food_code": "BEEF_CATEGORY_1_RAW"
+        },
+        {
+          "source_label": "Лук репчатый",
+          "quantity_g": "9",
+          "food_code": "ONION_BULB_FRESH"
+        },
+        {
+          "source_label": "Морковь свежая",
+          "quantity_g": "35",
+          "food_code": "CARROT"
+        },
+        {
+          "source_label": "Масло сливочное крестьянское 72,5% ж.",
+          "quantity_g": "8",
+          "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
+        },
+        {
+          "source_label": "Картофель",
+          "quantity_g": "91",
+          "food_code": "POTATO"
+        },
+        {
+          "source_label": "Зеленый горошек консервированный",
+          "quantity_g": "18",
+          "food_code": "GREEN_PEAS_CANNED"
+        },
+        {
+          "source_label": "Помидоры парниковые или грунтовые",
+          "quantity_g": "13",
+          "food_code": "TOMATO"
+        },
+        {
+          "source_label": "Соль поваренная йодированная",
+          "quantity_g": "0.9",
+          "food_code": "SALT_IODIZED"
+        },
+        {
+          "source_label": "Мука пшеничная 1 с.",
+          "quantity_g": "4",
+          "food_code": "FLOUR_WHEAT_FIRST_GRADE"
+        },
+        {
+          "source_label": "Вода питьевая",
+          "quantity_g": "75",
+          "food_code": "WATER"
+        }
+      ],
+      "source_branch_selection": {
+        "selection_kind": "SOURCE_ROW_ALTERNATIVE",
+        "selected_source_rows": [
+          {
+            "source_label": "Говядина 1 кат.",
+            "quantity_g": "81"
+          }
+        ],
+        "not_selected_source_rows": [
+          {
+            "source_label": "или мясо бескостное",
+            "quantity_g": "81"
+          }
+        ],
+        "selected_semantic_option": "Говядина 1 кат.",
+        "not_selected_semantic_options": [
+          "мясо бескостное"
+        ],
+        "rationale": "The source table contains separate alternative raw-meat rows. Freeze category-I beef; retain the boneless-meat row explicitly as not selected."
+      },
+      "source_intermediates": [
+        {
+          "source_label": "варка крупным куском",
+          "quantity_g": "50",
+          "semantic_role": "COOKED_MEAT_INTERMEDIATE",
+          "interpretation_note": "Semantic role records the reviewed meaning; source_label remains exact retained source text."
+        },
+        {
+          "source_label": "Масса полуфабриката",
+          "quantity_g": "280",
+          "semantic_role": "SEMIFINISHED_MASS"
+        }
+      ],
+      "process_binding": {
+        "status": "PASS_SELECTED_BEEF_BRANCH_EXACT_TOTAL_INTERNAL_WATER_SPLIT_UNKNOWN",
+        "rule": "Freeze category-I beef branch. Quantified water total is exact; internal use between vegetable poaching and flour sauce remains unspecified. Potato boiling water is a drained process resource."
+      },
+      "consumer_steps_ru": [
+        "Говядину отварить до готовности и нарезать по 3–4 кусочка на порцию.",
+        "Лук и морковь мелко нарезать и припустить в небольшом количестве воды со сливочным маслом.",
+        "Картофель нарезать кубиками и отварить до полуготовности, отвар слить.",
+        "Соединить картофель, зелёный горошек, помидоры, мясо, лук и морковь; добавить соус из подсушенной муки и воды и тушить до готовности.",
+        "За несколько минут до готовности добавить йодированную соль."
+      ],
+      "dependency_flags": [
+        "BEEF_CATEGORY_1"
+      ],
+      "selection_reason": "Beef is retained only for a genuinely different vegetable-heavy ragout; batch-level beef share still falls materially.",
+      "source_nutrition_row": {
+        "protein_g": "18.2",
+        "fat_g": "18.8",
+        "carbohydrate_g": "23.1",
+        "energy_kcal": "336"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "Ordinary household beef-and-vegetable ragout; no diagnosis-specific ingredient, therapeutic claim or medical-only process is published.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "336"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
+      },
+      "source_alternative_rows": [
+        {
+          "source_label": "или мясо бескостное",
+          "quantity_g": "81",
+          "disposition": "NOT_SELECTED_ALTERNATIVE",
+          "semantic_role": "ALTERNATIVE_RAW_MEAT_INPUT",
+          "reason": "The frozen branch selects the separate category-I beef source row."
+        }
+      ]
+    },
+    {
+      "canonical_code": "MR2019_2_9_STEAMED_BEEF_ROLL_OMELET",
+      "canonical_name": "Рулет говяжий с омлетом паровой",
+      "source_section_code": "APPENDIX_5",
+      "source_card_code": "2.9",
+      "source_card_raw_sha256": "2a60d9ff7c31b0d2c052635c0d4d938a8f03d02ac5d0c9aba01ed1d63116ee8c",
+      "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/miasnye-bliuda/tekhnologicheskaia-karta-n-2.9/",
+      "source_variant": "12_PLUS",
+      "meal_type_code": "main",
+      "source_output_g": "105",
+      "energy_kcal": "222",
+      "ingredients": [
+        {
+          "source_label": "Говядина 1 кат. или мясо бескостное",
+          "quantity_g": "73",
+          "food_code": "BEEF_CATEGORY_1_RAW"
+        },
+        {
+          "source_label": "Хлеб пшеничный",
+          "quantity_g": "12",
+          "food_code": "WHEAT_BREAD_PLAIN"
+        },
+        {
+          "source_label": "Вода питьевая",
+          "quantity_g": "16",
+          "food_code": "WATER"
+        },
+        {
+          "source_label": "Соль поваренная йодированная",
+          "quantity_g": "0.8",
+          "food_code": "SALT_IODIZED"
+        },
+        {
+          "source_label": "Яйцо куриное 2 с.",
+          "quantity_g": "8",
+          "food_code": "EGG"
+        },
+        {
+          "source_label": "Молоко цельное пастеризованное 3,2% ж.",
+          "quantity_g": "8",
+          "food_code": "MILK_3_2"
+        },
+        {
+          "source_label": "Масло сливочное крестьянское 72,5% ж.",
+          "quantity_g": "3",
+          "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
+        }
+      ],
+      "source_branch_selection": {
+        "selection_kind": "WITHIN_SOURCE_ROW_SEMANTIC_OPTION",
+        "selected_source_rows": [
+          {
+            "source_label": "Говядина 1 кат. или мясо бескостное",
+            "quantity_g": "73"
+          }
+        ],
+        "not_selected_source_rows": [],
+        "selected_semantic_option": "Говядина 1 кат.",
+        "not_selected_semantic_options": [
+          "мясо бескостное"
+        ],
+        "rationale": "The retained source combines the alternatives in one quantified row. Freeze the category-I beef semantic option without inventing a second source row."
+      },
+      "source_intermediates": [
+        {
+          "source_label": "Масса полуфабриката",
+          "quantity_g": "120",
+          "semantic_role": "SEMIFINISHED_MASS"
+        }
+      ],
+      "process_binding": {
+        "status": "PASS_SELECTED_BEEF_BRANCH_PROCESS_RESOURCE_WATER",
+        "rule": "Freeze category-I beef branch. Quantified water binds to bread soaking; extra water used only to wet cloth/tray remains a non-consumed process resource."
+      },
+      "consumer_steps_ru": [
+        "Говядину дважды измельчить, соединить с размоченным в воде и отжатым пшеничным хлебом, добавить йодированную соль и сливочное масло и хорошо вымешать.",
+        "Из яйца и молока приготовить омлет на пару и охладить.",
+        "Мясную массу разложить ровным слоем, в середину выложить омлет и сформовать рулет.",
+        "Готовить рулет на пару 20–25 минут до готовности и нарезать на порции."
+      ],
+      "dependency_flags": [
+        "BEEF_CATEGORY_1",
+        "MILK_3_2"
+      ],
+      "selection_reason": "Adds a materially different stuffed/steamed beef format; only two of ten R3-D recipes add beef.",
+      "source_nutrition_row": {
+        "protein_g": "15.8",
+        "fat_g": "15.0",
+        "carbohydrate_g": "6.0",
+        "energy_kcal": "222"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "The dish uses ordinary household minced-meat, omelet and steaming operations. Its dietetic/therapeutic-preventive source-collection provenance is retained as provenance only; no therapeutic claim or diagnosis-specific process is published.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY",
+        "DIETETIC_SOURCE_COLLECTION_PROVENANCE_ONLY_NO_THERAPEUTIC_CLAIM"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "222"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
+      },
+      "source_alternative_rows": []
+    }
+  ],
+  "future_runtime_transaction_contract": {
+    "architecture": "reuse merged R3-A/R3-B/R3-C option B; no new activation architecture",
+    "publication": [
+      "per-recipe atomic inactive RecipeVersion + prepared authority",
+      "exact replay zero-write",
+      "exact inactive subset resumable",
+      "failed recipe leaves no partial state",
+      "conflicting/partial truth fails closed",
+      "publication never activates"
+    ],
+    "activation": [
+      "starts only after every frozen RecipeVersion reconciles",
+      "all-inactive batch one caller-owned UoW / one commit",
+      "all-active replay zero-write",
+      "mixed active/inactive fails closed",
+      "injected activation failure rolls back all staged writes"
+    ]
+  },
+  "source_row_partition_contract": {
+    "rule": "Every 12+ source table row must appear exactly once in one frozen partition bucket: RecipeIngredient, source_intermediate, or explicitly-not-selected source alternative.",
+    "buckets": [
+      "ingredients",
+      "source_intermediates",
+      "source_alternative_rows"
+    ],
+    "source_labels": "must remain source-exact; semantic interpretation belongs in separate semantic_role/rationale fields",
+    "branch_binding": "every source_branch_selection must reference exact source row label(s) and 12+ quantity/quantities"
+  }
+}

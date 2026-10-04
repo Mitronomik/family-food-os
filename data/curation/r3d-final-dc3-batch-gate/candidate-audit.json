@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "operation": "R3D_FINAL_DC3_CANDIDATE_AUDIT",
+  "accepted_base": "1c82f34b960621aed3e1c43780270f8048edfe0f",
+  "issue": 157,
+  "decision": {
+    "selected_count": 10,
+    "rule": "coverage-first; cross 50 with source-clean product-useful recipes, never pad",
+    "product_result": "6 meat-free MAIN + 2 chicken MAIN + 2 differentiated beef MAIN; no fish additions",
+    "milk_free_breakfast_result": "NO_NEW_SOURCE_CLEAN_CANDIDATE",
+    "milk_free_breakfast_note": "R3-D does not claim improvement where retained source truth does not support it; hard MILK_2_5 unaffected breakfast set remains 3 / capacity 9.",
+    "final_dc3_expansion": true
+  },
+  "reviewed_not_selected": [
+    {
+      "source": "RU_MR_2_4_0162_19",
+      "card": "APPENDIX_5_CARD_6_5A",
+      "name": "Каша гречневая рассыпчатая",
+      "disposition": "REJECT_SOURCE_PROCESS_CONFLICT",
+      "reason": "Ingredient table has buckwheat, water, salt and butter only, while technology instructs adding milk; cannot publish a milk-free breakfast by ignoring the process."
+    },
+    {
+      "source": "RU_MR_2_4_0162_19",
+      "card": "APPENDIX_5_CARD_5_46",
+      "name": "Суфле творожное паровое без сахара",
+      "disposition": "DEFER_UNQUANTIFIED_PROCESS_INPUT",
+      "reason": "Technology explicitly adds salt but no salt quantity exists in the ingredient table; also contains milk, so it does not improve hard MILK_2_5 resilience."
+    },
+    {
+      "source": "ru-school2022",
+      "card": "54-3т",
+      "disposition": "DEFER_REQUIRED_PROCESS_PLACEMENT_UNRESOLVED",
+      "reason": "Quantified sugar is not placed by source technology."
+    },
+    {
+      "source": "ru-school2022",
+      "card": "54-4т",
+      "disposition": "DEFER_UNQUANTIFIED_PROCESS_WATER",
+      "reason": "Vanillin requires hot water absent from the quantitative ingredient table."
+    },
+    {
+      "source": "ru-school2022",
+      "card": "54-5т",
+      "disposition": "REJECT_SOURCE_PROCESS_FAT_CONFLICT",
+      "reason": "Ingredient table has sunflower oil while source technology greases the form with butter."
+    },
+    {
+      "source": "ru-school2022",
+      "card": "54-6т",
+      "disposition": "DEFER_UNQUANTIFIED_PROCESS_WATER",
+      "reason": "Vanillin requires hot water absent from the quantitative ingredient table."
+    },
+    {
+      "source": "ru-school2022",
+      "card": "54-7т",
+      "disposition": "OUT_OF_SCOPE_MEDICAL",
+      "reason": "Specialized celiac/medical context remains outside wellness MVP."
+    },
+    {
+      "source": "ru-school2022",
+      "card": "54-5о",
+      "disposition": "CLEAN_NOT_SELECTED_NO_PRIORITY_GAIN",
+      "reason": "Milk-dependent omelet with additional cauliflower/kohlrabi identity debt; does not improve the known milk-free breakfast gap and current omelet variety is already adequate."
+    },
+    {
+      "source": "RU_MR_2_4_0162_19",
+      "card": "APPENDIX_5_CARD_1_2",
+      "name": "Щи из свежей капусты вегетарианские со сметаной",
+      "disposition": "REJECT_SOURCE_PROCESS_FAT_CONFLICT",
+      "reason": "Table carries butter, while technology calls for vegetable oil; source process does not support an exact fat mapping."
+    },
+    {
+      "source": "RU_MR_2_4_0162_19",
+      "card": "APPENDIX_5_CARD_1_4A",
+      "name": "Суп овсяный с мелко шинкованными овощами",
+      "disposition": "REJECT_SOURCE_PROCESS_CONFLICT",
+      "reason": "Table carries vegetable oil and no sour cream, while technology calls for butter and serving with sour cream."
+    },
+    {
+      "source": "RU_MR_2_4_0162_19",
+      "card": "APPENDIX_5_CARD_2_2",
+      "name": "Суфле из отварного мяса паровое",
+      "disposition": "REJECT_PROCESS_QUANTITY_CONFLICT",
+      "reason": "12+ table gives 4 g refined vegetable oil for greasing while technology fixes 2 g recipe amount; do not infer an allocation."
+    },
+    {
+      "source": "RU_MR_2_4_0162_19",
+      "card": "APPENDIX_5_CARD_2_17",
+      "name": "Кнели мясные паровые",
+      "disposition": "REJECT_SOURCE_PROCESS_IDENTITY_CONFLICT",
+      "reason": "Ingredient table is beef/meat, while retained technology describes boiled chicken; source card is internally contradictory."
+    },
+    {
+      "source": "RU_MR_2_4_0162_19",
+      "card": "APPENDIX_5_CARD_2_5",
+      "name": "Фрикадельки мясные паровые",
+      "disposition": "CLEAN_NOT_SELECTED_DUPLICATE",
+      "reason": "Source-clean steam branch exists, but current catalogue already contains multiple beef meatball/cutlet forms; low incremental product value."
+    },
+    {
+      "source": "RU_MR_2_4_0162_19",
+      "card": "APPENDIX_5_CARD_2_6",
+      "name": "Биточки мясные паровые",
+      "disposition": "CLEAN_NOT_SELECTED_DUPLICATE",
+      "reason": "Near-duplicate of existing beef bitochek/cutlet family; would increase beef concentration for little household variety."
+    },
+    {
+      "source": "RU_MR_2_4_0162_19",
+      "card": "APPENDIX_5_CARD_2_7",
+      "name": "Тефтели мясные паровые",
+      "disposition": "CLEAN_NOT_SELECTED_DUPLICATE",
+      "reason": "Near-duplicate beef meatball family; excluded by product-value selection, not source quality."
+    },
+    {
+      "source": "RU_MR_2_4_0162_19",
+      "card": "APPENDIX_5_CARD_2_8",
+      "name": "Котлеты мясные паровые",
+      "disposition": "CLEAN_NOT_SELECTED_DUPLICATE",
+      "reason": "Near-duplicate beef cutlet family; excluded by product-value selection."
+    },
+    {
+      "source": "RU_MR_2_4_0162_19",
+      "card": "APPENDIX_5_CARD_2_10A",
+      "name": "Плов из риса с отварным мясом",
+      "disposition": "CLEAN_NOT_SELECTED_DUPLICATE",
+      "reason": "Existing accepted beef pilaf already covers this household pattern; R3-D prioritizes new meat-free/chicken variety."
+    },
+    {
+      "source": "RU_MR_2_4_0162_19",
+      "card": "APPENDIX_5_CARD_2_24",
+      "name": "Пюре куриное в бульоне со сливочным маслом",
+      "disposition": "DEFER_RECIPE_INTERMEDIATE_SEMANTICS",
+      "reason": "Card depends on separate chicken broth recipe/intermediate N 1.0. Treating it as a new atomic FoodIngredient would hide sub-recipe/assembly truth and create unnecessary architecture debt in the final DC3 batch."
+    }
+  ],
+  "source_families_reviewed": [
+    {
+      "source": "RU_MR_2_4_0162_19",
+      "status": "PRIMARY_SELECTED_SOURCE",
+      "durable_repo_bundle": "data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json"
+    },
+    {
+      "source": "ru-school2022",
+      "status": "SECONDARY_REVIEWED_FOR_GAPS",
+      "durable_private_archive": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip"
+    }
+  ]
+}

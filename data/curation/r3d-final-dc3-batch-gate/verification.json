@@ -1,0 +1,199 @@
+{
+  "schema_version": 3,
+  "operation": "R3D_FINAL_DC3_GATE_VERIFICATION_RECEIPT",
+  "accepted_base": "1c82f34b960621aed3e1c43780270f8048edfe0f",
+  "issue": 157,
+  "validator": "scripts/validate_r3d_final_dc3_gate.py",
+  "pre_pr_exact_head_execution": {
+    "status": "PASS",
+    "tested_revision": "3a66e892a340274fc1bf86b601f98364f8e090b9",
+    "github_actions_run_id": 37213223139,
+    "github_actions_job_id": 111468430526,
+    "repo_derived_current": {
+      "accepted_food_code_count": 211,
+      "exact_energy": 41,
+      "meal_counts": {
+        "breakfast": 17,
+        "main": 23,
+        "sandwich": 1
+      },
+      "breakfast_compatible": 18,
+      "milk_2_5_unaffected": 3,
+      "milk_2_5_capacity": 9,
+      "beef_main": 12,
+      "fish_main": 9
+    },
+    "frozen_r3d": {
+      "selected_count": 10,
+      "new_identity_only_count": 10,
+      "mr_selected_cards_verified": 10,
+      "mr_raw_card_hashes": "10/10",
+      "mr_output_energy_rows": "10/10",
+      "selected_mix": {
+        "meat_free": 6,
+        "chicken": 2,
+        "beef": 2,
+        "fish": 0
+      }
+    },
+    "projected": {
+      "exact_energy": 51,
+      "main": 33,
+      "beef_main": 14,
+      "fish_main": 9,
+      "chicken_main": 4,
+      "meat_free_main": 6,
+      "exact_beef_unaffected": 19,
+      "exact_beef_capacity": 57,
+      "gap_to_50": 0,
+      "next_planned_operation": "DC4_CORPUS_READINESS_AUDIT_AND_GATE1_CONSUMPTION",
+      "surplus_over_50": 1
+    },
+    "py_compile": "PASS",
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS",
+    "scope_whitespace": "PASS",
+    "markdown_links": "PASS"
+  },
+  "school2022_private_gap_audit": {
+    "status": "PASS",
+    "execution": "independent local materialization from durable Library before PR creation",
+    "durable_private_locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "archive_bytes": 206692075,
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "pdf_archive_path": "corpus-work/packages/school2022/raw/source.pdf",
+    "pdf_bytes": 4102547,
+    "pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+    "blockers_verified": {
+      "54-3т": "quantified sugar row exists; sugar absent from process placement",
+      "54-4т": "vanillin row exists; process requires hot water; no quantified water row",
+      "54-5т": "sunflower-oil row conflicts with butter greasing process",
+      "54-6т": "vanillin row exists; process requires hot water; no quantified water row",
+      "54-7т": "specialized_medical_scope=true"
+    },
+    "selected_runtime_dependency": false
+  },
+  "reproduction": {
+    "repo_only_command": "python scripts/validate_r3d_final_dc3_gate.py --json",
+    "full_gap_audit_command": "python scripts/validate_r3d_final_dc3_gate.py --school-archive \"$R3D_SCHOOL_ARCHIVE\" --json",
+    "syntax_command": "python -m py_compile scripts/validate_r3d_final_dc3_gate.py",
+    "ruff_check_command": "python -m ruff check scripts/validate_r3d_final_dc3_gate.py",
+    "ruff_format_command": "python -m ruff format --check scripts/validate_r3d_final_dc3_gate.py",
+    "whitespace_command": "git diff --check 1c82f34b960621aed3e1c43780270f8048edfe0f...HEAD"
+  },
+  "finalization_note": "Source→frozen completeness was verified on 48fdfb3743e4a9c23ec022c7073dc8eeb489ced7. The subsequent receipt/state-only finalization does not alter frozen recipe/source/validator semantics; the R3-D workflow reruns validator/static/scope checks on the final head.",
+  "review_correction": {
+    "status": "PASS",
+    "tested_revision": "ae8418bac52a9d4459a26f16b6ada607f654241a",
+    "reason": "Independent review requested two contract corrections only; frozen ten-recipe selection is unchanged.",
+    "blockers_closed": {
+      "household_applicability": {
+        "status": "PASS",
+        "selected_reviewed_pass": 10,
+        "specialized_medical_scope_false": 10,
+        "evidence": "Every selected row freezes household_applicability=REVIEWED_PASS, specialized_medical_scope=false, household_rationale and quarantined_source_context. Soup Serving feasibility stays a DC4 obligation; dietetic-source provenance for cards 2.15/2.9 is provenance-only and grants no therapeutic claim."
+      },
+      "prepared_output_authority": {
+        "status": "PASS",
+        "selected_contracts": 10,
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available_policy": "ENERGY_KCAL only, exact frozen source value",
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
+      }
+    },
+    "exact_checks": {
+      "r3d_gate": {
+        "run_id": 37224055581,
+        "conclusion": "SUCCESS"
+      },
+      "docs": {
+        "run_id": 37224055575,
+        "conclusion": "SUCCESS"
+      },
+      "dc1": {
+        "run_id": 37224055565,
+        "conclusion": "SUCCESS"
+      },
+      "validator_logic": "PASS",
+      "household_applicability_pass": 10,
+      "prepared_authority_contracts": 10,
+      "py_compile": "PASS",
+      "ruff_check": "PASS",
+      "ruff_format_check": "PASS",
+      "git_diff_check": "PASS",
+      "json_parse": "PASS",
+      "markdown_links": "PASS"
+    },
+    "unchanged_scope": [
+      "selected ten-recipe set",
+      "source card hashes and 12+ rows",
+      "identity-only FoodIngredient set",
+      "product mix and 41 -> 51 projection",
+      "future option-B publication/activation architecture",
+      "runtime/schema/migration/Planner bytes"
+    ]
+  },
+  "source_to_frozen_completeness_correction": {
+    "status": "PASS",
+    "tested_revision": "48fdfb3743e4a9c23ec022c7073dc8eeb489ced7",
+    "blocker": "Source→frozen completeness is now bidirectional and fail-closed.",
+    "checks": {
+      "selected_cards": 10,
+      "exact_source_page_urls": "10/10",
+      "full_12_plus_source_row_partitions": "10/10",
+      "partition_buckets": [
+        "ingredients",
+        "source_intermediates",
+        "source_alternative_rows"
+      ],
+      "source_intermediate_semantic_roles": "PASS",
+      "source_alternative_dispositions": "PASS",
+      "branch_source_row_quantity_bindings": "PASS",
+      "source_card_hashes": "10/10",
+      "output_energy_rows": "10/10"
+    },
+    "exactness_correction": {
+      "recipe": "MR2019_2_11_BEEF_VEGETABLE_RAGOUT",
+      "source_label": "варка крупным куском",
+      "quantity_g": "50",
+      "semantic_role": "COOKED_MEAT_INTERMEDIATE",
+      "note": "The previous interpreted label 'Масса отварного мяса' was removed. Source label is now preserved exactly; interpretation lives only in semantic_role."
+    },
+    "exact_checks": {
+      "r3d_gate": {
+        "run_id": 37229372543,
+        "conclusion": "SUCCESS"
+      },
+      "docs": {
+        "run_id": 37229372530,
+        "conclusion": "SUCCESS"
+      },
+      "dc1": {
+        "run_id": 37229372415,
+        "conclusion": "SUCCESS"
+      },
+      "validator_logic": "PASS",
+      "mr_source_page_urls": "10/10",
+      "mr_source_row_partitions": "10/10",
+      "py_compile": "PASS",
+      "ruff_check": "PASS",
+      "ruff_format_check": "PASS",
+      "git_diff_check": "PASS",
+      "json_parse": "PASS",
+      "markdown_links": "PASS"
+    },
+    "reviewed_source_scope_note": "The no-additional-clean milk-free-breakfast conclusion is scoped to the explicitly reviewed retained source families RU_MR_2_4_0162_19 and School2022; it is not an exhaustive claim over every possible retained/external family.",
+    "unchanged_scope": [
+      "selected ten-recipe set",
+      "recipe canonical codes and source cards",
+      "product mix and 41 -> 51 projection",
+      "ten identity-only FoodIngredients",
+      "household applicability decisions",
+      "prepared-output authority decisions",
+      "future option-B publication/activation architecture",
+      "runtime/schema/migration/Planner bytes"
+    ]
+  }
+}
