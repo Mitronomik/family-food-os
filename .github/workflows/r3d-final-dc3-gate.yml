@@ -93,6 +93,13 @@ jobs:
           (( ${#changed[@]} > 0 ))
           printf 'Changed paths:\n'
           printf '  %s\n' "${changed[@]}"
+
+          if [[ "${base}" != "${ACCEPTED_BASE}" ]]; then
+            echo 'Downstream PR after merged R3-D gate: gate-only changed-path restriction skipped.'
+            echo 'Gate validator and diff whitespace remain enforced.'
+            exit 0
+          fi
+
           for path in "${changed[@]}"; do
             case "${path}" in
               docs/family-food/r3d-final-dc3-batch-gate.md|              data/curation/r3d-final-dc3-batch-gate/*|              scripts/validate_r3d_final_dc3_gate.py|              state/current-focus.md|state/progress.md|state/handoff.md|              .github/workflows/r3d-final-dc3-gate.yml)
