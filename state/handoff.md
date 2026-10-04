@@ -45,10 +45,10 @@ merge, reassess DC3 catalogue coverage before another batch or DC4.
 ---
 
 
-## R3-C Contract Gate — active — 2026-10-04
+## R3-C Contract Gate — merged historical — 2026-10-04
 
-Accepted main:
-`90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4` (merged PR #152).
+Merged as PR #154 at:
+`3c5740b319e453715c5a58f5b65e6d216b7c4fdb`.
 
 Issue #153 / PR #154 / branch `docs/r3c-post-r3b-catalogue-gate`.
 
@@ -81,11 +81,11 @@ Repo-derived validator facts:
 - MILK_2_5 = 15 dependent, 3 unaffected, capacity 9;
 - BEEF_CATEGORY_1_RAW = 7/15 MAIN, 8 unaffected, capacity 24.
 
-Status: `READY_FOR_FINAL_REVIEW`; both independent-review verification blockers
-are corrected. Frozen eight-recipe content remains unchanged.
+Final status: `MERGED`; both independent-review verification blockers were
+corrected before merge. Frozen eight-recipe content remained unchanged.
 
-Do not start runtime until this gate is independently reviewed and explicitly
-merged. Do not start DC4/Gate1-CLOSE/PR9 automatically.
+Runtime continuation is PR #156 / Issue #155 above. DC4/Gate1-CLOSE/PR9 remain
+blocked until post-runtime DC3 reassessment.
 
 ---
 
