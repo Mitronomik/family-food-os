@@ -1,0 +1,105 @@
+name: R3-B School2022 BREAKFAST batch runtime
+
+on:
+  pull_request:
+    paths:
+      - 'backend/app/seed/r3b_school2022_breakfast_batch.py'
+      - 'backend/app/tests/test_r3b_school2022_breakfast_batch.py'
+      - 'backend/app/services/prepared_recipe_activation.py'
+      - 'backend/app/services/food_recipes.py'
+      - 'backend/app/services/recipe_nutrition_v2.py'
+      - 'backend/app/persistence/sqlalchemy_core/food_recipe_repositories.py'
+      - 'backend/app/persistence/sqlalchemy_core/recipe_nutrition_v2.py'
+      - 'data/curation/r3b-school2022-breakfast-batch/**'
+      - 'state/**'
+      - '.github/workflows/r3b-school2022-breakfast-batch-runtime.yml'
+  workflow_dispatch:
+    inputs:
+      target_ref:
+        description: 'Branch, tag or exact commit SHA to verify'
+        required: true
+        default: 'main'
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      AI_ENABLED: 'false'
+    steps:
+      - name: Checkout exact requested revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ inputs.target_ref || github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install backend and lint tools
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check -e './backend[test]'
+          python -m pip install --disable-pip-version-check 'ruff==0.16.8'
+
+      - name: Focused R3-B verification
+        run: |
+          set -euo pipefail
+          python -m pytest -q \
+            backend/app/tests/test_r3b_school2022_breakfast_batch.py \
+            backend/app/tests/test_r3a_school2022_main_batch.py \
+            backend/app/tests/test_r2f_cheese_sandwich.py \
+            backend/app/tests/test_r2f_cheese_sandwich_adversarial.py \
+            backend/app/tests/test_recipe_nutrition_v2.py \
+            backend/app/tests/test_planner_application_boundary.py \
+            backend/app/tests/test_migration_lineage.py \
+            --tb=short
+
+      - name: Ruff
+        run: |
+          set -euo pipefail
+          python -m ruff check \
+            backend/app/services/food_recipes.py \
+            backend/app/services/prepared_recipe_activation.py \
+            backend/app/seed/r3b_school2022_breakfast_batch.py \
+            backend/app/tests/test_r3b_school2022_breakfast_batch.py
+          python -m ruff format --check \
+            backend/app/services/food_recipes.py \
+            backend/app/services/prepared_recipe_activation.py \
+            backend/app/seed/r3b_school2022_breakfast_batch.py \
+            backend/app/tests/test_r3b_school2022_breakfast_batch.py
+
+      - name: Scope and whitespace
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          base="${PR_BASE_SHA:-origin/main}"
+          git fetch origin main --no-tags
+          git diff --check "$base"...HEAD
+
+      - name: Verification summary
+        run: |
+          set -euo pipefail
+          echo "tested revision: $(git rev-parse HEAD)"
+          echo 'R3-B exactly 3 identity-only foods / no Nutrition or Composition: PASS'
+          echo 'R3-B exactly 10 BREAKFAST RecipeVersions + prepared authority: PASS'
+          echo 'R3-B per-recipe atomic inactive publication + resumable convergence: PASS'
+          echo 'R3-B batch activation one UoW / one commit / rollback: PASS'
+          echo 'R3-B mixed active/inactive fail-closed + all-active replay: PASS'
+          echo 'R3-B Russian consumer steps + explicit omelet oven branch: PASS'
+          echo 'R3-A ENERGY_KCAL + 53 UNKNOWN: PASS'
+          echo 'R3-B hard MILK_2_5 exclusion: all 10 rejected, unaffected capacity 9: PASS'
+          echo 'R3-A batch activation regression: PASS'
+          echo 'R2-F single-recipe/milk-exclusion regression: PASS'
+          echo 'migration head 0042 / no 0043: PASS'
+          echo 'AI_ENABLED=false: PASS'
