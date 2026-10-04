@@ -56,3 +56,10 @@ Reuse the merged R3-A batch runtime seam in one PR:
 `identity reconcile → per-recipe inactive atomic publication → exact batch preflight → one-UoW activation`.
 
 No recipe-by-recipe PR split and no separate activation PR.
+
+
+## Review corrections
+
+- Consumer Recipe Steps for `54-23к` and `54-24к` contain Russian display text only; internal authority/inference terminology remains in engineering receipts, not user-facing steps.
+- Omelets `54-2о/3о/4о` explicitly publish the oven branch `180–200 °C / 8–10 минут`; the alternative steam branch `25–30 минут` remains provenance-only.
+- All ten R3-B recipes depend on `MILK_2_5`. Future runtime acceptance must prove that exact hard exclusion rejects all ten while preserving the existing three-candidate milk-free breakfast-compatible set and its repetition capacity 9.
