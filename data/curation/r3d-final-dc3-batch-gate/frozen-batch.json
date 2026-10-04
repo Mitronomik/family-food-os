@@ -422,12 +422,12 @@
           "food_code": "SALT_IODIZED"
         },
         {
-          "source_label": "Сыр голландский",
+          "source_label": "Сыр голландский х/о-85",
           "quantity_g": "15.6",
           "food_code": "CHEESE_HARD_UNSPECIFIED"
         },
         {
-          "source_label": "Масло сливочное крестьянское 72,5%",
+          "source_label": "Масло сливочное крестьянское 72,5% ж. <*>",
           "quantity_g": "4",
           "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
         }
@@ -476,12 +476,12 @@
           "food_code": "SALT_IODIZED"
         },
         {
-          "source_label": "Масло сливочное крестьянское 72%",
+          "source_label": "Масло сливочное крестьянское 72% ж.",
           "quantity_g": "6",
           "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
         },
         {
-          "source_label": "Сыр твёрдых сортов",
+          "source_label": "Сыр (твердых сортов)",
           "quantity_g": "21",
           "food_code": "CHEESE_HARD_UNSPECIFIED"
         }
@@ -526,7 +526,7 @@
           "food_code": "EGG"
         },
         {
-          "source_label": "Молоко цельное пастеризованное 3,2%",
+          "source_label": "Молоко цельное пастеризованное 3,2% ж.",
           "quantity_g": "38",
           "food_code": "MILK_3_2"
         },
@@ -541,7 +541,7 @@
           "food_code": "FLOUR_WHEAT_FIRST_GRADE"
         },
         {
-          "source_label": "Масло сливочное крестьянское 72,5%",
+          "source_label": "Масло сливочное крестьянское 72,5% ж. (для смазывания)",
           "quantity_g": "2",
           "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
         }
@@ -585,12 +585,12 @@
       "energy_kcal": "217",
       "ingredients": [
         {
-          "source_label": "Курица потрошеная 1 кат. варка тушкой",
+          "source_label": "Курица потрошеная 1 кат варка тушкой",
           "quantity_g": "196",
           "food_code": "CHICKEN_CATEGORY_1_WHOLE_RAW"
         },
         {
-          "source_label": "Масло сливочное крестьянское 72,5%",
+          "source_label": "Масло сливочное крестьянское 72,5% ж.",
           "quantity_g": "4",
           "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
         },
@@ -633,7 +633,7 @@
       "energy_kcal": "336",
       "ingredients": [
         {
-          "source_label": "Говядина 1 категории",
+          "source_label": "Говядина 1 кат.",
           "quantity_g": "81",
           "food_code": "BEEF_CATEGORY_1_RAW"
         },
@@ -648,7 +648,7 @@
           "food_code": "CARROT"
         },
         {
-          "source_label": "Масло сливочное крестьянское 72,5%",
+          "source_label": "Масло сливочное крестьянское 72,5% ж.",
           "quantity_g": "8",
           "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
         },
@@ -658,12 +658,12 @@
           "food_code": "POTATO"
         },
         {
-          "source_label": "Горошек зеленый консервированный",
+          "source_label": "Зеленый горошек консервированный",
           "quantity_g": "18",
           "food_code": "GREEN_PEAS_CANNED"
         },
         {
-          "source_label": "Помидоры",
+          "source_label": "Помидоры парниковые или грунтовые",
           "quantity_g": "13",
           "food_code": "TOMATO"
         },
@@ -726,7 +726,7 @@
       "energy_kcal": "222",
       "ingredients": [
         {
-          "source_label": "Говядина 1 категории",
+          "source_label": "Говядина 1 кат. или мясо бескостное",
           "quantity_g": "73",
           "food_code": "BEEF_CATEGORY_1_RAW"
         },
@@ -751,12 +751,12 @@
           "food_code": "EGG"
         },
         {
-          "source_label": "Молоко цельное пастеризованное 3,2%",
+          "source_label": "Молоко цельное пастеризованное 3,2% ж.",
           "quantity_g": "8",
           "food_code": "MILK_3_2"
         },
         {
-          "source_label": "Масло сливочное крестьянское 72,5%",
+          "source_label": "Масло сливочное крестьянское 72,5% ж.",
           "quantity_g": "3",
           "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
         }
