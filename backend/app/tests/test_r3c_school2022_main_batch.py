@@ -289,9 +289,10 @@ def test_r3c_fresh_publication_and_batch_activation(database):
             ) == tuple(
                 ingredient["food_code"] for ingredient in expected["ingredients"]
             )
-            assert tuple(ingredient.quantity for ingredient in detail.ingredients) == tuple(
-                Decimal(ingredient["net_g"])
-                for ingredient in expected["ingredients"]
+            assert tuple(
+                ingredient.quantity for ingredient in detail.ingredients
+            ) == tuple(
+                Decimal(ingredient["net_g"]) for ingredient in expected["ingredients"]
             )
 
             projection = nutrition.neutral_consumption_projection(version_id)
@@ -517,9 +518,7 @@ def test_r3c_partial_prepared_state_fails_closed(database):
             """,
             (RECIPE_CODES[0],),
         ).fetchone()[0]
-        db.execute(
-            "DROP TRIGGER recipe_prepared_nutrition_authorities_no_delete"
-        )
+        db.execute("DROP TRIGGER recipe_prepared_nutrition_authorities_no_delete")
         deleted = db.execute(
             """
             DELETE FROM recipe_prepared_nutrition_authorities
@@ -627,7 +626,9 @@ def test_r3c_hash_pinned_contract_rejects_tampered_artifact(
 def test_r3c_steam_branch_and_russian_steps_are_published_verbatim(database):
     frozen, _ = _load_contract()
     expected = next(
-        row for row in frozen["selected"] if row["canonical_code"] == STEAM_ONLY_RECIPE_CODE
+        row
+        for row in frozen["selected"]
+        if row["canonical_code"] == STEAM_ONLY_RECIPE_CODE
     )
     publish_r3c_school2022_main_batch(database)
 
@@ -640,7 +641,9 @@ def test_r3c_steam_branch_and_russian_steps_are_published_verbatim(database):
         instructions = tuple(step.instruction for step in detail.steps)
         assert instructions == tuple(expected["consumer_steps_ru"])
         assert any("на пару 15–20 минут" in step for step in instructions)
-        assert not any("10–12" in step and "вод" in step.casefold() for step in instructions)
+        assert not any(
+            "10–12" in step and "вод" in step.casefold() for step in instructions
+        )
 
         for code in RECIPE_CODES:
             recipe_detail = catalogue.get_latest_verified(
@@ -659,12 +662,18 @@ def test_r3c_planner_admission_reaches_41_exact_energy_and_23_main(database):
     engine = create_sqlite_engine(database)
     try:
         planner, _, _, _ = production_planner(engine)
-        eligible = tuple(row for row in planner.compose_candidate_admission() if row.eligible)
+        eligible = tuple(
+            row for row in planner.compose_candidate_admission() if row.eligible
+        )
         assert len(eligible) == 41
         assert Counter(row.meal_type_code for row in eligible) == Counter(
             {"breakfast": 17, "main": 23, "sandwich": 1}
         )
-        selected = {row.canonical_code: row for row in eligible if row.canonical_code in RECIPE_CODES}
+        selected = {
+            row.canonical_code: row
+            for row in eligible
+            if row.canonical_code in RECIPE_CODES
+        }
         assert tuple(code for code in RECIPE_CODES if code in selected) == RECIPE_CODES
         assert all(row.exact_energy_ready for row in selected.values())
         assert all(row.meal_type_code == "main" for row in selected.values())
@@ -724,7 +733,9 @@ def test_r3c_hard_beef_exclusion_rejects_affected_main_and_preserves_week(databa
         assert len(result.events) == 7
 
         versions = {
-            code: catalogue.get_current_verified(catalogue.get_by_code(code).id).version.id
+            code: catalogue.get_current_verified(
+                catalogue.get_by_code(code).id
+            ).version.id
             for code in RECIPE_CODES
         }
         for code in affected:
@@ -802,7 +813,9 @@ def test_r3c_preserves_hard_milk_breakfast_capacity_nine(database):
         assert max(selected.values()) <= 3
 
         versions = {
-            code: catalogue.get_current_verified(catalogue.get_by_code(code).id).version.id
+            code: catalogue.get_current_verified(
+                catalogue.get_by_code(code).id
+            ).version.id
             for code in relevant_codes
         }
         for code in R3B_RECIPE_CODES:
