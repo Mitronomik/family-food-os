@@ -179,3 +179,23 @@ python scripts/validate_r3c_post_r3b_gate.py \
 The archive path is supplied by the operator after materializing the durable
 Library artifact; no private path, temporary URL or network dependency is baked
 into the validator.
+
+
+### Repository-derived current truth
+
+The validator must not accept frozen arithmetic merely because `summary.json`
+contains expected constants. Repo-only verification reconstructs the accepted
+post-R3B exact-energy catalogue from merged runtime publication code and accepted
+publication specs, then compares that derived result to the frozen summary.
+
+It also derives the accepted FoodIngredient reuse universe from repository truth.
+Every selected `food_code` must exist in that current universe except the one
+explicit new identity `ATLANTIC_SALMON_FILLET_RAW`.
+
+Current meal-type support is parsed from the repository's
+`ROLE_COMPATIBILITY_V1`; `main` is not assumed by the gate. Current repetition
+capacity is parsed from `PlannerConfig.max_recipe_repetitions`.
+
+The durable receipt records both newly executed repo-derived checks and any
+explicitly reused source-archive evidence under the proportional-verification
+policy; reused evidence must name its tested revision and reason.
