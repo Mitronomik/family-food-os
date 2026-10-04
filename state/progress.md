@@ -48,10 +48,10 @@ DC3 catalogue readiness; do not start DC4/PR9 automatically.
 ---
 
 
-## R3-C Contract Gate — implementation active — 2026-10-04
+## R3-C Contract Gate — merged historical — 2026-10-04
 
-Accepted base:
-`90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4` (merged PR #152).
+Merged as PR #154 at:
+`3c5740b319e453715c5a58f5b65e6d216b7c4fdb`.
 
 Issue #153 / PR #154 / branch `docs/r3c-post-r3b-catalogue-gate`.
 
@@ -80,7 +80,11 @@ Future projection: exact-energy 41; main 23; gap to 50 = 9; DC4 still BLOCKED.
 
 Verification: selected-set/mapping/source-hash/arithmetic/scope checks PASS; base→head whitespace audit PASS after correction.
 
-Independent review found one formal blocker: the verification procedure/result was not durable.\nThe same PR now contains `scripts/validate_r3c_post_r3b_gate.py` plus\n`data/curation/r3c-post-r3b-catalogue-gate/verification.json`; the frozen eight-recipe set is unchanged.\n\nA second independent-review blocker found that the first validator still trusted
+Independent review found one formal blocker: the verification procedure/result was not durable.
+The same PR added `scripts/validate_r3c_post_r3b_gate.py` plus
+`data/curation/r3c-post-r3b-catalogue-gate/verification.json`; the frozen eight-recipe set remained unchanged.
+
+A second independent-review blocker found that the first validator still trusted
 summary constants for current catalogue truth and only checked mapped food codes
 for non-empty text. The validator now reconstructs accepted exact-energy runtime
 truth from merged seed modules/publication specs, derives the FoodIngredient reuse
@@ -89,7 +93,7 @@ result: 210 accepted food codes; 33 exact-energy = 17/15/1; breakfast-compatible
 18; MILK_2_5 15 dependent / 3 unaffected / capacity 9; exact beef 7/15 -> 8
 unaffected / capacity 24.
 
-Status: `READY_FOR_FINAL_REVIEW` — second independent-review blocker corrected.
+Final status: `MERGED`. The runtime continuation is PR #156 / Issue #155 above.
 
 ---
 
