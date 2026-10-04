@@ -214,8 +214,16 @@ def derive_current_truth(
         "current post-R3C meal counts drifted",
     )
     require(len(breakfast) == 18, "breakfast-compatible count must be 18")
-    require(\n        len(milk_dependent) == 15,\n        "MILK_2_5 dependent breakfast count must be 15; "\n        f"derived={len(milk_dependent)} codes={sorted(milk_dependent)}",\n    )
-    require(\n        len(milk_unaffected) == 3,\n        "MILK_2_5 unaffected set must contain 3; "\n        f"derived={len(milk_unaffected)} codes={sorted(milk_unaffected)}",\n    )
+    require(
+        len(milk_dependent) == 15,
+        "MILK_2_5 dependent breakfast count must be 15; "
+        f"derived={len(milk_dependent)} codes={sorted(milk_dependent)}",
+    )
+    require(
+        len(milk_unaffected) == 3,
+        "MILK_2_5 unaffected set must contain 3; "
+        f"derived={len(milk_unaffected)} codes={sorted(milk_unaffected)}",
+    )
     require(len(beef) == 12, "current exact beef MAIN count must be 12")
     require(len(fish) == 9, "current fish MAIN count must be 9")
     require(len(chicken) == 2, "current chicken MAIN count must be 2")
