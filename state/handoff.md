@@ -41,7 +41,7 @@ Reviewer focus:
 - projected 51 means “eligible for DC4 audit”, not “DC4 passed”.
 
 Pre-PR verification:
-- exact branch run #37213043259 — SUCCESS;
+- exact review-ready branch run #37213223139 on `3a66e892a340274fc1bf86b601f98364f8e090b9` — SUCCESS;
 - 10/10 committed MR source cards / output / energy rows — PASS;
 - repo-derived 41 current / 51 projected — PASS;
 - Ruff/format/scope/Markdown — PASS;

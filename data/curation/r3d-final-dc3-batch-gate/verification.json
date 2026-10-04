@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "operation": "R3D_FINAL_DC3_GATE_VERIFICATION_RECEIPT",
+  "accepted_base": "1c82f34b960621aed3e1c43780270f8048edfe0f",
+  "issue": 157,
+  "validator": "scripts/validate_r3d_final_dc3_gate.py",
+  "pre_pr_exact_head_execution": {
+    "status": "PASS",
+    "tested_revision": "3a66e892a340274fc1bf86b601f98364f8e090b9",
+    "github_actions_run_id": 37213223139,
+    "github_actions_job_id": 111468430526,
+    "repo_derived_current": {
+      "accepted_food_code_count": 211,
+      "exact_energy": 41,
+      "meal_counts": {
+        "breakfast": 17,
+        "main": 23,
+        "sandwich": 1
+      },
+      "breakfast_compatible": 18,
+      "milk_2_5_unaffected": 3,
+      "milk_2_5_capacity": 9,
+      "beef_main": 12,
+      "fish_main": 9
+    },
+    "frozen_r3d": {
+      "selected_count": 10,
+      "new_identity_only_count": 10,
+      "mr_selected_cards_verified": 10,
+      "mr_raw_card_hashes": "10/10",
+      "mr_output_energy_rows": "10/10",
+      "selected_mix": {
+        "meat_free": 6,
+        "chicken": 2,
+        "beef": 2,
+        "fish": 0
+      }
+    },
+    "projected": {
+      "exact_energy": 51,
+      "main": 33,
+      "beef_main": 14,
+      "fish_main": 9,
+      "chicken_main": 4,
+      "meat_free_main": 6,
+      "exact_beef_unaffected": 19,
+      "exact_beef_capacity": 57,
+      "gap_to_50": -1,
+      "next_planned_operation": "DC4_CORPUS_READINESS_AUDIT_AND_GATE1_CONSUMPTION"
+    },
+    "py_compile": "PASS",
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS",
+    "scope_whitespace": "PASS",
+    "markdown_links": "PASS"
+  },
+  "school2022_private_gap_audit": {
+    "status": "PASS",
+    "execution": "independent local materialization from durable Library before PR creation",
+    "durable_private_locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "archive_bytes": 206692075,
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "pdf_archive_path": "corpus-work/packages/school2022/raw/source.pdf",
+    "pdf_bytes": 4102547,
+    "pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+    "blockers_verified": {
+      "54-3т": "quantified sugar row exists; sugar absent from process placement",
+      "54-4т": "vanillin row exists; process requires hot water; no quantified water row",
+      "54-5т": "sunflower-oil row conflicts with butter greasing process",
+      "54-6т": "vanillin row exists; process requires hot water; no quantified water row",
+      "54-7т": "specialized_medical_scope=true"
+    },
+    "selected_runtime_dependency": false
+  },
+  "reproduction": {
+    "repo_only_command": "python scripts/validate_r3d_final_dc3_gate.py --json",
+    "full_gap_audit_command": "python scripts/validate_r3d_final_dc3_gate.py --school-archive \"$R3D_SCHOOL_ARCHIVE\" --json",
+    "syntax_command": "python -m py_compile scripts/validate_r3d_final_dc3_gate.py",
+    "ruff_check_command": "python -m ruff check scripts/validate_r3d_final_dc3_gate.py",
+    "ruff_format_command": "python -m ruff format --check scripts/validate_r3d_final_dc3_gate.py",
+    "whitespace_command": "git diff --check 1c82f34b960621aed3e1c43780270f8048edfe0f...HEAD"
+  },
+  "finalization_note": "This receipt and linked state/doc wording are verification metadata only. The branch-only R3-D workflow re-runs the same repo/source/scope checks on the receipt commit before PR creation."
+}

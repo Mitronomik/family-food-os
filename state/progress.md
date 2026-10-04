@@ -37,8 +37,8 @@ than padding the batch, including MR 2.2 quantity conflict, MR 2.17 beef/chicken
 table-process conflict, MR 2.24 recipe-intermediate broth semantics and known
 School2022 breakfast/chicken process defects.
 
-Pre-PR exact-head verification `#37213043259` on
-`7ea3bf4cd0e51234f6cee6d421b66648d1e595cd`: SUCCESS.
+Pre-PR exact-head verification `#37213223139` on
+`3a66e892a340274fc1bf86b601f98364f8e090b9`: SUCCESS.
 Repo-derived 41 → 51, 10/10 MR card hashes/rows, mappings, Ruff/format,
 scope/whitespace and Markdown links all PASS. Durable School2022 ZIP/PDF
 rehash and blocker replay also PASS outside CI.

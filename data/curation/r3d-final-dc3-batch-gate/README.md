@@ -55,6 +55,7 @@ false PASS.
 - `summary.json` — current/projected catalogue and resilience arithmetic.
 - `source-verification.json` — durable MR source receipt plus the retained
   School2022 gap-audit receipt.
+- `verification.json` — retained pre-PR command/result receipt.
 
 Canonical decision document:
 

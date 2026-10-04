@@ -316,6 +316,10 @@ Committed validator:
 
 `scripts/validate_r3d_final_dc3_gate.py`
 
+Retained receipt:
+
+`data/curation/r3d-final-dc3-batch-gate/verification.json`
+
 Repo-contained verification:
 
 ```bash
