@@ -633,7 +633,7 @@ def test_r3d_wrong_prepared_energy_conflicts_with_exact_authority(database):
     _, specs = _recipe_seeds_and_specs(frozen, bundle)
     bad = replace(
         specs[0],
-        expected_available_amounts=(("ENERGY_KCAL", Decimal("113")),),
+        expected_available_amounts=(("ENERGY_KCAL", Decimal(113)),),
     )
 
     engine = create_sqlite_engine(database)
