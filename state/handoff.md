@@ -21,6 +21,8 @@ schema, Planner or new Nutrition authority.
 
 Projected exact-energy count after future runtime: 41; DC4 remains blocked.
 
+Status: `READY_FOR_FINAL_REVIEW`.
+
 Do not start runtime until this gate is independently reviewed and explicitly
 merged. Do not start DC4/Gate1-CLOSE/PR9 automatically.
 

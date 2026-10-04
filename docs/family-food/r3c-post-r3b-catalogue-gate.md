@@ -1,8 +1,8 @@
 # R3-C — Post-R3B DC3 Catalogue Contract Gate
 
-**Status:** implementation contract / evidence gate  
-**Issue:** #153  
-**Accepted base:** `90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4`  
+**Status:** implementation contract / evidence gate
+**Issue:** #153
+**Accepted base:** `90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4`
 **Scope:** docs + curation evidence only
 
 ## 1. Decision
@@ -131,7 +131,7 @@ After future R3-C runtime:
 - gap to 80: 39;
 - DC4: **still blocked**.
 
-The broader repository-defined active verified union would become 71, but that number does not substitute for Planner/exact-energy usability.
+The broader repository-defined active verified union would become 71, but that number does not substitute for Planner/exact-energy usability. R3-C improves process/dish variety and adds chicken/salmon options, but it does not close protein-family concentration; that remains a later catalogue-quality concern.
 
 ## 11. Non-goals
 

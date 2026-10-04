@@ -26,7 +26,7 @@ Accepted base:
 
 Status:
 
-`IMPLEMENTATION_ACTIVE`.
+`READY_FOR_FINAL_REVIEW`.
 
 Canonical contract target:
 
@@ -57,6 +57,17 @@ Projected after future runtime:
 - 23 `main`;
 - gap to 50 = 9;
 - DC4 still blocked.
+
+## Verification
+
+- frozen selected set: 8 unique MAIN recipes — PASS;
+- all required ingredient rows mapped — PASS;
+- new identity-only authority leak — NONE;
+- source archive/PDF hashes independently re-verified — PASS;
+- remote scope audit: docs/data/state only — PASS;
+- base→head whitespace audit equivalent to `git diff --check` — PASS after correction;
+- current arithmetic 33 and projected arithmetic 41 — PASS;
+- DC4 remains blocked — PASS.
 
 ## Scope boundaries
 

@@ -30,7 +30,9 @@ or medical scope. No numerical padding.
 
 Future projection: exact-energy 41; main 23; gap to 50 = 9; DC4 still BLOCKED.
 
-Status: IMPLEMENTATION_ACTIVE until branch verification/PR creation.
+Verification: selected-set/mapping/source-hash/arithmetic/scope checks PASS; base→head whitespace audit PASS after correction.
+
+Status: `READY_FOR_FINAL_REVIEW`.
 
 ---
 

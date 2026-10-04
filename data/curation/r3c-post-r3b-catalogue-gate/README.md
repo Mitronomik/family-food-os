@@ -1,7 +1,7 @@
 # R3-C — post-R3B catalogue Contract Gate
 
-Accepted base: `90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4`  
-Issue: `#153`  
+Accepted base: `90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4`
+Issue: `#153`
 Status: `FROZEN_FOR_GATE_REVIEW`
 
 This package is evidence only. It freezes the next DC3 publication unit after merged PR #152. It publishes **nothing** at runtime.
@@ -19,14 +19,14 @@ Future R3-C runtime would project 41 exact-energy recipes: 17 breakfast / 23 mai
 
 ## Durable source
 
-`private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`  
-SHA-256 `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`  
+`private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip`
+SHA-256 `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`
 bytes `206692075`
 
 School2022 PDF inside archive:
 
-`corpus-work/packages/school2022/raw/source.pdf`  
-SHA-256 `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`  
+`corpus-work/packages/school2022/raw/source.pdf`
+SHA-256 `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`
 bytes `4102547`
 
 The archive was independently materialized from the project Library and hashed again on 2026-10-04.
