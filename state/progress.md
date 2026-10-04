@@ -1,5 +1,39 @@
 # Progress
 
+## R3-C Contract Gate — implementation active — 2026-10-04
+
+Accepted base:
+`90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4` (merged PR #152).
+
+Issue #153 / branch `docs/r3c-post-r3b-catalogue-gate`.
+
+Post-R3B reconciliation:
+
+- exact-energy active = 33;
+- breakfast 17 / main 15 / sandwich 1;
+- breakfast-compatible = 18;
+- hard MILK_2_5 unaffected set = 3, capacity 9;
+- DATA-CORPUS-V1 usable gap to 50 = 17;
+- DC4 = BLOCKED.
+
+Frozen R3-C gate set:
+
+- 9 MAIN RecipeVersions;
+- +2 identity-only FoodIngredients: BEEF_LIVER_RAW, ATLANTIC_SALMON_FILLET_RAW;
+- same-card prepared ENERGY_KCAL only; other frozen nutrients UNKNOWN;
+- R3-A/R3-B Option-B transaction semantics reused;
+- no migration/schema/Planner/new-Nutrition-authority change.
+
+Why 9, not 10–12: nearest additional School2022 cards have unresolved required
+ingredient placement, unquantified process inputs, source/process fat conflicts,
+or medical scope. No numerical padding.
+
+Future projection: exact-energy 42; main 24; gap to 50 = 8; DC4 still BLOCKED.
+
+Status: IMPLEMENTATION_ACTIVE until branch verification/PR creation.
+
+---
+
 ## R3-B runtime — review-ready — 2026-10-04
 
 Accepted base:

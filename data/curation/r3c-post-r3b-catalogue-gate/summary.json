@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "operation": "R3C_POST_R3B_CATALOGUE_GATE_SUMMARY",
+  "accepted_base": "90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4",
+  "issue": 153,
+  "current_repository_truth": {
+    "base_seed_source_verified_default_active_count": 30,
+    "dc3_active_exact_energy_count": 33,
+    "disjoint_union_active_verified_count": 63,
+    "active_exact_energy_by_meal_type": {
+      "breakfast": 17,
+      "main": 15,
+      "sandwich": 1
+    },
+    "planner_supported_exact_energy_count": 33,
+    "breakfast_compatible_count": 18,
+    "max_recipe_repetitions": 3,
+    "capacity": {
+      "breakfast_compatible": 54,
+      "main": 45,
+      "sandwich": 3
+    },
+    "note": "63 is the disjoint repository-defined union of the 30 default-active SOURCE_VERIFIED seed recipes and 33 accepted active exact-energy DC3 publications. DC4 usability is assessed against the exact-energy Planner-admitted subset, not the raw verified-row count."
+  },
+  "hard_exclusion_resilience": {
+    "MILK_2_5": {
+      "dependent_breakfast_count": 15,
+      "unaffected_breakfast_compatible_codes": [
+        "HARD_BOILED_EGG",
+        "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+        "SAD28_SANDWICH_CHEESE_20_10"
+      ],
+      "unaffected_count": 3,
+      "capacity": 9,
+      "seven_breakfast_generation": "MUST_REMAIN_SUCCESS"
+    },
+    "main_dependency_analysis": {
+      "BEEF_CATEGORY_1_RAW_current_count": 7,
+      "current_main_count": 15,
+      "unaffected_after_exact_beef_exclusion": 8,
+      "capacity_after_exact_beef_exclusion": 24,
+      "additional_mandatory_hard_exclusion_proof": false,
+      "rationale": "MAIN заметно концентрирован по beef/fish как curation signal, но exact BEEF_CATEGORY_1_RAW exclusion оставляет 8 кандидатов и capacity 24; category-wide meat/fish exclusion не является текущей Planner authority semantics."
+    }
+  },
+  "data_corpus_baseline": {
+    "usable_verified_target_min": 50,
+    "usable_verified_target_range": "50–80+",
+    "current_usable_exact_energy": 33,
+    "gap_to_50": 17,
+    "dc4_ready": false
+  },
+  "r3c": {
+    "selected_count": 9,
+    "selected_recipe_codes": [
+      "SCHOOL2022_54_21M_BOILED_CHICKEN",
+      "SCHOOL2022_54_3M_LAZY_CABBAGE_ROLLS",
+      "SCHOOL2022_54_26M_POTATO_BEEF_CASSEROLE",
+      "SCHOOL2022_54_19M_BEEF_LIVER_PATE",
+      "SCHOOL2022_54_1M_BOILED_BEEF_STROGANOFF",
+      "SCHOOL2022_54_30M_BEEF_RICE_QUENELLES",
+      "SCHOOL2022_54_20M_BOILED_BEEF",
+      "SCHOOL2022_54_15R_SALMON_IN_MILK",
+      "SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES"
+    ],
+    "new_identity_only_foods": [
+      "BEEF_LIVER_RAW",
+      "ATLANTIC_SALMON_FILLET_RAW"
+    ]
+  },
+  "projected_after_future_runtime": {
+    "disjoint_union_active_verified_count": 72,
+    "active_exact_energy_count": 42,
+    "active_exact_energy_by_meal_type": {
+      "breakfast": 17,
+      "main": 24,
+      "sandwich": 1
+    },
+    "breakfast_compatible_count": 18,
+    "capacity": {
+      "breakfast_compatible": 54,
+      "main": 72,
+      "sandwich": 3
+    },
+    "gap_to_50_usable": 8,
+    "gap_to_80_usable": 38,
+    "dc4_ready_after": false,
+    "milk_2_5_breakfast_resilience_unchanged": true,
+    "BEEF_CATEGORY_1_RAW_main_count": 12,
+    "unaffected_main_after_exact_beef_exclusion": 12,
+    "capacity_after_exact_beef_exclusion": 36
+  },
+  "non_goals": [
+    "runtime publication",
+    "migration 0043",
+    "schema change",
+    "Planner change",
+    "new Nutrition authority",
+    "DC4/Gate1-CLOSE/PR9",
+    "Shopping/Prep/PDF/PWA/Retail/Auth/PostgreSQL/AI"
+  ],
+  "next_allowed_action_after_merge": "separate R3-C runtime implementation PR for exactly this frozen set; no DC4 or PR9"
+}
