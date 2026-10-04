@@ -1,5 +1,26 @@
 # Handoff
 
+## R3-B runtime — active — 2026-10-04
+
+Accepted main:
+`dcc5f37f57a83283e4dee0d3c2957ed0704e9a46` (merged PR #150).
+
+Issue #151 / branch `feat/r3b-school2022-breakfast-batch-runtime`.
+
+Read first:
+`docs/family-food/r3b-school2022-breakfast-batch-gate.md`.
+
+Implement one runtime PR for exactly ten BREAKFAST RecipeVersions and exactly
+three identity-only foods.
+
+Reuse merged R3-A option B. No new activation architecture.
+
+Hard `MILK_2_5` proof is mandatory: all ten R3-B candidates rejected, exact
+unaffected three-candidate breakfast set preserved, capacity 9, seven-breakfast
+authoritative generation succeeds.
+
+Status: `IN_PROGRESS`.
+
 ## R3-B breakfast Contract Gate — active — 2026-10-04
 
 Accepted main:
