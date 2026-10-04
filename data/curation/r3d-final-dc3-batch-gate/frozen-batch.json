@@ -182,7 +182,7 @@
       ],
       "dependency_flags": [
         "MEAT_FREE",
-        "MILK_FREE"
+        "NO_MILK_2_5"
       ],
       "selection_reason": "Meat-free household MAIN; materially reduces beef/fish share with ordinary soup preparation.",
       "source_nutrition_row": {
@@ -262,7 +262,7 @@
       ],
       "dependency_flags": [
         "MEAT_FREE",
-        "MILK_FREE",
+        "NO_MILK_2_5",
         "DAIRY_SOUR_CREAM"
       ],
       "selection_reason": "Familiar meat-free soup adds barley/pickle variety and reduces beef/fish concentration.",
@@ -343,7 +343,7 @@
       ],
       "dependency_flags": [
         "MEAT_FREE",
-        "MILK_FREE",
+        "NO_MILK_2_5",
         "DAIRY_SOUR_CREAM"
       ],
       "selection_reason": "Meat-free oat/vegetable soup adds a distinct grain and process pattern.",
@@ -418,7 +418,7 @@
       ],
       "dependency_flags": [
         "MEAT_FREE",
-        "MILK_FREE"
+        "NO_MILK_2_5"
       ],
       "selection_reason": "Higher-energy meat-free legume MAIN; adds meaningful household and protein-source variety.",
       "source_nutrition_row": {
@@ -477,7 +477,7 @@
       ],
       "dependency_flags": [
         "MEAT_FREE",
-        "MILK_FREE",
+        "NO_MILK_2_5",
         "DAIRY_CHEESE"
       ],
       "selection_reason": "Simple household meat-free pasta MAIN; materially different from current protein-heavy catalogue.",
@@ -538,7 +538,7 @@
       ],
       "dependency_flags": [
         "MEAT_FREE",
-        "MILK_FREE",
+        "NO_MILK_2_5",
         "DAIRY_CHEESE"
       ],
       "selection_reason": "Baked meat-free MAIN adds a high-familiarity household dish and preparation pattern.",
