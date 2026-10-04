@@ -1,0 +1,61 @@
+name: R3-C post-R3B Contract Gate verification
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/validate_r3c_post_r3b_gate.py'
+      - 'data/curation/r3c-post-r3b-catalogue-gate/**'
+      - 'docs/family-food/r3c-post-r3b-catalogue-gate.md'
+      - 'state/**'
+      - '.github/workflows/r3c-post-r3b-gate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Ruff
+        run: python -m pip install --disable-pip-version-check 'ruff==0.16.8'
+
+      - name: Reconcile accepted repository truth
+        run: |
+          set -euo pipefail
+          python scripts/validate_r3c_post_r3b_gate.py --repo-only --json
+
+      - name: Validator syntax and lint
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/validate_r3c_post_r3b_gate.py
+          python -m ruff check scripts/validate_r3c_post_r3b_gate.py
+          python -m ruff format --check scripts/validate_r3c_post_r3b_gate.py
+
+      - name: Scope whitespace
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          base="${PR_BASE_SHA:-origin/main}"
+          git fetch origin main --no-tags
+          git diff --check "$base"...HEAD
+
+      - name: Verification summary
+        run: |
+          set -euo pipefail
+          echo 'R3-C repo-derived catalogue reconciliation: PASS'
+          echo 'R3-C FoodIngredient mapping universe: PASS'
+          echo 'R3-C current Planner role compatibility: PASS'
+          echo 'R3-C current exclusion arithmetic: PASS'
+          echo 'R3-C validator py_compile/Ruff: PASS'
+          echo "tested revision: $(git rev-parse HEAD)"
