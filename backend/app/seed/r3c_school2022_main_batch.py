@@ -377,7 +377,7 @@ def _recipe_seed(
         canonical_name=row["canonical_name"],
         initial_is_active=False,
         version=TrustedRecipeVersionSeed(
-            base_servings=Decimal("1"),
+            base_servings=Decimal(1),
             meal_type_code="main",
             prep_time_minutes=None,
             cook_time_minutes=None,
@@ -395,7 +395,7 @@ def _recipe_seed(
             source_version=f"sha256:{source['source_pdf_sha256']}",
             source_retrieved_at=None,
             source_document_sha256=source["source_pdf_sha256"],
-            source_original_servings=Decimal("1"),
+            source_original_servings=Decimal(1),
             rights_review_status=source["rights_review_status"],
             rights_basis=source["rights_basis"],
             change_note=(
