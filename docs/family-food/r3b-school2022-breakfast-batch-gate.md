@@ -61,6 +61,21 @@ identity.
 
 No identity creation grants NutritionProfile or Composition authority.
 
+## DECISION — exact source branch for omelets
+
+School2022 cards `54-2о`, `54-3о` and `54-4о` each offer an oven-baked
+route and an alternative steam route.
+
+R3-B freezes exactly one source branch for each published RecipeVersion:
+
+- selected: `OVEN_BAKE_180_200C_8_10_MIN` — запекание при 180–200 °C
+  в течение 8–10 минут;
+- not selected: `STEAM_25_30_MIN` — приготовление на пару 25–30 минут.
+
+The steam branch remains provenance-only and must not be silently merged into the
+published RecipeVersion. The butter half/half process binding belongs to the
+selected oven-baked branch.
+
 ## DECISION — process binding
 
 1. Exact quantified RecipeIngredient totals are authoritative.
@@ -150,6 +165,8 @@ The runtime PR must prove:
 11. Planner role mapping/scoring/repetition unchanged;
 12. migration head remains 0042;
 13. `AI_ENABLED=false`.
+14. hard exact `MILK_2_5` exclusion rejects all ten R3-B RecipeVersions with `MEMBER_EXCLUDED_INGREDIENT`; no R3-B RecipeVersion may enter the plan;
+15. under that exclusion, the unaffected breakfast-compatible set remains exactly `HARD_BOILED_EGG`, `SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE`, `SAD28_SANDWICH_CHEESE_20_10`, with count 3 / repetition capacity 9, and authoritative seven-breakfast generation still succeeds without weakening the hard constraint.
 
 ## Non-goals
 
