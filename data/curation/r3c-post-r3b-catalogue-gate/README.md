@@ -37,3 +37,36 @@ The archive was independently materialized from the project Library and hashed a
 - `summary.json` — current and projected catalogue/readiness counts.
 
 No migration, schema, Planner or Nutrition-authority change is authorized.
+
+
+## Reproducible verification
+
+The gate is validated by the committed read-only validator:
+
+`scripts/validate_r3c_post_r3b_gate.py`.
+
+Repository-only checks are reproducible without private source bytes:
+
+```bash
+python scripts/validate_r3c_post_r3b_gate.py --repo-only --json
+```
+
+For the full provenance check, first materialize the durable Library archive to
+an operator-controlled local path, then run:
+
+```bash
+export R3C_SOURCE_ARCHIVE=/path/to/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip
+python scripts/validate_r3c_post_r3b_gate.py \
+  --source-archive "$R3C_SOURCE_ARCHIVE" \
+  --json
+```
+
+The full check deterministically recomputes the ZIP and embedded PDF hashes,
+all **32/32** frozen source hashes (card/process/output/ENERGY reconciliation),
+all 51 selected source ingredient rows, selected/deferred disjointness, Russian
+consumer-step policy, current catalogue arithmetic, exclusion resilience and the
+post-R3-C projection.
+
+The retained command/result receipt is `verification.json`. Repo-only mode
+explicitly reports source archive verification as not run; it never converts a
+missing private archive into a PASS.
