@@ -1,5 +1,34 @@
 # Progress
 
+## R3-B runtime — implementation active — 2026-10-04
+
+Accepted base:
+`dcc5f37f57a83283e4dee0d3c2957ed0704e9a46`.
+
+Issue #151 / branch `feat/r3b-school2022-breakfast-batch-runtime`.
+
+Authorized implementation:
+
+- +3 identity-only FoodIngredients, no Nutrition/Composition;
+- +10 immutable SOURCE_VERIFIED BREAKFAST RecipeVersions;
+- ENERGY_KCAL + 53 UNKNOWN;
+- per-recipe atomic/resumable inactive publication;
+- reuse one-UoW R3-A batch activation seam;
+- Russian-only frozen Recipe Steps;
+- explicit oven-only omelet branch;
+- hard MILK_2_5 exclusion proof preserving capacity 9;
+- no migration/schema/Planner/new-authority change.
+
+Current implementation surface:
+
+- `backend/app/seed/r3b_school2022_breakfast_batch.py`;
+- `backend/app/tests/test_r3b_school2022_breakfast_batch.py`;
+- `.github/workflows/r3b-school2022-breakfast-batch-runtime.yml`.
+
+Verification pending.
+
+Status: `IN_PROGRESS`.
+
 ## R3-B breakfast Contract Gate — 2026-10-04
 
 Accepted base:
