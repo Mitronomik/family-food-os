@@ -535,6 +535,7 @@ def _change_note(row: dict[str, Any]) -> str:
     commitment = _review_commitment(row)
     return (
         "R3-D merged Gate #158; household=REVIEWED_PASS; medical=false; "
+        f"card_sha256={row['source_card_raw_sha256']}; "
         f"source_partition_sha256={commitment}; card={row['source_card_code']}."
     )
 
