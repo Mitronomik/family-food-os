@@ -1,5 +1,53 @@
 # Progress
 
+## R3-B breakfast Contract Gate — 2026-10-04
+
+Accepted base:
+`69c68f4153b25ac4e51cbe9ff54fb080201f08bd`.
+
+Issue #149 / branch `docs/r3b-school2022-breakfast-batch-gate`.
+
+Gate content freezes ten School2022 BREAKFAST RecipeVersions, three identity-only
+foods, exact source output/ENERGY_KCAL, household/process review and reuse of the
+merged R3-A batch transaction seam.
+
+Projected future runtime effect:
+
+- exact-energy active catalogue ~23 → ~33;
+- breakfast-compatible pool ~8 → ~18;
+- MAIN remains 15;
+- DC4 remains blocked by the `50–80+` baseline.
+
+Adversarial process-placement audit: PASS after replacing `54-3т` / `54-21к` with `54-2к` / `54-24к`.
+
+Independent archive/PDF hash readback: PASS.
+
+Content freeze: `f72c7c51d6758dcb11573ab88e49d51272d80e73`.
+
+Verification:
+
+- 10/10 cross-file set alignment — PASS;
+- 10/10 exact source gross/net/output/energy — PASS;
+- 3 identity-only / no Nutrition or Composition — PASS;
+- process-placement audit — PASS;
+- Docs #876 — SUCCESS;
+- DC1 #733 — SUCCESS.
+
+Independent-review blockers corrected:
+
+- consumer Recipe Steps no longer contain internal English engineering terms;
+- three omelets freeze oven branch and retain steam branch as provenance-only;
+- future runtime acceptance includes hard `MILK_2_5` exclusion for all ten R3-B recipes plus unchanged three-candidate milk-free capacity 9.
+
+Cross-file correction audit: PASS.
+
+Corrected content freeze: `6d043ba23e73a3373de95a22dd6fa226db35e8a3`.
+Docs #883 SUCCESS. DC1 #740 SUCCESS.
+
+Status: `READY_FOR_FINAL_REVIEW`.
+
+Runtime remains blocked until independent review and merge.
+
 ## R3-A runtime — review-ready — 2026-10-04
 
 Accepted base:

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "operation": "R3B_SCHOOL2022_BREAKFAST_BATCH_GATE_SUMMARY",
+  "accepted_base": "69c68f4153b25ac4e51cbe9ff54fb080201f08bd",
+  "issue": 149,
+  "selected_count": 10,
+  "selected_recipe_codes": [
+    "SCHOOL2022_54_2O_GREEN_PEA_OMELET",
+    "SCHOOL2022_54_3O_CARROT_OMELET",
+    "SCHOOL2022_54_4O_SEMI_HARD_CHEESE_OMELET",
+    "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE",
+    "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
+    "SCHOOL2022_54_2K_VISCOUS_CORN_MILK_PORRIDGE",
+    "SCHOOL2022_54_6K_MILLET_MILK_PORRIDGE",
+    "SCHOOL2022_54_16K_DRUZHBA_PORRIDGE",
+    "SCHOOL2022_54_23K_LIQUID_WHEAT_MILK_PORRIDGE",
+    "SCHOOL2022_54_24K_LIQUID_MILLET_MILK_PORRIDGE"
+  ],
+  "new_identity_only_foods": [
+    "CHEESE_SEMI_HARD_UNSPECIFIED",
+    "CORN_GROATS",
+    "MILLET_GROATS"
+  ],
+  "source_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+  "source_archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+  "projected": {
+    "active_exact_energy_before": 23,
+    "active_exact_energy_after": 33,
+    "breakfast_compatible_before": 8,
+    "breakfast_compatible_after": 18,
+    "main_active_unchanged": 15,
+    "sandwich_active_unchanged": 1,
+    "max_recipe_repetitions": 3,
+    "dc4_ready_after": false,
+    "milk_2_5_dependency_count": 10,
+    "milk_2_5_unaffected_breakfast_compatible_codes": [
+      "HARD_BOILED_EGG",
+      "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+      "SAD28_SANDWICH_CHEESE_20_10"
+    ],
+    "milk_2_5_unaffected_candidate_count": 3,
+    "milk_2_5_unaffected_capacity_per_week": 9,
+    "hard_milk_exclusion_rejects_all_r3b_candidates": true
+  },
+  "non_goals": [
+    "runtime publication",
+    "migration 0043",
+    "schema change",
+    "Planner change",
+    "new Nutrition authority",
+    "R3-C",
+    "DC4/Gate1-CLOSE/PR9"
+  ],
+  "exclusions": [
+    "ru-school2022:recipe:54-7т",
+    "ru-school2022:recipe:54-3т",
+    "ru-school2022:recipe:54-21к",
+    "ru-school2022:recipe:54-22к"
+  ],
+  "transaction_semantics": "Reuse merged R3-A option B: per-recipe atomic inactive publication with resumable convergence; full-batch preflight and one-UoW atomic activation.",
+  "future_runtime_acceptance": {
+    "hard_milk_exclusion_food_code": "MILK_2_5",
+    "all_r3b_candidates_must_be_rejected_with": "MEMBER_EXCLUDED_INGREDIENT",
+    "r3b_candidate_count_rejected": 10,
+    "unaffected_breakfast_compatible_codes": [
+      "HARD_BOILED_EGG",
+      "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+      "SAD28_SANDWICH_CHEESE_20_10"
+    ],
+    "unaffected_candidate_count": 3,
+    "max_recipe_repetitions": 3,
+    "unaffected_capacity_per_week": 9,
+    "seven_breakfast_authoritative_generation_must_succeed": true,
+    "no_r3b_recipe_may_enter_excluded_plan": true
+  }
+}

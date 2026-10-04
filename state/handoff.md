@@ -1,5 +1,43 @@
 # Handoff
 
+## R3-B breakfast Contract Gate — active — 2026-10-04
+
+Accepted main:
+`69c68f4153b25ac4e51cbe9ff54fb080201f08bd` (merged PR #148).
+
+Issue #149 / branch `docs/r3b-school2022-breakfast-batch-gate`.
+
+Read first:
+`docs/family-food/r3b-school2022-breakfast-batch-gate.md`.
+
+Exact batch: ten School2022 BREAKFAST cards
+`54-2о/3о/4о/2т/1к/2к/6к/16к/23к/24к`.
+
+New identity-only foods:
+`CHEESE_SEMI_HARD_UNSPECIFIED`, `CORN_GROATS`, `MILLET_GROATS`.
+
+Adversarial process audit removed `54-3т` / `54-21к` for unplaced quantified sugar and keeps `54-22к` deferred for unplaced quantified butter. Replacements are `54-2к` / `54-24к`.
+
+Source archive/PDF independently re-hashed 2026-10-04 and match the accepted
+School2022 receipt.
+
+Future runtime must reuse merged R3-A option B in one PR. No migration/schema/
+Planner/new-authority change.
+
+Content freeze: `f72c7c51d6758dcb11573ab88e49d51272d80e73`.
+
+Verification: cross-file/source/process audit PASS; Docs #876 SUCCESS; DC1 #733 SUCCESS.
+
+Status: `READY_FOR_FINAL_REVIEW`.
+
+Review corrections applied: Russian-only consumer steps for `54-23к/54-24к`; explicit oven-vs-steam branch selection for `54-2о/3о/4о`; mandatory hard `MILK_2_5` exclusion proof for all ten future runtime candidates.
+
+Corrected content freeze: `6d043ba23e73a3373de95a22dd6fa226db35e8a3`.
+
+Correction audit PASS. Docs #883 SUCCESS. DC1 #740 SUCCESS.
+
+Do not start runtime before independent review and merge of PR #150.
+
 ## R3-A runtime — review-ready — 2026-10-04
 
 Accepted main:

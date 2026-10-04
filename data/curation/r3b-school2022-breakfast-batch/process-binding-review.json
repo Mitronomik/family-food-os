@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "operation": "R3B_SCHOOL2022_BREAKFAST_BATCH_PROCESS_BINDING_REVIEW",
+  "accepted_base": "69c68f4153b25ac4e51cbe9ff54fb080201f08bd",
+  "issue": 149,
+  "policy": {
+    "exact_recipe_ingredient_total_is_authoritative": true,
+    "per_step_quantity_split_may_remain_unknown": true,
+    "forbidden": [
+      "invent per-step gram splits",
+      "infer retained water/yield after source drain steps",
+      "add process ingredient absent from quantified recipe table"
+    ],
+    "source_ratio_rule": "Explicit source ratios such as half/half or one-third may be retained as process facts; runtime need not materialize derived per-step gram values.",
+    "process_resource_rule": "Unquantified wash/scald/rinse water described as preparation context is not promoted to RecipeIngredient authority.",
+    "source_branch_rule": "When one source card offers multiple execution branches, the published RecipeVersion must freeze one explicit branch; non-selected branches remain provenance and are not merged into consumer steps."
+  },
+  "selected": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2о",
+      "canonical_code": "SCHOOL2022_54_2O_GREEN_PEA_OMELET",
+      "status": "PASS_EXPLICIT_RATIO_BINDING",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "rule": "Exact 5 g butter total is authoritative. Source explicitly places one half on the tray and the other half as melted finishing butter; runtime need not persist per-step grams.",
+      "selected_process_branch": "OVEN_BAKE_180_200C_8_10_MIN",
+      "selected_branch_description_ru": "Запекание в форме при 180–200 °C в течение 8–10 минут.",
+      "non_selected_source_branch": {
+        "code": "STEAM_25_30_MIN",
+        "description_ru": "Альтернативное приготовление омлета на пару в течение 25–30 минут.",
+        "disposition": "NOT_PUBLISHED_IN_THIS_RECIPE_VERSION"
+      },
+      "branch_rule": "Only the oven-baked source branch is frozen for this RecipeVersion; the steam branch remains provenance-only."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-3о",
+      "canonical_code": "SCHOOL2022_54_3O_CARROT_OMELET",
+      "status": "PASS_EXPLICIT_RATIO_BINDING",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "rule": "Exact 9.7 g butter total is authoritative. Source explicitly places one half on the tray and the other half as melted finishing butter; runtime need not persist per-step grams.",
+      "selected_process_branch": "OVEN_BAKE_180_200C_8_10_MIN",
+      "selected_branch_description_ru": "Запекание в форме при 180–200 °C в течение 8–10 минут.",
+      "non_selected_source_branch": {
+        "code": "STEAM_25_30_MIN",
+        "description_ru": "Альтернативное приготовление омлета на пару в течение 25–30 минут.",
+        "disposition": "NOT_PUBLISHED_IN_THIS_RECIPE_VERSION"
+      },
+      "branch_rule": "Only the oven-baked source branch is frozen for this RecipeVersion; the steam branch remains provenance-only."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-4о",
+      "canonical_code": "SCHOOL2022_54_4O_SEMI_HARD_CHEESE_OMELET",
+      "status": "PASS_EXPLICIT_RATIO_BINDING",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "rule": "Exact 10.7 g butter total is authoritative. Source explicitly places one half on the tray and the other half as melted finishing butter; runtime need not persist per-step grams.",
+      "selected_process_branch": "OVEN_BAKE_180_200C_8_10_MIN",
+      "selected_branch_description_ru": "Запекание в форме при 180–200 °C в течение 8–10 минут.",
+      "non_selected_source_branch": {
+        "code": "STEAM_25_30_MIN",
+        "description_ru": "Альтернативное приготовление омлета на пару в течение 25–30 минут.",
+        "disposition": "NOT_PUBLISHED_IN_THIS_RECIPE_VERSION"
+      },
+      "branch_rule": "Only the oven-baked source branch is frozen for this RecipeVersion; the steam branch remains provenance-only."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2т",
+      "canonical_code": "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE",
+      "status": "PASS_PARTIAL_RATIO_INTERNAL_SPLIT_UNKNOWN",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "rule": "Exact 7.5 g butter total is authoritative. Source explicitly places one third in carrot cooking and also names butter for tray greasing; do not invent unsupported internal gram allocations beyond source-stated ratios."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-1к",
+      "canonical_code": "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
+      "status": "PASS_EXPLICIT_PROCESS_BINDING",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "water": "WATER",
+      "rule": "Exact water and butter totals are source-authoritative; butter is explicitly added 2–3 minutes before readiness. No hidden retained-water inference."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2к",
+      "canonical_code": "SCHOOL2022_54_2K_VISCOUS_CORN_MILK_PORRIDGE",
+      "status": "PASS_EXPLICIT_PROCESS_BINDING",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "water": "WATER",
+      "rule": "Exact WATER=65 g is quantified cooking-water input. Unquantified wash water is process-resource context, not RecipeIngredient authority. Butter is explicitly added 2–3 minutes before readiness."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-6к",
+      "canonical_code": "SCHOOL2022_54_6K_MILLET_MILK_PORRIDGE",
+      "status": "PASS_EXPLICIT_PROCESS_BINDING",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "water": "WATER",
+      "rule": "Exact water and butter totals are source-authoritative; butter is explicitly added 2–3 minutes before readiness."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-16к",
+      "canonical_code": "SCHOOL2022_54_16K_DRUZHBA_PORRIDGE",
+      "status": "PASS_EXACT_TOTAL_INTERNAL_SPLIT_UNKNOWN",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "water": "WATER",
+      "rule": "Exact 70 g water total is authoritative across separate rice/millet precooking, but the per-groat split is not source-specified. Butter is explicitly added before final steaming."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-23к",
+      "canonical_code": "SCHOOL2022_54_23K_LIQUID_WHEAT_MILK_PORRIDGE",
+      "status": "PASS_EXACT_INPUT_RETAINED_UNKNOWN",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "water": "WATER",
+      "rule": "Exact 68 g water is authoritative source input. Technology explicitly drains excess water, so retained water/yield is UNKNOWN and must not be inferred. Butter is explicitly added before readiness."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-24к",
+      "canonical_code": "SCHOOL2022_54_24K_LIQUID_MILLET_MILK_PORRIDGE",
+      "status": "PASS_EXPLICIT_QUANTIFIED_COOKING_WATER",
+      "fat": "BUTTER_PEASANT_72_5_UNSALTED",
+      "water": "WATER",
+      "rule": "The quantified WATER=52 g is the source 'по расчету рецептуры' cooking-water input after separate wash/scald/drain operations. Earlier unquantified waters remain process resources. Butter is explicitly placed before readiness."
+    }
+  ],
+  "rejected_or_deferred": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-3т",
+      "reason": "Sugar is quantified in the table but absent from technology placement."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-21к",
+      "reason": "Sugar is quantified in the table but absent from technology placement."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-22к",
+      "reason": "Butter is quantified in the table but absent from technology placement."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-7т",
+      "reason": "Specialized celiac/medical scope."
+    }
+  ]
+}

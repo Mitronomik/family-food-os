@@ -4,137 +4,89 @@ Updated: 2026-10-04.
 
 ## Accepted state
 
-PR #146 / R3-A School2022 ten-recipe MAIN Contract Gate is merged into `main` at:
+PR #148 / R3-A ten-recipe MAIN runtime is merged into `main` at:
 
-`e152b357528bb000cf5cf16e792a0d31b983f117`.
-
-PR #145 was superseded and closed without merge.
+`69c68f4153b25ac4e51cbe9ff54fb080201f08bd`.
 
 DATA-CORPUS-V1 / DC3 remains active.
 
+Current deterministic exact-energy catalogue is approximately 23 active usable
+recipes: 15 MAIN, 7 BREAKFAST and 1 SANDWICH. The breakfast-compatible pool is 8.
+
+The `50–80+` DATA-CORPUS-V1 baseline is not met, so DC4 remains blocked.
+
 ## Current bounded operation
 
-**R3-A runtime — publish School2022 ten-recipe MAIN batch.**
+**R3-B — School2022 ten-recipe BREAKFAST Contract Gate.**
 
-Issue: `#147`.
+Issue: `#149`.
 
-Branch:
+Branch: `docs/r3b-school2022-breakfast-batch-gate`.
 
-`feat/r3a-school2022-main-batch-runtime`.
+Accepted base: `69c68f4153b25ac4e51cbe9ff54fb080201f08bd`.
 
-PR:
+Status: `READY_FOR_FINAL_REVIEW`.
 
-`#148`.
+Canonical gate:
 
-Accepted base:
+`docs/family-food/r3b-school2022-breakfast-batch-gate.md`.
 
-`e152b357528bb000cf5cf16e792a0d31b983f117`.
+## Exact selected set
 
-Runtime freeze:
+- `ru-school2022:recipe:54-2о` — Омлет с зеленым горошком;
+- `ru-school2022:recipe:54-3о` — Омлет с морковью;
+- `ru-school2022:recipe:54-4о` — Омлет с сыром;
+- `ru-school2022:recipe:54-2т` — Запеканка из творога с морковью;
+- `ru-school2022:recipe:54-1к` — Каша жидкая молочная кукурузная;
+- `ru-school2022:recipe:54-2к` — Каша вязкая молочная кукурузная;
+- `ru-school2022:recipe:54-6к` — Каша вязкая молочная пшенная;
+- `ru-school2022:recipe:54-16к` — Каша «Дружба»;
+- `ru-school2022:recipe:54-23к` — Каша жидкая молочная пшеничная;
+- `ru-school2022:recipe:54-24к` — Каша жидкая молочная пшенная;
 
-`6887b58e2331c1324a8269c4f8778a4ef3a0b143`.
+Adversarial process audit rejected `54-3т` and `54-21к` for quantified sugar without technology placement; they are replaced by source-clean `54-2к` and `54-24к`. `54-22к` remains deferred for quantified butter without technology placement.
 
-Status:
+New identity-only demand is exactly:
 
-`READY_FOR_FINAL_REVIEW`.
+- `CHEESE_SEMI_HARD_UNSPECIFIED`;
+- `CORN_GROATS`;
+- `MILLET_GROATS`.
 
-Canonical contract:
-
-`docs/family-food/r3a-school2022-main-batch-gate.md`.
-
-## Delivered runtime scope
-
-Published and activated exactly the ten frozen MAIN RecipeVersions:
-
-- `54-1р`, `54-2р`, `54-3р`;
-- `54-10р`, `54-11р`;
-- `54-4м`, `54-6м`, `54-7м`, `54-8м`, `54-11м`.
-
-Created/reconciled exactly three identity-only FoodIngredients:
-
-- `COD_FILLET_RAW`;
-- `PARSLEY_ROOT_RAW`;
-- `WHEAT_BREAD_STALE_UNSPECIFIED_GRADE`.
-
-No NutritionProfile or Composition authority is granted to them.
-
-Each new RecipeVersion uses exact prepared `ENERGY_KCAL` authority; the other
-53 frozen nutrient codes remain UNKNOWN.
-
-## Transaction result — option B
-
-Publication:
-
-1. each inactive RecipeVersion + prepared authority publishes atomically per recipe;
-2. a failure may leave only an exact inactive subset;
-3. rerun is zero-write for exact rows and converges missing rows;
-4. publication never activates recipes.
-
-Activation:
-
-1. starts only after all ten exact publications reconcile;
-2. all inactive -> all ten activate in one caller-owned UoW / one commit;
-3. all active -> zero-write replay;
-4. mixed active/inactive -> fail closed with zero writes;
-5. injected activation failure rolls back all staged activation writes.
-
-The runtime adds a transaction-neutral in-scope activation seam; the existing
-single-recipe prepared activation behavior remains regression-safe.
-
-## Source/process preservation
-
-- runtime consumes the hash-pinned repository package; no live web/Library dependency;
-- `54-8м` pre-soak liquid remains UNKNOWN;
-- `54-11м` preserves the 5–10 minute weak boil and covered
-  160 °C / 30–40 minute oven finish without an invented water split;
-- excluded/deferred `54-5м/54-9р/54-12м/54-15м/54-18м` are not published.
-
-## Runtime verification on exact freeze
-
-`R3-A School2022 MAIN batch runtime #13` — SUCCESS:
-
-- focused/affected suite: **95 passed**;
-- Ruff check: PASS;
-- Ruff format: PASS;
-- scope/whitespace: PASS;
-- exactly 3 identity-only foods / no Nutrition or Composition: PASS;
-- exactly 10 MAIN RecipeVersions + prepared authority: PASS;
-- per-recipe atomic inactive publication + resumable convergence: PASS;
-- one-UoW batch activation + rollback: PASS;
-- mixed-state fail-closed / all-active replay: PASS;
-- `54-8м` / `54-11м` reviewed process semantics: PASS;
-- migration head 0042 / no 0043: PASS;
-- `AI_ENABLED=false`: PASS.
-
-Same runtime freeze also has SUCCESS for:
-
-- Docs #873;
-- DC1 #730;
-- R1-D #90;
-- R1-F #85;
-- R1-H #30;
-- R1-C #130;
-- R2 breakfast #114;
-- R2-B #104;
-- R2-C #92;
-- R2-E #75;
-- R2-F #47;
-- Russian nutrition methodologies #473;
-- Nutrient registry V2 #929, including broad backend/launcher regression;
-- Partial nutrition profiles #685, including broad backend/launcher regression.
+No NutritionProfile or Composition authority.
 
 ## Scope boundaries
 
-Do not:
+Do not start runtime before independent gate review/merge.
+Do not split recipes into separate PRs.
+Do not create a separate activation PR.
+Do not add migration 0043/schema/Planner/new Nutrition authority changes.
+Do not start R3-C, DC4, Gate1-CLOSE or PR9.
 
-- merge PR #148 autonomously;
-- split recipes into separate PRs;
-- create a separate activation PR;
-- add migration 0043 or schema changes;
-- change Planner mapping/scoring/repetition;
-- add a new Nutrition authority;
-- start DC4/Gate1-CLOSE/PR9;
-- start another recipe batch before independent review/merge and reassessment.
+## Source receipt
 
-Only state/PR metadata may change after the runtime freeze unless a review finding
-requires reopening runtime verification.
+Independent Library materialize/hash readback on 2026-10-04:
+
+- ZIP 206692075 bytes / `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
+- PDF 4102547 bytes / `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`.
+
+Corrected content freeze:
+
+`6d043ba23e73a3373de95a22dd6fa226db35e8a3`.
+
+Review corrections:
+
+- all frozen consumer Recipe Steps are Russian-only; internal authority/inference terminology remains outside product-facing steps;
+- omelets `54-2о/3о/4о` explicitly select oven branch `180–200 °C / 8–10 минут`; steam `25–30 минут` is provenance-only;
+- future runtime must prove hard `MILK_2_5` rejects all 10 R3-B candidates while preserving the exact unaffected set `HARD_BOILED_EGG`, `SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE`, `SAD28_SANDWICH_CHEESE_20_10` with capacity 9 and successful seven-breakfast generation.
+
+Verification on corrected content freeze:
+
+- consumer-step language audit — PASS;
+- explicit omelet branch audit 3/3 — PASS;
+- hard `MILK_2_5` dependency 10/10 + unaffected-set receipt — PASS;
+- selected/spec/household/process/source alignment 10/10 — PASS;
+- frozen quantities/output/ENERGY and option-B semantics unchanged — PASS;
+- Docs #883 — SUCCESS;
+- DC1 #740 — SUCCESS.
+
+Runtime remains blocked until independent re-review and merge of PR #150.

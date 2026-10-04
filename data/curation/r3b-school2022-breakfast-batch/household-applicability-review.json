@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "operation": "R3B_SCHOOL2022_BREAKFAST_BATCH_HOUSEHOLD_APPLICABILITY",
+  "accepted_base": "69c68f4153b25ac4e51cbe9ff54fb080201f08bd",
+  "issue": 149,
+  "review_rule": {
+    "pass_requires": [
+      "ordinary non-clinical food semantics",
+      "core process executable with ordinary household stovetop/oven/steamer/basic tools",
+      "institutional serving/logistics context separable without source truth rewrite",
+      "no quantity/yield/nutrition inference"
+    ],
+    "external_corroboration_required": false,
+    "rationale": "The selected primary-source technologies themselves describe ordinary household cooking operations; no external recipe is needed to establish source truth."
+  },
+  "candidates": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2о",
+      "canonical_code": "SCHOOL2022_54_2O_GREEN_PEA_OMELET",
+      "decision": "REVIEWED_PASS",
+      "planner_role_review": "breakfast",
+      "specialized_medical_scope": false,
+      "consumer_steps": [
+        "Смешать подготовленные яйца с молоком и солью и взбить.",
+        "Консервированный зеленый горошек довести до кипения в отваре, слить и охладить; добавить в яичную массу.",
+        "Вылить массу в смазанную частью масла форму слоем 2,5–3 см и запекать при 180–200 °C 8–10 минут.",
+        "Перед подачей полить оставшимся растопленным сливочным маслом."
+      ],
+      "quarantined_context": [
+        "institutional serving-temperature rule",
+        "paraconvection/institutional equipment wording where present"
+      ],
+      "rationale": "Core source-defined preparation is ordinary household breakfast cooking; institutional logistics are provenance-only and do not alter quantities/output/Nutrition authority.",
+      "selected_process_branch": {
+        "code": "OVEN_BAKE_180_200C_8_10_MIN",
+        "description_ru": "Запекание в форме при 180–200 °C в течение 8–10 минут.",
+        "alternative_not_published": {
+          "code": "STEAM_25_30_MIN",
+          "description_ru": "Приготовление на пару в течение 25–30 минут."
+        }
+      }
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-3о",
+      "canonical_code": "SCHOOL2022_54_3O_CARROT_OMELET",
+      "decision": "REVIEWED_PASS",
+      "planner_role_review": "breakfast",
+      "specialized_medical_scope": false,
+      "consumer_steps": [
+        "Отварить подготовленную морковь и протереть.",
+        "Смешать яйца с молоком и солью, взбить, добавить морковь.",
+        "Запекать массу в смазанной частью масла форме при 180–200 °C 8–10 минут.",
+        "Перед подачей полить оставшимся растопленным сливочным маслом."
+      ],
+      "quarantined_context": [
+        "institutional serving-temperature rule",
+        "paraconvection/institutional equipment wording where present"
+      ],
+      "rationale": "Core source-defined preparation is ordinary household breakfast cooking; institutional logistics are provenance-only and do not alter quantities/output/Nutrition authority.",
+      "selected_process_branch": {
+        "code": "OVEN_BAKE_180_200C_8_10_MIN",
+        "description_ru": "Запекание в форме при 180–200 °C в течение 8–10 минут.",
+        "alternative_not_published": {
+          "code": "STEAM_25_30_MIN",
+          "description_ru": "Приготовление на пару в течение 25–30 минут."
+        }
+      }
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-4о",
+      "canonical_code": "SCHOOL2022_54_4O_SEMI_HARD_CHEESE_OMELET",
+      "decision": "REVIEWED_PASS",
+      "planner_role_review": "breakfast",
+      "specialized_medical_scope": false,
+      "consumer_steps": [
+        "Натереть подготовленный полутвердый сыр.",
+        "Смешать яйца с молоком и солью, добавить сыр и взбить.",
+        "Запекать в смазанной частью масла форме при 180–200 °C 8–10 минут.",
+        "Перед подачей полить оставшимся растопленным сливочным маслом."
+      ],
+      "quarantined_context": [
+        "institutional serving-temperature rule",
+        "paraconvection/institutional equipment wording where present"
+      ],
+      "rationale": "Core source-defined preparation is ordinary household breakfast cooking; institutional logistics are provenance-only and do not alter quantities/output/Nutrition authority.",
+      "selected_process_branch": {
+        "code": "OVEN_BAKE_180_200C_8_10_MIN",
+        "description_ru": "Запекание в форме при 180–200 °C в течение 8–10 минут.",
+        "alternative_not_published": {
+          "code": "STEAM_25_30_MIN",
+          "description_ru": "Приготовление на пару в течение 25–30 минут."
+        }
+      }
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2т",
+      "canonical_code": "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE",
+      "decision": "REVIEWED_PASS",
+      "planner_role_review": "breakfast",
+      "specialized_medical_scope": false,
+      "consumer_steps": [
+        "Протереть творог.",
+        "Морковь нарезать соломкой и припустить в молоке с 1/3 общего количества сливочного масла.",
+        "Постепенно всыпать манную крупу и варить при помешивании 10–15 минут; охладить до 40–50 °C.",
+        "Соединить с творогом, сырыми яйцами, сахаром и йодированной солью; выложить слоем 3 см в смазанную сливочным маслом и посыпанную сухарями форму.",
+        "Разровнять, смазать сметаной и запекать при 250 °C до лёгкой корочки, затем при 160–180 °C; суммарно не менее 15 минут."
+      ],
+      "quarantined_context": [
+        "institutional serving-temperature rule",
+        "paraconvection/institutional equipment wording where present"
+      ],
+      "rationale": "Core source-defined preparation is ordinary household breakfast cooking; institutional logistics are provenance-only and do not alter quantities/output/Nutrition authority."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-1к",
+      "canonical_code": "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
+      "decision": "REVIEWED_PASS",
+      "planner_role_review": "breakfast",
+      "specialized_medical_scope": false,
+      "consumer_steps": [
+        "Перебрать и промыть кукурузную крупу, несколько раз меняя воду.",
+        "Засыпать крупу в кипящую воду и варить при слабом кипении 20–30 минут, помешивая; добавить горячее молоко, йодированную соль и сахар.",
+        "За 2–3 минуты до готовности добавить растопленное сливочное масло, перемешать и упарить под закрытой крышкой."
+      ],
+      "quarantined_context": [
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Core source-defined preparation is ordinary household breakfast cooking; institutional logistics are provenance-only and do not alter quantities/output/Nutrition authority."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-2к",
+      "canonical_code": "SCHOOL2022_54_2K_VISCOUS_CORN_MILK_PORRIDGE",
+      "decision": "REVIEWED_PASS",
+      "planner_role_review": "breakfast",
+      "specialized_medical_scope": false,
+      "consumer_steps": [
+        "Перебрать и промыть кукурузную крупу, несколько раз меняя воду.",
+        "Засыпать крупу в кипящую воду и варить при слабом кипении, помешивая; через 15–20 минут добавить горячее молоко, йодированную соль и сахар.",
+        "За 2–3 минуты до готовности добавить растопленное сливочное масло, перемешать и упарить под закрытой крышкой."
+      ],
+      "quarantined_context": [
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Core source-defined preparation is ordinary household breakfast cooking; unquantified washing/scalding water is preparation context and does not alter quantified RecipeIngredient truth."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-6к",
+      "canonical_code": "SCHOOL2022_54_6K_MILLET_MILK_PORRIDGE",
+      "decision": "REVIEWED_PASS",
+      "planner_role_review": "breakfast",
+      "specialized_medical_scope": false,
+      "consumer_steps": [
+        "Перебрать пшенную крупу, промыть сначала тёплой, затем горячей водой и ошпарить.",
+        "В кипящую смесь воды и молока добавить йодированную соль и сахар, затем всыпать подготовленную крупу и варить при слабом кипении.",
+        "За 2–3 минуты до готовности добавить растопленное сливочное масло, перемешать и упарить под закрытой крышкой."
+      ],
+      "quarantined_context": [
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Core source-defined preparation is ordinary household breakfast cooking; institutional logistics are provenance-only and do not alter quantities/output/Nutrition authority."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-16к",
+      "canonical_code": "SCHOOL2022_54_16K_DRUZHBA_PORRIDGE",
+      "decision": "REVIEWED_PASS",
+      "planner_role_review": "breakfast",
+      "specialized_medical_scope": false,
+      "consumer_steps": [
+        "Пшенную крупу перебрать, промыть тёплой и горячей водой и ошпарить; рисовую крупу перебрать и промыть.",
+        "Обе крупы варить отдельно в кипящей воде до полуготовности. Источник фиксирует общий расход воды 70 г, но не делит его между крупами.",
+        "Соединить крупы, добавить тёплое молоко, сахар и йодированную соль; довести до кипения и варить при слабом кипении до поглощения жидкости над крупой.",
+        "За 10 минут до готовности добавить растопленное сливочное масло, перемешать и упарить под закрытой крышкой."
+      ],
+      "quarantined_context": [
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Core source-defined preparation is ordinary household breakfast cooking; institutional logistics are provenance-only and do not alter quantities/output/Nutrition authority."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-23к",
+      "canonical_code": "SCHOOL2022_54_23K_LIQUID_WHEAT_MILK_PORRIDGE",
+      "decision": "REVIEWED_PASS",
+      "planner_role_review": "breakfast",
+      "specialized_medical_scope": false,
+      "consumer_steps": [
+        "Засыпать пшеничную крупу в кипящую воду и варить 20–30 минут; лишнюю воду слить. Источник фиксирует 68 г воды как точный вход рецептуры; количество воды, оставшееся после варки и слива, источник не устанавливает.",
+        "Добавить предварительно доведённое до кипения молоко, йодированную соль и сахар и варить до загустения; затем упарить на водяной бане под плотно закрытой крышкой.",
+        "За 2–3 минуты до готовности добавить растопленное сливочное масло и тщательно перемешать."
+      ],
+      "quarantined_context": [
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Core source-defined preparation is ordinary household breakfast cooking; institutional logistics are provenance-only and do not alter quantities/output/Nutrition authority."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-24к",
+      "canonical_code": "SCHOOL2022_54_24K_LIQUID_MILLET_MILK_PORRIDGE",
+      "decision": "REVIEWED_PASS",
+      "planner_role_review": "breakfast",
+      "specialized_medical_scope": false,
+      "consumer_steps": [
+        "Перебрать пшенную крупу; многократно промыть в холодной, затем тёплой воде до прозрачности воды. Вода для промывания и ошпаривания является технологическим ресурсом и не входит в 52 г воды, заданные рецептурой.",
+        "Крупу залить кипящей водой, через 1 минуту воду слить; снова залить кипящей водой, довести до кипения, варить 2–5 минут и воду слить.",
+        "Залить 52 г кипящей воды по расчёту рецептуры и варить до загустения; влить кипящее молоко, добавить йодированную соль и сахар и продолжить варку.",
+        "За 2–3 минуты до готовности добавить растопленное сливочное масло, тщательно перемешать и упарить на водяной бане под закрытой крышкой."
+      ],
+      "quarantined_context": [
+        "institutional serving-temperature rule"
+      ],
+      "rationale": "Core source-defined preparation is ordinary household breakfast cooking; unquantified washing/scalding water is preparation context and does not alter quantified RecipeIngredient truth."
+    }
+  ]
+}
