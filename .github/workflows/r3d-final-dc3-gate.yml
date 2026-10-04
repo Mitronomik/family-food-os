@@ -1,0 +1,166 @@
+name: R3-D final DC3 Contract Gate verification
+
+on:
+  push:
+    branches:
+      - 'docs/r3d-final-dc3-batch-gate'
+  pull_request:
+    paths:
+      - 'docs/family-food/r3d-final-dc3-batch-gate.md'
+      - 'data/curation/r3d-final-dc3-batch-gate/**'
+      - 'scripts/validate_r3d_final_dc3_gate.py'
+      - 'state/**'
+      - '.github/workflows/r3d-final-dc3-gate.yml'
+  workflow_dispatch:
+    inputs:
+      target_ref:
+        description: 'Branch, tag or exact commit SHA to verify'
+        required: true
+        default: 'main'
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      AI_ENABLED: 'false'
+      ACCEPTED_BASE: '1c82f34b960621aed3e1c43780270f8048edfe0f'
+    steps:
+      - name: Checkout exact requested revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ inputs.target_ref || github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Ruff
+        run: python -m pip install --disable-pip-version-check 'ruff==0.16.8'
+
+      - name: Validate R3-D repository and source truth
+        run: |
+          set -euo pipefail
+          python scripts/validate_r3d_final_dc3_gate.py --json
+
+      - name: Parse retained gate JSON
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path("data/curation/r3d-final-dc3-batch-gate")
+          files = sorted(root.glob("*.json"))
+          assert files
+          for path in files:
+              value = json.loads(path.read_text(encoding="utf-8"))
+              assert isinstance(value, dict), path
+          print(f"R3-D JSON parse: PASS ({len(files)} files)")
+          PY
+
+      - name: Validator syntax and format
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/validate_r3d_final_dc3_gate.py
+          python -m ruff check scripts/validate_r3d_final_dc3_gate.py
+          python -m ruff format --check scripts/validate_r3d_final_dc3_gate.py
+
+      - name: Resolve diff base
+        id: base
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          git fetch origin main --no-tags
+          base="${PR_BASE_SHA:-${ACCEPTED_BASE}}"
+          echo "base=${base}" >> "${GITHUB_OUTPUT}"
+          echo "base=${base}"
+          echo "head=$(git rev-parse HEAD)"
+
+      - name: Scope and whitespace
+        run: |
+          set -euo pipefail
+          base='${{ steps.base.outputs.base }}'
+          git diff --check "${base}"...HEAD
+          mapfile -t changed < <(git diff --name-only "${base}"...HEAD)
+          (( ${#changed[@]} > 0 ))
+          printf 'Changed paths:\n'
+          printf '  %s\n' "${changed[@]}"
+          for path in "${changed[@]}"; do
+            case "${path}" in
+              docs/family-food/r3d-final-dc3-batch-gate.md|              data/curation/r3d-final-dc3-batch-gate/*|              scripts/validate_r3d_final_dc3_gate.py|              state/current-focus.md|state/progress.md|state/handoff.md|              .github/workflows/r3d-final-dc3-gate.yml)
+                ;;
+              *)
+                echo "Unexpected R3-D gate scope: ${path}" >&2
+                exit 1
+                ;;
+            esac
+          done
+
+      - name: Markdown link gate
+        run: |
+          set -euo pipefail
+          base='${{ steps.base.outputs.base }}'
+          python - "${base}" <<'PY'
+          import re
+          import subprocess
+          import sys
+          from pathlib import Path
+          from urllib.parse import unquote
+
+          base = sys.argv[1]
+          changed = subprocess.check_output(
+              ["git", "diff", "--name-only", f"{base}...HEAD"], text=True
+          ).splitlines()
+          md_files = [Path(p) for p in changed if p.endswith(".md") and Path(p).exists()]
+          link_re = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
+          failures = []
+          for path in md_files:
+              text = path.read_text(encoding="utf-8")
+              for raw in link_re.findall(text):
+                  target = raw.strip()
+                  if target.startswith("<") and target.endswith(">"):
+                      target = target[1:-1].strip()
+                  if not target or target.startswith(("#", "http://", "https://", "mailto:")):
+                      continue
+                  if ' "' in target:
+                      target = target.split(' "', 1)[0]
+                  target = unquote(target.split("#", 1)[0].split("?", 1)[0])
+                  if not target:
+                      continue
+                  resolved = (
+                      Path(".") / target.lstrip("/")
+                      if target.startswith("/")
+                      else path.parent / target
+                  )
+                  if not resolved.exists():
+                      failures.append(f"{path}: {raw} -> {resolved}")
+          if failures:
+              print("\n".join(failures), file=sys.stderr)
+              raise SystemExit(1)
+          print(f"Markdown links: PASS ({len(md_files)} changed files)")
+          PY
+
+      - name: Verification summary
+        run: |
+          set -euo pipefail
+          echo "tested revision: $(git rev-parse HEAD)"
+          echo 'R3-D repo-derived post-R3C truth: PASS'
+          echo 'R3-D selected MR source cards / raw hashes / 12+ rows: PASS'
+          echo 'R3-D 10 unique MAIN / mapping completeness / identity-only boundaries: PASS'
+          echo 'R3-D product mix 6 meat-free + 2 chicken + 2 beef + 0 fish: PASS'
+          echo 'R3-D projection 41 -> 51 and MAIN 23 -> 33: PASS'
+          echo 'R3-D exact-beef projection 14/33, unaffected 19, capacity 57: PASS'
+          echo 'R3-D hard MILK_2_5 path remains 3/capacity 9: PASS'
+          echo 'R3-D next planned operation after successful runtime: DC4: PASS'
+          echo 'AI_ENABLED=false: PASS'
