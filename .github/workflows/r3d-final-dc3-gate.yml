@@ -73,11 +73,7 @@ jobs:
           set -euo pipefail
           python -m py_compile scripts/validate_r3d_final_dc3_gate.py
           python -m ruff check scripts/validate_r3d_final_dc3_gate.py
-          python -m ruff format scripts/validate_r3d_final_dc3_gate.py
-          echo 'R3D_FORMATTED_FILE_BEGIN'
-          cat scripts/validate_r3d_final_dc3_gate.py
-          echo 'R3D_FORMATTED_FILE_END'
-          git diff --exit-code -- scripts/validate_r3d_final_dc3_gate.py
+          python -m ruff format --check scripts/validate_r3d_final_dc3_gate.py
 
       - name: Resolve diff base
         id: base
