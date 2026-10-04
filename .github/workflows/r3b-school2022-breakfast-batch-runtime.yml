@@ -51,7 +51,7 @@ jobs:
           python -m pip install --disable-pip-version-check -e './backend[test]'
           python -m pip install --disable-pip-version-check 'ruff==0.16.8'
 
-      - name: Focused R3-A verification
+      - name: Focused R3-B verification
         run: |
           set -euo pipefail
           python -m pytest -q \
