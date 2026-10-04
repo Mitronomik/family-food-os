@@ -4,85 +4,83 @@ Updated: 2026-10-04.
 
 ## Accepted state
 
-PR #152 / R3-B School2022 ten-recipe BREAKFAST runtime is MERGED into `main` at:
+PR #154 / R3-C post-R3B catalogue Contract Gate is MERGED into `main` at:
 
-`90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4`.
+`3c5740b319e453715c5a58f5b65e6d216b7c4fdb`.
 
 DATA-CORPUS-V1 / DC3 remains active.
 
 ## Current bounded operation
 
-**R3-C Contract Gate — post-R3B catalogue readiness + next DC3 batch.**
+**R3-C runtime — publish frozen eight-recipe MAIN batch.**
 
-Issue: `#153`.
-
-PR: `#154`.
+Issue: `#155`.
 
 Branch:
 
-`docs/r3c-post-r3b-catalogue-gate`.
+`feat/r3c-school2022-main-batch-runtime`.
 
 Accepted base:
 
-`90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4`.
+`3c5740b319e453715c5a58f5b65e6d216b7c4fdb`.
 
 Status:
 
-`READY_FOR_FINAL_REVIEW`.
+`IMPLEMENTATION_ACTIVE`.
 
-Canonical contract target:
+Canonical contract:
 
 `docs/family-food/r3c-post-r3b-catalogue-gate.md`.
 
-## Frozen result under review
+## Authorized runtime scope
 
-Post-R3B exact-energy catalogue:
+Publish/activate exactly eight frozen MAIN RecipeVersions:
 
-- 33 active exact-energy recipes;
-- 17 `breakfast`;
-- 15 `main`;
-- 1 `sandwich`;
-- 18 breakfast-compatible;
-- hard `MILK_2_5` unaffected set remains 3 / capacity 9;
-- DC4 remains blocked by DATA-CORPUS-V1 `50–80+` usable baseline.
+- `SCHOOL2022_54_21M_BOILED_CHICKEN`;
+- `SCHOOL2022_54_3M_LAZY_CABBAGE_ROLLS`;
+- `SCHOOL2022_54_26M_POTATO_BEEF_CASSEROLE`;
+- `SCHOOL2022_54_1M_BOILED_BEEF_STROGANOFF`;
+- `SCHOOL2022_54_30M_BEEF_RICE_QUENELLES`;
+- `SCHOOL2022_54_20M_BOILED_BEEF`;
+- `SCHOOL2022_54_15R_SALMON_IN_MILK`;
+- `SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES`.
 
-R3-C freezes eight source-backed `main` RecipeVersions for a later runtime PR.
-One new identity is allowed identity-only:
+Exactly one new identity-only FoodIngredient is authorized:
 
 - `ATLANTIC_SALMON_FILLET_RAW`.
 
-No NutritionProfile, NutrientVector or Composition authority is granted.
+No NutritionProfile, NutrientVector or Composition authority is allowed.
 
-Projected after future runtime:
+Reuse R3-A/R3-B option B:
 
-- 41 exact-energy recipes;
-- 23 `main`;
-- gap to 50 = 9;
-- DC4 still blocked.
+- per-recipe atomic inactive publication;
+- resumable exact inactive subset;
+- zero-write exact replay;
+- one-UoW full-batch activation;
+- mixed-state fail closed;
+- activation rollback.
 
-## Verification
+## Expected result
 
-- frozen selected set: 8 unique MAIN recipes — PASS;
-- all required ingredient rows mapped — PASS;
-- new identity-only authority leak — NONE;
-- source archive/PDF hashes independently re-verified — PASS;\n- committed reproducible validator + retained verification receipt — PASS;\n- repository-derived current truth (FoodIngredient universe, 33 exact-energy set, Planner compatibility, milk/beef exclusions) — PASS;
-- remote scope audit: docs/data/state only — PASS;
-- base→head whitespace audit equivalent to `git diff --check` — PASS after correction;
-- current arithmetic 33 and projected arithmetic 41 — PASS;
-- DC4 remains blocked — PASS.
+After successful runtime activation:
+
+- exact-energy catalogue: 33 -> 41;
+- MAIN: 15 -> 23;
+- breakfast: 17;
+- sandwich: 1;
+- gap to DATA-CORPUS-V1 lower baseline 50: 9;
+- DC4 remains blocked.
 
 ## Scope boundaries
 
-This operation is docs/evidence only.
-
 Do not:
 
-- publish/activate R3-C runtime recipes;
 - add migration 0043 or schema changes;
-- change Planner or Nutrition authority;
+- change Planner mapping/scoring/repetition;
+- add a new Nutrition authority;
+- publish deferred/rejected candidates;
 - start DC4 / Gate1-CLOSE / PR9;
 - start Shopping / Prep / PDF / PWA / Retail / Auth / PostgreSQL / AI.
 
-After this Contract Gate is independently reviewed and explicitly merged, stop.
-The only next allowed bounded operation is a separate R3-C runtime PR implementing
-exactly the frozen set.
+After this runtime PR is review-ready, stop for independent review. After merge,
+reassess DC3 catalogue readiness before authorizing another batch or DC4.
