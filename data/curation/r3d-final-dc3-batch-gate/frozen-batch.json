@@ -190,6 +190,23 @@
         "fat_g": "6.3",
         "carbohydrate_g": "11.2",
         "energy_kcal": "112"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "Ordinary household vegetable soup. Under the current coarse MealTypeCode taxonomy it is reviewed as lunch/main; its low source energy per 350 g does not prove Serving adequacy and must be tested in DC4 persisted-week/Serving feasibility.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY",
+        "LOW_ENERGY_SERVING_FEASIBILITY_REQUIRES_DC4",
+        "SOUP_AS_MAIN_IS_CURRENT_COARSE_TAXONOMY_CLASSIFICATION"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "112"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
       }
     },
     {
@@ -271,6 +288,23 @@
         "fat_g": "4.1",
         "carbohydrate_g": "17.5",
         "energy_kcal": "119"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "Ordinary household rassolnik. Under the current coarse MealTypeCode taxonomy it is reviewed as lunch/main; its low source energy per 350 g does not prove Serving adequacy and must be tested in DC4 persisted-week/Serving feasibility.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY",
+        "LOW_ENERGY_SERVING_FEASIBILITY_REQUIRES_DC4",
+        "SOUP_AS_MAIN_IS_CURRENT_COARSE_TAXONOMY_CLASSIFICATION"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "119"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
       }
     },
     {
@@ -352,6 +386,23 @@
         "fat_g": "4.1",
         "carbohydrate_g": "15.8",
         "energy_kcal": "112"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "Ordinary household oat-and-vegetable soup. Under the current coarse MealTypeCode taxonomy it is reviewed as lunch/main; its low source energy per 350 g does not prove Serving adequacy and must be tested in DC4 persisted-week/Serving feasibility.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY",
+        "LOW_ENERGY_SERVING_FEASIBILITY_REQUIRES_DC4",
+        "SOUP_AS_MAIN_IS_CURRENT_COARSE_TAXONOMY_CLASSIFICATION"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "112"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
       }
     },
     {
@@ -426,6 +477,23 @@
         "fat_g": "5.5",
         "carbohydrate_g": "33.6",
         "energy_kcal": "219"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "Ordinary household potato-and-split-pea soup. Under the current coarse MealTypeCode taxonomy it is reviewed as lunch/main; Serving adequacy remains a DC4 persisted-week/Serving feasibility question.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY",
+        "LOW_ENERGY_SERVING_FEASIBILITY_REQUIRES_DC4",
+        "SOUP_AS_MAIN_IS_CURRENT_COARSE_TAXONOMY_CLASSIFICATION"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "219"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
       }
     },
     {
@@ -486,6 +554,21 @@
         "fat_g": "6.7",
         "carbohydrate_g": "24.7",
         "energy_kcal": "193"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "Ordinary household cooked pasta with grated cheese; no diagnosis-specific ingredient, therapeutic claim or medical-only process is published.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "193"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
       }
     },
     {
@@ -547,6 +630,21 @@
         "fat_g": "10.9",
         "carbohydrate_g": "41.1",
         "energy_kcal": "313"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "Ordinary household baked macaroni with cheese; no diagnosis-specific ingredient, therapeutic claim or medical-only process is published.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "313"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
       }
     },
     {
@@ -622,6 +720,22 @@
         "fat_g": "21.7",
         "carbohydrate_g": "5.0",
         "energy_kcal": "291"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "The dish uses ordinary household boiling, sauce preparation and steaming. Its dietetic/therapeutic-preventive source-collection provenance is retained as provenance only; no therapeutic claim or diagnosis-specific process is published.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY",
+        "DIETETIC_SOURCE_COLLECTION_PROVENANCE_ONLY_NO_THERAPEUTIC_CLAIM"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "291"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
       }
     },
     {
@@ -676,6 +790,21 @@
         "fat_g": "20.6",
         "carbohydrate_g": "0",
         "energy_kcal": "267"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "Ordinary household boiled-chicken preparation; institutional source provenance does not create a therapeutic claim or medical-only process.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "267"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
       }
     },
     {
@@ -775,6 +904,21 @@
         "fat_g": "18.8",
         "carbohydrate_g": "23.1",
         "energy_kcal": "336"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "Ordinary household beef-and-vegetable ragout; no diagnosis-specific ingredient, therapeutic claim or medical-only process is published.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "336"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
       }
     },
     {
@@ -855,6 +999,22 @@
         "fat_g": "15.0",
         "carbohydrate_g": "6.0",
         "energy_kcal": "222"
+      },
+      "household_applicability": "REVIEWED_PASS",
+      "specialized_medical_scope": false,
+      "household_rationale": "The dish uses ordinary household minced-meat, omelet and steaming operations. Its dietetic/therapeutic-preventive source-collection provenance is retained as provenance only; no therapeutic claim or diagnosis-specific process is published.",
+      "quarantined_source_context": [
+        "NORMATIVE_OR_INSTITUTIONAL_SOURCE_PROVENANCE_ONLY",
+        "DIETETIC_SOURCE_COLLECTION_PROVENANCE_ONLY_NO_THERAPEUTIC_CLAIM"
+      ],
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "222"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
       }
     }
   ],

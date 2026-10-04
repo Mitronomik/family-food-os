@@ -482,6 +482,82 @@ def validate_gate(repo_root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
             row.get("source_output_g") and row.get("energy_kcal"),
             f"output/energy missing: {row['canonical_code']}",
         )
+        require(
+            row.get("household_applicability") == "REVIEWED_PASS",
+            f"household applicability not reviewed PASS: {row['canonical_code']}",
+        )
+        require(
+            row.get("specialized_medical_scope") is False,
+            f"selected recipe must not be specialized medical scope: {row['canonical_code']}",
+        )
+        household_rationale = row.get("household_rationale")
+        require(
+            isinstance(household_rationale, str) and household_rationale.strip(),
+            f"household rationale missing: {row['canonical_code']}",
+        )
+        quarantined_context = row.get("quarantined_source_context")
+        require(
+            isinstance(quarantined_context, list)
+            and quarantined_context
+            and all(
+                isinstance(item, str) and item.strip()
+                for item in quarantined_context
+            ),
+            f"quarantined source context missing: {row['canonical_code']}",
+        )
+        if row["canonical_code"] in {
+            "MR2019_1_2A_VEGETARIAN_CABBAGE_SOUP",
+            "MR2019_1_3_LENINGRAD_RASSOLNIK_SOUR_CREAM",
+            "MR2019_1_4_OAT_VEGETABLE_SOUP_SOUR_CREAM",
+            "MR2019_1_16_POTATO_SPLIT_PEA_SOUP",
+        }:
+            require(
+                "LOW_ENERGY_SERVING_FEASIBILITY_REQUIRES_DC4"
+                in quarantined_context,
+                f"soup Serving feasibility not quarantined to DC4: {row['canonical_code']}",
+            )
+            require(
+                "SOUP_AS_MAIN_IS_CURRENT_COARSE_TAXONOMY_CLASSIFICATION"
+                in quarantined_context,
+                f"soup coarse taxonomy review missing: {row['canonical_code']}",
+            )
+        if row["canonical_code"] in {
+            "MR2019_2_15_STEAMED_CHICKEN_SOUFFLE",
+            "MR2019_2_9_STEAMED_BEEF_ROLL_OMELET",
+        }:
+            require(
+                "DIETETIC_SOURCE_COLLECTION_PROVENANCE_ONLY_NO_THERAPEUTIC_CLAIM"
+                in quarantined_context,
+                f"dietetic-source household review missing: {row['canonical_code']}",
+            )
+
+        prepared = row.get("prepared_authority")
+        require(
+            isinstance(prepared, dict),
+            f"prepared authority contract missing: {row['canonical_code']}",
+        )
+        require(
+            prepared.get("authority_kind") == "PREPARED_OUTPUT_V1",
+            f"prepared authority kind drifted: {row['canonical_code']}",
+        )
+        require(
+            prepared.get("calculation_version")
+            == "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+            f"prepared calculation version drifted: {row['canonical_code']}",
+        )
+        require(
+            prepared.get("available") == {"ENERGY_KCAL": row["energy_kcal"]},
+            f"prepared ENERGY_KCAL binding mismatch: {row['canonical_code']}",
+        )
+        require(
+            prepared.get("unknown_policy")
+            == "all other frozen nutrient codes UNKNOWN",
+            f"prepared UNKNOWN policy drifted: {row['canonical_code']}",
+        )
+        require(
+            prepared.get("require_recipe_inactive") is True,
+            f"prepared publication must require inactive Recipe: {row['canonical_code']}",
+        )
         steps = row.get("consumer_steps_ru")
         require(
             isinstance(steps, list) and steps,
@@ -674,6 +750,15 @@ def validate_gate(repo_root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
         "current_fish_main": current["fish_main_count"],
         "selected_count": len(selected),
         "new_identity_only_count": len(identities),
+        "household_applicability_pass": sum(
+            1 for row in selected if row.get("household_applicability") == "REVIEWED_PASS"
+        ),
+        "prepared_authority_contracts": sum(
+            1
+            for row in selected
+            if row.get("prepared_authority", {}).get("authority_kind")
+            == "PREPARED_OUTPUT_V1"
+        ),
         "selected_mix": {
             "meat_free": selected_meat_free,
             "chicken": selected_chicken,

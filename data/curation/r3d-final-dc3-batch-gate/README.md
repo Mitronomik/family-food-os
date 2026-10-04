@@ -27,6 +27,22 @@ Projected exact-energy Planner-supported catalogue:
 The lower DATA-CORPUS-V1 baseline is crossed with a one-recipe buffer. R3-D is
 therefore the **last planned DC3 expansion batch** before DC4.
 
+## Household + Nutrition contract
+
+All ten selected recipes are frozen with `household_applicability=REVIEWED_PASS`
+and `specialized_medical_scope=false`, with explicit rationale and quarantined
+source context. Soup-as-`main` classification is reviewed under the current
+coarse taxonomy, while low-energy Serving feasibility remains a DC4 obligation.
+Dietetic source-collection provenance for cards 2.15/2.9 is provenance only and
+does not create a therapeutic claim.
+
+Every selected recipe also freezes the future prepared-output authority:
+
+`PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`.
+
+Only exact source `ENERGY_KCAL` is AVAILABLE; all other frozen nutrient codes
+remain UNKNOWN and publication requires the Recipe to be inactive.
+
 ## Product result
 
 Current MAIN concentration is 12 exact `BEEF_CATEGORY_1_RAW` + 9 fish + 2

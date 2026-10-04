@@ -227,6 +227,49 @@ This higher identity count is intentional. The gate does not collapse:
 
 Exact form truth is preferred over artificial debt minimization.
 
+## 7.1 Household applicability
+
+Every selected RecipeVersion is frozen with:
+
+- `household_applicability=REVIEWED_PASS`;
+- `specialized_medical_scope=false`;
+- a per-recipe household rationale;
+- explicit source context that is quarantined from consumer/runtime semantics.
+
+The four soups are reviewed as ordinary household lunch/main dishes under the
+current coarse `MealTypeCode` taxonomy. That classification does **not** prove
+that their source portion energy is sufficient for a realistic household Serving.
+Their low-energy Serving feasibility and persisted-week behavior remain mandatory
+DC4 validation.
+
+MR cards 2.15 and 2.9 come from a dietetic/therapeutic-preventive source
+collection, but the selected recipes themselves contain ordinary household
+ingredients and cooking operations. The gate publishes no diagnosis-specific
+indication, therapeutic claim or medical-only process. The dietetic collection
+context is retained as provenance only.
+
+The same rule applies to the remaining selected cards: institutional/normative
+source provenance is evidence, not a medical claim.
+
+## 7.2 Prepared Nutrition authority contract
+
+R3-D freezes the future production Nutrition authority, not only the source
+calorie number.
+
+For every selected RecipeVersion:
+
+```text
+authority_kind = PREPARED_OUTPUT_V1
+calculation_version = RECIPE_PREPARED_OUTPUT_NUTRITION_V1
+available = { ENERGY_KCAL: <exact source value> }
+unknown_policy = all other frozen nutrient codes UNKNOWN
+require_recipe_inactive = true
+```
+
+The source macro row remains review/provenance evidence; it does not silently
+promote protein, fat, carbohydrate or any other nutrient to production authority.
+No raw-input Composition, retention inference or source scaling is authorized.
+
 ## 8. Process and fail-closed review
 
 Notable rejected/deferred cards include:
