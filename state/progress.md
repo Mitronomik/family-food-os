@@ -32,7 +32,7 @@ Future projection: exact-energy 41; main 23; gap to 50 = 9; DC4 still BLOCKED.
 
 Verification: selected-set/mapping/source-hash/arithmetic/scope checks PASS; base→head whitespace audit PASS after correction.
 
-Status: `READY_FOR_FINAL_REVIEW`.
+Independent review found one formal blocker: the verification procedure/result was not durable.\nThe same PR now contains `scripts/validate_r3c_post_r3b_gate.py` plus\n`data/curation/r3c-post-r3b-catalogue-gate/verification.json`; the frozen eight-recipe set is unchanged.\n\nStatus: `READY_FOR_FINAL_REVIEW` — durable validator/receipt blocker corrected.
 
 ---
 
