@@ -5,7 +5,7 @@
 Accepted main:
 `90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4` (merged PR #152).
 
-Issue #153 / branch `docs/r3c-post-r3b-catalogue-gate`.
+Issue #153 / PR #154 / branch `docs/r3c-post-r3b-catalogue-gate`.
 
 Read first:
 

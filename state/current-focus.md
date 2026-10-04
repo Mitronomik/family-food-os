@@ -16,6 +16,8 @@ DATA-CORPUS-V1 / DC3 remains active.
 
 Issue: `#153`.
 
+PR: `#154`.
+
 Branch:
 
 `docs/r3c-post-r3b-catalogue-gate`.
