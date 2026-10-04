@@ -258,7 +258,9 @@ def test_r3d_fresh_publication_activation_and_authority(database):
     assert result.publication.identity_food_existing == 0
     assert result.activation_changed is True
     assert result.active_recipe_codes == RECIPE_CODES
-    assert tuple(code for code, _ in result.publication.recipe_version_ids) == RECIPE_CODES
+    assert (
+        tuple(code for code, _ in result.publication.recipe_version_ids) == RECIPE_CODES
+    )
     assert all(
         disposition == "FRESH"
         for _code, disposition in result.publication.authority_dispositions
@@ -284,8 +286,7 @@ def test_r3d_fresh_publication_activation_and_authority(database):
             )
             assert detail.version.source_url == expected["source_page_url"]
             assert detail.version.source_document_sha256 == (
-                "973acb53eee7a04c76853dff80988a0f"
-                "9b70e704495b715639cd8a34a747293e"
+                "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e"
             )
             assert f"card_sha256={expected['source_card_raw_sha256']}" in (
                 detail.version.change_note
@@ -364,7 +365,10 @@ def test_r3d_fresh_publication_activation_and_authority(database):
     assert len(rows) == 10
     assert all(row[1:] == (0, 0, 0) for row in rows)
 
-    assert migrations.expected_migration_ids()[-1] == "0042_recipe_prepared_output_nutrition"
+    assert (
+        migrations.expected_migration_ids()[-1]
+        == "0042_recipe_prepared_output_nutrition"
+    )
 
 
 def test_r3d_source_partition_evidence_is_not_promoted(database):
@@ -380,9 +384,13 @@ def test_r3d_source_partition_evidence_is_not_promoted(database):
             assert len(detail.ingredients) == len(expected["ingredients"])
             source_texts = tuple(row.source_amount_text for row in detail.ingredients)
             for intermediate in expected.get("source_intermediates", []):
-                assert all(intermediate["source_label"] not in text for text in source_texts)
+                assert all(
+                    intermediate["source_label"] not in text for text in source_texts
+                )
             for alternative in expected.get("source_alternative_rows", []):
-                assert all(alternative["source_label"] not in text for text in source_texts)
+                assert all(
+                    alternative["source_label"] not in text for text in source_texts
+                )
 
         ragout = next(
             row
@@ -687,7 +695,9 @@ def test_r3d_hash_pinned_mr_bundle_rejects_tamper(tmp_path):
     shutil.copyfile(MR_BUNDLE_PATH, bundle)
     text = bundle.read_text()
     assert '"source_card_code": "1.2а"' in text
-    bundle.write_text(text.replace('"source_card_code": "1.2а"', '"source_card_code": "1.2б"', 1))
+    bundle.write_text(
+        text.replace('"source_card_code": "1.2а"', '"source_card_code": "1.2б"', 1)
+    )
 
     with pytest.raises(ValueError, match="R3-D MR bundle changed"):
         _load_contract(bundle_path=bundle)
@@ -726,8 +736,9 @@ def test_r3d_russian_steps_household_and_branch_commitments(database):
             "MR2019_1_4_OAT_VEGETABLE_SOUP_SOUR_CREAM",
             "MR2019_1_16_POTATO_SPLIT_PEA_SOUP",
         ):
-            assert "LOW_ENERGY_SERVING_FEASIBILITY_REQUIRES_DC4" in (
-                expected_by_code[code]["quarantined_source_context"]
+            assert (
+                "LOW_ENERGY_SERVING_FEASIBILITY_REQUIRES_DC4"
+                in (expected_by_code[code]["quarantined_source_context"])
             )
         for code in (
             "MR2019_2_15_STEAMED_CHICKEN_SOUFFLE",
