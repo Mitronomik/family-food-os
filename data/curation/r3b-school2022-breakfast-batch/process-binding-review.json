@@ -12,7 +12,8 @@
       "add process ingredient absent from quantified recipe table"
     ],
     "source_ratio_rule": "Explicit source ratios such as half/half or one-third may be retained as process facts; runtime need not materialize derived per-step gram values.",
-    "process_resource_rule": "Unquantified wash/scald/rinse water described as preparation context is not promoted to RecipeIngredient authority."
+    "process_resource_rule": "Unquantified wash/scald/rinse water described as preparation context is not promoted to RecipeIngredient authority.",
+    "source_branch_rule": "When one source card offers multiple execution branches, the published RecipeVersion must freeze one explicit branch; non-selected branches remain provenance and are not merged into consumer steps."
   },
   "selected": [
     {
@@ -20,21 +21,45 @@
       "canonical_code": "SCHOOL2022_54_2O_GREEN_PEA_OMELET",
       "status": "PASS_EXPLICIT_RATIO_BINDING",
       "fat": "BUTTER_PEASANT_72_5_UNSALTED",
-      "rule": "Exact 5 g butter total is authoritative. Source explicitly places one half on the tray and the other half as melted finishing butter; runtime need not persist per-step grams."
+      "rule": "Exact 5 g butter total is authoritative. Source explicitly places one half on the tray and the other half as melted finishing butter; runtime need not persist per-step grams.",
+      "selected_process_branch": "OVEN_BAKE_180_200C_8_10_MIN",
+      "selected_branch_description_ru": "Запекание в форме при 180–200 °C в течение 8–10 минут.",
+      "non_selected_source_branch": {
+        "code": "STEAM_25_30_MIN",
+        "description_ru": "Альтернативное приготовление омлета на пару в течение 25–30 минут.",
+        "disposition": "NOT_PUBLISHED_IN_THIS_RECIPE_VERSION"
+      },
+      "branch_rule": "Only the oven-baked source branch is frozen for this RecipeVersion; the steam branch remains provenance-only."
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-3о",
       "canonical_code": "SCHOOL2022_54_3O_CARROT_OMELET",
       "status": "PASS_EXPLICIT_RATIO_BINDING",
       "fat": "BUTTER_PEASANT_72_5_UNSALTED",
-      "rule": "Exact 9.7 g butter total is authoritative. Source explicitly places one half on the tray and the other half as melted finishing butter; runtime need not persist per-step grams."
+      "rule": "Exact 9.7 g butter total is authoritative. Source explicitly places one half on the tray and the other half as melted finishing butter; runtime need not persist per-step grams.",
+      "selected_process_branch": "OVEN_BAKE_180_200C_8_10_MIN",
+      "selected_branch_description_ru": "Запекание в форме при 180–200 °C в течение 8–10 минут.",
+      "non_selected_source_branch": {
+        "code": "STEAM_25_30_MIN",
+        "description_ru": "Альтернативное приготовление омлета на пару в течение 25–30 минут.",
+        "disposition": "NOT_PUBLISHED_IN_THIS_RECIPE_VERSION"
+      },
+      "branch_rule": "Only the oven-baked source branch is frozen for this RecipeVersion; the steam branch remains provenance-only."
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-4о",
       "canonical_code": "SCHOOL2022_54_4O_SEMI_HARD_CHEESE_OMELET",
       "status": "PASS_EXPLICIT_RATIO_BINDING",
       "fat": "BUTTER_PEASANT_72_5_UNSALTED",
-      "rule": "Exact 10.7 g butter total is authoritative. Source explicitly places one half on the tray and the other half as melted finishing butter; runtime need not persist per-step grams."
+      "rule": "Exact 10.7 g butter total is authoritative. Source explicitly places one half on the tray and the other half as melted finishing butter; runtime need not persist per-step grams.",
+      "selected_process_branch": "OVEN_BAKE_180_200C_8_10_MIN",
+      "selected_branch_description_ru": "Запекание в форме при 180–200 °C в течение 8–10 минут.",
+      "non_selected_source_branch": {
+        "code": "STEAM_25_30_MIN",
+        "description_ru": "Альтернативное приготовление омлета на пару в течение 25–30 минут.",
+        "disposition": "NOT_PUBLISHED_IN_THIS_RECIPE_VERSION"
+      },
+      "branch_rule": "Only the oven-baked source branch is frozen for this RecipeVersion; the steam branch remains provenance-only."
     },
     {
       "source_recipe_id": "ru-school2022:recipe:54-2т",
