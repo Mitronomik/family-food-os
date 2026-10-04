@@ -77,10 +77,10 @@
       "energy_kcal": "291"
     },
     {
-      "source_card_code": "2.24",
-      "raw_card_sha256": "8ca2bc4904e3e72e128400bae03736938f8dd0e7159acd996b48b42f1a998166",
-      "output_g": "115",
-      "energy_kcal": "217"
+      "source_card_code": "2.14",
+      "raw_card_sha256": "6b5a0849d1ff302115045dd557096e4f52d17b14ebe67c90dd51603ac58fdcf6",
+      "output_g": "110",
+      "energy_kcal": "267"
     },
     {
       "source_card_code": "2.11",
