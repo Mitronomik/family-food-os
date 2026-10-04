@@ -1,5 +1,53 @@
 # Handoff
 
+## R3-D final DC3 Contract Gate — preflight active — 2026-10-04
+
+Accepted main:
+`1c82f34b960621aed3e1c43780270f8048edfe0f` (merged PR #156).
+
+Issue #157 / branch `docs/r3d-final-dc3-batch-gate`.
+No PR yet; preflight must finish first.
+
+Read first:
+
+- `docs/family-food/r3d-final-dc3-batch-gate.md`;
+- `data/curation/r3d-final-dc3-batch-gate/frozen-batch.json`;
+- `data/curation/r3d-final-dc3-batch-gate/candidate-audit.json`;
+- `data/curation/r3d-final-dc3-batch-gate/source-verification.json`;
+- `scripts/validate_r3d_final_dc3_gate.py`.
+
+Preflight-frozen batch = 10 MAIN from retained MR 2.4.0162-19:
+
+- 6 meat-free;
+- 2 chicken;
+- 2 beef;
+- 0 fish.
+
+Projected post-runtime = 51 usable exact-energy recipes / 33 MAIN.
+
+Milk-free breakfast remains a known limitation (3 unaffected / capacity 9)
+because no new candidate survives current source/process review.
+
+Ten new FoodIngredient identities are identity-only; do not grant
+NutritionProfile/NutrientVector/Composition authority.
+
+Reviewer focus:
+
+- whether four hot soups are truthful `main` candidates under current coarse
+  MealType taxonomy and realistic Serving behavior;
+- exact source mapping for MR 12+ rows;
+- identity exactness (3.2% milk, first-grade flour, Dutch cheese, 72% butter);
+- no hidden sub-recipe/intermediate truth;
+- projected 51 means “eligible for DC4 audit”, not “DC4 passed”.
+
+After successful R3-D runtime + post-runtime reconciliation, next planned
+operation is DC4. Do not create R3-E/R3-F for catalogue aesthetics.
+
+Status: `PREFLIGHT_ACTIVE`.
+
+---
+
+
 ## R3-C runtime — review-ready — 2026-10-04
 
 Accepted main:
