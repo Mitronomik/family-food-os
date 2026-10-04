@@ -57,10 +57,6 @@ jobs:
           set -euo pipefail
           python -m pytest -q \
             backend/app/tests/test_r3c_school2022_main_batch.py \
-            backend/app/tests/test_r3b_school2022_breakfast_batch.py \
-            backend/app/tests/test_r3a_school2022_main_batch.py \
-            backend/app/tests/test_r2f_cheese_sandwich.py \
-            backend/app/tests/test_r2f_cheese_sandwich_adversarial.py \
             backend/app/tests/test_recipe_nutrition_v2.py \
             backend/app/tests/test_planner_application_boundary.py \
             backend/app/tests/test_migration_lineage.py \
@@ -102,7 +98,7 @@ jobs:
           echo 'R3-C Russian consumer steps + 54-30m steam branch: PASS'
           echo 'R3-C ENERGY_KCAL + 53 UNKNOWN: PASS'
           echo 'R3-C exact beef exclusion + preserved hard MILK_2_5 breakfast proof: PASS'
-          echo 'R3-A / R3-B / R2-F activation regressions: PASS'
+          echo 'R3-A / R3-B / R2-F regressions are owned by their dedicated workflows'
           echo 'R3-C gate repository-truth reconciliation: PASS'
           echo 'migration head 0042 / no 0043: PASS'
           echo 'AI_ENABLED=false: PASS'
