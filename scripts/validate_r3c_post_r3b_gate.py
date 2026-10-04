@@ -4,11 +4,14 @@
 from __future__ import annotations
 
 import argparse
+import ast
+import csv
 import hashlib
 import json
 import re
 import sys
 import zipfile
+from collections import Counter
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any
@@ -25,10 +28,12 @@ EXPECTED_CODES = (
     "SCHOOL2022_54_15R_SALMON_IN_MILK",
     "SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES",
 )
-EXPECTED_MILK_UNAFFECTED = (
-    "HARD_BOILED_EGG",
-    "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
-    "SAD28_SANDWICH_CHEESE_20_10",
+EXPECTED_MILK_UNAFFECTED = frozenset(
+    {
+        "HARD_BOILED_EGG",
+        "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+        "SAD28_SANDWICH_CHEESE_20_10",
+    }
 )
 EXPECTED_IDENTITY = "ATLANTIC_SALMON_FILLET_RAW"
 
@@ -37,6 +42,68 @@ ROWS_MEMBER = "corpus-work/packages/school2022/normalized/published_rows.jsonl"
 RECONCILIATION_MEMBER = (
     "corpus-work/packages/school2022/normalized/"
     "published_nutrient_reconciliation.jsonl"
+)
+
+CURRENT_RUNTIME_BATCHES = (
+    {
+        "name": "R1-H",
+        "module": "backend/app/seed/r1h_school2022_main.py",
+        "constant": "RECIPE_CODES",
+        "package": (
+            "data/curation/r1g-catalogue-capacity-expansion/"
+            "prepared-publication-specs.json"
+        ),
+        "activation_marker": "activate_prepared_recipe",
+    },
+    {
+        "name": "R2",
+        "module": "backend/app/seed/r2_breakfast_capacity.py",
+        "constant": "RECIPE_CODES",
+        "package": "data/curation/r2-breakfast-capacity/publication-specs.json",
+        "activation_marker": "activate_prepared_recipe",
+    },
+    {
+        "name": "R2-B",
+        "module": "backend/app/seed/r2b_fish_main_diversity.py",
+        "constant": "RECIPE_CODES",
+        "package": "data/curation/r2b-fish-main-diversity/publication-specs.json",
+        "activation_marker": "activate_prepared_recipe",
+    },
+    {
+        "name": "R2-C",
+        "module": "backend/app/seed/r2c_breakfast_grain_diversity.py",
+        "constant": "RECIPE_CODES",
+        "package": "data/curation/r2c-breakfast-grain-diversity/publication-specs.json",
+        "activation_marker": "activate_prepared_recipe",
+    },
+    {
+        "name": "R2-E",
+        "module": "backend/app/seed/r2e_cottage_casserole.py",
+        "constant": "CASSEROLE_RECIPE_CODE",
+        "package": "data/curation/r2e-cottage-casserole/publication-specs.json",
+        "activation_marker": "activate_prepared_recipe",
+    },
+    {
+        "name": "R2-F",
+        "module": "backend/app/seed/r2f_cheese_sandwich.py",
+        "constant": "CHEESE_SANDWICH_RECIPE_CODE",
+        "package": "data/curation/r2f-sandwich-resilience/publication-specs.json",
+        "activation_marker": "activate_prepared_recipe",
+    },
+    {
+        "name": "R3-A",
+        "module": "backend/app/seed/r3a_school2022_main_batch.py",
+        "constant": "RECIPE_CODES",
+        "package": "data/curation/r3a-school2022-main-batch/publication-specs.json",
+        "activation_marker": "activate_prepared_recipe_batch",
+    },
+    {
+        "name": "R3-B",
+        "module": "backend/app/seed/r3b_school2022_breakfast_batch.py",
+        "constant": "RECIPE_CODES",
+        "package": "data/curation/r3b-school2022-breakfast-batch/publication-specs.json",
+        "activation_marker": "activate_prepared_recipe_batch",
+    },
 )
 
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -92,6 +159,419 @@ def require_sha(value: object, label: str) -> None:
     )
 
 
+def _simple_constants(path: Path) -> dict[str, object]:
+    tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+    values: dict[str, object] = {}
+
+    def resolve(node: ast.AST) -> object | None:
+        if isinstance(node, ast.Constant) and isinstance(node.value, (str, int)):
+            return node.value
+        if isinstance(node, ast.Name):
+            return values.get(node.id)
+        if isinstance(node, (ast.Tuple, ast.List)):
+            items = [resolve(item) for item in node.elts]
+            if any(item is None for item in items):
+                return None
+            return tuple(items)
+        return None
+
+    pending = [
+        node
+        for node in tree.body
+        if isinstance(node, (ast.Assign, ast.AnnAssign))
+    ]
+    for _ in range(4):
+        changed = False
+        for node in pending:
+            target = (
+                node.targets[0]
+                if isinstance(node, ast.Assign) and len(node.targets) == 1
+                else node.target
+                if isinstance(node, ast.AnnAssign)
+                else None
+            )
+            value_node = node.value
+            if not isinstance(target, ast.Name) or value_node is None:
+                continue
+            resolved = resolve(value_node)
+            if resolved is not None and values.get(target.id) != resolved:
+                values[target.id] = resolved
+                changed = True
+        if not changed:
+            break
+    return values
+
+
+def _runtime_codes(module_path: Path, constant: str) -> tuple[str, ...]:
+    values = _simple_constants(module_path)
+    require(constant in values, f"{module_path}: missing {constant}")
+    raw = values[constant]
+    if isinstance(raw, str):
+        return (raw,)
+    require(
+        isinstance(raw, tuple) and all(isinstance(item, str) for item in raw),
+        f"{module_path}: {constant} is not a string/tuple of strings",
+    )
+    return tuple(raw)
+
+
+def _recipe_record_from_payload(row: dict[str, Any]) -> dict[str, Any]:
+    trusted = row.get("trusted_recipe_seed")
+    if isinstance(trusted, dict):
+        return trusted
+    return row
+
+
+def _package_recipe_records(payload: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    if isinstance(payload.get("recipes"), dict):
+        result = {}
+        for key, raw in payload["recipes"].items():
+            require(isinstance(raw, dict), f"recipe payload not object: {key}")
+            recipe = _recipe_record_from_payload(raw)
+            code = recipe.get("canonical_code")
+            require(code == key, f"recipe key/canonical_code mismatch: {key}")
+            result[key] = recipe
+        return result
+    if isinstance(payload.get("recipe"), dict):
+        recipe = _recipe_record_from_payload(payload["recipe"])
+        code = recipe.get("canonical_code")
+        require(isinstance(code, str) and code, "single recipe canonical_code missing")
+        return {code: recipe}
+    raise ValidationError("publication package has no recipe/recipes payload")
+
+
+def _extract_r1f(repo_root: Path) -> dict[str, dict[str, Any]]:
+    path = repo_root / "backend/app/seed/r1f_prepared_output.py"
+    text = path.read_text(encoding="utf-8")
+    require("activate_prepared_recipe" in text, "R1-F activation seam missing")
+    constants = _simple_constants(path)
+    tree = ast.parse(text, filename=str(path))
+
+    def resolve_string(node: ast.AST) -> str:
+        if isinstance(node, ast.Constant) and isinstance(node.value, str):
+            return node.value
+        if isinstance(node, ast.Name):
+            value = constants.get(node.id)
+            if isinstance(value, str):
+                return value
+        raise ValidationError("R1-F seed contains unresolved string expression")
+
+    def keyword(call: ast.Call, name: str) -> ast.AST:
+        for item in call.keywords:
+            if item.arg == name:
+                return item.value
+        raise ValidationError(f"R1-F seed missing keyword: {name}")
+
+    result: dict[str, dict[str, Any]] = {}
+    for node in ast.walk(tree):
+        if not (
+            isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Name)
+            and node.func.id == "TrustedRecipeSeed"
+        ):
+            continue
+        code = resolve_string(keyword(node, "canonical_code"))
+        version_node = keyword(node, "version")
+        require(
+            isinstance(version_node, ast.Call)
+            and isinstance(version_node.func, ast.Name)
+            and version_node.func.id == "TrustedRecipeVersionSeed",
+            f"R1-F {code}: version is not TrustedRecipeVersionSeed",
+        )
+        meal_type = resolve_string(keyword(version_node, "meal_type_code"))
+        ingredients_node = keyword(version_node, "ingredients")
+        require(
+            isinstance(ingredients_node, (ast.Tuple, ast.List)),
+            f"R1-F {code}: ingredients are not literal tuple/list",
+        )
+        ingredients = []
+        for ingredient_node in ingredients_node.elts:
+            require(
+                isinstance(ingredient_node, ast.Call)
+                and isinstance(ingredient_node.func, ast.Name)
+                and ingredient_node.func.id == "TrustedRecipeIngredientSeed",
+                f"R1-F {code}: ingredient seed shape changed",
+            )
+            ingredients.append(
+                resolve_string(keyword(ingredient_node, "food_ingredient_code"))
+            )
+        result[code] = {
+            "canonical_code": code,
+            "meal_type_code": meal_type,
+            "ingredient_codes": tuple(ingredients),
+        }
+
+    expected = {
+        constants.get("EGG_RECIPE_CODE"),
+        constants.get("CHICKEN_RECIPE_CODE"),
+    }
+    require(set(result) == expected, "R1-F exact recipe set changed")
+    return result
+
+
+def _load_current_exact_energy_catalogue(
+    repo_root: Path,
+) -> tuple[dict[str, dict[str, Any]], set[str]]:
+    recipes = _extract_r1f(repo_root)
+    accepted_food_codes = {
+        ingredient
+        for row in recipes.values()
+        for ingredient in row["ingredient_codes"]
+    }
+
+    for batch in CURRENT_RUNTIME_BATCHES:
+        module_path = repo_root / batch["module"]
+        module_text = module_path.read_text(encoding="utf-8")
+        require(
+            batch["activation_marker"] in module_text,
+            f"{batch['name']}: activation seam missing",
+        )
+        runtime_codes = _runtime_codes(module_path, batch["constant"])
+        package = load_json(repo_root / batch["package"])
+        package_recipes = _package_recipe_records(package)
+        require(
+            set(runtime_codes) == set(package_recipes),
+            f"{batch['name']}: runtime/package recipe set mismatch",
+        )
+        for code in runtime_codes:
+            require(code not in recipes, f"duplicate accepted exact-energy recipe: {code}")
+            recipe = package_recipes[code]
+            version = recipe.get("version")
+            require(isinstance(version, dict), f"{batch['name']} {code}: version missing")
+            require(
+                version.get("verification_status") == "SOURCE_VERIFIED",
+                f"{batch['name']} {code}: not SOURCE_VERIFIED",
+            )
+            meal_type = version.get("meal_type_code")
+            require(isinstance(meal_type, str), f"{batch['name']} {code}: meal type missing")
+            ingredient_rows = version.get("ingredients")
+            require(
+                isinstance(ingredient_rows, list) and ingredient_rows,
+                f"{batch['name']} {code}: ingredient list missing",
+            )
+            ingredient_codes = tuple(
+                row.get("food_ingredient_code")
+                for row in ingredient_rows
+                if isinstance(row, dict)
+            )
+            require(
+                len(ingredient_codes) == len(ingredient_rows)
+                and all(isinstance(item, str) and item for item in ingredient_codes),
+                f"{batch['name']} {code}: ingredient mapping incomplete",
+            )
+
+            prepared = (
+                package.get("recipe", {}).get("prepared_spec")
+                if "recipe" in package
+                else package_recipes[code]
+                if "prepared_spec" in package_recipes[code]
+                else package.get("recipes", {}).get(code, {}).get("prepared_spec")
+            )
+            if not isinstance(prepared, dict):
+                raw = package.get("recipes", {}).get(code)
+                if isinstance(raw, dict):
+                    prepared = raw.get("prepared_spec")
+            require(isinstance(prepared, dict), f"{batch['name']} {code}: prepared spec missing")
+            require(
+                prepared.get("recipe_code") == code,
+                f"{batch['name']} {code}: prepared recipe_code mismatch",
+            )
+            available = prepared.get("expected_available_amounts")
+            require(
+                isinstance(available, list)
+                and len(available) == 1
+                and available[0][0] == "ENERGY_KCAL",
+                f"{batch['name']} {code}: exact-energy authority missing",
+            )
+
+            recipes[code] = {
+                "canonical_code": code,
+                "meal_type_code": meal_type,
+                "ingredient_codes": ingredient_codes,
+            }
+            accepted_food_codes.update(ingredient_codes)
+
+    base_path = repo_root / "data/seed/food_ingredients/ingredients.csv"
+    try:
+        with base_path.open(encoding="utf-8", newline="") as handle:
+            base_rows = list(csv.DictReader(handle))
+    except (OSError, UnicodeError, csv.Error) as exc:
+        raise ValidationError(f"could not read base food seed: {base_path}") from exc
+    base_codes = {
+        row.get("canonical_code", "").strip()
+        for row in base_rows
+        if row.get("canonical_code", "").strip()
+    }
+    require(base_codes, "base FoodIngredient universe is empty")
+    accepted_food_codes.update(base_codes)
+    return recipes, accepted_food_codes
+
+
+def _planner_contract(repo_root: Path) -> tuple[dict[str, frozenset[str]], int]:
+    food_types_path = repo_root / "backend/app/domain/food_recipes.py"
+    food_tree = ast.parse(
+        food_types_path.read_text(encoding="utf-8"),
+        filename=str(food_types_path),
+    )
+    meal_values: dict[str, str] = {}
+    for node in food_tree.body:
+        if isinstance(node, ast.ClassDef) and node.name == "MealTypeCode":
+            for item in node.body:
+                if (
+                    isinstance(item, ast.Assign)
+                    and len(item.targets) == 1
+                    and isinstance(item.targets[0], ast.Name)
+                    and isinstance(item.value, ast.Constant)
+                    and isinstance(item.value.value, str)
+                ):
+                    meal_values[item.targets[0].id] = item.value.value
+    require(meal_values, "MealTypeCode enum could not be derived")
+
+    planner_path = repo_root / "backend/app/domain/planner.py"
+    tree = ast.parse(
+        planner_path.read_text(encoding="utf-8"),
+        filename=str(planner_path),
+    )
+    compatibility: dict[str, frozenset[str]] | None = None
+    max_repetitions: int | None = None
+
+    for node in tree.body:
+        if isinstance(node, ast.ClassDef) and node.name == "PlannerConfig":
+            for item in node.body:
+                if (
+                    isinstance(item, ast.AnnAssign)
+                    and isinstance(item.target, ast.Name)
+                    and item.target.id == "max_recipe_repetitions"
+                    and isinstance(item.value, ast.Constant)
+                    and isinstance(item.value.value, int)
+                ):
+                    max_repetitions = item.value.value
+
+        target = None
+        value = None
+        if isinstance(node, ast.Assign) and len(node.targets) == 1:
+            target, value = node.targets[0], node.value
+        elif isinstance(node, ast.AnnAssign):
+            target, value = node.target, node.value
+        if not (
+            isinstance(target, ast.Name)
+            and target.id == "ROLE_COMPATIBILITY_V1"
+            and isinstance(value, ast.Dict)
+        ):
+            continue
+
+        parsed: dict[str, frozenset[str]] = {}
+        for key, raw_value in zip(value.keys, value.values, strict=True):
+            require(
+                isinstance(key, ast.Attribute)
+                and isinstance(key.value, ast.Name)
+                and key.value.id == "MealRole",
+                "ROLE_COMPATIBILITY_V1 key shape changed",
+            )
+            require(
+                isinstance(raw_value, ast.Call)
+                and isinstance(raw_value.func, ast.Name)
+                and raw_value.func.id == "frozenset"
+                and len(raw_value.args) == 1
+                and isinstance(raw_value.args[0], ast.Set),
+                "ROLE_COMPATIBILITY_V1 value shape changed",
+            )
+            names = []
+            for element in raw_value.args[0].elts:
+                require(
+                    isinstance(element, ast.Attribute)
+                    and isinstance(element.value, ast.Name)
+                    and element.value.id == "MealTypeCode",
+                    "ROLE_COMPATIBILITY_V1 MealTypeCode shape changed",
+                )
+                require(
+                    element.attr in meal_values,
+                    f"unknown MealTypeCode in Planner contract: {element.attr}",
+                )
+                names.append(meal_values[element.attr])
+            parsed[key.attr] = frozenset(names)
+        compatibility = parsed
+
+    require(compatibility is not None, "ROLE_COMPATIBILITY_V1 could not be derived")
+    require(
+        isinstance(max_repetitions, int) and max_repetitions > 0,
+        "Planner max_recipe_repetitions could not be derived",
+    )
+    return compatibility, max_repetitions
+
+
+def _derive_current_repository_truth(
+    repo_root: Path,
+) -> tuple[dict[str, Any], set[str], dict[str, dict[str, Any]]]:
+    recipes, accepted_food_codes = _load_current_exact_energy_catalogue(repo_root)
+    compatibility, max_repetitions = _planner_contract(repo_root)
+
+    supported_meal_types = frozenset().union(*compatibility.values())
+    require(
+        all(row["meal_type_code"] in supported_meal_types for row in recipes.values()),
+        "accepted exact-energy set contains Planner-unsupported meal type",
+    )
+
+    meal_counts = Counter(row["meal_type_code"] for row in recipes.values())
+    breakfast_types = compatibility.get("BREAKFAST")
+    require(breakfast_types is not None, "Planner BREAKFAST compatibility missing")
+    breakfast_codes = {
+        code
+        for code, row in recipes.items()
+        if row["meal_type_code"] in breakfast_types
+    }
+    milk_dependent_breakfast = {
+        code
+        for code in breakfast_codes
+        if "MILK_2_5" in row_ingredients(recipes[code])
+    }
+    milk_unaffected = breakfast_codes - milk_dependent_breakfast
+
+    main_codes = {
+        code for code, row in recipes.items() if row["meal_type_code"] == "main"
+    }
+    beef_dependent_main = {
+        code
+        for code in main_codes
+        if "BEEF_CATEGORY_1_RAW" in row_ingredients(recipes[code])
+    }
+    beef_unaffected_main = main_codes - beef_dependent_main
+
+    exact_codes_sorted = sorted(recipes)
+    return (
+        {
+            "exact_energy_recipe_count": len(recipes),
+            "exact_energy_recipe_codes_sha256": sha256(
+                "\n".join(exact_codes_sorted).encode("utf-8")
+            ),
+            "meal_type_counts": dict(sorted(meal_counts.items())),
+            "breakfast_compatible_count": len(breakfast_codes),
+            "milk_dependent_breakfast_count": len(milk_dependent_breakfast),
+            "milk_unaffected_breakfast_codes": sorted(milk_unaffected),
+            "milk_unaffected_breakfast_count": len(milk_unaffected),
+            "milk_unaffected_breakfast_capacity": (
+                len(milk_unaffected) * max_repetitions
+            ),
+            "main_count": len(main_codes),
+            "beef_dependent_main_count": len(beef_dependent_main),
+            "beef_unaffected_main_count": len(beef_unaffected_main),
+            "beef_unaffected_main_capacity": (
+                len(beef_unaffected_main) * max_repetitions
+            ),
+            "max_recipe_repetitions": max_repetitions,
+            "planner_supported_meal_types": sorted(supported_meal_types),
+            "breakfast_compatible_meal_types": sorted(breakfast_types),
+            "accepted_food_code_count": len(accepted_food_codes),
+        },
+        accepted_food_codes,
+        recipes,
+    )
+
+
+def row_ingredients(row: dict[str, Any]) -> frozenset[str]:
+    return frozenset(row["ingredient_codes"])
+
+
 def load_jsonl(archive: zipfile.ZipFile, member: str) -> list[dict[str, Any]]:
     try:
         text = archive.read(member).decode("utf-8")
@@ -110,10 +590,15 @@ def load_jsonl(archive: zipfile.ZipFile, member: str) -> list[dict[str, Any]]:
     return rows
 
 
-def validate_repo_package(repo_root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
+def validate_repo_package(
+    repo_root: Path,
+) -> tuple[dict[str, Any], dict[str, Any]]:
     package = repo_root / PACKAGE_REL
     frozen = load_json(package / "frozen-batch.json")
     summary = load_json(package / "summary.json")
+    derived, accepted_food_codes, current_recipes = _derive_current_repository_truth(
+        repo_root
+    )
 
     require(frozen.get("schema_version") == 1, "frozen schema changed")
     require(
@@ -132,10 +617,31 @@ def validate_repo_package(repo_root: Path) -> tuple[dict[str, Any], dict[str, An
     require(len(set(codes)) == 8, "selected recipe codes are not unique")
     require(len(set(source_ids)) == 8, "selected source IDs are not unique")
 
+    identities = frozen.get("new_identity_only_foods")
+    require(isinstance(identities, list) and len(identities) == 1, "identity count != 1")
+    identity = identities[0]
+    require(identity.get("canonical_code") == EXPECTED_IDENTITY, "identity changed")
+    require(identity.get("nutrition_profile") is None, "Nutrition authority leaked")
+    require(identity.get("composition_authority") is None, "Composition authority leaked")
+    new_identity_codes = {EXPECTED_IDENTITY}
+    require(
+        EXPECTED_IDENTITY not in accepted_food_codes,
+        "new R3-C identity already exists in accepted current FoodIngredient universe",
+    )
+
+    compatibility, _ = _planner_contract(repo_root)
+    supported_meal_types = frozenset().union(*compatibility.values())
+
+    mapped_food_codes: set[str] = set()
     ingredient_rows = 0
     for row in selected:
         code = row["canonical_code"]
-        require(row.get("meal_type_code") == "main", f"{code}: meal_type != main")
+        meal_type = row.get("meal_type_code")
+        require(meal_type == "main", f"{code}: meal_type != main")
+        require(
+            meal_type in supported_meal_types,
+            f"{code}: meal_type unsupported by current ROLE_COMPATIBILITY_V1",
+        )
         require(
             row.get("household_applicability") == "REVIEWED_PASS",
             f"{code}: household applicability not reviewed pass",
@@ -182,11 +688,12 @@ def validate_repo_package(repo_root: Path) -> tuple[dict[str, Any], dict[str, An
                 and ingredient["source_label"].strip(),
                 f"{code}: ingredient source_label missing",
             )
+            food_code = ingredient.get("food_code")
             require(
-                isinstance(ingredient.get("food_code"), str)
-                and ingredient["food_code"].strip(),
+                isinstance(food_code, str) and food_code.strip(),
                 f"{code}: ingredient food_code missing",
             )
+            mapped_food_codes.add(food_code)
             positive_decimal(ingredient.get("gross_g"), f"{code}.ingredient.gross_g")
             positive_decimal(ingredient.get("net_g"), f"{code}.ingredient.net_g")
 
@@ -199,12 +706,12 @@ def validate_repo_package(repo_root: Path) -> tuple[dict[str, Any], dict[str, An
                 f"{code}: consumer step contains internal English token",
             )
 
-    identities = frozen.get("new_identity_only_foods")
-    require(isinstance(identities, list) and len(identities) == 1, "identity count != 1")
-    identity = identities[0]
-    require(identity.get("canonical_code") == EXPECTED_IDENTITY, "identity changed")
-    require(identity.get("nutrition_profile") is None, "Nutrition authority leaked")
-    require(identity.get("composition_authority") is None, "Composition authority leaked")
+    missing_from_current = mapped_food_codes - accepted_food_codes
+    require(
+        missing_from_current == new_identity_codes,
+        "selected ingredient mapping references unknown current FoodIngredient code(s): "
+        f"{sorted(missing_from_current)}",
+    )
 
     deferred = frozen.get("deferred_or_rejected")
     require(isinstance(deferred, list) and deferred, "deferred inventory missing")
@@ -218,48 +725,117 @@ def validate_repo_package(repo_root: Path) -> tuple[dict[str, Any], dict[str, An
     require(source.get("source_archive_size_bytes") == 206692075, "archive size changed")
     require(source.get("source_pdf_size_bytes") == 4102547, "PDF size changed")
 
+    require(
+        derived["exact_energy_recipe_count"] == 33,
+        "derived current exact-energy recipe count != 33",
+    )
+    require(
+        derived["meal_type_counts"]
+        == {"breakfast": 17, "main": 15, "sandwich": 1},
+        "derived current meal-type counts changed",
+    )
+    require(
+        derived["breakfast_compatible_count"] == 18,
+        "derived breakfast-compatible count != 18",
+    )
+    require(
+        derived["milk_unaffected_breakfast_count"] == 3
+        and derived["milk_unaffected_breakfast_capacity"] == 9,
+        "derived MILK_2_5 unaffected 3/capacity-9 proof changed",
+    )
+    require(
+        frozenset(derived["milk_unaffected_breakfast_codes"])
+        == EXPECTED_MILK_UNAFFECTED,
+        "derived MILK_2_5 unaffected set changed",
+    )
+    require(
+        derived["beef_dependent_main_count"] == 7
+        and derived["main_count"] == 15
+        and derived["beef_unaffected_main_count"] == 8
+        and derived["beef_unaffected_main_capacity"] == 24,
+        "derived exact-beef exclusion proof changed",
+    )
+
     current = summary.get("current_repository_truth")
     require(isinstance(current, dict), "current repository truth missing")
     require(
         current.get("active_exact_energy_by_meal_type")
-        == {"breakfast": 17, "main": 15, "sandwich": 1},
-        "current meal-type counts changed",
+        == derived["meal_type_counts"],
+        "summary current meal-type counts differ from repository-derived truth",
     )
-    require(current.get("dc3_active_exact_energy_count") == 33, "current count != 33")
-    require(current.get("planner_supported_exact_energy_count") == 33, "Planner count != 33")
-    require(current.get("breakfast_compatible_count") == 18, "breakfast-compatible != 18")
+    require(
+        current.get("dc3_active_exact_energy_count")
+        == derived["exact_energy_recipe_count"],
+        "summary current count differs from repository-derived truth",
+    )
+    require(
+        current.get("planner_supported_exact_energy_count")
+        == derived["exact_energy_recipe_count"],
+        "summary Planner count differs from repository-derived truth",
+    )
+    require(
+        current.get("breakfast_compatible_count")
+        == derived["breakfast_compatible_count"],
+        "summary breakfast-compatible count differs from Planner contract",
+    )
+    require(
+        current.get("max_recipe_repetitions") == derived["max_recipe_repetitions"],
+        "summary repetition limit differs from PlannerConfig",
+    )
 
     resilience = summary.get("hard_exclusion_resilience")
     require(isinstance(resilience, dict), "exclusion analysis missing")
     milk = resilience.get("MILK_2_5")
     require(isinstance(milk, dict), "MILK_2_5 proof missing")
     require(
-        tuple(milk.get("unaffected_breakfast_compatible_codes", ()))
-        == EXPECTED_MILK_UNAFFECTED,
-        "MILK_2_5 unaffected set changed",
+        milk.get("dependent_breakfast_count")
+        == derived["milk_dependent_breakfast_count"],
+        "summary MILK_2_5 dependent count differs from repository truth",
     )
     require(
-        milk.get("unaffected_count") == 3 and milk.get("capacity") == 9,
-        "MILK_2_5 3/capacity-9 proof changed",
+        frozenset(milk.get("unaffected_breakfast_compatible_codes", ()))
+        == frozenset(derived["milk_unaffected_breakfast_codes"]),
+        "summary MILK_2_5 unaffected set differs from repository truth",
+    )
+    require(
+        milk.get("unaffected_count") == derived["milk_unaffected_breakfast_count"]
+        and milk.get("capacity") == derived["milk_unaffected_breakfast_capacity"],
+        "summary MILK_2_5 capacity differs from repository truth",
     )
 
     beef = resilience.get("main_dependency_analysis")
     require(isinstance(beef, dict), "MAIN dependency analysis missing")
-    require(beef.get("BEEF_CATEGORY_1_RAW_current_count") == 7, "exact beef count != 7")
-    require(beef.get("current_main_count") == 15, "current MAIN count != 15")
     require(
-        beef.get("unaffected_after_exact_beef_exclusion") == 8,
-        "exact beef exclusion must leave 8 MAIN",
+        beef.get("BEEF_CATEGORY_1_RAW_current_count")
+        == derived["beef_dependent_main_count"],
+        "summary exact-beef count differs from repository truth",
     )
     require(
-        beef.get("capacity_after_exact_beef_exclusion") == 24,
-        "exact beef exclusion capacity must be 24",
+        beef.get("current_main_count") == derived["main_count"],
+        "summary MAIN count differs from repository truth",
+    )
+    require(
+        beef.get("unaffected_after_exact_beef_exclusion")
+        == derived["beef_unaffected_main_count"],
+        "summary exact-beef unaffected count differs from repository truth",
+    )
+    require(
+        beef.get("capacity_after_exact_beef_exclusion")
+        == derived["beef_unaffected_main_capacity"],
+        "summary exact-beef capacity differs from repository truth",
     )
 
     baseline = summary.get("data_corpus_baseline")
     require(isinstance(baseline, dict), "baseline summary missing")
-    require(baseline.get("current_usable_exact_energy") == 33, "baseline current != 33")
-    require(baseline.get("gap_to_50") == 17, "baseline gap != 17")
+    require(
+        baseline.get("current_usable_exact_energy")
+        == derived["exact_energy_recipe_count"],
+        "baseline current count differs from repository truth",
+    )
+    require(
+        baseline.get("gap_to_50") == 50 - derived["exact_energy_recipe_count"],
+        "baseline gap differs from repository truth",
+    )
     require(baseline.get("dc4_ready") is False, "DC4 must remain blocked")
 
     r3c = summary.get("r3c")
@@ -270,21 +846,44 @@ def validate_repo_package(repo_root: Path) -> tuple[dict[str, Any], dict[str, An
 
     projected = summary.get("projected_after_future_runtime")
     require(isinstance(projected, dict), "projection missing")
+    projected_meal_counts = dict(derived["meal_type_counts"])
+    projected_meal_counts["main"] += len(selected)
+    projected_count = derived["exact_energy_recipe_count"] + len(selected)
     require(
-        projected.get("active_exact_energy_by_meal_type")
-        == {"breakfast": 17, "main": 23, "sandwich": 1},
-        "projected meal-type counts changed",
+        projected.get("active_exact_energy_by_meal_type") == projected_meal_counts,
+        "projected meal-type counts are not derived from current repository truth",
     )
-    require(projected.get("active_exact_energy_count") == 41, "projection count != 41")
-    require(projected.get("gap_to_50_usable") == 9, "projection gap != 9")
+    require(
+        projected.get("active_exact_energy_count") == projected_count,
+        "projected exact-energy count is not derived from current repository truth",
+    )
+    require(
+        projected.get("gap_to_50_usable") == 50 - projected_count,
+        "projected gap-to-50 is not derived from current repository truth",
+    )
     require(projected.get("dc4_ready_after") is False, "projected DC4 must be false")
 
     return frozen, {
         "selected_recipes": 8,
         "ingredient_rows": ingredient_rows,
         "deferred_or_rejected": len(deferred),
-        "current_exact_energy": 33,
-        "projected_exact_energy": 41,
+        "accepted_food_code_count": derived["accepted_food_code_count"],
+        "current_exact_energy": derived["exact_energy_recipe_count"],
+        "current_exact_energy_codes_sha256": derived[
+            "exact_energy_recipe_codes_sha256"
+        ],
+        "current_meal_type_counts": derived["meal_type_counts"],
+        "breakfast_compatible": derived["breakfast_compatible_count"],
+        "milk_dependent_breakfast": derived["milk_dependent_breakfast_count"],
+        "milk_unaffected_breakfast": derived["milk_unaffected_breakfast_count"],
+        "beef_dependent_main": derived["beef_dependent_main_count"],
+        "beef_unaffected_main": derived["beef_unaffected_main_count"],
+        "projected_exact_energy": projected_count,
+        "planner_supported_meal_types": derived["planner_supported_meal_types"],
+        "breakfast_compatible_meal_types": derived[
+            "breakfast_compatible_meal_types"
+        ],
+        "current_exact_energy_recipe_codes": sorted(current_recipes),
     }
 
 
@@ -363,7 +962,7 @@ def validate_source_archive(
                 )
                 require(
                     expected in available,
-                    f"source ingredient mapping mismatch: {source_id}: {expected}",
+                    f"source ingredient row mismatch: {source_id}: {expected}",
                 )
                 mapped_rows += 1
 
@@ -397,9 +996,7 @@ def validate_source_archive(
                 f"output ENERGY_KCAL mismatch: {source_id}",
             )
 
-            reconciliation = reconciliations.get(
-                f"{source_id}:reconcile:energy_kcal"
-            )
+            reconciliation = reconciliations.get(f"{source_id}:reconcile:energy_kcal")
             require(reconciliation is not None, f"energy reconciliation missing: {source_id}")
             require(
                 canonical_sha256(reconciliation)
@@ -451,7 +1048,7 @@ def main() -> int:
             result["source_archive_note"] = (
                 "rerun with --source-archive to recompute ZIP/PDF and all 32 hashes"
             )
-    except (ValidationError, KeyError, zipfile.BadZipFile) as exc:
+    except (ValidationError, KeyError, OSError, SyntaxError, zipfile.BadZipFile) as exc:
         payload = {"status": "FAIL", "error": str(exc)}
         if args.json:
             print(json.dumps(payload, ensure_ascii=False, sort_keys=True))
