@@ -41,7 +41,10 @@ from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
     SqlAlchemyPreparedRecipeNutritionRepository,
     create_recipe_nutrition_v2_service,
 )
-from app.seed.r3a_school2022_main_batch import seed_r3a_school2022_main_batch
+from app.seed.r3a_school2022_main_batch import (
+    RECIPE_CODES as R3A_RECIPE_CODES,
+    seed_r3a_school2022_main_batch,
+)
 from app.seed.r3b_school2022_breakfast_batch import (
     APPLICABILITY_PATH,
     IDENTITY_ONLY_FOOD_CODES,
@@ -301,6 +304,27 @@ def test_r3b_exact_full_replay_is_zero_write(database):
         for _code, disposition in replay.publication.authority_dispositions
     )
     assert db_dump(database) == before
+
+
+def test_r3b_preserves_deliberate_deactivation_in_prior_r3a_batch(database):
+    engine = create_sqlite_engine(database)
+    try:
+        catalogue = create_food_recipe_catalogue_service(engine)
+        prior = catalogue.get_by_code(R3A_RECIPE_CODES[0])
+        catalogue.deactivate(prior.id)
+        assert catalogue.get_by_code(R3A_RECIPE_CODES[0]).is_active is False
+    finally:
+        engine.dispose()
+
+    result = seed_r3b_school2022_breakfast_batch(database)
+
+    assert result.active_recipe_codes == RECIPE_CODES
+    engine = create_sqlite_engine(database)
+    try:
+        catalogue = create_food_recipe_catalogue_service(engine)
+        assert catalogue.get_by_code(R3A_RECIPE_CODES[0]).is_active is False
+    finally:
+        engine.dispose()
 
 
 def test_r3b_mixed_activation_state_fails_closed_and_preserves_deactivation(database):
