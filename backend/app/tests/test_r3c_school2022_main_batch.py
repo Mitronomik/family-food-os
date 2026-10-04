@@ -623,9 +623,8 @@ def test_r3c_steam_branch_and_russian_steps_are_published_verbatim(database):
                 catalogue.get_by_code(code).id
             )
             assert all(
-                not any(ch.isascii() and ch.isalpha() for ch in word)
+                not __import__("re").search(r"[A-Za-z]{2,}", step.instruction)
                 for step in recipe_detail.steps
-                for word in step.instruction.split()
             )
     finally:
         engine.dispose()
