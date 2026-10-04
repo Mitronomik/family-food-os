@@ -1,5 +1,50 @@
 # Progress
 
+## R3-D final DC3 Contract Gate — preflight active — 2026-10-04
+
+Accepted base:
+`1c82f34b960621aed3e1c43780270f8048edfe0f` (merged PR #156).
+
+Issue #157 / branch `docs/r3d-final-dc3-batch-gate`.
+
+PR intentionally not opened until preflight is complete.
+
+Preflight-frozen selection:
+
+- 10 MR 2.4.0162-19 Appendix-5 / 12+ source cards;
+- 6 meat-free MAIN;
+- 2 chicken MAIN;
+- 2 differentiated beef MAIN;
+- 0 fish additions;
+- 10 new identity-only FoodIngredients, no Nutrition/Vector/Composition authority.
+
+Projected future runtime:
+
+- exact-energy 41 -> 51;
+- MAIN 23 -> 33;
+- beef 12 -> 14;
+- fish remains 9;
+- chicken 2 -> 4;
+- meat-free 0 -> 6;
+- exact-beef unaffected 11 -> 19 / capacity 57;
+- gap-to-50 -> 0.
+
+Milk-free breakfast gap remains explicit: no additional source-clean in-scope
+candidate survived review; hard exact MILK_2_5 unaffected set stays 3 / capacity 9.
+
+Source/process preflight has already rejected/deferred internal conflicts rather
+than padding the batch, including MR 2.2 quantity conflict, MR 2.17 beef/chicken
+table-process conflict, MR 2.24 recipe-intermediate broth semantics and known
+School2022 breakfast/chicken process defects.
+
+Sequence decision: successful R3-D runtime hands directly to DC4 audit, not
+another planned catalogue expansion.
+
+Status: `PREFLIGHT_ACTIVE`.
+
+---
+
+
 ## R3-C runtime — review-ready — 2026-10-04
 
 Accepted base:
