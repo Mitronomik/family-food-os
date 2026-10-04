@@ -189,7 +189,7 @@ def derive_current_truth(
     milk_dependent = {
         code
         for code in breakfast
-        if MILK_CODE in recipe_ingredient_codes(code, row)
+        if MILK_CODE in recipe_ingredient_codes(code, recipes[code])
     }
     milk_unaffected = breakfast - milk_dependent
 
