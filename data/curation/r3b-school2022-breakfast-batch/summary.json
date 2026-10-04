@@ -31,7 +31,16 @@
     "main_active_unchanged": 15,
     "sandwich_active_unchanged": 1,
     "max_recipe_repetitions": 3,
-    "dc4_ready_after": false
+    "dc4_ready_after": false,
+    "milk_2_5_dependency_count": 10,
+    "milk_2_5_unaffected_breakfast_compatible_codes": [
+      "HARD_BOILED_EGG",
+      "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+      "SAD28_SANDWICH_CHEESE_20_10"
+    ],
+    "milk_2_5_unaffected_candidate_count": 3,
+    "milk_2_5_unaffected_capacity_per_week": 9,
+    "hard_milk_exclusion_rejects_all_r3b_candidates": true
   },
   "non_goals": [
     "runtime publication",
@@ -48,5 +57,20 @@
     "ru-school2022:recipe:54-21к",
     "ru-school2022:recipe:54-22к"
   ],
-  "transaction_semantics": "Reuse merged R3-A option B: per-recipe atomic inactive publication with resumable convergence; full-batch preflight and one-UoW atomic activation."
+  "transaction_semantics": "Reuse merged R3-A option B: per-recipe atomic inactive publication with resumable convergence; full-batch preflight and one-UoW atomic activation.",
+  "future_runtime_acceptance": {
+    "hard_milk_exclusion_food_code": "MILK_2_5",
+    "all_r3b_candidates_must_be_rejected_with": "MEMBER_EXCLUDED_INGREDIENT",
+    "r3b_candidate_count_rejected": 10,
+    "unaffected_breakfast_compatible_codes": [
+      "HARD_BOILED_EGG",
+      "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+      "SAD28_SANDWICH_CHEESE_20_10"
+    ],
+    "unaffected_candidate_count": 3,
+    "max_recipe_repetitions": 3,
+    "unaffected_capacity_per_week": 9,
+    "seven_breakfast_authoritative_generation_must_succeed": true,
+    "no_r3b_recipe_may_enter_excluded_plan": true
+  }
 }
