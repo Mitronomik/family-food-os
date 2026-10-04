@@ -33,7 +33,16 @@ Verification:
 - Docs #876 — SUCCESS;
 - DC1 #733 — SUCCESS.
 
-Status: `READY_FOR_FINAL_REVIEW`.
+Independent-review blockers corrected:
+
+- consumer Recipe Steps no longer contain internal English engineering terms;
+- three omelets freeze oven branch and retain steam branch as provenance-only;
+- future runtime acceptance includes hard `MILK_2_5` exclusion for all ten R3-B recipes plus unchanged three-candidate milk-free capacity 9.
+
+Cross-file correction audit: PASS.
+Docs/DC1 exact-head re-verification pending.
+
+Status: `REVIEW_CORRECTIONS_APPLIED_PENDING_VERIFICATION`.
 
 Runtime remains blocked until independent review and merge.
 
