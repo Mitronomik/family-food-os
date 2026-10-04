@@ -1,25 +1,53 @@
 # Handoff
 
-## R3-B runtime — active — 2026-10-04
+## R3-B runtime — review-ready — 2026-10-04
 
 Accepted main:
 `dcc5f37f57a83283e4dee0d3c2957ed0704e9a46` (merged PR #150).
 
-Issue #151 / branch `feat/r3b-school2022-breakfast-batch-runtime`.
+Issue #151 / branch `feat/r3b-school2022-breakfast-batch-runtime` / PR #152.
 
-Read first:
-`docs/family-food/r3b-school2022-breakfast-batch-gate.md`.
+Runtime freeze:
+`bf4580684140b00404bc91d16b8c7fcda016acb4`.
 
-Implement one runtime PR for exactly ten BREAKFAST RecipeVersions and exactly
-three identity-only foods.
+Delivered one runtime PR for exactly ten BREAKFAST RecipeVersions and exactly
+three identity-only FoodIngredients.
 
-Reuse merged R3-A option B. No new activation architecture.
+Reused option B:
 
-Hard `MILK_2_5` proof is mandatory: all ten R3-B candidates rejected, exact
-unaffected three-candidate breakfast set preserved, capacity 9, seven-breakfast
-authoritative generation succeeds.
+- per-recipe atomic inactive publication;
+- partial exact inactive subset allowed after failure;
+- rerun converges missing rows with exact rows zero-write;
+- activation waits for all ten exact publications;
+- all-inactive activation uses one batch UoW / one commit;
+- all-active replay is zero-write;
+- mixed active/inactive fails closed;
+- activation failure rolls back all staged writes.
 
-Status: `IN_PROGRESS`.
+Source/product invariants preserved:
+
+- Russian-only consumer Recipe Steps;
+- omelet oven branch selected; steam branch provenance-only;
+- hard `MILK_2_5` rejects all ten R3-B recipes;
+- unaffected breakfast set remains exactly egg + cottage casserole + cheese
+  sandwich, capacity 9, seven-breakfast authoritative generation succeeds;
+- deliberate deactivation in the prior R3-A batch is preserved.
+
+Verification on runtime freeze:
+
+- R3-B #8 SUCCESS — 114 passed, Ruff/format/scope PASS;
+- Docs #892 / DC1 #749 SUCCESS;
+- R1-C #149 / R2 #133 / R2-B #123 / R2-C #111 / R2-E #94 /
+  R2-F #66 / R3-A #32 SUCCESS;
+- Russian methodologies #482 SUCCESS;
+- Nutrient registry #949 SUCCESS including full backend/launcher regression;
+- Partial nutrition #704 SUCCESS including full backend/launcher regression;
+- migration remains 0042; AI disabled.
+
+Status: `READY_FOR_FINAL_REVIEW`.
+
+Only state/PR metadata may change after this freeze unless runtime verification is
+explicitly reopened. Do not merge autonomously or start R3-C/DC4.
 
 ## R3-B breakfast Contract Gate — active — 2026-10-04
 
