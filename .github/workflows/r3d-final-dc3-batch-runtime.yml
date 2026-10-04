@@ -1,9 +1,6 @@
 name: R3-D final DC3 batch runtime
 
 on:
-  push:
-    branches:
-      - 'feat/r3d-final-dc3-batch-runtime'
   pull_request:
     paths:
       - 'backend/app/seed/r3d_final_dc3_batch.py'

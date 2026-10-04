@@ -1,5 +1,44 @@
 # Progress
 
+## R3-D final DC3 runtime — pre-PR implementation complete — 2026-10-04
+
+Accepted base:
+`a6c1a0bd203e0ec21fd73eb4107282c2b144ff9a` (merged PR #158).
+
+Issue #159 / branch `feat/r3d-final-dc3-batch-runtime`.
+
+Runtime/test preflight freeze:
+`37b7696e40cc9d4192d6855047efa0d8012feaee`.
+
+Delivered:
+
+- exactly 10 frozen identity-only FoodIngredients;
+- exactly 10 frozen MAIN RecipeVersions;
+- exact MR card-specific provenance and raw-card commitment;
+- source intermediates/alternatives remain gate provenance, not RecipeIngredients;
+- household REVIEWED_PASS + medical=false review committed into immutable RecipeVersion provenance;
+- PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1;
+- ENERGY_KCAL only AVAILABLE / other 53 frozen nutrient codes UNKNOWN;
+- per-recipe atomic/resumable inactive publication;
+- one-UoW full-batch activation;
+- replay / mixed-state / partial-state / failure rollback proofs;
+- R3-C deliberate deactivation preservation;
+- 51 exact-energy / 33 MAIN seeded Planner truth;
+- beef 14 / fish 9 / chicken 4 / meat-free 6;
+- exact-beef unaffected 19 / capacity 57;
+- hard MILK_2_5 breakfast closure preserved at 3 / capacity 9;
+- migration remains 0042; AI disabled.
+
+Pre-PR workflow #37233411877: SUCCESS — 24 passed; gate validator, Ruff/format,
+migration/AI and scope/whitespace PASS.
+
+PR is intentionally opened only after this preflight.
+
+Status: `PRE_PR_READY`.
+
+---
+
+
 ## R3-D final DC3 Contract Gate — review-ready — 2026-10-04
 
 Accepted base:

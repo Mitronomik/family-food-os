@@ -1,5 +1,55 @@
 # Handoff
 
+## R3-D final DC3 runtime — pre-PR ready — 2026-10-04
+
+Accepted main:
+`a6c1a0bd203e0ec21fd73eb4107282c2b144ff9a` (merged PR #158).
+
+Issue #159 / branch `feat/r3d-final-dc3-batch-runtime`.
+
+Runtime/test preflight freeze:
+`37b7696e40cc9d4192d6855047efa0d8012feaee`.
+
+Read first:
+
+- `docs/family-food/r3d-final-dc3-batch-gate.md`;
+- `data/curation/r3d-final-dc3-batch-gate/frozen-batch.json`;
+- `backend/app/seed/r3d_final_dc3_batch.py`;
+- `backend/app/tests/test_r3d_final_dc3_batch.py`.
+
+Implementation reuses the R3-C architecture unchanged:
+
+- per-recipe caller-owned publication UoW;
+- exact replay zero-write;
+- partial exact inactive prefix resumable;
+- all-inactive batch activation in one UoW/commit;
+- all-active replay zero-write;
+- mixed state fail-closed;
+- activation rollback.
+
+No new schema, migration, Planner mapping or Nutrition authority.
+
+Gate-only source intermediates/alternatives are not promoted to RecipeIngredients.
+Immutable RecipeVersion provenance stores the exact card SHA plus a SHA-256
+commitment over reviewed partition/household/prepared-authority evidence.
+
+Pre-PR workflow #37233411877: SUCCESS — 24 focused/adversarial tests plus gate
+reconciliation, Ruff/format, migration/no-0043, AI-disabled and scope checks.
+
+Expected post-runtime truth: 51 exact-energy / 33 MAIN. Crossing 50 authorizes an
+honest DC4 audit after merge; it does not itself mean DC4 passed.
+
+Next after runtime merge:
+
+`post-runtime reconciliation → DC4`.
+
+Do not start R3-E/R3-F.
+
+Status: `PRE_PR_READY`.
+
+---
+
+
 ## R3-D final DC3 Contract Gate — review-ready — 2026-10-04
 
 Accepted main:

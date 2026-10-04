@@ -4,135 +4,98 @@ Updated: 2026-10-04.
 
 ## Accepted state
 
-PR #156 / R3-C frozen eight-recipe MAIN runtime is MERGED into `main` at:
+PR #158 / R3-D final DC3 Contract Gate is MERGED into `main` at:
 
-`1c82f34b960621aed3e1c43780270f8048edfe0f`.
+`a6c1a0bd203e0ec21fd73eb4107282c2b144ff9a`.
 
-DATA-CORPUS-V1 / DC3 remains active.
+DATA-CORPUS-V1 / DC3 remains active until the separately reviewed R3-D runtime
+publishes the final frozen batch.
 
-Accepted post-R3-C usable Planner truth:
+Accepted pre-runtime usable Planner truth:
 
 - 41 active exact-energy recipes;
 - 17 `breakfast`;
 - 23 `main`;
 - 1 `sandwich`;
-- breakfast-compatible = 18;
-- hard exact `MILK_2_5` unaffected set = 3 / capacity 9;
-- exact `BEEF_CATEGORY_1_RAW` = 12/23 MAIN;
-- gap to lower baseline 50 = 9;
-- DC4 is not yet authorized.
+- hard exact `MILK_2_5` unaffected breakfast set = 3 / capacity 9;
+- exact `BEEF_CATEGORY_1_RAW` = 12/23 MAIN.
 
 ## Current bounded operation
 
-**R3-D Contract Gate — final planned DC3 expansion before DC4.**
+**R3-D runtime — final ten-recipe DC3 batch before DC4.**
 
-Issue: `#157`.
+Issue: `#159`.
 
 Branch:
 
-`docs/r3d-final-dc3-batch-gate`.
+`feat/r3d-final-dc3-batch-runtime`.
 
 Accepted base:
 
-`1c82f34b960621aed3e1c43780270f8048edfe0f`.
+`a6c1a0bd203e0ec21fd73eb4107282c2b144ff9a`.
 
 PR:
 
-`#158`.
+**not opened yet — implementation preflight is complete.**
 
-Status:
+Runtime/test preflight freeze:
 
-`READY_FOR_INDEPENDENT_REVIEW`.
+`37b7696e40cc9d4192d6855047efa0d8012feaee`.
 
-Review unit:
+Pre-PR workflow #37233411877: **SUCCESS**.
 
-https://github.com/Mitronomik/family-food-os/pull/158
+Evidence:
 
-Canonical contract target:
+- 24/24 focused/adversarial R3-D runtime tests PASS;
+- merged R3-D gate validator PASS;
+- Ruff check/format PASS;
+- migration head 0042 / no 0043 PASS;
+- `AI_ENABLED=false` PASS;
+- scope/whitespace PASS.
 
-`docs/family-food/r3d-final-dc3-batch-gate.md`.
+## Runtime outcome under test
 
-## Preflight-frozen result
+The implementation publishes exactly:
 
-The gate currently freezes 10 `RU_MR_2_4_0162_19` source-backed MAIN recipes:
+- 10 frozen identity-only FoodIngredients;
+- 10 immutable SOURCE_VERIFIED MAIN RecipeVersions;
+- 10 PREPARED_OUTPUT_V1 authorities with exact ENERGY_KCAL only;
+- no FoodNutritionProfile/NutrientVector/Composition authority for new identities.
 
-- 6 meat-free;
-- 2 chicken;
-- 2 differentiated beef;
-- 0 fish.
+It preserves the merged gate's exact source-card URLs/hashes, 12+ ingredient
+rows, source partition commitment, household review and medical-context
+quarantine without adding schema.
 
-Projected after future runtime:
+Publication is per-recipe atomic/resumable. Activation reuses the merged
+R3-A/R3-B/R3-C one-UoW batch seam.
 
-- exact-energy = 51;
-- MAIN = 33;
-- breakfast = 17;
-- sandwich = 1;
-- beef MAIN = 14;
-- fish MAIN = 9;
-- chicken MAIN = 4;
-- meat-free MAIN = 6;
+Projected/verified seeded catalogue:
+
+- exact-energy 41 -> 51;
+- MAIN 23 -> 33;
+- beef 12 -> 14;
+- fish remains 9;
+- chicken 2 -> 4;
+- meat-free 0 -> 6;
 - exact-beef unaffected MAIN = 19 / capacity 57;
-- gap to 50 = 0.
-
-R3-D does **not** claim a new milk-free breakfast candidate. Source review found
-no additional source-clean in-scope candidate; the accepted hard-MILK path
-remains 3 / capacity 9.
-
-Exactly ten new FoodIngredient identities are frozen identity-only. No
-FoodNutritionProfile, NutrientVector or Composition authority is granted.
+- hard exact MILK_2_5 breakfast path remains 3 / capacity 9.
 
 ## Sequence decision
 
-R3-D is the last planned DC3 catalogue expansion.
+R3-D remains the last planned DC3 expansion.
 
-If the gate is reviewed/merged and its runtime later succeeds with honest
-post-runtime reconciliation:
+After independent review and merge of the runtime PR:
 
 ```text
-DC4 corpus readiness audit + Gate1 consumption
+post-runtime reconciliation
+→ DC4 corpus readiness audit + Gate1 consumption
 → Gate1-CLOSE
 → PR9 Shopping Engine
 ```
 
-Do not start R3-E/R3-F merely to increase catalogue size.
+Do not create R3-E/R3-F for catalogue aesthetics.
 
 ## Scope boundaries
 
-This Contract Gate is docs/evidence only.
-
-Do not:
-
-- publish or activate R3-D runtime recipes;
-- add migration 0043 or schema changes;
-- change Planner role mapping/scoring/repetition;
-- add a new Nutrition authority;
-- start DC4 before R3-D runtime + reconciliation;
-- start Gate1-CLOSE / PR9 / Shopping / Prep / PDF / PWA / Retail / Auth / PostgreSQL / AI.
-
-Preflight completed before PR creation.
-
-Household applicability / prepared authority review corrections are applied without
-changing the frozen ten-recipe set:
-
-- all 10 selected rows: `household_applicability=REVIEWED_PASS`;
-- all 10: `specialized_medical_scope=false` with rationale/quarantined context;
-- all 10: explicit `PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`;
-- exact ENERGY_KCAL only; all other frozen nutrient codes UNKNOWN;
-- tested correction revision `ae8418bac52a9d4459a26f16b6ada607f654241a`;
-- R3-D #37224055581 / Docs #37224055575 / DC1 #37224055565 — SUCCESS.
-
-Source→frozen completeness review correction is also applied without changing
-the frozen ten-recipe set:
-
-- 10/10 exact card-level `source_page_url`;
-- 10/10 full 12+ source-table partitions across RecipeIngredient /
-  source_intermediate / explicitly-not-selected alternative rows;
-- source-intermediate labels remain source-exact, with semantic interpretation
-  separated into `semantic_role`;
-- MR 2.11 now preserves exact `варка крупным куском — 50` instead of the
-  interpreted label `Масса отварного мяса`;
-- branch selections are bound to exact source row labels + 12+ quantities;
-- tested completeness revision `48fdfb3743e4a9c23ec022c7073dc8eeb489ced7`;
-- R3-D #37229372543 / Docs #37229372530 / DC1 #37229372415 — SUCCESS.
-
-Status remains `READY_FOR_INDEPENDENT_REVIEW`.
+No schema/migration/Planner/API/UI/new-Nutrition-authority changes.
+Do not start DC4 until this runtime PR is reviewed and merged.
