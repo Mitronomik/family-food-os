@@ -32,7 +32,16 @@ Future projection: exact-energy 41; main 23; gap to 50 = 9; DC4 still BLOCKED.
 
 Verification: selected-set/mapping/source-hash/arithmetic/scope checks PASS; base→head whitespace audit PASS after correction.
 
-Independent review found one formal blocker: the verification procedure/result was not durable.\nThe same PR now contains `scripts/validate_r3c_post_r3b_gate.py` plus\n`data/curation/r3c-post-r3b-catalogue-gate/verification.json`; the frozen eight-recipe set is unchanged.\n\nStatus: `READY_FOR_FINAL_REVIEW` — durable validator/receipt blocker corrected.
+Independent review found one formal blocker: the verification procedure/result was not durable.\nThe same PR now contains `scripts/validate_r3c_post_r3b_gate.py` plus\n`data/curation/r3c-post-r3b-catalogue-gate/verification.json`; the frozen eight-recipe set is unchanged.\n\nA second independent-review blocker found that the first validator still trusted
+summary constants for current catalogue truth and only checked mapped food codes
+for non-empty text. The validator now reconstructs accepted exact-energy runtime
+truth from merged seed modules/publication specs, derives the FoodIngredient reuse
+universe and parses current Planner compatibility/repetition settings. CI-derived
+result: 210 accepted food codes; 33 exact-energy = 17/15/1; breakfast-compatible
+18; MILK_2_5 15 dependent / 3 unaffected / capacity 9; exact beef 7/15 -> 8
+unaffected / capacity 24.
+
+Status: `READY_FOR_FINAL_REVIEW` — second independent-review blocker corrected.
 
 ---
 
