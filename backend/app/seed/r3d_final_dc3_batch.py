@@ -80,7 +80,18 @@ RECIPE_CODES = (
     "MR2019_2_11_BEEF_VEGETABLE_RAGOUT",
     "MR2019_2_9_STEAMED_BEEF_ROLL_OMELET",
 )
-SOURCE_CARD_CODES = ("1.2а", "1.3", "1.4", "1.16", "6.9", "6.19", "2.15", "2.14", "2.11", "2.9")
+SOURCE_CARD_CODES = (
+    "1.2а",
+    "1.3",
+    "1.4",
+    "1.16",
+    "6.9",
+    "6.19",
+    "2.15",
+    "2.14",
+    "2.11",
+    "2.9",
+)
 SOURCE_RECIPE_IDS = tuple(f"APPENDIX_5_CARD_{code}" for code in SOURCE_CARD_CODES)
 IDENTITY_ONLY_FOOD_CODES = (
     "VEGETABLE_OIL_REFINED_UNSPECIFIED",
@@ -184,13 +195,17 @@ def _parse_mr_12_plus(card: dict[str, Any]) -> tuple[list[tuple[str, str]], str]
         start = lines.index("12 лет и старше") + 1
         end = lines.index("Выход готовой продукции", start)
     except ValueError as exc:
-        raise ValueError(f"R3-D MR table markers missing: {card['source_card_code']}") from exc
+        raise ValueError(
+            f"R3-D MR table markers missing: {card['source_card_code']}"
+        ) from exc
 
     rows: list[tuple[str, str]] = []
     index = start
     while index < end:
         if index + 3 >= end + 1:
-            raise ValueError(f"R3-D MR ingredient row truncated: {card['source_card_code']}.")
+            raise ValueError(
+                f"R3-D MR ingredient row truncated: {card['source_card_code']}."
+            )
         label = lines[index]
         values = lines[index + 1 : index + 4]
         if len(values) != 3:
@@ -198,7 +213,9 @@ def _parse_mr_12_plus(card: dict[str, Any]) -> tuple[list[tuple[str, str]], str]
         rows.append((label, _normalize_number(values[2])))
         index += 4
     if index != end:
-        raise ValueError(f"R3-D MR ingredient table shape changed: {card['source_card_code']}.")
+        raise ValueError(
+            f"R3-D MR ingredient table shape changed: {card['source_card_code']}."
+        )
 
     output_values = lines[end + 1 : end + 4]
     if len(output_values) != 3:
@@ -261,7 +278,10 @@ def _validate_mr_source(
         raw_card = card.get("raw_card_text")
         if not isinstance(raw_card, str) or not raw_card:
             raise ValueError(f"R3-D raw MR card missing: {key}.")
-        if hashlib.sha256(raw_card.encode("utf-8")).hexdigest() != row["source_card_raw_sha256"]:
+        if (
+            hashlib.sha256(raw_card.encode("utf-8")).hexdigest()
+            != row["source_card_raw_sha256"]
+        ):
             raise ValueError(f"R3-D MR card hash mismatch: {key}.")
         if row["source_page_url"] != card.get("source_page_url"):
             raise ValueError(f"R3-D MR card URL mismatch: {key}.")
@@ -291,7 +311,10 @@ def _validate_mr_source(
             )
             for item in row.get("source_alternative_rows", [])
         )
-        if Counter(source_rows) != ingredient_rows + intermediate_rows + alternative_rows:
+        if (
+            Counter(source_rows)
+            != ingredient_rows + intermediate_rows + alternative_rows
+        ):
             raise ValueError(f"R3-D MR source→frozen partition mismatch: {key}.")
 
         branch = row.get("source_branch_selection")
@@ -347,7 +370,11 @@ def _load_contract(
     source = frozen.get("source")
     selected = frozen.get("selected")
     identities = frozen.get("new_identity_only_foods")
-    if not isinstance(source, dict) or not isinstance(selected, list) or not isinstance(identities, list):
+    if (
+        not isinstance(source, dict)
+        or not isinstance(selected, list)
+        or not isinstance(identities, list)
+    ):
         raise TypeError("R3-D contract collections changed.")
 
     selected_codes = tuple(row.get("canonical_code") for row in selected)
@@ -363,14 +390,11 @@ def _load_contract(
         raise ValueError("R3-D selected Recipe set/order changed.")
 
     identity_codes = tuple(row.get("canonical_code") for row in identities)
-    if (
-        identity_codes != IDENTITY_ONLY_FOOD_CODES
-        or any(
-            row.get("nutrition_profile") is not None
-            or row.get("nutrient_vector_authority") is not None
-            or row.get("composition_authority") is not None
-            for row in identities
-        )
+    if identity_codes != IDENTITY_ONLY_FOOD_CODES or any(
+        row.get("nutrition_profile") is not None
+        or row.get("nutrient_vector_authority") is not None
+        or row.get("composition_authority") is not None
+        for row in identities
     ):
         raise ValueError("R3-D identity-only FoodIngredient contract changed.")
 
@@ -434,8 +458,13 @@ def _load_contract(
             _decimal(ingredient["quantity_g"], field=f"{code}.ingredient.quantity_g")
 
         for intermediate in row.get("source_intermediates", []):
-            _decimal(intermediate["quantity_g"], field=f"{code}.intermediate.quantity_g")
-            if not isinstance(intermediate.get("semantic_role"), str) or not intermediate["semantic_role"]:
+            _decimal(
+                intermediate["quantity_g"], field=f"{code}.intermediate.quantity_g"
+            )
+            if (
+                not isinstance(intermediate.get("semantic_role"), str)
+                or not intermediate["semantic_role"]
+            ):
                 raise ValueError(f"R3-D intermediate semantic role missing: {code}.")
         for alternative in row.get("source_alternative_rows", []):
             _decimal(alternative["quantity_g"], field=f"{code}.alternative.quantity_g")
@@ -457,9 +486,11 @@ def _load_contract(
         or current.get("by_meal_type") != {"breakfast": 17, "main": 23, "sandwich": 1}
         or current.get("hard_milk_2_5", {}).get("unaffected_count") != 3
         or current.get("hard_milk_2_5", {}).get("capacity") != 9
-        or current.get("main_family_concentration", {}).get("beef_category_1_count") != 12
+        or current.get("main_family_concentration", {}).get("beef_category_1_count")
+        != 12
         or current.get("main_family_concentration", {}).get("fish_based_count") != 9
-        or product_mix != {
+        or product_mix
+        != {
             "meat_free_main": 6,
             "chicken_main": 2,
             "beef_main": 2,
@@ -468,9 +499,11 @@ def _load_contract(
         or not isinstance(projected, dict)
         or projected.get("active_exact_energy_count") != 51
         or projected.get("by_meal_type") != {"breakfast": 17, "main": 33, "sandwich": 1}
-        or projected.get("main_family_concentration", {}).get("beef_category_1_count") != 14
+        or projected.get("main_family_concentration", {}).get("beef_category_1_count")
+        != 14
         or projected.get("main_family_concentration", {}).get("fish_based_count") != 9
-        or projected.get("main_family_concentration", {}).get("chicken_based_count") != 4
+        or projected.get("main_family_concentration", {}).get("chicken_based_count")
+        != 4
         or projected.get("main_family_concentration", {}).get("meat_free_count") != 6
         or projected.get("main_family_concentration", {}).get(
             "unaffected_after_exact_beef_exclusion"
@@ -511,7 +544,9 @@ def _identity_seeds(
 
 
 def _source_amount_text(ingredient: dict[str, Any]) -> str:
-    return f"{ingredient['source_label']}: {ingredient['quantity_g']} г (12 лет и старше)"
+    return (
+        f"{ingredient['source_label']}: {ingredient['quantity_g']} г (12 лет и старше)"
+    )
 
 
 def _normalization_note(row: dict[str, Any], ingredient: dict[str, Any]) -> str:
@@ -748,7 +783,10 @@ def publish_r3d_final_dc3_batch(
                 with SqlAlchemyRecipeNutritionV2UnitOfWork(engine) as uow:
                     catalogue.reconcile_seed_in_scope(uow, (seed,))
                     published = nutrition.publish_prepared_in_scope(uow, spec)
-                    if published.disposition is not PreparedPublicationDisposition.FRESH:
+                    if (
+                        published.disposition
+                        is not PreparedPublicationDisposition.FRESH
+                    ):
                         raise RecipeNutritionV2ConflictError(
                             f"Fresh R3-D authority was not fresh: {seed.canonical_code}."
                         )
