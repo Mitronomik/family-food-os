@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Validate the frozen R3-C post-R3B Contract Gate package deterministically."""
 
 from __future__ import annotations
