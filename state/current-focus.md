@@ -25,7 +25,7 @@ Branch: `docs/r3b-school2022-breakfast-batch-gate`.
 
 Accepted base: `69c68f4153b25ac4e51cbe9ff54fb080201f08bd`.
 
-Status: `REVIEW_CORRECTIONS_APPLIED_PENDING_VERIFICATION`.
+Status: `READY_FOR_FINAL_REVIEW`.
 
 Canonical gate:
 
@@ -69,16 +69,24 @@ Independent Library materialize/hash readback on 2026-10-04:
 - ZIP 206692075 bytes / `c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea`;
 - PDF 4102547 bytes / `c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d`.
 
-Previous review content freeze `f72c7c51d6758dcb11573ab88e49d51272d80e73` is superseded by review corrections.
+Corrected content freeze:
 
-Applied corrections:
+`6d043ba23e73a3373de95a22dd6fa226db35e8a3`.
+
+Review corrections:
 
 - all frozen consumer Recipe Steps are Russian-only; internal authority/inference terminology remains outside product-facing steps;
 - omelets `54-2о/3о/4о` explicitly select oven branch `180–200 °C / 8–10 минут`; steam `25–30 минут` is provenance-only;
 - future runtime must prove hard `MILK_2_5` rejects all 10 R3-B candidates while preserving the exact unaffected set `HARD_BOILED_EGG`, `SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE`, `SAD28_SANDWICH_CHEESE_20_10` with capacity 9 and successful seven-breakfast generation.
 
-Cross-file correction audit: PASS.
+Verification on corrected content freeze:
 
-Docs/DC1 exact-head verification pending.
+- consumer-step language audit — PASS;
+- explicit omelet branch audit 3/3 — PASS;
+- hard `MILK_2_5` dependency 10/10 + unaffected-set receipt — PASS;
+- selected/spec/household/process/source alignment 10/10 — PASS;
+- frozen quantities/output/ENERGY and option-B semantics unchanged — PASS;
+- Docs #883 — SUCCESS;
+- DC1 #740 — SUCCESS.
 
 Runtime remains blocked until independent re-review and merge of PR #150.

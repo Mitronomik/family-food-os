@@ -40,9 +40,11 @@ Independent-review blockers corrected:
 - future runtime acceptance includes hard `MILK_2_5` exclusion for all ten R3-B recipes plus unchanged three-candidate milk-free capacity 9.
 
 Cross-file correction audit: PASS.
-Docs/DC1 exact-head re-verification pending.
 
-Status: `REVIEW_CORRECTIONS_APPLIED_PENDING_VERIFICATION`.
+Corrected content freeze: `6d043ba23e73a3373de95a22dd6fa226db35e8a3`.
+Docs #883 SUCCESS. DC1 #740 SUCCESS.
+
+Status: `READY_FOR_FINAL_REVIEW`.
 
 Runtime remains blocked until independent review and merge.
 

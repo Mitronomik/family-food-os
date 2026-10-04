@@ -28,11 +28,13 @@ Content freeze: `f72c7c51d6758dcb11573ab88e49d51272d80e73`.
 
 Verification: cross-file/source/process audit PASS; Docs #876 SUCCESS; DC1 #733 SUCCESS.
 
-Status: `REVIEW_CORRECTIONS_APPLIED_PENDING_VERIFICATION`.
+Status: `READY_FOR_FINAL_REVIEW`.
 
 Review corrections applied: Russian-only consumer steps for `54-23к/54-24к`; explicit oven-vs-steam branch selection for `54-2о/3о/4о`; mandatory hard `MILK_2_5` exclusion proof for all ten future runtime candidates.
 
-Prior content freeze is superseded. Docs/DC1 exact-head re-verification pending.
+Corrected content freeze: `6d043ba23e73a3373de95a22dd6fa226db35e8a3`.
+
+Correction audit PASS. Docs #883 SUCCESS. DC1 #740 SUCCESS.
 
 Do not start runtime before independent review and merge of PR #150.
 
