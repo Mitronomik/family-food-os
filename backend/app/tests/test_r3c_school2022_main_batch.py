@@ -1,3 +1,4 @@
+import re
 import shutil
 import sqlite3
 from collections import Counter
@@ -623,7 +624,7 @@ def test_r3c_steam_branch_and_russian_steps_are_published_verbatim(database):
                 catalogue.get_by_code(code).id
             )
             assert all(
-                not __import__("re").search(r"[A-Za-z]{2,}", step.instruction)
+                not re.search(r"[A-Za-z]{2,}", step.instruction)
                 for step in recipe_detail.steps
             )
     finally:
