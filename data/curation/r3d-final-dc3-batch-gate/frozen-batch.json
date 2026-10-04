@@ -174,7 +174,13 @@
         "MEAT_FREE",
         "MILK_FREE"
       ],
-      "selection_reason": "Meat-free household MAIN; materially reduces beef/fish share with ordinary soup preparation."
+      "selection_reason": "Meat-free household MAIN; materially reduces beef/fish share with ordinary soup preparation.",
+      "source_nutrition_row": {
+        "protein_g": "2.5",
+        "fat_g": "6.3",
+        "carbohydrate_g": "11.2",
+        "energy_kcal": "112"
+      }
     },
     {
       "canonical_code": "MR2019_1_3_LENINGRAD_RASSOLNIK_SOUR_CREAM",
@@ -249,7 +255,13 @@
         "MILK_FREE",
         "DAIRY_SOUR_CREAM"
       ],
-      "selection_reason": "Familiar meat-free soup adds barley/pickle variety and reduces beef/fish concentration."
+      "selection_reason": "Familiar meat-free soup adds barley/pickle variety and reduces beef/fish concentration.",
+      "source_nutrition_row": {
+        "protein_g": "2.8",
+        "fat_g": "4.1",
+        "carbohydrate_g": "17.5",
+        "energy_kcal": "119"
+      }
     },
     {
       "canonical_code": "MR2019_1_4_OAT_VEGETABLE_SOUP_SOUR_CREAM",
@@ -264,7 +276,7 @@
       "energy_kcal": "112",
       "ingredients": [
         {
-          "source_label": "Овсяные хлопья «Геркулес»",
+          "source_label": "Овсяные хлопья \"Геркулес\"",
           "quantity_g": "14",
           "food_code": "OATS_ROLLED"
         },
@@ -324,7 +336,13 @@
         "MILK_FREE",
         "DAIRY_SOUR_CREAM"
       ],
-      "selection_reason": "Meat-free oat/vegetable soup adds a distinct grain and process pattern."
+      "selection_reason": "Meat-free oat/vegetable soup adds a distinct grain and process pattern.",
+      "source_nutrition_row": {
+        "protein_g": "3.1",
+        "fat_g": "4.1",
+        "carbohydrate_g": "15.8",
+        "energy_kcal": "112"
+      }
     },
     {
       "canonical_code": "MR2019_1_16_POTATO_SPLIT_PEA_SOUP",
@@ -364,7 +382,7 @@
           "food_code": "SPLIT_PEAS_DRY"
         },
         {
-          "source_label": "Вода питьевая",
+          "source_label": "Вода питьевая или отвар овощной",
           "quantity_g": "230",
           "food_code": "WATER"
         },
@@ -392,7 +410,13 @@
         "MEAT_FREE",
         "MILK_FREE"
       ],
-      "selection_reason": "Higher-energy meat-free legume MAIN; adds meaningful household and protein-source variety."
+      "selection_reason": "Higher-energy meat-free legume MAIN; adds meaningful household and protein-source variety.",
+      "source_nutrition_row": {
+        "protein_g": "8.5",
+        "fat_g": "5.5",
+        "carbohydrate_g": "33.6",
+        "energy_kcal": "219"
+      }
     },
     {
       "canonical_code": "MR2019_6_9_VERMICELLI_HARD_CHEESE",
@@ -446,7 +470,13 @@
         "MILK_FREE",
         "DAIRY_CHEESE"
       ],
-      "selection_reason": "Simple household meat-free pasta MAIN; materially different from current protein-heavy catalogue."
+      "selection_reason": "Simple household meat-free pasta MAIN; materially different from current protein-heavy catalogue.",
+      "source_nutrition_row": {
+        "protein_g": "7.8",
+        "fat_g": "6.7",
+        "carbohydrate_g": "24.7",
+        "energy_kcal": "193"
+      }
     },
     {
       "canonical_code": "MR2019_6_19_BAKED_MACARONI_HARD_CHEESE",
@@ -501,7 +531,13 @@
         "MILK_FREE",
         "DAIRY_CHEESE"
       ],
-      "selection_reason": "Baked meat-free MAIN adds a high-familiarity household dish and preparation pattern."
+      "selection_reason": "Baked meat-free MAIN adds a high-familiarity household dish and preparation pattern.",
+      "source_nutrition_row": {
+        "protein_g": "12.3",
+        "fat_g": "10.9",
+        "carbohydrate_g": "41.1",
+        "energy_kcal": "313"
+      }
     },
     {
       "canonical_code": "MR2019_2_15_STEAMED_CHICKEN_SOUFFLE",
@@ -570,7 +606,13 @@
         "CHICKEN",
         "MILK_3_2"
       ],
-      "selection_reason": "Adds non-beef/fish protein and a steamed household preparation with exact source output/energy."
+      "selection_reason": "Adds non-beef/fish protein and a steamed household preparation with exact source output/energy.",
+      "source_nutrition_row": {
+        "protein_g": "19.1",
+        "fat_g": "21.7",
+        "carbohydrate_g": "5.0",
+        "energy_kcal": "291"
+      }
     },
     {
       "canonical_code": "MR2019_2_24_CHICKEN_PUREE_BROTH",
@@ -618,7 +660,13 @@
       "dependency_flags": [
         "CHICKEN"
       ],
-      "selection_reason": "Adds a second non-beef/fish protein MAIN with simple ingredients and a distinct texture/process."
+      "selection_reason": "Adds a second non-beef/fish protein MAIN with simple ingredients and a distinct texture/process.",
+      "source_nutrition_row": {
+        "protein_g": "14.6",
+        "fat_g": "17.6",
+        "carbohydrate_g": "0",
+        "energy_kcal": "217"
+      }
     },
     {
       "canonical_code": "MR2019_2_11_BEEF_VEGETABLE_RAGOUT",
@@ -711,7 +759,13 @@
       "dependency_flags": [
         "BEEF_CATEGORY_1"
       ],
-      "selection_reason": "Beef is retained only for a genuinely different vegetable-heavy ragout; batch-level beef share still falls materially."
+      "selection_reason": "Beef is retained only for a genuinely different vegetable-heavy ragout; batch-level beef share still falls materially.",
+      "source_nutrition_row": {
+        "protein_g": "18.2",
+        "fat_g": "18.8",
+        "carbohydrate_g": "23.1",
+        "energy_kcal": "336"
+      }
     },
     {
       "canonical_code": "MR2019_2_9_STEAMED_BEEF_ROLL_OMELET",
@@ -785,7 +839,13 @@
         "BEEF_CATEGORY_1",
         "MILK_3_2"
       ],
-      "selection_reason": "Adds a materially different stuffed/steamed beef format; only two of ten R3-D recipes add beef."
+      "selection_reason": "Adds a materially different stuffed/steamed beef format; only two of ten R3-D recipes add beef.",
+      "source_nutrition_row": {
+        "protein_g": "15.8",
+        "fat_g": "15.0",
+        "carbohydrate_g": "6.0",
+        "energy_kcal": "222"
+      }
     }
   ],
   "future_runtime_transaction_contract": {
