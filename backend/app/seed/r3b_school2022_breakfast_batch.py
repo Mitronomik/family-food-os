@@ -26,7 +26,7 @@ from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
     SqlAlchemyRecipeNutritionV2UnitOfWork,
     create_recipe_nutrition_v2_service,
 )
-from app.seed.r3a_school2022_main_batch import seed_r3b_school2022_breakfast_batch
+from app.seed.r3a_school2022_main_batch import seed_r3a_school2022_main_batch
 from app.services.food_ingredients import TrustedFoodIngredientIdentitySeed
 from app.services.food_recipes import (
     TrustedRecipeIngredientSeed,
