@@ -109,4 +109,16 @@ Do not:
 - start DC4 before R3-D runtime + reconciliation;
 - start Gate1-CLOSE / PR9 / Shopping / Prep / PDF / PWA / Retail / Auth / PostgreSQL / AI.
 
-Preflight completed before PR creation. The branch may now be delivered for independent review.
+Preflight completed before PR creation.
+
+Household applicability / prepared authority review corrections are applied without
+changing the frozen ten-recipe set:
+
+- all 10 selected rows: `household_applicability=REVIEWED_PASS`;
+- all 10: `specialized_medical_scope=false` with rationale/quarantined context;
+- all 10: explicit `PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1`;
+- exact ENERGY_KCAL only; all other frozen nutrient codes UNKNOWN;
+- tested correction revision `ae8418bac52a9d4459a26f16b6ada607f654241a`;
+- R3-D #37224055581 / Docs #37224055575 / DC1 #37224055565 — SUCCESS.
+
+Status remains `READY_FOR_INDEPENDENT_REVIEW`.

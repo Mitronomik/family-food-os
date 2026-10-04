@@ -51,6 +51,19 @@ Pre-PR verification:
 After successful R3-D runtime + post-runtime reconciliation, next planned
 operation is DC4. Do not create R3-E/R3-F for catalogue aesthetics.
 
+Independent-review corrections now frozen:
+
+- every selected recipe has REVIEWED_PASS household applicability,
+  specialized_medical_scope=false, rationale and quarantined source context;
+- soups remain current-coarse-taxonomy MAIN, with Serving feasibility deferred
+  explicitly to DC4;
+- MR 2.15 / 2.9 dietetic collection provenance does not become a therapeutic claim;
+- every selected recipe freezes PREPARED_OUTPUT_V1 /
+  RECIPE_PREPARED_OUTPUT_NUTRITION_V1 with exact ENERGY_KCAL only;
+- all other frozen nutrient codes remain UNKNOWN; publication requires inactive Recipe;
+- tested correction revision: `ae8418bac52a9d4459a26f16b6ada607f654241a`;
+- R3-D #37224055581 / Docs #37224055575 / DC1 #37224055565 — SUCCESS.
+
 Status: `READY_FOR_INDEPENDENT_REVIEW`.
 
 ---

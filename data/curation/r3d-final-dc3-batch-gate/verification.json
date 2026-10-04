@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "operation": "R3D_FINAL_DC3_GATE_VERIFICATION_RECEIPT",
   "accepted_base": "1c82f34b960621aed3e1c43780270f8048edfe0f",
   "issue": 157,
@@ -81,5 +81,58 @@
     "ruff_format_command": "python -m ruff format --check scripts/validate_r3d_final_dc3_gate.py",
     "whitespace_command": "git diff --check 1c82f34b960621aed3e1c43780270f8048edfe0f...HEAD"
   },
-  "finalization_note": "This receipt and linked state/doc wording are verification metadata only. The branch-only R3-D workflow re-runs the same repo/source/scope checks on the receipt commit before PR creation."
+  "finalization_note": "Independent-review corrections were verified on ae8418bac52a9d4459a26f16b6ada607f654241a. A later metadata-only receipt/state commit does not alter frozen recipe/source/validator semantics; the R3-D workflow re-runs validator/static/scope checks on the final head.",
+  "review_correction": {
+    "status": "PASS",
+    "tested_revision": "ae8418bac52a9d4459a26f16b6ada607f654241a",
+    "reason": "Independent review requested two contract corrections only; frozen ten-recipe selection is unchanged.",
+    "blockers_closed": {
+      "household_applicability": {
+        "status": "PASS",
+        "selected_reviewed_pass": 10,
+        "specialized_medical_scope_false": 10,
+        "evidence": "Every selected row freezes household_applicability=REVIEWED_PASS, specialized_medical_scope=false, household_rationale and quarantined_source_context. Soup Serving feasibility stays a DC4 obligation; dietetic-source provenance for cards 2.15/2.9 is provenance-only and grants no therapeutic claim."
+      },
+      "prepared_output_authority": {
+        "status": "PASS",
+        "selected_contracts": 10,
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available_policy": "ENERGY_KCAL only, exact frozen source value",
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN",
+        "require_recipe_inactive": true
+      }
+    },
+    "exact_checks": {
+      "r3d_gate": {
+        "run_id": 37224055581,
+        "conclusion": "SUCCESS"
+      },
+      "docs": {
+        "run_id": 37224055575,
+        "conclusion": "SUCCESS"
+      },
+      "dc1": {
+        "run_id": 37224055565,
+        "conclusion": "SUCCESS"
+      },
+      "validator_logic": "PASS",
+      "household_applicability_pass": 10,
+      "prepared_authority_contracts": 10,
+      "py_compile": "PASS",
+      "ruff_check": "PASS",
+      "ruff_format_check": "PASS",
+      "git_diff_check": "PASS",
+      "json_parse": "PASS",
+      "markdown_links": "PASS"
+    },
+    "unchanged_scope": [
+      "selected ten-recipe set",
+      "source card hashes and 12+ rows",
+      "identity-only FoodIngredient set",
+      "product mix and 41 -> 51 projection",
+      "future option-B publication/activation architecture",
+      "runtime/schema/migration/Planner bytes"
+    ]
+  }
 }

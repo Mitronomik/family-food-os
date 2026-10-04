@@ -46,6 +46,19 @@ rehash and blocker replay also PASS outside CI.
 Sequence decision: successful R3-D runtime hands directly to DC4 audit, not
 another planned catalogue expansion.
 
+Independent-review correction — household + prepared authority:
+
+- frozen ten-recipe set unchanged;
+- 10/10 household applicability REVIEWED_PASS;
+- 10/10 specialized_medical_scope=false;
+- soup low-energy Serving feasibility explicitly quarantined to DC4;
+- MR 2.15/2.9 dietetic-source context retained as provenance only;
+- 10/10 prepared authority = PREPARED_OUTPUT_V1 /
+  RECIPE_PREPARED_OUTPUT_NUTRITION_V1;
+- ENERGY_KCAL only AVAILABLE; all other frozen nutrient codes UNKNOWN;
+- correction revision `ae8418bac52a9d4459a26f16b6ada607f654241a`;
+- R3-D #37224055581 / Docs #37224055575 / DC1 #37224055565 SUCCESS.
+
 Status: `READY_FOR_INDEPENDENT_REVIEW`.
 
 ---
