@@ -97,7 +97,7 @@ jobs:
           echo 'R3-B batch activation one UoW / one commit / rollback: PASS'
           echo 'R3-B mixed active/inactive fail-closed + all-active replay: PASS'
           echo 'R3-B Russian consumer steps + explicit omelet oven branch: PASS'
-          echo 'R3-A ENERGY_KCAL + 53 UNKNOWN: PASS'
+          echo 'R3-B ENERGY_KCAL + 53 UNKNOWN: PASS'
           echo 'R3-B hard MILK_2_5 exclusion: all 10 rejected, unaffected capacity 9: PASS'
           echo 'R3-A batch activation regression: PASS'
           echo 'R2-F single-recipe/milk-exclusion regression: PASS'
