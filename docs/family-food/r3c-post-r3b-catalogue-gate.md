@@ -142,3 +142,40 @@ This gate does not authorize runtime publication, activation, migration `0043`, 
 After independent review and explicit user-authorized merge of this Contract Gate, the next bounded operation may be **one R3-C runtime PR implementing exactly the frozen eight-recipe batch**.
 
 Do not start DC4 or PR9 automatically.
+
+
+## Durable verification procedure
+
+This Contract Gate keeps its verification procedure in repository truth rather
+than only in an agent session.
+
+Committed validator:
+
+```text
+scripts/validate_r3c_post_r3b_gate.py
+```
+
+Retained receipt:
+
+```text
+data/curation/r3c-post-r3b-catalogue-gate/verification.json
+```
+
+The validator is read-only. With `--repo-only` it validates the frozen package,
+selected set, mappings, meal types, authority boundaries, Russian consumer text,
+exclusion analysis and current/projected arithmetic. With
+`--source-archive <path>` it additionally recomputes the durable corpus ZIP and
+School2022 PDF hashes and all four frozen source hashes for each of the eight
+selected cards.
+
+Canonical full command:
+
+```bash
+python scripts/validate_r3c_post_r3b_gate.py \
+  --source-archive "$R3C_SOURCE_ARCHIVE" \
+  --json
+```
+
+The archive path is supplied by the operator after materializing the durable
+Library artifact; no private path, temporary URL or network dependency is baked
+into the validator.
