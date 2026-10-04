@@ -27,7 +27,17 @@ Verification reproduction:
 - full retained-source validation uses `--source-archive "$R3C_SOURCE_ARCHIVE"`;
 - retained receipt: `data/curation/r3c-post-r3b-catalogue-gate/verification.json`.
 
-Status: `READY_FOR_FINAL_REVIEW`; the independent-review verification-durability blocker is corrected.
+Repo-derived validator facts:
+
+- accepted current reuse food-code universe = 210;
+- current exact-energy set derived from merged runtime seeds/specs = 33;
+- derived meal split = 17 breakfast / 15 main / 1 sandwich;
+- current Planner BREAKFAST compatibility yields 18 candidates;
+- MILK_2_5 = 15 dependent, 3 unaffected, capacity 9;
+- BEEF_CATEGORY_1_RAW = 7/15 MAIN, 8 unaffected, capacity 24.
+
+Status: `READY_FOR_FINAL_REVIEW`; both independent-review verification blockers
+are corrected. Frozen eight-recipe content remains unchanged.
 
 Do not start runtime until this gate is independently reviewed and explicitly
 merged. Do not start DC4/Gate1-CLOSE/PR9 automatically.
