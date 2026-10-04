@@ -504,17 +504,35 @@ def test_r3c_batch_activation_failure_rolls_back_every_staged_write(
 
 
 def test_r3c_partial_prepared_state_fails_closed(database):
-    result = publish_r3c_school2022_main_batch(database)
-    first_version_id = str(result.recipe_version_ids[0][1])
+    publish_r3c_school2022_main_batch(database)
     with sqlite3.connect(database.path) as db:
-        db.execute(
+        raw_version_id = db.execute(
+            """
+            SELECT v.id
+            FROM food_recipe_versions v
+            JOIN food_recipes r ON r.id = v.recipe_id
+            WHERE r.canonical_code = ?
+            """,
+            (RECIPE_CODES[0],),
+        ).fetchone()[0]
+        deleted = db.execute(
             """
             DELETE FROM recipe_prepared_nutrition_authorities
             WHERE recipe_version_id = ?
             """,
-            (first_version_id,),
-        )
+            (raw_version_id,),
+        ).rowcount
         db.commit()
+        assert deleted == 1
+        remaining = db.execute(
+            """
+            SELECT COUNT(*)
+            FROM recipe_prepared_nutrition_authorities
+            WHERE recipe_version_id = ?
+            """,
+            (raw_version_id,),
+        ).fetchone()[0]
+        assert remaining == 0
     before = db_dump(database)
 
     with pytest.raises(RecipeNutritionV2ConflictError, match="Partial persisted R3-C"):
