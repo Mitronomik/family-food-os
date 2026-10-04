@@ -515,6 +515,9 @@ def test_r3c_partial_prepared_state_fails_closed(database):
             """,
             (RECIPE_CODES[0],),
         ).fetchone()[0]
+        db.execute(
+            "DROP TRIGGER recipe_prepared_nutrition_authorities_no_delete"
+        )
         deleted = db.execute(
             """
             DELETE FROM recipe_prepared_nutrition_authorities
