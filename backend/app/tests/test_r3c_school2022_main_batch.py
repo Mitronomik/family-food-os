@@ -725,7 +725,8 @@ def test_r3c_hard_beef_exclusion_rejects_affected_main_and_preserves_week(databa
         for admission in main_admissions:
             recipe_detail = catalogue.get_current_verified(admission.recipe_id)
             ingredient_ids = {
-                ingredient.food_ingredient_id for ingredient in recipe_detail.ingredients
+                ingredient.food_ingredient_id
+                for ingredient in recipe_detail.ingredients
             }
             if beef_id in ingredient_ids:
                 beef_dependent.append(admission.canonical_code)
