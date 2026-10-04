@@ -472,12 +472,19 @@ def _planner_contract(repo_root: Path) -> tuple[dict[str, frozenset[str]], int]:
                 isinstance(raw_value, ast.Call)
                 and isinstance(raw_value.func, ast.Name)
                 and raw_value.func.id == "frozenset"
-                and len(raw_value.args) == 1
-                and isinstance(raw_value.args[0], ast.Set),
+                and len(raw_value.args) in {0, 1},
                 "ROLE_COMPATIBILITY_V1 value shape changed",
             )
+            if raw_value.args:
+                require(
+                    isinstance(raw_value.args[0], ast.Set),
+                    "ROLE_COMPATIBILITY_V1 non-empty value shape changed",
+                )
+                elements = raw_value.args[0].elts
+            else:
+                elements = ()
             names = []
-            for element in raw_value.args[0].elts:
+            for element in elements:
                 require(
                     isinstance(element, ast.Attribute)
                     and isinstance(element.value, ast.Name)
