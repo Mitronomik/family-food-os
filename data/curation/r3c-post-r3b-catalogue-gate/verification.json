@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "operation": "R3C_POST_R3B_GATE_VERIFICATION_RECEIPT",
+  "accepted_base": "90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4",
+  "issue": 153,
+  "pull_request": 154,
+  "validator": "scripts/validate_r3c_post_r3b_gate.py",
+  "source_archive": {
+    "locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "size_bytes": 206692075,
+    "sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "pdf_archive_path": "corpus-work/packages/school2022/raw/source.pdf",
+    "pdf_size_bytes": 4102547,
+    "pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d"
+  },
+  "reproduction": {
+    "archive_setup": "Materialize the durable Library archive to a local operator-controlled path and export R3C_SOURCE_ARCHIVE to that path.",
+    "repo_only_command": "python scripts/validate_r3c_post_r3b_gate.py --repo-only --json",
+    "full_command": "python scripts/validate_r3c_post_r3b_gate.py --source-archive \"$R3C_SOURCE_ARCHIVE\" --json",
+    "syntax_command": "python -m py_compile scripts/validate_r3c_post_r3b_gate.py",
+    "whitespace_command": "git diff --check 90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4...HEAD"
+  },
+  "retained_result": {
+    "status": "PASS",
+    "repo_checks": "PASS",
+    "selected_recipes": 8,
+    "ingredient_rows": 51,
+    "deferred_or_rejected": 15,
+    "current_exact_energy": 33,
+    "projected_exact_energy": 41,
+    "source_archive_checks": "PASS",
+    "archive_bytes": 206692075,
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "pdf_bytes": 4102547,
+    "pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+    "frozen_source_hashes": "32/32",
+    "source_ingredient_rows": 51
+  },
+  "checked_invariants": [
+    "8 unique selected RecipeVersions and exact frozen set/order",
+    "all selected meal_type_code=main",
+    "required ingredient mapping completeness",
+    "exactly one identity-only FoodIngredient with no Nutrition/Composition authority",
+    "selected/deferred disjointness",
+    "source archive and embedded School2022 PDF size/SHA-256",
+    "8 source-card hashes + 8 process hashes + 8 output-row hashes + 8 ENERGY reconciliation hashes",
+    "source output mass and same-card ENERGY_KCAL",
+    "Russian-only consumer steps",
+    "current 17 breakfast / 15 main / 1 sandwich = 33 and breakfast-compatible=18",
+    "MILK_2_5 unaffected set=3 and capacity=9",
+    "BEEF_CATEGORY_1_RAW exact exclusion 7/15 -> 8 unaffected and capacity=24",
+    "projection 41 exact-energy / 23 main / gap-to-50=9",
+    "DC4 remains false"
+  ],
+  "notes": [
+    "The validator is read-only and performs no network requests or repository writes.",
+    "Full source verification requires only the retained archive path supplied explicitly by the operator.",
+    "Repo-only mode intentionally reports source_archive_checks=NOT_RUN rather than implying archive verification."
+  ]
+}
