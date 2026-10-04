@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "operation": "R3D_FINAL_DC3_SOURCE_VERIFICATION",
+  "accepted_base": "1c82f34b960621aed3e1c43780270f8048edfe0f",
+  "issue": 157,
+  "selected_source": {
+    "source_name": "RU_MR_2_4_0162_19",
+    "bundle_path": "data/seed/ru_normative_recipe_corpus/mr_2_4_0162_19.bundle.json",
+    "bundle_git_blob_sha": "9210458b9ad81aa3650eccad7935519f8d375432",
+    "source_document_raw_bytes_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+    "source_document_raw_text_sha256": "b5a05ffb36d34cd7bd82de71b55319d72ac850064302bf228e1e1ad19fd02062",
+    "source_version": "2019-12-30",
+    "selected_section": "APPENDIX_5",
+    "selected_variant": "12_PLUS",
+    "selected_card_count": 10,
+    "status": "REPO_DURABLE_SOURCE"
+  },
+  "school2022_gap_audit": {
+    "durable_private_locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "archive_size_bytes": 206692075,
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "source_pdf_archive_path": "corpus-work/packages/school2022/raw/source.pdf",
+    "source_pdf_size_bytes": 4102547,
+    "source_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+    "verified_at": "2026-10-04",
+    "purpose": "Only candidate-gap review; no R3-D selected runtime recipe depends on the private archive.",
+    "milk_free_breakfast_cards_reviewed": [
+      "54-3т",
+      "54-4т",
+      "54-5т",
+      "54-6т",
+      "54-7т"
+    ],
+    "result": "NO_SOURCE_CLEAN_IN_SCOPE_MILK_FREE_BREAKFAST"
+  },
+  "selected_cards": [
+    {
+      "source_card_code": "1.2а",
+      "raw_card_sha256": "b209172357918043f9f92d485a8967a71d41dbcfaf69609ecb3781af983b45a9",
+      "output_g": "350",
+      "energy_kcal": "112"
+    },
+    {
+      "source_card_code": "1.3",
+      "raw_card_sha256": "7ec1683c88891f405ce57390c944ef3f8a79f90fc6c97787ddcf406f5a8b89b2",
+      "output_g": "350",
+      "energy_kcal": "119"
+    },
+    {
+      "source_card_code": "1.4",
+      "raw_card_sha256": "40606e0739c6be7473058c50adff2ab7ba3da95ddc62d0547473a61b22da0e30",
+      "output_g": "350",
+      "energy_kcal": "112"
+    },
+    {
+      "source_card_code": "1.16",
+      "raw_card_sha256": "f4d70b7eb24de3fc10fd239ad6dcb2d7047c8e458541a0a1f8d6e15256ee8731",
+      "output_g": "350",
+      "energy_kcal": "219"
+    },
+    {
+      "source_card_code": "6.9",
+      "raw_card_sha256": "5386cfcbef7c64dbd4c09d5e6737def2cebd0e051bd313052adb1b4f04063b5c",
+      "output_g": "120",
+      "energy_kcal": "193"
+    },
+    {
+      "source_card_code": "6.19",
+      "raw_card_sha256": "d6b6acab547af575ac10e74812dd1eec119fc839fbfc5baef047a593a4126ec4",
+      "output_g": "180",
+      "energy_kcal": "313"
+    },
+    {
+      "source_card_code": "2.15",
+      "raw_card_sha256": "2526913820833b13f7cdc5d9b480b1dd8cda27104aba98792dda040a2f3d543a",
+      "output_g": "115",
+      "energy_kcal": "291"
+    },
+    {
+      "source_card_code": "2.24",
+      "raw_card_sha256": "8ca2bc4904e3e72e128400bae03736938f8dd0e7159acd996b48b42f1a998166",
+      "output_g": "115",
+      "energy_kcal": "217"
+    },
+    {
+      "source_card_code": "2.11",
+      "raw_card_sha256": "89ef921166ece243277dc3f1106e340769f3a99a89195ff10028bd78f529a295",
+      "output_g": "230",
+      "energy_kcal": "336"
+    },
+    {
+      "source_card_code": "2.9",
+      "raw_card_sha256": "2a60d9ff7c31b0d2c052635c0d4d938a8f03d02ac5d0c9aba01ed1d63116ee8c",
+      "output_g": "105",
+      "energy_kcal": "222"
+    }
+  ]
+}
