@@ -1,13 +1,13 @@
 # Progress
 
-## R3-D final DC3 Contract Gate — preflight active — 2026-10-04
+## R3-D final DC3 Contract Gate — review-ready — 2026-10-04
 
 Accepted base:
 `1c82f34b960621aed3e1c43780270f8048edfe0f` (merged PR #156).
 
 Issue #157 / branch `docs/r3d-final-dc3-batch-gate`.
 
-PR intentionally not opened until preflight is complete.
+Preflight completed before PR creation; branch is ready for delivery.
 
 Preflight-frozen selection:
 
@@ -37,10 +37,16 @@ than padding the batch, including MR 2.2 quantity conflict, MR 2.17 beef/chicken
 table-process conflict, MR 2.24 recipe-intermediate broth semantics and known
 School2022 breakfast/chicken process defects.
 
+Pre-PR exact-head verification `#37213043259` on
+`7ea3bf4cd0e51234f6cee6d421b66648d1e595cd`: SUCCESS.
+Repo-derived 41 → 51, 10/10 MR card hashes/rows, mappings, Ruff/format,
+scope/whitespace and Markdown links all PASS. Durable School2022 ZIP/PDF
+rehash and blocker replay also PASS outside CI.
+
 Sequence decision: successful R3-D runtime hands directly to DC4 audit, not
 another planned catalogue expansion.
 
-Status: `PREFLIGHT_ACTIVE`.
+Status: `READY_FOR_INDEPENDENT_REVIEW`.
 
 ---
 

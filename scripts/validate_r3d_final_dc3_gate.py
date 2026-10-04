@@ -413,7 +413,7 @@ def validate_gate(repo_root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
     )
     require(frozen.get("accepted_base") == ACCEPTED_BASE, "accepted base changed")
     require(frozen.get("issue") == 157, "issue binding changed")
-    require(frozen.get("status") == "PREFLIGHT_FROZEN_FOR_GATE", "gate status changed")
+    require(frozen.get("status") == "FROZEN_FOR_GATE_REVIEW", "gate status changed")
 
     current, current_food_codes, current_recipes = derive_current_truth(repo_root)
     selected = frozen.get("selected")

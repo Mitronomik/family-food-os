@@ -1,12 +1,12 @@
 # Handoff
 
-## R3-D final DC3 Contract Gate — preflight active — 2026-10-04
+## R3-D final DC3 Contract Gate — review-ready — 2026-10-04
 
 Accepted main:
 `1c82f34b960621aed3e1c43780270f8048edfe0f` (merged PR #156).
 
 Issue #157 / branch `docs/r3d-final-dc3-batch-gate`.
-No PR yet; preflight must finish first.
+Preflight is complete; branch is ready for PR delivery.
 
 Read first:
 
@@ -40,10 +40,18 @@ Reviewer focus:
 - no hidden sub-recipe/intermediate truth;
 - projected 51 means “eligible for DC4 audit”, not “DC4 passed”.
 
+Pre-PR verification:
+- exact branch run #37213043259 — SUCCESS;
+- 10/10 committed MR source cards / output / energy rows — PASS;
+- repo-derived 41 current / 51 projected — PASS;
+- Ruff/format/scope/Markdown — PASS;
+- independently materialized School2022 ZIP/PDF hashes and breakfast blocker
+  replay — PASS.
+
 After successful R3-D runtime + post-runtime reconciliation, next planned
 operation is DC4. Do not create R3-E/R3-F for catalogue aesthetics.
 
-Status: `PREFLIGHT_ACTIVE`.
+Status: `READY_FOR_INDEPENDENT_REVIEW`.
 
 ---
 

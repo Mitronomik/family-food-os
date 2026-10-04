@@ -3,7 +3,7 @@
   "operation": "R3D_FINAL_DC3_FROZEN_BATCH_CONTRACT",
   "accepted_base": "1c82f34b960621aed3e1c43780270f8048edfe0f",
   "issue": 157,
-  "status": "PREFLIGHT_FROZEN_FOR_GATE",
+  "status": "FROZEN_FOR_GATE_REVIEW",
   "current_usable_exact_energy": 41,
   "minimum_selected_count": 9,
   "target_selected_range": "10–12",

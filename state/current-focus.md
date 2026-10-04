@@ -38,11 +38,11 @@ Accepted base:
 
 PR:
 
-**not opened yet by design** — preflight first.
+pending delivery after exact-head preflight; branch content is review-ready.
 
 Status:
 
-`PREFLIGHT_ACTIVE`.
+`READY_FOR_INDEPENDENT_REVIEW`.
 
 Canonical contract target:
 
@@ -105,5 +105,4 @@ Do not:
 - start DC4 before R3-D runtime + reconciliation;
 - start Gate1-CLOSE / PR9 / Shopping / Prep / PDF / PWA / Retail / Auth / PostgreSQL / AI.
 
-PR creation is intentionally delayed until validator/source/docs/state preflight is
-green or the gate is explicitly marked BLOCKED.
+Preflight completed before PR creation. The branch may now be delivered for independent review.

@@ -1,6 +1,6 @@
 # R3-D — Final DC3 Batch Contract Gate
 
-**Status:** implementation contract / evidence gate
+**Status:** implementation contract / evidence gate — preflight complete / review-ready
 **Issue:** #157
 **Accepted base:** `1c82f34b960621aed3e1c43780270f8048edfe0f`
 **Scope:** docs + curation evidence only
