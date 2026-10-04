@@ -65,7 +65,7 @@ Projected after future runtime:
 - frozen selected set: 8 unique MAIN recipes — PASS;
 - all required ingredient rows mapped — PASS;
 - new identity-only authority leak — NONE;
-- source archive/PDF hashes independently re-verified — PASS;\n- committed reproducible validator + retained verification receipt — PASS;
+- source archive/PDF hashes independently re-verified — PASS;\n- committed reproducible validator + retained verification receipt — PASS;\n- repository-derived current truth (FoodIngredient universe, 33 exact-energy set, Planner compatibility, milk/beef exclusions) — PASS;
 - remote scope audit: docs/data/state only — PASS;
 - base→head whitespace audit equivalent to `git diff --check` — PASS after correction;
 - current arithmetic 33 and projected arithmetic 41 — PASS;
