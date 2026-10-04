@@ -1,5 +1,28 @@
 # Progress
 
+## R3-C runtime — implementation active — 2026-10-04
+
+Accepted base:
+`3c5740b319e453715c5a58f5b65e6d216b7c4fdb` (merged PR #154).
+
+Issue #155 / branch `feat/r3c-school2022-main-batch-runtime`.
+
+Authorized scope:
+
+- exactly 8 frozen MAIN RecipeVersions;
+- exactly 1 new identity-only FoodIngredient: `ATLANTIC_SALMON_FILLET_RAW`;
+- PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1;
+- R3-A/R3-B option-B publication/activation semantics;
+- no migration/schema/Planner/new-authority change.
+
+Implementation currently adds the bounded R3-C seed/publication module, focused
+runtime/adversarial tests and dedicated runtime workflow. Final verification and
+review-ready freeze are still pending.
+
+Status: `IMPLEMENTATION_ACTIVE`.
+
+---
+
 ## R3-C Contract Gate — implementation active — 2026-10-04
 
 Accepted base:
