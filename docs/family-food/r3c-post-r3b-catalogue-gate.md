@@ -9,7 +9,7 @@
 
 PR #152 is merged. DATA-CORPUS-V1 / DC3 remains active. R3-B proved technical BREAKFAST capacity, but it did not close catalogue readiness.
 
-The next authoritative publication unit is frozen as **nine** School2022 MAIN RecipeVersions. The target was approximately 10–12, but the gate deliberately does not pad the batch: the nearest additional cards contain unresolved required-ingredient placement, unquantified process inputs, or contradictory fat semantics.
+The next authoritative publication unit is frozen as **eight** School2022 MAIN RecipeVersions. The target was approximately 10–12, but the gate deliberately does not pad the batch: the nearest additional cards contain unresolved required-ingredient placement, unquantified process inputs, or contradictory fat semantics.
 
 Runtime publication is a separate future PR and requires this gate to be independently reviewed and merged first.
 
@@ -58,25 +58,23 @@ Current Planner hard exclusions are exact `FoodIngredient` exclusions, not a syn
 1. `SCHOOL2022_54_21M_BOILED_CHICKEN` — Курица отварная — 80 g / 123.8 kcal.
 2. `SCHOOL2022_54_3M_LAZY_CABBAGE_ROLLS` — Голубцы ленивые — 100 g / 128.4 kcal.
 3. `SCHOOL2022_54_26M_POTATO_BEEF_CASSEROLE` — Запеканка картофельная с говядиной — 200 g / 408.7 kcal.
-4. `SCHOOL2022_54_19M_BEEF_LIVER_PATE` — Паштет из говяжьей печени — 60 g / 170.6 kcal.
-5. `SCHOOL2022_54_1M_BOILED_BEEF_STROGANOFF` — Бефстроганов из отварной говядины — 80 g / 167.5 kcal.
-6. `SCHOOL2022_54_30M_BEEF_RICE_QUENELLES` — Кнели из говядины с рисом — 80 g / 184.6 kcal.
-7. `SCHOOL2022_54_20M_BOILED_BEEF` — Говядина отварная — 80 g / 257.1 kcal.
-8. `SCHOOL2022_54_15R_SALMON_IN_MILK` — Сёмга, запечённая в молоке — 80 g / 151.7 kcal.
-9. `SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES` — Сёмга в томате с овощами — 70 g / 140.3 kcal.
+4. `SCHOOL2022_54_1M_BOILED_BEEF_STROGANOFF` — Бефстроганов из отварной говядины — 80 g / 167.5 kcal.
+5. `SCHOOL2022_54_30M_BEEF_RICE_QUENELLES` — Кнели из говядины с рисом — 80 g / 184.6 kcal.
+6. `SCHOOL2022_54_20M_BOILED_BEEF` — Говядина отварная — 80 g / 257.1 kcal.
+7. `SCHOOL2022_54_15R_SALMON_IN_MILK` — Сёмга, запечённая в молоке — 80 g / 151.7 kcal.
+8. `SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES` — Сёмга в томате с овощами — 70 g / 140.3 kcal.
 
-All nine are `main` under the current Planner contract. Full ingredient rows, source record/process/output hashes, Russian steps and process-binding decisions are frozen in `data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json`.
+All eight are `main` under the current Planner contract. Full ingredient rows, source record/process/output hashes, Russian steps and process-binding decisions are frozen in `data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json`.
 
-Two new FoodIngredient identities are allowed, **identity-only**:
+One new FoodIngredient identity is allowed, **identity-only**:
 
-- `BEEF_LIVER_RAW`;
 - `ATLANTIC_SALMON_FILLET_RAW`.
 
 They receive no NutritionProfile, NutrientVector or Composition authority.
 
 ## 5. Why not 10–12
 
-The gate rejects numerical padding. Nearby cards remain out for concrete evidence defects: `54-31м` and `54-12р` have unplaced quantified salt; `54-17м` has unplaced parsley; `54-15м` uses unquantified water/bay leaf; `54-23м/54-24м` conflict on sunflower oil vs butter; `54-25м` has unresolved two-fat placement; `54-4т/54-6т` need unquantified water; `54-3т/54-21к/54-22к` retain already-known placement gaps; `54-7т` is medical/celiac scope.
+The gate rejects numerical padding. Nearby cards remain out for concrete evidence defects: `54-19м` consumes 5 g butter for onion, then “remaining” butter in the mass, then additionally greases the form with butter without a quantified remaining share; `54-31м` and `54-12р` have unplaced quantified salt; `54-17м` has unplaced parsley; `54-15м` uses unquantified water/bay leaf; `54-23м/54-24м` conflict on sunflower oil vs butter; `54-25м` has unresolved two-fat placement; `54-4т/54-6т` need unquantified water; `54-3т/54-21к/54-22к` retain already-known placement gaps; `54-7т` is medical/celiac scope.
 
 Unknown stays unknown. A recipe is not admitted just to hit a batch-size target.
 
@@ -112,28 +110,28 @@ Reuse merged R3-A/R3-B Option B.
 
 Publication: per-recipe atomic inactive RecipeVersion + prepared authority; exact replay zero-write; exact inactive subset resumable; partial/conflicting truth fails closed; publication never activates.
 
-Activation: starts only after all nine exact publications reconcile; all-inactive uses one caller-owned UoW / one commit; all-active replay is zero-write; mixed state fails closed; injected activation failure rolls back all staged writes.
+Activation: starts only after all eight exact publications reconcile; all-inactive uses one caller-owned UoW / one commit; all-active replay is zero-write; mixed state fails closed; injected activation failure rolls back all staged writes.
 
 No new activation architecture is authorized.
 
 ## 9. Future runtime acceptance
 
-The later runtime PR must prove exact nine-recipe publication/activation, package tamper rejection, identity conflict rejection, wrong prepared ENERGY_KCAL rejection, exact replay, deliberate-deactivation preservation, mixed-state fail closed, rollback, Russian-only persisted steps, unchanged hard `MILK_2_5` breakfast proof, migration head `0042` / no `0043`, and `AI_ENABLED=false`.
+The later runtime PR must prove exact eight-recipe publication/activation, package tamper rejection, identity conflict rejection, wrong prepared ENERGY_KCAL rejection, exact replay, deliberate-deactivation preservation, mixed-state fail closed, rollback, Russian-only persisted steps, unchanged hard `MILK_2_5` breakfast proof, migration head `0042` / no `0043`, and `AI_ENABLED=false`.
 
 ## 10. Projection
 
 After future R3-C runtime:
 
-- exact-energy active: **42**;
+- exact-energy active: **41**;
 - `breakfast`: 17;
-- `main`: **24**;
+- `main`: **23**;
 - `sandwich`: 1;
 - breakfast-compatible: 18;
-- gap to 50 usable: **8**;
-- gap to 80: 38;
+- gap to 50 usable: **9**;
+- gap to 80: 39;
 - DC4: **still blocked**.
 
-The broader repository-defined active verified union would become 72, but that number does not substitute for Planner/exact-energy usability.
+The broader repository-defined active verified union would become 71, but that number does not substitute for Planner/exact-energy usability.
 
 ## 11. Non-goals
 
@@ -141,6 +139,6 @@ This gate does not authorize runtime publication, activation, migration `0043`, 
 
 ## 12. Next allowed action
 
-After independent review and explicit user-authorized merge of this Contract Gate, the next bounded operation may be **one R3-C runtime PR implementing exactly the frozen nine-recipe batch**.
+After independent review and explicit user-authorized merge of this Contract Gate, the next bounded operation may be **one R3-C runtime PR implementing exactly the frozen eight-recipe batch**.
 
 Do not start DC4 or PR9 automatically.

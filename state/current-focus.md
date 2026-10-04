@@ -44,19 +44,18 @@ Post-R3B exact-energy catalogue:
 - hard `MILK_2_5` unaffected set remains 3 / capacity 9;
 - DC4 remains blocked by DATA-CORPUS-V1 `50–80+` usable baseline.
 
-R3-C freezes nine source-backed `main` RecipeVersions for a later runtime PR.
-Two new identities are allowed identity-only:
+R3-C freezes eight source-backed `main` RecipeVersions for a later runtime PR.
+One new identity is allowed identity-only:
 
-- `BEEF_LIVER_RAW`;
 - `ATLANTIC_SALMON_FILLET_RAW`.
 
 No NutritionProfile, NutrientVector or Composition authority is granted.
 
 Projected after future runtime:
 
-- 42 exact-energy recipes;
-- 24 `main`;
-- gap to 50 = 8;
+- 41 exact-energy recipes;
+- 23 `main`;
+- gap to 50 = 9;
 - DC4 still blocked.
 
 ## Scope boundaries

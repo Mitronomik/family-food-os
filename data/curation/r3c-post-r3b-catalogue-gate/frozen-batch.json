@@ -21,14 +21,6 @@
   },
   "new_identity_only_foods": [
     {
-      "canonical_code": "BEEF_LIVER_RAW",
-      "canonical_name": "Печень говяжья сырая",
-      "category_code": "meat",
-      "default_unit": "g",
-      "nutrition_profile": null,
-      "composition_authority": null
-    },
-    {
       "canonical_code": "ATLANTIC_SALMON_FILLET_RAW",
       "canonical_name": "Сёмга, филе сырое",
       "category_code": "fish_seafood",
@@ -263,74 +255,6 @@
         "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
         "available": {
           "ENERGY_KCAL": "408.7"
-        },
-        "unknown_policy": "all other frozen nutrient codes UNKNOWN"
-      },
-      "household_applicability": "REVIEWED_PASS"
-    },
-    {
-      "source_recipe_id": "ru-school2022:recipe:54-19м",
-      "source_pdf_page": 129,
-      "source_card_canonical_json_sha256": "35d3158a9de1aa4b889c0c83fa2ad7fe50fd40b4ebf587787ef307f4c027ed0e",
-      "source_process_text_sha256": "faa32615c42ed20c147a69fa97b5a0a838b03b87fe9f0ee737b880a621cebce5",
-      "source_output_row_canonical_json_sha256": "812d627248c8d63288719ef142185f34a651ef6a3566b4bba6d8540d28f65a67",
-      "energy_reconciliation_canonical_json_sha256": "7b895a8461cc6a4d379a13bc9f5f2d625ab3de82be9d50e958b903589c4fe7d0",
-      "canonical_code": "SCHOOL2022_54_19M_BEEF_LIVER_PATE",
-      "canonical_name": "Паштет из говяжьей печени",
-      "meal_type_code": "main",
-      "source_output_g": "60",
-      "energy_kcal": "170.6",
-      "ingredients": [
-        {
-          "source_label": "печень говяжья",
-          "gross_g": "46.2",
-          "net_g": "44.4",
-          "food_code": "BEEF_LIVER_RAW"
-        },
-        {
-          "source_label": "лук репчатый",
-          "gross_g": "20",
-          "net_g": "16",
-          "food_code": "ONION_BULB_FRESH"
-        },
-        {
-          "source_label": "яйцо куриное",
-          "gross_g": "6.6",
-          "net_g": "6",
-          "food_code": "EGG"
-        },
-        {
-          "source_label": "масло сливочное",
-          "gross_g": "18",
-          "net_g": "18",
-          "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
-        },
-        {
-          "source_label": "соль поваренная йодированная",
-          "gross_g": "1.2",
-          "net_g": "1.2",
-          "food_code": "SALT_IODIZED"
-        }
-      ],
-      "process_binding": {
-        "status": "PASS_EXACT_TOTAL_PARTIAL_SPLIT_KNOWN",
-        "rule": "Из 18 г сливочного масла 5 г явно относятся к пассерованию лука; остальной общий расход относится к массе и смазыванию формы, но внутренний split источником не задан."
-      },
-      "consumer_steps_ru": [
-        "Печень промыть, снять плёнки, нарезать, отварить до готовности и протереть.",
-        "Мелко нарезанный репчатый лук пассеровать на 5 г сливочного масла из общего количества рецептуры.",
-        "Яйца отварить и мелко нарубить; соединить печень, лук и яйца, добавить йодированную соль и сливочное масло в пределах оставшегося общего количества, тщательно перемешать и сформовать батоном.",
-        "Выложить массу на смазанную сливочным маслом форму и запекать 5 минут при 120 °C. Источник не задаёт точный граммовый расход масла между массой и смазыванием формы."
-      ],
-      "quarantined_source_context": [
-        "институциональное требование к температуре подачи"
-      ],
-      "selection_reason": "Добавляет отдельную organ-meat identity и новый тип MAIN вместо ещё одной котлеты/рыбы; source process полностью воспроизводим без новой Nutrition authority.",
-      "prepared_authority": {
-        "authority_kind": "PREPARED_OUTPUT_V1",
-        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
-        "available": {
-          "ENERGY_KCAL": "170.6"
         },
         "unknown_policy": "all other frozen nutrient codes UNKNOWN"
       },
@@ -735,6 +659,11 @@
   ],
   "deferred_or_rejected": [
     {
+      "source_recipe_id": "ru-school2022:recipe:54-19м",
+      "disposition": "DEFER_EXACT_TOTAL_PROCESS_PLACEMENT_AMBIGUITY",
+      "reason": "Технология явно использует 5 г сливочного масла для лука, затем говорит добавить «оставшееся» масло в массу, а после этого ещё требует смазать форму сливочным маслом. Нельзя доказать, что точные 18 г одновременно покрывают все три операции без дополнительного неколичественного расхода."
+    },
+    {
       "source_recipe_id": "ru-school2022:recipe:54-31м",
       "disposition": "DEFER_REQUIRED_PROCESS_PLACEMENT_UNRESOLVED",
       "reason": "Карточка количественно задаёт йодированную соль, но технология не размещает соль; не добавлять placement по кулинарной догадке."
@@ -814,7 +743,7 @@
       "publication never activates"
     ],
     "activation": [
-      "starts only after all nine exact publications reconcile",
+      "starts only after all eight exact publications reconcile",
       "all-inactive batch activates in one caller-owned UoW / one commit",
       "all-active replay is zero-write",
       "mixed active/inactive fails closed",

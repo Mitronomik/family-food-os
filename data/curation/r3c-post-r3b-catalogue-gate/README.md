@@ -13,9 +13,9 @@ This package is evidence only. It freezes the next DC3 publication unit after me
 - breakfast-compatible pool: 18;
 - hard `MILK_2_5`: 3 unaffected breakfast-compatible recipes, capacity 9;
 - DATA-CORPUS-V1 baseline `50–80+` remains open;
-- R3-C freezes **9 MAIN recipes**, not 10–12, because the next closest source cards contain unresolved process placement, unquantified process inputs or source/process fat conflicts.
+- R3-C freezes **8 MAIN recipes**, not 10–12, because the next closest source cards contain unresolved process placement, unquantified process inputs or source/process fat conflicts.
 
-Future R3-C runtime would project 42 exact-energy recipes: 17 breakfast / 24 main / 1 sandwich. That still leaves a gap of 8 to the lower `50` baseline, so DC4 remains blocked.
+Future R3-C runtime would project 41 exact-energy recipes: 17 breakfast / 23 main / 1 sandwich. That still leaves a gap of 9 to the lower `50` baseline, so DC4 remains blocked.
 
 ## Durable source
 

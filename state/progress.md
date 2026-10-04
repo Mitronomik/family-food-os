@@ -18,17 +18,17 @@ Post-R3B reconciliation:
 
 Frozen R3-C gate set:
 
-- 9 MAIN RecipeVersions;
-- +2 identity-only FoodIngredients: BEEF_LIVER_RAW, ATLANTIC_SALMON_FILLET_RAW;
+- 8 MAIN RecipeVersions;
+- +1 identity-only FoodIngredient: ATLANTIC_SALMON_FILLET_RAW;
 - same-card prepared ENERGY_KCAL only; other frozen nutrients UNKNOWN;
 - R3-A/R3-B Option-B transaction semantics reused;
 - no migration/schema/Planner/new-Nutrition-authority change.
 
-Why 9, not 10–12: nearest additional School2022 cards have unresolved required
+Why 8, not 10–12: nearest additional School2022 cards have unresolved required
 ingredient placement, unquantified process inputs, source/process fat conflicts,
 or medical scope. No numerical padding.
 
-Future projection: exact-energy 42; main 24; gap to 50 = 8; DC4 still BLOCKED.
+Future projection: exact-energy 41; main 23; gap to 50 = 9; DC4 still BLOCKED.
 
 Status: IMPLEMENTATION_ACTIVE until branch verification/PR creation.
 

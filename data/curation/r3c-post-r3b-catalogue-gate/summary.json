@@ -51,12 +51,11 @@
     "dc4_ready": false
   },
   "r3c": {
-    "selected_count": 9,
+    "selected_count": 8,
     "selected_recipe_codes": [
       "SCHOOL2022_54_21M_BOILED_CHICKEN",
       "SCHOOL2022_54_3M_LAZY_CABBAGE_ROLLS",
       "SCHOOL2022_54_26M_POTATO_BEEF_CASSEROLE",
-      "SCHOOL2022_54_19M_BEEF_LIVER_PATE",
       "SCHOOL2022_54_1M_BOILED_BEEF_STROGANOFF",
       "SCHOOL2022_54_30M_BEEF_RICE_QUENELLES",
       "SCHOOL2022_54_20M_BOILED_BEEF",
@@ -64,31 +63,30 @@
       "SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES"
     ],
     "new_identity_only_foods": [
-      "BEEF_LIVER_RAW",
       "ATLANTIC_SALMON_FILLET_RAW"
     ]
   },
   "projected_after_future_runtime": {
-    "disjoint_union_active_verified_count": 72,
-    "active_exact_energy_count": 42,
+    "disjoint_union_active_verified_count": 71,
+    "active_exact_energy_count": 41,
     "active_exact_energy_by_meal_type": {
       "breakfast": 17,
-      "main": 24,
+      "main": 23,
       "sandwich": 1
     },
     "breakfast_compatible_count": 18,
     "capacity": {
       "breakfast_compatible": 54,
-      "main": 72,
+      "main": 69,
       "sandwich": 3
     },
-    "gap_to_50_usable": 8,
-    "gap_to_80_usable": 38,
+    "gap_to_50_usable": 9,
+    "gap_to_80_usable": 39,
     "dc4_ready_after": false,
     "milk_2_5_breakfast_resilience_unchanged": true,
     "BEEF_CATEGORY_1_RAW_main_count": 12,
-    "unaffected_main_after_exact_beef_exclusion": 12,
-    "capacity_after_exact_beef_exclusion": 36
+    "unaffected_main_after_exact_beef_exclusion": 11,
+    "capacity_after_exact_beef_exclusion": 33
   },
   "non_goals": [
     "runtime publication",

@@ -13,13 +13,13 @@ Read first:
 - `data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json`;
 - `data/curation/r3c-post-r3b-catalogue-gate/summary.json`.
 
-Exact future batch: nine MAIN RecipeVersions. New identities are exactly
-`BEEF_LIVER_RAW` and `ATLANTIC_SALMON_FILLET_RAW`, identity-only.
+Exact future batch: eight MAIN RecipeVersions. The only new identity is
+`ATLANTIC_SALMON_FILLET_RAW`, identity-only.
 
 Preserve R3-A/R3-B Option B and hard MILK_2_5 breakfast proof. No 0043,
 schema, Planner or new Nutrition authority.
 
-Projected exact-energy count after future runtime: 42; DC4 remains blocked.
+Projected exact-energy count after future runtime: 41; DC4 remains blocked.
 
 Do not start runtime until this gate is independently reviewed and explicitly
 merged. Do not start DC4/Gate1-CLOSE/PR9 automatically.
