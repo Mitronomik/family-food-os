@@ -1,9 +1,54 @@
 # Handoff
 
-## R3-C Contract Gate — active — 2026-10-04
+## R3-C runtime — review-ready — 2026-10-04
 
 Accepted main:
-`90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4` (merged PR #152).
+`3c5740b319e453715c5a58f5b65e6d216b7c4fdb` (merged PR #154).
+
+Issue #155 / PR #156 / branch `feat/r3c-school2022-main-batch-runtime`.
+
+Runtime freeze:
+`c9e985eaad876fbc66519488d995d6e65975308a`.
+
+Read first:
+
+- `docs/family-food/r3c-post-r3b-catalogue-gate.md`;
+- `data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json`;
+- `backend/app/seed/r3c_school2022_main_batch.py`;
+- `backend/app/tests/test_r3c_school2022_main_batch.py`.
+
+Delivered exactly eight frozen MAIN RecipeVersions and exactly one identity-only
+`ATLANTIC_SALMON_FILLET_RAW`. Reused R3-A/R3-B option B without shared-service,
+schema, migration, Planner or Nutrition-authority changes.
+
+Post-runtime projected truth verified in tests:
+
+- 41 exact-energy recipes;
+- 23 MAIN;
+- 17 breakfast;
+- 1 sandwich;
+- hard MILK_2_5 breakfast proof unchanged at capacity 9;
+- exact beef: 12/23 MAIN dependent, 11 unaffected / capacity 33;
+- gap-to-50 = 9;
+- DC4 remains blocked.
+
+Exact runtime-freeze verification is all green, including dedicated R3-C
+#37202224299 (22/22), R3-A/R3-B/R2-F regressions, and full backend/launcher
+regression in Nutrient registry #37202224305 and Partial nutrition #37202224282.
+
+Status: `READY_FOR_FINAL_REVIEW`.
+
+Only state/PR metadata may change after the runtime freeze unless independent
+review explicitly reopens runtime behavior. Do not merge autonomously. After
+merge, reassess DC3 catalogue coverage before another batch or DC4.
+
+---
+
+
+## R3-C Contract Gate — merged historical — 2026-10-04
+
+Merged as PR #154 at:
+`3c5740b319e453715c5a58f5b65e6d216b7c4fdb`.
 
 Issue #153 / PR #154 / branch `docs/r3c-post-r3b-catalogue-gate`.
 
@@ -36,11 +81,11 @@ Repo-derived validator facts:
 - MILK_2_5 = 15 dependent, 3 unaffected, capacity 9;
 - BEEF_CATEGORY_1_RAW = 7/15 MAIN, 8 unaffected, capacity 24.
 
-Status: `READY_FOR_FINAL_REVIEW`; both independent-review verification blockers
-are corrected. Frozen eight-recipe content remains unchanged.
+Final status: `MERGED`; both independent-review verification blockers were
+corrected before merge. Frozen eight-recipe content remained unchanged.
 
-Do not start runtime until this gate is independently reviewed and explicitly
-merged. Do not start DC4/Gate1-CLOSE/PR9 automatically.
+Runtime continuation is PR #156 / Issue #155 above. DC4/Gate1-CLOSE/PR9 remain
+blocked until post-runtime DC3 reassessment.
 
 ---
 

@@ -1,9 +1,57 @@
 # Progress
 
-## R3-C Contract Gate — implementation active — 2026-10-04
+## R3-C runtime — review-ready — 2026-10-04
 
 Accepted base:
-`90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4` (merged PR #152).
+`3c5740b319e453715c5a58f5b65e6d216b7c4fdb` (merged PR #154).
+
+Issue #155 / PR #156 / branch `feat/r3c-school2022-main-batch-runtime`.
+
+Runtime freeze:
+`c9e985eaad876fbc66519488d995d6e65975308a`.
+
+Outcome:
+
+- 1 identity-only FoodIngredient: `ATLANTIC_SALMON_FILLET_RAW`, no Nutrition/Vector/Composition authority;
+- 8 immutable SOURCE_VERIFIED MAIN RecipeVersions;
+- exact prepared ENERGY_KCAL + 53 UNKNOWN per recipe;
+- per-recipe atomic/resumable inactive publication;
+- one-UoW full-batch activation;
+- exact replay / deliberate-deactivation / mixed-state fail-closed semantics;
+- package tamper / partial state / identity conflict / wrong-energy rejection;
+- Russian-only persisted consumer steps;
+- `54-30м` steam-only 15–20 minute branch preserved;
+- hard MILK_2_5 breakfast resilience preserved at 3 candidates / capacity 9;
+- post-R3C exact-beef resilience = 12/23 dependent, 11 unaffected / capacity 33;
+- exact-energy catalogue 33 -> 41; MAIN 15 -> 23; gap-to-50 = 9;
+- DC4 remains BLOCKED;
+- no schema/migration/Planner/new-authority change.
+
+Exact runtime-freeze verification:
+
+- R3-C #37202224299 SUCCESS — 22/22 focused/adversarial tests;
+- Gate #37202224233 / Docs #37202224257 / DC1 #37202224207 SUCCESS;
+- R1-C #37202224245, R2 #37202224250, R2-B #37202224294,
+  R2-C #37202224239, R2-E #37202224235, R2-F #37202224202 SUCCESS;
+- R3-A #37202224232 / R3-B #37202224209 SUCCESS;
+- Russian methodologies #37202224243 SUCCESS;
+- Nutrient registry V2 #37202224305 SUCCESS including full backend/launcher regression;
+- Partial nutrition profiles #37202224282 SUCCESS including full backend/launcher regression;
+- Ruff check/format and scope/whitespace PASS;
+- migration head 0042; AI disabled.
+
+Status: `READY_FOR_FINAL_REVIEW`.
+
+Stop for independent review. Do not merge autonomously. After merge, reassess
+DC3 catalogue readiness; do not start DC4/PR9 automatically.
+
+---
+
+
+## R3-C Contract Gate — merged historical — 2026-10-04
+
+Merged as PR #154 at:
+`3c5740b319e453715c5a58f5b65e6d216b7c4fdb`.
 
 Issue #153 / PR #154 / branch `docs/r3c-post-r3b-catalogue-gate`.
 
@@ -32,7 +80,11 @@ Future projection: exact-energy 41; main 23; gap to 50 = 9; DC4 still BLOCKED.
 
 Verification: selected-set/mapping/source-hash/arithmetic/scope checks PASS; base→head whitespace audit PASS after correction.
 
-Independent review found one formal blocker: the verification procedure/result was not durable.\nThe same PR now contains `scripts/validate_r3c_post_r3b_gate.py` plus\n`data/curation/r3c-post-r3b-catalogue-gate/verification.json`; the frozen eight-recipe set is unchanged.\n\nA second independent-review blocker found that the first validator still trusted
+Independent review found one formal blocker: the verification procedure/result was not durable.
+The same PR added `scripts/validate_r3c_post_r3b_gate.py` plus
+`data/curation/r3c-post-r3b-catalogue-gate/verification.json`; the frozen eight-recipe set remained unchanged.
+
+A second independent-review blocker found that the first validator still trusted
 summary constants for current catalogue truth and only checked mapped food codes
 for non-empty text. The validator now reconstructs accepted exact-energy runtime
 truth from merged seed modules/publication specs, derives the FoodIngredient reuse
@@ -41,7 +93,7 @@ result: 210 accepted food codes; 33 exact-energy = 17/15/1; breakfast-compatible
 18; MILK_2_5 15 dependent / 3 unaffected / capacity 9; exact beef 7/15 -> 8
 unaffected / capacity 24.
 
-Status: `READY_FOR_FINAL_REVIEW` — second independent-review blocker corrected.
+Final status: `MERGED`. The runtime continuation is PR #156 / Issue #155 above.
 
 ---
 
