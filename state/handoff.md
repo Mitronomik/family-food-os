@@ -21,7 +21,13 @@ schema, Planner or new Nutrition authority.
 
 Projected exact-energy count after future runtime: 41; DC4 remains blocked.
 
-Status: `READY_FOR_FINAL_REVIEW`.
+Verification reproduction:
+
+- `python scripts/validate_r3c_post_r3b_gate.py --repo-only --json`;
+- full retained-source validation uses `--source-archive "$R3C_SOURCE_ARCHIVE"`;
+- retained receipt: `data/curation/r3c-post-r3b-catalogue-gate/verification.json`.
+
+Status: `READY_FOR_FINAL_REVIEW`; the independent-review verification-durability blocker is corrected.
 
 Do not start runtime until this gate is independently reviewed and explicitly
 merged. Do not start DC4/Gate1-CLOSE/PR9 automatically.
