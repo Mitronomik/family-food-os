@@ -115,6 +115,7 @@ OMELET_CODES = (
 OMELET_SELECTED_BRANCH = "OVEN_BAKE_180_200C_8_10_MIN"
 OMELET_NON_SELECTED_BRANCH = "STEAM_25_30_MIN"
 
+
 @dataclass(frozen=True)
 class R3BPublicationResult:
     identity_food_inserted: int
@@ -270,8 +271,7 @@ def _load_contract(
         != IDENTITY_ONLY_FOOD_CODES
         or tuple(row.get("canonical_code") for row in spec_identity_rows)
         != IDENTITY_ONLY_FOOD_CODES
-        or tuple(summary.get("new_identity_only_foods", ()))
-        != IDENTITY_ONLY_FOOD_CODES
+        or tuple(summary.get("new_identity_only_foods", ())) != IDENTITY_ONLY_FOOD_CODES
         or any(
             row.get("nutrition_profile") is not None
             or row.get("composition") is not None
@@ -343,8 +343,7 @@ def _load_contract(
             or tuple(prepared.get("expected_unknown_codes", ())) != expected_unknown
             or prepared.get("require_recipe_inactive") is not True
             or not any(
-                row.get("food_ingredient_code") == MILK_FOOD_CODE
-                for row in ingredients
+                row.get("food_ingredient_code") == MILK_FOOD_CODE for row in ingredients
             )
         ):
             raise ValueError(f"R3-B frozen Recipe/prepared spec changed: {code}.")
@@ -364,25 +363,18 @@ def _load_contract(
         receipt_branch = recipe.get("process_binding_receipt", {}).get(
             "source_branch_selection"
         )
-        household_branch = applicability_by_code[code].get(
-            "selected_process_branch"
-        )
+        household_branch = applicability_by_code[code].get("selected_process_branch")
         process_branch = process_by_code[code]
         if (
             not isinstance(published_branch, dict)
-            or published_branch.get("selected_process_branch")
-            != OMELET_SELECTED_BRANCH
-            or published_branch.get("non_selected_source_branches", [{}])[0].get(
-                "code"
-            )
+            or published_branch.get("selected_process_branch") != OMELET_SELECTED_BRANCH
+            or published_branch.get("non_selected_source_branches", [{}])[0].get("code")
             != OMELET_NON_SELECTED_BRANCH
             or not isinstance(receipt_branch, dict)
-            or receipt_branch.get("selected_process_branch")
-            != OMELET_SELECTED_BRANCH
+            or receipt_branch.get("selected_process_branch") != OMELET_SELECTED_BRANCH
             or not isinstance(household_branch, dict)
             or household_branch.get("code") != OMELET_SELECTED_BRANCH
-            or process_branch.get("selected_process_branch")
-            != OMELET_SELECTED_BRANCH
+            or process_branch.get("selected_process_branch") != OMELET_SELECTED_BRANCH
             or process_branch.get("non_selected_source_branch", {}).get("code")
             != OMELET_NON_SELECTED_BRANCH
         ):
@@ -712,7 +704,9 @@ def seed_r3b_school2022_breakfast_batch(
     package: Path = PACKAGE,
 ) -> R3BBreakfastBatchResult:
     publication = publish_r3b_school2022_breakfast_batch(config, package=package)
-    activation_changed = activate_r3b_school2022_breakfast_batch(config, package=package)
+    activation_changed = activate_r3b_school2022_breakfast_batch(
+        config, package=package
+    )
 
     engine = create_sqlite_engine(config)
     try:
