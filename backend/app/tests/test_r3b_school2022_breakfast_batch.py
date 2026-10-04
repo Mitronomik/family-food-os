@@ -582,8 +582,7 @@ def test_r3b_hard_milk_exclusion_rejects_all_batch_and_preserves_capacity_nine(
             ]
             assert traces
             assert any(
-                PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT
-                in row.rejection_codes
+                PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT in row.rejection_codes
                 for row in traces
             )
 
