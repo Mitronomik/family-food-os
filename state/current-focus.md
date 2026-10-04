@@ -38,11 +38,15 @@ Accepted base:
 
 PR:
 
-pending delivery after exact-head preflight; branch content is review-ready.
+`#158`.
 
 Status:
 
 `READY_FOR_INDEPENDENT_REVIEW`.
+
+Review unit:
+
+https://github.com/Mitronomik/family-food-os/pull/158
 
 Canonical contract target:
 

@@ -5,8 +5,8 @@
 Accepted main:
 `1c82f34b960621aed3e1c43780270f8048edfe0f` (merged PR #156).
 
-Issue #157 / branch `docs/r3d-final-dc3-batch-gate`.
-Preflight is complete; branch is ready for PR delivery.
+Issue #157 / PR #158 / branch `docs/r3d-final-dc3-batch-gate`.
+Preflight is complete; PR #158 is open for independent review.
 
 Read first:
 

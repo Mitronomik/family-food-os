@@ -5,9 +5,9 @@
 Accepted base:
 `1c82f34b960621aed3e1c43780270f8048edfe0f` (merged PR #156).
 
-Issue #157 / branch `docs/r3d-final-dc3-batch-gate`.
+Issue #157 / PR #158 / branch `docs/r3d-final-dc3-batch-gate`.
 
-Preflight completed before PR creation; branch is ready for delivery.
+Preflight completed before PR creation; PR #158 is open for independent review.
 
 Preflight-frozen selection:
 
