@@ -1,9 +1,6 @@
 name: R3-D final DC3 Contract Gate verification
 
 on:
-  push:
-    branches:
-      - 'docs/r3d-final-dc3-batch-gate'
   pull_request:
     paths:
       - 'docs/family-food/r3d-final-dc3-batch-gate.md'
