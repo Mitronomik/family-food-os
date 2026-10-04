@@ -714,6 +714,28 @@ def test_r3c_hard_beef_exclusion_rejects_affected_main_and_preserves_week(databa
             "0.25",
         )
         beef_id = food.get_by_code(BEEF_FOOD_CODE).id
+
+        main_admissions = tuple(
+            row
+            for row in planner.compose_candidate_admission()
+            if row.eligible and row.meal_type_code == "main"
+        )
+        beef_dependent = []
+        beef_unaffected = []
+        for admission in main_admissions:
+            recipe_detail = catalogue.get_current_verified(admission.recipe_id)
+            ingredient_ids = {
+                ingredient.food_ingredient_id for ingredient in recipe_detail.ingredients
+            }
+            if beef_id in ingredient_ids:
+                beef_dependent.append(admission.canonical_code)
+            else:
+                beef_unaffected.append(admission.canonical_code)
+        assert len(main_admissions) == 23
+        assert len(beef_dependent) == 12
+        assert len(beef_unaffected) == 11
+        assert len(beef_unaffected) * PlannerConfig().max_recipe_repetitions == 33
+
         request = AuthoritativeGenerationRequest(
             household.id,
             WEEK_START,
