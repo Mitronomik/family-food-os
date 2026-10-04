@@ -101,11 +101,21 @@
       "composition_authority": null
     },
     {
-      "canonical_code": "CHICKEN_BROTH_PLAIN",
-      "canonical_name": "Бульон куриный обычный",
-      "category_code": "staples",
+      "canonical_code": "CHEESE_DUTCH_HARD",
+      "canonical_name": "Сыр голландский твёрдый",
+      "category_code": "dairy",
       "default_unit": "g",
-      "identity_note": "Plain chicken broth referenced by MR card 1.0; not low-sodium retail broth.",
+      "identity_note": "Exact Dutch hard-cheese source identity from MR 6.9; do not broaden to generic hard cheese.",
+      "nutrition_profile": null,
+      "nutrient_vector_authority": null,
+      "composition_authority": null
+    },
+    {
+      "canonical_code": "BUTTER_PEASANT_72",
+      "canonical_name": "Масло сливочное крестьянское 72%",
+      "category_code": "fats_oils",
+      "default_unit": "g",
+      "identity_note": "Exact 72% source fat form from MR 6.19; do not infer equivalence to accepted 72.5% butter.",
       "nutrition_profile": null,
       "nutrient_vector_authority": null,
       "composition_authority": null
@@ -448,7 +458,7 @@
         {
           "source_label": "Сыр голландский х/о-85",
           "quantity_g": "15.6",
-          "food_code": "CHEESE_HARD_UNSPECIFIED"
+          "food_code": "CHEESE_DUTCH_HARD"
         },
         {
           "source_label": "Масло сливочное крестьянское 72,5% ж. <*>",
@@ -508,7 +518,7 @@
         {
           "source_label": "Масло сливочное крестьянское 72% ж.",
           "quantity_g": "6",
-          "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
+          "food_code": "BUTTER_PEASANT_72"
         },
         {
           "source_label": "Сыр (твердых сортов)",
@@ -615,57 +625,57 @@
       }
     },
     {
-      "canonical_code": "MR2019_2_24_CHICKEN_PUREE_BROTH",
-      "canonical_name": "Пюре куриное в бульоне со сливочным маслом",
+      "canonical_code": "MR2019_2_14_BOILED_CHICKEN_CATEGORY_1",
+      "canonical_name": "Курица 1 категории отварная",
       "source_section_code": "APPENDIX_5",
-      "source_card_code": "2.24",
-      "source_card_raw_sha256": "8ca2bc4904e3e72e128400bae03736938f8dd0e7159acd996b48b42f1a998166",
+      "source_card_code": "2.14",
+      "source_card_raw_sha256": "6b5a0849d1ff302115045dd557096e4f52d17b14ebe67c90dd51603ac58fdcf6",
       "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/",
       "source_variant": "12_PLUS",
       "meal_type_code": "main",
-      "source_output_g": "115",
-      "energy_kcal": "217",
+      "source_output_g": "110",
+      "energy_kcal": "267",
       "ingredients": [
         {
-          "source_label": "Курица потрошеная 1 кат варка тушкой",
-          "quantity_g": "196",
+          "source_label": "Куры 1 категории потрошеные",
+          "quantity_g": "155",
           "food_code": "CHICKEN_CATEGORY_1_WHOLE_RAW"
         },
         {
-          "source_label": "Масло сливочное крестьянское 72,5% ж.",
-          "quantity_g": "4",
-          "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
-        },
-        {
-          "source_label": "Бульон куриный к-р N 1.0",
-          "quantity_g": "35",
-          "food_code": "CHICKEN_BROTH_PLAIN"
+          "source_label": "Морковь свежая",
+          "quantity_g": "8",
+          "food_code": "CARROT"
         },
         {
           "source_label": "Соль поваренная йодированная",
-          "quantity_g": "0.6",
+          "quantity_g": "1",
           "food_code": "SALT_IODIZED"
         }
       ],
+      "source_intermediates": [
+        {
+          "source_label": "Масса отварной курицы",
+          "quantity_g": "110"
+        }
+      ],
       "process_binding": {
-        "status": "PASS_EXPLICIT_PROCESS_BINDING",
-        "rule": "Chicken broth is an explicit source ingredient and receives identity-only plain-broth semantics; boiling water for the whole bird is a process resource, not an inferred RecipeIngredient."
+        "status": "PASS_PROCESS_WATER_NON_CONSUMED_RESOURCE",
+        "rule": "Source hot water (2–2.5 L/kg) is an unquantified cooking medium, not a RecipeIngredient; source output and chemistry explicitly refer to boiled chicken meat with skin. Carrot and salt are quantified and placed."
       },
       "consumer_steps_ru": [
-        "Курицу отварить при слабом кипении до готовности.",
-        "Отделить мякоть от костей, кожи и видимого жира и дважды измельчить.",
-        "Развести куриную массу бульоном, добавить сливочное масло, довести до кипения и варить при слабом кипении 15 минут.",
-        "За 5 минут до окончания добавить йодированную соль."
+        "Курицу уложить в горячую воду, довести до кипения и снять пену.",
+        "Добавить очищенную морковь и йодированную соль и варить при слабом кипении до готовности.",
+        "Готовую курицу разделить на порционные кусочки; бульон используется только как технологическая среда и не входит в выход блюда."
       ],
       "dependency_flags": [
         "CHICKEN"
       ],
-      "selection_reason": "Adds a second non-beef/fish protein MAIN with simple ingredients and a distinct texture/process.",
+      "selection_reason": "Source-clean whole-chicken MAIN reuses the same exact category-I identity as the soufflé and avoids a new broth/sub-recipe architecture.",
       "source_nutrition_row": {
-        "protein_g": "14.6",
-        "fat_g": "17.6",
+        "protein_g": "20.4",
+        "fat_g": "20.6",
         "carbohydrate_g": "0",
-        "energy_kcal": "217"
+        "energy_kcal": "267"
       }
     },
     {
