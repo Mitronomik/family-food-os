@@ -118,6 +118,33 @@ def load_r3c_validator(repo_root: Path):
     return module
 
 
+def recipe_ingredient_codes(
+    code: str,
+    row: dict[str, Any],
+) -> tuple[str, ...]:
+    direct = row.get("ingredient_codes")
+    if isinstance(direct, (tuple, list)) and all(
+        isinstance(item, str) and item for item in direct
+    ):
+        return tuple(direct)
+
+    frozen = row.get("ingredients")
+    if isinstance(frozen, list):
+        codes = tuple(
+            item.get("food_code")
+            for item in frozen
+            if isinstance(item, dict)
+        )
+        if len(codes) == len(frozen) and all(
+            isinstance(item, str) and item for item in codes
+        ):
+            return codes
+
+    raise ValidationError(
+        f"recipe ingredient-code shape unavailable: {code}"
+    )
+
+
 def derive_current_truth(
     repo_root: Path,
 ) -> tuple[dict[str, Any], set[str], dict[str, dict[str, Any]]]:
@@ -162,7 +189,7 @@ def derive_current_truth(
     milk_dependent = {
         code
         for code in breakfast
-        if MILK_CODE in row["ingredient_codes"]
+        if MILK_CODE in recipe_ingredient_codes(code, row)
     }
     milk_unaffected = breakfast - milk_dependent
 
@@ -173,9 +200,9 @@ def derive_current_truth(
     }
 
     def has_any(row: dict[str, Any], codes: frozenset[str]) -> bool:
-        return bool(set(row["ingredient_codes"]) & codes)
+        return bool(set(recipe_ingredient_codes(row["canonical_code"], row)) & codes)
 
-    beef = {code for code, row in main.items() if BEEF_CODE in row["ingredient_codes"]}
+    beef = {code for code, row in main.items() if BEEF_CODE in recipe_ingredient_codes(code, row)}
     fish = {code for code, row in main.items() if has_any(row, FISH_CODES)}
     chicken = {code for code, row in main.items() if has_any(row, CHICKEN_CODES)}
     meat_free = set(main) - beef - fish - chicken
