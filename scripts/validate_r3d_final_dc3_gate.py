@@ -500,8 +500,7 @@ def validate_gate(repo_root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
             isinstance(quarantined_context, list)
             and quarantined_context
             and all(
-                isinstance(item, str) and item.strip()
-                for item in quarantined_context
+                isinstance(item, str) and item.strip() for item in quarantined_context
             ),
             f"quarantined source context missing: {row['canonical_code']}",
         )
@@ -512,8 +511,7 @@ def validate_gate(repo_root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
             "MR2019_1_16_POTATO_SPLIT_PEA_SOUP",
         }:
             require(
-                "LOW_ENERGY_SERVING_FEASIBILITY_REQUIRES_DC4"
-                in quarantined_context,
+                "LOW_ENERGY_SERVING_FEASIBILITY_REQUIRES_DC4" in quarantined_context,
                 f"soup Serving feasibility not quarantined to DC4: {row['canonical_code']}",
             )
             require(
@@ -550,8 +548,7 @@ def validate_gate(repo_root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
             f"prepared ENERGY_KCAL binding mismatch: {row['canonical_code']}",
         )
         require(
-            prepared.get("unknown_policy")
-            == "all other frozen nutrient codes UNKNOWN",
+            prepared.get("unknown_policy") == "all other frozen nutrient codes UNKNOWN",
             f"prepared UNKNOWN policy drifted: {row['canonical_code']}",
         )
         require(
@@ -751,7 +748,9 @@ def validate_gate(repo_root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
         "selected_count": len(selected),
         "new_identity_only_count": len(identities),
         "household_applicability_pass": sum(
-            1 for row in selected if row.get("household_applicability") == "REVIEWED_PASS"
+            1
+            for row in selected
+            if row.get("household_applicability") == "REVIEWED_PASS"
         ),
         "prepared_authority_contracts": sum(
             1
