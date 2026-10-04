@@ -43,8 +43,8 @@ from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
 )
 from app.seed.r3a_school2022_main_batch import (
     RECIPE_CODES as R3A_RECIPE_CODES,
-    seed_r3a_school2022_main_batch,
 )
+from app.seed.r3a_school2022_main_batch import seed_r3a_school2022_main_batch
 from app.seed.r3b_school2022_breakfast_batch import (
     APPLICABILITY_PATH,
     IDENTITY_ONLY_FOOD_CODES,
