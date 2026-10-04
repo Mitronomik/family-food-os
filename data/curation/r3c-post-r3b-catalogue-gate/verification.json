@@ -1,0 +1,104 @@
+{
+  "schema_version": 2,
+  "operation": "R3C_POST_R3B_GATE_VERIFICATION_RECEIPT",
+  "accepted_base": "90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4",
+  "issue": 153,
+  "pull_request": 154,
+  "validator": "scripts/validate_r3c_post_r3b_gate.py",
+  "validator_content_head": "b182378505d228086ca72ccbb717d9c82f55b3b3",
+  "repository_truth_derivation": {
+    "sources": [
+      "backend/app/seed/r1f_prepared_output.py",
+      "backend/app/seed/r1h_school2022_main.py",
+      "backend/app/seed/r2_breakfast_capacity.py",
+      "backend/app/seed/r2b_fish_main_diversity.py",
+      "backend/app/seed/r2c_breakfast_grain_diversity.py",
+      "backend/app/seed/r2e_cottage_casserole.py",
+      "backend/app/seed/r2f_cheese_sandwich.py",
+      "backend/app/seed/r3a_school2022_main_batch.py",
+      "backend/app/seed/r3b_school2022_breakfast_batch.py",
+      "their accepted publication-spec packages",
+      "data/seed/food_ingredients/ingredients.csv",
+      "backend/app/domain/food_recipes.py#MealTypeCode",
+      "backend/app/domain/planner.py#ROLE_COMPATIBILITY_V1",
+      "backend/app/domain/planner.py#PlannerConfig.max_recipe_repetitions"
+    ],
+    "rule": "Current exact-energy truth is reconstructed from merged runtime seed code and its accepted publication specs. summary.json is compared to those derived facts and is never used as their source."
+  },
+  "commands": {
+    "repo_only": "python scripts/validate_r3c_post_r3b_gate.py --repo-only --json",
+    "full_source": "python scripts/validate_r3c_post_r3b_gate.py --source-archive \"$R3C_SOURCE_ARCHIVE\" --json",
+    "syntax": "python -m py_compile scripts/validate_r3c_post_r3b_gate.py",
+    "ruff_check": "python -m ruff check scripts/validate_r3c_post_r3b_gate.py",
+    "ruff_format": "python -m ruff format --check scripts/validate_r3c_post_r3b_gate.py",
+    "whitespace": "git diff --check 90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4...HEAD"
+  },
+  "repo_only_execution": {
+    "status": "PASS",
+    "github_actions_run_id": 37199801599,
+    "github_actions_job_id": 111428966087,
+    "tested_revision": "b182378505d228086ca72ccbb717d9c82f55b3b3",
+    "accepted_food_code_count": 210,
+    "current_exact_energy": 33,
+    "current_exact_energy_codes_sha256": "7f5553bb593c674c0cc3f6bb9a8f039d79321792004064a1c858c1e458e21530",
+    "current_meal_type_counts": {
+      "breakfast": 17,
+      "main": 15,
+      "sandwich": 1
+    },
+    "breakfast_compatible": 18,
+    "planner_supported_meal_types": [
+      "breakfast",
+      "main",
+      "sandwich"
+    ],
+    "breakfast_compatible_meal_types": [
+      "breakfast",
+      "sandwich"
+    ],
+    "milk_dependent_breakfast": 15,
+    "milk_unaffected_breakfast": 3,
+    "beef_dependent_main": 7,
+    "beef_unaffected_main": 8,
+    "selected_recipes": 8,
+    "ingredient_rows": 51,
+    "deferred_or_rejected": 15,
+    "projected_exact_energy": 41,
+    "py_compile": "PASS",
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "source_archive_execution": {
+    "status": "REUSED_PASS",
+    "original_tested_revision": "264bc30a6869a7e2fbdea1d6ea77be7bc124a2a0",
+    "reuse_reason": "frozen-batch.json, source archive/PDF receipts, and validate_source_archive semantics are unchanged; only repository-truth derivation was strengthened. Reuse follows docs/family-food/verification-policy.md.",
+    "archive_bytes": 206692075,
+    "archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "pdf_bytes": 4102547,
+    "pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+    "frozen_source_hashes": "32/32",
+    "source_ingredient_rows": 51,
+    "reproduction": "Materialize the durable Library archive, export R3C_SOURCE_ARCHIVE, then run the full_source command above."
+  },
+  "checked_invariants": [
+    "accepted FoodIngredient reuse universe is derived from base food seed plus ingredient codes used by accepted exact-energy runtime publications",
+    "each frozen mapped food_code must exist in accepted current reuse universe, except exactly ATLANTIC_SALMON_FILLET_RAW",
+    "8 unique selected RecipeVersions and exact frozen set/order",
+    "all selected meal_type_code=main and main is supported by current ROLE_COMPATIBILITY_V1",
+    "required ingredient mapping completeness",
+    "exactly one identity-only FoodIngredient with no Nutrition/Composition authority",
+    "selected/deferred disjointness",
+    "current exact-energy recipe set independently reconstructed from merged runtime seeds/publication specs",
+    "17 breakfast / 15 main / 1 sandwich = 33 and breakfast-compatible=18 derived from current Planner contract",
+    "MILK_2_5 current dependency=15 and unaffected set=3/capacity=9",
+    "BEEF_CATEGORY_1_RAW current MAIN dependency=7/15, leaving 8/capacity=24",
+    "projection 41 exact-energy / 23 main / gap-to-50=9 and DC4 remains false",
+    "source archive and embedded School2022 PDF size/SHA-256",
+    "8 source-card hashes + 8 process hashes + 8 output-row hashes + 8 ENERGY reconciliation hashes",
+    "51 selected source ingredient rows",
+    "source output mass and same-card ENERGY_KCAL",
+    "Russian-only consumer steps"
+  ],
+  "finalization_note": "The receipt update itself is verification metadata only. The dedicated R3-C workflow re-runs repo-only reconciliation, py_compile, Ruff and git diff --check on subsequent exact heads."
+}

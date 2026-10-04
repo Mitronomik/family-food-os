@@ -1,5 +1,49 @@
 # Handoff
 
+## R3-C Contract Gate — active — 2026-10-04
+
+Accepted main:
+`90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4` (merged PR #152).
+
+Issue #153 / PR #154 / branch `docs/r3c-post-r3b-catalogue-gate`.
+
+Read first:
+
+- `docs/family-food/r3c-post-r3b-catalogue-gate.md`;
+- `data/curation/r3c-post-r3b-catalogue-gate/frozen-batch.json`;
+- `data/curation/r3c-post-r3b-catalogue-gate/summary.json`.
+
+Exact future batch: eight MAIN RecipeVersions. The only new identity is
+`ATLANTIC_SALMON_FILLET_RAW`, identity-only.
+
+Preserve R3-A/R3-B Option B and hard MILK_2_5 breakfast proof. No 0043,
+schema, Planner or new Nutrition authority.
+
+Projected exact-energy count after future runtime: 41; DC4 remains blocked.
+
+Verification reproduction:
+
+- `python scripts/validate_r3c_post_r3b_gate.py --repo-only --json`;
+- full retained-source validation uses `--source-archive "$R3C_SOURCE_ARCHIVE"`;
+- retained receipt: `data/curation/r3c-post-r3b-catalogue-gate/verification.json`.
+
+Repo-derived validator facts:
+
+- accepted current reuse food-code universe = 210;
+- current exact-energy set derived from merged runtime seeds/specs = 33;
+- derived meal split = 17 breakfast / 15 main / 1 sandwich;
+- current Planner BREAKFAST compatibility yields 18 candidates;
+- MILK_2_5 = 15 dependent, 3 unaffected, capacity 9;
+- BEEF_CATEGORY_1_RAW = 7/15 MAIN, 8 unaffected, capacity 24.
+
+Status: `READY_FOR_FINAL_REVIEW`; both independent-review verification blockers
+are corrected. Frozen eight-recipe content remains unchanged.
+
+Do not start runtime until this gate is independently reviewed and explicitly
+merged. Do not start DC4/Gate1-CLOSE/PR9 automatically.
+
+---
+
 ## R3-B runtime — review-ready — 2026-10-04
 
 Accepted main:

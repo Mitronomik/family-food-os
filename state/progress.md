@@ -1,5 +1,50 @@
 # Progress
 
+## R3-C Contract Gate — implementation active — 2026-10-04
+
+Accepted base:
+`90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4` (merged PR #152).
+
+Issue #153 / PR #154 / branch `docs/r3c-post-r3b-catalogue-gate`.
+
+Post-R3B reconciliation:
+
+- exact-energy active = 33;
+- breakfast 17 / main 15 / sandwich 1;
+- breakfast-compatible = 18;
+- hard MILK_2_5 unaffected set = 3, capacity 9;
+- DATA-CORPUS-V1 usable gap to 50 = 17;
+- DC4 = BLOCKED.
+
+Frozen R3-C gate set:
+
+- 8 MAIN RecipeVersions;
+- +1 identity-only FoodIngredient: ATLANTIC_SALMON_FILLET_RAW;
+- same-card prepared ENERGY_KCAL only; other frozen nutrients UNKNOWN;
+- R3-A/R3-B Option-B transaction semantics reused;
+- no migration/schema/Planner/new-Nutrition-authority change.
+
+Why 8, not 10–12: nearest additional School2022 cards have unresolved required
+ingredient placement, unquantified process inputs, source/process fat conflicts,
+or medical scope. No numerical padding.
+
+Future projection: exact-energy 41; main 23; gap to 50 = 9; DC4 still BLOCKED.
+
+Verification: selected-set/mapping/source-hash/arithmetic/scope checks PASS; base→head whitespace audit PASS after correction.
+
+Independent review found one formal blocker: the verification procedure/result was not durable.\nThe same PR now contains `scripts/validate_r3c_post_r3b_gate.py` plus\n`data/curation/r3c-post-r3b-catalogue-gate/verification.json`; the frozen eight-recipe set is unchanged.\n\nA second independent-review blocker found that the first validator still trusted
+summary constants for current catalogue truth and only checked mapped food codes
+for non-empty text. The validator now reconstructs accepted exact-energy runtime
+truth from merged seed modules/publication specs, derives the FoodIngredient reuse
+universe and parses current Planner compatibility/repetition settings. CI-derived
+result: 210 accepted food codes; 33 exact-energy = 17/15/1; breakfast-compatible
+18; MILK_2_5 15 dependent / 3 unaffected / capacity 9; exact beef 7/15 -> 8
+unaffected / capacity 24.
+
+Status: `READY_FOR_FINAL_REVIEW` — second independent-review blocker corrected.
+
+---
+
 ## R3-B runtime — review-ready — 2026-10-04
 
 Accepted base:

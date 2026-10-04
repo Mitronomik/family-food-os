@@ -1,0 +1,767 @@
+{
+  "schema_version": 1,
+  "operation": "R3C_POST_R3B_FROZEN_BATCH_CONTRACT",
+  "accepted_base": "90c4f0ebab693b01ec5b4cf7b93b67feeaf0ddb4",
+  "issue": 153,
+  "status": "FROZEN_FOR_GATE_REVIEW",
+  "source": {
+    "source_name": "ru-school2022",
+    "source_archive_locator": "private-library:/FamilyFoodOS/source-artifacts/FamilyFoodOS-corpus-0.3.0-2026-09-20.zip",
+    "source_archive_size_bytes": 206692075,
+    "source_archive_sha256": "c0d90020798b2998e841328b9081f06f8197efda084b852aa8457fd41a5ce8ea",
+    "source_archive_library_file_id": "libfile_26d95a7a50108191944b97db85a5c008",
+    "source_archive_last_verified": "2026-10-04",
+    "source_pdf_archive_path": "corpus-work/packages/school2022/raw/source.pdf",
+    "source_pdf_size_bytes": 4102547,
+    "source_pdf_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+    "source_pdf_locator": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+    "rights_review_status": "REVIEWED",
+    "rights_basis": "Нормативная рецептурная карта используется как фактические рецептурные данные по принятому контракту docs/family-food/ru-normative-recipe-corpus.md; сохраняются источник, версия, URL и SHA-256; фотографии, издательская вёрстка, логотипы и сторонние авторские комментарии не публикуются.",
+    "canonical_record_hash_rule": "sha256(UTF-8 compact JSON with ensure_ascii=false, sort_keys=true, separators=(',', ':'))"
+  },
+  "new_identity_only_foods": [
+    {
+      "canonical_code": "ATLANTIC_SALMON_FILLET_RAW",
+      "canonical_name": "Сёмга, филе сырое",
+      "category_code": "fish_seafood",
+      "default_unit": "g",
+      "nutrition_profile": null,
+      "composition_authority": null
+    }
+  ],
+  "selected": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-21м",
+      "source_pdf_page": 131,
+      "source_card_canonical_json_sha256": "576eb87d0edb4f95ee6fdae1e6ecbd6efdaa00474c3819d9dfdf2e81ae9ec4b7",
+      "source_process_text_sha256": "ebb18982aa55d887c55fbbf460f54b3b9f2ba13b60b6f6ff7201383177b776ea",
+      "source_output_row_canonical_json_sha256": "229f6c782eb28a2c4be95eca22c970c2d31ce335851acd359ae179c6212dd987",
+      "energy_reconciliation_canonical_json_sha256": "e97a54828207264fc868b742a554be15f92c8304177788a47bbab0b55894f1d6",
+      "canonical_code": "SCHOOL2022_54_21M_BOILED_CHICKEN",
+      "canonical_name": "Курица отварная",
+      "meal_type_code": "main",
+      "source_output_g": "80",
+      "energy_kcal": "123.8",
+      "ingredients": [
+        {
+          "source_label": "куриная грудка (филе)",
+          "gross_g": "130.1",
+          "net_g": "115.2",
+          "food_code": "CHICKEN_BREAST"
+        },
+        {
+          "source_label": "лук репчатый",
+          "gross_g": "3.6",
+          "net_g": "3.2",
+          "food_code": "ONION_BULB_FRESH"
+        },
+        {
+          "source_label": "петрушка (зелень)",
+          "gross_g": "3.6",
+          "net_g": "3.2",
+          "food_code": "PARSLEY"
+        },
+        {
+          "source_label": "соль поваренная йодированная",
+          "gross_g": "0.4",
+          "net_g": "0.4",
+          "food_code": "SALT_IODIZED"
+        },
+        {
+          "source_label": "вода",
+          "gross_g": "288",
+          "net_g": "288",
+          "food_code": "WATER"
+        }
+      ],
+      "process_binding": {
+        "status": "PASS_EXPLICIT_PROCESS_BINDING",
+        "rule": "Все пять количественных ингредиентов имеют явное место в технологии; институциональные логистические требования не публикуются как потребительские шаги."
+      },
+      "consumer_steps_ru": [
+        "Подготовить репчатый лук и зелень петрушки: промыть и нашинковать.",
+        "Подготовленное куриное филе нарезать кусками, положить в горячую воду и довести до кипения; снять пену, добавить лук, петрушку и йодированную соль и варить под крышкой при слабом кипении до готовности.",
+        "Готовое филе вынуть из бульона, немного остудить и разделить на порции.",
+        "Залить порции горячим бульоном, довести до кипения и кипятить 5–7 минут."
+      ],
+      "quarantined_source_context": [
+        "институциональное размораживание в дефростере/мясном цехе",
+        "хранение на мармите не более 2 часов",
+        "институциональное требование к температуре подачи"
+      ],
+      "selection_reason": "Единственный найденный в retained School2022 чистый куриный MAIN без неразрешённых воды/лаврового листа/конфликта жиров; уменьшает зависимость MAIN от говядины и рыбы.",
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "123.8"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN"
+      },
+      "household_applicability": "REVIEWED_PASS"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-3м",
+      "source_pdf_page": 116,
+      "source_card_canonical_json_sha256": "a474209834d4ebc58c6db12694e55b027b214196307213509d35f72b73ccd13f",
+      "source_process_text_sha256": "06cbb425d87640f648fc8c8d43adcb325f08552f9ef3ad18fc89f3174d149fd2",
+      "source_output_row_canonical_json_sha256": "3006394670a7c1ac1e3a5c0486bf975cc452e0f7f7673bd7f4ef26b43dbd1b4f",
+      "energy_reconciliation_canonical_json_sha256": "d2449f6316e9a4b7ac917d16383b6db36464aca9d1ea46531f6e8a7af9844b50",
+      "canonical_code": "SCHOOL2022_54_3M_LAZY_CABBAGE_ROLLS",
+      "canonical_name": "Голубцы ленивые",
+      "meal_type_code": "main",
+      "source_output_g": "100",
+      "energy_kcal": "128.4",
+      "ingredients": [
+        {
+          "source_label": "капуста белокочанная",
+          "gross_g": "75",
+          "net_g": "60",
+          "food_code": "CABBAGE_GREEN"
+        },
+        {
+          "source_label": "говядина 1 категории",
+          "gross_g": "45.2",
+          "net_g": "40",
+          "food_code": "BEEF_CATEGORY_1_RAW"
+        },
+        {
+          "source_label": "крупа рисовая",
+          "gross_g": "5",
+          "net_g": "5",
+          "food_code": "RICE_GROATS"
+        },
+        {
+          "source_label": "лук репчатый",
+          "gross_g": "7.5",
+          "net_g": "6",
+          "food_code": "ONION_BULB_FRESH"
+        },
+        {
+          "source_label": "масло сливочное",
+          "gross_g": "3",
+          "net_g": "3",
+          "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
+        },
+        {
+          "source_label": "соль поваренная йодированная",
+          "gross_g": "0.3",
+          "net_g": "0.3",
+          "food_code": "SALT_IODIZED"
+        },
+        {
+          "source_label": "вода",
+          "gross_g": "30",
+          "net_g": "30",
+          "food_code": "WATER"
+        }
+      ],
+      "process_binding": {
+        "status": "PASS_EXPLICIT_RATIO_AND_TOTAL_BINDING",
+        "rule": "Источник явно задаёт половину сливочного масла для лука и оставшуюся часть для финального тушения; 30 г воды относятся к финальному тушению. Вода для припускания капусты — технологический ресурс, а не RecipeIngredient."
+      },
+      "consumer_steps_ru": [
+        "Промыть рис и сварить рассыпчатым.",
+        "Подготовить и нашинковать лук; бланшировать и пассеровать его в половине общего количества сливочного масла.",
+        "Подготовить белокочанную капусту, тонко нашинковать, припустить в подсоленной кипящей воде до полуготовности и слить воду.",
+        "Измельчить подготовленную говядину, смешать с рисом, луком и капустой и хорошо вымешать.",
+        "Сформовать порции, уложить в форму, добавить воду и оставшуюся часть сливочного масла и готовить в духовке 30 минут при 250 °C."
+      ],
+      "quarantined_source_context": [
+        "институциональное размораживание мяса",
+        "пароконвектомат как институциональная формулировка",
+        "институциональное требование к температуре подачи"
+      ],
+      "selection_reason": "Обычное семейное блюдо с капустой и рисом; отличается от текущих котлет/рыбы/плова и имеет полную количественную и процессную привязку.",
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "128.4"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN"
+      },
+      "household_applicability": "REVIEWED_PASS"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-26м",
+      "source_pdf_page": 136,
+      "source_card_canonical_json_sha256": "2c19a57cee3f1d5711ccde2900141e0e21b317239648ce16a569c7218a70884e",
+      "source_process_text_sha256": "c71bb9f536423e7c445840dd700a8d2614ce83e215d776a0171d63e296d79c7b",
+      "source_output_row_canonical_json_sha256": "b4de6981566ef2bb9374a329fe4ada9ddea8a3e7ad4315d77e9591677cd063e4",
+      "energy_reconciliation_canonical_json_sha256": "1d542e1cf47c8d756f6ce4d3b539e2841888e91543d6dbdd33df1b1024a9d028",
+      "canonical_code": "SCHOOL2022_54_26M_POTATO_BEEF_CASSEROLE",
+      "canonical_name": "Запеканка картофельная с говядиной",
+      "meal_type_code": "main",
+      "source_output_g": "200",
+      "energy_kcal": "408.7",
+      "ingredients": [
+        {
+          "source_label": "картофель",
+          "gross_g": "224.4",
+          "net_g": "165",
+          "food_code": "POTATO"
+        },
+        {
+          "source_label": "говядина 1 категории",
+          "gross_g": "126.6",
+          "net_g": "112",
+          "food_code": "BEEF_CATEGORY_1_RAW"
+        },
+        {
+          "source_label": "сухари панировочные",
+          "gross_g": "3",
+          "net_g": "3",
+          "food_code": "BREADCRUMBS"
+        },
+        {
+          "source_label": "яйцо куриное",
+          "gross_g": "4.4",
+          "net_g": "4",
+          "food_code": "EGG"
+        },
+        {
+          "source_label": "масло сливочное",
+          "gross_g": "10",
+          "net_g": "10",
+          "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
+        },
+        {
+          "source_label": "соль поваренная йодированная",
+          "gross_g": "1",
+          "net_g": "1",
+          "food_code": "SALT_IODIZED"
+        }
+      ],
+      "process_binding": {
+        "status": "PASS_EXACT_TOTAL_INTERNAL_SPLIT_UNKNOWN",
+        "rule": "10 г сливочного масла — точный общий ингредиентный расход; источник использует его в мясной массе, для формы и перед запеканием, но не даёт точного внутреннего распределения. Вода для варки картофеля — технологический ресурс."
+      },
+      "consumer_steps_ru": [
+        "Подготовить яйца.",
+        "Измельчить подготовленную говядину, соединить со сливочным маслом и йодированной солью и прогреть слоем 2–3 см при 160–180 °C 8–10 минут, помешивая.",
+        "Картофель очистить, отварить до готовности, слить отвар, подсушить и размять; разделить на две равные части.",
+        "Выложить в форму половину картофеля, затем мясо и оставшийся картофель; смазать яйцом, посыпать панировочными сухарями и использовать сливочное масло в пределах общего количества рецептуры.",
+        "Запекать 25–30 минут при 250–280 °C и нарезать на порции."
+      ],
+      "quarantined_source_context": [
+        "институциональное размораживание мяса",
+        "институциональная глубина слоя посуды как технологический контекст",
+        "институциональное требование к температуре подачи"
+      ],
+      "selection_reason": "Добавляет узнаваемую семейную запеканку и картофельный MAIN; точный output/energy и все обязательные ингредиенты разрешимы.",
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "408.7"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN"
+      },
+      "household_applicability": "REVIEWED_PASS"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-1м",
+      "source_pdf_page": 114,
+      "source_card_canonical_json_sha256": "ec8b76061f704ef6bf20a7a978b121804621b1814f4bd84c063f55bc27f152ff",
+      "source_process_text_sha256": "2621432edb03768e4f50ce99d67d3bd400fa7580e6c5ca4c195c12f156c0eb3d",
+      "source_output_row_canonical_json_sha256": "b1f3c8ecfa61cddc76fe547b5b67ac9e1bd3545a324f5911ac85165bb2c5e7d7",
+      "energy_reconciliation_canonical_json_sha256": "c251cb28e6128949aeb495c6cec9fda527ed29eec8b7a1009716d5ffa3516c92",
+      "canonical_code": "SCHOOL2022_54_1M_BOILED_BEEF_STROGANOFF",
+      "canonical_name": "Бефстроганов из отварной говядины",
+      "meal_type_code": "main",
+      "source_output_g": "80",
+      "energy_kcal": "167.5",
+      "ingredients": [
+        {
+          "source_label": "говядина 1 категории",
+          "gross_g": "73.0",
+          "net_g": "64.6",
+          "food_code": "BEEF_CATEGORY_1_RAW"
+        },
+        {
+          "source_label": "морковь",
+          "gross_g": "7.3",
+          "net_g": "5.8",
+          "food_code": "CARROT"
+        },
+        {
+          "source_label": "лук репчатый",
+          "gross_g": "2",
+          "net_g": "1.6",
+          "food_code": "ONION_BULB_FRESH"
+        },
+        {
+          "source_label": "петрушка (корень)",
+          "gross_g": "1.3",
+          "net_g": "1.0",
+          "food_code": "PARSLEY_ROOT_RAW"
+        },
+        {
+          "source_label": "мука пшеничная высший сорт",
+          "gross_g": "1.0",
+          "net_g": "1.0",
+          "food_code": "FLOUR_WHEAT_HIGH_GRADE"
+        },
+        {
+          "source_label": "сметана",
+          "gross_g": "20",
+          "net_g": "20",
+          "food_code": "SOUR_CREAM_15"
+        },
+        {
+          "source_label": "масло сливочное",
+          "gross_g": "1.0",
+          "net_g": "1.0",
+          "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
+        },
+        {
+          "source_label": "соль поваренная йодированная",
+          "gross_g": "0.16",
+          "net_g": "0.16",
+          "food_code": "SALT_IODIZED"
+        },
+        {
+          "source_label": "вода",
+          "gross_g": "87.4",
+          "net_g": "87.4",
+          "food_code": "WATER"
+        }
+      ],
+      "process_binding": {
+        "status": "PASS_SINGLE_FAT_SAME_CARD_BINDING",
+        "rule": "Сливочное масло — единственный жир карточки: оно явно используется в белом соусе и связывается с неназванным жиром для пассерования лука без изобретения внутреннего граммового split. Соль названа в соусе и финальном тушении; общий split не задан."
+      },
+      "consumer_steps_ru": [
+        "Подготовить морковь и корень петрушки, отварить и протереть; лук подготовить, нашинковать, бланшировать и пассеровать.",
+        "Подготовленную говядину отварить до готовности, удалить плёнки и соединительную ткань и нарезать соломкой.",
+        "Для белого соуса подсушить муку при 110–120 °C без изменения цвета, охладить до 60–70 °C, растереть со сливочным маслом, постепенно влить воду и варить 25–30 минут; добавить йодированную соль, процедить и довести до кипения.",
+        "Соединить белый соус со сметаной, довести до кипения и варить 3–5 минут.",
+        "Соединить мясо, протёртые овощи и пассерованный лук со сметанным соусом, добавить йодированную соль в пределах общего количества рецептуры и тушить 5–10 минут."
+      ],
+      "quarantined_source_context": [
+        "институциональное размораживание мяса",
+        "институциональное требование к температуре подачи"
+      ],
+      "selection_reason": "Узнаваемый соусный MAIN с овощами и сметаной, технологически отличающийся от текущих котлет/тефтелей.",
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "167.5"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN"
+      },
+      "household_applicability": "REVIEWED_PASS"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-30м",
+      "source_pdf_page": 139,
+      "source_card_canonical_json_sha256": "f06ecf60fbb8a1fb42950b6211bb00255ab279139e5626bfc6287063a30f5377",
+      "source_process_text_sha256": "4ce6517d8a77e35d4c8962b1c2feb8ea41cdb5faa42b0d11ce1f7549cecad328",
+      "source_output_row_canonical_json_sha256": "2db4d5356568058ce25cbf4ec53f5841228fbe9c48eb198e324b08c6cdb7b932",
+      "energy_reconciliation_canonical_json_sha256": "58d5ff70a3852ab7930903a918bb4b8544dfb5419fab4388c8a97a167dddaf70",
+      "canonical_code": "SCHOOL2022_54_30M_BEEF_RICE_QUENELLES",
+      "canonical_name": "Кнели из говядины с рисом",
+      "meal_type_code": "main",
+      "source_output_g": "80",
+      "energy_kcal": "184.6",
+      "ingredients": [
+        {
+          "source_label": "говядина 1 категории",
+          "gross_g": "72.3",
+          "net_g": "64",
+          "food_code": "BEEF_CATEGORY_1_RAW"
+        },
+        {
+          "source_label": "крупа рисовая",
+          "gross_g": "7.2",
+          "net_g": "7.2",
+          "food_code": "RICE_GROATS"
+        },
+        {
+          "source_label": "молоко",
+          "gross_g": "8.8",
+          "net_g": "8.8",
+          "food_code": "MILK_2_5"
+        },
+        {
+          "source_label": "масло сливочное",
+          "gross_g": "5.6",
+          "net_g": "5.6",
+          "food_code": "BUTTER_PEASANT_72_5_UNSALTED"
+        },
+        {
+          "source_label": "соль поваренная йодированная",
+          "gross_g": "0.3",
+          "net_g": "0.3",
+          "food_code": "SALT_IODIZED"
+        }
+      ],
+      "process_binding": {
+        "status": "PASS_SELECTED_STEAM_BRANCH_EXACT_TOTAL",
+        "rule": "Паровая ветвь 15–20 минут выбрана для RecipeVersion. Альтернативное припускание 10–12 минут с добавлением воды остаётся provenance-only, потому что вода не входит в количественную таблицу. 5.6 г масла — общий точный расход для массы и формы; split неизвестен."
+      },
+      "consumer_steps_ru": [
+        "Измельчить подготовленную говядину; рис промыть и отварить.",
+        "Смешать мясо с остывшим рисом и дважды измельчить.",
+        "Взбить массу, постепенно добавляя молоко и растопленное сливочное масло; в конце добавить йодированную соль.",
+        "Разделить массу на кнели по 20–25 г, разложить в один ряд в смазанной сливочным маслом форме и готовить на пару 15–20 минут до готовности."
+      ],
+      "quarantined_source_context": [
+        "институциональное размораживание мяса",
+        "институциональное требование к температуре подачи"
+      ],
+      "selection_reason": "Добавляет паровой MAIN и использует уже принятые identities; альтернативная неколичественная водная ветвь изолируется без inference.",
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "184.6"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN"
+      },
+      "household_applicability": "REVIEWED_PASS"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-20м",
+      "source_pdf_page": 130,
+      "source_card_canonical_json_sha256": "e4b7a3846b342992148a4d93ad717ebf9e4a509d205f939ba2951d343f04b2d2",
+      "source_process_text_sha256": "75c5ef24ac0577dd951d5a0814d331b589662222db42812644452ad0a94805b5",
+      "source_output_row_canonical_json_sha256": "99639912f2bc2ceb6f3ee3bf1c7a10e3a1befba1cf09449880a6019c3c01d322",
+      "energy_reconciliation_canonical_json_sha256": "6ec557f063dbc04ced44c91842f5314a3f0fcb56e8b8c0a9d537d7fe25a27128",
+      "canonical_code": "SCHOOL2022_54_20M_BOILED_BEEF",
+      "canonical_name": "Говядина отварная",
+      "meal_type_code": "main",
+      "source_output_g": "80",
+      "energy_kcal": "257.1",
+      "ingredients": [
+        {
+          "source_label": "говядина 1 категории",
+          "gross_g": "146.4",
+          "net_g": "129.6",
+          "food_code": "BEEF_CATEGORY_1_RAW"
+        },
+        {
+          "source_label": "лук репчатый",
+          "gross_g": "3.6",
+          "net_g": "3.2",
+          "food_code": "ONION_BULB_FRESH"
+        },
+        {
+          "source_label": "морковь",
+          "gross_g": "4",
+          "net_g": "3.2",
+          "food_code": "CARROT"
+        },
+        {
+          "source_label": "соль поваренная йодированная",
+          "gross_g": "0.5",
+          "net_g": "0.5",
+          "food_code": "SALT_IODIZED"
+        },
+        {
+          "source_label": "вода",
+          "gross_g": "228.8",
+          "net_g": "228.8",
+          "food_code": "WATER"
+        }
+      ],
+      "process_binding": {
+        "status": "PASS_EXPLICIT_PROCESS_BINDING",
+        "rule": "Все количественные ингредиенты имеют явное место в технологии; удержание до отпуска и serving-temperature остаются provenance-only."
+      },
+      "consumer_steps_ru": [
+        "Подготовить морковь и репчатый лук.",
+        "Подготовленную говядину нарезать кусками, положить в горячую воду и варить при слабом кипении; добавить лук и морковь.",
+        "За 15–20 минут до готовности добавить йодированную соль.",
+        "Готовое мясо нарезать поперёк волокон на порции, залить небольшим количеством бульона и довести до кипения."
+      ],
+      "quarantined_source_context": [
+        "институциональное размораживание мяса",
+        "хранение до отпуска при 50–60 °C",
+        "институциональное требование к температуре подачи"
+      ],
+      "selection_reason": "Простой базовый MAIN с минимальным ingredient union и высокой exclusion/debug ценностью; даёт бытовой fallback без соуса/молока/хлеба.",
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "257.1"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN"
+      },
+      "household_applicability": "REVIEWED_PASS"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-15р",
+      "source_pdf_page": 110,
+      "source_card_canonical_json_sha256": "8aecc6f4b811213b114ddaf321f2cae4a0c13d8ac9eca0b29a8efd6b45aa5590",
+      "source_process_text_sha256": "3e5a6d6e13721dc014a01d88d6c78c2a77575b509c92825dddea28a972a7aff1",
+      "source_output_row_canonical_json_sha256": "4d9f693215173f7068f8739fb609e6c7b3965816a6dc85c1703997b5f984eb76",
+      "energy_reconciliation_canonical_json_sha256": "9571962aa256845ab1bd7ba0872cb13e9d5dfb9680d2cd94023a193e23d0f436",
+      "canonical_code": "SCHOOL2022_54_15R_SALMON_IN_MILK",
+      "canonical_name": "Сёмга, запечённая в молоке",
+      "meal_type_code": "main",
+      "source_output_g": "80",
+      "energy_kcal": "151.7",
+      "ingredients": [
+        {
+          "source_label": "семга (филе)",
+          "gross_g": "72.3",
+          "net_g": "64",
+          "food_code": "ATLANTIC_SALMON_FILLET_RAW"
+        },
+        {
+          "source_label": "молоко",
+          "gross_g": "25.6",
+          "net_g": "25.6",
+          "food_code": "MILK_2_5"
+        },
+        {
+          "source_label": "лук репчатый",
+          "gross_g": "20",
+          "net_g": "16",
+          "food_code": "ONION_BULB_FRESH"
+        },
+        {
+          "source_label": "масло подсолнечное",
+          "gross_g": "5.6",
+          "net_g": "5.6",
+          "food_code": "SUNFLOWER_OIL"
+        },
+        {
+          "source_label": "соль поваренная йодированная",
+          "gross_g": "0.2",
+          "net_g": "0.2",
+          "food_code": "SALT_IODIZED"
+        }
+      ],
+      "process_binding": {
+        "status": "PASS_EXPLICIT_PROCESS_BINDING",
+        "rule": "Все пять количественных ингредиентов явно участвуют в технологии; подсолнечное масло относится к смазыванию формы."
+      },
+      "consumer_steps_ru": [
+        "Подготовить репчатый лук, нашинковать и бланшировать.",
+        "Подготовленное филе сёмги нарезать порционными кусками и уложить на бланшированный лук в форму, смазанную подсолнечным маслом.",
+        "Залить горячим молоком примерно до одной трети высоты рыбы, добавить йодированную соль и запекать 20–25 минут до готовности."
+      ],
+      "quarantined_source_context": [
+        "институциональное размораживание рыбы",
+        "пароконвектомат как институциональная формулировка",
+        "институциональное требование к температуре подачи"
+      ],
+      "selection_reason": "Добавляет новую source-exact identity сёмги и простой способ приготовления; не требует нового calculation authority.",
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "151.7"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN"
+      },
+      "household_applicability": "REVIEWED_PASS"
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-17р",
+      "source_pdf_page": 111,
+      "source_card_canonical_json_sha256": "72bceb85840fd2052941f434096bce1846998802603bcdb03be13b689c686de0",
+      "source_process_text_sha256": "93865a179d77c25a0f43cd23c2953ed74c4afb2189bbcfc069d5b5c3620bec21",
+      "source_output_row_canonical_json_sha256": "9cc4fad35ef60bb7111a0411fcf219f122548cdba76520f6c840c6805a873f4a",
+      "energy_reconciliation_canonical_json_sha256": "3bf4a96d563a97e94c7620d64363382c21b082a6df9056636eec2abfb56774ad",
+      "canonical_code": "SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES",
+      "canonical_name": "Сёмга в томате с овощами",
+      "meal_type_code": "main",
+      "source_output_g": "70",
+      "energy_kcal": "140.3",
+      "ingredients": [
+        {
+          "source_label": "семга (филе)",
+          "gross_g": "63.3",
+          "net_g": "56",
+          "food_code": "ATLANTIC_SALMON_FILLET_RAW"
+        },
+        {
+          "source_label": "морковь",
+          "gross_g": "21.9",
+          "net_g": "17.5",
+          "food_code": "CARROT"
+        },
+        {
+          "source_label": "лук репчатый",
+          "gross_g": "12.2",
+          "net_g": "9.8",
+          "food_code": "ONION_BULB_FRESH"
+        },
+        {
+          "source_label": "томатное пюре",
+          "gross_g": "6.3",
+          "net_g": "6.3",
+          "food_code": "TOMATO_PUREE_PASTE"
+        },
+        {
+          "source_label": "петрушка (корень)",
+          "gross_g": "3.5",
+          "net_g": "2.8",
+          "food_code": "PARSLEY_ROOT_RAW"
+        },
+        {
+          "source_label": "сахар-песок",
+          "gross_g": "1.8",
+          "net_g": "1.8",
+          "food_code": "SUGAR"
+        },
+        {
+          "source_label": "масло подсолнечное",
+          "gross_g": "5.3",
+          "net_g": "5.3",
+          "food_code": "SUNFLOWER_OIL"
+        },
+        {
+          "source_label": "соль поваренная йодированная",
+          "gross_g": "0.2",
+          "net_g": "0.2",
+          "food_code": "SALT_IODIZED"
+        },
+        {
+          "source_label": "вода",
+          "gross_g": "17.5",
+          "net_g": "17.5",
+          "food_code": "WATER"
+        }
+      ],
+      "process_binding": {
+        "status": "PASS_SINGLE_FAT_SAME_CARD_BINDING",
+        "rule": "Подсолнечное масло — единственный жир карточки и связывается с пассерованием и смазыванием формы; 5.3 г — точный общий расход, внутренний split неизвестен. Вода, сахар и соль явно размещены в финальной операции."
+      },
+      "consumer_steps_ru": [
+        "Подготовить корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать вместе с морковью и петрушкой и добавить томатное пюре.",
+        "Подготовленное филе сёмги нарезать порционными кусками и уложить в форму, смазанную подсолнечным маслом.",
+        "Выложить на рыбу пассерованные овощи, добавить воду, сахар и йодированную соль.",
+        "Готовить в духовке 40–45 минут до готовности."
+      ],
+      "quarantined_source_context": [
+        "институциональное размораживание рыбы",
+        "пароконвектомат как институциональная формулировка",
+        "институциональное требование к температуре подачи"
+      ],
+      "selection_reason": "Добавляет овощной томатный вариант сёмги и повторно использует ту же новую fish identity, повышая ценность одной identity-only публикации.",
+      "prepared_authority": {
+        "authority_kind": "PREPARED_OUTPUT_V1",
+        "calculation_version": "RECIPE_PREPARED_OUTPUT_NUTRITION_V1",
+        "available": {
+          "ENERGY_KCAL": "140.3"
+        },
+        "unknown_policy": "all other frozen nutrient codes UNKNOWN"
+      },
+      "household_applicability": "REVIEWED_PASS"
+    }
+  ],
+  "deferred_or_rejected": [
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-19м",
+      "disposition": "DEFER_EXACT_TOTAL_PROCESS_PLACEMENT_AMBIGUITY",
+      "reason": "Технология явно использует 5 г сливочного масла для лука, затем говорит добавить «оставшееся» масло в массу, а после этого ещё требует смазать форму сливочным маслом. Нельзя доказать, что точные 18 г одновременно покрывают все три операции без дополнительного неколичественного расхода."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-31м",
+      "disposition": "DEFER_REQUIRED_PROCESS_PLACEMENT_UNRESOLVED",
+      "reason": "Карточка количественно задаёт йодированную соль, но технология не размещает соль; не добавлять placement по кулинарной догадке."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-12р",
+      "disposition": "DEFER_REQUIRED_PROCESS_PLACEMENT_UNRESOLVED",
+      "reason": "Карточка количественно задаёт йодированную соль, но технология не размещает её."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-17м",
+      "disposition": "DEFER_REQUIRED_PROCESS_PLACEMENT_UNRESOLVED",
+      "reason": "В таблице есть зелень петрушки, но технология её не размещает."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-15м",
+      "disposition": "DEFER_UNQUANTIFIED_PROCESS_INPUTS",
+      "reason": "Технология использует воду и лавровый лист, которых нет в количественной ingredient table."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-22м",
+      "disposition": "DEFER_ZERO_OR_UNQUANTIFIED_PROCESS_INPUT",
+      "reason": "Лавровый лист используется технологией, но source row не даёт пригодной положительной массы; unknown нельзя трактовать как zero."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-23м",
+      "disposition": "REJECT_SOURCE_PROCESS_FAT_CONFLICT",
+      "reason": "Ingredient table содержит подсолнечное масло, а технология смазывает форму сливочным маслом."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-24м",
+      "disposition": "REJECT_SOURCE_PROCESS_FAT_CONFLICT",
+      "reason": "Ingredient table содержит подсолнечное масло, а технология смазывает форму сливочным маслом."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-25м",
+      "disposition": "DEFER_MULTIPLE_FAT_PLACEMENT_UNRESOLVED",
+      "reason": "Карточка содержит сливочное и подсолнечное масло без полного source-resolved placement."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-4т",
+      "disposition": "DEFER_UNQUANTIFIED_PROCESS_WATER",
+      "reason": "Ванилин растворяется в горячей воде, но количественной water row нет."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-6т",
+      "disposition": "DEFER_UNQUANTIFIED_PROCESS_WATER",
+      "reason": "Ванилин растворяется в горячей воде, но количественной water row нет."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-3т",
+      "disposition": "DEFER_REQUIRED_PROCESS_PLACEMENT_UNRESOLVED",
+      "reason": "Сахар количественно задан, но не размещён в технологии."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-21к",
+      "disposition": "DEFER_REQUIRED_PROCESS_PLACEMENT_UNRESOLVED",
+      "reason": "Сахар количественно задан, но не размещён в технологии."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-22к",
+      "disposition": "DEFER_REQUIRED_PROCESS_PLACEMENT_UNRESOLVED",
+      "reason": "Сливочное масло количественно задано, но не размещено в технологии."
+    },
+    {
+      "source_recipe_id": "ru-school2022:recipe:54-7т",
+      "disposition": "OUT_OF_SCOPE_MEDICAL",
+      "reason": "Специализированный медицинский/целиакийный контекст не входит в wellness MVP."
+    }
+  ],
+  "transaction_contract": {
+    "publication": [
+      "per-recipe atomic inactive RecipeVersion + prepared authority",
+      "exact existing rows are zero-write",
+      "partial exact inactive subset is resumable",
+      "conflicting or partial persisted truth fails closed",
+      "publication never activates"
+    ],
+    "activation": [
+      "starts only after all eight exact publications reconcile",
+      "all-inactive batch activates in one caller-owned UoW / one commit",
+      "all-active replay is zero-write",
+      "mixed active/inactive fails closed",
+      "injected activation failure rolls back all staged activation writes"
+    ],
+    "architecture": "reuse merged R3-A/R3-B option B; no new activation architecture"
+  },
+  "future_runtime_acceptance": {
+    "source_package_tamper_rejected": true,
+    "identity_conflicts_rejected": true,
+    "wrong_prepared_energy_rejected": true,
+    "exact_replay_zero_write": true,
+    "deliberate_deactivation_preserved": true,
+    "mixed_state_fail_closed": true,
+    "publication_and_activation_failure_rollback": true,
+    "russian_only_consumer_steps": true,
+    "hard_milk_2_5_breakfast_proof_preserved": true,
+    "additional_main_hard_exclusion_proof_required": false,
+    "main_dependency_reason": "Exact BEEF_CATEGORY_1_RAW exclusion currently leaves 8 of 15 MAIN candidates (capacity 24), so current Planner does not structurally depend on that one FoodIngredient for seven MAIN opportunities. Category-wide meat/fish exclusion is not current Planner authority semantics."
+  }
+}
