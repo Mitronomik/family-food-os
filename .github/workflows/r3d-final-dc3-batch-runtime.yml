@@ -112,7 +112,7 @@ jobs:
           echo "tested revision: $(git rev-parse HEAD)"
           echo 'R3-D exactly 10 identity-only FoodIngredients / no Nutrition, vector or Composition: PASS'
           echo 'R3-D exactly 10 MAIN RecipeVersions + prepared authority: PASS'
-          echo 'R3-D exact card URL/hash/source rows + source partition commitment: PASS'
+          echo 'R3-D exact card URL/hash/source rows + full review contract commitment (ingredients/process binding/partition/household/authority): PASS'
           echo 'R3-D household applicability + medical-context quarantine: PASS'
           echo 'R3-D PREPARED_OUTPUT_V1 / ENERGY_KCAL + 53 UNKNOWN: PASS'
           echo 'R3-D per-recipe atomic inactive publication + resumable convergence: PASS'

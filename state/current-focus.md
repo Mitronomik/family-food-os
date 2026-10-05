@@ -1,6 +1,6 @@
 # Current focus
 
-Updated: 2026-10-04.
+Updated: 2026-10-05.
 
 ## Accepted state
 
@@ -29,11 +29,11 @@ Accepted base:
 
 Runtime/test freeze:
 
-`37b7696e40cc9d4192d6855047efa0d8012feaee`.
+`50934bca489e4c87204b56032dde6a4d0d3d1862`.
 
 Broad verification head:
 
-`74c7188aca47d1b5f5335f8a9d3696a9bcbf1196`.
+`50934bca489e4c87204b56032dde6a4d0d3d1862`.
 
 Status:
 
@@ -57,7 +57,7 @@ Merged R3-D provenance is preserved:
 
 - card-specific URL/hash;
 - exact 12+ source ingredient rows;
-- gate-reviewed full source-row partition commitment;
+- immutable `review_contract_sha256` over ingredients, process binding, source-row partition/branch, household context and prepared authority;
 - intermediates/alternatives are not promoted to RecipeIngredients;
 - household REVIEWED_PASS / specialized_medical_scope=false commitment;
 - dietetic/institutional context remains provenance only.
@@ -81,33 +81,40 @@ Seeded Planner proof:
 
 ## Verification
 
-Pre-PR freeze:
-R3-D #37233411877 — SUCCESS, 24 passed.
+Independent-review correction runtime freeze:
+`50934bca489e4c87204b56032dde6a4d0d3d1862`.
 
-Broad exact runtime verification head `74c7188...`:
+Correction:
 
-- R3-D runtime #37233906070 — SUCCESS;
-- R3-D gate #37233906129 — SUCCESS;
-- Docs #37233906088 — SUCCESS;
-- DC1 #37233906260 — SUCCESS;
-- R1-C #37233906123 — SUCCESS;
-- R2 #37233906152 — SUCCESS;
-- R2-B #37233906041 — SUCCESS;
-- R2-C #37233906077 — SUCCESS;
-- R2-E #37233906172 — SUCCESS;
-- R2-F #37233906090 — SUCCESS;
-- R3-A #37233906113 — SUCCESS;
-- R3-B #37233906086 — SUCCESS;
-- R3-C runtime #37233906052 — SUCCESS;
-- R3-C gate #37233906054 — SUCCESS;
-- Russian methodologies #37233906124 — SUCCESS;
-- Nutrient registry V2 #37233906064 — SUCCESS including backend/launcher regression;
-- Partial nutrition profiles #37233906111 — SUCCESS including backend/launcher regression.
+- `_review_commitment()` now includes frozen `ingredients` and `process_binding`;
+- immutable marker renamed to `review_contract_sha256`;
+- adversarial test proves changing only process-binding status/rule changes the commitment;
+- runtime/test suite = **25 passed**.
+
+Exact-head broad verification is fully green:
+
+- R3-D runtime #37281889334 — SUCCESS;
+- R3-D gate #37281889429 — SUCCESS;
+- Docs #37281889396 — SUCCESS;
+- DC1 #37281889497 — SUCCESS;
+- R1-C #37281889551 — SUCCESS;
+- R2 #37281889328 — SUCCESS;
+- R2-B #37281889455 — SUCCESS;
+- R2-C #37281889320 — SUCCESS;
+- R2-E #37281889366 — SUCCESS;
+- R2-F #37281889474 — SUCCESS;
+- R3-A #37281889375 — SUCCESS;
+- R3-B #37281889569 — SUCCESS;
+- R3-C runtime #37281889390 — SUCCESS;
+- R3-C gate #37281889436 — SUCCESS;
+- Russian methodologies #37281889405 — SUCCESS;
+- Nutrient registry V2 #37281889714 — SUCCESS including backend/launcher regression;
+- Partial nutrition profiles #37281889327 — SUCCESS including backend/launcher regression.
 
 Migration remains 0042; no 0043. `AI_ENABLED=false`.
 
-Post-freeze repository changes are verification workflows/state only; runtime/test
-bytes remain identical to `37b7696...`.
+The next commit is metadata/workflow/state only; runtime/test bytes remain frozen at
+`50934bca...`.
 
 ## Sequence decision
 

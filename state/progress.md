@@ -1,44 +1,46 @@
 # Progress
 
-## R3-D final DC3 runtime — review-ready — 2026-10-04
+## R3-D final DC3 runtime — corrected review-ready — 2026-10-05
 
 Accepted base:
 `a6c1a0bd203e0ec21fd73eb4107282c2b144ff9a` (merged PR #158).
 
 Issue #159 / PR #160 / branch `feat/r3d-final-dc3-batch-runtime`.
 
-Runtime/test freeze:
-`37b7696e40cc9d4192d6855047efa0d8012feaee`.
+Corrected runtime/test freeze and broad verification head:
+`50934bca489e4c87204b56032dde6a4d0d3d1862`.
 
-Broad verification head:
-`74c7188aca47d1b5f5335f8a9d3696a9bcbf1196`.
+Independent review blocker closed:
 
-Outcome:
+- review commitment now includes frozen RecipeIngredient rows;
+- review commitment now includes exact frozen `process_binding`;
+- marker renamed from `source_partition_sha256` to `review_contract_sha256`;
+- commitment also retains intermediates, alternatives, branch, household/medical
+  context and prepared authority;
+- adversarial test proves process-binding-only status/rule drift changes the hash.
+
+Outcome remains:
 
 - 10 identity-only FoodIngredients; zero Nutrition/Vector/Composition authority;
 - 10 SOURCE_VERIFIED MAIN RecipeVersions;
-- exact MR card URL/hash/source rows + partition commitment;
-- household REVIEWED_PASS / medical=false provenance commitment;
+- exact MR card URL/hash/source rows;
 - PREPARED_OUTPUT_V1 + exact ENERGY_KCAL / 53 UNKNOWN;
 - per-recipe atomic/resumable publication;
 - one-UoW batch activation / replay / mixed-state / rollback proof;
-- seeded exact-energy 51 / MAIN 33;
+- exact-energy 51 / MAIN 33;
 - beef 14 / fish 9 / chicken 4 / meat-free 6;
 - exact-beef unaffected 19 / capacity 57;
 - hard MILK_2_5 breakfast path remains 3 / capacity 9;
 - migration 0042; AI disabled.
 
-Verification:
+Exact corrected verification:
 
-- pre-PR R3-D #37233411877 SUCCESS — 24 passed;
-- exact broad head R3-D #37233906070 SUCCESS;
-- gate #37233906129 / Docs #37233906088 / DC1 #37233906260 SUCCESS;
+- R3-D #37281889334 SUCCESS — **25 passed**;
+- gate #37281889429 / Docs #37281889396 / DC1 #37281889497 SUCCESS;
 - R1-C/R2/R2-B/R2-C/R2-E/R2-F/R3-A/R3-B/R3-C regressions SUCCESS;
-- Russian methodologies #37233906124 SUCCESS;
-- Nutrient registry #37233906064 SUCCESS with full backend/launcher regression;
-- Partial nutrition #37233906111 SUCCESS with full backend/launcher regression.
-
-After runtime freeze, only verification workflow and state bytes changed.
+- Russian methodologies #37281889405 SUCCESS;
+- Nutrient registry #37281889714 SUCCESS with full backend/launcher regression;
+- Partial nutrition #37281889327 SUCCESS with full backend/launcher regression.
 
 Status: `READY_FOR_FINAL_REVIEW`.
 

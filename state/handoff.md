@@ -1,17 +1,14 @@
 # Handoff
 
-## R3-D final DC3 runtime — review-ready — 2026-10-04
+## R3-D final DC3 runtime — corrected review-ready — 2026-10-05
 
 Accepted main:
 `a6c1a0bd203e0ec21fd73eb4107282c2b144ff9a` (merged PR #158).
 
 Issue #159 / PR #160 / branch `feat/r3d-final-dc3-batch-runtime`.
 
-Runtime/test freeze:
-`37b7696e40cc9d4192d6855047efa0d8012feaee`.
-
-Broad verification head:
-`74c7188aca47d1b5f5335f8a9d3696a9bcbf1196`.
+Corrected runtime/test freeze + broad verification:
+`50934bca489e4c87204b56032dde6a4d0d3d1862`.
 
 Read first:
 
@@ -20,43 +17,35 @@ Read first:
 - `backend/app/seed/r3d_final_dc3_batch.py`;
 - `backend/app/tests/test_r3d_final_dc3_batch.py`.
 
-Delivered exactly the frozen ten-recipe batch and ten identity-only foods.
-No shared-service/schema/migration/Planner/Nutrition-authority change.
+Independent-review correction:
 
-Runtime semantics:
+- immutable RecipeVersion `change_note` now stores
+  `review_contract_sha256=<hash>`;
+- the hash covers exact frozen ingredients + `process_binding` + intermediates
+  + alternatives + branch selection + household/medical context + prepared authority;
+- changing only process-binding `status` or `rule` changes the hash (adversarial proof);
+- prior misleading `source_partition_sha256` marker is no longer used.
 
-- per-recipe atomic inactive publication;
-- exact replay zero-write;
-- partial exact inactive prefix resumable;
-- one-UoW all-inactive activation;
-- all-active replay zero-write;
-- mixed state fail-closed;
-- activation failure rollback.
+All previous runtime semantics and catalogue result remain unchanged:
 
-Source/provenance:
-
-- MR bundle and gate artifacts hash-pinned;
-- exact card URLs/card hashes/source rows;
-- intermediates and alternatives remain non-ingredient provenance;
-- immutable RecipeVersion change_note carries card SHA + reviewed partition commitment;
-- household/medical-context review committed without new schema.
-
-Verified result in seeded runtime:
-
+- 10 identity-only foods / no Nutrition-Vector-Composition authority;
+- 10 MAIN RecipeVersions;
 - 51 exact-energy / 33 MAIN;
 - beef 14 / fish 9 / chicken 4 / meat-free 6;
 - exact-beef unaffected 19 / capacity 57;
-- hard MILK breakfast closure remains 3 / capacity 9.
+- hard MILK breakfast closure 3 / capacity 9;
+- per-recipe atomic/resumable publication;
+- batch one-UoW activation / replay / mixed-state / rollback.
 
-Exact verification on `74c7188...` is fully green:
-R3-D, R3-D gate, Docs, DC1, all affected R1/R2/R3 regressions, Russian
-methodologies, plus full backend/launcher regression in Nutrient registry and
-Partial nutrition profiles.
+Exact corrected freeze verification is fully green:
+
+- R3-D #37281889334 — SUCCESS, **25 passed**;
+- Gate #37281889429 / Docs #37281889396 / DC1 #37281889497 — SUCCESS;
+- affected R1/R2/R3 workflows — SUCCESS;
+- Nutrient registry #37281889714 — SUCCESS including backend/launcher;
+- Partial nutrition #37281889327 — SUCCESS including backend/launcher.
 
 Status: `READY_FOR_FINAL_REVIEW`.
-
-Only state/PR metadata may change after the runtime freeze unless independent
-review explicitly reopens runtime behavior.
 
 After merge:
 `post-runtime reconciliation → DC4`.
