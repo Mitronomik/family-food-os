@@ -1,5 +1,49 @@
 # Handoff
 
+## Post-R3-D reconciliation — 2026-10-05
+
+Accepted main:
+
+`bbab6a0899c74f995c988455fe57d8d1f63d79af`
+(merged PR #160 — R3-D final DC3 runtime).
+
+DATA-CORPUS-V1 / DC3 is COMPLETE.
+
+Current repository truth:
+
+- 51 active exact-energy RecipeVersions;
+- 17 breakfast / 33 MAIN / 1 sandwich;
+- MAIN: beef 14 / fish 9 / chicken 4 / meat-free 6;
+- exact-beef unaffected MAIN 19 / capacity 57;
+- hard exact `MILK_2_5` breakfast unaffected set 3 / capacity 9;
+- migration head 0042 / no 0043;
+- AI disabled;
+- R3-D changed catalogue truth, not Planner algorithm or runtime architecture.
+
+Read before continuation:
+
+- `AGENTS.md`;
+- `state/current-focus.md`;
+- `docs/family-food/master-roadmap.md`;
+- `docs/family-food/master-roadmap-addendum-2026-09-19-data-corpus.md`;
+- `docs/family-food/data-corpus-v1.md`;
+- relevant Gate1/Planner contracts.
+
+Next bounded product operation after this reconciliation is reviewed/merged:
+
+**DC4 — corpus readiness audit + Gate1 consumption.**
+
+DC4 must consume ordinary accepted production catalogue truth. It must not
+silently become R3-E/R3-F or introduce gate-only authoritative data.
+
+After successful DC4 evidence:
+
+`Gate1-CLOSE → PR9 Shopping Engine`.
+
+Do not start PR9, Prep/PDF/PWA, Retail, AI or shared-deployment work early.
+
+---
+
 ## R3-D final DC3 runtime — corrected review-ready — 2026-10-05
 
 Accepted main:
