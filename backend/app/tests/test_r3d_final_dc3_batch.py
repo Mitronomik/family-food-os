@@ -1,4 +1,5 @@
 import re
+from copy import deepcopy
 import shutil
 import sqlite3
 from collections import Counter
@@ -291,7 +292,7 @@ def test_r3d_fresh_publication_activation_and_authority(database):
             assert f"card_sha256={expected['source_card_raw_sha256']}" in (
                 detail.version.change_note
             )
-            assert f"source_partition_sha256={_review_commitment(expected)}" in (
+            assert f"review_contract_sha256={_review_commitment(expected)}" in (
                 detail.version.change_note
             )
             assert "household=REVIEWED_PASS" in detail.version.change_note
@@ -703,6 +704,20 @@ def test_r3d_hash_pinned_mr_bundle_rejects_tamper(tmp_path):
         _load_contract(bundle_path=bundle)
 
 
+def test_r3d_review_commitment_changes_on_process_binding_drift():
+    frozen, _, _ = _load_contract()
+    original = frozen["selected"][3]
+    original_commitment = _review_commitment(original)
+
+    changed_status = deepcopy(original)
+    changed_status["process_binding"]["status"] += "_DRIFT"
+    assert _review_commitment(changed_status) != original_commitment
+
+    changed_rule = deepcopy(original)
+    changed_rule["process_binding"]["rule"] += " DRIFT"
+    assert _review_commitment(changed_rule) != original_commitment
+
+
 def test_r3d_russian_steps_household_and_branch_commitments(database):
     frozen, _, _ = _load_contract()
     publish_r3d_final_dc3_batch(database)
@@ -726,7 +741,7 @@ def test_r3d_russian_steps_household_and_branch_commitments(database):
             assert expected["household_rationale"]
             assert expected["quarantined_source_context"]
             assert "household=REVIEWED_PASS" in detail.version.change_note
-            assert f"source_partition_sha256={_review_commitment(expected)}" in (
+            assert f"review_contract_sha256={_review_commitment(expected)}" in (
                 detail.version.change_note
             )
 

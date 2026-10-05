@@ -228,9 +228,11 @@ def _review_commitment(row: dict[str, Any]) -> str:
         {
             "source_card_raw_sha256": row["source_card_raw_sha256"],
             "source_page_url": row["source_page_url"],
+            "ingredients": row["ingredients"],
             "source_intermediates": row.get("source_intermediates", []),
             "source_alternative_rows": row.get("source_alternative_rows", []),
             "source_branch_selection": row.get("source_branch_selection"),
+            "process_binding": row["process_binding"],
             "household_applicability": row["household_applicability"],
             "specialized_medical_scope": row["specialized_medical_scope"],
             "household_rationale": row["household_rationale"],
@@ -571,7 +573,7 @@ def _change_note(row: dict[str, Any]) -> str:
     return (
         "R3-D merged Gate #158; household=REVIEWED_PASS; medical=false; "
         f"card_sha256={row['source_card_raw_sha256']}; "
-        f"source_partition_sha256={commitment}; card={row['source_card_code']}."
+        f"review_contract_sha256={commitment}; card={row['source_card_code']}."
     )
 
 
