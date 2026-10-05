@@ -1,5 +1,61 @@
 # Handoff
 
+## R3-D final DC3 runtime — corrected review-ready — 2026-10-05
+
+Accepted main:
+`a6c1a0bd203e0ec21fd73eb4107282c2b144ff9a` (merged PR #158).
+
+Issue #159 / PR #160 / branch `feat/r3d-final-dc3-batch-runtime`.
+
+Corrected runtime/test freeze + broad verification:
+`50934bca489e4c87204b56032dde6a4d0d3d1862`.
+
+Read first:
+
+- `docs/family-food/r3d-final-dc3-batch-gate.md`;
+- `data/curation/r3d-final-dc3-batch-gate/frozen-batch.json`;
+- `backend/app/seed/r3d_final_dc3_batch.py`;
+- `backend/app/tests/test_r3d_final_dc3_batch.py`.
+
+Independent-review correction:
+
+- immutable RecipeVersion `change_note` now stores
+  `review_contract_sha256=<hash>`;
+- the hash covers exact frozen ingredients + `process_binding` + intermediates
+  + alternatives + branch selection + household/medical context + prepared authority;
+- changing only process-binding `status` or `rule` changes the hash (adversarial proof);
+- prior misleading `source_partition_sha256` marker is no longer used.
+
+All previous runtime semantics and catalogue result remain unchanged:
+
+- 10 identity-only foods / no Nutrition-Vector-Composition authority;
+- 10 MAIN RecipeVersions;
+- 51 exact-energy / 33 MAIN;
+- beef 14 / fish 9 / chicken 4 / meat-free 6;
+- exact-beef unaffected 19 / capacity 57;
+- hard MILK breakfast closure 3 / capacity 9;
+- per-recipe atomic/resumable publication;
+- batch one-UoW activation / replay / mixed-state / rollback.
+
+Exact corrected freeze verification is fully green:
+
+- R3-D #37281889334 — SUCCESS, **25 passed**;
+- Gate #37281889429 / Docs #37281889396 / DC1 #37281889497 — SUCCESS;
+- affected R1/R2/R3 workflows — SUCCESS;
+- Nutrient registry #37281889714 — SUCCESS including backend/launcher;
+- Partial nutrition #37281889327 — SUCCESS including backend/launcher.
+
+Status: `READY_FOR_FINAL_REVIEW`.
+
+After merge:
+`post-runtime reconciliation → DC4`.
+
+Do not merge autonomously. Do not create R3-E/R3-F.
+
+---
+
+
+
 ## R3-D final DC3 Contract Gate — review-ready — 2026-10-04
 
 Accepted main:
