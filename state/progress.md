@@ -1,5 +1,33 @@
 # Progress
 
+## R3-D final DC3 runtime — MERGED / DC3 COMPLETE — 2026-10-05
+
+PR #160 merged into `main` at
+`bbab6a0899c74f995c988455fe57d8d1f63d79af`.
+
+Accepted result:
+
+- R3-D runtime and final independent-review correction are accepted;
+- 51 active exact-energy RecipeVersions;
+- 17 breakfast / 33 MAIN / 1 sandwich;
+- MAIN distribution: beef 14 / fish 9 / chicken 4 / meat-free 6;
+- exact-beef unaffected MAIN 19 / capacity 57;
+- hard exact `MILK_2_5` breakfast unaffected set 3 / capacity 9;
+- migration remains 0042; no 0043;
+- `AI_ENABLED=false`;
+- no Planner algorithm/role/scoring/repetition change;
+- no new Nutrition/Vector/Composition authority for R3-D identity-only foods.
+
+DATA-CORPUS-V1 / DC3 is COMPLETE.
+
+Next sequence:
+
+`post-runtime reconciliation → DC4 corpus readiness audit + Gate1 consumption → Gate1-CLOSE → PR9 Shopping Engine`.
+
+Do not create R3-E/R3-F merely to increase catalogue size.
+
+---
+
 ## R3-D final DC3 runtime — corrected review-ready — 2026-10-05
 
 Accepted base:
