@@ -31,7 +31,10 @@ downstream PR bases, matching the already accepted R3-D gate pattern.
 It must be independently reviewed and merged before DC4 execution begins.
 
 After merge, the next bounded operation is a separate DC4 execution/evidence PR.
-That execution may audit/test the current corpus and Gate1 fixtures but may not
+That execution must dynamically enumerate every active current production
+RecipeVersion for corpus-wide audit, and separately reconcile the
+Planner-eligible exact-energy subset to 51 (17 breakfast / 33 MAIN / 1 sandwich).
+It may audit/test Gate1 fixtures but may not
 silently publish new FoodIngredient/RecipeVersion/Nutrition authority, change
 Planner rules, consume migration 0043 or start PR9.
 
