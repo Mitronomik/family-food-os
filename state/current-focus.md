@@ -4,6 +4,56 @@ Updated: 2026-10-06.
 
 ## Accepted state
 
+PR #163 / DC4 Contract Gate is MERGED into `main` at:
+
+`0ce316009eb6223d05756f175f388869ae8debd8`.
+
+DATA-CORPUS-V1 / DC3 is COMPLETE. DC4 contract is accepted.
+
+## Current bounded operation
+
+**DC4 execution/evidence — corpus readiness audit + Gate1 consumption.**
+
+Issue: `#164`.
+
+Branch:
+
+`feat/dc4-corpus-readiness`.
+
+Accepted base:
+
+`0ce316009eb6223d05756f175f388869ae8debd8`.
+
+Scope:
+
+- deterministic full-active catalogue audit;
+- separate Planner-eligible exact-energy reconciliation to 51 = 17/33/1;
+- exact three frozen Gate1 fixtures;
+- exact fail-closed MILK_2_5 + EGG breakfast case;
+- machine-readable summary + human-readable report;
+- focused tests / dedicated CI;
+- state synchronization.
+
+No production data publication, migration 0043, Planner redesign, Gate1-CLOSE
+or PR9 scope is authorized.
+
+## Sequence decision
+
+```text
+DC4 execution/evidence             CURRENT
+→ Gate1-CLOSE
+→ PR9 Shopping Engine
+```
+
+If DC4 discovers a material catalogue blocker, record it truthfully and route it
+to a separate bounded correction. Do not repair production truth in this PR.
+
+---
+
+Updated: 2026-10-06.
+
+## Accepted state
+
 PR #161 post-R3-D reconciliation is MERGED into `main` at:
 
 `d3fc30d7eb677d3dc7aec8f6cb219fffa22762e4`.
