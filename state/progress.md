@@ -20,6 +20,15 @@ Servings, hard exclusions, heterogeneous meal patterns, deterministic trace/repl
 bounded infeasibility and explicit corpus authority/provenance/Russian-language
 checks.
 
+The review correction expands the audit from fixture-consumed recipes to the
+full 51-recipe active production corpus and freezes the exact existing
+`GATE1_ROLE_SHAPES`-based 1/2/3-member fixtures, including exact hard exclusions,
+week shape, shared participation and expected outcomes.
+
+One verification-only CI compatibility change adds a downstream guard to the
+historical R3-D runtime changed-path allowlist. R3-D focused tests, gate
+reconciliation, migration/AI checks and whitespace verification remain active.
+
 No runtime/data publication/schema/migration/Planner redesign/PR9 scope belongs
 to this operation.
 
