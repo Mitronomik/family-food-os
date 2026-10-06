@@ -1,5 +1,28 @@
 # Progress
 
+## DC4 execution/evidence — ACTIVE — 2026-10-06
+
+Accepted base:
+`0ce316009eb6223d05756f175f388869ae8debd8` (merged PR #163).
+
+Issue #164 / branch `feat/dc4-corpus-readiness`.
+
+Initial execution harness added:
+
+- `scripts/audit_dc4_corpus_readiness.py`;
+- `backend/app/tests/test_dc4_corpus_readiness.py`;
+- `.github/workflows/dc4-corpus-readiness.yml`.
+
+The audit dynamically enumerates the full active catalogue, separately reconciles
+the Planner-eligible exact-energy subset to 51 = 17/33/1, executes the three
+frozen Gate1 fixtures and the exact MILK_2_5 + EGG fail-closed case.
+
+Next within this same bounded operation: use CI output to freeze the actual
+machine-readable readiness summary and human-readable DC4 report. A BLOCKED
+result is evidence, not authorization for data repair.
+
+---
+
 ## DC4 Contract Gate — ACTIVE — 2026-10-06
 
 Accepted base:
