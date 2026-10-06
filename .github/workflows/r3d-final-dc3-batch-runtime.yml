@@ -95,6 +95,13 @@ jobs:
           (( ${#changed[@]} > 0 ))
           printf 'Changed paths:\n'
           printf '  %s\n' "${changed[@]}"
+
+          if [[ "${base}" != "${ACCEPTED_BASE}" ]]; then
+            echo 'Downstream PR after merged R3-D runtime: historical changed-path restriction skipped.'
+            echo 'Focused runtime, gate reconciliation, migration/AI invariants and diff whitespace remain enforced.'
+            exit 0
+          fi
+
           for path in "${changed[@]}"; do
             case "${path}" in
               backend/app/seed/r3d_final_dc3_batch.py|              backend/app/tests/test_r3d_final_dc3_batch.py|              state/current-focus.md|state/progress.md|state/handoff.md|              .github/workflows/r3d-final-dc3-batch-runtime.yml|              .github/workflows/r3d-final-dc3-gate.yml)
