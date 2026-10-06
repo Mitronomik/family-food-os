@@ -21,7 +21,9 @@ bounded infeasibility and explicit corpus authority/provenance/Russian-language
 checks.
 
 The review correction expands the audit from fixture-consumed recipes to the
-full 51-recipe active production corpus and freezes the exact existing
+full dynamically enumerated active production catalogue. Separately, the
+Planner-eligible exact-energy subset must reconcile to 51 (17 breakfast /
+33 MAIN / 1 sandwich). The correction also freezes the exact existing
 `GATE1_ROLE_SHAPES`-based 1/2/3-member fixtures, including exact hard exclusions,
 week shape, shared participation and expected outcomes.
 
