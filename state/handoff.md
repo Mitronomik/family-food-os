@@ -23,8 +23,12 @@ Current branch:
 
 `docs/dc4-gate1-consumption-contract`.
 
-This PR is docs/state only. It must be independently reviewed and merged before
-DC4 execution begins.
+This PR is docs/state plus one verification-only R3-D runtime workflow
+compatibility correction. The workflow still executes its focused runtime and
+invariant checks; only the historical changed-path restriction is skipped for
+downstream PR bases, matching the already accepted R3-D gate pattern.
+
+It must be independently reviewed and merged before DC4 execution begins.
 
 After merge, the next bounded operation is a separate DC4 execution/evidence PR.
 That execution may audit/test the current corpus and Gate1 fixtures but may not
