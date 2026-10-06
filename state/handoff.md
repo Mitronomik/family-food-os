@@ -1,5 +1,49 @@
 # Handoff
 
+## DC4 Contract Gate — 2026-10-06
+
+Accepted main:
+
+`d3fc30d7eb677d3dc7aec8f6cb219fffa22762e4`
+(merged PR #161).
+
+Current operation: Issue #162, DC4 corpus readiness audit + Gate1 consumption
+contract.
+
+Read first:
+
+- `AGENTS.md`;
+- `state/current-focus.md`;
+- `docs/family-food/master-roadmap.md`;
+- `docs/family-food/master-roadmap-addendum-2026-09-19-data-corpus.md`;
+- `docs/family-food/data-corpus-v1.md`;
+- `docs/family-food/dc4-corpus-readiness-contract.md`.
+
+Current branch:
+
+`docs/dc4-gate1-consumption-contract`.
+
+This PR is docs/state plus one verification-only R3-D runtime workflow
+compatibility correction. The workflow still executes its focused runtime and
+invariant checks; only the historical changed-path restriction is skipped for
+downstream PR bases, matching the already accepted R3-D gate pattern.
+
+It must be independently reviewed and merged before DC4 execution begins.
+
+After merge, the next bounded operation is a separate DC4 execution/evidence PR.
+That execution must dynamically enumerate every active current production
+RecipeVersion for corpus-wide audit, and separately reconcile the
+Planner-eligible exact-energy subset to 51 (17 breakfast / 33 MAIN / 1 sandwich).
+It may audit/test Gate1 fixtures but may not
+silently publish new FoodIngredient/RecipeVersion/Nutrition authority, change
+Planner rules, consume migration 0043 or start PR9.
+
+Required sequence:
+
+`DC4 execution → Gate1-CLOSE → PR9 Shopping Engine`.
+
+---
+
 ## Post-R3-D reconciliation — 2026-10-05
 
 Accepted main:

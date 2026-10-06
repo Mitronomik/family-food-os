@@ -1,5 +1,43 @@
 # Progress
 
+## DC4 Contract Gate — ACTIVE — 2026-10-06
+
+Accepted base:
+`d3fc30d7eb677d3dc7aec8f6cb219fffa22762e4` (merged PR #161).
+
+Issue #162 / branch `docs/dc4-gate1-consumption-contract`.
+
+Goal: freeze the corpus-wide readiness audit and Gate1 consumption contract
+before executing DC4.
+
+Contract:
+
+`docs/family-food/dc4-corpus-readiness-contract.md`.
+
+The contract requires ordinary accepted production catalogue consumption,
+three materially different repository-backed Household fixtures, individualized
+Servings, hard exclusions, heterogeneous meal patterns, deterministic trace/replay,
+bounded infeasibility and explicit corpus authority/provenance/Russian-language
+checks.
+
+The review correction expands the audit from fixture-consumed recipes to the
+full dynamically enumerated active production catalogue. Separately, the
+Planner-eligible exact-energy subset must reconcile to 51 (17 breakfast /
+33 MAIN / 1 sandwich). The correction also freezes the exact existing
+`GATE1_ROLE_SHAPES`-based 1/2/3-member fixtures, including exact hard exclusions,
+week shape, shared participation and expected outcomes.
+
+One verification-only CI compatibility change adds a downstream guard to the
+historical R3-D runtime changed-path allowlist. R3-D focused tests, gate
+reconciliation, migration/AI checks and whitespace verification remain active.
+
+No runtime/data publication/schema/migration/Planner redesign/PR9 scope belongs
+to this operation.
+
+After independent review/merge: one separate DC4 execution/evidence PR.
+
+---
+
 ## R3-D final DC3 runtime — MERGED / DC3 COMPLETE — 2026-10-05
 
 PR #160 merged into `main` at

@@ -1,5 +1,61 @@
 # Current focus
 
+Updated: 2026-10-06.
+
+## Accepted state
+
+PR #161 post-R3-D reconciliation is MERGED into `main` at:
+
+`d3fc30d7eb677d3dc7aec8f6cb219fffa22762e4`.
+
+DATA-CORPUS-V1 / DC3 is COMPLETE.
+
+## Current bounded operation
+
+**DC4 Contract Gate — corpus readiness audit + Gate1 consumption.**
+
+Issue: `#162`.
+
+Branch:
+
+`docs/dc4-gate1-consumption-contract`.
+
+Accepted base:
+
+`d3fc30d7eb677d3dc7aec8f6cb219fffa22762e4`.
+
+Canonical contract target:
+
+`docs/family-food/dc4-corpus-readiness-contract.md`.
+
+Scope is docs/state plus one verification-only CI compatibility correction. This
+operation freezes the two-inventory audit model (dynamic full active catalogue +
+51-row Planner-eligible exact-energy baseline), exact Gate1 fixture matrix,
+PASS/BLOCKED/DEFERRED rules, adversarial acceptance and verification for the
+later DC4 execution.
+
+The CI correction adds only the same downstream changed-path guard already used
+by the R3-D gate workflow; focused R3-D verification remains active. No runtime,
+data publication, schema, migration, Planner-algorithm, API or UI change is
+authorized in this contract PR.
+
+## Sequence decision
+
+```text
+DC3 COMPLETE
+→ DC4 contract                    CURRENT
+→ DC4 execution/evidence
+→ Gate1-CLOSE
+→ PR9 Shopping Engine
+```
+
+Do not create R3-E/R3-F merely to increase catalogue size.
+
+Do not start DC4 execution before this contract is independently reviewed and
+merged. Do not start Gate1-CLOSE or PR9 automatically.
+
+---
+
 Updated: 2026-10-05.
 
 ## Accepted state
