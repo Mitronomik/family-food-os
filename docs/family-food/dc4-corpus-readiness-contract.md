@@ -50,25 +50,38 @@ DC4 owns:
 DC4 does not own production data repair. Any repair must be a separate bounded
 operation after the audit identifies the exact defect.
 
-## 4. Authoritative corpus audit
+## 4. Layer A — corpus-wide authoritative readiness audit
 
-The execution must inspect current active production RecipeVersions admitted by
-the current Planner contract and establish, for the Gate1-consumed corpus:
+DC4 first audits the **entire accepted active production corpus**. Gate1 fixture
+selection is a later consumer layer and cannot reduce this audit surface.
 
-### 4.1 Recipe identity and publication
+The frozen post-R3-D baseline is 51 active exact-energy production
+RecipeVersions. The DC4 execution must enumerate the complete active production
+RecipeVersion set from repository/runtime truth and reconcile it with that
+accepted baseline. If the active set is not exactly the accepted 51, the
+difference must receive an explicit PASS/BLOCKED disposition before proceeding;
+the implementation must not silently redefine the corpus.
 
-For every consumed RecipeVersion:
+Every active production RecipeVersion in this corpus-wide layer is audited for
+all requirements in §§4.1–4.5, whether or not a Gate1 fixture later selects it.
+
+### 4.1 Recipe identity and publication — all 51
+
+For every active production RecipeVersion:
 
 - active current version exists;
 - immutable RecipeVersion identity is stable;
 - source identity/version is reviewable;
 - verification/publication status is accepted;
 - Russian consumer display name and steps are present where required;
-- no gate-only RecipeVersion is created.
+- no gate-only RecipeVersion exists or is created.
 
-### 4.2 FoodIngredient resolution
+One defective active RecipeVersion is a corpus-wide BLOCKED item even when no
+Gate1 fixture selects it.
 
-For every required RecipeIngredient:
+### 4.2 FoodIngredient resolution — all 51
+
+For every required RecipeIngredient of every active production RecipeVersion:
 
 - a canonical FoodIngredient exists;
 - the mapping is exact enough for current food/form semantics;
@@ -76,13 +89,16 @@ For every required RecipeIngredient:
 - no required unresolved ingredient is hidden as optional/default;
 - no RetailSKU identity is used as Planner food truth.
 
-The Gate1-consumed set must have 100% required FoodIngredient resolution.
+The **entire active production corpus** must have 100% required FoodIngredient
+resolution. Gate1-selected recipes are not a substitute for this corpus-wide
+requirement.
 
-### 4.3 Nutrition / prepared-output authority
+### 4.3 Nutrition / prepared-output authority — all 51
 
-For every consumed Planner candidate:
+For every active production RecipeVersion:
 
-- the exact authority path required by current Planner admission exists;
+- the exact authority path required by its current publication/Planner-admission
+  contract exists;
 - exact values remain exact;
 - estimates remain estimates;
 - UNKNOWN remains UNKNOWN;
@@ -90,84 +106,183 @@ For every consumed Planner candidate:
 - source/provenance/version are reviewable;
 - no new Nutrition authority is introduced by DC4.
 
-Prepared-output-only recipes may be used only according to the current accepted
-Planner/Nutrition contract. DC4 must not infer unavailable macros/micronutrients.
+Prepared-output-only recipes may be accepted only according to the current
+accepted Planner/Nutrition contract. DC4 must not infer unavailable
+macros/micronutrients.
 
-### 4.4 Provenance and rights
+A recipe may be outside a particular fixture's selected meals and still BLOCK
+corpus readiness when its accepted active production authority is defective.
 
-The execution must report whether each consumed production family has reviewable:
+### 4.4 Provenance and rights — all 51
+
+For every active production RecipeVersion, the execution must report whether its
+production family has reviewable:
 
 - source;
 - source URL/reference or durable source identity;
 - source/version/date where applicable;
-- retained hash/commitment where current publication contract requires it;
+- retained hash/commitment where the current publication contract requires it;
 - rights/use disposition sufficient for the already accepted production record.
 
-DC4 does not reopen already accepted source policy without evidence of a concrete
-conflict, but missing durable provenance is a readiness blocker.
+DC4 does not reopen accepted source policy without evidence of a concrete
+conflict, but missing durable provenance on any active production RecipeVersion
+is a readiness blocker.
 
-### 4.5 Russian-language readiness
+### 4.5 Russian-language readiness — all 51
 
-Consumer-facing recipe/meal/program text used by the fixture must satisfy the
-current Russian-language contract.
+Consumer-facing recipe text for every active production RecipeVersion must
+satisfy the current Russian-language contract.
 
 Internal codes may appear in audit output, but must not be the only user-facing
-representation.
+representation. A Russian-readiness defect cannot be hidden by omitting that
+RecipeVersion from the Gate1 fixture weeks.
 
-## 5. Gate1 fixture matrix
+## 5. Layer B — exact Gate1 consumption fixture matrix
 
-The execution must use at least three materially different repository-backed
-Household fixtures. They must consume current public application/service/repository
-boundaries and ordinary accepted catalogue truth.
+Only after Layer A has enumerated and audited the full active corpus does DC4
+consume ordinary accepted production truth through Gate1 fixtures.
 
-### Fixture A — General family
+The fixture **schedule identity is frozen to the existing repository
+`scripts/gate1a_fixture_spec.py::GATE1_ROLE_SHAPES`**. DC4 does not invent a new
+fixture topology merely because the catalogue has changed.
 
-Minimum shape:
+Common fixture inputs:
 
-- three HouseholdMembers;
-- materially different serving needs;
-- ordinary mixed meal pattern;
-- no artificial exclusions introduced only to simplify selection.
+- timezone: `Europe/Moscow`;
+- week: Monday `2026-09-14` through Sunday `2026-09-20`;
+- every listed daily role repeats on all seven days;
+- member meal-pattern source: `CUSTOM`;
+- member profile foundation follows the existing Gate1 builder:
+  `birth_date=1990-01-<member index>`, alternating female/male by index,
+  `height_cm=170`, `weight_kg=65`, `activity_level=active`,
+  `goal=maintain`;
+- energy shares: BREAKFAST `0.30`, LUNCH `0.35`, DINNER `0.25`;
+- same role/date is one shared Household meal event containing exactly the
+  members whose frozen schedule includes that role;
+- source kind for automatically generated meals remains the current authorized
+  Planner source kind; no synthetic RecipeVersion is allowed;
+- expected baseline outcome for all three fixtures is **PlannerSuccess with a
+  persisted complete seven-day MealPlan**. Any bounded infeasibility in one of
+  these three mandatory fixtures is a DC4 BLOCKER.
 
-Expected result:
+### Fixture 1 — one-member dinner-only
 
-- complete seven-day authoritative plan;
-- individualized Servings;
-- persisted MealPlan/history;
-- deterministic trace.
+Exact shape:
 
-### Fixture B — Hard exclusion / resilience
+```text
+Household members: 1
+Member 1 roles: DINNER
+Member 1 selection: CUSTOM
+Member 1 hard exclusions: none
+Daily shared events:
+  DINNER -> Member 1
+Expected week:
+  7 DINNER events
+  7 Servings
+Expected outcome:
+  SUCCESS + persisted complete week
+```
 
-Must exercise a canonical hard exclusion that materially removes candidates.
+### Fixture 2 — two-member breakfast + shared dinner with milk exclusion
 
-At minimum the current accepted evidence includes:
+Exact shape:
 
-- hard `MILK_2_5` breakfast exclusion with unaffected capacity 9; and/or
-- hard beef exclusion against MAIN capacity.
+```text
+Household members: 2
+Member 1 roles: BREAKFAST + DINNER
+Member 2 roles: DINNER
+Selections: CUSTOM / CUSTOM
+Member 1 hard exclusions: MILK_2_5
+Member 2 hard exclusions: none
+Daily shared events:
+  BREAKFAST -> Member 1
+  DINNER    -> Member 1 + Member 2
+Expected week:
+  14 meal events
+  21 Servings
+Expected outcome:
+  SUCCESS + persisted complete week
+```
 
-Expected result:
+The accepted post-R3-D baseline records three `MILK_2_5`-unaffected breakfast
+candidates with repetition capacity 9, so this fixture intentionally proves the
+hard-exclusion fallback rather than merely reusing an unconstrained household.
 
-- excluded ingredient never appears in selected meals;
-- rejected candidates carry the expected hard-rejection reason;
-- a complete week is produced where current accepted capacity proves feasibility;
-- if another explicitly tested constraint set is infeasible, the result is
-  bounded infeasibility with no partial persisted MealPlan.
+Selected meals containing `MILK_2_5` for Member 1 are forbidden. Relevant
+rejected candidates must expose the current hard-exclusion rejection reason.
 
-### Fixture C — Heterogeneous household / constrained week
+### Fixture 3 — three-member heterogeneous 3/2/1-role household with beef exclusion
 
-Must differ materially from A and B through a combination of:
+Exact shape:
 
-- heterogeneous member meal opportunities;
-- different accepted meal-pattern selections;
-- time/equipment/variety/budget constraint already supported by Planner v0;
-- shared household events with individualized Servings.
+```text
+Household members: 3
+Member 1 roles: BREAKFAST + LUNCH + DINNER
+Member 2 roles: BREAKFAST + DINNER
+Member 3 roles: DINNER
+Selections: CUSTOM / CUSTOM / CUSTOM
+Member 1 hard exclusions: none
+Member 2 hard exclusions: none
+Member 3 hard exclusions: BEEF_CATEGORY_1_RAW
+Daily shared events:
+  BREAKFAST -> Member 1 + Member 2
+  LUNCH     -> Member 1
+  DINNER    -> Member 1 + Member 2 + Member 3
+Expected week:
+  21 meal events
+  42 Servings
+Expected outcome:
+  SUCCESS + persisted complete week
+```
 
-Expected result:
+A shared DINNER selected for Member 3 may not require
+`BEEF_CATEGORY_1_RAW`. The accepted post-R3-D baseline records 19 unaffected
+MAIN candidates / repetition capacity 57, so this fixture tests household
+reconciliation under a material member-specific exclusion.
 
-- Planner is not hardcoded to one universal meal count;
-- household reconciliation remains deterministic;
-- complete week or explicit bounded infeasibility;
-- no synthetic RecipeVersion is invented for unsupported source kinds.
+### 5.4 Historical Gate1 fixture test semantics
+
+The existing `backend/app/tests/test_planner_gate1_fixtures.py` predates the
+post-DC3 production corpus and historically expects
+`NO_ELIGIBLE_CANDIDATE` against its old seed state.
+
+DC4 freezes and reuses its `GATE1_ROLE_SHAPES` schedule identity, but **does not
+inherit that historical failure outcome**. The DC4 execution must build the same
+exact role shapes against current post-DC3 accepted production truth and prove
+the success outcomes frozen above.
+
+If implementation needs a new deterministic DC4 fixture builder/test to avoid
+mutating historical evidence, it should add one rather than rewrite historical
+PR8/Gate1-A evidence to imply it always had post-DC3 semantics.
+
+### 5.5 Exact fail-closed infeasibility case outside the three mandatory fixtures
+
+In addition to the three successful Gate1 fixtures, DC4 must execute this exact
+adversarial capacity case:
+
+```text
+Household members: 1
+Member 1 roles: BREAKFAST
+Selection: CUSTOM
+Week: 2026-09-14 .. 2026-09-20
+Hard exclusions:
+  MILK_2_5
+  EGG
+Expected outcome:
+  bounded PlannerFailure / infeasibility
+  no partial MealPlan persisted
+```
+
+Rationale: under the accepted post-R3-D milk-free breakfast baseline, the
+unaffected set is `HARD_BOILED_EGG`,
+`SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE`, and
+`SAD28_SANDWICH_CHEESE_20_10`. `EGG` removes the first two; the remaining
+candidate has repetition capacity below seven breakfasts. The execution must
+reconcile this assumption against current RecipeIngredient truth and fail closed
+if the exact dependency/capacity differs.
+
+This adversarial case is **not** one of the three mandatory success fixtures and
+cannot be used to turn a required Gate1 success fixture into an allowed failure.
 
 ## 6. Meal-pattern and source-kind checks
 
