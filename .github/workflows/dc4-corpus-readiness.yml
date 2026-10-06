@@ -1,0 +1,113 @@
+name: DC4 corpus readiness
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit_dc4_corpus_readiness.py'
+      - 'backend/app/tests/test_dc4_corpus_readiness.py'
+      - 'data/curation/dc4-corpus-readiness/**'
+      - 'docs/family-food/dc4-corpus-readiness-report.md'
+      - 'state/**'
+      - '.github/workflows/dc4-corpus-readiness.yml'
+  workflow_dispatch:
+    inputs:
+      target_ref:
+        description: 'Branch, tag or exact commit SHA to verify'
+        required: true
+        default: 'main'
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      AI_ENABLED: 'false'
+    steps:
+      - name: Checkout exact revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ inputs.target_ref || github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install backend and lint
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check -e './backend[test]'
+          python -m pip install --disable-pip-version-check 'ruff==0.16.8'
+
+      - name: Focused DC4 tests
+        run: |
+          set -euo pipefail
+          python -m pytest -q backend/app/tests/test_dc4_corpus_readiness.py --tb=short
+
+      - name: Generate current audit evidence
+        run: |
+          set -euo pipefail
+          python scripts/audit_dc4_corpus_readiness.py --output /tmp/dc4-summary.json
+          python - <<'PY'
+          import json
+          payload = json.load(open('/tmp/dc4-summary.json', encoding='utf-8'))
+          print('DC4 overall:', payload['overall_status'])
+          print('Full active catalogue:', payload['catalogue']['active_count'])
+          print('Blocked active recipes:', payload['catalogue']['blocked_count'])
+          print('Eligible exact-energy:', payload['planner_supply']['eligible_count'])
+          print('Eligible meal split:', payload['planner_supply']['meal_type_counts'])
+          print('Blockers:', payload['blockers'])
+          for row in payload['catalogue']['recipes']:
+              if row['disposition'] == 'BLOCKED':
+                  print('BLOCKED_RECIPE', row['canonical_code'], ','.join(row['issues']))
+          PY
+
+      - name: Ruff
+        run: |
+          set -euo pipefail
+          python -m ruff check scripts/audit_dc4_corpus_readiness.py backend/app/tests/test_dc4_corpus_readiness.py
+          python -m ruff format --check scripts/audit_dc4_corpus_readiness.py backend/app/tests/test_dc4_corpus_readiness.py
+
+      - name: Migration and AI invariants
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from app.db import migrations
+          ids = migrations.expected_migration_ids()
+          assert ids[-1] == '0042_recipe_prepared_output_nutrition'
+          assert not any(item.startswith('0043') for item in ids)
+          print('migration head 0042 / no 0043: PASS')
+          PY
+          test "${AI_ENABLED}" = "false"
+          echo 'AI_ENABLED=false: PASS'
+
+      - name: Scope and whitespace
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          git fetch origin main --no-tags
+          base="${PR_BASE_SHA:-origin/main}"
+          git diff --check "${base}"...HEAD
+          mapfile -t changed < <(git diff --name-only "${base}"...HEAD)
+          printf 'Changed paths:\n'
+          printf '  %s\n' "${changed[@]}"
+          for path in "${changed[@]}"; do
+            case "${path}" in
+              scripts/audit_dc4_corpus_readiness.py|\
+              backend/app/tests/test_dc4_corpus_readiness.py|\
+              data/curation/dc4-corpus-readiness/*|\
+              docs/family-food/dc4-corpus-readiness-report.md|\
+              state/current-focus.md|state/progress.md|state/handoff.md|\
+              .github/workflows/dc4-corpus-readiness.yml)
+                ;;
+              *)
+                echo "Unexpected DC4 execution scope: ${path}" >&2
+                exit 1
+                ;;
+            esac
+          done
