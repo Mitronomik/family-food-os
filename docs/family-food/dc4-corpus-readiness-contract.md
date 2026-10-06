@@ -23,10 +23,11 @@ size and does not authorize another R3 publication batch.
 The accepted post-R3-D state is:
 
 - DATA-CORPUS-V1 / DC3 COMPLETE;
-- 51 active exact-energy RecipeVersions;
-- 17 `breakfast`;
-- 33 `main`;
-- 1 `sandwich`;
+- the exact total count of all active current production RecipeVersions is **not**
+  hardcoded by this contract and must be derived from Recipe Catalogue truth;
+- the accepted Planner-eligible exact-energy subset is exactly 51 RecipeVersions;
+- within that eligible exact-energy subset: 17 `breakfast`, 33 `main`,
+  1 `sandwich`;
 - MAIN family distribution: beef 14 / fish 9 / chicken 4 / meat-free 6;
 - exact-beef unaffected MAIN = 19 / repetition capacity 57;
 - hard exact `MILK_2_5` breakfast unaffected set = 3 / repetition capacity 9;
@@ -35,7 +36,9 @@ The accepted post-R3-D state is:
 - `AI_ENABLED=false`;
 - current Planner role mapping, scoring and repetition limits unchanged by R3-D.
 
-These counts are accepted starting evidence, not automatic DC4 PASS.
+The `51 / 17 / 33 / 1` counts describe the accepted Planner-eligible
+exact-energy supply baseline only. They do **not** define the size of the full
+active production catalogue and are not automatic DC4 PASS.
 
 ## 3. Audit ownership
 
@@ -55,17 +58,38 @@ operation after the audit identifies the exact defect.
 DC4 first audits the **entire accepted active production corpus**. Gate1 fixture
 selection is a later consumer layer and cannot reduce this audit surface.
 
-The frozen post-R3-D baseline is 51 active exact-energy production
-RecipeVersions. The DC4 execution must enumerate the complete active production
-RecipeVersion set from repository/runtime truth and reconcile it with that
-accepted baseline. If the active set is not exactly the accepted 51, the
-difference must receive an explicit PASS/BLOCKED disposition before proceeding;
-the implementation must not silently redefine the corpus.
+DC4 must maintain **two separate inventories**:
 
-Every active production RecipeVersion in this corpus-wide layer is audited for
-all requirements in §§4.1–4.5, whether or not a Gate1 fixture later selects it.
+### Inventory A — full active production catalogue
 
-### 4.1 Recipe identity and publication — all 51
+Enumerate every active current production RecipeVersion dynamically from
+Recipe Catalogue repository/runtime truth. This inventory has no contract-hardcoded
+cardinality. Every row receives a corpus-readiness disposition, including active
+recipes that are currently Planner-ineligible or lack exact-energy admission.
+
+### Inventory B — Planner-eligible exact-energy supply baseline
+
+Independently derive the current Planner candidate-admission set and reconcile it
+to the accepted post-R3-D baseline:
+
+```text
+eligible exact-energy RecipeVersions = 51
+breakfast = 17
+main = 33
+sandwich = 1
+```
+
+The execution must fail closed if this eligible subset does not reconcile to the
+accepted baseline unless a separately approved later decision has superseded it.
+
+Inventory B is a subset/read-model over production truth; it does not define or
+truncate Inventory A.
+
+Every RecipeVersion in Inventory A is audited for all requirements in §§4.1–4.5,
+whether or not it is Planner-eligible and whether or not a Gate1 fixture later
+selects it.
+
+### 4.1 Recipe identity and publication — all active current RecipeVersions
 
 For every active production RecipeVersion:
 
@@ -79,7 +103,7 @@ For every active production RecipeVersion:
 One defective active RecipeVersion is a corpus-wide BLOCKED item even when no
 Gate1 fixture selects it.
 
-### 4.2 FoodIngredient resolution — all 51
+### 4.2 FoodIngredient resolution — all active current RecipeVersions
 
 For every required RecipeIngredient of every active production RecipeVersion:
 
@@ -93,7 +117,7 @@ The **entire active production corpus** must have 100% required FoodIngredient
 resolution. Gate1-selected recipes are not a substitute for this corpus-wide
 requirement.
 
-### 4.3 Nutrition / prepared-output authority — all 51
+### 4.3 Nutrition / prepared-output authority — all active current RecipeVersions
 
 For every active production RecipeVersion:
 
@@ -113,7 +137,7 @@ macros/micronutrients.
 A recipe may be outside a particular fixture's selected meals and still BLOCK
 corpus readiness when its accepted active production authority is defective.
 
-### 4.4 Provenance and rights — all 51
+### 4.4 Provenance and rights — all active current RecipeVersions
 
 For every active production RecipeVersion, the execution must report whether its
 production family has reviewable:
@@ -128,7 +152,7 @@ DC4 does not reopen accepted source policy without evidence of a concrete
 conflict, but missing durable provenance on any active production RecipeVersion
 is a readiness blocker.
 
-### 4.5 Russian-language readiness — all 51
+### 4.5 Russian-language readiness — all active current RecipeVersions
 
 Consumer-facing recipe text for every active production RecipeVersion must
 satisfy the current Russian-language contract.
@@ -461,8 +485,10 @@ obtain PASS.
 
 DC4 execution is review-ready only when:
 
-1. all required audit dimensions have explicit dispositions;
-2. all required Gate1 fixture cases have reproducible evidence;
+1. all active current production RecipeVersions from dynamically derived
+   Inventory A have explicit corpus-readiness dispositions;
+2. Inventory B reconciles exactly to the accepted 51 eligible exact-energy
+   baseline and all required Gate1 fixture cases have reproducible evidence;
 3. ordinary accepted production catalogue truth is consumed;
 4. no gate-only authority/data exception exists;
 5. hard exclusions and individualized Servings are proven;
