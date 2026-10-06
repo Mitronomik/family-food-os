@@ -29,7 +29,8 @@ Canonical contract target:
 `docs/family-food/dc4-corpus-readiness-contract.md`.
 
 Scope is docs/state plus one verification-only CI compatibility correction. This
-operation freezes the audit inputs, exact Gate1 fixture matrix,
+operation freezes the two-inventory audit model (dynamic full active catalogue +
+51-row Planner-eligible exact-energy baseline), exact Gate1 fixture matrix,
 PASS/BLOCKED/DEFERRED rules, adversarial acceptance and verification for the
 later DC4 execution.
 
