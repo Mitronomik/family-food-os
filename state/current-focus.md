@@ -28,11 +28,14 @@ Canonical contract target:
 
 `docs/family-food/dc4-corpus-readiness-contract.md`.
 
-Scope is docs/state only. This operation freezes the audit inputs, Gate1 fixture
-matrix, PASS/BLOCKED/DEFERRED rules, adversarial acceptance and verification for
-the later DC4 execution.
+Scope is docs/state plus one verification-only CI compatibility correction. This
+operation freezes the audit inputs, exact Gate1 fixture matrix,
+PASS/BLOCKED/DEFERRED rules, adversarial acceptance and verification for the
+later DC4 execution.
 
-No runtime/data publication/schema/migration/Planner-algorithm/API/UI change is
+The CI correction adds only the same downstream changed-path guard already used
+by the R3-D gate workflow; focused R3-D verification remains active. No runtime,
+data publication, schema, migration, Planner-algorithm, API or UI change is
 authorized in this contract PR.
 
 ## Sequence decision
