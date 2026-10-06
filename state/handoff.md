@@ -1,5 +1,33 @@
 # Handoff
 
+## DC4 execution/evidence — 2026-10-06
+
+Accepted main:
+
+`0ce316009eb6223d05756f175f388869ae8debd8` (merged PR #163).
+
+Current operation: Issue #164, branch `feat/dc4-corpus-readiness`.
+
+Read first:
+
+- `AGENTS.md`;
+- `state/current-focus.md`;
+- `docs/family-food/dc4-corpus-readiness-contract.md`;
+- `scripts/audit_dc4_corpus_readiness.py`.
+
+The first execution slice adds a reproducible audit harness, tests and dedicated
+CI. It must discover the full active catalogue dynamically and keep it separate
+from the accepted 51-row Planner-eligible exact-energy baseline.
+
+After CI returns actual catalogue/readiness facts, freeze those facts in
+`data/curation/dc4-corpus-readiness/` and
+`docs/family-food/dc4-corpus-readiness-report.md`.
+
+Do not repair discovered production-data blockers in this PR. Route them to a
+separate bounded correction. Do not start Gate1-CLOSE or PR9 automatically.
+
+---
+
 ## DC4 Contract Gate — 2026-10-06
 
 Accepted main:
