@@ -1,5 +1,92 @@
 # Current focus
 
+Updated: 2026-10-07.
+
+## Accepted state
+
+PR #165 / DC4 execution evidence is MERGED at:
+
+`c521e6d89a4d9fcc2900804ff7e05de66f14b093`.
+
+Independent blocker investigations are also MERGED:
+
+- PR #168 / Issue #166 — seven Russian RecipeStep findings confirmed as genuine consumer-language violations;
+- PR #169 / Issue #167 — Fixture 3 failure isolated to a Planner household-event ordering bug under the existing MealPlan completeness contract.
+
+Current accepted main:
+
+`d3e73072e4e24dde25a1251e19327731455e306f`.
+
+DC4 remains **BLOCKED**.
+
+## Current bounded authorization
+
+Two independent correction tracks are authorized after this reconciliation PR is reviewed and merged.
+
+### Track A — immutable Russian RecipeStep correction
+
+Goal: remove the seven confirmed consumer-language violations without mutating accepted RecipeVersions in place or losing provenance.
+
+Exact sequence:
+
+```text
+A1 evidence investigation                         MERGED #168
+→ A2 docs-only immutable correction Contract Gate
+→ A3 separately reviewed RecipeVersion runtime/data correction
+→ A accepted
+```
+
+A2 must define the lawful immutable/version-aware publication path before any production RecipeVersion publication or activation. The gate must preserve source/card hashes, source semantics, rights review, process bindings, ingredient quantities, Nutrition authority/UNKNOWN semantics, immutable prior versions and replay/conflict/rollback behavior.
+
+**Merging A2 alone does not complete Track A and does not authorize a DC4 rerun.** Track A is accepted only after the separately reviewed A3 runtime/data correction is merged and its required verification passes.
+
+No in-place mutation of an accepted RecipeVersion is authorized.
+
+### Track B — focused Planner household-event ordering correction
+
+Goal: correct the local Planner ordering defect identified in PR #169 while preserving each member's accepted opportunity order and the existing MealPlan completeness validation.
+
+No cross-context contract change is currently required by the accepted investigation.
+
+**Planner versioning is mandatory:** the known Fixture 3 ordering correction changes deterministic event ordering for the same accepted inputs, so B2 is expected to introduce a new Planner algorithm/config version rather than silently changing behavior under `planner-v0.4`. Preserving the old version identity would require a separate, explicit and independently reviewed proof that the version semantics are in fact unchanged.
+
+The runtime correction must retain exact Fixture 3 expectations:
+
+- 21 household MealEvents;
+- 42 individualized Servings;
+- member-specific hard beef exclusion;
+- deterministic replay;
+- no weakening of `validate_complete_plan`.
+
+If implementation disproves the local-bug assumption and requires changing a cross-context contract, stop and create a docs-only Implementation Contract Gate before runtime changes.
+
+## Sequence
+
+Tracks A and B may proceed independently after this reconciliation is accepted.
+
+```text
+Track A
+A1 evidence                         MERGED #168
+→ A2 docs-only immutable correction Contract Gate
+→ A3 separately reviewed RecipeVersion runtime/data correction
+→ A accepted
+
+Track B
+B1 investigation                    MERGED #169
+→ B2 versioned Planner ordering runtime correction
+→ B accepted
+
+A3 accepted + B2 accepted
+→ separate DC4 rerun
+→ Gate1-CLOSE
+→ PR9 Shopping Engine
+```
+
+Do not start the DC4 rerun after A2 alone. It is authorized only after both A3 and B2 are accepted and merged.
+Do not start Gate1-CLOSE or PR9 before a passing rerun and separate closure decision.
+
+---
+
 Updated: 2026-10-06.
 
 ## Accepted state

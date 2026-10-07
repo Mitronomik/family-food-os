@@ -1,5 +1,73 @@
 # Handoff
 
+## Post-DC4 correction reconciliation — 2026-10-07
+
+Accepted main:
+
+`d3e73072e4e24dde25a1251e19327731455e306f`.
+
+Merged evidence/research:
+
+- PR #165 — DC4 evidence, product gate BLOCKED;
+- PR #168 / Issue #166 — seven genuine Russian RecipeStep language violations;
+- PR #169 / Issue #167 — Planner Fixture 3 role/order root cause isolated.
+
+Current reconciliation: Issue #170 / branch `docs/post-dc4-correction-reconciliation`.
+
+Read before continuing:
+
+- `AGENTS.md`;
+- `state/current-focus.md`;
+- `docs/family-food/dc4-corpus-readiness-contract.md`;
+- `docs/family-food/dc4-corpus-readiness-report.md`;
+- `docs/family-food/dc4-russian-steps-investigation.md`;
+- `docs/family-food/dc4-planner-mealplan-order-investigation.md`.
+
+After this reconciliation is merged, two bounded tracks may run independently:
+
+### A — immutable Russian RecipeStep correction
+
+Exact sequence:
+
+```text
+A1 evidence                         MERGED #168
+→ A2 docs-only immutable correction Contract Gate
+→ A3 separately reviewed RecipeVersion runtime/data correction
+→ A accepted
+```
+
+A2 must define a version-aware publication route preserving immutable RecipeVersion history, exact retained source/provenance, process bindings, rights, ingredient quantities and Nutrition authority. Do not edit prior versions in place.
+
+**A2 merge alone does not complete Track A and does not authorize DC4 rerun.** A3 must be independently reviewed, merged and verified first.
+
+### B — Planner ordering runtime correction
+
+The accepted investigation classifies the current defect as a local Planner ordering bug. Implement a focused correction preserving per-member precedence and MealPlan completeness.
+
+Critical review rule: deterministic output semantics are versioned. The known Fixture 3 fix changes event ordering for the same accepted inputs, so B2 is expected to introduce a new Planner algorithm/config version. Do not silently alter `planner-v0.4`. Preserving the old version identity requires explicit independently reviewed evidence that semantics are unchanged.
+
+If B implementation reveals a necessary cross-context contract change, stop and create/merge a docs-only Contract Gate before further runtime work.
+
+Required downstream order:
+
+```text
+Track B
+B1 investigation                    MERGED #169
+→ B2 versioned Planner ordering runtime correction
+→ B accepted
+
+A3 accepted + B2 accepted
+→ separate DC4 rerun
+→ separate Gate1-CLOSE
+→ PR9 only if Gate1-CLOSE passes
+```
+
+Do not interpret A2 Contract Gate acceptance as Track A completion.
+
+No DC4 rerun, Gate1-CLOSE or Shopping implementation belongs to this reconciliation PR.
+
+---
+
 ## DC4 execution/evidence — 2026-10-06
 
 Accepted main:
