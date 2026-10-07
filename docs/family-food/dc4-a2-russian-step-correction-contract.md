@@ -260,7 +260,158 @@ Publishing the seven corrections as one all-or-nothing transaction is not
 required. A3 must be safely resumable across recipes and exact replay must
 converge to zero writes.
 
-## 9. Planner and catalogue invariants
+## 9. Historical R3-A replay compatibility after A3
+
+A3 must preserve the historical R3-A operation as a safe zero-write replay on a
+database where the Russian-language successor already exists.
+
+This is an explicit compatibility requirement of A2, not an implementation
+detail to discover later.
+
+### 9.1 `preflight_trusted_seed()` with same-provenance revisions
+
+The current `preflight_trusted_seed()` requires
+`len(list_by_provenance(...)) == 1`. That rule predates migration 0027
+same-source immutable revisions and is not valid after A3.
+
+A3 is authorized to change trusted-seed preflight resolution as follows:
+
+1. resolve all RecipeVersions with the exact external provenance;
+2. evaluate full `_seed_matches(...)` structural equality against the historical
+   trusted seed;
+3. if **exactly one** same-provenance revision structurally matches the seed,
+   return `EXACT_REPLAY`, regardless of later non-matching internal successors;
+4. if no provenance revision exists, retain the existing missing-provenance
+   conflict semantics for an existing Recipe;
+5. if provenance revisions exist but zero structural matches exist, fail closed;
+6. if more than one structural match exists, fail closed as ambiguous duplicate
+   immutable history.
+
+The method must not select `latest` merely because it has the greatest version
+number. Historical replay is identity-by-reviewed-structure, not current-version
+selection.
+
+`reconcile_seed(...)` already searches same-provenance candidates for a
+structural match; A3 must keep preflight and reconciliation semantics aligned.
+
+### 9.2 Historical `publish_prepared()` specs
+
+For `ReviewedPreparedRecipeNutritionSpec.recipe_version_number is None`, the
+post-A3 backward-compatible semantics are:
+
+1. list exact same-provenance revisions;
+2. filter them by full `trusted_recipe_seed_matches(...)`;
+3. require exactly one structural match;
+4. publish/replay prepared authority against that matched historical
+   RecipeVersion;
+5. never reinterpret `None` as "latest".
+
+Thus the original R3-A prepared spec continues to resolve the original R3-A
+RecipeVersion even after a language-only successor exists.
+
+For A3 correction specs, `recipe_version_number` is mandatory and targets the
+new successor exactly as frozen in §6.1.
+
+### 9.3 `publish_r3a_school2022_main_batch()` post-A3 replay
+
+On a database after A3:
+
+- `_assert_replay_not_partial(...)` must resolve the historical seed/spec target
+  by the structural-match rules above, not by `get_latest_verified()`;
+- the historical predecessor must still have its exact prepared authority;
+- `nutrition.publish_prepared(old_spec)` must return `EXACT_REPLAY` for that
+  predecessor with zero writes;
+- the operation must separately read `get_latest_verified()` and accept the A3
+  successor as current only if it has its own valid prepared authority and exact
+  energy;
+- the operation must not append another historical R3-A version, overwrite the A3
+  successor, or change current-version selection.
+
+The publication result may report the current verified successor as the Recipe's
+current version while the old prepared spec reports historical
+`EXACT_REPLAY`; tests must make this distinction explicit rather than assuming
+the replay target and current target are the same immutable ID.
+
+### 9.4 `activate_prepared_recipe_batch()` with historical specs
+
+The current activation path assumes the spec replay target and
+`get_latest_verified()` are the same RecipeVersion. That assumption becomes
+false after A3 and must be revised without weakening activation policy.
+
+For an **already-active** Recipe after A3:
+
+1. resolve the historical spec to its unique structural-match predecessor;
+2. require the predecessor's prepared publication to be exact replay;
+3. read the current latest SOURCE_VERIFIED RecipeVersion;
+4. require that current version is either:
+   - the same matched version; or
+   - a descendant through the immutable `created_from_version_id` chain whose
+     intermediate/current revisions preserve the A2-approved source identity and
+     whose differences are authorized immutable internal revisions;
+5. require the current version to have its **own** valid prepared-output authority;
+6. require Planner admission to resolve the current version, active, eligible,
+   exact-energy ready and blocker-free;
+7. return `activated=False` and the **current** version ID;
+8. perform zero writes.
+
+The historical prepared spec is evidence for the predecessor; it is never
+silently treated as the successor's authority.
+
+For an **inactive** Recipe, existing activation semantics remain strict: the spec
+must target the exact version being activated. Historical predecessor specs must
+not activate a newer successor implicitly.
+
+### 9.5 `activate_r3a_school2022_main_batch()` post-A3 replay
+
+Rerunning the historical R3-A activation operation after A3 must be a compatibility
+check, not a rollback operation.
+
+For the seven corrected Recipe families it must:
+
+- leave the Recipe active;
+- retain the A3 successor as current;
+- verify the historical predecessor replay and the current successor authority as
+  separate facts;
+- return no activation change;
+- create no RecipeVersion, Nutrition authority/value, activation or deactivation
+  write.
+
+The three unaffected R3-A recipes continue through their ordinary exact-replay
+path.
+
+### 9.6 Mandatory zero-write compatibility proof
+
+A3 must include an adversarial integration test with the exact sequence:
+
+```text
+seed/publish/activate historical R3-A
+→ capture all 10 R3-A version histories + authorities + active/current IDs
+→ apply all seven A3 successors + successor authorities
+→ capture post-A3 database state
+→ rerun publish_r3a_school2022_main_batch()
+→ rerun activate_r3a_school2022_main_batch()
+→ capture database state again
+```
+
+Required assertions:
+
+- historical R3-A rerun succeeds;
+- no new RecipeVersion is added;
+- no current RecipeVersion rolls back to predecessor;
+- no prepared authority or nutrient value is added, replaced or deleted;
+- no Recipe activation state changes;
+- seven corrected successors remain current;
+- each old R3-A spec still resolves exactly one historical structural match;
+- each corrected successor retains its own exact prepared authority;
+- Planner admission remains on the corrected current successor;
+- all ten R3-A Recipe families remain active and exact-energy ready;
+- transaction/write counters or before/after persisted snapshots prove
+  **zero-write replay**, not merely equal final values.
+
+Any historical operation that attempts to "repair" current state back to the old
+R3-A version is a contract violation.
+
+## 10. Planner and catalogue invariants
 
 After all seven corrections:
 
@@ -274,7 +425,7 @@ After all seven corrections:
 
 A count mismatch is a blocker, not permission to publish filler data.
 
-## 10. A3 required artifacts
+## 11. A3 required artifacts
 
 A3 must include:
 
@@ -289,7 +440,7 @@ A3 must include:
 
 The curation artifact is review evidence, not a new external source.
 
-## 11. Adversarial acceptance
+## 12. Adversarial acceptance
 
 A3 must prove:
 
@@ -307,12 +458,18 @@ A3 must prove:
 11. changed source/process/ingredient/energy commitment fails closed;
 12. injected failure between version append and authority publication leaves
     neither committed;
-13. Russian-language audit clears all seven findings;
-14. Planner exact-energy baseline remains 51 = 17/33/1;
-15. migration head remains 0042; no 0043;
-16. `AI_ENABLED=false`.
+13. historical R3-A preflight resolves exactly one old structural match despite
+    the same-provenance successor;
+14. historical R3-A publish + activation rerun after A3 is proven zero-write and
+    leaves all corrected successors current;
+15. historical predecessor authority and current successor authority remain
+    distinct and unchanged;
+16. Russian-language audit clears all seven findings;
+17. Planner exact-energy baseline remains 51 = 17/33/1;
+18. migration head remains 0042; no 0043;
+19. `AI_ENABLED=false`.
 
-## 12. Verification tier
+## 13. Verification tier
 
 A3 is data publication + immutable Recipe/Nutrition integration.
 
@@ -323,14 +480,15 @@ Minimum review-ready verification:
 - prepared-output Nutrition tests;
 - Planner admission reconciliation;
 - DC4 Russian-language focused audit;
-- R3-A source/process regressions;
+- R3-A source/process regressions, including the mandatory post-A3 historical
+  publish/activation zero-write replay sequence;
 - migration and AI invariants;
 - Ruff/format, diff/scope/whitespace;
 - broader backend/launcher only if shared persistence/UoW/startup code changes.
 
 Never claim old R3-A seed bytes were rewritten; they remain historical evidence.
 
-## 13. Non-goals
+## 14. Non-goals
 
 A2/A3 do not authorize:
 
@@ -344,7 +502,7 @@ A2/A3 do not authorize:
 - unrelated recipe growth;
 - Gate1-CLOSE, Shopping, Prep, UI, Retail, AI, Auth/PostgreSQL.
 
-## 14. Exit and stop rule
+## 15. Exit and stop rule
 
 A2 merge authorizes exactly one separately reviewed A3 correction operation.
 
