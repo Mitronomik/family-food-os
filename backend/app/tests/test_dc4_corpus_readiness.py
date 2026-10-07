@@ -16,7 +16,9 @@ def test_dc4_reproducible_corpus_and_gate1_evidence(tmp_path: Path) -> None:
 
     assert catalogue["active_count"] >= 51
     assert len(catalogue["recipes"]) == catalogue["active_count"]
-    assert all(row["disposition"] in {"PASS", "BLOCKED"} for row in catalogue["recipes"])
+    assert all(
+        row["disposition"] in {"PASS", "BLOCKED"} for row in catalogue["recipes"]
+    )
 
     assert supply["eligible_count"] == 51
     assert supply["meal_type_counts"] == {
@@ -77,7 +79,9 @@ def test_dc4_reproducible_corpus_and_gate1_evidence(tmp_path: Path) -> None:
     assert frozen["overall_status"] == result["overall_status"]
     assert frozen["blockers"] == result["blockers"]
     assert frozen["full_active_catalogue"]["active_count"] == catalogue["active_count"]
-    assert frozen["full_active_catalogue"]["blocked_count"] == catalogue["blocked_count"]
+    assert (
+        frozen["full_active_catalogue"]["blocked_count"] == catalogue["blocked_count"]
+    )
     assert [
         (row["canonical_code"], row["disposition"], row["issues"])
         for row in frozen["full_active_catalogue"]["recipes"]
@@ -85,15 +89,15 @@ def test_dc4_reproducible_corpus_and_gate1_evidence(tmp_path: Path) -> None:
         (row["canonical_code"], row["disposition"], row["issues"])
         for row in catalogue["recipes"]
     ]
-    assert frozen["planner_eligible_exact_energy"]["actual_count"] == supply[
-        "eligible_count"
-    ]
+    assert (
+        frozen["planner_eligible_exact_energy"]["actual_count"]
+        == supply["eligible_count"]
+    )
     assert [
         (row["fixture"], row["persisted_success"], row["persistence_error"])
         for row in frozen["fixture_results"]
     ] == [
-        (row["fixture"], row["success"], row["persistence_error"])
-        for row in fixtures
+        (row["fixture"], row["success"], row["persistence_error"]) for row in fixtures
     ]
 
 
@@ -102,9 +106,18 @@ def test_dc4_audit_is_deterministic_at_gate_level(tmp_path: Path) -> None:
     second = audit(DatabaseConfig(path=tmp_path / "second.sqlite"))
 
     assert first["catalogue"]["active_count"] == second["catalogue"]["active_count"]
-    assert first["catalogue"]["blocked_recipe_codes"] == second["catalogue"]["blocked_recipe_codes"]
-    assert first["planner_supply"]["eligible_count"] == second["planner_supply"]["eligible_count"]
-    assert first["planner_supply"]["meal_type_counts"] == second["planner_supply"]["meal_type_counts"]
+    assert (
+        first["catalogue"]["blocked_recipe_codes"]
+        == second["catalogue"]["blocked_recipe_codes"]
+    )
+    assert (
+        first["planner_supply"]["eligible_count"]
+        == second["planner_supply"]["eligible_count"]
+    )
+    assert (
+        first["planner_supply"]["meal_type_counts"]
+        == second["planner_supply"]["meal_type_counts"]
+    )
     assert [
         (
             row["fixture"],
