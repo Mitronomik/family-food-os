@@ -15,6 +15,7 @@ from typing import Any
 from app.db import migrations
 from app.db.config import DatabaseConfig
 from app.domain.food_recipes import RightsReviewStatus, VerificationStatus
+from app.domain.recipe_nutrition_v2 import NUTRIENT_CODES, RecipeNutritionAuthorityKind
 from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import MemberMealPatternSourceKind
 from app.domain.planner import (
@@ -136,6 +137,9 @@ def _audit_active_catalogue(recipes, food, recipe_nutrition) -> dict[str, Any]:
 
         exact_energy_ready = False
         nutrition_available = True
+        nutrition_authority_kind = None
+        unknown_nutrient_count = None
+        available_nutrient_count = None
         try:
             projection = recipe_nutrition.neutral_consumption_projection(version.id)
         except RecipeNutritionV2UnavailableError:
@@ -143,6 +147,42 @@ def _audit_active_catalogue(recipes, food, recipe_nutrition) -> dict[str, Any]:
             issues.append("NUTRITION_AUTHORITY_UNAVAILABLE")
         else:
             exact_energy_ready = projection.exact_energy_ready
+            nutrition_authority_kind = projection.authority_kind.value
+            if projection.authority_kind is RecipeNutritionAuthorityKind.PREPARED_OUTPUT_V1:
+                try:
+                    canonical = recipe_nutrition.prepared_canonical_nutrition(version.id)
+                except RecipeNutritionV2UnavailableError:
+                    issues.append("PREPARED_CANONICAL_NUTRITION_UNAVAILABLE")
+                else:
+                    unknown_nutrient_count = sum(
+                        row.amount is None for row in canonical.required_total
+                    )
+                    available_nutrient_count = sum(
+                        row.amount is not None for row in canonical.required_total
+                    )
+                    if (
+                        len(canonical.required_total) != len(NUTRIENT_CODES)
+                        or canonical.total_amount("ENERGY_KCAL") is None
+                        or any(
+                            row.amount != per_serving.amount * version.base_servings
+                            for row, per_serving in zip(
+                                canonical.required_total,
+                                canonical.per_base_serving,
+                                strict=True,
+                            )
+                            if row.amount is None and per_serving.amount is not None
+                        )
+                    ):
+                        issues.append("PREPARED_UNKNOWN_OR_ENERGY_SEMANTICS")
+                    if any(
+                        total.amount is None and serving.amount is not None
+                        for total, serving in zip(
+                            canonical.required_total,
+                            canonical.per_base_serving,
+                            strict=True,
+                        )
+                    ):
+                        issues.append("UNKNOWN_PROMOTED_TO_NUMERIC")
             if not exact_energy_ready:
                 issues.append("EXACT_ENERGY_UNAVAILABLE")
 
@@ -159,6 +199,9 @@ def _audit_active_catalogue(recipes, food, recipe_nutrition) -> dict[str, Any]:
                 "ingredient_codes": ingredient_codes,
                 "nutrition_available": nutrition_available,
                 "exact_energy_ready": exact_energy_ready,
+                "nutrition_authority_kind": nutrition_authority_kind,
+                "unknown_nutrient_count": unknown_nutrient_count,
+                "available_nutrient_count": available_nutrient_count,
                 "issues": sorted(set(issues)),
                 "disposition": disposition,
             }
