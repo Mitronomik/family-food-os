@@ -19,12 +19,27 @@ The first execution slice adds a reproducible audit harness, tests and dedicated
 CI. It must discover the full active catalogue dynamically and keep it separate
 from the accepted 51-row Planner-eligible exact-energy baseline.
 
-After CI returns actual catalogue/readiness facts, freeze those facts in
-`data/curation/dc4-corpus-readiness/` and
-`docs/family-food/dc4-corpus-readiness-report.md`.
+Durable evidence is now available:
 
-Do not repair discovered production-data blockers in this PR. Route them to a
-separate bounded correction. Do not start Gate1-CLOSE or PR9 automatically.
+- `data/curation/dc4-corpus-readiness/summary.json`;
+- `docs/family-food/dc4-corpus-readiness-report.md`.
+
+Observed DC4 = BLOCKED:
+
+- active catalogue 51, 7 Russian-step readiness violations;
+- Planner eligible exact-energy 51 / 17+33+1, PASS;
+- fixtures 1 and 2 SUCCESS;
+- fixture 3 produces complete pure Planner week but fails persisted
+  MealPlan member-role/order validation;
+- hard exclusions respected in selected pure Planner events;
+- bounded MILK_2_5 + EGG failure has no partial plan.
+
+Audit receipt: GitHub Actions #37569620771, exact audited head
+`bc6c91b779fdd4c5d5c01b97e947a37ef049ca90`; focused 2 passed and
+audit step SUCCESS, Ruff style corrected in later branch commits.
+
+Do not repair these blockers inside DC4. They require independently scoped
+corrections, re-audit and separate Gate1-CLOSE. PR9 remains NOT STARTED.
 
 ---
 
