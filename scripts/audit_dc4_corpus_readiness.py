@@ -14,6 +14,7 @@ from typing import Any
 
 from app.db import migrations
 from app.db.config import DatabaseConfig
+from app.domain.errors import DomainValidationError
 from app.domain.food_recipes import RightsReviewStatus, VerificationStatus
 from app.domain.recipe_nutrition_v2 import NUTRIENT_CODES, RecipeNutritionAuthorityKind
 from app.domain.meal_patterns import MealRole
@@ -290,9 +291,9 @@ def _fixture_exclusions(number: int, members, food) -> tuple[GenerationMemberCon
 
 
 def _selected_exclusion_violations(
-    persisted, members, constraints, recipes
+    events, members, constraints, recipes
 ) -> list[dict[str, object]]:
-    """Check actual selected meal ingredients for each participating member."""
+    """Check selected Planner meals against each participating member exclusion."""
     excluded = {item.member_id: item.excluded_food_ingredient_ids for item in constraints}
     selected_version_ingredients = {
         detail.version.id: frozenset(row.food_ingredient_id for row in detail.ingredients)
@@ -301,35 +302,40 @@ def _selected_exclusion_violations(
         for detail in (recipes.get_current_verified(recipe.id),)
     }
     violations: list[dict[str, object]] = []
-    members_by_event = {}
-    for serving in persisted.servings:
-        members_by_event.setdefault(serving.event_id, set()).add(serving.member_id)
-    for event_index, event in enumerate(persisted.events, 1):
+    for event_index, event in enumerate(events, 1):
         if event.recipe_version_id is None:
             continue
         ingredients = selected_version_ingredients.get(event.recipe_version_id)
         if ingredients is None:
-            violations.append({
-                "event": event_index,
-                "reason": "SELECTED_VERSION_NOT_IN_ACTIVE_CATALOGUE",
-                "recipe_version_id": str(event.recipe_version_id),
-            })
+            violations.append(
+                {
+                    "event": event_index,
+                    "reason": "SELECTED_VERSION_NOT_IN_ACTIVE_CATALOGUE",
+                    "recipe_version_id": str(event.recipe_version_id),
+                }
+            )
             continue
         for member_index, member in enumerate(members, 1):
-            if member.id not in members_by_event.get(event.id, set()):
+            if member.id not in event.participant_member_ids:
                 continue
             forbidden = ingredients & excluded.get(member.id, frozenset())
             if forbidden:
-                violations.append({
-                    "event": event_index,
-                    "member": member_index,
-                    "recipe_version_id": str(event.recipe_version_id),
-                    "excluded_ingredient_ids": sorted(str(value) for value in forbidden),
-                })
+                violations.append(
+                    {
+                        "event": event_index,
+                        "member": member_index,
+                        "recipe_version_id": str(event.recipe_version_id),
+                        "excluded_ingredient_ids": sorted(
+                            str(value) for value in forbidden
+                        ),
+                    }
+                )
     return violations
 
 
-def _run_success_fixtures(planner, meal_plans, households, food, recipes) -> list[dict[str, Any]]:
+def _run_success_fixtures(
+    planner, meal_plans, households, food, recipes
+) -> list[dict[str, Any]]:
     outcomes = []
     for number, roles_by_member in enumerate(GATE1_ROLE_SHAPES, 1):
         household = households.create_household(
@@ -354,23 +360,30 @@ def _run_success_fixtures(planner, meal_plans, households, food, recipes) -> lis
         second_pure = generate_week(pure_request, PLANNER_CONFIG)
         deterministic = (
             first_pure.trace.fingerprint == second_pure.trace.fingerprint
-            and first_pure.trace.request_fingerprint == second_pure.trace.request_fingerprint
+            and first_pure.trace.request_fingerprint
+            == second_pure.trace.request_fingerprint
+        )
+        planned_success = isinstance(first_pure, PlannerSuccess)
+        planned_events = first_pure.events if planned_success else ()
+        selected_violations = _selected_exclusion_violations(
+            planned_events, members, constraints, recipes
         )
 
-        result, persisted = planner.generate_authoritative(command)
-        success = isinstance(result, PlannerSuccess) and persisted is not None
-        event_count = len(result.events) if isinstance(result, PlannerSuccess) else 0
+        persisted = None
+        persistence_error = None
+        try:
+            result, persisted = planner.generate_authoritative(command)
+        except DomainValidationError as exc:
+            result = first_pure
+            persistence_error = str(exc)
+
+        persisted_success = isinstance(result, PlannerSuccess) and persisted is not None
+        event_count = len(planned_events)
         serving_count = len(persisted.servings) if persisted is not None else 0
-
-        selected_violations = (
-            [] if persisted is None else _selected_exclusion_violations(
-                persisted, members, constraints, recipes
-            )
-        )
 
         hard_exclusion_rejections = sum(
             PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT in row.rejection_codes
-            for row in result.trace.candidates
+            for row in first_pure.trace.candidates
         )
 
         outcomes.append(
@@ -378,17 +391,19 @@ def _run_success_fixtures(planner, meal_plans, households, food, recipes) -> lis
                 "fixture": number,
                 "member_count": len(members),
                 "roles": [[role.value for role in roles] for roles in roles_by_member],
-                "success": success,
+                "planned_success": planned_success,
+                "success": persisted_success,
+                "persistence_error": persistence_error,
                 "event_count": event_count,
                 "expected_event_count": EXPECTED_EVENT_COUNTS[number - 1],
                 "serving_count": serving_count,
                 "expected_serving_count": EXPECTED_SERVING_COUNTS[number - 1],
                 "deterministic": deterministic,
-                "trace_fingerprint": result.trace.fingerprint,
+                "trace_fingerprint": first_pure.trace.fingerprint,
                 "hard_exclusion_rejections": hard_exclusion_rejections,
                 "selected_exclusion_violations": selected_violations,
                 "selected_exclusions_respected": not selected_violations,
-                "planner_version": result.trace.config_version,
+                "planner_version": first_pure.trace.config_version,
             }
         )
     return outcomes
