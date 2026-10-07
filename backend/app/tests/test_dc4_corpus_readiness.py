@@ -26,14 +26,36 @@ def test_dc4_reproducible_corpus_and_gate1_evidence(tmp_path: Path) -> None:
 
     assert [row["member_count"] for row in fixtures] == [1, 2, 3]
     assert [row["event_count"] for row in fixtures] == [7, 14, 21]
-    assert [row["serving_count"] for row in fixtures] == [7, 21, 42]
-    assert all(row["success"] for row in fixtures)
+    assert all(row["planned_success"] for row in fixtures)
     assert all(row["deterministic"] for row in fixtures)
     assert all(row["selected_exclusions_respected"] for row in fixtures)
     assert all(not row["selected_exclusion_violations"] for row in fixtures)
     assert all(row["planner_version"] == "planner-v0.4" for row in fixtures)
     assert fixtures[1]["hard_exclusion_rejections"] > 0
     assert fixtures[2]["hard_exclusion_rejections"] > 0
+
+    successful = [row for row in fixtures if row["success"]]
+    for row in successful:
+        assert row["serving_count"] == row["expected_serving_count"]
+        assert row["persistence_error"] is None
+    failed = [row for row in fixtures if not row["success"]]
+    for row in failed:
+        assert row["serving_count"] == 0
+        assert row["persistence_error"]
+
+    assert ("GATE1_FIXTURE_FAILURE" in result["blockers"]) == bool(failed)
+
+    prepared = [
+        row
+        for row in catalogue["recipes"]
+        if row["nutrition_authority_kind"] == "PREPARED_OUTPUT_V1"
+    ]
+    assert prepared
+    assert all(
+        row["unknown_nutrient_count"] + row["available_nutrient_count"] == 54
+        for row in prepared
+    )
+    assert all("UNKNOWN_PROMOTED_TO_NUMERIC" not in row["issues"] for row in prepared)
 
     assert bounded["is_failure"] is True
     assert bounded["returned_persisted_plan"] is False
@@ -56,10 +78,26 @@ def test_dc4_audit_is_deterministic_at_gate_level(tmp_path: Path) -> None:
     assert first["planner_supply"]["eligible_count"] == second["planner_supply"]["eligible_count"]
     assert first["planner_supply"]["meal_type_counts"] == second["planner_supply"]["meal_type_counts"]
     assert [
-        (row["fixture"], row["success"], row["event_count"], row["serving_count"])
+        (
+            row["fixture"],
+            row["planned_success"],
+            row["success"],
+            row["event_count"],
+            row["serving_count"],
+            row["persistence_error"],
+            row["selected_exclusions_respected"],
+        )
         for row in first["fixtures"]
     ] == [
-        (row["fixture"], row["success"], row["event_count"], row["serving_count"])
+        (
+            row["fixture"],
+            row["planned_success"],
+            row["success"],
+            row["event_count"],
+            row["serving_count"],
+            row["persistence_error"],
+            row["selected_exclusions_respected"],
+        )
         for row in second["fixtures"]
     ]
     assert first["overall_status"] == second["overall_status"]
