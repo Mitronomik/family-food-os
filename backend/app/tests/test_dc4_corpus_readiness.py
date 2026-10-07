@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from app.db.config import DatabaseConfig
+
 from scripts.audit_dc4_corpus_readiness import audit
 
 
