@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from app.db.config import DatabaseConfig
@@ -67,6 +68,33 @@ def test_dc4_reproducible_corpus_and_gate1_evidence(tmp_path: Path) -> None:
     assert result["migration_head"] == "0042_recipe_prepared_output_nutrition"
     assert result["migration_ok"] is True
     assert result["ai_enabled_required"] is False
+
+    summary_path = (
+        Path(__file__).resolve().parents[3]
+        / "data/curation/dc4-corpus-readiness/summary.json"
+    )
+    frozen = json.loads(summary_path.read_text(encoding="utf-8"))
+    assert frozen["overall_status"] == result["overall_status"]
+    assert frozen["blockers"] == result["blockers"]
+    assert frozen["full_active_catalogue"]["active_count"] == catalogue["active_count"]
+    assert frozen["full_active_catalogue"]["blocked_count"] == catalogue["blocked_count"]
+    assert [
+        (row["canonical_code"], row["disposition"], row["issues"])
+        for row in frozen["full_active_catalogue"]["recipes"]
+    ] == [
+        (row["canonical_code"], row["disposition"], row["issues"])
+        for row in catalogue["recipes"]
+    ]
+    assert frozen["planner_eligible_exact_energy"]["actual_count"] == supply[
+        "eligible_count"
+    ]
+    assert [
+        (row["fixture"], row["persisted_success"], row["persistence_error"])
+        for row in frozen["fixture_results"]
+    ] == [
+        (row["fixture"], row["success"], row["persistence_error"])
+        for row in fixtures
+    ]
 
 
 def test_dc4_audit_is_deterministic_at_gate_level(tmp_path: Path) -> None:
