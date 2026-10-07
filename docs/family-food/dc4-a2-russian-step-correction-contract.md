@@ -53,7 +53,11 @@ The old version is never updated or deleted. The new version must reference the
 previous current version through `created_from_version_id`.
 
 The current Recipe identity remains one active Recipe. Current verified selection
-advances because the latest SOURCE_VERIFIED immutable version becomes current;
+advances because the latest SOURCE_VERIFIED immutable version becomes current.
+
+A3 must **not** expose an active Recipe whose newest verified version lacks its
+required prepared-output Nutrition authority. Therefore the new RecipeVersion and
+its prepared authority must be staged and committed in one shared transaction.
 Recipe activation is not toggled off/on merely to append a text correction.
 
 ## 4. Exact mutation boundary
@@ -113,6 +117,67 @@ Every new RecipeVersion has a new immutable ID. Nutrition authority must
 therefore be bound explicitly to the new version; the old version's authority
 cannot be implicitly treated as belonging to the new ID.
 
+### 6.1 Required revision-targeted publication seam
+
+Current prepared-output publication resolves external provenance and requires
+that exactly one RecipeVersion exists for that provenance. Migration 0027
+explicitly permits multiple immutable internal revisions with identical external
+provenance, so that existing resolution rule cannot publish A3 safely once the
+successor exists.
+
+A3 is therefore authorized to make this **bounded application-contract change**:
+
+- add `recipe_version_number: int` to
+  `ReviewedPreparedRecipeNutritionSpec`, matching the already established
+  revision-targeting pattern used by `ReviewedRecipeIngredientBindingSpec`;
+- `publish_prepared_in_scope` must resolve all same-provenance revisions and
+  require exactly one row with the requested `recipe_version_number`;
+- the targeted row must still match the full trusted Recipe seed and source
+  authority; version-number targeting does not relax structural/provenance checks;
+- existing callers must supply their exact historical/current version number;
+  no implicit "latest" target is introduced.
+
+No schema migration is needed for this application contract.
+
+### 6.2 Required shared-transaction RecipeVersion append seam
+
+Current public `append_trusted_version()` owns and commits its own UoW. That is
+not sufficient for an active Recipe correction because the newly current
+SOURCE_VERIFIED version would otherwise become visible before its new prepared
+authority exists.
+
+A3 is authorized to add a bounded
+`append_trusted_version_in_scope(scope, recipe_id, seed)` (exact naming may vary)
+that:
+
+- uses a caller-owned UoW;
+- validates Recipe identity and active FoodIngredient dependencies;
+- appends exactly the next immutable version linked by
+  `created_from_version_id`;
+- performs no commit;
+- contains no Nutrition decision.
+
+A3 orchestration must use one shared SQLAlchemy UoW that structurally exposes
+Recipe Catalogue repositories and prepared Nutrition repositories:
+
+```text
+preflight accepted predecessor + exact correction
+→ open shared UoW
+→ append successor RecipeVersion in scope
+→ publish prepared authority targeted to successor version number in scope
+→ verify in-scope canonical prepared nutrition / exact energy
+→ commit once
+```
+
+For this language-only correction, the prepared spec uses
+`require_recipe_inactive=false` **only because** RecipeVersion + authority are
+created atomically in the same transaction for an already-active Recipe. This
+does not change the default inactive-first rule for ordinary fresh production
+recipe publication.
+
+If the shared transaction rolls back, neither the successor RecipeVersion nor
+its authority may remain.
+
 For each corrected version A3 must publish/reconcile a new
 `PREPARED_OUTPUT_V1 / RECIPE_PREPARED_OUTPUT_NUTRITION_V1` authority whose
 reviewed source facts are identical to the previous accepted authority:
@@ -131,7 +196,9 @@ immutable RecipeVersion identity.
 ## 7. Publication and replay semantics
 
 A3 must provide one bounded deterministic publication seam for exactly the seven
-Recipe families.
+Recipe families. It may add only the two reusable application seams frozen above:
+caller-owned RecipeVersion append and exact revision-targeted prepared
+publication.
 
 ### Fresh
 
@@ -139,10 +206,17 @@ If the latest current version is the accepted A1 predecessor and no exact
 language-correction successor exists:
 
 1. validate predecessor identity and all frozen non-step facts;
-2. append one immutable RecipeVersion;
-3. publish the matching prepared-output authority for that new version;
-4. verify Russian-language readiness and Planner admission;
-5. commit per Recipe atomically.
+2. compute/freeze the exact successor version number;
+3. open one shared UoW;
+4. append one immutable RecipeVersion in scope;
+5. publish the matching prepared-output authority in scope targeted to that exact
+   successor version number;
+6. verify in-scope prepared canonical Nutrition and exact energy;
+7. commit once;
+8. after commit, verify Russian-language readiness and Planner admission.
+
+The active Recipe must never expose the successor as current outside the
+transaction before its authority exists.
 
 ### Exact replay
 
@@ -221,13 +295,17 @@ A3 must prove:
 5. source URL/hash/version/rights/process/ingredients/equipment remain identical;
 6. new prepared authority has same exact energy and 53 UNKNOWN;
 7. exact replay is zero-write;
-8. changed corrected text fails closed;
-9. changed source/process/ingredient/energy commitment fails closed;
-10. injected failure cannot leave a partial version/authority pair;
-11. Russian-language audit clears all seven findings;
-12. Planner exact-energy baseline remains 51 = 17/33/1;
-13. migration head remains 0042; no 0043;
-14. `AI_ENABLED=false`.
+8. prepared publication targets the exact successor version number even when
+   predecessor and successor share identical external provenance;
+9. ordinary prepared publication still defaults to inactive-first behavior;
+10. changed corrected text fails closed;
+11. changed source/process/ingredient/energy commitment fails closed;
+12. injected failure between version append and authority publication leaves
+    neither committed;
+13. Russian-language audit clears all seven findings;
+14. Planner exact-energy baseline remains 51 = 17/33/1;
+15. migration head remains 0042; no 0043;
+16. `AI_ENABLED=false`.
 
 ## 12. Verification tier
 
