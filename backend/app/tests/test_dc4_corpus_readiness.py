@@ -180,9 +180,7 @@ def test_dc4_missing_required_nutrition_authority_is_blocked() -> None:
         get_current_verified=lambda _recipe_id: detail,
     )
     food = SimpleNamespace(
-        get=lambda _ingredient_id: SimpleNamespace(
-            is_active=True, canonical_code="EGG"
-        )
+        get=lambda _ingredient_id: SimpleNamespace(is_active=True, canonical_code="EGG")
     )
 
     def missing_authority(_version_id):
