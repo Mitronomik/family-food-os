@@ -132,13 +132,19 @@ A3 is therefore authorized to make this **bounded application-contract change**:
   `ReviewedPreparedRecipeNutritionSpec`, following the explicit
   revision-targeting pattern already used by
   `ReviewedRecipeIngredientBindingSpec`;
-- when the target is `None`, preserve the existing legacy contract: external
-  provenance must resolve to exactly one RecipeVersion;
+- when the target is `None`, enumerate all exact same-provenance revisions,
+  filter them through full `trusted_recipe_seed_matches(...)`, and require
+  **exactly one structurally matching RecipeVersion**;
+- backward compatibility therefore means existing callers need not supply the
+  new parameter; it does **not** preserve the old `len(candidates) == 1`
+  assumption;
+- external provenance plus the trusted seed must resolve to exactly one
+  structurally matching immutable RecipeVersion;
 - when the target is provided, resolve all same-provenance revisions and require
-  exactly one row with that exact positive `recipe_version_number`;
+  exactly one row with that exact positive `recipe_version_number`, which must
+  also pass the full trusted-seed structural match;
 - every A3 correction spec **must** provide the exact successor version number;
-- the targeted row must still match the full trusted Recipe seed and source
-  authority; version-number targeting does not relax structural/provenance checks;
+- version-number targeting does not relax structural/provenance checks;
 - no implicit "latest" target is introduced and unrelated existing prepared-spec
   callers need not be rewritten merely for A3.
 
