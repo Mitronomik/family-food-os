@@ -23,13 +23,22 @@ DC4 remains **BLOCKED**.
 
 Two independent correction tracks are authorized after this reconciliation PR is reviewed and merged.
 
-### Track A — immutable Russian RecipeStep correction Contract Gate
+### Track A — immutable Russian RecipeStep correction
 
-Goal: define the lawful immutable/version-aware correction path for the seven confirmed Russian-language RecipeStep violations before any production RecipeVersion publication or activation.
+Goal: remove the seven confirmed consumer-language violations without mutating accepted RecipeVersions in place or losing provenance.
 
-Required first deliverable: **docs-only Implementation Contract Gate**.
+Exact sequence:
 
-The gate must preserve source/card hashes, source semantics, rights review, process bindings, ingredient quantities, Nutrition authority/UNKNOWN semantics, immutable prior versions and replay/conflict/rollback behavior.
+```text
+A1 evidence investigation                         MERGED #168
+→ A2 docs-only immutable correction Contract Gate
+→ A3 separately reviewed RecipeVersion runtime/data correction
+→ A accepted
+```
+
+A2 must define the lawful immutable/version-aware publication path before any production RecipeVersion publication or activation. The gate must preserve source/card hashes, source semantics, rights review, process bindings, ingredient quantities, Nutrition authority/UNKNOWN semantics, immutable prior versions and replay/conflict/rollback behavior.
+
+**Merging A2 alone does not complete Track A and does not authorize a DC4 rerun.** Track A is accepted only after the separately reviewed A3 runtime/data correction is merged and its required verification passes.
 
 No in-place mutation of an accepted RecipeVersion is authorized.
 
@@ -39,7 +48,7 @@ Goal: correct the local Planner ordering defect identified in PR #169 while pres
 
 No cross-context contract change is currently required by the accepted investigation.
 
-**Planner versioning is mandatory:** if the correction changes deterministic Planner output semantics, it must use a new algorithm/config version rather than silently changing behavior under `planner-v0.4`, unless a separately reviewed proof demonstrates that preserving the version identity is semantically valid.
+**Planner versioning is mandatory:** the known Fixture 3 ordering correction changes deterministic event ordering for the same accepted inputs, so B2 is expected to introduce a new Planner algorithm/config version rather than silently changing behavior under `planner-v0.4`. Preserving the old version identity would require a separate, explicit and independently reviewed proof that the version semantics are in fact unchanged.
 
 The runtime correction must retain exact Fixture 3 expectations:
 
@@ -56,19 +65,24 @@ If implementation disproves the local-bug assumption and requires changing a cro
 Tracks A and B may proceed independently after this reconciliation is accepted.
 
 ```text
-A: immutable RecipeStep correction Contract Gate
-B: versioned Planner ordering runtime correction
-                ↓
-both accepted corrections
-                ↓
-separate DC4 rerun
-                ↓
-Gate1-CLOSE
-                ↓
-PR9 Shopping Engine
+Track A
+A1 evidence                         MERGED #168
+→ A2 docs-only immutable correction Contract Gate
+→ A3 separately reviewed RecipeVersion runtime/data correction
+→ A accepted
+
+Track B
+B1 investigation                    MERGED #169
+→ B2 versioned Planner ordering runtime correction
+→ B accepted
+
+A3 accepted + B2 accepted
+→ separate DC4 rerun
+→ Gate1-CLOSE
+→ PR9 Shopping Engine
 ```
 
-Do not start the DC4 rerun until both accepted corrections are merged.
+Do not start the DC4 rerun after A2 alone. It is authorized only after both A3 and B2 are accepted and merged.
 Do not start Gate1-CLOSE or PR9 before a passing rerun and separate closure decision.
 
 ---
