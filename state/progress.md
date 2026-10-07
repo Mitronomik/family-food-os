@@ -1,5 +1,40 @@
 # Progress
 
+## DC4 execution/evidence — ACTIVE — 2026-10-06
+
+Accepted base:
+`0ce316009eb6223d05756f175f388869ae8debd8` (merged PR #163).
+
+Issue #164 / branch `feat/dc4-corpus-readiness`.
+
+Initial execution harness added:
+
+- `scripts/audit_dc4_corpus_readiness.py`;
+- `backend/app/tests/test_dc4_corpus_readiness.py`;
+- `.github/workflows/dc4-corpus-readiness.yml`.
+
+The audit dynamically enumerates the full active catalogue, separately reconciles
+the Planner-eligible exact-energy subset to 51 = 17/33/1, executes the three
+frozen Gate1 fixtures and the exact MILK_2_5 + EGG fail-closed case.
+
+Audit evidence from DC4 run #37569620771 at
+`bc6c91b779fdd4c5d5c01b97e947a37ef049ca90` is frozen in
+`data/curation/dc4-corpus-readiness/summary.json` and
+`docs/family-food/dc4-corpus-readiness-report.md`.
+
+DC4 result = BLOCKED: dynamically enumerated active catalogue 51,
+44 PASS / 7 Russian-step BLOCKED. Planner exact-energy eligible 51 = 17/33/1,
+baseline PASS. Fixtures 1/2 persist correctly; Fixture 3 generates 21 events
+but fails MealPlan role/order persistence validation, with zero persisted
+Servings. Selected hard exclusions respected in all pure Planner outputs.
+MILK_2_5 + EGG bounded infeasibility is fail-closed PASS.
+
+This is an evidence PR; final-head CI needs to be green for implementation
+quality, but it must not relabel the product gate as PASS. Separate bounded
+corrections are required before DC4 can be accepted as ready.
+
+---
+
 ## DC4 Contract Gate — ACTIVE — 2026-10-06
 
 Accepted base:
