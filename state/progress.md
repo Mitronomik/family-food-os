@@ -1,5 +1,38 @@
 # Progress
 
+## Post-DC4 correction reconciliation — ACTIVE — 2026-10-07
+
+Accepted main:
+`d3e73072e4e24dde25a1251e19327731455e306f`.
+
+Issue #170 / branch `docs/post-dc4-correction-reconciliation`.
+
+Accepted evidence chain:
+
+- PR #165 merged: DC4 reproducible evidence, status BLOCKED;
+- PR #168 merged: all seven Russian RecipeStep language findings are genuine;
+- PR #169 merged: heterogeneous Fixture 3 failure root cause is Planner global slot ordering, while MealPlan completeness validation enforces the accepted member-specific order.
+
+Authorized next work splits into two independent tracks:
+
+**A — RecipeStep language correction**
+- first operation is a docs-only immutable publication Contract Gate;
+- no existing RecipeVersion mutation;
+- preserve provenance, source/process semantics, prepared-output authority and history.
+
+**B — Planner ordering correction**
+- focused runtime correction is allowed under the existing cross-context contract;
+- exact Fixture 3 remains unchanged;
+- any deterministic output-semantic change requires explicit Planner algorithm/config versioning;
+- no silent behavior drift under `planner-v0.4`;
+- if implementation requires a cross-context contract change, stop and create a docs-only Contract Gate first.
+
+After A and B are accepted: one separate DC4 rerun. Gate1-CLOSE and PR9 remain blocked.
+
+This reconciliation changes state only; it does not implement either correction.
+
+---
+
 ## DC4 execution/evidence — ACTIVE — 2026-10-06
 
 Accepted base:
