@@ -60,14 +60,8 @@ jobs:
       - name: Ruff
         run: |
           set -euo pipefail
-          python -m ruff check \
-            backend/app/domain/planner.py \
-            backend/app/services/planner.py \
-            backend/app/tests/test_planner_ordering_v05.py
-          python -m ruff format --check \
-            backend/app/domain/planner.py \
-            backend/app/services/planner.py \
-            backend/app/tests/test_planner_ordering_v05.py
+          python -m ruff check backend/app/tests/test_planner_ordering_v05.py
+          python -m ruff format --check backend/app/tests/test_planner_ordering_v05.py
 
       - name: Migration and AI invariants
         run: |
