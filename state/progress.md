@@ -16,18 +16,24 @@ Accepted evidence chain:
 Authorized next work splits into two independent tracks:
 
 **A — RecipeStep language correction**
-- first operation is a docs-only immutable publication Contract Gate;
+- A1 evidence investigation — MERGED #168;
+- A2 next: docs-only immutable publication Contract Gate;
+- A3 after A2 acceptance: separately reviewed RecipeVersion runtime/data correction;
+- Track A becomes accepted only after A3 is merged and verified;
+- merging A2 alone does **not** complete Track A and does **not** authorize a DC4 rerun;
 - no existing RecipeVersion mutation;
 - preserve provenance, source/process semantics, prepared-output authority and history.
 
 **B — Planner ordering correction**
-- focused runtime correction is allowed under the existing cross-context contract;
+- B1 investigation — MERGED #169;
+- B2 next: focused runtime correction under the existing cross-context contract;
 - exact Fixture 3 remains unchanged;
-- any deterministic output-semantic change requires explicit Planner algorithm/config versioning;
-- no silent behavior drift under `planner-v0.4`;
-- if implementation requires a cross-context contract change, stop and create a docs-only Contract Gate first.
+- the known correction changes deterministic ordering for the same inputs, so a new Planner algorithm/config version is expected and should be treated as the default required outcome;
+- no silent behavior drift under `planner-v0.4`; keeping the old version requires explicit independently reviewed proof;
+- if implementation requires a cross-context contract change, stop and create a docs-only Contract Gate first;
+- Track B becomes accepted only after B2 is merged and verified.
 
-After A and B are accepted: one separate DC4 rerun. Gate1-CLOSE and PR9 remain blocked.
+Only **A3 accepted + B2 accepted** authorizes one separate DC4 rerun. A2 merge by itself is insufficient. Gate1-CLOSE and PR9 remain blocked.
 
 This reconciliation changes state only; it does not implement either correction.
 
