@@ -247,7 +247,7 @@ def _fixture_exclusions(number: int, members, food) -> tuple[GenerationMemberCon
 
 
 def _selected_exclusion_violations(
-    events, members, constraints, recipes
+    persisted, members, constraints, recipes
 ) -> list[dict[str, object]]:
     """Check actual selected meal ingredients for each participating member."""
     excluded = {item.member_id: item.excluded_food_ingredient_ids for item in constraints}
@@ -258,7 +258,10 @@ def _selected_exclusion_violations(
         for detail in (recipes.get_current_verified(recipe.id),)
     }
     violations: list[dict[str, object]] = []
-    for event_index, event in enumerate(events, 1):
+    members_by_event = {}
+    for serving in persisted.servings:
+        members_by_event.setdefault(serving.event_id, set()).add(serving.member_id)
+    for event_index, event in enumerate(persisted.events, 1):
         if event.recipe_version_id is None:
             continue
         ingredients = selected_version_ingredients.get(event.recipe_version_id)
@@ -270,7 +273,7 @@ def _selected_exclusion_violations(
             })
             continue
         for member_index, member in enumerate(members, 1):
-            if member.id not in event.participant_member_ids:
+            if member.id not in members_by_event.get(event.id, set()):
                 continue
             forbidden = ingredients & excluded.get(member.id, frozenset())
             if forbidden:
@@ -316,11 +319,10 @@ def _run_success_fixtures(planner, meal_plans, households, food, recipes) -> lis
         event_count = len(result.events) if isinstance(result, PlannerSuccess) else 0
         serving_count = len(persisted.servings) if persisted is not None else 0
 
-        selected_violations = _selected_exclusion_violations(
-            () if persisted is None else persisted.events,
-            members,
-            constraints,
-            recipes,
+        selected_violations = (
+            [] if persisted is None else _selected_exclusion_violations(
+                persisted, members, constraints, recipes
+            )
         )
 
         hard_exclusion_rejections = sum(
