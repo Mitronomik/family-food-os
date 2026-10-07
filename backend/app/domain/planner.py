@@ -10,6 +10,7 @@ from dataclasses import asdict, dataclass, is_dataclass, replace
 from datetime import date, timedelta
 from decimal import Decimal, ROUND_HALF_UP
 from enum import StrEnum
+from itertools import pairwise
 from uuid import UUID
 
 from app.domain.food_recipes import MealTypeCode
@@ -479,7 +480,7 @@ def _ordered_slots_v05(
                 if key not in successors:
                     return None
                 sequence.append(key)
-            for before, after in zip(sequence, sequence[1:], strict=False):
+            for before, after in pairwise(sequence):
                 if after not in successors[before]:
                     successors[before].add(after)
                     indegree[after] += 1
