@@ -152,9 +152,14 @@ def _audit_active_catalogue(recipes, food, recipe_nutrition) -> dict[str, Any]:
         else:
             exact_energy_ready = projection.exact_energy_ready
             nutrition_authority_kind = projection.authority_kind.value
-            if projection.authority_kind is RecipeNutritionAuthorityKind.PREPARED_OUTPUT_V1:
+            if (
+                projection.authority_kind
+                is RecipeNutritionAuthorityKind.PREPARED_OUTPUT_V1
+            ):
                 try:
-                    canonical = recipe_nutrition.prepared_canonical_nutrition(version.id)
+                    canonical = recipe_nutrition.prepared_canonical_nutrition(
+                        version.id
+                    )
                 except RecipeNutritionV2UnavailableError:
                     issues.append("PREPARED_CANONICAL_NUTRITION_UNAVAILABLE")
                 else:
@@ -279,7 +284,9 @@ def _accept_custom_pattern(meal_plans, household_id, member_id, roles):
     )
 
 
-def _fixture_exclusions(number: int, members, food) -> tuple[GenerationMemberConstraints, ...]:
+def _fixture_exclusions(
+    number: int, members, food
+) -> tuple[GenerationMemberConstraints, ...]:
     milk_id = food.get_by_code("MILK_2_5").id
     beef_id = food.get_by_code("BEEF_CATEGORY_1_RAW").id
     constraints = []
@@ -297,9 +304,13 @@ def _selected_exclusion_violations(
     events, members, constraints, recipes
 ) -> list[dict[str, object]]:
     """Check selected Planner meals against each participating member exclusion."""
-    excluded = {item.member_id: item.excluded_food_ingredient_ids for item in constraints}
+    excluded = {
+        item.member_id: item.excluded_food_ingredient_ids for item in constraints
+    }
     selected_version_ingredients = {
-        detail.version.id: frozenset(row.food_ingredient_id for row in detail.ingredients)
+        detail.version.id: frozenset(
+            row.food_ingredient_id for row in detail.ingredients
+        )
         for recipe in recipes.list_all()
         if recipe.is_active
         for detail in (recipes.get_current_verified(recipe.id),)
@@ -449,7 +460,9 @@ def _run_fail_closed_fixture(planner, meal_plans, households, food) -> dict[str,
     )
     return {
         "is_failure": isinstance(result, PlannerFailure),
-        "failure_code": None if not isinstance(result, PlannerFailure) else result.code.value,
+        "failure_code": None
+        if not isinstance(result, PlannerFailure)
+        else result.code.value,
         "returned_persisted_plan": persisted is not None,
         "partial_plan_exists": persisted_after,
         "max_repetition_rejections": max_repeat_rejections,
@@ -467,9 +480,7 @@ def audit(config: DatabaseConfig) -> dict[str, Any]:
         catalogue = _audit_active_catalogue(recipes, food, recipe_nutrition)
         planner_supply = _audit_planner_supply(planner)
         fixtures = _run_success_fixtures(planner, meal_plans, households, food, recipes)
-        fail_closed = _run_fail_closed_fixture(
-            planner, meal_plans, households, food
-        )
+        fail_closed = _run_fail_closed_fixture(planner, meal_plans, households, food)
     finally:
         engine.dispose()
 
@@ -499,9 +510,10 @@ def audit(config: DatabaseConfig) -> dict[str, Any]:
     if not fail_closed_pass:
         blockers.append("BOUNDED_INFEASIBILITY_FAILURE")
     migration_ids = migrations.expected_migration_ids()
-    migration_ok = (
-        migration_ids[-1] == "0042_recipe_prepared_output_nutrition"
-        and not any(item.startswith("0043") for item in migration_ids)
+    migration_ok = migration_ids[
+        -1
+    ] == "0042_recipe_prepared_output_nutrition" and not any(
+        item.startswith("0043") for item in migration_ids
     )
     if not migration_ok:
         blockers.append("MIGRATION_HEAD_DRIFT")
