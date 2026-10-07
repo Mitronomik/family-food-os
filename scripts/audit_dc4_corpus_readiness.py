@@ -99,7 +99,7 @@ def _audit_active_catalogue(recipes, food, recipe_nutrition) -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
     blockers: list[str] = []
 
-    active = tuple(recipes.list_active(limit=500))
+    active = tuple(recipe for recipe in recipes.list_all() if recipe.is_active)
     for recipe in active:
         issues: list[str] = []
         detail = recipes.get_current_verified(recipe.id)
@@ -246,7 +246,44 @@ def _fixture_exclusions(number: int, members, food) -> tuple[GenerationMemberCon
     return tuple(constraints)
 
 
-def _run_success_fixtures(planner, meal_plans, households, food) -> list[dict[str, Any]]:
+def _selected_exclusion_violations(
+    events, members, constraints, recipes
+) -> list[dict[str, object]]:
+    """Check actual selected meal ingredients for each participating member."""
+    excluded = {item.member_id: item.excluded_food_ingredient_ids for item in constraints}
+    selected_version_ingredients = {
+        detail.version.id: frozenset(row.food_ingredient_id for row in detail.ingredients)
+        for recipe in recipes.list_all()
+        if recipe.is_active
+        for detail in (recipes.get_current_verified(recipe.id),)
+    }
+    violations: list[dict[str, object]] = []
+    for event_index, event in enumerate(events, 1):
+        if event.recipe_version_id is None:
+            continue
+        ingredients = selected_version_ingredients.get(event.recipe_version_id)
+        if ingredients is None:
+            violations.append({
+                "event": event_index,
+                "reason": "SELECTED_VERSION_NOT_IN_ACTIVE_CATALOGUE",
+                "recipe_version_id": str(event.recipe_version_id),
+            })
+            continue
+        for member_index, member in enumerate(members, 1):
+            if member.id not in event.participant_member_ids:
+                continue
+            forbidden = ingredients & excluded.get(member.id, frozenset())
+            if forbidden:
+                violations.append({
+                    "event": event_index,
+                    "member": member_index,
+                    "recipe_version_id": str(event.recipe_version_id),
+                    "excluded_ingredient_ids": sorted(str(value) for value in forbidden),
+                })
+    return violations
+
+
+def _run_success_fixtures(planner, meal_plans, households, food, recipes) -> list[dict[str, Any]]:
     outcomes = []
     for number, roles_by_member in enumerate(GATE1_ROLE_SHAPES, 1):
         household = households.create_household(
@@ -265,6 +302,7 @@ def _run_success_fixtures(planner, meal_plans, households, food) -> list[dict[st
             WEEK_START,
             _fixture_exclusions(number, members, food),
         )
+        constraints = command.members
         pure_request = planner.compose_authoritative_request(command)
         first_pure = generate_week(pure_request, PLANNER_CONFIG)
         second_pure = generate_week(pure_request, PLANNER_CONFIG)
@@ -277,6 +315,13 @@ def _run_success_fixtures(planner, meal_plans, households, food) -> list[dict[st
         success = isinstance(result, PlannerSuccess) and persisted is not None
         event_count = len(result.events) if isinstance(result, PlannerSuccess) else 0
         serving_count = len(persisted.servings) if persisted is not None else 0
+
+        selected_violations = _selected_exclusion_violations(
+            () if persisted is None else persisted.events,
+            members,
+            constraints,
+            recipes,
+        )
 
         hard_exclusion_rejections = sum(
             PlannerRejectionCode.MEMBER_EXCLUDED_INGREDIENT in row.rejection_codes
@@ -296,6 +341,9 @@ def _run_success_fixtures(planner, meal_plans, households, food) -> list[dict[st
                 "deterministic": deterministic,
                 "trace_fingerprint": result.trace.fingerprint,
                 "hard_exclusion_rejections": hard_exclusion_rejections,
+                "selected_exclusion_violations": selected_violations,
+                "selected_exclusions_respected": not selected_violations,
+                "planner_version": result.trace.config_version,
             }
         )
     return outcomes
@@ -355,7 +403,7 @@ def audit(config: DatabaseConfig) -> dict[str, Any]:
         food = create_food_catalogue_service(engine)
         catalogue = _audit_active_catalogue(recipes, food, recipe_nutrition)
         planner_supply = _audit_planner_supply(planner)
-        fixtures = _run_success_fixtures(planner, meal_plans, households, food)
+        fixtures = _run_success_fixtures(planner, meal_plans, households, food, recipes)
         fail_closed = _run_fail_closed_fixture(
             planner, meal_plans, households, food
         )
@@ -367,6 +415,8 @@ def audit(config: DatabaseConfig) -> dict[str, Any]:
         and row["event_count"] == row["expected_event_count"]
         and row["serving_count"] == row["expected_serving_count"]
         and row["deterministic"]
+        and row["selected_exclusions_respected"]
+        and row["planner_version"] == PLANNER_CONFIG.version
         for row in fixtures
     )
     fail_closed_pass = (
@@ -396,6 +446,7 @@ def audit(config: DatabaseConfig) -> dict[str, Any]:
     return {
         "contract": "DC4_CORPUS_READINESS_V1",
         "week_start": WEEK_START.isoformat(),
+        "planner_version": PLANNER_CONFIG.version,
         "catalogue": catalogue,
         "planner_supply": planner_supply,
         "fixtures": fixtures,
