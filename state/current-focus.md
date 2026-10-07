@@ -45,8 +45,19 @@ DC4 execution/evidence             CURRENT
 → PR9 Shopping Engine
 ```
 
-If DC4 discovers a material catalogue blocker, record it truthfully and route it
-to a separate bounded correction. Do not repair production truth in this PR.
+DC4 audit evidence is BLOCKED on this bounded branch:
+
+- Inventory A: 51 active, 44 PASS, 7 Russian-step readiness BLOCKED;
+- Inventory B: 51 eligible exact-energy, 17/33/1 (PASS);
+- Fixture 1: persisted 7/7; Fixture 2: persisted 14 events / 21 Servings;
+- Fixture 3: Planner produced 21 events but persistence rejected role/order;
+- MILK_2_5 + EGG infeasibility: fail-closed PASS.
+
+Review the current PR #165 and the frozen evidence in
+`data/curation/dc4-corpus-readiness/summary.json` and
+`docs/family-food/dc4-corpus-readiness-report.md`.
+Do not silently repair production truth in this PR. Gate1-CLOSE and PR9 remain
+blocked until separately reviewed correction and a passing DC4 re-audit.
 
 ---
 
