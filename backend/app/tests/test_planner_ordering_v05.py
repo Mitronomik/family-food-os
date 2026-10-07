@@ -5,7 +5,6 @@ from datetime import date, datetime, timezone
 from decimal import Decimal
 from uuid import UUID
 
-import pytest
 
 from app.db.config import DatabaseConfig
 from app.domain.food_recipes import MealTypeCode
