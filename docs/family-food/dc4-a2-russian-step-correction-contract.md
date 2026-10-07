@@ -127,15 +127,20 @@ successor exists.
 
 A3 is therefore authorized to make this **bounded application-contract change**:
 
-- add `recipe_version_number: int` to
-  `ReviewedPreparedRecipeNutritionSpec`, matching the already established
-  revision-targeting pattern used by `ReviewedRecipeIngredientBindingSpec`;
-- `publish_prepared_in_scope` must resolve all same-provenance revisions and
-  require exactly one row with the requested `recipe_version_number`;
+- add a backward-compatible optional
+  `recipe_version_number: int | None = None` target to
+  `ReviewedPreparedRecipeNutritionSpec`, following the explicit
+  revision-targeting pattern already used by
+  `ReviewedRecipeIngredientBindingSpec`;
+- when the target is `None`, preserve the existing legacy contract: external
+  provenance must resolve to exactly one RecipeVersion;
+- when the target is provided, resolve all same-provenance revisions and require
+  exactly one row with that exact positive `recipe_version_number`;
+- every A3 correction spec **must** provide the exact successor version number;
 - the targeted row must still match the full trusted Recipe seed and source
   authority; version-number targeting does not relax structural/provenance checks;
-- existing callers must supply their exact historical/current version number;
-  no implicit "latest" target is introduced.
+- no implicit "latest" target is introduced and unrelated existing prepared-spec
+  callers need not be rewritten merely for A3.
 
 No schema migration is needed for this application contract.
 
