@@ -16,7 +16,6 @@ from app.db import migrations
 from app.db.config import DatabaseConfig
 from app.domain.errors import DomainValidationError
 from app.domain.food_recipes import RightsReviewStatus, VerificationStatus
-from app.domain.recipe_nutrition_v2 import NUTRIENT_CODES, RecipeNutritionAuthorityKind
 from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import MemberMealPatternSourceKind
 from app.domain.planner import (
@@ -26,6 +25,7 @@ from app.domain.planner import (
     PlannerSuccess,
     generate_week,
 )
+from app.domain.recipe_nutrition_v2 import NUTRIENT_CODES, RecipeNutritionAuthorityKind
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_ingredient_composition import (
     create_food_catalogue_service,
@@ -44,7 +44,9 @@ from app.persistence.sqlalchemy_core.meal_plan_uow import (
     SqlAlchemyMealPlanReadScope,
     SqlAlchemyMealPlanUnitOfWork,
 )
-from app.persistence.sqlalchemy_core.nutrition_composition import create_nutrition_service
+from app.persistence.sqlalchemy_core.nutrition_composition import (
+    create_nutrition_service,
+)
 from app.persistence.sqlalchemy_core.pantry_composition import create_pantry_service
 from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
     create_recipe_nutrition_v2_service,
@@ -57,6 +59,7 @@ from app.services.planner import (
     PlannerService,
 )
 from app.services.recipe_nutrition_v2 import RecipeNutritionV2UnavailableError
+
 from scripts.gate1a_fixture_spec import GATE1_ROLE_SHAPES
 
 WEEK_START = date(2026, 9, 14)
@@ -248,8 +251,8 @@ def _add_member(households, household_id, index: int):
         name=f"Участник {index}",
         birth_date=date(1990, 1, index),
         sex="female" if index % 2 else "male",
-        height_cm=Decimal("170"),
-        weight_kg=Decimal("65"),
+        height_cm=Decimal(170),
+        weight_kg=Decimal(65),
         activity_level="active",
         goal="maintain",
     )
