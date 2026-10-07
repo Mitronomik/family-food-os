@@ -213,6 +213,62 @@ def test_v05_preserves_every_member_precedence_and_v04_replay_stays_unchanged() 
     assert v04.trace.fingerprint != v05.trace.fingerprint
 
 
+def test_v05_preserves_repeated_role_occurrence_order() -> None:
+    first, second = uid(2), uid(3)
+    request = PlannerRequest(
+        uid(1),
+        WEEK_START,
+        (
+            MemberPlannerConstraints(
+                first,
+                selection(
+                    first,
+                    (
+                        (MealRole.BREAKFAST, Decimal("0.20")),
+                        (MealRole.SNACK, Decimal("0.10")),
+                        (MealRole.SNACK, Decimal("0.10")),
+                        (MealRole.DINNER, Decimal("0.20")),
+                    ),
+                ),
+                Decimal("2000"),
+            ),
+            MemberPlannerConstraints(
+                second,
+                selection(
+                    second,
+                    (
+                        (MealRole.BREAKFAST, Decimal("0.20")),
+                        (MealRole.DINNER, Decimal("0.20")),
+                    ),
+                ),
+                Decimal("2000"),
+            ),
+        ),
+        (
+            candidate(10, MealTypeCode.BREAKFAST),
+            candidate(12, MealTypeCode.SANDWICH),
+            candidate(11, MealTypeCode.MAIN),
+        ),
+    )
+
+    result = generate_week(
+        request,
+        PlannerConfig(version="planner-v0.5", max_recipe_repetitions=20),
+    )
+
+    assert isinstance(result, PlannerSuccess)
+    assert roles_for_member(result, first) == (
+        MealRole.BREAKFAST,
+        MealRole.SNACK,
+        MealRole.SNACK,
+        MealRole.DINNER,
+    )
+    assert roles_for_member(result, second) == (
+        MealRole.BREAKFAST,
+        MealRole.DINNER,
+    )
+
+
 def test_v05_incompatible_member_precedence_fails_closed() -> None:
     first, second = uid(2), uid(3)
     request = PlannerRequest(
