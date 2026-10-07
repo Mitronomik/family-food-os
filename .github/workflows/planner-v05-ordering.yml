@@ -6,6 +6,7 @@ on:
       - 'backend/app/domain/planner.py'
       - 'backend/app/services/planner.py'
       - 'backend/app/tests/test_planner_ordering_v05.py'
+      - 'backend/app/tests/test_planner_energy_allocation_v04.py'
       - '.github/workflows/planner-v05-ordering.yml'
   workflow_dispatch:
     inputs:
@@ -97,6 +98,7 @@ jobs:
               backend/app/domain/planner.py|\
               backend/app/services/planner.py|\
               backend/app/tests/test_planner_ordering_v05.py|\
+              backend/app/tests/test_planner_energy_allocation_v04.py|\
               .github/workflows/planner-v05-ordering.yml)
                 ;;
               *)
