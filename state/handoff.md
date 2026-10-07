@@ -1,5 +1,55 @@
 # Handoff
 
+## Post-DC4 correction reconciliation — 2026-10-07
+
+Accepted main:
+
+`d3e73072e4e24dde25a1251e19327731455e306f`.
+
+Merged evidence/research:
+
+- PR #165 — DC4 evidence, product gate BLOCKED;
+- PR #168 / Issue #166 — seven genuine Russian RecipeStep language violations;
+- PR #169 / Issue #167 — Planner Fixture 3 role/order root cause isolated.
+
+Current reconciliation: Issue #170 / branch `docs/post-dc4-correction-reconciliation`.
+
+Read before continuing:
+
+- `AGENTS.md`;
+- `state/current-focus.md`;
+- `docs/family-food/dc4-corpus-readiness-contract.md`;
+- `docs/family-food/dc4-corpus-readiness-report.md`;
+- `docs/family-food/dc4-russian-steps-investigation.md`;
+- `docs/family-food/dc4-planner-mealplan-order-investigation.md`.
+
+After this reconciliation is merged, two bounded tracks may run independently:
+
+### A — immutable Russian RecipeStep correction
+
+First deliverable is a **docs-only Implementation Contract Gate**. It must define a version-aware publication route preserving immutable RecipeVersion history, exact retained source/provenance, process bindings, rights, ingredient quantities and Nutrition authority. Do not edit prior versions in place.
+
+### B — Planner ordering runtime correction
+
+The accepted investigation classifies the current defect as a local Planner ordering bug. Implement a focused correction preserving per-member precedence and MealPlan completeness.
+
+Critical review rule: deterministic output semantics are versioned. If the corrected ordering changes output for the same accepted inputs, introduce a new Planner algorithm/config version; do not silently alter `planner-v0.4`. Only preserve the version identity with explicit independently reviewed evidence that semantics are unchanged.
+
+If B implementation reveals a necessary cross-context contract change, stop and create/merge a docs-only Contract Gate before further runtime work.
+
+Required downstream order:
+
+```text
+A accepted + B accepted
+→ separate DC4 rerun
+→ separate Gate1-CLOSE
+→ PR9 only if Gate1-CLOSE passes
+```
+
+No DC4 rerun, Gate1-CLOSE or Shopping implementation belongs to this reconciliation PR.
+
+---
+
 ## DC4 execution/evidence — 2026-10-06
 
 Accepted main:
