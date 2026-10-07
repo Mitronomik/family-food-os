@@ -1,0 +1,1183 @@
+{
+  "schema": "DC4_READINESS_EVIDENCE_V1",
+  "evidence_source": {
+    "workflow": "DC4 corpus readiness",
+    "run_id": 37569620771,
+    "job_id": 112625059401,
+    "audited_head_sha": "bc6c91b779fdd4c5d5c01b97e947a37ef049ca90",
+    "execution_date": "2026-10-07",
+    "focused_tests": "2 passed",
+    "audit_command": "python -m scripts.audit_dc4_corpus_readiness --output /tmp/dc4-summary.json",
+    "audit_step_status": "SUCCESS",
+    "workflow_status_at_capture": "FAILURE (Ruff only; data/readiness audit and focused tests succeeded)"
+  },
+  "overall_status": "BLOCKED",
+  "blockers": [
+    "FULL_ACTIVE_CATALOGUE_READINESS",
+    "GATE1_FIXTURE_FAILURE"
+  ],
+  "full_active_catalogue": {
+    "source": "FoodRecipeCatalogueService.list_all() filtered by is_active",
+    "active_count": 51,
+    "pass_count": 44,
+    "blocked_count": 7,
+    "recipes": [
+      {
+        "canonical_code": "BOILED_CHICKEN_MAIN_PRODUCT",
+        "canonical_name": "Курица отварная без гарнира",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "CHICKEN_CATEGORY_2_RAW"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "HARD_BOILED_EGG",
+        "canonical_name": "Яйцо куриное вкрутую",
+        "meal_type": "breakfast",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "EGG"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "MR2019_1_16_POTATO_SPLIT_PEA_SOUP",
+        "canonical_name": "Суп картофельный с горохом",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "CARROT",
+          "ONION_BULB_FRESH",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "POTATO",
+          "SPLIT_PEAS_DRY",
+          "WATER",
+          "SALT_IODIZED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "MR2019_1_2A_VEGETARIAN_CABBAGE_SOUP",
+        "canonical_name": "Щи из свежей капусты вегетарианские",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "CABBAGE_GREEN",
+          "POTATO",
+          "CARROT",
+          "TOMATO",
+          "ONION_BULB_FRESH",
+          "VEGETABLE_OIL_REFINED_UNSPECIFIED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "MR2019_1_3_LENINGRAD_RASSOLNIK_SOUR_CREAM",
+        "canonical_name": "Рассольник ленинградский со сметаной",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "WATER",
+          "BARLEY_PEARLED",
+          "POTATO",
+          "CARROT",
+          "ONION_BULB_FRESH",
+          "CUCUMBER_PICKLED_CANNED",
+          "SALT_IODIZED",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SOUR_CREAM_20"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "MR2019_1_4_OAT_VEGETABLE_SOUP_SOUR_CREAM",
+        "canonical_name": "Суп овсяный с овощами и сметаной",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "OATS_ROLLED",
+          "POTATO",
+          "CARROT",
+          "ONION_BULB_FRESH",
+          "TOMATO",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED",
+          "WATER",
+          "SOUR_CREAM_20"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "MR2019_2_11_BEEF_VEGETABLE_RAGOUT",
+        "canonical_name": "Рагу из овощей с отварной говядиной",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "BEEF_CATEGORY_1_RAW",
+          "ONION_BULB_FRESH",
+          "CARROT",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "POTATO",
+          "GREEN_PEAS_CANNED",
+          "TOMATO",
+          "SALT_IODIZED",
+          "FLOUR_WHEAT_FIRST_GRADE",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "MR2019_2_14_BOILED_CHICKEN_CATEGORY_1",
+        "canonical_name": "Курица 1 категории отварная",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "CHICKEN_CATEGORY_1_WHOLE_RAW",
+          "CARROT",
+          "SALT_IODIZED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "MR2019_2_15_STEAMED_CHICKEN_SOUFFLE",
+        "canonical_name": "Суфле из отварной курицы паровое",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "CHICKEN_CATEGORY_1_WHOLE_RAW",
+          "EGG",
+          "MILK_3_2",
+          "SALT_IODIZED",
+          "FLOUR_WHEAT_FIRST_GRADE",
+          "BUTTER_PEASANT_72_5_UNSALTED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "MR2019_2_9_STEAMED_BEEF_ROLL_OMELET",
+        "canonical_name": "Рулет говяжий с омлетом паровой",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "BEEF_CATEGORY_1_RAW",
+          "WHEAT_BREAD_PLAIN",
+          "WATER",
+          "SALT_IODIZED",
+          "EGG",
+          "MILK_3_2",
+          "BUTTER_PEASANT_72_5_UNSALTED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "MR2019_6_19_BAKED_MACARONI_HARD_CHEESE",
+        "canonical_name": "Макаронник с сыром запечённый",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "PASTA_DRY",
+          "WATER",
+          "SALT_IODIZED",
+          "BUTTER_PEASANT_72",
+          "CHEESE_HARD_UNSPECIFIED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "MR2019_6_9_VERMICELLI_HARD_CHEESE",
+        "canonical_name": "Вермишель с тёртым сыром",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "PASTA_DRY",
+          "WATER",
+          "SALT_IODIZED",
+          "CHEESE_DUTCH_HARD",
+          "BUTTER_PEASANT_72_5_UNSALTED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SAD28_SANDWICH_CHEESE_20_10",
+        "canonical_name": "Бутерброд с сыром",
+        "meal_type": "sandwich",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "WHEAT_BREAD_PLAIN",
+          "CHEESE_UNSPECIFIED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_10R_PINK_SALMON_TOMATO_VEGETABLES",
+        "canonical_name": "Горбуша, тушенная в томате с овощами",
+        "meal_type": "main",
+        "disposition": "BLOCKED",
+        "issues": [
+          "RUSSIAN_STEPS_NOT_READY"
+        ],
+        "ingredient_codes": [
+          "PINK_SALMON_FILLET_RAW",
+          "CARROT_RED_RAW",
+          "ONION_BULB_FRESH",
+          "TOMATO_PUREE_PASTE",
+          "PARSLEY_ROOT_RAW",
+          "SUGAR",
+          "SUNFLOWER_OIL",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_11M_BEEF_PILAF",
+        "canonical_name": "Плов из отварной говядины",
+        "meal_type": "main",
+        "disposition": "BLOCKED",
+        "issues": [
+          "RUSSIAN_STEPS_NOT_READY"
+        ],
+        "ingredient_codes": [
+          "RICE_GROATS",
+          "BEEF_CATEGORY_1_RAW",
+          "CARROT_RED_RAW",
+          "ONION_BULB_FRESH",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_11R_POLLOCK_TOMATO_VEGETABLES",
+        "canonical_name": "Минтай, тушенный в томате с овощами",
+        "meal_type": "main",
+        "disposition": "BLOCKED",
+        "issues": [
+          "RUSSIAN_STEPS_NOT_READY"
+        ],
+        "ingredient_codes": [
+          "POLLOCK_FILLET_RAW",
+          "CARROT_RED_RAW",
+          "ONION_BULB_FRESH",
+          "TOMATO_PUREE_PASTE",
+          "PARSLEY_ROOT_RAW",
+          "SUGAR",
+          "SUNFLOWER_OIL",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_13K_WHEAT_MILK_PORRIDGE",
+        "canonical_name": "Каша вязкая молочная пшеничная",
+        "meal_type": "breakfast",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "WHEAT_GROATS",
+          "MILK_2_5",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SUGAR",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_15R_SALMON_IN_MILK",
+        "canonical_name": "Сёмга, запечённая в молоке",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "ATLANTIC_SALMON_FILLET_RAW",
+          "MILK_2_5",
+          "ONION_BULB_FRESH",
+          "SUNFLOWER_OIL",
+          "SALT_IODIZED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_16K_DRUZHBA_PORRIDGE",
+        "canonical_name": "Каша «Дружба»",
+        "meal_type": "breakfast",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "RICE_GROATS",
+          "MILLET_GROATS",
+          "MILK_2_5",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SUGAR",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES",
+        "canonical_name": "Сёмга в томате с овощами",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "ATLANTIC_SALMON_FILLET_RAW",
+          "CARROT",
+          "ONION_BULB_FRESH",
+          "TOMATO_PUREE_PASTE",
+          "PARSLEY_ROOT_RAW",
+          "SUGAR",
+          "SUNFLOWER_OIL",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
+        "canonical_name": "Каша жидкая молочная кукурузная",
+        "meal_type": "breakfast",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "CORN_GROATS",
+          "MILK_2_5",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SUGAR",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_1M_BOILED_BEEF_STROGANOFF",
+        "canonical_name": "Бефстроганов из отварной говядины",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "BEEF_CATEGORY_1_RAW",
+          "CARROT",
+          "ONION_BULB_FRESH",
+          "PARSLEY_ROOT_RAW",
+          "FLOUR_WHEAT_HIGH_GRADE",
+          "SOUR_CREAM_15",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_1O_NATURAL_OMELET",
+        "canonical_name": "Омлет натуральный",
+        "meal_type": "breakfast",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "EGG",
+          "MILK_2_5",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_1R_COD_CUTLET",
+        "canonical_name": "Котлета рыбная из трески",
+        "meal_type": "main",
+        "disposition": "BLOCKED",
+        "issues": [
+          "RUSSIAN_STEPS_NOT_READY"
+        ],
+        "ingredient_codes": [
+          "COD_FILLET_RAW",
+          "WHEAT_BREAD_PLAIN",
+          "EGG",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+        "canonical_name": "Запеканка из творога",
+        "meal_type": "breakfast",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "TVOROG_5",
+          "SEMOLINA_GROATS",
+          "SUGAR",
+          "SOUR_CREAM_15",
+          "BREADCRUMBS",
+          "EGG",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED",
+          "VANILLIN",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_20K_BUCKWHEAT_MILK_PORRIDGE",
+        "canonical_name": "Каша жидкая молочная гречневая",
+        "meal_type": "breakfast",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "BUCKWHEAT",
+          "MILK_2_5",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SUGAR",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_20M_BOILED_BEEF",
+        "canonical_name": "Говядина отварная",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "BEEF_CATEGORY_1_RAW",
+          "ONION_BULB_FRESH",
+          "CARROT",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_21M_BOILED_CHICKEN",
+        "canonical_name": "Курица отварная",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "CHICKEN_BREAST",
+          "ONION_BULB_FRESH",
+          "PARSLEY",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_23K_LIQUID_WHEAT_MILK_PORRIDGE",
+        "canonical_name": "Каша жидкая молочная пшеничная",
+        "meal_type": "breakfast",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "WHEAT_GROATS",
+          "MILK_2_5",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SUGAR",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_24K_LIQUID_MILLET_MILK_PORRIDGE",
+        "canonical_name": "Каша жидкая молочная пшенная",
+        "meal_type": "breakfast",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "MILLET_GROATS",
+          "MILK_2_5",
+          "SUGAR",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_25_1K_RICE_MILK_PORRIDGE",
+        "canonical_name": "Каша жидкая молочная рисовая",
+        "meal_type": "breakfast",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "RICE_GROATS",
+          "MILK_2_5",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SUGAR",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_26M_POTATO_BEEF_CASSEROLE",
+        "canonical_name": "Запеканка картофельная с говядиной",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "POTATO",
+          "BEEF_CATEGORY_1_RAW",
+          "BREADCRUMBS",
+          "EGG",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_29M_BEEF_MEATBALLS",
+        "canonical_name": "Фрикадельки из говядины",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "BEEF_CATEGORY_1_RAW",
+          "WHEAT_BREAD_HIGH_GRADE_STALE",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_2K_VISCOUS_CORN_MILK_PORRIDGE",
+        "canonical_name": "Каша вязкая молочная кукурузная",
+        "meal_type": "breakfast",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "CORN_GROATS",
+          "MILK_2_5",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SUGAR",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_2M_BEEF_GOULASH",
+        "canonical_name": "Гуляш из говядины",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "BEEF_CATEGORY_1_RAW",
+          "ONION_BULB_FRESH",
+          "TOMATO_PUREE_PASTE",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "FLOUR_WHEAT_HIGH_GRADE",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_2O_GREEN_PEA_OMELET",
+        "canonical_name": "Омлет с зеленым горошком",
+        "meal_type": "breakfast",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "EGG",
+          "MILK_2_5",
+          "GREEN_PEAS_CANNED",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_2R_PINK_SALMON_CUTLET",
+        "canonical_name": "Котлета рыбная из горбуши",
+        "meal_type": "main",
+        "disposition": "BLOCKED",
+        "issues": [
+          "RUSSIAN_STEPS_NOT_READY"
+        ],
+        "ingredient_codes": [
+          "PINK_SALMON_FILLET_RAW",
+          "WHEAT_BREAD_PLAIN",
+          "EGG",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE",
+        "canonical_name": "Запеканка из творога с морковью",
+        "meal_type": "breakfast",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "TVOROG_5",
+          "CARROT",
+          "MILK_2_5",
+          "SEMOLINA_GROATS",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "EGG",
+          "BREADCRUMBS",
+          "SOUR_CREAM_15",
+          "SUGAR",
+          "SALT_IODIZED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_30M_BEEF_RICE_QUENELLES",
+        "canonical_name": "Кнели из говядины с рисом",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "BEEF_CATEGORY_1_RAW",
+          "RICE_GROATS",
+          "MILK_2_5",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_3M_LAZY_CABBAGE_ROLLS",
+        "canonical_name": "Голубцы ленивые",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "CABBAGE_GREEN",
+          "BEEF_CATEGORY_1_RAW",
+          "RICE_GROATS",
+          "ONION_BULB_FRESH",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_3O_CARROT_OMELET",
+        "canonical_name": "Омлет с морковью",
+        "meal_type": "breakfast",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "EGG",
+          "MILK_2_5",
+          "CARROT",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_3R_POLLOCK_CUTLET",
+        "canonical_name": "Котлета рыбная из минтая",
+        "meal_type": "main",
+        "disposition": "BLOCKED",
+        "issues": [
+          "RUSSIAN_STEPS_NOT_READY"
+        ],
+        "ingredient_codes": [
+          "POLLOCK_FILLET_RAW",
+          "WHEAT_BREAD_PLAIN",
+          "EGG",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_4M_BEEF_CUTLET",
+        "canonical_name": "Котлета из говядины",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "BEEF_CATEGORY_1_RAW",
+          "MILK_2_5",
+          "WHEAT_BREAD_STALE_UNSPECIFIED_GRADE",
+          "BREADCRUMBS",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_4O_SEMI_HARD_CHEESE_OMELET",
+        "canonical_name": "Омлет с сыром",
+        "meal_type": "breakfast",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "EGG",
+          "MILK_2_5",
+          "CHEESE_SEMI_HARD_UNSPECIFIED",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_6K_MILLET_MILK_PORRIDGE",
+        "canonical_name": "Каша вязкая молочная пшенная",
+        "meal_type": "breakfast",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "MILLET_GROATS",
+          "MILK_2_5",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SUGAR",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_6M_BEEF_BITOCHEK",
+        "canonical_name": "Биточек из говядины",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "BEEF_CATEGORY_1_RAW",
+          "MILK_2_5",
+          "WHEAT_BREAD_STALE_UNSPECIFIED_GRADE",
+          "BREADCRUMBS",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_6R_PINK_SALMON_IN_MILK",
+        "canonical_name": "Рыба, припущенная в молоке (горбуша)",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "PINK_SALMON_FILLET_RAW",
+          "MILK_2_5",
+          "ONION_BULB_FRESH",
+          "SUNFLOWER_OIL",
+          "SALT_IODIZED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_7M_BEEF_SCHNITZEL",
+        "canonical_name": "Шницель из говядины",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "BEEF_CATEGORY_1_RAW",
+          "MILK_2_5",
+          "WHEAT_BREAD_STALE_UNSPECIFIED_GRADE",
+          "BREADCRUMBS",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_7R_POLLOCK_IN_MILK",
+        "canonical_name": "Рыба, припущенная в молоке (минтай)",
+        "meal_type": "main",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "POLLOCK_FILLET_RAW",
+          "MILK_2_5",
+          "ONION_BULB_FRESH",
+          "SUNFLOWER_OIL",
+          "SALT_IODIZED"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_8M_STEAMED_BEEF_MEATBALLS",
+        "canonical_name": "Тефтели из говядины паровые",
+        "meal_type": "main",
+        "disposition": "BLOCKED",
+        "issues": [
+          "RUSSIAN_STEPS_NOT_READY"
+        ],
+        "ingredient_codes": [
+          "BEEF_CATEGORY_1_RAW",
+          "ONION_BULB_FRESH",
+          "WHEAT_BREAD_STALE_UNSPECIFIED_GRADE",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      },
+      {
+        "canonical_code": "SCHOOL2022_54_9K_MILK_OAT_PORRIDGE",
+        "canonical_name": "Каша вязкая молочная овсяная",
+        "meal_type": "breakfast",
+        "disposition": "PASS",
+        "issues": [],
+        "ingredient_codes": [
+          "OAT_GROATS",
+          "MILK_2_5",
+          "BUTTER_PEASANT_72_5_UNSALTED",
+          "SUGAR",
+          "SALT_IODIZED",
+          "WATER"
+        ],
+        "nutrition_authority_kind": "PREPARED_OUTPUT_V1",
+        "exact_energy_ready": true,
+        "available_nutrient_count": 1,
+        "unknown_nutrient_count": 53
+      }
+    ]
+  },
+  "planner_eligible_exact_energy": {
+    "actual_count": 51,
+    "actual_meal_types": {
+      "breakfast": 17,
+      "main": 33,
+      "sandwich": 1
+    },
+    "expected_count": 51,
+    "expected_meal_types": {
+      "breakfast": 17,
+      "main": 33,
+      "sandwich": 1
+    },
+    "matches_accepted_baseline": true,
+    "eligible_codes": [
+      "BOILED_CHICKEN_MAIN_PRODUCT",
+      "HARD_BOILED_EGG",
+      "MR2019_1_16_POTATO_SPLIT_PEA_SOUP",
+      "MR2019_1_2A_VEGETARIAN_CABBAGE_SOUP",
+      "MR2019_1_3_LENINGRAD_RASSOLNIK_SOUR_CREAM",
+      "MR2019_1_4_OAT_VEGETABLE_SOUP_SOUR_CREAM",
+      "MR2019_2_11_BEEF_VEGETABLE_RAGOUT",
+      "MR2019_2_14_BOILED_CHICKEN_CATEGORY_1",
+      "MR2019_2_15_STEAMED_CHICKEN_SOUFFLE",
+      "MR2019_2_9_STEAMED_BEEF_ROLL_OMELET",
+      "MR2019_6_19_BAKED_MACARONI_HARD_CHEESE",
+      "MR2019_6_9_VERMICELLI_HARD_CHEESE",
+      "SAD28_SANDWICH_CHEESE_20_10",
+      "SCHOOL2022_54_10R_PINK_SALMON_TOMATO_VEGETABLES",
+      "SCHOOL2022_54_11M_BEEF_PILAF",
+      "SCHOOL2022_54_11R_POLLOCK_TOMATO_VEGETABLES",
+      "SCHOOL2022_54_13K_WHEAT_MILK_PORRIDGE",
+      "SCHOOL2022_54_15R_SALMON_IN_MILK",
+      "SCHOOL2022_54_16K_DRUZHBA_PORRIDGE",
+      "SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES",
+      "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
+      "SCHOOL2022_54_1M_BOILED_BEEF_STROGANOFF",
+      "SCHOOL2022_54_1O_NATURAL_OMELET",
+      "SCHOOL2022_54_1R_COD_CUTLET",
+      "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+      "SCHOOL2022_54_20K_BUCKWHEAT_MILK_PORRIDGE",
+      "SCHOOL2022_54_20M_BOILED_BEEF",
+      "SCHOOL2022_54_21M_BOILED_CHICKEN",
+      "SCHOOL2022_54_23K_LIQUID_WHEAT_MILK_PORRIDGE",
+      "SCHOOL2022_54_24K_LIQUID_MILLET_MILK_PORRIDGE",
+      "SCHOOL2022_54_25_1K_RICE_MILK_PORRIDGE",
+      "SCHOOL2022_54_26M_POTATO_BEEF_CASSEROLE",
+      "SCHOOL2022_54_29M_BEEF_MEATBALLS",
+      "SCHOOL2022_54_2K_VISCOUS_CORN_MILK_PORRIDGE",
+      "SCHOOL2022_54_2M_BEEF_GOULASH",
+      "SCHOOL2022_54_2O_GREEN_PEA_OMELET",
+      "SCHOOL2022_54_2R_PINK_SALMON_CUTLET",
+      "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE",
+      "SCHOOL2022_54_30M_BEEF_RICE_QUENELLES",
+      "SCHOOL2022_54_3M_LAZY_CABBAGE_ROLLS",
+      "SCHOOL2022_54_3O_CARROT_OMELET",
+      "SCHOOL2022_54_3R_POLLOCK_CUTLET",
+      "SCHOOL2022_54_4M_BEEF_CUTLET",
+      "SCHOOL2022_54_4O_SEMI_HARD_CHEESE_OMELET",
+      "SCHOOL2022_54_6K_MILLET_MILK_PORRIDGE",
+      "SCHOOL2022_54_6M_BEEF_BITOCHEK",
+      "SCHOOL2022_54_6R_PINK_SALMON_IN_MILK",
+      "SCHOOL2022_54_7M_BEEF_SCHNITZEL",
+      "SCHOOL2022_54_7R_POLLOCK_IN_MILK",
+      "SCHOOL2022_54_8M_STEAMED_BEEF_MEATBALLS",
+      "SCHOOL2022_54_9K_MILK_OAT_PORRIDGE"
+    ],
+    "ineligible": []
+  },
+  "fixture_results": [
+    {
+      "fixture": 1,
+      "member_count": 1,
+      "roles": [
+        [
+          "DINNER"
+        ]
+      ],
+      "expected_events": 7,
+      "actual_planned_events": 7,
+      "expected_servings": 7,
+      "persisted_servings": 7,
+      "planned_success": true,
+      "persisted_success": true,
+      "persistence_error": null,
+      "planner_version": "planner-v0.4",
+      "deterministic": true,
+      "selected_exclusions_respected": true,
+      "selected_exclusion_violations": [],
+      "hard_exclusion_rejections": 0
+    },
+    {
+      "fixture": 2,
+      "member_count": 2,
+      "roles": [
+        [
+          "BREAKFAST",
+          "DINNER"
+        ],
+        [
+          "DINNER"
+        ]
+      ],
+      "expected_events": 14,
+      "actual_planned_events": 14,
+      "expected_servings": 21,
+      "persisted_servings": 21,
+      "planned_success": true,
+      "persisted_success": true,
+      "persistence_error": null,
+      "planner_version": "planner-v0.4",
+      "deterministic": true,
+      "selected_exclusions_respected": true,
+      "selected_exclusion_violations": [],
+      "hard_exclusion_rejections": 154
+    },
+    {
+      "fixture": 3,
+      "member_count": 3,
+      "roles": [
+        [
+          "BREAKFAST",
+          "LUNCH",
+          "DINNER"
+        ],
+        [
+          "BREAKFAST",
+          "DINNER"
+        ],
+        [
+          "DINNER"
+        ]
+      ],
+      "expected_events": 21,
+      "actual_planned_events": 21,
+      "expected_servings": 42,
+      "persisted_servings": 0,
+      "planned_success": true,
+      "persisted_success": false,
+      "persistence_error": "Member event roles and order must match the accepted resolved schedule.",
+      "planner_version": "planner-v0.4",
+      "deterministic": true,
+      "selected_exclusions_respected": true,
+      "selected_exclusion_violations": [],
+      "hard_exclusion_rejections": 0
+    }
+  ],
+  "bounded_infeasibility": {
+    "failure_code": "NO_ELIGIBLE_CANDIDATE",
+    "is_failure": true,
+    "partial_plan_exists": false,
+    "returned_persisted_plan": false,
+    "hard_exclusion_rejections": 120,
+    "max_repetition_rejections": 1
+  },
+  "planner_version": "planner-v0.4",
+  "week_start": "2026-09-14",
+  "migration_head": "0042_recipe_prepared_output_nutrition",
+  "migration_ok": true,
+  "ai_enabled_required": false,
+  "reused_evidence": {
+    "opportunity_1_2_3_5_6": "backend/app/tests/test_meal_plans.py::test_selection_snapshot_supports_initial_one_to_six_opportunities",
+    "opportunity_overflow": "backend/app/tests/test_meal_plans.py::test_selection_snapshot_rejects_seven_opportunities_at_product_boundary",
+    "source_tamper": "backend/app/tests/test_r3d_final_dc3_batch.py::test_r3d_hash_pinned_gate_rejects_tampered_artifact",
+    "process_binding_tamper": "backend/app/tests/test_r3d_final_dc3_batch.py::test_r3d_review_commitment_changes_on_process_binding_drift",
+    "no_gate_only_authority": "DC4 audit uses ordinary seed_r3d_final_dc3_batch plus ordinary Recipe Catalogue and Planner services; no DC4 RecipeVersion publication"
+  }
+}
