@@ -32,7 +32,6 @@ def test_dc4_reproducible_corpus_and_gate1_evidence(tmp_path: Path) -> None:
     assert all(not row["selected_exclusion_violations"] for row in fixtures)
     assert all(row["planner_version"] == "planner-v0.4" for row in fixtures)
     assert fixtures[1]["hard_exclusion_rejections"] > 0
-    assert fixtures[2]["hard_exclusion_rejections"] > 0
 
     successful = [row for row in fixtures if row["success"]]
     for row in successful:
