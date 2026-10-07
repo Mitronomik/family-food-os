@@ -1,9 +1,13 @@
 import json
 from pathlib import Path
+from types import SimpleNamespace
+from uuid import uuid4
 
 from app.db.config import DatabaseConfig
+from app.domain.food_recipes import MealTypeCode, RightsReviewStatus, VerificationStatus
+from app.services.recipe_nutrition_v2 import RecipeNutritionV2UnavailableError
 
-from scripts.audit_dc4_corpus_readiness import audit
+from scripts.audit_dc4_corpus_readiness import _audit_active_catalogue, audit
 
 
 def test_dc4_reproducible_corpus_and_gate1_evidence(tmp_path: Path) -> None:
@@ -143,3 +147,50 @@ def test_dc4_audit_is_deterministic_at_gate_level(tmp_path: Path) -> None:
     ]
     assert first["overall_status"] == second["overall_status"]
     assert first["blockers"] == second["blockers"]
+
+
+def test_dc4_missing_required_nutrition_authority_is_blocked() -> None:
+    recipe_id = uuid4()
+    version_id = uuid4()
+    ingredient_id = uuid4()
+    recipe = SimpleNamespace(
+        id=recipe_id,
+        canonical_code="EVIDENCE_MISSING_NUTRITION",
+        canonical_name="Яйцо отварное",
+        is_active=True,
+    )
+    version = SimpleNamespace(
+        id=version_id,
+        meal_type_code=MealTypeCode.BREAKFAST,
+        verification_status=VerificationStatus.SOURCE_VERIFIED,
+        rights_review_status=RightsReviewStatus.REVIEWED,
+        rights_basis="Проверенное право использования",
+        source_name="test",
+        source_recipe_id="test-1",
+        source_url="https://example.org/recipe",
+        source_document_sha256="a" * 64,
+    )
+    detail = SimpleNamespace(
+        version=version,
+        ingredients=(SimpleNamespace(food_ingredient_id=ingredient_id),),
+        steps=(SimpleNamespace(instruction="Сварить яйцо"),),
+    )
+    recipes = SimpleNamespace(
+        list_all=lambda: (recipe,),
+        get_current_verified=lambda _recipe_id: detail,
+    )
+    food = SimpleNamespace(
+        get=lambda _ingredient_id: SimpleNamespace(
+            is_active=True, canonical_code="EGG"
+        )
+    )
+
+    def missing_authority(_version_id):
+        raise RecipeNutritionV2UnavailableError("Missing authority")
+
+    nutrition = SimpleNamespace(neutral_consumption_projection=missing_authority)
+    result = _audit_active_catalogue(recipes, food, nutrition)
+    assert result["active_count"] == 1
+    assert result["blocked_count"] == 1
+    assert result["recipes"][0]["disposition"] == "BLOCKED"
+    assert "NUTRITION_AUTHORITY_UNAVAILABLE" in result["recipes"][0]["issues"]
