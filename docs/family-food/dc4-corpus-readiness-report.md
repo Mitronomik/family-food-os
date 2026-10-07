@@ -1,10 +1,10 @@
 # DC4 — Corpus Readiness & Gate1 Consumption Audit
 
-**Status:** BLOCKED — reproducible evidence, **not** Gate1 acceptance  
-**Issue / PR:** #164 / #165  
-**Accepted base:** `0ce316009eb6223d05756f175f388869ae8debd8` (merged #163)  
-**Contract:** [dc4-corpus-readiness-contract.md](dc4-corpus-readiness-contract.md)  
-**Machine-readable evidence:** [summary.json](../../data/curation/dc4-corpus-readiness/summary.json)  
+**Status:** BLOCKED — reproducible evidence, **not** Gate1 acceptance
+**Issue / PR:** #164 / #165
+**Accepted base:** `0ce316009eb6223d05756f175f388869ae8debd8` (merged #163)
+**Contract:** [dc4-corpus-readiness-contract.md](dc4-corpus-readiness-contract.md)
+**Machine-readable evidence:** [summary.json](../../data/curation/dc4-corpus-readiness/summary.json)
 **Evidence execution:** GitHub Actions `DC4 corpus readiness`, run `37569620771`, job `112625059401`, audited head `bc6c91b779fdd4c5d5c01b97e947a37ef049ca90`, 2026-10-07.
 
 ## Result
