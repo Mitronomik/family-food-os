@@ -29,6 +29,9 @@ def test_dc4_reproducible_corpus_and_gate1_evidence(tmp_path: Path) -> None:
     assert [row["serving_count"] for row in fixtures] == [7, 21, 42]
     assert all(row["success"] for row in fixtures)
     assert all(row["deterministic"] for row in fixtures)
+    assert all(row["selected_exclusions_respected"] for row in fixtures)
+    assert all(not row["selected_exclusion_violations"] for row in fixtures)
+    assert all(row["planner_version"] == "planner-v0.4" for row in fixtures)
     assert fixtures[1]["hard_exclusion_rejections"] > 0
     assert fixtures[2]["hard_exclusion_rejections"] > 0
 
@@ -38,6 +41,7 @@ def test_dc4_reproducible_corpus_and_gate1_evidence(tmp_path: Path) -> None:
     assert bounded["hard_exclusion_rejections"] > 0
     assert bounded["max_repetition_rejections"] > 0
 
+    assert result["planner_version"] == "planner-v0.4"
     assert result["migration_head"] == "0042_recipe_prepared_output_nutrition"
     assert result["migration_ok"] is True
     assert result["ai_enabled_required"] is False
