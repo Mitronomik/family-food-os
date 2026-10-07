@@ -159,8 +159,7 @@ def roles_for_member(result: PlannerSuccess, member_id: UUID) -> tuple[MealRole,
     return tuple(
         event.role
         for event in result.events
-        if event.local_date == WEEK_START
-        and member_id in event.participant_member_ids
+        if event.local_date == WEEK_START and member_id in event.participant_member_ids
     )
 
 
