@@ -1,10 +1,10 @@
 # DC4-A2 — Immutable Russian RecipeStep Correction Contract Gate
 
-**Status:** implementation contract / docs-only gate  
-**Issue:** #172  
-**Accepted base:** `3257e99d894c7355d6e1f080b3b4f6ce19f5d989`  
-**Preceded by:** PR #168 / Issue #166  
-**Authorizes after merge:** one separate A3 runtime/data correction PR  
+**Status:** implementation contract / docs-only gate
+**Issue:** #172
+**Accepted base:** `3257e99d894c7355d6e1f080b3b4f6ce19f5d989`
+**Preceded by:** PR #168 / Issue #166
+**Authorizes after merge:** one separate A3 runtime/data correction PR
 **Does not authorize:** DC4 rerun, Gate1-CLOSE or PR9
 
 ## 1. Goal
