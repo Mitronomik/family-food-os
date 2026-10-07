@@ -27,24 +27,42 @@ After this reconciliation is merged, two bounded tracks may run independently:
 
 ### A — immutable Russian RecipeStep correction
 
-First deliverable is a **docs-only Implementation Contract Gate**. It must define a version-aware publication route preserving immutable RecipeVersion history, exact retained source/provenance, process bindings, rights, ingredient quantities and Nutrition authority. Do not edit prior versions in place.
+Exact sequence:
+
+```text
+A1 evidence                         MERGED #168
+→ A2 docs-only immutable correction Contract Gate
+→ A3 separately reviewed RecipeVersion runtime/data correction
+→ A accepted
+```
+
+A2 must define a version-aware publication route preserving immutable RecipeVersion history, exact retained source/provenance, process bindings, rights, ingredient quantities and Nutrition authority. Do not edit prior versions in place.
+
+**A2 merge alone does not complete Track A and does not authorize DC4 rerun.** A3 must be independently reviewed, merged and verified first.
 
 ### B — Planner ordering runtime correction
 
 The accepted investigation classifies the current defect as a local Planner ordering bug. Implement a focused correction preserving per-member precedence and MealPlan completeness.
 
-Critical review rule: deterministic output semantics are versioned. If the corrected ordering changes output for the same accepted inputs, introduce a new Planner algorithm/config version; do not silently alter `planner-v0.4`. Only preserve the version identity with explicit independently reviewed evidence that semantics are unchanged.
+Critical review rule: deterministic output semantics are versioned. The known Fixture 3 fix changes event ordering for the same accepted inputs, so B2 is expected to introduce a new Planner algorithm/config version. Do not silently alter `planner-v0.4`. Preserving the old version identity requires explicit independently reviewed evidence that semantics are unchanged.
 
 If B implementation reveals a necessary cross-context contract change, stop and create/merge a docs-only Contract Gate before further runtime work.
 
 Required downstream order:
 
 ```text
-A accepted + B accepted
+Track B
+B1 investigation                    MERGED #169
+→ B2 versioned Planner ordering runtime correction
+→ B accepted
+
+A3 accepted + B2 accepted
 → separate DC4 rerun
 → separate Gate1-CLOSE
 → PR9 only if Gate1-CLOSE passes
 ```
+
+Do not interpret A2 Contract Gate acceptance as Track A completion.
 
 No DC4 rerun, Gate1-CLOSE or Shopping implementation belongs to this reconciliation PR.
 
