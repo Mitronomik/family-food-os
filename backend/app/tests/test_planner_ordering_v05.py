@@ -58,6 +58,7 @@ from app.services.planner import (
     GenerationMemberConstraints,
     PlannerService,
 )
+
 from scripts.gate1a_fixture_spec import GATE1_ROLE_SHAPES
 
 WEEK_START = date(2026, 9, 14)
@@ -105,7 +106,7 @@ def candidate(number: int, meal_type: MealTypeCode) -> PlannerCandidate:
         uid(number),
         meal_type,
         frozenset(),
-        Decimal("500"),
+        Decimal(500),
         NutritionStatus.COMPLETE,
         True,
         30,
@@ -135,17 +136,17 @@ def heterogeneous_request(
                         (MealRole.DINNER, Decimal("0.25")),
                     ),
                 ),
-                Decimal("2000"),
+                Decimal(2000),
             ),
             MemberPlannerConstraints(
                 second,
                 selection(second, second_roles),
-                Decimal("2000"),
+                Decimal(2000),
             ),
             MemberPlannerConstraints(
                 third,
                 selection(third, ((MealRole.DINNER, Decimal("0.25")),)),
-                Decimal("2000"),
+                Decimal(2000),
             ),
         ),
         (
@@ -229,7 +230,7 @@ def test_v05_preserves_repeated_role_occurrence_order() -> None:
                         (MealRole.DINNER, Decimal("0.20")),
                     ),
                 ),
-                Decimal("2000"),
+                Decimal(2000),
             ),
             MemberPlannerConstraints(
                 second,
@@ -240,7 +241,7 @@ def test_v05_preserves_repeated_role_occurrence_order() -> None:
                         (MealRole.DINNER, Decimal("0.20")),
                     ),
                 ),
-                Decimal("2000"),
+                Decimal(2000),
             ),
         ),
         (
@@ -283,7 +284,7 @@ def test_v05_incompatible_member_precedence_fails_closed() -> None:
                         (MealRole.DINNER, Decimal("0.50")),
                     ),
                 ),
-                Decimal("2000"),
+                Decimal(2000),
             ),
             MemberPlannerConstraints(
                 second,
@@ -294,7 +295,7 @@ def test_v05_incompatible_member_precedence_fails_closed() -> None:
                         (MealRole.BREAKFAST, Decimal("0.50")),
                     ),
                 ),
-                Decimal("2000"),
+                Decimal(2000),
             ),
         ),
         (
