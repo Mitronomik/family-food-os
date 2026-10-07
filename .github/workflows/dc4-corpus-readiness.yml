@@ -51,7 +51,7 @@ jobs:
       - name: Generate current audit evidence
         run: |
           set -euo pipefail
-          python scripts/audit_dc4_corpus_readiness.py --output /tmp/dc4-summary.json
+          python -m scripts.audit_dc4_corpus_readiness --output /tmp/dc4-summary.json
           python - <<'PY'
           import json
           payload = json.load(open('/tmp/dc4-summary.json', encoding='utf-8'))
