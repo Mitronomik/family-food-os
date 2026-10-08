@@ -1,10 +1,10 @@
 # Gate1-CLOSE — Planning Core closure decision
 
-**Status:** CLOSE — effective when PR #181 is independently reviewed and merged  
-**Issue / PR:** #180 / #181  
-**Accepted base:** `c85fae8e8e2c135855f1ba64ca6722de20e1bd29` (merged PR #179)  
-**Machine receipt:** [decision.json](../../data/curation/gate1-close/decision.json)  
-**DC4 rerun:** [dc4-corpus-readiness-rerun-report.md](dc4-corpus-readiness-rerun-report.md)  
+**Status:** CLOSE — effective when PR #181 is independently reviewed and merged
+**Issue / PR:** #180 / #181
+**Accepted base:** `c85fae8e8e2c135855f1ba64ca6722de20e1bd29` (merged PR #179)
+**Machine receipt:** [decision.json](../../data/curation/gate1-close/decision.json)
+**DC4 rerun:** [dc4-corpus-readiness-rerun-report.md](dc4-corpus-readiness-rerun-report.md)
 **Closure verification:** GitHub Actions `Gate1 closure`, run `37808665837`, job `113419518103`, artifact `11563757892`, exact head `4f3be9ad3d9c9ff929c86c7478a3881c65aa3c93`.
 
 ## DECISION
