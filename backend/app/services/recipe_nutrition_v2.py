@@ -385,8 +385,8 @@ class RecipeNutritionV2Service:
         )
         if len(matches) != 1:
             raise RecipeNutritionV2ConflictError(
-                "Prepared spec must resolve exactly one structurally matching "
-                "same-provenance RecipeVersion."
+                "Prepared RecipeVersion structure/process must resolve exactly one "
+                "same-provenance structural match."
             )
         detail = matches[0]
         version = detail.version
