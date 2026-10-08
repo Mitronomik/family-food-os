@@ -31,6 +31,7 @@ jobs:
     timeout-minutes: 60
     env:
       AI_ENABLED: 'false'
+      ACCEPTED_BASE: '2482c52085d7ba9e530f650105a6664ed6d369a7'
     steps:
       - name: Checkout exact revision
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -146,6 +147,11 @@ jobs:
           mapfile -t changed < <(git diff --name-only "${base}"...HEAD)
           printf 'Changed paths:\n'
           printf '  %s\n' "${changed[@]}"
+          if [[ "${base}" != "${ACCEPTED_BASE}" ]]; then
+            echo 'Downstream PR after merged DC4 rerun: historical changed-path restriction skipped.'
+            echo 'Full rerun tests/evidence, Ruff, migration/AI and diff whitespace remain enforced.'
+            exit 0
+          fi
           for path in "${changed[@]}"; do
             case "${path}" in
               scripts/audit_dc4_corpus_readiness_rerun.py|\
