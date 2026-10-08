@@ -18,6 +18,7 @@ from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
 )
 from app.seed.dc4_a3_russian_step_corrections import (
     CORRECTION_CODES,
+    _load_corrections,
     seed_dc4_a3_russian_step_corrections,
 )
 from scripts.audit_dc4_corpus_readiness import _audit_active_catalogue
@@ -45,6 +46,7 @@ def focused_audit(
     for code in CORRECTION_CODES:
         published = publication_by_code[code]
         audited = by_code[code]
+        correction = correction_by_code[code]
         runtime_ids.append(
             {
                 "canonical_code": code,
@@ -52,7 +54,17 @@ def focused_audit(
                 "successor_version_id": str(published.successor_version_id),
                 "current_audited_recipe_version_id": audited["recipe_version_id"],
                 "publication_disposition": published.disposition,
-                "expected_energy_kcal": format(published.exact_energy_kcal, "f"),
+                "source_name": correction_artifact["source_name"],
+                "source_recipe_id": correction["source_recipe_id"],
+                "source_version": correction_artifact["source_version"],
+                "source_document_sha256": correction_artifact[
+                    "source_document_sha256"
+                ],
+                "rights_basis": correction_artifact["rights_basis"],
+                "output_mass_g": correction["output_mass_g"],
+                "expected_energy_kcal": correction["energy_kcal"],
+                "old_steps": correction["old_steps"],
+                "new_steps": correction["new_steps"],
             }
         )
     russian_blocked = [
@@ -97,6 +109,10 @@ def focused_audit(
         "prior_russian_blockers_cleared": corrected_pass and not russian_blocked,
         "runtime_identity_matches_current_catalogue": runtime_id_match,
         "runtime_version_receipts": runtime_ids,
+        "correction_change_note": correction_artifact["change_note"],
+        "correction_contract_path": (
+            "data/curation/dc4-a3-russian-step-corrections/corrections.json"
+        ),
         "corrected_recipe_issues": corrected_issues,
         "layer_a": {
             "active_count": catalogue["active_count"],
