@@ -31,6 +31,7 @@ from app.seed.r3a_school2022_main_batch import (
 )
 from app.seed.r3d_final_dc3_batch import seed_r3d_final_dc3_batch
 from app.services.food_recipes import RecipeCatalogueConflictError
+from app.domain.planner import PlannerConfig
 from app.services.planner import PlannerService
 from app.services.recipe_nutrition_v2 import (
     PreparedPublicationDisposition,
@@ -349,12 +350,17 @@ def seed_dc4_a3_russian_step_corrections(
                 )
             )
 
+        planner_config = PlannerConfig(
+            version="planner-v0.5",
+            max_recipe_repetitions=3,
+        )
         planner = PlannerService(
             None,
             None,
             catalogue,
             None,
             None,
+            planner_config,
             recipe_nutrition=nutrition,  # type: ignore[arg-type]
         )
         admissions = tuple(planner.compose_candidate_admission())
@@ -375,7 +381,7 @@ def seed_dc4_a3_russian_step_corrections(
             active_recipe_count=active_count,
             eligible_count=len(eligible),
             meal_type_counts=tuple(sorted(meal_counts.items())),
-            planner_version=planner._config.version,
+            planner_version=planner_config.version,
         )
     finally:
         engine.dispose()
