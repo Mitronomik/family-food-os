@@ -25,8 +25,14 @@ from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
 )
 from app.seed.r3a_school2022_main_batch import (
     _load_contract as _load_r3a_contract,
+)
+from app.seed.r3a_school2022_main_batch import (
     _prepared_spec as _r3a_prepared_spec,
+)
+from app.seed.r3a_school2022_main_batch import (
     _recipe_seed as _r3a_recipe_seed,
+)
+from app.seed.r3a_school2022_main_batch import (
     activate_r3a_school2022_main_batch,
     publish_r3a_school2022_main_batch,
 )
