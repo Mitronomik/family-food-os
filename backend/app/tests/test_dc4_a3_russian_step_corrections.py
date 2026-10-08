@@ -149,10 +149,7 @@ def test_a3_fresh_publication_preserves_immutable_recipe_and_nutrition_truth(
             required = canonical.required_total
             assert sum(item.amount is not None for item in required) == 1
             assert sum(item.amount is None for item in required) == 53
-            assert (
-                canonical.per_serving_amount("ENERGY_KCAL")
-                == row.exact_energy_kcal
-            )
+            assert canonical.per_serving_amount("ENERGY_KCAL") == row.exact_energy_kcal
     finally:
         engine.dispose()
 
@@ -239,9 +236,7 @@ def test_a3_injected_prepared_write_failure_rolls_back_successor(
 
     def fail(connection, cursor, statement, parameters, context, executemany):
         del connection, cursor, parameters, context, executemany
-        if statement.strip().startswith(
-            "INSERT INTO recipe_prepared_nutrient_values"
-        ):
+        if statement.strip().startswith("INSERT INTO recipe_prepared_nutrient_values"):
             raise RuntimeError("injected DC4-A3 prepared authority failure")
 
     event.listen(engine, "before_cursor_execute", fail)
