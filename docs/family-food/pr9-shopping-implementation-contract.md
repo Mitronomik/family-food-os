@@ -1,9 +1,9 @@
 # PR9-ARCH — Generic Shopping Engine implementation contract
 
-**Status:** PROPOSED — docs-only implementation contract gate, independent review required  
-**Issue:** #183  
-**Accepted base:** `main@73cb7ee6b20d1af958639f75f6fa5db286381cb3` (merged #181)  
-**Authority:** root `AGENTS.md`, [Master Roadmap](master-roadmap.md), [architecture](architecture.md), [2026-09-13 addendum](master-roadmap-addendum-2026-09-13.md).  
+**Status:** PROPOSED — docs-only implementation contract gate, independent review required
+**Issue:** #183
+**Accepted base:** `main@73cb7ee6b20d1af958639f75f6fa5db286381cb3` (merged #181)
+**Authority:** root `AGENTS.md`, [Master Roadmap](master-roadmap.md), [architecture](architecture.md), [2026-09-13 addendum](master-roadmap-addendum-2026-09-13.md).
 **Next runtime stage:** PR9 Shopping, **blocked** until this contract is reviewed and merged.
 
 ## 1. Goal and factual preflight
@@ -21,14 +21,14 @@ Repository facts verified against the accepted base:
 
 ### CONTRACT versus still requiring implementation preflight
 
-The following are proposed cross-context contracts, **not claims of existing code**: combined read-scope/UoW, Shopping persistence tables, snapshot hashing, Shopping API, demand resolver and runtime migration. During PR9 runtime preflight verify concrete RecipeVersion/Assembly ingredient read methods, FoodIngredient edible/raw-form normalization semantics, current plan event lookup, and Pantry expiration policy. If a proposed contract conflicts with an accepted physical model, return to contract review, not a silent workaround.
+The following are proposed cross-context contracts, **not claims of existing code**: combined read-scope/UoW, Shopping persistence tables, snapshot hashing, Shopping API, demand resolver and runtime migration. The contract below freezes calculation, Pantry eligibility, representation, transaction strategy and assembly V1 policy. Runtime preflight may verify adapter method names and map the frozen contract to existing implementation but may not reinterpret these semantics without a new reviewed docs-only amendment. If a proposed contract conflicts with an accepted physical model, return to contract review, not a silent workaround.
 
 ## 2. Source-kind demand decision table
 
 | Current source kind | Direct new purchase demand in PR9 | Contract |
 | --- | --- | --- |
 | `COOK_RECIPE` | **YES** where exact immutable RecipeVersion ingredient input and participating Servings can be resolved | Sum event's positive Serving `portion_servings`; resolve ingredient inputs and normalize as specified below. Invalid/missing pins fail closed. |
-| `ASSEMBLY` | **CONDITIONAL** | Only if an accepted, source-pinned validated RecipeAssembly materializes exact per-ingredient input, yield/scale and source reference. Do not treat `source_reference` as an arbitrary recipe id; missing authority produces explicit unresolved status. |
+| `ASSEMBLY` | **NO in PR9 V1** | The accepted repository has no production RecipeAssembly aggregate/read adapter. Always emit an `ASSEMBLY_UNSUPPORTED` unresolved obligation per event, even if `source_reference` is populated. Never infer ingredients. A later approved assembly authority requires its own contract change. |
 | `LEFTOVER` | **NO automatically** | It represents already obtained food, not another fresh recipe. An accepted future remaining-serving/prepared-stock reservation contract is needed for supply validation. No duplicate ingredient demand. |
 | `PREPARED` | **NO automatically** | It refers to pre-existing prepared supply. No second ingredient charge; if supply is not verified, expose unresolved supply rather than asserting it is available. |
 | `READY_MEAL` | **NO canonical recipe ingredients by default** | Purchased ready-food demand belongs to a separately defined purchasable-item/retail-independent supply model; keep visible as unresolved purchase/supply when no trustworthy representation exists. Do not suppress it as fulfilled or invent ingredient decomposition. |
@@ -40,7 +40,7 @@ A complete ShoppingList must distinguish **covered recipe grocery demand** from 
 ## 3. Quantity calculation and normalization
 
 1. Read one authoritative MealPlan **revision** and its events/Servings, not a stitched mixture of current and historical versions. Every Serving must reference an event in that same plan and member in that Household.
-2. For each demand-producing event, resolve the pinned immutable recipe/validated assembly data. The recipe's declared base servings and unit-normalized ingredient inputs must be positive and source-backed. The event factor is **sum of participating members' `portion_servings`**, interpreted using the accepted Recipe/MealPlan serving convention; do not multiply by household size again. Confirm this convention against current RecipeScaling and Serving tests before runtime coding.
+2. For each demand-producing event, resolve the pinned immutable recipe/validated assembly data. The recipe's declared base servings and unit-normalized ingredient inputs must be positive and source-backed. Freeze the same formula as existing `scale_recipe(detail, target_servings)` and per-base-serving nutrition: `event_target_servings = Σ Serving.portion_servings` for this event; `required_ingredient_quantity = RecipeIngredient.quantity × event_target_servings / RecipeVersion.base_servings`. All values are Decimal. Require positive base servings and ingredient quantities; validate each Serving references that event, the exact persisted plan revision, and an eligible member of the Household. Do not multiply by member count again.
 3. Scale exact amounts with `Decimal` and versioned deterministic engine rules. Aggregate by `FoodIngredient` plus **compatible input form and base unit**. Same named ingredient with incompatible raw/cooked form or unresolved mass/volume/count conversion **must not** be merged. Do not silently use a density, yield, edible fraction or piece-weight without validated per-food provenance.
 4. Display and persist required input quantities with explicit precision/rounding policy. Intermediate arithmetic remains exact within Decimal precision; round **once** at the documented output boundary, upward where necessary to avoid understating purchase demand, not per event before aggregate. Unknown required quantity remains unknown. `percent` without an accepted mass denominator is not a purchasable unit.
 5. `required_quantity` represents **gross canonical purchase-equivalent need after any authorized form/edible-fraction conversion**; `pantry_available_quantity` is compatible, valid, non-reserved on-hand quantity; `purchase_quantity = max(required_quantity - pantry_available_quantity, 0)`. Do not subtract pantry from a noncomparable edible/raw demand. Missing generic price must remain UNKNOWN; pricing, SKU/package selection and retailer availability are not PR9 prerequisites.
@@ -52,7 +52,7 @@ A complete ShoppingList must distinguish **covered recipe grocery demand** from 
 - **INCOMPLETE with explicit unresolved rows/warnings:** non-cooking sources needing independently confirmed supply (`LEFTOVER`, `PREPARED`, `READY_MEAL`), unverified conditional `ASSEMBLY`, safe omission of a *not computable* subset while correctly identifying affected event, and unknown price. Incompleteness must never be shown as a complete grocery order.
 - **Normal:** well-formed recipe events and zero demand for out-of-home events. Budget/cost totals are UNKNOWN unless every included price has accepted authority; do not display a fabricated zero-cost week.
 
-The runtime implementation must test the boundary between `BLOCKING` and `INCOMPLETE` for each source kind and each conversion failure. If representing unresolved rows requires another schema concept, settle it in this contract before a runtime PR.
+The runtime implementation must test the boundary between `BLOCKING` and `INCOMPLETE` for each source kind and each conversion failure. The separate `ShoppingUnresolvedObligation` table defined in §5 is mandatory; no runtime choice between nullable items and split tables.
 
 ## 4. Pantry snapshot and subtraction
 
@@ -67,16 +67,25 @@ Proposed stable fingerprint input, captured in one transaction/read-consistent b
 
 Do not hash nondeterministic row order or timestamps unrelated to availability. In particular, exclude only irrelevant metadata after proving it cannot affect the policy; a changed quantity or eligibility field **must** change the fingerprint. Item snapshot identity is not a reservation: two simultaneous Shopping runs can read the same stock; neither can decrement it.
 
-Define availability policy before shipping: expired vs future-expiring goods, estimated inventory, multiple locations, and incompatible units/forms. Prefer conservative subtraction: verified compatible positive amounts only, capped at required amount, using deterministic FEFO for explanation; an estimated/unverified amount must be flagged and not treated as guaranteed purchased coverage. Distinguish Pantry `quantity` from genuinely usable stock in all responses. A Pantry location alone does not prove an ingredient in a certain prepared form.
+**Frozen PR9 V1 eligibility policy (no silent use of FEFO repository's current “available” naming):**
 
-At generation commit, prevent time-of-check/time-of-use mismatch: reread/validate the plan revision and Pantry fingerprint under the transaction strategy supported by the current SQLite UoW. If inputs differ, rollback the entire derived write and return a conflict/retryable stale-input response. Specify SQLite read/write locking behavior in the runtime implementation; an application-only before/after hash with a write window is insufficient. Any persisted list must declare exactly which snapshot produced it.
+1. Determine `as_of_date` once from the Household's IANA timezone and the application's captured clock instant (both recorded with the Shopping source snapshot). `expires_at < as_of_date` is expired and **excluded**. `expires_at == as_of_date` remains eligible on that local date; no assumed hour-level expiry.
+2. `estimated=true` items are **not subtracted**; report their positive amounts separately as uncertain inventory with an explicit Russian warning. An estimated quantity can never reduce `purchase_quantity`. Unknown expiry does not mean expired: an otherwise confirmed positive item without expiry is eligible but marked expiry-unknown.
+3. Include positive, non-estimated, unexpired items from all three accepted locations `PANTRY`, `FRIDGE`, `FREEZER`. Location influences display/FEFO ordering but never automatically proves prepared food or a different input form.
+4. Subtract only when the canonical `FoodIngredient` identity **and** its input form and `UnitCode` equal the normalized Shopping item. The Pantry stored unit must equal the canonical default unit. No inferred count↔mass, mass↔volume, raw↔cooked conversion; an ingredient requiring such conversion stays non-subtractable with an explicit warning until authoritative provenance exists.
+5. Sum independent qualifying lots for the same ingredient/form/unit using Decimal. Allocate in stable FEFO order (earliest known expiry, then location and UUID tie-break), cap subtraction at required demand, and preserve per-lot contribution metadata for explanation. `purchase_quantity = max(required_quantity - eligible_allocated_quantity, 0)`.
+6. Only current confirmed on-hand quantity participates: do not subtract leftovers/prepared meal supply again, reserved future inventory, or unconfirmed purchases. Pantry availability for shopping is **not** an inventory reservation.
+7. Fingerprint the **entire relevant Household Pantry state**, including estimated and expired rows and the captured `as_of_date`/policy version, so expiry-boundary rollover or stock edits invalidate dependent lists. The snapshot includes eligibility-driving facts even for excluded rows.
+
+**Frozen SQLite consistency contract:** one Shopping Unit of Work, one SQLite connection, explicit `BEGIN IMMEDIATE` before any authoritative source read (not a deferred read followed by an upgrade). Under the acquired writer reservation: load the exact MealPlan revision and its Servings, immutable recipe inputs and FoodIngredient truth, and the full Pantry snapshot; compute fingerprint and deterministic Shopping output; insert header, canonical items and unresolved obligations; verify all source identity/version pins while still holding that reservation; then commit once. Competing SQLite writers of MealPlan/Pantry/catalogue state cannot commit between the snapshot read and Shopping commit. A busy/locked timeout returns a structured retryable conflict; any exception rolls back the whole Shopping write. **No partial list becomes authoritative.** SQLite WAL/read snapshot semantics and busy timeout must be validated by executable concurrent-writer tests. The combined adapter must use the accepted project UoW contracts and must not let application/domain import SQLAlchemy. Do not open separate independently committed read scopes. When PostgreSQL arrives, define equivalent transaction locking/isolation in a separate approved shared-deployment contract.
 
 ## 5. Derived-state lifecycle and persistence proposal
 
-New proposed Household-owned aggregates: `ShoppingList` and `ShoppingListItem` (use one canonical name; avoid duplicate `ShoppingItem` synonym). Proposed header:
+**Decision: three separate persisted entities**: `ShoppingList` (immutable header), `ShoppingListItem` (only resolved canonical FoodIngredient demand), `ShoppingUnresolvedObligation` (event-level non-grocery or unverified obligations). Do not use a nullable FoodIngredient tagged union. This is the fixed PR9 V1 schema boundary.
 
 - UUIDv4 `id`, `household_id`, `meal_plan_id`, `source_plan_revision_number`, `source_pantry_snapshot_hash` (and snapshot schema/policy version), `engine_version`, `config_fingerprint`, `status` (`COMPLETE` or `INCOMPLETE`), `content_fingerprint`, UTC `created_at`; optional `supersedes_list_id` for successor provenance.
-- An authoritative `ShoppingListItem` stores `shopping_list_id`, canonical `food_ingredient_id` (nullable **only for explicitly unresolved noncatalogue obligations**), ingredient form/basis and unit, exact required/available/purchase quantities **or structured unknown**, Russian display-safe warning metadata and deterministic ordinal. A companion unresolved-obligation representation may be required to avoid overloading an ingredient row; decide exact normalized schema in the contract review, prior to runtime.
+- `ShoppingListItem`: UUIDv4 `id`, `shopping_list_id` FK, **non-null** `food_ingredient_id` FK, non-null normalized input form/basis and unit, Decimal `required_quantity`, `pantry_available_quantity`, `purchase_quantity` (each nonnegative, exact fixed precision), deterministic `ordinal`, optional structured warnings. `UNIQUE(shopping_list_id,food_ingredient_id,form,basis,unit)` and `UNIQUE(shopping_list_id,ordinal)`. A required unresolved numeric ingredient conversion is BLOCKING rather than a fabricated amount.
+- `ShoppingUnresolvedObligation`: UUIDv4 `id`, `shopping_list_id` FK, `meal_event_id` source reference, enumerated accepted `source_kind`, enum reason (`ASSEMBLY_UNSUPPORTED`, `LEFTOVER_SUPPLY_UNVERIFIED`, `PREPARED_SUPPLY_UNVERIFIED`, `READY_MEAL_UNRESOLVED`), optional safe Russian description/source reference, stable `ordinal`; quantity/price **absent**, not zero. Unique `(shopping_list_id,meal_event_id,reason)`. `ORDER_OUT`/`EAT_OUT` are documented non-grocery events and do not generate unresolved *shopping* obligations absent a separately accepted purchase requirement.
 - Persist per-input provenance/pins or a canonicalized source snapshot descriptor sufficient to audit the derivation without depending on mutable recipe catalogue labels.
 - Database constraints: household scope at both read and write, list/item FK, uniqueness of stable item key/ordinal per list, quantity `>=0` when known, valid enum/status/unit and revision positivity; indexes for `(household_id,meal_plan_id,created_at)`, current-week lookup and list items. Do not store a mutable `is_current` flag as sole staleness truth.
 
@@ -84,11 +93,11 @@ A generation creates an **immutable list snapshot** with all its items in one Uo
 
 Do **not** assume an unrelated `MealPlan.id` automatically pins the latest `revision_number`; confirm existing revision ID/history semantics and store sufficient identity to distinguish revisions. Unknown field exactness and migration constraints are part of final contract review, not assumptions of the existing database.
 
-### Proposed migration boundary
+### Migration boundary
 
 - Runtime may append `0043_shopping_engine` **only if migration registry still ends at 0042 at implementation start**. Reconcile reserved 0033 without backfilling it, and check concurrent branches before claiming the number.
 - New tables coexist with legacy tables; no rewrite of old meal/pantry/recipe data. No release-breaking destructive alteration. Fresh and upgrade chain, lineage, backup/export and foreign-key/integrity tests are mandatory.
-- Docs-only PR9-ARCH creates **no migration and no runtime table**. Schema specifics are a reviewable proposal; any new Pantry revision or cross-context schema dependency demands an explicit change to this contract and another review before runtime.
+- Docs-only PR9-ARCH creates **no migration and no runtime table**. The three-table schema and consistency contract above are frozen for V1; if runtime discovers a required new Pantry revision or cross-context schema dependency, return to independent contract review.
 
 ## 6. Service, repository, UoW and API boundary
 
@@ -123,11 +132,8 @@ These routes are *capabilities*, not a mandate to add four controllers if existi
 
 **DECISION proposed for approval:** use generic `FoodIngredient` items only; immutable revisioned Shopping snapshots; Pantry read-only fingerprint; complete-versus-incomplete distinction; source-kind gating; fail-closed numerical authority; no Retail/AI/Prep coupling. PR9-ARCH by itself has **no implementation authority** until reviewed/merged.
 
-**OPEN QUESTION — must close before runtime:**
-1. Which current RecipeVersion/RecipeAssembly persisted read adapter provides an exact input-grams/servings snapshot without introducing a new version authority? Which `ASSEMBLY` modes are actually producible?
-2. Can the accepted SQLite UoW provide read-consistent cross-context snapshots and a safe fingerprint recheck under concurrent writes without a new abstraction? Identify exact locking strategy and failure path.
-3. Are Pantry metadata, expiration and estimated stock policies sufficient to subtract safely, and how are canonical food form conversions validated? Incomplete evidence must not become an estimated quantity silently.
-4. Is a distinct unresolved-obligation table preferable to nullable ingredient rows for READY_MEAL/PREPARED/LEFTOVER, and what is the precise persisted structure?
-5. What are the exact existing RecipeScaling/Serving portion units and plan revision lookup semantics at runtime head? Revalidate before final schema/API freeze.
+**Frozen resolutions of the earlier blockers:** exact scaling is in §3; Pantry eligibility and fingerprint are in §4; three-table unresolved representation is in §5; `BEGIN IMMEDIATE` single-UoW locking is in §4; `ASSEMBLY` is always unresolved for V1 in §2. These are binding runtime acceptance criteria, not further architecture choices.
+
+**Remaining implementation checks (non-architectural):** map accepted RecipeVersion and FoodIngredient read adapters to the already fixed formula; determine the exact SQLite UoW extension point for explicit `BEGIN IMMEDIATE` and prove it with concurrent tests; confirm the plan ID + `revision_number` storage pairing and schema field types; reconcile migration registry against `main` before allocating 0043. If any requires changing an above invariant, **stop and amend this gate under independent review**.
 
 **Stop rule:** deliver one docs-only PR for independent review, with current-focus/progress/handoff synchronized. No schema, runtime, seed, AI, Retail, Pantry mutation, Prep, PDF or PWA changes. After merge, open a separately scoped PR9 runtime task; no autonomous merge.
