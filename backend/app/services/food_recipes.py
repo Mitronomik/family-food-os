@@ -414,8 +414,8 @@ class FoodRecipeCatalogueService:
         )
         if len(matches) != 1:
             raise RecipeCatalogueConflictError(
-                "Trusted seed must resolve exactly one structurally matching "
-                "same-provenance RecipeVersion."
+                "Same-provenance trusted seed must resolve exactly one structurally "
+                "matching RecipeVersion."
             )
         return TrustedRecipeSeedDisposition.EXACT_REPLAY
 
@@ -503,8 +503,8 @@ class FoodRecipeCatalogueService:
                 )
                 if len(matches) != 1:
                     raise RecipeCatalogueConflictError(
-                        "Trusted historical seed must resolve exactly one structurally "
-                        "matching same-provenance RecipeVersion."
+                        "Same-provenance trusted historical seed must resolve exactly "
+                        "one structurally matching RecipeVersion."
                     )
                 _increment_detail(counts, matches[0], inserted=False)
                 continue
