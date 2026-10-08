@@ -97,6 +97,27 @@ def test_dc4_rerun_reproducible_corpus_and_gate1_evidence(tmp_path: Path) -> Non
         for row in fixtures
     ]
 
+    reused = frozen["reused_evidence"]
+    assert reused["verification_freeze_sha"] == (
+        "3e5139283c557f75e59f2dd23dd219902b0a4840"
+    )
+    assert reused["full_backend_workflow"]["status"] == "SUCCESS"
+    assert reused["secondary_full_backend_workflow"]["status"] == "SUCCESS"
+    requirements = {row["requirement"]: row for row in reused["requirements"]}
+    assert set(requirements) == {
+        "MEAL_PATTERN_1_2_3_5_6_OPPORTUNITIES",
+        "MEAL_PATTERN_SEVEN_OPPORTUNITY_BOUNDARY",
+        "MEAL_PATTERN_ACCEPTANCE_PERSISTENCE",
+        "MEAL_TYPE_DISTINCT_FROM_MEAL_ROLE",
+        "MEAL_SOURCE_KIND_BOUNDARIES_NO_FABRICATION",
+        "PROVENANCE_TAMPER_AND_PROCESS_DRIFT_FAIL_CLOSED",
+        "NO_GATE_ONLY_AUTHORITY",
+    }
+    assert all(row["status"] == "SUCCESS" for row in requirements.values())
+    assert requirements["NO_GATE_ONLY_AUTHORITY"]["execution_path"].startswith(
+        "scripts/audit_dc4_corpus_readiness_rerun.py::audit"
+    )
+
 
 def test_dc4_rerun_is_deterministic_at_gate_level(tmp_path: Path) -> None:
     first = audit(DatabaseConfig(path=tmp_path / "first.sqlite"))
