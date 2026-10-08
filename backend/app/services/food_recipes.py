@@ -315,25 +315,36 @@ class FoodRecipeCatalogueService:
     def append_trusted_version(
         self, recipe_id: UUID, seed: TrustedRecipeVersionSeed
     ) -> RecipeVersionDetail:
-        now = self._clock()
         with self._write() as scope:
-            recipe = scope.recipes.get(recipe_id)
-            if recipe is None:
-                raise RecipeNotFoundError(recipe_id)
-            versions = scope.versions.list_for_recipe(recipe_id)
-            previous = versions[-1] if versions else None
-            number = 1 if previous is None else previous.version_number + 1
-            detail = self._new_detail(
-                scope,
-                recipe,
-                seed,
-                number,
-                None if previous is None else previous.id,
-                now,
-            )
-            scope.versions.add_detail(detail)
+            detail = self.append_trusted_version_in_scope(scope, recipe_id, seed)
             scope.commit()
             return detail
+
+    def append_trusted_version_in_scope(
+        self,
+        scope: RecipeCatalogueUnitOfWork,
+        recipe_id: UUID,
+        seed: TrustedRecipeVersionSeed,
+    ) -> RecipeVersionDetail:
+        """Append one immutable RecipeVersion inside a caller-owned transaction."""
+
+        self._require_active_seed_dependencies(scope, seed)
+        recipe = scope.recipes.get(recipe_id)
+        if recipe is None:
+            raise RecipeNotFoundError(recipe_id)
+        versions = scope.versions.list_for_recipe(recipe_id)
+        previous = versions[-1] if versions else None
+        number = 1 if previous is None else previous.version_number + 1
+        detail = self._new_detail(
+            scope,
+            recipe,
+            seed,
+            number,
+            None if previous is None else previous.id,
+            self._clock(),
+        )
+        scope.versions.add_detail(detail)
+        return detail
 
     def preflight_trusted_seed(
         self, seed: TrustedRecipeSeed
@@ -396,11 +407,15 @@ class FoodRecipeCatalogueService:
             raise RecipeCatalogueConflictError(
                 "Existing Recipe lacks the trusted seed provenance."
             )
-        if len(candidates) != 1 or not _seed_matches(
-            scope, candidates[0], seed.version
-        ):
+        matches = tuple(
+            detail
+            for detail in candidates
+            if _seed_matches(scope, detail, seed.version)
+        )
+        if len(matches) != 1:
             raise RecipeCatalogueConflictError(
-                "Same-provenance RecipeVersions differ from the trusted seed."
+                "Trusted seed must resolve exactly one structurally matching "
+                "same-provenance RecipeVersion."
             )
         return TrustedRecipeSeedDisposition.EXACT_REPLAY
 
@@ -481,19 +496,17 @@ class FoodRecipeCatalogueService:
                 entry.version.source_version,
             )
             if candidates:
-                existing = next(
-                    (
-                        detail
-                        for detail in candidates
-                        if _seed_matches(scope, detail, entry.version)
-                    ),
-                    None,
+                matches = tuple(
+                    detail
+                    for detail in candidates
+                    if _seed_matches(scope, detail, entry.version)
                 )
-                if existing is None:
+                if len(matches) != 1:
                     raise RecipeCatalogueConflictError(
-                        "Same-provenance RecipeVersions differ from the trusted historical seed."
+                        "Trusted historical seed must resolve exactly one structurally "
+                        "matching same-provenance RecipeVersion."
                     )
-                _increment_detail(counts, existing, inserted=False)
+                _increment_detail(counts, matches[0], inserted=False)
                 continue
 
             versions = scope.versions.list_for_recipe(recipe.id)
