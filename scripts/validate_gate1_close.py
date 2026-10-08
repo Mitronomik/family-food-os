@@ -51,7 +51,9 @@ def _current_baseline(config: DatabaseConfig) -> dict[str, Any]:
     engine = create_sqlite_engine(config)
     try:
         recipes = create_food_recipe_catalogue_service(engine)
-        active_recipes = tuple(recipe for recipe in recipes.list_all() if recipe.is_active)
+        active_recipes = tuple(
+            recipe for recipe in recipes.list_all() if recipe.is_active
+        )
         verified_current = tuple(
             recipes.get_current_verified(recipe.id) for recipe in active_recipes
         )
@@ -75,9 +77,7 @@ def validate(config: DatabaseConfig) -> dict[str, Any]:
     rerun = _load_rerun_summary()
     audit = rerun["audit"]
     reused = rerun.get("reused_evidence") or {}
-    requirements = {
-        row["requirement"]: row for row in reused.get("requirements", [])
-    }
+    requirements = {row["requirement"]: row for row in reused.get("requirements", [])}
 
     baseline = _current_baseline(config)
     fixtures = audit["fixtures"]
@@ -132,8 +132,7 @@ def validate(config: DatabaseConfig) -> dict[str, Any]:
             and all(row.get("status") == "SUCCESS" for row in requirements.values())
         ),
         "unknown_not_promoted": all(
-            row["available_nutrient_count"] == 1
-            and row["unknown_nutrient_count"] == 53
+            row["available_nutrient_count"] == 1 and row["unknown_nutrient_count"] == 53
             for row in audit["catalogue"]["recipes"]
         ),
         "migration_head_0042_no_0043": (
@@ -170,9 +169,7 @@ def validate(config: DatabaseConfig) -> dict[str, Any]:
         "criteria": criteria,
         "failed_criteria": failed,
         "reused_evidence_requirements": sorted(requirements),
-        "next_milestone_on_merge": (
-            "PR9_SHOPPING_ENGINE" if not failed else None
-        ),
+        "next_milestone_on_merge": ("PR9_SHOPPING_ENGINE" if not failed else None),
     }
 
 
