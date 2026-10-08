@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 from types import SimpleNamespace
 from uuid import uuid4
@@ -74,6 +75,27 @@ def test_dc4_rerun_reproducible_corpus_and_gate1_evidence(tmp_path: Path) -> Non
     assert all(row["disposition"] == "PASS" for row in catalogue["recipes"])
     assert result["blockers"] == []
     assert result["overall_status"] == "PASS"
+
+    summary_path = (
+        Path(__file__).resolve().parents[3]
+        / "data/curation/dc4-corpus-readiness/rerun-summary.json"
+    )
+    frozen = json.loads(summary_path.read_text(encoding="utf-8"))
+    receipt = frozen["audit"]
+    assert receipt["overall_status"] == result["overall_status"]
+    assert receipt["blockers"] == result["blockers"]
+    assert receipt["planner_version"] == result["planner_version"]
+    assert receipt["catalogue"]["active_count"] == catalogue["active_count"]
+    assert receipt["catalogue"]["blocked_count"] == catalogue["blocked_count"]
+    assert receipt["planner_supply"]["eligible_count"] == supply["eligible_count"]
+    assert receipt["planner_supply"]["meal_type_counts"] == supply["meal_type_counts"]
+    assert [
+        (row["fixture"], row["event_count"], row["serving_count"], row["success"])
+        for row in receipt["fixtures"]
+    ] == [
+        (row["fixture"], row["event_count"], row["serving_count"], row["success"])
+        for row in fixtures
+    ]
 
 
 def test_dc4_rerun_is_deterministic_at_gate_level(tmp_path: Path) -> None:
