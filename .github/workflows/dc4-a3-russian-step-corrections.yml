@@ -22,6 +22,7 @@ on:
       - 'state/handoff.md'
       - 'scripts/audit_dc4_a3_post_correction.py'
       - '.github/workflows/dc4-a3-russian-step-corrections.yml'
+      - '.github/workflows/dc4-corpus-readiness.yml'
   workflow_dispatch:
     inputs:
       target_ref:
@@ -197,7 +198,8 @@ jobs:
               state/progress.md|\
               state/handoff.md|\
               scripts/audit_dc4_a3_post_correction.py|\
-              .github/workflows/dc4-a3-russian-step-corrections.yml)
+              .github/workflows/dc4-a3-russian-step-corrections.yml|\
+              .github/workflows/dc4-corpus-readiness.yml)
                 ;;
               *)
                 echo "Unexpected DC4-A3 scope: ${path}" >&2
