@@ -831,12 +831,9 @@ class RecipeNutritionV2Service:
             raise RecipeNutritionV2ContractError(
                 "Prepared spec не совпадает с reviewed Recipe/source authority."
             )
-        if (
-            spec.recipe_version_number is not None
-            and (
-                type(spec.recipe_version_number) is not int
-                or spec.recipe_version_number <= 0
-            )
+        if spec.recipe_version_number is not None and (
+            type(spec.recipe_version_number) is not int
+            or spec.recipe_version_number <= 0
         ):
             raise RecipeNutritionV2ContractError(
                 "Prepared RecipeVersion number must be a positive integer."
