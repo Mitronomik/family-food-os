@@ -148,6 +148,9 @@ A3 is therefore authorized to make this **bounded application-contract change**:
 - no implicit "latest" target is introduced and unrelated existing prepared-spec
   callers need not be rewritten merely for A3.
 
+These `None` semantics are identical to the historical replay resolution rule
+in §9.2; A2 defines no separate legacy provenance-cardinality rule.
+
 No schema migration is needed for this application contract.
 
 ### 6.2 Required shared-transaction RecipeVersion append seam
