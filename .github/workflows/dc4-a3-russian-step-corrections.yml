@@ -15,6 +15,11 @@ on:
       - 'backend/app/tests/test_r1f_prepared_output.py'
       - 'backend/app/tests/test_planner_application_boundary.py'
       - 'data/curation/dc4-a3-russian-step-corrections/corrections.json'
+      - 'data/curation/dc4-a3-russian-step-corrections/evidence.json'
+      - 'docs/family-food/dc4-a3-post-correction-evidence.md'
+      - 'state/current-focus.md'
+      - 'state/progress.md'
+      - 'state/handoff.md'
       - 'scripts/audit_dc4_a3_post_correction.py'
       - '.github/workflows/dc4-a3-russian-step-corrections.yml'
   workflow_dispatch:
@@ -186,6 +191,11 @@ jobs:
               backend/app/tests/test_r1f_prepared_output.py|\
               backend/app/tests/test_planner_application_boundary.py|\
               data/curation/dc4-a3-russian-step-corrections/corrections.json|\
+              data/curation/dc4-a3-russian-step-corrections/evidence.json|\
+              docs/family-food/dc4-a3-post-correction-evidence.md|\
+              state/current-focus.md|\
+              state/progress.md|\
+              state/handoff.md|\
               scripts/audit_dc4_a3_post_correction.py|\
               .github/workflows/dc4-a3-russian-step-corrections.yml)
                 ;;
