@@ -1,0 +1,162 @@
+name: DC4 corpus readiness rerun
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit_dc4_corpus_readiness_rerun.py'
+      - 'backend/app/tests/test_dc4_corpus_readiness_rerun.py'
+      - 'data/curation/dc4-corpus-readiness/rerun-summary.json'
+      - 'docs/family-food/dc4-corpus-readiness-rerun-report.md'
+      - 'state/**'
+      - '.github/workflows/dc4-corpus-readiness-rerun.yml'
+  workflow_dispatch:
+    inputs:
+      target_ref:
+        description: 'Branch, tag or exact commit SHA to verify'
+        required: true
+        default: 'main'
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rerun:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      AI_ENABLED: 'false'
+    steps:
+      - name: Checkout exact revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ inputs.target_ref || github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install backend and Ruff
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check -e './backend[test]'
+          python -m pip install --disable-pip-version-check 'ruff==0.16.8'
+
+      - name: Focused full DC4 rerun tests
+        run: |
+          set -euo pipefail
+          python -m pytest -q             backend/app/tests/test_dc4_corpus_readiness_rerun.py             backend/app/tests/test_planner_ordering_v05.py             --tb=short
+
+      - name: Generate exact rerun evidence
+        env:
+          RERUN_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          python -m scripts.audit_dc4_corpus_readiness_rerun             --output /tmp/dc4-rerun-summary.json             --require-pass
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(
+              Path('/tmp/dc4-rerun-summary.json').read_text(encoding='utf-8')
+          )
+          assert data['overall_status'] == 'PASS'
+          assert data['blockers'] == []
+          assert data['planner_version'] == 'planner-v0.5'
+          assert data['catalogue']['active_count'] == 51
+          assert data['catalogue']['blocked_count'] == 0
+          assert data['planner_supply']['eligible_count'] == 51
+          assert data['planner_supply']['meal_type_counts'] == {
+              'breakfast': 17,
+              'main': 33,
+              'sandwich': 1,
+          }
+          fixtures = data['fixtures']
+          assert [row['event_count'] for row in fixtures] == [7, 14, 21]
+          assert [row['serving_count'] for row in fixtures] == [7, 21, 42]
+          assert all(row['success'] for row in fixtures)
+          assert all(row['deterministic'] for row in fixtures)
+          assert all(row['selected_exclusions_respected'] for row in fixtures)
+          assert all(row['planner_version'] == 'planner-v0.5' for row in fixtures)
+          bounded = data['bounded_infeasibility']
+          assert bounded['is_failure'] is True
+          assert bounded['returned_persisted_plan'] is False
+          assert bounded['partial_plan_exists'] is False
+          receipt = {
+              'schema': 'DC4_READINESS_RERUN_EVIDENCE_V1',
+              'evidence_source': {
+                  'workflow': 'DC4 corpus readiness rerun',
+                  'audited_head_sha': __import__('os').environ['RERUN_SOURCE_SHA'],
+                  'audit_command': (
+                      'python -m scripts.audit_dc4_corpus_readiness_rerun '
+                      '--output /tmp/dc4-rerun-summary.json --require-pass'
+                  ),
+              },
+              'audit': data,
+          }
+          Path('/tmp/dc4-rerun-receipt.json').write_text(
+              json.dumps(receipt, ensure_ascii=False, indent=2, sort_keys=True) + '\n',
+              encoding='utf-8',
+          )
+          print(json.dumps(receipt, ensure_ascii=False, sort_keys=True))
+          PY
+
+      - name: Upload exact rerun evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: dc4-rerun-evidence-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            /tmp/dc4-rerun-summary.json
+            /tmp/dc4-rerun-receipt.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Ruff
+        run: |
+          set -euo pipefail
+          python -m ruff check             scripts/audit_dc4_corpus_readiness_rerun.py             backend/app/tests/test_dc4_corpus_readiness_rerun.py
+          python -m ruff format --check             scripts/audit_dc4_corpus_readiness_rerun.py             backend/app/tests/test_dc4_corpus_readiness_rerun.py
+
+      - name: Migration and AI invariants
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from app.db import migrations
+          ids = migrations.expected_migration_ids()
+          assert ids[-1] == '0042_recipe_prepared_output_nutrition'
+          assert not any(item.startswith('0043') for item in ids)
+          print('migration head 0042 / no 0043: PASS')
+          PY
+          test "${AI_ENABLED}" = "false"
+          echo 'AI_ENABLED=false: PASS'
+
+      - name: Scope and whitespace
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          git fetch origin main --no-tags
+          base="${PR_BASE_SHA:-origin/main}"
+          git diff --check "${base}"...HEAD
+          mapfile -t changed < <(git diff --name-only "${base}"...HEAD)
+          printf 'Changed paths:\n'
+          printf '  %s\n' "${changed[@]}"
+          for path in "${changed[@]}"; do
+            case "${path}" in
+              scripts/audit_dc4_corpus_readiness_rerun.py|\
+              backend/app/tests/test_dc4_corpus_readiness_rerun.py|\
+              data/curation/dc4-corpus-readiness/rerun-summary.json|\
+              docs/family-food/dc4-corpus-readiness-rerun-report.md|\
+              state/current-focus.md|state/progress.md|state/handoff.md|\
+              .github/workflows/dc4-corpus-readiness-rerun.yml)
+                ;;
+              *)
+                echo "Unexpected DC4 rerun scope: ${path}" >&2
+                exit 1
+                ;;
+            esac
+          done
