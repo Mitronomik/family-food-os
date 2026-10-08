@@ -10,6 +10,7 @@ on:
       - 'backend/app/seed/dc4_a3_russian_step_corrections.py'
       - 'backend/app/tests/test_dc4_a3_russian_step_corrections.py'
       - 'backend/app/tests/test_r3a_school2022_main_batch.py'
+      - 'backend/app/tests/test_ru_school2022_step9_recipe_publication.py'
       - 'backend/app/tests/test_recipe_nutrition_v2.py'
       - 'backend/app/tests/test_r1f_prepared_output.py'
       - 'backend/app/tests/test_planner_application_boundary.py'
@@ -59,6 +60,7 @@ jobs:
           python -m pytest -q \
             backend/app/tests/test_dc4_a3_russian_step_corrections.py \
             backend/app/tests/test_r3a_school2022_main_batch.py \
+            backend/app/tests/test_ru_school2022_step9_recipe_publication.py \
             backend/app/tests/test_recipe_nutrition_v2.py \
             backend/app/tests/test_r1f_prepared_output.py \
             backend/app/tests/test_planner_application_boundary.py \
@@ -129,6 +131,7 @@ jobs:
               backend/app/seed/dc4_a3_russian_step_corrections.py|\
               backend/app/tests/test_dc4_a3_russian_step_corrections.py|\
               backend/app/tests/test_r3a_school2022_main_batch.py|\
+              backend/app/tests/test_ru_school2022_step9_recipe_publication.py|\
               backend/app/tests/test_recipe_nutrition_v2.py|\
               backend/app/tests/test_r1f_prepared_output.py|\
               backend/app/tests/test_planner_application_boundary.py|\
