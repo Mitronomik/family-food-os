@@ -52,9 +52,7 @@ def focused_audit(
 
     by_code = {row["canonical_code"]: row for row in catalogue["recipes"]}
     corrected = [by_code[code] for code in CORRECTION_CODES]
-    publication_by_code = {
-        row.canonical_code: row for row in publication.recipes
-    }
+    publication_by_code = {row.canonical_code: row for row in publication.recipes}
 
     runtime_ids = []
     for code in CORRECTION_CODES:
@@ -71,9 +69,7 @@ def focused_audit(
                 "source_name": correction_artifact["source_name"],
                 "source_recipe_id": correction["source_recipe_id"],
                 "source_version": correction_artifact["source_version"],
-                "source_document_sha256": correction_artifact[
-                    "source_document_sha256"
-                ],
+                "source_document_sha256": correction_artifact["source_document_sha256"],
                 "rights_basis": correction_artifact["rights_basis"],
                 "output_mass_g": correction["output_mass_g"],
                 "expected_energy_kcal": correction["energy_kcal"],
@@ -87,12 +83,9 @@ def focused_audit(
         for row in catalogue["recipes"]
         if "RUSSIAN_STEPS_NOT_READY" in row["issues"]
     ]
-    corrected_issues = {
-        row["canonical_code"]: row["issues"] for row in corrected
-    }
+    corrected_issues = {row["canonical_code"]: row["issues"] for row in corrected}
     corrected_pass = all(
-        row["disposition"] == "PASS"
-        and "RUSSIAN_STEPS_NOT_READY" not in row["issues"]
+        row["disposition"] == "PASS" and "RUSSIAN_STEPS_NOT_READY" not in row["issues"]
         for row in corrected
     )
     runtime_id_match = all(
