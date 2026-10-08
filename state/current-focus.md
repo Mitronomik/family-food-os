@@ -2,6 +2,70 @@
 
 Updated: 2026-10-08.
 
+## Gate1-CLOSE — final decision review
+
+Accepted main:
+
+`c85fae8e8e2c135855f1ba64ca6722de20e1bd29`
+(merged PR #179 — corrected-runtime DC4 rerun PASS).
+
+Current operation:
+
+- Issue #180;
+- PR #181;
+- branch `docs/gate1-close`;
+- Gate1 closure validator evidence head
+  `4f3be9ad3d9c9ff929c86c7478a3881c65aa3c93`.
+
+### Closure evidence
+
+Gate1 validator result:
+
+- decision: **CLOSE**;
+- Planning Core status: **COMPLETE**;
+- active FoodIngredient count: **227** (threshold >=80);
+- verified current RecipeVersions: **51** (threshold >=30);
+- DC4 rerun: PASS / blockers=[];
+- Planner: `planner-v0.5`;
+- mandatory fixtures: 7/7, 14/21, 21/42 MealEvents/Servings;
+- bounded milk+egg infeasibility: fail-closed / no partial MealPlan;
+- reused domain/adversarial evidence matrix: complete;
+- migration 0042 / no 0043;
+- AI disabled;
+- failed closure criteria: none.
+
+Evidence receipt:
+
+- workflow `Gate1 closure`;
+- run `37808665837`;
+- job `113419518103`;
+- artifact `11563757892`;
+- machine: `data/curation/gate1-close/decision.json`;
+- human: `docs/family-food/gate1-closure.md`.
+
+## Current authorization
+
+PR #181 is the explicit Gate1-CLOSE decision. It must be independently reviewed
+and merged before the milestone is considered closed.
+
+Until #181 merge:
+
+- Gate1 is not yet durably CLOSED;
+- PR9 Shopping Engine is **not** authorized to start.
+
+On #181 merge:
+
+```text
+GATE1-CLOSE COMPLETE
+→ PR9 Shopping Engine — NEXT AUTHORIZED MILESTONE
+```
+
+No PR10/Prep/PDF/PWA/Retail/AI/Auth/PostgreSQL work is authorized by this closure.
+
+---
+
+Updated: 2026-10-08.
+
 ## DC4 corrected-runtime rerun — final review
 
 Accepted main:
