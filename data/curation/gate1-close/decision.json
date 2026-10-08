@@ -1,0 +1,77 @@
+{
+  "accepted_base": "c85fae8e8e2c135855f1ba64ca6722de20e1bd29",
+  "baseline": {
+    "active_food_ingredient_count": 227,
+    "active_recipe_count": 51,
+    "verified_current_recipe_count": 51
+  },
+  "criteria": {
+    "ai_disabled": true,
+    "bounded_failure_no_partial_state": true,
+    "dc4_rerun_accepted_pass_receipt": true,
+    "deterministic_replay": true,
+    "hard_constraints_respected": true,
+    "mandatory_fixtures_complete": true,
+    "migration_head_0042_no_0043": true,
+    "minimum_active_food_ingredients": true,
+    "minimum_verified_recipes": true,
+    "planner_supply_reconciled": true,
+    "planner_v05_current": true,
+    "reused_domain_evidence_complete": true,
+    "three_materially_different_fixtures": true,
+    "unknown_not_promoted": true
+  },
+  "dc4_rerun_evidence": {
+    "active_recipe_count": 51,
+    "blocked_recipe_count": 0,
+    "bounded_failure_code": "NO_ELIGIBLE_CANDIDATE",
+    "fixture_event_counts": [
+      7,
+      14,
+      21
+    ],
+    "fixture_serving_counts": [
+      7,
+      21,
+      42
+    ],
+    "meal_type_counts": {
+      "breakfast": 17,
+      "main": 33,
+      "sandwich": 1
+    },
+    "overall_status": "PASS",
+    "planner_eligible_count": 51,
+    "planner_version": "planner-v0.5"
+  },
+  "decision": "CLOSE",
+  "failed_criteria": [],
+  "gate1_thresholds": {
+    "minimum_active_food_ingredients": 80,
+    "minimum_verified_recipes": 30
+  },
+  "next_milestone_on_merge": "PR9_SHOPPING_ENGINE",
+  "planning_core_status": "COMPLETE",
+  "pr9_authorized_after_merge": true,
+  "reused_evidence_requirements": [
+    "MEAL_PATTERN_1_2_3_5_6_OPPORTUNITIES",
+    "MEAL_PATTERN_ACCEPTANCE_PERSISTENCE",
+    "MEAL_PATTERN_SEVEN_OPPORTUNITY_BOUNDARY",
+    "MEAL_SOURCE_KIND_BOUNDARIES_NO_FABRICATION",
+    "MEAL_TYPE_DISTINCT_FROM_MEAL_ROLE",
+    "NO_GATE_ONLY_AUTHORITY",
+    "PROVENANCE_TAMPER_AND_PROCESS_DRIFT_FAIL_CLOSED"
+  ],
+  "schema": "GATE1_CLOSE_DECISION_V1",
+  "evidence_source": {
+    "workflow": "Gate1 closure",
+    "run_id": 37808665837,
+    "job_id": 113419518103,
+    "artifact_id": 11563757892,
+    "exact_head_sha": "4f3be9ad3d9c9ff929c86c7478a3881c65aa3c93",
+    "execution_date": "2026-10-08",
+    "workflow_status": "SUCCESS",
+    "validator_command": "python -m scripts.validate_gate1_close --output /tmp/gate1-close.json --require-pass",
+    "dc4_reconciliation_tests": "3 passed"
+  }
+}
