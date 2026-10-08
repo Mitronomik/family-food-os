@@ -101,8 +101,7 @@ def _load_corrections(path: Path = CORRECTIONS_PATH) -> dict[str, Any]:
     if (
         payload.get("schema_version") != "DC4_A3_RUSSIAN_STEP_CORRECTION_V1"
         or payload.get("issue") != 176
-        or payload.get("accepted_base")
-        != "2a16521a69d48b6df6dcec944ef39fd270d0a95f"
+        or payload.get("accepted_base") != "2a16521a69d48b6df6dcec944ef39fd270d0a95f"
         or payload.get("source_name") != "ru-school2022"
         or payload.get("source_document_sha256")
         != "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d"
@@ -152,8 +151,7 @@ def _assert_frozen_source_match(
         or old_seed.version.source_name != artifact["source_name"]
         or old_seed.version.source_recipe_id != correction["source_recipe_id"]
         or old_seed.version.source_version != artifact["source_version"]
-        or old_seed.version.source_document_sha256
-        != artifact["source_document_sha256"]
+        or old_seed.version.source_document_sha256 != artifact["source_document_sha256"]
         or (old_seed.version.rights_basis or "") != artifact["rights_basis"]
         or tuple(old_seed.version.steps) != tuple(correction["old_steps"])
         or old_spec.output_mass_g
@@ -276,8 +274,7 @@ def _publish_one(
                 or projection.per_base_serving.kcal != expected_energy
             ):
                 raise RecipeNutritionV2ConflictError(
-                    f"DC4-A3 in-scope exact energy drifted: "
-                    f"{old_seed.canonical_code}."
+                    f"DC4-A3 in-scope exact energy drifted: {old_seed.canonical_code}."
                 )
             uow.commit()
         successor_id = successor.version.id
@@ -299,8 +296,7 @@ def _publish_one(
             or replay.authority.recipe_version_id != current.version.id
         ):
             raise RecipeNutritionV2ConflictError(
-                f"DC4-A3 successor authority replay drifted: "
-                f"{old_seed.canonical_code}."
+                f"DC4-A3 successor authority replay drifted: {old_seed.canonical_code}."
             )
         successor_id = current.version.id
         disposition = PreparedPublicationDisposition.EXACT_REPLAY.value
@@ -331,9 +327,7 @@ def seed_dc4_a3_russian_step_corrections(
     artifact = _load_corrections()
     seed_r3d_final_dc3_batch(config)
     specs_payload = _r3a_payload()
-    corrections = {
-        row["canonical_code"]: row for row in artifact["recipes"]
-    }
+    corrections = {row["canonical_code"]: row for row in artifact["recipes"]}
 
     engine = create_sqlite_engine(config)
     try:
