@@ -1,11 +1,11 @@
 # DC4-A3 post-correction focused evidence
 
-**Status:** PASS  
-**Scope:** post-A3 focused DC4 Layer-A / Russian-readiness verification  
-**Full DC4 rerun:** NO  
-**Runtime freeze SHA:** `0aa949c7989f70658c2633e4792371c251bfcd7f`  
-**Workflow:** `DC4-A3 Russian RecipeStep corrections` run `37762618205`, job `113262471748`  
-**Uploaded artifact:** `dc4-a3-post-correction-evidence-0aa949c7989f70658c2633e4792371c251bfcd7f` (artifact `11543480822`)  
+**Status:** PASS
+**Scope:** post-A3 focused DC4 Layer-A / Russian-readiness verification
+**Full DC4 rerun:** NO
+**Runtime freeze SHA:** `0aa949c7989f70658c2633e4792371c251bfcd7f`
+**Workflow:** `DC4-A3 Russian RecipeStep corrections` run `37762618205`, job `113262471748`
+**Uploaded artifact:** `dc4-a3-post-correction-evidence-0aa949c7989f70658c2633e4792371c251bfcd7f` (artifact `11543480822`)
 **Committed machine receipt:** `data/curation/dc4-a3-russian-step-corrections/evidence.json`
 
 ## FACT — focused post-correction result
