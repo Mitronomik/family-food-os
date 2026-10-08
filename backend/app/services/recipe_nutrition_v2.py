@@ -123,8 +123,8 @@ class ReviewedPreparedRecipeNutritionSpec:
     review_reference: str
     expected_available_amounts: tuple[tuple[str, Decimal], ...]
     expected_unknown_codes: tuple[str, ...]
-    recipe_version_number: int | None = None
     require_recipe_inactive: bool = True
+    recipe_version_number: int | None = None
 
 
 @dataclass(frozen=True)
