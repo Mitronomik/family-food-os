@@ -1,5 +1,79 @@
 # Current focus
 
+Updated: 2026-10-08.
+
+## Post-DC4 bounded corrections — A3 final review
+
+Accepted main:
+
+`2a16521a69d48b6df6dcec944ef39fd270d0a95f`
+(merged PR #175 after merged PR #173).
+
+Accepted correction sequence:
+
+```text
+Track A
+A1 evidence investigation                         MERGED #168
+→ A2 immutable RecipeStep correction Contract Gate MERGED #173
+→ A3 RecipeVersion runtime/data correction         PR #177 — CURRENT / REVIEW-READY
+→ A accepted only after #177 merge
+
+Track B
+B1 ordering investigation                          MERGED #169
+→ B2 planner-v0.5 ordering runtime correction       MERGED #175
+→ B accepted
+```
+
+Current Planner algorithm/version is **`planner-v0.5`**. Historical
+`planner-v0.4` remains a replay version and was not silently rewritten.
+
+### A3 verified runtime evidence
+
+PR #177 runtime freeze:
+
+`0aa949c7989f70658c2633e4792371c251bfcd7f`.
+
+Focused post-correction evidence:
+
+- workflow run `37762618205`, job `113262471748`;
+- exact-run artifact `11543480822`;
+- active catalogue 51;
+- Layer-A blocked rows 0;
+- `RUSSIAN_STEPS_NOT_READY` 0;
+- all seven prior Russian-step blockers cleared;
+- Planner exact-energy eligible 51 = 17 breakfast / 33 main / 1 sandwich;
+- Planner version `planner-v0.5`;
+- full old/new steps, source commitments, expected energy and exact-run
+  predecessor/successor RecipeVersion IDs are frozen in
+  `data/curation/dc4-a3-russian-step-corrections/evidence.json`;
+- human receipt:
+  `docs/family-food/dc4-a3-post-correction-evidence.md`.
+
+This focused receipt is **not** a full DC4 rerun.
+
+## Current authorization
+
+The only current operation is **final independent review of PR #177**.
+
+Do not merge autonomously.
+
+DC4 remains **BLOCKED / not re-accepted** until A3 is merged and a separate full
+DC4 rerun executes the accepted DC4 contract, including all three Gate1 fixtures
+and bounded infeasibility.
+
+After A3 merge, the next authorized operation is:
+
+```text
+A3 MERGED + B2 MERGED
+→ separate DC4 rerun on planner-v0.5/current corrected catalogue
+→ separate Gate1-CLOSE only if DC4 passes
+→ PR9 Shopping Engine only after Gate1-CLOSE
+```
+
+Do not start Gate1-CLOSE or PR9 directly from the focused A3 evidence.
+
+---
+
 Updated: 2026-10-07.
 
 ## Accepted state

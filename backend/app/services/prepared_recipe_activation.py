@@ -20,6 +20,55 @@ class PreparedRecipeActivationError(ValueError):
     """Prepared Recipe cannot be activated under the reviewed authority contract."""
 
 
+def _same_source_lineage_contains(
+    catalogue: FoodRecipeCatalogueService,
+    recipe_id: UUID,
+    *,
+    descendant_version_id: UUID,
+    ancestor_version_id: UUID,
+) -> bool:
+    versions = {version.id: version for version in catalogue.list_versions(recipe_id)}
+    descendant = versions.get(descendant_version_id)
+    ancestor = versions.get(ancestor_version_id)
+    if descendant is None or ancestor is None:
+        return False
+    source_identity = (
+        ancestor.source_name,
+        ancestor.source_recipe_id,
+        ancestor.source_url,
+        ancestor.source_version,
+        ancestor.source_document_sha256,
+        ancestor.source_original_servings,
+        ancestor.source_output_g,
+        ancestor.source_output_text,
+        ancestor.rights_review_status,
+        ancestor.rights_basis,
+    )
+    current = descendant
+    while True:
+        if (
+            current.source_name,
+            current.source_recipe_id,
+            current.source_url,
+            current.source_version,
+            current.source_document_sha256,
+            current.source_original_servings,
+            current.source_output_g,
+            current.source_output_text,
+            current.rights_review_status,
+            current.rights_basis,
+        ) != source_identity:
+            return False
+        if current.id == ancestor.id:
+            return True
+        if current.created_from_version_id is None:
+            return False
+        parent = versions.get(current.created_from_version_id)
+        if parent is None:
+            return False
+        current = parent
+
+
 @dataclass(frozen=True)
 class PreparedRecipeActivationResult:
     recipe: Recipe
@@ -45,13 +94,26 @@ def activate_prepared_recipe(
         ) from exc
 
     replay = nutrition.publish_prepared(spec)
-    if (
-        replay.disposition is not PreparedPublicationDisposition.EXACT_REPLAY
-        or replay.authority.recipe_version_id != detail.version.id
-    ):
+    if replay.disposition is not PreparedPublicationDisposition.EXACT_REPLAY:
         raise PreparedRecipeActivationError(
-            "Prepared authority is not the exact reviewed RecipeVersion authority."
+            "Prepared authority is not an exact reviewed replay."
         )
+    if replay.authority.recipe_version_id != detail.version.id:
+        if not recipe.is_active:
+            raise PreparedRecipeActivationError(
+                "Inactive Recipe requires the reviewed spec to target the exact "
+                "RecipeVersion being activated."
+            )
+        if not _same_source_lineage_contains(
+            catalogue,
+            recipe.id,
+            descendant_version_id=detail.version.id,
+            ancestor_version_id=replay.authority.recipe_version_id,
+        ):
+            raise PreparedRecipeActivationError(
+                "Active Recipe current version is not an authorized same-source "
+                "descendant of the reviewed prepared authority."
+            )
 
     projection = nutrition.neutral_consumption_projection(detail.version.id)
     if (
@@ -164,13 +226,26 @@ def activate_prepared_recipe_batch(
             ) from exc
 
         replay = nutrition.publish_prepared(spec)
-        if (
-            replay.disposition is not PreparedPublicationDisposition.EXACT_REPLAY
-            or replay.authority.recipe_version_id != detail.version.id
-        ):
+        if replay.disposition is not PreparedPublicationDisposition.EXACT_REPLAY:
             raise PreparedRecipeActivationError(
                 f"Prepared authority is not exact: {spec.recipe_code}."
             )
+        if replay.authority.recipe_version_id != detail.version.id:
+            if not recipe.is_active:
+                raise PreparedRecipeActivationError(
+                    "Inactive prepared Recipe requires the reviewed spec to target "
+                    f"the exact current RecipeVersion: {spec.recipe_code}."
+                )
+            if not _same_source_lineage_contains(
+                catalogue,
+                recipe.id,
+                descendant_version_id=detail.version.id,
+                ancestor_version_id=replay.authority.recipe_version_id,
+            ):
+                raise PreparedRecipeActivationError(
+                    "Active prepared Recipe current version is not an authorized "
+                    f"same-source descendant: {spec.recipe_code}."
+                )
 
         projection = nutrition.neutral_consumption_projection(detail.version.id)
         if (

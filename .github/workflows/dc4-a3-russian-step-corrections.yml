@@ -1,0 +1,209 @@
+name: DC4-A3 Russian RecipeStep corrections
+
+on:
+  pull_request:
+    paths:
+      - 'backend/app/services/food_recipes.py'
+      - 'backend/app/services/recipe_nutrition_v2.py'
+      - 'backend/app/services/prepared_recipe_activation.py'
+      - 'backend/app/seed/r3a_school2022_main_batch.py'
+      - 'backend/app/seed/dc4_a3_russian_step_corrections.py'
+      - 'backend/app/tests/test_dc4_a3_russian_step_corrections.py'
+      - 'backend/app/tests/test_r3a_school2022_main_batch.py'
+      - 'backend/app/tests/test_ru_school2022_step9_recipe_publication.py'
+      - 'backend/app/tests/test_recipe_nutrition_v2.py'
+      - 'backend/app/tests/test_r1f_prepared_output.py'
+      - 'backend/app/tests/test_planner_application_boundary.py'
+      - 'data/curation/dc4-a3-russian-step-corrections/corrections.json'
+      - 'data/curation/dc4-a3-russian-step-corrections/evidence.json'
+      - 'docs/family-food/dc4-a3-post-correction-evidence.md'
+      - 'state/current-focus.md'
+      - 'state/progress.md'
+      - 'state/handoff.md'
+      - 'scripts/audit_dc4_a3_post_correction.py'
+      - '.github/workflows/dc4-a3-russian-step-corrections.yml'
+      - '.github/workflows/dc4-corpus-readiness.yml'
+  workflow_dispatch:
+    inputs:
+      target_ref:
+        description: 'Branch, tag or exact commit SHA to verify'
+        required: true
+        default: 'main'
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dc4-a3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      AI_ENABLED: 'false'
+    steps:
+      - name: Checkout exact revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ inputs.target_ref || github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install backend and Ruff
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check -e './backend[test]'
+          python -m pip install --disable-pip-version-check 'ruff==0.16.8'
+
+      - name: Focused A3 publication and compatibility tests
+        run: |
+          set -euo pipefail
+          python -m pytest -q \
+            backend/app/tests/test_dc4_a3_russian_step_corrections.py \
+            scripts/audit_dc4_a3_post_correction.py \
+            backend/app/tests/test_r3a_school2022_main_batch.py \
+            backend/app/tests/test_ru_school2022_step9_recipe_publication.py \
+            backend/app/tests/test_recipe_nutrition_v2.py \
+            backend/app/tests/test_r1f_prepared_output.py \
+            backend/app/tests/test_planner_application_boundary.py \
+            --tb=short
+
+      - name: Standalone A3 seed evidence
+        run: |
+          set -euo pipefail
+          tmp_db="$(mktemp --suffix=.sqlite)"
+          FAMILY_FOOD_DB_PATH="${tmp_db}" python -m app.seed.dc4_a3_russian_step_corrections > /tmp/dc4-a3.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path('/tmp/dc4-a3.json').read_text(encoding='utf-8'))
+          assert len(data['recipes']) == 7
+          assert {row['disposition'] for row in data['recipes']} == {'FRESH'}
+          assert data['active_recipe_count'] == 51
+          assert data['eligible_count'] == 51
+          assert data['meal_type_counts'] == {'breakfast': 17, 'main': 33, 'sandwich': 1}
+          assert data['planner_version'] == 'planner-v0.5'
+          print(json.dumps(data, ensure_ascii=False, sort_keys=True))
+          PY
+
+      - name: Focused post-correction DC4 Layer-A evidence
+        env:
+          EVIDENCE_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          tmp_db="$(mktemp --suffix=.sqlite)"
+          python -m scripts.audit_dc4_a3_post_correction \
+            --db "${tmp_db}" \
+            --source-sha "${EVIDENCE_SOURCE_SHA}" \
+            --output /tmp/dc4-a3-post-correction.json \
+            --markdown-output /tmp/dc4-a3-post-correction.md
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(
+              Path('/tmp/dc4-a3-post-correction.json').read_text(encoding='utf-8')
+          )
+          assert data['status'] == 'PASS'
+          assert data['full_dc4_rerun'] is False
+          assert data['prior_russian_blocker_count'] == 7
+          assert data['current_russian_steps_not_ready_count'] == 0
+          assert data['prior_russian_blockers_cleared'] is True
+          assert data['runtime_identity_matches_current_catalogue'] is True
+          assert data['layer_a']['active_count'] == 51
+          assert data['layer_a']['blocked_count'] == 0
+          assert data['planner_supply']['eligible_count'] == 51
+          assert data['planner_supply']['meal_type_counts'] == {
+              'breakfast': 17,
+              'main': 33,
+              'sandwich': 1,
+          }
+          assert data['planner_supply']['planner_version'] == 'planner-v0.5'
+          assert len(data['runtime_version_receipts']) == 7
+          print(json.dumps(data, ensure_ascii=False, sort_keys=True))
+          PY
+
+      - name: Upload focused post-correction evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: dc4-a3-post-correction-evidence-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            /tmp/dc4-a3-post-correction.json
+            /tmp/dc4-a3-post-correction.md
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Ruff
+        run: |
+          set -euo pipefail
+          python -m ruff check \
+            backend/app/services/food_recipes.py \
+            backend/app/services/recipe_nutrition_v2.py \
+            backend/app/services/prepared_recipe_activation.py \
+            backend/app/seed/r3a_school2022_main_batch.py \
+            backend/app/seed/dc4_a3_russian_step_corrections.py \
+            backend/app/tests/test_dc4_a3_russian_step_corrections.py \
+            scripts/audit_dc4_a3_post_correction.py
+          python -m ruff format --check \
+            backend/app/seed/dc4_a3_russian_step_corrections.py \
+            backend/app/tests/test_dc4_a3_russian_step_corrections.py \
+            scripts/audit_dc4_a3_post_correction.py
+
+      - name: Migration and AI invariants
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from app.db import migrations
+          ids = migrations.expected_migration_ids()
+          assert ids[-1] == '0042_recipe_prepared_output_nutrition'
+          assert not any(item.startswith('0043') for item in ids)
+          print('migration head 0042 / no 0043: PASS')
+          PY
+          test "${AI_ENABLED}" = "false"
+          echo 'AI_ENABLED=false: PASS'
+
+      - name: Scope and whitespace
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          base="${PR_BASE_SHA:-origin/main}"
+          git fetch origin main --no-tags
+          git diff --check "${base}"...HEAD
+          mapfile -t changed < <(git diff --name-only "${base}"...HEAD)
+          printf 'Changed paths:\n'
+          printf '  %s\n' "${changed[@]}"
+          for path in "${changed[@]}"; do
+            case "${path}" in
+              backend/app/services/food_recipes.py|\
+              backend/app/services/recipe_nutrition_v2.py|\
+              backend/app/services/prepared_recipe_activation.py|\
+              backend/app/seed/r3a_school2022_main_batch.py|\
+              backend/app/seed/dc4_a3_russian_step_corrections.py|\
+              backend/app/tests/test_dc4_a3_russian_step_corrections.py|\
+              backend/app/tests/test_r3a_school2022_main_batch.py|\
+              backend/app/tests/test_ru_school2022_step9_recipe_publication.py|\
+              backend/app/tests/test_recipe_nutrition_v2.py|\
+              backend/app/tests/test_r1f_prepared_output.py|\
+              backend/app/tests/test_planner_application_boundary.py|\
+              data/curation/dc4-a3-russian-step-corrections/corrections.json|\
+              data/curation/dc4-a3-russian-step-corrections/evidence.json|\
+              docs/family-food/dc4-a3-post-correction-evidence.md|\
+              state/current-focus.md|\
+              state/progress.md|\
+              state/handoff.md|\
+              scripts/audit_dc4_a3_post_correction.py|\
+              .github/workflows/dc4-a3-russian-step-corrections.yml|\
+              .github/workflows/dc4-corpus-readiness.yml)
+                ;;
+              *)
+                echo "Unexpected DC4-A3 scope: ${path}" >&2
+                exit 1
+                ;;
+            esac
+          done

@@ -22,7 +22,6 @@ from app.persistence.sqlalchemy_core.food_recipe_composition import (
     create_food_recipe_catalogue_service,
 )
 from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
-    SqlAlchemyRecipeNutritionV2ReadScope,
     SqlAlchemyRecipeNutritionV2UnitOfWork,
     create_recipe_nutrition_v2_service,
 )
@@ -502,22 +501,22 @@ def _recipe_seeds_and_specs(
 
 
 def _assert_replay_not_partial(engine, catalogue, nutrition, seed, spec) -> None:
+    del engine
     disposition = catalogue.preflight_trusted_seed(seed)
     if disposition is TrustedRecipeSeedDisposition.FRESH:
         return
-    recipe = catalogue.get_by_code(seed.canonical_code)
-    detail = catalogue.get_latest_verified(recipe.id)
-    with SqlAlchemyRecipeNutritionV2ReadScope(engine) as scope:
-        authority = scope.prepared.get_authority(detail.version.id)
-        values = scope.prepared.list_values(detail.version.id)
-    if authority is None or not values:
-        raise RecipeNutritionV2ConflictError(
-            f"Partial persisted R3-A state for {seed.canonical_code}."
-        )
     replay = nutrition.publish_prepared(spec)
     if replay.disposition is not PreparedPublicationDisposition.EXACT_REPLAY:
         raise RecipeNutritionV2ConflictError(
             f"Expected exact R3-A prepared replay for {seed.canonical_code}."
+        )
+    recipe = catalogue.get_by_code(seed.canonical_code)
+    current = catalogue.get_latest_verified(recipe.id)
+    projection = nutrition.neutral_consumption_projection(current.version.id)
+    if not projection.exact_energy_ready or projection.per_base_serving.kcal is None:
+        raise RecipeNutritionV2ConflictError(
+            f"Current R3-A RecipeVersion lacks exact prepared energy: "
+            f"{seed.canonical_code}."
         )
 
 

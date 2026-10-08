@@ -1,5 +1,71 @@
 # Handoff
 
+## DC4-A3 final review handoff — 2026-10-08
+
+Accepted main:
+
+`2a16521a69d48b6df6dcec944ef39fd270d0a95f`.
+
+Merged prerequisites:
+
+- PR #168 — A1 Russian RecipeStep evidence;
+- PR #173 — A2 immutable correction Contract Gate;
+- PR #169 — B1 Planner/MealPlan ordering investigation;
+- PR #175 — B2 versioned Planner ordering correction; current Planner is
+  `planner-v0.5`.
+
+Current operation:
+
+- Issue #176;
+- PR #177;
+- branch `feat/dc4-a3-russian-step-corrections`;
+- runtime freeze `0aa949c7989f70658c2633e4792371c251bfcd7f`.
+
+Read before continuation:
+
+- `AGENTS.md`;
+- `state/current-focus.md`;
+- `docs/family-food/dc4-a2-russian-step-correction-contract.md`;
+- `docs/family-food/dc4-a3-post-correction-evidence.md`;
+- `data/curation/dc4-a3-russian-step-corrections/corrections.json`;
+- `data/curation/dc4-a3-russian-step-corrections/evidence.json`;
+- `docs/family-food/dc4-corpus-readiness-contract.md`.
+
+A3 evidence status:
+
+- exact seven immutable successors;
+- historical predecessors preserved;
+- prepared authority 1 exact ENERGY_KCAL + 53 UNKNOWN;
+- historical R3-A replay zero-write;
+- focused Layer-A audit PASS: 51 active / 0 blocked;
+- `RUSSIAN_STEPS_NOT_READY=0`;
+- Planner supply 51 = 17/33/1 under `planner-v0.5`;
+- exact-run predecessor/successor UUIDs frozen in the committed evidence receipt;
+- workflow run `37762618205`, job `113262471748`, artifact `11543480822`.
+
+Important: UUIDs in the evidence receipt belong to that exact SQLite evidence
+instance. They prove the executed immutable lineage but are not portable
+cross-database identifiers.
+
+PR #177 is delivery/review-ready but **Track A remains incomplete until merge**.
+
+Do not run full DC4 before #177 merge.
+
+Required downstream sequence:
+
+```text
+PR #177 independent review + merge
+→ Track A accepted
+→ separate DC4 rerun using current catalogue + planner-v0.5
+→ Gate1-CLOSE only if DC4 passes
+→ PR9 only after Gate1-CLOSE
+```
+
+The post-A3 focused receipt is not permission to skip the full DC4 fixtures,
+bounded infeasibility or separate closure decision.
+
+---
+
 ## Post-DC4 correction reconciliation — 2026-10-07
 
 Accepted main:

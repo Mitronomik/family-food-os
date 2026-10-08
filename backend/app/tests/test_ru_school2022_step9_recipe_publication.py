@@ -618,7 +618,9 @@ def test_loader_accepts_exact_replay_that_wins_after_fresh_preflight(
     )
 
 
-def test_later_same_provenance_revision_blocks_exact_replay(database):
+def test_later_same_provenance_nonmatching_revision_keeps_structural_replay(
+    database,
+):
     seed, _ = step9.load_ru_school2022_step9_recipe_seed()
     engine = create_sqlite_engine(database)
     try:
@@ -630,16 +632,19 @@ def test_later_same_provenance_revision_blocks_exact_replay(database):
             recipe.id,
             replace(
                 seed.version,
-                change_note="Conflicting same-provenance internal revision.",
+                change_note="Different same-provenance internal revision.",
             ),
         )
     finally:
         engine.dispose()
     before = db_dump(database)
 
-    with pytest.raises(RecipeCatalogueConflictError, match="Same-provenance"):
-        step9.seed_ru_school2022_step9_recipe(database)
+    replay = step9.seed_ru_school2022_step9_recipe(database)
 
+    assert replay.recipes_inserted == 0
+    assert replay.versions_inserted == 0
+    assert replay.recipes_existing == 1
+    assert replay.versions_existing == 1
     assert db_dump(database) == before
 
 

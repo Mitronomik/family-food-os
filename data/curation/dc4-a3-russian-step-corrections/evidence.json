@@ -1,0 +1,241 @@
+{
+  "corrected_recipe_issues": {
+    "SCHOOL2022_54_10R_PINK_SALMON_TOMATO_VEGETABLES": [],
+    "SCHOOL2022_54_11M_BEEF_PILAF": [],
+    "SCHOOL2022_54_11R_POLLOCK_TOMATO_VEGETABLES": [],
+    "SCHOOL2022_54_1R_COD_CUTLET": [],
+    "SCHOOL2022_54_2R_PINK_SALMON_CUTLET": [],
+    "SCHOOL2022_54_3R_POLLOCK_CUTLET": [],
+    "SCHOOL2022_54_8M_STEAMED_BEEF_MEATBALLS": []
+  },
+  "correction_change_note": "DC4-A3 Russian RecipeStep language correction; source/process/ingredients/prepared authority unchanged; contract PR #173.",
+  "correction_contract_path": "data/curation/dc4-a3-russian-step-corrections/corrections.json",
+  "current_russian_steps_not_ready_codes": [],
+  "current_russian_steps_not_ready_count": 0,
+  "evidence_scope": "POST_A3_FOCUSED_LAYER_A_RUSSIAN_READINESS",
+  "explicitly_not_run": [
+    "DC4_GATE1_FIXTURES",
+    "DC4_BOUNDED_INFEASIBILITY",
+    "FULL_DC4_OVERALL_STATUS_RECOMPUTE",
+    "GATE1_CLOSE"
+  ],
+  "full_dc4_rerun": false,
+  "layer_a": {
+    "active_count": 51,
+    "blocked_count": 0,
+    "blocked_recipe_codes": []
+  },
+  "planner_supply": {
+    "eligible_count": 51,
+    "meal_type_counts": {
+      "breakfast": 17,
+      "main": 33,
+      "sandwich": 1
+    },
+    "planner_version": "planner-v0.5"
+  },
+  "prior_russian_blocker_codes": [
+    "SCHOOL2022_54_1R_COD_CUTLET",
+    "SCHOOL2022_54_2R_PINK_SALMON_CUTLET",
+    "SCHOOL2022_54_3R_POLLOCK_CUTLET",
+    "SCHOOL2022_54_10R_PINK_SALMON_TOMATO_VEGETABLES",
+    "SCHOOL2022_54_11R_POLLOCK_TOMATO_VEGETABLES",
+    "SCHOOL2022_54_8M_STEAMED_BEEF_MEATBALLS",
+    "SCHOOL2022_54_11M_BEEF_PILAF"
+  ],
+  "prior_russian_blocker_count": 7,
+  "prior_russian_blockers_cleared": true,
+  "runtime_identity_matches_current_catalogue": true,
+  "runtime_version_receipts": [
+    {
+      "canonical_code": "SCHOOL2022_54_1R_COD_CUTLET",
+      "current_audited_recipe_version_id": "0d44b2b9-8204-4236-825f-8d5e60affb81",
+      "expected_energy_kcal": "112.6",
+      "new_steps": [
+        "Измельчить подготовленное филе трески.",
+        "Замочить пшеничный хлеб в воде, отжать и повторно измельчить вместе с рыбой; добавить йодированную соль, сливочное масло, сырое яйцо и оставшуюся воду. Источник фиксирует общий расход воды и масла, но не делит его по операциям.",
+        "Сформовать котлеты, выложить на противень, смазанный маслом, выбрать предусмотренную картой ветвь с водой вместо рыбного бульона и запекать 20–25 минут до готовности. Не назначать отдельные граммы масла/воды шагам сверх общего расхода по исходной карте."
+      ],
+      "old_steps": [
+        "Измельчить подготовленное филе трески.",
+        "Замочить пшеничный хлеб в воде, отжать и повторно измельчить вместе с рыбой; добавить йодированную соль, сливочное масло, сырое яйцо и оставшуюся воду. Источник фиксирует общий расход воды и масла, но не делит его по операциям.",
+        "Сформовать котлеты, выложить на противень, смазанный маслом, выбрать предусмотренную картой ветвь с водой вместо рыбного бульона и запекать 20–25 минут до готовности. Не назначать отдельные граммы масла/воды шагам сверх общего source total."
+      ],
+      "output_mass_g": "100",
+      "predecessor_version_id": "aeec4e4a-b25f-486c-9be7-c18c0f71d5f9",
+      "publication_disposition": "FRESH",
+      "rights_basis": "Reviewed Russian normative factual recipe data; pinned School2022 source PDF and durable archive.",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_recipe_id": "ru-school2022:recipe:54-1р",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "successor_version_id": "0d44b2b9-8204-4236-825f-8d5e60affb81"
+    },
+    {
+      "canonical_code": "SCHOOL2022_54_2R_PINK_SALMON_CUTLET",
+      "current_audited_recipe_version_id": "61d2f9cc-5c89-48e4-9739-5d7b96260f85",
+      "expected_energy_kcal": "163.6",
+      "new_steps": [
+        "Измельчить подготовленное филе горбуши.",
+        "Замочить пшеничный хлеб в воде, отжать и повторно измельчить вместе с рыбой; добавить йодированную соль, сливочное масло, сырое яйцо и оставшуюся воду. Источник фиксирует общий расход воды и масла, но не делит его по операциям.",
+        "Сформовать котлеты, выложить на противень, смазанный маслом, выбрать предусмотренную картой ветвь с водой вместо рыбного бульона и запекать 20–25 минут до готовности. Не назначать отдельные граммы масла/воды шагам сверх общего расхода по исходной карте."
+      ],
+      "old_steps": [
+        "Измельчить подготовленное филе горбуши.",
+        "Замочить пшеничный хлеб в воде, отжать и повторно измельчить вместе с рыбой; добавить йодированную соль, сливочное масло, сырое яйцо и оставшуюся воду. Источник фиксирует общий расход воды и масла, но не делит его по операциям.",
+        "Сформовать котлеты, выложить на противень, смазанный маслом, выбрать предусмотренную картой ветвь с водой вместо рыбного бульона и запекать 20–25 минут до готовности. Не назначать отдельные граммы масла/воды шагам сверх общего source total."
+      ],
+      "output_mass_g": "100",
+      "predecessor_version_id": "0ef519fe-202d-44d3-b28a-019fcd16d5ea",
+      "publication_disposition": "FRESH",
+      "rights_basis": "Reviewed Russian normative factual recipe data; pinned School2022 source PDF and durable archive.",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_recipe_id": "ru-school2022:recipe:54-2р",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "successor_version_id": "61d2f9cc-5c89-48e4-9739-5d7b96260f85"
+    },
+    {
+      "canonical_code": "SCHOOL2022_54_3R_POLLOCK_CUTLET",
+      "current_audited_recipe_version_id": "4afaf701-5a51-4aaf-b119-0e9b23db7cf5",
+      "expected_energy_kcal": "114.2",
+      "new_steps": [
+        "Измельчить подготовленное филе минтая.",
+        "Замочить пшеничный хлеб в воде, отжать и повторно измельчить вместе с рыбой; добавить йодированную соль, сливочное масло, сырое яйцо и оставшуюся воду. Источник фиксирует общий расход воды и масла, но не делит его по операциям.",
+        "Сформовать котлеты, выложить на противень, смазанный маслом, выбрать предусмотренную картой ветвь с водой вместо рыбного бульона и запекать 20–25 минут до готовности. Не назначать отдельные граммы масла/воды шагам сверх общего расхода по исходной карте."
+      ],
+      "old_steps": [
+        "Измельчить подготовленное филе минтая.",
+        "Замочить пшеничный хлеб в воде, отжать и повторно измельчить вместе с рыбой; добавить йодированную соль, сливочное масло, сырое яйцо и оставшуюся воду. Источник фиксирует общий расход воды и масла, но не делит его по операциям.",
+        "Сформовать котлеты, выложить на противень, смазанный маслом, выбрать предусмотренную картой ветвь с водой вместо рыбного бульона и запекать 20–25 минут до готовности. Не назначать отдельные граммы масла/воды шагам сверх общего source total."
+      ],
+      "output_mass_g": "100",
+      "predecessor_version_id": "ca57f0e1-09e3-4a73-b67d-5e7994c6c85d",
+      "publication_disposition": "FRESH",
+      "rights_basis": "Reviewed Russian normative factual recipe data; pinned School2022 source PDF and durable archive.",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_recipe_id": "ru-school2022:recipe:54-3р",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "successor_version_id": "4afaf701-5a51-4aaf-b119-0e9b23db7cf5"
+    },
+    {
+      "canonical_code": "SCHOOL2022_54_10R_PINK_SALMON_TOMATO_VEGETABLES",
+      "current_audited_recipe_version_id": "a3890816-28f2-477d-9c97-04f6d60281fe",
+      "expected_energy_kcal": "134.3",
+      "new_steps": [
+        "Подготовить и нашинковать корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать овощи с томатным пюре, используя подсолнечное масло из этой карты.",
+        "Нарезать подготовленное филе горбуши порционными кусками.",
+        "Выложить рыбу и овощи в противень, смазанный тем же единственным указанным в карте подсолнечным маслом; добавить воду, сахар и йодированную соль и готовить 40–45 минут. Источник фиксирует общий расход масла 5,3 г, но не делит его между пассерованием и смазыванием противня."
+      ],
+      "old_steps": [
+        "Подготовить и нашинковать корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать овощи с томатным пюре, используя подсолнечное масло из этой карты.",
+        "Нарезать подготовленное филе горбуши порционными кусками.",
+        "Выложить рыбу и овощи в противень, смазанный тем же единственным указанным в карте подсолнечным маслом; добавить воду, сахар и йодированную соль и готовить 40–45 минут. Источник фиксирует 5,3 г масла total, но не делит его между пассерованием и смазыванием противня."
+      ],
+      "output_mass_g": "70",
+      "predecessor_version_id": "43e1caac-d674-4e7b-a88e-e81acb7a2e4c",
+      "publication_disposition": "FRESH",
+      "rights_basis": "Reviewed Russian normative factual recipe data; pinned School2022 source PDF and durable archive.",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_recipe_id": "ru-school2022:recipe:54-10р",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "successor_version_id": "a3890816-28f2-477d-9c97-04f6d60281fe"
+    },
+    {
+      "canonical_code": "SCHOOL2022_54_11R_POLLOCK_TOMATO_VEGETABLES",
+      "current_audited_recipe_version_id": "37d9796b-d4d8-4835-84bd-2955e8aafeff",
+      "expected_energy_kcal": "103",
+      "new_steps": [
+        "Подготовить и нашинковать корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать овощи с томатным пюре, используя подсолнечное масло из этой карты.",
+        "Нарезать подготовленное филе минтая порционными кусками.",
+        "Выложить рыбу и овощи в противень, смазанный тем же единственным указанным в карте подсолнечным маслом; добавить воду, сахар и йодированную соль и готовить 40–45 минут. Источник фиксирует общий расход масла 5,3 г, но не делит его между пассерованием и смазыванием противня."
+      ],
+      "old_steps": [
+        "Подготовить и нашинковать корень петрушки, морковь и репчатый лук; лук бланшировать, затем пассеровать овощи с томатным пюре, используя подсолнечное масло из этой карты.",
+        "Нарезать подготовленное филе минтая порционными кусками.",
+        "Выложить рыбу и овощи в противень, смазанный тем же единственным указанным в карте подсолнечным маслом; добавить воду, сахар и йодированную соль и готовить 40–45 минут. Источник фиксирует 5,3 г масла total, но не делит его между пассерованием и смазыванием противня."
+      ],
+      "output_mass_g": "70",
+      "predecessor_version_id": "8ac74eab-ffb1-441e-8d61-faec9d536b80",
+      "publication_disposition": "FRESH",
+      "rights_basis": "Reviewed Russian normative factual recipe data; pinned School2022 source PDF and durable archive.",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_recipe_id": "ru-school2022:recipe:54-11р",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "successor_version_id": "37d9796b-d4d8-4835-84bd-2955e8aafeff"
+    },
+    {
+      "canonical_code": "SCHOOL2022_54_8M_STEAMED_BEEF_MEATBALLS",
+      "current_audited_recipe_version_id": "154157d1-2d3f-436e-8558-eb33ff03ecc8",
+      "expected_energy_kcal": "117.1",
+      "new_steps": [
+        "Подготовить репчатый лук и пассеровать его на сливочном масле — это единственный жир для приготовления, указанный в карте.",
+        "Измельчить говядину с предварительно замоченным черствым пшеничным хлебом без корок, добавить йодированную соль и лук, повторно измельчить и сформовать шарики примерно по 24 г. Источник не указывает жидкость, использованную для замачивания хлеба.",
+        "Выложить на решётку, смоченную кипячёной водой, и готовить на пару 20–25 минут. Карта фиксирует общий расход воды 12 г; явное назначение воды по технологическим операциям — смачивание решётки. Не приписывать воду замачиванию хлеба и не придумывать распределение массы в граммах по этапам."
+      ],
+      "old_steps": [
+        "Подготовить репчатый лук и пассеровать его на сливочном масле — это единственный cooking-fat, указанный в карте.",
+        "Измельчить говядину с предварительно замоченным черствым пшеничным хлебом без корок, добавить йодированную соль и лук, повторно измельчить и сформовать шарики примерно по 24 г. Источник не указывает жидкость, использованную для замачивания хлеба.",
+        "Выложить на решётку, смоченную кипячёной водой, и готовить на пару 20–25 минут. Карта фиксирует 12 г воды total; явное process placement воды — смачивание решётки. Не приписывать воду замачиванию хлеба и не придумывать per-step gram split."
+      ],
+      "output_mass_g": "60",
+      "predecessor_version_id": "eeb19e6c-b21d-45c7-b79f-4a428d2f00c0",
+      "publication_disposition": "FRESH",
+      "rights_basis": "Reviewed Russian normative factual recipe data; pinned School2022 source PDF and durable archive.",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_recipe_id": "ru-school2022:recipe:54-8м",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "successor_version_id": "154157d1-2d3f-436e-8558-eb33ff03ecc8"
+    },
+    {
+      "canonical_code": "SCHOOL2022_54_11M_BEEF_PILAF",
+      "current_audited_recipe_version_id": "cee0a953-13b3-4294-8565-10bee5dc89f3",
+      "expected_energy_kcal": "348.3",
+      "new_steps": [
+        "Промыть рис; подготовить морковь и лук.",
+        "Лук бланшировать и пассеровать вместе с морковью на сливочном масле с добавлением воды. Карта фиксирует общий расход воды 313 г, но не делит это количество между операциями.",
+        "Подготовленную говядину нарезать кусочками по 10–15 г, добавить пассерованные морковь и лук и йодированную соль.",
+        "Мясо и овощи варить при слабом кипении 5–10 минут, всыпать подготовленный рис, варить до загустения, затем накрыть крышкой и довести до готовности в духовке при 160 °C 30–40 минут."
+      ],
+      "old_steps": [
+        "Промыть рис; подготовить морковь и лук.",
+        "Лук бланшировать и пассеровать вместе с морковью на сливочном масле с добавлением воды. Карта фиксирует 313 г воды total, но не делит это количество между операциями.",
+        "Подготовленную говядину нарезать кусочками по 10–15 г, добавить пассерованные морковь и лук и йодированную соль.",
+        "Мясо и овощи варить при слабом кипении 5–10 минут, всыпать подготовленный рис, варить до загустения, затем накрыть крышкой и довести до готовности в духовке при 160 °C 30–40 минут."
+      ],
+      "output_mass_g": "200",
+      "predecessor_version_id": "745d2046-ef0b-444e-b937-509ee557ec83",
+      "publication_disposition": "FRESH",
+      "rights_basis": "Reviewed Russian normative factual recipe data; pinned School2022 source PDF and durable archive.",
+      "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "source_name": "ru-school2022",
+      "source_recipe_id": "ru-school2022:recipe:54-11м",
+      "source_version": "sha256:c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+      "successor_version_id": "cee0a953-13b3-4294-8565-10bee5dc89f3"
+    }
+  ],
+  "schema_version": "DC4_A3_POST_CORRECTION_EVIDENCE_V1",
+  "source_sha": "0aa949c7989f70658c2633e4792371c251bfcd7f",
+  "status": "PASS",
+  "evidence_source": {
+    "runtime_freeze_sha": "0aa949c7989f70658c2633e4792371c251bfcd7f",
+    "workflow_name": "DC4-A3 Russian RecipeStep corrections",
+    "workflow_run_id": 37762618205,
+    "workflow_job_id": 113262471748,
+    "artifact_id": 11543480822,
+    "artifact_name": "dc4-a3-post-correction-evidence-0aa949c7989f70658c2633e4792371c251bfcd7f",
+    "artifact_size_bytes": 4919,
+    "artifact_created_at": "2026-10-08T10:22:52Z",
+    "artifact_expires_at": "2027-01-06T10:18:37Z",
+    "artifact_zip_sha256": "3d674cd04fc5fde92cfba4fab6b625e54c8edc6b824799a10eb7a5057ddcf9b2"
+  },
+  "receipt_semantics": {
+    "runtime_uuid_scope": "Exact evidence database/run only; UUIDs are not cross-database stable identity.",
+    "durable_identity": "canonical_code + immutable source/provenance + version lineage + committed correction contract",
+    "full_dc4_rerun": false
+  }
+}
