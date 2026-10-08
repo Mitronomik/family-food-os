@@ -1,4 +1,16 @@
-# Current focus
+# PR9-ARCH — Shopping implementation contract gate (current)
+
+Updated: 2026-10-08. Accepted main: `73cb7ee6b20d1af958639f75f6fa5db286381cb3` (PR #181 merged).
+
+Gate1-CLOSE is **COMPLETE**: Planning Core accepted. PR9 Shopping is the next authorized milestone. The current bounded operation is docs-only Implementation Contract Gate, Issue #183, branch `docs/pr9-shopping-contract-gate`; see [PR9 contract](../docs/family-food/pr9-shopping-implementation-contract.md).
+
+**Current authorization:** document, review and freeze Shopping source-kind demand, Decimal aggregation, Pantry snapshot/fingerprint, revisioned Shopping state, schema/migration/API and failure/adversarial test requirements. **No Shopping runtime/schema/migration code is authorized until this contract PR is independently reviewed and merged.** Prep, PDF, PWA, Retail, AI, Auth and PostgreSQL remain out of scope. On accepted merge: authorize a separately bounded PR9 runtime implementation (not autonomous merge).
+
+The Gate1-CLOSE sections below are historical pre-merge handoffs. Their instruction to wait for #181 is superseded by this verified merge.
+
+---
+
+# Current focus (historical entries below)
 
 Updated: 2026-10-08.
 
