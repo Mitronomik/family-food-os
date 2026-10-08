@@ -1,5 +1,63 @@
 # Progress
 
+## Gate1-CLOSE — REVIEW-READY — 2026-10-08
+
+Accepted main:
+`c85fae8e8e2c135855f1ba64ca6722de20e1bd29` (merged PR #179).
+
+Issue #180 / PR #181 / branch `docs/gate1-close`.
+
+Accepted prerequisite chain:
+
+- PR7 MealPlan/Serving — COMPLETE;
+- PR8 Planner v0 — COMPLETE;
+- DATA-CORPUS-V1 DC0..DC3 — COMPLETE;
+- A/B correction tracks — COMPLETE;
+- PR #179 DC4 rerun — MERGED / PASS.
+
+Gate1 closure validator evidence head:
+`4f3be9ad3d9c9ff929c86c7478a3881c65aa3c93`.
+
+Observed closure baseline:
+
+- 227 active FoodIngredient identities;
+- 51 active current RecipeVersions;
+- 51 verified current RecipeVersions;
+- 51 Planner-eligible exact-energy recipes = 17/33/1;
+- planner-v0.5;
+- 3 required fixtures all persisted successfully;
+- 7 / 21 / 42 individualized Servings;
+- exclusions respected;
+- deterministic traces present;
+- bounded infeasibility fail-closed;
+- DC4 reused/adversarial evidence matrix complete;
+- UNKNOWN semantics preserved;
+- migration 0042 / no 0043;
+- AI_ENABLED=false.
+
+Decision candidate:
+
+```text
+decision = CLOSE
+planning_core_status = COMPLETE
+failed_criteria = []
+pr9_authorized_after_merge = true
+```
+
+Durable outputs:
+
+- `data/curation/gate1-close/decision.json`;
+- `docs/family-food/gate1-closure.md`;
+- `scripts/validate_gate1_close.py`;
+- `.github/workflows/gate1-close.yml`.
+
+Status: **READY_FOR_INDEPENDENT_REVIEW**.
+
+Do not start PR9 before PR #181 is merged. After merge, PR9 Shopping Engine is
+the next authorized bounded milestone.
+
+---
+
 ## DC4 corrected-runtime rerun — REVIEW-READY — 2026-10-08
 
 Accepted main:
