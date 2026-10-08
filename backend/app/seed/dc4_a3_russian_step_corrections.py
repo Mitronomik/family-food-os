@@ -13,6 +13,7 @@ from typing import Any
 from uuid import UUID
 
 from app.db.config import REPOSITORY_ROOT, DatabaseConfig
+from app.domain.planner import PlannerConfig
 from app.domain.recipe_nutrition_v2 import RecipeNutritionAuthorityKind
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_recipe_composition import (
@@ -31,7 +32,6 @@ from app.seed.r3a_school2022_main_batch import (
 )
 from app.seed.r3d_final_dc3_batch import seed_r3d_final_dc3_batch
 from app.services.food_recipes import RecipeCatalogueConflictError
-from app.domain.planner import PlannerConfig
 from app.services.planner import PlannerService
 from app.services.recipe_nutrition_v2 import (
     PreparedPublicationDisposition,
