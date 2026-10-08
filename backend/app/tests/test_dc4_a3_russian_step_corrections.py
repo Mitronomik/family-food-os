@@ -4,12 +4,9 @@ from __future__ import annotations
 
 import json
 import sqlite3
-from dataclasses import replace
 from pathlib import Path
 
 import pytest
-from sqlalchemy import event
-
 from app.db.config import DatabaseConfig
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_recipe_composition import (
@@ -21,14 +18,21 @@ from app.persistence.sqlalchemy_core.recipe_nutrition_v2 import (
 from app.seed import dc4_a3_russian_step_corrections as a3
 from app.seed.r3a_school2022_main_batch import (
     _load_contract as _load_r3a_contract,
+)
+from app.seed.r3a_school2022_main_batch import (
     _prepared_spec as _r3a_prepared_spec,
+)
+from app.seed.r3a_school2022_main_batch import (
     _recipe_seed as _r3a_recipe_seed,
+)
+from app.seed.r3a_school2022_main_batch import (
     activate_r3a_school2022_main_batch,
     publish_r3a_school2022_main_batch,
 )
 from app.seed.r3d_final_dc3_batch import seed_r3d_final_dc3_batch
 from app.services.food_recipes import RecipeCatalogueConflictError
 from app.services.recipe_nutrition_v2 import PreparedPublicationDisposition
+from sqlalchemy import event
 
 
 def db_dump(config: DatabaseConfig) -> str:
