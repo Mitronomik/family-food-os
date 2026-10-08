@@ -124,8 +124,8 @@ jobs:
           mapfile -t changed < <(git diff --name-only "${base}"...HEAD)
           printf 'Changed paths:\n'
           printf '  %s\n' "${changed[@]}"
-          if [[ "${base}" != "${ACCEPTED_BASE}" ]]; then
-            echo 'Downstream PR after merged Gate1: historical changed-path allowlist skipped.'
+          if git merge-base --is-ancestor "${ACCEPTED_BASE}" HEAD; then
+            echo 'Downstream descendant of merged Gate1: historical changed-path allowlist skipped.'
             echo 'Gate1 validation, Ruff, migration/AI and git diff --check remain active.'
             exit 0
           fi
