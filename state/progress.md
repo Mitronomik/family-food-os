@@ -1,5 +1,61 @@
 # Progress
 
+## DC4 corrected-runtime rerun — REVIEW-READY — 2026-10-08
+
+Accepted main:
+`2482c52085d7ba9e530f650105a6664ed6d369a7`.
+
+Issue #178 / PR #179 / branch `evidence/dc4-rerun-v05`.
+
+Prerequisites accepted:
+
+- A1 #168 — MERGED;
+- A2 #173 — MERGED;
+- A3 #177 — MERGED;
+- B1 #169 — MERGED;
+- B2 #175 / planner-v0.5 — MERGED.
+
+The rerun preserves historical #165 audit evidence and uses a new dedicated
+script/test/workflow for current accepted runtime truth.
+
+Exact execution evidence head:
+`35cf1d154467ac4171979ea2943b600548c0fb27`.
+
+Workflow `DC4 corpus readiness rerun`:
+
+- run `37771436384`;
+- job `113291728664`;
+- artifact `11548231670`;
+- focused tests: 7 passed;
+- audit with `--require-pass`: SUCCESS;
+- Ruff/format: PASS;
+- migration/AI: PASS;
+- scope/whitespace: PASS.
+
+Observed:
+
+- full active catalogue 51 / blocked 0;
+- Planner eligible 51 = 17/33/1;
+- `planner-v0.5`;
+- fixtures: 7/7, 14/21, 21/42 events/Servings;
+- zero selected hard-exclusion violations;
+- bounded milk+egg failure is fail-closed with no partial plan;
+- `overall_status=PASS`;
+- `blockers=[]`.
+
+Durable outputs:
+
+- `data/curation/dc4-corpus-readiness/rerun-summary.json`;
+- `docs/family-food/dc4-corpus-readiness-rerun-report.md`.
+
+Status: **READY_FOR_INDEPENDENT_REVIEW**.
+
+Do not call Gate1 closed from this evidence alone. After PR #179 merge, next
+bounded operation is a separate Gate1-CLOSE decision. PR9 remains blocked until
+that closure is accepted.
+
+---
+
 ## DC4-A3 immutable Russian RecipeStep correction — REVIEW-READY — 2026-10-08
 
 Accepted main:
