@@ -64,6 +64,21 @@ jobs:
           print(json.dumps(data, ensure_ascii=False, sort_keys=True))
           PY
 
+      - name: Reconcile committed Gate1 decision receipt
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          generated = json.loads(Path('/tmp/gate1-close.json').read_text(encoding='utf-8'))
+          committed = json.loads(
+              Path('data/curation/gate1-close/decision.json').read_text(encoding='utf-8')
+          )
+          committed.pop('evidence_source', None)
+          assert committed == generated
+          print('Committed Gate1 decision matches fresh validation: PASS')
+          PY
+
       - name: Reconcile accepted DC4 rerun receipt
         run: |
           set -euo pipefail
