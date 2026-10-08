@@ -1263,5 +1263,124 @@
     "workflow_status": "SUCCESS",
     "focused_tests": "7 passed"
   },
-  "schema": "DC4_READINESS_RERUN_EVIDENCE_V1"
+  "schema": "DC4_READINESS_RERUN_EVIDENCE_V1",
+  "reused_evidence": {
+    "verification_freeze_sha": "3e5139283c557f75e59f2dd23dd219902b0a4840",
+    "verification_note": "The reusable domain/runtime tests below were re-executed on this exact PR head. Later commits in this PR only extend evidence/report metadata unless explicitly stated otherwise.",
+    "full_backend_workflow": {
+      "workflow": "Nutrient registry V2",
+      "run_id": 37772713432,
+      "status": "SUCCESS",
+      "coverage": "focused + all backend regression shards + launcher regression"
+    },
+    "secondary_full_backend_workflow": {
+      "workflow": "Partial nutrition profiles",
+      "run_id": 37772713616,
+      "status": "SUCCESS",
+      "coverage": "focused + all backend regression shards + launcher regression"
+    },
+    "requirements": [
+      {
+        "requirement": "MEAL_PATTERN_1_2_3_5_6_OPPORTUNITIES",
+        "contract_section": "6",
+        "evidence_kind": "reused_test",
+        "test_path": "backend/app/tests/test_meal_plans.py",
+        "test_name": "test_selection_snapshot_supports_initial_one_to_six_opportunities",
+        "why_still_valid": "The accepted meal-pattern snapshot boundary is unchanged by A3/B2/DC4 rerun. The test parametrically proves representative 1/2/3/5/6-opportunity schedules and ran in the exact-head full backend regression.",
+        "workflow": "Nutrient registry V2",
+        "run_id": 37772713432,
+        "status": "SUCCESS"
+      },
+      {
+        "requirement": "MEAL_PATTERN_SEVEN_OPPORTUNITY_BOUNDARY",
+        "contract_section": "6",
+        "evidence_kind": "reused_test",
+        "test_path": "backend/app/tests/test_meal_plans.py",
+        "test_name": "test_selection_snapshot_rejects_seven_opportunities_at_product_boundary",
+        "why_still_valid": "The product boundary remains six accepted opportunities; seven must fail closed. The domain bytes are unchanged and the test ran on the exact verification freeze.",
+        "workflow": "Nutrient registry V2",
+        "run_id": 37772713432,
+        "status": "SUCCESS"
+      },
+      {
+        "requirement": "MEAL_PATTERN_ACCEPTANCE_PERSISTENCE",
+        "contract_section": "6",
+        "evidence_kind": "reused_tests",
+        "test_path": "backend/app/tests/test_meal_plan_application.py",
+        "test_names": [
+          "test_program_selection_expands_catalogue_template_to_seven_days",
+          "test_selection_versions_advance_and_preserve_superseded_history",
+          "test_manual_week_creates_revision_and_shared_event_servings",
+          "test_complete_manual_week_supports_three_member_household"
+        ],
+        "why_still_valid": "These application tests prove accepted PROGRAM/CUSTOM meal-pattern expansion/versioning and persisted shared-event Servings. A3 changes recipe revisions and B2 changes Planner ordering only; the meal-pattern persistence contract itself was not changed.",
+        "workflow": "Nutrient registry V2",
+        "run_id": 37772713432,
+        "status": "SUCCESS"
+      },
+      {
+        "requirement": "MEAL_TYPE_DISTINCT_FROM_MEAL_ROLE",
+        "contract_section": "6",
+        "evidence_kind": "reused_tests",
+        "test_path": "backend/app/tests/test_planner_application_boundary.py",
+        "test_names": [
+          "test_candidate_admission_sees_blocked_catalogue_without_selecting_it"
+        ],
+        "supporting_test_path": "backend/app/tests/test_planner.py",
+        "supporting_test_names": [
+          "test_complete_heterogeneous_week_is_deterministic_and_weekly_normalized",
+          "test_exact_energy_readiness_is_narrow_and_legacy_incomplete_stays_rejected"
+        ],
+        "why_still_valid": "Planner consumes MealRole opportunities and separately admits RecipeVersion MealTypeCode values through the versioned meal-role compatibility contract. Unsupported MealTypeCode.OTHER is ROLE_UNSUPPORTED rather than fabricated into a role.",
+        "workflow": "Nutrient registry V2",
+        "run_id": 37772713432,
+        "status": "SUCCESS"
+      },
+      {
+        "requirement": "MEAL_SOURCE_KIND_BOUNDARIES_NO_FABRICATION",
+        "contract_section": "6",
+        "evidence_kind": "reused_tests",
+        "test_path": "backend/app/tests/test_meal_plans.py",
+        "test_names": [
+          "test_meal_source_requires_recipe_only_for_cook_recipe"
+        ],
+        "supporting_test_path": "backend/app/tests/test_planner.py",
+        "supporting_test_names": [
+          "test_incompatible_members_split_and_subset_fixed_event_is_preserved"
+        ],
+        "why_still_valid": "COOK_RECIPE requires a RecipeVersion, non-recipe source kinds cannot carry recipe truth, and fixed EAT_OUT events remain user-supplied while Planner-generated remaining events are COOK_RECIPE. Unsupported/non-recipe sources are therefore preserved or rejected, not fabricated as recipe-backed automatic meals.",
+        "workflow": "Nutrient registry V2",
+        "run_id": 37772713432,
+        "status": "SUCCESS"
+      },
+      {
+        "requirement": "PROVENANCE_TAMPER_AND_PROCESS_DRIFT_FAIL_CLOSED",
+        "contract_section": "11",
+        "evidence_kind": "reused_tests",
+        "test_path": "backend/app/tests/test_r3d_final_dc3_batch.py",
+        "test_names": [
+          "test_r3d_hash_pinned_gate_rejects_tampered_artifact",
+          "test_r3d_hash_pinned_mr_bundle_rejects_tamper",
+          "test_r3d_review_commitment_changes_on_process_binding_drift"
+        ],
+        "why_still_valid": "The immutable source/review commitment machinery is unchanged by DC4 rerun. Exact-head R3-D verification and full backend regression both passed, proving source artifact tamper and process-binding drift remain detectable.",
+        "workflow": "R3-D final DC3 batch runtime",
+        "run_id": 37772713549,
+        "status": "SUCCESS",
+        "also_covered_by_full_backend_run_id": 37772713432
+      },
+      {
+        "requirement": "NO_GATE_ONLY_AUTHORITY",
+        "contract_section": "11",
+        "evidence_kind": "current_execution_path",
+        "execution_path": "scripts/audit_dc4_corpus_readiness_rerun.py::audit -> seed_dc4_a3_russian_step_corrections -> ordinary FoodRecipeCatalogueService / RecipeNutritionV2Service / PlannerService",
+        "supporting_test_path": "backend/app/tests/test_dc4_corpus_readiness_rerun.py",
+        "supporting_test_name": "test_dc4_rerun_reproducible_corpus_and_gate1_evidence",
+        "why_still_valid": "The rerun introduces no Recipe/Food/Nutrition publication of its own. It seeds the accepted production catalogue through the merged A3 publication path, then audits and plans through ordinary services. No synthetic RecipeVersion or gate-only nutrition authority is created.",
+        "workflow": "DC4 corpus readiness rerun",
+        "run_id": 37772713594,
+        "status": "SUCCESS"
+      }
+    ]
+  }
 }
