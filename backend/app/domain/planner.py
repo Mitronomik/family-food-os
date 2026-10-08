@@ -10,6 +10,7 @@ from dataclasses import asdict, dataclass, is_dataclass, replace
 from datetime import date, timedelta
 from decimal import Decimal, ROUND_HALF_UP
 from enum import StrEnum
+from itertools import pairwise
 from uuid import UUID
 
 from app.domain.food_recipes import MealTypeCode
@@ -40,6 +41,7 @@ class PlannerFailureCode(StrEnum):
     NO_ELIGIBLE_CANDIDATE = "NO_ELIGIBLE_CANDIDATE"
     INVALID_FIXED_EVENT = "INVALID_FIXED_EVENT"
     MISSING_ENERGY_ALLOCATION = "MISSING_ENERGY_ALLOCATION"
+    INCOMPATIBLE_SLOT_ORDER = "INCOMPATIBLE_SLOT_ORDER"
 
 
 @dataclass(frozen=True)
@@ -59,7 +61,7 @@ class PlannerConfig:
             match = _VERSION.match(value) if isinstance(value, str) else None
             if match is None or match.end() != len(value):
                 raise ValueError(f"{name} must be a non-empty version-safe identifier")
-        if self.version not in {"planner-v0.3", "planner-v0.4"}:
+        if self.version not in {"planner-v0.3", "planner-v0.4", "planner-v0.5"}:
             raise ValueError("Unsupported Planner algorithm version")
         for name in (
             "preference_weight",
@@ -455,6 +457,58 @@ def _failure(
     )
 
 
+def _ordered_slots_v05(
+    request: PlannerRequest,
+    slots: dict[tuple[date, MealRole, int], set[UUID]],
+    slot_order: dict[tuple[date, MealRole, int], int],
+) -> tuple[tuple[date, MealRole, int], ...] | None:
+    """Topologically merge member-local opportunity order into household order."""
+
+    ordered: list[tuple[date, MealRole, int]] = []
+    for offset in range(7):
+        local_date = request.week_start + timedelta(days=offset)
+        day_keys = tuple(key for key in slots if key[0] == local_date)
+        successors = {key: set() for key in day_keys}
+        indegree = {key: 0 for key in day_keys}
+
+        for member in sorted(request.members, key=lambda item: item.member_id.hex):
+            seen: Counter[MealRole] = Counter()
+            sequence: list[tuple[date, MealRole, int]] = []
+            for role in member.selection.roles_for_weekday(offset + 1):
+                seen[role] += 1
+                key = (local_date, role, seen[role])
+                if key not in successors:
+                    return None
+                sequence.append(key)
+            for before, after in pairwise(sequence):
+                if after not in successors[before]:
+                    successors[before].add(after)
+                    indegree[after] += 1
+
+        def tie_break(key: tuple[date, MealRole, int]) -> tuple[int, str, int]:
+            return (slot_order[key], key[1].value, key[2])
+
+        ready = sorted(
+            (key for key in day_keys if indegree[key] == 0),
+            key=tie_break,
+        )
+        day_order: list[tuple[date, MealRole, int]] = []
+        while ready:
+            key = ready.pop(0)
+            day_order.append(key)
+            for successor in sorted(successors[key], key=tie_break):
+                indegree[successor] -= 1
+                if indegree[successor] == 0:
+                    ready.append(successor)
+                    ready.sort(key=tie_break)
+
+        if len(day_order) != len(day_keys):
+            return None
+        ordered.extend(day_order)
+
+    return tuple(ordered)
+
+
 def generate_week(
     request: PlannerRequest, config: PlannerConfig = PlannerConfig()
 ) -> PlannerResult:
@@ -498,7 +552,7 @@ def generate_week(
     allocation_shares: dict[tuple[UUID, date, MealRole, int], Decimal] = {}
     allocation_residuals: tuple[tuple[UUID, date, Decimal], ...] = ()
     allocation_sources: tuple[tuple[UUID, str], ...] = ()
-    if config.version == "planner-v0.4":
+    if config.version in {"planner-v0.4", "planner-v0.5"}:
         allocation = _v04_allocation(request)
         if allocation is None:
             return _failure(
@@ -557,9 +611,21 @@ def generate_week(
             FixedPlannerEvent | None,
         ]
     ] = []
-    ordered = sorted(
-        slots.items(), key=lambda x: (x[0][0], slot_order[x[0]], x[0][1].value, x[0][2])
-    )
+    if config.version == "planner-v0.5":
+        ordered_keys = _ordered_slots_v05(request, slots, slot_order)
+        if ordered_keys is None:
+            return _failure(
+                request,
+                config,
+                PlannerFailureCode.INCOMPATIBLE_SLOT_ORDER,
+                "Accepted member meal-pattern order cannot be reconciled.",
+            )
+        ordered = tuple((key, slots[key]) for key in ordered_keys)
+    else:
+        ordered = sorted(
+            slots.items(),
+            key=lambda x: (x[0][0], slot_order[x[0]], x[0][1].value, x[0][2]),
+        )
     for (local_date, role, occurrence), all_participants in ordered:
         remaining = set(all_participants)
         if fixed_event := fixed.get((local_date, role, occurrence)):
@@ -747,7 +813,7 @@ def generate_week(
     ) in provisional:
         positions[local_date] += 1
         if candidate:
-            if config.version == "planner-v0.4":
+            if config.version in {"planner-v0.4", "planner-v0.5"}:
                 portions = []
                 for member_id in participants:
                     share = allocation_shares[
@@ -815,7 +881,7 @@ def generate_week(
                     fixed_event.portions,
                 )
             )
-            if config.version == "planner-v0.4":
+            if config.version in {"planner-v0.4", "planner-v0.5"}:
                 fixed_portions = dict(fixed_event.portions)
                 for member_id in participants:
                     share = allocation_shares[

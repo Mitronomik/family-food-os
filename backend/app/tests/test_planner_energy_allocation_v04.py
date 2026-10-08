@@ -1179,4 +1179,4 @@ def test_v04_missing_allocation_fails_before_any_partial_plan():
 
 def test_planner_config_rejects_unknown_algorithm_version():
     with pytest.raises(ValueError, match="Unsupported Planner algorithm version"):
-        PlannerConfig(version="planner-v0.5")
+        PlannerConfig(version="planner-v0.6")
