@@ -8,6 +8,7 @@ on:
       - 'docs/family-food/gate1-closure.md'
       - 'state/**'
       - '.github/workflows/gate1-close.yml'
+      - '.github/workflows/dc4-corpus-readiness-rerun.yml'
   workflow_dispatch:
     inputs:
       target_ref:
@@ -128,7 +129,8 @@ jobs:
               data/curation/gate1-close/*|\
               docs/family-food/gate1-closure.md|\
               state/current-focus.md|state/progress.md|state/handoff.md|\
-              .github/workflows/gate1-close.yml)
+              .github/workflows/gate1-close.yml|\
+              .github/workflows/dc4-corpus-readiness-rerun.yml)
                 ;;
               *)
                 echo "Unexpected Gate1-CLOSE scope: ${path}" >&2
