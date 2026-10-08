@@ -1,5 +1,59 @@
 # Progress
 
+## DC4-A3 immutable Russian RecipeStep correction — REVIEW-READY — 2026-10-08
+
+Accepted main:
+`2a16521a69d48b6df6dcec944ef39fd270d0a95f`.
+
+Issue #176 / PR #177 / branch `feat/dc4-a3-russian-step-corrections`.
+
+Accepted prerequisites:
+
+- A1 / PR #168 — MERGED;
+- A2 Contract Gate / PR #173 — MERGED;
+- B1 / PR #169 — MERGED;
+- B2 planner-v0.5 / PR #175 — MERGED.
+
+A3 runtime freeze:
+`0aa949c7989f70658c2633e4792371c251bfcd7f`.
+
+Delivered:
+
+- exactly seven immutable same-source RecipeVersion successors;
+- predecessor versions retained and linked through `created_from_version_id`;
+- approved Russian RecipeStep language only; non-step recipe semantics preserved;
+- prepared ENERGY_KCAL rebound atomically to successor IDs;
+- 53 other frozen nutrient codes remain UNKNOWN;
+- historical R3-A seed/prepared/activation replay remains zero-write;
+- A3 exact replay is zero-write;
+- injected failure between version append and prepared authority rolls back;
+- current Planner `planner-v0.5`;
+- active catalogue and Planner exact-energy supply remain 51 = 17/33/1;
+- migration 0042 / no 0043; AI disabled.
+
+Focused post-correction DC4 Layer-A evidence:
+
+- workflow run `37762618205`, job `113262471748`;
+- artifact ID `11543480822`;
+- Layer-A active 51 / blocked 0;
+- current `RUSSIAN_STEPS_NOT_READY` count 0;
+- all seven prior Russian blockers cleared;
+- exact-run UUID + source/steps/energy receipt committed at
+  `data/curation/dc4-a3-russian-step-corrections/evidence.json`;
+- human receipt at
+  `docs/family-food/dc4-a3-post-correction-evidence.md`.
+
+The exact-run RecipeVersion UUIDs are evidence-database-specific, not
+cross-database stable IDs. Durable semantic identity remains the canonical recipe,
+immutable provenance and lineage contract.
+
+Track A is **not accepted until PR #177 is independently reviewed and merged**.
+
+The focused receipt does not run or close full DC4. After A3 merge, the next
+operation is a **separate DC4 rerun**. Gate1-CLOSE and PR9 remain blocked.
+
+---
+
 ## Post-DC4 correction reconciliation — ACTIVE — 2026-10-07
 
 Accepted main:
