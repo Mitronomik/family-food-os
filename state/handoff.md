@@ -1,5 +1,71 @@
 # Handoff
 
+## DC4 corrected-runtime rerun — final review handoff — 2026-10-08
+
+Accepted main:
+
+`2482c52085d7ba9e530f650105a6664ed6d369a7`
+(merged PR #177).
+
+Accepted correction state:
+
+- Track A complete: #168 → #173 → #177 merged;
+- Track B complete: #169 → #175 merged;
+- current deterministic Planner: `planner-v0.5`.
+
+Current operation:
+
+- Issue #178;
+- PR #179;
+- branch `evidence/dc4-rerun-v05`.
+
+Read first:
+
+- `AGENTS.md`;
+- `state/current-focus.md`;
+- `docs/family-food/dc4-corpus-readiness-contract.md`;
+- `docs/family-food/dc4-corpus-readiness-rerun-report.md`;
+- `data/curation/dc4-corpus-readiness/rerun-summary.json`;
+- historical `docs/family-food/dc4-corpus-readiness-report.md` for old BLOCKED evidence.
+
+Exact rerun evidence:
+
+- audited head `35cf1d154467ac4171979ea2943b600548c0fb27`;
+- workflow run `37771436384`;
+- job `113291728664`;
+- artifact `11548231670`;
+- 7 focused tests PASS;
+- full Layer A: 51 active / 0 blocked;
+- Planner supply 51 = 17/33/1;
+- Fixture 1: 7 events / 7 Servings;
+- Fixture 2: 14 events / 21 Servings;
+- Fixture 3: 21 events / 42 Servings;
+- hard exclusions respected;
+- bounded milk+egg infeasibility fail-closed;
+- `planner-v0.5`;
+- migration 0042 / no 0043;
+- AI disabled;
+- `overall_status=PASS`, no blockers.
+
+Historical #165 evidence must remain intact; it records the old pre-correction
+BLOCKED state and is not superseded retroactively.
+
+Current stop rule:
+
+- #179 must be independently reviewed and merged;
+- do not merge autonomously;
+- do not start PR9;
+- do not treat PASS rerun as an implicit Gate1-CLOSE.
+
+After #179 merge:
+
+```text
+separate Gate1-CLOSE decision
+→ PR9 only if Gate1-CLOSE passes
+```
+
+---
+
 ## DC4-A3 final review handoff — 2026-10-08
 
 Accepted main:
