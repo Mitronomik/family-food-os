@@ -9,18 +9,19 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from sqlalchemy import func, select
-
 from app.db import migrations
 from app.db.config import REPOSITORY_ROOT, DatabaseConfig
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
-from app.persistence.sqlalchemy_core.food_ingredient_tables import food_ingredients_table
+from app.persistence.sqlalchemy_core.food_ingredient_tables import (
+    food_ingredients_table,
+)
 from app.persistence.sqlalchemy_core.food_recipe_composition import (
     create_food_recipe_catalogue_service,
 )
 from app.seed.dc4_a3_russian_step_corrections import (
     seed_dc4_a3_russian_step_corrections,
 )
+from sqlalchemy import func, select
 
 RERUN_SUMMARY = (
     REPOSITORY_ROOT / "data/curation/dc4-corpus-readiness/rerun-summary.json"
