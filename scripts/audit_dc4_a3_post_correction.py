@@ -1,10 +1,13 @@
 """Focused post-A3 DC4 Layer-A / Russian-readiness evidence."""
+
 from __future__ import annotations
+
 import argparse
 import json
 import tempfile
 from pathlib import Path
 from typing import Any
+
 from app.db.config import DatabaseConfig
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.food_ingredient_composition import (
@@ -21,14 +24,23 @@ from app.seed.dc4_a3_russian_step_corrections import (
     _load_corrections,
     seed_dc4_a3_russian_step_corrections,
 )
+
 from scripts.audit_dc4_corpus_readiness import _audit_active_catalogue
+
 SCHEMA_VERSION = "DC4_A3_POST_CORRECTION_EVIDENCE_V1"
+
+
 def focused_audit(
     config: DatabaseConfig,
     *,
     source_sha: str | None = None,
 ) -> dict[str, Any]:
     publication = seed_dc4_a3_russian_step_corrections(config)
+    correction_artifact = _load_corrections()
+    correction_by_code = {
+        row["canonical_code"]: row for row in correction_artifact["recipes"]
+    }
+
     engine = create_sqlite_engine(config)
     try:
         recipes = create_food_recipe_catalogue_service(engine)
@@ -37,11 +49,13 @@ def focused_audit(
         catalogue = _audit_active_catalogue(recipes, food, nutrition)
     finally:
         engine.dispose()
+
     by_code = {row["canonical_code"]: row for row in catalogue["recipes"]}
     corrected = [by_code[code] for code in CORRECTION_CODES]
     publication_by_code = {
         row.canonical_code: row for row in publication.recipes
     }
+
     runtime_ids = []
     for code in CORRECTION_CODES:
         published = publication_by_code[code]
@@ -67,6 +81,7 @@ def focused_audit(
                 "new_steps": correction["new_steps"],
             }
         )
+
     russian_blocked = [
         row["canonical_code"]
         for row in catalogue["recipes"]
@@ -84,6 +99,7 @@ def focused_audit(
         row["successor_version_id"] == row["current_audited_recipe_version_id"]
         for row in runtime_ids
     )
+
     pass_status = (
         catalogue["active_count"] == 51
         and catalogue["blocked_count"] == 0
@@ -96,6 +112,7 @@ def focused_audit(
         == {"breakfast": 17, "main": 33, "sandwich": 1}
         and publication.planner_version == "planner-v0.5"
     )
+
     return {
         "schema_version": SCHEMA_VERSION,
         "evidence_scope": "POST_A3_FOCUSED_LAYER_A_RUSSIAN_READINESS",
@@ -131,6 +148,8 @@ def focused_audit(
             "GATE1_CLOSE",
         ],
     }
+
+
 def render_markdown(result: dict[str, Any]) -> str:
     receipts = "\n".join(
         "| {canonical_code} | `{predecessor_version_id}` | "
@@ -141,12 +160,16 @@ def render_markdown(result: dict[str, Any]) -> str:
     )
     if not receipts:
         receipts = "| — | — | — | — |"
+
     return f"""# DC4-A3 post-correction focused evidence
+
 **Status:** {result["status"]}
 **Scope:** focused Layer-A / Russian-readiness verification only
 **Full DC4 rerun:** NO
 **Evidence source SHA:** `{result.get("source_sha") or "UNSPECIFIED"}`
+
 ## Result
+
 - active production catalogue: **{result["layer_a"]["active_count"]}**;
 - Layer-A blocked rows: **{result["layer_a"]["blocked_count"]}**;
 - current `RUSSIAN_STEPS_NOT_READY`: **{result["current_russian_steps_not_ready_count"]}**;
@@ -154,17 +177,28 @@ def render_markdown(result: dict[str, Any]) -> str:
 - Planner exact-energy supply: **{result["planner_supply"]["eligible_count"]}**;
 - split: **{result["planner_supply"]["meal_type_counts"]}**;
 - Planner version: **{result["planner_supply"]["planner_version"]}**.
+
 ## Exact-run RecipeVersion identity receipt
+
 These UUIDs identify this exact evidence database/run. They are intentionally
 runtime-instance-specific and are not a cross-database identity contract.
+
 | Recipe | predecessor RecipeVersion | successor RecipeVersion | audited current RecipeVersion |
 | --- | --- | --- | --- |
 {receipts}
+
+The machine-readable receipt also contains full old/new RecipeStep arrays,
+source provenance/rights/output commitments and expected prepared energy for
+each row.
+
 ## Boundary
+
 This receipt does **not** run the three Gate1 fixtures, bounded infeasibility,
 full DC4 blocker recomputation or Gate1-CLOSE. Those remain reserved for the
 separate DC4 rerun after A3 is accepted.
 """
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--db")
@@ -172,6 +206,7 @@ def main() -> None:
     parser.add_argument("--markdown-output")
     parser.add_argument("--source-sha")
     args = parser.parse_args()
+
     if args.db:
         config = DatabaseConfig(path=Path(args.db))
         result = focused_audit(config, source_sha=args.source_sha)
@@ -179,6 +214,7 @@ def main() -> None:
         with tempfile.TemporaryDirectory(prefix="dc4-a3-focused-") as tmp:
             config = DatabaseConfig(path=Path(tmp) / "evidence.sqlite")
             result = focused_audit(config, source_sha=args.source_sha)
+
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(
@@ -189,8 +225,11 @@ def main() -> None:
         markdown = Path(args.markdown_output)
         markdown.parent.mkdir(parents=True, exist_ok=True)
         markdown.write_text(render_markdown(result), encoding="utf-8")
+
     print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     if result["status"] != "PASS":
         raise SystemExit(1)
+
+
 if __name__ == "__main__":
     main()
