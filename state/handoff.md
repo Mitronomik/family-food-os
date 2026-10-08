@@ -1,5 +1,69 @@
 # Handoff
 
+## Gate1-CLOSE — final review handoff — 2026-10-08
+
+Accepted main:
+
+`c85fae8e8e2c135855f1ba64ca6722de20e1bd29`
+(merged PR #179).
+
+Current operation:
+
+- Issue #180;
+- PR #181;
+- branch `docs/gate1-close`.
+
+Read first:
+
+- `AGENTS.md`;
+- `state/current-focus.md`;
+- `docs/family-food/master-roadmap.md`;
+- `docs/family-food/master-roadmap-addendum-2026-09-19-data-corpus.md`;
+- `docs/family-food/dc4-corpus-readiness-contract.md`;
+- `docs/family-food/dc4-corpus-readiness-rerun-report.md`;
+- `data/curation/dc4-corpus-readiness/rerun-summary.json`;
+- `docs/family-food/gate1-closure.md`;
+- `data/curation/gate1-close/decision.json`.
+
+Closure evidence:
+
+- validator exact head `4f3be9ad3d9c9ff929c86c7478a3881c65aa3c93`;
+- workflow run `37808665837`;
+- job `113419518103`;
+- artifact `11563757892`;
+- 227 active foods >= 80 required;
+- 51 verified current recipes >= 30 required;
+- DC4 rerun PASS / no blockers;
+- planner-v0.5;
+- all 3 mandatory fixtures complete;
+- individualized Servings 7 / 21 / 42;
+- hard exclusions respected;
+- bounded infeasibility has no partial state;
+- reused evidence/provenance/no-gate-only-authority matrix complete;
+- migration 0042 / no 0043;
+- AI disabled;
+- Gate1 decision candidate = CLOSE.
+
+Stop rule:
+
+- do not merge PR #181 autonomously;
+- do not start PR9 before #181 merge;
+- closure review may challenge evidence/decision only; no Shopping implementation
+  belongs in #181.
+
+If #181 is independently accepted and merged:
+
+```text
+Gate1 — Planning Core COMPLETE
+→ PR9 Shopping Engine
+```
+
+PR9 remains generic Shopping first: MealPlan/Servings → RecipeIngredients →
+normalization/aggregation → Pantry subtraction → revisioned ShoppingList.
+RetailSKU/prices/retailer connectors remain out of scope.
+
+---
+
 ## DC4 corrected-runtime rerun — final review handoff — 2026-10-08
 
 Accepted main:
