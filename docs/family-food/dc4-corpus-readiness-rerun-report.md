@@ -1,11 +1,11 @@
 # DC4 rerun — Corpus Readiness & Gate1 Consumption
 
-**Status:** PASS — corrected-runtime rerun, **not** Gate1-CLOSE  
-**Issue / PR:** #178 / #179  
-**Accepted base:** `2482c52085d7ba9e530f650105a6664ed6d369a7` (merged #177)  
-**Contract:** [dc4-corpus-readiness-contract.md](dc4-corpus-readiness-contract.md)  
-**Historical blocked audit:** [dc4-corpus-readiness-report.md](dc4-corpus-readiness-report.md)  
-**Machine-readable rerun evidence:** [rerun-summary.json](../../data/curation/dc4-corpus-readiness/rerun-summary.json)  
+**Status:** PASS — corrected-runtime rerun, **not** Gate1-CLOSE
+**Issue / PR:** #178 / #179
+**Accepted base:** `2482c52085d7ba9e530f650105a6664ed6d369a7` (merged #177)
+**Contract:** [dc4-corpus-readiness-contract.md](dc4-corpus-readiness-contract.md)
+**Historical blocked audit:** [dc4-corpus-readiness-report.md](dc4-corpus-readiness-report.md)
+**Machine-readable rerun evidence:** [rerun-summary.json](../../data/curation/dc4-corpus-readiness/rerun-summary.json)
 **Evidence execution:** GitHub Actions `DC4 corpus readiness rerun`, run `37771436384`, job `113291728664`, artifact `11548231670`, audited head `35cf1d154467ac4171979ea2943b600548c0fb27`, 2026-10-08.
 
 ## Result
@@ -49,7 +49,7 @@ Planner admission is recomputed independently from Layer A.
 | sandwich | 1 | 1 |
 | **Total** | **51** | **51** |
 
-Planner algorithm/config version: **`planner-v0.5`**.  
+Planner algorithm/config version: **`planner-v0.5`**.
 Max recipe repetitions: **3**.
 
 ## Layer B — mandatory Gate1 fixtures
