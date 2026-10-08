@@ -9,6 +9,7 @@ on:
       - 'docs/family-food/dc4-corpus-readiness-rerun-report.md'
       - 'state/**'
       - '.github/workflows/dc4-corpus-readiness-rerun.yml'
+      - '.github/workflows/dc4-a3-russian-step-corrections.yml'
   workflow_dispatch:
     inputs:
       target_ref:
@@ -152,7 +153,8 @@ jobs:
               data/curation/dc4-corpus-readiness/rerun-summary.json|\
               docs/family-food/dc4-corpus-readiness-rerun-report.md|\
               state/current-focus.md|state/progress.md|state/handoff.md|\
-              .github/workflows/dc4-corpus-readiness-rerun.yml)
+              .github/workflows/dc4-corpus-readiness-rerun.yml|\
+              .github/workflows/dc4-a3-russian-step-corrections.yml)
                 ;;
               *)
                 echo "Unexpected DC4 rerun scope: ${path}" >&2
