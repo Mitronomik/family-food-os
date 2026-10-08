@@ -35,16 +35,28 @@ def _same_source_lineage_contains(
     source_identity = (
         ancestor.source_name,
         ancestor.source_recipe_id,
+        ancestor.source_url,
         ancestor.source_version,
         ancestor.source_document_sha256,
+        ancestor.source_original_servings,
+        ancestor.source_output_g,
+        ancestor.source_output_text,
+        ancestor.rights_review_status,
+        ancestor.rights_basis,
     )
     current = descendant
     while True:
         if (
             current.source_name,
             current.source_recipe_id,
+            current.source_url,
             current.source_version,
             current.source_document_sha256,
+            current.source_original_servings,
+            current.source_output_g,
+            current.source_output_text,
+            current.rights_review_status,
+            current.rights_basis,
         ) != source_identity:
             return False
         if current.id == ancestor.id:
