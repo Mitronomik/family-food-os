@@ -2,6 +2,77 @@
 
 Updated: 2026-10-08.
 
+## DC4 corrected-runtime rerun — final review
+
+Accepted main:
+
+`2482c52085d7ba9e530f650105a6664ed6d369a7`
+(merged PR #177).
+
+Accepted correction tracks:
+
+- A1 / PR #168 — MERGED;
+- A2 / PR #173 — MERGED;
+- A3 / PR #177 — MERGED; Track A accepted;
+- B1 / PR #169 — MERGED;
+- B2 / PR #175 — MERGED; Track B accepted;
+- current Planner = `planner-v0.5`.
+
+Current operation:
+
+- Issue #178;
+- PR #179;
+- branch `evidence/dc4-rerun-v05`;
+- exact execution evidence head
+  `35cf1d154467ac4171979ea2943b600548c0fb27`.
+
+### Verified rerun evidence
+
+Dedicated workflow run `37771436384`, job `113291728664`, artifact
+`11548231670`:
+
+- focused rerun tests: 7 passed;
+- Layer A: 51 active / 51 PASS / 0 BLOCKED;
+- Planner exact-energy supply: 51 = 17 breakfast / 33 main / 1 sandwich;
+- Planner version: `planner-v0.5`;
+- Fixture 1: 7 events / 7 Servings — PASS;
+- Fixture 2: 14 events / 21 Servings — PASS;
+- Fixture 3: 21 events / 42 Servings — PASS;
+- selected hard exclusions respected;
+- bounded MILK_2_5 + EGG case: `NO_ELIGIBLE_CANDIDATE`, no partial plan;
+- `overall_status=PASS`, `blockers=[]`;
+- migration 0042 / no 0043;
+- `AI_ENABLED=false`.
+
+Durable receipts:
+
+- `data/curation/dc4-corpus-readiness/rerun-summary.json`;
+- `docs/family-food/dc4-corpus-readiness-rerun-report.md`.
+
+Historical PR #165 evidence remains unchanged and truthfully records the old
+BLOCKED result on pre-correction catalogue + `planner-v0.4`.
+
+## Current authorization
+
+The only current operation is **independent review of PR #179**.
+
+The rerun evidence is PASS, but the accepted project state does not advance to
+Gate1-CLOSE until #179 is reviewed and merged.
+
+After #179 merge:
+
+```text
+DC4 rerun accepted
+→ separate Gate1-CLOSE decision
+→ PR9 Shopping Engine only if Gate1-CLOSE passes
+```
+
+Do not start PR9 directly from rerun evidence. Do not merge #179 autonomously.
+
+---
+
+Updated: 2026-10-08.
+
 ## Post-DC4 bounded corrections — A3 final review
 
 Accepted main:
