@@ -1,4 +1,14 @@
-# Handoff
+# PR9-ARCH — contract-gate handoff — 2026-10-08
+
+Accepted main `73cb7ee6b20d1af958639f75f6fa5db286381cb3` (merged PR #181); Gate1 Planning Core COMPLETE. Current bounded operation: Issue #183, docs-only PR9 Shopping Implementation Contract Gate; branch `docs/pr9-shopping-contract-gate`.
+
+Read `AGENTS.md`, `state/current-focus.md`, `docs/family-food/master-roadmap.md` + later addenda, `docs/family-food/architecture.md`, [PR9 contract](../docs/family-food/pr9-shopping-implementation-contract.md), and `docs/family-food/verification-policy.md`. Review exact current MealPlan/Serving, Recipe/Assembly, Pantry, FoodIngredient and migration contracts. Accepted MealSourceKind values: COOK_RECIPE, ASSEMBLY, LEFTOVER, PREPARED, READY_MEAL, ORDER_OUT, EAT_OUT. Pantry has no aggregate revision; deterministic availability fingerprint proposed; no stock mutation. SQLite migration head 0042; 0043 is only a conditional future proposal. The contract lists explicit pre-runtime OPEN QUESTIONs requiring resolution/review.
+
+Stop after publication for independent review. Do not merge autonomously. **PR9 runtime NOT STARTED** until contract approval/merge; no Prep/PDF/PWA/Retail/AI/Auth/PostgreSQL authorization.
+
+---
+
+# Handoff (historical entries below)
 
 ## Gate1-CLOSE — final review handoff — 2026-10-08
 
