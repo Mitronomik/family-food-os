@@ -92,6 +92,7 @@ class ReviewedRecipeIngredientBindingSpec:
     composition_input_state: MassState | str
     expected_available_amounts: tuple[tuple[str, Decimal], ...]
     expected_unknown_codes: tuple[str, ...]
+    recipe_version_number: int | None = None
     require_recipe_inactive: bool = True
 
 
@@ -373,16 +374,22 @@ class RecipeNutritionV2Service:
         candidates = uow.versions.list_by_provenance(
             recipe.id, spec.source_name, spec.source_recipe_id, spec.source_version
         )
-        if len(candidates) != 1:
-            raise RecipeNutritionV2ConflictError(
-                "Prepared RecipeVersion provenance is not exact."
+        matches = tuple(
+            detail
+            for detail in candidates
+            if trusted_recipe_seed_matches(uow, detail, spec.trusted_recipe_seed)
+            and (
+                spec.recipe_version_number is None
+                or detail.version.version_number == spec.recipe_version_number
             )
-        detail = candidates[0]
+        )
+        if len(matches) != 1:
+            raise RecipeNutritionV2ConflictError(
+                "Prepared spec must resolve exactly one structurally matching "
+                "same-provenance RecipeVersion."
+            )
+        detail = matches[0]
         version = detail.version
-        if not trusted_recipe_seed_matches(uow, detail, spec.trusted_recipe_seed):
-            raise RecipeNutritionV2ConflictError(
-                "Prepared RecipeVersion structure/process differs from reviewed seed."
-            )
         if (
             version.verification_status.value != "SOURCE_VERIFIED"
             or version.source_document_sha256 != spec.source_document_sha256
@@ -823,6 +830,16 @@ class RecipeNutritionV2Service:
         ):
             raise RecipeNutritionV2ContractError(
                 "Prepared spec не совпадает с reviewed Recipe/source authority."
+            )
+        if (
+            spec.recipe_version_number is not None
+            and (
+                type(spec.recipe_version_number) is not int
+                or spec.recipe_version_number <= 0
+            )
+        ):
+            raise RecipeNutritionV2ContractError(
+                "Prepared RecipeVersion number must be a positive integer."
             )
         if (
             not isinstance(spec.output_mass_g, Decimal)
