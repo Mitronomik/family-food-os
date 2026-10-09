@@ -7,12 +7,12 @@ from datetime import date, datetime
 from decimal import Decimal
 from uuid import UUID
 
+from app.domain.meal_plans import MealSourceKind
 from app.domain.shopping_calculation import (
     ShoppingPriceStatus,
     ShoppingStatus,
     ShoppingUnresolvedReason,
 )
-from app.domain.meal_plans import MealSourceKind
 from app.domain.units import UnitCode
 
 
