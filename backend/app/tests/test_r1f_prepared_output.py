@@ -346,8 +346,9 @@ def test_r1f_prepared_authority_tables_are_immutable(database):
 
 
 def test_migration_0042_is_registered_and_required_tables_exist(database):
+    assert "0042_recipe_prepared_output_nutrition" in migrations.expected_migration_ids()
     assert migrations.expected_migration_ids()[-1] == (
-        "0042_recipe_prepared_output_nutrition"
+        "0043_shopping_engine"
     )
     with sqlite3.connect(database.path) as db:
         tables = {
