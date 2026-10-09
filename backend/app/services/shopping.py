@@ -286,16 +286,24 @@ class ShoppingService:
                 # The original derived snapshot stays readable even if a
                 # later catalogue/recipe edit makes recalculation fail closed.
                 return ShoppingCurrent(latest, True, "SOURCE_INVALID")
-            stored = latest.shopping_list
-            stale = (
-                stored.source_fingerprint != calculated.source_fingerprint
-                or stored.source_pantry_snapshot_hash != calculated.pantry_snapshot_hash
-                or stored.as_of_date != calculated.as_of_date
-                or stored.content_fingerprint != calculated.content_fingerprint
-                or stored.engine_version != calculated.engine_version
-                or stored.pantry_policy_version != calculated.pantry_policy_version
+            # Input equality, not insertion order, determines CURRENT. If
+            # Pantry returns to an earlier exact snapshot, its original
+            # immutable list can be current again without duplicating rows.
+            matching = scope.shopping.get_by_source(
+                household_id, plan_id, calculated.source_fingerprint
             )
-            return ShoppingCurrent(latest, stale, "SOURCE_CHANGED" if stale else None)
+            if matching is not None:
+                stored = matching.shopping_list
+                matches = (
+                    stored.source_pantry_snapshot_hash == calculated.pantry_snapshot_hash
+                    and stored.as_of_date == calculated.as_of_date
+                    and stored.content_fingerprint == calculated.content_fingerprint
+                    and stored.engine_version == calculated.engine_version
+                    and stored.pantry_policy_version == calculated.pantry_policy_version
+                )
+                if matches:
+                    return ShoppingCurrent(matching, False, None)
+            return ShoppingCurrent(latest, True, "SOURCE_CHANGED")
 
     def regenerate(self, household_id: UUID, plan_id: UUID) -> ShoppingListDetail:
         return self.generate(household_id, plan_id)
