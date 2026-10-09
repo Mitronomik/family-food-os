@@ -29,6 +29,7 @@ from app.persistence.sqlalchemy_core.pantry_repositories import (
 from app.persistence.sqlalchemy_core.shopping_repositories import (
     SqlAlchemyShoppingListRepository,
 )
+from app.persistence.sqlalchemy_core.sqlite_errors import is_sqlite_concurrency_conflict
 from app.persistence.sqlalchemy_core.uow import SqlAlchemyReadOnlyScope
 from app.services.shopping_contracts import (
     ShoppingPersistenceConflictError,
@@ -80,8 +81,12 @@ class SqlAlchemyShoppingUnitOfWork(_ShoppingRepositories):
             self._bind(connection)
         except OperationalError as exc:
             self._cleanup()
-            raise ShoppingPersistenceConflictError(
-                "Shopping source transaction is busy; retry"
+            if is_sqlite_concurrency_conflict(exc):
+                raise ShoppingPersistenceConflictError(
+                    "Shopping source transaction is busy; retry"
+                ) from exc
+            raise ShoppingPersistenceError(
+                "Shopping transaction initialization failed"
             ) from exc
         except BaseException:
             self._cleanup()
