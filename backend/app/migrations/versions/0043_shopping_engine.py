@@ -15,7 +15,12 @@ _Q = """typeof({c}) = 'text'
 
 
 def upgrade(connection):
-    # The runner owns the marker. Each execute is contained in its transaction.
+    # sqlite3 legacy transaction control does NOT auto-BEGIN for DDL.
+    # Acquire a physical transaction before the first CREATE TABLE so a failed
+    # upgrade cannot leave an unmarked partial Shopping schema.
+    if not connection.in_transaction:
+        connection.execute("BEGIN")
+    # The runner owns the marker in this same transaction.
     connection.execute("""
         CREATE TABLE shopping_lists (
           id CHAR(32) PRIMARY KEY NOT NULL CHECK(length(id)=32),
