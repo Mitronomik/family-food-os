@@ -516,9 +516,11 @@ def audit(config: DatabaseConfig) -> dict[str, Any]:
     # additive migrations may extend the live schema without invalidating
     # accepted corpus readiness evidence.
     migration_ok = (
-        migration_ids[-1:] == ["0042_recipe_prepared_output_nutrition"]
-        or migration_ids[-2:]
-        == ["0042_recipe_prepared_output_nutrition", "0043_shopping_engine"]
+        migration_ids[-1] == "0042_recipe_prepared_output_nutrition"
+        or migration_ids[-2:] == [
+            "0042_recipe_prepared_output_nutrition",
+            "0043_shopping_engine",
+        ]
     )
     if not migration_ok:
         blockers.append("MIGRATION_HEAD_DRIFT")
