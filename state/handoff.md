@@ -1,3 +1,13 @@
+# PR9-A — current implementation handoff — 2026-10-09
+
+Accepted `main@b787dace4174ac9bf3bd6026efdfb64db5f43441` (PR #184 merged, PR9-ARCH accepted). Current bounded task Issue #185; branch `feat/pr9-a-shopping-calculation`.
+
+Read `AGENTS.md` → `state/current-focus.md` → `docs/family-food/pr9-shopping-implementation-contract.md`, relevant roadmap/addenda and scoped AGENTS → `backend/app/domain/shopping_calculation.py` and `backend/app/tests/test_shopping_calculation.py` → existing MealPlan/Recipe/Pantry domain/tests. Pure PR9-A deliberately precedes persistence/SQLite UoW and API. No migration changes (accepted head 0042). Shopping input snapshot must be loaded atomically in a *future* PR9 service/UoW, not simulated as already integrated here.
+
+Keep deterministic Decimal-only calculations, no Pantry mutation, current seven MealSourceKind, unknown prices separate. Review CI/test results before merge. Stop after PR; do not merge autonomously or begin PR9 persistence/API/Prep/Retail/AI. PR9 overall NOT COMPLETE.
+
+---
+
 # PR9-ARCH — contract-gate handoff — 2026-10-08
 
 Accepted main `73cb7ee6b20d1af958639f75f6fa5db286381cb3` (merged PR #181); Gate1 Planning Core COMPLETE. Current bounded operation: Issue #183, docs-only PR9 Shopping Implementation Contract Gate; branch `docs/pr9-shopping-contract-gate`.
