@@ -72,6 +72,8 @@ class ShoppingUnresolved:
 class ShoppingWarning:
     code: str
     pantry_item_id: UUID
+    meal_event_id: UUID | None = None
+    required_date: date | None = None
 
 
 @dataclass(frozen=True)
@@ -352,14 +354,22 @@ def calculate_shopping(
             missing = amount
             use_date = max(as_of, meal_date)
             for lot in relevant_lots:
+                if missing <= 0:
+                    break
                 if (
-                    missing <= 0
-                    or not remaining[lot.id]
+                    not remaining[lot.id]
                     or lot.estimated
                     or lot.expires_on is None
-                    or lot.expires_on < use_date
                     or lot.unit != unit
                 ):
+                    continue
+                if lot.expires_on < use_date:
+                    if lot.expires_on >= as_of:
+                        warning = ShoppingWarning(
+                            "EXPIRES_BEFORE_REQUIRED_DATE", lot.id, event_id, use_date
+                        )
+                        if warning not in warnings:
+                            warnings.append(warning)
                     continue
                 taken = min(missing, remaining[lot.id])
                 remaining[lot.id] -= taken
@@ -388,7 +398,14 @@ def calculate_shopping(
         )
 
     unresolved.sort(key=lambda x: (str(x.meal_event_id), str(x.reason)))
-    warnings.sort(key=lambda x: (x.code, str(x.pantry_item_id)))
+    warnings.sort(
+        key=lambda x: (
+            x.code,
+            str(x.pantry_item_id),
+            str(x.meal_event_id) if x.meal_event_id else "",
+            x.required_date.isoformat() if x.required_date else "",
+        )
+    )
     allocation_result = tuple(
         sorted(allocations, key=lambda a: (str(a.meal_event_id), str(a.pantry_item_id)))
     )
@@ -411,7 +428,15 @@ def calculate_shopping(
                 [str(x.meal_event_id), str(x.source_kind), str(x.reason)]
                 for x in unresolved
             ],
-            "warnings": [[x.code, str(x.pantry_item_id)] for x in warnings],
+            "warnings": [
+                [
+                    x.code,
+                    str(x.pantry_item_id),
+                    str(x.meal_event_id) if x.meal_event_id else None,
+                    x.required_date.isoformat() if x.required_date else None,
+                ]
+                for x in warnings
+            ],
             "allocations": [
                 [str(x.meal_event_id), str(x.pantry_item_id), str(x.quantity)]
                 for x in allocation_result
