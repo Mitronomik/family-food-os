@@ -313,9 +313,11 @@ def test_reject_naive_clock_and_external_float_inputs():
     meal, recipes, foods = _input()
     with pytest.raises(ShoppingCalculationError):
         _calculate(meal, recipes, foods, clock=datetime(2026, 10, 9))
-    bad = replace(next(iter(recipes.values())).ingredients[0], quantity=Decimal("0"))
-    # Invalid recipe inputs are rejected by the existing immutable recipe domain.
-    with pytest.raises(Exception):
-        replace(next(iter(recipes.values())), ingredients=(
-            bad, next(iter(recipes.values())).ingredients[1]
-        ))
+    # Input domain rejects invalid arithmetic before Shopping ever receives it.
+    from app.domain.errors import DomainValidationError
+
+    original = next(iter(recipes.values())).ingredients[0]
+    with pytest.raises(DomainValidationError):
+        replace(original, quantity=Decimal("0"))
+    with pytest.raises(DomainValidationError):
+        replace(original, quantity=1.0)
