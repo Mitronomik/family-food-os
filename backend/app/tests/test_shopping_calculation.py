@@ -263,6 +263,42 @@ def test_future_week_lot_cannot_reduce_future_purchase():
         Decimal("300.000"),
     )
     assert not result.allocations
+    assert result.status is ShoppingStatus.COMPLETE
+    assert [(w.code, w.pantry_item_id, w.meal_event_id, w.required_date)
+            for w in result.warnings] == [
+        (
+            "EXPIRES_BEFORE_REQUIRED_DATE",
+            lot.id,
+            meal.events[0].id,
+            date(2026, 10, 11),
+        )
+    ]
+
+
+def test_lot_can_cover_early_meal_but_warn_for_unusable_remainder_on_late_meal():
+    meal, recipes, foods = _input(
+        kinds=(MealSourceKind.COOK_RECIPE,) * 2,
+        dates=(date(2026, 10, 9), date(2026, 10, 11)),
+    )
+    rice_id = next(iter(foods))
+    lot = _pantry(meal, rice_id, "450", expires_on=date(2026, 10, 10))
+    result = _calculate(meal, recipes, foods, pantry=(lot,))
+    assert _amounts(result, rice_id) == (
+        Decimal("600.000"),
+        Decimal("300.000"),
+        Decimal("300.000"),
+    )
+    assert len(result.allocations) == 1
+    assert result.allocations[0].meal_event_id == meal.events[0].id
+    assert result.allocations[0].quantity == Decimal(300)
+    assert len(result.warnings) == 1
+    warning = result.warnings[0]
+    assert warning.code == "EXPIRES_BEFORE_REQUIRED_DATE"
+    assert warning.pantry_item_id == lot.id
+    assert warning.meal_event_id == meal.events[1].id
+    assert warning.required_date == date(2026, 10, 11)
+    assert result.status is ShoppingStatus.COMPLETE
+    assert _calculate(meal, recipes, foods, pantry=(lot,)) == result
 
 
 def test_fefo_lots_not_reused_and_all_storage_locations_allowed():
@@ -342,6 +378,22 @@ def test_excess_pantry_never_produces_negative_purchase():
         Decimal("300.000"),
         Decimal("0.000"),
     )
+
+
+def test_aggregate_overflow_from_two_valid_events_fails_closed():
+    meal, recipes, foods = _input(
+        kinds=(MealSourceKind.COOK_RECIPE,) * 2,
+        dates=(date(2026, 10, 9), date(2026, 10, 10)),
+        member_portions=("6000000000",),
+    )
+    rice_id = next(iter(foods))
+    lot = _pantry(meal, rice_id, "50")
+    before = lot
+    # Each event requires 600_000_000_000 g (under the limit);
+    # the aggregate 1_200_000_000_000 g must not be persisted or returned.
+    with pytest.raises(ShoppingCalculationError, match="превышает допустимый предел"):
+        _calculate(meal, recipes, foods, pantry=(lot,))
+    assert lot == before
 
 
 def test_pantry_metadata_and_date_change_fingerprints():
