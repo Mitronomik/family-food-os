@@ -1,3 +1,15 @@
+# PR9-A — Pure Shopping Calculation Core (current)
+
+Updated: 2026-10-09.
+Accepted main: `b787dace4174ac9bf3bd6026efdfb64db5f43441` (PR #184 — PR9-ARCH — MERGED).
+Gate1 Planning Core is COMPLETE. Canonical Shopping implementation contract: [PR9-ARCH](../docs/family-food/pr9-shopping-implementation-contract.md).
+
+Current authorized operation: Issue #185 / PR9-A / branch `feat/pr9-a-shopping-calculation`. Build and independently review only the pure deterministic Shopping calculator, exact Serving scaling, date-aware Pantry allocation, incomplete obligations, separated price status and fingerprints. PR9-A adds no DB tables, migration, Shopping UoW, API or UI. PR9 persistence/API, Prep/PDF/PWA/Retail/AI and shared deployment remain NOT STARTED. Do not treat this work as Gate2 or complete PR9; stop for independent review before merge.
+
+Earlier PR9-ARCH and Gate1-CLOSE sections below are historical pre-merge state, superseded by the accepted merge above.
+
+---
+
 # PR9-ARCH — Shopping implementation contract gate (current)
 
 Updated: 2026-10-08. Accepted main: `73cb7ee6b20d1af958639f75f6fa5db286381cb3` (PR #181 merged).
