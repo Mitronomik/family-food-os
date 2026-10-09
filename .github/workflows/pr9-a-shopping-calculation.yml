@@ -1,0 +1,42 @@
+name: PR9-A Shopping calculation verification
+
+on:
+  pull_request:
+    paths:
+      - 'backend/app/domain/shopping_calculation.py'
+      - 'backend/app/tests/test_shopping_calculation.py'
+      - '.github/workflows/pr9-a-shopping-calculation.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  pure-shopping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      AI_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install backend and Ruff
+        run: |
+          set -euo pipefail
+          python -m pip install -e './backend[test]'
+          python -m pip install 'ruff==0.16.8'
+      - name: Pure Shopping contract regression
+        run: |
+          set -euo pipefail
+          python -m pytest -q backend/app/tests/test_shopping_calculation.py --tb=short
+      - name: Ruff check and format
+        run: |
+          set -euo pipefail
+          python -m ruff check backend/app/domain/shopping_calculation.py backend/app/tests/test_shopping_calculation.py
+          python -m ruff format --check backend/app/domain/shopping_calculation.py backend/app/tests/test_shopping_calculation.py
+      - name: Scope and whitespace
+        run: |
+          set -euo pipefail
+          git diff --check HEAD^ HEAD
+          test "$AI_ENABLED" = false
