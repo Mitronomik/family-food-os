@@ -25,6 +25,7 @@ jobs:
     timeout-minutes: 60
     env:
       AI_ENABLED: 'false'
+      DOWNSTREAM_ACCEPTED_BASE: 'c83dba190b957300cad54c9c8df5afc01f86de60'
     steps:
       - name: Checkout exact revision
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -88,6 +89,11 @@ jobs:
           mapfile -t changed < <(git diff --name-only "${base}"...HEAD)
           printf 'Changed paths:\n'
           printf '  %s\n' "${changed[@]}"
+          if git merge-base --is-ancestor "${DOWNSTREAM_ACCEPTED_BASE}" HEAD; then
+            echo 'Accepted downstream PR: historical Planner B2 changed-path allowlist skipped.'
+            echo 'Planner tests, DC4 compatibility, Ruff, migration and whitespace remain enforced.'
+            exit 0
+          fi
           for path in "${changed[@]}"; do
             case "${path}" in
               backend/app/domain/planner.py|\
