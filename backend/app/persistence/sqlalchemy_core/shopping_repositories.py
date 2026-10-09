@@ -12,7 +12,6 @@ from app.domain.shopping_lists import (
     ShoppingListItem,
     ShoppingUnresolvedObligation,
 )
-from app.services.shopping_contracts import ShoppingPersistenceError
 from app.persistence.sqlalchemy_core.shopping_tables import (
     shopping_list_items_table as items,
 )
@@ -22,6 +21,7 @@ from app.persistence.sqlalchemy_core.shopping_tables import (
 from app.persistence.sqlalchemy_core.shopping_tables import (
     shopping_unresolved_obligations_table as unresolved,
 )
+from app.services.shopping_contracts import ShoppingPersistenceError
 
 
 class SqlAlchemyShoppingListRepository:
