@@ -295,7 +295,8 @@ class ShoppingService:
             if matching is not None:
                 stored = matching.shopping_list
                 matches = (
-                    stored.source_pantry_snapshot_hash == calculated.pantry_snapshot_hash
+                    stored.source_pantry_snapshot_hash
+                    == calculated.pantry_snapshot_hash
                     and stored.as_of_date == calculated.as_of_date
                     and stored.content_fingerprint == calculated.content_fingerprint
                     and stored.engine_version == calculated.engine_version

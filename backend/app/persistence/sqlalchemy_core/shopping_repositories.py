@@ -103,12 +103,16 @@ class SqlAlchemyShoppingListRepository:
 
     def _history_ids(self, household_id: UUID, plan_id: UUID) -> list[UUID]:
         """Follow immutable supersedes links, never a random UUID/timestamp tie."""
-        rows = self._connection.execute(
-            select(lists.c.id, lists.c.supersedes_list_id).where(
-                lists.c.household_id == household_id,
-                lists.c.meal_plan_id == plan_id,
+        rows = (
+            self._connection.execute(
+                select(lists.c.id, lists.c.supersedes_list_id).where(
+                    lists.c.household_id == household_id,
+                    lists.c.meal_plan_id == plan_id,
+                )
             )
-        ).mappings().all()
+            .mappings()
+            .all()
+        )
         if not rows:
             return []
         children: dict[UUID, UUID] = {}
@@ -122,7 +126,9 @@ class SqlAlchemyShoppingListRepository:
             else:
                 children[parent] = row["id"]
         if len(roots) != 1:
-            raise ShoppingPersistenceError("Shopping successor history has no unique root")
+            raise ShoppingPersistenceError(
+                "Shopping successor history has no unique root"
+            )
         result: list[UUID] = []
         seen: set[UUID] = set()
         current = roots[0]
