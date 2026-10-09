@@ -97,12 +97,13 @@ def test_0037_appends_after_0036_without_consuming_0033():
     expected = expected_migration_ids()
     position = expected.index(PREVIOUS_HEAD)
     assert expected[position : position + 2] == [PREVIOUS_HEAD, MIGRATION_ID]
-    assert expected[-5:] == [
+    assert expected[-6:] == [
         "0038_transformation_applicability",
         "0039_recipe_ingredient_composition_binding",
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
         "0042_recipe_prepared_output_nutrition",
+        "0043_shopping_engine",
     ]
     assert not any(value.startswith("0033_") for value in expected)
 
@@ -122,6 +123,7 @@ def test_populated_0036_upgrade_preserves_legacy_plan_without_backfill(tmp_path)
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
         "0042_recipe_prepared_output_nutrition",
+        "0043_shopping_engine",
     ]
     with sqlite3.connect(database) as db:
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
@@ -141,6 +143,7 @@ def test_populated_0036_upgrade_preserves_legacy_plan_without_backfill(tmp_path)
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
         "0042_recipe_prepared_output_nutrition",
+        "0043_shopping_engine",
     ]
 
 
