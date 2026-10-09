@@ -1,3 +1,12 @@
+# PR9-B — IMPLEMENTING — 2026-10-09
+
+- PR #186 Shopping pure calculator **MERGED** into `main@c83dba190b957300cad54c9c8df5afc01f86de60`; PR9-A completed.
+- Issue #187: PR9-B Shopping persistence / atomic application service with dated Pantry provenance; PR9-ARCH accepted via #184.
+- Branch `feat/pr9-b-shopping-persistence` adds conditional migration 0043 (verified free on accepted main), three immutable Shopping tables, household repositories, explicit SQLite BEGIN IMMEDIATE write scope, and application service; integration tests/CI pending independent review.
+- No API, UI, Retail, Prep/PDF, AI, Pantry writes. PR9-C not started; PR9 overall NOT COMPLETE.
+
+---
+
 # PR9-A — IN DEVELOPMENT — 2026-10-09
 
 - PR #184 Shopping Implementation Contract Gate **MERGED** as `b787dace4174ac9bf3bd6026efdfb64db5f43441`.
