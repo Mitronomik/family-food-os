@@ -1,4 +1,5 @@
 """PR9-B SQLite Shopping migration, atomic UoW and application tests."""
+
 import sqlite3
 from dataclasses import replace
 from datetime import timedelta
@@ -84,10 +85,18 @@ def test_migration_0043_fresh_upgrade_and_lineage(tmp_path):
     assert apply_migrations(config) == []
     assert expected_migration_ids()[-1] == "0043_shopping_engine"
     with sqlite3.connect(config.path) as conn:
-        for table in ("shopping_lists","shopping_list_items","shopping_unresolved_obligations"):
-            assert conn.execute(
-                "SELECT 1 FROM sqlite_master WHERE name=? AND type='table'",(table,)
-            ).fetchone() is not None
+        for table in (
+            "shopping_lists",
+            "shopping_list_items",
+            "shopping_unresolved_obligations",
+        ):
+            assert (
+                conn.execute(
+                    "SELECT 1 FROM sqlite_master WHERE name=? AND type='table'",
+                    (table,),
+                ).fetchone()
+                is not None
+            )
         assert conn.execute("PRAGMA foreign_key_check").fetchall() == []
         assert conn.execute("SELECT COUNT(*) FROM shopping_lists").fetchone()[0] == 0
 
@@ -104,9 +113,12 @@ def test_generation_immutable_roundtrip_idempotent_and_price_unknown(store):
     assert service.generate(household.id, plan.plan.id) == first
     assert service.get_current(household.id, plan.plan.id).stale is False
     assert service.list_history(household.id, plan.plan.id) == [first]
-    assert _service(engine, NOW + timedelta(days=1)).get_current(
-        household.id, plan.plan.id
-    ).stale is True
+    assert (
+        _service(engine, NOW + timedelta(days=1))
+        .get_current(household.id, plan.plan.id)
+        .stale
+        is True
+    )
     with sqlite3.connect(config.path) as conn:
         assert conn.execute("SELECT COUNT(*) FROM shopping_lists").fetchone()[0] == 1
         assert conn.execute("SELECT COUNT(*) FROM pantry_movements").fetchone()[0] == 0
@@ -157,9 +169,12 @@ def test_physical_begin_immediate_blocks_competing_writer_and_rolls_back(store):
             "UPDATE households SET name='after-release' WHERE id=?",
             (household.id.hex,),
         )
-        assert connection.execute(
-            "SELECT name FROM households WHERE id=?", (household.id.hex,)
-        ).fetchone()[0] == "after-release"
+        assert (
+            connection.execute(
+                "SELECT name FROM households WHERE id=?", (household.id.hex,)
+            ).fetchone()[0]
+            == "after-release"
+        )
 
 
 def test_failure_injected_after_header_is_fully_rolled_back(store, monkeypatch):
@@ -167,18 +182,36 @@ def test_failure_injected_after_header_is_fully_rolled_back(store, monkeypatch):
     household, plan = _prepare(engine)
 
     def partial_insert_then_fail(repo, detail):
-        repo._connection.execute(insert(shopping_lists_table).values(
-            **{k: getattr(detail.shopping_list,k) for k in
-               detail.shopping_list.__dataclass_fields__}
-        ))
+        repo._connection.execute(
+            insert(shopping_lists_table).values(
+                **{
+                    k: getattr(detail.shopping_list, k)
+                    for k in detail.shopping_list.__dataclass_fields__
+                }
+            )
+        )
         raise RuntimeError("injected failure after Shopping header")
 
-    monkeypatch.setattr(SqlAlchemyShoppingListRepository, "add_detail",
-                        partial_insert_then_fail)
+    monkeypatch.setattr(
+        SqlAlchemyShoppingListRepository, "add_detail", partial_insert_then_fail
+    )
     with pytest.raises(RuntimeError, match="injected failure"):
         _service(engine).generate(household.id, plan.plan.id)
     with sqlite3.connect(config.path) as connection:
-        assert connection.execute("SELECT count(*) FROM shopping_lists").fetchone()[0] == 0
-        assert connection.execute("SELECT count(*) FROM shopping_list_items").fetchone()[0] == 0
-        assert connection.execute("SELECT count(*) FROM shopping_unresolved_obligations").fetchone()[0] == 0
-        assert connection.execute("SELECT count(*) FROM pantry_movements").fetchone()[0] == 0
+        assert (
+            connection.execute("SELECT count(*) FROM shopping_lists").fetchone()[0] == 0
+        )
+        assert (
+            connection.execute("SELECT count(*) FROM shopping_list_items").fetchone()[0]
+            == 0
+        )
+        assert (
+            connection.execute(
+                "SELECT count(*) FROM shopping_unresolved_obligations"
+            ).fetchone()[0]
+            == 0
+        )
+        assert (
+            connection.execute("SELECT count(*) FROM pantry_movements").fetchone()[0]
+            == 0
+        )

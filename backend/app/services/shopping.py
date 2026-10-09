@@ -3,6 +3,7 @@
 The persistence UoW owns BEGIN IMMEDIATE and every authoritative read.
 This module does not import SQLAlchemy, DBAPI connections or table definitions.
 """
+
 import json
 from collections.abc import Callable, Mapping
 from dataclasses import asdict, is_dataclass
@@ -39,7 +40,10 @@ def _canonical(value: object) -> object:
     if is_dataclass(value) and not isinstance(value, type):
         return _canonical(asdict(value))
     if isinstance(value, Mapping):
-        return {str(k): _canonical(v) for k, v in sorted(value.items(), key=lambda x: str(x[0]))}
+        return {
+            str(k): _canonical(v)
+            for k, v in sorted(value.items(), key=lambda x: str(x[0]))
+        }
     if isinstance(value, (list, tuple)):
         return [_canonical(v) for v in value]
     if isinstance(value, Decimal):
@@ -54,8 +58,13 @@ def _canonical(value: object) -> object:
 
 
 def _json(value: object) -> str:
-    return json.dumps(_canonical(value), sort_keys=True, ensure_ascii=False,
-                      separators=(",", ":"), allow_nan=False)
+    return json.dumps(
+        _canonical(value),
+        sort_keys=True,
+        ensure_ascii=False,
+        separators=(",", ":"),
+        allow_nan=False,
+    )
 
 
 def _digest(value: object) -> str:
@@ -76,8 +85,13 @@ class ShoppingService:
         self._clock = clock or (lambda: datetime.now(timezone.utc))
         self._id = id_factory
 
-    def _calculate(self, scope: ShoppingReadScope, household_id: UUID,
-                   plan_id: UUID, captured_at: datetime) -> tuple[ShoppingCalculation, dict]:
+    def _calculate(
+        self,
+        scope: ShoppingReadScope,
+        household_id: UUID,
+        plan_id: UUID,
+        captured_at: datetime,
+    ) -> tuple[ShoppingCalculation, dict]:
         household = scope.households.get_household(household_id)
         plan = scope.plans.get_detail(household_id, plan_id)
         if household is None or plan is None:
@@ -112,8 +126,12 @@ class ShoppingService:
             foods[food_id] = ingredient
         pantry = tuple(scope.pantry.list_items(household_id, include_empty=True))
         computed = calculate_shopping(
-            plan=plan, recipes=recipes, foods=foods, pantry_items=pantry,
-            household_timezone=household.timezone, captured_at=captured_at,
+            plan=plan,
+            recipes=recipes,
+            foods=foods,
+            pantry_items=pantry,
+            household_timezone=household.timezone,
+            captured_at=captured_at,
         )
         provenance = {
             "schema": "SHOPPING_SOURCE_SNAPSHOT_V1",
@@ -133,8 +151,12 @@ class ShoppingService:
             "plan_events": plan.events,
             "servings": plan.servings,
             "recipe_inputs": [
-                {"recipe_version_id": k, "version": v.version,
-                 "ingredients": v.ingredients} for k, v in sorted(recipes.items(), key=lambda x: str(x[0]))
+                {
+                    "recipe_version_id": k,
+                    "version": v.version,
+                    "ingredients": v.ingredients,
+                }
+                for k, v in sorted(recipes.items(), key=lambda x: str(x[0]))
             ],
             "foods": [foods[k] for k in sorted(foods, key=str)],
             "pantry_items": pantry,
@@ -155,7 +177,10 @@ class ShoppingService:
                 household_id, plan_id, computed.source_fingerprint
             )
             if existing is not None:
-                if existing.shopping_list.content_fingerprint != computed.content_fingerprint:
+                if (
+                    existing.shopping_list.content_fingerprint
+                    != computed.content_fingerprint
+                ):
                     raise ShoppingPersistenceConflictError(
                         "Повторный Shopping snapshot отличается при тех же входных данных."
                     )
@@ -182,22 +207,28 @@ class ShoppingService:
             )
             items = tuple(
                 ShoppingListItem(
-                    id=self._id(), shopping_list_id=detail_id,
+                    id=self._id(),
+                    shopping_list_id=detail_id,
                     household_id=household_id,
                     food_ingredient_id=row.food_ingredient_id,
-                    form_basis=row.form_basis, unit=row.unit,
+                    form_basis=row.form_basis,
+                    unit=row.unit,
                     required_quantity=row.required_quantity,
                     pantry_available_quantity=row.pantry_available_quantity,
-                    purchase_quantity=row.purchase_quantity, ordinal=i,
+                    purchase_quantity=row.purchase_quantity,
+                    ordinal=i,
                 )
                 for i, row in enumerate(computed.items, 1)
             )
             obligations = tuple(
                 ShoppingUnresolvedObligation(
-                    id=self._id(), shopping_list_id=detail_id,
+                    id=self._id(),
+                    shopping_list_id=detail_id,
                     household_id=household_id,
                     meal_event_id=row.meal_event_id,
-                    source_kind=row.source_kind, reason=row.reason, ordinal=i,
+                    source_kind=row.source_kind,
+                    reason=row.reason,
+                    ordinal=i,
                 )
                 for i, row in enumerate(computed.unresolved, 1)
             )
@@ -205,7 +236,10 @@ class ShoppingService:
             scope.shopping.add_detail(detail)
             # Validate against same locked source revision before one commit.
             again = scope.plans.get_detail(household_id, plan_id)
-            if again is None or again.plan.revision_number != header.source_plan_revision_number:
+            if (
+                again is None
+                or again.plan.revision_number != header.source_plan_revision_number
+            ):
                 raise ShoppingPersistenceConflictError(
                     "Ревизия плана изменилась во время сохранения."
                 )
@@ -219,7 +253,9 @@ class ShoppingService:
                 raise ShoppingNotFoundError("Список покупок не найден.")
             return detail
 
-    def list_history(self, household_id: UUID, plan_id: UUID) -> list[ShoppingListDetail]:
+    def list_history(
+        self, household_id: UUID, plan_id: UUID
+    ) -> list[ShoppingListDetail]:
         with self._read() as scope:
             if scope.plans.get_detail(household_id, plan_id) is None:
                 raise ShoppingNotFoundError("План питания не найден.")

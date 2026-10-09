@@ -1,4 +1,5 @@
 """Immutable Shopping snapshots: scoped Core readers and atomic inserts."""
+
 from dataclasses import asdict
 from uuid import UUID
 
@@ -51,22 +52,36 @@ class SqlAlchemyShoppingListRepository:
                 select(lists).where(
                     lists.c.id == list_id, lists.c.household_id == household_id
                 )
-            ).mappings().one_or_none()
+            )
+            .mappings()
+            .one_or_none()
         )
         if header is None:
             return None
-        stored_items = self._connection.execute(
-            select(items).where(
-                items.c.shopping_list_id == list_id,
-                items.c.household_id == household_id,
-            ).order_by(items.c.ordinal)
-        ).mappings().all()
-        stored_unresolved = self._connection.execute(
-            select(unresolved).where(
-                unresolved.c.shopping_list_id == list_id,
-                unresolved.c.household_id == household_id,
-            ).order_by(unresolved.c.ordinal)
-        ).mappings().all()
+        stored_items = (
+            self._connection.execute(
+                select(items)
+                .where(
+                    items.c.shopping_list_id == list_id,
+                    items.c.household_id == household_id,
+                )
+                .order_by(items.c.ordinal)
+            )
+            .mappings()
+            .all()
+        )
+        stored_unresolved = (
+            self._connection.execute(
+                select(unresolved)
+                .where(
+                    unresolved.c.shopping_list_id == list_id,
+                    unresolved.c.household_id == household_id,
+                )
+                .order_by(unresolved.c.ordinal)
+            )
+            .mappings()
+            .all()
+        )
         return ShoppingListDetail(
             ShoppingList(**header),
             tuple(ShoppingListItem(**row) for row in stored_items),
@@ -89,10 +104,13 @@ class SqlAlchemyShoppingListRepository:
         self, household_id: UUID, plan_id: UUID
     ) -> ShoppingListDetail | None:
         uid = self._connection.scalar(
-            select(lists.c.id).where(
+            select(lists.c.id)
+            .where(
                 lists.c.household_id == household_id,
                 lists.c.meal_plan_id == plan_id,
-            ).order_by(lists.c.created_at.desc(), lists.c.id.desc()).limit(1)
+            )
+            .order_by(lists.c.created_at.desc(), lists.c.id.desc())
+            .limit(1)
         )
         return None if uid is None else self.get_detail(household_id, uid)
 
@@ -100,12 +118,15 @@ class SqlAlchemyShoppingListRepository:
         self, household_id: UUID, plan_id: UUID
     ) -> list[ShoppingListDetail]:
         ids = self._connection.scalars(
-            select(lists.c.id).where(
+            select(lists.c.id)
+            .where(
                 lists.c.household_id == household_id,
                 lists.c.meal_plan_id == plan_id,
-            ).order_by(lists.c.created_at, lists.c.id)
+            )
+            .order_by(lists.c.created_at, lists.c.id)
         ).all()
         return [
-            detail for uid in ids
+            detail
+            for uid in ids
             if (detail := self.get_detail(household_id, uid)) is not None
         ]

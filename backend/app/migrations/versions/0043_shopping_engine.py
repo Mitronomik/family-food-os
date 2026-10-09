@@ -2,6 +2,7 @@
 
 SQLite custom runner is the sole schema authority. No create_all or Alembic.
 """
+
 MIGRATION_ID = "0043_shopping_engine"
 
 _Q = """typeof({c}) = 'text'
@@ -37,7 +38,8 @@ def upgrade(connection):
           UNIQUE(household_id, meal_plan_id, source_fingerprint)
         )
     """)
-    connection.execute("""
+    connection.execute(
+        """
         CREATE TABLE shopping_list_items (
           id CHAR(32) PRIMARY KEY NOT NULL CHECK(length(id)=32),
           shopping_list_id CHAR(32) NOT NULL,
@@ -53,13 +55,20 @@ def upgrade(connection):
             REFERENCES shopping_lists(id, household_id) ON DELETE RESTRICT,
           UNIQUE(shopping_list_id, food_ingredient_id, form_basis, unit),
           UNIQUE(shopping_list_id, ordinal),
-          CHECK( (""" + _Q.format(c="required_quantity") + """) ),
-          CHECK( (""" + _Q.format(c="pantry_available_quantity") + """) ),
-          CHECK( (""" + _Q.format(c="purchase_quantity") + """) ),
+          CHECK( ("""
+        + _Q.format(c="required_quantity")
+        + """) ),
+          CHECK( ("""
+        + _Q.format(c="pantry_available_quantity")
+        + """) ),
+          CHECK( ("""
+        + _Q.format(c="purchase_quantity")
+        + """) ),
           CHECK(CAST(pantry_available_quantity AS NUMERIC) <= CAST(required_quantity AS NUMERIC)),
           CHECK(unit <> 'pcs' OR substr(purchase_quantity,-3)='000')
         )
-    """)
+    """
+    )
     connection.execute("""
         CREATE TABLE shopping_unresolved_obligations (
           id CHAR(32) PRIMARY KEY NOT NULL CHECK(length(id)=32),
@@ -88,7 +97,11 @@ def upgrade(connection):
       ON shopping_unresolved_obligations(shopping_list_id,ordinal)
     """)
     # A historical shopping snapshot is an immutable record, not an editable cart.
-    for table in ("shopping_lists", "shopping_list_items", "shopping_unresolved_obligations"):
+    for table in (
+        "shopping_lists",
+        "shopping_list_items",
+        "shopping_unresolved_obligations",
+    ):
         for action in ("UPDATE", "DELETE"):
             connection.execute(f"""
                 CREATE TRIGGER trg_{table}_{action.lower()}_immutable

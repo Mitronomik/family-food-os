@@ -2,6 +2,7 @@
 
 A ShoppingList is an auditable derived artifact, never Pantry consumption.
 """
+
 from dataclasses import dataclass
 from datetime import date, datetime
 from decimal import Decimal
@@ -42,12 +43,18 @@ class ShoppingList:
                 raise ValueError(f"{name} must be UUIDv4")
         if self.source_plan_revision_number <= 0:
             raise ValueError("source_plan_revision_number must be positive")
-        for field in ("source_pantry_snapshot_hash", "config_fingerprint",
-                      "source_fingerprint", "content_fingerprint"):
+        for field in (
+            "source_pantry_snapshot_hash",
+            "config_fingerprint",
+            "source_fingerprint",
+            "content_fingerprint",
+        ):
             value = getattr(self, field)
             if len(value) != 64 or any(ch not in "0123456789abcdef" for ch in value):
                 raise ValueError(f"{field} must be lowercase SHA-256")
-        if not isinstance(self.as_of_date, date) or isinstance(self.as_of_date, datetime):
+        if not isinstance(self.as_of_date, date) or isinstance(
+            self.as_of_date, datetime
+        ):
             raise ValueError("as_of_date must be date")
         if not self.engine_version or not self.pantry_policy_version:
             raise ValueError("Shopping engine/policy identity is required")

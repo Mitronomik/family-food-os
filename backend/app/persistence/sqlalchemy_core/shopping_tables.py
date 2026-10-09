@@ -1,4 +1,5 @@
 """SQLAlchemy Core mappings; 0043_shopping_engine is schema authority."""
+
 from sqlalchemy import Column, Date, Integer, MetaData, String, Table
 
 from app.persistence.sqlalchemy_core.types import (

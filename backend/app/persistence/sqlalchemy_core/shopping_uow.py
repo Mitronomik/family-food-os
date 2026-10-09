@@ -5,6 +5,7 @@ A SQLAlchemy Connection.begin() is a logical scope and does not acquire a
 SQLite RESERVED writer lock. This adapter temporarily uses sqlite3 explicit
 SQL transaction mode and restores the pooled connection on exit.
 """
+
 from types import TracebackType
 
 from sqlalchemy.engine import Connection, Engine
