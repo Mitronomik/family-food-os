@@ -128,7 +128,9 @@ def _round(value: Decimal, mode: str) -> Decimal:
             ctx.prec = 50
             result = value.quantize(QUANTITY_STEP, rounding=mode)
     except InvalidOperation as exc:
-        raise ShoppingCalculationError("Невозможно точно округлить количество.") from exc
+        raise ShoppingCalculationError(
+            "Невозможно точно округлить количество."
+        ) from exc
     if result > MAX_QUANTITY:
         _reject("Количество превышает допустимый предел.")
     return result
@@ -182,7 +184,9 @@ def calculate_shopping(
     if not members:
         _reject("У плана отсутствуют подтверждённые участники.")
     lots = tuple(pantry_items)
-    if any(not isinstance(x, PantryItem) or x.household_id != household_id for x in lots):
+    if any(
+        not isinstance(x, PantryItem) or x.household_id != household_id for x in lots
+    ):
         _reject("В Pantry snapshot присутствуют данные другой семьи.")
     if len({x.id for x in lots}) != len(lots):
         _reject("Pantry snapshot содержит дублирующиеся идентификаторы партий.")
@@ -192,9 +196,13 @@ def calculate_shopping(
     for serving in plan.servings:
         if serving.member_id not in members:
             _reject("Порция принадлежит участнику другой семьи.")
-        serving_map[serving.event_id].append(_decimal(serving.portion_servings, positive=True))
+        serving_map[serving.event_id].append(
+            _decimal(serving.portion_servings, positive=True)
+        )
 
-    demand: dict[tuple[UUID, UnitCode], list[tuple[date, int, UUID, Decimal]]] = defaultdict(list)
+    demand: dict[tuple[UUID, UnitCode], list[tuple[date, int, UUID, Decimal]]] = (
+        defaultdict(list)
+    )
     food_pins: dict[str, list[str]] = {}
     recipe_pins: list[object] = []
     unresolved: list[ShoppingUnresolved] = []
@@ -210,24 +218,37 @@ def calculate_shopping(
         if kind is not MealSourceKind.COOK_RECIPE or event.recipe_version_id is None:
             _reject("Источник еды не имеет проверенной рецептурной потребности.")
         detail = recipes.get(event.recipe_version_id)
-        if not isinstance(detail, RecipeVersionDetail) or detail.version.id != event.recipe_version_id:
+        if (
+            not isinstance(detail, RecipeVersionDetail)
+            or detail.version.id != event.recipe_version_id
+        ):
             _reject("Не найдена закреплённая неизменяемая версия рецепта.")
         if (
             not detail.recipe.is_active
-            or detail.version.verification_status is not VerificationStatus.SOURCE_VERIFIED
+            or detail.version.verification_status
+            is not VerificationStatus.SOURCE_VERIFIED
             or detail.version.rights_review_status is not RightsReviewStatus.REVIEWED
         ):
             _reject("Версия рецепта не подтверждена для продуктового каталога.")
         base = _decimal(detail.version.base_servings, positive=True)
         total_servings = sum(serving_map[event.id], Decimal(0))
-        recipe_pins.append([
-            str(event.id), str(detail.version.id), detail.version.version_number,
-            detail.version.source_document_sha256, detail.version.source_version,
-            str(base), str(total_servings),
-        ])
+        recipe_pins.append(
+            [
+                str(event.id),
+                str(detail.version.id),
+                detail.version.version_number,
+                detail.version.source_document_sha256,
+                detail.version.source_version,
+                str(base),
+                str(total_servings),
+            ]
+        )
         for ingredient in detail.ingredients:
             food = foods.get(ingredient.food_ingredient_id)
-            if not isinstance(food, FoodIngredient) or food.id != ingredient.food_ingredient_id:
+            if (
+                not isinstance(food, FoodIngredient)
+                or food.id != ingredient.food_ingredient_id
+            ):
                 _reject("Отсутствует канонический ингредиент рецепта.")
             if not food.is_active or ingredient.unit != food.default_unit:
                 _reject("Несовместимые единицы или неактивный канонический продукт.")
@@ -244,39 +265,75 @@ def calculate_shopping(
             demand[(food.id, ingredient.unit)].append(
                 (event.local_date, event.position, event.id, amount)
             )
-            recipe_pins.append([str(ingredient.id), str(quantity), str(ingredient.unit), str(food.id)])
+            recipe_pins.append(
+                [str(ingredient.id), str(quantity), str(ingredient.unit), str(food.id)]
+            )
 
     pantry_source = [
-        str(household_id), as_of.isoformat(), PANTRY_POLICY_VERSION,
+        str(household_id),
+        as_of.isoformat(),
+        PANTRY_POLICY_VERSION,
         sorted((_lot_identity(x) for x in lots), key=lambda x: x[0]),
     ]
     pantry_hash = _fingerprint(pantry_source)
-    source_hash = _fingerprint({
-        "plan": [str(plan.plan.id), plan.plan.revision_number, plan.plan.week_start.isoformat(),
-                 plan.plan.config_version],
-        "events": [[str(e.id), e.local_date.isoformat(), e.position, str(e.source_kind),
+    source_hash = _fingerprint(
+        {
+            "plan": [
+                str(plan.plan.id),
+                plan.plan.revision_number,
+                plan.plan.week_start.isoformat(),
+                plan.plan.config_version,
+            ],
+            "events": [
+                [
+                    str(e.id),
+                    e.local_date.isoformat(),
+                    e.position,
+                    str(e.source_kind),
                     str(e.recipe_version_id) if e.recipe_version_id else None,
-                    e.source_reference] for e in events],
-        "servings": sorted([[str(s.event_id), str(s.member_id), str(s.portion_servings)]
-                            for s in plan.servings]),
-        "recipes": sorted(recipe_pins, key=lambda x: str(x)),
-        "foods": food_pins,
-        "pantry_hash": pantry_hash,
-        "timezone": household_timezone,
-        "version": ENGINE_VERSION,
-    })
+                    e.source_reference,
+                ]
+                for e in events
+            ],
+            "servings": sorted(
+                [
+                    [str(s.event_id), str(s.member_id), str(s.portion_servings)]
+                    for s in plan.servings
+                ]
+            ),
+            "recipes": sorted(recipe_pins, key=lambda x: str(x)),
+            "foods": food_pins,
+            "pantry_hash": pantry_hash,
+            "timezone": household_timezone,
+            "version": ENGINE_VERSION,
+        }
+    )
 
     warnings: list[ShoppingWarning] = []
     allocations: list[ShoppingLotAllocation] = []
     computed: list[ShoppingQuantity] = []
-    for food_id, unit in sorted(demand, key=lambda key: (foods[key[0]].category_code,
-                                                        foods[key[0]].canonical_name_key,
-                                                        str(key[0]), str(key[1]))):
+    for food_id, unit in sorted(
+        demand,
+        key=lambda key: (
+            foods[key[0]].category_code,
+            foods[key[0]].canonical_name_key,
+            str(key[0]),
+            str(key[1]),
+        ),
+    ):
         required = Decimal(0)
         allocated = Decimal(0)
         relevant_lots = sorted(
-            (item for item in lots if item.food_ingredient_id == food_id and item.quantity > 0),
-            key=lambda item: (item.expires_on or date.max, str(item.location), str(item.id)),
+            (
+                item
+                for item in lots
+                if item.food_ingredient_id == food_id and item.quantity > 0
+            ),
+            key=lambda item: (
+                item.expires_on or date.max,
+                str(item.location),
+                str(item.id),
+            ),
         )
         remaining = {item.id: _decimal(item.quantity) for item in relevant_lots}
         for lot in relevant_lots:
@@ -296,8 +353,11 @@ def calculate_shopping(
             use_date = max(as_of, meal_date)
             for lot in relevant_lots:
                 if (
-                    missing <= 0 or not remaining[lot.id] or lot.estimated
-                    or lot.expires_on is None or lot.expires_on < use_date
+                    missing <= 0
+                    or not remaining[lot.id]
+                    or lot.estimated
+                    or lot.expires_on is None
+                    or lot.expires_on < use_date
                     or lot.unit != unit
                 ):
                     continue
@@ -305,42 +365,73 @@ def calculate_shopping(
                 remaining[lot.id] -= taken
                 missing -= taken
                 allocated += taken
-                allocations.append(ShoppingLotAllocation(event_id, lot.id, food_id, taken))
+                allocations.append(
+                    ShoppingLotAllocation(event_id, lot.id, food_id, taken)
+                )
         required_out = _round(required, ROUND_CEILING)
         available_out = _round(allocated, ROUND_FLOOR)
         shortfall = max(required_out - available_out, Decimal(0))
         if unit is UnitCode.PIECE:
             with localcontext() as ctx:
                 ctx.prec = 50
-                purchase = shortfall.to_integral_value(rounding=ROUND_CEILING).quantize(QUANTITY_STEP)
+                purchase = shortfall.to_integral_value(rounding=ROUND_CEILING).quantize(
+                    QUANTITY_STEP
+                )
             if purchase > MAX_QUANTITY:
                 _reject("Количество штук превышает допустимый предел.")
         else:
             purchase = _round(shortfall, ROUND_CEILING)
         computed.append(
-            ShoppingQuantity(food_id, FORM_BASIS, unit, required_out, available_out, purchase)
+            ShoppingQuantity(
+                food_id, FORM_BASIS, unit, required_out, available_out, purchase
+            )
         )
 
     unresolved.sort(key=lambda x: (str(x.meal_event_id), str(x.reason)))
     warnings.sort(key=lambda x: (x.code, str(x.pantry_item_id)))
-    allocation_result = tuple(sorted(allocations, key=lambda a: (str(a.meal_event_id),
-                                                                  str(a.pantry_item_id))))
+    allocation_result = tuple(
+        sorted(allocations, key=lambda a: (str(a.meal_event_id), str(a.pantry_item_id)))
+    )
     items = tuple(computed)
-    content_hash = _fingerprint({
-        "source": source_hash,
-        "items": [[str(x.food_ingredient_id), x.form_basis, str(x.unit),
-                   str(x.required_quantity), str(x.pantry_available_quantity),
-                   str(x.purchase_quantity)] for x in items],
-        "unresolved": [[str(x.meal_event_id), str(x.source_kind), str(x.reason)]
-                       for x in unresolved],
-        "warnings": [[x.code, str(x.pantry_item_id)] for x in warnings],
-        "allocations": [[str(x.meal_event_id), str(x.pantry_item_id),
-                         str(x.quantity)] for x in allocation_result],
-    })
+    content_hash = _fingerprint(
+        {
+            "source": source_hash,
+            "items": [
+                [
+                    str(x.food_ingredient_id),
+                    x.form_basis,
+                    str(x.unit),
+                    str(x.required_quantity),
+                    str(x.pantry_available_quantity),
+                    str(x.purchase_quantity),
+                ]
+                for x in items
+            ],
+            "unresolved": [
+                [str(x.meal_event_id), str(x.source_kind), str(x.reason)]
+                for x in unresolved
+            ],
+            "warnings": [[x.code, str(x.pantry_item_id)] for x in warnings],
+            "allocations": [
+                [str(x.meal_event_id), str(x.pantry_item_id), str(x.quantity)]
+                for x in allocation_result
+            ],
+        }
+    )
     return ShoppingCalculation(
-        household_id, plan.plan.id, plan.plan.revision_number, as_of,
-        ENGINE_VERSION, PANTRY_POLICY_VERSION,
+        household_id,
+        plan.plan.id,
+        plan.plan.revision_number,
+        as_of,
+        ENGINE_VERSION,
+        PANTRY_POLICY_VERSION,
         ShoppingStatus.INCOMPLETE if unresolved else ShoppingStatus.COMPLETE,
-        ShoppingPriceStatus.UNKNOWN, items, tuple(unresolved), tuple(warnings),
-        allocation_result, pantry_hash, source_hash, content_hash,
+        ShoppingPriceStatus.UNKNOWN,
+        items,
+        tuple(unresolved),
+        tuple(warnings),
+        allocation_result,
+        pantry_hash,
+        source_hash,
+        content_hash,
     )
