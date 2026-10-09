@@ -43,7 +43,7 @@ REFERENCE_PINS_MIGRATION_ID = "0037_meal_plan_reference_methodology_pins"
 TRANSFORMATION_APPLICABILITY_MIGRATION_ID = "0038_transformation_applicability"
 COMPOSITION_BINDING_MIGRATION_ID = "0039_recipe_ingredient_composition_binding"
 RECIPE_OUTPUT_MIGRATION_ID = "0040_recipe_version_source_output"
-HEAD_MIGRATION_ID = "0042_recipe_prepared_output_nutrition"
+HEAD_MIGRATION_ID = "0043_shopping_engine"
 TABLE = "artifact_audit_operations"
 
 
@@ -282,6 +282,9 @@ def test_upgrading_from_0019_preserves_every_existing_row_and_table(tmp_path):
         "recipe_ingredient_composition_bindings",
         "recipe_prepared_nutrition_authorities",
         "recipe_prepared_nutrient_values",
+        "shopping_lists",
+        "shopping_list_items",
+        "shopping_unresolved_obligations",
     }
 
 
