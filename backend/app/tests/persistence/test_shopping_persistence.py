@@ -22,7 +22,9 @@ from app.domain.shopping_calculation import (
     ShoppingStatus,
 )
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
-from app.persistence.sqlalchemy_core.food_ingredient_tables import food_ingredients_table
+from app.persistence.sqlalchemy_core.food_ingredient_tables import (
+    food_ingredients_table,
+)
 from app.persistence.sqlalchemy_core.food_recipe_uow import (
     SqlAlchemyRecipeCatalogueUnitOfWork,
 )
