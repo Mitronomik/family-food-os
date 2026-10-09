@@ -236,6 +236,38 @@ def test_failure_injected_after_header_is_fully_rolled_back(store, monkeypatch):
         )
 
 
+def test_injected_failure_after_children_insert_rolls_back_obligations(
+    store, monkeypatch
+):
+    config, engine = store
+    household, plan = _prepare(engine, unresolved=True)
+    real_add = SqlAlchemyShoppingListRepository.add_detail
+
+    def insert_children_then_fail(repo, detail):
+        assert len(detail.unresolved) == 1
+        real_add(repo, detail)
+        raise RuntimeError("injected failure after unresolved child insert")
+
+    monkeypatch.setattr(
+        SqlAlchemyShoppingListRepository, "add_detail", insert_children_then_fail
+    )
+    with pytest.raises(RuntimeError, match="injected failure after unresolved"):
+        _service(engine).generate(household.id, plan.plan.id)
+
+    with sqlite3.connect(config.path) as connection:
+        for table in (
+            "shopping_lists",
+            "shopping_list_items",
+            "shopping_unresolved_obligations",
+        ):
+            assert connection.execute(
+                f"SELECT count(*) FROM {table}"
+            ).fetchone()[0] == 0
+        assert connection.execute(
+            "SELECT count(*) FROM pantry_movements"
+        ).fetchone()[0] == 0
+
+
 def test_full_recipe_pantry_generation_roundtrip_provenance_and_stale(store):
     config, engine = store
     recipe = _detail()
