@@ -18,6 +18,8 @@ jobs:
       AI_ENABLED: 'false'
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -37,7 +39,10 @@ jobs:
           python -m ruff format --diff backend/app/domain/shopping_calculation.py backend/app/tests/test_shopping_calculation.py
           python -m ruff format --check backend/app/domain/shopping_calculation.py backend/app/tests/test_shopping_calculation.py
       - name: Scope and whitespace
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
           set -euo pipefail
-          git diff --check HEAD^ HEAD
+          test -n "$PR_BASE_SHA"
+          git diff --check "$PR_BASE_SHA"...HEAD
           test "$AI_ENABLED" = false
