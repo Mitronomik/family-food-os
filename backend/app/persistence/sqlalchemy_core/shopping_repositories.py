@@ -13,7 +13,11 @@ from app.domain.shopping_lists import (
 )
 from app.persistence.sqlalchemy_core.shopping_tables import (
     shopping_list_items_table as items,
+)
+from app.persistence.sqlalchemy_core.shopping_tables import (
     shopping_lists_table as lists,
+)
+from app.persistence.sqlalchemy_core.shopping_tables import (
     shopping_unresolved_obligations_table as unresolved,
 )
 
