@@ -7,6 +7,7 @@ from uuid import uuid4
 
 import pytest
 
+from app.domain.errors import DomainValidationError
 from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import (
     HouseholdMealEvent,
@@ -220,8 +221,8 @@ def test_fefo_lots_not_reused_and_all_storage_locations_allowed():
                      location=PantryLocation.FREEZER)
     result = _calculate(meal, recipes, foods, pantry=(second, first))
     assert _amounts(result, rice_id) == (Decimal("600.000"), Decimal("500.000"), Decimal("100.000"))
-    assert sum(a.quantity for a in result.allocations) == Decimal("500")
-    assert sum(a.quantity for a in result.allocations if a.pantry_item_id == first.id) == Decimal("150")
+    assert sum(a.quantity for a in result.allocations) == Decimal(500)
+    assert sum(a.quantity for a in result.allocations if a.pantry_item_id == first.id) == Decimal(150)
     assert result.status is ShoppingStatus.COMPLETE
 
 
@@ -311,12 +312,10 @@ def test_incompatible_unit_and_optional_ingredient_fail_closed():
 def test_reject_naive_clock_and_external_float_inputs():
     meal, recipes, foods = _input()
     with pytest.raises(ShoppingCalculationError):
-        _calculate(meal, recipes, foods, clock=datetime(2026, 10, 9))
+        _calculate(meal, recipes, foods, clock=AS_OF.replace(tzinfo=None))
     # Input domain rejects invalid arithmetic before Shopping ever receives it.
-    from app.domain.errors import DomainValidationError
-
     original = next(iter(recipes.values())).ingredients[0]
     with pytest.raises(DomainValidationError):
-        replace(original, quantity=Decimal("0"))
+        replace(original, quantity=Decimal(0))
     with pytest.raises(DomainValidationError):
         replace(original, quantity=1.0)
