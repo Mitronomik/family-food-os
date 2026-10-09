@@ -233,14 +233,36 @@ def test_full_recipe_pantry_generation_roundtrip_provenance_and_stale(store):
     config, engine = store
     recipe = _detail()
     rice = FoodIngredient(
-        recipe.ingredients[0].food_ingredient_id, "RICE_SHOPPING",
-        "Rice", "rice", "grains", "g", None, None, False, (),
-        None, True, NOW, NOW,
+        recipe.ingredients[0].food_ingredient_id,
+        "RICE_SHOPPING",
+        "Rice",
+        "rice",
+        "grains",
+        "g",
+        None,
+        None,
+        False,
+        (),
+        None,
+        True,
+        NOW,
+        NOW,
     )
     leaf = FoodIngredient(
-        recipe.ingredients[1].food_ingredient_id, "BAY_SHOPPING",
-        "Bay leaf", "bay leaf", "spices", "pcs", None, None, False, (),
-        None, True, NOW, NOW,
+        recipe.ingredients[1].food_ingredient_id,
+        "BAY_SHOPPING",
+        "Bay leaf",
+        "bay leaf",
+        "spices",
+        "pcs",
+        None,
+        None,
+        False,
+        (),
+        None,
+        True,
+        NOW,
+        NOW,
     )
     with SqlAlchemyRecipeCatalogueUnitOfWork(engine) as scope:
         scope.food_ingredients.add(rice)
@@ -256,8 +278,10 @@ def test_full_recipe_pantry_generation_roundtrip_provenance_and_stale(store):
     events = list(plan.events)
     for idx in (3, 6):
         events[idx] = replace(
-            events[idx], source_kind=MealSourceKind.COOK_RECIPE,
-            recipe_version_id=recipe.version.id, source_reference=None,
+            events[idx],
+            source_kind=MealSourceKind.COOK_RECIPE,
+            recipe_version_id=recipe.version.id,
+            source_reference=None,
         )
     plan = replace(plan, events=tuple(events))
     with SqlAlchemyMealPlanUnitOfWork(engine) as scope:
@@ -265,8 +289,18 @@ def test_full_recipe_pantry_generation_roundtrip_provenance_and_stale(store):
         scope.plans.add_detail(plan)
         scope.commit()
     stock = PantryItem(
-        uuid4(), household.id, rice.id, Decimal("300.000"), "g",
-        "PANTRY", False, None, None, date(2026, 9, 18), NOW, NOW,
+        uuid4(),
+        household.id,
+        rice.id,
+        Decimal("300.000"),
+        "g",
+        "PANTRY",
+        False,
+        None,
+        None,
+        date(2026, 9, 18),
+        NOW,
+        NOW,
     )
     with SqlAlchemyPantryUnitOfWork(engine) as scope:
         scope.items.add(stock)
@@ -280,6 +314,7 @@ def test_full_recipe_pantry_generation_roundtrip_provenance_and_stale(store):
     assert rice_item.pantry_available_quantity == Decimal("125.000")
     assert rice_item.purchase_quantity == Decimal("125.000")
     import json
+
     evidence = json.loads(saved.shopping_list.provenance_json)
     warnings = evidence["warnings"]
     assert any(
@@ -293,12 +328,16 @@ def test_full_recipe_pantry_generation_roundtrip_provenance_and_stale(store):
     assert service.get_detail(household.id, saved.shopping_list.id) == saved
     assert not service.get_current(household.id, plan.plan.id).stale
     with sqlite3.connect(config.path) as connection:
-        assert connection.execute(
-            "SELECT quantity FROM pantry_items WHERE id=?", (stock.id.hex,)
-        ).fetchone()[0] == "300.000"
-        assert connection.execute(
-            "SELECT COUNT(*) FROM pantry_movements"
-        ).fetchone()[0] == 0
+        assert (
+            connection.execute(
+                "SELECT quantity FROM pantry_items WHERE id=?", (stock.id.hex,)
+            ).fetchone()[0]
+            == "300.000"
+        )
+        assert (
+            connection.execute("SELECT COUNT(*) FROM pantry_movements").fetchone()[0]
+            == 0
+        )
 
     with SqlAlchemyPantryUnitOfWork(engine) as scope:
         scope.items.update_metadata(
@@ -311,7 +350,10 @@ def test_full_recipe_pantry_generation_roundtrip_provenance_and_stale(store):
     newer = service.regenerate(household.id, plan.plan.id)
     assert newer.shopping_list.supersedes_list_id == saved.shopping_list.id
     assert newer.shopping_list.id != saved.shopping_list.id
-    assert newer.shopping_list.source_pantry_snapshot_hash != saved.shopping_list.source_pantry_snapshot_hash
+    assert (
+        newer.shopping_list.source_pantry_snapshot_hash
+        != saved.shopping_list.source_pantry_snapshot_hash
+    )
     assert service.get_detail(household.id, saved.shopping_list.id) == saved
     assert len(service.list_history(household.id, plan.plan.id)) == 2
 
@@ -340,12 +382,18 @@ def test_0043_failure_rolls_back_tables_and_marker(tmp_path, monkeypatch):
     with pytest.raises(RuntimeError, match="injected migration failure"):
         apply_migrations(config)
     with sqlite3.connect(config.path) as db:
-        assert db.execute(
-            "SELECT 1 FROM sqlite_master WHERE name='aborted_shopping_probe'"
-        ).fetchone() is None
-        assert db.execute(
-            "SELECT 1 FROM schema_migrations WHERE migration_id='0043_shopping_engine'"
-        ).fetchone() is None
+        assert (
+            db.execute(
+                "SELECT 1 FROM sqlite_master WHERE name='aborted_shopping_probe'"
+            ).fetchone()
+            is None
+        )
+        assert (
+            db.execute(
+                "SELECT 1 FROM schema_migrations WHERE migration_id='0043_shopping_engine'"
+            ).fetchone()
+            is None
+        )
     monkeypatch.setattr(module, "upgrade", upgrade)
     assert apply_migrations(config) == ["0043_shopping_engine"]
 
@@ -378,10 +426,16 @@ def test_backup_preserves_immutable_shopping_and_legacy_household(store, tmp_pat
         restored.execute("PRAGMA foreign_keys=ON")
         assert restored.execute("PRAGMA foreign_key_check").fetchall() == []
         assert restored.execute("SELECT COUNT(*) FROM households").fetchone()[0] >= 1
-        assert restored.execute("SELECT COUNT(*) FROM shopping_lists").fetchone()[0] == 1
-        assert restored.execute(
-            "SELECT COUNT(*) FROM shopping_unresolved_obligations"
-        ).fetchone()[0] == 1
-        assert restored.execute(
-            "SELECT id FROM shopping_lists"
-        ).fetchone()[0] == saved.shopping_list.id.hex
+        assert (
+            restored.execute("SELECT COUNT(*) FROM shopping_lists").fetchone()[0] == 1
+        )
+        assert (
+            restored.execute(
+                "SELECT COUNT(*) FROM shopping_unresolved_obligations"
+            ).fetchone()[0]
+            == 1
+        )
+        assert (
+            restored.execute("SELECT id FROM shopping_lists").fetchone()[0]
+            == saved.shopping_list.id.hex
+        )
