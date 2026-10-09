@@ -3,26 +3,32 @@
 The persistence UoW owns BEGIN IMMEDIATE and every authoritative read.
 This module does not import SQLAlchemy, DBAPI connections or table definitions.
 """
+import json
 from collections.abc import Callable, Mapping
 from dataclasses import asdict, is_dataclass
 from datetime import date, datetime, timezone
 from decimal import Decimal
 from enum import Enum
 from hashlib import sha256
-import json
 from uuid import UUID, uuid4
 
 from app.domain.meal_plans import MealSourceKind
 from app.domain.shopping_calculation import (
-    ShoppingCalculation, calculate_shopping,
+    ShoppingCalculation,
+    calculate_shopping,
 )
 from app.domain.shopping_lists import (
-    ShoppingCurrent, ShoppingList, ShoppingListDetail,
-    ShoppingListItem, ShoppingUnresolvedObligation,
+    ShoppingCurrent,
+    ShoppingList,
+    ShoppingListDetail,
+    ShoppingListItem,
+    ShoppingUnresolvedObligation,
 )
 from app.services.shopping_contracts import (
-    ShoppingNotFoundError, ShoppingPersistenceConflictError,
-    ShoppingReadScope, ShoppingUnitOfWork,
+    ShoppingNotFoundError,
+    ShoppingPersistenceConflictError,
+    ShoppingReadScope,
+    ShoppingUnitOfWork,
 )
 
 WriteFactory = Callable[[], ShoppingUnitOfWork]
