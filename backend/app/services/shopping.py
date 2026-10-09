@@ -196,7 +196,14 @@ class ShoppingService:
                 as_of_date=computed.as_of_date,
                 engine_version=computed.engine_version,
                 pantry_policy_version=computed.pantry_policy_version,
-                config_fingerprint=_digest([plan_id, provenance["calculation"]["config_version"], computed.engine_version, computed.pantry_policy_version]),
+                config_fingerprint=_digest(
+                    [
+                        plan_id,
+                        provenance["calculation"]["config_version"],
+                        computed.engine_version,
+                        computed.pantry_policy_version,
+                    ]
+                ),
                 source_fingerprint=computed.source_fingerprint,
                 content_fingerprint=computed.content_fingerprint,
                 status=computed.status,
