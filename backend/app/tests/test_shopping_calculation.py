@@ -264,8 +264,10 @@ def test_future_week_lot_cannot_reduce_future_purchase():
     )
     assert not result.allocations
     assert result.status is ShoppingStatus.COMPLETE
-    assert [(w.code, w.pantry_item_id, w.meal_event_id, w.required_date)
-            for w in result.warnings] == [
+    assert [
+        (w.code, w.pantry_item_id, w.meal_event_id, w.required_date)
+        for w in result.warnings
+    ] == [
         (
             "EXPIRES_BEFORE_REQUIRED_DATE",
             lot.id,
