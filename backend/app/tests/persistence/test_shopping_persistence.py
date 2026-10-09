@@ -360,7 +360,9 @@ def test_full_recipe_pantry_generation_roundtrip_provenance_and_stale(store):
         != saved.shopping_list.source_pantry_snapshot_hash
     )
     assert service.get_detail(household.id, saved.shopping_list.id) == saved
-    assert len(service.list_history(household.id, plan.plan.id)) == 2
+    assert service.list_history(household.id, plan.plan.id) == [saved, newer]
+    assert service.get_current(household.id, plan.plan.id).detail == newer
+    assert service.get_current(household.id, plan.plan.id).stale is False
 
     # A later source catalogue withdrawal cannot make historical Shopping
     # invisible or incorrectly CURRENT; numeric regeneration fails closed.
