@@ -1,4 +1,10 @@
-# Progress
+# PR9-ARCH — IN PROGRESS — 2026-10-08
+
+Accepted `main@73cb7ee6b20d1af958639f75f6fa5db286381cb3`; PR #181 Gate1-CLOSE merged, Planning Core COMPLETE. Issue #183 initiated to establish docs-only Shopping Implementation Contract Gate before persisted Shopping runtime. Contract: [pr9-shopping-implementation-contract.md](../docs/family-food/pr9-shopping-implementation-contract.md). Source-kind matrix uses exact current seven MealSourceKind values; current Pantry has no aggregate revision so contract proposes versioned deterministic fingerprint. Migration head 0042; proposed 0043 conditional on still-free runtime branch. No runtime, schema, migration, API, Pantry write, AI or Retail change. Status: awaiting independent contract review and merge; PR9 runtime NOT STARTED.
+
+---
+
+# Progress (historical entries below)
 
 ## Gate1-CLOSE — REVIEW-READY — 2026-10-08
 
