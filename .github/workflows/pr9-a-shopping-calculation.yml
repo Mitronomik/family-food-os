@@ -34,6 +34,7 @@ jobs:
         run: |
           set -euo pipefail
           python -m ruff check backend/app/domain/shopping_calculation.py backend/app/tests/test_shopping_calculation.py
+          python -m ruff format --diff backend/app/domain/shopping_calculation.py backend/app/tests/test_shopping_calculation.py
           python -m ruff format --check backend/app/domain/shopping_calculation.py backend/app/tests/test_shopping_calculation.py
       - name: Scope and whitespace
         run: |
