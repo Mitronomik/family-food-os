@@ -44,12 +44,17 @@ def _input(
     rice_id = recipe.ingredients[0].food_ingredient_id
     leaf_id = recipe.ingredients[1].food_ingredient_id
     rice = ingredient(
-        id=rice_id, canonical_code="RICE", canonical_name="Рис",
+        id=rice_id,
+        canonical_code="RICE",
+        canonical_name="Рис",
         canonical_name_key="рис",
     )
     leaf = ingredient(
-        id=leaf_id, canonical_code="BAY_LEAF", canonical_name="Лавровый лист",
-        canonical_name_key="лавровый лист", default_unit=UnitCode.PIECE,
+        id=leaf_id,
+        canonical_code="BAY_LEAF",
+        canonical_name="Лавровый лист",
+        canonical_name_key="лавровый лист",
+        default_unit=UnitCode.PIECE,
     )
     household = uuid4()
     plan = MealPlan(
@@ -66,9 +71,15 @@ def _input(
         # Positions are contiguous within each calendar date.
         position = sum(e.local_date == event_date for e in events) + 1
         event = HouseholdMealEvent(
-            uuid4(), plan.id, event_date, position, MealRole.DINNER, kind,
+            uuid4(),
+            plan.id,
+            event_date,
+            position,
+            MealRole.DINNER,
+            kind,
             recipe.version.id if kind is MealSourceKind.COOK_RECIPE else None,
-            None, AS_OF,
+            None,
+            AS_OF,
         )
         events.append(event)
         servings.extend(
@@ -90,14 +101,27 @@ def _pantry(
     unit=UnitCode.GRAM,
 ):
     return PantryItem(
-        uuid4(), meal.plan.household_id, food_id, Decimal(amount), unit, location,
-        estimated, None, None, expires_on, AS_OF, AS_OF,
+        uuid4(),
+        meal.plan.household_id,
+        food_id,
+        Decimal(amount),
+        unit,
+        location,
+        estimated,
+        None,
+        None,
+        expires_on,
+        AS_OF,
+        AS_OF,
     )
 
 
 def _calculate(meal, recipes, foods, pantry=(), **kwargs):
     return calculate_shopping(
-        plan=meal, recipes=recipes, foods=foods, pantry_items=tuple(pantry),
+        plan=meal,
+        recipes=recipes,
+        foods=foods,
+        pantry_items=tuple(pantry),
         household_timezone=kwargs.get("tz", "Europe/Moscow"),
         captured_at=kwargs.get("clock", AS_OF),
     )
@@ -105,18 +129,34 @@ def _calculate(meal, recipes, foods, pantry=(), **kwargs):
 
 def _amounts(result, food_id):
     item = next(x for x in result.items if x.food_ingredient_id == food_id)
-    return item.required_quantity, item.pantry_available_quantity, item.purchase_quantity
+    return (
+        item.required_quantity,
+        item.pantry_available_quantity,
+        item.purchase_quantity,
+    )
 
 
 def test_scaled_per_member_and_base_servings_with_separate_unknown_price():
     meal, recipes, foods = _input(member_portions=("1", "2"))
     result = _calculate(meal, recipes, foods)
     rice_id, leaf_id = tuple(foods)
-    assert _amounts(result, rice_id) == (Decimal("300.000"), Decimal("0.000"), Decimal("300.000"))
-    assert _amounts(result, leaf_id) == (Decimal("0.500"), Decimal("0.000"), Decimal("1.000"))
+    assert _amounts(result, rice_id) == (
+        Decimal("300.000"),
+        Decimal("0.000"),
+        Decimal("300.000"),
+    )
+    assert _amounts(result, leaf_id) == (
+        Decimal("0.500"),
+        Decimal("0.000"),
+        Decimal("1.000"),
+    )
     assert result.status is ShoppingStatus.COMPLETE
     assert result.price_status is ShoppingPriceStatus.UNKNOWN
-    assert result.pantry_snapshot_hash and result.source_fingerprint and result.content_fingerprint
+    assert (
+        result.pantry_snapshot_hash
+        and result.source_fingerprint
+        and result.content_fingerprint
+    )
 
 
 @pytest.mark.parametrize(
@@ -127,7 +167,9 @@ def test_scaled_per_member_and_base_servings_with_separate_unknown_price():
         (("1", "2", "3"), "600.000", "1.000"),
     ],
 )
-def test_participating_servings_scale_exactly_once(members, expected_rice, expected_leaf_purchase):
+def test_participating_servings_scale_exactly_once(
+    members, expected_rice, expected_leaf_purchase
+):
     meal, recipes, foods = _input(member_portions=members)
     result = _calculate(meal, recipes, foods)
     rice_id, leaf_id = tuple(foods)
@@ -136,8 +178,9 @@ def test_participating_servings_scale_exactly_once(members, expected_rice, expec
 
 
 def test_two_events_aggregate_once_with_stable_replay_and_read_only_state():
-    meal, recipes, foods = _input(dates=(WEEK, WEEK.replace(day=6)),
-                                  kinds=(MealSourceKind.COOK_RECIPE,) * 2)
+    meal, recipes, foods = _input(
+        dates=(WEEK, WEEK.replace(day=6)), kinds=(MealSourceKind.COOK_RECIPE,) * 2
+    )
     before = meal, tuple(recipes.items()), tuple(foods.items())
     first = _calculate(meal, recipes, foods)
     second = _calculate(meal, recipes, foods)
@@ -177,7 +220,11 @@ def test_outside_meals_have_no_grocery_demand(source):
 
 def test_mixed_sources_do_not_double_count_leftovers():
     meal, recipes, foods = _input(
-        kinds=(MealSourceKind.COOK_RECIPE, MealSourceKind.LEFTOVER, MealSourceKind.EAT_OUT),
+        kinds=(
+            MealSourceKind.COOK_RECIPE,
+            MealSourceKind.LEFTOVER,
+            MealSourceKind.EAT_OUT,
+        ),
         dates=(WEEK, WEEK.replace(day=6), WEEK.replace(day=7)),
     )
     result = _calculate(meal, recipes, foods)
@@ -195,7 +242,11 @@ def test_date_aware_expiry_allows_early_meal_but_never_late_meal():
     lot = _pantry(meal, rice_id, "300", expires_on=early)
     before = lot
     result = _calculate(meal, recipes, foods, pantry=(lot,))
-    assert _amounts(result, rice_id) == (Decimal("600.000"), Decimal("300.000"), Decimal("300.000"))
+    assert _amounts(result, rice_id) == (
+        Decimal("600.000"),
+        Decimal("300.000"),
+        Decimal("300.000"),
+    )
     assert len(result.allocations) == 1
     assert result.allocations[0].meal_event_id == meal.events[0].id
     assert lot == before
@@ -206,22 +257,44 @@ def test_future_week_lot_cannot_reduce_future_purchase():
     rice_id = next(iter(foods))
     lot = _pantry(meal, rice_id, "300", expires_on=date(2026, 10, 10))
     result = _calculate(meal, recipes, foods, pantry=(lot,))
-    assert _amounts(result, rice_id) == (Decimal("300.000"), Decimal("0.000"), Decimal("300.000"))
+    assert _amounts(result, rice_id) == (
+        Decimal("300.000"),
+        Decimal("0.000"),
+        Decimal("300.000"),
+    )
     assert not result.allocations
 
 
 def test_fefo_lots_not_reused_and_all_storage_locations_allowed():
-    meal, recipes, foods = _input(kinds=(MealSourceKind.COOK_RECIPE,) * 2,
-                                  dates=(date(2026, 10, 9), date(2026, 10, 10)))
+    meal, recipes, foods = _input(
+        kinds=(MealSourceKind.COOK_RECIPE,) * 2,
+        dates=(date(2026, 10, 9), date(2026, 10, 10)),
+    )
     rice_id = next(iter(foods))
-    first = _pantry(meal, rice_id, "150", expires_on=date(2026, 10, 9),
-                    location=PantryLocation.FRIDGE)
-    second = _pantry(meal, rice_id, "350", expires_on=date(2026, 10, 12),
-                     location=PantryLocation.FREEZER)
+    first = _pantry(
+        meal,
+        rice_id,
+        "150",
+        expires_on=date(2026, 10, 9),
+        location=PantryLocation.FRIDGE,
+    )
+    second = _pantry(
+        meal,
+        rice_id,
+        "350",
+        expires_on=date(2026, 10, 12),
+        location=PantryLocation.FREEZER,
+    )
     result = _calculate(meal, recipes, foods, pantry=(second, first))
-    assert _amounts(result, rice_id) == (Decimal("600.000"), Decimal("500.000"), Decimal("100.000"))
+    assert _amounts(result, rice_id) == (
+        Decimal("600.000"),
+        Decimal("500.000"),
+        Decimal("100.000"),
+    )
     assert sum(a.quantity for a in result.allocations) == Decimal(500)
-    assert sum(a.quantity for a in result.allocations if a.pantry_item_id == first.id) == Decimal(150)
+    assert sum(
+        a.quantity for a in result.allocations if a.pantry_item_id == first.id
+    ) == Decimal(150)
     assert result.status is ShoppingStatus.COMPLETE
 
 
@@ -237,16 +310,21 @@ def test_estimated_unknown_expiry_and_expired_are_not_subtracted():
     assert _amounts(result, rice)[1:] == (Decimal("0.000"), Decimal("300.000"))
     assert result.status is ShoppingStatus.COMPLETE
     assert {w.code for w in result.warnings} == {
-        "ESTIMATED_STOCK", "EXPIRY_UNKNOWN", "EXPIRED_STOCK"
+        "ESTIMATED_STOCK",
+        "EXPIRY_UNKNOWN",
+        "EXPIRED_STOCK",
     }
 
 
 def test_fractional_pieces_round_up_once_and_small_quantity_not_lost():
     recipe = _detail()
-    recipe = replace(recipe, ingredients=(
-        replace(recipe.ingredients[0], quantity=Decimal("0.001")),
-        recipe.ingredients[1],
-    ))
+    recipe = replace(
+        recipe,
+        ingredients=(
+            replace(recipe.ingredients[0], quantity=Decimal("0.001")),
+            recipe.ingredients[1],
+        ),
+    )
     meal, recipes, foods = _input(recipe=recipe, member_portions=("1",))
     result = _calculate(meal, recipes, foods)
     rice_id, leaf_id = tuple(foods)
@@ -258,9 +336,12 @@ def test_fractional_pieces_round_up_once_and_small_quantity_not_lost():
 def test_excess_pantry_never_produces_negative_purchase():
     meal, recipes, foods = _input(dates=(date(2026, 10, 9),))
     rice = next(iter(foods))
-    result = _calculate(meal, recipes, foods,
-                        pantry=(_pantry(meal, rice, "800"),))
-    assert _amounts(result, rice) == (Decimal("300.000"), Decimal("300.000"), Decimal("0.000"))
+    result = _calculate(meal, recipes, foods, pantry=(_pantry(meal, rice, "800"),))
+    assert _amounts(result, rice) == (
+        Decimal("300.000"),
+        Decimal("300.000"),
+        Decimal("0.000"),
+    )
 
 
 def test_pantry_metadata_and_date_change_fingerprints():
@@ -268,7 +349,9 @@ def test_pantry_metadata_and_date_change_fingerprints():
     rice = next(iter(foods))
     stock = _pantry(meal, rice, "150")
     a = _calculate(meal, recipes, foods, pantry=(stock,))
-    b = _calculate(meal, recipes, foods, pantry=(replace(stock, location=PantryLocation.FRIDGE),))
+    b = _calculate(
+        meal, recipes, foods, pantry=(replace(stock, location=PantryLocation.FRIDGE),)
+    )
     assert a.pantry_snapshot_hash != b.pantry_snapshot_hash
     assert a.content_fingerprint != b.content_fingerprint
     midnight = datetime(2026, 10, 9, 21, 10, tzinfo=timezone.utc)
@@ -291,21 +374,29 @@ def test_incompatible_unit_and_optional_ingredient_fail_closed():
     recipe = _detail()
     meal, recipes, foods = _input(recipe=recipe)
     rice_id = next(iter(foods))
-    altered = replace(recipe, ingredients=(
-        replace(recipe.ingredients[0], unit=UnitCode.PIECE),
-        recipe.ingredients[1],
-    ))
+    altered = replace(
+        recipe,
+        ingredients=(
+            replace(recipe.ingredients[0], unit=UnitCode.PIECE),
+            recipe.ingredients[1],
+        ),
+    )
     with pytest.raises(ShoppingCalculationError, match="Несовместимые"):
         _calculate(meal, {recipe.version.id: altered}, foods)
-    optional = replace(recipe, ingredients=(
-        replace(recipe.ingredients[0], optional=True),
-        recipe.ingredients[1],
-    ))
+    optional = replace(
+        recipe,
+        ingredients=(
+            replace(recipe.ingredients[0], optional=True),
+            recipe.ingredients[1],
+        ),
+    )
     with pytest.raises(ShoppingCalculationError, match="не зафиксирован"):
         _calculate(meal, {recipe.version.id: optional}, foods)
     # Food identity keys must not be silently guessed from similar display names.
     with pytest.raises(ShoppingCalculationError):
-        _calculate(meal, recipes, {fid: f for fid, f in foods.items() if fid != rice_id})
+        _calculate(
+            meal, recipes, {fid: f for fid, f in foods.items() if fid != rice_id}
+        )
 
 
 def test_reject_naive_clock_and_external_float_inputs():
