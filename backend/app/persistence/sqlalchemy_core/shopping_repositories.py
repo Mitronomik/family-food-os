@@ -12,6 +12,7 @@ from app.domain.shopping_lists import (
     ShoppingListItem,
     ShoppingUnresolvedObligation,
 )
+from app.services.shopping_contracts import ShoppingPersistenceError
 from app.persistence.sqlalchemy_core.shopping_tables import (
     shopping_list_items_table as items,
 )
@@ -100,33 +101,52 @@ class SqlAlchemyShoppingListRepository:
         )
         return None if uid is None else self.get_detail(household_id, uid)
 
-    def get_latest_for_plan(
-        self, household_id: UUID, plan_id: UUID
-    ) -> ShoppingListDetail | None:
-        uid = self._connection.scalar(
-            select(lists.c.id)
-            .where(
+    def _history_ids(self, household_id: UUID, plan_id: UUID) -> list[UUID]:
+        """Follow immutable supersedes links, never a random UUID/timestamp tie."""
+        rows = self._connection.execute(
+            select(lists.c.id, lists.c.supersedes_list_id).where(
                 lists.c.household_id == household_id,
                 lists.c.meal_plan_id == plan_id,
             )
-            .order_by(lists.c.created_at.desc(), lists.c.id.desc())
-            .limit(1)
-        )
-        return None if uid is None else self.get_detail(household_id, uid)
+        ).mappings().all()
+        if not rows:
+            return []
+        children: dict[UUID, UUID] = {}
+        roots: list[UUID] = []
+        for row in rows:
+            parent = row["supersedes_list_id"]
+            if parent is None:
+                roots.append(row["id"])
+            elif parent in children:
+                raise ShoppingPersistenceError("Shopping successor history has a fork")
+            else:
+                children[parent] = row["id"]
+        if len(roots) != 1:
+            raise ShoppingPersistenceError("Shopping successor history has no unique root")
+        result: list[UUID] = []
+        seen: set[UUID] = set()
+        current = roots[0]
+        while current is not None:
+            if current in seen:
+                raise ShoppingPersistenceError("Shopping successor history has a cycle")
+            seen.add(current)
+            result.append(current)
+            current = children.get(current)
+        if len(seen) != len(rows):
+            raise ShoppingPersistenceError("Shopping successor history is disconnected")
+        return result
+
+    def get_latest_for_plan(
+        self, household_id: UUID, plan_id: UUID
+    ) -> ShoppingListDetail | None:
+        ids = self._history_ids(household_id, plan_id)
+        return None if not ids else self.get_detail(household_id, ids[-1])
 
     def list_history(
         self, household_id: UUID, plan_id: UUID
     ) -> list[ShoppingListDetail]:
-        ids = self._connection.scalars(
-            select(lists.c.id)
-            .where(
-                lists.c.household_id == household_id,
-                lists.c.meal_plan_id == plan_id,
-            )
-            .order_by(lists.c.created_at, lists.c.id)
-        ).all()
         return [
             detail
-            for uid in ids
+            for uid in self._history_ids(household_id, plan_id)
             if (detail := self.get_detail(household_id, uid)) is not None
         ]
