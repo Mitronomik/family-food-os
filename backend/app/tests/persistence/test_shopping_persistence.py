@@ -260,12 +260,13 @@ def test_injected_failure_after_children_insert_rolls_back_obligations(
             "shopping_list_items",
             "shopping_unresolved_obligations",
         ):
-            assert connection.execute(
-                f"SELECT count(*) FROM {table}"
-            ).fetchone()[0] == 0
-        assert connection.execute(
-            "SELECT count(*) FROM pantry_movements"
-        ).fetchone()[0] == 0
+            assert (
+                connection.execute(f"SELECT count(*) FROM {table}").fetchone()[0] == 0
+            )
+        assert (
+            connection.execute("SELECT count(*) FROM pantry_movements").fetchone()[0]
+            == 0
+        )
 
 
 def test_full_recipe_pantry_generation_roundtrip_provenance_and_stale(store):
