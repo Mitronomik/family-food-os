@@ -4,14 +4,14 @@ No persistence, pricing authority, clock, network, Pantry write or Retail adapte
 The accepted PR9 contract is docs/family-food/pr9-shopping-implementation-contract.md.
 """
 
+import json
 from collections import defaultdict
+from collections.abc import Mapping
 from dataclasses import dataclass
 from datetime import date, datetime
-from decimal import Decimal, InvalidOperation, ROUND_CEILING, ROUND_FLOOR, localcontext
+from decimal import ROUND_CEILING, ROUND_FLOOR, Decimal, InvalidOperation, localcontext
 from enum import StrEnum
 from hashlib import sha256
-import json
-from typing import Mapping
 from uuid import UUID
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
