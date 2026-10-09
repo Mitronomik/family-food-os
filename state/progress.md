@@ -1,3 +1,13 @@
+# PR9-A — IN DEVELOPMENT — 2026-10-09
+
+- PR #184 Shopping Implementation Contract Gate **MERGED** as `b787dace4174ac9bf3bd6026efdfb64db5f43441`.
+- Issue #185 authorized: PR9-A deterministic Shopping calculation (pure domain; no persistence/API).
+- Implementation branch: `feat/pr9-a-shopping-calculation`. Contract: [PR9-ARCH](../docs/family-food/pr9-shopping-implementation-contract.md).
+- Runtime slice: immutable quantity/obligation projection, recipe/member Serving scaling, date-aware Pantry FEFO allocation, `0.001` rounding, independent UNKNOWN prices, snapshot/content fingerprints. Test suite in `backend/app/tests/test_shopping_calculation.py`.
+- Verification/CI, acceptance and merge remain pending. **PR9 overall NOT COMPLETE; persistence/UoW/API not started.**
+
+---
+
 # PR9-ARCH — IN PROGRESS — 2026-10-08
 
 Accepted `main@73cb7ee6b20d1af958639f75f6fa5db286381cb3`; PR #181 Gate1-CLOSE merged, Planning Core COMPLETE. Issue #183 initiated to establish docs-only Shopping Implementation Contract Gate before persisted Shopping runtime. Contract: [pr9-shopping-implementation-contract.md](../docs/family-food/pr9-shopping-implementation-contract.md). Source-kind matrix uses exact current seven MealSourceKind values; current Pantry has no aggregate revision so contract proposes versioned deterministic fingerprint. Migration head 0042; proposed 0043 conditional on still-free runtime branch. No runtime, schema, migration, API, Pantry write, AI or Retail change. Status: awaiting independent contract review and merge; PR9 runtime NOT STARTED.
