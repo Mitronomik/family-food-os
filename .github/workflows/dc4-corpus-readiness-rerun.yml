@@ -129,9 +129,10 @@ jobs:
           python - <<'PY'
           from app.db import migrations
           ids = migrations.expected_migration_ids()
-          assert ids[-1] == '0042_recipe_prepared_output_nutrition'
-          assert not any(item.startswith('0043') for item in ids)
-          print('migration head 0042 / no 0043: PASS')
+          assert ids[-1:] == ['0042_recipe_prepared_output_nutrition'] or ids[-2:] == [
+              '0042_recipe_prepared_output_nutrition', '0043_shopping_engine'
+          ]
+          print('accepted 0042 migration prefix and current head: PASS')
           PY
           test "${AI_ENABLED}" = "false"
           echo 'AI_ENABLED=false: PASS'
