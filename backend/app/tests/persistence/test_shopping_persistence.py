@@ -14,12 +14,14 @@ from app.db.migrations import (
     expected_migration_ids,
 )
 from app.domain.food_ingredients import FoodIngredient
-from app.domain.pantry import PantryItem
 from app.domain.meal_plans import MealSourceKind
+from app.domain.pantry import PantryItem
 from app.domain.shopping_calculation import ShoppingPriceStatus, ShoppingStatus
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
+from app.persistence.sqlalchemy_core.food_recipe_uow import (
+    SqlAlchemyRecipeCatalogueUnitOfWork,
+)
 from app.persistence.sqlalchemy_core.meal_plan_uow import SqlAlchemyMealPlanUnitOfWork
-from app.persistence.sqlalchemy_core.food_recipe_uow import SqlAlchemyRecipeCatalogueUnitOfWork
 from app.persistence.sqlalchemy_core.pantry_uow import SqlAlchemyPantryUnitOfWork
 from app.persistence.sqlalchemy_core.shopping_repositories import (
     SqlAlchemyShoppingListRepository,
@@ -34,7 +36,6 @@ from app.services.shopping_contracts import (
     ShoppingNotFoundError,
     ShoppingPersistenceConflictError,
 )
-from app.tests.test_food_recipe_domain import _detail
 from app.tests.persistence.test_meal_plan_repository import (
     NOW,
     _household,
@@ -43,6 +44,7 @@ from app.tests.persistence.test_meal_plan_repository import (
     _seed_household,
     _selection,
 )
+from app.tests.test_food_recipe_domain import _detail
 from sqlalchemy import insert
 
 
@@ -370,9 +372,8 @@ def test_backup_preserves_immutable_shopping_and_legacy_household(store, tmp_pat
     household, plan = _prepare(engine, unresolved=True)
     saved = _service(engine).generate(household.id, plan.plan.id)
     backup = tmp_path / "backup.sqlite"
-    with sqlite3.connect(config.path) as source:
-        with sqlite3.connect(backup) as target:
-            source.backup(target)
+    with sqlite3.connect(config.path) as source, sqlite3.connect(backup) as target:
+        source.backup(target)
     with sqlite3.connect(backup) as restored:
         restored.execute("PRAGMA foreign_keys=ON")
         assert restored.execute("PRAGMA foreign_key_check").fetchall() == []
