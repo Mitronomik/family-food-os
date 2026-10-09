@@ -1,3 +1,15 @@
+# PR9-B — Shopping persistence and transactional UoW (current)
+
+Updated: 2026-10-09.
+Accepted main: `c83dba190b957300cad54c9c8df5afc01f86de60` (merged PR #186).
+Gate1 COMPLETE; PR9-ARCH (#184) MERGED; PR9-A pure calculator (#186) MERGED.
+
+**Current bounded operation:** Issue #187, branch `feat/pr9-b-shopping-persistence`. Implement only PR9-B persisted immutable ShoppingList/ShoppingListItem/ShoppingUnresolvedObligation, custom migration 0043 (subject to accepted-head reconciliation), one SQLite BEGIN IMMEDIATE transaction, coherent Pantry/MealPlan/Recipe snapshot, application service generate/get/history/stale/regenerate, targeted + adversarial persistence verification. Follow canonical [PR9 implementation contract](../docs/family-food/pr9-shopping-implementation-contract.md). API, consumer UX, Retail, Prep/PDF/AI and multi-user deployment remain NOT STARTED. PR9 overall NOT COMPLETE until PR9-C and Gate 2 evidence. Do not merge this PR autonomously.
+
+Historic PR9-A and previous gates below are superseded as *current authorization*, not deleted as evidence.
+
+---
+
 # PR9-A — Pure Shopping Calculation Core (current)
 
 Updated: 2026-10-09.
