@@ -82,6 +82,9 @@ CURRENT_ALLOWED_TABLES = {
     "recipe_ingredient_composition_bindings",
     "recipe_prepared_nutrition_authorities",
     "recipe_prepared_nutrient_values",
+    "shopping_lists",
+    "shopping_list_items",
+    "shopping_unresolved_obligations",
     "sqlite_sequence",
 }
 

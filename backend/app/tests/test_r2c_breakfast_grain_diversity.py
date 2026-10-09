@@ -257,9 +257,7 @@ def test_r2c_fresh_publication_adds_three_grain_breakfasts_without_rewriting_cor
         assert row == (WHEAT_GROATS_FOOD_CODE, 0, 0)
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
 
-    assert migrations.expected_migration_ids()[-1] == (
-        "0042_recipe_prepared_output_nutrition"
-    )
+    assert migrations.expected_migration_ids()[-1] == "0043_shopping_engine"
     assert accepted_snapshot(database) == before
 
 
