@@ -337,7 +337,7 @@ def test_r3c_fresh_publication_and_batch_activation(database):
 
     assert (
         migrations.expected_migration_ids()[-1]
-        == "0042_recipe_prepared_output_nutrition"
+        == "0043_shopping_engine"
     )
 
 

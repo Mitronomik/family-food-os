@@ -515,14 +515,10 @@ def audit(config: DatabaseConfig) -> dict[str, Any]:
     # 0042 is the immutable DC4/Gate1 acceptance prefix. Later approved
     # additive migrations may extend the live schema without invalidating
     # accepted corpus readiness evidence.
-    migration_ok = "0042_recipe_prepared_output_nutrition" in migration_ids and (
-        migration_ids[-1] == "0042_recipe_prepared_output_nutrition"
-        or (
-            migration_ids[-2:] == [
-                "0042_recipe_prepared_output_nutrition",
-                "0043_shopping_engine",
-            ]
-        )
+    migration_ok = (
+        migration_ids[-1:] == ["0042_recipe_prepared_output_nutrition"]
+        or migration_ids[-2:]
+        == ["0042_recipe_prepared_output_nutrition", "0043_shopping_engine"]
     )
     if not migration_ok:
         blockers.append("MIGRATION_HEAD_DRIFT")
