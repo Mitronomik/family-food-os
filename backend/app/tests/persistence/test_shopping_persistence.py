@@ -328,6 +328,9 @@ def test_0043_failure_rolls_back_tables_and_marker(tmp_path, monkeypatch):
     upgrade = module.upgrade
 
     def fail(conn):
+        # Inject failure *after* the real migration acquires BEGIN and creates
+        # all three tables, without bypassing its transaction-control contract.
+        upgrade(conn)
         conn.execute("CREATE TABLE aborted_shopping_probe(id INTEGER)")
         raise RuntimeError("injected migration failure")
 
