@@ -1,3 +1,13 @@
+# PR9-B — active transaction/persistence handoff — 2026-10-09
+
+Accepted main `c83dba190b957300cad54c9c8df5afc01f86de60` (#186 merged; PR9-A complete), #184 PR9-ARCH implementation contract merged. Current Issue #187, branch `feat/pr9-b-shopping-persistence`.
+
+Read root AGENTS, current-focus, scoped backend/app/persistence AGENTS, [frozen PR9 contract](../docs/family-food/pr9-shopping-implementation-contract.md), migration rules, `backend/app/domain/shopping_calculation.py`, `backend/app/services/shopping.py` and `backend/app/persistence/sqlalchemy_core/shopping_uow.py`. DBAPI autocommit=False requires explicit physical BEGIN IMMEDIATE and commit/rollback; verify with two independent connections. Migration 0043 registered in custom runner and lineage for this branch; no 0043 existed on accepted main. Run fresh + upgrade + rollback/tenant tests, full backend/launcher regressions and scope lint before review-ready. Preserve Pantry read-only, immutable historical Shopping, and price_status UNKNOWN.
+
+No API/consumer UI/Prep/Retail/AI. PR9-B NOT MERGED, PR9 overall NOT COMPLETE, PR9-C NOT STARTED.
+
+---
+
 # PR9-A — current implementation handoff — 2026-10-09
 
 Accepted `main@b787dace4174ac9bf3bd6026efdfb64db5f43441` (PR #184 merged, PR9-ARCH accepted). Current bounded task Issue #185; branch `feat/pr9-a-shopping-calculation`.
