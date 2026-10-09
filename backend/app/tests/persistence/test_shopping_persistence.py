@@ -148,6 +148,36 @@ def test_generation_immutable_roundtrip_idempotent_and_price_unknown(store):
             )
 
 
+def test_new_meal_plan_revision_stales_old_list_but_preserves_history(store):
+    _, engine = store
+    household, first_plan = _prepare(engine)
+    service = _service(engine)
+    historical = service.generate(household.id, first_plan.plan.id)
+    pin = first_plan.member_selections[0]
+    successor_plan = _plan(
+        household.id,
+        pin.member_id,
+        pin.selection_id,
+        revision=2,
+        supersedes=first_plan.plan.id,
+    )
+    with SqlAlchemyMealPlanUnitOfWork(engine) as scope:
+        scope.plans.add_detail(successor_plan)
+        scope.commit()
+
+    current = service.get_current(household.id, first_plan.plan.id)
+    assert current.stale is True
+    assert current.reason == "PLAN_REVISION_CHANGED"
+    assert current.detail == historical
+    with pytest.raises(ShoppingPersistenceConflictError, match="ревизия"):
+        service.generate(household.id, first_plan.plan.id)
+    # Historical list remains immutable, while a new plan revision is eligible.
+    assert service.get_detail(household.id, historical.shopping_list.id) == historical
+    latest = service.generate(household.id, successor_plan.plan.id)
+    assert latest.shopping_list.source_plan_revision_number == 2
+    assert latest.shopping_list.meal_plan_id == successor_plan.plan.id
+
+
 def test_unresolved_obligation_roundtrip_and_foreign_household_hidden(store):
     _, engine = store
     household, plan = _prepare(engine, unresolved=True)
