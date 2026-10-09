@@ -404,9 +404,11 @@ def test_competing_writer_timeout_is_retryable_and_releases_connection(store):
     competing = sqlite3.connect(config.path, timeout=0)
     try:
         competing.execute("BEGIN IMMEDIATE")
-        with pytest.raises(ShoppingPersistenceConflictError, match="busy"):
-            with SqlAlchemyShoppingUnitOfWork(engine):
-                pytest.fail("No Shopping source read may occur without writer lock")
+        with (
+            pytest.raises(ShoppingPersistenceConflictError, match="busy"),
+            SqlAlchemyShoppingUnitOfWork(engine),
+        ):
+            pytest.fail("No Shopping source read may occur without writer lock")
     finally:
         competing.rollback()
         competing.close()

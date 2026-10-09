@@ -55,7 +55,7 @@ class ShoppingList:
         if not isinstance(self.as_of_date, date) or isinstance(
             self.as_of_date, datetime
         ):
-            raise ValueError("as_of_date must be date")
+            raise TypeError("as_of_date must be date")
         if not self.engine_version or not self.pantry_policy_version:
             raise ValueError("Shopping engine/policy identity is required")
         if not self.provenance_json:

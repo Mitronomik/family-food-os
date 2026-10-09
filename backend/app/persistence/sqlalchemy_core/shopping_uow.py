@@ -7,6 +7,7 @@ SQL transaction mode and restores the pooled connection on exit.
 """
 
 from types import TracebackType
+from typing import Self
 
 from sqlalchemy.engine import Connection, Engine
 from sqlalchemy.exc import DBAPIError, IntegrityError, OperationalError
@@ -57,7 +58,7 @@ class SqlAlchemyShoppingUnitOfWork(_ShoppingRepositories):
         self._dbapi = None
         self._original_autocommit = None
 
-    def __enter__(self) -> "SqlAlchemyShoppingUnitOfWork":
+    def __enter__(self) -> Self:
         if self._used:
             raise RuntimeError("Shopping UoW is single-use")
         self._used = True
@@ -162,7 +163,7 @@ class SqlAlchemyShoppingReadScope(_ShoppingRepositories):
     def __init__(self, engine: Engine) -> None:
         self._scope = SqlAlchemyReadOnlyScope(engine)
 
-    def __enter__(self) -> "SqlAlchemyShoppingReadScope":
+    def __enter__(self) -> Self:
         self._scope.__enter__()
         self._bind(self._scope.adapter_connection)
         return self
