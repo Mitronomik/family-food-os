@@ -1,30 +1,38 @@
 """PR9-B SQLite Shopping migration, atomic UoW and application tests."""
-from dataclasses import replace
-from datetime import datetime, timedelta, timezone
 import sqlite3
-from uuid import uuid4
+from dataclasses import replace
+from datetime import timedelta
 
 import pytest
-from sqlalchemy import insert
-
 from app.db.config import DatabaseConfig
 from app.db.migrations import (
-    MIGRATION_MODULES, apply_migrations, expected_migration_ids,
+    MIGRATION_MODULES,
+    apply_migrations,
+    expected_migration_ids,
 )
 from app.domain.meal_plans import MealSourceKind
 from app.domain.shopping_calculation import ShoppingPriceStatus, ShoppingStatus
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
 from app.persistence.sqlalchemy_core.meal_plan_uow import SqlAlchemyMealPlanUnitOfWork
-from app.persistence.sqlalchemy_core.shopping_repositories import SqlAlchemyShoppingListRepository
+from app.persistence.sqlalchemy_core.shopping_repositories import (
+    SqlAlchemyShoppingListRepository,
+)
 from app.persistence.sqlalchemy_core.shopping_tables import shopping_lists_table
 from app.persistence.sqlalchemy_core.shopping_uow import (
-    SqlAlchemyShoppingReadScope, SqlAlchemyShoppingUnitOfWork,
+    SqlAlchemyShoppingReadScope,
+    SqlAlchemyShoppingUnitOfWork,
 )
 from app.services.shopping import ShoppingService
 from app.services.shopping_contracts import ShoppingNotFoundError
 from app.tests.persistence.test_meal_plan_repository import (
-    NOW, _household, _member, _plan, _seed_household, _selection,
+    NOW,
+    _household,
+    _member,
+    _plan,
+    _seed_household,
+    _selection,
 )
+from sqlalchemy import insert
 
 
 @pytest.fixture
