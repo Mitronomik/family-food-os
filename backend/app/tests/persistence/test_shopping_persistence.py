@@ -16,8 +16,13 @@ from app.db.migrations import (
 from app.domain.food_ingredients import FoodIngredient
 from app.domain.meal_plans import MealSourceKind
 from app.domain.pantry import PantryItem
-from app.domain.shopping_calculation import ShoppingPriceStatus, ShoppingStatus
+from app.domain.shopping_calculation import (
+    ShoppingCalculationError,
+    ShoppingPriceStatus,
+    ShoppingStatus,
+)
 from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
+from app.persistence.sqlalchemy_core.food_ingredient_tables import food_ingredients_table
 from app.persistence.sqlalchemy_core.food_recipe_uow import (
     SqlAlchemyRecipeCatalogueUnitOfWork,
 )
@@ -45,7 +50,7 @@ from app.tests.persistence.test_meal_plan_repository import (
     _selection,
 )
 from app.tests.test_food_recipe_domain import _detail
-from sqlalchemy import insert
+from sqlalchemy import insert, update
 
 
 @pytest.fixture
@@ -354,6 +359,23 @@ def test_full_recipe_pantry_generation_roundtrip_provenance_and_stale(store):
         newer.shopping_list.source_pantry_snapshot_hash
         != saved.shopping_list.source_pantry_snapshot_hash
     )
+    assert service.get_detail(household.id, saved.shopping_list.id) == saved
+    assert len(service.list_history(household.id, plan.plan.id)) == 2
+
+    # A later source catalogue withdrawal cannot make historical Shopping
+    # invisible or incorrectly CURRENT; numeric regeneration fails closed.
+    with engine.begin() as connection:
+        connection.execute(
+            update(food_ingredients_table)
+            .where(food_ingredients_table.c.id == rice.id)
+            .values(is_active=False)
+        )
+    invalidated = service.get_current(household.id, plan.plan.id)
+    assert invalidated.stale is True
+    assert invalidated.reason == "SOURCE_INVALID"
+    assert invalidated.detail == newer
+    with pytest.raises(ShoppingCalculationError):
+        service.generate(household.id, plan.plan.id)
     assert service.get_detail(household.id, saved.shopping_list.id) == saved
     assert len(service.list_history(household.id, plan.plan.id)) == 2
 
