@@ -270,7 +270,7 @@ def test_r1c_catalogue_metrics_match_durable_receipt(database):
     assert main_rows["USSR82-208"]["current_blockers"]
 
     assert migrations.expected_migration_ids()[-1] == (
-        "0042_recipe_prepared_output_nutrition"
+        "0043_shopping_engine"
     )
 
 
