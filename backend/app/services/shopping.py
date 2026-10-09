@@ -16,6 +16,7 @@ from uuid import UUID, uuid4
 from app.domain.meal_plans import MealSourceKind
 from app.domain.shopping_calculation import (
     ShoppingCalculation,
+    ShoppingCalculationError,
     calculate_shopping,
 )
 from app.domain.shopping_lists import (
@@ -281,6 +282,10 @@ class ShoppingService:
                 calculated, _ = self._calculate(scope, household_id, plan_id, captured)
             except ShoppingPersistenceConflictError:
                 return ShoppingCurrent(latest, True, "PLAN_REVISION_CHANGED")
+            except ShoppingCalculationError:
+                # The original derived snapshot stays readable even if a
+                # later catalogue/recipe edit makes recalculation fail closed.
+                return ShoppingCurrent(latest, True, "SOURCE_INVALID")
             stored = latest.shopping_list
             stale = (
                 stored.source_fingerprint != calculated.source_fingerprint
