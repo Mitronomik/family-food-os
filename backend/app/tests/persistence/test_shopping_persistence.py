@@ -30,7 +30,10 @@ from app.persistence.sqlalchemy_core.shopping_uow import (
     SqlAlchemyShoppingUnitOfWork,
 )
 from app.services.shopping import ShoppingService
-from app.services.shopping_contracts import ShoppingNotFoundError
+from app.services.shopping_contracts import (
+    ShoppingNotFoundError,
+    ShoppingPersistenceConflictError,
+)
 from app.tests.test_food_recipe_domain import _detail
 from app.tests.persistence.test_meal_plan_repository import (
     NOW,
@@ -340,3 +343,41 @@ def test_0043_failure_rolls_back_tables_and_marker(tmp_path, monkeypatch):
         ).fetchone() is None
     monkeypatch.setattr(module, "upgrade", upgrade)
     assert apply_migrations(config) == ["0043_shopping_engine"]
+
+
+def test_competing_writer_timeout_is_retryable_and_releases_connection(store):
+    config, engine = store
+    household, plan = _prepare(engine)
+    competing = sqlite3.connect(config.path, timeout=0)
+    try:
+        competing.execute("BEGIN IMMEDIATE")
+        with pytest.raises(ShoppingPersistenceConflictError, match="busy"):
+            with SqlAlchemyShoppingUnitOfWork(engine):
+                pytest.fail("No Shopping source read may occur without writer lock")
+    finally:
+        competing.rollback()
+        competing.close()
+    # Failed acquisition did not leave a poisoned pooled connection.
+    saved = _service(engine).generate(household.id, plan.plan.id)
+    assert saved.shopping_list.household_id == household.id
+
+
+def test_backup_preserves_immutable_shopping_and_legacy_household(store, tmp_path):
+    config, engine = store
+    household, plan = _prepare(engine, unresolved=True)
+    saved = _service(engine).generate(household.id, plan.plan.id)
+    backup = tmp_path / "backup.sqlite"
+    with sqlite3.connect(config.path) as source:
+        with sqlite3.connect(backup) as target:
+            source.backup(target)
+    with sqlite3.connect(backup) as restored:
+        restored.execute("PRAGMA foreign_keys=ON")
+        assert restored.execute("PRAGMA foreign_key_check").fetchall() == []
+        assert restored.execute("SELECT COUNT(*) FROM households").fetchone()[0] >= 1
+        assert restored.execute("SELECT COUNT(*) FROM shopping_lists").fetchone()[0] == 1
+        assert restored.execute(
+            "SELECT COUNT(*) FROM shopping_unresolved_obligations"
+        ).fetchone()[0] == 1
+        assert restored.execute(
+            "SELECT id FROM shopping_lists"
+        ).fetchone()[0] == saved.shopping_list.id.hex
