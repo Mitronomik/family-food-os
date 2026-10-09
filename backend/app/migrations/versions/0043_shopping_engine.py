@@ -40,6 +40,7 @@ def upgrade(connection):
           supersedes_list_id CHAR(32) REFERENCES shopping_lists(id) ON DELETE RESTRICT,
           created_at DATETIME NOT NULL,
           UNIQUE(id, household_id),
+          UNIQUE(supersedes_list_id),
           UNIQUE(household_id, meal_plan_id, source_fingerprint)
         )
     """)
