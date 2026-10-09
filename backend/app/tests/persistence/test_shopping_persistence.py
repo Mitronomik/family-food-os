@@ -364,6 +364,19 @@ def test_full_recipe_pantry_generation_roundtrip_provenance_and_stale(store):
     assert service.get_current(household.id, plan.plan.id).detail == newer
     assert service.get_current(household.id, plan.plan.id).stale is False
 
+    # Reverting Pantry to the exact earlier eligible snapshot must reuse
+    # its original immutable list instead of reporting the latest B as current.
+    with SqlAlchemyPantryUnitOfWork(engine) as scope:
+        scope.items.update_metadata(
+            replace(stock, estimated=False, updated_at=NOW + timedelta(days=2))
+        )
+        scope.commit()
+    assert service.generate(household.id, plan.plan.id) == saved
+    returned = service.get_current(household.id, plan.plan.id)
+    assert returned.stale is False
+    assert returned.detail == saved
+    assert service.list_history(household.id, plan.plan.id) == [saved, newer]
+
     # A later source catalogue withdrawal cannot make historical Shopping
     # invisible or incorrectly CURRENT; numeric regeneration fails closed.
     with engine.begin() as connection:
