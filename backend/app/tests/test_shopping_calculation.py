@@ -7,7 +7,6 @@ from uuid import uuid4
 
 import pytest
 
-from app.domain.food_recipes import RecipeVersionDetail
 from app.domain.meal_patterns import MealRole
 from app.domain.meal_plans import (
     HouseholdMealEvent,
