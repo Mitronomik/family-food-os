@@ -1,3 +1,11 @@
+# PR9-B — CI verification follow-up — 2026-10-10
+
+Review PR #188 on `feat/pr9-b-shopping-persistence` against accepted base `c83dba190b957300cad54c9c8df5afc01f86de60`. The two residual failed exact-head checks were R1-F/R1-H `Ruff UP017` in unchanged legacy fixture tests. The workflows installed unpinned Ruff; earlier exact-head SUCCESS installed 0.16.10, later failing runs installed 0.16.8/0.17.0. Pinned both legacy workflows to 0.16.10 (toolchain-only correction, no ignored lint rules or source rewrites). Confirm latest 26/26 exact-head workflows, especially R1-F/R1-H and full backend/launcher, before ready-for-review decision. Historical 24/26 failure remains factual evidence; do not reuse it as full regression PASS.
+
+Shopping source identity, atomic UoW, errors and concurrency regressions remain unchanged. No merge, API/PR9-C, Prep/PR10 or Pantry writes authorized.
+
+---
+
 # PR9-B independent-review corrections — 2026-10-10
 
 Same Issue #187 / PR #188 / branch feat/pr9-b-shopping-persistence; accepted base main@c83dba190b957300cad54c9c8df5afc01f86de60. The 2026-10-10 review identified missing FoodIngredient sort fields in the previously accepted PR9-A source fingerprint, raw SQLAlchemy exceptions during PR9-B repository INSERT, and missing two-Service same-input concurrency proof. The corrective changes are intentionally within PR9-B: pin category_code and canonical_name_key as well as canonical_code/default_unit, translate IntegrityError into ShoppingPersistenceConflictError and other DBAPI errors into ShoppingPersistenceError (busy/locked remains a retryable conflict), preserve exception chaining, and verify rollback/current/stale/successor semantics.
