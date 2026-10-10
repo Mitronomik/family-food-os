@@ -46,12 +46,12 @@ def _move_to_valid_alternate_event(receipt):
     pairs = {
         (s["event_id"], s["member_id"]) for s in receipt["plan"]["servings"]
     }
-    selected = receipt["plan"]["servings"][0]
-    target = next(
-        event["event_id"]
+    selected, target = next(
+        (serving, event["event_id"])
+        for serving in receipt["plan"]["servings"]
         for event in receipt["plan"]["events"]
-        if event["event_id"] != selected["event_id"]
-        and (event["event_id"], selected["member_id"]) not in pairs
+        if event["event_id"] != serving["event_id"]
+        and (event["event_id"], serving["member_id"]) not in pairs
     )
     selected["event_id"] = target
 
@@ -109,7 +109,11 @@ def _duplicate_event_member_pair(receipt):
             else "DINNER"
         ),
         lambda r: r["plan"]["events"][0].update(
-            local_date=r["plan"]["events"][1]["local_date"]
+            local_date=next(
+                event["local_date"]
+                for event in r["plan"]["events"]
+                if event["local_date"] != r["plan"]["events"][0]["local_date"]
+            )
         ),
         lambda r: r["planner"].update(
             expected_semantic_pins_sha256="a" * 64
