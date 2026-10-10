@@ -1,3 +1,12 @@
+# PR10-META-FIXTURE — evidence follow-up after BLOCKED receipt — 2026-10-10
+
+- Confirmed PR #194 merged at `main@05610128ad7c1156e5908b809606a5cb7223acce`; accepted PR10-META receipt is **BLOCKED**, not READY.
+- Issue #195 / evidence branch: isolated synthetic SQLite seed + accepted `PlannerService.generate_authoritative`, persisted MealPlan read-back, machine evidence for 3 members/21 events/42 Servings, verified active recipe version/step source hashes, Planner-v0.5 deterministic trace. No production DB or model changes.
+- Scoped CI, tamper tests, artifact SHA256 and documentation verification required on final PR head. Full backend regression not required for isolated evidence script with byte-unchanged shared runtime.
+- Gate still BLOCKED without verified food-state storage/holding/reheat/freezer and a shared task covering >=2 real events with fewer distinct physical actions. PR10-A/B/C, Prep execution, PR10-PDF, Gate 2 not started.
+
+---
+
 # PR10-META — candidate evidence + BLOCKED assessment — 2026-10-10
 
 - PR #192 PR10-ARCH **MERGED** 2026-10-10T12:54:21Z; main `6189fc634030a6d011ed930ed70690e196af3ba0` accepted. Mandatory PR10-META precedes PR10-A/B/C.
