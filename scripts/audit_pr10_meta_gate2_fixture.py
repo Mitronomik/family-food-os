@@ -51,7 +51,7 @@ def _hash(value: object) -> str:
 def _finite_portion(value: object) -> str:
     """Canonical exact Decimal amount, rejecting NaN, infinity, invalid and zero."""
     if not isinstance(value, str):
-        raise ValueError("Serving amount must be a finite Decimal string")
+        raise TypeError("Serving amount must be a finite Decimal string")
     try:
         amount = Decimal(value)
     except InvalidOperation as exc:
