@@ -20,7 +20,9 @@ from app.api.exports import router as exports_router
 from app.api.health import router as health_router
 from app.api.households import create_households_router
 from app.api.pantry import create_pantry_router
+from app.api.shopping import create_shopping_router
 from app.persistence.sqlalchemy_core.pantry_composition import create_pantry_service
+from app.persistence.sqlalchemy_core.shopping_composition import create_shopping_service
 from app.api.ingredients import router as ingredients_router
 from app.api.imports import router as imports_router
 from app.api.ingredient_lots import router as ingredient_lots_router
@@ -71,13 +73,28 @@ def _omits_tax_rate_context(exc: RequestValidationError) -> bool:
 
 
 async def _validation_error_response(request: Request, exc: RequestValidationError):
-    """Give an omitted confirmation tax context the stable structured code.
+    """Give domain-specific validation boundaries safe structured errors.
 
     An outdated client that omits `expected_tax_rate_percent` or
     `expected_tax_rate_effective_at` must learn that from the repository's own
     error contract rather than from raw Pydantic internals. Every other
     validation error keeps FastAPI's existing response byte for byte.
     """
+    # Shopping's public API must never expose English Pydantic diagnostics,
+    # internal field values or unchecked request payloads in user messages.
+    if "/shopping-lists" in request.url.path and request.url.path.startswith(
+        "/api/households/"
+    ):
+        return JSONResponse(
+            status_code=422,
+            content={
+                "detail": {
+                    "code": "SHOPPING_INVALID_REQUEST",
+                    "message": "Некорректные параметры списка покупок.",
+                    "next_action": "Проверьте идентификаторы и формат запроса.",
+                }
+            },
+        )
     if not _omits_tax_rate_context(exc):
         return await request_validation_exception_handler(request, exc)
     issue = missing_tax_rate_context_error().issue
@@ -136,7 +153,9 @@ def create_app() -> FastAPI:
     app.state.household_engine = household_engine
     household_service = create_household_service(household_engine)
     pantry_service = create_pantry_service(household_engine)
+    shopping_service = create_shopping_service(household_engine)
     app.include_router(create_pantry_router(lambda: pantry_service), prefix="/api")
+    app.include_router(create_shopping_router(lambda: shopping_service), prefix="/api")
     app.include_router(alerts_router, prefix="/api")
     app.include_router(audit_logs_router, prefix="/api")
     app.include_router(backups_router, prefix="/api")
