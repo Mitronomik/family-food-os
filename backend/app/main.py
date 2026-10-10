@@ -19,10 +19,6 @@ from app.api.demo_data import router as demo_data_router
 from app.api.exports import router as exports_router
 from app.api.health import router as health_router
 from app.api.households import create_households_router
-from app.api.pantry import create_pantry_router
-from app.api.shopping import create_shopping_router
-from app.persistence.sqlalchemy_core.pantry_composition import create_pantry_service
-from app.persistence.sqlalchemy_core.shopping_composition import create_shopping_service
 from app.api.ingredients import router as ingredients_router
 from app.api.imports import router as imports_router
 from app.api.ingredient_lots import router as ingredient_lots_router
@@ -31,27 +27,31 @@ from app.api.onboarding import router as onboarding_router
 from app.api.orders import router as orders_router
 from app.api.packaging_items import router as packaging_items_router
 from app.api.packaging_stock_movements import router as packaging_stock_movements_router
-from app.api.production_readiness import router as production_readiness_router
-from app.api.production_confirmation import router as production_confirmation_router
+from app.api.pantry import create_pantry_router
 from app.api.production_batches import router as production_batches_router
+from app.api.production_confirmation import router as production_confirmation_router
+from app.api.production_readiness import router as production_readiness_router
 from app.api.purchase_suggestions import router as purchase_suggestions_router
 from app.api.recipes import router as recipes_router
 from app.api.report_documents import router as report_documents_router
 from app.api.reports import router as reports_router
 from app.api.settings import router as settings_router
+from app.api.shopping import create_shopping_router
 from app.api.stock_movements import router as stock_movements_router
 from app.api.tax_rate_settings import router as tax_rate_settings_router
-from app.identity import APP_SLUG, PRODUCT_NAME
-from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
-from app.persistence.sqlalchemy_core.household_composition import (
-    create_household_service,
-)
-from app.services.backend_liveness import acquire_backend_liveness_lock
 from app.domain.production_tax_context import (
     EXPECTED_EFFECTIVE_AT_FIELD,
     EXPECTED_PERCENT_FIELD,
     missing_tax_rate_context_error,
 )
+from app.identity import APP_SLUG, PRODUCT_NAME
+from app.persistence.sqlalchemy_core.engine import create_sqlite_engine
+from app.persistence.sqlalchemy_core.household_composition import (
+    create_household_service,
+)
+from app.persistence.sqlalchemy_core.pantry_composition import create_pantry_service
+from app.persistence.sqlalchemy_core.shopping_composition import create_shopping_service
+from app.services.backend_liveness import acquire_backend_liveness_lock
 from app.version import resolve_effective_app_version
 
 APP_NAME = APP_SLUG
