@@ -1,3 +1,13 @@
+# PR10-META-DATA — source/stage authority decision handoff — 2026-10-10
+
+Accepted base `main@577bbeab86ba77f1d05ae8c6a4cabd042e98d05d`, PR #202 merged. Current Issue #203, branch `docs/pr10-meta-reviewed-stage-authority-current`; read root `AGENTS.md`, `state/current-focus.md`, accepted PR10-ARCH, [reviewed stage preflight](../docs/family-food/pr10-meta-reviewed-stage-authority.md), [evidence JSON](../docs/family-food/pr10-meta-reviewed-stage-authority.json), [PR #202 same-day pair](../docs/family-food/pr10-meta-same-day-pair-evidence.json), R3-D primary source card 2.11/1.16.
+
+Tuesday 2026-09-15 lunch event `cf0e3fe3-4c59-4447-9fbd-7a9e19c6ff49` ragout RecipeVersion `063694fb-92cf-4731-adf6-041d36a532e4`, dinner `d000a213-d169-4f10-a2ad-08180f40aea6` pea soup RecipeVersion `116e25fa-12f3-4926-8a2a-7aa2cf99bb9c`. Same CARROT/ONION_BULB_FRESH codes; source MR1.16 preamble **does** require clean/peel/wash but published consumer recipe step omits distinct stage. MR2.11 only says prepared onion/carrot and requires fine chop; different source RecipeSteps and internal water/sauce splits. No reviewed shared-output form identity or real net reduction after splitting/holding/cleanup, no pinned same prep session.
+
+Proposed `ReviewedPrepStageBindingV1` only as **future reviewed source publication**, not production schema; accepted three Prep tables unchanged. Source-specific safety unknown, keep `PR10-META=BLOCKED`, PR10-A/B/C, PDF and Gate2 unauthorized. Docs CI and independent review required; do not merge autonomously. Next only if accepted: scope separate source/recipe-process authority publication review, possibly immutable RecipeVersion correction, before runtime.
+
+---
+
 # PR10-META-ALTERNATIVE — same-day raw-vegetable candidate handoff — 2026-10-10
 
 **Base:** `main@9a8e978c5aecb5c5390e9189acb0a0536f05e426`, merged PR #200. Current docs-only Issue #201 and branch `docs/pr10-meta-same-day-pair-audit`. Read root/scoped AGENTS, accepted PR10 contract, [alternative audit](../docs/family-food/pr10-meta-same-day-pair-audit.md), [machine receipt](../docs/family-food/pr10-meta-same-day-pair-evidence.json), accepted [R3-D source cards](../data/curation/r3d-final-dc3-batch-gate/frozen-batch.json) and merged [safety NO-GO](../docs/family-food/pr10-meta-safety-source-scope.md).
