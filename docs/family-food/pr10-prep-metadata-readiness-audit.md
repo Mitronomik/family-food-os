@@ -1,7 +1,7 @@
 # PR10-ARCH — bounded recipe metadata-readiness audit
 
-**Status:** reproducible source-manifest audit, **not** a kitchen-safety certification or Gate 2 acceptance.  
-**Audited repository:** `main@545c86b4dd39ba3b14e0c36fcbc4733da1137d14` (merged PR #190), 2026-10-10.  
+**Status:** reproducible source-manifest audit, **not** a kitchen-safety certification or Gate 2 acceptance.
+**Audited repository:** `main@545c86b4dd39ba3b14e0c36fcbc4733da1137d14` (merged PR #190), 2026-10-10.
 **Owning review:** Issue #191 / PR #192; companion to [PR10-ARCH contract](pr10-prep-freezer-implementation-contract.md).
 
 ## 1. Selection and reproducibility
@@ -10,7 +10,7 @@ The accepted [DC4 rerun evidence](../../data/curation/dc4-corpus-readiness/rerun
 
 Source manifests (all paths repository-relative) and included code counts:
 
-| Source manifest | Candidate recipes also in accepted DC4 | 
+| Source manifest | Candidate recipes also in accepted DC4 |
 | --- | ---: |
 | [R1-G](../../data/curation/r1g-catalogue-capacity-expansion/prepared-publication-specs.json) | 2 |
 | [R2 breakfast](../../data/curation/r2-breakfast-capacity/publication-specs.json) | 2 |
