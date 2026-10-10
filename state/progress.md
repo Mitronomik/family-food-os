@@ -1,3 +1,11 @@
+# PR9-C — Shopping API delivery in progress — 2026-10-10
+
+- #188 PR9-B MERGED at `main@9e9db57e7d8ffc8b155c662b0091555de7dc8a34`, immutable SQLite Shopping foundation accepted; exact-head 26/26 CI SUCCESS.
+- Issue #189 PR9-C: bounded HTTP adapter over unchanged ShoppingService, explicit Decimal-string/status/FEFO provenance DTOs, current/stale/missing state, safe Russian errors, household-scoped API tests and shared-engine composition. No new database migration or authoritative Shopping/Pantry logic.
+- Branch `feat/pr9-c-shopping-http-api`. Focused PR9-C CI + required full backend/launcher regression pending after implementation. Independent review required; no merge/PR10.
+
+---
+
 # PR9-B — CI toolchain correction on PR #188 — 2026-10-10
 
 - Independent review corrections remain scoped to PR9-B; source fingerprint, DBAPI error taxonomy and concurrency evidence are implemented and focused Shopping tests pass.
