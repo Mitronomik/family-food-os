@@ -1,0 +1,50 @@
+name: PR9-C Shopping API acceptance
+
+on:
+  pull_request:
+    paths:
+      - 'backend/app/api/shopping.py'
+      - 'backend/app/schemas/shopping.py'
+      - 'backend/app/persistence/sqlalchemy_core/shopping_composition.py'
+      - 'backend/app/main.py'
+      - 'backend/app/tests/test_shopping_api.py'
+      - '.github/workflows/pr9-c-shopping-api.yml'
+      - 'state/current-focus.md'
+      - 'state/progress.md'
+      - 'state/handoff.md'
+
+permissions:
+  contents: read
+
+jobs:
+  shopping-http:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      AI_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install backend and frozen Ruff baseline
+        run: |
+          python -m pip install -e './backend[test]' 'ruff==0.16.10'
+      - name: Shopping HTTP and persisted domain regression
+        run: |
+          python -m pytest -q backend/app/tests/test_shopping_api.py --tb=short
+          python -m pytest -q backend/app/tests/persistence/test_shopping_persistence.py backend/app/tests/test_shopping_calculation.py --tb=short
+          python -m pytest -q backend/app/tests/test_households_api.py backend/app/tests/test_pantry_api.py --tb=short
+      - name: Ruff check and formatting
+        run: |
+          python -m ruff check backend/app/api/shopping.py backend/app/schemas/shopping.py backend/app/persistence/sqlalchemy_core/shopping_composition.py backend/app/main.py backend/app/tests/test_shopping_api.py
+          python -m ruff format --diff backend/app/api/shopping.py backend/app/schemas/shopping.py backend/app/persistence/sqlalchemy_core/shopping_composition.py backend/app/main.py backend/app/tests/test_shopping_api.py
+          python -m ruff format --check backend/app/api/shopping.py backend/app/schemas/shopping.py backend/app/persistence/sqlalchemy_core/shopping_composition.py backend/app/main.py backend/app/tests/test_shopping_api.py
+      - name: Diff whitespace
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          git diff --check "$BASE_SHA"...HEAD
+          test "$AI_ENABLED" = false

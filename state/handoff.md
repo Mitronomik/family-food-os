@@ -1,3 +1,19 @@
+# PR9-C — query validation review blocker correction — 2026-10-10
+
+The latest independent review of PR #190 requested strict rejection of **all Shopping query parameters** (none are supported in PR9-C). Correction is a single router-level FastAPI `Depends` gate on `APIRouter(dependencies=[...])`, executed before endpoint handlers and service/database writes. It returns exactly the existing `SHOPPING_INVALID_REQUEST` 422 JSON envelope, with Russian message/next_action; invalid body and path values still use existing Shopping-safe 422 translation. Focused TestClient verifies all five routes and that rejected POSTs do not create lists, child obligations or Pantry movements. No ShoppingService, PR9-A/B, migration or architecture change.
+
+Verify **new exact head** with PR9-C specialized workflow, Ruff/format/whitespace, and full backend/launcher regression per verification policy; do not reuse old 23/23 as post-fix CI. PR #190 remains open, no merge. PR9-C next independent review; PR9 overall/PR10 still gated.
+
+---
+
+# PR9-C — HTTP API handoff — 2026-10-10
+
+Accepted `main@9e9db57e7d8ffc8b155c662b0091555de7dc8a34`: PR #188 PR9-B merged after exact-head 26/26 SUCCESS. Current issue #189, branch `feat/pr9-c-shopping-http-api`. Read root/scoped AGENTS, Issue #189, frozen `docs/family-food/pr9-shopping-implementation-contract.md` §6, `backend/app/services/shopping.py`, `backend/app/api/shopping.py`, `backend/app/schemas/shopping.py`, `backend/app/persistence/sqlalchemy_core/shopping_composition.py`, `backend/app/tests/test_shopping_api.py`.
+
+Implementation is adapter-only: ShoppingService remains numeric/lifecycle authority; Pydantic output retains exact quantity strings and separately translated Russian status/warning labels; allowlisted warnings/allocations from persisted source JSON; no raw provenance leakage; 404/409/422/503 safe machine codes; `main.create_app()` reuses household SQLite engine. Verify missing/current/stale, exact Pantry revert restoring older current snapshot, FEFO, wrong-household and invalid-input constraints, SQLite busy and concurrency. Required focus tests and full backend+launcher exact-head CI before review-ready. Do not start PR10/Prep, PWA, Retail, Auth, AI or alter the approved 0043 schema. Do not autonomously merge.
+
+---
+
 # PR9-B — CI verification follow-up — 2026-10-10
 
 Review PR #188 on `feat/pr9-b-shopping-persistence` against accepted base `c83dba190b957300cad54c9c8df5afc01f86de60`. The two residual failed exact-head checks were R1-F/R1-H `Ruff UP017` in unchanged legacy fixture tests. The workflows installed unpinned Ruff; earlier exact-head SUCCESS installed 0.16.10, later failing runs installed 0.16.8/0.17.0. Pinned both legacy workflows to 0.16.10 (toolchain-only correction, no ignored lint rules or source rewrites). Confirm latest 26/26 exact-head workflows, especially R1-F/R1-H and full backend/launcher, before ready-for-review decision. Historical 24/26 failure remains factual evidence; do not reuse it as full regression PASS.
