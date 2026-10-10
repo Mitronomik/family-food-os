@@ -1,3 +1,15 @@
+# PR10-META-SHARED — exact two-event source candidate, storage BLOCKED — 2026-10-10
+
+**Accepted main:** `c73f8a935a1c8ab39d1897310ed326005d0b68fd` (#196 PR10-META-FIXTURE MERGED 2026-10-10T14:33:45Z). PR10-ARCH #192 MERGED, PR10-META blocked evidence #194 MERGED. **PR10-META remains BLOCKED**; no PR10-A/B/C, PR10-PDF or Gate 2 authorization.
+
+**Current authorized bounded work:** Issue #197, branch `docs/pr10-meta-shared-process-preflight`. Review the real synthetic Gate2 MealEvents 2026-09-18 SCHNITZEL and 2026-09-19 BITOCHEK from exact PR #196 artifact, their School2022 source/step hashes and shared ingredient identities. See [source review](../docs/family-food/pr10-meta-shared-process-preflight.md) and [machine-readable two-event pins](../docs/family-food/pr10-meta-shared-process-evidence.json).
+
+**Current evidence:** first preparation instruction identical and accepted provenance traceable; step 2 forms different dishes; no source-backed safe overnight hold/storage/freezing and no proven reduction in physical actions. Conditional candidate only. Follow-up requires independently reviewed composite raw meat/milk/bread holding and shared-component authority; do not change production Recipe/Planner/Pantry, publish safety values or imply `PR10-META READY`.
+
+State below is historical superseded focus, retained as evidence. No autonomous merge.
+
+---
+
 # PR10-META-FIXTURE — persisted 3-member source pins — 2026-10-10
 
 **Accepted main:** `05610128ad7c1156e5908b809606a5cb7223acce`, PR #194 PR10-META (BLOCKED evidence) **MERGED** at 2026-10-10T13:44:00Z. PR #192 PR10-ARCH MERGED. **Gate PR10-META still BLOCKED**; PR10-A/B/C/PDF and Gate 2 not authorized.

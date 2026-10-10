@@ -1,3 +1,13 @@
+# PR10-META-SHARED — source process preflight review handoff — 2026-10-10
+
+Merged base `main@c73f8a935a1c8ab39d1897310ed326005d0b68fd` (#196). Current docs-only Issue #197 / branch `docs/pr10-meta-shared-process-preflight`. Read root/scoped AGENTS, accepted PR10-ARCH, merged PR10-META blocked decision, [pair report](../docs/family-food/pr10-meta-shared-process-preflight.md), [frozen pair JSON](../docs/family-food/pr10-meta-shared-process-evidence.json), School2022 R3-A reviewed manifest and exact #196 artifact identity.
+
+**Pair:** Fri 2026-09-18 SCHNITZEL event `ece787f4-ac81-4390-b57f-211c220b02a9`; Sat 2026-09-19 BITOCHEK event `63c2c701-ce68-4637-8a96-07252d32fde5`. Both in same 3-member synthetic plan, matching first step text/SHA, base source ingredient rows; different form step and no approved overnight raw mince/milk/soaked bread cold-chain. Identical third-step text is **not** identical actual cooking across different days.
+
+**Decision:** candidate shared work identified; useful net physical action reduction and recipe-specific safety remain **BLOCKED**, so PR10-META stays BLOCKED and PR10-A/B/C cannot start. External Rospotrebnadzor/USDA safety context does not grant recipe-specific storage/defrost metadata. Separate narrow source-safety / shared-process evidence review needed next, no production process publication yet. Docs/links/whitespace CI, check JSON pair truth, independent review before merge; keep main working.
+
+---
+
 # PR10-META-FIXTURE — PR #196 receipt-validator review correction — 2026-10-10
 
 Independent review at `50ed16aaac05bde3c66db3c54014be6c53499f26` requested stronger evidence integrity. Corrected `scripts/audit_pr10_meta_gate2_fixture.py` validates exact counts, positive finite Decimals, event/member unique Serving pairs, source-step-derived process hashes, and cross-checks event→recipe / event→Serving semantic digest against **independent pure Planner result**. Separate optional external baseline SHA catches edits to both receipt and its embedded baseline; externally logged JSON SHA anchors the whole artifact. Added adversarial tests for valid-ID reassignments, duplicate pairs, Infinity/NaN, arbitrary hashes, falsified counts and forged embedded digest.

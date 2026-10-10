@@ -1,0 +1,174 @@
+{
+  "schema": "PR10_META_SHARED_PROCESS_PREFLIGHT_V1",
+  "decision": "BLOCKED_SOURCE_STORAGE_TRANSITION_UNVERIFIED",
+  "scope": "SYNTHETIC_PERSISTED_3_MEMBER_FIXTURE_SOURCE_REVIEW_ONLY",
+  "accepted_main_sha": "c73f8a935a1c8ab39d1897310ed326005d0b68fd",
+  "source_receipt": {
+    "pr": 196,
+    "run_id": 38059374826,
+    "artifact_id": 11672432141,
+    "artifact_json_sha256": "6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec",
+    "external_planner_semantic_sha256": "2d6cb581649863b7edbd3c0efff2bae2934c6a512c99a45d10e92f92f514cb3d",
+    "fixture_plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+    "fixture_member_count": 3,
+    "fixture_event_count": 21,
+    "fixture_serving_count": 42,
+    "fixture_catalogue_version_count": 51,
+    "fixture_week_start": "2026-09-14"
+  },
+  "reviewed_recipe_source": {
+    "manifest_path": "data/curation/r3a-school2022-main-batch/publication-specs.json",
+    "source_name": "ru-school2022",
+    "source_document_url": "https://www.niig.su/images/documents/science/Sbornik_receptur_blud_i_tipovyh_menyu_dlya_organizacii_pitaniya_obuchayushchihsya.pdf",
+    "source_document_sha256": "c9264cf521ae699fb30a964d5668caec8f31ff1efc1f13a3dd055df40ebafb5d",
+    "source_rights_review_status": "REVIEWED",
+    "source_variants": [
+      {
+        "recipe_source_id": "ru-school2022:recipe:54-7м",
+        "source_page": 120
+      },
+      {
+        "recipe_source_id": "ru-school2022:recipe:54-6м",
+        "source_page": 119
+      }
+    ]
+  },
+  "events": [
+    {
+      "local_date": "2026-09-18",
+      "role": "LUNCH",
+      "position": 2,
+      "event_id": "ece787f4-ac81-4390-b57f-211c220b02a9",
+      "recipe_code": "SCHOOL2022_54_7M_BEEF_SCHNITZEL",
+      "recipe_version_id": "343a786b-3338-4d30-825e-486ce70dae54",
+      "portion_servings": "3.751136",
+      "version_number": 1,
+      "process_hash": "df66b058337957720f8e0d88a3094fe439a2db29a363cf9ff7a61cb900a9299c",
+      "steps": [
+        {
+          "position": 1,
+          "recipe_step_id": "6b70713e-e300-4f64-a656-dca680a725eb",
+          "instruction_sha256": "2d5b8a370947b64df0b0526ab55caa970be93ee062438c066024d26ab8a689da"
+        },
+        {
+          "position": 2,
+          "recipe_step_id": "694856ba-6f7f-4bcb-ab02-a7fcab09ecae",
+          "instruction_sha256": "3d365768f234fe48a3401e5e41e64e975a4503a0a2e642f4ad0d15c7a5fdb915"
+        },
+        {
+          "position": 3,
+          "recipe_step_id": "3961c0fb-5158-490f-9f9a-76a72e3f3e4a",
+          "instruction_sha256": "11bf546fb904bf8955a21d1f8ad2ec437aee81d39ad1a03f2ab2c2086505ac56"
+        }
+      ]
+    },
+    {
+      "local_date": "2026-09-19",
+      "role": "LUNCH",
+      "position": 2,
+      "event_id": "63c2c701-ce68-4637-8a96-07252d32fde5",
+      "recipe_code": "SCHOOL2022_54_6M_BEEF_BITOCHEK",
+      "recipe_version_id": "34ec0fa8-c724-424c-819f-fa6823264d04",
+      "portion_servings": "3.751136",
+      "version_number": 1,
+      "process_hash": "fb6cd597cc1511d048fe2d7396fcdd956a5522138a5120a6df6a395421903993",
+      "steps": [
+        {
+          "position": 1,
+          "recipe_step_id": "a8d94d4a-848d-4023-9405-d90d65397194",
+          "instruction_sha256": "2d5b8a370947b64df0b0526ab55caa970be93ee062438c066024d26ab8a689da"
+        },
+        {
+          "position": 2,
+          "recipe_step_id": "42ee4daf-98b7-4771-a4da-91c106a77380",
+          "instruction_sha256": "745694ec57eade3de59124e77bfac0600b3a86e1f7437f9837d9116aea260b16"
+        },
+        {
+          "position": 3,
+          "recipe_step_id": "8d20c10e-f2c2-45dd-8b43-e7ec209efaab",
+          "instruction_sha256": "11bf546fb904bf8955a21d1f8ad2ec437aee81d39ad1a03f2ab2c2086505ac56"
+        }
+      ]
+    }
+  ],
+  "source_manifest_ingredient_identity": {
+    "base_servings": "1",
+    "source_rows_identical": true,
+    "identical_base_ingredient_rows": [
+      {
+        "code": "BEEF_CATEGORY_1_RAW",
+        "base_amount_g": "64.5"
+      },
+      {
+        "code": "MILK_2_5",
+        "base_amount_g": "17.3"
+      },
+      {
+        "code": "WHEAT_BREAD_STALE_UNSPECIFIED_GRADE",
+        "base_amount_g": "14.3"
+      },
+      {
+        "code": "BREADCRUMBS",
+        "base_amount_g": "8.3"
+      },
+      {
+        "code": "BUTTER_PEASANT_72_5_UNSALTED",
+        "base_amount_g": "5.3"
+      },
+      {
+        "code": "SALT_IODIZED",
+        "base_amount_g": "0.2"
+      }
+    ],
+    "scaled_totals_authority": "NOT_COMPUTED_HERE; backend Recipe/Serving/Shopping scaling is authoritative"
+  },
+  "shared_process_candidate": {
+    "step_position": 1,
+    "instruction_sha256": "2d5b8a370947b64df0b0526ab55caa970be93ee062438c066024d26ab8a689da",
+    "text_exactly_equal_in_two_reviewed_source_variants": true,
+    "step_action": "MINCE_RAW_BEEF_AND_COMBINE_WITH_MILK_SOAKED_WHEAT_BREAD",
+    "stage": "RAW_UNCOOKED_MIXTURE",
+    "shared_component_identity_status": "CANDIDATE_NOT_PUBLISHED",
+    "preparation_date": "2026-09-18",
+    "future_use_date": "2026-09-19",
+    "conditional_unshared_task_count": 2,
+    "conditional_shared_task_count": 1,
+    "operation_reduction_if_safety_proven": 1,
+    "operation_reduction_approved": false
+  },
+  "limits": {
+    "step_2": "DIFFERENT_FORMING: SCHNITZEL_VS_BITOCHEK",
+    "step_3": "SAME_SOURCE_TEXT_BUT_INCLUDES_SEPARATE_FINAL_COOKING; CANNOT_GROUP_ACROSS_MEAL_DATES",
+    "batch_friendly": null,
+    "freezable": null,
+    "storage_days_fridge": null,
+    "storage_days_freezer": null,
+    "prep_time_minutes": null,
+    "total_time_minutes": null,
+    "source_specific_hold_duration_hours": null,
+    "form_transition_review_status": "UNVERIFIED",
+    "safety_and_cooling_review_status": "UNVERIFIED",
+    "defrost_and_reheat_process": "UNVERIFIED",
+    "numeric_step_classification_status": "UNVERIFIED",
+    "independent_reduced_action_proof": "NOT_ESTABLISHED",
+    "planner_authorization": "NONE"
+  },
+  "external_context_only": [
+    {
+      "authority": "Роспотребнадзор",
+      "url": "https://zpp.rospotrebnadzor.ru/news/federal/244173",
+      "role": "GENERAL_RAW_GROUND_MEAT_STORAGE_ADVICE_ONLY_NOT_MILK_BREAD_BEEF_RECIPE_CERTIFICATION"
+    },
+    {
+      "authority": "USDA FSIS",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/meat/ground-beef-and-food-safety",
+      "role": "GENERAL_GROUND_BEEF_SAFETY_ONLY_NOT_JURISDICTION_SPECIFIC_RECIPE_STORAGE_AUTHORITY"
+    }
+  ],
+  "next_review_required": [
+    "INDEPENDENT_SOURCE_BACKED_OVERNIGHT_HOLD_AND_COLD_CHAIN_REVIEW_FOR_MIXED_RAW_BEEF_MILK_BREAD",
+    "IMMUTABLE_SHARED_COMPONENT_PUBLICATION_AUTHORITY_WITH_INPUT_FORMS_AND_DECIMAL_SERVING_SCALE",
+    "CONFIRM_PROCESS_AND_EQUIPMENT_COMPATIBILITY_AT_COMBINED_BATCH_SCALE",
+    "REVIEW_NUMERIC_STEP_TEXT_AND_PHYSICAL_OPERATION_COUNT_WITH_NO_STOCK_OR_TIME_FABRICATION"
+  ]
+}
