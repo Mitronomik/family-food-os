@@ -1,3 +1,13 @@
+# PR10-ARCH — corrections for #192 review — 2026-10-10
+
+Accepted main `545c86b4dd39ba3b14e0c36fcbc4733da1137d14` (#190 merged). Corrected docs-only branch `docs/pr10-prep-freezer-contract`, Issue #191 / PR #192. Before next step read root `AGENTS.md`, this focus, [PR10 contract](../docs/family-food/pr10-prep-freezer-implementation-contract.md) and [30-candidate metadata audit](../docs/family-food/pr10-prep-metadata-readiness-audit.md).
+
+Contract decisions prepared for independent review: **three fixed normalized immutable Prep tables**, unresolved reason enum + nullable-step expression unique index + composite Household FK + status equivalence; shared group keys preserving source event contributions; numeric RecipeStep fail-closed classification, original source process text not a scaled ingredient authority; immutable review classification/source hashes; quantitative benefit threshold >=1 reviewed safe shared/advance operation spanning >=2 MealEvents with decreased unique actions. Candidate audit demonstrates 0/30 batch/freezer/storage metadata, so PR10-META is mandatory, and **PR10-A/B/C not authorized before its READY evidence**. The 30 audited codes are accepted DC4 candidates, not falsely claimed as final Gate 2 pinned recipe selection; actual Gate2 fixture re-audit required.
+
+Docs CI/link/whitespace and independent review still required before #192 merge. No changes to backend/migrations, Pantry, prepared inventory, PR10-PDF, Retail or AI. No autonomous merge.
+
+---
+
 # PR10-ARCH — independent docs contract review handoff — 2026-10-10
 
 **Accepted main:** `545c86b4dd39ba3b14e0c36fcbc4733da1137d14` (merged PR #190, PR9-C). New docs-only Issue #191 / branch `docs/pr10-prep-freezer-contract`. Current artifact: [PR10 contract](../docs/family-food/pr10-prep-freezer-implementation-contract.md), **PROPOSED until independent review and merge**. Read root `AGENTS.md`, `state/current-focus.md`, scoped docs/state AGENTS, roadmap + 2026-09-13 addendum, architecture/addendum, PR9-ARCH and this contract.
