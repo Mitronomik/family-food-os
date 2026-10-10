@@ -1,3 +1,13 @@
+# PR10-META-SHARED — selected real MealEvent pair preflight — 2026-10-10
+
+- Verified PR #196 MERGED, exact `main@c73f8a935a1c8ab39d1897310ed326005d0b68fd`; accepted final fixture JSON SHA256 `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec` and 3/21/42 counts.
+- Issue #197 docs-only source review pins exact 2026-09-18 SCHNITZEL and 2026-09-19 BITOCHEK synthetic events, distinct RecipeVersion IDs, identical first RecipeStep SHA256 `2d5b8a370947b64df0b0526ab55caa970be93ee062438c066024d26ab8a689da` and matching six reviewed base ingredient rows. Second step differs by dish shape; third source text identical but cross-day cooking cannot be merged.
+- Primary Rospotrebnadzor and USDA FSIS safety guidance examined **only as context**, not adopted to set storage/freeze duration or declare mixed minced beef/soaked bread/milk safe overnight.
+- Conditional one shared action across two events remains **UNPROVEN** due to unsafe/unknown Friday→Saturday hold, missing reviewed shared-component/process/equipment compatibility, nullable batch/freezer/storage and absent net-action validation. Decision `CANDIDATE_IDENTIFIED; PR10-META BLOCKED`. No authoritative data/runtime/migrations mutated.
+- Next evidence operation should review this exact composite-meat cold-chain transition and publication/physical-work facts under separate authorization; PR10-A/B/C and PR10-PDF NOT AUTHORIZED. Docs CI and independent review still required.
+
+---
+
 # PR10-META-FIXTURE — independent validator blocker remediation — 2026-10-10
 
 - Review of PR #196 at `50ed16aaac05bde3c66db3c54014be6c53499f26` identified insufficient receipt validation; the historical 10 tests / 23 workflows / JSON artifact pass applies only to **old head**.
