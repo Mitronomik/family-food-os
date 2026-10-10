@@ -136,4 +136,4 @@ These are candidate slice names/order for reviewer approval, **not independently
 
 **OPEN QUESTION / reviewer decision:** exactly two Prep tables vs a separate unresolved-obligation table; how much structured shared-work identity is needed to make an actually useful batch plan; whether verified freezer execution guidance requires a separately accepted recipe metadata/publication extension; source-linked process step completeness for the Gate 2 fixture; and whether any Prep calculation must pin Shopping beyond the PDF composition boundary. Close these before accepting runtime design—do not assume away unresolved safety or immutability issues.
 
-**Stop condition:** deliver this document as a docs-only independently reviewed PR, with corresponding state updates. Never use the docs PR itself as authority to start PR10 runtime before merge and accepted decisions. Do not begin PR10-PDF, PWA, Retail or AI. 
+**Stop condition:** deliver this document as a docs-only independently reviewed PR, with corresponding state updates. Never use the docs PR itself as authority to start PR10 runtime before merge and accepted decisions. Do not begin PR10-PDF, PWA, Retail or AI.
