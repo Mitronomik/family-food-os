@@ -734,14 +734,18 @@ def test_simultaneous_identical_generation_uses_one_immutable_snapshot(store):
             successes[0]
         ]
         with sqlite3.connect(config.path) as conn:
-            assert conn.execute("SELECT count(*) FROM shopping_lists").fetchone()[0] == 1
             assert (
-            conn.execute(
-                "SELECT count(*) FROM shopping_unresolved_obligations"
-            ).fetchone()[0]
-            == 1
-        )
-            assert conn.execute("SELECT count(*) FROM pantry_movements").fetchone()[0] == 0
+                conn.execute("SELECT count(*) FROM shopping_lists").fetchone()[0] == 1
+            )
+            assert (
+                conn.execute(
+                    "SELECT count(*) FROM shopping_unresolved_obligations"
+                ).fetchone()[0]
+                == 1
+            )
+            assert (
+                conn.execute("SELECT count(*) FROM pantry_movements").fetchone()[0] == 0
+            )
     finally:
         other_engine.dispose()
 
