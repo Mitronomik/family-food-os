@@ -1,3 +1,13 @@
+# PR10-META — blocked evidence gate handoff — 2026-10-10
+
+**Accepted main:** `6189fc634030a6d011ed930ed70690e196af3ba0` (#192 PR10-ARCH merged; #190 Shopping API merged). Current docs-only Issue #193 branch `docs/pr10-meta-readiness-gate` with [decision](../docs/family-food/pr10-meta-readiness-decision.md) and [machine receipt](../docs/family-food/pr10-meta-candidate-evidence.json). Read root/scoped AGENTS, accepted PR10 contract and earlier metadata audit before continuation.
+
+Truth boundaries: accepted historic DC4 receipt has **51 active RecipeVersions**, 3-member / 21-event / 42-Serving fixture summary, **no complete event→recipe pin trace**. Evidence receipt records 30 of 51 canonical recipe UUIDs joined to 7 reviewed source publication manifests, *not current SQLite or actual final Gate2 fixture*. Those 30 have no trusted batch/freezer/hold values; 109 source steps with 16 potential quantity-bearing steps in 12 recipes require reviewed classification. Decision **BLOCKED** because no reviewed source-backed safe shared operation across >=2 actual MealEvents and fewer unique actions exists on record.
+
+Next source review: freeze *actual* complete Gate2 MealPlan/revision/member events + 30 currently verified recipe pins; source-review one real shared candidate's form/stage/storage/hold/reheat/defrost, numeric RecipeStep semantics and immutable publication. Return READY only after real measurable gain and full source/fixture proof; do not invent unknown metadata. No PR10-A/B/C, migration, Prep/PreparedBatch execution, Pantry writes, PR10-PDF or Gate2 approval. Verify docs-only links/whitespace/scope, stop for independent review.
+
+---
+
 # PR10-ARCH — corrections for #192 review — 2026-10-10
 
 Accepted main `545c86b4dd39ba3b14e0c36fcbc4733da1137d14` (#190 merged). Corrected docs-only branch `docs/pr10-prep-freezer-contract`, Issue #191 / PR #192. Before next step read root `AGENTS.md`, this focus, [PR10 contract](../docs/family-food/pr10-prep-freezer-implementation-contract.md) and [30-candidate metadata audit](../docs/family-food/pr10-prep-metadata-readiness-audit.md).

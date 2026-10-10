@@ -1,3 +1,15 @@
+# PR10-META — source-readiness evidence gate (BLOCKED proposal) — 2026-10-10
+
+**Accepted main:** `6189fc634030a6d011ed930ed70690e196af3ba0` = merged PR #192 (PR10-ARCH). PR9 fully merged; Gate 2 NOT COMPLETE. Current bounded Issue #193 / `docs/pr10-meta-readiness-gate`: docs/evidence-only [PR10-META decision](../docs/family-food/pr10-meta-readiness-decision.md) and [30-candidate machine receipt](../docs/family-food/pr10-meta-candidate-evidence.json).
+
+The investigation currently concludes **BLOCKED**: 30/51 DC4 candidates pin historical accepted recipe UUIDs, but actual 3-member Gate 2 MealEvent→RecipeVersion pins and a safe shared prep operation across two events are **not proven**. All 30 candidate publication manifests have null `batch_friendly`, `freezable`, fridge/freezer durations; recipe numeric-step review is absent. No fabricated freezer timing or inferred batch authority.
+
+**CURRENT AUTHORIZATION:** publish/review the evidence and next bounded source-readiness tasks. Do NOT start PR10-A/B/C runtime, migration 0044, Prep execution/Pantry writes, PR10-PDF, Retail, AI or Gate 2 closure. A separately accepted PR10-META **READY** receipt is required for PR10 runtime.
+
+Earlier PR10-ARCH sections below are historical, superseded as current authorization.
+
+---
+
 # PR10-ARCH — independent-review correction of three blockers — 2026-10-10
 
 Issue #191 / PR #192, branch `docs/pr10-prep-freezer-contract`. Accepted base `main@545c86b4dd39ba3b14e0c36fcbc4733da1137d14` (#190 merged). Reviewer REQUEST CHANGES addressed **in the same docs-only branch**:

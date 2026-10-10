@@ -1,3 +1,13 @@
+# PR10-META — candidate evidence + BLOCKED assessment — 2026-10-10
+
+- PR #192 PR10-ARCH **MERGED** 2026-10-10T12:54:21Z; main `6189fc634030a6d011ed930ed70690e196af3ba0` accepted. Mandatory PR10-META precedes PR10-A/B/C.
+- Issue #193 initiated a **docs/evidence-only** receipt `docs/family-food/pr10-meta-candidate-evidence.json` with 30 exact accepted historic DC4 RecipeVersion IDs cross-joined to 7 recipe-publication manifests. Reconciled metadata: 0/30 prep/total time, batch-friendly, freezable, fridge/freezer duration; 1/30 cook time. 109 steps, 16 regex-only numeric-text candidates in 12 recipes.
+- DC4 3-member historical Planner fixture reports 21 events / 42 Servings but does not pin the actual Gate2 MealPlan UUID and all event→RecipeVersion mappings in its shared summary. No reviewed safe shared operation spanning >=2 real meal events can be proven. [PR10-META decision](../docs/family-food/pr10-meta-readiness-decision.md): **BLOCKED**, no fake READY.
+- Follow-up is separately reviewed actual Gate2 pinning and recipe/process/hold/storage evidence, then immutable review/publication if required and measurable >=1 distinct-action saving without invented time estimates. PR10-A/B/C, Prep execution, PR10-PDF, Gate2 not authorized.
+- Proportional docs-only CI/scope checks are required on the final PR head. No production runtime, migration or authoritative catalogue data changed.
+
+---
+
 # PR10-ARCH — three independent review blockers addressed — 2026-10-10
 
 - PR #192 independent review requested changes for unresolved schema choice, Prep usefulness proof and quantitative RecipeStep instructions. Changes remain docs-only on `docs/pr10-prep-freezer-contract`.
