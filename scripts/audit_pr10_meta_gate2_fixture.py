@@ -121,8 +121,7 @@ def build_fixture_receipt(config: DatabaseConfig) -> dict[str, Any]:
             raise TypeError("Planner replay failed")
         trace_stable = (
             pure_a.trace.fingerprint == pure_b.trace.fingerprint
-            and pure_a.trace.request_fingerprint
-            == pure_b.trace.request_fingerprint
+            and pure_a.trace.request_fingerprint == pure_b.trace.request_fingerprint
         )
         violations = _selected_exclusion_violations(
             pure_a.events,
@@ -220,9 +219,7 @@ def build_fixture_receipt(config: DatabaseConfig) -> dict[str, Any]:
                 "member_id": str(item.member_id),
                 "selection_id": str(item.selection_id),
             }
-            for item in sorted(
-                detail.member_selections, key=lambda x: str(x.member_id)
-            )
+            for item in sorted(detail.member_selections, key=lambda x: str(x.member_id))
         ]
         payload = {
             "schema": "PR10_META_GATE2_FIXTURE_PINS_V1",
@@ -262,7 +259,9 @@ def build_fixture_receipt(config: DatabaseConfig) -> dict[str, Any]:
                 "meal_events": len(events),
                 "servings": len(servings),
                 "current_verified_catalogue_versions": len(catalogue),
-                "unique_selected_versions": len({x["recipe_version_id"] for x in events}),
+                "unique_selected_versions": len(
+                    {x["recipe_version_id"] for x in events}
+                ),
             },
         }
         validate_fixture_receipt(payload)
@@ -286,8 +285,12 @@ def main() -> int:
     )
     print(
         json.dumps(
-            {"status": "FIXTURE_PINS_CAPTURED", "gate": receipt["gate_decision"],
-             "counts": receipt["counts"], "output": str(args.output)},
+            {
+                "status": "FIXTURE_PINS_CAPTURED",
+                "gate": receipt["gate_decision"],
+                "counts": receipt["counts"],
+                "output": str(args.output),
+            },
             sort_keys=True,
         )
     )
