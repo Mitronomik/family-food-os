@@ -1,0 +1,174 @@
+{
+  "schema": "PR10_META_SAFETY_SOURCE_SCOPE_V1",
+  "status": "CASE_BLOCKED_NOT_A_RECIPE_STORAGE_CLEARANCE",
+  "review_date": "2026-10-10",
+  "accepted_base_main_sha": "326480f42aa5f3bada5398a369eb75003d6cceaa",
+  "issue": 199,
+  "parent_accepted_evidence": {
+    "pr": 198,
+    "document": "docs/family-food/pr10-meta-shared-process-preflight.md",
+    "json": "docs/family-food/pr10-meta-shared-process-evidence.json",
+    "fixture_json_sha256": "6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec",
+    "meal_plan_id": "589ef95a-2158-40a1-af91-0e13087d5744",
+    "events": [
+      {
+        "event_id": "ece787f4-ac81-4390-b57f-211c220b02a9",
+        "date": "2026-09-18",
+        "recipe_code": "SCHOOL2022_54_7M_BEEF_SCHNITZEL",
+        "recipe_version_id": "343a786b-3338-4d30-825e-486ce70dae54"
+      },
+      {
+        "event_id": "63c2c701-ce68-4637-8a96-07252d32fde5",
+        "date": "2026-09-19",
+        "recipe_code": "SCHOOL2022_54_6M_BEEF_BITOCHEK",
+        "recipe_version_id": "34ec0fa8-c724-424c-819f-fa6823264d04"
+      }
+    ],
+    "shared_step_1_instruction_sha256": "2d5b8a370947b64df0b0526ab55caa970be93ee062438c066024d26ab8a689da"
+  },
+  "reviewed_form": "RAW_GROUND_BEEF_MIXED_WITH_MILK_SOAKED_WHEAT_BREAD",
+  "planned_transition": "2026-09-18_FIRST_STEP_TO_2026-09-19_FORMING_AND_COOKING",
+  "sources": [
+    {
+      "id": "RPN_FEDERAL_RAW_MINCE",
+      "issuer": "Роспотребнадзор — ГИС ЗПП",
+      "jurisdiction": "RU",
+      "published_date": "2021-10-08",
+      "url": "https://zpp.rospotrebnadzor.ru/news/federal/244173",
+      "supports": [
+        "GENERAL_RAW_MINCED_MEAT_HANDLING",
+        "GENERAL_REFRIGERATED_CONTAINER_AND_FREEZER_PACKAGING_ADVICE"
+      ],
+      "does_not_establish": [
+        "HOLD_TIME_FOR_MILK_SOAKED_BREAD_RAW_BEEF_COMPOSITE",
+        "STARTING_CLOCK_FROM_ACTUAL_PREP_AND_PREVIOUS_THAW",
+        "SAFETY_OF_FIXTURE_FRIDAY_TO_SATURDAY_HOLD"
+      ]
+    },
+    {
+      "id": "RPN_INGUSHETIA_COOKED_MINCE",
+      "issuer": "Роспотребнадзор по Республике Ингушетия",
+      "jurisdiction": "RU",
+      "published_date": "2026-07-15",
+      "url": "https://06.rospotrebnadzor.ru/content/kak-hranit-produkty-i-gotovye-blyuda-v-zharkuyu-pogodu-0",
+      "supports": [
+        "GENERAL_TIMELY_CONSUMPTION_ADVICE_FOR_FINISHED_MINCED_MEAT_DISHES",
+        "RAW_READY_FOOD_SEPARATION"
+      ],
+      "does_not_establish": [
+        "TIME_TO_STORE_RAW_BEFORE_COOKING_COMPOSITE",
+        "HOLDS_FOR_OUR_UNCOOKED_PREPARED_INTERMEDIATE"
+      ]
+    },
+    {
+      "id": "RPN_PRIMORYE_CULINARY",
+      "issuer": "Роспотребнадзор по Приморскому краю",
+      "jurisdiction": "RU",
+      "published_date": null,
+      "url": "https://25.rospotrebnadzor.ru/zdorovoe-pitanie/4353/",
+      "supports": [
+        "GENERAL_CAUTION_AGAINST_ADVANCE_MINCED_MEAT_PREPARATION"
+      ],
+      "verification_note": "Search index snippet; direct open unavailable at research time; treat as supplemental lead, not clearance",
+      "does_not_establish": [
+        "RECIPE_SPECIFIC_COMPOSITE_STORAGE_AUTHORIZATION"
+      ]
+    },
+    {
+      "id": "FSIS_GROUND_BEEF_FACT_SHEET",
+      "issuer": "USDA FSIS",
+      "jurisdiction": "US",
+      "published_date": null,
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/meat/ground-beef-and-food-safety",
+      "supports": [
+        "GENERAL_RAW_GROUND_BEEF_COLD_STORAGE_GUIDANCE",
+        "CROSS_CONTAMINATION_AND_SAFE_COOKING_GUIDANCE",
+        "PARTIAL_ADVANCE_COOKING_WARNING"
+      ],
+      "does_not_establish": [
+        "RUSSIAN_RECIPE_LEVEL_HOLD_DURATION",
+        "SAFETY_OF_GROUND_BEEF_PLUS_MILK_SOAKED_BREAD_INTERMEDIATE",
+        "SOURCE_SPECIFIC_INITIAL_RAW_OR_THAWED_INGREDIENT_STATES"
+      ]
+    },
+    {
+      "id": "FOODSAFETY_GOV_CHART",
+      "issuer": "FoodSafety.gov — U.S. federal agencies",
+      "jurisdiction": "US",
+      "published_date": null,
+      "url": "https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts",
+      "supports": [
+        "GENERAL_GROUND_MEAT_CATEGORY_STORAGE_CONTEXT"
+      ],
+      "does_not_establish": [
+        "APPROVAL_OF_OUR_SPECIFIC_PREMIXED_RAW_RECIPE_OR_HOME_KITCHEN_HOLD"
+      ]
+    }
+  ],
+  "transition_matrix": [
+    {
+      "from": "RAW_BEEF_SOURCE",
+      "to": "RAW_GROUND_BEEF",
+      "source_scope": "GENERAL_GUIDANCE_ONLY",
+      "project_status": "NEEDS_VERSION_SPECIFIC_PROCESS_REVIEW"
+    },
+    {
+      "from": "RAW_GROUND_BEEF",
+      "to": "RAW_BEEF_MILK_BREAD_COMPOSITE",
+      "source_scope": "RECIPE_STEP_EXISTS",
+      "project_status": "SOURCE_PROCESS_MATCH_CONFIRMED_NOT_STORABILITY"
+    },
+    {
+      "from": "RAW_BEEF_MILK_BREAD_COMPOSITE",
+      "to": "SAME_COMPOSITE_HELD_ACROSS_MEAL_DAYS",
+      "source_scope": "NO_DIRECT_REVIEWED_COMPOSITE_HOLD_AUTHORITY",
+      "project_status": "BLOCKED"
+    },
+    {
+      "from": "HELD_COMPOSITE",
+      "to": "FRIDAY_SCHNITZEL_AND_SATURDAY_BITOCHEK_FORMING",
+      "source_scope": "SOURCE_SPECIFIC_BRANCHES_EXIST_BUT_HELD_STATE_NOT_VERIFIED",
+      "project_status": "BLOCKED"
+    },
+    {
+      "from": "SEPARATELY_FORMED_UNCOOKED_PORTIONS",
+      "to": "COOKED_FINAL_DISH",
+      "source_scope": "GENERAL_MEAT_TEMPERATURE_GUIDANCE_ONLY",
+      "project_status": "NOT_AUTOMATED_AND_NO_COOKING_TIME_ASSUMPTION"
+    },
+    {
+      "from": "COOKED_FINAL_DISH",
+      "to": "STORED_LEFTOVER_OR_REHEATED",
+      "source_scope": "NO_REVIEWED_USE_CASE_FOR_THIS_PAIR",
+      "project_status": "OUT_OF_SCOPE"
+    }
+  ],
+  "missing_evidence": [
+    "ACTUAL_START_AND_END_LOCAL_CLOCK_TIMES_AND_HOLD_DURATION",
+    "INITIAL_MEAT_TEMPERATURE_SOURCE_FRESH_OR_PREVIOUSLY_FROZEN_THAW_HISTORY",
+    "MILK_AND_SOAKED_BREAD_INITIAL_STORAGE_SAFETY_AND_BATCH_PREPARATION_CLOCK",
+    "VALIDATED_FINAL_RAW_COMPOSITE_STORAGE_RULE_COVERING_PREP_DATE_TO_USE_DATE",
+    "CONTAINER_PACKAGING_COLD_CHAIN_APPLIANCE_MEASUREMENT_HOUSEHOLD_CONTEXT",
+    "RAW_GROUND_MILK_BREAD_HYGIENE_AND_CROSS_CONTAMINATION_RULE_APPLICABILITY",
+    "REVIEWED_IMMUTABLE_SHARED_COMPONENT_AND_EVENT_ALLOCATION_AUTHORITY",
+    "REVIEWED_NET_PHYSICAL_PREP_ACTION_REDUCTION_AFTER_STORING_AND_SPLITTING"
+  ],
+  "safety_claims": {
+    "recipe_storage_days_fridge": null,
+    "recipe_storage_days_freezer": null,
+    "recipe_freezable": null,
+    "recipe_batch_friendly": null,
+    "safe_overnight_hold_approved": false,
+    "safe_reheating_or_defrost_approved": false,
+    "early_prep_can_schedule": false,
+    "reduced_physical_operations_proven": false
+  },
+  "disposition": {
+    "candidate": "SCHOOL2022_54_7M_BEEF_SCHNITZEL_AND_54_6M_BEEF_BITOCHEK",
+    "decision": "NO_GO_FOR_AUTOMATIC_FRIDAY_TO_SATURDAY_PREP_ON_CURRENT_EVIDENCE",
+    "pr10_meta": "BLOCKED",
+    "pr10_a_runtime_authorized": false,
+    "proven_scope": "ONE_SYNTHETIC_FIXTURE_PAIR_ONLY_NOT_WHOLE_RECIPE_CATALOGUE",
+    "next": "EVIDENCE_AND_AUTHORITY_REVIEW_OR_ALTERNATIVE_SOURCE_BACKED_PAIR"
+  }
+}
