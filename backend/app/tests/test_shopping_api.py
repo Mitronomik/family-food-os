@@ -195,7 +195,6 @@ def test_empty_state_generation_and_idempotent_http_contract(api):
     assert _rows(config, "pantry_movements") == 0
 
 
-
 @pytest.mark.parametrize(
     "query",
     [
