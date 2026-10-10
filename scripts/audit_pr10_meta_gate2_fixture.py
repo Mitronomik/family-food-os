@@ -28,6 +28,7 @@ from app.seed.dc4_a3_russian_step_corrections import (
     seed_dc4_a3_russian_step_corrections,
 )
 from app.services.planner import AuthoritativeGenerationRequest
+
 from scripts.audit_dc4_corpus_readiness_rerun import (
     GATE1_ROLE_SHAPES,
     PLANNER_CONFIG,
@@ -115,9 +116,9 @@ def build_fixture_receipt(config: DatabaseConfig) -> dict[str, Any]:
         pure_a = generate_week(request, PLANNER_CONFIG)
         pure_b = generate_week(request, PLANNER_CONFIG)
         if not isinstance(pure_a, PlannerSuccess):
-            raise ValueError("Three-member Planner fixture did not succeed")
+            raise TypeError("Three-member Planner fixture did not succeed")
         if not isinstance(pure_b, PlannerSuccess):
-            raise ValueError("Planner replay failed")
+            raise TypeError("Planner replay failed")
         trace_stable = (
             pure_a.trace.fingerprint == pure_b.trace.fingerprint
             and pure_a.trace.request_fingerprint
