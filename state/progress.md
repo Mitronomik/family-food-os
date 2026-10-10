@@ -1,3 +1,13 @@
+# PR9-B — review corrections committed; verification pending — 2026-10-10
+
+- PR #188 remains OPEN/unmerged on feat/pr9-b-shopping-persistence; accepted base main@c83dba190b957300cad54c9c8df5afc01f86de60.
+- Corrected accepted PR9-A food source fingerprint pins for both FoodIngredient ordering fields (category_code, canonical_name_key), retaining quantity/FEFO authority and deterministic output. No migration or new aggregate.
+- Normalized repository INSERT constraint/DBAPI failures to driver-independent Shopping error types; UoW still owns atomic rollback.
+- Added regression coverage for catalogue sort change -> STALE -> immutable Shopping successor, UUID collision, FK/CHECK negative writes and two independent concurrent generate calls producing no fork.
+- New exact-head CI and independent review required; old 25/25 green receipt predates corrections. PR9-C NOT STARTED, PR10 NOT AUTHORIZED.
+
+---
+
 # PR9-B — IMPLEMENTING — 2026-10-09
 
 - PR #186 Shopping pure calculator **MERGED** into `main@c83dba190b957300cad54c9c8df5afc01f86de60`; PR9-A completed.
