@@ -419,7 +419,7 @@ def test_pantry_metadata_and_date_change_fingerprints():
     ("field", "new_value"),
     [
         ("category_code", "zz_grains"),
-        ("canonical_name_key", "яя"),
+        ("canonical_name_key", "японский рис"),
     ],
 )
 def test_food_ordering_metadata_is_pinned_in_source_fingerprint(field, new_value):
@@ -429,18 +429,23 @@ def test_food_ordering_metadata_is_pinned_in_source_fingerprint(field, new_value
         rice_id: replace(
             original_foods[rice_id],
             category_code="grains",
-            canonical_name_key="а",
+            canonical_name="Ароматный рис",
+            canonical_name_key="ароматный рис",
         ),
         leaf_id: replace(
             original_foods[leaf_id],
             category_code="grains",
-            canonical_name_key="я",
+            canonical_name="Лавровый лист",
+            canonical_name_key="лавровый лист",
         ),
     }
     first = _calculate(meal, recipes, foods)
+    update = {field: new_value}
+    if field == "canonical_name_key":
+        update["canonical_name"] = "Японский рис"
     changed_foods = {
         **foods,
-        rice_id: replace(foods[rice_id], **{field: new_value}),
+        rice_id: replace(foods[rice_id], **update),
     }
     second = _calculate(meal, recipes, changed_foods)
     assert tuple(x.food_ingredient_id for x in first.items) == (rice_id, leaf_id)
