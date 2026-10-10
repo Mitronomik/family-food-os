@@ -1,3 +1,13 @@
+# PR10-META-SAFETY — source applicability for 2-event raw composite — 2026-10-10
+
+**Accepted main:** `326480f42aa5f3bada5398a369eb75003d6cceaa` (#198 PR10-META-SHARED MERGED 2026-10-10T15:01:31Z). #196 fixture and #194 BLOCKED META receipt merged; PR10-ARCH #192 merged. **PR10-META remains BLOCKED**. No PR10-A/B/C, PR10-PDF or Gate 2 authorization.
+
+**Current bounded docs-only task:** Issue #199 / `docs/pr10-meta-safety-source-scope`. Examine exactly the Friday 2026-09-18 SCHNITZEL vs Saturday 2026-09-19 BITOCHEK raw beef/milk-soaked-bread shared-step candidate. New [case safety report](../docs/family-food/pr10-meta-safety-source-scope.md) and [source matrix](../docs/family-food/pr10-meta-safety-source-scope.json) distinguish Russian Rospotrebnadzor and US USDA generic minced-meat guidance from the missing **composite recipe-specific Friday→Saturday safe holding transition**.
+
+**Case decision: NO-GO on current evidence**. The same text/process step is proven, not a safe shared stored component; no expiry/freezer/time/cooking claim or net saved physical action. Do not alter recipe data or begin runtime. Next evidence option: shortlist another **real pinned** MealEvent pair with source-backed same-day/shared process and minimal storage transition, subject to separate reviewed scope. Stop for independent review, no autonomous merge.
+
+---
+
 # PR10-META-SHARED — exact two-event source candidate, storage BLOCKED — 2026-10-10
 
 **Accepted main:** `c73f8a935a1c8ab39d1897310ed326005d0b68fd` (#196 PR10-META-FIXTURE MERGED 2026-10-10T14:33:45Z). PR10-ARCH #192 MERGED, PR10-META blocked evidence #194 MERGED. **PR10-META remains BLOCKED**; no PR10-A/B/C, PR10-PDF or Gate 2 authorization.

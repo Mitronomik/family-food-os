@@ -1,3 +1,13 @@
+# PR10-META-SAFETY — narrowed official food-safety source review — 2026-10-10
+
+- PR #198 merged into main `326480f42aa5f3bada5398a369eb75003d6cceaa` at 2026-10-10T15:01:31Z; existing common first recipe step and 3-member fixture source fingerprints accepted. PR10-META still BLOCKED.
+- Issue #199 evidence-only review of 2026-09-18 SCHNITZEL / 2026-09-19 BITOCHEK. Primary Rospotrebnadzor 2021 minced-meat storage guidance, 2026 finished chopped-meat dish advice, and USDA FSIS/FoodSafety.gov general ground-meat guidance assessed by **food form/jurisdiction/source applicability**, not copied as recipe-specific shelf-life.
+- **Exact raw beef + milk-soaked bread composite Friday-to-Saturday transition NOT established**; initial thaw state, real prep/use hours, measured cold-chain and shared component state unknown. Conditional first-step 2→1 text/action saving does not demonstrate net physical reduction after packaging/cleaning/splitting.
+- Case report `docs/family-food/pr10-meta-safety-source-scope.md` and machine receipt `docs/family-food/pr10-meta-safety-source-scope.json` record **case NO-GO**, broader PR10-META BLOCKED. No RecipeVersion source numbers, `storage_days`, `freezable`, Prep implementation, migration or Pantry mutation changed.
+- Next bounded option: review a different actual pinned two-event pair with less demanding holding/storage need. Docs CI and independent review required before merge.
+
+---
+
 # PR10-META-SHARED — selected real MealEvent pair preflight — 2026-10-10
 
 - Verified PR #196 MERGED, exact `main@c73f8a935a1c8ab39d1897310ed326005d0b68fd`; accepted final fixture JSON SHA256 `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec` and 3/21/42 counts.
