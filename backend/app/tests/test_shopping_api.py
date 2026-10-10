@@ -8,10 +8,8 @@ from decimal import Decimal
 from threading import Barrier
 from uuid import uuid4
 
-import pytest
-from fastapi.testclient import TestClient
-
 import app.main as main_module
+import pytest
 from app.db.config import DATABASE_PATH_ENV, DatabaseConfig
 from app.db.migrations import apply_migrations
 from app.domain.food_ingredients import FoodIngredient
@@ -29,10 +27,7 @@ from app.persistence.sqlalchemy_core.shopping_uow import (
     SqlAlchemyShoppingUnitOfWork,
 )
 from app.services.shopping import ShoppingService
-from app.services.shopping_contracts import (
-    ShoppingPersistenceConflictError,
-    ShoppingPersistenceError,
-)
+from app.services.shopping_contracts import ShoppingPersistenceError
 from app.tests.persistence.test_meal_plan_repository import (
     NOW,
     _household,
@@ -43,6 +38,7 @@ from app.tests.persistence.test_meal_plan_repository import (
 )
 from app.tests.persistence.test_shopping_persistence import _prepare
 from app.tests.test_food_recipe_domain import _detail
+from fastapi.testclient import TestClient
 
 
 @pytest.fixture
@@ -373,11 +369,13 @@ def test_two_simultaneous_http_generations_do_not_fork(api):
         barrier.wait(timeout=10)
         return http_client.post(prefix, json={})
 
-    with TestClient(create_app()) as other_client:
-        with ThreadPoolExecutor(max_workers=2) as pool:
-            a = pool.submit(post_one, client)
-            b = pool.submit(post_one, other_client)
-            responses = (a.result(timeout=30), b.result(timeout=30))
+    with (
+        TestClient(create_app()) as other_client,
+        ThreadPoolExecutor(max_workers=2) as pool,
+    ):
+        a = pool.submit(post_one, client)
+        b = pool.submit(post_one, other_client)
+        responses = (a.result(timeout=30), b.result(timeout=30))
     assert {response.status_code for response in responses} <= {200, 409}
     successes = [r.json() for r in responses if r.status_code == 200]
     assert successes
