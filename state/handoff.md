@@ -1,3 +1,11 @@
+# PR10-META-FIXTURE — PR #196 receipt-validator review correction — 2026-10-10
+
+Independent review at `50ed16aaac05bde3c66db3c54014be6c53499f26` requested stronger evidence integrity. Corrected `scripts/audit_pr10_meta_gate2_fixture.py` validates exact counts, positive finite Decimals, event/member unique Serving pairs, source-step-derived process hashes, and cross-checks event→recipe / event→Serving semantic digest against **independent pure Planner result**. Separate optional external baseline SHA catches edits to both receipt and its embedded baseline; externally logged JSON SHA anchors the whole artifact. Added adversarial tests for valid-ID reassignments, duplicate pairs, Infinity/NaN, arbitrary hashes, falsified counts and forged embedded digest.
+
+Older receipt SHA256 `507bf8a18192f3edaec3d5ee295d3b8fab6fda872370c44ff74a598290b6158a` refers to pre-fix head and MUST NOT be used as post-fix evidence. Re-run exact-head specialized CI, docs and upload fresh artifact; preserve source authority and `PR10-META=BLOCKED`. No production Planner/Recipe/Shopping/Pantry service or migrations changed. PR #196 OPEN/unmerged and requires renewed independent review.
+
+---
+
 # PR10-META-FIXTURE — synthetic persisted event/recipe lineage handoff — 2026-10-10
 
 Base `05610128ad7c1156e5908b809606a5cb7223acce` (#194 merged, PR10-META still BLOCKED). Issue #195, branch `evidence/pr10-meta-gate2-fixture`. Read root AGENTS/scoped scripts/backend tests/docs, accepted [PR10 contract](../docs/family-food/pr10-prep-freezer-implementation-contract.md), [BLOCKED META decision](../docs/family-food/pr10-meta-readiness-decision.md), [fixture evidence contract](../docs/family-food/pr10-meta-gate2-fixture-evidence.md) and `scripts/audit_dc4_corpus_readiness_rerun.py`.
