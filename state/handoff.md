@@ -1,3 +1,13 @@
+# PR10-ARCH — independent docs contract review handoff — 2026-10-10
+
+**Accepted main:** `545c86b4dd39ba3b14e0c36fcbc4733da1137d14` (merged PR #190, PR9-C). New docs-only Issue #191 / branch `docs/pr10-prep-freezer-contract`. Current artifact: [PR10 contract](../docs/family-food/pr10-prep-freezer-implementation-contract.md), **PROPOSED until independent review and merge**. Read root `AGENTS.md`, `state/current-focus.md`, scoped docs/state AGENTS, roadmap + 2026-09-13 addendum, architecture/addendum, PR9-ARCH and this contract.
+
+Preflight: RecipeVersion has nullable prep/cook/total time, batch_friendly/freezable and fridge/freezer duration; RecipeStep has ordered instructions/stage_code; RecipeEquipment exists. There is no accepted per-step active/passive time, freeze_stage/defrost/reheat/storage_instruction or actual PreparedBatch inventory. The contract deliberately refuses invented food-safety/early prep authority; it separates immutable PrepPlan from confirmed execution, and leaves unresolved representation/shared-component provenance as explicit reviewer decisions.
+
+No production code, new tables, migration 0044 reservation, Pantry writes, Retail, AI, PR10-PDF or Gate 2 closure. Contract must be independently accepted before separate scoped PR10-A pure calculator / PR10-B persistence / PR10-C API (candidate order). Verify docs-only links/scope/whitespace, report actual CI. Do not merge autonomously.
+
+---
+
 # PR9-C — query validation review blocker correction — 2026-10-10
 
 The latest independent review of PR #190 requested strict rejection of **all Shopping query parameters** (none are supported in PR9-C). Correction is a single router-level FastAPI `Depends` gate on `APIRouter(dependencies=[...])`, executed before endpoint handlers and service/database writes. It returns exactly the existing `SHOPPING_INVALID_REQUEST` 422 JSON envelope, with Russian message/next_action; invalid body and path values still use existing Shopping-safe 422 translation. Focused TestClient verifies all five routes and that rejected POSTs do not create lists, child obligations or Pantry movements. No ShoppingService, PR9-A/B, migration or architecture change.
