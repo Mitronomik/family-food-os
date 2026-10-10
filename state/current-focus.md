@@ -1,3 +1,11 @@
+# PR9-C — Shopping HTTP API implementation — 2026-10-10
+
+**Accepted main:** `9e9db57e7d8ffc8b155c662b0091555de7dc8a34` (#188 PR9-B MERGED at 2026-10-10T09:38:44Z; accepted exact-head 26/26 SUCCESS). PR9-A #186 and PR9-ARCH #184 MERGED; Gate1 COMPLETE.
+**Current authorized bounded work:** GitHub Issue #189, branch `feat/pr9-c-shopping-http-api`. Expose accepted ShoppingService via typed Russian-safe FastAPI generate/get/current/regenerate/history, source revision/warnings/allocations, stable 404/409/422/503 and Household scoping. Only HTTP DTO/router/composition/wiring/tests/state/CI; no schema migration, changes to calculation, Pantry writes, Auth/Retail/PWA/Prep/PDF.
+**Gate:** PR9-C implementation must complete focused Shopping/Household/Pantry and full backend+launcher regression on its exact head, with independent review before merge. PR9 overall NOT COMPLETE; PR10 NOT AUTHORIZED.
+
+---
+
 # PR9-B — review-blocker corrections in progress — 2026-10-10
 
 PR #188 remains OPEN and unmerged. User-authorized correction of independent review findings on this same branch: (1) accepted PR9-A calculator's source fingerprint now pins FoodIngredient category_code and canonical_name_key, the two fields used by ordered Shopping output; (2) PR9-B repository INSERT errors map to driver-independent ShoppingPersistenceConflictError / ShoppingPersistenceError with original DBAPI cause and UoW rollback; (3) adversarial tests cover stale/successor ordering, duplicate identifiers, FK/CHECK rollback, and simultaneous independent-connection generate. This is a compliance correction to frozen PR9 source identity, not a new calculation/FEFO policy. Existing persisted immutable snapshots remain readable; a changed source creates a successor.
