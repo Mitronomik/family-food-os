@@ -120,7 +120,10 @@ def _provenance(
     """Strict, allowlisted public projection; never expose raw provenance JSON."""
     try:
         source = json.loads(detail.shopping_list.provenance_json)
-        if not isinstance(source, dict) or source["schema"] != "SHOPPING_SOURCE_SNAPSHOT_V1":
+        if (
+            not isinstance(source, dict)
+            or source["schema"] != "SHOPPING_SOURCE_SNAPSHOT_V1"
+        ):
             raise ValueError("Unsupported Shopping source snapshot")
         raw_warnings = source["warnings"]
         raw_allocations = source["allocations"]
@@ -183,7 +186,9 @@ def _detail_response(
     reason_message = (
         "Сохранена другая версия списка покупок."
         if reason == "HISTORICAL_SNAPSHOT"
-        else _message(_STALE_MESSAGES, reason) if reason else None
+        else _message(_STALE_MESSAGES, reason)
+        if reason
+        else None
     )
     warnings, allocations = _provenance(detail)
     return ShoppingDetailResponse(
@@ -286,7 +291,8 @@ def create_shopping_router(service_provider: ShoppingServiceProvider) -> APIRout
             service = service_provider()
             detail = service.get_detail(household_id, list_id)
             return _detail_response(
-                detail, service.get_current(household_id, detail.shopping_list.meal_plan_id)
+                detail,
+                service.get_current(household_id, detail.shopping_list.meal_plan_id),
             )
 
     @router.get(
@@ -295,7 +301,9 @@ def create_shopping_router(service_provider: ShoppingServiceProvider) -> APIRout
     )
     def get_current(household_id: UUID, plan_id: UUID) -> ShoppingCurrentResponse:
         with _errors():
-            return _current_response(service_provider().get_current(household_id, plan_id))
+            return _current_response(
+                service_provider().get_current(household_id, plan_id)
+            )
 
     @router.post(
         "/meal-plans/{plan_id}/shopping-lists/regenerate",
