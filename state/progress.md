@@ -1,3 +1,12 @@
+# PR10-ARCH — Prep/Freezer contract-gate proposal — 2026-10-10
+
+- Verified PR #190 PR9-C MERGED 2026-10-10T11:58:23Z; accepted `main@545c86b4dd39ba3b14e0c36fcbc4733da1137d14`. PR9 Shopping domain, persistence and API slices now merged. Previous PR9-C exact-head CI: 23/23 SUCCESS on `b452c9185fa97b36b6e0f2de10c7aef380fa1ddc`.
+- Started **docs-only** Issue #191, PR10-ARCH proposal at `docs/family-food/pr10-prep-freezer-implementation-contract.md`; source preflight found nullable RecipeVersion time/batch/freezer/storage fields, recipe steps/equipment, but no accepted structured freeze_stage/defrost/reheat or PreparedBatch supply authority.
+- Proposed conservative Prep generation, version/fingerprint lifecycle, no Pantry writes, fail-closed freezer/safety uncertainty and PR10-A/B/C candidate delivery sequence. **No runtime/schema/migration changed**; all proposals require independent review/approval.
+- PR10-PDF and Gate 2 NOT STARTED. PR11/Prep execution/Retail/AI/Auth not authorized by this docs gate.
+
+---
+
 # PR9-C — HTTP query validation review correction — 2026-10-10
 
 - Independent review of PR #190 at `09a5678ab47c9d8338c4a2b055777ee37404ef7b` found one blocking HTTP validation gap: unknown Shopping query parameters were ignored, unlike the strict request body.
