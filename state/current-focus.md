@@ -1,3 +1,11 @@
+# PR9-B — review-blocker corrections in progress — 2026-10-10
+
+PR #188 remains OPEN and unmerged. User-authorized correction of independent review findings on this same branch: (1) accepted PR9-A calculator's source fingerprint now pins FoodIngredient category_code and canonical_name_key, the two fields used by ordered Shopping output; (2) PR9-B repository INSERT errors map to driver-independent ShoppingPersistenceConflictError / ShoppingPersistenceError with original DBAPI cause and UoW rollback; (3) adversarial tests cover stale/successor ordering, duplicate identifiers, FK/CHECK rollback, and simultaneous independent-connection generate. This is a compliance correction to frozen PR9 source identity, not a new calculation/FEFO policy. Existing persisted immutable snapshots remain readable; a changed source creates a successor.
+
+Exact-head CI and independent review are still required before merge. PR9-C API NOT STARTED; PR10 NOT AUTHORIZED.
+
+---
+
 # PR9-B — Shopping persistence and transactional UoW (current)
 
 Updated: 2026-10-09.
