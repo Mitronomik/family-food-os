@@ -1,3 +1,13 @@
+# PR10-META-DATA — source/stage authority decision handoff — 2026-10-10
+
+Accepted base `main@9a8e978c5aecb5c5390e9189acb0a0536f05e426`, PR #202 merged. Current Issue #203, branch `docs/pr10-meta-reviewed-stage-authority`; read root `AGENTS.md`, `state/current-focus.md`, accepted PR10-ARCH, [reviewed stage preflight](../docs/family-food/pr10-meta-reviewed-stage-authority.md), [evidence JSON](../docs/family-food/pr10-meta-reviewed-stage-authority.json), [PR #202 same-day pair](../docs/family-food/pr10-meta-same-day-pair-evidence.json), R3-D primary source card 2.11/1.16.
+
+Tuesday 2026-09-15 lunch event `cf0e3fe3-4c59-4447-9fbd-7a9e19c6ff49` ragout RecipeVersion `063694fb-92cf-4731-adf6-041d36a532e4`, dinner `d000a213-d169-4f10-a2ad-08180f40aea6` pea soup RecipeVersion `116e25fa-12f3-4926-8a2a-7aa2cf99bb9c`. Same CARROT/ONION_BULB_FRESH codes; source MR1.16 preamble **does** require clean/peel/wash but published consumer recipe step omits distinct stage. MR2.11 only says prepared onion/carrot and requires fine chop; different source RecipeSteps and internal water/sauce splits. No reviewed shared-output form identity or real net reduction after splitting/holding/cleanup, no pinned same prep session.
+
+Proposed `ReviewedPrepStageBindingV1` only as **future reviewed source publication**, not production schema; accepted three Prep tables unchanged. Source-specific safety unknown, keep `PR10-META=BLOCKED`, PR10-A/B/C, PDF and Gate2 unauthorized. Docs CI and independent review required; do not merge autonomously. Next only if accepted: scope separate source/recipe-process authority publication review, possibly immutable RecipeVersion correction, before runtime.
+
+---
+
 # PR10-META-SAFETY — official guidance scope and pair NO-GO — 2026-10-10
 
 **Accepted base:** `326480f42aa5f3bada5398a369eb75003d6cceaa`, merged #198. Current docs-only Issue #199, branch `docs/pr10-meta-safety-source-scope`. Read `AGENTS.md`, `state/current-focus.md`, PR10-ARCH and META decision, [two-event source preflight](../docs/family-food/pr10-meta-shared-process-preflight.md), [new source-applicability report](../docs/family-food/pr10-meta-safety-source-scope.md) plus its [JSON matrix](../docs/family-food/pr10-meta-safety-source-scope.json).
