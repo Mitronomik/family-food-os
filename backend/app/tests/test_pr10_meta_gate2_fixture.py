@@ -41,11 +41,8 @@ def test_frozen_repo_backed_fixture_has_valid_source_and_serving_pins(fixture_re
     )
 
 
-
 def _move_to_valid_alternate_event(receipt):
-    pairs = {
-        (s["event_id"], s["member_id"]) for s in receipt["plan"]["servings"]
-    }
+    pairs = {(s["event_id"], s["member_id"]) for s in receipt["plan"]["servings"]}
     selected, target = next(
         (serving, event["event_id"])
         for serving in receipt["plan"]["servings"]
@@ -61,8 +58,7 @@ def _duplicate_event_member_pair(receipt):
     other = next(
         s
         for s in receipt["plan"]["servings"][1:]
-        if s["event_id"] != first["event_id"]
-        or s["member_id"] != first["member_id"]
+        if s["event_id"] != first["event_id"] or s["member_id"] != first["member_id"]
     )
     other["event_id"] = first["event_id"]
     other["member_id"] = first["member_id"]
@@ -100,9 +96,7 @@ def _duplicate_event_member_pair(receipt):
         lambda r: r["plan"]["servings"][0].update(portion_servings="-Infinity"),
         lambda r: r["plan"]["servings"][0].update(portion_servings="NaN"),
         lambda r: r["catalogue"][0].update(process_hash="a" * 64),
-        lambda r: r["catalogue"][0]["steps"][0].update(
-            instruction_sha256="b" * 64
-        ),
+        lambda r: r["catalogue"][0]["steps"][0].update(instruction_sha256="b" * 64),
         lambda r: r["plan"]["events"][0].update(
             role="BREAKFAST"
             if r["plan"]["events"][0]["role"] != "BREAKFAST"
@@ -115,9 +109,7 @@ def _duplicate_event_member_pair(receipt):
                 if event["local_date"] != r["plan"]["events"][0]["local_date"]
             )
         ),
-        lambda r: r["planner"].update(
-            expected_semantic_pins_sha256="a" * 64
-        ),
+        lambda r: r["planner"].update(expected_semantic_pins_sha256="a" * 64),
     ],
 )
 def test_receipt_fails_closed_for_changed_or_missing_pins(fixture_receipt, tamper):
@@ -125,6 +117,7 @@ def test_receipt_fails_closed_for_changed_or_missing_pins(fixture_receipt, tampe
     tamper(altered)
     with pytest.raises(ValueError):
         validate_fixture_receipt(altered)
+
 
 def test_forged_internal_baseline_fails_with_external_trusted_digest(fixture_receipt):
     altered = deepcopy(fixture_receipt)
@@ -141,11 +134,7 @@ def test_forged_internal_baseline_fails_with_external_trusted_digest(fixture_rec
     )
 
     altered["planner"]["expected_semantic_pins_sha256"] = _semantic_pins(
-        _receipt_semantic_events(
-            altered["plan"]["events"], altered["plan"]["servings"]
-        )
+        _receipt_semantic_events(altered["plan"]["events"], altered["plan"]["servings"])
     )
     with pytest.raises(ValueError):
-        validate_fixture_receipt(
-            altered, trusted_semantic_pins_sha256=original_digest
-        )
+        validate_fixture_receipt(altered, trusted_semantic_pins_sha256=original_digest)
