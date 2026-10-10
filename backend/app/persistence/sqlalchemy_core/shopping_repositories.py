@@ -5,6 +5,7 @@ from uuid import UUID
 
 from sqlalchemy import insert, select
 from sqlalchemy.engine import Connection
+from sqlalchemy.exc import DBAPIError, IntegrityError, OperationalError
 
 from app.domain.shopping_lists import (
     ShoppingList,
@@ -21,7 +22,11 @@ from app.persistence.sqlalchemy_core.shopping_tables import (
 from app.persistence.sqlalchemy_core.shopping_tables import (
     shopping_unresolved_obligations_table as unresolved,
 )
-from app.services.shopping_contracts import ShoppingPersistenceError
+from app.persistence.sqlalchemy_core.sqlite_errors import is_sqlite_concurrency_conflict
+from app.services.shopping_contracts import (
+    ShoppingPersistenceConflictError,
+    ShoppingPersistenceError,
+)
 
 
 class SqlAlchemyShoppingListRepository:
@@ -35,15 +40,33 @@ class SqlAlchemyShoppingListRepository:
             for row in (*detail.items, *detail.unresolved)
         ):
             raise ValueError("Shopping children must belong to one Household list")
-        self._connection.execute(insert(lists).values(**asdict(header)))
-        if detail.items:
-            self._connection.execute(
-                insert(items), [asdict(row) for row in detail.items]
-            )
-        if detail.unresolved:
-            self._connection.execute(
-                insert(unresolved), [asdict(row) for row in detail.unresolved]
-            )
+        try:
+            self._connection.execute(insert(lists).values(**asdict(header)))
+            if detail.items:
+                self._connection.execute(
+                    insert(items), [asdict(row) for row in detail.items]
+                )
+            if detail.unresolved:
+                self._connection.execute(
+                    insert(unresolved), [asdict(row) for row in detail.unresolved]
+                )
+        except IntegrityError as exc:
+            # The UoW owns rollback; callers must not see driver exceptions.
+            raise ShoppingPersistenceConflictError(
+                "Невозможно сохранить список покупок: конфликт ограничений данных."
+            ) from exc
+        except OperationalError as exc:
+            if is_sqlite_concurrency_conflict(exc):
+                raise ShoppingPersistenceConflictError(
+                    "Запись списка покупок занята; повторите попытку."
+                ) from exc
+            raise ShoppingPersistenceError(
+                "Не удалось сохранить список покупок."
+            ) from exc
+        except DBAPIError as exc:
+            raise ShoppingPersistenceError(
+                "Не удалось сохранить список покупок."
+            ) from exc
 
     def get_detail(
         self, household_id: UUID, list_id: UUID
