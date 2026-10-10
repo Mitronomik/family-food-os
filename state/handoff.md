@@ -1,3 +1,11 @@
+# PR10-META-FIXTURE — synthetic persisted event/recipe lineage handoff — 2026-10-10
+
+Base `05610128ad7c1156e5908b809606a5cb7223acce` (#194 merged, PR10-META still BLOCKED). Issue #195, branch `evidence/pr10-meta-gate2-fixture`. Read root AGENTS/scoped scripts/backend tests/docs, accepted [PR10 contract](../docs/family-food/pr10-prep-freezer-implementation-contract.md), [BLOCKED META decision](../docs/family-food/pr10-meta-readiness-decision.md), [fixture evidence contract](../docs/family-food/pr10-meta-gate2-fixture-evidence.md) and `scripts/audit_dc4_corpus_readiness_rerun.py`.
+
+The evidence script seeds an ephemeral SQLite DB through existing accepted DC4 seed + Planner/MealPlan services, builds 3-member seven-day fixture, validates persisted 21 events/42 Servings and current verified active RecipeVersion/step pins. It emits machine JSON as CI artifact with ephemeral fixture UUIDs and exact non-ephemeral recipe source version identities; deliberately `gate_decision=BLOCKED`. No Prep arithmetic/hold/freezer domain authority, migration or Pantry mutation. Verify focused TestClient/domain-style tests, exact-head CI, docs links and artifact SHA; any runtime script error is local to this one bounded evidence task. On successful independent review, source-backed shared-operation/food-state evidence is still required before PR10-META READY.
+
+---
+
 # PR10-META — blocked evidence gate handoff — 2026-10-10
 
 **Accepted main:** `6189fc634030a6d011ed930ed70690e196af3ba0` (#192 PR10-ARCH merged; #190 Shopping API merged). Current docs-only Issue #193 branch `docs/pr10-meta-readiness-gate` with [decision](../docs/family-food/pr10-meta-readiness-decision.md) and [machine receipt](../docs/family-food/pr10-meta-candidate-evidence.json). Read root/scoped AGENTS, accepted PR10 contract and earlier metadata audit before continuation.
