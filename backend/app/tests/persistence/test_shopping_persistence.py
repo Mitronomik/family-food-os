@@ -546,7 +546,10 @@ def test_food_sort_changes_produce_stale_and_immutable_successors(store):
         rice.id,
         leaf.id,
     )
-    assert second.shopping_list.source_fingerprint != first.shopping_list.source_fingerprint
+    assert (
+        second.shopping_list.source_fingerprint
+        != first.shopping_list.source_fingerprint
+    )
 
     # Changing only the category reverses that order again.
     with engine.begin() as connection:
@@ -562,7 +565,10 @@ def test_food_sort_changes_produce_stale_and_immutable_successors(store):
         leaf.id,
         rice.id,
     )
-    assert third.shopping_list.source_fingerprint != second.shopping_list.source_fingerprint
+    assert (
+        third.shopping_list.source_fingerprint
+        != second.shopping_list.source_fingerprint
+    )
     assert service.get_current(household.id, plan.plan.id).detail == third
     assert service.generate(household.id, plan.plan.id) == third
     assert service.list_history(household.id, plan.plan.id) == [first, second, third]
@@ -651,7 +657,11 @@ def test_duplicate_shopping_uuid_is_application_conflict_and_rolls_back(store):
     assert _service(engine).get_detail(household.id, first.shopping_list.id) == first
     with sqlite3.connect(config.path) as conn:
         assert conn.execute("SELECT count(*) FROM shopping_lists").fetchone()[0] == 1
-        assert conn.execute("SELECT count(*) FROM shopping_unresolved_obligations").fetchone()[0] == 1
+        assert (
+            conn.execute("SELECT count(*) FROM shopping_unresolved_obligations")
+            .fetchone()[0]
+            == 1
+        )
         assert conn.execute("SELECT count(*) FROM pantry_movements").fetchone()[0] == 0
 
 
@@ -727,7 +737,11 @@ def test_simultaneous_identical_generation_uses_one_immutable_snapshot(store):
         ]
         with sqlite3.connect(config.path) as conn:
             assert conn.execute("SELECT count(*) FROM shopping_lists").fetchone()[0] == 1
-            assert conn.execute("SELECT count(*) FROM shopping_unresolved_obligations").fetchone()[0] == 1
+            assert (
+            conn.execute("SELECT count(*) FROM shopping_unresolved_obligations")
+            .fetchone()[0]
+            == 1
+        )
             assert conn.execute("SELECT count(*) FROM pantry_movements").fetchone()[0] == 0
     finally:
         other_engine.dispose()
