@@ -1,3 +1,13 @@
+# PR10-META-SAFETY — official guidance scope and pair NO-GO — 2026-10-10
+
+**Accepted base:** `326480f42aa5f3bada5398a369eb75003d6cceaa`, merged #198. Current docs-only Issue #199, branch `docs/pr10-meta-safety-source-scope`. Read `AGENTS.md`, `state/current-focus.md`, PR10-ARCH and META decision, [two-event source preflight](../docs/family-food/pr10-meta-shared-process-preflight.md), [new source-applicability report](../docs/family-food/pr10-meta-safety-source-scope.md) plus its [JSON matrix](../docs/family-food/pr10-meta-safety-source-scope.json).
+
+**Source facts:** Fri SCHNITZEL event `ece787f4-ac81-4390-b57f-211c220b02a9`, Sat BITOCHEK `63c2c701-ce68-4637-8a96-07252d32fde5`. Identical source first step prepares *raw beef mixed with milk-soaked bread*; source steps 2 shape different products. Official Rospotrebnadzor general minced-meat advice and prepared-product advice, and USDA general raw ground-beef storage/cooking guidance, **do not clear that exact raw composite through Friday→Saturday**. Fixture has dates, no cooking/holding clocks or cold-chain state. Product-ready action saving is not proven. Document **case NO-GO**, `PR10-META=BLOCKED`, without inventing storage/defrost/freezer numbers.
+
+No production code/migration/seed/API changes; no PR10-A/B/C or PDF. After docs CI and independent review, next separate evidence task could rank a different actual 2-event pair requiring same-day preparation instead of indefinite repetition of an unsafe overnight assumption. No merge autonomously.
+
+---
+
 # PR10-META-SHARED — source process preflight review handoff — 2026-10-10
 
 Merged base `main@c73f8a935a1c8ab39d1897310ed326005d0b68fd` (#196). Current docs-only Issue #197 / branch `docs/pr10-meta-shared-process-preflight`. Read root/scoped AGENTS, accepted PR10-ARCH, merged PR10-META blocked decision, [pair report](../docs/family-food/pr10-meta-shared-process-preflight.md), [frozen pair JSON](../docs/family-food/pr10-meta-shared-process-evidence.json), School2022 R3-A reviewed manifest and exact #196 artifact identity.
