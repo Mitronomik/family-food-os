@@ -1,3 +1,13 @@
+# PR10-META-FIXTURE — persisted 3-member source pins — 2026-10-10
+
+**Accepted main:** `05610128ad7c1156e5908b809606a5cb7223acce`, PR #194 PR10-META (BLOCKED evidence) **MERGED** at 2026-10-10T13:44:00Z. PR #192 PR10-ARCH MERGED. **Gate PR10-META still BLOCKED**; PR10-A/B/C/PDF and Gate 2 not authorized.
+
+**CURRENT bounded work:** Issue #195 / branch `evidence/pr10-meta-gate2-fixture`; demonstrate a real **synthetic, persisted** three-member Planner week and audited source pins using the isolated [evidence script](../scripts/audit_pr10_meta_gate2_fixture.py), [CI](../.github/workflows/pr10-meta-fixture-evidence.yml), [proof/limits](../docs/family-food/pr10-meta-gate2-fixture-evidence.md). Source catalogue uses current verified RecipeVersion/step hashes. Fixture UUIDs are ephemeral; generated and archived as a CI receipt, not presumed from DC4 summary.
+
+Do not create Prep runtime/DB migration or invent batch/freezer/hold authority; independent source-backed two-event shared-work reduction remains another reviewed task. No merge without approval.
+
+---
+
 # PR10-META — source-readiness evidence gate (BLOCKED proposal) — 2026-10-10
 
 **Accepted main:** `6189fc634030a6d011ed930ed70690e196af3ba0` = merged PR #192 (PR10-ARCH). PR9 fully merged; Gate 2 NOT COMPLETE. Current bounded Issue #193 / `docs/pr10-meta-readiness-gate`: docs/evidence-only [PR10-META decision](../docs/family-food/pr10-meta-readiness-decision.md) and [30-candidate machine receipt](../docs/family-food/pr10-meta-candidate-evidence.json).

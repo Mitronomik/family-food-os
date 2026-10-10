@@ -1,0 +1,64 @@
+name: PR10-META persisted fixture evidence
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit_pr10_meta_gate2_fixture.py'
+      - 'backend/app/tests/test_pr10_meta_gate2_fixture.py'
+      - 'docs/family-food/pr10-meta-gate2-fixture-*.md'
+      - '.github/workflows/pr10-meta-fixture-evidence.yml'
+      - 'state/current-focus.md'
+      - 'state/progress.md'
+      - 'state/handoff.md'
+
+permissions:
+  contents: read
+
+jobs:
+  fixture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      AI_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install supported backend and lint baseline
+        run: python -m pip install -e './backend[test]' 'ruff==0.16.10'
+      - name: Persisted fixture and adversarial pin checks
+        run: python -m pytest -q backend/app/tests/test_pr10_meta_gate2_fixture.py --tb=short
+      - name: Capture synthetic persisted fixture receipt
+        run: |
+          python -m scripts.audit_pr10_meta_gate2_fixture --output /tmp/pr10-meta-fixture-receipt.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("/tmp/pr10-meta-fixture-receipt.json")
+          receipt = json.loads(p.read_text(encoding="utf-8"))
+          counts = receipt["counts"]
+          assert counts["members"] == 3
+          assert counts["meal_events"] == 21
+          assert counts["servings"] == 42
+          assert counts["current_verified_catalogue_versions"] >= 30
+          assert receipt["gate_decision"] == "BLOCKED"
+          assert receipt["scope"] == "SYNTHETIC_FRESH_SQLITE_PERSISTED_DIAGNOSTIC_ONLY"
+          PY
+          sha256sum /tmp/pr10-meta-fixture-receipt.json
+      - name: Focused Ruff + format
+        run: |
+          python -m ruff check scripts/audit_pr10_meta_gate2_fixture.py backend/app/tests/test_pr10_meta_gate2_fixture.py
+          python -m ruff format --check scripts/audit_pr10_meta_gate2_fixture.py backend/app/tests/test_pr10_meta_gate2_fixture.py
+      - name: PR whitespace scope
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: git diff --check "$BASE_SHA"...HEAD
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pr10-meta-synthetic-fixture-receipt
+          path: /tmp/pr10-meta-fixture-receipt.json
+          if-no-files-found: error
+          retention-days: 30
