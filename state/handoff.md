@@ -1,3 +1,13 @@
+# PR10-META-ALTERNATIVE — same-day raw-vegetable candidate handoff — 2026-10-10
+
+**Base:** `main@9a8e978c5aecb5c5390e9189acb0a0536f05e426`, merged PR #200. Current docs-only Issue #201 and branch `docs/pr10-meta-same-day-pair-audit`. Read root/scoped AGENTS, accepted PR10 contract, [alternative audit](../docs/family-food/pr10-meta-same-day-pair-audit.md), [machine receipt](../docs/family-food/pr10-meta-same-day-pair-evidence.json), accepted [R3-D source cards](../data/curation/r3d-final-dc3-batch-gate/frozen-batch.json) and merged [safety NO-GO](../docs/family-food/pr10-meta-safety-source-scope.md).
+
+Accepted #196 artifact JSON SHA256 `6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec` was directly checked; 7 days with 3 MealEvents each produce **21 unordered same-day pairs**, **0 matching exact RecipeStep hashes**. Select Tue lunch `cf0e3fe3-4c59-4447-9fbd-7a9e19c6ff49` ragout and Tue dinner `d000a213-d169-4f10-a2ad-08180f40aea6` pea soup; both use CARROT/ONION_BULB_FRESH/POTATO but source directions differ and stage-specific butter/water distribution is unproven. Potential common raw veggie wash/peel is research only; no shared ready-to-cook action or action savings approved; MealPlan does not pin exact prep/use times or safe holds.
+
+**PR10-META remains BLOCKED.** No PR10-A/B/C, migration, source publication or PDF. Verify docs-only CI, source-link scope and independent review; if accepted, next bounded source-authority/metadata publication contract can review **only** raw-vegetable prep stage equivalence and direct food-state evidence rather than more string matching. No autonomous merge.
+
+---
+
 # PR10-META-SAFETY — official guidance scope and pair NO-GO — 2026-10-10
 
 **Accepted base:** `326480f42aa5f3bada5398a369eb75003d6cceaa`, merged #198. Current docs-only Issue #199, branch `docs/pr10-meta-safety-source-scope`. Read `AGENTS.md`, `state/current-focus.md`, PR10-ARCH and META decision, [two-event source preflight](../docs/family-food/pr10-meta-shared-process-preflight.md), [new source-applicability report](../docs/family-food/pr10-meta-safety-source-scope.md) plus its [JSON matrix](../docs/family-food/pr10-meta-safety-source-scope.json).

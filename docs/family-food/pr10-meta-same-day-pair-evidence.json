@@ -1,0 +1,215 @@
+{
+  "schema": "PR10_META_SAME_DAY_PAIR_AUDIT_V1",
+  "decision": "BLOCKED_NO_REVIEWED_SHARED_PREP_OPERATION",
+  "accepted_main_sha": "9a8e978c5aecb5c5390e9189acb0a0536f05e426",
+  "scope": "SYNTHETIC_PERSISTED_GATE2_FIXTURE_EVIDENCE_ONLY",
+  "issue": 201,
+  "artifact": {
+    "from_merged_pr": 196,
+    "workflow_run_id": 38059374826,
+    "artifact_id": 11672432141,
+    "json_sha256": "6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec",
+    "independent_planner_semantic_sha256": "2d6cb581649863b7edbd3c0efff2bae2934c6a512c99a45d10e92f92f514cb3d",
+    "mealplan_id": "589ef95a-2158-40a1-af91-0e13087d5744"
+  },
+  "comparison_algorithm": "For each of seven exact local_date groups from accepted JSON receipt, take all unordered pairs of three COOK_RECIPE MealEvents and intersect immutable catalogue RecipeVersion.steps[].instruction_sha256 sets. Report nonempty pair count; do not infer preparation stage equivalence from text nor raw FoodIngredient identity.",
+  "coverage": {
+    "days": [
+      {
+        "date": "2026-09-14",
+        "recipes": [
+          "SCHOOL2022_54_1O_NATURAL_OMELET",
+          "SCHOOL2022_54_3M_LAZY_CABBAGE_ROLLS",
+          "MR2019_6_9_VERMICELLI_HARD_CHEESE"
+        ],
+        "unordered_distinct_event_pairs": 3,
+        "pairs_sharing_identical_published_step_sha256": 0
+      },
+      {
+        "date": "2026-09-15",
+        "recipes": [
+          "SCHOOL2022_54_2T_COTTAGE_CHEESE_CARROT_CASSEROLE",
+          "MR2019_2_11_BEEF_VEGETABLE_RAGOUT",
+          "MR2019_1_16_POTATO_SPLIT_PEA_SOUP"
+        ],
+        "unordered_distinct_event_pairs": 3,
+        "pairs_sharing_identical_published_step_sha256": 0
+      },
+      {
+        "date": "2026-09-16",
+        "recipes": [
+          "SCHOOL2022_54_16K_DRUZHBA_PORRIDGE",
+          "SCHOOL2022_54_17R_SALMON_TOMATO_VEGETABLES",
+          "SCHOOL2022_54_7R_POLLOCK_IN_MILK"
+        ],
+        "unordered_distinct_event_pairs": 3,
+        "pairs_sharing_identical_published_step_sha256": 0
+      },
+      {
+        "date": "2026-09-17",
+        "recipes": [
+          "SCHOOL2022_54_13K_WHEAT_MILK_PORRIDGE",
+          "MR2019_2_15_STEAMED_CHICKEN_SOUFFLE",
+          "SCHOOL2022_54_21M_BOILED_CHICKEN"
+        ],
+        "unordered_distinct_event_pairs": 3,
+        "pairs_sharing_identical_published_step_sha256": 0
+      },
+      {
+        "date": "2026-09-18",
+        "recipes": [
+          "SCHOOL2022_54_1T_COTTAGE_CHEESE_CASSEROLE",
+          "SCHOOL2022_54_7M_BEEF_SCHNITZEL",
+          "SCHOOL2022_54_1R_COD_CUTLET"
+        ],
+        "unordered_distinct_event_pairs": 3,
+        "pairs_sharing_identical_published_step_sha256": 0
+      },
+      {
+        "date": "2026-09-19",
+        "recipes": [
+          "SCHOOL2022_54_1K_LIQUID_CORN_MILK_PORRIDGE",
+          "SCHOOL2022_54_6M_BEEF_BITOCHEK",
+          "MR2019_1_2A_VEGETARIAN_CABBAGE_SOUP"
+        ],
+        "unordered_distinct_event_pairs": 3,
+        "pairs_sharing_identical_published_step_sha256": 0
+      },
+      {
+        "date": "2026-09-20",
+        "recipes": [
+          "SCHOOL2022_54_3O_CARROT_OMELET",
+          "SCHOOL2022_54_26M_POTATO_BEEF_CASSEROLE",
+          "MR2019_6_19_BAKED_MACARONI_HARD_CHEESE"
+        ],
+        "unordered_distinct_event_pairs": 3,
+        "pairs_sharing_identical_published_step_sha256": 0
+      }
+    ],
+    "meal_events": 21,
+    "events_per_day": 3,
+    "same_day_unordered_pairs": 21,
+    "same_day_pairs_with_identical_source_step_hash": 0,
+    "source_step_equivalence": "NONE_CONFIRMED_SAME_DAY"
+  },
+  "primary_candidate": {
+    "meal_date": "2026-09-15",
+    "source_publication": "data/curation/r3d-final-dc3-batch-gate/frozen-batch.json",
+    "source_family": "RU_MR_2_4_0162_19",
+    "source_document_raw_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+    "events": [
+      {
+        "meal_role": "LUNCH",
+        "meal_event_id": "cf0e3fe3-4c59-4447-9fbd-7a9e19c6ff49",
+        "recipe_code": "MR2019_2_11_BEEF_VEGETABLE_RAGOUT",
+        "recipe_version_id": "063694fb-92cf-4731-adf6-041d36a532e4",
+        "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/miasnye-bliuda/tekhnologicheskaia-karta-n-2.11/",
+        "source_card_raw_sha256": "89ef921166ece243277dc3f1106e340769f3a99a89195ff10028bd78f529a295",
+        "source_process_hash": "4171ef5b08d51cb1775f1bd8244042f20c016718a587f7440f954cd5db571177",
+        "relevant_recipe_step_position": 2,
+        "relevant_step_sha256": "55519c2f9e26fbb12ea8abd237547f58d94361f17deff6005919d7a86c7ad128",
+        "servings": [
+          {
+            "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+            "portion_servings": "2.470615"
+          }
+        ],
+        "source_base_servings": "1",
+        "source_ingredient_amounts_g": {
+          "CARROT": "35",
+          "ONION_BULB_FRESH": "9",
+          "POTATO": "91"
+        },
+        "source_step_summary": "Finely chop onion and carrot, then poach with a little water and butter; water allocation among steps is unknown"
+      },
+      {
+        "meal_role": "DINNER",
+        "meal_event_id": "d000a213-d169-4f10-a2ad-08180f40aea6",
+        "recipe_code": "MR2019_1_16_POTATO_SPLIT_PEA_SOUP",
+        "recipe_version_id": "116e25fa-12f3-4926-8a2a-7aa2cf99bb9c",
+        "source_page_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.16/",
+        "source_card_raw_sha256": "f4d70b7eb24de3fc10fd239ad6dcb2d7047c8e458541a0a1f8d6e15256ee8731",
+        "source_process_hash": "d4248bc8b7b013353362ca44314bd50e4b98ee546603affdefb575d624c3a9cd",
+        "relevant_recipe_step_position": 2,
+        "relevant_step_sha256": "a75d7d9fa0b0a77ab6eefd8a7b357c522dfc750662db99126efe89ea4447d850",
+        "servings": [
+          {
+            "member_id": "13d2b046-63fc-4c2e-af0d-483f067f9c16",
+            "portion_servings": "2.707523"
+          },
+          {
+            "member_id": "171cbad3-0b5f-44ba-bba2-ff4fc67537f0",
+            "portion_servings": "2.707523"
+          },
+          {
+            "member_id": "def51f62-65be-4939-8860-70c792ff7731",
+            "portion_servings": "3.147820"
+          }
+        ],
+        "source_base_servings": "1",
+        "source_ingredient_amounts_g": {
+          "CARROT": "14",
+          "ONION_BULB_FRESH": "5",
+          "POTATO": "88"
+        },
+        "source_step_summary": "Prepare carrot and onion and poach in water with butter; no identical cutting stage or water split is specified"
+      }
+    ],
+    "confirmed_common_food_ingredient_codes": [
+      "CARROT",
+      "ONION_BULB_FRESH",
+      "POTATO"
+    ],
+    "only_candidate_shared_physical_work": "WASH_OR_PEEL_RAW_CARROT_AND_ONION_BOTH_RECIPES_AT_ONE_SESSION_POTENTIALLY",
+    "source_review_status": "NO_PUBLISHED_SHARED_COMPONENT_IDENTITY_OR_CUTTING_EQUIVALENCE",
+    "source_steps_exactly_identical": false,
+    "same_day_does_not_prove_simultaneous_prep": true,
+    "meal_prep_clock_times_pinned": false,
+    "reviewed_intermediate_storage_transition": false,
+    "reviewed_actual_net_action_saving": false,
+    "reviewed_scalable_numeric_step_instructions": false,
+    "safe_executable_grouping_authorized": false
+  },
+  "negative_controls": [
+    {
+      "date": "2026-09-17",
+      "roles": [
+        "LUNCH",
+        "DINNER"
+      ],
+      "codes": [
+        "MR2019_2_15_STEAMED_CHICKEN_SOUFFLE",
+        "SCHOOL2022_54_21M_BOILED_CHICKEN"
+      ],
+      "reason": "Chicken names overlap but canonical source raw identities differ: CHICKEN_CATEGORY_1_WHOLE_RAW vs CHICKEN_BREAST, not fungible."
+    },
+    {
+      "dates": [
+        "2026-09-18",
+        "2026-09-19"
+      ],
+      "codes": [
+        "SCHOOL2022_54_7M_BEEF_SCHNITZEL",
+        "SCHOOL2022_54_6M_BEEF_BITOCHEK"
+      ],
+      "reason": "Exact common first-step hash across different days; accepted PR #200 case NO_GO for unverified overnight raw beef/milk/bread composite."
+    }
+  ],
+  "blockers": [
+    "UNREVIEWED_CROSS_RECIPE_PREP_COMPONENT_IDENTITY",
+    "RAGOUT_FINE_CHOP_VS_SOUP_UNSPECIFIED_PREP_FORM",
+    "UNKNOWN_MR2019_SOURCE_INTERNAL_WATER_AND_BUTTER_PROCESS_SPLIT",
+    "NO_ACTUAL_PREP_OR_HOLD_TIMES_OR_FOOD_STATE",
+    "NO_NET_PHYSICAL_ACTION_REDUCTION_PROVEN",
+    "NO_SOURCE_VERIFIED_NUMERIC_STEP_CLASSIFICATIONS"
+  ],
+  "non_goals": [
+    "NO_RECIPE_METADATA_PUBLICATION",
+    "NO_PREP_RUNTIME",
+    "NO_NEW_STORAGE_NUMBERS",
+    "NO_FREEZER_GUIDANCE",
+    "NO_PANTRY_MUTATION",
+    "NO_PR10_A_AUTHORIZATION"
+  ],
+  "next_evidence": "PR10_META_REVIEWED_SHARED_RAW_VEGETABLE_PREP_COMPONENT_OR_ALTERNATIVE_SOURCE_RECIPE_PUBLICATION_EVIDENCE_GATE"
+}
