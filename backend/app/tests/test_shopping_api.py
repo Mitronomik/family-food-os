@@ -204,8 +204,12 @@ def test_exact_quantities_fefo_evidence_and_no_pantry_write(api):
     payload = response.json()
     assert payload["status"] == "COMPLETE"
     assert payload["price_status"] == "UNKNOWN"
-    rice_item = next(x for x in payload["items"] if x["food_ingredient_id"] == str(rice.id))
-    leaf_item = next(x for x in payload["items"] if x["food_ingredient_id"] == str(leaf.id))
+    rice_item = next(
+        x for x in payload["items"] if x["food_ingredient_id"] == str(rice.id)
+    )
+    leaf_item = next(
+        x for x in payload["items"] if x["food_ingredient_id"] == str(leaf.id)
+    )
     assert (
         rice_item["required_quantity"],
         rice_item["pantry_available_quantity"],
@@ -227,9 +231,12 @@ def test_exact_quantities_fefo_evidence_and_no_pantry_write(api):
     assert payload["allocations"][0]["food_ingredient_id"] == str(rice.id)
     assert "pantry_items" not in str(payload)
     with sqlite3.connect(config.path) as connection:
-        assert connection.execute(
-            "SELECT quantity FROM pantry_items WHERE id=?", (stock.id.hex,)
-        ).fetchone()[0] == "300.000"
+        assert (
+            connection.execute(
+                "SELECT quantity FROM pantry_items WHERE id=?", (stock.id.hex,)
+            ).fetchone()[0]
+            == "300.000"
+        )
     assert _rows(config, "pantry_movements") == 0
 
 
@@ -250,7 +257,10 @@ def test_stale_successor_revert_and_historical_detail(api):
     assert newer["id"] != first["id"]
     assert newer["supersedes_list_id"] == first["id"]
     assert newer["source_fingerprint"] != first["source_fingerprint"]
-    assert client.get(root + "/shopping-lists/" + first["id"]).json()["lifecycle"] == "STALE"
+    assert (
+        client.get(root + "/shopping-lists/" + first["id"]).json()["lifecycle"]
+        == "STALE"
+    )
     assert client.get(prefix).json()["shopping_lists"][0]["id"] == first["id"]
 
     with SqlAlchemyPantryUnitOfWork(engine) as scope:
@@ -259,9 +269,10 @@ def test_stale_successor_revert_and_historical_detail(api):
     current = client.get(prefix + "/current").json()
     assert current["lifecycle"] == "CURRENT"
     assert current["detail"]["id"] == first["id"]
-    assert client.get(root + "/shopping-lists/" + newer["id"]).json()[
-        "stale_reason"
-    ] == "HISTORICAL_SNAPSHOT"
+    assert (
+        client.get(root + "/shopping-lists/" + newer["id"]).json()["stale_reason"]
+        == "HISTORICAL_SNAPSHOT"
+    )
     assert client.post(prefix).json()["id"] == first["id"]
     assert len(client.get(prefix).json()["shopping_lists"]) == 2
     assert _rows(config, "shopping_lists") == 2
@@ -341,7 +352,12 @@ def test_household_scope_validation_and_unknown_inputs(api):
     unknown = client.get(root + "/shopping-lists/" + str(missing_id))
     assert wrong.status_code == unknown.status_code == 404
     assert wrong.json() == unknown.json()
-    assert client.get(second_root + "/shopping-lists/" + saved["unresolved"][0]["id"]).status_code == 404
+    assert (
+        client.get(
+            second_root + "/shopping-lists/" + saved["unresolved"][0]["id"]
+        ).status_code
+        == 404
+    )
     assert _rows(config, "shopping_lists") == 1
 
 
@@ -390,9 +406,12 @@ def test_error_taxonomy_and_openapi(api, monkeypatch):
     household, plan = _prepare(engine)
     _, prefix = _urls(household, plan)
     paths = client.get("/openapi.json").json()["paths"]
-    assert prefix.replace(str(household.id), "{household_id}").replace(
-        str(plan.plan.id), "{plan_id}"
-    ) in paths
+    assert (
+        prefix.replace(str(household.id), "{household_id}").replace(
+            str(plan.plan.id), "{plan_id}"
+        )
+        in paths
+    )
 
     def broken_factory(_engine):
         class Broken:
