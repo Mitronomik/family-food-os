@@ -33,6 +33,8 @@ from app.services.shopping_contracts import (
 )
 
 ShoppingServiceProvider = Callable[[], ShoppingService]
+# Module-level Body object avoids constructing dependency metadata per endpoint.
+_EMPTY_SHOPPING_COMMAND = Body(default_factory=ShoppingGenerateRequest)
 
 _LIFECYCLE_MESSAGES = {
     ShoppingLifecycle.MISSING: "Список покупок пока не сформирован.",
@@ -123,7 +125,7 @@ def _provenance(
         raw_warnings = source["warnings"]
         raw_allocations = source["allocations"]
         if not isinstance(raw_warnings, list) or not isinstance(raw_allocations, list):
-            raise ValueError("Invalid Shopping provenance collections")
+            raise TypeError("Invalid Shopping provenance collections")
         warnings = [
             ShoppingWarningResponse(
                 code=entry["code"],
@@ -154,7 +156,7 @@ def _provenance(
 
 def _exact_quantity(value: object) -> str:
     if not isinstance(value, str):
-        raise ValueError("Shopping provenance quantity must be a decimal string")
+        raise TypeError("Shopping provenance quantity must be a decimal string")
     decimal = Decimal(value)
     if not decimal.is_finite() or decimal < 0:
         raise ValueError("Shopping provenance quantity is invalid")
@@ -267,7 +269,7 @@ def create_shopping_router(service_provider: ShoppingServiceProvider) -> APIRout
     def generate(
         household_id: UUID,
         plan_id: UUID,
-        payload: ShoppingGenerateRequest = Body(default_factory=ShoppingGenerateRequest),
+        payload: ShoppingGenerateRequest = _EMPTY_SHOPPING_COMMAND,
     ) -> ShoppingDetailResponse:
         del payload
         with _errors():
@@ -302,7 +304,7 @@ def create_shopping_router(service_provider: ShoppingServiceProvider) -> APIRout
     def regenerate(
         household_id: UUID,
         plan_id: UUID,
-        payload: ShoppingGenerateRequest = Body(default_factory=ShoppingGenerateRequest),
+        payload: ShoppingGenerateRequest = _EMPTY_SHOPPING_COMMAND,
     ) -> ShoppingDetailResponse:
         del payload
         with _errors():
