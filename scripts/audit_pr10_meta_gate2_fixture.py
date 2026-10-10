@@ -11,8 +11,8 @@ import argparse
 import hashlib
 import json
 import tempfile
-from datetime import timedelta
-from decimal import Decimal
+from datetime import date, timedelta
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any
 
@@ -48,42 +48,205 @@ def _hash(value: object) -> str:
     return hashlib.sha256(encoded).hexdigest()
 
 
-def validate_fixture_receipt(receipt: dict[str, Any]) -> None:
-    """Fail closed if persisted fixture has missing or crossed authority pins."""
+def _finite_portion(value: object) -> str:
+    """Canonical exact Decimal amount, rejecting NaN, infinity, invalid and zero."""
+    if not isinstance(value, str):
+        raise ValueError("Serving amount must be a finite Decimal string")
+    try:
+        amount = Decimal(value)
+    except InvalidOperation as exc:
+        raise ValueError("Serving amount is not a Decimal") from exc
+    if not amount.is_finite() or amount <= 0:
+        raise ValueError("Serving amount must be positive and finite")
+    return format(amount.normalize(), "f")
+
+
+def _semantic_pins(events: list[dict[str, Any]]) -> str:
+    """Hash exact Planner semantic selection and per-event participant servings."""
+    ordered = sorted(events, key=lambda row: (row["local_date"], row["position"]))
+    return _hash(ordered)
+
+
+def _receipt_semantic_events(
+    events: list[dict[str, Any]], servings: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
+    by_event: dict[str, list[dict[str, str]]] = {
+        event["event_id"]: [] for event in events
+    }
+    for serving in servings:
+        by_event[serving["event_id"]].append(
+            {
+                "member_id": serving["member_id"],
+                "portion_servings": _finite_portion(serving["portion_servings"]),
+            }
+        )
+    return [
+        {
+            "local_date": event["local_date"],
+            "position": event["position"],
+            "role": event["role"],
+            "source_kind": event["source_kind"],
+            "recipe_version_id": event["recipe_version_id"],
+            "servings": sorted(
+                by_event[event["event_id"]], key=lambda item: item["member_id"]
+            ),
+        }
+        for event in events
+    ]
+
+
+def _planner_semantic_events(planned_events: object) -> list[dict[str, Any]]:
+    """Independent Planner output; do not derive the baseline from the receipt."""
+    return [
+        {
+            "local_date": event.local_date.isoformat(),
+            "position": event.position,
+            "role": event.role.value,
+            "source_kind": event.source_kind.value,
+            "recipe_version_id": (
+                str(event.recipe_version_id)
+                if event.recipe_version_id is not None
+                else None
+            ),
+            "servings": sorted(
+                (
+                    {
+                        "member_id": str(member_id),
+                        "portion_servings": _finite_portion(str(quantity)),
+                    }
+                    for member_id, quantity in event.portions
+                ),
+                key=lambda item: item["member_id"],
+            ),
+        }
+        for event in planned_events
+    ]
+
+
+def validate_fixture_receipt(
+    receipt: dict[str, Any], *, trusted_semantic_pins_sha256: str | None = None
+) -> None:
+    """Validate structural pins plus an independently calculated Planner baseline.
+
+    An external verifier must additionally pin the JSON SHA256 from CI. The
+    embedded expected_semantic_pins_sha256 detects accidental/partial mutation,
+    but does not authenticate malicious edits that also replace that field.
+    """
+    if receipt["schema"] != "PR10_META_GATE2_FIXTURE_PINS_V1":
+        raise ValueError("Unsupported receipt schema")
+    if receipt["scope"] != "SYNTHETIC_FRESH_SQLITE_PERSISTED_DIAGNOSTIC_ONLY":
+        raise ValueError("Unsupported fixture scope")
     plan = receipt["plan"]
-    members = {row["member_id"] for row in receipt["members"]}
     events = plan["events"]
     servings = plan["servings"]
-    catalogue = {row["recipe_version_id"] for row in receipt["catalogue"]}
+    catalogue = receipt["catalogue"]
+    members = receipt["members"]
+    selected_members = {row["member_id"] for row in members}
     event_ids = {event["event_id"] for event in events}
-    if len(members) != 3 or len(events) != 21 or len(event_ids) != 21:
+    catalogue_ids = {row["recipe_version_id"] for row in catalogue}
+
+    if len(members) != 3 or len(selected_members) != 3:
+        raise ValueError("Three-member fixture must have distinct members")
+    if {row["fixture_ordinal"] for row in members} != {1, 2, 3}:
+        raise ValueError("Invalid member ordinals")
+    if len(events) != 21 or len(event_ids) != 21:
         raise ValueError("Three-member week must contain 21 distinct events")
-    if len(servings) != 42 or len({s["serving_id"] for s in servings}) != 42:
+    if len(servings) != 42 or len({row["serving_id"] for row in servings}) != 42:
         raise ValueError("Three-member week must contain 42 distinct servings")
-    if len(catalogue) < 30 or len(catalogue) != len(receipt["catalogue"]):
+    if len(catalogue_ids) < 30 or len(catalogue_ids) != len(catalogue):
         raise ValueError("Fixture catalogue must contain >=30 distinct current pins")
-    if len({e["local_date"] for e in events}) != 7:
-        raise ValueError("Fixture must cover seven local calendar days")
-    if len(plan["member_selections"]) != 3:
-        raise ValueError("Missing member selection version pins")
-    if {x["member_id"] for x in plan["member_selections"]} != members:
-        raise ValueError("Member selection ownership mismatch")
-    if any(
-        row["event_id"] not in event_ids
-        or row["member_id"] not in members
-        or Decimal(row["portion_servings"]) <= 0
-        for row in servings
-    ):
-        raise ValueError("Unscoped or invalid Serving")
+    if len({row["canonical_code"] for row in catalogue}) != len(catalogue):
+        raise ValueError("Duplicate canonical recipe identity")
+
+    if len(plan["member_selections"]) != 3 or {
+        row["member_id"] for row in plan["member_selections"]
+    } != selected_members:
+        raise ValueError("Member selection coverage mismatch")
+    if len({row["selection_id"] for row in plan["member_selections"]}) != 3:
+        raise ValueError("Member selection identifiers must be distinct")
+    try:
+        first_day = date.fromisoformat(plan["week_start"])
+        last_day = date.fromisoformat(plan["week_end"])
+        days = {date.fromisoformat(row["local_date"]) for row in events}
+    except (TypeError, ValueError) as exc:
+        raise ValueError("Invalid fixture date") from exc
+    if last_day != first_day + timedelta(days=6) or days != {
+        first_day + timedelta(days=i) for i in range(7)
+    }:
+        raise ValueError("Meal events must cover exactly seven fixture days")
+    if len({(e["local_date"], e["position"]) for e in events}) != 21:
+        raise ValueError("Duplicate event schedule slot")
+
+    seen_pairs: set[tuple[str, str]] = set()
+    event_members = {event_id: set() for event_id in event_ids}
+    for row in servings:
+        pair = (row["event_id"], row["member_id"])
+        if (
+            row["event_id"] not in event_ids
+            or row["member_id"] not in selected_members
+            or pair in seen_pairs
+        ):
+            raise ValueError("Serving is foreign or duplicates an event/member pair")
+        _finite_portion(row["portion_servings"])
+        seen_pairs.add(pair)
+        event_members[row["event_id"]].add(row["member_id"])
+    if any(not members_for_event for members_for_event in event_members.values()):
+        raise ValueError("Meal event missing all Servings")
+
     for event in events:
         if event["plan_id"] != plan["plan_id"]:
             raise ValueError("Event belongs to a foreign plan")
         if event["source_kind"] != MealSourceKind.COOK_RECIPE.value:
             raise ValueError("Fixture unexpectedly contains non-recipe source")
-        if event["recipe_version_id"] not in catalogue:
+        if event["recipe_version_id"] not in catalogue_ids:
             raise ValueError("Event points outside verified active catalogue")
-    if not receipt["planner"]["deterministic"]:
-        raise ValueError("Planner trace is not deterministic")
+
+    for recipe in catalogue:
+        steps = recipe["steps"]
+        if not steps or len({step["recipe_step_id"] for step in steps}) != len(steps):
+            raise ValueError("Recipe source steps missing or duplicated")
+        if sorted(step["position"] for step in steps) != list(range(1, len(steps) + 1)):
+            raise ValueError("Recipe step positions are not contiguous")
+        if any(
+            not isinstance(step["instruction_sha256"], str)
+            or len(step["instruction_sha256"]) != 64
+            or any(c not in "0123456789abcdef" for c in step["instruction_sha256"])
+            for step in steps
+        ):
+            raise ValueError("Recipe step fingerprint malformed")
+        if recipe["process_hash"] != _hash(steps):
+            raise ValueError("Recipe process hash differs from included source steps")
+
+    counts = receipt["counts"]
+    expected_counts = {
+        "members": len(members),
+        "meal_events": len(events),
+        "servings": len(servings),
+        "current_verified_catalogue_versions": len(catalogue),
+        "unique_selected_versions": len(
+            {event["recipe_version_id"] for event in events}
+        ),
+    }
+    if counts != expected_counts:
+        raise ValueError("Receipt declared counts disagree with actual collections")
+    planner = receipt["planner"]
+    if planner["version"] != PLANNER_CONFIG.version or not planner["deterministic"]:
+        raise ValueError("Planner trace or configuration is unverified")
+    if planner["selected_exclusion_violations"]:
+        raise ValueError("Selected Planner meal violates member exclusions")
+    expected_semantic_sha = planner["expected_semantic_pins_sha256"]
+    if not isinstance(expected_semantic_sha, str) or len(expected_semantic_sha) != 64:
+        raise ValueError("Missing trusted Planner semantic baseline digest")
+    actual_semantic_sha = _semantic_pins(
+        _receipt_semantic_events(events, servings)
+    )
+    if actual_semantic_sha != expected_semantic_sha:
+        raise ValueError("Event/recipe/member Servings differ from Planner baseline")
+    if (
+        trusted_semantic_pins_sha256 is not None
+        and expected_semantic_sha != trusted_semantic_pins_sha256
+    ):
+        raise ValueError("Receipt Planner baseline differs from external trusted pin")
     if receipt["gate_decision"] != "BLOCKED":
         raise ValueError("Fixture evidence alone cannot declare PR10-META READY")
 
@@ -235,6 +398,9 @@ def build_fixture_receipt(config: DatabaseConfig) -> dict[str, Any]:
                 "deterministic": trace_stable,
                 "trace_fingerprint": pure_a.trace.fingerprint,
                 "request_fingerprint": pure_a.trace.request_fingerprint,
+                "expected_semantic_pins_sha256": _semantic_pins(
+                    _planner_semantic_events(pure_a.events)
+                ),
                 "selected_exclusion_violations": violations,
             },
             "members": [
@@ -264,7 +430,12 @@ def build_fixture_receipt(config: DatabaseConfig) -> dict[str, Any]:
                 ),
             },
         }
-        validate_fixture_receipt(payload)
+        validate_fixture_receipt(
+            payload,
+            trusted_semantic_pins_sha256=_semantic_pins(
+                _planner_semantic_events(pure_a.events)
+            ),
+        )
         return payload
     finally:
         engine.dispose()
@@ -290,6 +461,7 @@ def main() -> int:
                 "gate": receipt["gate_decision"],
                 "counts": receipt["counts"],
                 "output": str(args.output),
+                "planner_semantic_pins_sha256": receipt["planner"]["expected_semantic_pins_sha256"],
             },
             sort_keys=True,
         )
