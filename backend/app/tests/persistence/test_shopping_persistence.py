@@ -463,7 +463,6 @@ def test_full_recipe_pantry_generation_roundtrip_provenance_and_stale(store):
     assert len(service.list_history(household.id, plan.plan.id)) == 2
 
 
-
 def test_food_sort_changes_produce_stale_and_immutable_successors(store):
     config, engine = store
     recipe = _detail()
@@ -579,7 +578,6 @@ def test_food_sort_changes_produce_stale_and_immutable_successors(store):
         assert conn.execute("SELECT count(*) FROM pantry_movements").fetchone()[0] == 0
 
 
-
 def test_0043_failure_rolls_back_tables_and_marker(tmp_path, monkeypatch):
     from importlib import import_module
 
@@ -639,7 +637,6 @@ def test_competing_writer_timeout_is_retryable_and_releases_connection(store):
     assert saved.shopping_list.household_id == household.id
 
 
-
 def test_duplicate_shopping_uuid_is_application_conflict_and_rolls_back(store):
     config, engine = store
     household, plan = _prepare(engine, unresolved=True)
@@ -658,8 +655,9 @@ def test_duplicate_shopping_uuid_is_application_conflict_and_rolls_back(store):
     with sqlite3.connect(config.path) as conn:
         assert conn.execute("SELECT count(*) FROM shopping_lists").fetchone()[0] == 1
         assert (
-            conn.execute("SELECT count(*) FROM shopping_unresolved_obligations")
-            .fetchone()[0]
+            conn.execute(
+                "SELECT count(*) FROM shopping_unresolved_obligations"
+            ).fetchone()[0]
             == 1
         )
         assert conn.execute("SELECT count(*) FROM pantry_movements").fetchone()[0] == 0
@@ -738,14 +736,14 @@ def test_simultaneous_identical_generation_uses_one_immutable_snapshot(store):
         with sqlite3.connect(config.path) as conn:
             assert conn.execute("SELECT count(*) FROM shopping_lists").fetchone()[0] == 1
             assert (
-            conn.execute("SELECT count(*) FROM shopping_unresolved_obligations")
-            .fetchone()[0]
+            conn.execute(
+                "SELECT count(*) FROM shopping_unresolved_obligations"
+            ).fetchone()[0]
             == 1
         )
             assert conn.execute("SELECT count(*) FROM pantry_movements").fetchone()[0] == 0
     finally:
         other_engine.dispose()
-
 
 
 def test_backup_preserves_immutable_shopping_and_legacy_household(store, tmp_path):
