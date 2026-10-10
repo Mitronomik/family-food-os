@@ -158,9 +158,10 @@ def validate_fixture_receipt(
     if len({row["canonical_code"] for row in catalogue}) != len(catalogue):
         raise ValueError("Duplicate canonical recipe identity")
 
-    if len(plan["member_selections"]) != 3 or {
-        row["member_id"] for row in plan["member_selections"]
-    } != selected_members:
+    if (
+        len(plan["member_selections"]) != 3
+        or {row["member_id"] for row in plan["member_selections"]} != selected_members
+    ):
         raise ValueError("Member selection coverage mismatch")
     if len({row["selection_id"] for row in plan["member_selections"]}) != 3:
         raise ValueError("Member selection identifiers must be distinct")
@@ -237,9 +238,7 @@ def validate_fixture_receipt(
     expected_semantic_sha = planner["expected_semantic_pins_sha256"]
     if not isinstance(expected_semantic_sha, str) or len(expected_semantic_sha) != 64:
         raise ValueError("Missing trusted Planner semantic baseline digest")
-    actual_semantic_sha = _semantic_pins(
-        _receipt_semantic_events(events, servings)
-    )
+    actual_semantic_sha = _semantic_pins(_receipt_semantic_events(events, servings))
     if actual_semantic_sha != expected_semantic_sha:
         raise ValueError("Event/recipe/member Servings differ from Planner baseline")
     if (
@@ -461,7 +460,9 @@ def main() -> int:
                 "gate": receipt["gate_decision"],
                 "counts": receipt["counts"],
                 "output": str(args.output),
-                "planner_semantic_pins_sha256": receipt["planner"]["expected_semantic_pins_sha256"],
+                "planner_semantic_pins_sha256": receipt["planner"][
+                    "expected_semantic_pins_sha256"
+                ],
             },
             sort_keys=True,
         )
