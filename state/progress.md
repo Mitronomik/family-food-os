@@ -1,3 +1,12 @@
+# PR10-META-DATA — source-level vegetable process authority preflight — 2026-10-10
+
+- Verified PR #202 merged on `main@9a8e978c5aecb5c5390e9189acb0a0536f05e426`; accepted weekly fixture has 3 members/21 MealEvents, 21 within-day pairs with 0 equal RecipeStep text hashes. PR10-META gate remains BLOCKED.
+- Issue #203 docs-only stage-source review: MR1.16 original source card says sort/peel/wash vegetables; R3-D immutable consumer recipe steps **do not expose this separately**. MR2.11 source says use prepared onion/carrot and finely chop, but does not independently specify the same wash/peel stage. Same CARROT/ONION_BULB_FRESH ingredients are insufficient to prove identical prep output form.
+- New [contract preflight](../docs/family-food/pr10-meta-reviewed-stage-authority.md) and [source/evidence matrix](../docs/family-food/pr10-meta-reviewed-stage-authority.json) identify process-stage authority requirements, immutable RecipeVersion/RecipeStep/hash/rights pins, Decimal servings, output form, timing/hold safety, per-event split and real physical-action benefit.
+- No source-backed shared stage published, no verified net B < A task comparison; decision **BLOCKED_RECIPE_STAGE_BINDING_NOT_PUBLISHED**. Proposed versioned curation receipt does NOT add any production identity/table/migration/API. Next move after independent review: separate immutable source-stage publication contract, or evidence-backed alternative; NOT PR10-A/B/C or PR10-PDF.
+
+---
+
 # PR10-META-SAFETY — narrowed official food-safety source review — 2026-10-10
 
 - PR #198 merged into main `326480f42aa5f3bada5398a369eb75003d6cceaa` at 2026-10-10T15:01:31Z; existing common first recipe step and 3-member fixture source fingerprints accepted. PR10-META still BLOCKED.
