@@ -227,7 +227,7 @@ def test_exact_quantities_fefo_evidence_and_no_pantry_write(api):
         for w in payload["warnings"]
     )
     assert len(payload["allocations"]) == 1
-    assert payload["allocations"][0]["quantity"] == "125"
+    assert payload["allocations"][0]["quantity"] == "125.000000"
     assert payload["allocations"][0]["food_ingredient_id"] == str(rice.id)
     assert "pantry_items" not in str(payload)
     with sqlite3.connect(config.path) as connection:
