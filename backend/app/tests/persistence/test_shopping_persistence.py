@@ -1,9 +1,11 @@
 """PR9-B SQLite Shopping migration, atomic UoW and application tests."""
 
 import sqlite3
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
 from datetime import date, timedelta
 from decimal import Decimal
+from threading import Barrier
 from uuid import uuid4
 
 import pytest
@@ -53,6 +55,7 @@ from app.tests.persistence.test_meal_plan_repository import (
 )
 from app.tests.test_food_recipe_domain import _detail
 from sqlalchemy import insert, update
+from sqlalchemy.exc import IntegrityError
 
 
 @pytest.fixture
@@ -460,6 +463,117 @@ def test_full_recipe_pantry_generation_roundtrip_provenance_and_stale(store):
     assert len(service.list_history(household.id, plan.plan.id)) == 2
 
 
+
+def test_food_sort_changes_produce_stale_and_immutable_successors(store):
+    config, engine = store
+    recipe = _detail()
+    rice = FoodIngredient(
+        recipe.ingredients[0].food_ingredient_id,
+        "RICE_SORT_TEST",
+        "Рис",
+        "рис",
+        "dry",
+        "g",
+        None,
+        None,
+        False,
+        (),
+        None,
+        True,
+        NOW,
+        NOW,
+    )
+    leaf = FoodIngredient(
+        recipe.ingredients[1].food_ingredient_id,
+        "LEAF_SORT_TEST",
+        "Лавровый лист",
+        "лавровый лист",
+        "dry",
+        "pcs",
+        None,
+        None,
+        False,
+        (),
+        None,
+        True,
+        NOW,
+        NOW,
+    )
+    with SqlAlchemyRecipeCatalogueUnitOfWork(engine) as scope:
+        scope.food_ingredients.add(rice)
+        scope.food_ingredients.add(leaf)
+        scope.recipes.add(recipe.recipe)
+        scope.versions.add_detail(recipe)
+        scope.commit()
+    household = _household()
+    member = _member(household.id)
+    _seed_household(engine, household, member)
+    selection = _selection(household.id, member.id)
+    plan = _plan(household.id, member.id, selection.selection.id)
+    events = list(plan.events)
+    events[3] = replace(
+        events[3],
+        source_kind=MealSourceKind.COOK_RECIPE,
+        recipe_version_id=recipe.version.id,
+        source_reference=None,
+    )
+    plan = replace(plan, events=tuple(events))
+    with SqlAlchemyMealPlanUnitOfWork(engine) as scope:
+        scope.selections.add_detail(selection)
+        scope.plans.add_detail(plan)
+        scope.commit()
+
+    service = _service(engine)
+    first = service.generate(household.id, plan.plan.id)
+    assert tuple(item.food_ingredient_id for item in first.items) == (
+        leaf.id,
+        rice.id,
+    )
+
+    # A name-key reorder keeps numeric requirements, Plan and Pantry unchanged.
+    with engine.begin() as connection:
+        connection.execute(
+            update(food_ingredients_table)
+            .where(food_ingredients_table.c.id == rice.id)
+            .values(canonical_name="Ароматный рис", canonical_name_key="ароматный рис")
+        )
+    stale = service.get_current(household.id, plan.plan.id)
+    assert stale.stale and stale.reason == "SOURCE_CHANGED"
+    assert stale.detail == first
+    second = service.regenerate(household.id, plan.plan.id)
+    assert second.shopping_list.supersedes_list_id == first.shopping_list.id
+    assert tuple(item.food_ingredient_id for item in second.items) == (
+        rice.id,
+        leaf.id,
+    )
+    assert second.shopping_list.source_fingerprint != first.shopping_list.source_fingerprint
+
+    # Changing only the category reverses that order again.
+    with engine.begin() as connection:
+        connection.execute(
+            update(food_ingredients_table)
+            .where(food_ingredients_table.c.id == rice.id)
+            .values(category_code="zz_dry")
+        )
+    assert service.get_current(household.id, plan.plan.id).stale
+    third = service.regenerate(household.id, plan.plan.id)
+    assert third.shopping_list.supersedes_list_id == second.shopping_list.id
+    assert tuple(item.food_ingredient_id for item in third.items) == (
+        leaf.id,
+        rice.id,
+    )
+    assert third.shopping_list.source_fingerprint != second.shopping_list.source_fingerprint
+    assert service.get_current(household.id, plan.plan.id).detail == third
+    assert service.generate(household.id, plan.plan.id) == third
+    assert service.list_history(household.id, plan.plan.id) == [first, second, third]
+    assert service.get_detail(household.id, first.shopping_list.id) == first
+    assert service.get_detail(household.id, second.shopping_list.id) == second
+    with sqlite3.connect(config.path) as conn:
+        assert conn.execute("SELECT count(*) FROM shopping_lists").fetchone()[0] == 3
+        assert conn.execute("SELECT count(*) FROM pantry_movements").fetchone()[0] == 0
+
+
+
 def test_0043_failure_rolls_back_tables_and_marker(tmp_path, monkeypatch):
     from importlib import import_module
 
@@ -517,6 +631,107 @@ def test_competing_writer_timeout_is_retryable_and_releases_connection(store):
     # Failed acquisition did not leave a poisoned pooled connection.
     saved = _service(engine).generate(household.id, plan.plan.id)
     assert saved.shopping_list.household_id == household.id
+
+
+
+def test_duplicate_shopping_uuid_is_application_conflict_and_rolls_back(store):
+    config, engine = store
+    household, plan = _prepare(engine, unresolved=True)
+    first = _service(engine).generate(household.id, plan.plan.id)
+    collision = ShoppingService(
+        lambda: SqlAlchemyShoppingUnitOfWork(engine),
+        lambda: SqlAlchemyShoppingReadScope(engine),
+        clock=lambda: NOW + timedelta(days=1),
+        id_factory=lambda: first.shopping_list.id,
+    )
+    with pytest.raises(ShoppingPersistenceConflictError) as caught:
+        collision.generate(household.id, plan.plan.id)
+    assert isinstance(caught.value.__cause__, IntegrityError)
+    assert _service(engine).list_history(household.id, plan.plan.id) == [first]
+    assert _service(engine).get_detail(household.id, first.shopping_list.id) == first
+    with sqlite3.connect(config.path) as conn:
+        assert conn.execute("SELECT count(*) FROM shopping_lists").fetchone()[0] == 1
+        assert conn.execute("SELECT count(*) FROM shopping_unresolved_obligations").fetchone()[0] == 1
+        assert conn.execute("SELECT count(*) FROM pantry_movements").fetchone()[0] == 0
+
+
+@pytest.mark.parametrize("constraint", ["foreign_key", "check"])
+def test_child_constraint_failure_maps_to_application_error_and_rolls_back(
+    store, monkeypatch, constraint
+):
+    config, engine = store
+    household, plan = _prepare(engine, unresolved=True)
+    real_add = SqlAlchemyShoppingListRepository.add_detail
+
+    def insert_invalid_child(repository, detail):
+        obligation = detail.unresolved[0]
+        if constraint == "foreign_key":
+            obligation = replace(obligation, meal_event_id=uuid4())
+        else:
+            obligation = replace(obligation, ordinal=0)
+        return real_add(repository, replace(detail, unresolved=(obligation,)))
+
+    with monkeypatch.context() as patch:
+        patch.setattr(
+            SqlAlchemyShoppingListRepository, "add_detail", insert_invalid_child
+        )
+        with pytest.raises(ShoppingPersistenceConflictError) as caught:
+            _service(engine).generate(household.id, plan.plan.id)
+    assert isinstance(caught.value.__cause__, IntegrityError)
+    with sqlite3.connect(config.path) as conn:
+        for table in (
+            "shopping_lists",
+            "shopping_list_items",
+            "shopping_unresolved_obligations",
+        ):
+            assert conn.execute(f"SELECT count(*) FROM {table}").fetchone()[0] == 0
+        assert conn.execute("SELECT count(*) FROM pantry_movements").fetchone()[0] == 0
+    # The failed transaction did not poison the pool or leave a partial header.
+    saved = _service(engine).generate(household.id, plan.plan.id)
+    assert len(saved.unresolved) == 1
+
+
+def test_simultaneous_identical_generation_uses_one_immutable_snapshot(store):
+    config, engine = store
+    household, plan = _prepare(engine, unresolved=True)
+    other_engine = create_sqlite_engine(config)
+    start = Barrier(2)
+
+    def generate_on(connection_engine):
+        start.wait(timeout=10)
+        try:
+            return _service(connection_engine).generate(household.id, plan.plan.id)
+        except ShoppingPersistenceConflictError as exc:
+            # A busy writer reservation is a documented retryable result.
+            return exc
+
+    try:
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            first = pool.submit(generate_on, engine)
+            second = pool.submit(generate_on, other_engine)
+            results = (first.result(timeout=20), second.result(timeout=20))
+        successes = [
+            result
+            for result in results
+            if not isinstance(result, ShoppingPersistenceConflictError)
+        ]
+        assert successes, "At least one writer must complete"
+        assert len({detail.shopping_list.id for detail in successes}) == 1
+        assert all(
+            isinstance(result, ShoppingPersistenceConflictError)
+            or result == successes[0]
+            for result in results
+        )
+        assert _service(engine).list_history(household.id, plan.plan.id) == [
+            successes[0]
+        ]
+        with sqlite3.connect(config.path) as conn:
+            assert conn.execute("SELECT count(*) FROM shopping_lists").fetchone()[0] == 1
+            assert conn.execute("SELECT count(*) FROM shopping_unresolved_obligations").fetchone()[0] == 1
+            assert conn.execute("SELECT count(*) FROM pantry_movements").fetchone()[0] == 0
+    finally:
+        other_engine.dispose()
+
 
 
 def test_backup_preserves_immutable_shopping_and_legacy_household(store, tmp_path):
