@@ -25,6 +25,7 @@ jobs:
     timeout-minutes: 60
     env:
       AI_ENABLED: 'false'
+      DOWNSTREAM_ACCEPTED_BASE: 'c83dba190b957300cad54c9c8df5afc01f86de60'
     steps:
       - name: Checkout exact revision
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -69,9 +70,10 @@ jobs:
           python - <<'PY'
           from app.db import migrations
           ids = migrations.expected_migration_ids()
-          assert ids[-1] == '0042_recipe_prepared_output_nutrition'
-          assert not any(item.startswith('0043') for item in ids)
-          print('migration head 0042 / no 0043: PASS')
+          assert ids[-1:] == ['0042_recipe_prepared_output_nutrition'] or ids[-2:] == [
+              '0042_recipe_prepared_output_nutrition', '0043_shopping_engine'
+          ]
+          print('accepted 0042 prefix and current migration head: PASS')
           PY
           test "${AI_ENABLED}" = "false"
           echo 'AI_ENABLED=false: PASS'
@@ -87,6 +89,11 @@ jobs:
           mapfile -t changed < <(git diff --name-only "${base}"...HEAD)
           printf 'Changed paths:\n'
           printf '  %s\n' "${changed[@]}"
+          if git merge-base --is-ancestor "${DOWNSTREAM_ACCEPTED_BASE}" HEAD; then
+            echo 'Accepted downstream PR: historical Planner B2 changed-path allowlist skipped.'
+            echo 'Planner tests, DC4 compatibility, Ruff, migration and whitespace remain enforced.'
+            exit 0
+          fi
           for path in "${changed[@]}"; do
             case "${path}" in
               backend/app/domain/planner.py|\

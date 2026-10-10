@@ -257,7 +257,14 @@ def calculate_shopping(
             if ingredient.optional:
                 _reject("Выбор необязательного ингредиента не зафиксирован в плане.")
             quantity = _decimal(ingredient.quantity, positive=True)
-            food_pins[str(food.id)] = [food.canonical_code, str(food.default_unit)]
+            # All catalogue facts that affect stable item order are source pins.
+            # Omitting them makes an updated ordering share an old source hash.
+            food_pins[str(food.id)] = [
+                food.canonical_code,
+                str(food.default_unit),
+                food.category_code,
+                food.canonical_name_key,
+            ]
             with localcontext() as ctx:
                 ctx.prec = 50
                 amount = quantity * total_servings / base

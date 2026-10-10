@@ -510,11 +510,16 @@ def audit(config: DatabaseConfig) -> dict[str, Any]:
     if not fail_closed_pass:
         blockers.append("BOUNDED_INFEASIBILITY_FAILURE")
     migration_ids = migrations.expected_migration_ids()
-    migration_ok = migration_ids[
-        -1
-    ] == "0042_recipe_prepared_output_nutrition" and not any(
-        item.startswith("0043") for item in migration_ids
-    )
+    # 0042 is the immutable DC4/Gate1 acceptance prefix. Later approved
+    # additive migrations may extend the live schema without invalidating
+    # accepted corpus readiness evidence.
+    accepted_head = "0042_recipe_prepared_output_nutrition"
+    migration_ok = migration_ids[-1] == accepted_head
+    if not migration_ok:
+        migration_ok = migration_ids[-2:] == [
+            accepted_head,
+            "0043_shopping_engine",
+        ]
     if not migration_ok:
         blockers.append("MIGRATION_HEAD_DRIFT")
 

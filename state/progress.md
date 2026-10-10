@@ -1,3 +1,31 @@
+# PR9-B — CI toolchain correction on PR #188 — 2026-10-10
+
+- Independent review corrections remain scoped to PR9-B; source fingerprint, DBAPI error taxonomy and concurrency evidence are implemented and focused Shopping tests pass.
+- Full exact-head run on `f0194bda1ac29118c64ed34b312c7bff6f2ec26c`: 24/26 workflows SUCCESS. Failures were only legacy R1-F and R1-H Ruff UP017 after unpinned installations resolved to 0.16.8/0.17.0. Their Python test suites passed, as did PR9-A/PR9-B and full backend/launcher regressions.
+- Root cause: Ruff toolchain drift. Previous accepted head R1-F/R1-H installed Ruff 0.16.10 and both passed (122/135 tests respectively); CI workflows are now pinned to exactly 0.16.10. No legacy fixture/data/Shopping calculation changes made to suppress lint.
+- New exact-head full CI and independent review must complete before merge. PR9-C API and PR10 remain blocked; PR9-B is not merged.
+
+---
+
+# PR9-B — review corrections committed; verification pending — 2026-10-10
+
+- PR #188 remains OPEN/unmerged on feat/pr9-b-shopping-persistence; accepted base main@c83dba190b957300cad54c9c8df5afc01f86de60.
+- Corrected accepted PR9-A food source fingerprint pins for both FoodIngredient ordering fields (category_code, canonical_name_key), retaining quantity/FEFO authority and deterministic output. No migration or new aggregate.
+- Normalized repository INSERT constraint/DBAPI failures to driver-independent Shopping error types; UoW still owns atomic rollback.
+- Added regression coverage for catalogue sort change -> STALE -> immutable Shopping successor, UUID collision, FK/CHECK negative writes and two independent concurrent generate calls producing no fork.
+- New exact-head CI and independent review required; old 25/25 green receipt predates corrections. PR9-C NOT STARTED, PR10 NOT AUTHORIZED.
+
+---
+
+# PR9-B — IMPLEMENTING — 2026-10-09
+
+- PR #186 Shopping pure calculator **MERGED** into `main@c83dba190b957300cad54c9c8df5afc01f86de60`; PR9-A completed.
+- Issue #187: PR9-B Shopping persistence / atomic application service with dated Pantry provenance; PR9-ARCH accepted via #184.
+- Branch `feat/pr9-b-shopping-persistence` adds conditional migration 0043 (verified free on accepted main), three immutable Shopping tables, household repositories, explicit SQLite BEGIN IMMEDIATE write scope, and application service; integration tests/CI pending independent review.
+- No API, UI, Retail, Prep/PDF, AI, Pantry writes. PR9-C not started; PR9 overall NOT COMPLETE.
+
+---
+
 # PR9-A — IN DEVELOPMENT — 2026-10-09
 
 - PR #184 Shopping Implementation Contract Gate **MERGED** as `b787dace4174ac9bf3bd6026efdfb64db5f43441`.

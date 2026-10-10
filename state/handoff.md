@@ -1,3 +1,29 @@
+# PR9-B — CI verification follow-up — 2026-10-10
+
+Review PR #188 on `feat/pr9-b-shopping-persistence` against accepted base `c83dba190b957300cad54c9c8df5afc01f86de60`. The two residual failed exact-head checks were R1-F/R1-H `Ruff UP017` in unchanged legacy fixture tests. The workflows installed unpinned Ruff; earlier exact-head SUCCESS installed 0.16.10, later failing runs installed 0.16.8/0.17.0. Pinned both legacy workflows to 0.16.10 (toolchain-only correction, no ignored lint rules or source rewrites). Confirm latest 26/26 exact-head workflows, especially R1-F/R1-H and full backend/launcher, before ready-for-review decision. Historical 24/26 failure remains factual evidence; do not reuse it as full regression PASS.
+
+Shopping source identity, atomic UoW, errors and concurrency regressions remain unchanged. No merge, API/PR9-C, Prep/PR10 or Pantry writes authorized.
+
+---
+
+# PR9-B independent-review corrections — 2026-10-10
+
+Same Issue #187 / PR #188 / branch feat/pr9-b-shopping-persistence; accepted base main@c83dba190b957300cad54c9c8df5afc01f86de60. The 2026-10-10 review identified missing FoodIngredient sort fields in the previously accepted PR9-A source fingerprint, raw SQLAlchemy exceptions during PR9-B repository INSERT, and missing two-Service same-input concurrency proof. The corrective changes are intentionally within PR9-B: pin category_code and canonical_name_key as well as canonical_code/default_unit, translate IntegrityError into ShoppingPersistenceConflictError and other DBAPI errors into ShoppingPersistenceError (busy/locked remains a retryable conflict), preserve exception chaining, and verify rollback/current/stale/successor semantics.
+
+New regression tests specifically exercise category/name-key reorder, immutable historic snapshots, header UUID collision, FK and CHECK failures during child INSERT, and concurrent ShoppingService.generate() on separate SQLite engines with one snapshot/no fork. No schema/migration change, Pantry writes, API, Retail, Prep, AI or next milestone. Run exact-head focused Shopping tests, full backend/launcher checks and independent review; do not claim prior exact-head CI receipt applies to changed code. Leave PR unmerged pending review.
+
+---
+
+# PR9-B — active transaction/persistence handoff — 2026-10-09
+
+Accepted main `c83dba190b957300cad54c9c8df5afc01f86de60` (#186 merged; PR9-A complete), #184 PR9-ARCH implementation contract merged. Current Issue #187, branch `feat/pr9-b-shopping-persistence`.
+
+Read root AGENTS, current-focus, scoped backend/app/persistence AGENTS, [frozen PR9 contract](../docs/family-food/pr9-shopping-implementation-contract.md), migration rules, `backend/app/domain/shopping_calculation.py`, `backend/app/services/shopping.py` and `backend/app/persistence/sqlalchemy_core/shopping_uow.py`. DBAPI autocommit=False requires explicit physical BEGIN IMMEDIATE and commit/rollback; verify with two independent connections. Migration 0043 registered in custom runner and lineage for this branch; no 0043 existed on accepted main. Run fresh + upgrade + rollback/tenant tests, full backend/launcher regressions and scope lint before review-ready. Preserve Pantry read-only, immutable historical Shopping, and price_status UNKNOWN.
+
+No API/consumer UI/Prep/Retail/AI. PR9-B NOT MERGED, PR9 overall NOT COMPLETE, PR9-C NOT STARTED.
+
+---
+
 # PR9-A — current implementation handoff — 2026-10-09
 
 Accepted `main@b787dace4174ac9bf3bd6026efdfb64db5f43441` (PR #184 merged, PR9-ARCH accepted). Current bounded task Issue #185; branch `feat/pr9-a-shopping-calculation`.

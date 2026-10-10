@@ -71,7 +71,7 @@ def test_dc4_reproducible_corpus_and_gate1_evidence(tmp_path: Path) -> None:
     assert bounded["max_repetition_rejections"] > 0
 
     assert result["planner_version"] == "planner-v0.4"
-    assert result["migration_head"] == "0042_recipe_prepared_output_nutrition"
+    assert result["migration_head"] == "0043_shopping_engine"
     assert result["migration_ok"] is True
     assert result["ai_enabled_required"] is False
 

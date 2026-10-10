@@ -97,7 +97,7 @@ def test_registry_matches_all_approved_definitions(database, bundle):
             (REGISTRY_VERSION,),
         ).fetchone()[0]
         assert json.loads(stored) == bundle
-    assert migrations.expected_migration_ids()[-12:] == [
+    assert migrations.expected_migration_ids()[-13:] == [
         "0030_recipe_source_corpus",
         "0031_meal_pattern_catalogue",
         "0032_meal_plan_serving",
@@ -110,6 +110,7 @@ def test_registry_matches_all_approved_definitions(database, bundle):
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
         "0042_recipe_prepared_output_nutrition",
+        "0043_shopping_engine",
     ]
 
 
@@ -427,6 +428,7 @@ def test_unknown_deployment_profile_aborts_upgrade_without_half_schema(
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
         "0042_recipe_prepared_output_nutrition",
+        "0043_shopping_engine",
     ]
 
 
@@ -466,6 +468,7 @@ def test_mid_backfill_failure_rolls_back_and_resume_is_deterministic(
         "0040_recipe_version_source_output",
         "0041_meal_pattern_energy_allocation",
         "0042_recipe_prepared_output_nutrition",
+        "0043_shopping_engine",
     ]
     after = snapshot(config)
     assert_snapshot_preserved(before, after)

@@ -1,3 +1,23 @@
+# PR9-B — review-blocker corrections in progress — 2026-10-10
+
+PR #188 remains OPEN and unmerged. User-authorized correction of independent review findings on this same branch: (1) accepted PR9-A calculator's source fingerprint now pins FoodIngredient category_code and canonical_name_key, the two fields used by ordered Shopping output; (2) PR9-B repository INSERT errors map to driver-independent ShoppingPersistenceConflictError / ShoppingPersistenceError with original DBAPI cause and UoW rollback; (3) adversarial tests cover stale/successor ordering, duplicate identifiers, FK/CHECK rollback, and simultaneous independent-connection generate. This is a compliance correction to frozen PR9 source identity, not a new calculation/FEFO policy. Existing persisted immutable snapshots remain readable; a changed source creates a successor.
+
+Exact-head CI and independent review are still required before merge. PR9-C API NOT STARTED; PR10 NOT AUTHORIZED.
+
+---
+
+# PR9-B — Shopping persistence and transactional UoW (current)
+
+Updated: 2026-10-09.
+Accepted main: `c83dba190b957300cad54c9c8df5afc01f86de60` (merged PR #186).
+Gate1 COMPLETE; PR9-ARCH (#184) MERGED; PR9-A pure calculator (#186) MERGED.
+
+**Current bounded operation:** Issue #187, branch `feat/pr9-b-shopping-persistence`. Implement only PR9-B persisted immutable ShoppingList/ShoppingListItem/ShoppingUnresolvedObligation, custom migration 0043 (subject to accepted-head reconciliation), one SQLite BEGIN IMMEDIATE transaction, coherent Pantry/MealPlan/Recipe snapshot, application service generate/get/history/stale/regenerate, targeted + adversarial persistence verification. Follow canonical [PR9 implementation contract](../docs/family-food/pr9-shopping-implementation-contract.md). API, consumer UX, Retail, Prep/PDF/AI and multi-user deployment remain NOT STARTED. PR9 overall NOT COMPLETE until PR9-C and Gate 2 evidence. Do not merge this PR autonomously.
+
+Historic PR9-A and previous gates below are superseded as *current authorization*, not deleted as evidence.
+
+---
+
 # PR9-A — Pure Shopping Calculation Core (current)
 
 Updated: 2026-10-09.

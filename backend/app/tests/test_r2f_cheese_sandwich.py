@@ -285,9 +285,7 @@ def test_r2f_fresh_publication_adds_cheese_sandwich_with_exact_prepared_authorit
         )
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
 
-    assert migrations.expected_migration_ids()[-1] == (
-        "0042_recipe_prepared_output_nutrition"
-    )
+    assert migrations.expected_migration_ids()[-1] == "0043_shopping_engine"
 
 
 def test_r2f_exact_replay_is_zero_write(database):

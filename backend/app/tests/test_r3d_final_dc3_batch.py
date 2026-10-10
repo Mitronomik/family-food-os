@@ -366,10 +366,7 @@ def test_r3d_fresh_publication_activation_and_authority(database):
     assert len(rows) == 10
     assert all(row[1:] == (0, 0, 0) for row in rows)
 
-    assert (
-        migrations.expected_migration_ids()[-1]
-        == "0042_recipe_prepared_output_nutrition"
-    )
+    assert migrations.expected_migration_ids()[-1] == "0043_shopping_engine"
 
 
 def test_r3d_source_partition_evidence_is_not_promoted(database):

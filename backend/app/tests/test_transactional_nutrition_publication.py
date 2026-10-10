@@ -874,9 +874,7 @@ def test_generic_v1_seed_and_decoder_remain_unchanged(tmp_path):
             value.provenance.source_nutrient_nbr is not None
             for value in vector.values
         )
-        assert migrations.expected_migration_ids()[-1] == (
-            "0042_recipe_prepared_output_nutrition"
-        )
+        assert migrations.expected_migration_ids()[-1] == "0043_shopping_engine"
     finally:
         engine.dispose()
 

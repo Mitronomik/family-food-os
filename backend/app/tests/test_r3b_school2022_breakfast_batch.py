@@ -273,10 +273,7 @@ def test_r3b_fresh_publication_and_batch_activation(database):
             ).fetchone()
             assert row == (code, 0, 0)
 
-    assert (
-        migrations.expected_migration_ids()[-1]
-        == "0042_recipe_prepared_output_nutrition"
-    )
+    assert migrations.expected_migration_ids()[-1] == "0043_shopping_engine"
 
 
 def test_r3b_publication_phase_keeps_all_recipes_inactive(database):

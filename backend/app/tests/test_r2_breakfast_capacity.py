@@ -254,9 +254,7 @@ def test_r2_fresh_publication_adds_exact_breakfasts_without_rewriting_r1(databas
         )
         assert db.execute("PRAGMA foreign_key_check").fetchall() == []
 
-    assert migrations.expected_migration_ids()[-1] == (
-        "0042_recipe_prepared_output_nutrition"
-    )
+    assert migrations.expected_migration_ids()[-1] == "0043_shopping_engine"
     assert r1_snapshot(database) == before
 
 

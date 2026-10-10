@@ -36,7 +36,9 @@ jobs:
       - name: Install backend and lint tools
         run: |
           python -m pip install -e './backend[test]'
-          python -m pip install ruff
+          # Keep the accepted lint baseline reproducible across independent CI jobs.
+          # PR #188 verification on this version passed before unpinned upgrades.
+          python -m pip install 'ruff==0.16.10'
       - name: Focused R1-H verification
         run: |
           python -m pytest -q             backend/app/tests/test_r1h_school2022_main.py             backend/app/tests/test_r1h_school2022_main_adversarial.py             backend/app/tests/test_r1f_prepared_output.py             backend/app/tests/test_r1f_prepared_output_adversarial.py             backend/app/tests/test_recipe_nutrition_v2.py             backend/app/tests/test_recipe_nutrition_v2_migration.py             backend/app/tests/test_planner_application_boundary.py             backend/app/tests/test_migration_lineage.py             backend/app/tests/test_migration_runner_rebuild.py             backend/app/tests/persistence/test_migration_coexistence.py             --tb=short
