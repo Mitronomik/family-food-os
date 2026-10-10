@@ -124,29 +124,28 @@ Response separates: machine status/reason, Russian message, ordered task actions
 
 | Surface | Minimum executable evidence |
 | --- | --- |
-| Pure calculation | Exact Serving scaling for 3-member Household; stable order/replay; 7 days; deterministic identical input; without AI |
-| Source kinds | All seven kinds; COOK_RECIPE verified pins, ASSEMBLY unsupported, LEFTOVER/PREPARED no fabricated supply, out-of-home zero prep |
-| Process metadata | Nullable time/batch/freezer/storage; mismatched/absent steps; Russian display; invalid/negative quantities; no guessed stages, storage time or duration |
-| Sharing | Same exact recipe repeated; candidate only under accepted safe metadata; unrelated recipes sharing food are not silently merged; unknown yield/form blocked |
-| Dates | Household-local days; same-day vs prior-day holds; expiry/storage boundary when proven; daylight-saving edge; no guaranteed Sunday cook |
-| Source revisions | New MealPlan or revised recipe instructions => STALE, immutable successor, old read, exact source revert and idempotent replay |
-| Persistence | Fresh/upgrade migration and lineage, FK, real rollback after header and after child, source-read atomicity, separate-connections same-input concurrent generation |
-| Household | Cross-home guessed plan/task/history/GET/current/POST => nondisclosing not found; no data exposure |
-| Side effects | Before/after PantryItems and PantryMovements identical on success, stale, conflict and failure; no prepared/freezer stock |
-| API | Russian-safe typed status/errors; no client-supplied truth; invalid query/body/UUID 422; no raw provenance or unsafe English fallback |
-| Gate 2 readiness | One Household, 3 members, 30 verified recipes, 80–120 canonical foods; actual 7-day MealPlan + Shopping + proposed Prep (PDF later); report blockers, never mislabel partial proof as Gate 2 COMPLETE |
+| Exact mathematics | Serving Decimal scaling for 3-member/7-day fixture; pinned structured ingredients separately from prose; noninteger factors, unit mismatch, overflow fail closed |
+| Source kinds | All seven; unsupported sources have correct unresolved enum; out-of-home requires no prep |
+| Numeric RecipeStep | No numbers; cutting size (15–20 г), working batch (2–3 eggs), temperature/time/dimensions versus ingredient-total (5,3 г oil); ambiguous withheld, changed scaling and corrections revalidated |
+| Metadata readiness | Source-backed 30-candidate audit; zero batch/freezer/storage authority; pinned actual Gate 2 recipe versions; negative all-UNKNOWN fixture without invented safe prep |
+| Measured usefulness | >=1 verified shared/advance operation for >=2 MealEvents with valid hold/safety evidence and strictly fewer unique physical operations than ungrouped baseline |
+| Shared grouping | Reviewed `shared_work_group_key`, per-event contributions, stable grouping, no lost source event |
+| Schema/status | Three tables with third unresolved, reason/code CHECK, NULL-safe UNIQUE expression index, composite Household FK and correct COMPLETE/INCOMPLETE |
+| Revision/history | Changed MealPlan or RecipeVersion/step classification => STALE; immutable successor; exact revert gives older CURRENT; idempotent replay |
+| Persistence | Migration fresh/upgrade, rollback after header/task/unresolved, busy conflicts, two independent concurrent writers/no fork |
+| Safety and household | Cross-Household guessed child/plan IDs nondisclosing; Pantry/PreparedBatch read-only for generation, conflict and failure |
+| API/display | Russian messages, no raw unreviewed instruction as scaled task, authoritative quantities separate; strict body/query/UUID and safe errors |
+| Gate 2 | 1 Household, 3 members, 30 actual pinned verified recipes, 80–120 foods; full Planner/Shopping/Prep + future PDF; AI=false and no Retail |
 
-**Verification tier:** docs-only contract: source/link checks, scope audit, whitespace. Runtime PR10-B involving migration/UoW must execute fresh+upgrade/rollback/concurrency tests and full backend **plus launcher** regression on exact frozen head. PR10-A pure tests and PR10-C API tests are scoped appropriately; run broader checks when shared startup is changed. Record exact tests and evidence; never weaken acceptance.
-
+**Verification tier:** docs-only link/scope/whitespace checks; full backend regression not necessary when runtime unchanged. PR10-META must provide separately reviewed source evidence and readiness proof. PR10-B migration/UoW requires fresh/upgrade/rollback/concurrency plus full exact-head backend and launcher regression. PR10-A and PR10-C require focused tests and appropriately broader checks for shared startup changes.
 ## 9. Proposed bounded implementation order (AFTER gate merge)
 
-1. **PR10-A — pure deterministic Prep calculator:** source-kind matrix, exact servings/process tasks, uncertainty and proposed scheduling, stable fingerprint; no DB/API. Recheck data-readiness without importing unverified freezer/storage facts.
-2. **PR10-B — Prep persistence/transaction:** only the accepted minimal schema and next valid migration; immutable snapshot, atomic UoW, retries/staleness, Household isolation, rollback and concurrent requests.
-3. **PR10-C — Prep API:** typed Russian consumer-safe generate/get/current/regenerate/history, strict input rejection, no execution or Pantry writes.
-4. **Optional separately scoped source-metadata/evidence correction** if trustworthy batch/storage/freezing process data is insufficient. This is not permission to publish LLM-invented steps or silently expand PR10-A/B/C.
+1. **PR10-META — MANDATORY separately reviewed readiness/evidence gate:** freeze >=30 actual Gate 2 verified RecipeVersion IDs, current process text and classifications; review storage/hold/reheat/defrost/shared-work authority; prove >=1 source-backed safe shared or advance operation for >=2 MealEvents and strictly fewer unique physical operations. The [current 30-candidate audit](pr10-prep-metadata-readiness-audit.md) cannot pass. If evidence is insufficient, return **BLOCKED** and require a separately approved immutable recipe/process publication correction; do not fabricate data.
+2. **PR10-A — deterministic pure Prep calculator (after META READY):** exact Servings, reviewed numeric text handling, explicit unresolved obligations, safe grouping and stable fingerprint; no database/API.
+3. **PR10-B — persistence/UoW:** frozen three-table schema and next free migration, source locking, atomic rollback, tenant scope, staleness and concurrent idempotent generation.
+4. **PR10-C — HTTP API:** typed Russian-safe generate/get/current/regenerate/history, strict validation, separate authoritative ingredient amounts and source-reviewed executable instructions.
 
-These are candidate slice names/order for reviewer approval, **not independently authorized runtime PRs**. PR10-PDF starts only after the accepted Prep planning capability exists, followed by its own artifact-specific contract/review if required. Gate 2 closure waits for the full real service/repository-backed fixture, not a component-level green suite.
-
+This order is proposed for independent review, not autonomous runtime authorization. A mere ordered restatement of RecipeSteps is insufficient to close PR10. PR10-PDF and Gate 2 are later, distinct stages.
 ## 10. Preservation matrix and reviewer challenges
 
 | Accepted authority | Required preservation |
@@ -159,16 +158,16 @@ These are candidate slice names/order for reviewer approval, **not independently
 | Security and UX | Russian display, no code/secret leak, Household scope, AI=false, no invented safety truth |
 | Later PR10-PDF/Gate 2 | Derivation/staleness pins and transparent UNKNOWN/PARTIAL states rather than fake complete vertical slice |
 
-**Reviewer must challenge:** (1) Is the minimal model sufficient to demonstrate useful prep rather than merely reprint recipes? (2) Is any accepted recipe actually freezer-ready with supported stage/reheat/storage instructions? (3) Is a separate unresolved entity required? (4) Is the chosen Prep source identity independent of Shopping correct for Gate 2 and PDF? (5) Does recipe process metadata change require a new RecipeVersion rather than in-place edits? (6) Does any proposed early-prep schedule violate storage/food-safety uncertainty? (7) Are we mistakenly treating nullable cookbook metadata as an approved authority?
+**Reviewer must challenge:** (1) Is the measured shared/advance operation real and safe across >=2 events? (2) Does PR10-META prove current RecipeVersion process/storage authority rather than nullable flags? (3) Are third-table unresolved enum/Household/FK and NULL-safe step uniqueness sound? (4) Do source numeric amounts agree with exact scaled structured ingredients, with unsafe steps withheld? (5) Is process/classification history immutable? (6) Is Prep independence from Shopping safe for PDF? (7) Does any early-prep action rely on guessed hold/freezer data?
 
 ## 11. Explicit decisions, assumptions and open questions
 
-**FACT:** PR9 merged; Gate 2 not complete; current recipe metadata is nullable and lacks structured freeze-stage and reheating methods; no accepted PreparedBatch execution authority.
+**FACT:** PR9 merged; Gate 2 remains pending. [Audited 30 verified catalogue candidates](pr10-prep-metadata-readiness-audit.md) have 0/30 non-null `batch_friendly`, `freezable` or fridge/freezer duration, 0/30 prep/total time and 1/30 cook time. Source text contains 109 steps, of which a heuristic prefilter flags 16 potentially quantitative steps across 12 recipes. This does not certify the actual as-yet-unfrozen Gate 2 recipe set.
 
-**ASSUMPTION:** A deterministic task-by-recipe baseline with limited proven grouping is the smallest useful PR10 V1. This must be evaluated on actual accepted verified recipes; do not claim time savings without evidence.
+**PROPOSED DECISIONS FROZEN FOR REVIEW:** three normalized immutable Prep tables including mandatory `prep_unresolved_obligations`, fixed reason enum and status rule; authoritative structured scaled RecipeIngredient quantities shown separately; fail-closed numeric-step review and withholding of unsafe executable prose; mandatory PR10-META before batch/freezer usefulness claims; measurable physical-operation reduction across >=2 MealEvents.
 
-**PROPOSED DECISION:** immutable PrepPlan/PrepTask planning separate from confirmed execution; no automatic freezing/storage claims without verified instructions; versioned deterministic source snapshot and Household transaction; no dependency on Retail, AI or mutable Pantry.
+**ASSUMPTION FOR PR10-META:** enough trustworthy process and storage facts can be reviewed/published with immutable provenance to satisfy the minimum usefulness proof. Current audit does NOT establish this.
 
-**OPEN QUESTION / reviewer decision:** exactly two Prep tables vs a separate unresolved-obligation table; how much structured shared-work identity is needed to make an actually useful batch plan; whether verified freezer execution guidance requires a separately accepted recipe metadata/publication extension; source-linked process step completeness for the Gate 2 fixture; and whether any Prep calculation must pin Shopping beyond the PDF composition boundary. Close these before accepting runtime design—do not assume away unresolved safety or immutability issues.
+**OPEN for PR10-META/runtime preflight, not deferred schema decisions:** which exact RecipeVersion IDs form Gate 2; whether safe shared-work/hold/reheat/defrost evidence exists; whether source publication correction needs another contract/migration; whether PDF composition needs additional Shopping pins. Three-table unresolved representation and numeric-step contract are closed decisions for this review.
 
-**Stop condition:** deliver this document as a docs-only independently reviewed PR, with corresponding state updates. Never use the docs PR itself as authority to start PR10 runtime before merge and accepted decisions. Do not begin PR10-PDF, PWA, Retail or AI.
+**Stop condition:** docs-only PR, no migration, Prep runtime, source-data mutation, Pantry execution, PDF or Gate 2 until gates are reviewed and merged.
