@@ -4,8 +4,8 @@ from copy import deepcopy
 from decimal import Decimal
 
 import pytest
-
 from app.db.config import DatabaseConfig
+
 from scripts.audit_pr10_meta_gate2_fixture import (
     build_fixture_receipt,
     validate_fixture_receipt,
