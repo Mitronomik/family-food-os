@@ -1,0 +1,173 @@
+{
+  "schema": "PR10_META_STAGE_AUTHORITY_PREFLIGHT_V1",
+  "status": "BLOCKED_RECIPE_STAGE_BINDING_NOT_PUBLISHED",
+  "accepted_main_sha": "577bbeab86ba77f1d05ae8c6a4cabd042e98d05d",
+  "issue": 203,
+  "source_authority": {
+    "fixture_reference": {
+      "json_sha256": "6c157ddead856ca2d109a698f221fc89472fda897c8f6473ceea0672afed04ec",
+      "independent_planner_semantic_sha256": "2d6cb581649863b7edbd3c0efff2bae2934c6a512c99a45d10e92f92f514cb3d",
+      "mealplan_id": "589ef95a-2158-40a1-af91-0e13087d5744"
+    },
+    "reviewed_publication": "data/curation/r3d-final-dc3-batch-gate/frozen-batch.json",
+    "normative_source": "RU_MR_2_4_0162_19",
+    "source_document_sha256": "973acb53eee7a04c76853dff80988a0f9b70e704495b715639cd8a34a747293e",
+    "source_context": "MR2019 educational health/diet context; previously reviewed for factual recipe corpus; not a household reusable-stage/safe storage certificate"
+  },
+  "pair": [
+    {
+      "event_id": "cf0e3fe3-4c59-4447-9fbd-7a9e19c6ff49",
+      "local_date": "2026-09-15",
+      "meal_role": "LUNCH",
+      "recipe_code": "MR2019_2_11_BEEF_VEGETABLE_RAGOUT",
+      "recipe_version_id": "063694fb-92cf-4731-adf6-041d36a532e4",
+      "recipe_process_hash": "4171ef5b08d51cb1775f1bd8244042f20c016718a587f7440f954cd5db571177",
+      "recipe_step_2_sha256": "55519c2f9e26fbb12ea8abd237547f58d94361f17deff6005919d7a86c7ad128",
+      "source_card_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/miasnye-bliuda/tekhnologicheskaia-karta-n-2.11/",
+      "source_card_sha256": "89ef921166ece243277dc3f1106e340769f3a99a89195ff10028bd78f529a295",
+      "source_card_vegetable_quantity_g": {
+        "CARROT": "35",
+        "ONION_BULB_FRESH": "9"
+      },
+      "source_original_stage": {
+        "onion_carrot": "prepared onion and carrot then finely chop and poach with water and butter",
+        "washing_peeling_explicit": "NO",
+        "cutting_kind": "FINE_CHOP"
+      },
+      "published_recipe_step_2_compressed": "Onion and carrot finely chopped and poached in water/butter",
+      "stage_kind": "RAW_CARROT_ONION_PREPARATION",
+      "identity_review_status": "CANDIDATE_ONLY",
+      "source_driven_published_stage": false
+    },
+    {
+      "event_id": "d000a213-d169-4f10-a2ad-08180f40aea6",
+      "local_date": "2026-09-15",
+      "meal_role": "DINNER",
+      "recipe_code": "MR2019_1_16_POTATO_SPLIT_PEA_SOUP",
+      "recipe_version_id": "116e25fa-12f3-4926-8a2a-7aa2cf99bb9c",
+      "recipe_process_hash": "d4248bc8b7b013353362ca44314bd50e4b98ee546603affdefb575d624c3a9cd",
+      "recipe_step_2_sha256": "a75d7d9fa0b0a77ab6eefd8a7b357c522dfc750662db99126efe89ea4447d850",
+      "source_card_url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.16/",
+      "source_card_sha256": "f4d70b7eb24de3fc10fd239ad6dcb2d7047c8e458541a0a1f8d6e15256ee8731",
+      "source_card_vegetable_quantity_g": {
+        "CARROT": "14",
+        "ONION_BULB_FRESH": "5"
+      },
+      "source_original_stage": {
+        "onion_carrot": "source preamble explicitly says sort/peel/wash vegetables before later poaching",
+        "washing_peeling_explicit": "YES_IN_UPSTREAM_SOURCE_ONLY",
+        "cutting_kind": "NOT_FROZEN_AS_IDENTICAL_TO_RAGOUT"
+      },
+      "published_recipe_step_2_compressed": "Carrot and onion prepared and poached in water/butter",
+      "stage_kind": "RAW_CARROT_ONION_PREPARATION",
+      "identity_review_status": "CANDIDATE_ONLY",
+      "source_driven_published_stage": false
+    }
+  ],
+  "reviewed_sources": [
+    {
+      "issuer": "МР 2.4.0162-19 (Gov primary normative technology text), hosted Sudact",
+      "ref": "MR2019 2.11",
+      "url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/miasnye-bliuda/tekhnologicheskaia-karta-n-2.11/",
+      "assertion": "prepared onion/carrot finely chopped then poached; no independent explicit wash+peel steps specified for the ragout variant"
+    },
+    {
+      "issuer": "МР 2.4.0162-19 (Gov primary normative technology text), hosted Sudact",
+      "ref": "MR2019 1.16",
+      "url": "https://sudact.ru/law/mr-240162-19-24-gigiena-detei-i-podrostkov/prilozhenie-5/supy/tekhnologicheskaia-karta-n-1.16/",
+      "assertion": "vegetables sorted peeled washed in source preamble; current curated consumer steps compress this away; no reviewed independent step identity"
+    },
+    {
+      "issuer": "Роспотребнадзор — федеральная ГИС ЗПП",
+      "ref": "general produce-washing hygiene 2026",
+      "url": "https://zpp.rospotrebnadzor.ru/news/federal/574886",
+      "assertion": "generic vegetable hygiene, not acceptance of a shared PrepStage or food-holding interval"
+    }
+  ],
+  "proposed_non_published_data_contract": {
+    "name": "ReviewedPrepStageBindingV1",
+    "storage": "REVIEWED_CURATION_RECEIPT_ONLY_NOT_NEW_PRODUCTION_TABLE",
+    "cardinality": "per_pinned_recipe_version_and_step_version_and_per_source_ingredient_form",
+    "required_fields": [
+      "binding_id",
+      "binding_version",
+      "recipe_version_id",
+      "recipe_step_id",
+      "step_instruction_sha256",
+      "recipe_process_hash",
+      "source_card_sha256",
+      "source_url",
+      "reviewer_identity_and_review_timestamp",
+      "rights_review_provenance",
+      "operation_type",
+      "input_food_ingredient_code",
+      "input_form",
+      "output_form",
+      "stage_scope",
+      "russian_instruction_review_status",
+      "quantity_binding_kind",
+      "batch_compatibility_decision",
+      "hold_transition_evidence",
+      "numeric_step_classification",
+      "recheck_on_recipe_version_change"
+    ],
+    "output_identity_only_if_accepted": false,
+    "candidate_operation": "WASH_OR_PEEL_RAW_CARROT_AND_ONION_IN_ONE_KITCHEN_SESSION",
+    "candidate_food_codes": [
+      "CARROT",
+      "ONION_BULB_FRESH"
+    ],
+    "quantity_scaling_authority": "BACKEND_ONLY_FROM_STRUCTURED_RECIPEINGREDIENT_PLUS_DECIMAL_SERVINGS",
+    "source_time_clocks": "NOT_PINNED",
+    "batch_reuse_approved": false,
+    "new_recipe_version_needed_if_published_steps_change": "REVIEW_REQUIRED",
+    "new_database_schema_authorized": false,
+    "future_persisted_prep_three_table_contract": "UNCHANGED"
+  },
+  "risk_matrix": [
+    {
+      "boundary": "SAME_CANONICAL_FOOD_INGREDIENT",
+      "fact": "YES",
+      "accepted_shared_stage": false
+    },
+    {
+      "boundary": "EXPLICIT_ORIGINAL_SOURCE_WASH_PEEL_BOTH_RECIPES",
+      "fact": "ONLY_SOUP_EXPLICIT",
+      "accepted_shared_stage": false
+    },
+    {
+      "boundary": "EXACT_REVIEWED_PUBLISHED_STEP_BINDING",
+      "fact": "NO_SEPARATE_STAGE",
+      "accepted_shared_stage": false
+    },
+    {
+      "boundary": "COMPATIBLE_CUTTING_FORM_AFTER_PREP",
+      "fact": "RAGOUT_FINE_CHOP_VS_SOUP_UNSPECIFIED",
+      "accepted_shared_stage": false
+    },
+    {
+      "boundary": "SAME_PREP_SESSION_AND_NO_HOLD",
+      "fact": "NO_PREP_CLOCK_OR_STATE",
+      "accepted_shared_stage": false
+    },
+    {
+      "boundary": "REVIEWED_SHARED_DECIMAL_ALLOCATION",
+      "fact": "SERVING_PINS_ONLY",
+      "accepted_shared_stage": false
+    },
+    {
+      "boundary": "NET_PHYSICAL_ACTION_REDUCTION",
+      "fact": "NO; SPLIT_AND_HANDLING_COSTS_UNMEASURED",
+      "accepted_shared_stage": false
+    },
+    {
+      "boundary": "COMBINED_POACHING_OR_WATER_SPLIT",
+      "fact": "UNKNOWN_AND_OUT_OF_SCOPE",
+      "accepted_shared_stage": false
+    }
+  ],
+  "next_gate": "SEPARATELY_REVIEWED_IMMUTABLE_PROCESS_STAGE_PUBLICATION_OR_ALTERNATIVE_CATALOGUE_EVIDENCE",
+  "ready": false,
+  "pr10_meta": "BLOCKED",
+  "pr10_runtime_authorized": false
+}
