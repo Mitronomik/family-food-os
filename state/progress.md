@@ -1,3 +1,12 @@
+# PR10-META-FIXTURE — independent validator blocker remediation — 2026-10-10
+
+- Review of PR #196 at `50ed16aaac05bde3c66db3c54014be6c53499f26` identified insufficient receipt validation; the historical 10 tests / 23 workflows / JSON artifact pass applies only to **old head**.
+- Evidence-local validator strengthened: recomputed counts, finite positive Decimal, unique event/member Serving pair, recipe step/process hash consistency, cross-checked event/Serving/pin semantics against independent pure Planner baseline (with separately pin-able external SHA).
+- Added adversarial cases for valid-catalogue substitution, valid-event Serving reassignment, duplicate event/member, Infinity/NaN, false counts, forged process/step hash and concurrent embedded/external semantic digest tamper.
+- Scoped work remains scripts/tests/docs/state. New exact-head CI and fresh artifact SHA required. PR10-META remains **BLOCKED**; PR10-A/B/C and PR10-PDF NOT AUTHORIZED.
+
+---
+
 # PR10-META-FIXTURE — evidence follow-up after BLOCKED receipt — 2026-10-10
 
 - Confirmed PR #194 merged at `main@05610128ad7c1156e5908b809606a5cb7223acce`; accepted PR10-META receipt is **BLOCKED**, not READY.
