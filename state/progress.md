@@ -1,3 +1,12 @@
+# PR9-B — CI toolchain correction on PR #188 — 2026-10-10
+
+- Independent review corrections remain scoped to PR9-B; source fingerprint, DBAPI error taxonomy and concurrency evidence are implemented and focused Shopping tests pass.
+- Full exact-head run on `f0194bda1ac29118c64ed34b312c7bff6f2ec26c`: 24/26 workflows SUCCESS. Failures were only legacy R1-F and R1-H Ruff UP017 after unpinned installations resolved to 0.16.8/0.17.0. Their Python test suites passed, as did PR9-A/PR9-B and full backend/launcher regressions.
+- Root cause: Ruff toolchain drift. Previous accepted head R1-F/R1-H installed Ruff 0.16.10 and both passed (122/135 tests respectively); CI workflows are now pinned to exactly 0.16.10. No legacy fixture/data/Shopping calculation changes made to suppress lint.
+- New exact-head full CI and independent review must complete before merge. PR9-C API and PR10 remain blocked; PR9-B is not merged.
+
+---
+
 # PR9-B — review corrections committed; verification pending — 2026-10-10
 
 - PR #188 remains OPEN/unmerged on feat/pr9-b-shopping-persistence; accepted base main@c83dba190b957300cad54c9c8df5afc01f86de60.
