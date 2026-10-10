@@ -414,6 +414,44 @@ def test_pantry_metadata_and_date_change_fingerprints():
     assert c.source_fingerprint != a.source_fingerprint
 
 
+
+@pytest.mark.parametrize(
+    ("field", "new_value"),
+    [
+        ("category_code", "zz_grains"),
+        ("canonical_name_key", "яя"),
+    ],
+)
+def test_food_ordering_metadata_is_pinned_in_source_fingerprint(field, new_value):
+    meal, recipes, original_foods = _input()
+    rice_id, leaf_id = tuple(original_foods)
+    foods = {
+        rice_id: replace(
+            original_foods[rice_id],
+            category_code="grains",
+            canonical_name_key="а",
+        ),
+        leaf_id: replace(
+            original_foods[leaf_id],
+            category_code="grains",
+            canonical_name_key="я",
+        ),
+    }
+    first = _calculate(meal, recipes, foods)
+    changed_foods = {
+        **foods,
+        rice_id: replace(foods[rice_id], **{field: new_value}),
+    }
+    second = _calculate(meal, recipes, changed_foods)
+    assert tuple(x.food_ingredient_id for x in first.items) == (rice_id, leaf_id)
+    assert tuple(x.food_ingredient_id for x in second.items) == (leaf_id, rice_id)
+    assert first.pantry_snapshot_hash == second.pantry_snapshot_hash
+    assert first.source_fingerprint != second.source_fingerprint
+    assert first.content_fingerprint != second.content_fingerprint
+    # Unmodified inputs still replay identically, regardless of dictionary order.
+    assert _calculate(meal, recipes, dict(reversed(list(foods.items())))) == first
+
+
 def test_cross_household_pantry_or_missing_recipe_fails_closed():
     meal, recipes, foods = _input()
     rice = next(iter(foods))
