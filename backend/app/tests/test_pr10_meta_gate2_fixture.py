@@ -34,7 +34,8 @@ def test_frozen_repo_backed_fixture_has_valid_source_and_serving_pins(fixture_re
     assert all(Decimal(s["portion_servings"]) > 0 for s in result["plan"]["servings"])
     assert all(len(row["process_hash"]) == 64 for row in result["catalogue"])
     assert all(
-        row["steps"] and all(len(step["instruction_sha256"]) == 64 for step in row["steps"])
+        row["steps"]
+        and all(len(step["instruction_sha256"]) == 64 for step in row["steps"])
         for row in result["catalogue"]
     )
 
